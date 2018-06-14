@@ -126,7 +126,7 @@ To create a PV and matching PVC, follow these steps.
     2.  Click **Storage**.
     3.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
     4.  Select **Subnets**.
-    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `bx cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
+    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ic cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
     6.  Click **Submit**.
     6.  Click the name of the file storage.
     7.  Note the **Mount Point** field. The field is displayed as `<server>:/<path>`.
@@ -268,7 +268,7 @@ To create a PV and matching PVC, follow these steps.
     2. In the **API Access Information** section, find your **API Username**.
 3.  Log in to the IBM Cloud infrastructure CLI plug-in.
     ```
-    bx sl init
+    ic sl init
     ```
     {: pre}
 
@@ -276,7 +276,7 @@ To create a PV and matching PVC, follow these steps.
 5.  Enter the user name and API key that you retrieved in the previous steps.
 6.  List available block storage devices.
     ```
-    bx sl block volume-list
+    ic sl block volume-list
     ```
     {: pre}
 
@@ -730,7 +730,7 @@ To add persistent storage:
       </tr>
     <tr>
     <td><code>spec/containers/image</code></td>
-    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `bx cr image-list`.</td>
+    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ic cr image-list`.</td>
     </tr>
     <tr>
     <td><code>spec/containers/name</code></td>
@@ -1370,7 +1370,7 @@ To clean up persistent data:
 
     1.  Get your cluster ID.
         ```
-        bx cs clusters
+        ic cs clusters
         ```
         {: pre}
 

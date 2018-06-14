@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -67,7 +67,7 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
     a. In the catalog, in **Boilerplates**, click **Python Flask**. This boilerplate includes a runtime environment for both Python 2 and Python 3 apps.
 
     b. Enter the app name `cf-py-<name>` and click **CREATE**. To access the app code for the boilerplate, you must deploy the CF app to the cloud first. You can use any name for the app. If you use the name from the example, replace `<name>` with a unique identifier, such as `cf-py-msx`.
-    
+
     **Attention**: Do not use personal information in any app, container image, or Kubernetes resource names.
 
     As the app is deployed, instructions for "Download, modify, and redeploy your app with the command line interface" are displayed.
@@ -127,7 +127,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 4. Build a Docker image that includes your app code and push it to your private registry.
 
   ```
-  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ic cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +147,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `bx cr namespaces` command to find it.</td>
+  <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ic cr namespaces` command to find it.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +156,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   </tbody>
   </table>
 
-  The image is created in your private registry. You can run the `bx cr images` command to verify that the image was created.
+  The image is created in your private registry. You can run the `ic cr images` command to verify that the image was created.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +222,7 @@ Deploy your app as a container in a Kubernetes cluster.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the `bx cr namespaces` command to find it.</td>
+  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the `ic cr namespaces` command to find it.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,7 +250,7 @@ Deploy your app as a container in a Kubernetes cluster.
     a.  Get the public IP address for the worker node in the cluster.
 
     ```
-    bx cs workers <cluster_name>
+    ic cs workers <cluster_name>
     ```
     {: pre}
 

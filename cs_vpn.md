@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -117,7 +117,7 @@ To configure the Helm chart:
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>Change this value to the list of cluster subnet CIDRs to expose over the VPN connection to the on-premises network. This list can include the following subnets: <ul><li>The Kubernetes pod subnet CIDR: <code>172.30.0.0/16</code></li><li>The Kubernetes service subnet CIDR: <code>172.21.0.0/16</code></li><li>If your apps are exposed by a NodePort service on the private network, the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running <code>bx cs worker &lt;cluster_name&gt;</code>. For example, if it is <code>&lt;10.176.48.xx&gt;</code> then note <code>&lt;10.176.48&gt;</code>. Next, get the worker private subnet CIDR by running the following command, replacing <code>&lt;xxx.yyy.zz&gt;</code> with the octet that you previously retrieved: <code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>.</li><li>If you have apps that are exposed by LoadBalancer services on the private network, the cluster's private or user-managed subnet CIDRs. To find these values, run <code>bx cs cluster-get &lt;cluster_name&gt; --showResources</code>. In the **VLANS** section, look for CIDRs that have a **Public** value of <code>false</code>.</li></ul>**Note**: If <code>ipsec.keyexchange</code> is set to <code>ikev1</code>, you can specify only one subnet.</td>
+    <td>Change this value to the list of cluster subnet CIDRs to expose over the VPN connection to the on-premises network. This list can include the following subnets: <ul><li>The Kubernetes pod subnet CIDR: <code>172.30.0.0/16</code></li><li>The Kubernetes service subnet CIDR: <code>172.21.0.0/16</code></li><li>If your apps are exposed by a NodePort service on the private network, the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running <code>ic cs worker &lt;cluster_name&gt;</code>. For example, if it is <code>&lt;10.176.48.xx&gt;</code> then note <code>&lt;10.176.48&gt;</code>. Next, get the worker private subnet CIDR by running the following command, replacing <code>&lt;xxx.yyy.zz&gt;</code> with the octet that you previously retrieved: <code>ic cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>.</li><li>If you have apps that are exposed by LoadBalancer services on the private network, the cluster's private or user-managed subnet CIDRs. To find these values, run <code>ic cs cluster-get &lt;cluster_name&gt; --showResources</code>. In the **VLANS** section, look for CIDRs that have a **Public** value of <code>false</code>.</li></ul>**Note**: If <code>ipsec.keyexchange</code> is set to <code>ikev1</code>, you can specify only one subnet.</td>
     </tr>
     <tr>
     <td><code>local.id</code></td>

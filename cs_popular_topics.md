@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -35,6 +35,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>13 June</td>
+<td>The `bx` CLI command name is changing to `ic` CLI</td>
+<td>When you download the latest version of the {{site.data.keyword.Bluemix_notm}} CLI, you now run commands by using the `ic` prefix instead of `bx`. For example, list your clusters by running `ic cs clusters`.</td>
+</tr>
 <tr>
 <td>12 June</td>
 <td>[Pod security policies](cs_psp.html)</td>
@@ -160,7 +165,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>27 February</td>
 <td>Hardware virtual machine (HVM) images for worker nodes</td>
-<td>Increase the I/O performance of your workloads with HVM images. Activate on each existing worker node by using the `bx cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
+<td>Increase the I/O performance of your workloads with HVM images. Activate on each existing worker node by using the `ic cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `ic cs worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
 </tr>
 <tr>
 <td>26 February</td>

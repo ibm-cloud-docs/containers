@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -33,10 +33,10 @@ Review these situations in which you might need to open specific ports and IP ad
 <br />
 
 
-## Running `bx cs` commands from behind a firewall
+## Running `ic cs` commands from behind a firewall
 {: #firewall_bx}
 
-If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `bx cs` commands, you must allow TCP access for {{site.data.keyword.containerlong_notm}}.
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ic cs` commands, you must allow TCP access for {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 1. Allow access to `containers.bluemix.net` on port 443.
@@ -71,35 +71,35 @@ If corporate network policies prevent access from your local system to public en
 
 When a cluster is created, the port in the master URL is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
-Before you begin, allow access to [run `bx cs` commands](#firewall_bx).
+Before you begin, allow access to [run `ic cs` commands](#firewall_bx).
 
 To allow access for a specific cluster:
 
 1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
 
    ```
-   bx login [--sso]
+   ic login [--sso]
    ```
    {: pre}
 
 2. Select the region that your cluster is in.
 
    ```
-   bx cs region-set
+   ic cs region-set
    ```
    {: pre}
 
 3. Get the name of your cluster.
 
    ```
-   bx cs clusters
+   ic cs clusters
    ```
    {: pre}
 
 4. Retrieve the **Master URL** for your cluster.
 
    ```
-   bx cs cluster-get <cluster_name_or_ID>
+   ic cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -153,7 +153,7 @@ To allow access for a specific cluster:
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
 {:shortdesc}
 
-Before you begin, allow access to run [`bx` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
+Before you begin, allow access to run [`ic` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
 
 1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
 
@@ -178,7 +178,7 @@ Let your cluster access infrastructure resources and services from behind a fire
   1.  Note the public IP address for all of your worker nodes in the cluster.
 
       ```
-      bx cs workers <cluster_name_or_ID>
+      ic cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -282,7 +282,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <tr>
          <td>EU Central</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
+         <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>UK South</td>
@@ -338,7 +338,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - Open ports 80 and 443 to allow the cluster bootstrapping process.
 
   6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the location (data center) that your cluster is in.
-      - To find the location (data center) of your cluster, run `bx cs clusters`.
+      - To find the location (data center) of your cluster, run `ic cs clusters`.
       - Allow access to the IP range for both the **Frontend (public) network** and **Backend (private) Network**.
       - Note that you must add the dal01 location (data center) for the **Backend (private) Network**.
 
