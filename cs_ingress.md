@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-15"
 
 ---
 
@@ -1064,14 +1064,27 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 
 You can further configure an application load balancer with the following options.
 
-- [Customizing your application load balancer with annotations](cs_annotations.html)
-- [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
+- [Customizing your Ingress resource with annotations](#annotations)
+- [Opening ports in the Ingress ALB](#opening_ingress_ports)
 - [Preserving the source IP address](#preserve_source_ip)
 - [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
 - [Customizing the Ingress log format](#ingress_log_format)
 - [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
 {: #ingress_annotation}
 
+### Customizing your Ingress resource with annotations
+{: #annotations}
+
+To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
+{: short desc}
+
+Get started with some of the most commonly used annotations.
+* [redirect-to-https](cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
+* [rewrite-path](cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your backend app listens on.
+* [ssl-services](cs_annotations.html#ssl-services): Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.
+* [client-max-body-size](cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
+
+For the full list of supported annotations, see [Ingress annotations](cs_annotations.html).
 
 ### Opening ports in the Ingress application load balancer
 {: #opening_ingress_ports}

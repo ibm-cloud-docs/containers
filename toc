@@ -52,6 +52,7 @@ IBM Cloud Kubernetes Service
         cs_nodeport.md
         cs_loadbalancer.md
         cs_ingress.md
+        cs_annotations.md
         cs_vpn.md
         cs_subnets.md
 
@@ -68,7 +69,6 @@ IBM Cloud Kubernetes Service
         cs_versions_changelog.md
 
     cs_regions.md
-    cs_annotations.md
 
     {: .topicgroup}
     IBM Cloud Dedicated
