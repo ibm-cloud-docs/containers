@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-06-13"
 {: #psp}
 
 With [pod security policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
-configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}. Clusters that run Kubernetes version 1.10.3 or later support the `PodSecurityPolicy` admission controller that enforces these policies. 
+configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}. Clusters that run Kubernetes versions 1.10.3 or later support the `PodSecurityPolicy` admission controller that enforces these policies. 
 {: shortdesc}
 
 Using an older version of Kubernetes? [Update your cluster](cs_cluster_update.html) today.

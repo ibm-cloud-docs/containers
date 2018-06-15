@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-06-13"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
 {:shortdesc}
 
-IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node). Check monthly for available updates. As updates become available, you are notified when you view information about the worker nodes, such as with the `bx cs workers <cluster>` or `bx cs worker-get <cluster> <worker>` commands.
+IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node). Check monthly for available updates. As updates become available, you are notified when you view information about the worker nodes, such as with the `ic cs workers <cluster>` or `ic cs worker-get <cluster> <worker>` commands.
 
 For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
 {: tip}
@@ -205,6 +205,8 @@ Review the following changes.
 
 Review the following changes.
 
+
+
 ### Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
 {: #197_1513}
 
@@ -319,6 +321,8 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018
 {: #1811_1512}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -236,7 +236,7 @@ To add a service:
 2.  List available {{site.data.keyword.Bluemix_notm}} services.
 
     ```
-    bx service list
+    ic service list
     ```
     {: pre}
 
@@ -267,14 +267,14 @@ To add a service:
 5.  Add the service to your cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ic cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb
+    ic cs cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
     Namespace:	mynamespace
@@ -307,26 +307,26 @@ To create a Cloud Foundry alias for the service instance:
 1. Target the org and a space where the service instance is created.
 
     ```
-    bx target -o <org_name> -s <space_name>
+    ic target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. Note the service instance name.
     ```
-    bx resource service-instances
+    ic resource service-instances
     ```
     {: pre}
 
 3. Create a Cloud Foundry alias for the service instance.
     ```
-    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ic resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. Verify that the service alias was created.
 
     ```
-    bx service list
+    ic service list
     ```
     {: pre}
 

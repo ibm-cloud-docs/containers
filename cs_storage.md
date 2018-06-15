@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -88,7 +88,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </tr>
   <tr id="cloud-db-service">
     <td>2. Cloud database service</td>
-    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, locations, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-for-cross-region-disaster-recovery) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html#ibm-cloudant-backup-and-recovery) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
+    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, locations, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
   </tr>
   <tr>
     <td>3. On-prem database</td>
@@ -126,7 +126,7 @@ To create a PV and matching PVC, follow these steps.
     2.  Click **Storage**.
     3.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
     4.  Select **Subnets**.
-    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `bx cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
+    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ic cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
     6.  Click **Submit**.
     6.  Click the name of the file storage.
     7.  Note the **Mount Point** field. The field is displayed as `<server>:/<path>`.
@@ -268,7 +268,7 @@ To create a PV and matching PVC, follow these steps.
     2. In the **API Access Information** section, find your **API Username**.
 3.  Log in to the IBM Cloud infrastructure CLI plug-in.
     ```
-    bx sl init
+    ic sl init
     ```
     {: pre}
 
@@ -276,7 +276,7 @@ To create a PV and matching PVC, follow these steps.
 5.  Enter the user name and API key that you retrieved in the previous steps.
 6.  List available block storage devices.
     ```
-    bx sl block volume-list
+    ic sl block volume-list
     ```
     {: pre}
 
@@ -730,7 +730,7 @@ To add persistent storage:
       </tr>
     <tr>
     <td><code>spec/containers/image</code></td>
-    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `bx cr image-list`.</td>
+    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ic cr image-list`.</td>
     </tr>
     <tr>
     <td><code>spec/containers/name</code></td>
@@ -1258,7 +1258,9 @@ Understanding your delete options:
 <dd><p>It depends on what you delete and the billing type. If you delete the PVC and PV, but not the instance in your IBM Cloud infrastructure (SoftLayer) account, that instance still exists and you are charged for it. You must delete everything to avoid charges. Further, when you specify the `billingType` in the PVC, you can choose "hourly" or "monthly." If you chose "monthly," or did not specify a billing type, then your instance is billed monthly. When you delete it, you are charged for the remainder of the month.</p></dd>
 </dl>
 
-**Important**: When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, [make a backup](#backup_restore).
+**Important**:
+* When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, [make a backup](#backup_restore).
+* If you are using an {{site.data.keyword.Bluemix_dedicated}} account, you must request volume deletion by [opening a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 Before you begin:
 * [Target your CLI](cs_cli_install.html#cs_cli_configure).
@@ -1368,7 +1370,7 @@ To clean up persistent data:
 
     1.  Get your cluster ID.
         ```
-        bx cs clusters
+        ic cs clusters
         ```
         {: pre}
 

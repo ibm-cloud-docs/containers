@@ -26,6 +26,7 @@ IBM Cloud Kubernetes Service
         cs_tutorials_istio.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: Create a multi-region cluster using Cloud Internet Services](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -51,6 +52,7 @@ IBM Cloud Kubernetes Service
         cs_nodeport.md
         cs_loadbalancer.md
         cs_ingress.md
+        cs_annotations.md
         cs_vpn.md
         cs_subnets.md
 
@@ -67,7 +69,6 @@ IBM Cloud Kubernetes Service
         cs_versions_changelog.md
 
     cs_regions.md
-    cs_annotations.md
 
     {: .topicgroup}
     IBM Cloud Dedicated

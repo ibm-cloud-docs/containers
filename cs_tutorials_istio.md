@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -175,7 +175,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       2. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for the BookInfo app.
 
           ```
-          bx cs cluster-get <cluster_name_or_ID>
+          ic cs cluster-get <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -236,7 +236,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       1. Get the public IP address of any worker node in your cluster.
 
          ```
-         bx cs workers <cluster_name_or_ID>
+         ic cs workers <cluster_name_or_ID>
          ```
          {: pre}
 
@@ -283,8 +283,7 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 ## What's next?
 {: #istio_tutorial_whatsnext}
 
-To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
-
-* [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
-
-* [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
+* To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
+    * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
+    * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
+* Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/@nick.nellis/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -66,7 +66,7 @@ Configuring your account to access the IBM Cloud infrastructure (SoftLayer) port
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
-When you run `bx`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
+When you run `ic`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
 
 {: tsCauses}
 You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
@@ -141,7 +141,7 @@ Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link i
 {: #bm_machine_id}
 
 {: tsSymptoms}
-When you use `bx cs worker` commands with your bare metal worker node, you see a message similar to the following.
+When you use `ic cs worker` commands with your bare metal worker node, you see a message similar to the following.
 
 ```
 Instance ID inconsistent with worker records
@@ -154,7 +154,7 @@ The machine ID can become inconsistent with the {{site.data.keyword.containersho
 {: tsResolve}
 For {{site.data.keyword.containershort_notm}} to re-identify the machine, [reload the bare metal worker node](cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](cs_versions_changelog.html).
 
-You can also [delete the bare metal worker node](cs_cli_reference.html##cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+You can also [delete the bare metal worker node](cs_cli_reference.html#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
 
@@ -189,11 +189,11 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+When you run `ic cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
 
 ```
 Multiple services with the same name were found.
-Run 'bx service list' to view available Bluemix service instances...
+Run 'ic service list' to view available Bluemix service instances...
 ```
 {: screen}
 
@@ -201,13 +201,13 @@ Run 'bx service list' to view available Bluemix service instances...
 Multiple service instances might have the same name in different regions.
 
 {: tsResolve}
-Use the service GUID instead of the service instance name in the `bx cs cluster-service-bind` command.
+Use the service GUID instead of the service instance name in the `ic cs cluster-service-bind` command.
 
 1. [Log in to the region that includes the service instance to bind.](cs_regions.html#bluemix_regions)
 
 2. Get the GUID for the service instance.
   ```
-  bx service show <service_instance_name> --guid
+  ic service show <service_instance_name> --guid
   ```
   {: pre}
 
@@ -219,7 +219,7 @@ Use the service GUID instead of the service instance name in the `bx cs cluster-
   {: screen}
 3. Bind the service to the cluster again.
   ```
-  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ic cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
   ```
   {: pre}
 
@@ -230,13 +230,13 @@ Use the service GUID instead of the service instance name in the `bx cs cluster-
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+When you run `ic cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
 
 ```
 Binding service to a namespace...
 FAILED
 
-The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ic service list'. (E0023)
 ```
 {: screen}
 
@@ -249,19 +249,19 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 1. Log in to {{site.data.keyword.Bluemix_notm}}. 
    ```
-   bx login
+   ic login
    ```
    {: pre}
    
 2. Target the org and the space where the service instance is provisioned. 
    ```
-   bx target -o <org> -s <space>
+   ic target -o <org> -s <space>
    ```
    {: pre}
    
 3. Verify that you are in the right space by listing your service instances. 
    ```
-   bx service list 
+   ic service list 
    ```
    {: pre}
    
@@ -280,13 +280,13 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
    1. Retrieve the cluster ID. 
       ```
-      bx cs clusters
+      ic cs clusters
       ```
       {: pre}
       
    2. Retrieve the service instance ID. 
       ```
-      bx service show <service_name> --guid
+      ic service show <service_name> --guid
       ```
       {: pre}
 
@@ -390,7 +390,7 @@ Manually update the reference of the private IP address to point to the correct 
 1.  Confirm that you have two worker nodes with the same **Private IP** address. Note the **Private IP** and **ID** of the deleted worker.
 
   ```
-  bx cs workers <CLUSTER_NAME>
+  ic cs workers <CLUSTER_NAME>
   ```
   {: pre}
 
@@ -426,7 +426,7 @@ Manually update the reference of the private IP address to point to the correct 
 5.  Reboot the worker node that was not deleted.
 
   ```
-  bx cs worker-reboot CLUSTER_ID NODE_ID
+  ic cs worker-reboot CLUSTER_ID NODE_ID
   ```
   {: pre}
 
@@ -463,7 +463,7 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
 2.  Refresh the Kubernetes master to restore it.
 
     ```
-    bx cs apiserver-refresh
+    ic cs apiserver-refresh
     ```
     {: pre}
 
@@ -485,8 +485,8 @@ If you just created the cluster, the worker nodes might still be configuring. If
 {: tsResolve}
 
 You can try one of the following solutions:
-  - Check the status of your cluster by running `bx cs clusters`. Then, check to be sure that your worker nodes are deployed by running `bx cs workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `bx cs vlans <location>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check the status of your cluster by running `ic cs clusters`. Then, check to be sure that your worker nodes are deployed by running `ic cs workers <cluster_name>`.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ic cs vlans <location>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
@@ -531,7 +531,7 @@ If this cluster is an existing one, check your cluster capacity.
 4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
 
     ```
-    bx cs worker-add <cluster_name_or_ID> 1
+    ic cs worker-add <cluster_name_or_ID> 1
     ```
     {: pre}
 
@@ -640,5 +640,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When you report an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ic cs clusters`.
 

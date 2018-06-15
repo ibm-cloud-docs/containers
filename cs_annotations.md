@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-15"
 
 ---
 
@@ -434,6 +434,9 @@ spec:
 <br />
 
 
+
+
+
 ### Private ALB routing (ALB-ID)
 {: #alb-id}
 
@@ -478,7 +481,7 @@ rules:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>The ID for your private ALB. To find the private ALB ID, run <code>bx cs albs --cluster &lt;my_cluster&gt;</code>.
+<td>The ID for your private ALB. To find the private ALB ID, run <code>ic cs albs --cluster &lt;my_cluster&gt;</code>.
 </td>
 </tr>
 </tbody></table>
@@ -540,6 +543,9 @@ spec:
 </dd></dl>
 
 <br />
+
+
+
 
 
 ### TCP ports for application load balancers (tcp-ports)
@@ -1238,7 +1244,7 @@ spec:
 <li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
 <li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
 <li>Create a bind secret.
-<pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
+<pre class="pre"><code>ic cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
 <li>Configure the <code>appid-auth</code> annotation.</li>
 </ol></dd>
 </dl>
