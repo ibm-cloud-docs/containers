@@ -447,11 +447,11 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>**Free and standard clusters**: Worker nodes feature disk encryption by default; [learn more](cs_secure.html#workernodes). If you want to disable encryption, include this option.</td>
+        <td>**Free and standard clusters**: Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). If you want to disable encryption, include this option.</td>
         </tr>
         <tr>
         <td><code>--trusted</code></td>
-        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#monitoring_logging) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
+        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
         </tr>
         </tbody></table>
 
