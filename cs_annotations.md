@@ -17,7 +17,7 @@ lastupdated: "2018-06-15"
 
 
 
-# Ingress annotations
+# Customizing Ingress with annotations
 {: #ingress_annotation}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
