@@ -150,7 +150,7 @@ The following image shows the components that are set up for every worker node t
     <p><img src="images/trusted_compute.png" alt="Trusted Compute for bare metal clusters" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
     <tr>
-  <td>Encrypted disks</td>
+  <td id="encrypted_disk">Encrypted disks</td>
     <td>By default, every worker node is provisioned with two local SSD encrypted data partitions. The first partition is not encrypted, and the second partition is unlocked by using LUKS encryption keys. Each worker in each Kubernetes cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containershort_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.</br></br><strong>Note: </strong>Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.</td>
       </tr>
     <tr>
