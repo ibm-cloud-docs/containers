@@ -588,10 +588,10 @@ trusted: <em>true</em>
 </td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#workernodes). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+      <td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#monitoring_logging) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
+      <td>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -652,10 +652,10 @@ trusted: <em>true</em>
 <p><strong>Note:</strong> Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#workernodes). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#monitoring_logging) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
+<dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ic cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
 <p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ic cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ic cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ic cs worker-get` [command](#cs_worker_get).</p></dd>
 </dl>
 
@@ -697,7 +697,7 @@ Enable a feature on an existing cluster.
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code><em>--trusted</em></code></dt>
-   <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#monitoring_logging) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
+   <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ic cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ic cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ic cs worker-get` [command](#cs_worker_get).</p></dd>
    </dl>
 
@@ -1437,7 +1437,7 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 ### ic cs machine-types LOCATION
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption](cs_secure.html#workernodes).
+View a list of available machine types for your worker nodes. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
 You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal.
@@ -2066,7 +2066,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#workernodes). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+<td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -2089,7 +2089,7 @@ diskEncryption: <em>false</em></code></pre>
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#workernodes). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
 </dl>
 
 **Examples**:
