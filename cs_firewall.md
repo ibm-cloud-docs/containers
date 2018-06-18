@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -332,10 +332,13 @@ Let your cluster access infrastructure resources and services from behind a fire
        </table>
 </p>
 
-  5. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) beginning with the **Backend (private) Network** section.
+  5. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) beginning with the **Backend (private) Network** section.
       - Add all of the [locations within the regions](cs_regions.html#locations) that you are using.
       - Note that you must add the dal01 location (data center).
       - Open ports 80 and 443 to allow the cluster bootstrapping process.
+      - Open port 10250 for the Kubernetes dashboard.
+      - Open port 53 for DNS access.
+      - Because all pod-to-pod traffic goes over the private network, either open all ports that the pods are using to communicate, or open all ports for the worker nodes in the cluster.
 
   6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the location (data center) that your cluster is in.
       - To find the location (data center) of your cluster, run `ic cs clusters`.
