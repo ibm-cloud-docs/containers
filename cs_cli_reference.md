@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-15"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -2684,6 +2684,7 @@ View a list of worker nodes and the status for each in a cluster.
 _1512
   ```
   {: screen}
+  
 
 ### ic cs worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
 {: #cs_rebalance}
