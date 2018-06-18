@@ -293,7 +293,7 @@ Add path definitions to external services, such as services hosted in {{site.dat
 
 <dl>
 <dt>Description</dt>
-<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a backend service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.
+<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a backend service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<br><br><strong>Note</strong>: You cannot specify multiple hosts for a single service and path.
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
