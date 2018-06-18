@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -237,79 +237,99 @@ When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy
 Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys.
 {:shortdesc}
 
-<table>
-<caption>Required files to store in secrets by task</caption>
-<thead>
-<th>Task</th>
-<th>Required files to store in secrets</th>
-</thead>
-<tbody>
-<tr>
-<td>Add a service to a cluster</td>
-<td>None. A secret is created for you when you bind a service to a cluster.</td>
-</tr>
-<tr>
-<td>Optional: Configure the Ingress service with TLS, if you are not using ingress-secret. <p><b>Note</b>: TLS is already enabled by default and a secret is created already for the TLS Connection.
+Review the following tasks that require secrets. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-To view the default TLS secret:
-<pre>
-ic cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
-</pre>
-</p>
-To create your own instead, complete the steps in this topic.</td>
-<td>Server cert and key: <code>server.crt</code> and <code>server.key</code></td>
-<tr>
-<td>Create the mutual-authentication annotation.</td>
-<td>CA cert: <code>ca.crt</code></td>
-</tr>
-</tbody>
-</table>
+### Adding a service to a cluster
+{: #secrets_service}
 
-For more information on what you can store in secrets, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
+When you bind a service to a cluster, you don't have to create a secret. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](cs_integrations.html#adding_cluster).
 
+### Configuring the Ingress ALB to use TLS
+{: #secrets_tls}
 
+The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
 
-To create a secret with a certificate:
+* If you are using the IBM-provided Ingress subdomain, you can [use the IBM-provided TLS certificate](cs_ingress.html#public_inside_2). To view the IBM-provided TLS secret, run the following command:
+    ```
+    ic cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
+    ```
+    {: pre}
 
-1. Generate the certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. For test purposes, you can generate a self-signed certificate.
+* If you are using a custom domain, you can use your own certificate to manage TLS termination. To create your own TLS secret:
+    1. Generate a key and certificate in one of the following ways:
+        * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+          **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")(https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+        * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html)
+            1. Create a `tls.key`.
+                ```
+                openssl genrsa -out tls.key 2048
+                ```
+                {: pre}
+            2. Use the key to create a `tls.crt`.
+                ```
+                openssl req -new -x509 -key tls.key -out tls.crt
+                ```
+                {: pre}
+    2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+    3. Create a secret YAML file using the cert and key.
+         ```
+         apiVersion: v1
+         kind: Secret
+         metadata:
+           name: ssl-my-test
+         type: Opaque
+         data:
+           tls.crt: <client_certificate>
+           tls.key: <client_key>
+         ```
+    4. Create the certificate as a Kubernetes secret.
+         ```
+         kubectl create -f ssl-my-test
+         ```
+         {: pre}
 
- **Important**: Make sure the [CN](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+### Customizing the Ingress ALB with the mutual authentication annotation
+{: #secrets_mutual_auth}
 
- The client cert and client key must be verified up to the trusted root certificate, which in this case, is the CA cert. Example:
+You can use the [`ingress.bluemix.net/mutual-auth` annotation](cs_annotations.html#mutual-auth) to configure mutual authentication of downstream traffic for the Ingress ALB. To create a mutual authentication secret:
 
- ```
- Client Certificate: issued by Intermediate Certificate
- Intermediate Certificate: issued by Root Certificate
- Root Certificate: issued by itself
- ```
- {: codeblock}
-
-2. Create the certificate as a Kubernetes secret.
-
-   ```
-   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
-   ```
-   {: pre}
-
-   Examples:
-   - TLS connection:
-
+1. Generate a key and certificate in one of the following ways:
+    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")(https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html)
+        1. Create a `ca.key`.
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. Use the key to create a `ca.crt`.
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. Use the `ca.crt` to create a self-signed certificate.
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+3. Create a secret YAML file using the cert.
      ```
-     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
      ```
-     {: pre}
-
-   - Mutual authentication annotation:
-
+4. Create the certificate as a Kubernetes secret.
      ```
-     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
+     kubectl create -f ssl-my-test
      ```
      {: pre}
 
 <br />
-
-
-
 
 
 ## Deploying apps with the GUI

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-15"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -1473,11 +1473,10 @@ Configure mutual authentication of downstream traffic for the Ingress ALB. The e
 <dt>Pre-requisites</dt>
 <dd>
 <ul>
-<li>[You must have a valid secret that contains the required certificate authority (CA)](cs_app.html#secrets). The <code>client.key</code> and <code>client.crt</code> are also needed to authenticate with mutual authentication.</li>
+<li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</li>
 <li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
-
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1579,7 +1578,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code>, <code>client.crt</code>, and <code>client.key</code> that your app is expecting from the client. To create a TLS secret, first [convert the certs and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
+  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>tls.crt</code> and <code>tls.key</code> that your app is expecting from the client. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_tls).</td>
   </tr>
   </tbody></table>
 
@@ -1642,7 +1641,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the mutual authentication secret for the service. The value must contain the CA certificate that your app is expecting from the client. To create a mutual authentication secret, first [convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
+  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the mutual authentication secret for the service. The mutual authentication secret must contain the required <code>ca.crt</code>. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</td>
   </tr>
   </tbody></table>
 
