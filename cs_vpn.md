@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -54,7 +54,7 @@ Because strongSwan is integrated within your cluster, you don't need an external
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
 * Either [create a standard cluster](cs_clusters.html#clusters_cli) or [update an existing cluster to version 1.7.16 or later](cs_cluster_update.html#master).
-* The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#manage) or [free up a used IP address](cs_subnets.html#free).
+* The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
 * [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 
 For more information about the Helm commands that are used to set up the strongSwan chart, see the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
@@ -89,7 +89,7 @@ To configure the Helm chart:
     </tr>
     <tr>
     <td><code>loadBalancerIP</code></td>
-    <td>If you want to specify a portable public IP address for the strongSwan VPN service for inbound VPN connections, add that IP address. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall.<br><br>To view available portable public IP addresses assigned to this cluster, see [managing IP addresses and subnets](cs_subnets.html#manage). If you leave this setting blank, a free portable public IP address is used. If the VPN connection is initiated from the on-premises gateway (<code>ipsec.auto</code> is set to <code>add</code>), you can use this property to configure a persistent public IP address on the on-premises gateway for the cluster.</td>
+    <td>If you want to specify a portable public IP address for the strongSwan VPN service for inbound VPN connections, add that IP address. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall.<br><br>To view available portable public IP addresses assigned to this cluster, see [managing IP addresses and subnets](cs_subnets.html#review_ip). If you leave this setting blank, a free portable public IP address is used. If the VPN connection is initiated from the on-premises gateway (<code>ipsec.auto</code> is set to <code>add</code>), you can use this property to configure a persistent public IP address on the on-premises gateway for the cluster.</td>
     </tr>
     <tr>
     <td><code>connectUsingLoadBalancerIP</code></td>
