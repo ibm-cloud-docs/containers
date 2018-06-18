@@ -76,7 +76,7 @@ To make working with API keys a little bit easier, try creating a functional ID 
 Before you can understand which role can perform each action, it's important to understand how the roles fit together.
 {: shortdesc}
 
-The following image shows the roles that each type of person in your organization might need. However, it is different for every organization. To see the minimum requirements for each action, check out [Minimum required permissions](/cs_access_reference.html).
+The following image shows the roles that each type of person in your organization might need. However, it is different for every organization.
 
 ![{{site.data.keyword.containershort_notm}} access roles](/images/user-policies.png)
 
