@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -30,53 +30,21 @@ With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}},
 
 You can forward logs from the following sources:
 
-
-<table>
-<caption>Log sources</caption>
-  <thead>
-    <tr>
-      <th>Log source</th>
-      <th>Characteristics</th>
-      <th>Log paths</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>container</code></td>
-      <td>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>application</code></td>
-      <td>Logs for your own application that runs in a Kubernetes cluster.</td>
-      <td><p>You can set the paths. In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p>
-      <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
-    </tr>
-    <tr>
-      <td><code>worker</code></td>
-      <td>Logs for virtual machine worker nodes within a Kubernetes cluster.</td>
-      <td><code>/var/log/syslog</code>, <code>/var/log/auth.log</code></td>
-    </tr>
-    <tr>
-      <td><code>kubernetes</code></td>
-      <td>Logs for the Kubernetes system component.</td>
-      <td><code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></td>
-    </tr>
-    <tr>
-      <td><code>ingress</code></td>
-      <td>Logs for an Ingress application load balancer that manages the network traffic that comes into a cluster.</td>
-      <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
-    </tr>
-    <tr>
-      <td><code>kube-audit</code></td>
-      <td>Logs for your Kubernetes API server.</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-
-
+<dl>
+  <dt><code>container</code></dt>
+    <dd>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</dd>
+  <dt><code>application</code></dt>
+    <dd><p>Logs for your own application that runs in a Kubernetes cluster. You can set the paths. In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p>
+    <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></dd>
+  <dt><code>worker</code></dt>
+    <dd><p>Logs for virtual machine worker nodes within a Kubernetes cluster.</p><p>Paths: <code>/var/log/syslog</code>, <code>/var/log/auth.log</code></p></dd>
+  <dt><code>kubernetes</code></dt>
+    <dd><p>Logs for the Kubernetes system component.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></p></dd>
+  <dt><code>ingress</code></dt>
+    <dd><p>Logs for an Ingress application load balancer that manages the network traffic that comes into a cluster.</p><p>Paths: <code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></dd>
+  <dt><code>kube-audit</code></dt>
+    <dd>Logs for your Kubernetes API server.</dd>
+</dl>
 
 </br>
 </br>

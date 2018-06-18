@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-18"
 
 ---
 
@@ -265,13 +265,7 @@ To add a subnet from an on-premises network:
 <br />
 
 
-## Managing IP addresses and subnets
-{: #manage}
-
-Review the following options for listing available public IP addresses, freeing up used IP addresses, and routing between multiple subnets on the same VLAN.
-{:shortdesc}
-
-### Viewing available portable public IP addresses
+## Viewing available portable public IP addresses
 {: #review_ip}
 
 To list all of the IP addresses in your cluster, both used and available, you can run:
@@ -329,7 +323,10 @@ Before you begin, [set the context for the cluster you want to use.](cs_cli_inst
     ```
     {: screen}
 
-### Freeing up used IP addresses
+<br />
+
+
+## Freeing up used IP addresses
 {: #free}
 
 You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
@@ -351,7 +348,10 @@ Before you begin, [set the context for the cluster you want to use.](cs_cli_inst
     ```
     {: pre}
 
-### Enabling routing between subnets on the same VLAN
+<br />
+
+
+## Enabling routing between subnets on the same VLAN
 {: #vlan-spanning}
 
 When you create a cluster, a subnet that ends in `/26` is provisioned in the same VLAN that the cluster is on. This primary subnet can hold up to 62 worker nodes.
@@ -360,3 +360,13 @@ When you create a cluster, a subnet that ends in `/26` is provisioned in the sam
 This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second primary subnet in the same VLAN is ordered.
 
 To route between subnets on the same VLAN, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+
+<br />
+
+
+## Managing subnet routing for gateway appliances
+{: #subnet_routing}
+
+When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress and load balancer networking services.
+
+However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use Ingress or load balancer networking services, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
