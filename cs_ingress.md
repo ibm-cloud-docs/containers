@@ -742,7 +742,6 @@ To enable a default private ALB by using the pre-assigned, IBM-provided portable
     public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
-
     
 
 2. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step.
@@ -795,7 +794,6 @@ To enable the private ALB by using your own portable private IP address:
     public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
-
     
 
 3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
