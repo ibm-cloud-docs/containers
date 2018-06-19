@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -89,7 +89,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ic cs region-set` command.
+3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ibmcloud cs region-set` command.
 
     ```
     ic login [--sso]
@@ -102,7 +102,7 @@ To deploy the app:
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ic cs cluster-config <cluster_name_or_ID>
+        ibmcloud cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -119,13 +119,13 @@ To deploy the app:
 5.  Log in to the {{site.data.keyword.registryshort_notm}} CLI. **Note**: Ensure that the container-registry plug-in is [installed](/docs/services/Registry/index.html#registry_cli_install).
 
     ```
-    ic cr login
+    ibmcloud cr login
     ```
     {: pre}
     -   If you forgot your namespace in {{site.data.keyword.registryshort_notm}}, run the following command.
 
         ```
-        ic cr namespace-list
+        ibmcloud cr namespace-list
         ```
         {: pre}
 
@@ -270,18 +270,18 @@ To deploy the app:
     2.  Get the public IP address for the worker node in the cluster.
 
         ```
-        ic cs workers <cluster_name_or_ID>
+        ibmcloud cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Example output:
 
         ```
-        ic cs workers pr_firm_cluster
+        ibmcloud cs workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.8
         ```
         {: screen}
 
@@ -420,7 +420,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 7.  Now that the deployment work is done you can open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
 
   ```
-  ic cs workers <cluster_name_or_ID>
+  ibmcloud cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -562,7 +562,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 5.  Verify that the images were successfully added to your registry namespace. If you used the Docker Quickstart terminal to run Docker commands, be sure that you switch back to the CLI that you used to set the `KUBECONFIG` session variable.
 
     ```
-    ic cr images
+    ibmcloud cr images
     ```
     {: pre}
 
@@ -744,7 +744,7 @@ Ready to delete what you created? You can use the configuration script to delete
   If you do not want to keep the cluster, you can delete that too.
 
   ```
-  ic cs cluster-rm <cluster_name_or_ID>
+  ibmcloud cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 

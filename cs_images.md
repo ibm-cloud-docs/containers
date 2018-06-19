@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -108,7 +108,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
     ```
     {: codeblock}
 
-    **Tip:** To retrieve your namespace information, run `ic cr namespace-list`.
+    **Tip:** To retrieve your namespace information, run `ibmcloud cr namespace-list`.
 
 3.  Create the deployment in your cluster.
 
@@ -212,7 +212,7 @@ To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts
 2.  List tokens in your {{site.data.keyword.Bluemix_notm}} account.
 
     ```
-    ic cr token-list
+    ibmcloud cr token-list
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts
 4.  Retrieve the value for your token. Replace <em>&lt;token_ID&gt;</em> with the ID of the token that you retrieved in the previous step.
 
     ```
-    ic cr token-get <token_id>
+    ibmcloud cr token-get <token_id>
     ```
     {: pre}
 
@@ -400,11 +400,11 @@ When you refer to the imagePullSecret in a pod deployment, the imagePullSecret i
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>The namespace where the image is stored. To list available namespaces, run `ic cr namespace-list`.</td>
+    <td>The namespace where the image is stored. To list available namespaces, run `ibmcloud cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run `ic cr image-list`.</td>
+    <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

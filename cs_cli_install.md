@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -56,7 +56,7 @@ To install the CLIs:
 
     **Note:** If you have a federated ID, use `ic login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ic cs`.
+3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ibmcloud cs`.
 
     ```
     ic plugin install container-service -r Bluemix
@@ -74,11 +74,11 @@ To install the CLIs:
 
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containershort_notm}} default Kubernetes version is 1.9.7. **Note**: If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containershort_notm}} default Kubernetes version is 1.9.8. **Note**: If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.9.8/bin/windows/amd64/kubectl.exe)
 
     2.  **For OSX and Linux**: Complete the following steps.
         1.  Move the executable file to the `/usr/local/bin` directory.
@@ -111,7 +111,7 @@ To install the CLIs:
 
     3.  **For Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
 
-5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ic cr`.
+5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ibmcloud cr`.
 
     ```
     ic plugin install container-registry -r Bluemix
@@ -134,9 +134,9 @@ Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.
 For reference information about these CLIs, see the documentation for those tools.
 
 -   [`ic` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
--   [`ic cs` commands](cs_cli_reference.html#cs_cli_reference)
+-   [`ibmcloud cs` commands](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [`ic cr` commands](/docs/cli/plugins/registry/index.html)
+-   [`ibmcloud cr` commands](/docs/cli/plugins/registry/index.html)
 
 <br />
 
@@ -163,7 +163,7 @@ Instead of installing each of the CLIs individually on your computer, you can in
     ```
     {: pre}
   
-3. Begin running `ic cs` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
+3. Begin running `ibmcloud cs` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
 
 <br />
 
@@ -175,7 +175,7 @@ Instead of installing each of the CLIs individually on your computer, you can in
 You can use the commands that are provided with the Kubernetes CLI to manage clusters in {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-All `kubectl` commands that are available in Kubernetes 1.9.7 are supported for use with clusters in {{site.data.keyword.Bluemix_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.Bluemix_notm}}.
+All `kubectl` commands that are available in Kubernetes 1.9.8 are supported for use with clusters in {{site.data.keyword.Bluemix_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.Bluemix_notm}}.
 
 Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_install) and [create a cluster](cs_clusters.html#clusters_cli).
 
@@ -190,12 +190,12 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
-3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ic cs region-set`.
+3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud cs region-set`.
 
 4.  List all of the clusters in the account to get the name of the cluster.
 
     ```
-    ic cs clusters
+    ibmcloud cs clusters
     ```
     {: pre}
 
@@ -203,7 +203,7 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ic cs cluster-config <cluster_name_or_ID>
+        ibmcloud cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -243,8 +243,8 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
     Example output:
 
     ```
-    Client Version: v1.9.7
-    Server Version: v1.9.7
+    Client Version: v1.9.8
+    Server Version: v1.9.8
     ```
     {: screen}
 
@@ -266,7 +266,7 @@ This task includes the information for updating these CLIs.
 
 -   {{site.data.keyword.Bluemix_notm}} CLI version 0.5.0 or later
 -   {{site.data.keyword.containershort_notm}} plug-in
--   Kubernetes CLI version 1.9.7 or later
+-   Kubernetes CLI version 1.9.8 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in
 -   Docker version 1.9. or later
 
@@ -304,7 +304,7 @@ To update the CLIs:
     3.  Initialize the CLI.
 
         ```
-        ic cs init
+        ibmcloud cs init
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -127,10 +127,10 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 ### Install and configure the version 3.1.1 Calico CLI for clusters that are running Kubernetes version 1.10 or later
 {: #1.10_install}
 
-Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ic cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
   ```
-  ic cs cluster-config <cluster_name> --admin
+  ibmcloud cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
@@ -302,10 +302,10 @@ To install and configure the 3.1.1 Calico CLI:
 ### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier
 {: #1.9_install}
 
-Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ic cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
   ```
-  ic cs cluster-config <cluster_name> --admin
+  ibmcloud cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
@@ -482,9 +482,9 @@ View the details for default and any added network policies that are applied to 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ic cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
     ```
-    ic cs cluster-config <cluster_name> --admin
+    ibmcloud cs cluster-config <cluster_name> --admin
     ```
     {: pre}
 
@@ -579,9 +579,9 @@ To create Calico policies, use the following steps.
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ic cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
     ```
-    ic cs cluster-config <cluster_name> --admin
+    ibmcloud cs cluster-config <cluster_name> --admin
     ```
     {: pre}
 

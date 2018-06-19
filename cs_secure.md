@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-15"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -119,7 +119,7 @@ Worker nodes carry the deployments and services that make up your app. When you 
 
 **Who owns the worker node and am I responsible to secure it?** </br>
 The ownership of a worker node depends on the type of cluster that you create. Worker nodes in free clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containershort_notm}} features, do not run production workloads on free clusters. Consider using standard clusters for your production worloads. </br> </br>
-Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ic cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the worker nodes, such as with the <code>ic cs workers <cluster_name></code> or <code>ic cs worker-get <cluster_name> <worker_ID></code> commands.
+Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the worker nodes, such as with the <code>ibmcloud cs workers <cluster_name></code> or <code>ibmcloud cs worker-get <cluster_name> <worker_ID></code> commands.
 
 **How does my worker node setup look like?**</br>
 The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks. </br></br>
@@ -159,7 +159,7 @@ The following image shows the components that are set up for every worker node t
     </tr>
     <tr>
       <td>SSH disabled</td>
-      <td>By default, SSH access is disabled on the worker node to protect your cluster from malicious attacks. When SSH access is disabled, access to the cluster is forced via the Kubernetes API server. The Kubernetes API server requires every request to be checked against the policies that are set in the authentication, authorization, and admission control module before the request is executed in the cluster. </br></br>  If you have a standard cluster and you want to install more features on your worker node, you can choose between the add-ons that are provided by {{site.data.keyword.containershort_notm}} or use [Kubernetes daemon sets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for everything that you want to run on every worker node. For any one-time action that you must execute, use [Kubernetes jobs ![External link icon](../icons/launch-glyph.svg "External link icon")]](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/).</td>
+      <td>By default, SSH access is disabled on the worker node to protect your cluster from malicious attacks. When SSH access is disabled, access to the cluster is forced via the Kubernetes API server. The Kubernetes API server requires every request to be checked against the policies that are set in the authentication, authorization, and admission control module before the request is executed in the cluster. </br></br>  If you have a standard cluster and you want to install more features on your worker node, you can choose between the add-ons that are provided by {{site.data.keyword.containershort_notm}} or use [Kubernetes daemon sets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for everything that you want to run on every worker node. For any one-time action that you must execute, use [Kubernetes jobs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/).</td>
     </tr>
   </tbody>
   </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -175,7 +175,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       2. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for the BookInfo app.
 
           ```
-          ic cs cluster-get <cluster_name_or_ID>
+          ibmcloud cs cluster-get <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -236,7 +236,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       1. Get the public IP address of any worker node in your cluster.
 
          ```
-         ic cs workers <cluster_name_or_ID>
+         ibmcloud cs workers <cluster_name_or_ID>
          ```
          {: pre}
 

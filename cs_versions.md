@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -29,8 +29,8 @@ lastupdated: "2018-06-14"
 The current supported Kubernetes versions are:
 
 - Latest: 1.10.3
-- Default: 1.9.7
-- Supported: 1.8.11
+- Default: 1.9.8
+- Supported: 1.8.13
 
 **Deprecated Versions**: When clusters are running on a deprecated Kubernetes, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you can run limited commands in your clusters to add workers, reload workers, and update the cluster. You cannot create new clusters in the deprecated version.
 
@@ -46,7 +46,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.9.7+9d6e0610086578
+Server Version: v1.9.8+9d6e0610086578
 ```
 {: screen}
 
@@ -64,11 +64,11 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 |Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
-As updates become available, you are notified when you view information about the worker nodes, such as with the `ic cs workers <cluster>` or `ic cs worker-get <cluster> <worker>` commands.
+As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud cs workers <cluster>` or `ibmcloud cs worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
    - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
--  **Patch updates**: Check monthly to see whether an update is available, and use the `ic cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ic cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
+-  **Patch updates**: Check monthly to see whether an update is available, and use the `ibmcloud cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 
 <br/>
 
@@ -117,7 +117,7 @@ Review changes that you might need to make when you are updating from the previo
 </tr>
 <tr>
 <td>Kubelet API access</td>
-<td>Kubelet API authorization is now delegated to the <code>Kubernetes API server</code>. Access to the Kubelet API is based on <code>ClusterRoles</code> that grant permission to access <strong>node</strong> subresources. By default, Kubernetes Heapster has <code>ClusterRole</code> and <code>ClusterRoleBinding</code>. However, if the Kubelet API is used by other users or apps, you must grant them permission to use the API. Refer to the Kubernetes documentation on [Kubelet authorization![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/kubelet-authentication-authorization/#kubelet-authorization).</td>
+<td>Kubelet API authorization is now delegated to the <code>Kubernetes API server</code>. Access to the Kubelet API is based on <code>ClusterRoles</code> that grant permission to access <strong>node</strong> subresources. By default, Kubernetes Heapster has <code>ClusterRole</code> and <code>ClusterRoleBinding</code>. However, if the Kubelet API is used by other users or apps, you must grant them permission to use the API. Refer to the Kubernetes documentation on [Kubelet authorization![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-authentication-authorization/).</td>
 </tr>
 <tr>
 <td>Cipher suites</td>

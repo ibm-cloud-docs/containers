@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-06-14"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
 {:shortdesc}
 
-IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node). Check monthly for available updates. As updates become available, you are notified when you view information about the worker nodes, such as with the `ic cs workers <cluster>` or `ic cs worker-get <cluster> <worker>` commands.
+IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node). Check monthly for available updates. As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud cs workers <cluster>` or `ibmcloud cs worker-get <cluster> <worker>` commands.
 
 For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
 {: tip}
@@ -206,6 +206,47 @@ Review the following changes.
 Review the following changes.
 
 
+### Changelog for worker node fix pack 1.9.8_1514, released 19 June 2018
+{: #198_1514}
+
+<table summary="Changes that were made since version 1.9.7_1513">
+<caption>Changes since version 1.9.7_1513</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.7</td>
+<td>v1.9.8</td>
+<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.8).</td>
+</tr>
+<tr>
+<td>Kubernetes Configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added PodSecurityPolicy to the --admission-control option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](cs_psp.html).</td>
+</tr>
+<tr>
+<td>IBM Cloud Provider</td>
+<td>v1.9.7-102</td>
+<td>v1.9.8-135</td>
+<td>Updated to support Kubernetes 1.9.8 release.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added <code>livenessProbe</code> to the OpenVPN client <code>vpn</code> deployment that runs in the <code>kube-system</code> namespace.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
 {: #197_1513}
@@ -322,6 +363,47 @@ Review the following changes.
 
 Review the following changes.
 
+
+### Changelog for worker node fix pack 1.8.13_1513, released 19 June 2018
+{: #1813_1513}
+
+<table summary="Changes that were made since version 1.8.11_1512">
+<caption>Changes since version 1.8.11_1512</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.8.11</td>
+<td>v1.8.13</td>
+<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.13).</td>
+</tr>
+<tr>
+<td>Kubernetes Configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added PodSecurityPolicy to the --admission-control option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](cs_psp.html).</td>
+</tr>
+<tr>
+<td>IBM Cloud Provider</td>
+<td>v1.8.11-126</td>
+<td>v1.8.13-170</td>
+<td>Updated to support Kubernetes 1.8.13 release.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added <code>livenessProbe</code> to the OpenVPN client <code>vpn</code> deployment that runs in the <code>kube-system</code> namespace.</td>
+</tr>
+</tbody>
+</table>
 
 
 ### Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018

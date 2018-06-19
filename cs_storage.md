@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -126,7 +126,7 @@ To create a PV and matching PVC, follow these steps.
     2.  Click **Storage**.
     3.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
     4.  Select **Subnets**.
-    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ic cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
+    5.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud cs workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
     6.  Click **Submit**.
     6.  Click the name of the file storage.
     7.  Note the **Mount Point** field. The field is displayed as `<server>:/<path>`.
@@ -730,7 +730,7 @@ To add persistent storage:
       </tr>
     <tr>
     <td><code>spec/containers/image</code></td>
-    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ic cr image-list`.</td>
+    <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code>spec/containers/name</code></td>
@@ -1370,7 +1370,7 @@ To clean up persistent data:
 
     1.  Get your cluster ID.
         ```
-        ic cs clusters
+        ibmcloud cs clusters
         ```
         {: pre}
 

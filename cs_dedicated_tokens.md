@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-14"
+lastupdated: "2018-06-19"
 
 ---
 
@@ -27,7 +27,7 @@ Create a non-expiring token for an image registry that you used for single and s
 
 1.  Request a permanent registry token for the current session. This token grants access to the images in the current namespace.
     ```
-    ic cr token-add --description "<description>" --non-expiring -q
+    ibmcloud cr token-add --description "<description>" --non-expiring -q
     ```
     {: pre}
 
@@ -114,10 +114,10 @@ Create a non-expiring token for an image registry that you used for single and s
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>The namespace where your image is stored. To list available namespaces, run `ic cr namespace-list`.</td>
+        <td>The namespace where your image is stored. To list available namespaces, run `ibmcloud cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run <code>ic cr image-list</code>.</td>
+        <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run <code>ibmcloud cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
