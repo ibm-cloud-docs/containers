@@ -127,7 +127,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 4. Build a Docker image that includes your app code and push it to your private registry.
 
   ```
-  ic cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +147,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ic cr namespaces` command to find it.</td>
+  <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +156,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   </tbody>
   </table>
 
-  The image is created in your private registry. You can run the `ic cr images` command to verify that the image was created.
+  The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +222,7 @@ Deploy your app as a container in a Kubernetes cluster.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the `ic cr namespaces` command to find it.</td>
+  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,7 +250,7 @@ Deploy your app as a container in a Kubernetes cluster.
     a.  Get the public IP address for the worker node in the cluster.
 
     ```
-    ic cs workers <cluster_name>
+    ibmcloud cs workers <cluster_name>
     ```
     {: pre}
 

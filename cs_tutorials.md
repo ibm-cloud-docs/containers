@@ -82,7 +82,7 @@ As your cluster provisions, install the following CLIs that are used to manage c
 1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `ic`.
 2.  Follow the prompts to select an account and an {{site.data.keyword.Bluemix_notm}} organization. Clusters are specific to an account, but are independent from an {{site.data.keyword.Bluemix_notm}} organization or space.
 
-4.  Install the {{site.data.keyword.containershort_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containershort_notm}} plug-in commands, use the prefix `ic cs`.
+4.  Install the {{site.data.keyword.containershort_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containershort_notm}} plug-in commands, use the prefix `ibmcloud cs`.
 
     ```
     ic plugin install container-service -r Bluemix
@@ -129,7 +129,7 @@ As your cluster provisions, install the following CLIs that are used to manage c
             ```
             {: pre}
 
-6. To set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}, install the {{site.data.keyword.registryshort_notm}} plug-in. To run registry commands, use the prefix `ic cr`.
+6. To set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}, install the {{site.data.keyword.registryshort_notm}} plug-in. To run registry commands, use the prefix `ibmcloud cr`.
 
     ```
     ic plugin install container-registry -r Bluemix
@@ -170,14 +170,14 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registryshort_notm}}, so they choose _pr_firm_ as their namespace to group all images in their account. Replace _&lt;namespace&gt;_ with a namespace of your choice that is unrelated to the tutorial.
 
     ```
-    ic cr namespace-add <namespace>
+    ibmcloud cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  Before you continue to the next step, verify that the deployment of your worker node is complete.
 
     ```
-    ic cs workers <cluster_name_or_ID>
+    ibmcloud cs workers <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -200,7 +200,7 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
     ```
-    ic cs cluster-config <cluster_name_or_ID>
+    ibmcloud cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -263,14 +263,14 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 2.  Bind the {{site.data.keyword.toneanalyzershort}} instance to the `default` Kubernetes namespace for the cluster. Later, you can create your own namespaces to manage user access to Kubernetes resources, but for now, use the `default` namespace. Kubernetes namespaces are different from the registry namespace you created earlier.
 
     ```
-    ic cs cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     Output:
 
     ```
-    ic cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    ibmcloud cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
     OK
     Namespace:	default

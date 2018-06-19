@@ -251,7 +251,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 If you are using the IBM-provided Ingress subdomain, you can [use the IBM-provided TLS certificate](cs_ingress.html#public_inside_2). To view the IBM-provided TLS secret, run the following command:
 ```
-ic cs cluster-get <cluster_name_or_ID> | grep "Ingress secret"
+ibmcloud cs cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ```
 {: pre}
 

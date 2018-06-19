@@ -137,12 +137,12 @@ You can create a configuration for cluster logging. You can differentiate betwee
 1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} API key owner need Manager, Developer, or Auditor [permissions](cs_users.html#access_policies) in that space.
   * If you don't know who the {{site.data.keyword.containershort_notm}} API key owner is, run the following command.
       ```
-      ic cs api-key-info <cluster_name>
+      ibmcloud cs api-key-info <cluster_name>
       ```
       {: pre}
   * To immediately apply any changes that you made, run the following command.
       ```
-      ic cs logging-config-refresh <cluster_name>
+      ibmcloud cs logging-config-refresh <cluster_name>
       ```
       {: pre}
 
@@ -153,13 +153,13 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 3. Create a log forwarding configuration.
     ```
-    ic cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --type ibm --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --space <cluster_space> --org <cluster_org --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+    ibmcloud cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --type ibm --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --space <cluster_space> --org <cluster_org --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
     ```
     {: pre}
 
   * Example container logging configuration for the default namespace and output:
     ```
-    ic cs logging-config-create mycluster
+    ibmcloud cs logging-config-create mycluster
     Creating cluster mycluster logging configurations...
     OK
     ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
@@ -170,7 +170,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
   * Example application logging configuration and output:
     ```
-    ic cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+    ibmcloud cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
     Creating logging configuration for application logs in cluster cluster2...
     OK
     Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
@@ -200,7 +200,7 @@ If you have apps that run in your containers that can't be configured to write l
 
 3. Create a log forwarding configuration.
     ```
-    ic cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ibmcloud cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
     {: pre}
 
@@ -217,13 +217,13 @@ You can verify that your configuration is set up correctly in one of two ways:
 
 * To list all of the logging configurations in a cluster:
     ```
-    ic cs logging-config-get <cluster_name_or_ID>
+    ibmcloud cs logging-config-get <cluster_name_or_ID>
     ```
     {: pre}
 
 * To list the logging configurations for one type of log source:
     ```
-    ic cs logging-config-get <cluster_name_or_ID> --logsource <source>
+    ibmcloud cs logging-config-get <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
@@ -237,7 +237,7 @@ You can update a logging configuration that you already created.
 
 1. Update a log forwarding configuration.
     ```
-    ic cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ibmcloud cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
     ```
     {: pre}
 
@@ -255,9 +255,9 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 2. Delete the logging configuration.
   <ul>
   <li>To delete one logging configuration:</br>
-    <pre><code>ic cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+    <pre><code>ibmcloud cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>To delete all of the logging configurations:</br>
-    <pre><code>ic cs logging-config-rm <my_cluster> --all</pre></code></li>
+    <pre><code>ibmcloud cs logging-config-rm <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -351,27 +351,27 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 1. Create a logging filter.
   ```
-  ic cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 2. View the log filter that you created.
 
   ```
-  ic cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. Update the log filter that you created.
   ```
-  ic cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. Delete a log filter that you created.
 
   ```
-  ic cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -411,14 +411,14 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 1. Create a logging configuration.
 
     ```
-    ic cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ibmcloud cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
     ```
     {: pre}
 
     Example command and output:
 
     ```
-    ic cs logging-config-create myCluster --logsource kube-audit
+    ibmcloud cs logging-config-create myCluster --logsource kube-audit
     Creating logging configuration for kube-audit logs in cluster myCluster...
     OK
     Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
@@ -457,13 +457,13 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 2. View your cluster logging configuration to verify that it was implemented the way that you intended.
 
     ```
-    ic cs logging-config-get <cluster_name_or_ID>
+    ibmcloud cs logging-config-get <cluster_name_or_ID>
     ```
     {: pre}
 
     Example command and output:
     ```
-    ic cs logging-config-get myCluster
+    ibmcloud cs logging-config-get myCluster
     Retrieving cluster myCluster logging configurations...
     OK
     Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
@@ -492,7 +492,7 @@ To forward Kubernetes API audit logs:
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
-    ic cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
     ```
     {: pre}
 
@@ -528,7 +528,7 @@ To forward Kubernetes API audit logs:
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
     ```
-    ic cs apiserver-config-get audit-webhook <cluster_name_or_ID>
+    ibmcloud cs apiserver-config-get audit-webhook <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -542,7 +542,7 @@ To forward Kubernetes API audit logs:
 3. Apply the configuration update by restarting the Kubernetes master.
 
     ```
-    ic cs apiserver-refresh <cluster_name_or_ID>
+    ibmcloud cs apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -551,14 +551,14 @@ To forward Kubernetes API audit logs:
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
-        ic cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ibmcloud cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
         ```
         {: pre}
 
     3. Apply the configuration update by restarting the Kubernetes master.
 
         ```
-        ic cs apiserver-refresh <cluster_name_or_ID>
+        ibmcloud cs apiserver-refresh <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -669,19 +669,19 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ic cs worker-reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
+   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud cs worker-reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ic cs worker-reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
+   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud cs worker-reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
    </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check you must deploy an HTTP server on every worker node in your cluster by using a [DaemonSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify if your HTTP server is healthy. You can define other paths by changing the <strong>Route</strong> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <strong>ExpectedStatus</strong>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
    For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
-   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ic cs worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
+   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud cs worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
    </tr>
    </tbody>
    </table>
