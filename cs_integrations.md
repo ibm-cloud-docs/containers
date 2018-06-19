@@ -26,6 +26,7 @@ You can use various external services and catalog services with a standard Kuber
 
 
 ## Application services
+{: #application_services}
 <table summary="Summary for accessibility">
 <caption>Application services</caption>
 <thead>
@@ -48,6 +49,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## DevOps services
+{: #devops_services}
 <table summary="Summary for accessibility">
 <caption>DevOps services</caption>
 <thead>
@@ -81,6 +83,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Logging and monitoring services
+{: #health_services}
 <table summary="Summary for accessibility">
 <caption>Logging and monitoring services</caption>
 <thead>
@@ -138,6 +141,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Security services
+{: #security_services}
 <table summary="Summary for accessibility">
 <caption>Security services</caption>
 <thead>
@@ -179,6 +183,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Storage services
+{: #storage_services}
 <table summary="Summary for accessibility">
 <caption>Storage services</caption>
 <thead>
