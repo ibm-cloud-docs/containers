@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-18"
+lastupdated: "2018-06-19"
 
 ---
 
-{:new_window: target="_blank"}
+{:new_window: target="blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -60,9 +60,6 @@ To create a configuration at the account level, for a specific container namespa
 1. Navigate to the **Overview** tab of the dashboard.
 2. Select the Cloud Foundry org and space from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
 3. Select the log sources from which you want to forward logs.
-
-    To configure application logging or specific container namespaces, use the CLI to set up your logging configuration.
-    {: tip}
 4. Click **Create**.
 
 </br>
@@ -123,11 +120,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
     </tr>
     <tr>
       <td><code><em>&lt;protocol&gt;</em></code></td>
-      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, <stging>`tls`,</staging> or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;secret_name&gt;</em></code></td>
-      <td>The name of the secret that you assign to your encoded secret</td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`,  or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
     </tr>
     <tr>
       <td><code><em>--skip-validation</em></code></td>
@@ -192,20 +185,18 @@ If you have apps that run in your containers that can't be configured to write l
 </br>
 </br>
 
-**Forwarding logs to your own server**
+
+**Forwarding logs to your own server over the `udp` or `tcp` protocols**
 
 1. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. You can use the following protocols: `udp`,  or `tcp`.
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
   You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
-
-  If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-  {: tip}
+2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located. If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. Create a log forwarding configuration.
     ```
@@ -215,6 +206,9 @@ If you have apps that run in your containers that can't be configured to write l
 
 </br>
 </br>
+
+
+
 
 ### Verifying log forwarding
 {: verify-logging}
@@ -266,6 +260,9 @@ You can stop forwarding logs one or all of the logging configurations for a clus
     <pre><code>ic cs logging-config-rm <my_cluster> --all</pre></code></li>
   </ul>
 
+</br>
+</br>
+
 ### Viewing logs
 {: #view_logs}
 
@@ -288,7 +285,6 @@ To access the Kibana dashboard, go to one of the following URLs and select the {
 
 For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
-</br>
 </br>
 
 **Docker logs**
@@ -579,12 +575,7 @@ Metrics help you monitor the health and performance of your clusters. You can us
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
-    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.
-      <ul>
-        <li>US-South and US-East: https://metrics.ng.bluemix.net</li>
-        <li>UK-South: https://metrics.eu-gb.bluemix.net</li>
-        <li>Eu-Central: https://metrics.eu-de.bluemix.net</li>
-      </ul></p></dd>
+    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p> {[firewall-ips-monitoring]} </dd>
 </dl>
 
 ### Other health monitoring tools
