@@ -71,8 +71,6 @@ Before you begin:
 #### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
 
-For more information about the Helm commands that are used to set up the strongSwan chart, see the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
-
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
 
 2. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
@@ -87,7 +85,7 @@ For more information about the Helm commands that are used to set up the strongS
 #### Step 2: Configure basic IPSec settings
 {: #strongswan_2}
 
-To control the establishment of the VPN connection, modify the following basic IPSec settings:
+To control the establishment of the VPN connection, modify the following basic IPSec settings.
 1. If your on-premises VPN tunnel endpoint does not support `ikev2` as a protocol for initializing the connection, change the value of `ipsec.keyexchange` to `ikev1` or `ike`.
 2. Set `ipsec.esp` to a list of ESP encryption and authentication algorithms that your on-premises VPN tunnel endpoint uses for the connection.
     * If `ipsec.keyexchange` is set to `ikev1`, this setting must be specified.
@@ -117,8 +115,7 @@ When you configure a strongSwan VPN connection, you choose whether the VPN conne
 
 To establish an inbound VPN connection, modify the following settings:
 1. Verify that `ipsec.auto` is set to `add`.
-2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
-    **Note**:
+2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).<br>**Note**:
     * If you use this property, you must also configure the public IP address that you select for the cluster VPN endpoint on the on-premises VPN endpoint.
     * If you leave this setting blank, one of the available portable public IP addresses is used.
 
@@ -128,15 +125,15 @@ To establish an outbound VPN connection, modify the following settings:
 3. Choose one of the following options for the IP address for the cluster VPN endpoint:
     * **Public IP address of the cluster's private gateway**: If your worker nodes are connected to a private VLAN only, then the outbound VPN request is routed through the private gateway in order to reach the internet. The public IP address of the private gateway is used for the VPN connection.
     * **Public IP address of the worker node where the strongSwan pod is running**: If the worker node where the strongSwan pod is running is connected to a public VLAN, then the worker node's public IP address is used for the VPN connection.
-        **Note**:
+        <br>**Note**:
         * If the strongSwan pod is deleted and rescheduled onto a different worker node in the cluster, then the public IP address of the VPN changes. The on-premises VPN endpoint of the remote network must allow the VPN connection to be established from the public IP address of any of the cluster worker nodes.
         * If the remote VPN endpoint cannot handle VPN connections from multiple public IP addresses, limit the nodes that the strongSwan VPN pod deploys to. Set `nodeSelector` to the IP addresses of specific worker nodes or a worker node label. For example, the value `kubernetes.io/hostname: 10.232.xx.xx,10.233.xx.xx` allows the VPN pod to deploy to those worker nodes only. The value `strongswan: vpn` restricts the VPN pod to running on any worker nodes with that label. You can use any worker node label. To allow different worker nodes to be used with different helm chart deployments, use `strongswan: <release_name>``. For high availability, select at least two worker nodes.
     * **Public IP address of the strongSwan service**: To establish connection by using the IP address of the strongSwan VPN service, set `connectUsingLoadBalancerIP` to `true`. The strongSwan service IP address is either a portable public IP address you can specify in the `loadBalancerIP` setting, or an available portable public IP address that is automatically assigned to the service.
-        **Note**:
+        <br>**Note**:
         * All of the cluster worker nodes must be on the same public VLAN. Otherwise, you must use the `nodeSelector` setting to ensure that the VPN pod deploys to a worker node on the same public VLAN as the `loadBalancerIP`.
         * You must configure the strongSwan service public IP address on the on-premises VPN endpoint.
         * If `connectUsingLoadBalancerIP` is set to `true` and `ipsec.keyexchange` is set to `ikev1`, you must set `enableServiceSourceIP` to `true`.
-4. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. * The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
+4. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
     **Note**: If you leave this setting blank, a free portable public IP address is used.
 
 #### Step 4: Access cluster resources over the VPN connection
@@ -148,7 +145,7 @@ Determine which cluster resources must be accessible by the remote network over 
 1. Add the CIDRs of one or more cluster subnets to the `local.subnet` setting. You must configure the local subnet CIDRs on the on-premises VPN endpoint. This list can include the following subnets:  
     * The Kubernetes pod subnet CIDR: `172.30.0.0/16`. Bidirectional communication is enabled between all cluster pods and any of the hosts in the remote network subnets that you list in the `remote.subnet` setting. If you must prevent any `remote.subnet` hosts from accessing cluster pods for security reasons, do not add the Kubernetes pod subnet to the `local.subnet` setting.
     * The Kubernetes service subnet CIDR: `172.21.0.0/16`. Service IP addresses provide a way to expose multiple app pods that are deployed on several worker nodes behind a single IP.
-    * If your apps are exposed by a NodePort service on the private network or a private Ingress ALB, the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running `ibmcloud cs worker <cluster_name>`. For example, if it is `<10.176.48.xx>` then note `<10.176.48>`. Next, get the worker private subnet CIDR by running the following command, replacing `<xxx.yyy.zz>` with the octet that you previously retrieved: `ibmcloud cs subnets | grep <xxx.yyy.zzz>`. **Note**: If a worker node is added on a new private subnet, you must add the new private subnet CIDR to the `local.subnet` setting and the on-premises VPN endpoint. Then, the VPN connection must be restarted.
+    * If your apps are exposed by a NodePort service on the private network or a private Ingress ALB, the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running `ibmcloud cs worker <cluster_name>`. For example, if it is `<10.176.48.xx>` then note `<10.176.48>`. Next, get the worker private subnet CIDR by running the following command, replacing `<xxx.yyy.zz>` with the octet that you previously retrieved: `ibmcloud cs subnets | grep <xxx.yyy.zzz>`.<br>**Note**: If a worker node is added on a new private subnet, you must add the new private subnet CIDR to the `local.subnet` setting and the on-premises VPN endpoint. Then, the VPN connection must be restarted.
     * If you have apps that are exposed by LoadBalancer services on the private network, the cluster's private user-managed subnet CIDRs. To find these values, run `ibmcloud cs cluster-get <cluster_name> --showResources`. In the **VLANS** section, look for CIDRs that have a **Public** value of `false`.
     If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet. However, you can use the `localSubnetNAT` setting to combine multiple cluster subnets into a single subnet.
     {:tip}
@@ -163,7 +160,7 @@ Determine which remote network resources must be accessible by the cluster over 
 {: shortdesc}
 
 1. Add the CIDRs of one or more on-premises private subnets to the `remote.subnet` setting.
-    **Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
+    <br>**Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
 
 #### Step 6: Deploy the Helm chart
 {: #strongswan_6}
