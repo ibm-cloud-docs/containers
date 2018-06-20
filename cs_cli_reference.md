@@ -1109,7 +1109,7 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 ### ibmcloud cs va CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
 {: #cs_va}
 
-After you [install the container scanner](/docs/services/va/va_index.html#va_install_livescan), view a detailed vulnerability assessment report for a container in your cluster.
+After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 
 **Command options**:
 
