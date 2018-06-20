@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -268,7 +268,7 @@ To create a PV and matching PVC, follow these steps.
     2. In the **API Access Information** section, find your **API Username**.
 3.  Log in to the IBM Cloud infrastructure CLI plug-in.
     ```
-    ic sl init
+    ibmcloud sl init
     ```
     {: pre}
 
@@ -276,7 +276,7 @@ To create a PV and matching PVC, follow these steps.
 5.  Enter the user name and API key that you retrieved in the previous steps.
 6.  List available block storage devices.
     ```
-    ic sl block volume-list
+    ibmcloud sl block volume-list
     ```
     {: pre}
 

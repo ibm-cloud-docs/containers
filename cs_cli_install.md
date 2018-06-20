@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -45,28 +45,28 @@ This task includes the information for installing these CLIs and plug-ins:
 <br>
 To install the CLIs:
 
-1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ic`.
+1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
 
 2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
     ```
-    ic login
+    ibmcloud login
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ic login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ibmcloud cs`.
 
     ```
-    ic plugin install container-service -r Bluemix
+    ibmcloud plugin install container-service -r Bluemix
     ```
     {: pre}
 
     To verify that the plug-in is installed properly, run the following command:
 
     ```
-    ic plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -114,14 +114,14 @@ To install the CLIs:
 5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ibmcloud cr`.
 
     ```
-    ic plugin install container-registry -r Bluemix
+    ibmcloud plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     To verify that the plug-in is installed properly, run the following command:
 
     ```
-    ic plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -133,7 +133,7 @@ Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.
 
 For reference information about these CLIs, see the documentation for those tools.
 
--   [`ic` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
+-   [`ibmcloud` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`ibmcloud cs` commands](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` commands](/docs/cli/plugins/registry/index.html)
@@ -182,11 +182,11 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
 
     ```
-    ic login
+    ibmcloud login
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ic login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
@@ -278,24 +278,24 @@ To update the CLIs:
 2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
 
     ```
-    ic login
+    ibmcloud login
     ```
     {: pre}
 
-     **Note:** If you have a federated ID, use `ic login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+     **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 3.  Update the {{site.data.keyword.containershort_notm}} plug-in.
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
 
         ```
-        ic plugin update container-service -r Bluemix
+        ibmcloud plugin update container-service -r Bluemix
         ```
         {: pre}
 
     2.  Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
 
         ```
-        ic plugin list
+        ibmcloud plugin list
         ```
         {: pre}
 
@@ -314,14 +314,14 @@ To update the CLIs:
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
 
         ```
-        ic plugin update container-registry -r Bluemix
+        ibmcloud plugin update container-registry -r Bluemix
         ```
         {: pre}
 
     2.  Verify the plug-in installation by running the following command and checking the list of the plug-ins that are installed.
 
         ```
-        ic plugin list
+        ibmcloud plugin list
         ```
         {: pre}
 
@@ -354,21 +354,21 @@ To uninstall the CLIs:
 1.  Uninstall the {{site.data.keyword.containershort_notm}} plug-in.
 
     ```
-    ic plugin uninstall container-service
+    ibmcloud plugin uninstall container-service
     ```
     {: pre}
 
 2.  Uninstall the {{site.data.keyword.registryshort_notm}} plug-in.
 
     ```
-    ic plugin uninstall container-registry
+    ibmcloud plugin uninstall container-registry
     ```
     {: pre}
 
 3.  Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
 
     ```
-    ic plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -415,7 +415,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
   - _&lt;username&gt;_: Your {{site.data.keyword.Bluemix_notm}} user name.
   - _&lt;password&gt;_: Your {{site.data.keyword.Bluemix_notm}} password.
   - _&lt;api_key&gt;_: Your {{site.data.keyword.Bluemix_notm}} API key.
-  - _&lt;passcode&gt;_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ic login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
+  - _&lt;passcode&gt;_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token

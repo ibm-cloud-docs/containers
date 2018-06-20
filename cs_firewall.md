@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -78,7 +78,7 @@ To allow access for a specific cluster:
 1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
 
    ```
-   ic login [--sso]
+   ibmcloud login [--sso]
    ```
    {: pre}
 
@@ -153,7 +153,7 @@ To allow access for a specific cluster:
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
 {:shortdesc}
 
-Before you begin, allow access to run [`ic` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
+Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
 
 1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
 

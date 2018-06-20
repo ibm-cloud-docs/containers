@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -66,7 +66,7 @@ Configuring your account to access the IBM Cloud infrastructure (SoftLayer) port
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
-When you run `ic`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
+When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
 
 {: tsCauses}
 You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
@@ -193,7 +193,7 @@ When you run `ibmcloud cs cluster-service-bind <cluster_name> <namespace> <servi
 
 ```
 Multiple services with the same name were found.
-Run 'ic service list' to view available Bluemix service instances...
+Run 'ibmcloud service list' to view available Bluemix service instances...
 ```
 {: screen}
 
@@ -207,7 +207,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud cs cl
 
 2. Get the GUID for the service instance.
   ```
-  ic service show <service_instance_name> --guid
+  ibmcloud service show <service_instance_name> --guid
   ```
   {: pre}
 
@@ -236,7 +236,7 @@ When you run `ibmcloud cs cluster-service-bind <cluster_name> <namespace> <servi
 Binding service to a namespace...
 FAILED
 
-The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ic service list'. (E0023)
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ibmcloud service list'. (E0023)
 ```
 {: screen}
 
@@ -249,19 +249,19 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 1. Log in to {{site.data.keyword.Bluemix_notm}}. 
    ```
-   ic login
+   ibmcloud login
    ```
    {: pre}
    
 2. Target the org and the space where the service instance is provisioned. 
    ```
-   ic target -o <org> -s <space>
+   ibmcloud target -o <org> -s <space>
    ```
    {: pre}
    
 3. Verify that you are in the right space by listing your service instances. 
    ```
-   ic service list 
+   ibmcloud service list 
    ```
    {: pre}
    
@@ -286,7 +286,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
       
    2. Retrieve the service instance ID. 
       ```
-      ic service show <service_name> --guid
+      ibmcloud service show <service_name> --guid
       ```
       {: pre}
 

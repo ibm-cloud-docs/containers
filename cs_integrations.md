@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -241,7 +241,7 @@ To add a service:
 2.  List available {{site.data.keyword.Bluemix_notm}} services.
 
     ```
-    ic service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -312,26 +312,26 @@ To create a Cloud Foundry alias for the service instance:
 1. Target the org and a space where the service instance is created.
 
     ```
-    ic target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. Note the service instance name.
     ```
-    ic resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. Create a Cloud Foundry alias for the service instance.
     ```
-    ic resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. Verify that the service alias was created.
 
     ```
-    ic service list
+    ibmcloud service list
     ```
     {: pre}
 
