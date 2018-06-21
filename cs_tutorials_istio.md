@@ -124,24 +124,36 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 1. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
-   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
+   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml -n istio-system
    ```
    {: pre}
 
 2. Ensure that the microservices and their corresponding pods are deployed:
 
    ```
-   kubectl get svc
+   kubectl get svc -n istio-system
    ```
    {: pre}
 
    ```
-   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
-   details         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   kubernetes      ClusterIP     10.xxx.xx.xxx    <none>        443/TCP         30m
-   productpage     ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   ratings         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   reviews         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE  
+   details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              22h
+   grafana                    ClusterIP      10.xxx.xx.xxx   <none>         3000/TCP                                                              22h
+   istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     22h
+   istio-egressgateway        ClusterIP      10.xxx.xx.xxx   <none>         80/TCP,443/TCP                                                        22h
+   istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            22h
+   istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   22h
+   istio-policy               ClusterIP      10.xxx.xx.xxx   <none>         9091/TCP,15004/TCP,9093/TCP                                           22h
+   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx   <none>         443/TCP                                                               22h
+   istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     22h
+   istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 22h
+   productpage                ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              22h
+   prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              22h
+   ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              22h
+   reviews                    ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              22h
+   servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              22h
+   tracing                    LoadBalancer   10.xxx.xx.xxx      169.46.5.163   80:31115/TCP                                                          22h
+   zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              22h
    ```
    {: screen}
 
