@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -241,50 +241,50 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned. 
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
 
 {: tsResolve}
 
 **As the user:**
 
-1. Log in to {{site.data.keyword.Bluemix_notm}}. 
+1. Log in to {{site.data.keyword.Bluemix_notm}}.
    ```
    ibmcloud login
    ```
    {: pre}
-   
-2. Target the org and the space where the service instance is provisioned. 
+
+2. Target the org and the space where the service instance is provisioned.
    ```
    ibmcloud target -o <org> -s <space>
    ```
    {: pre}
-   
-3. Verify that you are in the right space by listing your service instances. 
+
+3. Verify that you are in the right space by listing your service instances.
    ```
-   ibmcloud service list 
+   ibmcloud service list
    ```
    {: pre}
-   
-4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps). 
+
+4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps).
 
 **As the account admin:**
 
-1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access). 
+1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access).
 
-2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam/mngcf.html#updating-cloud-foundry-access) where the service is provisioned. 
+2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam/mngcf.html#updating-cloud-foundry-access) where the service is provisioned.
 
-3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission. 
+3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission.
 
-4. Wait a few minutes, then let the user try to bind the service again. 
+4. Wait a few minutes, then let the user try to bind the service again.
 
-5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
-   1. Retrieve the cluster ID. 
+5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID.
+   1. Retrieve the cluster ID.
       ```
       ibmcloud cs clusters
       ```
       {: pre}
-      
-   2. Retrieve the service instance ID. 
+
+   2. Retrieve the service instance ID.
       ```
       ibmcloud service show <service_name> --guid
       ```
@@ -311,66 +311,6 @@ Service is not disrupted due to these duplicates, but you can remove the old wor
   kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
-
-<br />
-
-
-## After a worker node updates or reloads, applications receive RBAC DENY errors
-{: #cs_rbac_deny}
-
-{: tsSymptoms}
-After you update to Kubernetes version 1.7, applications receive `RBAC DENY` errors.
-
-{: tsCauses}
-As of [Kubernetes version 1.7](cs_versions.html#cs_v17), applications that run in the `default` namespace no longer have cluster administrator privileges to the Kubernetes API for enhanced security.
-
-If your app runs in the `default` namespace, uses the `default ServiceAccount`, and accesses the Kubernetes API, it is affected by this Kubernetes change. For more information, see [the Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#upgrading-from-15).
-
-{: tsResolve}
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-
-1.  **Temporary action**: As you update your app RBAC policies, you might want to revert temporarily to the previous `ClusterRoleBinding` for the `default ServiceAccount` in the `default` namespace.
-
-    1.  Copy the following `.yaml` file.
-
-        ```yaml
-        kind: ClusterRoleBinding
-        apiVersion: rbac.authorization.k8s.io/v1beta1
-        metadata:
-         name: admin-binding-nonResourceURLSs-default
-        subjects:
-          - kind: ServiceAccount
-            name: default
-            namespace: default
-        roleRef:
-         kind: ClusterRole
-         name: admin-role-nonResourceURLSs
-         apiGroup: rbac.authorization.k8s.io
-        ---
-        kind: ClusterRoleBinding
-        apiVersion: rbac.authorization.k8s.io/v1beta1
-        metadata:
-         name: admin-binding-resourceURLSs-default
-        subjects:
-          - kind: ServiceAccount
-            name: default
-            namespace: default
-        roleRef:
-         kind: ClusterRole
-         name: admin-role-resourceURLSs
-         apiGroup: rbac.authorization.k8s.io
-        ```
-
-    2.  Apply the `.yaml` files to your cluster.
-
-        ```
-        kubectl apply -f FILENAME
-        ```
-        {: pre}
-
-2.  [Create RBAC authorization resources![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) to update the `ClusterRoleBinding` admin access.
-
-3.  If you created a temporary cluster role binding, remove it.
 
 <br />
 
@@ -455,9 +395,9 @@ If you have [the `PodSecurityPolicy` admission controller enabled](cs_psp.html),
 If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](cs_psp.html#ibm_psp), you might experience similar issues.
 
 {: tsResolve}
-Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#modify_psp). 
+Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#modify_psp).
 
-If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it. 
+If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
 1.  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 2.  Refresh the Kubernetes master to restore it.

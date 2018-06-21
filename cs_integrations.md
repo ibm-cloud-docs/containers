@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -499,7 +499,6 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     1. In your preferred editor, create the following file and save it as `rbac-config.yaml`.
       **Note**:
         * To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies). You can choose a namespace other than `kube-system`, but all IBM Helm charts must be installed in `kube-system`. Whenever you run a `helm` command, you must use the `tiller-namespace <namespace>` flag to point to the other namespace where Tiller is installed.
-        * If you are using a version 1.7.x cluster, change the `apiVersion` to `rbac.authorization.k8s.io/v1beta1`.
 
       ```
       apiVersion: v1

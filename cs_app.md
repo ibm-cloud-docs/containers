@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -157,78 +157,47 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 **Launching the Kubernetes dashboard from the CLI**
 {: #db_cli}
 
-*   **Deprecated**: For clusters with a Kubernetes master version of **1.7.16 or earlier**. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+1.  Get your credentials for Kubernetes.
 
-    Kubernetes version 1.7 is unsupported as of 21 June 2018. [Update your clusters](cs_cluster_update.html#update) to version 1.8 or later.
-    {: tip}
+    ```
+    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+    ```
+    {: pre}
 
-    1.  Set the proxy with the default port number.
+2.  Copy the **id-token** value that is shown in the output.
 
-        ```
-        kubectl proxy
-        ```
-        {: pre}
+3.  Set the proxy with the default port number.
 
-        Output:
+    ```
+    kubectl proxy
+    ```
+    {: pre}
 
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
+    Example output:
 
-    2.  Open the Kubernetes dashboard in a web browser.
+    ```
+    Starting to serve on 127.0.0.1:8001
+    ```
+    {: screen}
 
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
+4.  Sign in to the dashboard.
 
-*  For clusters with a Kubernetes master version of **1.8.2 or later**:
+  1.  In your browser, navigate to the following URL:
 
-    1.  Get your credentials for Kubernetes.
+      ```
+      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+      ```
+      {: codeblock}
 
-        ```
-        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-        ```
-        {: pre}
+  2.  In the sign-on page, select the **Token** authentication method.
 
-    2.  Copy the **id-token** value that is shown in the output.
-
-    3.  Set the proxy with the default port number.
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        Example output:
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    4.  Sign in to the dashboard.
-
-      1.  In your browser, navigate to the following URL:
-
-          ```
-          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-          ```
-          {: codeblock}
-
-      2.  In the sign-on page, select the **Token** authentication method.
-
-      3.  Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
+  3.  Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
 
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
 
 [Next, you can run a configuration file from the dashboard.](#app_ui)
 
-
 <br />
-
-
 
 
 ## Creating secrets

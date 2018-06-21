@@ -65,7 +65,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
-* Either [create a standard cluster](cs_clusters.html#clusters_cli) or [update an existing cluster to version 1.7.16 or later](cs_cluster_update.html#master).
+* [Create a standard cluster](cs_clusters.html#clusters_cli).
 * [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
@@ -352,7 +352,7 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.1.0 Helm chart, which is backwards compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
+**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9.
 
 Updating your cluster to Kubernetes 1.10? Be sure to delete your strongSwan Helm chart first. Then after the update, reinstall it.
 {:tip}
