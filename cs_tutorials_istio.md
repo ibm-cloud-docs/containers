@@ -231,7 +231,7 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 2. Uninstall Istio.
 
    ```
-   kubectl delete -f install/kubernetes/istio.yaml
+   kubectl delete -f install/kubernetes/istio-demo.yaml
    ```
    {: pre}
 
