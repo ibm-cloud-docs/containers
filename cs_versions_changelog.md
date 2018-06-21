@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-06-19"
 # Version changelog
 {: #changelog}
 
-View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
+View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
 IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node). Check monthly for available updates. As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud cs workers <cluster>` or `ibmcloud cs worker-get <cluster> <worker>` commands.
@@ -32,7 +32,7 @@ For information about changes since the previous version, see the following chan
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
 -  Version 1.8 [changelog](#18_changelog).
--  **Deprecated**: Version 1.7 [changelog](#17_changelog).
+-  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
 ## Version 1.10 changelog
 {: #110_changelog}
@@ -521,7 +521,7 @@ Review the following changes.
 ## Archive
 {: #changelog_archive}
 
-### Version 1.7 changelog (Deprecated)
+### Version 1.7 changelog (Unsupported)
 {: #17_changelog}
 
 Review the following changes.

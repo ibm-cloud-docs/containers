@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -205,7 +205,7 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 {: caption="Private services and worker node options" caption-side="top"}
 
 **What if I want to connect my cluster to an on-prem data center?**</br>
-To connect your worker nodes and apps to an on-prem data center, you can configure a [VPN IPSec endpoint with a strongSwan service, a Virtual Router Appliance, or with a Fortigate Security Appliance](cs_vpn.html#vpn). 
+To connect your worker nodes and apps to an on-prem data center, you can configure a [VPN IPSec endpoint with a strongSwan service, a Virtual Router Appliance, or with a Fortigate Security Appliance](cs_vpn.html#vpn).
 
 ## Persistent storage
 {: #storage}
@@ -243,7 +243,7 @@ You can choose what events you want to log for your cluster and where you want t
 **How can I monitor the health and performance of my cluster?**</br>
 You can verify the capacity and performance of your cluster by monitoring your cluster components and compute resources, such as CPU and memory usage. {{site.data.keyword.containershort_notm}} automatically sends metrics for standard clusters to {{site.data.keyword.monitoringlong}} so that you can [see and analyze them in Grafana](cs_health.html#view_metrics).
 
-You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#logging-and-monitoring-services), such as Prometheus, Weave Scope, and others.
+You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#health_services), such as Prometheus, Weave Scope, and others.
 
 **What are my options to enable trust in my cluster?** </br>
 By default, {{site.data.keyword.containershort_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.
@@ -256,7 +256,7 @@ By default, {{site.data.keyword.containershort_notm}} provides many features for
 
 3.  **Container Image Security Enforcement (beta)**: Create an admission controller with custom policies so that you can verify container images before you deploy them. With Container Image Security Enforcement, you control where the images are deployed from and ensure that they meet [Vulnerability Advisor](/docs/services/va/va_index.html) policies or [content trust](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) requirements. If a deployment does not meet the policies that you set, security enforcement prevents modifications to your cluster. For more information, see [Enforcing container image security (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce).
 
-4.  **Container Vulnerability Scanner**: By default, Vulnerability Advisor scans images that are stored in {{site.data.keyword.registryshort_notm}}. To check the status of live containers that are running in your cluster, you can install the container scanner. For more information, see [Installing the container scanner](/docs/services/va/va_index.html#va_install_livescan).
+4.  **Container Vulnerability Scanner**: By default, Vulnerability Advisor scans images that are stored in {{site.data.keyword.registryshort_notm}}. To check the status of live containers that are running in your cluster, you can install the container scanner. For more information, see [Installing the container scanner](/docs/services/va/va_index.html#va_install_container_scanner).
 
 5.  **Network analytics with Security Advisor (preview)**: With {{site.data.keyword.Bluemix_notm}} Security Advisor, you can centralize security insights from {{site.data.keyword.Bluemix_notm}} services such as Vulnerability Advisor and {{site.data.keyword.cloudcerts_short}}. When you enable Security Advisor in your cluster, you can view reports about suspicious incoming and outgoing network traffic. For more information, see [Network Analytics](/docs/services/security-advisor/network-analytics.html#network-analytics). To install, see [Setting up monitoring of suspicious clients and server IP addresses for a Kubernetes cluster](/docs/services/security-advisor/setup_cluster.html).
 
@@ -311,8 +311,8 @@ Even if you deployed a container from an image that passes the vulnerability che
       <td>Create an admission controller with custom policies so that you can verify container images before you deploy them. With [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce), you control where the images are deployed from and ensure that they meet Vulnerability Advisor policies or content trust requirements. If a deployment does not meet the policies that you set, the admission controller blocks the deployment in your cluster.</td>
     </tr>
     <tr>
-      <td>Live scan for containers</td>
-      <td>In order to detect vulnerabilities in running containers, you can install the [ibmcloud-container-scanner](/docs/services/va/va_index.html#va_install_livescan). Similar to the images, you can set up the live scanner to monitor the containers for vulnerabilities in all cluster namespaces. When vulnerabilities are found, update the source image and re-deploy the container.</td>
+      <td>Live scanning of containers</td>
+      <td>In order to detect vulnerabilities in running containers, you can install the [ibmcloud-container-scanner](/docs/services/va/va_index.html#va_install_container_scanner). Similar to the images, you can set up the container scanner to monitor the containers for vulnerabilities in all cluster namespaces. When vulnerabilities are found, update the source image and re-deploy the container.</td>
     </tr>
   </tbody>
   </table>
@@ -327,14 +327,14 @@ Kubernetes namespaces are a way to virtually partition a cluster and provide iso
 Every cluster is set up with the following namespaces:
 - **default:** The namespace where everything is deployed to that does not define a specific namespace. When you assign the Viewer, Editor, or Operator platform role to a user, the user can access the default namespace, but not the `kube-system`, `ibm-system`, or `ibm-cloud-cert` namespaces.
 - **kube-system and ibm-system:** This namespace holds deployments and services that are required for Kubernetes and {{site.data.keyword.containerlong_notm}} to manage the cluster. Cluster admins can use this namespace to make a Kubernetes resource available across namespaces.
-- **ibm-cloud-cert:** This namespace is used for resources that are related to {{site.data.keyword.cloudcerts_long_notm}}. 
+- **ibm-cloud-cert:** This namespace is used for resources that are related to {{site.data.keyword.cloudcerts_long_notm}}.
 - **kube-public:** This namespace can be accessed by all users, even if they are not authenticated with the cluster. Be cautious to deploy resources into this namespace as you might be putting your cluster at risk to get compromised.
 
 Cluster admins can set up additional namespaces in the cluster and customize them to their needs. </br></br>
 **Important:** For every namespace that you have in the cluster, make sure to set up proper [RBAC policies](cs_users.html#rbac) to limit access to this namespace, control what gets deployed, and to set proper [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [limit ranges ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/).  
 
 **Should I set up a single-tenant or a multi-tenant cluster?** </br>
-In a single-tenant cluster, you create one cluster for every group of people that must run workloads in a cluster. Usually, this team is responsible to manage the cluster and to properly configure and secure it. Multi-tenant clusters use multiple namespaces to isolate tenants and their workloads. 
+In a single-tenant cluster, you create one cluster for every group of people that must run workloads in a cluster. Usually, this team is responsible to manage the cluster and to properly configure and secure it. Multi-tenant clusters use multiple namespaces to isolate tenants and their workloads.
 
 <img src="images/cs_single_multitenant.png" width="600" alt="Single tenant vs. multi-tenant cluster" style="width:600px; border-style: none"/>
 
@@ -373,4 +373,3 @@ You are responsible for ensuring the security of your personal information in Ku
   <dt>Use a Kubernetes `imagePullSecret` to store image registry credentials</dt>
   <dd>Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in <a href="cs_images.html#other">Kubernetes imagePullSecrets</a> and other personal information in <a href="cs_app.html#secrets">Kubernetes secrets</a> instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.</dd>
   </dl>
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -26,6 +26,7 @@ You can use various external services and catalog services with a standard Kuber
 
 
 ## Application services
+{: #application_services}
 <table summary="Summary for accessibility">
 <caption>Application services</caption>
 <thead>
@@ -48,6 +49,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## DevOps services
+{: #devops_services}
 <table summary="Summary for accessibility">
 <caption>DevOps services</caption>
 <thead>
@@ -81,6 +83,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Logging and monitoring services
+{: #health_services}
 <table summary="Summary for accessibility">
 <caption>Logging and monitoring services</caption>
 <thead>
@@ -138,6 +141,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Security services
+{: #security_services}
 <table summary="Summary for accessibility">
 <caption>Security services</caption>
 <thead>
@@ -179,6 +183,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 ## Storage services
+{: #storage_services}
 <table summary="Summary for accessibility">
 <caption>Storage services</caption>
 <thead>
@@ -236,7 +241,7 @@ To add a service:
 2.  List available {{site.data.keyword.Bluemix_notm}} services.
 
     ```
-    ic service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -307,26 +312,26 @@ To create a Cloud Foundry alias for the service instance:
 1. Target the org and a space where the service instance is created.
 
     ```
-    ic target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. Note the service instance name.
     ```
-    ic resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. Create a Cloud Foundry alias for the service instance.
     ```
-    ic resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. Verify that the service alias was created.
 
     ```
-    ic service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -494,7 +499,6 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     1. In your preferred editor, create the following file and save it as `rbac-config.yaml`.
       **Note**:
         * To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies). You can choose a namespace other than `kube-system`, but all IBM Helm charts must be installed in `kube-system`. Whenever you run a `helm` command, you must use the `tiller-namespace <namespace>` flag to point to the other namespace where Tiller is installed.
-        * If you are using a version 1.7.x cluster, change the `apiVersion` to `rbac.authorization.k8s.io/v1beta1`.
 
       ```
       apiVersion: v1

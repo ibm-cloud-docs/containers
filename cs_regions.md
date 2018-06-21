@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -42,7 +42,7 @@ Supported {{site.data.keyword.containershort_notm}} regions are as follows:
 You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same region.
 {:shortdesc}
 
-To check which {{site.data.keyword.Bluemix_notm}} region you are currently in, run `ic info` and review the **Region** field.
+To check which {{site.data.keyword.Bluemix_notm}} region you are currently in, run `ibmcloud info` and review the **Region** field.
 
 {{site.data.keyword.Bluemix_notm}} regions can be accessed by specifying the API endpoint when you log in. If you do not specify a region, you are automatically logged in to the region that is closest to you.
 
@@ -50,25 +50,25 @@ For example, you can use the following commands to log in to {{site.data.keyword
 
   * US South and US East
       ```
-      ic login -a api.ng.bluemix.net
+      ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
   * Sydney and AP North
       ```
-      ic login -a api.au-syd.bluemix.net
+      ibmcloud login -a api.au-syd.bluemix.net
       ```
       {: pre}
 
   * Germany
       ```
-      ic login -a api.eu-de.bluemix.net
+      ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
   * United Kingdom
       ```
-      ic login -a api.eu-gb.bluemix.net
+      ibmcloud login -a api.eu-gb.bluemix.net
       ```
       {: pre}
 

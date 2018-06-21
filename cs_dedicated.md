@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -125,23 +125,23 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.Bluemix_notm}} credentials for the public account owner and select your account when prompted.
 
         ```
-        ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
     2.  Generate an API key for inviting users to the public account. Note the API key value, which the Dedicated account administrator must use in the next step.
 
         ```
-        ic iam api-key-create <key_name> -d "Key to invite users to <dedicated_account_name>"
+        ibmcloud iam api-key-create <key_name> -d "Key to invite users to <dedicated_account_name>"
         ```
         {: pre}
 
     3.  Note the GUID of the public account organization that you want to invite users to, which the Dedicated account administrator must use in the next step.
 
         ```
-        ic account orgs
+        ibmcloud account orgs
         ```
         {: pre}
 
@@ -149,17 +149,17 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter the {{site.data.keyword.Bluemix_notm}} credentials for the Dedicated account owner and select your account when prompted.
 
         ```
-        ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
     2.  Invite the users to the public account.
         * To invite a single user:
 
             ```
-            ic cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
+            ibmcloud cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
             {: pre}
 
@@ -168,7 +168,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         * To invite all users currently in a Dedicated account organization:
 
             ```
-            ic cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
+            ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
             Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. For more information about this command, see [Inviting a user from IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public).
@@ -178,7 +178,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     4.  Verify that the users were added to the account.
 
         ```
-        ic cf bluemix-admin invite-users-status -apikey=<public_API_key>
+        ibmcloud cf bluemix-admin invite-users-status -apikey=<public_API_key>
         ```
         {: pre}
 
@@ -205,11 +205,11 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     1.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your IBMid when prompted.
 
         ```
-        ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. Your Dedicated account is authenticated, and the Dedicated and public accounts are linked together. Every time you log in after this first time, you use only your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/cli/connect_dedicated_id.html#connect_dedicated_id).
 
@@ -225,7 +225,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 5.  If you want to unlink your accounts, you can disconnect your IBMid from your Dedicated user ID. For more information, see [Disconnect your dedicated ID from the public IBMid](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid).
 
     ```
-    ic iam dedicated-id-disconnect
+    ibmcloud iam dedicated-id-disconnect
     ```
     {: pre}
 
@@ -285,11 +285,11 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 2.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select your account when prompted.
 
     ```
-    ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+    ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ic login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 3.  To target a region, run `ibmcloud cs region-set`.
 

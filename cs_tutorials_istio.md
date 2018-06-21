@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -161,75 +161,30 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    ```
    {: screen}
 
-3. To verify the app deployment, either set up a URL for a standard cluster or get the public IP address of a worker node for a free cluster.
+3. To verify the app deployment, get the public address for your cluster.
 
     * For standard clusters:
 
-      1. Expose the BookInfo app by creating an Ingress gateway. The gateway allows Istio features, such as monitoring and route rules, to be applied to traffic entering the cluster.
-
+      1. Get the Ingress IP and port of your cluster.
           ```
-          kubectl create -f samples/bookinfo/kube/bookinfo-gateway.yaml
-          ```
-          {: pre}
-
-      2. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for the BookInfo app.
-
-          ```
-          ibmcloud cs cluster-get <cluster_name_or_ID>
+          kubectl get Ingress_secret
           ```
           {: pre}
 
-      3. Create the following resource YAML file for the IBM Ingress ALB. Replace <Ingress_subdomain> and <Ingress_secret> with the values that you found in the previous step.
-
+          Example output:
           ```
-          apiVersion: extensions/v1beta1
-          kind: Ingress
-          metadata:
-            name: myingress
-            annotations:
-              ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceNamespace=default istioServiceName=gateway"
-          spec:
-            tls:
-            - hosts:
-              - <Ingress_subdomain>
-            secretName: <Ingress_secret>
-            rules:
-            - host: <Ingress_subdomain>
-              http:
-                paths:
-                - path: /productpage
-                  backend:
-                    serviceName: productpage
-                    servicePort: 9080
-                - path: /login
-                  backend:
-                    serviceName: productpage
-                    servicePort: 9080
-                - path: /logout
-                  backend:
-                    serviceName: productpage
-                    servicePort: 9080
-                - path: /api/v1/products.*
-                  backend:
-                    serviceName: productpage
-                    servicePort: 9080
+          NAME      HOSTS     ADDRESS          PORTS     AGE
+          gateway   *         169.xx.xxx.xxx   80        3m
           ```
-          {: pre}
+          {: screen}
 
-          The [annotation](cs_annotations.html#istio-annotations) in this resource, `ingress.bluemix.net/istio-services`, enables the cluster ALB to route HTTPS requests to the Istio Ingress gateway for the BookInfo app. The Istio Ingress gateway allows the requests to be routed to the BookInfo productpage service based on the specified paths: `/productpage`, `/login`, `/logout`, and `/api/v1/products.*`.
 
-      4. Save the Ingress resource file in the `samples/bookinfo/kube` folder.
+      2. Create a `GATEWAY_URL` environment variable that uses the Ingress IP address.
 
-      5. Create the Ingress resource for your cluster ALB.
-
-          ```
-          kubectl apply -f samples/bookinfo/kube/myingress.yaml
-          ```
-          {: pre}
-
-      5. In a browser, go to `https://<Ingress_subdomain>/productpage` to view the BookInfo web page.
-
-      6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
+         ```
+         export GATEWAY_URL=<ingress_IP>:80
+         ```
+         {: pre}
 
     * For free clusters:
 
@@ -247,16 +202,16 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
          ```
          {: pre}
 
-      3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+4. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
 
          ```
          curl -I http://$GATEWAY_URL/productpage
          ```
          {: pre}
 
-      4. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
 
-      5. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
+6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
 Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio further.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -314,7 +314,7 @@ To view how many subnets a VLAN has:
 2.  Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see whether 40 or more subnets exist.
 
 {: tsResolve}
-If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/get-support/howtogetsupport.html#getting-customer-support). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
+If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 
 If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets.
 

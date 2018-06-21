@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -351,205 +351,16 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 ## Archive
 {: #k8s_version_archive}
 
-### Version 1.7 (Deprecated)
+### Version 1.7 (Unsupported)
 {: #cs_v17}
 
-**As of 22 May 2018, {{site.data.keyword.containershort_notm}} clusters that run Kubernetes version 1.7 are deprecated**. After 21 June 2018, Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
+As of 21 June 2018, {{site.data.keyword.containershort_notm}} clusters that run [Kubernetes version 1.7](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
 
-[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately.
-
-Are you still running Kubernetes version 1.5? Review the following information to assess the impact of updating your cluster from v1.5 to v1.7. [Update your clusters](cs_cluster_update.html#update) to v1.7, then immediately update them to at least v1.8.
-{: tip}
-
-<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.7 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.7 under the CNCF Kubernetes Software Conformance Certification program.</p>
-
-Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.7.
-
-<br/>
-
-#### Update before master
-{: #17_before}
-
-<table summary="Kubernetes updates for versions 1.7 and 1.6">
-<caption>Changes to make before you update the master to Kubernetes 1.7</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Storage</td>
-<td>Configuration scripts with `hostPath` and `mountPath` with parent directory references like `../to/dir` are not allowed. Change paths to simple absolute paths, for example, `/path/to/dir`.
-<ol>
-  <li>Determine whether you need to change storage paths:</br>
-  ```
-  kubectl get pods --all-namespaces -o yaml | grep "\.\." && echo "Action required"
-  ```
-  </br>
-
-  <li>If `Action required` is returned, change the pods to reference the absolute path before you update all of your worker nodes. If the pod is owned by another resource, such as a deployment, change the [_PodSpec_ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) within that resource.
-</ol>
-</td>
-</tr>
-</tbody>
-</table>
-
-#### Update after master
-{: #17_after}
-
-<table summary="Kubernetes updates for versions 1.7 and 1.6">
-<caption>Changes to make after you update the master to Kubernetes 1.7</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Deployment `apiVersion`</td>
-<td>After you update the cluster from Kubernetes 1.5, use `apps/v1beta1` for the `apiVersion` field in new `Deployment` YAML files. Continue to use `extensions/v1beta1` for other resources, such as `Ingress`.</td>
-</tr>
-<tr>
-<td>'kubectl'</td>
-<td>After the `kubectl` CLI update, these `kubectl create` commands must use multiple flags instead of comma-separated arguments:<ul>
- <li>`role`
- <li>`clusterrole`
- <li>`rolebinding`
- <li>`clusterrolebinding`
- <li>`secret`
- </ul>
-</br>  For example, run `kubectl create role --resource-name <x> --resource-name <y>` and not `kubectl create role --resource-name <x>,<y>`.</td>
-</tr>
-<tr>
-<td>Network Policy</td>
-<td>The `net.beta.kubernetes.io/network-policy` annotation is no longer available.
-<ol>
-  <li>Determine whether you need to change policies:</br>
-  ```
-  kubectl get ns -o yaml | grep "net.beta.kubernetes.io/network-policy" | grep "DefaultDeny" && echo "Action required"
-  ```
-  <li>If `"Action required"` is returned, add the following network policy to each Kubernetes namespace that was listed:</br>
-
-  <pre class="codeblock">
-  <code>
-  kubectl create -n &lt;namespace&gt; -f - &lt;&lt;EOF
-  kind: NetworkPolicy
-  apiVersion: networking.k8s.io/v1
-  metadata:
-    name: default-deny
-    namespace: &lt;namespace&gt;
-  spec:
-    podSelector: {}
-  EOF
-  </code>
-  </pre>
-
-  <li> After you add the networking policy, remove the `net.beta.kubernetes.io/network-policy` annotation:
-  ```
-  kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
-  ```
-  </li></ol>
-</td></tr>
-<tr>
-<td>Pod Affinity Scheduling</td>
-<td> The `scheduler.alpha.kubernetes.io/affinity` annotation is deprecated.
-<ol>
-  <li>For each namespace except `ibm-system` and `kube-system`, determine whether you need to update pod affinity scheduling:</br>
-  ```
-  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
-  ```
-  </br></li>
-  <li>If `"Action required"` is returned, use the [_PodSpec_ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ field instead of the `scheduler.alpha.kubernetes.io/affinity` annotation.</li>
-</ol>
-</td></tr>
-<tr>
-<td>RBAC for `default` `ServiceAccount`</td>
-<td><p>The administrator `ClusterRoleBinding` for the `default` `ServiceAccount` in the `default` namespace is removed to improve cluster security. Applications that run in the `default` namespace no longer have cluster administrator privileges to the Kubernetes API, and might encounter `RBAC DENY` permission errors. Check your app and its `.yaml` file to see whether it runs in the `default` namespace, uses the `default ServiceAccount`, and accesses the Kubernetes API.</p>
-<p>If your applications rely on these privileges, [create RBAC authorization resources![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) for your apps.</p>
-  <p>As you update your app RBAC policies, you might want to revert temporarily to the previous `default`. Copy, save, and apply the following files with the `kubectl apply -f FILENAME` command. <strong>Note</strong>: Revert to give yourself time to update all your application resources, and not as a long-term solution.</p>
-
-<p><pre class="codeblock">
-<code>
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
- name: admin-binding-nonResourceURLSs-default
-subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
-roleRef:
- kind: ClusterRole
- name: admin-role-nonResourceURLSs
- apiGroup: rbac.authorization.k8s.io
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
- name: admin-binding-resourceURLSs-default
-subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
-roleRef:
- kind: ClusterRole
- name: admin-role-resourceURLSs
- apiGroup: rbac.authorization.k8s.io
-</code>
-</pre></p>
-</td>
-</tr>
-<tr>
-<td>Read-only API data volumes</td>
-<td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
-Previously, apps were allowed to write data to these volumes that might be
-reverted automatically by the system. This migration action is required to fix
-security vulnerability [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
-If your apps rely on the previous insecure behavior, modify them accordingly.</td>
-</tr>
-<tr>
-<td>StatefulSet pod DNS</td>
-<td>StatefulSet pods lose their Kubernetes DNS entries after the master is updated. To restore the DNS entries, delete the StatefulSet pods. Kubernetes re-creates the pods and automatically restores the DNS entries. For more information, see the [Kubernetes issue ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/48327).</td>
-</tr>
-<tr>
-<td>Tolerations</td>
-<td>The `scheduler.alpha.kubernetes.io/tolerations` annotation is no longer available.
-<ol>
-  <li>For each namespace except `ibm-system` and `kube-system`, determine whether you need to change tolerations:</br>
-  ```
-  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/tolerations" && echo "Action required"
-  ```
-  </br>
-
-  <li>If `"Action required"` is returned, use the [_PodSpec_ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _tolerations_ field instead of the `scheduler.alpha.kubernetes.io/tolerations` annotation
-</ol>
-</td></tr>
-<tr>
-<td>Taints</td>
-<td>The `scheduler.alpha.kubernetes.io/taints` annotation is no longer available.
-<ol>
-  <li>Determine whether you need to change taints:</br>
-  ```
-  kubectl get nodes -o yaml | grep "scheduler.alpha.kubernetes.io/taints" && echo "Action required"
-  ```
-  <li>If `"Action required"` is returned, remove the `scheduler.alpha.kubernetes.io/taints` annotation for each node:</br>
-  `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
-  <li>Add a taint to each node:</br>
-  `kubectl taint node <node> <taint>`
-  </li></ol>
-</td></tr>
-</tbody>
-</table>
-
-<br />
-
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.8.
 
 ### Version 1.5 (Unsupported)
 {: #cs_v1-5}
 
-As of 4 April 2018, {{site.data.keyword.containershort_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.7](#cs_v17)).
+As of 4 April 2018, {{site.data.keyword.containershort_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
 
-[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately. You must update from one version to the next most recent, such as 1.5 to 1.7 or 1.8 to 1.9.
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.8.

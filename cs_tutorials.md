@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -79,13 +79,13 @@ As your cluster provisions, install the following CLIs that are used to manage c
 </br>
 **To install the CLIs and their prerequisites**
 
-1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `ic`.
+1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `ibmcloud`.
 2.  Follow the prompts to select an account and an {{site.data.keyword.Bluemix_notm}} organization. Clusters are specific to an account, but are independent from an {{site.data.keyword.Bluemix_notm}} organization or space.
 
 4.  Install the {{site.data.keyword.containershort_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containershort_notm}} plug-in commands, use the prefix `ibmcloud cs`.
 
     ```
-    ic plugin install container-service -r Bluemix
+    ibmcloud plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -132,14 +132,14 @@ As your cluster provisions, install the following CLIs that are used to manage c
 6. To set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}, install the {{site.data.keyword.registryshort_notm}} plug-in. To run registry commands, use the prefix `ibmcloud cr`.
 
     ```
-    ic plugin install container-registry -r Bluemix
+    ibmcloud plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     To verify that the container-service and container-registry plug-ins are properly installed, run the following command:
 
     ```
-    ic plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -157,7 +157,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI by using your {{site.data.keyword.Bluemix_notm}} credentials, when prompted.
 
     ```
-    ic login [--sso]
+    ibmcloud login [--sso]
     ```
     {: pre}
 
@@ -256,7 +256,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     **Note:** When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
     ```
-    ic service create tone_analyzer standard <service_name>
+    ibmcloud service create tone_analyzer standard <service_name>
     ```
     {: pre}
 

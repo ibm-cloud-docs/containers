@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -31,7 +31,7 @@ Refer to these commands to create and manage clusters on {{site.data.keyword.Blu
 **Tip:** To see the version of the {{site.data.keyword.containershort_notm}} plug-in, run the following command.
 
 ```
-ic plugin list
+ibmcloud plugin list
 ```
 {: pre}
 
@@ -861,7 +861,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
 ### ibmcloud cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME
 {: #cs_cluster_service_bind}
 
-Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ic service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
+Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
 
 <strong>Command options</strong>:
 
@@ -873,7 +873,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
-   <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ic service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ic service show <service instance name> --guid</code>. One of these values is required.</dd>
+   <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ibmcloud service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ibmcloud service show <service instance name> --guid</code>. One of these values is required.</dd>
    </dl>
 
 **Example**:

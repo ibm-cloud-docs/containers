@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-19"
+lastupdated: "2018-06-20"
 
 ---
 
@@ -92,7 +92,7 @@ To deploy the app:
 3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ibmcloud cs region-set` command.
 
     ```
-    ic login [--sso]
+    ibmcloud login [--sso]
     ```
     {: pre}
 
