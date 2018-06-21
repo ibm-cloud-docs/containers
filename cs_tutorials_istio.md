@@ -137,23 +137,23 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
    ```
    NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE  
-   details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              22h
-   grafana                    ClusterIP      10.xxx.xx.xxx   <none>         3000/TCP                                                              22h
-   istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     22h
-   istio-egressgateway        ClusterIP      10.xxx.xx.xxx   <none>         80/TCP,443/TCP                                                        22h
-   istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            22h
-   istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   22h
-   istio-policy               ClusterIP      10.xxx.xx.xxx   <none>         9091/TCP,15004/TCP,9093/TCP                                           22h
-   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx   <none>         443/TCP                                                               22h
-   istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     22h
-   istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 22h
-   productpage                ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              22h
-   prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              22h
-   ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              22h
-   reviews                    ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              22h
-   servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              22h
-   tracing                    LoadBalancer   10.xxx.xx.xxx      169.46.5.163   80:31115/TCP                                                          22h
-   zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              22h
+   details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   grafana                    ClusterIP      10.xxx.xx.xxx   <none>         3000/TCP                                                              6m
+   istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     6m
+   istio-egressgateway        ClusterIP      10.xxx.xx.xxx   <none>         80/TCP,443/TCP                                                        6m
+   istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            6m
+   istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   6m
+   istio-policy               ClusterIP      10.xxx.xx.xxx   <none>         9091/TCP,15004/TCP,9093/TCP                                           6m
+   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx   <none>         443/TCP                                                               6m
+   istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     6m
+   istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 6m
+   productpage                ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              6m
+   prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              6m
+   ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   reviews                    ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              6m
+   servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              6m
+   tracing                    LoadBalancer   10.xxx.xx.xxx      169.46.5.163   80:31115/TCP                                                          6m
+   zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              6m
    ```
    {: screen}
 
@@ -163,13 +163,24 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME                                READY     STATUS    RESTARTS   AGE
-   details-v1-1520924117-48z17         1/1       Running   0          6m
-   productpage-v1-560495357-jk1lz      1/1       Running   0          6m
-   ratings-v1-734492171-rnr5l          1/1       Running   0          6m
-   reviews-v1-874083890-f0qf0          1/1       Running   0          6m
-   reviews-v2-1343845940-b34q5         1/1       Running   0          6m
-   reviews-v3-1813607990-8ch52         1/1       Running   0          6m
+   NAME                                        READY     STATUS      RESTARTS   AGE
+   details-v1-1520924117-48z17                 1/1       Running     0          6m
+   istio-citadel-ff5696f6f-rbxbq               1/1       Running     0          1m
+   istio-egressgateway-58d98d898c-wbn7k        1/1       Running     0          1m
+   istio-ingress-6fb78f687f-t9d98              1/1       Running     0          1m
+   istio-ingressgateway-6bc7c7c4bc-8fdx2       1/1       Running     0          1m
+   istio-mixer-post-install-r6tl8              0/1       Completed   0          1m
+   istio-pilot-6c5c6b586c-vmk7m                2/2       Running     0          1m
+   istio-policy-5c7fbb4b9f-55gvc               2/2       Running     0          1m
+   istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
+   istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
+   istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
+   productpage-v1-560495357-jk1lz              1/1       Running     0          6m
+   prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
+   ratings-v1-734492171-rnr5l                  1/1       Running     0          6m
+   reviews-v1-874083890-f0qf0                  1/1       Running     0          6m
+   reviews-v2-1343845940-b34q5                 1/1       Running     0          6m
+   reviews-v3-1813607990-8ch52                 1/1       Running     0          6m
    ```
    {: screen}
 
