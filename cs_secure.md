@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-21"
 
 ---
 
@@ -243,7 +243,7 @@ You can choose what events you want to log for your cluster and where you want t
 **How can I monitor the health and performance of my cluster?**</br>
 You can verify the capacity and performance of your cluster by monitoring your cluster components and compute resources, such as CPU and memory usage. {{site.data.keyword.containershort_notm}} automatically sends metrics for standard clusters to {{site.data.keyword.monitoringlong}} so that you can [see and analyze them in Grafana](cs_health.html#view_metrics).
 
-You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#logging-and-monitoring-services), such as Prometheus, Weave Scope, and others.
+You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#health_services), such as Prometheus, Weave Scope, and others.
 
 **What are my options to enable trust in my cluster?** </br>
 By default, {{site.data.keyword.containershort_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.
