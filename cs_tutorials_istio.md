@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-22"
 
 ---
 
@@ -200,7 +200,6 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
           gateway   *         169.xx.xxx.xxx   80        3m
           ```
           {: screen}
-
 
       2. Create a `GATEWAY_URL` environment variable that uses the Ingress IP address.
 
