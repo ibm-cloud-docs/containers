@@ -136,29 +136,29 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE  
+   NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                                                               AGE  
    details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   grafana                    ClusterIP      10.xxx.xx.xxx   <none>         3000/TCP                                                              6m
+   grafana                    ClusterIP      10.xxx.xx.xxx    <none>         3000/TCP                                                              6m
    istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     6m
-   istio-egressgateway        ClusterIP      10.xxx.xx.xxx   <none>         80/TCP,443/TCP                                                        6m
+   istio-egressgateway        ClusterIP      10.xxx.xx.xxx    <none>         80/TCP,443/TCP                                                        6m
    istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            6m
    istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   6m
-   istio-policy               ClusterIP      10.xxx.xx.xxx   <none>         9091/TCP,15004/TCP,9093/TCP                                           6m
-   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx   <none>         443/TCP                                                               6m
+   istio-policy               ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP                                           6m
+   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx    <none>         443/TCP                                                               6m
    istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     6m
    istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 6m
-   productpage                ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              6m
+   productpage                ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
    prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              6m
    ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   reviews                    ClusterIP      10.xxx.xx.xxx   <none>         9080/TCP                                                              6m
+   reviews                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
    servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              6m
-   tracing                    LoadBalancer   10.xxx.xx.xxx      169.46.5.163   80:31115/TCP                                                          6m
+   tracing                    LoadBalancer   10.xxx.xx.xxx    169.46.5.163   80:31115/TCP                                                          6m
    zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              6m
    ```
    {: screen}
 
    ```
-   kubectl get pods
+   kubectl get pods -n istio-system
    ```
    {: pre}
 
@@ -225,11 +225,10 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
          {: pre}
 
 4. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
-
-         ```
-         curl -I http://$GATEWAY_URL/productpage
-         ```
-         {: pre}
+     ```
+     curl -I http://$GATEWAY_URL/productpage
+     ```
+     {: pre}
 
 5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
 
@@ -244,14 +243,12 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 {:shortdesc}
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
-
    ```
    samples/bookinfo/kube/cleanup.sh
    ```
    {: pre}
 
 2. Uninstall Istio.
-
    ```
    kubectl delete -f install/kubernetes/istio-demo.yaml
    ```
