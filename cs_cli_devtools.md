@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-25"
 
 ---
 
@@ -37,7 +37,8 @@ ibmcloud plugin list
 
 
 
-<table summary="API commands">
+<table summary="API commands table">
+<caption>API commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -46,15 +47,15 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud cs api](#cs_api)</td>
     <td>[ibmcloud cs api-key-info](#cs_api_key_info)</td>
     <td>[ibmcloud cs api-key-reset](#cs_api_key_reset)</td>
     <td>[ibmcloud cs apiserver-config-get](#cs_apiserver_config_get)</td>
-    <td>[ibmcloud cs apiserver-config-set](#cs_apiserver_config_set)</td>
   </tr>
   <tr>
+    <td>[ibmcloud cs apiserver-config-set](#cs_apiserver_config_set)</td>
     <td>[ibmcloud cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
     <td>[ibmcloud cs apiserver-refresh](#cs_apiserver_refresh)</td>
-    <td></td>
     <td></td>
  </tr>
 </tbody>
@@ -62,7 +63,8 @@ ibmcloud plugin list
 
 <br>
 
-<table summary="CLI plug-in usage commands">
+<table summary="CLI plug-in usage commands table">
+<caption>CLI plug-in usage commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -81,7 +83,8 @@ ibmcloud plugin list
 
 <br>
 
-<table summary="Cluster commands: Management">
+<table summary="Cluster commands: Management table">
+<caption>Cluster commands: Management commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -106,7 +109,8 @@ ibmcloud plugin list
 
 <br>
 
-<table summary="Cluster commands: Services and integrations">
+<table summary="Cluster commands: Services and integrations table">
+<caption>Cluster commands: Services and integrations commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -125,7 +129,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Cluster commands: Subnets">
+<table summary="Cluster commands: Subnets table">
+<caption>Cluster commands: Subnets commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -150,7 +155,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Infrastructure commands">
+<table summary="Infrastructure commands table">
+<caption>Cluster commands: Infrastructure commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -169,7 +175,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Ingress application load balancer (ALB) commands">
+<table summary="Ingress application load balancer (ALB) commands table">
+<caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -196,7 +203,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Logging commands">
+<table summary="Logging commands table">
+<caption>Logging commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -229,7 +237,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Region commands">
+<table summary="Region commands table">
+<caption>Region commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -248,7 +257,8 @@ ibmcloud plugin list
 
 </br>
 
-<table summary="Worker node commands">
+<table summary="Worker node commands table">
+<caption>Worker node commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -260,21 +270,80 @@ ibmcloud plugin list
       <td>[ibmcloud cs worker-add](#cs_worker_add)</td>
       <td>[ibmcloud cs worker-get](#cs_worker_get)</td>
       <td>[ibmcloud cs worker-reboot](#cs_worker_reboot)</td>
-      <td>[ibmcloud cs worker-reload](#cs_worker_reload)</td></staging>
+      <td>[ibmcloud cs worker-reload](#cs_worker_reload)</td>
     </tr>
     <tr>
       <td>[ibmcloud cs worker-rm](#cs_worker_rm)</td>
       <td>[ibmcloud cs worker-update](#cs_worker_update)</td>
       <td>[ibmcloud cs workers](#cs_workers)</td>
-      <td></td>
+      <td>[ibmcloud cs worker-get](#cs_worker_get)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud cs worker-reboot](#cs_worker_reboot)</td>
+      <td>[ibmcloud cs worker-reload](#cs_worker_reload)</td>
+      <td>[ibmcloud cs worker-rm](#cs_worker_rm)</td>
+      <td>[ibmcloud cs workers](#cs_workers)</td>
     </tr>
   </tbody>
 </table>
 
+
+
 ## API commands
 {: #api_commands}
 
-### ibmcloud cs api-key-info CLUSTER
+### ibmcloud cs api ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+{: #cs_api}
+
+Target the API endpoint for {{site.data.keyword.containershort_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
+
+Switching regions? Use the `ibmcloud cs region-set` [command](#cs_region-set) instead.
+{: tip}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code><em>ENDPOINT</em></code></dt>
+   <dd>The {{site.data.keyword.containershort_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint. Accepted values are:<ul>
+   <li>Global endpoint: https://containers.bluemix.net</li>
+   <li>AP North endpoint: https://ap-north.containers.bluemix.net</li>
+   <li>AP South endpoint: https://ap-south.containers.bluemix.net</li>
+   <li>EU Central endpoint: https://eu-central.containers.bluemix.net</li>
+   <li>UK South endpoint: https://uk-south.containers.bluemix.net</li>
+   <li>US East endpoint: https://us-east.containers.bluemix.net</li>
+   <li>US South endpoint: https://us-south.containers.bluemix.net</li></ul>
+   </dd>
+
+   <dt><code>--insecure</code></dt>
+   <dd>Allow an insecure HTTP connection. This flag is optional.</dd>
+
+   <dt><code>--skip-ssl-validation</code></dt>
+   <dd>Allow insecure SSL certificates. This flag is optional.</dd>
+
+   <dt><code>--api-version VALUE</code></dt>
+   <dd>Specify the API version of the service that you want to use. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**: View information about the current API endpoint that is targeted.
+```
+ibmcloud cs api
+```
+{: pre}
+
+```
+API Endpoint:          https://containers.bluemix.net   
+API Version:           v1   
+Skip SSL Validation:   false   
+Region:                us-south
+```
+{: screen}
+
+
+### ibmcloud cs api-key-info CLUSTER [--json] [-s]
 {: #cs_api_key_info}
 
 View the name and email address for the owner of the IAM API key in an {{site.data.keyword.containershort_notm}} region.
@@ -292,6 +361,13 @@ If you find that you need to update the API key that is stored for a region, you
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -302,7 +378,7 @@ If you find that you need to update the API key that is stored for a region, you
   {: pre}
 
 
-### ibmcloud cs api-key-reset
+### ibmcloud cs api-key-reset [-s]
 {: #cs_api_key_reset}
 
 Replace the current IAM API key in an {{site.data.keyword.containershort_notm}} region.
@@ -310,6 +386,14 @@ Replace the current IAM API key in an {{site.data.keyword.containershort_notm}} 
 This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud cs api-key-info` command](#cs_api_key_info).
 
 **Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containershort_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
 
 **Example**:
 
@@ -404,7 +488,7 @@ Disable the webhook backend configuration for the cluster's API server. Disablin
   ```
   {: pre}
 
-### ibmcloud cs apiserver-refresh CLUSTER
+### ibmcloud cs apiserver-refresh CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
 Restart the Kubernetes master in the cluster to apply changes to the API server configuration.
@@ -414,6 +498,10 @@ Restart the Kubernetes master in the cluster to apply changes to the API server 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -447,7 +535,7 @@ View a list of supported commands and parameters.
   {: pre}
 
 
-### ibmcloud cs init [--host HOST]
+### ibmcloud cs init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
 Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
@@ -457,6 +545,19 @@ Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
    <dd>The {{site.data.keyword.containershort_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](cs_regions.html#container_regions)</dd>
+
+   <dt><code>--insecure</code></dt>
+   <dd>Allow an insecure HTTP connection.</dd>
+
+   <dt><code>-p</code></dt>
+   <dd>Your IBM Cloud password.</dd>
+
+   <dt><code>-u</code></dt>
+   <dd>Your IBM Cloud username.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -488,7 +589,7 @@ ibmcloud cs messages
 {: #cluster_mgmt_commands}
 
 
-### ibmcloud cs cluster-config CLUSTER [--admin] [--export]
+### ibmcloud cs cluster-config CLUSTER [--admin] [--export] [-s] [--yaml]
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
@@ -504,6 +605,13 @@ After logging in, download Kubernetes configuration data and certificates to con
 
    <dt><code>--export</code></dt>
    <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+  <dt><code>--yaml</code></dt>
+  <dd>Prints the command output in YAML format. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -514,10 +622,10 @@ ibmcloud cs cluster-config my_cluster
 {: pre}
 
 
-### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted]
+### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
-Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
+Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
 <strong>Command options</strong>
 
@@ -544,7 +652,7 @@ trusted: <em>true</em>
 
 
 <table>
-    <caption>Table. Understanding the YAML file components</caption>
+    <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -639,7 +747,7 @@ trusted: <em>true</em>
 <ul>
 <li>This parameter is not available for free clusters.</li>
 <li>If this standard cluster is the first standard cluster that you create in this location, do not use this flag. A public VLAN is created for you when the cluster is created.</li>
-<li>If you created a standard cluster before in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, you must specify that public VLAN.
+<li>If you created a standard cluster before in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
 
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
@@ -657,35 +765,45 @@ trusted: <em>true</em>
 <dt><code>--trusted</code></dt>
 <dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
 <p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Examples**:
 
   
 
-  Example for a standard cluster:
-  {: #example_cluster_create}
-
-  ```
-  ibmcloud cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  Example for a free cluster:
+  **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
   ```
   ibmcloud cs cluster-create --name my_cluster
   ```
   {: pre}
 
-  Example for an {{site.data.keyword.Bluemix_dedicated_notm}} environment:
+  **Create your first standard cluster**: The first standard cluster that is created in a location also creates a private VLAN. Therefore, do not include the `--public-vlan` flag.
+  {: #example_cluster_create}
+
+  ```
+  ibmcloud cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ```
+  {: pre}
+
+  **Create subsequent standard clusters**: If you already created a standard cluster in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run `ibmcloud cs vlans <location>`.
+
+  ```
+  ibmcloud cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ```
+  {: pre}
+
+  **Create a cluster in an {{site.data.keyword.Bluemix_dedicated_notm}} environment**:
 
   ```
   ibmcloud cs cluster-create --machine-type machine-type --workers number --name cluster_name
   ```
   {: pre}
 
-### ibmcloud cs cluster-feature-enable CLUSTER [--trusted]
+### ibmcloud cs cluster-feature-enable [-f] CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
 
 Enable a feature on an existing cluster.
@@ -696,10 +814,16 @@ Enable a feature on an existing cluster.
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
+   <dt><code>-f</code></dt>
+   <dd>Use this option to force the <code>--trusted</code> option with no user prompts. This value is optional.</dd>
+
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
-   </dl>
+
+  <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
 
 **Example command**:
 
@@ -708,7 +832,7 @@ Enable a feature on an existing cluster.
   ```
   {: pre}
 
-### ibmcloud cs cluster-get CLUSTER [--showResources]
+### ibmcloud cs cluster-get CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
 
 View information about a cluster in your organization.
@@ -719,9 +843,18 @@ View information about a cluster in your organization.
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
    <dt><code><em>--showResources</em></code></dt>
    <dd>Show more cluster resources such as add-ons, VLANs, subnets, and storage.</dd>
-   </dl>
+
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+
 
 **Example command**:
 
@@ -743,7 +876,7 @@ View information about a cluster in your organization.
   Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
-  Version:     1.7.16_1511* (1.8.11_1509 latest)
+  Version:     1.10.3
   Owner Email: name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -761,7 +894,7 @@ View information about a cluster in your organization.
   ```
   {: screen}
 
-### ibmcloud cs cluster-rm [-f] CLUSTER
+### ibmcloud cs cluster-rm [-f] CLUSTER [-s]
 {: #cs_cluster_rm}
 
 Remove a cluster from your organization.
@@ -774,6 +907,10 @@ Remove a cluster from your organization.
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the removal of a cluster with no user prompts. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -784,7 +921,7 @@ Remove a cluster from your organization.
   {: pre}
 
 
-### ibmcloud cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update]
+### ibmcloud cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_cluster_update}
 
 Update the Kubernetes master to the default API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
@@ -805,6 +942,9 @@ You might need to change your YAML files for future deployments. Review this [re
 
    <dt><code>--force-update</code></dt>
    <dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -815,14 +955,20 @@ You might need to change your YAML files for future deployments. Review this [re
   {: pre}
 
 
-### ibmcloud cs clusters
+### ibmcloud cs clusters [--json] [-s]
 {: #cs_clusters}
 
 View a list of clusters in your organization.
 
 <strong>Command options</strong>:
 
-  None
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example**:
 
@@ -832,14 +978,20 @@ View a list of clusters in your organization.
   {: pre}
 
 
-### ibmcloud cs kube-versions
+### ibmcloud cs kube-versions [--json] [-s]
 {: #cs_kube_versions}
 
 View a list of Kubernetes versions supported in {{site.data.keyword.containershort_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](cs_cli_reference.html#cs_worker_update) to the default version for the latest, stable capabilities.
 
 **Command options**:
 
-  None
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example**:
 
@@ -847,8 +999,6 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
   ibmcloud cs kube-versions
   ```
   {: pre}
-
-
 
 <br />
 
@@ -858,7 +1008,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
 {: #cluster_services_commands}
 
 
-### ibmcloud cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME
+### ibmcloud cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s]
 {: #cs_cluster_service_bind}
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
@@ -874,6 +1024,10 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 
    <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
    <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ibmcloud service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ibmcloud service show <service instance name> --guid</code>. One of these values is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -884,7 +1038,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
   {: pre}
 
 
-### ibmcloud cs cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID
+### ibmcloud cs cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID [-s]
 {: #cs_cluster_service_unbind}
 
 Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
@@ -902,6 +1056,10 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
    <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud cs cluster-services <cluster_name_or_ID>`.This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -912,7 +1070,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
   {: pre}
 
 
-### ibmcloud cs cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces]
+### ibmcloud cs cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
 {: #cs_cluster_services}
 
 List the services that are bound to one or all of the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
@@ -927,8 +1085,14 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
    <dd>Include the services that are bound to a specific namespace in a cluster. This value is optional.</dd>
 
    <dt><code>--all-namespaces</code></dt>
-    <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
-    </dl>
+   <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
 
 **Example**:
 
@@ -937,9 +1101,41 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
   ```
   {: pre}
 
+### ibmcloud cs va CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
+{: #cs_va}
+
+After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
+
+**Command options**:
+
+<dl>
+<dt><code>CONTAINER_ID</code></dt>
+<dd><p>The ID of the container. This value is required.</p>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](cs_cli_install.html#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `ibmcloud cs va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+
+<dt><code>--extended</code></dt>
+<dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
+<p>By default, the scan results show the ID, policy status, affected packages, and how to resolve. With the `--extended` flag, it adds information such as the summary, vendor security notice, and official notice link.</p></dd>
+
+<dt><code>--vulnerabilities</code></dt>
+<dd>Restrict the command output to show package vulnerabilities only. This value is optional. You cannot use this flag if you use the `--configuration-issues` flag.</dd>
+
+<dt><code>--configuration-issues</code></dt>
+<dd>Restrict the command output to show configuration issues only. This value is optional. You cannot use this flag if you use the `--vulnerabilities` flag.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud cs va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15 --extended --vulnerabilities --json
+```
+{: pre}
 
 
-### ibmcloud cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL
+### ibmcloud cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
 {: #cs_webhook_create}
 
 Register a webhook.
@@ -958,6 +1154,9 @@ Register a webhook.
 
    <dt><code>--url <em>URL</em></code></dt>
    <dd>The URL for the webhook. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -974,7 +1173,7 @@ Register a webhook.
 ## Cluster commands: Subnets
 {: #cluster_subnets_commands}
 
-### ibmcloud cs cluster-subnet-add CLUSTER SUBNET
+### ibmcloud cs cluster-subnet-add CLUSTER SUBNET [-s]
 {: #cs_cluster_subnet_add}
 
 Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a specified cluster.
@@ -991,6 +1190,10 @@ Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a 
 
    <dt><code><em>SUBNET</em></code></dt>
    <dd>The ID of the subnet. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -1001,7 +1204,7 @@ Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a 
   {: pre}
 
 
-### ibmcloud cs cluster-subnet-create CLUSTER SIZE VLAN_ID
+### ibmcloud cs cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
 Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it available to a specified cluster in {{site.data.keyword.containershort_notm}}.
@@ -1021,6 +1224,10 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 
    <dt><code><em>VLAN_ID</em></code></dt>
    <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud cs vlans <location>` [command](#cs_vlans). </dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -1092,14 +1299,20 @@ Remove your own private subnet from a specified cluster.
   ```
   {: pre}
 
-### ibmcloud cs subnets
+### ibmcloud cs subnets [--json] [-s]
 {: #cs_subnets}
 
 View a list of subnets that are available in an IBM Cloud infrastructure (SoftLayer) account.
 
 <strong>Command options</strong>:
 
-   None
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example**:
 
@@ -1115,7 +1328,7 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
-### ibmcloud cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+### ibmcloud cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [-s]
 {: #cs_alb_cert_deploy}
 
 Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster.
@@ -1138,6 +1351,9 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>The certificate CRN. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Examples**:
@@ -1157,7 +1373,7 @@ Example for updating an existing ALB secret:
  {: pre}
 
 
-### ibmcloud cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN]
+### ibmcloud cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
 {: #cs_alb_cert_get}
 
 View information about an ALB secret in a cluster.
@@ -1175,6 +1391,12 @@ View information about an ALB secret in a cluster.
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
   <dd>The certificate CRN. This value is required to get information on all ALB secrets matching a specific certificate CRN in the cluster.</dd>
+
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
 
 **Examples**:
@@ -1194,7 +1416,7 @@ View information about an ALB secret in a cluster.
  {: pre}
 
 
-### ibmcloud cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN]
+### ibmcloud cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
 {: #cs_alb_cert_rm}
 
 Remove an ALB secret in a cluster.
@@ -1212,6 +1434,10 @@ Remove an ALB secret in a cluster.
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
   <dd>The certificate CRN. This value is required to remove all ALB secrets matching a specific certificate CRN in the cluster.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
   </dl>
 
 **Examples**:
@@ -1231,7 +1457,7 @@ Remove an ALB secret in a cluster.
  {: pre}
 
 
-### ibmcloud cs alb-certs --cluster CLUSTER
+### ibmcloud cs alb-certs --cluster CLUSTER [--json] [-s]
 {: #cs_alb_certs}
 
 View a list of ALB secrets in a cluster.
@@ -1243,6 +1469,10 @@ View a list of ALB secrets in a cluster.
    <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -1252,7 +1482,7 @@ View a list of ALB secrets in a cluster.
  ```
  {: pre}
 
-### ibmcloud cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
+### ibmcloud cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP] [-s]
 {: #cs_alb_configure}
 
 Enable or disable an ALB in your standard cluster. The public ALB is enabled by default.
@@ -1277,6 +1507,10 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
     <li>The private ALB is deployed with an IP address from a user-provided private subnet. If no IP address is provided, the ALB is deployed with a private IP address from the portable private subnet that was provisioned automatically when you created the cluster.</li>
    </ul>
    </dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Examples**:
@@ -1302,7 +1536,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
   ```
   {: pre}
 
-### ibmcloud cs alb-get --albID ALB_ID
+### ibmcloud cs alb-get --albID ALB_ID [--json] [-s]
 {: #cs_alb_get}
 
 View the details of an ALB.
@@ -1312,6 +1546,13 @@ View the details of an ALB.
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
    <dd>The ID for an ALB. Run <code>ibmcloud cs albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -1321,14 +1562,20 @@ View the details of an ALB.
   ```
   {: pre}
 
-### ibmcloud cs alb-types
+### ibmcloud cs alb-types [--json] [-s]
 {: #cs_alb_types}
 
 View the ALB types that are supported in the region.
 
 <strong>Command options</strong>:
 
-   None
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example**:
 
@@ -1338,7 +1585,7 @@ View the ALB types that are supported in the region.
   {: pre}
 
 
-### ibmcloud cs albs --cluster CLUSTER
+### ibmcloud cs albs --cluster CLUSTER [--json] [-s]
 {: #cs_albs}
 
 View the status of all ALBs in a cluster. If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
@@ -1348,6 +1595,13 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
    <dl>
    <dt><code><em>--cluster </em>CLUSTER</code></dt>
    <dd>The name or ID of the cluster where you list available ALBs. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -1364,7 +1618,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ## Infrastructure commands
 {: #infrastructure_commands}
 
-### ibmcloud cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
+### ibmcloud cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Set IBM Cloud infrastructure (SoftLayer) account credentials for your {{site.data.keyword.containershort_notm}} account.
@@ -1405,6 +1659,10 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
   <li>Copy the API key to use in this command.</li>
   </ol>
   </p></dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
   </dl>
 
 **Example**:
@@ -1424,7 +1682,10 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 
 <strong>Command options</strong>:
 
-   None
+  <dl>
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example**:
 
@@ -1434,123 +1695,26 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
   {: pre}
 
 
-### ibmcloud cs machine-types LOCATION
+### ibmcloud cs machine-types LOCATION [--json] [-s]
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption](cs_secure.html#encrypted_disk).
+View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the ecryption](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal.
-
-<dl>
-<dt>Why would I use physical machines (bare metal)?</dt>
-<dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
-<p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
-<dt>Why would I use virtual machines?</dt>
-<dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
-<p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
-<p>In a multi-tenant set up, physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).</p>
-<p>In a single-tenant set up, all physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.</p>
-<p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
-<p><strong>Virtual `u2c` or `b2c` machine flavors</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as container runtime and the kubelet.</p>
-<p><strong>What if I have deprecated `u1c` or `b1c` machine types?</strong> To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
-<dt>What virtual and physical machine flavors can I choose from?</dt>
-<dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
-<p>Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud cs machine-types <zone_name>`.</p>
-<p><table>
-<caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containershort_notm}}.</caption>
-<thead>
-<th>Name and use case</th>
-<th>Cores / Memory</th>
-<th>Primary / Secondary disk</th>
-<th>Network speed</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtual, u2c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td></td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td></td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg1c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg1c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Data-intensive bare metal, md1c.16x64.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Data-intensive bare metal, md1c.28x512.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Balanced bare metal, mb1c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Balanced bare metal, mb1c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-</tbody>
-</table>
-</p>
-</dd>
-</dl>
-
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](cs_clusters.html#shared_dedicated_node).
 
 <strong>Command options</strong>:
 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
-   <dd>Enter the location where you want to list available machine types. This value is required. Review [available locations](cs_regions.html#locations).</dd></dl>
+   <dd>Enter the location where you want to list available machine types. This value is required. Review [available locations](cs_regions.html#locations).</dd>
+
+   <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example command**:
 
@@ -1559,29 +1723,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   ```
   {: pre}
 
-**Example output**:
-
-  ```
-  Getting machine types list...
-  OK
-  Machine Types
-  Name                 Cores   Memory   Network Speed   OS             Server Type   Storage   Secondary Storage   Trustable
-  u2c.2x4              2       4GB      1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.4x16             4       16GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.16x64            16      64GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.32x128           32      128GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.56x242           56      242GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  mb1c.4x32            4       32GB     10000Mbps       UBUNTU_16_64   physical      1000GB    2000GB              False
-  mb1c.16x64           16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  mr1c.28x512          28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  md1c.16x64.4x4tb     16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  md1c.28x512.4x4tb    28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  
-  ```
-  {: screen}
-
-
-### ibmcloud cs vlans LOCATION [--all]
+### ibmcloud cs vlans LOCATION [--all] [--json] [-s]
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a location in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
@@ -1591,8 +1733,15 @@ List the public and private VLANs that are available for a location in your IBM 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list your private and public VLANs. This value is required. Review [available locations](cs_regions.html#locations).</dd>
+
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
+
+   <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -1609,7 +1758,7 @@ List the public and private VLANs that are available for a location in your IBM 
 ## Logging commands
 {: #logging_commands}
 
-### ibmcloud cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] --type LOG_TYPE [--json] [--skip-validation]
+### ibmcloud cs logging-config-create CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [-s]
 {: #cs_logging_create}
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -1619,28 +1768,45 @@ Create a logging configuration. You can use this command to forward logs for con
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster.</dd>
-  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
-  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-    <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
-  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
-  <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-    <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
-  <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-    <dd>The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level.</dd>
-  <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-    <dd>The name of the Cloud Foundry org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
-  <dt><code>--app-paths</code></dt>
-    <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. This value is required for log source <code>application</code>. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</dd>
+
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
+
+  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
+    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+
+  <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
+    <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
+
+  <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+    <dd>The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level.</dd>
+
+  <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+    <dd>The name of the Cloud Foundry org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
+
+  <dt><code>--app-paths</code></dt>
+    <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. This value is required for log source <code>application</code>. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+
+  <dt><code>--syslog-protocol</code></dt>
+    <dd>The transfer layer protocol that is used when the logging type is <code>syslog</code>. Supported values are <code>tcp</code> and the default <code>udp</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</dd>
+
   <dt><code>--app-containers</code></dt>
-    <dd>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code></dt>
+    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
+
   <dt><code>--json</code></dt>
-    <dd>Print the command output in JSON format. This value is optional.</dd>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
   <dt><code>--skip-validation</code></dt>
     <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+
+    <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Examples**:
@@ -1666,7 +1832,7 @@ Example for log type `syslog` that forwards logs from an `ingress` source on a p
   ```
   {: pre}
 
-### ibmcloud cs logging-config-get CLUSTER [--logsource LOG_SOURCE] [--json]
+### ibmcloud cs logging-config-get CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
 {: #cs_logging_get}
 
 View all log forwarding configurations for a cluster, or filter logging configurations based on log source.
@@ -1676,10 +1842,18 @@ View all log forwarding configurations for a cluster, or filter logging configur
  <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
+
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is optional.</dd>
+    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Shows the logging filters that render previous filters obsolete.</dd>
+
   <dt><code>--json</code></dt>
-    <dd>Optionally prints the command output in JSON format.</dd>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
  </dl>
 
 **Example**:
@@ -1690,7 +1864,7 @@ View all log forwarding configurations for a cluster, or filter logging configur
   {: pre}
 
 
-### ibmcloud cs logging-config-refresh CLUSTER
+### ibmcloud cs logging-config-refresh CLUSTER [-s]
 {: #cs_logging_refresh}
 
 Refresh the logging configuration for the cluster. This refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
@@ -1700,6 +1874,9 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Example**:
@@ -1710,7 +1887,7 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
   {: pre}
 
 
-### ibmcloud cs logging-config-rm CLUSTER [--id LOG_CONFIG_ID] [--all]
+### ibmcloud cs logging-config-rm CLUSTER [--id LOG_CONFIG_ID] [--all] [-s]
 {: #cs_logging_rm}
 
 Delete one log forwarding configuration or all logging configurations for a cluster. This stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
@@ -1720,10 +1897,15 @@ Delete one log forwarding configuration or all logging configurations for a clus
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>If you want to remove a single logging configuration, the logging configuration ID.</dd>
+
   <dt><code>--all</code></dt>
    <dd>The flag to remove all logging configurations in a cluster.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Example**:
@@ -1734,7 +1916,7 @@ Delete one log forwarding configuration or all logging configurations for a clus
   {: pre}
 
 
-### ibmcloud cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json] [--skipValidation]
+### ibmcloud cs logging-config-update CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [-s]
 {: #cs_logging_update}
 
 Update the details of a log forwarding configuration.
@@ -1744,29 +1926,43 @@ Update the details of a log forwarding configuration.
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>The logging configuration ID that you want to update. This value is required.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+   <dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
+
   <dt><code>--namespace <em>NAMESPACE</em></code>
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
+
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
+
    <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
    <dd>The name of the space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level.</dd>
+
    <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>The name of the org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
-   <dt><code>--app-paths</code></dt>
-     <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
-   <dt><code>--app-containers</code></dt>
+
+   <dt><code>--app-paths <em>PATH</em>,<em>PATH</em></code></dt>
+     <dd>An absolute file path in the container to collect logs from. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use a comma separated list. This value is required when you specify 'application' for the log source. </dd>
+
+   <dt><code>--app-containers <em>PATH</em>,<em>PATH</em></code></dt>
      <dd>The path on the containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
-   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-   <dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
+
    <dt><code>--json</code></dt>
-   <dd>Optionally prints the command output in JSON format.</dd>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
    <dt><code>--skipValidation</code></dt>
-   <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
-   </dl>
+    <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 **Example for log type `ibm`**:
 
@@ -1783,7 +1979,7 @@ Update the details of a log forwarding configuration.
   {: pre}
 
 
-### ibmcloud cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--s] [--json]
+### ibmcloud cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s]
 {: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
@@ -1792,21 +1988,31 @@ Create a logging filter. You can use this command to filter out logs that are fo
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Required: The name or ID of the cluster that you want to create a logging filter for.</dd>
+    <dd>The name or ID of the cluster that you want to create a logging filter for. This value is required.</dd>
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
+
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>Optional: A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command.</dd>
+    <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
+
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-    <dd>Optional: The Kubernetes namespace from which you want to filter logs.</dd>
+    <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
+    <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-    <dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
-  <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Optional: Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”.</dd>
+    <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+
+  <dt><code>--regex-message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional.</dd>
+
   <dt><code>--json</code></dt>
-    <dd>Optional: Prints the command output in JSON format.</dd>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Examples**:
@@ -1825,34 +2031,9 @@ This example filters out all of the logs that are forwarded, at an info level or
   ```
   {: pre}
 
-### ibmcloud cs logging-filter-update CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--s] [--json]
-{: #cs_log_filter_update}
-
-Update a logging filter. You can use this command to update a logging filter that you created.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Required: The name or ID of the cluster that you want to update a logging filter for.</dd>
-  <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
-  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>Optional: A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command.</dd>
-  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-    <dd>Optional: The Kubernetes namespace from which you want to filter logs.</dd>
-  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
-  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-    <dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
-  <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Optional: Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”.</dd>
-  <dt><code>--json</code></dt>
-    <dd>Optional: Prints the command output in JSON format.</dd>
-</dl>
 
 
-### ibmcloud cs logging-filter-get CLUSTER [--id FILTER_ID] [--show-matching-configs] [--json]
+### ibmcloud cs logging-filter-get CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
 {: #cs_log_filter_view}
 
 View a logging filter configuration. You can use this command to view the logging filters that you created.
@@ -1861,17 +2042,26 @@ View a logging filter configuration. You can use this command to view the loggin
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Required: The name or ID of the cluster that you want to view filters from.</dd>
+    <dd>The name or ID of the cluster that you want to view filters from. This value is required.</dd>
+
   <dt><code>--id <em>FILTER_ID</em></code></dt>
     <dd>The ID of the log filter that you want to view.</dd>
+
   <dt><code>--show-matching-configs</code></dt>
-    <dd>Optional: Show the logging configurations that match the configuration that you're viewing.</dd>
+    <dd>Show the logging configurations that match the configuration that you're viewing. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Show the logging filters that render previous filters obsolete. This value is optional.</dd>
+
   <dt><code>--json</code></dt>
-    <dd>Optional: Prints the command output in JSON format.</dd>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 
-### ibmcloud cs logging-filter-rm CLUSTER [--id FILTER_ID] [--json] [--all]
+### ibmcloud cs logging-filter-rm CLUSTER [--id FILTER_ID] [--all] [-s]
 {: #cs_log_filter_delete}
 
 Delete a logging filter. You can use this command to remove a logging filter that you created.
@@ -1881,13 +2071,57 @@ Delete a logging filter. You can use this command to remove a logging filter tha
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to delete a filter from.</dd>
+
   <dt><code>--id <em>FILTER_ID</em></code></dt>
     <dd>The ID of the log filter to delete.</dd>
+
   <dt><code>--all</code></dt>
-    <dd>Optional: Delete all of your log forwarding filters.</dd>
-  <dt><code>--json</code></dt>
-    <dd>Optional: Prints the command output in JSON format.</dd>
+    <dd>Delete all of your log forwarding filters. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
+
+
+### ibmcloud cs logging-filter-update CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--json] [-s]
+{: #cs_log_filter_update}
+
+Update a logging filter. You can use this command to update a logging filter that you created.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+
+ <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>The ID of the log filter to update.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
+
+  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
+    <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
+
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+
+  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
+    <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+
+  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
+    <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”. This value is optional.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
 
 <br />
 
@@ -1895,14 +2129,20 @@ Delete a logging filter. You can use this command to remove a logging filter tha
 ## Region commands
 {: #region_commands}
 
-### ibmcloud cs locations
+### ibmcloud cs locations [--json] [-s]
 {: #cs_datacenters}
 
-View a list of available locations for you to create a cluster in.
+View a list of available locations for you to create a cluster in. The available locations vary by the region that you are logged in to. To switch regions, run `ibmcloud cs region-set`.
 
 <strong>Command options</strong>:
 
-   None
+   <dl>
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
 
 **Example**:
 
@@ -2003,11 +2243,12 @@ us-south      us-south
 {: worker_node_commands}
 
 
-
-### ibmcloud cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
+###  ibmcloud cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.
+
+
 
 <strong>Command options</strong>:
 
@@ -2031,7 +2272,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre>
 
 <table>
-<caption>Table 2. Understanding the YAML file components</caption>
+<caption>Understanding the YAML file components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
 </thead>
@@ -2075,7 +2316,7 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
 <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
-<dt><code>--number <em>NUMBER</em></code></dt>
+<dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
@@ -2090,6 +2331,10 @@ diskEncryption: <em>false</em></code></pre>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
 </dl>
 
 **Examples**:
@@ -2106,10 +2351,7 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
-
-
-
-### ibmcloud cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
+### ibmcloud cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json] [-s]
 {: #cs_worker_get}
 
 View the details of a worker node.
@@ -2119,8 +2361,15 @@ View the details of a worker node.
    <dl>
    <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
    <dd>The name or ID of the worker node's cluster. This value is optional.</dd>
+
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
    <dd>The name of your worker node. Run <code>ibmcloud cs workers <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example command**:
@@ -2147,7 +2396,7 @@ View the details of a worker node.
   ```
   {: screen}
 
-### ibmcloud cs worker-reboot [-f] [--hard] CLUSTER WORKER [WORKER]
+### ibmcloud cs worker-reboot [-f] [--hard] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_reboot}
 
 Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change.
@@ -2206,6 +2455,9 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -2216,7 +2468,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-### ibmcloud cs worker-reload [-f] CLUSTER WORKER [WORKER]
+### ibmcloud cs worker-reload [-f] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_reload}
 
 Reload all the necessary configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state.
@@ -2271,6 +2523,9 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -2281,7 +2536,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-### ibmcloud cs worker-rm [-f] CLUSTER WORKER [WORKER]
+### ibmcloud cs worker-rm [-f] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_rm}
 
 Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. 
@@ -2334,6 +2589,9 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -2344,12 +2602,12 @@ Before you remove your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-
-
-### ibmcloud cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update]
+### ibmcloud cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_worker_update}
 
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `ibmcloud cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+
+
 
 **Important**: Running `ibmcloud cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
@@ -2368,8 +2626,15 @@ You might need to change your YAML files for deployments before updating. Review
    <dt><code>--force-update</code></dt>
    <dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
 
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+     <dd>The version of Kubernetes that you want your worker nodes to be updated with. The default version is used if this value is not specified.</dd>
+
    <dt><code><em>WORKER</em></code></dt>
    <dd>The ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
    </dl>
 
 **Example**:
@@ -2380,8 +2645,7 @@ You might need to change your YAML files for deployments before updating. Review
   {: pre}
 
 
-
-### ibmcloud cs workers CLUSTER [--show-deleted]
+### ibmcloud cs workers CLUSTER [--show-deleted] [--json] [-s]
 {: #cs_workers}
 
 View a list of worker nodes and the status for each in a cluster.
@@ -2391,8 +2655,15 @@ View a list of worker nodes and the status for each in a cluster.
    <dl>
    <dt><em>CLUSTER</em></dt>
    <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
+
    <dt><em>--show-deleted</em></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -2401,3 +2672,8 @@ View a list of worker nodes and the status for each in a cluster.
   ibmcloud cs workers my_cluster
   ```
   {: pre}
+
+<br />
+
+
+
