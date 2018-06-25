@@ -57,7 +57,7 @@ Review the following changes.
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>
@@ -245,7 +245,7 @@ Review the following changes.
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>
@@ -425,7 +425,7 @@ Review the following changes.
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>
