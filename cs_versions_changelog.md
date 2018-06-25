@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-25"
 
 ---
 
@@ -39,6 +39,28 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018
+{: #1103_1513}
+
+<table summary="Changes that were made since version 1.10.3_1512">
+<caption>Changes since version 1.10.3_1512</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.3_1512, released 12 June 2018
 {: #1103_1512}
@@ -205,9 +227,31 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018
+{: #198_1516}
 
-### Changelog for worker node fix pack 1.9.8_1514, released 19 June 2018
-{: #198_1514}
+<table summary="Changes that were made since version 1.9.8_1515">
+<caption>Changes since version 1.9.8_1515</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog for 1.9.8_1515, released 19 June 2018
+{: #198_1515}
 
 <table summary="Changes that were made since version 1.9.7_1513">
 <caption>Changes since version 1.9.7_1513</caption>
@@ -363,9 +407,31 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018
+{: #198_1516}
 
-### Changelog for worker node fix pack 1.8.13_1513, released 19 June 2018
-{: #1813_1513}
+<table summary="Changes that were made since version 1.8.13_1514">
+<caption>Changes since version 1.8.13_1514</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix for non-encrypted machine types that ensures the secondary disk is cleaned (gets a fresh filesystem) on reloads/updates</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog 1.8.13_1514, released 19 June 2018
+{: #1813_1514}
 
 <table summary="Changes that were made since version 1.8.11_1512">
 <caption>Changes since version 1.8.11_1512</caption>
