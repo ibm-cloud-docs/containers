@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-26"
 
 
 ---
@@ -35,7 +35,10 @@ As a cluster administrator, you can define access policies for your Kubernetes c
     <dd><p><strong>Platform</strong>: {{site.data.keyword.containershort_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} platform roles to determine the actions that individuals can perform on a cluster. The role permissions build on each other, which means that the `Editor` role has all of the same permissions as the `Viewer` role, plus the permissions that are granted to an editor. You can set these policies by region. These policies must be set along with infrastructure policies and have corresponding RBAC roles that are automatically assigned to the default namespace. Example actions are creating or removing clusters, or adding extra worker nodes.</p> <p><strong>Infrastructure</strong>: You can determine the access levels for your infrastructure such as the cluster node machines, networking, or storage resources. You must set this type of policy along with {{site.data.keyword.containershort_notm}} platform access policies. To learn about the available roles, check out [infrastructure permissions](/docs/iam/infrastructureaccess.html#infrapermission). In addition to granting specific infrastructure roles, you must also grant device access to users that work with infrastructure. To start assigning roles, follow the steps in [Customizing infrastructure permissions for a user](#infra_access). <strong>Note</strong>: Make sure that your {{site.data.keyword.Bluemix_notm}} account is [set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials) so that authorized users can perform actions in the IBM Cloud infrastructure (SoftLayer) account based on the assigned permissions.</p> <p><strong>RBAC</strong>: Resource-based access control (RBAC) is a way of securing your resources that are inside of your cluster and deciding who can perform which Kubernetes actions. Every user who is assigned a platform access policy is automatically assigned a Kubernetes role. In Kubernetes, [Role Based Access Control (RBAC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) determines the actions that a user can perform on the resources inside of a cluster. <strong>Note</strong>: RBAC roles are automatically set in conjunction with the platform role for the default namespace. As a cluster administrator, you can [update or assign roles](#rbac) for other namespaces.</p> <p><strong>Cloud Foundry</strong>: Not all services can be managed with Cloud IAM. If you are using one of these services, you can continue to use the [Cloud Foundry user roles](/docs/iam/cfaccess.html#cfaccess) to control access to your services. Example actions are binding a service or creating a new service instance.</p></dd>
 
   <dt>How can I set the permissions?</dt>
-    <dd><p><strong>Users</strong>: You might have a specific user that needs more or less permissions than the rest of your team. You can customize each users set of permissions so that they have only the minimum amount of permissions that they need to complete their task.</p> <p><strong>Access groups</strong>: You can create groups of users and then assign permissions to a specific group. For instance, you could group all of your team leads and give that group administrator access. While at the same time, your group of developers has only write access.</p> <p><strong>Resource groups</strong>:You can create access policies for specific resources that are not user specific. With IAM you can control who has access to specific instances of the service and the apps that are connected to it. Currently, you can only set {{site.data.keyword.containershort_notm}} specific policies for the default resource group. </p></dd>
+    <dd><p>When you set Platform permissions, you can assign access to a specific user, a group of users, or to the default resource group. When you set the platform permissions, RBAC roles are automatically configured for the default namespace and a RoleBinding is created.</p>
+    <p><strong>Users</strong>: You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the right amount of permissions that they need to complete their task.</p>
+    <p><strong>Access groups</strong>: You can create groups of users and then assign permissions to a specific group. For instance, you could group all of your team leads and give that group administrator access. While at the same time, your group of developers has only write access.</p>
+    <p><strong>Resource groups</strong>: With IAM, you can create access policies for a group of resources and grant users access to this group. These resources can be part of one {{site.data.keyword.Bluemix_notm}} service or you can also group resources across service instances, such as an {{site.data.keyword.containershort_notm}} cluster and a CF app. **Note**: {{site.data.keyword.containershort_notm}} supports only the default resource group. All cluster-related resources are automatically made available in the default resource group.</p></dd>
 </dl>
 
 
@@ -86,10 +89,10 @@ Figure. {{site.data.keyword.containershort_notm}} access permissions by type of 
 
 
 
-## Assigning roles
+## Assigning roles with the GUI
 {: #add_users}
 
-You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant access to your clusters.
+You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant access to your clusters with the GUI.
 {: shortdesc}
 
 **Before you begin**
@@ -106,7 +109,6 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 3. Assign a policy.
   * For a resource group:
     1. Select the **default** resource group. {{site.data.keyword.containershort_notm}} access can be configured for only the default resource group.
-    2. Assign the level of access that you would like the resource to have.
   * For a specific resource:
     1. From the **Services** list, select **{{site.data.keyword.containershort_notm}}**.
     2. From the **Region** list, select a region.
@@ -140,7 +142,6 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 4. Assign access policies. Don't forget to double check the people that you add to your group. Everyone in the group is provided the same level of access.
     * For a resource group:
         1. Select the **default** resource group. {{site.data.keyword.containershort_notm}} access can be configured for only the default resource group.
-        2. Assign the level of access that you would like the resource to have.
     * For a specific resource:
         1. From the **Services** list, select **{{site.data.keyword.containershort_notm}}**.
         2. From the **Region** list, select a region.
@@ -155,6 +156,7 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 8. Optional: Assign an [infrastructure role](/docs/iam/infrastructureaccess.html#infrapermission).
 
 <br />
+
 
 
 
@@ -225,25 +227,33 @@ If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) accoun
     * To allow users access to new devices that are created, select **Automatically grant access when new devices are added**.
     * To save your changes, click **Update Device Access**.
 
-
 Downgrading permissions? It can take a few minutes for the action to complete.
 {: tip}
 
 <br />
 
 
+
+
 ## Authorizing users with custom Kubernetes RBAC roles
 {: #rbac}
 
-{{site.data.keyword.containershort_notm}} access policies correspond with certain Kubernetes role-based access control (RBAC) roles as described in [Access policies and permissions](#access_policies). To authorize other Kubernetes roles that differ from the corresponding access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
+{{site.data.keyword.containershort_notm}} access policies correspond with certain Kubernetes role-based access control (RBAC) roles. To authorize other Kubernetes roles that differ from the corresponding access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
 {: shortdesc}
 
-For example, you might want to grant permissions to a team of developers to work on a certain API group or with resources within a Kubernetes namespace in the cluster, but not across the entire cluster. You create a role and then bind the role to users by using a user name that is unique to {{site.data.keyword.containershort_notm}}. For more information, see [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) in the Kubernetes documentation.
+There are times that you might need access policies to be more granular than an IAM policy might allow. No problem! You can assign access policies for specific Kubernetes resources for users or for users. You can create a role and then bind the role to specific users or a group. For more information, see [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) in the Kubernetes documentation.
 
-To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies). You can choose a namespace other than `kube-system`, but all IBM Helm charts must be installed in `kube-system`. Whenever you run a `helm` command, you must use the `tiller-namespace <namespace>` flag to point to the other namespace where Tiller is installed.
+When a binding is created for a group, it affects any user that is added or removed from that group. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
 {: tip}
 
-Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+
+**Before you begin**
+
+- Target the [Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- Ensure that the user or group has a minimum of `Viewer` access at the service level.
+
+
+**To customize RBAC roles**
 
 1.  Create the role with the access that you want to assign.
 
@@ -404,6 +414,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: pre}
 
 Now that you created and bound a custom Kubernetes RBAC role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
+
 
 <br />
 
