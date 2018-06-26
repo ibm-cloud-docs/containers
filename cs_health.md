@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-26"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -25,25 +25,17 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 ## Configuring cluster and app log forwarding
 {: #logging}
 
-With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both. To forward logs to both, create two configurations.
+Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. This allows you to prepare accordingly to protect your apps against downtime. To configure logging, you must be working with a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}.
 {: shortdesc}
 
-You can forward logs from the following sources:
 
 <dl>
-  <dt><code>container</code></dt>
-    <dd>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</dd>
-  <dt><code>application</code></dt>
-    <dd><p>Logs for your own application that runs in a Kubernetes cluster. You can set the paths. In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p>
-    <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></dd>
-  <dt><code>worker</code></dt>
-    <dd><p>Logs for virtual machine worker nodes within a Kubernetes cluster.</p><p>Paths: <code>/var/log/syslog</code>, <code>/var/log/auth.log</code></p></dd>
-  <dt><code>kubernetes</code></dt>
-    <dd><p>Logs for the Kubernetes system component.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></p></dd>
-  <dt><code>ingress</code></dt>
-    <dd><p>Logs for an Ingress application load balancer that manages the network traffic that comes into a cluster.</p><p>Paths: <code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></dd>
-  <dt><code>kube-audit</code></dt>
-    <dd>Logs for your Kubernetes API server.</dd>
+  <dt>Does IBM monitor my cluster?</dt>
+    <dd>Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.</dd>
+  <dt>What are the sources that I can configure logging for?</dt>
+    <dd><p>You can configure logs for the following sources:
+    <ul><li><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level. You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</li> <li><code>container</code>: Information that is logged by a running container. This contains any information that is written to <code>STDOUT</code> or <code>STDERR</code>.</li> <li><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. This could be events such as a pod failure, storage limitations, or issues with the Ubuntu operating system. You can find the logs at the following paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code>.</li> <li><code>kube-audit</code>: Information about cluster-related actions that are sent to the Kubernetes API server is logged for auditing reasons; including the time, the user, and the affected resource.</li> <li><code>kubernetes</code>: Logs from the kubelet, the kube-proxy, and other components that run in the kube-system namespace.</li> <li><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. You can find this information at the following paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code> For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</li></ul></p><p>To see how the log sources are configured within a cluster, check out the following image.</p>
+    ![Log sources](images/log_sources.png)</dd>
 </dl>
 
 </br>
@@ -388,6 +380,7 @@ Kubernetes automatically audits any events that are passed through your apiserve
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
+* Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
@@ -592,7 +585,7 @@ You can configure other tools for more monitoring capabilities.
 ## Configuring health monitoring for worker nodes with Autorecovery
 {: #autorecovery}
 
-The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.8 or later.
+The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.7 or later.
 {: shortdesc}
 
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
