@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-26"
 
 ---
 
@@ -1686,7 +1686,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
 spec:
   tls:
   - hosts:
@@ -1712,7 +1712,7 @@ spec:
 </thead>
 <tbody>
 <tr>
-<td><code>enabled</code></td>
+<td><code>enable</code></td>
   <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
 </tr>
 <tr>
