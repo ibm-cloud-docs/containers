@@ -1242,7 +1242,7 @@ spec:
 <dd>Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret.
 <ol>
 <li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
-<li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
+<li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app. redirectURIs must be in the following format: <code>http://&lt;hostname&gt;/&lt;location&gt;/appid_redirect</code> or <code>https://&lt;hostname&gt;/&lt;location&gt;/appid_redirect</code>.</li>
 <li>Create a bind secret.
 <pre class="pre"><code>ibmcloud cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
 <li>Configure the <code>appid-auth</code> annotation.</li>
