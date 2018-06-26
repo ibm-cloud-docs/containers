@@ -29,14 +29,27 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 {: shortdesc}
 
 
-<dl>
-  <dt>Does IBM monitor my cluster?</dt>
-    <dd>Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.</dd>
-  <dt>What are the sources that I can configure logging for?</dt>
-    <dd><p>You can configure logs for the following sources:
-    <ul><li><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level. You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</li> <li><code>container</code>: Information that is logged by a running container. This contains any information that is written to <code>STDOUT</code> or <code>STDERR</code>.</li> <li><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. This could be events such as a pod failure, storage limitations, or issues with the Ubuntu operating system. You can find the logs at the following paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code>.</li> <li><code>kube-audit</code>: Information about cluster-related actions that are sent to the Kubernetes API server is logged for auditing reasons; including the time, the user, and the affected resource.</li> <li><code>kubernetes</code>: Logs from the kubelet, the kube-proxy, and other components that run in the kube-system namespace.</li> <li><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. You can find this information at the following paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code> For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</li></ul></p><p>To see how the log sources are configured within a cluster, check out the following image.</p>
-    ![Log sources](images/log_sources.png)</dd>
-</dl>
+**Does IBM monitor my cluster?**
+Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
+
+**What are the sources that I can configure logging for?**
+
+The following image shows the location in the cluster that you can configure logging for.
+
+![Log sources](images/log_sources.png)
+
+
+1. <code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level. You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.
+
+2. <code>container</code>: Information that is logged by a running container. This contains any information that is written to <code>STDOUT</code> or <code>STDERR</code>.
+
+3. <code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. This could be events such as a pod failure, storage limitations, or issues with the Ubuntu operating system. You can find the logs at the following paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code>.
+
+4. <code>kube-audit</code>: Information about cluster-related actions that are sent to the Kubernetes API server is logged for auditing reasons; including the time, the user, and the affected resource.
+
+5. <code>kubernetes</code>: Logs from the kubelet, the kube-proxy, and other components that run in the kube-system namespace.
+
+6. <code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. You can find this information at the following paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code> For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</li></ul></p><p>To see how the log sources are configured within a cluster, check out the following image.
 
 </br>
 </br>
