@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-26"
 
 ---
 
@@ -2253,8 +2253,6 @@ us-south      us-south
 
 Add worker nodes to your standard cluster.
 
-
-
 <strong>Command options</strong>:
 
 <dl>
@@ -2611,8 +2609,6 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 {: #cs_worker_update}
 
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `ibmcloud cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
-
-
 
 **Important**: Running `ibmcloud cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
