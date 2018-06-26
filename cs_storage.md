@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-26"
 
 ---
 
@@ -1410,3 +1410,6 @@ To clean up persistent data:
         *  **`delete` (or `retain`)**: The reclaim policy for the PV.
 
     6.  Return to the file or block storage page. In the table, for the volume that you want to delete, select **Actions** > **Cancel**. In the pop-up window, select how you want to **Cancel**, then click **Continue**.
+    
+    
+
