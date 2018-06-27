@@ -1778,7 +1778,7 @@ spec:
               serviceName: productpage
               servicePort: 9080
     ```
-    {: pre}
+    {: codeblock}
 
 4. Create the Istio Ingress resource.
     ```
@@ -1789,7 +1789,7 @@ spec:
 
 5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
     ```
-    {{bxcs}} cluster-get <cluster_name_or_ID>
+    ibmcloud cs cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -1828,7 +1828,7 @@ spec:
               serviceName: productpage
               servicePort: 9080
     ```
-    {: pre}
+    {: codeblock}
 
 7. Create the IBM ALB Ingress resource.
     ```
