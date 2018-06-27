@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-26"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -1156,6 +1156,12 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 2. Upgrade the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version.
    ```
    helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+   
+3. Optional: When you update the plug-in, the `default` storage class is reset to `ibmc-file-bronze`. If you want to use a different storage class as the default, run the following command. 
+   ```
+   kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
    ```
    {: pre}
 
