@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-26"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -758,6 +758,8 @@ trusted: <em>true</em>
 </ul>
 
 <p>To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
+  
+
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -878,9 +880,11 @@ View information about a cluster in your organization.
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
+  Master Location: Dallas
   Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
+  Worker Locations: dal10
   Version:     1.10.3
   Owner Email: name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
@@ -2654,10 +2658,12 @@ View a list of worker nodes and the status for each in a cluster.
 <strong>Command options</strong>:
 
    <dl>
-   <dt><em>CLUSTER</em></dt>
+   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
 
-   <dt><em>--show-deleted</em></dt>
+   
+
+   <dt><code>--show-deleted</code></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
 
    <dt><code>--json</code></dt>
