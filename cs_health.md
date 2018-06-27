@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-26"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -45,9 +45,9 @@ The following image shows the location in the cluster that you can configure log
 
 3. <code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. This could be events such as a pod failure, storage limitations, or issues with the Ubuntu operating system. You can find the logs at the following paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code>.
 
-4. <code>kube-audit</code>: Information about cluster-related actions that are sent to the Kubernetes API server is logged for auditing reasons; including the time, the user, and the affected resource.
+4. <code>kubernetes</code>: Logs from the kubelet, the kube-proxy, and other components that run in the kube-system namespace.
 
-5. <code>kubernetes</code>: Logs from the kubelet, the kube-proxy, and other components that run in the kube-system namespace.
+5. <code>kube-audit</code>: Information about cluster-related actions that are sent to the Kubernetes API server is logged for auditing reasons; including the time, the user, and the affected resource.
 
 6. <code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. You can find this information at the following paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code> For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</li></ul></p><p>To see how the log sources are configured within a cluster, check out the following image.
 
