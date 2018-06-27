@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -26,15 +26,18 @@ lastupdated: "2018-06-21"
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
-The current supported Kubernetes versions are:
+**Supported Kubernetes versions**:
 
 - Latest: 1.10.3
 - Default: 1.9.8
-- Supported: 1.8.13
+- Other: 1.8.13
 
-**Deprecated Versions**: When clusters are running on a deprecated Kubernetes, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you can run limited commands in your clusters to add workers, reload workers, and update the cluster. You cannot create new clusters in the deprecated version.
+</br>
+</br>
 
-**Unsupported Versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support.
+**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
+
+**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 
 To check the server version of a cluster, run the following command.
 
@@ -66,7 +69,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud cs workers <cluster>` or `ibmcloud cs worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
-   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
+   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates**: Check monthly to see whether an update is available, and use the `ibmcloud cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 

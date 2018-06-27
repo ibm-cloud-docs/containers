@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -119,7 +119,7 @@ Worker nodes carry the deployments and services that make up your app. When you 
 
 **Who owns the worker node and am I responsible to secure it?** </br>
 The ownership of a worker node depends on the type of cluster that you create. Worker nodes in free clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containershort_notm}} features, do not run production workloads on free clusters. Consider using standard clusters for your production worloads. </br> </br>
-Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the worker nodes, such as with the <code>ibmcloud cs workers <cluster_name></code> or <code>ibmcloud cs worker-get <cluster_name> <worker_ID></code> commands.
+Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the <code>ibmcloud cs clusters</code> or <code>ibmcloud cs workers <cluster_name></code> commands.
 
 **How does my worker node setup look like?**</br>
 The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks. </br></br>
