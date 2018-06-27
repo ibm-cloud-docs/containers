@@ -24,7 +24,7 @@ lastupdated: "2018-06-27"
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-## Managing network traffic by using Ingress
+## Ingress components and architecture
 {: #planning}
 
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
