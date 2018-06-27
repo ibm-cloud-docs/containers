@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-26"
+lastupdated: "2018-06-27"
 
 ---
 
@@ -1739,6 +1739,7 @@ spec:
 </dd>
 
 <dt>Usage</dt></dl>
+
 1. Deploy your app. The example resources provided in these steps use the Istio sample app called [BookInfo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html), which can be found in the `istio-0.7.1/samples/bookinfo/kube` repository.
    ```
    kubectl apply -f bookinfo.yaml -n istio-system
