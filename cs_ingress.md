@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-27"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -1079,7 +1079,7 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 Get started with some of the most commonly used annotations.
 * [redirect-to-https](cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
 * [rewrite-path](cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your backend app listens on.
-* [ssl-services](cs_annotations.html#ssl-services): Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.
+* [ssl-services](cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
 * [client-max-body-size](cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
 For the full list of supported annotations, see [Ingress annotations](cs_annotations.html).
