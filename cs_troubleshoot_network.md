@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -568,6 +568,8 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 {: tip}
 
 <br />
+
+
 
 
 ## Getting help and support
