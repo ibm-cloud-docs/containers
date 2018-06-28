@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-27"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -1222,7 +1222,7 @@ spec:
 <tbody>
 <tr>
 <td><code>bindSecret</code></td>
-<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret.</td>
+<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
 </tr>
 <tr>
 <td><code>namespace</code></td>
@@ -1238,16 +1238,46 @@ spec:
 </tr>
 </tbody></table>
 </dd>
-<dt>Usage</dt>
-<dd>Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret.
-<ol>
-<li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
-<li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app. redirectURIs must be in the following format: <code>http://&lt;hostname&gt;/&lt;location&gt;/appid_redirect</code> or <code>https://&lt;hostname&gt;/&lt;location&gt;/appid_redirect</code>.</li>
-<li>Create a bind secret.
-<pre class="pre"><code>ibmcloud cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
-<li>Configure the <code>appid-auth</code> annotation.</li>
-</ol></dd>
-</dl>
+<dt>Usage</dt></dl>
+
+Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+
+1. Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).
+    1. Replace the auto-filled **Service name** with your own unique name for the service instance.
+        **Important**: The service instance name cant contain spaces.
+    2. Choose the same region that your cluster is deployed in.
+    3. Click **Create**.
+    If you have an existing {{site.data.keyword.appid_short_notm}} instance that you want to use, ensure that the service instance name doesn't contain spaces. To remove spaces, select the More option menu next to the name of your service instance and select **Rename service**.
+    {: tip}
+2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the URL against the whitelist of redirect URLs.
+    1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
+    2. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
+        * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/us-south/appid_redirect`.
+        * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/us-east/appid_redirect`.
+    3. Click **+** to add each URL.
+
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
+    ```
+    ibmcloud cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ```
+    {: pre}
+    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
+    ```
+    ibmcloud cs cluster-service-bind mycluster mynamespace appid1
+    Binding service instance to namespace...
+    OK
+    Namespace:    mynamespace
+    Secret name:  binding-<service_instance_name>
+    ```
+    {: screen}
+
+4. Get the secret that was created in your cluster namespace.
+    ```
+    kubectl get secrets --namespace=<namespace>
+    ```
+    {: pre}
+
+5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
 
 <br />
 
