@@ -1159,7 +1159,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    ```
    {: pre}
    
-3. Optional: When you update the plug-in, the `default` storage class is reset to `ibmc-file-bronze`. If you want to use a different storage class as the default, run the following command. 
+3. Optional: When you update the plug-in, the `default` storage class is unset.  If you want to set the default storage class to a storage class of your choice, run the following command. 
    ```
    kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
    ```
