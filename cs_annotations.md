@@ -47,6 +47,11 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
  <td>Modify the way the ALB matches the request URI against the app path.</td>
  </tr>
  <tr>
+ <td><a href="#location-snippets">Location snippets</a></td>
+ <td><code>location-snippets</code></td>
+ <td>Add a custom location block configuration for a service.</td>
+ </tr>
+ <tr>
  <td><a href="#alb-id">Private ALB routing</a></td>
  <td><code>ALB-ID</code></td>
  <td>Route incoming requests to your apps with a private ALB.</td>
@@ -55,6 +60,11 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
  <td><a href="#rewrite-path">Rewrite paths</a></td>
  <td><code>rewrite-path</code></td>
  <td>Route incoming network traffic to a different path that your backend app listens on.</td>
+ </tr>
+ <tr>
+ <td><a href="#server-snippets">Server snippets</a></td>
+ <td><code>server-snippets</code></td>
+ <td>Add a custom server block configuration.</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">TCP ports</a></td>
@@ -434,7 +444,65 @@ spec:
 <br />
 
 
+### Location snippets (location-snippets)
+{: #location-snippets}
 
+Add a custom location block configuration for a service.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. A location block is an nginx directive defined within the server block. Location blocks define how Ingress processes the request URI, or the part of the request that comes after the domain name or IP address and port.<br><br>When a server block receives a request, the location block matches the URI to a path and the request is forwarded to the IP address of the pod where the app is deployed. By using the <code>location-snippets</code> annotation, you can modify how the location block forwards requests to particular services.<br><br>To modify the server block as a whole instead, see the <a href="#server-snippets">server-snippets</a> annotation.</dd>
+
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/location-snippets: |
+    serviceName=&lt;myservice&gt;
+    # Example location snippet
+    proxy_request_buffering off;
+    rewrite_log on;
+    proxy_set_header "x-additional-test-header" "location-snippet-header";
+spec:
+tls:
+- hosts:
+  - mydomain
+  secretName: mytlssecret
+rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service that you created for your app.</td>
+</tr>
+<tr>
+<td>Location snippet</td>
+<td>Provide the configuration snippet that you want to use for the specified service. This sample snippet configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the <code>myservice</code> service.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ### Private ALB routing (ALB-ID)
@@ -545,7 +613,59 @@ spec:
 <br />
 
 
+### Server snippets (server-snippets)
+{: #server-snippets}
 
+Add a custom server block configuration.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. By using the <code>server-snippets</code> annotation, you can modify how the ALB handles requests by providing a custom configuration snippet.</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/server-snippets: |
+    location = /health {
+    return 200 'Healthy';
+    add_header Content-Type text/plain;
+    }
+spec:
+tls:
+- hosts:
+  - mydomain
+  secretName: mytlssecret
+rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td>Server snippet</td>
+<td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>/health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ### TCP ports for application load balancers (tcp-ports)
