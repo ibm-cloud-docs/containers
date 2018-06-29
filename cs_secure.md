@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -119,7 +119,7 @@ Worker nodes carry the deployments and services that make up your app. When you 
 
 **Who owns the worker node and am I responsible to secure it?** </br>
 The ownership of a worker node depends on the type of cluster that you create. Worker nodes in free clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containershort_notm}} features, do not run production workloads on free clusters. Consider using standard clusters for your production worloads. </br> </br>
-Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the worker nodes, such as with the <code>ibmcloud cs workers <cluster_name></code> or <code>ibmcloud cs worker-get <cluster_name> <worker_ID></code> commands.
+Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the <code>ibmcloud cs clusters</code> or <code>ibmcloud cs workers <cluster_name></code> commands.
 
 **How does my worker node setup look like?**</br>
 The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks. </br></br>
@@ -191,9 +191,6 @@ Review the following table to see your options for how to achieve network segmen
 |Support for IBM Cloud infrastructure (SoftLayer) network firewalls|{{site.data.keyword.containershort_notm}} is compatible with all [IBM Cloud infrastructure (SoftLayer) firewall offerings ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/network-security). On {{site.data.keyword.Bluemix_notm}} Public, you can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](cs_firewall.html#firewall) for each region so that the master and the worker nodes can communicate.|
 {: caption="Network segmentation options" caption-side="top"}
 
-**Can I use security groups to manage my cluster's network traffic?** </br>
-To use Ingress and LoadBalancer services, use [Calico and Kubernetes policies](cs_network_policy.html) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the master virtual IP address (VIP). If the VRRP protocol is not present to manage the master VIP, Ingress and LoadBalancer services do not work properly. If you are not using Ingress or LoadBalancer services and want to completely isolate your worker node from the public, you can use security groups.
-
 **What else can I do to reduce the surface for external attacks?**</br>
 The more apps or worker nodes that you expose publicly, the more steps you must take to prevent external malicious attacks. Review the following table to find options for how to keep apps and worker nodes private.
 
@@ -206,6 +203,26 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 
 **What if I want to connect my cluster to an on-prem data center?**</br>
 To connect your worker nodes and apps to an on-prem data center, you can configure a [VPN IPSec endpoint with a strongSwan service, a Virtual Router Appliance, or with a Fortigate Security Appliance](cs_vpn.html#vpn).
+
+### LoadBalancer and Ingress services
+{: #network_lb_ingress}
+
+You can use LoadBalancer and Ingress networking services to connect your apps to the public internet or to external private networks. Review the following optional settings for load balancers and Ingress ALBs that you can use to meet backend app security requirements or encrypt traffic as it moves through your cluster.
+
+**Can I use security groups to manage my cluster's network traffic?** </br>
+To use Ingress and LoadBalancer services, use [Calico and Kubernetes policies](cs_network_policy.html) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the master virtual IP address (VIP). If the VRRP protocol is not present to manage the master VIP, Ingress and LoadBalancer services do not work properly. If you are not using Ingress or LoadBalancer services and want to completely isolate your worker node from the public, you can use security groups.
+
+**How can I secure the source IP within the cluster?** </br>
+By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+
+Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [loadbalancers](cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALBs](cs_ingress.html#preserve_source_ip).
+
+**How can I encrypt traffic with TLS?** </br>
+The Ingress service offers TLS termination at two points in the traffic flow:
+* [Decrypt package upon arrival](cs_ingress.html#public_inside_2): By default, the Ingress ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.
+* [Re-encrypt package before it's forwarded to upstream apps](cs_annotations.html#ssl-services): The ALB decrypts HTTPS requests before forwarding traffic to your apps. If you have apps that require HTTS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a one-way or mutual-authentication TLS secret.
+
+To secure the service-to-service communication, you can use [Istio's mutual TLS authentication ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/security/mutual-tls/). Istio is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes.
 
 ## Persistent storage
 {: #storage}

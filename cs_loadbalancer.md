@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -52,7 +52,7 @@ The LoadBalancer service serves as the external entry point for incoming request
 
 3. `kube-proxy` routes the request to the Kubernetes load balancer service for the app.
 
-4. The request is forwarded to the private IP address of the pod where the app is deployed. If multiple app instances are deployed in the cluster, the load balancer routes the requests between the app pods.
+4. The request is forwarded to the private IP address of the app pod. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the load balancer routes the requests between the app pods.
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-28"
 
 ---
 
@@ -28,12 +28,34 @@ You can install updates to keep your Kubernetes clusters up-to-date in {{site.da
 ## Updating the Kubernetes master
 {: #master}
 
-Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.html#version_types). Depending on the type of update, you could be responsible for updating the Kubernetes master components.
+Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.html#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
 {:shortdesc}
 
-Updates can affect the Kubernetes API server version or other components in your Kubernetes master.  You are always responsible for keeping your worker nodes up to date. When making updates, the Kubernetes master is updated before the worker nodes.
+**How do I know when to update the master?**
 
-By default, your ability to update the Kubernetes API server is limited in your Kubernetes master more than two minor versions ahead of your current version. For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.10, you must first update to 1.8 or 1.9. You can force the update to occur, but updating three or more minor versions might cause unexpected results. If your cluster is running an unsupported Kubernetes version, you might have to force the update.
+You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.md) page.
+
+**How many versions behind the latest can the master be?**
+
+IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version. 
+
+For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.10, you must first update to 1.8 or 1.9. You can force the update to occur, but updating three or more minor versions might cause unexpected results or failure. 
+
+If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
+
+**Can my worker nodes run a later version than the master?**
+
+No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you also must update your workers for each patch version.
+
+**What happens during the master update?**
+
+When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
+
+**Can I roll back the update?**
+
+No, you cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before updating your production master.
+
+**What process can I follow to update the master?**
 
 The following diagram shows the process that you can take to update your master.
 
@@ -41,14 +63,16 @@ The following diagram shows the process that you can take to update your master.
 
 Figure 1. Updating Kubernetes master process diagram
 
-**Attention**: You cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before updating your production master.
+{: #update_master}
+To update the Kubernetes master _major_ or _minor_ version:
 
-For _major_ or _minor_ updates, complete the following steps:
+1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
 
-1. Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
-2. Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the [CLI command](cs_cli_reference.html#cs_cluster_update). When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
-3. Confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs clusters`.
-4. Install the version of the [`kubectl cli`](cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the CLI `ibmcloud cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+
+3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs clusters`.
+
+4.  Install the version of the [`kubectl cli`](cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
 
 When the Kubernetes API server update is complete, you can update your worker nodes.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-26"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-06-21"
 # Tutorial: Installing Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, and manage a network of microservices, also known as a service mesh, on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, and manage a network of microservices, also known as a service mesh, on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 {:shortdesc}
 
 In this tutorial, you can see how to install Istio alongside four microservices for a simple mock bookstore app called BookInfo. The microservices include a product web page, book details, reviews, and ratings. When you deploy BookInfo's microservices into an {{site.data.keyword.containershort}} cluster where Istio is installed, you inject the Istio Envoy sidecar proxies in the pods of each microservice.
@@ -121,43 +121,66 @@ These four microservices include a product web page, book details, reviews (with
 
 When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
 
-1. Deploy the BookInfo app. The `kube-inject` command adds Envoy to the `bookinfo.yaml` file and uses this updated file to deploy the app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
+1. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
-   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
+   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml -n istio-system
    ```
    {: pre}
 
 2. Ensure that the microservices and their corresponding pods are deployed:
 
    ```
-   kubectl get svc
+   kubectl get svc -n istio-system
    ```
    {: pre}
 
    ```
-   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
-   details         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   kubernetes      ClusterIP     10.xxx.xx.xxx    <none>        443/TCP         30m
-   productpage     ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   ratings         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
-   reviews         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                                                               AGE  
+   details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   grafana                    ClusterIP      10.xxx.xx.xxx    <none>         3000/TCP                                                              6m
+   istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     6m
+   istio-egressgateway        ClusterIP      10.xxx.xx.xxx    <none>         80/TCP,443/TCP                                                        6m
+   istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            6m
+   istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   6m
+   istio-policy               ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP                                           6m
+   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx    <none>         443/TCP                                                               6m
+   istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     6m
+   istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 6m
+   productpage                ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              6m
+   ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   reviews                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
+   servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              6m
+   tracing                    LoadBalancer   10.xxx.xx.xxx    169.46.5.163   80:31115/TCP                                                          6m
+   zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              6m
    ```
    {: screen}
 
    ```
-   kubectl get pods
+   kubectl get pods -n istio-system
    ```
    {: pre}
 
    ```
-   NAME                                READY     STATUS    RESTARTS   AGE
-   details-v1-1520924117-48z17         1/1       Running   0          6m
-   productpage-v1-560495357-jk1lz      1/1       Running   0          6m
-   ratings-v1-734492171-rnr5l          1/1       Running   0          6m
-   reviews-v1-874083890-f0qf0          1/1       Running   0          6m
-   reviews-v2-1343845940-b34q5         1/1       Running   0          6m
-   reviews-v3-1813607990-8ch52         1/1       Running   0          6m
+   NAME                                        READY     STATUS      RESTARTS   AGE
+   details-v1-1520924117-48z17                 1/1       Running     0          6m
+   istio-citadel-ff5696f6f-rbxbq               1/1       Running     0          1m
+   istio-egressgateway-58d98d898c-wbn7k        1/1       Running     0          1m
+   istio-ingress-6fb78f687f-t9d98              1/1       Running     0          1m
+   istio-ingressgateway-6bc7c7c4bc-8fdx2       1/1       Running     0          1m
+   istio-mixer-post-install-r6tl8              0/1       Completed   0          1m
+   istio-pilot-6c5c6b586c-vmk7m                2/2       Running     0          1m
+   istio-policy-5c7fbb4b9f-55gvc               2/2       Running     0          1m
+   istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
+   istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
+   istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
+   productpage-v1-560495357-jk1lz              1/1       Running     0          6m
+   prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
+   ratings-v1-734492171-rnr5l                  1/1       Running     0          6m
+   reviews-v1-874083890-f0qf0                  1/1       Running     0          6m
+   reviews-v2-1343845940-b34q5                 1/1       Running     0          6m
+   reviews-v3-1813607990-8ch52                 1/1       Running     0          6m
    ```
    {: screen}
 
@@ -177,7 +200,6 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
           gateway   *         169.xx.xxx.xxx   80        3m
           ```
           {: screen}
-
 
       2. Create a `GATEWAY_URL` environment variable that uses the Ingress IP address.
 
@@ -203,11 +225,10 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
          {: pre}
 
 4. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
-
-         ```
-         curl -I http://$GATEWAY_URL/productpage
-         ```
-         {: pre}
+     ```
+     curl -I http://$GATEWAY_URL/productpage
+     ```
+     {: pre}
 
 5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
 
@@ -222,16 +243,14 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 {:shortdesc}
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
-
    ```
    samples/bookinfo/kube/cleanup.sh
    ```
    {: pre}
 
 2. Uninstall Istio.
-
    ```
-   kubectl delete -f install/kubernetes/istio.yaml
+   kubectl delete -f install/kubernetes/istio-demo.yaml
    ```
    {: pre}
 
@@ -241,4 +260,4 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
     * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
     * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
-* Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/@nick.nellis/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
+* Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.

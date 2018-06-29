@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-29"
 
 ---
 
@@ -47,6 +47,11 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
  <td>Modify the way the ALB matches the request URI against the app path.</td>
  </tr>
  <tr>
+ <td><a href="#location-snippets">Location snippets</a></td>
+ <td><code>location-snippets</code></td>
+ <td>Add a custom location block configuration for a service.</td>
+ </tr>
+ <tr>
  <td><a href="#alb-id">Private ALB routing</a></td>
  <td><code>ALB-ID</code></td>
  <td>Route incoming requests to your apps with a private ALB.</td>
@@ -55,6 +60,11 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
  <td><a href="#rewrite-path">Rewrite paths</a></td>
  <td><code>rewrite-path</code></td>
  <td>Route incoming network traffic to a different path that your backend app listens on.</td>
+ </tr>
+ <tr>
+ <td><a href="#server-snippets">Server snippets</a></td>
+ <td><code>server-snippets</code></td>
+ <td>Add a custom server block configuration.</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">TCP ports</a></td>
@@ -434,7 +444,65 @@ spec:
 <br />
 
 
+### Location snippets (location-snippets)
+{: #location-snippets}
 
+Add a custom location block configuration for a service.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. A location block is an nginx directive defined within the server block. Location blocks define how Ingress processes the request URI, or the part of the request that comes after the domain name or IP address and port.<br><br>When a server block receives a request, the location block matches the URI to a path and the request is forwarded to the IP address of the pod where the app is deployed. By using the <code>location-snippets</code> annotation, you can modify how the location block forwards requests to particular services.<br><br>To modify the server block as a whole instead, see the <a href="#server-snippets">server-snippets</a> annotation.</dd>
+
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/location-snippets: |
+    serviceName=&lt;myservice&gt;
+    # Example location snippet
+    proxy_request_buffering off;
+    rewrite_log on;
+    proxy_set_header "x-additional-test-header" "location-snippet-header";
+spec:
+tls:
+- hosts:
+  - mydomain
+  secretName: mytlssecret
+rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service that you created for your app.</td>
+</tr>
+<tr>
+<td>Location snippet</td>
+<td>Provide the configuration snippet that you want to use for the specified service. This sample snippet configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the <code>myservice</code> service.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ### Private ALB routing (ALB-ID)
@@ -545,7 +613,59 @@ spec:
 <br />
 
 
+### Server snippets (server-snippets)
+{: #server-snippets}
 
+Add a custom server block configuration.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. By using the <code>server-snippets</code> annotation, you can modify how the ALB handles requests by providing a custom configuration snippet.</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/server-snippets: |
+    location = /health {
+    return 200 'Healthy';
+    add_header Content-Type text/plain;
+    }
+spec:
+tls:
+- hosts:
+  - mydomain
+  secretName: mytlssecret
+rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td>Server snippet</td>
+<td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>/health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ### TCP ports for application load balancers (tcp-ports)
@@ -1222,7 +1342,7 @@ spec:
 <tbody>
 <tr>
 <td><code>bindSecret</code></td>
-<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret.</td>
+<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
 </tr>
 <tr>
 <td><code>namespace</code></td>
@@ -1238,16 +1358,45 @@ spec:
 </tr>
 </tbody></table>
 </dd>
-<dt>Usage</dt>
-<dd>Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret.
-<ol>
-<li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
-<li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
-<li>Create a bind secret.
-<pre class="pre"><code>ibmcloud cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
-<li>Configure the <code>appid-auth</code> annotation.</li>
-</ol></dd>
-</dl>
+<dt>Usage</dt></dl>
+
+Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+
+1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
+    * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
+    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id):
+        1. Replace the auto-filled **Service name** with your own unique name for the service instance.
+            **Important**: The service instance name can't contain spaces.
+        2. Choose the same region that your cluster is deployed in.
+        3. Click **Create**.
+2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
+    1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
+    2. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
+        * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/us-south/appid_redirect`.
+        * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/us-east/appid_redirect`.
+
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
+    ```
+    ibmcloud cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ```
+    {: pre}
+    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
+    ```
+    ibmcloud cs cluster-service-bind mycluster mynamespace appid1
+    Binding service instance to namespace...
+    OK
+    Namespace:    mynamespace
+    Secret name:  binding-<service_instance_name>
+    ```
+    {: screen}
+
+4. Get the secret that was created in your cluster namespace.
+    ```
+    kubectl get secrets --namespace=<namespace>
+    ```
+    {: pre}
+
+5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
 
 <br />
 
@@ -1686,7 +1835,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
 spec:
   tls:
   - hosts:
@@ -1712,7 +1861,7 @@ spec:
 </thead>
 <tbody>
 <tr>
-<td><code>enabled</code></td>
+<td><code>enable</code></td>
   <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
 </tr>
 <tr>
@@ -1737,7 +1886,106 @@ spec:
 </tr>
 </tbody></table>
 </dd>
-</dl>
+
+<dt>Usage</dt></dl>
+
+1. Deploy your app. The example resources provided in these steps use the Istio sample app called [BookInfo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html), which can be found in the `istio-0.7.1/samples/bookinfo/kube` repository.
+   ```
+   kubectl apply -f bookinfo.yaml -n istio-system
+   ```
+   {: pre}
+
+2. Set up Istio routing rules for the app. For example, in the Istio sample app called BookInfo, [routing rules for each microservice ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) are defined in the `route-rule-all-v1.yaml` file.
+
+3. Expose the app to the Istio Ingress controller by creating an Istio Ingress resource. The resource allows Istio features, such as monitoring and route rules, to be applied to traffic entering the cluster.
+    For example, the following resource for the BookInfo app is pre-defined in the `bookinfo.yaml` file:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: istio-ingress-resource
+      annotations:
+        kubernetes.io/ingress.class: "istio"
+    spec:
+      rules:
+      - http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+4. Create the Istio Ingress resource.
+    ```
+    kubectl create -f istio-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+    You app is connected to the Istio Ingress controller.
+
+5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
+    ```
+    ibmcloud cs cluster-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+6. Connect the Istio Ingress controller to the IBM Ingress ALB for your cluster by creating an IBM Ingress resource.
+    Example for the BookInfo app:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: ibm-ingress-resource
+      annotations:
+        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
+    spec:
+      tls:
+      - hosts:
+        - mycluster-459249.us-south.containers.mybluemix.net
+        secretName: mycluster-459249
+      rules:
+      - host: mycluster-459249.us-south.containers.mybluemix.net
+        http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+7. Create the IBM ALB Ingress resource.
+    ```
+    kubectl apply -f ibm-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+
+8. In a browser, go to `https://<hostname>/frontend` to view the app web page.
 
 <br />
 

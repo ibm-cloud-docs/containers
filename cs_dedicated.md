@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-29"
 
 ---
 
@@ -446,6 +446,8 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         http://localhost:8001/ui
         ```
         {: codeblock}
+
+
 
 ### Using private and public image registries
 {: #dedicated_images}

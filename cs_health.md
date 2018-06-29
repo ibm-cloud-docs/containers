@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-06-28"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -25,26 +25,31 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 ## Configuring cluster and app log forwarding
 {: #logging}
 
-With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both. To forward logs to both, create two configurations.
+Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. This allows you to prepare accordingly to protect your apps against downtime. To configure logging, you must be working with a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}.
 {: shortdesc}
 
-You can forward logs from the following sources:
 
-<dl>
-  <dt><code>container</code></dt>
-    <dd>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</dd>
-  <dt><code>application</code></dt>
-    <dd><p>Logs for your own application that runs in a Kubernetes cluster. You can set the paths. In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p>
-    <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></dd>
-  <dt><code>worker</code></dt>
-    <dd><p>Logs for virtual machine worker nodes within a Kubernetes cluster.</p><p>Paths: <code>/var/log/syslog</code>, <code>/var/log/auth.log</code></p></dd>
-  <dt><code>kubernetes</code></dt>
-    <dd><p>Logs for the Kubernetes system component.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></p></dd>
-  <dt><code>ingress</code></dt>
-    <dd><p>Logs for an Ingress application load balancer that manages the network traffic that comes into a cluster.</p><p>Paths: <code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></dd>
-  <dt><code>kube-audit</code></dt>
-    <dd>Logs for your Kubernetes API server.</dd>
-</dl>
+**Does IBM monitor my cluster?**
+Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
+
+**What are the sources that I can configure logging for?**
+
+The following image shows the location in the cluster that you can configure logging for.
+
+![Log sources](images/log_sources.png)
+
+<ol>
+<li><p><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</p> <p>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></li>
+
+<li><code>container</code>: Information that is logged by a running container. This contains any information that is written to <code>STDOUT</code> or <code>STDERR</code>.</li>
+
+<li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+
+<li><p><code>kube-audit</code>: Information about cluster-related actions that is sent to the Kubernetes API server; including the time, the user, and the affected resource.</p></li>
+
+<li><p><code>kubernetes</code>: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
+
+<li><p><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In auth.log you can find information on the authentication requests that are made to the OS. </p><p>Paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></p></li>
 
 </br>
 </br>
@@ -69,65 +74,6 @@ To create a configuration at the account level, for a specific container namespa
 {: #enable-forwarding}
 
 You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
-
-<table>
-<caption> Understanding logging configuration options</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the options for logging configurations</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-      <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_source&gt;</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-      <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;port&gt;</em></code></td>
-      <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
-      <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;server_type&gt;</em></code></td>
-      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;protocol&gt;</em></code></td>
-      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`,  or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
-    </tr>
-    <tr>
-      <td><code><em>--skip-validation</em></code></td>
-      <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
-    </tr>
-  </tbody>
-</table>
 
 </br>
 </br>
@@ -209,6 +155,68 @@ If you have apps that run in your containers that can't be configured to write l
 
 
 
+
+### Understanding logging Options
+{: log-options}
+
+<table>
+<caption> Understanding logging configuration options</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the options for logging configurations</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+      <td>The name or ID of the cluster.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;log_source&gt;</em></code></td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+      <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
+      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;port&gt;</em></code></td>
+      <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
+      <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_space&gt;</em></code></td>
+      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_org&gt;</em></code></td>
+      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;server_type&gt;</em></code></td>
+      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
+      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;containers&gt;</em></code></td>
+      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;protocol&gt;</em></code></td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`,  or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+    </tr>
+    <tr>
+      <td><code><em>--skip-validation</em></code></td>
+      <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Verifying log forwarding
 {: verify-logging}
@@ -388,6 +396,7 @@ Kubernetes automatically audits any events that are passed through your apiserve
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
+* Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
@@ -592,7 +601,7 @@ You can configure other tools for more monitoring capabilities.
 ## Configuring health monitoring for worker nodes with Autorecovery
 {: #autorecovery}
 
-The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.8 or later.
+The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.7 or later.
 {: shortdesc}
 
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>

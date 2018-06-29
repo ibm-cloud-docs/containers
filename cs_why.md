@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-26"
 
 ---
 
@@ -81,7 +81,7 @@ You can run {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Blu
  <tr>
  <td>Hybrid setup
  </td>
- <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and other services that run on-premise, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and services that are running on-prem, you must [set up a VPN connection](cs_vpn.html).
+ <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and other services that run on-prem, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and services that are running on-prem, you must [set up a VPN connection](cs_vpn.html).
  </td>
  </tr>
  </tbody>
