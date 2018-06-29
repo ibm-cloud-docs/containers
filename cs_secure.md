@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-28"
+lastupdated: "2018-06-29"
 
 ---
 
@@ -210,7 +210,7 @@ To connect your worker nodes and apps to an on-prem data center, you can configu
 You can use LoadBalancer and Ingress networking services to connect your apps to the public internet or to external private networks. Review the following optional settings for load balancers and Ingress ALBs that you can use to meet backend app security requirements or encrypt traffic as it moves through your cluster.
 
 **Can I use security groups to manage my cluster's network traffic?** </br>
-To use Ingress and LoadBalancer services, use [Calico and Kubernetes policies](cs_network_policy.html) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the master virtual IP address (VIP). If the VRRP protocol is not present to manage the master VIP, Ingress and LoadBalancer services do not work properly. If you are not using Ingress or LoadBalancer services and want to completely isolate your worker node from the public, you can use security groups.
+To use Ingress and LoadBalancer services, use [Calico and Kubernetes policies](cs_network_policy.html) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the LoadBalancer IP address. If the VRRP protocol is not present to manage the LoadBalancer IP, Ingress and LoadBalancer services do not work properly. If you are not using Ingress or LoadBalancer services and want to completely isolate your worker node from the public, you can use security groups.
 
 **How can I secure the source IP within the cluster?** </br>
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.

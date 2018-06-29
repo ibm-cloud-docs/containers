@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-06-29"
 
 ---
 
@@ -41,7 +41,7 @@ If you have unique security requirements, you can use Calico and Kubernetes to c
 
 Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
-To use Ingress and LoadBalancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the master virtual IP address (VIP). If the VRRP protocol is not present to manage the master VIP, Ingress and LoadBalancer services do not work properly. 
+To use Ingress and LoadBalancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containershort_notm}} uses to manage the LoadBalancer IP address. If the VRRP protocol isn't present to manage the LoadBalancer IP, Ingress and LoadBalancer services do not work properly.
 {: tip}
 
 <br />
@@ -53,7 +53,7 @@ To use Ingress and LoadBalancer services, use Calico and Kubernetes policies to 
 When a cluster with a public VLAN is created, a HostEndpoint resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
 {:shortdesc}
 
-These default Calico policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that is not specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
+These default Calico policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
 
 Review the following default Calico network policies that are automatically applied to your cluster.
 
@@ -639,10 +639,10 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 <br />
 
 
-## Blocking inbound traffic to LoadBalancer or NodePort services
+## Controlling inbound traffic to LoadBalancer or NodePort services
 {: #block_ingress}
 
-[By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can block incoming traffic to your services based on traffic source or destination.
+[By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can use Calico policies to block incoming traffic to your services based on traffic source or destination.
 {:shortdesc}
 
 A Kubernetes LoadBalancer service is also a NodePort service. A LoadBalancer service makes your app available over the LoadBalancer IP address and port and makes your app available over the service's NodePorts. NodePorts are accessible on every IP address (public and private) for every node within the cluster.
@@ -728,3 +728,106 @@ policy changes to be applied throughout the cluster.
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+
+For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy/).
+{: tip}
+
+## Controlling traffic between pods
+{: #isolate_services}
+
+Kubernetes policies protect pods from internal network traffic. You can create simple Kubernetes network policies to isolate app microservices from each other within a namespace or across namespaces.
+{: shortdesc}
+
+For more information about how Kubernetes network policies control pod-to-pod traffic and for more example policies, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+{: tip}
+
+### Isolate app services within a namespace
+{: #services_one_ns}
+
+The following scenario demonstrates how to manage traffic between app microservices within one namespace.
+
+An Accounts team deploys multiple app services in one namespace, but they need isolation to permit only necessary communication between the microservices over the public network. For the app Srv1, the team has frontend, backend, and database services. They label each service with the `app: Srv1` label and the `tier: frontend`, `tier: backend`, or `tier: db` label.
+
+<img src="images/cs_network_policy_single_ns.png" width="200" alt="Use a network policy to manage cross-namepsace traffic." style="width:200px; border-style: none"/>
+
+The Accounts team wants to allow traffic from the frontend to the backend, and from the backend to the database. They use labels in their network policies to designate which traffic flows are permitted between microservices.
+
+First, they create a Kubernetes network policy that allows traffic from the frontend to the backend:
+
+```
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: backend-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: Srv1
+      tier: backend
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: Srv1
+          Tier: frontend
+```
+{: codeblock}
+
+Then, they create a similar Kubernetes network policy that allows traffic from the backend to the database:
+
+```
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: db-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: Srv1
+      tier: db
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: Srv1
+          Tier: backend
+  ```
+  {: codeblock}
+
+Traffic can now flow from the frontend to the backend, and from the backend to the database. The backend can respond to the backend, and the backend can respond to the frontend, but no reverse traffic connections can be established.
+
+### Isolate app services between namespaces
+{: #services_one_ns}
+
+The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
+
+Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Finance team deploys frontend, backend, and database services for the app Srv1 in the finance namespace. The Accounts team deploys frontend, backend, and database services for the app Srv2 in the accounts namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: finance` or `usage: accounts` label.
+
+<img src="images/cs_network_policy_multi_ns.png" width="475" alt="Use a network policy to manage cross-namepsace traffic." style="width:475px; border-style: none"/>
+
+The Finance team's Srv2 needs to call information from the Accounts team's Srv1 backend. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 backend in the accounts namespace. The team also specifies the port 3111 to isolate access through only that port.
+
+```
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  Namespace: accounts
+  name: accounts-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: Srv1
+      Tier: backend
+  ingress:
+  - from:
+      - NamespaceSelector:
+          matchLabels:
+            usage: finance
+        ports:
+          port: 3111
+```
+{: codeblock}
+
+Traffic can now flow from finance microservices to the accounts Srv1 backend. The accounts Srv1 backend can respond to finance microservices, but can't establish a reverse traffic connection.
+
+**Note**: It isn't possible to allow traffic from particular app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined. In this example, all traffic from all microservices in the finance namespace is permitted.
