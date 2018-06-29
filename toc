@@ -69,9 +69,10 @@ IBM Cloud Kubernetes Service
         cs_versions_changelog.md
 
     cs_regions.md
+    [Hybrid cloud](cs_hybrid.html#hybrid_iks_icp)
 
     {: .topicgroup}
-    IBM Cloud Dedicated
+    Dedicated cloud
         cs_dedicated.md
         [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
     {: .navgroup-end}
