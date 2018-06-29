@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-28"
+lastupdated: "2018-06-29"
 
 ---
 
@@ -1242,19 +1242,18 @@ spec:
 
 Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
 
-1. Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).
-    1. Replace the auto-filled **Service name** with your own unique name for the service instance.
-        **Important**: The service instance name cant contain spaces.
-    2. Choose the same region that your cluster is deployed in.
-    3. Click **Create**.
-    If you have an existing {{site.data.keyword.appid_short_notm}} instance that you want to use, ensure that the service instance name doesn't contain spaces. To remove spaces, select the More option menu next to the name of your service instance and select **Rename service**.
-    {: tip}
-2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the URL against the whitelist of redirect URLs.
+1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
+    * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the More option menu next to the name of your service instance and select **Rename service**.
+    * To provision a new [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id):
+        1. Replace the auto-filled **Service name** with your own unique name for the service instance.
+            **Important**: The service instance name can't contain spaces.
+        2. Choose the same region that your cluster is deployed in.
+        3. Click **Create**.
+2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
     1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
     2. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
         * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/us-south/appid_redirect`.
         * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/us-east/appid_redirect`.
-    3. Click **+** to add each URL.
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
     ```
