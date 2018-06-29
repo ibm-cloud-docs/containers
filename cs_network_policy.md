@@ -773,6 +773,8 @@ spec:
 ```
 {: codeblock}
 
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 frontend service so that ingress is permitted only _from_ those pods.
+
 Then, they create a similar Kubernetes network policy that allows traffic from the backend to the database:
 
 ```
@@ -793,19 +795,21 @@ spec:
           Tier: backend
   ```
   {: codeblock}
+  
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 database service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that ingress is permitted only _from_ those pods.
 
-Traffic can now flow from the frontend to the backend, and from the backend to the database. The backend can respond to the backend, and the backend can respond to the frontend, but no reverse traffic connections can be established.
+Traffic can now flow from the frontend to the backend, and from the backend to the database. The database can respond to the backend, and the backend can respond to the frontend, but no reverse traffic connections can be established.
 
 ### Isolate app services between namespaces
 {: #services_one_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 
-Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Finance team deploys frontend, backend, and database services for the app Srv1 in the finance namespace. The Accounts team deploys frontend, backend, and database services for the app Srv2 in the accounts namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: finance` or `usage: accounts` label.
+Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys frontend, backend, and database services for the app Srv1 in the accounts namespace. The Finance team deploys frontend, backend, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: finance` or `usage: accounts` label.
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="Use a network policy to manage cross-namepsace traffic." style="width:475px; border-style: none"/>
 
-The Finance team's Srv2 needs to call information from the Accounts team's Srv1 backend. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 backend in the accounts namespace. The team also specifies the port 3111 to isolate access through only that port.
+The Finance team's Srv2 needs to call information from the Accounts team's Srv1 backend. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 backend in the accounts namespace. The team also specifies the port 3111 to isolate access through that port only.
 
 ```
 kind: NetworkPolicy
@@ -820,13 +824,15 @@ spec:
       Tier: backend
   ingress:
   - from:
-      - NamespaceSelector:
-          matchLabels:
-            usage: finance
-        ports:
-          port: 3111
+    - NamespaceSelector:
+        matchLabels:
+          usage: finance
+      ports:
+        port: 3111
 ```
 {: codeblock}
+
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that the policy applies only _to_ those pods. The `spec.ingress.from.NamespaceSelector.matchLabels` section lists the label for the finance namespace so that ingress is permitted only _from_ services in that namespace.
 
 Traffic can now flow from finance microservices to the accounts Srv1 backend. The accounts Srv1 backend can respond to finance microservices, but can't establish a reverse traffic connection.
 
