@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-29"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -836,4 +836,4 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 backend
 
 Traffic can now flow from finance microservices to the accounts Srv1 backend. The accounts Srv1 backend can respond to finance microservices, but can't establish a reverse traffic connection.
 
-**Note**: It isn't possible to allow traffic from particular app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined. In this example, all traffic from all microservices in the finance namespace is permitted.
+**Note**: You can't allow traffic from specific app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined. In this example, all traffic from all microservices in the finance namespace is permitted.
