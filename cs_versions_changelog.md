@@ -39,28 +39,7 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
-### Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018
-{: #1103_1514}
 
-<table summary="Changes that were made since version 1.10.3_1513">
-<caption>Changes since version 1.10.3_1513</caption>
-<thead>
-<tr>
-<th>Component</th>
-<th>Previous</th>
-<th>Current</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kernel</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Optimized `sysctl` for high performance networking workloads.</td>
-</tr>
-</tbody>
-</table>
 
 ### Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018
 {: #1103_1513}
@@ -250,28 +229,6 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018
-{: #198_1517}
-
-<table summary="Changes that were made since version 1.9.8_1516">
-<caption>Changes since version 1.9.8_1516</caption>
-<thead>
-<tr>
-<th>Component</th>
-<th>Previous</th>
-<th>Current</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kernel</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Optimized `sysctl` for high performance networking workloads.</td>
-</tr>
-</tbody>
-</table>
 
 
 ### Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018
@@ -454,28 +411,7 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018
-{: #1813_1516}
 
-<table summary="Changes that were made since version 1.8.13_1515">
-<caption>Changes since version 1.8.13_1515</caption>
-<thead>
-<tr>
-<th>Component</th>
-<th>Previous</th>
-<th>Current</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kernel</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Optimized `sysctl` for high performance networking workloads.</td>
-</tr>
-</tbody>
-</table>
 
 ### Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018
 {: #1813_1515}
