@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -98,8 +98,12 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
 ## Adding or reusing custom and existing subnets in Kubernetes clusters
 {: #custom}
 
-You can add existing portable public or private subnets to your Kubernetes cluster or reuse subnets from a deleted cluster.
+You can add existing portable public or private subnets from your IBM Cloud infrastructure (SoftLayer) account to your Kubernetes cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
 {:shortdesc}
+
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses.
+
+**Note:** Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 
 Before you begin,
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-28"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -41,7 +41,7 @@ The following image shows the location in the cluster that you can configure log
 <ol>
 <li><p><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</p> <p>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></li>
 
-<li><code>container</code>: Information that is logged by a running container. This contains any information that is written to <code>STDOUT</code> or <code>STDERR</code>.</li>
+<li><p><code>container</code>: Information that is logged by a running container.</p> <p>Paths: any information that is written to <code>STDOUT</code> or <code>STDERR</code>.</p></li>
 
 <li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
 
@@ -50,6 +50,7 @@ The following image shows the location in the cluster that you can configure log
 <li><p><code>kubernetes</code>: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
 
 <li><p><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In auth.log you can find information on the authentication requests that are made to the OS. </p><p>Paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></p></li>
+</ol>
 
 </br>
 </br>

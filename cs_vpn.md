@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -154,7 +154,17 @@ Determine which cluster resources must be accessible by the remote network over 
 2. Optional: Remap cluster subnets by using the `localSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the cluster's private local IP subnets, the pod subnet (172.30.0.0/16), or the pod service subnet (172.21.0.0/16) to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN. To enable NAT, you can either add an entire subnet or individual IP addresses.
     * If you add an entire subnet in the format `10.171.42.0/24=10.10.10.0/24`, remapping is 1-to-1: all of the IP addresses in the internal network subnet are mapped over to external network subnet and vice versa.
     * If you add individual IP addresses in the format `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32`, only those internal IP addresses are mapped to the specified external IP addresses.
-    * You can also use this setting to hide all of the cluster IP addresses behind a single IP address. This option provides one of the most secure configurations for the VPN connection because no connections from the remote network back into the cluster are permitted.
+    
+3. Optional for version 2.2.0 and later strongSwan Helm charts: Hide all of the cluster IP addresses behind a single IP address by setting `enableSingleSourceIP` to `true`. This option provides one of the most secure configurations for the VPN connection because no connections from the remote network back into the cluster are permitted.
+    <br>**Note**:
+    * This setting requires that all data flow over the VPN connection must be outbound regardless of whether the VPN connection is established from the cluster or from the remote network.
+    * `local.subnet` must be set to only one /32 subnet.
+    
+4. Optional for version 2.2.0 and later strongSwan Helm charts: Enable the strongSwan service to route incoming requests from the remote network to a service that exists outside of the cluster by using the `localNonClusterSubnet` setting.
+    <br>**Note**:
+    * The non-cluster service must exist on the same private network or on a private network that is reachable by the worker nodes.
+    * The non-cluster worker node cannot initiate traffic to the remote network through the VPN connection, but the non-cluster node can be the target of incoming requests from the remote network.
+    * You must list the CIDRs of the non-cluster subnets in the `local.subnet` setting.
 
 ### Step 5: Access remote network resources over the VPN connection
 {: #strongswan_5}
@@ -164,6 +174,7 @@ Determine which remote network resources must be accessible by the cluster over 
 
 1. Add the CIDRs of one or more on-premises private subnets to the `remote.subnet` setting.
     <br>**Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
+2. Optional for version 2.2.0 and later strongSwan Helm charts: Remap remote network subnets by using the `remoteSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the remote network's IP subnets to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN.
 
 ### Step 6: Deploy the Helm chart
 {: #strongswan_6}
@@ -352,7 +363,7 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9.
+**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.2.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9.
 
 Updating your cluster to Kubernetes 1.10? Be sure to delete your strongSwan Helm chart first. Then after the update, reinstall it.
 {:tip}
