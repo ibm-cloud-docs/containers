@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-26"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -302,7 +302,7 @@ To use the service in a pod that is deployed in the cluster, cluster users must 
 ## Creating Cloud Foundry aliases for other {{site.data.keyword.Bluemix_notm}} service resources
 {: #adding_resource_cluster}
 
-Cloud Foundry services are supported for binding with clusters. To bind an {{site.data.keyword.Bluemix_notm}} service that is not a Cloud Foundry service to your cluster, create a Cloud Foundry alias for the service instance.
+Cloud Foundry services are supported for binding with clusters. You can see the different service types after you create the service instance and the services are grouped in the dashboard as **Cloud Foundry Services** and **Services**. To bind an {{site.data.keyword.Bluemix_notm}} service that is not a Cloud Foundry service to your cluster, create a Cloud Foundry alias for the service instance.
 {:shortdesc}
 
 Before you begin, [request an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
