@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-28"
+lastupdated: "2018-07-02"
 
 ---
 
@@ -33,7 +33,7 @@ Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.h
 
 **How do I know when to update the master?**
 
-You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.md) page.
+You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.html) page.
 
 **How many versions behind the latest can the master be?**
 
