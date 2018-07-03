@@ -21,15 +21,16 @@ lastupdated: "2018-07-03"
 # Storing data on IBM File Storage for IBM Cloud
 
 
+
 ## Adding file storage to apps
 {: #add_file}
 
-Create a persistent volume claim (PVC) to provision NFS file storage or block storage for your cluster. Then, mount this claim to a persistent volume (PV) to ensure that data is available even if the pods crash or shut down.
+Create a persistent volume claim (PVC) to provision NFS file storage for your cluster. Then, mount this claim to a persistent volume (PV) to ensure that data is available even if the pods crash or shut down.
 {:shortdesc}
 
-The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
+The NFS file storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
 
-**Note**: Block storage is a `ReadWriteOnce` access mode device. You can mount it to only one pod on one worker node in the cluster at a time. NFS file storage is a `ReadWriteMany` access mode, so you can mount it to multiple pods across workers within the cluster.
+**Note**: NFS file storage comes with a `ReadWriteMany` access mode, so you can mount it to multiple pods across workers within the cluster.
 
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
@@ -37,8 +38,7 @@ Before you begin:
 
 To add persistent storage:
 
-1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class. By default, file storage is provisioned with an `nfs` file system, and block storage is provisioned with an `ext4` file system. If you want to provision block storage with an `XFS` file system, [create your own custom storage class](#custom_storageclass).
-
+1.  Review and decide on the storage class that you want to use. You can choose between the pre-defined storage classes or create a customized storage class. The `ibmc-file-bronze` storage class is the same as the `default` storage class. 
     ```
     kubectl get storageclasses
     ```
