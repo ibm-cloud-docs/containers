@@ -18,4 +18,4 @@ lastupdated: "2018-07-03"
 
 
 
-# Storing data on {{site.data.keyword.blockstoragefull}}
+# Storing data on IBM Block Storage for IBM Cloud
