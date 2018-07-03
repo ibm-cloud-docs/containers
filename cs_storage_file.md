@@ -18,7 +18,7 @@ lastupdated: "2018-07-03"
 
 
 
-# Storing data on {{site.data.keyword.filestorage_full}}
+# Storing data on IBM File Storage for IBM Cloud
 
 
 ## Adding file storage to apps
