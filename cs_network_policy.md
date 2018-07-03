@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-02"
+lastupdated: "2018-07-03"
 
 ---
 
@@ -801,7 +801,7 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 databas
 Traffic can now flow from the frontend to the backend, and from the backend to the database. The database can respond to the backend, and the backend can respond to the frontend, but no reverse traffic connections can be established.
 
 ### Isolate app services between namespaces
-{: #services_one_ns}
+{: #services_across_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 
