@@ -542,3 +542,119 @@ You successfully created a PV object and bound it to a PVC. Cluster users can no
 
 <br />
 
+
+
+
+
+
+
+
+
+
+## Changing the default NFS version
+{: #nfs_version}
+
+The version of the file storage determines the protocol that is used to communicate with the {{site.data.keyword.Bluemix_notm}} file storage server. By default, all file storage instances are set up with NFS version 4. You can change your existing PV to an older NFS version if your app requires a specific version to properly function.
+{: shortdesc}
+
+To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod.
+
+**Important:** To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
+
+**To create a customized storage class with the desired NFS version:**
+1. Create a yaml file for your customized storage class. Replace <nfs_version> with the NFS version that you want to use. For example, to provision NFS version 3.0, enter **3.0**.
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ibmc-file-mount
+     #annotations:
+     #  storageclass.beta.kubernetes.io/is-default-class: "true"
+     labels:
+       kubernetes.io/cluster-service: "true"
+   provisioner: ibm.io/ibmc-file
+   parameters:
+     type: "Endurance"
+     iopsPerGB: "2"
+     sizeRange: "[1-12000]Gi"
+     reclaimPolicy: "Delete"
+     classVersion: "2"
+     mountOptions: nfsvers=<nfs_version>
+   ```
+   {: codeblock}
+
+2. Create the storage class in your cluster.
+   ```
+   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   ```
+   {: pre}
+
+3. Verify that the customized storage class was created.
+   ```
+   kubectl get storageclasses
+   ```
+   {: pre}
+
+4. Provision [file storage](#create) with your customized storage class.
+
+**To change your existing PV to use a different NFS version:**
+
+1. Get the PV of the file storage where you want to change the NFS version and note the name of the PV.
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+
+2. Add an annotation to your PV. Replace `<version_number>` with the NFS version that you want to use. For example, to change to NFS version 3.0, enter **3**.  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
+   ```
+   {: pre}
+
+3. Delete the pod that uses the file storage and re-create the pod.
+   1. Save the pod yaml to your local machine.
+      ```
+      kubect get pod <pod_name> -o yaml > <filepath/pod.yaml>
+      ```
+      {: pre}
+
+   2. Delete the pod.
+      ```
+      kubectl deleted pod <pod_name>
+      ```
+      {: pre}
+
+   3. Re-create the pod.
+      ```
+      kubectl apply -f <filepath/pod.yaml>
+      ```
+      {: pre}
+
+4. Wait for the pod to deploy.
+   ```
+   kubectl get pods
+   ```
+   {: pre}
+
+   The pod is fully deployed when the status changes to `Running`.
+
+5. Log in to your pod.
+   ```
+   kubectl exec -it <pod_name> sh
+   ```
+   {: pre}
+
+6. Verify that the file storage was mounted with the NFS version that you specified earlier.
+   ```
+   mount | grep "nfs" | awk -F" |," '{ print $5, $8 }'
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   nfs vers=3.0
+   ```
+   {: screen}
+
+<br />
+
