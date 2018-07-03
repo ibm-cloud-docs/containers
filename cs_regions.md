@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-07-03"
 
 ---
 
@@ -121,7 +121,9 @@ Example of `GET /clusters` API:
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud cs regions`.
 {: tip}
 
-To view documentation on the API commands, view [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
+To view documentation on the API commands, see [https://containers.bluemix.net/swagger-api/ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api/).
+
+To generate the API swagger as a JSON file for use in automation, use the following link: [https://containers.bluemix.net/swagger-api-json ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json).
 
 ## Locations available in {{site.data.keyword.containershort_notm}}
 {: #locations}
