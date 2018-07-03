@@ -56,7 +56,9 @@ IBM Cloud Kubernetes Service
         cs_vpn.md
         cs_subnets.md
 
+    
     cs_storage.md
+       
     cs_integrations.md
     {: .navgroup-end}
 
