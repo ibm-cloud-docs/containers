@@ -56,7 +56,7 @@ Get the [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net
 
 To create a free cluster:
 
-1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **Containers in Kubernetes Clusters** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
+1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
 
 2. Give your cluster a unique name.
 
