@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-03"
+lastupdated: "2018-07-05"
 
 ---
 
@@ -122,7 +122,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 6. Repeat these steps for every cluster where you want to provision block storage.
 
-You can now continue to [create a PVC](#create) to provision block storage for your app.
+You can now continue to create a PVC to provision block storage for your app.
 
 <br />
 
@@ -259,7 +259,7 @@ To create a customized storage class:
    ```
    {: pre}
 
-4. Provision [XFS block storage](#create) with your customized storage class.
+4. Provision XFS block storage with your customized storage class.
 
 <br />
 
