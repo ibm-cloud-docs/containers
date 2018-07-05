@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-28"
+lastupdated: "2018-07-05"
 
 ---
 
@@ -254,7 +254,7 @@ To fully-customize your clusters with your choice of hardware isolation, zone, A
 
 To create a cluster:
 
-1. In the catalog, select **Kubernetes Cluster**.
+1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
 
 2. Select a region in which to deploy your cluster.
 
