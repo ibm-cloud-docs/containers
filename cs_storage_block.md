@@ -19,6 +19,7 @@ lastupdated: "2018-07-06"
 
 
 # Storing data on IBM Block Storage for IBM Cloud
+{: #block_storage}
 
 
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in in your cluster
@@ -205,13 +206,13 @@ Before you begin:
 <br />
 
 
-## Deciding on block storage configuration
+## Deciding on the block storage configuration
 {: #predefined_storageclass}
 
 {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage with a specific configuration.
 {: shortdesc}
 
-Every storage class specifies the type of block storage that you provision, including available size, IOPS, and file system.  
+Every storage class specifies the type of block storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -532,7 +533,7 @@ parameters:
 
 ## What needs a new home
 
-The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
+The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. 
 
 <table>
    <caption>Block storage storage classes</caption>
