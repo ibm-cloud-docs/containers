@@ -235,13 +235,14 @@ Every storage class specifies the type of block storage that you provision, incl
     ```
     {: screen}
 
-2. Review the details for each of the pre-defined storage classes. 
+2. Review the details for each of the pre-defined storage classes.
+
    |Name|Type|File system|Billing|Size and IOPS|
    |----|----|-----|-----|---------------------|
-   |Bronze|Endurance|ext4|Size: 20-12000 Gi, IOPS: 2 per GB|Default: hourly|
-   |Silver|Endurance|ext4|Size: 20-12000 Gi, IOPS: 4 per GB|Default: hourly|
-   |Gold|Endurance|ext4|Size: 20-4000 Gi, IOPS: 10 per GB|Default: hourly|
-   |Custom|Performance|ext4|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|Default: hourly|
+   |Bronze|Endurance|ext4|Default: hourly|Size: 20-12000 Gi, IOPS: 2 per GB|
+   |Silver|Endurance|ext4|Default: hourly|Size: 20-12000 Gi, IOPS: 4 per GB|
+   |Gold|Endurance|ext4|Default: hourly|Size: 20-4000 Gi, IOPS: 10 per GB|
+   |Custom|Performance|ext4|Default: hourly|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|
    
    Not finding what you are looking for? You can create your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
    {: tip}
