@@ -241,12 +241,12 @@ Every storage class specifies the type of block storage that you provision, incl
    ```
    {: pre}
    
-   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples}(#custom_storageclass).
+   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
    {: tip}
    
 3. Choose the type of block storage that you want to provision. 
-   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). 
-   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). 
+   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
+   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS. 
      
 4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
@@ -429,14 +429,14 @@ To add block storage:
     If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
     {: tip}
 
-7.  Create the PVC.
+2.  Create the PVC.
 
     ```
     kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
-8.  Verify that your PVC is created and bound to the PV. This process can take a few minutes.
+3.  Verify that your PVC is created and bound to the PV. This process can take a few minutes.
 
     ```
     kubectl describe pvc mypvc
@@ -464,7 +464,7 @@ To add block storage:
     ```
     {: screen}
 
-9.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
     apiVersion: apps/v1beta1
@@ -539,13 +539,13 @@ To add block storage:
     </tr>
     </tbody></table>
 
-10.  Create the deployment.
+5.  Create the deployment.
      ```
      kubectl apply -f <local_yaml_path>
      ```
      {: pre}
 
-11.  Verify that the PV is successfully mounted.
+6.  Verify that the PV is successfully mounted.
 
      ```
      kubectl describe deployment <deployment_name>
@@ -576,7 +576,7 @@ To add block storage:
 
 Before you begin, make sure that you have an existing block storage instance that you can use to create your PV. For example, if you previously created a PVC with a `retain` storage class policy, you can use that retained data in the existing block storage for this new PVC.
 
-To create a PV and matching PVC, follow these steps.
+### Step 1: Retrieving the information of your existing block storage
 
 1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
     1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).
@@ -608,7 +608,10 @@ To create a PV and matching PVC, follow these steps.
     {: screen}
 
 7.  Note the `id`, `ip_addr`, `capacity_gb`, and `lunId` of the block storage device that you want to mount to your cluster.
-8.  Create a configuration file for your PV. Include the block storage ID, IP address, the size, and lun ID that you retrieved in the previous step.
+
+### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
+
+1.  Create a configuration file for your PV. Include the block storage ID, IP address, the size, and lun ID that you retrieved earlier.
 
     ```
     apiVersion: v1
@@ -666,19 +669,19 @@ To create a PV and matching PVC, follow these steps.
 	    </tr>
     </tbody></table>
 
-9.  Create the PV in your cluster.
+2.  Create the PV in your cluster.
     ```
     kubectl apply -f mypv.yaml
     ```
     {: pre}
 
-10. Verify that the PV is created.
+3. Verify that the PV is created.
     ```
     kubectl get pv
     ```
     {: pre}
 
-11. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV is created automatically instead.
+4. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV is created automatically instead.
 
      ```
      kind: PersistentVolumeClaim
@@ -696,13 +699,13 @@ To create a PV and matching PVC, follow these steps.
      ```
      {: codeblock}
 
-12.  Create your PVC.
+5.  Create your PVC.
      ```
      kubectl apply -f mypvc.yaml
      ```
      {: pre}
 
-13.  Verify that your PVC is created and bound to the PV that you created earlier. This process can take a few minutes.
+6.  Verify that your PVC is created and bound to the PV that you created earlier. This process can take a few minutes.
      ```
      kubectl describe pvc mypvc
      ```
@@ -742,8 +745,8 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <table>
 <caption>Block storage class: bronze</caption>
 <thead>
-<th>Specifications</th>
-<th>Default setting</th>
+<th>Characteristics</th>
+<th>Setting</th>
 </thead>
 <tbody>
 <tr>
@@ -759,16 +762,16 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <td>ext4</td>
 </tr>
 <tr>
-<td>IOPS</td>
-<td>2 IOPS per GB</td>
+<td>IOPS per gigabyte</td>
+<td>2</td>
 </tr>
 <tr>
-<td>Size</td>
+<td>Size range in gigabytes</td>
 <td>20-12000 Gi</td>
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</td>
+<td>Hourly</td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -783,8 +786,8 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <table>
 <caption>Block storage class: silver</caption>
 <thead>
-<th>Specifications</th>
-<th>Default setting</th>
+<th>Characteristics</th>
+<th>Setting</th>
 </thead>
 <tbody>
 <tr>
@@ -800,16 +803,16 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <td>ext4</td>
 </tr>
 <tr>
-<td>IOPS</td>
-<td>4 IOPS per GB</td>
+<td>IOPS per gigabyte</td>
+<td>4</td>
 </tr>
 <tr>
-<td>Size</td>
+<td>Size range in gigabytes</td>
 <td>20-12000 Gi</td>
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</td>
+<td>Hourly</td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -824,8 +827,8 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <table>
 <caption>Block storage class: gold</caption>
 <thead>
-<th>Specifications</th>
-<th>Default setting</th>
+<th>Characteristics</th>
+<th>Setting</th>
 </thead>
 <tbody>
 <tr>
@@ -841,16 +844,16 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <td>ext4</td>
 </tr>
 <tr>
-<td>IOPS</td>
-<td>10 IOPS per GB</td>
+<td>IOPS per gigabyte</td>
+<td>10</td>
 </tr>
 <tr>
-<td>Size</td>
+<td>Size range in gigabytes</td>
 <td>20-4000 Gi</td>
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</td>
+<td>Hourly</td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -865,8 +868,8 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <table>
 <caption>Block storage class: custom</caption>
 <thead>
-<th>Specifications</th>
-<th>Default setting</th>
+<th>Characteristics</th>
+<th>Setting</th>
 </thead>
 <tbody>
 <tr>
