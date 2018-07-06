@@ -752,7 +752,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 </tr>
 <tr>
 <td>Type</td>
-<td>Endurance</td>
+<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -793,7 +793,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 </tr>
 <tr>
 <td>Type</td>
-<td>Endurance</td>
+<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -834,7 +834,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 </tr>
 <tr>
 <td>Type</td>
-<td>Endurance</td>
+<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
 </tr>
 <tr>
 <td>File system</td>
