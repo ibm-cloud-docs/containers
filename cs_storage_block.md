@@ -284,14 +284,6 @@ Before you begin:
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
     - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
-
-
-
-
-The storage class determine the type of storage, the file system, and the size and IOPS range that To change the pre-defined values, consider creating a customized storage class.
-
-
-
 ## Customizing a storage class for XFS block storage
 {: #custom_storageclass}
 
@@ -368,9 +360,7 @@ Before you begin:
 
 To add block storage:
 
-1.  Decide if you want to be billed on an hourly or monthly basis. By default, you are billed hourly.
-
-2.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
+1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
     -  **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. 
@@ -427,29 +417,19 @@ To add block storage:
         </tr>
         <tr>
         <td><code>metadata/annotations</code></td>
-        <td>Specify the storage class for the PV:
-          <ul>
-          <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS per GB.</li>
-          <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS per GB.</li>
-          <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS per GB.</li>
-          <li>ibmc-file-custom / ibmc-file-retain-custom: Multiple values of IOPS available.</li>
-          <li>ibmc-block-bronze / ibmc-block-retain-bronze : 2 IOPS per GB.</li>
-          <li>ibmc-block-silver / ibmc-block-retain-silver: 4 IOPS per GB.</li>
-          <li>ibmc-block-gold / ibmc-block-retain-gold: 10 IOPS per GB.</li>
-          <li>ibmc-block-custom / ibmc-block-retain-custom: Multiple values of IOPS available.</li></ul>
-          <p>If you do not specify a storage class, the PV is created with the default storage class.</p><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+        <td>The name of the storage class that you want to use to provision block storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
-          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "monthly".</td>
+          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "hourly".</td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
-        <td>Enter the size of the file storage, in gigabytes (Gi). Choose a whole number within the allowable size range. </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your NFS file share or block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
+        <td>Enter the size of the block storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/iops</code></td>
-        <td>This option is for custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom / ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. To see all options, run `kubectl describe storageclasses <storageclass>`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
+        <td>This option is available for the custom storage classes only (`ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
         </tbody></table>
 
@@ -484,14 +464,14 @@ To add block storage:
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
-      3m		3m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
-      3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-file", expecting that a volume for the claim is provisioned either manually or via external software
-      1m		1m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+      3m		3m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
+      3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-block", expecting that a volume for the claim is provisioned either manually or via external software
+      1m		1m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
 
     ```
     {: screen}
 
-9.  {: #app_volume_mount}To mount the PVC to your deployment, create a configuration `.yaml` file.
+9.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
     apiVersion: apps/v1beta1
@@ -562,17 +542,17 @@ To add block storage:
     </tr>
     <tr>
     <td><code>volumes/persistentVolumeClaim/claimName</code></td>
-    <td>The name of the PVC that you want to use as your volume. When you mount the volume to the pod, Kubernetes identifies the PV that is bound to the PVC and enables the user to read from and write to the PV.</td>
+    <td>The name of the PVC that binds the PV that you want to use. </td>
     </tr>
     </tbody></table>
 
-10.  Create the deployment and mount the PVC.
+10.  Create the deployment.
      ```
      kubectl apply -f <local_yaml_path>
      ```
      {: pre}
 
-11.  Verify that the volume is successfully mounted.
+11.  Verify that the PV is successfully mounted.
 
      ```
      kubectl describe deployment <deployment_name>
