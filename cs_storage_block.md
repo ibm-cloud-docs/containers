@@ -236,13 +236,12 @@ Every storage class specifies the type of block storage that you provision, incl
     {: screen}
 
 2. Review the details for each of the pre-defined storage classes. 
-   
-   |Name | Type | File system | Size and IOPS | Billing|
-   |----|----|--|---------------------------------|----|
-   |Bronze|Endurance|ext4|Size: 20-12000 Gi, IOPS: 2 per GB|Default: hourly|
-   |Silver|Endurance|ext4|Size: 20-12000 Gi, IOPS: 4 per GB|Default: hourly|
-   |Gold|Endurance|ext4|Size: 20-4000 Gi, IOPS: 10 per GB|Default: hourly|
-   |Custom|Performance|ext4|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|Default: hourly|
+|Name|Type|File system|Size and IOPS|Billing|
+|----|----|--|---------------------------------|----|
+|Bronze|Endurance|ext4|Size: 20-12000 Gi, IOPS: 2 per GB|Default: hourly|
+|Silver|Endurance|ext4|Size: 20-12000 Gi, IOPS: 4 per GB|Default: hourly|
+|Gold|Endurance|ext4|Size: 20-4000 Gi, IOPS: 10 per GB|Default: hourly|
+|Custom|Performance|ext4|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|Default: hourly|
    
    Not finding what you are looking for? You can create your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
    {: tip}
@@ -489,6 +488,170 @@ To add block storage:
      {: screen}
      
 <br />
+
+
+
+## Using existing block storage in your cluster
+{: #existing_block}
+
+Before you begin, make sure that you have an existing block storage instance that you can use to create your PV. For example, if you previously created a PVC with a `retain` storage class policy, you can use that retained data in the existing block storage for this new PVC.
+
+To create a PV and matching PVC, follow these steps.
+
+1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
+    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).
+    2. Select **Account**, then **Users**, and then **User List**.
+    3. Find your user ID.
+    4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.
+2.  Retrieve the API user name for your IBM Cloud infrastructure (SoftLayer) account.
+    1. From the **User List** menu, select your user ID.
+    2. In the **API Access Information** section, find your **API Username**.
+3.  Log in to the IBM Cloud infrastructure CLI plug-in.
+    ```
+    ibmcloud sl init
+    ```
+    {: pre}
+
+4.  Choose to authenticate by using the user name and API key for your IBM Cloud infrastructure (SoftLayer) account.
+5.  Enter the user name and API key that you retrieved in the previous steps.
+6.  List available block storage devices.
+    ```
+    ibmcloud sl block volume-list
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    id         username            datacenter   storage_type              capacity_gb   bytes_used   ip_addr         lunId   active_transactions
+    38642141   IBM02SEL1543159-1   dal10        endurance_block_storage   20            -            169.xx.xxx.xxx   170     0
+    ```
+    {: screen}
+
+7.  Note the `id`, `ip_addr`, `capacity_gb`, and `lunId` of the block storage device that you want to mount to your cluster.
+8.  Create a configuration file for your PV. Include the block storage ID, IP address, the size, and lun ID that you retrieved in the previous step.
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mypv
+    spec:
+      capacity:
+        storage: "<storage_size>"
+      accessModes:
+        - ReadWriteOnce
+      flexVolume:
+        driver: "ibm/ibmc-block"
+        fsType: "<fs_type>"
+        options:
+          "Lun": "<lun_ID>"
+          "TargetPortal": "<IP_address>"
+          "VolumeID": "<volume_ID>"
+          "volumeName": "<volume_name>"
+      ```
+      {: codeblock}
+
+    <table>
+    <caption>Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>metadata/name</code></td>
+    <td>Enter the name of the PV that you want to create.</td>
+    </tr>
+    <tr>
+    <td><code>spec/flexVolume/fsType</code></td>
+    <td>Enter the file system type that is configured for your existing block storage. Choose between <code>ext4</code> or <code>xfs</code>. If you do not specify this option, the PV defaults to <code>ext4</code>. When the wrong fsType is defined, then the PV creation succeeds, but the mounting of the PV to a pod fails. </td></tr>	    
+    <tr>
+    <td><code>spec/capacity/storage</code></td>
+    <td>Enter the storage size of the existing block storage that you retrieved in the previous step as <code>capacity-gb</code>. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB).</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/Lun</code></td>
+    <td>Enter the lun ID for your block storage that you retrieved in the previous step as <code>lunId</code>.</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/TargetPortal</code></td>
+    <td>Enter the IP address of your block storage that you retrieved in the previous step as <code>ip_addr</code>. </td>
+    </tr>
+    <tr>
+	    <td><code>flexVolume/options/VolumeId</code></td>
+	    <td>Enter the ID of your block storage that you retrieved in the previous step as <code>id</code>.</td>
+	    </tr>
+	    <tr>
+		    <td><code>flexVolume/options/volumeName</code></td>
+		    <td>Enter a name for your volume.</td>
+	    </tr>
+    </tbody></table>
+
+9.  Create the PV in your cluster.
+    ```
+    kubectl apply -f mypv.yaml
+    ```
+    {: pre}
+
+10. Verify that the PV is created.
+    ```
+    kubectl get pv
+    ```
+    {: pre}
+
+11. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV is created automatically instead.
+
+     ```
+     kind: PersistentVolumeClaim
+     apiVersion: v1
+     metadata:
+      name: mypvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: ""
+     spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: "20Gi"
+     ```
+     {: codeblock}
+
+12.  Create your PVC.
+     ```
+     kubectl apply -f mypvc.yaml
+     ```
+     {: pre}
+
+13.  Verify that your PVC is created and bound to the PV that you created earlier. This process can take a few minutes.
+     ```
+     kubectl describe pvc mypvc
+     ```
+     {: pre}
+
+     Example output:
+
+     ```
+     Name: mypvc
+     Namespace: default
+     StorageClass:	""
+     Status: Bound
+     Volume: pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     Labels: <none>
+     Capacity: 20Gi
+     Access Modes: RWO
+     Events:
+       FirstSeen LastSeen Count From        SubObjectPath Type Reason Message
+       --------- -------- ----- ----        ------------- -------- ------ -------
+       3m 3m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal Provisioning External provisioner is provisioning volume  for claim "default/my-persistent-volume-claim"
+       3m 1m	 10 {persistentvolume-controller } Normal ExternalProvisioning cannot find provisioner "ibm.io/ibmc-block", expecting that  a volume for the claim is provisioned either manually or via external software
+       1m 1m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal ProvisioningSucceeded	Successfully provisioned volume  pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     ```
+     {: screen}
+
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
+
+<br />
+
 
 
 
