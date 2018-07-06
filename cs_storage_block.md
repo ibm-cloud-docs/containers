@@ -235,19 +235,20 @@ Every storage class specifies the type of block storage that you provision, incl
     ```
     {: screen}
 
-2. Review the details for each of the pre-defined storage classes.
-
-   |Name|Type|File system|Default billing|Size and IOPS|
-   |----|----|-----|-----|---------------------|
-   |Bronze|Endurance|ext4|Hourly|Size: 20-12000 Gi, IOPS: 2 per GB|
-   |Silver|Endurance|ext4|Hourly|Size: 20-12000 Gi, IOPS: 4 per GB|
-   |Gold|Endurance|ext4|Hourly|Size: 20-4000 Gi, IOPS: 10 per GB|
-   |Custom|Performance|ext4|Hourly|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|
+2. Review the configuration of a storage class. 
+   ```
+   kubectl describe storageclass <storageclass_name>
+   ```
+   {: pre}
    
-   Not finding what you are looking for? You can create your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
+   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples}(#custom_storageclass).
    {: tip}
+   
+3. Choose the type of block storage that you want to provision. 
+   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). 
+   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). 
      
-3. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
+4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
      <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
@@ -327,10 +328,12 @@ Every storage class specifies the type of block storage that you provision, incl
          </tr>
          </tbody></table>
 
-4. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
+5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
    - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
    
+6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) for more information. By default, all block storage devices are provisioned with an hourly billing type. 
+
 <br />
 
 
@@ -730,6 +733,170 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 <br />
 
 
+## Storage class reference
+{: #storageclass_reference}
+
+### Bronze
+{: #bronze}
+
+<table>
+<caption>Block storage class: bronze</caption>
+<thead>
+<th>Specifications</th>
+<th>Default setting</th>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>ibmc-block-bronze</code></br><code>ibmc-block-retain-bronze</code></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Endurance</td>
+</tr>
+<tr>
+<td>File system</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>IOPS</td>
+<td>2 IOPS per GB</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>20-12000 Gi</td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+</tr>
+</tbody>
+</table>
+
+### Silver
+{: #silver}
+
+<table>
+<caption>Block storage class: silver</caption>
+<thead>
+<th>Specifications</th>
+<th>Default setting</th>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>ibmc-block-silver</code></br><code>ibmc-block-retain-silver</code></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Endurance</td>
+</tr>
+<tr>
+<td>File system</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>IOPS</td>
+<td>4 IOPS per GB</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>20-12000 Gi</td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+</tr>
+</tbody>
+</table>
+
+### Gold
+{: #gold}
+
+<table>
+<caption>Block storage class: gold</caption>
+<thead>
+<th>Specifications</th>
+<th>Default setting</th>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>ibmc-block-gold</code></br><code>ibmc-block-retain-gold</code></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Endurance</td>
+</tr>
+<tr>
+<td>File system</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>IOPS</td>
+<td>10 IOPS per GB</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>20-4000 Gi</td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+</tr>
+</tbody>
+</table>
+
+### Custom
+{: #custom}
+
+<table>
+<caption>Block storage class: custom</caption>
+<thead>
+<th>Specifications</th>
+<th>Default setting</th>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>ibmc-block-custom</code></br><code>ibmc-block-retain-custom</code></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>[Performance ![External link icon](../icons/launch-glyph.svg "External link icon")]()</td>
+</tr>
+<tr>
+<td>File system</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>IOPS and size</td>
+<td><table><thead><th>Size range in gigabytes</th><th>IOPS range in multiples of 100</th></thead><tbody><tr><td>20-39 Gi</td><td>100-1000 IOPS</td></tr><tr><td>40-79 Gi</td><td>100-2000 IOPS</td></tr><tr><td>80-99 Gi</td><td>100-4000 IOPS</td></tr><tr><td>100-499 Gi</td><td>100-6000 IOPS</td></tr><tr><td>500-999 Gi</td><td>100-10000 IOPS</td></tr><tr><td>1000-1999 Gi</td><td>100-20000 IOPS</td></tr><tr><td>2000-2999 Gi</td><td>200-40000 IOPS</td></tr><tr><td>3000-3999 Gi</td><td>200-48000 IOPS</td></tr><tr><td>4000-7999 Gi</td><td>300-48000 IOPS</td></tr><tr><td>8000-9999 Gi</td><td>500-48000 IOPS</td></tr><tr><td>10000-12000 Gi</td><td>1000-48000 IOPS</td></tr></tbody></table></td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+</tr>
+</tbody>
+</table>
+
+<br />
 
 
 ## Sample customized storage classes
@@ -774,49 +941,4 @@ parameters:
 ## What needs a new home
 
 The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. 
-
-<table>
-   <caption>Block storage storage classes</caption>
-   <thead>
-   <th>Name</th>
-   <th>Type</th>
-   <th>File system</th>
-   <th>Size and IOPS</th>
-   <th>Billing</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td>Bronze</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-12000 Gi, IOPS: 2 per GB</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Silver</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-12000 Gi, IOPS: 4 per GBS</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Gold</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-4000 Gi, IOPS: 10 per GB</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Custom</td>
-   <td>Performance</td>
-   <td>ext4</td>
-   <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
-   <td>Default: Hourly</td>
-   </tr>
-   </tbody>
-   </table>
-
-
-
-
 
