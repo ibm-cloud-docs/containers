@@ -235,7 +235,7 @@ Before you begin:
 
 2.  Review the details for each of the pre-defined storage classes. 
 
-    - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage).  that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
+    - **Bronze, silver, and gold storage classes:** 
       <table>
       <caption>Block storage storage classes</caption>
       <thead>
@@ -271,30 +271,30 @@ Before you begin:
       <td>20-4000 Gi</td>
       <td>Hourly</td>
       </tr>
-     </tbody>
-     </table>
+      </tbody>
+      </table>
      
-   - **Custom storage class:**   
-     <table>
-     <caption>Block storage storage classes</caption>
-     <thead>
-     <th>Name</th>
-     <th>Type</th>
-     <th>File system</th>
-     <th>Size and IOPSrange</th>
-     <th>Billing</th>
-     </thead>
-     <tbody>
-     <tr>
-     <td>Custom</td>
-     <td>Performance</td>
-     <td>ext4</td>
-     <td></td>
-     <td>Size: 20-39 Gi, IOPS: 100-1000</br>Size:40-79 Gi, IOPS: 100-2000</br>Size: 80-99 Gi, IOPS: 100-4000</br>Size: 100-499 Gi, IOPS: 100-6000</br>Size: 500-999 Gi, IOPS: 100-10000</br>Size: 1000-1999 Gi, IOPS: 100-20000</br>Size: 2000-2999 Gi, IOPS: 200-40000</br>Size: 3000-3999 Gi, IOPS: 200-48000</br>Size: 4000-7999 Gi, IOPS: 300-48000</br>Size: 8000-9999 Gi, IOPS: 500-48000</br>Size: 10000-12000 Gi, IOPS: 1000-48000</td>
-    <td>Hourly</td>
-    </tr>
-    </tbody>
-    </table>
+    - **Custom storage class:**   
+      <table>
+      <caption>Block storage storage classes</caption>
+      <thead>
+      <th>Name</th>
+      <th>Type</th>
+      <th>File system</th>
+      <th>Size and IOPSrange</th>
+      <th>Billing</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Custom</td>
+      <td>Performance</td>
+      <td>ext4</td>
+      <td></td>
+      <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
+      <td>Hourly</td>
+      </tr>
+      </tbody>
+      </table>
 
 3. Choose the size 
 
