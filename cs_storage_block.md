@@ -241,8 +241,7 @@ Before you begin:
    <th>Name</th>
    <th>Type</th>
    <th>File system</th>
-   <th>IOPS per GB</th>
-   <th>Size range</th>
+   <th>Size and IOPS</th>
    <th>Billing</th>
    </thead>
    <tbody>
@@ -250,50 +249,33 @@ Before you begin:
    <td>Bronze</td>
    <td>Endurance</td>
    <td>ext4</td>
-   <td>2 IOPS</td>
-   <td>20-12000 Gi</td>
+   <td>Size: 20-12000 Gi, IOPS: 2 per GB</td>
    <td>Default: Hourly</td>
    </tr>
    <tr>
-      <td>Silver</td>
-      <td>Endurance</td>
-      <td>ext4</td>
-      <td>4 IOPS</td>
-      <td>20-12000 Gi</td>
-      <td>Default: Hourly</td>
-      </tr>
-      <tr>
-      <td>Gold</td>
-      <td>Endurance</td>
-      <td>ext4</td>
-      <td>10 IOPS</td>
-      <td>20-4000 Gi</td>
-      <td>Default: Hourly</td>
-      </tr>
-      </tbody>
-      </table>
+   <td>Silver</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>Size: 20-12000 Gi, IOPS: 4 per GBS</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
+   <td>Gold</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>Size: 20-4000 Gi, IOPS: 10 per GB</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
+   <td>Custom</td>
+   <td>Performance</td>
+   <td>ext4</td>
+   <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
+   <td>Default: Hourly</td>
+   </tr>
+   </tbody>
+   </table>
      
-    - **Custom storage class:**   
-      <table>
-      <caption>Block storage storage classes</caption>
-      <thead>
-      <th>Name</th>
-      <th>Type</th>
-      <th>File system</th>
-      <th>Size and IOPS range</th>
-      <th>Billing</th>
-      </thead>
-      <tbody>
-      <tr>
-      <td>Custom</td>
-      <td>Performance</td>
-      <td>ext4</td>
-      <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
-      <td>Default: Hourly</td>
-      </tr>
-      </tbody>
-      </table>
-
 3. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
    - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. 
