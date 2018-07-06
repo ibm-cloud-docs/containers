@@ -233,8 +233,6 @@ Before you begin:
     {: screen}
 
 2. Review the details for each of the pre-defined storage classes. 
-
-   - **Bronze, silver, and gold storage classes:** 
    <table>
    <caption>Block storage storage classes</caption>
    <thead>
@@ -282,7 +280,7 @@ Before you begin:
 
 4. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
-    - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
+   - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 ## Customizing a storage class for XFS block storage
 {: #custom_storageclass}
