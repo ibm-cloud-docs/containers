@@ -211,7 +211,7 @@ Before you begin:
 {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage.
 {: shortdesc}
 
-1.  List available storage classes.
+1. List available storage classes.
     ```
     kubectl get storageclasses | grep block
     ```
@@ -232,29 +232,29 @@ Before you begin:
     ```
     {: screen}
 
-2.  Review the details for each of the pre-defined storage classes. 
+2. Review the details for each of the pre-defined storage classes. 
 
-    - **Bronze, silver, and gold storage classes:** 
-      <table>
-      <caption>Block storage storage classes</caption>
-      <thead>
-      <th>Name</th>
-      <th>Type</th>
-      <th>File system</th>
-      <th>IOPS per GB</th>
-      <th>Size range</th>
-      <th>Billing</th>
-      </thead>
-      <tbody>
-      <tr>
-      <td>Bronze</td>
-      <td>Endurance</td>
-      <td>ext4</td>
-      <td>2 IOPS</td>
-      <td>20-12000 Gi</td>
-      <td>Default: Hourly</td>
-      </tr>
-      <tr>
+   - **Bronze, silver, and gold storage classes:** 
+   <table>
+   <caption>Block storage storage classes</caption>
+   <thead>
+   <th>Name</th>
+   <th>Type</th>
+   <th>File system</th>
+   <th>IOPS per GB</th>
+   <th>Size range</th>
+   <th>Billing</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Bronze</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>2 IOPS</td>
+   <td>20-12000 Gi</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
       <td>Silver</td>
       <td>Endurance</td>
       <td>ext4</td>
