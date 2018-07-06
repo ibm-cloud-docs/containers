@@ -37,18 +37,23 @@ When you create a new Kubernetes cluster, you receive an error message similar t
 
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
-Creating a standard cluster requires that you have either a Pay-As-You-Go account
-that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the {{site.data.keyword.containerlong}} CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+Creating a standard cluster requires that you have either a 
+Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) account term 
+or that you have used the {{site.data.keyword.containerlong}} CLI 
+to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 ```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 
+'Item' must be ordered with permission.
 ```
 {: screen}
 
 ```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 
+The user does not have the necessary {{site.data.keyword.Bluemix_notm}} 
+Infrastructure permissions to add servers
 ```
 {: screen}
 
