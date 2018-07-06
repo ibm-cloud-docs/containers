@@ -205,11 +205,13 @@ Before you begin:
 <br />
 
 
-## Choosing a pre-defined storage class 
+## Deciding on the block storage specifications
 {: #predefined_storageclass}
 
 {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage.
 {: shortdesc}
+
+Every storage class specifies the type of block storage that you provision, including available size, IOPS, and file system.  
 
 1. List available storage classes.
     ```
@@ -233,46 +235,16 @@ Before you begin:
     {: screen}
 
 2. Review the details for each of the pre-defined storage classes. 
-   <table>
-   <caption>Block storage storage classes</caption>
-   <thead>
-   <th>Name</th>
-   <th>Type</th>
-   <th>File system</th>
-   <th>Size and IOPS</th>
-   <th>Billing</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td>Bronze</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-12000 Gi, IOPS: 2 per GB</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Silver</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-12000 Gi, IOPS: 4 per GBS</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Gold</td>
-   <td>Endurance</td>
-   <td>ext4</td>
-   <td>Size: 20-4000 Gi, IOPS: 10 per GB</td>
-   <td>Default: Hourly</td>
-   </tr>
-   <tr>
-   <td>Custom</td>
-   <td>Performance</td>
-   <td>ext4</td>
-   <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
-   <td>Default: Hourly</td>
-   </tr>
-   </tbody>
-   </table>
+   
+   |Name | Type | File system | Size and IOPS | Billing|
+   |----|----|--|---------------------------------|----|
+   |Bronze|Endurance|ext4|Size: 20-12000 Gi, IOPS: 2 per GB|Default: hourly|
+   |Silver|Endurance|ext4|Size: 20-12000 Gi, IOPS: 4 per GB|Default: hourly|
+   |Gold|Endurance|ext4|Size: 20-4000 Gi, IOPS: 10 per GB|Default: hourly|
+   |Custom|Performance|ext4|<ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul>|Default: hourly|
+   
+   Not finding what you are looking for? You can create your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
+   {: tip}
      
 3. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
@@ -281,64 +253,7 @@ Before you begin:
 4. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
    - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
-
-## Customizing a storage class for XFS block storage
-{: #custom_storageclass}
-
-The storage classes that are pre-defined by {{site.data.keyword.containerlong}} provision block storage with an `ext4` file system by default. You can create a customized storage class to provision block storage with an `XFS` file system.
-{: shortdesc}
-
-Before you begin:
-- [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
-- Install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block).
-
-To create a customized storage class:
-1. Create a yaml file for your customized storage class.
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: ibmc-block-custom-xfs
-     labels:
-       addonmanager.kubernetes.io/mode: Reconcile
-   provisioner: ibm.io/ibmc-block
-   parameters:
-     type: "Performance"
-     sizeIOPSRange: |-
-       [20-39]Gi:[100-1000]
-       [40-79]Gi:[100-2000]
-       [80-99]Gi:[100-4000]
-       [100-499]Gi:[100-6000]
-       [500-999]Gi:[100-10000]
-       [1000-1999]Gi:[100-20000]
-       [2000-2999]Gi:[200-40000]
-       [3000-3999]Gi:[200-48000]
-       [4000-7999]Gi:[300-48000]
-       [8000-9999]Gi:[500-48000]
-       [10000-12000]Gi:[1000-48000]
-     fsType: "xfs"
-     reclaimPolicy: "Delete"
-     classVersion: "2"
-   ```
-   {: codeblock}
-
-   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`.
-   {: tip}
-
-2. Create the storage class in your cluster.
-   ```
-   kubectl apply -f <filepath/xfs_storageclass.yaml>
-   ```
-   {: pre}
-
-3. Verify that the customized storage class was created.
-   ```
-   kubectl get storageclasses
-   ```
-   {: pre}
-
-4. Provision XFS block storage with your customized storage class.
-
+   
 <br />
 
 
@@ -354,7 +269,7 @@ Create a persistent volume claim (PVC) to dynamically provision block storage fo
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
-- [Decide on a pre-defined storage class](#predefined_storageclass) or create a customized storage class. 
+- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass). 
 
 To add block storage:
 
@@ -571,15 +486,95 @@ To add block storage:
          ReadOnly:	false
      ```
      {: screen}
+     
+<br />
 
+
+
+## Sample customized storage classes
+{: #custom_storageclass}
+
+### Block storage with an `XFS` file system
+{: #xfs}
+
+The following example creates a storage class that is named `ibmc-block-custom-xfs` and that provisions performance block storage with an `XFS` file system. 
+
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-custom-xfs
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+provisioner: ibm.io/ibmc-block
+parameters:
+  type: "Performance"
+  sizeIOPSRange: |-
+    [20-39]Gi:[100-1000]
+    [40-79]Gi:[100-2000]
+    [80-99]Gi:[100-4000]
+    [100-499]Gi:[100-6000]
+    [500-999]Gi:[100-10000]
+    [1000-1999]Gi:[100-20000]
+    [2000-2999]Gi:[200-40000]
+    [3000-3999]Gi:[200-48000]
+    [4000-7999]Gi:[300-48000]
+    [8000-9999]Gi:[500-48000]
+    [10000-12000]Gi:[1000-48000]
+  fsType: "xfs"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
+```
+{: codeblock}
+
+<br />
 
 
 ## What needs a new home
 
 The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
 
+<table>
+   <caption>Block storage storage classes</caption>
+   <thead>
+   <th>Name</th>
+   <th>Type</th>
+   <th>File system</th>
+   <th>Size and IOPS</th>
+   <th>Billing</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Bronze</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>Size: 20-12000 Gi, IOPS: 2 per GB</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
+   <td>Silver</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>Size: 20-12000 Gi, IOPS: 4 per GBS</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
+   <td>Gold</td>
+   <td>Endurance</td>
+   <td>ext4</td>
+   <td>Size: 20-4000 Gi, IOPS: 10 per GB</td>
+   <td>Default: Hourly</td>
+   </tr>
+   <tr>
+   <td>Custom</td>
+   <td>Performance</td>
+   <td>ext4</td>
+   <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
+   <td>Default: Hourly</td>
+   </tr>
+   </tbody>
+   </table>
 
-    **Tip:** If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.
 
 
 
