@@ -1812,7 +1812,8 @@ Route traffic to Istio-managed services.
 <dl>
 <dt>Description</dt>
 <dd>
-If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
+<strong>Note</strong>: This annotation works only with Istio 0.7 and earlier.
+<br>If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
 <br><br>In the Ingress resource for the cluster ALB, you must:
   <ul>
     <li>specify the `istio-services` annotation</li>
