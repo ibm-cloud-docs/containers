@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-07-06"
 
 ---
 
@@ -33,7 +33,7 @@ If you have a more general issue, try out [cluster debugging](cs_troubleshoot.ht
 {: #cs_credentials}
 
 {: tsSymptoms}
-When you create a new Kubernetes cluster, you receive the following message.
+When you create a new Kubernetes cluster, you receive an error message similar to one of the following.
 
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
@@ -42,13 +42,27 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 ```
 {: screen}
 
+```
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
+```
+{: screen}
+
+```
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
+```
+{: screen}
+
 {: tsCauses}
 {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration.
 
-Users with other {{site.data.keyword.Bluemix_notm}} account types or users that have an existing IBM Cloud infrastructure (SoftLayer) account that is not linked to their {{site.data.keyword.Bluemix_notm}} account must configure their accounts to create standard clusters.
+Users with other {{site.data.keyword.Bluemix_notm}} account types or users that have an existing IBM Cloud infrastructure (SoftLayer) account that is not linked to their {{site.data.keyword.Bluemix_notm}} account must configure their accounts to create standard clusters. 
+
+If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
 {: tsResolve}
-Configuring your account to access the IBM Cloud infrastructure (SoftLayer) portfolio depends on the type of account that you have. Review the table to find available options for each account type.
+The account admin must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
+
+
 
 |Account type|Description|Available options to create a standard cluster|
 |------------|-----------|----------------------------------------------|
@@ -57,6 +71,7 @@ Configuring your account to access the IBM Cloud infrastructure (SoftLayer) port
 |Subscription accounts|Subscription accounts are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.|<strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually [set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account](cs_cli_reference.html#cs_credentials_set). Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually [set IBM Cloud infrastructure (SoftLayer) credentials](cs_cli_reference.html#cs_credentials_set) for your {{site.data.keyword.Bluemix_notm}} account.<p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p>|
 |IBM Cloud infrastructure (SoftLayer) accounts, no {{site.data.keyword.Bluemix_notm}} account|To create a standard cluster, you must have an {{site.data.keyword.Bluemix_notm}} account.|<p>[Create a Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, an IBM Cloud infrastructure (SoftLayer) account is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p>|
 {: caption="Standard cluster creation options by account type" caption-side="top"}
+
 
 
 <br />

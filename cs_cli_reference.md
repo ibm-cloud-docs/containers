@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-02"
+lastupdated: "2018-07-06"
 
 ---
 
@@ -1645,7 +1645,13 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) account username. This value is required.</dd>
+   <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. **Note**: The infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
+   <ol><li>Log in to the [{{site.data.keyword.Bluemix_notm}} portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).</li>
+   <li>From the expanding menu, select **Infrastructure**.</li>
+   <li>From the menu bar, select **Account** > **Users** > **User List**.</li>
+   <li>For the user that you want to view, click the **IBMid or Username**.</li>
+   <li>In the **API Access Information** section, view the **API Username**.</li>
+   </ol></dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
