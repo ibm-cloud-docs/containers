@@ -211,7 +211,6 @@ Before you begin:
 {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage.
 {: shortdesc}
 
-
 1.  List available storage classes.
     ```
     kubectl get storageclasses | grep block
@@ -253,7 +252,7 @@ Before you begin:
       <td>ext4</td>
       <td>2 IOPS</td>
       <td>20-12000 Gi</td>
-      <td>Hourly</td>
+      <td>Default: Hourly</td>
       </tr>
       <tr>
       <td>Silver</td>
@@ -261,7 +260,7 @@ Before you begin:
       <td>ext4</td>
       <td>4 IOPS</td>
       <td>20-12000 Gi</td>
-      <td>Hourly</td>
+      <td>Default: Hourly</td>
       </tr>
       <tr>
       <td>Gold</td>
@@ -269,7 +268,7 @@ Before you begin:
       <td>ext4</td>
       <td>10 IOPS</td>
       <td>20-4000 Gi</td>
-      <td>Hourly</td>
+      <td>Default: Hourly</td>
       </tr>
       </tbody>
       </table>
@@ -281,7 +280,7 @@ Before you begin:
       <th>Name</th>
       <th>Type</th>
       <th>File system</th>
-      <th>Size and IOPSrange</th>
+      <th>Size and IOPS range</th>
       <th>Billing</th>
       </thead>
       <tbody>
@@ -290,16 +289,20 @@ Before you begin:
       <td>Performance</td>
       <td>ext4</td>
       <td><ul><li>Size: 20-39 Gi, IOPS: 100-1000</li><li>Size:40-79 Gi, IOPS: 100-2000</li><li>Size: 80-99 Gi, IOPS: 100-4000</li><li>Size: 100-499 Gi, IOPS: 100-6000</li><li>Size: 500-999 Gi, IOPS: 100-10000</li><li>Size: 1000-1999 Gi, IOPS: 100-20000</li><li>Size: 2000-2999 Gi, IOPS: 200-40000</li><li>Size: 3000-3999 Gi, IOPS: 200-48000</li><li>Size: 4000-7999 Gi, IOPS: 300-48000</li><li>Size: 8000-9999 Gi, IOPS: 500-48000</li><li>Size: 10000-12000 Gi, IOPS: 1000-48000</li></ul></td>
-      <td>Hourly</td>
+      <td>Default: Hourly</td>
       </tr>
       </tbody>
       </table>
 
-3. Choose the size 
+3. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
+   - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
+   - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. 
 
-2. Review the pricing for block storage. 
+4. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
+   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
+    - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
-2. Decide if you want to keep the data or remove it
+
 
 
 
@@ -379,134 +382,16 @@ Create a persistent volume claim (PVC) to dynamically provision block storage fo
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
+- [Decide on a pre-defined storage class](#predefined_storageclass) or create a customized storage class. 
 
 To add block storage:
 
-1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage. To change the pre-defined values, consider creating a customized storage class.
-    ```
-    kubectl get storageclasses | grep block
-    ```
-    {: pre}
+1.  Decide if you want to be billed on an hourly or monthly basis. By default, you are billed hourly.
 
-    Example output: 
-    ```
-    $ kubectl get storageclasses
-    NAME                         TYPE
-    ibmc-block-custom            ibm.io/ibmc-block
-    ibmc-block-bronze            ibm.io/ibmc-block
-    ibmc-block-gold              ibm.io/ibmc-block
-    ibmc-block-silver            ibm.io/ibmc-block
-    ibmc-block-retain-bronze     ibm.io/ibmc-block
-    ibmc-block-retain-silver     ibm.io/ibmc-block
-    ibmc-block-retain-gold       ibm.io/ibmc-block
-    ibmc-block-retain-custom     ibm.io/ibmc-block
-    ```
-    {: screen}
-    
-    To see the details of a storage class, run `kubectl describe storageclass <storageclass_name>`.
-    {: tip}
-
-2.  Decide if you want to keep your data and the block storage after you delete the PVC.
-    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
-    - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
-
-3.  Decide on the storage type that you want to provision. 
-    - **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
-
-    <table>
-         <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
-         <thead>
-         <th>Storage class</th>
-         <th>IOPS per gigabyte</th>
-         <th>Size range in gigabytes</th>
-         </thead>
-         <tbody>
-         <tr>
-         <td>Bronze (default)</td>
-         <td>2 IOPS/GB</td>
-         <td>20-12000 Gi</td>
-         </tr>
-         <tr>
-         <td>Silver</td>
-         <td>4 IOPS/GB</td>
-         <td>20-12000 Gi</td>
-         </tr>
-         <tr>
-         <td>Gold</td>
-         <td>10 IOPS/GB</td>
-         <td>20-4000 Gi</td>
-         </tr>
-         </tbody></table>
-
-    <p>**Example command to show the details of a storage class**:</p>
-
-    <pre class="pre"><code>kubectl describe storageclasses ibmc-file-silver</code></pre>
-
-4.  **If you choose the custom storage class**: You get [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have more control over choosing the combination of IOPS and size. For example, if you select a size of 40Gi for your PVC, you can choose IOPS that is a multiple of 100 that is in the range of 100 - 2000 IOPS. The IOPS that you choose is static and does not scale with the size of the storage. If you choose 40Gi with 100 IOPS, your total IOPS remains 100. The following table shows you what range of IOPS you can choose depending on the size that you select.
-
-    <table>
-         <caption>Table of custom storage class size ranges and IOPS</caption>
-         <thead>
-         <th>Size range in gigabytes</th>
-         <th>IOPS range in multiples of 100</th>
-         </thead>
-         <tbody>
-         <tr>
-         <td>20-39 Gi</td>
-         <td>100-1000 IOPS</td>
-         </tr>
-         <tr>
-         <td>40-79 Gi</td>
-         <td>100-2000 IOPS</td>
-         </tr>
-         <tr>
-         <td>80-99 Gi</td>
-         <td>100-4000 IOPS</td>
-         </tr>
-         <tr>
-         <td>100-499 Gi</td>
-         <td>100-6000 IOPS</td>
-         </tr>
-         <tr>
-         <td>500-999 Gi</td>
-         <td>100-10000 IOPS</td>
-         </tr>
-         <tr>
-         <td>1000-1999 Gi</td>
-         <td>100-20000 IOPS</td>
-         </tr>
-         <tr>
-         <td>2000-2999 Gi</td>
-         <td>200-40000 IOPS</td>
-         </tr>
-         <tr>
-         <td>3000-3999 Gi</td>
-         <td>200-48000 IOPS</td>
-         </tr>
-         <tr>
-         <td>4000-7999 Gi</td>
-         <td>300-48000 IOPS</td>
-         </tr>
-         <tr>
-         <td>8000-9999 Gi</td>
-         <td>500-48000 IOPS</td>
-         </tr>
-         <tr>
-         <td>10000-12000 Gi</td>
-         <td>1000-48000 IOPS</td>
-         </tr>
-         </tbody></table>
-
-    <p>**Example command to show the details for a custom storage class**:</p>
-
-    <pre class="pre"><code>kubectl describe storageclasses ibmc-file-retain-custom</code></pre>
-
-5.  Decide if you want to be billed on an hourly or monthly basis. By default, you are billed monthly.
-
-6.  Create a configuration file to define your PVC and save the configuration as a `.yaml` file.
+2.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
     -  **Example for bronze, silver, gold storage classes**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. If you want to create a PVC to mount block storage to your cluster, make sure to enter `ReadWriteOnce` in the `accessModes` section.
+       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. 
 
        ```
        apiVersion: v1
@@ -514,20 +399,20 @@ To add block storage:
        metadata:
          name: mypvc
          annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
+           volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
        spec:
          accessModes:
-           - ReadWriteMany
+           - ReadWriteOnce
          resources:
            requests:
              storage: 24Gi
         ```
         {: codeblock}
 
-    -  **Example for custom storage classes**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed at the default of `"monthly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`. If you want to create a PVC to mount block storage to your cluster, make sure to enter `ReadWriteOnce` in the `accessModes` section.
+    -  **Example for using the custom storage class**:
+       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-block-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`. 
 
        ```
        apiVersion: v1
@@ -535,9 +420,9 @@ To add block storage:
        metadata:
          name: mypvc
          annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+           volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
-           billingType: "monthly"
+           billingType: "hourly"
        spec:
          accessModes:
            - ReadWriteMany
