@@ -249,7 +249,83 @@ Every storage class specifies the type of block storage that you provision, incl
      
 3. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more IOPS your storage has, the faster it processes read and write operations. 
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
+     <table>
+         <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
+         <thead>
+         <th>Storage class</th>
+         <th>IOPS per gigabyte</th>
+         <th>Size range in gigabytes</th>
+         </thead>
+         <tbody>
+         <tr>
+         <td>Bronze (default)</td>
+         <td>2 IOPS/GB</td>
+         <td>20-12000 Gi</td>
+         </tr>
+         <tr>
+         <td>Silver</td>
+         <td>4 IOPS/GB</td>
+         <td>20-12000 Gi</td>
+         </tr>
+         <tr>
+         <td>Gold</td>
+         <td>10 IOPS/GB</td>
+         <td>20-4000 Gi</td>
+         </tr>
+         </tbody></table>
    - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. 
+     <table>
+         <caption>Table of custom storage class size ranges and IOPS</caption>
+         <thead>
+         <th>Size range in gigabytes</th>
+         <th>IOPS range in multiples of 100</th>
+         </thead>
+         <tbody>
+         <tr>
+         <td>20-39 Gi</td>
+         <td>100-1000 IOPS</td>
+         </tr>
+         <tr>
+         <td>40-79 Gi</td>
+         <td>100-2000 IOPS</td>
+         </tr>
+         <tr>
+         <td>80-99 Gi</td>
+         <td>100-4000 IOPS</td>
+         </tr>
+         <tr>
+         <td>100-499 Gi</td>
+         <td>100-6000 IOPS</td>
+         </tr>
+         <tr>
+         <td>500-999 Gi</td>
+         <td>100-10000 IOPS</td>
+         </tr>
+         <tr>
+         <td>1000-1999 Gi</td>
+         <td>100-20000 IOPS</td>
+         </tr>
+         <tr>
+         <td>2000-2999 Gi</td>
+         <td>200-40000 IOPS</td>
+         </tr>
+         <tr>
+         <td>3000-3999 Gi</td>
+         <td>200-48000 IOPS</td>
+         </tr>
+         <tr>
+         <td>4000-7999 Gi</td>
+         <td>300-48000 IOPS</td>
+         </tr>
+         <tr>
+         <td>8000-9999 Gi</td>
+         <td>500-48000 IOPS</td>
+         </tr>
+         <tr>
+         <td>10000-12000 Gi</td>
+         <td>1000-48000 IOPS</td>
+         </tr>
+         </tbody></table>
 
 4. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the actual storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. 
