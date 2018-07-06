@@ -234,51 +234,65 @@ Before you begin:
     {: screen}
 
 2.  Review the details for each of the pre-defined storage classes. 
-    <table>
-    <caption>Block storage storage classes</caption>
-    <thead>
-    <th>Name</th>
-    <th>Type</th>
-    <th>File system</th>
-    <th>IOPS</th>
-    <th>Size</th>
-    <th>Billing</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Bronze</td>
-    <td>Endurance</td>
-    <td>ext4</td>
-    <td>2 IOPS per GB</td>
-    <td>20-12000 Gi</td>
-    <td>Hourly</td>
-    </tr>
-    <tr>
-    <td>Silver</td>
-    <td>Endurance</td>
-    <td>ext4</td>
-    <td>4 IOPS per GB</td>
-    <td>20-12000 Gi</td>
-    <td>Hourly</td>
-    </tr>
-    <tr>
-    <td>Gold</td>
-    <td>Endurance</td>
-    <td>ext4</td>
-    <td>10 IOPS per GB</td>
-    <td>20-4000 Gi</td>
-    <td>Hourly</td>
-    </tr>
-    <tr>
-    <td>Custom</td>
-    <td>Performance</td>
-    <td>ext4</td>
-    <td></td>
-    <td><table><thead><th>Size range in gigabytes</th><th>IOPS range in multiples of 100</th></thead><tbody><tr><td>20-39 Gi</td><td>100-1000 IOPS</td></tr><tr><td>40-79 Gi</td><td>100-2000 IOPS</td></tr><tr><td>80-99 Gi</td><td>100-4000 IOPS</td></tr><tr><td>100-499 Gi</td><td>100-6000 IOPS</td></tr><tr><td>500-999 Gi</td><td>100-10000 IOPS</td></tr><tr><td>1000-1999 Gi</td><td>100-20000 IOPS</td></tr><tr><td>2000-2999 Gi</td><td>200-40000 IOPS</td></tr><tr><td>3000-3999 Gi</td><td>200-48000 IOPS</td></tr><tr><td>4000-7999 Gi</td><td>300-48000 IOPS</td></tr><tr><td>8000-9999 Gi</td><td>500-48000 IOPS</td></tr><tr><td>10000-12000 Gi</td><td>1000-48000 IOPS</td></tr></tbody></table></td>
+
+    - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage).  that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
+      <table>
+      <caption>Block storage storage classes</caption>
+      <thead>
+      <th>Name</th>
+      <th>Type</th>
+      <th>File system</th>
+      <th>IOPS per GB</th>
+      <th>Size range</th>
+      <th>Billing</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Bronze</td>
+      <td>Endurance</td>
+      <td>ext4</td>
+      <td>2 IOPS</td>
+      <td>20-12000 Gi</td>
+      <td>Hourly</td>
+      </tr>
+      <tr>
+      <td>Silver</td>
+      <td>Endurance</td>
+      <td>ext4</td>
+      <td>4 IOPS</td>
+      <td>20-12000 Gi</td>
+      <td>Hourly</td>
+      </tr>
+      <tr>
+      <td>Gold</td>
+      <td>Endurance</td>
+      <td>ext4</td>
+      <td>10 IOPS</td>
+      <td>20-4000 Gi</td>
+      <td>Hourly</td>
+      </tr>
+     </tbody>
+     </table>
+     
+   - **Custom storage class:**   
+     <table>
+     <caption>Block storage storage classes</caption>
+     <thead>
+     <th>Name</th>
+     <th>Type</th>
+     <th>File system</th>
+     <th>Size and IOPSrange</th>
+     <th>Billing</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td>Custom</td>
+     <td>Performance</td>
+     <td>ext4</td>
+     <td></td>
+     <td>Size: 20-39 Gi, IOPS: 100-1000</br>Size:40-79 Gi, IOPS: 100-2000</br>Size: 80-99 Gi, IOPS: 100-4000</br>Size: 100-499 Gi, IOPS: 100-6000</br>Size: 500-999 Gi, IOPS: 100-10000</br>Size: 1000-1999 Gi, IOPS: 100-20000</br>Size: 2000-2999 Gi, IOPS: 200-40000</br>Size: 3000-3999 Gi, IOPS: 200-48000</br>Size: 4000-7999 Gi, IOPS: 300-48000</br>Size: 8000-9999 Gi, IOPS: 500-48000</br>Size: 10000-12000 Gi, IOPS: 1000-48000</td>
    <td>Hourly</td>
    </tr>
-   </tbody>
-   </table>
 
 3. Choose the size 
 
@@ -396,7 +410,7 @@ To add block storage:
     - If you want the PV, the data, and your block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 3.  Decide on the storage type that you want to provision. 
-    - If you want**If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
+    - **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
 
     <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
