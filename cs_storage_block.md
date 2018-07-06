@@ -205,15 +205,15 @@ Before you begin:
 <br />
 
 
-## Deciding on the block storage specifications
+## Deciding on block storage configuration
 {: #predefined_storageclass}
 
-{{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage.
+{{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage with a specific configuration.
 {: shortdesc}
 
 Every storage class specifies the type of block storage that you provision, including available size, IOPS, and file system.  
 
-1. List available storage classes.
+1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
     kubectl get storageclasses | grep block
     ```
