@@ -236,8 +236,8 @@ Every storage class specifies the type of block storage that you provision, incl
     {: screen}
 
 2. Review the details for each of the pre-defined storage classes. 
-   |Name|Type|File system|Size and IOPS|Billing|
-   |----|----|--|---------------------------------|----|
+   |Name|Type|File system|Billing|Size and IOPS|
+   |----|----|-----|-----|---------------------|
    |Bronze|Endurance|ext4|Size: 20-12000 Gi, IOPS: 2 per GB|Default: hourly|
    |Silver|Endurance|ext4|Size: 20-12000 Gi, IOPS: 4 per GB|Default: hourly|
    |Gold|Endurance|ext4|Size: 20-4000 Gi, IOPS: 10 per GB|Default: hourly|
