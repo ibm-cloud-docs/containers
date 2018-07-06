@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-05"
+lastupdated: "2018-07-06"
 
 ---
 
@@ -203,6 +203,92 @@ Before you begin:
    The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
 
 <br />
+
+
+## Choosing a pre-defined storage class 
+{: #predefined_storageclass}
+
+{{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage.
+{: shortdesc}
+
+
+1.  List available storage classes.
+    ```
+    kubectl get storageclasses | grep block
+    ```
+    {: pre}
+
+    Example output: 
+    ```
+    $ kubectl get storageclasses
+    NAME                         TYPE
+    ibmc-block-custom            ibm.io/ibmc-block
+    ibmc-block-bronze            ibm.io/ibmc-block
+    ibmc-block-gold              ibm.io/ibmc-block
+    ibmc-block-silver            ibm.io/ibmc-block
+    ibmc-block-retain-bronze     ibm.io/ibmc-block
+    ibmc-block-retain-silver     ibm.io/ibmc-block
+    ibmc-block-retain-gold       ibm.io/ibmc-block
+    ibmc-block-retain-custom     ibm.io/ibmc-block
+    ```
+    {: screen}
+
+2.  Review the details for each of the pre-defined storage classes. 
+    <table>
+    <caption>Block storage storage classes</caption>
+    <thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>File system</th>
+    <th>IOPS</th>
+    <th>Size</th>
+    <th>Billing</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Bronze</td>
+    <td>Endurance</td>
+    <td>ext4</td>
+    <td>2 IOPS per GB</td>
+    <td>20-12000 Gi</td>
+    <td>Hourly</td>
+    </tr>
+    <tr>
+    <td>Silver</td>
+    <td>Endurance</td>
+    <td>ext4</td>
+    <td>4 IOPS per GB</td>
+    <td>20-12000 Gi</td>
+    <td>Hourly</td>
+    </tr>
+    <tr>
+    <td>Gold</td>
+    <td>Endurance</td>
+    <td>ext4</td>
+    <td>10 IOPS per GB</td>
+    <td>20-4000 Gi</td>
+    <td>Hourly</td>
+    </tr>
+    <tr>
+    <td>Custom</td>
+    <td>Performance</td>
+    <td>ext4</td>
+    <td></td>
+    <td><table><thead><th>Size range in gigabytes</th><th>IOPS range in multiples of 100</th></thead><tbody><tr><td>20-39 Gi</td><td>100-1000 IOPS</td></tr><tr><td>40-79 Gi</td><td>100-2000 IOPS</td></tr><tr><td>80-99 Gi</td><td>100-4000 IOPS</td></tr><tr><td>100-499 Gi</td><td>100-6000 IOPS</td></tr><tr><td>500-999 Gi</td><td>100-10000 IOPS</td></tr><tr><td>1000-1999 Gi</td><td>100-20000 IOPS</td></tr><tr><td>2000-2999 Gi</td><td>200-40000 IOPS</td></tr><tr><td>3000-3999 Gi</td><td>200-48000 IOPS</td></tr><tr><td>4000-7999 Gi</td><td>300-48000 IOPS</td></tr><tr><td>8000-9999 Gi</td><td>500-48000 IOPS</td></tr><tr><td>10000-12000 Gi</td><td>1000-48000 IOPS</td></tr></tbody></table></td>
+   <td>Hourly</td>
+   </tr>
+   </tbody>
+   </table>
+
+3. Choose the size 
+
+2. Review the pricing for block storage. 
+
+2. Decide if you want to keep the data or remove it
+
+
+
+The storage class determine the type of storage, the file system, and the size and IOPS range that To change the pre-defined values, consider creating a customized storage class.
 
 
 
