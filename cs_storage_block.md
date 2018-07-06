@@ -259,7 +259,7 @@ Every storage class specifies the type of block storage that you provision, incl
          </thead>
          <tbody>
          <tr>
-         <td>Bronze (default)</td>
+         <td>Bronze</td>
          <td>2 IOPS/GB</td>
          <td>20-12000 Gi</td>
          </tr>
