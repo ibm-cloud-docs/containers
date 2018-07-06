@@ -171,6 +171,8 @@ Before you begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster. 
 - Make sure that you do not have any PVCs or PVs in your cluster that use block storage.
 
+To remove the plug-in: 
+
 1. Find the name of the block storage helm chart that you installed in your cluster.
    ```
    helm ls | grep ibmcloud-block-storage-plugin
