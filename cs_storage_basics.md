@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-03"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -19,3 +19,15 @@ lastupdated: "2018-07-03"
 
 
 # Understanding Kubernetes storage basics
+
+## Choosing your storage tier with storage classes
+
+## Customizing a storage class
+
+## Using persistent volume claims to add persistent storage
+
+## Preparing existing storage for multizone usage
+
+
+
+
