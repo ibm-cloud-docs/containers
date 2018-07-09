@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -356,6 +356,9 @@ Before you begin:
 To add block storage:
 
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
+
+    If you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, follow these steps to provision storage by using your customized storage class.
+    {: tip}
 
     -  **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. 
@@ -907,7 +910,31 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 ## Sample customized storage classes
 {: #custom_storageclass}
 
-### Block storage with an `XFS` file system
+### Specifying the zone for multizone clusters
+{: #multizone_yaml}
+
+The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these </br>
+
+To use a different storage class as your base, see the [storage class reference](#storageclass_reference). 
+
+```
+apiVersion: storage.k8s.io/v1beta1
+kind: StorageClass
+metadata:
+  name: ibmc-block-silver-mycustom-storageclass
+  labels:
+    kubernetes.io/cluster-service: "true"
+provisioner: ibm.io/ibmc-block
+parameters:
+  zone: "dal12"
+  type: "Endurance"
+  iopsPerGB: "4"
+  sizeRange: "[20-12000]Gi"
+reclaimPolicy: "Delete"
+```
+{: codeblock}
+
+### Mounting block storage with an `XFS` file system
 {: #xfs}
 
 The following example creates a storage class that is named `ibmc-block-custom-xfs` and that provisions performance block storage with an `XFS` file system. 
@@ -946,4 +973,10 @@ parameters:
 ## What needs a new home
 
 The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. 
+
+
+Before you begin:
+
+* Retrieve the cluster's zone in which you want to create the PV. > must go into the custom storage class
+
 
