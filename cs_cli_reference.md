@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -2137,6 +2137,7 @@ Update a logging filter. You can use this command to update a logging filter tha
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
+
 
 
 <br />
