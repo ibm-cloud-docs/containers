@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -88,4 +88,22 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </table>
 
 {: caption="Table. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
+
+
+## Adding storage in multizone clusters
+
+ou can create dynamic storage by following the same instructions to [create persistent storage in single-zone clusters](#create). By default, the zone in which your PV is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you add new zones to the cluster and submit a new PVC, the new zone is automatically added to the round-robin scheduling.
+{:shortdesc}
+
+**Can I share data across zones by using persistent storage?**
+
+No, NFS file or block persistent storage is not shared across zones. If you want to share data across zones, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+
+**I don't need to share data across zones, but I want persistent storage in each zone. How can I set up persistent storage in each zone?**
+
+If you dynamically provision NFS and block storage in a cluster that spans multiple zones, the storage is provisioned in only 1 zone that is selected on a round-robin basis. To provision persistent storage in all zones of your multizone cluster, repeat the steps to [provision dynamic storage](#create) for each zone. For example, if your cluster spans zones `dal10`, `dal12`, and `dal13`, the first time that you dynamically provision persistent storage might provision the storage in `dal10`. Create two more PVCs to cover `dal12` and `dal13`.
+
+**What if I want to specify the zone that the PV is created in?**
+
+You can choose to provision a PV in a specific zone, for example to set up storage for a pod that resides only in that zone. To do so, you must customize a storage class and apply its corresponding PVC in that zone. The specification in the PVC prevents it from being included in the default round-robin scheduling.
 
