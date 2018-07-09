@@ -114,10 +114,6 @@ The following table shows the different options that you have when configuring l
       <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`,  or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
     </tr>
     <tr>
-      <td><code><em>--verify-mode</em></code></td>
-      <td>When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the verification mode. Supported values are <code>verify-peer</code> and the default <code>verify-none</code>.</td>
-    </tr></staging>
-    <tr>
       <td><code><em>--skip-validation</em></code></td>
       <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
     </tr>
