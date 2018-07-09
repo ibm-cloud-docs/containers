@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -1727,7 +1727,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</td>
+  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code>, <code>client.crt</code>, and <code>client_key</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</td>
   </tr>
   </tbody></table>
 

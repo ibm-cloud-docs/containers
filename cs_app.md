@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -275,6 +275,8 @@ You can use the [`ingress.bluemix.net/ssl-services` annotation](cs_annotations.h
      type: Opaque
      data:
        trusted.crt: <ca_certificate>
+       client.crt: <client_certificate>
+       client.key: <client_key>
      ```
      {: codeblock}
 4. Create the certificate as a Kubernetes secret.
