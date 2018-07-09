@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-02"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -133,7 +133,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-2.  Confirm the location that the VLAN is located. In this example, the location is dal10.
+2.  Confirm the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> that the VLAN is located. In this example, the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> is dal10.
 
     ```
     ibmcloud cs vlans dal10
@@ -149,10 +149,10 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-3.  Create a cluster by using the location and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+3.  Create a cluster by using the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
-    ibmcloud cs cluster-create --location dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud cs cluster-create --<prod id="zone-lc">location<staging id="zone-lc">zone</staging> dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -168,7 +168,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location   Version
+    Name         ID                                   State      Created          Workers   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
     mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.8
     ```
     {: screen}
@@ -183,7 +183,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
     prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.8
     ```
     {: screen}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-05"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -96,7 +96,7 @@ Review the following information to decide what type of worker pools you want. A
 <dt>Why would I use physical machines (bare metal)?</dt>
 <dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud cs machine-types <<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
 <dt>Why would I use virtual machines?</dt>
 <dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
 <p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
@@ -210,7 +210,7 @@ A VLAN configures a group of worker nodes and pods as if they were attached to t
 
 For free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default during cluster creation.
 
-For standard clusters, the first time that you create a cluster in a location, a public VLAN and a private VLAN are automatically provisioned for you. For every subsequent cluster that you create in that location, you choose the VLANs that you want to use. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity, such as a [Virtual Router Appliance](cs_vpn.html#vyatta), so that the worker nodes can communicate with the master.
+For standard clusters, the first time that you create a cluster in a <prod id="zone-lc">location<staging id="zone-lc">zone</staging>, a public VLAN and a private VLAN are automatically provisioned for you. For every subsequent cluster that you create in that <prod id="zone-lc">location<staging id="zone-lc">zone</staging>, you choose the VLANs that you want to use. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity, such as a [Virtual Router Appliance](cs_vpn.html#vyatta), so that the worker nodes can communicate with the master.
 
 **Note**: If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
@@ -338,16 +338,16 @@ To create a cluster:
 
 6.  Create a cluster.
 
-    1.  **Standard clusters**: Review the locations that are available. The locations that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
+    1.  **Standard clusters**: Review the <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s that are available. The <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
 
         ```
-        ibmcloud cs locations
+        ibmcloud cs <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s
         ```
         {: pre}
         
         Your CLI output matches the [locations for the {{site.data.keyword.containerlong}} region](cs_regions.html#locations).
         
-    2.  **Standard clusters**: Choose a location and review the machine types available in that location. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
+    2.  **Standard clusters**: Choose a <prod id="zone-lc">location<staging id="zone-lc">zone</staging> and review the machine types available in that <prod id="zone-lc">location<staging id="zone-lc">zone</staging>. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
 
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
         -  **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
@@ -359,14 +359,14 @@ To create a cluster:
            {:tip}
 
         ```
-        ibmcloud cs machine-types <location>
+        ibmcloud cs machine-types <<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>
         ```
         {: pre}
 
     3.  **Standard clusters**: Check to see if a public and private VLAN already exists in the IBM Cloud infrastructure (SoftLayer) for this account.
 
         ```
-        ibmcloud cs vlans <location>
+        ibmcloud cs vlans <<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>
         ```
         {: pre}
 
@@ -386,7 +386,7 @@ To create a cluster:
     4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 30 days. When you create a standard cluster, by default, the worker node disks are encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
 
         ```
-        ibmcloud cs cluster-create --location dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
+        ibmcloud cs cluster-create --<prod id="zone-lc">location<staging id="zone-lc">zone</staging> dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
         ```
         {: pre}
 
@@ -408,12 +408,12 @@ To create a cluster:
         <td>The command to create a cluster in your {{site.data.keyword.Bluemix_notm}} organization.</td>
         </tr>
         <tr>
-        <td><code>--location <em>&lt;location&gt;</em></code></td>
-        <td>**Standard clusters**: Replace <em>&lt;location&gt;</em> with the {{site.data.keyword.Bluemix_notm}} location ID where you want to create your cluster. [Available locations](cs_regions.html#locations) depend on the {{site.data.keyword.containershort_notm}} region you are logged in to.</td>
+        <td><code>--<prod id="zone-lc">location<staging id="zone-lc">zone</staging> <em>&lt;<prod id="zone-lc">location<staging id="zone-lc">zone</staging>&gt;</em></code></td>
+        <td>**Standard clusters**: Replace <em>&lt;<prod id="zone-lc">location<staging id="zone-lc">zone</staging>&gt;</em> with the {{site.data.keyword.Bluemix_notm}} <prod id="zone-lc">location<staging id="zone-lc">zone</staging> ID where you want to create your cluster. [Available locations](cs_regions.html#locations) depend on the {{site.data.keyword.containershort_notm}} region you are logged in to.</td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
+        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
         </tr>
         <tr>
         <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
@@ -423,13 +423,13 @@ To create a cluster:
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
           <li>**Free clusters**: You do not have to define a public VLAN. Your free cluster is automatically connected to a public VLAN that is owned by IBM.</li>
-          <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that location, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).<br/><br/>
+          <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that <prod id="zone-lc">location<staging id="zone-lc">zone</staging>, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).<br/><br/>
           <strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that location, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containershort_notm}} automatically creates a private VLAN for you.<br/><br/><strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li></ul></td>
+        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that <prod id="zone-lc">location<staging id="zone-lc">zone</staging>, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containershort_notm}} automatically creates a private VLAN for you.<br/><br/><strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -467,7 +467,7 @@ To create a cluster:
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location   Version
+    Name         ID                                   State      Created          Workers   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
     my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.8
     ```
     {: screen}
@@ -484,7 +484,7 @@ To create a cluster:
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Location   Version
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
     kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.8
     ```
     {: screen}
@@ -566,7 +566,7 @@ To create a cluster:
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its locations, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud cs cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud cs cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
 You can view the current cluster state by running the `ibmcloud cs clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
 

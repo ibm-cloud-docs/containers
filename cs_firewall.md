@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -183,13 +183,13 @@ Let your cluster access infrastructure resources and services from behind a fire
       {: pre}
 
   2.  Allow outgoing network traffic from the source _<each_worker_node_publicIP>_ to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
-      - **Important**: You must allow outgoing traffic to port 443 for all of the locations within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the locations (dal10, dal12, and dal13).
+      - **Important**: You must allow outgoing traffic to port 443 for all of the <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the <prod id="zone-lc">location<staging id="zone-lc">zone</staging>s (dal10, dal12, and dal13).
       <p>
-  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for outgoing traffic</caption>
       <thead>
       <th>Region</th>
-      <th>Location</th>
+      <th><prod id="zone-uc">Location<staging id="zone-uc">Zone</staging></th>
       <th>IP address</th>
       </thead>
     <tbody>
@@ -231,7 +231,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - Replace <em>&lt;registry_publicIP&gt;</em> with the registry IP addresses to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images.
         <p>
-<table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+<table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} region</th>
@@ -271,7 +271,7 @@ Let your cluster access infrastructure resources and services from behind a fire
   4.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}} and {{site.data.keyword.loganalysislong_notm}} services:
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Replace <em>&lt;monitoring_public_IP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
-        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for monitoring traffic</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} region</th>
@@ -300,7 +300,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 </p>
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Replace <em>&lt;logging_public_IP&gt;</em> with all of the addresses for the logging regions to which you want to allow traffic:
-        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in column one and IP addresses to match in column two.">
 <caption>IP addresses to open for logging traffic</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} region</th>
@@ -334,16 +334,16 @@ Let your cluster access infrastructure resources and services from behind a fire
 
   5. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) beginning with the **Backend (private) Network** section.
       - Add all of the [locations within the regions](cs_regions.html#locations) that you are using.
-      - Note that you must add the dal01 location (data center).
+      - Note that you must add the dal01 <prod id="zone-lc">location<staging id="zone-lc">zone</staging> (data center).
       - Open ports 80 and 443 to allow the cluster bootstrapping process.
       - Open port 10250 for the Kubernetes dashboard.
       - Open port 53 for DNS access.
       - Because all pod-to-pod traffic goes over the private network, either open all ports that the pods are using to communicate, or open all ports for the worker nodes in the cluster.
 
-  6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the location (data center) that your cluster is in.
-      - To find the location (data center) of your cluster, run `ibmcloud cs clusters`.
+  6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> (data center) that your cluster is in.
+      - To find the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> (data center) of your cluster, run `ibmcloud cs clusters`.
       - Allow access to the IP range for both the **Frontend (public) network** and **Backend (private) Network**.
-      - Note that you must add the dal01 location (data center) for the **Backend (private) Network**.
+      - Note that you must add the dal01 <prod id="zone-lc">location<staging id="zone-lc">zone</staging> (data center) for the **Backend (private) Network**.
 
 <br />
 

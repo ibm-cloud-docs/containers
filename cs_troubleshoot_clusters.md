@@ -459,7 +459,7 @@ Manually update the reference of the private IP address to point to the correct 
   {: pre}
 
   ```
-  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
+  ID                                                 Public IP       Private IP       Machine Type   State     Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.8
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.8
   ```
@@ -550,7 +550,7 @@ If you just created the cluster, the worker nodes might still be configuring. If
 
 You can try one of the following solutions:
   - Check the status of your cluster by running `ibmcloud cs clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud cs workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud cs vlans <location>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud cs vlans <<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 

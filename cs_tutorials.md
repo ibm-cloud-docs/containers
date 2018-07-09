@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -184,7 +184,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.Bluemix_notm}} services.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
     kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.8
     ```
     {: screen}
