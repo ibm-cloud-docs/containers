@@ -66,13 +66,14 @@ If you have a valid Pay-As-You-Go account and receive this error message, you mi
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
-*  If you have a recent Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account, it comes with a linked infrastructure account that you can use. [Verify that the API key uses the correct credentials](#apikey).
-*  If you have a different type of account, [verify that the infrastructure account credentials are set up correctly](#credentials).
+*  If you have a recent Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account, the account comes with a linked infrastructure account that you can use. [Verify that the infrastructure API key is set up with the correct permissions](#apikey).
+*  If you have a different {{site.data.keyword.Bluemix_notm}} account type, verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](#credentials).
 
-To check if your cluster uses the linked infrastructure account or a different account:
-1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console cluster page![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/)](https://console.bluemix.net/containers-kubernetes/clusters).
-2.  From the table, select your cluster. 
-3.  In the **Overview** tab, if you see an **Infrastructure User** field, the cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account.
+To check if your cluster uses the linked infrastructure account or a different infrastructure account:
+1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
+2.  Check if your cluster uses a different infrastructure account. From the expandable menu, click **Containers > Clusters**.
+3.  From the table, select your cluster. 
+4.  In the **Overview** tab, if you see an **Infrastructure User** field, the cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account.
 
 ### Configuring the infrastructure API credentials for linked accounts
 {: #apikey}
