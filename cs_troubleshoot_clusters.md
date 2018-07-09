@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-06"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -38,9 +38,9 @@ When you create a new Kubernetes cluster, you receive an error message similar t
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
 Creating a standard cluster requires that you have either a 
-Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) account term 
-or that you have used the {{site.data.keyword.containerlong}} CLI 
-to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) 
+account term or that you have used the {{site.data.keyword.containerlong_notm}} 
+CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
@@ -65,7 +65,7 @@ Users with other {{site.data.keyword.Bluemix_notm}} account types or users that 
 If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
 {: tsResolve}
-The account admin must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
+The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
 
 
 
