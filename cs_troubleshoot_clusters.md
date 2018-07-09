@@ -66,18 +66,121 @@ If you have a valid Pay-As-You-Go account and receive this error message, you mi
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
+*  If you have a recent Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account, it comes with a linked infrastructure account that you can use. [Verify that the API key uses the correct credentials](#apikey).
+*  If you have a different type of account, [verify that the infrastructure account credentials are set up correctly](#credentials).
 
+To check if your cluster uses the linked infrastructure account or a different account:
+1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console cluster page![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/)](https://console.bluemix.net/containers-kubernetes/clusters).
+2.  From the table, select your cluster. 
+3.  In the **Overview** tab, if you see an **Infrastructure User** field, the cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account.
 
+### Configuring the infrastructure API credentials for linked accounts
+{: #apikey}
 
-|Account type|Description|Available options to create a standard cluster|
-|------------|-----------|----------------------------------------------|
-|Lite accounts|Lite accounts cannot provision clusters.|[Upgrade your Lite account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.|
-|Older Pay-As-You-Go accounts|Pay-As-You-Go accounts that were created before automatic account linking was available, did not come with access to the IBM Cloud infrastructure (SoftLayer) portfolio.<p>If you have an existing IBM Cloud infrastructure (SoftLayer) account, you cannot link this account to an older Pay-As-You-Go account.</p>|<strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>To continue using your old Pay-As-You-Go account, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio. Then, you must [set the IBM Cloud infrastructure (SoftLayer) API key for your old Pay-As-You-Go account](cs_cli_reference.html#cs_credentials_set). </p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can [set your credentials](cs_cli_reference.html#cs_credentials_set) in your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p>|
-|Subscription accounts|Subscription accounts are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.|<strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually [set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account](cs_cli_reference.html#cs_credentials_set). Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually [set IBM Cloud infrastructure (SoftLayer) credentials](cs_cli_reference.html#cs_credentials_set) for your {{site.data.keyword.Bluemix_notm}} account.<p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p>|
-|IBM Cloud infrastructure (SoftLayer) accounts, no {{site.data.keyword.Bluemix_notm}} account|To create a standard cluster, you must have an {{site.data.keyword.Bluemix_notm}} account.|<p>[Create a Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, an IBM Cloud infrastructure (SoftLayer) account is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p>|
-{: caption="Standard cluster creation options by account type" caption-side="top"}
+1.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
 
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).
+        
+    2.  From the expanding menu, select **Infrastructure**.
+        
+    3.  From the menu bar, select **Account** > **Users** > **User List**.
 
+    4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
+
+    5.  Verify or assign the user the [correct infrastructure permissions](cs_users.html#infra_access).
+
+2.  Reset the API key for the region that the cluster is in so that it belongs to the user.
+    
+    1.  Log in to the terminal as the correct user.
+    
+    2.  Reset the API key to this user.
+        ```
+        ibmcloud cs api-key-reset
+        ```
+        {: pre}    
+    
+    3.  Verify that the API key is set.
+        ```
+        ibmcloud cs api-key-info <cluster_name_or_ID>
+        ```
+        {: pre}
+        
+    4.  **Optional**: If you previously set credentials manually with the `ibmcloud cs credentials-set` command, remove the associated infrastructure account. Now, the API key that you set in the previous substeps is used to order infrastructure.
+        ```
+        ibmcloud cs credentials-unset
+        ```
+        {: pre}
+
+3.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
+
+    1.  [Check your worker VLAN connectivity](cs_clusters.html#worker_vlan_connection). 
+    2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
+    3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
+
+### Configuring the infrastructure account credentials for different accounts
+{: #credentials}
+
+1.  Get the infrastructure account that you want to use to access the IBM Cloud infrastructure (SoftLayer) portfolio. You have different options that depend on your current account type.
+
+    <table summary="The table shows the standard cluster creation options by account type. Rows are to be read from the left to right, with the account description in column one, and the options to create a standard cluster in column two.">
+    <caption>Standard cluster creation options by account type</caption>
+      <thead>
+      <th>Account description</th>
+      <th>Options to create a standard cluster</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>**Lite accounts** cannot provision clusters.</td>
+          <td>[Upgrade your Lite account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+        </tr>
+        <tr>
+          <td>**Recent Pay-As-You-Go** accounts come with access to the infrastructure portfolio.</td>
+          <td>You can create standard clusters. To troubleshoot infrastructure permissions, see [Configuring the infrastructure API credentials for linked accounts](#apikey).</td>
+        </tr>
+        <tr>
+          <td>**Older Pay-As-You-Go accounts** that were created before automatic account linking was available did not come with access to the IBM Cloud infrastructure (SoftLayer) portfolio.<p>If you have an existing IBM Cloud infrastructure (SoftLayer) account, you cannot link this account to an older Pay-As-You-Go account.</p></td>
+          <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>To continue using your old Pay-As-You-Go account, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can set your credentials in your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p><p>**For both options, continue to the next step**.</p></td>
+        </tr>
+        <tr>
+          <td>**Subscription accounts** are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+          <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account. Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually set IBM Cloud infrastructure (SoftLayer) credentials for your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p><p>**For both options, continue to the next step**.</p></td>
+        </tr>
+        <tr>
+          <td>**IBM Cloud infrastructure (SoftLayer) accounts**, no {{site.data.keyword.Bluemix_notm}} account</td>
+          <td><p>[Create an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, an IBM Cloud infrastructure (SoftLayer) account is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p><p>By default, your new {{site.keyword.data.Bluemix_notm}} account uses the new infrastructure account. To continue using the old infrastructure account, continue to the next step.</p></td>
+        </tr>
+      </tbody>
+      </table>
+
+2.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
+
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).
+        
+    2.  From the expanding menu, select **Infrastructure**.
+        
+    3.  From the menu bar, select **Account** > **Users** > **User List**.
+
+    4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
+
+    5.  Verify or assign the user the [correct infrastructure permissions](cs_users.html#infra_access).
+
+3.  Set the infrastructure API credentials with the user for the correct account.
+
+    1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
+            
+        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
+            
+        2.  In the **API Access Information** section, view the **API Username** and **Authentication Key**.    
+        
+    2.  Set the infrastructure API credentials to use.
+        ```
+        ibmcloud cs credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+  
+4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
+
+    1.  [Check your worker VLAN connectivity](cs_clusters.html#worker_vlan_connection). 
+    2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
+    3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
 
 <br />
 
