@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-08"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -32,9 +32,11 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 **Does IBM monitor my cluster?**
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
 
+</br>
+
 **What are the sources that I can configure logging for?**
 
-The following image shows the location in the cluster that you can configure logging for.
+In the following image you can see the location of the sources that you can configure logging for.
 
 ![Log sources](images/log_sources.png)
 
@@ -52,7 +54,11 @@ The following image shows the location in the cluster that you can configure log
 <li><p><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In auth.log you can find information on the authentication requests that are made to the OS. </p><p>Paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></p></li>
 </ol>
 
+</br>
+
 **What are the configuration options that I have?**
+
+The following table shows the different options that you have when configuring logging and their descriptions.
 
 <table>
 <caption> Understanding logging configuration options</caption>
@@ -117,7 +123,7 @@ The following image shows the location in the cluster that you can configure log
 </br>
 </br>
 
-## Configuring log Forwarding
+## Configuring log forwarding
 {: #configuring}
 
 You can configure logging for {{site.data.keyword.containershort_notm}} through the GUI or through the CLI.
