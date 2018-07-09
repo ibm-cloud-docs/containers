@@ -275,10 +275,9 @@ You can use the [`ingress.bluemix.net/ssl-services` annotation](cs_annotations.h
      type: Opaque
      data:
        trusted.crt: <ca_certificate>
-       client.crt: <client_certificate>
-       client.key: <client_key>
      ```
      {: codeblock}
+     **Note**: If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
 4. Create the certificate as a Kubernetes secret.
      ```
      kubectl create -f ssl-my-test
