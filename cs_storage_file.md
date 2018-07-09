@@ -35,7 +35,7 @@ To add persistent storage:
     **Tip:** If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.
 
 2.  Decide if you want to keep your data and the NFS file share or block storage after you delete the PVC.
-    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV still exists in the cluster and the data in it is saved, but it cannot be reused with another PVC. Also, the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing_file) storage. 
+    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV still exists in the cluster and the data in it is saved, but it cannot be reused with another PVC. Also, the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing_file) storage. To remove the PV or storage instance, see [Cleaning up persistent NFS file and block storage](#cleanup).
     - If you want the PV, the data, and your NFS file share or block storage to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 3.  **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
@@ -357,7 +357,7 @@ To add persistent storage:
 {: #nonroot}
 {: #enabling_root_permission}
 
-**NFS permissions**: Looking for documentation on enabling NFS non-root permissions? See [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot).
+**NFS permissions**: Looking for documentation on enabling NFS non-root and root permissions? See [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#root).
 
 <br />
 
@@ -510,10 +510,291 @@ You successfully created a PV object and bound it to a PVC. Cluster users can no
 
 
 
+## Setting up NFS and block persistent storage in multizone clusters
+{: #storage_multizone}
+
+You can provision persistent storage in each zone of a multizone cluster and use it in your app pods. However, persistent storage cannot be shared across multiple zones. To use persistent storage in a pod, the pod must run in the same zone where the persistent storage is provisioned.
+{: shortdesc}
+
+Looking to share data across zones? Try a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+{: tip}
+
+To use persistent storage in multizone clusters, you must label your multizone cluster's [existing PVs](#pv_multizone) for multizone use. Then, you can use [existing NFS or block persistent storage](#static_multizone) or [provision new storage instances dynamically](#dynamic_multizone) per zone in the multizone cluster.
+
+### Updating persistent volumes in existing clusters for multizone
+{: #pv_multizone}
+
+If you updated your cluster from a single-zone to a multizone cluster and had existing persistent volumes (PVs), update the PVs for multizone use. The labels assure that pods that use this storage are deployed to the zone where the persistent storage exists.
+{:shortdesc}
+
+Use a script to find all the PVs in your cluster and apply the Kubernetes `failure-domain.beta.kubernetes.io/region` and `failure-domain.beta.kubernetes.io/zone` labels. If the PV already has the labels, the script does not overwrite the existing values.
+
+Before you begin:
+- [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
+
+To update existing PVs:
+
+1.  Apply the multizone labels to your PVs by running the script.  Replace <mycluster> with the name of your cluster. When prompted, confirm the update of your PVs.
+
+    ```
+    bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
+    ```
+    {: pre}
+
+    **Example output**:
+
+    ```
+    Retrieving cluster storage...
+    OK
+
+    Name:			mycluster
+    ID:			  myclusterID1234
+    State:			normal
+    ...
+    Addons
+    Name                   Enabled
+    storage-watcher-pod    true
+    basic-ingress-v2       true
+    customer-storage-pod   true
+    us-south
+    kube-config-dal10-storage.yml
+    storage.yml
+    dal10\n
+    The persistent volumes which do not have region and zone labels will be updated with REGION=
+    us-south and ZONE=dal10. Are you sure to continue (y/n)?y
+    persistentvolume "pvc-ID-123456" labeled
+    persistentvolume "pvc-ID-789101" labeled
+    ['failure-domain.beta.kubernetes.io/region' already has a value (us-south), and --overwrite is false, 'failure-domain.beta.kubernetes.io/zone' already has a value (dal10), and --overwrite is false]
+    ['failure-domain.beta.kubernetes.io/region' already has a value (us-south), and --overwrite is false, 'failure-domain.beta.kubernetes.io/zone' already has a value (dal10), and --overwrite is false]
+    \nSuccessfully applied labels to persistent volumes which did not have region and zone labels.
+    ```
+    {: screen}
+
+2.  Verify that the labels were applied to your PVs.
+
+    1.  Look in the output of the previous command for the IDs of PVs that were labeled.
+
+        ```
+        persistentvolume "pvc-ID-123456" labeled
+        persistentvolume "pvc-ID-789101" labeled
+        ```
+        {: screen}
+
+    2.  Review the region and zone labels for your PVs.
+
+        ```
+        kubectl describe pv pvc-ID-123456
+        ```
+        {: pre}
+
+        **Example output**:
+        ```
+        Name:		pvc-ID-123456
+        Labels:		CapacityGb=4
+        		Datacenter=dal10
+            ...
+        		failure-domain.beta.kubernetes.io/region=us-south
+        		failure-domain.beta.kubernetes.io/zone=dal10
+            ...
+        ```
+        {: screen}
 
 
+### Using existing file shares and block storage to create persistent storage for multizone clusters
+{: #static_multizone}
+
+To use existing file storage in a multizone cluster, the NFS storage must exist within the same region and zone as the worker node for which you want to create persistent storage. The provision process is similar to the [single-zone cluster process](#existing_file).
+{:shortdesc}
+
+Before you begin
+-  [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+-  If a PV for your storage already exists, [add the zone and region label](#pv_multizone) to your PV.
+
+To add existing file or block storage:
+
+1.  Get the **Region Name** for your cluster.
+
+    ```
+    ibmcloud cs region
+    ```
+    {: pre}
+
+2.  Retrieve the zone of your existing file or block storage instance.
+    -  For file storage:
+       ```
+       ibmcloud sl file volume-list
+       ```
+       {: pre}
+
+    -  For block storage:
+       ```
+       ibmcloud sl block volume-list
+       ```
+       {: pre}
+
+    You can find the zone in the **datacenter** column of your CLI output.
+
+3.  Create a storage configuration file for your PV . Under `labels`, add the region and zone for your cluster, such as `us-south` and `dal12`.
+    - Example for file storage:
+      ```
+      apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+       name: mypv
+       labels:
+        failure-domain.beta.kubernetes.io/region: us-south
+        failure-domain.beta.kubernetes.io/zone: dal12
+      spec:
+       capacity:
+         storage: <storage_size>
+       accessModes:
+         - ReadWriteMany
+       nfs:
+         server: "<nfs_server>"
+         path: "<nfs_path>"
+      ```
+      {: codeblock}
+
+    - Example for block storage:
+      ```
+      apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: mypv
+	labels:
+         failure-domain.beta.kubernetes.io/region=us-south
+         failure-domain.beta.kubernetes.io/zone=dal12
+      spec:
+        capacity:
+          storage: "<storage_size>"
+        accessModes:
+          - ReadWriteOnce
+        flexVolume:
+          driver: "ibm/ibmc-block"
+          fsType: "<fs_type>"
+          options:
+            "Lun": "<lun_ID>"
+            "TargetPortal": "<IP_address>"
+            "VolumeID": "<volume_ID>"
+            "volumeName": "<volume_name>"
+      ```
+      {: codeblock}
+
+    To review how to retrieve other values for this configuration file, see adding [existing file storage](#existing_file).
+
+4.  Proceed with the [steps for existing file storage](#existing_file) for single-zone clusters, replacing the configuration file with the one you created in the previous step.
 
 
+### Creating persistent storage in multizone clusters
+{: #dynamic_multizone}
+
+You can create dynamic storage by following the same instructions to [create persistent storage in single-zone clusters](#add_file). By default, the zone in which your PV is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you add new zones to the cluster and submit a new PVC, the new zone is automatically added to the round-robin scheduling.
+{:shortdesc}
+
+**Can I share data across zones by using persistent storage?**
+
+No, NFS file or block persistent storage is not shared across zones. If you want to share data across zones, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+
+**I don't need to share data across zones, but I want persistent storage in each zone. How can I set up persistent storage in each zone?**
+
+If you dynamically provision NFS and block storage in a cluster that spans multiple zones, the storage is provisioned in only 1 zone that is selected on a round-robin basis. To provision persistent storage in all zones of your multizone cluster, repeat the steps to [provision dynamic storage](#add_file) for each zone. For example, if your cluster spans zones `dal10`, `dal12`, and `dal13`, the first time that you dynamically provision persistent storage might provision the storage in `dal10`. Create two more PVCs to cover `dal12` and `dal13`.
+
+**What if I want to specify the zone that the PV is created in?**
+
+You can choose to provision a PV in a specific zone, for example to set up storage for a pod that resides only in that zone. To do so, you must customize a storage class and apply its corresponding PVC in that zone. The specification in the PVC prevents it from being included in the default round-robin scheduling.
+
+The following instructions are provided if you want to specify a zone. If not, use the steps to [create persistent storage](#add_file).
+
+Before you begin:
+
+* [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+* Retrieve the cluster's zone in which you want to create the PV.
+
+To specify the zone in which the PV is created in a multizone cluster:
+
+1.  Complete the first five steps of [creating persistent storage](#add_file) to decide on retention policy (`reclaim`) and billing frequency, and to review the various storage class options that IBM provides.
+
+2.  Customize a storage class and verify that it is successfully applied.
+
+    1.  **Example customized storage class to specify a zone for multizone clusters**:
+        The following `.yaml` file customizes a storage class that is based on the `ibm-flie-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these fields. The zone is specified as `"dal12"`.</br>
+
+        ```
+        apiVersion: storage.k8s.io/v1beta1
+        kind: StorageClass
+        metadata:
+          name: ibmc-file-silver-mycustom-storageclass
+          labels:
+            kubernetes.io/cluster-service: "true"
+        provisioner: ibm.io/ibmc-file
+        parameters:
+          zone: "dal12"
+          type: "Endurance"
+          iopsPerGB: "4"
+          sizeRange: "[20-12000]Gi"
+        reclaimPolicy: "Delete"
+        ```
+        {: codeblock}
+
+    2.  Create the customized storage class.
+
+        ```
+        kubectl apply -f <local_file_path>
+        ```
+        {: pre}
+
+    3.  Verify that the customized storage class is created.
+
+        ```
+        kubectl get storageclasses
+        NAME                                     TYPE
+        ...
+        ibmc-file-silver-mycustom-storageclass   ibm.io/ibmc-file
+        ...
+        ```
+        {: pre}
+
+3.  Create a PVC that uses this customized storage class and verify that it is successfully applied. If you do not customize your request, by default the PVC is provisioned in a zone that is scheduled in a round-robin approach to balance PVCs across zones in the cluster.</br></br>
+    **Note:** After your storage is provisioned, you cannot change the size of your NFS file share or block storage. Make sure to specify a size that matches the amount of data that you want to store.
+
+    1.  **Example PVC to specify a zone for multizone clusters**:
+        The following `.yaml` file creates a claim that is named `mypvc` based on the customized storage class that is named `ibmc-file-silver-mycustom-storageclass`, billed `"hourly"`, with a gigabyte size of `24Gi`.
+
+        ```
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: mypvc
+          labels:
+            billingType: "hourly"
+        spec:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 24Gi
+          storageClassName: ibmc-file-silver-mycustom-storageclass
+         ```
+         {: codeblock}
+
+    2.  Create the PVC.
+
+        ```
+        kubectl apply -f mypvc.yaml
+        ```
+        {: pre}
+
+    3.  Verify that your persistent volume claim is created and bound to the persistent volume. This process can take a few minutes.
+
+        ```
+        kubectl describe pvc mypvc
+        ```
+        {: pre}
+
+4.  [Mount the PVC to your deployment](#app_volume_mount).
+
+<br />
 
 
 ## Changing the default NFS version
