@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-20"
+lastupdated: "2018-07-09"
 
 ---
 
@@ -69,7 +69,7 @@ You can modify these RBAC roles to remove or add admins, users, services, or nod
 
 Before you begin: 
 *  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-*  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](cs_users.html#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview).
+*  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](cs_users.html#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 
 **To modify the RBAC resources**:
 1.  Get the name of the RBAC cluster role binding.
