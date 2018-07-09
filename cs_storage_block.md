@@ -261,17 +261,20 @@ Before you begin, make sure that you have an existing block storage instance tha
     ```
     {: screen}
 
-7.  Note the `id`, `ip_addr`, `capacity_gb`, and `lunId` of the block storage device that you want to mount to your cluster.
+7.  Note the `id`, `ip_addr`, `capacity_gb`, the `datacenter`, and `lunId` of the block storage device that you want to mount to your cluster. **Note:** To mount existing storage to a cluster, you must have a worker node in the same zone as your storage. To verify the zone of your worker node, run `ibmcloud cs workers <cluster_name_or_ID>`. 
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
 
-1.  Create a configuration file for your PV. Include the block storage ID, IP address, the size, and lun ID that you retrieved earlier.
+1.  Create a configuration file for your PV. Include the block storage ID, IP address, the size, the datacenter and lun ID that you retrieved earlier.
 
     ```
     apiVersion: v1
     kind: PersistentVolume
     metadata:
       name: mypv
+      labels:
+         failure-domain.beta.kubernetes.io/region=<region>
+         failure-domain.beta.kubernetes.io/zone=<zone>
     spec:
       capacity:
         storage: "<storage_size>"
@@ -299,6 +302,9 @@ Before you begin, make sure that you have an existing block storage instance tha
     <td>Enter the name of the PV that you want to create.</td>
     </tr>
     <tr>
+    <td><code>metadata/labels</code></td>
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](#pv_multizone) to your PV. 
+    <tr>
     <td><code>spec/flexVolume/fsType</code></td>
     <td>Enter the file system type that is configured for your existing block storage. Choose between <code>ext4</code> or <code>xfs</code>. If you do not specify this option, the PV defaults to <code>ext4</code>. When the wrong fsType is defined, then the PV creation succeeds, but the mounting of the PV to a pod fails. </td></tr>	    
     <tr>
@@ -307,15 +313,15 @@ Before you begin, make sure that you have an existing block storage instance tha
     </tr>
     <tr>
     <td><code>flexVolume/options/Lun</code></td>
-    <td>Enter the lun ID for your block storage that you retrieved in the previous step as <code>lunId</code>.</td>
+    <td>Enter the lun ID for your block storage that you retrieved earlier as <code>lunId</code>.</td>
     </tr>
     <tr>
     <td><code>flexVolume/options/TargetPortal</code></td>
-    <td>Enter the IP address of your block storage that you retrieved in the previous step as <code>ip_addr</code>. </td>
+    <td>Enter the IP address of your block storage that you retrieved earlier as <code>ip_addr</code>. </td>
     </tr>
     <tr>
 	    <td><code>flexVolume/options/VolumeId</code></td>
-	    <td>Enter the ID of your block storage that you retrieved in the previous step as <code>id</code>.</td>
+	    <td>Enter the ID of your block storage that you retrieved earlier as <code>id</code>.</td>
 	    </tr>
 	    <tr>
 		    <td><code>flexVolume/options/volumeName</code></td>
@@ -627,5 +633,7 @@ The NFS file storage and block storage that backs the PV is clustered by IBM in 
 Before you begin:
 
 * Retrieve the cluster's zone in which you want to create the PV. > must go into the custom storage class
+
+
 
 </staging>
