@@ -1,39 +1,4 @@
----
-
-copyright:
-  years: 2014, 2018
-lastupdated: "2018-07-05"
-
----
-
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
-{:codeblock: .codeblock}
-{:tip: .tip}
-{:download: .download}
-
-
-
-
-# Storing data on IBM File Storage for IBM Cloud
-
-
-
-## Adding file storage to apps
-{: #add_file}
-
-Create a persistent volume claim (PVC) to provision NFS file storage for your cluster. Then, mount this claim to a persistent volume (PV) to ensure that data is available even if the pods crash or shut down.
-{:shortdesc}
-
-The NFS file storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
-
-**Note**: NFS file storage comes with a `ReadWriteMany` access mode, so you can mount it to multiple pods across workers within the cluster.
-
-Before you begin:
-- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
+s that your clusters are in so that you can create PVCs.
 
 
 To add persistent storage:
@@ -658,3 +623,5 @@ To change the default NFS version, you can either create a new storage class to 
 
 <br />
 
+
+</staging>
