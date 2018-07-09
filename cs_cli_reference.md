@@ -1646,7 +1646,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. **Note**: The infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
-   <ol><li>Log in to the [{{site.data.keyword.Bluemix_notm}} portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).</li>
+   <ol><li>Log in to the [{{site.data.keyword.Bluemix_notm}} portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).</li>
    <li>From the expanding menu, select **Infrastructure**.</li>
    <li>From the menu bar, select **Account** > **Users** > **User List**.</li>
    <li>For the user that you want to view, click the **IBMid or Username**.</li>
@@ -1661,7 +1661,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
   To generate an API key:
 
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>Generate</strong> to generate an IBM Cloud infrastructure (SoftLayer) API key for your account.</li>
   <li>Copy the API key to use in this command.</li>
@@ -1669,7 +1669,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
 
   To view your existing API key:
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>View</strong> to see your existing API key.</li>
   <li>Copy the API key to use in this command.</li>

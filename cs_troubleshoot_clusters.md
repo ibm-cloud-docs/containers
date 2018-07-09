@@ -70,7 +70,7 @@ The account owner must set up the infrastructure account credentials properly. T
 *  If you have a different {{site.data.keyword.Bluemix_notm}} account type, verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](#credentials).
 
 To check if your cluster uses the linked infrastructure account or a different infrastructure account:
-1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
+1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
 2.  Check if your cluster uses a different infrastructure account. From the expandable menu, click **Containers > Clusters**.
 3.  From the table, select your cluster. 
 4.  In the **Overview** tab, if you see an **Infrastructure User** field, the cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account.
@@ -80,7 +80,7 @@ To check if your cluster uses the linked infrastructure account or a different i
 
 1.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
 
-    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
         
     2.  From the expanding menu, select **Infrastructure**.
         
@@ -155,7 +155,7 @@ To check if your cluster uses the linked infrastructure account or a different i
 
 2.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
 
-    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/).
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
         
     2.  From the expanding menu, select **Infrastructure**.
         
@@ -169,7 +169,7 @@ To check if your cluster uses the linked infrastructure account or a different i
 
     1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
             
-        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.com/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
+        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
             
         2.  In the **API Access Information** section, view the **API Username** and **Authentication Key**.    
         
