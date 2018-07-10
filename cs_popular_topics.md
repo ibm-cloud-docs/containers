@@ -24,6 +24,24 @@ lastupdated: "2018-07-10"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in July 2018
+{: #july18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in July 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>10 July</td>
+<td>Introducing multizone clusters</td>
+<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+</tr>
+</tbody></table>
+
 ## Popular topics in June 2018
 {: #june18}
 
