@@ -218,6 +218,9 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 
     2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
+        **Mac or Linux user**: Instead of running the `ibmcloud cs cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `(ibmcloud cs cluster-config "<cluster-name>" | grep export)`.
+        {:tip}
+
     3.  Verify that the `KUBECONFIG` environment variable is set properly.
 
         Example:

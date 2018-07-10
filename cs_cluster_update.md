@@ -82,130 +82,175 @@ When the Kubernetes API server update is complete, you can update your worker no
 ## Updating worker nodes
 {: #worker_node}
 
-
-You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that your worker nodes remain in sync.
+You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that the worker nodes remain in sync.
 {: shortdesc}
 
-The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master. Before you begin, [update the Kubernetes master](#master).
+Before you begin:
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
+- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
 
-**Attention**:
-<ul><li>Updates to worker nodes can cause downtime for your apps and services.</li>
-<li>Data is deleted if not stored outside the pod.</li>
-<li>Use [replicas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) in your deployments to reschedule pods on available nodes.</li></ul>
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage.html#storage).
 
-But what if I can't have downtime?
 
-As part of the update process, specific nodes are going to go down for a period of time. To help avoid down time for your application, you can define unique keys in a configuration map that specifies threshold percentages for specific types of nodes during the upgrade process. By defining rules based on standard Kubernetes labels and giving a percentage of the maximum amount of nodes that are allowed to be unavailable, you can ensure that your app remains up and running. A node is considered unavailable if it has yet to complete the deploy process.
+**What happens to my apps during an update?**</br>
+If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool, or if you have stand-alone worker nodes, apps might be scheduled onto stand-alone worker nodes. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload.
 
-How are the keys defined?
+**How can I control how many worker nodes go down at a given time during the update?**
+If you need all your worker nodes to be up and running, consider [resizing your worker pool](cs_cli_reference.html#cs_worker_pool_resize) or [adding stand-alone worker nodes](cs_cli_reference.html#cs_worker_add) to add more worker nodes. You can remove the additional worker nodes after the update is completed.
 
-In the data information section of the configuration map, you can define up to 10 separate rules to run at any given time. To be upgraded, worker nodes must pass every defined rule.
+In addition, you can create a Kubernetes config map that specifies the maximum number of worker nodes that can be unavailable at a time during the update. Worker nodes are identified by the worker node labels. You can use IBM-provided labels or custom labels that you added to the worker node.
 
-The keys are defined. What now?
+**What if I choose not to define a config map?**</br>
+When the config map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster can be unavailable during the update process.
 
-After you define your rules, you run the `ibmcloud cs worker-update` command. If a successful response is returned, the worker nodes are queued to be updated. However, the nodes do not undergo the update process until all of the rules are satisfied. While they're queued, the rules are checked on an interval to see if any of the nodes are able to be updated.
+To create a config map and update worker nodes:
 
-What if I chose not to define a configuration map?
-
-When the configuration map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster are unavailable during the update process.
-
-To update your worker nodes:
-
-1. Make any changes that are marked _Update after master_ in [Kubernetes changes](cs_versions.html).
-
-2. Optional: Define your configuration map.
-    Example:
+1.  List available worker nodes and note their private IP address.
 
     ```
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: ibm-cluster-update-configuration
-      namespace: kube-system
-    data:
-     drain_timeout_seconds: "120"
-     zonecheck.json: |
-       {
-         "MaxUnavailablePercentage": 70,
-         "NodeSelectorKey": "failure-domain.beta.kubernetes.io/zone",
-         "NodeSelectorValue": "dal13"
-       }
-     regioncheck.json: |
-       {
-         "MaxUnavailablePercentage": 80,
-         "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
-         "NodeSelectorValue": "us-south"
-       }
-     defaultcheck.json: |
-       {
-         "MaxUnavailablePercentage": 100
-       }
+    ibmcloud cs workers <cluster_name_or_ID>
     ```
-    {:pre}
-  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the parameter in column one and the description that matches in column two.">
-  <caption>ConfigMap components</caption>
+    {: pre}
+
+2. View the labels of a worker node. You can find the worker node labels in the **Labels** section of your CLI output. Every label consists of a `NodeSelectorKey` and a `NodeSelectorValue`.
+   ```
+   kubectl describe node <private_worker_IP>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   Name:               10.184.58.3
+   Roles:              <none>
+   Labels:             arch=amd64
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal12
+                    ibm-cloud.kubernetes.io/encrypted-docker-data=true
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    kubernetes.io/hostname=10.123.45.3
+                    privateVLAN=2299001
+                    publicVLAN=2299012
+   Annotations:        node.alpha.kubernetes.io/ttl=0
+                    volumes.kubernetes.io/controller-managed-attach-detach=true
+   CreationTimestamp:  Tue, 03 Apr 2018 15:26:17 -0400
+   Taints:             <none>
+   Unschedulable:      false
+   ```
+   {: screen}
+
+3. Create a config map and define the unavailability rules for your worker nodes. The following example shows 4 checks, the `zonecheck.json`, `regioncheck.json`, `defaultcheck.json`, and a check template. You can use these example checks to define rules for worker nodes in a specific zone (`zonecheck.json`), region (`regioncheck.json`), or for all worker nodes that do not match any of the checks that you defined in the config map (`defaultcheck.json`). Use the check template to create your own check. For every check, to identify a worker node, you must choose one of the worker node labels that you retrieved in the previous step.  
+
+   **Note:** For every check, you can set only one value for <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. If you want to set rules for more than one region, zone, or other worker node labels, create a new check. Define up to 10 checks in a config map. If you add more checks, they are ignored.
+
+   Example:
+   ```
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: ibm-cluster-update-configuration
+     namespace: kube-system
+   data:
+    drain_timeout_seconds: "120"
+    zonecheck.json: |
+      {
+        "MaxUnavailablePercentage": 30,
+        "NodeSelectorKey": "failure-domain.beta.kubernetes.io/zone",
+        "NodeSelectorValue": "dal13"
+      }
+    regioncheck.json: |
+      {
+        "MaxUnavailablePercentage": 20,
+        "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
+        "NodeSelectorValue": "us-south"
+      }
+    defaultcheck.json: |
+      {
+        "MaxUnavailablePercentage": 20
+      }
+    <check_name>: |
+      {
+        "MaxUnavailablePercentage": <value_in_percentage>,
+        "NodeSelectorKey": "<node_selector_key>",
+        "NodeSelectorValue": "<node_selector_value>"
+      }
+   ```
+   {:pre}
+
+   <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the parameter in column one and the description that matches in column two.">
+   <caption>ConfigMap components</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the components </th>
     </thead>
     <tbody>
       <tr>
         <td><code>drain_timeout_seconds</code></td>
-        <td> Optional: The timeout in seconds of the drain that occurs during the worker node update. Drain sets the node to `unschedulable`, which prevents new pods from being deployed to that node. Drain also deletes pods off of the node. Accepted values are integers from 1 to 180. The default value is 30.</td>
+        <td> Optional: The timeout in seconds to wait for the [drain ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) to complete. Draining a worker node safely removes all existing pods from the worker node and reschedules the pods onto other worker nodes in the cluster. Accepted values are integers from 1 to 180. The default value is 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td> Examples of unique keys for which you want to set rules. The names of the keys can be anything you want them to be; the information is parsed by the configurations set within the key. For each key that you define, you can set only one value for <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. If you want to set rules for more than one region, or location (data center), create a new key entry. </td>
+        <td>Two checks that define a rule for a set of worker nodes that you can identify with the specified <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. The <code>zonecheck.json</code> identifies worker nodes based on their zone label, and the <code>regioncheck.json</code> uses the region label that is added to every worker node during provisioning. In the example, 30% of all worker nodes that have <code>dal13</code> as their zone label and 20% of all the worker nodes in <code>us-south</code> can be unavailable during the update.</td>
       </tr>
       <tr>
         <td><code>defaultcheck.json</code></td>
-        <td> As a default, if the <code>ibm-cluster-update-configuration</code> map is not defined in a valid way, only 20% of your clusters are able to be unavailable at one time. If one or more valid rules are defined without a global default, the new default is to allow 100% of the workers to be unavailable at one time. You can control this by creating a default percentage. </td>
+        <td>If you do not create a config map or the map is configured incorrectly, the Kubernetes default is applied. By default, only 20% of the worker nodes in the cluster can be unavailable at a given time. You can override the default value by adding the default check to your config map. In the example, every worker node that is not specified in the zone and region checks (<code>dal13</code> or <code>us-south</code>) can be unavailable during the update. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
-        <td> The maximum amount of nodes that are allowed to be unavailable for a specified key, specified as a percentage. A node is unavailable when it is in the process of deploying, reloading, or provisioning. The queued worker nodes are blocked from upgrading if it exceeds any defined maximum unavailable percentages. </td>
+        <td>The maximum amount of nodes that are allowed to be unavailable for a specified label key and value, specified as a percentage. A worker node is unavailable when it is in the process of deploying, reloading, or provisioning. The queued worker nodes are blocked from updating if it exceeds any defined maximum unavailable percentages. </td>
       </tr>
       <tr>
         <td><code>NodeSelectorKey</code></td>
-        <td> The type of label for which you want to set a rule for a specified key. You can set rules for the default labels provided by IBM, as well as on labels that you created. </td>
+        <td>The label key of the worker node for which you want to set a rule. You can set rules for the default labels provided by IBM, as well as on worker node labels that you created. <ul><li>If you want to add a rule for worker nodes that belong to one worker pool, you can use the <code>ibm-cloud.kubernetes.io/machine-type</code> label. </li><li> If you have more than one worker pool with the same machine type, use a custom label. </li></ul></td>
       </tr>
       <tr>
         <td><code>NodeSelectorValue</code></td>
-        <td> The subset of nodes within a specified key that the rule is set to evaluate. </td>
+        <td>The label value that the worker node must have to be considered for the rule that you define. </td>
       </tr>
     </tbody>
-  </table>
+   </table>
 
-    **Note**: A maximum of 10 rules can be defined. If you add more than 10 keys to one file, only a subset of the information is parsed.
+4. Create the configuration map in your cluster.
+   ```
+   kubectl apply -f <filepath/configmap.yaml>
+   ```
+   {: pre}
 
-3. Update your worker nodes from the GUI or by running the CLI command.
-  * To update from the {{site.data.keyword.Bluemix_notm}} Dashboard, navigate to the `Worker Nodes` section of your cluster, and click `Update Worker`.
-  * To get worker node IDs, run `ibmcloud cs workers <cluster_name_or_ID>`. If you select multiple worker nodes, the worker nodes are placed in a queue for update evaluation. If they are considered ready after evaluation, they will be updated according to the rules set in the configurations
+5. Verify that the config map is created.
+   ```
+   kubectl get configmap --namespace kube-system
+   ```
+   {: pre}
+
+6.  Update the worker nodes.
 
     ```
     ibmcloud cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
-4. Optional: Verify the events that are triggered by the configuration map and any validation errors that occur by running the following command and looking at **Events**.
-    ```
-    kubectl describe -n kube-system cm ibm-cluster-update-configuration
-    ```
-    {: pre}
+7. Optional: Verify the events that are triggered by the config map and any validation errors that occur. The events can be reviewed in the  **Events** section of your CLI output.
+   ```
+   kubectl describe -n kube-system cm ibm-cluster-update-configuration
+   ```
+   {: pre}
 
-5. Confirm that the update is complete:
-  * Review the Kubernetes version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs workers <cluster_name_or_ID>`.
-  * Review the Kubernetes version of the worker nodes by running `kubectl get nodes`.
-  * In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
+8. Confirm that the update is complete by reviewing the Kubernetes version of your worker nodes.  
+   ```
+   kubectl get nodes
+   ```
+   {: pre}
+
+9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Next steps:
-  - Repeat the update process with other clusters.
+  - Repeat the update process with other worker pools.
   - Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
   - If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
-
-
-
-
-
 
 <br />
 
@@ -224,46 +269,202 @@ Before you begin:
 
 **Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage.html#storage).
 
+1. List available worker nodes and note their private IP address.
+   - **For worker nodes in a worker pool**:
+     1. List available worker pools in your cluster.
+        ```
+        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+     2. List the worker nodes in the worker pool.
+        ```
+        ibmcloud cs workers <cluster_name_or_ID> --worker-pool <pool_name>
+        ```
+        {: pre}
+
+     3. Get the details for a worker node and note the zone, the private and the public VLAN ID.
+        ```
+        ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>
+        ```
+        {: pre}
+
+   - **Deprecated: For stand-alone worker nodes**:
+     1. List available worker nodes.
+        ```
+        ibmcloud cs workers <cluster_name_or_ID>
+        ```
+        {: pre}
+
+     2. Get the details for a worker node and note the zone, the private and the public VLAN ID.
+        ```
+        ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>
+        ```
+        {: pre}
+
+2. List available machine types in the zone.
+   ```
+   ibmcloud cs machine-types <zone>
+   ```
+   {: pre}
+
+3. Create a worker node with the new machine type.
+   - **For worker nodes in a worker pool**:
+     1. Create a worker pool with the number of worker nodes that you want to replace.
+        ```
+        ibmcloud cs worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+        ```
+        {: pre}
+
+     2. Verify that the worker pool is created.
+        ```
+        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
+        ```
+        ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+        ```
+        {: pre}
+
+   - **Deprecated: For stand-alone worker nodes**:
+       ```
+       ibmcloud cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ```
+       {: pre}
+
+4. Wait for the worker nodes to be deployed.
+   ```
+   ibmcloud cs workers <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   When the worker node state changes to **Normal**, the deployment is finished.
+
+5. Remove the old worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
+   - **For worker nodes in a worker pool**:
+     1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
+        ```
+        ibmcloud cs worker-pool-rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+     2. Verify that the worker pool is removed.
+        ```
+        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+   - **Deprecated: For stand-alone worker nodes**:
+      ```
+      ibmcloud cs worker-rm <cluster_name> <worker_node>
+      ```
+      {: pre}
+
+6. Verify that the worker nodes are removed from your cluster.
+   ```
+   ibmcloud cs workers <cluster_name_or_ID>
+   ```
+   {: pre}
+
+7. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
+
+## Updating from stand-alone worker nodes to worker pools
+{: #standalone_to_workerpool}
+
+With the introduction of multizone clusters, worker nodes with the same configuration, such as the machine type, are grouped in worker pools. When you create a new cluster, a worker pool that is named `default` is automatically created for you.
+{: shortdesc}
+
+You can use worker pools to spread worker nodes evenly across zones and build a balanced cluster. Balanced clusters are more available and resilient to failures. If a worker node is removed from a zone, you can rebalance the worker pool and automatically provision new worker nodes to that zone. Worker pools are also used to install Kubernetes version updates to all of your worker nodes.  
+
+**Important:** If you created clusters before multizone clusters became available, your worker nodes are still stand-alone and not automatically grouped into worker pools. You must update these clusters to use worker pools. If not updated, you cannot change your single zone cluster to a multizone cluster.
+
+Review the following image to see how your cluster setup changes when you move from stand-alone worker nodes to worker pools.
+
+<img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+
+1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
+   ```
+   ibmcloud cs workers <cluster_name_or_ID>
+   ```
+   {: pre}
+
+2. Create a worker pool and decide on the machine type and the number of worker nodes that you want to add to the pool.
+   ```
+   ibmcloud cs worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+   ```
+   {: pre}
+
+3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud cs cluster-get <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
+   ```
+   ibmcloud cs zones
+   ```
+   {: pre}
+
+4. List available VLANs for the zone that you chose in the previous step. If you do not have a VLAN in that zone yet, the VLAN is automatically created for you when you add the zone to the worker pool.
+   ```
+   ibmcloud cs vlans <zone>
+   ```
+   {: pre}
+
+5. Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. {{site.data.keyword.containerlong}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
+   1. **To add a zone to one worker pool**: Replace `<pool_name>` with the name of your worker pool, and fill in the cluster ID, zone, and VLANs with the information you previously retrieved. If you do not have a private and a public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you.
+
+      If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
+      ```
+      ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+      ```
+      {: pre}
+
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud cs zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. Then, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
+      ```
+      ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+      ```
+      {: pre}
+
+   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud cs zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#multi_zone).
+
+6. Wait for the worker nodes to be deployed in each zone.
+   ```
+   ibmcloud cs workers <cluster_name_or_ID>
+   ```
+   {: pre}
+   When the worker node state changes to **Normal** the deployment is finished.
+
+7. Remove your stand-alone worker nodes. If you have multiple stand-alone worker nodes, remove one at a time.
+   1. List the worker nodes in your cluster and compare the private IP address from this command with the private IP address that you retrieved in the beginning to find your stand-alone worker nodes.
+      ```
+      kubectl get nodes
+      ```
+      {: pre}
+   2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the `name` that is returned in the `kubectl get nodes` command.
+      ```
+      kubectl cordon <worker_name>
+      ```
+      {: pre}
+   3. Verify that pod scheduling is disabled for your worker node.
+      ```
+      kubectl get nodes
+      ```
+      {: pre}
+      Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+   4. Force pods to be removed from your stand-alone worker node and rescheduled onto remaining uncordoned stand-alone worker nodes and worker nodes from your worker pool.
+      ```
+      kubectl drain <worker_name> --ignore-daemonsets
+      ```
+      {: pre}
+      This process can take a few minutes.
+
+   5. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud cs workers <cluster_name_or_ID>` command.
+      ```
+      ibmcloud cs worker-rm <cluster_name_or_ID> <worker_ID>
+      ```
+      {: pre}
+   6. Repeat these steps until all your stand-alone worker nodes are removed.
 
 
-1. Note the names and locations of the worker nodes to update.
-    ```
-    ibmcloud cs workers <cluster_name>
-    ```
-    {: pre}
-
-2. View the available machine types.
-    ```
-    ibmcloud cs machine-types <location>
-    ```
-    {: pre}
-
-3. Add worker nodes by using the [ibmcloud cs worker-add](cs_cli_reference.html#cs_worker_add) command. Specify a machine type.
-
-    ```
-    ibmcloud cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-    ```
-    {: pre}
-
-4. Verify that the worker nodes are added.
-
-    ```
-    ibmcloud cs workers <cluster_name>
-    ```
-    {: pre}
-
-5. When the added worker nodes are in the `Normal` state, you can remove the outdated worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
-
-    ```
-    ibmcloud cs worker-rm <cluster_name> <worker_node>
-    ```
-    {: pre}
-
-6. Repeat these steps to upgrade other worker nodes to different machine types.
-
-
-
-
-
-
-
+**What's next?** </br>
+Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.

@@ -32,7 +32,7 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 
 To set up the infrastructure:
 
--   Create a cluster with  1 worker node.
+-   Create a cluster with 1 worker pool that has 1 worker node.
 -   Install the CLIs for running Kubernetes commands and managing Docker images.
 -   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
 -   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
@@ -64,7 +64,7 @@ Create your cluster in the GUI and install the required CLIs.
 
 Because it can take a few minutes to provision, create your cluster before you install the CLIs.
 
-1.  [In the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) create a free or standard cluster with  one worker node in it.
+1.  [In the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
     You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
     {: tip}
@@ -184,7 +184,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.Bluemix_notm}} services.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
     kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.8
     ```
     {: screen}

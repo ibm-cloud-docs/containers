@@ -549,7 +549,8 @@ rules:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud cs albs --cluster &lt;my_cluster&gt;</code>.
+<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud cs albs --cluster &lt;my_cluster&gt;</code>.<p>
+If you have a multizone cluster with more than one private ALB enabled, you can provide a list of ALB IDs separated by <code>;</code>. For example: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
 </tbody></table>
@@ -2568,7 +2569,7 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
@@ -2635,7 +2636,7 @@ spec:
 </tr>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>

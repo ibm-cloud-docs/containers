@@ -60,14 +60,14 @@ To create a free cluster:
 
 2. Give your cluster a unique name.
 
-3.  Click **Create Cluster**. A worker node is created that can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready` you can start working with your cluster!
+3.  Click **Create Cluster**. A worker pool is created that contains 1 worker node. The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready` you can start working with your cluster!
 
 Good work! You created your first Kubernetes cluster. Here are some details about your free cluster:
 
-*   **Machine Type**: The free cluster has one virtual worker node with 2 CPU and 4 GB memory available for your apps to use. When you create a standard cluster, you can choose between physical (bare metal) or virtual machines, along with various machine sizes.
+*   **Machine Type**: The free cluster has one virtual worker node, grouped into a worker pool, with 2 CPU and 4 GB memory available for your apps to use. When you create a standard cluster, you can choose between physical (bare metal) or virtual machines, along with various machine sizes.
 *   **Managed Master**: The worker node is centrally monitored and managed by a dedicated and highly available {{site.data.keyword.IBM_notm}}-owned Kubernetes master that controls and monitors all of the Kubernetes resources in the cluster. You can focus on your worker node and the apps that are deployed in the worker node without worrying about managing this master too.
 *   **Infrastructure Resources**: The resources that are required to run the cluster, such as VLANS and IP addresses, are managed in an {{site.data.keyword.IBM_notm}}-owned IBM Cloud infrastructure (SoftLayer) account. When you create a standard cluster, you manage these resources in your own IBM Cloud infrastructure (SoftLayer) account. You can learn more about these resources and the [permissions needed](cs_users.html#infra_access) when you create a standard cluster.
-*   **Other Options**: Free clusters are deployed within the region that you select, but you cannot choose which location (data center). For control over location, networking, and persistent storage, create a standard cluster. [Learn more about the benefits of free and standard clusters](cs_why.html#cluster_types).
+*   **Other Options**: Free clusters are deployed within the region that you select, but you cannot choose which zone. For control over zone, networking, and persistent storage, create a standard cluster. [Learn more about the benefits of free and standard clusters](cs_why.html#cluster_types).
 
 
 **What's next?**

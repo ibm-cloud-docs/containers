@@ -43,11 +43,10 @@ To make your apps externally accessible from the [public internet](#public_acces
 **[Ingress](cs_ingress.html)** (standard clusters only)
 * Expose multiple apps in a cluster by creating one external HTTP or HTTPS, TCP, or UDP application load balancer (ALB). The ALB uses a secured and unique public or private entry point to route incoming requests to your apps.
 * You can use one route to expose multiple apps in your cluster as services.
-* Ingress consists of two components:
+* Ingress consists of three components:
   * The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
   * The ALB listens for incoming HTTP or HTTPS, TCP, or UDP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
- 
- 
+  * The multizone load balancer (MZLB) handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones.
 * Use Ingress to implement your own ALB with custom routing rules and need SSL termination for your apps.
 
 To choose the best networking service for your app, you can follow this decision tree and click one of the options to get started.

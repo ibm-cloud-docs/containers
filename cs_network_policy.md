@@ -23,7 +23,7 @@ lastupdated: "2018-07-10"
 Every Kubernetes cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-If you have unique security requirements, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to LoadBalancer services, use Calico network policies.
+If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to LoadBalancer services, use Calico network policies.
 
 <ul>
   <li>
@@ -59,7 +59,7 @@ Review the following default Calico network policies that are automatically appl
 
 **Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 
- <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server location in column one and IP addresses to match in column two.">
+ <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server zone in column one and IP addresses to match in column two.">
  <caption>Default Calico policies for each cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Default Calico policies for each cluster</th>
@@ -257,7 +257,7 @@ To install and configure the 3.1.1 Calico CLI:
           ```
           {: screen}
 
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<location>-<cluster_name>.yml` from the end of the output.
+        **Note**: To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
 
     3. Retrieve the `ca-*pem_file`.
 
@@ -436,7 +436,7 @@ To install and configure the 1.6.3 Calico CLI:
           ```
           {: screen}
 
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<location>-<cluster_name>.yml` from the end of the output.
+        **Note**: To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
 
     3. Retrieve the `ca-*pem_file`.
 

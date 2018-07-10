@@ -29,6 +29,23 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
 {: tip}
 
+## In a multizone cluster, a persistent volume fails to mount to a pod
+{: #mz_pv_mount}
+
+{: tsSymptoms}
+Your cluster was previously a single-zone cluster with stand-alone worker nodes that were not in worker pools. You successfully mounted a persistent volume claim (PVC) that described the persistent volume (PV) to use for your app's pod deployment. Now that you have worker pools and added zones to your cluster, however, the PV fails to mount to a pod.
+
+{: tsCauses}
+For multizone clusters, PVs must have the following labels so that pods do not try to mount volumes in a different zone.
+* `failure-domain.beta.kubernetes.io/region`
+* `failure-domain.beta.kubernetes.io/zone`
+
+New clusters with worker pools that can span multiple zones label the PVs by default. If you created your clusters before worker pools were introduced, you must add the labels manually.
+
+{: tsResolve}
+[Update the PVs in your cluster with the region and zone labels](cs_storage.html#pv_multizone).
+
+<br />
 
 
 ## File systems for worker nodes change to read-only
@@ -48,7 +65,7 @@ The file system on the worker node is read-only.
 2.  For a short-term fix to the existing worker node, reload the worker node.
     <pre class="pre"><code>ibmcloud cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-For a long-term fix, [update the machine type by adding another worker node](cs_cluster_update.html#machine_type).
+For a long-term fix, [update the machine type of your worker pool](cs_cluster_update.html#machine_type).
 
 <br />
 

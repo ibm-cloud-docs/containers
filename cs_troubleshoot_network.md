@@ -321,7 +321,7 @@ If you have another VLAN that is available, you can [set up VLAN spanning](/docs
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
 1.  Check that the subnets that you want to use are available. **Note**: The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud cs subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
 
-2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the location and VLAN that has the subnets that are available for reuse.
+2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
 3.  Use the `ibmcloud cs cluster-subnet-add` [command](cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](cs_subnets.html#custom).
 
@@ -401,7 +401,7 @@ You previously established a working VPN connection by using the strongSwan IPSe
 * You cannot access the remote network from pods that are running on new worker nodes
 
 {: tsCauses}
-If you added a worker node:
+If you added a worker node to a worker pool:
 
 * The worker node was provisioned on a new private subnet that is not exposed over the VPN connection by your existing `localSubnetNAT` or `local.subnet` settings
 * VPN routes cannot be added to the worker node because the worker has taints or labels that are not included in your existing `tolerations` or `nodeSelector` settings
@@ -569,6 +569,71 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 
 <br />
 
+
+## Cannot add worker nodes due to an invalid VLAN ID
+{: #suspended}
+
+{: tsSymptoms}
+Your {{site.data.keyword.Bluemix_notm}} account was suspended, or all worker nodes in your cluster were deleted. After the account is reactivated, you cannot add worker nodes when you try to resize or rebalance your worker pool. You see an error message similar to the following:
+
+```
+SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
+```
+{: screen}
+
+{: tsCauses}
+When an account is suspended, the worker nodes within the account are deleted. If a cluster has no worker nodes, IBM Cloud infrastructure (SoftLayer) reclaims the associated public and private VLANs. However, the cluster worker pool still has the previous VLAN IDs in its metadata and uses these unavailable IDs when you rebalance or resize the pool. The nodes fail to create because the VLANs are no longer associated with the cluster.
+
+{: tsResolve}
+
+You can [delete your existing worker pool](cs_cli_reference.html#cs_worker_pool_rm), then [create a new worker pool](cs_cli_reference.html#cs_worker_pool_create).
+
+Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+
+1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
+
+    ```
+    ibmcloud cs clusters
+    ```
+    {: pre}
+
+2.  Get a new private and public VLAN for each zone that your cluster is in by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#order-vlans).
+
+3.  Note the new private and public VLAN IDs for each zone.
+
+4.  Note the name of your worker pools.
+
+    ```
+    ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+5.  Use the `zone-network-set` [command](cs_cli_reference.html#cs_zone_network_set) to change the worker pool network metadata.
+
+    ```
+    ibmcloud cs zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
+    ```
+    {: pre}
+
+6.  **Multizone cluster only**: Repeat **Step 5** for each zone in your cluster.
+
+7.  Rebalance or resize your worker pool to add worker nodes that use the new VLAN IDs. For example:
+
+    ```
+    ibmcloud cs worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
+    ```
+    {: pre}
+    
+8.  Verify that your worker nodes are created.
+
+    ```
+    ibmcloud cs workers <cluster_name_or_ID> --worker-pool <worker_pool>
+    ```
+    {: pre}
+
+<br />
 
 
 
