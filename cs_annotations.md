@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-29"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -1727,7 +1727,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>tls.crt</code> and <code>tls.key</code> that your app is expecting from the client. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_tls).</td>
+  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</td>
   </tr>
   </tbody></table>
 
@@ -1812,7 +1812,8 @@ Route traffic to Istio-managed services.
 <dl>
 <dt>Description</dt>
 <dd>
-If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
+<strong>Note</strong>: This annotation works only with Istio 0.7 and earlier.
+<br>If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
 <br><br>In the Ingress resource for the cluster ALB, you must:
   <ul>
     <li>specify the `istio-services` annotation</li>

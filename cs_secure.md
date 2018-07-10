@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-29"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -106,7 +106,7 @@ The following image shows the default cluster security settings that address aut
       <li>ServiceAccount</li>
       <li>StorageObjectInUseProtection (Kubernetes 1.10 and later)</li>
       <li>ValidatingAdmissionWebhook (Kubernetes 1.9 and later)</li></ul></br>
-      You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containershort_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li><li><strong>[Custom pod security policies](cs_psp.html#psp):</strong> Customize the default pod security policies or create your own to prevent unauthorized pod actions.</ul></br><strong>Note: </strong> If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster. </td>
+      You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containershort_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li><li><strong>[Custom pod security policies](cs_psp.html#psp):</strong> Customize the default pod security policies or create your own to prevent unauthorized pod actions.</ul></br><strong>Note: </strong> If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster. </td>
     </tr>
   </tbody>
 </table>

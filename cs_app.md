@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-21"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -251,8 +251,33 @@ If you are using a custom domain, you can use your own certificate to manage TLS
        tls.crt: <client_certificate>
        tls.key: <client_key>
      ```
+     {: codeblock}
+
+4. Create the certificate as a Kubernetes secret.
+     ```
+     kubectl create -f ssl-my-test
+     ```
      {: pre}
 
+### Customizing the Ingress ALB with the SSL services annotation
+{: #secrets_ssl_services}
+
+You can use the [`ingress.bluemix.net/ssl-services` annotation](cs_annotations.html#ssl-services) encrypt traffic to your upstream apps from the Ingress ALB. To create the secret:
+
+1. Get the certificate authority (CA) key and certificate from your upstream server.
+2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+3. Create a secret YAML file using the cert.
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       trusted.crt: <ca_certificate>
+     ```
+     {: codeblock}
+     **Note**: If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
 4. Create the certificate as a Kubernetes secret.
      ```
      kubectl create -f ssl-my-test
@@ -294,7 +319,7 @@ You can use the [`ingress.bluemix.net/mutual-auth` annotation](cs_annotations.ht
      data:
        ca.crt: <ca_certificate>
      ```
-     {: pre}
+     {: codeblock}
 4. Create the certificate as a Kubernetes secret.
      ```
      kubectl create -f ssl-my-test
