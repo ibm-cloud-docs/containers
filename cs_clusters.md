@@ -143,7 +143,7 @@ By default, your single zone cluster is set up with a worker pool that is named 
 When you add more worker nodes, app instances can be distributed across multiple worker nodes. If one worker node goes down, app instances on available worker nodes continue to run. Kubernetes automatically reschedules pods from unavailable worker nodes to ensure performance and capacity for your app. To ensure that your pods are evenly distributed across worker nodes, implement [pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **Can I convert my single zone cluster to a multizone cluster?**
-Sometimes. If your single zone cluster is in a [multizone metro city](cs_region.html#zones), you can convert the single zone cluster to a multizone cluster. To convert to a multizone cluster [add a zone](#add_zone) to your cluster's worker pool. If you have multiple worker pools, add the zone to all the pools so that the worker nodes remain balanced across the cluster.
+Sometimes. If your single zone cluster is in a [multizone metro city](cs_regions.html#zones), you can convert the single zone cluster to a multizone cluster. To convert to a multizone cluster [add a zone](#add_zone) to your cluster's worker pool. If you have multiple worker pools, add the zone to all the pools so that the worker nodes remain balanced across the cluster.
 
 **Do I have to use multizone clusters?**
 No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](cs_regions.html#zones).
