@@ -168,7 +168,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    Name         ID                                   State      Created          Workers   Location   Version
     mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.8
     ```
     {: screen}
@@ -183,7 +183,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
     prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.8
     ```
     {: screen}

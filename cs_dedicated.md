@@ -253,7 +253,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     1. Enter a **Cluster Name**. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
-    2. Select the **Location<staging zone-uc-new>Zone</staging zone-lc-new>** in which to deploy your cluster. The available location was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up.
+    2. Select the **Location** in which to deploy your cluster. The available location was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up.
 
     3. Choose the Kubernetes API server version for the cluster master node.
 
@@ -369,7 +369,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    Name         ID                                   State      Created          Workers   Location   Version
     my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.8
     ```
     {: screen}
@@ -386,7 +386,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
     kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.8
     ```
     {: screen}

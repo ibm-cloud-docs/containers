@@ -141,7 +141,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>13 March</td>
-<td>[Location<staging zone-uc-new>Zone</staging zone-lc-new> available in São Paulo](cs_regions.html)</td>
+<td>[Location available in São Paulo](cs_regions.html)</td>
 <td>Welcome São Paulo, Brazil as a new location in the US South region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this location and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
@@ -189,7 +189,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>14 February</td>
-<td>[Location<staging zone-uc-new>Zone</staging zone-lc-new> available in Seoul](cs_regions.html)</td>
+<td>[Location available in Seoul](cs_regions.html)</td>
 <td>Just in time for the Olympics, deploy a Kubernetes cluster to Seoul in the AP North region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this location and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
@@ -216,7 +216,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>23 January</td>
-<td>[Location<staging zone-uc-new>Zone</staging zone-lc-new>s available in Singapore and Montreal, CA](cs_regions.html)</td>
+<td>[Locations available in Singapore and Montreal, CA](cs_regions.html)</td>
 <td>Singapore and Montreal are locations available in the {{site.data.keyword.containershort_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these locations and the others within the region that your cluster is in.</td>
 </tr>
 <tr>

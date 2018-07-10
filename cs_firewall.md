@@ -189,7 +189,7 @@ Let your cluster access infrastructure resources and services from behind a fire
   <caption>IP addresses to open for outgoing traffic</caption>
       <thead>
       <th>Region</th>
-      <th>Location<staging zone-uc-new>Zone</staging zone-lc-new></th>
+      <th>Location</th>
       <th>IP address</th>
       </thead>
     <tbody>

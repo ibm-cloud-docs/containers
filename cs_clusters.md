@@ -467,7 +467,7 @@ To create a cluster:
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    Name         ID                                   State      Created          Workers   Location   Version
     my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.8
     ```
     {: screen}
@@ -484,7 +484,7 @@ To create a cluster:
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Location   Version
     kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.8
     ```
     {: screen}

@@ -459,7 +459,7 @@ Manually update the reference of the private IP address to point to the correct 
   {: pre}
 
   ```
-  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
+  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.8
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.8
   ```

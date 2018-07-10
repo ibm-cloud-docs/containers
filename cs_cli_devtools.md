@@ -622,7 +622,7 @@ ibmcloud cs cluster-config my_cluster
 {: pre}
 
 
-### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new> --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -706,7 +706,7 @@ trusted: <em>true</em>
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>The level of hardware isolation for your worker node. Use dedicated to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared.  This value is optional for standard clusters and is not available for free clusters.</dd>
 
-<dt><code>--location <em>LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new></em></code></dt>
+<dt><code>--location <em>LOCATION</em></code></dt>
 <dd>The location where you want to create the cluster. The locations that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance.  This value is required for standard clusters and is optional for free clusters.
 
 <p>Review [available locations](cs_regions.html#locations).
@@ -871,7 +871,7 @@ View information about a cluster in your organization.
   State:       normal
   Trust ready: false
   Created:     2018-01-01T17:19:28+0000
-  Location<staging zone-uc-new>Zone</staging zone-lc-new>:    dal10
+  Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
   Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
@@ -1695,7 +1695,7 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
   {: pre}
 
 
-### ibmcloud cs machine-types LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new> [--json] [-s]
+### ibmcloud cs machine-types LOCATION [--json] [-s]
 {: #cs_machine_types}
 
 View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the ecryption](cs_secure.html#encrypted_disk).
@@ -1706,7 +1706,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code><em>LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new></em></code></dt>
+   <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list available machine types. This value is required. Review [available locations](cs_regions.html#locations).</dd>
 
    <dt><code>--json</code></dt>
@@ -1723,7 +1723,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   ```
   {: pre}
 
-### ibmcloud cs vlans LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new> [--all] [--json] [-s]
+### ibmcloud cs vlans LOCATION [--all] [--json] [-s]
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a location in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
@@ -1731,7 +1731,7 @@ List the public and private VLANs that are available for a location in your IBM 
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code><em>LOCATION<staging zone-caps-new>ZONE</staging zone-lc-new></em></code></dt>
+   <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list your private and public VLANs. This value is required. Review [available locations](cs_regions.html#locations).</dd>
 
    <dt><code>--all</code></dt>
