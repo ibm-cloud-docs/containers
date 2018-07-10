@@ -26,14 +26,13 @@ In this scenario, a fictional PR firm uses the {{site.data.keyword.Bluemix_notm}
 
 Using the Kubernetes cluster that is created in the last tutorial, the PR firm's app developer deploys a Hello World version of the app. Building on each lesson in this tutorial, the app developer deploys progressively more complicated versions of the same app. The following diagram shows the components of each deployment by lesson.
 
-
-![Lesson components](images/cs_app_tutorial_roadmap.png)
+![Lesson components](images/cs_app_tutorial_mz-roadmap.png)
 
 As depicted in the diagram, Kubernetes uses several different types of resources to get your apps up and running in clusters. In Kubernetes, deployments and services work together. Deployments include the definitions for the app. For example, the image to use for the container and which port must be exposed for the app. When you create a deployment, a Kubernetes pod is created for each container that you defined in the deployment. To make your app more resilient, you can define multiple instances of the same app in your deployment and let Kubernetes automatically create a replica set for you. The replica set monitors the pods and assures that the specified number of pods are always up and running. If one of the pods becomes unresponsive, the pod is re-created automatically.
 
 Services group a set of pods and provide network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod. You can use Kubernetes services to make an app available to other pods inside the cluster or to expose an app to the internet. In this tutorial, you use a Kubernetes service to access your running app from the internet by using a public IP address that is automatically assigned to a worker node and a public port.
 
-To make your app even more highly available, in standard clusters, you can create multiple worker nodes to run even more replicas of your app. This task is not covered in this tutorial, but keep this concept in mind for future improvements to an app's availability.
+To make your app even more highly available, in standard clusters, you can create a worker pool that spans multiple zones with worker nodes in each zone to run even more replicas of your app. This task is not covered in this tutorial, but keep this concept in mind for future improvements to an app's availability.
 
 Only one of the lessons includes the integration of an {{site.data.keyword.Bluemix_notm}} service into an app, but you can use them with as simple or complex of an app as you can imagine.
 
@@ -67,8 +66,7 @@ In the previous tutorial, you created a cluster with one worker node. In this le
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
-
-![Deployment setup](images/cs_app_tutorial_components1.png)
+![Deployment setup](images/cs_app_tutorial_mz-components1.png)
 
 To deploy the app:
 
@@ -280,7 +278,7 @@ To deploy the app:
         ibmcloud cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
         kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.8
         ```
         {: screen}
@@ -317,8 +315,7 @@ In this lesson, you deploy three instances of the Hello World app into a cluster
 
 Higher availability means that user access is divided across the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
 
-
-![Deployment setup](images/cs_app_tutorial_components2.png)
+![Deployment setup](images/cs_app_tutorial_mz-components2.png)
 
 In the previous tutorial, you created your account and a cluster with one worker node. In this lesson, you configure a deployment and deploy three instances of the Hello World app. Each instance is deployed in a Kubernetes pod as part of a replica set in the worker node. To make it publicly available, you also create a Kubernetes service.
 
@@ -481,8 +478,7 @@ In the previous lessons, the apps were deployed as single components in one work
 
 Separating components into different containers ensures that you can update one without affecting the others. Then, you update the app to scale it up with more replicas to make it more highly available. The following diagram includes the components that you deploy by completing this lesson.
 
-![Deployment setup](images/cs_app_tutorial_components3.png)
-
+![Deployment setup](images/cs_app_tutorial_mz-components3.png)
 
 From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.Bluemix_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
 

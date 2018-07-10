@@ -30,20 +30,20 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
 {:shortdesc}
 
-
-
-Ingress consists of two components:
+Ingress consists of three components:
 <dl>
-<dt>Application load balancer</dt>
-<dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests and forwards requests to the appropriate app pod. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.</dd>
 <dt>Ingress resource</dt>
-<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with the ALB by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for an app. The Ingress resource also specifies the path to your app service, which is appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
-<br></br><strong>Note</strong>: As of 24 May 2018, the Ingress subdomain format changed for new clusters. If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>Clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>Clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
+<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with Ingress by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for apps. The Ingress resource also specifies the path to your app services, which are appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp1`. <br></br>**Note**: As of 24 May 2018, the Ingress subdomain format changed for new clusters. The region or zone name included in the new subdomain format is generated based on the zone where the cluster was created. If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>All clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>Single-zone clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>If you change a single-zone cluster created before 24 May 2018 to multizone by [adding a zone to the cluster](cs_clusters.html#add_zone) for the first time, the cluster continues to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, and is also assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Either subdomain can be used.</li></ul></br>**Multizone clusters**: The Ingress resource is global, and only one Ingress resource is required per namespace for a multizone cluster.</dd>
+<dt>Application load balancer (ALB)</dt>
+<dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.<br></br>**Multizone clusters**: When you add a zone to your cluster, a portable public subnet is added, and a new public ALB is automatically created and enabled on the subnet in that zone. All default public ALBs in your cluster share one public route, but have a different IP addresses. A default private ALB is also automatically created in each zone, but is not automatically enabled.</dd>
+<dt>Multizone load balancer (MZLB)</dt>
+<dd><p>**Multizone clusters**: Whenever you change a cluster from single- to multizone by [adding a zone to the cluster](cs_clusters.html#add_zone) for the first time, a multizone load balancer (MZLB) is automatically created and deployed to each zone where you have workers. The MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress Subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, the MZLB health check fails, the DNS lookup returns the available `1.1.1.1` and `2.2.2.2` ALB IPs, and the client accesses one of the available ALB IPs.</p>
+<p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you are using only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME to map the customer domain to the IBM-provide Ingress subdomain for your cluster.</p></dd>
 </dl>
 
-The following diagram shows how Ingress directs communication from the internet to an app:
+The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
-<img src="images/cs_ingress.png" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using Ingress" style="border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" alt="Expose an app in a single-zone cluster by using Ingress" style="border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
@@ -53,9 +53,21 @@ The following diagram shows how Ingress directs communication from the internet 
 
 4. The load balancer service routes the request to the ALB.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
+The following diagram shows how Ingress directs communication from the internet to an app in a multizone cluster:
 
+<img src="images/cs_ingress_multizone.png" alt="Expose an app in a multizone cluster by using Ingress" style="border-style: none"/>
+
+1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
+
+2. A DNS system service, which acts as the global load balancer, resolves the hostname in the URL to an available IP address that was reported as healthy by the MZLB. The MZLB continuously checks the portable public IP addresses of the load balancer services that expose public ALBs in your cluster. The IP addresses are resolved in a round-robin cycle, ensuring that requests are equally load balanced among the healthy ALBs in various zones.
+
+3. The client sends the request to the IP address of the load balancer service that exposes an ALB.
+
+4. The load balancer service routes the request to the ALB.
+
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
 <br />
 
@@ -67,10 +79,13 @@ Before you get started with Ingress, review the following prerequisites.
 {:shortdesc}
 
 **Prerequisites for all Ingress configurations:**
-- Ingress is available for standard clusters only and requires at least two worker nodes in the cluster to ensure high availability and that periodic updates are applied.
+- Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied.
 - Setting up Ingress requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
-
+**Prerequisites for using Ingress in multizone clusters**:
+ - If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, ALBs will not deploy uniformly. ALBs will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
+ - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
+ - If your cluster uses multiple VLANs, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so that worker nodes can communicate with each other on the private network.
 
 <br />
 
@@ -209,7 +224,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:                 dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -524,7 +539,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:                 dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -713,7 +728,7 @@ http://<subdomain2>.<domain>/<app1_path>
 ## Enabling a default private ALB
 {: #private_ingress}
 
-When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created and assigned a portable private IP address and a private route. However, the default private ALB is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
+When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created in each zone that you have worker nodes and assigned a portable private IP address and a private route. However, the default private ALB in each zone is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
 {:shortdesc}
 
 **Note**: If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](cs_subnets.html#request).
@@ -742,7 +757,9 @@ To enable a default private ALB by using the pre-assigned, IBM-provided portable
     public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
-    
+    In multizone clusters, the numbered suffix on the ALB ID indicates the order that the ALB was added.
+    * For example, the `-alb1` suffix on the ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` indicates that it was the first default private ALB that was created. It exists in the zone where you created the cluster.
+    * The `-alb2` suffix on the ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` indicates that it was the second default private ALB that was created. It exists in the second zone that you added to your cluster.
 
 2. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step.
 
@@ -794,7 +811,9 @@ To enable the private ALB by using your own portable private IP address:
     public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
-    
+    In multizone clusters, the numbered suffix on the ALB ID indicates the order that the ALB was added.
+    * For example, the `-alb1` suffix on the ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` indicates that it was the first default private ALB that was created. It exists in the zone where you created the cluster.
+    * The `-alb2` suffix on the ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` indicates that it was the second default private ALB that was created. It exists in the second zone that you added to your cluster.
 
 3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
 

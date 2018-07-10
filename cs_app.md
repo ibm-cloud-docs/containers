@@ -46,15 +46,13 @@ The more widely you distribute your setup across multiple worker nodes and clust
 
 Review the following potential app setups that are ordered with increasing degrees of availability.
 
-![Stages of high availability for an app](images/cs_app_ha_roadmap.png)
+![Stages of high availability for an app](images/cs_app_ha_roadmap-mz.png)
 
-1.  A deployment with n+2 pods that are managed by a replica set.
-2.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in the same location.
-3.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in different locations.
-4.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in different regions.
+1.  A deployment with n+2 pods that are managed by a replica set in a single node in a single zone cluster.
+2.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in a single zone cluster.
+3.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in a multizone cluster across zones.
 
-
-
+You can also [connect multiple clusters in different regions with a global load balancer](cs_clusters.html#multiple_clusters) to increase the high availability.
 
 ### Increasing the availability of your app
 {: #increase_availability}
@@ -76,8 +74,12 @@ Review the following potential app setups that are ordered with increasing degre
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
-  <dd>To protect your app from a location or region failure, you can create a second cluster in another location or region and use a deployment YAML to deploy a duplicate replica set for your app. By adding a shared route and load balancer in front of your clusters, you can spread your work load across locations and regions. For more information, see [High availability of clusters](cs_clusters.html#clusters).
-  </dd>
+  <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters.html#multiple_clusters).</p>
+  <p>When you use a replica set and specify pod anti-affinity, Kubernetes spreads your app pods across the nodes. If your nodes are in multiple zones, the pods are spread across the zones, increasing the availability of your app. If you want to limit your apps to run only in one zone, you can configure pod affinity, or create and label a worker pool in one zone. For more information, see [High availability for multizone clusters](cs_clusters.html#ha_clusters).</p>
+  <p><strong>What if I want to spread my app across regions?</strong></p>
+  <p>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](cs_clusters.html#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with pod anti-affinity for your app.
+  <p><strong>What if my apps need persistent storage?</strong></p>
+  <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
 
@@ -392,6 +394,98 @@ To deploy your app:
 <br />
 
 
+## Deploying apps to specific worker nodes by using labels
+{: #node_affinity}
+
+When you deploy an app, the app pods indiscriminately deploy to various worker nodes in your cluster. In some cases, you might want to restrict the worker nodes that the app pods to deploy to. For example, you might want app pods to only deploy to worker nodes in a certain worker pool because those worker nodes are on bare metal machines. To designate the worker nodes that app pods must deploy to, add an affinity rule to your app deployment.
+{:shortdesc}
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+
+1. Get the name of the worker pool that you want to deploy app pods to.
+    ```
+    ibmcloud cs worker-pools <cluster_name_or_ID>
+    ```
+    {:pre}
+
+    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud cs vlans <zone>`.
+    {: tip}
+
+2. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool name to the app deployment.
+
+    Example yaml:
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: with-node-affinity
+    spec:
+      template:
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: workerPool
+                    operator: In
+                    values:
+                    - <worker_pool_name>
+    ...
+    ```
+    {: codeblock}
+
+    In the **affinity** section of the example yaml, `workerPool` is the `key` and `<worker_pool_name>` is the `value`.
+
+3. Apply the updated deployment configuration file.
+    ```
+    kubectl apply -f with-node-affinity.yaml
+    ```
+    {: pre}
+
+4. Verify that the app pods deployed to the correct worker nodes.
+
+    1. List the pods in your cluster.
+        ```
+        kubectl get pods -o wide
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
+        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
+        ```
+        {: screen}
+
+    2. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
+
+        In the above example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.176.48.78`.
+
+    3. List the worker nodes in the worker pool that you designated in your app deployment.
+
+        ```
+        ibmcloud cs workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ```
+        {: pre}
+
+        Example output:
+
+        ```
+        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        ```
+        {: screen}
+
+        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker nodes on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>`.
+        {: tip}
+
+    4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.
+
+<br />
 
 
 ## Deploying an app on a GPU machine

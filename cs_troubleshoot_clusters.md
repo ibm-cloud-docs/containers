@@ -459,7 +459,7 @@ Manually update the reference of the private IP address to point to the correct 
   {: pre}
 
   ```
-  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
+  ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.8
   kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.8
   ```
@@ -550,7 +550,7 @@ If you just created the cluster, the worker nodes might still be configuring. If
 
 You can try one of the following solutions:
   - Check the status of your cluster by running `ibmcloud cs clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud cs workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud cs vlans <location>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud cs vlans <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
@@ -592,12 +592,21 @@ If this cluster is an existing one, check your cluster capacity.
 
 3.  Check if you have enough capacity in your cluster to deploy your pod.
 
-4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
+4.  If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
 
-    ```
-    ibmcloud cs worker-add <cluster_name_or_ID> 1
-    ```
-    {: pre}
+    1.  Review the current sizes and machine types of your worker pools to decide which one to resize.
+
+        ```
+        ibmcloud cs worker-pools
+        ```
+        {: pre}
+
+    2.  Resize your worker pools to add more nodes to each zone that the pool spans.
+
+        ```
+        ibmcloud cs worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ```
+        {: pre}
 
 5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 

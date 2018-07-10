@@ -62,7 +62,7 @@ The following image shows available non-persistent data storage options in {{sit
 ### Persistent data storage options for high availability
 {: #persistent}
 
-The main challenge when you create highly available stateful apps is to persist data across multiple app instances in multiple locations, and to keep data in sync always. For highly available data, you want to make sure that you have a master database with multiple instances that are spread across multiple data centers or even multiple regions. This master database must continuously be replicated to keep a single source of truth. All instances in your cluster must read from and write to this master database. In case one instance of the master is down, other instances take over the workload so that you do not experience downtime for your apps.
+The main challenge when you create highly available stateful apps is to persist data across multiple app instances in multiple zones, and to keep data in sync always. For highly available data, you want to make sure that you have a master database with multiple instances that are spread across multiple data centers or even multiple regions. This master database must continuously be replicated to keep a single source of truth. All instances in your cluster must read from and write to this master database. In case one instance of the master is down, other instances take over the workload so that you do not experience downtime for your apps.
 {: shortdesc}
 
 The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to make your data highly available in a standard cluster. The option that is right for you depends on the following factors:
@@ -72,8 +72,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
   * **Global replication:** For high availability, you might want to set up multiple storage instances that are distributed and replicated across data centers worldwide.
 
 <br/>
-<img src="images/cs_storage_ha.png" alt="High availability options for persistent storage"/>
-
+<img src="images/cs_storage_mz-ha.png" alt="High availability options for persistent storage"/>
 
 <table summary="The table shows persistent storage options. Rows are to be read from the left to right, with the number of the option in column one, the title of the otion in column two and a description in column three.">
 <caption>Persistent storage options</caption>
@@ -84,11 +83,11 @@ The following image shows the options that you have in {{site.data.keyword.conta
   <tbody>
   <tr>
   <td>1. NFS file storage or block storage</td>
-  <td>With this option, you can persist app and container data by using Kubernetes persistent volumes. Volumes are hosted on Endurance and Performance [NFS-based file storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details) or [block storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage) that can be used for apps that store data on a file basis or as a block rather than in a database. Data that is saved in file and block storage is encrypted at rest.<p>{{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, the delete policy, and the read and write permissions for the volume. To initiate a request for file storage or block storage, you must create a [persistent volume claim (PVC)](cs_storage.html#create). After you submit a PVC, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS-based file storage or block storage. [You can mount the PVC](cs_storage.html#app_volume_mount) as a volume to your deployment to allow the containers to read from and write to the volume. </p><p>Persistent volumes are provisioned in the data center where the worker node is located. With NFS, you can share data with pods in the same  cluster. With block storage, you can mount the PV to only 1 pod on 1 worker node in the cluster.  </p><p>By default, NFS storage and block storage are not backed up automatically. You can set up a periodic backup for your cluster by using the provided [backup and restore mechanisms](cs_storage.html#backup_restore). When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other deployments that mount the volume.</p><p><strong>Note:</strong> You can choose to be billed for persistent NFS file share storage and block storage hourly or monthly. If you choose monthly, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.</p></td>
+  <td>With this option, you can persist app and container data within the same zone by using Kubernetes persistent volumes. Volumes are hosted on Endurance and Performance [NFS-based file storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details) or [block storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage) that can be used for apps that store data on a file basis or as a block rather than in a database. Data that is saved in file and block storage is encrypted at rest.<p>{{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, the delete policy, and the read and write permissions for the volume. To initiate a request for file storage or block storage, you must create a [persistent volume claim (PVC)](cs_storage.html#create). After you submit a PVC, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS-based file storage or block storage. [You can mount the PVC](cs_storage.html#app_volume_mount) as a volume to your deployment to allow the containers to read from and write to the volume. </p><p>Persistent volumes are provisioned in the data center where the worker node is located. With NFS, you can share data with pods in the same single-zone cluster. With block storage, you can mount the PV to only 1 pod on 1 worker node in the cluster. In a multizone cluster, you need to set up a persistent volume in each zone that you want to store data in, and data is not shared across zones or across regions. </p><p>By default, NFS storage and block storage are not backed up automatically. You can set up a periodic backup for your cluster by using the provided [backup and restore mechanisms](cs_storage.html#backup_restore). When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other deployments that mount the volume.</p><p><strong>Note:</strong> You can choose to be billed for persistent NFS file share storage and block storage hourly or monthly. If you choose monthly, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.</p></td>
   </tr>
   <tr id="cloud-db-service">
     <td>2. Cloud database service</td>
-    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, locations, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
+    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, zones, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
   </tr>
   <tr>
     <td>3. On-prem database</td>
@@ -425,7 +424,7 @@ The NFS file storage and block storage that backs the PV is clustered by IBM in 
 **Note**: Block storage is a `ReadWriteOnce` access mode device. You can mount it to only one pod on one worker node in the cluster at a time. NFS file storage is a `ReadWriteMany` access mode, so you can mount it to multiple pods across workers within the cluster.
 
 Before you begin:
-- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
+- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - If you want to mount block storage to your apps, you must install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block) first.
 
 To add persistent storage:
@@ -463,7 +462,7 @@ To add persistent storage:
     **Tip:** If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.
 
 2.  Decide if you want to keep your data and the NFS file share or block storage after you delete the PVC.
-    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV still exists in the cluster and the data in it is saved, but it cannot be reused with another PVC. Also, the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing) or [block](#existing_block) storage. 
+    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV still exists in the cluster and the data in it is saved, but it cannot be reused with another PVC. Also, the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing) or [block](#existing_block) storage. To remove the PV or storage instance, see [Cleaning up persistent NFS file and block storage](#cleanup).
     - If you want the PV, the data, and your NFS file share or block storage to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 3.  **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
@@ -962,6 +961,292 @@ To apply the latest security updates and for a better performance, use the defau
 <br />
 
 
+## Setting up NFS and block persistent storage in multizone clusters
+{: #storage_multizone}
+
+You can provision persistent storage in each zone of a multizone cluster and use it in your app pods. However, persistent storage cannot be shared across multiple zones. To use persistent storage in a pod, the pod must run in the same zone where the persistent storage is provisioned.
+{: shortdesc}
+
+Looking to share data across zones? Try a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+{: tip}
+
+To use persistent storage in multizone clusters, you must label your multizone cluster's [existing PVs](#pv_multizone) for multizone use. Then, you can use [existing NFS or block persistent storage](#static_multizone) or [provision new storage instances dynamically](#dynamic_multizone) per zone in the multizone cluster.
+
+### Updating persistent volumes in existing clusters for multizone
+{: #pv_multizone}
+
+If you updated your cluster from a single-zone to a multizone cluster and had existing persistent volumes (PVs), update the PVs for multizone use. The labels assure that pods that use this storage are deployed to the zone where the persistent storage exists.
+{:shortdesc}
+
+Use a script to find all the PVs in your cluster and apply the Kubernetes `failure-domain.beta.kubernetes.io/region` and `failure-domain.beta.kubernetes.io/zone` labels. If the PV already has the labels, the script does not overwrite the existing values.
+
+Before you begin:
+- [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
+
+To update existing PVs:
+
+1.  Apply the multizone labels to your PVs by running the script.  Replace <mycluster> with the name of your cluster. When prompted, confirm the update of your PVs.
+
+    ```
+    bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
+    ```
+    {: pre}
+
+    **Example output**:
+
+    ```
+    Retrieving cluster storage...
+    OK
+
+    Name:			mycluster
+    ID:			  myclusterID1234
+    State:			normal
+    ...
+    Addons
+    Name                   Enabled
+    storage-watcher-pod    true
+    basic-ingress-v2       true
+    customer-storage-pod   true
+    us-south
+    kube-config-dal10-storage.yml
+    storage.yml
+    dal10\n
+    The persistent volumes which do not have region and zone labels will be updated with REGION=
+    us-south and ZONE=dal10. Are you sure to continue (y/n)?y
+    persistentvolume "pvc-ID-123456" labeled
+    persistentvolume "pvc-ID-789101" labeled
+    ['failure-domain.beta.kubernetes.io/region' already has a value (us-south), and --overwrite is false, 'failure-domain.beta.kubernetes.io/zone' already has a value (dal10), and --overwrite is false]
+    ['failure-domain.beta.kubernetes.io/region' already has a value (us-south), and --overwrite is false, 'failure-domain.beta.kubernetes.io/zone' already has a value (dal10), and --overwrite is false]
+    \nSuccessfully applied labels to persistent volumes which did not have region and zone labels.
+    ```
+    {: screen}
+
+2.  Verify that the labels were applied to your PVs.
+
+    1.  Look in the output of the previous command for the IDs of PVs that were labeled.
+
+        ```
+        persistentvolume "pvc-ID-123456" labeled
+        persistentvolume "pvc-ID-789101" labeled
+        ```
+        {: screen}
+
+    2.  Review the region and zone labels for your PVs.
+
+        ```
+        kubectl describe pv pvc-ID-123456
+        ```
+        {: pre}
+
+        **Example output**:
+        ```
+        Name:		pvc-ID-123456
+        Labels:		CapacityGb=4
+        		Datacenter=dal10
+            ...
+        		failure-domain.beta.kubernetes.io/region=us-south
+        		failure-domain.beta.kubernetes.io/zone=dal10
+            ...
+        ```
+        {: screen}
+
+
+### Using existing file shares and block storage to create persistent storage for multizone clusters
+{: #static_multizone}
+
+To use existing file storage in a multizone cluster, the NFS storage must exist within the same region and zone as the worker node for which you want to create persistent storage. The provision process is similar to the [single-zone cluster process](#existing).
+{:shortdesc}
+
+Before you begin
+-  [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+-  If a PV for your storage already exists, [add the zone and region label](#pv_multizone) to your PV.
+
+To add existing file or block storage:
+
+1.  Get the **Region Name** for your cluster.
+
+    ```
+    ibmcloud cs region
+    ```
+    {: pre}
+
+2.  Retrieve the zone of your existing file or block storage instance.
+    -  For file storage:
+       ```
+       ibmcloud sl file volume-list
+       ```
+       {: pre}
+
+    -  For block storage:
+       ```
+       ibmcloud sl block volume-list
+       ```
+       {: pre}
+
+    You can find the zone in the **datacenter** column of your CLI output.
+
+3.  Create a storage configuration file for your PV . Under `labels`, add the region and zone for your cluster, such as `us-south` and `dal12`.
+    - Example for file storage:
+      ```
+      apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+       name: mypv
+       labels:
+        failure-domain.beta.kubernetes.io/region: us-south
+        failure-domain.beta.kubernetes.io/zone: dal12
+      spec:
+       capacity:
+         storage: <storage_size>
+       accessModes:
+         - ReadWriteMany
+       nfs:
+         server: "<nfs_server>"
+         path: "<nfs_path>"
+      ```
+      {: codeblock}
+
+    - Example for block storage:
+      ```
+      apiVersion: v1
+      kind: PersistentVolume
+      metadata:
+        name: mypv
+	labels:
+         failure-domain.beta.kubernetes.io/region=us-south
+         failure-domain.beta.kubernetes.io/zone=dal12
+      spec:
+        capacity:
+          storage: "<storage_size>"
+        accessModes:
+          - ReadWriteOnce
+        flexVolume:
+          driver: "ibm/ibmc-block"
+          fsType: "<fs_type>"
+          options:
+            "Lun": "<lun_ID>"
+            "TargetPortal": "<IP_address>"
+            "VolumeID": "<volume_ID>"
+            "volumeName": "<volume_name>"
+      ```
+      {: codeblock}
+
+    To review how to retrieve other values for this configuration file, see adding [existing file storage](#existing) or [block storage](#existing_block).
+
+4.  Proceed with the [steps for existing file storage](#existing) or [existing block storage](#existing_block) for single-zone clusters, replacing the configuration file with the one you created in the previous step.
+
+
+### Creating persistent storage in multizone clusters
+{: #dynamic_multizone}
+
+You can create dynamic storage by following the same instructions to [create persistent storage in single-zone clusters](#create). By default, the zone in which your PV is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you add new zones to the cluster and submit a new PVC, the new zone is automatically added to the round-robin scheduling.
+{:shortdesc}
+
+**Can I share data across zones by using persistent storage?**
+
+No, NFS file or block persistent storage is not shared across zones. If you want to share data across zones, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+
+**I don't need to share data across zones, but I want persistent storage in each zone. How can I set up persistent storage in each zone?**
+
+If you dynamically provision NFS and block storage in a cluster that spans multiple zones, the storage is provisioned in only 1 zone that is selected on a round-robin basis. To provision persistent storage in all zones of your multizone cluster, repeat the steps to [provision dynamic storage](#create) for each zone. For example, if your cluster spans zones `dal10`, `dal12`, and `dal13`, the first time that you dynamically provision persistent storage might provision the storage in `dal10`. Create two more PVCs to cover `dal12` and `dal13`.
+
+**What if I want to specify the zone that the PV is created in?**
+
+You can choose to provision a PV in a specific zone, for example to set up storage for a pod that resides only in that zone. To do so, you must customize a storage class and apply its corresponding PVC in that zone. The specification in the PVC prevents it from being included in the default round-robin scheduling.
+
+The following instructions are provided if you want to specify a zone. If not, use the steps to [create persistent storage](#create).
+
+Before you begin:
+
+* [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+* Retrieve the cluster's zone in which you want to create the PV.
+
+To specify the zone in which the PV is created in a multizone cluster:
+
+1.  Complete the first five steps of [creating persistent storage](#create) to decide on retention policy (`reclaim`) and billing frequency, and to review the various storage class options that IBM provides.
+
+2.  Customize a storage class and verify that it is successfully applied.
+
+    1.  **Example customized storage class to specify a zone for multizone clusters**:
+        The following `.yaml` file customizes a storage class that is based on the `ibm-flie-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these fields. The zone is specified as `"dal12"`.</br>
+
+        ```
+        apiVersion: storage.k8s.io/v1beta1
+        kind: StorageClass
+        metadata:
+          name: ibmc-file-silver-mycustom-storageclass
+          labels:
+            kubernetes.io/cluster-service: "true"
+        provisioner: ibm.io/ibmc-file
+        parameters:
+          zone: "dal12"
+          type: "Endurance"
+          iopsPerGB: "4"
+          sizeRange: "[20-12000]Gi"
+        reclaimPolicy: "Delete"
+        ```
+        {: codeblock}
+
+    2.  Create the customized storage class.
+
+        ```
+        kubectl apply -f <local_file_path>
+        ```
+        {: pre}
+
+    3.  Verify that the customized storage class is created.
+
+        ```
+        kubectl get storageclasses
+        NAME                                     TYPE
+        ...
+        ibmc-file-silver-mycustom-storageclass   ibm.io/ibmc-file
+        ...
+        ```
+        {: pre}
+
+3.  Create a PVC that uses this customized storage class and verify that it is successfully applied. If you do not customize your request, by default the PVC is provisioned in a zone that is scheduled in a round-robin approach to balance PVCs across zones in the cluster.</br></br>
+    **Note:** After your storage is provisioned, you cannot change the size of your NFS file share or block storage. Make sure to specify a size that matches the amount of data that you want to store.
+
+    1.  **Example PVC to specify a zone for multizone clusters**:
+        The following `.yaml` file creates a claim that is named `mypvc` based on the customized storage class that is named `ibmc-file-silver-mycustom-storageclass`, billed `"hourly"`, with a gigabyte size of `24Gi`.
+
+        ```
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: mypvc
+          labels:
+            billingType: "hourly"
+        spec:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 24Gi
+          storageClassName: ibmc-file-silver-mycustom-storageclass
+         ```
+         {: codeblock}
+
+    2.  Create the PVC.
+
+        ```
+        kubectl apply -f mypvc.yaml
+        ```
+        {: pre}
+
+    3.  Verify that your persistent volume claim is created and bound to the persistent volume. This process can take a few minutes.
+
+        ```
+        kubectl describe pvc mypvc
+        ```
+        {: pre}
+
+4.  [Mount the PVC to your deployment](#app_volume_mount).
+
+<br />
+
 
 
 ## Installing the IBM Cloud infrastructure (SoftLayer) CLI
@@ -1215,23 +1500,23 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 ## Setting up backup and restore solutions for NFS file shares and block storage
 {: #backup_restore}
 
-File shares and block storage are provisioned into the same location as your cluster. The storage is hosted on clustered servers by {{site.data.keyword.IBM_notm}} to provide availability in case a server goes down. However, file shares and block storage are not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
+File shares and block storage are provisioned into the same zone as your cluster. The storage is hosted on clustered servers by {{site.data.keyword.IBM_notm}} to provide availability in case a server goes down. However, file shares and block storage are not backed up automatically and might be inaccessible if the entire zone fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
 {: shortdesc}
 
 Review the following backup and restore options for your NFS file shares and block storage:
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can set up periodic snapshots for your NFS file share or block storage, which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your NFS file share or block storage. Snapshots are stored on the existing storage instance within the same location. You can restore data from a snapshot if a user accidentally removes important data from the volume. </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> For file storage, the volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. For block storage, the size and IOPS are shown in the <strong>Labels</strong> section of your CLI output. To find the volume ID, review the <code>ibm.io/network-storage-id</code> annotation of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></br>For more information, see:<ul><li>[NFS periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Block periodic snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
-  <dt>Replicate snapshots to another location</dt>
- <dd><p>To protect your data from a location failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to an NFS file share or block storage instance that is set up in another location. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated NFS file share or block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p>
+  <dd><p>You can set up periodic snapshots for your NFS file share or block storage, which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your NFS file share or block storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> For file storage, the volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. For block storage, the size and IOPS are shown in the <strong>Labels</strong> section of your CLI output. To find the volume ID, review the <code>ibm.io/network-storage-id</code> annotation of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></br>For more information, see:<ul><li>[NFS periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Block periodic snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
+  <dt>Replicate snapshots to another zone</dt>
+ <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to an NFS file share or block storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated NFS file share or block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p>
  <p>For more information, see:<ul><li>[Replicate snapshots for NFS](/docs/infrastructure/FileStorage/replication.html)</li><li>[Replicate snapshots for Block](/docs/infrastructure/BlockStorage/replication.html#replicating-data)</li></ul></p></dd>
  <dt>Duplicate storage</dt>
- <dd><p>You can duplicate your NFS file share or block storage instance in the same location as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p>
+ <dd><p>You can duplicate your NFS file share or block storage instance in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p>
  <p>For more information, see:<ul><li>[NFS duplicate snapshots](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)</li><li>[Block duplicate snapshots](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)</li></ul></p></dd>
   <dt>Back up data to Object Storage</dt>
-  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.objectstoragefull}} instance that you set up in a location.</p>
-  <p>To make your data even more highly available and protect your app from a location failure, set up a second {{site.data.keyword.objectstoragefull}} instance and replicate data across locations. If you need to restore data from your {{site.data.keyword.objectstoragefull}} instance, use the restore script that is provided with the image.</p></dd>
+  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.objectstoragefull}} instance that you set up in a zone.</p>
+  <p>To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.objectstoragefull}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.objectstoragefull}} instance, use the restore script that is provided with the image.</p></dd>
 <dt>Copy data to and from pods and containers</dt>
 <dd><p>You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster.</p>
 <p>Before you begin, [target your Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to use. If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>

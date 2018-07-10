@@ -44,7 +44,8 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - [Configuring your {{site.data.keyword.Bluemix_notm}} account to access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials)
 - [Deploying and managing Kubernetes resources, such as pods, services, and deployments, within the cluster](cs_app.html#app_cli)
 - [Leveraging the capabilities of the service and Kubernetes to ensure high availability of apps](cs_app.html#highly_available_apps)
-- [Adding or removing cluster capacity by using the CLI to add or remove worker nodes](cs_cli_reference.html#cs_worker_add)
+- [Adding or removing cluster capacity by resizing your worker pools](cs_clusters.html#add_workers)
+- [Enabling VLAN spanning and keeping your multizone worker pools balanced across zones](cs_clusters.html#ha_clusters)
 - [Creating public and private VLANs in IBM Cloud infrastructure (SoftLayer) for network isolation of your cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [Ensuring that all worker nodes have network connectivity to the Kubernetes master URL](cs_firewall.html#firewall) <p>**Note**: If a worker node has both public and private VLANs, then network connectivity is configured. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection). </p>
 - [Updating the master kube-apiserver when Kubernetes version updates are available](cs_cluster_update.html#master)

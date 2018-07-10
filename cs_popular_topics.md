@@ -24,6 +24,24 @@ lastupdated: "2018-07-10"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in July 2018
+{: #july18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in July 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>10 July</td>
+<td>Introducing multizone clusters</td>
+<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+</tr>
+</tbody></table>
+
 ## Popular topics in June 2018
 {: #june18}
 
@@ -141,8 +159,8 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>13 March</td>
-<td>[Location available in São Paulo](cs_regions.html)</td>
-<td>Welcome São Paulo, Brazil as a new location in the US South region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this location and the others within the region that your cluster is in.</td>
+<td>[Zone available in São Paulo](cs_regions.html)</td>
+<td>Welcome São Paulo, Brazil as a new zone in the US South region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
 <td>12 March</td>
@@ -189,8 +207,8 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>14 February</td>
-<td>[Location available in Seoul](cs_regions.html)</td>
-<td>Just in time for the Olympics, deploy a Kubernetes cluster to Seoul in the AP North region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this location and the others within the region that your cluster is in.</td>
+<td>[Zone available in Seoul](cs_regions.html)</td>
+<td>Just in time for the Olympics, deploy a Kubernetes cluster to Seoul in the AP North region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
 <td>08 February</td>
@@ -216,8 +234,8 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>23 January</td>
-<td>[Locations available in Singapore and Montreal, CA](cs_regions.html)</td>
-<td>Singapore and Montreal are locations available in the {{site.data.keyword.containershort_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these locations and the others within the region that your cluster is in.</td>
+<td>[Zones available in Singapore and Montreal, CA](cs_regions.html)</td>
+<td>Singapore and Montreal are zones available in the {{site.data.keyword.containershort_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these zones and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
 <td>08 January</td>

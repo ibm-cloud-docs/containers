@@ -127,7 +127,10 @@ ibmcloud plugin list
     <td>[ibmcloud cs cluster-service-bind](#cs_cluster_service_bind)</td>
     <td>[ibmcloud cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
     <td>[ibmcloud cs cluster-services](#cs_cluster_services)</td>
+    <td>[ibmcloud cs va](#cs_va)</td>
+  </tr>
     <td>[ibmcloud cs webhook-create](#cs_webhook_create)</td>
+  <tr>
   </tr>
 </tbody>
 </table>
@@ -252,7 +255,7 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud cs locations](#cs_datacenters)</td>
+    <td>[ibmcloud cs zones](#cs_datacenters)</td>
     <td>[ibmcloud cs region](#cs_region)</td>
     <td>[ibmcloud cs region-set](#cs_region-set)</td>
     <td>[ibmcloud cs regions](#cs_regions)</td>
@@ -272,7 +275,7 @@ ibmcloud plugin list
  </thead>
  <tbody>
     <tr>
-      <td>[ibmcloud cs worker-add](#cs_worker_add)</td>
+      <td>Deprecated: [ibmcloud cs worker-add](#cs_worker_add)</td>
       <td>[ibmcloud cs worker-get](#cs_worker_get)</td>
       <td>[ibmcloud cs worker-reboot](#cs_worker_reboot)</td>
       <td>[ibmcloud cs worker-reload](#cs_worker_reload)</td>
@@ -292,7 +295,33 @@ ibmcloud plugin list
   </tbody>
 </table>
 
-
+<table summary="Worker pool commands table">
+<caption>Worker pool commands</caption>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Worker pool commands</th>
+ </thead>
+ <tbody>
+    <tr>
+      <td>[ibmcloud cs worker-pool-create](#cs_worker_pool_create)</td>
+      <td>[ibmcloud cs worker-pool-get](#cs_worker_pool_get)</td>
+      <td>[ibmcloud cs worker-pool-rebalance](#cs_rebalance)</td>
+      <td>[ibmcloud cs worker-pool-resize](#cs_worker_pool_resize)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud cs worker-pool-rm](#cs_worker_pool_rm)</td>
+      <td>[ibmcloud cs worker-pools](#cs_worker_pools)</td>
+      <td>[ibmcloud cs zone-add](#cs_zone_add)</td>
+      <td>[ibmcloud cs zone-network-set](#cs_zone_network_set)</td>
+    </tr>
+    <tr>
+     <td>[ibmcloud cs zone-rm](#cs_zone_rm)</td>
+     <td></td>
+    </tr>
+  </tbody>
+</table>
 
 ## API commands
 {: #api_commands}
@@ -627,7 +656,7 @@ ibmcloud cs cluster-config my_cluster
 {: pre}
 
 
-### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -639,11 +668,11 @@ Create a cluster in your organization. For free clusters, you specify the cluste
 
 <dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file.  This value is optional for standard clusters and is not available for free clusters.
 
-<p><strong>Note:</strong> If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--location</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.
+<p><strong>Note:</strong> If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--zone</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
-location: <em>&lt;location&gt;</em>
+zone: <em>&lt;zone&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_VLAN&gt;</em>
@@ -668,8 +697,8 @@ trusted: <em>true</em>
 </td>
     </tr>
     <tr>
-    <td><code><em>location</em></code></td>
-    <td>Replace <code><em>&lt;location&gt;</em></code> with the location where you want to create your cluster. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud cs locations</code>. </td>
+    <td><code><em>zone</em></code></td>
+    <td>Replace <code><em>&lt;zone&gt;</em></code> with the zone where you want to create your cluster. The available zones are dependent on the region that you are logged in. To list available zones, run <code>ibmcloud cs zones</code>. </td>
      </tr>
      <tr>
      <td><code><em>no-subnet</em></code></td>
@@ -677,15 +706,15 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
+     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
+     <td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;zone&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>Replace <code><em>&lt;public_VLAN&gt;</em></code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>fcr</code> (front-end router).</td>
+     <td>Replace <code><em>&lt;public_VLAN&gt;</em></code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;zone&gt;</em></code> and look for VLAN routers that start with <code>fcr</code> (front-end router).</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
@@ -711,17 +740,16 @@ trusted: <em>true</em>
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>The level of hardware isolation for your worker node. Use dedicated to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared.  This value is optional for standard clusters and is not available for free clusters.</dd>
 
-<dt><code>--location <em>LOCATION</em></code></dt>
-<dd>The location where you want to create the cluster. The locations that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance.  This value is required for standard clusters and is optional for free clusters.
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>The zone where you want to create the cluster. The zones that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance.  This value is required for standard clusters and is optional for free clusters.
 
-<p>Review [available locations](cs_regions.html#locations).
-</p>
+<p>Review [available zones](cs_regions.html#zones).</p>
 
-<p><strong>Note:</strong> When you select a location that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
+<p><strong>Note:</strong> When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
@@ -739,25 +767,25 @@ trusted: <em>true</em>
 
 <ul>
 <li>This parameter is not available for free clusters.</li>
-<li>If this standard cluster is the first standard cluster that you create in this location, do not include this flag. A private VLAN is created for you when the clusters is created.</li>
-<li>If you created a standard cluster before in this location or created a private VLAN in IBM Cloud infrastructure (SoftLayer) before, you must specify that private VLAN.
+<li>If this standard cluster is the first standard cluster that you create in this zone, do not include this flag. A private VLAN is created for you when the clusters is created.</li>
+<li>If you created a standard cluster before in this zone or created a private VLAN in IBM Cloud infrastructure (SoftLayer) before, you must specify that private VLAN.
 
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
-<p>To find out if you already have a private VLAN for a specific location or to find the name of an existing private VLAN, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>To find out if you already have a private VLAN for a specific zone or to find the name of an existing private VLAN, run <code>ibmcloud cs vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
 <li>This parameter is not available for free clusters.</li>
-<li>If this standard cluster is the first standard cluster that you create in this location, do not use this flag. A public VLAN is created for you when the cluster is created.</li>
-<li>If you created a standard cluster before in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
+<li>If this standard cluster is the first standard cluster that you create in this zone, do not use this flag. A public VLAN is created for you when the cluster is created.</li>
+<li>If you created a standard cluster before in this zone or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
 
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
-<p>To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud cs vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 
 
@@ -771,7 +799,7 @@ trusted: <em>true</em>
 
 <dt><code>--trusted</code></dt>
 <dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
-<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
+<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud cs machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -788,18 +816,18 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-  **Create your first standard cluster**: The first standard cluster that is created in a location also creates a private VLAN. Therefore, do not include the `--public-vlan` flag.
+  **Create your first standard cluster**: The first standard cluster that is created in a zone also creates a private VLAN. Therefore, do not include the `--public-vlan` flag.
   {: #example_cluster_create}
 
   ```
-  ibmcloud cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ibmcloud cs cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
-  **Create subsequent standard clusters**: If you already created a standard cluster in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run `ibmcloud cs vlans <location>`.
+  **Create subsequent standard clusters**: If you already created a standard cluster in this zone or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud cs vlans <zone>`.
 
   ```
-  ibmcloud cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ibmcloud cs cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -826,7 +854,7 @@ Enable a feature on an existing cluster.
 
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
-   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
+   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud cs machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -878,15 +906,15 @@ View information about a cluster in your organization.
   State:       normal
   Trust ready: false
   Created:     2018-01-01T17:19:28+0000
-  Location:    dal10
+  Zone:        dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
   Master Location: Dallas
   Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
-  Workers:     3
-  Worker Locations: dal10
-  Version:     1.10.3
-  Owner Email: name@example.com
+  Workers:      3
+  Worker Zones: dal10
+  Version:      1.10.3
+  Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
   Addons
@@ -1233,7 +1261,7 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
    <dd>The number of subnet IP addresses. This value is required. Possible values are 8, 16, 32, or 64.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud cs vlans <location>` [command](#cs_vlans). </dd>
+   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud cs vlans <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1711,10 +1739,10 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
   {: pre}
 
 
-### ibmcloud cs machine-types LOCATION [--json] [-s]
+### ibmcloud cs machine-types ZONE [--json] [-s]
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the ecryption](cs_secure.html#encrypted_disk).
+View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the ecryption](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
 You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](cs_clusters.html#shared_dedicated_node).
@@ -1722,8 +1750,8 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Enter the location where you want to list available machine types. This value is required. Review [available locations](cs_regions.html#locations).</dd>
+   <dt><code><em>ZONE</em></code></dt>
+   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](cs_regions.html#zones).</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -1739,16 +1767,16 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   ```
   {: pre}
 
-### ibmcloud cs vlans LOCATION [--all] [--json] [-s]
+### ibmcloud cs vlans ZONE [--all] [--json] [-s]
 {: #cs_vlans}
 
-List the public and private VLANs that are available for a location in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
+List the public and private VLANs that are available for a zone in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
 
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Enter the location where you want to list your private and public VLANs. This value is required. Review [available locations](cs_regions.html#locations).</dd>
+   <dt><code><em>ZONE</em></code></dt>
+   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](cs_regions.html#zones).</dd>
 
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
@@ -2146,10 +2174,10 @@ Update a logging filter. You can use this command to update a logging filter tha
 ## Region commands
 {: #region_commands}
 
-### ibmcloud cs locations [--json] [-s]
+### ibmcloud cs zones [--json] [-s]
 {: #cs_datacenters}
 
-View a list of available locations for you to create a cluster in. The available locations vary by the region that you are logged in to. To switch regions, run `ibmcloud cs region-set`.
+View a list of available zones for you to create a cluster in. The available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud cs region-set`.
 
 <strong>Command options</strong>:
 
@@ -2164,7 +2192,7 @@ View a list of available locations for you to create a cluster in. The available
 **Example**:
 
   ```
-  ibmcloud cs locations
+  ibmcloud cs zones
   ```
   {: pre}
 
@@ -2200,7 +2228,7 @@ For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US Sout
 <dt><code><em>REGION</em></code></dt>
 <dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
 
-For a list of available regions, review [regions and locations](cs_regions.html) or use the `ibmcloud cs regions` [command](#cs_regions).</dd></dl>
+For a list of available regions, review [regions and zones](cs_regions.html) or use the `ibmcloud cs regions` [command](#cs_regions).</dd></dl>
 
 **Example**:
 
@@ -2260,10 +2288,10 @@ us-south      us-south
 {: worker_node_commands}
 
 
-###  ibmcloud cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+### Deprecated: ibmcloud cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
-Add worker nodes to your standard cluster.
+Add standalone worker nodes to your standard cluster that are not in a worker pool.
 
 <strong>Command options</strong>:
 
@@ -2278,7 +2306,7 @@ Add worker nodes to your standard cluster.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_ID&gt;</em>
-location: <em>&lt;location&gt;</em>
+zone: <em>&lt;zone&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_VLAN&gt;</em>
 public-vlan: <em>&lt;public_VLAN&gt;</em>
@@ -2297,20 +2325,20 @@ diskEncryption: <em>false</em></code></pre>
 <td>Replace <code><em>&lt;cluster_name_or_ID&gt;</em></code> with the name or ID of the cluster where you want to add worker nodes.</td>
 </tr>
 <tr>
-<td><code><em>location</em></code></td>
-<td>Replace <code><em>&lt;location&gt;</em></code> with the location to deploy your worker nodes. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud cs locations</code>.</td>
+<td><code><em>zone</em></code></td>
+<td>Replace <code><em>&lt;zone&gt;</em></code> with the zone to deploy your worker nodes. The available zones are dependent on the region that you are logged in. To list available zones, run <code>ibmcloud cs zones</code>.</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types).</td>
+<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types).</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
+<td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;zone&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans &lt;location&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: {[private_VLAN_vyatta]}</td>
+<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans &lt;zone&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: {[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2329,7 +2357,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
@@ -2554,7 +2582,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 ### ibmcloud cs worker-rm [-f] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_rm}
 
-Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. 
+Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. You can automatically rebalance your worker pool by running the `ibmcloud cs worker-pool-rebalance` [command](#cs_rebalance).
 
 Before you remove your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
@@ -2658,7 +2686,7 @@ You might need to change your YAML files for deployments before updating. Review
   {: pre}
 
 
-### ibmcloud cs workers CLUSTER [--show-deleted] [--json] [-s]
+### ibmcloud cs workers CLUSTER [--worker-pool] POOL [--show-deleted] [--json] [-s]
 {: #cs_workers}
 
 View a list of worker nodes and the status for each in a cluster.
@@ -2669,7 +2697,8 @@ View a list of worker nodes and the status for each in a cluster.
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
 
-   
+   <dt><code>--worker-pool <em>POOL</em></code></dt>
+   <dd>View only worker nodes that belong to the worker pool. To list available worker pools, run `ibmcloud cs worker-pools --cluster <cluster_name_or_ID>`. This value is optional.</dd>
 
    <dt><code>--show-deleted</code></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
@@ -2691,4 +2720,292 @@ View a list of worker nodes and the status for each in a cluster.
 <br />
 
 
+## Worker pool commands
+{: #worker-pool}
 
+### ibmcloud cs worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE [--hardware ISOLATION] [--labels LABELS] [--disable-disk-encrypt]
+{: #cs_worker_pool_create}
+
+You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
+
+<strong>Command options</strong>:
+<dl>
+
+  <dt><code>--name <em>POOL_NAME</em></code></dt>
+    <dd>The name that you want to give your worker pool.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
+    <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers to create in each zone. This value is required.</dd>
+
+  <dt><code>--hardware <em>HARDWARE</em></code></dt>
+    <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
+
+  <dt><code>--labels <em>LABELS</em></code></dt>
+    <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
+
+  <dt><code>--diable-disk-encrpyt</code></dt>
+    <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
+
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud cs worker-pool-create my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ```
+  {: pre}
+
+### ibmcloud cs worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER
+{: #cs_worker_pool_get}
+
+View the details of a worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud cs worker-pools --cluster <cluster_name_or_ID>`. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud cs worker-pool-get --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+**Example output**:
+
+  ```
+  Name:               pool   
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
+  State:              active   
+  Hardware:           shared   
+  Zones:              dal10,dal12   
+  Workers per zone:   3   
+  Machine type:       b2c.4x16.encrypted   
+  Labels:             -   
+  Version:            1.9.8_1512
+  ```
+  {: screen}
+
+### ibmcloud cs worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+{: #cs_rebalance}
+
+You can rebalance your worker pool after you delete a worker node. When you run this command a new worker or workers are added to your worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code><em>--cluster CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+  <dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
+    <dd>The worker pool that you want to rebalance. This value is required.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud cs worker-pool-rebalance --cluster my_cluster --worker-pool my_pool
+  ```
+  {: pre}
+
+### ibmcloud cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+{: #cs_worker_pool_resize}
+
+Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster. Your worker pool must have at least 1 worker node.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers that you want to have in each zone. This value is required, and must be 1 or greater.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud cs worker-pool-resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
+  ```
+  {: pre}
+
+### ibmcloud cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [--json] [-s]
+{: #cs_worker_pool_rm}
+
+Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud cs worker-pool-rm --cluster my_cluster --worker-pool pool1
+  ```
+  {: pre}
+
+### ibmcloud cs worker-pools --cluster CLUSTER [--json] [-s]
+{: #cs_worker_pools}
+
+View the worker pools that you have in a cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud cs worker-pools --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud cs zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
+{: #cs_zone_add}
+
+**Multizone clusters only**: After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>A comma-separated list of worker pools that the zone is added to. At least 1 worker pool is required.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd><p>The ID of the private VLAN. This value is conditional.</p>
+    <p>If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud cs cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
+    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
+<p>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</p></dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd><p>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run <code>ibmcloud cs cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
+    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
+    <p>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</p></dd>
+
+  <dt><code>--private-only</code></dt>
+    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Planning private external networking for a private VLAN setup only](cs_network_planning.html#private_vlan).</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud cs zone-add --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+  ### ibmcloud cs zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--json] [-s]
+  {: #cs_zone_network_set}
+
+  **Multizone clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
+
+  <strong>Command options</strong>:
+
+  <dl>
+    <dt><code>--zone <em>ZONE</em></code></dt>
+      <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>A comma-separated list of worker pools that the zone is added to. At least 1 worker pool is required.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd>The ID of the public VLAN. This value is required if you want to change the public VLAN for the zone. If you do not want to change the private VLAN with the public VLAN, use the same private VLAN ID. The public VLAN ID must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+  **Example**:
+
+  ```
+  ibmcloud cs zone-network-set --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+### ibmcloud cs zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
+{: #cs_zone_rm}
+
+**Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
+
+Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
+{: tip}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-f</code></dt>
+    <dd>Force the update with no user prompts. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud cs zone-rm --zone dal10 --cluster my_cluster
+  ```
+  {: pre}

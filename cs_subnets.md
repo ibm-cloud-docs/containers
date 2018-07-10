@@ -79,7 +79,7 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud cs worker-get &lt;worker_id&gt;</code> command. </td>
+    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud cs worker-get &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
     </tr>
     </tbody></table>
 
@@ -133,7 +133,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-2.  Confirm the location that the VLAN is located. In this example, the location is dal10.
+2.  Confirm the zone that the VLAN is located. In this example, the zone is dal10.
 
     ```
     ibmcloud cs vlans dal10
@@ -149,10 +149,10 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-3.  Create a cluster by using the location and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+3.  Create a cluster by using the zone and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
-    ibmcloud cs cluster-create --location dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud cs cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -168,7 +168,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location   Version
+    Name         ID                                   State      Created          Workers   Zone   Version
     mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.8
     ```
     {: screen}
@@ -183,7 +183,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
     prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.8
     ```
     {: screen}

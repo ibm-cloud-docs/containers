@@ -25,8 +25,8 @@ Edge worker nodes can improve the security of your Kubernetes cluster by allowin
 
 When these worker nodes are marked for networking only, other workloads cannot consume the CPU or memory of the worker node and interfere with networking.
 
-
-
+If you have a multizone cluster and want to restrict network traffic to edge worker nodes, ensure that at least 2 edge worker nodes are enabled in each zone for high availability of load balancer or Ingress pods. If edge worker nodes are enabled in some zones but not in others, load balancers will not deploy uniformly. Load balancers will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
+{: tip}
 
 ## Labeling worker nodes as edge nodes
 {: #edge_nodes}
