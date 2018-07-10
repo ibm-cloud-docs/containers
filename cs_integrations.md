@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -231,7 +231,7 @@ Before you begin:
 
 1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 2. [Request an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
-   **Note:** To create an instance of a service in the Washington DC <prod id="zone-lc">location<staging id="zone-lc">zone</staging>, you must use the CLI.
+   **Note:** To create an instance of a service in the Washington DC location, you must use the CLI.
 3. Cloud Foundry services are supported to bind with clusters, but other services are not. You can see the different service types after you create the service instance and the services are grouped in the dashboard as **Cloud Foundry Services** and **Services**. To bind the services in the **Services** section with clusters, [first create Cloud Foundry aliases](#adding_resource_cluster).
 
 **Note:**

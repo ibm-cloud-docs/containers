@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -59,7 +59,7 @@ Review the following default Calico network policies that are automatically appl
 
 **Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 
- <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in column one and IP addresses to match in column two.">
+ <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server location in column one and IP addresses to match in column two.">
  <caption>Default Calico policies for each cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Default Calico policies for each cluster</th>
@@ -257,7 +257,7 @@ To install and configure the 3.1.1 Calico CLI:
           ```
           {: screen}
 
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>-<cluster_name>.yml` from the end of the output.
+        **Note**: To get the directory path, remove the file name `kube-config-prod-<location>-<cluster_name>.yml` from the end of the output.
 
     3. Retrieve the `ca-*pem_file`.
 
@@ -430,7 +430,7 @@ To install and configure the 1.6.3 Calico CLI:
           ```
           {: screen}
 
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<<prod id="zone-lc">location<staging id="zone-lc">zone</staging>>-<cluster_name>.yml` from the end of the output.
+        **Note**: To get the directory path, remove the file name `kube-config-prod-<location>-<cluster_name>.yml` from the end of the output.
 
     3. Retrieve the `ca-*pem_file`.
 

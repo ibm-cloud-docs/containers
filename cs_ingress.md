@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -209,7 +209,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>:                 dal10
+    Location<staging zone-uc-new>Zone</staging zone-lc-new>:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -524,7 +524,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>:                 dal10
+    Location<staging zone-uc-new>Zone</staging zone-lc-new>:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>

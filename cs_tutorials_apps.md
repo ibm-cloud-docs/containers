@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -280,7 +280,7 @@ To deploy the app:
         ibmcloud cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
         kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.8
         ```
         {: screen}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -59,7 +59,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Cluster hardware and ownership</td>
  <td>In standard clusters, the hardware can be shared by other {{site.data.keyword.IBM_notm}} customers or dedicated to you only. The public and private VLANs are owned and managed by you in your IBM Cloud infrastructure (SoftLayer) account.</td>
- <td>In clusters on {{site.data.keyword.Bluemix_dedicated_notm}}, the hardware is always dedicated. The public and private VLANs that are available for cluster creation are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up, and are owned and managed by IBM for you. The <prod id="zone-lc">location<staging id="zone-lc">zone</staging> that is available during cluster creation is also pre-defined for the {{site.data.keyword.Bluemix_notm}} environment.</td>
+ <td>In clusters on {{site.data.keyword.Bluemix_dedicated_notm}}, the hardware is always dedicated. The public and private VLANs that are available for cluster creation are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up, and are owned and managed by IBM for you. The location that is available during cluster creation is also pre-defined for the {{site.data.keyword.Bluemix_notm}} environment.</td>
  </tr>
  <tr>
  <td>Load balancer and Ingress networking</td>
@@ -253,7 +253,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     1. Enter a **Cluster Name**. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
-    2. Select the **<prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>** in which to deploy your cluster. The available <prod id="zone-lc">location<staging id="zone-lc">zone</staging> was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up.
+    2. Select the **Location<staging zone-uc-new>Zone</staging zone-lc-new>** in which to deploy your cluster. The available location was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up.
 
     3. Choose the Kubernetes API server version for the cluster master node.
 
@@ -266,7 +266,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
 
-    5. Select a **Machine type**. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different machine types by adding a worker node to the cluster.
+    5. Select a **Machine type**. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different machine types by adding a worker node to the cluster.
 
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
@@ -298,7 +298,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     Example:
 
     ```
-    ibmcloud cs cluster-create --<prod id="zone-lc">location<staging id="zone-lc">zone</staging> <<prod id="zone-lc">location<staging id="zone-lc">zone</staging>> --machine-type <machine_type> --name <cluster_name> --workers <number>
+    ibmcloud cs cluster-create --location <location> --machine-type <machine_type> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
@@ -313,12 +313,12 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>The command to create a cluster in your {{site.data.keyword.Bluemix_notm}} organization.</td>
     </tr>
     <tr>
-    <td><code>--<prod id="zone-lc">location<staging id="zone-lc">zone</staging> <em>&lt;<prod id="zone-lc">location<staging id="zone-lc">zone</staging>&gt;</em></code></td>
-    <td>Enter the {{site.data.keyword.Bluemix_notm}} <prod id="zone-lc">location<staging id="zone-lc">zone</staging> ID that your Dedicated environment is configured to use.</td>
+    <td><code>--location <em>&lt;location&gt;</em></code></td>
+    <td>Enter the {{site.data.keyword.Bluemix_notm}} location ID that your Dedicated environment is configured to use.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
+    <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -369,7 +369,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
+    Name         ID                                   State      Created          Workers   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
     my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.8
     ```
     {: screen}
@@ -386,7 +386,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   <prod id="zone-uc">Location<staging id="zone-uc">Zone</staging>   Version
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location<staging zone-uc-new>Zone</staging zone-lc-new>   Version
     kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.8
     ```
     {: screen}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-09"
+lastupdated: "2018-07-10"
 
 ---
 
@@ -2568,7 +2568,7 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> or service, use `key=<prod id="zone-lc">location<staging id="zone-lc">zone</staging>`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
@@ -2635,7 +2635,7 @@ spec:
 </tr>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the <prod id="zone-lc">location<staging id="zone-lc">zone</staging> or service, use `key=<prod id="zone-lc">location<staging id="zone-lc">zone</staging>`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
