@@ -138,7 +138,7 @@ To install and configure the 3.1.1 Calico CLI:
 
 1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
 
-    If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
+    If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
     {: tip}
 
 2. For OSX and Linux users, complete the following steps.
@@ -217,14 +217,14 @@ To install and configure the 3.1.1 Calico CLI:
           Example output:
 
           ```
-          https://169.xx.xxx.xxx:30001
+          https://169.xx.xxx.xxx:30000
           ```
           {: screen}
 
       - Windows:
         <ol>
         <li>Get the calico configuration values from the configmap. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-        <li>In the `data` section, locate the etcd_endpoints value. Example: <code>https://169.xx.xxx.xxx:30001</code>
+        <li>In the `data` section, locate the etcd_endpoints value. Example: <code>https://169.xx.xxx.xxx:30000</code>
         </ol>
 
     2. Retrieve the `<CERTS_DIR>`, the directory that the Kubernetes certificates are downloaded in.
@@ -272,31 +272,37 @@ To install and configure the 3.1.1 Calico CLI:
           <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
           <li> Locate the <code>ca-*pem_file</code> file.</ol>
 
-    4. Verify that the Calico configuration is working correctly.
+8. Apply the file.
+    ```
+    kubectl apply -f calicoctl.cfg
+    ```
+    {: pre}
 
-        - Linux and OS X:
+9. Verify that the Calico configuration is working correctly.
 
-          ```
-          calicoctl get nodes
-          ```
-          {: pre}
+    - Linux and OS X:
 
-        - Windows:
+      ```
+      calicoctl get nodes
+      ```
+      {: pre}
 
-          ```
-          calicoctl get nodes --config=filepath/calicoctl.cfg
-          ```
-          {: pre}
+    - Windows:
 
-          Output:
+      ```
+      calicoctl get nodes --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
-          ```
-          NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-          ```
-          {: screen}
+      Output:
+
+      ```
+      NAME
+      kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
+      kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
+      kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
+      ```
+      {: screen}
 
 
 ### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier
@@ -729,7 +735,7 @@ policy changes to be applied throughout the cluster.
   ```
   {: pre}
 
-For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](cs_tutorials_policies.html). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
 
 ## Controlling traffic between pods
@@ -748,7 +754,7 @@ The following scenario demonstrates how to manage traffic between app microservi
 
 An Accounts team deploys multiple app services in one namespace, but they need isolation to permit only necessary communication between the microservices over the public network. For the app Srv1, the team has frontend, backend, and database services. They label each service with the `app: Srv1` label and the `tier: frontend`, `tier: backend`, or `tier: db` label.
 
-<img src="images/cs_network_policy_single_ns.png" width="200" alt="Use a network policy to manage cross-namepsace traffic." style="width:200px; border-style: none"/>
+<img src="images/cs_network_policy_single_ns.png" width="200" alt="Use a network policy to manage cross-namespace traffic." style="width:200px; border-style: none"/>
 
 The Accounts team wants to allow traffic from the frontend to the backend, and from the backend to the database. They use labels in their network policies to designate which traffic flows are permitted between microservices.
 
