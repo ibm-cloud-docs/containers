@@ -48,9 +48,15 @@ To check which {{site.data.keyword.Bluemix_notm}} region you are currently in, r
 
 For example, you can use the following commands to log in to {{site.data.keyword.Bluemix_notm}} region API endpoints:
 
-  * US South and US East
+  * US South
       ```
       ibmcloud login -a api.ng.bluemix.net
+      ```
+      {: pre}
+      
+  * US East
+      ```
+      ibmcloud login -a api.us-east.bluemix.net
       ```
       {: pre}
 
