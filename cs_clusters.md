@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-11"
 
 ---
 
@@ -63,10 +63,11 @@ Before you get too far, you need to take care of a few admin items to ensure you
 
 Start today in the [{{site.data.keyword.containershort_notm}} console](https://console.bluemix.net/containers-kubernetes/clusters) by clicking **Create Cluster**.
 
-You can create a cluster in one of [three multizone cities](cs_regions.html#zones):
+You can create a cluster in one of the [multizone cities](cs_regions.html#zones):
 * Dallas in US South region: dal10, dal12, dal13
 * Washington DC in US East region: wdc04, wdc06, wdc07
 * Frankfurt in EU Central region: fra02, fra04, fra05
+* London in UK South region: lon02, lon04, lon06
 
 **Add zones to an existing cluster**:
 

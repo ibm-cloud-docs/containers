@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-11"
 
 ---
 
@@ -140,8 +140,8 @@ To view documentation on the API commands, view [https://containers.bluemix.net/
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
-* **Multizone Metro City**: You can create a cluster with worker nodes across zones.
-* **Single Zone City**: You can create a cluster with the worker nodes contained within the zone.
+* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones.
+* **Single Zone City**: Worker nodes in clusters that are created in a single zone city stay within one zone. You cannot spread worker nodes across multiple zones.
 
 <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro cities in column two, and the single zone cities in column three.">
 <caption>Available single and multizones by region.</caption>
@@ -174,8 +174,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>None</td>
-      <td><p>London: lon02, lon04</p></td>
+      <td>London: lon02, lon04, lon06</td>
+      <td></td>
     </tr>
     <tr>
       <td>US East</td>
