@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-11"
 
 
 ---
@@ -162,7 +162,7 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 
 
 
-### Authorizing users with custom Kubernetes RBAC roles
+## Authorizing users with custom Kubernetes RBAC roles
 {: #rbac}
 
 {{site.data.keyword.containershort_notm}} access policies correspond with certain Kubernetes role-based access control (RBAC) roles. To authorize other Kubernetes roles that differ from the corresponding access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
@@ -173,6 +173,7 @@ There are times that you might need access policies to be more granular than an 
 When a binding is created for a group, it affects any user that is added or removed from that group. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
 {: tip}
 
+If you want to assign access to a service such as for a continuous integration, continuous delivery pipeline, you can use [Kubernetes Service Accounts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/).
 
 **Before you begin**
 
@@ -270,6 +271,9 @@ When a binding is created for a group, it affects any user that is added or remo
         - kind: User
           name: https://iam.ng.bluemix.net/kubernetes#user2@example.com
           apiGroup: rbac.authorization.k8s.io
+        - kind: User
+          name: system:serviceaccount:<namespace>:<service_account_name>
+          apiGroup: rbac.authorization.k8s.io
         roleRef:
           kind: Role
           name: custom-rbac-test
@@ -305,7 +309,8 @@ When a binding is created for a group, it affects any user that is added or remo
             </tr>
             <tr>
               <td><code>subjects/name</code></td>
-              <td><ul><li>Append the user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`.</li><li>For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li></ul></td>
+              <td><ul><li>**For individual users**: Append the user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`. For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li>
+              <li>**For service accounts**: Specify the namespace and service name. For example: `system:serviceaccount:<namespace>:<service_account_name>`</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects/apiGroup</code></td>
