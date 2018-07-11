@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-11"
 
 ---
 
@@ -111,7 +111,15 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--syslog-protocol</em></code></td>
-      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`,  or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, `tls`, or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+    </tr>
+    <tr>
+      <td><code><em>--ca-cert</em></code></td>
+      <td>Required: When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the Kubernetes secret name that contains the Certificate Authority certificate.</td>
+    </tr>
+    <tr>
+      <td><code><em>--verify-mode</em></code></td>
+      <td>When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the verification mode. Supported values are <code>verify-peer</code> and the default <code>verify-none</code>.</td>
     </tr>
     <tr>
       <td><code><em>--skip-validation</em></code></td>
@@ -225,6 +233,35 @@ If you have apps that run in your containers that can't be configured to write l
 </br>
 </br>
 
+
+**Forwarding logs to your own server over the `tls` protocol**
+
+The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
+{: tip}
+
+1. Set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+
+2. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
+
+3. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+4. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located. If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. Create a log forwarding configuration.
+    ```
+    ibmcloud cs logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br>
+</br>
 
 
 ### Verifying log forwarding
