@@ -22,8 +22,8 @@ lastupdated: "2018-07-11"
 You can view, manage, and audit user-initated activities that change the state of your instance of your {{site.data.keyword.containershort_notm}} instance by using the {{site.data.keyword.cloudaccesstrailshort}} service.
 {: shortdesc}
 
-## Finding the Information
-{: at-find}
+## Finding the information
+{: #at-find}
 
 {{site.data.keyword.cloudaccesstrailshort}} events are available in the {{site.data.keyword.cloudaccesstrailshort}} **account domain** that is available in the {{site.data.keyword.Bluemix_notm}} region where the events are generated. {{site.data.keyword.cloudaccesstrailshort}} events are available in the {{site.data.keyword.cloudaccesstrailshort}} **space domain** that is associated to the Cloud Foundry space where the {{site.data.keyword.cloudaccesstrailshort}} service is provisioned.
 
