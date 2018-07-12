@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-12"
 
 ---
 
@@ -70,7 +70,8 @@ The following table is an overview of available {{site.data.keyword.Bluemix_notm
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
 | IBM MQ Advanced | 9.0.5 | CNU1VML |
-| IBM WebSphere Application Server Liberty | 18.0.0.2 | CJ0H2ML, CJ0H3ML |
+| IBM WebSphere Application Server Liberty (IBM Installation Manager install) | 16.0.0.3 | CND1GML |
+| IBM WebSphere Application Server Liberty (Archive install) | 16.0.0.3 | CND1HML |
 {: caption="Table. Supported {{site.data.keyword.Bluemix_notm}} Private products to be used in {{site.data.keyword.Bluemix_notm}} Public." caption-side="top"}
 
 Before you begin: 
