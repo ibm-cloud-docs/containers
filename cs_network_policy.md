@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-12"
 
 ---
 
@@ -272,11 +272,7 @@ To install and configure the 3.1.1 Calico CLI:
           <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
           <li> Locate the <code>ca-*pem_file</code> file.</ol>
 
-8. Apply the file.
-    ```
-    kubectl apply -f calicoctl.cfg
-    ```
-    {: pre}
+8. Save the file, and make sure you are in the directory where the file is located.
 
 9. Verify that the Calico configuration is working correctly.
 
@@ -477,6 +473,8 @@ To install and configure the 1.6.3 Calico CLI:
           ```
           {: screen}
 
+          **Important**: Windows and OS X users must include the `--config=filepath/calicoctl.cfg` flag every time you run a `calicoctl` command.
+
 <br />
 
 
@@ -505,10 +503,13 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 ### View network policies in clusters that are running Kubernetes version 1.10 or later
 {: #1.10_examine_policies}
 
+Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
+{: tip}
+
 1. View the Calico host endpoint.
 
     ```
-    calicoctl get hostendpoint -o yaml
+    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
@@ -516,57 +517,60 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 
     [Network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) are scoped to specific namespaces:
     ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide
+    calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
     ```
 
     [Global network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) are not scoped to specific namespaces:
     ```
-    calicoctl get GlobalNetworkPolicy -o wide
+    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 3. View details for a network policy.
 
     ```
-    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace>
+    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace> --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 4. View the details of all global network policies for the cluster.
 
     ```
-    calicoctl get GlobalNetworkPolicy -o yaml
+    calicoctl get GlobalNetworkPolicy -o yaml --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 ### View network policies in clusters that are running Kubernetes version 1.9 or earlier
 {: #1.9_examine_policies}
 
+Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
+{: tip}
+
 1. View the Calico host endpoint.
 
     ```
-    calicoctl get hostendpoint -o yaml
+    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 2. View all of the Calico and Kubernetes network policies that were created for the cluster. This list includes policies that might not be applied to any pods or hosts yet. For a network policy to be enforced, a Kubernetes resource must be found that matches the selector that was defined in the Calico network policy.
 
     ```
-    calicoctl get policy -o wide
+    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 3. View details for a network policy.
 
     ```
-    calicoctl get policy -o yaml <policy_name>
+    calicoctl get policy -o yaml <policy_name> --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
 4. View the details of all network policies for the cluster.
 
     ```
-    calicoctl get policy -o yaml
+    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
     ```
     {: pre}
 
@@ -678,7 +682,7 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
         apiVersion: projectcalico.org/v3
         kind: GlobalNetworkPolicy
         metadata:
-          name: deny-kube-node-port-services
+          name: deny-nodeports
         spec:
           applyOnForward: true
           ingress:
@@ -695,7 +699,8 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
             protocol: UDP
             source: {}
           preDNAT: true
-          selector: ibm.role in { 'worker_public', 'master_public' }
+          selector: ibm.role=='worker_public'
+          order: 1100
           types:
           - Ingress
         ```
@@ -709,7 +714,7 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
         apiVersion: v1
         kind: policy
         metadata:
-          name: deny-kube-node-port-services
+          name: deny-nodeports
         spec:
           preDNAT: true
           selector: ibm.role in { 'worker_public', 'master_public' }
@@ -730,10 +735,19 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
 2. Apply the Calico preDNAT network policy. It takes about 1 minute for the
 policy changes to be applied throughout the cluster.
 
-  ```
-  calicoctl apply -f deny-kube-node-port-services.yaml
-  ```
-  {: pre}
+  - Linux and OS X:
+
+    ```
+    calicoctl apply -f deny-nodeports.yaml
+    ```
+    {: pre}
+
+  - Windows:
+
+    ```
+    calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
 
 To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](cs_tutorials_policies.html). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
