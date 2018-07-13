@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-13"
 
 ---
 
@@ -30,6 +30,8 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
 {:shortdesc}
 
+**What comes with Ingress?**
+
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -40,6 +42,8 @@ Ingress consists of three components:
 <dd><p>**Multizone clusters**: Whenever you change a cluster from single- to multizone by [adding a zone to the cluster](cs_clusters.html#add_zone) for the first time, a multizone load balancer (MZLB) is automatically created and deployed to each zone where you have workers. The MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress Subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, the MZLB health check fails, the DNS lookup returns the available `1.1.1.1` and `2.2.2.2` ALB IPs, and the client accesses one of the available ALB IPs.</p>
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you are using only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME to map the customer domain to the IBM-provide Ingress subdomain for your cluster.</p></dd>
 </dl>
+
+**How does a request get to my app with Ingress in a single zone cluster?**
 
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
@@ -55,6 +59,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
+**How does a request get to my app with Ingress in a multizone cluster?**
 The following diagram shows how Ingress directs communication from the internet to an app in a multizone cluster:
 
 <img src="images/cs_ingress_multizone.png" alt="Expose an app in a multizone cluster by using Ingress" style="border-style: none"/>
