@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-12"
+lastupdated: "2018-07-13"
 
 ---
 
@@ -70,8 +70,7 @@ The following table is an overview of available {{site.data.keyword.Bluemix_notm
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
 | IBM MQ Advanced | 9.0.5 | CNU1VML |
-| IBM WebSphere Application Server Liberty (IBM Installation Manager install) | 16.0.0.3 | CND1GML |
-| IBM WebSphere Application Server Liberty (Archive install) | 16.0.0.3 | CND1HML |
+| IBM WebSphere Application Server Liberty | 16.0.0.3 | Docker Hub image |
 {: caption="Table. Supported {{site.data.keyword.Bluemix_notm}} Private products to be used in {{site.data.keyword.Bluemix_notm}} Public." caption-side="top"}
 
 Before you begin: 
@@ -82,13 +81,19 @@ Before you begin:
 
 To deploy an {{site.data.keyword.Bluemix_notm}} Private image in a cluster in {{site.data.keyword.Bluemix_notm}} Public:
 
-1. Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/services/Registry/ts_index.html#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster. 
+1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/services/Registry/ts_index.html#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster. 
 
-2. Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, then try again.
-   ```
-   helm status <helm_chart_name>
-   ```
-   {: pre}
+    **For IBM WebSphere Application Server Liberty**:
+    
+    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/)](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
+    
+    2.  Follow the [Liberty Helm chart instructions![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html). 
+
+2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, then try again.
+    ```
+    helm status <helm_chart_name>
+    ```
+    {: pre}
    
 3.  Refer to the product-specific documentation for more information about how to configure and use the product with your cluster. 
 
