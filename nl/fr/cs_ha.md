@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Haute disponibilité pour {{site.data.keyword.containerlong_notm}}
@@ -36,7 +38,9 @@ L'architecture et l'infrastructure d'{{site.data.keyword.containerlong_notm}} es
 
 <img src="images/cs_failure_ov.png" alt="Présentation des domaines d'erreur dans un cluster à haute disponibilité au sein d'une région {{site.data.keyword.containershort_notm}}." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="Ce tableau présente les points de défaillance dans {{site.data.keyword.containershort_notm}}. La lecture des lignes s'effectue de gauche à droite, le numéro correspondant au point de défaillance figurant dans la première colonne, son titre dans la deuxième colonne, une description dans la troisième colonne et un lien vers la documentation dans la quatrième colonne.">
+<caption>Points de défaillance</caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -69,13 +73,13 @@ L'architecture et l'infrastructure d'{{site.data.keyword.containerlong_notm}} es
   <tr>
     <td>4</td>
     <td>Défaillance d'emplacement</td>
-    <td>Une défaillance d'emplacement affecte tous les hôtes de calcul physiques et le stockage NFS. Ces défaillances peuvent être des pannes de courant, de ventilation, de réseau ou de stockage ou être dues à des catastrophes naturelles, telles que des inondations, des tremblements de terre ou des ouragans. Pour vous protéger en cas de défaillance d'emplacement, vous devez disposer de clusters à deux emplacements différents dont la charge est équilibrée au moyen d'un équilibreur de charge externe.</td>
+    <td>Une défaillance d'emplacement affecte tous les hôtes de calcul physiques et le stockage NFS. Ces défaillances peuvent être des pannes de courant, de ventilation, de réseau ou de stockage ou être dues à des catastrophes naturelles, telles que des inondations, des tremblements de terre ou des ouragans. Pour vous protéger en cas de défaillance d'un emplacement, vous devez disposer de clusters à deux emplacements différents dont la charge est équilibrée au moyen d'un équilibreur de charge externe.</td>
     <td>[Configuration de clusters à haute disponibilité.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
     <td>5</td>
     <td>Défaillance de région</td>
-    <td>Chaque région est configurée avec un équilibreur de charge à haute disponibilité accessible à partir du noeud final d'API spécifique à la région. L'équilibreur de charge achemine les demandes entrantes et sortantes aux clusters sur les différents emplacements de la région. La probabilité d'une défaillance totale au niveau de la région est faible. Toutefois, si vous voulez prendre en compte cette défaillance, vous pouvez configurer plusieurs clusters dans différentes régions et les connecter entre eux au moyen d'un équilibreur de charge externe. En cas de défaillance d'une région dans son ensemble, le cluster situé dans l'autre région peut prendre le relais. <br/><br/><strong>Remarque :</strong> Un cluster présent dans plusieurs régions nécessite plusieurs ressources de cloud et, en fonction de votre application, peut s'avérer complexe et coûteux. Vérifiez si vous avez besoin d'une configuration sur plusieurs régions ou si vous pouvez tolérer une interruption de service potentielle. Si vous souhaitez configurer un cluster sur plusieurs régions, assurez-vous que votre application et les données peuvent être hébergées dans une autre région et que votre application peut traiter la réplication globale des données.</td>
+    <td>Chaque région est configurée avec un équilibreur de charge à haute disponibilité accessible à partir du noeud final d'API spécifique à la région. L'équilibreur de charge achemine les demandes entrantes et sortantes aux clusters sur les différents emplacements de la région. La probabilité d'une défaillance totale au niveau de la région est faible. Toutefois, pour prendre en compte cette défaillance, vous pouvez configurer plusieurs clusters dans différentes régions et les connecter entre eux au moyen d'un équilibreur de charge externe. En cas de défaillance d'une région dans son ensemble, le cluster situé dans l'autre région peut prendre le relais. <br/><br/><strong>Remarque :</strong> Un cluster présent dans plusieurs régions nécessite plusieurs ressources de cloud et, en fonction de votre application, peut s'avérer complexe et coûteux. Vérifiez si vous avez besoin d'une configuration sur plusieurs régions ou si vous pouvez tolérer une interruption de service potentielle. Si vous souhaitez configurer un cluster sur plusieurs régions, assurez-vous que votre application et les données peuvent être hébergées dans une autre région et que votre application peut traiter la réplication globale des données.</td>
     <td>[Configuration de clusters à haute disponibilité.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ L'architecture et l'infrastructure d'{{site.data.keyword.containerlong_notm}} es
   </tr>
   </tbody>
   </table>
+
+
 

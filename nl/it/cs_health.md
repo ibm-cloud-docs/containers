@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -35,6 +35,7 @@ Se vuoi inoltrare i log da un'origine a entrambi i server di raccolta, devi crea
 Controlla la seguente tabella per informazioni sulle diverse origini log.
 
 <table>
+<caption>Origini log</caption>
   <thead>
     <tr>
       <th>Origine log</th>
@@ -45,13 +46,14 @@ Controlla la seguente tabella per informazioni sulle diverse origini log.
   <tbody>
     <tr>
       <td><code>container</code></td>
-      <td>Log per il tuo contenitore in esecuzione in un cluster Kubernetes.</td>
-      <td>Tutto ciò che è registrato su STDOUT o STDERR nei tuoi contenitori.</td>
+      <td>Log per il tuo contenitore in esecuzione in un cluster Kubernetes. Tutto ciò che è registrato su STDOUT o STDERR. </td>
+      <td> </td>
     </tr>
     <tr>
       <td><code>application</code></td>
       <td>Log per la tua applicazione eseguita in un cluster Kubernetes.</td>
-      <td>Puoi impostare i percorsi.</td>
+      <td><p>Puoi impostare i percorsi. Per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un symlink.</p>
+      <p>Esempio: se il percorso specificato è <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> ma in realtà i log vanno in <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, i log non potranno essere letti.</p></td>
     </tr>
     <tr>
       <td><code>worker</code></td>
@@ -68,17 +70,39 @@ Controlla la seguente tabella per informazioni sulle diverse origini log.
       <td>Log per un programma di bilanciamento del carico dell'applicazione Ingress che gestisce il traffico di rete che entra in un cluster.</td>
       <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
     </tr>
+    <tr>
+      <td><code>kube-audit</code></td>
+      <td>Log per il server API Kubernetes. </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
-Per configurare la registrazione tramite l'interfaccia utente, devi specificare un'organizzazione e uno spazio. Per abilitare la registrazione a livello di account, usa la CLI.
+Per abilitare la registrazione a livello di account o per configurare la registrazione dell'applicazione, utilizza la CLI.
 {: tip}
 
 
-### Prima di iniziare
-{: #before-forwarding}
+### Abilitazione dell'inoltro dei log con la GUI 
+{: #enable-forwarding-ui}
 
-1. Verifica le autorizzazioni. Se hai specificato uno spazio quando hai creato il cluster o la configurazione di registrazione, sia il proprietario dell'account che il proprietario della chiave {{site.data.keyword.containershort_notm}} necessitano delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.
+Puoi impostare una configurazione di registrazione nel dashboard {{site.data.keyword.containershort_notm}}. Il completamento di questo processo può richiedere alcuni minuti, per cui se non visualizzi i log immediatamente, prova ad attendere alcuni minuti e poi ricontrolla. 
+
+1. Passa alla scheda **Panoramica** del dashboard.
+2. Seleziona lo spazio e l'organizzazione Cloud Foundry dai quali desideri inoltrare i log. Quando configuri l'inoltro del log nel dashboard, i log vengono inviati all'endpoint {{site.data.keyword.loganalysisshort_notm}} predefinito del tuo cluster. Per inoltrare i log a un server esterno o a un altro endpoint {{site.data.keyword.loganalysisshort_notm}}, puoi utilizzare la CLI per configurare la registrazione.
+3. Seleziona le origini log dalle quali desideri inoltrare i log.
+
+    Per configurare la registrazione dell'applicazione o degli spazi dei nomi specifici, utilizza la CLI per impostare la tua configurazione di registrazione.
+    {: tip}
+4. Fai clic su **Crea**.
+
+### Abilitazione dell'inoltro dei log con la CLI 
+{: #enable-forwarding}
+
+Puoi creare una configurazione per la registrazione cluster. Puoi differenziare tra le diverse origini log utilizzando gli indicatori. Puoi riesaminare un elenco completo delle opzioni di configurazione nella [guida di riferimento CLI](cs_cli_reference.html#logging_commands).
+
+**Prima di iniziare**
+
+1. Verifica le autorizzazioni. Se hai specificato uno spazio quando hai creato il cluster o la configurazione di registrazione, sia il proprietario dell'account che il proprietario della chiave {{site.data.keyword.containershort_notm}} necessitano delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio. 
   * Se non sai chi sia il proprietario della chiave {{site.data.keyword.containershort_notm}}, immetti il seguente comando.
       ```
       bx cs api-key-info <cluster_name>
@@ -90,7 +114,7 @@ Per configurare la registrazione tramite l'interfaccia utente, devi specificare 
       ```
       {: pre}
 
-  Per ulteriori informazioni sulla modifica delle politiche di accesso e delle autorizzazioni {{site.data.keyword.containershort_notm}}, vedi [Gestione dell'accesso al cluster](cs_users.html#managing).
+  Per ulteriori informazioni sulla modifica delle politiche di accesso e delle autorizzazioni {{site.data.keyword.containershort_notm}}, vedi [Gestione dell'accesso al cluster](cs_users.html#access_policies).
   {: tip}
 
 2. [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster in cui si trova l'origine log.
@@ -102,14 +126,18 @@ Per configurare la registrazione tramite l'interfaccia utente, devi specificare 
   * Configura e gestisci il tuo proprio server o utilizza un provider per gestirlo al tuo posto. Se un provider gestisce il server al tuo posto, richiama l'endpoint di registrazione dal provider di registrazione. Il tuo server syslog deve accettare il protocollo UDP.
   * Esegui syslog da un contenitore. Ad esempio, puoi utilizzare questo [file .yaml di distribuzione![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) per recuperare un'immagine pubblica Docker che esegue un contenitore in un cluster Kubernetes. L'immagine pubblica la porta `514` sull'indirizzo IP del cluster pubblico e utilizza questo indirizzo IP per configurare l'host syslog.
 
-### Abilitazione dell'inoltro dei log
-{: #enable-forwarding}
+    Puoi rimuovere i prefissi syslog per visualizzare i tuoi log come un JSON valido aggiungendo il seguente codice all'inizio del tuo file `etc/rsyslog.conf` in cui è in esecuzione il tuo server rsyslog.</br>
+    ```$template customFormat,"%msg%\n"
+    $ActionFileDefaultTemplate customFormat
+    ```
+    {: tip}
 
-Puoi creare una configurazione per la registrazione cluster. Puoi differenziare tra le diverse origini log utilizzando indicatori pertinenti. Puoi riesaminare un elenco completo delle opzioni di configurazione nella [guida di riferimento CLI](cs_cli_reference.html#logging_commands). Se riscontri dei problemi, prova a risolverli utilizzando questa [guida per la risoluzione dei problemi](cs_troubleshoot_health.html).
+
+**Inoltro dei log**
 
 1. Crea una configurazione di inoltro dei log.
   ```
-  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
   ```
   {: pre}
 
@@ -139,59 +167,63 @@ Puoi creare una configurazione per la registrazione cluster. Puoi differenziare 
       Se hai applicazioni eseguite nei tuoi contenitori che non possono essere configurate per scrivere i log in STDOUT o STDERR, puoi creare una configurazione di registrazione per inoltrare i log dai file di log dell'applicazione.
       {: tip}
 
-
   <table>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-      <td>Il nome o l'ID del cluster.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_source&gt;</em></code></td>
-      <td>L'origine da cui vuoi inoltrare i log. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-      <td>Facoltativo: lo spazio dei nomi Kubernetes da cui vuoi inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine log <code>container</code>. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-      <td><p>Per {{site.data.keyword.loganalysisshort_notm}}, utilizza l'[URL di inserimento](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se non specifichi un URL di inserimento, viene utilizzato l'endpoint per la regione in cui hai creato il tuo cluster.</p>
-      <p>Per syslog, specifica il nome host o l'indirizzo IP del servizio di raccolta log.</p></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt; port&gt;</em></code></td>
-      <td>La porta di inserimento. Se non specifichi una porta, viene utilizzata la porta standard <code>9091</code>.
-      <p>Per syslog, specifica la porta del server di raccolta log. Se non specifichi una porta, viene utilizzata la porta standard <code>514</code>.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Facoltativo: il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Quando inoltri i log a {{site.data.keyword.loganalysisshort_notm}}, lo spazio e l'organizzazione sono specificati nel punto di inserimento. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>Il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è obbligatorio se hai specificato uno spazio.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;type&gt;</em></code></td>
-      <td>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>Il percorso su un contenitore a cui accedono le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>Facoltativo: per inoltrare i log dalle applicazioni, puoi specificare il nome del contenitore che contiene la tua applicazione. Puoi specificare più di un contenitore utilizzando un elenco separato da virgole. Se non si specificano i contenitori, i log vengono inoltrati da tutti i contenitori che contengono i percorsi da te forniti.</td>
-    </tr>
-    <tr>
-      <td><code><em>--skip-validation</em></code></td>
-      <td>Facoltativo: ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltrerà correttamente i log.</td>
-    </tr>
-  </tbody>
+  <caption>Descrizione dei componenti di questo comando</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>Il nome o l'ID del cluster.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;log_source&gt;</em></code></td>
+        <td>L'origine da cui vuoi inoltrare i log. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+        <td>Facoltativo: lo spazio dei nomi Kubernetes da cui vuoi inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine log <code>container</code>. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+        <td><p>Per {{site.data.keyword.loganalysisshort_notm}}, utilizza l'[URL di inserimento](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se non specifichi un URL di inserimento, viene utilizzato l'endpoint per la regione in cui hai creato il tuo cluster.</p>
+        <p>Per syslog, specifica il nome host o l'indirizzo IP del servizio di raccolta log.</p></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt; port&gt;</em></code></td>
+        <td>La porta di inserimento. Se non specifichi una porta, viene utilizzata la porta standard <code>9091</code>.
+        <p>Per syslog, specifica la porta del server di raccolta log. Se non specifichi una porta, viene utilizzata la porta standard <code>514</code>.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;cluster_space&gt;</em></code></td>
+        <td>Facoltativo: il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Quando inoltri i log a {{site.data.keyword.loganalysisshort_notm}}, lo spazio e l'organizzazione sono specificati nel punto di inserimento. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;cluster_org&gt;</em></code></td>
+        <td>Il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è obbligatorio se hai specificato uno spazio.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;type&gt;</em></code></td>
+        <td>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
+        <td>Il percorso su un contenitore a cui accedono le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;containers&gt;</em></code></td>
+        <td>Facoltativo: per inoltrare i log dalle applicazioni, puoi specificare il nome del contenitore che contiene la tua applicazione. Puoi specificare più di un contenitore utilizzando un elenco separato da virgole. Se non si specificano i contenitori, i log vengono inoltrati da tutti i contenitori che contengono i percorsi da te forniti.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;protocol&gt;</em></code></td>
+        <td>Quando il tipo di registrazione è <code>syslog</code>, il protocollo del livello di trasporto. I valori supportati sono <code>TCP</code> e il valore predefinito <code>UDP</code>. Quando esegui l'inoltro a un server rsyslog con il protocollo <code>udp</code>, i log superiori a 1KB vengono troncati.</td>
+      </tr>
+      <tr>
+        <td><code><em>--skip-validation</em></code></td>
+        <td>Facoltativo: ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltrerà correttamente i log.</td>
+      </tr>
+    </tbody>
   </table>
 
 2. Verifica che la tua configurazione sia corretta in uno dei due seguenti modi:
@@ -227,8 +259,8 @@ Puoi creare una configurazione per la registrazione cluster. Puoi differenziare 
       ```
       {: screen}
 
-### Aggiornamento dell'inoltro dei log
-{: #enable-forwarding}
+## Aggiornamento dell'inoltro dei log
+{: #updating-forwarding}
 
 1. Aggiorna una configurazione di inoltro dei log.
     ```
@@ -237,6 +269,7 @@ Puoi creare una configurazione per la registrazione cluster. Puoi differenziare 
     {: pre}
 
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
   <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
   </thead>
@@ -251,7 +284,7 @@ Puoi creare una configurazione per la registrazione cluster. Puoi differenziare 
     </tr>
     <tr>
       <td><code><em>&lt;namespace&gt;</em></code></td>
-      <td>Facoltativo: lo spazio dei nomi Kubernetes da cui vuoi inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine log <code>container</code>. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno la configurazione.</td>
+      <td>Facoltativo: lo spazio dei nomi Kubernetes da cui inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine log <code>container</code>. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno la configurazione.</td>
     </tr>
     <tr>
       <td><code><em>&lt;log_type&gt;</em></code></td>
@@ -297,10 +330,11 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
 
 1. Crea un filtro di registrazione.
   ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --message <message>
+  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
@@ -331,7 +365,7 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
       </tr>
       <tr>
         <td><code>&lt;message&gt;</code></td>
-        <td>Facoltativo: filtra i log che contengono un determinato messaggio.</td>
+        <td>Facoltativo: filtra i log che contengono un messaggio specificato scritto come un'espressione regolare. </td>
       </tr>
     </tbody>
   </table>
@@ -343,6 +377,7 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
   ```
   {: pre}
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
@@ -364,10 +399,11 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
 
 3. Aggiorna il filtro di log che hai creato.
   ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --message <message>
+  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
@@ -402,33 +438,34 @@ Puoi scegliere quali log inoltrare filtrando specifici log per un periodo di tem
       </tr>
       <tr>
         <td><code>&lt;message&gt;</code></td>
-        <td>Facoltativo: filtra i log che contengono un determinato messaggio.</td>
+        <td>Facoltativo: filtra i log che contengono un messaggio specificato scritto come un'espressione regolare. </td>
       </tr>
     </tbody>
   </table>
 
-4. Elimina un filtro di log che hai creato. 
+4. Elimina un filtro di log che hai creato.
 
   ```
   bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
     <tbody>
       <tr>
         <td><code>&lt;cluster_name_or_ID&gt;</code></td>
-        <td>Obbligatorio: il nome o l'ID del cluster per il quale vuoi eliminare un filtro di registrazione. </td>
+        <td>Obbligatorio: il nome o l'ID del cluster per il quale vuoi eliminare un filtro di registrazione.</td>
       </tr>
       <tr>
         <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Facoltativo: l'ID del filtro di log che desideri rimuovere. </td>
+        <td>Facoltativo: l'ID del filtro di log che desideri rimuovere.</td>
       </tr>
       <tr>
         <td><code>--all</code></td>
-        <td>Facoltativo: elimina tutti i tuoi filtri di inoltro del log. </td>
+        <td>Facoltativo: elimina tutti i tuoi filtri di inoltro del log.</td>
       </tr>
     </tbody>
   </table>
@@ -483,19 +520,20 @@ Puoi arrestare l'inoltro dei log eliminando una o tutte le configurazioni di reg
 <li>Per eliminare una configurazione di registrazione:</br>
   <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
   <table>
-      <thead>
-        <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
-      </thead>
-        <tbody>
-        <tr>
-          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-          <td>Il nome del cluster in cui si trova la configurazione di registrazione.</td>
-        </tr>
-        <tr>
-          <td><code><em>&lt;log_config_ID&gt;</em></code></td>
-          <td>L'ID della configurazione dell'origine log.</td>
-        </tr>
-  </tbody>
+  <caption>Descrizione dei componenti di questo comando</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>Il nome del cluster in cui si trova la configurazione di registrazione.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;log_config_ID&gt;</em></code></td>
+        <td>L'ID della configurazione dell'origine log.</td>
+      </tr>
+    </tbody>
   </table></li>
 <li>Per eliminare tutte le configurazioni di registrazione:</br>
   <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
@@ -504,23 +542,123 @@ Puoi arrestare l'inoltro dei log eliminando una o tutte le configurazioni di reg
 <br />
 
 
-## Configurazione dell'inoltro del log per i log di controllo dell'API Kubernetes
-{: #app_forward}
 
-Puoi configurare un webhook attraverso il server API Kubernetes per acquisire qualsiasi chiamata dal tuo cluster. Con un webhook abilitato, i log possono essere inviati a un server remoto.
+## Configurazione dell'inoltro del log per i log di controllo dell'API Kubernetes
+{: #api_forward}
+
+Kubernetes controlla automaticamente tutti gli eventi trasmessi tramite il tuo apiserver. Puoi inoltrare gli eventi a {{site.data.keyword.loganalysisshort_notm}} o a un server esterno.
 {: shortdesc}
+
 
 Per ulteriori informazioni sui log di controllo Kubernetes, consulta l'<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">argomento di controllo <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> nella documentazione Kubernetes.
 
 * L'inoltro dei log di controllo dell'API Kubernetes è supportato solo per Kubernetes versione 1.7 e successive.
 * Al momento, viene utilizzata una politica di controllo predefinita per tutti i cluster con questa configurazione di registrazione.
-* I log di controllo possono essere inoltrati solo a un server esterno.
+* Al momento, i filtri non sono supportati. 
+* Può essere presente solo una configurazione `kube-audit` per cluster, ma puoi inoltrare i log a {{site.data.keyword.loganalysisshort_notm}} e a un server esterno creando una configurazione di registrazione e un webhook.
 {: tip}
 
-### Abilitazione dell'inoltro dei log dell'API Kubernetes
+
+### Invio dei log di controllo a {{site.data.keyword.loganalysisshort_notm}}
+{: #audit_enable_loganalysis}
+
+Puoi inoltrare il tuoi log di controllo del server API Kubernetes a {{site.data.keyword.loganalysisshort_notm}}
+
+**Prima di iniziare**
+
+1. Verifica le autorizzazioni. Se hai specificato uno spazio quando hai creato il cluster o la configurazione di registrazione, sia il proprietario dell'account che il proprietario della chiave {{site.data.keyword.containershort_notm}} necessitano delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio. 
+
+2. [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster dai cui vuoi vengano raccolti i log di controllo del server API. **Nota**: se utilizzi un account dedicato, devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
+
+**Inoltro dei log**
+
+1. Crea una configurazione di registrazione.
+
+    ```
+    bx cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ```
+    {: pre}
+
+    Esempio di comando e output: 
+
+    ```
+    bx cs logging-config-create myCluster --logsource kube-audit
+    Creating logging configuration for kube-audit logs in cluster myCluster...
+    OK
+    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+
+    ```
+    {: screen}
+
+    <table>
+    <caption>Descrizione dei componenti di questo comando</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+          <td>Il nome o l'ID del cluster.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
+          <td>L'endpoint a cui vuoi inoltrare i log. Se non specifichi un [URL di inserimento](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), viene utilizzato l'endpoint per la regione in cui hai creato il tuo cluster.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_space&gt;</em></code></td>
+          <td>Facoltativo: il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Quando inoltri i log a {{site.data.keyword.loganalysisshort_notm}}, lo spazio e l'organizzazione sono specificati nel punto di inserimento. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_org&gt;</em></code></td>
+          <td>Il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è obbligatorio se hai specificato uno spazio.</td>
+        </tr>
+      </tbody>
+    </table>
+
+2. Visualizza la tua configurazione di registrazione del cluster per verificare che sia stata implementata nel modo che volevi.
+
+    ```
+    bx cs logging-config-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Esempio di comando e output:
+    ```
+    bx cs logging-config-get myCluster
+    Retrieving cluster myCluster logging configurations...
+    OK
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
+    ```
+    {: screen}
+
+  <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>Il nome o l'ID del cluster.</td>
+      </tr>
+    </tbody>
+  </table>
+
+3. Facoltativo: se vuoi arrestare l'inoltro dei log di controllo, puoi [eliminare la tua configurazione](#log_sources_delete).
+
+<br />
+
+
+
+### Invio dei log di controllo a un server esterno 
 {: #audit_enable}
 
-Prima di iniziare:
+**Prima di iniziare**
 
 1. Configura un server di registrazione remoto dove puoi inoltrare i log. Ad esempio, puoi [utilizzare Logstash con Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) per raccogliere gli eventi di controllo.
 
@@ -535,32 +673,34 @@ Per inoltrare i log di controllo dell'API Kubernetes:
     ```
     {: pre}
 
-    <table>
+  <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
+      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-    <td>Il nome o l'ID del cluster.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;server_URL&gt;</em></code></td>
-    <td>L'URL o l'indirizzo IP del servizio di registrazione remoto a cui vuoi inviare i log. Se fornisci un URL server non protetto i certificati vengono ignorati.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
-    <td>Il percorso del file per il certificato CA utilizzato per verificare il servizio di registrazione remoto.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;client_cert_path&gt;</em></code></td>
-    <td>Il percorso del file per il certificato client utilizzato per l'autenticazione con il servizio di registrazione remoto.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;client_key_path&gt;</em></code></td>
-    <td>Il percorso del file per la chiave client corrispondente utilizzata per il collegamento al servizio di registrazione remoto.</td>
-    </tr>
-    </tbody></table>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>Il nome o l'ID del cluster.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;server_URL&gt;</em></code></td>
+        <td>L'URL o l'indirizzo IP del servizio di registrazione remoto a cui vuoi inviare i log. Se fornisci un URL server non protetto i certificati vengono ignorati.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
+        <td>Il percorso del file per il certificato CA utilizzato per verificare il servizio di registrazione remoto.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;client_cert_path&gt;</em></code></td>
+        <td>Il percorso del file per il certificato client utilizzato per l'autenticazione con il servizio di registrazione remoto.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;client_key_path&gt;</em></code></td>
+        <td>Il percorso del file per la chiave client corrispondente utilizzata per il collegamento al servizio di registrazione remoto.</td>
+      </tr>
+    </tbody>
+  </table>
 
 2. Verifica che l'inoltro dei log sia stato abilitato visualizzando l'URL per il servizio di registrazione remoto.
 
@@ -583,40 +723,26 @@ Per inoltrare i log di controllo dell'API Kubernetes:
     ```
     {: pre}
 
-### Arresto dell'inoltro dei log dell'API Kubernetes
-{: #audit_delete}
+4. Facoltativo: se vuoi arrestare l'inoltro dei log di controllo, puoi disabilitare la tua configurazione. 
+    1. [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster dai cui vuoi venga arrestata la raccolta dei log di controllo del server API.
+    2. Disabilita la configurazione backend webhook per il server API del cluster.
 
-Puoi arrestare l'inoltro dei log di controllo disabilitando la configurazione backend webhook per il server API del cluster.
+        ```
+        bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ```
+        {: pre}
 
-Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster da cui vuoi arrestare la raccolta dei log di controllo dell'API.
+    3. Applica l'aggiornamento della configurazione riavviando il master Kubernetes.
 
-1. Disabilita la configurazione backend webhook per il server API del cluster.
-
-    ```
-    bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
-    ```
-    {: pre}
-
-2. Applica l'aggiornamento della configurazione riavviando il master Kubernetes.
-
-    ```
-    bx cs apiserver-refresh <cluster_name_or_ID>
-    ```
-    {: pre}
-
-<br />
-
-
-## Configurazione del monitoraggio dei cluster
-{: #monitoring}
-
-Le metriche ti aiutano a monitorare l'integrità e le prestazioni dei tuoi cluster. Puoi configurare il monitoraggio dell'integrità per i nodi di lavoro per rilevare e correggere automaticamente tutti i nodi di lavoro che entrano in uno stato di danneggiamento o non operativo. **Nota**: il monitoraggio è supportato solo per i cluster standard.
-{:shortdesc}
+        ```
+        bx cs apiserver-refresh <cluster_name_or_ID>
+        ```
+        {: pre}
 
 ## Visualizzazione delle metriche
 {: #view_metrics}
 
-Puoi utilizzare le funzioni Kubernetes e Docker standard per monitorare l'integrità del tuo cluster e delle applicazioni.
+Le metriche ti aiutano a monitorare l'integrità e le prestazioni dei tuoi cluster. Puoi utilizzare le funzioni Kubernetes e Docker standard per monitorare l'integrità del tuo cluster e delle applicazioni. **Nota**: il monitoraggio è supportato solo per i cluster standard.
 {:shortdesc}
 
 <dl>
@@ -628,7 +754,13 @@ vai al tuo **Dashboard {{site.data.keyword.Bluemix_notm}}** e seleziona un clust
     <dd>Il dashboard Kubernetes è un'interfaccia web di amministrazione in cui puoi esaminare lo stato dei nodi di lavoro, trovare risorse Kubernetes, distribuire applicazioni inserite in un contenitore e risolvere problemi con le informazioni di registrazione e monitoraggio. Per ulteriori informazioni su come
 accedere al tuo dashboard Kubernetes, consulta [Avvio del dashboard Kubernetes per  {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd>Le metriche per i cluster standard si trovano nell'account {{site.data.keyword.Bluemix_notm}} a cui è stato effettuato l'accesso quando è stato creato il cluster Kubernetes. Se quando hai creato il cluster hai specificato uno spazio {{site.data.keyword.Bluemix_notm}}, le metriche si trovano in quello spazio. Le metriche di contenitore sono raccolte automaticamente per tutti i contenitori distribuiti in un cluster. Queste metriche vengono inviate e rese disponibili tramite Grafana. Per ulteriori informazioni sulle metriche, vedi [Monitoraggio per il {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>Per accedere al dashboard Grafana, vai a uno dei seguenti URL e seleziona l'account o lo spazio {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster.<ul><li>Stati Uniti Sud e Stati Uniti Est: https://metrics.ng.bluemix.net</li><li>Regno Unito-Sud: https://metrics.eu-gb.bluemix.net</li><li>Europa centrale: https://metrics.eu-de.bluemix.net</li></ul></p></dd>
+    <dd><p>Le metriche per i cluster standard si trovano nell'account {{site.data.keyword.Bluemix_notm}} a cui è stato effettuato l'accesso quando è stato creato il cluster Kubernetes. Se quando hai creato il cluster hai specificato uno spazio {{site.data.keyword.Bluemix_notm}}, le metriche si trovano in quello spazio. Le metriche di contenitore sono raccolte automaticamente per tutti i contenitori distribuiti in un cluster. Queste metriche vengono inviate e rese disponibili tramite Grafana. Per ulteriori informazioni sulle metriche, vedi [Monitoraggio per il {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <p>Per accedere al dashboard Grafana, vai a uno dei seguenti URL e seleziona l'account o lo spazio {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster.
+      <ul>
+        <li>Stati Uniti Sud e Stati Uniti Est: https://metrics.ng.bluemix.net</li>
+        <li>Regno Unito-Sud: https://metrics.eu-gb.bluemix.net</li>
+        <li>Europa centrale: https://metrics.eu-de.bluemix.net</li>
+      </ul></p></dd>
 </dl>
 
 ### Altri strumenti di monitoraggio dell'integrità
@@ -654,8 +786,11 @@ Il sistema Autorecovery utilizza vari controlli per interrogare lo stato di inte
 
 Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster in cui vuoi controllare lo stato dei nodi di lavoro.
 
-1. Crea un file di mappa di configurazione che definisca i tuoi controlli in formato JSON. Ad esempio, il seguente file YAML definisce tre controlli: un controllo HTTP e due controlli del server API Kubernetes.</br>
-   **Suggerimento:** definisci ogni controllo come una chiave univoca nella sezione `data` della mappa di configurazione. 
+1. [Installa Helm per il tuo cluster e aggiungi il repository {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm](cs_integrations.html#helm).
+
+2. Crea un file di mappa di configurazione che definisca i tuoi controlli in formato JSON. Ad esempio, il seguente file YAML definisce tre controlli: un controllo HTTP e due controlli del server API Kubernetes. Fai riferimento alle tabelle che seguono il file YAML di esempio per informazioni sui tre tipi di controlli e sui componenti individuali dei controlli.
+</br>
+   **Suggerimento:** definisci ogni controllo come una chiave univoca nella sezione `data` della mappa di configurazione.
 
    ```
    kind: ConfigMap
@@ -719,25 +854,27 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Definisce un controllo del nodo dell'API Kubernetes che verifica se ogni nodo di lavoro è nello stato <code>Ready</code>. Il controllo per un nodo di lavoro specifico viene considerato un esito negativo se il nodo di lavoro non è nello stato <code>Ready</code>. Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene ricaricato. Questa azione equivale all'esecuzione di <code>bx cs worker-reload</code>. Il controllo del nodo è abilitato finché imposti il campo <b>Abilitato</b> su <code>false</code> o rimuovi il controllo.</td>
+   <td>Definisce un controllo del nodo dell'API Kubernetes che verifica se ogni nodo di lavoro è nello stato <code>Ready</code>. Il controllo per un nodo di lavoro specifico viene considerato un esito negativo se il nodo di lavoro non è nello stato <code>Ready</code>. Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene ricaricato. Questa azione equivale all'esecuzione di <code>bx cs worker-reload</code>.<br></br>Il controllo del nodo è abilitato finché imposti il campo <b>Abilitato</b> su <code>false</code> o rimuovi il controllo.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
-   <td>Definisce un controllo di pod dell'API Kubernetes che verifica la percentuale totale dei pod <code>NotReady</code> su un nodo di lavoro in base ai pod totali assegnati a tale nodo di lavoro. Il controllo per un nodo di lavoro specifico viene considerato un esito negativo se la percentuale totale dei pod <code>NotReady</code> è maggiore del valore definito <code>PodFailureThresholdPercent</code>. Per impostazione predefinita, vengono controllati i pod presenti in tutti gli spazi dei nomi. Per limitare il controllo ai soli pod presenti in un determinato spazio dei nomi, aggiungi il campo <code>Spazio dei nomi</code> al controllo. Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene ricaricato. Questa azione equivale all'esecuzione di <code>bx cs worker-reload</code>. Il controllo del pod è abilitato finché imposti il campo <b>Abilitato</b> su <code>false</code> o rimuovi il controllo.</td>
+   <td>
+   Definisce un controllo di pod dell'API Kubernetes che verifica la percentuale totale dei pod <code>NotReady</code> su un nodo di lavoro in base ai pod totali assegnati a tale nodo di lavoro. Il controllo per un nodo di lavoro specifico viene considerato un esito negativo se la percentuale totale dei pod <code>NotReady</code> è maggiore del valore definito <code>PodFailureThresholdPercent</code>. Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene ricaricato. Questa azione equivale all'esecuzione di <code>bx cs worker-reload</code>. Ad esempio, il valore predefinito per <code>PodFailureThresholdPercent</code> è 50%. Se la percentuale dei pod <code>NotReady</code> è maggiore del 50% per tre volte consecutive, il nodo di lavoro viene ricaricato. <br></br>Per impostazione predefinita, vengono controllati i pod presenti in tutti gli spazi dei nomi. Per limitare il controllo ai soli pod presenti in un determinato spazio dei nomi, aggiungi il campo <code>Spazio dei nomi</code> al controllo. Il controllo del pod è abilitato finché imposti il campo <b>Abilitato</b> su <code>false</code> o rimuovi il controllo.
+   </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
-   <td>Definisce un controllo HTTP che controlla se un server HTTP in esecuzione sul tuo nodo di lavoro è integro. Per utilizzare questo controllo, devi distribuire un server HTTP su ogni nodo di lavoro presente nel tuo cluster utilizzando un [DaemonSet ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Devi implementare un controllo di integrità che troverai nel percorso <code>/myhealth</code> e che può verificare se il tuo server HTTP è integro. Puoi definire altri percorsi modificando il parametro <strong>Route</strong>. Se il server HTTP è integro, devi restituire il codice di risposta HTTP definito in <strong>ExpectedStatus</strong>. Il server HTTP deve essere configurato per essere in ascolto su un indirizzo IP privato del nodo di lavoro. Puoi trovare l'indirizzo IP privato eseguendo <code>kubectl get nodes</code>.</br>
+   <td>Definisce un controllo HTTP che controlla se un server HTTP in esecuzione sul tuo nodo di lavoro è integro. Per utilizzare questo controllo, devi distribuire un server HTTP su ogni nodo di lavoro presente nel tuo cluster utilizzando un [DaemonSet ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Devi implementare un controllo di integrità che troverai nel percorso <code>/myhealth</code> e che può verificare se il tuo server HTTP è integro. Puoi definire altri percorsi modificando il parametro <strong>Route</strong>. Se il server HTTP è integro, devi restituire il codice di risposta HTTP definito in <strong>ExpectedStatus</strong>. Il server HTTP deve essere configurato per essere in ascolto su un indirizzo IP privato del nodo di lavoro. Puoi trovare l'indirizzo IP privato eseguendo <code>kubectl get nodes</code>.<br></br>
    Ad esempio, considera due nodi in un cluster con gli indirizzi IP privati 10.10.10.1 e 10.10.10.2. In questo esempio, vengono controllate due rotte alla ricerca di una risposta 200 HTTP: <code>http://10.10.10.1:80/myhealth</code> e <code>http://10.10.10.2:80/myhealth</code>.
-   Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene riavviato. Questa azione equivale all'esecuzione di <code>bx cs worker-reboot</code>. Il controllo HTTP non viene disabilitato finché non imposti il campo <b>Abilitato</b> su <code>true</code>.</td>
+   Il controllo nel YAML di esempio viene eseguito ogni 3 minuti. Se ha esito negativo per tre volte consecutive, il nodo di lavoro viene riavviato. Questa azione equivale all'esecuzione di <code>bx cs worker-reboot</code>.<br></br>Il controllo HTTP non viene disabilitato finché non imposti il campo <b>Abilitato</b> su <code>true</code>.</td>
    </tr>
    </tbody>
    </table>
 
-   <table summary="Descrizione dei componenti delle regole individuali">
-   <caption>Descrizione dei componenti delle regole individuali</caption>
+   <table summary="Descrizione dei componenti individuali dei controlli">
+   <caption>Descrizione dei componenti individuali dei controlli </caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/>Descrizione dei componenti delle regole individuali </th>
+   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/>Descrizione dei componenti individuali dei controlli </th>
    </thead>
    <tbody>
    <tr>
@@ -746,7 +883,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
    </tr>
    <tr>
    <td><code>Resource</code></td>
-   <td>Quando il tipo di controllo è <code>KUBEAPI</code>, immetti il tipo di risorsa che vuoi venga controllata da Autorecovery. I valori accettati sono <code>NODE</code> o <code>PODS</code>.</td>
+   <td>Quando il tipo di controllo è <code>KUBEAPI</code>, immetti il tipo di risorsa che vuoi venga controllata da Autorecovery. I valori accettati sono <code>NODE</code> o <code>POD</code>.</td>
    </tr>
    <tr>
    <td><code>FailureThreshold</code></td>
@@ -754,7 +891,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>Quando il tipo di risorsa è <code>PODS</code>, immetti la soglia per la percentuale di pod su un nodo di lavoro che può trovarsi in uno stato [NotReady ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Questa percentuale si basa sul numero totale di pod pianificati su un nodo di lavoro. Quando un controllo determina che la percentuale di pod non integri è maggiore della soglia, il controllo conta come un errore.</td>
+   <td>Quando il tipo di risorsa è <code>POD</code>, immetti la soglia per la percentuale di pod su un nodo di lavoro che può trovarsi in uno stato [NotReady ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Questa percentuale si basa sul numero totale di pod pianificati su un nodo di lavoro. Quando un controllo determina che la percentuale di pod non integri è maggiore della soglia, il controllo conta come un errore.</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>
@@ -795,7 +932,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
    </tbody>
    </table>
 
-2. Crea la mappa di configurazione nel tuo cluster.
+3. Crea la mappa di configurazione nel tuo cluster.
 
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
@@ -809,12 +946,12 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
     ```
     {: pre}
 
-4. Distribuisci Autorecovery nel tuo cluster applicando questo file YAML.
+4. Distribuisci Autorecovery nel tuo cluster installando il grafico Helm `ibm-worker-recovery`.
 
-   ```
-   kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
-   ```
-   {: pre}
+    ```
+    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    ```
+    {: pre}
 
 5. Dopo alcuni minuti, puoi controllare la sezione `Events` nell'output del seguente comando per visualizzare l'attività sulla distribuzione di Autorecovery.
 
@@ -823,3 +960,9 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
     ```
     {: pre}
 
+6. Se non stai visualizzando dell'attività nella distribuzione di Autorecovery, puoi controllare la distribuzione Helm eseguendo i test inclusi nella definizione del grafico di Autorecovery.
+
+    ```
+    helm test ibm-worker-recovery
+    ```
+    {: pre}

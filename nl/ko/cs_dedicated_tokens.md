@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # {{site.data.keyword.Bluemix_dedicated_notm}} 이미지 레지스트리에 대한 {{site.data.keyword.registryshort_notm}} 토큰 작성
@@ -66,7 +69,7 @@ lastupdated: "2018-4-20"
     ```
     {: pre}
 
-    IBM {{site.data.keyword.Bluemix_notm}} 컨테이너 서비스와 함께 작업하는 데 이 시크릿을 사용할 수 있습니다.
+    이 시크릿을 사용하여 {{site.data.keyword.containerlong}}에 대해 작업할 수 있습니다.
 
 6.  토큰 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
 
@@ -76,7 +79,7 @@ lastupdated: "2018-4-20"
     {: pre}
 
     <table>
-    <caption>표 1. 이 명령의 컴포넌트 이해</caption>
+    <caption>이 명령의 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
@@ -109,7 +112,7 @@ lastupdated: "2018-4-20"
 
 7.  imagePullSecret을 참조하는 팟(Pod)을 작성하십시오.
 
-    1.  선호하는 편집기를 열고 mypod.yaml이라는 이름의 팟(Pod) 구성 스크립트를 작성하십시오.
+    1.  선호하는 텍스트 편집기를 열고 mypod.yaml이라는 이름의 팟(Pod) 구성 스크립트를 작성하십시오.
     2.  레지스트리에 액세스하기 위해 사용할 imagePullSecret 및 팟(Pod)을 정의하십시오. 네임스페이스에서 개인용 이미지를 사용하려면 다음을 작성하십시오.
 
         ```
@@ -127,7 +130,7 @@ lastupdated: "2018-4-20"
         {: codeblock}
 
         <table>
-        <caption>표 2. YAML 파일 컴포넌트 이해</caption>
+        <caption>YAML 파일 컴포넌트 이해</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
         </thead>

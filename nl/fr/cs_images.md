@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Génération de conteneurs à partir d'images
@@ -44,7 +46,7 @@ Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containershort
 
 Une fois que vous avez configuré un registre d'images, les utilisateurs du cluster peuvent utiliser les images pour le déploiement de leurs applications dans le cluster.
 
-
+Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des images de conteneur.
 
 <br />
 
@@ -72,9 +74,9 @@ Vous pouvez déployer dans votre cluster des conteneurs depuis une image fournie
 
 Lorsque vous créez un cluster, des jetons de registre sans date d'expiration et des valeurs confidentielles sont créés automatiquement pour le [registre régional le plus proche, tout comme pour le registre global](/docs/services/Registry/registry_overview.html#registry_regions). Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke de manière sécurisée vos propres images Docker privées, tout comme les mêmes images publiques hébergées dans le registre global. Les jetons sont utilisés pour autoriser un accès en lecture seule aux espaces nom de votre choix que vous configurez dans {{site.data.keyword.registryshort_notm}} afin que vous puissiez utiliser ces images publiques (registre global) et privées (registres régionaux).
 
-Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containershort_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'images sont ajoutées à l'espace nom Kubernetes nommé `default`, la liste par défaut des valeurs confidentielles dans l'élément `ServiceAccount` pour cet espace nom, et l'espace nom `kube-system`.
+Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containershort_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'images (imagePullSecret) sont ajoutées à l'espace nom Kubernetes nommé `default`, la liste par défaut des valeurs confidentielles dans l'élément `ServiceAccount` pour cet espace nom, et l'espace nom `kube-system`.
 
-**Remarque :** avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Si vous désirez déployer un conteneur dans d'autres espaces de nom de votre cluster,  ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}},  ou dans un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre élément imagePullSecret pour votre cluster](#other).
+**Remarque :** avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}}, ou dans un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre élément imagePullSecret pour votre cluster](#other).
 
 Avant de commencer :
 1. [Configurez un espace de nom dans {{site.data.keyword.registryshort_notm}} sur {{site.data.keyword.Bluemix_notm}} public ou {{site.data.keyword.Bluemix_dedicated_notm}} et transférez par commande push des images dans cet espace de nom](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
@@ -180,9 +182,14 @@ Vous pouvez copier l'élément imagePullSecret qui est créé automatiquement po
    ```
    {: pre}
 
-3. Copiez l'élément imagePullSecret de l'espace de nom `default` vers l'espace de nom de votre choix. Le nouvel élément imagePullSecret est nommé `bluemix-<namespace_name>-secret-regional`.
+3. Copiez les éléments imagePullSecret de l'espace de nom `default` vers l'espace de nom de votre choix. Les nouveaux éléments imagePullSecrets sont nommés `bluemix-<namespace_name>-secret-regional` et `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+   ```
+   {: pre}
+   
+   ```
+   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
 
@@ -198,7 +205,7 @@ Vous pouvez copier l'élément imagePullSecret qui est créé automatiquement po
 ### Création d'un élément imagePullSecret pour accéder aux images figurant dans d'autres régions ou comptes {{site.data.keyword.Bluemix_notm}}
 {: #other_regions_accounts}
 
-Pour accéder à des images figurant dans d'autres régions ou comptes {{site.data.keyword.Bluemix_notm}}, vous devez créer un jeton de registre et sauvegarder vos données d'identification dans votre propre élément imagePullSecret.
+Pour accéder à des images figurant dans d'autres régions ou comptes {{site.data.keyword.Bluemix_notm}}, vous devez créer un jeton de registre et sauvegarder vos données d'identification dans un élément imagePullSecret.
 {: shortdesc}
 
 1.  Si vous ne possédez pas de jeton, [créez un jeton pour le registre auquel vous souhaitez accéder. ](/docs/services/Registry/registry_tokens.html#registry_tokens_create)
@@ -227,6 +234,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     {: pre}
 
     <table>
+    <caption>Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -253,11 +261,11 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. Si vous n'en avez pas, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td>
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td>
     </tr>
     </tbody></table>
 
-6.  Vérifiez que la création de la valeur confidentielle a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par le nom de l'espace de nom sur lequel vous avez créé l'élément imagePullSecret.
+6.  Vérifiez que la création de la valeur confidentielle a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom dans lequel vous avez créé l'élément imagePullSecret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -269,7 +277,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
 ### Accès aux images stockées dans d'autres registres privés
 {: #private_images}
 
-Si vous disposez déjà d'un registre privé à utiliser, vous devez stocker les données d'identification du registre dans un élément Kubernetes imagePullSecret et référencer cette valeur confidentielle dans votre fichier de configuration.
+Si vous disposez déjà d'un registre privé, vous devez stocker les données d'identification du registre dans un élément Kubernetes imagePullSecret et référencer cette valeur confidentielle depuis votre fichier de configuration.
 {:shortdesc}
 
 Avant de commencer :
@@ -287,6 +295,7 @@ Pour créer un élément imagePullSecret :
     {: pre}
 
     <table>
+    <caption>Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -343,7 +352,7 @@ Avant de commencer :
 ### Référencer l'élément `imagePullSecret` dans votre déploiement de pod
 {: #pod_imagePullSecret}
 
-Lorsque vous référencez l'élément imagePullSecret dans un déploiement de pod, il n'est valide que pour ce pod et ne peut pas être partagé entre les pods dans l'espace de nom.
+Lorsque vous référencez l'élément imagePullSecret dans un déploiement de pod, l'élément imagePullSecret n'est valide que pour ce pod et ne peut pas être partagé entre les pods dans l'espace de nom.
 {:shortdesc}
 
 1.  Créez un fichier de configuration de pod nommé `mypod.yaml`.
@@ -380,17 +389,18 @@ Lorsque vous référencez l'élément imagePullSecret dans un déploiement de po
     {: codeblock}
 
     <table>
+    <caption>Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
     <tbody>
     <tr>
     <td><code><em>&lt;container_name&gt;</em></code></td>
-    <td>Nom du conteneur que vous désirez déployer dans votre cluster.</td>
+    <td>Nom du conteneur à déployer dans votre cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td>
+    <td>Espace de nom sous lequel l'image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
@@ -424,9 +434,9 @@ Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vo
    kubectl describe serviceaccount default -n <namespace_name>
    ```
    {: pre}
-   Il n'existe aucun élément imagePullSecret lorsque la valeur `<none>` s'affiche dans l'entrée **Image pull secrets**.  
+   Lorsque `<none>` s'affiche dans l'entrée **ImagePullSecrets**, il n'existe aucun élément imagePullSecret.  
 2. Ajoutez l'élément imagePullSecret dans votre compte de service default.
-   - **Pour ajouter l'élément imagePullSecret lorsqu'il n'y en a aucun déjà défini :**
+   - **Pour ajouter un élément imagePullSecret lorsqu'aucun élément de ce type n'est défini :**
        ```
        kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<namespace_name>-secret-regional"}]}'
        ```
@@ -468,7 +478,7 @@ Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vo
    ```
    {: codeblock}
 
-5. Créez le déploiement dans votre cluster.
+5. Créez le déploiement dans le cluster.
    ```
    kubectl apply -f mypod.yaml
    ```

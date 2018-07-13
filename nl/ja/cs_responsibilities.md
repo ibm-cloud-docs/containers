@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} を使用する際の責任
 {{site.data.keyword.containerlong}} を使用する際のクラスターの管理責任とご利用条件について説明します。
@@ -28,7 +30,7 @@ lastupdated: "2018-4-20"
 **IBM は以下について責任を持ちます。**
 
 - クラスター作成時に、マスター、ワーカー・ノード、管理コンポーネント (Ingress アプリケーション・ロード・バランサーなど) をクラスター内にデプロイする
-- クラスターの Kubernetes マスターのセキュリティー更新、モニタリング、リカバリーを管理する
+- クラスターの Kubernetes マスターのセキュリティー更新、モニタリング、分離、およびリカバリーを管理する
 - ワーカー・ノードの正常性をモニタリングし、それらのワーカー・ノードの更新とリカバリーの自動化を提供する
 - ワーカー・ノードの追加、ワーカー・ノードの削除、デフォルト・サブネットの作成などの、インフラストラクチャー・アカウントに対する自動化タスクを実行する
 - クラスター内の運用コンポーネント (Ingress アプリケーション・ロード・バランサーやストレージ・プラグインなど) を管理、更新、リカバリーする
@@ -36,15 +38,17 @@ lastupdated: "2018-4-20"
 - すべてのワーカー・ノードにセキュリティー設定を提供する
 
 </br>
+
 **お客様は以下について責任を持ちます。**
 
+- [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために {{site.data.keyword.Bluemix_notm}} アカウントを構成する](cs_troubleshoot_clusters.html#cs_credentials)
 - [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](cs_app.html#app_cli)
 - [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](cs_app.html#highly_available_apps)
-- [CLI を使用してワーカー・ノードを追加または解除することで、キャパシティーを追加または縮小する](cs_cli_reference.html#cs_worker_add)
+- [CLI を使用してワーカー・ノードを追加または削除することで、クラスターのキャパシティーを追加または削除する](cs_cli_reference.html#cs_worker_add)
 - [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。詳しくは、[ワーカー・ノードの VLAN 接続](cs_clusters.html#worker_vlan_connection)を参照してください。</p>
+- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[ワーカー・ノードの VLAN 接続](cs_clusters.html#worker_vlan_connection)を参照してください。 </p>
 - [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](cs_cluster_update.html#master)
-- [`bx cs worker-update` コマンドを使用して、オペレーティング・システムの更新、セキュリティー・パッチ、Kubernetes バージョンの更新を適用することで、ワーカー・ノードを最新の状態に保つ](cs_cluster_update.html#worker_node)
+- [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](cs_cluster_update.html#worker_node)
 - [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
 - [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
 - [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html)
@@ -53,7 +57,7 @@ lastupdated: "2018-4-20"
 <br />
 
 
-## コンテナーの不正使用
+## {{site.data.keyword.containerlong_notm}} の不正使用
 {: #terms}
 
 お客様は {{site.data.keyword.containershort_notm}} を不正使用してはいけません。
@@ -71,4 +75,3 @@ lastupdated: "2018-4-20"
 
 
 すべての使用条件については、[クラウド・サービスのご利用条件](https://console.bluemix.net/docs/overview/terms-of-use/notices.html#terms)を参照してください。
-

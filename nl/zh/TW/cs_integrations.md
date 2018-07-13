@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 整合服務
 {: #integrations}
 
@@ -25,6 +27,7 @@ lastupdated: "2018-4-20"
 
 ## 應用程式服務
 <table summary="可存取性摘要">
+<caption>應用程式服務</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -45,6 +48,7 @@ lastupdated: "2018-4-20"
 
 ## DevOps Services
 <table summary="可存取性摘要">
+<caption>DevOps Services</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -77,6 +81,7 @@ lastupdated: "2018-4-20"
 
 ## 記載及監視服務
 <table summary="可存取性摘要">
+<caption>記載及監視服務</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -102,11 +107,11 @@ lastupdated: "2018-4-20"
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 透過自動探索及對映應用程式的 GUI，提供基礎架構及應用程式效能監視。Istana 會擷取向應用程式提出的每一個要求，讓您可以進行疑難排解，並執行主要原因分析，以避免問題再次發生。如需進一步瞭解，請參閱關於<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章。</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 透過自動探索及對映應用程式的 GUI，提供基礎架構及應用程式效能監視。Istana 會擷取向應用程式提出的每個要求，您可以用來進行疑難排解，並執行主要原因分析，以避免問題再次發生。如需進一步瞭解，請參閱關於<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章。</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus 是一個專為 Kubernetes 所設計的開放程式碼監視、記載及警示工具，可根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。會收集叢集中所有執行中容器的 CPU、記憶體、I/O 及網路活動，並且可以用於自訂查詢或警示中，以監視叢集中的效能及工作負載。
+<td>Prometheus 是一個特別針對 Kubernetes 所設計的開放程式碼監視、記載及警示工具。Prometheus 會根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。針對叢集中執行的每一個容器收集 CPU、記憶體、I/O 及網路活動。您可以使用自訂查詢或警示中所收集的資料，來監視叢集中的效能及工作負載。
 
 <p>若要使用 Prometheus，請遵循 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 指示 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</p>
 </td>
@@ -134,6 +139,7 @@ lastupdated: "2018-4-20"
 
 ## 安全服務
 <table summary="可存取性摘要">
+<caption>安全服務</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -174,6 +180,7 @@ lastupdated: "2018-4-20"
 
 ## 儲存服務
 <table summary="可存取性摘要">
+<caption>儲存服務</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -181,6 +188,10 @@ lastupdated: "2018-4-20"
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td>Heptio Ark</td>
+  <td>您可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，來備份及還原叢集資源與持續性磁區。如需相關資訊，請參閱 Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">災難回復及叢集移轉的使用案例 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>與 {{site.data.keyword.cos_short}} 一起儲存的資料會加密及分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。您可以使用 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) 來配置服務，以針對叢集中的資料進行一次性或排定的備份。如需服務的一般資訊，請參閱 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
@@ -225,14 +236,14 @@ lastupdated: "2018-4-20"
 2.  列出可用的 {{site.data.keyword.Bluemix_notm}} 服務。
 
     ```
-    bx service list
+        bx service list
     ```
     {: pre}
 
     CLI 輸出範例：
 
     ```
-    name                      service           plan    bound apps   last operation   
+        name                      service           plan    bound apps   last operation   
     <service_instance_name>   <service_name>    spark                create succeeded
     ```
     {: screen}
@@ -242,28 +253,28 @@ lastupdated: "2018-4-20"
     -   列出現有名稱空間，並選擇您要使用的名稱空間。
 
         ```
-        kubectl get namespaces
+                kubectl get namespaces
         ```
         {: pre}
 
-    -   在叢集中建立新的名稱空間。
+    -   在叢集中建立名稱空間。
 
         ```
-        kubectl create namespace <namespace_name>
+                kubectl create namespace <namespace_name>
         ```
         {: pre}
 
 5.  將服務新增至叢集。
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+        bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     將服務順利新增至叢集之後，即會建立叢集密碼，以保留服務實例認證。CLI 輸出範例：
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+        bx cs cluster-service-bind mycluster mynamespace cleardb 
     Binding service instance to namespace...
     OK
     Namespace: mynamespace
@@ -274,15 +285,11 @@ lastupdated: "2018-4-20"
 6.  驗證已在叢集名稱空間中建立密碼。
 
     ```
-    kubectl get secrets --namespace=<namespace>
+        kubectl get secrets --namespace=<namespace>
     ```
     {: pre}
 
-
-若要在叢集中所部署的 Pod 中使用服務，叢集使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法是[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](cs_storage.html#app_volume_mount)。
-
-
-
+若要在叢集中所部署的 Pod 中使用服務，叢集使用者必須存取服務認證。使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法為[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](#adding_app)。
 
 <br />
 
@@ -304,7 +311,7 @@ lastupdated: "2018-4-20"
     ```
     {: pre}
 
-2. 請記下服務實例名稱。
+2. 記下服務實例名稱。
     ```
     bx resource service-instances
     ```
@@ -336,9 +343,9 @@ lastupdated: "2018-4-20"
 加密 Kubernetes 密碼是用來儲存 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證，以及容許服務與叢集之間的安全通訊。
 {:shortdesc}
 
-Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。叢集使用者可以將密碼裝載至 Pod，而不透過環境變數或直接在 Dockerfile 中公開機密資訊。然後，Pod 中的執行容器可以存取那些密碼。
+Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。您可以將密碼裝載至 Pod，而不是透過環境變數或直接在 Dockerfile 中公開機密資訊。然後，Pod 中的執行容器可以存取那些密碼。
 
-當您將密碼磁區裝載至 Pod 時，會將名為 binding 的檔案儲存在磁區裝載目錄中，該目錄包括您存取 {{site.data.keyword.Bluemix_notm}} 服務所需的所有資訊及認證。
+當您將密碼磁區裝載至 Pod 時，會將名為 `binding` 的檔案儲存在磁區裝載目錄中。`binding` 檔案包括您存取 {{site.data.keyword.Bluemix_notm}} 服務所需的所有資訊及認證。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。請確定叢集管理者已將您要用在應用程式中的 {{site.data.keyword.Bluemix_notm}} 服務[新增至叢集](cs_integrations.html#adding_cluster)。
 
@@ -352,8 +359,8 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     輸出範例：
 
     ```
-    NAME                                    TYPE                                  DATA      AGE
-    binding-<service_instance_name>         Opaque                                1         3m
+    NAME                              TYPE            DATA      AGE
+    binding-<service_instance_name>   Opaque          1         3m
 
     ```
     {: screen}
@@ -397,17 +404,18 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     {: codeblock}
 
     <table>
+    <caption>瞭解 YAML 檔案元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>您要裝載至容器的密碼磁區的名稱。</td>
+    <td>您要裝載至容器之密碼磁區的名稱。</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>輸入您要裝載至容器的密碼磁區的名稱。</td>
+    <td>輸入您要裝載至容器之密碼磁區的名稱。</td>
     </tr>
     <tr>
     <td><code>secret/defaultMode</code></td>
@@ -415,27 +423,27 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     </tr>
     <tr>
     <td><code>secret/secretName</code></td>
-    <td>輸入您稍早記下的密碼的名稱。</td>
+    <td>輸入您稍早記下之密碼的名稱。</td>
     </tr></tbody></table>
 
 5.  建立 Pod，並裝載密碼磁區。
 
     ```
-    kubectl apply -f secret-test.yaml
+        kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
 6.  驗證已建立 Pod。
 
     ```
-    kubectl get pods --namespace=<my_namespace>
+        kubectl get pods --namespace=<my_namespace>
     ```
     {: pre}
 
     CLI 輸出範例：
 
     ```
-    NAME                           READY     STATUS    RESTARTS   AGE
+        NAME                           READY     STATUS    RESTARTS   AGE
     secret-test-1111454598-gfx32   1/1       Running   0          1m
     ```
     {: screen}
@@ -444,7 +452,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 8.  取得有關 Pod 的詳細資料，並尋找密碼名稱。
 
     ```
-    kubectl describe pod <pod_name>
+        kubectl describe pod <pod_name>
     ```
     {: pre}
 
@@ -462,7 +470,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 
     
 
-9.  實作應用程式時，請將它配置為在裝載目錄中尋找名為 **binding** 的密碼檔案、剖析 JSON 內容，以及判定可存取 {{site.data.keyword.Bluemix_notm}} 服務的 URL 及服務認證。
+9.  將應用程式配置為在裝載目錄中尋找 `binding` 密碼檔、剖析 JSON 內容，以及判定 URL 及服務認證來存取您的 {{site.data.keyword.Bluemix_notm}} 服務。
 
 您現在可以存取 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證。若要使用 {{site.data.keyword.Bluemix_notm}} 服務，請確定應用程式已配置為在裝載目錄中尋找服務密碼檔案、剖析 JSON 內容，以及判定服務詳細資料。
 
@@ -513,28 +521,28 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     2. 建立服務帳戶及叢集角色連結。
 
         ```
-        kubectl create -f rbac-config.yaml
+                kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
 3. 利用您所建立的服務帳戶，來起始設定 Helm 並安裝 `tiller`。
 
     ```
-    helm init --service-account tiller
+        helm init --service-account tiller
     ```
     {: pre}
 
 4. 驗證 `tiller - deploy` Pod 在叢集中的 **Status** 為 `Running`。
 
     ```
-        kubectl get pods -n kube-system -l app=helm
+            kubectl get pods -n kube-system -l app=helm
         ```
     {: pre}
 
     輸出範例：
 
     ```
-    NAME                            READY     STATUS    RESTARTS   AGE
+        NAME                            READY     STATUS    RESTARTS   AGE
     tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
     ```
     {: screen}
@@ -542,14 +550,14 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 5. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
 
     ```
-    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+        helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
 6. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
 
     ```
-    helm search ibm
+        helm search ibm
     ```
     {: pre}
 
@@ -558,7 +566,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     例如，若要檢視 strongSwan IPSec 服務 helm 圖表的設定、文件及預設值，請執行下列指令：
 
     ```
-    helm inspect ibm/strongswan
+        helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -590,21 +598,21 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
     若要啟用讀寫許可權，請執行下列指令：
 
     ```
-    kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
+        kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
     ```
     {: pre}
 
     若要啟用唯讀許可權，請執行下列動作：
 
     ```
-    kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
+        kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
     ```
     {: pre}
 
     輸出：
 
     ```
-    clusterrole "weave-scope-mgr" created
+        clusterrole "weave-scope-mgr" created
     clusterrolebinding "weave-scope-mgr-role-binding" created
     ```
     {: screen}
@@ -618,17 +626,17 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
     輸出：
 
     ```
-    serviceaccount "weave-scope" created
+        serviceaccount "weave-scope" created
     deployment "weave-scope-app" created
     service "weave-scope-app" created
     daemonset "weave-scope-agent" created
     ```
     {: screen}
 
-4.  在您的電腦上執行埠轉遞指令，以啟動服務。既然 Weave Scope 已配置叢集，則下一次存取 Weave Scope 時，您就可以執行此埠轉遞指令，而不需要再次完成先前的配置步驟。
+4.  在您的電腦上執行埠轉遞指令，以開啟服務。下次存取 Weave Scope 時，您就可以執行此埠轉遞指令，而不需要再次完成先前的配置步驟。
 
     ```
-    kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+        kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
     ```
     {: pre}
 
@@ -636,7 +644,7 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -649,5 +657,4 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
 [進一步瞭解 Weave Scope 特性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
-
 

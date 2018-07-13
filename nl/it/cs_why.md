@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,11 +15,14 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # Perché {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
 {{site.data.keyword.containerlong}} offre potenti strumenti combinando le tecnologie Docker e Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo.
 {:shortdesc}
+
 
 ## Vantaggi dell'utilizzo del servizio
 {: #benefits}
@@ -38,6 +41,7 @@ espandi velocemente il tuo cluster per soddisfare i carichi di lavoro.</li><li>E
 |Esposizione protetta delle applicazioni al pubblico|<ul><li>Scegli tra un indirizzo IP pubblico, una rotta fornita da {{site.data.keyword.IBM_notm}} o il tuo proprio dominio personale per accedere
 ai servizi nel tuo cluster da internet.</li></ul>|
 |Integrazione servizio {{site.data.keyword.Bluemix_notm}}|<ul><li>Aggiungi ulteriori funzionalità alla tua applicazione tramite l'integrazione dei servizi {{site.data.keyword.Bluemix_notm}}, come le API Watson, Blockchain, i servizi dati o Internet of Things.</li></ul>|
+{: caption="Vantaggi di {{site.data.keyword.containerlong_notm}} " caption-side="top"}
 
 
 
@@ -50,9 +54,9 @@ ai servizi nel tuo cluster da internet.</li></ul>|
 Puoi eseguire {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public o Dedicated, in {{site.data.keyword.Bluemix_notm}} Private o in una configurazione ibrida.
 {:shortdesc}
 
-Esamina le seguenti informazioni per le differenze tra queste configurazioni di {{site.data.keyword.containershort_notm}}.
 
 <table>
+<caption>Differenze tra le configurazioni {{site.data.keyword.containershort_notm}} </caption>
 <col width="22%">
 <col width="78%">
  <thead>
@@ -63,7 +67,7 @@ Esamina le seguenti informazioni per le differenze tra queste configurazioni di 
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>Con {{site.data.keyword.Bluemix_notm}} Public sull'[hardware condiviso o dedicato o sulle macchine bare metal](cs_clusters.html#shared_dedicated_node), puoi ospitare le tue applicazioni nei cluster sul cloud utilizzando {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_notm}} Public offre potenti strumenti combinando le tecnologie Docker e Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo. <br><br>Per ulteriori informazioni, vedi la [tecnologia {{site.data.keyword.containershort_notm}}](cs_tech.html#ibm-cloud-container-service-technology).
+ <td>Con {{site.data.keyword.Bluemix_notm}} Public sull'[hardware condiviso o dedicato o sulle macchine bare metal](cs_clusters.html#shared_dedicated_node), puoi ospitare le tue applicazioni nei cluster sul cloud utilizzando {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_notm}} Public offre potenti strumenti combinando le tecnologie Docker e Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo.<br><br>Per ulteriori informazioni, vedi la [tecnologia {{site.data.keyword.containershort_notm}}](cs_tech.html).
  </td>
  </tr>
  <tr>
@@ -75,7 +79,7 @@ Esamina le seguenti informazioni per le differenze tra queste configurazioni di 
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Private è una piattaforma applicativa che può essere installata localmente sulle tue macchine. Puoi scegliere di utilizzare {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private quando hai bisogno di sviluppare applicazioni inserite nel contenitore in loco nel tuo ambiente controllato dietro un firewall. <br><br>Per ulteriori informazioni, vedi le [informazioni sul prodotto {{site.data.keyword.Bluemix_notm}} Private ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) e la [documentazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ <td>{{site.data.keyword.Bluemix_notm}} Private è una piattaforma applicativa che può essere installata localmente sulle tue macchine. Puoi scegliere di utilizzare {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private quando hai bisogno di sviluppare applicazioni inserite nel contenitore in loco nel tuo ambiente controllato dietro un firewall. <br><br>Per ulteriori informazioni, vedi le [informazioni sul prodotto privato {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/private) e la documentazione [ ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
  </td>
  </tr>
  <tr>
@@ -98,11 +102,7 @@ Puoi creare un cluster gratuito o un qualsiasi numero di cluster standard. Prova
 
 |Caratteristiche|Cluster gratuiti|Cluster standard|
 |---------------|-------------|-----------------|
-|[Rete in cluster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
-|[Accesso dell'applicazione della rete pubblica da un servizio NodePort a un indirizzo IP non stabile](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
-|[Gestione degli accessi utente](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
-|[Accesso al servizio {{site.data.keyword.Bluemix_notm}} dal cluster e dalle applicazioni](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
-|[Spazio su disco sul nodo di lavoro per l'archiviazione non persistente](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
+|[Rete in cluster](cs_secure.html#in_cluster_network)
 |[Archiviazione basata sul file NFS persistente con i volumi](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Accesso dell'applicazione della rete pubblica o privata da un servizio di bilanciamento del carico a un indirizzo IP stabile](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Accesso dell'applicazione della rete pubblica da un servizio Ingress a un indirizzo IP stabile e URL personalizzabile](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
@@ -111,6 +111,7 @@ Puoi creare un cluster gratuito o un qualsiasi numero di cluster standard. Prova
 |[Opzione per il provisioning dei nodi di lavoro su server fisici (bare metal)](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Opzione per il provisioning dei nodi di lavoro bare metal con Trusted Compute](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Disponibile in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
+{: caption="Caratteristiche dei cluster standard e gratuito" caption-side="top"}
 
 <br />
 
@@ -118,8 +119,7 @@ Puoi creare un cluster gratuito o un qualsiasi numero di cluster standard. Prova
 
 
 {: #responsibilities}
-**Nota**: cerchi le tue responsabilità e i termini del contenitore quando utilizzi il servizio? 
+**Nota**: cerchi le tue responsabilità e i termini {{site.data.keyword.containerlong}} quando utilizzi il servizio?
 
 {: #terms}
 Vedi [Responsabilità di {{site.data.keyword.containershort_notm}}](cs_responsibilities.html).
-

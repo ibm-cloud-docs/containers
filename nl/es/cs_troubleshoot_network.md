@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Resolución de problemas en las redes del clúster
 {: #cs_troubleshoot_network}
 
@@ -28,11 +29,12 @@ Si utiliza {{site.data.keyword.containerlong}}, tenga en cuenta estas técnicas 
 Si tiene un problema más general, pruebe la [depuración del clúster](cs_troubleshoot.html).
 {: tip}
 
+
 ## No se puede conectar a una app mediante un servicio de equilibrador de carga.
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Ha expuesto a nivel público la app creando un servicio equilibrador de carga en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o equilibrador de carga, la conexión falla o supera el tiempo de espera.
+Ha expuesto a nivel público la app creando un servicio equilibrador de carga en el clúster. Cuando intenta conectar con la app utilizando la dirección IP pública o equilibrador de carga, la conexión falla o supera el tiempo de espera.
 
 {: tsCauses}
 Posibles motivos por los que el servicio del equilibrador de carga no funciona correctamente:
@@ -71,7 +73,7 @@ Para resolver el problema del servicio equilibrador de carga:
     {: pre}
 
     1.  Verifique que ha definido **LoadBalancer** como tipo de servicio.
-    2.  Asegúrese de que `<selector_key>` y `<selector_value>` que se utilizan en la sección `spec.selector` del servicio LoadBalancer coincidan con el par de clave/valor que se utiliza en la sección `spec.template.metadata.labels` de su yaml de despliegue. Si las etiquetas no coinciden, la sección **Endpoints** en el servicio LoadBalancer visualiza **<none>** y la app no es accesible desde Internet. 
+    2.  En la sección `spec.selector` del servicio LoadBalancer, asegúrese de que `<selector_key>` y `<selector_value>` corresponden al par de clave/valor utilizado en la sección `spec.template.metadata.labels` de su despliegue yaml. Si las etiquetas no coinciden, la sección **Endpoints** en el servicio LoadBalancer visualiza **<none>** y la app no es accesible desde Internet.
     3.  Compruebe que ha utilizado el **puerto** en el que escucha la app.
 
 3.  Compruebe el servicio equilibrador de carga y revisar la sección de **Sucesos** para ver si hay errores.
@@ -85,7 +87,7 @@ Para resolver el problema del servicio equilibrador de carga:
 
     <ul><li><pre class="screen"><code>Los clústeres con un nodo deben utilizar servicios de tipo NodePort</code></pre></br>Para utilizar el servicio equilibrador de carga, debe tener un clúster estándar con al menos dos nodos trabajadores.</li>
     <li><pre class="screen"><code>No hay ninguna IP de proveedor de nube disponible para dar respuesta a la solicitud de servicio del equilibrador de carga. Añada una subred portátil al clúster y vuélvalo a intentar</code></pre></br>Este mensaje de error indica que no queda ninguna dirección IP pública portátil que se pueda asignar al servicio equilibrador de carga. Consulte la sección sobre <a href="cs_subnets.html#subnets">Adición de subredes a clústeres</a> para ver información sobre cómo solicitar direcciones IP públicas portátiles para el clúster. Cuando haya direcciones IP públicas portátiles disponibles para el clúster, el servicio equilibrador de carga se creará automáticamente.</li>
-    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips></code></pre></br>Ha definido una dirección IP pública portátil para el servicio equilibrador de carga mediante la sección **loadBalancerIP**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. Cambie el script de configuración del servicio equilibrador de carga y elija una de las direcciones IP públicas portátiles disponibles o elimine la sección **loadBalancerIP** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.</li>
+    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips></code></pre></br>Ha definido una dirección IP pública portátil para el servicio equilibrador de carga mediante la sección **loadBalancerIP**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. En la sección **loadBalancerIP** del script de configuración, elimine la dirección IP existente y añada una de las direcciones IP públicas portátiles disponibles. También puede eliminar la sección **loadBalancerIP** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.</li>
     <li><pre class="screen"><code>No hay nodos disponibles para el servicio equilibrador de carga</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio equilibrador de carga. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.</li>
     <ol><li>Obtenga una lista de los nodos trabajadores disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>Si se encuentran al menos dos nodos trabajadores disponibles, obtenga una lista de los detalles de los nodos trabajadores.</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
@@ -95,7 +97,7 @@ Para resolver el problema del servicio equilibrador de carga:
     1.  Busque la dirección IP pública del servicio equilibrador de carga.
 
         ```
-        kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+        kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
@@ -111,7 +113,7 @@ Para resolver el problema del servicio equilibrador de carga:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Ha expuesto a nivel público la app creando un recurso de Ingress para la app en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress, la conexión falla o supera el tiempo de espera.
+Ha expuesto a nivel público la app creando un recurso de Ingress para la app en el clúster. Cuando intenta conectar con la app utilizando la dirección IP pública o subdominio del equilibrador de carga de aplicación (ALB), la conexión falla o supera el tiempo de espera.
 
 {: tsCauses}
 Posibles motivos por los que Ingress no funciona correctamente:
@@ -124,7 +126,7 @@ Posibles motivos por los que Ingress no funciona correctamente:
 {: tsResolve}
 Para resolver el problema de Ingress:
 
-1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad de su equilibrador de carga de aplicación de Ingress.
+1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad de su ALB.
 
   ```
   bx cs workers <cluster_name_or_ID>
@@ -133,41 +135,41 @@ Para resolver el problema de Ingress:
 
     En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
 
-2.  Recupere el subdominio del equilibrador de carga de aplicación de Ingress y la dirección IP pública y luego ejecute ping sobre cada uno.
+2.  Recupere el subdominio del ALB y la dirección IP pública y luego ejecute ping sobre cada uno.
 
-    1.  Recupere el subdominio del equilibrador de carga de aplicación.
+    1.  Recupere el subdominio de ALB.
 
       ```
       bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
-    2.  Ejecute ping sobre el subdominio del equilibrador de carga de aplicación de Ingress.
+    2.  Ejecute ping sobre el subdominio de ALB.
 
       ```
-      ping <ingress_controller_subdomain>
-      ```
-      {: pre}
-
-    3.  Recupere la dirección IP pública del equilibrador de carga de aplicación de Ingress.
-
-      ```
-      nslookup <ingress_controller_subdomain>
+      ping <ingress_subdomain>
       ```
       {: pre}
 
-    4.  Ejecute ping sobre la dirección IP pública del equilibrador de carga de aplicación de Ingress.
+    3.  Recupere la dirección IP pública del ALB.
 
       ```
-      ping <ingress_controller_IP>
+      nslookup <ingress_subdomain>
       ```
       {: pre}
 
-    Si la CLI devuelve un tiempo de espera para la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress y ha configurado un cortafuegos personalizado que protege los nodos trabajadores, es posible que tenga que abrir puertos adicionales y grupos de redes en el [cortafuegos](cs_troubleshoot_clusters.html#cs_firewall).
+    4.  Ejecute ping sobre la dirección IP pública del ALB.
 
-3.  Si utiliza un dominio personalizado, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress proporcionado por IBM con el proveedor del Servicio de nombres de dominio (DNS).
-    1.  Si ha utilizado el subdominio del equilibrador de carga de aplicación de Ingress, compruebe el registro del nombre canónico (CNAME).
-    2.  Si ha utilizado la dirección IP pública del equilibrador de carga de aplicación de Ingress, compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del registro de puntero
+      ```
+      ping <ALB_IP>
+      ```
+      {: pre}
+
+    Si la CLI devuelve un tiempo de espera para la dirección IP pública o subdominio del ALB y ha configurado un cortafuegos personalizado que protege los nodos trabajadores, abra más puertos y grupos de redes en el [cortafuegos](cs_troubleshoot_clusters.html#cs_firewall).
+
+3.  Si utiliza un dominio personalizado, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública o subdominio del ALB proporcionado por IBM con el proveedor de DNS.
+    1.  Si ha utilizado el subdominio del ALB, compruebe el registro del nombre canónico (CNAME).
+    2.  Si ha utilizado la dirección IP pública del ALB, compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del registro de puntero
 (PTR).
 4.  Compruebe el archivo de configuración del recurso de Ingress.
 
@@ -186,13 +188,13 @@ Para resolver el problema de Ingress:
         http:
           paths:
           - path: /
-            backend:
-              serviceName: myservice
-              servicePort: 80
+        backend:
+          serviceName: myservice
+          servicePort: 80
     ```
     {: codeblock}
 
-    1.  Compruebe que el subdominio del equilibrador de carga de aplicación de Ingress y el certificado TLS sean correctos. Para encontrar el subdominio proporcionado por IBM y el certificado TLS, ejecute `bx cs cluster-get <cluster_name_or_ID>`.
+    1.  Compruebe que el subdominio del ALB y el certificado TLS sean correctos. Para encontrar el subdominio proporcionado por IBM y el certificado TLS, ejecute `bx cs cluster-get <cluster_name_or_ID>`.
     2.  Asegúrese de que su app está a la escucha en la misma vía de acceso que está configurada en la sección **path** de Ingress. Si la app se ha configurado para que escuche en la vía de acceso raíz, incluya **/** como vía de acceso.
 5.  Compruebe el despliegue de Ingress y mire si hay algún mensaje de error o aviso.
 
@@ -211,7 +213,7 @@ Para resolver el problema de Ingress:
     Rules:
       Host                                             Path  Backends
       ----                                             ----  --------
-      mycluster.us-south.containers.mybluemix.net
+      mycluster.us-south.containers.appdomain.cloud
                                                        /tea      myservice1:80 (<none>)
                                                        /coffee   myservice2:80 (<none>)
     Annotations:
@@ -230,11 +232,11 @@ Para resolver el problema de Ingress:
     ```
     {: screen}
 
-6.  Compruebe los registros del equilibrador de carga de aplicación.
+6.  Compruebe los registros para su ALB.
     1.  Recupere el ID de los pods de Ingress que se ejecutan en el clúster.
 
       ```
-      kubectl get pods -n kube-system | grep alb1
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
@@ -245,25 +247,24 @@ Para resolver el problema de Ingress:
       ```
       {: pre}
 
-    3.  Mire si hay mensajes de error en los registros del equilibrador de carga de aplicación.
+    3.  Mire si hay mensajes de error en los registros del ALB.
 
 <br />
-
-
 
 
 ## Problemas con secretos del equilibrador de carga de aplicación de Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Después de desplegar un secreto de equilibrador de carga de aplicación de Ingress al clúster, el campo `Descripción` no se actualiza con el nombre de secreto al visualizar el certificado en {{site.data.keyword.cloudcerts_full_notm}}.
+Después de desplegar un secreto de equilibrador de carga de aplicación (ALB) de Ingress al clúster, el campo `Descripción` no se actualiza con el nombre de secreto al visualizar el certificado en {{site.data.keyword.cloudcerts_full_notm}}.
 
-Cuando lista información sobre el secreto del equilibrador de carga de aplicación, el estado indica `*_failed`. Por ejemplo, `create_failed`, `update_failed`, `delete_failed`.
+Cuando lista información sobre el secreto del ALB, el estado indica `*_failed`. Por ejemplo, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Revise los motivos siguientes por los que puede fallar el secreto del equilibrador de carga de aplicación y los pasos de resolución de problemas correspondientes:
+Revise los motivos siguientes por los que puede fallar el secreto del ALB y los pasos de resolución de problemas correspondientes:
 
 <table>
+<caption>Resolución de problemas de secretos del equilibrador de carga de aplicación de Ingress</caption>
  <thead>
  <th>Por qué está ocurriendo</th>
  <th>Cómo solucionarlo</th>
@@ -271,7 +272,7 @@ Revise los motivos siguientes por los que puede fallar el secreto del equilibrad
  <tbody>
  <tr>
  <td>No dispone de los roles de acceso necesarios para descargar y actualizar los datos de certificado.</td>
- <td>Solicite al administrador de su cuenta que le asigne los roles de **Operador** y **Editor** para su instancia de {{site.data.keyword.cloudcerts_full_notm}}. Para obtener más detalles, consulte <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gestión del acceso del servicio</a> para {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Solicite al administrador de su cuenta que le asigne los roles de **Operador** y **Editor** para su instancia de {{site.data.keyword.cloudcerts_full_notm}}. Para obtener más información, consulte <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gestión del acceso del servicio</a> para {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>El CRN de certificado proporcionado en el momento de la creación, actualización o eliminación no pertenece a la misma cuenta que el clúster.</td>
@@ -294,13 +295,13 @@ Revise los motivos siguientes por los que puede fallar el secreto del equilibrad
 <br />
 
 
-## No se puede obtener un subdominio para el ALB de Ingress 
+## No se puede obtener un subdominio para el ALB de Ingress
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Cuando ejecuta `bx cs cluster-get <cluster>`, el clúster está en un estado `normal`, sin embargo no hay disponible un **Subdominio de Ingress**. 
+Cuando ejecuta `bx cs cluster-get <cluster>`, el clúster está en un estado `normal`, sin embargo no hay disponible un **Subdominio de Ingress**.
 
-Podría ver un mensaje de error similar al siguiente. 
+Podría ver un mensaje de error similar al siguiente.
 
 ```
 Ya hay el número máximo de subredes permitidas en esta VLAN.
@@ -308,21 +309,21 @@ Ya hay el número máximo de subredes permitidas en esta VLAN.
 {: screen}
 
 {: tsCauses}
-Cuando se crea un clúster, se solicitan 8 subredes portátiles públicas y 8 subredes portátiles privadas en la VLAN que especifique.  En {{site.data.keyword.containershort_notm}}, las VLAN tienen un límite de 40 subredes. Si la VLAN del clúster ya ha alcanzado este límite, no se puede suministrar el **Subdominio de Ingress**. 
+Cuando se crea un clúster, se solicitan 8 subredes portátiles públicas y 8 subredes portátiles privadas en la VLAN que especifique. En {{site.data.keyword.containershort_notm}}, las VLAN tienen un límite de 40 subredes. Si la VLAN del clúster ya ha alcanzado este límite, no se puede suministrar el **Subdominio de Ingress**.
 
-Para ver cuántas subredes tiene una VLAN: 
+Para ver cuántas subredes tiene una VLAN:
 1.  En la [consola (SoftLayer) de la infraestructura de IBM Cloud](https://control.bluemix.net/), seleccione **Red** > **Gestión de IP** > **VLAN**.
-2.  Pulse el **Número de VLAN** de la VLAN que utilizó para crear el clúster. Revise la sección de **Subredes** para ver si hay 40 o más subredes. 
+2.  Pulse el **Número de VLAN** de la VLAN que utilizó para crear el clúster. Revise la sección **Subnets** para ver si hay 40 o más subredes.
 
 {: tsResolve}
-Si necesita una nueva VLAN, [póngase en contacto con el soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar una. A continuación, [cree un clúster](cs_cli_reference.html#cs_cluster_create) que utilice esta nueva VLAN. 
+Si necesita una nueva VLAN, [póngase en contacto con el soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar una. A continuación, [cree un clúster](cs_cli_reference.html#cs_cluster_create) que utilice esta nueva VLAN.
 
-Si tiene otra VLAN que esté disponible, puede [configurar la expansión de la VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) en el clúster existente. Después, puede añadir nuevos nodos trabajadores al clúster que utilicen otra VLAN con subredes disponibles. 
+Si tiene otra VLAN que esté disponible, puede [configurar la expansión de la VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) en el clúster existente. Después, puede añadir nuevos nodos trabajadores al clúster que utilicen otra VLAN con subredes disponibles.
 
-Si no utiliza todas las subredes en la VLAN, puede reutilizar subredes en el clúster. 
-1.  Compruebe que las subredes que desea utilizar están disponibles. **Nota**: La cuenta de infraestructura que está utilizando podría compartirse entre varias cuentas de {{site.data.keyword.Bluemix_notm}}. Si es así, incluso si ejecuta el mandato `bx cs subnets` para ver subredes con **Clústeres enlazados**, solo puede ver información de sus clústeres. Compruebe con el propietario de la cuenta de infraestructura para asegurarse de que las subredes están disponibles y que no las estén utilizando otra cuenta o equipo. 
+Si no utiliza todas las subredes en la VLAN, puede reutilizar subredes en el clúster.
+1.  Compruebe que las subredes que desea utilizar están disponibles. **Nota**: La cuenta de infraestructura que está utilizando podría compartirse entre varias cuentas de {{site.data.keyword.Bluemix_notm}}. Si es así, incluso si ejecuta el mandato `bx cs subnets` para ver subredes con **Clústeres enlazados**, solo puede ver información de sus clústeres. Compruebe con el propietario de la cuenta de infraestructura para asegurarse de que las subredes están disponibles y que no las estén utilizando otra cuenta o equipo.
 
-2.  [Cree un clúster](cs_cli_reference.html#cs_cluster_create) con la opción `--no-subnet` para que el servicio no intente crear nuevas subredes. Especifique la ubicación y la VLAN de las subredes disponibles para ser reutilizadas. 
+2.  [Cree un clúster](cs_cli_reference.html#cs_cluster_create) con la opción `--no-subnet` para que el servicio no intente crear nuevas subredes. Especifique la ubicación y la VLAN de las subredes disponibles para ser reutilizadas.
 
 3.  Utilice el [mandato](cs_cli_reference.html#cs_cluster_subnet_add) `bx cs cluster-subnet-add` para añadir subredes existentes a su clúster. Para obtener más información, consulte [Adición o reutilización de subredes existentes o personalizadas en clústeres de Kubernetes](cs_subnets.html#custom).
 
@@ -341,7 +342,7 @@ El archivo de configuración del diagrama de Helm tiene valores incorrectos, err
 {: tsResolve}
 Cuando intenta establecer la conectividad de VPN con el diagrama de Helm de strongSwan, es probable que el estado de VPN no sea `ESTABLISHED` la primera vez. Puede que necesite comprobar varios tipos de problema y cambiar el archivo de configuración en consonancia. Para resolver el problema de conectividad de VPN de strongSwan:
 
-1. Compare los valores de punto final de VPN local con los valores del archivo de configuración. Si hay discrepancias:
+1. Compare los valores de punto final de VPN local con los valores del archivo de configuración. Si los valores no coinciden:
 
     <ol>
     <li>Suprima el diagrama de Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
@@ -352,8 +353,8 @@ Cuando intenta establecer la conectividad de VPN con el diagrama de Helm de stro
 2. Si el pod de VPN está en estado `ERROR` o sigue bloqueándose y reiniciándose, puede que se deba a la validación de parámetro de los valores de `ipsec.conf` en la correlación de configuración del diagrama.
 
     <ol>
-    <li>Compruebe los errores de validación en los registros del pod de Strongswan.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>Si hay errores de validación, suprima el diagrama de Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
+    <li>Compruebe los errores de validación en los registros del pod de strongSwan.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
+    <li>Si los registros contienen errores de validación, suprima el diagrama de Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Corrija los valores incorrectos en el archivo `config.yaml` y guarde el archivo actualizado.</li>
     <li>Instale el nuevo diagrama de Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
     </ol>
@@ -397,20 +398,20 @@ Cuando intenta establecer la conectividad de VPN con el diagrama de Helm de stro
 {: tsSymptoms}
 Ha establecido previamente una conexión VPN activa utilizando el servicio VPN IPSec de strongSwan. Sin embargo, después de haber añadido o suprimido un nodo trabajador en el clúster, aparecen uno o varios de los siguientes síntomas:
 
-* el estado de la VPN no es `ESTABLISHED`
-* no se puede acceder a los nuevos nodos trabajadores desde la red local
-* no se puede acceder a la red remota desde los pods que se ejecutan en los nuevos nodos trabajadores
+* El estado de la VPN no es `ESTABLISHED`
+* No se puede acceder a los nuevos nodos trabajadores desde la red local
+* No se puede acceder a la red remota desde los pods que se ejecutan en los nuevos nodos trabajadores
 
 {: tsCauses}
 Si ha añadido un nodo trabajador:
 
-* el nodo trabajador se ha suministrado en una nueva subred privada que no se expone a través de la conexión VPN existente mediante los valores `localSubnetNAT` o `local.subnet`
+* El nodo trabajador se ha suministrado en una nueva subred privada que no se expone a través de la conexión VPN existente mediante los valores `localSubnetNAT` o `local.subnet`
 * las rutas de VPN no pueden añadirse al nodo trabajador porque el trabajador tiene antagonismos o etiquetas que no están incluidas en los valores actuales de `tolerations` o `nodeSelector`
-* el pod de VPN se ejecuta en el nodo trabajador nuevo, pero la dirección IP pública de dicho nodo trabajador no está permitida por el cortafuegos local
+* El pod de VPN se ejecuta en el nodo trabajador nuevo, pero la dirección IP pública de dicho nodo trabajador no está permitida por el cortafuegos local
 
 Si ha suprimido un nodo trabajador:
 
-* ese nodo trabajador era el único nodo en el que se estaba ejecutando un pod de VPN, debido a las restricciones en algunos antagonismos o etiquetas en los valores existentes de `tolerations` o `nodeSelector`
+* Ese nodo trabajador era el único nodo en el que se estaba ejecutando un pod de VPN, debido a las restricciones en algunos antagonismos o etiquetas en los valores existentes de `tolerations` o `nodeSelector`
 
 {: tsResolve}
 Actualice los valores de diagrama de Helm para reflejar los cambios del nodo trabajador:
@@ -429,11 +430,12 @@ Actualice los valores de diagrama de Helm para reflejar los cambios del nodo tra
     ```
     {: pre}
 
-3. Compruebe los valores siguientes y realice los cambios necesarios para reflejar los nodos añadidos o suprimidos.
+3. Compruebe los valores siguientes y cambie los valores para reflejar los nodos trabajadores añadidos o suprimidos necesarios.
 
     Si ha añadido un nodo trabajador:
 
     <table>
+    <caption>Valores de nodo trabajador</caption>
      <thead>
      <th>Valor</th>
      <th>Descripción</th>
@@ -441,25 +443,26 @@ Actualice los valores de diagrama de Helm para reflejar los cambios del nodo tra
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>El nodo trabajador añadido puede estar desplegado en una subred privada nueva diferente a las demás subredes existentes en las que se encuentran otros nodos trabajadores. Si está utilizando NAT de subred para volver a correlacionar las direcciones IP locales privadas del clúster y el nodo trabajador se añade a una nueva subred, añada el CIDR de la nueva subred a este valor.</td>
+     <td>El trabajador añadido puede estar desplegado en una subred privada nueva diferente a las demás subredes existentes en las que se encuentran otros nodos trabajadores. Si está utilizando NAT de subred para volver a correlacionar las direcciones IP locales privadas del clúster y el trabajador se añade a una nueva subred, añada el CIDR de la nueva subred a este valor.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Si anteriormente ha limitado la ejecución del pod de VPN a los nodos trabajadores con una etiqueta específica y desea añadir rutas VPN al trabajador, asegúrese de que el nodo trabajador añadido tiene dicha etiqueta.</td>
+     <td>Si anteriormente ha limitado el despliegue pods de VPN a los trabajadores con una etiqueta específica, asegúrese de que el nodo trabajador añadido también tiene dicha etiqueta.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Si el nodo trabajador añadido tiene antagonismos, y desea añadir rutas de VPN al trabajador, cambie este valor para permitir que el pod de VPN se ejecute en todos los nodos trabajadores con antagonismos o en nodos trabajadores con antagonismos específicos.</td>
+     <td>Si el nodo trabajador añadido tiene antagonismos, cambie este valor para permitir que el pod de VPN se ejecute en todos los trabajadores con cualquier antagonismo o con antagonismos específicos.</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>El nodo trabajador añadido puede estar desplegado en una subred privada nueva diferente a las demás subredes existentes en las que se encuentran otros nodos trabajadores. Si las apps están expuestas por los servicios NodePort o LoadBalancer en la red privada y están en un nodo trabajador nuevo que ha añadido, añada el CIDR de la nueva subred a este valor. **Nota**: Si añade valores a `local.subnet`, compruebe los valores de VPN para la subred local para ver si también deben actualizarse.</td>
+     <td>El trabajador añadido puede estar desplegado en una subred privada nueva diferente a las subredes existentes en las que se encuentran otros trabajadores. Si las apps están expuestas por los servicios NodePort o LoadBalancer en la red privada y las apps están en el trabajador añadido, añada el CIDR de la nueva subred a este valor. **Nota**: Si añade valores a `local.subnet`, compruebe los valores de VPN para la subred local para ver si también deben actualizarse.</td>
      </tr>
      </tbody></table>
 
     Si ha suprimido un nodo trabajador:
 
     <table>
+    <caption>Valores de nodo trabajador</caption>
      <thead>
      <th>Valor</th>
      <th>Descripción</th>
@@ -467,15 +470,15 @@ Actualice los valores de diagrama de Helm para reflejar los cambios del nodo tra
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Si está utilizando NAT de subred para volver a correlacionar direcciones IP locales privadas específicas, elimine las direcciones IP de esta configuración que pertenezcan al nodo trabajador antiguo. Si está utilizando NAT de subred para volver a correlacionar subredes enteras y no quedan nodos trabajadores en una subred, elimine el CIDR de esa subred de este valor.</td>
+     <td>Si está utilizando NAT de subred para volver a correlacionar direcciones IP locales privadas específicas, elimine las direcciones IP de esta configuración que pertenezcan al trabajador antiguo. Si está utilizando NAT de subred para volver a correlacionar subredes enteras y no quedan trabajadores en una subred, elimine dicho CIDR de subred de este valor.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Si anteriormente ha limitado la ejecución del pod de VPN a un solo nodo trabajador y este ha sido suprimido, cambie este valor para permitir que el pod de VPN se ejecute en otros nodos trabajadores.</td>
+     <td>Si con anterioridad limitó el despliegue de pod de VPN a un trabajador individual y dicho trabajador fue suprimido, cambie este valor para permitir que el pod de VPN se ejecute en otros trabajadores.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Si el nodo trabajador que suprimió no poseía antagonismo, pero los nodos que quedan sí poseen antagonismo, cambie este valor para permitir que el pod de VPN se ejecute en todos los nodos trabajadores con antagonismos o en nodos trabajadores con antagonismos específicos.
+     <td>Si el trabajador que suprimió no poseía antagonismos, y los únicos trabajadores que quedan poseen antagonismos, cambie este valor para permitir que todos los pods de VPN se ejecuten en trabajadores con cualquier antagonismo o con antagonismos específicos.
      </td>
      </tr>
      </tbody></table>
@@ -522,40 +525,51 @@ Actualice los valores de diagrama de Helm para reflejar los cambios del nodo tra
 
 
 
-
-## No se puede recuperar el URL de ETCD para la configuración de la CLI de Calico.
+## No se pueden recuperar políticas de red de Calico
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Cuando recupere el `<ETCD_URL>` para [añadir políticas de red](cs_network_policy.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
+Cuando intenta ver las políticas de red de Calico en su clúster ejecutando `calicoctl get policy`, obtiene resultados no esperados o mensajes de error:
+- Una lista vacía
+- Una lista de políticas de Calico v2 antiguas en lugar de políticas de la v3
+- `No se ha podido crear el cliente de API de Calico: error de sintaxis en calicoctl.cfg: archivo de configuración no válido: APIVersion desconocida 'projectcalico.org/v3'`
+
+Cuando intenta ver las políticas de red de Calico en su clúster ejecutando `calicoctl get GlobalNetworkPolicy`, obtiene resultados no esperados o mensajes de error:
+- Una lista vacía
+- `No se ha podido crear el cliente de API de Calico: error de sintaxis en calicoctl.cfg: archivo de configuración no válido: APIVersion desconocida 'v1'`
+- `No se ha podido crear el cliente de API de Calico: error de sintaxis en calicoctl.cfg: archivo de configuración no válido: APIVersion desconocida 'projectcalico.org/v3'`
+- `No se ha podido obtener recursos: No se da soporte al tipo de recurso 'GlobalNetworkPolicy'`
 
 {: tsCauses}
-El clúster no está en el nivel de [Kubernetes versión 1.7](cs_versions.html) o posterior.
+Para utilizar políticas de Calico, se deben alinear cuatro factores: la versión de Kubernetes del clúster, la versión de la CLI de Calico, la sintaxis del archivo de configuración de Calico y los mandatos de visualización de política. Uno o más de estos factores no están en la versión correcta.
 
 {: tsResolve}
-[Actualice el clúster](cs_cluster_update.html#master) o recupere el `<ETCD_URL>` con mandatos compatibles con versiones anteriores de Kubernetes.
+Cuando el clúster está en [Kubernetes versión 1.10 o posterior](cs_versions.html), debe utilizar Calico CLI v3.1, la sintaxis del archivo de configuración `calicoctl.cfg` v3 y los mandatos `calicoctl get GlobalNetworkPolicy` y `calicoctl get NetworkPolicy`.
 
-Para recuperar el `<ETCD_URL>`, ejecute uno de los mandatos siguientes:
+Cuando el clúster está en [Kubernetes versión 1.9 o anterior](cs_versions.html), debe utilizar Calico CLI v1.6.3, la sintaxis del archivo de configuración `calicoctl.cfg` v2 y el mandato `calicoctl get policy`.
 
-- Linux y OS X:
+Para asegurarse de que se han alineado todos los factores de Calico:
 
+1. Visualice la versión de Kubernetes del clúster.
     ```
-    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
-- Windows:
-    <ol>
-    <li> Obtenga una lista de los pods del espacio de nombres kube-system y localice el pod del controlador Calico. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Ejemplo:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-    <li> Consulte los detalles del pod del controlador Calico.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;calico_pod_ID&gt;</code></pre>
-    <li> Localice el valor de los puntos finales de ETCD. Ejemplo: <code>https://169.1.1.1:30001</code>
-    </ol>
+    * Si el clúster está en Kubernetes versión 1.10 o posterior:
+        1. [Instale y configure la CLI de Calico versión 3.1.1](cs_network_policy.html#1.10_install). La configuración incluye la actualización manual del archivo `calicoctl.cfg` para utilizar la sintaxis de Calico v3.
+        2. Asegúrese de que las políticas que desea crear y aplicar al clúster utilizan la [sintaxis Calico v3 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Si tiene un archivo de política `.yaml` o `.json` existente en sintaxis de Calico v2, puede convertirlo a la sintaxis de Calico v3 utilizando el mandato [`calicoctl convert` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+        3. Para [visualizar políticas](cs_network_policy.html#1.10_examine_policies), asegúrese de utilizar `calicoctl get GlobalNetworkPolicy` para políticas globales y `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas cuyo ámbito sean espacios de nombres específicos.
 
-Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adición de políticas de red) [cs_network_policy.html#adding_network_policies].
+    * Si el clúster está en Kubernetes versión 1.9 o anterior:
+        1. [Instale y configure la CLI de Calico versión 1.6.3](cs_network_policy.html#1.9_install). Asegúrese de que el archivo `calicoctl.cfg` utiliza la sintaxis de Calico v2.
+        2. Asegúrese de que todas las políticas que crea y desea aplicar al clúster utilizan la [sintaxis de Calico v2 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+        3. Para [visualizar políticas](cs_network_policy.html#1.9_examine_policies), asegúrese de utilizar `calicoctl get policy`.
+
+Antes de actualizar su clúster desde Kubernetes versión 1.9 o anterior a la versión 1.10 o posterior, consulte [Preparación para actualizar a Calico V3](cs_versions.html#110_calicov3).
+{: tip}
 
 <br />
-
-
 
 
 ## Obtención de ayuda y soporte
@@ -565,7 +579,8 @@ Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adició
 {: shortdesc}
 
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
--   Puede publicar una pregunta en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
+-   Publique una pregunta en [{{site.data.keyword.containershort_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
+
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
@@ -576,7 +591,6 @@ Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adició
 
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
-
 

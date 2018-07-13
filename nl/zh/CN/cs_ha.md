@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # {{site.data.keyword.containerlong_notm}} 的高可用性
@@ -36,7 +38,9 @@ lastupdated: "2018-4-20"
 
 <img src="images/cs_failure_ov.png" alt="{{site.data.keyword.containershort_notm}} 区域内高可用性集群中故障区的概述。" width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="此表显示 {{site.data.keyword.containershort_notm}} 中的故障点。各行都应从左到右阅读，其中第一列是故障点编号，第二列是故障点标题，第三列是描述，第四列是文档链接。">
+<caption>故障点</caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -75,7 +79,7 @@ lastupdated: "2018-4-20"
   <tr>
     <td>5 </td>
     <td>区域故障</td>
-    <td>每个区域都设置有高可用性负载均衡器，可从特定于区域的 API 端点进行访问。负载均衡器用于将入局和出局请求路由到区域位置中的集群。整个区域发生故障的可能性较低。但是，如果要应对此故障，可以在不同区域中设置多个集群，并使用外部负载均衡器来连接这些集群。万一整个区域发生故障，另一个区域中的集群可以接管工作负载。<br/><br/><strong>注：</strong>多区域集群需要多种云资源，并且根据应用程序的情况，该集群可能会十分复杂且昂贵。请检查您是否需要多区域设置，或者是否可以容忍潜在的服务中断。如果要设置多区域集群，请确保应用程序和数据可以在其他区域中托管，并且应用程序可以处理全局数据复制。</td>
+    <td>每个区域都设置有高可用性负载均衡器，可从特定于区域的 API 端点进行访问。负载均衡器用于将入局和出局请求路由到区域位置中的集群。整个区域发生故障的可能性较低。但是，要应对此故障，可以在不同区域中设置多个集群，并使用外部负载均衡器来连接这些集群。万一整个区域发生故障，另一个区域中的集群可以接管工作负载。<br/><br/><strong>注：</strong>多区域集群需要多种云资源，并且根据应用程序的情况，该集群可能会十分复杂且昂贵。请检查您是否需要多区域设置，或者是否可以容忍潜在的服务中断。如果要设置多区域集群，请确保应用程序和数据可以在其他区域中托管，并且应用程序可以处理全局数据复制。</td>
     <td>[设置高可用性集群。](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ lastupdated: "2018-4-20"
   </tr>
   </tbody>
   </table>
+
+
 

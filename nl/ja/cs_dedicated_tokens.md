@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # {{site.data.keyword.Bluemix_dedicated_notm}} イメージ・レジストリー用の {{site.data.keyword.registryshort_notm}} トークンの作成
@@ -66,7 +69,7 @@ lastupdated: "2018-4-20"
     ```
     {: pre}
 
-    このシークレットにより、IBM {{site.data.keyword.Bluemix_notm}} Container Service を使用することができます。
+    このシークレットにより、{{site.data.keyword.containerlong}} を使用することができます。
 
 6.  トークン情報を保管する Kubernetes シークレットを作成します。
 
@@ -76,7 +79,7 @@ lastupdated: "2018-4-20"
     {: pre}
 
     <table>
-    <caption>表 1. このコマンドの構成要素について</caption>
+    <caption>このコマンドの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
     </thead>
@@ -109,7 +112,7 @@ lastupdated: "2018-4-20"
 
 7.  imagePullSecret を参照するポッドを作成します。
 
-    1.  任意のエディターを開き、mypod.yaml という名前のポッド構成スクリプトを作成します。
+    1.  任意のテキスト・エディターを開き、mypod.yaml という名前のポッド構成スクリプトを作成します。
     2.  レジストリーへのアクセスに使用するポッドと imagePullSecret を定義します。 名前空間からプライベート・イメージを使用するには、次のようにします。
 
         ```
@@ -120,14 +123,14 @@ lastupdated: "2018-4-20"
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>表 2. YAML ファイルの構成要素について</caption>
+        <caption>YAML ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>

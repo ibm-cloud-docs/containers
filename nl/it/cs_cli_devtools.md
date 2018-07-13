@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Riferimenti CLI per la gestione dei cluster
@@ -554,7 +557,7 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>Sostituisci <code><em>&lt;cluster_name&gt;</em></code> con un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Nota che il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+    <td>Sostituisci <code><em>&lt;cluster_name&gt;</em></code> con un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
 </td>
     </tr>
     <tr>
@@ -618,7 +621,7 @@ prestazioni ottimali, seleziona la regione fisicamente più vicina a te.  Questo
 <dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Il nome del cluster.  Questo valore è obbligatorio. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Nota che il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+<dd>Il nome del cluster.  Questo valore è obbligatorio. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
@@ -634,9 +637,9 @@ prestazioni ottimali, seleziona la regione fisicamente più vicina a te.  Questo
 <ul>
 <li>Questo parametro non è disponibile per i cluster gratuiti.</li>
 <li>Se si tratta del primo cluster standard che crei in questa ubicazione, non includere questo indicatore. Alla creazione dei cluster, viene creata per te una VLAN privata.</li>
-<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato prima una VLAN privata nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN privata.
+<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato una VLAN privata nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN privata.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></li>
 </ul>
 
 <p>Per scoprire se già hai una VLAN privata per una specifica ubicazione o per trovare il nome di una
@@ -648,9 +651,9 @@ VLAN privata esistente, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code
 <li>Questo parametro non è disponibile per i cluster gratuiti.</li>
 <li>Se si tratta del primo cluster standard che crei in questa ubicazione, non utilizzare questo indicatore. Alla creazione
 del cluster, viene creata per te una VLAN pubblica.</li>
-<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato prima una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN pubblica.
+<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN pubblica.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></li>
 </ul>
 
 <p>Per scoprire se già hai una VLAN pubblica per una specifica ubicazione o per trovare il nome di una
@@ -754,7 +757,7 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
@@ -801,7 +804,7 @@ Rimuovere un cluster dalla tua organizzazione.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Aggiorna il master Kubernetes alla versione API predefinita. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuiti dall'utente non vengono modificati e continuano a essere eseguiti.
+Aggiorna il master Kubernetes alla versione API predefinita. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuite dall'utente non vengono modificate e continuano a essere eseguite.
 
 Potresti dover modificare i tuoi file YAML per distribuzioni future. Controlla questa [nota sulla release](cs_versions.html) per i dettagli.
 
@@ -1064,7 +1067,7 @@ Porta la tua sottorete privata nei cluster {{site.data.keyword.containershort_no
 Questa sottorete privata non è una di quelle fornite dall'infrastruttura IBM Cloud (SoftLayer). In quanto tale, devi configurare l'instradamento del traffico di rete in entrata e in uscita per la sottorete. Per aggiungere una sottorete dell'infrastruttura IBM Cloud (SoftLayer), utilizza il [comando](#cs_cluster_subnet_add) `bx cs cluster-subnet-add`.
 
 **Nota**:
-* Quando aggiungi una sottorete utente privata a un cluster, gli indirizzi IP di questa sottorete vengono utilizzati per i programmi di bilanciamento del carico privati nel cluster. Per evitare conflitti di indirizzi IP, assicurati
+* Quando aggiungi una sottorete utente privata a un cluster, gli indirizzi IP di questa sottorete vengono utilizzati per Load Balancers privati nel cluster. Per evitare conflitti di indirizzi IP, assicurati
 di utilizzare una sottorete con un solo cluster. Non utilizzare una sottorete per più cluster o per altri
 scopi al di fuori di {{site.data.keyword.containershort_notm}}
 contemporaneamente.
@@ -1107,10 +1110,10 @@ Rimuovi la tua propria sottorete privata da un cluster specificato.
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code><em>SUBNET_CIDR</em></code></dt>
-   <dd>La sottorete CIDR (Classless InterDomain Routing). Questo valore è obbligatorio e deve corrispondere al CIDR configurato dal [commando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
+   <dd>La sottorete CIDR (Classless InterDomain Routing). Questo valore è obbligatorio e deve corrispondere al CIDR configurato dal [comando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
-   <dd>L'ID della VLAN privata. Questo valore è obbligatorio e deve corrispondere all'ID della VLAN configurato dal [commando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
+   <dd>L'ID della VLAN privata. Questo valore è obbligatorio e deve corrispondere all'ID della VLAN configurato dal [comando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
    </dl>
 
 **Esempio**:
@@ -1159,7 +1162,7 @@ Distribuisci o aggiorna un certificato dalla tua istanza {{site.data.keyword.clo
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Includi questo indicatore per aggiornare il certificato per un segreto dell'ALB in un cluster. Questo valore è facoltativo.</dd>
+   <dd>Aggiorna il certificato per un segreto dell'ALB in un cluster. Questo valore è facoltativo.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>Il nome del segreto ALB. Questo valore è obbligatorio.</dd>
@@ -1280,9 +1283,6 @@ Visualizza un elenco di segreti dell'ALB in un cluster.
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1304,7 +1304,7 @@ Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitat
    <dd>
 
    <ul>
-    <li>Questo parametro è disponibile solo per un ALB privato</li>
+    <li>Questo parametro è disponibile solo per abilitare un ALB privato.</li>
     <li>L'ALB privato viene distribuito con un indirizzo IP da una sottorete privata fornita dall'utente. Se non viene fornito alcun indirizzo IP, l'ALB viene distribuito con un indirizzo IP privato dalla sottorete privata portatile che è stata fornita automaticamente quando hai creato il cluster.</li>
    </ul>
    </dd>
@@ -1319,13 +1319,6 @@ Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitat
   ```
   {: pre}
 
-  Esempio per disabilitare un ALB:
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   Esempio per abilitare un ALB con un indirizzo IP fornito dall'utente:
 
   ```
@@ -1333,7 +1326,12 @@ Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitat
   ```
   {: pre}
 
+  Esempio per disabilitare un ALB:
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1477,20 +1475,13 @@ la quantità di CPU virtuale, memoria e spazio su disco per ogni nodo di lavoro 
 Puoi eseguire il provisioning del tuo nodo di lavoro come macchina virtuale su hardware condiviso o dedicato o come macchina fisica su bare metal.
 
 <dl>
-<dt>Macchine fisiche (bare metal)</dt>
-<dd>Puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal. Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni.
+<dt>Perché dovrei utilizzare le macchine fisiche (bare metal)?</dt>
+<dd><p><strong>Più risorse di calcolo</strong>: puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal. Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno un'archiviazione locale maggiore rispetto a quelle virtuali e alcune dispongono di RAID per il backup dei dati locali.</p>
 <p><strong>Fatturazione mensile</strong>: i server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. I server bare metal vengono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. L'ordinazione e l'annullamento dei server bare metal è un processo manuale che viene eseguito tramite il tuo account dell'infrastruttura IBM Cloud (SoftLayer). Il suo completamento può richiedere più di un giorno lavorativo.</p>
-<p><strong>Opzione per abilitare Trusted Compute</strong>: abilita Trusted Compute per verificare i tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute è disponibile sui cluster su cui è in esecuzione Kubernetes versione 1.9 o successive e che hanno alcuni tipi di macchine bare metal. Quando esegui il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, puoi vedere quali macchine supportano l'attendibilità controllando il campo `Trustable`.</p>
-<p><strong>Gruppi di tipi di macchine bare metal</strong>: i tipi di macchine bare metal sono forniti in gruppi che hanno diverse risorse di calcolo tra cui puoi scegliere per soddisfare le esigenze della tua applicazione. I tipi di macchine fisiche hanno un'archiviazione locale maggiore rispetto a quelle virtuali e alcune dispongono di RAID per il backup dei dati locali. Per conoscere i diversi tipi di offerte bare metal, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.
-<ul><li>`mb1c.4x32`: se non hai bisogno di RAM o di risorse con dati intensivi, scegli questo tipo per una configurazione bilanciata delle risorse della macchina fisica per i tuoi nodi di lavoro. Bilanciata con 4 core, 32 GB di memoria, 1 TB di disco primario SATA, 2 TB di disco secondario SATA, 10 Gbps di rete associata.</li>
-<li>`mb1c.16x64`: se non hai bisogno di RAM o di risorse con dati intensivi, scegli questo tipo per una configurazione bilanciata delle risorse della macchina fisica per i tuoi nodi di lavoro. Bilanciata con 16 core, 64 GB di memoria, 1 TB di disco primario SATA, 1,7 TB di disco secondario SSD, 10 Gbps di rete associata.</li>
-<li>`mr1c.28x512`: scegli questo tipo per massimizzare la RAM disponibile per i tuoi nodi di lavoro. RAM intensiva con 28 core, 512 GB di memoria, 1 TB di disco primario SATA, 1,7 TB di disco secondario SSD, 10 Gbps di rete associata.</li>
-<li>`md1c.16x64.4x4tb`: scegli questo tipo se i tuoi nodi di lavoro richiedono una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. I dischi di archiviazione primaria da 1 TB sono configurati per RAID1 e i dischi di archiviazione secondaria da 4 TB sono configurati per RAID10. Dati intensivi con 28 core, 512 GB di memoria, 2x1TB di disco primario RAID1, 4x4TB di disco secondario SATA RAID10, 10 Gbps di rete associata.</li>
-<li>`md1c.28x512.4x4tb`: scegli questo tipo se i tuoi nodi di lavoro richiedono una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. I dischi di archiviazione primaria da 1 TB sono configurati per RAID1 e i dischi di archiviazione secondaria da 4 TB sono configurati per RAID10. Dati intensivi con 16 core, 64 GB di memoria, 2x1TB di disco primario RAID1, 4x4TB di disco secondario SATA RAID10, 10 Gbps di rete associata.</li>
-
-</ul></p></dd>
-<dt>Macchine virtuali</dt>
-<dd>Quando crei un cluster virtuale standard, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).
+<p><strong>Opzione per abilitare Trusted Compute</strong>: abilita Trusted Compute per verificare i tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute è disponibile sui cluster su cui è in esecuzione Kubernetes versione 1.9 o successive e che hanno alcuni tipi di macchine bare metal. Quando esegui il comando `bx cs machine-types <location>` [](cs_cli_reference.html#cs_machine_types), puoi vedere quali macchine supportano l'attendibilità controllando il campo **Trustable**. Ad esempio, le caratteristiche GPU `mgXc` non supportano Trusted Compute.</p></dd>
+<dt>Perché dovrei utilizzare le macchine virtuali?</dt>
+<dd><p>Con le VM, ottieni maggiore flessibilità, tempi di provisioning più veloci e ulteriori funzioni di scalabilità automatica rispetto ai bare metal, ad un prezzo più conveniente. Puoi utilizzare le VM per casi di utilizzo più generali come gli ambienti di sviluppo e test, di preparazione e di produzione, i microservizi e le applicazioni di business. Tuttavia, è un compromesso nelle prestazioni. Se hai bisogno di calcolo di prestazioni elevate per la RAM-, i dati-, o i carichi di lavoro intensivi di GPU-, utilizza i bare metal.</p>
+<p><strong>Decidi tra la tenancy singola o multipla</strong>: quando crei un cluster virtuale standard, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).</p>
 <p>In una configurazione a più tenant, le risorse fisiche, come ad esempio la CPU e la memoria, vengono condivise tra tutte le
 macchine virtuali distribuite allo stesso hardware fisico. Per assicurare che ogni macchina virtuale
 possa essere eseguita indipendentemente, un monitoraggio della macchina virtuale, conosciuto anche come hypervisor,
@@ -1504,8 +1495,96 @@ fisiche disponibili.</p>
 sono condivisi tra più clienti. Tuttavia, quando decidi tra nodi condivisi e dedicati,
 potresti voler verificare con il tuo dipartimento legale e discutere sul livello di conformità e isolamento dell'infrastruttura
 che il tuo ambiente dell'applicazione necessita.</p>
-<p><strong>Tipi di macchine virtuali `u2c` o `b2c`</strong>: queste macchine utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Questi tipi di macchina contengono 25 GB di archiviazione su disco locale primaria per il file system del sistema operativo e 100 GB di archiviazione su disco locale secondaria per `/var/lib/docker`, ossia la directory in cui sono scritti tutti i dati del contenitore.</p>
-<p><strong>Tipi di macchine obsolete `u1c` o `b1c`</strong>: per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, [aggiorna i tipi di macchina aggiungendo i nodi di lavoro](cs_cluster_update.html#machine_type).</p></dd>
+<p><strong>Caratteristiche delle macchine virtuali `u2c` o `b2c`</strong>: queste macchine utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Questi tipi di macchina contengono 25 GB di archiviazione su disco locale primaria per il file system del sistema operativo e 100 GB di archiviazione su disco locale secondaria per `/var/lib/docker`, ossia la directory in cui sono scritti tutti i dati del contenitore.</p>
+<p><strong>Cosa succede se ho tipi di macchine `u1c` o `b1c` obsoleti?</strong> Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, [aggiorna i tipi di macchina aggiungendo i nodi di lavoro](cs_cluster_update.html#machine_type).</p></dd>
+<dt>Tra quali caratteristiche della macchina fisica e virtuali posso scegliere?</dt>
+<dd><p>Molte! Seleziona il tipo di macchina che è migliore per il tuo caso di utilizzo. Ricorda che un pool di lavoro è composto da macchine che sono della stessa caratteristica. Se vuoi una combinazione di tipi di macchina nel tuo cluster, crea pool di lavoro separati per ogni caratteristica.</p>
+<p>I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `bx cs machine-types <zone_name>`.</p>
+<p><table>
+<caption>Tipi di macchina virtuale e fisica (bare metal) disponibili in {{site.data.keyword.containershort_notm}}.</caption>
+<thead>
+<th>Nome e caso di utilizzo</th>
+<th>Core / Memoria</th>
+<th>Disco primario / secondario</th>
+<th>Velocità di rete</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virtuale, u2c.2x4</strong>: utilizza questa VM di dimensione minima per il test rapido, le prove di concetto e altri carichi di lavoro leggeri.</td>
+<td>2 / 4GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtuale, b2c.4x16</strong>: seleziona questa VM bilanciata per il test e lo sviluppo e altri carichi di lavoro leggeri.</td>
+<td>4 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtuale, b2c.16x64</strong>: seleziona questa VM bilanciata per carichi di lavoro di dimensione media.</td></td>
+<td>16 / 64GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtuale, b2c.32x128</strong>: seleziona questa VM bilanciata per carichi di lavoro medi o grandi, come un database e un sito web dinamico con molti utenti simultanei.</td></td>
+<td>32 / 128GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtuale, b2c.56x242</strong>: seleziona questa VM bilanciata per carichi di lavoro grandi, come un database e più applicazioni con molti utenti simultanei.</td></td>
+<td>56 / 242GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal con RAM intensiva, mr1c.28x512</strong>: massimizza la disponibilità della RAM dei tuoi nodi di lavoro.</td>
+<td>28 / 512GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal GPU, mg1c.16x128</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa caratteristica ha 1 scheda fisica Tesla K80 con 2 GPU (graphics processing unit) per scheda per un totale di 2 GPU.</td>
+<td>16 / 128GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal GPU, mg1c.28x256</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa caratteristica ha 2 schede fisiche Tesla K80 con 2 GPU per scheda per un totale di 4 GPU.</td>
+<td>28 / 256GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal con dai intensivi, md1c.16x64.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
+<td>16 / 64GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal con dai intensivi, md1c.28x512.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
+<td>28 / 512 GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal bilanciato, mb1c.4x32</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali.</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 2TB SATA</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal bilanciato, mb1c.16x64</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali.</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1584,7 +1663,7 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster.</dd>
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>L'origine del log per la quale desideri abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Se non fornisci un'origine log, le configurazioni di registrazione vengono create per le origini log <code>container</code> e <code>ingress</code>.</dd>
+    <dd>'origine del log per abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Se non fornisci un'origine log, le configurazioni di registrazione vengono create per le origini log <code>container</code> e <code>ingress</code>.</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>Lo spazio dei nomi Kubernetes dal quale desideri inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine del log del contenitore ed è facoltativo. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</dd>
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -1723,7 +1802,7 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
    <dt><code>--app-paths</code></dt>
      <dd>Ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltra correttamente i log. Questo valore è facoltativo.</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>Il percorso sui loro contenitori a cui si collegano le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>Il percorso nei contenitori a cui si collegano le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>Il protocollo di inoltro del log che desideri utilizzare. Al momento, sono supportati <code>syslog</code> e <code>ibm</code>. Questo valore è obbligatorio.</dd>
    <dt><code>--json</code></dt>
@@ -1819,17 +1898,17 @@ Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiorna
 ### bx cs logging-filter-get CLUSTER [--id FILTER_ID][--show-matching-configs] [--json]
 {: #cs_log_filter_view}
 
-Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare questo comando per visualizzare i filtri di registrazione che hai creato. 
+Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare questo comando per visualizzare i filtri di registrazione che hai creato.
 
 <strong>Opzioni comando</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Obbligatorio: il nome o l'ID del cluster dal quale desideri visualizzare i filtri. </dd>
+    <dd>Obbligatorio: il nome o l'ID del cluster dal quale desideri visualizzare i filtri.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>L'ID del filtro di log che desideri visualizzare. </dd>
+    <dd>L'ID del filtro di log che desideri visualizzare.</dd>
   <dt><code>--show-matching-configs</code></dt>
-    <dd>Facoltativo: mostra le configurazioni di registrazione che corrispondono alla configurazione che stai visualizzando. </dd>
+    <dd>Facoltativo: mostra le configurazioni di registrazione che corrispondono alla configurazione che stai visualizzando.</dd>
   <dt><code>--json</code></dt>
     <dd>Facoltativo: stampa l'output del comando nel formato JSON.</dd>
 </dl>
@@ -1838,17 +1917,17 @@ Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare ques
 ### bx cs logging-filter-rm CLUSTER [--id FILTER_ID][--json] [--all]
 {: #cs_log_filter_delete}
 
-Elimina un filtro di registrazione. Puoi utilizzare questo comando per eliminare un filtro di registrazione che hai creato. 
+Elimina un filtro di registrazione. Puoi utilizzare questo comando per eliminare un filtro di registrazione che hai creato.
 
 <strong>Opzioni comando</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Il nome o l'ID del cluster da cui desideri eliminare un filtro. </dd>
+    <dd>Il nome o l'ID del cluster da cui desideri eliminare un filtro.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>L'ID del filtro di log che desideri eliminare. </dd>
+    <dd>L'ID del filtro di log da eliminare.</dd>
   <dt><code>--all</code></dt>
-    <dd>Facoltativo: elimina tutti i tuoi filtri di inoltro del log. </dd>
+    <dd>Facoltativo: elimina tutti i tuoi filtri di inoltro del log.</dd>
   <dt><code>--json</code></dt>
     <dd>Facoltativo: stampa l'output del comando nel formato JSON.</dd>
 </dl>
@@ -1980,7 +2059,7 @@ Aggiungere i nodi di lavoro al tuo cluster standard.
 <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>Il percorso al file YAML per aggiungere i nodi di lavoro al tuo cluster. Invece di definire ulteriori nodi di lavoro utilizzando le opzioni fornite in questo comando, puoi utilizzare un file YAML. Questo valore è facoltativo.
+<dd>Il percorso al file YAML per aggiungere i nodi di lavoro al cluster. Invece di definire ulteriori nodi di lavoro utilizzando le opzioni fornite in questo comando, puoi utilizzare un file YAML. Questo valore è facoltativo.
 
 <p><strong>Nota:</strong> se fornisci la stessa opzione nel comando come parametro nel file YAML, il valore nel comando ha la precedenza rispetto al valore nel YAML. Ad esempio, definisci un tipo di macchina nel tuo file YAML e utilizzi l'opzione --machine-type nel comando, il valore che hai immesso nell'opzione del comando sovrascrive il valore nel file YAML.
 
@@ -2002,7 +2081,7 @@ diskEncryption: <em>false</em></code></pre>
 <tbody>
 <tr>
 <td><code><em>name</em></code></td>
-<td>Sostituisci <code><em>&lt;cluster_name_or_ID&gt;</em></code> con il nome o l'ID del cluster in cui desideri aggiungere nodi di lavoro. </td>
+<td>Sostituisci <code><em>&lt;cluster_name_or_ID&gt;</em></code> con il nome o l'ID del cluster in cui desideri aggiungere nodi di lavoro.</td>
 </tr>
 <tr>
 <td><code><em>location</em></code></td>
@@ -2010,7 +2089,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. </td>
+<td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -2045,12 +2124,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>La VLAN privata specificata quando è stato creato il cluster. Questo valore è obbligatorio.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>La VLAN pubblica specificata quando è stato creato il cluster. Questo valore è facoltativo. Se vuoi che i tuoi nodi di lavoro siano solo su una VLAN privata, non fornire un ID VLAN pubblico. <strong>Nota</strong>: {[private_VLAN_vyatta]}
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
@@ -2076,7 +2155,7 @@ diskEncryption: <em>false</em></code></pre>
 ### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
 {: #cs_worker_get}
 
-Visualizza i dettagli di un nodo di lavoro. 
+Visualizza i dettagli di un nodo di lavoro.
 
 <strong>Opzioni comando</strong>:
 
@@ -2188,7 +2267,7 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 
 Ricarica tutte le configurazioni necessarie per un nodo di lavoro. Un ricaricamento può essere utile se il tuo nodo di lavoro riscontra dei problemi, come prestazioni scarse o se il nodo di lavoro è bloccato in uno stato non integro.
 
-Il ricaricamento di un nodo di lavoro non applica gli aggiornamenti più recenti, le patch di sicurezza o la [versione Kubernetes](cs_versions.html#version_types). Quando sono disponibili aggiornamenti alla versione e patch, ti verrà richiesto nella CLI e nella console mentre utilizzi le funzioni correlate al nodo di lavoro. Per tenere aggiornati i tuoi nodi di lavoro, utilizza regolarmente il [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.
+Il ricaricamento di un nodo di lavoro viene applicato agli aggiornamenti della versione patch per il tuo nodo di lavoro, ma non per aggiornamenti maggiori o minori. Per visualizzare le modifiche da un versione patch alla successiva, controlla la documentazione [Changelog versione](cs_versions_changelog.html#changelog).
 {: tip}
 
 Prima di ricaricare il tuo nodo di lavoro, assicurati che i pod vengano ripianificati su altri nodi di lavoro per evitare un periodo di inattività per la tua applicazione o il danneggiamento dei dati sul nodo di lavoro.
@@ -2252,7 +2331,7 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 ### bx cs worker-rm [-f] CLUSTER WORKER [WORKER]
 {: #cs_worker_rm}
 
-Rimuovere uno o più nodi di lavoro da un cluster. Se rimuovi un nodo di lavoro, il tuo cluster perde il bilanciamento.  
+Rimuovere uno o più nodi di lavoro da un cluster. Se rimuovi un nodo di lavoro, il tuo cluster perde il bilanciamento. 
 
 Prima di rimuovere il tuo nodo di lavoro, assicurati che i pod vengano ripianificati su altri nodi di lavoro per evitare un periodo di inattività per la tua applicazione o il danneggiamento dei dati sul nodo di lavoro.
 {: tip}
@@ -2360,7 +2439,7 @@ Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>Il nome o l'ID del cluster in cui elenchi i nodi di lavoro disponibili. Questo valore è obbligatorio.</dd>
+   <dd>Il nome o l'ID del cluster dei nodi di lavoro disponibili. Questo valore è obbligatorio.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>Visualizza i nodi di lavoro che sono stati eliminati dal cluster, incluso il motivo dell'eliminazione. Questo valore è facoltativo.</dd>
    </dl>
@@ -2371,4 +2450,3 @@ Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
   bx cs workers my_cluster
   ```
   {: pre}
-

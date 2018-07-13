@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Erforderliche Ports und IP-Adressen in Ihrer Firewall öffnen
 {: #firewall}
@@ -74,10 +77,10 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 
 1. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Wenn Sie über ein föderiertes Konto verfügen, schließen Sie die Option `--sso` ein.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Wählen Sie die Region aus, in der sich Ihr Cluster befindet.
 
@@ -96,8 +99,8 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 4. Rufen Sie die **Master-URL** für Ihren Cluster ab.
 
    ```
-    bx cs cluster-get <clustername_oder_-id>
-    ```
+   bx cs cluster-get <clustername_oder_-id>
+   ```
    {: pre}
 
    Beispielausgabe:
@@ -108,7 +111,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
    ```
    {: screen}
 
-5. Ermöglichen Sie Zugriff auf die **Master-URL** an dem Port, z. B. an Port `31142` im vorherigen Beispiel.
+5. Ermöglichen Sie Zugriff auf die **Master-URL** an dem Port, z. B. an Port `31142` aus dem vorherigen Beispiel.
 
 6. Überprüfen Sie Ihre Verbindung.
 
@@ -183,6 +186,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Standorte in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Standorte ('dal10', 'dal12' und 'dal13') zulassen.
       <p>
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+  <caption>Zu öffnende IP-Adressen für abgehenden Datenverkehr</caption>
       <thead>
       <th>Region</th>
       <th>Standort</th>
@@ -228,6 +232,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert.
         <p>
 <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+  <caption>Zu öffnende IP-Adressen für Registrydatenverkehr</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>
         <th>Registryadresse</th>
@@ -235,7 +240,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </thead>
       <tbody>
         <tr>
-          <td>Globale Registry (containerregionsübergreifend)</td>
+          <td>Über {{site.data.keyword.containershort_notm}}-Regionen hinweg verfügbare globale Registry</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Ersetzen Sie <em>&lt;monitoring_public_IP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+  <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
         <thead>
-        <th>Containerregion</th>
+        <th>{{site.data.keyword.containershort_notm}}-Region</th>
         <th>Überwachungsadresse</th>
         <th>IP-Adressen für die Überwachung</th>
         </thead>
@@ -295,8 +301,9 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Ersetzen Sie <em>&lt;logging_public_IP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+<caption>Zu öffnende IP-Adressen für die Protokollierung von Datenverkehr</caption>
         <thead>
-        <th>Containerregion</th>
+        <th>{{site.data.keyword.containershort_notm}}-Region</th>
         <th>Protokollierungsadresse</th>
         <th>IP-Adressen für die Protokollierung</th>
         </thead>
@@ -333,7 +340,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
   6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall für die [IBM Cloud Infrastructure (SoftLayer)-IP-Adressen](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) des Standorts (Rechenzentrums) zu, in dem sich Ihr Cluster befindet.
       - Führen Sie `bx cs clusters` aus, um den Standort (das Rechenzentrum) Ihres Clusters abzurufen.
       - Ermöglichen Sie Zugriff auf den IP-Bereich des **(öffentlichen) Front-End-Netzes** und des **privaten Back-End-Netzes**.
-      - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) für das **(private) Back-End--Netz** hinzufügen müssen.
+      - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) für das **(private) Back-End-Netz** hinzufügen müssen.
 
 <br />
 
@@ -352,4 +359,3 @@ Sie können eingehenden Zugriff auf NodePort-, LoadBalancer- und Ingress-Service
   <dt>Ingress</dt>
   <dd>Öffnen Sie Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die Ingress-Lastausgleichsfunktion für Anwendungen.</dd>
 </dl>
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,15 +15,17 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # 地域とロケーション
 {{site.data.keyword.Bluemix}} は、世界中でホストされています。 地域とは、エンドポイントによってアクセスされる地理的領域のことです。 ロケーションとは、地域内のデータ・センターのことです。 {{site.data.keyword.Bluemix_notm}} 内のサービスは、グローバルに使用できるものもありますし、特定の地域内で使用できるものもあります。 {{site.data.keyword.containerlong}} で Kubernetes クラスターを作成すると、そのリソースは、クラスターをデプロイした地域に残ります。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 地域](#bluemix_regions)は [{{site.data.keyword.containershort_notm}} 地域](#container_regions)とは異なります。
 
-![{{site.data.keyword.containershort_notm}} 地域とデータ・センター](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} 地域とロケーション](/images/regions.png)
 
-{{site.data.keyword.containershort_notm}} 地域とデータ・センター
+_{{site.data.keyword.containershort_notm}} 地域とロケーション_
 
 サポートされる {{site.data.keyword.containershort_notm}} 地域は次のとおりです。
   * 北アジア太平洋地域
@@ -32,7 +34,6 @@ lastupdated: "2018-4-20"
   * 英国南部
   * 米国東部
   * 米国南部
-
 
 
 ## {{site.data.keyword.Bluemix_notm}} 地域の API エンドポイント
@@ -45,7 +46,7 @@ lastupdated: "2018-4-20"
 
 {{site.data.keyword.Bluemix_notm}} 地域には、ログイン時に API エンドポイントを指定することによってアクセスできます。 地域を指定しない場合、最も近い地域に自動的にログインします。
 
-{{site.data.keyword.Bluemix_notm}} 地域の API エンドポイントを指定したログイン・コマンドの例を以下に示します。
+例えば、以下のコマンドを使用して {{site.data.keyword.Bluemix_notm}} 地域の API エンドポイントにログインできます。
 
   * 米国南部と米国東部
       ```
@@ -89,7 +90,7 @@ lastupdated: "2018-4-20"
 グローバル・エンドポイントと共に API を使用するには、すべての要求で、`X-Region` ヘッダーによって地域名を渡します。
 {: tip}
 
-### 別のコンテナー・サービス地域へのログイン
+### 別の {{site.data.keyword.containerlong}_notm} 地域へのログイン
 {: #container_login_endpoints}
 
 {{site.data.keyword.containershort_notm}} CLI を使用して、ロケーションを変更できます。
@@ -103,7 +104,7 @@ lastupdated: "2018-4-20"
 
 地域をすぐに切り替えるには、`bx cs region-set` を実行します。
 
-### コンテナー・サービスの API コマンドの使用
+### {{site.data.keyword.containerlong_notm}} の API コマンドの使用
 {: #containers_api}
 
 {{site.data.keyword.containershort_notm}} API と対話するには、コマンド・タイプを入力し、グローバルなエンドポイントに `/v1/command` を追加します。
@@ -130,22 +131,25 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
 
 | 地域 | ロケーション | 市区町村 |
 |--------|----------|------|
-| 北アジア太平洋地域 | hkg02、seo01、sng01、tok02 | 香港、ソウル、シンガポール、東京 |
+| 北アジア太平洋地域 | hkg02、seo01、sng01、tok02 | 中華人民共和国香港特別行政区、ソウル、シンガポール、東京 |
 | 南アジア太平洋地域     | mel01、syd01、syd04        | メルボルン、シドニー |
 | 中欧     | ams03、fra02、par01        | アムステルダム、フランクフルト、パリ |
-| 英国南部      | lon02、lon04         | London (ロンドン) |
+| 英国南部      | lon02、lon04         | ロンドン |
 | 米国東部      | mon01、tor01、wdc06、wdc07        | モントリオール、トロント、ワシントン DC |
 | 米国南部     | dal10、dal12、dal13、sao01       | ダラス、サンパウロ |
+{: caption="使用可能な地域とロケーション" caption-side="top"}
 
 クラスターのリソースは、クラスターがデプロイされたロケーション (データ・センター) に残ります。 以下の図は、米国東部の地域の例におけるクラスターの関係を強調しています。
 
-1.  クラスターのリソース (マスター・ノードやワーカー・ノードなど) は、クラスターをデプロイした同じロケーションにあります。 ローカル・コンテナーのオーケストレーション・アクション (`kubectl` コマンドなど) を開始すると、同じロケーション内のマスター・ノードとワーカー・ノードの間で情報が交換されます。
+1.  クラスターのリソース (マスター・ノードやワーカー・ノードなど) は、クラスターをデプロイした同じロケーションにあります。 ローカル・コンテナーのオーケストレーション・アクション (`kubectl` コマンドなど) を実行すると、同じロケーション内のマスター・ノードとワーカー・ノードの間で情報が交換されます。
 
 2.  他のクラスター・リソース (ストレージ、ネットワーキング、コンピュート、ポッドで実行されているアプリなど) をセットアップした場合、リソースとそのデータは、クラスターをデプロイしたロケーションに残ります。
 
-3.  クラスターの管理アクション (`bx cs` コマンドを使用するなど) を開始すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) は、地域のエンドポイントにルーティングされます。
+3.  クラスターの管理アクション (`bx cs` コマンドを使用するなど) を実行すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) が地域のエンドポイントにルーティングされます。
 
 ![クラスター・リソースが存在する場所について理解する](/images/region-cluster-resources.png)
 
-クラスター・リソースが存在する場所について理解する。
+_クラスター・リソースが存在する場所について理解する。_
+
+
 

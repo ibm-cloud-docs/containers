@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,13 +16,15 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
-# Esposizione delle applicazioni con NodePorts
+
+
+# Esposizione delle applicazioni con le NodePort
 {: #nodeport}
 
-Rendi disponibile la tua applicazione inserita in un contenitore per l'accesso a Internet utilizzando l'indirizzo IP pubblico di qualsiasi nodo di lavoro in un cluster Kubernetes ed esponendo una porta del nodo. Utilizza questa opzione per la verifica di {{site.data.keyword.containerlong}} e l'accesso pubblico a breve termine.
+Rendi disponibile la tua applicazione inserita in un contenitore per l'accesso a Internet utilizzando l'indirizzo IP pubblico di qualsiasi nodo di lavoro in un cluster Kubernetes ed esponendo una NodePort. Utilizza questa opzione per la verifica in {{site.data.keyword.containerlong}} e per l'accesso pubblico a breve termine.
 {:shortdesc}
 
-## Gestione del traffico di rete utilizzando NodePorts
+## Gestione del traffico di rete utilizzando le NodePort
 {: #planning}
 
 Esponi una porta pubblica sul tuo nodo di lavoro e utilizza l'indirizzo IP pubblico del nodo di lavoro per accedere al tuo servizio nel cluster pubblicamente da Internet.
@@ -62,9 +64,9 @@ e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione
 Puoi esporre la tua applicazione come un servizio Kubernetes NodePort per i cluster gratuito o standard.
 {:shortdesc}
 
-Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di esempio Kubernetes denominata [Guestbook ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml).
+Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di esempio Kubernetes denominata [Guestbook ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  Nel file di configurazione della tua applicazione, definisci una sezione per il [servizio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: per l'esempio Guestbook, esiste già una sezione del servizio di frontend nel file di configurazione. Per rendere l'applicazione Guestbook disponibile all'esterno, aggiungi il tipo di NodePort e una NodePort compresa nell'intervallo 30000 - 32767 alla sezione del servizio di frontend.
+1.  Nel file di configurazione della tua applicazione, definisci una sezione per il [servizio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: per l'esempio Guestbook, esiste una sezione del servizio di frontend nel file di configurazione. Per rendere l'applicazione Guestbook disponibile all'esterno, aggiungi il tipo di NodePort e una NodePort compresa nell'intervallo 30000 - 32767 alla sezione del servizio di frontend.
 
     Esempio:
 
@@ -87,13 +89,14 @@ Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di ese
     {: codeblock}
 
     <table>
+    <caption>Descrizione dei componenti del servizio NodePort</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti della sezione del servizio NodePort</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Sostituisci <code><em>&lt;my-nodeport-service&gt;</em></code> con un nome per il tuo servizio NodePort.</td>
+    <td>Sostituisci <code><em>&lt;my-nodeport-service&gt;</em></code> con un nome per il tuo servizio NodePort.<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le risorse Kubernetes.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -109,8 +112,8 @@ Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di ese
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>Facoltativo: sostituisci <code><em>&lt;31514&gt;</em></code> con un valore NodePort compreso tra 30000 e 32767. Non specificare un NodePort già utilizzato da un altro servizio. Se non assegni un NodePort, ne verrà assegnato uno casuale automaticamente.<br><br>Se vuoi specificare un NodePort e vedere quali NodePort sono già in uso, puoi immettere il seguente comando: <pre class="pre"><code>    kubectl get svc
-    </code></pre>Ogni NodePort in utilizzo viene visualizzata nel campo **Porte**.</td>
+     <td>Facoltativo: sostituisci <code><em>&lt;31514&gt;</em></code> con un valore NodePort compreso tra 30000 e 32767. Non specificare una NodePort già utilizzata da un altro servizio. Se non assegni una NodePort, ne verrà assegnata una casuale automaticamente.<br><br>Per specificare una NodePort e vedere quali NodePort sono già in uso, immetti il seguente comando: <pre class="pre"><code>    kubectl get svc
+    </code></pre><p>Ogni NodePort in utilizzo viene visualizzata nel campo **Porte**.</p></td>
      </tr>
      </tbody></table>
 
@@ -120,7 +123,7 @@ Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di ese
 
 **Operazioni successive:**
 
-Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro e il NodePort per formare l'URL pubblico per accedere all'applicazione da un browser.
+Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro e la NodePort per formare l'URL pubblico per accedere all'applicazione da un browser.
 
 1.  Ottieni l'indirizzo IP pubblico per un nodo di lavoro nel cluster.
 
@@ -163,7 +166,6 @@ Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico
     {: screen}
 
     In questo esempio, la NodePort è `30872`.</br>
-    **Nota:** se la sezione **Endpoints** mostra `<none>`, assicurati che `<selectorkey>` e `<selectorvalue>` che hai utilizzato nella sezione `spec.selector` del servizio NodePort siano uguali a quelli della coppia chiave/valore che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione. 
+    **Nota:** se la sezione **Endpoints** mostra `<none>`, controlla `<selectorkey>` e `<selectorvalue>` che hai utilizzato nella sezione `spec.selector` del servizio NodePort. Assicurati che siano gli stessi della coppia _chiave/valore_ che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione. 
 
 3.  Forma l'URL con uno degli indirizzi IP pubblici del nodo di lavoro e la NodePort. Esempio: `http://192.0.2.23:30872`
-

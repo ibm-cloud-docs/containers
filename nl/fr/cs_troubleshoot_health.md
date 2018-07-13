@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Traitement des incidents liés à la consignation et à la surveillance
@@ -38,6 +39,7 @@ Lorsque vous accédez au tableau de bord Kibana, vos journaux ne s'affichent pas
 Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuvent ne pas apparaître, ainsi que les étapes de résolution correspondantes :
 
 <table>
+<caption>Traitement des incidents liés aux journaux qui ne s'affichent pas</caption>
   <col width="40%">
   <col width="60%">
   <thead>
@@ -61,11 +63,14 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
   </tr>
   <tr>
     <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur  ou Auditeur n'ont pas été affectées au propriétaire du compte sur cet espace.</td>
-      <td>Pour modifier les droits d'accès du propriétaire du compte :<ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html#managing">Gestion de l'accès au cluster</a>.</li><li>Pour actualiser le jeton d'accès après que les droits d'accès ont été modifiés, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <td>Pour modifier les droits d'accès du propriétaire du compte :
+      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html">Gestion de l'accès au cluster</a>.</li>
+      <li>Pour actualiser le jeton d'accès après modification des droits d'accès, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Vous avez une configuration de consignation d'application avec un lien symbolique dans le chemin de votre application.</td>
-      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique.</p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont réellement acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</td>
+      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique.</p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
     </tr>
   </tbody>
 </table>
@@ -134,7 +139,8 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
+-   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
@@ -144,9 +150,8 @@ Vous avez encore des problèmes avec votre cluster ?
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
 pour plus d'informations sur l'utilisation des forums.
 
--   Contactez le support IBM en ouvrant un ticket de demande de service. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster
 {: #cf_tutorial}
 
@@ -26,14 +27,14 @@ Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cl
 ## Obiettivi
 
 - Imparare il processo generale di distribuzione delle applicazioni presenti nei contenitori in un cluster Kubernetes.
-- Creare un Dockerfile dal tuo codice applicazione per creare un'immagine del contenitore. 
+- Creare un Dockerfile dal tuo codice applicazione per creare un'immagine del contenitore.
 - Distribuire un contenitore proveniente da tale immagine in un cluster Kubernetes.
 
 ## Tempo richiesto
 30 minuti
 
 ## Destinatari
-Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud Foundry. 
+Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud Foundry.
 
 ## Prerequisiti
 
@@ -53,7 +54,7 @@ cluster](cs_clusters.html#clusters_ui).
 Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaricare il codice iniziale da utilizzare in questa esercitazione.
 {: shortdesc}
 
-1. Crea una directory denominata `cf-py` e passa ad essa. In questa directory, salva tutti i file richiesti per creare l'immagine Docker e per eseguire la tua applicazione. 
+1. Crea una directory denominata `cf-py` e passa ad essa. In questa directory, salva tutti i file richiesti per creare l'immagine Docker e per eseguire la tua applicazione.
 
   ```
   mkdir cf-py && cd cf-py
@@ -68,9 +69,9 @@ Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaric
 
     b. Immetti il nome dell'applicazione `cf-py-<name>` e fai clic su **CREATE**. Per accedere al codice dell'applicazione per il contenitore tipo, devi innanzitutto distribuire l'applicazione CF nel cloud. Puoi utilizzare qualsiasi nome per l'applicazione. Se utilizzi il nome proveniente dall'esempio, sostituisci `<name>` con un identificativo univoco, come `cf-py-msx`.
     
-    **Attenzione**: non utilizzare informazioni personali nei nomi dell'applicazione, del contenitore delle immagini o della risorsa Kubernetes. 
+    **Attenzione**: non utilizzare informazioni personali nei nomi dell'applicazione, del contenitore delle immagini o della risorsa Kubernetes.
 
-    Quando viene distribuita l'applicazione, vengono visualizzate le istruzioni per scaricare, modificare e ridistribuire la tua applicazione con l'interfaccia riga di comando. 
+    Quando viene distribuita l'applicazione, vengono visualizzate le istruzioni per scaricare, modificare e ridistribuire la tua applicazione con l'interfaccia riga di comando.
 
     c. Dal passo 1 nelle istruzioni della GUI, fai clic su **DOWNLOAD STARTER CODE**.
 
@@ -80,6 +81,7 @@ Il tuo codice applicazione è pronto per essere inserito nel contenitore!
 
 
 <br />
+
 
 
 ## Lezione 2: creazione di un'immagine Docker con il tuo codice applicazione
@@ -95,7 +97,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
   ```
   {: pre}
 
-2. Copia il seguente script nel Dockerfile. Questo Dockerfile si applica in modo specifico ad un'applicazione Python. Se stai utilizzando un altro tipo di codice, il tuo Dockerfile deve includere un'immagine di base diversa e potrebbe richiedere la definizione di altri campi. 
+2. Copia il seguente script nel Dockerfile. Questo Dockerfile si applica in modo specifico ad un'applicazione Python. Se stai utilizzando un altro tipo di codice, il tuo Dockerfile deve includere un'immagine di base diversa e potrebbe richiedere la definizione di altri campi.
 
   ```
   #Use the Python image from DockerHub as a base image
@@ -124,7 +126,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
 
 3. Salva le modifiche nell'editor nano premendo `ctrl + o`. Conferma le modifiche premendo `invio`. Esci dall'editor nano premendo `ctrl + x`.
 
-4. Crea un'immagine Docker che includa il tuo codice applicazione e inseriscila nel tuo registro privato. 
+4. Crea un'immagine Docker che includa il tuo codice applicazione e inseriscila nel tuo registro privato.
 
   ```
   bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
@@ -132,6 +134,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
   {: pre}
 
   <table>
+  <caption>Descrizione dei componenti di questo comando</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Questa icona indica che sono presenti informazioni aggiuntive sui componenti di questo comando."/> Descrizione dei componenti di questo comando</th>
   </thead>
@@ -142,11 +145,11 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
   </tr>
   <tr>
   <td><code>build</code></td>
-  <td>Il comando build. </td>
+  <td>Il comando build.</td>
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Il tuo percorso privato, che include il tuo spazio dei nomi univoco e il nome dell'immagine. Per questo esempio, viene utilizzato lo stesso nome sia per l'immagine che per la directory dell'applicazione, ma puoi scegliere qualsiasi nome per l'immagine nel tuo registro privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo. </td>
+  <td>Il tuo percorso privato, che include il tuo spazio dei nomi univoco e il nome dell'immagine. Per questo esempio, viene utilizzato lo stesso nome sia per l'immagine che per la directory dell'applicazione, ma puoi scegliere qualsiasi nome per l'immagine nel tuo registro privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +159,7 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
   </tbody>
   </table>
 
-  L'immagine viene creata nel tuo registro privato. Puoi eseguire il comando `bx cr images` per verificare che l'immagine sia stata creata. 
+  L'immagine viene creata nel tuo registro privato. Puoi eseguire il comando `bx cr images` per verificare che l'immagine sia stata creata.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -174,7 +177,7 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
 Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 {: shortdesc}
 
-1. Crea un file YAML di configurazione denominato `cf-py.yaml` e aggiorna `<registry_namespace>` con il nome del tuo registro delle immagini privato. Questo file di configurazione definisce una distribuzione del contenitore dall'immagine che hai creato nella lezione precedente e un servizio per esporre l'applicazione al pubblico. 
+1. Crea un file YAML di configurazione denominato `cf-py.yaml` e aggiorna `<registry_namespace>` con il nome del tuo registro delle immagini privato. Questo file di configurazione definisce una distribuzione del contenitore dall'immagine che hai creato nella lezione precedente e un servizio per esporre l'applicazione al pubblico.
 
   ```
   apiVersion: extensions/v1beta1
@@ -215,24 +218,25 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
   {: codeblock}
 
   <table>
+  <caption>Descrizione dei componenti del file YAML</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo. </td>
+  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
-  <td>Esponi la tua applicazione creando un servizio Kubernetes di tipo NodePort. L'intervallo di NodePort è compreso tra 30000 e 32767. Utilizza questa porta per verificare la tua applicazione in un browser in un secondo momento. </td>
+  <td>Esponi la tua applicazione creando un servizio Kubernetes di tipo NodePort. L'intervallo di NodePort è compreso tra 30000 e 32767. Utilizza questa porta per verificare la tua applicazione in un browser in un secondo momento.</td>
   </tr>
   </tbody></table>
 
 2. Applica il file di configurazione per creare la distribuzione e il servizio nel tuo cluster.
 
   ```
-  kubectl apply -f filepath/cf-py.yaml
+  kubectl apply -f <filepath>/cf-py.yaml
   ```
   {: pre}
 
@@ -257,17 +261,19 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
-    b. Apri un browser e controlla l'applicazione con il seguente URL: `http://<public_IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30872`. Puoi dare questo URL a un collaboratore come prova o immetterlo nel browser del cellulare, in modo da poter controllare che l'applicazione sia realmente disponibile pubblicamente. 
+    b. Apri un browser e controlla l'applicazione con il seguente URL: `http://<public_IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30872`. Puoi dare questo URL a un collaboratore come prova o immetterlo nel browser del cellulare, in modo da poter controllare che l'applicazione sia realmente disponibile pubblicamente.
 
     <img src="images/python_flask.png" alt="Un'acquisizione schermo dell'applicazione Python Flask del contenitore tipo distribuita." />
 
-5. [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard). I passi variano a seconda della tua versione di Kubernetes.
+5.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
 
-6. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Quando hai terminato di controllare il dashboard Kubernetes, utilizza `ctrl + c` per uscire dal comando `proxy`.
+    Se selezioni il tuo cluster nella [GUI {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    {: tip}
+
+6. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
 
 Congratulazioni! La tua applicazione è stata distribuita al contenitore!
-

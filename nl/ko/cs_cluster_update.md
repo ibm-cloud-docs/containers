@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 클러스터 및 작업자 노드 업데이트
@@ -30,7 +33,7 @@ lastupdated: "2018-4-20"
 
 업데이트는 Kubernetes 마스터의 Kubernetes API 서버 버전 또는 기타 컴포넌트에 영향을 줄 수 있습니다.  작업자 노드를 항상 최신 상태로 유지해야 합니다. 업데이트 시, 작업자 노드보다 먼저 Kubernetes 마스터가 업데이트됩니다.
 
-기본적으로 Kubernetes API 서버를 Kubernetes 마스터의 현재 버전보다 최대 2개의 부 버전까지만 업데이트할 수 있습니다. 예를 들어, 현재 Kubernetes API 서버가 버전 1.5이고 1.8로 업데이트하려면 먼저 1.7로 업데이트해야 합니다. 업데이트를 강제로 계속할 수 있지만 2개를 초과하는 부 버전 업데이트로 인해 예상치 못한 결과가 발생할 수 있습니다. 클러스터에서 지원되지 않는 Kubernetes 버전이 실행되는 경우 업데이트를 강제 실행해야 할 수 있습니다.
+기본적으로 Kubernetes API 서버를 Kubernetes 마스터의 현재 버전보다 최대 2개의 부 버전까지만 업데이트할 수 있습니다. 예를 들어, 현재 Kubernetes API 서버가 버전 1.7이고 1.10으로 업데이트하려면 먼저 1.8 또는 1.9로 업데이트해야 합니다. 업데이트를 강제로 실행할 수 있지만 3개 이상의 부 버전을 업데이트하면 예상치 못한 결과가 발생할 수 있습니다. 클러스터에서 지원되지 않는 Kubernetes 버전이 실행되는 경우 업데이트를 강제 실행해야 할 수 있습니다.
 
 다음 다이어그램은 마스터 업데이트 시 수행 가능한 프로세스를 보여줍니다.
 
@@ -55,13 +58,14 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 ## 작업자 노드 업데이트
 {: #worker_node}
 
+
 작업자 노드를 업데이트하라는 알림을 수신했습니다. 무슨 의미일까요? Kubernetes API 서버 및 기타 Kubernetes 마스터 컴포넌트의 보안 업데이트와 패치가 적절히 배치되면 작업자 노드를 동기화해야 합니다.
 {: shortdesc}
 
 작업자 노드 Kubernetes 버전은 Kubernetes 마스터에서 실행되는 Kubernetes API 서버 버전보다 상위 버전일 수 없습니다. 시작하기 전에 [Kubernetes 마스터를 업데이트](#master)하십시오.
 
-<ul>**주의**:</br>
-<li>작업자 노드에 대한 업데이트로 인해 앱과 서비스의 가동이 중단될 수 있습니다.</li>
+**주의**:
+<ul><li>작업자 노드에 대한 업데이트로 인해 앱과 서비스의 가동이 중단될 수 있습니다.</li>
 <li>팟(Pod)의 외부에 저장되지 않은 경우 데이터가 삭제됩니다.</li>
 <li>배치에 [복제본 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas)을 사용하여 사용 가능한 노드에서 팟(Pod)을 다시 스케줄하십시오.</li></ul>
 
@@ -75,9 +79,9 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 
 키가 정의되었습니다. 이제 무엇을 해야 합니까?
 
-규칙을 정의한 후에는 `bx cs worker-update` 명령을 실행하십시오. 성공 응답이 리턴되면 작업자 노드가 업데이트를 위해 큐에 대기됩니다. 그러나 모든 규칙을 만족하기 전에는 노드에서 업데이트 프로세스가 진행되지 않습니다. 노드가 큐에서 대기하는 동안에는 일정 간격마다 업데이트 가능한 노드가 있는지 확인하기 위해 규칙이 검사됩니다. 
+규칙을 정의한 후에는 `bx cs worker-update` 명령을 실행하십시오. 성공 응답이 리턴되면 작업자 노드가 업데이트를 위해 큐에 대기됩니다. 그러나 모든 규칙을 만족하기 전에는 노드에서 업데이트 프로세스가 진행되지 않습니다. 노드가 큐에서 대기하는 동안에는 일정 간격마다 업데이트 가능한 노드가 있는지 확인하기 위해 규칙이 검사됩니다.
 
-구성 맵을 정의하지 않으면 어떻게 되나요?
+구성 맵을 정의하지 않도록 선택하면 어떻게 되나요?
 
 구성 맵을 정의하지 않으면 기본값이 사용됩니다. 기본적으로, 업데이트 프로세스 중 각 클러스터의 전체 작업자 노드에서 최대 20%는 사용 불가능합니다.
 
@@ -115,13 +119,14 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
     ```
     {:pre}
   <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 매개변수가 있고 2열에는 일치하는 설명이 있습니다.">
+  <caption>ConfigMap 컴포넌트</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 컴포넌트 이해 </th>
     </thead>
     <tbody>
       <tr>
         <td><code>drain_timeout_seconds</code></td>
-        <td> 선택사항: 작업자 노드 업데이트 중 발생하는 드레인에 대한 제한시간(초)입니다. 드레인은 노드에 새 팟(Pod)이 배치되지 않도록 하는 `unschedulable` 상태로 노드를 설정합니다. 또한 드레인은 노드에서 팟(Pod)을 삭제합니다. 허용되는 값은 1 - 180 사이의 정수입니다. 기본값은 30입니다. </td>
+        <td> 선택사항: 작업자 노드 업데이트 중 발생하는 드레인에 대한 제한시간(초)입니다. 드레인은 노드에 새 팟(Pod)이 배치되지 않도록 하는 `unschedulable` 상태로 노드를 설정합니다. 또한 드레인은 노드에서 팟(Pod)을 삭제합니다. 허용되는 값은 1 - 180 사이의 정수입니다. 기본값은 30입니다.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
@@ -172,7 +177,11 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 다음 단계:
   - 다른 클러스터에서 업데이트 프로세스를 반복하십시오.
   - 클러스터에서 작업하는 개발자에게 `kubectl` CLI를 Kubernetes 마스터의 버전으로 업데이트하도록 알리십시오.
-  - Kubernetes 대시보드에 사용률 그래프가 표시되지 않으면 [`kube-dashboard` 팟(Pod)을 삭제](cs_troubleshoot_health.html#cs_dashboard_graphs)하십시오. 
+  - Kubernetes 대시보드에 사용률 그래프가 표시되지 않으면 [`kube-dashboard` 팟(Pod)을 삭제](cs_troubleshoot_health.html#cs_dashboard_graphs)하십시오.
+  
+
+
+
 
 
 <br />
@@ -182,8 +191,17 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 ## 머신 유형 업데이트
 {: #machine_type}
 
-새 작업자 노드를 추가하고 이전 작업자 노드를 제거하여 작업자 노드에 사용되는 머신 유형을 업데이트할 수 있습니다. 예를 들어, 이름에 `u1c` 또는 `b1c`가 있는 더 이상 사용되지 않는 머신 유형에 가상 작업자 노드가 있는 경우 이름에 `u2c` 또는 `b2c`가 있는 머신 유형을 사용하는 작업자 노드를 작성하십시오.
+새 작업자 노드를 추가하고 이전 작업자 노드를 제거하여 작업자 노드의 머신 유형을 업데이트할 수 있습니다. 예를 들어, 이름에 `u1c` 또는 `b1c`가 있는 더 이상 사용되지 않는 머신 유형에 가상 작업자 노드가 있는 경우 이름에 `u2c` 또는 `b2c`가 있는 머신 유형을 사용하는 작업자 노드를 작성하십시오.
 {: shortdesc}
+
+시작하기 전에:
+- 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- 작업자 노드에 데이터를 저장하면 [작업자 노드의 외부에 저장](cs_storage.html#storage)되지 않은 경우 데이터가 삭제됩니다.
+
+
+**주의**: 작업자 노드로 업데이트하면 앱과 서비스의 작동이 중단될 수 있습니다. [팟(Pod)의 외부에 저장](cs_storage.html#storage)되지 않은 경우 데이터가 삭제됩니다.
+
+
 
 1. 업데이트할 작업자 노드의 이름 및 위치를 기록해 두십시오.
     ```
@@ -193,18 +211,18 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 
 2. 사용 가능한 머신 유형을 보십시오.
     ```
-        bx cs machine-types <location>
+    bx cs machine-types <location>
     ```
     {: pre}
 
-3. [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 명령을 사용하여 작업자 노드를 추가하십시오. 머신 유형을 지정하십시오. 
+3. [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 명령을 사용하여 작업자 노드를 추가하십시오. 머신 유형을 지정하십시오.
 
     ```
     bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. 작업자 노드가 추가되었는지 확인하십시오. 
+4. 작업자 노드가 추가되었는지 확인하십시오.
 
     ```
     bx cs workers <cluster_name>
@@ -219,6 +237,13 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
     {: pre}
 
 6. 기타 작업자 노드를 다른 머신 유형으로 업그레이드하려면 이 단계를 반복하십시오.
+
+
+
+
+
+
+
 
 
 

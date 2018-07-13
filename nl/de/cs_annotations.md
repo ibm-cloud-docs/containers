@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,15 +16,17 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Ingress-Annotationen
 {: #ingress_annotation}
 
 Um Ihrer Lastausgleichsfunktion für Ingress-Anwendungen (ALB) Funktionalität hinzuzufügen, können Sie Annotationen als Metadaten in einer Ingress-Ressource angeben.
 {: shortdesc}
 
-Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie unter [Netzverkehr mithilfe von Ingress verwalten](cs_ingress.html#planning). 
+Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie unter [Netzverkehr mithilfe von Ingress verwalten](cs_ingress.html#planning).
 
 <table>
+<caption>Allgemeine Annotationen</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -64,6 +66,7 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <br>
 
 <table>
+<caption>Annotationen für Verbindungen</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -81,17 +84,17 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
   <tr>
   <td><a href="#keepalive-requests">Keepalive-Anforderungen</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können. </td>
+  <td>Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können.</td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Keepalive-Zeitlimit</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt. </td>
+  <td>Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">Proxy zu nächstem Upstream</a></td>
   <td><code>proxy-next-upstream-config</code></td>
-  <td>Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann. </td>
+  <td>Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann.</td>
   </tr>
   <tr>
   <td><a href="#sticky-cookie-services">Sitzungsaffinität mit Cookies</a></td>
@@ -101,13 +104,14 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
   <tr>
   <td><a href="#upstream-keepalive">Keepalive-Verbindungen für Upstream-Server</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen. </td>
+  <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen.</td>
   </tr>
   </tbody></table>
 
 <br>
 
   <table>
+  <caption>Annotationen für HTTPS- und TLS/SSL-Authentifizierung</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -145,13 +149,14 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
   <tr>
   <td><a href="#ssl-services">Unterstützung für SSL-Services</a></td>
   <td><code>ssl-services</code></td>
-  <td>Unterstützung für SSL-Services zulassen, um den Datenverkehr zu Ihren Upstream-Apps, für die HTTPS erforderlich ist, zu verschlüsseln. </td>
+  <td>Unterstützung für SSL-Services zulassen, um den Datenverkehr zu Ihren Upstream-Apps, für die HTTPS erforderlich ist, zu verschlüsseln.</td>
   </tr>
   </tbody></table>
 
 <br>
 
 <table>
+<caption>Istio-Annotationen</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -164,13 +169,14 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <tr>
 <td><a href="#istio-services">Istio-Services</a></td>
 <td><code>istio-services</code></td>
-<td>Datenverkehr an Istio-verwaltete Services weiterleiten. </td>
+<td>Datenverkehr an Istio-verwaltete Services weiterleiten.</td>
 </tr>
 </tbody></table>
 
 <br>
 
 <table>
+<caption>Annotationen für Proxypuffer</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -205,6 +211,7 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <br>
 
 <table>
+<caption>Annotationen für Anforderungen und Antworten</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -239,6 +246,7 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <br>
 
 <table>
+<caption>Annotationen für Servicegrenzwerte</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -304,8 +312,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -335,12 +344,13 @@ Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad 
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist.<br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden.<br><br>**Hinweis**: Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Anmerkung erforderlich.</dd>
+<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist.<br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden.<br><br><strong>Hinweis</strong>: Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Anmerkung erforderlich.</dd>
 
 <dt>Unterstützte Modifikatoren</dt>
 <dd>
 
 <table>
+<caption>Unterstützte Modifikatoren</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -350,19 +360,19 @@ Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad 
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>Der Modifikator 'Gleichheitszeichen' bewirkt, dass die ALB nur exakte Übereinstimmungen auswählt. Wenn eine exakte Übereinstimmung gefunden wird, wird die Suche gestoppt, und der übereinstimmende Pfad wird ausgewählt.</td>
+ <td>Der Modifikator 'Gleichheitszeichen' bewirkt, dass die ALB nur exakte Übereinstimmungen auswählt. Wenn eine exakte Übereinstimmung gefunden wird, wird die Suche gestoppt, und der übereinstimmende Pfad wird ausgewählt.<br>Wenn Ihre App beispielsweise an <code>/tea</code> empfangsbereit ist, wählt die Lastausgleichsfunktion für Anwendungen (ALB) beim Abgleich einer Anforderung mit Ihrer App nur genaue <code>/tea</code>-Pfade aus.</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>Der Modifikator 'Tilde' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung beachtet werden muss. </td>
+ <td>Der Modifikator 'Tilde' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung beachtet werden muss.<br>Wenn Ihre App beispielsweise am Verzeichnis <code>/coffee</code> empfangsbereit ist, kann die Lastausgleichsfunktion für Anwendungen (ALB) beim Abgleich einer Anforderung mit Ihrer App Pfade des Typs <code>/ab/coffee</code> oder <code>/123/coffee</code> auswählen, obwohl die Pfade nicht explizit für Ihre App angegeben sind.</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>Der Modifikator 'Tilde' gefolgt von einem Modifikator 'Stern' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung nicht beachtet werden muss.</td>
+ <td>Der Modifikator 'Tilde' gefolgt von einem Modifikator 'Stern' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung nicht beachtet werden muss.<br>Wenn Ihre App beispielsweise am Verzeichnis <code>/coffee</code> empfangsbereit ist, kann die Lastausgleichsfunktion für Anwendungen (ALB) beim Abgleich einer Anforderung mit Ihrer App Pfade des Typs <code>/ab/Coffee</code> oder <code>/123/COFFEE</code> auswählen, obwohl die Pfade nicht explizit für Ihre App angegeben sind.</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
- <td>Der Modifikator 'Zirkumflex' gefolgt von einem Modifikator 'Tilde' bewirkt, dass die ALB keinen regex-Pfad, sondern die beste nicht-regex-Übereinstimmung auswählt. </td>
+ <td>Der Modifikator 'Zirkumflex' gefolgt von einem Modifikator 'Tilde' bewirkt, dass die ALB keinen regex-Pfad, sondern die beste nicht-regex-Übereinstimmung auswählt.</td>
  </tr>
  </tbody>
 </table>
@@ -394,8 +404,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -422,7 +433,7 @@ Eingehende Anforderungen an Ihre Apps mit einer privaten ALB weiterleiten.
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen (ALB) für die Weiterleitung von eingehenden Anforderungen aus. </dd>
+Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen (ALB) für die Weiterleitung von eingehenden Anforderungen aus.</dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -450,8 +461,9 @@ tls:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -474,7 +486,7 @@ Leiten Sie eingehenden Netzverkehr für den Pfad in der Domäne einer Lastausgle
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) leitet eingehenden Netzverkehr für <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> an Ihre App weiter. Ihre App überwacht <code>/coffee</code> statt <code>/beans</code>. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an <code>/beans</code> eingehende Netzverkehr mithilfe des Pfads <code>/coffee</code> an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) zum Trennen der Services.</dd>
+<dd>Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) leitet eingehenden Netzverkehr für <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> an Ihre App weiter. Ihre App überwacht <code>/coffee</code> statt <code>/beans</code>. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an <code>/beans</code> eingehende Netzverkehr mithilfe des Pfads <code>/coffee</code> an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) zum Trennen der Services.</dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
 <pre class="codeblock">
@@ -500,8 +512,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -559,8 +572,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -584,17 +598,17 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>Öffnen Sie die ALB-Konfigurationszuordnung.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Fügen Sie die TCP-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie <code>&lt;port&gt;</code> durch die TCP-Ports, die Sie öffnen möchten.
+<li>Fügen Sie die TCP-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie <code>&lt;port&gt;</code> durch die TCP-Ports, die Sie öffnen möchten. <b>Hinweis</b>: Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt <a href="cs_ingress.html#opening_ingress_ports">Ports für den Ingress-Lastenausgleich öffnen</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
  creationTimestamp: 2017-08-22T19:06:51Z
  name: ibm-cloud-provider-ingress-cm
@@ -607,8 +621,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Konfigurieren Sie Ingress für den Zugriff auf Ihre App über einen vom Standard abweichenden TCP-Port. Verwenden Sie die YAML-Beispieldatei in dieser Referenz. </li>
 <li>Aktualisieren Sie Ihre ALB-Konfiguration.
 <pre class="pre">
@@ -650,8 +664,8 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "&lt;verbindungszeitlimit&gt;s"
-   ingress.bluemix.net/proxy-read-timeout: "&lt;lesezeitlimit&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;mein_service&gt; timeout=&lt;verbindungszeitlimit&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;mein_service&gt; timeout=&lt;lesezeitlimit&gt;"
 spec:
  tls:
  - hosts:
@@ -667,17 +681,18 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;verbindungszeitlimit&gt;</code></td>
- <td>Die Anzahl der Sekunden, die auf die Herstellung einer Verbindung mit der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>. <strong>Hinweis:</strong> Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein.</td>
+ <td>Die Anzahl der Sekunden oder Minuten, die auf die Herstellung einer Verbindung mit der Back-End-App gewartet werden soll. Beispiel: <code>65s</code> oder <code>2m</code>. <strong>Hinweis:</strong> Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein.</td>
  </tr>
  <tr>
  <td><code>&lt;lesezeitlimit&gt;</code></td>
- <td>Die Anzahl der Sekunden, die auf das Lesen von Daten aus der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>. <strong>Hinweis:</strong> Ein Lesezeitlimit kann nicht größer als 120 Sekunden sein.</td>
+ <td>Die Anzahl der Sekunden oder Minuten, die auf das Lesen von Daten aus der Back-End-App gewartet werden soll. Beispiel: <code>65s</code> oder <code>2m</code>.
  </tr>
  </tbody></table>
 
@@ -690,7 +705,8 @@ spec:
 ### Keepalive-Anforderungen (keepalive-requests)
 {: #keepalive-requests}
 
-Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können. {:shortdesc}
+Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -724,8 +740,9 @@ tls:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -748,12 +765,14 @@ tls:
 ### Keepalive-Zeitlimit (keepalive-timeout)
 {: #keepalive-timeout}
 
-Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung serverseitig geöffnet bleibt. {:shortdesc}
+Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung serverseitig geöffnet bleibt.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt. </dd>
+Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.
+</dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -781,8 +800,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -804,12 +824,13 @@ spec:
 ### Proxy zu nächstem Upstream (proxy-next-upstream-config)
 {: #proxy-next-upstream-config}
 
-Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann. {:shortdesc}
+Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige Appkonfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben. <br><br><strong>Hinweis</strong>: Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige Appkonfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben.<br><br><strong>Hinweis</strong>: Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -836,8 +857,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -920,18 +942,19 @@ spec:
   - host: meine_domäne
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;mein_service1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;mein_service2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -961,10 +984,13 @@ spec:
 <br />
 
 
+
+
 ### Keepalive-Verbindungen für Upstream-Server (upstream-keepalive)
 {: #upstream-keepalive}
 
-Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen. {:shortdesc}
+Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -998,8 +1024,9 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -1017,6 +1044,8 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
 <br />
 
 
+
+
 ## Annotationen für HTTPS- und TLS/SSL-Authentifizierung
 {: #https-auth}
 
@@ -1031,11 +1060,11 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
   <dd>
   Authentifizieren Sie Web- oder API-HTTP/HTTPS-Anforderungen mit {{site.data.keyword.appid_short_notm}}.
 
-  <p>Wenn Sie den Anforderungstyp auf <code>web</code> setzen, wird eine Webanforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Tokenprüfung fehlschlägt, wird die Webanforderung zurückgewiesen. Wenn die Anforderung kein Zugriffstoken enthält, wird die Anforderung an die {{site.data.keyword.appid_short_notm}}-Anmeldeseite umgeleitet. **Hinweis**: Damit die {{site.data.keyword.appid_short_notm}}-Webauthentifizierung funktioniert, müssen Cookies im Browser des Benutzers aktiviert sein.</p>
+  <p>Wenn Sie den Anforderungstyp auf <code>web</code> setzen, wird eine Webanforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Tokenprüfung fehlschlägt, wird die Webanforderung zurückgewiesen. Wenn die Anforderung kein Zugriffstoken enthält, wird die Anforderung an die {{site.data.keyword.appid_short_notm}}-Anmeldeseite umgeleitet. <strong>Hinweis</strong>: Damit die {{site.data.keyword.appid_short_notm}}-Webauthentifizierung funktioniert, müssen Cookies im Browser des Benutzers aktiviert sein.</p>
 
   <p>Wenn Sie den Anforderungstyp auf <code>api</code> setzen, wird eine API-Anforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Anforderung kein Zugriffstoken enthält, wird die Fehlernachricht <code>401: Unauthorized</code> an den Benutzer zurückgegeben.</p>
 
-  <p>**Hinweis**: Aus Sicherheitsgründen unterstützt die {{site.data.keyword.appid_short_notm}}-Authentifizierung nur Back-Ends mit aktiviertem TLS/SSL. </p>
+  <p>**Hinweis**: Aus Sicherheitsgründen unterstützt die {{site.data.keyword.appid_short_notm}}-Authentifizierung nur Back-Ends mit aktiviertem TLS/SSL.</p>
   </dd>
    <dt>YAML-Beispiel einer Ingress-Ressource</dt>
    <dd>
@@ -1062,8 +1091,9 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>Erklärung der Komponenten von Annotationen</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
     </thead>
     <tbody>
     <tr>
@@ -1136,8 +1166,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -1157,12 +1188,12 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>Öffnen Sie die ALB-Konfigurationszuordnung.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Fügen Sie die nicht dem Standard entsprechenden HTTP- und HTTPS-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie &lt;port&gt; durch den HTTP- oder HTTPS-Port, der geöffnet werden soll.
+<li>Fügen Sie die nicht dem Standard entsprechenden HTTP- und HTTPS-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie &lt;port&gt; durch den HTTP- oder HTTPS-Port, der geöffnet werden soll. <b>Hinweis</b>: Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt <a href="cs_ingress.html#opening_ingress_ports">Ports für den Ingress-Lastenausgleich öffnen</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1180,8 +1211,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Konfigurieren Sie Ingress zur Verwendung der nicht dem Standard entsprechenden Ports bei der Weiterleitung von eingehendem Netzverkehr an Ihre Services. Verwenden Sie die YAML-Beispieldatei in dieser Referenz. </li>
 <li>Aktualisieren Sie Ihre ALB-Konfiguration.
 <pre class="pre">
@@ -1209,6 +1240,7 @@ Das Umadressieren von HTTP-Anforderungen in HTTPS ist standardmäßig inaktivier
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1229,7 +1261,10 @@ spec:
         backend:
           serviceName: mein_service
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1263,19 +1298,20 @@ spec:
   - host: meine_domäne
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: mein_service1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: mein_service2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -1308,7 +1344,7 @@ Gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Konfigurieren Sie die gegenseitige Authentifizierung für die Ingress-ALB. Der Client authentifiziert den Server und der Server authentifiziert den Client anhand von Zertifikaten. Die gegenseitige Authentifizierung wird auch als zertifikatbasierte Authentifizierung oder Zweiwegeauthentifizierung bezeichnet.
+Konfigurieren Sie die gegenseitige Authentifizierung für Downstream-Datenverkehr für die Ingress-ALB. Der externe Client authentifiziert den Server und der Server authentifiziert den Client anhand von Zertifikaten. Die gegenseitige Authentifizierung wird auch als zertifikatbasierte Authentifizierung oder Zweiwegeauthentifizierung bezeichnet.
 </dd>
 
 <dt>Voraussetzungen</dt>
@@ -1346,8 +1382,9 @@ spec:
           </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -1356,7 +1393,7 @@ spec:
 </tr>
 <tr>
 <td><code>port</code></td>
-<td>Ersetzen Sie <code>&lt;<em>port</em>&gt;</code> durch die ALB-Portnummer. </td>
+<td>Ersetzen Sie <code>&lt;<em>port</em>&gt;</code> durch die ALB-Portnummer.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1380,10 +1417,7 @@ Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren U
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Verschlüsseln Sie den Datenverkehr zu Ihren Upstream-Apps, für die HTTPS erforderlich ist.
-
-**Optional**: Sie können die [unidirektionale Authentifizierung oder die gegenseitige Authentifizierung](#ssl-services-auth) zu dieser Annotation hinzufügen.
-</dd>
+Verschlüsseln Sie den Datenverkehr, den Ingress an die Upstream-Apps sendet, für die HTTPS erforderlich ist. Wenn Ihre Upstream-Apps TLS verarbeiten können, können Sie optional ein Zertifikat bereitstellen, das in einem geheimen TLS-Schlüssel enthalten ist.<br></br>**Optional**: Sie können die [unidirektionale Authentifizierung oder die gegenseitige Authentifizierung](#ssl-services-auth) zu dieser Annotation hinzufügen.</dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -1401,27 +1435,29 @@ spec:
   - host: meine_domäne
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: mein_service1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: mein_service2
-          servicePort: 8444</code></pre>
+          servicePort: 8444
+          </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt. </td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet. Informationen zum Erstellen eines geheimen TLS-Schlüssels finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets). </td>
+  <td>Optional: Wenn Sie einen geheimen TLS-Schlüssel verwenden möchten und Ihre Upstream-App TLS verarbeiten kann, ersetzen Sie <code>&lt;<em>service-ssl-secret</em>&gt;</code> durch den geheimen Schlüssel für den Service. Wenn Sie einen geheimen Schlüssel bereitstellen, muss die Werte für <code>trusted.crt</code>, <code>client.crt</code> und <code>client.key</code> enthalten, die die App vom Client erwartet. [Konvertieren Sie zunächst die Zertifikate und den Schlüssel in die Base64-Codierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/). Informationen zum Erstellen eines geheimen Schlüssels finden Sie dann unter [Geheime Schlüssel erstellen](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1438,9 +1474,6 @@ spec:
 <dt>Beschreibung</dt>
 <dd>
 Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren Upstream-Apps für zusätzliche Sicherheit mit der unidirektionalen oder gegenseitigen Authentifizierung.
-
-**Hinweis**: Bevor Sie beginnen, [konvertieren Sie das Zertifikat und den Schlüssel in die Base64-Codierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/).
-
 </dd>
 
 
@@ -1465,28 +1498,29 @@ spec:
   - host: meine_domäne
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: mein_service1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: mein_service2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt. </td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet. Informationen zum Erstellen eines geheimen Schlüssels für die gegenseitige Authentifizierung finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets). </td>
+  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für die gegenseitige Authentifizierung für den Service. Der Wert muss das Zertifikat einer Zertifizierungsstelle enthalten, das die App vom Client erwartet. Um einen geheimen Schlüssels für die gegenseitige Authentifizierung zu erstellen, [konvertieren Sie zunächst das Zertifikat und den Schlüssel in die Base64-Codierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/). Informationen zum Erstellen eines geheimen Schlüssels finden Sie dann unter [Geheime Schlüssel erstellen](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1502,24 +1536,27 @@ spec:
 ### Istio-Services (istio-services)
 {: #istio-services}
 
-  Datenverkehr an Istio-verwaltete Services weiterleiten. {:shortdesc}
+  Datenverkehr an Istio-verwaltete Services weiterleiten.
+  {:shortdesc}
 
   <dl>
   <dt>Beschreibung</dt>
   <dd>
   Wenn Sie über Istio-verwaltete Services verfügen, können Sie eine Cluster-ALB verwenden, um HTTP-/HTTPS-Anforderungen an den Istio-Ingress-Controller weiterzuleiten. Der Istio-Ingress-Controller leitet die Anforderungen dann weiter an die App-Services. Damit der Datenverkehr weitergeleitet werden kann, müssen Sie Änderungen an den Ingress-Ressourcen für die Cluster-ALB und den Istio-Ingress-Controller vornehmen.
-    <br><br>In der Ingress-Ressource für die Cluster-ALB müssen Sie Folgendes tun:       <ul>
+    <br><br>In der Ingress-Ressource für die Cluster-ALB müssen Sie Folgendes tun:
+      <ul>
         <li>die Annotation `istio-services` angeben</li>
         <li>den Servicepfad als tatsächlichen Pfad definieren, den die App überwacht</li>
         <li>den Service-Port als Port des Istio-Ingress-Controllers angeben</li>
       </ul>
-    <br>In der Ingress-Ressource für den Istio-Ingress-Controller müssen Sie Folgendes tun:       <ul>
+    <br>In der Ingress-Ressource für den Istio-Ingress-Controller müssen Sie Folgendes tun:
+      <ul>
         <li>den Servicepfad als tatsächlichen Pfad definieren, den die App überwacht</li>
         <li>den Service-Port als den HTTP-/HTTPS-Port des App-Service definieren, der vom Istio-Ingress-Controller öffentlich zugänglich gemacht wird</li>
     </ul>
   </dd>
 
-   <dt>YAML-Beispiel einer Ingress-Ressource für die Cluster-ALB </dt>
+   <dt>YAML-Beispiel einer Ingress-Ressource für die Cluster-ALB</dt>
    <dd>
 
    <pre class="codeblock">
@@ -1528,7 +1565,7 @@ spec:
    metadata:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;mein_service1&gt; istioServiceNamespace=&lt;istio-namensbereich&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;mein_service1&gt; istioServiceNamespace=&lt;istio-namensbereich&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - hosts:
@@ -1548,33 +1585,34 @@ spec:
             servicePort: &lt;istio-ingress-port&gt;</code></pre>
 
    <table>
+   <caption>Erklärung der Komponenten der YAML-Datei</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
-      <td>Um das Weiterleiten von Datenverkehr zu Istio-verwalteten Services zu aktivieren, legen Sie diesen Parameter auf <code>True</code> fest. </td>
+    <td><code>enabled</code></td>
+      <td>Um das Weiterleiten von Datenverkehr zu Istio-verwalteten Services zu aktivieren, legen Sie diesen Parameter auf <code>True</code> fest.</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre Istio-verwaltete App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, werden alle Istio-verwalteten Services für die Weiterleitung von Datenverkehr aktiviert. </td>
+    <td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre Istio-verwaltete App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, werden alle Istio-verwalteten Services für die Weiterleitung von Datenverkehr aktiviert.</td>
     </tr>
     <tr>
     <td><code>istioServiceNamespace</code></td>
-    <td>Ersetzen Sie <code><em>&lt;istio-namensbereich&gt;</em></code> durch den Kubernetes-Namensbereich, in dem Istio installiert ist. Dieses Feld ist optional. Wenn Sie keinen Namensbereich angeben, wird der Namensbereich <code>istio-system</code> verwendet. </td>
+    <td>Ersetzen Sie <code><em>&lt;istio-namensbereich&gt;</em></code> durch den Kubernetes-Namensbereich, in dem Istio installiert ist. Dieses Feld ist optional. Wenn Sie keinen Namensbereich angeben, wird der Namensbereich <code>istio-system</code> verwendet.</td>
     </tr>
     <tr>
     <td><code>istioServiceName</code></td>
-    <td>Ersetzen Sie <code><em>&lt;istio-ingress-service&gt;</em></code> durch den Namen des Istio-Ingress-Service. Dieses Feld ist optional. Wenn Sie den Istio-Ingress-Servicenamen nicht angeben, wird der Servicename <code>istio-ingress</code> verwendet. </td>
+    <td>Ersetzen Sie <code><em>&lt;istio-ingress-service&gt;</em></code> durch den Namen des Istio-Ingress-Service. Dieses Feld ist optional. Wenn Sie den Istio-Ingress-Servicenamen nicht angeben, wird der Servicename <code>istio-ingress</code> verwendet.</td>
     </tr>
     <tr>
     <td><code>path</code></td>
-      <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;/myapp1&gt;</em></code> durch den Back-End-Pfad, den der Istio-verwaltete Service überwacht. Der Pfad muss dem Pfad entsprechen, den Sie in der Istio-Ingress-Ressource definiert haben. </td>
+      <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;/myapp1&gt;</em></code> durch den Back-End-Pfad, den der Istio-verwaltete Service überwacht. Der Pfad muss dem Pfad entsprechen, den Sie in der Istio-Ingress-Ressource definiert haben.</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
-    <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;istio-ingress-port&gt;</em></code> durch den Port des Istio-Ingress-Controllers. </td>
+    <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;istio-ingress-port&gt;</em></code> durch den Port des Istio-Ingress-Controllers.</td>
     </tr>
     </tbody></table>
     </dd>
@@ -1607,7 +1645,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;mein_service1&gt;"
 spec:
  tls:
  - hosts:
@@ -1621,7 +1659,24 @@ spec:
         backend:
           serviceName: mein_service
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>Um die Pufferung von Antwortdaten für die Lastausgleichsfunktion für Anwendungen (ALB) zu inaktivieren, setzen Sie diesen Wert auf <code>false</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, verwenden alle Services diese Annotation.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1662,8 +1717,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -1724,8 +1780,9 @@ spec:
  </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -1784,8 +1841,9 @@ spec:
          </code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
 </thead>
 <tbody>
 <tr>
@@ -1827,7 +1885,6 @@ Wenn Ihre Back-End-App HTTP-Headerinformationen erfordert, können Sie die Annot
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1839,7 +1896,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=<mein_service1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1882,18 +1938,19 @@ spec:
   - host: meine_domäne
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;mein_service1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;mein_service2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -1949,18 +2006,19 @@ Entfernen von Headerinformationen, die in der Clientantwort von der Back-End-App
    - host: meine_domäne
     http:
       paths:
-       - path: /
-         backend:
-           serviceName: &lt;mein_service1&gt;
-           servicePort: 8080
-       - path: /myapp
-         backend:
-           serviceName: &lt;mein_service2&gt;
-           servicePort: 80</code></pre>
+       - path: /service1_path
+        backend:
+          serviceName: &lt;mein_service1&gt;
+          servicePort: 8080
+       - path: /service2_path
+        backend:
+          serviceName: &lt;mein_service2&gt;
+          servicePort: 80</code></pre>
 
   <table>
+  <caption>Erklärung der Komponenten von Annotationen</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
    </thead>
    <tbody>
    <tr>
@@ -2016,13 +2074,14 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;größe&gt;</code></td>
- <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um sie beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>.  <strong>Hinweis:</strong> Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</td>
+ <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um die maximale Größe beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>.  <strong>Hinweis:</strong> Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</td>
  </tr>
  </tbody></table>
 
@@ -2066,8 +2125,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
  </thead>
  <tbody>
  <tr>
@@ -2128,13 +2188,14 @@ Begrenzen Sie für alle Services anhand eines definierten Schlüssels die Verarb
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2190,8 +2251,9 @@ Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen 
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Erklärung der Komponenten von Annotationen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
   </thead>
   <tbody>
   <tr>
@@ -2200,7 +2262,7 @@ Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen 
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2215,3 +2277,6 @@ Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen 
   </dl>
 
   <br />
+
+
+

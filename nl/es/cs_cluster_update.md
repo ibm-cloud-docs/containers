@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Actualización de clústeres y nodos trabajadores
@@ -30,7 +33,7 @@ Periódicamente, Kubernetes publica [actualizaciones de parche, mayores o menore
 
 Las actualizaciones pueden afectar a la versión del servidor de API de Kubernetes o a otros componentes del maestro de Kubernetes.  Usted siempre es el responsable de mantener actualizados los nodos trabajadores. Cuando se realizan actualizaciones, el maestro de Kubernetes se actualiza antes que los nodos trabajadores.
 
-De forma predeterminada, la posibilidad de actualizar el servidor de API de Kubernetes está limitada en el maestro de Kubernetes a dos versiones menores posteriores a su versión actual. Por ejemplo, si el servidor de API de Kubernetes actual es de la versión 1.5 y desea actualizar a 1.8, primero se debe actualizar a la versión 1.7. Puede forzar que se produzca, pero actualizar a dos versiones menores puede provocar resultados imprevistos. Si el clúster está ejecutando una versión no soportada de Kubernetes, es posible que tenga que forzar la actualización.
+De forma predeterminada, la posibilidad de actualizar el servidor de API de Kubernetes está limitada en el maestro de Kubernetes a dos versiones menores posteriores a su versión actual. Por ejemplo, si el servidor de API de Kubernetes actual es de la versión 1.7 y desea actualizar a 1.10, primero se debe actualizar a la versión 1.8 o 1.9. Puede forzar que esto se produzca, sin embargo, la actualización de tres o más versiones menores podría dar lugar a resultados imprevistos. Si el clúster está ejecutando una versión no soportada de Kubernetes, es posible que tenga que forzar la actualización.
 
 El diagrama siguiente muestra el proceso que puede realizar para actualizar el maestro.
 
@@ -55,13 +58,14 @@ Cuando finalice la actualización del servidor de API de Kubernetes, puede actua
 ## Actualización de nodos trabajadores
 {: #worker_node}
 
+
 Ha recibido una notificación para actualizar los nodos trabajadores. ¿Qué significa esto? Como las actualizaciones y parches de seguridad se han aplicado para el servidor de API de Kubernetes y otros componentes del maestro de Kubernetes, debe asegurarse de que los nodos trabajadores permanecen sincronizados.
 {: shortdesc}
 
 La versión de Kubernetes del nodo trabajador no puede ser superior a la a la versión del servidor de API de Kubernetes que se ejecuta en el maestro de Kubernetes. Antes de empezar, [actualice el maestro de Kubernetes](#master).
 
-<ul>**Atención:**:</br>
-<li>Las actualizaciones de los nodos trabajadores pueden provocar que las apps y servicios estén un tiempo inactivos.</li>
+**Atención:**:
+<ul><li>Las actualizaciones de los nodos trabajadores pueden provocar que las apps y servicios estén un tiempo inactivos.</li>
 <li>Los datos se suprimen si no están almacenados fuera del pod.</li>
 <li>Utilice [réplicas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) si los despliegues permiten volver a planificar pods en nodos disponibles.</li></ul>
 
@@ -75,7 +79,7 @@ En la sección de información de datos del mapa de configuración, puede defini
 
 Las claves están definidas. ¿Qué hago?
 
-Después de definir las reglas, ejecute el mandato `bx cs worker-update`. Si se devuelve una respuesta satisfactoria, los nodos trabajadores se pondrán en cola para ser actualizados. Sin embargo, los nodos no completan el proceso de actualización hasta que se satisfacen todas las reglas. Mientras están en cola, las reglas se comprueban a intervalos para ver si alguno de los nodos puede ser actualizado. 
+Después de definir las reglas, ejecute el mandato `bx cs worker-update`. Si se devuelve una respuesta satisfactoria, los nodos trabajadores se pondrán en cola para ser actualizados. Sin embargo, los nodos no completan el proceso de actualización hasta que se satisfacen todas las reglas. Mientras están en cola, las reglas se comprueban a intervalos para ver si alguno de los nodos puede ser actualizado.
 
 ¿Qué ocurre si opto por no definir ningún mapa de configuración?
 
@@ -115,13 +119,14 @@ Para actualizar los nodos trabajadores:
     ```
     {:pre}
   <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha, con el parámetro en la columna uno y la descripción correspondiente en la columna dos. ">
+  <caption>Componentes de ConfigMap</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de los componentes </th>
     </thead>
     <tbody>
       <tr>
         <td><code>drain_timeout_seconds</code></td>
-        <td> Opcional: Tiempo de espera en segundos para el drenaje que se produce durante la actualización del nodo trabajador. El drenaje coloca al nodo en un estado `unschedulable`, lo que impide desplegar nuevos pods en dicho nodo. El drenaje también suprime nodos fuera del nodo. Los valores enteros aceptados van del 1 al 180. El valor predeterminado es 30. </td>
+        <td> Opcional: Tiempo de espera en segundos para el drenaje que se produce durante la actualización del nodo trabajador. El drenaje coloca al nodo en un estado `unschedulable`, lo que impide desplegar nuevos pods en dicho nodo. El drenaje también suprime nodos fuera del nodo. Los valores enteros aceptados van del 1 al 180. El valor predeterminado es 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
@@ -171,7 +176,11 @@ Para actualizar los nodos trabajadores:
 Pasos siguientes:
   - Repita el proceso de actualización con otros clústeres.
   - Informe a los desarrolladores que trabajan en el clúster para que actualicen su CLI de `kubectl` a la versión del maestro de Kubernetes.
-  - Si el panel de control de Kubernetes no muestra los gráficos de utilización, [suprima el pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs). 
+  - Si el panel de control de Kubernetes no muestra los gráficos de utilización, [suprima el pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
@@ -181,8 +190,17 @@ Pasos siguientes:
 ## Actualización de los tipos de máquina
 {: #machine_type}
 
-Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores añadiendo nuevos nodos trabajadores y eliminando los antiguos. Por ejemplo, si tiene nodos trabajadores virtuales en tipos de máquina en desuso con `u1c` o `b1c` en los nombres, cree nodos trabajadores que utilicen tipos de máquina con `u2c` o `b2c` en el nombre.
+Puede actualizar los tipos de máquina que utilizan los nodos trabajadores añadiendo nuevos nodos trabajadores y eliminando los antiguos. Por ejemplo, si tiene nodos trabajadores virtuales en tipos de máquina en desuso con `u1c` o `b1c` en los nombres, cree nodos trabajadores que utilicen tipos de máquina con `u2c` o `b2c` en el nombre.
 {: shortdesc}
+
+Antes de empezar:
+- Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+- Si almacena datos en su nodo trabajador, los datos se suprimen si no los [almacena fuera del nodo trabajador](cs_storage.html#storage).
+
+
+**Atención**: las actualizaciones a los nodos trabajadores pueden hacer que las apps y los servicios estén un tiempo inactivos. Los datos se suprimen si no se [almacenan fuera del pod](cs_storage.html#storage).
+
+
 
 1. Anote los nombres y las ubicaciones de los nodos trabajadores que desea actualizar.
     ```
@@ -203,7 +221,7 @@ Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores
     ```
     {: pre}
 
-4. Verifique que se añaden los nodos trabajadores. 
+4. Verifique que se añaden los nodos trabajadores.
 
     ```
     bx cs workers <cluster_name>
@@ -218,6 +236,13 @@ Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores
     {: pre}
 
 6. Repita estos pasos para actualizar otros nodos trabajadores a diferentes tipos de máquina.
+
+
+
+
+
+
+
 
 
 

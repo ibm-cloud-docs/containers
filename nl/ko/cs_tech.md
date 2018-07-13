@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} 기술
 
@@ -58,9 +60,9 @@ lastupdated: "2018-4-20"
   </ul>
   </dd>
 
+<p>컨테이너 이미지에 대해 작업하는 경우 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.</p>
 
-  
-<p>Docker에 대해 더 자세히 알아볼 준비가 되셨습니까? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">이 과정을 완료하여 Docker와 {{site.data.keyword.containershort_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>. </p>
+<p>Docker에 대해 더 자세히 알아볼 준비가 되셨습니까? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">이 과정을 완료하여 Docker와 {{site.data.keyword.containershort_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</p>
 
 </dl>
 
@@ -100,11 +102,11 @@ Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱�
 <dt>앱</dt>
 <dd>앱은 전체 앱 또는 앱의 컴포넌트를 참조할 수 있습니다. 별도의 팟(Pod) 또는 별도의 작업자 노드에 앱의 컴포넌트를 배치할 수 있습니다.</dd>
 
+<p>Kubernetes 리소스에 대해 작업할 때 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.</p>
 
-  
-<p>Kubernetes에 대해 더 자세히 알아볼 준비가 되셨습니까? </p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">클러스터 작성 튜토리얼을 통해 용어에 대한 지식을 넓히십시오</a>. </li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">이 과정을 완료하여 Kubernetes와 {{site.data.keyword.containershort_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>. </li></ul>
+<p>Kubernetes에 대해 더 자세히 알아볼 준비가 되셨습니까?</p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">클러스터 작성 튜토리얼을 통해 용어에 대한 지식을 넓히십시오</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">이 과정을 완료하여 Kubernetes와 {{site.data.keyword.containershort_notm}}가 어떻게 함께 작동하는지 알아보십시오</a>.</li></ul>
 
 
 </dl>
@@ -124,15 +126,18 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
   <dt>Kubernetes 마스터</dt>
     <dd>Kubernetes 마스터는 클러스터에서 모든 컴퓨팅, 네트워크 및 스토리지 리소스를 관리하는 역할을 합니다. Kubernetes 마스터를 사용하면 컨테이너화된 앱 및 서비스가 클러스터의 작업자 노드에 동일하게 배치됩니다. 앱 및 서비스의 구성 방식에 따라 마스터는 앱의 요구사항을 충족시키는 데 충분한 리소스가 있는 작업자 노드를 판별합니다.</dd>
   <dt>작업자 노드</dt>
-    <dd>각 작업자 노드는 클라우드 환경의 실제 머신(베어메탈), 또는 실제 하드웨어에서 실행되는 가상 머신입니다. 작업자 노드를 프로비저닝하는 경우 해당 작업자 노드에 호스팅되는 컨테이너에 사용 가능한 리소스를 판별합니다. 기본적으로, 작업자 노드는 {{site.data.keyword.IBM_notm}} 관리 Docker Engine, 개별 컴퓨팅 리소스, 네트워킹 및 볼륨 서비스로 설정됩니다. 기본 제공 보안 기능은 격리, 리소스 관리 기능 및 작업자 노드 보안 준수를 제공합니다.</dd>
+    <dd>각 작업자 노드는 클라우드 환경의 실제 머신(베어메탈), 또는 실제 하드웨어에서 실행되는 가상 머신입니다. 작업자 노드를 프로비저닝할 때 해당 작업자 노드에서 호스팅되는 컨테이너에 사용 가능한 리소스를 판별합니다. 기본적으로, 작업자 노드는 {{site.data.keyword.IBM_notm}} 관리 Docker Engine, 개별 컴퓨팅 리소스, 네트워킹 및 볼륨 서비스로 설정됩니다. 기본 제공 보안 기능은 격리, 리소스 관리 기능 및 작업자 노드 보안 준수를 제공합니다.</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처](images/cs_org_ov.png)
-그림. {{site.data.keyword.containershort_notm}} 아키텍처
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처">
+ <figcaption>{{site.data.keyword.containershort_notm}} 아키텍처</figcaption>
+</figure>
+</p>
 
-{{site.data.keyword.containerlong_notm}}를 다른 제품 및 서비스와 함께 사용하는 방법을 알아보시겠습니까? 몇 가지 [통합](cs_integrations.html#integrations)을 참고해 보십시오. 
+{{site.data.keyword.containerlong_notm}}를 다른 제품 및 서비스와 함께 사용하는 방법을 알아보시겠습니까? 몇 가지 [통합](cs_integrations.html#integrations)을 참고해 보십시오.
 
 
 <br />
-
 

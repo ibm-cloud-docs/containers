@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Alta disponibilità per {{site.data.keyword.containerlong_notm}}
@@ -36,7 +38,9 @@ L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} so
 
 <img src="images/cs_failure_ov.png" alt="Panoramica dei domini di errore in un cluster ad alta disponibilità all'interno di una regione {{site.data.keyword.containershort_notm}}." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="La tabella mostra i punti di errore in {{site.data.keyword.containershort_notm}}. Le righe devono essere lette da sinistra a destra, con il numero del punto di errore nella colonna uno, il titolo del punto di errore nella colonna due, una descrizione nella colonna tre e un link alla documentazione nella colonna quattro.">
+<caption>Punti di errore </caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -75,7 +79,7 @@ L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} so
   <tr>
     <td>5</td>
     <td>Errore di regione</td>
-    <td>Ogni regione è configurata con un programma di bilanciamento del carico altamente disponibile accessibile dall'endpoint API specifico della regione. Il programma di bilanciamento del carico instrada le richieste in entrata e in uscita ai cluster nelle ubicazioni regionali. La probabilità di un errore a livello dell'intera regione è bassa. Tuttavia, se vuoi tenere conto di questo errore, puoi configurare più cluster in regioni diverse e collegarli utilizzando un programma di bilanciamento del carico esterno. Nel caso in cui si verifichi un errore in un'intera regione, il cluster nell'altra regione può sostenere il carico di lavoro. <br/><br/><strong>Note:</strong> un cluster per più regioni richiede diverse risorse cloud e, a seconda della tua applicazione, può essere complesso e costoso. Controlla se hai bisogno di una configurazione per più regioni o se puoi gestire una potenziale interruzione del servizio. Se vuoi configurare un cluster per più regioni, assicurati che la tua applicazione e i dati possano essere ospitati in un'altra regione e che l'applicazione possa gestire la replica dei dati globali.</td>
+    <td>Ogni regione è configurata con un programma di bilanciamento del carico altamente disponibile accessibile dall'endpoint API specifico della regione. Il programma di bilanciamento del carico instrada le richieste in entrata e in uscita ai cluster nelle ubicazioni regionali. La probabilità di un errore a livello dell'intera regione è bassa. Tuttavia, per tenere conto di questo errore, puoi configurare più cluster in regioni diverse e collegarli utilizzando un programma di bilanciamento del carico esterno. Nel caso in cui si verifichi un errore in un'intera regione, il cluster nell'altra regione può sostenere il carico di lavoro. <br/><br/><strong>Note:</strong> un cluster per più regioni richiede diverse risorse cloud e, a seconda della tua applicazione, può essere complesso e costoso. Controlla se hai bisogno di una configurazione per più regioni o se puoi gestire una potenziale interruzione del servizio. Se vuoi configurare un cluster per più regioni, assicurati che la tua applicazione e i dati possano essere ospitati in un'altra regione e che l'applicazione possa gestire la replica dei dati globali.</td>
     <td>[Configurazione di cluster altamente disponibili.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} so
   </tr>
   </tbody>
   </table>
+
+
 

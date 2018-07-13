@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Traitement des incidents liés au stockage en cluster
 {: #cs_troubleshoot_storage}
 
@@ -28,6 +29,8 @@ Lorsque vous utilisez {{site.data.keyword.containerlong}}, tenez compte des tech
 Si vous rencontrez un problème d'ordre plus général, expérimentez le [débogage de cluster](cs_troubleshoot.html).
 {: tip}
 
+
+
 ## Les systèmes de fichiers des noeuds worker passent en mode lecture seule
 {: #readonly_nodes}
 
@@ -35,7 +38,7 @@ Si vous rencontrez un problème d'ordre plus général, expérimentez le [débog
 {: #stuck_creating_state}
 Vous pouvez voir l'un des symptômes suivants :
 - Lorsque vous exécutez la commande `kubectl get pods -o wide`, vous voyez que plusieurs pods qui s'exécutent sur le même noeud worker sont bloqués à l'état `ContainerCreating`.
-- Lorsque vous exécutez la commande `kubectl describe`, vous voyez l'erreur suivante dans la section des événements : `MountVolume.SetUp failed for volume ... read-only file system`.
+- Lorsque vous exécutez une commande `kubectl describe`, vous voyez s'afficher l'erreur suivante à la section **Events** : `MountVolume.SetUp failed for volume ... read-only file system`.
 
 {: tsCauses}
 Le système de fichiers sur le noeud worker est en lecture seule.
@@ -50,22 +53,23 @@ Pour une solution à long terme, [mettez à jour le type de machine en ajoutant 
 <br />
 
 
+
 ## L'application échoue lorsqu'un utilisateur non root détient le chemin de montage du stockage de fichiers NFS
 {: #nonroot}
 
 {: tsSymptoms}
-Après avoir [ajouté du stockage NFS](cs_storage.html#app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir des erreurs liées au droit d'accès en écriture ou des messages d'erreur indiquant qu'il manque des droits nécessaires. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
+Une fois que vous [ajoutez du stockage NFS](cs_storage.html#app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir des erreurs liées au droit d'accès en écriture ou des messages d'erreur indiquant qu'il manque des droits nécessaires. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
 
 {: tsCauses}
-Par défaut, les utilisateurs non root ne disposent pas de droits en écriture sur le chemin de montage du volume correspondant au stockage sauvegardé par NFS. Certaines images d'application courantes, telles que Jenkins et Nexus3, spécifient un utilisateur non root qui détient le chemin de montage dans le fichier Dockerfile. Lorsque vous créez un conteneur à partir de ce fichier Dockerfile, la création échoue car l'utilisateur non root ne dispose pas des droits nécessaires pour accéder au chemin de montage. Pour octroyer des droits en écriture, vous pouvez modifier le fichier Dockerfile pour ajouter temporairement l'utilisateur non root au groupe d'utilisateurs root avant de modifier les droits sur le chemin de montage, ou utiliser un conteneur init.
+Par défaut, les utilisateurs non root ne disposent pas de droits en écriture sur le chemin de montage du volume correspondant au stockage sauvegardé par NFS. Certaines images d'application courantes, telles que Jenkins et Nexus3, spécifient un utilisateur non root qui détient le chemin de montage dans le fichier Dockerfile. Lorsque vous créez un conteneur à partir de ce fichier Dockerfile, la création échoue car l'utilisateur non root ne dispose pas des droits nécessaires pour accéder au chemin de montage. Pour octroyer des droits en écriture, vous pouvez modifier le fichier Dockerfile pour ajouter temporairement l'utilisateur non root au groupe d'utilisateurs root avant que les droits sur le chemin de montage soient modifiés, ou utiliser un conteneur init.
 
-Si vous utilisez une charte Helm pour déployer une image avec un utilisateur non root que vous souhaiteriez habilité à disposer des droits en écriture sur le partage de fichiers NFS, éditez d'abord le déploiement Helm pour utiliser un conteneur init.
+Si vous utilisez une charte Helm pour déployer l'image, modifiez le déploiement Helm pour utiliser un conteneur init.
 {:tip}
 
 
 
 {: tsResolve}
-Lorsque vous ajoutez un [conteneur init![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans votre déploiement, vous pouvez octroyer à un utilisateur non root spécifié dans votre fichier Dockerfile les droits en écriture sur le chemin de montage du volume à l'intérieur du conteneur qui pointe vers votre partage de fichiers NFS. Le conteneur init démarre avant le conteneur de votre application. Le conteneur init crée le chemin de montage du volume dans le conteneur, modifie le chemin de montage de sorte à ce que l'utilisateur (non root) correct en soit détenteur, puis se ferme. Ensuite, le conteneur de votre application (qui comprend l'utilisateur non root censé écrire dans le chemin de montage) démarre. Comme le chemin est déjà détenu par l'utilisateur non root, l'écriture dans le chemin de montage aboutit. Si vous ne voulez pas utiliser un conteneur init, vous pouvez modifier le fichier Dockerfile afin d'ajouter l'accès d'utilisateur non root au stockage de fichiers NFS.
+Lorsque vous ajoutez un [conteneur init![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans votre déploiement, vous pouvez octroyer à un utilisateur non root spécifié dans votre fichier Dockerfile les droits en écriture pour le chemin de montage du volume à l'intérieur du conteneur qui pointe vers votre partage de fichiers NFS. Le conteneur init démarre avant le conteneur de votre application. Le conteneur init crée le chemin de montage du volume dans le conteneur, modifie le chemin de montage de sorte à ce que l'utilisateur (non root) correct en soit détenteur, puis se ferme. Ensuite, le conteneur de votre application avec l'utilisateur non root qui doit écrire dans le chemin de montage démarre. Comme le chemin est déjà détenu par l'utilisateur non root, l'écriture dans le chemin de montage aboutit. Si vous ne voulez pas utiliser un conteneur init, vous pouvez modifier le fichier Dockerfile afin d'ajouter l'accès d'utilisateur non root au stockage de fichiers NFS.
 
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
@@ -79,7 +83,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     ```
     FROM openjdk:8-jdk
 
-    RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+    RUN apt-get update &&apt-get install -y git curl &&rm -rf /var/lib/apt/lists/*
 
     ARG user=jenkins
     ARG group=jenkins
@@ -254,16 +258,74 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-Après avoir [ajouté l'accès d'utilisateur non root au stockage persistant](#nonroot) ou déployé une charte Helm avec un ID d'utilisateur non root, l'utilisateur n'a pas accès en écriture à un stockage monté.
+Une fois que vous avez [ajouté l'accès d'utilisateur non root au stockage persistant](#nonroot) ou déployé une charte Helm avec un ID d'utilisateur non root, l'utilisateur n'a pas accès en écriture au stockage monté.
 
 {: tsCauses}
 Le déploiement ou la configuration de la charte Helm indique le [contexte de sécurité](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) pour `fsGroup` (ID de groupe) et `runAsUser` (ID utilisateur) du pod. Actuellement, {{site.data.keyword.containershort_notm}} ne prend pas en charge la spécification `fsGroup` et n'accepte que `runAsUser` défini avec la valeur `0` (droits de l'utilisateur root).
 
 {: tsResolve}
-Supprimez les zones `securityContext` dans la configuration pour `fsGroup` et `runAsUser` du fichier de configuration de l'image, du déploiement ou de la charte Helm et effectuez un redéploiement. Si vous devez remplacer la propriété du chemin de montage `nobody`, [ajoutez un accès d'utilisateur non root](#nonroot). Après avoir ajouté la propriété [non-root initContainer](#nonroot), définissez `runAsUser` au niveau du conteneur et non pas au niveau du pod.
+Supprimez les zones `securityContext` dans la configuration pour `fsGroup` et `runAsUser` du fichier de configuration de l'image, du déploiement ou de la charte Helm, et effectuez un redéploiement. Si vous devez remplacer la propriété du chemin de montage `nobody`, [ajoutez un accès d'utilisateur non root](#nonroot). Une fois que vous avez ajouté la propriété [non-root initContainer](#nonroot), définissez `runAsUser` au niveau du conteneur et non pas au niveau du pod.
 
 <br />
 
+
+
+
+## Echec de montage d'un stockage par blocs existant sur un pod en raison d'un système de fichiers incorrect
+{: #block_filesystem}
+
+{: tsSymptoms}
+Lorsque vous exécutez la commande `kubectl describe pod <pod_name>`, l'erreur suivante s'affiche :
+```
+failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
+```
+{: screen}
+
+{: tsCauses}
+Vous disposez d'une unité de stockage par blocs configurée avec un système de fichiers `XFS`. Pour monter cette unité sur votre pod, vous [avez créé un volume persistant (PV)](cs_storage.html#existing_block) qui spécifiait `ext4` pour votre système de fichiers dans la section `spec/flexVolume/fsType`. Si aucun système de fichiers n'est défini, le volume persistant prend la valeur par défaut `ext4`.
+Le volume persitant a été créé et lié à votre instance de stockage par blocs. Cependant, lorsque vous tentez de monter le volume persistant sur votre cluster en utilisant une réservation de volume persistant (PVC) correspondante, le montage du volume échoue. Vous ne pouvez pas monter votre instance de stockage par blocs `XFS` avec un système de fichiers `ext4` sur le pod.
+
+{: tsResolve}
+Mettez à jour le système de fichier dans le volume persistant (PV) existant en remplaçant `ext4` par `XFS`.
+
+1. Affichez la liste des volumes persistants existants dans votre cluster et notez le nom du volume persistant que vous avez utilisé pour votre instance de stockage par blocs.
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+
+2. Sauvegardez le fichier YAML du volume persistant sur votre machine locale.
+   ```
+   kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+3. Ouvrez le fichier YAML et modifiez `fsType` en remplaçant `ext4` par `xfs`.
+4. Replacez le volume persistant dans votre cluster.
+   ```
+   kubectl replace --force -f <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+5. Connectez-vous au pod sur lequel vous avez monté le volume persistant.
+   ```
+   kubectl exec -it <pod_name> sh
+   ```
+   {: pre}
+
+6. Vérifiez que le système de fichiers est passé à `XFS`.
+   ```
+   df -Th
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
+   ```
+   {: screen}
+
+<br />
 
 
 
@@ -274,7 +336,8 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
+-   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
@@ -284,9 +347,8 @@ Vous avez encore des problèmes avec votre cluster ?
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
 pour plus d'informations sur l'utilisation des forums.
 
--   Contactez le support IBM en ouvrant un ticket de demande de service. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
-
 

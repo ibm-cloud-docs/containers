@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # 限制送至邊緣工作者節點的網路資料流量
 {: #edge}
@@ -39,9 +41,9 @@ lastupdated: "2018-4-20"
 - 確保您的叢集至少具有一個公用 VLAN。僅具有專用 VLAN 的叢集無法使用邊緣工作者節點。
 - [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
-步驟：
+若要將工作者節點標示為邊緣節點，請執行下列動作：
 
-1. 列出叢集中的所有工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。在每一個公用 VLAN 上至少選取兩個工作者節點作為邊緣工作者節點。使用兩個以上的工作者節點可提高網路資源的可用性。
+1. 列出叢集中的所有工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。在每一個公用 VLAN 上至少選取兩個工作者節點作為邊緣工作者節點。Ingress 需要每一個區域中至少有兩個工作者節點來提供高可用性。 
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -62,23 +64,23 @@ lastupdated: "2018-4-20"
   ```
   {: pre}
 
-  輸出：
+  輸出範例：
 
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
-4. 使用來自前一個步驟的輸出，複製並貼到每一個 `kubectl get service` 指令行。此指令會將負載平衡器重新部署至邊緣工作者節點。只有公用負載平衡器需要重新部署。
+4. 使用來自前一個步驟的輸出，複製並貼到每一個 `kubectl get service` 指令行。此指令會將負載平衡器重新部署至邊緣工作者節點。只有公用負載平衡器必須重新部署。
 
-  輸出：
+  輸出範例：
 
   ```
   service "my_loadbalancer" configured
   ```
   {: screen}
 
-您已使用 `dedicated=edge` 來標示工作者節點，並已將所有現有的負載平衡器及 Ingress 重新部署至邊緣工作者節點。接下來，請避免其他[工作負載在邊緣工作者節點上執行](#edge_workloads)，以及[封鎖對工作者節點上節點埠的入埠資料流量](cs_network_policy.html#block_ingress)。
+您已使用 `dedicated=edge` 來標示工作者節點，並已將所有現有的負載平衡器及 Ingress 重新部署至邊緣工作者節點。接下來，請避免其他[工作負載在邊緣工作者節點上執行](#edge_workloads)，以及[封鎖對工作者節點上 NodePort 的入埠資料流量](cs_network_policy.html#block_ingress)。
 
 <br />
 
@@ -93,19 +95,18 @@ lastupdated: "2018-4-20"
 
 
 
-1. 列出所有具有 `edge` 標籤的工作者節點。
+1. 列出所有具有 `dedicated=edge` 標籤的工作者節點。
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
   ```
   {: pre}
 
-2. 將污點套用至每一個工作者節點，以避免 Pod 在工作者節點上執行，並從工作者節點中移除沒有 `edge` 標籤的 Pod。移除的 Pod 會重新部署在有容量的其他工作者節點上。
+2. 將污點套用至每一個工作者節點，以避免 Pod 在工作者節點上執行，並從工作者節點中移除沒有 `dedicated=edge` 標籤的 Pod。移除的 Pod 會重新部署在有容量的其他工作者節點上。
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
 現在，僅具有 `dedicated=edge` 容忍的 Pod 才會部署至您的邊緣工作者節點。
 
-3. 如果您選擇[針對負載平衡器服務啟用來源 IP 保留 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，請確保藉由[將邊緣節點親緣性新增至應用程式 Pod](cs_loadbalancer.html#edge_nodes)，在邊緣工作者節點上排定應用程式 Pod，以便可將送入的要求轉遞至您的應用程式 Pod。
-
+3. 如果您選擇[針對負載平衡器服務啟用來源 IP 保留 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，請確保藉由[將邊緣節點親緣性新增至應用程式 Pod](cs_loadbalancer.html#edge_nodes)，在邊緣工作者節點上排定應用程式 Pod。必須在邊緣節點上排定應用程式 Pod，才能接收送入要求。

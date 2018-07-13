@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Ingress 注释
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ lastupdated: "2018-4-20"
 有关 Ingress 服务以及有关如何开始使用这些服务的常规信息，请参阅[使用 Ingress 管理网络流量](cs_ingress.html#planning)。
 
 <table>
+<caption>一般注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -65,6 +67,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>连接注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -109,6 +112,7 @@ lastupdated: "2018-4-20"
 <br>
 
   <table>
+  <caption>HTTPS 和 TLS/SSL 认证注释</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -154,6 +158,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>Istio 注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -173,6 +178,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>代理缓冲区注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -207,6 +213,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>请求和响应注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -242,6 +249,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>服务限制注释</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -307,8 +315,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -338,12 +347,13 @@ tls:
 
 <dl>
 <dt>描述</dt>
-<dd>缺省情况下，ALB 会将应用程序侦听的路径作为前缀进行处理。ALB 接收到对应用程序的请求时，ALB 会检查 Ingress 资源以查找与请求 URI 的开头相匹配的路径（作为前缀）。如果找到匹配项，那么会将请求转发到部署了应用程序的 pod 的 IP 地址。<br><br>`location-modifier` 注释通过修改位置块配置来更改 ALB 搜索匹配项的方式。位置块用于确定如何处理请求中的应用程序路径。<br><br>**注**：要处理正则表达式 (regex) 路径，此注释是必需的。</dd>
+<dd>缺省情况下，ALB 会将应用程序侦听的路径作为前缀进行处理。ALB 接收到对应用程序的请求时，ALB 会检查 Ingress 资源以查找与请求 URI 的开头相匹配的路径（作为前缀）。如果找到匹配项，那么会将请求转发到部署了应用程序的 pod 的 IP 地址。<br><br>`location-modifier` 注释通过修改位置块配置来更改 ALB 搜索匹配项的方式。位置块用于确定如何处理请求中的应用程序路径。<br><br><strong>注</strong>：要处理正则表达式 (regex) 路径，此注释是必需的。</dd>
 
 <dt>支持的修饰符</dt>
 <dd>
 
 <table>
+<caption>支持的修饰符</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -353,15 +363,15 @@ tls:
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>等号修饰符使 ALB 仅选择完全匹配项。找到完全匹配项时，搜索将停止，并选择匹配路径。</td>
+ <td>等号修饰符使 ALB 仅选择完全匹配项。找到完全匹配项时，搜索将停止，并选择匹配路径。<br>例如，如果应用程序侦听的是 <code>/tea</code>，那么 ALB 在匹配对应用程序的请求时，仅选择完全匹配的 <code>/tea</code> 路径。</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>波浪号修饰符使 ALB 在匹配期间将路径作为区分大小写的 regex 路径进行处理。</td>
+ <td>波浪号修饰符使 ALB 在匹配期间将路径作为区分大小写的 regex 路径进行处理。<br>例如，如果应用程序侦听的是 <code>/coffee</code>，那么 ALB 在匹配对应用程序的请求时，可以选择 <code>/ab/coffee</code> 或 <code>/123/coffee</code> 路径，即便并未为应用程序显式设置这些路径也不例外。</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>波浪号后跟星号修饰符使 ALB 在匹配期间将路径作为不区分大小写的 regex 路径进行处理。</td>
+ <td>波浪号后跟星号修饰符使 ALB 在匹配期间将路径作为不区分大小写的 regex 路径进行处理。<br>例如，如果应用程序侦听的是 <code>/coffee</code>，那么 ALB 在匹配对应用程序的请求时，可以选择 <code>/ab/Coffee</code> 或 <code>/123/COFFEE</code> 路径，即便并未为应用程序显式设置这些路径也不例外。</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -397,8 +407,9 @@ tls:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -453,8 +464,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -477,7 +489,7 @@ paths:
 
 <dl>
 <dt>描述</dt>
-<dd>Ingress ALB 域将 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> 上的入局网络流量路由到应用程序。应用程序侦听的是 <code>/coffee</code>，而不是 <code>/beans</code>。要将入局网络流量转发到应用程序，请将 rewrite 注释添加到 Ingress 资源配置文件。rewrite 注释可确保使用 <code>/coffee</code> 路径将 <code>/beans</code> 上的入局网络流量转发到应用程序。当包含多个服务时，请仅使用分号 (;) 来分隔这些服务。</dd>
+<dd>Ingress ALB 域将 <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> 上的入局网络流量路由到应用程序。应用程序侦听的是 <code>/coffee</code>，而不是 <code>/beans</code>。要将入局网络流量转发到应用程序，请将 rewrite 注释添加到 Ingress 资源配置文件。rewrite 注释可确保使用 <code>/coffee</code> 路径将 <code>/beans</code> 上的入局网络流量转发到应用程序。当包含多个服务时，请仅使用分号 (;) 来分隔这些服务。</dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -503,8 +515,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -564,8 +577,9 @@ tls:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -589,17 +603,18 @@ tls:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 输出类似于以下内容：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>打开 ALB 配置映射。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>将 TCP 端口添加到配置映射。将 <code>&lt;port&gt;</code> 替换为要打开的 TCP 端口。
+<b>注</b>：缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
-  public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
   creationTimestamp: 2017-08-22T19:06:51Z
   name: ibm-cloud-provider-ingress-cm
@@ -612,8 +627,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 输出类似于以下内容：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>将 Ingress 配置为通过非标准 TCP 端口访问应用程序。在此引用中使用样本 YAML 文件。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
@@ -657,8 +672,8 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-    ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-    ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
 tls:
  - hosts:
@@ -674,17 +689,18 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>等待连接到后端应用程序的秒数，例如 <code>65s</code>。<strong>注</strong>：连接超时不能超过 75 秒。</td>
+ <td>等待连接到后端应用程序的秒数或分钟数，例如 <code>65s</code> 或 <code>2m</code>。<strong>注</strong>：连接超时不能超过 75 秒。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>等待读取后端应用程序的秒数，例如 <code>65s</code>。<strong>注</strong>：读取超时不能超过 120 秒。</td>
+ <td>读取后端应用程序之前等待的秒数或分钟数，例如 <code>65s</code> 或 <code>2m</code>。
  </tr>
  </tbody></table>
 
@@ -732,8 +748,9 @@ paths:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -791,8 +808,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -846,8 +864,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -930,18 +949,19 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -969,6 +989,8 @@ tls:
  </dd></dl>
 
 <br />
+
+
 
 
 ### 上游保持活动连接数 (upstream-keepalive)
@@ -1009,8 +1031,9 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -1028,6 +1051,8 @@ tls:
 <br />
 
 
+
+
 ## HTTPS 和 TLS/SSL 认证注释
 {: #https-auth}
 
@@ -1042,7 +1067,7 @@ tls:
   <dd>
   使用 {{site.data.keyword.appid_short_notm}} 对 Web 或 API HTTP/HTTPS 请求进行认证。
 
-  <p>如果将请求类型设置为 <code>web</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 Web 请求。如果令牌验证失败，将拒绝 Web 请求。如果请求不包含访问令牌，那么会将请求重定向到 {{site.data.keyword.appid_short_notm}} 登录页面。**注**：要使 {{site.data.keyword.appid_short_notm}} Web 认证能够正常运作，必须在用户的浏览器中启用 cookie。</p>
+  <p>如果将请求类型设置为 <code>web</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 Web 请求。如果令牌验证失败，将拒绝 Web 请求。如果请求不包含访问令牌，那么会将请求重定向到 {{site.data.keyword.appid_short_notm}} 登录页面。<strong>注</strong>：要使 {{site.data.keyword.appid_short_notm}} Web 认证能够正常运作，必须在用户的浏览器中启用 cookie。</p>
 
   <p>如果将请求类型设置为 <code>api</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 API 请求。如果请求不包含访问令牌，将向用户返回 <code>401: Unauthorized</code> 错误消息。</p>
 
@@ -1073,8 +1098,9 @@ tls:
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>了解注释的组成部分</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
     </thead>
     <tbody>
     <tr>
@@ -1148,8 +1174,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -1169,12 +1196,13 @@ paths:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 输出类似于以下内容：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>打开 ALB 配置映射。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>将非缺省 HTTP 和 HTTPS 端口添加到配置映射。将 &lt;port&gt; 替换为要打开的 HTTP 或 HTTPS 端口。
+<b>注</b>：缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1192,8 +1220,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 输出类似于以下内容：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>配置 Ingress 以在将入局网络流量路由到服务时使用非缺省端口。在此引用中使用样本 YAML 文件。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
@@ -1223,6 +1251,7 @@ public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,
 
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1243,7 +1272,10 @@ paths:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1277,19 +1309,20 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -1322,7 +1355,7 @@ tls:
 <dl>
 <dt>描述</dt>
 <dd>
-为 Ingress ALB 配置相互认证。客户机会认证服务器，而服务器也会使用证书来认证客户机。相互认证也称为基于证书的认证或双向认证。
+为 Ingress ALB 配置下游流量的相互认证。外部客户机会认证服务器，而服务器也会使用证书来认证客户机。相互认证也称为基于证书的认证或双向认证。
  </dd>
 
 <dt>先决条件</dt>
@@ -1359,8 +1392,9 @@ tls:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -1393,10 +1427,7 @@ tls:
 <dl>
 <dt>描述</dt>
 <dd>
-加密流至需要 HTTPS 的上游应用程序的流量。
-
-**可选**：可以向此注释添加[单向认证或相互认证](#ssl-services-auth)。
-</dd>
+加密 Ingress 发送到需要 HTTPS 的上游应用程序的流量。如果上游应用程序可以处理 TLS，那么可以选择提供 TLS 私钥中包含的证书。<br></br>**可选**：可以向此注释添加[单向认证或相互认证](#ssl-services-auth)。</dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -1414,18 +1445,19 @@ rules:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -1434,7 +1466,7 @@ rules:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为服务的私钥。此参数是可选的。如果提供了该参数，那么值必须包含应用程序期望从客户机收到的密钥和证书。要创建 TLS 私钥，请参阅[创建私钥](cs_app.html#secrets)。</td>
+  <td>可选：如果要使用 TLS 私钥，并且上游应用程序可以处理 TLS，请将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为该服务的私钥。如果提供了私钥，那么值必须包含应用程序期望从客户机收到的 <code>trusted.crt</code>、<code>client.crt</code> 和 <code>client.key</code>。要创建 TLS 私钥，请先[将证书和密钥转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。然后，请参阅[创建私钥](cs_app.html#secrets)。</td>
   </tr>
   </tbody></table>
 
@@ -1451,10 +1483,6 @@ rules:
 <dt>描述</dt>
 <dd>
 允许向上游应用程序发出 HTTPS 请求，以及使用单向认证或相互认证加密流入上游应用程序的流量，以实现额外的安全性。
-
-
-**注**：开始之前，请[将证书和密钥转换为 base-64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
-
 </dd>
 
 
@@ -1479,19 +1507,20 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -1500,7 +1529,7 @@ tls:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为服务的私钥。此参数是可选的。如果提供了该参数，那么值必须包含应用程序期望从客户机收到的密钥和证书。要创建相互认证私钥，请参阅[创建私钥](cs_app.html#secrets)。</td>
+  <td>将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为服务的相互认证私钥。值必须包含应用程序期望从客户机收到的 CA 证书。要创建相互认证私钥，请先[将证书和密钥转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。然后，请参阅[创建私钥](cs_app.html#secrets)。</td>
   </tr>
   </tbody></table>
 
@@ -1545,7 +1574,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
 spec:
 tls:
     - hosts:
@@ -1565,12 +1594,13 @@ tls:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>了解 YAML 文件的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>要允许将流量路由到 Istio 管理的服务，请设置为 <code>True</code>。</td>
     </tr>
     <tr>
@@ -1624,7 +1654,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-    ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
 tls:
  - hosts:
@@ -1638,7 +1668,24 @@ paths:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>了解注释的组成部分</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>要禁用 ALB 上的响应数据缓冲，请设置为 <code>false</code>。</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>将 <code><em>&lt;myservice1&gt;</em></code> 替换为您针对应用程序创建的 Kubernetes 服务的名称。使用分号 (;) 分隔多个服务。此字段是可选的。如果未指定服务名称，那么所有服务都将使用此注释。</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1678,8 +1725,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -1739,8 +1787,9 @@ paths:
 </code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -1797,8 +1846,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+<th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
 </thead>
 <tbody>
 <tr>
@@ -1840,7 +1890,6 @@ paths:
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1852,7 +1901,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
 serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1895,18 +1943,19 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -1962,18 +2011,19 @@ tls:
    - host: mydomain
     http:
       paths:
-       - path: /
+       - path: /service1_path
          backend:
            serviceName: &lt;myservice1&gt;
            servicePort: 8080
-       - path: /myapp
+       - path: /service2_path
          backend:
            serviceName: &lt;myservice2&gt;
            servicePort: 80</code></pre>
 
   <table>
+  <caption>了解注释的组成部分</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
    </thead>
    <tbody>
    <tr>
@@ -2029,15 +2079,14 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>客户机响应主体的最大大小。例如，要将其设置为 200 兆字节，请定义 <code>200m</code>。
-
-  <strong>注</strong>：可以将大小设置为 0 以禁止检查客户机请求主体大小。</td>
+ <td>客户机响应主体的最大大小。例如，要将最大大小设置为 200 兆字节，请定义 <code>200m</code>。<strong>注</strong>：可以将大小设置为 0 以禁止检查客户机请求主体大小。</td>
  </tr>
  </tbody></table>
 
@@ -2081,8 +2130,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>了解注释的组成部分</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+ <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
  </thead>
  <tbody>
  <tr>
@@ -2143,13 +2193,14 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>要基于位置或服务来设置入局请求的全局限制，请使用 `key=location`。要基于头来设置入局请求的全局限制，请使用 `X-USER-ID key==$http_x_user_id`。</td>
+  <td>要基于位置或服务来设置入局请求的全局限制，请使用 `key=location`。要基于头来设置入局请求的全局限制，请使用 `X-USER-ID key=$http_x_user_id`。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2205,8 +2256,9 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>了解注释的组成部分</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
   </thead>
   <tbody>
   <tr>
@@ -2215,7 +2267,7 @@ tls:
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>要基于位置或服务来设置入局请求的全局限制，请使用 `key=location`。要基于头来设置入局请求的全局限制，请使用 `X-USER-ID key==$http_x_user_id`。</td>
+  <td>要基于位置或服务来设置入局请求的全局限制，请使用 `key=location`。要基于头来设置入局请求的全局限制，请使用 `X-USER-ID key=$http_x_user_id`。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2230,3 +2282,6 @@ tls:
   </dl>
 
   <br />
+
+
+

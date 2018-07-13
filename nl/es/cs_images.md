@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Compilación de contenedores a partir de imágenes
@@ -44,7 +46,7 @@ Puede utilizar varios registros con {{site.data.keyword.containershort_notm}} pa
 
 Después de configurar el registro de imágenes, los usuarios del clúster pueden utilizar las imágenes de sus despliegues de apps en el clúster.
 
-
+Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.
 
 <br />
 
@@ -55,16 +57,16 @@ Después de configurar el registro de imágenes, los usuarios del clúster puede
 Puede crear contenedores a partir de imágenes de confianza que están firmadas y almacenadas en {{site.data.keyword.registryshort_notm}}, y evitar despliegues de imágenes vulnerables o que no hayan sido firmadas.
 {:shortdesc}
 
-1.  [Firme imágenes para un contenido de confianza](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Después de establecer la confianza en sus imágenes, puede gestionar el contenido de confianza y los firmantes que pueden extraer las imágenes para su registro. 
-2.  Para imponer una política en la que únicamente se pueden utilizar imágenes firmadas para crear contenedores en su clúster, [añada Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce). 
+1.  [Firme imágenes para un contenido de confianza](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Después de establecer la confianza en sus imágenes, puede gestionar el contenido de confianza y los firmantes que pueden extraer las imágenes para su registro.
+2.  Para imponer una política en la que únicamente se pueden utilizar imágenes firmadas para crear contenedores en su clúster, [añada Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce).
 3.  Despliegue la app.
-    1. [Despliegue en el espacio de nombres de Kubernetes `default`](#namespace). 
-    2. [Despliegue en un espacio de nombres de Kubernetes diferente, o desde una cuenta o región diferente de {{site.data.keyword.Bluemix_notm}}](#other). 
+    1. [Despliegue en el espacio de nombres de Kubernetes `default`](#namespace).
+    2. [Despliegue en un espacio de nombres de Kubernetes diferente, o desde una cuenta o región diferente de {{site.data.keyword.Bluemix_notm}}](#other).
 
 <br />
 
 
-## Despliegue de contenedores desde una imagen de {{site.data.keyword.registryshort_notm}} en el espacio de nombres de Kubernetes `default` 
+## Despliegue de contenedores desde una imagen de {{site.data.keyword.registryshort_notm}} en el espacio de nombres de Kubernetes `default`
 {: #namespace}
 
 Puede desplegar contenedores en su clúster desde una imagen pública proporcionada por IBM o desde una imagen privada almacenada en el espacio de nombres de {{site.data.keyword.registryshort_notm}}.
@@ -74,7 +76,7 @@ Cuando crea un clúster, se crean automáticamente señales y secretos tanto par
 
 Cada señal se debe guardar en `imagePullSecret` de Kubernetes para que resulte accesible para un clúster de Kubernetes cuando se despliegue una app contenerizada. Cuando se crea el clúster, {{site.data.keyword.containershort_notm}} almacena automáticamente las señales para los registros global (imágenes públicas proporcionadas por IBM) y regionales en los secretos de extracción de imágenes de Kubernetes. Los secretos de extracción de imágenes se añaden al espacio de nombres `predeterminado` de Kubernetes, la lista predeterminada de secretos en la `ServiceAccount` de dicho espacio de nombres y el espacio de nombres `kube-system`.
 
-**Nota:** Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Si desea desplegar un contenedor en otros espacios de nombres del clúster, o si desea utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio imagePullSecret para el clúster](#other).
+**Nota:** Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio imagePullSecret para el clúster](#other).
 
 Antes de empezar:
 1. [Configure un espacio de nombres en {{site.data.keyword.registryshort_notm}} en {{site.data.keyword.Bluemix_notm}} Público o {{site.data.keyword.Bluemix_dedicated_notm}} y envíe por push imágenes a este espacio de nombres](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
@@ -127,7 +129,7 @@ Para desplegar un contenedor en el espacio de nombres **default** del clúster, 
 
 
 
-## Creación de un `imagePullSecret` para acceder a {{site.data.keyword.Bluemix_notm}} o registros privados en otros espacios de nombres de Kubernetes, cuentas y regiones de {{site.data.keyword.Bluemix_notm}} 
+## Creación de un `imagePullSecret` para acceder a {{site.data.keyword.Bluemix_notm}} o registros privados en otros espacios de nombres de Kubernetes, cuentas y regiones de {{site.data.keyword.Bluemix_notm}}
 {: #other}
 
 Cree sus propios `imagePullSecret` para desplegar contenedores para otros espacios de nombres de Kubernetes, utilice imágenes almacenadas en otras cuentas o regiones de {{site.data.keyword.Bluemix_notm}}, utilice imágenes almacenadas en {{site.data.keyword.Bluemix_dedicated_notm}} o utilice imágenes almacenadas en registros privados externos.
@@ -143,13 +145,13 @@ Antes de empezar:
 3.  [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure).
 
 <br/>
-Al crear su propio imagePullSecret puede elegir entre las siguientes opciones: 
+Al crear su propio imagePullSecret puede elegir entre las siguientes opciones:
 - [Copiar el imagePullSecret desde el espacio de nombres predeterminado a otros espacios de nombres en su clúster](#copy_imagePullSecret).
 - [Crear un imagePullSecret para acceder a imágenes en otras cuentas y regiones de {{site.data.keyword.Bluemix_notm}}](#other_regions_accounts).
 - [Crear un imagePullSecret para acceder a imágenes en registros privados externos](#private_images).
 
 <br/>
-Si ya creó un imagePullSecret en su espacio de nombres que desea utilizar en su despliegue, consulte [Despliegue de contenedores utilizando el imagePullSecret creado](#use_imagePullSecret). 
+Si ya creó un imagePullSecret en su espacio de nombres que desea utilizar en su despliegue, consulte [Despliegue de contenedores utilizando el imagePullSecret creado](#use_imagePullSecret).
 
 ### Copia del imagePullSecret desde el espacio de nombres predeterminado a otros espacios de nombres en el clúster
 {: #copy_imagePullSecret}
@@ -174,15 +176,20 @@ Puede copiar el imagePullSecret que se crea automáticamente para el espacio de 
    ```
    {: screen}
 
-2. Opcional: Cree un espacio de nombres en el clúster. 
+2. Opcional: Cree un espacio de nombres en el clúster.
    ```
    kubectl create namespace <namespace_name>
    ```
    {: pre}
 
-3. Copie imagePullSecret desde el espacio de nombres `default` en el espacio de nombres que elija. El nuevo imagePullSecret se denominará `bluemix-<namespace_name>-secret-regional`.
+3. Copie imagePullSecrets desde el espacio de nombres `default` en el espacio de nombres que elija. El nuevo imagePullSecrets se denomina `bluemix-<namespace_name>-secret-regional` y `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+   ```
+   {: pre}
+   
+   ```
+   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
 
@@ -192,13 +199,13 @@ Puede copiar el imagePullSecret que se crea automáticamente para el espacio de 
     ```
     {: pre}
 
-5. [Despliegue un contenedor utilizando el imagePullSecret](#use_imagePullSecret) en su espacio de nombres. 
+5. [Despliegue un contenedor utilizando el imagePullSecret](#use_imagePullSecret) en su espacio de nombres.
 
 
 ### Creación de un imagePullSecret para acceder a imágenes en otras cuentas y regiones de {{site.data.keyword.Bluemix_notm}}
 {: #other_regions_accounts}
 
-Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Bluemix_notm}}, debe crear una señal de registro y guardar sus credenciales en su propio imagePullSecret.
+Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Bluemix_notm}}, debe crear una señal de registro y guardar sus credenciales en un imagePullSecret.
 {: shortdesc}
 
 1.  Si no tiene una señal, [cree una señal para el registro al que desea acceder.](/docs/services/Registry/registry_tokens.html#registry_tokens_create)
@@ -227,6 +234,7 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
     {: pre}
 
     <table>
+    <caption>Descripción de los componentes de este mandato</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de los componentes de este mandato</th>
     </thead>
@@ -253,23 +261,23 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obligatorio. Si tiene una, especifique la dirección de correo electrónico de Docker. Si no tiene una, especifique una dirección de correo electrónico ficticia, como por ejemplo a@b.c. Este correo electrónico es obligatorio para crear un secreto de Kubernetes, pero no se utiliza después de la creación.</td>
+    <td>Obligatorio. Si tiene una, especifique la dirección de correo electrónico de Docker. Si no tiene, especifique una dirección de correo electrónico ficticia, como por ejemplo a@b.c. Este correo electrónico es obligatorio para crear un secreto de Kubernetes, pero no se utiliza después de la creación.</td>
     </tr>
     </tbody></table>
 
-6.  Verifique que el secreto se haya creado correctamente. Sustituya <em>&lt;kubernetes_namespace&gt;</em> por el nombre del espacio de nombres en el que ha creado imagePullSecret.
+6.  Verifique que el secreto se haya creado correctamente. Sustituya <em>&lt;kubernetes_namespace&gt;</em> por el espacio de nombres en el que ha creado imagePullSecret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-7.  [Despliegue un contenedor utilizando el imagePullSecret](#use_imagePullSecret) en su espacio de nombres. 
+7.  [Despliegue un contenedor utilizando el imagePullSecret](#use_imagePullSecret) en su espacio de nombres.
 
 ### Acceso a imágenes almacenadas en otros registros privados
 {: #private_images}
 
-Si ya tiene un registro privado que utilizar, debe almacenar las credenciales del registro en un imagePullSecret de Kubernetes y hacer referencia a dicho secreto en el archivo de configuración.
+Si ya tiene un registro privado, debe almacenar las credenciales del registro en un imagePullSecret de Kubernetes y hacer referencia a dicho secreto en su archivo de configuración.
 {:shortdesc}
 
 Antes de empezar:
@@ -287,6 +295,7 @@ Para crear un imagePullSecret:
     {: pre}
 
     <table>
+    <caption>Descripción de los componentes de este mandato</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de los componentes de este mandato</th>
     </thead>
@@ -332,22 +341,22 @@ Para crear un imagePullSecret:
 Puede definir un imagePullSecret en su despliegue de pod o almacenar el imagePullSecret en su cuenta de servicio de Kubernetes para que esté disponible para todos los despliegues que no especifican una cuenta de servicio.
 {: shortdesc}
 
-Seleccione una de las opciones siguientes: 
-* [Hacer referencia al imagePullSecret en su despliegue de pod](#pod_imagePullSecret): Utilice esta opción si de forma predeterminada no desea otorgar acceso a su registro a todos los pods en su espacio de nombres. 
-* [Almacenar el imagePullSecret en la cuenta de servicio de Kubernetes](#store_imagePullSecret): Utilice esta opción para otorgar acceso a las imágenes en su registro para despliegues en los espacios de nombres de Kubernetes seleccionados. 
+Seleccione una de las opciones siguientes:
+* [Hacer referencia al imagePullSecret en su despliegue de pod](#pod_imagePullSecret): Utilice esta opción si de forma predeterminada no desea otorgar acceso a su registro a todos los pods en su espacio de nombres.
+* [Almacenar el imagePullSecret en la cuenta de servicio de Kubernetes](#store_imagePullSecret): Utilice esta opción para otorgar acceso a las imágenes en su registro para despliegues en los espacios de nombres de Kubernetes seleccionados.
 
 Antes de empezar:
-* [Cree un imagePullSecret](#other) para acceder a imágenes en otros registros, espacios de nombres de Kubernetes, cuentas o regiones de {{site.data.keyword.Bluemix_notm}}. 
+* [Cree un imagePullSecret](#other) para acceder a imágenes en otros registros, espacios de nombres de Kubernetes, cuentas o regiones de {{site.data.keyword.Bluemix_notm}}.
 * [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure).
 
 ### Cómo hacer referencia al `imagePullSecret` en su despliegue de pod
 {: #pod_imagePullSecret}
 
-Cuando haga referencia al imagePullSecret en un despliegue de pod, solo es válido para este pod y no se puede compartir con otros pods en el espacio de nombres.
+Cuando haga referencia al imagePullSecret en un despliegue de pod, el imagePullSecret solo es válido para este pod y no se puede compartir con otros pods en el espacio de nombres.
 {:shortdesc}
 
 1.  Cree un archivo de configuración de pod denominado `mypod.yaml`.
-2.  Defina el pod y el imagePullSecret para acceder al {{site.data.keyword.registrylong_notm}} privado. 
+2.  Defina el pod y el imagePullSecret para acceder al {{site.data.keyword.registrylong_notm}} privado.
 
     Para acceder a una imagen privada:
     ```
@@ -364,7 +373,7 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, solo es váli
     ```
     {: codeblock}
 
-    Para acceder a una imagen pública de {{site.data.keyword.Bluemix_notm}}: 
+    Para acceder a una imagen pública de {{site.data.keyword.Bluemix_notm}}:
     ```
     apiVersion: v1
     kind: Pod
@@ -380,13 +389,14 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, solo es váli
     {: codeblock}
 
     <table>
+    <caption>Visión general de los componentes del archivo YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
     </thead>
     <tbody>
     <tr>
     <td><code><em>&lt;container_name&gt;</em></code></td>
-    <td>El nombre del contenedor que desea desplegar en el clúster.</td>
+    <td>El nombre del contenedor para desplegar en el clúster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
@@ -413,30 +423,30 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, solo es váli
     ```
     {: pre}
 
-### Almacenamiento del imagePullSecret en la cuenta de servicio de Kubernetes para el espacio de nombres seleccionado 
+### Almacenamiento del imagePullSecret en la cuenta de servicio de Kubernetes para el espacio de nombres seleccionado
 {:#store_imagePullSecret}
 
 Cada espacio de nombres tiene una cuenta de servicio que se denomina `default`. Puede añadir el imagePullSecret a esta cuenta de servicio para otorgar acceso a las imágenes en el registro. Los despliegues que automáticamente no especifican una cuenta de servicio utiliza la cuenta de servicio `default` para este espacio de nombres.
 {:shortdesc}
 
-1. Compruebe si ya existe un imagePullSecret para la cuenta de servicio predeterminada. 
+1. Compruebe si ya existe un imagePullSecret para la cuenta de servicio predeterminada.
    ```
    kubectl describe serviceaccount default -n <namespace_name>
    ```
    {: pre}
-   No existe un imagePullSecret cuando se visualiza `<none>` en la entrada de **Secretos de extracción de imagen**.   
-2. Añada el imagePullSecret a su cuenta de servicio predeterminada. 
-   - **Para añadir el imagePullSecret cuando no se ha definido un imagePullSecret: **
+   Cuando `<none>` se visualiza en la entrada **Image pull secrets**, no existe imagePullSecret.  
+2. Añada el imagePullSecret a su cuenta de servicio predeterminada.
+   - **Para añadir el imagePullSecret cuando no se ha definido un imagePullSecret:**
        ```
        kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<namespace_name>-secret-regional"}]}'
        ```
        {: pre}
-   - **Para añadir el imagePullSecret cuando ya se ha definido un imagePullSecret: **
+   - **Para añadir el imagePullSecret cuando ya se ha definido un imagePullSecret:**
        ```
        kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"bluemix-<namespace_name>-secret-regional"}}]'
        ```
        {: pre}
-3. Verifique que su imagePullSecret se añadió a la cuenta de servicio predeterminada. 
+3. Verifique que su imagePullSecret se añadió a la cuenta de servicio predeterminada.
    ```
    kubectl describe serviceaccount default -n <namespace_name>
    ```
@@ -455,7 +465,7 @@ Cada espacio de nombres tiene una cuenta de servicio que se denomina `default`. 
    ```
    {: pre}
 
-4. Despliegue un contenedor desde una imagen en el registro. 
+4. Despliegue un contenedor desde una imagen en el registro.
    ```
    apiVersion: v1
    kind: Pod
@@ -468,7 +478,7 @@ Cada espacio de nombres tiene una cuenta de servicio que se denomina `default`. 
    ```
    {: codeblock}
 
-5. Cree el despliegue en el clúster.
+5. Crear el despliegue en el clúster.
    ```
    kubectl apply -f mypod.yaml
    ```

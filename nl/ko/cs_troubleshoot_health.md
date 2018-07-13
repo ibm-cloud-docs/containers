@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # 로깅 및 모니터링 문제점 해결
 {: #cs_troubleshoot_health}
 
@@ -32,12 +33,13 @@ lastupdated: "2018-4-20"
 {: #cs_no_logs}
 
 {: tsSymptoms}
-Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다. 
+Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
 
 {: tsResolve}
-클러스터 로그가 표시되지 않는 이유와 해당 문제점 해결 단계를 검토하십시오. 
+클러스터 로그가 표시되지 않는 이유와 해당 문제점 해결 단계를 검토하십시오.
 
 <table>
+<caption>표시되지 않는 로그 문제점 해결</caption>
   <col width="40%">
   <col width="60%">
   <thead>
@@ -49,28 +51,31 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
  <tbody>
   <tr>
     <td>로깅 구성이 설정되지 않았습니다.</td>
-    <td>로그가 전송되도록 하려면 로깅 구성을 작성해야 합니다. 작성하려면 <a href="cs_health.html#logging">클러스터 로깅 구성</a>을 참조하십시오. </td>
+    <td>로그가 전송되도록 하려면 로깅 구성을 작성해야 합니다. 작성하려면 <a href="cs_health.html#logging">클러스터 로깅 구성</a>을 참조하십시오.</td>
   </tr>
   <tr>
     <td>클러스터가 <code>Normal</code> 상태가 아닙니다.</td>
     <td>클러스터의 상태를 확인하려면 <a href="cs_troubleshoot.html#debug_clusters">클러스터 디버깅</a>을 참조하십시오.</td>
   </tr>
   <tr>
-    <td>로그 스토리지 할당량에 도달했습니다.</td>
+    <td>로그 스토리지 할당량이 충족되었습니다.</td>
     <td>로그 스토리지 한계를 늘리려면 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}} 문서</a>를 참조하십시오.</td>
   </tr>
   <tr>
     <td>클러스터 작성시 영역을 지정한 경우, 계정 소유자에게 해당 영역에 대한 관리자, 개발자 또는 감사자 권한이 없습니다.</td>
-      <td>계정 소유자의 액세스 권한을 변경하려면 다음을 수행하십시오.<ol><li>클러스터의 계정 소유자를 찾으려면 <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li><li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containershort_notm}} 액세스 권한을 부여하려면 <a href="cs_users.html#managing">클러스터 액세스 관리</a>를 참조하십시오.</li><li>권한이 변경된 후 로깅 토큰을 새로 고치려면 <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li></ol></td>
+      <td>계정 소유자의 액세스 권한을 변경하려면 다음을 수행하십시오.
+      <ol><li>클러스터의 계정 소유자를 찾으려면 <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li>
+      <li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containershort_notm}} 액세스 권한을 부여하려면 <a href="cs_users.html">클러스터 액세스 관리</a>를 참조하십시오.</li>
+      <li>권한이 변경된 후 로깅 토큰을 새로 고치려면 <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li></ol></td>
     </tr>
     <tr>
-      <td>애플리케이션 로깅 구성의 앱 경로에 symlink가 포함되어 있습니다. </td>
-      <td><p>로그를 전송하려면 로깅 구성에 절대 경로를 사용해야 하며, 그렇지 않으면 로그를 읽을 수 없습니다. 경로가 작업자 노드에 마운트되어 있는 경우에는 symlink가 작성되었을 수 있습니다. </p> <p>예: 지정된 경로가 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>이지만 로그가 실제로는 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>로 이동하는 경우에는 이 로그를 읽을 수 없습니다. </td>
+      <td>애플리케이션 로깅 구성의 앱 경로에 symlink가 포함되어 있습니다.</td>
+      <td><p>로그를 전송하려면 로깅 구성에 절대 경로를 사용해야 하며, 그렇지 않으면 로그를 읽을 수 없습니다. 경로가 작업자 노드에 마운트되어 있는 경우에는 symlink가 작성되었을 수 있습니다.</p> <p>예: 지정된 경로가 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>이지만 로그가 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>로 이동하는 경우에는 이 로그를 읽을 수 없습니다. </p></td>
     </tr>
   </tbody>
 </table>
 
-문제점 해결 중에 변경한 사항을 테스트하려는 경우에는 여러 로그 이벤트를 생성하는 샘플 팟(Pod) *Noisy*를 클러스터의 작업자 노드에 배치할 수 있습니다. 
+문제점 해결 중에 변경한 사항을 테스트하려는 경우에는 여러 로그 이벤트를 생성하는 샘플 팟(Pod) *Noisy*를 클러스터의 작업자 노드에 배치할 수 있습니다.
 
   1. 로그 생성을 시작할 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
@@ -134,8 +139,9 @@ Kubernetes 대시보드에 액세스할 때 사용률 그래프는 표시되지 
 {: shortdesc}
 
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")를 참조](https://developer.ibm.com/bluemix/support/#status)하십시오.
--   [{{site.data.keyword.containershort_notm}} Slack에 질문을 게시하십시오. ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)
-    {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
+-   [{{site.data.keyword.containershort_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
+
+{{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
 
@@ -143,9 +149,8 @@ Kubernetes 대시보드에 액세스할 때 사용률 그래프는 표시되지 
     -   시작하기 지시사항과 서비스에 대한 질문은 [IBM developerWorks dW 응답![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
 
--   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기에 대한 정보나 지원 레벨 및 티켓 심각도에 대한 정보는 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
+-   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 
-{:tip}
-문제를 보고할 때 클러스터 ID를 포함하십시오. 클러스터 ID를 가져오려면 `bx cs clusters`를 실행하십시오.
-
+{: tip}
+문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `bx cs clusters`를 실행하십시오.
 

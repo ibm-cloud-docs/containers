@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Création d'un jeton {{site.data.keyword.registryshort_notm}} pour un registre d'images {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -66,7 +69,7 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
     ```
     {: pre}
 
-    Vous pouvez utiliser cette valeur confidentielle pour travailler dans IBM {{site.data.keyword.Bluemix_notm}} Container Service.
+    Vous pouvez utiliser cette valeur confidentielle pour travailler dans {{site.data.keyword.containerlong}}.
 
 6.  Créez la valeur confidentielle Kubernetes pour stocker votre information de jeton.
 
@@ -76,7 +79,7 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
     {: pre}
 
     <table>
-    <caption>Tableau 1. Description des composantes de cette commande</caption>
+    <caption>Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -109,7 +112,7 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
 
 7.  Créez un pod référençant l'élément imagePullSecret.
 
-    1.  Ouvrez l'éditeur de votre choix et créez un script de configuration de pod nommé, par exemple, mypod.yaml.
+    1.  Ouvrez l'éditeur de texte de votre choix et créez un script de configuration de pod nommé, par exemple, mypod.yaml.
     2.  Définissez le pod et la valeur imagePullSecret que vous désirez utiliser pour accéder au registre. Pour utiliser une image privée d'un espace de nom :
 
         ```
@@ -120,14 +123,14 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>Tableau 2. Description des composants du fichier YAML</caption>
+        <caption>Description des composants du fichier YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
         </thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # サービスの統合
 {: #integrations}
 
@@ -25,6 +27,7 @@ lastupdated: "2018-4-20"
 
 ## アプリケーション・サービス
 <table summary="アクセシビリティーについての要約">
+<caption>アプリケーション・サービス</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -46,6 +49,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## DevOps サービス
 <table summary="アクセシビリティーについての要約">
+<caption>DevOps サービス</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -78,6 +82,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## サービスのロギングとモニタリング
 <table summary="アクセシビリティーについての要約">
+<caption>サービスのロギングとモニタリング</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -103,18 +108,18 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は、アプリを自動的に検出してマップする GUI を使用して、インフラストラクチャーとアプリのパフォーマンス・モニターを提供します。 Istana はアプリに対するすべての要求をキャプチャーし、問題のトラブルシューティングと根本原因分析を行って、問題の再発を防ぎます。 詳しくは、<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} での Istana のデプロイ <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に関するブログ投稿を参照してください。</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は、アプリを自動的に検出してマップする GUI を使用して、インフラストラクチャーとアプリのパフォーマンス・モニターを提供します。 Istana はアプリに対するすべての要求をキャプチャーするので、その情報を使用してトラブルシューティングと根本原因分析を行い、問題の再発を防げるようになります。詳しくは、<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} での Istana のデプロイ <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に関するブログ投稿を参照してください。</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus は、特に Kubernetes のために設計されたモニタリング、ロギング、およびアラートのためのオープン・ソースのツールで、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、およびデプロイメントの正常性に関する詳細情報を取得するために使用されます。 クラスター内で実行中のすべてのコンテナーの CPU、メモリー、I/O、およびネットワークのアクティビティーが収集されて、クラスターのパフォーマンスとワークロードをモニターするためにカスタム・クエリーやアラートで使用できます。
+<td>Prometheus は、特に Kubernetes のために設計された、モニタリング、ロギング、アラートのためのオープン・ソース・ツールです。Prometheus は、Kubernetes のロギング情報に基づいて、クラスター、ワーカー・ノード、デプロイメントの正常性に関する詳細情報を取得します。クラスターで実行されているコンテナーごとに、CPU、メモリー、I/O、ネットワーク・アクティビティーの情報が収集されます。収集されたデータをカスタム・クエリーやアラートで使用して、クラスター内のパフォーマンスとワークロードをモニターできます。
 
-<p>Prometheus を使用するには、<a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS の説明 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に従います。</p>
+<p>Prometheus を使用する場合は、<a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS の説明 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に従ってください。</p>
 </td>
 </tr>
 <tr>
 <td>Sematext</td>
-<td><a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、コンテナー化アプリケーションのメトリックとログを表示します。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、コンテナー化アプリケーションのメトリックとログを表示します。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -134,6 +139,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## セキュリティー・サービス
 <table summary="アクセシビリティーについての要約">
+<caption>セキュリティー・サービス</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -155,7 +161,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>保護された独自の Docker イメージ・リポジトリーをセットアップします。そこでイメージを安全に保管し、クラスター・ユーザー間で共有することができます。詳しくは、<a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td>保護された独自の Docker イメージ・リポジトリーをセットアップします。そこでイメージを安全に保管し、クラスター・ユーザー間で共有することができます。 詳しくは、<a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -174,6 +180,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## ストレージ・サービス
 <table summary="アクセシビリティーについての要約">
+<caption>ストレージ・サービス</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -182,16 +189,20 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </thead>
 <tbody>
 <tr>
+  <td>Heptio Ark</td>
+  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスター・リソースと永続ボリュームのバックアップとリストアを実行できます。詳しくは、Heptio Ark の <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+</tr>
+<tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。[ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。このサービスに関する一般情報については、<a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。 このサービスに関する一般情報については、<a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}} は、データを JSON 形式の文書として保管する文書指向の DataBase as a Service (DBaaS) です。このサービスは、スケーラビリティー、高可用性、耐久性を実現するように設計されています。詳しくは、<a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} は、データを JSON 形式の文書として保管する文書指向の DataBase as a Service (DBaaS) です。 このサービスは、スケーラビリティー、高可用性、耐久性を実現するように設計されています。 詳しくは、<a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}} は、高可用性と冗長性、自動およびオンデマンドのノンストップ・バックアップ、モニター・ツール、アラート・システムへの統合、パフォーマンス分析ビューなどを提供します。詳しくは、<a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+    <td>{{site.data.keyword.composeForMongoDB}} は、高可用性と冗長性、自動およびオンデマンドのノンストップ・バックアップ、モニター・ツール、アラート・システムへの統合、パフォーマンス分析ビューなどを提供します。 詳しくは、<a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
   </tr>
 </tbody>
 </table>
@@ -232,7 +243,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
     CLI 出力例:
 
     ```
-    name                      service           plan    bound apps   last operation   
+    name                      service           plan    bound apps   last operation
     <service_instance_name>   <service_name>    spark                create succeeded
     ```
     {: screen}
@@ -246,7 +257,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
         ```
         {: pre}
 
-    -   クラスターに新しい名前空間を作成します。
+    -   クラスターに名前空間を作成します。
 
         ```
         kubectl create namespace <namespace_name>
@@ -263,10 +274,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
     サービスがクラスターに正常に追加されると、サービス・インスタンスの資格情報を保持するクラスター・シークレットが作成されます。 CLI 出力例:
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+    bx cs cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mynamespace
+    Namespace:	mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
@@ -278,11 +289,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
     ```
     {: pre}
 
-
-クラスターにデプロイされたポッドでサービスを使用するために、クラスター・ユーザーは、この [Kubernetes シークレットをシークレット・ボリュームとしてポッドにマウントすることで](cs_storage.html#app_volume_mount)、{{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報にアクセスできます。
-
-
-
+クラスター・ユーザーは、クラスターにデプロイされたポッドでサービスを使用するために、サービス資格情報にアクセスする必要があります。ユーザーは、この [Kubernetes シークレットをシークレット・ボリュームとしてポッドにマウントする](#adding_app)ことで、{{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報にアクセスできます。
 
 <br />
 
@@ -336,9 +343,9 @@ Cloud Foundry サービスは、クラスターとのバインディングをサ
 暗号化した Kubernetes シークレットを使用して、{{site.data.keyword.Bluemix_notm}} サービスの詳細情報や資格情報を保管し、サービスとクラスターの間のセキュアな通信を確保します。
 {:shortdesc}
 
-Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。 機密情報を環境変数で公開したり、Dockerfile に直接書き込んだりする代わりに、クラスター・ユーザーはシークレットをポッドにマウントできます。 それにより、それらのシークレットに、ポッド内で実行中のコンテナーからアクセスできます。
+Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。 機密情報を環境変数として公開したり、Dockerfile に直接書き込んだりする代わりに、シークレットをポッドにマウントできます。それにより、それらのシークレットに、ポッド内で実行中のコンテナーからアクセスできます。
 
-シークレット・ボリュームをポッドにマウントすると、binding という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。そのファイルに、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするのに必要なすべての情報や資格情報が格納されます。
+シークレット・ボリュームをポッドにマウントすると、`binding` という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。`binding` ファイルに、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするために必要なすべての情報と資格情報が格納されます。
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。 アプリで使用する {{site.data.keyword.Bluemix_notm}} サービスが、クラスター管理者によって[クラスターに追加されていること](cs_integrations.html#adding_cluster)を確認してください。
 
@@ -352,8 +359,8 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
     出力例:
 
     ```
-    NAME                                    TYPE                                  DATA      AGE
-    binding-<service_instance_name>         Opaque                                1         3m
+    NAME                              TYPE            DATA      AGE
+    binding-<service_instance_name>   Opaque          1         3m
 
     ```
     {: screen}
@@ -397,6 +404,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
     {: codeblock}
 
     <table>
+    <caption>YAML ファイルの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
     </thead>
@@ -462,7 +470,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 
     
 
-9.  アプリを実装するときには、マウント・ディレクトリーで **binding** という名前のシークレット・ファイルを見つけ、その JSON コンテンツを解析して、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするための URL とサービス資格情報を判別するようにアプリを構成します。
+9.  マウント・ディレクトリーで `binding` シークレット・ファイルを見つけ、その JSON コンテンツを解析して、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするための URL とサービス資格情報を判別するという一連の操作を行うようにアプリを構成します。
 
 {{site.data.keyword.Bluemix_notm}} サービスの詳細情報や資格情報にアクセスできるようになりました。 {{site.data.keyword.Bluemix_notm}} サービスを利用するために、マウント・ディレクトリーでサービスのシークレット・ファイルを見つけ、JSON コンテンツを解析してサービスの詳細情報を判別できるようにアプリを構成してください。
 
@@ -625,7 +633,7 @@ Weave Scope をクラスターで使用するには、以下のようにしま�
     ```
     {: screen}
 
-4.  ポート転送コマンドを実行して、コンピューター上でサービスを開始します。 これで、クラスターでの Weave Scope の構成は完了です。次回 Weave Scope にアクセスするときは、以下のポート転送コマンドを実行するだけでよく、上記の構成ステップを再度実行する必要はありません。
+4.  ポート転送コマンドを実行して、コンピューター上でサービスを開きます。次回 Weave Scope にアクセスする時は、上記の構成ステップを再度実行する必要はなく、次のポート転送コマンドを実行することができます。
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
@@ -636,7 +644,7 @@ Weave Scope をクラスターで使用するには、以下のようにしま�
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -649,5 +657,4 @@ Weave Scope をクラスターで使用するには、以下のようにしま�
 [Weave Scope の機能についての詳細 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
-
 

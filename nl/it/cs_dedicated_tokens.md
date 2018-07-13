@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Creazione di un token {{site.data.keyword.registryshort_notm}} per un registro di immagini di {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -67,7 +70,7 @@ variabile.
     ```
     {: pre}
 
-    Puoi utilizzare questo segreto per lavorare con il servizio IBM {{site.data.keyword.Bluemix_notm}} Container.
+    Puoi utilizzare questo segreto per lavorare con {{site.data.keyword.containerlong}}.
 
 6.  Crea il segreto Kubernetes per memorizzare le informazioni sul token.
 
@@ -77,7 +80,7 @@ variabile.
     {: pre}
 
     <table>
-    <caption>Tabella 1. Descrizione dei componenti di questo comando</caption>
+    <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
@@ -110,7 +113,7 @@ variabile.
 
 7.  Crea un a pod che fa riferimento all'imagePullSecret.
 
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del pod denominato mypod.yaml.
+    1.  Apri il tuo editor di testo preferito e crea uno script di configurazione del pod denominato mypod.yaml. 
     2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al registro. Per utilizzare un'immagine privata da uno spazio dei nomi:
 
         ```
@@ -121,14 +124,14 @@ variabile.
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>Tabella 2.Descrizione dei componenti del file YAML</caption>
+        <caption>Descrizione dei componenti del file YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
         </thead>

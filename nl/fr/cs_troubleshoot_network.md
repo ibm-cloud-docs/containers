@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Traitement des incidents liés à la mise en réseau au sein d'un cluster
 {: #cs_troubleshoot_network}
 
@@ -28,11 +29,12 @@ Lorsque vous utilisez {{site.data.keyword.containerlong}}, envisagez l'utilisati
 Si vous rencontrez un problème d'ordre plus général, expérimentez le [débogage de cluster](cs_troubleshoot.html).
 {: tip}
 
+
 ## Impossible de se connecter à une application via un service d'équilibreur de charge
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-Vous avez exposé votre application au public en créant un service d'équilibreur de charge dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique de l'équilibreur de charge, la connexion a échoué ou expiré.
+Vous avez exposé votre application au public en créant un service d'équilibreur de charge dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application en utilisant l'adresse IP publique de l'équilibreur de charge, la connexion a échoué ou expiré.
 
 {: tsCauses}
 Il se peut que le service d'équilibreur de charge ne fonctionne pas correctement pour l'une des raisons suivantes :
@@ -71,7 +73,7 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
     {: pre}
 
     1.  Vérifiez que vous avez défini **LoadBalancer** comme type de service.
-    2.  Assurez-vous que les éléments `<selector_key>` et `<selector_value>` que vous avez utilisés dans la section `spec.selector` du service LoadBalancer sont identiques à la paire clé-valeur que vous avez utilisée dans la section `spec.template.metadata.labels` du fichier YAML de déploiement. Si les libellés ne correspondent pas, la section **Noeuds finaux** de votre service LoadBalancer affiche **<aucun>** et votre application n'est pas accessible sur Internet.
+    2.  Dans la section `spec.selector` du service LoadBalancer, vérifiez que les valeurs de `<selector_key>` et `<selector_value>` sont identiques à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` de votre fichier YAML de déploiement. Si les libellés ne correspondent pas, la section **Endpoints** de votre service LoadBalancer affiche **<none>** et votre application n'est pas accessible sur Internet.
     3.  Vérifiez que vous avez utilisé le **port** sur lequel votre application est en mode écoute.
 
 3.  Vérifiez votre service d'équilibreur de charge et passez en revue la section **Events** à la recherche d'éventuelles erreurs.
@@ -85,7 +87,7 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Pour utiliser le service d'équilibreur de charge, vous devez disposer d'un cluster standard et d'au moins deux noeuds worker.</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Ce message d'erreur indique qu'il ne reste aucune adresse IP publique portable à attribuer à votre service d'équilibreur de charge. Pour savoir comment demander des adresses IP publiques portables pour votre cluster, voir la rubrique <a href="cs_subnets.html#subnets">Ajout de sous-réseaux à des clusters</a>. Dès lors que des adresses IP publiques portables sont disponibles pour le cluster, le service d'équilibreur de charge est automatiquement créé.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Modifiez le script de configuration de votre service d'équilibreur de charge et choisissez l'une des adresses IP publiques portables disponibles ou retirez la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable puisse être allouée automatiquement.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Dans la section **loadBalancerIP** de votre script de configuration, supprimez l'adresse IP existante et ajoutez l'une des adresses IP publiques portables disponibles. Vous pouvez également retirer la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable disponible puisse être allouée automatiquement.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds worker pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds worker, mais que la mise à disposition des noeuds worker ait échoué.</li>
     <ol><li>Affichez la liste des noeuds worker disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>Si au moins deux noeuds worker disponibles sont trouvés, affichez les détails de ces noeuds worker.</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
@@ -95,7 +97,7 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
     1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
 
         ```
-        kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+        kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
@@ -110,7 +112,7 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application Ingress, la connexion a échoué ou expiré.
+Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application en utilisant l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application (ALB) Ingress, la connexion a échoué ou expiré.
 
 {: tsCauses}
 Il se peut qu'Ingress ne fonctionne pas correctement pour les raisons suivantes :
@@ -123,7 +125,7 @@ Il se peut qu'Ingress ne fonctionne pas correctement pour les raisons suivantes 
 {: tsResolve}
 Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre équilibreur de charge d'application Ingress.
+1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre équilibreur de charge ALB.
 
   ```
   bx cs workers <cluster_name_or_ID>
@@ -132,41 +134,41 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 
     Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
 
-2.  Extrayez le sous-domaine et l'adresse IP publique de l'équilibreur de charge d'application Ingress, puis exécutez une commande ping vers chacun d'eux.
+2.  Récupérez le sous-domaine et l'adresse IP publique de l'équilibreur de charge ALB, puis exécutez une commande PING vers chacun d'eux.
 
-    1.  Récupérez le sous-domaine de l'équilibreur de charge d'application.
+    1.  Récupérez le sous-domaine de l'équilibreur de charge ALB.
 
       ```
       bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
-    2.  Exécutez une commande ping vers le sous-domaine de l'équilibreur de charge d'application Ingress.
+    2.  Exécutez une commande ping vers le sous-domaine de l'équilibreur de charge ALB.
 
       ```
-      ping <ingress_controller_subdomain>
-      ```
-      {: pre}
-
-    3.  Identifiez l'adresse IP publique de votre d'équilibreur de charge d'application Ingress.
-
-      ```
-      nslookup <ingress_controller_subdomain>
+      ping <ingress_subdomain>
       ```
       {: pre}
 
-    4.  Exécutez une commande ping vers l'adresse IP publique de l'équilibreur de charge d'application Ingress.
+    3.  Récupérez l'adresse IP publique de votre équilibreur de charge ALB.
 
       ```
-      ping <ingress_controller_IP>
+      nslookup <ingress_subdomain>
       ```
       {: pre}
 
-    Si l'interface CLI renvoie un dépassement du délai d'attente pour l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application Ingress, et que vous avez configuré un pare-feu personnalisé pour protéger vos noeuds worker, vous aurez peut-être besoin d'ouvrir des ports et des groupes réseau supplémentaires dans votre [pare-feu](cs_troubleshoot_clusters.html#cs_firewall).
+    4.  Exécutez une commande PING vers l'adresse IP publique de l'équilibreur de charge ALB.
 
-3.  Si vous utilisez un domaine personnalisé, assurez-vous qu'il est mappé à l'adresse IP publique ou au sous-domaine de l'équilibreur de charge Ingress fourni par IBM avec votre fournisseur DNS (Domain Name Service).
-    1.  Si vous avez utilisé le sous-domaine de l'équilibreur de charge d'application Ingress, vérifiez le nom canonique (enregistrement CNAME).
-    2.  Si vous avez utilisé l'adresse IP publique de l'équilibreur de charge d'application Ingress, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable dans le pointeur (enregistrement PTR).
+      ```
+      ping <ALB_IP>
+      ```
+      {: pre}
+
+    Si l'interface CLI renvoie un dépassement de délai d'attente pour l'adresse IP publique ou le sous-domaine de l'équilibreur de charge ALB, et que vous avez configuré un pare-feu personnalisé pour protéger vos noeuds worker, ouvrez des ports et des groupes réseau supplémentaires dans votre [pare-feu](cs_troubleshoot_clusters.html#cs_firewall).
+
+3.  Si vous utilisez un domaine personnalisé, assurez-vous qu'il est mappé à l'adresse IP publique ou au sous-domaine de l'équilibreur de charge ALB fourni par IBM avec votre fournisseur DNS.
+    1.  Si vous avez utilisé le sous-domaine de l'équilibreur de charge ALB, vérifiez le nom canonique (enregistrement CNAME).
+    2.  Si vous avez utilisé l'adresse IP publique de l'équilibreur de charge ALB, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable dans le pointeur (enregistrement PTR).
 4.  Vérifiez le fichier de configuration de ressource Ingress.
 
     ```
@@ -184,13 +186,13 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
         http:
           paths:
           - path: /
-            backend:
-              serviceName: myservice
-              servicePort: 80
+        backend:
+          serviceName: myservice
+          servicePort: 80
     ```
     {: codeblock}
 
-    1.  Vérifiez que le sous-domaine de l'équilibreur de charge d'application Ingress et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine fournis par IBM, exécutez la commande `bx cs cluster-get <cluster_name_or_ID>`.
+    1.  Vérifiez que le sous-domaine de l'équilibreur de charge ALB et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine fournis par IBM, exécutez la commande `bx cs cluster-get <cluster_name_or_ID>`.
     2.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre contrôleur Ingress. Si votre application est configurée pour être en mode écoute sur le chemin racine, ajoutez **/** comme chemin.
 5.  Vérifiez le déploiement du contrôleur Ingress et recherchez les éventuels messages d'erreur ou d'avertissement.
 
@@ -209,7 +211,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     Rules:
       Host                                             Path  Backends
       ----                                             ----  --------
-      mycluster.us-south.containers.mybluemix.net
+      mycluster.us-south.containers.appdomain.cloud
                                                        /tea      myservice1:80 (<none>)
                                                        /coffee   myservice2:80 (<none>)
     Annotations:
@@ -228,11 +230,11 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     ```
     {: screen}
 
-6.  Vérifiez les journaux de l'équilibreur de charge de votre application.
+6.  Vérifiez les journaux de votre équilibreur de charge ALB.
     1.  Récupérez l'ID des pods Ingress qui sont en cours d'exécution dans votre cluster.
 
       ```
-      kubectl get pods -n kube-system | grep alb1
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
@@ -243,25 +245,24 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
       ```
       {: pre}
 
-    3.  Recherchez les messages d'erreur dans les journaux de l'équilibreur de charge d'application.
+    3.  Recherchez les messages d'erreur dans les journaux de l'équilibreur de charge ALB.
 
 <br />
-
-
 
 
 ## Problèmes de valeur confidentielle de l'équilibreur de charge d'application Ingress
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Après avoir déployé une valeur confidentielle d'équilibreur de charge d'application Ingress dans votre cluster, la zone `Description` n'est pas actualisée avec le nom de valeur confidentielle lorsque vous examinez votre certificat dans {{site.data.keyword.cloudcerts_full_notm}}.
+Une fois que vous avez déployé une valeur confidentielle d'équilibreur de charge ALB Ingress dans votre cluster, la zone `Description` n'est pas actualisée avec le nom de valeur confidentielle lorsque vous affichez votre certificat dans {{site.data.keyword.cloudcerts_full_notm}}.
 
-Lorsque vous listez les informations sur la valeur confidentielle de l'équilibreur de charge, son statut indique `*_failed` (Echec). Par exemple, `create_failed`, `update_failed`, `delete_failed`.
+Lorsque vous listez les informations sur la valeur confidentielle de l'équilibreur de charge ALB, son statut indique `*_failed` (Echec). Par exemple, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équilibreur de charge d'application peut échouer, ainsi que les étapes de résolution correspondantes :
+Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équilibreur de charge ALB peut échouer, ainsi que les étapes de résolution correspondantes :
 
 <table>
+<caption>Traitement des incidents liés aux valeurs confidentielles de l'équilibreur de charge d'application Ingress</caption>
  <thead>
  <th>Motifs</th>
  <th>Procédure de résolution du problème</th>
@@ -269,7 +270,7 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  <tbody>
  <tr>
  <td>Les rôles d'accès requis pour télécharger et mettre à jour des données de certificat ne vous ont pas été attribués.</td>
- <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles **Opérateur** et **Editeur** sur votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus de détails, voir la rubrique sur la <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles **Opérateur** et **Editeur** sur votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus d'informations, voir la rubrique sur la <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>Le CRN de certificat indiqué lors de la création, de la mise à jour ou de la suppression ne relève pas du même compte que le cluster.</td>
@@ -310,7 +311,7 @@ Lorsque vous créez un cluster, 8 sous-réseaux publics et 8 sous-réseaux priv�
 
 Pour afficher le nombre de sous-réseaux d'un VLAN :
 1.  Dans la [console de l'infrastructure IBM Cloud (SoftLayer)](https://control.bluemix.net/), sélectionnez **Réseau** > **Gestion IP** > **VLAN**.
-2.  Cliquez sur le **Numéro de VLAN** du VLAN que vous avez utilisé pour créer votre cluster. Examinez la section **Sous-réseaux** pour voir s'il y a 40 sous-réseaux ou plus.
+2.  Cliquez sur le **Numéro de VLAN** du VLAN que vous avez utilisé pour créer votre cluster. Examinez la section **Sous-réseaux** pour voir s'il existe 40 sous-réseaux ou plus.
 
 {: tsResolve}
 Si vous avez besoin d'un nouveau réseau local virtuel, commandez-le en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
@@ -339,7 +340,7 @@ Le fichier de configuration de votre charte Helm contient des valeurs incorrecte
 {: tsResolve}
 Lorsque vous essayez d'établir une connectivité VPN avec la charte Helm strongSwan, il est fort probable que le statut du VPN ne soit pas `ESTABLISHED` la première fois. Vous pourrez vérifier plusieurs types d'erreurs et modifier votre fichier de configuration en conséquence. Pour identifier et résoudre les incidents liés à la connectivité VPN strongSwan :
 
-1. Comparez les paramètres du noeud final VPN sur site par rapport aux paramètres de votre fichier de configuration. S'ils ne correspondent pas :
+1. Comparez les paramètres du noeud final VPN sur site par rapport aux paramètres de votre fichier de configuration. Si ces paramètres ne correspondent pas :
 
     <ol>
     <li>Supprimez la charte Helm existante.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
@@ -350,8 +351,8 @@ Lorsque vous essayez d'établir une connectivité VPN avec la charte Helm strong
 2. Si le pod VPN est à l'état d'erreur (`ERROR`) ou continue à planter et à redémarrer, cela peut être dû à une validation de paramètres dans la section `ipsec.conf` de la mappe de configuration de la charte.
 
     <ol>
-    <li>Vérifiez les éventuelles erreurs de validation dans les journaux du pod Strongswan.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>S'il y a des erreurs de validation, supprimez la charte Helm existante.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
+    <li>Vérifiez les éventuelles erreurs de validation dans les journaux du pod strongSwan.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
+    <li>S'il y a des erreurs de validation dans les journaux, supprimez la charte Helm existante.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Corrigez les valeurs incorrectes dans le fichier `config.yaml` et sauvegardez le fichier mis à jour.</li>
     <li>Installez la nouvelle charte Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
     </ol>
@@ -360,15 +361,15 @@ Lorsque vous essayez d'établir une connectivité VPN avec la charte Helm strong
 
     <ol>
     <li>Exécutez les tests Helm.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    <li>En cas d'échec d'un test, référez-vous à la rubrique [Description des tests Helm de connectivité VPN](cs_vpn.html#vpn_tests_table) pour obtenir des informations sur chaque test et les causes possibles de leur échec. <b>Remarque</b> : Certains de ces tests ont des conditions requises qui font partie des paramètres facultatifs dans la configuration du VPN. En cas d'échec de certains tests, les erreurs peuvent être acceptables si vous avez indiqué ces paramètres facultatifs.</li>
+    <li>En cas d'échec d'un test, référez-vous à la rubrique [Description des tests Helm de connectivité VPN](cs_vpn.html#vpn_tests_table) pour obtenir des informations sur chaque test et les causes possibles de leur échec. <b>Remarque</b> : certains de ces tests ont des conditions requises qui font partie des paramètres facultatifs dans la configuration du VPN. En cas d'échec de certains tests, les erreurs peuvent être acceptables si vous avez indiqué ces paramètres facultatifs.</li>
     <li>Affichez la sortie d'un test ayant échoué en consultant les journaux du pod de test.<br><pre class="codeblock"><code>kubectl logs -n kube-system <test_program></code></pre></li>
     <li>Supprimez la charte Helm existante.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Corrigez les valeurs incorrectes dans le fichier <code>config.yaml</code> et sauvegardez le fichier mis à jour.</li>
     <li>Installez la nouvelle charte Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    <li>Pour vérifiez vos modifications :<ol><li>Récupérez les pods de test actuels.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Nettoyez les pods du test en cours.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Réexécutez les tests.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
+    <li>Pour vérifier vos modifications :<ol><li>Récupérez les pods de test actuels.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Nettoyez les pods du test en cours.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Réexécutez les tests.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
     </ol></ol>
 
-4. Exécutez l'outil de débogage VPN inclus dans l'image du pod VPN.
+4. Exécutez l'outil de débogage VPN qui est inclus dans l'image du pod VPN.
 
     1. Définissez la variable d'environnement `STRONGSWAN_POD`.
 
@@ -395,20 +396,20 @@ Lorsque vous essayez d'établir une connectivité VPN avec la charte Helm strong
 {: tsSymptoms}
 Vous avez déjà établi une connexion VPN opérationnelle en utilisant le service VPN IPSec strongSwan. Cependant, après avoir ajouté ou supprimé un noeud worker sur votre cluster, vous expérimentez un ou plusieurs symptômes de ce type :
 
-* vous n'obtenez pas le statut VPN `ESTABLISHED`
-* vous ne parvenez pas à accéder aux nouveaux noeuds worker à partir de votre réseau local
-* vous ne pouvez pas accéder au réseau distant à partir des pods qui s'exécutent sur les nouveaux noeuds worker
+* Vous n'obtenez pas le statut VPN `ESTABLISHED`
+* Vous ne parvenez pas à accéder aux nouveaux noeuds worker à partir de votre réseau local
+* Vous ne pouvez pas accéder au réseau distant à partir des pods qui s'exécutent sur les nouveaux noeuds worker
 
 {: tsCauses}
 Si vous avez ajouté un noeud worker :
 
-* le noeud worker a été mis en place sur un nouveau sous-réseau privé qui n'est pas exposé via la connexion VPN avec vos paramètres `localSubnetNAT` ou `local.subnet`
-* les routes VPN ne peuvent pas être ajoutées au noeud worker car celui-ci possède des annotations taint ou des étiquettes qui ne sont pas incluses dans vos paramètres `tolerations` ou `nodeSelector`
-* le pod VPN s'exécute sur le nouveau noeud worker, mais l'adresse IP publique de ce noeud n'est pas autorisée via le pare-feu local
+* Le noeud worker a été mis en place sur un nouveau sous-réseau privé qui n'est pas exposé via la connexion VPN avec vos paramètres `localSubnetNAT` ou `local.subnet`
+* Les routes VPN ne peuvent pas être ajoutées au noeud worker car celui-ci possède des annotations taint ou des étiquettes qui ne sont pas incluses dans vos paramètres `tolerations` ou `nodeSelector`
+* Le pod VPN s'exécute sur le nouveau noeud worker, mais l'adresse IP publique de ce noeud n'est pas autorisée via le pare-feu local
 
 Si vous avez supprimé un noeud worker :
 
-* ce noeud worker constituait le seul noeud sur lequel un pod VPN s'exécutait, en raison des restrictions relatives à certaines annotations taint ou étiquettes dans vos paramètres `tolerations` ou `nodeSelector`
+* Ce noeud worker constituait le seul noeud sur lequel un pod VPN s'exécutait, en raison des restrictions relatives à certaines annotations taint ou étiquettes dans vos paramètres `tolerations` ou `nodeSelector`
 
 {: tsResolve}
 Mettez à jour les valeurs de la charte Helm pour répercuter les modifications du noeud worker :
@@ -427,11 +428,12 @@ Mettez à jour les valeurs de la charte Helm pour répercuter les modifications 
     ```
     {: pre}
 
-3. Vérifiez les paramètres suivants et effectuez les modifications nécessaires pour répercuter les noeuds worker ajoutés ou supprimés selon les besoins.
+3. Vérifiez les paramètres suivants et modifiez les paramètres pour répercuter les noeuds worker ajoutés ou supprimés selon les besoins.
 
     Si vous avez ajouté un noeud worker :
 
     <table>
+    <caption>Paramètres du noeud worker</caption>
      <thead>
      <th>Paramètre</th>
      <th>Description</th>
@@ -443,21 +445,22 @@ Mettez à jour les valeurs de la charte Helm pour répercuter les modifications 
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Si vous aviez déjà limité le pod VPN de sorte à ce qu'il s'exécute sur n'importe quels noeuds worker avec une étiquette spécifique, et que vous souhaitez que des routes VPN soient ajoutées au noeud worker, assurez-vous que le noeud worker ajouté ait cette étiquette.</td>
+     <td>Si vous avez précédemment limité le déploiement du pod VPN aux noeuds worker avec un libellé spécifique, vérifiez que le noeud worker ajouté comporte également ce libellé.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Si le noeud worker ajouté comporte des annotations taint et que vous souhaitez que des routes VPN soient ajoutées à ce noeud, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur tous les noeuds worker avec des annotations taint ou ayant des annotations taint spécifiques.</td>
+     <td>Si le noeud worker ajouté comporte des annotations taint, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur tous les noeuds worker avec des annotations taint ou ayant des annotations taint spécifiques.</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>Le noeud worker ajouté peut être déployé sur un nouveau sous-réseau privé différent des autres sous-réseaux existants sur lesquels résident les autres noeuds worker. Si vos applications sont exposées par les services NodePort or LoadBalancer sur le réseau privé et qu'elles sont sur un nouveau noeud worker que vous avez ajouté, ajoutez le nouveau CIDR du sous-réseau à ce paramètre. **Remarque** : Si vous ajoutez des valeurs au paramètre `local.subnet`, vérifiez les paramètres VPN du sous-réseau local pour voir s'ils doivent également faire l'objet d'une mise à jour.</td>
+     <td>Le noeud worker ajouté peut être déployé sur un nouveau sous-réseau privé différent des sous-réseaux existants sur lesquels résident les autres noeuds worker. Si vos applications sont exposées par les services NodePort or LoadBalancer sur le réseau privé et qu'elles sont sur le noeud worker ajouté, ajoutez le nouveau CIDR du sous-réseau à ce paramètre. **Remarque** : si vous ajoutez des valeurs au paramètre `local.subnet`, vérifiez les paramètres VPN du sous-réseau local pour voir s'ils doivent également faire l'objet d'une mise à jour.</td>
      </tr>
      </tbody></table>
 
     Si vous avez supprimé un noeud worker :
 
     <table>
+    <caption>Paramètres du noeud worker</caption>
      <thead>
      <th>Paramètre</th>
      <th>Description</th>
@@ -465,15 +468,15 @@ Mettez à jour les valeurs de la charte Helm pour répercuter les modifications 
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Si vous utilisez la conversion NAT de sous-réseau pour remapper des adresses IP locales privées spécifiques, supprimez de ce paramètre les adresses IP provenant de l'ancien noeud worker. Si vous utilisez la conversion NAT de sous-réseau pour remapper des sous-réseaux entiers et que vous n'avez aucun noeud worker restant sur un sous-réseau, supprimez le CIDR de sous-réseau de ce paramètre.</td>
+     <td>Si vous utilisez la conversion NAT de sous-réseau pour remapper des adresses IP locales privées spécifiques, supprimez de ce paramètre les adresses IP provenant de l'ancien noeud worker. Si vous utilisez la conversion NAT de sous-réseau pour remapper des sous-réseaux entiers et qu'aucun noeud worker n'est présent sur un sous-réseau, supprimez le CIDR de sous-réseau de ce paramètre.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Si vous avez limité le pod VPN de sorte qu'il s'exécute sur un noeud worker unique et que ce noeud a été supprimé, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur d'autres noeuds worker.</td>
+     <td>Si vous avez limité le pod VPN de sorte pour qu'il s'exécute sur un noeud worker unique et que ce noeud a été supprimé, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur d'autres noeuds worker.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Si le noeud worker que vous avez supprimé n'avait pas d'annotation taint, mais que seuls les noeuds restants ont des annotations taint, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur tous les noeuds worker ayant des annotations taint ou ayant des annotations taint spécifiques.
+     <td>Si le noeud worker que vous avez supprimé n'avait pas d'annotation taint, mais que seuls les noeuds restants ont des annotations taint, modifiez ce paramètre pour autoriser le pod VPN à s'exécuter sur tous les noeuds comportant des annotations taint ou des annotations taint spécifiques.
      </td>
      </tr>
      </tbody></table>
@@ -520,40 +523,51 @@ Mettez à jour les valeurs de la charte Helm pour répercuter les modifications 
 
 
 
-
-## Impossible d'extraire l'URL ETCD pour la configuration d'interface CLI de Calico
+## Récupération impossible des règles réseau Calico
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Lorsque vous extrayez l'URL `<ETCD_URL>` pour [ajouter des règles réseau](cs_network_policy.html#adding_network_policies), vous obtenez le message d'erreur `calico-config not found`.
+Lorsque vous essayez d'afficher les règles réseau Calico dans votre cluster en exécutant la commande `calicoctl get policy`, vous obtenez l'un des résultats imprévisibles ou messages d'erreur suivants :
+- Une liste vide
+- Une liste de règles Calico v2 au lieu de règles v3
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+
+Lorsque vous essayez d'afficher les règles réseau Calico dans votre cluster en exécutant la commande `calicoctl get GlobalNetworkPolicy`, vous obtenez l'un des résultats imprévisibles ou messages d'erreur suivants :
+- Une liste vide
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'v1'`
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+- `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-Votre cluster n'est pas à la [version Kubernetes 1.7](cs_versions.html) ou ultérieure.
+Pour utiliser des règles Calico, quatre facteurs doivent être en phase : la version de votre cluster Kubernetes, la version de l'interface de ligne de commande (CLI) Calico, la syntaxe du fichier de configuration Calico et les commandes d'affichage des règles. Au moins un de ces facteurs n'est pas à la version correcte.
 
 {: tsResolve}
-[Mettez à jour votre cluster](cs_cluster_update.html#master) ou extrayez l'URL `<ETCD_URL>` avec des commandes compatibles avec les versions antérieures de Kubernetes.
+Lorsque la version de votre cluster correspond à [Kubernetes version 1.10 ou ultérieure](cs_versions.html), vous devez utiliser l'interface CLI de Calico v3.1, la syntaxe du fichier de configuration `calicoctl.cfg` v3 et les commandes `calicoctl get GlobalNetworkPolicy` et `calicoctl get NetworkPolicy`.
 
-Pour extraire l'URL `<ETCD_URL>`, Exécutez l'une des commandes suivantes :
+Lorsque la version de votre cluster correspond à [Kubernetes version 1.9 ou antérieure](cs_versions.html), vous devez utiliser l'interface CLI de Calico v1.6.3, la syntaxe du fichier de configuration `calicoctl.cfg` v2 et la commande `calicoctl get policy`.
 
-- Linux et OS X :
+Pour vous assurer que tous les facteurs Calico sont en phase :
 
+1. Affichez la version de votre cluster Kubernetes.
     ```
-    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
-- Windows :
-    <ol>
-    <li> Extrayez la liste des pods dans l'espace de nom kube-system et localisez le pod du contrôleur Calico. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Exemple :</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-    <li> Affichez les détails du pod du contrôleur Calico.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;calico_pod_ID&gt;</code></pre>
-    <li> Localisez la valeur des noeuds finaux ETCD. Exemple : <code>https://169.1.1.1:30001</code>
-    </ol>
+    * Si la version de votre cluster correspond à Kubernetes version 1.10 ou ultérieure :
+        1. [Installez et configurez l'interface CLI de Calico version 3.1.1](cs_network_policy.html#1.10_install). La configuration comprend la mise à jour manuelle du fichier `calicoctl.cfg` pour utiliser la syntaxe de Calico v3.
+        2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Si vous disposez d'un fichier `.yaml` de rège existant ou d'un fichier `.json` avec la syntaxe de Calico v2, vous pouvez le convertir en syntaxe de Calico v3 en utilisant la commande [`calicoctl convert` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+        3. Pour [afficher les règles](cs_network_policy.html#1.10_examine_policies), vérifiez que vous utilisez la commande `calicoctl get GlobalNetworkPolicy` pour les règles globales et `calicoctl get NetworkPolicy --namespace <policy_namespace>` pour les règles limitées à des espaces de nom spécifiques.
 
-Lorsque vous extrayez l'URL `<ETCD_URL>`, continuez avec les étapes mentionnées dans (Ajout de règles réseau)[cs_network_policy.html#adding_network_policies].
+    * Si la version de votre cluster correspond à Kubernetes version 1.9 ou antérieure :
+        1. [Installez et configurez l'interface CLI de Calico version 1.6.3](cs_network_policy.html#1.9_install). Vérifiez que le fichier `calicoctl.cfg` utilise la syntaxe de Calico v2.
+        2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v2 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy). 
+        3. Pour [afficher les règles](cs_network_policy.html#1.9_examine_policies), vérifiez que vous utilisez la commande `calicoctl get policy`.
+
+Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
+{: tip}
 
 <br />
-
-
 
 
 ## Aide et assistance
@@ -563,8 +577,10 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
-    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.{: tip}
+-   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+
+    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
+    {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
 
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
@@ -572,9 +588,8 @@ Vous avez encore des problèmes avec votre cluster ?
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
 pour plus d'informations sur l'utilisation des forums.
 
--   Contactez le support IBM en ouvrant un ticket de demande de service. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
-
 

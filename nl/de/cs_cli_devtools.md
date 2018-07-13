@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # CLI-Referenz zum Verwalten von Clustern
@@ -274,7 +277,7 @@ bx plugin list
 ### bx cs api-key-info CLUSTER
 {: #cs_api_key_info}
 
-Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containershort_notm}}-Region an. 
+Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containershort_notm}}-Region an.
 
 Der IAM-API-Schlüssel (IAM, Identity and Access Management) wird automatisch für eine Region festgelegt, wenn die erste Aktion ausgeführt wird, für die die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie ausgeführt werden muss. Zum Beispiel erstellt einer Ihrer Benutzer mit Administratorberechtigung den ersten Cluster in der Region `Vereinigte Staaten (Süden)`. Dadurch wird der IAM-API-Schlüssel für diesen Benutzer in dem Konto für diese Region gespeichert. Der API-Schlüssel wird verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, z. B. neue Workerknoten oder VLANs.
 
@@ -302,7 +305,7 @@ Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der fü
 ### bx cs api-key-reset
 {: #cs_api_key_reset}
 
-Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containershort_notm}}-Region. 
+Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containershort_notm}}-Region.
 
 Dieser Befehl erfordert die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto. Der IAM-API-Schlüssel ist erforderlich, um Infrastruktur aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen. Einmal gespeichert, wird der API-Schlüssel unabhängig vom Benutzer, der diesen Befehl ausführt, für jede Aktion in einer Region verwendet, die Infrastrukturberechtigungen erfordert. Weitere Informationen dazu, wie IAM-API-Schlüssel funktionieren, finden Sie beim [Befehl `bx cs api-key-info`](#cs_api_key_info).
 
@@ -488,7 +491,7 @@ bx cs messages
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
 
-Laden Sie nach erfolgter Anmeldung Kubernetes-Konfigurationsdaten und -Zertifikate herunter, um eine Verbindung zum Cluster herzustellen und `kubectl`-Befehle auszuführen. Die Dateien werden in `ausgangsverzeichnis_des_benutzers/.bluemix/plugins/container-service/clusters/<clustername>`.
+Laden Sie nach erfolgter Anmeldung Kubernetes-Konfigurationsdaten und -Zertifikate herunter, um eine Verbindung zum Cluster herzustellen und `kubectl`-Befehle auszuführen. Die Dateien werden in `ausgangsverzeichnis_des_benutzers/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 
 **Befehlsoptionen**:
 
@@ -548,7 +551,8 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>Ersetzen Sie <code><em>&lt;clustername&gt;</em></code> durch den Namen Ihres Clusters. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Beachten Sie, dass sich der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne aus dem Clusternamen und der Region zusammensetzt, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt. </td>
+    <td>Ersetzen Sie <code><em>&lt;clustername&gt;</em></code> durch den Namen Ihres Clusters. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne setzt sich aus dem Clusternamen und der Region zusammen, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt.
+</td>
     </tr>
     <tr>
     <td><code><em>standort</em></code></td>
@@ -580,7 +584,8 @@ trusted: <em>true</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn die Version nicht angegeben ist, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen. </td></tr>
+      <td>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn die Version nicht angegeben ist, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen.
+</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Um die Verschlüsselung zu inaktivieren, schließen Sie diese Option ein und legen Sie den Wert auf <code>false</code> fest.</td></tr>
@@ -606,10 +611,12 @@ trusted: <em>true</em>
 <dd>Wählen Sie einen Maschinentyp aus. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die verfügbaren physischen und virtuellen Maschinentypen variieren je nach dem Standort, an dem Sie den Cluster bereitstellen. Weitere Informationen finden Sie in der Dokumentation zum [Befehl](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Dieser Wert ist für Standardcluster erforderlich und steht für kostenlose Cluster nicht zur Verfügung.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Der Name für den Cluster.  Dieser Wert ist erforderlich. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Beachten Sie, dass sich der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne aus dem Clusternamen und der Region zusammensetzt, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt. </dd>
+<dd>Der Name für den Cluster.  Dieser Wert ist erforderlich. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne setzt sich aus dem Clusternamen und der Region zusammen, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt.
+</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn die Version nicht angegeben ist, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen. </dd>
+<dd>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn die Version nicht angegeben ist, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen.
+</dd>
 
 <dt><code>--no-subnet</code></dt>
 <dd>Standardmäßig werden sowohl ein öffentliches als auch ein privates portierbares Teilnetz in dem VLAN erstellt, das dem Cluster zugeordnet ist. Schließen Sie das Flag <code>--no-subnet</code> ein, um zu verhindern, dass Teilnetze für den Cluster erstellt werden. Sie können Teilnetze zu einem späteren Zeitpunkt [erstellen](#cs_cluster_subnet_create) oder zu einem Cluster [hinzufügen](#cs_cluster_subnet_add).</dd>
@@ -622,7 +629,7 @@ trusted: <em>true</em>
 <li>Wenn dieser Standardcluster der erste Standardcluster ist, den Sie an diesem Standort erstellen, schließen Sie dieses Flag nicht ein. Ein privates VLAN wird zusammen mit den Clustern für Sie erstellt.</li>
 <li>Wenn Sie bereits einen Standardcluster an diesem Standort oder ein privates VLAN in IBM Cloud Infrastructure (SoftLayer) erstellt haben, müssen Sie dieses private VLAN angeben.
 
-<p><strong>Hinweis:</strong> {[übereinstimmende_VLANs]}</p></li>
+<p><strong>Hinweis:</strong> Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p></li>
 </ul>
 
 <p>Führen Sie <code>bx cs vlans <em>&lt;standort&gt;</em></code> aus, um herauszufinden, ob Sie bereits über ein privates VLAN für einen bestimmten Standort verfügen, oder um den Namen eines vorhandenen privaten VLANs zu erfahren.</p></dd>
@@ -634,7 +641,7 @@ trusted: <em>true</em>
 <li>Wenn dieser Standardcluster der erste Standardcluster ist, den Sie an diesem Standort erstellen, verwenden Sie dieses Flag nicht. Ein öffentliches VLAN wird zusammen mit dem Cluster für Sie erstellt.</li>
 <li>Wenn Sie bereits einen Standardcluster an diesem Standort oder ein öffentliches VLAN in IBM Cloud Infrastructure (SoftLayer) erstellt haben, müssen Sie dieses öffentliche VLAN angeben.
 
-<p><strong>Hinweis:</strong> {[übereinstimmende_VLANs]}</p></li>
+<p><strong>Hinweis:</strong> Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p></li>
 </ul>
 
 <p>Führen Sie <code>bx cs vlans <em>&lt;standort&gt;</em></code> aus, um herauszufinden, ob Sie bereits über ein öffentliches VLAN für einen bestimmten Standort verfügen, oder um den Namen eines vorhandenen öffentlichen VLANs zu erfahren.</p></dd>
@@ -726,15 +733,15 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
 **Beispielausgabe**:
 
   ```
-  Name:        mein_cluster
+  Name:        my_cluster
   ID:          abc1234567
   State:       normal
   Trust ready: false
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: mein_cluster.us-south.containers.mybluemix.net
-  Ingress secret:    mein_cluster
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
   Owner Email: name@example.com
@@ -780,7 +787,7 @@ Entfernen eines Clusters aus der Organisation.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Aktualisieren Sie den Kubernetes-Master auf die API-Standardversion. Während der Aktualisierung können Sie weder auf den Cluster zugreifen noch eine Änderung am Cluster vornehmen. Workerknoten, Apps und Ressourcen, die vom Benutzer bereitgestellt wurden, werden nicht geändert und weiterhin ausgeführt. 
+Aktualisieren Sie den Kubernetes-Master auf die API-Standardversion. Während der Aktualisierung können Sie weder auf den Cluster zugreifen noch eine Änderung am Cluster vornehmen. Workerknoten, Apps und Ressourcen, die vom Benutzer bereitgestellt wurden, werden nicht geändert und weiterhin ausgeführt.
 
 Möglicherweise müssen Sie Ihre YAML-Dateien für zukünftige Bereitstellungen ändern. Lesen Sie die detaillierten Informationen in diesen [Releaseinformationen](cs_versions.html).
 
@@ -895,7 +902,7 @@ schlägt er fehl, weil die Serviceberechtigungsnachweise nicht gefunden werden k
    <dd>Der Name des Kubernetes-Namensbereichs. Dieser Wert ist erforderlich.</dd>
 
    <dt><code><em>GUID_DER_SERVICEINSTANZ</em></code></dt>
-   <dd>Die ID der {{site.data.keyword.Bluemix_notm}}-Serviceinstanz, die Sie entfernen möchten. Führen Sie `bx cs cluster-services <clustername_oder_-id>` aus, um die ID der Serviceinstanz abzurufen. Dieser Wert ist erforderlich.</dd>
+   <dd>Die ID der {{site.data.keyword.Bluemix_notm}}-Serviceinstanz, die Sie entfernen möchten. Führen Sie `bx cs cluster-services <cluster_name_or_ID>` aus, um die ID der Serviceinstanz abzurufen. Dieser Wert ist erforderlich.</dd>
    </dl>
 
 **Beispiel**:
@@ -1129,7 +1136,7 @@ Stellen Sie für die Lastausgleichsfunktion für Anwendungen (ALB) in einem Clus
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Schließen Sie dieses Flag ein, um das Zertifikat für einen geheimen Schlüssel der Lastausgleichsfunktion für Anwendungen (ALB) in einem Cluster zu aktualisieren. Dieser Wert ist optional.</dd>
+   <dd>Aktualisieren Sie das Zertifikat für einen geheimen Schlüssel der Lastausgleichsfunktion für Anwendungen (ALB) in einem Cluster. Dieser Wert ist optional.</dd>
 
    <dt><code>--secret-name <em>NAME_DES_GEHEIMEN_SCHLÜSSELS</em></code></dt>
    <dd>Der Name des geheimen Schlüssels der Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB). Dieser Wert ist erforderlich.</dd>
@@ -1250,9 +1257,6 @@ Anzeigen einer Liste der geheimen ALB-Schlüssel in einem Cluster.
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB-ID [--enable][--disable][--user-ip BENUTZER-IP]
 {: #cs_alb_configure}
 
@@ -1274,7 +1278,7 @@ Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (ALB)
    <dd>
 
    <ul>
-    <li>Dieser Parameter ist nur für eine private Lastausgleichsfunktion für Anwendungen (ALB) verfügbar.</li>
+    <li>Dieser Parameter ist nur für die Aktivierung einer privaten Lastausgleichsfunktion für Anwendungen (ALB) verfügbar.</li>
     <li>Die private ALB wird mit einer IP-Adresse aus einem von einem Benutzer bereitgestellten privaten Teilnetz implementiert. Wird keine IP-Adresse bereitgestellt, wird die Lastausgleichsfunktion für Anwendungen (ALB) mit einer privaten IP-Adresse aus dem portierbaren, privaten Teilnetz bereitgestellt, die beim Erstellen des Clusters automatisch bereitgestellt wurde.</li>
    </ul>
    </dd>
@@ -1289,13 +1293,6 @@ Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (ALB)
   ```
   {: pre}
 
-  Beispiel für die Inaktivierung einer ALB:
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   Beispiel für die Aktivierung einer ALB mit einer von einem Benutzer bereitgestellten IP-Adresse:
 
   ```
@@ -1303,7 +1300,12 @@ Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (ALB)
   ```
   {: pre}
 
+  Beispiel für die Inaktivierung einer ALB:
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB-ID
 {: #cs_alb_get}
@@ -1446,26 +1448,106 @@ Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Jede
 Sie können Ihre Workerknoten als virtuelle Maschine auf gemeinsam genutzter oder dedizierter Hardware bereitstellen oder als physische Maschine auf Bare-Metal-Systemen.
 
 <dl>
-<dt>Physische Maschinen (Bare-Metal)</dt>
-<dd>Sie können Ihre Workerknoten als physischen Single-Tenant Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird. Mit Bare-Metal haben Sie direkten Zugriff auf die physischen Ressourcen auf der Maschine, wie z. B. Speicher oder CPU. Durch diese Konfiguration wird der Hypervisor der virtuellen Maschine entfernt, der physische Ressourcen zu virtuellen Maschinen zuordnet, die auf dem Host ausgeführt werden. Stattdessen sind alle Ressourcen der Bare-Metal-Maschine ausschließlich dem Worker gewidmet, also müssen Sie sich keine Sorgen machen, dass "lärmende Nachbarn" Ressourcen gemeinsam nutzen oder die Leistung verlangsamen.
-<p><strong>Monatliche Abrechnung</strong>: Die Nutzung von Bare-Metal-Servern ist teurer als die Nutzung virtueller Server. Bare-Metal-Server eignen sich für Hochleistungsanwendungen, die mehr Ressourcen und mehr Hoststeuerung benötigen. Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats belastet. Das Buchen und Stornieren von Bare-Metal-Servern ist ein manueller Prozess in Ihrem IBM Cloud Infrastructure-Konto (SoftLayer). Er kann länger als einen Geschäftstag dauern. </p>
-<p><strong>Option zum Aktivieren von Trusted Compute</strong>: Aktivieren Sie Trusted Compute, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containershort_notm}} mit Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute ist nur auf Clustern mit Kubernetes Version 1.9 oder höher verfügbar, die bestimmte Bare-Metal-Maschinentypen aufweisen. Bei der Ausführung des[ Befehls](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>` können Sie im Feld `Trustable` ablesen, welche Maschinen Trusted Compute unterstützen.</p>
-<p><strong>Bare-Metal-Maschinentypgruppen</strong>: Bare-Metal-Maschinentypen werden in Gruppen mit unterschiedlichen Rechenressourcen bereitgestellt, aus denen Sie auswählen können, um die Anforderungen Ihrer Anwendung zu erfüllen.
-Physische Maschinentypen verfügen über einen größeren lokalen Speicher als virtuelle und einige verfügen zudem über RAID für die Sicherung lokaler Daten. Weitere Informationen zu den unterschiedlichen Typen von Bare-Metal-Produktangeboten finden Sie unter dem [Befehl](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.
-<ul><li>`mb1c.4x32`: Wenn Sie keine Ressourcen benötigen, die viel RAM oder Daten verbrauchen, wählen Sie diesen Typ für eine ausgewogene Konfiguration physischer Maschinenressourcen für Ihre Workerknoten aus. Ausgeglichen mit 4 Kernen, 32 GB Speicher, 1 TB SATA-Primärplatte, 2 TB SATA Sekundärplatte, 10 Gbps Bonded Network.</li>
-<li>`mb1c.16x64`: Wenn Sie keine Ressourcen benötigen, die viel RAM oder Daten verbrauchen, wählen Sie diesen Typ für eine ausgewogene Konfiguration physischer Maschinenressourcen für Ihre Workerknoten aus. Ausgeglichen mit 16 Kernen, 64 GB Speicher, 1 TB SATA-Primärplatte, 1,7 TB SSD-Sekundärplatte, 10 Gbps Bonded Network.</li>
-<li>`mr1c.28x512`: Wählen Sie diesen Typ aus, um den verfügbaren RAM-Speicher für Ihre Workerknoten zu maximieren. RAM-intensiv mit 28 Kernen, 512 GB Speicher, 1 TB SATA-Primärplatte, 1,7 TB SSD-Sekundärplatte, 10Gbps Bonded Network.</li>
-<li>`md1c.16x64.4x4tb`: Wählen Sie diesen Typ aus, wenn Ihre Workerknoten eine bedeutsame Menge lokalen Festplattenspeicherplatz einschließlich RAID für die Sicherung der lokal auf der Maschine gespeicherten Daten benötigen. Die 1 TB-Primärspeicherplatten sind für RAID1 konfiguriert und die 4 TB-Sekundärspeicherplatten sind für RAID10 konfiguriert. Datenintensiv mit 28 Kernen, 512 GB Speicher, 2 x 1 TB RAID1-Primärplatte, 4 x 4 TB SATA-RAID10-Sekundärplatte, 10 Gbps Bonded Network.</li>
-<li>`md1c.28x512.4x4tb`: Wählen Sie diesen Typ aus, wenn Ihre Workerknoten eine bedeutsame Menge lokalen Festplattenspeicherplatz einschließlich RAID für die Sicherung der lokal auf der Maschine gespeicherten Daten benötigen. Die 1 TB-Primärspeicherplatten sind für RAID1 konfiguriert und die 4 TB-Sekundärspeicherplatten sind für RAID10 konfiguriert. Datenintensiv mit 16 Kernen, 64 GB Speicher, 2 x 1 TB RAID1-Primärplatte, 4 x 4 TB SATA-RAID10-Sekundärplatte, 10 Gbps Bonded Network.</li>
-
-</ul></p></dd>
-<dt>Virtuelle Maschinen</dt>
-<dd>Wenn Sie einen virtuellen Standardcluster erstellen, müssen Sie auswählen, ob die zugrunde liegende Hardware von mehreren {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt werden kann (Multi-Tenant-Konfiguration) oder ob Sie die ausschließlich Ihnen vorbehaltene, dedizierte Nutzung vorziehen (Single-Tenant-Konfiguration).
+<dt>Warum sollte ich physische Maschinen (Bare-Metal) verwenden?</dt>
+<dd><p><strong>Mehr Berechnungsressourcen</strong>: Sie können Ihre Workerknoten als physischen Single-Tenant Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird. Mit Bare-Metal haben Sie direkten Zugriff auf die physischen Ressourcen auf der Maschine, wie z. B. Speicher oder CPU. Durch diese Konfiguration wird der Hypervisor der virtuellen Maschine entfernt, der physische Ressourcen zu virtuellen Maschinen zuordnet, die auf dem Host ausgeführt werden. Stattdessen sind alle Ressourcen der Bare-Metal-Maschine ausschließlich dem Worker gewidmet, also müssen Sie sich keine Sorgen machen, dass "lärmende Nachbarn" Ressourcen gemeinsam nutzen oder die Leistung verlangsamen. Physische Maschinentypen verfügen über einen größeren lokalen Speicher als virtuelle und einige verfügen zudem über RAID für die Sicherung lokaler Daten.</p>
+<p><strong>Monatliche Abrechnung</strong>: Die Nutzung von Bare-Metal-Servern ist teurer als die Nutzung virtueller Server. Bare-Metal-Server eignen sich für Hochleistungsanwendungen, die mehr Ressourcen und mehr Hoststeuerung benötigen. Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats belastet. Das Buchen und Stornieren von Bare-Metal-Servern ist ein manueller Prozess in Ihrem IBM Cloud Infrastructure-Konto (SoftLayer). Er kann länger als einen Geschäftstag dauern.</p>
+<p><strong>Option zum Aktivieren von Trusted Compute</strong>: Aktivieren Sie Trusted Compute, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containershort_notm}} mit Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute ist nur auf Clustern mit Kubernetes Version 1.9 oder höher verfügbar, die bestimmte Bare-Metal-Maschinentypen aufweisen. Bei der Ausführung des[ Befehls](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>` können Sie im Feld **Trustable** ablesen, welche Maschinen Trusted Compute unterstützen. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht.</p></dd>
+<dt>Warum sollte ich virtuelle Maschinen verwenden?</dt>
+<dd><p>Virtuelle Maschinen bieten eine größere Flexibilität, schnellere Bereitstellungszeiten und mehr automatische Skalierbarkeitsfunktionen als Bare-Metal-Maschinen und sind zudem kostengünstiger. Sie können virtuelle Maschinen für die meisten allgemeinen Anwendungsfälle, wie Test- und Entwicklungsumgebungen, Staging- und Produktionsumgebungen, Mikroservices und Business-Apps, verwenden. Allerdings müssen bei der Leistung Kompromisse gemacht werden. Wenn Sie für RAM-, GPU- oder datenintensive Arbeitslasten eine Datenverarbeitung mit hoher Leistung benötigen, verwenden Sie Bare-Metal-Maschinen.</p>
+<p><strong>Auswahl zwischen Single-Tenant- oder Multi-Tenant-Konfiguration</strong>: Wenn Sie einen virtuellen Standardcluster erstellen, müssen Sie auswählen, ob die zugrunde liegende Hardware von mehreren {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt werden kann (Multi-Tenant-Konfiguration) oder ob Sie die ausschließlich Ihnen vorbehaltene, dedizierte Nutzung vorziehen (Single-Tenant-Konfiguration).</p>
 <p>Bei einer Multi-Tenant-Konfiguration werden physische Ressourcen wie CPU und Speicher von allen virtuellen Maschinen, die auf derselben physischen Hardware bereitgestellt wurden, gemeinsam genutzt. Um sicherzustellen, dass jede virtuelle Maschine unabhängig von anderen Maschinen ausgeführt werden kann, segmentiert ein VM-Monitor, d. h. eine Überwachungsfunktion für virtuelle Maschinen, die auch als Hypervisor bezeichnet wird, die physischen Ressourcen in isolierte Entitäten und ordnet diese einer virtuellen Maschine als dedizierte Ressourcen zu. Dies wird als Hypervisor-Isolation bezeichnet.</p>
 <p>Bei einer Single-Tenant-Konfiguration ist die Nutzung aller physischen Ressourcen ausschließlich Ihnen vorbehalten. Sie können mehrere Workerknoten als virtuelle Maschinen auf demselben physischen Host bereitstellen. Ähnlich wie bei der Multi-Tenant-Konfiguration stellt der Hypervisor auch hier sicher, dass jeder Workerknoten seinen Anteil an den verfügbaren physischen Ressourcen erhält.</p>
 <p>Gemeinsam genutzte Knoten sind in der Regel kostengünstiger als dedizierte Knoten, weil die Kosten für die ihnen zugrunde liegende Hardware von mehreren Kunden getragen werden. Bei der Entscheidungsfindung hinsichtlich gemeinsam genutzter Knoten versus dedizierter Knoten sollten Sie mit Ihrer Rechtsabteilung Rücksprache halten, um zu klären, welcher Grad an Infrastrukturisolation und Compliance für Ihre App-Umgebung erforderlich ist.</p>
 <p><strong>Virtuelle `u2c`- oder `b2c`-Maschinentypen</strong>: Diese Maschinen verwenden lokale Platten anstelle von SAN (Storage Area Networking) für die Zuverlässigkeit. Zu den Vorteilen zählen ein höherer Durchsatz beim Serialisieren von Bytes für die lokale Festplatte und weniger Beeinträchtigungen des Dateisystems aufgrund von Netzausfällen. Diese Maschinentypen weisen 25 GB primären lokalen Plattenspeicher für das Dateisystem des Betriebssystems auf und 100 GB sekundären lokalen Plattenspeicher für das Verzeichnis `/var/lib/docker`, in das alle Containerdaten geschrieben werden.</p>
-<p><strong>Veraltete `u1c`- oder `b1c`-Maschinentypen</strong>: Zu Beginn der Verwendung von `u2c`- und `b2c`-Maschinentypen [aktualisieren Sie die Maschinentypen durch Hinzufügen von Workerknoten](cs_cluster_update.html#machine_type).</p></dd>
+<p><strong>Was passiert, wenn ich über veraltete `u1c`- oder `b1c`-Maschinentypen verfüge?</strong> Zu Beginn der Verwendung von `u2c`- und `b2c`-Maschinentypen [aktualisieren Sie die Maschinentypen durch Hinzufügen von Workerknoten](cs_cluster_update.html#machine_type).</p></dd>
+<dt>Welche Typen von virtuellen und physischen Maschinen stehen zur Auswahl?</dt>
+<dd><p>Viele! Wählen Sie den Maschinentyp aus, der am besten für Ihren Anwendungsfall geeignet ist. Denken Sie daran, dass sich ein Worker-Pool aus Maschinen desselben Typs zusammensetzt. Wenn Sie mit einer Mischung aus Maschinentypen in Ihrem Cluster arbeiten möchten, erstellen Sie für jeden Typ einen eigenen Worker-Pool.</p>
+<p>Maschinentypen variieren je nach Zone. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `bx cs machine-types <zone_name>` aus.</p>
+<p><table>
+<caption>Verfügbare physische (Bare-Metal) und virtuelle Maschinentypen in {{site.data.keyword.containershort_notm}}.</caption>
+<thead>
+<th>Name und Anwendungsfall</th>
+<th>Kerne/Speicher</th>
+<th>Primäre/Sekundäre Platte</th>
+<th>Netzgeschwindigkeit</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virtuell, u2c.2x4</strong>: Verwenden Sie diese kompakte virtuelle Maschine für Schnelltests, Machbarkeitsnachweise und weitere leichte Workloads.</td>
+<td>2/4 GB</td>
+<td>25 GB/100 GB</td>
+<td>1000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Virtuell, b2c.4x16</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für Tests und Entwicklung und weitere leichte Workloads.</td>
+<td>4/16 GB</td>
+<td>25 GB/100 GB</td>
+<td>1000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Virtuell, b2c.16x64</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für mittlere Workloads aus.</td></td>
+<td>16/64 GB</td>
+<td>25 GB/100 GB</td>
+<td>1000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Virtuell, b2c.32x128</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für mittlere bis große Workloads, wie eine Datenbank und eine dynamische Website mit vielen gleichzeitigen Benutzern, aus.</td></td>
+<td>32/128 GB</td>
+<td>25 GB/100 GB</td>
+<td>1000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Virtuell, b2c.56x242</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für große Workloads, wie eine Datenbank und mehrere Apps mit vielen gleichzeitigen Benutzern, aus.</td></td>
+<td>56/242 GB</td>
+<td>25 GB/100 GB</td>
+<td>1000 MB/s</td>
+</tr>
+<tr>
+<td><strong>RAM-intensiv, Bare-Metal, mr1c.28x512</strong>: Maximieren Sie den verfügbaren RAM-Speicher für Ihre Workerknoten.</td>
+<td>28/512 GB</td>
+<td>2 TB SATA/960 GB SSD</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>GPU, Bare-Metal, mg1c.16x128</strong>: Wählen Sie diesen Typ für rechenintensive Workloads, wie Datenverarbeitungen mit hoher Leistung, maschinelles Lernen oder 3D-Anwendungen, aus. Dieser Typ verfügt über eine physische Tesla K80-Karte mit zwei GPUs (Graphics Processing Units) pro Karte für insgesamt zwei GPUs.</td>
+<td>16/128 GB</td>
+<td>2 TB SATA/960 GB SSD</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>GPU, Bare-Metal, mg1c.28x256</strong>: Wählen Sie diesen Typ für rechenintensive Workloads, wie Datenverarbeitungen mit hoher Leistung, maschinelles Lernen oder 3D-Anwendungen, aus. Dieser Typ verfügt über zwei physische Tesla K80-Karten, die zwei GPUs (Graphics Processing Units) pro Karte für insgesamt vier GPUs aufweisen.</td>
+<td>28/256 GB</td>
+<td>2 TB SATA/960 GB SSD</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Datenintensiv, Bare-Metal, md1c.16x64.4x4tb</strong>: Wählen Sie diesen Typ aus, wenn Sie eine bedeutende Menge an lokalem Festplattenspeicherplatz, einschließlich RAID, für die Sicherung der lokal auf der Maschine gespeicherten Daten benötigen. Dieser Typ eignet sich für Anwendungsfälle wie verteilte Dateisysteme, große Datenbanken und Workloads für Big-Data-Analysen.</td>
+<td>16/64 GB</td>
+<td>2 x 2 TB RAID1/4 x 4 TB SATA RAID10</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Datenintensiv, Bare-Metal, md1c.28x512.4x4tb</strong>: Wählen Sie diesen Typ aus, wenn Sie eine bedeutende Menge an lokalem Festplattenspeicherplatz, einschließlich RAID, für die Sicherung der lokal auf der Maschine gespeicherten Daten benötigen. Dieser Typ eignet sich für Anwendungsfälle wie verteilte Dateisysteme, große Datenbanken und Workloads für Big-Data-Analysen.</td>
+<td>28/512 GB</td>
+<td>2 x 2 TB RAID1/4 x 4 TB SATA RAID10</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Ausgeglichen, Bare-Metal, mb1c.4x32</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, für die mehr Ressourcen für die Datenverarbeitung benötigt werden, als virtuelle Maschinen bieten können.</td>
+<td>4/32 GB</td>
+<td>2 TB SATA/2 TB SATA</td>
+<td>10000 MB/s</td>
+</tr>
+<tr>
+<td><strong>Ausgeglichen, Bare-Metal, mb1c.16x64</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, für die mehr Ressourcen für die Datenverarbeitung benötigt werden, als virtuelle Maschinen bieten können.</td>
+<td>16/64 GB</td>
+<td>2 TB SATA/960 GB SSD</td>
+<td>10000 MB/s</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1543,7 +1625,7 @@ Erstellen Sie eine Protokollierungskonfiguration. Sie können diesen Befehl verw
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>Der Name oder die ID des Clusters.</dd>
   <dt><code>--logsource <em>PROTOKOLLQUELLE</em></code></dt>
-    <dd>Die Protokollquelle, für die Sie die Protokollweiterleitung aktivieren möchten. Dieses Argument unterstützt eine durch Kommas getrennte Liste mit Protokollquellen, auf die die Konfiguration angewendet werden soll. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Wenn Sie keine Protokollquelle bereitstellen, werden Protokollkonfigurationen für die Protokollquellen <code>container</code> und <code>ingress</code> erstellt.</dd>
+    <dd>Die Protokollquelle, für die die Protokollweiterleitung aktiviert werden soll. Dieses Argument unterstützt eine durch Kommas getrennte Liste mit Protokollquellen, auf die die Konfiguration angewendet werden soll. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Wenn Sie keine Protokollquelle bereitstellen, werden Protokollkonfigurationen für die Protokollquellen <code>container</code> und <code>ingress</code> erstellt.</dd>
   <dt><code>--namespace <em>KUBERNETES-NAMENSBEREICH</em></code></dt>
     <dd>Der Kubernetes-Namensbereich, von dem aus Protokolle weitergeleitet werden sollen. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist nur für die Containerprotokollquelle gültig und optional. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Cluster diese Konfiguration.</dd>
   <dt><code>--hostname <em>PROTOKOLLSERVER-HOSTNAME</em></code></dt>
@@ -1559,7 +1641,7 @@ Erstellen Sie eine Protokollierungskonfiguration. Sie können diesen Befehl verw
   <dt><code>--type <em>PROTOKOLLTYP</em></code></dt>
     <dd>Gibt an, wohin Sie Ihre Protokolle weiterleiten möchten. Optionen sind <code>ibm</code>, wodurch Ihre Protokolle an {{site.data.keyword.loganalysisshort_notm}} weitergeleitet werden, und <code>syslog</code>, wodurch Ihre Protokolle an externe Server weitergeleitet werden.</dd>
   <dt><code>--app-containers</code></dt>
-    <dd>Optional: Zum Weiterleiten von Protokollen von Apps, können Sie den Namen des Containers angeben, der Ihre App enthält. Sie können mehr als einen Container angeben, indem Sie eine durch Kommas getrennte Liste verwenden. Falls keine Container angegeben sind, werden Protokolle von allen Containern weitergeleitet, die die von Ihnen bereitgestellten Pfade enthalten. Diese Option ist nur für <code>application</code> der Protokollquelle gültig. </dt>
+    <dd>Optional: Zum Weiterleiten von Protokollen von Apps, können Sie den Namen des Containers angeben, der Ihre App enthält. Sie können mehr als einen Container angeben, indem Sie eine durch Kommas getrennte Liste verwenden. Falls keine Container angegeben sind, werden Protokolle von allen Containern weitergeleitet, die die von Ihnen bereitgestellten Pfade enthalten. Diese Option ist nur für <code>application</code> der Protokollquelle gültig.</dt>
   <dt><code>--json</code></dt>
     <dd>Druckt die Befehlsausgabe im JSON-Format. Dieser Wert ist optional.</dd>
   <dt><code>--skip-validation</code></dt>
@@ -1715,26 +1797,26 @@ Erstellen Sie einen Protokollierungsfilter. Mit diesem Befehl können Sie Protok
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter erstellen möchten. </dd>
+    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter erstellen möchten.</dd>
   <dt><code>--type <em>PROTOKOLLTYP</em></code></dt>
-    <dd>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt. </dd>
+    <dd>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt.</dd>
   <dt><code>--logging-configs <em>KONFIGURATIONEN</em></code></dt>
-    <dd>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl verwenden. </dd>
+    <dd>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl verwenden.</dd>
   <dt><code>--namespace <em>KUBERNETES-NAMENSBEREICH</em></code></dt>
-    <dd>Optional: Der Kubernetes-Namensbereich, in dem Sie Protokolle filtern möchten. </dd>
+    <dd>Optional: Der Kubernetes-Namensbereich, in dem Sie Protokolle filtern möchten.</dd>
   <dt><code>--container <em>CONTAINERNAME</em></code></dt>
-    <dd>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar. </dd>
+    <dd>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</dd>
   <dt><code>--level <em>PROTOKOLLIERUNGSSTUFE</em></code></dt>
-    <dd>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten. Beispielausgabe: <code>{"log": "hello", "level": "info"}</code></dd>
+    <dd>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen heraus. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten. Beispielausgabe: <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>NACHRICHT</em></code></dt>
-    <dd>Optional: Filtert alle Protokolle mit einer bestimmten Nachricht. Die Nachricht wird buchstabengetreu abgeglichen und nicht als Ausdruck. Beispiel: Die Nachrichten “Hello”, “!” und “Hello, World!” würden im Protokoll “Hello, World!” wiedergefunden.</dd>
+    <dd>Optional: Filtert alle Protokolle mit einer bestimmten Nachricht heraus. Die Nachricht wird buchstabengetreu abgeglichen und nicht als Ausdruck. Beispiel: Die Nachrichten “Hello”, “!”und “Hello, World!”würden im Protokoll “Hello, World!” wiedergefunden.</dd>
   <dt><code>--json</code></dt>
-    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format. </dd>
+    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format.</dd>
 </dl>
 
 **Beispiele**:
 
-In diesem Beispiel werden alle Protokolle herausgefiltert, die von Containern mit dem Namen `test-container` im Standardnamensbereich weitergeleitet werden, die sich auf der Stufe 'debug' oder einer niedrigeren Stufe befinden und eine Protokollnachricht haben, die 'GET request' enthält. 
+In diesem Beispiel werden alle Protokolle herausgefiltert, die von Containern mit dem Namen `test-container` im Standardnamensbereich weitergeleitet werden, die sich auf der Stufe 'debug' oder einer niedrigeren Stufe befinden und eine Protokollnachricht haben, die 'GET request' enthält.
 
   ```
   bx cs logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
@@ -1751,65 +1833,65 @@ In diesem Beispiel werden alle Protokolle herausgefiltert, die von einem bestimm
 ### bx cs logging-filter-update CLUSTER --type PROTOKOLLTYP [--logging-configs KONFIGURATIONEN][--namespace KUBERNETES_NAMESPACE] [--container CONTAINERNAME][--level LOGGING_LEVEL] [--message NACHRICHT][--s] [--json]
 {: #cs_log_filter_update}
 
-Aktualisieren Sie einen Protokollierungsfilter. Mit diesem Befehl können Sie einen selbst erstellten Protokollierungsfilter aktualisieren. 
+Aktualisieren Sie einen Protokollierungsfilter. Mit diesem Befehl können Sie einen selbst erstellten Protokollierungsfilter aktualisieren.
 
 <strong>Befehlsoptionen</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter aktualisieren möchten. </dd>
+    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter aktualisieren möchten.</dd>
   <dt><code>--type <em>PROTOKOLLTYP</em></code></dt>
-    <dd>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt. </dd>
+    <dd>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt.</dd>
   <dt><code>--logging-configs <em>KONFIGURATIONEN</em></code></dt>
-    <dd>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl verwenden. </dd>
+    <dd>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl verwenden.</dd>
   <dt><code>--namespace <em>KUBERNETES-NAMENSBEREICH</em></code></dt>
-    <dd>Optional: Der Kubernetes-Namensbereich, in dem Sie Protokolle filtern möchten. </dd>
+    <dd>Optional: Der Kubernetes-Namensbereich, in dem Sie Protokolle filtern möchten.</dd>
   <dt><code>--container <em>CONTAINERNAME</em></code></dt>
-    <dd>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar. </dd>
+    <dd>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</dd>
   <dt><code>--level <em>PROTOKOLLIERUNGSSTUFE</em></code></dt>
     <dd>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen heraus. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten. Beispielausgabe: <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>NACHRICHT</em></code></dt>
-    <dd>Optional: Filtert alle Protokolle mit einer bestimmten Nachricht heraus. Die Nachricht wird buchstabengetreu abgeglichen und nicht als Ausdruck. Beispiel: Die Nachrichten “Hello”, “!” und “Hello, World!” würden im Protokoll “Hello, World!” wiedergefunden.</dd>
+    <dd>Optional: Filtert alle Protokolle mit einer bestimmten Nachricht heraus. Die Nachricht wird buchstabengetreu abgeglichen und nicht als Ausdruck. Beispiel: Die Nachrichten “Hello”, “!”und “Hello, World!”würden im Protokoll “Hello, World!” wiedergefunden.</dd>
   <dt><code>--json</code></dt>
-    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format. </dd>
+    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format.</dd>
 </dl>
 
 
 ### bx cs logging-filter-get CLUSTER [--id FILTER-ID][--show-matching-configs] [--json]
 {: #cs_log_filter_view}
 
-Zeigen Sie eine Protokollierungsfilterkonfiguration an. Mit diesem Befehl können Sie die selbst erstellten Protokollierungsfilter anzeigen. 
+Zeigen Sie eine Protokollierungsfilterkonfiguration an. Mit diesem Befehl können Sie die selbst erstellten Protokollierungsfilter anzeigen.
 
 <strong>Befehlsoptionen</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie Filter anzeigen möchten. </dd>
+    <dd>Erforderlich: Der Name oder die ID des Clusters, für das Sie Filter anzeigen möchten.</dd>
   <dt><code>--id <em>FILTER-ID</em></code></dt>
     <dd>Die ID des Protokollfilters, den Sie anzeigen möchten.</dd>
   <dt><code>--show-matching-configs</code></dt>
-    <dd>Optional: Zeigt die Protokollierungskonfigurationen an, die mit der überprüften Konfiguration übereinstimmen. </dd>
+    <dd>Optional: Zeigt die Protokollierungskonfigurationen an, die mit der überprüften Konfiguration übereinstimmen.</dd>
   <dt><code>--json</code></dt>
-    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format. </dd>
+    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format.</dd>
 </dl>
 
 
 ### bx cs logging-filter-rm CLUSTER [--id FILTER-ID][--json] [--all]
 {: #cs_log_filter_delete}
 
-Löschen Sie einen Protokollierungsfilter. Mit diesem Befehl können Sie einen selbst erstellten Protokollierungsfilter entfernen. 
+Löschen Sie einen Protokollierungsfilter. Mit diesem Befehl können Sie einen selbst erstellten Protokollierungsfilter entfernen.
 
 <strong>Befehlsoptionen</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Der Name oder die ID des Clusters, aus dem Sie einen Protokollierungsfilter löschen möchten. </dd>
+    <dd>Der Name oder die ID des Clusters, aus dem Sie einen Protokollierungsfilter löschen möchten.</dd>
   <dt><code>--id <em>FILTER-ID</em></code></dt>
-    <dd>Die ID des Protokollfilters, den Sie löschen möchten. </dd>
+    <dd>Die ID des Protokollfilters, der gelöscht werden soll. </dd>
   <dt><code>--all</code></dt>
-    <dd>Optional: Löscht alle Protokollweiterleitungsfilter. </dd>
+    <dd>Optional: Löscht alle Protokollweiterleitungsfilter.</dd>
   <dt><code>--json</code></dt>
-    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format. </dd>
+    <dd>Optional: Druckt die Befehlsausgabe im JSON-Format.</dd>
 </dl>
 
 <br />
@@ -1939,7 +2021,7 @@ Fügen Sie Ihrem Standardcluster Workerknoten hinzu.
 <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
 
 <dt><code>--file <em>DATEISTANDORT</em></code></dt>
-<dd>Der Pfad zur YAML-Datei für das Hinzufügen von Workerknoten zu Ihrem Cluster. Statt zusätzliche Workerknoten mithilfe der in diesem Befehl bereitgestellten Optionen zu definieren, können Sie eine YAML-Datei verwenden. Dieser Wert ist optional.
+<dd>Der Pfad zur YAML-Datei für das Hinzufügen von Workerknoten zum Cluster. Statt zusätzliche Workerknoten mithilfe der in diesem Befehl bereitgestellten Optionen zu definieren, können Sie eine YAML-Datei verwenden. Dieser Wert ist optional.
 
 <p><strong>Hinweis:</strong> Wenn Sie dieselbe Option wie im Befehl als Parameter in der YAML-Datei bereitstellen, hat der Wert im Befehl Vorrang vor dem Wert in der YAML. Beispiel: Sie definieren einen Maschinentyp in Ihrer YAML-Datei und verwenden die Option '--machine-type' im Befehl. Der Wert, den Sie in der Befehlsoption eingegeben haben, überschreibt den Wert in der YAML-Datei.
 
@@ -1969,7 +2051,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>maschinentyp</em></code></td>
-<td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die verfügbaren physischen und virtuellen Maschinentypen variieren je nach dem Standort, an dem Sie den Cluster bereitstellen. Weitere Informationen finden Sie im [Befehl](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. </td>
+<td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die verfügbaren physischen und virtuellen Maschinentypen variieren je nach dem Standort, an dem Sie den Cluster bereitstellen. Weitere Informationen finden Sie im [Befehl](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>privates_vlan</em></code></td>
@@ -2004,12 +2086,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATES_VLAN</em></code></dt>
 <dd>Das private VLAN, das bei der Erstellung des Clusters angegeben wurde. Dieser Wert ist erforderlich.
 
-<p><strong>Hinweis:</strong> {[übereinstimmende_VLANs]}</p></dd>
+<p><strong>Hinweis:</strong> Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p></dd>
 
 <dt><code>--public-vlan <em>ÖFFENTLICHES_VLAN</em></code></dt>
 <dd>Das öffentliche VLAN, das bei der Erstellung des Clusters angegeben wurde. Dieser Wert ist optional. Wenn Ihre Workerknoten ausschließlich in einem privaten VLAN bereitgestellt werden sollen, geben Sie keine öffentliche VLAN-ID an. <strong>Hinweis</strong>: {[privates_vlan_vyatta]}
 
-<p><strong>Hinweis:</strong> {[übereinstimmende_VLANs]}</p></dd>
+<p><strong>Hinweis:</strong> Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Wenn Sie die Verschlüsselung inaktivieren möchten, schließen Sie diese Option ein.</dd>
@@ -2035,7 +2117,7 @@ diskEncryption: <em>false</em></code></pre>
 ### bx cs worker-get [CLUSTERNAME_ODER_-ID] WORKERKNOTEN-ID
 {: #cs_worker_get}
 
-Zeigen Sie die Details eines Workerknotens an. 
+Zeigen Sie die Details eines Workerknotens an.
 
 <strong>Befehlsoptionen</strong>:
 
@@ -2083,7 +2165,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2102,7 +2184,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
     ```
     {: pre}
     Dieser Prozess kann einige Minuten dauern.
- 5. Führen Sie einen Warmstart für den Workerknoten durch. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <clustername_oder_-id>` zurückgegeben wird.
+ 5. Führen Sie einen Warmstart für den Workerknoten durch. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <cluster_name_or_ID>` zurückgegeben wird.
     ```
     bx cs worker-reboot <clustername_oder_-id> <workername_oder_-id>
     ```
@@ -2144,7 +2226,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
 
 Laden Sie bei Bedarf die erforderlichen Konfigurationen für einen Workerknoten erneut. Ein erneutes Laden kann sinnvoll sein, wenn Ihr Workerknoten Probleme wie zum Beispiel langsames Laden aufweist oder wenn Ihr Knoten in einem nicht einwandfreien Zustand verharrt.
 
-Beim Neuladen eines Workerknotens werden die neuesten Aktualisierungen, Sicherheitspatches oder die aktuelle [Kubernetes-Version](cs_versions.html#version_types) nicht angewendet. Wenn Patch- und Versionsaktualisierungen verfügbar sind, wird Ihnen in der CLI und der Konsole eine Eingabeaufforderung angezeigt, während Sie workerbezogene Features verwenden. Um Ihre Worker auf dem neuesten Stand zu halten, sollten Sie in regelmäßigen Abständen den [Befehl](cs_cli_reference.html#cs_worker_update) `bx cs worker-update` ausführen.
+Durch das erneute Laden eines Workerknotens werden Aktualisierungen von Patchversionen auf den Workerknoten angewendet; dies gilt jedoch nicht für Aktualisierungen von Haupt- oder Nebenversionen. Informationen zu den Änderungen von einer Patchversion zur nächsten finden Sie in der Dokumentation zum [Änderungsprotokoll der Version](cs_versions_changelog.html#changelog).
 {: tip}
 
 Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods erneut auf anderen Workerknoten geplant werden, um Ausfallzeiten für Ihre App oder Datenverlust auf Ihrem Workerknoten zu vermeiden.
@@ -2153,7 +2235,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods er
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2172,7 +2254,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods er
     ```
     {: pre}
     Dieser Prozess kann einige Minuten dauern.
- 5. Laden Sie den Workerknoten erneut. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <clustername_oder_-id>` zurückgegeben wird.
+ 5. Laden Sie den Workerknoten erneut. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <cluster_name_or_ID>` zurückgegeben wird.
     ```
     bx cs worker-reload <clustername_oder_-id> <workername_oder_-id>
     ```
@@ -2207,7 +2289,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods er
 ### bx cs worker-rm [-f] CLUSTER WORKER [WORKER]
 {: #cs_worker_rm}
 
-Entfernen Sie einen oder mehrere Workerknoten von einem Cluster. Wenn Sie einen Workerknoten entfernen, ist Ihr Cluster nicht mehr ausgeglichen.  
+Entfernen Sie einen oder mehrere Workerknoten von einem Cluster. Wenn Sie einen Workerknoten entfernen, ist Ihr Cluster nicht mehr ausgeglichen. 
 
 Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneut auf anderen Workerknoten geplant werden, um Ausfallzeiten für Ihre App oder Datenverlust auf Ihrem Workerknoten zu vermeiden.
 {: tip}
@@ -2216,7 +2298,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneu
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `bx cs workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2235,7 +2317,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneu
    ```
    {: pre}
    Dieser Prozess kann einige Minuten dauern.
-5. Entfernen Sie den Worker-Knoten. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <clustername_oder_-id>` zurückgegeben wird.
+5. Entfernen Sie den Worker-Knoten. Verwenden Sie die Worker-ID, die vom Befehl `bx cs workers <cluster_name_or_ID>` zurückgegeben wird.
    ```
    bx cs worker-rm <clustername_oder_-id> <workername_oder_-id>
    ```
@@ -2272,7 +2354,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneu
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-Aktualisieren Sie Workerknoten, um die neuesten Sicherheitsupdates und Patches auf das Betriebssystem anzuwenden und um die Kubernetes-Version auf die Version des Masterknotens zu aktualisieren. Sie können die Kubernetes-Version des Masterknotens mit dem [Befehl](cs_cli_reference.html#cs_cluster_update) `bx cs cluster-update` aktualisieren. 
+Aktualisieren Sie Workerknoten, um die neuesten Sicherheitsupdates und Patches auf das Betriebssystem anzuwenden und um die Kubernetes-Version auf die Version des Masterknotens zu aktualisieren. Sie können die Kubernetes-Version des Masterknotens mit dem [Befehl](cs_cli_reference.html#cs_cluster_update) `bx cs cluster-update` aktualisieren.
 
 **Wichtig**: Durch die Ausführung von `bx cs worker-update` kann es zu Ausfallzeiten bei Ihren Apps und Services kommen. Während der Aktualisierung wird die Planung aller Pods auf anderen Workerknoten neu erstellt und die Daten werden gelöscht, wenn sie nicht außerhalb des Pods gespeichert wurden. Um Ausfallzeiten zu vermeiden, sollten Sie [sicherstellen, dass genügend Workerknoten vorhanden sind, um die Workload zu verarbeiten, während die ausgewählten Workerknoten aktualisiert werden](cs_cluster_update.html#worker_node).
 
@@ -2313,7 +2395,7 @@ Anzeigen einer Liste der Workerknoten und ihres jeweiligen Status in einem Clust
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>Der Name oder die ID des Clusters, in dem Sie verfügbare Workerknoten auflisten. Dieser Wert ist erforderlich.</dd>
+   <dd>Der Name oder die ID des Clusters für die verfügbaren Workerknoten. Dieser Wert ist erforderlich.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>Zeigen Sie Workerknoten an, die aus dem Cluster gelöscht wurden, und den Grund für das Löschen. Dieser Wert ist optional.</dd>
    </dl>
@@ -2324,4 +2406,3 @@ Anzeigen einer Liste der Workerknoten und ihres jeweiligen Status in einem Clust
   bx cs workers mein_cluster
   ```
   {: pre}
-

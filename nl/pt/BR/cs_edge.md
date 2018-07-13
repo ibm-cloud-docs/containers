@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,6 +15,8 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # Restringindo o tráfego de rede para os nós do trabalhador de borda
 {: #edge}
 
@@ -26,7 +28,7 @@ Quando esses nós do trabalhador são marcados somente para rede, outras cargas 
 
 
 
-## Rotular nós do trabalhador como nós da borda
+## Identificação de nós do trabalhador como nós de borda
 {: #edge_nodes}
 
 Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para assegurar que o Ingresso e os balanceadores de carga sejam implementados somente nesses nós do trabalhador.
@@ -38,9 +40,9 @@ Antes de iniciar:
 - Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
 - [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
 
-Etapas:
+Para rotular nós do trabalhador como nós de borda:
 
-1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador em cada VLAN pública para serem os nós do trabalhador de borda. Usar dois ou mais nós do trabalhador melhora a disponibilidade dos recursos de rede.
+1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador em cada VLAN pública para serem os nós do trabalhador de borda. O Ingresso requer pelo menos dois nós do trabalhador em cada zona para fornecer alta disponibilidade. 
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -54,35 +56,35 @@ Etapas:
   ```
   {: pre}
 
-3. Recupere todos os serviços existentes do balanceador de carga em seu cluster.
+3. Recupere todos os serviços existentes do balanceador de carga no cluster.
 
   ```
   kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
   ```
   {: pre}
 
-  Saída:
+  Saída de exemplo:
 
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
-4. Usando a saída da etapa anterior, copie e cole cada linha `kubectl get service`. Esse comando reimplementa o balanceador de carga para um nó do trabalhador de borda. somente balanceadores de carga públicos precisam ser reimplementados.
+4. Usando a saída da etapa anterior, copie e cole cada linha `kubectl get service`. Esse comando reimplementa o balanceador de carga para um nó do trabalhador de borda. Somente balanceadores de carga públicos devem ser reimplementados.
 
-  Saída:
+  Saída de exemplo:
 
   ```
   Serviço "my_loadbalancer" configurado
   ```
   {: screen}
 
-Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso para os nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de ponta](#edge_workloads) e [bloqueiem o tráfego de entrada para as portas de nós em nós do trabalhador](cs_network_policy.html#block_ingress).
+Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso nos nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de borda](#edge_workloads) e [bloqueiem o tráfego de entrada para NodePorts em nós do trabalhador](cs_network_policy.html#block_ingress).
 
 <br />
 
 
-## Evitar que cargas de trabalho sejam executadas em nós do trabalhador de borda
+## Evitando que cargas de trabalho sejam executadas em nós do trabalhador de borda
 {: #edge_workloads}
 
 Um benefício de nós do trabalhador de borda é que eles podem ser especificados para executar somente serviços de rede.
@@ -91,19 +93,18 @@ Um benefício de nós do trabalhador de borda é que eles podem ser especificado
 Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 
-1. Liste todos os nós do trabalhador com o rótulo `edge`.
+1. Liste todos os nós do trabalhador com o rótulo `dedicated=edge`.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
   ```
   {: pre}
 
-2. Aplique uma contaminação a cada nó do trabalhador que evita que os pods sejam executados no nó do trabalhador e que remove os pods que não possuem o rótulo `edge` do nó do trabalhador. Os pods removidos são reimplementados em outros nós do trabalhador com capacidade.
+2. Aplique uma contaminação a cada nó do trabalhador que evita que os pods sejam executados no nó do trabalhador e que remove os pods que não têm o rótulo `dedicated=edge` do nó do trabalhador. Os pods removidos são reimplementados em outros nós do trabalhador com capacidade.
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
   Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
-3. Se você optar por [ativar a preservação IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes) para que as solicitações recebidas possam ser encaminhadas para os pods de seu app.
-
+3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,11 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # 教程：在 {{site.data.keyword.containerlong_notm}} 上安装 Istio
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) 是一个开放式平台，用于在云平台上（如 {{site.data.keyword.containerlong}} 中的 Kubernetes）连接、保护和管理微服务网络（也称为服务网）。通过 Istio，可管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，在服务网上验证服务身份，等等。
+[Istio](https://www.ibm.com/cloud/info/istio) 是一个开放式平台，用于在云平台上（如 {{site.data.keyword.containerlong}} 中的 Kubernetes）连接、保护和管理微服务网络（也称为服务网）。通过 Istio，可管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，验证服务身份，等等。
 {:shortdesc}
 
 在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containershort}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar sidecar 代理。
@@ -39,13 +40,13 @@ lastupdated: "2018-4-20"
 
 ## 受众
 
-本教程适用于此前从未使用过 Istio 的软件开发者和网络管理员。
+本教程适用于首次使用 Istio 的软件开发者和网络管理员。
 
 ## 先决条件
 
--  [安装 CLI](cs_cli_install.html#cs_cli_install_steps)
--  [创建群集](cs_clusters.html#clusters_cli)
--  [将 CLI 设定为集群目标](cs_cli_install.html#cs_cli_configure)
+-  [安装 CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes V1.9 或更高版本。确保安装与集群的 Kubernetes 版本相匹配的 `kubectl` CLI 版本。
+-  使用 Kubernetes V1.9 或更高版本来[创建集群](cs_clusters.html#clusters_cli)。
+-  [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 
 ## 第 1 课：下载并安装 Istio
 {: #istio_tutorial1}
@@ -116,7 +117,7 @@ lastupdated: "2018-4-20"
    {: screen}
 
 
-祝贺您！您已成功将 Istio 安装到集群中。接下来，将 BookInfo 样本应用程序部署到集群中。
+非常好！您已成功将 Istio 安装到集群中。接下来，将 BookInfo 样本应用程序部署到集群中。
 
 
 ## 第 2 课：部署 BookInfo 应用程序
@@ -174,14 +175,14 @@ lastupdated: "2018-4-20"
     * 如果您正在使用标准集群，请运行以下命令以获取集群的 Ingress IP 和端口：
 
        ```
-       kubectl get ingress
+              kubectl get ingress
        ```
        {: pre}
 
-       输出类似于以下内容：
+       输出示例：
 
        ```
-       NAME      HOSTS     ADDRESS          PORTS     AGE
+              NAME      HOSTS     ADDRESS          PORTS     AGE
        gateway   *         169.xx.xxx.xxx   80        3m
        ```
        {: screen}
@@ -189,21 +190,21 @@ lastupdated: "2018-4-20"
        此示例所产生的 Ingress 地址为 `169.48.221.218:80`。使用以下命令将地址导出为网关 URL。您将在下一步中使用该网关 URL 来访问 BookInfo 产品页面。
 
        ```
-       export GATEWAY_URL=169.xx.xxx.xxx:80
+              export GATEWAY_URL=169.xx.xxx.xxx:80
        ```
        {: pre}
 
     * 如果您使用的是免费集群，那么必须使用工作程序节点的公共 IP 和 NodePort。运行以下命令，以获取工作程序节点的公共 IP：
 
        ```
-       bx cs workers <cluster_name_or_ID>
+              bx cs workers <cluster_name_or_ID>
        ```
        {: pre}
 
        使用以下命令将工作程序节点的公共 IP 导出为网关 URL。您将在下一步中使用该网关 URL 来访问 BookInfo 产品页面。
 
        ```
-       export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
+              export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
        ```
        {: pre}
 
@@ -214,16 +215,16 @@ lastupdated: "2018-4-20"
    ```
    {: pre}
 
-5. 在浏览器中，浏览至 `http://$GATEWAY_URL/productpage` 以查看 BookInfo Web 页面。
+5. 在浏览器中，转至 `http://$GATEWAY_URL/productpage` 以查看 BookInfo Web 页面。
 
 6. 尝试多次刷新该页面。不同版本的评论部分会以红色星星、黑色星星和无星星进行循环。
 
-祝贺您！您已成功部署了使用 Istio Envoy sidecar 的 BookInfo 样本应用程序。接下来，您可以清除资源或继续使用更多教程来进一步探索 Istio 功能。
+非常好！您已成功部署了使用 Istio Envoy sidecar 的 BookInfo 样本应用程序。接下来，您可以清除资源或继续使用更多教程来进一步探索 Istio。
 
 ## 清除
 {: #istio_tutorial_cleanup}
 
-如果您不希望探索[后续步骤？](#istio_tutorial_whatsnext)中提供的更多 Istio 功能，那么可以清除集群中的 Istio 资源。
+如果您已完成使用 Istio，并且不希望[继续探索](#istio_tutorial_whatsnext)，那么可以清除集群中的 Istio 资源。
 {:shortdesc}
 
 1. 删除集群中的所有 BookInfo 服务、pod 和部署。
@@ -243,9 +244,8 @@ lastupdated: "2018-4-20"
 ## 接下来要做什么？
 {: #istio_tutorial_whatsnext}
 
-要进一步探索 Istio 功能，您可以在 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/) 中找到更多指南。
+要进一步探索 Istio，您可以在 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/) 中找到更多指南。
 
 * [智能路由 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/intelligent-routing.html)：此示例显示如何使用 Istio 的各种流量管理功能，将流量路由到特定版本 BookInfo 的评论和评级微服务中。
 
-* [深入遥测 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/telemetry.html)：此示例显示如何使用 Istio Mixer 和 Envoy 代理跨 BookInfo 微服务获取统一度量值、日志和跟踪。
-
+* [深入遥测 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/telemetry.html)：此示例包含如何使用 Istio Mixer 和 Envoy 代理跨 BookInfo 微服务获取统一度量值、日志和跟踪。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -26,11 +26,12 @@ lastupdated: "2018-4-20"
 
 使用在最後指導教學中建立的 Kubernetes 叢集，公關公司的應用程式開發人員會部署應用程式的 Hello World 版本。根據本指導教學中每個課程的建置，應用程式開發人員會漸進部署同一個應用程式的較複雜版本。下圖依課程顯示每個部署的元件。
 
+
 ![課程元件](images/cs_app_tutorial_roadmap.png)
 
-如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義，例如用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有所需數目的 Pod 在執行。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
+如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保一律有指定數目的 Pod 啟動與執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
 
-服務會將一組 Pod 分組在一起，並且為叢集中的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您將會使用 Kubernetes 服務，透過自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
+服務會將一組 Pod 分組在一起，並且為叢集中的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您使用 Kubernetes 服務，透過自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
 
 為了讓應用程式的可用性更高，您可以在標準叢集中建立多個工作者節點，以執行更多的應用程式抄本。本指導教學中未討論此作業，但請記住這個概念，以便未來改進應用程式的可用性。
 
@@ -51,11 +52,12 @@ lastupdated: "2018-4-20"
 
 ## 適用對象
 
-以前從未在 Kubernetes 叢集中部署應用程式的軟體開發人員及網路管理者。
+第一次將應用程式部署至 Kubernetes 叢集的軟體開發人員及網路管理者。
 
 ## 必要條件
 
 * [指導教學：在 {{site.data.keyword.containershort_notm}} 中建立 Kubernetes 叢集](cs_tutorials.html#cs_cluster_tutorial)。
+
 
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
 {: #cs_apps_tutorial_lesson1}
@@ -64,6 +66,7 @@ lastupdated: "2018-4-20"
 {:shortdesc}
 
 您藉由完成本課程而部署的元件會顯示在下圖中。
+
 
 
 ![部署設定](images/cs_app_tutorial_components1.png)
@@ -76,30 +79,31 @@ lastupdated: "2018-4-20"
     * `package.json`：應用程式的相關 meta 資料。
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+        git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
 2.  導覽至 `Lab 1` 目錄。
 
     ```
-    cd 'container-service-getting-started-wt/Lab 1'
+        cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
 
-3. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
-  ```
-    bx login [--sso]
+3.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請使用 `bx cs region-set` 指令。
+
     ```
-  {: pre}
+        bx login [--sso]
+    ```
+    {: pre}
 
-  **附註**：如果 login 指令失敗，您可能具有聯合 ID。請嘗試將 `--sso` 旗標附加至指令。請使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
+    **附註**：如果 login 指令失敗，您可能具有聯合 ID。請嘗試將 `--sso` 旗標附加至指令。請使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
 
-4. 在 CLI 中設定叢集的環境定義。
-    1. 取得指令來設定環境變數，並下載 Kubernetes 配置檔。
+4.  在 CLI 中設定叢集的環境定義。
+    1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
         ```
-        bx cs cluster-config <cluster_name_or_ID>
+                bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -109,36 +113,36 @@ lastupdated: "2018-4-20"
         OS X 的範例：
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
+                export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
         ```
         {: screen}
 
-5.  登入 {{site.data.keyword.registryshort_notm}} CLI。**附註**：請確定您已[安裝](/docs/services/Registry/index.html#registry_cli_install)  container-registry 外掛程式。
+5.  登入 {{site.data.keyword.registryshort_notm}} CLI。**附註**：確定已[安裝](/docs/services/Registry/index.html#registry_cli_install) container-registry 外掛程式。
 
     ```
-    bx cr login
+        bx cr login
     ```
     {: pre}
     -   如果您忘記 {{site.data.keyword.registryshort_notm}} 中的名稱空間，請執行下列指令。
 
         ```
-        bx cr namespace-list
+                bx cr namespace-list
         ```
         {: pre}
 
-6. 啟動 Docker。
-    * 如果您是使用 Docker CE，則不需要執行任何動作。
+6.  啟動 Docker。
+    * 如果您使用 Docker Community Edition，則不需要執行任何動作。
     * 如果您是使用 Linux，請遵循 [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/admin/)，視您使用的 Linux 發行套件而定，尋找有關如何啟動 Docker 的指示。
     * 如果您是在 Windows 或 OSX 上使用 Docker Toolbox，則可以使用 Docker Quickstart Terminal，它會為您啟動 Docker。在後續幾個步驟中，請使用 Docker Quickstart Terminal 來執行 Docker 指令，然後切回您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
 
-7.  建置 Docker 映像檔，其中包含 `Lab 1` 目錄的應用程式檔案。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。
+7.  建置 Docker 映像檔，其中包括 `Lab 1` 目錄的應用程式檔案。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。
 
-    
+    進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。
 
     1.  在本端建置映像檔。指定您要使用的名稱和標籤。請務必使用您在前一個指導教學中，在 {{site.data.keyword.registryshort_notm}} 中建立的名稱空間。為映像檔標記名稱空間資訊，可以讓 Docker 知道在稍後的步驟中，要將映像檔推送到哪裡。僅在映像檔名稱中使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+                docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
         ```
         {: pre}
 
@@ -175,7 +179,7 @@ lastupdated: "2018-4-20"
         ```
         {: screen}
 
-8.  部署會用來管理 Pod，而 Pod 中包含應用程式的容器化實例。下列指令會將應用程式部署在單一 Pod 中。基於本指導教學的目的，部署命名為 hello-world-deployment，但您可以將它改為任何您想要的名稱。如果您使用 Docker Quickstart Terminal 來執行 Docker 指令，請務必切回到您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
+8.  部署可用來管理 Pod，而 Pod 中包括應用程式的容器化實例。下列指令會將應用程式部署在單一 Pod 中。基於本指導教學的目的，部署命名為 **hello-world-deployment**，但您可以將它改為任何您想要的名稱。如果您使用 Docker Quickstart 終端機來執行 Docker 指令，請務必切回到您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -189,7 +193,7 @@ lastupdated: "2018-4-20"
     ```
     {: screen}
 
-    
+    進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](cs_secure.html#pi)。
 
 9.  將部署公開成為 NodePort 服務，讓全世界都可以存取此應用程式。就像您可能會公開 Cloud Foundry 應用程式的埠，您公開的 NodePort 就是工作者節點用來接聽資料流量的埠。
 
@@ -205,8 +209,8 @@ lastupdated: "2018-4-20"
     ```
     {: screen}
 
-    <table>
     <table summary="expose 指令參數的相關資訊。">
+    <caption>進一步瞭解 expose 參數</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 進一步瞭解 expose 參數</th>
     </thead>
@@ -225,7 +229,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>服務應該提供服務的埠。</td>
+    <td>服務於其上進行處理的埠。</td>
     </tr>
     <tr>
     <td><code>--type=NodePort</code></td>
@@ -233,7 +237,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>服務將資料流量導向的目標埠。在這個實例中，target-port 與 port 相同，但您建立的其他應用程式可能不同。</td>
+    <td>服務將資料流量導向其中的目標埠。在這個實例中，target-port 與 port 相同，但您建立的其他應用程式可能不同。</td>
     </tr>
     </tbody></table>
 
@@ -267,8 +271,8 @@ lastupdated: "2018-4-20"
     2.  取得工作者節點在叢集中的公用 IP 位址。
 
         ```
-       bx cs workers <cluster_name_or_ID>
-       ```
+        bx cs workers <cluster_name_or_ID>
+        ```
         {: pre}
 
         輸出範例：
@@ -278,7 +282,7 @@ lastupdated: "2018-4-20"
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
@@ -289,11 +293,15 @@ lastupdated: "2018-4-20"
     ```
     {: screen}
 
-    您可以將這個 URL 提供給同事試用，或是在行動電話的瀏覽器中輸入，就會看到 Hello World 應用程式真的可以公開使用。
+    若要查看應用程式可公開使用，請嘗試在您的行動電話上將它輸入到瀏覽器中。
+    {: tip}
 
-12. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。請注意，步驟會視您的 Kubernet 版本而有所不同。
+12. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
 
-13. 在**工作負載**標籤中，您可以看到所建立的資源。完成瀏覽 Kubernetes 儀表板之後，請使用 CTRL+C 來結束 `proxy` 指令。
+    如果您在 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) 中選取叢集，則可以使用 **Kubernetes 儀表板**按鈕，透過按一下來啟動儀表板。
+    {: tip}
+
+13. 在**工作負載**標籤中，您可以看到所建立的資源。
 
 恭喜！您已部署第一個應用程式版本。
 
@@ -308,13 +316,14 @@ lastupdated: "2018-4-20"
 在本課程中，您會將 Hello World 應用程式的三個實例部署至叢集中，以獲得比第一個應用程式版本更高的可用性。
 {:shortdesc}
 
-較高的可用性代表使用者存取作業會分流至這三個實例。當有太多使用者嘗試存取相同的應用程式實例時，他們可能會注意到回應時間變慢。對您的使用者而言，多個實例代表更快的回應時間。在本課程中，您也會瞭解性能檢查及部署更新如何搭配 Kubernetes 使用。下圖包含您完成本課程時會部署的元件。
+較高的可用性表示使用者存取作業會分成三個實例。當有太多使用者嘗試存取相同的應用程式實例時，他們可能會注意到回應時間變慢。對您的使用者而言，多個實例表示更快的回應時間。在本課程中，您也會瞭解性能檢查及部署更新如何使用 Kubernetes。下圖包括您藉由完成本課程所部署的元件。
+
 
 ![部署設定](images/cs_app_tutorial_components2.png)
 
 在前一個指導教學中，您已建立自己的帳戶，以及一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並部署三個 Hello World 應用程式實例。每一個實例都會部署在 Kubernetes Pod 中，作為工作者節點中抄本集的一部分。若要讓它可公開使用，請同時建立 Kubernetes 服務。
 
-如配置 Script 中所定義，Kubernetes 可以使用可用性檢查來查看 Pod 中的容器是否正在執行中。例如，這些檢查可能會捕捉到死鎖，也就是應用程式正在執行，但無法繼續進行的狀況。將處於此狀況的容器重新啟動，有助於讓應用程式提高可用性，而不管其錯誤。然後，Kubernetes 會使用整備檢查，以瞭解容器何時準備好，可以重新開始接受資料流量。當 Pod 的容器就緒時，就會將 Pod 視為就緒。當 Pod 就緒時，就會重新啟動。在這個應用程式版本中，每 15 秒，應用程式就會逾時。由於已在配置 Script 中配置性能檢查，當性能檢查發現應用程式有問題時，就會重建容器。
+如配置 Script 中所定義，Kubernetes 可以使用可用性檢查來查看 Pod 中的容器是否正在執行中。例如，這些檢查可能會捕捉到死鎖，也就是應用程式正在執行，但無法繼續進行的狀況。將處於此狀況的容器重新啟動，有助於讓應用程式提高可用性，而不管其錯誤。然後，Kubernetes 會使用就緒檢查，以瞭解容器何時準備好，可以重新開始接受資料流量。當 Pod 的容器就緒時，就會將 Pod 視為就緒。當 Pod 就緒時，就會重新啟動。在這個應用程式版本中，每 15 秒，應用程式就會逾時。由於已在配置 Script 中配置性能檢查，當性能檢查發現應用程式有問題時，就會重建容器。
 
 1.  在 CLI 中，導覽至 `Lab 2` 目錄。
 
@@ -371,14 +380,14 @@ lastupdated: "2018-4-20"
         ```
         image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
         ```
-        {: pre}
+        {: codeblock}
 
     2.  在 **Deployment** 區段中，注意 `replicas`。replicas 是應用程式的實例數目。執行三個實例會讓應用程式的可用性高於只執行一個實例。
 
         ```
         replicas: 3
         ```
-        {: pre}
+        {: codeblock}
 
     3.  請注意 HTTP 存活性探測，它每 5 秒會檢查一次容器的性能。
 
@@ -412,8 +421,8 @@ lastupdated: "2018-4-20"
 7.  現在，部署工作已完成，您可以開啟瀏覽器並查看應用程式。若要構成 URL，請採用您在前一個課程中用於工作者節點的相同公用 IP 位址，並將其與配置 Script 中指定的 NodePort 結合。若要取得工作者節點的公用 IP 位址，請執行：
 
   ```
-       bx cs workers <cluster_name_or_ID>
-       ```
+  bx cs workers <cluster_name_or_ID>
+  ```
   {: pre}
 
   使用範例值的 URL 為 `http://169.xx.xxx.xxx:30072`。您可能會在瀏覽器中看到下列文字。如果沒看到這些文字，請不必擔心。此應用程式的設計即為啟動後關閉。
@@ -434,7 +443,7 @@ lastupdated: "2018-4-20"
   ```
   {: screen}
 
-8.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。請注意，步驟會視您的 Kubernet 版本而有所不同。
+8.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
 
 9. 在**工作負載**標籤中，您可以看到所建立的資源。在此標籤中，您可以反覆重新整理，並看到性能檢查正常運作中。在 **Pod** 區段中，您可以看到，當 Pod 中的容器重建時，Pod 重新啟動多少次。如果您正好在儀表板中捕捉到下列錯誤，此訊息表示性能檢查捕捉到問題。請給它幾分鐘時間，然後再重新整理。您會看到每一個 Pod 的重新啟動次數有所變更。
 
@@ -444,9 +453,6 @@ lastupdated: "2018-4-20"
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
     ```
     {: screen}
-
-    完成瀏覽 Kubernetes 儀表板之後，請在您的 CLI 中輸入 CTRL+C，以結束 `proxy` 指令。
-
 
 恭喜！您已部署第二個應用程式版本。您必須使用的指令較少、已瞭解性能檢查如何運作，並編輯了部署，這真是太棒了！Hello World 應用程式已通過公關公司的測試。現在，您可以為公關公司部署更好用的應用程式，以開始分析新聞稿。
 
@@ -460,9 +466,9 @@ lastupdated: "2018-4-20"
   輸出範例：
 
   ```
-deployment "hw-demo-deployment" deleted
-service "hw-demo-service" deleted
-```
+  deployment "hw-demo-deployment" deleted
+  service "hw-demo-service" deleted
+  ```
   {: screen}
 
 <br />
@@ -474,9 +480,10 @@ service "hw-demo-service" deleted
 在前面的課程中，應用程式是在一個工作者節點中部署成單一元件。在本課程中，您可以將應用程式的兩個元件部署至使用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的叢集。
 {:shortdesc}
 
-將元件分開在不同的容器中，可確保您在更新其中一個元件時，不會影響其他元件。然後，您將會更新應用程式，使用更多抄本擴充它，以提高可用性。下圖包含您完成本課程時會部署的元件。
+將元件分開在不同的容器中，可確保您在更新其中一個元件時，不會影響其他元件。然後，您更新應用程式，使用更多抄本擴充它，以提高可用性。下圖包括您藉由完成本課程所部署的元件。
 
 ![部署設定](images/cs_app_tutorial_components3.png)
+
 
 在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將在 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的實例，並配置兩個部署，分別部署應用程式的每一個元件。每一個元件都會部署在工作者節點的 Kubernetes Pod 中。若要讓這兩個元件可公開使用，請同時對每一個元件建立一個 Kubernetes 服務。
 
@@ -502,7 +509,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-    2.  在本端將應用程式的第一部分建置並標記為映像檔。同樣地，不要忘記指令尾端的句點 (`.`)。如果您是使用 Docker Quickstart Terminal 來執行 Docker 指令，請務必切換 CLI。
+    2.  在本端將應用程式的第一部分建置並標記為映像檔。同樣地，不要忘記指令尾端的句點 (`.`)。如果您是使用 Docker Quickstart 終端機來執行 Docker 指令，請務必切換 CLI。
 
         ```
         docker build -t registry.<region>.bluemix.net/<namespace>/watson .
@@ -553,7 +560,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-5.  驗證這些映像檔都已順利新增至登錄名稱空間。如果您使用 Docker Quickstart Terminal 來執行 Docker 指令，請務必切回到您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
+5.  驗證這些映像檔都已順利新增至登錄名稱空間。如果您使用 Docker Quickstart 終端機來執行 Docker 指令，請務必切回到您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
 
     ```
     bx cr images
@@ -573,7 +580,7 @@ service "hw-demo-service" deleted
     ```
     {: screen}
 
-6.  利用文字編輯器，開啟 `Lab 3` 目錄中的 `watson-deployment.yml` 檔案。針對應用程式的 watson 及 watson-talk 元件，此配置 Script 都有包括部署及服務。
+6.  利用文字編輯器，開啟 `Lab 3` 目錄中的 `watson-deployment.yml` 檔案。針對應用程式的 `watson` 及 `watson-talk` 元件，此配置 Script 都有包括部署及服務。
 
     1.  針對這兩個部署，在登錄名稱空間中更新映像檔的詳細資料。
 
@@ -667,9 +674,9 @@ service "hw-demo-service" deleted
 
     在瀏覽器中，您可以看到對您輸入文字的 JSON 回應。
 
-10.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。請注意，步驟會視您的 Kubernet 版本而有所不同。
+10. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
 
-11. 在**工作負載**標籤中，您可以看到所建立的資源。完成瀏覽 Kubernetes 儀表板之後，請使用 CTRL+C 來結束 `proxy` 指令。
+11. 在**工作負載**標籤中，您可以看到所建立的資源。
 
 ### 課程 3b. 更新執行中的 Watson Tone Analyzer 部署
 {: #lesson3b}
@@ -681,8 +688,8 @@ service "hw-demo-service" deleted
 1.  開啟執行中部署的配置詳細資料。
 
     ```
-        kubectl edit deployment/watson-talk-pod
-        ```
+    kubectl edit deployment/watson-talk-pod
+    ```
     {: pre}
 
     視您的作業系統而定，可能會開啟 vi 編輯器或文字編輯器。
@@ -690,10 +697,10 @@ service "hw-demo-service" deleted
 2.  將映像檔的名稱變更為 ibmliberty 映像檔。
 
     ```
-        spec:
-              containers:
-              - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
+    spec:
+          containers:
+          - image: registry.<region>.bluemix.net/ibmliberty:latest
+    ```
     {: codeblock}
 
 3.  儲存變更，並結束編輯器。
@@ -701,22 +708,22 @@ service "hw-demo-service" deleted
 4.  將變更套用至執行中的部署。
 
     ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
     {: pre}
 
     等待確認推出完成。
 
     ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
     {: screen}
 
     當您推出變更時，Kubernetes 會建立並測試另一個 Pod。測試成功時，會移除舊的 Pod。
 
 [測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-恭喜！您已部署 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 應用程式。公關公司可以真的開始使用這個應用程式的部署，以開始分析其新聞稿。
+恭喜！您已部署 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 應用程式。公關公司可以開始使用這個部署，以開始分析其新聞稿。
 
 準備好刪除您建立的內容嗎？您可以使用配置 Script 來刪除您所建立的資源。
 
@@ -728,11 +735,11 @@ service "hw-demo-service" deleted
   輸出範例：
 
   ```
-deployment "watson-pod" deleted
-deployment "watson-talk-pod" deleted
-service "watson-service" deleted
-service "watson-talk-service" deleted
-```
+  deployment "watson-pod" deleted
+  deployment "watson-talk-pod" deleted
+  service "watson-service" deleted
+  service "watson-talk-service" deleted
+  ```
   {: screen}
 
   如果您不想要保留叢集，可以同時將它刪除。
@@ -747,7 +754,6 @@ service "watson-talk-service" deleted
 
 既然您已掌握基本觀念，就可以移至更進階的活動。請考量嘗試執行下列其中一項：
 
-- 在儲存庫中完成更複雜的實驗
+- 在儲存庫中完成[更複雜的實驗室 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
 - 使用 {{site.data.keyword.containershort_notm}} [自動擴充應用程式](cs_app.html#app_scaling)
 - 探索 [developerWorks ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上的容器編排行程。
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,24 +15,25 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # 地區及位置
 {{site.data.keyword.Bluemix}} 是在全球各地管理。地區是端點所存取的地理區域。位置是地區內的資料中心。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containershort_notm}} 地區](#container_regions)不同。
 
-![{{site.data.keyword.containershort_notm}} 地區與資料中心](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} 地區及位置](/images/regions.png)
 
-{{site.data.keyword.containershort_notm}} 地區與資料中心
+_{{site.data.keyword.containershort_notm}} 地區及位置_
 
-支援的 {{site.data.keyword.containershort_notm}} 地區：
+支援的 {{site.data.keyword.containershort_notm}} 地區如下：
   * 亞太地區北部
   * 亞太地區南部
   * 歐盟中部
   * 英國南部
   * 美國東部
   * 美國南部
-
 
 
 ## {{site.data.keyword.Bluemix_notm}} 地區 API 端點
@@ -45,7 +46,7 @@ lastupdated: "2018-4-20"
 
 {{site.data.keyword.Bluemix_notm}} 地區可以藉由在登入時指定 API 端點來存取。如果您未指定地區，則會將您自動登入最接近的地區。
 
-{{site.data.keyword.Bluemix_notm}} 地區 API 端點與範例登入指令：
+例如，您可以使用下列指令來登入 {{site.data.keyword.Bluemix_notm}} 地區 API 端點：
 
   * 美國南部及美國東部
       ```
@@ -89,7 +90,7 @@ lastupdated: "2018-4-20"
 若要使用 API 搭配廣域端點，請在您的所有要求中，在 `X-Region` 標頭傳遞地區名稱。
 {: tip}
 
-### 登入不同的容器服務地區
+### 登入不同的 {{site.data.keyword.containerlong}_notm} 地區
 {: #container_login_endpoints}
 
 您可以使用 {{site.data.keyword.containershort_notm}} CLI 來變更位置。
@@ -103,7 +104,7 @@ lastupdated: "2018-4-20"
 
 若要快速切換地區，請執行 `bx cs region-set`。
 
-### 使用容器服務 API 指令
+### 使用 {{site.data.keyword.containerlong_notm}} API 指令
 {: #containers_api}
 
 若要與 {{site.data.keyword.containershort_notm}} API 互動，請輸入指令類型，並在廣域端點附加 `/v1/command`。
@@ -128,24 +129,27 @@ lastupdated: "2018-4-20"
 位置是指 {{site.data.keyword.Bluemix_notm}} 地區內可用的實體資料中心。地區是組織位置的概念工具，可包括不同國家/地區中的位置（資料中心）。下表依地區顯示可用的位置。
 {:shortdesc}
 
-| 地區| 位置| 城市|
+|地區|位置|城市|
 |--------|----------|------|
-| 亞太地區北部| hkg02、seo01、sng01、tok02 | 香港、首爾、新加坡、東京|
-| 亞太地區南部| mel01、syd01、syd04| 墨爾本、雪梨|
-| 歐盟中部| ams03、fra02、par01        | 阿姆斯特丹、法蘭克福、巴黎|
-| 英國南部| lon02、lon04| 倫敦|
-| 美國東部| mon01、tor01、wdc06、wdc07| 蒙特利爾、多倫多、華盛頓特區|
-| 美國南部| dal10、dal12、dal13、sao01| 達拉斯、聖保羅|
+|亞太地區北部|hkg02、seo01、sng01、tok02 |中華人民共和國香港特別行政區、首爾、新加坡、東京|
+|亞太地區南部|mel01、syd01、syd04|墨爾本、雪梨|
+|歐盟中部|ams03、fra02、par01        |阿姆斯特丹、法蘭克福、巴黎|
+|英國南部|lon02、lon04|倫敦|
+|美國東部|mon01、tor01、wdc06、wdc07|蒙特利爾、多倫多、華盛頓特區|
+|美國南部|dal10、dal12、dal13、sao01|達拉斯、聖保羅|
+{: caption="可用的地區及位置" caption-side="top"}
 
 叢集的資源會保留在已部署叢集的位置（資料中心）。下列影像強調顯示叢集在美國東部地區範例內的關係：
 
-1.  叢集的資源（包括主節點及工作者節點）位於您已部署叢集的相同位置。當您起始本端容器編排動作（例如，`kubectl` 指令）時，會在相同位置內的主節點與工作者節點之間交換資訊。
+1.  叢集的資源（包括主節點及工作者節點）位於您已部署叢集的相同位置。當您建立本端容器編排動作（例如 `kubectl` 指令）時，會在相同位置內的主節點與工作者節點之間交換資訊。
 
-2.  如果您設定了其他叢集資源（例如，儲存空間、網路、運算或在 Pod 執行的應用程式），則資源及其資料會保留在您已部署叢集的位置。
+2.  如果您已設定其他叢集資源（例如，儲存空間、網路、運算或在 Pod 執行的應用程式），則資源及其資料會保留在您已部署叢集的位置。
 
-3.  當您起始叢集管理動作（例如，使用 `bx cs` 指令）時，會將有關叢集的基本資訊（例如，名稱、ID、使用者、指令）遞送至地區端點。
+3.  當您建立叢集管理動作（例如，使用 `bx cs` 指令）時，會將有關叢集的基本資訊（例如，名稱、ID、使用者、指令）遞送至地區端點。
 
 ![瞭解叢集資源所在的位置](/images/region-cluster-resources.png)
 
-瞭解叢集資源所在的位置。
+_瞭解叢集資源所在的位置。_
+
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # 使用 NodePort、LoadBalancer 或 Ingress 服务规划联网
 {: #planning}
 
@@ -26,10 +27,11 @@ lastupdated: "2018-4-20"
 
 |集群类型|集群的公共 VLAN 的管理方|
 |------------|------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 中的免费集群|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 中的标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户|
+|免费集群|{{site.data.keyword.IBM_notm}}|
+|标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户|
+{: caption="按集群类型列出的公用 VLAN 的管理器" caption-side="top"}
 
-有关工作程序节点与 pod 之间的集群内网络通信的信息，请参阅[集群内联网](cs_secure.html#in_cluster_network)。有关将 Kubernetes 集群中运行的应用程序安全连接到内部部署网络或连接到集群外部的应用程序的信息，请参阅[设置 VPN 连接](cs_vpn.html)。
+有关工作程序节点与 pod 之间的集群内网络通信的更多信息，请参阅[集群内联网](cs_secure.html#in_cluster_network)。有关将 Kubernetes 集群中运行的应用程序安全连接到内部部署网络或连接到集群外部的应用程序的更多信息，请参阅[设置 VPN 连接](cs_vpn.html)。
 
 ## 允许对应用程序进行公共访问
 {: #public_access}
@@ -41,7 +43,7 @@ lastupdated: "2018-4-20"
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/networking.png)
 
-此图显示了 {{site.data.keyword.containershort_notm}} 中 Kubernetes 如何携带用户网络流量。根据创建的是免费集群还是标准集群，有不同的方式使应用程序可从因特网进行访问。
+此图显示了 {{site.data.keyword.containershort_notm}} 中 Kubernetes 如何携带用户网络流量。要使应用程序可从因特网进行访问，具体方法根据您创建的是免费集群还是标准集群而有所不同。
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">NodePort 服务</a>（免费和标准集群）</dt>
@@ -64,14 +66,14 @@ lastupdated: "2018-4-20"
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a>（仅限标准集群）</dt>
 <dd>
  <ul>
-  <li>通过创建一个外部 HTTP 或 HTTPS、TCP 或 UDP 负载均衡器来使用安全的唯一公共入口点将入局请求路由到集群中的多个应用程序，从而公开这些应用程序。</li>
+  <li>通过创建一个外部 HTTP 或 HTTPS、TCP 或 UDP 负载均衡器，公开集群中的多个应用程序。负载均衡器使用安全的唯一公共入口点将入局请求路由到应用程序。</li>
   <li>您可以使用一个公用路径，将集群中的多个应用程序显示为服务。</li>
   <li>Ingress 由两个组件组成：
    <ul>
     <li>Ingress 资源用于定义如何对应用程序的入局请求进行路由和负载均衡的规则。</li>
-    <li>应用程序负载均衡器 (ALB) 侦听入局 HTTP 或 HTTPS、TCP 或 UDP 服务请求，并根据 Ingress 资源中定义的规则在各个应用程序 pod 之间转发请求。</li>
+    <li>应用程序负载均衡器 (ALB) 侦听入局 HTTP 或 HTTPS、TCP 或 UDP 服务请求。ALB 根据在 Ingress 资源中定义的规则，在各个应用程序 pod 之间转发请求。</li>
    </ul>
-  <li>如果要使用定制路由规则来实施自己的 ALB，并且需要对应用程序进行 SSL 终止，请使用 Ingress。</li>
+  <li>如果要通过定制路由规则来实施自己的 ALB，并需要对应用程序进行 SSL 终止，可使用 Ingress。</li>
  </ul>
 </dd></dl>
 
@@ -83,4 +85,3 @@ lastupdated: "2018-4-20"
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer 服务" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Ingress 服务" shape="circle" coords="445, 420, 45"/>
 </map>
-

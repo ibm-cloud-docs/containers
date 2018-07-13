@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,21 +15,26 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
-# Versioni Kubernetes
+
+
+# Azioni di aggiornamento e informazioni sulla versione
 {: #cs_versions}
+
+## Tipi di versione Kubernetes
+{: #version_types}
 
 {{site.data.keyword.containerlong}} supporta contemporaneamente più versioni di Kubernetes. Quando viene rilasciata una versione più recente (n), sono supportate fino a 2 versioni precedenti (n-2). Le versioni che sono più di 2 precedenti rispetto all'ultima (n-3) sono prima dichiarate obsolete e quindi non più supportate.
 {:shortdesc}
 
 Le versioni di Kubernetes al momento supportate sono:
 
-- Più recente: 1.9.3
-- Predefinita: 1.8.11
-- Supportata: 1.7.16
+- Più recente: 1.10.1
+- Predefinita: 1.9.7
+- Supportata: 1.8.11
 
 **Versioni obsolete**: se i cluster sono in esecuzione su un Kubernetes deprecato, hai 30 giorni per controllare ed effettuare l'aggiornamento a una versione di Kubernetes supportata prima che la versione non sia più supportata. Durante il periodo di deprecazione, puoi eseguire comandi limitati nei cluster per aggiungere nodi di lavoro, ricaricare i nodi di lavoro e aggiornare il cluster. Non puoi creare nuovi cluster nella versione obsoleta.
 
-**Versioni non supportate**: se esegui i cluster in una versione Kubernetes che non è supportata, [controlla i potenziali impatti](#version_types) per gli aggiornamenti e quindi [aggiorna il tuo cluster](cs_cluster_update.html#update) immediatamente per continuare a ricevere il supporto e gli aggiornamenti di sicurezza importanti.
+**Versioni non supportate**: se esegui i cluster in una versione Kubernetes che non è supportata, [controlla i potenziali impatti](#version_types) per gli aggiornamenti e quindi [aggiorna il cluster](cs_cluster_update.html#update) immediatamente per continuare a ricevere il supporto e gli aggiornamenti di sicurezza importanti.
 
 Per controllare la versione del server di un cluster, immetti il seguente comando.
 
@@ -41,13 +46,13 @@ kubectl version  --short | grep -i server
 Output di esempio:
 
 ```
-Server Version: v1.8.11+9d6e0610086578
+Server Version: v1.9.7+9d6e0610086578
 ```
 {: screen}
 
 
 ## Tipi di aggiornamento
-{: #version_types}
+{: #update_types}
 
 Per il tuo cluster Kubernetes sono disponibili tre tipi di aggiornamento: principale, secondario e patch.
 {:shortdesc}
@@ -60,24 +65,125 @@ Per il tuo cluster Kubernetes sono disponibili tre tipi di aggiornamento: princi
 {: caption="Impatti degli aggiornamenti di Kubernetes" caption-side="top"}
 
 Quando gli aggiornamenti diventano disponibili, riceverai una notifica quando visualizzerai le informazioni relative ai nodi di lavoro, ad esempio con i comandi `bx cs workers <cluster>` o `bx cs worker-get <cluster> <worker>`.
--  **Aggiornamenti principali e secondari**: per prima cosa, [aggiorna il tuo nodo master](cs_cluster_update.html#master) e poi [aggiorna i nodi di lavoro](cs_cluster_update.html#worker_node). 
-   - Per impostazione predefinita, non puoi aggiornare un master Kubernetes più di due versioni secondarie in avanti. Ad esempio, se il master corrente è la versione 1.5 e vuoi aggiornare a 1.8, devi prima aggiornare a 1.7. Puoi forzare l'aggiornamento per continuare, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti.
+-  **Aggiornamenti principali e secondari**: per prima cosa, [aggiorna il tuo nodo master](cs_cluster_update.html#master) e poi [aggiorna i nodi di lavoro](cs_cluster_update.html#worker_node).  
+   - Per impostazione predefinita, non puoi aggiornare un master Kubernetes a più di tre versioni secondarie in avanti. Ad esempio, se il master corrente è la versione 1.5 e vuoi aggiornare a 1.8, devi prima aggiornare a 1.7. Puoi forzare l'aggiornamento per continuare, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti.
    - Se utilizzi una versione della CLI `kubectl` che non corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le [versioni della CLI](cs_cli_install.html#kubectl) e dei cluster Kubernetes.
--  **Aggiornamenti patch**: controlla mensilmente per vedere se è disponibile un aggiornamento e usa il [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update` per applicare queste patch di sicurezza e del sistema operativo. Per ulteriori dettagli, vedi [Changelog versione](cs_versions_changelog.html).
+-  **Aggiornamenti patch**: controlla mensilmente per vedere se è disponibile un aggiornamento e usa il comando `bx cs worker-update` [](cs_cli_reference.html#cs_worker_update) o `bx cs worker-reload` [](cs_cli_reference.html#cs_worker_reload) per applicare queste patch di sicurezza e del sistema operativo. Per ulteriori informazioni, vedi [Changelog versione](cs_versions_changelog.html). 
 
 <br/>
 
-Le informazioni in questa pagina riassumo gli aggiornamenti che potrebbero avere un impatto sulle applicazioni distribuite quando aggiorni un cluster a una nuova versione dalla versione precedente.
+Queste informazioni riassumono gli aggiornamenti che potrebbero avere un impatto sulle applicazioni distribuite quando aggiorni un cluster a una nuova versione dalla versione precedente. 
+-  [Azioni di migrazione](#cs_v110) Versione 1.10. 
 -  [Azioni di migrazione](#cs_v19) Versione 1.9.
 -  [Azioni di migrazione](#cs_v18) Versione 1.8.
--  [Azioni di migrazione](#cs_v17) Versione 1.7.
 -  [Archiviazione](#k8s_version_archive) di versioni obsolete o non supportate.
 
 <br/>
 
-Per un elenco più completo delle modifiche, esamina quanto segue:
+Per un elenco completo delle modifiche, esamina le seguenti informazioni: 
 * [Changelog Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [Changelog versione IBM](cs_versions_changelog.html).
+
+## Versione 1.10
+{: #cs_v110}
+
+<p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.10 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto certificato Kubernetes per la versione 1.10 con il programma Kubernetes Software Conformance Certification di CNCF. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
+
+Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.10.
+
+**Importante**: prima di poter correttamente eseguire l'aggiornamento a Kubernetes 1.10, devi seguire la procedura elencata in [Preparazione dell'aggiornamento a Calico v3](#110_calicov3).
+
+<br/>
+
+### Aggiorna prima il master
+{: #110_before}
+
+<table summary="Aggiornamenti di Kubernetes per le versioni 1.10">
+<caption>Modifiche da apportare prima di aggiornare il master a Kubernetes 1.10</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico v3</td>
+<td>L'aggiornamento della versione Kubernetes 1.10 aggiorna anche Calico da v2.6.5 a v3.1.1. <strong>Importante</strong>: prima di poter correttamente eseguire l'aggiornamento a Kubernetes v1.10, devi seguire la procedura elencata in [Preparazione dell'aggiornamento a Calico v3](#110_calicov3).</td>
+</tr>
+<tr>
+<td>Politica di rete del dashboard Kubernetes</td>
+<td>In Kubernetes 1.10, la politica di rete <code>kubernetes-dashboard</code> nello spazio dei nomi <code>kube-system</code> blocca a tutti i pod di accedere al dashboard Kubernetes. Tuttavia, questo <strong>non</strong> influenza la possibilità di accedere al dashboard dalla console {{site.data.keyword.Bluemix_notm}} o utilizzando <code>kubectl proxy</code>. Se un pod necessita dell'accesso al dashboard, puoi aggiungere un'etichetta <code>kubernetes-dashboard-policy: allow</code> a uno spazio dei nomi e poi distribuire il pod allo spazio dei nomi.</td>
+</tr>
+<tr>
+<td>Accesso API Kubelet</td>
+<td>L'autorizzazione API Kubelet è ora delegata al <code>server API Kubernetes</code>. L'accesso all'API Kubelet si basa su <code>ClusterRoles</code> che concede l'autorizzazione ad accedere alle risorse secondarie <strong>node</strong>. Per impostazione predefinita, Kubernetes Heapster ha <code>ClusterRole</code> e <code>ClusterRoleBinding</code>. Tuttavia, se l'API Kubelet viene utilizzata da altri utenti o applicazioni, devi concedere loro l'autorizzazione ad utilizzare l'API. Fai riferimento alla documentazione Kubernetes in [Kubelet authorization![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/kubelet-authentication-authorization/#kubelet-authorization).</td>
+</tr>
+<tr>
+<td>Suite di cifratura </td>
+<td>La suite di cifratura supportata dal <code>server API Kubernetes</code> e dall'API Kubelet è ora limitata a un sottoinsieme con codifica molto elevata (128 bit o più). Se hai risorse o un'automazione esistenti che utilizzano una cifratura meno sicura e che si basano sulla comunicazione con il <code>server API Kubernetes</code> o l'API Kubelet, abilita una cifratura più elevata prima di aggiornare il master.</td>
+</tr>
+</tbody>
+</table>
+
+### Aggiorna dopo il master
+{: #110_after}
+
+<table summary="Aggiornamenti Kubernetes per la versione 1.10">
+<caption>Modifiche da apportare dopo aver aggiornato il master a Kubernetes 1.10</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico v3</td>
+<td>Quando il cluster viene aggiornato, tutti i dati Calico esistenti applicati al cluster vengono automaticamente migrati per utilizzare la sintassi Calico v3. Per visualizzare, aggiungere o modificare le risorse Calico con la sintassi Calico v3, aggiorna la tua [configurazione della CLI Calico alla versione 3.1.1](#110_calicov3).</td>
+</tr>
+<tr>
+<td>Indirizzo <code>ExternalIP</code> del nodo</td>
+<td>Il campo <code>ExternalIP</code> di un nodo è ora impostato sul valore dell'indirizzo IP pubblico del nodo. Controlla e aggiorna tutte le risorse che dipendono da questo valore.</td>
+</tr>
+<tr>
+<td><code>kubectl port-forward</code></td>
+<td>Ora quando utilizzi il comando <code>kubectl port-forward</code>, non supporta più l'indicatore <code>-p</code>. Se i tuoi script si basano sul comportamento precedente, aggiornarli per sostituire l'indicatore <code>-p</code> con il nome del pod.</td>
+</tr>
+<tr>
+<td>Volumi di dati API in sola lettura</td>
+<td>Ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati in sola lettura.
+Precedentemente, le applicazioni potevano scrivere i dati in questi volumi che potevano essere ripristinati
+automaticamente dal sistema. Questa azione di migrazione è necessaria per risolvere la vulnerabilità di
+sicurezza [CVE-2017-1002102![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</td>
+</tr>
+</tbody>
+</table>
+
+### Preparazione dell'aggiornamento a Calico v3 
+{: #110_calicov3}
+
+Prima di iniziare, il tuo master del cluster e tutti i nodi di lavoro devono essere in esecuzione alla versione Kubernetes 1.8 o successiva e devono avere almeno un nodo di lavoro.
+
+**Importante**: prepara l'aggiornamento a Calico v3 prima di aggiornare il master. Durante l'upgrade del master a Kubernetes v1.10, non vengono pianificati nuovi pod o nuove politiche di rete Kubernetes o Calico. La quantità di tempo dell'aggiornamento impedisce nuove variazioni di pianificazione. I cluster piccoli possono impiegare pochi minuti, con pochi minuti extra per ogni 10 nodi. I pod e le politiche di rete esistenti continuano ad essere in esecuzione.
+
+1.  Verifica che i tuoi pod Calico siano integri.
+    ```
+    kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
+    ```
+    {: pre}
+    
+2.  Se tutti i pod non sono nello stato **In esecuzione**, elimina il pod e attendi finché non è in uno stato **In esecuzione** prima di continuare.
+
+3.  Se generi automaticamente le politiche o altre risorse Calico, aggiorna il tuo strumento di automazione per generare queste risorse con la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
+
+4.  Se utilizzi [strongSwan](cs_vpn.html#vpn-setup) per la connettività VPN, il grafico Helm strongSwan 2.0.0 non funziona con Calico v3 o Kubernetes 1.10. [Aggiorna strongSwan](cs_vpn.html#vpn_upgrade) al grafico Helm 2.1.0, che è compatibile con le versioni precedenti Calico 2.6 e Kubernetes 1.7, 1.8 e 1.9.
+
+5.  [Aggiorna il tuo master del cluster a Kubernetes v1.10](cs_cluster_update.html#master).
+
+<br />
+
 
 ## Versione 1.9
 {: #cs_v19}
@@ -133,6 +239,14 @@ In precedenza, l'operazione aveva esito negativo e visualizzavi un messaggio di 
 <td>Agli utenti viene richiesto di accedere al dashboard Kubernetes con le proprie credenziali per visualizzare le risorse del cluster. L'autorizzazione RBAC `ClusterRoleBinding` predefinita del dashboard Kubernetes è stata rimossa. Per istruzioni, consulta [Avvio del dashboard Kubernetes](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
+<td>Volumi di dati API in sola lettura</td>
+<td>Ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati in sola lettura.
+Precedentemente, le applicazioni potevano scrivere i dati in questi volumi che potevano essere ripristinati
+automaticamente dal sistema. Questa azione di migrazione è necessaria per risolvere la vulnerabilità di
+sicurezza [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</td>
+</tr>
+<tr>
 <td>Corruzioni e tolleranze</td>
 <td>Le corruzioni `node.alpha.kubernetes.io/notReady` e `node.alpha.kubernetes.io/unreachable` sono state modificate rispettivamente in `node.kubernetes.io/not-ready` e `node.kubernetes.io/unreachable`.<br>
 Nonostante le corruzioni siano state aggiornate automaticamente, devi aggiornare manualmente le tolleranze per queste corruzioni. Per ogni spazio dei nomi tranne `ibm-system` e `kube-system`, determina se è necessario modificare le tolleranze:<br>
@@ -148,6 +262,7 @@ Se viene restituito `Action required`, modifica di conseguenza le tolleranze del
 </table>
 
 <br />
+
 
 
 ## Versione 1.8
@@ -200,7 +315,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>Il comando `kubectl delete` non ridimensiona più gli oggetti API del carico di lavoro, come i pod, prima che l'oggetto venga eliminato. Se richiedi che l'oggetto venga ridimensionato, utilizza [`kubectl scale ` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) prima di eliminare l'oggetto.</td>
+<td>Il comando `kubectl delete` non ridimensiona più gli oggetti API del carico di lavoro, come i pod, prima che l'oggetto venga eliminato. Se richiedi che l'oggetto venga ridimensionato, utilizza [`kubectl scale ` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/#scale) prima di eliminare l'oggetto.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -224,8 +339,19 @@ Se le tue applicazioni si basano sul comportamento non sicuro precedente, modifi
 <br />
 
 
-## Versione 1.7
+
+## Archivio
+{: #k8s_version_archive}
+
+### Versione 1.7 (obsoleta)
 {: #cs_v17}
+
+**A partire dal 22 maggio 2018, {{site.data.keyword.containershort_notm}} i cluster che eseguono la versione Kubernetes 1.7 sono obsoleti**. Dopo il 21 giugno 2018, i cluster della versione 1.7 non possono ricevere aggiornamenti di sicurezza o supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.8](#cs_v18)).
+
+[Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente.
+
+Stai ancora eseguendo la versione Kubernetes 1.5? Controlla le seguenti informazioni per valutare l'impatto dell'aggiornamento dalla v1.5 alla v1.7. [Aggiorna i tuoi cluster](cs_cluster_update.html#update) alla v1.7 e poi aggiornali immediatamente all'ultima v1.8.
+{: tip}
 
 <p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.7 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.7 nel programma CNCF Kubernetes Software Conformance Certification.</p>
 
@@ -233,7 +359,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 
 <br/>
 
-### Aggiorna prima il master
+#### Aggiorna prima il master
 {: #17_before}
 
 <table summary="Aggiornamenti Kubernetes per le versioni 1.7 e 1.6">
@@ -262,7 +388,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 </tbody>
 </table>
 
-### Aggiorna dopo il master
+#### Aggiorna dopo il master
 {: #17_after}
 
 <table summary="Aggiornamenti Kubernetes per le versioni 1.7 e 1.6">
@@ -279,7 +405,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 <td>Dopo aver aggiornato il cluster da Kubernetes 1.5, utilizza `apps/v1beta1` per il campo `apiVersion` nei nuovi file YALM di `Deployment`. Continua a utilizzare `extensions/v1beta1` per le altre risorse, ad esempio `Ingress`.</td>
 </tr>
 <tr>
-<td>kubectl</td>
+<td>'kubectl'</td>
 <td>Dopo l'aggiornamento della CLI `kubectl` , questi comandi `kubectl create` devono utilizzare più indicatori anziché argomenti separati da virgola:<ul>
  <li>`role`
  <li>`clusterrole`
@@ -413,13 +539,9 @@ Se le tue applicazioni si basano sul comportamento non sicuro precedente, modifi
 <br />
 
 
-## Archivio
-{: #k8s_version_archive}
-
 ### Versione 1.5 (non supportata)
 {: #cs_v1-5}
 
 A partire dal 4 aprile 2018, i cluster {{site.data.keyword.containershort_notm}} che eseguono [Kubernetes versione 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) non sono supportati. I cluster versione 1.5 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.7](#cs_v17)).
 
-[Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente. Nota che l'aggiornamento viene eseguito da una versione alla successiva più recente, ad esempio da 1.5 a 1.7 o da 1.8 a 1.9.
-
+[Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente. Devi aggiornare da una versione alla successiva più recente, ad esempio da 1.5 a 1.7 o da 1.8 a 1.9. 

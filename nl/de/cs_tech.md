@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}}-Technologie
 
@@ -57,8 +59,8 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
   </ul>
   </dd>
 
+<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.</p>
 
-  
 <p>Sind Sie bereit, mehr über Docker zu erfahren? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Erfahren Sie, wie Docker und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></p>
 
 </dl>
@@ -98,10 +100,10 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 <dt>App</dt>
 <dd>Eine App kann sich auf eine gesamte App oder eine Komponente einer App beziehen. Sie können Komponenten einer App in verschiedenen Pods oder Workerknoten bereitstellen.</dd>
 
+<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.</p>
 
-  
-<p>Sind Sie bereit, mehr über Kubernetes zu erfahren? </p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Erweitern Sie Ihr terminologisches Wissen mithilfe des Lernprogramms "Cluster erstellen"</a>. </li>
+<p>Sind Sie bereit, mehr über Kubernetes zu erfahren?</p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Erweitern Sie Ihr terminologisches Wissen mithilfe des Lernprogramms "Cluster erstellen"</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Erfahren Sie, wie Kubernetes und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></li></ul>
 
 
@@ -125,12 +127,15 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <dd>Jeder Workerknoten ist eine physische Maschine (Bare-Metal) oder eine virtuelle Maschine, die auf physischer Hardware in der Cloudumgebung ausgeführt wird. Wenn Sie einen Workerknoten bereitstellen, legen Sie die Ressourcen fest, die den auf diesem Workerknoten gehosteten Containern zur Verfügung stehen. Ohne Vorbereitungen sind Ihre Workerknoten mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Rechenressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet. Die integrierten Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher.</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/cs_org_ov.png)
-Abbildung. {{site.data.keyword.containershort_notm}}-Architektur
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur">
+ <figcaption>{{site.data.keyword.containershort_notm}}-Architektur</figcaption>
+</figure>
+</p>
 
-Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](cs_integrations.html#integrations). 
+Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](cs_integrations.html#integrations).
 
 
 <br />
-
 

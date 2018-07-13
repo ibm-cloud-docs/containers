@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Netzbetrieb mit NodePort-, LoadBalancer- oder Ingress-Services planen
 {: #planning}
 
@@ -26,10 +27,11 @@ Die öffentliche Netzschnittstelle für die Workerknoten in kostenlosen Clustern
 
 |Clustertyp|Manager des öffentlichen VLANs für den Cluster|
 |------------|------------------------------------------|
-|Kostenlose Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
-|Standardcluster in {{site.data.keyword.Bluemix_notm}}|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
+|Kostenlose Cluster|{{site.data.keyword.IBM_notm}}|
+|Standardcluster|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
+{: caption="Manager der öffentlichen VLANs nach Clustertyp" caption-side="top"}
 
-Informationen zur clusterinternen Netzkommunikation zwischen Workerknoten und Pods finden Sie in [Netzbetrieb in Clustern](cs_secure.html#in_cluster_network). Informationen zu sicheren Verbindungen von Apps, die in einem Kubernetes-Cluster ausgeführt werden, zu einem lokalen Netz oder zu Apps außerhalb Ihres Clusters finden Sie in [VPN-Konnektivität einrichten](cs_vpn.html).
+Weitere Informationen zur clusterinternen Netzkommunikation zwischen Workerknoten und Pods finden Sie in [Netzbetrieb in Clustern](cs_secure.html#in_cluster_network). Weitere Informationen zu sicheren Verbindungen von Apps, die in einem Kubernetes-Cluster ausgeführt werden, zu einem lokalen Netz oder zu Apps außerhalb Ihres Clusters finden Sie in [VPN-Konnektivität einrichten](cs_vpn.html).
 
 ## Öffentlichen Zugriff auf Apps zulassen
 {: #public_access}
@@ -41,7 +43,7 @@ Um eine App öffentlich für das Internet zugänglich zu machen, müssen Sie vor
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/networking.png)
 
-Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.containershort_notm}} überträgt. Je nachdem, ob Sie einen kostenlosen Cluster oder einen Standardcluster erstellt haben, gibt es verschiedene Möglichkeiten, Ihre App im Internet zugänglich zu machen.
+Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.containershort_notm}} überträgt. Um die App über das Internet zugänglich zu machen, stehen Ihnen verschiedene Möglichkeiten in Abhängigkeit davon zur Verfügung, ob Sie einen kostenlosen oder einen Standardcluster erstellt haben.
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">NodePort-Service</a> (kostenlose Cluster und Standardcluster)</dt>
@@ -64,13 +66,14 @@ Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.co
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a> (nur Standardcluster)</dt>
 <dd>
  <ul>
-  <li>Sie können mehrere Apps in ihrem Cluster öffentlich zugänglich machen, indem Sie eine einzelne externe HTTP- oder HTTPS-, TCP- oder UDP-Lastausgleichsfunktion (LoadBalancer) erstellen, die einen geschützten und eindeutigen Einstiegspunkt für die Weiterleitung eingehender Anforderungen an Ihre Apps verwendet.</li>
+  <li>Sie können mehrere Apps in einem Cluster öffentlich zugänglich machen, indem Sie eine einzelne externe HTTP- oder HTTPS-, TCP- oder UDP-Lastausgleichsfunktion (LoadBalancer) erstellen. Diese verwendet einen geschützten und eindeutigen Einstiegspunkt für die Weiterleitung eingehender Anforderungen an Ihre Apps.</li>
   <li>Sie können eine öffentliche Route verwenden, um mehrere Apps in Ihrem Cluster als Services zugänglich zu machen.</li>
-  <li>Ingress besteht aus zwei Komponenten: <ul>
+  <li>Ingress besteht aus zwei Komponenten:
+   <ul>
     <li>Die Ingress-Ressource definiert die Regeln, die festlegen, wie die Weiterleitung der eingehenden Anforderungen für eine App und deren Lastausgleich erfolgen soll.</li>
-    <li>Die Lastausgleichsfunktion für Anwendungen (ALB) ist für eingehende HTTP- oder HTTPS-, TCP- oder UDP-Serviceanforderungen  empfangsbereit und leitet Anforderungen über die Pods der App in Übereinstimmung mit den für jede Ingress-Ressource definierten Regeln weiter.</li>
+    <li>Die Lastausgleichsfunktion für Anwendungen (ALB) ist für eingehende HTTP-, HTTPS-, TCP- oder UDP-Serviceanforderungen empfangsbereit. Sie leitet Anforderungen über die Pods der App in Übereinstimmung mit den für jede Ingress-Ressource definierten Regeln weiter.</li>
    </ul>
-  <li>Verwenden Sie Ingress, wenn Sie Ihre eigene ALB mit angepassten Regeln für die Weiterleitung implementieren möchten und wenn Sie SSL-Terminierung für Ihre Apps benötigen.</li>
+  <li>Verwenden Sie Ingress, wenn Sie Ihre eigene ALB mit angepassten Regeln für die Weiterleitung implementieren möchten und eine SSL-Terminierung für Ihre Apps benötigen.</li>
  </ul>
 </dd></dl>
 
@@ -82,4 +85,3 @@ Folgen Sie diesem Entscheidungsbaum, um die beste Netzoption für Ihre Anwendung
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer-Service" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Ingress-Service" shape="circle" coords="445, 420, 45"/>
 </map>
-

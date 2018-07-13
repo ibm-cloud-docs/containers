@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Apertura delle porte e degli indirizzi IP necessari nel tuo firewall
 {: #firewall}
@@ -75,10 +78,10 @@ Per concedere l'accesso per un cluster specifico:
 1. Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
 {{site.data.keyword.Bluemix_notm}} quando richiesto. Se hai un account federato, includi l'opzione `--sso`.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Seleziona la regione in cui si trova il tuo cluster.
 
@@ -109,7 +112,7 @@ Per concedere l'accesso per un cluster specifico:
    ```
    {: screen}
 
-5. Consenti l'accesso all'**URL master** sulla porta, ad esempio `31142` nell'esempio precedente.
+5. Consenti l'accesso all'**URL master** sulla porta, ad esempio `31142` dall'esempio precedente. 
 
 6. Verifica la tua connessione.
 
@@ -173,7 +176,7 @@ Prima di cominciare, consenti l'accesso a eseguire i comandi [`bx`](#firewall_bx
 Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttura da dietro un firewall, come ad esempio per le regioni {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, gli IP privati dell'infrastruttura IBM Cloud (SoftLayer) e i dati in uscita per le attestazioni del volume persistente.
 {:shortdesc}
 
-  1.  Prendi nota dell'indirizzo IP pubblico di tutti i nodi di lavoro nel cluster.
+  1.  Prendi nota dell'indirizzo IP pubblico di tutti i tuoi nodi di lavoro nel cluster. 
 
       ```
       bx cs workers <cluster_name_or_ID>
@@ -184,6 +187,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       - **Importante**: devi consentire il traffico in uscita alla porta 443 per tutte le ubicazioni all'interno della regione, per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster si trova in Stati Uniti Sud, devi consentire il traffico dalla porta 443 agli indirizzi IP per tutte le ubicazioni (dal10, dal12 e dal13).
       <p>
   <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+  <caption>Gli indirizzi IP da aprire per il traffico in uscita</caption>
       <thead>
       <th>Regione</th>
       <th>Ubicazione</th>
@@ -229,6 +233,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       - Sostituisci <em>&lt;registry_publicIP&gt;</em> con gli indirizzi IP del registro per cui vuoi consentire il traffico. Il registro globale archivia le immagini pubbliche fornite da IBM e i registri regionali archiviano le tue proprie immagini pubbliche e private.
         <p>
 <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+  <caption>Gli indirizzi IP da aprire per il traffico del registro </caption>
       <thead>
         <th>Regione {{site.data.keyword.containershort_notm}}</th>
         <th>Indirizzo del registro</th>
@@ -236,7 +241,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       </thead>
       <tbody>
         <tr>
-          <td>Registro globale tra le regioni del contenitore</td>
+          <td>Registro globale tra le regioni {{site.data.keyword.containershort_notm}} </td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -268,8 +273,9 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Sostituisci <em>&lt;monitoring_public_IP&gt;</em> con tutti gli indirizzi delle regioni di monitoraggio per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+  <caption>Gli indirizzi IP da aprire per il traffico di monitoraggio </caption>
         <thead>
-        <th>Regione del contenitore</th>
+        <th>Regione {{site.data.keyword.containershort_notm}}</th>
         <th>Indirizzo di monitoraggio</th>
         <th>Indirizzi IP di monitoraggio</th>
         </thead>
@@ -296,8 +302,9 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Sostituisci <em>&lt;logging_public_IP&gt;</em> con tutti gli indirizzi delle regioni di registrazione per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+<caption>Gli indirizzi IP da aprire per il traffico di registrazione </caption>
         <thead>
-        <th>Regione del contenitore</th>
+        <th>Regione {{site.data.keyword.containershort_notm}}</th>
         <th>Indirizzo di registrazione</th>
         <th>Indirizzi IP di registrazione</th>
         </thead>
@@ -353,4 +360,3 @@ Puoi ora consentire l'accesso in entrata ai servizi NodePort, programma di bilan
   <dt>Ingress</dt>
   <dd>Apri la porta 80 per HTTP o la 443 per HTTPS per l'indirizzo IP per il programma di bilanciamento del carico dell'applicazione Ingress.</dd>
 </dl>
-

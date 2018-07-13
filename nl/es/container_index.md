@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Iniciación a {{site.data.keyword.containerlong_notm}}
@@ -43,33 +44,33 @@ Entonces ¿desea desplegar una app en un contenedor? ¡Un momento! Cree antes un
 
 Y ¿qué es un clúster? Un clúster es un conjunto de recursos, nodos, redes y dispositivos de almacenamiento que mantienen la alta disponibilidad de las apps. Cuando tenga un clúster, podrá desplegar sus apps en contenedores.
 
-Antes de empezar, debe tener una [cuenta de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) de prueba, de pago según uso o de suscripción para crear un clúster gratuito.
+**Antes de empezar**
 
-**¿Qué tipo de cuenta de {{site.data.keyword.Bluemix_notm}} debería tener?** Con las cuentas de pago según uso y de suscripción, puede suministrar recursos de infraestructura de IBM Cloud (SoftLayer) para los clústeres de Kubernetes y crear un clúster gratuito o clústeres estándar. Con una cuenta de prueba, puede crear un clúster gratuito durante, pero no clústeres estándar. Todos los clústeres gratuitos se suprimen después de 21 días. Para continuar con clústeres de Kubernetes, cree otro clúster gratuito hasta que finalice su cuenta de prueba, o actualice la cuenta a una de suscripción o de pago según uso.
+Debe tener una [cuenta de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) de prueba, pago según uso o de suscripción.
+
+Con una cuenta de prueba, puede crear un clúster gratuito que puede utilizar durante 21 días para familiarizarse con el servicio. Con una cuenta de pago según uso o de suscripción, podrá crear igualmente un clúster de prueba gratuito, pero también aprovisionar recursos (SoftLayer) de infraestructura de IBM Cloud para utilizar en clústeres estándares.
 {:tip}
 
 Para crear un clúster gratuito:
 
-1.  En la categoría **Contenedores** del [**Catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), pulse **Contenedores en clústeres de Kubernetes**.
+1.  En el [**Catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione **Contenedores en clústeres Kubernetes** y pulse **Crear**. Se abre una página de configuración del clúster. De forma predeterminada, se selecciona **Clúster gratuito**.
 
-2.  Consulte los clústeres y pulse **Crear**. Escriba un **Nombre de clúster**. El tipo de clúster predeterminado es gratuito. La próxima vez, puede crear un clúster estándar y definir personalizaciones adicionales como, por ejemplo, el número de nodos trabajadores.
+2. Dele un nombre exclusivo al clúster.
 
-3.  Pulse **Crear clúster**. Se abren los detalles del clúster, pero el nodo trabajador del clúster tarda unos minutos en suministrarse. Verá el estado del nodo trabajador en el separador **Nodos trabajadores**. Cuando el estado sea `Listo`, significa que el nodo trabajador está listo para ser utilizado.
+3.  Pulse **Crear clúster**. Se crea un nodo trabajador, es posible que tarde unos minutos en ser suministrado. En el separador **Nodos trabajadores** verá el progreso de la creación. Cuando el estado sea `Listo`, podrá empezar a trabajar con el clúster.
 
 Enhorabuena. Ha creado su primer clúster de Kubernetes. Estos son algunos detalles sobre su clúster gratuito:
 
 *   **Tipo de máquina**: El clúster gratuito tiene un nodo trabajador virtual con 2 CPU y 4 GB de memoria disponible para que utilicen sus apps. Cuando se crea un clúster estándar, puede elegir entre máquina físicas (nativas) o máquinas virtuales, junto con diversos tamaños de máquina.
 *   **Maestro gestionado**: El nodo trabajador se supervisa y se gestiona de forma centralizada mediante un maestro de Kubernetes de alta disponibilidad propiedad de {{site.data.keyword.IBM_notm}} que controla y supervisa todos los recursos de Kubernetes del clúster. Puede centrarse en el nodo trabajador y en las apps que se despliegan en el nodo trabajador sin tener que preocuparse de gestionar también este maestro.
 *   **Recursos de infraestructura**: Los recursos necesarios para ejecutar el clúster, como VLANS y direcciones IP, se gestionan en una cuenta de infraestructura de IBM Cloud (SoftLayer) propiedad de {{site.data.keyword.IBM_notm}}. Cuando cree un clúster estándar, podrá gestionar estos recursos en su propia cuenta de infraestructura de IBM Cloud (SoftLayer). Encontrará más información sobre estos recursos y los [permisos necesarios](cs_users.html#infra_access) cuando cree un clúster estándar.
-*   **Ubicación y otras opciones**: Los clústeres gratuitos se despliegan dentro de la región que selecciona, pero no puede elegir en qué ubicación (centro de datos). Para obtener más control sobre la ubicación, las redes y el almacenamiento persistente, cree un clúster estándar. [Más información sobre las ventajas de los clústeres gratuitos y estándar](cs_why.html#cluster_types).
+*   **Otras opciones**: Los clústeres gratuitos se despliegan dentro de la región que selecciona, pero no puede elegir en qué ubicación (centro de datos). Para obtener un control sobre la ubicación, las redes y el almacenamiento persistente, cree un clúster estándar. [Más información sobre las ventajas de los clústeres gratuitos y estándar](cs_why.html#cluster_types).
 
 
 **¿Qué es lo siguiente?**
-En los próximos 21 días, pruebe lo siguiente en su clúster gratuito. 
+En los próximos 21 días, pruebe lo siguiente en su clúster gratuito.
 
 * [Instalar las CLI para empezar a trabajar con el clúster.](cs_cli_install.html#cs_cli_install)
 * [Desplegar una app en el clúster.](cs_app.html#app_cli)
 * [Cree un clúster estándar con varios nodos para aumentar la disponibilidad.](cs_clusters.html#clusters_ui)
-* [Configure su propio registro privado en {{site.data.keyword.Bluemix_notm}}
-para almacenar y compartir imágenes de Docker con otros usuarios. ](/docs/services/Registry/index.html)
-
+* [Configure un registro privado en {{site.data.keyword.Bluemix_notm}} para almacenar y compartir imágenes de Docker con otros usuarios. ](/docs/services/Registry/index.html)

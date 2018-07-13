@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Configurazione della CLI e della API
@@ -75,11 +78,11 @@ Per installare le CLI:
 [installa la CLI Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Il prefisso per eseguire i comandi utilizzando la CLI Kubernetes è
 `kubectl`.
 
-    1.  Scarica la versione `major.minor` della CLI Kubernetes che corrisponde alla versione `major.minor` del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containershort_notm}} è la 1.8.11. **Nota**: se utilizzi una versione della CLI `kubectl` che non corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le versioni della CLI e dei cluster Kubernetes.
+    1.  Scarica la versione `major.minor` della CLI Kubernetes che corrisponde alla versione `major.minor` del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containershort_notm}} è la 1.9.7. **Nota**: se utilizzi una versione della CLI `kubectl` che non corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le versioni della CLI e dei cluster Kubernetes.
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
     2.  **Per OSX e Linux**: completa la seguente procedura.
         1.  Sposta il file eseguibile nella directory `/usr/local/bin`.
@@ -146,10 +149,38 @@ Per informazioni di riferimento su queste CLI, consulta la documentazione per qu
 
 -   [Comandi `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Comandi `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   [Comandi `kubectl` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [`kubectl` commands ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Comandi `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
+
+
+
+
+## Esecuzione della CLI in un contenitore nel tuo computer
+{: #cs_cli_container}
+
+Invece di installare ogni CLI individualmente sul tuo computer, puoi installare le CLI in un contenitore che viene eseguito sul tuo computer.
+{:shortdesc}
+
+1. Crea un'immagine dal Dockerfile fornito.
+
+    ```
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    ```
+    {: pre}
+
+2. Distribuisci l'immagine localmente come un contenitore e monta un volume per accedere ai file locali. 
+  
+    ```
+    docker run -it -v /local/path:/container/volume <image_name>
+    ```
+    {: pre}
+  
+3. Inizia eseguendo i comandi `bx cs` e `kubectl` dalla shell interattiva. Se crei dati che vuoi salvare, salvali nel volume che hai montato. Quando esci dalla shell, il contenitore si arresta. 
+
+<br />
+
 
 
 ## Configurazione della CLI per eseguire `kubectl`
@@ -159,7 +190,7 @@ Puoi utilizzare i comandi forniti con la CLI Kubernetes per gestire i cluster in
 {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Tutti i comandi `kubectl` disponibili in Kubernetes 1.8.11 sono supportati per l'utilizzo con i cluster in {{site.data.keyword.Bluemix_notm}}. Dopo che hai creato un cluster, imposta il
+Tutti i comandi `kubectl` disponibili in Kubernetes 1.9.7 sono supportati per l'utilizzo con i cluster in {{site.data.keyword.Bluemix_notm}}. Dopo che hai creato un cluster, imposta il
 contesto per la tua CLI locale su tale cluster con una variabile di ambiente. Puoi quindi eseguire i comandi
 `kubectl` Kubernetes per lavorare con il tuo cluster in {{site.data.keyword.Bluemix_notm}}.
 
@@ -180,7 +211,7 @@ Prima di poter eseguire i comandi `kubectl`, [installa le CLI richieste](#cs_cli
 2.  Seleziona un account {{site.data.keyword.Bluemix_notm}}. Se sei assegnato a più organizzazioni {{site.data.keyword.Bluemix_notm}}, seleziona l'organizzazione
 dove è stato creato il cluster. I cluster sono specifici di un'organizzazione, ma sono indipendenti da uno spazio {{site.data.keyword.Bluemix_notm}}. Pertanto, non devi selezionare uno spazio.
 
-3.  Se vuoi creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione {{site.data.keyword.Bluemix_notm}} che hai selezionato precedentemente, esegui `bx cs region-set`.
+3.  Per creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione {{site.data.keyword.Bluemix_notm}} che hai selezionato precedentemente, esegui `bx cs region-set`.
 
 4.  Elenca tutti i cluster nell'account per ottenere il nome del cluster.
 
@@ -192,19 +223,19 @@ dove è stato creato il cluster. I cluster sono specifici di un'organizzazione, 
 5.  Configura il cluster che hai creato come il contesto per questa sessione. Completa questi passi di configurazione ogni volta che lavori con il tuo cluster.
     1.  Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
-    ```
-    bx cs cluster-config <cluster_name_or_ID>
-    ```
-    {: pre}
+        ```
+        bx cs cluster-config <cluster_name_or_ID>
+        ```
+        {: pre}
 
-    Dopo aver scaricato i file di configurazione, viene visualizzato un comando che puoi utilizzare per impostare il percorso al file di configurazione di Kubernetes locale come una variabile di ambiente.
+        Dopo aver scaricato i file di configurazione, viene visualizzato un comando che puoi utilizzare per impostare il percorso al file di configurazione di Kubernetes locale come una variabile di ambiente.
 
-    Esempio:
+        Esempio:
 
-    ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
+        ```
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        ```
+        {: screen}
 
     2.  Copia e incolla il comando visualizzato nel tuo terminale per impostare la variabile di ambiente `KUBECONFIG`.
 
@@ -234,12 +265,12 @@ Kubernetes.
     Output di esempio:
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
-Ora puoi eseguire i comandi `kubectl` per gestire i tuoi cluster in {{site.data.keyword.Bluemix_notm}}. Per un elenco completo dei comandi, consulta la [Documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+Ora puoi eseguire i comandi `kubectl` per gestire i tuoi cluster in {{site.data.keyword.Bluemix_notm}}. Per un elenco completo dei comandi, consulta la [Documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/).
 
 **Suggerimento:** se stai utilizzando Windows e la CLI Kubernetes non è installata nella stessa directory della CLI {{site.data.keyword.Bluemix_notm}}, devi modificare le directory al percorso in cui è installata la CLI Kubernetes per eseguire correttamente i comandi `kubectl`.
 
@@ -257,7 +288,7 @@ Questa attività include le informazioni per aggiornare queste CLI.
 
 -   Versione CLI {{site.data.keyword.Bluemix_notm}} 0.5.0 o successiva
 -   Plug-in {{site.data.keyword.containershort_notm}}
--   CLI Kubernetes versione 1.8.11 o successiva
+-   CLI Kubernetes versione 1.9.7 o successiva
 -   Plug-in {{site.data.keyword.registryshort_notm}}
 -   Docker versione 1.9. o successiva
 
@@ -394,6 +425,7 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
 **Nota:** per l'autenticazione con {{site.data.keyword.containershort_notm}}, devi fornire un token IAM (Identity and Access Management) generato con le tue credenziali {{site.data.keyword.Bluemix_notm}} e che include l'ID dell'account {{site.data.keyword.Bluemix_notm}} in cui è stato creato il cluster. A seconda del modo con cui ti autentichi con {{site.data.keyword.Bluemix_notm}}, puoi scegliere tra le seguenti opzioni di automazione della creazione del tuo token IAM.
 
 <table>
+<caption>Opzioni e tipi di ID</caption>
 <thead>
 <th>ID {{site.data.keyword.Bluemix_notm}}</th>
 <th>Opzioni personali</th>
@@ -429,7 +461,8 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
 
     Per specificare una regione {{site.data.keyword.Bluemix_notm}}, [controlla le abbreviazioni della regione e come vengono utilizzate negli endpoint API](cs_regions.html#bluemix_regions).
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>Parametri di input per ottenere i token</caption>
     <thead>
         <th>Parametri di input</th>
         <th>Valori</th>
@@ -499,6 +532,7 @@ passo precedente.
     {: codeblock}
 
     <table summary="Parametri di input per richiamare l'ID dell'account {{site.data.keyword.Bluemix_notm}} ">
+    <caption>Parametri di input per ottenere un ID account {{site.data.keyword.Bluemix_notm}} </caption>
     <thead>
   	<th>Parametri di input</th>
   	<th>Valori</th>
@@ -554,7 +588,8 @@ nel campo **resources/metadata/guid** dell'output dell'API.
 
     Per specificare una regione {{site.data.keyword.Bluemix_notm}}, [controlla le abbreviazioni della regione e come vengono utilizzate negli endpoint API](cs_regions.html#bluemix_regions).
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>Parametri di input per ottenere i token</caption>
     <thead>
         <th>Parametri di input</th>
         <th>Valori</th>
@@ -603,12 +638,12 @@ nel campo **resources/metadata/guid** dell'output dell'API.
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
     }
 
     ```
@@ -625,6 +660,7 @@ passi precedenti per creare le informazioni della tua intestazione.
      {: codeblock}
 
      <table summary="Parametri di input per utilizzare l'API">
+     <caption>Parametri di input per utilizzare l'API</caption>
      <thead>
      <th>Parametri di input</th>
      <th>Valori</th>
@@ -652,16 +688,16 @@ all'API {{site.data.keyword.Bluemix_notm}}. Puoi utilizzare la stessa procedura 
 {:shortdesc}
 
 Prima di iniziare, assicurati di disporre di un token di aggiornamento IAM o di una chiave API {{site.data.keyword.Bluemix_notm}} che
-puoi utilizzare per richiedere un nuovo token di accesso. 
+puoi utilizzare per richiedere un nuovo token di accesso.
 - **Token di aggiornamento:** segui le istruzioni presenti in [Automazione del processo di creazione e gestione dei cluster con l'API {{site.data.keyword.Bluemix_notm}}](#cs_api).
 - **Chiave API** recupera la tua chiave API [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/) come segue.
    1. Dalla barra dei menu, fai clic su **Gestisci** > **Sicurezza** > **Chiavi API della piattaforma**.
    2. Fai clic su **Crea**.
    3. Immetti un **Nome** e una **Descrizione** per la tua chiave API e fai clic su **Crea**.
-   4. Fai clic su **Mostra** per vedere la chiave API che è stata generata per te. 
-   5. Copia la chiave API in modo che tu possa utilizzarla per recuperare il tuo nuovo token di accesso IAM. 
+   4. Fai clic su **Mostra** per vedere la chiave API che è stata generata per te.
+   5. Copia la chiave API in modo che tu possa utilizzarla per recuperare il tuo nuovo token di accesso IAM.
 
-Utilizza la seguente procedura se desideri creare un token IAM oppure ottenere un nuovo token di aggiornamento. 
+Utilizza la seguente procedura se desideri creare un token IAM oppure ottenere un nuovo token di aggiornamento.
 
 1.  Genera un nuovo token di accesso IAM utilizzando il token di aggiornamento oppure la chiave API {{site.data.keyword.Bluemix_notm}}.
     ```
@@ -670,6 +706,7 @@ Utilizza la seguente procedura se desideri creare un token IAM oppure ottenere u
     {: codeblock}
 
     <table summary="Parametri di input per il novo token IAM">
+    <caption>Parametri di input per un nuovo token IAM </caption>
     <thead>
     <th>Parametri di input</th>
     <th>Valori</th>
@@ -695,7 +732,7 @@ Utilizza la seguente procedura se desideri creare un token IAM oppure ottenere u
     <li>response_type: cloud_iam uaa</li>
     <li>apikey: <em>&lt;api_key&gt;</em></li>
     <li>uaa_client_ID: cf</li>
-        <li>uaa_client_secret:</li></ul><strong>Nota:</strong> aggiungi la chiave <code>uaa_client_secret</code> senza alcun valore specificato. </td>
+        <li>uaa_client_secret:</li></ul><strong>Nota:</strong> aggiungi la chiave <code>uaa_client_secret</code> senza alcun valore specificato.</td>
     </tr>
     </tbody>
     </table>
@@ -705,12 +742,12 @@ Utilizza la seguente procedura se desideri creare un token IAM oppure ottenere u
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
     }
 
     ```

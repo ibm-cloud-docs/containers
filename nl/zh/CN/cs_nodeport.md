@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,12 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 使用 NodePort 公开应用程序
 {: #nodeport}
 
-通过使用 Kubernetes 集群中任何工作程序节点的公共 IP 地址并公开节点端口，使容器化应用程序可通过因特网访问。此选项可用于测试 {{site.data.keyword.containerlong}} 和短期公共访问权。
+通过使用 Kubernetes 集群中任何工作程序节点的公共 IP 地址并公开 NodePort，使容器化应用程序可通过因特网访问。此选项可用于在 {{site.data.keyword.containerlong}} 中进行测试以及用于短期公共访问权。
 {:shortdesc}
 
 ## 使用 NodePort 管理网络流量
@@ -53,7 +55,7 @@ lastupdated: "2018-4-20"
 对于免费或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
 {:shortdesc}
 
-如果还没有应用程序准备就绪，可以使用名为 [Guestbook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 示例应用程序。
+如果还没有应用程序准备就绪，可以使用名为 [Guestbook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 示例应用程序。
 
 1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。**注**：对于 Guestbook 示例，配置文件中已经存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
 
@@ -78,13 +80,14 @@ lastupdated: "2018-4-20"
     {: codeblock}
 
     <table>
+    <caption>了解 NodePort 服务的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 NodePort 服务部分的组成部分</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>将 <code><em>&lt;my-nodeport-service&gt;</em></code> 替换为 NodePort 服务的名称。</td>
+    <td>将 <code><em>&lt;my-nodeport-service&gt;</em></code> 替换为 NodePort 服务的名称。<p>使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -100,8 +103,8 @@ lastupdated: "2018-4-20"
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>如果要指定 NodePort，并希望查看哪些 NodePort 已在使用，可以运行以下命令：<pre class="pre"><code>    kubectl get svc
-    </code></pre>所有已在使用的 NodePort 都会显示在**端口**字段下。</td>
+     <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>要指定 NodePort，并希望查看哪些 NodePort 已在使用，请运行以下命令：<pre class="pre"><code>    kubectl get svc
+    </code></pre><p>所有已在使用的 NodePort 都会显示在**端口**字段下。</p></td>
      </tr>
      </tbody></table>
 
@@ -116,14 +119,14 @@ lastupdated: "2018-4-20"
 1.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-    bx cs workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
     输出：
 
     ```
-    ID                                                Public IP   Private IP    Size     State    Status
+        ID                                                Public IP   Private IP    Size     State    Status
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
     ```
@@ -132,14 +135,14 @@ lastupdated: "2018-4-20"
 2.  如果分配了随机 NodePort，请了解分配的是哪个 NodePort。
 
     ```
-    kubectl describe service <service_name>
+        kubectl describe service <service_name>
     ```
     {: pre}
 
     输出：
 
     ```
-    Name:                   <service_name>
+        Name:                   <service_name>
     Namespace:              default
     Labels:                 run=<deployment_name>
     Selector:               run=<deployment_name>
@@ -154,7 +157,6 @@ lastupdated: "2018-4-20"
     {: screen}
 
     在此示例中，NodePort为 `30872`。</br>
-    **注：**如果 **Endpoints** 部分显示 `<none>`，请确保 NodePort 服务的 `spec.selector` 部分中使用的 `<selectorkey>` 和 `<selectorvalue>` 与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的键/值对相同。
+    **注：**如果 **Endpoints** 部分显示 `<none>`，请在 NodePort 服务的 `spec.selector` 部分中检查使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
 
 3.  使用其中一个工作程序节点公共 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`
-

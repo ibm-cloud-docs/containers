@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,47 +15,18 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
 # Configurando a conectividade de VPN
 {: #vpn}
 
-Com a conectividade de VPN, é possível conectar apps com segurança em um cluster do Kubernetes no {{site.data.keyword.containerlong}} a uma rede no local. Também é possível conectar apps que são externos ao seu cluster para um app que está em execução dentro de seu cluster.
+Com a conectividade VPN, é possível conectar apps com segurança em um cluster do Kubernetes no {{site.data.keyword.containerlong}} a uma rede no local. Também é possível conectar apps que são externos ao seu cluster para um app que está em execução dentro de seu cluster.
 {:shortdesc}
 
-Para conectar os nós do trabalhador e apps a um data center local, é possível configurar um terminal VPN IPSec com um serviço strongSwan ou com um Dispositivo de gateway Vyatta ou um Dispositivo Fortigate.
-
-- **Vyatta Gateway Appliance ou Fortigate Appliance**: se você tiver um cluster maior, quiser acessar recursos não Kubernetes pela VPN ou quiser acessar múltiplos clusters em uma única VPN, poderá optar por configurar um Vyatta Gateway Appliance ou um [Fortigate Security Appliance![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) para configurar um terminal VPN IPSec. Para configurar um Vyatta, veja [Configurando a conectividade de VPN com Vyatta](#vyatta).
+Para conectar seus nós do trabalhador e apps a um data center no local, é possível configurar uma das opções a seguir.
 
 - **Serviço de VPN strongSwan IPSec**: é possível configurar um [Serviço de VPN strongSwan IPSec ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.strongswan.org/) que conecte de forma segura seu cluster do Kubernetes a uma rede no local. O serviço strongSwan IPSec VPN fornece um canal de comunicação seguro de ponta a ponta na Internet, que se baseia no conjunto de protocolo Internet Protocol Security (IPsec) padrão de mercado. Para configurar uma conexão segura entre seu cluster e uma rede no local, [configure e implemente o serviço VPN IPSec do strongSwan](#vpn-setup) diretamente em um pod no cluster.
 
-## Configurando a conectividade de VPN com um Vyatta Gateway Appliance
-{: #vyatta}
-
-O [Vyatta Gateway Appliance ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) é um servidor bare metal que executa uma distribuição especial do Linux. É possível usar um Vyatta como um gateway de VPN para se conectar com segurança a uma rede no local.
-{:shortdesc}
-
-Todo o tráfego de rede público e privado que entra ou sai das VLANs do cluster é roteado por meio do Vyatta. É possível usar o Vyatta como um terminal de VPN para criar um túnel IPSec criptografado entre servidores em uma infraestrutura do IBM Cloud (SoftLayer) e recursos locais. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containershort_notm}} pode se comunicar com um servidor local por meio de uma conexão VPN Vyatta:
-
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:725px; border-style: none"/>
-
-1. Um app em seu cluster, `myapp2`, recebe uma solicitação de um serviço Ingress ou LoadBalancer e precisa conectar-se com segurança a dados na rede local.
-
-2. Como `myapp2` está em um nó do trabalhador que está em uma VLAN privada apenas, o Vyatta age como uma conexão segura entre os nós do trabalhador e a rede local. O Vyatta usa o endereço IP de destino para determinar quais pacotes de rede devem ser enviados para a rede local.
-
-3. A solicitação é criptografada e enviada pelo túnel VPN para o data center no local.
-
-4. A solicitação recebida passa pelo firewall no local e é entregue ao terminal de túnel VPN (roteador) no qual ela é decriptografada.
-
-5. O terminal de túnel VPN (roteador) encaminha a solicitação para o servidor ou o mainframe local, dependendo do endereço IP de destino especificado na etapa 2. Os dados necessários são enviados de volta na conexão VPN para `myapp2` por meio do mesmo processo.
-
-Para configurar um Vyatta Gateway Appliance:
-
-1. [Solicite um Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta).
-
-2. [Configure a VLAN privada no Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta).
-
-3. Para ativar uma conexão de VPN usando o Vyatta, [configure o IPSec no Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta).
-
-Para obter mais informações, veja esta postagem do blog sobre como [conectar um cluster a um data center local ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+- **Virtual Router Appliance (VRA) ou Fortigate Security Appliance (FSA)**: você pode escolher configurar um [VRA](/docs/infrastructure/virtual-router-appliance/about.html) ou [FSA](/docs/infrastructure/fortigate-10g/about.html) para configurar um terminal de VPN IPSec. Essa opção é útil quando se tem um cluster maior e se deseja acessar recursos não Kubernetes por meio da VPN ou acessar múltiplos clusters por meio de uma única VPN. Para configurar um VRA, veja [Configurando a conectividade VPN com o VRA](#vyatta).
 
 ## Configurando a conectividade de VPN com o gráfico Helm do serviço de VPN strongSwan IPSec
 {: #vpn-setup}
@@ -69,13 +40,13 @@ Como o strongSwan está integrado ao cluster, não é necessário um dispositivo
 
 1. Um app em seu cluster, `myapp`, recebe uma solicitação de um serviço Ingress ou LoadBalancer e precisa conectar-se com segurança a dados em sua rede local.
 
-2. A solicitação para o data center local é encaminhada para o pod VPN do strongSwan do IPSec. O endereço IP de destino é usado para determinar quais pacotes de rede devem ser enviados para o pod VPN do strongSwan do IPSec.
+2. A solicitação para o data center local é encaminhada para o pod VPN do strongSwan do IPSec. O endereço IP de destino é usado para determinar quais pacotes de rede enviar para o pod VPN do strongSwan do IPSec.
 
 3. A solicitação é criptografada e enviada pelo túnel VPN para o data center no local.
 
 4. A solicitação recebida passa pelo firewall no local e é entregue ao terminal de túnel VPN (roteador) no qual ela é decriptografada.
 
-5. O terminal de túnel VPN (roteador) encaminha a solicitação para o servidor ou o mainframe local, dependendo do endereço IP de destino especificado na etapa 2. Os dados necessários são enviados de volta na conexão VPN para `myapp` por meio do mesmo processo.
+5. O terminal de túnel VPN (roteador) encaminha a solicitação para o servidor ou mainframe no local, dependendo do endereço IP de destino que foi especificado na etapa 2. Os dados necessários são enviados de volta na conexão VPN para `myapp` por meio do mesmo processo.
 
 ### Configurar o gráfico Helm do strongSwan
 {: #vpn_configure}
@@ -104,6 +75,7 @@ Para configurar o gráfico Helm:
     **Importante**: se não for necessário mudar uma propriedade, deixe um comentário nessa propriedade, colocando um `#` na frente dela.
 
     <table>
+    <caption>Entendendo os componentes deste YAML</caption>
     <col width="22%">
     <col width="78%">
     <thead>
@@ -121,7 +93,7 @@ Para configurar o gráfico Helm:
     </tr>
     <tr>
     <td><code>connectUsingLoadBalancerIP</code></td>
-    <td>Use o endereço IP do balanceador de carga que foi incluído no <code>loadBalancerIP</code> para também estabelecer a conexão VPN de saída. Se essa opção estiver ativada, todos os nós do trabalhador do cluster deverão estar na mesma VLAN pública. Caso contrário, deve-se usar a configuração <code>nodeSelector</code> para assegurar que o pod de VPN seja implementado em um nó do trabalhador na mesma VLAN pública que a do <code>loadBalancerIP</code>. Essa opção será ignorada se <code>ipsec.auto</code> estiver configurado como <code>add</code>.<p>Valores aceitos:</p><ul><li><code>"false"</code>: não conectar a VPN usando o IP do balanceador de carga. O endereço IP público do nó do trabalhador em que o pod de VPN está em execução é usado no lugar.</li><li><code>"true"</code>: estabeleça a VPN usando o IP do balanceador de carga como o IP de origem local. Se <code>loadBalancerIP</code> não estiver configurado, o endereço IP externo designado ao serviço de balanceador de carga será usado.</li><li><code>"auto"</code>: quando <code>ipsec.auto</code> estiver configurado como <code>start</code> e <code>loadBalancerIP</code> estiver configurado, estabeleça a VPN usando o IP do balanceador de carga como o IP de origem local.</li></ul></td>
+    <td>Use o endereço IP do balanceador de carga que foi incluído no <code>loadBalancerIP</code> para também estabelecer a conexão VPN de saída. Se essa opção estiver ativada, todos os nós do trabalhador do cluster deverão estar na mesma VLAN pública. Caso contrário, deve-se usar a configuração <code>nodeSelector</code> para assegurar que o pod de VPN seja implementado em um nó do trabalhador na mesma VLAN pública que a do <code>loadBalancerIP</code>. Essa opção será ignorada se <code>ipsec.auto</code> estiver configurado como <code>add</code>.<p>Valores aceitos:</p><ul><li><code>"false"</code>: não conecte a VPN usando o IP do balanceador de carga. O endereço IP público do nó do trabalhador em que o pod de VPN está em execução é usado no lugar.</li><li><code>"true"</code>: estabeleça a VPN usando o IP do balanceador de carga como o IP de origem local. Se <code>loadBalancerIP</code> não estiver configurado, o endereço IP externo designado ao serviço de balanceador de carga será usado.</li><li><code>"auto"</code>: quando <code>ipsec.auto</code> é configurado como <code>start</code> e <code>loadBalancerIP</code> é configurado, estabeleça a VPN usando o IP do balanceador de carga como o IP de origem local.</li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
@@ -179,7 +151,7 @@ Para configurar o gráfico Helm:
     **Nota**: se você tem múltiplas implementações de VPN em um único cluster, é possível evitar conflitos de nomenclatura e diferenciar entre suas implementações escolhendo nomes de liberação mais descritivos que `vpn`. Para evitar o truncamento do nome de liberação, limite o nome de liberação para 35 caracteres ou menos.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
+    -f config.yaml helm install -- name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -209,14 +181,14 @@ Depois de implementar seu gráfico Helm, teste a conectividade VPN.
 2. Configure a variável de ambiente `STRONGSWAN_POD`.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 3. Verifique o status da VPN. Um status de `ESTABLISHED` significa que a conexão de VPN foi bem-sucedida.
 
     ```
-    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    Kubectl exec $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 
@@ -233,8 +205,8 @@ Depois de implementar seu gráfico Helm, teste a conectividade VPN.
     **Nota**:
 
     <ul>
-    <li>Quando você tenta estabelecer a conectividade VPN com o gráfico Helm do strongSwan, é provável que o status da VPN não seja `ESTABLISHED` na primeira vez. Você pode precisar verificar as configurações do terminal de VPN e mudar o arquivo de configuração várias vezes antes que a conexão seja bem-sucedida: <ol><li>Execute `helm delete --purge <release_name>`</li><li>Corrija os valores incorretos no arquivo de configuração.</li><li>Execute `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>Também é possível executar mais verificações na próxima etapa.</li>
-    <li>Se o pod de VPN está em um estado `ERROR` ou continua travando e reiniciando, isso pode ser devido à validação do parâmetro das configurações do `ipsec.conf` no configmap do gráfico.<ol><li>Verifique quaisquer erros de validação nos logs de pod do strongSwan executando `kubectl logs -n kube-system $STRONGSWAN_POD`.</li><li>Se erros de validação existirem, execute `helm delete --purge <release_name>`<li>Corrija os valores incorretos no arquivo de configuração.</li><li>Execute `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>Se o seu cluster tem um alto número de nós do trabalhador, também é possível usar `helm upgrade` para aplicar mais rapidamente suas mudanças em vez de executar `helm delete` e `helm install`.</li>
+    <li>Quando você tenta estabelecer a conectividade VPN com o gráfico Helm do strongSwan, é provável que o status da VPN não seja `ESTABLISHED` na primeira vez. Você pode precisar verificar as configurações do terminal de VPN e mudar o arquivo de configuração várias vezes antes que a conexão seja bem-sucedida: <ol><li>Execute `helm delete --purge <release_name>`</li><li>Corrija os valores incorretos no arquivo de configuração.</li><li>Execute `helm install -f config.yaml -- name=<release_name> ibm/strongswan`</li></ol>Também é possível executar mais verificações na próxima etapa.</li>
+    <li>Se o pod de VPN está em um estado `ERROR` ou continua travando e reiniciando, isso pode ser devido à validação do parâmetro das configurações do `ipsec.conf` no configmap do gráfico.<ol><li>Verifique quaisquer erros de validação nos logs do pod do strongSwan executando `kubectl logs -n $STRONGSWAN_POD`.</li><li>Se erros de validação existirem, execute `helm delete --purge <release_name>`<li>Corrija os valores incorretos no arquivo de configuração.</li><li>Execute `helm install -f config.yaml -- name=<release_name> ibm/strongswan`</li></ol>Se o seu cluster tem um alto número de nós do trabalhador, também é possível usar `helm upgrade` para aplicar mais rapidamente suas mudanças em vez de executar `helm delete` e `helm install`.</li>
     </ul>
 
 4. É possível testar ainda mais a conectividade VPN executando os cinco testes do Helm que são incluídos na definição de gráfico do strongSwan.
@@ -244,21 +216,22 @@ Depois de implementar seu gráfico Helm, teste a conectividade VPN.
     ```
     {: pre}
 
-    * Se todos os testes são aprovados, sua conexão VPN do strongSwan foi configurada com sucesso.
+    * Se todos os testes passarem, sua conexão VPN do strongSwan foi configurada com êxito.
 
-    * Se qualquer teste falhar, continue com a próxima etapa.
+    * Se algum dos testes falhar, continue com a próxima etapa.
 
 5. Visualize a saída de um teste com falha consultando os logs do pod de teste.
 
     ```
-    kubectl logs -n kube-system <test_program>
+    kubectl logs <test_program>
     ```
     {: pre}
 
-    **Nota**: alguns dos testes têm requisitos que são configurações opcionais na configuração de VPN. Se alguns dos testes falharem, as falhas poderão ser aceitáveis, dependendo de se você especificou essas configurações opcionais. Consulte a tabela a seguir para obter mais informações sobre cada teste e por que ele pode falhar.
+    **Nota**: alguns dos testes têm requisitos que são configurações opcionais na configuração de VPN. Se alguns dos testes falharem, as falhas poderão ser aceitáveis, dependendo de se você especificou essas configurações opcionais. Consulte a tabela a seguir para obter informações sobre cada teste e por que ele pode falhar.
 
     {: #vpn_tests_table}
     <table>
+    <caption>Entendendo os testes de conectividade VPN do Helm</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Entendendo os testes de conectividade VPN do Helm</th>
     </thead>
@@ -299,7 +272,7 @@ Depois de implementar seu gráfico Helm, teste a conectividade VPN.
 9. Instale o gráfico do Helm em seu cluster com o arquivo `config.yaml` atualizado. As propriedades atualizadas são armazenadas em um configmap para seu gráfico.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
@@ -320,12 +293,12 @@ Depois de implementar seu gráfico Helm, teste a conectividade VPN.
 12. Limpe os pods de teste atuais.
 
     ```
-    kubectl get pods -a -n kube-system -l app=strongswan-test
+    Kubectl get pods -a -l app=strongswan-test
     ```
     {: pre}
 
     ```
-    kubectl delete pods -n kube-system -l app=strongswan-test
+    kubectl delete pods -l app=strongswan-test
     ```
     {: pre}
 
@@ -348,9 +321,11 @@ Certifique-se de que o gráfico Helm do strongSwan esteja atualizado fazendo upg
 Para fazer upgrade de seu gráfico Helm do strongSwan para a versão mais recente:
 
   ```
-  helm upgrade -f config.yaml --namespace kube-system <release_name> ibm/strongswan
+  Helm upgrade -f config.yaml < release_name> ibm/strongswan
   ```
   {: pre}
+
+**Importante**: o gráfico Helm do strongSwan 2.0.0 não funciona com o Calico v3 ou Kubernetes 1.10. Antes de [atualizar seu cluster para 1.10](cs_versions.html#cs_v110), atualize o strongSwan para o gráfico Helm 2.1.0, que é compatível com versões anteriores do Calico 2.6 e Kubernetes 1.7, 1.8 e 1.9.
 
 
 ### Fazendo upgrade da versão 1.0.0
@@ -380,11 +355,13 @@ Para fazer upgrade da versão 1.0.0, deve-se excluir o gráfico 1.0.0 e instalar
 4. Instale o gráfico do Helm em seu cluster com o arquivo `config.yaml` atualizado.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
 Além disso, algumas configurações de tempo limite do `ipsec.conf` que foram codificadas permanentemente na 1.0.0 são expostas como propriedades configuráveis em versões mais recentes. Os nomes e os padrões de algumas dessas configurações de tempo limite do `ipsec.conf` configuráveis também foram mudados para serem mais consistentes com os padrões do strongSwan. Se você está fazendo upgrade de seu gráfico Helm da 1.0.0 e deseja reter os padrões da versão 1.0.0 para as configurações de tempo limite, inclua as novas configurações em seu arquivo de configuração do gráfico com os valores padrão antigos.
+
+
 
   <table>
   <caption>As diferenças de configurações do ipsec.conf entre a versão 1.0.0 e a versão mais recente</caption>
@@ -427,3 +404,33 @@ Além disso, algumas configurações de tempo limite do `ipsec.conf` que foram c
   ```
   {: pre}
 
+<br />
+
+
+## Configurando a conectividade VPN com um Virtual Router Appliance
+{: #vyatta}
+
+O [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) fornece o sistema operacional Vyatta 5600 mais recente para servidores bare metal x86. É possível usar um VRA como um gateway de VPN para se conectar com segurança a uma rede no local.
+{:shortdesc}
+
+Todo o tráfego de rede pública e privada que entra ou sai das VLANs do cluster é roteado por meio de um VRA. É possível usar o VRA como um terminal de VPN para criar um túnel IPSec criptografado entre servidores na infraestrutura do IBM Cloud (SoftLayer) e recursos no local. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containershort_notm}} pode se comunicar com um servidor no local por meio de uma conexão VPN do VRA:
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:725px; border-style: none"/>
+
+1. Um app em seu cluster, `myapp2`, recebe uma solicitação de um serviço Ingress ou LoadBalancer e precisa conectar-se com segurança a dados na rede local.
+
+2. Como o `myapp2` está em um nó do trabalhador que está somente em uma VLAN privada, o VRA age como uma conexão segura entre os nós do trabalhador e a rede no local. O VRA usa o endereço IP de destino para determinar quais pacotes de rede enviar para a rede no local.
+
+3. A solicitação é criptografada e enviada pelo túnel VPN para o data center no local.
+
+4. A solicitação recebida passa pelo firewall no local e é entregue ao terminal de túnel VPN (roteador) no qual ela é decriptografada.
+
+5. O terminal de túnel VPN (roteador) encaminha a solicitação para o servidor ou mainframe no local, dependendo do endereço IP de destino que foi especificado na etapa 2. Os dados necessários são enviados de volta na conexão VPN para `myapp2` por meio do mesmo processo.
+
+Para configurar um Virtual Router Appliance:
+
+1. [Pedir um VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html).
+
+2. [Configure a VLAN privada no VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
+
+3. Para ativar uma conexão VPN usando o VRA, [configure VRRP no VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).

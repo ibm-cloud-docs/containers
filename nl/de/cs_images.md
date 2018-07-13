@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Container auf Grundlage von Images erstellen
@@ -45,7 +47,7 @@ Für die Bereitstellung Ihrer Apps im Cluster können Sie mehrere Registrys mit 
 
 Nachdem Sie eine Image-Registry eingerichtet haben, können Benutzer diese Images zur Bereitstellung ihrer Apps im Cluster verwenden.
 
-
+Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.
 
 <br />
 
@@ -56,11 +58,11 @@ Nachdem Sie eine Image-Registry eingerichtet haben, können Benutzer diese Image
 Sie können Container aus vertrauenswürdigen Images erstellen, die signiert und in {{site.data.keyword.registryshort_notm}} gespeichert sind, und Bereitstellungen aus nicht signierten oder gefährdeten Images verhindern.
 {:shortdesc}
 
-1.  [Images für vertrauenswürdige Inhalte signieren](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Nachdem Sie eine Vertrauensbeziehung für Ihre Images konfiguriert haben, können Sie vertrauenswürdige Inhalte und Unterzeichner, die Images per Push-Operation in Ihre Registry übertragen können, verwalten. 
-2.  Um eine Richtlinie umzusetzen, die besagt, dass nur signierte Images zum Erstellen von Containern in Ihrem Cluster verwendet werden können, [fügen Sie Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce) hinzu. 
-3.  Stellen Sie Ihre App bereit. 
-    1. [Bereitstellung im Kubernetes-Standardnamensbereich (`default`)](#namespace). 
-    2. [Bereitstellung in einem anderen Kubernetes-Namensbereich oder aus einer anderen {{site.data.keyword.Bluemix_notm}}-Region bzw. einem anderen Konto](#other). 
+1.  [Images für vertrauenswürdige Inhalte signieren](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Nachdem Sie eine Vertrauensbeziehung für Ihre Images konfiguriert haben, können Sie vertrauenswürdige Inhalte und Unterzeichner, die Images per Push-Operation in Ihre Registry übertragen können, verwalten.
+2.  Um eine Richtlinie umzusetzen, die besagt, dass nur signierte Images zum Erstellen von Containern in Ihrem Cluster verwendet werden können, [fügen Sie Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce) hinzu.
+3.  Stellen Sie Ihre App bereit.
+    1. [Bereitstellung im Kubernetes-Standardnamensbereich (`default`)](#namespace).
+    2. [Bereitstellung in einem anderen Kubernetes-Namensbereich oder aus einer anderen {{site.data.keyword.Bluemix_notm}}-Region bzw. einem anderen Konto](#other).
 
 <br />
 
@@ -75,7 +77,7 @@ Wenn Sie einen Cluster erstellen, werden automatisch nicht ablaufende Registry-T
 
 Jedes Token muss in einem `imagePullSecret` von Kubernetes gespeichert sein, damit ein Kubernetes-Cluster darauf zugreifen kann, wenn Sie eine containerisierte App bereitstellen. Bei der Erstellung Ihres Clusters werden die Tokens für die globale Registry (mit den von IBM bereitgestellten öffentlichen Images) von {{site.data.keyword.containershort_notm}} automatisch in geheimen Schlüsseln für Image-Pulloperationen (imagePullSecrets) in Kubernetes gespeichert. Diese geheimen Schlüssel für Image-Pulloperationen werden dem `standardmäßigen` Kubernetes-Namensbereich (default), der Standardliste mit geheimen Schlüsseln im Servicekonto (`ServiceAccount`) für diesen Namensbereich und dem Namensbereich `kube-system` hinzugefügt.
 
-**Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Wenn Sie einen Container in anderen Namensbereichen Ihres Clusters bereitstellen möchten oder wenn Sie ein Image verwenden möchten, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes imagePullSecret für Ihren Cluster erstellen](#other).
+**Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Um einen Container in anderen Namensbereichen Ihres Clusters bereitstellen oder ein Image verwenden zu können, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes imagePullSecret für Ihren Cluster erstellen](#other).
 
 Vorbemerkungen:
 1. [Richten Sie einen Namensbereich in {{site.data.keyword.registryshort_notm}} unter {{site.data.keyword.Bluemix_notm}} Public oder {{site.data.keyword.Bluemix_dedicated_notm}} ein und übertragen Sie Images per Push-Operation an diesen Namensbereich](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
@@ -145,13 +147,13 @@ Vorbemerkungen:
 3.  [Richten Sie Ihre CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 <br/>
-Sie haben folgende Optionen, wenn Sie Ihr eigenes imagePullSecret erstellen möchten: 
-- [Kopieren Sie das imagePullSecret aus dem Standardnamensbereich in andere Namensbereiche in Ihrem Cluster](#copy_imagePullSecret). 
-- [Erstellen Sie ein imagePullSecret für den Zugriff auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen und -Konten](#other_regions_accounts). 
-- [Erstellen Sie ein imagePullSecret für den Zugriff auf Images in externen privaten Registrys](#private_images). 
+Sie haben folgende Optionen, wenn Sie Ihr eigenes imagePullSecret erstellen möchten:
+- [Kopieren Sie das imagePullSecret aus dem Standardnamensbereich in andere Namensbereiche in Ihrem Cluster](#copy_imagePullSecret).
+- [Erstellen Sie ein imagePullSecret für den Zugriff auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen und -Konten](#other_regions_accounts).
+- [Erstellen Sie ein imagePullSecret für den Zugriff auf Images in externen privaten Registrys](#private_images).
 
 <br/>
-Wenn Sie bereits ein imagePullSecret in Ihrem Namensbereich erstellt haben, das Sie in Ihrer Bereitstellung verwenden möchten, finden Sie weitere Informationen unter [Container mithilfe des erstellten imagePullSecret bereitstellen](#use_imagePullSecret). 
+Wenn Sie bereits ein imagePullSecret in Ihrem Namensbereich erstellt haben, das Sie in Ihrer Bereitstellung verwenden möchten, finden Sie weitere Informationen unter [Container mithilfe des erstellten imagePullSecret bereitstellen](#use_imagePullSecret).
 
 ### imagePullSecret aus dem Standardnamensbereich in andere Namensbereiche in Ihrem Cluster kopieren
 {: #copy_imagePullSecret}
@@ -159,7 +161,7 @@ Wenn Sie bereits ein imagePullSecret in Ihrem Namensbereich erstellt haben, das 
 Sie können das imagePullSecret, das automatisch für den Kubernetes-Standardnamensbereich (`default`) erstellt wird, in andere Namensbereiche in Ihrem Cluster kopieren.
 {: shortdesc}
 
-1. Listen Sie verfügbare Namensbereiche in Ihrem Cluster auf. 
+1. Listen Sie verfügbare Namensbereiche in Ihrem Cluster auf.
    ```
    kubectl get namespaces
    ```
@@ -176,15 +178,20 @@ Sie können das imagePullSecret, das automatisch für den Kubernetes-Standardnam
    ```
    {: screen}
 
-2. Optional: Erstellen Sie einen Namensbereich in Ihrem Cluster. 
+2. Optional: Erstellen Sie einen Namensbereich in Ihrem Cluster.
    ```
    kubectl create namespace <name_des_namensbereichs>
    ```
    {: pre}
 
-3. Kopieren Sie das imagePullSecret aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Das neue imagePullSecret heißt `bluemix-<name_des_namensbereichs>-secret-regional`.
+3. Kopieren Sie das imagePullSecrets aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Die neuen imagePullSecrets heißen `bluemix-<namespace_name>-secret-regional` und `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<name_des_namensbereichs>/g' | kubectl -n <name_des_namensbereichs> create -f -
+   ```
+   {: pre}
+   
+   ```
+   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<name_des_namensbereichs>/g' | kubectl -n <name_des_namensbereichs> create -f -
    ```
    {: pre}
 
@@ -194,13 +201,13 @@ Sie können das imagePullSecret, das automatisch für den Kubernetes-Standardnam
     ```
     {: pre}
 
-5. [Stellen Sie mithilfe des imagePullSecret einen Container](#use_imagePullSecret) in Ihrem Namensbereich bereit. 
+5. [Stellen Sie mithilfe des imagePullSecret einen Container](#use_imagePullSecret) in Ihrem Namensbereich bereit.
 
 
 ### imagePullSecret für den Zugriff auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen und -Konten erstellen
 {: #other_regions_accounts}
 
-Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konten zuzugreifen, müssen Sie ein Registry-Token erstellen und Ihre Berechtigungsnachweise in Ihrem eigenen imagePullSecret speichern.
+Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konten zuzugreifen, müssen Sie ein Registry-Token erstellen und Ihre Berechtigungsnachweise in einem imagePullSecret speichern.
 {: shortdesc}
 
 1.  Falls Sie kein Token haben, [erstellen Sie ein Token für die Registry, auf die Sie zugreifen möchten.](/docs/services/Registry/registry_tokens.html#registry_tokens_create)
@@ -212,7 +219,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     {: pre}
 
 3.  Notieren Sie sich die Token-ID, die Sie verwenden möchten.
-4.  Rufen Sie den Wert für Ihr Token ab. Ersetzen Sie <em>&lt;token-id&gt;</em> durch die ID des Tokens, das sie im vorherigen Schritt abgerufen haben. 
+4.  Rufen Sie den Wert für Ihr Token ab. Ersetzen Sie <em>&lt;token-id&gt;</em> durch die ID des Tokens, das sie im vorherigen Schritt abgerufen haben.
 
     ```
     bx cr token-get <token-id>
@@ -229,6 +236,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     {: pre}
 
     <table>
+    <caption>Erklärung der Bestandteile dieses Befehls</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -259,22 +267,19 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     </tr>
     </tbody></table>
 
-6.  Überprüfen Sie, dass der geheime Schlüssel erfolgreich erstellt wurde. Ersetzen Sie
-<em>&lt;kubernetes-namensbereich&gt;</em> durch den Namen des Namensbereichs, in dem Sie das
-imagePullSecret erstellt haben.
+6.  Überprüfen Sie, dass der geheime Schlüssel erfolgreich erstellt wurde. Ersetzen Sie <em>&lt;kubernetes-namensbereich&gt;</em> durch den Namensbereich, in dem Sie das imagePullSecret erstellt haben.
 
     ```
     kubectl get secrets --namespace <kubernetes-namensbereich>
     ```
     {: pre}
 
-7.  [Stellen Sie mithilfe des imagePullSecret einen Container](#use_imagePullSecret) in Ihrem Namensbereich bereit. 
+7.  [Stellen Sie mithilfe des imagePullSecret einen Container](#use_imagePullSecret) in Ihrem Namensbereich bereit.
 
 ### Zugriff auf Images in anderen privaten Registrys
 {: #private_images}
 
-Wenn bereits eine private Registry zur Verwendung vorhanden ist, müssen Sie die Berechtigungsnachweise für die Registry in einem imagePullSecret von Kubernetes
-speichern und diesen geheimen Schlüssel in Ihrer Konfigurationsdatei referenzieren.
+Wenn bereits eine private Registry vorhanden ist, müssen Sie die Berechtigungsnachweise für die Registry in einem imagePullSecret von Kubernetes speichern und diesen geheimen Schlüssel aus Ihrer Konfigurationsdatei referenzieren.
 {:shortdesc}
 
 Vorbemerkungen:
@@ -292,6 +297,7 @@ Gehen Sie wie folgt vor, um ein imagePullSecret zu erstellen:
     {: pre}
 
     <table>
+    <caption>Erklärung der Bestandteile dieses Befehls</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -331,7 +337,7 @@ imagePullSecret erstellt haben.
     ```
     {: pre}
 
-3.  [Erstellen Sie einen Pod, der das imagePullSecret referenziert](#use_imagePullSecret). 
+3.  [Erstellen Sie einen Pod, der das imagePullSecret referenziert](#use_imagePullSecret).
 
 ## Container mithilfe des erstellten imagePullSecret bereitstellen
 {: #use_imagePullSecret}
@@ -340,23 +346,23 @@ Sie können ein imagePullSecret in Ihrer Pod-Bereitstellung definieren oder das 
 {: shortdesc}
 
 Wählen Sie eine der beiden folgenden Optionen aus:
-* [Verweis auf das imagePullSecret in Ihrer Pod-Bereitstellung](#pod_imagePullSecret): Verwenden Sie diese Option, wenn Sie nicht allen Pods in Ihrem Namensbereich standardmäßig Zugriff auf Ihre Registry geben möchten. 
-* [Speichern des imagePullSecret im Kubernetes-Servicekonto](#store_imagePullSecret): Verwenden Sie diese Option, um Zugriff auf Images in Ihrer Registry für Bereitstellungen im ausgewählten Kubernetes-Namensbereich zu gewähren. 
+* [Verweis auf das imagePullSecret in Ihrer Pod-Bereitstellung](#pod_imagePullSecret): Verwenden Sie diese Option, wenn Sie nicht allen Pods in Ihrem Namensbereich standardmäßig Zugriff auf Ihre Registry geben möchten.
+* [Speichern des imagePullSecret im Kubernetes-Servicekonto](#store_imagePullSecret): Verwenden Sie diese Option, um Zugriff auf Images in Ihrer Registry für Bereitstellungen im ausgewählten Kubernetes-Namensbereich zu gewähren.
 
 Vorbemerkungen:
-* [Erstellen Sie ein imagePullSecret](#other), um Zugriff auf Images in anderen Registrys, Kubernetes-Namensbereichen, {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konten zu geben. 
-* [Geben Sie als Ziel der CLI Ihren Cluster an](cs_cli_install.html#cs_cli_configure). 
+* [Erstellen Sie ein imagePullSecret](#other), um Zugriff auf Images in anderen Registrys, Kubernetes-Namensbereichen, {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konten zu geben.
+* [Richten Sie Ihre CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 ### Verweis auf das `imagePullSecret` in Ihrer Pod-Bereitstellung
 {: #pod_imagePullSecret}
 
-Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist es nur für diesen Pod gültig und kann nicht mit anderen Pods im Namensbereich gemeinsam verwendet werden.
+Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist das imagePullSecret nur für diesen Pod gültig und kann nicht mit anderen Pods im Namensbereich gemeinsam verwendet werden.
 {:shortdesc}
 
 1.  Erstellen Sie eine Podkonfigurationsdatei mit dem Namen `mypod.yaml`.
-2.  Definieren Sie den Pod und das imagePullSecret, um auf die private {{site.data.keyword.registrylong_notm}} zuzugreifen. 
+2.  Definieren Sie den Pod und das imagePullSecret, um auf die private {{site.data.keyword.registrylong_notm}} zuzugreifen.
 
-    So greifen Sie auf ein privates Image zu: 
+    So greifen Sie auf ein privates Image zu:
     ```
     apiVersion: v1
     kind: Pod
@@ -371,7 +377,7 @@ Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist es n
     ```
     {: codeblock}
 
-    So greifen Sie auf ein öffentliches {{site.data.keyword.Bluemix_notm}}-Image zu: 
+    So greifen Sie auf ein öffentliches {{site.data.keyword.Bluemix_notm}}-Image zu:
     ```
     apiVersion: v1
     kind: Pod
@@ -387,6 +393,7 @@ Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist es n
     {: codeblock}
 
     <table>
+    <caption>Erklärung der Komponenten der YAML-Datei</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
     </thead>
@@ -426,13 +433,13 @@ Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist es n
 Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie können das imagePullSecret zu diesem Servicekonto hinzufügen, um Zugriff auf Images in Ihrer Registry zu gewähren. Bereitstellungen, bei denen kein Servicekonto angegeben ist, verwenden automatisch das Servicekonto `default` für diesen Namensbereich.
 {:shortdesc}
 
-1. Prüfen Sie, ob bereits ein imagePullSecret für Ihr Standardservicekonto vorhanden ist. 
+1. Prüfen Sie, ob bereits ein imagePullSecret für Ihr Standardservicekonto vorhanden ist.
    ```
    kubectl describe serviceaccount default -n <name_des_namensbereichs>
    ```
    {: pre}
-   Es ist ein imagePullSecret vorhanden, wenn `<none>` im Eintrag **Image pull secrets** angezeigt wird.   
-2. Fügen Sie das imagePullSecret zu Ihrem Standardservicekonto hinzu. 
+   Wenn `<none>` im Eintrag **Image pull secrets** angezeigt wird, ist kein imagePullSecret vorhanden.  
+2. Fügen Sie das imagePullSecret zu Ihrem Standardservicekonto hinzu.
    - **So fügen Sie das imagePullSecret hinzu, wenn kein imagePullSecret definiert ist:**
        ```
        kubectl patch -n <name_des_namensbereichs> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<name_des_namensbereichs>-secret-regional"}]}'
@@ -443,7 +450,7 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
        kubectl patch -n <name_des_namensbereichs> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"bluemix-<name_des_namensbereichs>-secret-regional"}}]'
        ```
        {: pre}
-3. Überprüfen Sie, dass Ihr imagePullSecret zu Ihrem Standardservicekonto hinzugefügt wurde. 
+3. Überprüfen Sie, dass Ihr imagePullSecret zu Ihrem Standardservicekonto hinzugefügt wurde.
    ```
    kubectl describe serviceaccount default -n <name_des_namensbereichs>
    ```
@@ -462,7 +469,7 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
    ```
    {: pre}
 
-4. Stellen Sie einen Container aus einem Image in Ihrer Registry bereit. 
+4. Stellen Sie einen Container aus einem Image in Ihrer Registry bereit.
    ```
    apiVersion: v1
    kind: Pod
@@ -475,7 +482,7 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
    ```
    {: codeblock}
 
-5. Erstellen Sie die Bereitstellung in Ihrem Cluster.
+5. Erstellen Sie die Bereitstellung im Cluster.
    ```
    kubectl apply -f mypod.yaml
    ```

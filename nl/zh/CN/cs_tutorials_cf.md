@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # 教程：将应用程序从 Cloud Foundry 迁移到集群
@@ -81,6 +82,7 @@ lastupdated: "2018-4-20"
 <br />
 
 
+
 ## 第 2 课：使用应用程序代码创建 Docker 映像
 
 创建 Dockerfile 以包含应用程序代码以及容器的必要配置。然后，通过该 Dockerfile 构建 Docker 映像，并将其推送到专用映像注册表。
@@ -130,6 +132,7 @@ lastupdated: "2018-4-20"
   {: pre}
 
   <table>
+  <caption>了解此命令的组成部分</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="此图标指示可了解有关此命令组成部分的更多信息。"/> 了解此命令的组成部分</th>
   </thead>
@@ -148,7 +151,7 @@ lastupdated: "2018-4-20"
   </tr>
   <tr>
   <td><code>.</code></td>
-  <td>Dockerfile 的位置。如果要从包含 Dockerfile 的目录运行 build 命令，请输入句点 (.)。否则，请使用 Dockerfile 的相对路径。</td>
+  <td>Dockerfile 的位置。如果要从包含 Dockerfile 的目录运行 build 命令，请输入句点 (.). 否则，请使用 Dockerfile 的相对路径。</td>
   </tr>
   </tbody>
   </table>
@@ -212,6 +215,7 @@ lastupdated: "2018-4-20"
   {: codeblock}
 
   <table>
+  <caption>了解 YAML 文件的组成部分</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
   </thead>
@@ -229,7 +233,7 @@ lastupdated: "2018-4-20"
 2. 应用配置文件，以在集群中创建部署和服务。
 
   ```
-  kubectl apply -f filepath/cf-py.yaml
+  kubectl apply -f <filepath>/cf-py.yaml
   ```
   {: pre}
 
@@ -246,7 +250,7 @@ lastupdated: "2018-4-20"
     a.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-    bx cs workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -254,7 +258,7 @@ lastupdated: "2018-4-20"
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
@@ -262,9 +266,11 @@ lastupdated: "2018-4-20"
 
     <img src="images/python_flask.png" alt="已部署样板 Python Flask 应用程序的截屏。" />
 
-5. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。步骤根据您的 Kubernetes 版本而有所不同。
+5.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
 
-6. 在**工作负载**选项卡中，可以查看已创建的资源。探索完 Kubernetes 仪表板后，请使用 `ctrl+c` 以退出 `proxy` 命令。
+    如果在 [{{site.data.keyword.Bluemix_notm}}GUI](https://console.bluemix.net/) 中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
+    {: tip}
+
+6. 在**工作负载**选项卡中，可以查看已创建的资源。
 
 祝贺您！您的应用程序已部署在容器中！
-

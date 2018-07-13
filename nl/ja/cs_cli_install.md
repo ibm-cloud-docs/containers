@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # CLI と API のセットアップ
@@ -71,11 +74,11 @@ CLI をインストールするには、以下のことを行います。
 
 4.  {: #kubectl}Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.11 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
+    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.9.7 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
     2.  **OSX および Linux の場合**: 以下の手順を実行します。
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
@@ -132,10 +135,38 @@ CLI をインストールするには、以下のことを行います。
 
 -   [`bx` コマンド](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` コマンド](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [`kubectl` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`bx cr` コマンド](/docs/cli/plugins/registry/index.html)
 
 <br />
+
+
+
+
+## コンテナー内の CLI をコンピューター上で実行する
+{: #cs_cli_container}
+
+コンピューターに個別に各 CLI をインストールする代わりに、コンピューター上で実行するコンテナーに CLI をインストールすることができます。
+{:shortdesc}
+
+1. 提供された Dockerfile からイメージを作成します。
+
+    ```
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    ```
+    {: pre}
+
+2. イメージをコンテナーとしてローカルにデプロイし、ローカル・ファイルにアクセスするためのボリュームをマウントします。
+  
+    ```
+    docker run -it -v /local/path:/container/volume <image_name>
+    ```
+    {: pre}
+  
+3. 対話式シェルから `bx cs` コマンドと `kubectl` コマンドの実行を開始します。保存するデータを作成する場合は、マウントしたボリュームにそのデータを保存します。シェルを終了すると、コンテナーは停止します。 
+
+<br />
+
 
 
 ## `kubectl` を実行するように CLI を構成する
@@ -144,7 +175,7 @@ CLI をインストールするには、以下のことを行います。
 Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
 {:shortdesc}
 
-Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes 1.9.7 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
 
@@ -159,7 +190,7 @@ Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、
 
 2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
-3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成とアクセスを行う場合は、`bx cs region-set` を実行します。
+3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成またはアクセスを行うには、`bx cs region-set` を実行します。
 
 4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
 
@@ -171,19 +202,19 @@ Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、
 5.  作成したクラスターを、このセッションのコンテキストとして設定します。 次の構成手順は、クラスターの操作時に毎回行ってください。
     1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
-    ```
-    bx cs cluster-config <cluster_name_or_ID>
-    ```
-    {: pre}
+        ```
+        bx cs cluster-config <cluster_name_or_ID>
+        ```
+        {: pre}
 
-    構成ファイルをダウンロードした後に、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
+        構成ファイルをダウンロードした後に、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
 
-    例:
+        例:
 
-    ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
+        ```
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        ```
+        {: screen}
 
     2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
 
@@ -199,7 +230,6 @@ Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、
         出力:
         ```
         /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-
         ```
         {: screen}
 
@@ -213,12 +243,12 @@ Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、
     出力例:
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
-これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) を参照してください。
+これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/) を参照してください。
 
 **ヒント:** Windows を使用している場合、Kubernetes CLI が {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールされていなければ、`kubectl` コマンドを正常に実行するために、Kubernetes CLI のインストール先パスにディレクトリーを変更する必要があります。
 
@@ -236,7 +266,7 @@ Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.11 以降
+-   Kubernetes CLI バージョン 1.9.7 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -364,6 +394,7 @@ CLI をアンインストールするには、以下のようにします。
 **注:** {{site.data.keyword.containershort_notm}} で認証するには、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成された IAM (ID およびアクセス管理) トークンを提供する必要があります。このトークンには、クラスターの作成に使用された {{site.data.keyword.Bluemix_notm}} アカウント ID が入っています。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、IAM トークンの作成を自動化するための次のオプションから選択できます。
 
 <table>
+<caption>ID タイプとオプション</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
 <th>選択オプション</th>
@@ -399,7 +430,8 @@ CLI をアンインストールするには、以下のようにします。
 
     {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>トークンを取得するための入力パラメーター</caption>
     <thead>
         <th>入力パラメーター</th>
         <th>値</th>
@@ -467,6 +499,7 @@ CLI をアンインストールするには、以下のようにします。
     {: codeblock}
 
     <table summary="{{site.data.keyword.Bluemix_notm}} アカウント ID を取得するための入力パラメーター">
+    <caption>{{site.data.keyword.Bluemix_notm}} アカウント ID を取得するための入力パラメーター</caption>
     <thead>
   	<th>入力パラメーター</th>
   	<th>値</th>
@@ -520,7 +553,8 @@ CLI をアンインストールするには、以下のようにします。
 
     {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>トークンを取得するための入力パラメーター</caption>
     <thead>
         <th>入力パラメーター</th>
         <th>値</th>
@@ -590,6 +624,7 @@ CLI をアンインストールするには、以下のようにします。
      {: codeblock}
 
      <table summary="API を使用するための入力パラメーター">
+     <caption>API を使用するための入力パラメーター</caption>
      <thead>
      <th>入力パラメーター</th>
      <th>値</th>
@@ -632,6 +667,7 @@ IAM トークンを作成する場合、または新しいリフレッシュ・�
     {: codeblock}
 
     <table summary="新しい IAM トークンのための入力パラメーター">
+    <caption>新しい IAM トークンのための入力パラメーター</caption>
     <thead>
     <th>入力パラメーター</th>
     <th>値</th>

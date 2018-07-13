@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,24 +15,25 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # Regionen und Standorte
 {{site.data.keyword.Bluemix}} wird weltweit gehostet. Eine Region ist ein geografischer Bereich, auf den über einen Endpunkt zugegriffen wird. Standorte stellen Rechenzentren innerhalb der Region dar. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben.
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}}-Regionen](#bluemix_regions) unterscheiden sich von [{{site.data.keyword.containershort_notm}}-Regionen](#container_regions).
 
-![{{site.data.keyword.containershort_notm}}-Regionen und -Rechenzentren](/images/regions.png)
+![{{site.data.keyword.containershort_notm}}-Regionen und -Standorte](/images/regions.png)
 
-{{site.data.keyword.containershort_notm}}-Regionen und Rechenzentren
+_{{site.data.keyword.containershort_notm}}-Regionen und -Standorte_
 
-Unterstützte {{site.data.keyword.containershort_notm}}-Regionen:
+Folgende {{site.data.keyword.containershort_notm}}-Regionen werden unterstützt:
   * Asien-Pazifik (Norden)
   * Asien-Pazifik (Süden)
   * Zentraleuropa
   * Großbritannien (Süden)
   * Vereinigte Staaten (Osten)
   * Vereinigte Staaten (Süden)
-
 
 
 ## API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen
@@ -45,7 +46,7 @@ Um zu überprüfen, in welcher {{site.data.keyword.Bluemix_notm}}-Region Sie sic
 
 Auf {{site.data.keyword.Bluemix_notm}}-Regionen kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt angegeben wird. Wenn Sie keine Region angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet.
 
-API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen mit Beispielen für Anmeldebefehle:
+Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-Endpunkten der {{site.data.keyword.Bluemix_notm}}-Region verwenden:
 
   * Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten)
       ```
@@ -86,10 +87,10 @@ Sie können auf {{site.data.keyword.containershort_notm}} über einen globalen E
 * Um zu überprüfen, in welcher {{site.data.keyword.containershort_notm}}-Region Sie sich momentan befinden, führen Sie `bx cs region` aus.
 * Um eine Liste der verfügbaren Region samt den zugehörigen Endpunkten abzurufen, führen Sie den Befehl `bx cs regions` aus.
 
-Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen in einem Header vom Typ `X-Region`.
+Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen im Header vom Typ `X-Region`.
 {: tip}
 
-### Bei anderer Container-Service-Region anmelden
+### Bei einer anderen {{site.data.keyword.containerlong}_notm}-Region anmelden
 {: #container_login_endpoints}
 
 Sie können Standorte mithilfe der {{site.data.keyword.containershort_notm}}-CLI ändern.
@@ -103,7 +104,7 @@ Sie können sich beispielsweise aus den folgenden Gründen bei einer anderen Reg
 
 Um schnell zwischen Regionen zu wechseln, führen Sie `bx cs region-set`.
 
-### Container-Service-API-Befehle verwenden
+### {{site.data.keyword.containerlong_notm}}-API-Befehle verwenden
 {: #containers_api}
 
 Um mit der {{site.data.keyword.containershort_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den globalen Endpunkt die Zeichenfolge `/v1/command` anfügen.
@@ -117,7 +118,8 @@ Beispiel für die API `GET /clusters`:
 
 </br>
 
-Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen in einem Header vom Typ `X-Region`. Um die verfügbaren Regionen aufzulisten, führen Sie den Befehl `bx cs regions` aus.
+Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen im Header vom Typ `X-Region`.
+Um die verfügbaren Regionen aufzulisten, führen Sie den Befehl `bx cs regions` aus.
 {: tip}
 
 Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
@@ -130,22 +132,25 @@ Standorte sind physische Rechenzentren, die innerhalb einer {{site.data.keyword.
 
 | Region | Standort | Ort |
 |--------|----------|------|
-| Asien-Pazifik (Norden) | hkg02, seo01, sng01, tok02 | Hongkong, Seoul, Singapur, Tokio |
+| Asien-Pazifik (Norden) | hkg02, seo01, sng01, tok02 | Hongkong (Sonderverwaltungsregion der VR China), Seoul, Singapur, Tokio |
 | Asien-Pazifik (Süden)     | mel01, syd01, syd04        | Melbourne, Sydney |
 | Zentraleuropa     | ams03, fra02, par01        | Amsterdam, Frankfurt, Paris |
 | Großbritannien (Süden)      | lon02, lon04         | London |
 | Vereinigte Staaten (Osten)      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
 | Vereinigte Staaten (Süden)     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
+{: caption="Verfügbare Regionen und Standorte" caption-side="top"}
 
 Die Ressourcen Ihrer Cluster bleiben an dem Standort (Rechenzentrum), an dem der Cluster bereitgestellt wird. Die folgende Abbildung stellt die Beziehung Ihres Clusters innerhalb der Beispielregion 'Vereinigte Staaten (Osten)' genauer dar.
 
-1.  Die Ressourcen Ihres Clusters, einschließlich der Master- und Workerknoten, befinden sich an demselben Standort, an dem Sie den Cluster bereitgestellt haben. Wenn Sie lokale Container-Orchestrierungsaktionen wie z. B. `kubectl`-Befehle einleiten, werden die Informationen zwischen den Master- und Workerknoten innerhalb desselben Standortsausgetauscht.
+1.  Die Ressourcen Ihres Clusters, einschließlich der Master- und Workerknoten, befinden sich an demselben Standort, an dem Sie den Cluster bereitgestellt haben. Wenn Sie lokale Container-Orchestrierungsaktionen wie z. B. `kubectl`-Befehle einleiten, werden die Informationen zwischen den Master- und Workerknoten innerhalb desselben Standorts ausgetauscht.
 
 2.  Wenn Sie andere Clusterressourcen konfigurieren, z. B. Speicher-, Netz- und Rechenressourcen oder Anwendungen, die in Pods ausgeführt werden, verbleiben die Ressourcen und ihre Daten an dem Standort, an dem Sie den Cluster bereitgestellt haben.
 
-3.  Wenn Sie  Cluster-Management-Aktionen wie die `bx cs`-Befehle ausführen, werden Basisinformationen über die Cluster (wie z. B. Name, ID, Benutzer, Befehl) an den regionalen Endpunkt weitergeleitet.
+3.  Wenn Sie Cluster-Management-Aktionen wie die `bx cs`-Befehle ausführen, werden Basisinformationen über die Cluster (wie z. B. Name, ID, Benutzer, Befehl) an den regionalen Endpunkt weitergeleitet.
 
 ![Erklärung, wo Ihre Clusterresourcen sich befinden](/images/region-cluster-resources.png)
 
-Erklärung, wo Ihre Clusterressourcen sich befinden.
+_Erklärung, wo Ihre Clusterressourcen sich befinden._
+
+
 

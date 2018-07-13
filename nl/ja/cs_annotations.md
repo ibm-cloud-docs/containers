@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Ingress のアノテーション
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 Ingress サービスの一般情報とその使用を開始する方法については、[Ingress を使用してネットワーク・トラフィックを管理する](cs_ingress.html#planning)を参照してください。
 
 <table>
+<caption>一般的なアノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -64,6 +66,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
 <br>
 
 <table>
+<caption>接続アノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -86,8 +89,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
   <tr>
   <td><a href="#keepalive-timeout">キープアライブ・タイムアウト</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>サーバー上でキープアライブ接続を開いた状態で保つ最大時間を設定します。
-</td>
+  <td>サーバー上でキープアライブ接続を開いた状態で保つ最大時間を設定します。</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">次のアップストリームにプロキシー</a></td>
@@ -109,6 +111,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
 <br>
 
   <table>
+  <caption>HTTPS および TLS/SSL 認証アノテーション</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -136,7 +139,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
   <tr>
   <td><a href="#hsts">HTTP Strict Transport Security (HSTS)</a></td>
   <td><code>hsts</code></td>
-  <td>ドメインへのアクセスに HTTPS のみ使用するようブラウザーを設定します。</td>
+  <td>ドメインへのアクセスに HTTPS のみ使用するようにブラウザーを設定します。</td>
   </tr>
   <tr>
   <td><a href="#mutual-auth">相互認証</a></td>
@@ -146,13 +149,14 @@ Ingress サービスの一般情報とその使用を開始する方法につい
   <tr>
   <td><a href="#ssl-services">SSL サービス・サポート</a></td>
   <td><code>ssl-services</code></td>
-  <td>SSL サービス・サポートで、HTTPS が必要なアップストリーム・アプリへのトラフィックを暗号化できるようにします。 </td>
+  <td>SSL サービス・サポートで、HTTPS が必要なアップストリーム・アプリへのトラフィックを暗号化できるようにします。</td>
   </tr>
   </tbody></table>
 
 <br>
 
 <table>
+<caption>Istio アノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -172,6 +176,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
 <br>
 
 <table>
+<caption>プロキシー・バッファー・アノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -206,6 +211,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
 <br>
 
 <table>
+<caption>要求/応答アノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -240,6 +246,7 @@ Ingress サービスの一般情報とその使用を開始する方法につい
 <br>
 
 <table>
+<caption>サービス制限アノテーション</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -305,8 +312,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -336,12 +344,13 @@ ALB が要求 URI とアプリ・パスを突き合わせる方法を変更し�
 
 <dl>
 <dt>説明</dt>
-<dd>デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。<br><br>`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。<br><br>**注**: 正規表現 (regex) パスを処理するには、このアノテーションが必要です。</dd>
+<dd>デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。<br><br>`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。<br><br><strong>注</strong>: 正規表現 (regex) パスを処理するには、このアノテーションが必要です。</dd>
 
 <dt>サポートされる修飾子</dt>
 <dd>
 
 <table>
+<caption>サポートされる修飾子</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -351,15 +360,15 @@ ALB が要求 URI とアプリ・パスを突き合わせる方法を変更し�
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>等号修飾子を使用すると、ALB は完全一致のみを選択します。 完全一致が検出されると、検索は停止し、一致したパスが選択されます。</td>
+ <td>等号修飾子を使用すると、ALB は完全一致のみを選択します。 完全一致が検出されると、検索は停止し、一致したパスが選択されます。<br>例えば、アプリが <code>/tea</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、厳密に一致する <code>/tea</code> パスのみを選択します。</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>波形記号修飾子を使用すると、マッチング時に ALB はパスを大/小文字を区別する正規表現パスとして処理します。</td>
+ <td>波形記号修飾子を使用すると、マッチング時に ALB はパスを大/小文字を区別する正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/coffee</code> パスまたは <code>/123/coffee</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>波形記号の後にアスタリスクが続く修飾子では、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。</td>
+ <td>波形記号の後にアスタリスクが続く修飾子では、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/Coffee</code> パスまたは <code>/123/COFFEE</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -395,13 +404,14 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
   <td><code>modifier</code></td>
-  <td><code>&lt;<em>location_modifier</em>&gt;</code> を、パスに使用するロケーション修飾子に置き換えてください。 サポートされる修飾子は、<code>「=」</code>、<code>「~」</code>、<code>「~\*」</code>、および<code>「^~」</code>です。修飾子は単一引用符で囲む必要があります。</td>
+  <td><code>&lt;<em>location_modifier</em>&gt;</code> を、パスに使用するロケーション修飾子に置き換えてください。 サポートされる修飾子は、<code>「=」</code>、<code>「~」</code>、<code>「~\*」</code>、および<code>「^~」</code>です。 修飾子は単一引用符で囲む必要があります。</td>
   </tr>
   <tr>
   <td><code>serviceName</code></td>
@@ -451,8 +461,9 @@ rules:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -475,7 +486,7 @@ ALB ドメイン・パスへの着信ネットワーク・トラフィックを�
 
 <dl>
 <dt>説明</dt>
-<dd>Ingress ALB ドメインは、<code>mykubecluster.us-south.containers.mybluemix.net/beans</code> への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、<code>/beans</code> ではなく <code>/coffee</code> で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、<code>/beans</code> 上の着信ネットワーク・トラフィックは <code>/coffee</code> パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用して区切ってください。</dd>
+<dd>Ingress ALB ドメインは、<code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、<code>/beans</code> ではなく <code>/coffee</code> で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、<code>/beans</code> 上の着信ネットワーク・トラフィックは <code>/coffee</code> パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用して区切ってください。</dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -501,8 +512,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -560,8 +572,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -585,17 +598,17 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 出力は、以下のようになります。
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>ALB の構成マップを開きます。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>TCP ポートを構成マップに追加します。 <code>&lt;port&gt;</code> を、開く TCP ポートに置き換えます。
+<li>TCP ポートを構成マップに追加します。 <code>&lt;port&gt;</code> を、開く TCP ポートに置き換えます。 <b>注</b>: デフォルトでは、ポート 80 とポート 443 が開いています。80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
  creationTimestamp: 2017-08-22T19:06:51Z
  name: ibm-cloud-provider-ingress-cm
@@ -608,8 +621,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 出力は、以下のようになります。
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>標準以外の TCP ポートを介してアプリにアクセスするように Ingress を構成します。 この解説ではサンプル YAML ファイルを使用します。 </li>
 <li>ALB 構成を更新します。
 <pre class="pre">
@@ -650,8 +663,8 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-   ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
  tls:
  - hosts:
@@ -667,17 +680,18 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>バックエンド・アプリへの接続で待機する秒数 (例: <code>65s</code>)。 <strong>注:</strong> 接続タイムアウトは、75 秒より長くできません。</td>
+ <td>バックエンド・アプリに接続されるのを待機する秒数または分数 (例: <code>65s</code> または <code>2m</code>)。<strong>注:</strong> 接続タイムアウトは、75 秒より長くできません。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>バックエンド・アプリから読み取る前に待機する秒数 (例: <code>65s</code>)。 <strong>注:</strong> 読み取りタイムアウトは、120 秒より長くできません。</td>
+ <td>バックエンド・アプリが読み取られるまで待機する秒数または分数 (例: <code>65s</code> または <code>2m</code>)。
  </tr>
  </tbody></table>
 
@@ -690,7 +704,8 @@ spec:
 ### キープアライブ要求数 (keepalive-requests)
 {: #keepalive-requests}
 
-1 つのキープアライブ接続で処理できる要求の最大数を設定します。{:shortdesc}
+1 つのキープアライブ接続で処理できる要求の最大数を設定します。
+{:shortdesc}
 
 <dl>
 <dt>説明</dt>
@@ -724,8 +739,9 @@ rules:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -783,8 +799,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -806,12 +823,13 @@ spec:
 ### 次のアップストリームにプロキシー (proxy-next-upstream-config)
 {: #proxy-next-upstream-config}
 
-ALB が要求を次のアップストリーム・サーバーに渡すことができる場合に設定します。{:shortdesc}
+ALB が要求を次のアップストリーム・サーバーに渡すことができる場合に設定します。
+{:shortdesc}
 
 <dl>
 <dt>説明</dt>
 <dd>
-Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。`proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。<br><br><strong>注</strong>: `proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。
+Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。 一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。 ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。 その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。 `proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。<br><br><strong>注</strong>: `proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -838,8 +856,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -848,12 +867,12 @@ spec:
 </tr>
 <tr>
 <td><code>retries</code></td>
-<td><code>&lt;<em>tries</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行回数に置き換えます。この回数には元の要求が含まれます。この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
+<td><code>&lt;<em>tries</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行回数に置き換えます。 この回数には元の要求が含まれます。 この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
 </td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
-<td><code>&lt;<em>time</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行時間 (秒) に置き換えます。例えば、時間を 30 秒に設定するには、<code>30s</code> と入力します。この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
+<td><code>&lt;<em>time</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行時間 (秒) に置き換えます。 例えば、時間を 30 秒に設定するには、<code>30s</code> と入力します。 この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
 </td>
 </tr>
 <tr>
@@ -868,13 +887,12 @@ spec:
 </tr>
 <tr>
 <td><code>http_502</code></td>
-<td><code>true</code> に設定すると、最初のアップストリーム・サーバーがコード 502 の応答を返したときに、ALB は次のアップストリーム・サーバーに要求を渡します。
-指定できる HTTP 応答コードは、<code>500</code>、<code>502</code>、<code>503</code>、<code>504</code>、<code>403</code>、<code>404</code>、<code>429</code> です。
+<td><code>true</code> に設定すると、最初のアップストリーム・サーバーがコード 502 の応答を返したときに、ALB は次のアップストリーム・サーバーに要求を渡します。 指定できる HTTP 応答コードは、<code>500</code>、<code>502</code>、<code>503</code>、<code>504</code>、<code>403</code>、<code>404</code>、<code>429</code> です。
 </td>
 </tr>
 <tr>
 <td><code>non_idempotent</code></td>
-<td><code>true</code> に設定すると、ALB は非べき等型メソッドを含む要求を次のアップストリーム・サーバーに渡すことができます。デフォルトでは、ALB はこれらの要求を次のアップストリーム・サーバーに渡しません。
+<td><code>true</code> に設定すると、ALB は非べき等型メソッドを含む要求を次のアップストリーム・サーバーに渡すことができます。 デフォルトでは、ALB はこれらの要求を次のアップストリーム・サーバーに渡しません。
 </td>
 </tr>
 <tr>
@@ -923,18 +941,19 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -962,6 +981,8 @@ spec:
  </dd></dl>
 
 <br />
+
+
 
 
 ### アップストリーム・キープアライブ (upstream-keepalive)
@@ -1002,8 +1023,9 @@ spec:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -1021,6 +1043,8 @@ spec:
 <br />
 
 
+
+
 ## HTTPS および TLS/SSL 認証アノテーション
 {: #https-auth}
 
@@ -1035,7 +1059,7 @@ spec:
   <dd>
   {{site.data.keyword.appid_short_notm}} を使用して、Web または API の HTTP /HTTPS 要求を認証します。
 
-  <p>要求タイプを <code>web</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 **注**: {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。</p>
+  <p>要求タイプを <code>web</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 <strong>注</strong>: {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。</p>
 
   <p>要求タイプを <code>api</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む API 要求が検証されます。 要求にアクセス・トークンが含まれていない場合、「<code>401 : Unauthorized</code>」というエラー・メッセージがユーザーに返されます。</p>
 
@@ -1066,8 +1090,9 @@ spec:
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>アノテーションの構成要素について</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
     </thead>
     <tbody>
     <tr>
@@ -1140,8 +1165,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -1161,12 +1187,12 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 出力は、以下のようになります。
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>ALB の構成マップを開きます。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 &lt;port&gt; を、開く HTTP または HTTPS のポートに置き換えます。
+<li>非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 &lt;port&gt; を、開く HTTP または HTTPS のポートに置き換えます。 <b>注</b>: デフォルトでは、ポート 80 とポート 443 が開いています。80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1184,8 +1210,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 出力は、以下のようになります。
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>着信ネットワーク・トラフィックをサービスにルーティングする際に、非デフォルトのポートを使用するように Ingress を構成します。 この解説ではサンプル YAML ファイルを使用します。 </li>
 <li>ALB 構成を更新します。
 <pre class="pre">
@@ -1212,6 +1238,7 @@ HTTP 要求の HTTPS へのリダイレクトはデフォルトで無効です�
 
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1232,7 +1259,10 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1266,19 +1296,20 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -1311,7 +1342,7 @@ ALB の相互認証を構成します。
 <dl>
 <dt>説明</dt>
 <dd>
-Ingress ALB の相互認証を構成します。 クライアントはサーバーを認証し、サーバーもクライアントを認証します。どちらも証明書が使用されます。 相互認証は、証明書ベース認証とも双方向認証とも呼ばれます。
+Ingress ALB のダウンストリーム・トラフィックの相互認証を構成します。外部クライアントはサーバーを認証し、サーバーもクライアントを認証します。どちらも証明書が使用されます。相互認証は、証明書ベース認証とも双方向認証とも呼ばれます。
 </dd>
 
 <dt>前提条件</dt>
@@ -1348,8 +1379,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -1362,7 +1394,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td><code>&lt;<em>servicename</em>&gt;</code> を 1 つ以上の Ingress リソースの名前に置き換えます。このパラメーターはオプションです。</td>
+<td><code>&lt;<em>servicename</em>&gt;</code> を 1 つ以上の Ingress リソースの名前に置き換えます。 このパラメーターはオプションです。</td>
 </tr>
 </tbody></table>
 
@@ -1382,10 +1414,7 @@ HTTPS 要求を許可し、アップストリーム・アプリへのトラフ�
 <dl>
 <dt>説明</dt>
 <dd>
-HTTPS を必要とするアップストリーム・アプリへのトラフィックを暗号化します。
-
-**オプション**: このアノテーションに[片方向認証または相互認証](#ssl-services-auth)を追加できます。
-</dd>
+HTTPS を必要とするアップストリーム・アプリに Ingress が送信するトラフィックを暗号化します。アップストリーム・アプリが TLS を処理できる場合は、TLS シークレットに含まれる証明書を提供できます (オプション)。<br></br>**オプション**: このアノテーションに[片方向認証または相互認証](#ssl-services-auth)を追加できます。</dd>
 
 
 <dt>サンプル Ingress リソース YAML</dt>
@@ -1403,27 +1432,28 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
+  <td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。 トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスのシークレットに置き換えます。 このパラメーターはオプションです。 このパラメーターを指定した場合は、アプリが必要とするクライアントの鍵と証明書が値に含まれていなければなりません。 TLS シークレットを作成するには、[シークレットの作成](cs_app.html#secrets)を参照してください。</td>
+  <td>オプション: TLS シークレットを使用する場合、アップストリーム・アプリが TLS を処理できるなら、<code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスのシークレットに置き換えます。シークレットを提供する場合は、アプリが必要とするクライアントの <code>trusted.crt</code>、<code>client.crt</code>、<code>client.key</code> が値に含まれていなければなりません。TLS シークレットを作成するには、まず[証明書と鍵を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。その後、[シークレットの作成](cs_app.html#secrets)を参照してください。</td>
   </tr>
   </tbody></table>
 
@@ -1440,9 +1470,6 @@ spec:
 <dt>説明</dt>
 <dd>
 HTTPS 要求を許可し、セキュリティーを強化するために片方向認証または相互認証を使用してアップストリーム・アプリへのトラフィックを暗号化します。
-
-**注**: 始めに、[証明書と鍵を base-64 に変換してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
-
 </dd>
 
 
@@ -1467,28 +1494,29 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
+  <td><code>&lt;<em>myservice</em>&gt;</code> を、HTTPS を必要とするサービスの名前に置き換えます。 トラフィックは暗号化されて ALB からこのアプリのサービスに送信されます。</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスのシークレットに置き換えます。 このパラメーターはオプションです。 このパラメーターを指定した場合は、アプリが必要とするクライアントの鍵と証明書が値に含まれていなければなりません。 相互認証シークレットを作成するには、[シークレットの作成](cs_app.html#secrets)を参照してください。</td>
+  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスの相互認証シークレットに置き換えます。アプリが必要とするクライアントの CA 証明書が値に含まれていなければなりません。相互認証シークレットを作成するには、まず[証明書と鍵を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。その後、[シークレットの作成](cs_app.html#secrets)を参照してください。</td>
   </tr>
   </tbody></table>
 
@@ -1504,17 +1532,21 @@ spec:
 ### Istio サービス (istio-services)
 {: #istio-services}
 
-  Istio 管理対象サービスにトラフィックを転送します。{:shortdesc}
+  Istio 管理対象サービスにトラフィックを転送します。
+  {:shortdesc}
 
   <dl>
   <dt>説明</dt>
   <dd>
-  Istio 管理対象サービスがある場合は、クラスター ALB を使用して HTTP/HTTPS 要求を Istio Ingress コントローラーに転送できます。Istio Ingress コントローラーは、要求をアプリ・サービスに転送します。トラフィックを転送するには、クラスター ALB と Istio Ingress コントローラーの両方の Ingress リソースを変更する必要があります。<br><br>クラスター ALB の Ingress リソースで、以下を行う必要があります。<ul>
+  Istio 管理対象サービスがある場合は、クラスター ALB を使用して HTTP/HTTPS 要求を Istio Ingress コントローラーに転送できます。 Istio Ingress コントローラーは、要求をアプリ・サービスに転送します。 トラフィックを転送するには、クラスター ALB と Istio Ingress コントローラーの両方の Ingress リソースを変更する必要があります。
+    <br><br>クラスター ALB の Ingress リソースで、以下を行う必要があります。
+      <ul>
         <li>`istio-services` アノテーションを指定する</li>
         <li>サービス・パスを、アプリが listen する実際のパスとして定義する</li>
         <li>サービス・ポートを Istio Ingress コントローラーのポートとして定義する</li>
       </ul>
-    <br>Istio Ingress コントローラーの Ingress リソースで、以下を行う必要があります。<ul>
+    <br>Istio Ingress コントローラーの Ingress リソースで、以下を行う必要があります。
+      <ul>
         <li>サービス・パスを、アプリが listen する実際のパスとして定義する</li>
         <li>サービス・ポートを、Istio Ingress コントローラーで公開するアプリ・サービスの HTTP/HTTPS ポートとして定義する</li>
     </ul>
@@ -1529,7 +1561,7 @@ spec:
    metadata:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - hosts:
@@ -1549,29 +1581,30 @@ spec:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>YAML ファイルの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>Istio 管理サービスへのトラフィック転送を有効にするには、<code>True</code> に設定します。</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td><code><em>&lt;myservice1&gt;</em></code> を、Istio 管理対象アプリ用に作成した Kubernetes サービスの名前に置き換えます。複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しなかった場合は、すべての Istio 管理対象サービスのトラフィック転送が有効化されます。</td>
+    <td><code><em>&lt;myservice1&gt;</em></code> を、Istio 管理対象アプリ用に作成した Kubernetes サービスの名前に置き換えます。 複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しなかった場合は、すべての Istio 管理対象サービスのトラフィック転送が有効化されます。</td>
     </tr>
     <tr>
     <td><code>istioServiceNamespace</code></td>
-    <td><code><em>&lt;istio-namespace&gt;</em></code> を、Istio がインストールされている Kubernetes 名前空間に置き換えます。このフィールドはオプションです。 名前空間を指定しなかった場合は、<code>istio-system</code> 名前空間が使用されます。</td>
+    <td><code><em>&lt;istio-namespace&gt;</em></code> を、Istio がインストールされている Kubernetes 名前空間に置き換えます。 このフィールドはオプションです。 名前空間を指定しなかった場合は、<code>istio-system</code> 名前空間が使用されます。</td>
     </tr>
     <tr>
     <td><code>istioServiceName</code></td>
-    <td><code><em>&lt;istio-ingress-service&gt;</em></code> を Istio Ingress サービスの名前に置き換えます。このフィールドはオプションです。 Istio Ingress サービス名を指定しなかった場合は、サービス名 <code>istio-ingress</code> が使用されます。</td>
+    <td><code><em>&lt;istio-ingress-service&gt;</em></code> を Istio Ingress サービスの名前に置き換えます。 このフィールドはオプションです。 Istio Ingress サービス名を指定しなかった場合は、サービス名 <code>istio-ingress</code> が使用されます。</td>
     </tr>
     <tr>
     <td><code>path</code></td>
-      <td>トラフィックを転送する Istio 管理対象サービスごとに、<code><em>&lt;/myapp1&gt;</em></code> を、Istio 管理対象サービスが listen するバックエンド・パスに置き換えます。このパスは、Istio Ingress リソースで定義したパスに対応している必要があります。</td>
+      <td>トラフィックを転送する Istio 管理対象サービスごとに、<code><em>&lt;/myapp1&gt;</em></code> を、Istio 管理対象サービスが listen するバックエンド・パスに置き換えます。 このパスは、Istio Ingress リソースで定義したパスに対応している必要があります。</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
@@ -1608,7 +1641,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
@@ -1622,7 +1655,24 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>アノテーションの構成要素について</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>ALB での応答データ・バッファリングを無効にするには、<code>false</code> に設定します。</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td><code><em>&lt;myservice1&gt;</em></code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。複数のサービスは、セミコロン (,) で区切ります。 このフィールドはオプションです。 サービス名を指定しない場合は、すべてのサービスがこのアノテーションを使用します。</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1663,8 +1713,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -1725,8 +1776,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -1784,8 +1836,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
 </thead>
 <tbody>
 <tr>
@@ -1827,7 +1880,6 @@ spec:
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1839,7 +1891,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1882,18 +1933,19 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -1949,18 +2001,19 @@ spec:
    - host: mydomain
     http:
       paths:
-       - path: /
-         backend:
-           serviceName: &lt;myservice1&gt;
-           servicePort: 8080
-       - path: /myapp
-         backend:
-           serviceName: &lt;myservice2&gt;
-           servicePort: 80</code></pre>
+       - path: /service1_path
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+       - path: /service2_path
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
 
   <table>
+  <caption>アノテーションの構成要素について</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
    </thead>
    <tbody>
    <tr>
@@ -2016,13 +2069,14 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>クライアント応答本体の最大サイズ。 例えば、200 M バイトに設定するには、<code>200m</code> と定義します。  <strong>注:</strong> サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
+ <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。<strong>注:</strong> サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
  </tr>
  </tbody></table>
 
@@ -2066,8 +2120,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>アノテーションの構成要素について</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+ <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
  </thead>
  <tbody>
  <tr>
@@ -2128,13 +2183,14 @@ spec:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>ロケーションまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key==$http_x_user_id` を使用します。</td>
+  <td>ロケーションまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2190,8 +2246,9 @@ spec:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>アノテーションの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
   </thead>
   <tbody>
   <tr>
@@ -2200,7 +2257,7 @@ spec:
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>ロケーションまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key==$http_x_user_id` を使用します。</td>
+  <td>ロケーションまたはサービスに基づいて着信要求のグローバル制限を設定するには、`key=location` を使用します。 ヘッダーに基づいて着信要求のグローバル制限を設定するには、`X-USER-ID key=$http_x_user_id` を使用します。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2215,3 +2272,6 @@ spec:
   </dl>
 
   <br />
+
+
+

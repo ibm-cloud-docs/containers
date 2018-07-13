@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,11 +16,50 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Argomenti popolari di {{site.data.keyword.containershort_notm}}
 {: #cs_popular_topics}
 
-Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{site.data.keyword.containerlong}}.
+Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulteriori informazioni sulle nuove funzioni da esplorare, su un suggerimento per la sperimentazione o su alcuni argomenti popolari che gli altri sviluppatori stanno trovando utili al momento.
 {:shortdesc}
+
+## Argomenti popolari nel maggio 2018
+{: #may18}
+
+
+<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel maggio 2018 </caption>
+<thead>
+<th>Data</th>
+<th>Titolo</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td>24 maggio</td>
+<td>[Nuovo formato del dominio secondario Ingress](cs_ingress.html)</td>
+<td>I cluster creati dopo il 24 maggio vengono assegnati a un dominio secondario Ingress in un nuovo formato: <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>. Quando utilizzi Ingress per esporre le tue applicazioni, puoi utilizzare il nuovo dominio secondario per accedere alle tue applicazioni da internet.</td>
+</tr>
+<tr>
+<td>14 maggio</td>
+<td>[Aggiornamento: distribuisci i carichi di lavoro nel bare metal GPU nel mondo](cs_app.html#gpu_app)</td>
+<td>Se hai un [tipo di macchina GPU (graphics processing unit) bare metal](cs_clusters.html#shared_dedicated_node) nel tuo cluster, puoi pianificare le applicazioni intensive in modo matematico. Il nodo di lavoro GPU può elaborare il carico di lavoro della tua applicazione tramite la CPU e la GPU per aumentare le prestazioni.</td>
+</tr>
+<tr>
+<td>03 maggio</td>
+<td>[Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce)</td>
+<td>Il tuo team ha bisogno di un piccolo ulteriore aiuto per sapere quale immagine trasmettere nei tuoi contenitori dell'applicazione? Prova Container Image Security Enforcement beta per verificare le immagini del contenitore prima di distribuirle. Disponibile per i cluster che eseguono Kubernetes 1.9 o successiva.</td>
+</tr>
+<tr>
+<td>01 maggio</td>
+<td>[Distribuisci il dashboard Kubernetes dalla GUI](cs_app.html#cli_dashboard)</td>
+<td>Hai mai voluto accedere al dashboard Kubernetes con un clic? Controlla il pulsante **Dashboard Kubernetes** nella GUI {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+</tbody></table>
+
+
+
 
 ## Argomenti popolari nell'aprile 2018
 {: #apr18}
@@ -46,7 +85,7 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 <tr>
 <td>5 aprile</td>
 <td>[Filtraggio dei log](cs_health.html#filter-logs)</td>
-<td>Filtra specifici log per impedire che vengano inoltrati. I log possono essere filtrati per uno specifico spazio dei nomi, nome contenitore, livello di log e stringa di messaggio. </td>
+<td>Filtra specifici log per impedire che vengano inoltrati. I log possono essere filtrati per uno specifico spazio dei nomi, nome contenitore, livello di log e stringa di messaggio.</td>
 </tr>
 </tbody></table>
 
@@ -62,7 +101,7 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 </thead>
 <tbody>
 <tr>
-<td> 16 marzo</td>
+<td>16 marzo</td>
 <td>[Provisioning di un cluster bare metal con Trusted Compute](cs_clusters.html#shared_dedicated_node)</td>
 <td>Crea un cluster bare metal che esegue [Kubernetes versione 1.9](cs_versions.html#cs_v19) o successiva e abilita Trusted Compute per verificare possibili tentativi di intrusione nei tuoi nodi di lavoro.</td>
 </tr>
@@ -74,12 +113,12 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 <tr>
 <td>13 marzo</td>
 <td>[Ubicazione disponibile a San Paolo](cs_regions.html)</td>
-<td>San Paolo, in Brasile, è la nuova ubicazione nella regione Stati Uniti Sud. Se hai un firewall, assicurati di [aprire le porte del firewall richieste](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>San Paolo, in Brasile, è la nuova ubicazione nella regione Stati Uniti Sud. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
 <td>12 marzo</td>
 <td>[Ti sei appena registrato a {{site.data.keyword.Bluemix_notm}} con un account di prova? Prova un cluster Kubernetes gratuito!](container_index.html#clusters)</td>
-<td>Con un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) di prova, puoi distribuire 1 cluster gratuito per 21 giorni per testare le funzionalità di Kubernetes.</td>
+<td>Con un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) di prova, puoi distribuire un cluster gratuito per 21 giorni per testare le funzionalità di Kubernetes.</td>
 </tr>
 </tbody></table>
 
@@ -112,22 +151,22 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 <tr>
 <td>20 febbraio</td>
 <td>Immagini crittografate e [contenuti firmati e attendibili](../services/Registry/registry_trusted_content.html#registry_trustedcontent)</td>
-<td>In {{site.data.keyword.registryshort_notm}}, puoi firmare e crittografare le immagini per garantirne l'integrità durante la memorizzazione nello spazio dei nomi del tuo registro. Crea i contenitori utilizzando solo contenuti attendibili.</td>
+<td>In {{site.data.keyword.registryshort_notm}}, puoi firmare e crittografare le immagini per garantirne l'integrità durante la memorizzazione nello spazio dei nomi del tuo registro. Esegui le tue istanze del contenitore utilizzando solo contenuti attendibili. </td>
 </tr>
 <tr>
 <td>19 febbraio</td>
 <td>[Configura la VPN IPSec strongSwan](cs_vpn.html#vpn-setup)</td>
-<td>Distribuisci rapidamente il grafico Helm della VPN IPSec strongSwan per connettere in modo sicuro il cluster {{site.data.keyword.containershort_notm}} al tuo data center in loco senza Vyatta.</td>
+<td>Distribuisci rapidamente il grafico Helm della VPN IPSec strongSwan per connettere in modo sicuro il cluster {{site.data.keyword.containershort_notm}} al tuo data center in loco senza un VRA (Virtual Router Appliance).</td>
 </tr>
 <tr>
 <td>14 febbraio</td>
 <td>[Ubicazione disponibile a Seoul](cs_regions.html)</td>
-<td>Giusto in tempo per le Olimpiadi, distribuisci un cluster Kubernetes a Seoul nella regione Asia Pacifico Nord. Se hai un firewall, assicurati di [aprire le porte del firewall richieste](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>Giusto in tempo per le Olimpiadi, distribuisci un cluster Kubernetes a Seoul nella regione Asia Pacifico Nord. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
 <td>8 febbraio</td>
 <td>[Aggiorna Kubernetes 1.9](cs_versions.html#cs_v19)</td>
-<td>Rivedi le modifiche da apportare ai tuoi cluster prima di aggiornare a Kubernetes 1.9.</td>
+<td>Rivedi le modifiche da apportare ai tuoi cluster prima di aggiornare a Kubernetes 1.9. </td>
 </tr>
 </tbody></table>
 
@@ -149,12 +188,12 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 <tr>
 <td>23 gennaio</td>
 <td>[Ubicazioni disponibili a Singapore e Montreal, CA](cs_regions.html)</td>
-<td>Singapore e Montreal sono le ubicazioni disponibili nelle regioni Asia Pacifico Nord e Stati Uniti Est di {{site.data.keyword.containershort_notm}}. Se hai un firewall, assicurati di [aprire le porte del firewall richieste](cs_firewall.html#firewall) per queste ubicazioni e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>Singapore e Montreal sono le ubicazioni disponibili nelle regioni Asia Pacifico Nord e Stati Uniti Est di {{site.data.keyword.containershort_notm}}. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per queste ubicazioni e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
 <td>8 gennaio</td>
-<td>[Tipi di macchine migliorate disponibili](cs_cli_reference.html#cs_machine_types)</td>
-<td>I tipi di macchine della serie 2 includono l'archiviazione SSD locale e la crittografia del disco. [Migra i tuoi carichi di lavoro](cs_cluster_update.html#machine_type) a questi tipi di macchine per migliorare prestazioni e stabilità.</td>
+<td>[Disponibili caratteristiche avanzate](cs_cli_reference.html#cs_machine_types)</td>
+<td>I tipi di macchine virtuali della serie 2 includono l'archiviazione SSD locale e la crittografia del disco. [Sposta i tuoi carichi di lavoro](cs_cluster_update.html#machine_type) a queste caratteristiche per migliorare prestazioni e stabilità.</td>
 </tr>
 </tbody></table>
 
@@ -164,5 +203,5 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 Puoi vedere di cosa parlano gli altri utenti e porre le tue domande in [{{site.data.keyword.containershort_notm}} Slack. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
-
-
+Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
+{: tip}

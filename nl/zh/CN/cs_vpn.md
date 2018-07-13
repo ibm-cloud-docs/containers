@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,66 +15,38 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
 # 设置 VPN 连接
 {: #vpn}
 
 通过 VPN 连接，您可以将 {{site.data.keyword.containerlong}} 上 Kubernetes 集群中的应用程序安全地连接到内部部署网络。您还可以将集群外部的应用程序连接到正在集群内部运行的应用程序。
 {:shortdesc}
 
-要将工作程序节点和应用程序连接到内部部署的数据中心，您可以使用 strongSwan 服务或者通过 Vyatta 网关设备或 Fortigate 设备来配置 VPN IPSec 端点。
-
-- **Vyatta 网关设备或 Fortigate 设备**：如果您具有更大的集群，希望通过 VPN 来访问非 Kubernetes 资源，或者希望通过单个 VPN 访问多个集群，那么可选择设置 Vyatta 网关设备或 [Fortigate 安全设备 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) 来配置 IPSec VPN 端点。要配置 Vyatta，请参阅[使用 Vyatta 设置 VPN 连接](#vyatta)。
+要将工作程序节点和应用程序连接到内部部署数据中心，可以配置下列其中一个选项。
 
 - **strongSwan IPSec VPN 服务**：您可以设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/)，以将 Kubernetes 集群与内部部署网络安全连接。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPsec) 协议组，通过因特网提供安全的端到端通信信道。要在集群与内部部署网络之间设置安全连接，请在集群的 pod 中直接[配置和部署 strongSwan IPSec VPN 服务](#vpn-setup)。
 
-## 使用 Vyatta 网关设备设置 VPN 连接
-{: #vyatta}
-
-[Vyatta 网关设备 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) 是运行 Linux 特殊分发版的裸机服务器。可以使用 Vyatta 作为 VPN 网关来安全地连接到内部部署网络。
-{:shortdesc}
-
-所有进出集群 VLAN 的公用和专用网络流量都将通过 Vyatta 进行路由。可以使用 Vyatta 作为 VPN 端点，以在 IBM Cloud Infrastructure (SoftLayer) 和内部部署资源中的服务器之间创建加密的 IPSec 隧道。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中仅限专用的工作程序节点上的应用程序可以如何通过 Vyatta VPN 连接与内部部署服务器进行通信：
-
-<img src="images/cs_vpn_vyatta.png" width="725" alt="使用负载均衡器在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:725px; border-style: none"/>
-
-1. 集群中的应用程序 `myapp2` 接收来自 Ingress 或 LoadBalancer 服务的请求，并且需要安全地连接到内部部署网络中的数据。
-
-2. 因为 `myapp2` 位于仅在专用 VLAN 上的工作程序节点上，所以 Vyatta 充当工作程序节点与内部部署网络之间的安全连接。Vyatta 使用目标 IP 地址来确定应该将哪些网络包发送到内部部署网络。
-
-3. 该请求已加密，并通过 VPN 通道发送到内部部署数据中心。
-
-4. 入局请求通过内部部署防火墙传递，并传递到将在其中进行解密的 VPN 通道端点（路由器）。
-
-5. VPN 通道端点（路由器）将该请求转发到内部部署服务器或大型机，具体取决于步骤 2 中指定的目标 IP 地址。通过相同的过程，经由 VPN 连接将必需的数据发送回 `myapp2`。
-
-要设置 Vyatta 网关设备，请执行以下操作：
-
-1. [订购 Vyatta ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta)。
-
-2. [在 Vyatta 上配置专用 VLAN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)。
-
-3. 要使用 Vyatta 启用 VPN 连接，请[在 Vyatta 上配置 IPSec ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta)。
-
-有关更多信息，请参阅有关[将集群连接到内部部署数据中心 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 的博客帖子。
+- **虚拟路由器设备 (VRA) 或 Fortigate Security Appliance (FSA)**：您可选择设置 [VRA](/docs/infrastructure/virtual-router-appliance/about.html) 或 [FSA](/docs/infrastructure/fortigate-10g/about.html) 来配置 IPSec VPN 端点。如果您具有更大的集群，希望通过 VPN 来访问非 Kubernetes 资源，或者希望通过单个 VPN 访问多个集群，那么此选项会非常有用。要配置 VRA，请参阅[使用 VRA 设置 VPN 连接](#vyatta)。
 
 ## 使用 strongSwan IPSec VPN 服务 Helm 图表设置 VPN 连接
 {: #vpn-setup}
 
-使用 Helm 图表在 Kubernetes pod 内配置并部署 strongSwan IPSec VPN 服务。{:shortdesc}
+使用 Helm 图表在 Kubernetes pod 内配置并部署 strongSwan IPSec VPN 服务。
+{:shortdesc}
 
-由于 strongSwan 已在集群中集成，因此无需外部网关设备。建立 VPN 连接时，会在集群中的所有工作程序节点上自动配置路径。这些路径允许在任何工作程序节点和远程系统上的 pod 之间通过 VPN 通道进行双向连接。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中的应用程序可以如何通过 strongSwan VPN 连接与内部部署服务器进行通信：
+由于 strongSwan 已在集群中集成，因此无需外部网关设备。建立 VPN 连接时，会在集群中的所有工作程序节点上自动配置路径。这些路径允许在任何工作程序节点和远程系统上的 pod 之间通过 VPN 隧道进行双向连接。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中的应用程序可以如何通过 strongSwan VPN 连接与内部部署服务器进行通信：
 
 <img src="images/cs_vpn_strongswan.png" width="700" alt="使用负载均衡器在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:700px; border-style: none"/>
 
 1. 集群中的应用程序 `myapp` 接收来自 Ingress 或 LoadBalancer 服务的请求，并且需要安全地连接到内部部署网络中的数据。
 
-2. 对内部部署数据中心的请求将转发到 IPSec strongSwan VPN pod。目标 IP 地址用于确定应该将哪些网络包发送到 IPSec strongSwan VPN pod。
+2. 对内部部署数据中心的请求将转发到 IPSec strongSwan VPN pod。目标 IP 地址用于确定将哪些网络包发送到 IPSec strongSwan VPN pod。
 
-3. 该请求已加密，并通过 VPN 通道发送到内部部署数据中心。
+3. 该请求已加密，并通过 VPN 隧道发送到内部部署数据中心。
 
-4. 入局请求通过内部部署防火墙传递，并传递到将在其中进行解密的 VPN 通道端点（路由器）。
+4. 入局请求通过内部部署防火墙传递，并传递到将在其中进行解密的 VPN 隧道端点（路由器）。
 
-5. VPN 通道端点（路由器）将该请求转发到内部部署服务器或大型机，具体取决于步骤 2 中指定的目标 IP 地址。通过相同的过程，经由 VPN 连接将必需的数据发送回 `myapp`。
+5. VPN 隧道端点（路由器）将该请求转发到内部部署服务器或大型机，具体取决于步骤 2 中指定的目标 IP 地址。必需的数据通过相同的过程经由 VPN 连接发送回 `myapp`。
 
 ### 配置 strongSwan Helm 图表
 {: #vpn_configure}
@@ -95,7 +67,7 @@ lastupdated: "2018-4-20"
 2. 在本地 YAML 文件中保存 strongSwan Helm 图表的缺省配置设置。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+        helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
@@ -104,6 +76,7 @@ lastupdated: "2018-4-20"
     **重要信息**：如果不需要更改属性，请通过在属性前面放置 `#` 注释掉该属性。
 
     <table>
+    <caption>了解此 YAML 的组成部分</caption>
     <col width="22%">
     <col width="78%">
     <thead>
@@ -120,7 +93,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>connectUsingLoadBalancerIP</code></td>
-    <td>使用在 <code>loadBalancerIP</code> 中添加的负载均衡器 IP 地址还可建立出站 VPN 连接。如果启用此选项，那么所有集群工作程序节点必须位于同一公用 VLAN 上。否则，必须使用 <code>nodeSelector</code> 设置来确保 VPN pod 部署到 <code>loadBalancerIP</code> 所在的公用 VLAN 上的工作程序节点。如果 <code>ipsec.auto</code> 设置为 <code>add</code>，那么将忽略此选项。<p>接受的值：</p><ul><li><code>"false"</code>：不使用负载均衡器 IP 来连接 VPN。将改为使用运行 VPN pod 的工作程序节点的公共 IP 地址。</li><li><code>"true"</code>：使用负载均衡器 IP 作为本地源 IP 来建立 VPN。如果未设置 <code>loadBalancerIP</code>，那么将使用分配给 LoadBalancer 服务的外部 IP 地址。</li><li><code>"auto"</code>：<code>ipsec.auto</code> 设置为 <code>start</code>，并且设置了 <code>loadBalancerIP</code> 时，将使用负载均衡器 IP 作为本地源 IP 来建立 VPN。</li></ul></td>
+    <td>使用在 <code>loadBalancerIP</code> 中添加的负载均衡器 IP 地址还可建立出站 VPN 连接。如果启用此选项，那么所有集群工作程序节点必须位于同一公用 VLAN 上。否则，必须使用 <code>nodeSelector</code> 设置来确保 VPN pod 部署到 <code>loadBalancerIP</code> 所在的公用 VLAN 上的工作程序节点。如果 <code>ipsec.auto</code> 设置为 <code>add</code>，那么将忽略此选项。<p>接受的值：</p><ul><li><code>"false"</code>：不使用负载均衡器 IP 来连接 VPN。将改为使用运行 VPN pod 的工作程序节点的公共 IP 地址。</li><li><code>"true"</code>：使用负载均衡器 IP 作为本地源 IP 来建立 VPN。如果未设置 <code>loadBalancerIP</code>，那么将使用分配给 LoadBalancer 服务的外部 IP 地址。</li><li><code>"auto"</code>：<code>ipsec.auto</code> 设置为 <code>start</code>，并且设置了 <code>loadBalancerIP</code> 时，使用负载均衡器 IP 作为本地源 IP 来建立 VPN。</li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
@@ -128,15 +101,15 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>ipsec.keyexchange</code></td>
-    <td>如果内部部署 VPN 通道端点不支持 <code>ikev2</code> 作为初始化连接的协议，请将此值更改为 <code>ikev1</code> 或 <code>ike</code>。</td>
+    <td>如果内部部署 VPN 隧道端点不支持 <code>ikev2</code> 作为初始化连接的协议，请将此值更改为 <code>ikev1</code> 或 <code>ike</code>。</td>
     </tr>
     <tr>
     <td><code>ipsec.esp</code></td>
-    <td>添加内部部署 VPN 通道端点用于连接的 ESP 加密和认证算法的列表。<ul><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev1</code>，那么必须指定此设置。</li><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev2</code>，那么此设置是可选的。如果将此设置保留为空，那么会将缺省 strongSwan 算法 <code>aes128-sha1,3des-sha1</code> 用于连接。</li></ul></td>
+    <td>添加内部部署 VPN 隧道端点用于连接的 ESP 加密和认证算法的列表。<ul><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev1</code>，那么必须指定此设置。</li><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev2</code>，那么此设置是可选的。如果将此设置保留为空，那么会将缺省 strongSwan 算法 <code>aes128-sha1,3des-sha1</code> 用于连接。</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.ike</code></td>
-    <td>添加内部部署 VPN 通道端点用于连接的 IKE/ISAKMP SA 加密和认证算法的列表。<ul><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev1</code>，那么必须指定此设置。</li><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev2</code>，那么此设置是可选的。如果将此设置保留为空，那么会将缺省 strongSwan 算法 <code>aes128-sha1-modp2048,3des-sha1-modp1536</code> 用于连接。</li></ul></td>
+    <td>添加内部部署 VPN 隧道端点用于连接的 IKE/ISAKMP SA 加密和认证算法的列表。<ul><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev1</code>，那么必须指定此设置。</li><li>如果 <code>ipsec.keyexchange</code> 设置为 <code>ikev2</code>，那么此设置是可选的。如果将此设置保留为空，那么会将缺省 strongSwan 算法 <code>aes128-sha1-modp2048,3des-sha1-modp1536</code> 用于连接。</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.auto</code></td>
@@ -148,7 +121,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>local.id</code></td>
-    <td>将此值更改为 VPN 通道端点用于连接的本地 Kubernetes 集群端的字符串标识。</td>
+    <td>将此值更改为 VPN 隧道端点用于连接的本地 Kubernetes 集群端的字符串标识。</td>
     </tr>
     <tr>
     <td><code>remote.gateway</code></td>
@@ -159,7 +132,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>remote.id</code></td>
-    <td>将此值更改为 VPN 通道端点用于连接的远程内部部署端的字符串标识。</td>
+    <td>将此值更改为 VPN 隧道端点用于连接的远程内部部署端的字符串标识。</td>
     </tr>
     <tr>
     <td><code>remote.privateIPtoPing</code></td>
@@ -167,7 +140,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>preshared.secret</code></td>
-    <td>将此值更改为内部部署 VPN 通道端点网关用于连接的预共享密钥。此值存储在 <code>ipsec.secrets</code> 中。</td>
+    <td>将此值更改为内部部署 VPN 隧道端点网关用于连接的预共享密钥。此值存储在 <code>ipsec.secrets</code> 中。</td>
     </tr>
     </tbody></table>
 
@@ -178,21 +151,21 @@ lastupdated: "2018-4-20"
     **注**：如果在单个集群中有多个 VPN 部署，那么可以通过选择比 `vpn` 描述性更强的发行版名称，以避免命名冲突并区分部署。为了避免截断发行版名称，请将发行版名称限制为不超过 35 个字符。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
 6. 检查图表部署状态。当图表就绪时，输出顶部附近的 **STATUS** 字段的值为 `DEPLOYED`。
 
     ```
-    helm status vpn
+        helm status vpn
     ```
     {: pre}
 
 7. 部署图表后，请验证是否使用了 `config.yaml` 文件中的已更新设置。
 
     ```
-    helm get values vpn
+        helm get values vpn
     ```
     {: pre}
 
@@ -208,15 +181,15 @@ lastupdated: "2018-4-20"
 2. 设置 `STRONGSWAN_POD` 环境变量。
 
     ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
-        ```
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    ```
     {: pre}
 
 3. 检查 VPN 的状态。状态 `ESTABLISHED` 表示 VPN 连接成功。
 
     ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
-        ```
+    kubectl exec $STRONGSWAN_POD -- ipsec status
+    ```
     {: pre}
 
     输出示例：
@@ -232,14 +205,14 @@ lastupdated: "2018-4-20"
     **注**：
 
     <ul>
-    <li>尝试使用 strongSwan Helm 图表建立 VPN 连接时，很有可能 VPN 阶段状态一开始不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置，并多次更改配置文件，连接才能成功：<ol><li>运行 `helm delete --purge <release_name>`</li><li>修正配置文件中的错误值。</li><li>运行 `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>您还可以在下一步中运行更多检查。</li>
-    <li>如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是因为在图表的配置映射中对 `ipsec.conf` 设置进行了参数验证。<ol><li>请通过运行 `kubectl logs -n kube-system $STRONGSWAN_POD` 来检查 strongSwan pod 日志中是否存在任何验证错误。</li><li>如果存在验证错误，请运行 `helm delete --purge <release_name>`<li>修正配置文件中的错误值。</li><li>运行 `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>如果集群具有大量工作程序节点，那么还可以使用 `helm upgrade` 来更迅速地应用更改，而不运行 `helm delete` 和 `helm install`。</li>
+    <li>尝试使用 strongSwan Helm 图表建立 VPN 连接时，很有可能 VPN 阶段状态一开始不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置，并多次更改配置文件，连接才能成功：<ol><li>运行 `helm delete --purge <release_name>`</li><li>修正配置文件中的错误值。</li><li>运行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>您还可以在下一步中运行更多检查。</li>
+    <li>如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是因为在图表的配置映射中对 `ipsec.conf` 设置进行了参数验证。<ol><li>请通过运行 `kubectl logs -n $STRONGSWAN_POD` 来检查 strongSwan pod 日志中是否存在任何验证错误。</li><li>如果存在验证错误，请运行 `helm delete --purge <release_name>`<li>修正配置文件中的错误值。</li><li>运行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>如果集群具有大量工作程序节点，那么还可以使用 `helm upgrade` 来更迅速地应用更改，而不运行 `helm delete` 和 `helm install`。</li>
     </ul>
 
 4. 可以通过运行 strongSwan 图表定义中包含的五个 Helm 测试来进一步测试 VPN 连接。
 
     ```
-    helm test vpn
+        helm test vpn
     ```
     {: pre}
 
@@ -250,14 +223,15 @@ lastupdated: "2018-4-20"
 5. 通过查看测试 pod 的日志来查看失败测试的输出。
 
     ```
-    kubectl logs -n kube-system <test_program>
+    kubectl logs <test_program>
     ```
     {: pre}
 
-    **注**：某些测试有一些要求，而这些要求在 VPN 配置中是可选设置。如果某些测试失败，失败可能是可接受的，具体取决于您是否指定了这些可选设置。有关每个测试的更多信息以及测试可能失败的原因，请参阅下表。
+    **注**：某些测试有一些要求，而这些要求在 VPN 配置中是可选设置。如果某些测试失败，失败可能是可接受的，具体取决于您是否指定了这些可选设置。有关每个测试的信息以及测试可能失败的原因，请参阅下表。
 
     {: #vpn_tests_table}
     <table>
+    <caption>了解 Helm VPN 连接测试</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 Helm VPN 连接测试</th>
     </thead>
@@ -287,7 +261,7 @@ lastupdated: "2018-4-20"
 6. 删除当前 Helm 图表。
 
     ```
-    helm delete --purge vpn
+        helm delete --purge vpn
     ```
     {: pre}
 
@@ -298,40 +272,40 @@ lastupdated: "2018-4-20"
 9. 使用更新的 `config.yaml` 文件将 Helm 图表安装到集群。更新的属性会存储在图表的配置映射中。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
 10. 检查图表部署状态。当图表就绪时，输出顶部附近的 **STATUS** 字段的值为 `DEPLOYED`。
 
     ```
-    helm status vpn
+        helm status vpn
     ```
     {: pre}
 
 11. 部署图表后，请验证是否使用了 `config.yaml` 文件中的已更新设置。
 
     ```
-    helm get values vpn
+        helm get values vpn
     ```
     {: pre}
 
 12. 清除当前测试 pod。
 
     ```
-    kubectl get pods -a -n kube-system -l app=strongswan-test
+    kubectl get pods -a -l app=strongswan-test
     ```
     {: pre}
 
     ```
-    kubectl delete pods -n kube-system -l app=strongswan-test
+    kubectl delete pods -l app=strongswan-test
     ```
     {: pre}
 
 13. 重新运行测试。
 
     ```
-    helm test vpn
+        helm test vpn
     ```
     {: pre}
 
@@ -347,9 +321,11 @@ lastupdated: "2018-4-20"
 要将 strongSwan Helm 图表升级到最新版本，请执行以下操作：
 
   ```
-  helm upgrade -f config.yaml --namespace kube-system <release_name> ibm/strongswan
+  helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
+
+**重要信息**：strongSwan 2.0.0 Helm 图表不适用于 Calico V3 或 Kubernetes 1.10。在[将集群更新到 1.10](cs_versions.html#cs_v110) 之前，请先将 strongSwan 更新到 2.1.0 Helm 图表，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.7、1.8 和 1.9。
 
 
 ### 从 V1.0.0 升级
@@ -363,14 +339,14 @@ lastupdated: "2018-4-20"
 1. 删除 1.0.0 Helm 图表。
 
     ```
-    helm delete --purge <release_name>
+        helm delete --purge <release_name>
     ```
     {: pre}
 
 2. 在本地 YAML 文件中保存最新版本 strongSwan Helm 图表的缺省配置设置。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+        helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
@@ -379,11 +355,13 @@ lastupdated: "2018-4-20"
 4. 使用更新的 `config.yaml` 文件将 Helm 图表安装到集群。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
 此外，在 1.0.0 中进行硬编码的某些 `ipsec.conf` 超时设置在更高版本中公开为可配置属性。其中某些可配置的 `ipsec.conf` 超时设置的名称和缺省值也已更改为与 strongSwan 标准更一致。如果要从 Helm 图表 1.0.0 进行升级，并且希望超时设置保留 1.0.0 版本的缺省值，请将新设置添加到使用旧缺省值的图表配置文件。
+
+
 
   <table>
   <caption>V1.0.0 与最新版本之间的 ipsec.conf 设置差异</caption>
@@ -426,3 +404,33 @@ lastupdated: "2018-4-20"
   ```
   {: pre}
 
+<br />
+
+
+## 使用虚拟路由器设备设置 VPN 连接
+{: #vyatta}
+
+[虚拟路由器设备 (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) 为 x86 裸机服务器提供最新的 Vyatta 5600 操作系统。可以使用 VRA 作为 VPN 网关来安全地连接到内部部署网络。
+{:shortdesc}
+
+所有进出集群 VLAN 的公用和专用网络流量都将通过 VRA 进行路由。可以使用 VRA 作为 VPN 端点，以在 IBM Cloud Infrastructure (SoftLayer) 和内部部署资源中的服务器之间创建加密的 IPSec 隧道。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中仅限专用的工作程序节点上的应用程序可以如何通过 VRA VPN 连接与内部部署服务器进行通信：
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="使用负载均衡器在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:725px; border-style: none"/>
+
+1. 集群中的应用程序 `myapp2` 接收来自 Ingress 或 LoadBalancer 服务的请求，并且需要安全地连接到内部部署网络中的数据。
+
+2. 因为 `myapp2` 位于仅在专用 VLAN 上的工作程序节点上，所以 VRA 充当工作程序节点与内部部署网络之间的安全连接。VRA 使用目标 IP 地址来确定将哪些网络包发送到内部部署网络。
+
+3. 该请求已加密，并通过 VPN 隧道发送到内部部署数据中心。
+
+4. 入局请求通过内部部署防火墙传递，并传递到将在其中进行解密的 VPN 隧道端点（路由器）。
+
+5. VPN 隧道端点（路由器）将该请求转发到内部部署服务器或大型机，具体取决于步骤 2 中指定的目标 IP 地址。必需的数据通过相同的过程经由 VPN 连接发送回 `myapp2`。
+
+要设置虚拟路由器设备，请执行以下操作：
+
+1. [订购 VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html)。
+
+2. [在 VRA 上配置专用 VLAN](/docs/infrastructure/virtual-router-appliance/manage-vlans.html)。
+
+3. 要使用 VRA 来启用 VPN 连接，请[在 VRA 上配置 VRRP](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp)。

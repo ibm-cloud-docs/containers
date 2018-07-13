@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Fehlerbehebung für die Protokollierung und Überwachung
 {: #cs_troubleshoot_health}
 
@@ -32,12 +33,13 @@ Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_
 {: #cs_no_logs}
 
 {: tsSymptoms}
-Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt. 
+Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
 
 {: tsResolve}
-Überprüfen Sie die folgenden möglichen Ursachen für nicht angezeigte Clusterprotokolle sowie die entsprechenden Fehlerbehebungsschritte: 
+Überprüfen Sie die folgenden möglichen Ursachen für nicht angezeigte Clusterprotokolle sowie die entsprechenden Fehlerbehebungsschritte:
 
 <table>
+<caption>Nicht angezeigte Protokolle zur Fehlerbehebung</caption>
   <col width="40%">
   <col width="60%">
   <thead>
@@ -49,7 +51,7 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
  <tbody>
   <tr>
     <td>Es ist keine Protokollierungskonfiguration eingerichtet.</td>
-    <td>Damit Protokolle gesendet werden, müssen Sie eine Protokollierungskonfiguration erstellen. Informationen dazu finden Sie unter <a href="cs_health.html#logging">Clusterprotokollierung konfigurieren</a>. </td>
+    <td>Damit Protokolle gesendet werden, müssen Sie eine Protokollierungskonfiguration erstellen. Informationen dazu finden Sie unter <a href="cs_health.html#logging">Clusterprotokollierung konfigurieren</a>.</td>
   </tr>
   <tr>
     <td>Der Cluster weist nicht den Status <code>Normal</code> auf.</td>
@@ -61,16 +63,19 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
   </tr>
   <tr>
     <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
-      <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:<ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code>.</li><li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html#managing">Clusterzugriff verwalten</a>.</li><li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
+      <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:
+      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code>.</li>
+      <li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html">Clusterzugriff verwalten</a>.</li>
+      <li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Sie haben eine Anwendungsprotokollierungskonfiguration mit einer symbolischen Verbindung in Ihrem App-Pfad. </td>
-      <td><p>Damit Protokolle gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt. </p> <p>Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle tatsächlich an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden. </td>
+      <td>Sie haben eine Anwendungsprotokollierungskonfiguration mit einer symbolischen Verbindung in Ihrem App-Pfad.</td>
+      <td><p>Damit Protokolle gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt.</p> <p>Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden.</p></td>
     </tr>
   </tbody>
 </table>
 
-Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie *Noisy* auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert. 
+Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie *Noisy* auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert.
 
   1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) einen Cluster an, auf dem Protokolle generiert werden sollen.
 
@@ -134,8 +139,10 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com)
-    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an. {: tip}
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+
+    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+    {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
@@ -145,11 +152,8 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM
-Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter
-[Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
-
 

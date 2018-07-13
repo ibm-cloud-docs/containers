@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Alta disponibilidade para o {{site.data.keyword.containerlong_notm}}
@@ -36,7 +38,9 @@ O {{site.data.keyword.containershort_notm}} fornece várias abordagens para incl
 
 <img src="images/cs_failure_ov.png" alt="Visão geral de domínios de falha em um cluster de alta disponibilidade dentro de uma região do {{site.data.keyword.containershort_notm}}." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="A tabela mostra pontos de falha no {{site.data.keyword.containershort_notm}}. As linhas devem ser lidas da esquerda para a direita, com o número do ponto de falha na coluna um, o título do ponto de falha na coluna dois, uma descrição na coluna três e um link para a documentação na coluna quatro.">
+<caption>Pontos de falha</caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -75,7 +79,7 @@ O {{site.data.keyword.containershort_notm}} fornece várias abordagens para incl
   <tr>
     <td>5</td>
     <td>Falha de região</td>
-    <td>Cada região é configurada com um balanceador de carga altamente disponível que seja acessível por meio do terminal de API específico da região. O balanceador de carga roteia solicitações de entrada e de saída para clusters em locais regionais. A probabilidade de uma falha regional integral é baixa. No entanto, se você deseja considerar essa falha, é possível configurar múltiplos clusters em diferentes regiões e conectá-los usando um balanceador de carga externo. No caso de uma região inteira falhar, o cluster na outra região pode assumir o controle da carga de trabalho. <br/><br/><strong>Nota:</strong> um cluster multiregion requer vários recursos em nuvem e, dependendo do seu app, pode ser complexo e caro. Verifique se você precisa de uma configuração multiregion ou se pode acomodar uma interrupção de serviço em potencial. Se você desejar configurar um cluster multiregion, certifique-se de que o seu app e os dados possam ser hospedados em outra região e de que o seu app possa manipular a replicação de dados globais.</td>
+    <td>Cada região é configurada com um balanceador de carga altamente disponível que seja acessível por meio do terminal de API específico da região. O balanceador de carga roteia solicitações de entrada e de saída para clusters em locais regionais. A probabilidade de uma falha regional integral é baixa. No entanto, para considerar essa falha, é possível configurar múltiplos clusters em diferentes regiões e conectá-los usando um balanceador de carga externo. No caso de uma região inteira falhar, o cluster na outra região pode assumir o controle da carga de trabalho. <br/><br/><strong>Nota:</strong> um cluster multiregion requer vários recursos em nuvem e, dependendo do seu app, pode ser complexo e caro. Verifique se você precisa de uma configuração multiregion ou se pode acomodar uma interrupção de serviço em potencial. Se você desejar configurar um cluster multiregion, certifique-se de que o seu app e os dados possam ser hospedados em outra região e de que o seu app possa manipular a replicação de dados globais.</td>
     <td>[Configurando clusters altamente disponíveis.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ O {{site.data.keyword.containershort_notm}} fornece várias abordagens para incl
   </tr>
   </tbody>
   </table>
+
+
 

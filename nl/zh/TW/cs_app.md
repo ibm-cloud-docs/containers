@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # 在叢集中部署應用程式
@@ -56,6 +58,7 @@ lastupdated: "2018-4-20"
 
 
 ### 增加應用程式的可用性
+{: #increase_availability}
 
 <dl>
   <dt>使用部署和抄本集來部署您的應用程式及其相依關係</dt>
@@ -133,41 +136,54 @@ spec:
 {: #cli_dashboard}
 
 在本端系統上開啟 Kubernetes 儀表板，以檢視叢集及其工作者節點的相關資訊。
+[在 GUI 中](#db_gui)，只需按一下按鈕，即可存取儀表板。[使用 CLI](#db_cli)，您可以存取儀表板，或使用自動化處理程序中的步驟，例如針對 CI/CD 管線。
 {:shortdesc}
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
 
 您可以使用預設埠或設定自己的埠，來啟動叢集的 Kubernetes 儀表板。
 
-1.  對於 Kubernetes 主要版本為 1.7.16 或之前版本的叢集：
+**從 GUI 啟動 Kubernetes 儀表板**
+{: #db_gui}
+
+1.  登入 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/)。
+2.  從功能表列中您的設定檔中，選取您要使用的帳戶。
+3.  從功能表中，按一下**容器**。
+4.  在**叢集**頁面上，按一下您要存取的叢集。
+5.  從叢集詳細資料頁面中，按一下 **Kubernetes 儀表板**按鈕。
+
+**從 CLI 啟動 Kubernetes 儀表板**
+{: #db_cli}
+
+*  對於 Kubernetes 主要版本為 1.7.16 或之前版本的叢集：
 
     1.  使用預設埠號來設定 Proxy。
 
         ```
-        kubectl proxy
+                kubectl proxy
         ```
         {: pre}
 
         輸出：
 
         ```
-        Starting to serve on 127.0.0.1:8001
+                Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
     2.  在 Web 瀏覽器中開啟 Kubernetes 儀表板。
 
         ```
-        http://localhost:8001/ui
+                http://localhost:8001/ui
         ```
         {: codeblock}
 
-2.  對於 Kubernetes 主要版本為 1.8.2 或更新版本的叢集：
+*  對於 Kubernetes 主要版本為 1.8.2 或更新版本的叢集：
 
     1.  取得 Kubernetes 的認證。
 
         ```
-        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+                kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
         ```
         {: pre}
 
@@ -176,14 +192,14 @@ spec:
     3.  使用預設埠號來設定 Proxy。
 
         ```
-        kubectl proxy
+                kubectl proxy
         ```
         {: pre}
 
         輸出範例：
 
         ```
-        Starting to serve on 127.0.0.1:8001
+                Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
@@ -192,7 +208,7 @@ spec:
       1.  在您的瀏覽器中，導覽至下列 URL：
 
           ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+                      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
           {: codeblock}
 
@@ -200,10 +216,9 @@ spec:
 
       3.  然後，將您先前複製的 **id-token** 值貼到**記號**欄位，然後按一下**登入**。
 
-[接下來，您可以從儀表板執行配置檔。](#app_ui)
-
 完成 Kubernetes 儀表板之後，使用 `CTRL+C` 來結束 `proxy` 指令。在您結束之後，無法再使用 Kubernetes 儀表板。請執行 `proxy` 指令，以重新啟動 Kubernetes 儀表板。
 
+[接下來，您可以從儀表板執行配置檔。](#app_ui)
 
 
 <br />
@@ -310,7 +325,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
   * 選取**在下面指定應用程式詳細資料**，然後輸入詳細資料。
   * 選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。
 
-  需要配置檔的說明嗎？請移出此[範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)。在此範例中，容器是從美國南部地區中的 **ibmliberty** 映像檔部署的。
+  需要配置檔的說明嗎？請移出此[範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)。在此範例中，容器是從美國南部地區中的 **ibmliberty** 映像檔部署的。當您使用 Kubernetes 資源時，進一步瞭解[保護您的個人資訊](cs_secure.html#pi)。
   {: tip}
 
 3.  驗證您是否已使用下列其中一種方式，順利部署您的應用程式。
@@ -341,7 +356,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
     -   [Ingress ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一種負載平衡器，提供路徑來公開存取您的應用程式。
 
-    
+    當您使用 Kubernetes 資源時，進一步瞭解[保護您的個人資訊](cs_secure.html#pi)。
 
 2.  在叢集的環境定義中執行配置檔。
 
@@ -350,12 +365,180 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     ```
     {: pre}
 
-3.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
+3.  如果您使用 NodePort 服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
 
 <br />
 
 
 
+
+## 在 GPU 機器上部署應用程式
+{: #gpu_app}
+
+如果您有[裸機圖形處理裝置 (GPU) 機型](cs_clusters.html#shared_dedicated_node)，則可以將數學運算密集的工作負載排定在工作者節點上。例如，您可以執行 3D 應用程式，而此應用程式會使用「統一計算裝置架構 (CUDA) 」平台來共用 GPU 和 CPU 之間的處理負載，以提高效能。
+{:shortdesc}
+
+在下列步驟中，您將學習如何部署需要 GPU 的工作負載。您也可以[部署應用程式](#app_ui)，不需要在 GPU 和 CPU 之間處理它們的工作負載。之後，您可能發現使用[此 Kubernetes 示範 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) 來嘗試數學運算密集的工作負載（例如 [TensorFlow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.tensorflow.org/) 機器學習架構）很有用。
+
+開始之前：
+* [建立一個裸機 GPU 機型](cs_clusters.html#clusters_cli)。請注意，此處理程序可能需要多個營業日才能完成。
+* 您的主要叢集及 GPU 工作者節點必須執行 Kubernetes 1.10 版或更新版本。
+
+若要在 GPU 機器上執行工作負載，請執行下列動作：
+1.  建立 YAML 檔案。在此範例中，`Job` YAML 會管理批次型工作負載，方法為建立一個短暫存在的 Pod，一直執行到排定它完成的指令順利終止。
+
+    **重要事項**：對於 GPU 工作量，您必須一律在 YAML 規格中提供 `resources: limits: nvidia.com/gpu` 欄位。
+
+    ```yaml
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: nvidia-smi
+      labels:
+        name: nvidia-smi
+    spec:
+      template:
+        metadata:
+          labels:
+            name: nvidia-smi
+        spec:
+          containers:
+          - name: nvidia-smi
+            image: nvidia/cuda:9.1-base-ubuntu16.04
+            command: [ "/usr/test/nvidia-smi" ]
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                nvidia.com/gpu: 2
+            volumeMounts:
+            - mountPath: /usr/test
+              name: nvidia0
+          volumes:
+            - name: nvidia0
+              hostPath:
+                path: /usr/bin
+          restartPolicy: Never
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>YAML 元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>meta 資料及標籤名稱</td>
+    <td>為工作提供名稱和標籤，並在檔案的 meta 資料及 `spec template` meta 資料中使用相同的名稱。例如，`nvidia-smi`。</td>
+    </tr>
+    <tr>
+    <td><code>containers/image</code></td>
+    <td>提供容器是其執行中實例的映像檔。在此範例中，該值會設為使用 DockerHub CUDA 映像檔：<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
+    </tr>
+    <tr>
+    <td><code>containers/command</code></td>
+    <td>指定要在容器中執行的指令。在此範例中，<code>[ "/usr/test/nvidia-smi" ]</code> 指令會參照 GPU 機器上的二進位檔，因此您也必須設定磁區裝載。</td>
+    </tr>
+    <tr>
+    <td><code>containers/imagePullPolicy</code></td>
+    <td>若要只當映像檔目前不在工作者節點上時，才取回新的映像檔，請指定 <code>IfNotPresent</code>。</td>
+    </tr>
+    <tr>
+    <td><code>resources/limits</code></td>
+    <td>對於 GPU 機器，您必須指定資源限制。Kubernetes [裝置外掛程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) 會設定預設資源要求，以符合限制。
+    <ul><li>您必須將金鑰指定為 <code>nvidia.com/gpu</code>。</li>
+    <li>輸入您要要求的 GPU 數目（整數），例如 <code>2</code>。<strong>附註</strong>：容器 Pod 不會共用 GPU，而且 GPU 不能過量使用。例如，如果您只有 1 部 `mg1c.16x128` 機器，則在該機器中您只有 2 個 GPU，且最多可以指定 `2`。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>volumeMounts</code></td>
+    <td>為裝載至容器的磁區命名，例如 <code>nvidia0</code>。請在磁區的容器上指定 <code>mountPath</code>。在此範例中，路徑 <code>/usr/test</code> 符合工作容器指令中所使用的路徑。</td>
+    </tr>
+    <tr>
+    <td><code>volumes</code></td>
+    <td>為工作磁區命名，例如 <code>nvidia0</code>。在 GPU 工作者節點的 <code>hostPath</code> 中，指定主機上磁區的 <code>path</code>，在這個範例中，指定 <code>/usr/bin</code>。容器 <code>mountPath</code> 會對映至主機碟區 <code>path</code>，這可讓此工作存取 GPU 工作者節點上的 NVIDIA 二進位檔，以供容器指令執行。</td>
+    </tr>
+    </tbody></table>
+
+2.  套用 YAML 檔案。例如：
+
+    ```
+    kubectl apply -f nvidia-smi.yaml
+    ```
+    {: pre}
+
+3.  藉由依 `nvidia-sim` 標籤過濾您的 Pod 來檢查工作 Pod。驗證 **STATUS** 為 **Completed**。
+
+    ```
+    kubectl get pod -a -l 'name in (nvidia-sim)'
+    ```
+    {: pre}
+
+    輸出範例：
+    ```
+    NAME                  READY     STATUS      RESTARTS   AGE
+    nvidia-smi-ppkd4      0/1       Completed   0          36s
+    ```
+    {: screen}
+
+4.  說明 Pod，以查看 GPU 裝置外掛程式如何排定 Pod。
+    * 在 `Limits` 及 `Requests` 欄位中，查看您所指定的資源限制符合裝置外掛程式自動設定的要求。
+    * 在事件中，驗證已將 Pod 指派給 GPU 工作者節點。
+
+    ```
+    kubectl describe pod nvidia-smi-ppkd4
+    ```
+    {: pre}
+
+    輸出範例：
+    ```
+    Name:           nvidia-smi-ppkd4
+    Namespace:      default
+    ...
+    Limits:
+     nvidia.com/gpu:  2
+    Requests:
+     nvidia.com/gpu:  2
+    ...
+    Events:
+    Type    Reason                 Age   From                     Message
+    ----    ------                 ----  ----                     -------
+    Normal  Scheduled              1m    default-scheduler        Successfully assigned nvidia-smi-ppkd4 to 10.xxx.xx.xxx
+    ...
+    ```
+    {: screen}
+
+5.  若要驗證工作已使用 GPU 來計算其工作負載，您可以檢查日誌。來自工作的 `[ "/usr/test/nvidia-smi" ]` 指令已查詢 GPU 工作者節點上的 GPU 裝置狀態。
+
+    ```
+    kubectl logs nvidia-sim-ppkd4
+    ```
+    {: pre}
+
+    輸出範例：
+    ```
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |===============================+======================+======================|
+    |   0  Tesla K80           Off  | 00000000:83:00.0 Off |                  Off |
+    | N/A   37C    P0    57W / 149W |      0MiB / 12206MiB |      0%      Default |
+    +-------------------------------+----------------------+----------------------+
+    |   1  Tesla K80           Off  | 00000000:84:00.0 Off |                  Off |
+    | N/A   32C    P0    63W / 149W |      0MiB / 12206MiB |      1%      Default |
+    +-------------------------------+----------------------+----------------------+
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                       GPU Memory |
+    |  GPU       PID   Type   Process name                             Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    ```
+    {: screen}
+
+    在此範例中，您會看到使用這兩個 GPU 來執行工作，因為在工作者節點中已排定這兩個 GPU。如果限制設為 1，則只會顯示 1 個 GPU。
 
 ## 調整應用程式 
 {: #app_scaling}
@@ -372,7 +555,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 步驟：
 
-1.  從 CLI 將應用程式部署至叢集。當您部署應用程式時，必須要求 CPU。
+1.  從 CLI 將您的應用程式部署至叢集。當您部署應用程式時，必須要求 CPU。
 
     ```
     kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
@@ -380,6 +563,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     {: pre}
 
     <table>
+    <caption>kubectl run 的指令元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
@@ -412,6 +596,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     {: pre}
 
     <table>
+    <caption>kubectl autoscale 的指令元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
@@ -442,7 +627,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 在開始之前，請先建立[部署](#app_cli)。
 
-1.  [推出 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) 變更。例如，您可能想要變更起始部署中所用的映像檔。
+1.  [推出 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) 變更。例如，您可能想要變更起始部署中所用的映像檔。
 
     1.  取得部署名稱。
 
@@ -504,5 +689,4 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
         {: pre}
 
 <br />
-
 

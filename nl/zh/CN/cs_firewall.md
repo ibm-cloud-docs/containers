@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # 在防火墙中打开必需的端口和 IP 地址
 {: #firewall}
@@ -74,10 +77,10 @@ lastupdated: "2018-4-20"
 
 1. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。如果您有联合帐户，请包括 `--sso` 选项。
 
-    ```
+   ```
     bx login [--sso]
     ```
-    {: pre}
+   {: pre}
 
 2. 选择集群所在的区域。
 
@@ -89,8 +92,8 @@ lastupdated: "2018-4-20"
 3. 获取集群的名称。
 
    ```
-    bx cs clusters
-    ```
+        bx cs clusters
+        ```
    {: pre}
 
 4. 检索集群的**主 URL**。
@@ -175,7 +178,7 @@ lastupdated: "2018-4-20"
   1.  记下用于集群中所有工作程序节点的公共 IP 地址。
 
       ```
-       bx cs workers <cluster_name_or_ID>
+             bx cs workers <cluster_name_or_ID>
        ```
       {: pre}
 
@@ -183,7 +186,8 @@ lastupdated: "2018-4-20"
       - **重要事项**：针对区域内的所有位置，必须允许出站流量从端口 443 流出，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至所有位置（dal10、dal12 和 dal13）的 IP 地址。
       <p>
   <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <thead>
+  <caption>要为出局流量打开的 IP 地址</caption>
+      <thead>
       <th>区域</th>
       <th>位置</th>
       <th>IP 地址</th>
@@ -228,14 +232,15 @@ lastupdated: "2018-4-20"
       - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量流至的注册表 IP 地址。全局注册表存储 IBM 提供的公共映像，区域注册表存储您自己的专用或公共映像。
         <p>
 <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <thead>
+  <caption>要为注册表流量打开的 IP 地址</caption>
+      <thead>
         <th>{{site.data.keyword.containershort_notm}} 区域</th>
         <th>注册表地址</th>
         <th>注册表 IP 地址</th>
       </thead>
       <tbody>
         <tr>
-          <td>跨容器区域的全局注册表</td>
+          <td>跨 {{site.data.keyword.containershort_notm}} 区域的全局注册表</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - 将 <em>&lt;monitoring_public_IP&gt;</em> 替换为要允许流量流至的监视区域的所有地址：
         <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-      <thead>
-        <th>容器区域</th>
+  <caption>要为监视流量打开的 IP 地址</caption>
+        <thead>
+        <th>{{site.data.keyword.containershort_notm}} 区域</th>
         <th>监视地址</th>
         <th>监视 IP 地址</th>
         </thead>
@@ -295,8 +301,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - 将 <em>&lt;logging_public_IP&gt;</em> 替换为要允许流量流至的日志记录区域的所有地址：
         <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-      <thead>
-        <th>容器区域</th>
+  <caption>要对日志记录流量打开的 IP 地址</caption>
+        <thead>
+        <th>{{site.data.keyword.containershort_notm}} 区域</th>
         <th>日志记录地址</th>
         <th>日志记录 IP 地址</th>
         </thead>
@@ -352,4 +359,3 @@ lastupdated: "2018-4-20"
   <dt>Ingress</dt>
   <dd>针对 Ingress 应用程序负载均衡器的 IP 地址打开端口 80（对于 HTTP）或端口 443（对于 HTTPS）。</dd>
 </dl>
-

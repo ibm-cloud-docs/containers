@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # 방화벽에서 필수 포트와 IP 주소 열기
 {: #firewall}
@@ -75,10 +78,10 @@ lastupdated: "2018-4-20"
 1. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면
 {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하십시오. 연합 계정이 있는 경우, `--sso` 옵션을 포함하십시오.
 
-    ```
+   ```
     bx login [--sso]
-    ```
-    {: pre}
+   ```
+   {: pre}
 
 2. 클러스터가 있는 지역을 선택하십시오.
 
@@ -90,7 +93,7 @@ lastupdated: "2018-4-20"
 3. 클러스터의 이름을 가져오십시오.
 
    ```
-         bx cs clusters
+   bx cs clusters
    ```
    {: pre}
 
@@ -173,10 +176,10 @@ lastupdated: "2018-4-20"
 클러스터가 방화벽 뒤에서 인프라 리소스와 서비스(예: {{site.data.keyword.containershort_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress)에 액세스할 수 있게 하십시오.
 {:shortdesc}
 
-  1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 두십시오.
+  1.  클러스터의 모든 작업자 노드에 대한 공인 IP 주소를 기록해 두십시오.
 
       ```
-       bx cs workers <cluster_name_or_ID>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -184,6 +187,7 @@ lastupdated: "2018-4-20"
       - **중요**: 부트스트랩 프로세스 중에 로드를 밸런싱하려면 지역 내 모든 위치에 대해 포트 443으로의 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있는 경우 포트 443에서 모든 위치(dal10, dal12 및 dal13)의 IP 주소로의 트래픽을 허용해야 합니다.
       <p>
   <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+  <caption>발신 트래픽을 위해 열리는 IP 주소</caption>
       <thead>
       <th>지역</th>
       <th>위치</th>
@@ -229,6 +233,7 @@ lastupdated: "2018-4-20"
       - <em>&lt;registry_publicIP&gt;</em>를 트래픽을 허용하려는 레지스트리 IP 주소로 대체하십시오. 글로벌 레지스트리는 IBM 제공 공용 이미지를 저장하고 지역 레지스트리는 사용자의 개인용 이미지 또는 공용 이미지를 저장합니다.
         <p>
 <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+  <caption>레지스트리 트래픽을 위해 열리는 IP 주소</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} 지역</th>
         <th>레지스트리 주소</th>
@@ -236,7 +241,7 @@ lastupdated: "2018-4-20"
       </thead>
       <tbody>
         <tr>
-          <td>컨테이너 지역 전체의 글로벌 레지스트리</td>
+          <td>{{site.data.keyword.containershort_notm}} 지역 전체의 글로벌 레지스트리</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -268,8 +273,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - <em>&lt;monitoring_public_IP&gt;</em>를 트래픽을 허용할 모니터링 지역에 대한 모든 주소로 대체하십시오.
         <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+  <caption>모니터링 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
-        <th>컨테이너 지역</th>
+        <th>{{site.data.keyword.containershort_notm}} 지역</th>
         <th>모니터링 주소</th>
         <th>모니터링 IP 주소</th>
         </thead>
@@ -296,8 +302,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - <em>&lt;logging_public_IP&gt;</em>를 트래픽을 허용할 로깅 지역에 대한 모든 주소로 대체하십시오.
         <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+<caption>로깅 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
-        <th>컨테이너 지역</th>
+        <th>{{site.data.keyword.containershort_notm}} 지역</th>
         <th>로깅 주소</th>
         <th>로깅 IP 주소</th>
         </thead>
@@ -353,4 +360,3 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
   <dt>Ingress</dt>
   <dd>Ingress 애플리케이션 로드 밸런서의 IP 주소에 대해 HTTP의 경우 포트 80을 열고 HTTPS의 경우 포트 443을 여십시오.</dd>
 </dl>
-

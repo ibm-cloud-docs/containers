@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,9 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
+
 # 建立 {{site.data.keyword.Bluemix_dedicated_notm}} 映像檔登錄的 {{site.data.keyword.registryshort_notm}} 記號
 {: #cs_dedicated_tokens}
 
@@ -25,7 +28,7 @@ lastupdated: "2018-4-20"
 1.  登入 {{site.data.keyword.Bluemix_dedicated_notm}} 環境。
 
     ```
-    bx login -a api.<dedicated_domain>
+        bx login -a api.<dedicated_domain>
     ```
     {: pre}
 
@@ -46,7 +49,7 @@ lastupdated: "2018-4-20"
 4.  要求現行階段作業的永久性登錄記號。將 <dedicated_domain> 取代為 {{site.data.keyword.Bluemix_dedicated_notm}} 環境的網域。此記號會授與對現行名稱空間中映像檔的存取權。
 
     ```
-    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
+        curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
     ```
     {: pre}
 
@@ -62,28 +65,28 @@ lastupdated: "2018-4-20"
 5.  驗證 Kubernetes 密碼。
 
     ```
-    kubectl describe secrets
+        kubectl describe secrets
     ```
     {: pre}
 
-    您可以利用此密碼來使用 IBM {{site.data.keyword.Bluemix_notm}} Container Service。
+    您可以利用此密碼來使用 {{site.data.keyword.containerlong}}。
 
 6.  建立用來儲存記號資訊的 Kubernetes 密碼。
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
-    <caption>表 1. 瞭解此指令的元件</caption>
+    <caption>瞭解此指令的元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
-    <td>必要。您要使用密碼並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用密碼並在其中部署容器之叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
@@ -109,7 +112,7 @@ lastupdated: "2018-4-20"
 
 7.  建立會參照 imagePullSecret 的 Pod。
 
-    1.  開啟偏好的編輯器，然後建立名為 mypod.yaml 的 Pod 配置 Script。
+    1.  開啟偏好的文字編輯器，然後建立名為 mypod.yaml 的 Pod 配置 Script。
     2.  定義您要用來存取登錄的 Pod 及 imagePullSecret。若要使用名稱空間中的專用映像檔：
 
         ```
@@ -120,14 +123,14 @@ lastupdated: "2018-4-20"
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>表 2. 瞭解 YAML 檔案元件</caption>
+        <caption>瞭解 YAML 檔案元件</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
@@ -162,7 +165,7 @@ lastupdated: "2018-4-20"
     4.  在叢集中建立部署。
 
           ```
-          kubectl apply -f mypod.yaml
+                    kubectl apply -f mypod.yaml
           ```
           {: pre}
 

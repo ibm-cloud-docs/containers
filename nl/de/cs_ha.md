@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Hochverfügbarkeit für {{site.data.keyword.containerlong_notm}}
@@ -36,7 +38,9 @@ Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurd
 
 <img src="images/cs_failure_ov.png" alt="Übersicht über Fehlerbereiche in einem Hochverfügbarkeitscluster innerhalb einer {{site.data.keyword.containershort_notm}}-Region." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="Die Tabelle zeigt Fehlerquellen in {{site.data.keyword.containershort_notm}}. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie die Fehlerquelle, den Titel der Fehlerquelle in Spalte 2, eine Beschreibung in Spalte 3 und einen Link zur Dokumentation in Spalte 4. ">
+<caption>Fehlerquellen</caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -75,7 +79,7 @@ Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurd
   <tr>
     <td>5</td>
     <td>Regionsfehler</td>
-    <td>Jede Region wird mit einer hoch verfügbaren Lastausgleichsfunktion konfiguriert, auf die von einem regionsspezifischen API-Endpunkt aus zugegriffen werden kann. Die Lastausgleichsfunktion leitet eingehende und ausgehende Anforderungen an Cluster zu den regionalen Standorten weiter. Die Wahrscheinlichkeit eines vollständigen regionalen Ausfalls ist gering. Wenn Sie diesem Fehler jedoch vorbeugen möchten, können Sie mehrere Cluster in verschiedenen Regionen einrichten und sie mithilfe einer externen Lastausgleichsfunktion verbinden. Wenn eine ganze Region ausfällt, kann der Cluster in der anderen Region die Arbeitslast übernehmen. <br/><br/><strong>Hinweis:</strong> Ein Cluster in mehreren Regionen erfordert mehrere Cloudressourcen und kann abhängig von Ihrer App sehr komplex und kostenintensiv sein. Prüfen Sie, ob Sie eine Konfiguration über mehrere Regionen benötigen, oder ob Sie mit einer möglichen Serviceunterbrechung umgehen können. Wenn Sie einen Cluster in mehreren Regionen konfigurieren möchten, stellen Sie sicher, dass Ihre App und die Daten in einer anderen Region gehostet werden können, und dass Ihre App die Replikation von globalen Daten handhaben kann.</td>
+    <td>Jede Region wird mit einer hoch verfügbaren Lastausgleichsfunktion konfiguriert, auf die von einem regionsspezifischen API-Endpunkt aus zugegriffen werden kann. Die Lastausgleichsfunktion leitet eingehende und ausgehende Anforderungen an Cluster zu den regionalen Standorten weiter. Die Wahrscheinlichkeit eines vollständigen regionalen Ausfalls ist gering. Um diesem Fehler jedoch vorzubeugen, können Sie mehrere Cluster in verschiedenen Regionen einrichten und sie mithilfe einer externen Lastausgleichsfunktion verbinden. Wenn eine ganze Region ausfällt, kann der Cluster in der anderen Region die Arbeitslast übernehmen. <br/><br/><strong>Hinweis:</strong> Ein Cluster in mehreren Regionen erfordert mehrere Cloudressourcen und kann abhängig von Ihrer App sehr komplex und kostenintensiv sein. Prüfen Sie, ob Sie eine Konfiguration über mehrere Regionen benötigen, oder ob Sie mit einer möglichen Serviceunterbrechung umgehen können. Wenn Sie einen Cluster in mehreren Regionen konfigurieren möchten, stellen Sie sicher, dass Ihre App und die Daten in einer anderen Region gehostet werden können, und dass Ihre App die Replikation von globalen Daten handhaben kann.</td>
     <td>[Hoch verfügbare Cluster konfigurieren](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurd
   </tr>
   </tbody>
   </table>
+
+
 

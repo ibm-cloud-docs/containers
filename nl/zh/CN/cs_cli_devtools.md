@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 用于管理集群的 CLI 参考
@@ -28,8 +31,8 @@ lastupdated: "2018-4-20"
 **提示：**要查看 {{site.data.keyword.containershort_notm}} 插件的版本，请运行以下命令。
 
 ```
-bx plugin list
-```
+    bx plugin list
+    ```
 {: pre}
 
 
@@ -549,7 +552,7 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。请注意，集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</td>
+    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</td>
     </tr>
     <tr>
     <td><code><em>location</em></code></td>
@@ -608,7 +611,7 @@ trusted: <em>true</em>
 <dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。请注意，集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</dd>
+<dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</dd>
@@ -626,7 +629,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>注</strong>：{[matching_VLANs]}</p></li>
+<p><strong>注：</strong>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p></li>
 </ul>
 
 <p>要了解您是否已具有用于特定位置的专用 VLAN，或要找到现有专用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -640,7 +643,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>注</strong>：{[matching_VLANs]}</p></li>
+<p><strong>注：</strong>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p></li>
 </ul>
 
 <p>要了解您是否已具有用于特定位置的公用 VLAN，或要找到现有公用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -697,7 +700,7 @@ trusted: <em>true</em>
 
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>包含此标志可对集群中所有支持的裸机工作程序节点启用[可信计算](cs_secure.html#trusted_compute)。启用信任后，日后无法对集群禁用信任。</p>
-   <p>要检查裸机机器类型是否支持信任，请检查 `bx cs machine-types <location>` [命令](#cs_machine_types)输出中的 **Trustable** 字段。要验证集群是否已启用信任，请查看 `bx cs cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `bx cs worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
+   <p>要检查裸机机器类型是否支持信任，请检查 `bx cs machine-types <location>` [命令](#cs_machine_types)输出中的 `Trustable` 字段。要验证集群是否已启用信任，请查看 `bx cs cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `bx cs worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
    </dl>
 
 **示例命令**：
@@ -739,7 +742,7 @@ trusted: <em>true</em>
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
@@ -826,8 +829,8 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs clusters
-  ```
+        bx cs clusters
+        ```
   {: pre}
 
 
@@ -1133,7 +1136,7 @@ trusted: <em>true</em>
    <dd>集群的名称或标识。此值是必需的。</dd>
 
    <dt><code>--update</code></dt>
-   <dd>包含此标志可在集群中更新 ALB 私钥的证书。此值是可选的。</dd>
+   <dd>更新集群中 ALB 私钥的证书。此值是可选的。</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>ALB 私钥的名称。此值是必需的。</dd>
@@ -1254,9 +1257,6 @@ trusted: <em>true</em>
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1278,7 +1278,7 @@ trusted: <em>true</em>
    <dd>
 
    <ul>
-    <li>此参数仅可用于专用 ALB。</li>
+    <li>此参数仅可用于启用专用 ALB。</li>
     <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
    </ul>
    </dd>
@@ -1293,13 +1293,6 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-  禁用 ALB 的示例：
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   使用用户提供的 IP 地址启用 ALB 的示例：
 
   ```
@@ -1307,7 +1300,12 @@ trusted: <em>true</em>
   ```
   {: pre}
 
+  禁用 ALB 的示例：
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1450,23 +1448,106 @@ trusted: <em>true</em>
 可以将工作程序节点作为虚拟机在共享或专用硬件上进行供应，也可以作为物理机器在裸机上进行供应。
 
 <dl>
-<dt>物理机器（裸机）</dt>
-<dd>可以将工作程序节点作为单租户物理服务器（也称为裸机）进行供应。通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。<p><strong>按月计费</strong>：裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。</p>
-<p><strong>用于启用可信计算的选项</strong>：启用“可信计算”以验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。在运行 Kubernetes V1.9 或更高版本并具有特定裸机机器类型的集群上，可信计算可用。运行 `bx cs machine-types <location>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 `Trustable` 字段来了解哪些机器支持信任。</p>
-<p><strong>裸机机器类型组</strong>：裸机机器类型分为多个组，每组具有不同的计算资源，您可以从中进行选择以满足应用程序的需求。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于备份本地数据的 RAID。要了解不同类型的裸机产品，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)。<ul><li>`mb1c.4x32`：如果不需要 RAM 密集型或数据密集型资源，请选择此类型以对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 4 个核心、32 GB 内存、1 TB SATA 主磁盘、2 TB SATA 辅助磁盘和 10 Gbps 绑定网络。</li>
-<li>`mb1c.16x64`：如果不需要 RAM 密集型或数据密集型资源，请选择此类型以对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 16 个核心、64 GB 内存、1 TB SATA 主磁盘、1.7 TB SSD 辅助磁盘和 10 Gbps 绑定网络。</li>
-<li>`mr1c.28x512`：选择此类型可最大限度提高可用于工作程序节点的 RAM。RAM 密集型资源是 28 个核心、512 GB 内存、1 TB SATA 主磁盘、1.7 TB SSD 辅助磁盘和 10 Gbps 绑定网络。</li>
-<li>`md1c.16x64.4x4tb`：如果工作程序节点需要大量本地磁盘存储（包括用于备份本地存储在机器上的数据的 RAID），请选择此类型。为 RAID1 配置了 1 TB 主存储磁盘，为 RAID10 配置了 4 TB 辅助存储磁盘。数据密集型资源是 28 个核心、512 GB 内存、2 个 1 TB RAID1 主磁盘、4 个 4 TB SATA RAID10 辅助磁盘和 10 Gbps 绑定网络。</li>
-<li>`md1c.28x512.4x4tb`：如果工作程序节点需要大量本地磁盘存储（包括用于备份本地存储在机器上的数据的 RAID），请选择此类型。为 RAID1 配置了 1 TB 主存储磁盘，为 RAID10 配置了 4 TB 辅助存储磁盘。数据密集型资源是 16 个核心、64 GB 内存、2 个 1 TB RAID1 主磁盘、4 个 4 TB SATA RAID10 辅助磁盘和 10 Gbps 绑定网络。</li>
-
-</ul></p></dd>
-<dt>虚拟机</dt>
-<dd>创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
+<dt>为何要使用物理机器（裸机）？</dt>
+<dd><p><strong>更多计算资源</strong>：可以将工作程序节点作为单租户物理服务器（也称为裸机）进行供应。通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于备份本地数据的 RAID。</p>
+<p><strong>按月计费</strong>：裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。</p>
+<p><strong>用于启用可信计算的选项</strong>：启用“可信计算”以验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。在运行 Kubernetes V1.9 或更高版本并具有特定裸机机器类型的集群上，可信计算可用。运行 `bx cs machine-types <location>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 **Trustable** 字段来了解哪些机器支持信任。例如，`mgXc` GPU 类型模板不支持可信计算。</p></dd>
+<dt>为什么要使用虚拟机？</dt>
+<dd><p>相对于裸机，使用虚拟机 (VM) 能以更具成本效益的价格获得更高灵活性、更短供应时间以及更多自动可扩展性功能。您可以将 VM 用于最通用的用例，例如测试和开发环境、编译打包和生产环境、微服务以及业务应用程序。但是，在性能方面会有所牺牲。如果需要针对 RAM 密集型、数据密集型或 GPU 密集型工作负载进行高性能计算，请使用裸机。</p>
+<p><strong>确定是单租户还是多租户</strong>：创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。</p>
 <p>在多租户设置中，物理资源（如 CPU 和内存）在部署到同一物理硬件的所有虚拟机之间共享。要确保每个虚拟机都能独立运行，虚拟机监视器（也称为系统管理程序）会将物理资源分段成隔离的实体，并将其作为专用资源分配给虚拟机（系统管理程序隔离）。</p>
 <p>在单租户设置中，所有物理资源都仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。与多租户设置类似，系统管理程序也会确保每个工作程序节点在可用物理资源中获得应有的份额。</p>
 <p>共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。</p>
-<p><strong>虚拟 `u2c` 或 `b2c` 机器类型</strong>：这些机器使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 主本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 辅助本地磁盘存储。</p>
-<p><strong>不推荐的 `u1c` 或 `b1c` 机器类型</strong>：要开始使用 `u2c` 和 `b2c` 机器类型，请[通过添加工作程序节点来更新机器类型](cs_cluster_update.html#machine_type)。</p></dd>
+<p><strong>虚拟 `u2c` 或 `b2c` 机器类型模板</strong>：这些机器使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 主本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 辅助本地磁盘存储。</p>
+<p><strong>如果我拥有不推荐使用的 `u1c` 或 `b1c` 机器类型该怎么办？</strong>要开始使用 `u2c` 和 `b2c` 机器类型，请[通过添加工作程序节点来更新机器类型](cs_cluster_update.html#machine_type)。</p></dd>
+<dt>我可以选择哪些虚拟机和物理机器类型模板？</dt>
+<dd><p>有很多！请选择最适合您用例的机器类型。请记住，一个工作程序池由属于相同类型模板的机器组成。如果要在集群中混合使用机器类型，请为每种类型模板创建单独的工作程序池。</p>
+<p>机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `bx cs machine-types<zone_name>`。</p>
+<p><table>
+<caption>{{site.data.keyword.containershort_notm}} 中的可用物理（裸机）和虚拟机类型。</caption>
+<thead>
+<th>名称和用例</th>
+<th>核心数/内存</th>
+<th>主/辅助磁盘</th>
+<th>网络速度</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>虚拟，u2c.2x4</strong>：对于快速测试、概念验证和其他轻型工作负载，请使用此最小大小的 VM。</td>
+<td>2 / 4 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
+</tr>
+<tr>
+<td><strong>虚拟，b2c.4x16</strong>：对于测试和开发以及其他轻型工作负载，请选择此均衡的 VM。</td>
+<td>4 / 16 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
+</tr>
+<tr>
+<td><strong>虚拟，b2c.16x64</strong>：对于中型工作负载，请选择此均衡的 VM。</td></td>
+<td>16 / 64 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
+</tr>
+<tr>
+<td><strong>虚拟，b2c.32x128</strong>：对于中型到大型工作负载（例如，具有大量并发用户的数据库和动态 Web 站点），请选择此均衡的 VM。</td></td>
+<td>32 / 128 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
+</tr>
+<tr>
+<td><strong>虚拟，b2c.56x242</strong>：对于大型工作负载（例如，具有大量并发用户的数据库和多个应用程序），请选择此均衡的 VM。</td></td>
+<td>56 / 242 GB</td>
+<td>25 GB / 100 GB</td>
+<td>1000 Mbps</td>
+</tr>
+<tr>
+<td><strong>RAM 密集型裸机，mr1c.28x512</strong>：最大限度提高可用于工作程序节点的 RAM。</td>
+<td>28 / 512 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>GPU 裸机，mg1c.16x128</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 1 块 Tesla K80 物理卡，每块卡有 2 个图形处理单元 (GPU)，共有 2 个 GPU。</td>
+<td>16 / 128 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>GPU 裸机，mg1c.28x256</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 2 块 Tesla K80 物理卡，每块卡有 2 个 GPU，共有 4 个 GPU。</td>
+<td>28 / 256 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>数据密集型裸机，md1c.16x64.4x4tb</strong>：适用于需要大量本地磁盘存储的情况，包括用于备份机器上本地存储的数据的 RAID。用于分布式文件系统、大型数据库和大数据分析工作负载等用例。</td>
+<td>16 / 64 GB</td>
+<td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>数据密集型裸机，md1c.28x512.4x4tb</strong>：适用于需要大量本地磁盘存储的情况，包括用于备份机器上本地存储的数据的 RAID。用于分布式文件系统、大型数据库和大数据分析工作负载等用例。</td>
+<td>28 / 512 GB</td>
+<td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>均衡裸机，mb1c.4x32</strong>：用于需要的计算资源比虚拟机所提供的计算资源更多的均衡工作负载。</td>
+<td>4 / 32 GB</td>
+<td>2 TB SATA / 2 TB SATA</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>均衡裸机，mb1c.16x64</strong>：用于需要的计算资源比虚拟机所提供的计算资源更多的均衡工作负载。</td>
+<td>16 / 64 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>10000 Mbps</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1524,8 +1605,8 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs vlans dal10
-  ```
+    bx cs vlans dal10
+    ```
   {: pre}
 
 
@@ -1685,7 +1766,7 @@ trusted: <em>true</em>
    <dt><code>--app-paths</code></dt>
      <dd>跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。此值是可选的。</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>其容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>您要使用的日志转发协议。目前支持 <code>syslog</code> 和 <code>ibm</code>。此值是必需的。</dd>
    <dt><code>--json</code></dt>
@@ -2011,12 +2092,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>创建集群时指定的专用 VLAN。此值是必需的。
 
-<p><strong>注</strong>：{[matching_VLANs]}</p></dd>
+<p><strong>注：</strong>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。<strong>注</strong>：{[private_VLAN_vyatta]}
 
-<p><strong>注</strong>：{[matching_VLANs]}</p></dd>
+<p><strong>注：</strong>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项。</dd>
@@ -2108,7 +2189,7 @@ kubectl get nodes
     kubectl drain <worker_name>
     ```
     {: pre}
-    此过程可能需要几分钟时间。
+此过程可能需要几分钟时间。
  5. 重新引导工作程序节点。使用从 `bx cs workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     bx cs worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
@@ -2151,7 +2232,7 @@ kubectl get nodes
 
 重新装入工作程序节点的所有必需配置。如果工作程序节点遇到问题（例如，性能降低），或者如果工作程序节点卡在非正常运行状态，那么重新装入会非常有用。
 
-重新装入工作程序节点不会应用最新的更新、安全补丁或 [Kubernetes 版本](cs_versions.html#version_types)。如果有补丁和版本更新可用，会在您使用与工作程序相关的功能时，通过 CLI 和控制台对您进行提示。要使工作程序保持最新状态，请定期使用 `bx cs worker-update` [命令](cs_cli_reference.html#cs_worker_update)。
+重新装入工作程序节点会将补丁版本更新应用于工作程序节点，但不会应用主要或次要更新。要查看从一个补丁版本到下一个补丁版本的更改，请查看[版本更改日志](cs_versions_changelog.html#changelog)文档。
 {: tip}
 
 在重新装入工作程序节点之前，请确保将 pod 重新安排到其他工作程序节点上，以帮助避免因工作程序节点上的应用程序或数据损坏而产生的停机时间。
@@ -2178,14 +2259,14 @@ kubectl get nodes
     kubectl drain <worker_name>
     ```
     {: pre}
-    此过程可能需要几分钟时间。
+此过程可能需要几分钟时间。
  5. 重新装入工作程序节点。使用从 `bx cs workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
     bx cs worker-reload <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
  6. 等待重新装入完成。
- 7. 使工作程序节点可用于 pod 安排。请使用从 `kubectl get nodes` 命令返回的工作程序节点的 **name**。
+ 7. 使工作程序节点可用于 pod 安排。请使用从 `kubectl get nodes` 命令返回的工作程序节点的 **name**。         
     ```
     kubectl uncordon <worker_name>
     ```
@@ -2320,7 +2401,7 @@ kubectl get nodes
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>列出了其中可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
+   <dd>可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>查看从集群中删除的工作程序节点，包括删除原因。此值是可选的。</dd>
    </dl>
@@ -2331,4 +2412,3 @@ kubectl get nodes
   bx cs workers my_cluster
   ```
   {: pre}
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Ingress 어노테이션
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
 Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 일반 정보는 [Ingress를 사용한 네트워크 트래픽 관리](cs_ingress.html#planning)를 참조하십시오.
 
 <table>
+<caption>일반 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -64,6 +66,7 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
 <br>
 
 <table>
+<caption>연결 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -81,17 +84,17 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
   <tr>
   <td><a href="#keepalive-requests">Keepalive 요청</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>하나의 Keepalive 연결을 통해 서비스할 수 있는 최대 요청 수를 설정합니다. </td>
+  <td>하나의 Keepalive 연결을 통해 서비스할 수 있는 최대 요청 수를 설정합니다.</td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Keepalive 제한시간</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>서버에서 Keepalive 연결이 열려 있는 최대 시간을 설정합니다. </td>
+  <td>서버에서 Keepalive 연결이 열려 있는 최대 시간을 설정합니다.</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">다음 업스트림 프록시</a></td>
   <td><code>proxy-next-upstream-config</code></td>
-  <td>ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 시점을 설정합니다. </td>
+  <td>ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 시점을 설정합니다.</td>
   </tr>
   <tr>
   <td><a href="#sticky-cookie-services">쿠키를 사용하는 세션 선호도</a></td>
@@ -101,13 +104,14 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
   <tr>
   <td><a href="#upstream-keepalive">업스트림 Keepalive</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>업스트림 서버에 대한 최대 유휴 Keepalive 연결 수를 설정합니다. </td>
+  <td>업스트림 서버에 대한 최대 유휴 Keepalive 연결 수를 설정합니다.</td>
   </tr>
   </tbody></table>
 
 <br>
 
   <table>
+  <caption>HTTPS 및 TLS/SSL 인증 어노테이션</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -135,7 +139,7 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
   <tr>
   <td><a href="#hsts">HSTS(HTTP Strict Transport Security)</a></td>
   <td><code>hsts</code></td>
-  <td>HTTPS를 사용해서만 도메인에 액세스하도록 브라우저를 설정합니다.</td>
+  <td>HTTPS를 통해서만 도메인에 액세스하도록 브라우저를 설정합니다.</td>
   </tr>
   <tr>
   <td><a href="#mutual-auth">상호 인증</a></td>
@@ -145,13 +149,14 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
   <tr>
   <td><a href="#ssl-services">SSL 서비스 지원</a></td>
   <td><code>ssl-services</code></td>
-  <td>SSL 서비스 지원이 HTTPS가 필요한 업스트림 앱에 트래픽을 암호화하도록 허용합니다. </td>
+  <td>SSL 서비스 지원이 HTTPS가 필요한 업스트림 앱에 트래픽을 암호화하도록 허용합니다.</td>
   </tr>
   </tbody></table>
 
 <br>
 
 <table>
+<caption>Istio 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -164,13 +169,14 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
 <tr>
 <td><a href="#istio-services">Istio 서비스</a></td>
 <td><code>istio-services</code></td>
-<td>Istio 관리 서비스로 트래픽을 라우팅합니다. </td>
+<td>Istio 관리 서비스로 트래픽을 라우팅합니다.</td>
 </tr>
 </tbody></table>
 
 <br>
 
 <table>
+<caption>프록시 버퍼 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -205,6 +211,7 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
 <br>
 
 <table>
+<caption>요청 및 응답 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -239,6 +246,7 @@ Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 �
 <br>
 
 <table>
+<caption>서비스 제한 어노테이션</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -304,8 +312,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -335,12 +344,13 @@ ALB가 앱 경로에 대해 요청 URI를 일치시키는 방법을 수정합니
 
 <dl>
 <dt>설명</dt>
-<dd>기본적으로, ALB는 앱이 청취하는 경로를 접두부로 처리합니다. ALB가 앱에 대한 요청을 수신하는 경우 ALB는 요청 URI의 시작과 일치하는 경로(접두부로)의 Ingress 리소스를 처리합니다. 일치 항목이 있으면 요청은 앱이 배치된 팟(Pod)의 IP 주소로 전달됩니다.<br><br>`location-modifier` 어노테이션은 ALB가 위치 블록 구성을 수정하여 일치 항목을 검색하는 방법을 변경합니다. 위치 블록은 앱 경로에 대한 요청을 처리하는 방법을 결정합니다.<br><br>**참고**: 정규식(regex) 경로를 처리하기 위해 이 어노테이션이 필요합니다.</dd>
+<dd>기본적으로, ALB는 앱이 청취하는 경로를 접두부로 처리합니다. ALB가 앱에 대한 요청을 수신하는 경우 ALB는 요청 URI의 시작과 일치하는 경로(접두부로)의 Ingress 리소스를 처리합니다. 일치 항목이 있으면 요청은 앱이 배치된 팟(Pod)의 IP 주소로 전달됩니다.<br><br>`location-modifier` 어노테이션은 ALB가 위치 블록 구성을 수정하여 일치 항목을 검색하는 방법을 변경합니다. 위치 블록은 앱 경로에 대한 요청을 처리하는 방법을 결정합니다.<br><br><strong>참고</strong>: 정규식(regex) 경로를 처리하기 위해 이 어노테이션이 필요합니다.</dd>
 
 <dt>지원되는 수정자</dt>
 <dd>
 
 <table>
+<caption>지원되는 수정자</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -350,19 +360,19 @@ ALB가 앱 경로에 대해 요청 URI를 일치시키는 방법을 수정합니
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>등호 수정자는 ALB가 정확히 일치하는 항목만 선택하도록 합니다. 정확하게 일치하는 항목을 찾으면 검색을 중지하고 일치하는 경로가 선택됩니다.</td>
+ <td>등호 수정자는 ALB가 정확히 일치하는 항목만 선택하도록 합니다. 정확하게 일치하는 항목을 찾으면 검색을 중지하고 일치하는 경로가 선택됩니다.<br>예를 들어, 앱이 <code>/tea</code>에서 청취하는 경우 ALB가 앱에 대한 요청을 일치시킬 때 정확한 <code>/tea</code> 경로만 선택합니다.</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>물결 기호 수정자는 ALB가 비교 중에 경로를 대소문자를 구분하는 정규식 경로로 처리하도록 합니다. </td>
+ <td>물결 기호 수정자는 ALB가 비교 중에 경로를 대소문자를 구분하는 정규식 경로로 처리하도록 합니다.<br>예를 들어, 앱이 <code>/coffee</code>에서 청취하면 경로가 앱에 대해 명시적으로 설정되지 않은 경우에도 ALB가 앱에 대한 요청을 일치시킬 때 <code>/ab/coffee</code> 또는 <code>/123/coffee</code> 경로를 선택할 수 있습니다.</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>물결 기호와 그 뒤의 별표는 ALB가 비교 중에 경로를 대소문자를 구분하지 않는 정규식 경로로 처리하도록 합니다. </td>
+ <td>물결 기호와 그 뒤의 별표는 ALB가 비교 중에 경로를 대소문자를 구분하지 않는 정규식 경로로 처리하도록 합니다.<br>예를 들어, 앱이 <code>/coffee</code>에서 청취하면 경로가 앱에 대해 명시적으로 설정되지 않은 경우에도 ALB가 앱에 대한 요청을 일치시킬 때 <code>/ab/Coffee</code> 또는 <code>/123/COFFEE</code> 경로를 선택할 수 있습니다.</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
- <td>캐럿과 그 뒤의 물결 기호는 ALB가 정규식 경로 대신 정규식이 아닌 최적 일치 항목을 선택하도록 합니다. </td>
+ <td>캐럿과 그 뒤의 물결 기호는 ALB가 정규식 경로 대신 정규식이 아닌 최적 일치 항목을 선택하도록 합니다.</td>
  </tr>
  </tbody>
 </table>
@@ -394,8 +404,9 @@ tls:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -422,7 +433,7 @@ tls:
 <dl>
 <dt>설명</dt>
 <dd>
-공용 ALB 대신 수신 요청을 라우팅할 개인용 ALB를 선택합니다. </dd>
+공용 ALB 대신 수신 요청을 라우팅할 개인용 ALB를 선택합니다.</dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -450,8 +461,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -474,7 +486,7 @@ ALB 도메인 경로의 수신 네트워크 트래픽을 백엔드 애플리케�
 
 <dl>
 <dt>설명</dt>
-<dd>Ingress ALB 도메인은 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code>의 수신 네트워크 트래픽을 사용자의 앱으로 라우팅합니다. 사용자 앱은 <code>/beans</code> 대신 <code>/coffee</code>를 청취합니다. 수신 네트워크 트래픽을 사용자 앱에 전달하려면 재작성 어노테이션을 Ingress 리소스 구성 파일에 추가하십시오. 재작성 어노테이션에서는 <code>/coffee</code> 경로를 사용하여 <code>/beans</code>의 수신 네트워크 트래픽을 사용자 앱으로 전달할 수 있습니다. 여러 서비스가 포함된 경우에는 세미콜론(;)만 사용하여 이를 구분하십시오.</dd>
+<dd>Ingress ALB 도메인은 <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>의 수신 네트워크 트래픽을 사용자의 앱으로 라우팅합니다. 사용자 앱은 <code>/beans</code> 대신 <code>/coffee</code>를 청취합니다. 수신 네트워크 트래픽을 사용자 앱에 전달하려면 재작성 어노테이션을 Ingress 리소스 구성 파일에 추가하십시오. 재작성 어노테이션에서는 <code>/coffee</code> 경로를 사용하여 <code>/beans</code>의 수신 네트워크 트래픽을 사용자 앱으로 전달할 수 있습니다. 여러 서비스가 포함된 경우에는 세미콜론(;)만 사용하여 이를 구분하십시오.</dd>
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -500,8 +512,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -559,8 +572,9 @@ tls:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -584,17 +598,17 @@ tls:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>ALB 구성 맵을 여십시오.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>TCP 포트를 구성 맵에 추가하십시오. 열려는 TCP 포트로 <code>&lt;port&gt;</code>를 대체하십시오.
+<li>TCP 포트를 구성 맵에 추가하십시오. 열려는 TCP 포트로 <code>&lt;port&gt;</code>를 대체하십시오. <b>참고</b>: 기본적으로 포트 80 및 443이 열립니다. 80 및 443을 열린 상태로 유지하려면 `public-ports` 필드에 지정하는 다른 TCP 포트 이외에 이러한 포트를 포함해야 합니다. 사설 ALB를 사용으로 설정한 경우 `private-ports` 필드에도 열린 상태로 유지할 포트를 지정해야 합니다. 자세한 정보는 <a href="cs_ingress.html#opening_ingress_ports">Ingress ALB에서 포트 열기</a>를 참조하십시오.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
-  public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
   creationTimestamp: 2017-08-22T19:06:51Z
   name: ibm-cloud-provider-ingress-cm
@@ -607,8 +621,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>비표준 TCP 포트를 통해 앱에 액세스하도록 Ingress를 구성하십시오. 이 참조서에 있는 샘플 YAML 파일을 사용하십시오. </li>
 <li>ALB 구성을 업데이트하십시오.
 <pre class="pre">
@@ -650,8 +664,8 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-    ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-    ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
 tls:
  - hosts:
@@ -667,18 +681,18 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>백엔드 앱에 연결하기 위해 대기하는 시간(초)입니다(예: <code>65s</code>). <strong>참고:</strong> 연결 제한시간은 75초를 초과할 수 없습니다.</td>
+ <td>백엔드 앱에 연결하기 위해 대기하는 시간(초 또는 분)입니다(예: <code>65s</code> 또는 <code>2m</code>). <strong>참고:</strong> 연결 제한시간은 75초를 초과할 수 없습니다.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>백엔드 앱을 읽기 전에 대기하는 시간(초)입니다(예: <code>65s</code>). <strong>참고:</strong> 읽기 제한시간은 120초를 초과할 수 없습니다.</td>
- </tr>
+ <td>백엔드 앱을 읽기 전에 대기하는 시간(초 또는 분)입니다(예: <code>65s</code> 또는 <code>2m</code>). </tr>
  </tbody></table>
 
  </dd></dl>
@@ -725,8 +739,9 @@ paths:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -784,8 +799,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -813,7 +829,7 @@ ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 시점을 �
 <dl>
 <dt>설명</dt>
 <dd>
-Ingress ALB가 클라이언트 앱과 사용자의 앱 간의 프록시 역할을 수행합니다. 일부 앱 설정은 ALB로부터 수신되는 클라이언트 요청을 처리하는 여러 업스트림 서버를 필요로 합니다. ALB가 사용하는 프록시 서버가 앱이 사용하는 업스트림 서버와의 연결을 설정하지 못하는 경우가 있습니다. 이 경우 ALB는 다음 업스트림 서버와 연결을 설정하여 여기에 대신 요청을 전달하려 할 수 있습니다. 사용자는 `proxy-next-upstream-config` 어노테이션을 사용하여 ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 경우, 시간 및 횟수를 설정할 수 있습니다. <br><br><strong>참고</strong>: `proxy-next-upstream-config`를 사용할 때는 제한시간이 항상 구성되므로 이 어노테이션에 `timeout=true`를 추가하지 마십시오.
+Ingress ALB가 클라이언트 앱과 사용자의 앱 간의 프록시 역할을 수행합니다. 일부 앱 설정은 ALB로부터 수신되는 클라이언트 요청을 처리하는 여러 업스트림 서버를 필요로 합니다. ALB가 사용하는 프록시 서버가 앱이 사용하는 업스트림 서버와의 연결을 설정하지 못하는 경우가 있습니다. 이 경우 ALB는 다음 업스트림 서버와 연결을 설정하여 여기에 대신 요청을 전달하려 할 수 있습니다. 사용자는 `proxy-next-upstream-config` 어노테이션을 사용하여 ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 경우, 시간 및 횟수를 설정할 수 있습니다.<br><br><strong>참고</strong>: `proxy-next-upstream-config`를 사용할 때는 제한시간이 항상 구성되므로 이 어노테이션에 `timeout=true`를 추가하지 마십시오.
 </dd>
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
@@ -840,8 +856,9 @@ tls:
 </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -924,18 +941,19 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -963,6 +981,8 @@ tls:
  </dd></dl>
 
 <br />
+
+
 
 
 ### 업스트림 Keepalive(upstream-keepalive)
@@ -1003,8 +1023,9 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -1022,6 +1043,8 @@ tls:
 <br />
 
 
+
+
 ## HTTPS 및 TLS/SSL 인증 어노테이션
 {: #https-auth}
 
@@ -1036,11 +1059,11 @@ tls:
   <dd>
   {{site.data.keyword.appid_short_notm}}를 사용하여 웹 또는 API HTTP/HTTPS 요청을 인증합니다.
 
-  <p>요청 유형을 <code>web</code>으로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 웹 요청이 유효성 검증됩니다. 토큰 유효성 검증에 실패하는 경우 웹 요청이 거부됩니다. 요청에 액세스 토큰이 포함되지 않으면 요청이 {{site.data.keyword.appid_short_notm}} 로그인 페이지로 경로 재지정됩니다. **참고**: {{site.data.keyword.appid_short_notm}} 웹 인증이 작동하려면 사용자의 브라우저에서 쿠키가 사용으로 설정되어야 합니다.</p>
+  <p>요청 유형을 <code>web</code>으로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 웹 요청이 유효성 검증됩니다. 토큰 유효성 검증에 실패하는 경우 웹 요청이 거부됩니다. 요청에 액세스 토큰이 포함되지 않으면 요청이 {{site.data.keyword.appid_short_notm}} 로그인 페이지로 경로 재지정됩니다. <strong>참고</strong>: {{site.data.keyword.appid_short_notm}} 웹 인증이 작동하려면 사용자의 브라우저에서 쿠키가 사용으로 설정되어야 합니다.</p>
 
   <p>요청 유형을 <code>api</code>로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 API 요청이 유효성 검증됩니다. 요청에 액세스 토큰이 포함되지 않으면 <code>401: Unauthorized</code> 오류 메시지가 사용자에게 리턴됩니다.</p>
 
-  <p>**참고**: 보안상의 이유로, {{site.data.keyword.appid_short_notm}} 인증은 TLS/SSL을 사용하는 백엔드만 지원합니다. </p>
+  <p>**참고**: 보안상의 이유로, {{site.data.keyword.appid_short_notm}} 인증은 TLS/SSL을 사용하는 백엔드만 지원합니다.</p>
   </dd>
    <dt>샘플 Ingress 리소스 YAML</dt>
    <dd>
@@ -1067,8 +1090,9 @@ tls:
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>어노테이션 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -1141,8 +1165,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -1162,12 +1187,12 @@ paths:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>ALB 구성 맵을 여십시오.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>기본이 아닌 HTTP 및 HTTPS 포트를 구성 맵에 추가하십시오. 열려는 HTTP 또는 HTTPS 포트로 &lt;port&gt;를 대체하십시오.
+<li>기본이 아닌 HTTP 및 HTTPS 포트를 구성 맵에 추가하십시오. 열려는 HTTP 또는 HTTPS 포트로 &lt;port&gt;를 대체하십시오. <b>참고</b>: 기본적으로 포트 80 및 443이 열립니다. 80 및 443을 열린 상태로 유지하려면 `public-ports` 필드에 지정하는 다른 TCP 포트 이외에 이러한 포트를 포함해야 합니다. 사설 ALB를 사용으로 설정한 경우 `private-ports` 필드에도 열린 상태로 유지할 포트를 지정해야 합니다. 자세한 정보는 <a href="cs_ingress.html#opening_ingress_ports">Ingress ALB에서 포트 열기</a>를 참조하십시오.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1185,8 +1210,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>수신 네트워크 트래픽을 서버로 라우팅할 때 기본이 아닌 포트를 사용하도록 Ingress를 구성하십시오. 이 참조서에 있는 샘플 YAML 파일을 사용하십시오. </li>
 <li>ALB 구성을 업데이트하십시오.
 <pre class="pre">
@@ -1214,6 +1239,7 @@ HTTP 요청의 경로를 HTTPS로 재지정하는 기능은 기본적으로 사�
 
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1234,7 +1260,10 @@ paths:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1268,19 +1297,20 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -1313,14 +1343,14 @@ ALB에 대한 상호 인증을 구성합니다.
 <dl>
 <dt>설명</dt>
 <dd>
-Ingress ALB에 대한 상호 인증을 구성합니다. 클라이언트는 서버를 인증하고 서버 또한 인증서를 사용하여 클라이언트를 인증합니다. 상호 인증은 인증서 기반 인증 또는 양방향 인증이라고도 합니다.
+Ingress ALB에 대한 다운스트림 트래픽의 상호 인증을 구성합니다. 외부 클라이언트가 서버를 인증하고 또한 서버는 인증서를 사용하여 클라이언트를 인증합니다. 상호 인증은 인증서 기반 인증 또는 양방향 인증이라고도 합니다.
 </dd>
 
 <dt>전제조건</dt>
 <dd>
 <ul>
 <li>[필수 인증 기관(CA)이 포함된 올바른 시크릿을 가져야 합니다](cs_app.html#secrets). <code>client.key</code> 및 <code>client.crt</code>는 상호 인증으로 인증해야 합니다.</li>
-<li>443 외 포트에서의 상호 인증을 가능하게 하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)하십시오. </li>
+<li>443 외 포트에서의 상호 인증을 가능하게 하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)하십시오.</li>
 </ul>
 </dd>
 
@@ -1350,8 +1380,9 @@ tls:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -1360,7 +1391,7 @@ tls:
 </tr>
 <tr>
 <td><code>port</code></td>
-<td><code>&lt;<em>port</em>&gt;</code>를 ALB 포트 번호로 대체하십시오. </td>
+<td><code>&lt;<em>port</em>&gt;</code>를 ALB 포트 번호로 대체하십시오.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1384,10 +1415,7 @@ HTTPS 요청을 허용하고 업스트림 앱에 대한 트래픽을 암호화�
 <dl>
 <dt>설명</dt>
 <dd>
-HTTPS가 필요한 업스트림 앱에 대한 트래픽을 암호화합니다.
-
-**선택사항**: 이 어노테이션에 [단방향 인증 또는 상호 인증](#ssl-services-auth)을 추가할 수 있습니다.
-</dd>
+Ingress에서 HTTPS가 필요한 업스트림 앱에 전송하는 트래픽을 암호화합니다. 업스트림 앱이 TLS를 처리할 수 있는 경우 선택적으로 TLS 시크릿에 포함된 인증서를 제공할 수 있습니다.<br></br>**선택사항**: 이 어노테이션에 [단방향 인증 또는 상호 인증](#ssl-services-auth)을 추가할 수 있습니다.</dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -1405,27 +1433,28 @@ rules:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다. </td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다. TLS 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets)을 참조하십시오. </td>
+  <td>선택사항: TLS 시크릿을 사용하려고 하고 업스트림 앱이 TLS를 처리할 수 있는 경우 <code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스에 대한 시크릿으로 대체하십시오. 시크릿을 제공하는 경우 앱이 클라이언트로부터 예상하는 <code>trusted.crt</code>, <code>client.crt</code> 및 <code>client.key</code>가 값에 포함되어야 합니다. TLS 시크릿을 작성하려면 먼저 [인증서와 키를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)을 수행하십시오. 그런 다음 [시크릿 작성](cs_app.html#secrets)을 참조하십시오.</td>
   </tr>
   </tbody></table>
 
@@ -1442,9 +1471,6 @@ rules:
 <dt>설명</dt>
 <dd>
 HTTPS 요청을 허용하고 추가 보안을 위해 단방향 또는 상호 인증을 사용하여 업스트림 앱에 대한 트래픽을 암호화합니다.
-
-**참고**: 시작하기 전에 [인증서와 키를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)을 수행하십시오.
-
 </dd>
 
 
@@ -1469,28 +1495,29 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다. </td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets)을 참조하십시오. </td>
+  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스에 대한 상호 인증 시크릿으로 대체하십시오. 앱이 클라이언트로부터 예상하는 CA 인증서가 값에 포함되어야 합니다. 상호 인증 시크릿을 작성하려면 먼저 [인증서와 키를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)을 수행하십시오. 그런 다음 [시크릿 작성](cs_app.html#secrets)을 참조하십시오.</td>
   </tr>
   </tbody></table>
 
@@ -1535,7 +1562,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
 spec:
 tls:
     - hosts:
@@ -1555,33 +1582,34 @@ tls:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>YAML 파일 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
-      <td>Istio 관리 서비스에 대한 트래픽 라우팅을 사용하려면 <code>True</code>로 설정하십시오. </td>
+    <td><code>enabled</code></td>
+      <td>Istio 관리 서비스에 대한 트래픽 라우팅을 사용하려면 <code>True</code>로 설정하십시오.</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td><code><em>&lt;myservice1&gt;</em></code>을 Istio 관리 앱을 위해 작성한 Kubernetes 서비스의 이름으로 대체하십시오. 여러 서비스는 세미콜론(;)으로 구분하십시오. 이 필드는 선택사항입니다. 서비스 이름을 지정하지 않으면 모든 Istio 관리 서비스에서 트래픽 라우팅을 사용할 수 있게 됩니다. </td>
+    <td><code><em>&lt;myservice1&gt;</em></code>을 Istio 관리 앱을 위해 작성한 Kubernetes 서비스의 이름으로 대체하십시오. 여러 서비스는 세미콜론(;)으로 구분하십시오. 이 필드는 선택사항입니다. 서비스 이름을 지정하지 않으면 모든 Istio 관리 서비스에서 트래픽 라우팅을 사용할 수 있게 됩니다.</td>
     </tr>
     <tr>
     <td><code>istioServiceNamespace</code></td>
-    <td><code><em>&lt;istio-namespace&gt;</em></code>를 Istio가 설치된 Kubernetes 네임스페이스로 대체하십시오. 이 필드는 선택사항입니다. 네임스페이스를 지정하지 않으면 <code>istio-system</code> 네임스페이스가 사용됩니다. </td>
+    <td><code><em>&lt;istio-namespace&gt;</em></code>를 Istio가 설치된 Kubernetes 네임스페이스로 대체하십시오. 이 필드는 선택사항입니다. 네임스페이스를 지정하지 않으면 <code>istio-system</code> 네임스페이스가 사용됩니다.</td>
     </tr>
     <tr>
     <td><code>istioServiceName</code></td>
-    <td><code><em>&lt;istio-ingress-service&gt;</em></code>를 Istio Ingress 서비스의 이름으로 대체하십시오. 이 필드는 선택사항입니다. Istio Ingress 서비스 이름을 지정하지 않으면 서비스 이름 <code>istio-ingress</code>가 사용됩니다. </td>
+    <td><code><em>&lt;istio-ingress-service&gt;</em></code>를 Istio Ingress 서비스의 이름으로 대체하십시오. 이 필드는 선택사항입니다. Istio Ingress 서비스 이름을 지정하지 않으면 서비스 이름 <code>istio-ingress</code>가 사용됩니다.</td>
     </tr>
     <tr>
     <td><code>path</code></td>
-      <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;/myapp1&gt;</em></code>을 Istio 관리 서비스가 청취하는 백엔드 경로로 대체하십시오. 이 경로는 Istio Ingress 리소스에 정의한 경로와 대응해야 합니다. </td>
+      <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;/myapp1&gt;</em></code>을 Istio 관리 서비스가 청취하는 백엔드 경로로 대체하십시오. 이 경로는 Istio Ingress 리소스에 정의한 경로와 대응해야 합니다.</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
-    <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;istio_ingress_port&gt;</em></code>를 Istio Ingress 제어기의 포트로 대체하십시오. </td>
+    <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;istio_ingress_port&gt;</em></code>를 Istio Ingress 제어기의 포트로 대체하십시오.</td>
     </tr>
     </tbody></table>
     </dd>
@@ -1614,7 +1642,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-    ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
 tls:
  - hosts:
@@ -1628,7 +1656,24 @@ paths:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>어노테이션 컴포넌트 이해</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>ALB에서 응답 데이터 버퍼링을 사용하지 않도록 설정하려면 <code>false</code>로 설정하십시오.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td><code><em>&lt;myservice1&gt;</em></code>을 앱을 대해 작성한 Kubernetes 서비스의 이름으로 대체하십시오. 여러 서비스는 세미콜론(;)으로 구분하십시오. 이 필드는 선택사항입니다. 서비스 이름을 지정하지 않으면 모든 서비스에서 이 어노테이션을 사용합니다.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1669,8 +1714,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -1731,8 +1777,9 @@ paths:
  </code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -1790,8 +1837,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
 </thead>
 <tbody>
 <tr>
@@ -1833,7 +1881,6 @@ paths:
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1845,7 +1892,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
 serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1888,18 +1934,19 @@ tls:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -1930,7 +1977,7 @@ tls:
  <dl>
  <dt>설명</dt>
  <dd>Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. ALB로 전송된 백엔드 앱의 클라이언트 응답은 처리(프록시)되어 새 응답에 넣어진 후 새 응답이 ALB에서 클라이언트 웹 브라우저로 전송됩니다. 응답을 프록시 처리하면 백엔드 앱에서 처음에 전송된 http 헤더 정보가 제거되지만 이 프로세스에서는 모든 백엔드 앱 고유 헤더를 제거하지 않을 수 있습니다. ALB에서 클라이언트 웹 브라우저로 응답을 전달하기 전에 클라이언트 응답에서 헤더 정보를 제거하십시오.</dd>
- <dt>샘플 Infress 리소스 YAML</dt>
+ <dt>샘플 Ingress 리소스 YAML</dt>
  <dd>
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
@@ -1955,18 +2002,19 @@ tls:
    - host: mydomain
     http:
       paths:
-       - path: /
+       - path: /service1_path
          backend:
            serviceName: &lt;myservice1&gt;
            servicePort: 8080
-       - path: /myapp
+       - path: /service2_path
          backend:
            serviceName: &lt;myservice2&gt;
            servicePort: 80</code></pre>
 
   <table>
+  <caption>어노테이션 컴포넌트 이해</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
    </thead>
    <tbody>
    <tr>
@@ -2022,13 +2070,14 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>클라이언트 응답 본문의 최대 크기입니다. 예를 들어, 200MB로 설정하려면 <code>200m</code>을 정의하십시오.  <strong>참고:</strong> 클라이언트 요청 본문 크기 검사를 사용하지 않게 크기를 0으로 설정할 수 있습니다.</td>
+ <td>클라이언트 응답 본문의 최대 크기입니다. 예를 들어, 최대 크기를 200MB로 설정하려면 <code>200m</code>을 정의하십시오. <strong>참고:</strong> 클라이언트 요청 본문 크기 검사를 사용하지 않게 크기를 0으로 설정할 수 있습니다.</td>
  </tr>
  </tbody></table>
 
@@ -2072,8 +2121,9 @@ paths:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>어노테이션 컴포넌트 이해</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+ <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
  </thead>
  <tbody>
  <tr>
@@ -2134,13 +2184,14 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>위치 또는 서비스를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `key=location`을 사용하십시오. 헤더를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `X-USER-ID key==$http_x_user_id`를 사용하십시오.</td>
+  <td>위치 또는 서비스를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `key=location`을 사용하십시오. 헤더를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `X-USER-ID key=$http_x_user_id`를 사용하십시오.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2196,8 +2247,9 @@ tls:
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>어노테이션 컴포넌트 이해</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
   </thead>
   <tbody>
   <tr>
@@ -2206,7 +2258,7 @@ tls:
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>위치 또는 서비스를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `key=location`을 사용하십시오. 헤더를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `X-USER-ID key==$http_x_user_id`를 사용하십시오.</td>
+  <td>위치 또는 서비스를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `key=location`을 사용하십시오. 헤더를 기반으로 수신 요청의 글로벌 한계를 설정하려면 `X-USER-ID key=$http_x_user_id`를 사용하십시오.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2221,3 +2273,6 @@ tls:
   </dl>
 
   <br />
+
+
+

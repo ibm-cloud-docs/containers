@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 集成服务
 {: #integrations}
 
@@ -25,6 +27,7 @@ lastupdated: "2018-4-20"
 
 ## 应用程序服务
 <table summary="可访问性摘要">
+<caption>应用程序服务</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -45,6 +48,7 @@ lastupdated: "2018-4-20"
 
 ## DevOps 服务
 <table summary="可访问性摘要">
+<caption>DevOps 服务</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -77,6 +81,7 @@ lastupdated: "2018-4-20"
 
 ## 日志记录和监视服务
 <table summary="可访问性摘要">
+<caption>日志记录和监视服务</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -102,18 +107,18 @@ lastupdated: "2018-4-20"
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 通过 GUI 自动发现和映射应用程序，从而提供基础架构和应用程序性能监视。Istana 会捕获向应用程序发出的每一个请求，支持您进行故障诊断并执行根本原因分析，以防止问题再次发生。请查看有关<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 的博客帖子，以了解更多信息。</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 通过 GUI 自动发现和映射应用程序，从而提供基础架构和应用程序性能监视。Istana 会捕获向应用程序发出的每一个请求，您可以利用这些信息进行故障诊断并执行根本原因分析，以防止问题再次发生。请查看有关<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 的博客帖子，以了解更多信息。</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计，可基于 Kubernetes 日志记录信息检索有关集群、工作程序节点和部署运行状况的详细信息。集群中所有运行中容器的 CPU、内存、I/O 和网络活动都会进行收集，并可用于定制查询或警报以监视集群中的性能和工作负载。
+<td>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计。Prometheus 基于 Kubernetes 日志记录信息来检索有关集群、工作程序节点和部署运行状况的详细信息。针对集群中运行中的每个容器，都会收集 CPU、内存、I/O 和网络活动。可以在定制查询或警报中使用收集的数据，以监视集群中的性能和工作负载。
 
 <p>要使用 Prometheus，请遵循 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 指示信息 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</p>
 </td>
 </tr>
 <tr>
 <td>Sematext</td>
-<td>使用 <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可查看容器化应用程序的度量值和日志。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+<td>使用 <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可查看容器化应用程序的度量值和日志。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -133,6 +138,7 @@ lastupdated: "2018-4-20"
 
 ## 安全服务
 <table summary="可访问性摘要">
+<caption>安全服务</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -173,6 +179,7 @@ lastupdated: "2018-4-20"
 
 ## 存储服务
 <table summary="可访问性摘要">
+<caption>存储服务</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -180,6 +187,10 @@ lastupdated: "2018-4-20"
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td>Heptio Ark</td>
+  <td>可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来备份和复原集群资源和持久性卷。有关更多信息，请参阅 Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>使用 {{site.data.keyword.cos_short}} 存储的数据经过加密，分散在多个地理位置，并使用 REST API 通过 HTTP 进行访问。您可以使用 [ibm-backup-restore 映像](/docs/services/RegistryImages/ibm-backup-restore/index.html)来配置服务，以便为集群中的数据生成一次性备份或安排的备份。有关该服务的常规信息，请参阅 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
@@ -223,14 +234,14 @@ lastupdated: "2018-4-20"
 2.  列出可用的 {{site.data.keyword.Bluemix_notm}} 服务。
 
     ```
-    bx service list
+        bx service list
     ```
     {: pre}
 
     示例 CLI 输出：
 
     ```
-    name                      service           plan    bound apps   last operation   
+        name                      service           plan    bound apps   last operation   
     <service_instance_name>   <service_name>    spark                create succeeded
     ```
     {: screen}
@@ -242,28 +253,28 @@ lastupdated: "2018-4-20"
 
 
         ```
-        kubectl get namespaces
+                kubectl get namespaces
         ```
         {: pre}
 
-    -   在集群中创建新的名称空间。
+    -   在集群中创建名称空间。
 
         ```
-        kubectl create namespace <namespace_name>
+                kubectl create namespace <namespace_name>
         ```
         {: pre}
 
 5.  将服务添加到集群。
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+        bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     服务成功添加到集群后，将创建集群私钥，用于保存服务实例的凭证。示例 CLI 输出：
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+        bx cs cluster-service-bind mycluster mynamespace cleardb 
     Binding service instance to namespace...
     OK
     Namespace: mynamespace
@@ -274,15 +285,11 @@ lastupdated: "2018-4-20"
 6.  验证是否已在集群名称空间中创建私钥。
 
     ```
-    kubectl get secrets --namespace=<namespace>
+        kubectl get secrets --namespace=<namespace>
     ```
     {: pre}
 
-
-要在集群中部署的 pod 中使用服务，集群用户可以[将 Kubernetes 私钥作为私钥卷安装到 pod](cs_storage.html#app_volume_mount)，以访问 {{site.data.keyword.Bluemix_notm}} 服务的服务凭证。
-
-
-
+要使用集群中部署的 pod 中的服务，集群用户必须访问服务凭证。用户可以通过[将 Kubernetes 私钥作为私钥卷安装到 pod](#adding_app)，以访问 {{site.data.keyword.Bluemix_notm}} 服务的服务凭证。
 
 <br />
 
@@ -300,7 +307,7 @@ lastupdated: "2018-4-20"
 1. 将在其中创建服务实例的组织和空间设定为目标。
 
     ```
-    bx target -o <org_name> -s <space_name>
+        bx target -o <org_name> -s <space_name>
     ```
     {: pre}
 
@@ -319,7 +326,7 @@ lastupdated: "2018-4-20"
 4. 验证是否已创建服务别名。
 
     ```
-    bx service list
+        bx service list
     ```
     {: pre}
 
@@ -336,24 +343,26 @@ lastupdated: "2018-4-20"
 加密的 Kubernetes 私钥用于存储 {{site.data.keyword.Bluemix_notm}} 服务详细信息和凭证，并允许该服务与集群之间进行安全通信。
 {:shortdesc}
 
-Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）的安全方法。集群用户可以将私钥安装到 pod，而不通过环境变量或直接在 Dockerfile 中公开保密信息。然后，这些私钥可由 pod 中正在运行的容器进行访问。
+Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）的安全方法。您可以将私钥安装到 pod，而不通过环境变量或直接在 Dockerfile 中公开保密信息。然后，这些私钥可由 pod 中正在运行的容器进行访问。
 
-将私钥卷安装到 pod 时，会将名为 binding 的文件存储在卷安装目录中；此文件包含访问 {{site.data.keyword.Bluemix_notm}} 服务所需的全部信息和凭证。
+将私钥卷安装到 pod 时，会将名为 `binding` 的文件存储在卷安装目录中。`binding` 文件包含访问 {{site.data.keyword.Bluemix_notm}} 服务所需的全部信息和凭证。
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。确保您要在应用程序中使用的 {{site.data.keyword.Bluemix_notm}} 服务已由集群管理员[添加到集群](cs_integrations.html#adding_cluster)。
 
 1.  列出集群名称空间中的可用私钥。
 
     ```
-    kubectl get secrets --namespace=<my_namespace>
+        kubectl get secrets --namespace=<my_namespace>
     ```
     {: pre}
 
     输出示例：
 
     ```
-    NAME                                    TYPE                                  DATA      AGE
+        NAME                                    TYPE                                  DATA      AGE
     binding-<service_instance_name>         Opaque                                1         3m
+
+    
 
     ```
     {: screen}
@@ -397,6 +406,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     {: codeblock}
 
     <table>
+    <caption>了解 YAML 文件的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
     </thead>
@@ -421,21 +431,21 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 5.  创建 pod 并安装私钥卷。
 
     ```
-    kubectl apply -f secret-test.yaml
+        kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
 6.  验证 pod 是否已创建。
 
     ```
-    kubectl get pods --namespace=<my_namespace>
+        kubectl get pods --namespace=<my_namespace>
     ```
     {: pre}
 
     示例 CLI 输出：
 
     ```
-    NAME                           READY     STATUS    RESTARTS   AGE
+        NAME                           READY     STATUS    RESTARTS   AGE
     secret-test-1111454598-gfx32   1/1       Running   0          1m
     ```
     {: screen}
@@ -444,7 +454,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 8.  获取有关 pod 的详细信息，并查找私钥名称。
 
     ```
-    kubectl describe pod <pod_name>
+        kubectl describe pod <pod_name>
     ```
     {: pre}
 
@@ -462,7 +472,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 
     
 
-9.  实施应用程序时，将其配置为在安装目录中查找名为 **binding** 的私钥文件，解析 JSON 内容，并确定用于访问 {{site.data.keyword.Bluemix_notm}} 服务的 URL 和服务凭证。
+9.  将应用程序配置为在安装目录中查找 `binding` 私钥文件，解析 JSON 内容，并确定用于访问 {{site.data.keyword.Bluemix_notm}} 服务的 URL 和服务凭证。
 
 现在，您可以访问 {{site.data.keyword.Bluemix_notm}} 服务详细信息和凭证。要使用 {{site.data.keyword.Bluemix_notm}} 服务，请确保将应用程序配置为在安装目录中查找服务私钥文件，解析 JSON 内容，并确定服务详细信息。
 
@@ -513,28 +523,28 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     2. 创建服务帐户和集群角色绑定。
 
         ```
-        kubectl create -f rbac-config.yaml
+                kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
 3. 使用创建的服务帐户来初始化 Helm 并安装 `tiller`。
 
     ```
-    helm init --service-account tiller
+        helm init --service-account tiller
     ```
     {: pre}
 
 4. 验证 `tiller-deploy` pod 在集群中的 **Status** 是否为 `Running`。
 
     ```
-        kubectl get pods -n kube-system -l app=helm
+            kubectl get pods -n kube-system -l app=helm
         ```
     {: pre}
 
     输出示例：
 
     ```
-    NAME                            READY     STATUS    RESTARTS   AGE
+        NAME                            READY     STATUS    RESTARTS   AGE
     tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
     ```
     {: screen}
@@ -542,14 +552,14 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 5. 向 Helm 实例添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。
 
     ```
-    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+        helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
 6. 列出 {{site.data.keyword.Bluemix_notm}} 存储库中当前可用的 Helm 图表。
 
     ```
-    helm search ibm
+        helm search ibm
     ```
     {: pre}
 
@@ -558,7 +568,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     例如，要查看 strongSwan IPSec VPN 服务 Helm 图表的设置、文档和缺省值，请运行以下命令：
 
     ```
-    helm inspect ibm/strongswan
+        helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -590,21 +600,21 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
     启用读/写许可权：
 
     ```
-    kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
+        kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
     ```
     {: pre}
 
     启用只读许可权：
 
     ```
-    kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
+        kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
     ```
     {: pre}
 
     输出：
 
     ```
-    clusterrole "weave-scope-mgr" created
+        clusterrole "weave-scope-mgr" created
     clusterrolebinding "weave-scope-mgr-role-binding" created
     ```
     {: screen}
@@ -618,17 +628,17 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
     输出：
 
     ```
-    serviceaccount "weave-scope" created
+        serviceaccount "weave-scope" created
     deployment "weave-scope-app" created
     service "weave-scope-app" created
     daemonset "weave-scope-agent" created
     ```
     {: screen}
 
-4.  运行端口转发命令以在计算机上启动该服务。现在，Weave Scope 已配置用于集群；下次访问 Weave Scope 时，可以运行以下端口转发命令，而不用再次完成先前的配置步骤。
+4.  运行端口转发命令以在计算机上打开该服务。下次访问 Weave Scope 时，可以运行以下端口转发命令，而不用再次完成先前的配置步骤。
 
     ```
-    kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+        kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
     ```
     {: pre}
 
@@ -636,7 +646,7 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -649,5 +659,4 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
 [了解有关 Weave Scope 功能的更多信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
-
 

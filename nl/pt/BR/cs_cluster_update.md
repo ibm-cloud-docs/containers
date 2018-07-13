@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Atualizando clusters e nós do trabalhador
@@ -30,7 +33,7 @@ Periodicamente, o Kubernetes libera [atualizações principais, secundárias ou 
 
 As atualizações podem afetar a versão do servidor da API do Kubernetes ou outros componentes em seu mestre do Kubernetes.  Você é sempre responsável por manter seus nós do trabalhador atualizados. Ao fazer atualizações, o mestre do Kubernetes é atualizado antes dos nós do trabalhador.
 
-Por padrão, sua capacidade de atualizar o servidor da API do Kubernetes é limitada em seu mestre do Kubernetes para mais de duas versões secundárias à frente de sua versão atual. Por exemplo, se a sua versão atual do servidor da API do Kubernetes é 1.5 e você deseja atualizar para 1.8, deve-se primeiro atualizar para 1.7. É possível forçar a ocorrência da atualização, mas atualizar mais de duas versões secundárias pode causar resultados inesperados. Se o seu cluster está executando uma versão do Kubernetes não suportada, você pode ter que forçar a atualização.
+Por padrão, sua capacidade de atualizar o servidor da API do Kubernetes é limitada em seu mestre do Kubernetes para mais de duas versões secundárias à frente de sua versão atual. Por exemplo, se a sua versão atual do servidor da API do Kubernetes é 1.7 e você deseja atualizar para a 1.10, deve-se primeiro atualizar para a 1.8 ou 1.9. É possível forçar a ocorrência da atualização, mas atualizar três ou mais versões secundárias pode causar resultados inesperados. Se o seu cluster está executando uma versão do Kubernetes não suportada, você pode ter que forçar a atualização.
 
 O diagrama a seguir mostra o processo que você pode usar para atualizar seu mestre.
 
@@ -55,13 +58,14 @@ Quando a atualização do servidor da API do Kubernetes for concluída, será po
 ## Atualizando nós do trabalhador
 {: #worker_node}
 
+
 Você recebeu uma notificação para atualizar seus nós do trabalhador. O que isso significa? Conforme as atualizações de segurança e as correções são colocadas no local para o servidor da API do Kubernetes e outros componentes do mestre do Kubernetes, deve-se ter certeza de que os nós do trabalhador permanecem em sincronização.
 {: shortdesc}
 
 A versão do Kubernetes do nó do trabalhador não pode ser maior que a versão do servidor da API do Kubernetes que é executada em seu mestre do Kubernetes. Antes de iniciar, [atualize o mestre do Kubernetes](#master).
 
-<ul>**Atenção**:</br>
-<li>As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços.</li>
+**Atenção**:
+<ul><li>As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços.</li>
 <li>Os dados são excluídos se não armazenados fora do pod.</li>
 <li>Use [réplicas ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) em suas implementações para reagendar os pods em nós disponíveis.</li></ul>
 
@@ -77,7 +81,7 @@ As chaves estão definidas. E agora?
 
 Depois de definir suas regras, você executa o comando `bx cs worker-update`. Se uma resposta bem-sucedida for retornada, os nós do trabalhador serão enfileirados para serem atualizados. No entanto, os nós não são submetidos ao processo de atualização até que todas as regras estejam satisfeitas. Enquanto são enfileiradas, as regras são verificadas em um intervalo para ver se algum dos nós é capaz de ser atualizado.
 
-E se eu escolher não definir um mapa de configuração?
+E se eu escolhi não definir um mapa de configuração?
 
 Quando o mapa de configuração não está definido, o padrão é usado. Por padrão, um máximo de 20% de todos os nós do trabalhador em cada cluster ficam indisponíveis durante o processo de atualização.
 
@@ -115,6 +119,7 @@ Para atualizar seus nós do trabalhador:
     ```
     {:pre}
   <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o parâmetro na coluna um e a descrição que corresponde na coluna dois.">
+  <caption>Componentes ConfigMap</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Entendendo os componentes </th>
     </thead>
@@ -172,6 +177,10 @@ Próximas etapas:
   - Repita o processo de atualização com outros clusters.
   - Informe aos desenvolvedores que trabalham no cluster para atualizar sua CLI `kubectl` para a versão do mestre do Kubernetes.
   - Se o painel do Kubernetes não exibir gráficos de utilização, [exclua o pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
@@ -181,8 +190,17 @@ Próximas etapas:
 ## Atualizando tipos de máquina
 {: #machine_type}
 
-É possível atualizar os tipos de máquina que são usados em nós do trabalhador, incluindo novos nós do trabalhador e removendo os antigos. Por exemplo, se você têm nós do trabalhador virtual em tipos de máquina descontinuada com `u1c` ou `b1c` nos nomes, crie nós do trabalhador que usam tipos de máquina com `u2c` ou `b2c` nos nomes.
+É possível atualizar os tipos de máquina de seus nós do trabalhador, incluindo novos nós do trabalhador e removendo os antigos. Por exemplo, se você têm nós do trabalhador virtual em tipos de máquina descontinuada com `u1c` ou `b1c` nos nomes, crie nós do trabalhador que usam tipos de máquina com `u2c` ou `b2c` nos nomes.
 {: shortdesc}
+
+Antes de iniciar:
+- [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+- Se você armazenar dados em seu nó do trabalhador, os dados serão excluídos se não [armazenados fora do nó do trabalhador](cs_storage.html#storage).
+
+
+**Atenção**: as atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Os dados serão excluídos se não [armazenados fora do pod](cs_storage.html#storage).
+
+
 
 1. Anote os nomes e locais dos nós do trabalhador para atualizar.
     ```
@@ -218,6 +236,13 @@ Próximas etapas:
     {: pre}
 
 6. Repita essas etapas para atualizar outros nós do trabalhador para tipos de máquina diferentes.
+
+
+
+
+
+
+
 
 
 

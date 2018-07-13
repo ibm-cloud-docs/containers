@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Consulta de CLI para gestionar clústeres
@@ -548,7 +551,8 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>Sustituya <code><em>&lt;cluster_name&gt;</em></code> por el nombre del clúster. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. Tenga en cuenta que el nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster podría ser truncado y añadírsele un valor aleatorio dentro del nombre de dominio de Ingress. </td>
+    <td>Sustituya <code><em>&lt;cluster_name&gt;</em></code> por el nombre del clúster. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. El nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster podría ser truncado y añadírsele un valor aleatorio dentro del nombre de dominio de Ingress.
+</td>
     </tr>
     <tr>
     <td><code><em>location</em></code></td>
@@ -580,7 +584,8 @@ trusted: <em>true</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Cuando no se especifica la versión, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>. </td></tr>
+      <td>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Cuando no se especifica la versión, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.
+</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
@@ -606,10 +611,12 @@ trusted: <em>true</em>
 <dd>Elija un tipo de máquina. Puede desplegar los nodos trabajadores como máquinas virtuales en hardware dedicado o compartido, o como máquinas físicas en servidores nativos. Los tipos de máquinas físicas y virtuales varían según la ubicación en la que se despliega el clúster. Para obtener más información, consulte la documentación del [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Este valor es obligatorio para clústeres estándares y no está disponible para clústeres gratuitos.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>El nombre del clúster.  Este valor es obligatorio. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. Tenga en cuenta que el nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster podría ser truncado y añadírsele un valor aleatorio dentro del nombre de dominio de Ingress. </dd>
+<dd>El nombre del clúster.  Este valor es obligatorio. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. El nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster podría ser truncado y añadírsele un valor aleatorio dentro del nombre de dominio de Ingress.
+</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Cuando no se especifica la versión, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>. </dd>
+<dd>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Cuando no se especifica la versión, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.
+</dd>
 
 <dt><code>--no-subnet</code></dt>
 <dd>De forma predeterminada, se crea una subred portátil pública y una privada en la VLAN asociada con el clúster. Incluya el distintivo <code>--no-subnet</code> para evitar crear subredes con el clúster. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster más adelante.</dd>
@@ -622,7 +629,7 @@ trusted: <em>true</em>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no incluya este distintivo. Al crear clústeres se crea automáticamente una VLAN privada.</li>
 <li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN privada en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN privada.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Nota:</strong> Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p></li>
 </ul>
 
 <p>Para saber si ya tiene una VLAN privada para una ubicación específica o para encontrar el nombre de una VLAN privada existente, ejecute <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -634,7 +641,7 @@ trusted: <em>true</em>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no utilice este distintivo. Al crear el clúster se crea automáticamente una VLAN pública.</li>
 <li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN pública en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN pública.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Nota:</strong> Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p></li>
 </ul>
 
 <p>Para saber si ya tiene una VLAN pública para una ubicación específica o para encontrar el nombre de una VLAN pública existente, ejecute <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -733,7 +740,7 @@ Ver información sobre un clúster de la organización.
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
@@ -780,7 +787,7 @@ Eliminar un clúster de la organización.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Actualice el maestro de Kubernetes a la versión predeterminada de la API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster despliegan no se modifican y continúan ejecutándose. 
+Actualice el maestro de Kubernetes a la versión predeterminada de la API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster despliegan no se modifican y continúan ejecutándose.
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues. Revise esta [nota del release](cs_versions.html) para ver detalles.
 
@@ -1126,7 +1133,7 @@ Despliegue o actualice un certificado de la instancia de {{site.data.keyword.clo
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Incluya este distintivo para actualizar el certificado para un secreto de ALB en un clúster. Este valor es opcional.</dd>
+   <dd>Actualiza el certificado para un secreto del ALB en un clúster. Este valor es opcional.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>El nombre del secreto de ALB. Este valor es obligatorio.</dd>
@@ -1247,9 +1254,6 @@ Visualice una lista de secretos de ALB en un clúster.
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1271,7 +1275,7 @@ Habilite o inhabilite un ALB en el clúster estándar. El ALB público está hab
    <dd>
 
    <ul>
-    <li>Este parámetro está disponible solo para un ALB privado.</li>
+    <li>Este parámetro está disponible para habilitar un ALB privado únicamente.</li>
     <li>El ALB privado se despliega con una dirección IP de una subred privada proporcionada por un usuario. Si no se proporciona la dirección IP, el ALB se despliega con una dirección IP privada de la subred privada portátil que se suministra automáticamente cuando se crea el clúster.</li>
    </ul>
    </dd>
@@ -1286,13 +1290,6 @@ Habilite o inhabilite un ALB en el clúster estándar. El ALB público está hab
   ```
   {: pre}
 
-  Ejemplo para inhabilitar un ALB:
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   Ejemplo para habilitar un ALB con una dirección IP proporcionada por un usuario:
 
   ```
@@ -1300,7 +1297,12 @@ Habilite o inhabilite un ALB en el clúster estándar. El ALB público está hab
   ```
   {: pre}
 
+  Ejemplo para inhabilitar un ALB:
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1443,27 +1445,107 @@ Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores.
 Puede suministrar el nodo trabajador como una máquina virtual en hardware dedicado o compartido, o como una máquina física en un servidor nativo.
 
 <dl>
-<dt>Máquinas físicas (nativas)</dt>
-<dd>Puede suministrar el nodo trabajador como un servidor físico de arrendatario único, también conocido como nativo. Los servidores nativos ofrecen acceso directo a los recursos físicos en la máquina, como la memoria o la CPU. Esta configuración elimina el hipervisor de máquina virtual que asigna recursos físicos a máquinas virtuales que se ejecutan en el host. En su lugar, todos los recursos de una máquina nativa están dedicados exclusivamente al trabajador, por lo que no es necesario preocuparse por "vecinos ruidosos" que compartan recursos o ralenticen el rendimiento.
-<p><strong>Facturación mensual</strong>: los servidores nativos son más caros que los servidores virtuales, y son más apropiados para apps de alto rendimiento que necesitan más recursos y control de host. Los servidores nativos se facturan de forma mensual. Si cancela un servidor nativo antes de fin de mes, se le facturará a finales de ese mes. La realización de pedidos de servidores nativos, y su cancelación, es un proceso manual que se realiza a través de su cuenta (SoftLayer) de la infraestructura de IBM Cloud. Puede ser necesario más de un día laborable para completar la tramitación. </p>
-<p><strong>Opción para habilitar Trusted Compute</strong>: Habilite Trusted Compute para protegerse ante la manipulación indebida de nodos trabajadores. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente. Puede crear un nuevo clúster sin confianza. Para obtener más información sobre cómo funciona la confianza durante el proceso de inicio del nodo, consulte [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute está disponible en los clústeres donde se ejecuta Kubernetes versión 1.9 o posterior y poseen determinados tipos de máquina nativos. Cuando ejecute el [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, en el campo `Trustable` puede ver qué máquinas son compatibles con la confianza.</p>
-<p><strong>Grupos de tipo de máquina nativa</strong>: Los tipos de máquina nativa vienen en grupos que tienen distintos recursos de cálculo que puede elegir para satisfacer las necesidades de la app.
-Los tipos de máquina física tienen más almacenamiento local que virtual, y algunos tienen RAID para realizar copias de seguridad de datos locales. Para obtener más información sobre los distintos tipos de ofertas nativas, consulte el [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.
-<ul><li>`mb1c.4x32`: Si no necesita RAM, u otros recursos intensivos de datos, seleccione este tipo para obtener una configuración equilibrada de los recursos de la máquina física para los nodos trabajadores. Equilibrado con 4 núcleos, 32 GB de memoria, disco primario SATA de 1 TB, disco secundario SATA de 2 TB, red adherida de 10 Gbps.</li>
-<li>`mb1c.16x64`: Si no necesita RAM, u otros recursos intensivos de datos, seleccione este tipo para obtener una configuración equilibrada de los recursos de la máquina física para los nodos trabajadores. Equilibrado con 16 núcleos, 64 GB de memoria, disco primario SATA de 1 TB, disco secundario SSD de 1,7 TB, red adherida de 10 Gbps.</li>
-<li>`mr1c.28x512`: Seleccione este tipo para maximizar la RAM disponible para los nodos trabajadores. Uso intensivo de RAM con 28 núcleos, 512 GB de memoria, disco primario SATA de 1 TB, disco secundario SSD de 1,7 TB, red adherida de 10 Gbps.</li>
-<li>`md1c.16x64.4x4tb`: Seleccione este tipo si los nodos trabajadores requieren una cantidad significativa de almacenamiento en disco local, incluido RAID para realizar copia de seguridad de los datos almacenados localmente en la máquina. Los discos de almacenamiento primario de 1 TB están configurados para RAID1, y los discos de almacenamiento secundario de 4TB están configurados para RAID10. Uso intensivo de datos con 28 núcleos, 512 GB de memoria, 2 discos primarios RAID1 de 1 TB, 4 discos secundarios SATA de RAID10 de 4 TB, red adherida de 10 Gbps.</li>
-<li>`md1c.28x512.4x4tb`: Seleccione este tipo si los nodos trabajadores requieren una cantidad significativa de almacenamiento en disco local, incluido RAID para realizar copia de seguridad de los datos almacenados localmente en la máquina. Los discos de almacenamiento primario de 1 TB están configurados para RAID1, y los discos de almacenamiento secundario de 4TB están configurados para RAID10. Uso intensivo de datos con 16 núcleos, 64 GB de memoria, 2 discos primarios RAID1 de 1 TB, 4 discos secundarios SATA de RAID10 de 4 TB, red adherida de 10 Gbps.</li>
-
-</ul></p></dd>
-<dt>Máquinas virtuales</dt>
-<dd>Cuando se crea un clúster virtual estándar, debe seleccionar si desea que el hardware subyacente se comparta entre varios clientes de {{site.data.keyword.IBM_notm}} (tenencia múltiple) o se le dedique a usted exclusivamente (tenencia única).
+<dt>¿Por qué debería utilizar máquinas física (nativas)?</dt>
+<dd><p><strong>Más recursos de cálculo</strong>: Puede suministrar el nodo trabajador como un servidor físico de arrendatario único, también denominado servidor nativo. Los servidores nativos ofrecen acceso directo a los recursos físicos en la máquina, como la memoria o la CPU. Esta configuración elimina el hipervisor de máquina virtual que asigna recursos físicos a máquinas virtuales que se ejecutan en el host. En su lugar, todos los recursos de una máquina nativa están dedicados exclusivamente al trabajador, por lo que no es necesario preocuparse por "vecinos ruidosos" que compartan recursos o ralenticen el rendimiento. Los tipos de máquina física tienen más almacenamiento local que virtual, y algunos tienen RAID para realizar copias de seguridad de datos locales.</p>
+<p><strong>Facturación mensual</strong>: los servidores nativos son más caros que los servidores virtuales, y son más apropiados para apps de alto rendimiento que necesitan más recursos y control de host. Los servidores nativos se facturan de forma mensual. Si cancela un servidor nativo antes de fin de mes, se le facturará a finales de ese mes. La realización de pedidos de servidores nativos, y su cancelación, es un proceso manual que se realiza a través de su cuenta (SoftLayer) de la infraestructura de IBM Cloud. Puede ser necesario más de un día laborable para completar la tramitación.</p>
+<p><strong>Opción para habilitar Trusted Compute</strong>: Habilite Trusted Compute para protegerse ante la manipulación indebida de nodos trabajadores. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente. Puede crear un nuevo clúster sin confianza. Para obtener más información sobre cómo funciona la confianza durante el proceso de inicio del nodo, consulte [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute está disponible en los clústeres donde se ejecuta Kubernetes versión 1.9 o posterior y poseen determinados tipos de máquina nativos. Cuando ejecute el [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, en el campo **Trustable** puede ver qué máquinas dan soporte a la confianza. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute.</p></dd>
+<dt>¿Por qué debería utilizar máquinas virtuales?</dt>
+<dd><p>Las máquinas virtuales ofrecen una mayor flexibilidad, unos tiempos de suministro más reducidos y proporcionan más características automáticas de escalabilidad que las máquinas nativas, a un precio más reducido. Utilice máquinas virtuales en los casos de uso con un propósito más general como, por ejemplo, en entornos de desarrollo y pruebas, entornos de transferencia y producción, microservicios y apps empresariales. Sin embargo, deberá encontrar un compromiso con su rendimiento. Si necesita un alto rendimiento de cálculo con cargas de trabajo intensivas de RAM, datos o GPU, utilice máquinas nativas.</p>
+<p><strong>Decida entre la tenencia múltiple o única</strong>: Cuando se crea un clúster virtual estándar, debe seleccionar si desea que el hardware subyacente se comparta entre varios clientes de {{site.data.keyword.IBM_notm}} (tenencia múltiple) o se le dedique a usted exclusivamente (tenencia única).</p>
 <p>En una configuración de tenencia múltiple, los recursos físicos, como CPU y memoria, se comparten entre todas las máquinas virtuales desplegadas en el mismo hardware físico. Para asegurarse de que cada máquina virtual se pueda ejecutar de forma independiente, un supervisor de máquina virtual, también conocido como hipervisor, segmenta los recursos físicos en entidades aisladas y los asigna como recursos dedicados a una máquina virtual (aislamiento de hipervisor).</p>
 <p>En una configuración de tenencia única, se dedican al usuario todos los recursos físicos. Puede desplegar varios nodos trabajadores como máquinas virtuales en el mismo host físico. De forma similar a la configuración de tenencia múltiple,
 el hipervisor asegura que cada nodo trabajador recibe su parte compartida de los recursos físicos disponibles.</p>
 <p>Los nodos compartidos suelen resultar más económicos que los nodos dedicados porque los costes del hardware subyacente se comparten entre varios clientes. Sin embargo, cuando decida entre nodos compartidos y dedicados, debe ponerse en contacto con el departamento legal y ver el nivel de aislamiento y de conformidad de la infraestructura que necesita el entorno de app.</p>
 <p><strong>Tipos de máquinas virtuales `u2c` o `b2c`</strong>: Estas máquinas utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local primario para el sistema de archivos de SO y 100 GB de almacenamiento en disco local secundario para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor.</p>
-<p><strong>Tipos de máquina en desuso `u1c` o `b1c`</strong>: Para empezar a utilizar los tipos de máquina `u2c` y `b2c`, [actualice los tipos de máquina añadiendo nodos trabajadores](cs_cluster_update.html#machine_type).</p></dd>
+<p><strong>¿Qué hago si tengo tipos de máquina `u1c` o `b1c` en desuso?</strong> Para empezar a utilizar los tipos de máquina `u2c` y `b2c`, [actualice los tipos de máquina añadiendo nodos trabajadores](cs_cluster_update.html#machine_type).</p></dd>
+<dt>¿Qué tipos de máquina virtual y física puedo elegir?</dt>
+<dd><p>¡Muchos! Seleccione el tipo de máquina mejor se adecue a su caso de uso. Recuerde que una agrupación de trabajadores está formada por máquinas del mismo tipo. Si desea una combinación de varios tipos de máquina en el clúster, cree agrupaciones de trabajadores separadas para cada tipo.</p>
+<p>Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponibles en su zona, ejecute `bx cs machine-types <zone_name>`.</p>
+<p><table>
+<caption>Tipos de máquina físicos (nativos) y virtuales en {{site.data.keyword.containershort_notm}}.</caption>
+<thead>
+<th>Nombre y caso de uso</th>
+<th>Núcleos / Memoria</th>
+<th>Disco primario / secundario</th>
+<th>Velocidad de red</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virtual, u2c.2x4</strong>: Utilice esta máquina virtual con el tamaño más reducido para realizar pruebas rápidas, pruebas de conceptos y ejecutar otras cargas ligeras.</td>
+<td>2 / 4GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtual, b2c.4x16</strong>: Seleccione esta máquina virtual equilibrada para realizar pruebas y desarrollo, y para otras cargas de trabajo ligeras.</td>
+<td>4 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtual, b2c.16x64</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio.</td></td>
+<td>16 / 64GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtual, b2c.32x128</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio a grande, por ejemplo, como base de datos y sitio web dinámico con muchos usuarios simultáneos.</td></td>
+<td>32 / 128GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Virtual, b2c.56x242</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo grandes, por ejemplo, como base de datos y para varias apps con muchos usuarios simultáneos.</td></td>
+<td>56 / 242GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativa gran capacidad de memoria, mr1c.28x512</strong>: Maximice la RAM disponible para sus nodos trabajadores.</td>
+<td>28 / 512GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativas con GPU, mg1c.16x128</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene una tarjeta física Tesla K80 con dos unidades de proceso gráfico (GPU) por tarjeta (2 GPU).</td>
+<td>16 / 128GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativas con GPU, mg1c.28x256</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene 2 tarjetas físicas Tesla K80 con 2 GPU por tarjeta, para hacer un total de 4 GPU.</td>
+<td>28 / 256GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativa intensiva para datos, md1c.16x64.4x4tb</strong>: Para una cantidad significativa de almacenamiento local, incluido RAID para respaldar datos que se almacenan locamente en la máquina. Casos de uso de ejemplo: sistemas de archivos distribuidos, bases de datos grandes y cargas de trabajo analíticas de Big Data.</td>
+<td>16 / 64GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativa intensiva para datos, md1c.28x512.4x4tb</strong>: Para una cantidad significativa de almacenamiento local, incluido RAID para respaldar datos que se almacenan locamente en la máquina. Casos de uso de ejemplo: sistemas de archivos distribuidos, bases de datos grandes y cargas de trabajo analíticas de Big Data.</td>
+<td>28 / 512 GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativa equilibrada, mb1c.4x32</strong>: Para cargas de trabajo equilibradas que requieren más recursos de computación que los ofrecidos por las máquinas virtuales.</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 2TB SATA</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Máquina nativa equilibrada, mb1c.16x64</strong>: Para cargas de trabajo equilibradas que requieren más recursos de computación que los ofrecidos por las máquinas virtuales.</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1542,7 +1624,7 @@ Crear una configuración de registro. Puede utilizar este mandato para reenviar 
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>El nombre o ID del clúster.</dd>
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>El origen de registro para el que desea habilitar el reenvío de registros. Este argumento da soporte a una lista separada por comas de orígenes de registro a los que aplicar la configuración. Los valores aceptados son <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Si no proporciona un origen de registro, las configuraciones de registro se crean para los orígenes de registro <code>container</code> e <code>ingress</code>.</dd>
+    <dd>El origen del registro para habilitar su reenvío. Este argumento da soporte a una lista separada por comas de orígenes de registro a los que aplicar la configuración. Los valores aceptados son <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Si no proporciona un origen de registro, las configuraciones de registro se crean para los orígenes de registro <code>container</code> e <code>ingress</code>.</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>El espacio de Kubernetes desde el que desea reenviar registros. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor sólo es válido para el origen de registro de contenedor y es opcional. Si no especifica un espacio de nombres, todos los espacios de nombres del clúster utilizarán esta configuración.</dd>
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -1558,7 +1640,7 @@ Crear una configuración de registro. Puede utilizar este mandato para reenviar 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>El destino al que desea reenviar los registros. Las opciones son <code>ibm</code>, que reenvía los registros a {{site.data.keyword.loganalysisshort_notm}} y <code>syslog</code>, que reenvía los registros a un servidor externo.</dd>
   <dt><code>--app-containers</code></dt>
-    <dd>Opcional: Para reenviar registros de apps, puede especificar el nombre del contenedor que contiene la app. Puede especificar más de un contenedor mediante una lista separada por comas. Si no se especifica ningún contenedor, se reenvían los registros de todos los contenedores que contienen las vías de acceso indicadas. Esta opción únicamente es válida para el origen de registro <code>application</code>. </dt>
+    <dd>Opcional: Para reenviar registros de apps, puede especificar el nombre del contenedor que contiene la app. Puede especificar más de un contenedor mediante una lista separada por comas. Si no se especifica ningún contenedor, se reenvían los registros de todos los contenedores que contienen las vías de acceso indicadas. Esta opción únicamente es válida para el origen de registro <code>application</code>.</dt>
   <dt><code>--json</code></dt>
     <dd>Imprime la salida del mandato en formato JSON. Este valor es opcional.</dd>
   <dt><code>--skip-validation</code></dt>
@@ -1681,7 +1763,7 @@ Actualizar los detalles de una configuración de reenvío de registros.
    <dt><code>--app-paths</code></dt>
      <dd>Omite la validación de los nombres de espacio y organización cuando se especifican. Al omitir la validación, disminuye el tiempo de proceso, pero si la configuración de registro no es válida, los registros no se reenviarán correctamente. Este valor es opcional.</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>La vía de acceso de los contenedores en la que registran las apps. Para reenviar registros con el tipo de origen <code>application</code>, debe proporcionar una vía de acceso. Para especificar más de una vía de acceso, utilice una lista separada por comas. Ejemplo: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>La vía de acceso en los contenedores en los que las apps están creando registros. Para reenviar registros con el tipo de origen <code>application</code>, debe proporcionar una vía de acceso. Para especificar más de una vía de acceso, utilice una lista separada por comas. Ejemplo: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>El protocolo de reenvío de registros que desea utilizar. Actualmente se da soporte a <code>syslog</code> e <code>ibm</code>. Este valor es obligatorio.</dd>
    <dt><code>--json</code></dt>
@@ -1708,33 +1790,33 @@ Actualizar los detalles de una configuración de reenvío de registros.
 ### bx cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--s] [--json]
 {: #cs_log_filter_create}
 
-Crea un filtro de registro. Utilice este mandato para filtrar los registros que su configuración de registro reenvía. 
+Crea un filtro de registro. Utilice este mandato para filtrar los registros que su configuración de registro reenvía.
 
 <strong>Opciones del mandato</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Obligatorio: Nombre o ID de clúster que desea para crear un filtro de registro. </dd>
+    <dd>Obligatorio: Nombre o ID de clúster que desea para crear un filtro de registro.</dd>
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>Tipo de registro al que aplicar el filtro. Actualmente se da soporte a <code>all</code>, <code>container</code> y <code>host</code>. </dd>
+    <dd>Tipo de registro al que aplicar el filtro. Actualmente se da soporte a <code>all</code>, <code>container</code> y <code>host</code>.</dd>
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>Opcional: Una lista separada por comas de los ID de configuración de registro. Si no se proporciona, el filtro se aplica a todas las configuraciones de registro de clúster que se pasan al filtro. Puede ver las configuraciones de registro que coinciden con el filtro utilizando con el mandato el distintivo <code>--show-matching-configs</code>. </dd>
+    <dd>Opcional: Una lista separada por comas de los ID de configuración de registro. Si no se proporciona, el filtro se aplica a todas las configuraciones de registro de clúster que se pasan al filtro. Puede ver las configuraciones de registro que coinciden con el filtro utilizando con el mandato el distintivo <code>--show-matching-configs</code>.</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-    <dd>Opcional: Espacio de nombres de Kubernetes para el que desea filtrar registros. </dd>
+    <dd>Opcional: Espacio de nombres de Kubernetes para el que desea filtrar registros.</dd>
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>Opcional: Nombre del contenedor desde el que desea filtrar registros. Este distintivo sólo se aplica cuando se utiliza el tipo de registro de <code>container</code>. </dd>
+    <dd>Opcional: Nombre del contenedor desde el que desea filtrar registros. Este distintivo sólo se aplica cuando se utiliza el tipo de registro de <code>container</code>.</dd>
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Opcional: Filtra los registros en el nivel especificado y en los inferiores. Valores aceptables en su orden canónico son <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> y <code>trace</code>. Por ejemplo, si filtra registros al nivel <code>info</code>, también se filtran los niveles <code>debug</code> y <code>trace</code>. **Nota**: Puede utilizar este distintivo sólo cuando los mensajes de registro están en formato JSON y contienen un campo de nivel. Salida de ejemplo:
 <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Opcional: Filtra los registros que contienen un mensaje concreto en el registro. La coincidencia del mensaje se realiza de forma literal y no como una expresión. Ejemplo: Los mensajes "Hello", "!" y "Hello, World!", se aplicarían al registro "Hello, World!".</dd>
+    <dd>Opcional: Filtra los registros que contienen un mensaje concreto en el registro. La coincidencia del mensaje se realiza de forma literal y no como una expresión. Ejemplo: Los mensajes "Hello", "!"y "Hello, World!", se aplicarían al registro "Hello, World!".</dd>
   <dt><code>--json</code></dt>
     <dd>Opcional: Imprime la salida del mandato en formato JSON.</dd>
 </dl>
 
 **Ejemplos**:
 
-Este ejemplo filtra todos los registros reenviados desde contenedores con el nombre `test-container` en el espacio de nombres predeterminado que se encuentren en el nivel debug o inferior con un mensaje que contenga "GET request". 
+Este ejemplo filtra todos los registros reenviados desde contenedores con el nombre `test-container` en el espacio de nombres predeterminado que se encuentren en el nivel debug o inferior con un mensaje que contenga "GET request".
 
   ```
   bx cs logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
@@ -1757,20 +1839,20 @@ Actualiza un filtro de registro. Utilice este mandato para actualizar un filtro 
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Obligatorio: Nombre o ID de clúster que desea para actualizar un filtro de registro. </dd>
+    <dd>Obligatorio: Nombre o ID de clúster que desea para actualizar un filtro de registro.</dd>
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>Tipo de registro al que aplicar el filtro. Actualmente se da soporte a <code>all</code>, <code>container</code> y <code>host</code>. </dd>
+    <dd>Tipo de registro al que aplicar el filtro. Actualmente se da soporte a <code>all</code>, <code>container</code> y <code>host</code>.</dd>
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>Opcional: Una lista separada por comas de los ID de configuración de registro. Si no se proporciona, el filtro se aplica a todas las configuraciones de registro de clúster que se pasan al filtro. Puede ver las configuraciones de registro que coinciden con el filtro utilizando con el mandato el distintivo <code>--show-matching-configs</code>. </dd>
+    <dd>Opcional: Una lista separada por comas de los ID de configuración de registro. Si no se proporciona, el filtro se aplica a todas las configuraciones de registro de clúster que se pasan al filtro. Puede ver las configuraciones de registro que coinciden con el filtro utilizando con el mandato el distintivo <code>--show-matching-configs</code>.</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-    <dd>Opcional: Espacio de nombres de Kubernetes para el que desea filtrar registros. </dd>
+    <dd>Opcional: Espacio de nombres de Kubernetes para el que desea filtrar registros.</dd>
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>Opcional: Nombre del contenedor desde el que desea filtrar registros. Este distintivo sólo se aplica cuando se utiliza el tipo de registro de <code>container</code>. </dd>
+    <dd>Opcional: Nombre del contenedor desde el que desea filtrar registros. Este distintivo sólo se aplica cuando se utiliza el tipo de registro de <code>container</code>.</dd>
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Opcional: Filtra los registros en el nivel especificado y en los inferiores. Valores aceptables en su orden canónico son <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> y <code>trace</code>. Por ejemplo, si filtra registros al nivel <code>info</code>, también se filtran los niveles <code>debug</code> y <code>trace</code>. **Nota**: Puede utilizar este distintivo sólo cuando los mensajes de registro están en formato JSON y contienen un campo de nivel. Salida de ejemplo:
 <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Opcional: Filtra los registros que contienen un mensaje concreto en el registro. La coincidencia del mensaje se realiza de forma literal y no como una expresión. Ejemplo: Los mensajes "Hello", "!" y "Hello, World!", se aplicarían al registro "Hello, World!".</dd>
+    <dd>Opcional: Filtra los registros que contienen un mensaje concreto en el registro. La coincidencia del mensaje se realiza de forma literal y no como una expresión. Ejemplo: Los mensajes "Hello", "!"y "Hello, World!", se aplicarían al registro "Hello, World!".</dd>
   <dt><code>--json</code></dt>
     <dd>Opcional: Imprime la salida del mandato en formato JSON.</dd>
 </dl>
@@ -1779,17 +1861,17 @@ Actualiza un filtro de registro. Utilice este mandato para actualizar un filtro 
 ### bx cs logging-filter-get CLUSTER [--id FILTER_ID][--show-matching-configs] [--json]
 {: #cs_log_filter_view}
 
-Visualiza una configuración de filtro de registro. Utilice este mandato para visualizar los filtros de registro que haya creado. 
+Visualiza una configuración de filtro de registro. Utilice este mandato para visualizar los filtros de registro que haya creado.
 
 <strong>Opciones del mandato</strong>:
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Obligatorio: Nombre o ID de clúster del que desea visualizar los filtros. </dd>
+    <dd>Obligatorio: Nombre o ID de clúster del que desea visualizar los filtros.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>ID del filtro de registro que desea visualizar. </dd>
+    <dd>ID del filtro de registro que desea visualizar.</dd>
   <dt><code>--show-matching-configs</code></dt>
-    <dd>Opcional: Muestra las configuraciones de registro que coincidan con la configuración que está visualizando. </dd>
+    <dd>Opcional: Muestra las configuraciones de registro que coincidan con la configuración que está visualizando.</dd>
   <dt><code>--json</code></dt>
     <dd>Opcional: Imprime la salida del mandato en formato JSON.</dd>
 </dl>
@@ -1804,11 +1886,11 @@ Suprime un filtro de registro. Utilice este mandato para eliminar un filtro de r
 
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
-    <dd>Nombre o ID del clúster del que desea suprimir un filtro. </dd>
+    <dd>Nombre o ID del clúster del que desea suprimir un filtro.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>ID del filtro de registro que desea suprimir. </dd>
+    <dd>El ID del filtro de registro para suprimir.</dd>
   <dt><code>--all</code></dt>
-    <dd>Opcional: Suprimir todos filtros de reenvío de registro. </dd>
+    <dd>Opcional: Suprimir todos filtros de reenvío de registro.</dd>
   <dt><code>--json</code></dt>
     <dd>Opcional: Imprime la salida del mandato en formato JSON.</dd>
 </dl>
@@ -1940,7 +2022,7 @@ Añadir nodos trabajadores al clúster estándar.
 <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>La vía de acceso al archivo YAML para añadir nodos trabajadores a su clúster. En lugar de definir los nodos trabajadores adicionales mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML. Este valor es opcional.
+<dd>La vía de acceso al archivo YAML para añadir nodos trabajadores al clúster. En lugar de definir los nodos trabajadores adicionales mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML. Este valor es opcional.
 
 <p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define un tipo de máquina en el archivo YAML y utiliza la opción --machine-type en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
 
@@ -1970,7 +2052,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Sustituya <code><em>&lt;machine_type&gt;</em></code> por el tipo de máquina en el que desea desplegar los nodos trabajadores. Puede desplegar los nodos trabajadores como máquinas virtuales en hardware dedicado o compartido, o como máquinas físicas en servidores nativos. Los tipos de máquinas físicas y virtuales varían según la ubicación en la que se despliega el clúster. Para obtener más información, consulte el [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. </td>
+<td>Sustituya <code><em>&lt;machine_type&gt;</em></code> por el tipo de máquina en el que desea desplegar los nodos trabajadores. Puede desplegar los nodos trabajadores como máquinas virtuales en hardware dedicado o compartido, o como máquinas físicas en servidores nativos. Los tipos de máquinas físicas y virtuales varían según la ubicación en la que se despliega el clúster. Para obtener más información, consulte el [mandato](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -2005,12 +2087,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>La VLAN privada que se ha especificado al crear el clúster. Este valor es obligatorio.
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Nota:</strong> Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>La VLAN pública que se ha especificado al crear el clúster. Este valor es opcional. Si desea que los nodos trabajadores existan solo en una VLAN privada, no proporcione ningún ID de VLAN pública. <strong>Nota</strong>: {[private_VLAN_vyatta]}
 
-<p><strong>Nota:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Nota:</strong> Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
@@ -2146,7 +2228,7 @@ Antes de rearrancar el nodo trabajador, asegúrese de que los pods se vuelven a 
 
 Recargue todas las configuraciones necesarias para un nodo trabajador. Una recarga puede ser útil si el nodo trabajador tiene problemas, como un rendimiento lento, o si queda bloqueado en un estado incorrecto.
 
-Al recargar un nodo trabajador no se aplican las últimas actualizaciones, parches de seguridad ni la [versión de Kubernetes](cs_versions.html#version_types). Cuando haya disponibles actualizaciones de parches o de versión, se le solicitará en la CLI y la consola al utilizar características relacionadas con los nodos trabajadores. Para mantener actualizados los nodos trabajadores, utilice de forma periódica el [mandato](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.
+La recarga de un nodo trabajador aplica actualizaciones de versiones de parche a dicho nodo trabajador, pero no actualizaciones mayores o menores. Para ver los cambios entre versiones de parches, revise la documentación de [Registro de cambios de versiones](cs_versions_changelog.html#changelog).
 {: tip}
 
 Antes de recargar el nodo trabajador, asegúrese de que los pods se vuelven a programar en otros nodos trabajadores para evitar el tiempo de inactividad de la app o la corrupción de los datos en el nodo trabajador.
@@ -2276,7 +2358,6 @@ Antes de eliminar el nodo trabajador, asegúrese de que los pods se vuelven a pr
 
 Actualiza los nodos trabajadores para aplicar las últimas actualizaciones y parches de seguridad para el sistema operativo, y para actualizar la versión de Kubernetes para que coincida con la versión del nodo maestro. Puede actualizar la versión de Kubernetes del nodo maestro con el [command](cs_cli_reference.html#cs_cluster_update) `bx cs cluster-update`.
 
-
 **Importante**: La ejecución de `bx cs worker-update` puede causar un tiempo de inactividad para sus apps y servicios. Durante la actualización, todos los pods se vuelven a planificar en otros nodos trabajadores y los datos se suprimen si no se guardan fuera del pod. Para evitar el tiempo de inactividad, [asegúrese de tener suficientes nodos trabajadores para manejar la carga de trabajo mientras se estén actualizando los nodos trabajadores seleccionados](cs_cluster_update.html#worker_node).
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues antes de la actualización. Revise esta [nota del release](cs_versions.html) para ver detalles.
@@ -2316,7 +2397,7 @@ Ver una lista de los nodos trabajadores y el estado de cada uno de ellos en un c
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
+   <dd>El nombre o ID del clúster para los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>Visualiza los nodos trabajadores que se han suprimido del clúster, incluido el motivo de la supresión. Este valor es opcional.</dd>
    </dl>
@@ -2327,4 +2408,3 @@ Ver una lista de los nodos trabajadores y el estado de cada uno de ellos en un c
   bx cs workers my_cluster
   ```
   {: pre}
-

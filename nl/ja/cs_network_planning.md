@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # NodePort、LoadBalancer、または Ingress サービスを使用したネットワーキングの計画
 {: #planning}
 
@@ -26,10 +27,11 @@ lastupdated: "2018-4-20"
 
 |クラスター・タイプ|クラスターのパブリック VLAN の管理者|
 |------------|------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 内のフリー・クラスター|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 内の標準クラスター|IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するお客様|
+|フリー・クラスター|{{site.data.keyword.IBM_notm}}|
+|標準クラスター|IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するお客様|
+{: caption="クラスター・タイプ別のパブリック VLAN のマネージャー" caption-side="top"}
 
-ワーカー・ノードとポッドの間のクラスター内ネットワーク通信について詳しくは、[クラスター内ネットワーキング](cs_secure.html#in_cluster_network)を参照してください。 Kubernetes クラスター内で実行するアプリをセキュアにオンプレミス・ネットワークに接続する、またはクラスター外のアプリに接続する方法について詳しくは、[VPN 接続のセットアップ](cs_vpn.html)を参照してください。
+ワーカー・ノードとポッドの間のクラスター内ネットワーク通信について詳しくは、[クラスター内ネットワーキング](cs_secure.html#in_cluster_network)を参照してください。Kubernetes クラスター内で実行されるアプリをセキュアにオンプレミス・ネットワークに接続する、またはクラスター外のアプリに接続する方法について詳しくは、[VPN 接続のセットアップ](cs_vpn.html)を参照してください。
 
 ## アプリへのパブリック・アクセスを許可する方法
 {: #public_access}
@@ -41,7 +43,7 @@ lastupdated: "2018-4-20"
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー](images/networking.png)
 
-この図は、{{site.data.keyword.containershort_notm}} で Kubernetes がユーザー・ネットワーク・トラフィックを伝送する方法を示しています。 フリー・クラスターを作成したか標準クラスターを作成したかに応じて、インターネットからアプリにアクセスできるようにする方法は複数あります。
+この図は、{{site.data.keyword.containershort_notm}} で Kubernetes がユーザー・ネットワーク・トラフィックを伝送する方法を示しています。 アプリをインターネットからアクセス可能にする方法は、フリー・クラスターと標準クラスターのどちらを作成したかによって異なります。
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">NodePort サービス</a> (フリー・クラスターと標準クラスター)</dt>
@@ -64,13 +66,14 @@ lastupdated: "2018-4-20"
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a> (標準クラスターのみ)</dt>
 <dd>
  <ul>
-  <li>HTTP または HTTPS、TCP、UDP のいずれかで使用できる外部ロード・バランサーを 1 つ作成することによって、クラスターに複数のアプリを公開できます。このロード・バランサーを使用して、保護された固有のパブリック・エントリー・ポイントから着信要求を各アプリにルーティングします。</li>
+  <li>1 つの外部 HTTP または HTTPS、TCP、または UDP ロード・バランサーを作成して、クラスター内の複数のアプリを公開します。ロード・バランサーは、保護された固有のパブリック・エントリー・ポイントを使用して、着信要求をアプリにルーティングします。</li>
   <li>1 つのパブリック・ルートを使用してクラスター内の複数のアプリをサービスとして公開できます。</li>
-  <li>Ingress は、以下の 2 つのコンポーネントで構成されています。<ul>
+  <li>Ingress は、以下の 2 つのコンポーネントで構成されています。
+   <ul>
     <li>Ingress リソースでは、アプリに対する着信要求のルーティングとロード・バランシングの方法に関するルールを定義します。</li>
-    <li>アプリケーション・ロード・バランサー (ALB) は、着信する HTTP または HTTPS、TCP、または UDP のサービス要求を listen し、Ingress リソースに定義されたルールに基づいて、アプリのポッドに要求を転送します。</li>
+    <li>アプリケーション・ロード・バランサー (ALB) は、着信 HTTP または HTTPS、TCP、または UDP サービス要求を listen します。これは、Ingress リソースで定義したルールに基づいて、アプリのポッド間で要求を転送します。</li>
    </ul>
-  <li>カスタム・ルーティング・ルールを使用して独自の ALB を実装する場合、およびアプリに SSL 終端が必要な場合は、Ingress を使用してください。</li>
+  <li>カスタム・ルーティング・ルールを使用して独自の ALB を実装する場合や、アプリに SSL 終端が必要な場合に Ingress を使用します。</li>
  </ul>
 </dd></dl>
 
@@ -82,4 +85,3 @@ lastupdated: "2018-4-20"
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer サービス" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Ingress サービス" shape="circle" coords="445, 420, 45"/>
 </map>
-

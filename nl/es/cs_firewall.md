@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Apertura de los puertos y direcciones IP necesarios en el cortafuegos
 {: #firewall}
@@ -75,10 +78,10 @@ Para permitir el acceso a un clúster específico:
 1. Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Escriba
 sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Si tiene una cuenta federada, incluya la opción `--sso`.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Seleccione la región en la que está el clúster.
 
@@ -173,7 +176,7 @@ Antes de empezar, permita el acceso para ejecutar mandatos [`bx`](#firewall_bx) 
 Permita que el clúster acceda a servicios y recursos de infraestructura desde detrás de un cortafuegos, como para las regiones de {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IP privadas de infraestructura de IBM Cloud (SoftLayer) y de salida para reclamaciones de volumen permanente.
 {:shortdesc}
 
-  1.  Anote la dirección IP pública de todos los nodos trabajadores del clúster.
+  1.  Anote la dirección IP pública de todos sus nodos trabajadores del clúster.
 
       ```
       bx cs workers <cluster_name_or_ID>
@@ -184,6 +187,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       - **Importante**: También debe permitir el tráfico de salida al puerto 443 y a todas las ubicaciones entre una región y otra para equilibrar la carga durante el proceso de arranque. Por ejemplo, si el clúster está en EE.UU. sur, debe permitir el tráfico procedente desde el puerto 443 a las direcciones IP para todas las ubicaciones (dal10, dal12 y dal13).
       <p>
   <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
+  <caption>Direcciones IP para abrir para el tráfico saliente</caption>
       <thead>
       <th>Región</th>
       <th>Ubicación</th>
@@ -229,6 +233,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       - Sustituya <em>&lt;registry_publicIP&gt;</em> por las direcciones IP de registro a las que desea permitir el tráfico. El registro global almacena imágenes públicas proporcionadas por IBM y los registros regionales almacenan sus propias imágenes privadas o públicas.
         <p>
 <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
+  <caption>Direcciones IP para abrir para el tráfico de registro</caption>
       <thead>
         <th>Región de {{site.data.keyword.containershort_notm}}</th>
         <th>Dirección de registro</th>
@@ -236,7 +241,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       </thead>
       <tbody>
         <tr>
-          <td>Registro global en regiones de contenedor</td>
+          <td>Registro global a través de regiones de {{site.data.keyword.containershort_notm}}</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -268,8 +273,9 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Sustituya <em>&lt;monitoring_public_IP&gt;</em> por todas las direcciones de las regiones de supervisión a las que desea permitir el tráfico:
         <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
+  <caption>Direcciones IP para abrir para el tráfico de supervisión</caption>
         <thead>
-        <th>Región del contenedor</th>
+        <th>Región de {{site.data.keyword.containershort_notm}}</th>
         <th>Dirección de supervisión</th>
         <th>Direcciones IP de supervisión</th>
         </thead>
@@ -296,8 +302,9 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Sustituya <em>&lt;logging_public_IP&gt;</em> por todas las direcciones de las regiones de registro a las que desea permitir el tráfico:
         <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
+<caption>Direcciones IP para abrir para el tráfico de creación de registros</caption>
         <thead>
-        <th>Región del contenedor</th>
+        <th>Región de {{site.data.keyword.containershort_notm}}</th>
         <th>Dirección de registro</th>
         <th>Direcciones IP de registro</th>
         </thead>
@@ -353,4 +360,3 @@ Puede permitir el acceso a servicios NodePort, de equilibrador de carga e Ingres
   <dt>Ingress</dt>
   <dd>Abra el puerto 80 para HTTP o el puerto 443 para HTTPS a la dirección IP del equilibrador de carga de aplicación de Ingress.</dd>
 </dl>
-

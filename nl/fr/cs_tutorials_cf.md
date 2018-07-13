@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Tutoriel : Migration d'une application de Cloud Foundry vers un cluster
@@ -81,13 +82,13 @@ Votre code d'application est désormais prêt à être conteneurisé.
 <br />
 
 
+
 ## Leçon 2 : Création d'une image Docker avec votre code d'application
 
 Créez un fichier Dockerfile incluant votre code d'application et les configurations nécessaires pour votre conteneur. Générez ensuite une image Docker depuis ce fichier Dockerfile et transférez-la à votre registre d'images privé.
 {: shortdesc}
 
 1. Dans le répertoire `cf-py` que vous avez créé dans la leçon précédente, créez un fichier `Dockerfile`, lequel constitue la base pour la création d'une image de conteneur. Vous pouvez créer le fichier Dockerfile à l'aide de l'éditeur CLI de votre choix ou d'un éditeur de texte sur votre ordinateur. L'exemple suivant illustre comment créer un fichier Dockerfile avec l'éditeur nano.
-
 
   ```
   Dockerfile nano
@@ -131,6 +132,7 @@ Créez un fichier Dockerfile incluant votre code d'application et les configurat
   {: pre}
 
   <table>
+  <caption>Description des composantes de cette commande</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Cette icône indique qu'il y a d'autres informations pour en savoir plus sur les composantes de cette commande."/> Description des composantes de cette commande</th>
   </thead>
@@ -213,6 +215,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
   {: codeblock}
 
   <table>
+  <caption>Description des composants du fichier YAML</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
   </thead>
@@ -230,7 +233,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 2. Appliquez le fichier de configuration pour créer le déploiement et le service dans votre cluster.
 
   ```
-  kubectl apply -f filepath/cf-py.yaml
+  kubectl apply -f <filepath>/cf-py.yaml
   ```
   {: pre}
 
@@ -255,7 +258,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
@@ -263,9 +266,11 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     <img src="images/python_flask.png" alt="Capture d'écran de l'application de conteneur boilerplate Python Flask déployée." />
 
-5. [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard). Les étapes peuvent varier en fonction de la version de Kubernetes que vous utilisez.
+5.  [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard).
 
-6. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées. Lorsque vous avez fini d'explorer le tableau de bord Kubernetes, utilisez les touches `ctrl + c` pour quitter la commande `proxy`.
+    Si vous sélectionnez votre cluster dans l'interface graphique d'[{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    {: tip}
+
+6. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées.
 
 Félicitations ! Votre application est déployée dans un conteneur.
-

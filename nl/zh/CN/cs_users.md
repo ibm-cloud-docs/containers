@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 
 ---
@@ -17,11 +17,13 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # 分配集群访问权
 {: #users}
 
 作为集群管理员，您可以为 Kubernetes 集群定义访问策略，以便为不同用户创建不同级别的访问权。例如，您可以授权某些用户使用集群资源，而其他用户只能部署容器。
 {: shortdesc}
+
 
 ## 规划访问请求
 {: #planning_access}
@@ -29,7 +31,7 @@ lastupdated: "2018-4-20"
 作为集群管理员，可能很难跟踪访问请求。因此，建立访问请求的通信模式对于维护集群的安全性至关重要。
 {: shortdesc}
 
-为了确保正确的人员具有正确的访问权，请在策略上非常明确地规定谁有权访问集群来请求访问权或获取有关常见任务的帮助。
+为了确保正确的人员具有正确的访问权，请在策略上明确规定谁可以请求访问权或获取有关常见任务的帮助。
 
 您可能已经有一个适用于您团队的方法，那很好！如果您还不知道从何着手，请考虑尝试下列其中一种方法。
 
@@ -48,7 +50,6 @@ lastupdated: "2018-4-20"
 访问策略的作用域基于用户定义的一个或多个角色，这些角色确定允许用户执行的操作。可以设置特定于集群、基础架构、服务实例或 Cloud Foundry 角色的策略。
 {: shortdesc}
 
-{: #managing}
 必须为使用 {{site.data.keyword.containershort_notm}} 的每个用户定义访问策略。某些策略是预定义策略，但其他策略可以进行定制。查看下图及定义，以了解哪些角色适用于常见用户任务，并确定您可能希望在哪里定制策略。
 
 ![{{site.data.keyword.containershort_notm}} 访问角色](/images/user-policies.png)
@@ -57,12 +58,12 @@ lastupdated: "2018-4-20"
 
 <dl>
   <dt>身份和访问管理 (IAM) 策略</dt>
-    <dd><p><em>平台</em>：可以确定个人可在 {{site.data.keyword.containershort_notm}} 集群上执行的操作。可以按区域设置这些策略。操作示例包括创建或除去集群，或者添加额外的工作程序节点。这些策略必须与基础架构策略一起设置。</p>
-    <p><em>基础架构</em>：可以确定基础架构的访问级别，例如集群节点机器、联网或存储资源。无论用户是通过 {{site.data.keyword.containershort_notm}} GUI 还是通过 CLI 发出请求，都将强制执行同一策略；即便在 IBM Cloud Infrastructure (SoftLayer) 中完成这些操作也是如此。必须将此类型的策略与 {{site.data.keyword.containershort_notm}} 平台访问策略一起设置。要了解可用角色的信息，请查看[基础架构许可权](/docs/iam/infrastructureaccess.html#infrapermission)。</p></dd>
+    <dd><p><strong>平台</strong>：可以确定个人可在 {{site.data.keyword.containershort_notm}} 集群上执行的操作。可以按区域设置这些策略。操作示例包括创建或除去集群，或者添加额外的工作程序节点。这些策略必须与基础架构策略一起设置。</p>
+    <p><strong>基础架构</strong>：可以确定基础架构的访问级别，例如集群节点机器、联网或存储资源。无论用户是通过 {{site.data.keyword.containershort_notm}} GUI 还是通过 CLI 发出请求，都将强制执行同一策略；即便在 IBM Cloud Infrastructure (SoftLayer) 中完成这些操作也是如此。必须将此类型的策略与 {{site.data.keyword.containershort_notm}} 平台访问策略一起设置。要了解可用角色的信息，请查看[基础架构许可权](/docs/iam/infrastructureaccess.html#infrapermission)。</p> </br></br><strong>注：</strong>确保您的 {{site.data.keyword.Bluemix_notm}} 帐户已[设置为有权访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合](cs_troubleshoot_clusters.html#cs_credentials)，以便授权用户可以根据分配的许可权在 IBM Cloud Infrastructure (SoftLayer) 帐户中执行操作。</dd>
   <dt>Kubernetes 基于资源的访问控制 (RBAC) 角色</dt>
-    <dd>分配了平台访问策略的每个用户都会自动分配有 Kubernetes 角色。在 Kubernetes 中，[基于角色的访问控制 (RBAC) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) 将确定用户可以对集群中的资源执行的操作。对于 <code>default</code> 名称空间，会自动为其配置 RBAC 角色，但作为集群管理员，您可以为其他名称空间分配角色。</dd>
+    <dd>分配了平台访问策略的每个用户都会自动分配有 Kubernetes 角色。在 Kubernetes 中，[基于角色的访问控制 (RBAC) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) 将确定用户可以对集群中的资源执行的操作。<strong>注</strong>：对于 <code>default</code> 名称空间，会自动为其配置 RBAC 角色，但作为集群管理员，您可以为其他名称空间分配角色。</dd>
   <dt>Cloud Foundry</dt>
-    <dd>目前，并非所有服务都可以通过 Cloud IAM 进行管理。如果使用的是无法通过 Cloud IAM 管理的其中一个服务，那么可以继续使用 [Cloud Foundry 用户角色](/docs/iam/cfaccess.html#cfaccess)来控制对服务的访问。</dd>
+    <dd>并非所有服务都可以通过 Cloud IAM 进行管理。如果使用的是无法通过 Cloud IAM 管理的其中一个服务，那么可以继续使用 [Cloud Foundry 用户角色](/docs/iam/cfaccess.html#cfaccess)来控制对服务的访问。</dd>
 </dl>
 
 
@@ -74,7 +75,11 @@ lastupdated: "2018-4-20"
 
 {{site.data.keyword.containershort_notm}} 配置为使用 {{site.data.keyword.Bluemix_notm}} 平台角色。角色许可权基于彼此进行构建，这意味着`编辑者`角色具有与`查看者`角色相同的许可权，外加授予编辑者的许可权。下表说明了每个角色可以执行的操作的类型。
 
+您分配平台角色时，会将相应的 RBAC 角色自动分配给缺省名称空间。如果您更改用户的平台角色，那么还会更新 RBAC 角色。
+{: tip}
+
 <table>
+<caption>平台角色和操作</caption>
   <tr>
     <th>平台角色</th>
     <th>操作示例</th>
@@ -87,7 +92,7 @@ lastupdated: "2018-4-20"
   </tr>
   <tr>
     <td>编辑者</td>
-    <td>可以将 IBM Cloud 服务绑定到集群或从集群取消绑定，也可以创建 Webhook。</td>
+    <td>可以将 IBM Cloud 服务绑定到集群或从集群取消绑定，也可以创建 Webhook。<strong>注</strong>：要绑定服务，您还必须分配有 Cloud Foundry 开发者角色。</td>
     <td>编辑</td>
   </tr>
   <tr>
@@ -97,34 +102,39 @@ lastupdated: "2018-4-20"
   </tr>
   <tr>
     <td>管理员</td>
-    <td>可以创建和除去集群。可以在服务和基础架构的帐户级别编辑其他用户的访问策略。</td>
+    <td>可以创建和除去集群。可以在服务和基础架构的帐户级别编辑其他用户的访问策略。<strong>注</strong>：可以将管理访问权分配给特定集群，也可以分配给您帐户的所有服务实例。要删除集群，您必须具有对要删除的集群的管理访问权。要创建集群，您必须具有对该服务所有实例的管理角色。</td>
     <td>集群管理</td>
   </tr>
 </table>
 
 有关在 UI 中分配用户角色的更多信息，请参阅[管理 IAM 访问权](/docs/iam/mngiam.html#iammanidaccser)。
 
+
 ### 基础架构角色
 {: #infrastructure_roles}
 
 基础架构角色支持用户对基础架构级别的资源执行任务。下表说明了每个角色可以执行的操作的类型。基础架构角色可定制；请务必仅向用户授予执行其作业所需的访问权。
 
+除了授予特定的基础架构角色外，您还必须将设备访问权授予使用基础架构的用户。
+{: tip}
+
 <table>
+<caption>基础架构角色和操作</caption>
   <tr>
     <th>基础架构角色</th>
     <th>操作示例</th>
   </tr>
   <tr>
     <td><i>仅查看</i></td>
-    <td>可以查看基础架构详细信息。可以查看帐户摘要，包括发票和付款情况。</td>
+    <td>可以查看基础架构详细信息和帐户摘要，包括发票和付款情况</td>
   </tr>
   <tr>
     <td><i>基本用户</i></td>
-    <td>可以编辑服务配置（包括 IP 地址），添加或编辑 DNS 记录，以及添加有权访问基础架构的新用户。</td>
+    <td>可以编辑服务配置（包括 IP 地址），添加或编辑 DNS 记录，以及添加有权访问基础架构的新用户</td>
   </tr>
   <tr>
     <td><i>超级用户</i></td>
-    <td>可以执行与基础架构相关的所有操作。</td>
+    <td>可以执行与基础架构相关的所有操作</td>
   </tr>
 </table>
 
@@ -135,14 +145,18 @@ lastupdated: "2018-4-20"
 
 基于资源的访问控制 (RBAC) 是一种保护集群内部资源并决定谁可以执行哪些 Kubernetes 操作的方法。在下表中，可以查看 RBAC 角色的类型以及具有该角色的用户可以执行的操作的类型。许可权基于彼此进行构建，这意味着`管理`同时具有`查看`和`编辑`角色随附的所有策略。请务必仅授予用户所需的访问权。
 
+对于缺省名称空间，RBAC 角色会与平台角色一起自动设置。[您可以更新角色，也可以为其他名称空间分配角色](#rbac)。
+{: tip}
+
 <table>
+<caption>RBAC 角色和操作</caption>
   <tr>
     <th>RBAC 角色</th>
     <th>操作示例</th>
   </tr>
   <tr>
     <td>查看</td>
-    <td>可以查看缺省名称空间内部的资源。</td>
+    <td>可以查看缺省名称空间内部的资源。查看者无法查看 Kubernetes 的私钥。</td>
   </tr>
   <tr>
     <td>编辑</td>
@@ -186,14 +200,17 @@ lastupdated: "2018-4-20"
 ## 了解 IAM API 密钥和 `bx cs credentials-set` 命令
 {: #api_key}
 
-要成功供应和使用帐户中的集群，必须确保帐户已正确设置，以用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。根据帐户设置，可以使用通过 `bx cs credentials-set` 命令手动设置的 IAM API 密钥或基础架构凭证。
+要成功供应和使用帐户中的集群，必须确保帐户已正确设置为访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。根据帐户设置，可以使用通过 `bx cs credentials-set` 命令手动设置的 IAM API 密钥或基础架构凭证。
 
 <dl>
   <dt>IAM API 密钥</dt>
-  <dd>执行需要 {{site.data.keyword.containershort_notm}} 管理员访问策略的第一个操作时，会自动针对区域设置 Identity and Access Management (IAM) API 密钥。例如，某个管理用户在 <code>us-south</code> 区域中创建了第一个集群。通过执行此操作，此用户的 IAM API 密钥将存储在此区域的帐户中。API 密钥用于订购 IBM Cloud Infrastructure (SoftLayer)，例如新的工作程序节点或 VLAN。</br></br>
-其他用户在此区域中执行需要与 IBM Cloud Infrastructure (SoftLayer) 产品服务组合进行交互的操作（例如，创建新集群或重新装入工作程序节点）时，将使用存储的 API 密钥来确定是否存在执行该操作的足够许可权。要确保可以成功执行集群中与基础架构相关的操作，请为 {{site.data.keyword.containershort_notm}} 管理用户分配<strong>超级用户</strong>基础架构访问策略。</br></br>您可以通过运行 [<code>bx cs api-key-info</code>](cs_cli_reference.html#cs_api_key_info) 来查找当前 API 密钥所有者。如果发现需要更新为区域存储的 API 密钥，那么可以通过运行 [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来执行此操作。此命令需要 {{site.data.keyword.containershort_notm}} 管理员访问策略，并在帐户中存储执行此命令的用户的 API 密钥。</br></br> <strong>注：</strong>如果使用 <code>bx cs credentials-set</code> 命令手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么可能不会使用为该区域存储的 API 密钥。</dd>
-<dt>通过 <code>bx cs credentials-set</code> 设置的 IBM Cloud Infrastructure (SoftLayer) 凭证</dt>
-<dd>如果您有 {{site.data.keyword.Bluemix_notm}} 现买现付帐户，那么缺省情况下您可以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。但是，您可能希望使用已经拥有的其他 IBM Cloud Infrastructure (SoftLayer) 帐户来订购基础架构。您可以使用 [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) 命令将此基础架构帐户链接到 {{site.data.keyword.Bluemix_notm}} 帐户。</br></br>如果手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么这些凭证会用于订购基础架构，即使已存在帐户的 IAM API 密钥也不例外。如果存储了其凭证的用户没有必需的许可权来订购基础架构，那么与基础架构相关的操作（例如，创建集群或重新装入工作程序节点）可能会失败。</br></br> 要除去手动设置的 IBM Cloud Infrastructure (SoftLayer) 凭证，可以使用 [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 命令。除去凭证后，将使用 IAM API 密钥来订购基础架构。</dd>
+    <dd><p>执行需要 {{site.data.keyword.containershort_notm}} 管理员访问策略的第一个操作时，会自动针对区域设置 Identity and Access Management (IAM) API 密钥。例如，某个管理用户在 <code>us-south</code> 区域中创建了第一个集群。通过执行此操作，此用户的 IAM API 密钥将存储在此区域的帐户中。API 密钥用于订购 IBM Cloud Infrastructure (SoftLayer)，例如新的工作程序节点或 VLAN。</p> <p>其他用户在此区域中执行需要与 IBM Cloud Infrastructure (SoftLayer) 产品服务组合进行交互的操作（例如，创建新集群或重新装入工作程序节点）时，将使用存储的 API 密钥来确定是否存在执行该操作的足够许可权。要确保可以成功执行集群中与基础架构相关的操作，请为 {{site.data.keyword.containershort_notm}} 管理用户分配<strong>超级用户</strong>基础架构访问策略。</p>
+    <p>您可以通过运行 [<code>bx cs api-key-info</code>](cs_cli_reference.html#cs_api_key_info) 来查找当前 API 密钥所有者。如果发现需要更新为区域存储的 API 密钥，那么可以通过运行 [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来执行此操作。此命令需要 {{site.data.keyword.containershort_notm}} 管理员访问策略，并在帐户中存储执行此命令的用户的 API 密钥。</p>
+    <p><strong>注：</strong>如果使用 <code>bx cs credentials-set</code> 命令手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么可能不会使用为该区域存储的 API 密钥。</p></dd>
+  <dt>通过 <code>bx cs credentials-set</code> 设置的 IBM Cloud Infrastructure (SoftLayer) 凭证</dt>
+    <dd><p>如果您有 {{site.data.keyword.Bluemix_notm}} 现买现付帐户，那么缺省情况下您可以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。但是，您可能希望使用已经拥有的其他 IBM Cloud Infrastructure (SoftLayer) 帐户来订购基础架构。您可以使用 [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) 命令将此基础架构帐户链接到 {{site.data.keyword.Bluemix_notm}} 帐户。</p>
+    <p>如果手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么这些凭证会用于订购基础架构，即使已存在帐户的 IAM API 密钥也不例外。如果存储了其凭证的用户没有必需的许可权来订购基础架构，那么与基础架构相关的操作（例如，创建集群或重新装入工作程序节点）可能会失败。</p>
+    <p>要除去手动设置的 IBM Cloud Infrastructure (SoftLayer) 凭证，可以使用 [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 命令。除去凭证后，将使用 IAM API 密钥来订购基础架构。</p></dd>
 </dl>
 
 <br />
@@ -243,12 +260,12 @@ lastupdated: "2018-4-20"
        </tr>
        <tr>
          <td><strong>专用联网</strong>：<ul><li>管理用于集群内联网的专用 VLAN。</li><li>设置与专用网络的 VPN 连接。</li></ul></td>
-         <td><strong>网络</strong>：<ul><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>管理 IPSEC 网络隧道</li><li>管理网络网关</li><li>VPN 管理</li></ul></td>
+         <td><strong>网络</strong>：<ul><li>管理网络子网路径</li><li>管理 IPSEC 网络隧道</li><li>管理网络网关</li><li>VPN 管理</li></ul></td>
        </tr>
        <tr>
          <td><strong>公用网络</strong>：<ul><li>设置公共负载均衡器或 Ingress 联网以公开应用程序。</li></ul></td>
          <td><strong>设备</strong>：<ul><li>管理负载均衡器</li><li>编辑主机名/域</li><li>管理端口控制</li></ul>
-         <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>添加 IP 地址</li></ul>
+         <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li><li>管理网络子网路径</li><li>添加 IP 地址</li></ul>
          <strong>服务</strong>：<ul><li>管理 DNS、逆向 DNS 和 WHOIS</li><li>查看证书 (SSL)</li><li>管理证书 (SSL)</li></ul></td>
        </tr>
      </tbody>
@@ -258,8 +275,8 @@ lastupdated: "2018-4-20"
 
 6.  在**设备访问权**选项卡中，选择要向其授予访问权的设备。
 
-    * 在**设备类型**下拉列表中，可以向**所有虚拟服务器**授予访问权。
-    * 要允许用户访问所创建的新设备，请选中**添加新设备时自动授予访问权**。
+    * 在**设备类型**下拉列表中，可以授予对**所有虚拟服务器**的访问权。
+    * 要允许用户访问所创建的新设备，请选择**添加新设备时自动授予访问权**。
     * 要保存更改，请单击**更新设备访问权**。
 
 <br />
@@ -271,7 +288,7 @@ lastupdated: "2018-4-20"
 {{site.data.keyword.containershort_notm}} 访问策略与特定 Kubernetes 基于角色的访问控制 (RBAC) 角色相对应，如[访问策略和许可权](#access_policies)中所述。要授权不同于相应访问策略的其他 Kubernetes 角色，您可以定制 RBAC 角色，然后将这些角色分配给个人或用户组。
 {: shortdesc}
 
-例如，您可能希望授予开发者团队许可权，以对特定 API 组或集群中某个 Kubernetes 名称空间内的资源（而不是整个集群）进行操作。使用对 {{site.data.keyword.containershort_notm}} 唯一的用户名创建角色，然后将该角色绑定到用户。有关更多详细信息，请参阅 Kubernetes 文档中的[使用 RBAC 授权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。
+例如，您可能希望授予开发者团队许可权，以对特定 API 组或集群中某个 Kubernetes 名称空间内的资源（而不是整个集群）进行操作。使用对 {{site.data.keyword.containershort_notm}} 唯一的用户名创建角色，然后将该角色绑定到用户。有关更多信息，请参阅 Kubernetes 文档中的[使用 RBAC 授权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。
 
 开始之前，请[设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)
 
@@ -296,52 +313,53 @@ lastupdated: "2018-4-20"
         {: codeblock}
 
         <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>kind</code></td>
-        <td>使用 `Role` 来授予对单个名称空间内资源的访问权，或使用 `ClusterRole` 授予对集群范围内资源的访问权。</td>
-        </tr>
-        <tr>
-        <td><code>apiVersion</code></td>
-        <td><ul><li>对于运行 Kubernetes 1.8 或更高版本的集群，请使用 `rbac.authorization.k8s.io/v1`。</li><li>对于更早的版本，请使用 `apiVersion: rbac.authorization.k8s.io/v1beta1`。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/namespace</code></td>
-        <td><ul><li>对于 `Role` 类型：指定授予其访问权的 Kubernetes 名称空间。</li><li>如果要创建在集群级别应用的 `ClusterRole`，请不要使用 `namespace` 字段。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>对角色命名，并在稍后绑定角色时使用该名称。</td>
-        </tr>
-        <tr>
-        <td><code>rules/apiGroups</code></td>
-        <td><ul><li>指定您希望用户能够与之进行交互的 Kubernetes API 组，例如 `"apps"`、`"batch"` 或 `"extensions"`。</li><li>要访问 REST 路径 `api/v1` 上的核心 API 组，请将该组保留为空：`[""]`。</li><li>有关更多信息，请参阅 Kubernetes 文档中的 [API 组 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/api-overview/#api-groups)。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>rules/resources</code></td>
-        <td><ul><li>指定要授予其访问权的 Kubernetes 资源，例如 `"daemonsets"`、`"deployments"`、`"events"` 或 `"ingresses"`。</li><li>如果指定 `"nodes"`，那么角色类型必须为 `ClusterRole`。</li><li>有关资源列表，请参阅 Kubernetes 备忘单中的[资源类型 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) 表。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>rules/verbs</code></td>
-        <td><ul><li>指定希望用户能够执行的操作的类型，例如 `"get"`、`"list"`、`"describe"`、`"create"` 或 `"delete"`。</li><li>有关完整的动词列表，请参阅 [`kubectl` 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。</li></ul></td>
-        </tr>
-        </tbody>
+        <caption>了解此 YAML 的组成部分</caption>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td>使用 `Role` 来授予对单个名称空间内资源的访问权，或使用 `ClusterRole` 授予对集群范围内资源的访问权。</td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>对于运行 Kubernetes 1.8 或更高版本的集群，请使用 `rbac.authorization.k8s.io/v1`。</li><li>对于更早的版本，请使用 `apiVersion: rbac.authorization.k8s.io/v1beta1`。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/namespace</code></td>
+              <td><ul><li>对于 `Role` 类型：指定授予其访问权的 Kubernetes 名称空间。</li><li>如果要创建在集群级别应用的 `ClusterRole`，请不要使用 `namespace` 字段。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/name</code></td>
+              <td>对角色命名，并在稍后绑定角色时使用该名称。</td>
+            </tr>
+            <tr>
+              <td><code>rules/apiGroups</code></td>
+              <td><ul><li>指定您希望用户能够与之进行交互的 Kubernetes API 组，例如 `"apps"`、`"batch"` 或 `"extensions"`。</li><li>要访问 REST 路径 `api/v1` 上的核心 API 组，请将该组保留为空：`[""]`。</li><li>有关更多信息，请参阅 Kubernetes 文档中的 [API 组 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-9.docs.kubernetes.io/docs/reference/api-overview/#api-groups)。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>rules/resources</code></td>
+              <td><ul><li>指定要授予其访问权的 Kubernetes 资源，例如 `"daemonsets"`、`"deployments"`、`"events"` 或 `"ingresses"`。</li><li>如果指定 `"nodes"`，那么角色类型必须为 `ClusterRole`。</li><li>有关资源列表，请参阅 Kubernetes 备忘单中的[资源类型 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) 表。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>rules/verbs</code></td>
+              <td><ul><li>指定希望用户能够执行的操作的类型，例如 `"get"`、`"list"`、`"describe"`、`"create"` 或 `"delete"`。</li><li>有关完整的动词列表，请参阅 [`kubectl` 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。</li></ul></td>
+            </tr>
+          </tbody>
         </table>
 
     2.  在集群中创建角色。
 
         ```
-        kubectl apply -f <path_to_yaml_file>
+                kubectl apply -f <path_to_yaml_file>
         ```
         {: pre}
 
     3.  验证角色是否已创建。
 
         ```
-        kubectl get roles
+                kubectl get roles
         ```
         {: pre}
 
@@ -370,66 +388,66 @@ lastupdated: "2018-4-20"
         {: codeblock}
 
         <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>kind</code></td>
-        <td>对于以下两种类型的角色 `.yaml` 文件，将 `kind` 指定为 `RoleBinding`：名称空间 `Role` 和集群范围的 `ClusterRole`.</td>
-        </tr>
-        <tr>
-        <td><code>apiVersion</code></td>
-        <td><ul><li>对于运行 Kubernetes 1.8 或更高版本的集群，请使用 `rbac.authorization.k8s.io/v1`。</li><li>对于更早的版本，请使用 `apiVersion: rbac.authorization.k8s.io/v1beta1`。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/namespace</code></td>
-        <td><ul><li>对于 `Role` 类型：指定授予其访问权的 Kubernetes 名称空间。</li><li>如果要创建在集群级别应用的 `ClusterRole`，请不要使用 `namespace` 字段。</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>对角色绑定命名。</td>
-        </tr>
-        <tr>
-        <td><code>subjects/kind</code></td>
-        <td>将 kind 指定为 `User`。</td>
-        </tr>
-        <tr>
-        <td><code>subjects/name</code></td>
-        <td><ul><li>将用户的电子邮件地址附加到以下 URL：`https://iam.ng.bluemix.net/kubernetes#`。</li><li>例如，`https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>subjects/apiGroup</code></td>
-        <td>使用 `rbac.authorization.k8s.io`。</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/kind</code></td>
-        <td>在角色 `.yaml` 文件中输入与 `kind` 相同的值：`Role` 或 `ClusterRole`。</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/name</code></td>
-        <td>输入角色 `.yaml` 文件的名称。</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/apiGroup</code></td>
-        <td>使用 `rbac.authorization.k8s.io`。</td>
-        </tr>
-        </tbody>
+        <caption>了解此 YAML 的组成部分</caption>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td>对于以下两种类型的角色 `.yaml` 文件，将 `kind` 指定为 `RoleBinding`：名称空间 `Role` 和集群范围的 `ClusterRole`。</td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>对于运行 Kubernetes 1.8 或更高版本的集群，请使用 `rbac.authorization.k8s.io/v1`。</li><li>对于更早的版本，请使用 `apiVersion: rbac.authorization.k8s.io/v1beta1`。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/namespace</code></td>
+              <td><ul><li>对于 `Role` 类型：指定授予其访问权的 Kubernetes 名称空间。</li><li>如果要创建在集群级别应用的 `ClusterRole`，请不要使用 `namespace` 字段。</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/name</code></td>
+              <td>对角色绑定命名。</td>
+            </tr>
+            <tr>
+              <td><code>subjects/kind</code></td>
+              <td>将 kind 指定为 `User`。</td>
+            </tr>
+            <tr>
+              <td><code>subjects/name</code></td>
+              <td><ul><li>将用户的电子邮件地址附加到以下 URL：`https://iam.ng.bluemix.net/kubernetes#`。</li><li>例如，`https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects/apiGroup</code></td>
+              <td>使用 `rbac.authorization.k8s.io`。</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/kind</code></td>
+              <td>在角色 `.yaml` 文件中输入与 `kind` 相同的值：`Role` 或 `ClusterRole`。</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/name</code></td>
+              <td>输入角色 `.yaml` 文件的名称。</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/apiGroup</code></td>
+              <td>使用 `rbac.authorization.k8s.io`。</td>
+            </tr>
+          </tbody>
         </table>
 
     2. 在集群中创建角色绑定资源。
 
         ```
-        kubectl apply -f filepath/my_role_team1.yaml
+                kubectl apply -f filepath/my_role_team1.yaml
         ```
         {: pre}
 
     3.  验证绑定是否已创建。
 
         ```
-        kubectl get rolebinding
+                kubectl get rolebinding
         ```
         {: pre}
 
 现在您已经创建并绑定了定制 Kubernetes RBAC 角色，接下来该由用户进行操作。请要求用户测试根据其角色有权完成的操作，例如删除 pod。
-

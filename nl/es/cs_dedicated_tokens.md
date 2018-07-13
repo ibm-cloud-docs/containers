@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -66,7 +69,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     ```
     {: pre}
 
-    Puede utilizar este secreto para trabajar con IBM {{site.data.keyword.Bluemix_notm}} Container Service.
+    Utilice este secreto para trabajar con {{site.data.keyword.containerlong}}.
 
 6.  Cree el secreto de Kubernetes para almacenar la información de la señal.
 
@@ -76,7 +79,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     {: pre}
 
     <table>
-    <caption>Tabla 1. Visión general de los componentes de este mandato</caption>
+    <caption>Descripción de los componentes de este mandato</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de los componentes de este mandato</th>
     </thead>
@@ -109,7 +112,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
 
 7.  Cree un pod que haga referencia a imagePullSecret.
 
-    1.  Abra el editor que prefiera y cree un script de configuración de pod llamado mypod.yaml.
+    1.  Abra el editor de texto que prefiera y cree un script de configuración de pod llamado mypod.yaml.
     2.  Defina el pod y el imagePullSecret que desea utilizar para acceder al registro. Para utilizar una imagen privada de un espacio de nombres:
 
         ```
@@ -127,7 +130,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
         {: codeblock}
 
         <table>
-        <caption>Tabla 2. Visión general de los componentes del archivo YAML</caption>
+        <caption>Visión general de los componentes del archivo YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
         </thead>

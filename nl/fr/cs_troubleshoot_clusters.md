@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Traitement des incidents liés aux clusters et aux noeuds worker
@@ -37,34 +38,26 @@ Lorsque vous créez un nouveau cluster Kubernetes, vous rencontrez le message su
 ```
 Nous n'avons pas pu nous connecter à votre compte d'infrastructure IBM Cloud.
 La création d'un cluster standard nécessite un compte de type Paiement à la carte lié aux
-conditions d'un compte de l'infrastructure IBM Cloud (SoftLayer) ou d'avoir utilisé l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}
-Container Service pour définir vos clés d'API d'{{site.data.keyword.Bluemix_notm}} Infrastructure.
+conditions d'un compte de l'infrastructure IBM Cloud (SoftLayer) ou l'utilisation de l'interface de ligne de commande {{site.data.keyword.containerlong}} pour définir vos clés d'API d'infrastructure {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
 {: tsCauses}
-Les utilisateurs disposant d'un compte {{site.data.keyword.Bluemix_notm}} non lié doivent créer un nouveau compte de type Paiement à la carte ou ajouter manuellement des clés d'API d'infrastructure IBM Cloud (SoftLayer) à l'aide de l'interface CLI d'{{site.data.keyword.Bluemix_notm}}.
+Les comptes Paiement à la carte {{site.data.keyword.Bluemix_notm}} créés après l'activation de la liaison automatique de compte sont déjà configurés avec l'accès au portefeuille d'infrastructure IBM Cloud (SoftLayer). Vous pouvez acheter des ressources d'infrastructure pour votre cluster sans configuration supplémentaire.
+
+Les utilisateurs disposant d'autres types de compte {{site.data.keyword.Bluemix_notm}}, ou disposant d'un compte d'infrastructure IBM Cloud (SoftLayer) existant non lié à leur compte {{site.data.keyword.Bluemix_notm}} doivent configurer leurs comptes pour créer des clusters standard. 
 
 {: tsResolve}
-Pour ajouter des données d'identification à votre compte {{site.data.keyword.Bluemix_notm}} :
+La configuration de votre compte pour accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer) dépend du type de compte dont vous disposez. Consultez ce tableau pour identifier les options disponibles pour chaque type de compte.
 
-1.  Contactez l'administrateur de l'infrastructure IBM Cloud (SoftLayer) pour obtenir votre nom d'utilisateur d'infrastructure IBM Cloud (SoftLayer) et la clé d'API.
+|Type de compte|Description|Options disponibles pour création d'un cluster standard|
+|------------|-----------|----------------------------------------------|
+|Comptes Lite|Les comptes Lite ne peuvent pas provisionner des clusters.|[Mettez à niveau votre compte Lite vers un compte {{site.data.keyword.Bluemix_notm}}  Pay-As-You-Go](/docs/account/index.html#paygo) (Paiement à la carte) configuré avec accès au portefeuille d'infrastructure IBM Cloud (SoftLayer).|
+|Anciens comptes Paiement à la carte|Les comptes Paiement à la carte créés avant que la liaison automatique de compte ne soit disponible ne disposaient pas d'un accès au portefeuille d'infrastructure IBM Cloud (SoftLayer).<p>Si vous disposez d'un compte d'infrastructure IBM Cloud (SoftLayer) existant, vous ne pouvez pas le lier à un ancien compte Paiement à la carte.</p>|<strong>Option 1 :</strong> [Créez un compte Paiement à la carte](/docs/account/index.html#paygo) configuré avec accès au portefeuille d'infrastructure IBM Cloud (SoftLayer). Si vous sélectionnez cette option, vous disposerez de deux comptes {{site.data.keyword.Bluemix_notm}} avec facturation distincte.<p>Pour continuer à utiliser votre ancien compte Paiement à la carte, vous pouvez utiliser votre nouveau compte Paiement à la carte pour générer une clé d'API permettant d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer). Vous devez ensuite [définir la clé d'API de l'infrastructure IBM Cloud (SoftLayer) pour votre ancien compte Paiement à la carte](cs_cli_reference.html#cs_credentials_set). </p><p><strong>Option 2 :</strong> Si vous disposez déjà d'un compte d'infrastructure IBM Cloud (SoftLayer) existant que vous désirez utiliser, vous pouvez [définir vos données d'identification](cs_cli_reference.html#cs_credentials_set) dans votre compte {{site.data.keyword.Bluemix_notm}}.</p><p>**Remarque :** lorsque vous effectuez une liaison manuelle vers un compte d'infrastructure IBM Cloud (SoftLayer), les données d'identification sont utilisées pour toutes les actions spécifiques de l'infrastructure IBM Cloud (SoftLayer) effectuées dans votre compte {{site.data.keyword.Bluemix_notm}}. Vous devez vérifier que la clé d'API que vous avez définie dispose de [droits d'infrastructure suffisants](cs_users.html#infra_access) pour que vos utilisateurs puissent créer et gérer des clusters.</p>|
+|Comptes Abonnement|Les comptes de type Abonnement ne sont pas configurés avec un accès au portefeuille d'infrastructure IBM Cloud (SoftLayer).|<strong>Option 1 :</strong> [Créez un compte Paiement à la carte](/docs/account/index.html#paygo) configuré avec accès au portefeuille d'infrastructure IBM Cloud (SoftLayer). Si vous sélectionnez cette option, vous disposerez de deux comptes {{site.data.keyword.Bluemix_notm}} avec facturation distincte.<p>Si vous souhaitez continuer à utiliser votre ancien compte Abonnement, vous pouvez utiliser le nouveau compte Paiement à la carte pour générer une clé d'API dans l'infrastructure IBM Cloud (SoftLayer). Vous devez ensuite [définir manuellement la clé d'API de l'infrastructure IBM Cloud (SoftLayer) pour votre compte Abonnement](cs_cli_reference.html#cs_credentials_set). N'oubliez pas que les ressources d'infrastructure IBM Cloud (SoftLayer) sont facturées via votre nouveau compte Paiement à la carte.</p><p><strong>Option 2 :</strong> Si vous disposez déjà d'un compte d'infrastructure IBM Cloud (SoftLayer) que vous désirez utiliser, vous pouvez [définir manuellement des données d'identification d'infrastructure IBM Cloud (SoftLayer)](cs_cli_reference.html#cs_credentials_set) pour votre compte {{site.data.keyword.Bluemix_notm}}.<p>**Remarque :** lorsque vous effectuez une liaison manuelle vers un compte d'infrastructure IBM Cloud (SoftLayer), les données d'identification sont utilisées pour toutes les actions spécifiques de l'infrastructure IBM Cloud (SoftLayer) effectuées dans votre compte {{site.data.keyword.Bluemix_notm}}. Vous devez vérifier que la clé d'API que vous avez définie dispose de [droits d'infrastructure suffisants](cs_users.html#infra_access) pour que vos utilisateurs puissent créer et gérer des clusters.</p>|
+|Compte d'infrastructure IBM Cloud (SoftLayer), aucun compte {{site.data.keyword.Bluemix_notm}}|Pour créer un cluster standard, vous devez disposer d'un compte {{site.data.keyword.Bluemix_notm}}.|<p>[Créez un compte de type Paiement à la carte](/docs/account/index.html#paygo) configuré pour accès au portefeuille d'infrastructure IBM Cloud (SoftLayer). Si vous sélectionnez cette option, un compte d'infrastructure IBM Cloud (SoftLayer) est créé pour vous. Vous disposez de deux comptes d'infrastructure IBM Cloud (SoftLayer) différents avec facturation distincte.</p>|
+{: caption="Options de création de cluster standard par type de compte" caption-side="top"}
 
-    **Remarque : ** le compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez doit être configuré avec des droits Superutilisateur pour vous permettre de créer des clusters standard.
-
-2.  Ajoutez les données d'identification.
-
-  ```
-  bx cs credentials-set --infrastructure-username <username> --infrastructure-api-key <api_key>
-  ```
-  {: pre}
-
-3.  Créez un cluster standard.
-
-  ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
 
 <br />
 
@@ -86,7 +79,7 @@ Des règles réseau d'entreprise empêchent peut-être l'accès depuis votre sys
 {: #cs_firewall}
 
 {: tsSymptoms}
-Lorsque les connexions des noeuds worker sont impossibles, vous pourrez voir toute une série de symptômes différents. Vous pourrez obtenir l'un des messages suivants en cas d'échec de la commande kubectl proxy ou si vous essayez d'accéder à un service dans votre cluster et que la connexion échoue.
+Lorsque les connexions des noeuds worker sont impossibles, vous pouvez voir toute une variété de symptômes différents. Vous pourrez obtenir l'un des messages suivants en cas d'échec de la commande kubectl proxy ou si vous essayez d'accéder à un service dans votre cluster et que la connexion échoue.
 
   ```
   Connection refused
@@ -120,7 +113,7 @@ Si la commande kubectl proxy aboutit, mais que le tableau de bord n'est pas disp
 
 
 {: tsCauses}
-Vous pouvez disposer d'un pare-feu supplémentaire configuré ou avoir personnalisé vos paramètres de pare-feu existants dans votre compte d'infrastructure IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Une autre cause peut être que les noeuds worker soient bloqués dans une boucle de rechargement.
+Vous pouvez disposer d'un autre pare-feu configuré ou avoir personnalisé vos paramètres de pare-feu existants dans votre compte d'infrastructure IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Une autre cause peut être que les noeuds worker soient bloqués dans une boucle de rechargement.
 
 {: tsResolve}
 [Autorisez le cluster à accéder aux ressources d'infrastructure et à d'autres services](cs_firewall.html#firewall_outbound). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
@@ -144,12 +137,37 @@ Utilisez des [DaemonSets ![Icône de lien externe](../icons/launch-glyph.svg "Ic
 <br />
 
 
+## Les commandes `kubectl exec` et `kubectl logs` ne fonctionnent pas
+{: #exec_logs_fail}
 
-## La liaison d'un service à un cluster renvoie une erreur due à une utilisation du même nom
+{: tsSymptoms}
+Si vous exécutez une commande `kubectl exec` ou `kubectl logs`, le message suivant s'affiche :
+
+  ```
+  <workerIP>:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+{: tsCauses}
+La connexion OpenVPN entre le noeud maître et les noeuds worker ne fonctionne pas correctement.
+
+{: tsResolve}
+1. Activez la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer).
+2. Redémarrez le pod du client OpenVPN.
+  ```
+  kubectl delete pod -n kube-system -l app=vpn
+  ```
+  {: pre}
+3. Si le message d'erreur s'affiche toujours, le noeud worker sur lequel réside le pod VPN est peut-être défectueux. Pour redémarrer le pod VPN et le replanifier sur un autre noeud worker, utilisez les [commandes cordon, drain et réamorcez le noeud worker](cs_cli_reference.html#cs_worker_reboot) sur lequel se trouve le pod VPN.
+
+<br />
+
+
+## La liaison d'un service à un cluster renvoie une erreur due à l'utilisation du même nom
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche.
+Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche :
 
 ```
 Multiple services with the same name were found.
@@ -186,18 +204,86 @@ Utilisez l'identificateur global unique (GUID) du service au lieu du nom de l'in
 <br />
 
 
+## La liaison d'un service à un cluster renvoie une erreur indiquant que le service est introuvable
+{: #cs_not_found_services}
 
-## Après avoir mis à jour ou rechargé un noeud worker, des noeuds et des pods en double apparaissent
+{: tsSymptoms}
+Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche :
+
+```
+Binding service to a namespace...
+FAILED
+
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
+```
+{: screen}
+
+{: tsCauses}
+Pour lier des services à un cluster vous devez disposer du rôle d'utilisateur développeur Cloud Foundry pour l'espace où l'instance de service est mise à disposition. Vous devez également disposer de l'accès Editeur IAM à {{site.data.keyword.containerlong}}. Pour accéder à l'instance de service, vous devez être connecté à l'espace dans lequel l'instance de service est mise à disposition. 
+
+{: tsResolve}
+
+**En tant qu'utilisateur :**
+
+1. Connectez-vous à {{site.data.keyword.Bluemix_notm}}. 
+   ```
+   bx login
+   ```
+   {: pre}
+   
+2. Ciblez l'organisation et l'espace où l'instance de service est mise à disposition. 
+   ```
+   bx target -o <org> -s <space>
+   ```
+   {: pre}
+   
+3. Vérifiez que vous êtes dans le bon espace en affichant la liste de vos instances de service. 
+   ```
+   bx service list 
+   ```
+   {: pre}
+   
+4. Essayez d'effectuer à nouveau la liaison du service. Si vous obtenez la même erreur, contactez l'administrateur du compte et vérifiez que vous disposez des droits suffisants pour effectuer des liaisons de services (voir la procédure suivante de l'administrateur du compte). 
+
+**En tant qu'administrateur du compte :**
+
+1. Vérifiez que l'utilisateur qui rencontre ce problème dispose des [droits d'éditeur pour {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access). 
+
+2. Vérifiez que l'utilisateur qui rencontre ce problème dispose du [rôle de développeur Cloud Foundry pour l'espace](/docs/iam/mngcf.html#updating-cloud-foundry-access) dans lequel le service est mis à disposition. 
+
+3. Si les droits adéquats existent, essayez d'affecter un autre droit, puis d'affecter à nouveau le droit requis. 
+
+4. Patientez quelques minutes, puis laissez l'utilisateur effectuer une nouvelle tentative de liaison du service. 
+
+5. Si le problème n'est toujours pas résolu, les droits IAM ne sont pas synchronisés et vous ne pouvez pas résoudre le problème vous-même. [Contactez le support IBM](/docs/get-support/howtogetsupport.html#getting-customer-support) en ouvrant un ticket de demande de service. Veillez à fournir l'ID du cluster, l'ID utilisateur et l'ID de l'instance de service. 
+   1. Récupérez l'ID du cluster.
+      ```
+      bx cs clusters
+      ```
+      {: pre}
+      
+   2. Récupérez l'ID d'instance de service.
+      ```
+      bx service show <service_name> --guid
+      ```
+      {: pre}
+
+
+<br />
+
+
+
+## Après la mise à jour ou le rechargement d'un noeud worker, des noeuds et des pods en double apparaissent
 {: #cs_duplicate_nodes}
 
 {: tsSymptoms}
 Lorsque vous exécutez la commande `kubectl get nodes`, vous voyez des noeuds worker en double avec le statut **NotReady**. Les noeuds worker avec le statut **NotReady** ont des adresses IP publiques, alors que les noeuds worker avec le statut **Ready** ont des adresses IP privées.
 
 {: tsCauses}
-D'anciens clusters avaient des noeuds worker répertoriés par l'adresse IP publique du cluster. A présent, les noeuds worker sont répertoriés par l'adresse IP privée du cluster. Lorsque vous rechargez ou mettez à jour un noeud, l'adresse IP est modifiée, mais la référence à l'adresse IP publique est conservée.
+D'anciens clusters affichaient la liste des noeuds worker avec l'adresse IP publique de cluster. A présent, les noeuds worker sont répertoriés avec l'adresse IP privée du cluster. Lorsque vous rechargez ou mettez à jour un noeud, l'adresse IP est modifiée, mais la référence à l'adresse IP publique est conservée.
 
 {: tsResolve}
-Il n'y a aucune interruption de service due à ces doublons, mais vous devez retirer les références des anciens noeuds worker du serveur d'API.
+Le service n'est pas interrompu en raison de ces doublons, mais vous pouvez supprimer les références aux anciens noeuds worker du serveur d'API.
 
   ```
   kubectl delete node <node_name1> <node_name2>
@@ -207,11 +293,11 @@ Il n'y a aucune interruption de service due à ces doublons, mais vous devez ret
 <br />
 
 
-## Après avoir mis à jour ou rechargé un noeud worker, les applications reçoivent des erreurs de type RBAC DENY
+## Après la mise à jour ou le rechargement d'un noeud worker, les applications reçoivent le message d'erreur RBAC DENY
 {: #cs_rbac_deny}
 
 {: tsSymptoms}
-Après la mise à jour vers Kubernetes version 1.7, les applications reçoivent des erreurs de type `RBAC DENY`.
+Après avoir effectué la mise à jour vers Kubernetes version 1.7, les applications reçoivent des erreurs de type `RBAC DENY`.
 
 {: tsCauses}
 A partir de [Kubernetes version 1.7](cs_versions.html#cs_v17), les applications qui s'exécutent dans l'espace de nom `default` ne disposent plus des privilèges d'administrateur de cluster sur l'API Kubernetes pour la sécurité renforcée.
@@ -240,17 +326,17 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
          apiGroup: rbac.authorization.k8s.io
         ---
         kind: ClusterRoleBinding
-        apiVersion: rbac.authorization.k8s.io/v1beta1
-        metadata:
-         name: admin-binding-resourceURLSs-default
-        subjects:
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
           - kind: ServiceAccount
-            name: default
-            namespace: default
-        roleRef:
-         kind: ClusterRole
-         name: admin-role-resourceURLSs
-         apiGroup: rbac.authorization.k8s.io
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
         ```
 
     2.  Appliquez le fichier `.yaml` à votre cluster.
@@ -288,8 +374,8 @@ Mettez manuellement à jour la référence de l'adresse IP privée pour qu'elle 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.8.11
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.8.11
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.7
   ```
   {: screen}
 
@@ -315,7 +401,7 @@ Mettez manuellement à jour la référence de l'adresse IP privée pour qu'elle 
   ```
   {: pre}
 
-5.  Redémarre le noeud worker qui n'a pas été supprimé.
+5.  Redémarrez le noeud worker qui n'a pas été supprimé.
 
   ```
   bx cs worker-reboot CLUSTER_ID NODE_ID
@@ -335,13 +421,13 @@ Le noeud supprimé n'apparaît plus dans Calico.
 Lorsque vous déployez votre cluster, il reste à l'état en attente (pending) et ne démarre pas.
 
 {: tsCauses}
-Si vous venez de créer le cluster, les noeuds worker sont peut-être encore en cours de configuration. Si vous attendez depuis un bon moment, il est possible que votre réseau local virtuel (VLAN) soit non valide.
+Si vous venez de créer le cluster, les noeuds worker sont peut-être encore en cours de configuration. Si vous patientez déjà depuis un bon moment, il se peut que votre réseau local virtuel (VLAN) soit non valide.
 
 {: tsResolve}
 
 Vous pouvez envisager l'une des solutions suivantes :
   - Vérifiez le statut de votre cluster en exécutant la commande `bx cs clusters`. Puis vérifiez que vos noeuds worker sont déployés en exécutant la commande `bx cs workers <cluster_name>`.
-  - Vérifiez si votre réseau local virtuel (VLAN) est valide. Pour être valide, un VLAN doit être associé à une infrastructure pouvant héberger un noeud worker avec un stockage sur disque local. Vous pouvez [afficher la liste de vos VLAN](/docs/containers/cs_cli_reference.html#cs_vlans) en exécutant la commande `bx cs vlans LOCATION`. Si le VLAN n'apparaît pas dans la liste, il n'est pas valide. Choisissez-en un autre.
+  - Vérifiez si votre réseau local virtuel (VLAN) est valide. Pour être valide, un VLAN doit être associé à une infrastructure pouvant héberger un noeud worker avec un stockage sur disque local. Vous pouvez [afficher la liste de vos VLAN](/docs/containers/cs_cli_reference.html#cs_vlans) en exécutant la commande `bx cs vlans <location>`. Si le VLAN n'apparaît pas dans la liste, il n'est pas valide. Choisissez-en un autre.
 
 <br />
 
@@ -385,10 +471,10 @@ S'il s'agit d'un cluster existant, vérifiez sa capacité.
 
 4.  Si vous ne disposez pas de suffisamment de capacité dans votre cluster, ajoutez un autre noeud worker à celui-ci.
 
-  ```
-  bx cs worker-add <cluster_name_or_ID> 1
-  ```
-  {: pre}
+    ```
+    bx cs worker-add <cluster_name_or_ID> 1
+    ```
+    {: pre}
 
 5.  Si vos pods sont toujours à l'état **pending** après le déploiement complet du noeud worker, consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) pour effectuer d'autres tâches en vue d'identifier et de résoudre le problème.
 
@@ -472,7 +558,6 @@ Pour identifier et résoudre les problèmes liés à votre charte Helm :
     ```
     {: pre}
 
-
 <br />
 
 
@@ -483,7 +568,8 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
+-   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
@@ -493,9 +579,8 @@ Vous avez encore des problèmes avec votre cluster ?
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
 pour plus d'informations sur l'utilisation des forums.
 
--   Contactez le support IBM en ouvrant un ticket de demande de service. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
-
 

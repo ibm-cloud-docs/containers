@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,12 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Apps mit NodePorts zugänglich machen
 {: #nodeport}
 
-Sie können Ihre containerisierte App für den Internetzugriff verfügbar machen, indem Sie die öffentliche IP-Adresse eines beliebigen Workerknotens in einem Kubernetes-Cluster verwenden und einen Knotenport zugänglich machen. Verwenden Sie diese Option zum Testen von {{site.data.keyword.containerlong}} und zur Bereitstellung von öffentlichem Zugriff über einen kurzen Zeitraum.
+Sie können Ihre containerisierte App für den Internetzugriff verfügbar machen, indem Sie die öffentliche IP-Adresse eines beliebigen Workerknotens in einem Kubernetes-Cluster verwenden und einen Knotenport zugänglich machen. Verwenden Sie diese Option zum Testen in {{site.data.keyword.containerlong}} und zur Bereitstellung von öffentlichem Zugriff über einen kurzen Zeitraum.
 {:shortdesc}
 
 ## Netzverkehr mithilfe von NodePorts verwalten
@@ -53,9 +55,9 @@ Das folgende Diagramm veranschaulicht, wie die Kommunikation vom Internet an ein
 Sie können Ihre App als einen Kubernetes-NodePort-Service für kostenlose Cluster oder Standardcluster zugänglich machen.
 {:shortdesc}
 
-Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namens [Guestbook ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) verwenden.
+Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namens [Guestbook ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml) verwenden.
 
-1.  Definieren Sie in der Konfigurationsdatei für Ihre App einen Abschnitt vom Typ [Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/). **Hinweis**: Für das Beispiel 'Guestbook' ist in der Konfigurationsdatei bereits ein Front-End-Serviceabschnitt vorhanden. Um die App 'Guestbook' extern verfügbar zu machen, müssen Sie dem Front-End-Serviceabschnitt den Typ 'NodePort' und für 'nodePort' eine Portnummer aus dem Bereich 30000 bis 32767 hinzufügen.
+1.  Definieren Sie in der Konfigurationsdatei für Ihre App einen Abschnitt vom Typ [Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/). **Hinweis**: Für das Beispiel 'Guestbook' ist in der Konfigurationsdatei ein Front-End-Serviceabschnitt vorhanden. Um die App 'Guestbook' extern verfügbar zu machen, müssen Sie dem Front-End-Serviceabschnitt den Typ 'NodePort' und für 'nodePort' eine Portnummer aus dem Bereich 30000 bis 32767 hinzufügen.
 
     Beispiel:
 
@@ -78,17 +80,18 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
     {: codeblock}
 
     <table>
+    <caption>Erklärung der Komponenten des NodePort-Service</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten des NodePort-Serviceabschnitts</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Ersetzen Sie <code><em>&lt;mein_nodeport-service&gt;</em></code> durch einen Namen für Ihren NodePort-Service.</td>
+    <td>Ersetzen Sie <code><em>&lt;mein_nodeport-service&gt;</em></code> durch einen Namen für Ihren NodePort-Service.<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Ersetzen Sie <code><em>&lt;mein_bezeichnungsschlüssel&gt;</em></code> und <code><em>&lt;mein_bezeichnungswert&gt;</em></code> durch die Bezeichnung, die Sie für Ihren Service verwenden möchten. </td>
+    <td>Ersetzen Sie <code><em>&lt;mein_bezeichnungsschlüssel&gt;</em></code> und <code><em>&lt;mein_bezeichnungswert&gt;</em></code> durch die Bezeichnung, die Sie für Ihren Service verwenden möchten.</td>
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
@@ -100,8 +103,7 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>Optional: Ersetzen Sie <code><em>&lt;31514&gt;</em></code> durch eine Knotenportnummer aus dem Bereich 30000 bis 32767. Geben Sie für 'NodePort' keine Portnummer an, die bereits von einem anderen Service verwendet wird. Wenn manuell keine Knotenportnummer festgelegt wird, so erfolgt die Zuweisung automatisch nach dem Zufallsprinzip.<br><br>Wenn Sie für 'NodePort' eine Portnummer festlegen wollen und ermitteln wollen, welche Knotenportnummern bereits belegt sind, führen Sie den folgenden Befehl aus: <pre class="pre"><code>   kubectl get svc
-   </code></pre>Alle bereits belegten Knotenportnummern werden unter dem Feld **Ports** angezeigt.</td>
+     <td>Optional: Ersetzen Sie <code><em>&lt;31514&gt;</em></code> durch eine Knotenportnummer aus dem Bereich 30000 bis 32767. Geben Sie für 'NodePort' keine Portnummer an, die bereits von einem anderen Service verwendet wird. Wenn manuell keine Knotenportnummer festgelegt wird, so erfolgt die Zuweisung automatisch nach dem Zufallsprinzip.<br><br>Wenn Sie für 'NodePort' eine Portnummer festlegen wollen und ermitteln möchten, welche Knotenportnummern bereits belegt sind, führen Sie den folgenden Befehl aus: <pre class="pre"><code>kubectl get svc</code></pre><p>Alle bereits belegten Knotenportnummern werden unter dem Feld **Ports** angezeigt.</p></td>
      </tr>
      </tbody></table>
 
@@ -154,7 +156,6 @@ Bei Bereitstellung der App können Sie mithilfe der öffentlichen IP-Adresse jed
     {: screen}
 
     In diesem Beispiel lautet die Portnummer für 'NodePort' `30872`.</br>
-    **Hinweis:** Wenn im Abschnitt **Endpoints** `<none>` angezeigt wird, stellen Sie sicher, dass der `<selektorschlüssel>` und der `<selektorwert>`, die Sie im Abschnitt `spec.selector` des NodePort-Service angegeben haben, dem Schlüssel/Wert-Paar entspricht, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei verwendet haben. 
+    **Hinweis:** Wenn `<none>` im Abschnitt **Endpoints** angezeigt wird, überprüfen Sie die Werte für `<selectorkey>` und `<selectorvalue>`, die Sie im Abschnitt `spec.selector` des NodePort-Service verwenden. Stellen Sie sicher, dass es sich hierbei um dasselbe _Schlüssel/Wert_-Paar handelt, das Sie im Abschnitt `spec.template.metadata.labels` der YAML-Bereitstellungsdatei verwendet haben.
 
 3.  Bilden Sie die URL mit einer der öffentlichen IP-Adressen des Workerknotens und der Portnummer für 'NodePort'. Beispiel: `http://192.0.2.23:30872`
-

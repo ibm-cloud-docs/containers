@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,13 +24,14 @@ lastupdated: "2018-4-20"
 
 Neste cenário, uma firma PR fictícia usa o serviço {{site.data.keyword.Bluemix_notm}} para analisar seus press releases e receber feedback no sinal de suas mensagens.
 
-Usando o cluster do Kubernetes criado no tutorial passado, o desenvolvedor de aplicativo da firma PR implementa uma versão Hello World do app. Construindo em cada lição neste tutorial, o desenvolvedor de aplicativo implementa versões progressivamente mais complicadas do mesmo app. O diagrama a seguir mostra os componentes de cada implementação por lição.
+Usando o cluster do Kubernetes que foi criado no último tutorial, o desenvolvedor de app da firma PR implementa uma versão Hello World do app. Construindo em cada lição neste tutorial, o desenvolvedor de aplicativo implementa versões progressivamente mais complicadas do mesmo app. O diagrama a seguir mostra os componentes de cada implementação por lição.
+
 
 ![Componentes da lição](images/cs_app_tutorial_roadmap.png)
 
-Conforme descrito no diagrama, o Kubernetes usa vários tipos diferentes de recursos para deixar seus apps funcionando em clusters. No Kubernetes, as implementações e os serviços funcionam juntos. As implementações incluem as definições para o app; por exemplo, a imagem a ser usada para o contêiner e qual porta deve ser exposta para o app. Ao criar uma implementação, um pod do Kubernetes é criado para cada contêiner definido na implementação. Para tornar seu app mais resiliente, é possível definir múltiplas instâncias do mesmo app em sua implementação e permitir que o Kubernetes crie automaticamente um conjunto de réplicas para você. O conjunto de réplicas monitora os pods e assegura que o número desejado de pods esteja funcionando sempre. Se um dos pods tornar-se não responsivo, o pod será recriado automaticamente.
+Conforme descrito no diagrama, o Kubernetes usa vários tipos diferentes de recursos para deixar seus apps funcionando em clusters. No Kubernetes, as implementações e os serviços funcionam juntos. As implementações incluem as definições para o app. Por exemplo, a imagem a ser usada para o contêiner e qual porta deve ser exposta para o app. Ao criar uma implementação, um pod do Kubernetes é criado para cada contêiner definido na implementação. Para tornar seu app mais resiliente, é possível definir múltiplas instâncias do mesmo app em sua implementação e permitir que o Kubernetes crie automaticamente um conjunto de réplicas para você. O conjunto de réplicas monitora os pods e assegura que o número especificado de pods estejam sempre funcionando. Se um dos pods tornar-se não responsivo, o pod será recriado automaticamente.
 
-Os serviços agrupam um conjunto de cápsulas e fornecem conexão de rede a esses pods para outros serviços no cluster sem expor o endereço IP privado real de cada pod. É possível usar os serviços do Kubernetes para tornar um app disponível para outros pods dentro do cluster ou para expor um app na Internet. Neste tutorial, você usará um serviço do Kubernetes para acessar seu app em execução na Internet usando um endereço IP público que é designado automaticamente a um nó do trabalhador e uma porta pública.
+Os serviços agrupam um conjunto de cápsulas e fornecem conexão de rede a esses pods para outros serviços no cluster sem expor o endereço IP privado real de cada pod. É possível usar os serviços do Kubernetes para tornar um app disponível para outros pods dentro do cluster ou para expor um app na Internet. Neste tutorial, você usa um serviço do Kubernetes para acessar seu app em execução na Internet usando um endereço IP público que é designado automaticamente a um nó do trabalhador e uma porta pública.
 
 Para tornar seu app ainda mais altamente disponível, em clusters padrão, é possível criar múltiplos nós do trabalhador para executar ainda mais réplicas de seu app. Essa tarefa não é coberta neste tutorial, mas mantenha esse conceito em mente para melhorias futuras na disponibilidade de um app.
 
@@ -52,11 +53,12 @@ minutos
 
 ## Públicos
 
-Desenvolvedores de software e administradores da rede que nunca implementaram um app em um cluster do Kubernetes antes.
+Os desenvolvedores de software e administradores da rede que estão implementando um app em um cluster do Kubernetes pela primeira vez.
 
 ## Pré-requisitos
 
 * [Tutorial: criando clusters do Kubernetes no {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
+
 
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
 {: #cs_apps_tutorial_lesson1}
@@ -65,6 +67,7 @@ No tutorial anterior, você criou um cluster com um nó do trabalhador. Nesta li
 {:shortdesc}
 
 Os componentes que você implementa concluindo esta lição são mostrados no diagrama a seguir.
+
 
 ![Configuração de implementação](images/cs_app_tutorial_components1.png)
 
@@ -87,16 +90,17 @@ Para implementar o app:
     ```
     {: pre}
 
-3. Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, [inclua o terminal de API](cs_regions.html#bluemix_regions).
-  ```
-  bx login [--sso]
-  ```
-  {: pre}
+3.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, use o comando `bx cs region-set`.
 
-  **Nota**: se o comando de login falha, talvez você tenha um ID federado. Tente anexar a sinalização `--sso` ao comando. Use a URL fornecida na saída da CLI para recuperar uma senha descartável.
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
 
-4. Configure o contexto para o cluster em sua CLI.
-    1. Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
+    **Nota**: se o comando de login falha, talvez você tenha um ID federado. Tente anexar a sinalização `--sso` ao comando. Use a URL fornecida na saída da CLI para recuperar uma senha descartável.
+
+4.  Configure o contexto para o cluster em sua CLI.
+    1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
         ```
         bx cs cluster-config <cluster_name_or_ID>
@@ -113,7 +117,7 @@ Para implementar o app:
         ```
         {: screen}
 
-5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}. **Nota**: assegure-se de que você tenha o plug-in de registro de contêiner [instalado](/docs/services/Registry/index.html#registry_cli_install).
+5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}. **Nota**: assegure-se de que o plug-in de registro de contêiner esteja [instalado](/docs/services/Registry/index.html#registry_cli_install).
 
     ```
     bx cr login
@@ -126,14 +130,14 @@ Para implementar o app:
         ```
         {: pre}
 
-6. Inicie o Docker.
-    * Se você estiver usando o Docker CE, nenhuma ação será necessária.
+6.  Inicie o Docker.
+    * Se você estiver usando o Docker Community Edition, nenhuma ação será necessária.
     * Se você estiver usando o Linux, siga a [documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/engine/admin/) para localizar instruções sobre como iniciar o Docker, dependendo da distribuição Linux usada.
     * Se estiver usando o Docker Toolbox no Windows ou OSX, será possível usar o Docker Quickstart Terminal, que inicia o Docker para você. Use o Docker Quickstart Terminal nas próximas etapas para executar os comandos do Docker e, em seguida, altere novamente para a CLI na qual a variável de sessão `KUBECONFIG` é configurada.
 
 7.  Construa uma imagem do Docker que inclua os arquivos de app do diretório `Lab 1`. Caso seja necessário fazer uma mudança no app no futuro, repita estas etapas para criar outra versão da imagem.
 
-    
+    Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.
 
     1.  Construa a imagem localmente. Especifique o nome e a tag que você deseja usar. Certifique-se de usar o namespace que você criou no {{site.data.keyword.registryshort_notm}} no tutorial anterior. Identificar a imagem com as informações de namespace indica ao Docker para onde enviar por push a imagem em uma etapa posterior. Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a imagem.
 
@@ -163,7 +167,7 @@ Para implementar o app:
         ```
         {: screen}
 
-8.  As implementações são usadas para gerenciar pods, que incluem instâncias conteinerizadas de um app. O comando a seguir implementa o app em um único pod. Para os propósitos deste tutorial, a implementação é chamada hello-world-deployment, mas é possível fornecer qualquer nome que você desejar. Se tiver usado o terminal Docker Quickstart para executar comandos do Docker, certifique-se de alterar novamente para a CLI usada para configurar a variável de sessão `KUBECONFIG`.
+8.  As implementações são usadas para gerenciar pods, que incluem instâncias conteinerizadas de um app. O comando a seguir implementa o app em um único pod. Para os propósitos deste tutorial, a implementação é denominada **hello-world-deployment**, mas é possível dar qualquer nome que você deseja. Se tiver usado o terminal Docker Quickstart para executar comandos do Docker, certifique-se de alterar novamente para a CLI usada para configurar a variável de sessão `KUBECONFIG`.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -177,9 +181,9 @@ Para implementar o app:
     ```
     {: screen}
 
-    
+    Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.
 
-9.  Torne o app acessível ao mundo expondo a implementação como um serviço NodePort. Assim como você pode expor uma porta para um app Cloud Foundry, o NodePort exposto é a porta na qual o nó do trabalhador atende o tráfego.
+9.  Torne o app acessível ao mundo expondo a implementação como um serviço NodePort. Assim como você pode expor uma porta para um app Cloud Foundry, o NodePort que você expõe é a porta na qual o nó do trabalhador atende o tráfego.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -193,8 +197,8 @@ Para implementar o app:
     ```
     {: screen}
 
-    <table>
     <table summary=“Information about the expose command parameters.”>
+    <caption>Mais sobre os parâmetros de exposição</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Mais sobre os parâmetros de exposição</th>
     </thead>
@@ -213,7 +217,7 @@ Para implementar o app:
     </tr>
     <tr>
     <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>A porta na qual o serviço deve entregar.</td>
+    <td>A porta na qual o serviço atende.</td>
     </tr>
     <tr>
     <td><code>--type=NodePort</code></td>
@@ -266,7 +270,7 @@ Para implementar o app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
@@ -277,11 +281,15 @@ Para implementar o app:
     ```
     {: screen}
 
-    É possível fornecer essa URL a um colega de trabalho para tentá-la ou inseri-la no navegador do seu telefone celular, para que seja possível ver se o app Hello World está realmente disponível publicamente.
+    Para ver se o app está publicamente disponível, tente inseri-lo em um navegador em seu telefone celular.
+    {: tip}
 
-12. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard). Observe que as etapas são diferentes, dependendo da versão do Kubernetes.
+12. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
-13. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Quando tiver concluído a exploração do painel do Kubernetes, use CTRL + C para sair do comando `proxy`.
+    Se selecionar seu cluster na GUI do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    {: tip}
+
+13. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
 Parabéns! Você implementou sua primeira versão do app.
 
@@ -296,14 +304,14 @@ Muitos comandos nesta lição? Acordado. Que tal usar um script de configuraçã
 Nessa lição, você implementa três instâncias do app Hello World em um cluster para obter maior disponibilidade que a primeira versão do app.
 {:shortdesc}
 
-Disponibilidade mais alta significa que o acesso de usuário é dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
-o Kubernetes. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+Disponibilidade mais alta significa que o acesso de usuário é dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem funcionar com o Kubernetes. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+
 
 ![Configuração de implementação](images/cs_app_tutorial_components2.png)
 
 No tutorial anterior, você criou sua conta e um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa três instâncias do app Hello World. Cada instância é implementada em um pod do Kubernetes como parte de um conjunto de réplicas no nó do trabalhador. Para torná-la publicamente disponível, você também cria um serviço do Kubernetes.
 
-Conforme definido no script de configuração, o Kubernetes pode usar uma verificação de disponibilidade para ver se um contêiner em um pod está em execução ou não. Por exemplo, essas verificações podem capturar conflitos, em que um app está em execução, mas não é possível fazer progresso. Reiniciar um contêiner que está nessa condição pode ajudar a tornar o app mais disponível apesar de erros. Então, o Kubernetes usa a verificação de prontidão para saber quando um contêiner está pronto para começar a aceitar o tráfego novamente. Um pod é considerado pronto quando seu contêiner está pronto. Quando o pod está pronto, ele é iniciado novamente. Nesta versão do app, a cada 15 segundos, ele atinge o tempo limite. Com uma verificação de funcionamento configurada no script de configuração, os contêineres serão recriados se a verificação de funcionamento localizar um problema com um app.
+Conforme definido no script de configuração, o Kubernetes pode usar uma verificação de disponibilidade para ver se um contêiner em um pod está em execução ou não. Por exemplo, essas verificações podem capturar conflitos, em que um app está em execução, mas não consegue progredir. Reiniciar um contêiner que está nessa condição pode ajudar a tornar o app mais disponível apesar de erros. Então, o Kubernetes usa uma verificação de prontidão para saber quando um contêiner está pronto para começar a aceitar o tráfego novamente. Um pod é considerado pronto quando seu contêiner está pronto. Quando o pod está pronto, ele é iniciado novamente. Nesta versão do app, a cada 15 segundos, ele atinge o tempo limite. Com uma verificação de funcionamento configurada no script de configuração, os contêineres serão recriados se a verificação de funcionamento localizar um problema com um app.
 
 1.  Em uma CLI, navegue para o diretório `Lab 2`.
 
@@ -348,7 +356,7 @@ Conforme definido no script de configuração, o Kubernetes pode usar uma verifi
         ```
         image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
         ```
-        {: pre}
+        {: codeblock}
 
     2.  Na seção **Implementação**, observe as `replicas`. As réplicas
 são o número de instâncias de seu app. Executar três instâncias torna o app mais altamente disponível
@@ -357,9 +365,9 @@ do que apenas uma instância.
         ```
         replicas: 3
         ```
-        {: pre}
+        {: codeblock}
 
-    3.  Observe que a análise de vivacidade de HTTP verifica o funcionamento do contêiner a cada 5 segundos.
+    3.  Observe a análise de vivacidade de HTTP que verifica o funcionamento do contêiner a cada 5 segundos.
 
         ```
         livenessProbe:
@@ -413,7 +421,7 @@ do que apenas uma instância.
   ```
   {: screen}
 
-8.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard). Observe que as etapas são diferentes, dependendo da versão do Kubernetes.
+8.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
 9. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Nessa guia, é possível atualizar continuamente e ver que a verificação de funcionamento está funcionando. Na seção **Pods**, é possível ver quantas vezes os pods são reiniciados quando os contêineres neles são recriados. Se acontecer de você capturar o erro a seguir no painel, esta mensagem indicará que a verificação de funcionamento capturou um problema. Aguarde alguns minutos e atualize novamente. Você verá o número de mudança de reinicializações para cada pod.
 
@@ -423,9 +431,6 @@ do que apenas uma instância.
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
     ```
     {: screen}
-
-    Quando tiver concluído a exploração do painel do Kubernetes, em sua CLI, insira CTRL + C para sair do comando `proxy`.
-
 
 Parabéns! A segunda versão do app foi implementada. Você teve que usar menos comandos,
 aprendeu como as verificações de funcionamento trabalham e editou uma implementação, o que é ótimo! O app Hello World passou no teste para a firma PR. Agora, é possível implementar um app mais útil para que a firma PR comece a analisar os press releases.
@@ -454,10 +459,10 @@ service "hw-demo-service" deleted
 Nas lições anteriores, os apps foram implementados como componentes únicos em um nó do trabalhador. Nesta lição, é possível implementar dois componentes de um app em um cluster que usam o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {:shortdesc}
 
-Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualizará o app para escalá-lo para cima com mais réplicas para torná-lo
-mais altamente disponível. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualiza o app para escalá-lo para cima com mais réplicas para torná-lo mais altamente disponível. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
 
 ![Configuração de implementação](images/cs_app_tutorial_components3.png)
+
 
 No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente.
 
@@ -554,7 +559,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
     ```
     {: screen}
 
-6.  Abra o arquivo `watson-deployment.yml` no diretório `Lab 3` com um editor de texto. Esse script de configuração inclui uma implementação e um serviço para ambos os componentes, watson e watson-talk, do app.
+6.  Abra o arquivo `watson-deployment.yml` no diretório `Lab 3` com um editor de texto. Esse script de configuração inclui uma implementação e um serviço para ambos os componentes do app, `watson` e `watson-talk`.
 
     1.  Atualize os detalhes para a imagem em seu namespace de registro para ambas as implementações.
 
@@ -648,9 +653,9 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
 
     Em um navegador, é possível ver a resposta JSON para o texto inserido.
 
-10.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard). Observe que as etapas são diferentes, dependendo da versão do Kubernetes.
+10. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
-11. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Quando tiver concluído a exploração do painel do Kubernetes, use CTRL + C para sair do comando `proxy`.
+11. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
 ### Lição 3b. Atualizando a implementação em execução do Watson Tone Analyzer
 {: #lesson3b}
@@ -672,8 +677,8 @@ Mude o nome da imagem:
 
     ```
     spec:
-              containers:
-              - image: registry.<region>.bluemix.net/ibmliberty:latest
+          containers:
+          - image: registry.<region>.bluemix.net/ibmliberty:latest
     ```
     {: codeblock}
 
@@ -697,7 +702,7 @@ Mude o nome da imagem:
 
 [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-Parabéns! Você implementou o app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. A firma PR pode definitivamente iniciar o uso dessa implementação do app para iniciar a análise de seus press releases.
+Parabéns! Você implementou o app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. A firma PR pode começar a usar essa implementação para iniciar a análise de seus press releases.
 
 Pronto para excluir o que você criou? É possível usar o script de configuração para excluir os recursos criados.
 
@@ -728,7 +733,6 @@ service "watson-talk-service" deleted
 
 Agora que você conquistou o básico, é possível mover para atividades mais avançadas. Considere experimentar um dos seguintes:
 
-- Concluir um laboratório mais complicado no repositório
+- Conclua um [laboratório mais complicado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) no repositório
 - [Escalar automaticamente seus apps](cs_app.html#app_scaling) com o {{site.data.keyword.containershort_notm}}
 - Explorar as jornadas de orquestração de contêiner no [developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Apps mit Ingress zugänglich machen
 {: #ingress}
 
@@ -25,86 +27,124 @@ Stellen Sie mehrere Apps in Ihrem Kubernetes-Cluster bereit, indem Sie Ingress-R
 ## Netzverkehr mithilfe von Ingress verwalten
 {: #planning}
 
-Ingress ist ein Kubernetes-Service, der Netzverkehr-Workloads in Ihrem Cluster ausgleicht, indem öffentliche oder private Anforderungen an Ihre Apps weitergeleitet werden. Mit Ingress können Sie in einem öffentlichen oder privaten Netz mehrere App-Services zugänglich machen, indem Sie eine eindeutige öffentliche oder private Route verwenden. {:shortdesc}
+Ingress ist ein Kubernetes-Service, der Netzverkehr-Workloads in Ihrem Cluster ausgleicht, indem öffentliche oder private Anforderungen an Ihre Apps weitergeleitet werden. Mit Ingress können Sie in einem öffentlichen oder privaten Netz mehrere App-Services zugänglich machen, indem Sie eine eindeutige öffentliche oder private Route verwenden.
+{:shortdesc}
 
-Ingress besteht aus zwei Komponenten: 
+
+
+Ingress besteht aus zwei Komponenten:
 <dl>
 <dt>Lastausgleichsfunktion für Anwendungen</dt>
 <dd>Die Lastausgleichsfunktion für Anwendungen (ALB) ist eine externe Lastausgleichsfunktionen, die für eingehende HTTP-, HTTPS-, TCP- oder UDP-Serviceanforderungen empfangsbereit ist und Anforderungen an den entsprechenden App-Pod weiterleitet. Wenn Sie einen Standardcluster erstellen, erstellt {{site.data.keyword.containershort_notm}} automatisch eine hochverfügbare ALB für Ihre Cluster und ordnet ihnen eine eindeutige öffentliche Route zu. Die öffentliche Route ist mit einer portierbaren öffentlichen IP-Adresse verknüpft, die bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Es wird zwar auch eine private Standard-ALB (Lastausgleichsfunktion für Anwendungen) erstellt, diese wird jedoch nicht automatisch aktiviert.</dd>
 <dt>Ingress-Ressource</dt>
-<dd>Um eine App über Ingress zugänglich zu machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service bei der Lastausgleichsfunktion für Anwendungen (ALB) registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource ist eine Kubernetes-Ressource, die die Regeln für die Weiterleitung eingehender Anforderungen für eine App definiert. Die Ingress-Ressource gibt auch den Pfad zu Ihrem App-Service an, der an die öffentliche Route angehängt wird, um eine eindeutige App-URL zu bilden, z. B. `mycluster.us-south.containers.mybluemix.net/myapp`. </dd>
+<dd>Um eine App über Ingress zugänglich zu machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service bei der Lastausgleichsfunktion für Anwendungen (ALB) registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource ist eine Kubernetes-Ressource, die die Regeln für die Weiterleitung eingehender Anforderungen für eine App definiert. Die Ingress-Ressource gibt auch den Pfad zu Ihrem App-Service an, der an die öffentliche Route angehängt wird, um eine eindeutige App-URL zu bilden, z. B. `mycluster.us-south.containers.appdomain.cloud/myapp`. <br></br><strong>Hinweis</strong>: Seit dem 24. Mai 2018 gibt es ein anderes Ingress-Unterdomänenformat für neue Cluster.<ul><li>Clustern, die nach dem 24. Mai 2018 erstellt wurden, wird eine Unterdomäne in dem neuen Format <code>&lt;clustername&gt;.&lt;region&gt;.containers.appdomain.cloud</code> zugewiesen.</li><li>Cluster, die vor dem 24. Mai erstellt wurden, verwenden weiterhin die zugeordnete Unterdomäne in dem alten Format <code>&lt;clustername&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
 </dl>
 
 Das folgende Diagramm veranschaulicht, wie Ingress die Kommunikation vom Internet an eine App leitet:
 
-<img src="images/cs_ingress_planning.png" width="550" alt="App {{site.data.keyword.containershort_notm}} mithilfe von Ingress zugänglich machen" style="width:550px; border-style: none"/>
+<img src="images/cs_ingress.png" width="550" alt="Eine App in {{site.data.keyword.containershort_notm}} über Ingress zugänglich machen" style="width:550px; border-style: none"/>
 
-1. Ein Benutzer sendet eine Anforderung an Ihre App, indem er auf die URL Ihrer App zugreift. Diese URL ist die öffentliche URL für Ihre zugänglich gemachte App, der der Pfad der Ingress-Ressource wie zum Beispiel `mycluster.us-south.containers.mybluemix.net/myapp` angehängt wird.
+1. Ein Benutzer sendet eine Anforderung an Ihre App, indem er auf die URL Ihrer App zugreift. Diese URL ist die öffentliche URL für Ihre zugänglich gemachte App, der der Pfad der Ingress-Ressource wie zum Beispiel `mycluster.us-south.containers.appdomain.cloud/myapp` angehängt wird.
 
-2. Ein DNS-Systemservice, der als globale Lastausgleichsfunktion fungiert, löst die URL in die portierbare öffentliche IP-Adresse der öffentlichen Standard-ALB im Cluster auf.
+2. Ein DNS-Systemservice, der als globale Lastausgleichsfunktion fungiert, löst die URL in die portierbare öffentliche IP-Adresse der öffentlichen Standard-ALB im Cluster auf. Die Anforderung wird an den Kubernetes-Lastausgleichsservice für die App weitergeleitet.
 
-3. `kube-proxy` leitet die Anforderung an den Kubernetes-ALB-Service für die App weiter.
+3. Der Kubernetes-Service leitet die Anforderung an die ALB weiter.
 
-4. Der Kubernetes-Service leitet die Anforderung an die ALB weiter.
-
-5. Die ALB überprüft, ob eine Weiterleitungsregel für den Pfad `myapp` im Cluster vorhanden ist. Wird eine übereinstimmende Regel gefunden, wird die Anforderung entsprechend der Regeln, die Sie in der Ingress-Ressource definiert haben, an den Pod weitergeleitet, in dem die App bereitgestellt wurde. Wenn mehrere App-Instanzen im Cluster bereitgestellt werden, gleicht die ALB die Anforderungen zwischen den App-Pods aus.
+4. Die ALB überprüft, ob eine Weiterleitungsregel für den Pfad `myapp` im Cluster vorhanden ist. Wird eine übereinstimmende Regel gefunden, wird die Anforderung entsprechend der Regeln, die Sie in der Ingress-Ressource definiert haben, an den Pod weitergeleitet, in dem die App bereitgestellt wurde. Wenn mehrere App-Instanzen im Cluster bereitgestellt werden, gleicht die ALB die Anforderungen zwischen den App-Pods aus.
 
 
-
-**Hinweis:** Ingress ist nur für Standardcluster verfügbar und erfordert mindestens zwei Workerknoten im Cluster, um eine hohe Verfügbarkeit und regelmäßige Aktualisierungen zu gewährleisten. Für die Einrichtung von Ingress ist eine [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
-
-Folgen Sie diesem Entscheidungsbaum, um die beste Konfiguration für Ingress auszuwählen:
-
-<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Diese Abbildung zeigt eine Übersicht zum Auswählen der besten Konfiguration für Ihre Ingress-Lastausgleichsfunktion für Anwendungen. Falls diese Abbildung nicht angezeigt wird, finden Sie diese Informationen auch in der Dokumentation." style="width:750px;" />
-<map name="ingress_map" id="ingress_map">
-<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Apps mithilfe einer angepassten Domäne ohne TLS nicht öffentlich zugänglich machen" shape="rect" coords="25, 246, 187, 294"/>
-<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Apps mithilfe einer angepassten Domäne mit TLS nicht öffentlich zugänglich machen" shape="rect" coords="161, 337, 309, 385"/>
-<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Apps außerhalb des verwendeten Clusters mithilfe der von IBM bereitgestellten oder einer angepassten Domäne mit TLS öffentlich zugänglich machen" shape="rect" coords="313, 229, 466, 282"/>
-<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Apps mithilfe einer angepassten Domäne mit TLS öffentlich zugänglich machen" shape="rect" coords="365, 415, 518, 468"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Apps mithilfe der von IBM bereitgestellten Domäne ohne TLS öffentlich zugänglich machen" shape="rect" coords="414, 629, 569, 679"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Apps mithilfe der von IBM bereitgestellten Domäne mit TLS öffentlich zugänglich machen" shape="rect" coords="563, 711, 716, 764"/>
-</map>
 
 <br />
 
 
-## Apps öffentlich zugänglich machen
-{: #ingress_expose_public}
+## Voraussetzungen
+{: #config_prereqs}
 
-Wenn Sie einen Standardcluster erstellen, wird automatisch eine von IBM bereitgestellte Lastausgleichsfunktion für Anwendungen (ALB) aktiviert, der eine portierbare öffentliche IP-Adresse und eine öffentliche Route zugewiesen ist.
+Bevor Sie mit der Verwendung mit Ingress beginnen, überprüfen Sie die folgenden Voraussetzungen.
 {:shortdesc}
 
-Jeder App, die öffentlich über Ingress zugänglich gemacht wird, ist ein eindeutiger Pfad zugewiesen, der an die öffentliche Route angehängt wird, sodass Sie eine eindeutige URL verwenden können, um öffentlich auf eine App in Ihrem Cluster zuzugreifen. Um Ihre App öffentlich zugänglich zu machen, können Sie Ingress für die folgenden Szenarios konfigurieren.
+**Voraussetzungen für alle Ingress-Konfigurationen:**
+- Ingress ist nur für Standardcluster verfügbar und erfordert mindestens zwei Workerknoten im Cluster, um eine hohe Verfügbarkeit und regelmäßige Aktualisierungen zu gewährleisten.
+- Für die Einrichtung von Ingress ist eine [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
--   [Apps mithilfe der von IBM bereitgestellten Domäne ohne TLS öffentlich zugänglich machen](#ibm_domain)
--   [Apps mithilfe der von IBM bereitgestellten Domäne mit TLS öffentlich zugänglich machen](#ibm_domain_cert)
--   [Apps mithilfe einer angepassten Domäne mit TLS öffentlich zugänglich machen](#custom_domain_cert)
--   [Apps außerhalb des verwendeten Clusters mithilfe der von IBM bereitgestellten oder einer angepassten Domäne mit TLS öffentlich zugänglich machen](#external_endpoint)
 
-### Apps mithilfe der von IBM bereitgestellten Domäne ohne TLS öffentlich zugänglich machen
-{: #ibm_domain}
 
-Sie können die Lastausgleichsfunktion für Anwendungen (ALB) als Lastausgleichsfunktion für eingehenden HTTP-Netzdatenverkehr für die Apps in Ihrem Cluster konfigurieren und die von IBM bereitgestellte Domäne für den Zugriff auf Ihre Apps über das Internet verwenden.
+<br />
+
+
+## Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen
+{: #multiple_namespaces}
+
+Es ist mindestens eine Ingress-Ressource pro Namensbereich erforderlich, in dem sich die zugänglich zu machenden Apps befinden.
+{:shortdesc}
+
+<dl>
+<dt>Alle Apps befinden sich in einem Namensbereich</dt>
+<dd>Wenn sich die Apps in Ihrem Cluster alle im selben Namensbereich befinden, ist mindestens eine Ingress-Ressource erforderlich, um die Weiterleitungsregeln für die dort zugänglich gemachten Apps zu definieren. Wenn beispielsweise `App1` und `App2` von Services in einem Namensbereich für die Entwicklung zugänglich gemacht werden, können Sie eine Ingress-Ressource in dem Namensbereich erstellen. Die Ressource gibt `domain.net` als Host an und registriert die Pfade, an denen die einzelnen Apps empfangsbereit sind, mit `domain.net`.
+<br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="Mindestens eine Ressource ist pro Namensbereich erforderlich." style="width:300px; border-style: none"/>
+</dd>
+<dt>Apps in mehreren Namensbereichen</dt>
+<dd>Wenn sich die Apps in Ihrem Cluster in unterschiedlichen Namensbereichen befinden, müssen Sie mindestens eine Ressource pro Namensbereich erstellen, um Regeln für die dort zugänglich gemachten Apps zu definieren. Um mehrere Ingress-Ressourcen mit der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) des Clusters zu registrieren, müssen Sie eine Platzhalterdomäne verwenden. Wenn eine solche Platzhalterdomäne, wie `*.mycluster.us-south.containers.appdomain.cloud`, registriert wird, werden mehrere Unterdomänen für denselben Host aufgelöst. Sie können dann in jedem Namensbereich eine Ingress-Ressource erstellen und in jeder Ingress-Ressource eine andere Unterdomäne angeben.
+<br><br>
+Nehmen Sie beispielsweise folgendes Szenario an:<ul>
+<li>Sie verfügen über zwei Versionen derselben App (`App1` und `App3`) zu Testzwecken.</li>
+<li>Sie stellen die Apps in zwei unterschiedlichen Namensbereichen im selben Cluster bereit: `App1` im Namensbereich für die Entwicklung und `App3` im Namensbereich für das Staging.</li></ul>
+Um dieselbe Cluster-ALB zum Verwalten von Datenverkehr für diese Apps zu verwenden, erstellen Sie die folgenden Services und Ressourcen:<ul>
+<li>Einen Kubernetes-Service im Namensbereich für die Entwicklung zum Bereitstellen von `App1`.</li>
+<li>Eine Ingress-Ressource im Namensbereich für die Entwicklung, die den Host als `dev.mycluster.us-south.containers.appdomain.cloud` angibt.</li>
+<li>Einen Kubernetes-Service im Namensbereich für das Staging zum Bereitstellen von `App3`.</li>
+<li>Eine Ingress-Ressource im Namensbereich für das Staging, die den Host als `stage.mycluster.us-south.containers.appdomain.cloud` angibt.</li></ul></br>
+<img src="images/cs_ingress_multi_ns.png" alt="Verwenden Sie in einem Namensbereich Unterdomänen in einer oder mehreren Ressourcen" style="border-style: none"/>
+Jetzt werden beide URLs für dieselbe Domäne aufgelöst und daher beide von derselben Lastausgleichsfunktion für Anwendungen (ALB) bedient. Da jedoch die Ressource im Namensbereich für das Staging mit der Unterdomäne `stage` registriert ist, leitet die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) Anforderungen ordnungsgemäß von der URL `stage.mycluster.us-south.containers.appdomain.cloud/app3` nur an `App3` weiter.</dd>
+</dl>
+
+**Hinweis**:
+* Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. TLS wird jedoch nicht für den von IBM bereitgestellten Platzhalter für die Ingress-Unterdomäne unterstützt.
+* Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+
+### Mehrere Domänen in einem Namensbereich
+
+In einem einzelnen Namensbereich können Sie über eine Domäne auf alle Apps in dem Namensbereich zugreifen. Wenn Sie für die Apps in einem einzelnen Namensbereich unterschiedliche Domänen verwenden möchten, verwenden Sie eine Platzhalterdomäne. Wenn eine solche Platzhalterdomäne, wie `*.mycluster.us-south.containers.appdomain.cloud`, registriert wird, werden mehrere Unterdomänen für denselben Host aufgelöst. Sie können dann eine Ressource verwenden, um mehrere Unterdomänenhosts in dieser Ressource anzugeben. Alternativ können Sie in dem Namensbereich mehrere Ingress-Ressourcen erstellen und in jeder Ingress-Ressource eine andere Unterdomäne angeben.
+
+
+<img src="images/cs_ingress_single_ns_multi_subs.png" alt="Es ist mindestens eine Ressource pro Namensbereich erforderlich." style="border-style: none"/>
+
+**Hinweis**:
+* Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. TLS wird jedoch nicht für den von IBM bereitgestellten Platzhalter für die Ingress-Unterdomäne unterstützt.
+* Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+
+<br />
+
+
+## Apps in Ihrem Cluster öffentlich zugänglich machen
+{: #ingress_expose_public}
+
+Machen Sie Apps in Ihrem Cluster über die öffentliche Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) für die Allgemeinheit zugänglich.
 {:shortdesc}
 
 Vorbemerkungen:
 
+-   Überprüfen Sie die [Voraussetzungen](#config_prereqs) für Ingress.
 -   Wenn Sie nicht bereits über einen verfügen, [erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui).
 -   [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus, `kubectl`-Befehle auszuführen.
 
-Gehen Sie wie folgt vor, um eine App unter Verwendung der von IBM bereitgestellten Domäne zugänglich zu machen:
+### Schritt 1: Apps bereitstellen und App-Services erstellen
+{: #public_inside_1}
 
-1.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
+Stellen Sie als Erstes Ihre Apps bereit und erstellen Sie Kubernetes-Services und machen Sie diese zugänglich.
+{: shortdesc}
 
-2.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB öffentlich zugänglich gemacht wird. 
+1.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können.
+
+2.   Erstellen Sie einen Kubernetes-Service für jede App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden.
+      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei, beispielsweise `myapp_service.yaml`.
+      2.  Definieren Sie einen Service für die App, der von der ALB zugänglich gemacht wird.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selektorschlüssel>: <selektorwert>
@@ -115,14 +155,13 @@ Gehen Sie wie folgt vor, um eine App unter Verwendung der von IBM bereitgestellt
           {: codeblock}
 
           <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
           <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der ALB-Servicedateikomponenten</th>
           </thead>
           <tbody>
           <tr>
           <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
+          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei übereinstimmen.</td>
            </tr>
            <tr>
            <td><code>port</code></td>
@@ -130,15 +169,30 @@ Gehen Sie wie folgt vor, um eine App unter Verwendung der von IBM bereitgestellt
            </tr>
            </tbody></table>
       3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
+      4.  Erstellen Sie den Service in Ihrem Cluster. Wenn Apps in mehreren Namensbereichen in Ihrem Cluster bereitgestellt werden, stellen Sie sicher, dass der Service im selben Namensbereich bereitgestellt wird wie die App, die Sie zugänglich machen möchten.
 
           ```
-          kubectl apply -f myalbservice.yaml
+          kubectl apply -f myapp_service.yaml [-n <namensbereich>]
           ```
           {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie öffentlich zugänglich machen wollen. 
+      5.  Wiederholen Sie diese Schritte für jede App, die Sie zugänglich machen wollen.
 
-3. Rufen Sie die Details für Ihren Cluster ab, um die von IBM bereitgestellte Domäne anzuzeigen. Ersetzen Sie _&lt;clustername_oder_-id&gt;_ durch den Namen des Clusters, in dem die App bereitgestellt wird, die Sie öffentlich zugänglich machen möchten. 
+
+### Schritt 2: App-Domäne und TLS-Terminierung auswählen
+{: #public_inside_2}
+
+Beim Konfigurieren der öffentlichen Lastausgleichsfunktion für Anwendungen wählen Sie die Domäne aus, über die Ihre Apps zugänglich sind, und geben an, ob die TLS-Terminierung verwendet werden soll.
+{: shortdesc}
+
+<dl>
+<dt>Domäne</dt>
+<dd>Sie können die von IBM bereitgestellte Domäne, wie <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, für den Zugriff auf die App über das Internet verwenden. Um stattdessen eine angepasste Domäne zu verwenden, können Sie diese der von IBM bereitgestellten Domäne oder der öffentlichen IP-Adresse der Lastausgleichsfunktion für Anwendungen zuordnen.</dd>
+<dt>TLS-Terminierung</dt>
+<dd>Die Lastausgleichsfunktion für Anwendungen verteilt die Lasten des HTTP-Netzverkehrs auf die Apps in Ihrem Cluster. Um auch einen Lastausgleich für eingehende HTTPS-Verbindungen durchführen zu können, können Sie die Lastausgleichsfunktion so konfigurieren, dass der Netzverkehr entschlüsselt und die entschlüsselte Anforderung an die Apps weitergeleitet wird, die in Ihrem Cluster zugänglich sind. Wenn Sie die von IBM bereitgestellte Ingress-Unterdomäne verwenden, können Sie das von IBM bereitgestellte TLS-Zertifikat verwenden. TLS wird momentan nicht für von IBM bereitgestellte Platzhalter-Unterdomänen unterstützt. Wenn Sie eine angepasste Domäne verwenden, können Sie Ihr eigenes TLS-Zertifikat zum Verwalten der TLS-Terminierung nutzen.</dd>
+</dl>
+
+Gehen Sie wie folgt vor, um die von IBM bereitgestellte Ingress-Domäne zu verwenden:
+1. Rufen Sie die Details für den Cluster ab. Ersetzen Sie _&lt;clustername_oder_-id&gt;_ durch den Namen des Clusters, in dem die Apps, die Sie zugänglich machen möchten, bereitgestellt werden.
 
     ```
     bx cs cluster-get <clustername_oder_-id>
@@ -154,488 +208,214 @@ Gehen Sie wie folgt vor, um eine App unter Verwendung der von IBM bereitgestellt
     Created:                2018-01-12T18:33:35+0000
     Location:               dal10
     Master URL:             https://169.xx.xxx.xxx:26268
-    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
-    Ingress Secret:         <geheimer_tls-schlüssel>
+    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
+    Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.8.11
+    Version:                1.9.7
     Owner Email:            owner@email.com
-    Monitoring Dashboard:   <dashboard-URL>
+    Monitoring Dashboard:   <dashboard-url>
     ```
     {: screen}
+2. Rufen Sie die von IBM bereitgestellte Domäne im Feld **Ingress-Unterdomäne** ab. Wenn Sie TLS verwenden möchten, rufen Sie auch den von IBM bereitgestellten geheimen TLS-Schlüssel im Feld **Geheimer Ingress-Schlüssel** ab.
+    **Hinweis**: Wenn Sie eine Platzhalter-Unterdomäne verwenden, wird TLS nicht unterstützt.
 
-    Die von IBM bereitgestellte Domäne ist im Feld für die Ingress-Unterdomäne (**Ingress subdomain**) angegeben.
-4.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die von IBM bereitgestellte Domäne für das Weiterleiten von eingehendem Netzverkehr an die zuvor erstellten Services verwendet. 
+Gehen Sie wie folgt vor, um eine angepasste Domäne zu verwenden:
+1.    Erstellen Sie eine angepasste Domäne. Arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}}-DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
+      * Wenn sich die Apps, die über Ingress zugänglich gemacht werden sollen, in einem Cluster in unterschiedlichen Namensbereichen befinden, registrieren Sie die angepasste Domäne als Platzhalterdomäne, wie `*.custom_domain.net`.
 
-        ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: myingressresource
-        spec:
-          rules:
-          - host: <ibm-domäne>
-            http:
-              paths:
-              - path: /<service1_pfad>
-                backend:
-                  serviceName: <service1>
-                  servicePort: 80
-              - path: /<service2_pfad>
-                backend:
-                  serviceName: <service2>
-                  servicePort: 80
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>host</code></td>
-        <td>Ersetzen Sie <em>&lt;ibm-domäne&gt;</em> durch den Namen der <strong>Ingress-Unterdomäne</strong> aus dem vorherigen Schritt. 
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (*) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. 
-
-        </br>
-        Für jeden Kubernetes-Service können Sie einen individuellen Pfad definieren, der an die von IBM bereitgestellte Domäne angehängt wird; um einen eindeutigen Pfad zu Ihrer App zu erstellen, z. B. <code>ibm-domäne/service1_pfad</code>. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-        </br></br>
-        Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-        </br>
-        Beispiel: <ul><li>Geben Sie für <code>http://ibm-domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>http://ibm-domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-        </br>
-        <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.</td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
-        </tr>
-        </tbody></table>
-
-    3.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myingressresource.yaml
-        ```
-        {: pre}
-5.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
-
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
-
-6.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
-
-      ```
-      https://<ibm-domäne>/<service1_pfad>
-      ```
-      {: codeblock}
-
-
-<br />
-
-
-### Apps mithilfe der von IBM bereitgestellten Domäne mit TLS öffentlich zugänglich machen
-{: #ibm_domain_cert}
-
-Sie können die Ingress-ALB (Lastausgleichsfunktion für Anwendungen) so konfigurieren, dass eingehende TLS-Verbindungen für Ihre Apps verwaltet, der Netzverkehr mithilfe des von IBM bereitgestellten TLS-Zertifikats entschlüsselt und die entschlüsselte Anforderung an die Apps weitergeleitet wird, die in Ihrem Cluster zugänglich sind.
-{:shortdesc}
-
-Vorbemerkungen:
-
--   Wenn Sie nicht bereits über einen verfügen, [erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui).
--   [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus, `kubectl`-Befehle auszuführen.
-
-Gehen Sie wie folgt vor, um eine App unter Verwendung der von IBM bereitgestellten Domäne mit TLS zugänglich zu machen:
-
-1.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
-
-2.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB öffentlich zugänglich gemacht wird. 
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myalbservice
-          spec:
-            selector:
-              <selektorschlüssel>: <selektorwert>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>Der Port, den der Service überwacht.</td>
-           </tr>
-           </tbody></table>
-      3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
-
-          ```
-          kubectl apply -f myalbservice.yaml
-          ```
-          {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie öffentlich zugänglich machen wollen.
-
-3.   Zeigen Sie die von IBM bereitgestellte Domäne und das TLS-Zertifikat an. Ersetzen Sie _&lt;clustername_oder_-id&gt;_ durch den Namen des Clusters, in dem die App bereitgestellt wird. 
-
-      ```
-    bx cs cluster-get <clustername_oder_-id>
-    ```
-      {: pre}
-
-      Beispielausgabe:
-
-      ```
-      Name:                   mycluster
-      ID:                     18a61a63c6a94b658596ca93d087aad9
-      State:                  normal
-      Created:                2018-01-12T18:33:35+0000
-      Location:               dal10
-      Master URL:             https://169.xx.xxx.xxx:26268
-      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
-      Ingress Secret:         <geheimer_tls-schlüssel_von_ibm>
-      Workers:                3
-      Version:                1.8.11
-      Owner Email:            owner@email.com
-      Monitoring Dashboard:   <dashboard-URL>
-      ```
-      {: screen}
-
-      Die von IBM bereitgestellte Domäne ist im Feld **Ingress-Unterdomäne** und das von IBM bereitgestellte Zertifikat im Feld **Geheimer Ingress-Schlüssel** angegeben. 
-
-4.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die von IBM bereitgestellte Domäne für das Weiterleiten von eingehendem Netzverkehr an die Services, die Sie zuvor erstellt haben, und Ihr angepasstes Zertifikat für die Verwaltung der TLS-Terminierung verwendet. 
-
-        ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: myingressresource
-        spec:
-          tls:
-          - hosts:
-            - <ibm-domäne>
-            secretName: <geheimer_tls-schlüssel_von_ibm>
-          rules:
-          - host: <ibm-domäne>
-            http:
-              paths:
-              - path: /<service1_pfad>
-                backend:
-                  serviceName: <service1>
-                  servicePort: 80
-              - path: /<service2_pfad>
-                backend:
-                  serviceName: <service2>
-                  servicePort: 80
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>tls/hosts</code></td>
-        <td>Ersetzen Sie <em>&lt;ibm-domäne&gt;</em> durch den Namen der <strong>Ingress-Unterdomäne</strong> aus dem vorherigen Schritt. Diese Domäne ist für TLS-Terminierung konfiguriert.
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>tls/secretName</code></td>
-        <td>Ersetzen Sie <em>&lt;<geheimer_tls-schlüssel_von_ibm>&gt;</em> durch den von IBM bereitgestellten Namen des <strong>geheimen Ingress-Schlüssels</strong> aus dem vorherigen Schritt. Mithilfe dieses Zertifikats wird die TLS-Terminierung verwaltet.
-        </tr>
-        <tr>
-        <td><code>host</code></td>
-        <td>Ersetzen Sie <em>&lt;ibm-domäne&gt;</em> durch den Namen der <strong>Ingress-Unterdomäne</strong> aus dem vorherigen Schritt. Diese Domäne ist für TLS-Terminierung konfiguriert.
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. 
-
-        </br>
-        Für jeden Kubernetes-Service können Sie einen individuellen Pfad definieren, der an die von IBM bereitgestellte Domäne angehängt wird; um einen eindeutigen Pfad zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-        </br>
-        Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-
-        </br>
-        Beispiel: <ul><li>Geben Sie für <code>http://ibm-domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>http://ibm-domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-        <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.</td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
-        </tr>
-        </tbody></table>
-
-    3.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myingressresource.yaml
-        ```
-        {: pre}
-5.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
-
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
-
-6.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
-
-      ```
-      https://<ibm-domäne>/<service1_pfad>
-      ```
-      {: codeblock}
-
-
-<br />
-
-
-### Apps mithilfe einer angepassten Domäne mit TLS öffentlich zugänglich machen
-{: #custom_domain_cert}
-
-Sie können die Lastausgleichsfunktion für Anwendungen (ALB) zum Weiterleiten von eingehendem Netzverkehr an die Apps in Ihrem Cluster verwenden und Ihr eigenes TLS-Zertifikat zum Verwalten der TLS-Terminierung nutzen, wobei Sie statt der von IBM bereitgestellten Domäne Ihre angepasste Domäne verwenden.
-{:shortdesc}
-
-Vorbemerkungen:
-
--   Wenn Sie nicht bereits über einen verfügen, [erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui).
--   [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus, `kubectl`-Befehle auszuführen.
-
-Gehen Sie wie folgt vor, um eine App unter Verwendung einer angepassten Domäne mit TLS zugänglich zu machen:
-
-1.  Erstellen Sie eine angepasste Domäne. Zum Erstellen einer angepassten Domäne arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
 2.  Konfigurieren Sie Ihre Domäne, um eingehenden Netzverkehr an die von IBM bereitgestellte Lastausgleichsfunktion für Anwendungen (ALB) weiterzuleiten. Wählen Sie zwischen diesen Optionen:
-    -   Definieren Sie einen Alias für Ihre angepasste Domäne, indem Sie die von IBM bereitgestellte Domäne als kanonischen Namensdatensatz (CNAME) angeben. Führen Sie `bx cs cluster-get <clustername>` aus, um die von IBM bereitgestellte Ingress-Domäne zu suchen, und suchen Sie nach dem Feld für die Ingress-Unterdomäne (**Ingress subdomain**).
+    -   Definieren Sie einen Alias für Ihre angepasste Domäne, indem Sie die von IBM bereitgestellte Domäne als kanonischen Namensdatensatz (CNAME) angeben. Führen Sie `bx cs cluster-get <cluster_name>` aus, um die von IBM bereitgestellte Ingress-Domäne zu suchen, und suchen Sie nach dem Feld für die Ingress-Unterdomäne (**Ingress subdomain**).
     -   Ordnen Sie Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse der von IBM bereitgestellten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare öffentliche IP-Adresse der ALB zu finden, führen Sie folgenden Befehl aus: `bx cs alb-get <public_alb_ID>`.
-3.  Importieren oder erstellen Sie ein TLS-Zertifikat und einen geheimen Schlüssel:
-    * Wenn in {{site.data.keyword.cloudcerts_long_notm}} bereits ein TLS-Zertifikat gespeichert ist, das Sie verwenden wollen, können Sie den zugehörigen geheimen Schlüssel in Ihren Cluster importieren, indem Sie den folgenden Befehl ausführen:
-
-      ```
-      bx cs alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats>
-      ```
-      {: pre}
-
-    * Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
-        1. Erstellen Sie ein TLS-Zertifikat und einen Schlüssel für Ihre Domäne, der im PEM-Format codiert ist.
-        2. Erstellen Sie einen geheimen Schlüssel, der Ihr TLS-Zertifikat und Ihren Schlüssel verwendet. Ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch einen Namen für Ihren geheimen Kubernetes-Schlüssel, <em>&lt;dateipfad_des_tls-schlüssels&gt;</em> durch den Pfad Ihrer angepassten TLS-Schlüsseldatei und <em>&lt;dateipfad_des_tls-zertifikats&gt;</em> durch den Pfad Ihrer angepassten TLS-Zertifikatsdatei. 
-
-            ```
-            kubectl create secret tls <name_des_geheimen_tls-schlüssels> --key <dateipfad_des_tls-schlüssels> --cert <dateipfad_des_tls-zertifikats>
-            ```
-            {: pre}
-4.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
-
-5.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB öffentlich zugänglich gemacht wird. 
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myalbservice
-          spec:
-            selector:
-              <selektorschlüssel>: <selektorwert>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>Der Port, den der Service überwacht.</td>
-           </tr>
-           </tbody></table>
-      3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
-
-          ```
-          kubectl apply -f myalbservice.yaml
-          ```
-          {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie öffentlich zugänglich machen wollen.
-
-6.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an Ihre Services und Ihr angepasstes Zertifikat für die Verwaltung der TLS-Terminierung verwendet.
-
+3.   Optional: Wenn Sie TLS verwenden möchten, importieren oder erstellen Sie ein TLS-Zertifikat und geheimen Schlüssel. Wenn Sie eine Platzhalterdomäne verwenden, stellen Sie sicher, dass Sie ein Platzhalterzertifikat importieren oder erstellen.
+      * Wenn in {{site.data.keyword.cloudcerts_long_notm}} bereits ein TLS-Zertifikat gespeichert ist, das Sie verwenden wollen, können Sie den zugehörigen geheimen Schlüssel in Ihren Cluster importieren, indem Sie den folgenden Befehl ausführen:
         ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: myingressresource
-        spec:
-          tls:
-          - hosts:
-            - <angepasste_domäne>
-            secretName: <geheimer_tls-schlüssel>
-          rules:
-          - host: <angepasste_domäne>
-            http:
-              paths:
-              - path: /<service1_pfad>
-                backend:
-                  serviceName: <service1>
-                  servicePort: 80
-              - path: /<service2_pfad>
-                backend:
-                  serviceName: <service2>
-                  servicePort: 80
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>tls/hosts</code></td>
-        <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch die angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten. 
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>tls/secretName</code></td>
-        <td>Ersetzen Sie <em>&lt;geheimer_tls-schlüssel&gt;</em> durch den Namen des zuvor erstellten geheimen Schlüssels, der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.
-        </tr>
-        <tr>
-        <td><code>host</code></td>
-        <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch die angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten. 
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.
-        </td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. 
-
-        </br>
-        Für jeden Service können Sie einen individuellen Pfad definieren, der an Ihre angepasste Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-        </br>
-        Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-
-        </br></br>
-        Beispiel: <ul><li>Geben Sie für <code>https://angepasste_domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>https://angepasste_domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-        <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.
-        </td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
-        </tr>
-        </tbody></table>
-
-    3.  Speichern Sie Ihre Änderungen.
-    4.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myingressresource.yaml
+        bx cs alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats>
         ```
         {: pre}
-7.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
+      * Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
+        1. Erstellen Sie ein TLS-Zertifikat und einen Schlüssel für Ihre Domäne, der im PEM-Format codiert ist.
+        2. Erstellen Sie einen geheimen Schlüssel, der Ihr TLS-Zertifikat und Ihren Schlüssel verwendet. Ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch einen Namen für Ihren geheimen Kubernetes-Schlüssel, <em>&lt;dateipfad_des_tls-schlüssels&gt;</em> durch den Pfad Ihrer angepassten TLS-Schlüsseldatei und <em>&lt;dateipfad_des_tls-zertifikats&gt;</em> durch den Pfad Ihrer angepassten TLS-Zertifikatsdatei.
+          ```
+          kubectl create secret tls <name_des_geheimen_tls-schlüssels> --key <dateipfad_des_tls-schlüssels> --cert <dateipfad_des_tls-zertifikats>
+          ```
+          {: pre}
+
+
+### Schritt 3: Ingress-Ressource erstellen
+{: #public_inside_3}
+
+Ingress-Ressourcen definieren die Routing-Regeln, mit der die Lastausgleichsfunktion für Anwendungen Datenverkehr an Ihren App-Service weiterleitet.
+{: shortdesc}
+
+**Hinweis:** Wenn Ihr Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich mindestens eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+
+1. Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel).
+
+2. Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die von IBM bereitgestellte Domäne oder Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an die zuvor erstellten Services verwendet.
+
+    YALM-Beispieldatei ohne TLS:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+    spec:
+      rules:
+      - host: <domäne>
+        http:
+          paths:
+          - path: /<app1-pfad>
+            backend:
+              serviceName: <app1-service>
+              servicePort: 80
+          - path: /<app2-pfad>
+            backend:
+              serviceName: <app2-service>
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    YALM-Beispieldatei mit TLS:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+    spec:
+      tls:
+      - hosts:
+        - <domäne>
+        secretName: <name_des_geheimen_tls-schlüssels>
+      rules:
+      - host: <domäne>
+        http:
+          paths:
+          - path: /<app1-pfad>
+            backend:
+              serviceName: <app1-service>
+              servicePort: 80
+          - path: /<app2-pfad>
+            backend:
+              serviceName: <app2-service>
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>tls/hosts</code></td>
+    <td>Um TLS zu verwenden, ersetzen Sie <em>&lt;domäne&gt;</em> durch die von IBM bereitgestellte Ingress-Unterdomäne oder Ihre angepasste Domäne.
+
+    </br></br>
+    <strong>Hinweis:</strong><ul><li>Wenn die Apps von Services in einem Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net` oder `subdomain1.mycluster.us-south.containers.appdomain.cloud`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>tls/secretName</code></td>
+    <td><ul><li>Wenn Sie die von IBM bereitgestellte Ingress-Domäne verwenden, ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch den Namen des von IBM bereitgestellten geheimen Ingress-Schlüssels.</li><li>Wenn Sie eine angepasste Domäne verwenden, ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch den geheimen Schlüssel, den Sie zuvor erstellt haben und der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.</li><ul><td>
+    </tr>
+    <tr>
+    <td><code>host</code></td>
+    <td>Ersetzen Sie <em>&lt;domäne&gt;</em> durch die von IBM bereitgestellte Ingress-Unterdomäne oder Ihre angepasste Domäne.
+
+    </br></br>
+    <strong>Hinweis:</strong><ul><li>Wenn die Apps von Services in einem Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net` oder `subdomain1.mycluster.us-south.containers.appdomain.cloud`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+    <td>Ersetzen Sie <em>&lt;app-pfad&gt;</em> durch einen Schrägstrich oder den Pfad, den Ihre App überwacht. Der Pfad wird an die von IBM bereitstellte Domäne oder Ihre angepasste Domäne angehängt, um eine eindeutige Route zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird.
+    </br></br>
+    Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an. Beispiel: <ul><li>Geben Sie für <code>http://domain/</code> als Pfad <code>/</code> ein.</li><li>Geben Sie für <code>http://domain/app1-pfad</code> als Pfad <code>/app1-pfad</code> ein.</li></ul>
+    </br>
+    <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie die [Annotation zum erneuten Schreiben (rewrite)](cs_annotations.html#rewrite-path) verwenden.
+    </td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Ersetzen Sie <em>&lt;app1-service&gt;</em> und <em>&lt;app2-service&gt;</em> usw. durch die entsprechenden Namen der Services, die Sie erstellt haben, um die Apps zugänglich zu machen. Wenn die Apps von Services im Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, schließen Sie nur App-Services ein, die sich im selben Namensbereich befinden. Sie müssen für jeden Namensbereich, in denen Apps zugänglich gemacht werden sollen, eine Ingress-Ressource erstellen.</td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
+    </tr>
+    </tbody></table>
+
+3.  Erstellen Sie die Ingress-Ressource für Ihr Cluster. Stellen Sie sicher, dass die Ressource im selben Namensbereich wie die App-Services bereitgestellt wird, die in der Ressource angegeben wurden.
+
+    ```
+    kubectl apply -f myingressresource.yaml -n <namensbereich>
+    ```
+    {: pre}
+4.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
 
       ```
       kubectl describe ingress myingressresource
       ```
       {: pre}
 
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
+      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an.
 
-8.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
 
-      ```
-      https://<angepasste_domäne>/<service1_pfad>
-      ```
-      {: codeblock}
+Die Ingress-Ressource wird im selben Namensbereich wie die App-Services erstellt. Die Apps in diesem Namensbereich werden für die Ingress-Lastausgleichsfunktion für Anwendungen des Clusters registriert.
+
+### Schritt 4: Über das Internet auf die App zugreifen
+{: #public_inside_4}
+
+Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
+
+```
+https://<domäne>/<app1-pfad>
+```
+{: pre}
+
+Wenn Sie mehrere Apps zugänglich gemacht haben, greifen Sie auf diese Apps zu, indem Sie den an die URL angehängten Pfad ändern.
+
+```
+https://<domain>/<app2-pfad>
+```
+{: pre}
+
+Wenn Sie Apps in verschiedenen Namensbereichen über eine Platzhalterdomäne zugänglich machen, greifen Sie auf diese Apps mit den entsprechenden Unterdomänen zu.
+
+```
+http://<unterdomäne1>.<domäne>/<app1-pfad>
+```
+{: pre}
+
+```
+http://<unterdomäne2>.<domäne>/<app1-pfad>
+```
+{: pre}
 
 
 <br />
 
 
-### Apps außerhalb des verwendeten Clusters mithilfe der von IBM bereitgestellten oder einer angepassten Domäne mit TLS öffentlich zugänglich machen
+## Apps außerhalb Ihres Clusters öffentlich zugänglich machen
 {: #external_endpoint}
 
-Sie können die Lastausgleichsfunktion für Anwendungen (ALB) so konfigurieren, dass Apps, die sich außerhalb des Clusters befinden, berücksichtigt werden. Eingehende Anforderungen an die von IBM bereitgestellte oder Ihre angepasste Domäne werden automatisch an die externe App weitergeleitet.
+Machen Sie Apps außerhalb Ihres Clusters öffentlich zugänglich, indem Sie sie in den öffentlichen Lastausgleich der Ingress-ALB einschließen. Eingehende öffentliche Anforderungen an die von IBM bereitgestellte oder Ihre angepasste Domäne werden automatisch an die externe App weitergeleitet.
 {:shortdesc}
 
 Vorbemerkungen:
 
+-   Überprüfen Sie die [Voraussetzungen](#config_prereqs) für Ingress.
 -   Wenn Sie nicht bereits über einen verfügen, [erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui).
 -   [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus, `kubectl`-Befehle auszuführen.
 -   Stellen Sie sicher, dass auf die externe App, die Sie beim Lastausgleich des Clusters berücksichtigen möchten, über eine öffentliche IP-Adresse zugegriffen werden kann.
 
-Sie können eingehenden Netzverkehr in der von IBM bereitgestellten Domäne an Apps weiterleiten, die sich außerhalb Ihres Clusters befinden. Wenn Sie stattdessen eine angepasste Domäne und ein TLS-Zertifikat verwenden möchten, ersetzen Sie die von IBM bereitgestellte Domäne und das TLS-Zertifikat durch Ihre [angepasste Domäne und das TLS-Zertifikat](#custom_domain_cert).
+### Schritt 1: App-Service und externen Endpunkt erstellen
+{: #public_outside_1}
+
+Erstellen Sie zunächst einen Kubernetes-Service, um die externe App zugänglich zu machen, und konfigurieren Sie einen externen Kubernetes-Endpunkt für die App.
+{: shortdesc}
 
 1.  Erstellen Sie einen Kubernetes-Service für Ihren Cluster, der eingehende Anforderungen an einen von Ihnen erstellten externen Endpunkt weiterleitet.
     1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myexternalservice.yaml` (Beispiel).
-    2.  Definieren Sie den ALB-Service.
+    2.  Definieren Sie einen Service für die App, der von der ALB zugänglich gemacht wird.
 
         ```
         apiVersion: v1
@@ -657,7 +437,7 @@ Sie können eingehenden Netzverkehr in der von IBM bereitgestellten Domäne an A
         <tbody>
         <tr>
         <td><code>metadata/name</code></td>
-        <td>Ersetzen Sie <em>&lt;mein_externer_service&gt;</em> durch den Namen Ihres Service. </td>
+        <td>Ersetzen Sie <em>&lt;mein_externer_service&gt;</em> durch den Namen Ihres Service.<p>Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.</p></td>
         </tr>
         <tr>
         <td><code>port</code></td>
@@ -682,8 +462,8 @@ Sie können eingehenden Netzverkehr in der von IBM bereitgestellten Domäne an A
           name: myexternalendpoint
         subsets:
           - addresses:
-              - ip: <externe_IP1>
-              - ip: <externe_IP2>
+              - ip: <externe_ip1>
+              - ip: <externe_ip2>
             ports:
               - port: <externer_port>
         ```
@@ -696,14 +476,14 @@ Sie können eingehenden Netzverkehr in der von IBM bereitgestellten Domäne an A
         <tbody>
         <tr>
         <td><code>name</code></td>
-        <td>Ersetzen Sie <em>&lt;myexternalendpoint&gt;</em> durch den Namen des Kubernetes-Service, den Sie zuvor erstellt haben. </td>
+        <td>Ersetzen Sie <em>&lt;myexternalendpoint&gt;</em> durch den Namen des Kubernetes-Service, den Sie zuvor erstellt haben.</td>
         </tr>
         <tr>
         <td><code>ip</code></td>
-        <td>Ersetzen Sie <em>&lt;externe_IP&gt;</em> durch die öffentlichen IP-Adressen für die Verbindung mit Ihrer externen App. </td>
+        <td>Ersetzen Sie <em>&lt;externe_IP&gt;</em> durch die öffentlichen IP-Adressen für die Verbindung mit Ihrer externen App.</td>
          </tr>
          <td><code>port</code></td>
-         <td>Ersetzen Sie <em>&lt;externer_port&gt;</em> durch den Port, den Ihre externe App überwacht. </td>
+         <td>Ersetzen Sie <em>&lt;externer_port&gt;</em> durch den Port, den Ihre externe App überwacht.</td>
          </tbody></table>
 
     3.  Speichern Sie Ihre Änderungen.
@@ -713,152 +493,225 @@ Sie können eingehenden Netzverkehr in der von IBM bereitgestellten Domäne an A
         kubectl apply -f myexternalendpoint.yaml
         ```
         {: pre}
-3.   Zeigen Sie die von IBM bereitgestellte Domäne und das TLS-Zertifikat an. Ersetzen Sie _&lt;clustername_oder_-id&gt;_ durch den Namen des Clusters, in dem die App bereitgestellt wird. 
 
-      ```
+### Schritt 2: App-Domäne und TLS-Terminierung auswählen
+{: #public_outside_2}
+
+Beim Konfigurieren der öffentlichen Lastausgleichsfunktion für Anwendungen wählen Sie die Domäne aus, über die Ihre Apps zugänglich sind, und geben an, ob die TLS-Terminierung verwendet werden soll.
+{: shortdesc}
+
+<dl>
+<dt>Domäne</dt>
+<dd>Sie können die von IBM bereitgestellte Domäne, wie <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, für den Zugriff auf die App über das Internet verwenden. Um stattdessen eine angepasste Domäne zu verwenden, können Sie diese der von IBM bereitgestellten Domäne oder der öffentlichen IP-Adresse der Lastausgleichsfunktion für Anwendungen zuordnen.</dd>
+<dt>TLS-Terminierung</dt>
+<dd>Die Lastausgleichsfunktion für Anwendungen verteilt die Lasten des HTTP-Netzverkehrs auf die Apps in Ihrem Cluster. Um auch einen Lastausgleich für eingehende HTTPS-Verbindungen durchführen zu können, können Sie die Lastausgleichsfunktion so konfigurieren, dass der Netzverkehr entschlüsselt und die entschlüsselte Anforderung an die Apps weitergeleitet wird, die in Ihrem Cluster zugänglich sind. Wenn Sie die von IBM bereitgestellte Ingress-Unterdomäne verwenden, können Sie das von IBM bereitgestellte TLS-Zertifikat verwenden. TLS wird momentan nicht für von IBM bereitgestellte Platzhalter-Unterdomänen unterstützt. Wenn Sie eine angepasste Domäne verwenden, können Sie Ihr eigenes TLS-Zertifikat zum Verwalten der TLS-Terminierung nutzen.</dd>
+</dl>
+
+Gehen Sie wie folgt vor, um die von IBM bereitgestellte Ingress-Domäne zu verwenden:
+1. Rufen Sie die Details für den Cluster ab. Ersetzen Sie _&lt;clustername_oder_-id&gt;_ durch den Namen des Clusters, in dem die Apps, die Sie zugänglich machen möchten, bereitgestellt werden.
+
+    ```
     bx cs cluster-get <clustername_oder_-id>
     ```
-      {: pre}
+    {: pre}
 
-      Beispielausgabe:
+    Beispielausgabe:
 
-      ```
-      Name:                   mycluster
-      ID:                     18a61a63c6a94b658596ca93d087aad9
-      State:                  normal
-      Created:                2018-01-12T18:33:35+0000
-      Location:               dal10
-      Master URL:             https://169.xx.xxx.xxx:26268
-      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
-      Ingress Secret:         <geheimer_tls-schlüssel_von_ibm>
-      Workers:                3
-      Version:                1.8.11
-      Owner Email:            owner@email.com
-      Monitoring Dashboard:   <dashboard-URL>
-      ```
-      {: screen}
+    ```
+    Name:                   mycluster
+    ID:                     18a61a63c6a94b658596ca93d087aad9
+    State:                  normal
+    Created:                2018-01-12T18:33:35+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:26268
+    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
+    Ingress Secret:         <tls_secret>
+    Workers:                3
+    Version:                1.9.7
+    Owner Email:            owner@email.com
+    Monitoring Dashboard:   <dashboard-url>
+    ```
+    {: screen}
+2. Rufen Sie die von IBM bereitgestellte Domäne im Feld **Ingress-Unterdomäne** ab. Wenn Sie TLS verwenden möchten, rufen Sie auch den von IBM bereitgestellten geheimen TLS-Schlüssel im Feld **Geheimer Ingress-Schlüssel** ab. **Hinweis**: Wenn Sie eine Platzhalter-Unterdomäne verwenden, wird TLS nicht unterstützt.
 
-      Die von IBM bereitgestellte Domäne ist im Feld **Ingress-Unterdomäne** und das von IBM bereitgestellte Zertifikat im Feld **Geheimer Ingress-Schlüssel** angegeben. 
+Gehen Sie wie folgt vor, um eine angepasste Domäne zu verwenden:
+1.    Erstellen Sie eine angepasste Domäne. Arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
+      * Wenn sich die Apps, die über Ingress zugänglich gemacht werden sollen, in einem Cluster in unterschiedlichen Namensbereichen befinden, registrieren Sie die angepasste Domäne als Platzhalterdomäne, wie `*.custom_domain.net`.
 
-4.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie können eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere externe Apps zu definieren, solange jede App mit ihrem externen Endpunkt über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myexternalingress.yaml` (Beispiel).
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die von IBM bereitgestellte Domäne und das TLS-Zertifikat für das Weiterleiten von eingehendem Netzverkehr an Ihre externe App mithilfe des zuvor definierten externen Endpunkts verwendet.
-
+2.  Konfigurieren Sie Ihre Domäne, um eingehenden Netzverkehr an die von IBM bereitgestellte Lastausgleichsfunktion für Anwendungen (ALB) weiterzuleiten. Wählen Sie zwischen diesen Optionen:
+    -   Definieren Sie einen Alias für Ihre angepasste Domäne, indem Sie die von IBM bereitgestellte Domäne als kanonischen Namensdatensatz (CNAME) angeben. Führen Sie `bx cs cluster-get <cluster_name>` aus, um die von IBM bereitgestellte Ingress-Domäne zu suchen, und suchen Sie nach dem Feld für die Ingress-Unterdomäne (**Ingress subdomain**).
+    -   Ordnen Sie Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse der von IBM bereitgestellten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare öffentliche IP-Adresse der ALB zu finden, führen Sie folgenden Befehl aus: `bx cs alb-get <public_alb_ID>`.
+3.   Optional: Wenn Sie TLS verwenden möchten, importieren oder erstellen Sie ein TLS-Zertifikat und geheimen Schlüssel. Wenn Sie eine Platzhalterdomäne verwenden, stellen Sie sicher, dass Sie ein Platzhalterzertifikat importieren oder erstellen.
+      * Wenn in {{site.data.keyword.cloudcerts_long_notm}} bereits ein TLS-Zertifikat gespeichert ist, das Sie verwenden wollen, können Sie den zugehörigen geheimen Schlüssel in Ihren Cluster importieren, indem Sie den folgenden Befehl ausführen:
         ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: myexternalingress
-        spec:
-          tls:
-          - hosts:
-            - <ibm-domäne>
-            secretName: <geheimer_tls-schlüssel_von_ibm>
-          rules:
-          - host: <ibm-domäne>
-            http:
-              paths:
-              - path: /<externer_service1_pfad>
-                backend:
-                  serviceName: <externer_service1>
-                  servicePort: 80
-              - path: /<externer_service2_pfad>
-                backend:
-                  serviceName: <externer_service2>
-                  servicePort: 80
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>tls/hosts</code></td>
-        <td>Ersetzen Sie <em>&lt;ibm-domäne&gt;</em> durch den Namen der <strong>Ingress-Unterdomäne</strong> aus dem vorherigen Schritt. Diese Domäne ist für TLS-Terminierung konfiguriert.
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>tls/secretName</code></td>
-        <td>Ersetzen Sie <em>&lt;geheimer_tls-schlüssel_von_ibm&gt;</em> durch den von IBM bereitgestellten <strong>geheimen Ingress-Schlüssel</strong> aus dem vorherigen Schritt. Mithilfe dieses Zertifikats wird die TLS-Terminierung verwaltet.</td>
-        </tr>
-        <tr>
-        <td><code>rules/host</code></td>
-        <td>Ersetzen Sie <em>&lt;ibm-domäne&gt;</em> durch den Namen der <strong>Ingress-Unterdomäne</strong> aus dem vorherigen Schritt. Diese Domäne ist für TLS-Terminierung konfiguriert.
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td>Ersetzen Sie <em>&lt;externer_servicepfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre Anwendung überwacht, sodass Netzverkehr an die externe App weitergeleitet werden kann. 
-
-        </br>
-        Für jeden Service können Sie einen individuellen Pfad definieren, der an die von IBM bereitgestellte Domäne oder die angepasste Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen, z. B. <code>http://ibm-domäne/externer_servicepfad</code> oder <code>http://angepasste_domäne/</code>. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr an die externe App weiter. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-        </br></br>
-        Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-
-        </br></br>
-        <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.</td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td>Ersetzen Sie <em>&lt;externer_service&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre externe App verwendet haben. </td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>Der Port, den Ihr Service überwacht.</td>
-        </tr>
-        </tbody></table>
-
-    3.  Speichern Sie Ihre Änderungen.
-    4.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myexternalingress.yaml
+        bx cs alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats>
         ```
         {: pre}
-5.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
+      * Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
+        1. Erstellen Sie ein TLS-Zertifikat und einen Schlüssel für Ihre Domäne, der im PEM-Format codiert ist.
+        2. Erstellen Sie einen geheimen Schlüssel, der Ihr TLS-Zertifikat und Ihren Schlüssel verwendet. Ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch einen Namen für Ihren geheimen Kubernetes-Schlüssel, <em>&lt;dateipfad_des_tls-schlüssels&gt;</em> durch den Pfad Ihrer angepassten TLS-Schlüsseldatei und <em>&lt;dateipfad_des_tls-zertifikats&gt;</em> durch den Pfad Ihrer angepassten TLS-Zertifikatsdatei.
+          ```
+          kubectl create secret tls <name_des_geheimen_tls-schlüssels> --key <dateipfad_des_tls-schlüssels> --cert <dateipfad_des_tls-zertifikats>
+          ```
+          {: pre}
+
+
+### Schritt 3: Ingress-Ressource erstellen
+{: #public_outside_3}
+
+Ingress-Ressourcen definieren die Routing-Regeln, mit der die Lastausgleichsfunktion für Anwendungen Datenverkehr an Ihren App-Service weiterleitet.
+{: shortdesc}
+
+**Hinweis:** Wenn Sie mehrere externe Apps zugänglich machen und sich die von Ihnen für die Apps in [Schritt 1](#public_outside_1) erstellten Services in unterschiedlichen Namensbereiche befinden, ist mindestens eine Ingress-Ressource pro Namensbereich erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+
+1. Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myexternalingress.yaml` (Beispiel).
+
+2. Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die von IBM bereitgestellte Domäne oder Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an die zuvor erstellten Services verwendet.
+
+    YALM-Beispieldatei ohne TLS:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myexternalingress
+    spec:
+      rules:
+      - host: <domäne>
+        http:
+          paths:
+          - path: /<pfad_der_externen_app1>
+            backend:
+              serviceName: <app1-service>
+              servicePort: 80
+          - path: /<pfad_der_externen_app2>
+            backend:
+              serviceName: <app2-service>
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    YALM-Beispieldatei mit TLS:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myexternalingress
+    spec:
+      tls:
+      - hosts:
+        - <domäne>
+        secretName: <name_des_geheimen_tls-schlüssels>
+      rules:
+      - host: <domäne>
+        http:
+          paths:
+          - path: /<pfad_der_externen_app1>
+            backend:
+              serviceName: <app1-service>
+              servicePort: 80
+          - path: /<pfad_der_externen_app2>
+            backend:
+              serviceName: <app2-service>
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>tls/hosts</code></td>
+    <td>Um TLS zu verwenden, ersetzen Sie <em>&lt;domäne&gt;</em> durch die von IBM bereitgestellte Ingress-Unterdomäne oder Ihre angepasste Domäne.
+
+    </br></br>
+    <strong>Hinweis:</strong><ul><li>Wenn sich die App-Service in unterschiedlichen Namensbereichen im Cluster befinden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net` oder `subdomain1.mycluster.us-south.containers.appdomain.cloud`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>tls/secretName</code></td>
+    <td><ul><li>Wenn Sie die von IBM bereitgestellte Ingress-Domäne verwenden, ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch den Namen des von IBM bereitgestellten geheimen Ingress-Schlüssels.</li><li>Wenn Sie eine angepasste Domäne verwenden, ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch den geheimen Schlüssel, den Sie zuvor erstellt haben und der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.</li><ul><td>
+    </tr>
+    <tr>
+    <td><code>rules/host</code></td>
+    <td>Ersetzen Sie <em>&lt;domäne&gt;</em> durch die von IBM bereitgestellte Ingress-Unterdomäne oder Ihre angepasste Domäne.
+
+    </br></br>
+    <strong>Hinweis:</strong><ul><li>Wenn die Apps von Services in einem Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net` oder `subdomain1.mycluster.us-south.containers.appdomain.cloud`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+    <td>Ersetzen Sie <em>&lt;pfad_der_externen_app&gt;</em> durch einen Schrägstrich oder den Pfad, den Ihre App überwacht. Der Pfad wird an die von IBM bereitstellte Domäne oder Ihre angepasste Domäne angehängt, um eine eindeutige Route zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr an die externe App weiter. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten.
+    </br></br>
+    Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an. Beispiel: <ul><li>Geben Sie für <code>http://domain/</code> als Pfad <code>/</code> ein.</li><li>Geben Sie für <code>http://domain/app1-pfad</code> als Pfad <code>/app1-pfad</code> ein.</li></ul>
+    </br></br>
+    <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie die [Annotation zum erneuten Schreiben (rewrite)](cs_annotations.html#rewrite-path) verwenden.</td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Ersetzen Sie <em>&lt;app1-service&gt;</em> und <em>&lt;app2-service&gt;</em> usw. durch die entsprechenden Namen der Services, die Sie erstellt haben, um die externen Apps zugänglich zu machen. Wenn die Apps von Services im Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, schließen Sie nur App-Services ein, die sich im selben Namensbereich befinden. Sie müssen für jeden Namensbereich, in denen Apps zugänglich gemacht werden sollen, eine Ingress-Ressource erstellen.</td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
+    </tr>
+    </tbody></table>
+
+3.  Erstellen Sie die Ingress-Ressource für Ihr Cluster. Stellen Sie sicher, dass die Ressource im selben Namensbereich wie die App-Services bereitgestellt wird, die in der Ressource angegeben wurden.
+
+    ```
+    kubectl apply -f myexternalingress.yaml -n <namensbereich>
+    ```
+    {: pre}
+4.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
 
       ```
       kubectl describe ingress myingressresource
       ```
       {: pre}
 
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
+      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an.
 
-6.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
 
-      ```
-      https://<ibm-domäne>/<service1_pfad>
-      ```
-      {: codeblock}
+Die Ingress-Ressource wird im selben Namensbereich wie die App-Services erstellt. Die Apps in diesem Namensbereich werden für die Ingress-Lastausgleichsfunktion für Anwendungen des Clusters registriert.
+
+### Schritt 4: Über das Internet auf die App zugreifen
+{: #public_outside_4}
+
+Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
+
+```
+https://<domäne>/<app1-pfad>
+```
+{: pre}
+
+Wenn Sie mehrere Apps zugänglich gemacht haben, greifen Sie auf diese Apps zu, indem Sie den an die URL angehängten Pfad ändern.
+
+```
+https://<domain>/<app2-pfad>
+```
+{: pre}
+
+Wenn Sie Apps in verschiedenen Namensbereichen über eine Platzhalterdomäne zugänglich machen, greifen Sie auf diese Apps mit den entsprechenden Unterdomänen zu.
+
+```
+http://<unterdomäne1>.<domäne>/<app1-pfad>
+```
+{: pre}
+
+```
+http://<unterdomäne2>.<domäne>/<app1-pfad>
+```
+{: pre}
 
 
 <br />
 
 
-## Apps in einem privaten Netz zugänglich machen
-{: #ingress_expose_private}
-
-Wenn Sie einen Standardcluster erstellen, wird eine von IBM bereitgestellte Lastausgleichsfunktion für Anwendungen (ALB) erstellt, der eine portierbare öffentliche IP-Adresse und eine private Route zugewiesen ist. Die private Standard-ALB wird jedoch nicht automatisch aktiviert.
-{:shortdesc}
-
-Um Ihre App für private Netze zugänglich zu machen, [aktivieren Sie zunächst die private Lastausgleichsfunktion für Anwendungen](#private_ingress).
-
-Anschließend können Sie Ingress für die folgenden Szenarios konfigurieren.
--   [Apps mithilfe einer angepassten Domäne ohne TLS und mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich machen](#private_ingress_no_tls)
--   [Apps mithilfe einer angepassten Domäne mit TLS und mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich machen](#private_ingress_tls)
--   [Apps mithilfe eines lokalen DNS-Service nicht öffentlich zugänglich machen](#private_ingress_onprem_dns)
-
-### Private Lastausgleichsfunktion für Anwendungen aktivieren
+## Private Lastausgleichsfunktion für Anwendungen aktivieren
 {: #private_ingress}
 
-Bevor Sie die standardmäßige private Lastausgleichsfunktion für Anwendungen (ALB) verwenden können, müssen Sie sie entweder mit der von IBM bereitgestellten, portierbaren privaten IP-Adresse oder mit Ihrer eigenen portierbaren privaten IP-Adresse aktivieren.
+Wenn Sie einen Standardcluster erstellen, wird eine von IBM bereitgestellte private Lastausgleichsfunktion für Anwendungen (ALB) erstellt, der eine portierbare öffentliche IP-Adresse und eine private Route zugewiesen ist. Die private Standard-ALB wird jedoch nicht automatisch aktiviert. Um mit der privaten Lastausgleichsfunktion für Anwendungen (ALB) privaten Netzdatenverkehr auf Ihre Apps zu verteilen, müssen Sie sie zunächst entweder mit der von IBM bereitgestellten, portierbaren privaten IP-Adresse oder mit Ihrer eigenen portierbaren privaten IP-Adresse aktivieren.
 {:shortdesc}
 
 **Hinweis**: Wenn Sie beim Erstellen des Clusters das Flag `--no-subnet` verwendet haben, müssen Sie ein portierbares privates Teilnetz oder ein durch einen Benutzer verwaltetes Teilnetz hinzufügen, bevor Sie die private Lastausgleichsfunktion für Anwendungen (ALB) aktivieren können. Weitere Informationen finden Sie im Abschnitt [Weitere Teilnetze für Ihren Cluster anfordern](cs_subnets.html#request).
@@ -892,15 +745,34 @@ Gehen Sie wie folgt vor, um die private Lastausgleichsfunktion für Anwendungen 
    ```
    {: pre}
 
-
+<br>
 Gehen Sie wie folgt vor, um die private Lastausgleichsfunktion für Anwendungen (ALB) mit Ihrer eigenen portierbaren privaten IP-Adresse zu aktivieren:
 
-1. Konfigurieren Sie das vom Benutzer verwaltete Teilnetz der gewünschten IP-Adresse so, dass Datenverkehr über das private VLAN Ihres Clusters geleitet wird. Ersetzen Sie <em>&lt;clustername&gt;</em> durch den Namen oder die ID des Clusters, in dem die App, die Sie zugänglich machen möchten, bereitgestellt wird, <em>&lt;teilnetz-CIDR&gt;</em> durch die CIDR Ihres vom Benutzer verwalteten Teilnetzes und <em>&lt;private_VLAN-id&gt;</em> durch eine verfügbare private VLAN-ID. Sie können durch das Ausführen des Befehls `bx cs vlans` nach der ID eines verfügbaren privaten VLANs suchen.
+1. Konfigurieren Sie das vom Benutzer verwaltete Teilnetz der gewünschten IP-Adresse so, dass Datenverkehr über das private VLAN Ihres Clusters geleitet wird.
 
    ```
    bx cs cluster-user-subnet-add <clustername> <teilnetz-CIDR> <private_VLAN-id>
    ```
    {: pre}
+
+   <table>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Befehlskomponenten</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;clusername&gt;</code></td>
+   <td>Der Name oder die ID des Clusters, auf dem die App, die zugänglich gemacht werden soll, bereitgestellt wird.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;teilnetz-CIDR&gt;</code></td>
+   <td>Das CIDR des benutzerverwalteten Teilnetzes.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;private_VLAN-id&gt;</code></td>
+   <td>Eine verfügbare private VLAN-ID. Sie können durch das Ausführen des Befehls `bx cs vlans` nach der ID eines verfügbaren privaten VLANs suchen.</td>
+   </tr>
+   </tbody></table>
 
 2. Listen Sie die verfügbaren ALBs in Ihrem Cluster auf, um die ID der privaten ALB abzurufen.
 
@@ -927,31 +799,35 @@ Gehen Sie wie folgt vor, um die private Lastausgleichsfunktion für Anwendungen 
 <br />
 
 
-### Apps mithilfe einer angepassten Domäne ohne TLS und mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich machen
-{: #private_ingress_no_tls}
+## Apps in einem privaten Netz zugänglich machen
+{: #ingress_expose_private}
 
-Sie können die private Lastausgleichsfunktion für Anwendungen (ALB) zum Weiterleiten von eingehendem Netzverkehr an die Apps in Ihrem Cluster verwenden, wobei Sie eine angepasste Domäne verwenden.
+Machen Sie Apps über die private Ingress-ALB für ein privates Netz zugänglich.
 {:shortdesc}
 
 Vorbemerkungen:
+* Überprüfen Sie die [Voraussetzungen](#config_prereqs) für Ingress.
 * [Private Lastausgleichsfunktion für Anwendungen aktivieren](#private_ingress).
-* Wenn Sie über private Workerknoten verfügen und einen externen DNS-Anbieter verwenden möchten, müssen Sie [Edge-Knoten mit öffentl. Zugriff konfigurieren](cs_edge.html#edge) und eine [Vyatta Gateway Appliance![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") konfigurieren ](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/). Wenn Sie nur in einem privaten Netz bleiben möchten, finden Sie weitere Informationen stattdessen unter [Apps mithilfe eines lokalen DNS-Service nicht öffentlich zugänglich machen](#private_ingress_onprem_dns). 
+* Wenn Sie über private Workerknoten verfügen und einen externen DNS-Anbieter verwenden möchten, müssen Sie [Edge-Knoten mit öffentlichem Zugriff konfigurieren](cs_edge.html#edge) und eine [Virtual Router Appliance ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") konfigurieren](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+* Wenn Sie über private Workerknoten verfügen und nur in einem privaten Netz bleiben möchten, müssen Sie [einen privaten lokalen DNS-Service konfigurieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/), um URL-Anforderungen an Ihre Apps aufzulösen.
 
-Gehen Sie wie folgt vor, um eine App unter Verwendung einer angepassten Domäne ohne TLS mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich zu machen:
+### Schritt 1: Apps bereitstellen und App-Services erstellen
+{: #private_1}
 
-1.  Erstellen Sie eine angepasste Domäne. Zum Erstellen einer angepassten Domäne arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
-2.  Ordnen Sie Ihre angepasste Domäne der portierbaren privaten IP-Adresse der von IBM bereitgestellten privaten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare private IP-Adresse des privaten ALB zu finden, führen Sie den folgenden Befehl aus: `bx cs albs -- cluster <clustername>`.
-3.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
+Stellen Sie als Erstes Ihre Apps bereit und erstellen Sie Kubernetes-Services und machen Sie diese zugänglich.
+{: shortdesc}
 
-4.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB im privaten Netz zugänglich gemacht wird. 
+1.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können.
+
+2.   Erstellen Sie einen Kubernetes-Service für jede App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden.
+      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei, beispielsweise `myapp_service.yaml`.
+      2.  Definieren Sie einen Service für die App, der von der ALB zugänglich gemacht wird.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selektorschlüssel>: <selektorwert>
@@ -962,14 +838,13 @@ Gehen Sie wie folgt vor, um eine App unter Verwendung einer angepassten Domäne 
           {: codeblock}
 
           <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
           <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der ALB-Servicedateikomponenten</th>
           </thead>
           <tbody>
           <tr>
           <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
+          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods als Ziel auszuwählen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei übereinstimmen.</td>
            </tr>
            <tr>
            <td><code>port</code></td>
@@ -977,378 +852,104 @@ Gehen Sie wie folgt vor, um eine App unter Verwendung einer angepassten Domäne 
            </tr>
            </tbody></table>
       3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
+      4.  Erstellen Sie den Service in Ihrem Cluster. Wenn Apps in mehreren Namensbereichen in Ihrem Cluster bereitgestellt werden, stellen Sie sicher, dass der Service im selben Namensbereich bereitgestellt wird wie die App, die Sie zugänglich machen möchten.
 
           ```
-          kubectl apply -f myalbservice.yaml
+          kubectl apply -f myapp_service.yaml [-n <namensbereich>]
           ```
           {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie im privaten Netz zugänglich machen möchten.
+      5.  Wiederholen Sie diese Schritte für jede App, die Sie zugänglich machen wollen.
 
-5.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an Ihre Services verwendet.
 
+### Schritt 2: Angepasste Domäne zuordnen und TLS-Terminierung auswählen
+{: #private_2}
+
+Beim Konfigurieren der privaten Lastausgleichsfunktion für Anwendungen (ALB) verwenden Sie eine angepasste Domäne, über die Ihre Apps zugänglich sind, und geben an, ob die TLS-Terminierung verwendet werden soll.
+{: shortdesc}
+
+Die Lastausgleichsfunktion für Anwendungen verteilt die Lasten des HTTP-Netzverkehrs auf die Apps. Um auch einen Lastausgleich für eingehende HTTPS-Verbindungen durchführen zu können, können Sie die ALB so konfigurieren, dass Ihr eigenes TLS-Zertifikat zum Entschlüsseln des Netzverkehrs verwendet wird. Die ALB leitet denn die entschlüsselte Anforderung an die Apps weiter, die in Ihrem Cluster zugänglich sind.
+1.   Erstellen Sie eine angepasste Domäne. Arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
+      * Wenn sich die Apps, die über Ingress zugänglich gemacht werden sollen, in einem Cluster in unterschiedlichen Namensbereichen befinden, registrieren Sie die angepasste Domäne als Platzhalterdomäne, wie `*.custom_domain.net`.
+
+2. Ordnen Sie Ihre angepasste Domäne der portierbaren privaten IP-Adresse der von IBM bereitgestellten privaten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare private IP-Adresse des privaten ALB zu finden, führen Sie den folgenden Befehl aus: `bx cs albs -- cluster <cluster_name>`.
+3.   Optional: Wenn Sie TLS verwenden möchten, importieren oder erstellen Sie ein TLS-Zertifikat und geheimen Schlüssel. Wenn Sie eine Platzhalterdomäne verwenden, stellen Sie sicher, dass Sie ein Platzhalterzertifikat importieren oder erstellen.
+      * Wenn in {{site.data.keyword.cloudcerts_long_notm}} bereits ein TLS-Zertifikat gespeichert ist, das Sie verwenden wollen, können Sie den zugehörigen geheimen Schlüssel in Ihren Cluster importieren, indem Sie den folgenden Befehl ausführen:
         ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: myingressresource
-          annotations:
-            ingress.bluemix.net/ALB-ID: "<private_ALB-id>"
-        spec:
-          rules:
-          - host: <angepasste_domäne>
-            http:
-              paths:
-              - path: /<service1_pfad>
-                backend:
-                  serviceName: <service1>
-                  servicePort: 80
-              - path: /<service2_pfad>
-                backend:
-                  serviceName: <service2>
-                  servicePort: 80
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Ersetzen Sie <em>&lt;private_ALB-ID&gt;</em> durch die ID für Ihre private Lastausgleichsfunktion für Anwendungen (ALB). Führen Sie den Befehl <code>bx cs albs --cluster <mein_cluster></code> aus, um nach der ALB-ID zu suchen. Weitere Informationen zu dieser Ingress-Annotation finden Sie unter [Weiterleitung mit einer privaten Lastausgleichsfunktion für Anwendungen](cs_annotations.html#alb-id).</td>
-        </tr>
-        <td><code>host</code></td>
-        <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch Ihre angepasste Domäne.
-
-        </br></br>
-        <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.
-        </td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. 
-
-        </br>
-
-        Für jeden Service können Sie einen individuellen Pfad definieren, der an Ihre angepasste Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-        </br>
-        Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-
-        </br></br>
-        Beispiel: <ul><li>Geben Sie für <code>https://angepasste_domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>https://angepasste_domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-        <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.
-        </td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
-        </tr>
-        </tbody></table>
-
-    3.  Speichern Sie Ihre Änderungen.
-    4.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myingressresource.yaml
+        bx cs alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats>
         ```
         {: pre}
-6.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
-
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
-
-7.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
-
-      ```
-      https://<angepasste_domäne>/<service1_pfad>
-      ```
-      {: codeblock}
-
-
-<br />
-
-
-### Apps mithilfe einer angepassten Domäne mit TLS und mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich machen
-{: #private_ingress_tls}
-
-Sie können private Lastausgleichsfunktionen für Anwendungen (ALBs) zum Weiterleiten von eingehendem Netzverkehr an die Apps in Ihrem Cluster verwenden. Verwenden Sie außerdem Ihr eigenes TLS-Zertifikat, um die TLS-Terminierung zu verwalten, während Sie Ihre angepasste Domäne verwenden.
-{:shortdesc}
-
-Vorbemerkungen:
-* [Private Lastausgleichsfunktion für Anwendungen aktivieren](#private_ingress).
-* Wenn Sie über private Workerknoten verfügen und einen externen DNS-Anbieter verwenden möchten, müssen Sie [Edge-Knoten mit öffentl. Zugriff konfigurieren](cs_edge.html#edge) und eine [Vyatta Gateway Appliance![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") konfigurieren ](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/). Wenn Sie nur in einem privaten Netz bleiben möchten, finden Sie weitere Informationen stattdessen unter [Apps mithilfe eines lokalen DNS-Service nicht öffentlich zugänglich machen](#private_ingress_onprem_dns). 
-
-Gehen Sie wie folgt vor, um eine App unter Verwendung einer angepassten Domäne mit TLS mithilfe eines externen DNS-Anbieters nicht öffentlich zugänglich zu machen:
-
-1.  Erstellen Sie eine angepasste Domäne. Zum Erstellen einer angepassten Domäne arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns), um Ihre angepasste Domäne zu registrieren.
-2.  Ordnen Sie Ihre angepasste Domäne der portierbaren privaten IP-Adresse der von IBM bereitgestellten privaten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare private IP-Adresse des privaten ALB zu finden, führen Sie den folgenden Befehl aus: `bx cs albs -- cluster <clustername>`.
-3.  Importieren oder erstellen Sie ein TLS-Zertifikat und einen geheimen Schlüssel:
-    * Wenn in {{site.data.keyword.cloudcerts_long_notm}} bereits ein TLS-Zertifikat gespeichert ist, das Sie verwenden wollen, können Sie den zugehörigen geheimen Schlüssel in Ihren Cluster importieren, indem Sie den folgenden Befehl ausführen: `bx cs alb-cert-deploy --secret-name <secret_name> --cluster <clustername_oder_-id> --cert-crn <certificate_crn>`.
-    * Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
+      * Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
         1. Erstellen Sie ein TLS-Zertifikat und einen Schlüssel für Ihre Domäne, der im PEM-Format codiert ist.
-        2. Erstellen Sie einen geheimen Schlüssel, der Ihr TLS-Zertifikat und Ihren Schlüssel verwendet. Ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch einen Namen für Ihren geheimen Kubernetes-Schlüssel, <em>&lt;dateipfad_des_tls-schlüssels&gt;</em> durch den Pfad Ihrer angepassten TLS-Schlüsseldatei und <em>&lt;dateipfad_des_tls-zertifikats&gt;</em> durch den Pfad Ihrer angepassten TLS-Zertifikatsdatei. 
-
-            ```
-            kubectl create secret tls <name_des_geheimen_tls-schlüssels> --key <dateipfad_des_tls-schlüssels> --cert <dateipfad_des_tls-zertifikats>
-            ```
-            {: pre}
-4.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
-
-5.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB im privaten Netz zugänglich gemacht wird. 
-
+        2. Erstellen Sie einen geheimen Schlüssel, der Ihr TLS-Zertifikat und Ihren Schlüssel verwendet. Ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch einen Namen für Ihren geheimen Kubernetes-Schlüssel, <em>&lt;dateipfad_des_tls-schlüssels&gt;</em> durch den Pfad Ihrer angepassten TLS-Schlüsseldatei und <em>&lt;dateipfad_des_tls-zertifikats&gt;</em> durch den Pfad Ihrer angepassten TLS-Zertifikatsdatei.
           ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myalbservice
-          spec:
-            selector:
-              <selektorschlüssel>: <selektorwert>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>Der Port, den der Service überwacht.</td>
-           </tr>
-           </tbody></table>
-      3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
-
-          ```
-          kubectl apply -f myalbservice.yaml
+          kubectl create secret tls <name_des_geheimen_tls-schlüssels> --key <dateipfad_des_tls-schlüssels> --cert <dateipfad_des_tls-zertifikats>
           ```
           {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie im privaten Netz zugänglich machen möchten.
-
-6.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-    2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an Ihre Services und Ihr angepasstes Zertifikat für die Verwaltung der TLS-Terminierung verwendet.
-
-          ```
-          apiVersion: extensions/v1beta1
-          kind: Ingress
-          metadata:
-            name: myingressresource
-            annotations:
-              ingress.bluemix.net/ALB-ID: "<private_ALB-id>"
-          spec:
-            tls:
-            - hosts:
-              - <angepasste_domäne>
-              secretName: <geheimer_tls-schlüssel>
-            rules:
-            - host: <angepasste_domäne>
-              http:
-                paths:
-                - path: /<service1_pfad>
-                  backend:
-                    serviceName: <service1>
-                    servicePort: 80
-                - path: /<service2_pfad>
-                  backend:
-                    serviceName: <service2>
-                    servicePort: 80
-           ```
-           {: pre}
-
-           <table>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>ingress.bluemix.net/ALB-ID</code></td>
-          <td>Ersetzen Sie <em>&lt;private_ALB-ID&gt;</em> durch die ID für Ihre private Lastausgleichsfunktion für Anwendungen (ALB). Führen Sie den Befehl <code>bx cs albs --cluster <clustername></code> aus, um nach der ALB-ID zu suchen. Weitere Informationen zu dieser Ingress-Annotation finden Sie unter [Weiterleitung mit einer privaten Lastausgleichsfunktion für Anwendungen (ALB-ID)](cs_annotations.html#alb-id).</td>
-          </tr>
-          <tr>
-          <td><code>tls/hosts</code></td>
-          <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch die angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten. 
-
-          </br></br>
-          <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</td>
-          </tr>
-          <tr>
-          <td><code>tls/secretName</code></td>
-          <td>Ersetzen Sie <em>&lt;geheimer_tls-schlüssel&gt;</em> durch den Namen des zuvor erstellten geheimen Schlüssels, der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.
-          </tr>
-          <tr>
-          <td><code>host</code></td>
-          <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch Ihre angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten. 
-
-          </br></br>
-          <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.
-          </td>
-          </tr>
-          <tr>
-          <td><code>path</code></td>
-          <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. 
-
-          </br>
-Für jeden Service können Sie einen individuellen Pfad definieren, der an Ihre angepasste Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service. Er sendet Netzverkehr an ihn und dann weiter an die Pods, in denen die App ausgeführt wird, indem derselbe Pfad verwendet wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. 
-
-          </br>
-          Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-
-          </br></br>
-          Beispiel: <ul><li>Geben Sie für <code>https://angepasste_domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>https://angepasste_domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-          <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.
-          </td>
-          </tr>
-          <tr>
-          <td><code>serviceName</code></td>
-          <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
-          </tr>
-          <tr>
-          <td><code>servicePort</code></td>
-          <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
-          </tr>
-           </tbody></table>
-
-    3.  Speichern Sie Ihre Änderungen.
-    4.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
-
-        ```
-        kubectl apply -f myingressresource.yaml
-        ```
-        {: pre}
-7.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
-
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
-
-8.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
-
-      ```
-      https://<angepasste_domäne>/<service1_pfad>
-      ```
-      {: codeblock}
 
 
-Lesen Sie [diesen Blogbeitrag ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")]](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2) mit einem umfassenden Lernprogramm zur Vorgehensweise für das Schützen von microservice-to-microservice-Kommunikation mithilfe der privaten ALB mit TLS über Ihre Cluster hinweg.
+### Schritt 3: Ingress-Ressource erstellen
+{: #pivate_3}
 
-<br />
+Ingress-Ressourcen definieren die Routing-Regeln, mit der die Lastausgleichsfunktion für Anwendungen Datenverkehr an Ihren App-Service weiterleitet.
+{: shortdesc}
 
+**Hinweis:** Wenn Ihr Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich mindestens eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
 
-### Apps mithilfe eines lokalen DNS-Service nicht öffentlich zugänglich machen
-{: #private_ingress_onprem_dns}
+1. Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel).
 
-Sie können die private Lastausgleichsfunktion für Anwendungen (ALB) zum Weiterleiten von eingehendem Netzverkehr an die Apps in Ihrem Cluster verwenden, wobei Sie eine angepasste Domäne verwenden. Wenn Sie über private Workerknoten verfügen und nur in einem privaten Netz bleiben möchten, können Sie ein privates, lokales DNS verwenden, um URL-Anforderungen an Ihre Apps aufzulösen.
-{:shortdesc}
+2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die die angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an die zuvor erstellten Services verwendet. 
 
-1. [Private Lastausgleichsfunktion für Anwendungen aktivieren](#private_ingress).
-2. Damit Ihre privaten Workerknoten mit dem Kubernetes-Master kommunizieren können, [richten Sie VPN-Konnektivität ein](cs_vpn.html). 
-3. [Konfigurieren Sie Ihren DNS-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/). 
-4. Erstellen Sie eine angepasste Domäne und registrieren Sie sie bei Ihrem DNS-Service. 
-5.  Ordnen Sie Ihre angepasste Domäne der portierbaren privaten IP-Adresse der von IBM bereitgestellten privaten Lastausgleichsfunktion für Anwendungen (ALB) zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Um die portierbare private IP-Adresse des privaten ALB zu finden, führen Sie den folgenden Befehl aus: `bx cs albs -- cluster <clustername>`.
-6.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Stellen Sie sicher, dass Sie eine Bezeichnung zu Ihrer Bereitstellung im Metadatenabschnitt Ihrer Konfigurationsdatei hinzufügen, z. B. `app: code`. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Ingress-Lastenausgleich aufgenommen werden können. 
-
-7.   Erstellen Sie einen Kubernetes-Service für die App, den Sie öffentlich zugänglich machen möchten. Ihre App muss von einem Kubernetes-Service verfügbar gemacht werden, um von der Cluster-ALB beim Ingress-Lastausgleich berücksichtigt zu werden. 
-      1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Servicekonfigurationsdatei namens `myalbservice.yaml` (Beispiel). 
-      2.  Definieren Sie einen Service für die App, der von der ALB im privaten Netz zugänglich gemacht wird. 
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myalbservice
-          spec:
-            selector:
-              <selektorschlüssel>: <selektorwert>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <caption>Erklärung der ALB-Servicedateikomponenten</caption>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>Der Port, den der Service überwacht.</td>
-           </tr>
-           </tbody></table>
-      3.  Speichern Sie Ihre Änderungen.
-      4.  Erstellen Sie den Service in Ihrem Cluster.
-
-          ```
-          kubectl apply -f myalbservice.yaml
-          ```
-          {: pre}
-      5.  Wiederholen Sie diese Schritte für jede App, die Sie im privaten Netz zugänglich machen möchten.
-
-8.  Erstellen Sie eine Ingress-Ressource. Ingress-Ressourcen definieren die Routing-Regeln für den Kubernetes-Service, den Sie für Ihre App erstellt haben; sie werden von der ALB verwendet, um eingehenden Netzverkehr zum Cluster weiterzuleiten. Sie müssen eine Ingress-Ressource verwenden, um Routing-Regeln für mehrere Apps zu definieren, wenn jede App über einen Kubernetes-Service im Cluster zugänglich gemacht wird.
-  1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel). 
-  2.  Definieren Sie eine Ingress-Ressource in Ihrer Konfigurationsdatei, die Ihre angepasste Domäne für das Weiterleiten von eingehendem Netzverkehr an Ihre Services verwendet.
-
-    **Hinweis**: Wenn Sie TLS nicht verwenden möchten, entfernen Sie den Abschnitt `tls` aus dem folgenden Beispiel. 
-
+    YALM-Beispieldatei ohne TLS:
     ```
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
       annotations:
-        ingress.bluemix.net/ALB-ID: "<private_ALB-id>"
+        ingress.bluemix.net/ALB-ID: "<private_alb-id>"
+    spec:
+      rules:
+      - host: <domäne>
+        http:
+          paths:
+          - path: /<app1-pfad>
+            backend:
+              serviceName: <app1-service>
+              servicePort: 80
+          - path: /<app2-pfad>
+            backend:
+              serviceName: <app2-service>
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    YALM-Beispieldatei mit TLS:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+      annotations:
+        ingress.bluemix.net/ALB-ID: "<private_alb-id>"
     spec:
       tls:
       - hosts:
-        - <angepasste_domäne>
-        secretName: <geheimer_tls-schlüssel>
+        - <domäne>
+        secretName: <name_des_geheimen_tls-schlüssels>
       rules:
-      - host: <angepasste_domäne>
+      - host: <domäne>
         http:
           paths:
-          - path: /<service1_pfad>
+          - path: /<app1-pfad>
             backend:
-              serviceName: <service1>
+              serviceName: <app1-service>
               servicePort: 80
-          - path: /<service2_pfad>
+          - path: /<app2-pfad>
             backend:
-              serviceName: <service2>
+              serviceName: <app2-service>
               servicePort: 80
-     ```
-     {: codeblock}
+    ```
+    {: codeblock}
 
     <table>
     <thead>
@@ -1357,37 +958,37 @@ Sie können die private Lastausgleichsfunktion für Anwendungen (ALB) zum Weiter
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Ersetzen Sie <em>&lt;private_ALB-ID&gt;</em> durch die ID für Ihre private Lastausgleichsfunktion für Anwendungen (ALB). Führen Sie den Befehl <code>bx cs albs --cluster <mein_cluster></code> aus, um nach der ALB-ID zu suchen. Weitere Informationen zu dieser Ingress-Annotation finden Sie unter [Weiterleitung mit einer privaten Lastausgleichsfunktion für Anwendungen (ALB-ID)](cs_annotations.html#alb-id).</td>
+    <td>Ersetzen Sie <em>&lt;private_ALB-ID&gt;</em> durch die ID für Ihre private Lastausgleichsfunktion für Anwendungen (ALB). Führen Sie den Befehl <code>bx cs albs --cluster <mein_cluster></code> aus, um nach der ALB-ID zu suchen. Weitere Informationen zu dieser Ingress-Annotation finden Sie unter [Weiterleitung mit einer privaten Lastausgleichsfunktion für Anwendungen](cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls/hosts</code></td>
-    <td>Wenn Sie den Abschnitt `tls` verwenden, ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch unsere angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten.
+    <td>Um TLS zu verwenden, ersetzen Sie <em>&lt;domäne&gt;</em> durch Ihre angepasste Domäne.
+
     </br></br>
-    <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden. </td>
+    <strong>Hinweis:</strong><ul><li>Wenn die Apps von Services in einem Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td>Wenn Sie den Abschnitt `tls` verwenden, ersetzen Sie <em>&lt;name_des_geheimen_tls-schlüssels&gt;</em> durch den Namen des geheimen Schlüssels, den Sie zuvor erstellt haben und der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.
+    <td>Ersetzen Sie <em>&lt;geheimer_tls-schlüssel&gt;</em> durch den Namen des zuvor erstellten geheimen Schlüssels, der Ihr angepasstes TLS-Zertifikat sowie den Schlüssel enthält. Wenn Sie ein Zertifikat aus {{site.data.keyword.cloudcerts_short}} importiert haben, können Sie den Befehl <code>bx cs alb-cert-get --cluster <clustername_oder_-id> --cert-crn <crn_des_zertifikats></code> ausführen, um die geheimen Schlüssel anzuzeigen, die einem TLS-Zertifikat zugeordnet sind.
     </tr>
     <tr>
     <td><code>host</code></td>
-    <td>Ersetzen Sie <em>&lt;angepasste_domäne&gt;</em> durch Ihre angepasste Domäne, die Sie für TLS-Terminierung konfigurieren möchten. </br></br>
-    <strong>Hinweis:</strong> Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.
+    <td>Ersetzen Sie <em>&lt;domäne&gt;</em> durch Ihre angepasste Domäne.
+    </br></br>
+    <strong>Hinweis:</strong><ul><li>Wenn die Apps von Services in einem Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, hängen Sie eine Platzhalter-Unterdomäne, wie `subdomain1.custom_domain.net`, an die Domäne an. Verwenden Sie für jede Ressource, die Sie im Cluster erstellen, eine eindeutige Unterdomäne.</li><li>Verwenden Sie keine Sternchen (&ast;) für Ihren Host oder lassen Sie die Hosteigenschaft leer, um Fehler während der Ingress-Erstellung zu vermeiden.</li></ul></td>
     </td>
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>Ersetzen Sie <em>&lt;service1_pfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre App überwacht, sodass Netzverkehr an die App weitergeleitet werden kann. </br>
-Für jeden Service können Sie einen individuellen Pfad definieren, der an Ihre angepasste Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service. Er sendet Netzverkehr an ihn und dann weiter an die Pods, in denen die App ausgeführt wird, indem derselbe Pfad verwendet wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz zu erhalten. </br>
-    Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
+    <td>Ersetzen Sie <em>&lt;app-pfad&gt;</em> durch einen Schrägstrich oder den Pfad, den Ihre App überwacht. Der Pfad wird an Ihre angepasste Domäne angehängt, um eine eindeutige Route zu Ihrer App zu erstellen. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen (ALB) weitergeleitet. Die Lastausgleichsfunktion für Anwendungen (ALB) sucht nach dem zugehörigen Service und sendet Netzverkehr an ihn. Der Service leitet den Datenverkehr dann an die Pods weiter, in denen die App ausgeführt wird.
     </br></br>
-    Beispiel: <ul><li>Geben Sie für <code>https://angepasste_domäne/</code> als Pfad <code>/</code> ein. </li><li>Geben Sie für <code>https://angepasste_domäne/service1_pfad</code> als Pfad <code>/service1_pfad</code> ein. </li></ul>
-    <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit [Annotation neu schreiben](cs_annotations.html#rewrite-path) eine richtige Weiterleitung an Ihre App einrichten.
-    </td>
+    Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an. Beispiel: <ul><li>Geben Sie für <code>http://domain/</code> als Pfad <code>/</code> ein.</li><li>Geben Sie für <code>http://domain/app1-pfad</code> als Pfad <code>/app1-pfad</code> ein.</li></ul>
+    </br>
+    <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie die [Annotation zum erneuten Schreiben (rewrite)](cs_annotations.html#rewrite-path) verwenden.</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Ersetzen Sie <em>&lt;service1&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben. </td>
+    <td>Ersetzen Sie <em>&lt;app1-service&gt;</em> und <em>&lt;app2-service&gt;</em> usw. durch die entsprechenden Namen der Services, die Sie erstellt haben, um die Apps zugänglich zu machen. Wenn die Apps von Services im Cluster in unterschiedlichen Namensbereichen zugänglich gemacht werden, schließen Sie nur App-Services ein, die sich im selben Namensbereich befinden. Sie müssen für jeden Namensbereich, in denen Apps zugänglich gemacht werden sollen, eine Ingress-Ressource erstellen.</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
@@ -1395,34 +996,57 @@ Für jeden Service können Sie einen individuellen Pfad definieren, der an Ihre 
     </tr>
     </tbody></table>
 
-  3.  Speichern Sie Ihre Änderungen.
-  4.  Erstellen Sie die Ingress-Ressource für Ihr Cluster.
+3.  Erstellen Sie die Ingress-Ressource für Ihr Cluster. Stellen Sie sicher, dass die Ressource im selben Namensbereich wie die App-Services bereitgestellt wird, die in der Ressource angegeben wurden.
 
-      ```
-      kubectl apply -f myingressresource.yaml
-      ```
-      {: pre}
-9.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
+    ```
+    kubectl apply -f myingressresource.yaml -n <namensbereich>
+    ```
+    {: pre}
+4.   Überprüfen Sie, dass die Ingress-Ressource erfolgreich erstellt wurde.
 
       ```
       kubectl describe ingress myingressresource
       ```
       {: pre}
 
-      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an. 
+      1. Wenn Nachrichten im Ereignis einen Fehler in Ihrer Ressourcenkonfiguration beschreiben, ändern Sie die Werte in Ihrer Ressourcendatei und wenden Sie die Datei für die Ressource erneut an.
 
-10.   Geben Sie in einem Web-Browser die URL des App-Service an, auf den zugegriffen werden soll.
 
-      ```
-      https://<angepasste_domäne>/<service1_pfad>
-      ```
-      {: codeblock}
+Die Ingress-Ressource wird im selben Namensbereich wie die App-Services erstellt. Die Apps in diesem Namensbereich werden für die Ingress-Lastausgleichsfunktion für Anwendungen des Clusters registriert.
 
+### Schritt 4: Über das private Netz auf die App zugreifen
+{: #private_4}
+
+Geben Sie von Ihrer privaten Netzfirewall aus die URL des App-Service in einem Web-Browser ein.
+
+```
+https://<domäne>/<app1-pfad>
+```
+{: pre}
+
+Wenn Sie mehrere Apps zugänglich gemacht haben, greifen Sie auf diese Apps zu, indem Sie den an die URL angehängten Pfad ändern.
+
+```
+https://<domain>/<app2-pfad>
+```
+{: pre}
+
+Wenn Sie Apps in verschiedenen Namensbereichen über eine Platzhalterdomäne zugänglich machen, greifen Sie auf diese Apps mit den entsprechenden Unterdomänen zu.
+
+```
+http://<unterdomäne1>.<domäne>/<app1-pfad>
+```
+{: pre}
+
+```
+http://<unterdomäne2>.<domäne>/<app1-pfad>
+```
+{: pre}
+
+
+Lesen Sie [diesen Blogbeitrag ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2) mit einem umfassenden Lernprogramm zur Vorgehensweise für das Schützen von microservice-to-microservice-Kommunikation mithilfe der privaten ALB mit TLS über Ihre Cluster hinweg.
 
 <br />
-
-
-
 
 
 ## Optional: Konfiguration der Lastausgleichsfunktion für Anwendungen
@@ -1443,29 +1067,30 @@ Mit den folgenden Optionen können Sie die Konfiguration einer Lastausgleichsfun
 Standardmäßig sind nur die Ports 80 und 443 für die Ingress-ALB (Lastausgleichsfunktion für Anwendungen) zugänglich. Um weitere Ports zugänglich zu machen, können Sie die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm` bearbeiten.
 {:shortdesc}
 
-1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`. 
+1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
-2. Fügen Sie den Abschnitt <code>data</code> hinzu und geben Sie die öffentlichen Ports `80`, `443` und allen weiteren Ports, die Sie öffentlich zugänglich machen möchten, durch Semikolons getrennt an. 
+2. Fügen Sie den Abschnitt <code>data</code> hinzu und geben Sie die öffentlichen Ports `80`, `443` und allen weiteren Ports, die Sie öffentlich zugänglich machen möchten, durch Semikolons getrennt an.
 
-    **Hinweis**: Bei der Angabe der Ports müssen die Ports 80 und 443 eingeschlossen werden, um diese Ports offen zu halten. Ein Port, der nicht angegeben wird, wird geschlossen.
+    **Wichtig**: Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Ein Port, der nicht angegeben wird, wird geschlossen. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen.
 
     ```
     apiVersion: v1
- data:
-   public-ports: "80;443;<port3>"
- kind: ConfigMap
- metadata:
-   name: ibm-cloud-provider-ingress-cm
-   namespace: kube-system
+    data:
+      public-ports: "80;443;<port3>"
+      private-ports: "80;443;<port4>"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
     ```
     {: codeblock}
 
-    Beispiel:
+    Beispielausgabe, mit der die Ports `80`, `443` und `9443` offen gehalten werden:
     ```
     apiVersion: v1
  data:
@@ -1477,9 +1102,9 @@ Standardmäßig sind nur die Ports 80 und 443 für die Ingress-ALB (Lastausgleic
     ```
     {: screen}
 
-3. Speichern Sie die Konfigurationsdatei. 
+3. Speichern Sie die Konfigurationsdatei.
 
-4. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden. 
+4. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden.
 
  ```
  kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -1508,13 +1133,13 @@ Weitere Informationen zu Konfigurationszuordnungsressourcen finden Sie in der [K
 Aktivieren Sie SSL-Protokolle und -Verschlüsselungen auf der globalen HTTP-Ebene, indem Sie die Konfigurationszuordnung `ibm-cloud-provider-ingress-cm` bearbeiten.
 {:shortdesc}
 
-
+Standardmäßig wird das TLS 1.2-Protokoll für alle Ingress-Konfigurationen verwendet, die die von IBM bereitgestellte Domäne verwenden. Sie können den Standardwert überschreiben, um stattdessen das TLS 1.1- oder 1.0-Protokoll zu verwenden, indem Sie die folgenden Schritte durchführen.
 
 **Hinweis**: Wenn Sie die aktivierten Protokolle für alle Hosts angeben, funktionieren die Parameter TLSv1.1 und TLSv1.2 (1.1.13, 1.0.12) nur wenn OpenSSL 1.0.1 oder eine höhere Version verwendet wird. Der Parameter TLSv1.3 (1.13.0) funktioniert nur, wenn OpenSSL 1.1.1 mit der Unterstützung von TLSv1.3 erstellt und dann verwendet wird.
 
 Gehen Sie wie folgt vor, um die Konfigurationszuordnung zu bearbeiten und SSL-Protokolle und Verschlüsselungen zu aktivieren.
 
-1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`. 
+1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1535,9 +1160,9 @@ Gehen Sie wie folgt vor, um die Konfigurationszuordnung zu bearbeiten und SSL-Pr
    ```
    {: codeblock}
 
-3. Speichern Sie die Konfigurationsdatei. 
+3. Speichern Sie die Konfigurationsdatei.
 
-4. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden. 
+4. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden.
 
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -1565,16 +1190,16 @@ Gehen Sie wie folgt vor, um die Konfigurationszuordnung zu bearbeiten und SSL-Pr
 Sie können den Inhalt und das Format von Protokollen anpassen, die für die Ingress-ALB gesammelt werden.
 {:shortdesc}
 
-Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine Protokollfelder an. Sie können jedoch auch ein angepasstes Protokollformat erstellen. Gehen Sie wie folgt vor, um auszuwählen, welche Protokollkomponenten weitergeleitet werden und wie sie in der Protokollausgabe angeordnet sind: 
+Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine Protokollfelder an. Sie können jedoch auch ein angepasstes Protokollformat erstellen. Gehen Sie wie folgt vor, um auszuwählen, welche Protokollkomponenten weitergeleitet werden und wie deise in der Protokollausgabe angeordnet sind:
 
-1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`. 
+1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource `ibm-cloud-provider-ingress-cm`.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
-2. Fügen Sie einen Abschnitt <code>data</code> hinzu. Fügen Sie das Feld `log-format` und optional das Feld `log-format-escape-json` hinzu. 
+2. Fügen Sie einen Abschnitt <code>data</code> hinzu. Fügen Sie das Feld `log-format` und optional das Feld `log-format-escape-json` hinzu.
 
     ```
     apiVersion: v1
@@ -1589,23 +1214,24 @@ Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine
     {: pre}
 
     <table>
+    <caption>YAML-Dateikomponenten</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Konfiguration von 'log-format'</th>
     </thead>
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>Ersetzen Sie <code>&lt;schlüssel&gt;</code> durch den Namen für die Protokollkomponente und <code>&lt;protokollvariable&gt;</code> durch eine Variable für die Protokollkomponente, die Sie in Protokolleinträgen erfassen möchten. Sie können Text und Interpunktion einschließen, die der Protokolleintrag enthalten soll, z. B. Anführungszeichen um Zeichenfolgewerte und Kommas zum Trennen der einzelnen Protokollkomponenten. Wenn Sie beispielsweise eine Komponente wie <code>request: "$request",</code>  formatieren, wird Folgendes in einem Protokolleintrag generiert: <code>request: "GET / HTTP/1.1",</code>. Eine Liste aller Variablen, die Sie verwenden können, finden Sie im <a href="http://nginx.org/en/docs/varindex.html">Nginx-Variablenindex</a>. <br><br>Um einen zusätzlichen Header wie <em>x-custom-ID</em> zu protokollieren, fügen Sie das folgende Schlüssel/Wert-Paar zum angepassten Protokollinhalt hinzu: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Beachten Sie, dass Bindestriche (<code>-</code>) in Unterstriche (<code>_</code>) konvertiert werden und dass <code>$http_</code> dem angepassten Headernamen vorangestellt werden muss. </td>
+    <td>Ersetzen Sie <code>&lt;schlüssel&gt;</code> durch den Namen für die Protokollkomponente und <code>&lt;protokollvariable&gt;</code> durch eine Variable für die Protokollkomponente, die Sie in Protokolleinträgen erfassen möchten. Sie können Text und Interpunktion einschließen, die der Protokolleintrag enthalten soll, z. B. Anführungszeichen um Zeichenfolgewerte und Kommas zum Trennen der einzelnen Protokollkomponenten. Wenn Sie beispielsweise eine Komponente wie <code>request: "$request",</code>  formatieren, wird Folgendes in einem Protokolleintrag generiert: <code>request: "GET / HTTP/1.1",</code>. Eine Liste aller Variablen, die Sie verwenden können, finden Sie im <a href="http://nginx.org/en/docs/varindex.html">Nginx-Variablenindex</a>.<br><br>Um einen zusätzlichen Header wie <em>x-custom-ID</em> zu protokollieren, fügen Sie das folgende Schlüssel/Wert-Paar zum angepassten Protokollinhalt hinzu: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Bindestriche (<code>-</code>) werden in Unterstriche (<code>_</code>) konvertiert und <code>$http_</code> muss dem angepassten Headernamen vorangestellt werden.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
-    <td>Optional: Standardmäßig werden Protokolle im Textformat generiert. Um Protokolle im JSON-Format zu generieren, fügen Sie das Feld <code>log-format-escape-json</code> hinzu und verwenden Sie den Wert <code>true</code>. </td>
+    <td>Optional: Standardmäßig werden Protokolle im Textformat generiert. Um Protokolle im JSON-Format zu generieren, fügen Sie das Feld <code>log-format-escape-json</code> hinzu und verwenden Sie den Wert <code>true</code>.</td>
     </tr>
     </tbody></table>
     </dd>
     </dl>
 
-    Ihr Protokollformat kann beispielsweise die folgenden Variablen enthalten: 
+    Ihr Protokollformat kann beispielsweise die folgenden Variablen enthalten:
     ```
     apiVersion: v1
     data:
@@ -1621,13 +1247,13 @@ Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine
     ```
     {: screen}
 
-    Ein Protokolleintrag mit diesem Format sähe wie folgt aus: 
+    Ein Protokolleintrag mit diesem Format sieht in etwa wie folgt aus:
     ```
     remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
     ```
     {: screen}
 
-    Wenn Sie ein angepasstes Protokollformat erstellen möchten, das auf dem Standardformat für ALB-Protokolle basiert, können Sie den folgenden Abschnitt zu Ihrer Konfigurationszuordnung hinzufügen und nach Bedarf ändern: 
+    Wenn Sie ein angepasstes Protokollformat erstellen möchten, das auf dem Standardformat für ALB-Protokolle basiert, ändern Sie den folgenden Abschnitt nach Bedarf und fügen Sie ihn zu Ihrer Konfigurationszuordnung hinzu:
     ```
     apiVersion: v1
     data:
@@ -1648,9 +1274,9 @@ Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine
     ```
     {: codeblock}
 
-4. Speichern Sie die Konfigurationsdatei. 
+4. Speichern Sie die Konfigurationsdatei.
 
-5. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden. 
+5. Stellen Sie sicher, dass die Änderungen an der Konfigurationszuordnung angewendet wurden.
 
  ```
  kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -1672,10 +1298,9 @@ Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine
  ```
  {: screen}
 
-4. Um die Ingress-ALB-Protokolle anzuzeigen, [erstellen Sie eine Protokollierungskonfiguration für den Ingress-Service](cs_health.html#logging) in Ihrem Cluster. 
+4. Um die Ingress-ALB-Protokolle anzuzeigen, [erstellen Sie eine Protokollierungskonfiguration für den Ingress-Service](cs_health.html#logging) in Ihrem Cluster.
 
 <br />
-
 
 
 

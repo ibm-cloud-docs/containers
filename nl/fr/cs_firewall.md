@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Ouverture des ports et adresses IP requis dans votre pare-feu
 {: #firewall}
@@ -30,7 +33,7 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
 <br />
 
 
-## Exécution  de commandes `bx cs` de derrière un pare-feu
+## Exécution  de commandes `bx cs` derrière un pare-feu
 {: #firewall_bx}
 
 Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `bx cs`, vous devez autoriser l'accès TCP pour {{site.data.keyword.containerlong_notm}}.
@@ -60,7 +63,7 @@ Si les règles réseau de l'entreprise empêchent l'accès depuis votre système
 <br />
 
 
-## Exécution de commandes `kubectl` de derrière un pare-feu
+## Exécution de commandes `kubectl` derrière un pare-feu
 {: #firewall_kubectl}
 
 Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `kubectl`, vous devez autoriser l'accès TCP pour le cluster.
@@ -74,10 +77,10 @@ Pour autoriser l'accès à un cluster spécifique :
 
 1. Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Si vous disposez d'un compte fédéré, incluez l'option `--sso`.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Sélectionnez la région où réside votre cluster.
 
@@ -108,7 +111,7 @@ Pour autoriser l'accès à un cluster spécifique :
    ```
    {: screen}
 
-5. Autorisez l'accès au **Master URL** sur le port (comme au port `31142` dans l'exemple précédent).
+5. Autorisez l'accès à l'URL maître (**Master URL**) sur le port (comme au port `31142` dans l'exemple précédent).
 
 6. Vérifiez votre connexion.
 
@@ -144,7 +147,7 @@ Pour autoriser l'accès à un cluster spécifique :
 <br />
 
 
-## Exécution de commandes `calicoctl` de derrière un pare-feu
+## Exécution de commandes `calicoctl` derrière un pare-feu
 {: #firewall_calicoctl}
 
 Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `calicoctl`, vous devez autoriser l'accès TCP pour les commandes Calico.
@@ -169,7 +172,7 @@ Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#fire
 ## Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services
 {: #firewall_outbound}
 
-Laissez votre cluster accéder aux ressources d'infrastructure et aux services de derrière un pare-feu, comme pour les régions {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et l'accès sortant pour les réservations de volume persistant.
+Laissez votre cluster accéder aux ressources d'infrastructure et aux services derrière un pare-feu, comme pour les régions {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et l'accès sortant pour les réservations de volume persistant.
 {:shortdesc}
 
   1.  Notez l'adresse IP publique pour tous vos noeuds worker dans le cluster.
@@ -183,6 +186,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour tous les emplacements de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic du port 443 vers les adresses IP de les emplacements (dal10, dal12 et dal13).
       <p>
   <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+  <caption>Adresses IP à ouvrir pour le trafic sortant</caption>
       <thead>
       <th>Région</th>
       <th>Emplacement</th>
@@ -228,6 +232,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       - Remplacez <em>&lt;registry_publicIP&gt;</em> par les adresses IP du registre auxquelles vous désirez autoriser le trafic. Le registre global héberge des images publiques fournies par IBM et les registres régionaux vos propres images privées ou publiques.
         <p>
 <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+  <caption>Adresses IP à ouvrir pour le trafic du registre</caption>
       <thead>
         <th>Région {{site.data.keyword.containershort_notm}}</th>
         <th>Adresse du registre</th>
@@ -235,7 +240,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       </thead>
       <tbody>
         <tr>
-          <td>Registre global entre régions du conteneur</td>
+          <td>Registre global entre les régions d'{{site.data.keyword.containershort_notm}}</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Remplacez <em>&lt;monitoring_public_IP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
         <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+  <caption>Adresses IP à ouvrir pour gérer le trafic</caption>
         <thead>
-        <th>Région du conteneur</th>
+        <th>Région {{site.data.keyword.containershort_notm}}</th>
         <th>Adresse de surveillance</th>
         <th>Adresses IP de surveillance</th>
         </thead>
@@ -295,8 +301,9 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Remplacez <em>&lt;logging_public_IP&gt;</em> par toutes les adresses des régions de consignation auxquelles vous voulez autoriser le trafic :
         <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+<caption>Adresses IP à ouvrir pour consigner le trafic</caption>
         <thead>
-        <th>Région du conteneur</th>
+        <th>Région {{site.data.keyword.containershort_notm}}</th>
         <th>Adresse de consignation</th>
         <th>Adresses IP de consignation</th>
         </thead>
@@ -352,4 +359,3 @@ Vous pouvez autoriser l'accès entrant au NodePort, à l'équilibreur de charge 
   <dt>Ingress</dt>
   <dd>Ouvrez le port 80 pour HTTP ou le port 443 pour HTTPS vers l'adresse IP de l'équilibreur de charge d'application Ingress.</dd>
 </dl>
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Resolución de problemas del almacenamiento del clúster
 {: #cs_troubleshoot_storage}
 
@@ -28,6 +29,8 @@ Si utiliza {{site.data.keyword.containerlong}}, tenga en cuenta estas técnicas 
 Si tiene un problema más general, pruebe la [depuración del clúster](cs_troubleshoot.html).
 {: tip}
 
+
+
 ## Los sistemas de archivos de los nodos trabajadores pasan a ser de sólo lectura
 {: #readonly_nodes}
 
@@ -35,7 +38,7 @@ Si tiene un problema más general, pruebe la [depuración del clúster](cs_troub
 {: #stuck_creating_state}
 Puede ver uno de los siguientes síntomas:
 - Cuando ejecuta `kubectl get pods -o wide`, ve que varios pods que se están ejecutando en el mismo nodo trabajador quedan bloqueados en el estado `ContainerCreating`.
-- Cuando se ejecuta un mandato `kubectl describe`, ve el siguiente error en la sección de sucesos: `MountVolume.SetUp failed for volume ... read-only file system`.
+- Cuando se ejecuta un mandato `kubectl describe`, ve el siguiente error en la sección **Events**: `MountVolume.SetUp failed for volume ... read-only file system`.
 
 {: tsCauses}
 El sistema de archivos del nodo trabajador es de sólo lectura.
@@ -50,22 +53,23 @@ Para un arreglo a largo plazo, [actualice el tipo de máquina añadiendo otro no
 <br />
 
 
+
 ## La app falla cuando un usuario no root es el propietario de la vía de acceso de montaje del almacenamiento de archivos NFS
 {: #nonroot}
 
 {: tsSymptoms}
-Después de [añadir almacenamiento NFS](cs_storage.html#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como, "write-permission" o "do not have required permission". El pod falla y queda atascado en un ciclo de recarga. 
+Después de [añadir almacenamiento NFS](cs_storage.html#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como, "write-permission" o "do not have required permission". El pod falla y queda atascado en un ciclo de recarga.
 
 {: tsCauses}
 De forma predeterminada, los usuarios no root no tienen permiso de escritura sobre la vía de acceso de montaje del volumen para el almacenamiento respaldado por NFS. Algunas imágenes comunes de app, como por ejemplo Jenkins y Nexus3, especifican un usuario no root que posee la vía de acceso de montaje en Dockerfile. Cuando se crea un contenedor desde este Dockerfile, la creación del contenedor falla debido a permisos insuficientes del usuario no root en la vía de acceso de montaje. Para otorgar permiso de escritura, puede modificar el Dockerfile para añadir temporalmente el usuario no root al grupo de usuarios root antes de cambiar los permisos de la vía de acceso de montaje, o utilizar un contenedor de inicialización.
 
-Si utiliza un diagrama de Helm para desplegar una imagen con un usuario no root que desea que tenga permisos de escritura en la compartición de archivos NFS, edite primero el despliegue de Helm para utilizar un contenedor de inicialización.
+Si utiliza un diagrama de Helm para desplegar la imagen, edite el despliegue de Helm para utilizar un contenedor de inicialización.
 {:tip}
 
 
 
 {: tsResolve}
-Cuando se incluye un [contenedor de inicialización ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) en el despliegue, puede dar a un usuario no root especificado en el Dockerfile permisos de escritura para la vía de acceso de montaje del volumen dentro del contenedor que apunta a la compartición de archivos NFS. El contenedor de inicialización de inicia antes que el contenedor de la app. El contenedor de inicialización crea la vía de acceso de montaje del volumen dentro del contenedor, cambia la propiedad de la vía de acceso de montaje al usuario (no root) correcto y se cierra. A continuación, se inicia el contenedor de la app, que incluye el usuario no root que debe escribir en la vía de acceso de montaje. Dado que la vía de acceso ya es propiedad del usuario no root, la escritura en la vía de acceso de montaje se realiza correctamente. Si no desea utilizar un contenedor de inicialización, puede modificar el Dockerfile para añadir acceso de usuario no root al almacenamiento de archivos NFS.
+Cuando se incluye un [contenedor de inicialización ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) en el despliegue, puede dar a un usuario no root especificado en el Dockerfile permisos de escritura para la vía de acceso de montaje del volumen dentro del contenedor. El contenedor de inicialización de inicia antes que el contenedor de la app. El contenedor de inicialización crea la vía de acceso de montaje del volumen dentro del contenedor, cambia la propiedad de la vía de acceso de montaje al usuario (no root) correcto y se cierra. A continuación, se inicia el contenedor de la app con el usuario no root que debe escribir en la vía de acceso de montaje. Dado que la vía de acceso ya es propiedad del usuario no root, la escritura en la vía de acceso de montaje se realiza correctamente. Si no desea utilizar un contenedor de inicialización, puede modificar el Dockerfile para añadir acceso de usuario no root al almacenamiento de archivos NFS.
 
 
 Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
@@ -79,7 +83,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
     ```
     FROM openjdk:8-jdk
 
-    RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+    RUN apt-get update &&apt-get install -y git curl &&rm -rf /var/lib/apt/lists/*
 
     ARG user=jenkins
     ARG group=jenkins
@@ -254,16 +258,74 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-Tras [añadir acceso de usuario no root al almacenamiento permanente](#nonroot) o desplegar un diagrama de Helm con un ID de usuario no root especificado, el usuario no puede grabar en el almacenamiento montado.
+Después de [añadir acceso de usuario no root al almacenamiento permanente](#nonroot) o desplegar un diagrama de Helm con un ID de usuario no root especificado, el usuario no puede grabar en el almacenamiento montado.
 
 {: tsCauses}
 En la configuración del diagrama de Helm o el despliegue se especifica el [contexto de seguridad](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) para el ID de grupo (`fsGroup`) y el ID de usuario (`runAsUser`) del pod. Actualmente, {{site.data.keyword.containershort_notm}} no soporta la especificación de `fsGroup` y sólo soporta que `runAsUser` se establezca como `0` (permisos root).
 
 {: tsResolve}
-Elimine los campos `securityContext` de la configuración para `fsGroup` y `runAsUser` del archivo de configuración del diagrama de Helm, el despliegue o la imagen, y vuelva a desplegar. Si tiene que cambiar la propiedad de la vía de acceso de montaje de `nobody`, [añada acceso de usuario non-root](#nonroot). Después de añadir [non-root initContainer](#nonroot), establezca `runAsUser` al nivel del contenedor, no a nivel de pod. 
+Elimine los campos `securityContext` de la configuración para `fsGroup` y `runAsUser` de la imagen, despliegue o archivo de configuración de diagrama de Helm y vuelva a desplegar. Si tiene que cambiar la propiedad de la vía de acceso de montaje de `nobody`, [añada acceso de usuario non-root](#nonroot). Después de añadir [non-root initContainer](#nonroot), establezca `runAsUser` al nivel del contenedor, no a nivel de pod.
 
 <br />
 
+
+
+
+## El montaje de almacenamiento en bloques existente a un pod falla debido a un sistema de archivos erróneo
+{: #block_filesystem}
+
+{: tsSymptoms}
+Cuando ejecuta `kubectl describe pod <pod_name>`, ve el siguiente error:
+```
+failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
+```
+{: screen}
+
+{: tsCauses}
+Puede tener un dispositivo de almacenamiento en bloques configurado con un sistema de archivos `XFS`. Para montar este dispositivo en el pod, [creó un PV](cs_storage.html#existing_block) que especificaba `ext4` como su sistema de archivos o bien no se especificaba ningún sistema de archivos en la sección `spec/flexVolume/fsType`. Si no se define un sistema de archivos, el valor predeterminado para el PV es `ext4`.
+El PV se creó satisfactoriamente y se enlazó a la instancia de almacenamiento en bloques existente. Sin embargo, cuando se intentó montar el PV a su clúster mediante una PVC coincidente, el volumen no se pudo montar. No se puede montar una instancia de almacenamiento en bloques `XFS` con un sistema de archivos `ext4` en el pod.
+
+{: tsResolve}
+Actualice el sistema de archivos en el PV existente de `ext4` a `XFS`.
+
+1. Liste los PV existentes en el clúster y anote el nombre del VF que ha utilizado para la instancia de almacenamiento en bloques existente.
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+
+2. Guarde el yaml del PV en su máquina local.
+   ```
+   kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+3. Abra el archivo yaml y cambie el `fsType` de `ext4` a `xfs`.
+4. Sustituya el PV en el clúster.
+   ```
+   kubectl replace --force -f <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+5. Inicie una sesión en el pod en el que ha montado el PV.
+   ```
+   kubectl exec -it <pod_name> sh
+   ```
+   {: pre}
+
+6. Verifique el sistema de archivos ha cambiado a `XFS`.
+   ```
+   df -Th
+   ```
+   {: pre}
+
+   Salida de ejemplo:
+   ```
+   Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
+   ```
+   {: screen}
+
+<br />
 
 
 
@@ -274,7 +336,8 @@ Elimine los campos `securityContext` de la configuración para `fsGroup` y `runA
 {: shortdesc}
 
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
--   Puede publicar una pregunta en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
+-   Publique una pregunta en [{{site.data.keyword.containershort_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
+
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
@@ -285,7 +348,6 @@ Elimine los campos `securityContext` de la configuración para `fsGroup` y `runA
 
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
-
 

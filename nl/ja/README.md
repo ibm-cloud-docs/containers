@@ -2,9 +2,10 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
+
 
 # 顧客対応資料のソース・ファイル
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Integración de servicios
 {: #integrations}
 
@@ -25,6 +27,7 @@ Puede utilizar diversos servicios externos y servicios del catálogo con un clú
 
 ## Servicios de aplicación
 <table summary="Resumen de las características de accesibilidad">
+<caption>Servicios de aplicación</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -46,6 +49,7 @@ IBM Blockchain de recinto de pruebas de nube <img src="../icons/launch-glyph.svg
 
 ## DevOps services
 <table summary="Resumen de las características de accesibilidad">
+<caption>DevOps services</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -79,6 +83,7 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 
 ## Servicios de registro y supervisión
 <table summary="Resumen de las características de accesibilidad">
+<caption>Servicios de registro y supervisión</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -104,12 +109,11 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> proporciona la infraestructura y la supervisión de rendimiento de app con una GUI que detecta y correlaciona automáticamente las apps. Instana captura las solicitudes de las apps, permitiéndole resolver problemas y realizar el análisis de la causa raíz para evitar que se repitan los problemas. Consulte la publicación sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">despliegue de Instana en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para obtener más información.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> proporciona la infraestructura y la supervisión de rendimiento de app con una GUI que detecta y correlaciona automáticamente las apps. Instana captura las solicitudes de las apps, que puede utilizar para resolver problemas y realizar el análisis de la causa raíz para evitar que se repitan los problemas. Consulte la publicación sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">despliegue de Instana en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para obtener más información.</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus es una herramienta de supervisión, registro y generación de alertas de código abierto específicamente diseñada para Kubernetes para recuperar información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Se recopila información sobre CPU, memoria, E/S y actividad de red
-de todos los contenedores en ejecución de un clúster, que se puede utilizar en consultas personalizadas o en alertas para supervisar el rendimiento y las cargas de trabajo del clúster.
+<td>Prometheus es una herramienta de supervisión, registro y generación de alertas diseñada específicamente para Kubernetes. Prometheus recupera información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Para cada contenedor en ejecución en el clúster se recopila actividad de CPU, memoria, E/S y red. Los datos recopilados se pueden utilizar en consultas personalizadas o en alertas para supervisar el rendimiento y las cargas de trabajo del clúster.
 
 <p>Para utilizar Prometheus, siga las <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">instrucciones de CoreOS <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</p>
 </td>
@@ -136,6 +140,7 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 
 ## Servicios de seguridad
 <table summary="Resumen de las características de accesibilidad">
+<caption>Servicios de seguridad</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -176,6 +181,7 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 
 ## Servicios de almacenamiento
 <table summary="Resumen de las características de accesibilidad">
+<caption>Servicios de almacenamiento</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -183,6 +189,10 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td>Heptio Ark</td>
+  <td>Utilice <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para hacer copias de seguridad y restauración de volúmenes persistentes y recursos de clúster. Para obtener más información, consulte <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Casos de uso para migración de clústeres y recuperación ante desastres <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> de Heptio Ark.</td>
+</tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>Los datos que se almacenan con {{site.data.keyword.cos_short}} están cifrados y se dispersan entre varias ubicaciones geográficas. Se accede a estos datos sobre HTTP utilizando una API REST. Utilice [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) para configurar el servicio y hacer copias de seguridad puntuales o planificadas de los datos en los clústeres. Para obtener información general sobre el servicio, consulte la <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">documentación de {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
@@ -193,7 +203,7 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}} ofrece alta disponibilidad y redundancia, copias de seguridad automatizadas y bajo demanda sin interrupciones, herramientas de supervisión, integración en sistemas de alertas, vistas de análisis de rendimiento y mucho más. Para obtener más información, consulte la <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">documentación de {{site.data.keyword.composeForMongoDB}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+    <td>{{site.data.keyword.composeForMongoDB}} ofrece alta disponibilidad y redundancia, copias de seguridad automatizadas y bajo demanda sin interrupciones, herramientas de supervisión, integración en sistemas de alertas, vistas de análisis de rendimiento y mucho más. Para obtener más información, consulte la <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">documentación de {{site.data.keyword.composeForMongoDB}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
   </tr>
 </tbody>
 </table>
@@ -248,7 +258,7 @@ Para añadir un servicio:
         ```
         {: pre}
 
-    -   Cree un espacio de nombres nuevo en el clúster.
+    -   Cree un espacio de nombres en el clúster.
 
         ```
         kubectl create namespace <namespace_name>
@@ -280,11 +290,7 @@ Para añadir un servicio:
     ```
     {: pre}
 
-
-Para utilizar el servicio en un pod desplegado en el clúster, los usuarios del clúster pueden acceder a las credenciales de servicio del servicio de {{site.data.keyword.Bluemix_notm}} mediante el [montaje del secreto de Kubernetes como volumen secreto en un pod](cs_storage.html#app_volume_mount).
-
-
-
+Para utilizar el servicio en un pod desplegado en el clúster, los usuarios del clúster deben acceder a las credenciales de servicio. Los usuarios pueden acceder a las credenciales del servicio {{site.data.keyword.Bluemix_notm}} [montando el secreto de Kubernetes como un volumen secreto para un pod](#adding_app).
 
 <br />
 
@@ -338,9 +344,9 @@ Para crear un alias de Cloud Foundry para la instancia de servicio:
 Se utilizan secretos cifrados de Kubernetes para almacenar detalles de servicios y credenciales de {{site.data.keyword.Bluemix_notm}} y permitir una comunicación segura entre el servicio y el clúster.
 {:shortdesc}
 
-Los secretos de Kubernetes constituyen una forma segura de almacenar información confidencial, como nombres de usuario, contraseñas o claves. En lugar de exponer la información confidencial a través de variables de entorno o directamente en Dockerfile, los usuarios del clúster pueden montar secretos en un pod. Después, se puede acceder a esos secretos mediante un contenedor en ejecución en un pod.
+Los secretos de Kubernetes constituyen una forma segura de almacenar información confidencial, como nombres de usuario, contraseñas o claves. En lugar de exponer la información confidencial a través de variables de entorno o directamente en Dockerfile, los secretos se pueden montar en un pod. Después, se puede acceder a esos secretos mediante un contenedor en ejecución en un pod.
 
-Cuando monta un volumen secreto en un pod, se almacena un archivo denominado binding en el directorio de montaje del volumen, que incluye toda la información y las credenciales que necesita para acceder al servicio de {{site.data.keyword.Bluemix_notm}}.
+Cuando monta un volumen secreto en un pod, un archivo que se denomina `binding` se almacena en el directorio de montaje del volumen. El archivo `binding` incluye toda la información y las credenciales que necesita para acceder al servicio de {{site.data.keyword.Bluemix_notm}}.
 
 Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure). Asegúrese de que el administrador del clúster ha [añadido al clúster](cs_integrations.html#adding_cluster) el servicio de {{site.data.keyword.Bluemix_notm}} que desea utilizar en su app.
 
@@ -399,6 +405,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
     {: codeblock}
 
     <table>
+    <caption>Visión general de los componentes del archivo YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
     </thead>
@@ -464,7 +471,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 
     
 
-9.  Cuando implemente la app, configúrela de modo que encuentre el archivo secreto denominado **binding** en el directorio de montaje, analice el contenido JSON y determine el URL y las credenciales del servicio para acceder al servicio de {{site.data.keyword.Bluemix_notm}}.
+9.  Configure las apps para encontrar el archivo secreto `binding` en el directorio de montaje, analice el contenido JSON y determine el URL y las credenciales del servicio para acceder al servicio {{site.data.keyword.Bluemix_notm}}.
 
 Ahora puede acceder a los detalles y credenciales del servicio de {{site.data.keyword.Bluemix_notm}}. Para poder trabajar con el servicio de {{site.data.keyword.Bluemix_notm}}, asegúrese de que la app se haya configurado de modo que busque el archivo secreto del servicio en el directorio de montaje, analice el contenido JSON y determine los detalles del servicio.
 
@@ -483,11 +490,11 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
 
 1. Instale la <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">CLI de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
 
-2. **Importante**: Para mantener la seguridad del clúster, cree una cuenta de servicio para Tiller en el espacio de nombres `kube-system` y un enlace de rol de clúster de Kubernetes RBAC para el pod `tiller-deploy`. 
+2. **Importante**: Para mantener la seguridad del clúster, cree una cuenta de servicio para Tiller en el espacio de nombres `kube-system` y un enlace de rol de clúster de Kubernetes RBAC para el pod `tiller-deploy`.
 
     1. En su editor de preferencias, cree el siguiente archivo y guárdelo como `rbac-config.yaml`.
       **Nota**:
-        * El rol de clúster `cluster-admin` se crea de forma predeterminada en los clústeres de Kubernetes de forma que no tendrá que definirlo de forma explícita. 
+        * El rol de clúster `cluster-admin` se crea de forma predeterminada en los clústeres de Kubernetes de forma que no tendrá que definirlo de forma explícita.
         * Si está utilizando un clúster versión 1.7.x, cambie `apiVersion` a `rbac.authorization.k8s.io/v1beta1`.
 
       ```
@@ -512,14 +519,14 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
       ```
       {: codeblock}
 
-    2. Cree la cuenta de servicio y el enlace de rol de clúster. 
+    2. Cree la cuenta de servicio y el enlace de rol de clúster.
 
         ```
         kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
-3. Inicialice Helm e instale `tiller` con la cuenta de servicio que acaba de crear. 
+3. Inicialice Helm e instale `tiller` con la cuenta de servicio que acaba de crear.
 
     ```
     helm init --service-account tiller
@@ -555,9 +562,9 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
     ```
     {: pre}
 
-7. Para obtener más información sobre un gráfico, obtenga una lista de sus valores y los valores predeterminados. 
+7. Para obtener más información sobre un gráfico, obtenga una lista de sus valores y los valores predeterminados.
 
-    Por ejemplo, para visualizar los valores, la documentación y los valores predeterminados para el gráfico Helm del servicio strongSwan IPSec VPN: 
+    Por ejemplo, para visualizar los valores, la documentación y los valores predeterminados para el gráfico Helm del servicio strongSwan IPSec VPN:
 
     ```
     helm inspect ibm/strongswan
@@ -627,7 +634,7 @@ Para utilizar Weave Scope con una clúster:
     ```
     {: screen}
 
-4.  Ejecute un mandato de reenvío de puerto para que aparezca el servicio en el sistema. Ahora que Weave Scope se ha configurado con el clúster, para acceder a él la próxima vez puede ejecutar este mandato de reenvío de puerto sin realizar de nuevo los pasos de configuración anteriores.
+4.  Ejecute un mandato de reenvío de puerto para que abrir el servicio en el sistema. La próxima vez que acceda a Weave Scope, podrá ejecutar este mandato sin realizar de nuevo los pasos de configuración anteriores.
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
@@ -638,7 +645,7 @@ Para utilizar Weave Scope con una clúster:
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -651,5 +658,4 @@ Para utilizar Weave Scope con una clúster:
 [Más información sobre las características de Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Tutorial: Migrando um app do Cloud Foundry para um cluster
@@ -81,6 +82,7 @@ Seu código de app está pronto para ser conteinerizado!
 <br />
 
 
+
 ## Lição 2: Criando uma imagem do Docker com seu código de app
 
 Crie um Dockerfile que inclua seu código de app e as configurações necessárias para seu contêiner. Em seguida, construa uma imagem do Docker desse Dockerfile e envie-a por push para seu registro de imagem privada.
@@ -131,6 +133,7 @@ computador. O exemplo a seguir mostra como criar um arquivo Dockerfile com o edi
   {: pre}
 
   <table>
+  <caption>Entendendo os componentes deste comando</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Este ícone indica que há mais informações para conhecer sobre os componentes desse comando."/> Entendendo os componentes desse comando</th>
   </thead>
@@ -214,6 +217,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
   {: codeblock}
 
   <table>
+  <caption>Entendendo os componentes de arquivo YAML</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
   </thead>
@@ -231,7 +235,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 2. Aplique o arquivo de configuração para criar a implementação e o serviço em seu cluster.
 
   ```
-  Filepath/cf-py.yaml kubectl apply -f
+  Kubectl apply filepath> -f < /cf-py.yaml
   ```
   {: pre}
 
@@ -256,7 +260,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
@@ -264,9 +268,11 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     <img src="images/python_flask.png" alt="Uma captura de tela do app Python Flask de modelo implementado." />
 
-5. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard). As etapas são diferentes, dependendo de sua versão do Kubernetes.
+5.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
-6. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Quando tiver terminado de explorar o painel do Kubernetes, use `ctrl + c` para sair do comando `proxy`.
+    Se selecionar seu cluster na GUI do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    {: tip}
+
+6. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
 Parabéns! Seu app está implementado em um contêiner!
-

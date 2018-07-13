@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Mise à jour des clusters et des noeuds worker
@@ -30,7 +33,7 @@ Régulièrement, Kubernetes publie des [mises à jour principales, secondaires o
 
 Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes.  C'est toujours vous qui êtes chargé de garder vos noeuds worker à jour. Lors de l'application de mises à jour, le maître Kubernetes est actualisé avant les noeuds worker.
 
-Par défaut, votre possibilité de mettre à jour le serveur d'API Kubernetes est limitée dans le maître Kubernetes dont les versions secondaires sont plus de deux fois supérieures à la version actuelle. Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.5 et que vous voulez le mettre à jour à la version 1.8, vous devez d'abord effectuer une mise à jour vers la version 1.7. Vous pouvez forcer la mise à jour au-delà de deux versions secondaires, mais ceci peut entraîner des résultats inattendus. Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour.
+Par défaut, votre possibilité de mettre à jour le serveur d'API Kubernetes est limitée dans le maître Kubernetes dont les versions secondaires sont plus de deux fois supérieures à la version actuelle. Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.7 et que vous voulez le mettre à jour à la version 1.10, vous devez d'abord effectuer une mise à jour vers la version 1.8 ou 1.9. Vous pouvez forcer la mise à jour au-delà de trois versions secondaires, mais ceci peut entraîner des résultats inattendus. Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour.
 
 Le diagramme suivant illustre la procédure que vous pourriez suivre pour mettre à jour votre maître.
 
@@ -55,13 +58,14 @@ Lorsque la mise à jour du serveur d'API Kubernetes est terminée, vous pouvez m
 ## Mise à jour des noeuds worker
 {: #worker_node}
 
+
 Vous avez reçu une notification vous invitant à mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Comme les mises à jour de sécurité et les correctifs sont mis en place pour le serveur d'API Kubernetes et d'autres composants du maître Kubernetes, vous devez vérifier que vos noeuds worker soient toujours synchronisés.
 {: shortdesc}
 
 La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes. Avant de commencer, [mettez à jour le maître Kubernetes](#master).
 
-<ul>**Attention** :</br>
-<li>Les mises à jour des noeuds worker peuvent entraîner des temps d'indisponibilité de vos applications et services.</li>
+**Attention** :
+<ul><li>Les mises à jour des noeuds worker peuvent entraîner des temps d'indisponibilité de vos applications et services.</li>
 <li>Les données sont supprimées si elles ne sont pas stockées hors du pod.</li>
 <li>Utilisez des [répliques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) dans vos déploiements pour replanifier des pods sur les noeuds disponibles.</li></ul>
 
@@ -77,7 +81,7 @@ Les clés ont été définies. Que faire maintenant ?
 
 Après avoir défini vos règles, exécutez la commande `bx cs worker-update`. Si une réponse positive est renvoyée, les noeuds worker sont placés en file d'attente pour être mis à jour. Cependant, la procédure de mise à jour des noeuds n'est pas engagée tant que toutes les règles ne sont pas satisfaites. Une fois les noeuds placés en file d'attente, les règles sont vérifiées périodiquement pour déterminer si l'un des noeuds peut être mis à jour.
 
-Que se passe-t-il si je choisis de ne pas définir de mappe de configuration ?
+Que se passe-t-il si j'ai choisi de ne pas définir une mappe de configuration ?
 
 Si aucune mappe de configuration n'est définie, celle par défaut est utilisée. Par défaut, 20 % au maximum de vos noeuds worker sont indisponibles au cours de la procédure de mise à jour.
 
@@ -115,6 +119,7 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
     ```
     {:pre}
   <table summary="La première ligne du tableau couvre les deux colonnes. Le reste des lignes doit être lu de gauche à droite, le paramètre figurant dans la première colonne et les descriptions correspondantes dans la seconde colonne.">
+  <caption>Composants de ConfigMap</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants </th>
     </thead>
@@ -172,6 +177,10 @@ Etapes suivantes :
   - Répétez le processus de mise à jour pour les autres clusters.
   - Informez les développeurs qui travaillent dans le cluster pour qu'ils mettent à jour leur interface de ligne de commande `kubectl` à la version du maître Kubernetes.
   - Si le tableau de bord Kubernetes n'affiche pas les graphiques d'utilisation, [supprimez le pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
@@ -181,8 +190,17 @@ Etapes suivantes :
 ## Mise à jour des types de machine
 {: #machine_type}
 
-Vous pouvez mettre à jour les types de machine utilisés dans les noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si vous disposez de noeuds worker sur des types de machine dépréciés comportant `u1c` ou `b1c` dans le nom, créez des noeuds worker ayant `u2c` ou `b2c` dans le nom.
+Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si vous disposez de noeuds worker sur des types de machine dépréciés comportant `u1c` ou `b1c` dans le nom, créez des noeuds worker ayant `u2c` ou `b2c` dans le nom.
 {: shortdesc}
+
+Avant de commencer :
+- [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
+- Si vous stockez des données sur votre noeud worker, les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage.html#storage).
+
+
+**Attention** : Les mises à jour des noeuds d'agent peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage.html#storage).
+
+
 
 1. Notez les noms et emplacements des noeuds worker à ajouter.
     ```
@@ -218,6 +236,13 @@ Vous pouvez mettre à jour les types de machine utilisés dans les noeuds worker
     {: pre}
 
 6. Répétez cette procédure pour mettre à niveau d'autres noeuds worker sur d'autres types de machine.
+
+
+
+
+
+
+
 
 
 

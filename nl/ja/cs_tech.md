@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} テクノロジー
 
@@ -57,8 +59,8 @@ Docker の基本概念についての説明:
   </ul>
   </dd>
 
+<p>コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。</p>
 
-  
 <p>Docker に関する知識をさらに深める準備ができましたか? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">このコースを受講して、Docker と {{site.data.keyword.containershort_notm}} が連携する仕組みを学習しましょう。</a></p>
 
 </dl>
@@ -69,7 +71,7 @@ Docker の基本概念についての説明:
 ## Kubernetes クラスター
 {: #kubernetes_basics}
 
-<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に対する Kubernetes 認定を示しています。"/>Kubernetes というオープン・ソース・プロジェクトでは、コンテナー化されたインフラストラクチャーの実行と、実動ワークロード、オープン・ソース・コントリビューション、Docker コンテナー管理ツールが組み合わされています。Kubernetes インフラストラクチャーは、コンテナーを管理するための分離された安全なアプリ・プラットフォームです。ポータブルで拡張性に優れ、フェイルオーバー時の自己修復機能も備えています。
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に対する Kubernetes 認定を示しています。"/>Kubernetes というオープン・ソース・プロジェクトでは、コンテナー化されたインフラストラクチャーの実行と、実動ワークロード、オープン・ソース・コントリビューション、Docker コンテナー管理ツールが組み合わされています。 Kubernetes インフラストラクチャーは、コンテナーを管理するための分離された安全なアプリ・プラットフォームです。ポータブルで拡張性に優れ、フェイルオーバー時の自己修復機能も備えています。
 {:shortdesc}
 
 以下の図に示されている、Kubernetes の基本概念の一部について説明します。
@@ -98,9 +100,9 @@ Docker の基本概念についての説明:
 <dt>アプリ</dt>
 <dd>アプリとは、完全に機能する 1 つのアプリ全体を指す場合もありますし、アプリのコンポーネントを指す場合もあります。 アプリのコンポーネントは、別々のポッドまたは別々のワーカー・ノードにデプロイできます。</dd>
 
+<p>Kubernetes リソースを処理する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。</p>
 
-  
-<p>Kubernetes に関する知識をさらに深める準備ができましたか? </p>
+<p>Kubernetes に関する知識をさらに深める準備ができましたか?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">クラスターの作成チュートリアルを利用して、用語の理解をさらに深めてください</a>。</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">このコースを受講して、Kubernetes と {{site.data.keyword.containershort_notm}} が連携する仕組みを学習しましょう。</a></li></ul>
 
@@ -113,7 +115,7 @@ Docker の基本概念についての説明:
 ## サービス・アーキテクチャー
 {: #architecture}
 
-{{site.data.keyword.containershort_notm}} 上で実行される Kubernetes クラスターでは、コンテナー化アプリは、ワーカー・ノードと呼ばれるコンピュート・ホスト上でホストされます。 具体的には、これらのアプリはポッド内で実行され、ポッドがワーカー・ノード上でホストされます。ワーカー・ノードは Kubernetes マスターによって管理されます。 Kubernetes マスターとワーカー・ノードは、安全な TLS 証明書と openVPN 接続を使用して相互に通信し、クラスター構成を調整します。
+{{site.data.keyword.containershort_notm}} 上で実行される Kubernetes クラスターでは、コンテナー化アプリは、ワーカー・ノードと呼ばれるコンピュート・ホスト上でホストされます。 具体的には、これらのアプリはポッド内で実行され、ポッドがワーカー・ノード上でホストされます。 ワーカー・ノードは Kubernetes マスターによって管理されます。 Kubernetes マスターとワーカー・ノードは、安全な TLS 証明書と openVPN 接続を使用して相互に通信し、クラスター構成を調整します。
 {: shortdesc}
 
 Kubernetes マスターとワーカー・ノードの違いは何ですか? これは良い質問です。
@@ -122,15 +124,18 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
   <dt>Kubernetes マスター</dt>
     <dd>Kubernetes マスターは、クラスター内のすべてのコンピュート・リソース、ネットワーク・リソース、ストレージ・リソースを管理します。 Kubernetes マスターは、コンテナー化されたアプリとサービスがクラスター内のワーカー・ノードに均等にデプロイされるようにします。 マスターは、アプリとサービスの構成方法に応じて、アプリの要件を満たせるだけのリソースがあるワーカー・ノードを決定します。</dd>
   <dt>ワーカー・ノード</dt>
-    <dd>各ワーカー・ノードは、物理マシン (ベア・メタル) であるか、クラウド環境内の物理ハードウェアで実行される仮想マシンです。ワーカー・ノードをプロビジョンする際に、そのワーカー・ノード上でホストされるコンテナーで使用できるリソースを決定します。 すぐに使用できるように、ワーカー・ノードには、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスがセットアップされます。 標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。</dd>
+    <dd>各ワーカー・ノードは、物理マシン (ベア・メタル) であるか、クラウド環境内の物理ハードウェアで実行される仮想マシンです。 ワーカー・ノードをプロビジョンする際に、そのワーカー・ノード上でホストされるコンテナーで使用できるリソースを決定します。すぐに使用できるように、ワーカー・ノードには、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスがセットアップされます。 標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー](images/cs_org_ov.png)
-図. {{site.data.keyword.containershort_notm}} アーキテクチャー
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー">
+ <figcaption>{{site.data.keyword.containershort_notm}} アーキテクチャー</figcaption>
+</figure>
+</p>
 
 {{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](cs_integrations.html#integrations)についていくつか紹介しています。
 
 
 <br />
-
 

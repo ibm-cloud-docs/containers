@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Tecnología {{site.data.keyword.containerlong_notm}}
 
@@ -57,9 +59,9 @@ Obtenga información acerca de algunos aspectos básicos de Docker:
   </ul>
   </dd>
 
+<p>Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.</p>
 
-  
-<p>¿Listo para conocer Docker en más profundidad?  <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Complete este curso para conocer cómo Docker y {{site.data.keyword.containershort_notm}} funcionan conjuntamente.</a></p>
+<p>¿Listo para conocer Docker en más profundidad? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Complete este curso para conocer cómo Docker y {{site.data.keyword.containershort_notm}} funcionan conjuntamente.</a></p>
 
 </dl>
 
@@ -99,9 +101,9 @@ Defina estrategias para la app que incluyan el número de pods que desea añadir
 <dt>App</dt>
 <dd>Una app puede hacer referencia a una app completa o al componente de una app. Puede desplegar componentes de una app en pods o nodos trabajadores independientes.</dd>
 
+<p>Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.</p>
 
-  
-<p>¿Listo para conocer Kubernetes en más profundidad?  </p>
+<p>¿Listo para conocer Kubernetes en más profundidad?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplíe su conocimiento terminológico con la guía de aprendizaje de creación de clústeres</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Complete este curso para conocer cómo Kubernetes y {{site.data.keyword.containershort_notm}} funcionan conjuntamente.</a></li></ul>
 
@@ -126,12 +128,15 @@ En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containershor
     <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</dd>
 </dl>
 
-![Arquitectura de Kubernetes de {{site.data.keyword.containerlong_notm}}](images/cs_org_ov.png)
-Figura. Arquitectura de {{site.data.keyword.containershort_notm}}
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} - Arquitectura Kubernetes">
+ <figcaption>{{site.data.keyword.containershort_notm}} - Arquitectura</figcaption>
+</figure> 
+</p>
 
 ¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](cs_integrations.html#integrations).
 
 
 <br />
-
 

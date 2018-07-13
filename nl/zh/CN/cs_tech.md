@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} 技术
 
@@ -56,8 +58,8 @@ lastupdated: "2018-4-20"
   </ul>
   </dd>
 
+<p>使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。</p>
 
-  
 <p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containershort_notm}}</a>。</p>
 
 </dl>
@@ -95,8 +97,8 @@ lastupdated: "2018-4-20"
 <dt>应用程序</dt>
 <dd>应用程序可能是指完整应用程序，也可能指应用程序组件。可在单独的 pod 或单独的工作程序节点中部署应用程序的组件。</dd>
 
+<p>使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。</p>
 
-  
 <p>准备好进一步了解 Kubernetes 了吗？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">通过“创建集群”教程扩大对术语的了解</a>。</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containershort_notm}}</a>。</li></ul>
@@ -122,12 +124,15 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <dd>每个工作程序节点都是物理机器（裸机）或是在云环境中的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/cs_org_ov.png)
-图. {{site.data.keyword.containershort_notm}} 体系结构
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构">
+ <figcaption>{{site.data.keyword.containershort_notm}} 体系结构</figcaption>
+</figure>
+</p>
 
 想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](cs_integrations.html#integrations)。
 
 
 <br />
-
 

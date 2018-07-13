@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Annotazioni di Ingress
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ Per aggiungere funzionalità al tuo programma di bilanciamento del carico dell'a
 Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi [Gestione del traffico di rete utilizzando Ingress](cs_ingress.html#planning).
 
 <table>
+<caption>Annotazioni generali</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -64,6 +66,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <br>
 
 <table>
+<caption>Annotazioni di connessione</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -108,6 +111,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <br>
 
   <table>
+  <caption>Annotazioni autenticazione HTTPS e TLS/SSL</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -145,13 +149,14 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
   <tr>
   <td><a href="#ssl-services">Supporto dei servizi SSL</a></td>
   <td><code>ssl-services</code></td>
-  <td>Consenti il supporto dei servizi SSL per crittografare il traffico verso le tue applicazioni upstream che richiedono HTTPS. </td>
+  <td>Consenti il supporto dei servizi SSL per crittografare il traffico verso le tue applicazioni upstream che richiedono HTTPS.</td>
   </tr>
   </tbody></table>
 
 <br>
 
 <table>
+<caption>Annotazioni Istio</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -171,6 +176,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <br>
 
 <table>
+<caption>Annotazioni buffer proxy</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -205,6 +211,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <br>
 
 <table>
+<caption>Annotazioni richiesta e risposta</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -239,6 +246,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <br>
 
 <table>
+<caption>Annotazioni limite del servizio</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -304,8 +312,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -335,12 +344,13 @@ Modifica il modo in cui l'ALB mette in corrispondenza l'URI della richiesta con 
 
 <dl>
 <dt>Descrizione</dt>
-<dd>Per impostazione predefinita, gli ALB elaborano i percorsi che le applicazioni ascoltano sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione.<br><br>**Nota**: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria.</dd>
+<dd>Per impostazione predefinita, gli ALB elaborano i percorsi che le applicazioni ascoltano sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione.<br><br><strong>Nota</strong>: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria.</dd>
 
 <dt>Modificatori supportati</dt>
 <dd>
 
 <table>
+<caption>Modificatori supportati</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -350,15 +360,15 @@ Modifica il modo in cui l'ALB mette in corrispondenza l'URI della richiesta con 
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>Il modificatore con segno di uguale fa sì che l'ALB selezioni solo le corrispondenze esatte. Quando viene trovata una corrispondenza esatta, la ricerca si ferma e viene selezionato il percorso corrispondente.</td>
+ <td>Il modificatore con segno di uguale fa sì che l'ALB selezioni solo le corrispondenze esatte. Quando viene trovata una corrispondenza esatta, la ricerca si ferma e viene selezionato il percorso corrispondente.<br>Ad esempio, se la tua applicazione è in ascolto su <code>/tea</code>, l'ALB seleziona solo i percorsi <code>/tea</code> esatti quando fa corrispondere una richiesta alla tua applicazione.</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>il modificatore con tilde fa sì che l'ALB elabori i percorsi come percorsi regex sensibili al maiuscolo/minuscolo durante la corrispondenza.</td>
+ <td>il modificatore con tilde fa sì che l'ALB elabori i percorsi come percorsi regex sensibili al maiuscolo/minuscolo durante la corrispondenza.<br>Ad esempio, se la tua applicazione è in ascolto su <code>/coffee</code>, l'ALB può selezionare i percorsi <code>/ab/coffee</code> o <code>/123/coffee</code> quando fa corrispondere una richiesta alla tua applicazione anche se i percorsi non sono esplicitamente impostati per la tua applicazione.</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>Il modificatore con tilde seguita da un asterisco fa sì che l'ALB elabori i percorsi come percorsi regex non sensibili al maiuscolo/minuscolo durante la corrispondenza.</td>
+ <td>Il modificatore con tilde seguita da un asterisco fa sì che l'ALB elabori i percorsi come percorsi regex non sensibili al maiuscolo/minuscolo durante la corrispondenza.<br>Ad esempio, se la tua applicazione è in ascolto su <code>/coffee</code>, l'ALB può selezionare i percorsi <code>/ab/Coffee</code> o <code>/123/COFFEE</code> quando fa corrispondere una richiesta alla tua applicazione anche se i percorsi non sono esplicitamente impostati per la tua applicazione.</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -394,8 +404,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -450,8 +461,9 @@ tls:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -474,7 +486,7 @@ Instrada il traffico di rete in entrata in un percorso di dominio dell'ALB a un 
 
 <dl>
 <dt>Descrizione</dt>
-<dd>Il tuo dominio dell'ALB Ingress instrada il traffico di rete in entrata in <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> alla tua applicazione. La tua applicazione è in ascolto su <code>/coffee</code>, invece di <code>/beans</code>. Per inoltrare il traffico di rete in entrata alla tua applicazione, aggiungi l'annotazione di riscrittura al file di configurazione della tua risorsa Ingress. L'annotazione di riscrittura garantisce che il traffico di rete in entrata su <code>/beans</code> venga inoltrato alla tua applicazione utilizzando il percorso <code>/coffee</code>. Quando includi più servizi, utilizza solo un punto e virgola (;) per
+<dd>Il tuo dominio dell'ALB Ingress instrada il traffico di rete in entrata in <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> alla tua applicazione. La tua applicazione è in ascolto su <code>/coffee</code>, invece di <code>/beans</code>. Per inoltrare il traffico di rete in entrata alla tua applicazione, aggiungi l'annotazione di riscrittura al file di configurazione della tua risorsa Ingress. L'annotazione di riscrittura garantisce che il traffico di rete in entrata su <code>/beans</code> venga inoltrato alla tua applicazione utilizzando il percorso <code>/coffee</code>. Quando includi più servizi, utilizza solo un punto e virgola (;) per
 separarli.</dd>
 <dt>YAML risorsa Ingress di esempio</dt>
 <dd>
@@ -501,8 +513,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -561,8 +574,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -586,17 +600,17 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>Apri la mappa di configurazione di ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Aggiungi le porte TCP alla mappa di configurazione. Sostituisci <code>&lt;port&gt;</code> con le porte TCP che desideri aprire.
+<li>Aggiungi le porte TCP alla mappa di configurazione. Sostituisci <code>&lt;port&gt;</code> con le porte TCP che desideri aprire. <b>Nota</b>: per impostazione predefinita, le porte 80 e 443 sono aperte. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte TCP che specifichi nel campo `public-ports`. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`. Per ulteriori informazioni, consulta <a href="cs_ingress.html#opening_ingress_ports">Apertura delle porte nell'ALB Ingress</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
  creationTimestamp: 2017-08-22T19:06:51Z
  name: ibm-cloud-provider-ingress-cm
@@ -609,8 +623,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Configura Ingress per accedere alla tua applicazione tramite una porta TCP non standard. Utilizza il file YAML di esempio in questo riferimento. </li>
 <li>Aggiorna la configurazione del tuo ALB.
 <pre class="pre">
@@ -652,8 +666,8 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-   ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
  tls:
  - hosts:
@@ -669,17 +683,18 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>Il numero di secondi da attendere per il collegamento all'applicazione di back-end, ad esempio <code>65s</code>. <strong>Nota:</strong> un timeout di collegamento non può superare 75 secondi.</td>
+ <td>Il numero di secondi o di minuti da attendere per il collegamento all'applicazione di back-end, ad esempio <code>65s</code> o <code>2m</code>. <strong>Nota:</strong> un timeout di collegamento non può superare 75 secondi.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>Il numero di secondi da attendere prima che venga letta l'applicazione di back-end, ad esempio <code>65s</code>. <strong>Nota:</strong> un timeout di lettura non può superare 120 secondi.</td>
+ <td>Il numero di secondi o di minuti da attendere prima che venga letta l'applicazione di back-end, ad esempio <code>65s</code> o <code>2m</code>.
  </tr>
  </tbody></table>
 
@@ -727,8 +742,9 @@ tls:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -786,8 +802,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -842,8 +859,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -906,7 +924,7 @@ Utilizza l'annotazione cookie permanente per aggiungere l'affinità di sessione 
 Ad ogni client che si collega alla tua applicazione di back-end, l'ALB assegna uno dei server upstream disponibili. L'ALB crea un cookie di sessione che viene memorizzato nell'applicazione del client e che viene incluso nelle informazioni di intestazione di ogni richiesta tra l'ALB e il client. Le informazioni nel cookie garantiscono che tutte le richieste vengano gestite dallo stesso server upstream nella sessione.
 
 </br></br>
-Quando includi più servizi, utilizza un un punto e virgola (;) per separarli.</dd>
+Quando includi più servizi, utilizza un punto e virgola (;) per separarli.</dd>
 <dt>YAML risorsa Ingress di esempio</dt>
 <dd>
 
@@ -926,18 +944,19 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -966,6 +985,8 @@ supportato solo <code>sha1</code>. SHA1 crea un riepilogo hash in base alle info
  </dd></dl>
 
 <br />
+
+
 
 
 ### Keepalive upstream (upstream-keepalive)
@@ -1006,8 +1027,9 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -1025,6 +1047,8 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
 <br />
 
 
+
+
 ## Annotazioni autenticazione HTTPS e TLS/SSL
 {: #https-auth}
 
@@ -1039,7 +1063,7 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
   <dd>
   Esegui l'autenticazione di richieste HTTP/HTTPS web o API con {{site.data.keyword.appid_short_notm}}.
 
-  <p>Se imposti il tipo di richiesta su <code>web</code>, viene convalidata una richiesta web che contiene un token di accesso {{site.data.keyword.appid_short_notm}}. Se la convalida del token non riesce, la richiesta web viene rifiutata. Se la richiesta non contiene un token di accesso, verrà reindirizzata alla pagina di accesso di {{site.data.keyword.appid_short_notm}}. **Nota**: perché l'autenticazione web {{site.data.keyword.appid_short_notm}} funzioni, è necessario abilitare i cookie nel browser dell'utente.</p>
+  <p>Se imposti il tipo di richiesta su <code>web</code>, viene convalidata una richiesta web che contiene un token di accesso {{site.data.keyword.appid_short_notm}}. Se la convalida del token non riesce, la richiesta web viene rifiutata. Se la richiesta non contiene un token di accesso, verrà reindirizzata alla pagina di accesso di {{site.data.keyword.appid_short_notm}}. <strong>Nota</strong>: perché l'autenticazione web {{site.data.keyword.appid_short_notm}} funzioni, è necessario abilitare i cookie nel browser dell'utente.</p>
 
   <p>Se imposti il tipo di richiesta su <code>api</code>, viene convalidata una richiesta API che contiene un token di accesso {{site.data.keyword.appid_short_notm}}. Se la richiesta non contiene un token di accesso, l'utente riceverà il messaggio di errore <code>401: Unauthorized</code>.</p>
 
@@ -1070,8 +1094,9 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>Descrizione dei componenti dell'annotazione</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+    <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
     </thead>
     <tbody>
     <tr>
@@ -1144,8 +1169,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -1165,12 +1191,12 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>Apri la mappa di configurazione di ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Aggiungi le porte HTTP e HTTPS non predefinite alla mappa di configurazione. Sostituisci &lt;port&gt; con la porta HTTP o HTTPS che desideri aprire.
+<li>Aggiungi le porte HTTP e HTTPS non predefinite alla mappa di configurazione. Sostituisci &lt;port&gt; con la porta HTTP o HTTPS che desideri aprire. <b>Nota</b>: per impostazione predefinita, le porte 80 e 443 sono aperte. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte TCP che specifichi nel campo `public-ports`. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`. Per ulteriori informazioni, consulta <a href="cs_ingress.html#opening_ingress_ports">Apertura delle porte nell'ALB Ingress</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1188,8 +1214,8 @@ metadata:
 <code>kubectl get service -n kube-system</code></pre>
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Configura il tuo Ingress in modo che utilizzi le porte non predefinite quando instrada il traffico di rete ai tuoi servizi. Utilizza il file YAML di esempio in questo riferimento. </li>
 <li>Aggiorna la configurazione del tuo ALB.
 <pre class="pre">
@@ -1217,6 +1243,7 @@ Il reindirizzamento delle richieste HTTP in HTTPS è disabilitato per impostazio
 
 <dt>YAML risorsa Ingress di esempio</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1237,7 +1264,10 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1271,19 +1301,20 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -1316,7 +1347,7 @@ Configura l'autenticazione reciproca per l'ALB.
 <dl>
 <dt>Descrizione</dt>
 <dd>
-Configura l'autenticazione reciproca per l'ALB Ingress. Il client autentica il server e anche il server autentica il client utilizzando i certificati. L'autenticazione reciproca è nota anche come autenticazione basata su certificato o autenticazione bidirezionale.
+Configura l'autenticazione reciproca del traffico di downstream per l'ALB Ingress. Il client esterno autentica il server e anche il server autentica il client utilizzando i certificati. L'autenticazione reciproca è nota anche come autenticazione basata su certificato o autenticazione bidirezionale.
 </dd>
 
 <dt>Prerequisiti</dt>
@@ -1353,8 +1384,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -1387,10 +1419,7 @@ Consenti le richieste HTTPS e crittografa il traffico alle tue applicazioni upst
 <dl>
 <dt>Descrizione</dt>
 <dd>
-Crittografa il traffico verso le tue applicazioni upstream che richiedono HTTPS.
-
-**Facoltativo**: a questa annotazione, puoi aggiungere [l'autenticazione unidirezionale o l'autenticazione reciproca](#ssl-services-auth).
-</dd>
+Crittografa il traffico che Ingress invia alle applicazioni upstream che richiedono HTTPS. Se le tue applicazioni upstream possono gestire TLS, puoi facoltativamente fornire un certificato contenuto in un segreto TLS.<br></br>**Facoltativo**: a questa annotazione, puoi aggiungere [l'autenticazione unidirezionale o l'autenticazione reciproca](#ssl-services-auth).</dd>
 
 
 <dt>YAML risorsa Ingress di esempio</dt>
@@ -1408,18 +1437,19 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -1428,7 +1458,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client. Per creare un segreto TLS, vedi [Creazione dei segreti](cs_app.html#secrets).</td>
+  <td>Facoltativo: se vuoi utilizzare un segreto TLS e la tua applicazione upstream può gestire TLS, sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto del servizio. Se fornisci un segreto, il valore deve contenere i <code>trusted.crt</code>, <code>client.crt</code> e <code>client.key</code> che la tua applicazione si aspetta dal client. Per creare un segreto TLS, per prima cosa [converti i certificati e la chiave in base-64 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.base64encode.org/). Poi consulta [Creazione dei segreti](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1445,9 +1475,6 @@ spec:
 <dt>Descrizione</dt>
 <dd>
 Consenti le richieste HTTPS e crittografa il traffico alle tue applicazioni upstream con l'autorizzazione unidirezionale o reciproca per garantire ulteriore sicurezza.
-
-**Nota**: prima di iniziare, [converti il certificato e la chiave in base-64 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.base64encode.org/).
-
 </dd>
 
 
@@ -1472,19 +1499,20 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -1493,7 +1521,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client. Per creare un segreto di autenticazione reciproca, vedi [Creazione dei segreti](cs_app.html#secrets).</td>
+  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto dell'autenticazione reciproca per il servizio. Il valore deve contenere il certificato CA che la tua applicazione si aspetta dal client. Per creare un segreto di autenticazione reciproca, per prima cosa [converti il certificato e la chiave in base-64 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.base64encode.org/). Poi consulta [Creazione dei segreti](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1519,12 +1547,12 @@ spec:
     <br><br>Nella risorsa Ingress per l'ALB cluster, devi:
       <ul>
         <li>specificare l'annotazione `istio-services`</li>
-        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione </li>
+        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione</li>
         <li>definire la porta di servizio come la porta del controller Ingress Istio</li>
       </ul>
     <br>Nella risorsa Ingress per il controller Ingress Istio, devi:
       <ul>
-        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione </li>
+        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione</li>
         <li>definire la porta di servizio come la porta HTTP/HTTPS del servizio dell'applicazione esposto dal controller Ingress Istio</li>
     </ul>
   </dd>
@@ -1538,7 +1566,7 @@ spec:
    metadata:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - hosts:
@@ -1558,17 +1586,18 @@ spec:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>Descrizione dei componenti del file YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>Per abilitare l'instradamento del traffico ai servizi gestiti da Istio, deve essere impostato su <code>True</code>.</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Sostituisci <code><em>&lt;myservice1&gt;</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione gestita da Istio. Separa più servizi con un punto e virgola (;). Questo campo è facoltativo. Se non specifichi un nome di servizio, tutti i servizi gestiti da Istio verranno abilitati per l'instradamento del traffico. </td>
+    <td>Sostituisci <code><em>&lt;myservice1&gt;</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione gestita da Istio. Separa più servizi con un punto e virgola (;). Questo campo è facoltativo. Se non specifichi un nome di servizio, tutti i servizi gestiti da Istio verranno abilitati per l'instradamento del traffico.</td>
     </tr>
     <tr>
     <td><code>istioServiceNamespace</code></td>
@@ -1617,7 +1646,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
@@ -1631,7 +1660,24 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>Per disabilitare il buffer dei dati della risposta nell'ALB, imposta su <code>false</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Sostituisci <code><em>&lt;myservice1&gt;</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione. Separa più servizi con un punto e virgola (;). Questo campo è facoltativo. Se non specifichi un nome di servizio, tutti i servizi utilizzano questa annotazione. </td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1672,8 +1718,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -1734,8 +1781,9 @@ spec:
  </code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -1793,8 +1841,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
 </thead>
 <tbody>
 <tr>
@@ -1836,7 +1885,6 @@ Se la tua applicazione di back-end richiede le informazioni dell'intestazione HT
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1848,7 +1896,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1891,18 +1938,19 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -1958,18 +2006,19 @@ Rimuovi le informazioni di intestazione incluse nella risposta client dall'appli
    - host: mydomain
     http:
       paths:
-       - path: /
-        backend:
-          serviceName: &lt;myservice1&gt;
-          servicePort: 8080
-       - path: /myapp
-        backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
+       - path: /service1_path
+         backend:
+           serviceName: &lt;myservice1&gt;
+           servicePort: 8080
+       - path: /service2_path
+         backend:
+           serviceName: &lt;myservice2&gt;
+           servicePort: 80</code></pre>
 
   <table>
+  <caption>Descrizione dei componenti dell'annotazione</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+   <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
    </thead>
    <tbody>
    <tr>
@@ -2025,13 +2074,14 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>La dimensione massima del corpo della risposta client. Ad esempio, per impostarla su 200 megabyte, definisci <code>200m</code>.  <strong>Nota:</strong> puoi impostare la dimensione su 0 per disabilitare il controllo della dimensione del corpo della richiesta client.</td>
+ <td>La dimensione massima del corpo della risposta client. Ad esempio, per impostare la dimensione massima su 200 megabyte, definisci <code>200m</code>. <strong>Nota:</strong> puoi impostare la dimensione su 0 per disabilitare il controllo della dimensione del corpo della richiesta client.</td>
  </tr>
  </tbody></table>
 
@@ -2075,8 +2125,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Descrizione dei componenti dell'annotazione</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
  </thead>
  <tbody>
  <tr>
@@ -2137,13 +2188,14 @@ Per tutti i servizi, limita la velocità di elaborazione delle richieste e il nu
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>Per impostare un limite globale per le richieste in entrata in base alla posizione o al servizio, utilizza `key=location`. Per impostare un limite globale per le richieste in entrata in base all'intestazione, utilizza `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Per impostare un limite globale per le richieste in entrata in base alla posizione o al servizio, utilizza `key=location`. Per impostare un limite globale per le richieste in entrata in base all'intestazione, utilizza `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2199,8 +2251,9 @@ Limita la velocità di elaborazione delle richieste e il numero di connessioni p
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Descrizione dei componenti dell'annotazione</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
   </thead>
   <tbody>
   <tr>
@@ -2209,7 +2262,7 @@ Limita la velocità di elaborazione delle richieste e il numero di connessioni p
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>Per impostare un limite globale per le richieste in entrata in base alla posizione o al servizio, utilizza `key=location`. Per impostare un limite globale per le richieste in entrata in base all'intestazione, utilizza `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Per impostare un limite globale per le richieste in entrata in base alla posizione o al servizio, utilizza `key=location`. Per impostare un limite globale per le richieste in entrata in base all'intestazione, utilizza `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2224,3 +2277,6 @@ Limita la velocità di elaborazione delle richieste e il numero di connessioni p
   </dl>
 
   <br />
+
+
+

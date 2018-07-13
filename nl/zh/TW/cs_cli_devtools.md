@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 管理叢集的 CLI 參考資料
@@ -226,7 +229,7 @@ bx plugin list
 
 </br>
 
-<table summary="區域指令">
+<table summary="地區指令">
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -548,7 +551,7 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>將 <code><em>&lt;cluster_name&gt;</em></code> 取代為叢集的名稱。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。請注意，叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷並在 Ingress  網域名稱內附加一個隨機值。</td>
+    <td>將 <code><em>&lt;cluster_name&gt;</em></code> 取代為叢集的名稱。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷並在 Ingress  網域名稱內附加一個隨機值。</td>
     </tr>
     <tr>
     <td><code><em>location</em></code></td>
@@ -605,7 +608,7 @@ trusted: <em>true</em>
 <dd>選擇機型。您可以將工作者節點部署為共用或專用硬體上的虛擬機器，或部署為裸機上的實體機器。可用的實體及虛擬機器類型會因您部署叢集所在的位置而不同。如需相關資訊，請參閱 `bx cs machine-types` [指令](cs_cli_reference.html#cs_machine_types) 的文件。此值對於標準叢集是必要的，不適用於免費叢集。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>叢集的名稱。這是必要值。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。請注意，叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷並在 Ingress  網域名稱內附加一個隨機值。</dd>
+<dd>叢集的名稱。這是必要值。此名稱必須以字母開頭，可以包含字母、數字及連字號 (-)，且長度不得超過 35 個字元。叢集名稱和叢集部署所在的地區會形成 Ingress 子網域的完整網域名稱。為了確保 Ingress 子網域在地區內是唯一的，叢集名稱可能會被截斷並在 Ingress  網域名稱內附加一個隨機值。</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>叢集主節點的 Kubernetes 版本。這是選用值。未指定版本時，會使用支援的 Kubernetes 版本的預設值來建立叢集。若要查看可用的版本，請執行 <code>bx cs kube-versions</code>。</dd>
@@ -623,7 +626,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>附註：</strong>{[matching_VLANs]}</p></li>
+<p><strong>附註：</strong>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></li>
 </ul>
 
 <p>若要找出您是否已有特定位置的專用 VLAN，或尋找現有專用 VLAN 的名稱，請執行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -637,7 +640,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>附註：</strong>{[matching_VLANs]}</p></li>
+<p><strong>附註：</strong>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></li>
 </ul>
 
 <p>若要找出您是否已有特定位置的公用 VLAN，或尋找現有公用 VLAN 的名稱，請執行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -726,7 +729,7 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-**範例輸出**：
+**輸出範例**：
 
   ```
   Name:        my_cluster
@@ -736,7 +739,7 @@ trusted: <em>true</em>
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
@@ -1128,7 +1131,7 @@ trusted: <em>true</em>
    <dd>叢集的名稱或 ID。這是必要值。</dd>
 
    <dt><code>--update</code></dt>
-   <dd>包括此旗標，以更新叢集中的 ALB 密碼的憑證。這是選用值。</dd>
+   <dd>更新叢集中 ALB 密碼的憑證。這是選用值。</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>ALB 密碼的名稱。這是必要值。</dd>
@@ -1249,9 +1252,6 @@ trusted: <em>true</em>
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1273,7 +1273,7 @@ trusted: <em>true</em>
    <dd>
 
    <ul>
-    <li>此參數僅適用於專用 ALB</li>
+    <li>此參數僅適用於啟用專用 ALB。</li>
     <li>專用 ALB 是使用來自使用者提供的專用子網路的 IP 位址進行部署。如果未提供 IP 位址，則會使用您建立叢集時自動佈建的可攜式專用子網路中的專用 IP 位址進行部署。</li>
    </ul>
    </dd>
@@ -1288,13 +1288,6 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-  停用 ALB 的範例：
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   以使用者提供的 IP 位址啟用 ALB 的範例：
 
   ```
@@ -1302,7 +1295,12 @@ trusted: <em>true</em>
   ```
   {: pre}
 
+  停用 ALB 的範例：
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1371,7 +1369,7 @@ trusted: <em>true</em>
 
 針對 {{site.data.keyword.containershort_notm}} 帳戶設定 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 
-如果您有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶，依預設，您便可以存取 IBM Cloud 基礎架構 (SoftLayer) 組合。不過，建議您使用您已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購基礎架構。您可以使用此指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。
+如果您有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶，依預設，您可以存取 IBM Cloud 基礎架構 (SoftLayer) 組合。不過，您可能想要使用您已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購基礎架構。您可以使用此指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。
 
 如果手動設定了 IBM Cloud 基礎架構 (SoftLayer) 認證，則即使帳戶已有 [IAM API 金鑰](#cs_api_key_info)，也會使用這些認證來訂購基礎架構。如果已儲存其認證的使用者沒有訂購基礎架構的必要許可權，則基礎架構相關動作（例如建立叢集或重新載入工作者節點）可能會失敗。
 
@@ -1445,24 +1443,106 @@ trusted: <em>true</em>
 您可以將工作者節點佈建為共用或專用硬體上的虛擬機器，或佈建為裸機上的實體機器。
 
 <dl>
-<dt>實體機器（裸機）</dt>
-<dd>您可以將工作者節點佈建為單一承租戶實體伺服器，也稱為裸機伺服器。裸機可讓您直接存取機器上的實體資源，例如記憶體或 CPU。此設定可免除虛擬機器 Hypervisor，該 Hypervisor 將實體資源配置給在主機上執行的虛擬機器。相反地，裸機的所有資源將由工作者節點專用，因此您不需要擔心「吵雜的鄰居」共用資源或降低效能。<p><strong>按月計費</strong>：裸機伺服器的成本高於虛擬伺服器，最適合需要更多資源及主機控制的高效能應用程式。裸機伺服器按月計費。如果您在月底之前取消裸機伺服器，則會向您收取該月整個月的費用。訂購及取消裸機伺服器是透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶進行的手動處理程序。可能需要一個以上的營業日才能完成。</p>
-<p><strong>啟用授信運算的選項</strong>：啟用「授信運算」，以驗證工作者節點是否遭到竄改。如果您在叢集建立期間未啟用信任，但後來想要啟用，您可以使用 `bx cs feature-enable` [指令](cs_cli_reference.html#cs_cluster_feature_enable)。啟用信任之後，以後您就無法再予以停用。您可以建立無信任的新叢集。如需在節點啟動處理程序期間信任運作方式的相關資訊，請參閱[使用授信運算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。「授信運算」適用於執行 Kubernets 1.9 版或更新版本，且具有特定裸機機型的叢集。當您執行 `bx cs machine-types <location>` [指令](cs_cli_reference.html#cs_machine_types)時，可以檢閱 `Trustable` 欄位來查看哪些機器支援信任。</p>
-<p><strong>裸機機型群組</strong>：裸機機型分成數個具有不同運算資源的群組，您可以從中選擇以符合應用程式的需求。實體機型的本端儲存空間高於虛擬機型，有些實體機型具有 RAID 可用來備份本端資料。若要瞭解裸機產品的不同類型，請參閱 `bx cs machine-type` [指令](cs_cli_reference.html#cs_machine_types)。
-<ul><li>`mb1c.4x32`：如果您不需要 RAM 或資料密集資源，請選擇此類型，讓工作者節點的實體機器資源達到平衡配置。以 4 核心、32GB 記憶體、1TB SATA 主要磁碟、2TB SATA 次要磁碟、10Gbps 結合網路達到平衡。</li>
-<li>`mb1c.16x64`：如果您不需要 RAM 或資料密集資源，請選擇此類型，讓工作者節點的實體機器資源達到平衡配置。以 16 核心、64GB 記憶體、1TB SATA 主要磁碟、1.7TB SSD 次要磁碟、10Gbps 結合網路達到平衡。</li>
-<li>`mr1c.28x512`選擇此類型，將工作者節點可用的 RAM 最大化。以 28 核心、512GB 記憶體、1TB SATA 主要磁碟、1.7TB SSD 次要磁碟、10Gbps 結合網路加強 RAM。</li>
-<li>`md1c.16x64.4x4tb`：如果工作者節點需要大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料，請選擇此類型。針對 RAID1 配置 1TB 主要儲存空間磁碟，並針對 RAID10 配置 4TB 次要儲存空間磁碟。以 28 核心、512GB 記憶體、2x1TB RAID1 主要磁碟、4x4TB SATA RAID10 次要磁碟、10Gbps 結合網路加強資料。</li>
-<li>`md1c.28x512.4x4tb`：如果工作者節點需要大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料，請選擇此類型。針對 RAID1 配置 1TB 主要儲存空間磁碟，並針對 RAID10 配置 4TB 次要儲存空間磁碟。以 16 核心、64GB 記憶體、2x1TB RAID1 主要磁碟、4x4TB SATA RAID10 次要磁碟、10Gbps 結合網路加強資料。</li>
-
-</ul></p></dd>
-<dt>虛擬機器</dt>
-<dd>當您建立標準虛擬叢集時，必須選擇是要由多個 {{site.data.keyword.IBM_notm}} 客戶（多方承租戶）共用基礎硬體，還是只供您一人專用（單一承租戶）。
+<dt>為何要使用實體機器（裸機）？</dt>
+<dd><p><strong>更多運算資源</strong>：您可以將工作者節點佈建為單一承租戶實體伺服器，也稱為裸機。裸機可讓您直接存取機器上的實體資源，例如記憶體或 CPU。此設定可免除虛擬機器 Hypervisor，該 Hypervisor 將實體資源配置給在主機上執行的虛擬機器。相反地，裸機的所有資源將由工作者節點專用，因此您不需要擔心「吵雜的鄰居」共用資源或降低效能。實體機型的本端儲存空間多於虛擬機型，有些實體機型具有 RAID 可用來備份本端資料。</p>
+<p><strong>按月計費</strong>：裸機伺服器的成本高於虛擬伺服器，最適合需要更多資源及主機控制的高效能應用程式。裸機伺服器按月計費。如果您在月底之前取消裸機伺服器，則會向您收取該月整個月的費用。訂購及取消裸機伺服器是透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶進行的手動程序。可能需要多個營業日才能完成。</p>
+<p><strong>啟用授信運算的選項</strong>：啟用「授信運算」，以驗證工作者節點是否遭到竄改。如果您在叢集建立期間未啟用信任，但後來想要啟用，您可以使用 `bx cs feature-enable` [指令](cs_cli_reference.html#cs_cluster_feature_enable)。啟用信任之後，以後您就無法再予以停用。無需信任，即可建立新叢集。如需在節點啟動處理程序期間信任運作方式的相關資訊，請參閱[使用授信運算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。「授信運算」適用於執行 Kubernets 1.9 版或更新版本，且具有特定裸機機型的叢集。當您執行 `bx cs machine-types <location>` [指令](cs_cli_reference.html#cs_machine_types)時，可以檢閱 **Trustable** 欄位來查看哪些機器支援信任。例如，`mgXc` GPU 特性不支援「授信運算」。</p></dd>
+<dt>為何要使用虛擬機器？</dt>
+<dd><p>使用 VM，您可以取得更大的彈性、更快速的佈建時間，以及比裸機還要多的自動可擴充性功能，而且價格更加划算。您可以對大部分一般用途的使用案例使用 VM，例如測試與開發環境、暫置及 Prod 環境、微服務，以及商務應用程式。不過，會犧牲效能。對於 RAM、資料或 GPU 密集的工作負載，如果您需要高效能運算，請使用裸機。</p>
+<p><strong>決定單一承租戶或多方承租戶</strong>：當您建立標準虛擬叢集時，必須選擇是要由多個 {{site.data.keyword.IBM_notm}} 客戶（多方承租戶）共用基礎硬體，還是只供您一人專用（單一承租戶）。</p>
 <p>在多方承租戶設定中，會在所有部署至相同實體硬體的虛擬機器之間共用實體資源（例如 CPU 及記憶體）。為了確保每台虛擬機器都可以獨立執行，虛擬機器監視器（也稱為 Hypervisor）會將實體資源分段為隔離實體，並將它們當成專用資源配置至虛擬機器（Hypervisor 隔離）。</p>
 <p>在單一承租戶設定中，所有實體資源都只供您專用。您可以將多個工作者節點部署為相同實體主機上的虛擬機器。與多方承租戶設定類似，Hypervisor 確保每個工作者節點都可以共用可用的實體資源。</p>
-<p>因為基礎硬體的成本是由多個客戶分攤，所以共用節點通常會比專用節點成本低。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離及法規遵循層次。</p>
-<p><strong>虛擬 `u2c` 或 `b2c` 機型</strong>：這些機器使用本端磁碟而非儲存區域網路 (SAN) 來提供可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 主要本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 次要本端磁碟儲存空間，供 `/var/lib/docker` 使用，所有容器資料都會寫入至這個目錄中。</p>
-<p><strong>已淘汰 `u1c` 或 `b1c` 機型</strong>：若要開始使用 `u2c` 及 `b2c` 機型，[請藉由新增工作者節點來更新機型](cs_cluster_update.html#machine_type)。</p></dd>
+<p>因為基礎硬體的成本是由多個客戶分攤，所以共用節點成本通常會比專用節點成本低。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離及法規遵循層次。</p>
+<p><strong>虛擬 `u2c` 或 `b2c` 機器特性</strong>：這些機器使用本端磁碟而非儲存區域網路 (SAN) 來提供可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 主要本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 次要本端磁碟儲存空間，供 `/var/lib/docker` 使用，所有容器資料都會寫入至這個目錄中。</p>
+<p><strong>如果我已淘汰 `u1c` 或 `b1c` 機型，怎麼辨？</strong>若要開始使用 `u2c` 及 `b2c` 機型，[請藉由新增工作者節點來更新機型](cs_cluster_update.html#machine_type)。</p></dd>
+<dt>可以選擇哪些虛擬及實體機器特性？</dt>
+<dd><p>許多！選取最適合您使用案例的機器類型。請記住，工作者儲存區是由特性相同的機器所組成。如果要在您的叢集中混合各種機型，請對每一個特性建立個別的工作者儲存區。</p>
+<p>機型因區域而異。若要查看您區域中可用的機器類型，請執行 `bx cs machine-types<zone_name>`。</p>
+<p><table>
+<caption>{{site.data.keyword.containershort_notm}} 中可用的實體（裸機）及虛擬機器類型。</caption>
+<thead>
+<th>名稱及使用案例</th>
+<th>核心 / 記憶體</th>
+<th>主要 / 次要磁碟</th>
+<th>網路速度</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>虛擬，u2c.2x4</strong>：針對快速測試、概念證明，以及其他輕型工作負載，使用這個大小最小的 VM。</td>
+<td>2 / 4GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>虛擬，b2c.4x16</strong>：針對測試與開發，以及其他輕型工作負載，選取這個已平衡的 VM。</td>
+<td>4 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>虛擬，b2c.16x64</strong>：針對中型工作負載，選取這個已平衡的 VM。</td></td>
+<td>16 / 64GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>虛擬，b2c.32x128</strong>：針對中型或大型工作負載（例如一個資料庫及一個具有許多並行使用者的動態網站），選取這個已平衡的 VM。</td></td>
+<td>32 / 128GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>虛擬，b2c.56x242</strong>：針對大型工作負載（例如一個資料庫及多個具有許多並行使用者的應用程式），選取這個已平衡的 VM。</td></td>
+<td>56 / 242GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr>
+<tr>
+<td><strong>RAM 密集的裸機，mr1c.28x512</strong>：將工作者節點可用的 RAM 最大化。</td>
+<td>28 / 512GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>GPU 裸機，mg1c.16x128</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 1 張 Tesla K80 實體卡，而每張卡有 2 個圖形處理裝置 (GPU)，總計 2 個 GPU。</td>
+<td>16 / 128GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>GPU 裸機，mg1c.28x256</strong>：針對數學運算密集的工作負載（例如高效能運算、機器學習或 3D 應用程式）選擇這種類型。此特性有 2 張 Tesla K80 實體卡，而每張卡有 2 個 GPU，總計 4 個 GPU。</td>
+<td>28 / 256GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>資料密集的裸機，md1c.16x64.4x4tb</strong>：適用於大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料。用於分散式檔案系統、大型資料庫及海量資料分析工作負載之類的案例。</td>
+<td>16 / 64GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>資料密集的裸機，md1c.28x512.4x4tb</strong>：適用於大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料。用於分散式檔案系統、大型資料庫及海量資料分析工作負載之類的案例。</td>
+<td>28 / 512 GB</td>
+<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>平衡的裸機，mb1c.4x32</strong>：用於所需的運算資源比虛擬機器提供的還多的已平衡工作負載。</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 2TB SATA</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>平衡的裸機，mb1c.16x64</strong>：用於所需的運算資源比虛擬機器提供的還多的已平衡工作負載。</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1479,7 +1559,7 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-**範例輸出**：
+**輸出範例**：
 
   ```
   Getting machine types list...
@@ -1540,7 +1620,7 @@ trusted: <em>true</em>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>叢集的名稱或 ID。</dd>
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>您要為其啟用日誌轉遞的日誌來源。此引數支援以逗點區隔的日誌來源（要套用其配置）清單。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。如果您未提供日誌來源，則會建立 <code>container</code> 及 <code>ingress</code> 日誌來源的記載配置。</dd>
+    <dd>要為其啟用日誌轉遞的日誌來源。此引數支援以逗點區隔的日誌來源（要套用其配置）清單。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。如果您未提供日誌來源，則會建立 <code>container</code> 及 <code>ingress</code> 日誌來源的記載配置。</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>您要從該處轉遞日誌的 Kubernetes 名稱空間。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。此值僅對容器日誌來源有效且為選用。如果未指定名稱空間，則叢集中的所有名稱空間都會使用此配置。</dd>
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -1679,7 +1759,7 @@ trusted: <em>true</em>
    <dt><code>--app-paths</code></dt>
      <dd>在指定組織及空間名稱時跳過其驗證。跳過驗證可減少處理時間，但是無效的記載配置不會正確轉遞日誌。這是選用值。</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>應用程式記載至其容器上的路徑。若要使用來源類型 <code>application</code> 轉遞日誌，您必須提供路徑。若要指定多個路徑，請使用逗點區隔清單。範例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>應用程式記載至的容器上的路徑。若要使用來源類型 <code>application</code> 轉遞日誌，您必須提供路徑。若要指定多個路徑，請使用逗點區隔清單。範例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>您要使用的日誌轉遞通訊協定。目前支援 <code>syslog</code> 和 <code>ibm</code>。這是必要值。</dd>
    <dt><code>--json</code></dt>
@@ -1714,15 +1794,15 @@ trusted: <em>true</em>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>必要：您要為其建立記載過濾器之叢集的名稱或 ID。</dd>
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>您想要套用過濾器的日誌類型。目前支援 <code>all</code>、<code>container</code> 和 <code>host</code>。</dd>
+    <dd>您要將過濾器套用至其中的日誌類型。目前支援 <code>all</code>、<code>container</code> 及 <code>host</code>。</dd>
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>選用項目：以逗點區隔的記載配置 ID 清單。如果未提供，過濾器會套用至傳遞給過濾器的所有叢集記載配置。您可以使用 <code>--show-matching-configs</code> 旗標搭配指令，來檢視符合過濾器的日誌配置。</dd>
+    <dd>選用項目：以逗點區隔的記載配置 ID 清單。如果未提供，過濾器會套用至傳遞給過濾器的所有叢集記載配置。您可以使用 <code>--show-matching-configs</code> 旗標與指令搭配，來檢視符合過濾器的日誌配置。</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>選用項目：您要從該處過濾日誌的 Kubernetes 名稱空間。</dd>
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>選用項目：您要從中過濾掉日誌的容器名稱。唯有當您使用日誌類型 <code>container</code> 時，此旗標才適用。</dd>
+    <dd>選用項目：您要從中過濾掉日誌的容器名稱。只有在您使用日誌類型 <code>container</code> 時，此旗標才適用。</dd>
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-    <dd>選用項目：過濾掉指定層次以下的日誌。可接受的值依其標準順序為 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 及 <code>trace</code>。舉例來說，如果您在 <code>info</code> 層次過濾日誌，則也會過濾掉 <code>debug</code> 和 <code>trace</code>。**附註**：只有在日誌訊息是 JSON 格式且包含 level 欄位時，才能使用此旗標。輸出範例：<code>{"log": "hello", "level": "info"}</code></dd>
+    <dd>選用項目：過濾掉指定層次以下的日誌。可接受的值依其標準順序為 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 及 <code>trace</code>。舉例來說，如果您過濾掉 <code>info</code> 層次的日誌，則也會過濾掉 <code>debug</code> 及 <code>trace</code>。**附註**：只有在日誌訊息是 JSON 格式且包含 level 欄位時，才能使用此旗標。輸出範例：<code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
     <dd>選用項目：過濾掉日誌中任何位置包含指定訊息的任何日誌。訊息會逐字比對，而不是以表示式的方式比對。範例：訊息 "Hello"、"!" 及 "Hello, World!" 會適用於日誌 "Hello, World!"。</dd>
   <dt><code>--json</code></dt>
@@ -1756,15 +1836,15 @@ trusted: <em>true</em>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>必要：您要為其更新記載過濾器之叢集的名稱或 ID。</dd>
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>您想要套用過濾器的日誌類型。目前支援 <code>all</code>、<code>container</code> 和 <code>host</code>。</dd>
+    <dd>您要將過濾器套用至其中的日誌類型。目前支援 <code>all</code>、<code>container</code> 及 <code>host</code>。</dd>
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
-    <dd>選用項目：以逗點區隔的記載配置 ID 清單。如果未提供，過濾器會套用至傳遞給過濾器的所有叢集記載配置。您可以使用 <code>--show-matching-configs</code> 旗標搭配指令，來檢視符合過濾器的日誌配置。</dd>
+    <dd>選用項目：以逗點區隔的記載配置 ID 清單。如果未提供，過濾器會套用至傳遞給過濾器的所有叢集記載配置。您可以使用 <code>--show-matching-configs</code> 旗標與指令搭配，來檢視符合過濾器的日誌配置。</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>選用項目：您要從該處過濾日誌的 Kubernetes 名稱空間。</dd>
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-    <dd>選用項目：您要從中過濾掉日誌的容器名稱。唯有當您使用日誌類型 <code>container</code> 時，此旗標才適用。</dd>
+    <dd>選用項目：您要從中過濾掉日誌的容器名稱。只有在您使用日誌類型 <code>container</code> 時，此旗標才適用。</dd>
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-    <dd>選用項目：過濾掉指定層次以下的日誌。可接受的值依其標準順序為 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 及 <code>trace</code>。舉例來說，如果您在 <code>info</code> 層次過濾日誌，則也會過濾掉 <code>debug</code> 和 <code>trace</code>。**附註**：只有在日誌訊息是 JSON 格式且包含 level 欄位時，才能使用此旗標。輸出範例：<code>{"log": "hello", "level": "info"}</code></dd>
+    <dd>選用項目：過濾掉指定層次以下的日誌。可接受的值依其標準順序為 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 及 <code>trace</code>。舉例來說，如果您過濾掉 <code>info</code> 層次的日誌，則也會過濾掉 <code>debug</code> 及 <code>trace</code>。**附註**：只有在日誌訊息是 JSON 格式且包含 level 欄位時，才能使用此旗標。輸出範例：<code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
     <dd>選用項目：過濾掉日誌中任何位置包含指定訊息的任何日誌。訊息會逐字比對，而不是以表示式的方式比對。範例：訊息 "Hello"、"!" 及 "Hello, World!" 會適用於日誌 "Hello, World!"。</dd>
   <dt><code>--json</code></dt>
@@ -1802,9 +1882,9 @@ trusted: <em>true</em>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>您要從中刪除過濾器之叢集的名稱或 ID。</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>您要刪除的日誌過濾器 ID。</dd>
+    <dd>要刪除的日誌過濾器 ID。</dd>
   <dt><code>--all</code></dt>
-    <dd>選用：刪除所有日誌轉遞過濾器。</dd>
+    <dd>選用項目：刪除所有日誌轉遞過濾器。</dd>
   <dt><code>--json</code></dt>
     <dd>選用項目：以 JSON 格式列印指令輸出。</dd>
 </dl>
@@ -2005,12 +2085,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>建立叢集時所指定的專用 VLAN。這是必要值。
 
-<p><strong>附註：</strong>{[matching_VLANs]}</p></dd>
+<p><strong>附註：</strong>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>建立叢集時所指定的公用 VLAN。這是選用值。如果想要工作者節點僅存在於專用 VLAN 上，請不要提供公用 VLAN ID。<strong>附註</strong>：{[private_VLAN_vyatta]}
 
-<p><strong>附註：</strong>{[matching_VLANs]}</p></dd>
+<p><strong>附註：</strong>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#worker)。若要停用加密，請包含此選項。</dd>
@@ -2054,7 +2134,7 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
-**範例輸出**：
+**輸出範例**：
 
   ```
   ID:           kube-dal10-123456789-w1
@@ -2109,7 +2189,7 @@ diskEncryption: <em>false</em></code></pre>
     ```
     {: pre}
  6. 在讓工作者節點可用於 pod 排程之前等待大約 5 分鐘，以確定重新啟動已完成。在重新啟動期間，工作者節點的狀態不會變更。工作者節點的重新啟動通常會在幾秒鐘內完成。
- 7. 讓工作者節點可用於 Pod 排程。使用從 `kubectl get node` 指令傳回的工作者節點的**名稱**。
+ 7. 讓工作者節點可用於 Pod 排程。請使用從 `kubectl get node` 指令傳回的工作者節點的**名稱**。
     ```
     kubectl uncordon <worker_name>
     ```
@@ -2145,7 +2225,7 @@ diskEncryption: <em>false</em></code></pre>
 
 重新載入工作者節點的所有必要配置。如果您的工作者節點遇到問題，例如效能變慢，或工作者節點停留在不健全的狀態下，則重新載入可能會很有幫助。
 
-重新載入工作者節點時，並不會套用最新的更新、安全修補程式或 [Kubernetes 版本](cs_versions.html#version_types)。當有修補程式和版本更新可用時，在您使用工作者節點相關特性時，系統會在 CLI 和主控台提示您。若要讓您的工作者節點保持最新，請定期使用 `bx cs worker-update` [指令](cs_cli_reference.html#cs_worker_update)。
+重新載入工作者節點會將修補程式版本更新套用至您的工作者節點，但不會套用主要或次要更新。若要查看從某個修補程式版本到下一個修補程式版本的變更，請檢閱[版本變更日誌](cs_versions_changelog.html#changelog)文件。
 {: tip}
 
 在您重新載入工作者節點之前，請確定在其他工作者節點上的 Pod 已重新排程，這有助於避免應用程式關閉，或工作者節點上的資料毀損。
@@ -2179,7 +2259,7 @@ diskEncryption: <em>false</em></code></pre>
     ```
     {: pre}
  6. 等待重新載入完成。
- 7. 讓工作者節點可用於 Pod 排程。使用從 `kubectl get node` 指令傳回的工作者節點的**名稱**。
+ 7. 讓工作者節點可用於 Pod 排程。請使用從 `kubectl get node` 指令傳回的工作者節點的**名稱**。
     ```
     kubectl uncordon <worker_name>
     ```
@@ -2244,8 +2324,8 @@ diskEncryption: <em>false</em></code></pre>
 
 6. 驗證已移除工作者節點。
    ```
-       bx cs workers <cluster_name_or_ID>
-       ```
+   bx cs workers <cluster_name_or_ID>
+   ```
 </br>
 <strong>指令選項</strong>：
 
@@ -2314,7 +2394,7 @@ diskEncryption: <em>false</em></code></pre>
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>列出可用工作者節點的叢集的名稱或 ID。這是必要值。</dd>
+   <dd>可用工作者節點之叢集的名稱或 ID。這是必要值。</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>檢視已從叢集中刪除的工作者節點，包括刪除的原因。這是選用值。</dd>
    </dl>
@@ -2325,4 +2405,3 @@ diskEncryption: <em>false</em></code></pre>
   bx cs workers my_cluster
   ```
   {: pre}
-

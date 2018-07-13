@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,47 +15,18 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
 # VPN-Konnektivität einrichten
 {: #vpn}
 
 Mit der VPN-Konnektivität können Sie sichere Verbindungen von Apps in einem Kubernetes-Cluster auf {{site.data.keyword.containerlong}} zu einem lokalen Netz herstellen. Sie können auch Apps, die nicht in Ihrem Cluster enthalten sind, mit Apps verbinden, die Teil Ihres Clusters sind.
 {:shortdesc}
 
-Um eine Verbindung Ihrer Workerknoten und Apps mit einem lokalen Rechenzentrum einzurichten, können Sie einen VPN-IPSec-Endpunkt mit einem StrongSwan-Service oder mit einer Vyatta-Gateway-Appliance bzw. einer Fortigate-Appliance konfigurieren.
+Um eine Verbindung Ihrer Workerknoten und Apps mit einem lokalen Rechenzentrum einzurichten, können Sie eine der folgenden Optionen konfigurieren.
 
-- **Vyatta-Gateway-Appliance oder Fortigate-Appliance**: Wenn Ihr Cluster größer ist, wenn Sie über das VPN auf Nicht-Kubernetes-Ressourcen zugreifen möchten oder wenn Sie über ein einzelnes VPN auf mehrere Cluster zugreifen möchten, können Sie eine Vyatta-Gateway-Appliance oder eine [Fortigate Security Appliance ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) einrichten, um einen IPSec-VPN-Endpunkt zu konfigurieren. Informationen zum Konfigurieren einer Vyatta-Instanz finden Sie unter [VPN-Konnektivität mit Vyatta konfigurieren](#vyatta). 
+- **StrongSwan-IPSec-VPN-Service**: Sie können einen [StrongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/) konfigurieren, der Ihren Kubernetes-Cluster sicher mit einem lokalen Netz verbindet. Der StrongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPsec-Protokollsuite (IPsec - Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](#vpn-setup) direkt in einem Pod in Ihrem Cluster.
 
-- **StrongSwan-IPSec-VPN-Service**: Sie können einen [StrongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/) konfigurieren, der Ihren Kubernetes-Cluster sicher mit einem lokalen Netz verbindet. Der StrongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPsec-Protokollsuite (IPsec - Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](#vpn-setup) direkt in einem Pod in Ihrem Cluster. 
-
-## VPN-Konnektivität mit einer Vyatta-Gateway-Appliance einrichten
-{: #vyatta}
-
-Die [Vyatta-Gateway-Appliance ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) ist ein Bare-Metal-Server, auf dem eine spezielle Instanz von Linux ausgeführt wird. Sie können eine Vyatta-Instanz als VPN-Gateway verwenden, um eine sichere Verbindung zu einem lokalen Netz herzustellen.
-{:shortdesc}
-
-Der gesamte öffentliche und private Netzverkehr, der in die Cluster-VLANs eintritt oder sie verlässt, wird über die Vyatta-Instanz geleitet. Sie können die Vyatta-Instanz als VPN-Endpunkt einsetzen, um einen verschlüsselten IPSec-Tunnel zwischen Servern in IBM Cloud Infrastructure- (SoftLayer) und lokalen Ressourcen zu erstellen. Das folgende Diagramm zeigt beispielsweise, wie eine App auf einem privaten Workerknoten in {{site.data.keyword.containershort_notm}} mit einem lokalen Server über eine Vyatta-VPN-Verbindung kommunizieren kann: 
-
-<img src="images/cs_vpn_vyatta.png" width="725" alt="App in {{site.data.keyword.containershort_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:725px; border-style: none"/>
-
-1. Eine App in Ihrem Cluster, `myapp2`, empfängt eine Anforderung von einem Ingress- oder LoadBalancer-Service und muss eine sichere Verbindung mit Daten in Ihrem lokalen Netz herstellen. 
-
-2. Da `myapp2` sich auf einem Workerknoten in einem rein privaten VLAN befindet, fungiert die Vyatta-Instanz als sichere Verbindung zwischen den Workerknoten und dem lokalen Netz. Die Vyatta-Instanz verwendet die IP-Zieladresse, um zu bestimmen, welche Netzpakete an das lokale Netz gesendet werden sollen. 
-
-3. Die Anforderung wird verschlüsselt und über den VPN-Tunnel an das lokale Rechenzentrum gesendet. 
-
-4. Die eingehende Anforderung passiert die lokale Firewall und wird an den VPN-Tunnelendpunkt (Router) zugestellt, wo sie entschlüsselt wird. 
-
-5. Der VPN-Tunnelendpunkt (Router) leitet die Anforderung abhängig von der in Schritt 2 angegebenen Ziel-IP-Adresse an den lokalen Server oder den Mainframe weiter. Die erforderlichen Daten werden auf dieselbe Weise über die VPN-Verbindung zurück an `myapp2` gesendet. 
-
-Führen Sie die folgenden Schritte aus, um eine Vyatta-Gateway-Appliance einzurichten: 
-
-1. [Bestellen Sie eine Vyatta-Instanz ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta). 
-
-2. [Konfigurieren Sie das private VLAN auf der Vyatta-Instanz ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta). 
-
-3. Zum Aktivieren einer VPN-Verbindung mithilfe der Vyatta-Instanz [konfigurieren Sie IPSec auf der Vyatta-Instanz ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta). 
-
-Weitere Informationen finden Sie in diesem Blogbeitrag zum [Verbinden eines Clusters mit einem lokalen Rechenzentrum ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/). 
+- **Virtual Router Appliance (VRA) oder Fortigate Security Appliance (FSA)**: Sie können zum Konfigurieren eines IPSec-VPN-Endpunkts entweder eine [VRA](/docs/infrastructure/virtual-router-appliance/about.html) oder eine [FSA](/docs/infrastructure/fortigate-10g/about.html) einrichten. Diese Option ist hilfreich, wenn der Cluster größer ist, Sie über das VPN auf Nicht-Kubernetes-Ressourcen oder über ein einzelnes VPN auf mehrere Cluster zugreifen möchten. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](#vyatta). 
 
 ## Helm-Diagramm zur Einrichtung von VPN-Konnektivität mit dem StrongSwan-IPSec-VPN-Service
 {: #vpn-setup}
@@ -63,25 +34,25 @@ Weitere Informationen finden Sie in diesem Blogbeitrag zum [Verbinden eines Clus
 Verwenden Sie ein Helm-Diagramm, um den StrongSwan-IPSec-VPN-Service innerhalb eines Kubernetes-Pods zu konfigurieren und bereitzustellen.
 {:shortdesc}
 
-Da strongSwan in Ihren Cluster integriert ist, benötigen Sie keine externe Gateway-Einheit. Beim Einrichten der VPN-Konnektivität werden automatisch Routen auf allen Workerknoten im Cluster konfiguriert. Diese Routen ermöglichen eine bidirektionale Konnektivität über den VPN-Tunnel zwischen Pods auf allen Workerknoten und dem fernen System. Das folgende Diagramm zeigt beispielsweise, wie eine App in {{site.data.keyword.containershort_notm}} mit einem lokalen Server über eine strongSwan-VPN-Verbindung kommunizieren kann: 
+Da strongSwan in Ihren Cluster integriert ist, benötigen Sie keine externe Gateway-Einheit. Beim Einrichten der VPN-Konnektivität werden automatisch Routen auf allen Workerknoten im Cluster konfiguriert. Diese Routen ermöglichen eine bidirektionale Konnektivität über den VPN-Tunnel zwischen Pods auf allen Workerknoten und dem fernen System. Das folgende Diagramm zeigt beispielsweise, wie eine App in {{site.data.keyword.containershort_notm}} mit einem lokalen Server über eine strongSwan-VPN-Verbindung kommunizieren kann:
 
 <img src="images/cs_vpn_strongswan.png" width="700" alt="App in {{site.data.keyword.containershort_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:700px; border-style: none"/>
 
-1. Eine App in Ihrem Cluster, `myapp`, empfängt eine Anforderung von einem Ingress- oder LoadBalancer-Service und muss eine sichere Verbindung mit Daten in Ihrem lokalen Netz herstellen. 
+1. Eine App in Ihrem Cluster, `myapp`, empfängt eine Anforderung von einem Ingress- oder LoadBalancer-Service und muss eine sichere Verbindung mit Daten in Ihrem lokalen Netz herstellen.
 
-2. Die Anforderung an das lokale Rechenzentrum wird an den IPSec-strongSwan-VPN-Pod weitergeleitet. Die IP-Zieladresse wird verwendet, um zu bestimmen, welche Netzpakete an den IPSec-strongSwan-VPN-Pod gesendet werden sollen. 
+2. Die Anforderung an das lokale Rechenzentrum wird an den IPSec-strongSwan-VPN-Pod weitergeleitet. Die IP-Zieladresse wird verwendet, um zu bestimmen, welche Netzpakete an den IPSec-strongSwan-VPN-Pod gesendet werden sollen.
 
-3. Die Anforderung wird verschlüsselt und über den VPN-Tunnel an das lokale Rechenzentrum gesendet. 
+3. Die Anforderung wird verschlüsselt und über den VPN-Tunnel an das lokale Rechenzentrum gesendet.
 
-4. Die eingehende Anforderung passiert die lokale Firewall und wird an den VPN-Tunnelendpunkt (Router) zugestellt, wo sie entschlüsselt wird. 
+4. Die eingehende Anforderung passiert die lokale Firewall und wird an den VPN-Tunnelendpunkt (Router) zugestellt, wo sie entschlüsselt wird.
 
-5. Der VPN-Tunnelendpunkt (Router) leitet die Anforderung abhängig von der in Schritt 2 angegebenen Ziel-IP-Adresse an den lokalen Server oder den Mainframe weiter. Die erforderlichen Daten werden auf dieselbe Weise über die VPN-Verbindung zurück an `myapp` gesendet. 
+5. Der VPN-Tunnelendpunkt (Router) leitet die Anforderung abhängig von der in Schritt 2 angegebenen Ziel-IP-Adresse an den lokalen Server oder den Mainframe weiter. Die erforderlichen Daten werden auf dieselbe Weise über die VPN-Verbindung zurück an `myapp` gesendet.
 
 ### StrongSwan-Helm-Diagramm konfigurieren
 {: #vpn_configure}
 
 Vorbemerkungen:
-* [Installieren Sie ein IPsec-VPN-Gateway in Ihrem lokalen Rechenzentrum](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection). 
+* [Installieren Sie ein IPsec-VPN-Gateway in Ihrem lokalen Rechenzentrum](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
 * Entweder [erstellen Sie einen Standardcluster](cs_clusters.html#clusters_cli) oder Sie [aktualisieren einen vorhandenen Cluster auf Version 1.7.16 oder eine höhere Version](cs_cluster_update.html#master).
 * Das Cluster muss mindestens eine verfügbare öffentliche Load Balancer-IP-Adresse haben. [Sie können Ihre verfügbaren öffentlichen IP-Adressen zur Überprüfung anzeigen](cs_subnets.html#manage) oder [eine bereits verwendete IP-Adresse freigeben](cs_subnets.html#free).
 * [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
@@ -104,6 +75,7 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     **Wichtig**: Wenn Sie keine Eigenschaft ändern müssen, kommentieren Sie diese Eigenschaft aus, indem Sie jeweils ein `#` davorsetzen.
 
     <table>
+    <caption>Erklärung dieser YAML-Komponenten</caption>
     <col width="22%">
     <col width="78%">
     <thead>
@@ -112,16 +84,16 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     <tbody>
     <tr>
     <td><code>localSubnetNAT</code></td>
-    <td>Network Address Translation (NAT) für Teilnetze bietet eine Ausweichlösung für Teilnetzkonflikte zwischen lokalen Netzen und den lokalen Netzen im Unternehmen. Sie können NAT verwenden, um die privaten lokalen IP-Teilnetze des Clusters, das Pod-Teilnetz (172.30.0.0/16) oder das Teilnetz des Pod-Service (172.21.0.0/16) zu einem anderen privaten Teilnetz zuzuordnen. Der VPN-Tunnel erkennt erneut zugeordnete IP-Teilnetze, die an Stelle der ursprünglichen Teilnetze treten. Die erneute Zuordnung erfolgt vor dem Senden der Pakete über den VPN-Tunnel sowie nach dem Eintreffen der Pakete aus dem VPN-Tunnel. Sie können sowohl erneut zugeordnete als auch nicht erneut zugeordnete Teilnetze gleichzeitig über VPN bereitstellen.<br><br>Um NAT aktivieren zu können, können Sie entweder ein vollständiges Teilnetz oder einzelne IP-Adressen hinzufügen. Wenn Sie ein vollständiges Teilnetz hinzufügen (im Format <code>10.171.42.0/24=10.10.10.0/24</code>), erfolgt die erneute Zuordnung 1-zu-1: Alle IP-Adressen im internen Teilnetz werden einem externen Teilnetz zugeordnet und umgekehrt. Wenn Sie einzelne IP-Adressen (im Format <code>10.171.42.17/32=10.10.10.2/32, 10.171.42.29/32=10.10.10.3/32</code>) zuordnen, werden nur diese internen IP-Adressen zu den angegebenen externen IP-Adressen zugeordnet. <br><br>Wenn Sie diese Option verwenden, ist das lokale Teilnetz, das über die VPN-Verbindung bereitgestellt wird, das Teilnetz "außerhalb", dem das "interne" Teilnetz zugeordnet wird.
+    <td>Network Address Translation (NAT) für Teilnetze bietet eine Ausweichlösung für Teilnetzkonflikte zwischen lokalen Netzen und den lokalen Netzen im Unternehmen. Sie können NAT verwenden, um die privaten lokalen IP-Teilnetze des Clusters, das Pod-Teilnetz (172.30.0.0/16) oder das Teilnetz des Pod-Service (172.21.0.0/16) zu einem anderen privaten Teilnetz zuzuordnen. Der VPN-Tunnel erkennt erneut zugeordnete IP-Teilnetze, die an Stelle der ursprünglichen Teilnetze treten. Die erneute Zuordnung erfolgt vor dem Senden der Pakete über den VPN-Tunnel sowie nach dem Eintreffen der Pakete aus dem VPN-Tunnel. Sie können sowohl erneut zugeordnete als auch nicht erneut zugeordnete Teilnetze gleichzeitig über VPN bereitstellen.<br><br>Um NAT aktivieren zu können, können Sie entweder ein vollständiges Teilnetz oder einzelne IP-Adressen hinzufügen. Wenn Sie ein vollständiges Teilnetz hinzufügen (im Format <code>10.171.42.0/24=10.10.10.0/24</code>), erfolgt die erneute Zuordnung 1-zu-1: Alle IP-Adressen im internen Teilnetz werden einem externen Teilnetz zugeordnet und umgekehrt. Wenn Sie einzelne IP-Adressen (im Format <code>10.171.42.17/32=10.10.10.2/32, 10.171.42.29/32=10.10.10.3/32</code>) zuordnen, werden nur diese internen IP-Adressen zu den angegebenen externen IP-Adressen zugeordnet.<br><br>Wenn Sie diese Option verwenden, ist das lokale Teilnetz, das über die VPN-Verbindung bereitgestellt wird, das Teilnetz "außerhalb", dem das "interne" Teilnetz zugeordnet wird.
     </td>
     </tr>
     <tr>
     <td><code>loadBalancerIP</code></td>
-    <td>Wenn Sie eine portierbare öffentliche IP-Adresse für den strongSwan-VPN-Service für eingehende VPN-Verbindungen angeben möchten, fügen Sie diese IP-Adresse hinzu. Die Angabe einer IP-Adresse ist nützlich, wenn Sie eine fixe IP-Adresse benötigen, z. B. wenn Sie festlegen müssen, welche IP-Adressen von einer lokalen Firewall zugelassen werden. <br><br>Informationen zum Anzeigen verfügbarer portierbarer öffentlicher IP-Adressen, die diesem Cluster zugewiesen sind, finden Sie unter [IP-Adressen und Teilnetze verwalten](cs_subnets.html#manage). Wenn Sie diese Einstellung leer lassen, wird eine freie portierbare öffentliche IP-Adresse verwendet. Wenn die VPN-Verbindung vom lokalen Gateway im Unternehmen initialisiert wird (für <code>ipsec.auto</code> ist <code>add</code> festgelegt), können Sie diese Eigenschaft verwenden, um eine persistente, öffentliche IP-Adresse auf dem lokalen Gateway im Unternehmen für den Cluster zu konfigurieren. </td>
+    <td>Wenn Sie eine portierbare öffentliche IP-Adresse für den strongSwan-VPN-Service für eingehende VPN-Verbindungen angeben möchten, fügen Sie diese IP-Adresse hinzu. Die Angabe einer IP-Adresse ist nützlich, wenn Sie eine fixe IP-Adresse benötigen, z. B. wenn Sie festlegen müssen, welche IP-Adressen von einer lokalen Firewall zugelassen werden.<br><br>Informationen zum Anzeigen verfügbarer portierbarer öffentlicher IP-Adressen, die diesem Cluster zugewiesen sind, finden Sie unter [IP-Adressen und Teilnetze verwalten](cs_subnets.html#manage). Wenn Sie diese Einstellung leer lassen, wird eine freie portierbare öffentliche IP-Adresse verwendet. Wenn die VPN-Verbindung vom lokalen Gateway im Unternehmen initialisiert wird (für <code>ipsec.auto</code> ist <code>add</code> festgelegt), können Sie diese Eigenschaft verwenden, um eine persistente, öffentliche IP-Adresse auf dem lokalen Gateway im Unternehmen für den Cluster zu konfigurieren.</td>
     </tr>
     <tr>
     <td><code>connectUsingLoadBalancerIP</code></td>
-    <td>Verwenden Sie die IP-Adresse der Lastausgleichsfunktion, die Sie in <code>loadBalancerIP</code> hinzugefügt haben, um auch die ausgehende VPN-Verbindung herzustellen. Ist diese Option aktiviert, müssen sich alle Workerknoten des Clusters in demselben öffentlichen VLAN befinden. Andernfalls müssen Sie die Einstellung <code>nodeSelector</code> verwenden, um sicherzustellen, dass der VPN-Pod auf einem Workerknoten in demselben öffentliche VLAN wie <code>loadBalancerIP</code> bereitgestellt wird. Diese Option wird ignoriert, wenn <code>ipsec.auto</code> auf <code>add</code> gesetzt ist. <p>Gültige Werte: </p><ul><li><code>"false"</code>: Die Verbindung des VPN wird nicht mithilfe der IP der Lastausgleichsfunktion hergestellt. Stattdessen wird die öffentliche IP-Adresse des Workerknotens, auf dem der VPN-Pod ausgeführt wird, verwendet. </li><li><code>"true"</code>: Die Verbindung des VPN wird mithilfe der IP der Lastausgleichsfunktion als lokaler Quellen-IP hergestellt. Wenn <code>loadBalancerIP</code> nicht festgelegt ist, wird die externe IP-Adresse, die dem Lastausgleichsservice zugewiesen ist, verwendet. </li><li><code>"auto"</code>: Wenn <code>ipsec.auto</code> auf <code>start</code> gesetzt und <code>loadBalancerIP</code> festgelegt ist, wird das VPN mithilfe der IP der Lastausgleichsfunktion als lokaler Quellen-IP eingerichtet. </li></ul></td>
+    <td>Verwenden Sie die IP-Adresse der Lastausgleichsfunktion, die Sie in <code>loadBalancerIP</code> hinzugefügt haben, um auch die ausgehende VPN-Verbindung herzustellen. Ist diese Option aktiviert, müssen sich alle Workerknoten des Clusters in demselben öffentlichen VLAN befinden. Andernfalls müssen Sie die Einstellung <code>nodeSelector</code> verwenden, um sicherzustellen, dass der VPN-Pod auf einem Workerknoten in demselben öffentliche VLAN wie <code>loadBalancerIP</code> bereitgestellt wird. Diese Option wird ignoriert, wenn <code>ipsec.auto</code> auf <code>add</code> gesetzt ist.<p>Gültige Werte:</p><ul><li><code>"false"</code>: Die Verbindung des VPN wird nicht mithilfe der IP der Lastausgleichsfunktion hergestellt. Stattdessen wird die öffentliche IP-Adresse des Workerknotens, auf dem der VPN-Pod ausgeführt wird, verwendet.</li><li><code>"true"</code>: Die Verbindung des VPN wird mithilfe der IP der Lastausgleichsfunktion als lokaler Quellen-IP hergestellt. Wenn <code>loadBalancerIP</code> nicht festgelegt ist, wird die externe IP-Adresse, die dem Lastausgleichsservice zugewiesen ist, verwendet.</li><li><code>"auto"</code>: Wenn <code>ipsec.auto</code> auf <code>start</code> gesetzt und <code>loadBalancerIP</code> festgelegt ist, wird das VPN mithilfe der IP der Lastausgleichsfunktion als lokaler Quellen-IP eingerichtet.</li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
@@ -133,11 +105,11 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     </tr>
     <tr>
     <td><code>ipsec.esp</code></td>
-    <td>Fügen Sie die Liste von ESP-Verschlüsselungs-/Authentifizierungsalgorithmen hinzu, die Ihr lokaler VPN-Tunnelendpunkt für die Verbindung verwendet. <ul><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, muss diese Einstellung angegeben werden. </li><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev2</code> festgelegt ist, ist diese Einstellung optional. Wenn Sie diese Einstellung leer lassen, wird der Standardwert für strongSwan-Algorithmen <code>aes128-sha1,3des-sha1</code> für die Verbindung verwendet.</li></ul></td>
+    <td>Fügen Sie die Liste von ESP-Verschlüsselungs-/Authentifizierungsalgorithmen hinzu, die Ihr lokaler VPN-Tunnelendpunkt für die Verbindung verwendet.<ul><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, muss diese Einstellung angegeben werden.</li><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev2</code> festgelegt ist, ist diese Einstellung optional. Wenn Sie diese Einstellung leer lassen, wird der Standardwert für strongSwan-Algorithmen <code>aes128-sha1,3des-sha1</code> für die Verbindung verwendet.</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.ike</code></td>
-    <td>Fügen Sie die Liste von IKE/ISAKMP-SA-Verschlüsselungs-/Authentifizierungsalgorithmen hinzu, die Ihr lokaler VPN-Tunnelendpunkt für die Verbindung verwendet. <ul><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, muss diese Einstellung angegeben werden. </li><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev2</code> festgelegt ist, ist diese Einstellung optional. Wenn Sie diese Einstellung leer lassen, wird der Standardwert für strongSwan-Algorithmen <code>aes128-sha1-modp2048,3des-sha1-modp1536</code> für die Verbindung verwendet. </li></ul></td>
+    <td>Fügen Sie die Liste von IKE/ISAKMP-SA-Verschlüsselungs-/Authentifizierungsalgorithmen hinzu, die Ihr lokaler VPN-Tunnelendpunkt für die Verbindung verwendet.<ul><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, muss diese Einstellung angegeben werden.</li><li>Wenn <code>ipsec.keyexchange</code> auf <code>ikev2</code> festgelegt ist, ist diese Einstellung optional. Wenn Sie diese Einstellung leer lassen, wird der Standardwert für strongSwan-Algorithmen <code>aes128-sha1-modp2048,3des-sha1-modp1536</code> für die Verbindung verwendet.</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.auto</code></td>
@@ -145,7 +117,7 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>Ändern Sie diesen Wert in die Liste von Clusterteilnetz-CIDRs, die über die VPN-Verbindung für das lokale Netz zugänglich sein sollen. Diese Liste kann die folgenden Teilnetze enthalten: <ul><li>Die Teilnetz-CIDR des Kubernetes-Pods: <code>172.30.0.0/16</code></li><li>Die Teilnetz-CIDR des Kubernetes-Service: <code>172.21.0.0/16</code></li><li>Wenn Ihre Apps über einen NodePort-Service im privaten Netz zugänglich gemacht werden, die private Teilnetz-CIDR des Workerknotens. Rufen Sie die ersten drei Oktette der privaten IP-Adresse Ihres Workers ab, indem Sie <code>bx cs worker &lt;clustername&gt;</code> ausführen. Beispiel: Bei <code>&lt;10.176.48.xx&gt;</code> notieren Sie sich <code>&lt;10.176.48&gt;</code>. Rufen Sie als Nächstes die private Teilnetz-CIDR Ihre Workers ab, indem Sie den folgenden Befehl ausführen. Ersetzen Sie dabei <code>&lt;xxx.yyy.zz&gt;</code> durch das eben abgerufene Oktett: <code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>. </li><li>Wenn Sie Apps über LoadBalancer-Services im privaten Netz zugänglich machen, die private oder benutzerverwaltete Teilnetz-CIDR des Clusters. Sie finden diese Werte, indem Sie <code>bx cs cluster-get &lt;clustername&gt; --showResources</code> abrufen. Suchen Sie im Abschnitt **VLANS** nach CIDRs, deren **Public**-Wert <code>false</code> lautet.</li></ul>**Hinweis**: Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, können Sie nur ein Teilnetz angeben. </td>
+    <td>Ändern Sie diesen Wert in die Liste von Clusterteilnetz-CIDRs, die über die VPN-Verbindung für das lokale Netz zugänglich sein sollen. Diese Liste kann die folgenden Teilnetze enthalten: <ul><li>Die Teilnetz-CIDR des Kubernetes-Pods: <code>172.30.0.0/16</code></li><li>Die Teilnetz-CIDR des Kubernetes-Service: <code>172.21.0.0/16</code></li><li>Wenn Ihre Apps über einen NodePort-Service im privaten Netz zugänglich gemacht werden, die private Teilnetz-CIDR des Workerknotens. Rufen Sie die ersten drei Oktette der privaten IP-Adresse Ihres Workers ab, indem Sie <code>bx cs worker &lt;clustername&gt;</code> ausführen. Beispiel: Bei <code>&lt;10.176.48.xx&gt;</code> notieren Sie sich <code>&lt;10.176.48&gt;</code>. Rufen Sie als Nächstes die private Teilnetz-CIDR Ihre Workers ab, indem Sie den folgenden Befehl ausführen. Ersetzen Sie dabei <code>&lt;xxx.yyy.zz&gt;</code> durch das eben abgerufene Oktett: <code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>.</li><li>Wenn Sie Apps über LoadBalancer-Services im privaten Netz zugänglich machen, die private oder benutzerverwaltete Teilnetz-CIDR des Clusters. Sie finden diese Werte, indem Sie <code>bx cs cluster-get &lt;clustername&gt; --showResources</code> abrufen. Suchen Sie im Abschnitt **VLANS** nach CIDRs, deren **Public**-Wert <code>false</code> lautet.</li></ul>**Hinweis**: Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, können Sie nur ein Teilnetz angeben.</td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -156,7 +128,7 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     <td>Ändern Sie diesen Wert in die öffentliche IP-Adresse für das lokale VPN-Gateway. Wenn für <code>ipsec.auto</code> die Einstellung <code>start</code> festgelegt ist, ist dieser Wert erforderlich.</td>
     </tr>
     <td><code>remote.subnet</code></td>
-    <td>Ändern Sie diesen Wert in die Liste von lokalen privaten Teilnetz-CIDRs, die für die Kubernetes-Cluster zugänglich sind. **Hinweis**: Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, können Sie nur ein Teilnetz angeben. </td>
+    <td>Ändern Sie diesen Wert in die Liste von lokalen privaten Teilnetz-CIDRs, die für die Kubernetes-Cluster zugänglich sind. **Hinweis**: Wenn <code>ipsec.keyexchange</code> auf <code>ikev1</code> festgelegt ist, können Sie nur ein Teilnetz angeben.</td>
     </tr>
     <tr>
     <td><code>remote.id</code></td>
@@ -179,7 +151,7 @@ Gehen Sie wie folgt vor, um das Helm-Diagramm zu konfigurieren:
     **Hinweis**: Wenn Sie über mehrere VPN-Bereitstellungen in einem einzelnen Cluster verfügen, können Sie Namenskonflikte vermeiden und zwischen Ihren Bereitstellungen unterscheiden, indem Sie aussagekräftigere Releasenamen als `vpn` verwenden. Um das Abschneiden des Releasenamens zu vermeiden, begrenzen Sie den Releasenamen auf maximal 35 Zeichen.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -209,14 +181,14 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
 2. Legen Sie die Umgebungsvariable `STRONGSWAN_POD` fest.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 3. Prüfen Sie den Status des VPN. Der Status `ESTABLISHED` bedeutet, dass die VPN-Verbindung erfolgreich war.
 
     ```
-    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    kubectl exec $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 
@@ -233,8 +205,8 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
     **Hinweis**:
 
     <ul>
-    <li>Wenn Sie versuchen, die VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass das VPN beim ersten Mal nicht den Status `ESTABLISHED` aufweist. Unter Umständen müssen Sie die Einstellungen des lokalen VPN-Endpunkts prüfen und die Konfigurationsdatei mehrmals ändern, bevor die Verbindung erfolgreich ist: <ol><li>Führen Sie folgenden Befehl aus: `helm delete --purge <releasename>`</li><li>Korrigieren Sie die falschen Werte in der Konfigurationsdatei.</li><li>Führen Sie den folgenden Befehl aus: `helm install -f config.yaml --namespace=kube-system --name=<releasename> ibm/strongswan`</li></ol>Sie können im nächsten Schritt noch weitere Prüfungen ausführen.</li>
-    <li>Falls der VPN-Pod den Status `ERROR` aufweist oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen.<ol><li>Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs -n kube-system $STRONGSWAN_POD` in den Protokollen des StrongSwan-Pods nach Validierungsfehlern suchen.</li><li>Wenn Gültigkeitsfehler vorhanden sind, führen Sie den folgenden Befehl aus: `helm delete --purge <releasename>`<li>Korrigieren Sie die falschen Werte in der Konfigurationsdatei.</li><li>Führen Sie den folgenden Befehl aus: `helm install -f config.yaml --namespace=kube-system --name=<releasename> ibm/strongswan`</li></ol>Wenn Ihr Cluster viele Workerknoten umfasst, können Sie mit `helm upgrade` Ihre Änderungen schneller anwenden, anstatt erst `helm delete` und `helm install` auszuführen.</li>
+    <li>Wenn Sie versuchen, die VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass das VPN beim ersten Mal nicht den Status `ESTABLISHED` aufweist. Unter Umständen müssen Sie die Einstellungen des lokalen VPN-Endpunkts prüfen und die Konfigurationsdatei mehrmals ändern, bevor die Verbindung erfolgreich ist: <ol><li>Führen Sie folgenden Befehl aus: `helm delete --purge <release_name>`</li><li>Korrigieren Sie die falschen Werte in der Konfigurationsdatei.</li><li>Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan` aus.</li></ol>Sie können im nächsten Schritt noch weitere Prüfungen ausführen.</li>
+    <li>Falls der VPN-Pod den Status `ERROR` aufweist oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen.<ol><li>Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs -n $STRONGSWAN_POD` in den Protokollen des StrongSwan-Pods nach Validierungsfehlern suchen.</li><li>Wenn Gültigkeitsfehler vorhanden sind, führen Sie den folgenden Befehl aus: `helm delete --purge <release_name>`<li>Korrigieren Sie die falschen Werte in der Konfigurationsdatei.</li><li>Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan` aus.</li></ol>Wenn Ihr Cluster viele Workerknoten umfasst, können Sie mit `helm upgrade` Ihre Änderungen schneller anwenden, anstatt erst `helm delete` und `helm install` auszuführen.</li>
     </ul>
 
 4. Sie können die VPN-Konnektivität weiter testen, indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind.
@@ -251,14 +223,15 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
 5. Zeigen Sie die Ausgabe eines fehlgeschlagenen Tests an, indem Sie die Protokolle des Testpods anzeigen.
 
     ```
-    kubectl logs -n kube-system <test_program>
+    kubectl logs <testprogramm>
     ```
     {: pre}
 
-    **Hinweis**: Einige der Tests haben als Voraussetzungen optionale Einstellungen in der VPN-Konfiguration. Wenn einige der Tests fehlschlagen, kann dies abhängig davon, ob Sie diese optionalen Einstellungen angegeben haben, zulässig sein. Suchen Sie in der folgenden Tabelle nach weiteren Informationen zu den einzelnen Tests und warum ein Test fehlschlagen könnte.
+    **Hinweis**: Einige der Tests haben als Voraussetzungen optionale Einstellungen in der VPN-Konfiguration. Wenn einige der Tests fehlschlagen, kann dies abhängig davon, ob Sie diese optionalen Einstellungen angegeben haben, zulässig sein. Suchen Sie in der folgenden Tabelle nach Informationen zu den einzelnen Tests und warum ein Test fehlschlagen könnte.
 
     {: #vpn_tests_table}
     <table>
+    <caption>Erklärung der Helm-VPN-Konnektivitätstests</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Helm-VPN-Konnektivitätstests</th>
     </thead>
@@ -299,7 +272,7 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
 9. Installieren Sie das Helm-Diagramm auf Ihrem Cluster mit der aktualisierten Datei `config.yaml`. Die aktualisierten Eigenschaften werden in einer Konfigurationszuordnung für Ihr Diagramm gespeichert.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<releasename> ibm/strongswan
+    helm install -f config.yaml --name=<releasename> ibm/strongswan
     ```
     {: pre}
 
@@ -320,12 +293,12 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
 12. Bereinigen Sie die aktuellen Testpods.
 
     ```
-    kubectl get pods -a -n kube-system -l app=strongswan-test
+    kubectl get pods -a -l app=strongswan-test
     ```
     {: pre}
 
     ```
-    kubectl delete pods -n kube-system -l app=strongswan-test
+    kubectl delete pods -l app=strongswan-test
     ```
     {: pre}
 
@@ -348,9 +321,11 @@ Stellen Sie sicher, dass Ihr StrongSwan-Helm-Diagramm aktuell ist, indem Sie es 
 Gehen Sie wie folge vor, um das StrongSwan-Helm-Diagramm auf die neueste Version zu aktualisieren.
 
   ```
-  helm upgrade -f config.yaml --namespace kube-system <releasename> ibm/strongswan
+  helm upgrade -f config.yaml <releasename> ibm/strongswan
   ```
   {: pre}
+
+**Wichtig**: Das strongSwan 2.0.0-Helm-Diagramm ist nicht mit Calico Version 3 oder Kubernetes Version 1.10 kompatibel. Bevor Sie [den Cluster auf Version 1.10 aktualisieren](cs_versions.html#cs_v110), aktualisieren Sie strongSwan auf das 2.1.0-Helm-Diagramm, das mit Calico Version 2.6 und Kubernetes Version 1.7, 1.8 und 1.9 abwärtskompatibel ist.
 
 
 ### Upgrade von Version 1.0.0 durchführen
@@ -380,11 +355,13 @@ Um ein Upgrade von Version 1.0.0 auszuführen, müssen Sie das Diagramm der Vers
 4. Installieren Sie das Helm-Diagramm auf Ihrem Cluster mit der aktualisierten Datei `config.yaml`.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<releasename> ibm/strongswan
+    helm install -f config.yaml --name=<releasename> ibm/strongswan
     ```
     {: pre}
 
 Zusätzlich werden bestimmte `ipsec.conf`-Einstellungen für die Zeitlimitüberschreitung, die in Version 1.0.0 fest codiert waren, in nachfolgenden Versionen als konfigurierbare Eigenschaften bereitgestellt. Die Namen und Standardwerte einiger dieser konfigurierbaren `ipsec.conf`-Einstellungen für die Zeitlimitüberschreitung wurden ferner geändert, damit Sie mit den Standardwerten von StrongSwan besser harmonieren. Wenn Sie ein Upgrade für Ihr Helm-Diagramm von Version 1.0.0 durchführen und die Standardwerte der Version 1.0.0 für die Zeitlimitüberschreitung beibehalten möchten, fügen Sie die alten Standardwerte als neue Einstellungen zu Ihrer Diagrammkonfigurationsdatei hinzu.
+
+
 
   <table>
   <caption>Unterschiede der ipsec.conf-Einstellungen zwischen Version 1.0.0 und der neuesten Version</caption>
@@ -427,3 +404,32 @@ Sie können die VPN-Verbindung inaktivieren, indem Sie das Helm-Diagramm lösche
   ```
   {: pre}
 
+<br />
+
+
+## VPN-Konnektivität mit einer Virtual Router Appliance (VRA) einrichten
+{: #vyatta}
+
+[Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) stellt das aktuelle Vyatta 5600-Betriebssystem für x86-Bare-Metal-Server bereit. Sie können eine VRA-Instanz als VPN-Gateway verwenden, um eine sichere Verbindung zu einem lokalen Netz herzustellen.{:shortdesc}
+
+Der gesamte öffentliche und private Netzverkehr, der in die Cluster-VLANs eintritt oder sie verlässt, wird über eine VRA geleitet. Sie können die VRA als VPN-Endpunkt einsetzen, um einen verschlüsselten IPSec-Tunnel zwischen Servern in IBM Cloud Infrastructure- (SoftLayer) und lokalen Ressourcen zu erstellen. Das folgende Diagramm zeigt beispielsweise, wie eine App auf einem privaten Workerknoten in {{site.data.keyword.containershort_notm}} mit einem lokalen Server über eine VRA-VPN-Verbindung kommunizieren kann: 
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="App in {{site.data.keyword.containershort_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:725px; border-style: none"/>
+
+1. Eine App in Ihrem Cluster, `myapp2`, empfängt eine Anforderung von einem Ingress- oder LoadBalancer-Service und muss eine sichere Verbindung mit Daten in Ihrem lokalen Netz herstellen.
+
+2. Da `myapp2` sich auf einem Workerknoten in einem rein privaten VLAN befindet, fungiert die VRA als sichere Verbindung zwischen den Workerknoten und dem lokalen Netz. Die VRA verwendet die IP-Zieladresse, um zu bestimmen, welche Netzpakete an das lokale Netz gesendet werden sollen.
+
+3. Die Anforderung wird verschlüsselt und über den VPN-Tunnel an das lokale Rechenzentrum gesendet.
+
+4. Die eingehende Anforderung passiert die lokale Firewall und wird an den VPN-Tunnelendpunkt (Router) zugestellt, wo sie entschlüsselt wird.
+
+5. Der VPN-Tunnelendpunkt (Router) leitet die Anforderung abhängig von der in Schritt 2 angegebenen Ziel-IP-Adresse an den lokalen Server oder den Mainframe weiter. Die erforderlichen Daten werden auf dieselbe Weise über die VPN-Verbindung zurück an `myapp2` gesendet.
+
+Führen Sie die folgenden Schritte aus, um eine Virtual Router Appliance einzurichten:
+
+1. [Bestellen Sie eine Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/getting-started.html).
+
+2. [Konfigurieren Sie das private VLAN auf der VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
+
+3. Um eine VPN-Verbindung mithilfe der VRA zu aktivieren, [konfigurieren Sie VRRP auf der VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).

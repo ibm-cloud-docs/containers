@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,11 +15,14 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # 为什么使用 {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
 {{site.data.keyword.containerlong}} 通过组合 Docker 和 Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。
 {:shortdesc}
+
 
 ## 使用服务的优点
 {: #benefits}
@@ -34,6 +37,7 @@ lastupdated: "2018-4-20"
 |持续监视集群运行状况|<ul><li>使用集群仪表板可快速查看和管理集群、工作程序节点和容器部署的运行状况。</li><li>使用 {{site.data.keyword.monitoringlong}}，找到详细的使用量度量值，并快速扩展集群以满足工作负载需求。</li><li>使用 {{site.data.keyword.loganalysislong}} 复查日志记录信息，以查看详细的集群活动。</li></ul>|
 |安全地向公众公开应用程序|<ul><li>在公共 IP 地址、{{site.data.keyword.IBM_notm}} 提供的路径或自己的定制域之间进行选择，以通过因特网访问集群中的服务。</li></ul>|
 |{{site.data.keyword.Bluemix_notm}} 服务集成|<ul><li>通过集成 {{site.data.keyword.Bluemix_notm}} 服务（例如，Watson API、Blockchain、数据服务或 Internet of Things）向应用程序添加额外的功能。</li></ul>|
+{: caption="{{site.data.keyword.containerlong_notm}} 的优点" caption-side="top"}
 
 
 
@@ -46,9 +50,9 @@ lastupdated: "2018-4-20"
 可以在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中、在 {{site.data.keyword.Bluemix_notm}} Private 中或者在混合设置中运行 {{site.data.keyword.containershort_notm}}。
 {:shortdesc}
 
-查看以下信息以了解这些 {{site.data.keyword.containershort_notm}} 设置的差异。
 
 <table>
+<caption>{{site.data.keyword.containershort_notm}} 设置之间的差异</caption>
 <col width="22%">
 <col width="78%">
  <thead>
@@ -59,7 +63,7 @@ lastupdated: "2018-4-20"
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>使用位于[共享或专用硬件或者位于裸机机器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public 时，可以使用 {{site.data.keyword.containershort_notm}} 在云上的集群中托管应用程序。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 通过将 Docker 和 Kubernetes 技术、直观的用户体验以及内置安全和隔离功能组合使用，交付了功能强大的工具，可在计算主机的集群中对容器化应用程序自动执行部署、操作、扩展和监视。<br><br>有关更多信息，请参阅 [{{site.data.keyword.containershort_notm}} 技术](cs_tech.html#ibm-cloud-container-service-technology)。
+ <td>使用位于[共享或专用硬件或者位于裸机机器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public 时，可以使用 {{site.data.keyword.containershort_notm}} 在云上的集群中托管应用程序。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 通过将 Docker 和 Kubernetes 技术、直观的用户体验以及内置安全和隔离功能组合使用，交付了功能强大的工具，可在计算主机的集群中对容器化应用程序自动执行部署、操作、扩展和监视。<br><br>有关更多信息，请参阅 [{{site.data.keyword.containershort_notm}} 技术](cs_tech.html)。
  </td>
  </tr>
  <tr>
@@ -71,7 +75,7 @@ lastupdated: "2018-4-20"
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Private 是可以在自己的机器上本地安装的应用程序平台。如果需要在防火墙后您自己的受控环境中开发和管理内部部署容器化应用程序，那么可以选择在 {{site.data.keyword.Bluemix_notm}} Private 中使用 {{site.data.keyword.containershort_notm}}。<br><br>有关更多信息，请参阅 [{{site.data.keyword.Bluemix_notm}} Private 产品信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) 和[文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
+ <td>{{site.data.keyword.Bluemix_notm}} Private 是可以在自己的机器上本地安装的应用程序平台。如果需要在防火墙后您自己的受控环境中开发和管理内部部署容器化应用程序，那么可以选择在 {{site.data.keyword.Bluemix_notm}} Private 中使用 {{site.data.keyword.containershort_notm}}。<br><br>有关更多信息，请参阅 [{{site.data.keyword.Bluemix_notm}} Private 产品信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/private) 和[文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
  </td>
  </tr>
  <tr>
@@ -94,11 +98,7 @@ lastupdated: "2018-4-20"
 
 |特征|免费集群|标准集群|
 |---------------|-------------|-----------------|
-|[集群内联网](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[NodePort 服务对非稳定 IP 地址的公用网络应用程序访问权](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[用户访问管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[从集群和应用程序访问 {{site.data.keyword.Bluemix_notm}} 服务](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[工作程序节点上用于非持久性存储的磁盘空间](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[集群内联网](cs_secure.html#in_cluster_network)
 |[基于 NFS 文件的持久存储器（带有卷）](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[LoadBalancer 服务对稳定 IP 地址的公用或专用网络应用程序访问权](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[Ingress 服务对稳定 IP 地址和可定制 URL 的公用网络应用程序访问权](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
@@ -107,6 +107,7 @@ lastupdated: "2018-4-20"
 |[用于在物理（裸机服务器）服务器上供应工作程序节点的选项](cs_clusters.html#shared_dedicated_node)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用于供应具有可信计算的裸机工作程序的选项](cs_clusters.html#shared_dedicated_node)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[在 {{site.data.keyword.Bluemix_dedicated_notm}} 中可用](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+{: caption="免费和标准集群的特征" caption-side="top"}
 
 <br />
 
@@ -114,8 +115,7 @@ lastupdated: "2018-4-20"
 
 
 {: #responsibilities}
-**注**：使用服务时，想查找您的责任和容器条款？
+**注**：使用服务时，想查找您的责任和 {{site.data.keyword.containerlong}} 条款？
 
 {: #terms}
 请参阅 [{{site.data.keyword.containershort_notm}} 责任](cs_responsibilities.html)。
-

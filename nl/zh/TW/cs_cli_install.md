@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 設定 CLI 及 API
@@ -49,8 +52,8 @@ lastupdated: "2018-4-20"
 2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
 
     ```
-    bx login
-    ```
+          bx login
+      ```
     {: pre}
 
     **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
@@ -58,53 +61,53 @@ lastupdated: "2018-4-20"
 3.  若要建立 Kubernetes 叢集，以及管理工作者節點，請安裝 {{site.data.keyword.containershort_notm}} 外掛程式。使用 {{site.data.keyword.containershort_notm}} 外掛程式來執行指令的字首是 `bx cs`。
 
     ```
-    bx plugin install container-service -r Bluemix
+        bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
     若要驗證已適當安裝外掛程式，請執行下列指令：
 
     ```
-    bx plugin list
-    ```
+            bx plugin list
+        ```
     {: pre}
 
     在結果中，{{site.data.keyword.containershort_notm}} 外掛程式會顯示為 container-service。
 
 4.  {: #kubectl}若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-    1.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.11。**附註**：如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集及 CLI 版本保持最新。
+    1.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.9.7。**附註**：如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集及 CLI 版本保持最新。
 
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
-        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
-        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
+        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
+        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
     2.  **若為 OSX 及 Linux**：請完成下列步驟。
         1.  將執行檔移至 `/usr/local/bin` 目錄。
 
             ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
+                        mv /filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
         2.  確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
 
             ```
-            echo $PATH
+                        echo $PATH
             ```
             {: pre}
 
             CLI 輸出範例：
 
             ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+                        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
             ```
             {: screen}
 
         3.  使檔案成為可執行檔。
 
             ```
-            chmod +x /usr/local/bin/kubectl
+                        chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -113,15 +116,15 @@ lastupdated: "2018-4-20"
 5.  若要管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `bx cr`。
 
     ```
-    bx plugin install container-registry -r Bluemix
+        bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     若要驗證已適當安裝外掛程式，請執行下列指令：
 
     ```
-    bx plugin list
-    ```
+            bx plugin list
+        ```
     {: pre}
 
     在結果中，外掛程式會顯示為 container-registry。
@@ -134,10 +137,38 @@ lastupdated: "2018-4-20"
 
 -   [`bx` 指令](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` 指令](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`bx cr` 指令](/docs/cli/plugins/registry/index.html)
 
 <br />
+
+
+
+
+## 在電腦上的容器中執行 CLI
+{: #cs_cli_container}
+
+不是在您的電腦上個別安裝每一個 CLI，而是您可以將 CLI 安裝至在您電腦上執行的容器。
+{:shortdesc}
+
+1. 從提供的 Dockerfile 建立映像檔。
+
+    ```
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    ```
+    {: pre}
+
+2. 在本端部署映像檔作為容器，並裝載磁區來存取本端檔案。
+  
+    ```
+    docker run -it -v /local/path:/container/volume <image_name>
+    ```
+    {: pre}
+  
+3. 從互動式 Shell 開始執行 `bx cs` 及 `kubectl` 指令。如果您建立了要儲存的資料，請將該資料儲存至您所裝載的磁區。當您結束 Shell 時，容器就會停止。 
+
+<br />
+
 
 
 ## 配置 CLI 以執行 `kubectl`
@@ -146,7 +177,7 @@ lastupdated: "2018-4-20"
 您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。
 {:shortdesc}
 
-支援 Kubernetes 1.8.11 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+支援 Kubernetes 1.9.7 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 
 
 您必須先[安裝必要的 CLI](#cs_cli_install) 及[建立叢集](cs_clusters.html#clusters_cli)，才能執行 `kubectl` 指令。
@@ -154,7 +185,7 @@ lastupdated: "2018-4-20"
 1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
 
     ```
-      bx login
+          bx login
       ```
     {: pre}
 
@@ -162,31 +193,31 @@ lastupdated: "2018-4-20"
 
 2.  選取 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您被指派到多個 {{site.data.keyword.Bluemix_notm}} 組織，請選取在其中建立叢集的組織。叢集是組織特有的，但與 {{site.data.keyword.Bluemix_notm}} 空間無關。因此，您不需要選取空間。
 
-3.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請執行 `bx cs region-set`。
+3.  若要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請執行 `bx cs region-set`。
 
 4.  列出帳戶中的所有叢集，以取得叢集的名稱。
 
     ```
-      bx cs clusters
+          bx cs clusters
       ```
     {: pre}
 
 5.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
     1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
+        ```
+            bx cs cluster-config <cluster_name_or_ID>
     ```
-    bx cs cluster-config <cluster_name_or_ID>
-    ```
-    {: pre}
+        {: pre}
 
-    下載配置檔之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
+        下載配置檔之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
 
-    範例：
+        範例：
 
+        ```
+            export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
     ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
+        {: screen}
 
     2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
 
@@ -195,7 +226,7 @@ lastupdated: "2018-4-20"
         範例：
 
         ```
-          echo $KUBECONFIG
+                  echo $KUBECONFIG
           ```
         {: pre}
 
@@ -208,19 +239,19 @@ lastupdated: "2018-4-20"
 6.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
     ```
-      kubectl version  --short
-      ```
+    kubectl version  --short
+    ```
     {: pre}
 
     輸出範例：
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
-您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
+您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)。
 
 **提示：**如果您使用的是 Windows，但未在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI，則必須將目錄切換至 Kubernetes CLI 安裝所在的路徑，才能順利執行 `kubectl` 指令。
 
@@ -238,7 +269,7 @@ lastupdated: "2018-4-20"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.5.0 版或更新版本
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.8.11 版或更新版本
+-   Kubernetes CLI 1.9.7 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 -   Docker 1.9 版或更新版本
 
@@ -325,8 +356,6 @@ lastupdated: "2018-4-20"
 <br>
 若要解除安裝 CLI，請執行下列動作：
 
-
-
 1.  解除安裝 {{site.data.keyword.containershort_notm}} 外掛程式。
 
     ```
@@ -370,6 +399,7 @@ lastupdated: "2018-4-20"
 **附註：**若要向 {{site.data.keyword.containershort_notm}} 進行鑑別，您必須提供以 {{site.data.keyword.Bluemix_notm}} 認證產生且包含建立叢集所在 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的「身分及存取管理 (IAM)」記號。根據您向 {{site.data.keyword.Bluemix_notm}} 進行鑑別的方式，您可以在下列選項之間進行選擇，以自動建立 IAM 記號。
 
 <table>
+<caption>ID 類型和選項</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
 <th>我的選項</th>
@@ -405,7 +435,8 @@ lastupdated: "2018-4-20"
 
     若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[檢閱 API 端點中所使用的地區縮寫](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>取得記號的輸入參數</caption>
     <thead>
         <th>輸入參數</th>
         <th>值</th>
@@ -460,6 +491,8 @@ lastupdated: "2018-4-20"
     "expiration": 1493747503
     }
 
+    
+
     ```
     {: screen}
 
@@ -473,6 +506,7 @@ lastupdated: "2018-4-20"
     {: codeblock}
 
     <table summary="取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數">
+    <caption>取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數</caption>
     <thead>
   	<th>輸入參數</th>
   	<th>值</th>
@@ -526,7 +560,8 @@ lastupdated: "2018-4-20"
 
     若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[檢閱 API 端點中所使用的地區縮寫](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>取得記號的輸入參數</caption>
     <thead>
         <th>輸入參數</th>
         <th>值</th>
@@ -575,13 +610,15 @@ lastupdated: "2018-4-20"
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
     }
+
+    
 
     ```
     {: screen}
@@ -591,12 +628,13 @@ lastupdated: "2018-4-20"
 4.  列出帳戶中的所有 Kubernetes 叢集。使用您在先前步驟中所擷取的資訊，以建置標頭資訊。
 
      ```
-        GET https://containers.bluemix.net/v1/clusters
-        ```
+     GET https://containers.bluemix.net/v1/clusters
+     ```
      {: codeblock}
 
      <table summary="使用 API 的輸入參數">
-         <thead>
+         <caption>使用 API 的輸入參數</caption>
+     <thead>
      <th>輸入參數</th>
      <th>值</th>
      </thead>
@@ -638,7 +676,8 @@ lastupdated: "2018-4-20"
     {: codeblock}
 
     <table summary="新 IAM 記號的輸入參數">
-     <thead>
+     <caption>新 IAM 記號的輸入參數</caption>
+    <thead>
     <th>輸入參數</th>
     <th>值</th>
     </thead>
@@ -673,13 +712,15 @@ lastupdated: "2018-4-20"
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
+    "refresh_token": "<iam_refresh_token>",
+    "uaa_token": "<uaa_token>",
+    "uaa_refresh_token": "<uaa_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1493747503
     }
+
+    
 
     ```
     {: screen}

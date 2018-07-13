@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Resolução de problemas de criação de log e monitoramento
@@ -38,6 +39,7 @@ Quando você acessa o painel do Kibana, seus logs não são exibidos.
 Revise as razões a seguir para saber o motivo de os logs do cluster não aparecerem e as etapas de resolução de problemas correspondentes:
 
 <table>
+<caption>Resolução de logs que não exibem</caption>
   <col width="40%">
   <col width="60%">
   <thead>
@@ -56,16 +58,19 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
     <td>Para verificar o estado do seu cluster, veja <a href="cs_troubleshoot.html#debug_clusters">Depurando clusters</a>.</td>
   </tr>
   <tr>
-    <td>A cota de armazenamento do log foi atingida.</td>
+    <td>A cota de armazenamento do log foi atendida.</td>
     <td>Para aumentar os seus limites de armazenamento de log, veja a <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html"> documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
   </tr>
   <tr>
     <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
-      <td>Para mudar permissões de acesso para o proprietário da conta:<ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html#managing">Gerenciando o acesso ao cluster</a>.</li><li>Para atualizar o token de criação de log depois que as permissões foram mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <td>Para mudar permissões de acesso para o proprietário da conta:
+      <ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html">Gerenciando o acesso ao cluster</a>.</li>
+      <li>Para atualizar o token de criação de log após as permissões serem mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Você tem uma configuração de criação de log do aplicativo com um link simbólico no caminho do app.</td>
-      <td><p>Para que os logs sejam enviados, deve-se usar um caminho absoluto na configuração de criação de log ou os logs não poderão ser lidos. Se o seu caminho estiver montado em seu nó do trabalhador, ele poderá ter criado um link simbólico.</p> <p>Exemplo: se o caminho especificado for <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>, mas os logs realmente forem para <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, então os logs não poderão ser lidos.</td>
+      <td><p>Para que os logs sejam enviados, deve-se usar um caminho absoluto na configuração de criação de log ou os logs não poderão ser lidos. Se o seu caminho estiver montado em seu nó do trabalhador, ele poderá ter criado um link simbólico.</p> <p>Exemplo: se o caminho especificado é <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>, mas os logs vão para <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, os logs não podem ser lidos.</p></td>
     </tr>
   </tbody>
 </table>
@@ -134,7 +139,8 @@ Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
--   Poste uma pergunta no [Slack do {{site.data.keyword.containershort_notm}}. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
+-   Poste uma pergunta no [{{site.data.keyword.containershort_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
+
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
@@ -143,9 +149,8 @@ Ainda está tendo problemas com o seu cluster?
     -   Para perguntas sobre o serviço e instruções de introdução, use o fórum [IBM developerWorks dW Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
 
--   Entre em contato com o Suporte IBM abrindo um chamado. Para obter informações sobre como abrir um chamado de suporte IBM ou sobre níveis de suporte e severidades de chamado, consulte [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
-Ao relatar um problema, inclua seu ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
-
+{: tip}
+Ao relatar um problema, inclua o ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Technologie d'{{site.data.keyword.containerlong_notm}}
 
@@ -57,8 +59,8 @@ En savoir plus sur certains concepts Docker de base :
   </ul>
   </dd>
 
+<p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des images de conteneur.</p>
 
-  
 <p>Prêt à en savoir plus sur Docker ? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Découvrez comment Docker et {{site.data.keyword.containershort_notm}} fonctionnent ensemble en suivant ce cours.</a></p>
 
 </dl>
@@ -98,9 +100,9 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 <dt>Application</dt>
 <dd>Une application peut se référer à une application complète ou à un composant d'une application. Vous pourriez déployer des composants d'une application dans des composants distincts ou des noeuds worker distincts.</dd>
 
+<p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des ressources Kubernetes.</p>
 
-  
-<p>Prêt à en savoir plus sur Kubernetes ? </p>
+<p>Prêt à en savoir plus sur Kubernetes ?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Développez vos connaissances en termes de terminologie avec le tutoriel Création de clusters</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Découvrez comment Kubernetes et {{site.data.keyword.containershort_notm}} fonctionnent ensemble en suivant ce cours.</a></li></ul>
 
@@ -122,15 +124,18 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
   <dt>Maître Kubernetes</dt>
     <dd>Le maître Kubernetes est chargé de gérer toutes les ressources de calcul, de réseau et de stockage dans le cluster. Il assure que vos applications et services conteneurisés sont déployés de manière égale sur les noeuds worker dans le cluster. En fonction de la configuration de vos applications et de vos services, le maître détermine le noeud worker qui dispose des ressources suffisantes pour répondre aux besoins de l'application.</dd>
   <dt>Noeud worker</dt>
-    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité.</dd>
+    <dd>Chaque noeud worker correspond à une machine physique (bare metal) ou à une machine virtuelle qui s'exécute sur du matériel physique dans l'environnement de cloud. Lorsque vous mettez à disposition un noeud worker, vous déterminez les ressources disponibles dans les conteneurs qui sont hébergés sur ce noeud worker. Prêts à l'emploi, vos noeuds worker sont configurés avec un moteur Docker Engine géré par {{site.data.keyword.IBM_notm}}, ainsi que des ressources de calcul, un réseau et un service de volumes distincts. Les fonctions de sécurité intégrées assurent l'isolement, offrent des capacités de gestion des ressources et garantissent la conformité des noeuds worker en matière de sécurité.</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} - Architecture Kubernetes](images/cs_org_ov.png)
-Figure. Architecture {{site.data.keyword.containershort_notm}}
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - Architecture">
+ <figcaption>Architecture d'{{site.data.keyword.containershort_notm}}</figcaption>
+</figure>
+</p>
 
 Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](cs_integrations.html#integrations).
 
 
 <br />
-
 

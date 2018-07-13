@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 서비스 통합
 {: #integrations}
 
@@ -25,6 +27,7 @@ lastupdated: "2018-4-20"
 
 ## 애플리케이션 서비스
 <table summary="접근성 요약">
+<caption>애플리케이션 서비스</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -46,6 +49,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## DevOps 서비스
 <table summary="접근성 요약">
+<caption>DevOps 서비스</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -78,6 +82,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## 서비스 로깅 및 모니터링
 <table summary="접근성 요약">
+<caption>서비스 로깅 및 모니터링</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -103,13 +108,11 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 인프라 및 앱 성능 모니터링에 자동으로 앱을 발견하고 맵핑하는 GUI를 제공합니다. Istana는 앱에 대한 모든 요청을 캡처하며 이를 통해 사용자는 문제점을 해결하고 근본 원인 분석을 수행하여 문제점이 다시 발생하지 않도록 방지할 수 있습니다. 자세한 내용은 <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}}에 Istana 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에 대한 블로그 게시물을 확인하십시오.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 인프라 및 앱 성능 모니터링에 자동으로 앱을 발견하고 맵핑하는 GUI를 제공합니다. Istana는 앱에 대한 모든 요청을 캡처하며 문제점을 해결하고 근본 원인 분석을 수행하여 문제점이 다시 발생하지 않도록 방지하는 데 사용할 수 있습니다. 자세한 내용은 <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}}에 Istana 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에 대한 블로그 게시물을 확인하십시오.</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus는 Kubernetes 로깅 정보를 기반으로 배치 상태와 클러스터, 작업자 노드에 대한 세부 정보를 검색하기 위해 Kubernetes용으로 특별하게 설계된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. 
-클러스터에서 실행 중인 모든 컨테이너의 CPU, 메모리, I/O 및 네트워크 활동이 수집되며,
-클러스터의 성능과 워크로드를 모니터하기 위해 사용자 정의 조회 또는 경보에서 사용될 수 있습니다.
+<td>Prometheus는 특별히 Kubernetes용으로 설계된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. Prometheus는 Kubernetes 로깅 정보를 기반으로 클러스터, 작업자 노드 및 배치 상태에 대한 자세한 정보를 검색합니다. 클러스터에서 실행 중인 각 컨테이너에 대한 CPU, 메모리, I/O 및 네트워크 활동이 수집됩니다. 사용자 정의 조회 또는 경보에서 수집된 데이터를 사용하여 클러스터의 성능 및 워크로드를 모니터할 수 있습니다.
 
 <p>Prometheus를 사용하려면 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 지시사항 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 따르십시오.</p>
 </td>
@@ -136,6 +139,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## 보안 서비스
 <table summary="접근성 요약">
+<caption>보안 서비스</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -157,7 +161,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+  <td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -176,6 +180,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## 스토리지 서비스
 <table summary="접근성 요약">
+<caption>스토리지 서비스</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -184,16 +189,20 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </thead>
 <tbody>
 <tr>
+  <td>Heptio Ark</td>
+  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클러스터 리소스 및 지속적 볼륨을 백업하고 복원할 수 있습니다. 자세한 정보는 Heptio Ark의 <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">재해 복구 및 클러스터 마이그레이션을 위한 유스 케이스 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+</tr>
+<tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore/index.html) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 이 서비스에 대한 일반 정보는 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+  <td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore/index.html) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 이 서비스에 대한 일반 정보는 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}}는  데이터를 JSON 형식의 문서로 저장하는 문서 지향 DBaaS(DataBase as a Service)입니다. 이 서비스는 확장성, 고가용성 및 내구성을 제공하기 위해 제작되었습니다. 자세한 정보는 <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+    <td>{{site.data.keyword.cloudant_short_notm}}는  데이터를 JSON 형식의 문서로 저장하는 문서 지향 DBaaS(DataBase as a Service)입니다. 이 서비스는 확장성, 고가용성 및 내구성을 제공하기 위해 제작되었습니다. 자세한 정보는 <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}}는 고가용성 및 중복성, On-Demand 방식의 자동화된 비중지 백업, 모니터링 도구, 경보 시스템으로의 통합, 성능 분석 보기 등을 제공합니다. 자세한 정보는 <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+    <td>{{site.data.keyword.composeForMongoDB}}는 고가용성 및 중복성, On-Demand 방식의 자동화된 비중지 백업, 모니터링 도구, 경보 시스템으로의 통합, 성능 분석 보기 등을 제공합니다. 자세한 정보는 <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
   </tr>
 </tbody>
 </table>
@@ -218,8 +227,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 **참고:**
 <ul><ul>
-<li>서비스 키를 지원하는
-{{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다. 서비스가 서비스 키를 지원하지 않는 경우 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/apps/reqnsi.html#accser_external)을 참조하십시오.</li>
+<li>서비스 키를 지원하는 {{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다. 서비스가 서비스 키를 지원하지 않는 경우 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/apps/reqnsi.html#accser_external)을 참조하십시오.</li>
 <li>서비스를 추가하기 전에 클러스터와 작업자 노드가 완전히 배치되어야 합니다.</li>
 </ul></ul>
 
@@ -249,7 +257,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
         ```
         {: pre}
 
-    -   클러스터의 새 네임스페이스를 작성하십시오.
+    -   클러스터에 네임스페이스를 작성하십시오.
 
         ```
         kubectl create namespace <namespace_name>
@@ -281,11 +289,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
     ```
     {: pre}
 
-
-클러스터에 배치된 팟(Pod)에서 서비스를 사용하려면 [Kubernetes 시크릿을 시크릿 볼륨으로 팟(Pod)에 마운트](cs_storage.html#app_volume_mount)하여 클러스터 사용자가 {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 자격 증명에 액세스할 수 있어야 합니다.
-
-
-
+팟(Pod)에서 클러스터에 배치된 서비스를 사용하려면 클러스터 사용자가 서비스 신임 정보에 액세스해야 합니다. 사용자는 [Kubernetes 시크릿을 시크릿 볼륨으로 팟(Pod)에 마운트하여](#adding_app) {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 신임 정보에 액세스할 수 있습니다.
 
 <br />
 
@@ -339,9 +343,9 @@ Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니�
 암호화된 Kubernetes 시크릿을 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 세부사항과 신임 정보를 저장하고 서비스와 클러스터 간의 보안 통신을 허용합니다.
 {:shortdesc}
 
-Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기밀 정보를 저장하는 안전한 방법입니다. 환경 변수를 사용하거나 Dockerfile에서 직접 기밀 정보를 노출하는 대신 클러스터 사용자는 시크릿을 팟(Pod)에 마운트할 수 있습니다. 그런 다음, 팟(Pod)의 컨테이너를 실행하여 이 시크릿에 액세스할 수 있습니다.
+Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기밀 정보를 저장하는 안전한 방법입니다. 환경 변수를 통하거나 Dockerfile에서 직접 기밀 정보를 노출하는 대신 시크릿을 팟(Pod)에 마운트할 수 있습니다. 그런 다음, 팟(Pod)의 컨테이너를 실행하여 이 시크릿에 액세스할 수 있습니다.
 
-시크릿 볼륨을 팟(Pod)에 마운트하면, 이름이 binding인 파일이 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하는 데 필요한 모든 정보와 신임 정보가 포함된 볼륨 마운트 디렉토리에 저장됩니다.
+시크릿 볼륨을 팟(Pod)에 마운트하면 `binding`이라는 파일이 볼륨 마운트 디렉토리에 저장됩니다. `binding` 파일에는 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하는 데 필요한 모든 정보와 신임 정보가 포함되어 있습니다.
 
 시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 앱에서 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터 관리자가 [클러스터에 추가](cs_integrations.html#adding_cluster)하게 하십시오.
 
@@ -400,6 +404,7 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     {: codeblock}
 
     <table>
+    <caption>YAML 파일 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
@@ -465,9 +470,9 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 
     
 
-9.  앱을 구현할 때 마운트 디렉토리에서 이름이 **binding**이라는 시크릿 파일을 찾고 JSON 컨텐츠를 구문 분석하며 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하기 위한 URL 및 서비스 신임 정보를 판별하도록 앱을 구성하십시오.
+9.  마운트 디렉토리에서 `binding` 시크릿 파일을 찾고 JSON 컨텐츠를 구문 분석하며 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하기 위한 URL 및 서비스 신임 정보를 판별하도록 앱을 구성하십시오.
 
-이제 {{site.data.keyword.Bluemix_notm}} 서비스 세부사항과 신임 정보에 액세스할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 서비스 관련 작업을 수행하려면, 마운트 디렉토리에서 서비스 시크릿 파일을 찾아서 JSON 컨텐츠를 구문 분석하고 서비스 세부사항을 판별하도록 앱이 구성되어 있는지 확인하십시오.
+이제 {{site.data.keyword.Bluemix_notm}} 서비스 세부사항과 신임 정보에 액세스할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 서비스에 대해 작업하려면 마운트 디렉토리에서 서비스 시크릿 파일을 찾아서 JSON 컨텐츠를 구문 분석하고 서비스 세부사항을 판별하도록 앱이 구성되어 있는지 확인하십시오.
 
 <br />
 
@@ -478,18 +483,18 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 [Helm ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://helm.sh/)은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다.
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}}로 Helm 차트를 사용하기 전에 클러스터의 Helm 인스턴스를 설치하고 초기화해야 합니다. 그런 다음, {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가할 수 있습니다.
+{{site.data.keyword.containershort_notm}}에 Helm 차트를 사용하려면 먼저 클러스터에 Helm 인스턴스를 설치하고 초기화해야 합니다. 그런 다음, {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가할 수 있습니다.
 
 시작하기 전에 Helm 차트를 사용할 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
-2. **중요**: 클러스터 보안을 유지하려면 `kube-system` 네임스페이스에 tiller에 대한 서비스 계정을 작성하고 `tiller-deploy` 팟(Pod)에 대한 Kubernetes RBAC 클러스터 역할 바인딩을 작성하십시오. 
+2. **중요**: 클러스터 보안을 유지하려면 `kube-system` 네임스페이스에 tiller에 대한 서비스 계정을 작성하고 `tiller-deploy` 팟(Pod)에 대한 Kubernetes RBAC 클러스터 역할 바인딩을 작성하십시오.
 
     1. 선호하는 편집기에서 다음 파일을 작성하고 `rbac-config.yaml`로 저장하십시오.
       **참고**:
-        * `cluster-admin` 클러스터 역할은 Kubernetes 클러스터에서 기본적으로 작성되므로 이를 명시적으로 정의할 필요는 없습니다. 
-        * 버전 1.7.x 클러스터를 사용하고 있는 경우에는 `apiVersion`을 `rbac.authorization.k8s.io/v1beta1`로 변경하십시오. 
+        * `cluster-admin` 클러스터 역할은 Kubernetes 클러스터에서 기본적으로 작성되므로 이를 명시적으로 정의할 필요는 없습니다.
+        * 버전 1.7.x 클러스터를 사용하고 있는 경우에는 `apiVersion`을 `rbac.authorization.k8s.io/v1beta1`로 변경하십시오.
 
       ```
       apiVersion: v1
@@ -513,14 +518,14 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
       ```
       {: codeblock}
 
-    2. 서비스 계정 및 클러스터 역할 바인딩을 작성하십시오. 
+    2. 서비스 계정 및 클러스터 역할 바인딩을 작성하십시오.
 
         ```
         kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
-3. Helm을 초기화하고 작성한 서비스 계정을 사용하여 `tiller`를 설치하십시오. 
+3. Helm을 초기화하고 작성한 서비스 계정을 사용하여 `tiller`를 설치하십시오.
 
     ```
     helm init --service-account tiller
@@ -549,16 +554,16 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     ```
     {: pre}
 
-6. {{site.data.keyword.Bluemix_notm}} 저장소에서 현재 사용 가능한 Helm 차트를 나열하십시오.
+6. 현재 {{site.data.keyword.Bluemix_notm}} 저장소에서 사용 가능한 Helm 차트를 나열하십시오.
 
     ```
     helm search ibm
     ```
     {: pre}
 
-7. 차트에 대해 자세히 알아보려면 해당 설정 및 기본값을 나열하십시오. 
+7. 차트에 대해 자세히 알아보려면 해당 설정 및 기본값을 나열하십시오.
 
-    예를 들어, strongSwan IPSec VPN 서비스 Helm 차트의 설정, 문서 및 기본값을 보려면 다음과 같이 입력하십시오. 
+    예를 들어, strongSwan IPSec VPN 서비스 Helm 차트의 설정, 문서 및 기본값을 보려면 다음과 같이 입력하십시오.
 
     ```
     helm inspect ibm/strongswan
@@ -628,7 +633,7 @@ Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스 등을 포함하�
     ```
     {: screen}
 
-4.  포트 전달 명령을 실행하여 컴퓨터에서 서비스를 시작하십시오. 이제 Weave Scope가 클러스터에서 구성되었으므로, 다음 번에 Weave Scope에 액세스하기 위해 이전 구성 단계를 다시 완료하지 않고도 이 포트 전달 명령을 실행할 수 있습니다.
+4.  포트 전달 명령을 실행하여 컴퓨터에서 서비스를 여십시오. 다음에 Weave Scope에 액세스할 때 이전 구성 단계를 다시 완료하지 않고도 이 포트 전달 명령을 실행할 수 있습니다.
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
@@ -652,5 +657,4 @@ Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스 등을 포함하�
 [Weave Scope 기능에 대해 자세히 알아보십시오 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
-
 

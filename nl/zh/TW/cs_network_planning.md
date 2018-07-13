@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # 規劃搭配 NodePort、LoadBalancer 或 Ingress 服務的網路
 {: #planning}
 
@@ -26,10 +27,11 @@ lastupdated: "2018-4-20"
 
 |叢集類型|叢集之公用 VLAN 的管理員|
 |------------|------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 中的免費叢集|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}}中的標準叢集|在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中時|
+|免費叢集|{{site.data.keyword.IBM_notm}}|
+|標準叢集|在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中時|
+{: caption="依叢集類型的公用 VLAN 管理員" caption-side="top"}
 
-如需工作者節點與 Pod 之間叢集內網路通訊的相關資訊，請參閱[叢集內網路](cs_secure.html#in_cluster_network)。如需將 Kubernetes 叢集中執行的應用程式安全地連接至內部部署網路，或連接到您叢集外部的應用程式的相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
+如需工作者節點與 Pod 之間叢集內網路通訊的相關資訊，請參閱[叢集內網路](cs_secure.html#in_cluster_network)。如需將 Kubernetes 叢集中執行的應用程式安全地連接至內部部署網路，或連接至您叢集外部應用程式的相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
 
 ## 容許對應用程式的公用存取
 {: #public_access}
@@ -41,7 +43,7 @@ lastupdated: "2018-4-20"
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 架構](images/networking.png)
 
-此圖顯示 Kubernetes 在 {{site.data.keyword.containershort_notm}} 中如何攜帶使用者網路資料流量。視您所建立的是免費還是標準叢集而定，會有不同的方式可從網際網路存取您的應用程式。
+此圖顯示 Kubernetes 在 {{site.data.keyword.containershort_notm}} 中如何攜帶使用者網路資料流量。若要讓您的應用程式可從網際網路存取，您的方法取決於您是建立免費叢集還是標準叢集而有所不同。
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">NodePort 服務</a>（免費及標準叢集）</dt>
@@ -64,14 +66,14 @@ lastupdated: "2018-4-20"
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a>（僅限標準叢集）</dt>
 <dd>
  <ul>
-  <li>在叢集中公開多個應用程式，方法是透過建立一個外部 HTTP 或 HTTPS、TCP 或 UDP 負載平衡器，使用安全且唯一的公用進入點，將送入要求遞送給應用程式。</li>
+  <li>藉由建立一個外部 HTTP 或 HTTPS、TCP 或 UDP 負載平衡器，來公開叢集中的多個應用程式。負載平衡器會使用安全且唯一的公用進入點，將送入要求遞送至您的應用程式。</li>
   <li>您可以使用一個公用路徑，將叢集中的多個應用程式公開為服務。</li>
   <li>Ingress 由兩個元件組成：
    <ul>
     <li>Ingress 資源會定義如何遞送及負載平衡應用程式送入要求的規則。</li>
-    <li>應用程式負載平衡器 (ALB) 會根據您在 Ingress 資源中定義的規則，接聽送入的 HTTP 或 HTTPS、TCP 或 UDP 服務要求，以及在應用程式的 Pod 之間轉遞要求。</li>
+    <li>應用程式負載平衡器 (ALB) 會接聽送入的 HTTP 或 HTTPS、TCP 或 UDP 服務要求。它會根據您在 Ingress 資源中所定義的規則，在應用程式的 Pod 之間轉遞要求。</li>
    </ul>
-  <li>如果您要使用自訂遞送規則來實作自己的 ALB，以及需要應用程式的 SSL 終止，請使用 Ingress。</li>
+  <li>使用 Ingress 以利用自訂遞送規則來實作自己的 ALB，而且您的應用程式需要 SSL 終止。</li>
  </ul>
 </dd></dl>
 
@@ -83,4 +85,3 @@ lastupdated: "2018-4-20"
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer 服務" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Ingress 服務" shape="circle" coords="445, 420, 45"/>
 </map>
-

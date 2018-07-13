@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Resolución de problemas de supervisión y creación de registros
@@ -35,9 +36,10 @@ Si tiene un problema más general, pruebe la [depuración del clúster](cs_troub
 Al acceder al panel de control de Kibana, sus registros no se visualizan.
 
 {: tsResolve}
-Revise los siguientes motivos por los que no aparecen sus registros del clúster y los pasos de resolución de problemas correspondientes: 
+Revise los siguientes motivos por los que no aparecen sus registros del clúster y los pasos de resolución de problemas correspondientes:
 
 <table>
+<caption>Resolución de problemas de registros que no se muestran</caption>
   <col width="40%">
   <col width="60%">
   <thead>
@@ -61,16 +63,19 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
   </tr>
   <tr>
     <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
-      <td>Para cambiar los permisos de acceso para el propietario de la cuenta:<ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html#managing">Gestión de acceso a clústeres</a>.</li><li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <td>Para cambiar los permisos de acceso para el propietario de la cuenta:
+      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html">Gestión de acceso a clústeres</a>.</li>
+      <li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Tiene una configuración de creación de registro de aplicación con un enlace simbólico en la vía de acceso de la aplicación. </td>
-      <td><p>Para que se puedan enviar los registros, se debe utilizar una vía de acceso absoluta en la configuración de registro o de lo contrario, no se podrán leer los registros. Si la vía de acceso está montada en su nodo trabajador, podría haber creado un enlace simbólico. </p> <p>Ejemplo: Si la vía de acceso especificada es <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> pero los registros en realidad van a <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, entonces no se podrán leer los registros. </td>
+      <td>Tiene una configuración de creación de registro de aplicación con un enlace simbólico en la vía de acceso de la app.</td>
+      <td><p>Para que se puedan enviar los registros, se debe utilizar una vía de acceso absoluta en la configuración de registro o de lo contrario, no se podrán leer los registros. Si la vía de acceso está montada en su nodo trabajador, podría haber creado un enlace simbólico.</p> <p>Ejemplo: Si la vía de acceso especificada es <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> pero los registros van a <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, entonces no se podrán leer los registros.</p></td>
     </tr>
   </tbody>
 </table>
 
-Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar *Noisy*, un pod de ejemplo que produce varios sucesos de registro, en un nodo trabajador en el clúster. 
+Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar *Noisy*, un pod de ejemplo que produce varios sucesos de registro, en un nodo trabajador en el clúster.
 
   1. [Defina como objetivo de la CLI](cs_cli_install.html#cs_cli_configure) un clúster donde desee iniciar los registros de producción.
 
@@ -134,7 +139,8 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 {: shortdesc}
 
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
--   Puede publicar una pregunta en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
+-   Publique una pregunta en [{{site.data.keyword.containershort_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
+
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
@@ -145,7 +151,6 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
-
 

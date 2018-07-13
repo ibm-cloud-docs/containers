@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Ingress 註釋
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ lastupdated: "2018-4-20"
 如需 Ingress 服務及如何開始使用它們的一般資訊，請參閱[使用 Ingress 來管理網路資料流量](cs_ingress.html#planning)。
 
 <table>
+<caption>一般註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -47,7 +49,7 @@ lastupdated: "2018-4-20"
  <tr>
  <td><a href="#alb-id">專用 ALB 遞送</a></td>
  <td><code>ALB-ID</code></td>
- <td>使用專用 ALB，將送入的要求遞送至應用程式。</td>
+ <td>使用專用 ALB，將送入要求遞送至應用程式。</td>
  </tr>
  <tr>
  <td><a href="#rewrite-path">重寫路徑</a></td>
@@ -64,6 +66,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>連線註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -108,6 +111,7 @@ lastupdated: "2018-4-20"
 <br>
 
   <table>
+  <caption>HTTPS 及 TLS/SSL 鑑別註釋</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -153,6 +157,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>Istio 註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -172,6 +177,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>Proxy 緩衝區註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -206,6 +212,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>要求及回應註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -240,6 +247,7 @@ lastupdated: "2018-4-20"
 <br>
 
 <table>
+<caption>服務限制註釋</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -284,10 +292,10 @@ lastupdated: "2018-4-20"
 <pre class="codeblock">
 <code>
 apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: cafe-ingress
-  annotations:
+   annotations:
     ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
  spec:
   tls:
@@ -305,8 +313,9 @@ kind: Ingress
 </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -336,12 +345,13 @@ kind: Ingress
 
 <dl>
 <dt>說明</dt>
-<dd>依預設，ALB 會處理應用程式接聽的路徑（作為字首）。當 ALB 收到對應用程式的要求時，ALB 會檢查 Ingress 資源以尋找符合此要求 URI 開頭的路徑（作為字首）。如果找到相符項，要求會轉遞至應用程式部署所在 Pod 的 IP 位址。<br><br>`location-modifier` 註釋可藉由修改位置區塊配置來變更 ALB 搜尋相符項的方式。位置區塊決定如何處理對應用程式路徑的要求。<br><br>**附註**：若要處理正規表示式 (regex) 路徑，則需要此註釋。</dd>
+<dd>依預設，ALB 會處理應用程式接聽的路徑（作為字首）。當 ALB 收到對應用程式的要求時，ALB 會檢查 Ingress 資源以尋找符合此要求 URI 開頭的路徑（作為字首）。如果找到相符項，要求會轉遞至應用程式部署所在 Pod 的 IP 位址。<br><br>`location-modifier` 註釋可藉由修改位置區塊配置來變更 ALB 搜尋相符項的方式。位置區塊決定如何處理對應用程式路徑的要求。<br><br><strong>附註</strong>：若要處理正規表示式 (regex) 路徑，則需要此註釋。</dd>
 
 <dt>支援的修飾元</dt>
 <dd>
 
 <table>
+<caption>支援的修飾元</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -351,15 +361,15 @@ kind: Ingress
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>等號修飾元讓 ALB 只選取完全相符項。找到完全相符項時，搜尋即會停止，並選取相符的路徑。</td>
+ <td>等號修飾元讓 ALB 只選取完全相符項。找到完全相符項時，搜尋即會停止，並選取相符的路徑。<br>例如，如果您的應用程式在 <code>/tea</code> 上接聽，則在將要求與您的應用程式進行比對時，ALB 只會選取確切的 <code>/tea</code> 路徑。</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>波狀符號修飾元讓 ALB 在比對期間將路徑當作區分大小寫的 regex 路徑來處理。</td>
+ <td>波狀符號修飾元讓 ALB 在比對期間將路徑當作區分大小寫的 regex 路徑來處理。<br>例如，如果您的應用程式在 <code>/coffee</code> 上接聽，則在將要求與您的應用程式進行比對時，即使未針對您的應用程式明確地指定路徑，ALB 也可以選取 <code>/ab/coffee</code> 或 <code>/123/coffee</code> 路徑。</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>波狀符號後面接一個星號修飾元，讓 ALB 在比對期間將路徑當作不區分大小寫的 regex 路徑來處理。</td>
+ <td>波狀符號後面接一個星號修飾元，讓 ALB 在比對期間將路徑當作不區分大小寫的 regex 路徑來處理。<br>例如，如果您的應用程式在 <code>/coffee</code> 上接聽，則在將要求與您的應用程式進行或時，即使未針對您的應用程式明確地指定路徑，ALB 也可以選取 <code>/ab/Coffee</code> 或 <code>/123/COFFEE</code> 路徑。</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -375,10 +385,10 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
-name: myingress
-annotations:
+   name: myingress
+   annotations:
   ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
  spec:
   tls:
@@ -395,8 +405,9 @@ annotations:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -417,13 +428,13 @@ annotations:
 ### 專用 ALB 遞送 (ALB-ID)
 {: #alb-id}
 
-使用專用 ALB，將送入的要求遞送至應用程式。
+使用專用 ALB，將送入要求遞送至應用程式。
 {:shortdesc}
 
 <dl>
 <dt>說明</dt>
 <dd>
-選擇專用 ALB 來遞送送入的要求，而非公用 ALB。</dd>
+選擇專用 ALB 來遞送送入要求，而非公用 ALB。</dd>
 
 
 <dt>Ingress 資源範例 YAML</dt>
@@ -431,17 +442,17 @@ annotations:
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
-name: myingress
-annotations:
+   name: myingress
+   annotations:
   ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
  spec:
-tls:
+   tls:
 - hosts:
   - mydomain
-  secretName: mytlssecret
-rules:
+     secretName: mytlssecret
+   rules:
 - host: mydomain
   http:
     paths:
@@ -451,8 +462,9 @@ rules:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -475,15 +487,15 @@ rules:
 
 <dl>
 <dt>說明</dt>
-<dd>Ingress ALB 網域會將 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> 上的送入網路資料流量遞送至您的應用程式。您的應用程式會接聽 <code>/coffee</code>，而非 <code>/beans</code>。若要將送入的網路資料流量轉遞至您的應用程式，請將重寫註釋新增至您的 Ingress 資源配置檔。重寫註釋確保 <code>/beans</code> 上的送入網路資料流量會使用 <code>/coffee</code> 路徑轉遞至您的應用程式。包含多個服務時，只使用分號 (;) 來區隔它們。</dd>
+<dd>Ingress ALB 網域會將 <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> 上的送入網路資料流量遞送至您的應用程式。您的應用程式會接聽 <code>/coffee</code>，而非 <code>/beans</code>。若要將送入的網路資料流量轉遞至您的應用程式，請將重寫註釋新增至您的 Ingress 資源配置檔。重寫註釋確保 <code>/beans</code> 上的送入網路資料流量會使用 <code>/coffee</code> 路徑轉遞至您的應用程式。包含多個服務時，只使用分號 (;) 來區隔它們。</dd>
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
  spec:
   tls:
@@ -501,8 +513,9 @@ kind: Ingress
 </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -542,10 +555,10 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
-name: myingress
-annotations:
+   name: myingress
+   annotations:
   ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
  spec:
   tls:
@@ -562,8 +575,9 @@ annotations:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -587,17 +601,18 @@ annotations:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 輸出會與下列內容類似：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>開啟 ALB 配置對映。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>將 TCP 埠新增至配置對映。將 <code>&lt;port&gt;</code> 取代為您要開啟的 TCP 埠。
+<b>附註</b>：依預設，會開啟埠 80 及 443。如果您要將 80 及 443 保留為開啟狀態，則除了您在 `public-ports` 欄位中指定的任何其他 TCP 埠之外，還必須包括它們。如果已啟用專用 ALB，則也必須在 `private-ports` 欄位中指定您要保留開啟狀態的任何埠。如需相關資訊，請參閱<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中開啟埠</a>。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
-  public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
  metadata:
   creationTimestamp: 2017-08-22T19:06:51Z
   name: ibm-cloud-provider-ingress-cm
@@ -610,8 +625,8 @@ data:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 輸出會與下列內容類似：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>配置 Ingress 透過非標準 TCP 埠來存取您的應用程式。請在此參照中使用範例 YAML。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
@@ -655,8 +670,8 @@ kind: Ingress
  metadata:
    name: myingress
    annotations:
-    ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-    ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
  spec:
    tls:
  - hosts:
@@ -672,17 +687,18 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>要等待連接後端應用程式的秒數，例如 <code>65s</code>。<strong>附註：</strong>連接逾時不可超過 75 秒。</td>
+ <td>要等待連接至後端應用程式的秒數或分鐘數，例如 <code>65s</code> 或 <code>2m</code>。<strong>附註：</strong>連接逾時不可超過 75 秒。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>要在讀取後端應用程式之前等待的秒數，例如 <code>65s</code>。<strong>附註：</strong>read-timeout 不可超過 120 秒。</td>
+ <td>要在讀取後端應用程式之前等待的秒數或分鐘數，例如 <code>65s</code> 或 <code>2m</code>。
  </tr>
  </tbody></table>
 
@@ -712,15 +728,15 @@ kind: Ingress
 <code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
-  name: myingress
-  annotations:
+   name: myingress
+   annotations:
   ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
  spec:
-  tls:
+   tls:
 - hosts:
   - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
 - host: mydomain
   http:
     paths:
@@ -730,8 +746,9 @@ kind: Ingress
         servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -769,7 +786,7 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -789,8 +806,9 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -823,10 +841,10 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 <dd>
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
  spec:
   tls:
@@ -844,8 +862,9 @@ kind: Ingress
 </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -911,10 +930,10 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
  spec:
   tls:
@@ -925,18 +944,19 @@ kind: Ingress
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
+  <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -966,6 +986,8 @@ kind: Ingress
 <br />
 
 
+
+
 ### 上游保留作用中 (upstream-keepalive)
 {: #upstream-keepalive}
 
@@ -987,25 +1009,26 @@ kind: Ingress
  kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;myservice&gt; keepalive=&lt;max_connections&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -1023,6 +1046,8 @@ kind: Ingress
 <br />
 
 
+
+
 ## HTTPS 及 TLS/SSL 鑑別註釋
 {: #https-auth}
 
@@ -1037,7 +1062,7 @@ kind: Ingress
   <dd>
 使用 {{site.data.keyword.appid_short_notm}} 鑑別 Web 或 API HTTP/HTTPS 要求。
 
-  <p>如果您將要求類型設為 <code>web</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 Web 要求。如果記號驗證失敗，則會拒絕 Web 要求。如果要求不包含存取記號，則會將該要求重新導向至 {{site.data.keyword.appid_short_notm}} 登入頁面。**附註**：若要讓 {{site.data.keyword.appid_short_notm}} Web 鑑別能夠運作，必須在使用者的瀏覽器中啟用 Cookie。</p>
+  <p>如果您將要求類型設為 <code>web</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 Web 要求。如果記號驗證失敗，則會拒絕 Web 要求。如果要求不包含存取記號，則會將該要求重新導向至 {{site.data.keyword.appid_short_notm}} 登入頁面。<strong>附註</strong>：若要讓 {{site.data.keyword.appid_short_notm}} Web 鑑別能夠運作，必須在使用者的瀏覽器中啟用 Cookie。</p>
 
   <p>如果您將要求類型設為 <code>api</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 API 要求。如果要求不包含存取記號，則會向使用者傳回 <code>401: Unauthorized</code> 錯誤訊息。</p>
 
@@ -1068,8 +1093,9 @@ kind: Ingress
         servicePort: 8080</code></pre>
 
    <table>
+   <caption>瞭解註釋元件</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
     </thead>
     <tbody>
     <tr>
@@ -1122,7 +1148,7 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -1142,8 +1168,9 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -1163,12 +1190,13 @@ kind: Ingress
 <code>kubectl get service -n kube-system</code></pre>
 CLI 輸出會與下列內容類似：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
 <li>開啟 ALB 配置對映。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>將非預設的 HTTP 及 HTTPS 埠新增至配置對映。將 &lt;port&gt; 取代為您要開啟的 HTTP 或 HTTPS 埠。
+<b>附註</b>：依預設，會開啟埠 80 及 443。如果您要將 80 及 443 保留為開啟狀態，則除了您在 `public-ports` 欄位中指定的任何其他 TCP 埠之外，還必須包括它們。如果已啟用專用 ALB，則也必須在 `private-ports` 欄位中指定您要保留開啟狀態的任何埠。如需相關資訊，請參閱<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中開啟埠</a>。
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1186,8 +1214,8 @@ data:
 <code>kubectl get service -n kube-system</code></pre>
 CLI 輸出會與下列內容類似：
 <pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>配置您的 Ingress，以在將送入的網路資料流量遞送至服務時使用非預設埠。請在此參照中使用範例 YAML。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
@@ -1210,16 +1238,15 @@ public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,
 <dt>說明</dt>
 <dd>請設定 Ingress ALB，以 IBM 提供的 TLS 憑證或您的自訂 TLS 憑證來保護網域安全。部分使用者可能會嘗試對 ALB 網域使用不安全的 <code>http</code> 要求（例如 <code>http://www.myingress.com</code>）來存取您的應用程式，而非使用 <code>https</code>。您可以使用重新導向註釋，一律將不安全的 HTTP 用戶端要求重新導向至 HTTPS。如果您未使用此註釋，依預設，不安全的 HTTP 要求不會轉換成 HTTPS 要求，且可能會將未加密的機密資訊公開給大眾使用。
 
-
-
 </br></br>
 依預設，會停用將 HTTP 要求重新導向至 HTTPS。</dd>
 
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -1237,7 +1264,10 @@ kind: Ingress
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1257,10 +1287,10 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
  spec:
   tls:
@@ -1271,19 +1301,20 @@ kind: Ingress
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -1316,7 +1347,7 @@ kind: Ingress
 <dl>
 <dt>說明</dt>
 <dd>
-配置 Ingress ALB 的交互鑑別。用戶端會鑑別伺服器，而伺服器也會使用憑證來鑑別用戶端。交互鑑別也稱為憑證型鑑別或雙向鑑別。
+針對 Ingress ALB 配置下游資料流量的交互鑑別。外部用戶端會鑑別伺服器，而伺服器也會使用憑證來鑑別用戶端。交互鑑別也稱為憑證型鑑別或雙向鑑別。
  </dd>
 
 <dt>必要條件</dt>
@@ -1333,10 +1364,10 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
-name: myingress
-annotations:
+   name: myingress
+   annotations:
   ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
  spec:
   tls:
@@ -1354,8 +1385,9 @@ annotations:
           </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -1388,10 +1420,7 @@ annotations:
 <dl>
 <dt>說明</dt>
 <dd>
-加密要送至需要 HTTPS 的上游應用程式的資料流量。
-
-**選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。
-</dd>
+加密 Ingress 傳送至需要 HTTPS 的上游應用程式的資料流量。如果您的上游應用程式可以處理 TLS，則您可以選擇性地提供 TLS 密碼中包含的憑證。<br></br>**選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。</dd>
 
 
 <dt>Ingress 資源範例 YAML</dt>
@@ -1399,7 +1428,7 @@ annotations:
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: &lt;myingressname&gt;
    annotations:
@@ -1409,18 +1438,19 @@ kind: Ingress
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -1429,7 +1459,7 @@ kind: Ingress
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的密碼。這是選用參數。如果提供參數，則此值必須包含您的應用程式預期來自用戶端的金鑰及憑證。若要建立 TLS 密碼，請參閱[建立密碼](cs_app.html#secrets)。</td>
+  <td>選用項目：如果您要使用 TLS 密碼，且您的上游應用程式可以處理 TLS，請將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的密碼。如果您提供密碼，則此值必須包含您的應用程式預期來自用戶端的 <code>trusted.crt</code>、<code>client.crt</code> 及 <code>client.key</code>。若要建立 TLS 密碼，請先[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。然後，請參閱[建立密碼](cs_app.html#secrets)。</td>
   </tr>
   </tbody></table>
 
@@ -1446,10 +1476,6 @@ kind: Ingress
 <dt>說明</dt>
 <dd>
 容許 HTTPS 要求，並使用單向或交互鑑別，加密要送至上游應用程式的資料流量，以取得額外的安全。
-
-
-**附註**：開始之前，請[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。
-
 </dd>
 
 
@@ -1458,10 +1484,10 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: &lt;myingressname&gt;
-  annotations:
+   annotations:
     ingress.bluemix.net/ssl-services: |
       ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
       ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
@@ -1474,19 +1500,20 @@ kind: Ingress
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
           </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -1495,7 +1522,7 @@ kind: Ingress
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的密碼。這是選用參數。如果提供參數，則此值必須包含您的應用程式預期來自用戶端的金鑰及憑證。若要建立交互鑑別密碼，請參閱[建立密碼](cs_app.html#secrets)。</td>
+  <td>將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的交互鑑別密碼。此值必須包含您的應用程式預期來自用戶端的 CA 憑證。若要建立交互鑑別密碼，請先[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。然後，請參閱[建立密碼](cs_app.html#secrets)。</td>
   </tr>
   </tbody></table>
 
@@ -1539,7 +1566,7 @@ kind: Ingress
  metadata:
    name: myingress
    annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
  spec:
    tls:
     - hosts:
@@ -1559,12 +1586,13 @@ kind: Ingress
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>瞭解 YAML 檔案元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>若要讓資料流量可以遞送至 Istio 管理服務，請設為 <code>True</code>。</td>
     </tr>
     <tr>
@@ -1614,11 +1642,11 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
  spec:
    tls:
  - hosts:
@@ -1632,7 +1660,24 @@ kind: Ingress
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>瞭解註釋元件</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>若要在 ALB 上停用回應資料緩衝，請設為 <code>false</code>。</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>將 <code><em>&lt;myservice1&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。以分號 (;) 區隔多項服務。這是選用欄位。如果您未指定服務名稱，則所有服務都會使用此註釋。</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1653,7 +1698,7 @@ kind: Ingress
 <dd>
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
  name: proxy-ingress
    annotations:
@@ -1673,8 +1718,9 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -1735,8 +1781,9 @@ kind: Ingress
 </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -1774,17 +1821,17 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
  name: proxy-ingress
-   annotations:
+  annotations:
    ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
  spec:
-   tls:
+  tls:
  - hosts:
    - mydomain
-     secretName: mytlssecret
-   rules:
+    secretName: mytlssecret
+  rules:
  - host: mydomain
    http:
      paths:
@@ -1795,8 +1842,9 @@ kind: Ingress
          </code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
 </thead>
 <tbody>
 <tr>
@@ -1838,7 +1886,6 @@ kind: Ingress
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1850,7 +1897,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
 serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1867,7 +1913,7 @@ serviceName=<myservice1> {
  kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
       &lt;header1&gt; &lt;value1&gt;;
@@ -1893,18 +1939,19 @@ serviceName=<myservice1> {
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -1960,18 +2007,19 @@ serviceName=<myservice1> {
    - host: mydomain
      http:
        paths:
-       - path: /
+       - path: /service1_path
          backend:
            serviceName: &lt;myservice1&gt;
            servicePort: 8080
-       - path: /myapp
+       - path: /service2_path
          backend:
            serviceName: &lt;myservice2&gt;
            servicePort: 80</code></pre>
 
   <table>
+  <caption>瞭解註釋元件</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
    </thead>
    <tbody>
    <tr>
@@ -2007,7 +2055,7 @@ serviceName=<myservice1> {
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -2027,13 +2075,14 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>用戶端回應內文的大小上限。例如，若要將它設為 200 MB，請定義 <code>200m</code>。<strong>附註：</strong>您可以將大小設為 0，以停用用戶端要求內文大小的檢查。</td>
+ <td>用戶端回應內文的大小上限。例如，若要將大小上限設為 200 MB，請定義 <code>200m</code>。<strong>附註：</strong>您可以將大小設為 0，以停用用戶端要求內文大小的檢查。</td>
  </tr>
  </tbody></table>
 
@@ -2057,7 +2106,7 @@ kind: Ingress
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -2077,8 +2126,9 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
 <table>
+<caption>瞭解註釋元件</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
  </thead>
  <tbody>
  <tr>
@@ -2122,7 +2172,7 @@ kind: Ingress
  kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
  spec:
   tls:
@@ -2139,13 +2189,14 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key==$http_x_user_id`。</td>
+  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2183,7 +2234,7 @@ kind: Ingress
  kind: Ingress
  metadata:
   name: myingress
-  annotations:
+   annotations:
     ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
  spec:
   tls:
@@ -2200,8 +2251,9 @@ kind: Ingress
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>瞭解註釋元件</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
   </thead>
   <tbody>
   <tr>
@@ -2210,7 +2262,7 @@ kind: Ingress
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key==$http_x_user_id`。</td>
+  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2225,3 +2277,6 @@ kind: Ingress
   </dl>
 
   <br />
+
+
+

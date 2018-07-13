@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 设置 CLI 和 API
@@ -49,7 +52,7 @@ lastupdated: "2018-4-20"
 2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
 
     ```
-    bx login
+        bx login
     ```
     {: pre}
 
@@ -58,14 +61,14 @@ lastupdated: "2018-4-20"
 3.  要创建 Kubernetes 集群以及管理工作程序节点，请安装 {{site.data.keyword.containershort_notm}} 插件。用于通过 {{site.data.keyword.containershort_notm}} 插件运行命令的前缀是 `bx cs`。
 
     ```
-    bx plugin install container-service -r Bluemix
+        bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
     要验证是否已正确安装该插件，请运行以下命令：
 
     ```
-    bx plugin list
+        bx plugin list
     ```
     {: pre}
 
@@ -73,39 +76,39 @@ lastupdated: "2018-4-20"
 
 4.  {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.11。**注**：如果使用的 `kubectl` CLI 版本并未至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
+    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.9.7。**注**：如果使用的 `kubectl` CLI 版本并未至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
 
 
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
-        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
-        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
+        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
+        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
     2.  **对于 OSX 和 Linux**：完成以下步骤。
         1.  将可执行文件移至 `/usr/local/bin` 目录。
 
             ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
+                        mv /filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
         2.  确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
 
             ```
-            echo $PATH
+                        echo $PATH
             ```
             {: pre}
 
             示例 CLI 输出：
 
             ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+                        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
             ```
             {: screen}
 
         3.  使文件可执行。
 
             ```
-            chmod +x /usr/local/bin/kubectl
+                        chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -114,14 +117,14 @@ lastupdated: "2018-4-20"
 5.  要管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可扩展性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `bx cr`。
 
     ```
-    bx plugin install container-registry -r Bluemix
+        bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     要验证是否已正确安装该插件，请运行以下命令：
 
     ```
-    bx plugin list
+        bx plugin list
     ```
     {: pre}
 
@@ -135,10 +138,38 @@ lastupdated: "2018-4-20"
 
 -   [`bx` 命令](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` 命令](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`bx cr` 命令](/docs/cli/plugins/registry/index.html)
 
 <br />
+
+
+
+
+## 在计算机上的容器中运行 CLI
+{: #cs_cli_container}
+
+您可以将多个 CLI 安装到计算机上运行的一个容器中，而不必分别将每个 CLI 安装在计算机上。
+{:shortdesc}
+
+1. 基于提供的 Dockerfile 创建映像。
+
+    ```
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    ```
+    {: pre}
+
+2. 将映像本地部署为容器，并安装卷以访问本地文件。
+  
+    ```
+    docker run -it -v /local/path:/container/volume <image_name>
+    ```
+    {: pre}
+  
+3. 在交互式 shell 中，开始运行 `bx cs` 和 `kubectl` 命令。如果创建了要保存的数据，请将这些数据保存到安装的卷中。退出 shell 时，容器会停止。 
+
+<br />
+
 
 
 ## 将 CLI 配置为运行 `kubectl`
@@ -147,7 +178,7 @@ lastupdated: "2018-4-20"
 您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。
 {:shortdesc}
 
-支持 Kubernetes 1.8.11 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+支持 Kubernetes 1.9.7 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 
 
@@ -156,7 +187,7 @@ lastupdated: "2018-4-20"
 1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](cs_regions.html#bluemix_regions)。
 
     ```
-    bx login
+        bx login
     ```
     {: pre}
 
@@ -164,31 +195,31 @@ lastupdated: "2018-4-20"
 
 2.  选择 {{site.data.keyword.Bluemix_notm}} 帐户。如果您分配有多个 {{site.data.keyword.Bluemix_notm}} 组织，请选择在其中创建集群的组织。集群是特定于组织的，但又独立于 {{site.data.keyword.Bluemix_notm}} 空间。因此，您无需选择空间。
 
-3.  如果要在先前选择的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请运行 `bx cs region-set`。
+3.  要在先前选择的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请运行 `bx cs region-set`。
 
 4.  列出帐户中的所有集群以获取集群的名称。
 
     ```
-    bx cs clusters
-    ```
+            bx cs clusters
+        ```
     {: pre}
 
 5.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
     1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
+        ```
+            bx cs cluster-config <cluster_name_or_ID>
     ```
-    bx cs cluster-config <cluster_name_or_ID>
-    ```
-    {: pre}
+        {: pre}
 
-    下载配置文件后，会显示一个命令，您可以使用该命令将本地 Kubernetes 配置文件的路径设置为环境变量。
+        下载配置文件后，会显示一个命令，您可以使用该命令将本地 Kubernetes 配置文件的路径设置为环境变量。
 
-    示例：
+        示例：
 
+        ```
+            export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
     ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
+        {: screen}
 
     2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
 
@@ -197,32 +228,32 @@ lastupdated: "2018-4-20"
         示例：
 
         ```
-        echo $KUBECONFIG
+                echo $KUBECONFIG
         ```
         {: pre}
 
         输出：
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+                /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
 6.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
 
     ```
-    kubectl version  --short
-    ```
+            kubectl version  --short
+        ```
     {: pre}
 
     输出示例：
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
-现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
+现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/)。
 
 **提示：**如果使用的是 Windows，而 Kubernetes CLI 未安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中，那么必须将目录更改为 Kubernetes CLI 的安装路径才能成功运行 `kubectl` 命令。
 
@@ -240,7 +271,7 @@ lastupdated: "2018-4-20"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.8.11 或更高版本
+-   Kubernetes CLI V1.9.7 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 -   Docker V1.9 或更高版本
 
@@ -253,7 +284,7 @@ lastupdated: "2018-4-20"
 2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](cs_regions.html#bluemix_regions)。
 
     ```
-    bx login
+        bx login
     ```
     {: pre}
 
@@ -263,15 +294,15 @@ lastupdated: "2018-4-20"
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        bx plugin update container-service -r Bluemix
+                bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-        bx plugin list
-        ```
+            bx plugin list
+    ```
         {: pre}
 
         {{site.data.keyword.containershort_notm}} 插件会在结果中显示为 container-service。
@@ -279,7 +310,7 @@ lastupdated: "2018-4-20"
     3.  初始化 CLI。
 
         ```
-        bx cs init
+                bx cs init
         ```
         {: pre}
 
@@ -289,15 +320,15 @@ lastupdated: "2018-4-20"
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        bx plugin update container-registry -r Bluemix
+                bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-        bx plugin list
-        ```
+            bx plugin list
+    ```
         {: pre}
 
         Registry 插件会在结果中显示为 container-registry。
@@ -331,21 +362,21 @@ lastupdated: "2018-4-20"
 1.  卸载 {{site.data.keyword.containershort_notm}} 插件。
 
     ```
-    bx plugin uninstall container-service
+        bx plugin uninstall container-service
     ```
     {: pre}
 
 2.  卸载 {{site.data.keyword.registryshort_notm}} 插件。
 
     ```
-    bx plugin uninstall container-registry
+        bx plugin uninstall container-registry
     ```
     {: pre}
 
 3.  通过运行以下命令并检查已安装的插件的列表，验证插件是否已卸载。
 
     ```
-    bx plugin list
+        bx plugin list
     ```
     {: pre}
 
@@ -372,6 +403,7 @@ lastupdated: "2018-4-20"
 **注：**要向 {{site.data.keyword.containershort_notm}} 进行认证，必须提供使用 {{site.data.keyword.Bluemix_notm}} 凭证生成的 Identity and Access Management (IAM) 令牌，并包括创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户标识。根据您向 {{site.data.keyword.Bluemix_notm}} 进行认证的方式，可以在下列选项之间进行选择，以自动创建 IAM 令牌。
 
 <table>
+<caption>标识类型和选项</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} 标识</th>
 <th>我的选项</th>
@@ -395,19 +427,20 @@ lastupdated: "2018-4-20"
   - _&lt;passcode&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 一次性密码。运行 `bx login --sso`，并按照 CLI 输出中的指示信息，使用 Web 浏览器检索一次性密码。
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+        POST https://iam.<region>.bluemix.net/oidc/token
     ```
     {: codeblock}
 
     示例：
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+        POST https://iam.ng.bluemix.net/oidc/token
     ```
     {: codeblock}
 
     要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>用于获取令牌的输入参数</caption>
     <thead>
         <th>输入参数</th>
         <th>值</th>
@@ -454,13 +487,15 @@ lastupdated: "2018-4-20"
     ```
     {
     "access_token": "<iam_token>",
-    "refresh_token": "<iam_refresh_token>",
-    "uaa_token": "<uaa_token>",
-    "uaa_refresh_token": "<uaa_refresh_token>",
-    "token_type": "Bearer",
-    "expires_in": 3600,
-    "expiration": 1493747503
+      "refresh_token": "<iam_refresh_token>",
+      "uaa_token": "<uaa_token>",
+      "uaa_refresh_token": "<uaa_refresh_token>",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "expiration": 1493747503
     }
+
+    
 
     ```
     {: screen}
@@ -470,11 +505,12 @@ lastupdated: "2018-4-20"
 2.  检索创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。将 _&lt;iam_token&gt;_ 替换为在上一步中检索到的 IAM 令牌。
 
     ```
-    GET https://accountmanagement.<region>.bluemix.net/v1/accounts
+        GET https://accountmanagement.<region>.bluemix.net/v1/accounts
     ```
     {: codeblock}
 
     <table summary="用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数">
+    <caption>用于获取 {{site.data.keyword.Bluemix_notm}} 帐户标识的输入参数</caption>
     <thead>
   	<th>输入参数</th>
   	<th>值</th>
@@ -517,19 +553,20 @@ lastupdated: "2018-4-20"
     **注：**如果使用的是 {{site.data.keyword.Bluemix_notm}} API 密钥，那么必须使用为其创建 API 密钥的 {{site.data.keyword.Bluemix_notm}} 帐户标识。要访问其他帐户中的集群，请登录此帐户并创建基于此帐户的 {{site.data.keyword.Bluemix_notm}} API 密钥。
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+        POST https://iam.<region>.bluemix.net/oidc/token
     ```
     {: codeblock}
 
     示例：
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+        POST https://iam.ng.bluemix.net/oidc/token
     ```
     {: codeblock}
 
     要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](cs_regions.html#bluemix_regions)。
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>用于获取令牌的输入参数</caption>
     <thead>
         <th>输入参数</th>
         <th>值</th>
@@ -586,6 +623,8 @@ lastupdated: "2018-4-20"
       "expiration": 1493747503
     }
 
+    
+
     ```
     {: screen}
 
@@ -595,12 +634,13 @@ lastupdated: "2018-4-20"
 
 
      ```
-        GET https://containers.bluemix.net/v1/clusters
+             GET https://containers.bluemix.net/v1/clusters
         ```
      {: codeblock}
 
      <table summary="用于使用 API 的输入参数">
-         <thead>
+         <caption>用于使用 API 的输入参数</caption>
+     <thead>
      <th>输入参数</th>
      <th>值</th>
      </thead>
@@ -643,7 +683,8 @@ lastupdated: "2018-4-20"
     {: codeblock}
 
     <table summary="用于新 IAM 令牌的输入参数">
-         <thead>
+         <caption>用于新 IAM 令牌的输入参数</caption>
+    <thead>
     <th>输入参数</th>
     <th>值</th>
     </thead>
@@ -685,6 +726,8 @@ lastupdated: "2018-4-20"
       "expires_in": 3600,
       "expiration": 1493747503
     }
+
+    
 
     ```
     {: screen}

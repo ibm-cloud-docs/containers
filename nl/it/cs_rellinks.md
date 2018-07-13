@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Link correlati
 {: #cs_rellinks}
 
@@ -23,21 +25,22 @@ lastupdated: "2018-4-20"
 
 - [Pricing calculator for clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
 - [REST API for clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.bluemix.net/swagger)
-- [REST API for cluster logging ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [REST API for cluster Ingress application load balancing ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [REST API for logging in Kubernetes clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-logging/)
+- [REST API for managing Ingress application load balancers in Kubernetes clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks container orchestration journeys ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [developerWorks courses ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/)
 - [Docker documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per la gestione del pacchetto Kubernetes
-- Rete di servizi [Istio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://istio.io/)
+- [Istio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://istio.io/) piattaforma per collegare, gestire e proteggere i microservizi
 - Visualizzazione [Weave Scope ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.weave.works/oss/scope/)
 
 <br />
 
 
 **Glossari**
-- [Glossario {{site.data.keyword.Bluemix_notm}}](/docs/overview/glossary/index.html)
+
+- [Glossario {{site.data.keyword.Bluemix_notm}}](/docs/overview/glossary/index.html#glossary)
 - [Glossario Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Glossario Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/glossary/)
 
@@ -53,11 +56,12 @@ lastupdated: "2018-4-20"
 
 
 
-**Link correlati ai contenitori singoli e scalabili**
+**Link correlati ai contenitori singoli e scalabili (obsoleti)**
 
 - [REST API for single and scalable containers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://ccsapi-doc.mybluemix.net/)
 
 <br />
+
 
 
 **Generale**
@@ -67,5 +71,4 @@ lastupdated: "2018-4-20"
 - [Microservices.TV ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/tv/microservices/)
 
 <br />
-
 

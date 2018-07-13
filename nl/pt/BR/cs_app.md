@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Implementando apps em clusters
@@ -59,11 +61,11 @@ múltiplos nós (antiafinidade) em diferentes regiões.
 
 
 ### Aumentando a disponibilidade de seu app
+{: #increase_availability}
 
 <dl>
   <dt>Usar implementações e conjuntos de réplicas para implementar seu app e suas dependências</dt>
-    <dd><p>Uma implementação é um recurso do Kubernetes que pode ser usado para declarar todos os componentes do app e
-suas dependências. Com as implementações, não é necessário anotar todas as etapas e, em vez disso, é possível se concentrar no app.</p>
+    <dd><p>Uma implementação é um recurso do Kubernetes que pode ser usado para declarar todos os componentes de seu app e suas dependências. Com as implementações, não é necessário anotar todas as etapas e, em vez disso, é possível se concentrar no app.</p>
     <p>Ao implementar mais de um pod, um conjunto de réplicas é criado automaticamente para as suas
 implementações e monitora os pods e assegura que o número desejado de pods esteja ativo e em execução
 sempre. Quando um pod fica inativo, o conjunto de réplicas substitui o pod não responsivo por um novo.</p>
@@ -146,14 +148,26 @@ Para aprender mais sobre cada componente, revise os [Conceitos básicos do Kuber
 ## Ativando o painel do Kubernetes
 {: #cli_dashboard}
 
-Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador.
+Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador. [Na GUI](#db_gui), é possível acessar o painel com um conveniente botão de um clique. [Com a CLI](#db_cli), é possível acessar o painel ou usar as etapas em um processo de automação, como para um pipeline CI/CD.
 {:shortdesc}
 
 Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster. Essa tarefa requer a [política de acesso de Administrador](cs_users.html#access_policies). Verifique sua [política de acesso](cs_users.html#infra_access) atual.
 
 É possível usar a porta padrão ou configurar sua própria porta para ativar o painel do Kubernetes para um cluster.
 
-1.  Para clusters com uma versão mestre do Kubernetes de 1.7.16 ou anterior:
+**Ativando o painel do Kubernetes por meio da GUI**
+{: #db_gui}
+
+1.  Efetue login no [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/).
+2.  No seu perfil na barra de menus, selecione a conta que você deseja usar.
+3.  No menu, clique em **Contêineres**.
+4.  Na página **Clusters**, clique no cluster que você deseja acessar.
+5.  Na página de detalhes do cluster, clique no botão **Painel do Kubernetes**.
+
+**Ativando o painel do Kubernetes por meio da CLI**
+{: #db_cli}
+
+*  Para clusters com uma versão mestre do Kubernetes de 1.7.16 ou anterior:
 
     1.  Configure o proxy com o número da porta padrão.
 
@@ -176,7 +190,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
         ```
         {: codeblock}
 
-2.  Para clusters com uma versão mestre do Kubernetes de 1.8.2 ou mais recente:
+*  Para clusters com uma versão mestre do Kubernetes de 1.8.2 ou mais recente:
 
     1.  Obtenha suas credenciais para o Kubernetes.
 
@@ -214,10 +228,9 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 
       3.  Em seguida, cole o valor **id-token** que você copiou anteriormente no campo **Token** e clique em **CONECTAR**.
 
-[Em seguida, é possível executar um arquivo de configuração do painel.](#app_ui)
-
 Quando estiver pronto com o painel do Kubernetes, use `CTRL+C` para sair do comando `proxy`. Depois de sair, o painel do Kubernetes não estará mais disponível. Execute o comando `proxy` para reiniciar o painel do Kubernetes.
 
+[Em seguida, é possível executar um arquivo de configuração do painel.](#app_ui)
 
 
 <br />
@@ -325,7 +338,7 @@ Para implementar seu app:
   * Selecione **Especificar detalhes do app abaixo** e insira os detalhes.
   * Selecione **Fazer upload de um arquivo YAML ou JSON** para fazer upload do [arquivo de configuração de seu app ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
 
-  Precisa de ajuda com seu arquivo de configuração. Verifique este [arquivo YAML de exemplo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). Neste exemplo, um contêiner é implementado por meio da imagem **ibmliberty** na região sul dos EUA.
+  Precisa de ajuda com seu arquivo de configuração. Verifique este [arquivo YAML de exemplo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). Neste exemplo, um contêiner é implementado por meio da imagem **ibmliberty** na região sul dos EUA. Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.
   {: tip}
 
 3.  Verifique se você implementou com sucesso o seu app em uma das maneiras a seguir.
@@ -356,7 +369,7 @@ Para implementar seu app:
 
     -   [Ingresso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/ingress/): especifica um tipo de balanceador de carga que fornece rotas para acessar seu app publicamente.
 
-    
+    Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.
 
 2.  Execute o arquivo de configuração no contexto de um cluster.
 
@@ -365,12 +378,180 @@ Para implementar seu app:
     ```
     {: pre}
 
-3.  Se você disponibilizou o seu aplicativo publicamente usando um serviço de porta de nó, um serviço de balanceamento de carga ou Ingresso, verifique se você pode acessar o aplicativo.
+3.  Se você disponibilizou o seu app publicamente usando um serviço de porta de nó, um serviço de balanceador de carga ou Ingresso, verifique se é possível acessar o app.
 
 <br />
 
 
 
+
+## Implementando um app em uma máquina de GPU
+{: #gpu_app}
+
+Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters.html#shared_dedicated_node), é possível planejar cargas de trabalho matematicamente intensivas no nó do trabalhador. Por exemplo, você pode executar um app 3D que usa a plataforma Compute Unified Device Architecture (CUDA) para compartilhar a carga de processamento da GPU e CPU para aumentar o desempenho.
+{:shortdesc}
+
+Nas etapas a seguir, você aprenderá como implementar cargas de trabalho que requerem a GPU. Também é possível [implementar apps](#app_ui) que não precisam processar suas cargas de trabalho na GPU e CPU. Depois, você pode achar útil experimentar cargas de trabalho matematicamente intensivas, como a estrutura de aprendizado de máquina [TensorFlow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.tensorflow.org/) com [esta demo do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
+
+Antes de iniciar:
+* [Crie um tipo de máquina de GPU bare metal](cs_clusters.html#clusters_cli). Observe que esse processo pode levar mais de 1 dia útil para ser concluído.
+* Seu cluster mestre e o nó do trabalhador de GPU devem executar o Kubernetes versão 1.10 ou mais recente.
+
+Para executar uma carga de trabalho em uma máquina de GPU:
+1.  Crie um arquivo YAML. Neste exemplo, um `Job` YAML gerencia cargas de trabalho em lote, fazendo um pod de curta duração que é executado até que o comando planejado para ser concluído com êxito seja finalizado.
+
+    **Importante**: para cargas de trabalho de GPU, deve-se sempre fornecer o campo `resources: limits: nvidia.com/gpu` na especificação YAML.
+
+    ```yaml
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: nvidia-smi
+      labels:
+        name: nvidia-smi
+    spec:
+      template:
+        metadata:
+          labels:
+            name: nvidia-smi
+        spec:
+          containers:
+          - name: nvidia-smi
+            image: nvidia/cuda:9.1-base-ubuntu16.04
+            command: [ "/usr/test/nvidia-smi" ]
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                nvidia.com/gpu: 2
+            volumeMounts:
+            - mountPath: /usr/test
+              name: nvidia0
+          volumes:
+            - name: nvidia0
+              hostPath:
+                path: /usr/bin
+          restartPolicy: Never
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>Componentes do YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Metadados e nomes de rótulo</td>
+    <td>Dê um nome e um rótulo para a tarefa e use o mesmo nome nos metadados do arquivo e nos metadados de `spec template`. Por exemplo, `nvidia-smi`.</td>
+    </tr>
+    <tr>
+    <td><code>contêineres / imagem</code></td>
+    <td>Forneça a imagem da qual o contêiner é uma instância em execução. Neste exemplo, o valor é configurado para usar a imagem do DockerHub CUDA:<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
+    </tr>
+    <tr>
+    <td><code>contêineres / comando</code></td>
+    <td>Especifique um comando para ser executado no contêiner. Neste exemplo, o comando <code>[ "/usr/test/nvidia-smi" ]</code>refere-se a um binário que está na máquina de GPU; portanto, deve-se também configurar uma montagem do volume.</td>
+    </tr>
+    <tr>
+    <td><code>contêineres / imagePullPolicy</code></td>
+    <td>Para puxar uma nova imagem somente se a imagem não estiver atualmente no nó do trabalhador, especifique <code>IfNotPresent</code>.</td>
+    </tr>
+    <tr>
+    <td><code>resources / limites</code></td>
+    <td>Para máquinas de GPU, deve-se especificar o limite de recurso. O [Plug-in do dispositivo![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) do Kubernetes configura a solicitação de recurso padrão para corresponder ao limite.
+    <ul><li>Deve-se especificar a chave como <code>nvidia.com/gpu</code>.</li>
+    <li>Insira o número inteiro de GPUs que você solicitar, como <code>2</code>. <strong>Nota</strong>: os pods do contêiner não compartilham GPUs e as GPUs não podem estar supercomprometidas. Por exemplo, se você tem somente 1 máquina `mg1c.16x128`, então tem apenas 2 GPUs nessa máquina e pode especificar um máximo de `2`.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>volumeMounts</code></td>
+    <td>Nomeie o volume que está montado no contêiner, como <code>nvidia0</code>. Especifique o <code>mountPath</code> no contêiner para o volume. Neste exemplo, o caminho <code>/usr/test</code> corresponde ao caminho usado no comando de contêiner de tarefa.</td>
+    </tr>
+    <tr>
+    <td><code>volumes</code></td>
+    <td>Nomeie o volume de tarefa, como <code>nvidia0</code>. No <code>hostPath</code> do nó do trabalhador da GPU, especifique o <code>path</code> do volume no host, neste exemplo, <code>/usr/bin</code>. O contêiner <code>mountPath</code> é mapeado para o <code>path</code> do volume do host, que fornece esse acesso de tarefa aos binários do NVIDIA no nó do trabalhador da GPU para o comando de contêiner a ser executado.</td>
+    </tr>
+    </tbody></table>
+
+2.  Aplique o arquivo YAML. Por exemplo:
+
+    ```
+    Kubectl apply -f nvidia-smi.yaml
+    ```
+    {: pre}
+
+3.  Verifique o pod de tarefa filtrando os pods pelo rótulo `nvidia-sim`. Verifique se o **STATUS** é **Concluído**.
+
+    ```
+    kubectl get pod -a -l 'name in (nvidia-sim)'
+    ```
+    {: pre}
+
+    Saída de exemplo:
+    ```
+    NAME                  READY     STATUS      RESTARTS   AGE
+    nvidia-smi-ppkd4      0/1       Completed   0          36s
+    ```
+    {: screen}
+
+4.  Descreva o pod para ver como o plug-in do dispositivo de GPU planejou o pod.
+    * Nos campos `Limits` e `Requests`, veja se o limite de recurso que você especificou corresponde à solicitação que o plug-in do dispositivo configurou automaticamente.
+    * Nos eventos, verifique se o pod está designado ao seu nó do trabalhador da GPU.
+
+    ```
+    Kubectl describe pod nvidia-smi-ppkd4
+    ```
+    {: pre}
+
+    Saída de exemplo:
+    ```
+    Name:           nvidia-smi-ppkd4
+    Namespace:      default
+    ...
+    Limits:
+     nvidia.com/gpu:  2
+    Requests:
+     nvidia.com/gpu:  2
+    ...
+    Events:
+    Type    Reason                 Age   From                     Message
+    ----    ------                 ----  ----                     -------
+    Normal  Scheduled              1m    default-scheduler        Successfully assigned nvidia-smi-ppkd4 to 10.xxx.xx.xxx
+    ...
+    ```
+    {: screen}
+
+5.  Para verificar se a tarefa usou a GPU para calcular sua carga de trabalho, é possível verificar os logs. O comando `[ "/usr/test/nvidia-smi" ]` da tarefa consultou o estado do dispositivo GPU no nó do trabalhador da GPU.
+
+    ```
+    Kubectl logs nvidia a simulação ppkd4
+    ```
+    {: pre}
+
+    Saída de exemplo:
+    ```
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |===============================+======================+======================|
+    |   0  Tesla K80           Off  | 00000000:83:00.0 Off |                  Off |
+    | N/A   37C    P0    57W / 149W |      0MiB / 12206MiB |      0%      Default |
+    +-------------------------------+----------------------+----------------------+
+    |   1  Tesla K80           Off  | 00000000:84:00.0 Off |                  Off |
+    | N/A   32C    P0    63W / 149W |      0MiB / 12206MiB |      1%      Default |
+    +-------------------------------+----------------------+----------------------+
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                       GPU Memory |
+    |  GPU       PID   Type   Process name                             Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    ```
+    {: screen}
+
+    Neste exemplo, você vê que ambas as GPUs foram usadas para executar a tarefa porque foram planejadas no nó do trabalhador. Se o limite for configurado como 1, somente 1 GPU será mostrada.
 
 ## Ajuste de escala de apps 
 {: #app_scaling}
@@ -387,7 +568,7 @@ Antes de iniciar:
 
 Etapas:
 
-1.  Implemente seu app no cluster a partir da CLI. Ao implementar seu app, deve-se solicitar a CPU.
+1.  Implemente seu app em um cluster por meio da CLI. Ao implementar seu app, deve-se solicitar a CPU.
 
     ```
     kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
@@ -395,6 +576,7 @@ Etapas:
     {: pre}
 
     <table>
+    <caption>Componentes de comando para executar kubectl</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -427,6 +609,7 @@ Etapas:
     {: pre}
 
     <table>
+    <caption>Componentes de comando para kubectl autoscale</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -457,7 +640,7 @@ Etapas:
 
 Antes de iniciar, crie uma [implementação](#app_cli).
 
-1.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
+1.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
 
     1.  Obtenha o nome da implementação.
 
@@ -519,5 +702,4 @@ Antes de iniciar, crie uma [implementação](#app_cli).
         {: pre}
 
 <br />
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Integration von Services
 {: #integrations}
 
@@ -25,6 +27,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Anwendungsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<caption>Anwendungsservices</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -45,6 +48,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## DevOps-Services
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<caption>DevOps-Services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -77,6 +81,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Protokollierungs- und Überwachungsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<caption>Protokollierungs- und Überwachungsservices</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -106,14 +111,14 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus ist ein Open-Source-Tool für Überwachung, Protokollierung und Benachrichtigung bei Alerts, das speziell für Kubernetes entwickelt wurde, um auf Grundlage der Kubernetes-Protokollierungsinformationen detaillierte Informationen zu Cluster, Workerknoten und Bereitstellungszustand abzurufen. Die CPU-, Speicher-, Ein-/Ausgabe- und Netzaktivität aller aktiven Container in einem Cluster wird erfasst und kann in angepassten Abfragen oder Alerts für die Überwachung der Leistung und der einzelnen Arbeitslasten in Ihrem Cluster verwendet werden.
+<td>Prometheus ist ein Open-Source-Tool für die Überwachung, Protokollierung und Benachrichtigung bei Alerts, das speziell für Kubernetes entwickelt wurde. Prometheus ruft auf Grundlage der Kubernetes-Protokollierungsinformationen detaillierte Informationen zu Cluster, Workerknoten und Bereitstellungszustand ab. Informationen zu CPU, Speicher, Ein-/Ausgabe und Netzaktivität werden für alle Container erfasst, die in einem Cluster ausgeführt werden. Sie können die erfassten Daten in angepassten Abfragen oder Alerts verwenden, um die Leistung und Workloads im Cluster zu überwachen.
 
 <p>Um Prometheus zu verwenden, befolgen Sie die <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS-Anweisungen <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</p>
 </td>
 </tr>
 <tr>
 <td>Sematext</td>
-<td>Zeigen Sie Metriken und Protokolle für Ihre containerisierten Anwendungen mithilfe von <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Zeigen Sie Metriken und Protokolle für Ihre containerisierten Anwendungen mithilfe von <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -133,6 +138,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Sicherheitsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<caption>Sicherheitsservices</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -154,7 +160,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Richten Sie Ihr eigenes gesichertes Docker-Image-Repository ein, in dem Sie Images sicher speichern und mit Clusterbenutzern teilen können. Weitere Informationen finden Sie in der <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+  <td>Richten Sie Ihr eigenes gesichertes Docker-Image-Repository ein, in dem Sie Images sicher speichern und mit Clusterbenutzern teilen können. Weitere Informationen finden Sie in der <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -173,6 +179,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Speicherservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<caption>Speicherservices</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -181,16 +188,20 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </thead>
 <tbody>
 <tr>
+  <td>Heptio Ark</td>
+  <td>Sie können <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um Clusterressourcen und PVs (Persistent Volumes) zu sichern und wiederherzustellen. Weitere Informationen finden Sie in der Heptio Ark-Veröffentlichung zu <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Anwendungsfällen für Disaster-Recovery und Clustermigration <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+</tr>
+<tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>In {{site.data.keyword.cos_short}} gespeicherte Daten werden verschlüsselt und über mehrere geografische Regionen verteilt. Auf sie kann über HTTP mithilfe einer REST-API zugegriffen werden. Sie können den Befehl [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) verwenden, um den Service so zu konfigurieren, dass er einmalige oder geplante Sicherungen von Daten in Ihrem Cluster ausführt. Allgemeine Informationen zu dem Service finden Sie in der <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+  <td>In {{site.data.keyword.cos_short}} gespeicherte Daten werden verschlüsselt und über mehrere geografische Regionen verteilt. Auf sie kann über HTTP mithilfe einer REST-API zugegriffen werden. Sie können den Befehl [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) verwenden, um den Service so zu konfigurieren, dass er einmalige oder geplante Sicherungen von Daten in Ihrem Cluster ausführt. Allgemeine Informationen zu dem Service finden Sie in der <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}} ist eine dokumentorientierte Database as a Service (DBaaS), die Daten als Dokumente im JSON-Format speichert. Der Service ist auf Skalierbarkeit, Hochverfügbarkeit und Langlebigkeit ausgelegt. Weitere Informationen finden Sie in der <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+    <td>{{site.data.keyword.cloudant_short_notm}} ist eine dokumentorientierte Database as a Service (DBaaS), die Daten als Dokumente im JSON-Format speichert. Der Service ist auf Skalierbarkeit, Hochverfügbarkeit und Langlebigkeit ausgelegt. Weitere Informationen finden Sie in der <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}} bietet Hochverfügbarkeit und Redundanz, automatisierte und bedarfsgesteuerte, unterbrechungsfreie Sicherungen, Überwachungstools, Integration in Alertsysteme, Leistungsanalyseansichten und vieles mehr. Weitere Informationen finden Sie in der <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+    <td>{{site.data.keyword.composeForMongoDB}} bietet Hochverfügbarkeit und Redundanz, automatisierte und bedarfsgesteuerte, unterbrechungsfreie Sicherungen, Überwachungstools, Integration in Alertsysteme, Leistungsanalyseansichten und vieles mehr. Weitere Informationen finden Sie in der <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
   </tr>
 </tbody>
 </table>
@@ -217,8 +228,7 @@ Vorbemerkungen:
 
 **Hinweis:**
 <ul><ul>
-<li>Es können nur {{site.data.keyword.Bluemix_notm}}-Services
-hinzugefügt werden, die Serviceschlüssel unterstützen. Wenn der Service keine Serviceschlüssel unterstützt, dann sollten Sie die Informationen zum Thema [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external) lesen.</li>
+<li>Es können nur {{site.data.keyword.Bluemix_notm}}-Services hinzugefügt werden, die Serviceschlüssel unterstützen. Wenn der Service keine Serviceschlüssel unterstützt, dann sollten Sie die Informationen zum Thema [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external) lesen.</li>
 <li>Der Cluster und die Workerknoten müssen vollständig bereitgestellt werden, bevor Sie einen Service hinzufügen können.</li>
 </ul></ul>
 
@@ -248,7 +258,7 @@ Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
         ```
         {: pre}
 
-    -   Erstellen Sie einen neuen Namensbereich in Ihrem Cluster.
+    -   Erstellen Sie einen Namensbereich in Ihrem Cluster.
 
         ```
         kubectl create namespace <name_des_namensbereichs>
@@ -280,11 +290,7 @@ Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
     ```
     {: pre}
 
-
-Um den Service in einem Pod zu verwenden, der im Cluster bereitgestellt ist, können Clusterbenutzer auf die Serviceberechtigungsnachweise des {{site.data.keyword.Bluemix_notm}}-Service zugreifen, indem sie [den geheimen Kubernetes-Schlüssel als Datenträger für geheime Schlüssel an einen Pod anhängen](cs_storage.html#app_volume_mount).
-
-
-
+Um den Service in einem Pod zu verwenden, der im Cluster bereitgestellt ist, müssen Clusterbenutzer auf die Serviceberechtigungsnachweise zugreifen. Benutzer können auf die Serviceberechtigungsnachweise des {{site.data.keyword.Bluemix_notm}}-Service zugreifen, indem sie [den geheimen Kubernetes-Schlüssel als Datenträger für geheime Schlüssel an einen Pod anhängen](#adding_app).
 
 <br />
 
@@ -338,9 +344,9 @@ Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
 Zum Speichern der Detailinformationen und Berechtigungsnachweise für {{site.data.keyword.Bluemix_notm}}-Services und zur Sicherstellung der sicheren Kommunikation zwischen dem Service und dem Cluster werden verschlüsselte Kubernetes-Schlüssel verwendet.
 {:shortdesc}
 
-Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar. Statt vertrauliche Informationen über Umgebungsvariablen oder direkt in der Dockerfile selbst offenzulegen, können Clusterbenutzer geheime Schlüssel an einen Pod anhängen. Auf diese geheimen Schlüssel kann anschließend über einen aktiven Container in einem Pod zugegriffen werden.
+Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar. Statt vertrauliche Informationen über Umgebungsvariablen oder direkt in der Dockerfile selbst offenzulegen, können Sie geheime Schlüssel an einen Pod anhängen. Auf diese geheimen Schlüssel kann anschließend über einen aktiven Container in einem Pod zugegriffen werden.
 
-Wenn Sie einen Datenträger für geheime Schlüssel an Ihren Pod anhängen, wird im Mountverzeichnis des Datenträgers eine Datei namens 'binding' gespeichert. Diese Datei enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+Wenn Sie einen Datenträger für geheime Schlüssel an Ihren Pod anhängen, wird im Mountverzeichnis des Datenträgers eine Datei namens `binding` gespeichert. Die Datei `binding` enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus. Stellen Sie sicher, dass der {{site.data.keyword.Bluemix_notm}}-Service, den Sie in Ihrer App verwenden wollen, vom Clusteradministrator [zu dem Cluster hinzugefügt](cs_integrations.html#adding_cluster) wurde.
 
@@ -394,11 +400,12 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
           - name: service-bind-volume
             secret:
               defaultMode: 420
-              secretName: binding-<serviceinstanzname>
+              secretName: binding-<name_der_serviceinstanz>
     ```
     {: codeblock}
 
     <table>
+    <caption>Erklärung der Komponenten der YAML-Datei</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
     </thead>
@@ -464,7 +471,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 
     
 
-9.  Konfigurieren Sie Ihre App beim Implementieren so, dass sie die Datei **binding** mit dem geheimen Schlüssel im Mountverzeichnis finden, den JSON-Inhalt parsen und die URL sowie die Berechtigungsnachweise für den Service ermitteln kann, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+9.  Konfigurieren Sie Ihre App beim Implementieren so, dass sie die Datei `binding` mit dem geheimen Schlüssel im Mountverzeichnis finden, den JSON-Inhalt parsen und die URL sowie die Berechtigungsnachweise für den Service ermitteln kann, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
 
 Sie können nun auf die Details für den {{site.data.keyword.Bluemix_notm}}-Service und die zugehörigen Berechtigungsnachweise zugreifen. Um mit Ihrem {{site.data.keyword.Bluemix_notm}}-Service arbeiten zu können, stellen Sie sicher, dass Ihre App so konfiguriert ist, dass sie die Datei mit dem geheimen Schlüssel für den Service im Mountverzeichnis finden, den JSON-Inhalt parsen und die Servicedetails ermitteln kann.
 
@@ -483,12 +490,12 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
 
 1. Installieren Sie die <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm-CLI <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 
-2. **Wichtig**: Um Clustersicherheit zu bewahren, erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`. 
+2. **Wichtig**: Um Clustersicherheit zu bewahren, erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`.
 
     1. Erstellen Sie in Ihrem bevorzugten Editor die folgende Datei und speichern Sie sie als `rbac-config.yaml`.
       **Hinweis**:
-        * Die Clusterrolle `cluster-admin` wird standardmäßig in Kubernetes-Clustern erstellt, Sie müssen sie also nicht explizit definieren. 
-        * Wenn Sie ein Cluster der Version 1.7.x verwenden, ändern Sie `apiVersion` in `rbac.authorization.k8s.io/v1beta1`. 
+        * Die Clusterrolle `cluster-admin` wird standardmäßig in Kubernetes-Clustern erstellt, Sie müssen sie also nicht explizit definieren.
+        * Wenn Sie ein Cluster der Version 1.7.x verwenden, ändern Sie `apiVersion` in `rbac.authorization.k8s.io/v1beta1`.
 
       ```
       apiVersion: v1
@@ -512,14 +519,14 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
       ```
       {: codeblock}
 
-    2. Erstellen Sie das Servicekonto und die Clusterrollenbindung. 
+    2. Erstellen Sie das Servicekonto und die Clusterrollenbindung.
 
         ```
         kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
-3. Initialisieren Sie Helm und installieren Sie `tiller` mit dem erstellten Servicekonto. 
+3. Initialisieren Sie Helm und installieren Sie `tiller` mit dem erstellten Servicekonto.
 
     ```
     helm init --service-account tiller
@@ -548,16 +555,16 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
     ```
     {: pre}
 
-6. Listen Sie die aktuell verfügbaren Helm-Diagramme im {{site.data.keyword.Bluemix_notm}}Repository auf.
+6. Listen Sie die aktuell im {{site.data.keyword.Bluemix_notm}}-Repository verfügbaren Helm-Diagramme auf.
 
     ```
     helm search ibm
     ```
     {: pre}
 
-7. Wenn Sie mehr über ein Diagramm erfahren möchten, listen Sie die zugehörigen Einstellungen und Standardwerte auf. 
+7. Wenn Sie mehr über ein Diagramm erfahren möchten, listen Sie die zugehörigen Einstellungen und Standardwerte auf.
 
-    So können Sie beispielsweise die Einstellungen, Dokumentation und Standardwerte für das Helm-Diagramm des strongSwan-IPSec-VPN-Service anzeigen: 
+    So können Sie beispielsweise die Einstellungen, Dokumentation und Standardwerte für das Helm-Diagramm des strongSwan-IPSec-VPN-Service anzeigen:
 
     ```
     helm inspect ibm/strongswan
@@ -627,7 +634,7 @@ Gehen Sie wie folgt vor, um Weave Scope mit einem Cluster zu verwenden:
     ```
     {: screen}
 
-4.  Führen Sie einen Befehl zur Portweiterleitung aus, um den Service auf dem Computer zu starten. Da Weave Scope jetzt für den Cluster konfiguriert ist, können Sie diesen Befehl zur Portweiterleitung beim nächsten Zugriff auf Weave Scope ausführen, ohne wieder die vorherigen Konfigurationsschritte ausführen zu müssen.
+4.  Führen Sie einen Befehl zur Portweiterleitung aus, um den Service auf dem Computer zu öffnen. Beim nächsten Zugriff auf Weave Scope können Sie diesen Befehl zur Portweiterleitung ausführen, ohne wieder die vorherigen Konfigurationsschritte durchführen zu müssen.
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
@@ -638,7 +645,7 @@ Gehen Sie wie folgt vor, um Weave Scope mit einem Cluster zu verwenden:
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -651,5 +658,4 @@ Gehen Sie wie folgt vor, um Weave Scope mit einem Cluster zu verwenden:
 [Weitere Informationen zu den Weave Scope-Funktionen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Tecnologia do {{site.data.keyword.containerlong_notm}}
 
@@ -59,8 +61,8 @@ uma máquina virtual.</dd>
   </ul>
   </dd>
 
+<p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.</p>
 
-  
 <p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></p>
 
 </dl>
@@ -102,8 +104,8 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 <dt>App</dt>
 <dd>Um app pode se referir a um app completo ou um componente de um app. Você pode implementar componentes de um app em pods separados ou nós do trabalhador separados.</dd>
 
+<p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.</p>
 
-  
 <p>Pronto para obter um conhecimento mais profundo do Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expanda seu conhecimento de terminologia com o tutorial Criando clusters</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></li></ul>
@@ -129,12 +131,15 @@ Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz
     <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes](images/cs_org_ov.png)
-Figura. Arquitetura do {{site.data.keyword.containershort_notm}}
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes">
+ <figcaption>Arquitetura do {{site.data.keyword.containershort_notm}}</figcaption>
+</figure>
+</p>
 
 Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](cs_integrations.html#integrations).
 
 
 <br />
-
 

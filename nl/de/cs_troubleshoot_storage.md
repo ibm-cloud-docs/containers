@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Fehlerbehebung für Clusterspeicher
 {: #cs_troubleshoot_storage}
 
@@ -28,6 +29,8 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_troubleshoot.html).
 {: tip}
 
+
+
 ## Dateisysteme für Workerknoten werden schreibgeschützt
 {: #readonly_nodes}
 
@@ -35,7 +38,7 @@ Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_
 {: #stuck_creating_state}
 Sie bemerken möglicherweise eines der folgenden Symptome:
 - Wenn Sie den Befehl `kubectl get pods -o wide` ausführen, dann können Sie erkennen, dass mehrere Pods, die auf demselben Workerknoten ausgeführt werden, im Zustand `ContainerCreating` blockiert sind.
-- Wenn Sie den Befehl `kubectl describe` ausführen, sehen Sie den folgenden Fehler im Abschnitt 'Ereignisse' `MountVolume.SetUp failed for volume ... read-only file system`.
+- Wenn Sie den Befehl `kubectl describe` ausführen, sehen Sie den folgenden Fehler im Abschnitt **Ereignisse** `MountVolume.SetUp failed for volume ... read-only file system`.
 
 {: tsCauses}
 Das Dateisystem auf dem Workerknoten ist schreibgeschützt.
@@ -50,22 +53,23 @@ Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp aktualisi
 <br />
 
 
+
 ## App schlägt fehl, wenn ein Benutzer ohne Rootberechtigung Eigner des NFS-Dateispeicher-Mountpfads ist
 {: #nonroot}
 
 {: tsSymptoms}
-Nach dem [Hinzufügen von NFS-Speicher](cs_storage.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken. 
+Nach dem [Hinzufügen von NFS-Speicher](cs_storage.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
 
 {: tsCauses}
 Standardmäßig haben Benutzer ohne Rootberechtigung keinen Schreibzugriff auf den Datenträgermountpfad für NFS-gesicherte Speicher. Einige allgemeine App-Images, wie z. B. Jenkins und Nexus3, geben einen Benutzer ohne Rootberechtigung an, der Eigner des Mountpfads in der Dockerfile ist. Wenn Sie einen Container aus dieser Dockerfile erstellen, schlägt die Erstellung des Containers aufgrund unzureichender Berechtigungen für den Benutzer ohne Rootberechtigung auf dem Mountpfad fehl. Um Schreibberechtigung zu erteilen, können Sie die Dockerfile so ändern, dass der Benutzer ohne Rootberechtigung temporär zur Stammbenutzergruppe hinzugefügt wird, bevor die Mountpfadberechtigungen geändert werden, oder Sie verwenden einen Init-Container.
 
-Wenn Sie ein Helm-Diagramm verwenden, um ein Image für einen Benutzer ohne Rootberechtigung bereitzustellen, der Schreibberechtigungen auf die NFS-Dateifreigabe erhalten soll, bearbeiten Sie zuerst die Helm-Bereitstellung, um einen Init-Container zu verwenden.
+Wenn Sie ein Helm-Diagramm verwenden, um das Image bereitzustellen, bearbeiten Sie die Helm-Bereitstellung, um einen Init-Container zu verwenden.
 {:tip}
 
 
 
 {: tsResolve}
-Wenn Sie einen [Init-Container![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in Ihre Bereitstellung einschließen, können Sie einem Benutzer ohne Rootberechtigung, der in Ihrer Dockerfile angegeben ist, Schreibberechtigungen für den Datenträgermountpfad innerhalb des Containers erteilen, der auf Ihre NFS-Dateifreigabe verweist. Der Init-Container startet, bevor Ihr App-Container startet. Der Init-Container erstellt den Datenträgermountpfad innerhalb des Containers, ändert den Mountpfad, sodass der richtige Benutzer (ohne Rootberechtigung) Eigner ist, und schließt den Pfad wieder. Anschließend startet Ihr App-Container, der den Benutzer ohne Rootberechtigung enthält, der in den Mountpfad schreiben muss. Da der Benutzer ohne Rootberechtigung bereits Eigner des Pfads ist, ist das Schreiben in den Mountpfad erfolgreich. Wenn Sie keinen Init-Container verwenden möchten, können Sie die Dockerfile ändern, um Benutzern ohne Rootberechtigung Zugriff auf den NFS-Dateispeicher hinzuzufügen.
+Wenn Sie einen [Init-Container![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in Ihre Bereitstellung einschließen, können Sie einem Benutzer ohne Rootberechtigung, der in Ihrer Dockerfile angegeben ist, Schreibberechtigungen für den Datenträgermountpfad innerhalb des Containers erteilen. Der Init-Container startet, bevor Ihr App-Container startet. Der Init-Container erstellt den Datenträgermountpfad innerhalb des Containers, ändert den Mountpfad, sodass der richtige Benutzer (ohne Rootberechtigung) Eigner ist, und schließt den Pfad wieder. Anschließend wird Ihr App-Container mit dem Benutzer ohne Rootberechtigung gestartet, der in den Mountpfad schreiben muss. Da der Benutzer ohne Rootberechtigung bereits Eigner des Pfads ist, ist das Schreiben in den Mountpfad erfolgreich. Wenn Sie keinen Init-Container verwenden möchten, können Sie die Dockerfile ändern, um Benutzern ohne Rootberechtigung Zugriff auf den NFS-Dateispeicher hinzuzufügen.
 
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
@@ -79,7 +83,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     ```
     FROM openjdk:8-jdk
 
-    RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+    RUN apt-get update &&apt-get install -y git curl &&rm -rf /var/lib/apt/lists/*
 
     ARG user=jenkins
     ARG group=jenkins
@@ -129,7 +133,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
       args:
         - chown <UID>:<GID> /mount; # Ersetzen Sie UID und GID durch Werte aus der Dockerfile
       volumeMounts:
-      - name: volume #  Kann durch einen beliebigen Namen ersetzt werden
+      - name: volume # Kann durch einen beliebigen Namen ersetzt werden
         mountPath: /mount # Muss mit dem Mountpfad in der args-Zeile übereinstimmen
     ```
     {: codeblock}
@@ -260,10 +264,68 @@ Nach dem [Hinzufügen von Zugriff für Benutzer ohne Rootberechtigung auf persis
 Die Bereitstellungs- oder Helm-Diagrammkonfiguration gibt den [Sicherheitskontext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) für `fsGroup` (Gruppen-ID) und `runAsUser` (Benutzer-ID) des Pod an. Aktuell unterstützt {{site.data.keyword.containershort_notm}} die Spezifikation `fsGroup` nicht, sondern nur `runAsUser` mit der Festlegung als `0` (Rootberechtigungen).
 
 {: tsResolve}
-Entfernen Sie in der Konfiguration die `securityContext`-Felder für `fsGroup` und `runAsUser` aus dem Image, der Bereitstellungs- oder Helm-Diagrammkonfigurationsdatei und nehmen Sie die Bereitstellung erneut vor. Wenn Sie die Eigentumsrechte des Mountpfads von `nobody` ändern müssen, [fügen Sie Zugriff für Benutzer ohne Rootberechtigung hinzu](#nonroot). Nachdem Sie den [non-root initContainer](#nonroot) hinzugefügt haben, legen Sie `runAsUser` auf Containerebene fest, nicht Podebene. 
+Entfernen Sie in der Konfiguration die `securityContext`-Felder für `fsGroup` und `runAsUser` aus dem Image, der Bereitstellungs- oder Helm-Diagrammkonfigurationsdatei und nehmen Sie die Bereitstellung erneut vor. Wenn Sie die Eigentumsrechte des Mountpfads von `nobody` ändern müssen, [fügen Sie Zugriff für Benutzer ohne Rootberechtigung hinzu](#nonroot). Nachdem Sie den [non-root initContainer](#nonroot) hinzugefügt haben, legen Sie `runAsUser` auf Containerebene fest, nicht Podebene.
 
 <br />
 
+
+
+
+## Das Anhängen eines vorhandenen Blockspeichers an einen Pod schlägt aufgrund des falschen Dateisystems fehl
+{: #block_filesystem}
+
+{: tsSymptoms}
+Bei der Ausführung des Befehls `kubectl describe pod <pod_name>` wird der folgende Fehler angezeigt:
+```
+failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
+```
+{: screen}
+
+{: tsCauses}
+Sie verfügen über eine vorhandene Blockspeichereinheit, die für ein `XFS`-Dateisystem konfiguriert ist. Um diese Einheit an Ihren Pod anzuhängen, haben Sie [einen persistenten Datenträger (PV) erstellt](cs_storage.html#existing_block), der `ext4` als Ihr Dateisystem oder kein Dateisystem im Abschnitt `spec/flexVolume/fsType` angegeben hat. Wenn kein Dateisystem definiert ist, nimmt der persistente Datenträger standardmäßig den Wert `ext4` ein.
+Der persistente Datenträger wurde erfolgreich erstellt und mit der vorhandenen Blockspeicherinstanz verknüpft. Wenn Sie jedoch versuchen, den persistenten Datenträger mithilfe eines PVC an den Cluster anzuhängen, schlägt dieser Vorgang fehl. Sie können die `XFS`-Blockspeicherinstanz nicht mit einem `ext4`-Dateisystem an den Pod anhängen.
+
+{: tsResolve}
+Aktualisieren Sie das Dateisystem im vorhandenen persistenten Datenträger von `ext4` auf `XFS`.
+
+1. Listen Sie die vorhandenen persistenten Datenträger in Ihrem Cluster auf und notieren Sie sich den Namen des persistenten Datenträgers, den Sie für die vorhandene Blockspeicherinstanz verwendet haben.
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+
+2. Speichern Sie die YALM-Datei des persistenten Datenträgers auf der lokalen Maschine.
+   ```
+   kubectl get pv <pv-name> -o yaml > <dateipfad/xfs_pv.yaml>
+   ```
+   {: pre}
+
+3. Öffnen Sie die YALM-Datei und ändern Sie den Wert für `fsType` von `ext4` in `xfs`.
+4. Ersetzen Sie den persistenten Datenträger im Cluster.
+   ```
+   kubectl replace --force -f <dateipfad/xfs_pv.yaml>
+   ```
+   {: pre}
+
+5. Melden Sie sich bei dem Pod an, an den Sie den persistenten Datenträger angehängt haben.
+   ```
+   kubectl exec -it <pod-name> sh
+   ```
+   {: pre}
+
+6. Stellen Sie sicher, dass das Dateisystem in `XFS` geändert wurde.
+   ```
+   df -Th
+   ```
+   {: pre}
+
+   Beispielausgabe:
+   ```
+   Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
+   ```
+   {: screen}
+
+<br />
 
 
 
@@ -274,8 +336,10 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com)
-    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an. {: tip}
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+
+    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+    {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
@@ -285,11 +349,8 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM
-Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter
-[Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # {{site.data.keyword.registryshort_notm}}-Token für eine {{site.data.keyword.Bluemix_dedicated_notm}}-Image-Registry erstellen
@@ -66,7 +69,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
     ```
     {: pre}
 
-    Sie können diesen geheimen Schlüssel verwenden, um mit IBM {{site.data.keyword.Bluemix_notm}} Container Service zu arbeiten.
+    Sie können diesen geheimen Schlüssel verwenden, um mit {{site.data.keyword.containerlong}} zu arbeiten.
 
 6.  Erstellen Sie den geheimen Kubernetes-Schlüssel, um Ihre Tokeninformationen zu speichern.
 
@@ -76,7 +79,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
     {: pre}
 
     <table>
-    <caption>Tabelle 1. Erklärung der Bestandteile dieses Befehls</caption>
+    <caption>Erklärung der Bestandteile dieses Befehls</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -109,7 +112,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
 
 7.  Erstellen Sie einen Pod, der das imagePullSecret referenziert.
 
-    1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie ein Podkonfigurationsscript namens 'mypod.yaml'.
+    1.  Öffnen Sie Ihren bevorzugten Texteditor und erstellen Sie ein Podkonfigurationsscript namens 'mypod.yaml'.
     2.  Definieren Sie den Pod und das imagePullSecret, das Sie für den Zugriff auf die Registry verwenden möchten. Gehen Sie wie folgt vor, um ein privates Image aus einem Namensbereich zu verwenden:
 
         ```
@@ -127,7 +130,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
         {: codeblock}
 
         <table>
-        <caption>Tabelle 2. Erklärung der Komponenten der YAML-Datei</caption>
+        <caption>Erklärung der Komponenten der YAML-Datei</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
         </thead>

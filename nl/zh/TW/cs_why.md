@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,11 +15,14 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # 為何要用 {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
 {{site.data.keyword.containerlong}} 藉由結合 Docker 和 Kubernetes 技術、直覺式使用者體驗以及內建安全和隔離來提供功能強大的工具，以在運算主機的叢集中自動部署、操作、擴充及監視容器化應用程式。
 {:shortdesc}
+
 
 ## 使用服務的優點
 {: #benefits}
@@ -34,6 +37,7 @@ lastupdated: "2018-4-20"
 |叢集性能的持續監視|<ul><li>使用叢集儀表板，快速查看及管理叢集、工作者節點及容器部署的性能。</li><li>使用 {{site.data.keyword.monitoringlong}} 來尋找詳細的耗用度量值，並快速擴充叢集以符合工作負載。</li><li>使用 {{site.data.keyword.loganalysislong}} 來檢閱記載資訊，以查看詳細的叢集活動。</li></ul>|
 |安全地將應用程式公開給大眾使用|<ul><li>選擇公用 IP 位址、{{site.data.keyword.IBM_notm}} 所提供的路徑，或您自己的自訂網域，以從網際網路存取叢集中的服務。</li></ul>|
 |{{site.data.keyword.Bluemix_notm}} 服務整合|<ul><li>透過整合 {{site.data.keyword.Bluemix_notm}} 服務（例如 Watson API、Blockchain、資料服務或 Internet of Things），為應用程式增加額外的功能。</li></ul>|
+{: caption="{{site.data.keyword.containerlong_notm}} 的優點" caption-side="top"}
 
 
 
@@ -46,9 +50,9 @@ lastupdated: "2018-4-20"
 您可以在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated、在 {{site.data.keyword.Bluemix_notm}} Private，或在混合式設定中執行 {{site.data.keyword.containershort_notm}}。
 {:shortdesc}
 
-檢閱下列資訊，在這些 {{site.data.keyword.containershort_notm}} 設定之間找出差異。
 
 <table>
+<caption>{{site.data.keyword.containershort_notm}} 設定之間的差異</caption>
 <col width="22%">
 <col width="78%">
  <thead>
@@ -59,7 +63,7 @@ lastupdated: "2018-4-20"
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>利用[共用或專用硬體上或祼機機器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public，您可以使用 {{site.data.keyword.containershort_notm}} 來管理雲端上叢集中的應用程式。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 藉由結合 Docker 和 Kubernetes 技術、直覺式使用者體驗以及內建安全和隔離來提供功能強大的工具，以在運算主機的叢集中自動部署、操作、擴充及監視容器化應用程式。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 技術](cs_tech.html#ibm-cloud-container-service-technology)。</td>
+ <td>利用[共用或專用硬體上或祼機機器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public，您可以使用 {{site.data.keyword.containershort_notm}} 來管理雲端上叢集中的應用程式。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 藉由結合 Docker 和 Kubernetes 技術、直覺式使用者體驗以及內建安全和隔離來提供功能強大的工具，以在運算主機的叢集中自動部署、操作、擴充及監視容器化應用程式。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 技術](cs_tech.html)。</td>
  </tr>
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Dedicated
@@ -70,7 +74,7 @@ lastupdated: "2018-4-20"
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Private 是可在您自己機器本端安裝的應用程式平台。當您需要在防火牆後面的專屬控制環境中開發及管理內部部署容器化應用程式時，您可能選擇使用 {{site.data.keyword.Bluemix_notm}} Private 中的 {{site.data.keyword.containershort_notm}}。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} Private 產品資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)，以及[文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
+ <td>{{site.data.keyword.Bluemix_notm}} Private 是可在您自己機器本端安裝的應用程式平台。當您需要在防火牆後面的專屬控制環境中開發及管理內部部署容器化應用程式時，您可能選擇使用 {{site.data.keyword.Bluemix_notm}} Private 中的 {{site.data.keyword.containershort_notm}}。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} Private 產品資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/private)，以及[文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
  </td>
  </tr>
  <tr>
@@ -88,16 +92,12 @@ lastupdated: "2018-4-20"
 ## 免費與標準叢集的比較
 {: #cluster_types}
 
-您可以建立一個免費叢集，或任意數目的標準叢集。請試用免費叢集，以熟悉並測試一些 Kubernetes 功能，或是建立標準叢集，以使用完整的 Kubernetes 功能來部署應用程式。
+您可以建立一個免費叢集或任意數目的標準叢集。請試用免費叢集，以熟悉並測試一些 Kubernetes 功能，或是建立標準叢集，以使用完整的 Kubernetes 功能來部署應用程式。
 {:shortdesc}
 
 |特徵|免費叢集|標準叢集|
 |---------------|-------------|-----------------|
-|[叢集內網路](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[NodePort 服務對於不穩定 IP 位址的公用網路應用程式存取](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[使用者存取管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[叢集及應用程式中的 {{site.data.keyword.Bluemix_notm}} 服務存取](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[工作者節點上用於非持續性儲存空間的磁碟空間](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[叢集內網路](cs_secure.html#in_cluster_network)
 |[含磁區的持續性 NFS 檔案型儲存空間](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[負載平衡器服務對於穩定 IP 位址的公用或專用網路應用程式存取](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[Ingress 服務對於穩定 IP 位址及可自訂 URL 的公用網路應用程式存取](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
@@ -105,7 +105,8 @@ lastupdated: "2018-4-20"
 |[記載及監視](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[可以選擇在實體（裸機）伺服器上佈建工作者節點](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[可以使用授信運算佈建裸機工作者節點](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[在 {{site.data.keyword.Bluemix_dedicated_notm}} 中可用](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[在 {{site.data.keyword.Bluemix_dedicated_notm}} 中提供](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+{: caption="免費及標準叢集的性質" caption-side="top"}
 
 <br />
 
@@ -113,8 +114,7 @@ lastupdated: "2018-4-20"
 
 
 {: #responsibilities}
-**附註**：在您使用服務時，要尋找您的責任及容器術語嗎？
+**附註**：要在您使用服務時，尋找您該負的責任及 {{site.data.keyword.containerlong}} 條款嗎？
 
 {: #terms}
 請參閱 [{{site.data.keyword.containershort_notm}} 責任](cs_responsibilities.html)。
-

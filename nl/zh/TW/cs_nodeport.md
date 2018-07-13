@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,12 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 使用 NodePort 公開應用程式
 {: #nodeport}
 
-使用 Kubernetes 叢集中任何工作者節點的公用 IP 位址，並公開節點埠，將容器化應用程式設為可在網際網路上進行存取。使用此選項來測試 {{site.data.keyword.containerlong}} 及短期公用存取。
+使用 Kubernetes 叢集中任何工作者節點的公用 IP 位址，並公開 NodePort，將容器化應用程式設為可在網際網路上進行存取。使用此選項，在 {{site.data.keyword.containerlong}} 進行測試，以及進行短期公用存取。
 {:shortdesc}
 
 ## 使用 NodePort 管理網路資料流量
@@ -53,9 +55,9 @@ lastupdated: "2018-4-20"
 對於免費或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 {:shortdesc}
 
-如果您還沒有應用程式，您可以使用稱為 [Guestbook ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 範例應用程式。
+如果您還沒有應用程式，您可以使用稱為 [Guestbook ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 範例應用程式。
 
-1.  在應用程式的配置檔中，定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。**附註**：就 Guestbook 範例而言，配置檔中已存在前端服務區段。若要讓 Guestbook 應用程式可在外部使用，請新增 NodePort 類型及範圍 30000 - 32767 內的 NodePort 至前端服務區段。
+1.  在應用程式的配置檔中，定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。**附註**：就 Guestbook 範例而言，配置檔中存在前端服務區段。若要讓 Guestbook 應用程式可在外部使用，請新增 NodePort 類型及範圍 30000 - 32767 內的 NodePort 至前端服務區段。
 
     範例：
 
@@ -78,13 +80,14 @@ lastupdated: "2018-4-20"
     {: codeblock}
 
     <table>
+    <caption>瞭解 NodePort 服務元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 NodePort 服務區段元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>將 <code><em>&lt;my-nodeport-service&gt;</em></code> 取代為 NodePort 服務的名稱。</td>
+    <td>將 <code><em>&lt;my-nodeport-service&gt;</em></code> 取代為 NodePort 服務的名稱。<p>當您使用 Kubernetes 資源時，進一步瞭解[保護您的個人資訊](cs_secure.html#pi)。</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -99,7 +102,7 @@ lastupdated: "2018-4-20"
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>選用項目：將 <code><em>&lt;31514&gt;</em></code> 取代為 30000 到 32767 範圍內的 NodePort。請不要指定另一個服務已在使用中的 NodePort。如果未指派 NodePort，則會自動指派一個隨機 NodePort。<br><br>如果您要指定 NodePort，並且要查看哪些 NodePort 已在使用中，則可以執行下列指令：<pre class="pre"><code>kubectl get svc</code></pre>使用中的任何 NodePort 會出現在**埠**欄位下。</td>
+     <td>選用項目：將 <code><em>&lt;31514&gt;</em></code> 取代為 30000 到 32767 範圍內的 NodePort。請不要指定另一個服務已在使用中的 NodePort。如果未指派 NodePort，則會自動指派一個隨機 NodePort。<br><br>若要指定 NodePort 並查看哪些 NodePort 已在使用中，請執行下列指令：<pre class="pre"><code>kubectl get svc</code></pre><p>使用中的任何 NodePort 會出現在**埠**欄位下。</p></td>
      </tr>
      </tbody></table>
 
@@ -114,14 +117,14 @@ lastupdated: "2018-4-20"
 1.  取得叢集中工作者節點的公用 IP 位址。
 
     ```
-    bx cs workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
     輸出：
 
     ```
-    ID                                                Public IP   Private IP    Size     State    Status
+        ID                                                Public IP   Private IP    Size     State    Status
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
     ```
@@ -130,14 +133,14 @@ lastupdated: "2018-4-20"
 2.  如果已指派隨機 NodePort，請找出已指派的 NodePort。
 
     ```
-    kubectl describe service <service_name>
+        kubectl describe service <service_name>
     ```
     {: pre}
 
     輸出：
 
     ```
-    Name:                   <service_name>
+        Name:                   <service_name>
     Namespace:              default
     Labels:                 run=<deployment_name>
     Selector:               run=<deployment_name>
@@ -152,7 +155,6 @@ lastupdated: "2018-4-20"
     {: screen}
 
     在此範例中，NodePort 是 `30872`。</br>
-    **附註：**如果 **Endpoints** 區段顯示 `<none>`，請確定您在 NodePort 服務的 `spec.selector` 區段中使用的 `<selectorkey>` 及 `<selectorvalue>`，與您在部署 yaml 的 `spec.template.metadata.labels` 區段中使用的鍵值組相同。
+    **附註：**如果**端點**區段顯示 `<none>`，請檢查您在 NodePort 服務的 `spec.selector` 區段中使用的 `<selectorkey>` 及 `<selectorvalue>`。確定它與您在部署 yaml 的 `spec.template.metadata.labels` 區段中所使用的_鍵值組_ 相同。
 
 3.  形成具有其中一個工作者節點公用 IP 位址及 NodePort 的 URL。範例：`http://192.0.2.23:30872`
-

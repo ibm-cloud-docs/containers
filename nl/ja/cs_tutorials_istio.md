@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,11 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # チュートリアル: {{site.data.keyword.containerlong_notm}} での Istio のインストール
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} の Kubernetes のようなクラウド・プラットフォームでマイクロサービスのネットワーク (サービス・メッシュともいう) を接続、保護、管理するためのオープン・プラットフォームです。 Istio を使用して、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス・メッシュでのサービス ID の検証などを行います。
+[Istio](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} の Kubernetes のようなクラウド・プラットフォームでマイクロサービスのネットワーク (サービス・メッシュともいう) を接続、保護、管理するためのオープン・プラットフォームです。 Istio を使用すると、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス ID の検証などを行うことができます。
 {:shortdesc}
 
 このチュートリアルでは、BookInfo と呼ばれる単純な演習用ブックストア・アプリ用に、Istio と一緒に 4 つのマイクロサービスをインストールする方法を確認できます。 このマイクロサービスには、製品 Web ページ、本の詳細情報、レビュー、評価が含まれます。 Istio をインストールする {{site.data.keyword.containershort}} クラスターに BookInfo のマイクロサービスをデプロイする際には、各マイクロサービスのポッド内に Istio Envoy サイドカー・プロキシーを挿入します。
@@ -39,13 +40,13 @@ lastupdated: "2018-4-20"
 
 ## 対象読者
 
-このチュートリアルは、Istio を使用したことがないソフトウェア開発者やネットワーク管理者を対象にしています。
+このチュートリアルは、Istio を初めて使用するソフトウェア開発者やネットワーク管理者を対象にしています。
 
 ## 前提条件
 
--  [CLI のインストール](cs_cli_install.html#cs_cli_install_steps)
--  [クラスターの作成](cs_clusters.html#clusters_cli)
--  [CLI のターゲットを自分のクラスターに設定する](cs_cli_install.html#cs_cli_configure)
+-  [CLI をインストールします](cs_cli_install.html#cs_cli_install_steps)。 Istio には Kubernetes バージョン 1.9 以上が必要です。必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
+-  バージョン 1.9 以上の Kubernetes で[クラスターを作成します](cs_clusters.html#clusters_cli)。
+-  [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 
 ## レッスン 1: Istio をダウンロードしてインストールする
 {: #istio_tutorial1}
@@ -116,7 +117,7 @@ lastupdated: "2018-4-20"
    {: screen}
 
 
-これで完了です。 クラスターに Istio を正常にインストールしました。 次に、BookInfo サンプル・アプリをクラスター内にデプロイします。
+おつかれさまでした。 クラスターに Istio を正常にインストールしました。 次に、BookInfo サンプル・アプリをクラスター内にデプロイします。
 
 
 ## レッスン 2: BookInfo アプリをデプロイする
@@ -178,7 +179,7 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
        ```
        {: pre}
 
-       出力は、以下のようになります。
+       出力例:
 
        ```
        NAME      HOSTS     ADDRESS          PORTS     AGE
@@ -214,16 +215,16 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
    ```
    {: pre}
 
-5. ブラウザーで、`http://$GATEWAY_URL/productpage` にナビゲートし、BookInfo の Web ページを表示します。
+5. ブラウザーで、`http://$GATEWAY_URL/productpage` に移動し、BookInfo の Web ページを表示します。
 
 6. ページの最新表示を複数回試行します。 さまざまなバージョンのレビュー・セクションが、赤い星形、黒い星形、星形なしの間でラウンドロビンします。
 
-これで完了です。 BookInfo サンプル・アプリと Istio Envoy サイドカーを正常にデプロイしました。 次に、リソースをクリーンアップするか、引き続き追加のチュートリアルを試して、さらに Istio 機能を探索することができます。
+おつかれさまでした。 BookInfo サンプル・アプリと Istio Envoy サイドカーを正常にデプロイしました。 次は、リソースをクリーンアップします。または、他のチュートリアルを引き続き試し、Istio についてさらに詳しく知ることもできます。
 
 ## クリーンアップ
 {: #istio_tutorial_cleanup}
 
-[次の作業](#istio_tutorial_whatsnext)で示されている Istio 機能をさらに探索しない場合は、クラスター内の Istio リソースをクリーンアップできます。
+Istio での作業を終了し、[次の作業](#istio_tutorial_whatsnext)に進まない場合は、クラスター内の Istio リソースをクリーンアップできます。
 {:shortdesc}
 
 1. クラスター内の BookInfo サービス、ポッド、デプロイメントをすべて削除します。
@@ -243,9 +244,8 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
 ## 次の作業
 {: #istio_tutorial_whatsnext}
 
-Istio 機能をさらに探索するには、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) にさらにガイドがあります。
+Istio についてさらに詳しく知るには、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) でその他のガイドを参照できます。
 
 * [Intelligent Routing ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/intelligent-routing.html): この例では、Istio のトラフィック管理機能を使用して、特定のバージョンの BookInfo のレビューと評価のマイクロサービスにトラフィックをルーティングする方法を示しています。
 
 * [In-Depth Telemetry ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/telemetry.html): この例では、Istio Mixer と Envoy プロキシーを使用して、BookInfo のマイクロサービス間で統一されたメトリック、ログ、トレースを取得する方法を示しています。
-

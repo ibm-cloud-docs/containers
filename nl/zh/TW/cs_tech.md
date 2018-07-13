@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} 技術
 
@@ -56,8 +58,8 @@ lastupdated: "2018-4-20"
   </ul>
   </dd>
 
+<p>進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
 
-  
 <p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></p>
 
 </dl>
@@ -83,7 +85,8 @@ lastupdated: "2018-4-20"
 <dd>Kubernetes 叢集包含一台以上稱為工作者節點的運算主機。工作者節點是由 Kubernetes 主節點進行管理，Kubernetes 主節點會集中控制及監視叢集中的所有 Kubernetes 資源。因此，當您部署容器化應用程式的資源時，Kubernetes 主節點會考慮部署需求及叢集中的可用容量，來決定要在其上部署這些資源的工作者節點。Kubernetes 資源包括服務、部署及 Pod。</dd>
 
 <dt>服務</dt>
-<dd>服務是一種 Kubernetes 資源，可將一組 Pod 分組在一起，並提供這些 Pod 的網路連線功能，而不需要公開每一個 Pod 的實際專用 IP 位址。您可以使用服務，將您的應用程式設為可在叢集內使用或可供公用網際網路使用。</dd>
+<dd>服務是一種 Kubernetes 資源，可將一組 Pod 分組在一起，並提供這些 Pod 的網路連線功能，而不需要公開每一個 Pod 的實際專用 IP 位址。您可以使用服務，將您的應用程式設為可在叢集內使用或可供公用網際網路使用。
+</dd>
 
 <dt>部署</dt>
 <dd>部署是一種 Kubernetes 資源，您可在其中指定執行應用程式所需的其他資源或功能的相關資訊（例如服務、持續性儲存空間或註釋）。將部署記載在配置 YAML 檔案中，然後再將其套用至叢集。Kubernetes 主節點會配置資源，並將容器部署至具有可用容量之工作者節點上的 Pod。
@@ -97,8 +100,8 @@ lastupdated: "2018-4-20"
 <dd>應用程式可能指的是完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
 </dd>
 
+<p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
 
-  
 <p>準備好深入瞭解 Kubernetes 嗎？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></li></ul>
@@ -124,12 +127,15 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <dd>每一個工作者節點都是實體機器（裸機）或是在雲端環境中實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、不同的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全規範。</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes 架構](images/cs_org_ov.png)
-圖. {{site.data.keyword.containershort_notm}} 架構
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
+ <figcaption>{{site.data.keyword.containershort_notm}} 架構</figcaption>
+</figure>
+</p>
 
 想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請查看部分[整合](cs_integrations.html#integrations)。
 
 
 <br />
-
 

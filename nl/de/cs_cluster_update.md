@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Cluster und Workerknoten aktualisieren
@@ -30,7 +33,7 @@ Kubernetes gibt regelmäßig [Hauptversionen, Nebenversionen oder Patches als Ak
 
 Aktualisierungen können die API-Serverversion von Kubernetes oder andere Komponenten in Ihrem Kubernetes-Master betreffen.  Auf jeden Fall sind Sie immer dafür verantwortlich, Ihre Workerknoten auf dem neuesten Stand zu halten. Bei Aktualisierungen  wird der Kubernetes-Master vor den Workerknoten aktualisiert.
 
-Standardmäßig ist Ihre Fähigkeit den API-Server von Kubernetes zu aktualisieren in Ihrem Kubernetes-Master auf zwei Nebenversionen vor Ihrer aktuellen Version begrenzt. Beispiel: Wenn Ihre aktuelle API-Serverversion von Kubernetes die Version 1.5 ist und Sie auf Version 1.8 aktualisieren möchten, müssen Sie zuerst auf Version 1.7 aktualisieren. Sie können die gewünschte Aktualisierung zwar erzwingen, doch kann eine Aktualisierung über mehr als zwei Nebenversionen hinweg unter Umständen zu nicht erwarteten Ergebnissen führen. Falls Ihr Cluster in einer nicht unterstützten Kubernetes-Version ausgeführt wird, müssen Sie die Aktualisierung möglicherweise erzwingen.
+Standardmäßig ist Ihre Fähigkeit den API-Server von Kubernetes zu aktualisieren in Ihrem Kubernetes-Master auf zwei Nebenversionen vor Ihrer aktuellen Version begrenzt. Beispiel: Wenn Ihre aktuelle API-Serverversion von Kubernetes die Version 1.7 ist und Sie auf Version 1.10 aktualisieren möchten, müssen Sie zuerst auf Version 1.8 oder 1.9 aktualisieren. Sie können die gewünschte Aktualisierung zwar erzwingen, doch kann eine Aktualisierung über drei oder mehr Nebenversionen hinweg unter Umständen zu nicht erwarteten Ergebnissen führen. Falls Ihr Cluster in einer nicht unterstützten Kubernetes-Version ausgeführt wird, müssen Sie die Aktualisierung möglicherweise erzwingen.
 
 Das folgende Diagramm zeigt den Prozess, den Sie zum Aktualisieren des Masters durchlaufen können.
 
@@ -55,13 +58,14 @@ Wenn die Aktualisierung des API-Servers von Kubernetes abgeschlossen ist, könne
 ## Workerknoten aktualisieren
 {: #worker_node}
 
+
 Sie haben eine Benachrichtigung erhalten, die besagt, dass Sie Ihre Workerknoten aktualisieren müssen. Was bedeutet dies nun? Bei der Einrichtung von Sicherheitsupdates und -patchs für den API-Server von Kubernetes und anderen Komponenten des Kubernetes-Masters müssen Sie darauf achten, dass Ihre Workerknoten synchronisiert bleiben.
 {: shortdesc}
 
 Die Kubernetes-Version der Workerknoten darf nicht höher als die Version des API-Servers von Kubernetes sein. [Erstellen Sie zunächst einen Kubernetes-Master](#master).
 
-<ul>**Achtung**:</br>
-<li>Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen.</li>
+**Achtung**:
+<ul><li>Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen.</li>
 <li>Die Daten werden gelöscht, wenn sie nicht außerhalb des Pods gespeichert werden.</li>
 <li>Verwenden Sie [Replikate ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) in Ihren Bereitstellungen, um die erneute Zeitplanung für Pods auf den verfügbaren Knoten zu ermöglichen.</li></ul>
 
@@ -75,7 +79,7 @@ Im Abschnitt für Dateninformationen der Konfigurationszuordnung können Sie bis
 
 Die Schlüssel sind definiert. Was kommt als Nächstes?
 
-Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl `bx cs worker-update` aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können. 
+Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl `bx cs worker-update` aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können.
 
 Wie sieht es aus, wenn keine Konfigurationszuordnung definiert wurde?
 
@@ -115,13 +119,14 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
     ```
     {:pre}
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die übrigen Zeilen sollten von links nach rechts gelesen werden, wobei der Parameter in der ersten Spalte und die entsprechende Beschreibung in der zweiten Spalte angegeben sind.">
+  <caption>Komponenten der Konfigurationszuordnung</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten </th>
     </thead>
     <tbody>
       <tr>
         <td><code>drain_timeout_seconds</code></td>
-        <td> Optional: Das Zeitlimit in Sekunden für das Entleeren, das während der Aktualisierung des Workerknotens auftritt. Beim Entleeren wird der Knoten auf `unschedulable` (nicht planbar) gesetzt, was verhindert, dass neue Pods auf diesem Knoten bereitgestellt werden. Beim Entleeren werden außerdem Pods vom Knoten gelöscht. Zulässige Werte liegen zwischen 1 und 180. Der Standardwert ist 30. </td>
+        <td> Optional: Das Zeitlimit in Sekunden für das Entleeren, das während der Aktualisierung des Workerknotens auftritt. Beim Entleeren wird der Knoten auf `unschedulable` (nicht planbar) gesetzt, was verhindert, dass neue Pods auf diesem Knoten bereitgestellt werden. Beim Entleeren werden außerdem Pods vom Knoten gelöscht. Zulässige Werte liegen zwischen 1 und 180. Der Standardwert ist 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
@@ -171,7 +176,11 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
 Nächste Schritte:
   - Wiederholen Sie den Aktualisierungsprozess für andere Cluster.
   - Informieren Sie die Entwickler, die im Cluster arbeiten, damit diese ihre `kubectl`-CLI auf die Version des Kubernetes-Masters aktualisieren können.
-  - Wenn im Kubernetes-Dashboard keine Nutzungsdiagramme angezeigt werden, [löschen Sie den Pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs). 
+  - Wenn im Kubernetes-Dashboard keine Nutzungsdiagramme angezeigt werden, [löschen Sie den Pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
@@ -181,8 +190,17 @@ Nächste Schritte:
 ## Maschinentypen aktualisieren
 {: #machine_type}
 
-Sie können die Maschinentypen aktualisieren, die in den Workerknoten verwendet werden, indem Sie neue Workerknoten hinzufügen und alte entfernen. Wenn Sie zum Beispiel über virtuelle Workerknoten auf nicht mehr verwendeten Maschinen mit `u1c` oder `b1c` in den jeweiligen Namen verfügen, erstellen Sie Workerknoten, die Maschinentypen mit `u2c` oder `b2c` in den Namen verwenden.
+Sie können die Maschinentypen der Workerknoten aktualisieren, indem Sie neue Workerknoten hinzufügen und alte entfernen. Wenn Sie zum Beispiel über virtuelle Workerknoten auf nicht mehr verwendeten Maschinen mit `u1c` oder `b1c` in den jeweiligen Namen verfügen, erstellen Sie Workerknoten, die Maschinentypen mit `u2c` oder `b2c` in den Namen verwenden.
 {: shortdesc}
+
+Vorbemerkungen:
+- [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
+- Wenn Sie Daten auf dem Workerknoten speichern, werden die Daten gelöscht, wenn sie nicht [außerhalb des Workerknotens gespeichert sind](cs_storage.html#storage).
+
+
+**Achtung**: Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Die Daten werden gelöscht, wenn sie nicht [außerhalb des Pods gespeichert werden](cs_storage.html#storage).
+
+
 
 1. Notieren Sie die Namen und Standorte der Workerknoten, die aktualisiert werden sollen.
     ```
@@ -196,14 +214,14 @@ Sie können die Maschinentypen aktualisieren, die in den Workerknoten verwendet 
     ```
     {: pre}
 
-3. Fügen Sie Workerknoten mit dem Befehl [bx cs worker-add](cs_cli_reference.html#cs_worker_add) hinzu. Geben Sie einen Maschinentyp an. 
+3. Fügen Sie Workerknoten mit dem Befehl [bx cs worker-add](cs_cli_reference.html#cs_worker_add) hinzu. Geben Sie einen Maschinentyp an.
 
     ```
     bx cs worker-add --cluster <clustername> --machine-type <maschinentyp> --number <anzahl_der_workerknoten> --private-vlan <private_vlan-id> --public-vlan <öffentliche_vlan-id>
     ```
     {: pre}
 
-4. Überprüfen Sie, dass die Workerknoten hinzugefügt wurden. 
+4. Überprüfen Sie, dass die Workerknoten hinzugefügt wurden.
 
     ```
     bx cs workers <clustername>
@@ -218,6 +236,13 @@ Sie können die Maschinentypen aktualisieren, die in den Workerknoten verwendet 
     {: pre}
 
 6. Wiederholen Sie diese Schritte, um andere Workerknoten auf unterschiedliche Maschinentypen zu aktualisieren.
+
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Tecnologia {{site.data.keyword.containerlong_notm}}
 
@@ -59,8 +61,8 @@ ambienti standardizzati alle distribuzioni di sviluppo e produzione. Il runtime 
   </ul>
   </dd>
 
+<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.</p>
 
-  
 <p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Impara come Docker e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></p>
 
 </dl>
@@ -105,9 +107,9 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 <dt>Applicazione</dt>
 <dd>Un'applicazione può far riferimento a un'applicazione completa o a un componente di un'applicazione. Potresti distribuire i componenti di un'applicazione in pod o nodi di lavoro separati.</dd>
 
+<p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le risorse Kubernetes.</p>
 
-  
-<p>Pronto per approfondire le informazioni su Kubernetes? </p>
+<p>Pronto per approfondire le informazioni su Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplia la tua conoscenza della terminologia con l'esercitazione Creazione dei cluster</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></li></ul>
 
@@ -132,12 +134,15 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <dd>Ogni nodo di lavoro è una macchina fisica (bare metal) o una macchina virtuale che viene eseguita su hardware fisico nell'ambiente cloud. Quando esegui il provisioning di un nodo di lavoro, determini le risorse disponibili per i contenitori ospitati su quel nodo di lavoro. Per impostazione predefinita, i tuoi nodi di lavoro sono configurati con un motore Docker gestito da {{site.data.keyword.IBM_notm}}, risorse di calcolo separate, collegamento di rete e un servizio di volume. Le funzioni di sicurezza integrate forniscono isolamento, funzionalità di gestione delle risorse e conformità di sicurezza dei nodi di lavoro.</dd>
 </dl>
 
-![{{site.data.keyword.containerlong_notm}} - Architettura Kubernetes](images/cs_org_ov.png)
-Figura. Architettura {{site.data.keyword.containershort_notm}}
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+ <figcaption>{{site.data.keyword.containershort_notm}} architecture</figcaption>
+</figure> 
+</p>
 
 Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](cs_integrations.html#integrations).
 
 
 <br />
-
 

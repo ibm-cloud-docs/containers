@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,12 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Exposition d'application avec des services NodePort
 {: #nodeport}
 
-Rendez votre application conteneurisée accessible sur Internet en utilisant l'adresse IP publique de n'importe quel noeud worker dans un cluster Kubernetes et en exposant un port de noeud. Utilisez cette option pour tester {{site.data.keyword.containerlong}} et l'accès public à court terme.
+Rendez votre application conteneurisée accessible sur Internet en utilisant l'adresse IP publique de n'importe quel noeud worker dans un cluster Kubernetes et en exposant un port de noeud (NodePort). Utilisez cette option pour tester {{site.data.keyword.containerlong}} et pour un accès public à court terme.
 {:shortdesc}
 
 ## Gestion de trafic réseau à l'aide de services NodePort
@@ -53,9 +55,9 @@ Le diagramme suivant montre comment la communication est dirigée vers une appli
 Vous pouvez exposer votre application en tant que service Kubernetes NodePort pour les clusters gratuits ou standard.
 {:shortdesc}
 
-Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d'application Kubernetes intitulé [Guestbook ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml).
+Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d'application Kubernetes intitulé [Guestbook ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/). **Remarque** : Dans l'exemple Guestbook, une section de service front-end existe déjà dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
+1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/). **Remarque** : Dans l'exemple Guestbook, il existe une section de service front-end dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
 
     Exemple :
 
@@ -78,13 +80,14 @@ Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d
     {: codeblock}
 
     <table>
+    <caption>Description des composants du service NodePort</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants de la section service NodePort</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Remplacez <code><em>&lt;my-nodeport-service&gt;</em></code> par le nom de votre service NodePort.</td>
+    <td>Remplacez <code><em>&lt;my-nodeport-service&gt;</em></code> par le nom de votre service NodePort.<p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des ressources Kubernetes.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -100,7 +103,7 @@ Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>Facultatif : Remplacez <code><em>&lt;31514&gt;</em></code> par un port de noeud compris entre 30000 et 32767. Ne spécifiez pas un port de noeud déjà utilisé par un autre service. Si aucune valeur NodePort n'est affectée, une valeur Nodeport aléatoire est affectée pour vous.<br><br>Si vous désirez spécifier un port de noeud et savoir lesquels sont déjà utilisés, vous pouvez utiliser la commande suivante : <pre class="pre"><code>kubectl get svc</code></pre>Les ports de noeud utilisés figurent sous la zone **Ports**.</td>
+     <td>Facultatif : Remplacez <code><em>&lt;31514&gt;</em></code> par un port de noeud compris entre 30000 et 32767. Ne spécifiez pas un port de noeud déjà utilisé par un autre service. Si aucune valeur NodePort n'est affectée, une valeur Nodeport aléatoire est affectée pour vous.<br><br>Pour spécifier un port de noeud et voir lesquels sont déjà utilisés, vous pouvez utiliser la commande suivante : <pre class="pre"><code>kubectl get svc</code></pre><p>Les ports de noeud utilisés figurent sous la zone **Ports**.</p></td>
      </tr>
      </tbody></table>
 
@@ -153,7 +156,6 @@ Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de
     {: screen}
 
     Dans cet exemple, la valeur de NodePort est `30872`.</br>
-    **Remarque :** si la section **Endpoints** affiche `<none>`, vérifiez que les valeurs `<selectorkey>` et `<selectorvalue>` que vous avez utilisées dans la section `spec.selector` du service NodePort sont identiques à la paire clé/valeur que vous avez utilisée dans la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
+    **Remarque :** si la section **Endpoints** affiche `<none>`, vérifiez les éléments `<selectorkey>` et `<selectorvalue>` que vous avez utilisés dans la section `spec.selector` du service NodePort. Assurez-vous qu'ils sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
 
 3.  Composez l'URL avec l'une des adresses IP publiques de noeud worker et la valeur NodePort. Exemple : `http://192.0.2.23:30872`
-

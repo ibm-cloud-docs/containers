@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,11 +15,14 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
+
 # Pourquoi utiliser {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
 {{site.data.keyword.containerlong}} propose des outils puissants en combinant les technologies Docker et Kubernetes, une expérience utilisateur intuitive et une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul.
 {:shortdesc}
+
 
 ## Avantages de l'utilisation du service
 {: #benefits}
@@ -34,6 +37,7 @@ Les clusters sont déployés sur des hôtes de calcul qui fournissent des capaci
 |Surveillance en continu de l'état de santé du cluster|<ul><li>Utilisez le tableau de bord du cluster pour déterminer rapidement et gérer l'état de santé de votre cluster, des noeuds worker et des déploiements de conteneurs.</li><li>Accédez à des métriques de consommation détaillées en utilisant {{site.data.keyword.monitoringlong}} et élargissez rapidement votre cluster pour répondre aux charges de travail.</li><li>Examinez les informations de consignation à l'aide d'{{site.data.keyword.loganalysislong}} pour voir les activités détaillées du cluster.</li></ul>|
 |Exposition sécurisée des applications au public|<ul><li>Sélectionnez une adresse IP publique, une route fournie par {{site.data.keyword.IBM_notm}} ou votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
 |Intégration de services {{site.data.keyword.Bluemix_notm}}|<ul><li>Vous pouvez ajouter des fonctionnalités supplémentaires à votre application via l'intégration de services {{site.data.keyword.Bluemix_notm}}, tels que les API Watson, Blockchain, services de données ou Internet of Things.</li></ul>|
+{: caption="Avantages d'{{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 
 
@@ -46,9 +50,9 @@ Les clusters sont déployés sur des hôtes de calcul qui fournissent des capaci
 Vous pouvez exécuter {{site.data.keyword.containershort_notm}} dans {{site.data.keyword.Bluemix_notm}} Public ou Dedicated, dans {{site.data.keyword.Bluemix_notm}} Private ou dans une configuration hybride.
 {:shortdesc}
 
-Consultez les informations suivantes pour connaître les différences entre ces configurations d'{{site.data.keyword.containershort_notm}}.
 
 <table>
+<caption>Différences entre les configurations d'{{site.data.keyword.containershort_notm}}</caption>
 <col width="22%">
 <col width="78%">
  <thead>
@@ -59,25 +63,25 @@ Consultez les informations suivantes pour connaître les différences entre ces 
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>Avec {{site.data.keyword.Bluemix_notm}} Public sur du [matériel partagé ou dédié ou sur des machines bare metal](cs_clusters.html#shared_dedicated_node), vous pouvez héberger vos applications dans des clusters sur le cloud à l'aide d'{{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} sur {{site.data.keyword.Bluemix_notm}} Public fournit des outils performants en combinant les technologies de Docker et Kubernetes, une expérience utilisateur intuitive, ainsi qu'une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul.<br><br>Pour plus d'informations, voir [Technologie d'{{site.data.keyword.containershort_notm}}](cs_tech.html#ibm-cloud-container-service-technology).
+ <td>Avec {{site.data.keyword.Bluemix_notm}} Public sur du [matériel partagé ou dédié ou sur des machines bare metal](cs_clusters.html#shared_dedicated_node), vous pouvez héberger vos applications dans des clusters sur le cloud à l'aide d'{{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} sur {{site.data.keyword.Bluemix_notm}} Public fournit des outils performants en combinant les technologies de Docker et Kubernetes, une expérience utilisateur intuitive, ainsi qu'une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul.<br><br>Pour plus d'informations, voir [Technologie d'{{site.data.keyword.containershort_notm}}](cs_tech.html).
  </td>
  </tr>
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Dedicated
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Dedicated offre les mêmes fonctions qu'{{site.data.keyword.containershort_notm}} sur le cloud que {{site.data.keyword.Bluemix_notm}} Public. Cependant, avec un compte {{site.data.keyword.Bluemix_notm}} Dedicated, les [ressources physiques disponibles sont dédiées exclusivement à votre cluster](cs_clusters.html#shared_dedicated_node) et ne sont pas partagées par d'autres clients {{site.data.keyword.IBM_notm}}. Vous pouvez opter pour la mise en place d'un environnement {{site.data.keyword.Bluemix_notm}} Dedicated si vous avez besoin d'isoler votre cluster et les autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez. <br><br>Pour plus d'informations, voir [Initiation aux clusters dans {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated offre les mêmes fonctions qu'{{site.data.keyword.containershort_notm}} sur le cloud que {{site.data.keyword.Bluemix_notm}} Public. Cependant, avec un compte {{site.data.keyword.Bluemix_notm}} Dedicated, les [ressources physiques disponibles sont dédiées exclusivement à votre cluster](cs_clusters.html#shared_dedicated_node) et ne sont pas partagées par d'autres clients {{site.data.keyword.IBM_notm}}. Vous pouvez opter pour la mise en place d'un environnement {{site.data.keyword.Bluemix_notm}} Dedicated si vous avez besoin d'isoler votre cluster et les autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez.<br><br>Pour plus d'informations, voir [Initiation aux clusters dans {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
  </td>
  </tr>
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Private est une plateforme applicative pouvant être installée en local sur vos propres machines. Vous pouvez choisir d'utiliser {{site.data.keyword.containershort_notm}} dans {{site.data.keyword.Bluemix_notm}} Private lorsque vous devez développer et gérer des applications conteneurisées sur site dans votre propre environnement contrôlé et protégé derrière un pare-feu. <br><br>Pour plus d'informations, voir [les informations produit {{site.data.keyword.Bluemix_notm}} Private ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) et la [documentation associée ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ <td>{{site.data.keyword.Bluemix_notm}} Private est une plateforme applicative pouvant être installée en local sur vos propres machines. Vous pouvez choisir d'utiliser {{site.data.keyword.containershort_notm}} dans {{site.data.keyword.Bluemix_notm}} Private lorsque vous devez développer et gérer des applications conteneurisées sur site dans votre propre environnement contrôlé et protégé derrière un pare-feu. <br><br>Pour plus d'informations, voir les [informations produit d'{{site.data.keyword.Bluemix_notm}} Private ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/private) ainsi que la [documentation associée ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
  </td>
  </tr>
  <tr>
  <td>Configuration hybride
  </td>
- <td>Une configuration hybride est l'utiliation combinée de services qui s'exécutent dans l'environnement {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et d'autres services exécutés sur site, par exemple une application dans l'environnement {{site.data.keyword.Bluemix_notm}} Private. Exemples de configuration hybride : <ul><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Public, mais en connectant ce cluster à une base de données sur site.</li><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Private et déploiement d'une application dans ce cluster. Cependant, cette application peut utiliser un service {{site.data.keyword.ibmwatson}}, tel que {{site.data.keyword.toneanalyzershort}}, dans l'environnement {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>Pour activer la communication entre les services qui s'exécutent dans {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et les services qui s'exécutent sur site, vous devez [configurer une connexion VPN](cs_vpn.html).
+ <td>Une configuration hybride est l'utilisation combinée de services qui s'exécutent dans l'environnement {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et d'autres services exécutés sur site, par exemple une application dans l'environnement {{site.data.keyword.Bluemix_notm}} Private. Exemples de configuration hybride : <ul><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Public, mais en connectant ce cluster à une base de données sur site.</li><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Private et déploiement d'une application dans ce cluster. Cependant, cette application peut utiliser un service {{site.data.keyword.ibmwatson}}, tel que {{site.data.keyword.toneanalyzershort}}, dans l'environnement {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>Pour activer la communication entre les services qui s'exécutent dans {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et les services qui s'exécutent sur site, vous devez [configurer une connexion VPN](cs_vpn.html).
  </td>
  </tr>
  </tbody>
@@ -94,11 +98,7 @@ Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters stand
 
 |Caractéristiques|Clusters gratuits|Clusters standard|
 |---------------|-------------|-----------------|
-|[Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Accès à des applications réseau publiques par un service NodePort avec une adresse IP instable](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Gestion de l'accès utilisateur](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Accès au service {{site.data.keyword.Bluemix_notm}} depuis le cluster et les applications](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Espace disque sur un noeud worker pour stockage non persistant](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+|[Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network)
 |[Stockage de fichiers NFS persistant avec volumes](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques ou privées par un service d'équilibreur de charge avec une adresse IP stable](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques par un service Ingress avec une adresse IP stable et une URL personnalisable](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
@@ -107,6 +107,7 @@ Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters stand
 |[Option permettant de mettre à disposition vos noeuds worker sur des serveurs physiques (bare metal)](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Option permettant de mettre à disposition des noeuds worker bare metal avec la fonction de calcul sécurisé](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Disponible dans {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+{: caption="Caractéristiques des clusters gratuits et standard" caption-side="top"}
 
 <br />
 
@@ -114,8 +115,7 @@ Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters stand
 
 
 {: #responsibilities}
-**Remarque** : vous recherchez quelles sont vos responsabilités et les dispositions relatives aux conteneurs quand vous utilisez le service ?
+**Remarque** : vous recherchez quelles sont vos responsabilités et les dispositions relatives à {{site.data.keyword.containerlong}} quand vous utilisez le service ?
 
 {: #terms}
 Voir [Responsabilités liées à l'utilisation d'{{site.data.keyword.containershort_notm}}](cs_responsibilities.html).
-

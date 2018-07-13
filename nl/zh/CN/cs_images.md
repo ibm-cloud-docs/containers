@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # 基于映像构建容器
@@ -46,7 +48,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 设置映像注册表后，集群用户可以使用映像将其应用程序部署到集群。
 
-
+使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
 <br />
 
@@ -76,7 +78,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 每个令牌必须存储在 Kubernetes `imagePullSecret` 中，才能在部署容器化应用程序时供 Kubernetes 集群访问。创建集群时，{{site.data.keyword.containershort_notm}} 会自动将全局（IBM 提供的公共映像）和区域注册表的令牌存储在 Kubernetes 映像拉取私钥中。映像拉取私钥会添加到 `default` Kubernetes 名称空间、该名称空间的 `ServiceAccount` 中的缺省私钥列表以及 `kube-system` 名称空间。
 
-**注**：使用此初始设置时，可以通过 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间中可用的任何映像，将容器部署到集群的**缺省**名称空间。如果要将容器部署到集群的其他名称空间，或者如果要使用存储在其他 {{site.data.keyword.Bluemix_notm}} 区域或其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，您必须[为集群创建自己的 imagePullSecret](#other)。
+**注**：使用此初始设置时，可以通过 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间中可用的任何映像，将容器部署到集群的**缺省**名称空间。要将容器部署到集群的其他名称空间，或者要使用存储在其他 {{site.data.keyword.Bluemix_notm}} 区域或其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，您必须[为集群创建自己的 imagePullSecret](#other)。
 
 开始之前：
 1. [在 {{site.data.keyword.Bluemix_notm}} Public 或 {{site.data.keyword.Bluemix_dedicated_notm}} 的 {{site.data.keyword.registryshort_notm}} 中设置名称空间并将映像推送到此名称空间](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
@@ -114,14 +116,14 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 3.  在集群中创建部署。
 
     ```
-    kubectl apply -f mydeployment.yaml
+        kubectl apply -f mydeployment.yaml
     ```
     {: pre}
 
     **提示：**您还可以部署现有配置文件，如 IBM 提供的其中一个公共映像。此示例使用美国南部区域中的 **ibmliberty** 映像。
 
     ```
-    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
+        kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
     ```
     {: pre}
 
@@ -183,9 +185,14 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
         ```
    {: pre}
 
-3. 将 imagePulSecret 从 `default` 名称空间复制到您选择的名称空间。新 imagePullSecret 的名称为 `bluemix-<namespace_name>-secret-regional`。
+3. 将 imagePulSecret 从 `default` 名称空间复制到您选择的名称空间。新 imagePullSecret 的名称为 `bluemix-<namespace_name>-secret-regional` 和 `bluemix-<namespace_name>-secret-international`。
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+   ```
+   {: pre}
+   
+   ```
+   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
 
@@ -201,14 +208,14 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 ### 创建 imagePullSecret 以访问其他 {{site.data.keyword.Bluemix_notm}} 区域和帐户中的映像
 {: #other_regions_accounts}
 
-要访问其他 {{site.data.keyword.Bluemix_notm}} 区域或帐户中的映像，必须创建注册表令牌，并将凭证保存在自己的 imagePullSecret 中。
+要访问其他 {{site.data.keyword.Bluemix_notm}} 区域或帐户中的映像，必须创建注册表令牌，并将凭证保存在 imagePullSecret 中。
 {: shortdesc}
 
 1.  如果还没有令牌，请[为要访问的注册表创建令牌](/docs/services/Registry/registry_tokens.html#registry_tokens_create)。
 2.  列出您的 {{site.data.keyword.Bluemix_notm}} 帐户中的令牌。
 
     ```
-    bx cr token-list
+        bx cr token-list
     ```
     {: pre}
 
@@ -216,7 +223,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 4.  检索令牌的值。将 <em>&lt;token_ID&gt;</em> 替换为在上一步中检索到的令牌的标识。
 
     ```
-    bx cr token-get <token_id>
+        bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -225,11 +232,12 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 5.  创建 Kubernetes 私钥以用于存储令牌信息。
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
+    <caption>了解此命令的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
@@ -260,11 +268,10 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     </tr>
     </tbody></table>
 
-6.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建 imagePullSecret 的名称空间的名称。
-
+6.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建 imagePullSecret 的名称空间。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+        kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -273,7 +280,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 ### 访问存储在其他专用注册表中的映像
 {: #private_images}
 
-如果您已经拥有要使用的专用注册表，那么必须将相应的注册表凭证存储在 Kubernetes imagePullSecret 中，并在配置文件中引用此私钥。
+如果您已经拥有专用注册表，那么必须将相应的注册表凭证存储在 Kubernetes imagePullSecret 中，并在配置文件中引用此私钥。
 {:shortdesc}
 
 开始之前：
@@ -286,11 +293,12 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 1.  创建 Kubernetes 私钥以用于存储专用注册表凭证。
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
+        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
+    <caption>了解此命令的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
@@ -325,7 +333,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+        kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -348,7 +356,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 ### 在 pod 部署中引用 `imagePullSecret`
 {: #pod_imagePullSecret}
 
-在 pod 部署中引用 imagePullSecret 时，此引用仅对该 pod 有效，而不能在名称空间中的各 pod 之间共享。
+在 pod 部署中引用 imagePullSecret 时，imagePullSecret 仅对该 pod 有效，而不能在名称空间中的各 pod 之间共享。
 {:shortdesc}
 
 1.  创建名为 `mypod.yaml` 的 pod 配置文件。
@@ -385,6 +393,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     {: codeblock}
 
     <table>
+    <caption>了解 YAML 文件的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
     </thead>
@@ -429,7 +438,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
    kubectl describe serviceaccount default -n <namespace_name>
    ```
    {: pre}
-   **Image pull secrets** 条目中显示 `<none>` 时，说明不存在 imagePullSecret。  
+   **Image pull secrets** 条目中显示 `<none>` 时，说明不存在任何 imagePullSecret。  
 2. 将 imagePulldSecret 添加到 default 服务帐户。
    - **未定义 imagePullSecret 时添加 imagePullSecret：**
        ```

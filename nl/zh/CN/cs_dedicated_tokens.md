@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,9 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
+
 # 为 {{site.data.keyword.Bluemix_dedicated_notm}} 映像注册表创建 {{site.data.keyword.registryshort_notm}} 令牌
 {: #cs_dedicated_tokens}
 
@@ -25,7 +28,7 @@ lastupdated: "2018-4-20"
 1.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。
 
     ```
-    bx login -a api.<dedicated_domain>
+        bx login -a api.<dedicated_domain>
     ```
     {: pre}
 
@@ -46,7 +49,7 @@ lastupdated: "2018-4-20"
 4.  为当前会话请求永久注册表标记。将 <dedicated_domain> 替换为 {{site.data.keyword.Bluemix_dedicated_notm}} 环境的域。此令牌将授予对当前名称空间中的映像的访问权。
 
     ```
-    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
+        curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
     ```
     {: pre}
 
@@ -62,21 +65,21 @@ lastupdated: "2018-4-20"
 5.  验证 Kubernetes 私钥。
 
     ```
-    kubectl describe secrets
+        kubectl describe secrets
     ```
     {: pre}
 
-    您可以使用此私钥来处理 IBM {{site.data.keyword.Bluemix_notm}} Container Service。
+    您可以使用此私钥来处理 {{site.data.keyword.containerlong}}。
 
 6.  创建 Kubernetes 私钥以用于存储令牌信息。
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
-    <caption>表 1. 了解此命令的组成部分</caption>
+    <caption>了解此命令的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
@@ -109,7 +112,7 @@ lastupdated: "2018-4-20"
 
 7.  创建引用 imagePullSecret 的 pod。
 
-    1.  打开首选编辑器，并创建名为 mypod.yaml 的 pod 配置脚本。
+    1.  打开首选文本编辑器，并创建名为 mypod.yaml 的 pod 配置脚本。
     2.  定义要用于访问注册表的 pod 和 imagePullSecret。要使用名称空间中的专用映像，请使用以下内容：
 
 
@@ -121,14 +124,14 @@ lastupdated: "2018-4-20"
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>表 2. 了解 YAML 文件的组成部分</caption>
+        <caption>了解 YAML 文件的组成部分</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
         </thead>
@@ -163,7 +166,7 @@ lastupdated: "2018-4-20"
     4.  在集群中创建部署。
 
           ```
-          kubectl apply -f mypod.yaml
+                    kubectl apply -f mypod.yaml
           ```
           {: pre}
 

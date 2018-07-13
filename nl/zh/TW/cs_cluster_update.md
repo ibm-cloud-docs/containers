@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # 更新叢集和工作者節點
@@ -30,7 +33,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。您一律要負責將工作者節點保持為最新。進行更新時，Kubernetes 主節點會在工作者節點之前先更新。
 
-依預設，Kubernetes 主節點限制了更新 Kubernetes API 伺服器的能力，其限制為不超過現行版本兩個次要版本。例如，如果現行 Kubernetes API 伺服器版本是 1.5，而您要更新至 1.8，則必須先更新至 1.7。您可以強制發生更新，但更新超過兩個次要版本可能會造成非預期的結果。如果您的叢集是執行不受支援的 Kubernetes 版本，則可能需要強制更新。
+依預設，Kubernetes 主節點限制了更新 Kubernetes API 伺服器的能力，其限制為不超過現行版本兩個次要版本。例如，如果現行 Kubernetes API 伺服器版本是 1.7，而您要更新至 1.10，則必須先更新至 1.8 或 1.9。您可以強制進行更新，但更新三個以上次要版本可能會造成非預期的結果。如果您的叢集是執行不受支援的 Kubernetes 版本，則可能需要強制更新。
 
 下圖顯示您可以採取來更新主節點的處理程序。
 
@@ -55,13 +58,14 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 ## 更新工作者節點
 {: #worker_node}
 
-您收到更新工作者節點的通知。這代表什麼意思？當 Kubernetes API 伺服器及其他 Kubernetes 主節點元件的安全更新和修補程式就緒之後，您需要確定工作者節點保持同步。
+
+您收到更新工作者節點的通知。這代表什麼意思？當 Kubernetes API 伺服器及其他 Kubernetes 主節點元件的安全更新和修補程式備妥之後，您需要確定工作者節點保持同步。
 {: shortdesc}
 
 工作者節點 Kubernetes 版本不得高於在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本。開始之前，請[更新 Kubernetes 主節點](#master)。
 
-<ul>**注意**：</br>
-<li>更新工作者節點可能會導致應用程式及服務關閉。</li>
+**注意**：
+<ul><li>更新工作者節點可能會導致應用程式及服務關閉。</li>
 <li>如果資料未儲存在 Pod 外，便會刪除資料。</li>
 <li>在您的部署中，使用[抄本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas)，在可用節點上重新排定 Pod。</li></ul>
 
@@ -89,7 +93,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     範例：
 
     ```
-    apiVersion: v1
+        apiVersion: v1
     kind: ConfigMap
     metadata:
       name: ibm-cluster-update-configuration
@@ -115,6 +119,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     ```
     {:pre}
   <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為參數，第二欄則為符合的說明。">
+    <caption>ConfigMap 元件</caption>
     <thead>
       <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解元件</th>
     </thead>
@@ -150,10 +155,10 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 3. 從 GUI 或藉由執行 CLI 指令更新您的工作者節點。
   * 若要從 {{site.data.keyword.Bluemix_notm}} 儀表板更新，請導覽至叢集的`工作者節點`區段，然後按一下`更新工作者`。
-  * 若要取得工作者節點 ID，請執行 `bx cs wokers<cluster_name_or_ID>`。如果您選取多個工作者節點，則工作者節點會放入佇列以便進行更新評估。如果評估之後認為它們已就緒，則會根據配置中的規則來更新。
+  * 若要取得工作者節點 ID，請執行 `bx cs wokers<cluster_name_or_ID>`。如果您選取多個工作者節點，則工作者節點會放入佇列以便進行更新評估。如果評估之後認為它們已備妥，則會根據配置中的規則來更新。
 
     ```
-    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+        bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -172,6 +177,10 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
   - 對其他叢集重複更新程序。
   - 通知在叢集內工作的開發人員，將 `kubectl` CLI 更新至 Kubernetes 主節點的版本。
   - 如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](cs_troubleshoot_health.html#cs_dashboard_graphs)。
+  
+
+
+
 
 
 <br />
@@ -181,8 +190,17 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 ## 更新機型
 {: #machine_type}
 
-您可以藉由新增工作者節點及移除舊的工作者節點，來更新工作者節點中使用的機型。例如，假設您在專用的機型上有虛擬工作者節點，且機型的名稱中有 `u1c` 或 `b1c`，請建立使用名稱中有 `u2c` 或 `b2c` 的機型的工作者節點。
+您可以藉由新增工作者節點及移除舊的工作者節點，來更新工作者節點的機型。例如，假設您在專用的機型上有虛擬工作者節點，且機型的名稱中有 `u1c` 或 `b1c`，請建立使用名稱中有 `u2c` 或 `b2c` 的機型的工作者節點。
 {: shortdesc}
+
+開始之前：
+- [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
+- 如果您在工作者節點上儲存資料，若資料不是[儲存在工作者節點外，即會刪除資料](cs_storage.html#storage)。
+
+
+**注意**：更新工作者節點可能會導致應用程式及服務關閉。如果[資料未儲存在 Pod 外](cs_storage.html#storage)，即會刪除資料。
+
+
 
 1. 記下要更新的工作者節點的名稱及位置。
     ```
@@ -192,8 +210,8 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 2. 檢視可用的機型。
     ```
-        bx cs machine-types <location>
-        ```
+    bx cs machine-types <location>
+    ```
     {: pre}
 
 3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 指令來新增工作者節點。請指定機型。
@@ -218,6 +236,13 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     {: pre}
 
 6. 重複這些步驟，將其他工作者節點升級至不同機型。
+
+
+
+
+
+
+
 
 
 

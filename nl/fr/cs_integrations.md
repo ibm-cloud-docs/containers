@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,8 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Intégration de services
 {: #integrations}
 
@@ -25,6 +27,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services d'application
 <table summary="Récapitulatif de l'accessibilité">
+<caption>Services d'application</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -45,6 +48,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services DevOps
 <table summary="Récapitulatif de l'accessibilité">
+<caption>Services DevOps</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -77,6 +81,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services de consignation et de surveillance
 <table summary="Récapitulatif de l'accessibilité">
+<caption>Services de consignation et de surveillance</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -102,18 +107,18 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> permet de surveiller les performances de l'infrastructure et des applications à l'aide d'une interface graphique qui découvre et mappe automatiquement vos applications. Istana capture toutes les demandes adressées à vos applications, ce qui vous permet d'identifier et de résoudre les problèmes et d'effectuer une analyse de la cause première pour éviter leur récurrence. Pour en savoir plus, consultez l'article de blogue sur le <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">déploiement d'Istana dans {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> permet de surveiller les performances de l'infrastructure et des applications à l'aide d'une interface graphique qui découvre et mappe automatiquement vos applications. Istana capture toutes les demandes adressées à vos applications, que vous pouvez utiliser pour identifier et résoudre les problèmes et effectuer une analyse de leur cause première pour éviter qu'ils ne se reproduisent. Pour en savoir plus, consultez l'article de blogue sur le <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">déploiement d'Istana dans {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus est un outil à code source ouvert de surveillance, de consignation et d'alerte conçu spécifiquement pour Kubernetes afin d'extraire des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. Les informations d'utilisation de l'UC, de la mémoire et du réseau de tous les conteneurs en activité sont collectées et peuvent être utilisées dans des interrogations ou des alertes personnalisées pour surveiller les performances et les charges de travail de votre cluster.
+<td>Prometheus est un outil open source de surveillance, de consignation et d'alerte spécialement conçu pour Kubernetes. Prometheus extrait des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. L'activité de l'UC, de la mémoire, des E-S et du réseau est collectée pour chaque conteneur s'exécutant dans un cluster. Vous pouvez utiliser les données collectées dans des demandes ou des alertes personnalisées pour surveiller les performances et les charges de travail dans votre cluster.
 
 <p>Pour utiliser Prometheus, suivez les <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">instructions CoreOS <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</p>
 </td>
 </tr>
 <tr>
 <td>Sematext</td>
-<td>Vous pouvez afficher les métriques et les journaux de vos applications conteneurisées à l'aide de <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour plus d'informations, voir <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+<td>Vous pouvez afficher les métriques et les journaux de vos applications conteneurisées à l'aide de <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour plus d'informations, voir la rubrique sur <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">la surveillance et la consignation des conteneurs avec Sematext <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -133,6 +138,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services de sécurité
 <table summary="Récapitulatif de l'accessibilité">
+<caption>Services de sécurité</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -173,6 +179,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services de stockage
 <table summary="Récapitulatif de l'accessibilité">
+<caption>Services de stockage</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -180,6 +187,10 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td>Heptio Ark</td>
+  <td>Vous pouvez utiliser <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour effectuer la sauvegarde et la restauration de vos ressources de cluster et vos volumes persistants. Pour plus d'informations, voir <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">les cas d'utilisation pour la reprise après incident et la migration de cluster <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> de Heptio Ark.</td>
+</tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>Les données stockées avec {{site.data.keyword.cos_short}} sont chiffrées et disséminées entre plusieurs emplacements géographiques. Elles sont accessibles via HTTP en utilisant une API REST. Vous pouvez utiliser l'[image ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore/index.html) pour configurer le service de sorte à effectuer des sauvegardes ponctuelles ou planifiées pour les données figurant dans vos clusters. Pour obtenir des informations générales sur le service, voir la <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">documentation d'{{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
@@ -215,7 +226,7 @@ Avant de commencer :
 
 **Remarque :**
 <ul><ul>
-<li>Vous ne pouvez ajouter que des services {{site.data.keyword.Bluemix_notm}} qui prennent en charge les clés de service. Si le service ne prend pas en charge les clés de service, voir [Utilisation des services {{site.data.keyword.Bluemix_notm}} avec des applications externes](/docs/apps/reqnsi.html#accser_external).</li>
+<li>Vous pouvez ajouter uniquement des services {{site.data.keyword.Bluemix_notm}} qui prennent en charge les clés de service. Si le service ne prend pas en charge les clés de service, voir [Utilisation des services {{site.data.keyword.Bluemix_notm}} avec des applications externes](/docs/apps/reqnsi.html#accser_external).</li>
 <li>Le cluster et les noeuds worker doivent être complètement déployés pour pouvoir ajouter un service.</li>
 </ul></ul>
 
@@ -245,7 +256,7 @@ Pour ajouter un service, procédez comme suit :
         ```
         {: pre}
 
-    -   Créez un nouvel espace de nom dans votre cluster.
+    -   Créez un espace de nom dans votre cluster.
 
         ```
         kubectl create namespace <namespace_name>
@@ -277,11 +288,7 @@ Pour ajouter un service, procédez comme suit :
     ```
     {: pre}
 
-
-Pour utiliser le service dans un pod qui est déployé dans le cluster, les utilisateurs du cluster peuvent accéder aux données d'identification du service {{site.data.keyword.Bluemix_notm}} en [montant la valeur confidentielle Kubernetes en tant que volume secret sur un pod.](cs_storage.html#app_volume_mount)
-
-
-
+Pour utiliser le service dans un pod qui est déployé dans le cluster, les utilisateurs du cluster doivent accéder aux données d'identification du service. Ils peuvent accéder aux données d'identification du service {{site.data.keyword.Bluemix_notm}} en [montant la valeur confidentielle de Kubernetes en tant que volume secret](#adding_app).
 
 <br />
 
@@ -335,9 +342,9 @@ Pour créer un alias Cloud Foundry pour l'instance de service :
 Des valeurs confidentielles  Kubernetes chiffrées sont utilisées pour stocker les informations détaillées du service {{site.data.keyword.Bluemix_notm}} et ses données d'identification, ainsi que pour permettre une communication sécurisée entre le service et le cluster.
 {:shortdesc}
 
-Les valeurs confidentielles Kubernetes permettent de stocker de manière sécurisée des informations sensibles, comme les noms des utilisateurs, leurs mots de passe ou leurs clés. Au lieu d'exposer des informations confidentielles via des variables d'environnement, ou directement dans le fichier Dockerfile, les utilisateurs de cluster peuvent monter des valeurs confidentielles sur un pod. Ces valeurs sont alors accessibles à un conteneur en cours d'exécution sur un pod.
+Les valeurs confidentielles Kubernetes permettent de stocker de manière sécurisée des informations sensibles, comme les noms des utilisateurs, leurs mots de passe ou leurs clés. Au lieu d'exposer des informations confidentielles via des variables d'environnement, ou directement dans le fichier Dockerfile, vous pouvez monter des valeurs confidentielles sur un pod. Ces valeurs sont alors accessibles à un conteneur en cours d'exécution sur un pod.
 
-Lorsque vous montez un volume secret sur votre pod, un fichier nommé binding est stocké dans le répertoire de montage du volume et contient toutes les informations et données d'identification dont vous avez besoin pour accéder au service {{site.data.keyword.Bluemix_notm}}.
+Lorsque vous montez un volume secret sur votre pod, un fichier nommé `binding` est stocké dans le répertoire de montage du volume. Le fichier `binding` comprend toutes les informations et données d'identification dont vous avez besoin pour accéder au service {{site.data.keyword.Bluemix_notm}}.
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster. Vérifiez que le service {{site.data.keyword.Bluemix_notm}} que vous souhaitez utiliser dans votre application
 a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administrateur du cluster.
@@ -398,6 +405,7 @@ a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administ
     {: codeblock}
 
     <table>
+    <caption>Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -463,9 +471,9 @@ a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administ
 
     
 
-9.  Lors de l'implémentation de votre application, configurez-la afin de rechercher le fichier de valeur confidentielle nommé **binding** sous le répertoire de montage, d'analyser le contenu JSON et de déterminer l'URL et les données d'identification du service pour accéder à votre service {{site.data.keyword.Bluemix_notm}}.
+9.  Configurez vos applications pour trouver le fichier de valeurs confidentielles `binding` dans le répertoire de montage, analyser le contenu JSON et déterminer l'URL et les données d'identification pour accéder à votre service {{site.data.keyword.Bluemix_notm}}.
 
-Vous pouvez à présent accéder aux informations détaillées et aux données d'identification du service {{site.data.keyword.Bluemix_notm}}. Pour utiliser votre service {{site.data.keyword.Bluemix_notm}}, vérifiez que votre application est configurée pour rechercher le fichier de la valeur confidentielle du service dans le répertoire de montage, analyser le contenu JSON et examiner les informations détaillées du service.
+Vous pouvez à présent accéder aux informations détaillées et aux données d'identification du service {{site.data.keyword.Bluemix_notm}}. Pour utiliser votre service {{site.data.keyword.Bluemix_notm}}, veillez à ce que votre application soit configurée pour rechercher le fichier de la valeur confidentielle du service dans le répertoire de montage, analyser le contenu JSON et examiner les informations détaillées du service.
 
 <br />
 
@@ -568,7 +576,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_
 {: #helm_links}
 
 * Pour utiliser la charte Helm strongSwan, voir [Configuration de la connectivité VPN avec la charte Helm du service VPN IPsec strongSwan](cs_vpn.html#vpn-setup).
-* Affichez les chartes Helm disponibles que vous pouvez utiliser avec {{site.data.keyword.Bluemix_notm}} dans l'interface graphique [Catalogue des chartes Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
+* Affichez les chartes Helm disponibles que vous pouvez utiliser avec {{site.data.keyword.Bluemix_notm}} dans l'interface graphique du [catalogue des chartes Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
 * Pour en savoir plus sur les commandes Helm utilisées pour configurer et gérer des chartes Helm, voir la <a href="https://docs.helm.sh/helm/" target="_blank">documentation Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.
 * Pour en savoir plus sur comment augmenter la vitesse de déploiement avec les chartes Helm de Kubernetes, voir [Increase deployment velocity with Kubernetes Helm Charts ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
@@ -626,7 +634,7 @@ Pour utiliser Weave Scope avec un cluster, procédez comme suit :
     ```
     {: screen}
 
-4.  Exécutez une commande d'acheminement de port pour accéder au service sur votre ordinateur. A présent que Weave Scope est configuré avec le cluster, pour accéder à Weave Scope la prochaine fois, vous pouvez lancer cette commande d'acheminement de port sans avoir à exécuter à nouveau la procédure de configuration précédente.
+4.  Exécutez une commande d'acheminement de port pour ouvrir le service sur votre ordinateur. La prochaine fois que vous accéderez à Weave Scope, vous pourrez exécuter cette commande d'acheminement de port sans avoir à compléter à nouveau les étapes de configuration précédentes.
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
@@ -637,7 +645,7 @@ Pour utiliser Weave Scope avec un cluster, procédez comme suit :
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}
@@ -650,5 +658,4 @@ Pour utiliser Weave Scope avec un cluster, procédez comme suit :
 [En savoir plus sur les fonctions Weave Scope ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
-
 

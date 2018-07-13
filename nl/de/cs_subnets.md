@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,25 +16,29 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Teilnetze für Cluster konfigurieren
 {: #subnets}
 
 Ändern Sie den Pool der verfügbaren, portierbaren, öffentlichen oder privaten IP-Adressen, indem Sie Ihrem Kubernetes-Cluster in {{site.data.keyword.containerlong}} Teilnetze hinzufügen.
 {:shortdesc}
 
-Sie können in {{site.data.keyword.containershort_notm}} stabile, portierbare IPs für Kubernetes-Services hinzufügen, indem Sie dem Cluster Teilnetze hinzufügen. In diesem Fall werden Teilnetze nicht mit Netzmasken verwendet, um Konnektivität zwischen mehreren Clustern zu erstellen. Stattdessen werden Teilnetze eingesetzt, um unveränderliche IPs für einen Service aus einem Cluster bereitzustellen, über die auf den Service zugegriffen werden kann.
+Sie können in {{site.data.keyword.containershort_notm}} stabile, portierbare IP-Adressen für Kubernetes-Services hinzufügen, indem Sie dem Cluster Teilnetze hinzufügen. In diesem Fall werden Teilnetze nicht mit Netzmasken verwendet, um Konnektivität zwischen mehreren Clustern zu erstellen. Stattdessen werden Teilnetze eingesetzt, um feste IP-Adressen für einen Service aus einem Cluster bereitzustellen, über die auf den Service zugegriffen werden kann.
 
 <dl>
   <dt>Das Erstellen eines Clusters schließt standardmäßig das Erstellen von Teilnetzen ein.</dt>
   <dd>Wenn Sie einen Standardcluster erstellen, stellt {{site.data.keyword.containershort_notm}} automatisch die folgenden Teilnetze bereit:
-    <ul><li>Ein portierbares öffentliches Teilnetz mit 5 öffentlichen IP-Adressen</li>
-      <li>Ein portierbares privates Teilnetz mit 5 privaten IP-Adressen</li></ul>
-Portierbare öffentliche und private IP-Adressen sind statisch und ändern sich nicht, wenn ein Workerknoten entfernt wird. Pro Teilnetz wird eine der portierbaren öffentlichen und eine der portierbaren privaten IP-Adressen für [Ingress-Lastausgleichsfunktionen für Anwendungen](cs_ingress.html) verwendet, mit denen Sie mehrere Apps in Ihrem Cluster zugänglich machen können. Die verbleibenden vier portierbaren öffentlichen und vier portierbaren privaten IP-Adressen können verwendet werden, um einzelne Apps für das öffentliche oder private Netz verfügbar zu machen, indem Sie einen [Lastausgleichsservice erstellen](cs_loadbalancer.html). </dd>
+    <ul><li>Ein primäres öffentliches Teilnetz, das während der Clustererstellung öffentliche IP-Adressen für Workerknoten festlegt.</li>
+    <li>Ein primäres privates Teilnetz, das während der Clustererstellung private IP-Adressen für Workerknoten festlegt.</li>
+    <li>Ein portierbares öffentliches Teilnetz, das fünf öffentliche IP-Adressen für Ingress-Netzservices und Netzservices für die Lastausgleichsfunktion bereitstellt.</li>
+    <li>Ein portierbares privates Teilnetz, das fünf private IP-Adressen für Ingress-Netzservices und Netzservices für die Lastausgleichsfunktion bereitstellt.</li></ul>
+      Portierbare öffentliche und private IP-Adressen sind statisch und ändern sich nicht, wenn ein Workerknoten entfernt wird. Für jedes Teilnetz wird eine portierbare öffentliche und eine portierbare private IP-Adresse für die standardmäßig verwendeten [Ingress-Lastausgleichsfunktionen für Anwendungen](cs_ingress.html) verwendet. Sie können die Ingress-Lastausgleichsfunktion für Anwendungen verwenden, um mehrere Apps in Ihrem Cluster zugänglich zu machen. Die verbleibenden vier portierbaren öffentlichen und vier portierbaren privaten IP-Adressen können verwendet werden, um einzelne Apps für das öffentliche oder private Netz verfügbar zu machen, indem Sie einen [Lastausgleichsservice erstellen](cs_loadbalancer.html).</dd>
   <dt>[Bestellen und Verwalten Ihrer eigenen Teilnetze](#custom)</dt>
-  <dd>Sie können vorhandene portierbare Teilnetze in Ihrem IBM Cloud Infrastructure-Konto (SoftLayer) bestellen und verwalten, statt die automatisch bereitgestellten Teilnetze zu verwenden. Verwenden Sie diese Option, um stabile statische IPs beizubehalten, obwohl Cluster entfernt oder erstellt werden, oder um größere Blöcke von IPs zu bestellen. Erstellen Sie zunächst ein Cluster ohne Teilnetze mithilfe des Befehls `cluster-create --no-subnet` und fügen Sie dann mit dem Befehl `cluster-subnet-add` das Teilnetz zum Cluster hinzu. </dd>
+  <dd>Sie können vorhandene portierbare Teilnetze in Ihrem IBM Cloud Infrastructure-Konto (SoftLayer) bestellen und verwalten, statt die automatisch bereitgestellten Teilnetze zu verwenden. Verwenden Sie diese Option, um stabile statische IP-Adressen beizubehalten, obwohl Cluster entfernt oder erstellt werden, oder um größere Blöcke von IP-Adressen zu bestellen. Erstellen Sie zunächst ein Cluster ohne Teilnetze mithilfe des Befehls `cluster-create --no-subnet` und fügen Sie dann mit dem Befehl `cluster-subnet-add` das Teilnetz zum Cluster hinzu. </dd>
 </dl>
 
-**Hinweis:** Portierbare öffentliche IP-Adressen werden monatlich berechnet. Wenn Sie nach der Bereitstellung Ihres Clusters portierbare öffentliche IP-Adressen entfernen, müssen Sie trotzdem die monatliche Gebühr bezahlen, auch wenn sie sie nur über einen kurzen Zeitraum genutzt haben. 
+**Hinweis:** Portierbare öffentliche IP-Adressen werden monatlich berechnet. Wenn Sie nach der Bereitstellung Ihres Clusters portierbare öffentliche IP-Adressen entfernen, müssen Sie trotzdem die monatliche Gebühr bezahlen, auch wenn sie sie nur über einen kurzen Zeitraum genutzt haben.
 
 ## Weitere Teilnetze für Ihren Cluster anfordern
 {: #request}
@@ -57,6 +61,7 @@ Gehen Sie wie folgt vor, um ein Teilnetz in einem IBM Cloud Infrastructure (Soft
     {: pre}
 
     <table>
+    <caption>Erklärung der Bestandteile dieses Befehls</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -94,7 +99,8 @@ Gehen Sie wie folgt vor, um ein Teilnetz in einem IBM Cloud Infrastructure (Soft
 ## Angepasste und vorhandene Teilnetze in Kubernetes-Clustern hinzufügen
 {: #custom}
 
-Sie können vorhandene portierbare öffentliche oder private Teilnetze zu Ihrem Kubernetes-Cluster hinzufügen oder Teilnetze aus einem gelöschten Cluster wiederverwenden.{:shortdesc}
+Sie können vorhandene portierbare öffentliche oder private Teilnetze zu Ihrem Kubernetes-Cluster hinzufügen oder Teilnetze aus einem gelöschten Cluster wiederverwenden.
+{:shortdesc}
 
 Vorbereitende Schritte
 - [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
@@ -107,7 +113,7 @@ Vorbereitende Schritte
 
 Gehen Sie wie folgt vor, um ein Teilnetz in Ihrem Portfolio von IBM Cloud Infrastructure (SoftLayer) mit angepassten Firewallregeln oder verfügbaren IP-Adressen zu verwenden.
 
-1.  Geben Sie das Teilnetz an, das Sie verwenden möchten. Beachten Sie die ID des Teilnetzes und die VLAN-ID. In diesem Beispiel lautet die Teilnetz-ID `1602829` und die VLAN-ID `2234945`. 
+1.  Geben Sie das Teilnetz an, das Sie verwenden möchten. Beachten Sie die ID des Teilnetzes und die VLAN-ID. In diesem Beispiel lautet die Teilnetz-ID `1602829` und die VLAN-ID `2234945`.
 
     ```
     bx cs subnets
@@ -140,7 +146,7 @@ Gehen Sie wie folgt vor, um ein Teilnetz in Ihrem Portfolio von IBM Cloud Infras
     ```
     {: screen}
 
-3.  Erstellen Sie einen Cluster mithilfe der Position und der VLAN-ID, die Sie angegeben haben. Wenn Sie ein vorhandenes Teilnetz wiederverwenden möchten, schließen Sie das Flag `--no-subnet` ein, um zu vermeiden, dass ein neues portierbares öffentliches und ein neues portierbares privates IP-Teilnetz automatisch erstellt wird. 
+3.  Erstellen Sie einen Cluster mithilfe der Position und der VLAN-ID, die Sie angegeben haben. Wenn Sie ein vorhandenes Teilnetz wiederverwenden möchten, schließen Sie das Flag `--no-subnet` ein, um zu vermeiden, dass ein neues portierbares öffentliches und ein neues portierbares privates IP-Teilnetz automatisch erstellt wird.
 
     ```
     bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name mein_cluster
@@ -162,7 +168,7 @@ Clusters in **deployed** (Bereitgestellt) geändert.
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    mein_cluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.7
     ```
     {: screen}
 
@@ -177,7 +183,7 @@ Clusters in **deployed** (Bereitgestellt) geändert.
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.7
     ```
     {: screen}
 
@@ -201,12 +207,12 @@ Stellen Sie ein Teilnetz aus einem lokalen Netz zur Verfügung, auf das über {{
 
 Voraussetzungen:
 - Vom Benutzer verwaltete Teilnetze können nur zu privaten VLANs hinzugefügt werden.
-- Die Begrenzung für die Länge des Teilnetzpräfix beträgt /24 bis /30. Beispiel: `169.xx.xxx.xxx/24` gibt 253 verwendbare private IP-Adressen an, während `169.xx.xxx.xxx/30` eine verwendbare private IP-Adresse angibt. 
+- Die Begrenzung für die Länge des Teilnetzpräfix beträgt /24 bis /30. Beispiel: `169.xx.xxx.xxx/24` gibt 253 verwendbare private IP-Adressen an, während `169.xx.xxx.xxx/30` eine verwendbare private IP-Adresse angibt.
 - Die erste IP-Adresse im Teilnetz muss als Gateway für das Teilnetz verwendet werden.
 
 Vorbemerkungen:
 - Konfigurieren Sie vorab das Routing des Netzverkehrs in das externe Teilnetz bzw. aus dem externen Teilnetz.
-- Vergewissern Sie sich, dass Sie über VPN-Konnektivität zwischen der Gateway-Einheit des lokalen Rechenzentrums und entweder der Vyatta-Einheit des privaten Netzes im Portfolio von IBM Cloud Infrastructure (SoftLayer) oder dem aktiven StrongSwan-VPN-Service in Ihrem Cluster verfügen. Weitere Informationen finden Sie unter [VPN-Konnektivität einrichten](cs_vpn.html). 
+- Vergewissern Sie sich, dass Sie über VPN-Konnektivität zwischen dem Netzgateway des lokalen Rechenzentrums und entweder der Virtual Router Appliance des privaten Netzes oder dem aktiven StrongSwan-VPN-Service in Ihrem Cluster verfügen. Weitere Informationen finden Sie unter [VPN-Konnektivität einrichten](cs_vpn.html).
 
 Gehen Sie wie folgt vor, um ein lokales Netz im Unternehmen hinzuzufügen:
 
@@ -257,7 +263,7 @@ Gehen Sie wie folgt vor, um ein lokales Netz im Unternehmen hinzuzufügen:
 
 4. Optional: [Routing zwischen Teilnetzen auf demselben VLAN aktivieren](#vlan-spanning).
 
-5. Fügen Sie einen privaten Lastausgleichsservice oder eine private Ingress-Lastausgleichsfunktion für Anwendungen hinzu, um über das private Netz auf Ihre App zuzugreifen. Wenn Sie eine private IP-Adresse aus dem Teilnetz verwenden möchten, die Sie hinzugefügt haben, müssen Sie eine IP-Adresse angeben. Andernfalls wird eine IP-Adresse nach dem Zufallsprinzip aus den Teilnetzen von IBM Cloud Infrastructure (SoftLayer) oder aus den vom Benutzer bereitgestellten Teilnetzen im privaten VLAN ausgewählt. Weitere Informationen finden Sie unter [Öffentlichen oder privaten Zugriff auf eine App mithilfe eines LoadBalancer-Service aktivieren](cs_loadbalancer.html#config) oder [Private Lastausgleichsfunktion für Anwendungen aktivieren](cs_ingress.html#private_ingress). 
+5. Fügen Sie einen privaten Lastausgleichsservice oder eine private Ingress-Lastausgleichsfunktion für Anwendungen hinzu, um über das private Netz auf Ihre App zuzugreifen. Wenn Sie eine private IP-Adresse aus dem Teilnetz verwenden möchten, die Sie hinzugefügt haben, müssen Sie eine IP-Adresse angeben. Andernfalls wird eine IP-Adresse nach dem Zufallsprinzip aus den Teilnetzen von IBM Cloud Infrastructure (SoftLayer) oder aus den vom Benutzer bereitgestellten Teilnetzen im privaten VLAN ausgewählt. Weitere Informationen finden Sie unter [Öffentlichen oder privaten Zugriff auf eine App mithilfe eines LoadBalancer-Service aktivieren](cs_loadbalancer.html#config) oder [Private Lastausgleichsfunktion für Anwendungen aktivieren](cs_ingress.html#private_ingress).
 
 <br />
 
@@ -322,7 +328,7 @@ Bevor Sie beginnen, müssen Sie den [Kontext für den zu verwendenden Cluster fe
     **Hinweis:** Die Erstellung dieses Service schlägt fehl, weil der Kubernetes-Master die angegebene IP-Adresse der Lastausgleichsfunktion in der Kubernetes-Konfigurationszuordnung nicht finden kann. Wenn Sie diesen Befehl ausführen, können Sie die Fehlernachricht und die Liste von verfügbaren öffentlichen IP-Adressen für den Cluster anzeigen.
 
     ```
-    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. Die folgenden Cloud-Provider-IPs sind verfügbar: <liste_von_IP-adressen>
+    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <liste_von_IP-adressen>
     ```
     {: screen}
 
@@ -357,4 +363,3 @@ Wenn Sie einen Cluster erstellen, wird ein Teilnetz, das auf `/26` endet, in dem
 Dieser Grenzwert von 62 Workerknoten kann von einem großen Cluster oder von mehreren kleineren Clustern in einer einzigen Region, die sich in demselben VLAN befinden, überschritten werden. Wenn der Grenzwert für den 62-Worker-Knoten erreicht ist, wird ein zweites primäres Teilnetz in demselben VLAN bestellt.
 
 Für die Weiterleitung zwischen Teilnetzen auf demselben VLAN, müssen Sie VLAN-Spanning aktivieren. Entsprechende Anweisungen finden Sie in [VLAN-Spanning aktivieren oder inaktivieren](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
-

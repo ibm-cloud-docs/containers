@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -15,47 +15,18 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
+
 # 設定 VPN 連線功能
 {: #vpn}
 
 使用 VPN 連線功能，您可以在 {{site.data.keyword.containerlong}} 上將 Kubernetes 叢集中的應用程式安全地連接至內部部署網路。您也可以將叢集外部的應用程式連接至叢集內部執行的應用程式。
 {:shortdesc}
 
-若要將工作者節點及應用程式連接至內部部署的資料中心，您可以使用 strongSwan 服務或者 Vyatta Gateway Appliance 或 Fortigate Appliance 來配置 VPN IPSec 端點。
-
-- **Vyatta Gateway Appliance 或 Fortigate Appliance**：如果您有較大的叢集，且要透過 VPN 存取非 Kubernetes 資源，或要透過單一 VPN 存取多個叢集，則可以選擇設定 Vyatta Gateway Appliance 或 [Fortigate Security Appliance![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) 來配置 IPSec VPN 端點。若要配置 Vyatta，請參閱[使用 Vyatta 設定 VPN 連線功能](#vyatta)。
+若要將工作者節點及應用程式連接至內部部署資料中心，您可以配置下列其中一個選項。
 
 - **strongSwan IPSec VPN 服務**：您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/)，以安全地連接 Kubernetes 叢集與內部部署網路。在根據業界標準網際網路通訊協定安全 (IPsec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。若要設定叢集與內部部署網路之間的安全連線，請直接在叢集的 Pod 中[配置及部署 strongSwan IPSec VPN 服務](#vpn-setup)。
 
-## 利用 Vyatta Gateway Appliance 設定 VPN 連線功能
-{: #vyatta}
-
-[Vyatta Gateway Appliance ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) 是執行特殊 Linux 發行套件的裸機伺服器。您可以使用 Vyatta 作為 VPN 閘道，以安全地連接至內部部署網路。
-{:shortdesc}
-
-進入或離開叢集 VLAN 的所有公用及專用網路資料流量都會透過 Vyatta 遞送。您可以使用 Vyatta 作為 VPN 端點，在 IBM Cloud 基礎架構 (SoftLayer) 及內部部署資源中的伺服器之間建立已加密的 IPSec 通道。例如，下圖顯示 {{site.data.keyword.containershort_notm}} 中僅限專用工作者節點上的應用程式如何透過 Vyatta VPN 連線與內部部署伺服器通訊：
-
-<img src="images/cs_vpn_vyatta.png" width="725" alt="使用負載平衡器公開 {{site.data.keyword.containershort_notm}} 中的應用程式" style="width:725px; border-style: none"/>
-
-1. 叢集中的應用程式 (`myapp2`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
-
-2. 因為 `myapp2` 位於僅限專用 VLAN 的工作者節點上，所以 Vyatta 在工作者節點與內部部署網路之間充當安全連線。Vyatta 會使用目的地 IP 位址，來決定哪些網路封包應該傳送至內部部署網路。
-
-3. 此要求會加密並透過 VPN 通道傳送至內部部署資料中心。
-
-4. 送入的要求會通過內部部署防火牆，並遞送至解密所在的 VPN 通道端點（路由器）。
-
-5. VPN 通道端點（路由器）會將要求轉遞至內部部署伺服器或大型主機，視步驟 2 中指定的目的地 IP 位址而定。必要資料會藉由相同的處理程序，透過 VPN 連線傳回至 `myapp2`。
-
-若要設定 Vyatta Gateway Appliance，請執行下列動作：
-
-1. [訂購 Vyatta ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta)。
-
-2. [在 Vyatta 上配置專用 VLAN ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)。
-
-3. 若要使用 Vyatta 啟用 VPN 連線，請[在 Vyatta 上配置 IPSec ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta)。
-
-如需相關資訊，請參閱[將叢集連接至內部部署資料中心 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 上的這篇部落格文章。
+- **Virtual Router Appliance (VRA) 或 Fortigate Security Appliance (FSA)**：您可以選擇設定 [VRA](/docs/infrastructure/virtual-router-appliance/about.html) 或 [FSA](/docs/infrastructure/fortigate-10g/about.html)，以配置 IPSec VPN 端點。當您有較大的叢集、要透過 VPN 存取非 Kubernetes 資源，或要透過單一 VPN 存取多個叢集時，此選項十分有用。若要配置 VRA，請參閱[使用 VRA 設定 VPN 連線功能](#vyatta)。
 
 ## 使用 strongSwan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能
 {: #vpn-setup}
@@ -69,7 +40,7 @@ lastupdated: "2018-4-20"
 
 1. 叢集中的應用程式 (`myapp`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
 
-2. 內部部署資料中心的要求會轉遞至 IPSec strongSwan VPN Pod。目的地 IP 位址是用來判定應該將哪些網路封包傳送至 IPSec strongSwan VPN Pod。
+2. 內部部署資料中心的要求會轉遞至 IPSec strongSwan VPN Pod。目的地 IP 位址是用來判定要傳送至 IPSec strongSwan VPN pod 的網路封包。
 
 3. 此要求會加密並透過 VPN 通道傳送至內部部署資料中心。
 
@@ -95,7 +66,7 @@ lastupdated: "2018-4-20"
 2. 將 strongSwan Helm 圖表的預設配置設定儲存在本端 YAML 檔案中。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+        helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
@@ -104,6 +75,7 @@ lastupdated: "2018-4-20"
     **重要事項**：如果您不需要變更內容，請在它前面加上 `#` 來註銷該內容。
 
     <table>
+    <caption>瞭解這個 YAML 元件</caption>
     <col width="22%">
     <col width="78%">
     <thead>
@@ -120,7 +92,7 @@ lastupdated: "2018-4-20"
     </tr>
     <tr>
     <td><code>connectUsingLoadBalancerIP</code></td>
-    <td>使用您在 <code>loadBalancerIP</code> 中所新增的負載平衡器 IP 位址，也可以建立出埠 VPN 連線。如果啟用此選項，則所有叢集工作者節點都必須位於相同的公用 VLAN 上。否則，您必須使用 <code>nodeSelector</code> 設定，以確保 VPN Pod 部署至與 <code>loadBalancerIP</code> 相同的公用 VLAN 上的工作者節點。如果將 <code>ipsec.auto</code> 設為 <code>add</code>，則會忽略此選項。<p>接受值：</p><ul><li><code>"false"</code>：不使用負載平衡器 IP 來連接 VPN。改為使用 VPN Pod 執行所在之工作者節點的 IP 位址。</li><li><code>"true"</code>：使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。如果未設定 <code>loadBalancerIP</code>，則會使用指派給負載平衡器服務的外部 IP 位址。</li><li><code>"auto"</code>：將 <code>ipsec.auto</code> 設為 <code>start</code>，並設定 <code>loadBalancerIP</code> 時，請使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。</li></ul></td>
+    <td>使用您在 <code>loadBalancerIP</code> 中所新增的負載平衡器 IP 位址，也可以建立出埠 VPN 連線。如果啟用此選項，則所有叢集工作者節點都必須位於相同的公用 VLAN 上。否則，您必須使用 <code>nodeSelector</code> 設定，以確保 VPN Pod 部署至與 <code>loadBalancerIP</code> 相同的公用 VLAN 上的工作者節點。如果將 <code>ipsec.auto</code> 設為 <code>add</code>，則會忽略此選項。<p>接受值：</p><ul><li><code>"false"</code>：不使用負載平衡器 IP 來連接 VPN。改為使用 VPN Pod 執行所在之工作者節點的 IP 位址。</li><li><code>"true"</code>：使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。如果未設定 <code>loadBalancerIP</code>，則會使用指派給負載平衡器服務的外部 IP 位址。</li><li><code>"auto"</code>：將 <code>ipsec.auto</code> 設為 <code>start</code> 並設定 <code>loadBalancerIP</code> 時，請使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。</li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
@@ -178,21 +150,21 @@ lastupdated: "2018-4-20"
     **附註**：如果單一叢集中有多個 VPN 部署，您可以選擇比 `vpn` 更具描述性的版次名稱，以避免命名衝突並區分您的部署。為了避免截斷版次名稱，請將版次名稱限制為 35 個字元以內。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
-6. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位，會具有 `DEPLOYED` 值。
+6. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位值為 `DEPLOYED`。
 
     ```
-    helm status vpn
+        helm status vpn
     ```
     {: pre}
 
 7. 部署圖表之後，請驗證已使用 `config.yaml` 檔案中的已更新設定。
 
     ```
-    helm get values vpn
+        helm get values vpn
     ```
     {: pre}
 
@@ -208,15 +180,15 @@ lastupdated: "2018-4-20"
 2. 設定 `STRONGSWAN_POD` 環境變數。
 
     ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
-        ```
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    ```
     {: pre}
 
 3. 檢查 VPN 的狀態。`ESTABLISHED` 狀態表示 VPN 連線成功。
 
     ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
-        ```
+    kubectl exec $STRONGSWAN_POD -- ipsec status
+    ```
     {: pre}
 
     輸出範例：
@@ -232,14 +204,14 @@ lastupdated: "2018-4-20"
     **附註**：
 
     <ul>
-    <li>當您嘗試使用 strongSwan Helm 圖表建立 VPN 連線功能時，有可能第一次的 VPN 狀態不是 `ESTABLISHED`。您可能需要檢查內部部署 VPN 端點設定，並數次變更配置檔，連線才會成功：<ol><li>執行 `helm delete --purge <release_name>`</li><li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>您也可以在下一步執行其他檢查。</li>
-    <li>如果 VPN Pod 處於 `ERROR` 狀態，或持續當機並重新啟動，則可能是由於圖表的 ConfigMap 中 `ipsec.conf` 設定的參數驗證所造成。<ol><li>請執行 `kubectl logs -n kube-system $STRONGSWAN_POD`，檢查 strongSwan Pod 日誌中是否有任何驗證錯誤。</li><li>如果有驗證錯誤，請執行 `helm delete --purge <release_name>`<li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>如果叢集具有大量工作者節點，您也可以使用 `helm upgrade` 更快速地套用您的變更，而不是執行 `helm delete` 及 `helm install`。</li>
+    <li>當您嘗試使用 strongSwan Helm 圖表建立 VPN 連線功能時，有可能第一次的 VPN 狀態不是 `ESTABLISHED`。您可能需要檢查內部部署 VPN 端點設定，並數次變更配置檔，連線才會成功：<ol><li>執行 `helm delete --purge <release_name>`</li><li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>您也可以在下一步執行其他檢查。</li>
+    <li>如果 VPN Pod 處於 `ERROR` 狀態，或持續當機並重新啟動，則可能是由於圖表的 ConfigMap 中 `ipsec.conf` 設定的參數驗證所造成。<ol><li>請執行 `kubectl logs -n $STRONGSWAN_POD`，檢查 strongSwan Pod 日誌中是否有任何驗證錯誤。</li><li>如果有驗證錯誤，請執行 `helm delete --purge <release_name>`<li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>如果叢集具有大量工作者節點，您也可以使用 `helm upgrade` 更快速地套用您的變更，而不是執行 `helm delete` 及 `helm install`。</li>
     </ul>
 
 4. 您可以藉由執行內含在 strongSwan 圖表定義中的五個 Helm 測試，來進一步測試 VPN 連線功能。
 
     ```
-    helm test vpn
+        helm test vpn
     ```
     {: pre}
 
@@ -250,7 +222,7 @@ lastupdated: "2018-4-20"
 5. 查看測試 Pod 的日誌，以檢視失敗測試的輸出。
 
     ```
-    kubectl logs -n kube-system <test_program>
+    kubectl logs <test_program>
     ```
     {: pre}
 
@@ -258,6 +230,7 @@ lastupdated: "2018-4-20"
 
     {: #vpn_tests_table}
     <table>
+    <caption>瞭解 Helm VPN 連線功能測試</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/>瞭解 Helm VPN 連線功能測試</th>
     </thead>
@@ -287,7 +260,7 @@ lastupdated: "2018-4-20"
 6. 刪除現行 Helm 圖表。
 
     ```
-    helm delete --purge vpn
+        helm delete --purge vpn
     ```
     {: pre}
 
@@ -298,40 +271,40 @@ lastupdated: "2018-4-20"
 9. 使用已更新的 `config.yaml` 檔案，將 Helm 圖表安裝至叢集。已更新的內容會儲存在圖表的 ConfigMap 中。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
-10. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位，會具有 `DEPLOYED` 值。
+10. 檢查圖表部署狀態。圖表就緒時，輸出頂端附近的 **STATUS** 欄位值為 `DEPLOYED`。
 
     ```
-    helm status vpn
+        helm status vpn
     ```
     {: pre}
 
 11. 部署圖表之後，請驗證已使用 `config.yaml` 檔案中的已更新設定。
 
     ```
-    helm get values vpn
+        helm get values vpn
     ```
     {: pre}
 
 12. 清除現行測試 Pod。
 
     ```
-    kubectl get pods -a -n kube-system -l app=strongswan-test
+    kubectl get pods -a -l app=strongswan-test
     ```
     {: pre}
 
     ```
-    kubectl delete pods -n kube-system -l app=strongswan-test
+    kubectl delete pods -l app=strongswan-test
     ```
     {: pre}
 
 13. 重新執行測試。
 
     ```
-    helm test vpn
+        helm test vpn
     ```
     {: pre}
 
@@ -347,9 +320,11 @@ lastupdated: "2018-4-20"
 若要將 strongSwan Helm 圖表升級至最新版本，請執行下列動作：
 
   ```
-  helm upgrade -f config.yaml --namespace kube-system <release_name> ibm/strongswan
+  helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
+
+**重要事項**：strongSwan 2.0.0 Helm 圖表不會使用 Calico 第 3 版或 Kubernetes 1.10。[將叢集更新至 1.10](cs_versions.html#cs_v110) 之前，請將 strongSwan 更新至 2.1.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.7、1.8 及 1.9 舊版相容。
 
 
 ### 從 1.0.0 版升級
@@ -363,14 +338,14 @@ lastupdated: "2018-4-20"
 1. 刪除 1.0.0 Helm 圖表。
 
     ```
-    helm delete --purge <release_name>
-    ```
+      helm delete --purge <release_name>
+  ```
     {: pre}
 
 2. 將 strongSwan Helm 圖表的最新版本的預設配置設定儲存在本端 YAML 檔案中。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+        helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
@@ -379,11 +354,13 @@ lastupdated: "2018-4-20"
 4. 使用已更新的 `config.yaml` 檔案，將 Helm 圖表安裝至叢集。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
 此外，1.0.0 中某些寫在程式中的 `ipsec.conf` 逾時設定，在未來版本中公開為可配置的內容。其中一些可配置的 `ipsec.conf` 逾時設定的名稱及預設值，也變更為更符合 strongSwan 標準。如果您要從 1.0.0 升級 Helm 圖表，且要保留 1.0.0 版的逾時設定預設值，請使用舊的預設值，將新設定新增至圖表配置檔中。
+
+
 
   <table>
   <caption>1.0.0 版與最新版本之間的 ipsec.conf 設定差異</caption>
@@ -426,3 +403,33 @@ lastupdated: "2018-4-20"
   ```
   {: pre}
 
+<br />
+
+
+## 利用 Virtual Router Appliance 設定 VPN 連線功能
+{: #vyatta}
+
+[Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) 提供適用於 x86 裸機伺服器的最新 Vyatta 5600 作業系統。您可以使用 VRA 作為 VPN 閘道，以安全地連接至內部部署網路。
+{:shortdesc}
+
+進入或結束叢集 VLAN 的所有公用及專用網路資料流量都會透過 VRA 遞送。您可以使用 VRA 作為 VPN 端點，在 IBM Cloud 基礎架構 (SoftLayer) 及內部部署資源中的伺服器之間建立已加密的 IPSec 通道。例如，下圖顯示 {{site.data.keyword.containershort_notm}} 中僅限專用工作者節點上的應用程式如何透過 VRA VPN 連線與內部部署伺服器通訊：
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="使用負載平衡器公開 {{site.data.keyword.containershort_notm}} 中的應用程式" style="width:725px; border-style: none"/>
+
+1. 叢集中的應用程式 (`myapp2`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
+
+2. 因為 `myapp2` 位於僅限專用 VLAN 的工作者節點上，所以 VRA 在工作者節點與內部部署網路之間充當安全連線。VRA 會使用目的地 IP 位址，來判定要傳送至內部部署網路的網路封包。
+
+3. 此要求會加密並透過 VPN 通道傳送至內部部署資料中心。
+
+4. 送入的要求會通過內部部署防火牆，並遞送至解密所在的 VPN 通道端點（路由器）。
+
+5. VPN 通道端點（路由器）會將要求轉遞至內部部署伺服器或大型主機，視步驟 2 中指定的目的地 IP 位址而定。必要資料會藉由相同的處理程序，透過 VPN 連線傳回至 `myapp2`。
+
+若要設定 Virtual Router Appliance，請執行下列動作：
+
+1. [訂購 VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html)。
+
+2. [在 VRA 上配置專用 VLAN](/docs/infrastructure/virtual-router-appliance/manage-vlans.html)。
+
+3. 若要使用 VRA 啟用 VPN 連線，請[在 VRA 上配置 VRRP](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp)。

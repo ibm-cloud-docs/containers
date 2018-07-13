@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # 集群和工作程序节点故障诊断
@@ -35,33 +36,28 @@ lastupdated: "2018-4-20"
 创建新的 Kubernetes 集群时，收到以下消息。
 
 ```
-我们无法连接到您的 IBM Cloud infrastructure (SoftLayer) 帐户。创建标准集群要求您有链接到 IBM Cloud infrastructure (SoftLayer) 帐户条款的现买现付帐户，或者您已使用 {{site.data.keyword.Bluemix_notm}} Container Service CLI 设置 {{site.data.keyword.Bluemix_notm}} Infrastructure API 密钥。
+我们无法连接到您的 IBM Cloud infrastructure (SoftLayer) 帐户。创建标准集群要求您有链接到 IBM Cloud Infrastructure (SoftLayer) 帐户条款的现买现付帐户，或者您已使用 {{site.data.keyword.containerlong}} CLI 设置 {{site.data.keyword.Bluemix_notm}} 基础架构 API 密钥。
 ```
 {: screen}
 
 {: tsCauses}
-具有未链接 {{site.data.keyword.Bluemix_notm}} 帐户的用户必须创建新的现买现付帐户，或者使用 {{site.data.keyword.Bluemix_notm}} CLI 手动添加 IBM Cloud infrastructure (SoftLayer) API 密钥。
+在自动帐户链接启用后创建的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户已设置有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。您可以为集群购买基础架构资源，而无需额外配置。
+
+
+具有其他 {{site.data.keyword.Bluemix_notm}} 帐户类型的用户或具有未链接到其 {{site.data.keyword.Bluemix_notm}} 帐户的现有 IBM Cloud Infrastructure (SoftLayer) 帐户的用户必须对其帐户进行配置才能创建标准集群。
+
 
 {: tsResolve}
-要向您的 {{site.data.keyword.Bluemix_notm}} 帐户添加凭证，请执行以下操作：
+配置帐户以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合取决于您拥有的帐户类型。请查看下表以查找每种帐户类型的可用选项。
 
-1.  请联系 IBM Cloud infrastructure (SoftLayer) 管理员，以获取您的 IBM Cloud infrastructure (SoftLayer) 用户名和 API 密钥。
+|帐户类型|描述|用于创建标准集群的可用选项|
+|------------|-----------|----------------------------------------------|
+|Lite 帐户|Lite 帐户无法供应集群。|[将 Lite 帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付帐户](/docs/account/index.html#paygo)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|
+|较旧的现买现付帐户|在自动帐户链接可用之前创建的现买现付帐户没有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。<p>如果您有现有的 IBM Cloud infrastructure (SoftLayer) 帐户，那么无法将此帐户链接到较旧的现买现付帐户。</p>|<strong>选项 1：</strong>[创建新的现买现付帐户](/docs/account/index.html#paygo)，该帐户设置为具有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>要继续使用旧的现买现付帐户，可以使用新的现买现付帐户生成 API 密钥，以用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。然后，必须[为旧的现买现付帐户设置 IBM Cloud Infrastructure (SoftLayer) API 密钥](cs_cli_reference.html#cs_credentials_set)。</p><p><strong>选项 2：</strong>如果您已经拥有要使用的现有 IBM Cloud Infrastructure (SoftLayer) 帐户，那么可以在 {{site.data.keyword.Bluemix_notm}} 帐户中[设置凭证](cs_cli_reference.html#cs_credentials_set)。</p><p>**注：**手动链接到 IBM Cloud Infrastructure (SoftLayer) 帐户时，凭证用于 {{site.data.keyword.Bluemix_notm}} 帐户中每个特定于 IBM Cloud Infrastructure (SoftLayer) 的操作。您必须确保设置的 API 密钥具有[足够的基础架构许可权](cs_users.html#infra_access)，以便用户可以创建和使用集群。</p>|
+|预订帐户|预订帐户未设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|<strong>选项 1：</strong>[创建新的现买现付帐户](/docs/account/index.html#paygo)，该帐户设置为具有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果要继续使用预订帐户，那么可以使用新的现买现付帐户在 IBM Cloud Infrastructure (SoftLayer) 中生成 API 密钥。然后，必须手动[为预订帐户设置 IBM Cloud Infrastructure (SoftLayer) API 密钥](cs_cli_reference.html#cs_credentials_set)。请记住，IBM Cloud infrastructure (SoftLayer) 资源将通过新的现买现付帐户进行计费。</p><p><strong>选项 2：</strong>如果您已经拥有要使用的现有 IBM Cloud Infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户手动[设置 IBM Cloud Infrastructure (SoftLayer) 凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注：**手动链接到 IBM Cloud Infrastructure (SoftLayer) 帐户时，凭证用于 {{site.data.keyword.Bluemix_notm}} 帐户中每个特定于 IBM Cloud Infrastructure (SoftLayer) 的操作。您必须确保设置的 API 密钥具有[足够的基础架构许可权](cs_users.html#infra_access)，以便用户可以创建和使用集群。</p>|
+|IBM Cloud infrastructure (SoftLayer) 帐户，无 {{site.data.keyword.Bluemix_notm}} 帐户|要创建标准集群，您必须具有 {{site.data.keyword.Bluemix_notm}} 帐户。|<p>[创建现买现付帐户](/docs/account/index.html#paygo)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，将为您创建 IBM Cloud Infrastructure (SoftLayer) 帐户。您有两个独立的 IBM Cloud infrastructure (SoftLayer) 帐户，两者单独进行计费。</p>|
+{: caption="按帐户类型列出的标准集群创建选项" caption-side="top"}
 
-    **注**：您使用的 IBM Cloud infrastructure (SoftLayer) 帐户必须设置有“超级用户”许可权才可成功创建标准集群。
-
-2.  添加凭证。
-
-  ```
-  bx cs credentials-set --infrastructure-username <username> --infrastructure-api-key <api_key>
-  ```
-  {: pre}
-
-3.  创建标准集群。
-
-  ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
 
 <br />
 
@@ -117,7 +113,7 @@ lastupdated: "2018-4-20"
 
 
 {: tsCauses}
-您可能已在 IBM Cloud infrastructure (SoftLayer) 帐户中额外设置了防火墙或定制了现有防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
+您可能已在 IBM Cloud Infrastructure (SoftLayer) 帐户中设置了其他防火墙或定制了现有防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
 
 {: tsResolve}
 [允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
@@ -141,12 +137,37 @@ lastupdated: "2018-4-20"
 <br />
 
 
+## `kubectl exec` 和 `kubectl logs` 不起作用
+{: #exec_logs_fail}
+
+{: tsSymptoms}
+如果运行 `kubectl exec` 或 `kubectl logs`，会看到以下消息。
+
+  ```
+  <workerIP>:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+{: tsCauses}
+主节点与工作程序节点之间的 OpenVPN 连接工作不正常。
+
+{: tsResolve}
+1. 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。
+2. 重新启动 OpenVPN 客户机 pod。
+  ```
+  kubectl delete pod -n kube-system -l app=vpn
+  ```
+  {: pre}
+3. 如果仍看到相同的错误消息，说明 VPN pod 所在的工作程序节点可能运行状况欠佳。要重新启动 VPN pod 并将其重新安排到其他工作程序节点，请[对工作程序节点执行 cordon、drain 和 reboot](cs_cli_reference.html#cs_worker_reboot)（即，对 VPN pod 所在的工作程序节点执行这些命令）。
+
+<br />
+
 
 ## 将服务绑定到集群导致同名错误
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-运行 `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，看到以下消息。
+运行 `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，会看到以下消息。
 
 ```
 Multiple services with the same name were found.
@@ -183,18 +204,86 @@ Run 'bx service list' to view available Bluemix service instances...
 <br />
 
 
+## 将服务绑定到集群导致找不到服务错误
+{: #cs_not_found_services}
 
-## 更新或重新装入工作程序节点后，出现重复的节点和 pod
+{: tsSymptoms}
+运行 `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，会看到以下消息。
+
+```
+Binding service to a namespace...
+FAILED
+
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
+```
+{: screen}
+
+{: tsCauses}
+要将服务绑定到集群，您必须具有在其中供应服务实例的空间的 Cloud Foundry 开发者用户角色。此外，您必须具有对 {{site.data.keyword.containerlong}} 的 IAM 编辑者访问权。要访问服务实例，您必须登录到在其中供应该服务实例的空间。 
+
+{: tsResolve}
+
+**以用户身份执行以下操作：**
+
+1. 登录到 {{site.data.keyword.Bluemix_notm}}。 
+   ```
+    bx login
+    ```
+   {: pre}
+   
+2. 将在其中供应服务实例的组织和空间设定为目标。 
+   ```
+   bx target -o <org> -s <space>
+   ```
+   {: pre}
+   
+3. 通过列出服务实例来验证您是否位于正确的空间中。 
+   ```
+    bx service list
+    ```
+   {: pre}
+   
+4. 重试绑定服务。如果遇到相同的错误，请联系帐户管理员，并验证您是否具有足够的许可权来绑定服务（请参阅以下帐户管理员步骤）。 
+
+**以帐户管理员身份执行以下操作：**
+
+1. 验证遇到此问题的用户是否具有[对 {{site.data.keyword.containerlong}} 的编辑者许可权](/docs/iam/mngiam.html#editing-existing-access)。 
+
+2. 验证遇到此问题的用户是否具有对在其中供应该服务的[空间的 Cloud Foundry 开发者角色](/docs/iam/mngcf.html#updating-cloud-foundry-access)。 
+
+3. 如果存在正确的许可权，请尝试分配其他许可权，然后重新分配所需的许可权。 
+
+4. 稍等几分钟，然后让用户重试绑定服务。 
+
+5. 如果这无法解决此问题，说明 IAM 许可权不同步，您无法自行解决此问题。请通过开具支持凭单，[与 IBM 支持联系](/docs/get-support/howtogetsupport.html#getting-customer-support)。确保提供集群标识、用户标识和服务实例标识。 
+   1. 检索集群标识。
+      ```
+        bx cs clusters
+        ```
+      {: pre}
+      
+   2. 检索服务实例标识。
+      ```
+      bx service show <service_name> --guid
+      ```
+      {: pre}
+
+
+<br />
+
+
+
+## 工作程序节点更新或重新装入后，出现重复的节点和 pod
 {: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-运行 `kubectl get nodes` 时，您看到状态为 **NotReady** 的重复工作程序节点。状态为 **NotReady** 的工作程序节点具有公共 IP 地址，而状态为 **Ready** 的工作程序节点具有专用 IP 地址。
+运行 `kubectl get nodes` 时，看到状态为 **NotReady** 的重复工作程序节点。状态为 **NotReady** 的工作程序节点具有公共 IP 地址，而状态为 **Ready** 的工作程序节点具有专用 IP 地址。
 
 {: tsCauses}
-较旧的集群具有按集群的公共 IP 地址列出的工作程序节点。现在，工作程序节点按集群的专用 IP 地址列出。当您重新装入或更新节点时，IP 地址将更改，但对公共 IP 地址的引用将保持不变。
+较旧的集群按集群的公共 IP 地址列出工作程序节点。现在，工作程序节点按集群的专用 IP 地址列出。当您重新装入或更新节点时，IP 地址将更改，但对公共 IP 地址的引用将保持不变。
 
 {: tsResolve}
-由于这些重复，因此不存在服务中断，但您应该从 API 服务器中除去旧的工作程序节点引用。
+由于存在这些重复项，因此服务不会中断，但您可以从 API 服务器中除去旧的工作程序节点引用。
 
   ```
   kubectl delete node <node_name1> <node_name2>
@@ -204,7 +293,7 @@ Run 'bx service list' to view available Bluemix service instances...
 <br />
 
 
-## 更新或重新装入工作程序节点后，应用程序收到 RBAC DENY 错误
+## 工作程序节点更新或重新装入后，应用程序收到 RBAC DENY 错误
 {: #cs_rbac_deny}
 
 {: tsSymptoms}
@@ -229,18 +318,18 @@ Run 'bx service list' to view available Bluemix service instances...
          name: admin-binding-nonResourceURLSs-default
         subjects:
           - kind: ServiceAccount
-            name: default
-            namespace: default
-        roleRef:
-         kind: ClusterRole
-         name: admin-role-nonResourceURLSs
-         apiGroup: rbac.authorization.k8s.io
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-nonResourceURLSs
+   apiGroup: rbac.authorization.k8s.io
         ---
-        kind: ClusterRoleBinding
-        apiVersion: rbac.authorization.k8s.io/v1beta1
-        metadata:
-         name: admin-binding-resourceURLSs-default
-        subjects:
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
           - kind: ServiceAccount
             name: default
             namespace: default
@@ -253,7 +342,7 @@ Run 'bx service list' to view available Bluemix service instances...
     2.  将 `.yaml` 文件应用于集群。
 
         ```
-        kubectl apply -f FILENAME
+                kubectl apply -f FILENAME
         ```
         {: pre}
 
@@ -285,8 +374,8 @@ Run 'bx service list' to view available Bluemix service instances...
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.8.11
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.8.11
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.7
   ```
   {: screen}
 
@@ -332,13 +421,13 @@ Run 'bx service list' to view available Bluemix service instances...
 部署集群时，集群保持暂挂状态，而不启动。
 
 {: tsCauses}
-如果刚刚创建了集群，那么工作程序节点可能仍在配置中。如果已经等待了一段时间，那么可能是 VLAN 无效。
+如果刚刚创建了集群，那么工作程序节点可能仍在配置中。如果您已经等待一段时间，那么可能是 VLAN 无效。
 
 {: tsResolve}
 
 可以尝试下列其中一个解决方案：
-  - 通过运行 `bx cs cluster` 来检查集群的阶段状态。然后，通过运行 `bx cs workers <cluster_name>`.
-  - 检查以确定 VLAN 是否有效。要使 VLAN 有效，必须将 VLAN 与可使用本地磁盘存储来托管工作程序的基础架构相关联。可以通过运行 `bx cs vlans LOCATION` 来[列出 VLAN](/docs/containers/cs_cli_reference.html#cs_vlans)，如果 VLAN 未显示在列表中，说明该 VLAN 无效。请选择其他 VLAN。
+  - 通过运行 `bx cs cluster` 来检查集群的阶段状态。然后，通过运行 `bx cs workers <cluster_name>` 来检查以确保工作程序节点已部署。
+  - 检查以确定 VLAN 是否有效。要使 VLAN 有效，必须将 VLAN 与可使用本地磁盘存储来托管工作程序的基础架构相关联。可以通过运行 `bx cs vlans <location>` 来[列出 VLAN](/docs/containers/cs_cli_reference.html#cs_vlans)，如果 VLAN 未显示在列表中，说明该 VLAN 无效。请选择其他 VLAN。
 
 <br />
 
@@ -382,10 +471,10 @@ kubectl get nodes
 
 4.  如果集群中没有足够的容量，请向集群另外添加一个工作程序节点。
 
+    ```
+      bx cs worker-add <cluster_name_or_ID> 1
   ```
-  bx cs worker-add <cluster_name_or_ID> 1
-  ```
-  {: pre}
+    {: pre}
 
 5.  如果在完全部署工作程序节点后，pod 仍然保持 **pending** 状态，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) 以进一步对 pod 的暂挂状态进行故障诊断。
 
@@ -425,14 +514,14 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
 1. 列出 Helm 实例中当前可用的存储库。
 
     ```
-    helm repo list
+        helm repo list
     ```
     {: pre}
 
 2. 在输出中，验证 {{site.data.keyword.Bluemix_notm}} 存储库 `ibm` 的 URL 是否为 `https://registry.bluemix.net/helm/ibm`。
 
     ```
-    NAME    URL
+        NAME    URL
     stable  https://kubernetes-charts.storage.googleapis.com
     local   http://127.0.0.1:8888/charts
     ibm     https://registry.bluemix.net/helm/ibm
@@ -444,31 +533,30 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
         1. 除去 {{site.data.keyword.Bluemix_notm}} 存储库。
 
             ```
-            helm repo remove ibm
+                        helm repo remove ibm
             ```
             {: pre}
 
         2. 重新添加 {{site.data.keyword.Bluemix_notm}} 存储库。
 
             ```
-            helm repo add ibm  https://registry.bluemix.net/helm/ibm
+                        helm repo add ibm  https://registry.bluemix.net/helm/ibm
             ```
             {: pre}
 
     * 如果该 URL 正确，请从相应存储库中获取最新更新。
 
         ```
-        helm repo update
+                helm repo update
         ```
         {: pre}
 
 3. 使用更新安装 Helm 图表。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>
+        helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>
     ```
     {: pre}
-
 
 <br />
 
@@ -480,7 +568,9 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
 {: shortdesc}
 
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
+
+如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
 
@@ -488,9 +578,8 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
     -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
--   通过开具凭单，与 IBM 支持联系。有关提交 IBM 支持凭单或支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+-   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
-{:tip}
+{: tip}
 报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
-
 

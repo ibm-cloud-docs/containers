@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Guide de référence de l'interface de ligne de commande pour la gestion de clusters
@@ -304,7 +307,7 @@ Si vous constatez que la clé d'API stockée pour une région nécessite une mis
 
 Permet de remplacer la clé d'API IAM actuelle dans une région {{site.data.keyword.containershort_notm}}.
 
-Cette commande nécessite la politique d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la commande [`bx cs api-key-info`](#cs_api_key_info).
+Cette commande nécessite la politique d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la [commande `bx cs api-key-info`](#cs_api_key_info).
 
 **Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des droits [{{site.data.keyword.containershort_notm}} et des droit de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
@@ -324,7 +327,7 @@ Extrait des informations sur une option pour une configuration du serveur d'API 
 #### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
-Affiche l'URL du service de consignation distant auquel vous envoyez les journaux d'audit de serveur d'API. L'URL a été spécifiée lorsque vous avez créé le backend webhook pour la configuration de serveur d'API.
+Affiche l'URL du service de consignation distant auquel vous envoyez les journaux d'audit de serveur d'API. L'URL a été spécifiée lorsque vous avez créé le back end du webhook pour la configuration de serveur d'API.
 
 <strong>Options de commande</strong> :
 
@@ -343,12 +346,12 @@ Affiche l'URL du service de consignation distant auquel vous envoyez les journau
 ### bx cs apiserver-config-set
 {: #cs_apiserver_config_set}
 
-Définit une option pour configuration de serveur d'API Kubernetes d'un cluster. Cette commande doit être associée à l'une des sous-commandes suivantes pour l'option de configuration que vous voulez configurer.
+Définit une option pour la configuration du serveur d'API Kubernetes d'un cluster. Cette commande doit être associée à l'une des sous-commandes suivantes pour l'option de configuration que vous voulez définir.
 
 #### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
-Définissez le backend webhook pour la configuration de serveur d'API. Le backend webhook achemine les journaux d'audit de serveur d'API à un serveur distant. Une configuration webhook est créée compte tenu des informations que vous soumettez dans les indicateurs de cette commande. Si vous ne soumettez pas d'informations dans les indicateurs, une configuration webhook par défaut est utilisée.
+Définissez le back end du webhook pour la configuration de serveur d'API. Le back end du webhook achemine les journaux d'audit de serveur d'API à un serveur distant. Une configuration webhook est créée compte tenu des informations que vous soumettez dans les indicateurs de cette commande. Si vous ne soumettez pas d'informations dans les indicateurs, une configuration webhook par défaut est utilisée.
 
 <strong>Options de commande</strong> :
 
@@ -356,7 +359,7 @@ Définissez le backend webhook pour la configuration de serveur d'API. Le backen
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
-   <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
+   <dt><code>--remoteServer <em>SERVER_URL_OR_IP</em></code></dt>
    <dd>URL ou adresse IP du service de consignation distant auquel vous désirez envoyer les journaux d'audit. Si vous indiquez une URL de serveur non sécurisée, les certificats éventuels sont ignorés. Cette valeur est facultative.</dd>
 
    <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
@@ -385,7 +388,7 @@ Désactive une option pour une configuration de serveur d'API Kubernetes d'un cl
 #### bx cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
 
-Désactivez la configuration de serveur dorsal webhook pour le serveur d'API du cluster. La désactivation du serveur dorsal webhook arrête le transfert des journaux d'audit du serveur d'API à un serveur distant.
+Désactivez la configuration de back end du webhook pour le serveur d'API du cluster. La désactivation de back end du webhook arrête le transfert des journaux d'audit du serveur d'API à un serveur distant.
 
 <strong>Options de commande</strong> :
 
@@ -497,7 +500,7 @@ Après la connexion, téléchargez les données de configuration et les certific
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
    <dt><code>--admin</code></dt>
-   <dd>Téléchargez les fichiers de certificat et d'autorisations TLS pour le rôle Superutilisateur. Vous pouvez utiliser les certificats pour automatiser les tâches d'un cluster sans avoir à s'authentifier à nouveau. Les fichiers sont téléchargés dans `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. Cette valeur est facultative.</dd>
+   <dd>Téléchargez les fichiers de certificat et d'autorisations TLS pour le rôle Superutilisateur. Vous pouvez utiliser les certificats pour automatiser les tâches d'un cluster sans avoir à vous authentifier à nouveau. Les fichiers sont téléchargés dans `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. Cette valeur est facultative.</dd>
 
    <dt><code>--export</code></dt>
    <dd>Téléchargez les certificats et les données de configuration Kubernetes sans autre message que la commande export. Comme aucun message ne s'affiche, vous pouvez utiliser cet indicateur lorsque vous créez des scripts automatisés. Cette valeur est facultative.</dd>
@@ -548,7 +551,7 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>Remplacez <code><em>&lt;cluster_name&gt;</em></code> par le nom de votre cluster. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Notez que le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et ajouté avec une valeur aléatoire dans le nom de domaine Ingress.
+    <td>Remplacez <code><em>&lt;cluster_name&gt;</em></code> par le nom de votre cluster. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et complété par une valeur aléatoire dans le nom de domaine Ingress.
 </td>
     </tr>
     <tr>
@@ -561,15 +564,15 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
+     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;private_VLAN&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
+     <td>Remplacez <code><em>&lt;private_VLAN&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur de back-end).</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;public_VLAN&gt;</em></code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal).</td>
+     <td>Remplacez <code><em>&lt;public_VLAN&gt;</em></code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur de front-end).</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
@@ -606,10 +609,10 @@ trusted: <em>true</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
+<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Nom du cluster.  Cette valeur est obligatoire. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Notez que le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et ajouté avec une valeur aléatoire dans le nom de domaine Ingress.
+<dd>Nom du cluster.  Cette valeur est obligatoire. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et complété par une valeur aléatoire dans le nom de domaine Ingress.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
@@ -627,7 +630,7 @@ trusted: <em>true</em>
 <li>S'il s'agit du premier cluster standard que vous créez à cet emplacement, n'incluez pas cet indicateur. Un VLAN privé est créé pour vous lorsque le cluster est créé.</li>
 <li>Si vous avez créé un cluster standard auparavant à cet emplacement ou créé un VLAN privé dans l'infrastructure IBM Cloud (SoftLayer), vous devez spécifier ce VLAN privé.
 
-<p><strong>Remarque :</strong> {[matching_VLANs]}</p></li>
+<p><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></li>
 </ul>
 
 <p>Pour déterminer si vous disposez déjà d'un VLAN privé pour un emplacement spécifique ou pour identifier le nom d'un VLAN privé existant, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -639,7 +642,7 @@ trusted: <em>true</em>
 <li>S'il s'agit du premier cluster standard que vous créez à cet emplacement, n'utilisez pas cet indicateur. Un VLAN public est créé pour vous lorsque le cluster est créé.</li>
 <li>Si vous avez créé un cluster standard auparavant à cet emplacement ou créé un VLAN public dans l'infrastructure IBM Cloud (SoftLayer), vous devez spécifier ce VLAN public.
 
-<p><strong>Remarque :</strong> {[matching_VLANs]}</p></li>
+<p><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></li>
 </ul>
 
 <p>Pour déterminer si vous disposez déjà d'un VLAN public pour un emplacement spécifique ou pour identifier le nom d'un VLAN public existant, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -740,7 +743,7 @@ Affichez des informations sur un cluster dans votre organisation.
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)
@@ -787,7 +790,7 @@ Supprimez un cluster de votre organisation.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Mettez à jour le maître Kubernetes à la version par défaut de l'API. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. Les noeuds worker, les applications et les ressources déployés par l'utilisateur ne sont pas modifiés et continuent à s'exécuter. 
+Mettez à jour le maître Kubernetes à la version par défaut de l'API. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. Les noeuds worker, les applications et les ressources déployés par l'utilisateur ne sont pas modifiés et continuent à s'exécuter.
 
 Vous pourriez devoir modifier vos fichiers YAML en vue de déploiements ultérieurs. Consultez cette [note sur l'édition](cs_versions.html) pour plus de détails.
 
@@ -1131,7 +1134,7 @@ Déploiement ou mise à jour d'un certificat à partir de votre instance {{site.
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Incluez cet indicateur pour mettre à jour le certificat pour une valeur confidentielle (secret) ALB dans un cluster. Cette valeur est facultative.</dd>
+   <dd>Met à jour le certificat d'une valeur confidentielle d'équilibreur de charge d'application (ALB) dans un cluster. Cette valeur est facultative.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>Nom de la valeur confidentielle ALB. Cette valeur est obligatoire.</dd>
@@ -1252,9 +1255,6 @@ Affichage d'une liste de valeurs confidentielles ALB dans un cluster.
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1276,7 +1276,7 @@ Activation ou désactivation d'un équilibreur de charge ALB dans votre cluster 
    <dd>
 
    <ul>
-    <li>Ce paramètre n'est disponible que pour un équilibreur de charge d'application (ALB) privé</li>
+    <li>Ce paramètre n'est disponible que pour activer un équilibreur de charge d'application (ALB) privé</li>
     <li>L'ALB privé est déployé avec une adresse IP à partir d'un sous-réseau privé fourni par l'utilisateur. Si aucune adresse IP n'est fournie, l'ALB est déployé avec une adresse IP privée issue du sous-réseau privé portable qui est mis à disposition automatiquement lorsque vous avez créé le cluster.</li>
    </ul>
    </dd>
@@ -1291,13 +1291,6 @@ Activation ou désactivation d'un équilibreur de charge ALB dans votre cluster 
   ```
   {: pre}
 
-  Exemple de désactivation d'un équilibreur de charge ALB :
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   Exemple d'activation d'un équilibreur de charge ALB avec une adresse IP fournie par l'utilisateur :
 
   ```
@@ -1305,7 +1298,12 @@ Activation ou désactivation d'un équilibreur de charge ALB dans votre cluster 
   ```
   {: pre}
 
+  Exemple de désactivation d'un équilibreur de charge ALB :
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1448,25 +1446,106 @@ Affichez la liste des types de machine disponibles pour vos noeuds worker. Chaqu
 Vous pouvez mettre à disposition votre noeud worker en tant que machine virtuelle sur un matériel dédié ou partagé, ou en tant que machine physique sur un serveur bare metal.
 
 <dl>
-<dt>Machines physiques (bare metal)</dt>
-<dd>Vous pouvez mettre à disposition votre noeud worker en tant que serveur physique à service exclusif, également désigné par serveur bare metal. Bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances.
+<dt>Pourquoi utiliser des machines physiques (bare metal) ?</dt>
+<dd><p><strong>Plus de ressources de calcul</strong> : vous pouvez mettre à disposition votre noeud worker en tant que serveur physique à service exclusif, également désigné par serveur bare metal. Bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour effectuer des sauvegardes de données locales.</p>
 <p><strong>Facturation mensuelle</strong> : les serveurs bare metal sont plus chers que les serveurs virtuels et conviennent mieux aux applications à hautes performances qui nécessitent plus de ressources et de contrôle hôte. Les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. La commande et l'annulation de serveurs bare metal est un processus manuel qui s'effectue via votre compte d'infrastructure IBM Cloud (SoftLayer). Ce processus peut prendre plus d'un jour ouvrable.</p>
-<p><strong>Option pour activer la fonction de calcul sécurisé (Trusted Compute)</strong> : activez la fonction de calcul sécurisé pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containershort_notm}} avec calcul sécurisé](cs_secure.html#trusted_compute). La fonction de calcul sécurisé (Trusted Compute) est activée sur les clusters qui exécutent Kubernetes version 1.9 ou ultérieure et qui ont certains types de machine bare metal. Lorsque vous exécutez la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone `Trustable`.</p>
-<p><strong>Groupes de types de machine bare metal</strong> : les types de machine bare metal sont fournis en groupes ayant des ressources de traitement différentes que vous pouvez sélectionner pour répondre aux besoins de votre application. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour effectuer des sauvegardes de données locales. Pour en savoir plus sur les différents types d'offres bare metal, voir la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type` .
-<ul><li>`mb1c.4x32` : si vous n'avez pas besoin de ressources à forte consommation de mémoire RAM ou de données, sélectionnez ce type pour obtenir une configuration équilibrée des ressources de machine physique pour vos noeuds worker. Configuration équilibrée avec 4 coeurs, 32 Go de RAM, un disque principal SATA de 1 To, un disque secondaire SATA de 2 To, un réseau de liaisons à 10 Gbit/s.</li>
-<li>`mb1c.16x64` : si vous n'avez pas besoin de ressources à forte consommation de mémoire RAM ou de données, sélectionnez ce type pour obtenir une configuration équilibrée des ressources de machine physique pour vos noeuds worker. Configuration équilibrée avec 16 coeurs, 64 Go de RAM, un disque principal SATA de 1 To, un disque secondaire SSD de 1,75 To, un réseau de liaisons à 10 Gbit/s.</li>
-<li>`mr1c.28x512` : sélectionnez ce type pour maximiser la mémoire RAM disponible pour vos noeuds worker. Grande capacité de mémoire RAM avec 28 coeurs, 512 Go de mémoire, un disque principal SATA 1 To, un disque secondaire SSD 1,7 To, un réseau de liaisons à 10 Gbit/s.</li>
-<li>`md1c.16x64.4x4tb` : sélectionnez ce type si vos noeuds worker nécessitent une quantité substantielle de stockage sur disque local, y compris sur disque RAID pour la sauvegarde des données stockées localement sur la machine. Les disques de stockage principaux d'une capacité de 1 To sont configurés pour RAID1 et les disques de stockage secondaires de 4 To sont configurés pour RAID10. Grande capacité de données avec 28 coeurs, 512 Go de mémoire, disque principal RAID1 de 2 x 1 To, disque secondaire RAID10 SATA 4x4 To, réseau de liaisons à 10 Gbit/s.</li>
-<li>`md1c.28x512.4x4tb` : sélectionnez ce type si vos noeuds worker nécessitent une quantité substantielle de stockage sur disque local, y compris sur disque RAID pour la sauvegarde des données stockées localement sur la machine. Les disques de stockage principaux d'une capacité de 1 To sont configurés pour RAID1 et les disques de stockage secondaires de 4 To sont configurés pour RAID10. Grande capacité de données avec 16 coeurs, 64 Go de mémoire, disque principal RAID1 de 2 x 1 To, disque secondaire RAID10 SATA 4x4 To, réseau de liaisons à 10 Gbit/s.</li>
-
-</ul></p></dd>
-<dt>Machines virtuelles</dt>
-<dd>Lorsque vous créez un cluster standard virtuel, vous devez décider si le matériel sous-jacent doit être partagé par plusieurs clients {{site.data.keyword.IBM_notm}} (service partagé) ou vous être dédié exclusivement (service exclusif).
-<p>Dans une configuration de service partagé, les ressources physiques (comme l'UC et la mémoire) sont partagées par toutes les machines virtuelles déployées sur le même matériel physique. Pour permettre à chaque machine virtuelle d'opérer indépendamment, un moniteur de machine virtuelle, également dénommé hyperviseur, segmente les ressources physiques en entités isolées et les alloue à une machine virtuelle en tant que ressources dédiés (isolement par hyperviseur).</p>
-<p>Dans une configuration de service exclusif, toutes les ressources physiques vous sont dédiées en exclusivité. Vous pouvez déployer plusieurs noeuds worker en tant que machines virtuelles sur le même hôte physique. A l'instar de la configuration de service partagé, l'hyperviseur veille à ce que chaque noeud worker ait sa part des ressources physiques disponibles.</p>
+<p><strong>Option pour activer la fonction de calcul sécurisé (Trusted Compute)</strong> : activez la fonction de calcul sécurisé pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containershort_notm}} avec calcul sécurisé](cs_secure.html#trusted_compute). La fonction de calcul sécurisé (Trusted Compute) est activée sur les clusters qui exécutent Kubernetes version 1.9 ou ultérieure et qui ont certains types de machine bare metal. Lorsque vous exécutez la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone **Trustable**. Par exemple, les versions GPU `mgXc` ne prennent pas en charge la fonction de calcul sécurisé (Trusted Compute).</p></dd>
+<dt>Pourquoi utiliser des machines virtuelles ?</dt>
+<dd><p>Avec des machines virtuelles, vous pouvez obtenir une plus grande flexibilité, des temps de mise à disposition plus rapides et plus de fonctions de mise à l'échelle automatique qu'avec des machines physiques (bare metal), à un coût plus avantageux. Vous pouvez utiliser des machines virtuelles pour la plupart des cas d'utilisation généraux, par exemple les environnements de test et de développement, les environnements de préproduction et de production, les microservices et les applications métier. Cependant, il y a un impact sur les performances. Si vous avez besoin de calcul haute performance pour des charges de travail qui consomment beaucoup de mémoire RAM, de données ou de processeur graphique (GPU), utilisez des machines bare metal.</p>
+<p><strong>Choisir entre un service partagé ou exclusif</strong> : lorsque vous créez un cluster standard virtuel, vous devez décider si le matériel sous-jacent doit être partagé par plusieurs clients {{site.data.keyword.IBM_notm}} (service partagé) ou vous être dédié exclusivement (service exclusif). </p>
+<p>Dans une configuration à service partagé, les ressources physiques (comme l'UC et la mémoire) sont partagées par toutes les machines virtuelles déployées sur le même matériel physique. Pour permettre à chaque machine virtuelle d'opérer indépendamment, un moniteur de machine virtuelle, également dénommé hyperviseur, segmente les ressources physiques en entités isolées et les alloue à une machine virtuelle en tant que ressources dédiées (isolement par hyperviseur).</p>
+<p>Dans une configuration à service exclusif, toutes les ressources physiques vous sont dédiées en exclusivité. Vous pouvez déployer plusieurs noeuds worker en tant que machines virtuelles sur le même hôte physique. A l'instar de la configuration à service partagé, l'hyperviseur veille à ce que chaque noeud worker ait sa part des ressources physiques disponibles.</p>
 <p>Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, vous devriez contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.</p>
-<p><strong>Types de machine virtuelle `u2c` ou `b2c`</strong> : ces machines utilisent le disque local au lieu du réseau SAN (Storage Area Networking) pour une plus grande fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.</p>
-<p><strong>Types de machine `u1c` ou `b1c` obsolètes</strong> : pour commencer à utiliser les types de machine `u2c` et `b2c`, [mettez à jour les types de machine en ajoutant des noeuds worker](cs_cluster_update.html#machine_type).</p></dd>
+<p><strong>Versions de machine virtuelle `u2c` ou `b2c`</strong> : ces machines utilisent le disque local au lieu du réseau SAN (Storage Area Networking) pour une plus grande fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.</p>
+<p><strong>Que se passe-t-il si je dispose de types de machine `u1c` ou `b1c` obsolètes ?</strong> Pour commencer à utiliser les types de machine `u2c` et `b2c`, [mettez à jour les types de machine en ajoutant des noeuds worker](cs_cluster_update.html#machine_type).</p></dd>
+<dt>Entre quelles versions de machine virtuelle et physique ai-je le choix ?</dt>
+<dd><p>De nombreuses versions ! Sélectionnez le type de machine correspondant le mieux à vos besoins. N'oubliez pas qu'un pool de noeuds worker est constitué de machines de même version. Si vous souhaitez avoir un mélange de types de machine dans votre cluster, créez des pool de noeuds worker distincts pour chaque version.</p>
+<p>Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `bx cs machine-types <zone_name>`.</p>
+<p><table>
+<caption>Types de machine physique (bare metal) et virtuelle disponibles dans {{site.data.keyword.containershort_notm}}.</caption>
+<thead>
+<th>Nom et cas d'utilisation</th>
+<th>Coeurs/ Mémoire</th>
+<th>Disque principal / secondaire</th>
+<th>Vitesse réseau</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virtuel, u2c.2x4</strong> : utilisez cette machine virtuelle de petite taille à des fins de test rapide, de démonstration de faisabilité et pour d'autres charges de travail légères.</td>
+<td>2 / 4 Go</td>
+<td>25 Go / 100 Go</td>
+<td>1000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Virtuel, b2c.4x16</strong> : sélectionnez cette machine virtuelle équilibrée à des fins de test et de développement et pour d'autres charges de travail légères.</td>
+<td>4 / 16 Go</td>
+<td>25 Go / 100 Go</td>
+<td>1000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Virtuel, b2c.16x64</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne.</td></td>
+<td>16 / 64 Go</td>
+<td>25 Go / 100 Go</td>
+<td>1000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Virtuel, b2c.32x128</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne à élevée, par exemple une base de données et un site Web dynamique avec de nombreux utilisateurs simultanés.</td></td>
+<td>32 / 128 Go</td>
+<td>25 Go / 100 Go</td>
+<td>1000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Virtuel, b2c.56x242</strong> : sélectionnez cette machine virtuelle équilibrée pour des charges de travail volumineuses, par exemple une base de données et plusieurs applications avec de nombreux utilisateurs simultanés.</td></td>
+<td>56 / 242 Go</td>
+<td>25 Go / 100 Go</td>
+<td>1000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal à forte consommation de mémoire RAM, mr1c.28x512</strong> : augmentez au maximum la mémoire RAM disponible pour vos noeuds worker.</td>
+<td>28 / 512 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal GPU, mg1c.16x128</strong> : Choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version comporte 1 carte physique Tesla K80 avec 2 unités de traitement graphiques (GPU) par carte pour un total de 2 GPU.</td>
+<td>16 / 128 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal GPU, mg1c.28x256</strong> : Choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version possède 2 cartes physiques Tesla K80 avec 2 unités GPU par carte pour un total de 4 unités GPU.</td>
+<td>28 / 256 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal à forte consommation de données, md1c.16x64.4x4tb</strong> : idéal pour une quantité substantielle de stockage sur disque local, y compris RAID, pour la sauvegarde de données stockées localement sur la machine. A utiliser pour les charges de travail de systèmes de fichiers répartis, de bases de données volumineuses ou d'analyse de big data.</td>
+<td>16 / 64 Go</td>
+<td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal à forte consommation de données, md1c.28x512.4x4tb</strong> : idéal pour une quantité substantielle de stockage sur disque local, y compris RAID, pour la sauvegarde de données stockées localement sur la machine. A utiliser pour les charges de travail de systèmes de fichiers répartis, de bases de données volumineuses ou d'analyse de big data.</td>
+<td>28 / 512 Go</td>
+<td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal équilibré, mb1c.4x32</strong> : A utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles.</td>
+<td>4 / 32 Go</td>
+<td>SATA 2 To / SATA 2 To</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal équilibré, mb1c.16x64</strong> : A utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles.</td>
+<td>16 / 64 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>10000 Mbit/s</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
 </dl>
 
 
@@ -1683,7 +1762,7 @@ Mettez à jour les détails d'une configuration d'acheminement des journaux.
    <dt><code>--app-paths</code></dt>
      <dd>Ignore la validation des noms d'organisation et d'espace lorsqu'ils sont spécifiés. Cette opération permet de réduire le temps de traitement, mais une configuration de consignation non valide ne transfère pas correctement les journaux. Cette valeur est facultative.</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>Chemin dans leurs conteneurs utilisé par les applications pour la consignation. Pour transférer des journaux avec le type de source <code>application</code>, vous devez indiquer un chemin. Pour indiquer plusieurs chemins, utilisez une liste séparée par des virgules. Exemple : <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>Chemin dans les conteneurs utilisés par les applications pour la consignation. Pour transférer des journaux avec le type de source <code>application</code>, vous devez indiquer un chemin. Pour indiquer plusieurs chemins, utilisez une liste séparée par des virgules. Exemple : <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>Protocole de transfert de journal que vous souhaitez utiliser. Actuellement, <code>syslog</code> et <code>ibm</code> sont pris en charge. Cette valeur est obligatoire.</dd>
    <dt><code>--json</code></dt>
@@ -1728,7 +1807,7 @@ Créez un filtre de consignation. Cette commande vous permet de filtrer les jour
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Facultatif : filtre les journaux dont le niveau est inférieur ou égal au niveau spécifié. Les valeurs admises, par ordre canonique, sont : <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> et <code>trace</code>. Par exemple, si vous avez filtré les journaux au niveau <code>info</code>, les niveaux <code>debug</code> et <code>trace</code> sont également filtrés. **Remarque** : vous pouvez utiliser cet indicateur uniquement si les messages de journal sont au format JSON et contiennent une zone de niveau. Exemple de sortie : <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Facultatif : filtre les journaux contenant un message particulier n'importe où dans le journal. Le message est mis en correspondance littéralement, et non en tant qu'expression. Exemple : les messages “Hello”, “!” et “Hello, World!” s'appliqueront au journal “Hello, World!”.</dd>
+    <dd>Facultatif : filtre les journaux contenant un message particulier n'importe où dans le journal. Le message est mis en correspondance littéralement, et non en tant qu'expression. Exemple : les messages “Hello”, “!”et “Hello, World!”s'appliqueront au journal “Hello, World!”.</dd>
   <dt><code>--json</code></dt>
     <dd>Facultatif : imprime le résultat de la commande au format JSON.</dd>
 </dl>
@@ -1770,7 +1849,7 @@ Mettez à jour un filtre de consignation. Vous pouvez utiliser cette commande po
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Facultatif : filtre les journaux dont le niveau est inférieur ou égal au niveau spécifié. Les valeurs admises, par ordre canonique, sont : <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> et <code>trace</code>. Par exemple, si vous avez filtré les journaux au niveau <code>info</code>, les niveaux <code>debug</code> et <code>trace</code> sont également filtrés. **Remarque** : vous pouvez utiliser cet indicateur uniquement si les messages de journal sont au format JSON et contiennent une zone de niveau. Exemple de sortie : <code>{"log": "hello", "level": "info"}</code></dd>
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Facultatif : filtre les journaux contenant un message particulier n'importe où dans le journal. Le message est mis en correspondance littéralement, et non en tant qu'expression. Exemple : les messages “Hello”, “!” et “Hello, World!” s'appliqueront au journal “Hello, World!”.</dd>
+    <dd>Facultatif : filtre les journaux contenant un message particulier n'importe où dans le journal. Le message est mis en correspondance littéralement, et non en tant qu'expression. Exemple : les messages “Hello”, “!”et “Hello, World!”s'appliqueront au journal “Hello, World!”.</dd>
   <dt><code>--json</code></dt>
     <dd>Facultatif : imprime le résultat de la commande au format JSON.</dd>
 </dl>
@@ -1806,7 +1885,7 @@ Supprimez un filtre de consignation. Vous pouvez utiliser cette commande pour su
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>Nom ou ID du cluster duquel vous souhaitez supprimer un filtre.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>ID du filtre de journal que vous désirez supprimer.</dd>
+    <dd>ID du filtre de journal à supprimer.</dd>
   <dt><code>--all</code></dt>
     <dd>Facultatif : supprime tous vos filtres d'acheminement de journaux.</dd>
   <dt><code>--json</code></dt>
@@ -1859,13 +1938,13 @@ Region: us-south
 
 Définissez la région pour {{site.data.keyword.containershort_notm}}. Vous pouvez créer et gérer des clusters spécifiques à la région, et aussi désirer disposer de clusters dans plusieurs régions en vue d'une haute disponibilité.
 
-Par exemple, vous pourriez vous connecter à {{site.data.keyword.Bluemix_notm}} dans la région Sud des Etats-Unis et y créer un cluster. Vous pourriez ensuite utiliser la commande `bx cs region-set eu-central` pour cibler la région Centre des Etats-Unis et y créer un autre cluster. Enfin, vous pourriez utiliser la commande `bx cs region-set us-south` pour revenir à la région Sud des Etats-Unis et gérer votre cluster dans cette région.
+Par exemple, vous pourriez vous connecter à {{site.data.keyword.Bluemix_notm}} dans la région Sud des Etats-Unis et y créer un cluster. Vous pourriez ensuite utiliser la commande `bx cs region-set eu-central` pour cibler la région Europe centrale et y créer un autre cluster. Enfin, vous pourriez utiliser la commande `bx cs region-set us-south` pour revenir à la région Sud des Etats-Unis et gérer votre cluster dans cette région.
 
 **Options de commande** :
 
 <dl>
 <dt><code><em>REGION</em></code></dt>
-<dd>Entrez la région que vous désirez cibler. Cette valeur est facultative. Si vous n'indiquez pas la région, vous pouvez la sélectionner dans la liste dans la sortie.
+<dd>Entrez la région que vous désirez cibler. Cette valeur est facultative. Si vous n'indiquez pas la région, vous pouvez la sélectionner dans la liste figurant dans la sortie.
 
 Pour la liste des régions disponibles, consultez la rubrique [régions et emplacements](cs_regions.html) ou utilisez la commande `bx cs regions` [](#cs_regions).</dd></dl>
 
@@ -1940,7 +2019,7 @@ Ajoutez des noeuds worker à votre cluster standard.
 <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>Chemin d'accès au fichier YAML pour ajouter des noeuds worker à votre cluster. Au lieu de définir des noeuds worker supplémentaires à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative.
+<dd>Chemin d'accès au fichier YAML pour ajouter des noeuds worker au cluster. Au lieu de définir des noeuds worker supplémentaires à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative.
 
 <p><strong>Remarque :</strong> si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous définissez un type de machine dans votre fichier YAML et que vous utilisez l'option --machine-type dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.
 
@@ -1970,15 +2049,15 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
+<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>Remplacez <code><em>&lt;private_VLAN&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
+<td>Remplacez <code><em>&lt;private_VLAN&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur de back-end).</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Remplacez <code>&lt;public_VLAN&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans &lt;location&gt;</code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal). <br><strong>Remarque</strong> : {[private_VLAN_vyatta]}</td>
+<td>Remplacez <code>&lt;public_VLAN&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans &lt;location&gt;</code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur de front-end). <br><strong>Remarque</strong> : {[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1997,7 +2076,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared. Cette valeur est facultative.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
+<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques sur un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
 <dd>Entier représentant le nombre de noeuds worker à créer dans le cluster. La valeur par défaut est 1. Cette valeur est facultative.</dd>
@@ -2005,12 +2084,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>VLAN privé spécifié lors de la création du cluster. Cette valeur est obligatoire.
 
-<p><strong>Remarque :</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>VLAN public spécifié lors de la création du cluster. Cette valeur est facultative. Si vous désirez que vos noeuds worker ne soient présents que sur un réseau virtuel local privé, n'indiquez pas d'ID de réseau virtuel local public. <strong>Remarque</strong> : {[private_VLAN_vyatta]}
 
-<p><strong>Remarque :</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur de back-end) et les routeurs de VLAN public par <code>fcr</code> (routeur de front-end). Lors de la création d'un cluster et de la spécification des VLAN publics et privés, le nombre et la combinaison de lettres après ces préfixes doivent correspondre.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Les noeuds worker disposent par défaut du chiffrement de disque. [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option.</dd>
@@ -2145,7 +2224,7 @@ Avant de redémarrer le noeud worker, assurez-vous que les pods sont replanifié
 
 Rechargez toutes les configurations nécessaires relatives à un noeud worker. Un rechargement peut s'avérer utile en cas de problème sur votre noeud worker, par exemple une dégradation des performances ou une immobilisation dans un mauvais état de santé.
 
-Recharger un noeud worker ne s'applique pas aux dernières mises à jour, correctifs de sécurité ou à la [version Kubernetes](cs_versions.html#version_types). Lorsque des mises à jour de correctif ou de version sont disponibles, vous êtes invités à les appliquer dans l'interface de ligne de commande ou sur la console lors de l'utilisation de fonctions liées aux noeuds worker. Pour conserver vos noeuds worker à jour, utilisez régulièrement la [commande](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.
+Le rechargement d'un noeud worker applique des mises à jour de version de correctif à votre noeud worker mais pas de mise à jour principale ou secondaire. Pour voir les modifications d'une version de correctif à une autre, consultez la documentation [Journal des modifications de version](cs_versions_changelog.html#changelog).
 {: tip}
 
 Avant de recharger le noeud worker, assurez-vous que les pods sont replanifiés sur d'autres noeuds worker afin d'éviter toute indisponibilité de votre application ou l'altération des données sur votre noeud worker.
@@ -2314,7 +2393,7 @@ Affichez la liste des noeuds worker d'un cluster et le statut de chacun d'eux.
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>Nom ou ID du cluster sur lequel répertorier les noeuds worker disponibles. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID du cluster pour les noeuds worker disponibles. Cette valeur est obligatoire.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>Affiche les noeuds worker qui ont été supprimés du cluster, y compris la raison de la suppression. Cette valeur est facultative.</dd>
    </dl>
@@ -2325,4 +2404,3 @@ Affichez la liste des noeuds worker d'un cluster et le statut de chacun d'eux.
   bx cs workers my_cluster
   ```
   {: pre}
-

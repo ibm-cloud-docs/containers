@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # 指導教學：將應用程式從 Cloud Foundry 移轉至叢集
@@ -81,6 +82,7 @@ lastupdated: "2018-4-20"
 <br />
 
 
+
 ## 課程 2：使用您的應用程式碼建立 Docker 映像檔
 
 建立 Dockerfile，其中包含您的應用程式碼及容器的必要配置。然後，從該 Dockerfile 建置 Docker 映像檔，並將它推送至您的專用映像檔登錄。
@@ -130,6 +132,7 @@ lastupdated: "2018-4-20"
   {: pre}
 
   <table>
+  <caption>瞭解此指令的元件</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="此圖示指出有相關資訊可供您瞭解這個指令的元件。"/> 瞭解這個指令的元件</th>
   </thead>
@@ -212,6 +215,7 @@ lastupdated: "2018-4-20"
   {: codeblock}
 
   <table>
+  <caption>瞭解 YAML 檔案元件</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
   </thead>
@@ -229,7 +233,7 @@ lastupdated: "2018-4-20"
 2. 套用配置檔，以在叢集中建立部署及服務。
 
   ```
-  kubectl apply -f filepath/cf-py.yaml
+  kubectl apply -f <filepath>/cf-py.yaml
   ```
   {: pre}
 
@@ -246,7 +250,7 @@ lastupdated: "2018-4-20"
     a.  取得工作者節點在叢集中的公用 IP 位址。
 
     ```
-    bx cs workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -254,7 +258,7 @@ lastupdated: "2018-4-20"
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
@@ -262,9 +266,11 @@ lastupdated: "2018-4-20"
 
     <img src="images/python_flask.png" alt="已部署的樣板 Python Flask 應用程式的畫面擷取。" />
 
-5. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。步驟會視您的 Kubernet 版本而有所不同。
+5.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
 
-6. 在**工作負載**標籤中，您可以看到所建立的資源。完成 Kubernetes 儀表板探索之後，使用 `ctrl + c` 來結束 `proxy` 指令。
+    如果您在 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) 中選取叢集，則可以使用 **Kubernetes 儀表板**按鈕，透過按一下來啟動儀表板。
+    {: tip}
+
+6. 在**工作負載**標籤中，您可以看到所建立的資源。
 
 恭喜！您的應用程式已部署在容器中！
-

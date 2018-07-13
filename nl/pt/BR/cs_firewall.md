@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Abrindo portas e endereços IP necessários em seu firewall
 {: #firewall}
@@ -74,10 +77,10 @@ Para permitir acesso para um cluster específico:
 
 1. Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Se você tiver uma conta federada, inclua a opção `--sso`.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Selecione a região em que seu cluster está dentro.
 
@@ -108,7 +111,7 @@ Para permitir acesso para um cluster específico:
    ```
    {: screen}
 
-5. Permita acesso à **URL principal** na porta, como a porta `31142` no exemplo anterior.
+5. Permita acesso ao **Master URL** na porta, como a porta `31142` do exemplo anterior.
 
 6. Verifique sua conexão.
 
@@ -172,7 +175,7 @@ Antes de iniciar, permita acesso aos comandos [`bx` ](#firewall_bx) e aos comand
 Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para regiões do {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados de infraestrutura do IBM Cloud (SoftLayer) e egresso para solicitações de volume persistente.
 {:shortdesc}
 
-  1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
+  1.  Anote o endereço IP público para todos os nós do trabalhador no cluster.
 
       ```
       bx cs workers <cluster_name_or_ID>
@@ -183,6 +186,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       - **Importante**: deve-se permitir o tráfego de saída para a porta 443 para todos os locais dentro da região, para equilibrar a carga durante o processo de autoinicialização. Por exemplo, se o seu cluster estiver no Sul dos EUA, deve-se permitir o tráfego da porta 443 para os endereços IP para todos os locais (dal10, dal12 e dal13).
       <p>
   <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+  <caption>Endereços IP a serem abertos para o tráfego de saída</caption>
       <thead>
       <th>Região</th>
       <th>Localização</th>
@@ -228,6 +232,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       - Substitua <em>&lt;registry_publicIP&gt;</em> pelos endereços IP de registro para os quais você deseja permitir o tráfego. O registro global armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas.
         <p>
 <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+  <caption>Endereços IP a serem abertos para o tráfego de Registro</caption>
       <thead>
         <th>Região do {{site.data.keyword.containershort_notm}}</th>
         <th>Endereço de registro</th>
@@ -235,7 +240,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </thead>
       <tbody>
         <tr>
-          <td>Registro global em regiões do contêiner</td>
+          <td>Registro global em {{site.data.keyword.containershort_notm}} regiões</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Substitua <em>&lt;monitoring_public_IP&gt;</em> por todos os endereços das regiões de monitoramento para as quais você deseja permitir o tráfego:
         <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+  <caption>Endereços IP a serem abertos para o tráfego de monitoramento</caption>
         <thead>
-        <th>Região do contêiner</th>
+        <th>Região do {{site.data.keyword.containershort_notm}}</th>
         <th>Endereço de monitoramento</th>
         <th>Endereços IP de monitoramento</th>
         </thead>
@@ -295,8 +301,9 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Substitua <em>&lt;logging_public_IP&gt;</em> por todos os endereços das regiões de criação de log para as quais você deseja permitir o tráfego:
         <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+<caption>Endereços IP a serem abertos para o tráfego de criação de log</caption>
         <thead>
-        <th>Região do contêiner</th>
+        <th>Região do {{site.data.keyword.containershort_notm}}</th>
         <th>Endereço de criação de log</th>
         <th>Endereços IP de log</th>
         </thead>
@@ -352,4 +359,3 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
   <dt>Entrada</dt>
   <dd>Abra a porta 80 para HTTP ou a porta 443 para HTTPS para o endereço IP para o balanceador de carga do aplicativo Ingress.</dd>
 </dl>
-

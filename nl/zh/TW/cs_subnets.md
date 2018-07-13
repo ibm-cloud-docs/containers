@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,22 +16,26 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # 配置叢集的子網路
 {: #subnets}
 
 藉由將子網路新增至 {{site.data.keyword.containerlong}} 中的 Kubernetes 叢集，來變更可用的可攜式公用或專用 IP 位址的儲存區。
 {:shortdesc}
 
-在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。在此情況下，子網路不會與網路遮罩搭配使用，以在一個以上的叢集中建立連線功能。而是使用子網路，從可用來存取服務的叢集中提供該服務的永久固定 IP。
+在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP 位址。在此情況下，子網路不會與網路遮罩搭配使用，以在一個以上的叢集中建立連線功能。而是使用子網路，從可用來存取服務的叢集中提供該服務的永久固定 IP 位址。
 
 <dl>
   <dt>建立叢集依預設包含建立子網路</dt>
   <dd>當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建下列子網路：
-    <ul><li>具有 5 個公用 IP 位址的可攜式公用子網路</li>
-      <li>具有 5 個專用 IP 位址的可攜式專用子網路</li></ul>
-      可攜式公用及專用 IP 位址是靜態的，而且不會在移除工作者節點時變更。針對每一個子網路，其中一個可攜式公用 IP 位址及其中一個可攜式專用 IP 位址會用於 [Ingress 應用程式負載平衡器](cs_ingress.html)，您可以使用應用程式負載平衡器來公開叢集中的多個應用程式。藉由[建立負載平衡器服務](cs_loadbalancer.html)，即可使用其餘四個可攜式公用 IP 位址及四個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。</dd>
+    <ul><li>主要公用子網路，可判定在建立叢集期間工作者節點的公用 IP 位址</li>
+    <li>主要專用子網路，可判定在建立叢集期間工作者節點的專用 IP 位址</li>
+    <li>可攜式公用子網路，可為 Ingress 及負載平衡器網路服務提供 5 個公用 IP 位址</li>
+    <li>可攜式專用子網路，可為 Ingress 及負載平衡器網路服務提供 5 個專用 IP 位址</li></ul>
+      可攜式公用及專用 IP 位址是靜態的，而且不會在移除工作者節點時變更。針對每一個子網路，將一個可攜式公用 IP 位址及一個可攜式專用 IP 位址用於預設 [Ingress 應用程式負載平衡器](cs_ingress.html)。您可以使用 Ingress 應用程式負載平衡器，公開叢集中的多個應用程式。藉由[建立負載平衡器服務](cs_loadbalancer.html)，即可使用其餘四個可攜式公用 IP 位址及四個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。</dd>
   <dt>[訂購及管理您自己的現有子網路](#custom)</dt>
-  <dd>您可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中訂購及管理現有的可攜式子網路，而不是使用自動佈建的子網路。使用此選項，可在移除及建立叢集時保留穩定的靜態 IP，或訂購更大的 IP 區塊。請先使用 `cluster-create --no-subnet` 指令來建立無子網路的叢集，然後使用 `cluster-subnet-add` 指令將子網路新增至叢集。</dd>
+  <dd>您可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中訂購及管理現有的可攜式子網路，而不是使用自動佈建的子網路。使用此選項，可在移除及建立叢集時保留穩定的靜態 IP 位址，或訂購更大的 IP 位址區塊。請先使用 `cluster-create --no-subnet` 指令來建立無子網路的叢集，然後使用 `cluster-subnet-add` 指令將子網路新增至叢集。</dd>
 </dl>
 
 **附註：**可攜式公用 IP 位址為按月收費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用也是一樣。
@@ -39,10 +43,10 @@ lastupdated: "2018-4-20"
 ## 要求叢集的其他子網路
 {: #request}
 
-您可以藉由將子網路指派給叢集，來為叢集新增穩定的可攜式公用或專用 IP。
+您可以藉由將子網路指派給叢集，來為叢集新增穩定的可攜式公用或專用 IP 位址。
 {:shortdesc}
 
-**附註：**當您讓叢集可以使用子網路時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+**附註：**當您讓叢集可以使用子網路時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定您使用的子網路只有一個叢集。請不要同時將子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。
 
@@ -51,11 +55,12 @@ lastupdated: "2018-4-20"
 1. 佈建新的子網路。
 
     ```
-    bx cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
+        bx cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
     ```
     {: pre}
 
     <table>
+    <caption>瞭解此指令的元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
@@ -81,7 +86,7 @@ lastupdated: "2018-4-20"
 2.  驗證已順利建立子網路並將其新增至叢集。子網路 CIDR 列在 **VLAN** 區段中。
 
     ```
-    bx cs cluster-get --showResources <cluster_name_or_ID>
+        bx cs cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -110,16 +115,18 @@ lastupdated: "2018-4-20"
 1.  識別要使用的子網路。請記下子網路的 ID 及 VLAN ID。在此範例中，子網路 ID 是 `1602829`，而 VLAN ID 是 `2234945`。
 
     ```
-    bx cs subnets
+        bx cs subnets
     ```
     {: pre}
 
     ```
-    Getting subnet list...
+        Getting subnet list...
     OK
     ID        Network             Gateway          VLAN ID   Type      Bound Cluster
     1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
     1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
+
+    
 
     ```
     {: screen}
@@ -127,12 +134,12 @@ lastupdated: "2018-4-20"
 2.  確認 VLAN 所在的位置。在此範例中，位置是 dal10。
 
     ```
-    bx cs vlans dal10
+        bx cs vlans dal10
     ```
     {: pre}
 
     ```
-    Getting VLAN list...
+        Getting VLAN list...
     OK
     ID        Name   Number   Type      Router         Supports Virtual Workers
     2234947          1813     private   bcr01a.dal10   true
@@ -143,14 +150,14 @@ lastupdated: "2018-4-20"
 3.  使用您所識別的位置及 VLAN ID 來建立叢集。若要重複使用現有的子網路，請包含 `--no-subnet` 旗標，以防止自動建立新的可攜式公用 IP 子網路及新的可攜式專用 IP 子網路。
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
 4.  驗證已要求建立叢集。
 
     ```
-    bx cs clusters
+        bx cs clusters
     ```
     {: pre}
 
@@ -160,14 +167,14 @@ lastupdated: "2018-4-20"
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.7
     ```
     {: screen}
 
 5.  檢查工作者節點的狀態。
 
     ```
-    bx cs workers <cluster>
+        bx cs workers <cluster>
     ```
     {: pre}
 
@@ -175,14 +182,14 @@ lastupdated: "2018-4-20"
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.7
     ```
     {: screen}
 
 6.  指定子網路 ID，以將子網路新增至叢集。當您讓子網路可供叢集使用時，系統會為您建立 Kubernetes ConfigMap，其中包括您可以使用的所有可用的可攜式公用 IP 位址。如果您的叢集還沒有應用程式負載平衡器，則會自動使用一個可攜式公用 IP 位址及一個可攜式專用 IP 位址，來建立公用及專用應用程式負載平衡器。所有其他可攜式公用或專用 IP 位址，則可用來為您的應用程式建立負載平衡器服務。
 
     ```
-    bx cs cluster-subnet-add mycluster 807861
+        bx cs cluster-subnet-add mycluster 807861
     ```
     {: pre}
 
@@ -204,19 +211,19 @@ lastupdated: "2018-4-20"
 
 開始之前：
 - 配置進出外部子網路的網路資料流量遞送。
-- 確認您在內部部署資料中心閘道裝置與 IBM Cloud 基礎架構 (SoftLayer) 組合中的專用網路 Vyatta 或您叢集中執行的 strongSwan VPN 服務之間，具有 VPN 連線功能。如需相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
+- 確認您在內部部署資料中心網路閘道與專用網路 Virtual Router Appliance 或您叢集中執行的 strongSwan VPN 服務之間，具有 VPN 連線功能。如需相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
 
 若要從內部部署網路新增子網路，請執行下列動作：
 
 1. 檢視叢集「專用 VLAN」的 ID。找出 **VLAN** 區段。在 **User-managed** 欄位中，將 VLAN ID 識別為 _false_。
 
     ```
-    bx cs cluster-get --showResources <cluster_name>
+        bx cs cluster-get --showResources <cluster_name>
     ```
     {: pre}
 
     ```
-    VLANs
+        VLANs
     VLAN ID   Subnet CIDR       Public   User-managed
     2234947   10.xxx.xx.xxx/29  false    false
     2234945   169.xx.xxx.xxx/29 true     false
@@ -226,26 +233,26 @@ lastupdated: "2018-4-20"
 2. 將外部子網路新增至您的專用 VLAN。可攜式專用 IP 位址會新增至叢集的 ConfigMap。
 
     ```
-    bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <VLAN_ID>
+        bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <VLAN_ID>
     ```
     {: pre}
 
     範例：
 
     ```
-    bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
+        bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
     ```
     {: pre}
 
 3. 驗證已新增使用者提供的子網路。**User-managed** 欄位為 _true_。
 
     ```
-    bx cs cluster-get --showResources <cluster_name>
+        bx cs cluster-get --showResources <cluster_name>
     ```
     {: pre}
 
     ```
-    VLANs
+        VLANs
     VLAN ID   Subnet CIDR       Public   User-managed
     2234947   10.xxx.xx.xxx/29  false    false
     2234945   169.xx.xxx.xxx/29 true   false
@@ -306,21 +313,21 @@ lastupdated: "2018-4-20"
 2.  在叢集中建立服務。
 
     ```
-    kubectl apply -f myservice.yaml
+        kubectl apply -f myservice.yaml
     ```
     {: pre}
 
 3.  檢查服務。
 
     ```
-    kubectl describe service myservice
+        kubectl describe service myservice
     ```
     {: pre}
 
     **附註：**建立此服務失敗，因為 Kubernetes 主節點在 Kubernetes ConfigMap 中找不到指定的負載平衡器 IP 位址。當您執行此指令時，可以看到錯誤訊息以及叢集可用的公用 IP 位址清單。
 
     ```
-    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IPs are available: <list_of_IP_addresses>
+        Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
     ```
     {: screen}
 
@@ -335,14 +342,14 @@ lastupdated: "2018-4-20"
 1.  列出叢集中可用的服務。
 
     ```
-    kubectl get services
+        kubectl get services
     ```
     {: pre}
 
 2.  移除使用公用或專用 IP 位址的負載平衡器服務。
 
     ```
-    kubectl delete service <service_name>
+        kubectl delete service <service_name>
     ```
     {: pre}
 
@@ -355,4 +362,3 @@ lastupdated: "2018-4-20"
 大型叢集或相同 VLAN 的單一地區中的數個較小叢集，可能會超出這 62 個工作者節點的限制。達到 62 個工作者節點的限制時，會在相同 VLAN 中訂購第二個主要子網路。
 
 若要在相同 VLAN 上的子網路之間進行遞送，您必須開啟 VLAN 跨越。如需指示，請參閱[啟用或停用 VLAN 跨越](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。
-

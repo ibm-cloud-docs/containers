@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # 在防火牆中開啟必要埠及 IP 位址
 {: #firewall}
@@ -74,10 +77,10 @@ lastupdated: "2018-4-20"
 
 1. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。如果您有聯合帳戶，請包含 `--sso` 選項。
 
-    ```
+   ```
     bx login [--sso]
     ```
-    {: pre}
+   {: pre}
 
 2. 選取您叢集所在的地區。
 
@@ -108,7 +111,7 @@ lastupdated: "2018-4-20"
    ```
    {: screen}
 
-5. 容許在埠上存取**主要 URL**，例如前一個範例中的埠 `31142`。
+5. 容許在埠上存取**主要 URL**，例如來自前一個範例的埠 `31142`。
 
 6. 驗證連線。
 
@@ -175,7 +178,7 @@ lastupdated: "2018-4-20"
   1.  記下叢集中所有工作者節點的公用 IP 位址。
 
       ```
-       bx cs workers <cluster_name_or_ID>
+             bx cs workers <cluster_name_or_ID>
        ```
       {: pre}
 
@@ -183,7 +186,8 @@ lastupdated: "2018-4-20"
       - **重要事項**：對於地區內的所有位置，您必須容許對埠 443 的送出資料流量，以平衡引導處理程序期間的負載。例如，如果您的叢集是在美國南部，則對於所有位置（dal10、dal12 及 dal13），您必須容許從埠 443 到 IP 位址的資料流量。
       <p>
   <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <thead>
+  <caption>針對送出資料流量開啟的 IP 位址</caption>
+      <thead>
       <th>地區</th>
       <th>位置</th>
       <th>IP 位址</th>
@@ -228,14 +232,15 @@ lastupdated: "2018-4-20"
       - 將 <em>&lt;registry_publicIP&gt;</em> 取代為您要容許資料流量的登錄 IP 位址。全球登錄會儲存 IBM 提供的公用映像檔，地區登錄會儲存您自己的專用或公用映像檔。
         <p>
 <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <thead>
+  <caption>針對「登錄」資料流量開啟的 IP 位址</caption>
+      <thead>
         <th>{{site.data.keyword.containershort_notm}} 地區</th>
         <th>登錄位址</th>
         <th>登錄 IP 位址</th>
       </thead>
       <tbody>
         <tr>
-          <td>跨容器地區的全球登錄</td>
+          <td>跨 {{site.data.keyword.containershort_notm}} 地區的全球登錄</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - 將 <em>&lt;monitoring_public_IP&gt;</em> 取代為您要容許資料流量的監視地區的所有位址：
         <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <thead>
-        <th>容器地區</th>
+  <caption>針對監視資料流量開啟的 IP 位址</caption>
+        <thead>
+        <th>{{site.data.keyword.containershort_notm}} 地區</th>
         <th>監視位址</th>
         <th>監視 IP 位址</th>
         </thead>
@@ -295,8 +301,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - 將 <em>&lt;logging_public_IP&gt;</em> 取代為您要容許資料流量的記載地區的所有位址：
         <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <thead>
-        <th>容器地區</th>
+  <caption>針對記載資料流量開啟的 IP 位址</caption>
+        <thead>
+        <th>{{site.data.keyword.containershort_notm}} 地區</th>
         <th>記載位址</th>
         <th>記載 IP 位址</th>
         </thead>
@@ -352,4 +359,3 @@ lastupdated: "2018-4-20"
   <dt>Ingress</dt>
   <dd>針對 Ingress 應用程式負載平衡器的 IP 位址，開啟埠 80（適用於 HTTP）或埠 443（適用於 HTTPS）。</dd>
 </dl>
-

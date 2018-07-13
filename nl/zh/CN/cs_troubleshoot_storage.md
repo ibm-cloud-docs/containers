@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # 集群存储故障诊断
 {: #cs_troubleshoot_storage}
 
@@ -28,6 +29,8 @@ lastupdated: "2018-4-20"
 如果您有更常规的问题，请尝试[集群调试](cs_troubleshoot.html)。
 {: tip}
 
+
+
 ## 工作程序节点的文件系统更改为只读
 {: #readonly_nodes}
 
@@ -35,7 +38,7 @@ lastupdated: "2018-4-20"
 {: #stuck_creating_state}
 您可能会看到下列其中一个症状：
 - 当您运行 `kubectl get pods -o wide` 时，您会看到在同一工作程序节点上运行的多个 pod 陷入 `ContainerCreating` 状态。
-- 运行 `kubectl describe` 命令时，在 events 部分中看到以下错误：`MountVolume.SetUp failed for volume ... read-only file system`。
+- 运行 `kubectl describe` 命令时，在 **Events** 部分中看到以下错误：`MountVolume.SetUp failed for volume ... read-only file system`。
 
 {: tsCauses}
 工作程序节点上的文件系统是只读的。
@@ -49,6 +52,7 @@ lastupdated: "2018-4-20"
 <br />
 
 
+
 ## 非 root 用户拥有 NFS 文件存储器安装路径时，应用程序发生故障
 {: #nonroot}
 
@@ -58,14 +62,13 @@ lastupdated: "2018-4-20"
 {: tsCauses}
 缺省情况下，非 root 用户在支持 NFS 的存储器的卷安装路径上没有写许可权。一些公共应用程序映像（例如，Jenkins 和 Nexus3）会在 Dockerfile 中指定拥有安装路径的非 root 用户。通过此 Dockerfile 创建容器时，由于安装路径上非 root 用户的许可权不足，创建容器会失败。要授予写许可权，可以修改 Dockerfile，以在更改安装路径许可权之前将非 root 用户临时添加到 root 用户组，或者使用 init 容器。
 
-
-如果要使用 Helm 图表以您希望在 NFS 文件共享上具有写许可权的非 root 用户身份部署映像，请首先编辑 Helm 部署以使用 init 容器。
+如果使用 Helm 图表来部署映像，请编辑 Helm 部署以使用 init 容器。
 {:tip}
 
 
 
 {: tsResolve}
-在部署中包含 [init 容器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 时，可以向 Dockerfile 中指定的非 root 用户授予对指向 NFS 文件共享的容器内卷安装路径的写许可权。init 容器会在应用程序容器启动之前启动。init 容器在容器内创建卷安装路径，将安装路径更改为由正确的（非 root）用户拥有，然后关闭。随后，应用程序容器将启动，这包括必须写入安装路径的非 root 用户。由于该路径已由非 root 用户拥有，因此写入安装路径成功。如果您不想使用 init 容器，那么可以修改 Dockerfile 以添加对 NFS 文件存储器的非 root 用户访问权。
+在部署中包含 [init 容器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 时，可以向 Dockerfile 中指定的非 root 用户授予对容器内卷安装路径的写许可权。init 容器会在应用程序容器启动之前启动。init 容器在容器内创建卷安装路径，将安装路径更改为由正确的（非 root）用户拥有，然后关闭。随后，应用程序容器将以必须写入安装路径的非 root 用户身份启动。由于该路径已由非 root 用户拥有，因此写入安装路径成功。如果您不想使用 init 容器，那么可以修改 Dockerfile 以添加对 NFS 文件存储器的非 root 用户访问权。
 
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
@@ -77,9 +80,13 @@ lastupdated: "2018-4-20"
     **示例**：
 
     ```
-    FROM openjdk:8-jdk
+        FROM openjdk:8-jdk
 
-    RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+    
+
+    RUN apt-get update &&apt-get install -y git curl &&rm -rf /var/lib/apt/lists/*
+
+    
 
     ARG user=jenkins
     ARG group=jenkins
@@ -87,6 +94,8 @@ lastupdated: "2018-4-20"
     ARG gid=1000
     ARG http_port=8080
     ARG agent_port=50000
+
+    
 
     ENV JENKINS_HOME /var/jenkins_home
     ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
@@ -115,7 +124,7 @@ lastupdated: "2018-4-20"
 3.  创建 PVC。
 
     ```
-    kubectl apply -f mypvc.yaml
+        kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -123,14 +132,14 @@ lastupdated: "2018-4-20"
 
     ```
     initContainers:
-    - name: initContainer # 或者，可以替换为任何名称
+    - name: initContainer # Or you can replace with any name
       image: alpine:latest
       command: ["/bin/sh", "-c"]
       args:
-        - chown <UID>:<GID> /mount; # 将 UID 和 GID 替换为 Dockerfile 中的值
+        - chown <UID>:<GID> /mount; # Replace UID and GID with values from the Dockerfile
       volumeMounts:
-      - name: volume # 或者，可以替换为任何名称
-        mountPath: /mount # 必须与 args 行中的安装路径相匹配
+      - name: volume # Or you can replace with any name
+        mountPath: /mount # Must match the mount path in the args line
     ```
     {: codeblock}
 
@@ -173,21 +182,21 @@ lastupdated: "2018-4-20"
 5.  创建 pod 并将 PVC 安装到该 pod。
 
     ```
-    kubectl apply -f my_pod.yaml
+        kubectl apply -f my_pod.yaml
     ```
     {: pre}
 
 6. 验证卷是否已成功安装到 pod。记下 pod 名称和 **Containers/Mounts** 路径。
 
     ```
-    kubectl describe pod <my_pod>
+        kubectl describe pod <my_pod>
     ```
     {: pre}
 
     **示例输出**：
 
     ```
-    Name:		    mypod-123456789
+        Name:		    mypod-123456789
     Namespace:	default
     ...
     Init Containers:
@@ -217,27 +226,29 @@ lastupdated: "2018-4-20"
         ClaimName: mypvc
         ReadOnly: false
 
+    
+
     ```
     {: screen}
 
 7.  使用先前记下的 pod 名称登录到 pod。
 
     ```
-    kubectl exec -it <my_pod-123456789> /bin/bash
+        kubectl exec -it <my_pod-123456789> /bin/bash
     ```
     {: pre}
 
 8. 验证容器安装路径的许可权。在示例中，安装路径为 `/var/jenkins_home`。
 
     ```
-    ls -ln /var/jenkins_home
+        ls -ln /var/jenkins_home
     ```
     {: pre}
 
     **示例输出**：
 
     ```
-    jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
+        jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
     total 12
     -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
     drwxr-xr-x 2 1000 1000 4096 Mar  9 19:58 init.groovy.d
@@ -267,6 +278,63 @@ lastupdated: "2018-4-20"
 
 
 
+## 由于文件系统不正确，将现有块存储器安装到 pod 失败
+{: #block_filesystem}
+
+{: tsSymptoms}
+运行 `kubectl describe pod <pod_name>` 时，会看到以下错误：
+```
+failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
+```
+{: screen}
+
+{: tsCauses}
+您具有设置为使用 `XFS` 文件系统的现有块存储设备。为了将此设备安装到 pod，您已[创建 PV](cs_storage.html#existing_block)，其中在 `spec/flexVolume/fsType` 部分中指定 `ext4` 作为文件系统，或者未指定任何文件系统。如果未定义任何文件系统，PV 将缺省为 `ext4`。PV 已成功创建，并且已链接到现有块存储器实例。但是，尝试使用匹配的 PVC 将 PV 安装到集群时，卷安装失败。无法将使用 `ext4` 文件系统的 `XFS` 块存储器实例安装到 pod。
+
+{: tsResolve}
+将现有 PV 中的文件系统从 `ext4` 更新为 `XFS`。
+
+1. 列出集群中的现有 PV，并记下用于现有块存储器实例的 PV 的名称。
+   ```
+    kubectl get pv
+    ```
+   {: pre}
+
+2. 将 PV YAML 保存到本地计算机。
+   ```
+   kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+3. 打开该 YAML 文件，并将 `fsType` 从 `ext4` 更改为 `xfs`。
+4. 替换集群中的 PV。
+   ```
+   kubectl replace --force -f <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+5. 登录到安装了 PV 的 pod。
+   ```
+   kubectl exec -it <pod_name> sh
+   ```
+   {: pre}
+
+6. 验证文件系统是否已更改为 `XFS`。
+   ```
+   df -Th
+   ```
+   {: pre}
+
+   输出示例：
+   ```
+   Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
+   ```
+   {: screen}
+
+<br />
+
+
+
 ## 获取帮助和支持
 {: #ts_getting_help}
 
@@ -274,7 +342,9 @@ lastupdated: "2018-4-20"
 {: shortdesc}
 
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
+
+如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
 
@@ -282,9 +352,8 @@ lastupdated: "2018-4-20"
     -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
--   通过开具凭单，与 IBM 支持联系。有关提交 IBM 支持凭单或支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+-   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
-{:tip}
+{: tip}
 报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
-
 

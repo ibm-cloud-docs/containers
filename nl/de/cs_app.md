@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Apps in Clustern bereitstellen
@@ -57,19 +59,20 @@ Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmend
 
 
 ### Verfügbarkeit Ihrer App erhöhen
+{: #increase_availability}
 
 <dl>
   <dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
-    <dd><p>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Bei Bereitstellungen müssen Sie nicht alle Schritte niederschreiben und können sich stattdessen auf Ihre App konzentrieren. </p>
+    <dd><p>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Bei Bereitstellungen müssen Sie nicht alle Schritte niederschreiben und können sich stattdessen auf Ihre App konzentrieren.</p>
     <p>Wenn Sie mehrere Pods bereitstellen, wird für Ihre Bereitstellungen automatisch eine Replikatgruppe erstellt, anhand der die Pods überwacht werden und sichergestellt wird, dass die gewünschte Anzahl von Pods jederzeit betriebsbereit ist. Wird ein Pod inaktiv, so ersetzt die Replikatgruppe den inaktiven Pod durch einen neuen Pod.</p>
     <p>Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter Anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit nicht verfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</p>
-    <p>Sie können mehrere Revisionen mit unterschiedlichen Flags gleichzeitig bereitstellen. Sie können beispielsweise eine Bereitstellung zuerst testen, bevor Sie sich entschließen, sie per Push-Operation an die Produktion zu übertragen. </p>
-    <p>Mit Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren. </p></dd>
+    <p>Sie können mehrere Revisionen mit unterschiedlichen Flags gleichzeitig bereitstellen. Sie können beispielsweise eine Bereitstellung zuerst testen, bevor Sie sich entschließen, sie per Push-Operation an die Produktion zu übertragen.</p>
+    <p>Mit Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren.</p></dd>
   <dt>Ausreichende Anzahl von Replikaten für die Arbeitslast Ihrer App plus 2 einbeziehen</dt>
-    <dd>Um Ihre App noch verfügbarer zu machen und ihre Ausfallsicherheit zu steigern, sollten Sie erwägen, über die Mindestzahl hinaus zusätzliche Replikate einzubinden, damit die erwartete Arbeitslast verarbeitet werden kann. Zusätzliche Replikate sind in der Lage, die Arbeitslast abzufangen, wenn ein Pod ausfällt und der ausgefallene Pod noch nicht durch die Replikatgruppe ersetzt wurde. Zum Schutz vor zwei gleichzeitigen Ausfällen sollten Sie zwei zusätzliche Replikate einbinden. Diese Konfiguration folgt dem Muster 'N+2'. Hierbei steht 'N' für die Anzahl der Replikate, die für die Verarbeitung der eingehenden Arbeitslast zur Verfügung steht, während der Wert '+2' die beiden zusätzlich eingebundenen Replikate angibt. Vorausgesetzt, in Ihrem Cluster ist ausreichend Platz, ist die Anzahl der mögliche Pods unbegrenzt. </dd>
+    <dd>Um Ihre App noch verfügbarer zu machen und ihre Ausfallsicherheit zu steigern, sollten Sie erwägen, über die Mindestzahl hinaus zusätzliche Replikate einzubinden, damit die erwartete Arbeitslast verarbeitet werden kann. Zusätzliche Replikate sind in der Lage, die Arbeitslast abzufangen, wenn ein Pod ausfällt und der ausgefallene Pod noch nicht durch die Replikatgruppe ersetzt wurde. Zum Schutz vor zwei gleichzeitigen Ausfällen sollten Sie zwei zusätzliche Replikate einbinden. Diese Konfiguration folgt dem Muster 'N+2'. Hierbei steht 'N' für die Anzahl der Replikate, die für die Verarbeitung der eingehenden Arbeitslast zur Verfügung steht, während der Wert '+2' die beiden zusätzlich eingebundenen Replikate angibt. Vorausgesetzt, in Ihrem Cluster ist ausreichend Platz, ist die Anzahl der mögliche Pods unbegrenzt.</dd>
   <dt>Pods auf mehrere Knoten (Anti-Affinität) verteilen</dt>
-    <dd><p>Wenn Sie Ihre Bereitstellung erstellen, können alle Pods auf demselben Workerknoten bereitgestellt werden. Dies wird als Affinität oder Zusammenstellung bezeichnet. Zum Schutz Ihrer App vor dem Ausfall eines Workerknotens können Sie Ihre Bereitstellung so konfigurieren, dass Ihre Pods mithilfe der Option <em>podAntiAffinity</em> in Ihren Standardclustern über mehrere Workerknoten verteilt werden. Sie können zwei Typen von Pod-Anti-Affinität definieren: bevorzugt oder erforderlich. Weitere Informationen finden Sie in der Kubernetes-Dokumentation unter <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Wird in einem neuen Tab oder einem neuen Fenster geöffnet)">Assigning Pods to Nodes</a>. </p>
-    <p><strong>Hinweis</strong>: Mit der erforderlichen Anti-Affinität können Sie nur die Anzahl von Replikaten bereitstellen, für die es Workerknoten gibt. Wenn Sie beispielsweise drei Workerknoten haben, aber in Ihrer YAML-Datei fünf Replikate definieren, werden nur drei Replikate bereitgestellt. Jedes Replikat befindet sich auf einem anderen Workerknoten. Die zwei übrigen Replikate verbleiben ausstehend. Wenn Sie einen weiteren Workerknoten zu Ihrem Cluster hinzufügen, wird eines der restlichen Replikate automatisch auf dem Workerknoten bereitgestellt. <p>
+    <dd><p>Wenn Sie Ihre Bereitstellung erstellen, können alle Pods auf demselben Workerknoten bereitgestellt werden. Dies wird als Affinität oder Zusammenstellung bezeichnet. Zum Schutz Ihrer App vor dem Ausfall eines Workerknotens können Sie Ihre Bereitstellung so konfigurieren, dass Ihre Pods mithilfe der Option <em>podAntiAffinity</em> in Ihren Standardclustern über mehrere Workerknoten verteilt werden. Sie können zwei Typen von Pod-Anti-Affinität definieren: bevorzugt oder erforderlich. Weitere Informationen finden Sie in der Kubernetes-Dokumentation unter <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Wird in einem neuen Tab oder einem neuen Fenster geöffnet)">Assigning Pods to Nodes</a>.</p>
+    <p><strong>Hinweis</strong>: Mit der erforderlichen Anti-Affinität können Sie nur die Anzahl von Replikaten bereitstellen, für die es Workerknoten gibt. Wenn Sie beispielsweise drei Workerknoten haben, aber in Ihrer YAML-Datei fünf Replikate definieren, werden nur drei Replikate bereitgestellt. Jedes Replikat befindet sich auf einem anderen Workerknoten. Die zwei übrigen Replikate verbleiben ausstehend. Wenn Sie einen weiteren Workerknoten zu Ihrem Cluster hinzufügen, wird eines der restlichen Replikate automatisch auf dem Workerknoten bereitgestellt.<p>
     <p><strong>Beispiele für YAML-Bereitstellungsdateien</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">Nginx-App mit bevorzugter Anti-Affinität für Pods</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">IBM® WebSphere® Application Server Liberty-App mit erforderlicher Anti-Affinität für Pods</a></li></ul></p>
@@ -136,14 +139,26 @@ Um mehr über die einzelnen Komponenten zu erfahren, lesen Sie sich den Abschnit
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
-Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen.
+Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der GUI](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashoard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus. Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
-1.  Für Cluster mit der Kubernetes-Masterversion 1.7.16 oder einer früheren Version:
+**Kubernetes-Dashboard über die GUI starten**
+{: #db_gui}
+
+1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) an. 
+2.  Wählen Sie in Ihrem Profil in der Menüleiste das Konto aus, das Sie verwenden möchten.
+3.  Klicken Sie im Menü auf **Container**.
+4.  Klicken Sie auf der Seite **Cluster** auf den Cluster, auf den Sie zugreifen möchten.
+5.  Klicken Sie auf der Seite mit den Clusterdetails auf die Schaltfläche **Kubernetes-Dashboard**.
+
+**Kubernetes-Dashboard über die CLI starten**
+{: #db_cli}
+
+*  Für Cluster mit der Kubernetes-Masterversion 1.7.16 oder einer früheren Version:
 
     1.  Legen Sie die Standardportnummer für den Proxy fest.
 
@@ -166,7 +181,7 @@ Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das
         ```
         {: codeblock}
 
-2.  Für Cluster mit einer Kubernetes-Masterversion ab Version 1.8.2:
+*  Für Cluster mit einer Kubernetes-Masterversion ab Version 1.8.2:
 
     1.  Rufen Sie Ihre Berechtigungsnachweise für Kubernetes ab.
 
@@ -204,10 +219,9 @@ Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das
 
       3.  Fügen Sie dann den zuvor kopierten Wert für **id-token** in das Feld **Token** ein und klicken Sie auf **ANMELDEN**.
 
-[Als Nächstes können Sie eine Konfigurationsdatei über das Dashboard ausführen.](#app_ui)
-
 Wenn Sie die Arbeit im Kubernetes-Dashboard beendet haben, beenden Sie den Befehl `proxy` mit der Tastenkombination `STRG + C`. Anschließend ist das Kubernetes-Dashboard nicht mehr verfügbar. Führen Sie den Befehl `proxy` aus, um das Kubernetes-Dashboard erneut zu starten.
 
+[Als Nächstes können Sie eine Konfigurationsdatei über das Dashboard ausführen.](#app_ui)
 
 
 <br />
@@ -309,17 +323,16 @@ Vorbemerkungen:
 
 Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
-1.  Öffnen Sie das Kubernetes-[Dashboard](#cli_dashboard) und klicken Sie auf **+ Erstellen**. 
-2.  Geben Sie Ihre App-Details auf einem der beiden folgenden Wege ein. 
-  * Wählen Sie **App-Details unten angeben** aus und geben Sie die Details ein. 
-  * Wählen Sie **YAML- oder JSON-Datei hochladen** aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) Ihrer App hochzuladen. 
+1.  Öffnen Sie das Kubernetes-[Dashboard](#cli_dashboard) und klicken Sie auf **+ Erstellen**.
+2.  Geben Sie Ihre App-Details auf einem der beiden folgenden Wege ein.
+  * Wählen Sie **App-Details unten angeben** aus und geben Sie die Details ein.
+  * Wählen Sie **YAML- oder JSON-Datei hochladen** aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) Ihrer App hochzuladen.
 
-  Benötigen Sie Hilfe mit Ihrer Konfigurationsdatei? Sehen Sie sich diese [YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In diesem Beispiel wird ein Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitgestellt.
-  {: tip}
+  Benötigen Sie Hilfe mit Ihrer Konfigurationsdatei? Sehen Sie sich diese [YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In diesem Beispiel wird ein Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitgestellt. Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.{: tip}
 
-3.  Überprüfen Sie auf einem der beiden folgenden Wege, dass Sie Ihre App erfolgreich bereitgestellt haben. 
-  * Klicken Sie im Kubernetes-Dashboard auf **Bereitstellungen**. Es wird eine Liste der erfolgreichen Bereitstellungen angezeigt. 
-  * Wenn Ihre App [öffentlich verfügbar](cs_network_planning.html#public_access) ist, navigieren Sie zur Clusterübersichtsseite in Ihrem {{site.data.keyword.containerlong}}-Dashboard. Kopieren Sie die Unterdomäne, die sich im Abschnitt mit der Clusterzusammenfassung befindet, und fügen Sie sie in einen Browser ein, um Ihre App anzuzeigen. 
+3.  Überprüfen Sie auf einem der beiden folgenden Wege, dass Sie Ihre App erfolgreich bereitgestellt haben.
+  * Klicken Sie im Kubernetes-Dashboard auf **Bereitstellungen**. Es wird eine Liste der erfolgreichen Bereitstellungen angezeigt.
+  * Wenn Ihre App [öffentlich verfügbar](cs_network_planning.html#public_access) ist, navigieren Sie zur Clusterübersichtsseite in Ihrem {{site.data.keyword.containerlong}}-Dashboard. Kopieren Sie die Unterdomäne, die sich im Abschnitt mit der Clusterzusammenfassung befindet, und fügen Sie sie in einen Browser ein, um Ihre App anzuzeigen.
 
 <br />
 
@@ -345,7 +358,7 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
     -   [Ingress ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/ingress/): Gibt einen Typ von Lastausgleichsfunktion an, die Routen für den öffentlichen Zugriff auf Ihre App bereitstellt.
 
-    
+    Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.
 
 2.  Führen Sie die Konfigurationsdatei in dem Kontext eines Clusters aus.
 
@@ -360,6 +373,174 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
 
 
+
+## Eine App auf einer GPU-Maschine bereitstellen
+{: #gpu_app}
+
+Wenn Sie über einen [Bare-Metal-GPU-Maschinentyp (Graphics Processing Unit)](cs_clusters.html#shared_dedicated_node) verfügen, können Sie rechenintensive Workloads für den Workerknoten terminieren. Sie können beispielsweise eine 3D-App ausführen, die die CUDA-Plattform (CUDA, Compute Unified Device Architecture) verwendet, um zur Leistungssteigerung die Systembelastung auf die GPU und CPU aufzuteilen.
+{:shortdesc}
+
+In den nachfolgenden Abschnitten erfahren Sie, wie Sie Workloads bereitstellen, für die die GPU erforderlich ist. Sie können auch [Apps bereitstellen](#app_ui), die ihre Workloads nicht auf der GPU und der CPU verarbeiten müssen. Anschließend kann es hilfreich sein, sich mit rechenintensiven Workloads, wie dem Framework [TensorFlow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.tensorflow.org/) für maschinelles Lernen mit [dieser Kubernetes-Demo ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) vertraut zu machen.
+
+Vorbemerkungen:
+* [Erstellen Sie einen Bare-Metal-GPU-Maschinentyp](cs_clusters.html#clusters_cli). Beachten Sie, dass dieser Prozess länger als einen Geschäftstag dauern kann.
+* Für den Cluster-Master und GPU-Workerknoten muss Kubernetes Version 1.10 oder höher ausgeführt werden.
+
+Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
+1.  Erstellen Sie eine YAML-Datei. In diesem Beispiel verwaltet eine YALM-Datei des Typs `Job` Stapelworkloads, die einen Pod mit kurzer Lebensdauer hervorbringen, der so lange ausgeführt wird, bis der Befehl, der ihn erfolgreich abschließen soll, beendet wird.
+
+    **Wichtig**: Bei GPU-Workloads müssen Sie immer einen Wert für das Feld `resources: limits: nvidia.com/gpu` in der YAML-Spezifikation bereitstellen.
+
+    ```yaml
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: nvidia-smi
+      labels:
+        name: nvidia-smi
+    spec:
+      template:
+        metadata:
+          labels:
+            name: nvidia-smi
+        spec:
+          containers:
+          - name: nvidia-smi
+            image: nvidia/cuda:9.1-base-ubuntu16.04
+            command: [ "/usr/test/nvidia-smi" ]
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                nvidia.com/gpu: 2
+            volumeMounts:
+            - mountPath: /usr/test
+              name: nvidia0
+          volumes:
+            - name: nvidia0
+              hostPath:
+                path: /usr/bin
+          restartPolicy: Never
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>YAML-Dateikomponenten</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Namen für Metadaten und Bezeichnungen</td>
+    <td>Geben Sie einen Namen und eine Bezeichnung für den Job an und verwenden Sie diesen Namen sowohl für die Metadaten der Datei als auch für die Metadaten von `spec template`. Beispiel: `nvidia-smi`.</td>
+    </tr>
+    <tr>
+    <td><code>containers/image</code></td>
+    <td>Geben Sie ein Image an, von dem der Container eine Instanz ausführt. In diesem Beispiel ist der Wert so festgelegt, dass das Docker Hub-CUDA-Image <code>nvidia/cuda:9.1-base-ubuntu16.04</code> verwendet wird.</td>
+    </tr>
+    <tr>
+    <td><code>containers/command</code></td>
+    <td>Geben Sie einen Befehl an, der im Container ausgeführt werden soll. In diesem Beispiel bezieht sich der Befehl <code>[ "/usr/test/nvidia-smi" ]</code> auf eine Binärdatei auf der GPU-Maschine; Sie müssen daher auch ein Datenträgermount einrichten.</td>
+    </tr>
+    <tr>
+    <td><code>containers/imagePullPolicy</code></td>
+    <td>Um nur ein neues Image zu extrahieren, wenn das Image sich nicht aktuell auf dem Workerknoten befindet, geben Sie <code>IfNotPresent</code> an.</td>
+    </tr>
+    <tr>
+    <td><code>resources/limits</code></td>
+    <td>Für GPU-Maschinen müssen Sie eine Ressourcengrenze angeben. Das [Einheiten-Plug-in![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) von Kubernetes legt die Standardressourcenanforderung entsprechend dieser Grenze fest.
+    <ul><li>Sie müssen den Schlüssel als <code>nvidia.com/gpu</code> angeben.</li>
+    <li>Geben Sie die Anzahl der von Ihnen angeforderten GPUs als Ganzzahl ein, beispielsweise <code>2</code>. <strong>Hinweis</strong>: Container-Pods geben GPUs nicht frei und GPUs können nicht überbelastet werden. Wenn Sie zum Beispiel nur über eine Maschine des Typs `mg1c.16x128` verfügen, stehen Ihnen nur zwei GPUs auf dieser Maschine zur Verfügung und es kann maximal der Wert `2` angegeben werden.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>volumeMounts</code></td>
+    <td>Name des Datenträgers, der an den Container angehängt wird, beispielsweise <code>nvidia0</code>. Geben Sie einen Wert für <code>mountPath</code> im Container für den Datenträger an. In diesem Beispiel entspricht der Pfad <code>/usr/test</code> dem im Containerbefehl des Jobs verwendeten Pfad.</td>
+    </tr>
+    <tr>
+    <td><code>volumes</code></td>
+    <td>Geben Sie dem Datenträger des Jobs einen Namen, beispielsweise <code>nvidia0</code>. Geben Sie als <code>hostPath</code> für den GPU-Workerknoten den Pfad (<code>path</code>) des Datenträgers auf dem Host an. In diesem Beispiel lautet dieser <code>/usr/bin</code>. Der Wert für <code>mountPath</code> des Containers wird dem Pfad (<code>path</code>) des Hostdatenträgers zugeordnet, wodurch der Job Zugriff auf die NVIDIA-Binärdateien auf dem GPU-Workerknoten erhält, damit der Containerbefehl ausgeführt werden kann.</td>
+    </tr>
+    </tbody></table>
+
+2.  Wenden Sie die YAML-Datei an. Beispiel:
+
+    ```
+    kubectl apply -f nvidia-smi.yaml
+    ```
+    {: pre}
+
+3.  Überprüfen Sie den Job-Pod, indem Sie die Pods anhand der Bezeichnung `nvidia-sim` filtern. Stellen Sie sicher, dass der **STATUS** den Wert **Completed** aufweist.
+
+    ```
+    kubectl get pod -a -l 'name in (nvidia-sim)'
+    ```
+    {: pre}
+
+    Beispielausgabe:
+    ```
+    NAME                  READY     STATUS      RESTARTS   AGE
+    nvidia-smi-ppkd4      0/1       Completed   0          36s
+    ```
+    {: screen}
+
+4.  Beschreiben Sie den Pod, um zu sehen, wie das GPU-Einheiten-Plug-in den Pod terminiert hat.
+    * In den Feldern `Limits` und `Requests` entspricht die von Ihnen angegebene Ressourcengrenze der Anforderung, die das Einheiten-Plug-in automatisch festgelegt hat.
+    * Überprüfen Sie in den Ereignissen, dass der Pod dem GPU-Workerknoten zugewiesen ist.
+
+    ```
+    kubectl describe pod nvidia-smi-ppkd4
+    ```
+    {: pre}
+
+    Beispielausgabe:
+    ```
+    Name:           nvidia-smi-ppkd4
+    Namespace:      default
+    ...
+    Limits:
+     nvidia.com/gpu:  2
+    Requests:
+     nvidia.com/gpu:  2
+    ...
+    Events:
+    Type    Reason                 Age   From                     Message
+    ----    ------                 ----  ----                     -------
+    Normal  Scheduled              1m    default-scheduler        Successfully assigned nvidia-smi-ppkd4 to 10.xxx.xx.xxx
+    ...
+    ```
+    {: screen}
+
+5.  Um sicherzustellen, dass der Job die GPU zum Berechnen der Workload verwendet hat, können Sie die entsprechenden Protokolle überprüfen. Mit dem Befehl `[ "/usr/test/nvidia-smi" ]` des Jobs wurde der GPU-Einheitenstatus auf dem GPU-Workerknoten abgefragt.
+
+    ```
+    kubectl logs nvidia-sim-ppkd4
+    ```
+    {: pre}
+
+    Beispielausgabe:
+    ```
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |===============================+======================+======================|
+    |   0  Tesla K80           Off  | 00000000:83:00.0 Off |                  Off |
+    | N/A   37C    P0    57W / 149W |      0MiB / 12206MiB |      0%      Default |
+    +-------------------------------+----------------------+----------------------+
+    |   1  Tesla K80           Off  | 00000000:84:00.0 Off |                  Off |
+    | N/A   32C    P0    63W / 149W |      0MiB / 12206MiB |      1%      Default |
+    +-------------------------------+----------------------+----------------------+
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                       GPU Memory |
+    |  GPU       PID   Type   Process name                             Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    ```
+    {: screen}
+
+    In diesem Beispiel wurden beide GPUs zum Ausführen des Jobs verwendet, da beide im Workerknoten terminiert wurden. Falls der Grenzwert auf '1' gesetzt ist, wird nur eine GPU angezeigt.
 
 ## Apps skalieren 
 {: #app_scaling}
@@ -376,7 +557,7 @@ Vorbemerkungen:
 
 Schritte:
 
-1.  Stellen Sie Ihre App über die Befehlszeilenschnittstelle (CLI) bereit. Bei der Bereitstellung Ihrer App müssen Sie CPU anfordern.
+1.  Stellen Sie Ihre App für einen Cluster über die Befehlszeilenschnittstelle (CLI) bereit. Bei der Bereitstellung Ihrer App müssen Sie CPU anfordern.
 
     ```
     kubectl run <appname> --image=<image> --requests=cpu=<cpu> --expose --port=<portnummer>
@@ -384,6 +565,7 @@ Schritte:
     {: pre}
 
     <table>
+    <caption>Befehlskomponenten von 'kubectl run'</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -416,6 +598,7 @@ Schritte:
     {: pre}
 
     <table>
+    <caption>Befehlskomponenten von 'kubectl autoscale'</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
     </thead>
@@ -446,7 +629,7 @@ Sie können den Rollout Ihrer Änderungen auf eine automatisierte und gesteuerte
 
 Erstellen Sie zunächst eine [Bereitstellung](#app_cli).
 
-1.  [Implementieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) Sie eine Änderung. Beispiel: Sie möchten das Image ändern, das Sie in Ihrer ursprünglichen Bereitstellung verwendet haben.
+1.  [Implementieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) Sie eine Änderung. Beispiel: Sie möchten das Image ändern, das Sie in Ihrer ursprünglichen Bereitstellung verwendet haben.
 
     1.  Rufen Sie den Namen der Bereitstellung ab.
 
@@ -508,5 +691,4 @@ Erstellen Sie zunächst eine [Bereitstellung](#app_cli).
         {: pre}
 
 <br />
-
 

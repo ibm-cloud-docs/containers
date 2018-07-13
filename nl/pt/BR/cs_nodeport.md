@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,12 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Expondo apps com NodePorts
 {: #nodeport}
 
-Disponibilize seu app conteinerizado para acesso à Internet usando o endereço IP público de qualquer nó do trabalhador em um cluster do Kubernetes e expondo uma porta de nó. Use essa opção para testar o {{site.data.keyword.containerlong}} e o acesso público de curto prazo.
+Disponibilize seu app conteinerizado para acesso à Internet usando o endereço IP público de qualquer nó do trabalhador em um cluster do Kubernetes e expondo um NodePort. Use essa opção para teste no {{site.data.keyword.containerlong}} e para acesso público de curto prazo.
 {:shortdesc}
 
 ## Gerenciando o tráfego de rede usando NodePorts
@@ -55,9 +57,9 @@ nó do trabalhador. É possível usar o serviço do NodePort para testar o acess
 É possível expor seu app como um serviço NodePort do Kubernetes para clusters grátis ou padrão.
 {:shortdesc}
 
-Se você ainda não tem um app pronto, é possível usar um app de exemplo do Kubernetes chamado [Guestbook ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml).
+Se você ainda não tem um app pronto, é possível usar um app de exemplo do Kubernetes chamado [Guestbook ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: para o exemplo Guestbook, uma seção de serviço de front-end já existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
+1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: para o exemplo Guestbook, uma seção de serviço de front-end existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
 
     Exemplo:
 
@@ -80,13 +82,14 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
     {: codeblock}
 
     <table>
+    <caption>Entendendo os componentes de serviço NodePort</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Entendendo os componentes de seção do serviço NodePort</th>
     </thead>
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Substitua <code><em>&lt;my-nodeport-service&gt;</em></code> por um nome para seu serviço NodePort.</td>
+    <td>Substitua <code><em>&lt;my-nodeport-service&gt;</em></code> por um nome para seu serviço NodePort.<p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -102,7 +105,7 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>Opcional: substitua <code><em>&lt;31514&gt;</em></code> por um NodePort no intervalo de 30000 a 32767. Não especifique um NodePort que já esteja em uso por outro serviço. Se nenhum NodePort for designado, um aleatório será designado para você.<br><br>Se você deseja especificar um NodePort e deseja ver quais NodePorts já estão em uso, é possível executar o comando a seguir: <pre class="pre"><code>kubectl get svc</code></pre>Os NodePorts em uso aparecem sob o campo **Portas**.</td>
+     <td>Opcional: substitua <code><em>&lt;31514&gt;</em></code> por um NodePort no intervalo de 30000 a 32767. Não especifique um NodePort que já esteja em uso por outro serviço. Se nenhum NodePort for designado, um aleatório será designado para você.<br><br>Para especificar um NodePort e ver quais NodePorts já estão em uso, execute o comando a seguir: <pre class="pre"><code>kubectl get svc</code></pre><p>Os NodePorts em uso aparecem sob o campo **Portas**.</p></td>
      </tr>
      </tbody></table>
 
@@ -155,7 +158,6 @@ Quando o app for implementado, será possível usar o endereço IP público de q
     {: screen}
 
     Neste exemplo, o NodePort é `30872`.</br>
-    **Nota:** se a seção **Terminais** exibir `<none>`, certifique-se de que o `<selectorkey>` e o `<selectorvalue>` usados na seção `spec.selector` do serviço NodePort sejam iguais ao par de chaves/valores usados na seção `spec.template.metadata.labels` do yaml de sua implementação.
+    **Nota:** se a seção **Terminais** exibir `<none>`, verifique o `<selectorkey>` e o `<selectorvalue>` que você usa na seção `spec.selector` do serviço NodePort. Assegure-se de que seja o mesmo que o par _chave/valor_ que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação.
 
 3.  Forme a URL com um dos endereços IP públicos do nó do trabalhador e o NodePort. Exemplo: `http://192.0.2.23:30872`
-

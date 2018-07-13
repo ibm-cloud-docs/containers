@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Alta disponibilidad para {{site.data.keyword.containerlong_notm}}
@@ -36,7 +38,9 @@ La arquitectura y la infraestructura de {{site.data.keyword.containerlong_notm}}
 
 <img src="images/cs_failure_ov.png" alt="Visión general de dominios de error en un clúster de alta disponibilidad dentro de una región de {{site.data.keyword.containershort_notm}}." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="La tabla muestra los puntos de anomalía en {{site.data.keyword.containershort_notm}}. Las filas se leen de izquierda a derecha, con el número de punto de anomalía en la columna uno, el título del punto de anomalía en la columna dos, una descripción en la columna tres y un enlace a la documentación en la columna cuatro.">
+<caption>Puntos de anomalía</caption>
 <col width="3%">
 <col width="10%">
 <col width="70%">
@@ -75,7 +79,7 @@ La arquitectura y la infraestructura de {{site.data.keyword.containerlong_notm}}
   <tr>
     <td>5</td>
     <td>Error de región</td>
-    <td>Cada región está configurada con un equilibrador de carga de alta disponibilidad al que se puede acceder desde el punto final de la API específico de la región. El equilibrador de carga direcciona solicitudes de entrada y salida a los clústeres en las ubicaciones regionales. La probabilidad de que se produzca un error global de región es baja. Sin embargo, si desea estar preparado ante este error, puede configurar varios clústeres en diferentes regiones y conectarlos mediante un equilibrador de carga externo. En caso de que falle toda una región, el clúster de la otra región puede asumir la carga de trabajo. <br/><br/><strong>Nota:</strong> Un clúster de varias regiones requiere varios recursos de nube y, en función de la app, puede ser complejo y costoso. Compruebe si necesita una configuración de varias regiones o si podría tolerar una interrupción potencial del servicio. Si desea configurar un clúster de varias regiones, asegúrese de que la app y los datos se pueden alojar en otra región, y que la app admite la réplica de datos globales.</td>
+    <td>Cada región está configurada con un equilibrador de carga de alta disponibilidad al que se puede acceder desde el punto final de la API específico de la región. El equilibrador de carga direcciona solicitudes de entrada y salida a los clústeres en las ubicaciones regionales. La probabilidad de que se produzca un error global de región es baja. Sin embargo, para estar preparado ante este error, puede configurar varios clústeres en diferentes regiones y conectarlos mediante un equilibrador de carga externo. En caso de que falle toda una región, el clúster de la otra región puede asumir la carga de trabajo. <br/><br/><strong>Nota:</strong> Un clúster de varias regiones requiere varios recursos de nube y, en función de la app, puede ser complejo y costoso. Compruebe si necesita una configuración de varias regiones o si podría tolerar una interrupción potencial del servicio. Si desea configurar un clúster de varias regiones, asegúrese de que la app y los datos se pueden alojar en otra región, y que la app admite la réplica de datos globales.</td>
     <td>[Configuración de clústeres de alta disponibilidad.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
@@ -86,4 +90,6 @@ La arquitectura y la infraestructura de {{site.data.keyword.containerlong_notm}}
   </tr>
   </tbody>
   </table>
+
+
 

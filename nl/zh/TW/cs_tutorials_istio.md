@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,10 +16,11 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # 指導教學：在 {{site.data.keyword.containerlong_notm}} 上安裝 Istio
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) 是一種開放平台，能夠連接、保護及管理雲端平台上的微服務網路（也稱為服務網），例如 {{site.data.keyword.containerlong}} 中的 Kubernetes。透過 Istio 可管理網路資料流量、微服務之間的負載平衡、強制執行存取原則、驗證服務網上的服務身分等等。
+[Istio](https://www.ibm.com/cloud/info/istio) 是一種開放平台，能夠連接、保護及管理雲端平台上的微服務網路（也稱為服務網），例如 {{site.data.keyword.containerlong}} 中的 Kubernetes。使用 Istio，您可以管理網路資料流量、微服務之間的負載平衡、強制執行存取原則、驗證服務身分等等。
 {:shortdesc}
 
 在本指導教學中，您可以看到如何為一個稱為 BookInfo 的簡單模擬書店應用程式，一起安裝 Istio 及四個微服務。微服務包括產品網頁、書籍詳細資料、檢閱及評等。將 BookInfo 的微服務部署至已安裝 Istio 的 {{site.data.keyword.containershort}} 叢集時，即會在每一個微服務的 Pod 中注入 Istio Envoy Sidecar Proxy。
@@ -39,13 +40,13 @@ lastupdated: "2018-4-20"
 
 ## 適用對象
 
-本指導教學的適用對象是之前未曾使用過 Istio 的軟體開發人員及網路管理者。
+本指導教學的適用對象是第一次使用 Istio 的軟體開發人員及網路管理者。
 
 ## 必要條件
 
--  [安裝 CLI](cs_cli_install.html#cs_cli_install_steps)
--  [建立叢集](cs_clusters.html#clusters_cli)
--  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)
+-  [安裝 CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes 1.9 版或以上版本。請務必安裝符合叢集的 Kubernetes 版本的 `kubectl` CLI 版本。
+-  [建立叢集](cs_clusters.html#clusters_cli)，其 Kubernetes 版本為 1.9 或以上版本。
+-  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
 ## 課程 1：下載並安裝 Istio
 {: #istio_tutorial1}
@@ -69,7 +70,7 @@ lastupdated: "2018-4-20"
    ```
    {: pre}
 
-4. 切換至 Istio 檔案位置的目錄。
+4. 將目錄切換至 Istio 檔案位置。
 
    ```
    cd filepath/istio-0.4.0
@@ -83,7 +84,7 @@ lastupdated: "2018-4-20"
    ```
    {: pre}
 
-   **附註**：如果您需要在 Sidecar 之間啟用交互 TLS 鑑別，則可以改為安裝 `istio-auth` 檔案：`kubectl apply -f install/kubernetes/istio-auth.yaml`
+   **附註**：如果您需要在 Sidecar 之間啟用相互 TLS 鑑別，則可以改為安裝 `istio-auth` 檔案：`kubectl apply -f install/kubernetes/istio-auth.yaml`
 
 6. 先確定已完整部署 Kubernetes 服務 `istio-pilot`、`istio-mixer` 及 `istio-ingress`，再繼續進行。
 
@@ -116,7 +117,7 @@ lastupdated: "2018-4-20"
    {: screen}
 
 
-恭喜！您已順利將 Istio 安裝至叢集。接下來，請將 BookInfo 範例應用程式部署至您的叢集。
+做得好！您已順利將 Istio 安裝至叢集。接下來，請將 BookInfo 範例應用程式部署至您的叢集。
 
 
 ## 課程 2：部署 BookInfo 應用程式
@@ -174,14 +175,14 @@ lastupdated: "2018-4-20"
     * 如果您要使用標準叢集，請執行下列指令來取得叢集的 Ingress IP 及埠：
 
        ```
-       kubectl get ingress
+              kubectl get ingress
        ```
        {: pre}
 
-       輸出類似下列內容：
+       輸出範例：
 
        ```
-       NAME      HOSTS     ADDRESS          PORTS     AGE
+              NAME      HOSTS     ADDRESS          PORTS     AGE
        gateway   *         169.xx.xxx.xxx   80        3m
        ```
        {: screen}
@@ -189,21 +190,21 @@ lastupdated: "2018-4-20"
        針對此範例所產生的 Ingress 位址是 `169.48.221.218:80`。使用下列指令，將位址匯出為閘道 URL。您將在下一步中使用閘道 URL 來存取 BookInfo 產品頁面。
 
        ```
-       export GATEWAY_URL=169.xx.xxx.xxx:80
+              export GATEWAY_URL=169.xx.xxx.xxx:80
        ```
        {: pre}
 
     * 如果您要使用免費叢集，則必須使用工作者節點的公用 IP 及 NodePort。執行下列指令，以取得工作者節點的公用 IP：
 
        ```
-       bx cs workers <cluster_name_or_ID>
+              bx cs workers <cluster_name_or_ID>
        ```
        {: pre}
 
        使用下列指令，將工作者節點的公用 IP 匯出為閘道 URL。您將在下一步中使用閘道 URL 來存取 BookInfo 產品頁面。
 
        ```
-       export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
+              export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
        ```
        {: pre}
 
@@ -214,16 +215,16 @@ lastupdated: "2018-4-20"
    ```
    {: pre}
 
-5. 在瀏覽器中，導覽至 `http://$GATEWAY_URL/productpage` 以檢視 BookInfo 網頁。
+5. 在瀏覽器中，移至 `http://$GATEWAY_URL/productpage` 以檢視 BookInfo 網頁。
 
 6. 嘗試多次重新整理頁面。不同版本的檢閱區段會循環使用紅色星星、黑色星星及無任何星星。
 
-恭喜！您已順利使用 Istio Envoy Sidecar 來部署 BookInfo 範例應用程式。接下來，您可以清理資源，或繼續執行其他指導教學來進一步探索 Istio 功能。
+做得好！您已順利使用 Istio Envoy Sidecar 來部署 BookInfo 範例應用程式。接下來，您可以清理資源，或繼續執行其他指導教學來進一步探索 Istio。
 
 ## 清理
 {: #istio_tutorial_cleanup}
 
-如果您不想要探索[下一步為何？](#istio_tutorial_whatsnext)中所提供的其他 Istio 功能，則可以清理叢集中的 Istio 資源。
+如果您完成使用 Istio，而且不想要[繼續探索](#istio_tutorial_whatsnext)，則可以清理叢集中的 Istio 資源。
 {:shortdesc}
 
 1. 刪除叢集中的所有 BookInfo 服務、Pod 及部署。
@@ -243,9 +244,8 @@ lastupdated: "2018-4-20"
 ## 下一步為何？
 {: #istio_tutorial_whatsnext}
 
-若要進一步探索 Istio 功能，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
+若要進一步探索 Istio，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
 
 * [Intelligent Routing ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
 
-* [In-Depth Telemetry ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例顯示如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。
-
+* [In-Depth Telemetry ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例包括如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。

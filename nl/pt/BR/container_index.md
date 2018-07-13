@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Introdução ao {{site.data.keyword.containerlong_notm}}
@@ -43,26 +44,27 @@ Então você deseja implementar um app em um contêiner? Espere! Inicie criando 
 
 E o que é um cluster? Um cluster é um conjunto de recursos, nós de trabalhador, redes e dispositivos de armazenamento que mantêm os apps altamente disponíveis. Após ter o seu cluster, é possível implementar seus apps em contêineres.
 
-Antes de iniciar, deve-se ter uma [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) para Teste, de Pay-As-You-Go ou de Assinatura para criar um cluster grátis.
+**Antes de começar**
 
-**Qual tipo de conta do {{site.data.keyword.Bluemix_notm}} devo obter?** Com as contas de Pay-As-You-Go e de Assinatura, é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para seus clusters do Kubernetes e criar um cluster grátis ou clusters padrão. Com uma conta para Teste, é possível criar um cluster grátis, mas não clusters padrão. Todos os clusters grátis são excluídos depois de 21 dias. Para continuar com clusters do Kubernetes, crie outro cluster grátis até que sua conta para Teste termine ou faça upgrade de sua conta para Pay-As-You-Go ou Assinatura.
+Deve-se ter uma conta para Teste, pré-paga ou de Assinatura do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/).
+
+Com uma conta para Teste, é possível criar um cluster grátis que você pode usar por 21 dias para familiarizar-se com o serviço. Com uma conta pré-paga ou de Assinatura, ainda é possível criar um cluster de avaliação grátis, mas também é possível provisionar recursos de infraestrutura do IBM Cloud (SoftLayer) para usar em clusters padrão.
 {:tip}
 
 Para criar um cluster grátis:
 
-1.  No [**Catálogo** do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), categoria **Contêineres**, clique em **Contêineres em clusters do Kubernetes**.
+1.  No **Catálogo** do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), selecione **Contêineres em clusters do Kubernetes** e clique em **Criar**. Uma página de configuração do cluster é aberta. Por padrão, o **grátis cluster** é selecionado.
 
-2.  Leia sobre clusters, em seguida, clique em **Criar**. Insira um **Nome do cluster**. O tipo de cluster padrão é grátis. Da próxima vez, será possível criar um cluster padrão e definir customizações adicionais, como o número de nós do trabalhador.
+2. Forneça seu cluster um nome exclusivo.
 
-3.  Clique em **Criar Cluster**. Os detalhes para o cluster são abertos, mas o nó do trabalhador no cluster leva alguns minutos para
-provisão. É possível ver o status do nó do trabalhador na guia **Nós do trabalhador**. Quando o status atingir `Pronto`, seu nó do trabalhador estará pronto para ser usado.
+3.  Clique em **Criar Cluster**. Um nó do trabalhador é criado e pode levar alguns minutos para que a provisão seja efetuada, mas é possível ver o progresso na guia **Nós do trabalhador**. Quando o status atinge `Ready`, é possível começar a trabalhar com seu cluster!
 
 Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns detalhes sobre seu cluster grátis:
 
 *   **Tipo de máquina**: o cluster grátis tem um nó do trabalhador virtual com 2 CPUs e 4 GB de memória disponíveis para seus apps usarem. Ao criar um cluster padrão, é possível escolher entre máquinas físicas (bare metal) ou virtuais, juntamente com vários tamanhos de máquina.
 *   **Mestre gerenciado**: o nó do trabalhador é monitorado e gerenciado centralmente por um mestre do Kubernetes pertencente ao {{site.data.keyword.IBM_notm}} dedicado e altamente disponível que controla e monitora todos os recursos do Kubernetes no cluster. É possível concentrar-se em seu nó do trabalhador e nos apps implementados nele sem se preocupar também com o gerenciamento desse mestre.
 *   **Recursos de infraestrutura**: os recursos que são necessários para executar o cluster, como VLANS e endereços IP, são gerenciados em uma conta de infraestrutura do IBM Cloud (SoftLayer) pertencente à {{site.data.keyword.IBM_notm}}. Ao criar um cluster padrão, você gerencia esses recursos em sua própria conta de infraestrutura do IBM Cloud (SoftLayer). É possível aprender mais sobre esses recursos e as [permissões necessárias](cs_users.html#infra_access) ao criar um cluster padrão.
-*   **Local e outras opções**: clusters grátis são implementados dentro da região que você seleciona, mas não é possível escolher qual o local (data center). Para obter mais controle sobre local, rede e armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
+*   **Outras opções**: os clusters grátis são implementados dentro da região que você seleciona, mas não é possível escolher qual local (data center). Para controle sobre local, rede e armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
 
 
 **O que vem a seguir?**
@@ -72,5 +74,4 @@ Nos próximos 21 dias, tente algumas coisas com seu cluster grátis.
 * [Implementar um app no cluster.](cs_app.html#app_cli)
 * [Crie um cluster padrão com múltiplos
 nós para disponibilidade mais alta.](cs_clusters.html#clusters_ui)
-* [Configure seu próprio registro privado no {{site.data.keyword.Bluemix_notm}} para armazenar e compartilhar imagens do Docker com outros usuários.](/docs/services/Registry/index.html)
-
+* [Configure um registro privado no {{site.data.keyword.Bluemix_notm}} para armazenar e compartilhar imagens do Docker com outros usuários.](/docs/services/Registry/index.html)

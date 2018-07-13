@@ -76,7 +76,7 @@
 <path id="path14485" inkscape:connector-curvature="0" sodipodi:nodetypes="cc" class="st8" d="M642.6,275.5l28.7-0.2"/>
 <path id="path14-2-9" inkscape:connector-curvature="0" class="st9" d="M687.1,194h182.3c9.4,0,17.2,9.3,17.2,20.6v122.2
 	c0,11.3-7.6,20.6-17.2,20.6H687.1c-9.4,0-17.2-9.3-17.2-20.6V214.7C670,203.4,677.6,194,687.1,194z"/>
-<text id="text43-3-7" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 750.2073 254.8838)" class="st10 st6 st3">磁區</text>
+<text id="text43-3-7" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 731.2073 254.8838)" class="st10 st6 st3">磁區</text>
 <g id="g3223-1-4-1" transform="translate(-42.812998,-227.59106)">
 	<title  id="title3229-1-0-1">Files</title>
 	<path id="path22-5-9-5" inkscape:connector-curvature="0" class="st5" d="M743.9,502.8h28.5c2.8,0,5.3,2.3,5.3,5.3v45.2
@@ -91,8 +91,8 @@
 <g id="Text-2-2-1" transform="translate(-42.812988,-227.59106)">
 	<text transform="matrix(1 0 0 1 793.7163 540.1868)" class="st6 st7">資料</text>
 </g>
-<text id="text39-2-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 180.8301 252.8037)" class="st10 st6 st3">容器</text>
-<text id="text39-2-3-2" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 505.1382 254.5049)" class="st10 st6 st3">容器</text>
+<text id="text39-2-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 147.8301 252.8037)" class="st10 st6 st3">容器</text>
+<text id="text39-2-3-2" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 481.1382 254.5049)" class="st10 st6 st3">容器</text>
 <text transform="matrix(1 0 0 1 154.6461 40.5586)" class="st2 st3">選項 1</text>
 <rect id="rect10-4-2-8-6" x="54.7" y="556.5" class="st1" width="411.8" height="248.8">
 <title  id="title3217-8-1-5-1">Organization</title>
@@ -116,7 +116,7 @@
 	c0,9.4-12,17.2-27.1,17.2H608.8c-14.8,0-27.1-7.8-27.1-17.2V647C582,637.6,594,629.8,608.8,629.8z">
 <title  id="title3219-5-7-2-2">File share</title>
 </path>
-<text id="text39-2-3-2-3-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 720.8553 677.3906)" class="st10 st6 st3">容器</text>
+<text id="text39-2-3-2-3-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 690.8553 677.3906)" class="st10 st6 st3">容器</text>
 <g id="g3223-1-4-1-4-8-4" transform="translate(-54.577537,22.76856)">
 	<title  id="title3229-1-0-1-3-7-4">Files</title>
 	<path id="path22-5-9-5-1-4-6" inkscape:connector-curvature="0" class="st5" d="M728.4,832.2h28.5c2.8,0,5.3,2.3,5.3,5.3v45.2
@@ -131,7 +131,7 @@
 <g id="Text-2-2-1-4-9-1" transform="translate(-54.577527,22.76856)">
 	<text transform="matrix(1 0 0 1 778.2386 869.5645)" class="st6 st7">資料</text>
 </g>
-<text id="text43-3-7-5-6-9" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 623.9916 839.1143)" class="st10 st6 st3">Bluemix 資料庫服務</text>
+<text id="text43-3-7-5-6-9" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 588.9916 839.1143)" class="st10 st6 st3">Bluemix 資料庫服務</text>
 <g id="flowRoot3665" transform="translate(-259.17061,-14.15714)">
 </g>
 <text transform="matrix(1 0 0 1 64.2158 101.9092)" class="st6 st13">組織</text>
@@ -142,23 +142,23 @@
 <text transform="matrix(1 0 0 1 71.5088 594.3828)" class="st6 st13">空間</text>
 <text transform="matrix(1 0 0 1 522.9678 538.1943)" class="st6 st13">組織</text>
 <text transform="matrix(1 0 0 1 581.4961 594.3828)" class="st6 st13">空間</text>
-<text id="text43-3-7-5" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 300.8153 675.4492)" class="st10 st6 st3">磁區</text>
+<text id="text43-3-7-5" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 289.8153 675.4492)" class="st10 st6 st3">磁區</text>
 <path id="path22-5-9-5-1" inkscape:connector-curvature="0" class="st5" d="M281.6,688.7h110.6c10.8,0,20.7,2.3,20.7,5.3v45.2
 	c0,2.8-9,5.3-20.7,5.3H281.6c-10.8,0-20.7-2.3-20.7-5.3V694C260.9,691.2,270.8,688.7,281.6,688.7z"/>
 <g id="Text-2-2-1-4" transform="translate(-229.30839,-49.043959)">
-	<text transform="matrix(1 0 0 1 526.0273 775.0869)" class="st6 st7">配置檔</text>
+	<text transform="matrix(1 0 0 1 506.0273 775.0869)" class="st6 st7">配置檔</text>
 </g>
 <path id="path14485-9-1" inkscape:connector-curvature="0" sodipodi:nodetypes="cc" class="st8" d="M233.3,700.4l13.5,0.4"/>
 <path id="path16-4-1-9" inkscape:connector-curvature="0" class="st4" d="M91.5,626.1H223c6.8,0,12.4,8.3,12.4,18.4v109.2
 	c0,10.1-5.5,18.4-12.4,18.4H91.5c-6.8,0-12.4-8.3-12.4-18.4V644.5C79.2,634.4,84.7,626.1,91.5,626.1L91.5,626.1z">
 <title  id="title3219-5-7-2">File share</title>
 </path>
-<text id="text39-2-3-2-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 115.4689 675.4209)" class="st10 st6 st3">容器</text>
+<text id="text39-2-3-2-3" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 95.4689 675.4209)" class="st10 st6 st3">容器</text>
 <path id="path20-1-5-7" inkscape:connector-curvature="0" class="st12" d="M102.4,841.6h306.8c11.9,0,21.9,5.8,21.9,12.7v113.9
 	c0,6.9-9.9,12.7-21.9,12.7H102.4c-11.9,0-21.9-5.8-21.9-12.7V854.3C80.6,847.4,90.5,841.6,102.4,841.6z">
 <title  id="title3221-7-1-9">Volume</title>
 </path>
-<text id="text43-3-7-5-6" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 150.9956 885.188)" class="st10 st6 st3">內部部署資料庫</text>
+<text id="text43-3-7-5-6" sodipodi:linespacing="125%" transform="matrix(1 0 0 1 111.9956 885.188)" class="st10 st6 st3">內部部署資料庫</text>
 <g id="g3223-1-4-1-4-8-4_1_" transform="translate(-54.577537,22.76856)">
 	<title  id="title3229-1-0-1-3-7-4">Files</title>
 	<path id="path22-5-9-5-1-4-6_1_" inkscape:connector-curvature="0" class="st5" d="M233.2,881.5h28.5c2.8,0,5.3,2.3,5.3,5.3V932

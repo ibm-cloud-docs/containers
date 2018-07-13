@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # チュートリアル: Cloud Foundry からクラスターへのアプリのマイグレーション
@@ -59,13 +60,13 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   ```
   {: pre}
 
-2. このディレクトリーに、アプリのコード・ファイルと、すべての関連ファイルをコピーします。 独自のアプリのコードを使用することも、カタログからボイラープレートをダウンロードすることもできます。このチュートリアルでは、Python Flask ボイラープレートを使用します。ただし、Node.js、Java、[Kitura](https://github.com/IBM-Cloud/Kitura-Starter) アプリでも同じ基本手順を使用できます。
+2. このディレクトリーに、アプリのコード・ファイルと、すべての関連ファイルをコピーします。 独自のアプリのコードを使用することも、カタログからボイラープレートをダウンロードすることもできます。 このチュートリアルでは、Python Flask ボイラープレートを使用します。 ただし、Node.js、Java、[Kitura](https://github.com/IBM-Cloud/Kitura-Starter) アプリでも同じ基本手順を使用できます。
 
     Python Flask アプリ・コードをダウンロードするには、以下のようにします。
 
-    a. カタログの**ボイラープレート**で、**Python Flask** をクリックします。このボイラープレートには、Python 2 と Python 3 の両方のアプリ用のランタイム環境が含まれています。
+    a. カタログの**ボイラープレート**で、**Python Flask** をクリックします。 このボイラープレートには、Python 2 と Python 3 の両方のアプリ用のランタイム環境が含まれています。
 
-    b. アプリ名 `cf-py-<name>` を入力して、**「作成」**をクリックします。ボイラープレートのアプリ・コードにアクセスするには、まず CF アプリをクラウドにデプロイする必要があります。アプリには任意の名前を使用できます。 例にある名前を使用する場合は、`<name>` を固有 ID で置き換えます (例: `cf-py-msx`)。
+    b. アプリ名 `cf-py-<name>` を入力して、**「作成」**をクリックします。 ボイラープレートのアプリ・コードにアクセスするには、まず CF アプリをクラウドにデプロイする必要があります。 アプリには任意の名前を使用できます。 例にある名前を使用する場合は、`<name>` を固有 ID で置き換えます (例: `cf-py-msx`)。
     
     **注意**: アプリ、コンテナー・イメージ、Kubernetes リソースの名前には、個人情報を使用しないでください。
 
@@ -81,19 +82,20 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 <br />
 
 
+
 ## レッスン 2: アプリのコードを使用して Docker イメージを作成する
 
 アプリのコードとコンテナーに必要な構成を含む Dockerfile を作成します。 その後、その Dockerfile から Docker イメージをビルドし、それをプライベート・イメージ・レジストリーにプッシュします。
 {: shortdesc}
 
-1. 直前のレッスンで作成した `cf-py` ディレクトリーに、コンテナー・イメージを作成するための基礎となる `Dockerfile` を作成します。コンピューター上の任意の CLI エディターまたはテキスト・エディターを使用して、Dockerfile を作成できます。 次の例は、nano editor を使用して Dockerfile ファイルを作成する方法を示しています。
+1. 直前のレッスンで作成した `cf-py` ディレクトリーに、コンテナー・イメージを作成するための基礎となる `Dockerfile` を作成します。 コンピューター上の任意の CLI エディターまたはテキスト・エディターを使用して、Dockerfile を作成できます。 次の例は、nano editor を使用して Dockerfile ファイルを作成する方法を示しています。
 
   ```
   nano Dockerfile
   ```
   {: pre}
 
-2. 次のスクリプトを Dockerfile にコピーします。 この Dockerfile は Python アプリだけに適用されます。別の種類のコードを使用する場合は、Dockerfile に別の基本イメージが含まれている必要があります。また、他のフィールドを定義する必要がある可能性があります。
+2. 次のスクリプトを Dockerfile にコピーします。 この Dockerfile は Python アプリだけに適用されます。 別の種類のコードを使用する場合は、Dockerfile に別の基本イメージが含まれている必要があります。また、他のフィールドを定義する必要がある可能性があります。
 
   ```
   #Use the Python image from DockerHub as a base image
@@ -120,7 +122,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   ```
   {: codeblock}
 
-3. `Ctrl + o` を押して、変更内容を nano エディターに保存します。`enter` を押して、変更を確認します。 `ctrl + x` を押して、nano エディターを終了します。
+3. `Ctrl + o` を押して、変更内容を nano エディターに保存します。 `enter` を押して、変更を確認します。 `ctrl + x` を押して、nano エディターを終了します。
 
 4. アプリ・コードを含むイメージを作成し、それを専用レジストリーにプッシュします。
 
@@ -130,6 +132,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   {: pre}
 
   <table>
+  <caption>このコマンドの構成要素について</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="このアイコンは、このコマンドの構成要素の詳細を表示できることを示しています。"/> このコマンドの構成要素について理解する</th>
   </thead>
@@ -144,7 +147,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>専用  レジストリーのパス。これには、固有の名前空間とイメージの名前が含まれます。 この例では、イメージの名前にアプリのディレクトリーと同じ名前を使用していますが、専用レジストリーのイメージには任意の名前を選択できます。名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
+  <td>専用  レジストリーのパス。これには、固有の名前空間とイメージの名前が含まれます。 この例では、イメージの名前にアプリのディレクトリーと同じ名前を使用していますが、専用レジストリーのイメージには任意の名前を選択できます。 名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -171,7 +174,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 アプリを Kubernetes クラスターのコンテナーとしてデプロイします。
 {: shortdesc}
 
-1. `cf-py.yaml` という名前の構成 YAML ファイルを作成し、`<registry_namespace>` をプライベート・イメージ・レジストリーの名前に更新します。この構成ファイルは、直前のレッスンで作成したイメージからのコンテナー・デプロイメント、およびアプリを一般に公開するためのサービスを定義します。
+1. `cf-py.yaml` という名前の構成 YAML ファイルを作成し、`<registry_namespace>` をプライベート・イメージ・レジストリーの名前に更新します。 この構成ファイルは、直前のレッスンで作成したイメージからのコンテナー・デプロイメント、およびアプリを一般に公開するためのサービスを定義します。
 
   ```
   apiVersion: extensions/v1beta1
@@ -212,24 +215,25 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   {: codeblock}
 
   <table>
+  <caption>YAML ファイルの構成要素について</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
   </thead>
   <tbody>
   <tr>
   <td><code>イメージ</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
+  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。 名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
-  <td>NodePort タイプの Kubernetes サービスを作成してアプリを公開します。NodePort は 30000 から 32767 までの範囲にあります。このポートを後でブラウザーで使用してアプリをテストします。</td>
+  <td>NodePort タイプの Kubernetes サービスを作成してアプリを公開します。 NodePort は 30000 から 32767 までの範囲にあります。 このポートを後でブラウザーで使用してアプリをテストします。</td>
   </tr>
   </tbody></table>
 
 2. 構成ファイルを適用して、デプロイメントおよびサービスをクラスター内に作成します。
 
   ```
-  kubectl apply -f filepath/cf-py.yaml
+  kubectl apply -f <filepath>/cf-py.yaml
   ```
   {: pre}
 
@@ -254,7 +258,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.8.11
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 
@@ -262,9 +266,11 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     <img src="images/python_flask.png" alt="デプロイされたボイラープレート Python Flask アプリの画面キャプチャー。" />
 
-5. [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。 この手順は Kubernetes のバージョンに応じて異なります。
+5.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
 
-6. **「ワークロード」**タブで、作成したリソースを表示します。 Kubernetes ダッシュボードの探索が終了したら、`Ctrl + c` を使用して `proxy` コマンドを終了します。
+    [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    {: tip}
+
+6. **「ワークロード」**タブで、作成したリソースを表示します。
 
 これで完了です。 アプリがコンテナーにデプロイされました。
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -19,6 +19,7 @@ lastupdated: "2018-4-20"
 {:tsResolve: .tsResolve}
 
 
+
 # Fehlerbehebung für Clusternetze
 {: #cs_troubleshoot_network}
 
@@ -27,6 +28,7 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 
 Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_troubleshoot.html).
 {: tip}
+
 
 ## Verbindung mit einer App über einen Lastausgleichsservice kann nicht hergestellt werden
 {: #cs_loadbalancer_fails}
@@ -71,7 +73,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     {: pre}
 
     1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
-    2.  Stellen Sie sicher, dass die Werte für `<selektorschlüssel>` und `<selektorwert>`, die Sie im Abschnitt `spec.selector` des LoadBalancer-Service verwenden, dem Schlüssel/Wert-Paar entspricht, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei angegeben haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich. 
+    2.  Stellen Sie sicher, dass die Werte für `<selector_key>` und `<selector_value>`, die Sie im Abschnitt `spec.selector` des LoadBalancer-Service verwenden, dem Schlüssel/Wert-Paar entsprechen, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei angegeben haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
     3.  Prüfen Sie, dass Sie den **Port** verwendet haben, den Ihre App überwacht.
 
 3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
@@ -85,7 +87,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den Lastausgleichsservice verwenden zu können, müssen Sie über ein Standardcluster mit mindestens zwei Workerknoten verfügen.</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem Lastausgleichsservice zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter <a href="cs_subnets.html#subnets">Clustern Teilnetze hinzufügen</a>. Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der Lastausgleichsservice automatisch erstellt.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Ändern Sie das Konfigurationsscript Ihres Lastausgleichsservice und wählen Sie entweder eine der portierbaren öffentlichen IP-Adressen aus, oder entfernen Sie den Abschnitt **loadBalancerIP** aus Ihrem Script, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Entfernen Sie im Abschnitt **loadBalancerIP** des Konfigurationsscripts die vorhandene IP-Adresse und fügen Sie eine der vorhandenen portierbaren öffentlichen IP-Adressen hinzu. Sie können auch den Abschnitt **loadBalancerIP** aus Ihrem Script entfernen, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr ale einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
     <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="codeblock"><code>bx cs worker-get [&lt;clustername_oder_-id&gt;] &lt;worker-id&gt;</code></pre></li>
@@ -95,7 +97,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
 
         ```
-        kubectl describe service <mein_service> | grep "LoadBalancer Ingress"
+        kubectl describe service <servicename> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
@@ -110,7 +112,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse oder Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
+Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse oder Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen (ALB) herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
 
 {: tsCauses}
 Ingress funktioniert aus den folgenden Gründen möglicherweise nicht ordnungsgemäß:
@@ -123,7 +125,7 @@ Ingress funktioniert aus den folgenden Gründen möglicherweise nicht ordnungsge
 {: tsResolve}
 Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 
-1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihre Ingress-Lastausgleichsfunktion für Anwendungen zu gewährleisten.
+1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihre Lastausgleichsfunktion für Anwendungen zu gewährleisten.
 
   ```
   bx cs workers <clustername_oder_-id>
@@ -132,7 +134,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 
     Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
 
-2.  Rufen Sie die Unterdomäne und die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen ab und setzen Sie anschließend ein Pingsignal an beide ab.
+2.  Rufen Sie die Unterdomäne und die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen ab und setzen Sie anschließend ein Pingsignal an beide ab.
 
     1.  Rufen Sie die Unterdomäne der Lastausgleichsfunktion für Anwendungen ab.
 
@@ -144,29 +146,29 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     2.  Setzen Sie ein Pingsignal an die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen ab.
 
       ```
-      ping <unterdomäne_des_ingress-controllers>
+      ping <ingress-unterdomäne>
       ```
       {: pre}
 
-    3.  Rufen Sie die öffentliche IP-Adresse Ihrer Ingress-Lastausgleichsfunktion für Anwendungen ab.
+    3.  Rufen Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion für Anwendungen ab.
 
       ```
-      nslookup <unterdomäne_des_ingress-controllers>
-      ```
-      {: pre}
-
-    4.  Setzen Sie ein Pingsignal an die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen ab.
-
-      ```
-      ping <ingress-controller-ip>
+      nslookup <ingress-unterdomäne>
       ```
       {: pre}
 
-    Falls die CLI eine Zeitlimitüberschreitung für die öffentliche IP-Adresse oder die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen zurückgibt und Sie eine angepasste Firewall eingerichtet haben, die Ihre Workerknoten schützt, müssen Sie unter Umständen zusätzliche Ports und Netzgruppen in Ihrer [Firewall](cs_troubleshoot_clusters.html#cs_firewall) öffnen.
+    4.  Setzen Sie ein Pingsignal an die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen ab.
 
-3.  Wenn Sie eine angepasste Domäne verwenden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse oder Unterdomäne der von IBM bereitgestellten Ingress-Lastausgleichsfunktion für Anwendungen mit Ihrem DNS-Anbieter (Domain Name Service) zugeordnet ist.
-    1.  Wenn Sie die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie Ihren CNAME-Datensatz (Canonical Name, kanonischer Name).
-    2.  Wenn Sie die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse im Zeigerdatensatz (PTR) zugeordnet ist.
+      ```
+      ping <ip_der_lastausgleichsfunktion_für_anwendungen>
+      ```
+      {: pre}
+
+    Falls die CLI eine Zeitlimitüberschreitung für die öffentliche IP-Adresse oder die Unterdomäne der Lastausgleichsfunktion für Anwendungen zurückgibt und Sie eine angepasste Firewall eingerichtet haben, die Ihre Workerknoten schützt, öffnen Sie weitere Ports und Netzgruppen in Ihrer [Firewall](cs_troubleshoot_clusters.html#cs_firewall).
+
+3.  Wenn Sie eine angepasste Domäne verwenden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse oder Unterdomäne der von IBM bereitgestellten Lastausgleichsfunktion für Anwendungen mit Ihrem DNS-Anbieter (Domain Name Service) zugeordnet ist.
+    1.  Wenn Sie die Unterdomäne der Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie Ihren CNAME-Datensatz (Canonical Name, kanonischer Name).
+    2.  Wenn Sie die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse im Zeigerdatensatz (PTR) zugeordnet ist.
 4.  Prüfen Sie Ihre Ingress-Ressourcenkonfigurationsdatei.
 
     ```
@@ -178,19 +180,19 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
       tls:
       - hosts:
         - <ingress-unterdomäne>
-        secretName: <geheimer_tls-schlüssel_in_ingress>
+        secretName: <geheimer_ingress-tls-schlüssel>
       rules:
       - host: <ingress-unterdomäne>
         http:
           paths:
           - path: /
-            backend:
-              serviceName: myservice
-              servicePort: 80
+        backend:
+          serviceName: mein_service
+          servicePort: 80
     ```
     {: codeblock}
 
-    1.  Prüfen Sie, dass die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den folgenden Befehl aus: `bx cs cluster-get <clustername_oder_-id>`.
+    1.  Prüfen Sie, dass die Unterdomäne der Lastausgleichsfunktion für Anwendungen und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den folgenden Befehl aus: `bx cs cluster-get <cluster_name_or_ID>`.
     2.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, schließen Sie **/** als Ihren Pfad ein.
 5.  Überprüfen Sie Ihre Ingress-Bereitstellung und suchen Sie nach möglichen Warnungen und Fehlernachrichten.
 
@@ -209,7 +211,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     Rules:
       Host                                             Path  Backends
       ----                                             ----  --------
-      mycluster.us-south.containers.mybluemix.net
+      mycluster.us-south.containers.appdomain.cloud
                                                        /tea      myservice1:80 (<none>)
                                                        /coffee   myservice2:80 (<none>)
     Annotations:
@@ -232,7 +234,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     1.  Rufen Sie die ID der Ingress-Pods ab, die in Ihrem Cluster ausgeführt werden.
 
       ```
-      kubectl get pods -n kube-system | grep alb1
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
@@ -248,13 +250,11 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 <br />
 
 
-
-
 ## Probleme mit geheimen Schlüsseln der Ingress-Lastausgleichsfunktion für Anwendungen
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Nach der Bereitstellung eines geheimen Schlüssels der Ingress-Lastausgleichsfunktion für Anwendungen für Ihren Cluster wird das Beschreibungsfeld `Description` nicht mit dem Namen des geheimen Schlüssels aktualisiert, wenn Sie Ihr Zertifikat in {{site.data.keyword.cloudcerts_full_notm}} anzeigen.
+Nach der Bereitstellung eines geheimen Schlüssels der Lastausgleichsfunktion für Anwendungen für Ihren Cluster wird das Beschreibungsfeld `Description` nicht mit dem Namen des geheimen Schlüssels aktualisiert, wenn Sie Ihr Zertifikat in {{site.data.keyword.cloudcerts_full_notm}} anzeigen.
 
 Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunktion für Anwendungen wird der Status `*_failed` angezeigt. Beispiel: `create_failed`, `update_failed` oder `delete_failed`.
 
@@ -262,6 +262,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
 Überprüfen Sie die folgenden möglichen Ursachen für ein Fehlschlagen des geheimen Schlüssels der Lastausgleichsfunktion für Anwendungen sowie die entsprechenden Fehlerbehebungsschritte:
 
 <table>
+<caption>Fehlerbehebung für geheime Schlüssel der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB)</caption>
  <thead>
  <th>Mögliche Ursache</th>
  <th>Fehlerbehebungsmaßnahme</th>
@@ -269,7 +270,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
  <tbody>
  <tr>
  <td>Sie verfügen nicht über die erforderlichen Zugriffsrollen für das Herunterladen und Aktualisieren von Zertifikatsdaten.</td>
- <td>Bitten Sie Ihren Kontoadministrator, Ihnen sowohl die Rolle eines **Operators** als auch die Rolle eines **Bearbeiters** für Ihre Instanz von {{site.data.keyword.cloudcerts_full_notm}} zuzuweisen. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}. </td>
+ <td>Bitten Sie Ihren Kontoadministrator, Ihnen sowohl die Rolle eines **Operators** als auch die Rolle eines **Bearbeiters** für Ihre Instanz von {{site.data.keyword.cloudcerts_full_notm}} zuzuweisen. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>Die CRN des Zertifikats, die zum Zeitpunkt der Erstellung, Aktualisierung oder Entfernung angegeben wurde, gehört nicht zu demselben Konto wie der Cluster.</td>
@@ -277,7 +278,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
  </tr>
  <tr>
  <td>Die zum Zeitpunkt der Erstellung angegebene CRN des Zertifikats ist falsch.</td>
- <td><ol><li>Überprüfen Sie die Richtigkeit der von Ihnen angegebenen Zeichenfolge für die CRN des Zertifikats.</li><li>Falls die CRN des Zertifikats als korrekt befunden wird, versuchen Sie den geheimen Schlüssel <code>bx cs alb-cert-deploy --update --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code> zu aktualisieren. </li><li>Wenn dieser Befehl zum Status <code>update_failed</code> führt, entfernen Sie den geheimen Schlüssel: <code>bx cs alb-cert-rm --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt;</code> </li><li>Stellen Sie den geheimen Schlüssel erneut bereit: <code>bx cs alb-cert-deploy --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></li></ol></td>
+ <td><ol><li>Überprüfen Sie die Richtigkeit der von Ihnen angegebenen Zeichenfolge für die CRN des Zertifikats.</li><li>Falls die CRN des Zertifikats als korrekt befunden wird, versuchen Sie den geheimen Schlüssel <code>bx cs alb-cert-deploy --update --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code> zu aktualisieren.</li><li>Wenn dieser Befehl zum Status <code>update_failed</code> führt, entfernen Sie den geheimen Schlüssel: <code>bx cs alb-cert-rm --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt;</code></li><li>Stellen Sie den geheimen Schlüssel erneut bereit: <code>bx cs alb-cert-deploy --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>Die zum Zeitpunkt der Aktualisierung angegebene CRN des Zertifikats ist falsch.</td>
@@ -296,9 +297,9 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Wenn Sie `bx cs cluster-get <cluster>` ausführen, hat Ihr Cluster einen `normalen` Zustand, aber es ist keine **Ingress-Unterdomäne** verfügbar. 
+Wenn Sie `bx cs cluster-get <cluster>` ausführen, hat Ihr Cluster einen `normalen` Zustand, aber es ist keine **Ingress-Unterdomäne** verfügbar.
 
-Es wird möglicherweise eine Fehlernachricht ähnlich der folgenden angezeigt. 
+Es wird möglicherweise eine Fehlernachricht ähnlich der folgenden angezeigt.
 
 ```
 There are already the maximum number of subnets permitted in this VLAN.
@@ -306,23 +307,23 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Wenn Sie einen Cluster erstellen, werden acht öffentliche und acht private portierbare Teilnetze in dem angegebenen VLAN angefordert. Für {{site.data.keyword.containershort_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit bereits erreicht hat, kann die **Ingress-Unterdomäne** nicht bereitgestellt werden. 
+Wenn Sie einen Cluster erstellen, werden acht öffentliche und acht private portierbare Teilnetze in dem angegebenen VLAN angefordert. Für {{site.data.keyword.containershort_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit bereits erreicht hat, kann die **Ingress-Unterdomäne** nicht bereitgestellt werden.
 
-So zeigen Sie die Anzahl von Teilnetzen eines VLAN an: 
-1.  Wählen Sie in der [IBM Cloud Infrastructure-Konsole (SoftLayer)](https://control.bluemix.net/) **Netz** > **IP-Management** > **VLANs** aus. 
-2.  Klicken Sie auf die **VLAN-Nummer** des VLANs, mit dem Sie Ihren Cluster erstellt haben. Überprüfen Sie den Abschnitt **Teilnetze**, um zu sehen, ob mehr als 40 Teilnetze vorhanden sind. 
+So zeigen Sie die Anzahl von Teilnetzen eines VLAN an:
+1.  Wählen Sie in der [IBM Cloud Infrastructure-Konsole (SoftLayer)](https://control.bluemix.net/) **Netz** > **IP-Management** > **VLANs** aus.
+2.  Klicken Sie auf die **VLAN-Nummer** des VLANs, mit dem Sie Ihren Cluster erstellt haben. Überprüfen Sie den Abschnitt **Teilnetze**, um zu sehen, ob mehr als 40 Teilnetze vorhanden sind.
 
 {: tsResolve}
-Wenn Sie ein neues VLAN benötigen, fordern Sie eines beim [{{site.data.keyword.Bluemix_notm}} Support](/docs/get-support/howtogetsupport.html#getting-customer-support) an. [Erstellen Sie dann einen Cluster](cs_cli_reference.html#cs_cluster_create), der dieses neue VLAN verwendet. 
+Wenn Sie ein neues VLAN benötigen, fordern Sie eines beim [{{site.data.keyword.Bluemix_notm}} Support](/docs/get-support/howtogetsupport.html#getting-customer-support) an. [Erstellen Sie dann einen Cluster](cs_cli_reference.html#cs_cluster_create), der dieses neue VLAN verwendet.
 
-Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. 
+Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden.
 
-Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im Cluster wiederverwenden. 
-1.  Prüfen Sie, dass die Teilnetze, die Sie verwenden möchten, verfügbar sind. **Hinweis**: Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. Ist dies der Fall, werden, selbst wenn Sie den Befehl `bx cs subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen, nur Informationen zu Ihren Clustern angezeigt. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden. 
+Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im Cluster wiederverwenden.
+1.  Prüfen Sie, dass die Teilnetze, die Sie verwenden möchten, verfügbar sind. **Hinweis**: Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. Ist dies der Fall, werden, selbst wenn Sie den Befehl `bx cs subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen, nur Informationen zu Ihren Clustern angezeigt. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.
 
-2.  [Erstellen Sie einen Cluster](cs_cli_reference.html#cs_cluster_create) mit der Option `--no-subnet`, sodass der Service nicht versucht, neue Teilnetze zu erstellen. Geben Sie den Standort und das VLAN an, an dem Sie die verfügbaren Teilnetze finden können. 
+2.  [Erstellen Sie einen Cluster](cs_cli_reference.html#cs_cluster_create) mit der Option `--no-subnet`, sodass der Service nicht versucht, neue Teilnetze zu erstellen. Geben Sie den Standort und das VLAN an, an dem Sie die verfügbaren Teilnetze finden können.
 
-3.  Verwenden Sie den [Befehl](cs_cli_reference.html#cs_cluster_subnet_add) `bx cs cluster-subnet-add`, um vorhandene Teilnetze zu Ihrem Cluster hinzuzufügen. Weitere Informationen finden Sie unter [Angepasste und vorhandene Teilnetze in Kubernetes-Clustern hinzufügen oder daraus entfernen](cs_subnets.html#custom). 
+3.  Verwenden Sie den [Befehl](cs_cli_reference.html#cs_cluster_subnet_add) `bx cs cluster-subnet-add`, um vorhandene Teilnetze zu Ihrem Cluster hinzuzufügen. Weitere Informationen finden Sie unter [Angepasste und vorhandene Teilnetze in Kubernetes-Clustern hinzufügen oder daraus entfernen](cs_subnets.html#custom).
 
 <br />
 
@@ -339,7 +340,7 @@ Ihre Helm-Diagrammkonfigurationsdatei weist falsche oder fehlende Werte auf oder
 {: tsResolve}
 Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass der Status beim ersten Mal nicht `ESTABLISHED` lautet. Möglicherweise müssen Sie mehrere Problemtypen überprüfen und Ihre Konfigurationsdatei entsprechend ändern. Gehen Sie wie folgt vor, um Fehler in Ihrer StrongSwan-VPN-Konnektivität zu beheben:
 
-1. Überprüfen Sie die Einstellungen des lokalen VPN-Endpunkts im Unternehmen mit den Einstellungen in Ihrer Konfigurationsdatei. Falls Sie fehlende Übereinstimmung feststellen:
+1. Überprüfen Sie die Einstellungen des lokalen VPN-Endpunkts im Unternehmen mit den Einstellungen in Ihrer Konfigurationsdatei. Falls die Einstellungen nicht übereinstimmen:
 
     <ol>
     <li>Löschen Sie das vorhandene Helm-Diagramm.</br><pre class="codeblock"><code>helm delete --purge <releasename></code></pre></li>
@@ -350,8 +351,8 @@ Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erste
 2. Falls der VPN-Pod den Status `ERROR` hat oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationsmap des Diagramms liegen.
 
     <ol>
-    <li>Überprüfen Sie alle Gültigkeitsfehler in den StrongSwan-Pod-Protokollen.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>Falls Gültigkeitsfehler vorliegen, löschen Sie das vorhandene Helm-Diagramm.</br><pre class="codeblock"><code>helm delete --purge <releasename></code></pre></li>
+    <li>Überprüfen Sie alle Gültigkeitsfehler in den strongSwan-Pod-Protokollen.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
+    <li>Falls die Protokolle Gültigkeitsfehler enthalten, löschen Sie das vorhandene Helm-Diagramm.</br><pre class="codeblock"><code>helm delete --purge <releasename></code></pre></li>
     <li>Korrigieren Sie die falschen Werte in der Datei `config.yaml` und speichern Sie die aktualisiert Datei.</li>
     <li>Installieren Sie das neue Helm-Diagramm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<releasename> bluemix/strongswan</code></pre></li>
     </ol>
@@ -395,8 +396,8 @@ Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erste
 {: tsSymptoms}
 Sie haben zuvor eine funktionierende VPN-Verbindung mithilfe des StrongSwan-IPSec-VPN-Service hergestellt. Nachdem Sie einen Workerknoten in Ihrem Cluster hinzugefügt oder gelöscht haben, tritt jedoch mindestens eines der folgenden Symptome auf:
 
-* Der VPN-Status lautet nicht `ESTABLISHED`
-* Sie können von Ihrem lokalen Netz im Unternehmen nicht auf einen neuen Workerknoten zugreifen
+* Der VPN-Status lautet nicht `ESTABLISHED`.
+* Sie können von Ihrem lokalen Netz im Unternehmen nicht auf einen neuen Workerknoten zugreifen.
 * Sie können von Pods, die auf neuen Workerknoten ausgeführt werden, nicht auf das ferne Netz zugreifen.
 
 {: tsCauses}
@@ -427,11 +428,12 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
     ```
     {: pre}
 
-3. Überprüfgen Sie die folgenden Einstellungen und nehmen Sie bei Bedarf Änderungen vor, um die gelöschten oder hinzugefügten Workerknoten abzubilden.
+3. Überprüfen Sie die folgenden Einstellungen und nehmen Sie bei Bedarf Änderungen vor, um die gelöschten oder hinzugefügten Workerknoten abzubilden.
 
     Wenn Sie einen Workerknoten hinzugefügt haben:
 
     <table>
+    <caption>Workerknoteneinstellungen</caption?
      <thead>
      <th>Einstellung</th>
      <th>Beschreibung</th>
@@ -439,25 +441,26 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Der hinzugefügte Workerknoten kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die anderen vorhandenen Teilnetze, auf denen sich andere Workerknoten befinden. Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um die privaten lokalen IP-Adressen Ihres Clusters erneut zuzuordnen, und wenn ein Workerknoten auf einem neuen Teilnetz hinzugefügt wurde, fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu.</td>
+     <td>Der hinzugefügte Worker kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die anderen vorhandenen Teilnetze, auf denen sich andere Workerknoten befinden. Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um die privaten lokalen IP-Adressen Ihres Clusters erneut zuzuordnen, und wenn der Worker auf einem neuen Teilnetz hinzugefügt wurde, fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Wenn Sie den VPN-Pod zuvor auf die Ausführung auf beliebigen Workerknoten mit einer bestimmten Bezeichnung beschränkt haben und wenn Sie jetzt VPN-Routen zum Worker hinzufügen möchten, stellen Sie sicher, dass der hinzugefügte Workerknoten über diese Bezeichnung verfügt.</td>
+     <td>Wenn Sie zuvor die Bereitstellung des VPN-Pods auf Worker mit einer bestimmten Bezeichnung begrenzt haben, stellen Sie sicher, dass der hinzugefügte Worker auch diese Bezeichnung aufweist.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Wenn der hinzugefügte Workerknoten eine Bezeichnung trägt und Sie dem Worker VPN-Routen hinzufügen möchten, dann ändern Sie die Einstellung, damit der VPN-Pod auf allen Workerknoten mit Bezeichnungen oder auf Workerknoten mit bestimmten Bezeichnungen ausgeführt werden kann.</td>
+     <td>Wenn der hinzugefügte Workerknoten über einen Taint verfügt, ändern Sie diese Einstellung so, dass der VPN-Pod auf allen Workern mit beliebigen Bezeichnungen und bestimmten Bezeichnungen ausgeführt wird.</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>Der hinzugefügte Workerknoten kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die anderen vorhandenen Teilnetze, auf denen sich andere Workerknoten befinden. Wenn Ihre Apps von NodePort- oder LoadBalancer-Services im privaten Netz zugänglich gemacht werden und sich auf einem neuen Workerknoten befinden, den Sie hinzugefügt haben, dann fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu. **Hinweis**: Wenn Sie Werte zum `lokalen Teilnetz` hinzufügen, überprüfen Sie die VPN-Einstellungen für das lokale Teilnetz im Unternehmen, um zu sehen, ob diese ebenfalls aktualisiert werden müssen.</td>
+     <td>Der hinzugefügte Worker kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die vorhandenen Teilnetze, auf denen sich andere Worker befinden. Wenn Ihre Apps von NodePort- oder LoadBalancer-Services im privaten Netz zugänglich gemacht werden und sich auf dem hinzugefügten Worker befinden, dann fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu. **Hinweis**: Wenn Sie Werte zum `lokalen Teilnetz` hinzufügen, überprüfen Sie die VPN-Einstellungen für das lokale Teilnetz im Unternehmen, um zu sehen, ob diese ebenfalls aktualisiert werden müssen.</td>
      </tr>
      </tbody></table>
 
     Wenn Sie einen Workerknoten gelöscht haben:
 
     <table>
+    <caption>Einstellungen für Workerknoten</caption>
      <thead>
      <th>Einstellung</th>
      <th>Beschreibung</th>
@@ -465,15 +468,16 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um bestimmte private, lokale IP-Adressen erneut zuzuordnen, entfernen Sie alle IP-Adressen aus dieser Einstellung, die vom alten Workerknoten stammen. Wenn Sie die Teilnetz-NAT verwenden, um ganze Teilnetze erneut zuzuordnen und wenn sich keine Ihrer Workerknoten mehr im Teilnetz befinden, dann entfernen Sie das Teilnetz-CIDR aus dieser Einstellung.</td>
+     <td>Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um bestimmte private, lokale IP-Adressen erneut zuzuordnen, entfernen Sie alle IP-Adressen aus dieser Einstellung, die vom alten Worker stammen. Wenn Sie die Teilnetz-NAT verwenden, um ganze Teilnetze erneut zuzuordnen, und sich keine Worker mehr im Teilnetz befinden, entfernen Sie das Teilnetz-CIDR aus dieser Einstellung.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>Sie haben zuvor den VPN-Pod auf die Ausführung auf einen einzigen Workerknoten beschränkt und dieser Workerknoten wurde gelöscht. Ändern Sie diese Einstellung, um dem VPN-Pod die Ausführung auf anderen Workerknoten zu erlauben.</td>
+     <td>Wenn Sie zuvor die Bereitstellung des VPN-Pods auf einen einzelnen Worker begrenzt haben und dieser Worker gelöscht wurde, ändern Sie diese Einstellung so, dass der VPN-Pod auf anderen Workern ausgeführt werden kann.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Falls auf den von Ihnen gelöschten Workerknoten kein Taint angewendet wurde, aber auf alle verbleibenden Workerknoten wurden Taints angewendet, ändern Sie diese Einstellung, damit der VPN-Pod auf allen Workerknoten mit Taints oder auf Workerknoten mit bestimmten Taints ausgeführt werden kann. </td>
+     <td>Wenn der von Ihnen gelöschte Worker mit keinem Taint versehen war, alle anderen verbliebenen Worker jedoch schon, ändern Sie die Einstellung so, dass der VPN-Pod auf Workern mit beliebigen Taints oder bestimmten Taints ausgeführt werden kann.
+     </td>
      </tr>
      </tbody></table>
 
@@ -519,40 +523,51 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
 
 
 
-
-## ETCD-URL für die Konfiguration der Calico-CLI kann nicht abgerufen werden
+## Calico-Netzrichtlinien können nicht abgerufen werden
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Wenn Sie die `<ETCD_URL>` abrufen, um [Netzrichtlinien hinzuzufügen](cs_network_policy.html#adding_network_policies), dann gibt das System die Fehlernachricht `calico-config nicht gefunden` aus.
+Wenn Sie versuchen, Calico-Netzrichtlinien im Cluster durch Ausführen des Befehls `calicoctl get policy` anzuzeigen, führt dies zu den folgenden unerwarteten Ergebnissen oder Fehlermeldungen:
+- Eine leere Liste.
+- Eine Liste alter Calico-Richtlinien der Version 2 anstelle der Version 3.
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+
+Wenn Sie versuchen, Calico-Netzrichtlinien im Cluster durch Ausführen des Befehls `calicoctl get GlobalNetworkPolicy` anzuzeigen, führt dies zu den folgenden unerwarteten Ergebnissen oder Fehlermeldungen:
+- Eine leere Liste.
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'v1'`
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+- `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-Ihr Cluster verfügt nicht über [Kubernetes Version 1.7](cs_versions.html) oder höher.
+Bei der Verwendung von Calico-Richtlinien müssen vier Faktoren aufeinander abgestimmt werden: Die Version des Kubernetes-Cluster, die Version der Calico-CLI, die Syntax der Calico-Konfigurationsdatei und Befehle zum Anzeigen von Richtlinien (view policy). Einer oder mehrere dieser Faktoren entsprechen nicht den Vorgaben.
 
 {: tsResolve}
-[Aktualisieren Sie Ihren Cluster](cs_cluster_update.html#master) oder rufen Sie die `<ETCD_URL>` mithilfe von Befehlen ab, die mit älteren Versionen von Kubernetes kompatibel sind.
+Wenn der Cluster [Kubernetes Version 1.10 oder höher](cs_versions.html) verwendet, müssen Sie die Calico-CLI der Version 3.1, die Version 3-Syntax für die Konfigurationsdatei `calicoctl.cfg` und die Befehle `calicoctl get GlobalNetworkPolicy` und `calicoctl get NetworkPolicy` verwenden.
 
-Führen Sie die folgenden Befehle aus, um den Wert für `<ETCD_URL>` abzurufen:
+Wenn der Cluster [Kubernetes Version 1.9 oder früher](cs_versions.html) verwendet, müssen Sie die Calico-CLI der Version 1.6.3, die Version 2-Syntax für die Konfigurationsdatei `calicoctl.cfg` und den Befehl `calicoctl get policy` verwenden.
 
-- Linux und OS X:
+Gehen Sie wie folgt vor, um sicherzustellen, dass alle Calico-Faktoren aufeinander abgestimmt sind:
 
+1. Zeigen Sie die Kubernetes-Version des Clusters an.
     ```
-    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    bx cs cluster-get <clustername>
     ```
     {: pre}
 
-- Windows:
-    <ol>
-    <li> Rufen Sie eine Liste der Pods im Namensbereich des kube-Systems ab und suchen Sie nach dem Calico-Controller-Pod. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Beispiel:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-    <li> Zeigen Sie die Details des Calico-Controller-Pods an.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;calico-pod-id&gt;</code></pre>
-    <li> Suchen Sie den etcd-Endpunktwert. Beispiel: <code>https://169.1.1.1:30001</code>
-    </ol>
+    * Wenn der Cluster Kubernetes Version 1.10 oder höher verwendet:
+        1. [Installieren und konfigurieren Sie die Calico-CLI der Version 3.1.1](cs_network_policy.html#1.10_install). Die Konfiguration umfasst die manuelle Aktualisierung der Datei `calicoctl.cfg` für die Verwendung der Calico Version 3-Syntax.
+        2. Stellen Sie sicher, dass alle Richtlinien, die Sie erstellen und auf den Cluster anwenden möchten, die [Calico Version 3-Syntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) verwenden. Wenn eine bestehende `.yaml`- oder `.json`-Richtliniendatei mit der Calico Version 2-Syntax vorliegt, können Sie sie mithilfe des Befehls [`calicoctl convert` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) in die Calico Version 3-Syntax konvertieren.
+        3. Stellen Sie zum [Anzeigen von Richtlinien](cs_network_policy.html#1.10_examine_policies) sicher, dass Sie den Befehl `calicoctl get GlobalNetworkPolicy` für globale Richtlinien und den Befehl `calicoctl get NetworkPolicy --namespace <policy_namespace>` für Richtlinien verwenden, die sich auf bestimmte Namensbereiche beziehen.
 
-Wenn Sie die `<ETCD_URL>` abrufen, dann arbeiten Sie mit den Schritten weiter, die unter (Netzrichtlinien hinzufügen)[cs_network_policy.html#adding_network_policies] aufgeführt sind.
+    * Wenn der Cluster Kubernetes Version 1.9 oder früher verwendet:
+        1. [Installieren und konfigurieren Sie die Calico-CLI der Version 1.6.3](cs_network_policy.html#1.9_install). Vergewissern Sie sich, dass die Datei `calicoctl.cfg` die Calico Version 2-Syntax verwendet.
+        2. Stellen Sie sicher, dass alle Richtlinien, die Sie erstellen und auf den Cluster anwenden möchten, die [Calico Version 2-Syntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) verwenden.
+        3. Stellen Sie zum [Anzeigen von Richtlinien](cs_network_policy.html#1.9_examine_policies) sicher, dass Sie den Befehl `calicoctl get policy` verwenden.
+
+Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version auf Version 1.10 oder höher aktualisieren, ziehen Sie den Abschnitt [Vorbereitungen für die Aktualisierung auf Calico Version 3](cs_versions.html#110_calicov3) zurate.
+{: tip}
 
 <br />
-
-
 
 
 ## Hilfe und Unterstützung anfordern
@@ -562,8 +577,10 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com)
-    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an. {: tip}
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+
+    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+    {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
@@ -573,11 +590,8 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM
-Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter
-[Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
-
 

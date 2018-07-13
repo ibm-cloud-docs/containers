@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Planification réseau avec les services NodePort, LoadBalancer ou Ingress
 {: #planning}
 
@@ -26,8 +27,9 @@ L'interface de réseau public des noeuds worker tant dans les clusters gratuits 
 
 |Type de cluster|Gestionnaire du VLAN public pour le cluster|
 |------------|------------------------------------------|
-|Clusters gratuits dans {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
-|Clusters standard dans {{site.data.keyword.Bluemix_notm}}|Vous dans votre compte d'infrastructure IBM Cloud (SoftLayer)|
+|Clusters gratuits|{{site.data.keyword.IBM_notm}}|
+|Clusters standard|Vous dans votre compte d'infrastructure IBM Cloud (SoftLayer)|
+{: caption="Gestionnaires des VLAN publics par type de cluster" caption-side="top"}
 
 Pour plus d'informations sur la communication réseau en interne dans le cluster entre les noeuds worker et les pods, voir [Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network). Pour plus d'informations sur la sécurisation des connexions d'applications qui s'exécutent dans un cluster Kubernetes vers un réseau sur site ou vers des applications externes au cluster, voir [Configuration de la connectivité VPN](cs_vpn.html).
 
@@ -41,7 +43,7 @@ Pour rendre une application accessible au public sur Internet, vous devez mettre
 
 ![{{site.data.keyword.containerlong_notm}} Architecture Kubernetes](images/networking.png)
 
-Le diagramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.data.keyword.containershort_notm}}. Selon que vous avez créé un cluster gratuit ou standard, différentes méthodes sont disponibles pour rendre votre application accessible depuis Internet.
+Le diagramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.data.keyword.containershort_notm}}. Pour rendre votre application accessible sur Internet, les méthodes peuvent varier selon que vous avez créé un cluster gratuit ou standard.
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">Service NodePort</a> (clusters gratuits et standard)</dt>
@@ -64,14 +66,14 @@ Le diagramme illustre comment Kubernetes véhicule le trafic réseau dans {{site
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a> (clusters standard uniquement)</dt>
 <dd>
  <ul>
-  <li>Exposez plusieurs applications dans votre cluster en créant un équilibreur de charge externe HTTP ou HTTPS, TCP ou UDP qui utilise un point d'entrée public sécurisé et unique pour acheminer les demandes entrantes vers vos applications.</li>
+  <li>Exposez plusieurs applications dans votre cluster en créant un équilibreur de charge externe HTTP ou HTTPS, TCP ou UDP. L'équilibreur de charge utilise un point d'entrée public sécurisé et unique pour acheminer les demandes entrantes vers vos applications.</li>
   <li>Vous pouvez utiliser une seule route publique pour exposer plusieurs applications dans votre cluster en tant que services.</li>
   <li>Ingress comporte deux composants :
    <ul>
     <li>La ressource Ingress définit les règles de routage et d'équilibrage de charge des demandes entrantes pour une application.</li>
-    <li>L'équilibreur de charge d'application (ALB) est à l'écoute des demandes entrantes de service HTTP ou HTTPS, TCP ou UDP et achemine ces demandes aux pods des applications en fonction des règles que vous avez définies dans la ressource Ingress.</li>
+    <li>L'équilibreur de charge d'application (ALB) est à l'écoute des demandes de service HTTP, HTTPS, TCP ou UDP entrantes. Il transmet les demandes aux pods des applications en fonction des règles que vous avez définies dans la ressource Ingress.</li>
    </ul>
-  <li>Utilisez Ingress si vous désirez implémenter votre propre équilibreur de charge ALB avec des règles de routage personnalisées et si vous avez besoin d'une terminaison SSL pour vos applications.</li>
+  <li>Utilisez Ingress pour implémenter votre propre équilibreur de charge ALB avec des règles de routage personnalisées et si vous avez besoin d'une terminaison SSL pour vos applications.</li>
  </ul>
 </dd></dl>
 
@@ -83,4 +85,3 @@ Pour sélectionner l'option réseau optimale pour votre application, vous pouvez
 <area href="/docs/containers/cs_loadbalancer.html" alt="Service LoadBalancer" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Service Ingress" shape="circle" coords="445, 420, 45"/>
 </map>
-

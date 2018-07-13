@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # チュートリアル: クラスターの作成
@@ -31,10 +32,10 @@ Kubernetes クラスターを {{site.data.keyword.containerlong}} にデプロ�
 
 インフラストラクチャーをセットアップするには、以下のようにします。
 
--   1 つのワーカー・ノードがある Kubernetes クラスターを作成する
--   Kubernetes コマンドを実行し Docker イメージを管理するための CLI をインストールする
--   イメージを格納するためのプライベート・イメージ・リポジトリーを {{site.data.keyword.registrylong_notm}} で作成する
--   {{site.data.keyword.toneanalyzershort}} サービスをクラスターに追加して、そのサービスをクラスター内のアプリで使用できるようにする
+-   1 つのワーカー・ノードがあるクラスターを作成します。
+-   Kubernetes コマンドを実行し Docker イメージを管理するための CLI をインストールします。
+-   イメージを格納するためのプライベート・イメージ・リポジトリーを {{site.data.keyword.registrylong_notm}} で作成します。
+-   {{site.data.keyword.toneanalyzershort}} サービスをクラスターに追加して、そのサービスをクラスター内のすべてのアプリが使用できるようにします。
 
 
 ## 所要時間
@@ -44,12 +45,13 @@ Kubernetes クラスターを {{site.data.keyword.containerlong}} にデプロ�
 
 ## 対象読者
 
-このチュートリアルは、Kubernetes クラスターを作成したことがないソフトウェア開発者やネットワーク管理者を対象にしています。
+このチュートリアルは、Kubernetes クラスターを初めて作成するソフトウェア開発者やネットワーク管理者を対象にしています。
 
 
 ## 前提条件
 
 -  従量課金 (PAYG) またはサブスクリプションの [{{site.data.keyword.Bluemix_notm}} アカウント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/registration/)
+-  作業を行うクラスター・スペース内の [Cloud Foundry 開発者役割](/docs/iam/mngcf.html#mngcf)
 
 
 ## レッスン 1: クラスターを作成して CLI をセットアップする
@@ -58,13 +60,16 @@ Kubernetes クラスターを {{site.data.keyword.containerlong}} にデプロ�
 GUI 内にクラスターを作成して必要な CLI をインストールします。
 {: shortdesc}
 
+**クラスターを作成するには、以下のようにします。**
 
-クラスターを作成するには、以下のようにします。
+クラスターがプロビジョンされるまでには数分かかることがあるため、CLI をインストールする前にクラスターを作成します。
 
-1. クラスターがプロビジョンされるまで数分かかることがあります。 時間を有効に使うために、CLI をインストールする前に [GUI でクラスターを作成 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) します。 このチュートリアルでは、クラスターを米国東部地域に作成します。
+1.  [GUI![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) で、1 つのワーカー・ノードを持つフリー・クラスターまたは標準クラスターを作成します。
 
+    [CLI でクラスター](cs_clusters.html#clusters_cli)を作成することもできます。
+    {: tip}
 
-CLI でクラスターを管理するために、以下の CLI とその前提条件が使用されます。
+クラスターがプロビジョンされたら、クラスターを管理するために使用する以下の CLI をインストールします。
 -   {{site.data.keyword.Bluemix_notm}} CLI
 -   {{site.data.keyword.containershort_notm}} プラグイン
 -   Kubernetes CLI
@@ -72,7 +77,7 @@ CLI でクラスターを管理するために、以下の CLI とその前提�
 -   Docker CLI
 
 </br>
-CLI とその前提条件をインストールするには、以下のようにします。
+**CLI とその前提条件をインストールするには、以下のようにします。**
 
 1.  {{site.data.keyword.containershort_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://clis.ng.bluemix.net/ui/home.html) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI コマンドを実行するには、接頭部 `bx` を使用します。
 2.  プロンプトに従ってアカウントと {{site.data.keyword.Bluemix_notm}} 組織を選択します。 クラスターはアカウントに固有のものですが、{{site.data.keyword.Bluemix_notm}} 組織またはスペースからは独立しています。
@@ -84,14 +89,14 @@ CLI とその前提条件をインストールするには、以下のように�
     ```
     {: pre}
 
-5.  Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.11 です。
+5.  クラスターにアプリをデプロイするには、[Kubernetes CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
+    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.9.7 です。
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
           **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
@@ -103,7 +108,7 @@ CLI とその前提条件をインストールするには、以下のように�
             ```
             {: pre}
 
-        2.  /usr/local/bin が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
+        2.  `/usr/local/bin` が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
 
             ```
             echo $PATH
@@ -138,9 +143,10 @@ CLI とその前提条件をインストールするには、以下のように�
     ```
     {: pre}
 
-7. ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、[Docker CE CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
+7. ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、[Docker Community Edition CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
 
 これで完了です。 CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
+
 
 ## レッスン 2: プライベート・レジストリーをセットアップする
 {: #cs_cluster_tutorial_lesson2}
@@ -159,8 +165,8 @@ CLI とその前提条件をインストールするには、以下のように�
 
 2.  独自のプライベート・イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。 {{site.data.keyword.Bluemix_notm}} 内のプライベート・イメージ・リポジトリーは、名前空間によって識別されます。 イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。
 
-   
-    
+    コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。
+
     この例で PR 会社はイメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として _pr_firm_ を選択します。 _&lt;namespace&gt;_ を、このチュートリアルに関係のない任意の名前空間に置き換えてください。
 
     ```
@@ -173,13 +179,13 @@ CLI とその前提条件をインストールするには、以下のように�
     ```
     bx cs workers <cluster_name_or_ID>
     ```
-     {: pre}
+    {: pre}
 
     ワーカー・ノードのプロビジョニングが終了すると、状況が **Ready** に変わり、{{site.data.keyword.Bluemix_notm}} サービスのバインドを開始できます。
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.7
     ```
     {: screen}
 
@@ -189,7 +195,7 @@ CLI とその前提条件をインストールするには、以下のように�
 CLI でクラスターのコンテキストを設定します。
 {: shortdesc}
 
-クラスターの作業を行うためにコンテナー CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。 Kubernetes CLI はこの変数を使用して、{{site.data.keyword.Bluemix_notm}} 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
+クラスターの作業を行うために {{site.data.keyword.containerlong}} CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。 Kubernetes CLI はこの変数を使用して、{{site.data.keyword.Bluemix_notm}} 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
 
 1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
@@ -235,8 +241,8 @@ CLI でクラスターのコンテキストを設定します。
     出力例:
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
@@ -272,7 +278,7 @@ CLI でクラスターのコンテキストを設定します。
     ```
     {: screen}
 
-3.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、ユーザー名、パスワード、コンテナーがサービスにアクセスするために使用する URL など、サービスに関する機密情報を含んだ JSON ファイルによって定義されます。 この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされる、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} にアクセスするための資格情報がシークレットに格納されます。
+3.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、ユーザー名、パスワード、コンテナーがアクセスするために使用する URL など、機密情報を含む JSON ファイルによって定義されます。この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされる、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} にアクセスするための資格情報がシークレットに格納されます。
 
     ```
     kubectl get secrets --namespace=default
@@ -290,12 +296,11 @@ CLI でクラスターのコンテキストを設定します。
     {: screen}
 
 </br>
-おつかれさまでした。 クラスターを構成したので、ローカル環境でアプリをクラスターにデプロイする作業を開始する用意が整いました。
+おつかれさまでした。 クラスターが構成され、ローカル環境でアプリをクラスターにデプロイする準備が整いました。
 
 ## 次の作業
 {: #next}
 
-* [クイズに答えて知識を試してみましょう!![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [クイズに答えて 知識を試してみましょう ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)。
 
 * [チュートリアル: {{site.data.keyword.containershort_notm}} の Kubernetes クラスターにアプリをデプロイする方法](cs_tutorials_apps.html#cs_apps_tutorial)を試して、作成したクラスターに PR 会社のアプリをデプロイします。
-

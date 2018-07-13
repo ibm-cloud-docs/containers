@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Anotações de ingresso
 {: #ingress_annotation}
 
@@ -25,6 +26,7 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
 Para obter informações gerais sobre os serviços Ingress e como começar a utilizá-los, veja [Gerenciando o tráfego de rede usando o Ingress](cs_ingress.html#planning).
 
 <table>
+<caption>Anotações gerais</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -64,6 +66,7 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
 <br>
 
 <table>
+<caption>Anotações da conexão</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -108,6 +111,7 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
 <br>
 
   <table>
+  <caption>Anotações de autenticação HTTPS e TLS/SSL</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -145,13 +149,14 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
   <tr>
   <td><a href="#ssl-services">Suporte a serviços SSL</a></td>
   <td><code>ssl-services</code></td>
-  <td>Permita que o suporte de serviços SSL criptografe o tráfego para seus apps de envio de dados que requerem HTTPS. </td>
+  <td>Permita que o suporte de serviços SSL criptografe o tráfego para seus apps de envio de dados que requerem HTTPS.</td>
   </tr>
   </tbody></table>
 
 <br>
 
 <table>
+<caption>Anotações do Istio</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -171,6 +176,7 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
 <br>
 
 <table>
+<caption>Anotações de buffer de proxy</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -205,6 +211,7 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
 <br>
 
 <table>
+<caption>Anotações de solicitação e de resposta</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -239,6 +246,7 @@ Para obter informações gerais sobre os serviços Ingress e como começar a uti
 <br>
 
 <table>
+<caption>Anotações de limite de serviço</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -302,8 +310,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -333,12 +342,13 @@ Modifique a maneira com que o ALB corresponde o URI de solicitação ao caminho 
 
 <dl>
 <dt>Descrição</dt>
-<dd>Por padrão, os ALBs processam os caminhos em que os apps atendem como prefixos. Quando um ALB recebe uma solicitação para um app, o ALB verifica o recurso de Ingresso para um caminho (como um prefixo) que corresponde ao início do URI de solicitação. Se uma correspondência é localizada, a solicitação é encaminhada para o endereço IP do pod no qual o app está implementado.<br><br>A anotação `location-modifier` muda a maneira como o ALB procura correspondências modificando a configuração de bloco de local. O bloco de local determina como as solicitações são manipuladas para o caminho do app.<br><br>**Nota**: para manipular caminhos de expressão regular (regex), essa anotação é necessária.</dd>
+<dd>Por padrão, os ALBs processam os caminhos em que os apps atendem como prefixos. Quando um ALB recebe uma solicitação para um app, o ALB verifica o recurso de Ingresso para um caminho (como um prefixo) que corresponde ao início do URI de solicitação. Se uma correspondência é localizada, a solicitação é encaminhada para o endereço IP do pod no qual o app está implementado.<br><br>A anotação `location-modifier` muda a maneira como o ALB procura correspondências modificando a configuração de bloco de local. O bloco de local determina como as solicitações são manipuladas para o caminho do app.<br><br><strong>Nota</strong>: para manipular caminhos de expressão regular (regex), essa anotação é necessária.</dd>
 
 <dt>Modificadores suportados</dt>
 <dd>
 
 <table>
+<caption>Modificadores suportados</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -348,15 +358,15 @@ Modifique a maneira com que o ALB corresponde o URI de solicitação ao caminho 
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>O modificador sinal de igual faz com que o ALB selecione somente as correspondências exatas. Quando uma correspondência exata é localizada, a procura para e o caminho correspondente é selecionado.</td>
+ <td>O modificador sinal de igual faz com que o ALB selecione somente as correspondências exatas. Quando uma correspondência exata é localizada, a procura para e o caminho correspondente é selecionado.<br>Por exemplo, se seu app atende em <code>/tea</code>, o ALB seleciona somente caminhos <code>/tea</code> exatos ao corresponder uma solicitação com seu app.</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>O modificador til faz com que o ALB processe caminhos como caminhos regex com distinção entre maiúsculas e minúsculas durante a correspondência.</td>
+ <td>O modificador til faz com que o ALB processe caminhos como caminhos regex com distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se seu app atende em <code>/coffee</code>, o ALB pode selecionar os caminhos <code>/ab/coffee</code> ou <code>/123/coffee</code> ao corresponder uma solicitação com seu app mesmo que os caminhos não estejam configurados explicitamente para seu app.</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>O til seguido por um modificador asterisco faz com que o ALB processe caminhos como caminhos regex sem distinção entre maiúsculas e minúsculas durante a correspondência.</td>
+ <td>O til seguido por um modificador asterisco faz com que o ALB processe caminhos como caminhos regex sem distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se seu app atende em <code>/coffee</code>, o ALB pode selecionar os caminhos <code>/ab/Coffee</code> ou <code>/123/COFFEE</code> ao corresponder uma solicitação com seu app mesmo que os caminhos não estejam configurados explicitamente para seu app.</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -390,8 +400,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -446,8 +457,9 @@ tls:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -470,7 +482,7 @@ Roteie o tráfego de rede recebido em um caminho de domínio do ALB para um cami
 
 <dl>
 <dt>Descrição</dt>
-<dd>Seu domínio de ALB de Ingresso roteia o tráfego de rede recebido em <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> para seu app. O seu app atende em <code>/coffee</code>, em vez de <code>/beans</code>. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em <code>/beans</code> seja encaminhado para o seu app usando o caminho <code>/coffee</code>. Ao incluir múltiplos serviços, use apenas um ponto e vírgula (;) para separá-los.</dd>
+<dd>Seu domínio de ALB de Ingresso roteia o tráfego de rede recebido em <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> para seu app. O seu app atende em <code>/coffee</code>, em vez de <code>/beans</code>. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em <code>/beans</code> seja encaminhado para o seu app usando o caminho <code>/coffee</code>. Ao incluir múltiplos serviços, use apenas um ponto e vírgula (;) para separá-los.</dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
 <pre class="codeblock">
@@ -494,8 +506,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -551,8 +564,9 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -576,17 +590,17 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 A saída da CLI é semelhante à seguinte:
 <pre class="screen">
-<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-public-ingress-ctl-svc 10.xxx.xx.xxx 169.xx.xxx.xxx 80:30776/TCP,443:30412/TCP 8d</code></pre></li>
+<code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP 109d</code></pre></li>
 <li>Abra o mapa de configuração do ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Inclua as portas TCP no mapa de configuração. Substitua <code>&lt;port&gt;</code> pelas portas TCP que você deseja abrir.
+<li>Inclua as portas TCP no mapa de configuração. Substitua <code>&lt;port&gt;</code> pelas portas TCP que você deseja abrir. <b>Nota</b>: por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Quando se ativa um ALB privado, deve-se também especificar quaisquer portas que deseja manter abertas no campo `private-ports`. Para obter mais informações, veja <a href="cs_ingress.html#opening_ingress_ports">Abrindo portas no ALB do Ingress</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 dados:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadados:
  creationTimestamp: 2017-08-22T19:06:51Z
  name: ibm-cloud-provider-ingress-cm
@@ -599,8 +613,8 @@ metadados:
 <code>kubectl get service -n kube-system</code></pre>
 A saída da CLI é semelhante à seguinte:
 <pre class="screen">
-<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-public-ingress-ctl-svc 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 8d</code></pre></li>
+<code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 109d</code></pre></li>
 <li>Configure seu Ingresso para acessar seu app por meio de uma porta TCP não padrão. Use o arquivo YAML de amostra nesta referência. </li>
 <li>Atualize sua configuração do ALB.
 <pre class="pre">
@@ -641,8 +655,8 @@ kind: Ingress
 metadados:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-   ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   Ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   Ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
  tls:
  - System z:
@@ -658,17 +672,18 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>O número de segundos de espera para se conectar ao app backend, por exemplo <code>65s</code>. <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</td>
+ <td>O número de segundos ou minutos a esperar para se conectar ao app de backend, por exemplo <code>65s</code> ou <code>2m</code>. <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>O número de segundos de espera antes que o app backend seja lido, por exemplo <code>65s</code>. <strong>Nota:</strong> um tempo limite de leitura não pode exceder 120 segundos.</td>
+ <td>O número de segundos ou minutos a esperar antes de o app de backend ser lido, por exemplo <code>65s</code> ou <code>2m</code>.
  </tr>
  </tbody></table>
 
@@ -716,8 +731,9 @@ tls:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -775,8 +791,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -829,8 +846,9 @@ spec:
 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -913,12 +931,13 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: / backend: serviceName: &lt;myservice1&gt; servicePort: 8080
-      - path: /myapp backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
+      - path: /service1_path backend: serviceName: &lt;myservice1&gt; servicePort: 8080
+      - path: /service2_path backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
 
   <table>
+  <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -947,6 +966,8 @@ spec:
  </dd></dl>
 
 <br />
+
+
 
 
 ### Envio de dados keep-alive (upstream-keepalive)
@@ -987,8 +1008,9 @@ Configure o número máximo de conexões keep-alive inativas para o servidor de 
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -1006,6 +1028,8 @@ Configure o número máximo de conexões keep-alive inativas para o servidor de 
 <br />
 
 
+
+
 ## Anotações de autenticação HTTPS e TLS/SSL
 {: #https-auth}
 
@@ -1020,7 +1044,7 @@ Configure o número máximo de conexões keep-alive inativas para o servidor de 
   <dd>
   Autentique solicitações HTTP/HTTPS da web ou da API com {{site.data.keyword.appid_short_notm}}.
 
-  <p>Se você configura o tipo de solicitação para <code>web</code>, uma solicitação da web que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a validação do token falha, a solicitação da web é rejeitada. Se a solicitação não contém um token de acesso, a solicitação é redirecionada para a página de login do {{site.data.keyword.appid_short_notm}}. **Nota**: para que a autenticação da web do {{site.data.keyword.appid_short_notm}} funcione, os cookies devem estar ativados no navegador do usuário.</p>
+  <p>Se você configura o tipo de solicitação para <code>web</code>, uma solicitação da web que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a validação do token falha, a solicitação da web é rejeitada. Se a solicitação não contém um token de acesso, a solicitação é redirecionada para a página de login do {{site.data.keyword.appid_short_notm}}. <strong>Nota</strong>: para que a autenticação da web do {{site.data.keyword.appid_short_notm}} funcione, os cookies devem estar ativados no navegador do usuário.</p>
 
   <p>Se você configura o tipo de solicitação para <code>api</code>, uma solicitação de API que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a solicitação não contém um token de acesso, uma mensagem de erro <code>401: Unauthorized</code> é retornada ao usuário.</p>
 
@@ -1051,8 +1075,9 @@ Configure o número máximo de conexões keep-alive inativas para o servidor de 
           servicePort: 8080</code></pre>
 
    <table>
+   <caption>Entendendo os componentes de anotação</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
     </thead>
     <tbody>
     <tr>
@@ -1125,8 +1150,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -1146,12 +1172,12 @@ spec:
 <code>kubectl get service -n kube-system</code></pre>
 A saída da CLI é semelhante à seguinte:
 <pre class="screen">
-<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-public-ingress-ctl-svc 10.xxx.xx.xxx 169.xx.xxx.xxx 80:30776/TCP,443:30412/TCP 8d</code></pre></li>
+<code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP 109d</code></pre></li>
 <li>Abra o mapa de configuração do ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Inclua as portas HTTP e HTTPS não padrão no mapa de configuração. Substitua &lt;port&gt; pelas portas HTTP ou HTTPS que você deseja abrir.
+<li>Inclua as portas HTTP e HTTPS não padrão no mapa de configuração. Substitua &lt;port&gt; pelas portas HTTP ou HTTPS que você deseja abrir. <b>Nota</b>: por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Quando se ativa um ALB privado, deve-se também especificar quaisquer portas que deseja manter abertas no campo `private-ports`. Para obter mais informações, veja <a href="cs_ingress.html#opening_ingress_ports">Abrindo portas no ALB do Ingress</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1169,8 +1195,8 @@ metadados:
 <code>kubectl get service -n kube-system</code></pre>
 A saída da CLI é semelhante à seguinte:
 <pre class="screen">
-<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-public-ingress-ctl-svc 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 8d</code></pre></li>
+<code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 109d</code></pre></li>
 <li>Configure seu Ingresso para usar as portas não padrão ao rotear o tráfego de rede recebido para seus serviços. Use o arquivo YAML de amostra nesta referência. </li>
 <li>Atualize sua configuração do ALB.
 <pre class="pre">
@@ -1197,6 +1223,7 @@ O redirecionamento de solicitações de HTTP para HTTPS é desativado por padrã
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
@@ -1217,7 +1244,10 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+</dd>
+
+</dl>
 
 <br />
 
@@ -1249,16 +1279,13 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: / backend: serviceName: myservice1 servicePort: 8443
-      - path: /
-        backend:
-          serviceName: myservice2
-          servicePort: 8444
-          </code></pre>
+      - path: /service1_path backend: serviceName: myservice1 servicePort: 8443
+      - path: /service2_path backend: serviceName: myservice2 servicePort: 8444 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -1291,7 +1318,7 @@ Configure a autenticação mútua para o ALB.
 <dl>
 <dt>Descrição</dt>
 <dd>
-Configure a autenticação mútua para o ALB de Ingresso. O cliente autentica o servidor e o servidor também autentica o cliente usando certificados. A autenticação mútua também é conhecida como autenticação baseada em certificado ou autenticação de duas vias.
+Configure a autenticação mútua de tráfego de recebimento de dados para o ALB de Ingresso. O cliente externo autentica o servidor e o servidor também autentica o cliente usando certificados. A autenticação mútua também é conhecida como autenticação baseada em certificado ou autenticação de duas vias.
 </dd>
 
 <dt>Pré-requisitos</dt>
@@ -1328,8 +1355,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -1362,10 +1390,7 @@ Permitir solicitações de HTTPS e criptografar o tráfego para seus apps de env
 <dl>
 <dt>Descrição</dt>
 <dd>
-Criptografe o tráfego para seus apps de envio de dados que requerem HTTPS.
-
-**Opcional**: é possível incluir [autenticação unidirecional ou autenticação mútua](#ssl-services-auth) nessa anotação.
-</dd>
+Criptografe o tráfego que o Ingresso envia para apps de envio de dados que requerem HTTPS. Se seus apps de envio de dados podem manipular TLS, é possível opcionalmente fornecer um certificado que esteja contido em um segredo do TLS.<br></br>**Opcional**: é possível incluir [autenticação unidirecional ou autenticação mútua](#ssl-services-auth) nessa anotação.</dd>
 
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
@@ -1383,15 +1408,13 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: / backend: serviceName: myservice1 servicePort: 8443
-      - path: /
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
+      - path: /service1_path backend: serviceName: myservice1 servicePort: 8443
+      - path: /service2_path backend: serviceName: myservice2 servicePort: 8444 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -1400,7 +1423,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo para do serviço. Este parâmetro é opcional. Se o parâmetro for fornecido, o valor deverá conter a chave e o certificado que o seu app está esperando do cliente. Para criar um segredo do TLS, veja [Criando segredos](cs_app.html#secrets).</td>
+  <td>Opcional: se você desejar usar um segredo do TLS e seu app de envio de dados puder manipular TLS, substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo para o serviço. Se você fornecer um segredo, o valor deverá conter o <code>trusted.crt</code>, <code>client.crt</code> e <code>client.key</code> que seu app está esperando do cliente. Para criar um segredo do TLS, primeiro [converta os certificados e a chave em base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/). Então, consulte [Criando segredos](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1417,9 +1440,6 @@ spec:
 <dt>Descrição</dt>
 <dd>
 Permita as solicitações de HTTPS e criptografe o tráfego para seus apps de envio de dados com autenticação unilateral ou mútua para segurança adicional.
-
-**Nota**: antes de iniciar, [converta o certificado e chave em base-64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/).
-
 </dd>
 
 
@@ -1442,16 +1462,13 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: / backend: serviceName: myservice1 servicePort: 8443
-      - path: /
-        backend:
-          serviceName: myservice2
-          servicePort: 8444
-          </code></pre>
+      - path: /service1_path backend: serviceName: myservice1 servicePort: 8443
+      - path: /service2_path backend: serviceName: myservice2 servicePort: 8444 </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -1460,7 +1477,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo para do serviço. Este parâmetro é opcional. Se o parâmetro for fornecido, o valor deverá conter a chave e o certificado que o seu app está esperando do cliente. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets).</td>
+  <td>Substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo de autenticação mútua para o serviço. O valor deve conter o certificado de CA que o seu app está esperando do cliente. Para criar um segredo de autenticação mútua, primeiro [converter o certificado e chave em base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/). Então, consulte [Criando segredos](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1505,7 +1522,7 @@ spec:
    metadados:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - System z:
@@ -1525,12 +1542,13 @@ spec:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>Entendendo os componentes de arquivo YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>ativado</code></td>
       <td>Para ativar o roteamento de tráfego para os serviços gerenciados pelo Istio, configure como <code>True</code>.</td>
     </tr>
     <tr>
@@ -1584,7 +1602,7 @@ kind: Ingress
 metadados:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   Ingress.bluemix.net/proxy-buffering: "ativado=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - System z:
@@ -1598,7 +1616,24 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<caption>Entendendo os componentes de anotação</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>ativado</code></td>
+   <td>Para desativar o armazenamento em buffer de dados de resposta no ALB, configure para <code>false</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Substitua <code><em>&lt;myservice1&gt;</em></code> pelo nome do serviço do Kubernetes que você criou para o seu app. Separe múltiplos serviços com um ponto e vírgula (;). Este campo é opcional. Se você não especificar um nome do serviço, todos os serviços usarão essa anotação.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1639,8 +1674,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -1701,8 +1737,9 @@ spec:
  </code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -1760,8 +1797,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
 </thead>
 <tbody>
 <tr>
@@ -1803,7 +1841,6 @@ Se o seu app backend requer informações do cabeçalho de HTTP, é possível us
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1815,7 +1852,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1858,12 +1894,13 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: / backend: serviceName: &lt;myservice1&gt; servicePort: 8080
-      - path: /myapp backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
+      - path: /service1_path backend: serviceName: &lt;myservice1&gt; servicePort: 8080
+      - path: /service2_path backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -1919,12 +1956,13 @@ Remova as informações do cabeçalho que são incluídas na resposta do cliente
    - host: mydomain
     http:
       paths:
-       - path: / backend: serviceName: &lt;myservice1&gt; servicePort: 8080
-       - path: /myapp backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
+       - path: /service1_path backend: serviceName: &lt;myservice1&gt; servicePort: 8080
+       - path: /service2_path backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
 
   <table>
+  <caption>Entendendo os componentes de anotação</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
    </thead>
    <tbody>
    <tr>
@@ -1980,13 +2018,14 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>O tamanho máximo do corpo de resposta do cliente. Por exemplo, para configurá-lo como 200 megabytes, defina <code>200 m</code>.  <strong>Nota:</strong> será possível configurar o tamanho como 0 para desativar a verificação do tamanho do corpo de solicitação do cliente.</td>
+ <td>O tamanho máximo do corpo de resposta do cliente. Por exemplo, para configurar o tamanho máximo para 200 megabytes, defina <code>200m</code>. <strong>Nota:</strong> será possível configurar o tamanho como 0 para desativar a verificação do tamanho do corpo de solicitação do cliente.</td>
  </tr>
  </tbody></table>
 
@@ -2030,8 +2069,9 @@ spec:
           servicePort: 8080</code></pre>
 
 <table>
+<caption>Entendendo os componentes de anotação</caption>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
  </thead>
  <tbody>
  <tr>
@@ -2092,13 +2132,14 @@ Para todos os serviços, limite a taxa de processamento de solicitação e o nú
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
   <td><code>chave</code></td>
-  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2154,8 +2195,9 @@ Limitar a taxa de processamento de solicitação e o número de conexões para s
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Entendendo os componentes de anotação</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
   </thead>
   <tbody>
   <tr>
@@ -2164,7 +2206,7 @@ Limitar a taxa de processamento de solicitação e o número de conexões para s
   </tr>
   <tr>
   <td><code>chave</code></td>
-  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2179,3 +2221,6 @@ Limitar a taxa de processamento de solicitação e o número de conexões para s
   </dl>
 
   <br />
+
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,22 +16,26 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
+
 # Configurando sub-redes para clusters
 {: #subnets}
 
 Mude o conjunto de endereços IP públicos ou privados móveis disponíveis, incluindo sub-redes em seu cluster do Kubernetes no {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis estáveis para serviços do Kubernetes, incluindo sub-redes da rede no cluster. Nesse caso, as sub-redes não estão sendo usadas com netmasking para criar a conectividade entre um ou mais clusters. Em vez disso, as sub-redes são usadas para fornecer IPs fixos permanente para um serviço de um cluster que pode ser usado para acessar esse serviço.
+No {{site.data.keyword.containershort_notm}}, é possível incluir endereços IP móveis e estáveis para serviços do Kubernetes, incluindo sub-redes de rede para o cluster. Nesse caso, as sub-redes não estão sendo usadas com netmasking para criar a conectividade entre um ou mais clusters. Em vez disso, as sub-redes são usadas para fornecer endereços IP fixos permanentes para um serviço de um cluster que pode ser usado para acessar esse serviço.
 
 <dl>
   <dt>A criação de um cluster inclui a criação de uma sub-rede por padrão</dt>
   <dd>Quando você cria um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente as redes a seguir:
-    <ul><li>Uma sub-rede pública móvel com 5 endereços IP públicos</li>
-      <li>Uma sub-rede privada móvel com 5 endereços IP privados </li></ul>
-      Os endereços IP públicos e privados móveis são estáticos e não mudam quando um nó do trabalhador é removido. Para cada sub-rede, um dos endereços IP públicos móveis e um dos endereços IP privados móveis são usados para [balanceadores de carga de aplicativo do Ingress](cs_ingress.html) que podem ser usados para expor múltiplos apps em seu cluster. Os outros quatro endereços IP públicos e privados móveis podem ser usados para expor apps únicos à rede pública ou privada [criando um serviço de balanceador de carga](cs_loadbalancer.html).</dd>
+    <ul><li>Uma sub-rede pública primária que determina os endereços IP públicos para nós do trabalhador durante a criação de cluster</li>
+    <li>Uma sub-rede privada primária que determina endereços IP privados para nós do trabalhador durante a criação do cluster</li>
+    <li>Uma sub-rede pública móvel que fornece 5 endereços IP públicos para os serviços de rede do Ingress e do balanceador de carga</li>
+    <li>Uma sub-rede privada móvel que fornece 5 endereços IP privados para os serviços de rede do Ingress e do balanceador de carga</li></ul>
+      Os endereços IP públicos e privados móveis são estáticos e não mudam quando um nó do trabalhador é removido. Para cada sub-rede, um endereço IP público móvel e um endereço IP privado móvel serão usados para os [balanceadores de carga do aplicativo Ingress](cs_ingress.html) padrão. É possível usar o balanceador de carga do aplicativo de Ingresso para expor múltiplos apps em seu cluster. Os outros quatro endereços IP públicos e privados móveis podem ser usados para expor apps únicos à rede pública ou privada [criando um serviço de balanceador de carga](cs_loadbalancer.html).</dd>
   <dt>[Solicitando e gerenciando suas próprias sub-redes existentes](#custom)</dt>
-  <dd>É possível solicitar e gerenciar sub-redes móveis existentes em sua conta de infraestrutura do IBM Cloud (SoftLayer) em vez de usar as sub-redes provisionadas automaticamente. Use essa opção para reter IPs estáticos estáveis nas remoções e criações de clusters ou para solicitar blocos de IPs maiores. Primeiramente crie um cluster sem sub-redes usando o comando `cluster-create --no-subnet` e, em seguida, inclua a sub-rede no cluster com o comando `cluster-subnet-add`. </dd>
+  <dd>É possível solicitar e gerenciar sub-redes móveis existentes em sua conta de infraestrutura do IBM Cloud (SoftLayer) em vez de usar as sub-redes provisionadas automaticamente. Use essa opção para reter endereços IP estáticos estáveis em remoções e criações de cluster ou para pedir blocos maiores de endereços IP. Primeiro, crie um cluster sem sub-redes usando o comando `cluster-create --no-subnet` e, em seguida, inclua a sub-rede no cluster com o comando `cluster-subnet-add`. </dd>
 </dl>
 
 **Nota:** os endereços IP públicos móveis são cobrados mensalmente. Se você remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda terá que pagar o encargo mensal, mesmo se os tiver usado apenas por um curto período de tempo.
@@ -39,7 +43,7 @@ No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis e
 ## Solicitando sub-redes adicionais para seu cluster
 {: #request}
 
-É possível incluir IPs públicos ou privados estáveis e móveis no cluster designando sub-redes ao cluster.
+É possível incluir endereços IP públicos móveis, privados ou estáveis no cluster designando sub-redes ao cluster.
 {:shortdesc}
 
 **Nota:** quando você disponibiliza uma sub-rede para um cluster, os endereços IP dessa sub-rede são usados para propósitos de rede do cluster. Para evitar conflitos de endereço IP, certifique-se de usar uma sub-rede com somente um cluster. Não use uma sub-rede para múltiplos clusters ou para outros
@@ -58,6 +62,7 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
     {: pre}
 
     <table>
+    <caption>Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -72,7 +77,7 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Substitua <code>&lt;subnet_size&gt;</code> pelo número de endereços IP que você deseja incluir de sua sub-rede móvel. Os valores aceitos são 8, 16, 32 ou 64. <p>**Nota:** quando você inclui endereços IP móveis para sua sub-rede, três endereços IP são usados para estabelecer a rede interna do cluster. Não é possível usar esses três IPs para o seu balanceador de carga de aplicativo ou para criar um serviço de balanceador de carga. Por exemplo, se você solicitar oito endereços IP públicos móveis, será possível usar cinco deles para expor os seus apps ao público.</p> </td>
+    <td>Substitua <code>&lt;subnet_size&gt;</code> pelo número de endereços IP que você deseja incluir de sua sub-rede móvel. Os valores aceitos são 8, 16, 32 ou 64. <p>**Nota:** quando você inclui endereços IP móveis para sua sub-rede, três endereços IP são usados para estabelecer a rede interna do cluster. Não é possível usar esses três endereços IP para seu balanceador de carga do aplicativo ou para criar um serviço de balanceador de carga. Por exemplo, se você solicitar oito endereços IP públicos móveis, será possível usar cinco deles para expor os seus apps ao público.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -162,7 +167,7 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.7
     ```
     {: screen}
 
@@ -177,7 +182,7 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.7
     ```
     {: screen}
 
@@ -206,7 +211,7 @@ Requisitos:
 
 Antes de iniciar:
 - Configure o roteamento de tráfego de rede dentro e fora da sub-rede externa.
-- Confirme se você tem conectividade VPN entre o dispositivo de gateway do data center no local e a rede privada Vyatta em seu portfólio de infraestrutura do IBM Cloud (SoftLayer) ou o serviço VPN do strongSwan que está em execução em seu cluster. Para obter mais informações, veja [Configurando a conectividade VPN](cs_vpn.html).
+- Confirme se você tem conectividade VPN entre o gateway de rede do data center no local e o Virtual Router Appliance de rede privada ou o serviço VPN do strongSwan que é executado em seu cluster. Para obter mais informações, veja [Configurando a conectividade VPN](cs_vpn.html).
 
 Para incluir uma sub-rede de uma rede no local:
 
@@ -322,7 +327,7 @@ Antes de iniciar, [configure o contexto para o cluster que você deseja usar.](c
     **Nota:** a criação desse serviço falha porque o mestre do Kubernetes não pode localizar o endereço IP do balanceador de carga especificado no configmap do Kubernetes. Quando você executa esse comando, é possível ver a mensagem de erro e a lista de endereços IP públicos disponíveis para o cluster.
 
     ```
-    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. Os IPs do provedor em nuvem a seguir estão disponíveis: <list_of_IP_addresses>
+    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. Os endereços IP do provedor em nuvem a seguir estão disponíveis: <list_of_IP_addresses>
     ```
     {: screen}
 
@@ -357,4 +362,3 @@ Ao criar um cluster, uma sub-rede que termina em `/26` é provisionada na mesma 
 Esse limite de 62 nós do trabalhador pode ser excedido por um cluster grande ou por vários clusters menores em uma única região que estão na mesma VLAN. Quando o limite de 62 nós do trabalhador é atingido, uma segunda sub-rede primária na mesma VLAN é solicitada.
 
 Para rotear entre sub-redes na mesma VLAN, deve-se ativar a ampliação de VLAN. Para obter instruções, veja [Ativar ou desativar a ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
-

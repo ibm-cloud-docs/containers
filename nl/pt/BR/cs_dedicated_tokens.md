@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Criando um token do {{site.data.keyword.registryshort_notm}} para um registro de imagem do {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -66,7 +69,7 @@ Crie um token sem expiração para um registro de imagem que você usou para gru
     ```
     {: pre}
 
-    É possível usar esse segredo para trabalhar com o IBM {{site.data.keyword.Bluemix_notm}} Container Service.
+    É possível usar esse segredo para trabalhar com o {{site.data.keyword.containerlong}}.
 
 6.  Crie o segredo do Kubernetes para armazenar suas informações do token.
 
@@ -76,7 +79,7 @@ Crie um token sem expiração para um registro de imagem que você usou para gru
     {: pre}
 
     <table>
-    <caption>Tabela 1. Entendendo os componentes deste comando</caption>
+    <caption>Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -109,7 +112,7 @@ Crie um token sem expiração para um registro de imagem que você usou para gru
 
 7.  Crie um pod que referencie o imagePullSecret.
 
-    1.  Abra seu editor preferencial e crie um script de configuração de pod chamado mypod.yaml.
+    1.  Abra seu editor de texto preferencial e crie um script de configuração de pod que seja chamado mypod.yaml.
     2.  Defina o pod e o imagePullSecret que você deseja usar para acessar o registro. Para usar uma imagem privada de um namespace:
 
         ```
@@ -120,14 +123,14 @@ Crie um token sem expiração para um registro de imagem que você usou para gru
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
         {: codeblock}
 
         <table>
-        <caption>Tabela 2. Entendendo os componentes de arquivo YAML</caption>
+        <caption>Entendendo os componentes de arquivo YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
         </thead>

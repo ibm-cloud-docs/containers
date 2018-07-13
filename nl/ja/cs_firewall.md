@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # ファイアウォールで必要なポートと IP アドレスを開く
 {: #firewall}
@@ -74,10 +77,10 @@ lastupdated: "2018-4-20"
 
 1. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 統合されたアカウントがある場合は、`--sso` オプションを含めます。
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. クラスターが属する地域を選択します。
 
@@ -108,7 +111,7 @@ lastupdated: "2018-4-20"
    ```
    {: screen}
 
-5. ポート上での**マスター URL** へのアクセスを許可します。前の例ではポート `31142` です。
+5. ポート (例えば、前の例のポート `31142`) での**マスター URL** へのアクセスを許可します。
 
 6. 接続を確認します。
 
@@ -172,7 +175,7 @@ lastupdated: "2018-4-20"
 {{site.data.keyword.containershort_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信 (egress) などのために、クラスターがインフラストラクチャーのリソースとサービスにファイアウォールの背後からアクセスできるようにします。
 {:shortdesc}
 
-  1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
+  1.  クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
       ```
       bx cs workers <cluster_name_or_ID>
@@ -183,6 +186,7 @@ lastupdated: "2018-4-20"
       - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのロケーションのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、ポート 443 からすべてのロケーションの IP アドレス (dal10、dal12、dal13) へのトラフィックを許可する必要があります。
       <p>
   <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+  <caption>発信トラフィック用に開く IP アドレス</caption>
       <thead>
       <th>地域</th>
       <th>ロケーション</th>
@@ -228,6 +232,7 @@ lastupdated: "2018-4-20"
       - <em>&lt;registry_publicIP&gt;</em> を、トラフィックを許可するレジストリー IP アドレスに置き換えます。 グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。
         <p>
 <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+  <caption>レジストリー・トラフィック用に開く IP アドレス</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>レジストリー・アドレス</th>
@@ -235,7 +240,7 @@ lastupdated: "2018-4-20"
       </thead>
       <tbody>
         <tr>
-          <td>コンテナー地域間のグローバル・レジストリー</td>
+          <td>{{site.data.keyword.containershort_notm}} 地域間のグローバル・レジストリー</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -267,8 +272,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
         <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+  <caption>モニター・トラフィック用に開く IP アドレス</caption>
         <thead>
-        <th>コンテナー地域</th>
+        <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>モニタリング・アドレス</th>
         <th>モニタリング IP アドレス</th>
         </thead>
@@ -295,8 +301,9 @@ lastupdated: "2018-4-20"
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
         <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+<caption>ロギング・トラフィック用に開く IP アドレス</caption>
         <thead>
-        <th>コンテナー地域</th>
+        <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>ロギング・アドレス</th>
         <th>ロギング IP アドレス</th>
         </thead>
@@ -352,4 +359,3 @@ NodePort、ロード・バランサー、Ingress の各サービスへの着信�
   <dt>Ingress</dt>
   <dd>Ingress アプリケーション・ロード・バランサーの IP アドレスへのポート 80 (HTTP の場合) またはポート 443 (HTTPS の場合) を開きます。</dd>
 </dl>
-

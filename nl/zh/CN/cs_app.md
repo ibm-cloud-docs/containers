@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # 在集群中部署应用程序
@@ -56,6 +58,7 @@ lastupdated: "2018-4-20"
 
 
 ### 提高应用程序的可用性
+{: #increase_availability}
 
 <dl>
   <dt>使用部署和副本集来部署应用程序及其依赖项</dt>
@@ -132,41 +135,54 @@ spec:
 {: #cli_dashboard}
 
 在本地系统上打开 Kubernetes 仪表板，以查看有关集群及其工作程序节点的信息。
+[在 GUI 中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
 {:shortdesc}
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
 可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
-1.  对于带有 Kubernetes V1.7.16 或更低版本主节点的集群：
+**通过 GUI 启动 Kubernetes 仪表板**
+{: #db_gui}
+
+1.  登录到 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/)。
+2.  从菜单栏的概要文件中，选择要使用的帐户。
+3.  在菜单中，单击**容器**。
+4.  在**集群**页面上，单击要访问的集群。
+5.  在集群详细信息页面中，单击 **Kubernetes 仪表板**按钮。
+
+**通过 CLI 启动 Kubernetes 仪表板**
+{: #db_cli}
+
+*  对于带有 Kubernetes V1.7.16 或更低版本主节点的集群：
 
     1.  使用缺省端口号设置代理。
 
         ```
-        kubectl proxy
+                kubectl proxy
         ```
         {: pre}
 
         输出：
 
         ```
-        Starting to serve on 127.0.0.1:8001
+                Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
     2.  在 Web 浏览器中打开 Kubernetes 仪表板。
 
         ```
-        http://localhost:8001/ui
+                http://localhost:8001/ui
         ```
         {: codeblock}
 
-2.  对于带有 Kubernetes V1.8.2 或更高版本主节点的集群：
+*  对于带有 Kubernetes V1.8.2 或更高版本主节点的集群：
 
     1.  获取 Kubernetes 的凭证。
 
         ```
-        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+                kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
         ```
         {: pre}
 
@@ -175,14 +191,14 @@ spec:
     3.  使用缺省端口号设置代理。
 
         ```
-        kubectl proxy
+                kubectl proxy
         ```
         {: pre}
 
         输出示例：
 
         ```
-        Starting to serve on 127.0.0.1:8001
+                Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
@@ -191,7 +207,7 @@ spec:
       1.  在浏览器中，浏览至以下 URL：
 
           ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+                      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
           {: codeblock}
 
@@ -199,10 +215,9 @@ spec:
 
       3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
 
-[接下来，可以通过仪表板来运行配置文件。](#app_ui)
-
 对 Kubernetes 仪表板操作完毕后，使用 `CTRL+C` 以退出 `proxy` 命令。退出后，Kubernetes 仪表板不再可用。运行 `proxy` 命令以重新启动 Kubernetes 仪表板。
 
+[接下来，可以通过仪表板来运行配置文件。](#app_ui)
 
 
 <br />
@@ -275,14 +290,14 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
    - TLS 连接：
 
      ```
-     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+          kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
    - 相互认证注释：
 
      ```
-     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
+          kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
@@ -311,6 +326,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
   * 选择**上传 YAML 或 JSON 文件**以上传应用程序[配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。
 
   需要配置文件的相关帮助？请查看此 [YAML 文件示例 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)。在此示例中，将从美国南部区域中的 **ibmliberty** 映像部署容器。
+  使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
   {: tip}
 
 3.  通过下列其中一种方式验证是否已成功部署应用程序。
@@ -341,12 +357,12 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
     -   [Ingress ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一种类型的负载均衡器，以提供用于公开访问应用程序的路径。
 
-    
+    使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
 2.  在集群上下文中运行配置文件。
 
     ```
-    kubectl apply -f config.yaml
+        kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -356,6 +372,174 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 
 
+
+## 在 GPU 机器上部署应用程序
+{: #gpu_app}
+
+如果您有[裸机图形处理单元 (GPU) 机器类型](cs_clusters.html#shared_dedicated_node)，那么可以在工作程序节点上安排数学密集型工作负载。例如，您可以运行使用计算统一设备体系结构 (CUDA) 平台的 3D 应用程序，使处理负载在 GPU 和 CPU 上共享以提高性能。
+{:shortdesc}
+
+在以下步骤中，您将了解如何部署需要 GPU 的工作负载。您还可以[部署应用程序](#app_ui)，这些应用程序无需处理 GPU 和 CPU 上的工作负载。之后，您可能会发现使用数学密集型工作负载（例如，[此 Kubernetes 演示 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) 中的 [TensorFlow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.tensorflow.org/) 机器学习框架）非常有用。
+
+开始之前：
+* [创建裸机 GPU 机器类型](cs_clusters.html#clusters_cli)。请注意，完成此过程可能需要超过 1 个工作日的时间。
+* 集群主节点和 GPU 工作程序节点必须运行 Kubernetes V1.10 或更高版本。
+
+要在 GPU 机器上执行工作负载，请执行以下操作：
+1.  创建 YAML 文件。在此示例中，`Job` YAML 管理类似批处理的工作负载的方式是，生成一个运行时间很短的 pod，该 pod 一直运行到将其安排为完成的命令成功终止。
+
+    **重要信息**：对于 GPU 工作负载，必须始终在 YAML 规范中提供 `resources: limits: nvidia.com/gpu` 字段。
+
+    ```yaml
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: nvidia-smi
+      labels:
+        name: nvidia-smi
+    spec:
+      template:
+        metadata:
+          labels:
+            name: nvidia-smi
+        spec:
+          containers:
+          - name: nvidia-smi
+            image: nvidia/cuda:9.1-base-ubuntu16.04
+            command: [ "/usr/test/nvidia-smi" ]
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                nvidia.com/gpu: 2
+            volumeMounts:
+            - mountPath: /usr/test
+              name: nvidia0
+          volumes:
+            - name: nvidia0
+              hostPath:
+                path: /usr/bin
+          restartPolicy: Never
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>YAML 的组成部分</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>元数据和标签名称</td>
+    <td>为作业提供名称和标签，并在文件的元数据和 `spec template` 元数据中使用相同的名称。例如，`nvidi-smi`。</td>
+    </tr>
+    <tr>
+    <td><code>containers/image</code></td>
+    <td>提供容器是其运行实例的映像。在此示例中，该值设置为使用 DockerHub CUDA 映像：<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
+    </tr>
+    <tr>
+    <td><code>containers/command</code></td>
+    <td>指定要在容器中运行的命令。在此示例中，<code>[ "/usr/test/nvidia-smi" ]</code> 命令引用 GPU 机器上的二进制文件，因此您还必须设置卷安装。</td>
+    </tr>
+    <tr>
+    <td><code>containers/imagePullPolicy</code></td>
+    <td>要仅在映像当前不在工作程序节点上时才拉取新映像，请指定 <code>IfNotPresent</code>。</td>
+    </tr>
+    <tr>
+    <td><code>resources/limits</code></td>
+    <td>对于 GPU 机器，必须指定资源限制。Kubernetes [设备插件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) 会设置缺省资源请求以与该限制相匹配。
+    <ul><li>必须将键指定为 <code>nvidia.com/gpu</code>。</li>
+    <li>输入整数表示请求的 GPU 数，例如 <code>2</code>。<strong>注</strong>：容器 pod 不会共享 GPU，并且 GPU 也无法超量使用。例如，如果只有 1 个 `mg1c.16x128` 机器，那么该机器中只有 2 个 GPU，因此可以指定的最大值为 `2`。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>volumeMounts</code></td>
+    <td>对安装到容器上的卷命名，例如 <code>nvipi0</code>。指定该卷在容器上的 <code>mountPath</code>。在此示例中，路径 <code>/usr/test</code> 与作业容器命令中使用的路径相匹配。</td>
+    </tr>
+    <tr>
+    <td><code>volumes</code></td>
+    <td>对作业卷命名，例如 <code>nvia0</code>。在 GPU 工作程序节点的 <code>hostPath</code> 中，指定卷在主机上的 <code>path</code>，在此示例中为 <code>/usr/bin</code>。容器 <code>mountPath</code> 会映射到主机卷 <code>path</code>，这使此作业能够访问 GPU 工作程序节点上供容器命令运行的 NVIDIA 二进制文件。</td>
+    </tr>
+    </tbody></table>
+
+2.  应用 YAML 文件。例如：
+
+    ```
+    kubectl apply -f nvidia-smi.yaml
+    ```
+    {: pre}
+
+3.  通过按 `nvipia-sim` 标签过滤 pod 来检查作业 pod。验证 **STATUS** 是否为 **Completed**。
+
+    ```
+    kubectl get pod -a -l 'name in (nvidia-sim)'
+    ```
+    {: pre}
+
+    输出示例：
+    ```
+    NAME                  READY     STATUS      RESTARTS   AGE
+    nvidia-smi-ppkd4      0/1       Completed   0          36s
+    ```
+    {: screen}
+
+4.  对 pod 执行 describe 命令，以查看 GPU 设备插件是如何安排 pod 的。
+    * 在 `Limits` 和 `Requests` 字段中，确保指定的资源限制与设备插件自动设置的请求相匹配。
+    * 在 Events 中，验证是否已将 pod 分配给 GPU 工作程序节点。
+
+    ```
+    kubectl describe pod nvidia-smi-ppkd4
+    ```
+    {: pre}
+
+    输出示例：
+    ```
+    Name:           nvidia-smi-ppkd4
+    Namespace:      default
+    ...
+    Limits:
+     nvidia.com/gpu:  2
+    Requests:
+     nvidia.com/gpu:  2
+    ...
+    Events:
+    Type    Reason                 Age   From                     Message
+    ----    ------                 ----  ----                     -------
+    Normal  Scheduled              1m    default-scheduler        Successfully assigned nvidia-smi-ppkd4 to 10.xxx.xx.xxx
+    ...
+    ```
+    {: screen}
+
+5.  要验证作业是否使用了 GPU 来计算其工作负载，可以检查日志。从作业发出的 `[ "/usr/test/nvidia-smi" ]` 命令查询 GPU 工作程序节点上的 GPU 设备状态。
+
+    ```
+    kubectl logs nvidia-sim-ppkd4
+    ```
+    {: pre}
+
+    输出示例：
+    ```
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |===============================+======================+======================|
+    |   0  Tesla K80           Off  | 00000000:83:00.0 Off |                  Off |
+    | N/A   37C    P0    57W / 149W |      0MiB / 12206MiB |      0%      Default |
+    +-------------------------------+----------------------+----------------------+
+    |   1  Tesla K80           Off  | 00000000:84:00.0 Off |                  Off |
+    | N/A   32C    P0    63W / 149W |      0MiB / 12206MiB |      1%      Default |
+    +-------------------------------+----------------------+----------------------+
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                       GPU Memory |
+    |  GPU       PID   Type   Process name                             Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    ```
+    {: screen}
+
+    在此示例中，您看到两个 GPU 都用于执行作业，因为这两个 GPU 均已安排在工作程序节点中。如果限制设置为 1，那么仅显示 1 个 GPU。
 
 ## 扩展应用程序 
 {: #app_scaling}
@@ -376,11 +560,12 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 
     ```
-    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+        kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
     <table>
+    <caption>kubectl run 的命令组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
@@ -408,11 +593,12 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
-    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+        kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
     ```
     {: pre}
 
     <table>
+    <caption>kubectl autoscale 的命令组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
@@ -443,33 +629,33 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 开始之前，请创建[部署](#app_cli)。
 
-1.  [应用 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) 更改。例如，您可能希望更改初始部署中使用的映像。
+1.  [应用 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) 更改。例如，您可能希望更改初始部署中使用的映像。
 
     1.  获取部署名称。
 
         ```
-        kubectl get deployments
+                kubectl get deployments
         ```
         {: pre}
 
     2.  获取 pod 名称。
 
         ```
-        kubectl get pods
-        ```
+                    kubectl get pods
+            ```
         {: pre}
 
     3.  获取在 pod 中运行的容器的名称。
 
         ```
-        kubectl describe pod <pod_name>
+                kubectl describe pod <pod_name>
         ```
         {: pre}
 
     4.  设置新映像以供部署使用。
 
         ```
-        kubectl set image deployment/<deployment_name><container_name>=<image_name>
+                kubectl set image deployment/<deployment_name><container_name>=<image_name>
         ```
         {: pre}
 
@@ -478,7 +664,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  检查部署的状态。
 
     ```
-    kubectl rollout status deployments/<deployment_name>
+        kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
@@ -486,24 +672,23 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     1.  查看部署的应用历史记录，并确定上次部署的修订版号。
 
         ```
-        kubectl rollout history deployment/<deployment_name>
+                kubectl rollout history deployment/<deployment_name>
         ```
         {: pre}
 
         **提示**：要查看特定修订版的详细信息，请包含相应的修订版号。
 
         ```
-        kubectl rollout history deployment/<deployment_name> --revision=<number>
+                kubectl rollout history deployment/<deployment_name> --revision=<number>
         ```
         {: pre}
 
     2.  回滚到先前的版本或指定修订版。要回滚到先前的版本，请使用以下命令。
 
         ```
-        kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
+                kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
 
 <br />
-
 

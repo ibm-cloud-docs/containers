@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Planificación de red con servicios NodePort, LoadBalancer o Ingress
 {: #planning}
 
@@ -26,10 +27,11 @@ La interfaz de red pública para los nodos trabajadores tanto en clústeres grat
 
 |Tipo de clúster|Gestor de la VLAN pública del clúster|
 |------------|------------------------------------------|
-|Clústeres gratuitos en {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
-|Clústeres estándares en {{site.data.keyword.Bluemix_notm}}|En la cuenta de infraestructura de IBM Cloud (SoftLayer)|
+|Clústeres gratuitos|{{site.data.keyword.IBM_notm}}|
+|Clústeres estándares|En la cuenta de infraestructura de IBM Cloud (SoftLayer)|
+{: caption="Gestores de VLAN públicas según el tipo de clúster" caption-side="top"}
 
-Para obtener información sobre la comunicación de red segura entre nodos trabajadores y pods, consulte [Redes en clúster](cs_secure.html#in_cluster_network). Para obtener información sobre la conexión segura de apps que se ejecutan en un clúster de Kubernetes a una red local o a otras apps externas al clúster, consulte [Configuración de la conectividad de VPN](cs_vpn.html).
+Para obtener más información sobre la comunicación de red segura entre nodos trabajadores y pods, consulte [Redes en clúster](cs_secure.html#in_cluster_network). Para obtener más información sobre la conexión segura de apps que se ejecutan en un clúster de Kubernetes a una red local o a otras apps externas al clúster, consulte [Configuración de la conectividad de VPN](cs_vpn.html).
 
 ## Cómo permitir el acceso público a apps
 {: #public_access}
@@ -41,7 +43,7 @@ Para que una app esté disponible a nivel público en Internet, debe actualizar 
 
 ![{{site.data.keyword.containerlong_notm}} Arquitectura de Kubernetes](images/networking.png)
 
-El diagrama muestra cómo Kubernetes lleva el tráfico de red de usuario en {{site.data.keyword.containershort_notm}}. Dependiendo de si ha creado un clúster gratuito o estándar, existen diversas formas de permitir el acceso a su app desde Internet.
+El diagrama muestra cómo Kubernetes lleva el tráfico de red de usuario en {{site.data.keyword.containershort_notm}}. Para asegurarse de que su app es accesible desde internet, puede hacerlo dependiendo si creó un clúster estándar o gratuito.
 
 <dl>
 <dt><a href="cs_nodeport.html#planning" target="_blank">Servicio NodePort</a> (clústeres gratuitos y estándares)</dt>
@@ -64,15 +66,14 @@ El diagrama muestra cómo Kubernetes lleva el tráfico de red de usuario en {{si
 <dt><a href="cs_ingress.html#planning" target="_blank">Ingress</a> (solo clústeres estándares)</dt>
 <dd>
  <ul>
-  <li>Exponga varias apps en el clúster creando un equilibrador de carga HTTP o HTTPS, TCP o UDP externo que utilice un punto de entrada público seguro y exclusivo para direccionar las solicitudes entrantes a las apps.</li>
+  <li>Exponga varias apps en un clúster creando un equilibrador de carga HTTP o HTTPS, TCP o UDP externo. El equilibrador de carga utiliza un punto de entrada público único protegido para direccionar las solicitudes entrantes a sus apps.</li>
   <li>Puede utilizar una ruta pública para exponer varias apps en el clúster como servicios.</li>
   <li>Ingress consta de dos componentes:
-
-<ul>
+   <ul>
     <li>El recurso de Ingress define las reglas sobre cómo direccionar y equilibrar la carga de las solicitudes de entrada para una app.</li>
-    <li>El equilibrador de carga de aplicación (ALB) escucha solicitudes de entrada de servicio HTTP o HTTPS, TCP o UDP y reenvía las solicitudes a los pods de las apps según las reglas definidas en el recurso de Ingress.</li>
+    <li>El equilibrador de carga de aplicación (ALB) está a la escucha de solicitudes entrantes de servicio HTTP o HTTPS, TCP o UDP. Reenvía las solicitudes a través de los pods de las apps con base a las reglas que se definen en el recurso Ingress.</li>
    </ul>
-  <li>Utilice Ingress si desea implementar su propio ALB con reglas de direccionamiento personalizadas y si necesita terminación SSL para sus apps.</li>
+  <li>Utilice Ingress para implementar su propio ALB con reglas de direccionamiento personalizadas y con terminación SSL si es necesario para sus apps.</li>
  </ul>
 </dd></dl>
 
@@ -84,4 +85,3 @@ Para seleccionar la mejor opción de red para su aplicación, puede seguir este 
 <area href="/docs/containers/cs_loadbalancer.html" alt="servicio LoadBalancer" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Servicio Ingress" shape="circle" coords="445, 420, 45"/>
 </map>
-

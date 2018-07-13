@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-4-20"
 {:download: .download}
 
 
+
 # Expondo apps com LoadBalancers
 {: #loadbalancer}
 
@@ -25,7 +26,13 @@ Exponha uma porta e use um endereço IP móvel para o balanceador de carga para 
 ## Gerenciando o tráfego de rede usando os LoadBalancers
 {: #planning}
 
-Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} solicita automaticamente cinco endereços IP móveis públicos e cinco endereços IP móveis privados e os provisiona em sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação do cluster. Dois dos endereços IP móveis, um público e um privado, são usados para [Balanceadores de carga de aplicativo do Ingress](cs_ingress.html). Quatro endereços IP móveis públicos e quatro endereços IP móveis privados podem ser usados para expor apps criando um serviço LoadBalancer.
+Quando você cria um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente as redes a seguir:
+* Uma sub-rede pública primária que determina endereços IP públicos para nós do trabalhador durante a criação de cluster
+* Uma sub-rede privada primária que determina endereços IP privados para nós do trabalhador durante a criação do cluster
+* Uma sub-rede pública móvel que fornece 5 endereços IP públicos para os serviços de rede do Ingress e do balanceador de carga
+* Uma sub-rede privada móvel que fornece 5 endereços IP privados para os serviços de rede do Ingress e do balanceador de carga
+
+Os endereços IP públicos e privados móveis são estáticos e não mudam quando um nó do trabalhador é removido. Para cada sub-rede, um endereço IP público móvel e um endereço IP privado móvel serão usados para os [balanceadores de carga do aplicativo Ingress](cs_ingress.html) padrão. Os outros quatro endereços IP privados móveis e quatro endereços IP públicos móveis podem ser usados para expor apps únicos à rede pública ou privada criando um serviço de balanceador de carga.
 
 Ao criar um serviço do Kubernetes LoadBalancer em um cluster em uma VLAN pública, um balanceador de carga externo é criado. Suas opções para endereços IP quando você cria um serviço LoadBalancer são como a seguir:
 
@@ -33,9 +40,9 @@ Ao criar um serviço do Kubernetes LoadBalancer em um cluster em uma VLAN públi
 - Se o seu cluster está disponível somente em uma VLAN privada, um dos quatro endereços IP privados móveis disponíveis é usado.
 - É possível solicitar um endereço IP público ou privado móvel para um serviço LoadBalancer, incluindo uma anotação no arquivo de configuração: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
-O endereço IP público móvel que é designado ao seu serviço LoadBalancer é permanente e não muda quando um nó do trabalhador é removido ou recriado. Portanto, o serviço LoadBalancer é mais disponível do que o serviço NodePort. Diferente dos serviços NodePort, é possível designar qualquer porta a seu balanceador de carga e não ser limitado a um determinado intervalo de portas. Se você usar um serviço LoadBalancer, uma porta de nó também estará disponível em cada endereço IP de qualquer nó do trabalhador. Para bloquear o acesso à porta de nó enquanto você estiver usando um serviço LoadBalancer, consulte [Bloqueando tráfego recebido](cs_network_policy.html#block_ingress).
+O endereço IP público móvel que é designado ao seu serviço LoadBalancer é permanente e não muda quando um nó do trabalhador é removido ou recriado. Portanto, o serviço LoadBalancer é mais disponível do que o serviço NodePort. Diferente dos serviços NodePort, é possível designar qualquer porta a seu balanceador de carga e não ser limitado a um determinado intervalo de portas. Se você usa um serviço LoadBalancer, um NodePort também está disponível em cada endereço IP de qualquer nó do trabalhador. Para bloquear o acesso ao NodePort enquanto você está usando um serviço LoadBalancer, veja [Bloqueando tráfego recebido](cs_network_policy.html#block_ingress).
 
-O serviço LoadBalancer serve como o ponto de entrada externo para solicitações recebidas para o app. Para acessar o serviço LoadBalancer por meio da Internet, use o endereço IP público do balanceador de carga e a porta designada no formato `<IP_address>:<port>`. O diagrama a seguir mostra como um balanceador de carga direciona a comunicação da Internet para um app:
+O serviço LoadBalancer serve como o ponto de entrada externo para solicitações recebidas para o app. Para acessar o serviço LoadBalancer por meio da Internet, use o endereço IP público do balanceador de carga e a porta designada no formato `<IP_address>:<port>`. O diagrama a seguir mostra como um balanceador de carga direciona a comunicação da Internet para um app.
 
 <img src="images/cs_loadbalancer_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:550px; border-style: none"/>
 
@@ -53,7 +60,67 @@ O serviço LoadBalancer serve como o ponto de entrada externo para solicitaçõe
 <br />
 
 
+S `.</td>
+        </tr>
+        <tr>
+          <td><code>seletor</code></td>
+          <td>Insira o par de chave de etiqueta (<em>&lt;selector_key&gt;</em>) e valor (<em>&lt;selector_value&gt;</em>) a serem usados para direcionar os pods nos quais seu app é executado. Para destinar os seus pods e incluí-los no balanceamento de carga de serviço, verifique os valores <em>&lt;selectorkey&gt;</em> e <em>&lt;selectorvalue&gt;</em>. Certifique-se de que sejam iguais ao par de <em>chave/valor</em> usado na seção <code>spec.template.metadata.labels</code> do yaml de sua implementação.</td>
+        </tr>
+        <tr>
+          <td><code>port</code></td>
+          <td>A porta na qual o serviço atende.</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIP</code></td>
+          <td>Para criar um LoadBalancer privado ou usar um endereço IP móvel específico para um LoadBalancer público, substitua <em>&lt;IP_address&gt;</em> pelo endereço IP que você deseja usar. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+        </tr>
+        </tbody></table>
 
+      3. Opcional: configure um firewall especificando o `loadBalancerSourceRanges` na seção **spec**. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+
+      4. Crie o serviço em seu cluster.
+
+          ```
+          kubectl apply -f myloadbalancer.yaml
+          ```
+          {: pre}
+
+          Quando o serviço de balanceador de carga for criado, um endereço IP móvel será designado automaticamente ao balanceador de carga. Se nenhum endereço IP móvel estiver disponível, o serviço de balanceador de carga não poderá ser criado.
+
+3.  Verifique se o serviço de balanceador de carga foi criado com êxito. Substitua _&lt;myservice&gt;_ pelo nome do serviço de balanceador de carga que você criou na etapa anterior.
+
+    ```
+    Kubectl describe myloadbalancer de serviço
+    ```
+    {: pre}
+
+    **Nota:** pode levar alguns minutos para o serviço de balanceador de carga ser criado corretamente e para que o app fique disponível.
+
+    Exemplo de saída da CLI:
+
+    ```
+    Name: myloadbalancer Namespace: default Labels: <none> Selector: app=liberty Type: LoadBalancer Location: dal10 IP: 172.21.xxx.xxx LoadBalancer Ingress: 169.xx.xxx.xxx Port: <unset> 8080/TCP NodePort: <unset> 32040/TCP Endpoints: 172.30.xxx.xxx:8080 Session Affinity: None Events: FirstSeen	LastSeen	Count	From			SubObjectPath	Type	 Reason			 Message
+      ---------	--------	-----	----			-------------	----	 ------			          -------
+      10s		 10s		 1	 {service-controller }	 Normal CreatingLoadBalancer	Creating load balancer 10s		 10s		 1	 {service-controller }		Normal CreatedLoadBalancer	Created load balancer
+    ```
+    {: screen}
+
+    O endereço IP do **Ingresso de LoadBalancer** é o endereço IP móvel que foi designado ao seu serviço de balanceador de carga.
+
+4.  Se você tiver criado um balanceador de carga público, acesse seu app pela Internet.
+    1.  Abra seu navegador da web preferencial.
+    2.  Insira o endereço IP público móvel do balanceador de carga e a porta.
+
+        ```
+        Http://169.xx.xxx.xxx:8080
+        ```
+        {: codeblock}        
+
+5. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
+
+6. Opcional: para manipular solicitações recebidas para seu app de outras zonas, repita estas etapas para incluir um balanceador de carga em cada zona.
+
+</staging>
 
 ## Ativando o acesso público ou privado para um app usando um serviço LoadBalancer
 {: #config}
@@ -62,7 +129,7 @@ Antes de iniciar:
 
 -   Este recurso está disponível somente para clusters padrão.
 -   Deve-se ter um endereço IP público ou privado móvel disponível para designar ao serviço de balanceador de carga.
--   Um serviço de balanceador de carga com um endereço IP privado móvel ainda tem uma porta do nó público aberta em cada nó do trabalhador. Para incluir uma política de rede para evitar o tráfego público, consulte [Bloqueando tráfego recebido](cs_network_policy.html#block_ingress).
+-   Um serviço de balanceador de carga com um endereço IP privado móvel ainda tem um NodePort público aberto em cada nó do trabalhador. Para incluir uma política de rede para evitar o tráfego público, consulte [Bloqueando tráfego recebido](cs_network_policy.html#block_ingress).
 
 Para criar um serviço de balanceador de carga:
 
@@ -87,8 +154,7 @@ Para criar um serviço de balanceador de carga:
           selector:
             <selector_key>:<selector_value>
           ports:
-           - protocol: TCP
-             port: 8080
+           - protocol: TCP port: 8080
         ```
         {: codeblock}
 
@@ -113,13 +179,14 @@ Para criar um serviço de balanceador de carga:
         {: codeblock}
 
         <table>
+        <caption>Entendendo os componentes de arquivo YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
         </thead>
         <tbody>
         <tr>
           <td><code>seletor</code></td>
-          <td>Insira a chave de etiqueta (<em>&lt;selector_key&gt;</em>) e o par de valores (<em>&lt;selector_value&gt;</em>) que você deseja usar para destinar os pods nos quais o seu app é executado. Para direcionar os seus pods e incluí-los no balanceamento de carga de serviço, certifique-se de que a <em>&lt;selector_key&gt;</em> e o <em>&lt;selector_value&gt;</em> sejam os mesmos que o par de chave/valor que você usou na seção <code>spec.template.metadata.labels</code> de seu yaml de implementação.</td>
+          <td>Insira o par de chave de etiqueta (<em>&lt;selector_key&gt;</em>) e valor (<em>&lt;selector_value&gt;</em>) a serem usados para direcionar os pods nos quais seu app é executado. Para destinar seus pods e incluí-los no balanceamento de carga de serviço, verifique os valores <em>&lt;selector_key&gt;</em> e <em>&lt;selector_value&gt;</em>. Certifique-se de que sejam iguais ao par de <em>chave/valor</em> usado na seção <code>spec.template.metadata.labels</code> do yaml de sua implementação.</td>
         </tr>
         <tr>
           <td><code>port</code></td>
@@ -158,23 +225,9 @@ Para criar um serviço de balanceador de carga:
     Exemplo de saída da CLI:
 
     ```
-    Name:                   myloadbalancer
-    Namespace:              default
-    Labels:                 <none>
-    Selector:               app=liberty
-    Type:                   LoadBalancer
-    Location:               dal10
-    IP:                     172.21.xxx.xxx
-    LoadBalancer Ingress:   169.xx.xxx.xxx
-    Port:                   <unset> 8080/TCP
-    NodePort:               <unset> 32040/TCP
-    Endpoints:              172.30.xxx.xxx:8080
-    Session Affinity:       None
-    Events:
-      FirstSeen	LastSeen	Count	From			SubObjectPath	Type	 Reason			          Message
+    Name: myloadbalancer Namespace: default Labels: <none> Selector: app=liberty Type: LoadBalancer Location: dal10 IP: 172.21.xxx.xxx LoadBalancer Ingress: 169.xx.xxx.xxx Port: <unset> 8080/TCP NodePort: <unset> 32040/TCP Endpoints: 172.30.xxx.xxx:8080 Session Affinity: None Events: FirstSeen	LastSeen	Count	From			SubObjectPath	Type	 Reason			 Message
       ---------	--------	-----	----			-------------	----	 ------			          -------
-      10s		    10s		    1	    {service-controller }	  Normal CreatingLoadBalancer	Creating load balancer
-      10s		    10s		    1	    {service-controller }		Normal CreatedLoadBalancer	Created load balancer
+      10s		 10s		 1	 {service-controller }	 Normal CreatingLoadBalancer	Creating load balancer 10s		 10s		 1	 {service-controller }		Normal CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
@@ -189,7 +242,7 @@ Para criar um serviço de balanceador de carga:
         ```
         {: codeblock}
 
-5. Se você optar por [preservar o endereço IP de origem do pacote recebido![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) e tiver nós de borda, nós do trabalhador somente privados ou múltiplas VLANs, assegure-se de que os pods do app sejam incluídos no balanceamento de carga [incluindo a afinidade de nó e as tolerâncias nos pods do app](#node_affinity_tolerations).
+5. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
 
 <br />
 
@@ -200,20 +253,20 @@ Para criar um serviço de balanceador de carga:
 Sempre que você implementa pods de app, os pods de serviço do balanceador de carga também são implementados nos nós do trabalhador nos quais os pods de app são implementados. No entanto, existem algumas situações em que os pods do balanceador de carga e os pods do app podem não ser planejados no mesmo nó do trabalhador:
 {: shortdesc}
 
-* Você contaminou nós de borda nos quais apenas pods do serviço de balanceador de carga podem ser implementados. Pods do app não podem ser implementados nesses nós.
+* Você tem nós de borda que estão contaminados para que somente pods do serviço de balanceador de carga possam ser implementados neles. Pods do app não podem ser implementados nesses nós.
 * O seu cluster está conectado a múltiplas VLANs públicas ou privadas e os pods de seu app podem ser implementados em nós do trabalhador conectados apenas a uma VLAN. Os pods do serviço de balanceador de carga podem não ser implementados nesses nós do trabalhador porque o endereço IP do balanceador de carga está conectado a uma VLAN diferente daquela dos nós do trabalhador.
 
-Quando uma solicitação do cliente para seu app é enviada para seu cluster, ela é roteada para um pod para o serviço de balanceador de carga do Kubernetes que expõe o app. Se um pod de app não existir no mesmo nó do trabalhador que o do pod de serviço de balanceador de carga, o balanceador de carga encaminhará a solicitação para um nó de trabalhador diferente no qual um pod de app é implementado. O endereço IP de origem do pacote é mudado para o endereço IP público do nó do trabalhador no qual o pod de app está em execução.
+Quando uma solicitação do cliente para seu app é enviada para seu cluster, ela é roteada para um pod para o serviço de balanceador de carga do Kubernetes que expõe o app. Se nenhum pod de app existir no mesmo nó do trabalhador que o pod de serviço de balanceador de carga, o balanceador de carga encaminhará a solicitação para um pod de app em um nó do trabalhador diferente. O endereço IP de origem do pacote é mudado para o endereço IP público do nó do trabalhador no qual o pod de app está em execução.
 
-Se você quiser preservar o endereço IP de origem original da solicitação do cliente, será possível [ativar o IP de origem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) para serviços de balanceador de carga. Preservar o IP do cliente é útil, por exemplo, quando os servidores de app precisam aplicar as políticas de segurança e de controle de acesso. Após a ativação do IP de origem, os pods do serviço de balanceador de carga devem encaminhar solicitações para pods do app que são implementados no mesmo nó do trabalhador somente. Para forçar seu app a implementar em nós do trabalhador específicos nos quais os pods do serviço de balanceador de carga também podem implementar, deve-se incluir as regras de afinidade e as tolerâncias na implementação do app.
+Para preservar o endereço IP de origem original da solicitação do cliente, é possível [ativar o IP de origem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) para serviços de balanceador de carga. Preservar o IP do cliente é útil, por exemplo, quando os servidores de app precisam aplicar as políticas de segurança e de controle de acesso. Após a ativação do IP de origem, os pods do serviço de balanceador de carga devem encaminhar solicitações para pods do app que são implementados no mesmo nó do trabalhador somente. Para forçar seu app a implementar em nós do trabalhador específicos nos quais os pods do serviço de balanceador de carga também podem implementar, deve-se incluir as regras de afinidade e as tolerâncias na implementação do app.
 
 ### Incluindo regras de afinidade e tolerâncias do nó de borda
 {: #edge_nodes}
 
-Quando você [identifica nós do trabalhador como nós de borda](cs_edge.html#edge_nodes), os pods do serviço de balanceador de carga são implementados apenas nesses nós de borda. Se você também [contaminar os nós de borda](cs_edge.html#edge_workloads), os pods de app não poderão ser implementados nos nós de borda.
+Quando você [rotula os nós do trabalhador como nós de borda](cs_edge.html#edge_nodes) e também [contamina os nós de borda](cs_edge.html#edge_workloads), os pods do serviço de balanceador de carga são implementados somente nesses nós de borda e os pods de app não podem ser implementados nos nós de borda. Quando o IP de origem for ativado para o serviço de balanceador de carga, os pods do balanceador de carga nos nós de borda não poderão encaminhar solicitações recebidas para seus pods de app em outros nós do trabalhador.
 {:shortdesc}
 
-Ao ativar o IP de origem, as solicitações recebidas não poderão ser encaminhadas do balanceador de carga para o pod de app. Para forçar a implementação dos pods de app nos nós de borda, inclua uma [regra de afinidade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) e uma [tolerância ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) do nó de borda na implementação do app.
+Para forçar a implementação dos pods de app nos nós de borda, inclua uma [regra de afinidade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) e uma [tolerância ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) do nó de borda na implementação do app.
 
 Exemplo de yaml de implementação com afinidade do nó de borda e tolerância do nó de borda:
 
@@ -241,10 +294,10 @@ spec:
 ```
 {: codeblock}
 
-Observe que ambas as seções de **afinidade** e de **tolerâncias** têm `dedicated` como a `key` e `edge` como o `value`.
+As seções **affinity** e **tolerations** têm `dedicated` como o `key` e `edge` como o `value`.
 
 ### Incluindo regras de afinidade para múltiplas VLANs públicas ou privadas
-{: #edge_nodes}
+{: #edge_nodes_multiple_vlans}
 
 Quando o cluster está conectado a múltiplas VLANs públicas ou privadas, os pods do app podem ser implementados nos nós do trabalhador que são conectados apenas a uma VLAN. Se o endereço IP do balanceador de carga estiver conectado a uma VLAN diferente desses nós do trabalhador, os pods do serviço de balanceador de carga não serão implementados nesses nós do trabalhador.
 {:shortdesc}
@@ -253,7 +306,7 @@ Quando o IP de origem for ativado, planeje os pods de app nos nós do trabalhado
 
 Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
 
-1. Obtenha o endereço IP do serviço de balanceador de carga que você deseja usar. Procure o endereço IP no campo **Ingress do LoadBalancer**.
+1. Obtenha o endereço IP do serviço de balanceador de carga. Procure o endereço IP no campo **Ingress do LoadBalancer**.
     ```
     kubectl describe service <loadbalancer_service_name>
     ```
@@ -280,7 +333,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 
     2. Na saída sob **VLANs da sub-rede**, procure o CIDR de sub-rede que corresponde ao endereço IP do balanceador de carga recuperado anteriormente e anote o ID da VLAN.
 
-        Por exemplo, se o endereço IP do serviço de balanceador de carga for `169.36.5.xxx`, a sub-rede correspondente na saída de exemplo acima será `169.36.5.xxx/29`. O ID da VLAN ao qual a sub-rede está conectada é `2234945`.
+        Por exemplo, se o endereço IP do serviço de balanceador de carga for `169.36.5.xxx`, a sub-rede correspondente na saída de exemplo da etapa anterior será `169.36.5.xxx/ 29`. O ID da VLAN ao qual a sub-rede está conectada é `2234945`.
 
 3. [Inclua uma regra de afinidade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) na implementação do app para o ID da VLAN que você anotou na etapa anterior.
 
@@ -307,7 +360,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
     ```
     {: codeblock}
 
-    No yaml acima, a seção **afinidade** tem `publicVLAN` como a `key` e `"2234945"` como o `value`.
+    No YAML de exemplo, a seção **affinity** tem `publicVLAN` como o `chave` e `"2234945"` como o `value`.
 
 4. Aplique o arquivo de configuração de implementação atualizado.
     ```
@@ -332,7 +385,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 
     2. Na saída, identifique um pod para seu app. Observe o ID de **NÓ** do nó do trabalhador em que o pod está.
 
-        Na saída de exemplo acima, o pod do app `cf-py-d7b7d94db-vp8pq` está no nó do trabalhador `10.176.48.78`.
+        Na saída de exemplo da etapa anterior, o pod de app `cf-py-d7b7d94db-vp8pq` está no nó do trabalhador `10.176.48.78`.
 
     3. Liste os detalhes para o nó do trabalhador.
 
@@ -360,4 +413,3 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
         {: screen}
 
     4. Na seção **Rótulos** da saída, verifique se a VLAN pública ou privada é a VLAN que você designou nas etapas anteriores.
-

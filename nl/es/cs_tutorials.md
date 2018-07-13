@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Guía de aprendizaje: Creación de clústeres
@@ -32,10 +33,10 @@ Hello World de la app.
 
 Para configurar la infraestructura debe:
 
--   Crear un clúster de Kubernetes con un nodo trabajador
--   Instalar las CLI para ejecutar mandatos de Kubernetes y gestionar imágenes de Docker
--   Crear un repositorio de imágenes privadas en {{site.data.keyword.registrylong_notm}} para almacenar las imágenes
--   Añadir el servicio {{site.data.keyword.toneanalyzershort}} al clúster para que cualquier app del clúster pueda utilizar el servicio
+-   Crear un clúster con 1 nodo trabajador.
+-   Instalar las CLI para ejecutar mandatos de Kubernetes y gestionar imágenes de Docker.
+-   Crear un repositorio de imágenes privadas en {{site.data.keyword.registrylong_notm}} para almacenar las imágenes.
+-   Añadir el servicio {{site.data.keyword.toneanalyzershort}} al clúster para que cualquier app del clúster pueda utilizar el servicio.
 
 
 ## Tiempo necesario
@@ -45,12 +46,13 @@ Para configurar la infraestructura debe:
 
 ## Público
 
-Esta guía de aprendizaje está destinada a los desarrolladores de software y administradores de la red que nunca antes han creado un clúster de Kubernetes.
+Esta guía de aprendizaje está destinada a los desarrolladores de software y administradores de la red que están creando un clúster de Kubernetes por primera vez.
 
 
 ## Requisitos previos
 
 -  Una [cuenta de {{site.data.keyword.Bluemix_notm}} de Suscripción o Pago según uso ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/registration/)
+-  El [rol de desarrollador de Cloud Foundry](/docs/iam/mngcf.html#mngcf) en el espacio de clúster en el que desea trabajar.
 
 
 ## Lección 1: Creación de un clúster y configuración de la CLI
@@ -59,13 +61,16 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 Cree su clúster en la GUI e instale las CLI necesarias.
 {: shortdesc}
 
+**Para crear el clúster**
 
-Para crear el clúster:
+Puesto que el suministro puede tardar unos minutos, cree el clúster antes de instalar las CLI.
 
-1. El suministro del clúster puede tardar unos minutos. Para aprovechar el tiempo al máximo, [cree el clúster en la GUI ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) antes de instalar las CLI. Para esta guía de aprendizaje, cree el clúster en la región EE.UU. este.
+1.  [En la interfaz gráfica de usuario ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) cree un clúster gratuito o estándar que posea un nodo trabajador.
 
+    También puede crear un [clúster en la CLI](cs_clusters.html#clusters_cli).
+    {: tip}
 
-Las siguientes CLI y sus requisitos previos se utilizan para gestionar clústeres mediante la CLI:
+A medida que se suministra el clúster, instale las siguientes CLI para gestionar los clústeres:
 -   CLI de {{site.data.keyword.Bluemix_notm}}
 -   Plug-in de {{site.data.keyword.containershort_notm}}
 -   CLI de Kubernetes
@@ -73,7 +78,7 @@ Las siguientes CLI y sus requisitos previos se utilizan para gestionar clústere
 -   CLI de Docker
 
 </br>
-Para instalar las CLI y sus requisitos previos:
+**Para instalar las CLI y sus requisitos previos**
 
 1.  Un requisito previo del plug-in de {{site.data.keyword.containershort_notm}} es que instale la CLI de [{{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://clis.ng.bluemix.net/ui/home.html). Para ejecutar mandatos de CLI de {{site.data.keyword.Bluemix_notm}}, utilice el prefijo `bx`.
 2.  Siga las indicaciones para seleccionar una cuenta y una organización de {{site.data.keyword.Bluemix_notm}}. Los clústeres son específicos de una cuenta, pero son independientes de una organización o espacio de {{site.data.keyword.Bluemix_notm}}.
@@ -85,16 +90,14 @@ Para instalar las CLI y sus requisitos previos:
     ```
     {: pre}
 
-5.  Para ver una versión local del panel de control Kubernetes y desplegar apps en los clústeres, [instale la CLI de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Para ejecutar mandatos la CLI de Kubernetes, utilice el prefijo `kubectl`.
-    1.  Para disponer de compatibilidad funcional completa, descargue la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.11. 
+5.  Para desplegar apps en los clústeres, [instale la CLI de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Para ejecutar mandatos la CLI de Kubernetes, utilice el prefijo `kubectl`.
+    1.  Para disponer de compatibilidad funcional completa, descargue la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.9.7.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
 
-        Linux:
-[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
 
-        Windows:
-[https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
           **Sugerencia:** Si utiliza Windows, instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
 
@@ -106,7 +109,7 @@ Para instalar las CLI y sus requisitos previos:
             ```
             {: pre}
 
-        2.  Asegúrese de que /usr/local/bin esté en la variable del sistema `PATH`. La variable `PATH` contiene todos los directorios en los que el sistema operativo puede encontrar archivos ejecutables. Los directorios que se muestran en la variable `PATH` sirven para distintos propósitos. `/usr/local/bin` se utiliza para guardar archivos ejecutables correspondientes a software que no forma parte del sistema operativo y que ha instalado manualmente el administrador del sistema.
+        2.  Asegúrese de que `/usr/local/bin` aparezca en la variable del sistema `PATH`. La variable `PATH` contiene todos los directorios en los que el sistema operativo puede encontrar archivos ejecutables. Los directorios que se muestran en la variable `PATH` sirven para distintos propósitos. `/usr/local/bin` se utiliza para guardar archivos ejecutables correspondientes a software que no forma parte del sistema operativo y que ha instalado manualmente el administrador del sistema.
 
             ```
             echo $PATH
@@ -141,9 +144,10 @@ Para instalar las CLI y sus requisitos previos:
     ```
     {: pre}
 
-7. Para crear imágenes localmente y enviarlas por push al repositorio de imágenes privadas, [instale la CLI de Docker CE ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_windows/) en su lugar.
+7. Para crear imágenes localmente y enviarlas por push al repositorio de imágenes privadas, [instale la CLI de Docker Community Edition ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_windows/) en su lugar.
 
 ¡Enhorabuena! Ha instalado correctamente las CLI para las siguientes lecciones y guías de aprendizaje. A continuación, configure el entorno de clúster y añada el servicio {{site.data.keyword.toneanalyzershort}}.
+
 
 ## Lección 2: Configuración de su registro privado
 {: #cs_cluster_tutorial_lesson2}
@@ -162,8 +166,8 @@ Configure un repositorio de imágenes privadas en {{site.data.keyword.registrysh
 
 2.  Configure su propio repositorio de imágenes privadas en {{site.data.keyword.registryshort_notm}} para almacenar y compartir de forma segura imágenes de Docker con todos los usuarios del clúster. Un repositorio privado en {{site.data.keyword.Bluemix_notm}} se identifica mediante un espacio de nombres. El espacio de nombres sirve para crear un URL exclusivo para el repositorio privado que los desarrolladores pueden utilizar para acceder a las imágenes de Docker.
 
-   
-    
+    Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.
+
     En este ejemplo, la empresa PR desea crear un solo repositorio de imágenes en {{site.data.keyword.registryshort_notm}}, por lo que eligen _pr_firm_ como el espacio de nombres para agrupar todas las imágenes de la cuenta. Sustituya _&lt;namespace&gt;_ por un espacio de nombres de su elección que no esté relacionado con la guía de aprendizaje.
 
     ```
@@ -176,13 +180,13 @@ Configure un repositorio de imágenes privadas en {{site.data.keyword.registrysh
     ```
     bx cs workers <cluster_name_or_ID>
     ```
-     {: pre}
+    {: pre}
 
     Cuando el suministro del nodo trabajador finaliza, el estado pasa a **Preparado** y puede empezar a enlazar servicios de {{site.data.keyword.Bluemix_notm}}.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.7
     ```
     {: screen}
 
@@ -192,7 +196,7 @@ Configure un repositorio de imágenes privadas en {{site.data.keyword.registrysh
 Establezca el contexto para el clúster en la CLI.
 {: shortdesc}
 
-Cada vez que inicie la sesión en la CLI del contenedor para trabajar con clústeres, deberá ejecutar estos mandatos para establecer el archivo de configuración del clúster como una variable de la sesión. La CLI de Kubernetes utiliza esta variable para buscar un archivo de configuración local y los certificados necesarios para conectar con el clúster en {{site.data.keyword.Bluemix_notm}}.
+Cada vez que inicie la sesión en la CLI de {{site.data.keyword.containerlong}} para trabajar con clústeres, deberá ejecutar estos mandatos para establecer el archivo de configuración del clúster como una variable de la sesión. La CLI de Kubernetes utiliza esta variable para buscar un archivo de configuración local y los certificados necesarios para conectar con el clúster en {{site.data.keyword.Bluemix_notm}}.
 
 1.  Obtenga el mandato para establecer la variable de entorno y descargar los archivos de configuración de Kubernetes.
 
@@ -239,8 +243,8 @@ Kubernetes como variable de entorno.
     Salida de ejemplo:
 
     ```
-    Client Version: v1.8.11
-    Server Version: v1.8.11
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
@@ -249,7 +253,7 @@ Kubernetes como variable de entorno.
 
 Con los servicios de {{site.data.keyword.Bluemix_notm}}, puede aprovechar la funcionalidad ya desarrollada de sus apps. Cualquier servicio de {{site.data.keyword.Bluemix_notm}} que esté enlazado al clúster puede ser utilizado por cualquier app desplegada en ese clúster. Repita los pasos siguientes para cada servicio de {{site.data.keyword.Bluemix_notm}} que desee utilizar con sus apps.
 
-1.  Añada el servicio {{site.data.keyword.toneanalyzershort}} a la cuenta de {{site.data.keyword.Bluemix_notm}}. Sustituya <service_name> con un nombre para su instancia de servicio. 
+1.  Añada el servicio {{site.data.keyword.toneanalyzershort}} a la cuenta de {{site.data.keyword.Bluemix_notm}}. Sustituya <service_name> con un nombre para su instancia de servicio.
 
     **Nota:** Cuando añada el servicio {{site.data.keyword.toneanalyzershort}} a su cuenta, se visualizará un mensaje que indica que el servicio no es gratuito. Si limita la llamada a la API, en esta guía de aprendizaje no se incurre en ningún cargo por el servicio {{site.data.keyword.watson}}. [Revise la información sobre precios correspondientes al servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
@@ -276,7 +280,7 @@ Con los servicios de {{site.data.keyword.Bluemix_notm}}, puede aprovechar la fun
     ```
     {: screen}
 
-3.  Verifique que el secreto de Kubernetes se ha creado en el espacio de nombres del clúster. Cada servicio de {{site.data.keyword.Bluemix_notm}} se define mediante un archivo JSON que incluye información confidencial sobre el servicio, como el nombre de usuario, la contraseña y el URL, que el contenedor utiliza para acceder al servicio. Para almacenar esta información de forma segura, se utilizan secretos de Kubernetes. En este ejemplo, el secreto incluye las credenciales para acceder a la instancia de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} suministrada en su cuenta.
+3.  Verifique que el secreto de Kubernetes se ha creado en el espacio de nombres del clúster. Cada servicio de {{site.data.keyword.Bluemix_notm}} se define mediante un archivo JSON que incluye información confidencial como, por ejemplo, el nombre de usuario, la contraseña y el URL que el contenedor utiliza para obtener acceso. Para almacenar esta información de forma segura, se utilizan secretos de Kubernetes. En este ejemplo, el secreto incluye las credenciales para acceder a la instancia de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} suministrada en su cuenta.
 
     ```
     kubectl get secrets --namespace=default
@@ -294,12 +298,11 @@ Con los servicios de {{site.data.keyword.Bluemix_notm}}, puede aprovechar la fun
     {: screen}
 
 </br>
-¡Buen trabajo! Ha configurado el clúster y el entorno local está preparado para que empiece a desplegar apps en el clúster.
+¡Buen trabajo! El clúster está configurado y su entorno local está listo para que inicie el despliegue de apps en el clúster.
 
 ## ¿Qué es lo siguiente?
 {: #next}
 
-* [Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* Probar sus conocimientos y [responder a un cuestionario ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Probar la [Guía de aprendizaje: Despliegue de apps en clústeres de Kubernetes en {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) para desplegar la app de la empresa PR en el clúster que ha creado.
-
