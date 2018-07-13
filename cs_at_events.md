@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-07-11"
+lastupdated: "2018-07-13"
 
 ---
 
@@ -35,6 +35,9 @@ To monitor administrative activity:
 4. Set the time frame that you want to view logs for. The default is 15 min.
 5. In the **Available Fields** list, click **type**. Click the magnifying glass icon for **Activity Tracker** to limit the logs to only those tracked by the service.
 6. You can use the other available fields to narrow your search.
+
+To grant other users to see activity, see [Granting permisisons to see account events](docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_acc_events).
+{: tip}
 
 ## Tracking events
 {: #events}
