@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-13"
+lastupdated: "2018-07-16"
 
 ---
 
@@ -85,7 +85,7 @@ To deploy an {{site.data.keyword.Bluemix_notm}} Private image in a cluster in {{
 
     **For IBM WebSphere Application Server Liberty**:
     
-    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/)](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
+    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
     
     2.  Follow the [Liberty Helm chart instructions![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html). 
 
