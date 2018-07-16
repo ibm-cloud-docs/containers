@@ -51,8 +51,11 @@ IBM Cloud Kubernetes Service
         cs_network_planning.md
         cs_nodeport.md
         cs_loadbalancer.md
-        cs_ingress.md
-        cs_annotations.md
+
+        {: .topicgroup}
+        Test Ingress twistie
+            cs_ingress.md
+            cs_annotations.md
         cs_vpn.md
         cs_subnets.md
 
