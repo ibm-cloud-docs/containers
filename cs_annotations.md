@@ -2348,11 +2348,11 @@ metadata:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt; &lt;value1&gt;;
-      &lt;header2&gt; &lt;value2&gt;;
+      &lt;header1&gt;:&lt;value1&gt;;
+      &lt;header2&gt;:&lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt; &lt;value3&gt;;
+      &lt;header3&gt;:&lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {

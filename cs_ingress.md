@@ -1079,6 +1079,7 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 <br />
 
 
+
 ## Optional application load balancer configurations
 {: #configure_alb}
 
@@ -1432,5 +1433,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
+
+
 
 
