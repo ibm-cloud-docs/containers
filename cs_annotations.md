@@ -242,9 +242,9 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 </thead>
 <tbody>
 <tr>
-<td><a href="#add-host-port">Add host port</a></td>
+<td><a href="#add-host-port">Add server port to host header</a></td>
 <td><code>add-host-port</code></td>
-<td>Set the :server_port to the host for routing requests</td>
+<td>Add the server port to the host for routing requests.</td>
 </tr>
 <tr>
 <td><a href="#client-max-body-size">Client request body size</a></td>
@@ -2246,12 +2246,12 @@ spec:
 ## Request and response annotations
 {: #request-response}
 
-### Add host port (add-host-port)
+### Add server port to host header (add-host-port)
 {: #add-host-port}
 
 <dl>
 <dt>Description</dt>
-<dd>Add the `:server_port` to the host header of a client request before forwarding the request to your backend app. If you do not specify a service name, the configuration is applied to all services in the Ingress resource.
+<dd>Add the `:server_port` to the host header of a client request before forwarding the request to your backend app.
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
