@@ -30,8 +30,7 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
 {:shortdesc}
 
-**What comes with Ingress?**
-
+**What comes with Ingress?**</br>
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -43,8 +42,7 @@ Ingress consists of three components:
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you are using only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME to map the customer domain to the IBM-provide Ingress subdomain for your cluster.</p></dd>
 </dl>
 
-**How does a request get to my app with Ingress in a single zone cluster?**
-
+**How does a request get to my app with Ingress in a single zone cluster?**</br>
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
 <img src="images/cs_ingress_singlezone.png" alt="Expose an app in a single-zone cluster by using Ingress" style="border-style: none"/>
@@ -59,7 +57,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
-**How does a request get to my app with Ingress in a multizone cluster?**
+**How does a request get to my app with Ingress in a multizone cluster?**</br>
 The following diagram shows how Ingress directs communication from the internet to an app in a multizone cluster:
 
 <img src="images/cs_ingress_multizone.png" alt="Expose an app in a multizone cluster by using Ingress" style="border-style: none"/>

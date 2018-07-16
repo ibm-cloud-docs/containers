@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-16"
 
 ---
 
@@ -31,32 +31,26 @@ You can install updates to keep your Kubernetes clusters up-to-date in {{site.da
 Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.html#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
 {:shortdesc}
 
-**How do I know when to update the master?**
-
+**How do I know when to update the master?**</br>
 You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.html) page.
 
-**How many versions behind the latest can the master be?**
-
+**How many versions behind the latest can the master be?**</br>
 IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version. 
 
 For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.10, you must first update to 1.8 or 1.9. You can force the update to occur, but updating three or more minor versions might cause unexpected results or failure. 
 
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
-**Can my worker nodes run a later version than the master?**
-
+**Can my worker nodes run a later version than the master?**</br>
 No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you also must update your workers for each patch version.
 
-**What happens during the master update?**
-
+**What happens during the master update?**</br>
 When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
 
-**Can I roll back the update?**
-
+**Can I roll back the update?**</br>
 No, you cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before updating your production master.
 
-**What process can I follow to update the master?**
-
+**What process can I follow to update the master?**</br>
 The following diagram shows the process that you can take to update your master.
 
 ![Master update best practice](/images/update-tree.png)
