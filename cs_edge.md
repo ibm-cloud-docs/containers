@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-16"
 
 ---
 
@@ -25,7 +25,7 @@ Edge worker nodes can improve the security of your Kubernetes cluster by allowin
 
 When these worker nodes are marked for networking only, other workloads cannot consume the CPU or memory of the worker node and interfere with networking.
 
-If you have a multizone cluster and want to restrict network traffic to edge worker nodes, ensure that at least 2 edge worker nodes are enabled in each zone for high availability of load balancer or Ingress pods. If edge worker nodes are enabled in some zones but not in others, load balancers will not deploy uniformly. Load balancers will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
+If you have a multizone cluster and want to restrict network traffic to edge worker nodes, at least 2 edge worker nodes must be enabled in each zone for high availability of load balancer or Ingress pods. Create an edge node worker pool that spans all the zones in your cluster, with at least 2 worker nodes per zone.
 {: tip}
 
 ## Labeling worker nodes as edge nodes
@@ -38,21 +38,22 @@ Before you begin:
 
 - [Create a standard cluster.](cs_clusters.html#clusters_cli)
 - Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
+- [Create a new worker pool](cs_clusters.html#add_pool) that spans all the zone in your cluster and has at least 2 workers per zone.
 - [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 
 To label worker nodes as edge nodes:
 
-1. List all of the worker nodes in the cluster. Use the private IP address from the **NAME** column to identify the nodes. Select at least two worker nodes on each public VLAN to be edge worker nodes. Ingress requires at least two worker nodes in each zone to provide high availability.
+1. List the worker nodes in your edge node worker pool. Use the private IP address from the **NAME** column to identify the nodes.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud cs workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
 2. Label the worker nodes with `dedicated=edge`. After a worker node is marked with `dedicated=edge`, all subsequent Ingress and load balancers are deployed to an edge worker node.
 
   ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
