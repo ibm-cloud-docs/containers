@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-16"
 
 ---
 
@@ -519,7 +519,7 @@ If you have [the `PodSecurityPolicy` admission controller enabled](cs_psp.html),
 If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](cs_psp.html#ibm_psp), you might experience similar issues.
 
 {: tsResolve}
-Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#modify_psp).
+Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#customize_psp).
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
