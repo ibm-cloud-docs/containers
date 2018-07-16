@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-12"
+lastupdated: "2018-07-16"
 
 ---
 
@@ -242,14 +242,9 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 </thead>
 <tbody>
 <tr>
-<td><a href="#proxy-add-headers">Additional client request or response header</a></td>
-<td><code>proxy-add-headers, response-add-headers</code></td>
-<td>Add header information to a client request before forwarding the request to your back-end app or to a client response before sending the response to the client.</td>
-</tr>
-<tr>
-<td><a href="#response-remove-headers">Client response header removal</a></td>
-<td><code>response-remove-headers</code></td>
-<td>Remove header information from a client response before forwarding the response to the client.</td>
+<td><a href="#add-host-port">Add host port</a></td>
+<td><code>add-host-port</code></td>
+<td>Set the :server_port to the host for routing requests</td>
 </tr>
 <tr>
 <td><a href="#client-max-body-size">Client request body size</a></td>
@@ -260,6 +255,16 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 <td><a href="#large-client-header-buffers">Large client header buffers</a></td>
 <td><code>large-client-header-buffers</code></td>
 <td>Set the maximum number and size of buffers that read large client request headers.</td>
+</tr>
+<tr>
+<td><a href="#proxy-add-headers">Additional client request or response header</a></td>
+<td><code>proxy-add-headers, response-add-headers</code></td>
+<td>Add header information to a client request before forwarding the request to your back-end app or to a client response before sending the response to the client.</td>
+</tr>
+<tr>
+<td><a href="#response-remove-headers">Client response header removal</a></td>
+<td><code>response-remove-headers</code></td>
+<td>Remove header information from a client response before forwarding the response to the client.</td>
 </tr>
 </tbody></table>
 
@@ -2241,6 +2246,57 @@ spec:
 ## Request and response annotations
 {: #request-response}
 
+### Add host port (add-host-port)
+{: #add-host-port}
+
+<dl>
+<dt>Description</dt>
+<dd>Add the `:server_port` to the host header of a client request before forwarding the request to your backend app. If you do not specify a service name, the configuration is applied to all services in the Ingress resource.
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/add-host-port: "enabled=&lt;true&gt; serviceName=&lt;myservice&gt;"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>To enable setting of server_port for the host, set to <code>true</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
+
+<br />
+
 
 ### Additional client request or response header (proxy-add-headers, response-add-headers)
 {: #proxy-add-headers}
@@ -2260,6 +2316,7 @@ If your back-end app requires HTTP header information, you can use the <code>pro
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -2271,6 +2328,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=<myservice1> {
   Host $host;
+  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
