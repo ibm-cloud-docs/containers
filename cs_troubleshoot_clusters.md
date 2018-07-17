@@ -114,7 +114,7 @@ To check if your cluster uses the linked infrastructure account or a different i
 
 3.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
-    1.  [Check your worker VLAN connectivity](cs_clusters.html#worker_vlan_connection). 
+    1.  Check your worker VLAN connectivity. 
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
 
@@ -179,7 +179,7 @@ To check if your cluster uses the linked infrastructure account or a different i
   
 4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
-    1.  [Check your worker VLAN connectivity](cs_clusters.html#worker_vlan_connection). 
+    1.  Check your worker VLAN connectivity. 
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
 
