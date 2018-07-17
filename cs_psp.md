@@ -152,7 +152,6 @@ Before you begin:
     ```
     {: pre}
 
-6.  **Optional**: To create your own pod security policy, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, if the existing policy permits users to create and update privileged pods, but the policy that you create does not, the conflict makes the policy fail.
 </br>
 **To delete the RBAC resources**:
 1.  Get the name of the RBAC cluster role binding.
@@ -172,6 +171,12 @@ Before you begin:
     kubectl get clusterrolebinding
     ```
     {: pre}
+
+</br>
+**To create your own pod security policy**:
+To create your own pod security policy resource and authorize users through RBAC, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). 
+
+Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, the existing policy permits users to create and update privileged pods. If you create a policy that does not permit users to create or update privileged pods, the conflict between the existing and the new policy might cause unexpected results.
 
 ## Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management
 {: #ibm_psp}
