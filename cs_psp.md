@@ -86,7 +86,7 @@ Before you begin:
     
     **Example cluster role binding file**:
     
-    ```
+    ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -113,25 +113,27 @@ Before you begin:
       kind: Group
       name: system:authenticated
     ```
-    {: screen}
+    {: codeblock}
     
 3.  Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Example actions:
     
-    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in others namespaces are no longer authorized. Change the `system:serviceaccounts` to `system:serviceaccount:<namespace>` such as in the following example.
-        ```
+    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in others namespaces are no longer authorized. 
+    
+        To scope the policy to allow actions in a specific namespace, change the `system:serviceaccounts` to `system:serviceaccount:<namespace>`.
+        ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
           name: system:serviceaccount:kube-system
         ```
-        {: screen}
+        {: codeblock}
   
     *   **Users**: You might want to remove authorization for all authenticated users to deploy pods with privileged access. Remove the following `system:authenticated` entry.
-        ```
+        ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
           name: system:authenticated
         ```
-        {: screen}
+        {: codeblock}
 
 4.  Create the modified cluster role binding resource in your cluster.
 
@@ -148,8 +150,6 @@ Before you begin:
     {: pre}
 
 6.  **Optional**: To create your own pod security policy, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Make sure that you modified the existing policies so that the new one you create does not conflict with it. For example, if the existing policy permits users to create and update privileged pods, but the policy that you create does not, the conflict make the policy fail.
-
-</br>
 </br>
 **To delete the RBAC resources**:
 1.  Get the name of the RBAC cluster role binding.
