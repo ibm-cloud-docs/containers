@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-16"
+lastupdated: "2018-07-17"
 
 ---
 
@@ -514,7 +514,7 @@ unable to validate against any pod security policy
 {: screen}
 
 {: tsCauses}
-If you have [the `PodSecurityPolicy` admission controller enabled](cs_psp.html), it checks the authorization of the user or service account, such as a deployment, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
+[The `PodSecurityPolicy` admission controller](cs_psp.html) checks the authorization of the user or service account, such as a deployment or Helm tiller, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
 
 If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](cs_psp.html#ibm_psp), you might experience similar issues.
 
