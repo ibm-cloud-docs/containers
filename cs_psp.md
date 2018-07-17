@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-16"
+lastupdated: "2018-07-17"
 
 ---
 
@@ -33,7 +33,7 @@ With the the `PodSecurityPolicy` admission controller, no pods can be created un
 **Are any policies set by default? What can I add?**</br>
 By default, {{site.data.keyword.containershort_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller. 
 
-Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources](#customize_psp) or [create your own](#create_psp).
+Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
 **How does policy authorization work?**</br>
 When you as a user create a pod directly and not by using a controller such as a deployment, your credentials are validated against the pod security policies that you are authorized to use. If no policy supports the pod security requirements, the pod is not created.
