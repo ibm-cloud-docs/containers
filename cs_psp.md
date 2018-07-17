@@ -152,7 +152,7 @@ Before you begin:
     ```
     {: pre}
 
-6.  **Optional**: To create your own pod security policy, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Make sure that you modified the existing policies so that the new one you create does not conflict with it. For example, if the existing policy permits users to create and update privileged pods, but the policy that you create does not, the conflict make the policy fail.
+6.  **Optional**: To create your own pod security policy, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, if the existing policy permits users to create and update privileged pods, but the policy that you create does not, the conflict makes the policy fail.
 </br>
 **To delete the RBAC resources**:
 1.  Get the name of the RBAC cluster role binding.
