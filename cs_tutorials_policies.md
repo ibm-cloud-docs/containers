@@ -56,6 +56,7 @@ The first lesson shows you how your app is exposed from multiple IP addresses an
 Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a LoadBalancer service. A LoadBalancer service makes your app available over both the LoadBalancer service IP address and the worker nodes' NodePorts.
 
 The following image shows how the webserver app will be exposed to the internet by the public NodePort and public LoadBalancer at the end of Lesson 1:
+
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the webserver app is exposed to the internet by the public NodePort and public LoadBalancer." style="width:450px; border-style: none"/>
 
 1. Create a test namespace to use throughout this tutorial.
@@ -344,7 +345,7 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 {: shortdesc}
 
 First, in addition to the NodePorts, you must block all incoming traffic to the LoadBalancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public NodePorts and LoadBalancer will be blocked and only traffic from your whitelisted system IP will be allowed:
-<img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public LoadBalancer to your system IP only." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="600" alt="The webserver app is exposed by public LoadBalancer to your system IP only." style="width:600px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the LoadBalancer IP address and port. Replace `<loadbalancer_IP>` with the LoadBalancer public IP address from your cheat sheet.
     ```
@@ -464,7 +465,7 @@ At this point, all traffic to the public NodePorts and LoadBalancer is blocked. 
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
 
 In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public NodePorts will be blocked, and all traffic to the public LoadBalancer will be allowed. Only traffic from your blacklisted system IP to the LoadBalancer will be blocked:
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public LoadBalancer to the internet. Traffic from your system IP only is blocked." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="600" alt="The webserver app is exposed by public LoadBalancer to the internet. Traffic from your system IP only is blocked." style="width:600px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.
     ```

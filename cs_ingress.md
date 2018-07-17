@@ -753,9 +753,9 @@ To enable a default private ALB by using the pre-assigned, IBM-provided portable
 
     The field **Status** for private ALBs is _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP         Zone
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -              dal10
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -              dal12
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
     public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
     public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
     ```
@@ -809,14 +809,11 @@ To enable the private ALB by using your own portable private IP address:
 
     The field **Status** for the private ALB is _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP         Zone
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -              dal10
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
     public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
     ```
     {: screen}
-    In multizone clusters, the numbered suffix on the ALB ID indicates the order that the ALB was added.
-    * For example, the `-alb1` suffix on the ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` indicates that it was the first default private ALB that was created. It exists in the zone where you created the cluster.
-    * The `-alb2` suffix on the ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` indicates that it was the second default private ALB that was created. It exists in the second zone that you added to your cluster.
 
 3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
 
