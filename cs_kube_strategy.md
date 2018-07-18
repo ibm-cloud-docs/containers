@@ -40,7 +40,7 @@ While no system is entirely failsafe, you can take steps to increase your the hi
 
 Review more information about making resources highly available.
 * [Reduce potential points of failure](cs_ha.html#ha).
-* [Create multizone clusters](cs_clusters.html#ha_clusters).
+* [Create multizone clusters](cs_clusters_planning.html#ha_clusters).
 * [Plan highly available deployments](cs_app.html#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](cs_images.html#planning).
 * [Plan data storage](cs_storage.html#persistent). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).

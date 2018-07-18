@@ -16,7 +16,7 @@ You can create a cluster in one of the [multizone cities](cs_regions.html#zones)
 If the cluster is in one of the supported multizone locations, yes. See [Updating from stand-alone worker nodes to worker pools](cs_cluster_update.html#standalone_to_workerpool).
 
 **I created my multizone cluster. Why is there still only one zone? How do I add zones to my cluster?**</br>
-If you [create your multizone cluster with the CLI](#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro city](cs_regions.html#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](#add_zone).
+If you [create your multizone cluster with the CLI](#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro city](cs_regions.html#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](cs_clusters.html#add_zone).
 
 ### Going forward, what are some changes from how I currently manage my clusters?
 {: #mz_new_ways}
@@ -70,10 +70,10 @@ To protect your app from a Kubernetes master failure and for regions where multi
 
 <img src="images/cs_multiple_cluster_zones.png" alt="High availability for multiple clusters" width="700" style="width:700px; border-style: none"/>
 
-To balance your workload across multiple clusters, you must set up a global load balancer and add the IP addresses of your application load balancers (ALBs) or load balancer services to your domain. By adding these IP addresses, you can route incoming traffic between your clusters. For the global load balancer to detect if one of your clusters is unavailable, consider adding a ping-based health check to every IP address. When you set up this check, your DNS provider regularly pings the IP addresses that you added to your domain. If one IP address becomes unavailable, then traffic is not sent to this IP address anymore. However, Kubernetes does not automatically restart pods from the unavailable cluster on worker nodes in available clusters. If you want Kubernetes to automatically restart pods in available clusters, consider setting up a [multizone cluster](#multi_zone).
+To balance your workload across multiple clusters, you must set up a global load balancer and add the IP addresses of your application load balancers (ALBs) or load balancer services to your domain. By adding these IP addresses, you can route incoming traffic between your clusters. For the global load balancer to detect if one of your clusters is unavailable, consider adding a ping-based health check to every IP address. When you set up this check, your DNS provider regularly pings the IP addresses that you added to your domain. If one IP address becomes unavailable, then traffic is not sent to this IP address anymore. However, Kubernetes does not automatically restart pods from the unavailable cluster on worker nodes in available clusters. If you want Kubernetes to automatically restart pods in available clusters, consider setting up a [multizone cluster](#multizone).
 
 **Why do I need 3 clusters in 3 zones?** </br>
-Similar to using [3 zones in a multizone clusters](#multi_zone), you can provide more availability to your app by setting up 3 clusters across zones. You can also reduce costs by purchasing smaller machines to handle your workload.
+Similar to using [3 zones in a multizone clusters](#multizone), you can provide more availability to your app by setting up 3 clusters across zones. You can also reduce costs by purchasing smaller machines to handle your workload.
 
 **What if I want to set up multiple clusters across regions?** </br>
 You can set up multiple clusters in different regions of one geolocation (such as US South and US East) or across geolocations (such as US South and EU Central). Both setups offer the same level of availability for your app, but also add complexity when it comes to data sharing and data replication. For most cases, staying within the same geolocation is sufficient. But if you have users across the world, it might be better to set up a cluster where your users are, so that your users do not experience long waiting times when they send a request to your app.
@@ -137,7 +137,7 @@ When you create a standard cluster, worker nodes of the same memory, CPU, and si
 You can choose between virtual or physical (bare metal) servers. Depending on the level of hardware isolation that you choose, virtual worker nodes can be set up as shared or dedicated nodes. You can also choose whether you want worker nodes to connect to a public VLAN and private VLAN, or only to a private VLAN. Every worker node is provisioned with a specific machine type that determines the number of vCPUs, memory, and disk space that are available to the containers that are deployed to the worker node. Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
 
-Want to be sure that you always have enough worker nodes to cover your workload? Try out [the iccs-cluster-autoscaler (alpha)](#scaling_clusters).
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the iccs-cluster-autoscaler (alpha)](cs_clusters.html#scaling_clusters).
 {: tip}
 
 ## Available hardware for worker nodes
