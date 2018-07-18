@@ -19,7 +19,7 @@ lastupdated: "2018-07-18"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-You can view, manage, and audit user-initated activities that change the state of your instance of your {{site.data.keyword.containershort_notm}} instance by using the {{site.data.keyword.cloudaccesstrailshort}} service.
+You can view, manage, and audit user-initated activities in your {{site.data.keyword.containershort_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
 {: shortdesc}
 
 ## Finding the information
@@ -36,15 +36,16 @@ To monitor administrative activity:
 5. In the **Available Fields** list, click **type**. Click the magnifying glass icon for **Activity Tracker** to limit the logs to only those tracked by the service.
 6. You can use the other available fields to narrow your search.
 
-To grant other users to see activity, see [Granting permisisons to see account events](docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_acc_events).
-{: tip}
+
 
 ## Tracking events
 {: #events}
 
 Check out the following tables for a list of the events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
 
-For general events check out the following table.
+For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} docs](/docs/services/cloud-activity-tracker/index.html).
+
+For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
 
 <table>
   <tr>
@@ -628,5 +629,3 @@ For general events check out the following table.
     <td>A pod preset was updated.</td>
   </tr>
 </table>
-
-For more information about how the service works see the [{{site.data.keyword.cloudaccesstrailshort}} docs](/docs/services/cloud-activity-tracker/index.html).

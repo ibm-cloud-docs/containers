@@ -53,7 +53,9 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - [Recovering troubled worker nodes by running `kubectl` commands, such as `cordon` or `drain`, and by running `ibmcloud ks` commands, such as `reboot`, `reload`, or `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Adding or removing subnets in IBM Cloud infrastructure (SoftLayer) as needed](cs_subnets.html#subnets)
 - [Backing up and restoring data in persistent storage in IBM Cloud infrastructure (SoftLayer) ![External link icon](../icons/launch-glyph.svg "External link icon")](../services/RegistryImages/ibm-backup-restore/index.html)
+- Setting up [logging](cs_health.html#logging) and [monitoring](cs_health.html#view_metrics) services to support your cluster's health and performance
 - [Configuring health monitoring for worker nodes with Autorecovery](cs_health.html#autorecovery)
+- Auditing events that change resources in your cluster, such as by using [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) to view user-initiated activities that change the state of your {{site.data.keyword.containershort_notm}} instance
 
 <br />
 
