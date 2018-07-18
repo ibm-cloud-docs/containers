@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -190,7 +190,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
       1. Get the Ingress IP and port of your cluster.
           ```
-          kubectl get Ingress_secret
+          kubectl get ingress
           ```
           {: pre}
 
