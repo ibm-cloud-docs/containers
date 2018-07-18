@@ -16,15 +16,16 @@ lastupdated: "2018-07-18"
 {:download: .download}
 
 
-
-
-# Configuring subnets for clusters
+# Configuring VLANs, subnets, and IPs
 {: #subnets}
 
-Change the pool of available portable public or private IP addresses by adding subnets to your Kubernetes cluster in {{site.data.keyword.containerlong}}.
+Change the pool of available portable public or private IP addresses for load balancer or Ingress services by adding subnets to your Kubernetes cluster.
 {:shortdesc}
 
-In {{site.data.keyword.containershort_notm}}, you can add stable, portable IP addresses for Kubernetes services by adding network subnets to the cluster. In this case, subnets are not being used with netmasking to create connectivity across one or more clusters. Instead, the subnets are used to provide permanent fixed IP addresses for a service from a cluster that can be used to access that service.
+## Choosing subnets during cluster creation
+{: choose_subnets}
+
+When you create a standard cluster, subnets are automatically created for you. You can also order and manage existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead of using the automatically provisioned subnets. Review the following information about using the default subnets or ordering and managing your own subnets.
 
 <dl>
   <dt>Creating a cluster includes subnet creation by default</dt>
@@ -38,15 +39,103 @@ In {{site.data.keyword.containershort_notm}}, you can add stable, portable IP ad
   <dd>You can order and manage existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead of using the automatically provisioned subnets. Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. First, create a cluster without subnets by using the `cluster-create --no-subnet` command, and then add the subnet to the cluster with the `cluster-subnet-add` command. </dd>
 </dl>
 
-**Note:** Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
+## Viewing available portable public IP addresses
+{: #review_ip}
 
-## Requesting more subnets for your cluster
-{: #request}
+To list all of the IP addresses in your cluster, both used and available, you can run:
 
-You can add stable, portable public, or private IP addresses to the cluster by assigning subnets to the cluster.
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
+  ```
+  {: pre}
+
+To list only available public IP addresses for your cluster, you can use the following steps:
+
+Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
+
+1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
+
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        run: myservice
+      name: myservice
+      namespace: default
+    spec:
+      ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 80
+      selector:
+        run: myservice
+      sessionAffinity: None
+      type: LoadBalancer
+      loadBalancerIP: 1.1.1.1
+    ```
+    {: codeblock}
+
+2.  Create the service in your cluster.
+
+    ```
+    kubectl apply -f myservice.yaml
+    ```
+    {: pre}
+
+3.  Inspect the service.
+
+    ```
+    kubectl describe service myservice
+    ```
+    {: pre}
+
+    **Note:** The creation of this service fails because the Kubernetes master cannot find the specified load balancer IP address in the Kubernetes configmap. When you run this command, you can see the error message and the list of available public IP addresses for the cluster.
+
+    ```
+    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
+    ```
+    {: screen}
+
+<br />
+
+
+## Freeing up used IP addresses
+{: #free}
+
+You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
 {:shortdesc}
 
-**Note:** When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containershort_notm}} at the same time.
+Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
+
+1.  List available services in your cluster.
+
+    ```
+    kubectl get services
+    ```
+    {: pre}
+
+2.  Remove the load balancer service that uses a public or private IP address.
+
+    ```
+    kubectl delete service <service_name>
+    ```
+    {: pre}
+
+<br />
+
+
+## Adding portable IPs by ordering more subnets
+{: #request}
+
+You can add stable, portable public or private IP addresses to the cluster by assigning subnets to the cluster. The subnets are used to provide permanent fixed IP addresses that can be used to access load balancer services.
+{:shortdesc}
+
+By default, four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html). If you need to create more than four public or four private load balancers, you can add stable, portable IP addresses by adding network subnets to the cluster.
+
+**Note:**
+* When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containershort_notm}} at the same time.
+* Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your subnet is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
@@ -95,7 +184,7 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
 <br />
 
 
-## Adding or reusing custom and existing subnets in Kubernetes clusters
+## Adding portable IPs by using custom and existing subnets
 {: #custom}
 
 You can add existing portable public or private subnets from your IBM Cloud infrastructure (SoftLayer) account to your Kubernetes cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
@@ -200,7 +289,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 <br />
 
 
-## Adding user-managed subnets and IP addresses to Kubernetes clusters
+## Adding portable IPs by using user-managed subnets
 {: #user_managed}
 
 Provide a subnet from an on-premises network that you want {{site.data.keyword.containershort_notm}} to access. Then, you can add private IP addresses from that subnet to load balancer services in your Kubernetes cluster.
@@ -265,92 +354,6 @@ To add a subnet from an on-premises network:
 4. Optional: [Enable routing between subnets on the same VLAN](#vlan-spanning).
 
 5. Add a private load balancer service or a private Ingress application load balancer to access your app over the private network. To use a private IP address from the subnet that you added, you must specify an IP address. Otherwise, an IP address is chosen at random from the IBM Cloud infrastructure (SoftLayer) subnets or user-provided subnets on the private VLAN. For more information, see [Enabling public or private access to an app by using a LoadBalancer service](cs_loadbalancer.html#config) or [Enabling the private application load balancer](cs_ingress.html#private_ingress).
-
-<br />
-
-
-## Viewing available portable public IP addresses
-{: #review_ip}
-
-To list all of the IP addresses in your cluster, both used and available, you can run:
-
-  ```
-  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
-  ```
-  {: pre}
-
-To list only available public IP addresses for your cluster, you can use the following steps:
-
-Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
-
-1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      labels:
-        run: myservice
-      name: myservice
-      namespace: default
-    spec:
-      ports:
-      - port: 80
-        protocol: TCP
-        targetPort: 80
-      selector:
-        run: myservice
-      sessionAffinity: None
-      type: LoadBalancer
-      loadBalancerIP: 1.1.1.1
-    ```
-    {: codeblock}
-
-2.  Create the service in your cluster.
-
-    ```
-    kubectl apply -f myservice.yaml
-    ```
-    {: pre}
-
-3.  Inspect the service.
-
-    ```
-    kubectl describe service myservice
-    ```
-    {: pre}
-
-    **Note:** The creation of this service fails because the Kubernetes master cannot find the specified load balancer IP address in the Kubernetes configmap. When you run this command, you can see the error message and the list of available public IP addresses for the cluster.
-
-    ```
-    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
-    ```
-    {: screen}
-
-<br />
-
-
-## Freeing up used IP addresses
-{: #free}
-
-You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
-{:shortdesc}
-
-Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
-
-1.  List available services in your cluster.
-
-    ```
-    kubectl get services
-    ```
-    {: pre}
-
-2.  Remove the load balancer service that uses a public or private IP address.
-
-    ```
-    kubectl delete service <service_name>
-    ```
-    {: pre}
 
 <br />
 

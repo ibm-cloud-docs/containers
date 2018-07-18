@@ -16,7 +16,6 @@ lastupdated: "2018-07-18"
 {:download: .download}
 
 
-
 # Controlling traffic with network policies
 {: #network_policies}
 
@@ -519,6 +518,7 @@ Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in 
     ```
     calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
     ```
+    {:pre}
 
     [Global network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) are not scoped to specific namespaces:
     ```
