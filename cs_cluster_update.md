@@ -19,7 +19,7 @@ lastupdated: "2018-07-18"
 
 
 
-# Making updates
+# Updating clusters, worker nodes, and add-ons
 {: #update}
 
 You can install updates to keep your Kubernetes clusters up-to-date in {{site.data.keyword.containerlong}}.
@@ -367,16 +367,16 @@ Before you begin:
 ## Updating cluster add-ons
 {: #microservices}
 
-Your {{site.data.keyword.containershort_notm}} cluster comes with **add-ons**, or certain components that you must update separately from the master and worker nodes. {{site.data.keyword.containershort_notm}} cluster add-ons are deployed with the cluster, such as Fluentd for logging.
+Your {{site.data.keyword.containershort_notm}} cluster comes with **add-ons**, such as Fluentd for logging, that are installed automatically when you provision the cluster. These add-ons must be updated separately from the master and worker nodes.
 {: shortdesc}
 
-**What add-ons are in my cluster by default, that I have to update separately from the cluster?**
+**What default add-ons do I have to update separately from the cluster?**
 * [Fluentd for logging](#logging)
 
-**Are there other types of add-ons?**
-Yes. You can also add components to your cluster by [using Helm charts](cs_integrations.html#helm) to install a component into your cluster, such as adding the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). These add-ons do not come preinstalled with your cluster, and you must update each of them separately by following the instructions to update the Helm charts.
+**Can I install other add-ons than the default?**</br>
+Yes. {{site.data.keyword.containershort_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
-### Logging
+### Fluentd for logging
 {: #logging}
 
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
@@ -395,7 +395,9 @@ If automatic updates are disabled but you need to make a change to your configur
     ```
     {: pre}
 
-*  Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward. For example:
+*  Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward.
+
+    Example command:
 
     ```
     ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
