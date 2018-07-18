@@ -70,7 +70,7 @@ Review the following default Calico network policies that are automatically appl
       <td>Allows all outbound traffic.</td>
     </tr>
     <tr>
-      <td><code>allow-bixfix-port</code></td>
+      <td><code>allow-bigfix-port</code></td>
       <td>Allows incoming traffic on port 52311 to the BigFix app to allow necessary worker node updates.</td>
     </tr>
     <tr>
