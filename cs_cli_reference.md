@@ -236,9 +236,9 @@ ibmcloud plugin list
     </tr>
     <tr>
       <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
+      <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
+      <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
     </tr>
   </tbody>
 </table>
@@ -1807,7 +1807,7 @@ List the public and private VLANs that are available for a zone in your IBM Clou
 ## Logging commands
 {: #logging_commands}
 
-### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [-s]
+### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [--force-update][-s]
 {: #cs_logging_create}
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -1853,6 +1853,9 @@ Create a logging configuration. You can use this command to forward logs for con
 
   <dt><code>--skip-validation</code></dt>
     <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
 
     <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1913,7 +1916,7 @@ View all log forwarding configurations for a cluster, or filter logging configur
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh --cluster CLUSTER [-s]
+### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update]  [-s]
 {: #cs_logging_refresh}
 
 Refresh the logging configuration for the cluster. This refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
@@ -1923,6 +1926,9 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
 <dl>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>--force-update</code></dt>
+     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
 
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1936,7 +1942,7 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
   {: pre}
 
 
-### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [-s]
+### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--force-update] [-s]
 {: #cs_logging_rm}
 
 Delete one log forwarding configuration or all logging configurations for a cluster. This stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
@@ -1953,6 +1959,9 @@ Delete one log forwarding configuration or all logging configurations for a clus
   <dt><code>--all</code></dt>
    <dd>The flag to remove all logging configurations in a cluster.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -1965,7 +1974,7 @@ Delete one log forwarding configuration or all logging configurations for a clus
   {: pre}
 
 
-### ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [-s]
+### ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [--force-update] [-s]
 {: #cs_logging_update}
 
 Update the details of a log forwarding configuration.
@@ -2009,6 +2018,9 @@ Update the details of a log forwarding configuration.
    <dt><code>--skipValidation</code></dt>
     <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
@@ -2028,7 +2040,7 @@ Update the details of a log forwarding configuration.
   {: pre}
 
 
-### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s]
+### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE]  [--force-update]  [--json] [-s]
 {: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
@@ -2056,6 +2068,9 @@ Create a logging filter. You can use this command to filter out logs that are fo
 
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
     <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -2110,7 +2125,7 @@ View a logging filter configuration. You can use this command to view the loggin
 </dl>
 
 
-### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [-s]
+### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
 {: #cs_log_filter_delete}
 
 Delete a logging filter. You can use this command to remove a logging filter that you created.
@@ -2125,14 +2140,16 @@ Delete a logging filter. You can use this command to remove a logging filter tha
     <dd>The ID of the log filter to delete.</dd>
 
   <dt><code>--all</code></dt>
-    <dd>Delete all of your log forwarding filters. This value is optional.</dd>
+    <dd>Delete all of your log forwarding filters. This value is optional.</dd
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
 
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-
-### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--json] [-s]
+### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE]  [--force-update] [--json] [-s]
 {: #cs_log_filter_update}
 
 Update a logging filter. You can use this command to update a logging filter that you created.
@@ -2164,6 +2181,9 @@ Update a logging filter. You can use this command to update a logging filter tha
   <dt><code>--message <em>MESSAGE</em></code></dt>
     <dd>Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”. This value is optional.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -2171,7 +2191,41 @@ Update a logging filter. You can use this command to update a logging filter tha
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
+### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+{: #cs_log_autoupdate_enable}
 
+Enable automatic update of your Fluentd pods in a specific cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+{: #cs_log_autoupdate_disable}
+
+Disable automatic update of your Fluentd pods in a specific cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+{: #cs_log_autoupdate_get}
+
+View whether your Fluentd pods are set to automatically update in a specific cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+</dl>
 
 <br />
 

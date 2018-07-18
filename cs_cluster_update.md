@@ -19,7 +19,7 @@ lastupdated: "2018-07-18"
 
 
 
-# Updating clusters and worker nodes
+# Making updates
 {: #update}
 
 You can install updates to keep your Kubernetes clusters up-to-date in {{site.data.keyword.containerlong}}.
@@ -35,9 +35,9 @@ Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.h
 You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.html) page.
 
 **How many versions behind the latest can the master be?**</br>
-IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version. 
+IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version.
 
-For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.10, you must first update to 1.8 or 1.9. You can force the update to occur, but updating three or more minor versions might cause unexpected results or failure. 
+For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.10, you must first update to 1.8 or 1.9. You can force the update to occur, but updating three or more minor versions might cause unexpected results or failure.
 
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
@@ -363,6 +363,44 @@ Before you begin:
    {: pre}
 
 7. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
+
+## Updating cluster add-ons
+{: #microservices}
+
+Your {{site.data.keyword.containershort_notm}} cluster comes with **add-ons**, or certain components that you must update separately from the master and worker nodes. {{site.data.keyword.containershort_notm}} cluster add-ons are deployed with the cluster, such as Fluentd for logging.
+{: shortdesc}
+
+**What add-ons are in my cluster by default, that I have to update separately from the cluster?**
+* [Fluentd for logging](#logging)
+
+**Are there other types of add-ons?**
+Yes. You can also add components to your cluster by [using Helm charts](cs_integrations.html#helm) to install a component into your cluster, such as adding the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). These add-ons do not come preinstalled with your cluster, and you must update each of them separately by following the instructions to update the Helm charts.
+
+### Logging
+{: #logging}
+
+In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
+{: shortdesc}
+
+You can check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_log_autoupdate_get).
+
+To disable automatic updates, run the `ibmcloud ks logging-autoupdate-disable` [command](cs_cli_reference.html#cs_log_autoupdate_disable).
+
+If automatic updates are disabled but you need to make a change to your configuration, you have two options.
+
+*  Turn on automatic updates for your Fluentd pods.
+
+    ```
+    ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+*  Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward. For example:
+
+    ```
+    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+    ```
+    {: pre}
 
 ## Updating from stand-alone worker nodes to worker pools
 {: #standalone_to_workerpool}
