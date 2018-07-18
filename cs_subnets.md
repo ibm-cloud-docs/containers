@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -55,7 +55,7 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
 1. Provision a new subnet.
 
     ```
-    ibmcloud cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
+    ibmcloud ks cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
     ```
     {: pre}
 
@@ -79,14 +79,14 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud cs worker-get &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
+    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud ks worker-get &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
     </tr>
     </tbody></table>
 
 2.  Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **VLANs** section.
 
     ```
-    ibmcloud cs cluster-get --showResources <cluster_name_or_ID>
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -110,7 +110,7 @@ Before you begin,
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. The subnets are deleted within 24 hours.
 
    ```
-   ibmcloud cs cluster-rm <cluster_name_or_ID
+   ibmcloud ks cluster-rm <cluster_name_or_ID
    ```
    {: pre}
 
@@ -119,7 +119,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 1.  Identify the subnet to use. Note the ID of the subnet and the VLAN ID. In this example, the subnet ID is `1602829` and the VLAN ID is `2234945`.
 
     ```
-    ibmcloud cs subnets
+    ibmcloud ks subnets
     ```
     {: pre}
 
@@ -136,7 +136,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 2.  Confirm the zone that the VLAN is located. In this example, the zone is dal10.
 
     ```
-    ibmcloud cs vlans dal10
+    ibmcloud ks vlans dal10
     ```
     {: pre}
 
@@ -152,14 +152,14 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 3.  Create a cluster by using the zone and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
-    ibmcloud cs cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
 4.  Verify that the creation of the cluster was requested.
 
     ```
-    ibmcloud cs clusters
+    ibmcloud ks clusters
     ```
     {: pre}
 
@@ -176,7 +176,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 5.  Check the status of the worker nodes.
 
     ```
-    ibmcloud cs workers <cluster>
+    ibmcloud ks workers <cluster>
     ```
     {: pre}
 
@@ -191,7 +191,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no application load balancers exist for your cluster, one portable public and one portable private IP address is automatically used to create the public and private application load balancers. All other portable public and private IP addresses can be used to create load balancer services for your apps.
 
     ```
-    ibmcloud cs cluster-subnet-add mycluster 807861
+    ibmcloud ks cluster-subnet-add mycluster 807861
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ To add a subnet from an on-premises network:
 1. View the ID of your cluster's Private VLAN. Locate the **VLANs** section. In the field **User-managed**, identify the VLAN ID with _false_.
 
     ```
-    ibmcloud cs cluster-get --showResources <cluster_name>
+    ibmcloud ks cluster-get --showResources <cluster_name>
     ```
     {: pre}
 
@@ -235,21 +235,21 @@ To add a subnet from an on-premises network:
 2. Add the external subnet to your private VLAN. The portable private IP addresses are added to the cluster's configmap.
 
     ```
-    ibmcloud cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <VLAN_ID>
+    ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <VLAN_ID>
     ```
     {: pre}
 
     Example:
 
     ```
-    ibmcloud cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
+    ibmcloud ks cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
     ```
     {: pre}
 
 3. Verify that the user-provided subnet is added. The field **User-managed** is _true_.
 
     ```
-    ibmcloud cs cluster-get --showResources <cluster_name>
+    ibmcloud ks cluster-get --showResources <cluster_name>
     ```
     {: pre}
 

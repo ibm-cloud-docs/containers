@@ -21,7 +21,7 @@ If you [create your multizone cluster with the CLI](#clusters_cli), the cluster 
 ### Going forward, what are some changes from how I currently manage my clusters?
 {: #mz_new_ways}
 
-With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](cs_cli_reference.html#cs_cli_reference), or in your terminal by running `ibmcloud cs help`.
+With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](cs_cli_reference.html#cs_cli_reference), or in your terminal by running `ibmcloud ks help`.
 
 The following table compares the old and new methods for a few common cluster management actions.
 <table summary="The table shows the description of the new way to perform multizone commands. Rows are to be read from the left to right, with the description in column one, the old way in column two, and the new multizone way in column three.">
@@ -34,20 +34,20 @@ The following table compares the old and new methods for a few common cluster ma
   <tbody>
     <tr>
     <td>Add worker nodes to the cluster.</td>
-    <td><strong>Deprecated</strong>: <code>ibmcloud cs worker-add</code> to add stand-alone worker nodes.</td>
-    <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud cs worker-pool-create</code> [command](cs_cli_reference.html#cs_worker_pool_create).</li>
-    <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud cs worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
+    <td><strong>Deprecated</strong>: <code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</td>
+    <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud ks worker-pool-create</code> [command](cs_cli_reference.html#cs_worker_pool_create).</li>
+    <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud ks worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
     </tr>
     <tr>
     <td>Remove worker nodes from the cluster.</td>
-    <td><code>ibmcloud cs worker-rm</code>, which you can still use to delete a troublesome worker node from your cluster.</td>
-    <td><ul><li>If your worker pool is unbalanced, for example after removing a worker node), rebalance it: <code>ibmcloud cs worker-pool-rebalance</code> [command](cs_cli_reference.html#cs_rebalance).</li>
-    <li>To reduce the number of worker nodes in a pool, resize the number per zone (minimum value of 1): <code>ibmcloud cs worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
+    <td><code>ibmcloud ks worker-rm</code>, which you can still use to delete a troublesome worker node from your cluster.</td>
+    <td><ul><li>If your worker pool is unbalanced, for example after removing a worker node), rebalance it: <code>ibmcloud ks worker-pool-rebalance</code> [command](cs_cli_reference.html#cs_rebalance).</li>
+    <li>To reduce the number of worker nodes in a pool, resize the number per zone (minimum value of 1): <code>ibmcloud ks worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
     </tr>
     <tr>
     <td>Use a new VLAN for worker nodes.</td>
-    <td><strong>Deprecated</strong>: Add a new worker node that uses the new private or public VLAN: <code>ibmcloud cs worker-add</code>.</td>
-    <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud cs zone-network-set</code> [command](cs_cli_reference.html#cs_zone_network_set).</td>
+    <td><strong>Deprecated</strong>: Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</td>
+    <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud ks zone-network-set</code> [command](cs_cli_reference.html#cs_zone_network_set).</td>
     </tr>
   </tbody>
   </table>
@@ -86,7 +86,7 @@ You can set up multiple clusters in different regions of one geolocation (such a
 4. For each cluster, list the public IP addresses for your ALBs or load balancer services.
    - To list the IP address of all public enabled ALBs in your cluster:
      ```
-     ibmcloud cs albs --cluster <cluster_name_or_id>
+     ibmcloud ks albs --cluster <cluster_name_or_id>
      ```
      {: pre}
 
@@ -154,7 +154,7 @@ Review the following information to decide what type of worker pools you want. A
 <dt>Why would I use physical machines (bare metal)?</dt>
 <dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud cs machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
 <dt>Why would I use virtual machines?</dt>
 <dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
 <p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
@@ -165,7 +165,7 @@ Review the following information to decide what type of worker pools you want. A
 <p><strong>What if I have deprecated `u1c` or `b1c` machine types?</strong> To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
 <dt>What virtual and physical machine flavors can I choose from?</dt>
 <dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
-<p>Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud cs machine-types <zone_name>`.</p>
+<p>Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone_name>`.</p>
 <p><table>
 <caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containershort_notm}}.</caption>
 <thead>

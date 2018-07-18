@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -555,7 +555,7 @@ rules:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud cs albs --cluster &lt;my_cluster&gt;</code>.<p>
+<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>.<p>
 If you have a multizone cluster with more than one private ALB enabled, you can provide a list of ALB IDs separated by <code>;</code>. For example: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
@@ -1384,12 +1384,12 @@ Because the application uses {{site.data.keyword.appid_short_notm}} for authenic
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
     ```
-    ibmcloud cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
     When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
     ```
-    ibmcloud cs cluster-service-bind mycluster mynamespace appid1
+    ibmcloud ks cluster-service-bind mycluster mynamespace appid1
     Binding service instance to namespace...
     OK
     Namespace:    mynamespace
@@ -1946,7 +1946,7 @@ spec:
 
 5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
     ```
-    ibmcloud cs cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 

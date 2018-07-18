@@ -62,9 +62,9 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the CLI `ibmcloud cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the CLI `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
-3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs clusters`.
+3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud ks clusters`.
 
 4.  Install the version of the [`kubectl cli`](cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
 
@@ -104,7 +104,7 @@ To create a config map and update worker nodes:
 1.  List available worker nodes and note their private IP address.
 
     ```
-    ibmcloud cs workers <cluster_name_or_ID>
+    ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -223,7 +223,7 @@ To create a config map and update worker nodes:
 6.  Update the worker nodes.
 
     ```
-    ibmcloud cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+    ibmcloud ks worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -267,38 +267,38 @@ Before you begin:
    - **For worker nodes in a worker pool**:
      1. List available worker pools in your cluster.
         ```
-        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      2. List the worker nodes in the worker pool.
         ```
-        ibmcloud cs workers <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
         ```
         {: pre}
 
      3. Get the details for a worker node and note the zone, the private and the public VLAN ID.
         ```
-        ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
         ```
         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
      1. List available worker nodes.
         ```
-        ibmcloud cs workers <cluster_name_or_ID>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
      2. Get the details for a worker node and note the zone, the private and the public VLAN ID.
         ```
-        ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
         ```
         {: pre}
 
 2. List available machine types in the zone.
    ```
-   ibmcloud cs machine-types <zone>
+   ibmcloud ks machine-types <zone>
    ```
    {: pre}
 
@@ -306,31 +306,31 @@ Before you begin:
    - **For worker nodes in a worker pool**:
      1. Create a worker pool with the number of worker nodes that you want to replace.
         ```
-        ibmcloud cs worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
         ```
         {: pre}
 
      2. Verify that the worker pool is created.
         ```
-        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
         ```
-        ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+        ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
        ```
-       ibmcloud cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
        ```
        {: pre}
 
 4. Wait for the worker nodes to be deployed.
    ```
-   ibmcloud cs workers <cluster_name_or_ID>
+   ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -340,25 +340,25 @@ Before you begin:
    - **For worker nodes in a worker pool**:
      1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```
-        ibmcloud cs worker-pool-rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
+        ibmcloud ks worker-pool-rm --worker-pool <pool_name> --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      2. Verify that the worker pool is removed.
         ```
-        ibmcloud cs worker-pools --cluster <cluster_name_or_ID>
+        ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
       ```
-      ibmcloud cs worker-rm <cluster_name> <worker_node>
+      ibmcloud ks worker-rm <cluster_name> <worker_node>
       ```
       {: pre}
 
 6. Verify that the worker nodes are removed from your cluster.
    ```
-   ibmcloud cs workers <cluster_name_or_ID>
+   ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -382,25 +382,25 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
 1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
    ```
-   ibmcloud cs workers <cluster_name_or_ID>
+   ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
 2. Create a worker pool and decide on the machine type and the number of worker nodes that you want to add to the pool.
    ```
-   ibmcloud cs worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
-3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud cs cluster-get <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
+3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster-get <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
    ```
-   ibmcloud cs zones
+   ibmcloud ks zones
    ```
    {: pre}
 
 4. List available VLANs for the zone that you chose in the previous step. If you do not have a VLAN in that zone yet, the VLAN is automatically created for you when you add the zone to the worker pool.
    ```
-   ibmcloud cs vlans <zone>
+   ibmcloud ks vlans <zone>
    ```
    {: pre}
 
@@ -409,21 +409,21 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
       If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
       ```
-      ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+      ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud cs zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. Then, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. Then, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
       ```
-      ibmcloud cs zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+      ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud cs zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#multi_zone).
+   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#multi_zone).
 
 6. Wait for the worker nodes to be deployed in each zone.
    ```
-   ibmcloud cs workers <cluster_name_or_ID>
+   ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
    When the worker node state changes to **Normal** the deployment is finished.
@@ -452,9 +452,9 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
       {: pre}
       This process can take a few minutes.
 
-   5. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud cs workers <cluster_name_or_ID>` command.
+   5. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks workers <cluster_name_or_ID>` command.
       ```
-      ibmcloud cs worker-rm <cluster_name_or_ID> <worker_ID>
+      ibmcloud ks worker-rm <cluster_name_or_ID> <worker_ID>
       ```
       {: pre}
    6. Repeat these steps until all your stand-alone worker nodes are removed.

@@ -213,7 +213,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       1. Get the public IP address of any worker node in your cluster.
 
          ```
-         ibmcloud cs workers <cluster_name_or_ID>
+         ibmcloud ks workers <cluster_name_or_ID>
          ```
          {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -96,19 +96,19 @@ To check if your cluster uses the linked infrastructure account or a different i
     
     2.  Reset the API key to this user.
         ```
-        ibmcloud cs api-key-reset
+        ibmcloud ks api-key-reset
         ```
         {: pre}    
     
     3.  Verify that the API key is set.
         ```
-        ibmcloud cs api-key-info <cluster_name_or_ID>
+        ibmcloud ks api-key-info <cluster_name_or_ID>
         ```
         {: pre}
         
-    4.  **Optional**: If you previously set credentials manually with the `ibmcloud cs credentials-set` command, remove the associated infrastructure account. Now, the API key that you set in the previous substeps is used to order infrastructure.
+    4.  **Optional**: If you previously set credentials manually with the `ibmcloud ks credentials-set` command, remove the associated infrastructure account. Now, the API key that you set in the previous substeps is used to order infrastructure.
         ```
-        ibmcloud cs credentials-unset
+        ibmcloud ks credentials-unset
         ```
         {: pre}
 
@@ -175,7 +175,7 @@ To check if your cluster uses the linked infrastructure account or a different i
         
     2.  Set the infrastructure API credentials to use.
         ```
-        ibmcloud cs credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
   
 4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
@@ -265,7 +265,7 @@ Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link i
 {: #bm_machine_id}
 
 {: tsSymptoms}
-When you use `ibmcloud cs worker` commands with your bare metal worker node, you see a message similar to the following.
+When you use `ibmcloud ks worker` commands with your bare metal worker node, you see a message similar to the following.
 
 ```
 Instance ID inconsistent with worker records
@@ -313,7 +313,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-When you run `ibmcloud cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+When you run `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
 
 ```
 Multiple services with the same name were found.
@@ -325,7 +325,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 Multiple service instances might have the same name in different regions.
 
 {: tsResolve}
-Use the service GUID instead of the service instance name in the `ibmcloud cs cluster-service-bind` command.
+Use the service GUID instead of the service instance name in the `ibmcloud ks cluster-service-bind` command.
 
 1. [Log in to the region that includes the service instance to bind.](cs_regions.html#bluemix_regions)
 
@@ -343,7 +343,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud cs cl
   {: screen}
 3. Bind the service to the cluster again.
   ```
-  ibmcloud cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
   ```
   {: pre}
 
@@ -354,7 +354,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud cs cl
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-When you run `ibmcloud cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+When you run `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
 
 ```
 Binding service to a namespace...
@@ -404,7 +404,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID.
    1. Retrieve the cluster ID.
       ```
-      ibmcloud cs clusters
+      ibmcloud ks clusters
       ```
       {: pre}
 
@@ -454,7 +454,7 @@ Manually update the reference of the private IP address to point to the correct 
 1.  Confirm that you have two worker nodes with the same **Private IP** address. Note the **Private IP** and **ID** of the deleted worker.
 
   ```
-  ibmcloud cs workers <CLUSTER_NAME>
+  ibmcloud ks workers <CLUSTER_NAME>
   ```
   {: pre}
 
@@ -490,7 +490,7 @@ Manually update the reference of the private IP address to point to the correct 
 5.  Reboot the worker node that was not deleted.
 
   ```
-  ibmcloud cs worker-reboot CLUSTER_ID NODE_ID
+  ibmcloud ks worker-reboot CLUSTER_ID NODE_ID
   ```
   {: pre}
 
@@ -527,7 +527,7 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
 2.  Refresh the Kubernetes master to restore it.
 
     ```
-    ibmcloud cs apiserver-refresh
+    ibmcloud ks apiserver-refresh
     ```
     {: pre}
 
@@ -549,8 +549,8 @@ If you just created the cluster, the worker nodes might still be configuring. If
 {: tsResolve}
 
 You can try one of the following solutions:
-  - Check the status of your cluster by running `ibmcloud cs clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud cs workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud cs vlans <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check the status of your cluster by running `ibmcloud ks clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks workers <cluster_name>`.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud ks vlans <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
@@ -597,14 +597,14 @@ If this cluster is an existing one, check your cluster capacity.
     1.  Review the current sizes and machine types of your worker pools to decide which one to resize.
 
         ```
-        ibmcloud cs worker-pools
+        ibmcloud ks worker-pools
         ```
         {: pre}
 
     2.  Resize your worker pools to add more nodes to each zone that the pool spans.
 
         ```
-        ibmcloud cs worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
@@ -713,5 +713,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
 

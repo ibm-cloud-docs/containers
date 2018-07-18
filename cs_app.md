@@ -225,7 +225,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 If you are using the IBM-provided Ingress subdomain, you can [use the IBM-provided TLS certificate](cs_ingress.html#public_inside_2). To view the IBM-provided TLS secret, run the following command:
 ```
-ibmcloud cs cluster-get <cluster_name_or_ID> | grep "Ingress secret"
+ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ```
 {: pre}
 
@@ -407,11 +407,11 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
 1. Get the name of the worker pool that you want to deploy app pods to.
     ```
-    ibmcloud cs worker-pools <cluster_name_or_ID>
+    ibmcloud ks worker-pools <cluster_name_or_ID>
     ```
     {:pre}
 
-    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud cs vlans <zone>`.
+    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud ks vlans <zone>`.
     {: tip}
 
 2. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool name to the app deployment.
@@ -469,7 +469,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
         ```
-        ibmcloud cs workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
         ```
         {: pre}
 
@@ -483,7 +483,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
         ```
         {: screen}
 
-        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker nodes on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>`.
+        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker nodes on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
         {: tip}
 
     4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.

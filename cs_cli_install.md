@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -56,7 +56,7 @@ To install the CLIs:
 
     **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ibmcloud cs`.
+3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ibmcloud ks`.
 
     ```
     ibmcloud plugin install container-service -r Bluemix
@@ -134,7 +134,7 @@ Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.
 For reference information about these CLIs, see the documentation for those tools.
 
 -   [`ibmcloud` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
--   [`ibmcloud cs` commands](cs_cli_reference.html#cs_cli_reference)
+-   [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` commands](/docs/cli/plugins/registry/index.html)
 
@@ -163,7 +163,7 @@ Instead of installing each of the CLIs individually on your computer, you can in
     ```
     {: pre}
   
-3. Begin running `ibmcloud cs` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
+3. Begin running `ibmcloud ks` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
 
 <br />
 
@@ -190,12 +190,12 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
-3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud cs region-set`.
+3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
 4.  List all of the clusters in the account to get the name of the cluster.
 
     ```
-    ibmcloud cs clusters
+    ibmcloud ks clusters
     ```
     {: pre}
 
@@ -203,7 +203,7 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ibmcloud cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -218,7 +218,7 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 
     2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
-        **Mac or Linux user**: Instead of running the `ibmcloud cs cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `(ibmcloud cs cluster-config "<cluster-name>" | grep export)`.
+        **Mac or Linux user**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `(ibmcloud ks cluster-config "<cluster-name>" | grep export)`.
         {:tip}
 
     3.  Verify that the `KUBECONFIG` environment variable is set properly.
@@ -307,7 +307,7 @@ To update the CLIs:
     3.  Initialize the CLI.
 
         ```
-        ibmcloud cs init
+        ibmcloud ks init
         ```
         {: pre}
 

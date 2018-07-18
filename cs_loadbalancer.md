@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -127,7 +127,7 @@ To set up a LoadBalancer service in a multizone cluster:
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>Annotation to specify the zone. To see zones, run <code>ibmcloud cs zones</code>.</td>
+        <td>Annotation to specify the zone. To see zones, run <code>ibmcloud ks zones</code>.</td>
       </tr>
       <tr>
         <td><code>selector</code></td>
@@ -408,7 +408,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
     1. List portable public VLANs for your cluster.
         ```
-        ibmcloud cs cluster-get <cluster_name_or_ID> --showResources
+        ibmcloud ks cluster-get <cluster_name_or_ID> --showResources
         ```
         {: pre}
 

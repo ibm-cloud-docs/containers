@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -63,7 +63,7 @@ The file system on the worker node is read-only.
 {: tsResolve}
 1.  Back up any data that might be stored on the worker node or in your containers.
 2.  For a short-term fix to the existing worker node, reload the worker node.
-    <pre class="pre"><code>ibmcloud cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
 For a long-term fix, [update the machine type of your worker pool](cs_cluster_update.html#machine_type).
 
@@ -366,5 +366,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
 

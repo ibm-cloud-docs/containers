@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-17"
+lastupdated: "2018-07-18"
 
 ---
 
@@ -97,8 +97,8 @@ Supported {{site.data.keyword.containershort_notm}} regions:
   * US South
 
 You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/`.
-* To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud cs region`.
-* To retrieve a list of available regions and their endpoints, run `ibmcloud cs regions`.
+* To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud ks region`.
+* To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
@@ -113,7 +113,7 @@ You might want to log in to another {{site.data.keyword.containershort_notm}} re
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containershort_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
-To quickly switch regions, run `ibmcloud cs region-set`.
+To quickly switch regions, run `ibmcloud ks region-set`.
 
 ### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
@@ -129,7 +129,7 @@ Example of `GET /clusters` API:
 
 </br>
 
-To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud cs regions`.
+To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
 {: tip}
 
 To view documentation on the API commands, view [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
@@ -204,7 +204,7 @@ _Understanding where your single-zone cluster resources are._
 
 2.  If you set up other cluster resources, such as storage, networking, compute, or apps running in pods, the resources and their data remain in the zone that you deployed your cluster to.
 
-3.  When you initiate cluster management actions, such as using `ibmcloud cs` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
 
 ### Multizone clusters
 {: #multizone}
@@ -219,4 +219,4 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
     * [Managing network traffic by using Ingress](cs_ingress.html#planning)
     * [Increasing the availability of your app](cs_app.html#increase_availability)
 
-3.  When you initiate cluster management actions, such as using `ibmcloud cs` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
