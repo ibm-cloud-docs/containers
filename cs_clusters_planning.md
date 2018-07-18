@@ -126,7 +126,7 @@ If you want to create a cluster that only has access on a private VLAN:
 4.  If you configure a NodePort, LoadBalancer, or Ingress service to expose an app, the service is accessible on only the private IP address. You must configure the ports in your firewall to use the private IP address.
 
 
-## Overview of worker pools and worker nodes
+## Worker pools and worker nodes
 {: #planning_worker_nodes}
 
 A Kubernetes cluster consists of worker nodes that are grouped in worker node pools and is centrally monitored and managed by the Kubernetes master. Cluster admins decide how to set up the cluster of worker nodes to ensure that cluster users have all the resources to deploy and run apps in the cluster.
