@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-18"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -257,7 +257,7 @@ To use a custom domain:
         1. Create a TLS certificate and key for your domain that is encoded in PEM format.
         2. Create a secret that uses your TLS certificate and key. Replace <em>&lt;tls_secret_name&gt;</em> with a name for your Kubernetes secret, <em>&lt;tls_key_filepath&gt;</em> with the path to your custom TLS key file, and <em>&lt;tls_cert_filepath&gt;</em> with the path to your custom TLS certificate file.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
@@ -571,7 +571,7 @@ To use a custom domain:
         1. Create a TLS certificate and key for your domain that is encoded in PEM format.
         2. Create a secret that uses your TLS certificate and key. Replace <em>&lt;tls_secret_name&gt;</em> with a name for your Kubernetes secret, <em>&lt;tls_key_filepath&gt;</em> with the path to your custom TLS key file, and <em>&lt;tls_cert_filepath&gt;</em> with the path to your custom TLS certificate file.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
@@ -909,7 +909,7 @@ The ALB load balances HTTP network traffic to your apps. To also load balance in
         1. Create a TLS certificate and key for your domain that is encoded in PEM format.
         2. Create a secret that uses your TLS certificate and key. Replace <em>&lt;tls_secret_name&gt;</em> with a name for your Kubernetes secret, <em>&lt;tls_key_filepath&gt;</em> with the path to your custom TLS key file, and <em>&lt;tls_cert_filepath&gt;</em> with the path to your custom TLS certificate file.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
