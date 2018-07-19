@@ -365,7 +365,7 @@ Before you begin:
 7. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
 
 ## Updating cluster add-ons
-{: #microservices}
+{: #addons}
 
 Your {{site.data.keyword.containershort_notm}} cluster comes with **add-ons**, such as Fluentd for logging, that are installed automatically when you provision the cluster. These add-ons must be updated separately from the master and worker nodes.
 {: shortdesc}

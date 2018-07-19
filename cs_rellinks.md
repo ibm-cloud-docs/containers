@@ -21,15 +21,43 @@ lastupdated: "2018-07-19"
 # Related links
 {: #cs_rellinks}
 
-**Links related to clusters**
+## {{site.data.keyword.containershort_notm}}
+{: #containers}
 
 - [Pricing calculator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
+
+**REST APIs**
+
 - [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger)
 - [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json)
 - [REST API for logging in Kubernetes clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [REST API for managing Ingress application load balancers in Kubernetes clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+
+<br />
+
+
+**Tutorials, demos, and courses**
+
+- [Modernize and extend an existing Java web app (JPetStore) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [developerWorks container orchestration journeys ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [developerWorks courses ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
+- [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")] (https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+- [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
+- Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
+- [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
+- [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
+- [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
+- [Automate deployments in a cluster with Terraform ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/plan-create-update-deployments.html#plan-create-and-update-deployment-environments)
+- [Organizing users and teams ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications)
+- [Using Logistics Wizard with Istio and {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
+- [Enable your microservices with advanced traffic management and request tracing capabilities with Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
+
+<br />
+
+
+**Integrated open source technologies**
+
 - [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/)
 - [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for Kubernetes package management
@@ -48,24 +76,17 @@ lastupdated: "2018-07-19"
 <br />
 
 
-**Links related to the container registry**
+## {{site.data.keyword.registryshort_notm}}
+{: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-
-
-<br />
-
-
-
-**Links related to single and scalable containers (deprecated)**
-
-- [REST API for single and scalable containers ![External link icon](../icons/launch-glyph.svg "External link icon")](http://ccsapi-doc.mybluemix.net/)
+- [REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://registry.ng.bluemix.net/api/doc/)
 
 <br />
 
 
-
-**General**
+## Follow us
+{: #follow}
 
 - [Twitter ![External link icon](../icons/launch-glyph.svg "External link icon")](https://twitter.com/hashtag/ibmcontainers)
 - [Developers Community articles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/tag/containers/)
