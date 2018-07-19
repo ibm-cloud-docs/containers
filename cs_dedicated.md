@@ -16,7 +16,6 @@ lastupdated: "2018-07-19"
 {:download: .download}
 
 
-
 # Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
@@ -508,7 +507,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     ```
     {: screen}
 
-4. **Important**: To route between subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
+4. **Important**: To route between subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](cs_subnets.html#subnet-routing).
 
 5. To configure on-premises and internal account connectivity, choose between these options:
   - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, LoadBalancer, or Ingress services](cs_network_planning.html#planning).

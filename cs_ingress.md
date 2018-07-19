@@ -16,8 +16,6 @@ lastupdated: "2018-07-19"
 {:download: .download}
 
 
-
-
 # Exposing apps with Ingress
 {: #ingress}
 
@@ -1088,7 +1086,6 @@ You can further configure an application load balancer with the following option
 - [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
 - [Customizing the Ingress log format](#ingress_log_format)
 - [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
-- [Changing the keepalive time for connection between the client and the ALB](#keepalive_time)
 {: #ingress_annotation}
 
 ### Customizing your Ingress resource with annotations
@@ -1416,40 +1413,6 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
    apiVersion: v1
    data:
      vts-status-zone-size: "10m"
-   kind: ConfigMap
-   metadata:
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-   ```
-   {: codeblock}
-
-3. Save the configuration file.
-
-4. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-### Increasing the keepalive time for connections between the client and the ALB
-{: #keepalive_time}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap:
-
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
-
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Change the value of `keep-alive` from `8s` to a larger value.
-
-   ```
-   apiVersion: v1
-   data:
-     keep-alive: "8s"
    kind: ConfigMap
    metadata:
      name: ibm-cloud-provider-ingress-cm
