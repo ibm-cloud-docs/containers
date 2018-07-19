@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-18"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -16,30 +16,137 @@ lastupdated: "2018-07-18"
 {:download: .download}
 
 
-# Configuring VLANs, subnets, and IPs
+# Configuring subnets for clusters
 {: #subnets}
 
 Change the pool of available portable public or private IP addresses for load balancer or Ingress services by adding subnets to your Kubernetes cluster.
 {:shortdesc}
 
-## Choosing subnets during cluster creation
-{: choose_subnets}
+## Default VLANs, subnets, and IPs for standard clusters
+{: #default_vlans_subnets}
 
-When you create a standard cluster, subnets are automatically created for you. You can also order and manage existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead of using the automatically provisioned subnets. Review the following information about using the default subnets or ordering and managing your own subnets.
+When you create a cluster, every cluster is automatically connected to a VLAN from your IBM Cloud infrastructure (SoftLayer) account.
+{:shortdesc}
 
+A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire.
 <dl>
-  <dt>Creating a cluster includes subnet creation by default</dt>
-  <dd>When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions the following subnets:
-    <ul><li>A primary public subnet that determines the public IP addresses for worker nodes during cluster creation</li>
-    <li>A primary private subnet that determines private IP addresses for worker nodes during cluster creation</li>
-    <li>A portable public subnet that provides 5 public IP addresses for Ingress and load balancer networking services</li>
-    <li>A portable private subnet that provides 5 private IP addresses for Ingress and load balancer networking services</li></ul>
-      Portable public and private IP addresses are static and do not change when a worker node is removed. For each subnet, one portable public and one portable private IP address is used for the default [Ingress application load balancers](cs_ingress.html). You can use the Ingress application load balancer to expose multiple apps in your cluster. The remaining four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html).</dd>
-  <dt>[Ordering and managing your own existing subnets](#custom)</dt>
-  <dd>You can order and manage existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead of using the automatically provisioned subnets. Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. First, create a cluster without subnets by using the `cluster-create --no-subnet` command, and then add the subnet to the cluster with the `cluster-subnet-add` command. </dd>
-</dl>
+  <dt>Public VLAN</dt>
+  <dd>The public VLAN has two subnets automatically provisioned on it:
+    <ul><li>The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation.</li>
+    <li>The portable public subnet provides 1 public IP address that is used by the default public Ingress ALB and 4 public IP addresses that you can use to create public load balancer networking services.</li></ul></dd>
+  <dt>Private VLAN</dt>
+  <dd>The private VLAN also has two subnets automatically provisioned on it:
+      <ul><li>The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation.</li>
+      <li>The portable private subnet provides 1 private IP address that is used by the default private Ingress ALB and 4 private IP addresses that you can use to create private load balancer networking services.</li></ul></dd></dl>
 
-## Viewing available portable public IP addresses
+**Note**: If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+
+## Using custom or existing subnets to create a cluster
+{: #custom}
+
+When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
+{:shortdesc}
+
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses.
+
+**Note:** Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
+
+Before you begin,
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. The subnets are deleted within 24 hours.
+
+   ```
+   ibmcloud ks cluster-rm <cluster_name_or_ID
+   ```
+   {: pre}
+
+To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio with custom firewall rules or available IP addresses:
+
+1.  Identify the subnet to use. Note the ID of the subnet and the VLAN ID. In this example, the subnet ID is `1602829` and the VLAN ID is `2234945`.
+
+    ```
+    ibmcloud ks subnets
+    ```
+    {: pre}
+
+    ```
+    Getting subnet list...
+    OK
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
+
+    ```
+    {: screen}
+
+2.  Confirm the zone that the VLAN is located. In this example, the zone is dal10.
+
+    ```
+    ibmcloud ks vlans dal10
+    ```
+    {: pre}
+
+    ```
+    Getting VLAN list...
+    OK
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2234947          1813     private   bcr01a.dal10   true
+    2234945          1618     public    fcr01a.dal10   true
+    ```
+    {: screen}
+
+3.  Create a cluster by using the zone and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+
+    ```
+    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ```
+    {: pre}
+
+4.  Verify that the creation of the cluster was requested. **Note:** It can take up to 15 minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
+
+    ```
+    ibmcloud ks clusters
+    ```
+    {: pre}
+
+    When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
+
+    ```
+    Name         ID                                   State      Created          Workers   Zone   Version
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.8
+    ```
+    {: screen}
+
+5.  Check the status of the worker nodes.
+
+    ```
+    ibmcloud ks workers <cluster>
+    ```
+    {: pre}
+
+    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
+
+    ```
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.8
+    ```
+    {: screen}
+
+6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use.
+
+    ```
+    ibmcloud ks cluster-subnet-add mycluster 807861
+    ```
+    {: pre}
+
+7. Optional: [Enable routing between subnets on the same VLAN](#vlan-spanning).
+
+<br />
+
+
+## Managing existing portable IP addresses
+
+### Viewing available portable public IP addresses
 {: #review_ip}
 
 To list all of the IP addresses in your cluster, both used and available, you can run:
@@ -100,7 +207,7 @@ Before you begin, [set the context for the cluster you want to use.](cs_cli_inst
 <br />
 
 
-## Freeing up used IP addresses
+### Freeing up used IP addresses
 {: #free}
 
 You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
@@ -125,21 +232,25 @@ Before you begin, [set the context for the cluster you want to use.](cs_cli_inst
 <br />
 
 
-## Adding portable IPs by ordering more subnets
-{: #request}
+## Adding portable IP addresses
+{: #adding_ips}
 
-You can add stable, portable public or private IP addresses to the cluster by assigning subnets to the cluster. The subnets are used to provide permanent fixed IP addresses that can be used to access load balancer services.
+You can add portable public or private IP addresses to the cluster by assigning subnets to the cluster. The subnets are used to provide permanent fixed IP addresses that can be used to access load balancer services.
 {:shortdesc}
 
-By default, four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html). If you need to create more than four public or four private load balancers, you can add stable, portable IP addresses by adding network subnets to the cluster.
+By default, four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html). If you need to create more than four public or four private load balancers, you can get more portable IP addresses by adding network subnets to the cluster.
 
 **Note:**
 * When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containershort_notm}} at the same time.
 * Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your subnet is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+### Adding portable IPs by ordering more subnets
+{: #request}
 
-To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it available to a specified cluster:
+You can get more portable IPs for load balancer services by creating a new subnet in an IBM Cloud infrastructure (SoftLayer) account and making it available to your specified cluster.
+{:shortdesc}
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 1. Provision a new subnet.
 
@@ -184,115 +295,10 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
 <br />
 
 
-## Adding portable IPs by using custom and existing subnets
-{: #custom}
-
-You can add existing portable public or private subnets from your IBM Cloud infrastructure (SoftLayer) account to your Kubernetes cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
-{:shortdesc}
-
-Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses.
-
-**Note:** Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
-
-Before you begin,
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-- To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. The subnets are deleted within 24 hours.
-
-   ```
-   ibmcloud ks cluster-rm <cluster_name_or_ID
-   ```
-   {: pre}
-
-To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio with custom firewall rules or available IP addresses:
-
-1.  Identify the subnet to use. Note the ID of the subnet and the VLAN ID. In this example, the subnet ID is `1602829` and the VLAN ID is `2234945`.
-
-    ```
-    ibmcloud ks subnets
-    ```
-    {: pre}
-
-    ```
-    Getting subnet list...
-    OK
-    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
-    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
-    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
-
-    ```
-    {: screen}
-
-2.  Confirm the zone that the VLAN is located. In this example, the zone is dal10.
-
-    ```
-    ibmcloud ks vlans dal10
-    ```
-    {: pre}
-
-    ```
-    Getting VLAN list...
-    OK
-    ID        Name   Number   Type      Router         Supports Virtual Workers
-    2234947          1813     private   bcr01a.dal10   true
-    2234945          1618     public    fcr01a.dal10   true
-    ```
-    {: screen}
-
-3.  Create a cluster by using the zone and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
-
-    ```
-    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
-    ```
-    {: pre}
-
-4.  Verify that the creation of the cluster was requested.
-
-    ```
-    ibmcloud ks clusters
-    ```
-    {: pre}
-
-    **Note:** It can take up to 15 minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
-
-    When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
-
-    ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.9.8
-    ```
-    {: screen}
-
-5.  Check the status of the worker nodes.
-
-    ```
-    ibmcloud ks workers <cluster>
-    ```
-    {: pre}
-
-    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
-
-    ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.8
-    ```
-    {: screen}
-
-6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no application load balancers exist for your cluster, one portable public and one portable private IP address is automatically used to create the public and private application load balancers. All other portable public and private IP addresses can be used to create load balancer services for your apps.
-
-    ```
-    ibmcloud ks cluster-subnet-add mycluster 807861
-    ```
-    {: pre}
-
-7. Optional: [Enable routing between subnets on the same VLAN](#vlan-spanning).
-
-<br />
-
-
-## Adding portable IPs by using user-managed subnets
+### Adding portable IPs by using user-managed subnets
 {: #user_managed}
 
-Provide a subnet from an on-premises network that you want {{site.data.keyword.containershort_notm}} to access. Then, you can add private IP addresses from that subnet to load balancer services in your Kubernetes cluster.
+You can get more portable private IPs for load balancer services by making a subnet from an on-premises network available to your specified cluster.
 {:shortdesc}
 
 Requirements:
@@ -358,7 +364,14 @@ To add a subnet from an on-premises network:
 <br />
 
 
-## Enabling routing between subnets on the same VLAN
+## Managing subnet routing
+{: #subnet-routing}
+
+If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+
+Review the following scenarios in which VLAN spanning is also required.
+
+### Enabling routing between primary subnets on the same VLAN
 {: #vlan-spanning}
 
 When you create a cluster, a subnet that ends in `/26` is provisioned in the same VLAN that the cluster is on. This primary subnet can hold up to 62 worker nodes.
@@ -371,7 +384,7 @@ To route between subnets on the same VLAN, you must turn on VLAN spanning. For i
 <br />
 
 
-## Managing subnet routing for gateway appliances
+### Managing subnet routing for gateway appliances
 {: #subnet_routing}
 
 When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress and load balancer networking services.
