@@ -475,3 +475,5 @@ To set up a Virtual Router Appliance:
 2. [Configure the private VLAN on the VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
 
 3. To enable a VPN connection by using the VRA, [configure VRRP on the VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
+
+**Note**: If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#subnet-routing).

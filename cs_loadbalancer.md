@@ -23,24 +23,15 @@ lastupdated: "2018-07-19"
 Expose a port and use a portable IP address for the load balancer to access a containerized app.
 {:shortdesc}
 
-## Managing network traffic by using LoadBalancers
+## Load balancer components and architecture
 {: #planning}
 
-When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions the following subnets:
-* A primary public subnet that determines public IP addresses for worker nodes during cluster creation
-* A primary private subnet that determines private IP addresses for worker nodes during cluster creation
-* A portable public subnet that provides 5 public IP addresses for Ingress and load balancer networking services
-* A portable private subnet that provides 5 private IP addresses for Ingress and load balancer networking services
+When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions a portable public subnet and a portable private subnet.
 
-Portable public and private IP addresses are static and do not change when a worker node is removed. For each subnet, one portable public and one portable private IP address is used for the default [Ingress application load balancers](cs_ingress.html). The remaining four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by creating a load balancer service.
+* The portable public subnet provides 1 portable public IP address that is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating a public load balancer service.
+* The portable private subnet provides 1 portable private IP address that is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating a private load balancer service.
 
-When you create a Kubernetes LoadBalancer service in a cluster on a public VLAN, an external load balancer is created. Your options for IP addresses when you create a LoadBalancer service are as follows:
-
-- If your cluster is on a public VLAN, one of the four available portable public IP addresses is used.
-- If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
-- You can request a portable public or private IP address for a LoadBalancer service by adding an annotation to the configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
-
-The portable public IP address that is assigned to your LoadBalancer service is permanent and does not change when a worker node is removed or re-created. Therefore, the LoadBalancer service is more available than the NodePort service. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. If you use a LoadBalancer service, a NodePort is also available on each IP address of any worker node. To block access to NodePort while you are using a LoadBalancer service, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
+Portable public and private IP addresses are static and do not change when a worker node is removed. Therefore, a LoadBalancer service is more available than a NodePort service. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. If you use a LoadBalancer service, a NodePort is also available on each IP address of any worker node. To block access to NodePort while you are using a LoadBalancer service, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
 
 The LoadBalancer service serves as the external entry point for incoming requests for the app. To access the LoadBalancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`. The following diagram shows how a load balancer directs communication from the internet to an app.
 
