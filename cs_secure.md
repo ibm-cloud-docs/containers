@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -119,7 +119,7 @@ Worker nodes carry the deployments and services that make up your app. When you 
 
 **Who owns the worker node and am I responsible to secure it?** </br>
 The ownership of a worker node depends on the type of cluster that you create. Worker nodes in free clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containershort_notm}} features, do not run production workloads on free clusters. Consider using standard clusters for your production worloads. </br> </br>
-Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud cs worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the <code>ibmcloud cs clusters</code> or <code>ibmcloud cs workers <cluster_name></code> commands.
+Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containershort_notm}} components apply the latest security updates and patches. </br></br><strong>Important: </strong>Use the <code>ibmcloud ks worker-update</code> [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the <code>ibmcloud ks clusters</code> or <code>ibmcloud ks workers <cluster_name></code> commands.
 
 **How does my worker node setup look like?**</br>
 The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks. </br></br>
@@ -261,6 +261,9 @@ You can choose what events you want to log for your cluster and where you want t
 You can verify the capacity and performance of your cluster by monitoring your cluster components and compute resources, such as CPU and memory usage. {{site.data.keyword.containershort_notm}} automatically sends metrics for standard clusters to {{site.data.keyword.monitoringlong}} so that you can [see and analyze them in Grafana](cs_health.html#view_metrics).
 
 You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#health_services), such as Prometheus, Weave Scope, and others.
+
+**How can I audit events that happen in my cluster?**</br>
+You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containershort_notm}} cluster](cs_at_events.html#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov).
 
 **What are my options to enable trust in my cluster?** </br>
 By default, {{site.data.keyword.containershort_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.

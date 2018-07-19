@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -76,8 +76,11 @@ You can also [connect multiple clusters in different regions with a global load 
 <dt>Distribute pods across multiple zones or regions</dt>
   <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters.html#multiple_clusters).</p>
   <p>When you use a replica set and specify pod anti-affinity, Kubernetes spreads your app pods across the nodes. If your nodes are in multiple zones, the pods are spread across the zones, increasing the availability of your app. If you want to limit your apps to run only in one zone, you can configure pod affinity, or create and label a worker pool in one zone. For more information, see [High availability for multizone clusters](cs_clusters.html#ha_clusters).</p>
-  <p><strong>What if I want to spread my app across regions?</strong></p>
-  <p>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](cs_clusters.html#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with pod anti-affinity for your app.
+  <p><strong>In a multizone cluster deployment, are my app pods distributed evenly across the nodes?</strong></p>
+  <p>The pods are evenly distributed across zones, but not always across nodes. For example, if you have a cluster with 1 node in each of 3 zones and deploy a replica set of 6 pods, then each node gets 2 pods. However, if you have a cluster with 2 nodes in each of 3 zones and deploy a replica set of 6 pods, each zone has 2 pods scheduled, and might schedule 1 pod per node or might not. For more control over scheduling, you can [set pod affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
+  <p><strong>If a zone goes down, how are pods rescheduled onto the remaining nodes in the other zones?</strong></br>It depends on your scheduling policy that you used in the deployment. If you included [node-specific pod affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), your pods are not rescheduled. If you did not, pods are created on available worker nodes in other zones, but they might not be balanced. For example, the 2 pods might be spread across the 2 available nodes, or they might both be scheduled onto 1 node with available capacity. Similarly, when the unavailable zone returns, pods are not automatically deleted and rebalanced across nodes. If you want the pods to be rebalanced across zones after the zone is back up, consider using the [Kubernetes descheduler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/descheduler).</p>
+  <p><strong>Tip</strong>: In multizone clusters, try to keep your worker node capacity at 50% per zone so that you have enough capacity left to protect your cluster against a zonal failure.</p>
+  <p><strong>What if I want to spread my app across regions?</strong></br>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](cs_clusters.html#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with [pod anti-affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) for your app.</p>
   <p><strong>What if my apps need persistent storage?</strong></p>
   <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -222,7 +225,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 If you are using the IBM-provided Ingress subdomain, you can [use the IBM-provided TLS certificate](cs_ingress.html#public_inside_2). To view the IBM-provided TLS secret, run the following command:
 ```
-ibmcloud cs cluster-get <cluster_name_or_ID> | grep "Ingress secret"
+ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ```
 {: pre}
 
@@ -404,11 +407,11 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
 1. Get the name of the worker pool that you want to deploy app pods to.
     ```
-    ibmcloud cs worker-pools <cluster_name_or_ID>
+    ibmcloud ks worker-pools <cluster_name_or_ID>
     ```
     {:pre}
 
-    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud cs vlans <zone>`.
+    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud ks vlans <zone>`.
     {: tip}
 
 2. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool name to the app deployment.
@@ -466,7 +469,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
         ```
-        ibmcloud cs workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
         ```
         {: pre}
 
@@ -480,7 +483,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
         ```
         {: screen}
 
-        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker nodes on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud cs worker-get <cluster_name_or_ID> <worker_ID>`.
+        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker nodes on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
         {: tip}
 
     4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -161,7 +161,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>As a supplement to <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protecting container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+  <td>As a supplement to <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -276,14 +276,14 @@ To add a service:
 5.  Add the service to your cluster.
 
     ```
-    ibmcloud cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
 
     ```
-    ibmcloud cs cluster-service-bind mycluster mynamespace cleardb
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
     Namespace:	mynamespace

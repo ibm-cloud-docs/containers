@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -87,7 +87,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ibmcloud cs region-set` command.
+3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ibmcloud ks region-set` command.
 
     ```
     ibmcloud login [--sso]
@@ -100,7 +100,7 @@ To deploy the app:
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ibmcloud cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -268,14 +268,14 @@ To deploy the app:
     2.  Get the public IP address for the worker node in the cluster.
 
         ```
-        ibmcloud cs workers <cluster_name_or_ID>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Example output:
 
         ```
-        ibmcloud cs workers pr_firm_cluster
+        ibmcloud ks workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
@@ -417,7 +417,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 7.  Now that the deployment work is done you can open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
 
   ```
-  ibmcloud cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -740,7 +740,7 @@ Ready to delete what you created? You can use the configuration script to delete
   If you do not want to keep the cluster, you can delete that too.
 
   ```
-  ibmcloud cs cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 

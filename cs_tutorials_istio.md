@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-10"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -188,9 +188,15 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
     * For standard clusters:
 
-      1. Get the Ingress IP and port of your cluster.
+      1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
           ```
-          kubectl get Ingress_secret
+          istioctl create -f samples/bookinfo/routing/bookinfo-gateway.yaml
+          ```
+          {: pre}
+      
+      2. Get the ingress IP and port.
+          ```
+          kubectl get ingress
           ```
           {: pre}
 
@@ -213,7 +219,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
       1. Get the public IP address of any worker node in your cluster.
 
          ```
-         ibmcloud cs workers <cluster_name_or_ID>
+         ibmcloud ks workers <cluster_name_or_ID>
          ```
          {: pre}
 
