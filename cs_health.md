@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-18"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -45,7 +45,7 @@ In the following image you can see the location of the sources that you can conf
 
 <li><p><code>container</code>: Information that is logged by a running container.</p> <p>Paths: Anything written to <code>STDOUT</code> or <code>STDERR</code>.</p></li>
 
-<li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/cs_ingress.html#ingress_log_format).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+<li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress.html#ingress_log_format).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
 
 <li><p><code>kube-audit</code>: Information about cluster-related actions that is sent to the Kubernetes API server; including the time, the user, and the affected resource.</p></li>
 
