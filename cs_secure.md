@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-18"
+lastupdated: "2018-07-19"
 
 ---
 
@@ -263,7 +263,7 @@ You can verify the capacity and performance of your cluster by monitoring your c
 You can also use built-in tools, such as the {{site.data.keyword.containershort_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](cs_integrations.html#health_services), such as Prometheus, Weave Scope, and others.
 
 **How can I audit events that happen in my cluster?**</br>
-You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containershort_notm}} cluster](cs_at_events.html#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov).
+You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containershort_notm}} cluster](cs_at_events.html#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov).
 
 **What are my options to enable trust in my cluster?** </br>
 By default, {{site.data.keyword.containershort_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.
