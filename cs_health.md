@@ -32,8 +32,6 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 **Does IBM monitor my cluster?**
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containershort_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containershort_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
 
-</br>
-
 **What are the sources that I can configure logging for?**
 
 In the following image you can see the location of the sources that you can configure logging for.
@@ -128,8 +126,12 @@ The following table shows the different options that you have when configuring l
   </tbody>
 </table>
 
-</br>
-</br>
+**Am I responsible for keeping Fluentd for logging updated?**
+
+In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](cs_cluster_update.html#logging).
+
+<br />
+
 
 ## Configuring log forwarding
 {: #configuring}

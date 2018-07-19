@@ -106,22 +106,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tbody></table>
 
 
-.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
-</tr>
-<tr>
-<td>[Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce)</td>
-<td>Available 03 May. Does your team need a little extra help to know which image to pull in your app containers? Try out the Container Image Security Enforcement beta to verify container images before you deploy them. Available for clusters that run Kubernetes 1.9 or later.</td>
-</tr>
-<tr>
-<td>[Deploy the Kubernetes dashboard from the GUI](cs_app.html#cli_dashboard)</td>
-<td>Available 01 May. Did you ever want to access the Kubernetes dashboard with one click? Check out the **Kubernetes Dashboard** button in the {{site.data.keyword.Bluemix_notm}} GUI.</td>
-</tr>
-<tr>
-<td>[Check out the latest Ingress annotations](cs_annotations.html)</td>
-<td>Use an Ingress service more effectively by trying out the supported annotations that you can add to your configurartion files.</td>
-</tr>
-</tbody></table>
-</staging>
+
 
 ## Popular topics in April 2018
 {: #apr18}
