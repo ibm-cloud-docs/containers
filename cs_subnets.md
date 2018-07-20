@@ -32,24 +32,35 @@ During cluster creation, the cluster worker nodes and default subnets are automa
 
 When you create a cluster, the cluster's worker nodes are connected automatically to a VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers and pods.
 
-In free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default.
+In free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default. Because IBM controls the VLANs, subnets, and IP addresses, you cannot create multizone clusters or add subnets to your cluster, and can use only NodePort services to expose your app.
 
-In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you choose the VLANs that you want to use. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation.
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you can reuse the same public and private VLAN because multiple clusters can share VLANs.
 
-**Note**: If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation.
+
+To see the VLANs that are provisioned in each zone for your account, run `ibmcloud ks vlans <zone>.` To see the VLANs that one cluster is provisioned on, run `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
+
+**Note**:
+* If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 ### Subnets and IP addresses
 {: #subnets_ips}
 
-In addition to worker nodes and pods, subnets are also provisioned onto VLANs. Subnets provide network connectivity to your cluster components by assigning IP addresses to them. The following subnets are automatically provisioned on the default public and private VLANs:
+In addition to worker nodes and pods, subnets are also automatically provisioned onto VLANs. Subnets provide network connectivity to your cluster components by assigning IP addresses to them.
+
+The following subnets are automatically provisioned on the default public and private VLANs:
 
 **Public VLAN**
-* The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.
-* The portable public subnet provides 1 public IP address that is used by the default public Ingress ALB and 4 public IP addresses that you can use to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet.
+* The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters in on the same VLAN can share one primary public subnet.
+* The portable public subnet is bound to one cluster only and provides the cluster with 8 public IP addresses. 3 IPs are reserved for Softlayer functions. 1 IP is used by the default public Ingress ALB and 4 IPs can be used to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for public load balancers, see [Adding portable IP addresses](#addings_ips).
 
 **Private VLAN**
-* The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.
-* The portable private subnet provides 1 private IP address that is used by the default private Ingress ALB and 4 private IP addresses that you can use to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over a private network.
+* The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters in on the same VLAN can share one primary private subnet.
+* The portable private subnet is bound to one cluster only and provides the cluster with 8 private IP addresses. 3 IPs are reserved for Softlayer functions. 1 IP is used by the default private Ingress ALB and 4 IPs can be used to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for private load balancers, see [Adding portable IP addresses](#addings_ips).
+
+To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
+
+**Note**: In {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 
 ## Using custom or existing subnets to create a cluster
 {: #custom}
@@ -86,7 +97,6 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ID        Network             Gateway          VLAN ID   Type      Bound Cluster
     1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
     1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
-
     ```
     {: screen}
 
@@ -382,10 +392,10 @@ Review the following scenarios in which VLAN spanning is also required.
 ### Enabling routing between primary subnets on the same VLAN
 {: #vlan-spanning}
 
-When you create a cluster, a subnet that ends in `/26` is provisioned on the default private primary VLAN and on the default public primary VLAN. A primary subnet can provide IPs for up to 62 worker nodes.
+When you create a cluster, a subnet that ends in `/26` is provisioned on the default private primary VLAN. A private primary subnet can provide IPs for up to 62 worker nodes.
 {:shortdesc}
 
-This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second primary subnet in the same VLAN is ordered.
+This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second private primary subnet in the same VLAN is ordered.
 
 To ensure that workers in these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 

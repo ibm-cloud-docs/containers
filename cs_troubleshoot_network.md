@@ -307,7 +307,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-When you create a cluster, 8 public and 8 private portable subnets are requested on the VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN already reached that limit, the **Ingress Subdomain** fails to provision.
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision.
 
 To view how many subnets a VLAN has:
 1.  From the [IBM Cloud infrastructure (SoftLayer) console](https://control.bluemix.net/), select **Network** > **IP Management** > **VLANs**.
@@ -625,7 +625,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
     ```
     {: pre}
-    
+
 8.  Verify that your worker nodes are created.
 
     ```
