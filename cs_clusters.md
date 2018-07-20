@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-20"
 
 ---
 
@@ -243,7 +243,7 @@ You can choose between virtual or physical (bare metal) servers. Depending on th
 
 Every cluster is set up with a default worker pool that groups worker nodes with the same configuration that you defined during cluster creation, such as the machine type. If you provision a cluster from the UI, you can select multiple zones at the same time. Clusters that are created from the CLI are initially provisioned with a worker pool in one zone only. You can add more zones to your worker pool after the cluster is provisioned to replicate worker nodes evenly across zones. For example, if you add a second zone to a worker pool that consists of 3 worker nodes, then 3 worker nodes are provisioned into the second zone which leaves you with a cluster of 6 worker nodes in total.
 
-If you have worker nodes in different zones, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. This procedure ensures that your worker nodes can communicate with each other on the private network. To add different machine type flavors to your cluster, [create another worker pool(cs_cli_reference.html#cs_worker_pool_add).
+To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning). To add different machine type flavors to your cluster, [create another worker pool(cs_cli_reference.html#cs_worker_pool_add).
 
 ### Hardware for worker nodes
 {: #shared_dedicated_node}
@@ -446,7 +446,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
 
-    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters. Be sure to turn on [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) if you select more than one zone.
+    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters. To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
         **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity.
 
 5. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -496,42 +496,44 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 Before you begin:
 - You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation.
 - [Make sure you have the minimum required permissions in IBM Cloud infrastructure (SoftLayer) to provision a standard cluster](cs_users.html#infra_access).
+- Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
 
 To create a cluster:
 
-1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. 
+    
+    1.  Log in and enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
-2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+        ```
+        ibmcloud login
+        ```
+        {: pre}
 
-    ```
-    ibmcloud login
-    ```
-    {: pre}
+        **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-3. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
+    3.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
-4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
-
-6.  Create a cluster.
+3.  Create a cluster.
 
     1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
-        
+
         **Note**: To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones).
 
         ```
         ibmcloud ks zones
         ```
         {: pre}
-        
+
     2.  **Standard clusters**: Choose a zone and review the machine types available in that zone. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
 
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
         -  **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
         -  **Physical**: Billed monthly, bare metal servers are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
         - **Physical machines with Trusted Compute**: For bare metal clusters that run Kubernetes version 1.9 or later, you can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
-        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations or consult the `ibmcloud ks machine-types` [command documentation](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different physical or virtual machine types by using the `ibmcloud ks worker-add` [command](cs_cli_reference.html#cs_worker_add).
+        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations of the [available worker node hardware](#shared_dedicated_node). After you create your cluster, you can add different physical or virtual machine types by [adding a worker pool](#add_pool).
 
            Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by  mistake, you are still charged the full month.
            {:tip}
@@ -633,7 +635,7 @@ To create a cluster:
         </tr>
         </tbody></table>
 
-7.  Verify that the creation of the cluster was requested.
+4.  Verify that the creation of the cluster was requested.
 
     ```
     ibmcloud ks clusters
@@ -650,7 +652,7 @@ To create a cluster:
     ```
     {: screen}
 
-8.  Check the status of the worker nodes.
+5.  Check the status of the worker nodes.
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
@@ -667,7 +669,7 @@ To create a cluster:
     ```
     {: screen}
 
-9. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+6.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
@@ -702,7 +704,7 @@ To create a cluster:
         ```
         {: screen}
 
-10. Launch your Kubernetes dashboard with the default port `8001`.
+7.  Launch your Kubernetes dashboard with the default port `8001`.
     1.  Set the proxy with the default port number.
 
         ```
@@ -729,7 +731,6 @@ To create a cluster:
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
 - If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -  Clusters with Kubernetes version 1.10.3 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 

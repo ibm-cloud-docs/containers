@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-20"
 
 ---
 
@@ -71,7 +71,7 @@ Before you begin:
   * A load balancer service with a portable private IP address still has a public NodePort open on every worker node. To add a network policy to prevent public traffic, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
   * In each zone, at least one public VLAN must have portable subnets available for Ingress and LoadBalancer services. To add private Ingress and LoadBalancer services, you must specify at least one private VLAN with available portable subnets. To add subnets, see [Configuring subnets for clusters](cs_subnets.html).
   * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, load balancers will not deploy uniformly. Load balancers will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
-  * If your cluster uses multiple VLANs, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so that worker nodes can communicate with each other on the private network.
+  * To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 
 To set up a LoadBalancer service in a multizone cluster:

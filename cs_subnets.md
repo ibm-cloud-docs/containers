@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-20"
 
 ---
 
@@ -42,13 +42,14 @@ In standard clusters, the first time that you create a cluster in a zone, a publ
 {: #subnets_ips}
 
 In addition to worker nodes and pods, subnets are also provisioned onto VLANs. Subnets provide network connectivity to your cluster components by assigning IP addresses to them. The following subnets are automatically provisioned on the default public and private VLANs:
-<dl>
-  <dt>Public VLAN</dt>
-  <dd><ul><li>The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.</li><li>The portable public subnet provides 1 public IP address that is used by the default public Ingress ALB and 4 public IP addresses that you can use to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet.</li></ul></dd>
-  <dt>Private VLAN</dt>
-  <dd><ul><li>The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.</li><li>The portable private subnet provides 1 private IP address that is used by the default private Ingress ALB and 4 private IP addresses that you can use to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over a private network.</li></ul></dd></dl>
-  </dd>
-</dl>
+
+**Public VLAN**
+* The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.
+* The portable public subnet provides 1 public IP address that is used by the default public Ingress ALB and 4 public IP addresses that you can use to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet.
+
+**Private VLAN**
+* The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. This primary subnet can provide IP addresses to up to 62 worker nodes.
+* The portable private subnet provides 1 private IP address that is used by the default private Ingress ALB and 4 private IP addresses that you can use to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over a private network.
 
 ## Using custom or existing subnets to create a cluster
 {: #custom}
@@ -65,7 +66,7 @@ Before you begin,
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
 
    ```
-   ibmcloud ks cluster-rm <cluster_name_or_ID
+   ibmcloud ks cluster-rm <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -89,38 +90,23 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-2.  If you can't remember which zone the VLAN is in, you can run `ibmcloud ks vlans <zone>` to list the VLANs located in a zone.
-
-    ```
-    ibmcloud ks vlans dal10
-    ```
-    {: pre}
-
-    In this example, the `2234945` VLAN is in dal10.
-    ```
-    Getting VLAN list...
-    OK
-    ID        Name   Number   Type      Router         Supports Virtual Workers
-    2234947          1813     private   bcr01a.dal10   true
-    2234945          1618     public    fcr01a.dal10   true
-    ```
-    {: screen}
-
-3. [Create a cluster](cs_clusters.html#clusters_cli) by using the zone and VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+2. [Create a cluster](cs_clusters.html#clusters_cli) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
     ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
+    If you can't remember which zone the VLAN is in for the `--zone` flag, you can check whether the VLAN is in a certain zone by running `ibmcloud ks vlans <zone>`.
+    {: tip}
 
-4.  Verify that the cluster was created. **Note:** It can take up to 15 minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
+3.  Verify that the cluster was created. **Note:** It can take up to 15 minutes for the worker node machines to be ordered and for the cluster to be set up and provisioned in your account.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-    When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
+    When your cluster is fully provisioned, the **State** changes to `deployed`.
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
@@ -128,14 +114,14 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-5.  Check the status of the worker nodes.
+4.  Check the status of the worker nodes.
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
-    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
+    Before continuing to the next step, the worker nodes must be ready. The **State** changes to `normal` and the **Status** is `Ready`.
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
@@ -143,14 +129,14 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create load balancer services for your apps.
+5.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create load balancer services for your apps.
 
     ```
     ibmcloud ks cluster-subnet-add mycluster 807861
     ```
     {: pre}
 
-7. **Important**: To route between subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
+6. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
 
 <br />
 
@@ -311,7 +297,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ```
     {: screen}
 
-3. **Important**: To route between subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
+3. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
 
 <br />
 
@@ -401,7 +387,7 @@ When you create a cluster, a subnet that ends in `/26` is provisioned on the def
 
 This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second primary subnet in the same VLAN is ordered.
 
-To ensure that these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+To ensure that workers in these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 <br />
 

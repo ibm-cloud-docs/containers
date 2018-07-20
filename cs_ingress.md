@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-20"
 
 ---
 
@@ -86,7 +86,7 @@ Before you get started with Ingress, review the following prerequisites.
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, ALBs will not deploy uniformly. ALBs will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
  - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
- - If your cluster uses multiple VLANs, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so that worker nodes can communicate with each other on the private network.
+ - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 <br />
 
