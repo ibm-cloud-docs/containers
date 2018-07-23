@@ -344,7 +344,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: screen}
 
 {: tsCauses}
-In each zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's public VLAN in a zone already reached that limit, the public Ingress ALB for that fails to provision.
+In each zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's public VLAN in a zone already reached that limit, the public Ingress ALB for that zone fails to provision.
 
 {: tsResolve}
 To check the number of subnets on a VLAN and for steps on how to get another VLAN, see [Cannot get a subdomain for Ingress ALB](#cs_subnet_limit).
