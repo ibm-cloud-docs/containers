@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-23"
 
 ---
 
@@ -1074,25 +1074,11 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 <br />
 
 
-
-## Optional application load balancer configurations
-{: #configure_alb}
-
-You can further configure an application load balancer with the following options.
-
-- [Customizing your Ingress resource with annotations](#annotations)
-- [Opening ports in the Ingress ALB](#opening_ingress_ports)
-- [Preserving the source IP address](#preserve_source_ip)
-- [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
-- [Customizing the Ingress log format](#ingress_log_format)
-- [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
-{: #ingress_annotation}
-
-### Customizing your Ingress resource with annotations
+## Customizing an Ingress resource with annotations
 {: #annotations}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
-{: short desc}
+{: shortdesc}
 
 Get started with some of the most commonly used annotations.
 * [redirect-to-https](cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
@@ -1100,9 +1086,12 @@ Get started with some of the most commonly used annotations.
 * [ssl-services](cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
 * [client-max-body-size](cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
-For the full list of supported annotations, see [Ingress annotations](cs_annotations.html).
+For the full list of supported annotations, see [Customizing Ingress with annotations](cs_annotations.html).
 
-### Opening ports in the Ingress application load balancer
+<br />
+
+
+## Opening ports in the Ingress ALB
 {: #opening_ingress_ports}
 
 By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose other ports, you can edit the `ibm-cloud-provider-ingress-cm` configmap resource.
@@ -1154,7 +1143,10 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
-### Preserving the source IP address
+<br />
+
+
+## Preserving the source IP address
 {: #preserve_source_ip}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
@@ -1238,7 +1230,10 @@ To enable source IP preservation, edit the load balancer service that exposes an
         ```
         {: pre}
 
-### Configuring SSL protocols and SSL ciphers at the HTTP level
+<br />
+
+
+## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
 Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
@@ -1280,125 +1275,16 @@ To edit the configmap to enable SSL protocols and ciphers:
    ```
    {: pre}
 
-### Customizing Ingress log content and format
-{: #ingress_log_format}
+<br />
 
-You can customize the content and format of logs that are collected for the Ingress ALB.
-{:shortdesc}
 
-By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format. To choose which log components are forwarded and how the components are arranged in the log output:
+## Performance tuning: Increasing the connection keepalive time
+{: #keepalive_time}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize performance of your ALBs, you can change the default settings of the keepalive time for the connections between the ALB and the client.
+{: shortdesc}
 
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Add a <code>data</code> section. Add the `log-format` field and optionally, the `log-format-escape-json` field.
-
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: pre}
-
-    <table>
-    <caption>YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the log-format configuration</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>log-format</code></td>
-    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log_variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request",</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1",</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">Nginx variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>_</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
-    </tr>
-    <tr>
-    <td><code>log-format-escape-json</code></td>
-    <td>Optional: By default, logs are generated in text format. To generate logs in JSON format, add the <code>log-format-escape-json</code> field and use value <code>true</code>.</td>
-    </tr>
-    </tbody></table>
-
-    For example, your log format might contain the following variables:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
-                    time_date: [$time_local], request: "$request",
-                    status: $status, http_referer: "$http_referer",
-                    http_user_agent: "$http_user_agent",
-                    request_id: $request_id}'
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: screen}
-
-    A log entry according to this format looks like the following example:
-    ```
-    remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
-    ```
-    {: screen}
-
-    To create a custom log format that is based on the default format for ALB logs, modify the following section as needed and add it to your configmap:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
-                    "host": "$http_host", "scheme": "$scheme",
-                    "request_method": "$request_method", "request_uri": "$uri",
-                    "request_id": "$request_id", "status": $status,
-                    "upstream_addr": "$upstream_addr", "upstream_status":
-                    $upstream_status, "request_time": $request_time,
-                    "upstream_response_time": $upstream_response_time,
-                    "upstream_connect_time": $upstream_connect_time,
-                    "upstream_header_time": $upstream_header_time}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: codeblock}
-
-4. Save the configuration file.
-
-5. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-4. To view the Ingress ALB logs, choose between two options.
-    * [Create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
-    * Check the logs from the CLI.
-        1. Get the ID of a pod for an ALB.
-            ```
-            kubectl get pods -n kube-system | grep alb
-            ```
-            {: pre}
-
-        2. Open the logs for that ALB pod. Verify that logs follow the updated format.
-            ```
-            kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
-            ```
-            {: pre}
-
-### Increasing the size of the shared memory zone for Ingress metrics collection
-{: #vts_zone_size}
-
-Shared memory zones are defined so that worker processes can share information such as cache, session persistence, and rate limits. A shared memory zone, called the virtual host traffic status zone, is set up for Ingress to collect metrics data for an ALB.
-{:shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
+In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -1407,12 +1293,12 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
     ```
     {: pre}
 
-2. Change the value of `vts-status-zone-size` from `10m` to a larger value.
+2. Change the value of `keep-alive` from `8s` to a larger value.
 
    ```
    apiVersion: v1
    data:
-     vts-status-zone-size: "10m"
+     keep-alive: "8s"
    kind: ConfigMap
    metadata:
      name: ibm-cloud-provider-ingress-cm
@@ -1428,7 +1314,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-
 
 

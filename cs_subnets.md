@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-23"
 
 ---
 
@@ -33,9 +33,9 @@ During cluster creation, the cluster worker nodes and default subnets are automa
 When you create a cluster, the cluster's worker nodes are connected automatically to a VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers and pods.
 
 <dl>
-<dt>Free clusters</dt>
+<dt>VLANs for free clusters</dt>
 <dd>In free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default. Because IBM controls the VLANs, subnets, and IP addresses, you cannot create multizone clusters or add subnets to your cluster, and can use only NodePort services to expose your app.</dd>
-<dt>Standard clusters</dt>
+<dt>VLANs for standard clusters</dt>
 <dd>In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you can reuse the same public and private VLAN because multiple clusters can share VLANs.</br></br>You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation.</dd></dl>
 
 To see the VLANs that are provisioned in each zone for your account, run `ibmcloud ks vlans <zone>.` To see the VLANs that one cluster is provisioned on, run `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
@@ -49,11 +49,11 @@ In addition to worker nodes and pods, subnets are also automatically provisioned
 
 The following subnets are automatically provisioned on the default public and private VLANs:
 
-**Public VLAN**
+**Public VLAN subnets**
 * The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters in on the same VLAN can share one primary public subnet.
 * The portable public subnet is bound to one cluster only and provides the cluster with 8 public IP addresses. 3 IPs are reserved for Softlayer functions. 1 IP is used by the default public Ingress ALB and 4 IPs can be used to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for public load balancers, see [Adding portable IP addresses](#addings_ips).
 
-**Private VLAN**
+**Private VLAN subnets**
 * The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters in on the same VLAN can share one primary private subnet.
 * The portable private subnet is bound to one cluster only and provides the cluster with 8 private IP addresses. 3 IPs are reserved for Softlayer functions. 1 IP is used by the default private Ingress ALB and 4 IPs can be used to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for private load balancers, see [Adding portable IP addresses](#addings_ips).
 
@@ -160,10 +160,10 @@ By default, 4 portable public and 4 portable private IP addresses can be used to
 
 To list all of the portable IP addresses in your cluster, both used and available, you can run:
 
-  ```
-  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
-  ```
-  {: pre}
+```
+kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
+```
+{: pre}
 
 To list only portable public IP addresses that are available to create load balancers, you can use the following steps:
 

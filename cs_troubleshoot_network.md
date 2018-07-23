@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-23"
 
 ---
 
@@ -324,6 +324,30 @@ If you are not using all the subnets in the VLAN, you can reuse subnets in the c
 2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
 3.  Use the `ibmcloud ks cluster-subnet-add` [command](cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](cs_subnets.html#custom).
+
+<br />
+
+
+## Ingress ALB does not deploy in a zone
+{: #cs_multizone_subnet_limit}
+
+{: tsSymptoms}
+When you have a multizone cluster and run `ibmcloud ks albs <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
+```
+ALB ID                                            Enabled   Status     Type      ALB IP   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
+public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
+public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
+```
+{: screen}
+
+{: tsCauses}
+In each zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's public VLAN in a zone already reached that limit, the public Ingress ALB for that fails to provision.
+
+{: tsResolve}
+To check the number of subnets on a VLAN and for steps on how to get another VLAN, see [Cannot get a subdomain for Ingress ALB](#cs_subnet_limit).
 
 <br />
 
