@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-23"
 
 ---
 
@@ -32,7 +32,6 @@ lastupdated: "2018-07-20"
 - Default: 1.9.8
 - Other: 1.8.13
 
-</br>
 </br>
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
