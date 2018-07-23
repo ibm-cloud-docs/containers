@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-23"
 
 ---
 
@@ -72,6 +72,10 @@ You can also [connect multiple clusters in different regions with a global load 
     <p><strong>Example deployment YAML files</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Nginx app with preferred pod anti-affinity.</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
+    <staging appyaml><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required. 
+      <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
+      <p>For an example of affinity in an app deployment, see [Planning your app deployment YAML](#app_yaml).</p>
+      </dd></staging appyaml>
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
   <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters.html#multiple_clusters).</p>
@@ -84,6 +88,7 @@ You can also [connect multiple clusters in different regions with a global load 
   <p><strong>What if my apps need persistent storage?</strong></p>
   <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
+
 
 
 ### Minimal app deployment
@@ -136,6 +141,246 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 
 
 
+
+<staging appyaml>
+
+
+## Planning your app deployment YAML
+{: #app_yaml}
+
+In Kubernetes, you describe your app in a YAML file that declares the desired configuration of the API object. The Kubernetes API server than processes the YAML file, stores it in etcd, and the Kubernetes scheduler uses the Kubernetes API to fulfill your app's workload as described in the YAML file by scheduling pods onto worker nodes within the cluster.
+{: shortdesc}
+
+When you prepare your app YAML file, you have many options to increase the app's availability, performance, and security. For example, instead of a single pod, you can use a Kubernetes controller object to manage your workload, such as a deployment, job, or daemon set. For more information about pods and controllers, view the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). A deployment that manages a replica set of pods is a common use case for an app.
+
+Review the example deployment YAML and the following explanation to understand how you can enhance your app deployment with replica sets, labels, affinity, image policies, ports, resource requests and limits, liveness and readiness probes, and pod disruption budgets.
+
+```yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: wasliberty
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: wasliberty
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - wasliberty
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: wasliberty
+        image: registry.bluemix.net/ibmliberty
+        ports:
+        - containerPort: 9080
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: wasliberty
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: wasliberty
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+spec:
+  ports:
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort
+
+```
+{: codeblock}
+
+<dl>
+<dt>Basic deployment metadata</dt>
+  <dd><p>Use the appropriate API version for the kind of Kubernetes object that you deploy. The name that you give in the metadata is the object's name, not its label. You use the name when interacting with your object, such as `kubectl get deployment <name>`.</p>
+  <p>For more information about types of objects, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/).</p>
+  <codeblock class="codeblock">
+  apiVersion: apps/v1beta1
+  kind: Deployment
+  metadata:
+    name: wasliberty
+  </codeblock></dd>
+
+<dt>Replica set</dt>
+  <dd><p>Your [deployment ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) can manage a replica set, which specifies how many pods of the app to deploy.</p>
+  <codeblock class="codeblock">
+  spec:
+    replicas: 3
+  </codeblock></dd>
+
+<dt>Labels</dt>
+  <dd><p>With labels, you can mark different types of resources in your cluster with the same `key:value` pair. Then, you can specify the selector to match the label so that you can build upon these other resources. In the example, the deployment spec selects the template that matches the lable `app: wasliberty.`</p>
+  <p>For more information about labels, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</p>
+  <codeblock class="codeblock">
+  selector:
+    matchLabels:
+      app: wasliberty
+  template:
+    metadata:
+      labels:
+        app: wasliberty
+  </codeblock></dd>
+
+<dt>Affinity</dt>
+  <dd><p>Specify affinity (co-location) when you want more control over which worker nodes the pods are scheduled on. For example, to spread the deployment across worker nodes instead of allowing pods to schedule on the same node, use the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required.</p> 
+  <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
+  <p><strong>Note</strong>: With required anti-affinity, you can only deploy the amount of replicas that you have worker nodes for. For example, if you have 3 worker nodes in your cluster but you define 5 replicas in your YAML file, then only 3 replicas deploy. Each replica lives on a different worker node. The leftover 2 replicas remain pending. If you add another worker node to your cluster, then one of the leftover replicas deploys to the new worker node automatically.<p>
+  <p>The example uses required pod affinity. For an example with preferred, see <a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Nginx app with preferred pod anti-affinity.</a></p>
+  <codeblock class="codeblock">
+  spec:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - wasliberty
+          topologyKey: kubernetes.io/hostname
+  </codeblock></dd>
+
+<dt>Container image</dt>
+  <dd>
+  <p>If you do not specify an image tag, by default it pulls the latest image.</p>
+  <p>**Attention**: Avoid using the latest tag for prod workloads. You might not have tested your workload with the latest image if you are using a public or shared repository, such as Docker Hub or {{site.data.keyword.registryshort_notm}}. To list the tags of public IBM images, switch to the global registry region by running `{{bxcr}} region-set global`, and then run `ibmcloud cr images --include-ibm`.</p>
+  <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not already exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
+  <codeblock class="codeblock">
+  containers:
+  - name: wasliberty
+    image: registry.bluemix.net/ibmliberty:webProfile8
+    imagePullPolicy: Always
+  </codeblock></dd>
+
+<dt>Port for the app's service</dt>
+  <dd><p>Select a port to open the app's services on. You use this same port number when you create a services object.</p>
+  <codeblock class="codeblock">
+  ports:
+  - containerPort: 9080
+  </codeblock></dd>
+
+<dt>Resource requests and limits</dt>
+  <dd><p>As a cluster admin, you can make sure that teams that share a cluster don't take up more than their fair share of compute resources (memory and CPU) by creating a [ResourceQuota object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for each team's Kubernetes namespace in the cluster. If the cluster admin sets a compute resource quota, then each container within the deployment template must specify resource requests and limits for memory and CPU, otherwise the pod creation fails.</p>
+  <p>**Request**: The minimum amount that the scheduler reserves for the container to use. If it is equal to the limit, the request is guaranteed. If it is less than the limit, the request is still guaranteed, but the the scheduler can use the difference between the request and the limit to fulfill the resources of other containers.</p>
+  <p>**Limit**: The maximum amount that the container can consume. If a container exceeds the limit, it might be terminated. If no limit is specified, the default is the worker node's capacity.</p>
+  <p>**Troubleshooting**: To see if a container is being killed because of a resource limit:
+  <ol><li>Describe the pod and look for the **Restart Count**.<pre class="pre"><code>kubectl describe pod</code></pre></li>
+  <li>If it has restarted many times in a short period of time, fetch its status. <pre class="pre"><code>kubectl get pod -o go-template={{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}</code></pre></li>
+  <li>Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.</li></ol> 
+  <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
+  <codeblock class="codeblock">
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  </codeblock></dd>
+
+<dt>Liveness and readiness probes</dt>
+  <dd><p>**Liveness probe**: The probe checks whether the container is running. If the probe fails, the container is restarted. If the container does not provide a liveness probe, the probe succeeds.</p>
+  <p>**Readiness probe**: The probe checks whether the container is ready to service requests and external traffic. If the probe fails, the pod's IP address is removed as a usable IP address for services that match the pod. Before the initial delay, the probe defaults to failure, giving your container time to come up. If the container does not provide a readiness probe, the probe succeeds.
+  <p>You can set up the probes as commands, HTTP requests, or TCP sockets. The example uses commands. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
+  <codeblock class="codeblock">
+  livenessProbe:
+    exec:
+      command:
+      - cat
+      - /tmp/healthy
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  readinessProbe:
+    exec:
+      command:
+      - cat
+      - /tmp/healthy
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  </codeblock></dd>
+
+<dt>Pod Disruption Budget</dt>
+  <dd><p>To increase your app's availability, you can control how your app reacts to disruptions based on the type of availability that you want with a `PodDisruptionBudget` object.</p>
+  <p>`minAvailable`: You can specify the number or percentage of pods that must still be available after a disruption occurs.</p>
+  <p>`maxUnavailable`: You can specify the number or percentage of pods that can be unavailable after a disruption occurs. The example uses `maxUnavailable: 1`.</p>
+  <p>`selector`: Fill in the label to select the set of pods that the PodDisruptionBudget applies to. Note that if you used this same label in other pod deployments, the pod applies to those as well.</p>
+  <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
+  <codeblock class="codeblock">
+  apiVersion: policy/v1beta1
+  kind: PodDisruptionBudget
+  metadata:
+    name: wasliberty
+  spec:
+    maxUnavailable: 1
+    selector:
+      matchLabels:
+        app: wasliberty
+  </codeblock></dd>
+
+<dt>Exposing the app service</dt>
+  <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment.</p>
+  <p>For more information, see [Choosing a NodePort, LoadBalancer, or Ingress service](cs_network_planning.html#external).</p>
+  <codeblock class="codeblock">
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: wasliberty
+    labels:
+      app: wasliberty
+  spec:
+    ports:
+    - port: 9080
+    selector:
+      app: wasliberty
+    type: NodePort
+  </codeblock></dd>
+
+</dl>
+
+<br />
+
+
+</staging appyaml>
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
