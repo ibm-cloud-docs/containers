@@ -1279,10 +1279,16 @@ To edit the configmap to enable SSL protocols and ciphers:
 <br />
 
 
-## Performance tuning: Increasing the connection keepalive time
+## Tuning performance
+{: #perf_tuning}
+
+To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
+{: shortdesc}
+
+### Increasing the keepalive connection time
 {: #keepalive_time}
 
-Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize performance of your ALBs, you can change the default settings of the keepalive time for the connections between the ALB and the client.
+Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize performance of your ALBs, you can change the default setting of the keepalive time for the connections between the ALB and the client.
 {: shortdesc}
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap.
