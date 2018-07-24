@@ -379,6 +379,10 @@ spec:
     type: NodePort
   </codeblock></p></dd>
 
+<dt>Ready to deploy an app?</dt>
+<dd><ul><li>[Deploy an app from the Kubernetes dashboard](cs_app.html#app_ui).</li>
+<li>[Deploy an app from the CLI](cs_app.html#app_cli).</li></ul></dd>
+
 </dl>
 
 <br />
