@@ -226,7 +226,6 @@ spec:
   selector:
     app: wasliberty
   type: NodePort
-
 ```
 {: codeblock}
 
