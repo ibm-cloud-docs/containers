@@ -285,7 +285,9 @@ spec:
 <dt>Container image</dt>
   <dd>
   <p>If you do not specify an image tag, by default it pulls the latest image.</p>
-  <p>**Attention**: Avoid using the latest tag for production workloads. You might not have tested your workload with the latest image if you are using a public or shared repository, such as Docker Hub or {{site.data.keyword.registryshort_notm}}. To list the tags of public IBM images, switch to the global registry region by running `{{bxcr}} region-set global`, and then run `ibmcloud cr images --include-ibm`.</p>
+  <p>**Attention**: Avoid using the latest tag for production workloads. You might not have tested your workload with the latest image if you are using a public or shared repository, such as Docker Hub or {{site.data.keyword.registryshort_notm}}. To list the tags of public IBM images:.</p>
+  <ol><li>Switch to the global registry region.<pre class="pre"><code>{{bxcr}} region-set global</code></pre></li>
+  <li>List the IBM images.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not already exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
   <p><codeblock class="codeblock">
   containers:
@@ -343,9 +345,9 @@ spec:
 
 <dt>Pod Disruption Budget</dt>
   <dd><p>To increase your app's availability, you can control how your app reacts to disruptions based on the type of availability that you want with a `PodDisruptionBudget` object.</p>
-  <p>`minAvailable`: You can specify the number or percentage of pods that must still be available after a disruption occurs.</p>
-  <p>`maxUnavailable`: You can specify the number or percentage of pods that can be unavailable after a disruption occurs. The example uses `maxUnavailable: 1`.</p>
-  <p>`selector`: Fill in the label to select the set of pods that the PodDisruptionBudget applies to. Note that if you used this same label in other pod deployments, the pod applies to those as well.</p>
+  <ul><li>`minAvailable`: You can specify the number or percentage of pods that must still be available after a disruption occurs.</li>
+  <li>`maxUnavailable`: You can specify the number or percentage of pods that can be unavailable after a disruption occurs. The example uses `maxUnavailable: 1`.</li>
+  <li>`selector`: Fill in the label to select the set of pods that the PodDisruptionBudget applies to. Note that if you used this same label in other pod deployments, the pod applies to those as well.</li></ul>
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
   <p><codeblock class="codeblock">
   apiVersion: policy/v1beta1
