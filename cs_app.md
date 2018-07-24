@@ -75,7 +75,7 @@ You can also [connect multiple clusters in different regions with a global load 
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
     <staging appyaml><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required. 
       <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
-      <p>For an example of affinity in an app deployment, see [Planning your app deployment YAML](#app_yaml).</p>
+      <p>For an example of affinity in an app deployment, see [Making your app deployment YAML file](#app_yaml).</p>
       </dd></staging appyaml>
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
@@ -146,7 +146,7 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 <staging appyaml>
 
 
-## Planning your app deployment YAML
+## Making your app deployment YAML file
 {: #app_yaml}
 
 In Kubernetes, you describe your app in a YAML file that declares the desired configuration of the API object. The Kubernetes API server then processes the YAML file, stores it in etcd, and the Kubernetes scheduler uses the Kubernetes API to fulfill your app's workload as described in the YAML file by scheduling pods onto worker nodes within the cluster.
