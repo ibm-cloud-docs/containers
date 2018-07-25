@@ -24,7 +24,7 @@ To improve the findability of storage information, the storage topics that you a
 *  [Using existing block storage in your cluster](cs_storage_block.html#existing_block)
 *  Adding NFS file storage or block storage to apps
     * [File storage](cs_storage_file.html#add_file)
-    * [Block storage](cs_storage_block.html#create_block)
+    * [Block storage](cs_storage_block.html#add_block)
 *  [Customizing a storage class for XFS block storage](cs_storage_block.html#custom_storageclass)
 *  [Changing the default NFS file storage version](cs_storage_file.html#nfs_version)
 *  [Setting up NFS and block persistent storage in multizone clusters](cs_storage_basics.html#multizone)
