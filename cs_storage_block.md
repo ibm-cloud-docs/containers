@@ -354,7 +354,7 @@ Every storage class specifies the type of block storage that you provision, incl
 
 
 ## Adding block storage to apps
-{: #create_block}
+{: #add_block}
 
 Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account. 
 {:shortdesc}
