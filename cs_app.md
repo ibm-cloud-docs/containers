@@ -230,29 +230,27 @@ template:
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
   <p><pre class="codeblock"><code>resources:
   requests:
-    memory: "128Mi"
-    cpu: "250m"
-  limits:
     memory: "512Mi"
-    cpu: "500m"</pre></code></p></dd>
+    cpu: "500m"
+  limits:
+    memory: "1024Mi"
+    cpu: "1000m"</pre></code></p></dd>
 
 <dt>Liveness and readiness probes</dt>
   <dd><p>**Liveness probe**: The probe checks whether the container is running. If the probe fails, the container is restarted. If the container does not provide a liveness probe, the probe succeeds.</p>
   <p>**Readiness probe**: The probe checks whether the container is ready to service requests and external traffic. If the probe fails, the pod's IP address is removed as a usable IP address for services that match the pod. Before the initial delay, the probe defaults to failure, giving your container time to come up. If the container does not provide a readiness probe, the probe succeeds.
   <p>You can set up the probes as commands, HTTP requests, or TCP sockets. The example uses commands. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
   <p><pre class="codeblock"><code>livenessProbe:
-  exec:
-    command:
-    - cat
-    - /tmp/healthy
-  initialDelaySeconds: 5
+  httpGet:
+    path: /
+    port: 9080
+  initialDelaySeconds: 20
   periodSeconds: 5
 readinessProbe:
-  exec:
-    command:
-    - cat
-    - /tmp/healthy
-  initialDelaySeconds: 5
+  httpGet:
+    path: /
+    port: 9080
+  initialDelaySeconds: 20
   periodSeconds: 5</pre></code></p></dd>
 
 <dt>Exposing the app service</dt>
