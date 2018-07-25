@@ -72,8 +72,8 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Persistent storage</td>
- <td>Use [dynamic provisioning](cs_storage.html#create) or [static provisioning](cs_storage.html#existing) of volumes.</td>
- <td>Use [dynamic provisioning](cs_storage.html#create) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) or [static provisioning](cs_storage_basics.html#static_provisioning) of volumes.</td>
+ <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -558,4 +558,4 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, or a deletion of volumes, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see [Persistent data storage](cs_storage_planning.html#persistent). To request a backup for your volumes, a restoration from your volumes, or a deletion of volumes, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
