@@ -43,7 +43,7 @@ For multizone clusters, PVs must have the following labels so that pods do not t
 New clusters with worker pools that can span multiple zones label the PVs by default. If you created your clusters before worker pools were introduced, you must add the labels manually.
 
 {: tsResolve}
-[Update the PVs in your cluster with the region and zone labels](cs_storage.html#pv_multizone).
+[Update the PVs in your cluster with the region and zone labels](cs_storage_basics.html#multizone).
 
 <br />
 
@@ -75,7 +75,7 @@ For a long-term fix, [update the machine type of your worker pool](cs_cluster_up
 {: #nonroot}
 
 {: tsSymptoms}
-After you [add NFS storage](cs_storage.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
+After you [add NFS storage](cs_storage_file.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
 
 {: tsCauses}
 By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile. When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an init container.
@@ -299,7 +299,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-You have an existing block storage device that is set up with an `XFS` file system. To mount this device to your pod, you [created a PV](cs_storage.html#existing_block) that specified `ext4` as your file system or no file system in the `spec/flexVolume/fsType` section. If no file system is defined, the PV defaults to `ext4`.
+You have an existing block storage device that is set up with an `XFS` file system. To mount this device to your pod, you [created a PV](cs_storage_block.html#existing_block) that specified `ext4` as your file system or no file system in the `spec/flexVolume/fsType` section. If no file system is defined, the PV defaults to `ext4`.
 The PV was created successfully and was linked to your existing block storage instance. However, when you try to mount the PV to your cluster by using a matching PVC, the volume fails to mount. You cannot mount your `XFS` block storage instance with an `ext4` file system to the pod.
 
 {: tsResolve}
