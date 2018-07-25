@@ -151,7 +151,7 @@ If you cannot use one of the provided storage classes, you can create your own c
 
 4. Create a persistent volume claim (PVC) to dynamically provision storage with your customized storage class.
    - [File storage](cs_storage_file.html#add_file)
-   - [Block storage](cs_storage_block.html#create_block)
+   - [Block storage](cs_storage_block.html#add_block)
    
 5. Verify that your PVC is created and bound to a persistent volume (PV). This process might take a few minutes to complete. 
    ```
@@ -172,7 +172,7 @@ If you want to change the size, IOPS, type, or retention policy for a storage de
    
 2. Create a PVC to provision your persistent storage. 
    - [File storage](cs_storage_file.html#add_file)
-   - [Block storage](cs_storage_block.html#create_block)
+   - [Block storage](cs_storage_block.html#add_block)
    
 3. Copy the data from your existing storage device to your new one. Every type of storage comes with different options to backup and restore data. 
    - [File storage](cs_storage_file.html#backup_restore)
