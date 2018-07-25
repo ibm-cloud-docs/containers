@@ -970,7 +970,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performance ![External link icon](../icons/launch-glyph.svg "External link icon")]()</td>
+<td>[Performance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
 </tr>
 <tr>
 <td>File system</td>
