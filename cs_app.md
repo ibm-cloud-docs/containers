@@ -154,81 +154,9 @@ In Kubernetes, you describe your app in a YAML file that declares the desired co
 
 When you prepare your app YAML file, you have many options to increase the app's availability, performance, and security. For example, instead of a single pod, you can use a Kubernetes controller object to manage your workload, such as a deployment, job, or daemon set. For more information about pods and controllers, view the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). A deployment that manages a replica set of pods is a common use case for an app.
 
-Review the example deployment YAML and the following explanation to understand how you can enhance your app deployment with replica sets, labels, affinity, image policies, ports, resource requests and limits, liveness and readiness probes, and pod disruption budgets.
+Review the following explanation to understand how you can enhance your app deployment with replica sets, labels, affinity, image policies, ports, resource requests and limits, liveness and readiness probes, and pod disruption budgets.
 
-```yaml
-apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - wasliberty
-            topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        readinessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
-          initialDelaySeconds: 5
-          periodSeconds: 5
----
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: wasliberty
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: wasliberty
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort
-```
-{: codeblock}
+You can also review a copy of the [complete YAML file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
 
 <dl>
 <dt>Basic deployment metadata</dt>
@@ -326,22 +254,6 @@ readinessProbe:
     - /tmp/healthy
   initialDelaySeconds: 5
   periodSeconds: 5</pre></code></p></dd>
-
-<dt>Pod Disruption Budget</dt>
-  <dd><p>To increase your app's availability, you can control how your app reacts to disruptions based on the type of availability that you want with a `PodDisruptionBudget` object.</p>
-  <ul><li>`minAvailable`: You can specify the number or percentage of pods that must still be available after a disruption occurs.</li>
-  <li>`maxUnavailable`: You can specify the number or percentage of pods that can be unavailable after a disruption occurs. The example uses `maxUnavailable: 1`.</li>
-  <li>`selector`: Fill in the label to select the set of pods that the PodDisruptionBudget applies to. Note that if you used this same label in other pod deployments, the pod applies to those as well.</li></ul>
-  <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
-  <p><pre class="codeblock"><code>apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: wasliberty
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: wasliberty</pre></code></p></dd>
 
 <dt>Exposing the app service</dt>
   <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment.</p>
