@@ -27,10 +27,10 @@ To improve the findability of storage information, the storage topics that you a
     * [Block storage](cs_storage_block.html#create_block)
 *  [Customizing a storage class for XFS block storage](cs_storage_block.html#custom_storageclass)
 *  [Changing the default NFS file storage version](cs_storage_file.html#nfs_version)
-*  [Setting up NFS and block persistent storage in multizone clusters](cs_storage_basics.html#preparing-existing-storage-for-multizone-usage-with-kubernetes-labels)
+*  [Setting up NFS and block persistent storage in multizone clusters](cs_storage_basics.html#multizone)
 *  Installing the IBM Cloud infrastructure (SoftLayer) CLI: Now, you can use `ibmcloud sl` commands instead of installing the `slcli`.
 *  [Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster](cs_storage_block.html#install_block)
 *  Setting up backup and restore solutions for NFS file shares and block storage
     * [File storage](cs_storage_file.html#backup_restore)
-    * [Block storage](cs_storage_block.html#backing_restore)
+    * [Block storage](cs_storage_block.html#backup_restore)
 *  [Cleaning up persistent NFS file and block storage](cs_storage_remove.html#cleanup)
