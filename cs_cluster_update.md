@@ -85,7 +85,7 @@ Before you begin:
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
 - If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent).
 
 
 **What happens to my apps during an update?**</br>
@@ -258,10 +258,10 @@ You can update the machine types of your worker nodes by adding new worker nodes
 
 Before you begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent).
 
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent).
 
 1. List available worker nodes and note their private IP address.
    - **For worker nodes in a worker pool**:
@@ -374,7 +374,7 @@ Your {{site.data.keyword.containershort_notm}} cluster comes with **add-ons**, s
 * [Fluentd for logging](#logging)
 
 **Can I install other add-ons than the default?**</br>
-Yes. {{site.data.keyword.containershort_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
+Yes. {{site.data.keyword.containershort_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
 ### Fluentd for logging
 {: #logging}
