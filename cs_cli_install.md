@@ -133,7 +133,7 @@ Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.
 
 For reference information about these CLIs, see the documentation for those tools.
 
--   [`ibmcloud` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
+-   [`ibmcloud` commands](../cli/reference/bluemix_cli/bx_cli.html#bluemix_cli)
 -   [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` commands](/docs/cli/plugins/registry/index.html)
