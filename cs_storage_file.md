@@ -30,7 +30,7 @@ lastupdated: "2018-07-25"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#change_storageclass) from the old storage instance to your new one. 
+**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one. 
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -284,7 +284,7 @@ To add file storage:
 
 4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
-    If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#root).
+    If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#nonroot).
     {: tip}
 
     ```
@@ -442,7 +442,7 @@ To use existing storage in a different cluster than the one where you provisione
      
 **For persistent storage that was provisioned outside the cluster:** </br> 
 If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes. 
-{: #external_storage}1.  From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/), click **Storage**. 
+1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/), click **Storage**. 
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
 3.  Select **Subnets**.
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
@@ -485,7 +485,7 @@ If you want to use existing storage that you provisioned earlier, but never used
     </tr>
     <tr>
     <td><code>metadata/labels</code></td>
-    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](#pv_multizone) to your PV.
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](cs_storage_basics.html#multizone) to your PV.
     </tr>
     <tr>
     <td><code>spec/capacity/storage</code></td>
@@ -885,3 +885,5 @@ parameters:
 reclaimPolicy: "Delete"
 ```
 {: codeblock}
+
+
