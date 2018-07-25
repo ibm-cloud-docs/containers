@@ -886,4 +886,27 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
++### Changing the default NFS version
+{: #nfs_version_class}
+
+The following customized storage class is based on the [`ibmc-file-bronze` storage class](#bronze) and lets you define the NFS version that you want to provision. For example, to provision NFS version 3.0, replace `<nfs_version>` with **3.0**.
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-file-mount
+  #annotations:
+  #  storageclass.beta.kubernetes.io/is-default-class: "true"
+  labels:
+    kubernetes.io/cluster-service: "true"
+provisioner: ibm.io/ibmc-file
+parameters:
+  type: "Endurance"
+  iopsPerGB: "2"
+  sizeRange: "[1-12000]Gi"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
+  mountOptions: nfsvers=<nfs_version>
+```
+{: codeblock}
 
