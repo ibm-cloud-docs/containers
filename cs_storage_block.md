@@ -125,7 +125,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 6. Repeat these steps for every cluster where you want to provision block storage.
 
-You can now continue to [create a PVC](#create_block) to provision block storage for your app.
+You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 
 
 ### Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
