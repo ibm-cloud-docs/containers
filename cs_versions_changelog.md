@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-20"
+lastupdated: "2018-07-25"
 
 ---
 
@@ -39,6 +39,59 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+
+### Changelog for 1.10.5_1517, released 24 July 2018
+{: #1105_1517}
+
+<table summary="Changes that were made since version 1.10.3_1514">
+<caption>Changes since version 1.10.3_1514</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.1.1</td>
+<td>v3.1.3</td>
+<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/releases/#v313).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.3-85</td>
+<td>v1.10.5-118</td>
+<td>Updated to support Kubernetes 1.10.5 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>320</td>
+<td>334</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.3</td>
+<td>v1.10.5</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.5).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Minor improvements to worker node network settings for high performance networking workloads.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn` deployment that runs in the `kube-system` namespace is now managed by the Kubernetes `addon-manager`.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018
 {: #1103_1514}
@@ -252,6 +305,53 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for 1.9.9_1520, released 24 July 2018
+{: #199_1520}
+
+<table summary="Changes that were made since version 1.9.8_1517">
+<caption>Changes since version 1.9.8_1517</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.8-141</td>
+<td>v1.9.9-167</td>
+<td>Updated to support Kubernetes 1.9.9 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>320</td>
+<td>334</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.8</td>
+<td>v1.9.9</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.9).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Minor improvements to worker node network settings for high performance networking workloads.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn` deployment that runs in the `kube-system` namespace is now managed by the Kubernetes `addon-manager`.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018
 {: #198_1517}
@@ -329,7 +429,7 @@ Review the following changes.
 <tr>
 <td>IBM Cloud Provider</td>
 <td>v1.9.7-102</td>
-<td>v1.9.8-135</td>
+<td>v1.9.8-141</td>
 <td>Updated to support Kubernetes 1.9.8 release.</td>
 </tr>
 <tr>
@@ -457,6 +557,52 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for 1.8.15_1518, released 24 July 2018
+{: #1815_1518}
+
+<table summary="Changes that were made since version 1.8.13_1516">
+<caption>Changes since version 1.8.13_1516</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.8.13-176</td>
+<td>v1.8.15-204</td>
+<td>Updated to support Kubernetes 1.8.15 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>320</td>
+<td>334</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.8.13</td>
+<td>v1.8.15</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.15).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Minor improvements to worker node network settings for high performance networking workloads.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The OpenVPN client `vpn` deployment that runs in the `kube-system` namespace is now managed by the Kubernetes `addon-manager`.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018
 {: #1813_1516}
@@ -534,7 +680,7 @@ Review the following changes.
 <tr>
 <td>IBM Cloud Provider</td>
 <td>v1.8.11-126</td>
-<td>v1.8.13-170</td>
+<td>v1.8.13-176</td>
 <td>Updated to support Kubernetes 1.8.13 release.</td>
 </tr>
 <tr>
