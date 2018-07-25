@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-24"
+lastupdated: "2018-07-25"
 
 ---
 
@@ -234,24 +234,21 @@ spec:
 <dt>Basic deployment metadata</dt>
   <dd><p>Use the appropriate API version for the kind of Kubernetes object that you deploy. The name that you give in the metadata is the object's name, not its label. You use the name when interacting with your object, such as `kubectl get deployment <name>`.</p>
   <p>For more information about types of objects, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/).</p>
-  <p><pre class="codeblock"><code>
-apiVersion: apps/v1beta1
+  <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: wasliberty</code></pre></p></dd>
 
 <dt>Replica set</dt>
   <dd><p>Your [deployment ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) can manage a replica set, which specifies how many pods of the app to deploy.</p>
-  <p><pre class="codeblock"><code>
-spec:
+  <p><pre class="codeblock"><code>spec:
   replicas: 3</pre></code></p></dd>
 
 <dt>Labels</dt>
   <dd><p>With labels, you can mark different types of resources in your cluster with the same `key:value` pair. Then, you can specify the selector to match the label so that you can build upon these other resources. In the example, the deployment spec selects the template that matches the lable `app: wasliberty.`</p>
   <ul><li>For more information about labels, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
   <li>For a more detailed example, see [Deploying apps to specific worker nodes by using labels](cs_app.html#node_affinity).</li></ul>
-  <p><pre class="codeblock"><code>
-selector:
+  <p><pre class="codeblock"><code>selector:
   matchLabels:
     app: wasliberty
 template:
@@ -265,8 +262,7 @@ template:
   <p><strong>Note</strong>: With required anti-affinity, you can only deploy the amount of replicas that you have worker nodes for. For example, if you have 3 worker nodes in your cluster but you define 5 replicas in your YAML file, then only 3 replicas deploy. Each replica lives on a different worker node. The leftover 2 replicas remain pending. If you add another worker node to your cluster, then one of the leftover replicas deploys to the new worker node automatically.<p>
   <ul><li>The example uses required pod affinity. For an example YAML with preferred, see <a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Nginx app with preferred pod anti-affinity.</a></li>
   <li>For an example of setting worker node affinity, see [Deploying apps to specific worker nodes by using labels](cs_app.html#node_affinity).</li></ul>
-  <p><pre class="codeblock"><code>
-spec:
+  <p><pre class="codeblock"><code>spec:
   affinity:
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -285,16 +281,14 @@ spec:
   <ol><li>Switch to the global registry region.<pre class="pre"><code>{{bxcr}} region-set global</code></pre></li>
   <li>List the IBM images.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not already exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
-  <p><pre class="codeblock"><code>
-containers:
+  <p><pre class="codeblock"><code>containers:
 - name: wasliberty
   image: registry.bluemix.net/ibmliberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt>Port for the app's service</dt>
   <dd><p>Select a port to open the app's services on. You use this same port number when you create a services object.</p>
-  <p><pre class="codeblock"><code>
-ports:
+  <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
 <dt>Resource requests and limits</dt>
@@ -306,8 +300,7 @@ ports:
   <li>If it has restarted many times in a short period of time, fetch its status. <pre class="pre"><code>kubectl get pod -o go-template={{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}</code></pre></li>
   <li>Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.</li></ol> 
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
-  <p><pre class="codeblock"><code>
-resources:
+  <p><pre class="codeblock"><code>resources:
   requests:
     memory: "128Mi"
     cpu: "250m"
@@ -319,8 +312,7 @@ resources:
   <dd><p>**Liveness probe**: The probe checks whether the container is running. If the probe fails, the container is restarted. If the container does not provide a liveness probe, the probe succeeds.</p>
   <p>**Readiness probe**: The probe checks whether the container is ready to service requests and external traffic. If the probe fails, the pod's IP address is removed as a usable IP address for services that match the pod. Before the initial delay, the probe defaults to failure, giving your container time to come up. If the container does not provide a readiness probe, the probe succeeds.
   <p>You can set up the probes as commands, HTTP requests, or TCP sockets. The example uses commands. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
-  <p><pre class="codeblock"><code>
-livenessProbe:
+  <p><pre class="codeblock"><code>livenessProbe:
   exec:
     command:
     - cat
@@ -341,8 +333,7 @@ readinessProbe:
   <li>`maxUnavailable`: You can specify the number or percentage of pods that can be unavailable after a disruption occurs. The example uses `maxUnavailable: 1`.</li>
   <li>`selector`: Fill in the label to select the set of pods that the PodDisruptionBudget applies to. Note that if you used this same label in other pod deployments, the pod applies to those as well.</li></ul>
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
-  <p><pre class="codeblock"><code>
-apiVersion: policy/v1beta1
+  <p><pre class="codeblock"><code>apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: wasliberty
@@ -355,8 +346,7 @@ spec:
 <dt>Exposing the app service</dt>
   <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment.</p>
   <p>For more information, see [Choosing a NodePort, LoadBalancer, or Ingress service](cs_network_planning.html#external).</p>
-  <p><pre class="codeblock"><code>
-apiVersion: v1
+  <p><pre class="codeblock"><code>apiVersion: v1
 kind: Service
 metadata:
   name: wasliberty
