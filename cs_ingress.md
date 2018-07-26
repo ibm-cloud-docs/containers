@@ -833,7 +833,7 @@ Expose apps to a private network by using the private Ingress ALB.
 Before you begin:
 * Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
     * Public and private VLAN: To use the external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-    * Private VLAN only: You must configure a [private, on-premises DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)].
+    * Private VLAN only: You must configure a [private, on-premises DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Enable the private application load balancer](#private_ingress).
 
