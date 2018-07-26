@@ -65,6 +65,7 @@ IBM Cloud Kubernetes Service
         cs_storage_file.md
         cs_storage_block.md
         cs_storage_remove.md
+
     cs_integrations.md
     {: .navgroup-end}
 
