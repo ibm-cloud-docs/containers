@@ -85,9 +85,9 @@ Before you get started with Ingress, review the following prerequisites.
 - Setting up Ingress requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
 **Prerequisites for using Ingress in multizone clusters**:
- - If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, ALBs will not deploy uniformly. ALBs will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
- - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
+ - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
  - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+ - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
 <br />
 
@@ -145,7 +145,6 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
 * [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Deploy apps and create app services
@@ -422,9 +421,8 @@ Expose apps that are outside your cluster to the public by including them in pub
 Before you begin:
 
 -   Review the Ingress [prerequisites](#config_prereqs).
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 -   Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
+-   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Create an app service and external endpoint
 {: #public_outside_1}
@@ -738,7 +736,6 @@ When you create a standard cluster, an IBM-provided private application load bal
 Before you begin:
 
 -   Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
 -   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
@@ -831,10 +828,10 @@ Expose apps to a private network by using the private Ingress ALB.
 {:shortdesc}
 
 Before you begin:
+* Review the Ingress [prerequisites](#config_prereqs).
 * Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
     * Public and private VLAN: To use the external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
     * Private VLAN only: You must configure a [private, on-premises DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
-* Review the Ingress [prerequisites](#config_prereqs).
 * [Enable the private application load balancer](#private_ingress).
 
 ### Step 1: Deploy apps and create app services
