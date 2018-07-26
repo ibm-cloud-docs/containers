@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-25"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -150,7 +150,7 @@ Every storage class specifies the type of file storage that you provision, inclu
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file). 
    - If you want the PV, the data, and your physical file storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
    
-6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type. 
+6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with a monthly billing type. 
    **Note:** If you choose a monthly billing type, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.
 
 <br />
@@ -232,7 +232,7 @@ To add file storage:
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
-          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
+          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with a monthly billing type. </td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -729,7 +729,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Hourly</td>
+<td>Monthly</td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -771,7 +771,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Hourly</li></ul></td>
+<td>Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -812,7 +812,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Hourly</li></ul></td>
+<td>Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -849,7 +849,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Hourly</li></ul></td>
+<td>Monthly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
