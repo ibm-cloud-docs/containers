@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-25"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -96,7 +96,7 @@ Supported {{site.data.keyword.containershort_notm}} regions:
   * US East
   * US South
 
-You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/`.
+You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.
 * To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud ks region`.
 * To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
