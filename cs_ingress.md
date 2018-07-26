@@ -230,7 +230,7 @@ To use the IBM-provided Ingress domain:
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.9
+    Version:                1.9.8
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
@@ -544,7 +544,7 @@ To use the IBM-provided Ingress domain:
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.9
+    Version:                1.9.8
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
