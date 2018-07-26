@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -38,6 +38,7 @@ For information about changes since the previous version, see the following chan
 {: #110_changelog}
 
 Review the following changes.
+
 
 
 ### Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018
@@ -253,6 +254,7 @@ Review the following changes.
 Review the following changes.
 
 
+
 ### Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018
 {: #198_1517}
 
@@ -329,7 +331,7 @@ Review the following changes.
 <tr>
 <td>IBM Cloud Provider</td>
 <td>v1.9.7-102</td>
-<td>v1.9.8-135</td>
+<td>v1.9.8-141</td>
 <td>Updated to support Kubernetes 1.9.8 release.</td>
 </tr>
 <tr>
@@ -458,6 +460,7 @@ Review the following changes.
 Review the following changes.
 
 
+
 ### Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018
 {: #1813_1516}
 
@@ -534,7 +537,7 @@ Review the following changes.
 <tr>
 <td>IBM Cloud Provider</td>
 <td>v1.8.11-126</td>
-<td>v1.8.13-170</td>
+<td>v1.8.13-176</td>
 <td>Updated to support Kubernetes 1.8.13 release.</td>
 </tr>
 <tr>

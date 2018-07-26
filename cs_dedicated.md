@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -14,7 +14,6 @@ lastupdated: "2018-07-19"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
-
 
 
 # Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
@@ -73,8 +72,8 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Persistent storage</td>
- <td>Use [dynamic provisioning](cs_storage.html#create) or [static provisioning](cs_storage.html#existing) of volumes.</td>
- <td>Use [dynamic provisioning](cs_storage.html#create) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) or [static provisioning](cs_storage_basics.html#static_provisioning) of volumes.</td>
+ <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -508,7 +507,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     ```
     {: screen}
 
-4. Optional: [Enable routing between subnets on the same VLAN](cs_subnets.html#vlan-spanning).
+4. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 5. To configure on-premises and internal account connectivity, choose between these options:
   - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, LoadBalancer, or Ingress services](cs_network_planning.html#planning).
@@ -559,4 +558,4 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, or a deletion of volumes, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see [Persistent data storage](cs_storage_planning.html#persistent). To request a backup for your volumes, a restoration from your volumes, or a deletion of volumes, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).

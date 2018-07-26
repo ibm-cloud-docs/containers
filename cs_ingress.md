@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -14,8 +14,6 @@ lastupdated: "2018-07-19"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
-
-
 
 
 # Exposing apps with Ingress
@@ -39,7 +37,8 @@ Ingress consists of three components:
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.<br></br>**Multizone clusters**: When you add a zone to your cluster, a portable public subnet is added, and a new public ALB is automatically created and enabled on the subnet in that zone. All default public ALBs in your cluster share one public route, but have a different IP addresses. A default private ALB is also automatically created in each zone, but is not automatically enabled.</dd>
 <dt>Multizone load balancer (MZLB)</dt>
 <dd><p>**Multizone clusters**: Whenever you change a cluster from single- to multizone by [adding a zone to the cluster](cs_clusters.html#add_zone) for the first time, a multizone load balancer (MZLB) is automatically created and deployed to each zone where you have workers. The MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress Subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, the MZLB health check fails, the DNS lookup returns the available `1.1.1.1` and `2.2.2.2` ALB IPs, and the client accesses one of the available ALB IPs.</p>
-<p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you are using only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME to map the customer domain to the IBM-provide Ingress subdomain for your cluster.</p></dd>
+<p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you are using only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
+<p><strong>Note</strong>: If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="cs_tutorials_policies.html#lesson3">Calico network policy tutorial</a>.</dd>
 </dl>
 
 **How does a request get to my app with Ingress in a single zone cluster?**</br>
@@ -86,9 +85,9 @@ Before you get started with Ingress, review the following prerequisites.
 - Setting up Ingress requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
 **Prerequisites for using Ingress in multizone clusters**:
- - If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, ALBs will not deploy uniformly. ALBs will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
+ - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
+ - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
  - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
- - If your cluster uses multiple VLANs, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so that worker nodes can communicate with each other on the private network.
 
 <br />
 
@@ -146,7 +145,6 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
 * [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Deploy apps and create app services
@@ -423,9 +421,8 @@ Expose apps that are outside your cluster to the public by including them in pub
 Before you begin:
 
 -   Review the Ingress [prerequisites](#config_prereqs).
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 -   Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
+-   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Create an app service and external endpoint
 {: #public_outside_1}
@@ -739,7 +736,6 @@ When you create a standard cluster, an IBM-provided private application load bal
 Before you begin:
 
 -   Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
 -   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
@@ -832,11 +828,11 @@ Expose apps to a private network by using the private Ingress ALB.
 {:shortdesc}
 
 Before you begin:
-* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
 * Review the Ingress [prerequisites](#config_prereqs).
+* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
+    * Public and private VLAN: To use the external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+    * Private VLAN only: You must configure a [private, on-premises DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 * [Enable the private application load balancer](#private_ingress).
-* If you have private worker nodes and want to use an external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-* If you have private worker nodes and want to remain on a private network only, you must [configure a private, on-premises DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to resolve URL requests to your apps.
 
 ### Step 1: Deploy apps and create app services
 {: #private_1}
@@ -1076,26 +1072,11 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 <br />
 
 
-
-## Optional application load balancer configurations
-{: #configure_alb}
-
-You can further configure an application load balancer with the following options.
-
-- [Customizing your Ingress resource with annotations](#annotations)
-- [Opening ports in the Ingress ALB](#opening_ingress_ports)
-- [Preserving the source IP address](#preserve_source_ip)
-- [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
-- [Customizing the Ingress log format](#ingress_log_format)
-- [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
-- [Changing the keepalive time for connection between the client and the ALB](#keepalive_time)
-{: #ingress_annotation}
-
-### Customizing your Ingress resource with annotations
+## Customizing an Ingress resource with annotations
 {: #annotations}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
-{: short desc}
+{: shortdesc}
 
 Get started with some of the most commonly used annotations.
 * [redirect-to-https](cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
@@ -1103,9 +1084,12 @@ Get started with some of the most commonly used annotations.
 * [ssl-services](cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
 * [client-max-body-size](cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
-For the full list of supported annotations, see [Ingress annotations](cs_annotations.html).
+For the full list of supported annotations, see [Customizing Ingress with annotations](cs_annotations.html).
 
-### Opening ports in the Ingress application load balancer
+<br />
+
+
+## Opening ports in the Ingress ALB
 {: #opening_ingress_ports}
 
 By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose other ports, you can edit the `ibm-cloud-provider-ingress-cm` configmap resource.
@@ -1157,7 +1141,10 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
-### Preserving the source IP address
+<br />
+
+
+## Preserving the source IP address
 {: #preserve_source_ip}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
@@ -1241,7 +1228,10 @@ To enable source IP preservation, edit the load balancer service that exposes an
         ```
         {: pre}
 
-### Configuring SSL protocols and SSL ciphers at the HTTP level
+<br />
+
+
+## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
 Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
@@ -1283,159 +1273,22 @@ To edit the configmap to enable SSL protocols and ciphers:
    ```
    {: pre}
 
-### Customizing Ingress log content and format
-{: #ingress_log_format}
+<br />
 
-You can customize the content and format of logs that are collected for the Ingress ALB.
-{:shortdesc}
 
-By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format. To choose which log components are forwarded and how the components are arranged in the log output:
+## Tuning performance
+{: #perf_tuning}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
+{: shortdesc}
 
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Add a <code>data</code> section. Add the `log-format` field and optionally, the `log-format-escape-json` field.
-
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: pre}
-
-    <table>
-    <caption>YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the log-format configuration</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>log-format</code></td>
-    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log_variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request",</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1",</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">Nginx variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>_</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
-    </tr>
-    <tr>
-    <td><code>log-format-escape-json</code></td>
-    <td>Optional: By default, logs are generated in text format. To generate logs in JSON format, add the <code>log-format-escape-json</code> field and use value <code>true</code>.</td>
-    </tr>
-    </tbody></table>
-
-    For example, your log format might contain the following variables:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
-                    time_date: [$time_local], request: "$request",
-                    status: $status, http_referer: "$http_referer",
-                    http_user_agent: "$http_user_agent",
-                    request_id: $request_id}'
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: screen}
-
-    A log entry according to this format looks like the following example:
-    ```
-    remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
-    ```
-    {: screen}
-
-    To create a custom log format that is based on the default format for ALB logs, modify the following section as needed and add it to your configmap:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
-                    "host": "$http_host", "scheme": "$scheme",
-                    "request_method": "$request_method", "request_uri": "$uri",
-                    "request_id": "$request_id", "status": $status,
-                    "upstream_addr": "$upstream_addr", "upstream_status":
-                    $upstream_status, "request_time": $request_time,
-                    "upstream_response_time": $upstream_response_time,
-                    "upstream_connect_time": $upstream_connect_time,
-                    "upstream_header_time": $upstream_header_time}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: codeblock}
-
-4. Save the configuration file.
-
-5. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-4. To view the Ingress ALB logs, choose between two options.
-    * [Create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
-    * Check the logs from the CLI.
-        1. Get the ID of a pod for an ALB.
-            ```
-            kubectl get pods -n kube-system | grep alb
-            ```
-            {: pre}
-
-        2. Open the logs for that ALB pod. Verify that logs follow the updated format.
-            ```
-            kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
-            ```
-            {: pre}
-
-### Increasing the size of the shared memory zone for Ingress metrics collection
-{: #vts_zone_size}
-
-Shared memory zones are defined so that worker processes can share information such as cache, session persistence, and rate limits. A shared memory zone, called the virtual host traffic status zone, is set up for Ingress to collect metrics data for an ALB.
-{:shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
-
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
-
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Change the value of `vts-status-zone-size` from `10m` to a larger value.
-
-   ```
-   apiVersion: v1
-   data:
-     vts-status-zone-size: "10m"
-   kind: ConfigMap
-   metadata:
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-   ```
-   {: codeblock}
-
-3. Save the configuration file.
-
-4. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-### Increasing the keepalive time for connections between the client and the ALB
+### Increasing the keepalive connection time
 {: #keepalive_time}
 
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap:
+Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize performance of your ALBs, you can change the default setting of the keepalive time for the connections between the ALB and the client.
+{: shortdesc}
+
+In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -1465,7 +1318,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-
 
 

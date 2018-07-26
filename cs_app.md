@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -34,8 +34,9 @@ Learn the general steps for deploying apps by clicking an area of the following 
 <area href="#cli_dashboard" target="_blank" alt="Option 2: Start the Kubernetes dashboard locally and run configuration files." title="Option 2: Start the Kubernetes dashboard locally and run configuration files." shape="rect" coords="544, 141, 728, 204" />
 </map>
 
-
 <br />
+
+
 
 
 ## Planning highly available deployments
@@ -72,6 +73,7 @@ You can also [connect multiple clusters in different regions with a global load 
     <p><strong>Example deployment YAML files</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Nginx app with preferred pod anti-affinity.</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
+    
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
   <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters.html#multiple_clusters).</p>
@@ -84,6 +86,7 @@ You can also [connect multiple clusters in different regions with a global load 
   <p><strong>What if my apps need persistent storage?</strong></p>
   <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
+
 
 
 ### Minimal app deployment
@@ -133,6 +136,8 @@ spec:
 To learn more about each component, review the [Kubernetes basics](cs_tech.html#kubernetes_basics).
 
 <br />
+
+
 
 
 

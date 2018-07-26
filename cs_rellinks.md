@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -24,14 +24,19 @@ lastupdated: "2018-07-19"
 ## {{site.data.keyword.containershort_notm}}
 {: #containers}
 
+**General**
+
 - [Pricing calculator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
+
+<br />
+
 
 **REST APIs**
 
 - [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger)
 - [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json)
-- [REST API for logging in Kubernetes clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [REST API for managing Ingress application load balancers in Kubernetes clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [REST API for logging in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-logging/)
+- [REST API for managing Ingress application load balancers in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 
 <br />
 
@@ -42,9 +47,9 @@ lastupdated: "2018-07-19"
 - [developerWorks container orchestration journeys ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [developerWorks courses ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
-- [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")] (https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+- [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
-- Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
+- [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
 - [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
 - [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
 - [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)

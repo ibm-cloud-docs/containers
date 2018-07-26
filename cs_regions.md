@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -96,7 +96,7 @@ Supported {{site.data.keyword.containershort_notm}} regions:
   * US East
   * US South
 
-You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/`.
+You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.
 * To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud ks region`.
 * To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
@@ -214,7 +214,7 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
 
 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
-    * [Setting up persistent storage in multizone clusters](cs_storage.html#storage_multizone)
+    * Setting up [file storage](cs_storage_file.html#add_file) and [block storage](cs_storage_block.html#add_block) in multizone clusters
     * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](cs_loadbalancer.html#multi_zone_config)
     * [Managing network traffic by using Ingress](cs_ingress.html#planning)
     * [Increasing the availability of your app](cs_app.html#increase_availability)

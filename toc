@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
+{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers/container_index.html"}
 IBM Cloud Kubernetes Service
 
     {: .navgroup id="learn"}
@@ -54,11 +54,18 @@ IBM Cloud Kubernetes Service
         cs_loadbalancer.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_health.md
         cs_vpn.md
         cs_subnets.md
 
-    
-    cs_storage.md
+    {: .topicgroup}
+    Storing data on persistent storage
+        cs_storage_planning.md
+        cs_storage_basics.md
+        cs_storage_file.md
+        cs_storage_block.md
+        cs_storage_remove.md
+
     cs_integrations.md
     {: .navgroup-end}
 

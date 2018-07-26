@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-19"
+lastupdated: "2018-07-26"
 
 ---
 
@@ -270,11 +270,11 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <tbody>
  <tr>
  <td>You do not have the required access roles to download and update certificate data.</td>
- <td>Check with your account Administrator to assign you both the **Operator** and **Editor** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Check with your account Administrator to assign you both the **Manager** and **Writer** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
- <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>
- <td>Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster.</td>
+ <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster or is not in the default resource group.</td>
+ <td>Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster. Also check that the certificate manager instance is in the default resource group.</td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create is incorrect.</td>
@@ -307,7 +307,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-When you create a cluster, 8 public and 8 private portable subnets are requested on the VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN already reached that limit, the **Ingress Subdomain** fails to provision.
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision.
 
 To view how many subnets a VLAN has:
 1.  From the [IBM Cloud infrastructure (SoftLayer) console](https://control.bluemix.net/), select **Network** > **IP Management** > **VLANs**.
@@ -324,6 +324,30 @@ If you are not using all the subnets in the VLAN, you can reuse subnets in the c
 2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
 3.  Use the `ibmcloud ks cluster-subnet-add` [command](cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](cs_subnets.html#custom).
+
+<br />
+
+
+## Ingress ALB does not deploy in a zone
+{: #cs_multizone_subnet_limit}
+
+{: tsSymptoms}
+When you have a multizone cluster and run `ibmcloud ks albs <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
+```
+ALB ID                                            Enabled   Status     Type      ALB IP   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
+public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
+public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
+```
+{: screen}
+
+{: tsCauses}
+In each zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containershort_notm}}, VLANs have a limit of 40 subnets. If the cluster's public VLAN in a zone already reached that limit, the public Ingress ALB for that zone fails to provision.
+
+{: tsResolve}
+To check the number of subnets on a VLAN and for steps on how to get another VLAN, see [Cannot get a subdomain for Ingress ALB](#cs_subnet_limit).
 
 <br />
 
@@ -625,7 +649,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
     ```
     {: pre}
-    
+
 8.  Verify that your worker nodes are created.
 
     ```
