@@ -830,7 +830,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>2m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
+ <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>1m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
