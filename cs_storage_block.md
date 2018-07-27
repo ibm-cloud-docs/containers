@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-26"
+lastupdated: "2018-07-27"
 
 ---
 
@@ -610,7 +610,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
 ### Step 1: Retrieving the information of your existing block storage
 
 1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
-    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).
+    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/).
     2. Select **Account**, then **Users**, and then **User List**.
     3. Find your user ID.
     4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.
