@@ -28,9 +28,9 @@ lastupdated: "2018-07-27"
 
 **Supported Kubernetes versions**:
 
-- Latest: 1.10.3
-- Default: 1.9.8
-- Other: 1.8.13
+- Latest: 1.10.5
+- Default: 1.9.9
+- Other: 1.8.15
 
 </br>
 
@@ -53,7 +53,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.9.8+9d6e0610086578
+Server Version: v1.9.9+9d6e0610086578
 ```
 {: screen}
 
