@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-26"
+lastupdated: "2018-07-27"
 
 ---
 
@@ -28,15 +28,20 @@ lastupdated: "2018-07-26"
 
 **Supported Kubernetes versions**:
 
-- Latest: 1.10.3
-- Default: 1.9.8
-- Other: 1.8.13
+- Latest: 1.10.5
+- Default: 1.9.9
+- Other: 1.8.15
 
 </br>
 
-**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
+**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
 
-**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support. 
+*  **Attention**: If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. 
+*  Unsupported clusters cannot add or reload existing worker nodes. 
+*  After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+
+</br>
 
 To check the server version of a cluster, run the following command.
 
@@ -48,7 +53,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.9.8+9d6e0610086578
+Server Version: v1.9.9+9d6e0610086578
 ```
 {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-26"
+lastupdated: "2018-07-27"
 
 ---
 
@@ -412,6 +412,48 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
         The tool outputs several pages of information as it runs various tests for common networking issues. Output lines that begin with `ERROR`, `WARNING`, `VERIFY`, or `CHECK` indicate possible errors with the VPN connectivity.
 
     <br />
+
+
+## Cannot install a new strongSwan Helm chart release
+{: #cs_strongswan_release}
+
+{: tsSymptoms}
+You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan`. However, you see the following error:
+```
+Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
+```
+{: screen}
+
+{: tsCauses}
+This error indicates that the previous release of the strongSwan chart was not completely uninstalled.
+
+{: tsResolve}
+
+1. Delete the previous chart release.
+    ```
+    helm delete --purge <old_release_name>
+    ```
+    {: pre}
+
+2. Delete the deployment for the previous release. Deletion of the deployment and associated pod takes up to 1 minute.
+    ```
+    kubectl delete deploy -n kube-system vpn-strongswan
+    ```
+    {: pre}
+
+3. Verify that the deployment has been deleted. The deployment `vpn-strongswan` does not appear in the list.
+    ```
+    kubectl get deployments -n kube-system
+    ```
+    {: pre}
+
+4. Re-install the updated strongSwan Helm chart with a new release name.
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
+    ```
+    {: pre}
+
+<br />
 
 
 ## strongSwan VPN connectivity fails after worker node addition or deletion

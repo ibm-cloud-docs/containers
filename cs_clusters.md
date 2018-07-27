@@ -243,7 +243,7 @@ You can choose between virtual or physical (bare metal) servers. Depending on th
 
 Every cluster is set up with a default worker pool that groups worker nodes with the same configuration that you defined during cluster creation, such as the machine type. If you provision a cluster from the UI, you can select multiple zones at the same time. Clusters that are created from the CLI are initially provisioned with a worker pool in one zone only. You can add more zones to your worker pool after the cluster is provisioned to replicate worker nodes evenly across zones. For example, if you add a second zone to a worker pool that consists of 3 worker nodes, then 3 worker nodes are provisioned into the second zone which leaves you with a cluster of 6 worker nodes in total.
 
-To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning). To add different machine type flavors to your cluster, [create another worker pool](cs_cli_reference.html#cs_worker_pool_add).
+To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning). To add different machine type flavors to your cluster, [create another worker pool](cs_cli_reference.html#cs_worker_pool_create).
 
 ### Hardware for worker nodes
 {: #shared_dedicated_node}
@@ -648,7 +648,7 @@ To create a cluster:
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.8
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.9
     ```
     {: screen}
 
@@ -665,7 +665,7 @@ To create a cluster:
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.8
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.9
     ```
     {: screen}
 

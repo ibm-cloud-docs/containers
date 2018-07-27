@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-26"
+lastupdated: "2018-07-27"
 
 ---
 
@@ -150,7 +150,7 @@ Every storage class specifies the type of file storage that you provision, inclu
    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file). 
    - If you want the PV, the data, and your physical file storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
    
-6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with a monthly billing type. 
+6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type. 
    **Note:** If you choose a monthly billing type, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.
 
 <br />
@@ -232,7 +232,7 @@ To add file storage:
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
-          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with a monthly billing type. </td>
+          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -442,7 +442,7 @@ To use existing storage in a different cluster than the one where you provisione
      
 **For persistent storage that was provisioned outside the cluster:** </br> 
 If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes. 
-1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/), click **Storage**. 
+1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/), click **Storage**. 
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
 3.  Select **Subnets**.
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
@@ -729,7 +729,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</td>
+<td>Hourly</td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -771,7 +771,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</li></ul></td>
+<td>Hourly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -812,7 +812,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</li></ul></td>
+<td>Hourly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
@@ -849,7 +849,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Billing</td>
-<td>Monthly</li></ul></td>
+<td>Hourly</li></ul></td>
 </tr>
 <tr>
 <td>Pricing</td>
