@@ -41,6 +41,8 @@ lastupdated: "2018-07-27"
 *  Unsupported clusters cannot add or reload existing worker nodes. 
 *  After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 
+</br>
+
 To check the server version of a cluster, run the following command.
 
 ```
