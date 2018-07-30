@@ -36,6 +36,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>30 July</td>
+<td>[Bring your own Ingress controller](cs_ingress.html#user_managed)</td>
+<td>Do you have very specific security or other custom requirements for your cluster's Ingress controller? If so, you might want to run your own Ingress controller instead of the default.</td>
+</tr>
+<tr>
 <td>10 July</td>
 <td>Introducing multizone clusters</td>
 <td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>

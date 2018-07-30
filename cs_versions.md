@@ -28,9 +28,9 @@ lastupdated: "2018-07-30"
 
 **Supported Kubernetes versions**:
 
-- Latest: 1.10.5
+- Latest: 1.9.9
 - Default: 1.10.5
-- Other: 1.9.9, 1.8.15
+- Other: 1.8.15
 
 </br>
 
