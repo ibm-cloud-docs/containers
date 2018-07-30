@@ -666,7 +666,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, . with the name of the services you created to expose your external apps. If your apps are exposed by services in different namespaces in the cluster, include only app services that are in the same namespace. You must create one Ingress resource for each namespace where where you have apps that you want to expose.</td>
+    <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, etc. with the name of the services you created to expose your external apps. If your apps are exposed by services in different namespaces in the cluster, include only app services that are in the same namespace. You must create one Ingress resource for each namespace where where you have apps that you want to expose.</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
