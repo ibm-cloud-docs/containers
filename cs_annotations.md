@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-27"
+lastupdated: "2018-07-30"
 
 ---
 
@@ -830,7 +830,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>2m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
+ <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>1m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -1378,7 +1378,8 @@ Because the application uses {{site.data.keyword.appid_short_notm}} for authenic
         3. Click **Create**.
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
     1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
-    2. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
+    2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
+    3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
         * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/us-south/appid_redirect`.
         * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/us-east/appid_redirect`.
 

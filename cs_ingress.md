@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-27"
+lastupdated: "2018-07-30"
 
 ---
 
@@ -230,7 +230,7 @@ To use the IBM-provided Ingress domain:
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.9
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
@@ -544,7 +544,7 @@ To use the IBM-provided Ingress domain:
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.9
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
@@ -1319,4 +1319,131 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
    ```
    {: pre}
 
+<br />
 
+
+## Configuring a user-managed Ingress controller
+{: #user_managed}
+
+Run your own Ingress controller on {{site.data.keyword.Bluemix_notm}} while leveraging the IBM-provided Ingress subdomain and TLS certificate assigned to your cluster.
+{: shortdesc}
+
+Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you run your own Ingress controller instead of the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
+
+1. Get the ID of the default public ALB. The public ALB has a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
+
+2. Disable the default public ALB. The `--disable-deployment` flag disables the IBM-provided ALB deployment, but doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
+    ```
+    ibmcloud ks alb-configure --alb-ID <ALB_ID> --disable-deployment
+    ```
+    {: pre}
+
+3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [nginx community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
+
+4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
+    ```
+    kubectl apply -f customingress.yaml -n kube-system
+    ```
+    {: pre}
+
+5. Get the label on your custom Ingress deployment.
+    ```
+    kubectl get deploy nginx-ingress-controller -n kube-system --show-labels
+    ```
+    {: pre}
+
+    In the following example output, the label value is `ingress-nginx`:
+    ```
+    NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       LABELS
+    nginx-ingress-controller   1         1         1            1           1m        app=ingress-nginx
+    ```
+    {: screen}
+
+5. Using the ALB ID you got in step 1, open the load balancer service that exposes the ALB.
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+6. Update the load balancer service to point to your custom Ingress deployment. Under `spec/selector`, remove the ALB ID from the `app` label and add the label for your own Ingress controller that you got in step 5.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      ...
+    spec:
+      clusterIP: 172.21.xxx.xxx
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 169.xx.xxx.xxx
+      ports:
+      - name: http
+        nodePort: 31070
+        port: 80
+        protocol: TCP
+        targetPort: 80
+      - name: https
+        nodePort: 31854
+        port: 443
+        protocol: TCP
+        targetPort: 443
+      selector:
+        app: <custom_controller_label>
+      ...
+    ```
+    {: codeblock}
+    1. Optional: By default, the load balancer service allows traffic on port 80 and 443. If your custom Ingress controller requires a different set of ports, add those ports to the `ports` section.
+
+7. Save and close the configuration file. The output is similar to the following:
+    ```
+    service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+    ```
+    {: screen}
+
+8. Verify that the ALB `Selector` now points to your controller.
+    ```
+    kubectl describe svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    Name:                     public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Namespace:                kube-system
+    Labels:                   app=public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Annotations:              service.kubernetes.io/ibm-ingress-controller-public=169.xx.xxx.xxx
+                              service.kubernetes.io/ibm-load-balancer-cloud-provider-zone=wdc07
+    Selector:                 app=ingress-nginx
+    Type:                     LoadBalancer
+    IP:                       172.21.xxx.xxx
+    IP:                       169.xx.xxx.xxx
+    LoadBalancer Ingress:     169.xx.xxx.xxx
+    Port:                     port-443  443/TCP
+    TargetPort:               443/TCP
+    NodePort:                 port-443  30087/TCP
+    Endpoints:                172.30.xxx.xxx:443
+    Port:                     port-80  80/TCP
+    TargetPort:               80/TCP
+    NodePort:                 port-80  31865/TCP
+    Endpoints:                172.30.xxx.xxx:80
+    Session Affinity:         None
+    External Traffic Policy:  Cluster
+    Events:                   <none>
+    ```
+    {: screen}
+
+8. Deploy any other resources that are required by your custom Ingress controller, such as the configmap.
+
+9. If you have a multizone cluster, repeat these steps for each ALB.
+
+10. Create Ingress resources for your apps by following the steps in [Exposing apps that are inside your cluster to the public](#ingress_expose_public).
+
+Your apps are now exposed by your custom Ingress controller. To restore the IBM-provided ALB deployment, re-enable the ALB. The ALB is redeployed, and the load balancer service is automatically reconfigured to point to the ALB.
+
+```
+ibmcloud ks alb-configure --alb-ID <alb ID> --enable
+```
+{: pre}
