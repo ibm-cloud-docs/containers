@@ -68,14 +68,14 @@ Download and install Istio in your cluster.
 3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
 
    ```
-   export PATH=$PWD/istio-0.8.0/bin:$PATH
+   export PATH=$PWD/istio-1.0/bin:$PATH
    ```
    {: pre}
 
 4. Change the directory to the Istio file location.
 
    ```
-   cd filepath/istio-0.8.0
+   cd filepath/istio-1.0
    ```
    {: pre}
 
@@ -193,7 +193,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
           istioctl create -f samples/bookinfo/routing/bookinfo-gateway.yaml
           ```
           {: pre}
-      
+
       2. Get the ingress IP and port.
           ```
           kubectl get ingress
@@ -240,7 +240,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
 6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
-Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio further.
+Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue with more tutorials to explore Istio further.
 
 ## Cleanup
 {: #istio_tutorial_cleanup}
