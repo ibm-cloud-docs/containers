@@ -273,8 +273,8 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <td>Check with your account Administrator to assign you both the **Manager** and **Writer** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
- <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster or is not in the default resource group.</td>
- <td>Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster. Also check that the certificate manager instance is in the default resource group.</td>
+ <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>
+ <td>Check that the certificate CRN you provided is imported to an instance of the {{site.data.keyword.cloudcerts_short}} service that is deployed in the same account as your cluster.</td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create is incorrect.</td>
