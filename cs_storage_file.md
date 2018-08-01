@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-30"
+lastupdated: "2018-08-01"
 
 ---
 
@@ -67,7 +67,7 @@ Every storage class specifies the type of file storage that you provision, inclu
    - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS. 
      
 4. Choose the size and IOPS for your file storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations. 
-   - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi file storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
+   - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi file storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS. 
      <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
          <thead>
@@ -92,7 +92,7 @@ Every storage class specifies the type of file storage that you provision, inclu
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. 
+   - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. </br></br> The IOPS to gigabyte ratio also determines the type of hard disk that is provisioned for you. For example, if you have 500Gi at 100 IOPS, your IOPS to gigabyte ratio is 0.2. Storage with a ratio of less than or equal to 0.3 is provisioned on SATA hard disks. If your ratio is greater than 0.3, then your storage is provisioned on SSD hard disks.  
      <table>
          <caption>Table of custom storage class size ranges and IOPS</caption>
          <thead>
@@ -728,6 +728,10 @@ Review the following backup and restore options for your file storage:
 <td>20-12000 Gi</td>
 </tr>
 <tr>
+<td>Hard disk</td>
+<td>SSD</td>
+</tr>
+<tr>
 <td>Billing</td>
 <td>Hourly</td>
 </tr>
@@ -768,6 +772,10 @@ Review the following backup and restore options for your file storage:
 <tr>
 <td>Size range in gigabytes</td>
 <td>20-12000 Gi</td>
+</tr>
+<tr>
+<td>Hard disk</td>
+<td>SSD</td>
 </tr>
 <tr>
 <td>Billing</td>
@@ -811,6 +819,10 @@ Review the following backup and restore options for your file storage:
 <td>20-4000 Gi</td>
 </tr>
 <tr>
+<td>Hard disk</td>
+<td>SSD</td>
+</tr>
+<tr>
 <td>Billing</td>
 <td>Hourly</li></ul></td>
 </tr>
@@ -846,6 +858,10 @@ Review the following backup and restore options for your file storage:
 <tr>
 <td>IOPS and size</td>
 <td><p><strong>Size range in gigabytes / IOPS range in multiples of 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
+</tr>
+<tr>
+<td>Hard disk</td>
+<td>The IOPS to gigabyte ratio determines the type of hard disk that is provisioned. To determine your IOPS to gigabyte ratio, you divide the IOPS by the size of your storage. </br></br>Example: </br>You chose 500Gi of storage with 100 IOPS. Your ratio is 0.2 (100 IOPS/500Gi). </br></br><strong>Overview of hard disk types per ratio:</strong><ul><li>Less than or equal to 0.3: SATA</li><li>Greater than 0.3: SSD</li></ul></td>
 </tr>
 <tr>
 <td>Billing</td>

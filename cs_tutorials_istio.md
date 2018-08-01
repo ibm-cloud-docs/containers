@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-30"
+lastupdated: "2018-07-31"
 
 ---
 
@@ -193,7 +193,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
           istioctl create -f samples/bookinfo/routing/bookinfo-gateway.yaml
           ```
           {: pre}
-      
+
       2. Get the ingress IP and port.
           ```
           kubectl get ingress
@@ -240,7 +240,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
 6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
-Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio further.
+Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue with more tutorials to explore Istio further.
 
 ## Cleanup
 {: #istio_tutorial_cleanup}

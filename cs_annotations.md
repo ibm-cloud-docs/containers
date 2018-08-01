@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-30"
+lastupdated: "2018-07-31"
 
 ---
 
@@ -1379,9 +1379,9 @@ Because the application uses {{site.data.keyword.appid_short_notm}} for authenic
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
     1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
     2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-    3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<location>/appid_redirect` or `https://<hostname>/<location>/appid_redirect`.
-        * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/us-south/appid_redirect`.
-        * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/us-east/appid_redirect`.
+    3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
+        * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
+        * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
     ```
@@ -1458,7 +1458,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Enter the port number that you want to use for incoming HTTP or HTTPS network traffic.  <p><strong>Note:</strong> When a custom port is specified for either HTTP or HTTPS, the default ports are no longer valid for both HTTP and HTTPS. For example, to change the default port for HTTPS to 8443, but use the default port for HTTP, you must set custom ports for both: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Enter the port number to use for incoming HTTP or HTTPS network traffic.  <p><strong>Note:</strong> When a custom port is specified for either HTTP or HTTPS, the default ports are no longer valid for both HTTP and HTTPS. For example, to change the default port for HTTPS to 8443, but use the default port for HTTP, you must set custom ports for both: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
