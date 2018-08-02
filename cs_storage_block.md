@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-01"
+lastupdated: "2018-08-02"
 
 ---
 
@@ -32,8 +32,8 @@ Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in with a Helm
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
 
-1. Install [Helm](cs_integrations.html#helm) on the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
-2. Update the helm repo to retrieve the latest version of all helm charts in this repo.
+1. Install [Helm and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository](cs_integrations.html#helm) to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
@@ -134,19 +134,19 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage pl
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster.
 
-1. Update the helm repo to retrieve the latest version of all helm charts in this repo.
+1. Update the Helm repo to retrieve the latest version of all helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
    
-2. Optional: Download to latest helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information. 
+2. Optional: Download to latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information. 
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
-3. Find the name of the block storage helm chart that you installed in your cluster.
+3. Find the name of the block storage Helm chart that you installed in your cluster.
    ```
    helm ls | grep ibmcloud-block-storage-plugin
    ```
@@ -172,7 +172,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 
 ### Removing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
-If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage in your cluster, you can uninstall the helm chart.
+If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
 {: shortdesc}
 
 **Note:** Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
@@ -183,7 +183,7 @@ Before you begin:
 
 To remove the plug-in: 
 
-1. Find the name of the block storage helm chart that you installed in your cluster.
+1. Find the name of the block storage Helm chart that you installed in your cluster.
    ```
    helm ls | grep ibmcloud-block-storage-plugin
    ```
