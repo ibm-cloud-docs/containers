@@ -32,7 +32,7 @@ Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in with a Helm
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
 
-1. Install the [Helm client on your local machine, the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository](cs_integrations.html#helm) to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
