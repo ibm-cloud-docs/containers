@@ -42,8 +42,8 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the CLIs](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a standard cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containershort_notm} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
@@ -136,7 +136,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
 3. Ensure that the microservices and their corresponding pods are deployed:
     ```
-    kubectl get svc -n default
+    kubectl get svc
     ```
     {: pre}
 
@@ -151,7 +151,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
     {: screen}
 
     ```
-    kubectl get pods -n default
+    kubectl get pods
     ```
     {: pre}
 
@@ -170,29 +170,43 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
     {: screen}
 
 4. To verify the app deployment, get the public address for your cluster.
-    1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
-        ```
-        kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-        ```
-        {: pre}
+    * Standard clusters:
+        1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
+            ```
+            kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+            ```
+            {: pre}
 
-    2. Set the ingress host.
-        ```
-        export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        ```
-        {: pre}
+        2. Set the ingress host.
+            ```
+            export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+            ```
+            {: pre}
 
-    3. Set the ingress port.
-        ```
-        export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-        ```
+        3. Set the ingress port.
+            ```
+            export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+            ```
 
-    4. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
+        4. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
 
-       ```
-       export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-       ```
-       {: pre}
+           ```
+           export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+           ```
+           {: pre}
+
+    * Free clusters:
+        1. Get the public IP address of any worker node in your cluster.
+            ```
+            ibmcloud ks workers <cluster_name_or_ID>
+            ```
+            {: pre}
+
+        2. Create a GATEWAY_URL environment variable that uses the public IP address of the worker node.
+            ```
+            export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
+            ```
+            {: pre}
 
 5. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
      ```
@@ -226,16 +240,11 @@ If you're finished working with Istio and don't want to [continue exploring](#is
         ```
         {: pre}
 
-    * Uninstall a manual deployment:
-        ```
-        kubectl delete -f install/kubernetes/istio-demo.yaml
-        ```
-        {: pre}
-
 ## What's next?
 {: #istio_tutorial_whatsnext}
 
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
     * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
     * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
+* Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
 * Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
