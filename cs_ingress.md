@@ -1143,7 +1143,7 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  ```
  {: pre}
 
-For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
+For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
 <br />
 
