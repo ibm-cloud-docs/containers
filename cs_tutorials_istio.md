@@ -43,7 +43,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  [Install the CLIs](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
+-  [Create a standard cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
@@ -77,17 +77,17 @@ Download and install Istio in your cluster.
     {: pre}
 
     ```
-    NAME                                        READY     STATUS      RESTARTS   AGE
-    istio-citadel-748d656b-pj9bw               1/1       Running   0          2m
-    istio-egressgateway-6c65d7c98d-l54kg       1/1       Running   0          2m
-    istio-galley-65cfbc6fd7-bpnqx              1/1       Running   0          2m
-    istio-ingressgateway-f8dd85989-6w6nj       1/1       Running   0          2m
-    istio-pilot-5fd885964b-l4df6               2/2       Running   0          2m
-    istio-policy-56f4f4cbbd-2z2bk              2/2       Running   0          2m
-    istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running   0          2m
-    istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running   0          2m
-    istio-telemetry-8687d9d745-mwjbf           2/2       Running   0          2m
-    prometheus-55c7c698d6-f4drj                1/1       Running   0          2m
+    NAME                                       READY     STATUS      RESTARTS   AGE
+    istio-citadel-748d656b-pj9bw               1/1       Running     0          2m
+    istio-egressgateway-6c65d7c98d-l54kg       1/1       Running     0          2m
+    istio-galley-65cfbc6fd7-bpnqx              1/1       Running     0          2m
+    istio-ingressgateway-f8dd85989-6w6nj       1/1       Running     0          2m
+    istio-pilot-5fd885964b-l4df6               2/2       Running     0          2m
+    istio-policy-56f4f4cbbd-2z2bk              2/2       Running     0          2m
+    istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running     0          2m
+    istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running     0          2m
+    istio-telemetry-8687d9d745-mwjbf           2/2       Running     0          2m
+    prometheus-55c7c698d6-f4drj                1/1       Running     0          2m
     ```
     {: screen}
 
@@ -142,11 +142,11 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
-    details                   ClusterIP      172.21.19.104    <none>         9080/TCP         28s
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   28s
-    productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         28s
-    ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         28s
-    reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         28s
+    details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
+    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
+    productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
+    ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
+    reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
     ```
     {: screen}
 
@@ -156,16 +156,16 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
     {: pre}
 
     ```
-    NAME                                        READY     STATUS      RESTARTS   AGE
-    details-v1-6865b9b99d-7v9h8              2/2       Running             0          2m
-    guestbook-76897854cc-6zsws               1/1       Running             0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running             0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running             0          2m
-    productpage-v1-f8c8fb8-tbsz9             2/2       Running             0          2m
-    ratings-v1-77f657f55d-png6j              2/2       Running             0          2m
-    reviews-v1-6b7f6db5c5-fdmbq              2/2       Running             0          2m
-    reviews-v2-7ff5966b99-zflkv              2/2       Running             0          2m
-    reviews-v3-5df889bcff-nlmjp              2/2       Running             0          2m
+    NAME                                     READY     STATUS      RESTARTS   AGE
+    details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
+    guestbook-76897854cc-6zsws               1/1       Running     0          2m
+    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
+    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
+    productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
+    ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
+    reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
+    reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
+    reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
     ```
     {: screen}
 
