@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -1285,6 +1285,8 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
+
+
 
 ### Increasing the keepalive connection time
 {: #keepalive_time}

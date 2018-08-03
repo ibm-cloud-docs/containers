@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -127,7 +127,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>17 April</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Install the {{site.data.keyword.Bluemix_notm}} Block Storage [plug-in](cs_storage.html#install_block) to save persistent data in block storage. Then, you can [create new](cs_storage.html#create) or [use existing](cs_storage.html#existing_block) block storage for your cluster.</td>
+<td>Install the {{site.data.keyword.Bluemix_notm}} Block Storage [plug-in](cs_storage_block.html#install_block) to save persistent data in block storage. Then, you can [create new](cs_storage_block.html#add_block) or [use existing](cs_storage_block.html#existing_block) block storage for your cluster.</td>
 </tr>
 <tr>
 <td>13 April</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -20,12 +20,10 @@ lastupdated: "2018-07-31"
 # Tutorial: Installing Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_tutorial}
 
-[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, and manage a network of microservices, also known as a service mesh, on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, control, and observe services on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 {:shortdesc}
 
 In this tutorial, you can see how to install Istio alongside four microservices for a simple mock bookstore app called BookInfo. The microservices include a product web page, book details, reviews, and ratings. When you deploy BookInfo's microservices into an {{site.data.keyword.containershort}} cluster where Istio is installed, you inject the Istio Envoy sidecar proxies in the pods of each microservice.
-
-**Note**: Some configurations and features of the Istio platform are still under development and are subject to change based on user feedback. Allow a few months for stabilization before you use Istio in production. 
 
 ## Objectives
 
@@ -54,39 +52,56 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
+1. Install Istio by either using the IBM Istio Helm chart or by manually downloading and installing Istio. **Note**: To use the BookInfo example in Lesson 2, you must manually download and install Istio because the manual deployment includes the necessary BookInfo files.
+    * To use the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio):
+        1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
+        2. Install Istio’s [Custom Resource Definitions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions).
+            ```
+            kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
+            ```
+            {: pre}
+        3. Install the Helm chart to your cluster.
+            ```
+            helm install ../ibm-istio --name=istio --namespace istio-system
+            ```
+            {: pre}
+        4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
+           ```
+           export PATH=$PWD/istio-1.0/bin:$PATH
+           ```
+           {: pre}
+    * To manually download and install Istio:
+        1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
 
+           ```
+           curl -L https://git.io/getLatestIstio | sh -
+           ```
+           {: pre}
 
-1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
+        2. Extract the installation files.
 
-   ```
-   curl -L https://git.io/getLatestIstio | sh -
-   ```
-   {: pre}
+        3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
 
-2. Extract the installation files.
+           ```
+           export PATH=$PWD/istio-1.0/bin:$PATH
+           ```
+           {: pre}
 
-3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
+        4. Change the directory to the Istio file location.
 
-   ```
-   export PATH=$PWD/istio-1.0/bin:$PATH
-   ```
-   {: pre}
+           ```
+           cd filepath/istio-1.0
+           ```
+           {: pre}
 
-4. Change the directory to the Istio file location.
+        5. Install Istio on the Kubernetes cluster. Istio is deployed in the Kubernetes namespace `istio-system`.
 
-   ```
-   cd filepath/istio-1.0
-   ```
-   {: pre}
+           ```
+           kubectl apply -f install/kubernetes/istio-demo.yaml
+           ```
+           {: pre}
 
-5. Install Istio on the Kubernetes cluster. Istio is deployed in the Kubernetes namespace `istio-system`.
-
-   ```
-   kubectl apply -f install/kubernetes/istio-demo.yaml
-   ```
-   {: pre}
-
-6. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
+2. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
    ```
    kubectl get pods -n istio-system
    ```
@@ -121,17 +136,23 @@ These four microservices include a product web page, book details, reviews (with
 
 When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
-1. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
+1. Label the `default` namespace with `istio-injection=enabled`.
+    ```
+    kubectl label namespace default istio-injection=enabled
+    ```
+    {: pre}
+
+2. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
-   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml -n istio-system
+   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
    ```
    {: pre}
 
-2. Ensure that the microservices and their corresponding pods are deployed:
+3. Ensure that the microservices and their corresponding pods are deployed:
 
    ```
-   kubectl get svc -n istio-system
+   kubectl get svc
    ```
    {: pre}
 
@@ -158,7 +179,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: screen}
 
    ```
-   kubectl get pods -n istio-system
+   kubectl get pods
    ```
    {: pre}
 
@@ -175,16 +196,16 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
    istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
    istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
-   productpage-v1-560495357-jk1lz              1/1       Running     0          6m
+   productpage-v1-560495357-jk1lz              2/2       Running     0          6m
    prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
-   ratings-v1-734492171-rnr5l                  1/1       Running     0          6m
-   reviews-v1-874083890-f0qf0                  1/1       Running     0          6m
-   reviews-v2-1343845940-b34q5                 1/1       Running     0          6m
-   reviews-v3-1813607990-8ch52                 1/1       Running     0          6m
+   ratings-v1-734492171-rnr5l                  2/2       Running     0          6m
+   reviews-v1-874083890-f0qf0                  2/2       Running     0          6m
+   reviews-v2-1343845940-b34q5                 2/2       Running     0          6m
+   reviews-v3-1813607990-8ch52                 2/2       Running     0          6m
    ```
    {: screen}
 
-3. To verify the app deployment, get the public address for your cluster.
+4. To verify the app deployment, get the public address for your cluster.
 
     * For standard clusters:
 
@@ -230,15 +251,15 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
          ```
          {: pre}
 
-4. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+5. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
      ```
      curl -I http://$GATEWAY_URL/productpage
      ```
      {: pre}
 
-5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+6. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
 
-6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
+7. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
 Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue with more tutorials to explore Istio further.
 
@@ -250,15 +271,23 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
    ```
-   samples/bookinfo/kube/cleanup.sh
+   samples/bookinfo/platform/kube/cleanup.sh
    ```
    {: pre}
 
 2. Uninstall Istio.
-   ```
-   kubectl delete -f install/kubernetes/istio-demo.yaml
-   ```
-   {: pre}
+    * Uninstall a Helm deployment:
+        ```
+        helm del istio --purge
+        kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
+        ```
+        {: pre}
+
+    * Uninstall a manual deployment:
+        ```
+        kubectl delete -f install/kubernetes/istio-demo.yaml
+        ```
+        {: pre}
 
 ## What's next?
 {: #istio_tutorial_whatsnext}

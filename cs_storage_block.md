@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-02"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -140,7 +140,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    ```
    {: pre}
    
-2. Optional: Download to latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information. 
+2. Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information. 
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
