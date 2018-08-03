@@ -27,9 +27,8 @@ In this tutorial, you can see how to install Istio alongside four microservices 
 
 ## Objectives
 
--   Download and install Istio in your cluster
+-   Deploy the Istio Helm chart in your cluster
 -   Deploy the BookInfo sample app
--   Inject Envoy sidecar proxies into the pods of the app's four microservices to connect the microservices in the service mesh
 -   Verify the BookInfo app deployment and round robin through the three versions of the ratings service
 
 ## Time required
@@ -42,7 +41,7 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the IBM Cloud CLI, the {{site.data.keyword.containershort_notm} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containershort_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
 -  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -53,15 +52,15 @@ Download and install Istio in your cluster.
 {:shortdesc}
 
 1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
-    1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
-    2. Install Istio’s [Custom Resource Definitions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions).
+    1. [Install Helm for your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
+    2. Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
         {: pre}
     3. Install the Helm chart to your cluster.
         ```
-        helm install ../ibm-istio --name=istio --namespace istio-system
+        helm install ibm/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
     4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
@@ -70,7 +69,7 @@ Download and install Istio in your cluster.
        ```
        {: pre}
 
-2. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue.
+2. Ensure the pods for the 9 Istio services and for Prometheus are all fully deployed before you continue.
     ```
     kubectl get pods -n istio-system
     ```
@@ -100,9 +99,7 @@ Good work! You successfully installed Istio into your cluster. Next, deploy the 
 Deploy the BookInfo sample app's microservices to your Kubernetes cluster.
 {:shortdesc}
 
-These four microservices include a product web page, book details, reviews (with several versions of the review microservice), and ratings. You can find all files that are used in this example in your Istio installation's `samples/bookinfo` directory.
-
-When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
+These four microservices include a product web page, book details, reviews (with several versions of the review microservice), and ratings. When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
 1. Download the Istio package containing the necessary BookInfo files.
     1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
@@ -227,18 +224,22 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 {:shortdesc}
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
-   ```
-   samples/bookinfo/platform/kube/cleanup.sh
-   ```
-   {: pre}
+    ```
+    samples/bookinfo/platform/kube/cleanup.sh
+    ```
+    {: pre}
 
-2. Uninstall Istio.
-    * Uninstall a Helm deployment:
-        ```
-        helm del istio --purge
-        kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
-        ```
-        {: pre}
+2. Uninstall the Istio Helm deployment.
+    ```
+    helm del istio --purge
+    ```
+    {: pre}
+
+3. Delete the Istio custom resource definitions.
+    ```
+    kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
+    ```
+    {: pre}
 
 ## What's next?
 {: #istio_tutorial_whatsnext}
