@@ -16,7 +16,7 @@ lastupdated: "2018-08-03"
 {:download: .download}
 
 
-# Exposing apps with Ingress
+# Exposing apps with Ingress 
 {: #ingress} 
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
