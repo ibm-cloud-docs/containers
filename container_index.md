@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -27,9 +27,6 @@ Containers are a standard way to package apps and all their dependencies so that
 
 
 Click an option to get started:
-
-
-
 
 <img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Click an icon to get started quickly with {{site.data.keyword.containershort_notm}}. With {{site.data.keyword.Bluemix_dedicated_notm}}, click this icon to see your options." style="width:440px;" />
 <map name="home_map" id="home_map">
@@ -77,3 +74,5 @@ Try out some things with your free cluster before it expires.
 * [Deploy an app in your cluster.](cs_app.html#app_cli)
 * [Create a standard cluster with multiple nodes for higher availability.](cs_clusters.html#clusters_ui)
 * [Set up a private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
+
+
