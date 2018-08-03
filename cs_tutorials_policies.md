@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-03"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-07-31"
 
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, LoadBalancer, and Ingress services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 
-However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. [Calico Pre-DNAT policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) and can be used to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies are applied before Kubernetes can use regular DNAT traffic forwarding to pods, preventing specified traffic from reaching your apps. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
+However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
 In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic hitting your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a LoadBalancer service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
 
@@ -59,7 +59,7 @@ The following image shows how the webserver app will be exposed to the internet 
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the webserver app is exposed to the internet by the public NodePort and public LoadBalancer." style="width:450px; border-style: none"/>
 
-1. Create a test namespace to use throughout this tutorial.
+1. Create a test namespace called `pr-firm` to use throughout this tutorial.
     ```
     kubectl create ns pr-firm
     ```
@@ -106,7 +106,7 @@ The following image shows how the webserver app will be exposed to the internet 
         run: webserver
       type: LoadBalancer
     ```
-    {: screen}
+    {: codeblock}
 
 5. Deploy the LoadBalancer.
     ```
@@ -283,7 +283,7 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
   ```
   {: screen}
 
-2. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and NodePort.
+3. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and NodePort.
     ```
     curl  --connect-timeout 10 <worker_IP>:<NodePort>
     ```
@@ -295,13 +295,13 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
     ```
     {: screen}
 
-3. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
+4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
     ```
     kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
-4. Using the value from your cheat sheet, verify that you can still publicly access LoadBalancer external IP address.
+5. Using the value from your cheat sheet, verify that you can still publicly access the LoadBalancer external IP address.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -332,7 +332,7 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
     {: screen}
     In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the LoadBalancer sees your system's source IP address as the client IP address.
 
-5. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
+6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
 
 Great! At this point, your app is exposed to the public internet from the public LoadBalancer port only. Traffic to the public NodePorts is blocked. You've partially locked down your cluster from unwanted traffic.
 
@@ -401,7 +401,7 @@ First, in addition to the NodePorts, you must block all incoming traffic to the 
     ```
     {: pre}
 
-4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP (listed as the `client_address` in your successful curl commands) to the LoadBalancer IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the LoadBalancer and `<client_address>` with the public IP address of your system's source IP.
+4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the LoadBalancer IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the LoadBalancer and `<client_address>` with the public IP address of your system's source IP.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
