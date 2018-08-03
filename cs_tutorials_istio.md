@@ -52,76 +52,44 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
-1. Install Istio by either using the IBM Istio Helm chart or by manually downloading and installing Istio. **Note**: To use the BookInfo example in Lesson 2, you must manually download and install Istio because the manual deployment includes the necessary BookInfo files.
-    * To use the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio):
-        1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
-        2. Install Istio’s [Custom Resource Definitions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions).
-            ```
-            kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
-            ```
-            {: pre}
-        3. Install the Helm chart to your cluster.
-            ```
-            helm install ../ibm-istio --name=istio --namespace istio-system
-            ```
-            {: pre}
-        4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
-           ```
-           export PATH=$PWD/istio-1.0/bin:$PATH
-           ```
-           {: pre}
-    * To manually download and install Istio:
-        1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
-
-           ```
-           curl -L https://git.io/getLatestIstio | sh -
-           ```
-           {: pre}
-
-        2. Extract the installation files.
-
-        3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
-
-           ```
-           export PATH=$PWD/istio-1.0/bin:$PATH
-           ```
-           {: pre}
-
-        4. Change the directory to the Istio file location.
-
-           ```
-           cd filepath/istio-1.0
-           ```
-           {: pre}
-
-        5. Install Istio on the Kubernetes cluster. Istio is deployed in the Kubernetes namespace `istio-system`.
-
-           ```
-           kubectl apply -f install/kubernetes/istio-demo.yaml
-           ```
-           {: pre}
+1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
+    1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
+    2. Install Istio’s [Custom Resource Definitions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions).
+        ```
+        kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
+        ```
+        {: pre}
+    3. Install the Helm chart to your cluster.
+        ```
+        helm install ../ibm-istio --name=istio --namespace istio-system
+        ```
+        {: pre}
+    4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
+       ```
+       export PATH=$PWD/istio-1.0/bin:$PATH
+       ```
+       {: pre}
 
 2. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
-   ```
-   kubectl get pods -n istio-system
-   ```
-   {: pre}
+    ```
+    kubectl get pods -n istio-system
+    ```
+    {: pre}
 
-   ```
-   NAME                                        READY     STATUS      RESTARTS   AGE
-   istio-citadel-ff5696f6f-rbxbq               1/1       Running     0          1m
-   istio-egressgateway-58d98d898c-wbn7k        1/1       Running     0          1m
-   istio-ingress-6fb78f687f-t9d98              1/1       Running     0          1m
-   istio-ingressgateway-6bc7c7c4bc-8fdx2       1/1       Running     0          1m
-   istio-mixer-post-install-r6tl8              0/1       Completed   0          1m
-   istio-pilot-6c5c6b586c-vmk7m                2/2       Running     0          1m
-   istio-policy-5c7fbb4b9f-55gvc               2/2       Running     0          1m
-   istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
-   istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
-   istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
-   prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
-   ```
-   {: screen}
+    ```
+    NAME                                        READY     STATUS      RESTARTS   AGE
+    istio-citadel-748d656b-pj9bw               1/1       Running   0          2m
+    istio-egressgateway-6c65d7c98d-l54kg       1/1       Running   0          2m
+    istio-galley-65cfbc6fd7-bpnqx              1/1       Running   0          2m
+    istio-ingressgateway-f8dd85989-6w6nj       1/1       Running   0          2m
+    istio-pilot-5fd885964b-l4df6               2/2       Running   0          2m
+    istio-policy-56f4f4cbbd-2z2bk              2/2       Running   0          2m
+    istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running   0          2m
+    istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running   0          2m
+    istio-telemetry-8687d9d745-mwjbf           2/2       Running   0          2m
+    prometheus-55c7c698d6-f4drj                1/1       Running   0          2m
+    ```
+    {: screen}
 
 Good work! You successfully installed Istio into your cluster. Next, deploy the BookInfo sample app into your cluster.
 
@@ -136,7 +104,24 @@ These four microservices include a product web page, book details, reviews (with
 
 When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
-1. Label the `default` namespace with `istio-injection=enabled`.
+1. Download the Istio package containing the necessary BookInfo files.
+    1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
+
+       ```
+       curl -L https://git.io/getLatestIstio | sh -
+       ```
+       {: pre}
+
+    2. Extract the installation files.
+
+    3. Change the directory to the Istio file location.
+
+       ```
+       cd filepath/istio-1.0
+       ```
+       {: pre}
+
+2. Label the `default` namespace with `istio-injection=enabled`.
     ```
     kubectl label namespace default istio-injection=enabled
     ```
@@ -145,115 +130,73 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 2. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
-   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
+   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
 3. Ensure that the microservices and their corresponding pods are deployed:
+    ```
+    kubectl get svc -n default
+    ```
+    {: pre}
 
-   ```
-   kubectl get svc
-   ```
-   {: pre}
+    ```
+    NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+    details                   ClusterIP      172.21.19.104    <none>         9080/TCP         28s
+    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   28s
+    productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         28s
+    ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         28s
+    reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         28s
+    ```
+    {: screen}
 
-   ```
-   NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                                                               AGE  
-   details                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   grafana                    ClusterIP      10.xxx.xx.xxx    <none>         3000/TCP                                                              6m
-   istio-citadel              ClusterIP      10.xxx.xx.xxx    <none>         8060/TCP,9093/TCP                                                     6m
-   istio-egressgateway        ClusterIP      10.xxx.xx.xxx    <none>         80/TCP,443/TCP                                                        6m
-   istio-ingressgateway       LoadBalancer   10.xxx.xx.xxx    169.46.5.162   80:31380/TCP,443:31390/TCP,31400:31400/TCP                            6m
-   istio-pilot                ClusterIP      10.xxx.xx.xxx    <none>         15003/TCP,15005/TCP,15007/TCP,15010/TCP,15011/TCP,8080/TCP,9093/TCP   6m
-   istio-policy               ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP                                           6m
-   istio-sidecar-injector     ClusterIP      10.xxx.xx.xxx    <none>         443/TCP                                                               6m
-   istio-statsd-prom-bridge   ClusterIP      10.xxx.xx.xxx    <none>         9102/TCP,9125/UDP                                                     6m
-   istio-telemetry            ClusterIP      10.xxx.xx.xxx    <none>         9091/TCP,15004/TCP,9093/TCP,42422/TCP                                 6m
-   productpage                ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   prometheus                 ClusterIP      10.xxx.xx.xxx    <none>         9090/TCP                                                              6m
-   ratings                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   reviews                    ClusterIP      10.xxx.xx.xxx    <none>         9080/TCP                                                              6m
-   servicegraph               ClusterIP      10.xxx.xx.xxx    <none>         8088/TCP                                                              6m
-   tracing                    LoadBalancer   10.xxx.xx.xxx    169.46.5.163   80:31115/TCP                                                          6m
-   zipkin                     ClusterIP      10.xxx.xx.xxx    <none>         9411/TCP                                                              6m
-   ```
-   {: screen}
+    ```
+    kubectl get pods -n default
+    ```
+    {: pre}
 
-   ```
-   kubectl get pods
-   ```
-   {: pre}
-
-   ```
-   NAME                                        READY     STATUS      RESTARTS   AGE
-   details-v1-1520924117-48z17                 1/1       Running     0          6m
-   istio-citadel-ff5696f6f-rbxbq               1/1       Running     0          1m
-   istio-egressgateway-58d98d898c-wbn7k        1/1       Running     0          1m
-   istio-ingress-6fb78f687f-t9d98              1/1       Running     0          1m
-   istio-ingressgateway-6bc7c7c4bc-8fdx2       1/1       Running     0          1m
-   istio-mixer-post-install-r6tl8              0/1       Completed   0          1m
-   istio-pilot-6c5c6b586c-vmk7m                2/2       Running     0          1m
-   istio-policy-5c7fbb4b9f-55gvc               2/2       Running     0          1m
-   istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
-   istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
-   istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
-   productpage-v1-560495357-jk1lz              2/2       Running     0          6m
-   prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
-   ratings-v1-734492171-rnr5l                  2/2       Running     0          6m
-   reviews-v1-874083890-f0qf0                  2/2       Running     0          6m
-   reviews-v2-1343845940-b34q5                 2/2       Running     0          6m
-   reviews-v3-1813607990-8ch52                 2/2       Running     0          6m
-   ```
-   {: screen}
+    ```
+    NAME                                        READY     STATUS      RESTARTS   AGE
+    details-v1-6865b9b99d-7v9h8              2/2       Running             0          2m
+    guestbook-76897854cc-6zsws               1/1       Running             0          2m
+    guestbook-76897854cc-pcp4v               1/1       Running             0          2m
+    guestbook-76897854cc-tlqhs               1/1       Running             0          2m
+    productpage-v1-f8c8fb8-tbsz9             2/2       Running             0          2m
+    ratings-v1-77f657f55d-png6j              2/2       Running             0          2m
+    reviews-v1-6b7f6db5c5-fdmbq              2/2       Running             0          2m
+    reviews-v2-7ff5966b99-zflkv              2/2       Running             0          2m
+    reviews-v3-5df889bcff-nlmjp              2/2       Running             0          2m
+    ```
+    {: screen}
 
 4. To verify the app deployment, get the public address for your cluster.
+    1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
+        ```
+        kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+        ```
+        {: pre}
 
-    * For standard clusters:
+    2. Set the ingress host.
+        ```
+        export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+        ```
+        {: pre}
 
-      1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
-          ```
-          istioctl create -f samples/bookinfo/routing/bookinfo-gateway.yaml
-          ```
-          {: pre}
+    3. Set the ingress port.
+        ```
+        export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+        ```
 
-      2. Get the ingress IP and port.
-          ```
-          kubectl get ingress
-          ```
-          {: pre}
+    4. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
 
-          Example output:
-          ```
-          NAME      HOSTS     ADDRESS          PORTS     AGE
-          gateway   *         169.xx.xxx.xxx   80        3m
-          ```
-          {: screen}
-
-      2. Create a `GATEWAY_URL` environment variable that uses the Ingress IP address.
-
-         ```
-         export GATEWAY_URL=<ingress_IP>:80
-         ```
-         {: pre}
-
-    * For free clusters:
-
-      1. Get the public IP address of any worker node in your cluster.
-
-         ```
-         ibmcloud ks workers <cluster_name_or_ID>
-         ```
-         {: pre}
-
-      2. Create a `GATEWAY_URL` environment variable that uses the public IP address of the worker node.
-
-         ```
-         export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-         ```
-         {: pre}
+       ```
+       export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+       ```
+       {: pre}
 
 5. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
      ```
-     curl -I http://$GATEWAY_URL/productpage
+     curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage
      ```
      {: pre}
 
