@@ -70,7 +70,7 @@ Download and install Istio in your cluster.
        ```
        {: pre}
 
-2. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
+2. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue.
     ```
     kubectl get pods -n istio-system
     ```
