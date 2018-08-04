@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-04"
 
 ---
 
@@ -179,7 +179,7 @@ If you want to allow incoming network traffic from the internet, you must expose
 **What is network segmentation and how can I set it up for a cluster?** </br>
 Network segmentation describes the approach to divide a network into multiple sub-networks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one sub-network cannot see or access apps in another sub-network. Network segmentation also limits the access that is provided to an insider or third party software and can limit the range of malicious activities.   
 
-{{site.data.keyword.containershort_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers. However, if you want to use multiple subnets or multiple VLANs in a cluster, for example in a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that worker nodes can see and talk to each other.
+{{site.data.keyword.containershort_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers. However, if you want to use multiple subnets or multiple VLANs in a cluster, for example in a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that worker nodes can see and talk to each other.
 
 VLAN spanning is an {{site.data.keyword.Bluemix_notm}} account setting and can be either turned on or off. When turned on, all clusters in your account can see and talk to each other. While this might be useful for some scenarios, VLAN spanning removes network segmentation for your clusters.
 
