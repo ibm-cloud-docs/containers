@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -507,7 +507,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     ```
     {: screen}
 
-4. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+4. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 5. To configure on-premises and internal account connectivity, choose between these options:
   - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, LoadBalancer, or Ingress services](cs_network_planning.html#planning).

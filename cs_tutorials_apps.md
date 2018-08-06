@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-07-31"
 {:download: .download}
 
 
-# Tutorial: Deploying apps into clusters
+# Tutorial: Deploying apps into Kubernetes clusters
 {: #cs_apps_tutorial}
 
 You can learn how to use {{site.data.keyword.containerlong}} to deploy a containerized app that leverages {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
@@ -55,7 +55,7 @@ Software developers and network administrators that are deploying an app into a 
 
 ## Prerequisites
 
-* [Tutorial: Creating Kubernetes clusters in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
+* [Tutorial: Creating Kubernetes clusters](cs_tutorials.html#cs_cluster_tutorial).
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
@@ -129,7 +129,7 @@ To deploy the app:
 
 6.  Start Docker.
     * If you are using Docker Community Edition, no action is needed.
-    * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/admin/) to find instructions about how to start Docker depending on the Linux distribution that you use.
+    * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/config/daemon/) to find instructions about how to start Docker depending on the Linux distribution that you use.
     * If you are using Docker Toolbox on Windows or OSX, you can use the Docker Quickstart Terminal, which starts Docker for you. Use the Docker Quickstart Terminal for the next few steps to run the Docker commands and then switch back to the CLI where you set the `KUBECONFIG` session variable.
 
 7.  Build a Docker image that includes the app files of the `Lab 1` directory. If you need to make a change to the app in the future, repeat these steps to create another version of the image.
@@ -751,4 +751,4 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
-- Explore the container orchestration journeys on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- Explore the container orchestration code patterns on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)

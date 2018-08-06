@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -93,11 +93,11 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--space</em></code></td>
-      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level. If you do specify a space, then you must also specify an org.</td>
     </tr>
     <tr>
       <td><code><em>--org</em></code></td>
-      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+      <td>Optional: The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
     </tr>
     <tr>
       <td><code><em>--app-containers</em></code></td>

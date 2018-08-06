@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-07-31"
 # Setting up clusters
 {: #clusters}
 
-Design your Kubernetes cluster setup for maximum container availability and capacity with {{site.data.keyword.containerlong}}.
+Design your Kubernetes cluster setup for maximum container availability and cluster capacity with {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial).
 {:shortdesc}
 
 ## Creating multizone clusters in {{site.data.keyword.containershort_notm}}
@@ -49,7 +49,7 @@ Before you get too far, you need to take care of a few admin items to ensure you
   </dd>
 <dt>Enable VLAN spanning or VRF</dt>
   <dd><p>Your worker nodes must communicate with each other on the private network across zones. You have two options:</p>
-  <ol><li>[Enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in your IBM Cloud infrastructure (SoftLayer) account. To enable VLAN spanning, you must have the <strong>Network > Manage Network VLAN Spanning</strong> [infrastructure permission](/docs/iam/infrastructureaccess.html#infrapermission), or you can request the account owner to enable it.</li>
+  <ol><li>[Enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your IBM Cloud infrastructure (SoftLayer) account. To enable VLAN spanning, you must have the <strong>Network > Manage Network VLAN Spanning</strong> [infrastructure permission](/docs/iam/infrastructureaccess.html#infrapermission), or you can request the account owner to enable it.</li>
   <li>Or, use a Virtual Router Function (VRF) enabled IBM Cloud infrastructure (SoftLayer) account. To get a VRF account, contact IBM Cloud infrastructure (SoftLayer) support.</li></ol></dd>
 <dt>Prepare existing persistent volumes</dt>
   <dd><p>Persistent volumes can be used only in the zone where the actual storage device is located. To prevent unexpected app errors in a multizone cluster, you must apply region and zone labels to existing persistent volumes. These labels help the kube-scheduler to determine where to schedule an app that uses the persistent volume. Run the following command and replace <code>&lt;mycluster&gt;</code> with your cluster name:</p>
@@ -200,7 +200,7 @@ You can set up multiple clusters in different regions of one geolocation (such a
 **To set up a global load balancer for multiple clusters:**
 
 1. [Create clusters](cs_clusters.html#clusters) in multiple zones or regions.
-2. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
+2. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
 3. In each cluster, expose your app by using an [application load balancer (ALB)](cs_ingress.html#ingress_expose_public) or [load balancer service](cs_loadbalancer.html#config).
 4. For each cluster, list the public IP addresses for your ALBs or load balancer services.
    - To list the IP address of all public enabled ALBs in your cluster:
@@ -243,7 +243,7 @@ You can choose between virtual or physical (bare metal) servers. Depending on th
 
 Every cluster is set up with a default worker pool that groups worker nodes with the same configuration that you defined during cluster creation, such as the machine type. If you provision a cluster from the UI, you can select multiple zones at the same time. Clusters that are created from the CLI are initially provisioned with a worker pool in one zone only. You can add more zones to your worker pool after the cluster is provisioned to replicate worker nodes evenly across zones. For example, if you add a second zone to a worker pool that consists of 3 worker nodes, then 3 worker nodes are provisioned into the second zone which leaves you with a cluster of 6 worker nodes in total.
 
-To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning). To add different machine type flavors to your cluster, [create another worker pool](cs_cli_reference.html#cs_worker_pool_create).
+To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning). To add different machine type flavors to your cluster, [create another worker pool](cs_cli_reference.html#cs_worker_pool_create).
 
 ### Hardware for worker nodes
 {: #shared_dedicated_node}
@@ -375,7 +375,7 @@ For free clusters, the cluster's worker nodes are connected to an IBM-owned publ
 
 For standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN are automatically provisioned for you. For every subsequent cluster that you create in that zone, you choose the VLANs that you want to use. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity, such as a [Virtual Router Appliance](cs_vpn.html#vyatta), so that the worker nodes can communicate with the master.
 
-**Note**: If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+**Note**: If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 ### Worker node memory limits
 {: #resource_limit_node}
@@ -446,7 +446,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
 
-    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters. To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters. To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
         **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity.
 
 5. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -480,7 +480,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
+- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network.
 - If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
@@ -497,7 +497,7 @@ Before you begin:
 - You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation.
 - [Make sure you have the minimum required permissions in IBM Cloud infrastructure (SoftLayer) to provision a standard cluster](cs_users.html#infra_access).
 - Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
-- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
+- If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network.
 
 To create a cluster:
 
@@ -861,7 +861,7 @@ When you add a zone to a worker pool, the worker nodes that are defined in your 
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](cs_regions.html#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
-*  Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
+*  Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
 
 To add a zone with worker nodes to your worker pool:
 

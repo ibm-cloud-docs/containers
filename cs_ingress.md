@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-07-31"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -86,7 +86,7 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
- - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+ - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
  - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
 <br />
@@ -1079,7 +1079,7 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 ## Customizing an Ingress resource with annotations
 {: #annotations}
 
-To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
+To add capabilities to your Ingress application load balancer (ALB), you can add IBM-specific annotations as metadata in an Ingress resource.
 {: shortdesc}
 
 Get started with some of the most commonly used annotations.
@@ -1143,7 +1143,7 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  ```
  {: pre}
 
-For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
+For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
 <br />
 
@@ -1285,6 +1285,8 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
+
+
 
 ### Increasing the keepalive connection time
 {: #keepalive_time}

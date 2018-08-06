@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-01"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -30,7 +30,7 @@ lastupdated: "2018-08-01"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one. 
+**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -38,7 +38,7 @@ Every storage class specifies the type of file storage that you provision, inclu
     ```
     {: pre}
 
-    Example output: 
+    Example output:
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
@@ -49,25 +49,25 @@ Every storage class specifies the type of file storage that you provision, inclu
     ibmc-file-retain-custom      ibm.io/ibmc-file
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
-    ibmc-file-silver             ibm.io/ibmc-file 
+    ibmc-file-silver             ibm.io/ibmc-file
     ```
     {: screen}
 
-2. Review the configuration of a storage class. 
+2. Review the configuration of a storage class.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
-   
+
    For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
    {: tip}
-   
-3. Choose the type of file storage that you want to provision. 
+
+3. Choose the type of file storage that you want to provision.
    - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
-   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS. 
-     
-4. Choose the size and IOPS for your file storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations. 
-   - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi file storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS. 
+   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS.
+
+4. Choose the size and IOPS for your file storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
+   - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi file storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.
      <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
          <thead>
@@ -146,11 +146,11 @@ Every storage class specifies the type of file storage that you provision, inclu
          </tr>
          </tbody></table>
 
-5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
-   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file). 
+5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted.
+   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file).
    - If you want the PV, the data, and your physical file storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
-   
-6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type. 
+
+6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type.
    **Note:** If you choose a monthly billing type, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.
 
 <br />
@@ -160,12 +160,12 @@ Every storage class specifies the type of file storage that you provision, inclu
 ## Adding file storage to apps
 {: #add_file}
 
-Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure (SoftLayer) account. 
+Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
-- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass). 
+- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
   **Tip:** If you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, follow the steps in this topic to provision storage by using your customized storage class.
 
@@ -174,7 +174,7 @@ To add file storage:
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
     -  **Example for bronze, silver, gold storage classes**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`. 
+       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
 
        ```
        apiVersion: v1
@@ -195,7 +195,7 @@ To add file storage:
         {: codeblock}
 
     -  **Example for using the custom storage class**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`. 
+       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
 
        ```
        apiVersion: v1
@@ -387,7 +387,7 @@ To add file storage:
          ReadOnly:	false
      ```
      {: screen}
-     
+
 <br />
 
 
@@ -396,53 +396,54 @@ To add file storage:
 ## Using existing file storage in your cluster
 {: #existing_file}
 
-If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage. 
+If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
 
 Before you begin, make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
 
-### Step 1: Preparing your existing storage. 
+### Step 1: Preparing your existing storage.
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV and prepare the storage to be accessible in your cluster.  
 
-**For storage that was provisioned with a `retain` storage class:** </br> 
+**For storage that was provisioned with a `retain` storage class:** </br>
 If you provisioned storage with a `retain` storage class and you remove the PVC, the PV and the physical storage device are not automatically removed. To reuse the storage in your cluster, you must remove the remaining PV first.
 
-To use existing storage in a different cluster than the one where you provisioned it, follow the steps for [storage that was created outside of the cluster](#external_storage) to add the storage to the subnet of your worker node. 
+To use existing storage in a different cluster than the one where you provisioned it, follow the steps for [storage that was created outside of the cluster](#external_storage) to add the storage to the subnet of your worker node.
 {: tip}
 
-1. List existing PVs. 
+1. List existing PVs.
    ```
    kubectl get pv
    ```
    {: pre}
-     
-   Look for the PV that belongs to your persistent storage. The PV is in a `released` state. 
-     
-2. Get the details of the PV. 
+
+   Look for the PV that belongs to your persistent storage. The PV is in a `released` state.
+
+2. Get the details of the PV.
    ```
    kubectl describe pv <pv_name>
    ```
    {: pre}
-     
-3. Note the `CapacityGb`, `storageClass`, `failure-domain.beta.kubernetes.io/region`, `failure-domain.beta.kubernetes.io/zone`, `server`, and `path`. 
-  
-4. Remove the PV. 
+
+3. Note the `CapacityGb`, `storageClass`, `failure-domain.beta.kubernetes.io/region`, `failure-domain.beta.kubernetes.io/zone`, `server`, and `path`.
+
+4. Remove the PV.
    ```
    kubectl delete pv <pv_name>
    ```
    {: pre}
-   
-5. Verify that the PV is removed. 
+
+5. Verify that the PV is removed.
    ```
    kubectl get pv
    ```
    {: pre}
-     
+
 </br>
-     
-**For persistent storage that was provisioned outside the cluster:** </br> 
-If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes. 
-1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/), click **Storage**. 
+
+**For persistent storage that was provisioned outside the cluster:** </br>
+If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes.
+
+1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/), click **Storage**.
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
 3.  Select **Subnets**.
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
@@ -515,7 +516,7 @@ If you want to use existing storage that you provisioned earlier, but never used
     ```
     {: pre}
 
-5.  Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV, and a new physical storage instance is [dynamically provisioned](cs_storage_basics.html#dynamic_provisioning). 
+5.  Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV, and a new physical storage instance is [dynamically provisioned](cs_storage_basics.html#dynamic_provisioning).
 
     ```
     kind: PersistentVolumeClaim
@@ -585,7 +586,7 @@ To change the default NFS version, you can either create a new storage class to 
 **Important:** To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
 
 **To create a customized storage class with the desired NFS version:**
-1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision. 
+1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.
 2. Create the storage class in your cluster.
    ```
    kubectl apply -f <filepath/nfsversion_storageclass.yaml>
@@ -674,7 +675,7 @@ Review the following backup and restore options for your file storage:
   <dt>Set up periodic snapshots</dt>
   <dd><p>You can [set up periodic snapshots for your file storage](/docs/infrastructure/FileStorage/snapshots.html), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your file storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>Replicate snapshots to another zone</dt>
- <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to a file storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated file storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p></dd>
+ <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to a file storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated file storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage. </p></dd>
  <dt>Duplicate storage</dt>
  <dd><p>You can [duplicate your file storage instance](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first [set up snapshots for the volume](/docs/infrastructure/FileStorage/snapshots.html).</p></dd>
   <dt>Back up data to {{site.data.keyword.cos_full}}</dt>
@@ -690,7 +691,7 @@ Review the following backup and restore options for your file storage:
 <li>Copy data from a pod in your cluster to a specific container in another pod another: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
-  
+
 <br />
 
 
@@ -925,4 +926,3 @@ parameters:
   mountOptions: nfsvers=<nfs_version>
 ```
 {: codeblock}
-
