@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,8 +16,8 @@ lastupdated: "2018-08-04"
 {:download: .download}
 
 
-# Exposing apps with Ingress 
-{: #ingress} 
+# Exposing apps with Ingress
+{: #ingress}
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
@@ -1079,7 +1079,7 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 ## Customizing an Ingress resource with annotations
 {: #annotations}
 
-To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
+To add capabilities to your Ingress application load balancer (ALB), you can add IBM-specific annotations as metadata in an Ingress resource.
 {: shortdesc}
 
 Get started with some of the most commonly used annotations.
