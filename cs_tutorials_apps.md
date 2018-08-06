@@ -129,7 +129,7 @@ To deploy the app:
 
 6.  Start Docker.
     * If you are using Docker Community Edition, no action is needed.
-    * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/admin/) to find instructions about how to start Docker depending on the Linux distribution that you use.
+    * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/config/daemon/) to find instructions about how to start Docker depending on the Linux distribution that you use.
     * If you are using Docker Toolbox on Windows or OSX, you can use the Docker Quickstart Terminal, which starts Docker for you. Use the Docker Quickstart Terminal for the next few steps to run the Docker commands and then switch back to the CLI where you set the `KUBECONFIG` session variable.
 
 7.  Build a Docker image that includes the app files of the `Lab 1` directory. If you need to make a change to the app in the future, repeat these steps to create another version of the image.
