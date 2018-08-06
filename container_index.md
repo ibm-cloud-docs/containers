@@ -67,7 +67,7 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 *   **Other Options**: Free clusters are deployed within the region that you select, but you cannot choose which zone. For control over zone, networking, and persistent storage, create a standard cluster. [Learn more about the benefits of free and standard clusters](cs_why.html#cluster_types).
 
 
-**What's next?**
+**What's next?**</br>
 Try out some things with your free cluster before it expires.
 
 * Go through the [first {{site.data.keyword.containershort_notm}} tutorial](cs_tutorials.html#cs_cluster_tutorial) for creating a Kubernetes cluster, installing the CLI, creating a private registry, setting up your cluster environment, and adding a service to your cluster.
