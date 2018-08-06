@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-04"
 # Exposing apps with LoadBalancers
 {: #loadbalancer}
 
-Expose a port and use a portable IP address for the load balancer to access a containerized app.
+Expose a port and use a portable IP address for a Layer 4 load balancer to access a containerized app.
 {:shortdesc}
 
 ## Load balancer components and architecture
@@ -31,7 +31,9 @@ When you create a standard cluster, {{site.data.keyword.containershort_notm}} au
 * The portable public subnet provides 1 portable public IP address that is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating a public load balancer service.
 * The portable private subnet provides 1 portable private IP address that is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating a private load balancer service.
 
-Portable public and private IP addresses are static and do not change when a worker node is removed. Therefore, a LoadBalancer service is more available than a NodePort service. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. If you use a LoadBalancer service, a NodePort is also available on each IP address of any worker node. To block access to NodePort while you are using a LoadBalancer service, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
+Portable public and private IP addresses are static and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer and are not bound to a certain port range.
+
+A load balancer service also makes your app available over the service's NodePorts. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to LoadBalancer or NodePort services](cs_network_policy.html#block_ingress).
 
 The LoadBalancer service serves as the external entry point for incoming requests for the app. To access the LoadBalancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`. The following diagram shows how a load balancer directs communication from the internet to an app.
 
@@ -188,7 +190,9 @@ To set up a LoadBalancer service in a multizone cluster:
 
 5. If you choose to [enable source IP preservation for a load balancer service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
-6. Optional: To handle incoming requests to your app from other zones, repeat these steps to add a load balancer in each zone.
+6. To handle incoming requests to your app from other zones, repeat the above steps to add a load balancer in each zone.
+
+7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to LoadBalancer or NodePort services](cs_network_policy.html#block_ingress).
 
 ## Enabling public or private access to an app in a single-zone cluster
 {: #config}
@@ -327,21 +331,24 @@ To create a load balancer service:
 
 5. If you choose to [enable source IP preservation for a load balancer service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
+6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to LoadBalancer or NodePort services](cs_network_policy.html#block_ingress).
+
 <br />
 
 
 ## Adding node affinity and tolerations to app pods for source IP
 {: #node_affinity_tolerations}
 
-Whenever you deploy app pods, load balancer service pods are also deployed to the worker nodes that the app pods are deployed to. However, some situations exist where the load balancer pods and app pods might not be scheduled onto the same worker node:
-{: shortdesc}
+When a client request to your app is sent to your cluster, the request is routed to the load balancer service pod that exposes your app. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+
+To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for load balancer services. The TCP connection continues all the way to the app pods so that the app can see the actual source IP address of the initiator. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
+
+After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. Typically, load balancer service pods are also deployed to the worker nodes that the app pods are deployed to. However, some situations exist where the load balancer pods and app pods might not be scheduled onto the same worker node:
 
 * You have edge nodes that are tainted so that only load balancer service pods can deploy to them. App pods are not permitted to deploy to those nodes.
 * Your cluster is connected to multiple public or private VLANs, and your app pods might deploy to worker nodes that are connected only to one VLAN. Load balancer service pods might not deploy to those worker nodes because the load balancer IP address is connected to a different VLAN than the worker nodes.
 
-When a client request to your app is sent to your cluster, the request is routed to a pod for the Kubernetes load balancer service that exposes the app. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
-
-To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
+To force your app to deploy to specific worker nodes where load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
 
 ### Adding edge node affinity rules and tolerations
 {: #edge_nodes}
