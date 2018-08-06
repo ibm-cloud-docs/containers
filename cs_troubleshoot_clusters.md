@@ -37,22 +37,22 @@ When you create a new Kubernetes cluster, you receive an error message similar t
 
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
-Creating a standard cluster requires that you have either a 
-Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) 
-account term or that you have used the {{site.data.keyword.containerlong_notm}} 
+Creating a standard cluster requires that you have either a
+Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer)
+account term or that you have used the {{site.data.keyword.containerlong_notm}}
 CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 ```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
 'Item' must be ordered with permission.
 ```
 {: screen}
 
 ```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 
-The user does not have the necessary {{site.data.keyword.Bluemix_notm}} 
+{{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
+The user does not have the necessary {{site.data.keyword.Bluemix_notm}}
 Infrastructure permissions to add servers
 ```
 {: screen}
@@ -60,7 +60,7 @@ Infrastructure permissions to add servers
 {: tsCauses}
 {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration.
 
-Users with other {{site.data.keyword.Bluemix_notm}} account types or users that have an existing IBM Cloud infrastructure (SoftLayer) account that is not linked to their {{site.data.keyword.Bluemix_notm}} account must configure their accounts to create standard clusters. 
+Users with other {{site.data.keyword.Bluemix_notm}} account types or users that have an existing IBM Cloud infrastructure (SoftLayer) account that is not linked to their {{site.data.keyword.Bluemix_notm}} account must configure their accounts to create standard clusters.
 
 If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
@@ -72,7 +72,7 @@ The account owner must set up the infrastructure account credentials properly. T
 To check if your cluster uses the linked infrastructure account or a different infrastructure account:
 1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
 2.  Check if your cluster uses a different infrastructure account. From the expandable menu, click **Containers > Clusters**.
-3.  From the table, select your cluster. 
+3.  From the table, select your cluster.
 4.  In the **Overview** tab, if you see an **Infrastructure User** field, the cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account.
 
 ### Configuring the infrastructure API credentials for linked accounts
@@ -81,9 +81,9 @@ To check if your cluster uses the linked infrastructure account or a different i
 1.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
 
     1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
-        
+
     2.  From the expanding menu, select **Infrastructure**.
-        
+
     3.  From the menu bar, select **Account** > **Users** > **User List**.
 
     4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
@@ -91,21 +91,21 @@ To check if your cluster uses the linked infrastructure account or a different i
     5.  Verify or assign the user the [correct infrastructure permissions](cs_users.html#infra_access).
 
 2.  Reset the API key for the region that the cluster is in so that it belongs to the user.
-    
+
     1.  Log in to the terminal as the correct user.
-    
+
     2.  Reset the API key to this user.
         ```
         ibmcloud ks api-key-reset
         ```
         {: pre}    
-    
+
     3.  Verify that the API key is set.
         ```
         ibmcloud ks api-key-info <cluster_name_or_ID>
         ```
         {: pre}
-        
+
     4.  **Optional**: If you previously set credentials manually with the `ibmcloud ks credentials-set` command, remove the associated infrastructure account. Now, the API key that you set in the previous substeps is used to order infrastructure.
         ```
         ibmcloud ks credentials-unset
@@ -114,7 +114,7 @@ To check if your cluster uses the linked infrastructure account or a different i
 
 3.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
-    1.  Check your worker VLAN connectivity. 
+    1.  Check your worker VLAN connectivity.
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
 
@@ -156,9 +156,9 @@ To check if your cluster uses the linked infrastructure account or a different i
 2.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
 
     1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
-        
+
     2.  From the expanding menu, select **Infrastructure**.
-        
+
     3.  From the menu bar, select **Account** > **Users** > **User List**.
 
     4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
@@ -168,18 +168,18 @@ To check if your cluster uses the linked infrastructure account or a different i
 3.  Set the infrastructure API credentials with the user for the correct account.
 
     1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
-            
+
         1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
-            
+
         2.  In the **API Access Information** section, view the **API Username** and **Authentication Key**.    
-        
+
     2.  Set the infrastructure API credentials to use.
         ```
         ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-  
+
 4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
-    1.  Check your worker VLAN connectivity. 
+    1.  Check your worker VLAN connectivity.
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
 
@@ -283,11 +283,11 @@ You can also [delete the bare metal worker node](cs_cli_reference.html#cs_cluste
 <br />
 
 
-## `kubectl exec` and `kubectl logs` do not work
+## `kubectl` commands time out
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-If you run `kubectl exec` or `kubectl logs`, you see the following message.
+If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward`, or `kubectl logs`, you see the following message.
 
   ```
   <workerIP>:10250: getsockopt: connection timed out
