@@ -312,43 +312,43 @@ Review the following information to decide what type of worker pools you want. A
 </tr>
 <tr>
 <td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
-<td>28 Cores 256GB RAM</td>
+<td>28 / 512GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>GPU bare metal, mg1c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
-<td>16 Cores 128GB RAM</td>
+<td>16 / 128GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>GPU bare metal, mg1c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
-<td>28 Cores 512GB RAM</td>
+<td>28 / 256GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Data-intensive bare metal, md1c.16x64.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>16 Cores 64GB RAM</td>
+<td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Data-intensive bare metal, md1c.28x512.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>28 Cores 512GB RAM</td>
+<td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Balanced bare metal, mb1c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>4 Cores 32GB RAM</td>
+<td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Balanced bare metal, mb1c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>16 Cores 64GB RAM</td>
+<td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
