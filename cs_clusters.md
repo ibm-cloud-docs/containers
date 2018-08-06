@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-04"
 # Setting up clusters
 {: #clusters}
 
-Design your Kubernetes cluster setup for maximum container availability and capacity with {{site.data.keyword.containerlong}}.
+Design your Kubernetes cluster setup for maximum container availability and cluster capacity with {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial).
 {:shortdesc}
 
 ## Creating multizone clusters in {{site.data.keyword.containershort_notm}}

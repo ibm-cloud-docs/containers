@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -17,10 +17,10 @@ lastupdated: "2018-08-04"
 
 
 
-# Tutorial: Creating clusters
+# Tutorial: Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
 
-Deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. You can automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster.
+With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster.
 {:shortdesc}
 
 In this tutorial series, you can see how a fictional public relations firm uses Kubernetes capabilities to deploy a containerized app in {{site.data.keyword.Bluemix_notm}}. Leveraging {{site.data.keyword.toneanalyzerfull}}, the PR firm analyzes their press releases and receives feedback.
@@ -28,12 +28,11 @@ In this tutorial series, you can see how a fictional public relations firm uses 
 
 ## Objectives
 
-In this first tutorial, you act as the PR firm's networking administrator. You configure a custom Kubernetes cluster that is used to deploy and test a Hello World version of the app.
-
-To set up the infrastructure:
+In this first tutorial, you act as the PR firm's networking administrator. You configure a custom Kubernetes cluster that is used to deploy and test a Hello World version of the app in {{site.data.keyword.containershort_notm}}.
+{:shortdesc}
 
 -   Create a cluster with 1 worker pool that has 1 worker node.
--   Install the CLIs for running Kubernetes commands and managing Docker images.
+-   Install the CLIs for running [Kubernetes commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) and managing Docker images.
 -   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
 -   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
 
@@ -46,7 +45,7 @@ To set up the infrastructure:
 ## Audience
 
 This tutorial is intended for software developers and network administrators who are creating a Kubernetes cluster for the first time.
-
+{: shortdesc}
 
 ## Prerequisites
 
@@ -57,14 +56,14 @@ This tutorial is intended for software developers and network administrators who
 ## Lesson 1: Creating a cluster and setting up the CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Create your cluster in the GUI and install the required CLIs.
+Create your Kubernetes cluster in the GUI and install the required CLIs.
 {: shortdesc}
 
 **To create your cluster**
 
 Because it can take a few minutes to provision, create your cluster before you install the CLIs.
 
-1.  [In the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) create a free or standard cluster with 1 worker pool that has 1 worker node in it.
+1.  [In the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
     You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
     {: tip}
@@ -151,7 +150,7 @@ Congratulations! You've successfully installed the CLIs for the following lesson
 ## Lesson 2: Setting up your private registry
 {: #cs_cluster_tutorial_lesson2}
 
-Set up a private image repository in {{site.data.keyword.registryshort_notm}} and add secrets to your cluster so that the app can access the {{site.data.keyword.toneanalyzershort}} service.
+Set up a private image repository in {{site.data.keyword.registryshort_notm}} and add secrets to your Kubernetes cluster so that the app can access the {{site.data.keyword.toneanalyzershort}} service.
 {: shortdesc}
 
 1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI by using your {{site.data.keyword.Bluemix_notm}} credentials, when prompted.
@@ -192,7 +191,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 ## Lesson 3: Setting up your cluster environment
 {: #cs_cluster_tutorial_lesson3}
 
-Set the context for your cluster in your CLI.
+Set the context for your Kubernetes cluster in your CLI.
 {: shortdesc}
 
 Every time you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.
@@ -249,7 +248,8 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
 ## Lesson 4: Adding a service to your cluster
 {: #cs_cluster_tutorial_lesson4}
 
-With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.Bluemix_notm}} service that is bound to the cluster can be used by any app that is deployed in that cluster. Repeat the following steps for every {{site.data.keyword.Bluemix_notm}} service that you want to use with your apps.
+With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.Bluemix_notm}} service that is bound to the Kubernetes cluster can be used by any app that is deployed in that cluster. Repeat the following steps for every {{site.data.keyword.Bluemix_notm}} service that you want to use with your apps.
+{: shortdesc}
 
 1.  Add the {{site.data.keyword.toneanalyzershort}} service to your {{site.data.keyword.Bluemix_notm}} account. Replace <service_name> with a name for your service instance.
 
@@ -302,5 +302,4 @@ Great work! Your cluster is configured and your local environment is ready for y
 {: #next}
 
 * Test your knowledge and [take a quiz ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!
-
-* Try the [Tutorial: Deploying apps into Kubernetes clusters in {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.
+* Try the [Tutorial: Deploying apps into Kubernetes clusters](cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.

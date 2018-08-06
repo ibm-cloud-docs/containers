@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-08-04"
 {:download: .download}
 
 
-# Tutorial: Deploying apps into clusters
+# Tutorial: Deploying apps into Kubernetes clusters
 {: #cs_apps_tutorial}
 
 You can learn how to use {{site.data.keyword.containerlong}} to deploy a containerized app that leverages {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
@@ -55,7 +55,7 @@ Software developers and network administrators that are deploying an app into a 
 
 ## Prerequisites
 
-* [Tutorial: Creating Kubernetes clusters in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
+* [Tutorial: Creating Kubernetes clusters](cs_tutorials.html#cs_cluster_tutorial).
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
@@ -751,4 +751,4 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
-- Explore the container orchestration journeys on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- Explore the container orchestration code patterns on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)

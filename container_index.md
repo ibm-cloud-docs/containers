@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -70,9 +70,8 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 **What's next?**
 Try out some things with your free cluster before it expires.
 
-* [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
-* [Deploy an app in your cluster.](cs_app.html#app_cli)
-* [Create a standard cluster with multiple nodes for higher availability.](cs_clusters.html#clusters_ui)
-* [Set up a private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
+* Go through the [first {{site.data.keyword.containershort_notm}} tutorial](cs_tutorials.html#cs_cluster_tutorial) for creating a Kubernetes cluster, installing the CLI, creating a private registry, setting up your cluster environment, and adding a service to your cluster.
+* Keep up your momentum with the [second {{site.data.keyword.containershort_notm}} tutorial](cs_tutorials_apps.html#cs_apps_tutorial) about deploying apps to the cluster.
+* [Create a standard cluster](cs_clusters.html#clusters_ui) with multiple nodes for higher availability.
 
 

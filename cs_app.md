@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-08-04"
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users.
 {: shortdesc}
 
-Learn the general steps for deploying apps by clicking an area of the following image.
+Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](cs_tutorials_apps.html#cs_apps_tutorial).
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
 <map name="d62e18" id="d62e18">

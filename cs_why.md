@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-04"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -40,7 +40,7 @@ Clusters are deployed on compute hosts that provide native Kubernetes and {{site
 |{{site.data.keyword.Bluemix_notm}} service integration|<ul><li>Add extra capabilities to your app through the integration of {{site.data.keyword.Bluemix_notm}} services, such as Watson APIs, Blockchain, data services, or Internet of Things.</li></ul>|
 {: caption="Benefits of the {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
-
+Ready to get started? Try out the [creating a Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial).
 
 <br />
 
