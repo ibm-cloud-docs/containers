@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-07"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# Planning cluster networking
+# Planning to expose your apps with public networking
 {: #planning}
 
 With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publicly or privately accessible and internal networking within your cluster.
@@ -59,6 +59,8 @@ To choose the best networking service for your app, you can follow this decision
 </map>
 
 <br />
+
+
 
 
 ## Planning public external networking
@@ -184,3 +186,5 @@ By default, it is difficult to track changing private IP addresses for apps that
 To avoid conflicts, do not use this IP range on any nodes that communicate with your worker nodes. A DNS lookup entry is also created for the service and stored in the `kube-dns` component of the cluster. The DNS entry contains the name of the service, the namespace where the service was created, and the link to the assigned in-cluster IP address.
 
 To access a pod behind a cluster IP service, apps can either use the in-cluster IP address of the service or send a request by using the name of the service. When you use the name of the service, the name is looked up in the `kube-dns` component and routed to the in-cluster IP address of the service. When a request reaches the service, the service ensures that all requests are equally forwarded to the pods, independent of their in-cluster IP addresses and the worker node they are deployed to.
+
+
