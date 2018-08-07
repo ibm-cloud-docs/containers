@@ -16,11 +16,14 @@ lastupdated: "2018-08-07"
 {:download: .download}
 
 
-# Planning to expose your apps with public networking
+# Planning to expose your apps with external networking
 {: #planning}
+
 
 With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publicly or privately accessible and internal networking within your cluster.
 {: shortdesc}
+
+
 
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
