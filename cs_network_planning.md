@@ -28,7 +28,7 @@ With {{site.data.keyword.containerlong}}, you can manage both external networkin
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
 
-To make your apps externally accessible from the [public internet](#public_access) or a [private network](#private_both_vlans), {{site.data.keyword.containershort_notm}} supports three networking services.
+To make your apps externally accessible from the public internet or a private network, {{site.data.keyword.containershort_notm}} supports three networking services.
 {:shortdesc}
 
 **[NodePort service](cs_nodeport.html)** (free and standard clusters)
