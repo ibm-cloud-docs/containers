@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-08"
 
 ---
 
@@ -725,18 +725,75 @@ http://<subdomain2>.<domain>/<app1_path>
 <br />
 
 
-## Enabling a default private ALB
+## Exposing apps to a private network
+{: #ingress_expose_private}
+
+Expose apps to a private network by using the private Ingress ALB.
+{:shortdesc}
+
+Before you begin:
+* Review the Ingress [prerequisites](#config_prereqs).
+* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
+    * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+    * Private VLAN only: You must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+
+### Step 1: Deploy apps and create app services
+{: #private_1}
+
+Start by deploying your apps and creating Kubernetes services to expose them.
+{: shortdesc}
+
+1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
+
+2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
+      2.  Define a service for the app that the ALB will expose.
+
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myappservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
+
+          <table>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>The port that the service listens on.</td>
+           </tr>
+           </tbody></table>
+      3.  Save your changes.
+      4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
+
+          ```
+          kubectl apply -f myappservice.yaml [-n <namespace>]
+          ```
+          {: pre}
+      5.  Repeat these steps for every app that you want to expose.
+
+
+### Step 2: Enable the default private ALB
 {: #private_ingress}
 
 When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created in each zone that you have worker nodes and assigned a portable private IP address and a private route. However, the default private ALB in each zone is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
 {:shortdesc}
 
 **Note**: If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](cs_subnets.html#request).
-
-Before you begin:
-
--   Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
 
@@ -766,6 +823,8 @@ To enable a default private ALB by using the pre-assigned, IBM-provided portable
    ibmcloud ks alb-configure --albID <private_ALB_ID> --enable
    ```
    {: pre}
+
+3. **Multizone clusters**: For high availability, repeat the above steps for the private ALB in each zone.
 
 <br>
 To enable the private ALB by using your own portable private IP address:
@@ -818,74 +877,10 @@ To enable the private ALB by using your own portable private IP address:
    ```
    {: pre}
 
-<br />
+4. **Multizone clusters**: For high availability, repeat the above steps for the private ALB in each zone.
 
-
-## Exposing apps to a private network
-{: #ingress_expose_private}
-
-Expose apps to a private network by using the private Ingress ALB.
-{:shortdesc}
-
-Before you begin:
-* Review the Ingress [prerequisites](#config_prereqs).
-* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
-    * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-    * Private VLAN only: You must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
-* [Enable the private application load balancer](#private_ingress).
-
-### Step 1: Deploy apps and create app services
-{: #private_1}
-
-Start by deploying your apps and creating Kubernetes services to expose them.
-{: shortdesc}
-
-1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
-
-2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
-      2.  Define a service for the app that the ALB will expose.
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>The port that the service listens on.</td>
-           </tr>
-           </tbody></table>
-      3.  Save your changes.
-      4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
-
-          ```
-          kubectl apply -f myappservice.yaml [-n <namespace>]
-          ```
-          {: pre}
-      5.  Repeat these steps for every app that you want to expose.
-
-
-### Step 2: Map your custom domain and select TLS termination
-{: #private_2}
+### Step 3: Map your custom domain and select TLS termination
+{: #private_3}
 
 When you configure the private ALB, you use a custom domain that your apps will be accessible through and choose whether to use TLS termination.
 {: shortdesc}
@@ -910,8 +905,8 @@ The ALB load balances HTTP network traffic to your apps. To also load balance in
           {: pre}
 
 
-### Step 3: Create the Ingress resource
-{: #pivate_3}
+### Step 4: Create the Ingress resource
+{: #private_4}
 
 Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
 {: shortdesc}
@@ -1037,8 +1032,8 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
 
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
 
-### Step 4: Access your app from your private network
-{: #private_4}
+### Step 5: Access your app from your private network
+{: #private_5}
 
 1. Before you can access your app, make sure that you can access a DNS service.
   * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
