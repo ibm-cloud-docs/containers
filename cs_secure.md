@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-07"
+lastupdated: "2018-08-08"
 
 ---
 
@@ -134,7 +134,7 @@ The following image shows the components that are set up for every worker node t
   <th>Description</th>
   </thead>
   <tbody>
-    <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containershort_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containershort_notm}} uses a Linux kernel that is tailored for Ubuntu. You can run any Linux distribution inside your container, but some Linux distributions might not be compatible or supported if you run them on a Linux kernel version that is tailored for Ubuntu.</td></tr>
+    <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containershort_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containershort_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containershort_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</td></tr>
     <tr>
   <td>Compute isolation</td>
   <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](cs_clusters.html#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
