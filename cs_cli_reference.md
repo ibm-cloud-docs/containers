@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-08"
 
 ---
 
@@ -787,7 +787,8 @@ trusted: <em>true</em>
 
 <p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
-
+<dt><code>--private-only</code></dt>
+  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Planning private external networking for a private VLAN setup only](cs_network_planning.html#private_vlan).</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.

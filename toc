@@ -43,7 +43,6 @@ IBM Cloud Kubernetes Service
         cs_psp.md
         cs_edge.md
         cs_health.md
-
     cs_images.md
     cs_app.md
 

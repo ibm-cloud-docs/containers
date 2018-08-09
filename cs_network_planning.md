@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-08"
 
 ---
 
@@ -16,16 +16,19 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# Planning cluster networking
+# Planning to expose your apps with external networking
 {: #planning}
+
 
 With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publicly or privately accessible and internal networking within your cluster.
 {: shortdesc}
 
+
+
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
 
-To make your apps externally accessible from the [public internet](#public_access) or a [private network](#private_both_vlans), {{site.data.keyword.containershort_notm}} supports three networking services.
+To make your apps externally accessible from the public internet or a private network, {{site.data.keyword.containershort_notm}} supports three networking services.
 {:shortdesc}
 
 **[NodePort service](cs_nodeport.html)** (free and standard clusters)
@@ -61,6 +64,8 @@ To choose the best networking service for your app, you can follow this decision
 <br />
 
 
+
+
 ## Planning public external networking
 {: #public_access}
 
@@ -93,7 +98,7 @@ The following sections describe the capabilities across {{site.data.keyword.cont
 ### Expose your apps with private networking services and secure your cluster with Calico network policies
 {: #private_both_vlans_calico}
 
-The public network interface for worker nodes is protected by [predefined Calico network policy settings](cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containershort_notm}} architecture](cs_tech.html).
+The public network interface for worker nodes is protected by [predefined Calico network policy settings](cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master. Access to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containershort_notm}} architecture](cs_tech.html).
 
 If you expose your apps with a NodePort service, a LoadBalancer service, or an Ingress application load balancer, the default Calico policies also allow inbound network traffic from the internet to these services. To make your app accessible from a private network only, you can choose to use only private NodePort, LoadBalancer, or Ingress services and block all public traffic to the services.
 
@@ -184,3 +189,5 @@ By default, it is difficult to track changing private IP addresses for apps that
 To avoid conflicts, do not use this IP range on any nodes that communicate with your worker nodes. A DNS lookup entry is also created for the service and stored in the `kube-dns` component of the cluster. The DNS entry contains the name of the service, the namespace where the service was created, and the link to the assigned in-cluster IP address.
 
 To access a pod behind a cluster IP service, apps can either use the in-cluster IP address of the service or send a request by using the name of the service. When you use the name of the service, the name is looked up in the `kube-dns` component and routed to the in-cluster IP address of the service. When a request reaches the service, the service ensures that all requests are equally forwarded to the pods, independent of their in-cluster IP addresses and the worker node they are deployed to.
+
+

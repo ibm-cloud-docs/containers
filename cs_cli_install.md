@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-07"
 
 ---
 
@@ -36,7 +36,7 @@ Install the required CLIs to create and manage your Kubernetes clusters in {{sit
 
 This task includes the information for installing these CLIs and plug-ins:
 
--   {{site.data.keyword.Bluemix_notm}} CLI version 0.5.0 or later
+-   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI version that matches the `major.minor` version of your cluster
 -   Optional: {{site.data.keyword.registryshort_notm}} plug-in
@@ -46,6 +46,9 @@ This task includes the information for installing these CLIs and plug-ins:
 To install the CLIs:
 
 1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](../cli/index.html#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+
+    Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-).
+    {: tip}
 
 2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
@@ -267,7 +270,7 @@ You might want to update the CLIs periodically to use new features.
 
 This task includes the information for updating these CLIs.
 
--   {{site.data.keyword.Bluemix_notm}} CLI version 0.5.0 or later
+-   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI version 1.10.5 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-07"
 
 ---
 
@@ -2327,7 +2327,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
+  serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2349,11 +2349,11 @@ metadata:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;:&lt;value1&gt;;
-      &lt;header2&gt;:&lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;:&lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
