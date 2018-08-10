@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-10"
 
 ---
 
@@ -90,6 +90,8 @@ This information summarizes updates that are likely to have impact on deployed a
 For a complete list of changes, review the following information:
 * [Kubernetes changelog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [IBM version changelog](cs_versions_changelog.html).
+
+
 
 ## Version 1.10
 {: #cs_v110}
