@@ -2492,7 +2492,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
  tls:
  - hosts:
