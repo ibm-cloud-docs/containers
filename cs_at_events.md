@@ -19,11 +19,16 @@ lastupdated: "2018-08-13"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-You can view, manage, and audit user-initated activities in your {{site.data.keyword.containershort_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
+You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containershort_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
 {: shortdesc}
 
-## Finding the information
-{: #at-find}
+
+
+For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} docs](/docs/services/cloud-activity-tracker/index.html). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
+
+
+## Finding the information for Kubernetes audit events
+{: #kube-find}
 
 {{site.data.keyword.cloudaccesstrailshort}} events are available in the {{site.data.keyword.cloudaccesstrailshort}} **account domain** that is available in the {{site.data.keyword.Bluemix_notm}} region where the events are generated. {{site.data.keyword.cloudaccesstrailshort}} events are available in the {{site.data.keyword.cloudaccesstrailshort}} **space domain** that is associated to the Cloud Foundry space where the {{site.data.keyword.cloudaccesstrailshort}} service is provisioned.
 
@@ -36,16 +41,20 @@ To monitor administrative activity:
 5. In the **Available Fields** list, click **type**. Click the magnifying glass icon for **Activity Tracker** to limit the logs to only those tracked by the service.
 6. You can use the other available fields to narrow your search.
 
+To let other users view account and space events, see [Granting permissions to see account events](docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+{: tip}
 
+## Tracking Kube audit events
+{: #kube-events}
 
-## Tracking events
-{: #events}
+Check out the following table for a list of the events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
 
-Check out the following tables for a list of the events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
+**Before you begin**
 
-For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} docs](/docs/services/cloud-activity-tracker/index.html).
+Be sure that your cluster is configured to forward [Kubernetes API audit events](cs_health.html#api_forward).
 
-For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
+**Forwarded events**
 
 <table>
   <tr>
@@ -54,11 +63,11 @@ For more information about the Kubernetes actions that are tracked, review the [
   </tr>
   <tr>
     <td><code>bindings.create</code></td>
-    <td>A binding is created.</td>
+    <td>A binding was created.</td>
   </tr>
   <tr>
     <td><code>configmaps.create</code></td>
-    <td>A configuration map is created.</td>
+    <td>A configuration map was created.</td>
   </tr>
   <tr>
     <td><code>configmaps.delete</code></td>
@@ -66,11 +75,11 @@ For more information about the Kubernetes actions that are tracked, review the [
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>A configuration map is patched.</td>
+    <td>A configuration map was patched.</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
-    <td>A configuration map is updated.</td>
+    <td>A configuration map was updated.</td>
   </tr>
   <tr>
     <td><code>events.create</code></td>
@@ -90,7 +99,7 @@ For more information about the Kubernetes actions that are tracked, review the [
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>A range limit is created.</td>
+    <td>A range limit was created.</td>
   </tr>
   <tr>
     <td><code>limitranges.delete</code></td>
@@ -106,7 +115,7 @@ For more information about the Kubernetes actions that are tracked, review the [
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
-    <td>A namespace is created.</td>
+    <td>A namespace was created.</td>
   </tr>
   <tr>
     <td><code>namespaces.delete</code></td>
