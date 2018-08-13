@@ -260,6 +260,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      Name                          Location   State    Type               Tags   
      <iam_service_instance_name>   <region>   active   service_instance      
      ```
+     {: screen}
       
    You can also see the different service types in your dashboard as **Cloud Foundry Services** and **Services**.
    
