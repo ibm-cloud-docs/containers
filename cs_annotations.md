@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-07"
+lastupdated: "2018-08-13"
 
 ---
 
@@ -2492,7 +2492,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
  tls:
  - hosts:

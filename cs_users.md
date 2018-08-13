@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-13"
 
 
 ---
@@ -168,7 +168,7 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 {{site.data.keyword.containershort_notm}} access policies correspond with certain Kubernetes role-based access control (RBAC) roles. To authorize other Kubernetes roles that differ from the corresponding access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
 {: shortdesc}
 
-There are times that you might need access policies to be more granular than an IAM policy might allow. No problem! You can assign access policies for specific Kubernetes resources for users or for users. You can create a role and then bind the role to specific users or a group. For more information, see [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) in the Kubernetes documentation.
+Do you need your cluster access policies to be more granular than an IAM policy allows? No problem! You can assign access policies for specific Kubernetes resources to users, groups of users (in clusters that run Kubernetes v1.11 or later), or service accounts. You can create a role and then bind the role to specific users or a group. For more information, see [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) in the Kubernetes documentation.
 
 When a binding is created for a group, it affects any user that is added or removed from that group. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
 {: tip}
@@ -262,21 +262,21 @@ If you want to assign access to a service such as for a continuous integration, 
         kind: RoleBinding
         apiVersion: rbac.authorization.k8s.io/v1
         metadata:
-          name: my_role_team1
+          name: my_role_binding
           namespace: default
         subjects:
         - kind: User
           name: https://iam.ng.bluemix.net/kubernetes#user1@example.com
           apiGroup: rbac.authorization.k8s.io
-        - kind: User
-          name: https://iam.ng.bluemix.net/kubernetes#user2@example.com
+        - kind: Group
+          name: team1
           apiGroup: rbac.authorization.k8s.io
-        - kind: User
-          name: system:serviceaccount:<namespace>:<service_account_name>
-          apiGroup: rbac.authorization.k8s.io
+        - kind: ServiceAccount
+          name: <service_account_name>
+          namespace: <kubernetes_namespace>
         roleRef:
           kind: Role
-          name: custom-rbac-test
+          name: my_role
           apiGroup: rbac.authorization.k8s.io
         ```
         {: codeblock}
@@ -305,16 +305,25 @@ If you want to assign access to a service such as for a continuous integration, 
             </tr>
             <tr>
               <td><code>subjects/kind</code></td>
-              <td>Specify the kind as `User`.</td>
+              <td>Specify the kind as one of the following:
+              <ul><li>`User`: Bind the RBAC role to an individual user in your account.</li>
+              <li>`Group`: For clusters that run Kubernetes 1.11 or later, bind the RBAC role to an [IAM group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>`ServiceAccount`: Bind the RBAC role to a service account in a namespace in your cluster.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects/name</code></td>
-              <td><ul><li>**For individual users**: Append the user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`. For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li>
-              <li>**For service accounts**: Specify the namespace and service name. For example: `system:serviceaccount:<namespace>:<service_account_name>`</li></ul></td>
+              <td><ul><li>**For `User`**: Append the individual user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`. For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li>
+              <li>**For `Group`**: For clusters that run Kubernetes 1.11 or later, specify the name of the [IAM group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>**For `ServiceAccount`**: Specify the service account name.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects/apiGroup</code></td>
-              <td>Use `rbac.authorization.k8s.io`.</td>
+              <td><ul><li>**For `User` or `Group`**: use `rbac.authorization.k8s.io`.</li>
+              <li>**For `ServiceAccount`**: Do not include this field.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects/namespace</code></td>
+              <td>**For `ServiceAccount` only**: Specify the name of the Kubernetes namespace that the service account is deployed to.</td>
             </tr>
             <tr>
               <td><code>roleRef/kind</code></td>
@@ -334,7 +343,7 @@ If you want to assign access to a service such as for a continuous integration, 
     2. Create the role binding resource in your cluster.
 
         ```
-        kubectl apply -f filepath/my_role_team1.yaml
+        kubectl apply -f filepath/my_role_binding.yaml
         ```
         {: pre}
 

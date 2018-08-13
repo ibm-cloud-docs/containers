@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-08-13"
 
 ---
 
@@ -221,147 +221,167 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 
 
-## Adding Cloud Foundry services to clusters
+## Adding {{site.data.keyword.Bluemix_notm}} services to clusters
 {: #adding_cluster}
 
-Add an existing Cloud Foundry service instance to your cluster to enable your cluster users to access and use the service when they deploy an app to the cluster.
+Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
-Before you begin:
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+   
+Looking to access an {{site.data.keyword.Bluemix_notm}} service instance with an app that runs outside of {{site.data.keyword.Bluemix_notm}}? See [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external) for more information. 
+{: tip}
+   
+To add an {{site.data.keyword.Bluemix_notm}} service to your cluster: 
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:** Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
+   
+2. Check the type of service that you created and make note of the service instance **Name**. 
+   - **Cloud Foundry services:**
+     ```
+     ibmcloud service list
+     ```
+     {: pre}
+   
+     Example output:
+     ```
+     name                         service           plan    bound apps   last operation
+     <cf_service_instance_name>   <service_name>    spark                create succeeded
+     ```
+     {: screen}
+   
+  - **IAM-enabled services:**
+     ```
+     ibmcloud resource service-instances
+     ```
+     {: pre}
+     
+     Example output: 
+     ```
+     Name                          Location   State    Type               Tags   
+     <iam_service_instance_name>   <region>   active   service_instance      
+     ```
+     {: screen}
+      
+   You can also see the different service types in your dashboard as **Cloud Foundry Services** and **Services**.
+   
+3. For IAM-enabled services, create a Cloud Foundry alias so that you can bind this service to your cluster. If your service already is a Cloud Foundry service, this step is not necessary and you can continue with the next step. 
+   1. Target a Cloud Foundry org and space. 
+      ```
+      ibmcloud target --cf
+      ```
+      {: pre}
+   
+   2. Create a Cloud Foundry alias for the service instance.
+      ```
+      ibmcloud resource service-alias-create <service_alias_name> --instance-name <iam_service_instance_name>
+      ```
+      {: pre}
 
-1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-2. [Request an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
-   **Note:** To create an instance of a service in the Washington DC zone, you must use the CLI.
-3. Cloud Foundry services are supported to bind with clusters, but other services are not. You can see the different service types after you create the service instance and the services are grouped in the dashboard as **Cloud Foundry Services** and **Services**. To bind the services in the **Services** section with clusters, [first create Cloud Foundry aliases](#adding_resource_cluster).
+   3. Verify that the service alias is created.
+      ```
+      ibmcloud service list
+      ```
+      {: pre}
+      
+4. Identify the cluster namespace that you want to use to add your service. Choose between the following options.
+   - List existing namespaces and choose a namespace that you want to use.
+     ```
+     kubectl get namespaces
+     ```
+     {: pre}
 
-**Note:**
-<ul><ul>
-<li>You can add only {{site.data.keyword.Bluemix_notm}} services that support service keys. If the service does not support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external).</li>
-<li>The cluster and the worker nodes must be deployed fully before you can add a service.</li>
-</ul></ul>
+   - Create a namespace in your cluster.
+     ```
+     kubectl create namespace <namespace_name>
+     ```
+     {: pre}
 
-
-To add a service:
-2.  List available {{site.data.keyword.Bluemix_notm}} services.
-
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
-
-    Example CLI output:
-
-    ```
-    name                      service           plan    bound apps   last operation
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
-
-3.  Note the **name** of the service instance that you want to add to your cluster.
-4.  Identify the cluster namespace that you want to use to add your service. Choose between the following options.
-    -   List existing namespaces and choose a namespace that you want to use.
-
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
-
-    -   Create a namespace in your cluster.
-
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
-
-5.  Add the service to your cluster.
-
+5.  Add the service to your cluster. For IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. 
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
-    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
-
+    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Secrets are automatically encrypted in etcd to protect your data. 
+    
+    Example output:
     ```
     ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace:	mynamespace
+    Namespace:	     mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
 
-6.  Verify that the secret was created in your cluster namespace.
-
-    ```
-    kubectl get secrets --namespace=<namespace>
-    ```
-    {: pre}
-
-To use the service in a pod that is deployed in the cluster, cluster users must access the service credentials. Users can access the service credentials of the {{site.data.keyword.Bluemix_notm}} service by [mounting the Kubernetes secret as a secret volume to a pod](#adding_app).
-
-<br />
-
-
-## Creating Cloud Foundry aliases for other {{site.data.keyword.Bluemix_notm}} service resources
-{: #adding_resource_cluster}
-
-Cloud Foundry services are supported for binding with clusters. You can see the different service types after you create the service instance and the services are grouped in the dashboard as **Cloud Foundry Services** and **Services**. To bind an {{site.data.keyword.Bluemix_notm}} service that is not a Cloud Foundry service to your cluster, create a Cloud Foundry alias for the service instance.
-{:shortdesc}
-
-Before you begin, [request an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
-
-To create a Cloud Foundry alias for the service instance:
-
-1. Target the org and a space where the service instance is created.
-
-    ```
-    ibmcloud target -o <org_name> -s <space_name>
-    ```
-    {: pre}
-
-2. Note the service instance name.
-    ```
-    ibmcloud resource service-instances
-    ```
-    {: pre}
-
-3. Create a Cloud Foundry alias for the service instance.
-    ```
-    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
-    ```
-    {: pre}
-
-4. Verify that the service alias was created.
-
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
-
-5. [Bind the Cloud Foundry alias to the cluster](#adding_cluster).
+6.  Verify the service credentials in your Kubernetes secret. 
+    1. Get the details of the secret and note the **binding** value. The **binding** value is base64 encoded and holds the credentials for your service instance in JSON format.
+       ```
+       kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+       ```
+       {: pre}
+    
+       Example output:
+       ```
+       apiVersion: v1
+       data:
+         binding: <binding>
+       kind: Secret
+       metadata:
+         annotations:
+           service-instance-id: 1111aaaa-a1aa-1aa1-1a11-111aa111aa11
+           service-key-id: 2b22bb2b-222b-2bb2-2b22-b22222bb2222
+         creationTimestamp: 2018-08-07T20:47:14Z
+         name: binding-<service_instance_name>
+         namespace: <namespace>
+         resourceVersion: "6145900"
+         selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+         uid: 33333c33-3c33-33c3-cc33-cc33333333c
+       type: Opaque
+       ```
+       {: screen}
+   
+    2. Decode the binding value. 
+       ```
+       echo "<binding>" | base64 -D
+       ```
+       {: pre}
+       
+       Example output: 
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
+       
+    3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find for your service instance in the {{site.data.keyword.Bluemix_notm}} dashboard.
+    
+7. Now that your service is bound to your cluster, you must configure your app to [access the service credentials in the Kubernetes secret](#adding_app). 
 
 
-
-<br />
-
-
-## Adding services to apps
+## Accessing service credentials from your apps
 {: #adding_app}
 
-Encrypted Kubernetes secrets are used to store {{site.data.keyword.Bluemix_notm}} service details and credentials and allow secure communication between the service and the cluster.
-{:shortdesc}
+To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, you must make the service credentials that are stored in the Kubernetes secret available to your app. 
+{: shortdesc}
 
-Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. Rather than exposing confidential information via environment variables or directly in the Dockerfile, you can mount secrets to a pod. Then, those secrets can be accessed by a running container in a pod.
+The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
+- [Mount the secret as a volume to your pod](#mount_secret)
+- [Reference the secret in environment variables](#reference_secret)
 
-When you mount a secret volume to your pod, a file that is named `binding` is stored in the volume mount directory. The `binding` file includes all information and credentials that you need to access the {{site.data.keyword.Bluemix_notm}} service.
+Before your begin: 
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#adding_cluster). 
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. Make sure that the {{site.data.keyword.Bluemix_notm}} service that you want to use in your app was [added to the cluster](cs_integrations.html#adding_cluster) by the cluster admin.
+### Mounting the secret as a volume to your pod
+{: #mount_secret}
 
-1.  List available secrets in your cluster namespace.
+When you mount the secret as a volume to your pod, a file that is named `binding` is stored in the volume mount directory. The `binding` file in JSON format includes all the information and credentials that you need to access the {{site.data.keyword.Bluemix_notm}} service.
+{: shortdesc}
+
+1.  List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
 
     ```
-    kubectl get secrets --namespace=<my_namespace>
+    kubectl get secrets
     ```
     {: pre}
 
@@ -374,12 +394,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ```
     {: screen}
 
-2.  Look for a secret of type **Opaque** and note the **name** of the secret. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
-
-3.  Open your preferred editor.
-
-4.  Create a YAML file to configure a pod that can access the service details through a secret volume. If you bound more than one service, verify that each secret is associated with the correct service.
-
+2.  Create a YAML file for your Kubernetes deployment and mount the secret as a volume to your pod. 
     ```
     apiVersion: apps/v1beta1
     kind: Deployment
@@ -399,13 +414,13 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
             app: secret-test
         spec:
           containers:
-          - image: nginx
+          - image: registry.bluemix.net/ibmliberty:latest
             name: secret-test
             volumeMounts:
-            - mountPath: /opt/service-bind
-              name: service-bind-volume
+            - mountPath: <mount_path>
+              name: <volume_name>
           volumes:
-          - name: service-bind-volume
+          - name: <volume_name>
             secret:
               defaultMode: 420
               secretName: binding-<service_instance_name>
@@ -420,32 +435,30 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     <tbody>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>The name of the secret volume that you want to mount to your container.</td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
-    <td>Enter a name for the secret volume that you want to mount to your container.</td>
+    <td><code>volumeMounts/name</code></br><code>volumes/name</code></td>
+    <td>The name of the volume to mount to your pod.</td>
     </tr>
     <tr>
     <td><code>secret/defaultMode</code></td>
-    <td>Set read-only permissions for the service secret.</td>
+    <td>The read and write permissions on the secret. Use `420` to set read-only permissions. </td>
     </tr>
     <tr>
     <td><code>secret/secretName</code></td>
-    <td>Enter the name of the secret that you noted earlier.</td>
+    <td>The name of the secret that you noted in the previous step.</td>
     </tr></tbody></table>
 
-5.  Create the pod and mount the secret volume.
-
+3.  Create the pod and mount the secret as a volume.
     ```
     kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
-6.  Verify that the pod is created.
-
+4.  Verify that the pod is created.
     ```
-    kubectl get pods --namespace=<my_namespace>
+    kubectl get pods
     ```
     {: pre}
 
@@ -457,34 +470,185 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ```
     {: screen}
 
-7.  Note the **NAME** of your pod.
-8.  Get the details about the pod and look for the secret name.
+5.  Access the service credentials. 
+    1. Log in to your pod. 
+       ```
+       kubectl exec <pod_name> -it bash
+       ```
+       {: pre}
+       
+    2. Navigate to your volume mount path that you defined earlier and list the files in your volume mount path.
+       ```
+       cd <volume_mountpath> && ls
+       ```
+       {: pre}
+       
+       Example output: 
+       ```
+       binding
+       ```
+       {: screen}
+       
+       The `binding` file includes the service credentials that you stored in the Kubernetes secret. 
+       
+    4. View the service credentials. The credentials are stored as key value pairs in JSON format. 
+       ```
+       cat binding
+       ```
+       {: pre}
+       
+       Example output: 
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
+       
+    5. Configure your app to parse the JSON content and retrieve the information that you need to access your service. 
+
+
+### Referencing the secret in environment variables
+{: #reference_secret}
+
+You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.   
+{: shortdesc}
+
+1. List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
 
     ```
-    kubectl describe pod <pod_name>
+    kubectl get secrets
     ```
     {: pre}
 
-    Output:
+    Example output:
 
     ```
-    ...
-    Volumes:
-      service-bind-volume:
-        Type:       Secret (a volume populated by a Secret)
-        SecretName: binding-<service_instance_name>
-    ...
+    NAME                              TYPE            DATA      AGE
+    binding-<service_instance_name>   Opaque          1         3m
     ```
     {: screen}
-
     
+2. Get the details of your secret to find potential key value pairs that you can reference as environment variables in your pod. The service credentials are stored in the `binding` key of your secret. 
+   ```
+   kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+   ```
+   {: pre}
+    
+   Example output:
+   ```
+   apiVersion: v1
+   data:
+     binding: <binding>
+   kind: Secret
+   metadata:
+     annotations:
+       service-instance-id: 7123acde-c3ef-4ba2-8c52-439ac007fa70
+       service-key-id: 9h30dh8a-023f-4cf4-9d96-d12345ec7890
+     creationTimestamp: 2018-08-07T20:47:14Z
+     name: binding-<service_instance_name>
+     namespace: <namespace>
+     resourceVersion: "6145900"
+     selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+     uid: 12345a31-9a83-11e8-ba83-cd49014748f
+   type: Opaque
+   ```
+   {: screen}
 
-9.  Configure your apps to find the `binding` secret file in the mount directory, parse the JSON content, and determine the URL and service credentials to access your {{site.data.keyword.Bluemix_notm}} service.
+3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key. 
+   ```
+   apiVersion: apps/v1beta1
+   kind: Deployment
+   metadata:
+     labels:
+       app: secret-test
+     name: secret-test
+     namespace: <my_namespace>
+   spec:
+     selector:
+       matchLabels:
+         app: secret-test
+     template:
+       metadata:
+         labels:
+           app: secret-test
+       spec:
+         containers:
+         - image: registry.bluemix.net/ibmliberty:latest
+           name: secret-test
+           env:
+           - name: BINDING
+             valueFrom:
+               secretKeyRef:
+                 name: binding-<service_instance_name>
+                 key: binding
+     ```
+     {: codeblock}
+     
+     <table>
+     <caption>Understanding the YAML file components</caption>
+     <thead>
+     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td><code>containers/env/name</code></td>
+     <td>The name of your environment variable.</td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/name</code></td>
+     <td>The name of the secret that you noted in the previous step.</td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/key</code></td>
+     <td>The key that is part of your secret and that you want to reference in your environment variable. To reference the service credentials, you must use the <strong>binding</strong> key.  </td>
+     </tr>
+     </tbody></table>
 
-You can now access the {{site.data.keyword.Bluemix_notm}} service details and credentials. To work with your {{site.data.keyword.Bluemix_notm}} service, ensure that your app is configured to find the service secret file in the mount directory, parse the JSON content and determine the service details.
+4. Create the pod that references the `binding` key of your secret as an environment variable.
+   ```
+   kubectl apply -f secret-test.yaml
+   ```
+   {: pre}
 
-<br />
+5. Verify that the pod is created.
+   ```
+   kubectl get pods
+   ```
+   {: pre}
 
+   Example CLI output:
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+   secret-test-1111454598-gfx32   1/1       Running   0          1m
+   ```
+   {: screen}
+    
+6. Verify that the environment variable is set correctly. 
+   1. Log in to your pod. 
+      ```
+      kubectl exec <pod_name> -it bash
+      ```
+      {: pre}
+      
+   2. List all environment variables in the pod. 
+      ```
+      env
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      ```
+      {: screen}
+
+7. Configure your app to read the environment variable and to parse the JSON content to retrieve the information that you need to access your service. 
+
+   Example code in Python: 
+   ```
+   if os.environ.get('BINDING'):
+        credentials = json.loads(os.environ.get('BINDING'))
+   ```
+   {: codeblock}
 
 ## Setting up Helm in {{site.data.keyword.containershort_notm}}
 {: #helm}

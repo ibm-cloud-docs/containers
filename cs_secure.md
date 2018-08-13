@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-08"
+lastupdated: "2018-08-13"
 
 ---
 
@@ -106,7 +106,7 @@ The following image shows the default cluster security settings that address aut
       <li>ServiceAccount</li>
       <li>StorageObjectInUseProtection (Kubernetes 1.10 and later)</li>
       <li>ValidatingAdmissionWebhook (Kubernetes 1.9 and later)</li></ul></br>
-      You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containershort_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li><li><strong>[Custom pod security policies](cs_psp.html#psp):</strong> Customize the default pod security policies or create your own to prevent unauthorized pod actions.</ul></br><strong>Note: </strong> If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster. </td>
+      You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containershort_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li></ul></br><strong>Note: </strong> If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster. </td>
     </tr>
   </tbody>
 </table>
@@ -134,7 +134,7 @@ The following image shows the components that are set up for every worker node t
   <th>Description</th>
   </thead>
   <tbody>
-    <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containershort_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containershort_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containershort_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</td></tr>
+    <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containershort_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containershort_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containershort_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</td></tr>
     <tr>
   <td>Compute isolation</td>
   <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](cs_clusters.html#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
