@@ -41,7 +41,28 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018
+{: #1105_1518}
 
+<table summary="Changes that were made since version 1.10.5_1517">
+<caption>Changes since version 1.10.5_1517</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.5_1517, released 27 July 2018
 {: #1105_1517}
@@ -308,7 +329,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018
+{: #199_1521}
 
+<table summary="Changes that were made since version 1.9.9_1520">
+<caption>Changes since version 1.9.9_1520</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.9.9_1520, released 27 July 2018
 {: #199_1520}
@@ -561,7 +603,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018
+{: #1815_1519}
 
+<table summary="Changes that were made since version 1.8.15_1518">
+<caption>Changes since version 1.8.15_1518</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.8.15_1518, released 27 July 2018
 {: #1815_1518}
