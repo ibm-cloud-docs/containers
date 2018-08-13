@@ -41,7 +41,7 @@ To monitor administrative activity:
 5. In the **Available Fields** list, click **type**. Click the magnifying glass icon for **Activity Tracker** to limit the logs to only those tracked by the service.
 6. You can use the other available fields to narrow your search.
 
-To let other users view account and space events, see [Granting permissions to see account events](docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+To let other users view account and space events, see [Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
 {: tip}
 
 ## Tracking Kube audit events
