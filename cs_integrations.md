@@ -365,7 +365,7 @@ To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, 
 
 The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
 - [Mount the secret as a volume to your pod](#mount_secret)
-- [Reference the secret in environment variables](#reference_secret) 
+- [Reference the secret in environment variables](#reference_secret)
 
 Before your begin: 
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
@@ -508,6 +508,9 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 ### Referencing the secret in environment variables
 {: #reference_secret}
 
+You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.   
+{: shortdesc}
+
 1. List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
 
     ```
@@ -523,7 +526,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
     ```
     {: screen}
     
-2. Get the details of your secret to find potential key value pairs that you can reference as environment variables in your pod. 
+2. Get the details of your secret to find potential key value pairs that you can reference as environment variables in your pod. The service credentials are stored in the `binding` key of your secret. 
    ```
    kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
    ```
@@ -548,10 +551,8 @@ When you mount the secret as a volume to your pod, a file that is named `binding
    type: Opaque
    ```
    {: screen}
-   
-   The service credentials are stored in the `binding` key of your secret. 
 
-3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key.  
+3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key. 
    ```
    apiVersion: apps/v1beta1
    kind: Deployment
@@ -647,19 +648,6 @@ When you mount the secret as a volume to your pod, a file that is named `binding
         credentials = json.loads(os.environ.get('BINDING'))
    ```
    {: codeblock}
-
-### Adding the service credentials to your deployment YAML file
-{: #yaml_data}
-
-Instead of accessing the service credentials from your Kubernetes secret, you can choose to add this information directly as environment variables to your deployment YAML. 
-{: shortdesc}
-
-**Important:** When you choose this method, you expose sensitive data in Kubernetes objects that are not designed to hold sensitive data and that do not encrypt this information by default. Review [Storing personal information](cs_secure.html#pi) for more information. Use this option only if you cannot [mount the secret as a volume](#mount_secret) or [reference the secret as environment variables](#reference_secret). 
-
-For more information, see [Accessing services across {{site.data.keyword.Bluemix_notm}} deployment environments](/docs/apps/reqnsi.html#migrate_instance). 
-
-<br />
-
 
 ## Setting up Helm in {{site.data.keyword.containershort_notm}}
 {: #helm}
