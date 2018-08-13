@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-11"
+lastupdated: "2018-08-13"
 
 ---
 
@@ -233,8 +233,7 @@ Looking to access an {{site.data.keyword.Bluemix_notm}} service instance with an
 {: tip}
    
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster: 
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
-   **Note:** Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:** Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
    
 2. Check the type of service that you created and make note of the service instance **Name**. 
    - **Cloud Foundry services:**
@@ -245,7 +244,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
    
      Example output:
      ```
-     name                      service           plan    bound apps   last operation
+     name                         service           plan    bound apps   last operation
      <cf_service_instance_name>   <service_name>    spark                create succeeded
      ```
      {: screen}
@@ -260,6 +259,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      Name                          Location   State    Type               Tags   
      <iam_service_instance_name>   <region>   active   service_instance      
+     ```
       
    You can also see the different service types in your dashboard as **Cloud Foundry Services** and **Services**.
    
@@ -352,7 +352,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
        ```
        {: screen}
        
-    3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find in the {{site.data.keyword.Bluemix_notm}} dashboard.
+    3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find for your service instance in the {{site.data.keyword.Bluemix_notm}} dashboard.
     
 7. Now that your service is bound to your cluster, you must configure your app to [access the service credentials in the Kubernetes secret](#adding_app). 
 
@@ -449,7 +449,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
     <td>The name of the secret that you noted in the previous step.</td>
     </tr></tbody></table>
 
-3.  Create the pod and mount the secret volume.
+3.  Create the pod and mount the secret as a volume.
     ```
     kubectl apply -f secret-test.yaml
     ```
@@ -503,9 +503,6 @@ When you mount the secret as a volume to your pod, a file that is named `binding
        {: screen)
        
     5. Configure your app to parse the JSON content and retrieve the information that you need to access your service. 
-
-
-<br />
 
 
 ### Referencing the secret in environment variables
