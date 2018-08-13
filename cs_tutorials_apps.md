@@ -439,16 +439,25 @@ As defined in the configuration script, Kubernetes can use an availability check
   ```
   {: screen}
 
-8.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+8.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard GUI.
 
-9. In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
+    *  **From the CLI**: Watch what is happening to your pods as they change status. 
+       ```
+       kubectl get pods -o wide -w
+       ```
+       {: pre}
+       
+    *  **From the GUI**:
 
-    ```
-    Liveness probe failed: HTTP probe failed with statuscode: 500
-    Back-off restarting failed docker container
-    Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-    ```
-    {: screen}
+       1.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+       2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
+
+       ```
+       Liveness probe failed: HTTP probe failed with statuscode: 500
+       Back-off restarting failed docker container
+       Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
+       ```
+       {: screen}
 
 Congratulations! You deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
