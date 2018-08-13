@@ -235,6 +235,10 @@ To add file storage:
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
         </tr>
         <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany:</strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany:</strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce:</strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+        </tr>
+        <tr>
         <td><code>spec/resources/requests/storage</code></td>
         <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
