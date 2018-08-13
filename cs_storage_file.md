@@ -236,7 +236,7 @@ To add file storage:
         </tr>
         <tr>
         <td><code>spec/accessMode</code></td>
-        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany:</strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany:</strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce:</strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -495,6 +495,10 @@ If you want to use existing storage that you provisioned earlier, but never used
     <tr>
     <td><code>spec/capacity/storage</code></td>
     <td>Enter the storage size of the existing NFS file share that you retrieved earlier. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB), and the size must match the size of the existing file share.</td>
+    </tr>
+    <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
     </tr>
     <tr>
     <td><code>spec/nfs/server</code></td>
