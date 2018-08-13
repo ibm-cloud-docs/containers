@@ -550,7 +550,7 @@ To add block storage:
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container.</td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path.</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
