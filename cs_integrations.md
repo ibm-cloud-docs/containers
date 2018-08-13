@@ -520,7 +520,6 @@ When you mount the secret as a volume to your pod, a file that is named `binding
     ```
     NAME                              TYPE            DATA      AGE
     binding-<service_instance_name>   Opaque          1         3m
-
     ```
     {: screen}
     
