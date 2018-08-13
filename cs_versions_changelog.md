@@ -41,6 +41,8 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+
+
 ### Changelog for 1.10.5_1517, released 27 July 2018
 {: #1105_1517}
 
@@ -306,6 +308,8 @@ Review the following changes.
 
 Review the following changes.
 
+
+
 ### Changelog for 1.9.9_1520, released 27 July 2018
 {: #199_1520}
 
@@ -556,6 +560,8 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for 1.8.15_1518, released 27 July 2018
 {: #1815_1518}
