@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -29,12 +29,86 @@ For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.11 [changelog](#111_changelog).
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
 -  Version 1.8 [changelog](#18_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
 
+## Version 1.11 changelog
+{: #111_changelog}
+
+Review the following changes.
+
+### Changelog for 1.11.2_1513, released 14 August 2018
+{: #1112_1513}
+
+<table summary="Changes that were made since version 1.10.5_1518">
+<caption>Changes since version 1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>N/A</td>
+<td>1.1.2</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2).</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, update them to handle either runtime. Examples of times you might rely on Docker as the container runtime:
+<ul><li>If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.</li>
+<li>Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.</li></ul><br>You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.2.14</td>
+<td>v3.2.18</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.2.18).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.5-118</td>
+<td>v1.11.2-60</td>
+<td>Updated to support Kubernetes 1.11 release. In addition, load balancer pods now use the new `ibm-app-cluster-critical` pod priority class.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>334</td>
+<td>338</td>
+<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](cs_storage_basics.html#multizone).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.11.2</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated the OpenID Connect configuration for the cluster's Kubernetes API server to support {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) access groups. Added `Priority` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod priority. For more information, see:
+<ul><li>[IAM access groups](cs_users.html#rbac)</li>
+<li>[Configuring pod priority](cs_pod_priority.html#pod_priority)</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes Heapster</td>
+<td>v1.5.2</td>
+<td>v.1.5.4</td>
+<td>See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.10 changelog
 {: #110_changelog}
