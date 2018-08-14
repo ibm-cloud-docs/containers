@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-08-13"
 
 Expose a port and use a portable IP address for a Layer 4 load balancer to access a containerized app.
 {:shortdesc}
+
+
 
 ## Load balancer components and architecture
 {: #planning}
@@ -503,3 +505,4 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
         {: screen}
 
     4. In the **Labels** section of the output, verify that the public or private VLAN is the VLAN that you designated in previous steps.
+
