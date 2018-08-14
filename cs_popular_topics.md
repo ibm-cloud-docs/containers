@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -23,6 +23,24 @@ lastupdated: "2018-08-13"
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+## Popular topics in August 2018
+{: #aug18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in August 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>14 August</td>
+<td>Update your clusters to Kubernetes versions 1.11 to assign pod priority</td>
+<td>After you update your cluster to [Kubernetes version 1.11](cs_versions.html#cs_v111), you can take advantage of new capabilities, such as increased container runtime performance with `containerd` or [assigning pod priority](cs_pod_priority.html#pod_priority).</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in July 2018
 {: #july18}
