@@ -513,7 +513,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 3.  Create the PV in your cluster.
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -545,7 +545,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 6.  Create your PVC.
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -597,7 +597,7 @@ To change the default NFS version, you can either create a new storage class to 
 1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.
 2. Create the storage class in your cluster.
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -638,7 +638,7 @@ To change the default NFS version, you can either create a new storage class to 
 
    3. Re-create the pod.
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
