@@ -35,6 +35,7 @@ For information about changes since the previous version, see the following chan
 -  Version 1.8 [changelog](#18_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
+</br>
 
 ## Version 1.11 changelog
 {: #111_changelog}
