@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -127,56 +127,32 @@ To deploy the app:
         ```
         {: pre}
 
-6.  Start Docker.
-    * If you are using Docker Community Edition, no action is needed.
-    * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/config/daemon/) to find instructions about how to start Docker depending on the Linux distribution that you use.
-    * If you are using Docker Toolbox on Windows or OSX, you can use the Docker Quickstart Terminal, which starts Docker for you. Use the Docker Quickstart Terminal for the next few steps to run the Docker commands and then switch back to the CLI where you set the `KUBECONFIG` session variable.
+6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
 
-7.  Build a Docker image that includes the app files of the `Lab 1` directory. If you need to make a change to the app in the future, repeat these steps to create another version of the image.
+    Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
-    Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ```
+    {: pre}
 
-    1.  Build the image locally. Specify the name and tag that you want to use. Be sure to use the namespace that you created in {{site.data.keyword.registryshort_notm}} in the previous tutorial. Tagging the image with the namespace information tells Docker where to push the image in a later step. Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
+    When the build is complete, verify that you see the following success message:
+    
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed 
+    f31d9ee9db57: Pushed 
+    33c64488a635: Pushed 
+    0804854a4553: Layer already exists 
+    6bd4a62f5178: Layer already exists 
+    9dfa40a0da3b: Layer already exists 
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-        ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
-        ```
-        {: pre}
-
-        When the build is complete, verify that you see the following success message:
-        ```
-        Successfully built <image_id>
-        Successfully tagged <image_tag>
-        ```
-        {: screen}
-
-    2.  Push the image to your registry namespace.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
-        ```
-        {: pre}
-
-        Example output:
-
-        ```
-        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-        ea2ded433ac8: Pushed
-        894eb973f4d3: Pushed
-        788906ca2c7e: Pushed
-        381c97ba7dc3: Pushed
-        604c78617f34: Pushed
-        fa18e5ffd316: Pushed
-        0a5e2b2ddeaa: Pushed
-        53c779688d06: Pushed
-        60a0858edcd5: Pushed
-        b6ca02dfe5e6: Pushed
-        1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-        43 size: 2398
-        ```
-        {: screen}
-
-8.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give it any name that you want. If you used the Docker Quickstart terminal to run Docker commands, be sure that you switch back to the CLI that you used to set the `KUBECONFIG` session variable.
+7.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -192,7 +168,7 @@ To deploy the app:
 
     Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
 
-9.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
+8.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -238,7 +214,7 @@ To deploy the app:
     </tr>
     </tbody></table>
 
-10. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
+9. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1.  Get information about the service to see which NodePort was assigned.
 
         ```
@@ -283,7 +259,7 @@ To deploy the app:
         ```
         {: screen}
 
-11. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
+10. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
 
     ```
     Hello world! Your app is up and running in a cluster!
@@ -293,12 +269,12 @@ To deploy the app:
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
 
-12. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+11. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
-13. In the **Workloads** tab, you can see the resources that you created.
+12. In the **Workloads** tab, you can see the resources that you created.
 
 Congratulations! You deployed your first version of the app.
 
@@ -330,47 +306,30 @@ As defined in the configuration script, Kubernetes can use an availability check
 
 2.  If you started a new CLI session, log in and set the cluster context.
 
-3.  Build and tag the second version of the app locally as an image. Again, don't forget the period (`.`) at the end of the command.
+3.  Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registryshort_notm}}.  Again, don't forget the period (`.`) at the end of the command.
 
-  ```
-  docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+      ```
+    {: pre}
 
-  Verify that you see the success message.
+    Verify that you see the success message.
 
-  ```
-  Successfully built <image_id>
-  ```
-  {: screen}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed 
+    f31d9ee9db57: Pushed 
+    33c64488a635: Pushed 
+    0804854a4553: Layer already exists 
+    6bd4a62f5178: Layer already exists 
+    9dfa40a0da3b: Layer already exists 
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-4.  Push the second version of the image in your registry namespace. Wait for the image to be pushed before you continue to the next step.
-
-  ```
-  docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
-  ```
-  {: pre}
-
-  Example output:
-
-  ```
-  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-  ```
-  {: screen}
-
-5.  Open the `healthcheck.yml` file, in the `Lab 2` directory, with a text editor. This configuration script combines a few steps from the previous lesson to create a deployment and a service at the same time. The PR firm's app developers can use these scripts when updates are made or to troubleshoot issues by re-creating the pods.
+4.  Open the `healthcheck.yml` file, in the `Lab 2` directory, with a text editor. This configuration script combines a few steps from the previous lesson to create a deployment and a service at the same time. The PR firm's app developers can use these scripts when updates are made or to troubleshoot issues by re-creating the pods.
     1. Update the details for the image in your private registry namespace.
 
         ```
@@ -399,7 +358,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 
     4.  In the **Service** section, note the `NodePort`. Rather than generating a random NodePort like you did in the previous lesson, you can specify a port in the 30000 - 32767 range. This example uses 30072.
 
-6.  Switch back to the CLI that you used to set your cluster context and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
+5.  Switch back to the CLI that you used to set your cluster context and run the configuration script. When the deployment and the service are created, the app is available for the PR firm's users to see.
 
   ```
   kubectl apply -f healthcheck.yml
@@ -414,7 +373,7 @@ As defined in the configuration script, Kubernetes can use an availability check
   ```
   {: screen}
 
-7.  Now that the deployment work is done you can open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
+6.  Now that the deployment work is done you can open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -439,7 +398,7 @@ As defined in the configuration script, Kubernetes can use an availability check
   ```
   {: screen}
 
-8.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard GUI.
+7.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard GUI.
 
     *  **From the CLI**: Watch what is happening to your pods as they change status. 
        ```
@@ -513,10 +472,10 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: pre}
 
-    2.  Build and tag the first part of the app locally as an image. Again, don't forget the period (`.`) at the end of the command. If you're using the Docker Quickstart terminal to run Docker commands, be sure that you switch CLIs.
+    2.  Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Again, don't forget the period (`.`) at the end of the command.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -526,13 +485,6 @@ From the previous tutorial, you have your account and a cluster with one worker 
         Successfully built <image_id>
         ```
         {: screen}
-
-    3.  Push the first part of the app as an image in your private registry namespace. Wait for the image to be pushed before you continue to the next step.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson
-        ```
-        {: pre}
 
 4.  Build the {{site.data.keyword.watson}}-talk image.
 
@@ -543,10 +495,10 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: pre}
 
-    2.  Build and tag the second part of the app locally as an image. Again, don't forget the period (`.`) at the end of the command.
+    2.  Build, tag, and push the `watson-talk`app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Again, don't forget the period (`.`) at the end of the command.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -557,14 +509,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: screen}
 
-    3.  Push the second part of the app to your private registry namespace. Wait for the image to be pushed before you continue to the next step.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson-talk
-        ```
-        {: pre}
-
-5.  Verify that the images were successfully added to your registry namespace. If you used the Docker Quickstart terminal to run Docker commands, be sure that you switch back to the CLI that you used to set the `KUBECONFIG` session variable.
+5.  Verify that the images were successfully added to your registry namespace.
 
     ```
     ibmcloud cr images

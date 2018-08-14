@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-08-13"
 
 **Supported Kubernetes versions**:
 
-- Latest: 1.10.5
+- Latest: 1.11.2
 - Default: 1.10.5
 - Other: 1.9.9, 1.8.15
 
@@ -80,6 +80,7 @@ As updates become available, you are notified when you view information about th
 <br/>
 
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+-  Version 1.11 [migration actions](#cs_v111).
 -  Version 1.10 [migration actions](#cs_v110).
 -  Version 1.9 [migration actions](#cs_v19).
 -  Version 1.8 [migration actions](#cs_v18).
@@ -91,7 +92,74 @@ For a complete list of changes, review the following information:
 * [Kubernetes changelog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [IBM version changelog](cs_versions_changelog.html).
 
+## Version 1.11
+{: #cs_v111}
 
+Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
+
+### Update before master
+{: #111_before}
+
+<table summary="Kubernetes updates for version 1.11">
+<caption>Changes to make before you update the master to Kubernetes 1.11</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`containerd` new Kubernetes container runtime</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, update them to handle either runtime. Examples of times you might rely on Docker as the container runtime:
+<ul><li>If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.</li>
+<li>Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.</li></ul><br>You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).</td>
+</tr>
+<tr>
+<td>Kubernetes container volume mount propagation</td>
+<td>The default value for the [`mountPropagation` field ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) for a container `VolumeMount` changed from `HostToContainer` to `None`. This change restores the behavior that existed in Kubernetes version 1.9 and earlier. If your pod specs rely on `HostToContainer` being the default, update them.</td>
+</tr>
+<tr>
+<td>Kubernetes API server JSON deserializer</td>
+<td>The Kubernetes API server JSON deserializer is now case-sensitive. This change restores the behavior that existed in Kubernetes version 1.7 and earlier. If your JSON resource definitions use the incorrect case, update them. <br><br>**Note**: Only direct Kubernetes API server requests are impacted. The `kubectl` CLI continued to enforce case-sensitive keys in Kubernetes version 1.7 and later, so if you strictly manage your resources with `kubectl`, you are not impacted.</td>
+</tr>
+</tbody>
+</table>
+
+### Update after master
+{: #111_after}
+
+<table summary="Kubernetes updates for version 1.11">
+<caption>Changes to make after you update the master to Kubernetes 1.11</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Refresh Kubernetes configuration</td>
+<td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. <br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>`kubectl` CLI</td>
+<td>The `kubectl` CLI for Kubernetes version 1.11 requires the `apps/v1` APIs. As a result, the v1.11 `kubectl` CLI does not work for clusters that run Kubernetes version 1.8 or earlier. Use the version of the `kubectl` CLI that matches the Kubernetes API server version of your cluster.</td>
+</tr>
+<tr>
+<td>`kubectl auth can-i`</td>
+<td>Now, when a user is not authorized, the `kubectl auth can-i` command fails with `exit code 1`. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>Now, when deleting resources by using selection criteria such as labels, the `kubectl delete` command ignores `not found` errors by default. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>Kubernetes `sysctls` feature</td>
+<td>The `security.alpha.kubernetes.io/sysctls` annotation is now ignored. Instead, Kubernetes added fields to the `PodSecurityPolicy` and `Pod` objects for specifying and controlling `sysctls`. For more information, see [Using sysctls in Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/). <br><br>After you update the cluster master and workers, update your `PodSecurityPolicy` and `Pod` objects to use the new `sysctls` fields.</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.10
 {: #cs_v110}

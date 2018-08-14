@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -40,7 +40,6 @@ This task includes the information for installing these CLIs and plug-ins:
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI version that matches the `major.minor` version of your cluster
 -   Optional: {{site.data.keyword.registryshort_notm}} plug-in
--   Optional: Docker version 1.9 or later
 
 <br>
 To install the CLIs:
@@ -130,8 +129,6 @@ To install the CLIs:
 
     The plug-in is displayed in the results as container-registry.
 
-6.  To build images locally and push them to your registry namespace, [install Docker ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download). If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. The Docker CLI is used to build apps into images. The prefix for running commands by using the Docker CLI is `docker`.
-
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containershort_notm}}](cs_clusters.html#clusters_cli).
 
 For reference information about these CLIs, see the documentation for those tools.
@@ -151,6 +148,8 @@ For reference information about these CLIs, see the documentation for those tool
 
 Instead of installing each of the CLIs individually on your computer, you can install the CLIs into a container that runs on your computer.
 {:shortdesc}
+
+Before you begin, [install Docker ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download) to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) instead.
 
 1. Create an image from the provided Dockerfile.
 
@@ -274,7 +273,6 @@ This task includes the information for updating these CLIs.
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI version 1.10.5 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in
--   Docker version 1.9. or later
 
 <br>
 To update the CLIs:
@@ -333,10 +331,6 @@ To update the CLIs:
 
         The registry plug-in is displayed in the results as container-registry.
 
-6.  Update Docker.
-    -   If you are using Docker Community Edition, start Docker, click the **Docker** icon, and click **Check for updates**.
-    -   If you are using Docker Toolbox, download the [latest version ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) and run the installer.
-
 <br />
 
 
@@ -352,8 +346,6 @@ This task includes the information for removing these CLIs:
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
--   Docker version 1.9. or later
-
 <br>
 To uninstall the CLIs:
 
@@ -379,12 +371,6 @@ To uninstall the CLIs:
     {: pre}
 
     The container-service and the container-registry plug-in are not displayed in the results.
-
-6.  Uninstall Docker. Instructions to uninstall Docker vary based on the operating system that you use.
-
-    - [OSX ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
-    - [Linux ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

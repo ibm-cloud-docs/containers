@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -322,7 +322,7 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 ### Viewing logs
 {: #view_logs}
 
-To view logs for clusters and containers, you can use the standard Kubernetes and Docker logging features.
+To view logs for clusters and containers, you can use the standard Kubernetes and container runtime logging features.
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -343,9 +343,9 @@ For more information about viewing logs, see [Navigating to Kibana from a web br
 
 </br>
 
-**Docker logs**
+**Container logs**
 
-You can leverage the built-in Docker logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+You can leverage the built-in container runtime logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
@@ -621,7 +621,7 @@ To forward Kubernetes API audit logs:
 ## Viewing metrics
 {: #view_metrics}
 
-Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps. **Note**: Monitoring is supported only for standard clusters.
+Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and container runtime features to monitor the health of your clusters and apps. **Note**: Monitoring is supported only for standard clusters.
 {:shortdesc}
 
 <dl>

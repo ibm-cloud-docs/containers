@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -235,6 +235,10 @@ To add file storage:
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
         </tr>
         <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+        </tr>
+        <tr>
         <td><code>spec/resources/requests/storage</code></td>
         <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
@@ -449,7 +453,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
 5.  Click **Submit**.
 6.  Click the name of the file storage.
-7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<server>:/<path>`.
+7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<nfs_server>:<file_storage_path>`.
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
 
@@ -493,6 +497,10 @@ If you want to use existing storage that you provisioned earlier, but never used
     <td>Enter the storage size of the existing NFS file share that you retrieved earlier. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB), and the size must match the size of the existing file share.</td>
     </tr>
     <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+    </tr>
+    <tr>
     <td><code>spec/nfs/server</code></td>
     <td>Enter the NFS file share server ID that you retrieved earlier.</td>
     </tr>
@@ -505,7 +513,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 3.  Create the PV in your cluster.
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -537,7 +545,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 6.  Create your PVC.
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -589,7 +597,7 @@ To change the default NFS version, you can either create a new storage class to 
 1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.
 2. Create the storage class in your cluster.
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -630,7 +638,7 @@ To change the default NFS version, you can either create a new storage class to 
 
    3. Re-create the pod.
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
