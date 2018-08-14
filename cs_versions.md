@@ -139,6 +139,10 @@ Review changes that you might need to make when you are updating from the previo
 </thead>
 <tbody>
 <tr>
+<td>Refresh cluster logging configuration</td>
+<td>If you [configured log forwarding](cs_health.html#health) for your cluster, update the logging configuration by running the `ibmcloud ks logging-config-refresh --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_logging_refresh).</td>
+</tr>
+<tr>
 <td>Refresh Kubernetes configuration</td>
 <td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. <br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
 </tr>
