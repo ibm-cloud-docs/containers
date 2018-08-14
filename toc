@@ -41,6 +41,7 @@ IBM Cloud Kubernetes Service
         cs_cluster_update.md
         cs_users.md
         cs_psp.md
+        cs_pod_priority.md
         cs_edge.md
         cs_health.md
     cs_images.md
