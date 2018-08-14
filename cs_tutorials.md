@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -32,7 +32,7 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 {:shortdesc}
 
 -   Create a cluster with 1 worker pool that has 1 worker node.
--   Install the CLIs for running [Kubernetes commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) and managing Docker images.
+-   Install the CLIs for running [Kubernetes commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) and managing Docker images in {{site.data.keyword.registrylong_notm}}.
 -   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
 -   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
 
@@ -73,7 +73,6 @@ As your cluster provisions, install the following CLIs that are used to manage c
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
--   Docker CLI
 
 </br>
 **To install the CLIs and their prerequisites**
@@ -141,8 +140,6 @@ As your cluster provisions, install the following CLIs that are used to manage c
     ibmcloud plugin list
     ```
     {: pre}
-
-7. To build images locally and push them to your private image repository, [install the Docker community edition CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download). If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) instead.
 
 Congratulations! You've successfully installed the CLIs for the following lessons and tutorials. Next, set up your cluster environment and add the {{site.data.keyword.toneanalyzershort}} service.
 

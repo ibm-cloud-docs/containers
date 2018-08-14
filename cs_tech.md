@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -25,7 +25,7 @@ Learn more about the technology behind {{site.data.keyword.containerlong}}.
 ## Docker containers
 {: #docker_containers}
 
-Built on existing Linux container technology (LXC), the open source project named Docker defined templates for how to package software into standardized units, called containers, that include all of the elements that an app needs to run.
+Built on existing Linux container technology (LXC), the open source project named Docker defined templates for how to package software into standardized units, called containers, that include all of the elements that an app needs to run. {{site.data.keyword.containerlong_notm}} uses `containerd` as the container runtime to deploy containers from Docker container images into your cluster.
 {:shortdesc}
 
 Learn about some basic Docker concepts:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -485,5 +485,4 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
    {: pre}
 
 <br />
-
 
