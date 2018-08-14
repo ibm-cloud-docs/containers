@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-14"
 
 ---
 
@@ -453,7 +453,7 @@ If you want to use existing storage that you provisioned earlier, but never used
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
 5.  Click **Submit**.
 6.  Click the name of the file storage.
-7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<server>:/<path>`.
+7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<nfs_server>:<file_storage_path>`.
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
 
