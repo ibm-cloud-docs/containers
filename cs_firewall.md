@@ -268,7 +268,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       </table>
 </p>
 
-  4.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}} and {{site.data.keyword.loganalysislong_notm}} services:
+  4. Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}} and {{site.data.keyword.loganalysislong_notm}} services:
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Replace <em>&lt;monitoring_public_IP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
@@ -332,7 +332,9 @@ Let your cluster access infrastructure resources and services from behind a fire
        </table>
 </p>
 
-  5. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) beginning with the **Backend (private) Network** section.
+  5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containershort_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+
+  6. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) beginning with the **Backend (private) Network** section.
       - Add all of the [zones within the regions](cs_regions.html#zones) that you are using.
       - Note that you must add the `dal01` zone (data center).
       - Open ports 80 and 443 to allow the cluster bootstrapping process.
@@ -340,7 +342,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - Open port 53 for DNS access.
       - Because all pod-to-pod traffic goes over the private network, either open all ports that the pods are using to communicate, or open all ports for the worker nodes in the cluster.
 
-  6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the zone that your cluster is in.
+  7. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the zone that your cluster is in.
       - To find the zone of your cluster, run `ibmcloud ks clusters`.
       - Allow access to the IP range for both the **Frontend (public) network** and **Backend (private) Network**.
       - Note that you must add the `dal01` zone (data center) for the **Backend (private) Network**.
