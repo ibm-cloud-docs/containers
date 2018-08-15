@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -502,7 +502,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 ### View network policies in clusters that are running Kubernetes version 1.10 or later
 {: #1.10_examine_policies}
 
-Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
+Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
 {: tip}
 
 1. View the Calico host endpoint.
