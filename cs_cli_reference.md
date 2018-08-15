@@ -1751,7 +1751,7 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](cs_clusters.html#shared_dedicated_node).
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](cs_clusters_planning.html#shared_dedicated_node).
 
 <strong>Command options</strong>:
 

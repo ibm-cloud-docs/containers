@@ -64,13 +64,13 @@ You can run {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Blu
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](cs_clusters.html#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containershort_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containershort_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containershort_notm}} technology](cs_tech.html).
+ <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](cs_clusters_planning.html#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containershort_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containershort_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containershort_notm}} technology](cs_tech.html).
  </td>
  </tr>
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Dedicated
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Dedicated offers the same {{site.data.keyword.containershort_notm}} capabilities on the cloud as {{site.data.keyword.Bluemix_notm}} Public. However, with an {{site.data.keyword.Bluemix_notm}} Dedicated account, available [physical resources are dedicated to your cluster only](cs_clusters.html#shared_dedicated_node) and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_notm}} Dedicated environment when you require isolation for your cluster and the other {{site.data.keyword.Bluemix_notm}} services that you use.<br><br>For more information, see [Getting started with clusters in {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated offers the same {{site.data.keyword.containershort_notm}} capabilities on the cloud as {{site.data.keyword.Bluemix_notm}} Public. However, with an {{site.data.keyword.Bluemix_notm}} Dedicated account, available [physical resources are dedicated to your cluster only](cs_clusters_planning.html#shared_dedicated_node) and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_notm}} Dedicated environment when you require isolation for your cluster and the other {{site.data.keyword.Bluemix_notm}} services that you use.<br><br>For more information, see [Getting started with clusters in {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
  </td>
  </tr>
  <tr>
@@ -113,8 +113,8 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Portable public IP addresses](cs_subnets.html#review_ip)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Logging and monitoring](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision your worker nodes on physical (bare metal) servers](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision bare metal workers with Trusted Compute](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision your worker nodes on physical (bare metal) servers](cs_clusters_planning.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision bare metal workers with Trusted Compute](cs_clusters_planning.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}
 
