@@ -1322,6 +1322,86 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
 <br />
 
 
+### Increasing the keepalive requests
+{: #keepalive_requests}
+
+Keepalive requests can have a major impact on performance. To optimize performance of your ALBs, you can change the default setting of the keepalive requests i.e., connections between the ALB and the client.
+{: shortdesc}
+
+In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive-requests` field sets the no.of requests, i.e., no.of keepalive client connection that stays open to the Ingress ALB. By default, `keep-alive-requests` is set to `4096`. You can override the default by editing the Ingress configmap.
+
+1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. Change the value of `keep-alive-requests` from `4096` to a desired value.
+
+   ```
+   apiVersion: v1
+   data:
+     keep-alive-requests: "4096"
+   kind: ConfigMap
+   metadata:
+     name: ibm-cloud-provider-ingress-cm
+     namespace: kube-system
+   ```
+   {: codeblock}
+
+3. Save the configuration file.
+
+4. Verify that the configmap changes were applied.
+
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+<br />
+
+
+### Modifying the backlog for default_server
+{: #backlog}
+
+backlog for default_server can be modified via configmap. you can decrease the default setting of the backlog.
+{: shortdesc}
+
+In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field sets the backlog value. By default, `backlog` is set to `32768`. You can override the default by editing the Ingress configmap.
+
+1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. Change the value of `backlog` from `32768` to a desired value. This value should be less than the kernel's net.core.somaxconn value
+
+   ```
+   apiVersion: v1
+   data:
+     backlog: "32768"
+   kind: ConfigMap
+   metadata:
+     name: ibm-cloud-provider-ingress-cm
+     namespace: kube-system
+   ```
+   {: codeblock}
+
+3. Save the configuration file.
+
+4. Verify that the configmap changes were applied.
+
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+<br />
+
+
 ## Configuring a user-managed Ingress controller
 {: #user_managed}
 
