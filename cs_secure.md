@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -151,7 +151,7 @@ The following image shows the components that are set up for every worker node t
   </tr>
     <tr>
   <td id="encrypted_disk">Encrypted disks</td>
-    <td>By default, every worker node is provisioned with two local SSD encrypted data partitions. The first partition is not encrypted, and the second partition is unlocked by using LUKS encryption keys. Each worker in each Kubernetes cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containershort_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.</br></br><strong>Note: </strong>Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.</td>
+    <td>By default, every worker node is provisioned with two local SSD encrypted data partitions. The first partition contains the kernel image that is used to boot the worker node and is not encrypted. The second partition holds the container file system and is unlocked by using LUKS encryption keys. Each worker node in each Kubernetes cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containershort_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.</br></br><strong>Note: </strong>Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.</td>
       </tr>
     <tr>
       <td>Expert AppArmor policies</td>
