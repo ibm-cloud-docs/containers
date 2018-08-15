@@ -406,19 +406,19 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 {:shortdesc}
 
 **Before you begin**
-
-You must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/).
+* You must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/).
+* Decide between a [free or standard cluster](cs_why.html#cluster_types).
 
 To fully-customize your clusters with your choice of hardware isolation, zone, API version and more, create a standard cluster.
 {: tip}
 
 **To create a free cluster**
 
-You can use your 1 free cluster to become familiar with how {{site.data.keyword.containershort_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 21 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+You can use your 1 free cluster to become familiar with how {{site.data.keyword.containershort_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
 
 1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
 
-2. Select a region in which to deploy your cluster.
+2. Select a region in which to deploy your cluster. **Note**: You cannot create free clusters in the US East or AP North regions and corresponding zones.
 
 3. Select the **Free** cluster plan.
 
@@ -498,6 +498,7 @@ Before you begin:
 - [Make sure you have the minimum required permissions in IBM Cloud infrastructure (SoftLayer) to provision a standard cluster](cs_users.html#infra_access).
 - Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 - If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network.
+- Decide between a [free or standard cluster](cs_why.html#cluster_types). With your 1 free cluster, you get a limited number of days to try out Kubernetes features. Create a standard cluster to get more benefits and control over your cluster performance. 
 
 To create a cluster:
 
@@ -516,7 +517,7 @@ To create a cluster:
 
     3.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
-3.  Create a cluster.
+3.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
     1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
 
