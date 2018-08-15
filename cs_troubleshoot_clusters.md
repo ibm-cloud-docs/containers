@@ -176,6 +176,8 @@ To check if your cluster uses the linked infrastructure account or a different i
     2.  Set the infrastructure API credentials to use.
         ```
         ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ```
+        {: pre}
 
 4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
