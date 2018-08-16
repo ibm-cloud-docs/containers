@@ -28,7 +28,7 @@ Expose a port and use a portable IP address for a Layer 4 load balancer to acces
 ## Load balancer components and architecture
 {: #planning}
 
-When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions a portable public subnet and a portable private subnet.
+When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically provisions a portable public subnet and a portable private subnet.
 
 * The portable public subnet provides 1 portable public IP address that is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating a public load balancer service.
 * The portable private subnet provides 1 portable private IP address that is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating a private load balancer service.
@@ -39,7 +39,7 @@ A load balancer service also makes your app available over the service's NodePor
 
 The LoadBalancer service serves as the external entry point for incoming requests for the app. To access the LoadBalancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`. The following diagram shows how a load balancer directs communication from the internet to an app.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using a load balancer" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer" style="width:550px; border-style: none"/>
 
 1. A request to your app uses the public IP address of your load balancer and the assigned port on the worker node.
 
