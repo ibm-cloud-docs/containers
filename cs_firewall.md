@@ -234,13 +234,13 @@ Let your cluster access infrastructure resources and services from behind a fire
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>
       <thead>
-        <th>{{site.data.keyword.containershort_notm}} region</th>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Registry address</th>
         <th>Registry IP address</th>
       </thead>
       <tbody>
         <tr>
-          <td>Global registry across {{site.data.keyword.containershort_notm}} regions</td>
+          <td>Global registry across {{site.data.keyword.containerlong_notm}} regions</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
