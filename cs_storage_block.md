@@ -34,7 +34,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
-   **Important:** If you use the Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm). 
+   **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm). 
    
 2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
