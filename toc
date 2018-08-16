@@ -35,15 +35,23 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Administering clusters
+        cs_clusters_planning.md
         cs_clusters.md
-        cs_firewall.md
-        cs_network_policy.md
         cs_cluster_update.md
         cs_users.md
         cs_psp.md
         cs_pod_priority.md
-        cs_edge.md
         cs_health.md
+
+    {: .topicgroup}
+    Setting up cluster networking
+        cs_network_cluster.md
+        cs_firewall.md
+        cs_network_policy.md
+        cs_subnets.md
+        cs_edge.md
+        cs_vpn.md
+
     cs_images.md
     cs_app.md
 
@@ -55,8 +63,6 @@ IBM Cloud Kubernetes Service
         cs_ingress.md
         cs_annotations.md
         cs_ingress_health.md
-        cs_vpn.md
-        cs_subnets.md
 
     {: .topicgroup}
     Storing data on persistent storage

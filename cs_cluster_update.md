@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -459,7 +459,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
       ```
       {: pre}
 
-   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#multi_zone).
+   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](cs_clusters_planning.html#multizone).
 
 6. Wait for the worker nodes to be deployed in each zone.
    ```
@@ -501,4 +501,4 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
 
 **What's next?** </br>
-Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](cs_clusters.html#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](cs_clusters_planning.html#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.

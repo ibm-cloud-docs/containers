@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-14"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -394,7 +394,7 @@ Review the following changes.
 <td>GPU support</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Support for [graphics processing unit (GPU) container workloads](cs_app.html#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](cs_clusters.html#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Support for [graphics processing unit (GPU) container workloads](cs_app.html#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](cs_clusters_planning.html#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>

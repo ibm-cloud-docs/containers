@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-16"
 
 ---
 
@@ -28,7 +28,7 @@ Containers are a standard way to package apps and all their dependencies so that
 
 Click an option to get started:
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Click an icon to get started quickly with {{site.data.keyword.containershort_notm}}. With {{site.data.keyword.Bluemix_dedicated_notm}}, click this icon to see your options." style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Click an icon to get started quickly with {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.Bluemix_dedicated_notm}}, click this icon to see your options." style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" title="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="Install the CLIs." title="Install the CLIs." shape="rect" coords="155, -1, 289, 210" />
@@ -53,7 +53,7 @@ Get the [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net
 
 To create a free cluster:
 
-1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
+1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containerlong_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
 
 2. Give your cluster a unique name.
 
@@ -70,8 +70,8 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 **What's next?**</br>
 Try out some things with your free cluster before it expires.
 
-* Go through the [first {{site.data.keyword.containershort_notm}} tutorial](cs_tutorials.html#cs_cluster_tutorial) for creating a Kubernetes cluster, installing the CLI, creating a private registry, setting up your cluster environment, and adding a service to your cluster.
-* Keep up your momentum with the [second {{site.data.keyword.containershort_notm}} tutorial](cs_tutorials_apps.html#cs_apps_tutorial) about deploying apps to the cluster.
+* Go through the [first {{site.data.keyword.containerlong_notm}} tutorial](cs_tutorials.html#cs_cluster_tutorial) for creating a Kubernetes cluster, installing the CLI, creating a private registry, setting up your cluster environment, and adding a service to your cluster.
+* Keep up your momentum with the [second {{site.data.keyword.containerlong_notm}} tutorial](cs_tutorials_apps.html#cs_apps_tutorial) about deploying apps to the cluster.
 * [Create a standard cluster](cs_clusters.html#clusters_ui) with multiple nodes for higher availability.
 
 

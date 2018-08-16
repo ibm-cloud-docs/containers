@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -20,19 +20,21 @@ lastupdated: "2018-08-13"
 A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, its resources remain in the region that you deploy the cluster to.
+{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, its resources remain in the region that you deploy the cluster to. 
+
+**Note**: You can create standard clusters in every supported {{site.data.keyword.containershort_notm}} region. Free clusters are available only in select regions.
 
 ![{{site.data.keyword.containershort_notm}} regions and zones](/images/regions-mz.png)
 
 _{{site.data.keyword.containershort_notm}} regions and zones_
 
 Supported {{site.data.keyword.containershort_notm}} regions are as follows:
-  * AP North
-  * AP South
-  * EU Central
-  * UK South
-  * US East
-  * US South
+* AP North (standard clusters only)
+* AP South
+* EU Central
+* UK South
+* US East (standard clusters only)
+* US South
 
 <br />
 
@@ -88,12 +90,14 @@ For example, you can use the following commands to log in to {{site.data.keyword
 By using {{site.data.keyword.containershort_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containershort_notm}} region endpoints refer specifically to the {{site.data.keyword.containershort_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
 {:shortdesc}
 
+**Note**: You can create standard clusters in every supported {{site.data.keyword.containershort_notm}} region. Free clusters are available only in select regions.
+
 Supported {{site.data.keyword.containershort_notm}} regions:
-  * AP North
+  * AP North (standard clusters only)
   * AP South
   * EU Central
   * UK South
-  * US East
+  * US East (standard clusters only)
   * US South
 
 You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.

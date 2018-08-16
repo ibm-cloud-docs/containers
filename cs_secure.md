@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-15"
 
 ---
 
@@ -137,7 +137,7 @@ The following image shows the components that are set up for every worker node t
     <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containershort_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containershort_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containershort_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</td></tr>
     <tr>
   <td>Compute isolation</td>
-  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](cs_clusters.html#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
+  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](cs_clusters_planning.html#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
 </tr>
 <tr>
 <td>Option to deploy bare metal</td>
@@ -151,7 +151,7 @@ The following image shows the components that are set up for every worker node t
   </tr>
     <tr>
   <td id="encrypted_disk">Encrypted disks</td>
-    <td>By default, every worker node is provisioned with two local SSD encrypted data partitions. The first partition is not encrypted, and the second partition is unlocked by using LUKS encryption keys. Each worker in each Kubernetes cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containershort_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.</br></br><strong>Note: </strong>Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.</td>
+    <td>By default, every worker node is provisioned with two local SSD encrypted data partitions. The first partition contains the kernel image that is used to boot the worker node and is not encrypted. The second partition holds the container file system and is unlocked by using LUKS encryption keys. Each worker node in each Kubernetes cluster has its own unique LUKS encryption key, managed by {{site.data.keyword.containershort_notm}}. When you create a cluster or add a worker node to an existing cluster, the keys are pulled securely and then discarded after the encrypted disk is unlocked.</br></br><strong>Note: </strong>Encryption can impact disk I/O performance. For workloads that require high-performance disk I/O, test a cluster with encryption both enabled and disabled to help you decide whether to turn off encryption.</td>
       </tr>
     <tr>
       <td>Expert AppArmor policies</td>

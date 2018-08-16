@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-13"
+lastupdated: "2018-08-16"
 
 ---
 
@@ -44,7 +44,7 @@ To monitor administrative activity:
 To let other users view account and space events, see [Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
 {: tip}
 
-## Tracking Kube audit events
+## Tracking Kubernetes audit events
 {: #kube-events}
 
 Check out the following table for a list of the events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.

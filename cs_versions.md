@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-14"
+lastupdated: "2018-08-16"
 
 ---
 
@@ -36,9 +36,9 @@ lastupdated: "2018-08-14"
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
 
-**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support. 
-*  **Attention**: If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. 
-*  Unsupported clusters cannot add or reload existing worker nodes. 
+**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support.
+*  **Attention**: If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure.
+*  Unsupported clusters cannot add or reload existing worker nodes.
 *  After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 
 </br>
@@ -97,6 +97,8 @@ For a complete list of changes, review the following information:
 ## Version 1.11
 {: #cs_v111}
 
+<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.11 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.11 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
 
 ### Update before master
@@ -142,7 +144,7 @@ Review changes that you might need to make when you are updating from the previo
 <tbody>
 <tr>
 <td>Refresh cluster logging configuration</td>
-<td>If you [configured log forwarding](cs_health.html#health) for your cluster, update the logging configuration by running the `ibmcloud ks logging-config-refresh --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_logging_refresh).</td>
+<td>`fluentd` is automatically updated with version 1.11, even when `logging-autoupdate` is disabled.</td>
 </tr>
 <tr>
 <td>Refresh Kubernetes configuration</td>
