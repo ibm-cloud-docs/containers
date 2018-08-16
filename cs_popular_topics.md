@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-16"
 
 ---
 
@@ -61,7 +61,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>10 July</td>
 <td>Introducing multizone clusters</td>
-<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters_planning.html#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -114,7 +114,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](cs_app.html#gpu_app)</td>
-<td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
+<td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters_planning.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
 </tr>
 <tr>
 <td>03 May</td>
