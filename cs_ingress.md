@@ -1458,7 +1458,7 @@ Configuring your own custom Ingress controller can be useful when you have speci
 
 2. Disable the default public ALB. The `--disable-deployment` flag disables the IBM-provided ALB deployment, but doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
     ```
-    ibmcloud ks alb-configure --alb-ID <ALB_ID> --disable-deployment
+    ibmcloud ks alb-configure --albID <ALB_ID> --disable-deployment
     ```
     {: pre}
 
