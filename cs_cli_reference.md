@@ -35,7 +35,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 ## ibmcloud ks commands
 {: #cs_commands}
 
-**Tip:** To see the version of the {{site.data.keyword.containershort_notm}} plug-in, run the following command.
+**Tip:** To see the version of the {{site.data.keyword.containerlong_notm}} plug-in, run the following command.
 
 ```
 ibmcloud plugin list
@@ -574,7 +574,7 @@ View a list of supported commands and parameters.
 ### ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
-Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
+Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
 
 <strong>Command options</strong>:
 

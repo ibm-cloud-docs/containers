@@ -37,14 +37,14 @@ Install the required CLIs to create and manage your Kubernetes clusters in {{sit
 This task includes the information for installing these CLIs and plug-ins:
 
 -   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
--   {{site.data.keyword.containershort_notm}} plug-in
+-   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI version that matches the `major.minor` version of your cluster
 -   Optional: {{site.data.keyword.registryshort_notm}} plug-in
 
 <br>
 To install the CLIs:
 
-1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](../cli/index.html#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](../cli/index.html#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
 
     Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-).
     {: tip}
@@ -58,7 +58,7 @@ To install the CLIs:
 
     **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `ibmcloud ks`.
+3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containerlong_notm}} plug-in is `ibmcloud ks`.
 
     ```
     ibmcloud plugin install container-service -r Bluemix
@@ -72,7 +72,7 @@ To install the CLIs:
     ```
     {: pre}
 
-    The {{site.data.keyword.containershort_notm}} plug-in is displayed in the results as container-service.
+    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as container-service.
 
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
@@ -270,7 +270,7 @@ You might want to update the CLIs periodically to use new features.
 This task includes the information for updating these CLIs.
 
 -   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
--   {{site.data.keyword.containershort_notm}} plug-in
+-   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI version 1.10.5 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in
 
@@ -288,7 +288,7 @@ To update the CLIs:
 
      **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-3.  Update the {{site.data.keyword.containershort_notm}} plug-in.
+3.  Update the {{site.data.keyword.containerlong_notm}} plug-in.
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
 
         ```
@@ -303,7 +303,7 @@ To update the CLIs:
         ```
         {: pre}
 
-        The {{site.data.keyword.containershort_notm}} plug-in is displayed in the results as container-service.
+        The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as container-service.
 
     3.  Initialize the CLI.
 
@@ -343,13 +343,13 @@ If you no longer need the CLI, you can uninstall it.
 This task includes the information for removing these CLIs:
 
 
--   {{site.data.keyword.containershort_notm}} plug-in
+-   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
 <br>
 To uninstall the CLIs:
 
-1.  Uninstall the {{site.data.keyword.containershort_notm}} plug-in.
+1.  Uninstall the {{site.data.keyword.containerlong_notm}} plug-in.
 
     ```
     ibmcloud plugin uninstall container-service
