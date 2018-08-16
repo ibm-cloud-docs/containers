@@ -303,7 +303,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
 <caption>IP addresses to open for logging traffic</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}} region</th>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Logging address</th>
         <th>Logging IP addresses</th>
         </thead>
