@@ -93,7 +93,7 @@ You cannot access or change your cluster while the Kubernetes master is unavaila
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
 Yes. Because the worker nodes are on different VLANs for each zone, you have two options to enable networking communication:
 
-1. [Enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in your IBM Cloud infrastructure (SoftLayer) account. To enable VLAN spanning, you must have the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/iam/infrastructureaccess.html#infrapermission), or you can request the account owner to enable it.
+1. [Enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your IBM Cloud infrastructure (SoftLayer) account. To enable VLAN spanning, you must have the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/iam/infrastructureaccess.html#infrapermission), or you can request the account owner to enable it.
 
 2. Or, use a Virtual Router Function (VRF) enabled IBM Cloud infrastructure (SoftLayer) account. To get a VRF account, contact IBM Cloud infrastructure (SoftLayer) support.
 
