@@ -183,7 +183,7 @@ You can choose to [create a private-VLAN only cluster](cs_clusters.html#clusters
 </br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. **Note**: Using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html?pos=5).
 
 **What are my options for managing public and private access to my cluster?**
-The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
+</br>The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
 
 ### Configure a gateway appliance
 {: #private_vlan_gateway}
