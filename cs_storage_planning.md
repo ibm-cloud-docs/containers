@@ -88,3 +88,8 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </table>
 
 {: caption="Table. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
+
+
+
+
+
