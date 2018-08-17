@@ -294,6 +294,27 @@ Review the following information to decide what type of worker pools you want. A
 <td>1000Mbps</td>
 </tr>
 <tr>
+<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 32GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>32 / 32GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<tr>
 <td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 960GB SSD</td>
@@ -333,6 +354,18 @@ Review the following information to decide what type of worker pools you want. A
 <td><strong>Balanced bare metal, mb1c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>28 / 256GB</td>
+<td>2TB SATA / 3.8TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal with SDS, ms2c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>28 / 512GB</td>
+<td>2TB SATA / 4x3.8TB Raw SSD</td>
 <td>10000Mbps</td>
 </tr>
 </tbody>
