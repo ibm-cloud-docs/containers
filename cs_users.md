@@ -7,7 +7,7 @@ lastupdated: "2018-08-17"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -63,11 +63,11 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 
   <dt>Is there a difference between the two?</dt>
     <dd>Both the API key and the <code>ibmcloud ks credentials-set</code> command accomplish the same task. If you manually set credentials with the <code>ibmcloud ks credentials-set</code> command, then the set credentials override any access that is granted by the API key. However, if the user whose credentials are stored does not have the required permissions to order infrastructure then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail.</dd>
+
+  <dt>Is there a way to make assigning IBM Cloud infrastructure (SoftLayer) permissions easier?</dt>
+    <dd><p>Users typically don't need specific IBM Cloud infrastructure (SoftLayer) permissions. Instead, set up the API key with the correct infrastructure permissions, and use that API key in each region that you want clusters. The API key can belong to the account owner, a functional ID, or a user depending on what is easier for you to manage and audit.</p> <p>If you want to create a cluster in a new region, make sure that the first cluster is created by whoever owns the API key that you set up with the proper infrastructure credentials. After, you can invite individual people, IAM groups, or service account users to that region If the users are going to work only with Kubernetes and not making direct changes to infrastructure, then the api-key being set correctly is all that you need to ensure. If you have specific users that need access to the infrastructure part of your account such as for networking or storage, you can set specific permissions for those users separately.</p> <p>For more information about setting permissions, check out [Customizing infrastructure permissions for a user](#infra_access)</p></dd>
 </dl>
 
-
-To make working with API keys a little bit easier, try creating a functional ID that you can use to set permissions.
-{: tip}
 
 <br />
 
@@ -159,13 +159,195 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
 
 
 
+## Assigning roles with the CLI
+{: #add_users_cli}
+
+You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant access to your clusters with the CLI.
+{: shortdesc}
+
+**Before you begin**
+
+Verify that you are assigned the `Manager` [Cloud Foundry role](/docs/iam/mngcf.html#mngcf) for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
+
+**To assign access to a specific user**
+
+1. Invite the user to your account.
+  ```
+  bx account user-invite <user@email.com>
+  ```
+  {: pre}
+2. Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}}. You can choose between Viewer, Editor, Operator, and Administrator for role.
+  ```
+  bx iam policy-create <user@email.com> --service-name containers-kubernetes --roles <role>
+  ```
+  {: pre}
+
+**To assign access to a group**
+
+1. If the user is not already part of your account, invite them.
+  ```
+  bx account user-invite <user_email>
+  ```
+  {: pre}
+
+2. Create a group.
+  ```
+  bx iam access-group-create <team_name>
+  ```
+  {: pre}
+
+3. Add the user to the group.
+  ```
+  bx iam access-group-user-add <team_name> <user_email>
+  ```
+  {: pre}
+
+4. Add the user to the group. You can choose between Viewer, Editor, Operator, and Administrator for role.
+  ```
+  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role>
+  ```
+  {: pre}
+
+5. Update your cluster configuration to generate a RoleBinding.
+  ```
+  ibmcloud ks cluster-config
+  ```
+  {: pre}
+
+  RoleBinding:
+  ```
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: <binding>
+    namespace: default
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: <role>
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: <group_name>
+    namespace: default
+  ```
+  {: screen}
+
+The previous instructions show how to give a group of users access to all {{site.data.keyword.containerlong_notm}} resources. As an admin, you can also limit access to the service at the region or cluster instance level.
+{: tip}
+
+<br />
 
 
 
-## Authorizing users with custom Kubernetes RBAC roles
+## Authorizing users with RBAC role bindings
+{: #role-binding}
+
+Every cluster is set up with predefined RBAC roles that are configured for the default namespace of your cluster. You can copy RBAC roles from the default namespace to other namespaces in your cluster to enforce the same level of user access.
+
+**What is an RBAC RoleBinding?**
+
+A role binding is a Kubernetes resource-specific access policy. You can use role bindings to set policies that are specific to namespaces, pods, or other resources within your cluster. {{site.data.keyword.containerlong_notm}} provides predefined RBAC roles that correspond to the platform roles in IAM. When you assign a user an IAM plaform role, an RBAC role binding is automatically created for the user in the default namespace of the cluster.
+
+**What is an RBAC cluster role binding?**
+
+While an RBAC role binding is specific to one resource, such as a namespace or a pod, an RBAC cluster role binding can be used to set permissions at the cluster level which includes all namespaces. Cluster role binding's are created automatically for the default namespace when platform roles are set. You can copy that role binding to other namespaces.
+
+
+<table>
+  <tr>
+    <th>Platform role</th>
+    <th>RBAC role</th>
+    <th>Role Binding</th>
+  </tr>
+  <tr>
+    <td>Viewer</td>
+    <td>View</td>
+    <td><code>ibm-view</code></td>
+  </tr>
+  <tr>
+    <td>Editor</td>
+    <td>Edit</td>
+    <td><code>ibm-edit</code></td>
+  </tr>
+  <tr>
+    <td>Operator</td>
+    <td>Admin</td>
+    <td><code>ibm-operate</code></td>
+  </tr>
+  <tr>
+    <td>Administrator</td>
+    <td>Cluster-admin</td>
+    <td><code>ibm-admin</code></td>
+  </tr>
+</table>
+
+**Are there any specific requirements when working with RoleBindings?**
+
+In order to work with IBM Helm Charts, you must install Tiller in the `kube-system` namespace. In order to install Tiller, you must have the [`cluster-admin` role](cs_users.html#access_policies)
+within the `kube-system` namespace. For other Helm charts, you can choose another namespace. However, when you run a `helm` command, you must use the `tiller-namespace <namespace>` flag to point to the namespace in which Tiller is installed.
+
+
+### Copying an RBAC RoleBinding
+
+When you configure your platform policies, a cluster role binding is generated automatically for the default namespace. You can copy the binding into other namespaces by updating the binding with the namespace for which you want to set the policy. For example, say that you have a group of developers called `team-a` and they have `view` access across the service, but they need `edit` access to the `teama` namespace. You can edit the automatically generated RoleBinding to give them the access that they need at the resource level.
+
+1. Create an RBAC role binding for the default namespace by [assigning access with a platform role](#add_users_cli).
+  ```
+  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role>
+  ```
+  {: pre}
+  Example output:
+  ```
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: ibm-view
+    namespace: default
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: View
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: group
+    name: team-a
+    namespace: default
+  ```
+  {: screen}
+2. Copy that configuration into another namespace.
+  ```
+  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role> --namespace <namespace>
+  ```
+  {: pre}
+  In the previous scenario, I made a change to the configuration for another namespace. The updated configuration would look like the following:
+  ```
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: ibm-edit
+    namespace: teama
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: edit
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: group
+    name: team-a
+    namespace: teama
+  ```
+  {: screen}
+
+<br />
+
+
+
+
+### Creating custom Kubernetes RBAC roles
 {: #rbac}
 
-{{site.data.keyword.containerlong_notm}} access policies correspond with certain Kubernetes role-based access control (RBAC) roles. To authorize other Kubernetes roles that differ from the corresponding access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
+To authorize other Kubernetes roles that differ from the corresponding platform access policy, you can customize RBAC roles and then assign the roles to individuals or groups of users.
 {: shortdesc}
 
 Do you need your cluster access policies to be more granular than an IAM policy allows? No problem! You can assign access policies for specific Kubernetes resources to users, groups of users (in clusters that run Kubernetes v1.11 or later), or service accounts. You can create a role and then bind the role to specific users or a group. For more information, see [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) in the Kubernetes documentation.
