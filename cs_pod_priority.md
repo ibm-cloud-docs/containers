@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -33,7 +33,7 @@ Make sure that you have [set up proper user access](cs_users.html#users) to your
 **How does priority scheduling and preemption work?**</br>
 In general, pending pods that have a higher priority are scheduled before lower prioritized pods. If you do not have enough resources left in your worker nodes, the scheduler can preempt (remove) pods to free up enough resources for the higher prioritized pods to be scheduled. Preemption is also affected by graceful termination periods, pod disruption budgets, and worker node affinity.
 
-If you do not specify a priority for your pod deployment, the default is set to the priority class that is set as the `globalDefault` . If you do not have a `globalDefault` priority class, the default priority for all pods is zero (`0`). By default, {{site.data.keyword.containershort_notm}} does not set a `globalDefault`, so the pod default priority is zero.
+If you do not specify a priority for your pod deployment, the default is set to the priority class that is set as the `globalDefault` . If you do not have a `globalDefault` priority class, the default priority for all pods is zero (`0`). By default, {{site.data.keyword.containerlong_notm}} does not set a `globalDefault`, so the pod default priority is zero.
 
 Consider the scenarios in the following figure. **Important**: As you can see, you need to understand how pod priority and scheduler work together to place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending, at the same time as existing pods are removed, such as in Scenario 3.
 
@@ -51,7 +51,7 @@ No. If you don't want to use pod priority, don't set a `globalDefault` or includ
 ## Understanding default priority classes
 {: #default_priority_class}
 
-Your {{site.data.keyword.containershort_notm}} clusters come with some priority classes by default. **Important**: Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
+Your {{site.data.keyword.containerlong_notm}} clusters come with some priority classes by default. **Important**: Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
 {: shortdesc}
 
 The following table describes the priority classes that are in your cluster by default and why they are used. 
@@ -150,7 +150,7 @@ Great! You created a priority class. Let your team know about the priority class
 ## Assigning priority to your pods
 {: #prioritize}
 
-Assign a priority class to your pod spec to set the pod's priority within your {{site.data.keyword.containershort_notm}} cluster. If your pods existed before priority classes became available with Kubernetes version 1.11, you must edit the pod YAML files to assign the pods a priority.
+Assign a priority class to your pod spec to set the pod's priority within your {{site.data.keyword.containerlong_notm}} cluster. If your pods existed before priority classes became available with Kubernetes version 1.11, you must edit the pod YAML files to assign the pods a priority.
 {: shortdesc}
 
 Before you begin:

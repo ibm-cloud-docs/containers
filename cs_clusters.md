@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -36,9 +36,9 @@ To fully-customize your clusters with your choice of hardware isolation, zone, A
 
 **To create a free cluster**
 
-You can use your 1 free cluster to become familiar with how {{site.data.keyword.containershort_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
 
-1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+1. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
 
 2. Select a region in which to deploy your cluster. **Note**: You cannot create free clusters in the US East or AP North regions and corresponding zones.
 
@@ -56,7 +56,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 **To create a standard cluster**
 
-1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+1. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -141,7 +141,7 @@ To create a cluster:
 
 3.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
+    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in.
 
         **Note**: To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones).
 
@@ -212,7 +212,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containershort_notm}} region that you are logged in to.<br></br>**Note**: The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</td>
+        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in to.<br></br>**Note**: The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -232,7 +232,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containershort_notm}} automatically creates a private VLAN for you.<br/><br/><strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li></ul></td>
+        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containerlong_notm}} automatically creates a private VLAN for you.<br/><br/><strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -20,15 +20,15 @@ lastupdated: "2018-08-16"
 A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, its resources remain in the region that you deploy the cluster to. 
+{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to. 
 
-**Note**: You can create standard clusters in every supported {{site.data.keyword.containershort_notm}} region. Free clusters are available only in select regions.
+**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-![{{site.data.keyword.containershort_notm}} regions and zones](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} regions and zones](/images/regions-mz.png)
 
-_{{site.data.keyword.containershort_notm}} regions and zones_
+_{{site.data.keyword.containerlong_notm}} regions and zones_
 
-Supported {{site.data.keyword.containershort_notm}} regions are as follows:
+Supported {{site.data.keyword.containerlong_notm}} regions are as follows:
 * AP North (standard clusters only)
 * AP South
 * EU Central
@@ -84,15 +84,15 @@ For example, you can use the following commands to log in to {{site.data.keyword
 <br />
 
 
-## Regions in {{site.data.keyword.containershort_notm}}
+## Regions in {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
-By using {{site.data.keyword.containershort_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containershort_notm}} region endpoints refer specifically to the {{site.data.keyword.containershort_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
+By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
 {:shortdesc}
 
-**Note**: You can create standard clusters in every supported {{site.data.keyword.containershort_notm}} region. Free clusters are available only in select regions.
+**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-Supported {{site.data.keyword.containershort_notm}} regions:
+Supported {{site.data.keyword.containerlong_notm}} regions:
   * AP North (standard clusters only)
   * AP South
   * EU Central
@@ -100,8 +100,8 @@ Supported {{site.data.keyword.containershort_notm}} regions:
   * US East (standard clusters only)
   * US South
 
-You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.
-* To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud ks region`.
+You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.
+* To check which {{site.data.keyword.containerlong_notm}} region you are currently in, run `ibmcloud ks region`.
 * To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
@@ -110,11 +110,11 @@ To use the API with the global endpoint, in all your requests, pass the region n
 ### Logging in to a different {{site.data.keyword.containerlong_notm}} region
 {: #container_login_endpoints}
 
-You can change regions by using the {{site.data.keyword.containershort_notm}} CLI.
+You can change regions by using the {{site.data.keyword.containerlong_notm}} CLI.
 {:shortdesc}
 
-You might want to log in to another {{site.data.keyword.containershort_notm}} region for the following reasons:
-  * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containershort_notm}} in another region.
+You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
+  * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
 To quickly switch regions, run `ibmcloud ks region-set`.
@@ -122,7 +122,7 @@ To quickly switch regions, run `ibmcloud ks region-set`.
 ### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
 
-To interact with the {{site.data.keyword.containershort_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
+To interact with the {{site.data.keyword.containerlong_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
 {:shortdesc}
 
 Example of `GET /clusters` API:
@@ -138,7 +138,7 @@ To use the API with the global endpoint, in all your requests, pass the region n
 
 To view documentation on the API commands, view [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
 
-## Zones in {{site.data.keyword.containershort_notm}}
+## Zones in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.

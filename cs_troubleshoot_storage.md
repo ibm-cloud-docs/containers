@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -278,7 +278,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 After you [add non-root user access to persistent storage](#nonroot) or deploying a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
 
 {: tsCauses}
-The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containershort_notm}} does not support the `fsGroup` specification, and supports only `runAsUser` set as `0` (root permissions).
+The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containerlong_notm}} does not support the `fsGroup` specification, and supports only `runAsUser` set as `0` (root permissions).
 
 {: tsResolve}
 Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser` from the image, deployment, or Helm chart configuration file and redeploy. If you need to change the ownership of the mount path from `nobody`, [add non-root user access](#nonroot). After you add the [non-root initContainer](#nonroot), set `runAsUser` at the container level, not the pod level.

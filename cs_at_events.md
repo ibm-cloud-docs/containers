@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-16"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containershort_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
+You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containerlong_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
 {: shortdesc}
 
 
@@ -35,7 +35,7 @@ For more information about how the service works, see the [{{site.data.keyword.c
 To monitor administrative activity:
 
 1. Log in to your {{site.data.keyword.Bluemix_notm}} account.
-2. From the catalog, provision an instance of the {{site.data.keyword.cloudaccesstrailshort}} service in the same account as your instance of  {{site.data.keyword.containershort_notm}}.
+2. From the catalog, provision an instance of the {{site.data.keyword.cloudaccesstrailshort}} service in the same account as your instance of  {{site.data.keyword.containerlong_notm}}.
 3. On the **Manage** tab of the {{site.data.keyword.cloudaccesstrailshort}} dashboard, click the **View in Kibana**.
 4. Set the time frame that you want to view logs for. The default is 15 min.
 5. In the **Available Fields** list, click **type**. Click the magnifying glass icon for **Activity Tracker** to limit the logs to only those tracked by the service.

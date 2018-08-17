@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -25,7 +25,7 @@ With {{site.data.keyword.containerlong}}, you can manage external networking by 
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
 
-To make your apps externally accessible from the public internet or a private network, {{site.data.keyword.containershort_notm}} supports three networking services.
+To make your apps externally accessible from the public internet or a private network, {{site.data.keyword.containerlong_notm}} supports three networking services.
 {:shortdesc}
 
 **[NodePort service](cs_nodeport.html)** (free and standard clusters)
@@ -64,16 +64,16 @@ To choose the best networking service for your app, you can follow this decision
 ## Planning public external networking
 {: #public_access}
 
-When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface.
+When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface.
 {:shortdesc}
 
 To make an app publicly available to the internet, you can create a NodePort, LoadBalancer, or Ingress service. To compare each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
 
-The following diagram shows how Kubernetes forwards public network traffic in {{site.data.keyword.containershort_notm}}.
+The following diagram shows how Kubernetes forwards public network traffic in {{site.data.keyword.containerlong_notm}}.
 
-![{{site.data.keyword.containershort_notm}} Kubernetes architecture](images/networking.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/networking.png)
 
-*Kubernetes data plane in {{site.data.keyword.containershort_notm}}*
+*Kubernetes data plane in {{site.data.keyword.containerlong_notm}}*
 
 The public network interface for the worker nodes in both free and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](cs_network_policy.html#network_policies).
 

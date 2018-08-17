@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -34,7 +34,7 @@ When you expose your app by creating a Kubernetes service of type NodePort, a No
 
 The following diagram shows how communication is directed from the internet to an app when a NodePort service is configured:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using NodePort" style="width:550px; border-style: none"/>
 
 1. A request is sent to your app by using the public IP address of your worker node and the NodePort on the worker node.
 

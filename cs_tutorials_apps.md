@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -704,5 +704,5 @@ Ready to delete what you created? You can use the configuration script to delete
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following:
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
-- [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
+- [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
 - Explore the container orchestration code patterns on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)

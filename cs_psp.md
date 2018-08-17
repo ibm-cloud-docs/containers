@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -30,11 +30,11 @@ As a cluster admin, you want to control what happens in your cluster, especially
 
 With the the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [Helm](cs_integrations.html#helm_links), the Helm tiller component creates pods, and so you must have the correct pod security policy authorization.
 
-Trying to control which users have access to the {{site.data.keyword.containershort_notm}}? See [Assigning cluster access](cs_users.html#users) to set IAM and infrastructure permissions.
+Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](cs_users.html#users) to set IAM and infrastructure permissions.
 {: tip}
 
 **Are any policies set by default? What can I add?**</br>
-By default, {{site.data.keyword.containershort_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller. 
+By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller. 
 
 Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
@@ -181,7 +181,7 @@ Make sure that you modified the existing policies so that the new policy that yo
 ## Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management
 {: #ibm_psp}
 
-Your Kubernetes cluster in {{site.data.keyword.containershort_notm}} contains the following
+Your Kubernetes cluster in {{site.data.keyword.containerlong_notm}} contains the following
 pod security policies and related RBAC resources to allow {{site.data.keyword.IBM_notm}} to properly manage your cluster.
 {: shortdesc}
 
