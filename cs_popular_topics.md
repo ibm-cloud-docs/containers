@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-08-16"
 
 
 
-# Popular topics for {{site.data.keyword.containershort_notm}}
+# Popular topics for {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
@@ -61,7 +61,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>10 July</td>
 <td>Introducing multizone clusters</td>
-<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containershort_notm}}](cs_clusters_planning.html#multizone).</td>
+<td>Want to improve cluster availability? Now you can span your cluster across multiple zones in select metro areas. For more information, see [Creating multizone clusters in {{site.data.keyword.containerlong_notm}}](cs_clusters_planning.html#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -178,7 +178,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>14 March</td>
 <td>[Secure sign-in with {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
-<td>Enhance your apps that are running in {{site.data.keyword.containershort_notm}} by requiring users to sign in.</td>
+<td>Enhance your apps that are running in {{site.data.keyword.containerlong_notm}} by requiring users to sign in.</td>
 </tr>
 <tr>
 <td>13 March</td>
@@ -226,7 +226,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>19 February</td>
 <td>[Set up the strongSwan IPSec VPN](cs_vpn.html#vpn-setup)</td>
-<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containershort_notm}} cluster securely to your on-premises data center without a Virtual Router Appliance.</td>
+<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containerlong_notm}} cluster securely to your on-premises data center without a Virtual Router Appliance.</td>
 </tr>
 <tr>
 <td>14 February</td>
@@ -258,7 +258,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>23 January</td>
 <td>[Zones available in Singapore and Montreal, CA](cs_regions.html)</td>
-<td>Singapore and Montreal are zones available in the {{site.data.keyword.containershort_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these zones and the others within the region that your cluster is in.</td>
+<td>Singapore and Montreal are zones available in the {{site.data.keyword.containerlong_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these zones and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
 <td>08 January</td>
@@ -270,7 +270,7 @@ configure pod security policies to authorize who can create and update pods in {
 ## Chat with like-minded developers on Slack
 {: #slack}
 
-You can see what others are talking about and ask your own questions in the [{{site.data.keyword.containershort_notm}} Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
+You can see what others are talking about and ask your own questions in the [{{site.data.keyword.containerlong_notm}} Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
 If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.

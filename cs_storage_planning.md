@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -88,3 +88,8 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </table>
 
 {: caption="Table. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
+
+
+
+
+

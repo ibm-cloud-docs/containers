@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -34,7 +34,7 @@ Learn about some basic Docker concepts:
 <dt>Image</dt>
 <dd>A container image is the base for every container that you want to run. Container images are built from a Dockerfile, a text file that defines how to build the image and which build artifacts to include in it, such as the app, the app's configuration, and its dependencies. Images are always built from other images, making them quick to configure. Let someone else do the bulk of the work on an image and then tweak it for your use.</dd>
 <dt>Registry</dt>
-<dd>An image registry is a place to store, retrieve, and share container images. Images that are stored in a registry can either be publicly available (public registry) or accessible by a small group of users (private registry). {{site.data.keyword.containershort_notm}} offers public images, such as ibmliberty, that you can use to create your first containerized app. When it comes to enterprise applications, use a private registry like the one that is provided in {{site.data.keyword.Bluemix_notm}} to protect your images from being used by unauthorized users.
+<dd>An image registry is a place to store, retrieve, and share container images. Images that are stored in a registry can either be publicly available (public registry) or accessible by a small group of users (private registry). {{site.data.keyword.containerlong_notm}} offers public images, such as ibmliberty, that you can use to create your first containerized app. When it comes to enterprise applications, use a private registry like the one that is provided in {{site.data.keyword.Bluemix_notm}} to protect your images from being used by unauthorized users.
 </dd>
 <dt>Container</dt>
 <dd>Every container is created from an image. A container is a packaged app with all of its dependencies so that the app can be moved between environments and run without changes. Unlike virtual machines, containers do not virtualize a device, its operating system, and the underlying hardware. Only the app code, run time, system tools, libraries, and settings are packaged inside the container. Containers run as isolated processes on Ubuntu compute hosts and share the host operating system and its hardware resources. This approach makes a container more lightweight, portable, and efficient than a virtual machine.</dd>
@@ -61,7 +61,7 @@ Learn about some basic Docker concepts:
 
 <p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.</p>
 
-<p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Learn how Docker and {{site.data.keyword.containershort_notm}} work together by completing this course.</a></p>
+<p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
 
 </dl>
 
@@ -104,7 +104,7 @@ Define update strategies for your app, including the number of pods that you wan
 
 <p>Ready to gain deeper knowledge of Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containershort_notm}} work together by completing this course.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></li></ul>
 
 
 </dl>
@@ -115,14 +115,14 @@ Define update strategies for your app, including the number of pods that you wan
 ## Service architecture
 {: #architecture}
 
-In a Kubernetes cluster that runs on {{site.data.keyword.containershort_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. Well, to be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an openVPN connection to orchestrate your cluster configurations.
+In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. Well, to be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an openVPN connection to orchestrate your cluster configurations.
 {: shortdesc}
 
 The following image shows the components of your cluster and how they interact.
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containershort_notm}} architecture</figcaption>
+ <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
 </figure>
 </p>
 

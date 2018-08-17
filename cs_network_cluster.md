@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-08-16"
 # Planning in-cluster and private networking
 {: #planning}
 
-Plan a networking setup for your {{site.data.keyword.containershort}} cluster.
+Plan a networking setup for your {{site.data.keyword.containerlong}} cluster.
 {: shortdesc}
 
 ## Understanding in-cluster networking
@@ -40,7 +40,7 @@ To access a pod behind a cluster service, apps can either use the in-cluster IP 
 ## Understanding VLAN connections and network interfaces
 {: #interfaces}
 
-{{site.data.keyword.containershort_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers.
+{{site.data.keyword.containerlong_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers.
 
 By default, all clusters are connected to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node. Your workers have a private network interface and are accessible over the private network. When you create a cluster that is also connected to a public VLAN, your cluster has a public network interface too. The public VLAN allows the worker nodes to automatically and securely connect to the master. For more information about the default VLANs for your cluster, see [Default VLANs, subnets, and IPs for clusters](cs_subnets.html#default_vlans_subnets).
 
@@ -65,7 +65,7 @@ Click one of the following setups to plan networking for your cluster:
 ## Planning default cluster networking
 {: #both_vlans}
 
-By default, {{site.data.keyword.containershort_notm}} sets up your cluster with access to a public VLAN and a private VLAN.
+By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a public VLAN and a private VLAN.
 {:shortdesc}
 
 
@@ -81,7 +81,7 @@ By default, {{site.data.keyword.containershort_notm}} sets up your cluster with 
 * You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. 
 
 **What are my options for managing public and private access to my cluster?**
-</br>The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to set up networking for clusters that are connected to a public and a private VLAN.
+</br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a public and a private VLAN.
 
 ### Expose your apps with networking services
 {: #both_vlans_services}
@@ -110,7 +110,7 @@ To securely connect your worker nodes and apps to an on-premises network, you ca
 ## Planning customized default cluster networking
 {: #both_vlans_private}
 
-By default, {{site.data.keyword.containershort_notm}} sets up your cluster with access to a public VLAN and a private VLAN. However, you can customize the default networking setup by using network policies to block public access.
+By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a public VLAN and a private VLAN. However, you can customize the default networking setup by using network policies to block public access.
 {:shortdesc}
 
 
@@ -125,7 +125,7 @@ By default, {{site.data.keyword.containershort_notm}} sets up your cluster with 
 * You have an app in a single-zone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLAN.
 * You have an app in a multizone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLANs as your cluster. 
 
-**What are my options for managing public and private access to my cluster?**</br>The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to set up private-only networking and lock down public networking for clusters that are connected to a public and a private VLAN.
+**What are my options for managing public and private access to my cluster?**</br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up private-only networking and lock down public networking for clusters that are connected to a public and a private VLAN.
 
 ### Expose your apps with private networking services and secure your cluster from public access with Calico network policies
 {: #both_vlans_private_services}
@@ -183,7 +183,7 @@ You can choose to [create a private-VLAN only cluster](cs_clusters.html#clusters
 </br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. **Note**: Using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html?pos=5).
 
 **What are my options for managing public and private access to my cluster?**
-</br>The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
+</br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
 
 ### Configure a gateway appliance
 {: #private_vlan_gateway}

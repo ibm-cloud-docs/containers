@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -202,7 +202,7 @@ You can set up multiple clusters in different regions of one geolocation (such a
 ## Private clusters
 {: #private_clusters}
 
-By default, {{site.data.keyword.containershort_notm}} sets up your cluster with access to a private VLAN and a public VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface. The public VLAN allows the worker nodes to automatically and securely connect to the master.
+By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a private VLAN and a public VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface. The public VLAN allows the worker nodes to automatically and securely connect to the master.
 
 
 If you want to create a cluster that only has access on a private VLAN, you can create a single zone or multizone private cluster. However, when your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
@@ -242,7 +242,7 @@ Review the following information to decide what type of worker pools you want. A
 <dt>Why would I use physical machines (bare metal)?</dt>
 <dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
 <dt>Why would I use virtual machines?</dt>
 <dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
 <p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
@@ -255,7 +255,7 @@ Review the following information to decide what type of worker pools you want. A
 <dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
 <p>Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone_name>`.</p>
 <p><table>
-<caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containershort_notm}}.</caption>
+<caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containerlong_notm}}.</caption>
 <thead>
 <th>Name and use case</th>
 <th>Cores / Memory</th>
@@ -293,6 +293,27 @@ Review the following information to decide what type of worker pools you want. A
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
+<tr>
+<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 32GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>32 / 32GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td>16 / 16GB</td>
+<td>25GB / 100GB</td>
+<td>1000Mbps</td>
+</tr><tr>
 <tr>
 <td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
 <td>28 / 512GB</td>
@@ -335,6 +356,18 @@ Review the following information to decide what type of worker pools you want. A
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
+<tr>
+<td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>28 / 256GB</td>
+<td>2TB SATA / 3.8TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal with SDS, ms2c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>28 / 512GB</td>
+<td>2TB SATA / 4x3.8TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
 </tbody>
 </table>
 </p>
@@ -347,7 +380,7 @@ You can deploy clusters by using the [console UI](cs_clusters.html#clusters_ui) 
 ## Worker node memory limits
 {: #resource_limit_node}
 
-{{site.data.keyword.containershort_notm}} sets a memory limit on each worker node. When pods that are running on the worker node exceed this memory limit, the pods are removed. In Kubernetes, this limit is called a [hard eviction threshold ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
+{{site.data.keyword.containerlong_notm}} sets a memory limit on each worker node. When pods that are running on the worker node exceed this memory limit, the pods are removed. In Kubernetes, this limit is called a [hard eviction threshold ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
 {:shortdesc}
 
 If your pods are removed frequently, add more worker nodes to your cluster or set [resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) on your pods.

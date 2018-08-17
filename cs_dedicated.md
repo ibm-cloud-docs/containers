@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-15"
 If you have an {{site.data.keyword.Bluemix_dedicated}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.Bluemix_notm}} services that are also running there.
 {:shortdesc}
 
-If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containershort_notm}}](container_index.html) in a public {{site.data.keyword.Bluemix_notm}} account.
+If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](container_index.html) in a public {{site.data.keyword.Bluemix_notm}} account.
 
 ## About the Dedicated cloud environment
 {: #dedicated_environment}
 
 With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.Bluemix_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.Bluemix_notm}} public](cs_clusters.html#clusters_ui).
 
-With {{site.data.keyword.Bluemix_dedicated_notm}}, you can create clusters from the catalog in the Dedicated console or by using the {{site.data.keyword.containershort_notm}} CLI. To use the Dedicated console, you log in to both your Dedicated and public accounts simultaneously by using your IBMid. You can use the dual login to access your public clusters by using your Dedicated console. To use the CLI, you log in by using your Dedicated endpoint (`api.<my-dedicated-cloud-instance>.bluemix.net.`). You then target the {{site.data.keyword.containershort_notm}} API endpoint of the public region that is associated with the Dedicated environment.
+With {{site.data.keyword.Bluemix_dedicated_notm}}, you can create clusters from the catalog in the Dedicated console or by using the {{site.data.keyword.containerlong_notm}} CLI. To use the Dedicated console, you log in to both your Dedicated and public accounts simultaneously by using your IBMid. You can use the dual login to access your public clusters by using your Dedicated console. To use the CLI, you log in by using your Dedicated endpoint (`api.<my-dedicated-cloud-instance>.bluemix.net.`). You then target the {{site.data.keyword.containerlong_notm}} API endpoint of the public region that is associated with the Dedicated environment.
 
 The most significant differences between {{site.data.keyword.Bluemix_notm}} public and Dedicated are as follows.
 
@@ -82,8 +82,8 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Accessing the registry</td>
- <td>See the options in [Using private and public image registries with {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
- <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.</li></ul></td>
+ <td>See the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html).</td>
+ <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.</li></ul></td>
  </tr>
  <tr>
  <td>Multizone clusters</td>
@@ -107,12 +107,12 @@ Built-in security features provide isolation, resource management capabilities, 
 
 *Kubernetes architecture and networking in the {{site.data.keyword.Bluemix_dedicated_notm}}*
 
-![{{site.data.keyword.containershort_notm}} Kubernetes architecture on {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes architecture on {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## Setting up {{site.data.keyword.containershort_notm}} on Dedicated
+## Setting up {{site.data.keyword.containerlong_notm}} on Dedicated
 {: #dedicated_setup}
 
 Each {{site.data.keyword.Bluemix_dedicated_notm}} environment has a public, client-owned, corporate account in {{site.data.keyword.Bluemix_notm}}. For users in the Dedicated environment to create clusters, the administrator must add the users to a public corporate account.
@@ -285,7 +285,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Creating clusters with the CLI
 {: #dedicated_creating_cli}
 
-1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 2.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select your account when prompted.
 
     ```
@@ -461,7 +461,7 @@ With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single
 
 Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
 
-For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containershort_notm}}](cs_images.html). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
+For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
 
 ### Adding subnets to clusters
 {: #dedicated_cluster_subnet}
@@ -471,7 +471,7 @@ Change the pool of available portable public IP addresses by adding subnets to y
 #### Adding more user-managed subnets and IP addresses to your Kubernetes clusters
 {: #dedicated_byoip_subnets}
 
-Provide more of your own subnets from an on-premises network that you want to use to access {{site.data.keyword.containershort_notm}}. You can add private IP addresses from those subnets to Ingress and load balancer services in your Kubernetes cluster. User-managed subnets are configured in one of two ways depending on the format of the subnet that you want to use.
+Provide more of your own subnets from an on-premises network that you want to use to access {{site.data.keyword.containerlong_notm}}. You can add private IP addresses from those subnets to Ingress and load balancer services in your Kubernetes cluster. User-managed subnets are configured in one of two ways depending on the format of the subnet that you want to use.
 
 Requirements:
 - User-managed subnets can be added to private VLANs only.

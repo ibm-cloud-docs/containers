@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-15"
 # Tutorial: Migrating an app from Cloud Foundry to a cluster
 {: #cf_tutorial}
 
-You can take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to a Kubernetes cluster in {{site.data.keyword.containershort_notm}}.
+You can take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 

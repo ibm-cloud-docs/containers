@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -55,7 +55,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - [Backing up and restoring data in persistent storage in IBM Cloud infrastructure (SoftLayer) ![External link icon](../icons/launch-glyph.svg "External link icon")](../services/RegistryImages/ibm-backup-restore/index.html)
 - Setting up [logging](cs_health.html#logging) and [monitoring](cs_health.html#view_metrics) services to support your cluster's health and performance
 - [Configuring health monitoring for worker nodes with Autorecovery](cs_health.html#autorecovery)
-- Auditing events that change resources in your cluster, such as by using [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) to view user-initiated activities that change the state of your {{site.data.keyword.containershort_notm}} instance
+- Auditing events that change resources in your cluster, such as by using [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) to view user-initiated activities that change the state of your {{site.data.keyword.containerlong_notm}} instance
 
 <br />
 
@@ -63,14 +63,14 @@ Review the responsibilities that you share with IBM to manage your clusters.
 ## Abuse of {{site.data.keyword.containerlong_notm}}
 {: #terms}
 
-Clients cannot misuse {{site.data.keyword.containershort_notm}}.
+Clients cannot misuse {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Misuse includes:
 
 *   Any illegal activity
 *   Distribution or execution of malware
-*   Harming {{site.data.keyword.containershort_notm}} or interfering with anyone's use of {{site.data.keyword.containershort_notm}}
+*   Harming {{site.data.keyword.containerlong_notm}} or interfering with anyone's use of {{site.data.keyword.containerlong_notm}}
 *   Harming or interfering with anyone's use of any other service or system
 *   Unauthorized access to any service or system
 *   Unauthorized modification of any service or system

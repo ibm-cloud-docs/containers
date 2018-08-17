@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -35,7 +35,7 @@ Images are typically stored in a registry that can either be accessible by the p
 Public registries, such as Docker Hub, can be used to get started with Docker and Kubernetes to create your first containerized app in a cluster. But when it comes to enterprise applications, use a private registry, like the one provided in {{site.data.keyword.registryshort_notm}} to protect your images from being used and changed by unauthorized users. Private registries must be set up by the cluster admin to ensure that the credentials to access the private registry are available to the cluster users.
 
 
-You can use multiple registries with {{site.data.keyword.containershort_notm}} to deploy apps to your cluster.
+You can use multiple registries with {{site.data.keyword.containerlong_notm}} to deploy apps to your cluster.
 
 |Registry|Description|Benefit|
 |--------|-----------|-------|
@@ -74,7 +74,7 @@ You can deploy containers to your cluster from an IBM-provided public image or a
 
 When you create a cluster, non-expiring registry tokens and secrets are automatically created for both the [nearest regional registry and the global registry](/docs/services/Registry/registry_overview.html#registry_regions). The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images, as well as the same public images that are stored in the global registry. The tokens are used to authorize read-only access to any of your namespaces that you set up in {{site.data.keyword.registryshort_notm}} so that you can work with these public (global registry) and private (regional registries) images.
 
-Each token must be stored in a Kubernetes `imagePullSecret` so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containershort_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the default list of secrets in the `ServiceAccount` for that namespace, and the `kube-system` namespace.
+Each token must be stored in a Kubernetes `imagePullSecret` so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containerlong_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the default list of secrets in the `ServiceAccount` for that namespace, and the `kube-system` namespace.
 
 **Note:** By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.Bluemix_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.Bluemix_notm}} region or in another {{site.data.keyword.Bluemix_notm}} account, you must [create your own imagePullSecret for your cluster](#other).
 

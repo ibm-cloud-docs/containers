@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-15"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -172,7 +172,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 ## Allowing the cluster to access infrastructure resources and other services
 {: #firewall_outbound}
 
-Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containershort_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
+Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
   1.  Note the public IP address for all of your worker nodes in the cluster.
@@ -234,13 +234,13 @@ Let your cluster access infrastructure resources and services from behind a fire
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>
       <thead>
-        <th>{{site.data.keyword.containershort_notm}} region</th>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Registry address</th>
         <th>Registry IP address</th>
       </thead>
       <tbody>
         <tr>
-          <td>Global registry across {{site.data.keyword.containershort_notm}} regions</td>
+          <td>Global registry across {{site.data.keyword.containerlong_notm}} regions</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -274,7 +274,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for monitoring traffic</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}} region</th>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Monitoring address</th>
         <th>Monitoring IP addresses</th>
         </thead>
@@ -303,7 +303,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
 <caption>IP addresses to open for logging traffic</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}} region</th>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Logging address</th>
         <th>Logging IP addresses</th>
         </thead>
@@ -332,7 +332,7 @@ Let your cluster access infrastructure resources and services from behind a fire
        </table>
 </p>
 
-  5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containershort_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+  5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
   6. For private firewalls, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) beginning with the **Backend (private) Network** section.
       - Add all of the [zones within the regions](cs_regions.html#zones) that you are using.
