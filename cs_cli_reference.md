@@ -3037,32 +3037,32 @@ View the worker pools that you have in a cluster.
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd>The ID of the private VLAN. This value is required, whether you want to change the private VLAN ID or keep the ID the same as the existing value. You might want to keep the private VLAN ID the same as the existing value if you update the public VLAN but want to keep the same private VLAN.<br><br>The value must match the private VLAN ID of one or more of the worker nodes in the cluster, and the private and public VLANs must be compatible.
-    <ol><li>Check the VLANs that you have available to your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code><p>Example output:</p></pre>
-    <screen>Subnet VLANs
+    <ol><li>Check the VLANs that you have available to your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
+    <pre class="screen"><code>Subnet VLANs
 VLAN ID   Subnet CIDR         Public   User-managed
 229xxxx   169.xx.xxx.xxx/29   true     false
-229xxxx   10.xxx.xx.x/29      false    false</screen></li>
+229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
     <li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Example output: Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set the worker pool to create worker nodes with these incompatible public and private VLANs.
-    <screen>
+    <pre class="screen"><code>
     ID        Name   Number   Type      Router         Supports Virtual Workers
     229xxxx          1234     private   bcr01a.dal12   true
     229xxxx          5678     public    fcr01a.dal12   true
-    </screen></li>
+    </code></pre></li>
     <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning">enable VLAN spanning</a> for your account, or <a href="/docs/infrastructure/vlans/order-vlan.html#order-vlans">order new VLANs</a>.</li></ol>
     <br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd>The ID of the public VLAN. This value is required only if you want to change the public VLAN for the zone. Because you must always include the private VLAN flag, if you want to change only the public VLAN ID, use this flag. Then, for the private VLAN flag, use the existing private VLAN ID.<br><br>The value must match the private VLAN ID of one or more of the worker nodes in the cluster, and the private and public VLANs must be compatible.<ol><li>Check the VLANs that you have available to your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code><p>Example output:</p></pre>
-    <screen>Subnet VLANs
+    <dd>The ID of the public VLAN. This value is required only if you want to change the public VLAN for the zone. Because you must always include the private VLAN flag, if you want to change only the public VLAN ID, use this flag. Then, for the private VLAN flag, use the existing private VLAN ID.<br><br>The value must match the private VLAN ID of one or more of the worker nodes in the cluster, and the private and public VLANs must be compatible.<ol><li>Check the VLANs that you have available to your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
+    <pre class="screen"><code>Subnet VLANs
 VLAN ID   Subnet CIDR         Public   User-managed
 229xxxx   169.xx.xxx.xxx/29   true     false
-229xxxx   10.xxx.xx.x/29      false    false</screen></li>
-    <li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Example output: Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set the worker pool to create worker nodes with these incompatible public and private VLANs.
-    <screen>
+229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
+    <li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Example output: Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set the worker pool to create worker nodes with these incompatible public and private VLANs.</p>
+    <pre class="screen"><code>
     ID        Name   Number   Type      Router         Supports Virtual Workers
     229xxxx          1234     private   bcr01a.dal12   true
     229xxxx          5678     public    fcr01a.dal12   true
-    </screen></li>
+    </code></pre></li>
     <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning">enable VLAN spanning</a> for your account, or <a href="/docs/infrastructure/vlans/order-vlan.html#order-vlans">order new VLANs</a>.</li></ol><br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
 
   <dt><code>-f</code></dt>
