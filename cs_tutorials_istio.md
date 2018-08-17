@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-08-17"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-16"
 [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, control, and observe services on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 {:shortdesc}
 
-In this tutorial, you can see how to install Istio alongside four microservices for a simple mock bookstore app called BookInfo. The microservices include a product web page, book details, reviews, and ratings. When you deploy BookInfo's microservices into an {{site.data.keyword.containershort}} cluster where Istio is installed, you inject the Istio Envoy sidecar proxies in the pods of each microservice.
+In this tutorial, you can see how to install Istio alongside four microservices for a simple mock bookstore app called BookInfo. The microservices include a product web page, book details, reviews, and ratings. When you deploy BookInfo's microservices into an {{site.data.keyword.containerlong}} cluster where Istio is installed, you inject the Istio Envoy sidecar proxies in the pods of each microservice.
 
 ## Objectives
 
@@ -41,7 +41,7 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the IBM Cloud CLI, the {{site.data.keyword.containershort_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
 -  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -63,13 +63,8 @@ Download and install Istio in your cluster.
         helm install ibm/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
-    4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
-       ```
-       export PATH=$PWD/istio-1.0/bin:$PATH
-       ```
-       {: pre}
 
-2. Ensure the pods for the 9 Istio services and for Prometheus are all fully deployed before you continue.
+2. Ensure the pods for the 9 Istio services and the pod for Prometheus are all fully deployed before you continue.
     ```
     kubectl get pods -n istio-system
     ```
@@ -102,21 +97,23 @@ Deploy the BookInfo sample app's microservices to your Kubernetes cluster.
 These four microservices include a product web page, book details, reviews (with several versions of the review microservice), and ratings. When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
 1. Download the Istio package containing the necessary BookInfo files.
-    1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
-
+    1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) and extract the installation files, or get the latest version by using cURL:
        ```
        curl -L https://git.io/getLatestIstio | sh -
        ```
        {: pre}
 
-    2. Extract the installation files.
-
-    3. Change the directory to the Istio file location.
-
+    2. Change the directory to the Istio file location.
        ```
-       cd filepath/istio-1.0
+       cd <filepath>/istio-1.0
        ```
        {: pre}
+
+    3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
+        ```
+        export PATH=$PWD/istio-1.0/bin:$PATH
+        ```
+        {: pre}
 
 2. Label the `default` namespace with `istio-injection=enabled`.
     ```
@@ -140,7 +137,6 @@ These four microservices include a product web page, book details, reviews (with
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
@@ -155,9 +151,6 @@ These four microservices include a product web page, book details, reviews (with
     ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    guestbook-76897854cc-6zsws               1/1       Running     0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
     ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
     reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
