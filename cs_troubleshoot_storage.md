@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-18"
+lastupdated: "2018-08-20"
 
 ---
 
@@ -345,61 +345,6 @@ Update the file system in the existing PV from `ext4` to `XFS`.
 <br />
 
 
-## Object storage: Installing the {{site.data.keyword.cos_full_notm}} plug-in fails
-{: #cos_helm_fails}
-
-{: tsSymptoms}
-When you install the {{site.data.keyword.cos_full_notm}} plug-in, the installation fails with the following error: 
-```
-Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
-```
-{: screen}
-
-{: tsCauses}
-The {{site.data.keyword.cos_full_notm}} Helm plug-in is already installed. This error might also occur if only parts of the plug-in are installed. 
-
-{: tsResolve}
-
-1. Remove the {{site.data.keyword.cos_full_notm}} Helm plug-in. 
-   ```
-   rm -rf ~/.helm/plugins/helm-ibmc
-   ```
-   {: pre}
-   
-2. [Install the {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos). 
-
-## Object storage: PVC or pod creation fails due to not finding the Kubernetes secret
-{: #cos_secret_access_fails}
-
-{: tsSymptoms}
-When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails. 
-
-- Example error message for PVC creation failure: 
-  ```
-  pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
-  ```
-  {: screen}
-
-- Example error message for pod creation failure: 
-  ```
-  persistentvolumeclaim "pvc-3" not found (repeated 3 times)
-  ```
-  {: screen}
-  
-{: tsCauses}
-The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} service credentials, the PVC, and the pod are not all in the same Kubernetes namespace. When the secret is deployed to a different namespace than your PVC or pod, the secret cannot be accessed. 
-
-{: tsResolve}
-
-1. List the secrets in your cluster and review the Kubernetes namespace where the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service instance is created. 
-   ```
-   kubectl get secrets --all-namespaces
-   ```
-   {: pre}
-   
-2. Check your YAML configuration file to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](cs_storage_cos.html#cos_create_secret) in the desired namespace. 
-   
-3. Create the PVC or deploy the pod in the desired namespace. 
 
 
 
