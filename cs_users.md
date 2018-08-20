@@ -7,7 +7,7 @@ lastupdated: "2018-08-20"
 
 ---
 
-{:new_window: target="_blank"}
+{:new_window: target="blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -55,7 +55,7 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
   <dt>Why do I need access to the IBM Cloud infrastructure (SoftLayer) portfolio?</dt>
     <dd>To successfully provision and work with clusters in your account, you must ensure that your account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio. Depending on your account setup, you either use the IAM API key or infrastructure credentials that you manually set by using the `ibmcloud ks credentials-set` command.</dd>
 
-  <dt>How does the IAM API key work with the Container service?</dt>
+  <dt>How does the IAM API key work with {{site.data.keyword.containerlong_notm}}?</dt>
     <dd><p>The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the <code>us-south</code> region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs.</p> <p>When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the <strong>Super user</strong> infrastructure access policy.</p> <p>You can find the current API key owner by running [<code>ibmcloud ks api-key-info</code>](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The API key that is stored for the region might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the <code>ibmcloud ks credentials-set</code> command.</p> <p><strong>Note:</strong> Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it is unnecessarily changed.</p></dd>
 
   <dt>What does the <code>ibmcloud ks credentials-set</code> command do?</dt>
@@ -79,7 +79,7 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 Before you can understand which role can perform each action, it's important to understand how the roles fit together.
 {: shortdesc}
 
-The following image shows the roles that each type of person in your organization might need. However, it is different for every organization.
+The following image shows the roles that each type of person in your organization might need. However, it is different for every organization. You might notice that some users require custom permissions for infrastructure. Be sure to read through [Accessing the IBM Cloud infrastructure (SoftLayer) porfolio](#api_key) to learn about what IBM Cloud infrastructure (SoftLayer) permissions are and who needs which permissions. 
 
 ![{{site.data.keyword.containerlong_notm}} access roles](/images/user-policies.png)
 
@@ -355,7 +355,7 @@ Do you need your cluster access policies to be more granular than an IAM policy 
 When a binding is created for a group, it affects any user that is added or removed from that group. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
 {: tip}
 
-If you want to assign access to a service such as for a continuous integration, continuous delivery pipeline, you can use [Kubernetes Service Accounts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/).
+If you want to assign access to a service, such as a continuous delivery toolchain, you can use [Kubernetes Service Accounts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/).
 
 **Before you begin**
 
