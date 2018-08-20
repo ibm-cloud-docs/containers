@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-20"
 
 ---
 
@@ -354,6 +354,9 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 </tbody>
 </table>
 
+
+
+
 <br />
 
 
@@ -429,12 +432,16 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 </tbody>
 </table>
 
+
+
 <br />
 
 
 
 ## Archive
 {: #k8s_version_archive}
+
+
 
 ### Version 1.7 (Unsupported)
 {: #cs_v17}

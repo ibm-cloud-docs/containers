@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-20"
 
 ---
 
@@ -110,6 +110,9 @@ Review the following changes.
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## Version 1.10 changelog
 {: #110_changelog}
@@ -399,6 +402,9 @@ Review the following changes.
 </tbody>
 </table>
 
+<br />
+
+
 ## Version 1.9 changelog
 {: #19_changelog}
 
@@ -672,6 +678,11 @@ Review the following changes.
 </tr>
 </tbody>
 </table>
+
+
+
+<br />
+
 
 ## Version 1.8 changelog
 {: #18_changelog}
@@ -949,8 +960,18 @@ Review the following changes.
 </tbody>
 </table>
 
+
+
+<br />
+
+
 ## Archive
 {: #changelog_archive}
+
+
+
+<br />
+
 
 ### Version 1.7 changelog (Unsupported)
 {: #17_changelog}
