@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-20"
+lastupdated: "2018-08-21"
 
 ---
 
@@ -94,7 +94,9 @@ You cannot access or change your cluster while the Kubernetes master is unavaila
 Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf).
 
 **How do I let my users access my app from the public Internet?**</br>
-You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service. By default, public ALBs are automatically created and enabled in each zone in your cluster. A multizone load balancer (MZLB) for your cluster is also automatically created and enabled. The MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. For more information, see highly available [Ingress services](cs_ingress.html#planning).
+You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service.
+
+By default, public ALBs are automatically created and enabled in each zone in your cluster. A Cloudflare multizone load balancer (MZLB) for your cluster is also automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For more information, see [Ingress components and architecture](cs_ingress.html#planning).
 
 Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](cs_loadbalancer.html#multi_zone_config).
 
