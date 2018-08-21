@@ -1274,7 +1274,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 <br />
 
 
-## Tuning performance
+## Tuning ALB performance
 {: #perf_tuning}
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
@@ -1322,13 +1322,11 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
    ```
    {: pre}
 
-### Increasing the keepalive connection time
+### Changing the number or duration of keepalive connections
 {: #keepalive_time}
 
-Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the default setting of the keepalive time for the connections between the ALB and the client.
+Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -1337,11 +1335,13 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
     ```
     {: pre}
 
-2. Change the value of `keep-alive` from `8s` to a higher value.
-
+2. Change the values of `keep-alive-requests` and `keep-alive`.
+    * `keep-alive-requests`: The number of keepalive client connections that can stay open to the Ingress ALB. The default is `4096`.
+    * `keep-alive`: The timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. The default is `8s`.
    ```
    apiVersion: v1
    data:
+     keep-alive-requests: "4096"
      keep-alive: "8s"
    kind: ConfigMap
    metadata:
@@ -1359,50 +1359,8 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
    ```
    {: pre}
 
-<br />
 
-
-### Increasing the number of keepalive requests
-{: #keepalive_requests}
-
-Keepalive requests can have a major impact on performance. To optimize the performance of your ALBs, you can change the default setting of the number of keepalive connections between the ALB and the client.
-{: shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive-requests` field sets the number of keepalive client connections that can stay open to the Ingress ALB. By default, `keep-alive-requests` is set to `4096`. You can override the default by editing the Ingress configmap.
-
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
-
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Change the value of `keep-alive-requests` from `4096` to a higher value.
-
-   ```
-   apiVersion: v1
-   data:
-     keep-alive-requests: "4096"
-   kind: ConfigMap
-   metadata:
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-   ```
-   {: codeblock}
-
-3. Save the configuration file.
-
-4. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-<br />
-
-
-### Modifying the pending connections backlog
+### Changing the pending connections backlog
 {: #backlog}
 
 You can decrease the default backlog setting for how many pending connections can wait in the server queue.
@@ -1417,7 +1375,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
     ```
     {: pre}
 
-2. Change the value of `backlog` from `32768` to a lower value. This value must be less than the kernel's `net.core.somaxconn` value, which is set to `32768` by default.
+2. Change the value of `backlog` from `32768` to a lower value. The value must be equal to or lesser than 32768.
 
    ```
    apiVersion: v1
@@ -1439,16 +1397,18 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
    ```
    {: pre}
 
+
+
 <br />
 
 
-## Configuring a user-managed Ingress controller
+## Bringing your own Ingress controller
 {: #user_managed}
 
-Run your own Ingress controller on {{site.data.keyword.Bluemix_notm}} while leveraging the IBM-provided Ingress subdomain and TLS certificate assigned to your cluster.
+Bring your own Ingress controller and run it on {{site.data.keyword.Bluemix_notm}} while leveraging the IBM-provided Ingress subdomain and TLS certificate assigned to your cluster.
 {: shortdesc}
 
-Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you run your own Ingress controller instead of the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
+Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
 
 1. Get the ID of the default public ALB. The public ALB has a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
     ```
