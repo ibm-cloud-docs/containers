@@ -16,10 +16,11 @@ lastupdated: "2018-08-22"
 {:download: .download}
 
 
-
-
 # Planning highly available persistent storage
 {: #storage_planning}
+
+
+
 
 ## Non-persistent data storage options
 {: #non_persistent}
@@ -88,6 +89,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </table>
 
 {: caption="Table. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
+
 
 
 
