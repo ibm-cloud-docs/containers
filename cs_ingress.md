@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-21"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -1398,6 +1398,10 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
    {: pre}
 
 
+### Tuning kernel performance
+{: #kernel}
+
+To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](cs_performance.html). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
 
 <br />
 

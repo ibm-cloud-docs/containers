@@ -42,6 +42,7 @@ IBM Cloud Kubernetes Service
         cs_psp.md
         cs_pod_priority.md
         cs_health.md
+        cs_performance.md
 
     {: .topicgroup}
     Setting up cluster networking
