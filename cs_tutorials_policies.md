@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-23"
 
 ---
 
@@ -110,7 +110,7 @@ The following image shows how the webserver app will be exposed to the internet 
 
 5. Deploy the LoadBalancer.
     ```
-    kubectl apply -f filepath/webserver.yaml
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
@@ -297,7 +297,7 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
 
 4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
     ```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc -n pr-firm webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -341,7 +341,7 @@ Next, you can create and apply Calico policies to whitelist traffic from certain
 ## Lesson 3: Allow incoming traffic from a whitelisted IP to the LoadBalancer
 {: #lesson3}
 
-You now decide to completely lock down traffic to the PR firm's cluster and test access by whitelisting your own computer's IP address.
+You now decide to completely lock down traffic to the PR firm's cluster and test access by whitelisting only your own computer's IP address.
 {: shortdesc}
 
 First, in addition to the NodePorts, you must block all incoming traffic to the LoadBalancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public NodePorts and LoadBalancer will be blocked and only traffic from your whitelisted system IP will be allowed:
@@ -468,14 +468,26 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="The webserver app is exposed by public LoadBalancer to the internet. Traffic from your system IP only is blocked." style="width:600px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.
-    ```
-    calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
-    {: pre}
-    ```
-    calicoctl delete GlobalNetworkPolicy whitelist
-    ```
-    {: pre}
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist
+      ```
+      {: pre}
+
+    - Windows and OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
     Now, all incoming TCP and UDP traffic from any source IP to the LoadBalancer IP address and port is permitted again.
 
 2. To deny all incoming TCP and UDP traffic from your system's source IP address to the LoadBalancer IP address and port, create a low-order Pre-DNAT policy called `deny-lb-port-80.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the LoadBalancer and `<client_address>` with the public IP address of your system's source IP.
@@ -539,10 +551,18 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
     At this point, all traffic to the public NodePorts is blocked, and all traffic to the public LoadBalancer is allowed. Only traffic from your blacklisted system IP to the LoadBalancer is blocked.
 
 5. To clean up this blacklist policy:
-    ```
-    calicoctl delete GlobalNetworkPolicy blacklist
-    ```
-    {: pre}
+
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist
+      ```
+      {: pre}
+
+    - Windows and OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 Great work! You've successfully controlled traffic into your app by using Calico Pre-DNAT policies to whitelist and blacklist source IPs.
 
