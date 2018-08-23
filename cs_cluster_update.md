@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-23"
 
 ---
 
@@ -372,6 +372,25 @@ Your {{site.data.keyword.containerlong_notm}} cluster comes with **add-ons**, su
 
 **What default add-ons do I have to update separately from the cluster?**
 * [Fluentd for logging](#logging)
+
+**Are there add-ons that I do not need to update and cannot change?**</br>
+Yes, your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval. 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+You can view these resources by using the `addonmanager.kubernetes.io/mode: Reconcile` label. For example:
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
 
 **Can I install other add-ons than the default?**</br>
 Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
