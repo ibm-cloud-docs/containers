@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-23"
 
 ---
 
@@ -41,6 +41,35 @@ For information about changes since the previous version, see the following chan
 {: #111_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
+{: #1112_1514}
+
+<table summary="Changes that were made since version 1.11.2_1513">
+<caption>Changes since version  1.11.2_1513</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>Updated `systemd` to fix `cgroup` leak.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.2_1513, released 14 August 2018
 {: #1112_1513}
@@ -118,6 +147,36 @@ Review the following changes.
 {: #110_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018
+{: #1105_1519}
+
+<table summary="Changes that were made since version 1.10.5_1518">
+<caption>Changes since version  1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>Updated `systemd` to fix `cgroup` leak.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018
 {: #1105_1518}
@@ -290,7 +349,7 @@ Review the following changes.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -409,6 +468,36 @@ Review the following changes.
 {: #19_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018
+{: #199_1522}
+
+<table summary="Changes that were made since version 1.9.9_1521">
+<caption>Changes since version  1.9.9_1521</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>Updated `systemd` to fix `cgroup` leak.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018
 {: #199_1521}
@@ -587,7 +676,7 @@ Review the following changes.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -688,6 +777,36 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018
+{: #1815_1520}
+
+<table summary="Changes that were made since version 1.8.15_1519">
+<caption>Changes since version  1.8.15_1519</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>Updated `systemd` to fix `cgroup` leak.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Updated worker node images with kernel update for [CVE-2018-3620,CVE-2018-3646 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018
 {: #1815_1519}
@@ -866,7 +985,7 @@ Review the following changes.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -996,7 +1115,7 @@ Review the following changes.
 <td>Kernel update</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>New worker node images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
