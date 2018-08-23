@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2018-08-17"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
+ 
 
 
 # Troubleshooting cluster storage
@@ -48,7 +48,7 @@ New clusters with worker pools that can span multiple zones label the PVs by def
 <br />
 
 
-## File systems for worker nodes change to read-only
+## File storage: File systems for worker nodes change to read-only
 {: #readonly_nodes}
 
 {: tsSymptoms}
@@ -71,7 +71,7 @@ For a long-term fix, [update the machine type of your worker pool](cs_cluster_up
 
 
 
-## App fails when a non-root user owns the NFS file storage mount path
+## File storage: App fails when a non-root user owns the NFS file storage mount path
 {: #nonroot}
 
 {: tsSymptoms}
@@ -271,7 +271,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 <br />
 
 
-## Adding non-root user access to persistent storage fails
+## File storage: Adding non-root user access to persistent storage fails
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
@@ -288,7 +288,7 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 
 
-## Mounting existing block storage to a pod fails due to the wrong file system
+## Block storage: Mounting existing block storage to a pod fails due to the wrong file system
 {: #block_filesystem}
 
 {: tsSymptoms}
@@ -343,6 +343,8 @@ Update the file system in the existing PV from `ext4` to `XFS`.
    {: screen}
 
 <br />
+
+
 
 
 

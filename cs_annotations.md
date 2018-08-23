@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -475,7 +475,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -767,11 +767,11 @@ Your CLI output looks similar to the following:
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Configure your Ingress to access your app via a non-standard TCP port. Use the sample YAML file in this reference. </li>
-<li>Update your ALB configuration.
+<li>Either create your ALB resource or update your existing ALB configuration.
 <pre class="pre">
 <code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>Open your preferred web browser to access your app. Example: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Curl the Ingress subdomain to access your app. Example: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 

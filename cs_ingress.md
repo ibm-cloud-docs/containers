@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -36,7 +36,7 @@ Ingress consists of three components:
 <dt>Application load balancer (ALB)</dt>
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource. When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.<br></br>**Multizone clusters**: When you add a zone to your cluster, a portable public subnet is added, and a new public ALB is automatically created and enabled on the subnet in that zone. All default public ALBs in your cluster share one public route, but have a different IP addresses. A default private ALB is also automatically created in each zone, but is not automatically enabled.</dd>
 <dt>Multizone load balancer (MZLB)</dt>
-<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname yourcluster.us-east.containers.appdomain.cloud has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
+<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p><strong>Note</strong>: If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="cs_tutorials_policies.html#lesson3">Calico network policy tutorial</a>.</dd>
 </dl>
@@ -86,7 +86,7 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
- - To enable communication on the private network between workers that are in different zones, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+ - If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
  - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
 <br />
@@ -1274,7 +1274,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 <br />
 
 
-## Tuning performance
+## Tuning ALB performance
 {: #perf_tuning}
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
@@ -1322,13 +1322,11 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
    ```
    {: pre}
 
-### Increasing the keepalive connection time
+### Changing the number or duration of keepalive connections
 {: #keepalive_time}
 
-Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the default setting of the keepalive time for the connections between the ALB and the client.
+Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field sets the timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. By default, `keep-alive` is set to `8s`. You can override the default by editing the Ingress configmap.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -1337,11 +1335,13 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
     ```
     {: pre}
 
-2. Change the value of `keep-alive` from `8s` to a higher value.
-
+2. Change the values of `keep-alive-requests` and `keep-alive`.
+    * `keep-alive-requests`: The number of keepalive client connections that can stay open to the Ingress ALB. The default is `4096`.
+    * `keep-alive`: The timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. The default is `8s`.
    ```
    apiVersion: v1
    data:
+     keep-alive-requests: "4096"
      keep-alive: "8s"
    kind: ConfigMap
    metadata:
@@ -1359,50 +1359,8 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive` field
    ```
    {: pre}
 
-<br />
 
-
-### Increasing the number of keepalive requests
-{: #keepalive_requests}
-
-Keepalive requests can have a major impact on performance. To optimize the performance of your ALBs, you can change the default setting of the number of keepalive connections between the ALB and the client.
-{: shortdesc}
-
-In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `keep-alive-requests` field sets the number of keepalive client connections that can stay open to the Ingress ALB. By default, `keep-alive-requests` is set to `4096`. You can override the default by editing the Ingress configmap.
-
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
-
-    ```
-    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
-    ```
-    {: pre}
-
-2. Change the value of `keep-alive-requests` from `4096` to a higher value.
-
-   ```
-   apiVersion: v1
-   data:
-     keep-alive-requests: "4096"
-   kind: ConfigMap
-   metadata:
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-   ```
-   {: codeblock}
-
-3. Save the configuration file.
-
-4. Verify that the configmap changes were applied.
-
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
-
-<br />
-
-
-### Modifying the pending connections backlog
+### Changing the pending connections backlog
 {: #backlog}
 
 You can decrease the default backlog setting for how many pending connections can wait in the server queue.
@@ -1417,7 +1375,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
     ```
     {: pre}
 
-2. Change the value of `backlog` from `32768` to a lower value. This value must be less than the kernel's `net.core.somaxconn` value, which is set to `32768` by default.
+2. Change the value of `backlog` from `32768` to a lower value. The value must be equal to or lesser than 32768.
 
    ```
    apiVersion: v1
@@ -1439,16 +1397,22 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
    ```
    {: pre}
 
+
+### Tuning kernel performance
+{: #kernel}
+
+To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](cs_performance.html). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
+
 <br />
 
 
-## Configuring a user-managed Ingress controller
+## Bringing your own Ingress controller
 {: #user_managed}
 
-Run your own Ingress controller on {{site.data.keyword.Bluemix_notm}} while leveraging the IBM-provided Ingress subdomain and TLS certificate assigned to your cluster.
+Bring your own Ingress controller and run it on {{site.data.keyword.Bluemix_notm}} while leveraging the IBM-provided Ingress subdomain and TLS certificate assigned to your cluster.
 {: shortdesc}
 
-Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you run your own Ingress controller instead of the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
+Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
 
 1. Get the ID of the default public ALB. The public ALB has a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
     ```

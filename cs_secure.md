@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -52,7 +52,7 @@ The Kubernetes API server and etcd are the most vulnerable components that run i
 
 To protect your Kubernetes API server and etcd data store, you must secure and limit the access to your Kubernetes API server for both human users and Kubernetes service accounts.
 
-**How is access to my Kubernetes API server granted anyway?** </br>
+**How is access to my Kubernetes API server granted?** </br>
 By default, Kubernetes requires every request to go through several stages before access to the API server is granted:
 
 <ol><li><strong>Authentication: </strong>Validates the identity of a registered user or service account.</li><li><strong>Authorization: </strong>Limits the permissions of authenticated users and service accounts to ensure that they can access and operate only the cluster components that you want them to.</li><li><strong>Admission control: </strong>Validates or mutates requests before they are processed by the Kubernetes API server. Many Kubernetes features require admission controllers in order to properly function.</li></ol>
@@ -180,7 +180,7 @@ If you want to allow incoming network traffic from the internet, you must expose
 **What is network segmentation and how can I set it up for a cluster?** </br>
 Network segmentation describes the approach to divide a network into multiple sub-networks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one sub-network cannot see or access apps in another sub-network. Network segmentation also limits the access that is provided to an insider or third party software and can limit the range of malicious activities.   
 
-{{site.data.keyword.containerlong_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers. However, if you want to use multiple subnets or multiple VLANs in a cluster, for example in a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that worker nodes can see and talk to each other.
+{{site.data.keyword.containerlong_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 VLAN spanning is an {{site.data.keyword.Bluemix_notm}} account setting and can be either turned on or off. When turned on, all clusters in your account can see and talk to each other. While this might be useful for some scenarios, VLAN spanning removes network segmentation for your clusters.
 
@@ -221,7 +221,7 @@ Preserving the client’s IP is useful, for example, when app servers have to ap
 **How can I encrypt traffic with TLS?** </br>
 The Ingress service offers TLS termination at two points in the traffic flow:
 * [Decrypt package upon arrival](cs_ingress.html#public_inside_2): By default, the Ingress ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.
-* [Re-encrypt package before it's forwarded to upstream apps](cs_annotations.html#ssl-services): The ALB decrypts HTTPS requests before forwarding traffic to your apps. If you have apps that require HTTS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a one-way or mutual-authentication TLS secret.
+* [Re-encrypt package before it's forwarded to upstream apps](cs_annotations.html#ssl-services): The ALB decrypts HTTPS requests before forwarding traffic to your apps. If you have apps that require HTTPS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a one-way or mutual-authentication TLS secret.
 
 To secure the service-to-service communication, you can use [Istio's mutual TLS authentication ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/security/mutual-tls/). Istio is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes.
 

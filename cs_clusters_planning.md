@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -91,14 +91,12 @@ A multizone cluster is set up with a single Kubernetes master that is provisione
 You cannot access or change your cluster while the Kubernetes master is unavailable. However, worker nodes, apps, and resources that you deployed are not modified and continue to run. To protect your cluster against a Kubernetes master failure or in regions where multizone clusters are not available, you can [set up multiple clusters and connect them with a global load balancer](#multiple_clusters).
 
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
-Yes. Because the worker nodes are on different VLANs for each zone, you have two options to enable networking communication:
-
-1. [Enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your IBM Cloud infrastructure (SoftLayer) account. To enable VLAN spanning, you must have the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/iam/infrastructureaccess.html#infrapermission), or you can request the account owner to enable it.
-
-2. Or, use a Virtual Router Function (VRF) enabled IBM Cloud infrastructure (SoftLayer) account. To get a VRF account, contact IBM Cloud infrastructure (SoftLayer) support.
+Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 **How do I let my users access my app from the public Internet?**</br>
-You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service. By default, public ALBs are automatically created and enabled in each zone in your cluster. A multizone load balancer (MZLB) for your cluster is also automatically created and enabled. The MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. For more information, see highly available [Ingress services](cs_ingress.html#planning).
+You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service.
+
+By default, public ALBs are automatically created and enabled in each zone in your cluster. A Cloudflare multizone load balancer (MZLB) for your cluster is also automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For more information, see [Ingress components and architecture](cs_ingress.html#planning).
 
 Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](cs_loadbalancer.html#multi_zone_config).
 
@@ -168,7 +166,7 @@ You can set up multiple clusters in different regions of one geolocation (such a
 **To set up a global load balancer for multiple clusters:**
 
 1. [Create clusters](cs_clusters.html#clusters) in multiple zones or regions.
-2. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. As an alternative to VLAN spanning, you can use a Virtual Router Function (VRF) if it is enabled in your IBM Cloud infrastructure (SoftLayer) account.
+2. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 3. In each cluster, expose your app by using an [application load balancer (ALB)](cs_ingress.html#ingress_expose_public) or [load balancer service](cs_loadbalancer.html#config).
 4. For each cluster, list the public IP addresses for your ALBs or load balancer services.
    - To list the IP address of all public enabled ALBs in your cluster:

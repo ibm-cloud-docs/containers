@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-17"
+lastupdated: "2018-08-22"
 
 ---
 
@@ -180,7 +180,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</td>
     </tr>
     <tr>
-    <td>IBM Storage Provider</td>
+    <td>Storage provider</td>
     <td>kube-system</td>
     <td>Every cluster is set up with a plug-in to provision file storage. You can choose to install other add-ons, such as block storage.</td>
     </tr>
@@ -210,17 +210,17 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>The Calico node is a container that bundles together the various components required for networking containers with Calico.</td>
     </tr>
     <tr>
-    <td>IBM Logging and Metrics</td>
+    <td>Logging and metrics</td>
     <td>ibm-system</td>
     <td>You can use the integrated {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}} services to expand your collection and retention capabilities when working with logs and metrics.</td>
     </tr>
     <tr>
-    <td>IBM Ingress ALB</td>
+    <td>Ingress ALB</td>
     <td>ibm-system</td>
     <td>Ingress is a Kubernetes service that you can use to balance network traffic workloads in your cluster by forwarding public or private requests to multiple apps in your cluster. To expose your apps over the public or private network, you must create an Ingress resource to register your apps with the Ingress application load balancer (ALB). Multiple apps can then be accessed by using a single URL or IP address.</td>
     </tr>
     <tr>
-    <td>IBM Load Balancer</td>
+    <td>Load balancer</td>
     <td>ibm-system</td>
     <td>A load balancer is a Kubernetes services that can be used to balance network traffic workloads in your cluster by forwarding public or private requests to an app.</td>
     </tr>
