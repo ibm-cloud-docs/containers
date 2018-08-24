@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-23"
 
 ---
 
@@ -1418,8 +1418,7 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 
 <dl>
 <dt>Description</dt>
-<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.
-</dd>
+<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p><strong>Note</strong>: To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port other than 443.</p></dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
@@ -1631,7 +1630,7 @@ Configure mutual authentication of downstream traffic for the Ingress ALB. The e
 <dd>
 <ul>
 <li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</li>
-<li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports).</li>
+<li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port other than 443.</li>
 </ul>
 </dd>
 
