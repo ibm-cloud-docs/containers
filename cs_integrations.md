@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-24"
 
 ---
 
@@ -227,10 +227,9 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
+**Important:** You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external). 
+
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-   
-Looking to access an {{site.data.keyword.Bluemix_notm}} service instance with an app that runs outside of {{site.data.keyword.Bluemix_notm}}? See [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external) for more information. 
-{: tip}
    
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster: 
 1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:** Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
