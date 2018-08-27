@@ -21,6 +21,7 @@ lastupdated: "2018-08-27"
 Customize logging and set up monitoring to help you troubleshoot issues and improve the performance of your Ingress configuration.
 {: shortdesc}
 
+
 ## Customizing Ingress log content and format
 {: #ingress_log_format}
 
