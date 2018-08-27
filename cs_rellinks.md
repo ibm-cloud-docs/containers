@@ -44,8 +44,8 @@ lastupdated: "2018-08-27"
 **Tutorials, demos, and courses**
 
 - [Modernize and extend an existing Java web app (JPetStore) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [developerWorks container orchestration journeys ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [developerWorks courses ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [IBM Developer container orchestration journeys ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [IBM Developer courses ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

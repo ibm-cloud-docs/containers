@@ -137,17 +137,17 @@ To deploy the app:
     {: pre}
 
     When the build is complete, verify that you see the following success message:
-    
+
     ```
     Successfully built <image_ID>
     Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
     The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
-    29042bc0b00c: Pushed 
-    f31d9ee9db57: Pushed 
-    33c64488a635: Pushed 
-    0804854a4553: Layer already exists 
-    6bd4a62f5178: Layer already exists 
-    9dfa40a0da3b: Layer already exists 
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
     1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
     ```
     {: screen}
@@ -319,12 +319,12 @@ As defined in the configuration script, Kubernetes can use an availability check
     Successfully built <image_ID>
     Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
     The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
-    29042bc0b00c: Pushed 
-    f31d9ee9db57: Pushed 
-    33c64488a635: Pushed 
-    0804854a4553: Layer already exists 
-    6bd4a62f5178: Layer already exists 
-    9dfa40a0da3b: Layer already exists 
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
     1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
     ```
     {: screen}
@@ -400,12 +400,12 @@ As defined in the configuration script, Kubernetes can use an availability check
 
 7.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard GUI.
 
-    *  **From the CLI**: Watch what is happening to your pods as they change status. 
+    *  **From the CLI**: Watch what is happening to your pods as they change status.
        ```
        kubectl get pods -o wide -w
        ```
        {: pre}
-       
+
     *  **From the GUI**:
 
        1.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
@@ -705,4 +705,4 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
-- Explore the container orchestration code patterns on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)
