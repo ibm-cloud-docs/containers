@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-27"
 
 ---
 
@@ -211,39 +211,27 @@ When you configure the public ALB, you choose the domain that your apps will be 
 </dl>
 
 To use the IBM-provided Ingress domain:
-1. Get the details for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the apps that you want to expose are deployed.
-
+Get the IBM-provided domain, and, if you want to use TLS, the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed. **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
     Example output:
 
     ```
-    Name:                   mycluster
-    ID:                     18a61a63c6a94b658596ca93d087aad9
-    State:                  normal
-    Created:                2018-01-12T18:33:35+0000
-    Zone:                   dal10
-    Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
-    Workers:                3
-    Version:                1.10.5
-    Owner Email:            owner@email.com
-    Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
-2. Get the IBM-provided domain in the **Ingress subdomain** field. If you want to use TLS, also get the IBM-provided TLS secret in the **Ingress Secret** field.
-    **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
+
 
 To use a custom domain:
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and will remove any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
@@ -409,6 +397,9 @@ http://<subdomain2>.<domain>/<app1_path>
 {: pre}
 
 
+Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
+{: tip}
+
 <br />
 
 
@@ -420,9 +411,9 @@ Expose apps that are outside your cluster to the public by including them in pub
 
 Before you begin:
 
--   Review the Ingress [prerequisites](#config_prereqs).
--   Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
+* Review the Ingress [prerequisites](#config_prereqs).
+* Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
+* [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Create an app service and external endpoint
 {: #public_outside_1}
@@ -525,38 +516,27 @@ When you configure the public ALB, you choose the domain that your apps will be 
 </dl>
 
 To use the IBM-provided Ingress domain:
-1. Get the details for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the apps that you want to expose are deployed.
-
+Get the IBM-provided domain, and, if you want to use TLS, the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed. **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
     Example output:
 
     ```
-    Name:                   mycluster
-    ID:                     18a61a63c6a94b658596ca93d087aad9
-    State:                  normal
-    Created:                2018-01-12T18:33:35+0000
-    Zone:                   dal10
-    Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
-    Workers:                3
-    Version:                1.10.5
-    Owner Email:            owner@email.com
-    Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
-2. Get the IBM-provided domain in the **Ingress subdomain** field. If you want to use TLS, also get the IBM-provided TLS secret in the **Ingress Secret** field. **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
+
 
 To use a custom domain:
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and will remove any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
@@ -721,6 +701,9 @@ http://<subdomain2>.<domain>/<app1_path>
 ```
 {: pre}
 
+
+Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
+{: tip}
 
 <br />
 
@@ -1066,6 +1049,7 @@ http://<subdomain2>.<domain>/<app1_path>
 
 
 For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2).
+{: tip}
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-27"
 
 ---
 
@@ -46,7 +46,7 @@ Your load balancer service might not be working properly for one of the followin
 {: tsResolve}
 To troubleshoot your load balancer service:
 
-1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to assure high availability for your load balancer service.
+1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to ensure high availability for your load balancer service.
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -106,146 +106,23 @@ To troubleshoot your load balancer service:
 <br />
 
 
-
-
 ## Cannot connect to an app via Ingress
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
 You publicly exposed your app by creating an Ingress resource for your app in your cluster. When you tried to connect to your app by using the public IP address or subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
-{: tsCauses}
-Ingress might not be working properly for the following reasons:
-<ul><ul>
-<li>The cluster is not fully deployed yet.
-<li>The cluster was set up as a free cluster or as a standard cluster with only one worker node.
-<li>The Ingress configuration script includes errors.
-</ul></ul>
-
 {: tsResolve}
-To troubleshoot your Ingress:
-
-1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to assure high availability for your ALB.
-
-  ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
-  {: pre}
-
-    In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
-
-2.  Retrieve the ALB subdomain and public IP address, and then ping each one.
-
-    1.  Retrieve the ALB subdomain.
-
-      ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
-      ```
-      {: pre}
-
-    2.  Ping the ALB subdomain.
-
-      ```
-      ping <ingress_subdomain>
-      ```
-      {: pre}
-
-    3.  Retrieve the public IP address of your ALB.
-
-      ```
-      nslookup <ingress_subdomain>
-      ```
-      {: pre}
-
-    4.  Ping the ALB public IP address.
-
-      ```
-      ping <ALB_IP>
-      ```
-      {: pre}
-
-    If the CLI returns a timeout for the public IP address or subdomain of the ALB, and you have set up a custom firewall that is protecting your worker nodes, open more ports and networking groups in your [firewall](cs_troubleshoot_clusters.html#cs_firewall).
-
-3.  If you are using a custom domain, make sure that your custom domain is mapped to the public IP address or subdomain of the IBM-provided ALB with your DNS provider.
-    1.  If you used the ALB subdomain, check your Canonical Name record (CNAME).
-    2.  If you used the ALB public IP address, check that your custom domain is mapped to the portable public IP address in the Pointer record (PTR).
-4.  Check your Ingress resource configuration file.
-
+First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
     ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: myingress
-    spec:
-      tls:
-      - hosts:
-        - <ingress_subdomain>
-        secretName: <ingress_tls_secret>
-      rules:
-      - host: <ingress_subdomain>
-        http:
-          paths:
-          - path: /
-            backend:
-              serviceName: myservice
-              servicePort: 80
-    ```
-    {: codeblock}
-
-    1.  Check that the ALB subdomain and TLS certificate are correct. To find the IBM provided subdomain and TLS certificate, run `ibmcloud ks cluster-get <cluster_name_or_ID>`.
-    2.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, include **/** as your path.
-5.  Check your Ingress deployment and look for potential warning or error messages.
-
-    ```
-    kubectl describe ingress <myingress>
+    ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
-    For example, in the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations you used.
+In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-    ```
-    Name:             myingress
-    Namespace:        default
-    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
-    Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
-    Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-    ```
-    {: screen}
-
-6.  Check the logs for your ALB.
-    1.  Retrieve the ID of the Ingress pods that are running in your cluster.
-
-      ```
-      kubectl get pods -n kube-system | grep alb
-      ```
-      {: pre}
-
-    2.  Retrieve the logs for each Ingress pod.
-
-      ```
-      kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
-      ```
-      {: pre}
-
-    3.  Look for error messages in the ALB logs.
+* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [Cannot get a subdomain for Ingress ALB](cs_troubleshoot_network.html#cs_subnet_limit).
+* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](cs_troubleshoot_debug_ingress.html).
 
 <br />
 
