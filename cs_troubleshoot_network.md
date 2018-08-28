@@ -228,6 +228,29 @@ To check the number of subnets on a VLAN and for steps on how to get another VLA
 <br />
 
 
+## Connection via WebSockets closes after 60 seconds
+{: #cs_ingress_websocket}
+
+{: tsSymptoms}
+Your Ingress service exposes an app that uses a WebSocket. However, the connection between a client and your WebSocket app closes when no traffic is sent between them for 60 seconds.
+
+{: tsCauses}
+The connection to your WebSocket app might drop after 60 seconds of inactivity for one of the following reasons:
+
+* Your Internet connection has a proxy or firewall that doesn't tolerate long connections.
+* A timeout in the ALB to the WebSocket app terminates the connection.
+
+{: tsResolve}
+
+1. If you connect to your WebSocket app through a proxy or firewall, make sure the proxy or firewall isn't configured to automatically terminate long connections.
+
+2. To keep the connection alive, you can increase the value of the timeout or set up a heartbeat in your app.
+    * Increase the value of the `proxy-read-timeout` in your ALB configuration. For example, to change the timeout from `60s` to a larger value like `300s`, add this [annotation](cs_annotations.html#connection) to your Ingress resource file: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. The timeout is changed for all public ALBs in your cluster.
+    * If you don't want to change the ALB's default read timeout value, set a heartbeat in your WebSocket app. When you set up a heartbeat protocol by using a framework like [WAMP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://wamp-proto.org/), the app's upstream server periodically sends a "ping" message on a timed interval and the client responds with a "pong" message. Set the heartbeat interval to 58 seconds or less so that the "ping/pong" traffic keeps the connection open before the 60-second timeout is enforced.
+
+<br />
+
+
 ## Cannot establish VPN connectivity with the strongSwan Helm chart
 {: #cs_vpn_fails}
 
