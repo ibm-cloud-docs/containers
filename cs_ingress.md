@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-28"
 
 ---
 
@@ -231,7 +231,7 @@ To use a custom domain:
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and will remove any failing IPs from the DNS response.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
@@ -536,7 +536,7 @@ To use a custom domain:
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and will remove any failing IPs from the DNS response.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:

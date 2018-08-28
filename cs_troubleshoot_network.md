@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-28"
 
 ---
 
@@ -26,9 +26,8 @@ lastupdated: "2018-08-27"
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster networking.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
+Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
 {: tip}
-
 
 ## Cannot connect to an app via a load balancer service
 {: #cs_loadbalancer_fails}
