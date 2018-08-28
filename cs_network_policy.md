@@ -763,7 +763,7 @@ You can isolate your cluster from other systems on the private network by applyi
 
 The policies target the worker node private interface (eth0) and the pod network of a cluster.
 * Worker nodes:
-    * Private interface egress is permitted only to pod IPs, workers in this cluster, IBM Cloud workers responsible for worker updates and worker reloads, and the UPD/TCP port 53 for DNS access.
+    * Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access.
     * Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
 * Pods:
     * All ingress to pods is permitted from workers in the cluster.
@@ -803,12 +803,10 @@ The compatibility of Calico versions for CLI configuration and policies varies b
       ```
       {: pre}
 
-3. In `bootstrap-private.yaml`, add the IBM Cloud infrastructure (SoftLayer) [IP ranges for the zones](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-) where you have worker nodes.
-
-4. In `generic-privatehostendpoint.yaml`, replace <worker_name> with the name of a worker node and <worker-node-private-ip> with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`. Repeat this step in a new section for each worker node in your cluster.
+3. In `generic-privatehostendpoint.yaml`, replace <worker_name> with the name of a worker node and <worker-node-private-ip> with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`. Repeat this step in a new section for each worker node in your cluster.
 **Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
 
-5. Apply all of the policies to your cluster.
+4. Apply all of the policies to your cluster.
     - Linux and OS X:
 
       ```
@@ -817,7 +815,6 @@ The compatibility of Calico versions for CLI configuration and policies varies b
       calicoctl apply -f allow-egress-pods.yaml
       calicoctl apply -f allow-icmp-private.yaml
       calicoctl apply -f allow-vrrp-private.yaml
-      calicoctl apply -f bootstrap-private.yaml
       calicoctl apply -f generic-privatehostendpoint.yaml
       ```
       {: pre}
@@ -830,7 +827,6 @@ The compatibility of Calico versions for CLI configuration and policies varies b
       calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f bootstrap-private.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
