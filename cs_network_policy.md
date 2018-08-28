@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-28"
 
 ---
 
@@ -753,6 +753,87 @@ policy changes to be applied throughout the cluster.
 
 To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](cs_tutorials_policies.html#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
+
+## Isolating clusters on the private network
+{: #isolate_workers}
+
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can communicate with workers.
+
+You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/). This set of Calico policies and host endpoints isolate the private network traffic of a cluster in {{site.data.keyword.containerlong_notm}} from other resources in the account's private network.
+
+The policies target the worker node private interface (eth0) and the pod network of a cluster.
+* Worker nodes:
+    * Private interface egress is permitted only to pod IPs, workers in this cluster, IBM Cloud workers responsible for worker updates and worker reloads, and the UPD/TCP port 53 for DNS access.
+    * Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
+* Pods:
+    * All ingress to pods is permitted from workers in the cluster.
+    * Egress from pods is restricted only to public IPs, DNS, kubelet, and other pods in the cluster.
+
+To use these Calico policies to isolate your cluster on the private network, complete the following steps.
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
+
+* [Kubernetes version 1.10 or later clusters](#1.10_create_new)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_create_new)
+
+1. Clone the `IBM-Cloud/kube-samples` respository.
+    ```
+    git clone https://github.com/IBM-Cloud/kube-samples.git
+    ```
+    {: pre}
+
+2. Navigate to the private policy directory for the Calico version that your cluster version is compatible with.
+    * Kubernetes version 1.10 or later clusters:
+      ```
+      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
+      ```
+      {: pre}
+
+    * Kubernetes version 1.9 or earlier clusters:
+      ```
+      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
+      ```
+      {: pre}
+
+3. In `bootstrap-private.yaml`, add the IBM Cloud infrastructure (SoftLayer) [IP ranges for the zones](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-) where you have worker nodes.
+
+4. In `generic-privatehostendpoint.yaml`, replace <worker_name> with the name of a worker node and <worker-node-private-ip> with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`. Repeat this step in a new section for each worker node in your cluster.
+**Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
+
+5. Apply all of the policies to your cluster.
+    - Linux and OS X:
+
+      ```
+      calicoctl apply -f allow-all-workers-private.yaml
+      calicoctl apply -f allow-dns-10250.yaml
+      calicoctl apply -f allow-egress-pods.yaml
+      calicoctl apply -f allow-icmp-private.yaml
+      calicoctl apply -f allow-vrrp-private.yaml
+      calicoctl apply -f bootstrap-private.yaml
+      calicoctl apply -f generic-privatehostendpoint.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-dns-10250.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f bootstrap-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## Controlling traffic between pods
 {: #isolate_services}
