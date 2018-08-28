@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-28"
 
 ---
 
@@ -152,9 +152,8 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
             ```
             healthy
             ```
-            {: pre}
-
-        * If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
+            {: screen}
+            If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
 3. Get the IBM-provided Ingress subdomain.
     ```
