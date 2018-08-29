@@ -762,10 +762,14 @@ If you have a multizone cluster, multiple VLANs for a single zone cluster, or mu
 You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/). This set of Calico policies and host endpoints isolate the private network traffic of a cluster from other resources in the account's private network.
 
 The policies target the worker node private interface (eth0) and the pod network of a cluster.
-*Worker nodes*
+
+**Worker nodes**
+
 * Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access.
 * Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
-*Pods*
+
+**Pods**
+
 * All ingress to pods is permitted from workers in the cluster.
 * Egress from pods is restricted only to public IPs, DNS, kubelet, and other pods in the cluster.
 
@@ -798,8 +802,11 @@ To isolate your cluster on the private network using Calico policies:
       ```
       {: pre}
 
-3. In `generic-privatehostendpoint.yaml`, replace `<worker_name>` with the name of a worker node and `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`. Repeat this step in a new section for each worker node in your cluster.
-**Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
+3. Set up the private host endpoint policy.
+    1. Open the `generic-privatehostendpoint.yaml` policy.
+    2. Replace `<worker_name>` with the name of a worker node and `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
+    3. Repeat this step in a new section for each worker node in your cluster.
+    **Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
 
 4. Apply all of the policies to your cluster.
     - Linux and OS X:
@@ -899,7 +906,7 @@ Traffic can now flow from the frontend to the backend, and from the backend to t
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 
-Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys frontend, backend, and database services for the app Srv1 in the accounts namespace. The Finance team deploys frontend, backend, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: finance` or `usage: accounts` label.
+Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys frontend, backend, and database services for the app Srv1 in the accounts namespace. The Finance team deploys frontend, backend, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="Use a network policy to manage cross-namepsace traffic." style="width:475px; border-style: none"/>
 

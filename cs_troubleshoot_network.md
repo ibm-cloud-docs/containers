@@ -228,7 +228,7 @@ To check the number of subnets on a VLAN and for steps on how to get another VLA
 <br />
 
 
-## Connection via WebSockets closes after 60 seconds
+## Connection via WebSocket closes after 60 seconds
 {: #cs_ingress_websocket}
 
 {: tsSymptoms}
@@ -241,6 +241,8 @@ The connection to your WebSocket app might drop after 60 seconds of inactivity f
 * A timeout in the ALB to the WebSocket app terminates the connection.
 
 {: tsResolve}
+To prevent the connection from closing after 60 seconds of inactivity:
+
 1. If you connect to your WebSocket app through a proxy or firewall, make sure the proxy or firewall isn't configured to automatically terminate long connections.
 
 2. To keep the connection alive, you can increase the value of the timeout or set up a heartbeat in your app.
