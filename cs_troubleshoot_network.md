@@ -356,7 +356,7 @@ This error indicates that the previous release of the strongSwan chart was not c
 <br />
 
 
-## strongSwan VPN connectivity fails after worker node addition or deletion
+## strongSwan VPN connectivity fails after you add or delete worker nodes
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}

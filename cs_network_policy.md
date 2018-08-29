@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-28"
+lastupdated: "2018-08-29"
 
 ---
 
@@ -762,12 +762,12 @@ If you have a multizone cluster, multiple VLANs for a single zone cluster, or mu
 You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/). This set of Calico policies and host endpoints isolate the private network traffic of a cluster from other resources in the account's private network.
 
 The policies target the worker node private interface (eth0) and the pod network of a cluster.
-<dl><dt>Worker nodes</dt>
-<dd>Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access.</dd>
-<dd>Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.</dd>
-<dt>Pods</dt>
-<dd>All ingress to pods is permitted from workers in the cluster.</dd>
-<dd>Egress from pods is restricted only to public IPs, DNS, kubelet, and other pods in the cluster.</dd></dl>
+*Worker nodes*
+* Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access.
+* Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
+*Pods*
+* All ingress to pods is permitted from workers in the cluster.
+* Egress from pods is restricted only to public IPs, DNS, kubelet, and other pods in the cluster.
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
