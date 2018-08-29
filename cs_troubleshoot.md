@@ -208,8 +208,14 @@ Review common error messages and learn how to resolve them.
         <td>Your IBM Cloud infrastructure (SoftLayer) account might be restricted from ordering compute resources. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](#ts_getting_help).</td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
-        <td>The VLAN that you selected is associated with a pod in the data center that has insufficient space to provision your worker node. You can choose between the following options:<ul><li>Use a different data center to provision your worker node. Run <code>ibmcloud ks zones</code> to list available data center.<li>If you have an existing public and private VLAN pair that is associated with another pod in the data center, use this VLAN pair instead.<li>Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](#ts_getting_help).</ul></td>
+      <td>{{site.data.keyword.Bluemix_notm}} infrastructure exception: Could not place order.<br><br>
+      {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
+      <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or, you might have exceeded a limit in your IBM Cloud infrastructure (SoftLayer) account. To resolve, try one of the following options:
+      <ul><li>Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.</li>
+      <li>For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.</li>
+      <li>Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure (SoftLayer) account. For worker nodes that are in a worker pool, you can use the <code>ibmcloud ks zone-network-set</code> [command](cs_cli_reference.html#cs_zone_network_set).</li>
+      <li>Contact your IBM Cloud infrastructure (SoftLayer) account manager to verify that you do not exceed an account limit, such as a global quota.</li>
+      <li>Open an [IBM Cloud infrastructure (SoftLayer) support ticket](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
@@ -224,7 +230,7 @@ Review common error messages and learn how to resolve them.
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
-        The IBM Cloud infrastructure credentials could not be validated.</td>
+        The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
         <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure (SoftLayer) portfolio, or you are using the wrong infrastructure credentials. See [Configure access to the IBM Cloud infrastructure (SoftLayer) portfolio to create standard Kubernetes clusters](cs_troubleshoot_clusters.html#cs_credentials).</td>
       </tr>
       <tr>
