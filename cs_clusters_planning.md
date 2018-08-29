@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-29"
 
 ---
 
@@ -373,7 +373,7 @@ Review the following information to decide what type of worker pools you want. A
 </dl>
 
 
-You can deploy clusters by using the [console UI](cs_clusters.html#clusters_ui) or the [CLI](cs_clusters.html#clusters_cli).
+
 
 ## Worker node memory limits
 {: #resource_limit_node}
