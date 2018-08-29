@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-27"
+lastupdated: "2018-08-29"
 
 ---
 
@@ -913,7 +913,7 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### Changing the default NFS version
+### Changing the default NFS version
 {: #nfs_version_class}
 
 The following customized storage class is based on the [`ibmc-file-bronze` storage class](#bronze) and lets you define the NFS version that you want to provision. For example, to provision NFS version 3.0, replace `<nfs_version>` with **3.0**.
