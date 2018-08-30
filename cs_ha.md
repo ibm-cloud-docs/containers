@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-30"
 
 ---
 
@@ -56,5 +56,5 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
   <p>See [Setting up highly available clusters.](cs_clusters_planning.html#ha_clusters)</p></dd>   
 <dt> 6a, 6b. Storage failure.</dt>
   <dd><p>In a stateful app, data plays an important role to keep your app up and running. You want to make sure that your data is highly available so that you can recover from a potential failure. In {{site.data.keyword.containerlong_notm}} you can choose from several options to persist your data. For example, you can provision NFS storage by using Kubernetes native persistent volumes, or store your data by using an {{site.data.keyword.Bluemix_notm}} database service.</p>
-  <p>See [Planning highly available data.](cs_storage_planning.html#persistent)</p></dd> 
+  <p>See [Planning highly available data](cs_storage_planning.html#persistent).</p></dd> 
 </dl>

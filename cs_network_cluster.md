@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-30"
 
 ---
 
@@ -78,7 +78,7 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 **Why might I use this setup?**
 
 * You have an app that must be accessible to the public internet in a single-zone cluster.
-* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. 
+* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. **Note**: To isolate your multizone cluster on the private network, use [Calico network policies](cs_network_policy.html#isolate_workers).
 
 **What are my options for managing public and private access to my cluster?**
 </br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a public and a private VLAN.
@@ -143,7 +143,10 @@ As an example, say you created a private load balancer service. You also created
 * If you're not in the IBM Cloud account but still behind the company firewall, any system through a VPN connection to the subnet that the load balancer IP is on
 * If you're in a different IBM Cloud account, any system through a VPN connection to the subnet that the load balancer IP is on
 
+### Isolate your cluster on the private network
+{: #isolate}
 
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](cs_network_policy.html#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
 
 ### Optional: Isolate networking workloads to edge worker nodes
 {: #both_vlans_private_edge}

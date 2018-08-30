@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-23"
+lastupdated: "2018-08-30"
 
 ---
 
@@ -40,6 +40,8 @@ For information about changes since the previous version, see the following chan
 {: #111_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
 {: #1112_1514}
@@ -134,7 +136,7 @@ Review the following changes.
 <td>Kubernetes Heapster</td>
 <td>v1.5.2</td>
 <td>v.1.5.4</td>
-<td>See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
+<td>Increased resource limits for the `heapster-nanny` container. See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
 </tr>
 </tbody>
 </table>
@@ -146,6 +148,8 @@ Review the following changes.
 {: #110_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018
 {: #1105_1519}
@@ -467,6 +471,8 @@ Review the following changes.
 {: #19_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018
 {: #199_1522}

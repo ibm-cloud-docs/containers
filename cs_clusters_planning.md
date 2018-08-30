@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-22"
+lastupdated: "2018-08-30"
 
 ---
 
@@ -229,31 +229,45 @@ Kubernetes limits the maximum number of worker nodes that you can have in a clus
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
 
-When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you choose whether your worker pools consists of worker nodes that are either physical machines (bare metal) or virtual machines that run on physical hardware. You also select the worker node flavor, or combination of memory, CPU, and other machine specifications. If you want more than one flavor of worker node, you must create a worker pool for each flavor. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account.
+When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you choose whether your worker pools consists of worker nodes that are either physical machines (bare metal) or virtual machines that run on physical hardware. You also select the worker node flavor, or combination of memory, CPU, and other machine specifications such as disk storage.
 {:shortdesc}
 
 ![Hardware options for worker nodes in a standard cluster](images/cs_clusters_hardware.png)
 
-Review the following information to decide what type of worker pools you want. As you plan, consider the [worker node limit minimum threshold](#resource_limit_node) of 10% of total memory capacity.
+If you want more than one flavor of worker node, you must create a worker pool for each flavor. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. As you plan, consider the [worker node limit minimum threshold](#resource_limit_node) of 10% of total memory capacity.
 
-<dl>
-<dt>Why would I use physical machines (bare metal)?</dt>
-<dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
-<p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
-<dt>Why would I use virtual machines?</dt>
-<dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
-<p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
-<p>In a multi-tenant set up, physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).</p>
-<p>In a single-tenant set up, all physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.</p>
-<p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
-<p><strong>Virtual `u2c` or `b2c` machine flavors</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as container runtime and the kubelet.</p>
-<p><strong>What if I have deprecated `u1c` or `b1c` machine types?</strong> To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
-<dt>What virtual and physical machine flavors can I choose from?</dt>
-<dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
-<p>Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone_name>`.</p>
-<p><table>
-<caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containerlong_notm}}.</caption>
+You can deploy clusters by using the [console UI](cs_clusters.html#clusters_ui) or the [CLI](cs_clusters.html#clusters_cli).
+
+Select one of the following options to decide what type of worker pool you want.
+* [Virtual machines](#vm)
+* [Physical machines (bare metal)](#bm)
+* [Software-defined storage (SDS) machines](#sds)
+
+### Virtual machines
+{: #vm}
+
+With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use [bare metal](#bm).
+{: shortdesc}
+
+**Do I want to use shared or dedicated hardware?**</br>
+When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
+
+* **In a multi-tenant, shared hardware setup**: Physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
+* **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.
+
+Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
+
+**What are the general features of VMs?**</br>
+Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`.
+
+**What if I have deprecated `u1c` or `b1c` machine types?**</br>
+To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).
+
+**What virtual machine flavors are available?**</br>
+Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
+
+<table>
+<caption>Available virtual machine types in {{site.data.keyword.containerlong_notm}}.</caption>
 <thead>
 <th>Name and use case</th>
 <th>Cores / Memory</th>
@@ -292,26 +306,69 @@ Review the following information to decide what type of worker pools you want. A
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td></td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td></td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want an even balance of compute resources from the worker node.</td></td>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
-</tr><tr>
+</tr>
+</tbody>
+</table>
+
+### Physical machines (bare metal)
+{: #bm}
+
+You can provision your worker node as a single-tenant physical server, also referred to as bare metal.
+{: shortdesc}
+
+**How is bare metal different than VMs?**</br>
+Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.
+
+**Besides better specs for performance, can I do something with bare metal that I can't with VMs?**</br>
+Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
+
+**Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
+Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. 
+
+**Important**: Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.
+
+**What bare metal flavors can I order?**</br>
+Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [VM](#vm) or [SDS](#sds) machine types.
+
+Bare metal machines are optimized for different use cases such as RAM-intensive, data-intensive, or GPU-intensive workloads.
+
+Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
+
+* **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
+* **SSD**: A solid state drive storage device for high performance data.
+* **SAN**: For select virtual machines, the storage device is mounted via software area network (SAN).
+* **Raw**: The storage device is unformatted, with the full capacity is available for use.
+* **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
+
+
+<table>
+<caption>Available bare metal machine types in {{site.data.keyword.containerlong_notm}}.</caption>
+<thead>
+<th>Name and use case</th>
+<th>Cores / Memory</th>
+<th>Primary / Secondary disk</th>
+<th>Network speed</th>
+</thead>
+<tbody>
 <tr>
 <td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
 <td>28 / 512GB</td>
@@ -355,25 +412,59 @@ Review the following information to decide what type of worker pools you want. A
 <td>10000Mbps</td>
 </tr>
 <tr>
+</tbody>
+</table>
+
+### Software-defined storage (SDS) machines
+{: #sds}
+
+Software-defined storage (SDS) flavors are either virtual or physical machines that are provisioned with a raw disk for physical local storage. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
+{: shortdesc}
+
+**When do I use SDS flavors?**</br>
+You typically use SDS machines in the following cases:
+*  If you use an SDS add-on to the cluster, you must use an SDS machine.
+*  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
+*  You might have custom apps or cluster add-ons that require SDS or local storage. For example, if you plan to use logDNA, you must use an SDS machine type.
+
+**What SDS flavors can I order?**</br>
+Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) machine types.
+
+Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
+
+* **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
+* **SSD**: A solid state drive storage device for high performance data.
+* **SAN**: For select virtual machines, the storage device is mounted via software area network (SAN).
+* **Raw**: The storage device is unformatted, with the full capacity is available for use.
+* **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
+
+
+<table>
+<caption>Available SDS machine types in {{site.data.keyword.containerlong_notm}}.</caption>
+<thead>
+<th>Name and use case</th>
+<th>Cores / Memory</th>
+<th>Primary / Secondary disk</th>
+<th>Local storage</th>
+<th>Network speed</th>
+</thead>
+<tbody>
+<tr>
 <td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 256GB</td>
-<td>2TB SATA / 3.8TB Raw SSD</td>
+<td>2TB SATA / 1.9TB SSD</td>
+<td>3.8TB Raw SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms2c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 512GB</td>
-<td>2TB SATA / 4x3.8TB Raw SSD</td>
+<td>2TB SATA / 1.9TB SSD</td>
+<td>4 disks, 3.8TB Raw SSD</td>
 <td>10000Mbps</td>
 </tr>
 </tbody>
 </table>
-</p>
-</dd>
-</dl>
-
-
-You can deploy clusters by using the [console UI](cs_clusters.html#clusters_ui) or the [CLI](cs_clusters.html#clusters_cli).
 
 ## Worker node memory limits
 {: #resource_limit_node}
