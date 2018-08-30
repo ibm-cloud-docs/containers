@@ -180,6 +180,12 @@ ibmcloud plugin list
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
+  <tr>
+    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
 </tbody>
 </table>
 
@@ -1804,6 +1810,28 @@ List the public and private VLANs that are available for a zone in your IBM Clou
   {: pre}
 
 
+### ibmcloud ks vlan-spanning-get [--json] [-s]
+{: #cs_vlan_spanning_get}
+
+View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other by means of the private network, regardless of its assigned VLAN.
+
+<strong>Command options</strong>:
+
+   <dl>
+    <dt><code>--json</code></dt>
+      <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+    <dt><code>-s</code></dt>
+      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks vlan-spanning-get
+  ```
+  {: pre}
+
 <br />
 
 
@@ -3024,7 +3052,7 @@ View the worker pools that you have in a cluster.
   {: #cs_zone_network_set}
 
   **Multizone clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
-  
+
   Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.
   <ol><li>Check the VLANs that are available in your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
   <pre class="screen"><code>Subnet VLANs
