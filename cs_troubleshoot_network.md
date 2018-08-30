@@ -192,7 +192,7 @@ To view how many subnets a VLAN has:
 {: tsResolve}
 If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 
-If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets.
+If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
 
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
 1.  Check that the subnets that you want to use are available. **Note**: The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
