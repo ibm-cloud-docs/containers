@@ -185,7 +185,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 ## Step 3: Checking your domain mappings and Ingress resource configuration
 {: #config}
 
-1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address.
+1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     * IBM-provided subdomain: Check that your custom domain is mapped to the cluster's IBM-provided subdomain in the Canonical Name record (CNAME).
         ```
         host www.my-domain.com
@@ -223,7 +223,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     2.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](cs_annotations.html#rewrite-path) annotation.
 
-    3. Edit your resource configuration YAML as needed. When you close the editor, yor changes are saved and automatically applied.
+    3. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -232,7 +232,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 ## Removing an ALB from DNS for debugging
 {: #one_alb}
 
-If you can't access your app through a specific ALB IP or can't [ping one ALB IP](#ping), you can temporarily remove the ALB from production by disabling its DNS registration. Then, you can use the ALB's IP address to run debugging tests on that ALB.
+If you can't access your app through a specific ALB IP, you can temporarily remove the ALB from production by disabling its DNS registration. Then, you can use the ALB's IP address to run debugging tests on that ALB.
 
 For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs have IP addresses `169.46.52.222` and `169.62.196.238`. Although the health check is returning healthy for the second zone's ALB, your app isn't directly reachable through it. You decide to remove that ALB's IP address, `169.62.196.238`, from production for debugging. The first zone's ALB IP, `169.46.52.222`, is registered with your domain and continues to route traffic while you debug the second zone's ALB.
 
@@ -275,7 +275,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         ```
         {: screen}
 
-    2. To remove the IP from the health check, insert `#` in front of the `server_name`. When the `albhealth.mycluster-12345.us-south.containers.appdomain.cloud` virtual host is disabled for the ALB, the automated health check automatically removes the IP from the DNS response.
+    2. To remove the IP by disabling the health check, insert `#` in front of the `server_name`. When the `albhealth.mycluster-12345.us-south.containers.appdomain.cloud` virtual host is disabled for the ALB, the automated health check automatically removes the IP from the DNS response.
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- sed -i -e 's*server_name*#server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
@@ -298,6 +298,8 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- nginx -s reload
         ```
         {: pre}
+
+    5. Repeat these steps for each ALB pod.
 
 4. Now, when you attempt to cURL the `albhealth` host to health check the ALB IP, the check fails.
     ```
