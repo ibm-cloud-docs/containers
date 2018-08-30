@@ -353,7 +353,6 @@ Bare metal machines are optimized for different use cases such as RAM-intensive,
 
 Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
-* **Type of storage device**
 * **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
 * **SSD**: A solid state drive storage device for high performance data.
 * **SAN**: For select virtual machines, the storage device is mounted via software area network (SAN).
@@ -433,7 +432,6 @@ Machine types vary by zone. To see the machine types available in your zone, run
 
 Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
-* **Type of storage device**
 * **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
 * **SSD**: A solid state drive storage device for high performance data.
 * **SAN**: For select virtual machines, the storage device is mounted via software area network (SAN).
