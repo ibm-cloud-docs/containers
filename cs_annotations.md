@@ -1367,7 +1367,7 @@ spec:
 </dd>
 <dt>Usage</dt></dl>
 
-Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+Because the application uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
     * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
