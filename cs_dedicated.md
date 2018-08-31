@@ -558,6 +558,6 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see [Persistent data storage options for high availability](cs_storage_planning.html#persistent). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 If you choose to provision [file storage](cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support ticket.
