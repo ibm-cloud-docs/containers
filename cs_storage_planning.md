@@ -20,6 +20,8 @@ lastupdated: "2018-08-31"
 {: #storage_planning}
 
 ## Choosing a storage solution
+{: #choose_storage_solution}
+
 Before you can decide what type of storage is the right solution for you, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data. 
 {: shortdesc}
 
