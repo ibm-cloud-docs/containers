@@ -713,9 +713,6 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
-    To run the app with a non-root user, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod by defining the non-root user in `runAsUser` without setting the `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and impacts performance. Depending on how many files you have, updating the permissions might prevent your pod from coming up and getting into a `Running` state. 
-    {: tip}
-
     ```
     apiVersion: apps/v1beta1
     kind: Deployment
@@ -735,6 +732,8 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
           containers:
           - image: <image_name>
             name: <container_name>
+            securityContext:
+              runAsUser: <non_root_user>
             volumeMounts:
             - name: <volume_name>
               mountPath: /<file_path>
@@ -770,6 +769,10 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
     <tr>
     <td><code>spec/containers/name</code></td>
     <td>The name of the container that you want to deploy to your cluster.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/securityContext/runAsUser</code></td>
+    <td>Optional: To run the app with a non-root user, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod by defining the non-root user without setting the `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and impacts performance. Depending on how many files you have, updating the permissions might prevent your pod from coming up and getting into a <code>Running</code> state. </td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
