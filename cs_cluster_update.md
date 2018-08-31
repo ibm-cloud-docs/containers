@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-30"
+lastupdated: "2018-08-31"
 
 ---
 
@@ -85,7 +85,7 @@ Before you begin:
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
 - If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
 
 **What happens to my apps during an update?**</br>
@@ -258,10 +258,10 @@ You can update the machine types of your worker nodes by adding new worker nodes
 
 Before you begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent).
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
 1. List available worker nodes and note their private IP address.
    - **For worker nodes in a worker pool**:

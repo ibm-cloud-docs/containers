@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-30"
+lastupdated: "2018-08-31"
 
 ---
 
@@ -34,8 +34,8 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
-   **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm). 
-   
+   **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+
 2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
@@ -142,8 +142,8 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    helm repo update
    ```
    {: pre}
-   
-2. Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information. 
+
+2. Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
@@ -181,10 +181,10 @@ If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block
 **Note:** Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
 
 Before you begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster. 
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster.
 - Make sure that you do not have any PVCs or PVs in your cluster that use block storage.
 
-To remove the plug-in: 
+To remove the plug-in:
 
 1. Find the name of the block storage Helm chart that you installed in your cluster.
    ```
@@ -230,7 +230,7 @@ To remove the plug-in:
 
 Every storage class specifies the type of block storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one. 
+**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -238,7 +238,7 @@ Every storage class specifies the type of block storage that you provision, incl
     ```
     {: pre}
 
-    Example output: 
+    Example output:
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
@@ -253,20 +253,20 @@ Every storage class specifies the type of block storage that you provision, incl
     ```
     {: screen}
 
-2. Review the configuration of a storage class. 
+2. Review the configuration of a storage class.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
-   
+
    For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
    {: tip}
-   
-3. Choose the type of block storage that you want to provision. 
+
+3. Choose the type of block storage that you want to provision.
    - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
-   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS. 
-     
-4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations. 
+   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS.
+
+4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
      <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
@@ -292,7 +292,7 @@ Every storage class specifies the type of block storage that you provision, incl
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. </br></br>The IOPS to gigabyte ratio also determines the type of hard disk that is provisioned for you. For example, if you have 500Gi at 100 IOPS, your IOPS to gigabyte ratio is 0.2. Storage with a ratio of less than or equal to 0.3 is provisioned on SATA hard disks. If your ratio is greater than 0.3, then your storage is provisioned on SSD hard disks. 
+   - **Custom storage class:** When you choose this storage class, you have more control over the size and IOPS that you want. For the size, you can select any whole number of gigabyte within the allowed size range. The size that you choose determines the IOPS range that is available to you. You can choose an IOPS that is a multiple of 100 that is in the specified range. The IOPS that you choose is static and does not scale with the size of the storage. For example, if you choose 40Gi with 100 IOPS, your total IOPS remains 100. </br></br>The IOPS to gigabyte ratio also determines the type of hard disk that is provisioned for you. For example, if you have 500Gi at 100 IOPS, your IOPS to gigabyte ratio is 0.2. Storage with a ratio of less than or equal to 0.3 is provisioned on SATA hard disks. If your ratio is greater than 0.3, then your storage is provisioned on SSD hard disks.
      <table>
          <caption>Table of custom storage class size ranges and IOPS</caption>
          <thead>
@@ -346,11 +346,11 @@ Every storage class specifies the type of block storage that you provision, incl
          </tr>
          </tbody></table>
 
-5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted. 
-   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing block storage](#existing_block). 
+5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted.
+   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing block storage](#existing_block).
    - If you want the PV, the data, and your physical block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
-   
-6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) for more information. By default, all block storage devices are provisioned with an hourly billing type. 
+
+6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) for more information. By default, all block storage devices are provisioned with an hourly billing type.
 
 <br />
 
@@ -359,7 +359,7 @@ Every storage class specifies the type of block storage that you provision, incl
 ## Adding block storage to apps
 {: #add_block}
 
-Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account. 
+Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
 **Important**: Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only one pod on one worker node in the cluster at a time.
@@ -367,14 +367,14 @@ Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_bas
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
-- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass). 
+- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
 To add block storage:
 
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
-    -  **Example for bronze, silver, gold storage classes**: 
-       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. 
+    -  **Example for bronze, silver, gold storage classes**:
+       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`.
 
        ```
        apiVersion: v1
@@ -397,7 +397,7 @@ To add block storage:
         {: codeblock}
 
     -  **Example for using the custom storage class**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-block-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`. 
+       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-block-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
 
        ```
        apiVersion: v1
@@ -596,7 +596,7 @@ To add block storage:
          ReadOnly:	false
      ```
      {: screen}
-     
+
 <br />
 
 
@@ -641,26 +641,26 @@ Before you can start to mount your existing storage to an app, you must retrieve
     ```
     {: screen}
 
-7.  Note the `id`, `ip_addr`, `capacity_gb`, the `datacenter`, and `lunId` of the block storage device that you want to mount to your cluster. **Note:** To mount existing storage to a cluster, you must have a worker node in the same zone as your storage. To verify the zone of your worker node, run `ibmcloud ks workers <cluster_name_or_ID>`. 
+7.  Note the `id`, `ip_addr`, `capacity_gb`, the `datacenter`, and `lunId` of the block storage device that you want to mount to your cluster. **Note:** To mount existing storage to a cluster, you must have a worker node in the same zone as your storage. To verify the zone of your worker node, run `ibmcloud ks workers <cluster_name_or_ID>`.
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
 
-1.  Optional: If you have storage that you provisioned with a `retain` storage class, when you remove the PVC, the PV and the physical storage device are not removed. To reuse the storage in your cluster, you must remove the PV first. 
-    1. List existing PVs. 
+1.  Optional: If you have storage that you provisioned with a `retain` storage class, when you remove the PVC, the PV and the physical storage device are not removed. To reuse the storage in your cluster, you must remove the PV first.
+    1. List existing PVs.
        ```
        kubectl get pv
        ```
        {: pre}
-     
-       Look for the PV that belongs to your persistent storage. The PV is in a `released` state. 
-     
-    2. Remove the PV. 
+
+       Look for the PV that belongs to your persistent storage. The PV is in a `released` state.
+
+    2. Remove the PV.
        ```
        kubectl delete pv <pv_name>
        ```
        {: pre}
-   
-    3. Verify that the PV is removed. 
+
+    3. Verify that the PV is removed.
        ```
        kubectl get pv
        ```
@@ -799,7 +799,7 @@ You successfully created a PV and bound it to a PVC. Cluster users can now [moun
 
 
 
-## Backing up and restoring data 
+## Backing up and restoring data
 {: #backup_restore}
 
 Block storage is provisioned into the same location as the worker nodes in your cluster. The storage is hosted on clustered servers by IBM to provide availability in case a server goes down. However, block storage is not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
@@ -808,14 +808,14 @@ Review the following backup and restore options for your block storage:
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can [set up periodic snapshots for your block storage](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your block storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The size and IOPS are shown in the <strong>Labels</strong> section of your CLI output. To find the volume ID, review the <code>ibm.io/network-storage-id</code> annotation of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>You can [set up periodic snapshots for your block storage](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your block storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. <strong>Note</strong>: If you have a Dedicated account, you must </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The size and IOPS are shown in the <strong>Labels</strong> section of your CLI output. To find the volume ID, review the <code>ibm.io/network-storage-id</code> annotation of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>Replicate snapshots to another zone</dt>
- <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/BlockStorage/replication.html#replicating-data) to a block storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p></dd>
+ <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/BlockStorage/replication.html#replicating-data) to a block storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage. <strong>Note</strong>: If you have a Dedicated account, you cannot replicate snapshots to another zone.</p></dd>
  <dt>Duplicate storage</dt>
- <dd><p>You can [duplicate your block storage instance](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p></dd>
+ <dd><p>You can [duplicate your block storage instance](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume. <strong>Note</strong>: If you have a Dedicated account, you must <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">open a support ticket</a>.</p></dd>
   <dt>Back up data to {{site.data.keyword.cos_full}}</dt>
-  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full} instance that you set up in a zone.</p><strong>Note:</strong> Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To backup your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and re-mount the storage to your app pod. </br></br>
-To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.cos_full}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.cos_full}} instance, use the restore script that is provided with the image.</dd>
+  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full}} instance that you set up in a zone.</p><strong>Note:</strong> Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To backup your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and re-mount the storage to your app pod. </br></br>
+To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.cos_short}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.cos_short}} instance, use the restore script that is provided with the image.</dd>
 <dt>Copy data to and from pods and containers</dt>
 <dd><p>You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster.</p>
 <p>Before you begin, [target your Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to use. If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>
@@ -1021,7 +1021,7 @@ To make your data even more highly available and protect your app from a zone fa
 
 The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these </br>
 
-To use a different storage class as your base, see the [storage class reference](#storageclass_reference). 
+To use a different storage class as your base, see the [storage class reference](#storageclass_reference).
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -1043,7 +1043,7 @@ reclaimPolicy: "Delete"
 ### Mounting block storage with an `XFS` file system
 {: #xfs}
 
-The following example creates a storage class that is named `ibmc-block-custom-xfs` and that provisions performance block storage with an `XFS` file system. 
+The following example creates a storage class that is named `ibmc-block-custom-xfs` and that provisions performance block storage with an `XFS` file system.
 
 ```
 apiVersion: storage.k8s.io/v1
