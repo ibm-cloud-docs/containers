@@ -588,7 +588,11 @@ You can try one of the following solutions:
 When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
 
 {: tsCauses}
-If you just created the Kubernetes cluster, the worker nodes might still be configuring. If this cluster is an existing one, you might not have enough capacity in your cluster to deploy the pod.
+If you just created the Kubernetes cluster, the worker nodes might still be configuring. 
+
+If this cluster is an existing one:
+*  You might not have enough capacity in your cluster to deploy the pod.
+*  The pod might have exceeded a resource request or limit.
 
 {: tsResolve}
 This task requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
@@ -634,11 +638,20 @@ If this cluster is an existing one, check your cluster capacity.
         ```
         {: pre}
 
-5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
+5.  Optional: Check your pod resource requests.
+
+    1.  Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
+
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+    
+    2.  If the request exceeds the available capacity, [add a new worker pool](cs_clusters.html#add_pool) with worker nodes that can fulfill the request.
+
+6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 
 <br />
-
-
 
 
 ## Containers do not start
@@ -653,8 +666,9 @@ Containers might not start when the registry quota is reached.
 {: tsResolve}
 [Free up storage in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-<br />
 
+
+<br />
 
 
 ## Cannot install a Helm chart with updated configuration values
