@@ -36,6 +36,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>31 August</td>
+<td>{{site.data.keyword.cos_full_notm}} is now integrated with {{site.data.keyword.containerlong}}</td>
+<td>Use Kubernetes-native persistent volume claims (PVC) to provision {{site.data.keyword.cos_full_notm}} to your cluster. {{site.data.keyword.cos_full_notm}} is best used for read-intensive workloads and if you want to store data across multiple zones in a multizone cluster. Start by [creating an {{site.data.keyword.cos_full_notm}} service instance](cs_storage_cos.html#create_cos_service) and [installing the {{site.data.keyword.cos_full_notm}} plug-in](cs_storage_cos.html#install_cos) on your cluster. </br></br>Not sure what storage solution might be the right one for you? Start [here](cs_storage_planning.html#choose_storage_solution) to analyze your data and choose the appropriate storage solution for your data. </td>
+</tr>
+<tr>
 <td>14 August</td>
 <td>Update your clusters to Kubernetes versions 1.11 to assign pod priority</td>
 <td>After you update your cluster to [Kubernetes version 1.11](cs_versions.html#cs_v111), you can take advantage of new capabilities, such as increased container runtime performance with `containerd` or [assigning pod priority](cs_pod_priority.html#pod_priority).</td>
