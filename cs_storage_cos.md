@@ -420,7 +420,7 @@ If you do not want to provision and use {{site.data.keyword.cos_full_notm}} in y
 Before you begin:
 
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
-- Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. T list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`. 
+- Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`. 
 
 To remove the plug-in:
 
@@ -677,7 +677,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>ibm.io/object-path</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the name of the subdirectory that you want to create in the bucket that you defined in <code>ibm.io/bucket</code>. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the name of the existing subdirectory in the bucket that you defined in <code>ibm.io/bucket</code>. </li></ul> </td>
+   <td>Optional: Enter the name of the existing subdirectory in your bucket that you want to mount. Use this option if you want to mount a subdirectory only and not the entire bucket. To mount a subdirectory, you must set <code>ibm.io/auto-create-bucket: "false"</code> and provide the name of the bucket in <code>ibm.io/bucket</code>. </li></ul> </td>
    </tr>
    <tr>
    <td><code>ibm.io/secret-name</code></td>
