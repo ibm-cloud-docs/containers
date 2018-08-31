@@ -1367,7 +1367,7 @@ spec:
 </dd>
 <dt>Usage</dt></dl>
 
-Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+Because the application uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
     * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
@@ -1418,7 +1418,7 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 
 <dl>
 <dt>Description</dt>
-<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p><strong>Note</strong>: To enable mutual authentication on a port, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port.</p></dd>
+<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p><strong>Note</strong>: To enable mutual authentication on a port, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.</p></dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
