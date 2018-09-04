@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-04"
 
 ---
 
@@ -1870,7 +1870,7 @@ spec:
 <tbody>
 <tr>
 <td><code>enable</code></td>
-  <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
+  <td>To enable traffic routing to Istio-managed services, set to <code>True</code>.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>

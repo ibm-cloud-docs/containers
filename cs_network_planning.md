@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-04"
 
 ---
 
@@ -114,7 +114,7 @@ For more information about setting up your cluster for networking, including inf
 ## Planning private external networking for a private VLAN only setup
 {: #private_vlan}
 
-When your worker nodes are connected to both a private VLAN only, you can make your app accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
+When your worker nodes are connected to a private VLAN only, you can make your app accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
 
 **NodePort**:
 * [Create a private NodePort service](cs_nodeport.html). The service is available over the private IP address of a worker node.
