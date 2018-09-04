@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-04"
 
 ---
 
@@ -30,6 +30,7 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 **Before you begin**
 * You must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/).
 * Decide between a [free or standard cluster](cs_why.html#cluster_types).
+* If you create a standard cluster, you can [estimate the cost with the pricing calculator![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for outbound networking bandwidth varies by usage and is an additional charge beyond the charges in the pricing calculator.
 
 To fully-customize your clusters with your choice of hardware isolation, zone, API version and more, create a standard cluster.
 {: tip}
@@ -121,6 +122,7 @@ Before you begin:
 - Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 - If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 - Decide between a [free or standard cluster](cs_why.html#cluster_types). With your 1 free cluster, you get a limited number of days to try out Kubernetes features. Create a standard cluster to get more benefits and control over your cluster performance.
+- If you create a standard cluster, you can [estimate the cost with the pricing calculator![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for outbound networking bandwidth varies by usage and is an additional charge beyond the charges in the pricing calculator.
 
 To create a cluster:
 
