@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-04"
 
 ---
 
@@ -41,7 +41,46 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for 1.11.2_1516, released 30 August 2018
+{: #1112_1516}
 
+<table summary="Changes that were made since version 1.11.2_1514">
+<caption>Changes since version  1.11.2_1514</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.1.3</td>
+<td>v3.2.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.2/releases/#v321).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.2</td>
+<td>1.1.3</td>
+<td>See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.3).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.2-60</td>
+<td>v1.11.2-71</td>
+<td>Changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
 {: #1112_1514}
@@ -149,7 +188,44 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for 1.10.7_1520, released 30 August 2018
+{: #1107_1520}
 
+<table summary="Changes that were made since version 1.10.5_1519">
+<caption>Changes since version  1.10.5_1519</caption>
+<thead>
+<tr>
+<td>Calico</td>
+<td>v3.1.3</td>
+<td>v3.2.1</td>
+<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.2/releases/#v321).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.5-118</td>
+<td>v1.10.7-146</td>
+<td>Updated to support Kubernetes 1.10.7 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>334</td>
+<td>338</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to add the region the zone labels.<br><br> Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.10.7</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7).</td>
+</tr>
+<tr>
+<td>Kubernetes Heapster configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased resource limits for the `heapster-nanny` container.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018
 {: #1105_1519}
@@ -472,7 +548,38 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for 1.9.10_1523, released 30 August 2018
+{: #1910_1523}
 
+<table summary="Changes that were made since version 1.9.9_1522">
+<caption>Changes since version  1.9.9_1522</caption>
+<thead>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.9-167</td>
+<td>v1.9.10-192</td>
+<td>Updated to support Kubernetes 1.9.10 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>334</td>
+<td>338</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to add the region the zone labels.<br><br>Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.9</td>
+<td>v1.9.10</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10).</td>
+</tr>
+<tr>
+<td>Kubernetes Heapster configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased resource limits for the `heapster-nanny` container.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018
 {: #199_1522}
