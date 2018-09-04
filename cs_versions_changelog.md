@@ -41,7 +41,7 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
-### Changelog for 1.11.2_1516, released 30 August 2018
+### Changelog for 1.11.2_1516, released 04 September 2018
 {: #1112_1516}
 
 <table summary="Changes that were made since version 1.11.2_1514">
@@ -188,7 +188,7 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for 1.10.7_1520, released 30 August 2018
+### Changelog for 1.10.7_1520, released 04 September 2018
 {: #1107_1520}
 
 <table summary="Changes that were made since version 1.10.5_1519">
@@ -548,7 +548,7 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for 1.9.10_1523, released 30 August 2018
+### Changelog for 1.9.10_1523, released 04 September 2018
 {: #1910_1523}
 
 <table summary="Changes that were made since version 1.9.9_1522">
