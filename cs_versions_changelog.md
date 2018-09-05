@@ -177,6 +177,12 @@ Review the following changes.
 <td>v.1.5.4</td>
 <td>Increased resource limits for the `heapster-nanny` container. See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
 </tr>
+<tr>
+<td>Logging configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The container log directory is now `/var/log/pods/` instead of the previous `/var/lib/docker/containers/`.</td>
+</tr>
 </tbody>
 </table>
 
