@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-05"
 
 ---
 
@@ -205,8 +205,8 @@ Let your cluster access infrastructure resources and services from behind a fire
       </tr>
       <tr>
          <td>EU Central</td>
-         <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>UK South</td>

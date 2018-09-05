@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-04"
+lastupdated: "2018-09-05"
 
 ---
 
@@ -77,7 +77,7 @@ Review the following changes.
 <td>IBM file storage plug-in configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
 </tr>
 </tbody>
 </table>
@@ -177,6 +177,12 @@ Review the following changes.
 <td>v.1.5.4</td>
 <td>Increased resource limits for the `heapster-nanny` container. See the [Kubernetes Heapster release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
 </tr>
+<tr>
+<td>Logging configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The container log directory is now `/var/log/pods/` instead of the previous `/var/lib/docker/containers/`.</td>
+</tr>
 </tbody>
 </table>
 
@@ -210,7 +216,7 @@ Review the following changes.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to add the region the zone labels.<br><br> Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -564,7 +570,7 @@ Review the following changes.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to add the region the zone labels.<br><br>Changed NFS version to `nfsvers=4` in the IBM storage class mount options. If your app needs to use a previous version of NFS, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](cs_storage_file.html#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-05"
 
 ---
 
@@ -53,7 +53,8 @@ Download and install Istio in your cluster.
 
 1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
     1. [Install Helm for your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
-    2. Install Istio’s custom resource definitions.
+    2.  **For Helm versions 2.10 or later**: Skip this step. 
+        **For Helm versions 2.9 or earlier**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -121,14 +122,14 @@ These four microservices include a product web page, book details, reviews (with
     ```
     {: pre}
 
-2. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
+3. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
-3. Ensure that the microservices and their corresponding pods are deployed:
+4. Ensure that the microservices and their corresponding pods are deployed:
     ```
     kubectl get svc
     ```
@@ -159,7 +160,7 @@ These four microservices include a product web page, book details, reviews (with
     ```
     {: screen}
 
-4. To verify the app deployment, get the public address for your cluster.
+5. To verify the app deployment, get the public address for your cluster.
     * Standard clusters:
         1. To expose your app on a public ingress IP, deploy the BookInfo gateway.
             ```
@@ -177,6 +178,7 @@ These four microservices include a product web page, book details, reviews (with
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
+            {: pre}
 
         4. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
 
@@ -204,7 +206,19 @@ These four microservices include a product web page, book details, reviews (with
      ```
      {: pre}
 
-6. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+6.  View the BookInfo web page in a browser.
+    
+    For Mac OS or Linux:
+    ```
+    open http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
+    
+    For Windows:
+    ```
+    start http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 7. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
@@ -228,7 +242,7 @@ If you're finished working with Istio and don't want to [continue exploring](#is
     ```
     {: pre}
 
-3. Delete the Istio custom resource definitions.
+3. **Optional**: If you are using Helm 2.9 or earlier and applied the Istio custom resource definitions, delete them.
     ```
     kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
     ```

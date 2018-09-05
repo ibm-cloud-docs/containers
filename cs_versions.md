@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-04"
+lastupdated: "2018-09-05"
 
 ---
 
@@ -143,8 +143,9 @@ Review changes that you might need to make when you are updating from the previo
 </thead>
 <tbody>
 <tr>
-<td>Refresh cluster logging configuration</td>
-<td>`fluentd` is automatically updated with version 1.11, even when `logging-autoupdate` is disabled.</td>
+<td>Cluster logging configuration</td>
+<td>The `fluentd` cluster add-on is automatically updated with version 1.11, even when `logging-autoupdate` is disabled.<br><br>
+The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`. If you use your own logging solution that monitors the previous directory, update accordingly.</td>
 </tr>
 <tr>
 <td>Refresh Kubernetes configuration</td>
