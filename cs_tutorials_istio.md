@@ -53,8 +53,7 @@ Download and install Istio in your cluster.
 
 1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
     1. [Install Helm for your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
-    2.  **For Helm versions 2.10 or later**: Skip this step. 
-        **For Helm versions 2.9 or earlier**: Install Istio’s custom resource definitions.
+    2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
