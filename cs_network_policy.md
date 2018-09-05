@@ -1021,16 +1021,16 @@ To create a Calico policy to log denied traffic:
     metadata:
       name: log-denied-packets
     spec:
-      order: 3000
+      types:
+      - Ingress
       ingress:
       - action: Log
         destination: {}
         source: {}
       selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-      types:
-      - Ingress
+      order: 3000
     ```
-    {: pre}
+    {: codeblock}
 
     <table>
     <caption>Understanding the log policy YAML components</caption>
@@ -1040,19 +1040,19 @@ To create a Calico policy to log denied traffic:
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>This <code>Ingress</code> policy applies incoming traffic requests. <strong>Note:</strong> the value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to only traffic from the Ingress ALB.</td>
+     <td>This <code>Ingress</code> policy applies incoming traffic requests. <strong>Note:</strong> The value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to traffic only from the IBM Ingress ALB.</td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
-      <td><ul><li><code>action</code>: The <code>Log</code> action writes a log entry for any requests that match this policy. The denied packet logs from the Calico `log-denied-packets` policy are collected in the `/var/log/syslog` path on the worker node.</li><li><code>destination</code>: No destination is specified because the <code>selector</code> applies this policy to all pods with a certain label.</li><li><code>source</code>: This policy applies to requests from any source.</td>
-     </tr>
-     <tr>
-      <td><code>order</code></td>
-      <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
+      <td><ul><li><code>action</code>: The <code>Log</code> action writes a log entry for any requests that match this policy to the `/var/log/syslog` path on the worker node.</li><li><code>destination</code>: No destination is specified because the <code>selector</code> applies this policy to all pods with a certain label.</li><li><code>source</code>: This policy applies to requests from any source.</td>
      </tr>
      <tr>
       <td><code>selector</code></td>
       <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your Calico policy from step 1 or that you found in the Calico syntax for your Kubernetes policy in step 3. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same iptables chain as the <code>access-nginx</code> sample network policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same pod selector label.</td>
+     </tr>
+     <tr>
+      <td><code>order</code></td>
+      <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
      </tr>
     </tbody>
     </table>
