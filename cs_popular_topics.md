@@ -24,6 +24,24 @@ lastupdated: "2018-09-05"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in September 2018
+{: #sept18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in August 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>05 September</td>
+<td>[Zone available in Oslo](cs_regions.html)</td>
+<td>Welcome Oslo, Norway as a new zone in the EU Central region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the others within the region that your cluster is in.</td>
+</tr>
+</tbody></table>
+
 ## Popular topics in August 2018
 {: #aug18}
 
