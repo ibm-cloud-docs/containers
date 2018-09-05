@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-31"
+lastupdated: "2018-09-05"
 
 ---
 
@@ -155,7 +155,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cos_full_notm}} plug-in.
 
     **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm). 
-2. Add the staging repo to your cluster. 
+2. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster. 
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
@@ -325,7 +325,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    ```
    {: screen}
       
-   The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod <pod_name>` to find the root cause for the failure. 
+   The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure. 
    
 10. Verify that the storage classes are created successfully. 
    ```
