@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-06"
 
 
 ---
@@ -173,12 +173,12 @@ Verify that you are assigned the `Manager` [Cloud Foundry role](/docs/iam/mngcf.
 
 1. Invite the user to your account.
   ```
-  bx account user-invite <user@email.com>
+  ibmcloud account user-invite <user@email.com>
   ```
   {: pre}
 2. Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}}. You can choose between Viewer, Editor, Operator, and Administrator for role.
   ```
-  bx iam policy-create <user@email.com> --service-name containers-kubernetes --roles <role>
+  ibmcloud iam user-policy-create <user_email> --service-name containers-kubernetes --roles <role>
   ```
   {: pre}
 
@@ -186,25 +186,25 @@ Verify that you are assigned the `Manager` [Cloud Foundry role](/docs/iam/mngcf.
 
 1. If the user is not already part of your account, invite them.
   ```
-  bx account user-invite <user_email>
+  ibmcloud account user-invite <user_email>
   ```
   {: pre}
 
 2. Create a group.
   ```
-  bx iam access-group-create <team_name>
+  ibmcloud iam access-group-create <team_name>
   ```
   {: pre}
 
 3. Add the user to the group.
   ```
-  bx iam access-group-user-add <team_name> <user_email>
+  ibmcloud iam access-group-user-add <team_name> <user_email>
   ```
   {: pre}
 
 4. Add the user to the group. You can choose between Viewer, Editor, Operator, and Administrator for role.
   ```
-  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role>
+  ibmcloud iam access-group-policy-create <team_name> --service-name containers-kubernetes --roles <role>
   ```
   {: pre}
 
@@ -237,7 +237,6 @@ The previous instructions show how to give a group of users access to all {{site
 {: tip}
 
 <br />
-
 
 
 ## Authorizing users with RBAC role bindings
@@ -294,7 +293,7 @@ When you configure your platform policies, a cluster role binding is generated a
 
 1. Create an RBAC role binding for the default namespace by [assigning access with a platform role](#add_users_cli).
   ```
-  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role>
+  ibmcloud iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role>
   ```
   {: pre}
   Example output:
@@ -317,7 +316,7 @@ When you configure your platform policies, a cluster role binding is generated a
   {: screen}
 2. Copy that configuration into another namespace.
   ```
-  bx iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role> --namespace <namespace>
+  ibmcloud iam access-policy-create <team_name> --service-name containers-kubernetes --roles <role> --namespace <namespace>
   ```
   {: pre}
   In the previous scenario, I made a change to the configuration for another namespace. The updated configuration would look like the following:
