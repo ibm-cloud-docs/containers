@@ -385,7 +385,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
-	   region: us-south
+           region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -408,7 +408,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
-	   region: us-south
+           region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -439,11 +439,11 @@ To add block storage:
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "hourly".</td>
         </tr>
 	<tr>
-	<td><code>metadata/region</code></td>
+	<td><code>metadata/labels/region</code></td>
         <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
 	</tr>
 	<tr>
-	<td><code>metadata/zone</code></td>
+	<td><code>metadata/labels/zone</code></td>
 	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
 	</tr>
         <tr>
