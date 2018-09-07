@@ -210,20 +210,20 @@ When you configure the public ALB, you choose the domain that your apps will be 
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in every namespace.</li></ul></dd>
 </dl>
 
-To use the IBM-provided Ingress domain:
+To use the IBM-provided Ingress domain: </br>
 Get the IBM-provided domain, and, if you want to use TLS, the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed. **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
-    ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
-    ```
-    {: pre}
+```
+ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+```
+{: pre}
 
-    Example output:
+Example output:
 
-    ```
-    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
-    Ingress Secret:         <tls_secret>
-    ```
-    {: screen}
+```
+Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
+Ingress Secret:         <tls_secret>
+```
+{: screen}
 
 
 To use a custom domain:
@@ -515,20 +515,20 @@ When you configure the public ALB, you choose the domain that your apps will be 
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in every namespace.</li></ul></dd>
 </dl>
 
-To use the IBM-provided Ingress domain:
+To use the IBM-provided Ingress domain: </br>
 Get the IBM-provided domain, and, if you want to use TLS, the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed. **Note**: For information about wildcard TLS certification, see [this note](#wildcard_tls).
-    ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
-    ```
-    {: pre}
+```
+ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+```
+{: pre}
 
-    Example output:
+Example output:
 
-    ```
-    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
-    Ingress Secret:         <tls_secret>
-    ```
-    {: screen}
+```
+Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
+Ingress Secret:         <tls_secret>
+```
+{: screen}
 
 
 To use a custom domain:
