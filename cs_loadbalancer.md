@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-07"
 
 ---
 
@@ -73,7 +73,7 @@ Note:
 
 Before you begin:
   * A load balancer service with a portable private IP address still has a public NodePort open on every worker node. To add a network policy to prevent public traffic, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
-  * In each zone, at least one public VLAN must have portable subnets available for Ingress and LoadBalancer services. To add private Ingress and LoadBalancer services, you must specify at least one private VLAN with available portable subnets. To add subnets, see [Configuring subnets for clusters](cs_subnets.html).
+  * You must deploy a load balancer in each zone, and each load balancer is assigned its own IP address in that zone. To create public load balancers, at least one public VLAN must have portable subnets available in each zone. To add private load balancer services, at least one private VLAN must have portable subnets available in each zone. To add subnets, see [Configuring subnets for clusters](cs_subnets.html).
   * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](cs_edge.html#edge) are enabled in each zone. If edge worker nodes are enabled in some zones but not in others, load balancers will not deploy uniformly. Load balancers will be deployed onto edge nodes in some zones but on regular worker nodes in other zones.
   * If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
