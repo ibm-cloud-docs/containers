@@ -28,7 +28,9 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
 {:shortdesc}
 
-**What comes with Ingress?**</br>
+### What comes with Ingress?
+{: #components}
+
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -41,7 +43,9 @@ Ingress consists of three components:
 <p><strong>Note</strong>: If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="cs_tutorials_policies.html#lesson3">Calico network policy tutorial</a>.</dd>
 </dl>
 
-**How does a request get to my app with Ingress in a single zone cluster?**</br>
+### How does a request get to my app with Ingress in a single zone cluster?
+{: #architecture-single}
+
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
 <img src="images/cs_ingress_singlezone.png" alt="Expose an app in a single-zone cluster by using Ingress" style="border-style: none"/>
@@ -56,7 +60,9 @@ The following diagram shows how Ingress directs communication from the internet 
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
-**How does a request get to my app with Ingress in a multizone cluster?**</br>
+### How does a request get to my app with Ingress in a multizone cluster?
+{: #architecture-multi}
+
 The following diagram shows how Ingress directs communication from the internet to an app in a multizone cluster:
 
 <img src="images/cs_ingress_multizone.png" alt="Expose an app in a multizone cluster by using Ingress" style="border-style: none"/>
@@ -98,39 +104,46 @@ Before you get started with Ingress, review the following prerequisites.
 At least one Ingress resource is required per namespace where you have apps that you want to expose.
 {:shortdesc}
 
-<dl>
-<dt>All apps are in one namespace</dt>
-<dd>If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
-<br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
-</dd>
-<dt>Apps are in multiple namespaces</dt>
-<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
-<br><br>
-For example, consider the following scenario:<ul>
-<li>You have two versions of the same app, `app1` and `app3`, for testing purposes.</li>
-<li>You deploy the apps in two different namespaces within the same cluster: `app1` into the development namespace, and `app3` into the staging namespace.</li></ul>
-To use the same cluster ALB to manage traffic to these apps, you create the following services and resources:<ul>
-<li>A Kubernetes service in the development namespace to expose `app1`.</li>
-<li>An Ingress resource in the development namespace that specifies the host as `dev.domain.net`.</li>
-<li>A Kubernetes service in the staging namespace to expose `app3`.</li>
-<li>An Ingress resource in the staging namespace that specifies the host as `stage.domain.net`.</li></ul></br>
+### All apps are in one namespace
+{: #one-ns}
+
+If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
+
+<img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
+
+### Apps are in multiple namespaces
+{: #multi-ns}
+
+If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+
+For example, consider the following scenario:
+* You have two versions of the same app, `app1` and `app3`, for testing purposes.
+* You deploy the apps in two different namespaces within the same cluster: `app1` into the development namespace, and `app3` into the staging namespace.
+
+To use the same cluster ALB to manage traffic to these apps, you create the following services and resources:
+* A Kubernetes service in the development namespace to expose `app1`.
+* An Ingress resource in the development namespace that specifies the host as `dev.domain.net`.
+* A Kubernetes service in the staging namespace to expose `app3`.
+* An Ingress resource in the staging namespace that specifies the host as `stage.domain.net`.
+
 <img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" style="border-style: none"/>
-Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.domain.net/app3` URL to only `app3`.</dd>
-</dl>
+
+Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.domain.net/app3` URL to only `app3`.
 
 {: #wildcard_tls}
 **Note**:
-* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. For clusters created on or after 6 June 2018, the IBM-provided Ingress subdomain TLS certificate is a wildcard certificate and can be used for the registered wildcard subdomain. For clusters created before 6 June, 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.
+* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
 
 ### Multiple domains within a namespace
+{: #multi-domains}
 
 Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="At least one resource is required per namespace." style="border-style: none"/>
 
 **Note**:
-* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. For clusters created on or after 6 June 2018, the IBM-provided Ingress subdomain TLS certificate is a wildcard certificate and can be used for the registered wildcard subdomain. For clusters created before 6 June 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.
+* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided Ingress TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
 
 <br />
@@ -207,7 +220,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 <dt>Domain</dt>
 <dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
-<dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in every namespace.</li></ul></dd>
+<dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in every namespace. <strong>Note</strong>: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.</li></ul></dd>
 </dl>
 
 #### To use the IBM-provided Ingress domain:
@@ -233,7 +246,7 @@ Ingress Secret:         <tls_secret>
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
     -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
-3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
+3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace. <strong>Note</strong>: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
         ```
         ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
@@ -512,7 +525,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 <dt>Domain</dt>
 <dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
-<dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in every namespace.</li></ul></dd>
+<dd>The ALB load balances HTTP network traffic your apps. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. <ul><li>If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire.</li><li>If you use a custom domain, you can use your own TLS certificate to manage TLS termination. Import or create a TLS secret for the certificate in the cluster's <code>default</code> namespace. <strong>Note</strong>: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.</li></ul></dd>
 </dl>
 
 #### To use the IBM-provided Ingress domain:
@@ -538,7 +551,7 @@ Ingress Secret:         <tls_secret>
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
     -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
-3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
+3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace. <strong>Note</strong>: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
         ```
         ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
@@ -623,7 +636,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your app services in different namespaces in the cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong> Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</td>
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
@@ -634,7 +647,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>Replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong> Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</td>
     </tr>
     <tr>
     <td><code>path</code></td>
@@ -777,7 +790,7 @@ When you create a standard cluster, an IBM-provided private application load bal
 
 **Note**: If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](cs_subnets.html#request).
 
-To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
+**To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:**
 
 1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluster_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
 
@@ -809,7 +822,7 @@ To enable a default private ALB by using the pre-assigned, IBM-provided portable
 3. **Multizone clusters**: For high availability, repeat the above steps for the private ALB in each zone.
 
 <br>
-To enable the private ALB by using your own portable private IP address:
+**To enable the private ALB by using your own portable private IP address:**
 
 1. Configure the user-managed subnet of your chosen IP address to route traffic on the private VLAN of your cluster.
 
@@ -872,7 +885,7 @@ The ALB load balances HTTP network traffic to your apps. To also load balance in
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2. Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud ks albs --cluster <cluster_name>`.
-3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace.
+3.   Optional: To use TLS, either import or create a TLS certificate and key secret. If you use a wildcard domain, ensure that you import or create a wildcard certificate in the <code>default</code> namespace so that the ALB can access and use the certificate in each namespace. <strong>Note</strong>: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
       * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
         ```
         ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
@@ -962,10 +975,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     </tr>
     <tr>
     <td><code>tls/hosts</code></td>
-    <td>To use TLS, replace <em>&lt;domain&gt;</em> with your custom domain.
-
-    </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <td>To use TLS, replace <em>&lt;domain&gt;</em> with your custom domain.</br></br><strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
