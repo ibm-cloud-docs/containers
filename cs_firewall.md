@@ -28,7 +28,7 @@ Review these situations in which you might need to open specific ports and IP ad
 * [To run `kubectl` commands](#firewall_kubectl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
 * [To run `calicoctl` commands](#firewall_calicoctl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
 * [To allow communication between the Kubernetes master and the worker nodes](#firewall_outbound) when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account.
-* [To allow the cluster to access resources over a firewall on the private network](#firewall_outbound).
+* [To allow the cluster to access resources over a firewall on the private network](#firewall_private).
 * [To access the NodePort service, LoadBalancer service, or Ingress from outside of the cluster](#firewall_inbound).
 
 <br />
@@ -344,14 +344,14 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 
 ## Allowing the cluster to access resources over a private firewall
-{: #firewall_outbound}
+{: #firewall_private}
 
 If you have a firewall on the private network, allow communication between worker nodes and let your cluster access infrastructure resources over the private network.
 {:shortdesc}
 
 **Note**: If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway appliance as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
 
-1. Set up the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
+1. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
     1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
     2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](cs_regions.html#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
 2. Open the following ports:
@@ -359,7 +359,7 @@ If you have a firewall on the private network, allow communication between worke
     - Allow outbound TCP and UDP to port 2049 to allow mounting file storage as volumes.
     - Allow inbound TCP and UDP connections to port 10250 for the Kubernetes dashboard and commands such as `kubectl logs` and `kubectl exec`.
     - Allow inbound and outbound connections to TCP and UDP port 53 for DNS access.
-3. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using all ports, all private IP addresses, or the Calico worker node label.
+3. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
 
 ## Accessing NodePort, load balancer, and Ingress services from outside the cluster
 {: #firewall_inbound}
