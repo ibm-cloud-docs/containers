@@ -1673,7 +1673,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-Set IBM Cloud infrastructure (SoftLayer) account credentials for an region {{site.data.keyword.containerlong_notm}} region.
+Set IBM Cloud infrastructure (SoftLayer) account credentials for an {{site.data.keyword.containerlong_notm}} region.
 
 If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using this command.
 
