@@ -43,7 +43,7 @@ This tutorial is intended for software developers and network administrators who
 - [Create a version 1.10 cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.1.1 Calico CLI and Calico v3 policy syntax in this tutorial.
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 - [Install and configure the Calico CLI](cs_network_policy.html#1.10_install).
-- [Make sure you have the Editor, Operator, or Administrator platform role](cs_users.html#add_users_cli).
+- [Make sure you have the **Editor**, **Operator**, or **Administrator** platform role](cs_users.html#add_users_cli).
 
 <br />
 
