@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -125,8 +125,8 @@ To use the same cluster ALB to manage traffic to these apps, you create the foll
 * An Ingress resource in the development namespace that specifies the host as `dev.domain.net`.
 * A Kubernetes service in the staging namespace to expose `app3`.
 * An Ingress resource in the staging namespace that specifies the host as `stage.domain.net`.
-
-<img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" style="border-style: none"/>
+</br>
+<img src="images/cs_ingress_multi_ns.png" width="500" alt="Within a namespace, use subdomains in one or multiple resources" style="width:500px; border-style: none"/>
 
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.domain.net/app3` URL to only `app3`.
 
