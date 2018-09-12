@@ -33,7 +33,7 @@ You understand the [{{site.data.keyword.Bluemix_notm}} offerings](cs_why.html#di
 Establish VPN connectivity between your public Kubernetes cluster and your {{site.data.keyword.Bluemix}} Private instance to allow two-way communication.
 {: shortdesc}
 
-1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix}} Public or use an existing one. To create a cluster, choose between the following options: 
+1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public or use an existing one. To create a cluster, choose between the following options: 
     - [Create a standard cluster from the GUI](cs_clusters.html#clusters_ui). 
     - [Create a standard cluster from the CLI](cs_clusters.html#clusters_cli). 
     - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
@@ -61,9 +61,9 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
     ```
     {: pre}
 
-4.  [Create a cluster in {{site.data.keyword.Bluemix}} Private![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
+4.  [Create a cluster in {{site.data.keyword.Bluemix_notm}} Private![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
 
-5.  In your {{site.data.keyword.Bluemix}} Private cluster, deploy the strongSwan IPSec VPN service.
+5.  In your {{site.data.keyword.Bluemix_notm}} Private cluster, deploy the strongSwan IPSec VPN service.
 
     1.  [Complete the strongSwan IPSec VPN workarounds ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html). 
 
@@ -81,7 +81,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
     
         *  Remember that the private `local.id` must match the public `remote.id`, the private `remote.id` must match the public `local.id`, and the `preshared.secret` values for private and public must match.
         
-        Now, you can initiate a connection from the {{site.data.keyword.Bluemix}} Private cluster to the {{site.data.keyword.containerlong_notm}} cluster.
+        Now, you can initiate a connection from the {{site.data.keyword.Bluemix_notm}} Private cluster to the {{site.data.keyword.containerlong_notm}} cluster.
 
 7.  [Test the VPN connection](cs_vpn.html#vpn_test) between your clusters.
 
