@@ -420,7 +420,7 @@ Choose a machine type with the right storage configuration to support your workl
 ### Software-defined storage (SDS) machines
 {: #sds}
 
-Software-defined storage (SDS) flavors arephysical machines that are provisioned with a raw disk for physical local storage. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
+Software-defined storage (SDS) flavors are physical machines that are provisioned with a raw disk for physical local storage. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
 {: shortdesc}
 
 **When do I use SDS flavors?**</br>
