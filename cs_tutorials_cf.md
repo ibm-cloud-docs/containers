@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -41,6 +41,7 @@ This tutorial is intended for Cloud Foundry app developers.
 - [Create a private image registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Create a cluster](cs_clusters.html#clusters_ui).
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- [Make sure you have the **Editor**, **Operator**, or **Administrator** platform role](cs_users.html#add_users_cli).
 - [Learn about Docker and Kubernetes terminology](cs_tech.html).
 
 

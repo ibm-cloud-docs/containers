@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -385,7 +385,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
-           region: us-south
+	         region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -674,8 +674,8 @@ Before you can start to mount your existing storage to an app, you must retrieve
     metadata:
       name: mypv
       labels:
-         failure-domain.beta.kubernetes.io/region=<region>
-         failure-domain.beta.kubernetes.io/zone=<zone>
+         failure-domain.beta.kubernetes.io/region: <region>
+         failure-domain.beta.kubernetes.io/zone: <zone>
     spec:
       capacity:
         storage: "<storage_size>"

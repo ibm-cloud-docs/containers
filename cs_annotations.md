@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -1695,64 +1695,7 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB decrypts the request before forwarding traffic to your apps. If you have apps that require HTTPS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret. The TLS connection terminates, then re-encrypts SSL on the backend.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
-
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;myingressname&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service that requires HTTPS. Traffic is encrypted from the ALB to this app's service.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### SSL Services support with authentication
-{: #ssl-services-auth}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Allow HTTPS requests and encrypt traffic to your upstream apps with one-way or mutual authentication for additional security.
-</dd>
-
+When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB handles the TLS termination and decrypts the request before forwarding the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to stay encrypted, use the `ssl-services` annotation to disable the default TLS termination of the ALB. The ALB terminates the TLS connection and re-encrypts SSL before sending traffic to the backend app.<br></br>Additionally, if your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1797,7 +1740,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the mutual authentication secret for the service. The mutual authentication secret must contain the required <code>ca.crt</code>. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</td>
+  <td>If your backend app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
   </tr>
   </tbody></table>
 

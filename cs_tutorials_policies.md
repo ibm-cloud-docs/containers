@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -43,6 +43,7 @@ This tutorial is intended for software developers and network administrators who
 - [Create a version 1.10 cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.1.1 Calico CLI and Calico v3 policy syntax in this tutorial.
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 - [Install and configure the Calico CLI](cs_network_policy.html#1.10_install).
+- [Make sure you have the **Editor**, **Operator**, or **Administrator** platform role](cs_users.html#add_users_cli).
 
 <br />
 
@@ -59,21 +60,15 @@ The following image shows how the webserver app will be exposed to the internet 
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the webserver app is exposed to the internet by the public NodePort and public LoadBalancer." style="width:450px; border-style: none"/>
 
-1. Create a test namespace called `pr-firm` to use throughout this tutorial.
+1. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers that it received in the connection.
     ```
-    kubectl create ns pr-firm
-    ```
-    {: pre}
-
-2. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers it received in the connection.
-    ```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-3. Verify that the web server app pods have a **STATUS** of `Running`.
+2. Verify that the web server app pods have a **STATUS** of `Running`.
     ```
-    kubectl get pods -n pr-firm -o wide
+    kubectl get pods -o wide
     ```
     {: pre}
 
@@ -86,7 +81,7 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: screen}
 
-4. To expose the app to the public internet, create a LoadBalancer service configuration file called `webserver.yaml` in a text editor.
+3. To expose the app to the public internet, create a LoadBalancer service configuration file called `webserver.yaml` in a text editor.
     ```
     apiVersion: v1
     kind: Service
@@ -108,17 +103,17 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: codeblock}
 
-5. Deploy the LoadBalancer.
+4. Deploy the LoadBalancer.
     ```
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. Verify that you can publicly access the app exposed by the LoadBalancer from your computer.
+5. Verify that you can publicly access the app exposed by the LoadBalancer from your computer.
 
     1. Get the public **EXTERNAL-IP** address of the LoadBalancer.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -165,7 +160,7 @@ The following image shows how the webserver app will be exposed to the internet 
 
     1. Get the NodePort that the LoadBalancer assigned to the worker nodes. The NodePort is in the 30000 - 32767 range.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -297,7 +292,7 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
 
 4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
     ```
-    kubectl patch svc -n pr-firm webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 

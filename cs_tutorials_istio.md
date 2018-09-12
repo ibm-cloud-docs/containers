@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -42,7 +42,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
+-  [Create a cluster that runs Kubernetes version 1.9 or later](cs_clusters.html#clusters_cli), or [update an existing cluster to version 1.9](cs_versions.html#cs_v19).
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
@@ -52,9 +52,8 @@ Download and install Istio in your cluster.
 {:shortdesc}
 
 1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
-    1. [Install Helm for your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
-    2.  **For Helm versions 2.10 or later**: Skip this step. 
-        **For Helm versions 2.9 or earlier**: Install Istio’s custom resource definitions.
+    1. [Set up Helm in your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
+    2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -207,13 +206,13 @@ These four microservices include a product web page, book details, reviews (with
      {: pre}
 
 6.  View the BookInfo web page in a browser.
-    
+
     For Mac OS or Linux:
     ```
     open http://$GATEWAY_URL/productpage
     ```
     {: pre}
-    
+
     For Windows:
     ```
     start http://$GATEWAY_URL/productpage

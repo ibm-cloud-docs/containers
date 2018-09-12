@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -1673,13 +1673,13 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-Set IBM Cloud infrastructure (SoftLayer) account credentials for your {{site.data.keyword.containerlong_notm}} account.
+Set IBM Cloud infrastructure (SoftLayer) account credentials for an {{site.data.keyword.containerlong_notm}} region.
 
 If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using this command.
 
-If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these credentials are used to order infrastructure, even if an [IAM API key](#cs_api_key_info) already exists for the account. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
+If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region, these credentials are used to order infrastructure for all clusters within that region. These credentials are used to determine infrastructure permissions, even if an [IAM API key](#cs_api_key_info) already exists for the region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
 
-You cannot set multiple credentials for one {{site.data.keyword.containerlong_notm}} account. Every {{site.data.keyword.containerlong_notm}} account is linked to one IBM Cloud infrastructure (SoftLayer) portfolio only.
+You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} region.
 
 **Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
 
@@ -1734,7 +1734,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containerlong_no
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-Remove IBM Cloud infrastructure (SoftLayer) account credentials from your {{site.data.keyword.containerlong_notm}} account.
+Remove IBM Cloud infrastructure (SoftLayer) account credentials from an {{site.data.keyword.containerlong_notm}} region.
 
 After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
 
@@ -2535,7 +2535,7 @@ View the details of a worker node.
 ### ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [-s]
 {: #cs_worker_reboot}
 
-Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change.
+Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node.
 
 **Attention:** Rebooting a worker node can cause data corruption on the worker node. Use this command with caution and when you know that a reboot can help recover your worker node. In all other cases, [reload your worker node](#cs_worker_reload) instead.
 

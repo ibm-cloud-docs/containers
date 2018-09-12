@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-05"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -88,7 +88,10 @@ Let's say you need a worker node with 6 cores to handle the workload for your ap
 A multizone cluster is set up with a single Kubernetes master that is provisioned in the same metro area as the workers. For example, if the workers are in one or multiple of the `dal10`, `dal12`, or `dal13` zones, the master is located in the Dallas multizone metro city.
 
 **What happens if the Kubernetes master becomes unavailable?** </br>
-You cannot access or change your cluster while the Kubernetes master is unavailable. However, worker nodes, apps, and resources that you deployed are not modified and continue to run. To protect your cluster against a Kubernetes master failure or in regions where multizone clusters are not available, you can [set up multiple clusters and connect them with a global load balancer](#multiple_clusters).
+The [Kubernetes master](cs_tech.html#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up. **Note**: Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.
+
+
+To protect your cluster against a Kubernetes master failure or in regions where multizone clusters are not available, you can [set up multiple clusters and connect them with a global load balancer](#multiple_clusters).
 
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
 Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
@@ -417,7 +420,7 @@ Choose a machine type with the right storage configuration to support your workl
 ### Software-defined storage (SDS) machines
 {: #sds}
 
-Software-defined storage (SDS) flavors are either virtual or physical machines that are provisioned with a raw disk for physical local storage. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
+Software-defined storage (SDS) flavors are physical machines that are provisioned with a raw disk for physical local storage. Because data is co-located with the compute node, SDS machines are suited for high performance workloads.
 {: shortdesc}
 
 **When do I use SDS flavors?**</br>
