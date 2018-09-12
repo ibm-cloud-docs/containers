@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -129,15 +129,13 @@ Review the following changes.
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, update them to handle either runtime. Examples of times you might rely on Docker as the container runtime:
-<ul><li>If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.</li>
-<li>Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.</li></ul><br>You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>

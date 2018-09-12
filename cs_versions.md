@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -115,9 +115,7 @@ Review changes that you might need to make when you are updating from the previo
 <tbody>
 <tr>
 <td>`containerd` new Kubernetes container runtime</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, update them to handle either runtime. Examples of times you might rely on Docker as the container runtime:
-<ul><li>If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.</li>
-<li>Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.</li></ul><br>You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).</td>
+<td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Migrating to `containerd` as the container runtime](#containerd).</td>
 </tr>
 <tr>
 <td>Kubernetes container volume mount propagation</td>
@@ -169,6 +167,35 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tr>
 </tbody>
 </table>
+
+### Migrating to `containerd` as the container runtime
+{: #containerd}
+
+For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Docker as the new container runtime for Kubernetes to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, you must update them to handle `containerd` as the container runtime. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).
+{: shortdesc}
+
+**How do I know if my apps rely on `docker` instead of `containerd`?**<br>
+Examples of times that you might rely on Docker as the container runtime:
+*  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.
+*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.
+
+**Besides reliance on the runtime, do I need to take other migration actions?**<br>
+
+**Manifest tool**: If you have multi-platform images that are built with the experimental `docker manifest` [tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) before Docker version 18.06, you cannot pull the image from DockerHub by using `containerd`.
+
+When you check the pod events, you might see an error such as the following.
+```
+failed size validation
+```
+{: screen}
+
+To use an image that is built by using the manifest tool with `containerd`, choose from the following options.
+
+*  Rebuild the image with the [manifest tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/estesp/manifest-tool).
+*  Rebuild the image with the `docker-manifest` tool after you update to Docker version 18.06 or later.
+
+**What is not affected? Do I need to change how I deploy my containers?**<br>
+In general, your container deployment processes do not change. You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead.
 
 ## Version 1.10
 {: #cs_v110}
