@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -175,7 +175,6 @@ To add file storage:
 
     -  **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
-
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -196,7 +195,6 @@ To add file storage:
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
-
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
