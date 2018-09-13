@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -223,118 +223,12 @@ Review the following tasks that require secrets. For more information on what yo
 
 When you bind a service to a cluster, you don't have to create a secret. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](cs_integrations.html#adding_cluster).
 
-### Configuring the Ingress ALB to use TLS
+### Encrypting traffic to your apps with TLS secrets
 {: #secrets_tls}
 
-The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
+The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. For more information, see the [Ingress configuration documentation](cs_ingress.html#public_inside_3).
 
-If you are using the IBM-provided Ingress subdomain, you can [use the IBM-provided TLS certificate](cs_ingress.html#public_inside_2). To view the IBM-provided TLS secret, run the following command:
-```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
-```
-{: pre}
-
-If you are using a custom domain, you can use your own certificate to manage TLS termination. To create your own TLS secret:
-1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `tls.key`.
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Use the key to create a `tls.crt`.
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
-2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert and key.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <client_certificate>
-       tls.key: <client_key>
-     ```
-     {: codeblock}
-
-4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-
-### Customizing the Ingress ALB with the SSL services annotation
-{: #secrets_ssl_services}
-
-You can use the [`ingress.bluemix.net/ssl-services` annotation](cs_annotations.html#ssl-services) encrypt traffic to your upstream apps from the Ingress ALB. To create the secret:
-
-1. Get the certificate authority (CA) key and certificate from your upstream server.
-2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <ca_certificate>
-     ```
-     {: codeblock}
-     **Note**: If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
-4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-
-### Customizing the Ingress ALB with the mutual authentication annotation
-{: #secrets_mutual_auth}
-
-You can use the [`ingress.bluemix.net/mutual-auth` annotation](cs_annotations.html#mutual-auth) to configure mutual authentication of downstream traffic for the Ingress ALB. To create a mutual authentication secret:
-
-1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `ca.key`.
-            ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Use the key to create a `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
-            ```
-            {: pre}
-        3. Use the `ca.crt` to create a self-signed certificate.
-            ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
-2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
-4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+Additionally, if you have apps that require the HTTPS protocol and need traffic to stay encrypted, you can use one-way or mutual authentication secrets with the `ssl-services` annotation. For more information, see the [Ingress annotations documentation](cs_ingress.html#ssl-services).
 
 <br />
 

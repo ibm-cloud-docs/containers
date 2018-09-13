@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -1629,7 +1629,7 @@ Configure mutual authentication of downstream traffic for the Ingress ALB. The e
 <dt>Pre-requisites</dt>
 <dd>
 <ul>
-<li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</li>
+<li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
 <li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.</li>
 </ul>
 </dd>
@@ -1681,6 +1681,45 @@ spec:
 
 </dd>
 </dl>
+
+To create a mutual authentication secret:
+
+1. Generate a key and certificate in one of the following ways:
+    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
+        1. Create a `ca.key`.
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. Use the key to create a `ca.crt`.
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. Use the `ca.crt` to create a self-signed certificate.
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+3. Create a secret YAML file using the cert.
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
+     ```
+     {: codeblock}
+4. Create the certificate as a Kubernetes secret.
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
 
 <br />
 
@@ -1740,12 +1779,73 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>If your backend app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a TLS secret, see [Creating secrets](cs_app.html#secrets_ssl_services).</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets_mutual_auth).</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
+  <td>If your backend app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
   </tr>
   </tbody></table>
 
   </dd>
   </dl>
+
+**To create a one-way authentication secret:**
+
+1. Get the certificate authority (CA) key and certificate from your upstream server.
+2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+3. Create a secret YAML file using the cert.
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       trusted.crt: <ca_certificate>
+     ```
+     {: codeblock}
+     **Note**: If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
+4. Create the certificate as a Kubernetes secret.
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
+
+**To create a mutual authentication secret:**
+
+1. Generate a key and certificate in one of the following ways:
+    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
+        1. Create a `ca.key`.
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. Use the key to create a `ca.crt`.
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. Use the `ca.crt` to create a self-signed certificate.
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+3. Create a secret YAML file using the cert.
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
+     ```
+     {: codeblock}
+4. Create the certificate as a Kubernetes secret.
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
 
 <br />
 

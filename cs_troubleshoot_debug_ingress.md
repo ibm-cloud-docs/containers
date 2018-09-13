@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -40,7 +40,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     ```
     {: pre}
 
-    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](cs_ingress.html#public_inside_3) or the [annotations documentation](cs_annotations.html).
+    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](cs_ingress.html#public_inside_4) or the [annotations documentation](cs_annotations.html).
 
     ```
     Name:             myingress
@@ -338,7 +338,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     * If everything is configured correctly, you get back the expected response from your app.
-    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](cs_ingress.html#public_inside_3), or any other configurations you have applied to only this ALB.
+    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](cs_ingress.html#public_inside_4), or any other configurations you have applied to only this ALB.
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
   1. Log in to the ALB pod and remove the `#` from the `server_name`.
