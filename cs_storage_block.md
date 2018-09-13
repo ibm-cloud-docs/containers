@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -393,8 +393,8 @@ To add block storage:
          resources:
            requests:
              storage: 24Gi
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-block-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
@@ -408,7 +408,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
-           region: us-south
+	         region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -417,33 +417,33 @@ To add block storage:
            requests:
              storage: 45Gi
              iops: "300"
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
-        <table>
-        <caption>Understanding the YAML file components</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Enter the name of the PVC.</td>
-        </tr>
-        <tr>
-        <td><code>metadata/annotations</code></td>
-        <td>The name of the storage class that you want to use to provision block storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
-        </tr>
-        <tr>
-          <td><code>metadata/labels/billingType</code></td>
-          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "hourly".</td>
-        </tr>
-	<tr>
-	<td><code>metadata/labels/region</code></td>
-        <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
-	</tr>
-	<tr>
-	<td><code>metadata/labels/zone</code></td>
+       <table>
+       <caption>Understanding the YAML file components</caption>
+       <thead>
+       <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+       </thead>
+       <tbody>
+       <tr>
+       <td><code>metadata/name</code></td>
+       <td>Enter the name of the PVC.</td>
+       </tr>
+       <tr>
+       <td><code>metadata/annotations</code></td>
+       <td>The name of the storage class that you want to use to provision block storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       </tr>
+       <tr>
+         <td><code>metadata/labels/billingType</code></td>
+         <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "hourly".</td>
+       </tr>
+       <tr>
+       <td><code>metadata/labels/region</code></td>
+       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
+       </tr>
+       <tr>
+       <td><code>metadata/labels/zone</code></td>
 	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
 	</tr>
         <tr>
