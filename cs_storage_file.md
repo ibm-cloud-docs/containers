@@ -173,8 +173,9 @@ To add file storage:
 
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
-    -  **Example for bronze, silver, gold storage classes**:
+    - **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
+       
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -190,12 +191,13 @@ To add file storage:
          resources:
            requests:
              storage: 24Gi
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
-       ```
+      
+      ```
        apiVersion: v1
        kind: PersistentVolumeClaim
        metadata:
@@ -211,40 +213,40 @@ To add file storage:
            requests:
              storage: 45Gi
              iops: "300"
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
-        <table>
-        <caption>Understanding the YAML file components</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Enter the name of the PVC.</td>
-        </tr>
-        <tr>
-        <td><code>metadata/annotations</code></td>
-        <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
-        </tr>
-        <tr>
-          <td><code>metadata/labels/billingType</code></td>
+       <table>
+       <caption>Understanding the YAML file components</caption>
+       <thead>
+       <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+       </thead>
+       <tbody>
+       <tr>
+       <td><code>metadata/name</code></td>
+       <td>Enter the name of the PVC.</td>
+       </tr>
+       <tr>
+       <td><code>metadata/annotations</code></td>
+       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       </tr>
+       <tr>
+         <td><code>metadata/labels/billingType</code></td>
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
-        </tr>
-        <tr>
-        <td><code>spec/accessMode</code></td>
-        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/storage</code></td>
-        <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/iops</code></td>
-        <td>This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
-        </tr>
-        </tbody></table>
+       </tr>
+       <tr>
+       <td><code>spec/accessMode</code></td>
+       <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+       </tr>
+       <tr>
+       <td><code>spec/resources/requests/storage</code></td>
+       <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
+       </tr>
+       <tr>
+       <td><code>spec/resources/requests/iops</code></td>
+       <td>This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
+       </tr>
+       </tbody></table>
 
     If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
     {: tip}
