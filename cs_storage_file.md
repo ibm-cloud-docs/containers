@@ -197,7 +197,7 @@ To add file storage:
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
       
-      ```
+       ```
        apiVersion: v1
        kind: PersistentVolumeClaim
        metadata:
