@@ -1682,7 +1682,7 @@ spec:
 </dd>
 </dl>
 
-To create a mutual authentication secret:
+**To create a mutual authentication secret:**
 
 1. Generate a key and certificate in one of the following ways:
     * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
@@ -1808,6 +1808,7 @@ spec:
      ```
      {: pre}
 
+</br>
 **To create a mutual authentication secret:**
 
 1. Generate a key and certificate in one of the following ways:

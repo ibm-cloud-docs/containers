@@ -266,6 +266,7 @@ Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
 Ingress Secret:         <tls_secret>
 ```
 {: screen}
+</br>
 
 **If you use a custom domain:**
 
@@ -278,19 +279,19 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `tls.key`.
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Use the key to create a `tls.crt`.
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
+  * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+    **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+  * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
+      1. Create a `tls.key`.
+          ```
+          openssl genrsa -out tls.key 2048
+          ```
+          {: pre}
+      2. Use the key to create a `tls.crt`.
+          ```
+          openssl req -new -x509 -key tls.key -out tls.crt
+          ```
+          {: pre}
 2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert and key.
      ```
@@ -479,6 +480,8 @@ Before you begin:
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
 * [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
+To expose apps that are outside your cluster to the public:
+
 1.  Create a Kubernetes service for your cluster that will forward incoming requests to an external endpoint that you will create.
     1.  Open your preferred editor and create a service configuration file that is named, for example, `myexternalservice.yaml`.
     2.  Define a service for the app that the ALB will expose.
@@ -560,7 +563,7 @@ Before you begin:
         ```
         {: pre}
 
-3. Continue with Step 2 in [Exposing apps that are inside your cluster to the public](#public_inside_2).
+3. Continue with the steps in [Exposing apps that are inside your cluster to the public](#public_inside_2), beginning with Step 2.
 
 <br />
 
@@ -721,10 +724,9 @@ When you create a standard cluster, an IBM-provided private application load bal
 ### Step 3: Map your custom domain
 {: #private_3}
 
-When you configure the private ALB, you use a custom domain that your apps will be accessible through and choose whether to use TLS termination.
+When you configure the private ALB, use a custom domain that your apps will be accessible through.
 {: shortdesc}
 
-The ALB load balances HTTP network traffic to your apps. To also load balance incoming HTTPS connections, you can configure the ALB to you can use your own TLS certificate to decrypt the network traffic. The ALB then forwards the decrypted request to the apps that are exposed in your cluster.
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
@@ -735,7 +737,7 @@ The ALB load balances HTTP network traffic to your apps. To also load balance in
 ### Step 4: Select TLS termination
 {: #private_4}
 
-After you map your custom domain, you choose whether to use TLS termination.
+After you map your custom domain, choose whether to use TLS termination.
 {: shortdesc}
 
 The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
@@ -751,19 +753,19 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `tls.key`.
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Use the key to create a `tls.crt`.
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
+  * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
+    **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+  * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
+      1. Create a `tls.key`.
+          ```
+          openssl genrsa -out tls.key 2048
+          ```
+          {: pre}
+      2. Use the key to create a `tls.crt`.
+          ```
+          openssl req -new -x509 -key tls.key -out tls.crt
+          ```
+          {: pre}
 2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert and key.
      ```
