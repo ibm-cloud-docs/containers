@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-14"
 
 
 ---
@@ -1045,44 +1045,160 @@ Now that you created and bound a custom Kubernetes RBAC Role or ClusterRole, fol
 ## Accessing the IBM Cloud infrastructure (SoftLayer) portfolio
 {: #api_key}
 
-
-
 **Why do I need to access the IBM Cloud infrastructure (SoftLayer) portfolio?**
 
 To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio.
 {: shortdesc}
 
-To use the default IBM Cloud infrastructure (SoftLayer) account connected to your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you set the infrastructure context for a region by using an API key. To use a different IBM Cloud infrastructure (SoftLayer) account, you set the infrastructure context for a region by manually setting infrastructure credentials with the `ibmcloud ks credentials-set` command.
+[To use the default IBM Cloud infrastructure (SoftLayer) account](#api-key) connected to your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you set the infrastructure context for a region by using an API key. [To use a different IBM Cloud infrastructure (SoftLayer) account](#credentials), you set the infrastructure context for a region by manually setting infrastructure credentials with the `ibmcloud ks credentials-set` command.
 
 When a user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key or infrastructure credentials are used to determine whether sufficient permissions exist to perform that action.
-
-**How can I access the default IBM Cloud infrastructure (SoftLayer) account?**
-
-If you have an [{{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](cs_troubleshoot_clusters.html#cs_credentials), you have access to a linked IBM Cloud infrastructure (SoftLayer) portfolio by default. The Identity and Access Management (IAM) API key is used to order infrastructure resources from this IBM Cloud infrastructure (SoftLayer) portfolio, such as new worker nodes or VLANs. The API key is automatically set for a region when the first action that requires the `Administrator` platform management role is performed. For example, when one of your admin users creates the first cluster in the `us-south` region, the IAM API key for this user is stored in the account for this region.
-
-To make sure that all infrastructure-related actions in your cluster can be successfully performed, you must [assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy](#infra_access).
-
-You can find the current API key owner by running [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. **Note**: Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it is unnecessarily changed.
-
-**How can I access a different IBM Cloud infrastructure (SoftLayer) account?**
-
-Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set) command. The IBM Cloud infrastructure (SoftLayer) credentials are used instead of the API key that is stored for the region.
-
-To make sure that infrastructure-related actions in your cluster can be successfully performed, you must [assign the owner of the credentials the **Super user** infrastructure access policy](#infra_access).
-
-To see if your infrastructure account credentials are set to use a different account, open the [{{site.data.keyword.containerlong_notm}} GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. In the **Overview** tab, look for an **Infrastructure User** field. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use a different infrastructure account credentials.
-
-To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [`ibmcloud ks credentials-unset`](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure.
 
 **After the API key or infrastructure credentials are set for a region, how do I set infrastructure permissions for the other account users?**
 
 When you assign the **Super user** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [platform role](#platform).
 
-For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users, users in IAM access groups, or service account users to that region by setting platform management policies for them in that region. A user with a `Viewer` platform role is not authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to `Operator`, the user is authorized to add a worker node. The `worker-add` action succeeds because the user role is authorized and the API key is set correctly. You do not need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super user** infrastructure role, such as the account owner. After, you can invite individual users, users in IAM access groups, or service account users to that region by setting platform management policies for them in that region. A user with a `Viewer` platform role is not authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to `Operator`, the user is authorized to add a worker node. The `worker-add` action succeeds because the user role is authorized and the API key is set correctly. You do not need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
 
-**What if I don't want to assign the API key owner or credentials owner the Super User role?**</br>
+**What if I don't want to assign the API key owner or credentials owner the Super User role?**
 
 For compliance, security, or billing reasons, you might not want to give the **Super user** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credentials-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure (SoftLayer) permissions](#infra_access) for users.
+
+### Accessing the default IBM Cloud infrastructure (SoftLayer) account
+{: #api-key}
+
+If you have an [{{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](cs_troubleshoot_clusters.html#cs_credentials), you have access to a linked IBM Cloud infrastructure (SoftLayer) portfolio by default. The Identity and Access Management (IAM) API key is used to order infrastructure resources from this IBM Cloud infrastructure (SoftLayer) portfolio, such as new worker nodes or VLANs. The API key is automatically set for a region when the first action that requires the `Administrator` platform management role is performed. For example, when one of your admin users creates the first cluster in the `us-south` region, the IAM API key for this user is stored in the account for this region.
+
+You can find the current API key owner by running [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. **Note**: Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it is unnecessarily changed.
+
+To use the default infrastructure credentials for linked Pay-As-You-Go accounts with the API key:
+
+1.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
+
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
+
+    2.  From the expanding menu, select **Infrastructure**.
+
+    3.  From the menu bar, select **Account** > **Users** > **User List**.
+
+    4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
+
+    5.  To make sure that all infrastructure-related actions in your cluster can be successfully performed, [assign the user the **Super user** infrastructure access policy](#infra_access).
+
+2.  Set the API key for the region that the cluster is in.
+
+    1.  Log in to the terminal with the user whose infrastructure permissions you want to use.
+
+    2.  If you are in a different region, change to the region where you want to set the API key.
+
+        ```
+        ibmcloud ks region-set
+        ```
+        {: pre}
+
+    3.  Set the user's API key for the region.
+        ```
+        ibmcloud ks api-key-reset
+        ```
+        {: pre}    
+
+    4.  Verify that the API key is set.
+        ```
+        ibmcloud ks api-key-info <cluster_name_or_ID>
+        ```
+        {: pre}
+
+3.  **Optional**: If your Pay-As-You-Go account uses a different infrastructure account to provision clusters (for example, you used the `ibmcloud ks credentials-set` command), the account continues to use those infrastructure credentials instead of the API key. You must remove the associated infrastructure account so that the API key that you set in previous step is used.
+    ```
+    ibmcloud ks credentials-unset
+    ```
+    {: pre}
+
+4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
+
+    1.  Check your worker VLAN connectivity.
+    2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
+    3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
+
+### Accessing a different IBM Cloud infrastructure (SoftLayer) account
+{: # credentials}
+
+Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set) command. The IBM Cloud infrastructure (SoftLayer) credentials are used instead of the API key that is stored for the region.
+
+To make sure that infrastructure-related actions in your cluster can be successfully performed, [assign the owner of the credentials the **Super user** infrastructure access policy](#infra_access).
+
+To see if your infrastructure account credentials are set to use a different account, open the [{{site.data.keyword.containerlong_notm}} GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. In the **Overview** tab, look for an **Infrastructure User** field. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use a different infrastructure account credentials.
+
+Configuring the infrastructure credentials for different platform and infrastructure accounts
+{: #credentials}
+
+1.  Get the infrastructure account that you want to use to access the IBM Cloud infrastructure (SoftLayer) portfolio. You have different options that depend on your current account type.
+
+    <table summary="The table shows the standard cluster creation options by account type. Rows are to be read from the left to right, with the account description in column one, and the options to create a standard cluster in column two.">
+    <caption>Standard cluster creation options by account type</caption>
+      <thead>
+      <th>Account description</th>
+      <th>Options to create a standard cluster</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>**Lite accounts** cannot provision clusters.</td>
+          <td>[Upgrade your Lite account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+        </tr>
+        <tr>
+          <td>**Recent Pay-As-You-Go** accounts come with access to the infrastructure portfolio.</td>
+          <td>You can create standard clusters. To troubleshoot infrastructure permissions, see [Configuring the infrastructure API credentials for linked accounts](#apikey).</td>
+        </tr>
+        <tr>
+          <td>**Older Pay-As-You-Go accounts** that were created before automatic account linking was available did not come with access to the IBM Cloud infrastructure (SoftLayer) portfolio.<p>If you have an existing IBM Cloud infrastructure (SoftLayer) account, you cannot link this account to an older Pay-As-You-Go account.</p></td>
+          <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>To continue using your old Pay-As-You-Go account, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can set your credentials in your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p><p>**For both options, continue to the next step**.</p></td>
+        </tr>
+        <tr>
+          <td>**Subscription accounts** are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+          <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account. Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually set IBM Cloud infrastructure (SoftLayer) credentials for your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p><p>**For both options, continue to the next step**.</p></td>
+        </tr>
+        <tr>
+          <td>**IBM Cloud infrastructure (SoftLayer) accounts**, no {{site.data.keyword.Bluemix_notm}} account</td>
+          <td><p>[Create an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, an IBM Cloud infrastructure (SoftLayer) account is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p><p>By default, your new {{site.keyword.data.Bluemix_notm}} account uses the new infrastructure account. To continue using the old infrastructure account, continue to the next step.</p></td>
+        </tr>
+      </tbody>
+      </table>
+
+2.  Verify that the user whose credentials you want to use for infrastructure actions has the correct permissions.
+
+    1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
+
+    2.  From the expanding menu, select **Infrastructure**.
+
+    3.  From the menu bar, select **Account** > **Users** > **User List**.
+
+    4.  In the **API Key** column, verify that the user has an API Key, or click **Generate**.
+
+    5.  Verify or assign the user the [correct infrastructure permissions](cs_users.html#infra_access).
+
+3.  Set the infrastructure API credentials with the user for the correct account.
+
+    1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
+
+        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
+
+        2.  In the **API Access Information** section, view the **API Username** and **Authentication Key**.    
+
+    2.  Set the infrastructure API credentials to use.
+        ```
+        ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ```
+        {: pre}
+
+4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
+
+    1.  Check your worker VLAN connectivity.
+    2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
+    3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
+
+5. To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [`ibmcloud ks credentials-unset`](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure.
+
+{[shite-space.md]}
 
 ## Customizing infrastructure permissions
 {: #infra_access}
