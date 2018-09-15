@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-15"
 
 ---
 
@@ -337,7 +337,7 @@ To access the Kibana dashboard, go to one of the following URLs and select the {
 - US-South and US-East: https://logging.ng.bluemix.net
 - UK-South: https://logging.eu-gb.bluemix.net
 - EU-Central: https://logging.eu-fra.bluemix.net
-- AP-South: https://logging.au-syd.bluemix.net
+- AP-South and AP-North: https://logging.au-syd.bluemix.net
 
 For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
