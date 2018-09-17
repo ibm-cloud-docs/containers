@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-17"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-09-13"
 
 **Supported Kubernetes versions**:
 
-- Latest: 1.11.2
+- Latest: 1.11.2 
 - Default: 1.10.7
 - Other: 1.9.10
 - Deprecated: 1.8.15, unsupported 22 September 2018
