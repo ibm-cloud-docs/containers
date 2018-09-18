@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -922,7 +922,7 @@ View information about a cluster in your organization.
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.11.2
+  Version:      1.11.3
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -2818,7 +2818,7 @@ View a list of worker nodes and the status for each in a cluster.
 ## Worker pool commands
 {: #worker-pool}
 
-### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE [--hardware ISOLATION] [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
+### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
 {: #cs_worker_pool_create}
 
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
@@ -2838,8 +2838,8 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
     <dd>The number of workers to create in each zone. This value is required, and must be 1 or greater.</dd>
 
-  <dt><code>--hardware <em>HARDWARE</em></code></dt>
-    <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
+  <dt><code>--hardware <em>ISOLATION</em></code></dt>
+    <dd>The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal machine types, specify `dedicated`. This value is required.</dd>
 
   <dt><code>--labels <em>LABELS</em></code></dt>
     <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
