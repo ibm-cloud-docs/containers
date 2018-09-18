@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-# 教程：将应用程序部署到集群
+# 教程：将应用程序部署到 Kubernetes 集群
 {: #cs_apps_tutorial}
 
 您可以了解如何使用 {{site.data.keyword.containerlong}} 来部署利用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的容器化应用程序。
@@ -27,14 +27,13 @@ lastupdated: "2018-05-24"
 
 公关公司的应用程序开发者使用最后一个教程中创建的 Kubernetes 集群，部署 Hello World 版本的应用程序。通过在此教程中的每一课上进行构建，应用程序开发者可通过渐进方式部署同一应用程序的更复杂版本。下图按课程显示每个部署的组件。
 
-
-![课程组成部分](images/cs_app_tutorial_roadmap.png)
+![课程组成部分](images/cs_app_tutorial_mz-roadmap.png)
 
 如图中所示，Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并开始运行。在 Kubernetes 中，部署与服务一起工作。部署包含应用程序的定义。例如，要用于容器的映像以及必须为应用程序公开的端口。创建部署时，会为部署中定义的每个容器创建一个 Kubernetes pod。要使应用程序更具弹性，可以在部署中定义同一应用程序的多个实例，并允许 Kubernetes 自动为您创建副本集。副本集用于监视 pod，并确保始终有指定数量的 pod 启动并在运行。如果其中一个 pod 无响应，那么会自动重新创建该 pod。
 
 服务会将一些 pod 分组在一起，并提供与这些 pod 的网络连接，以供集群中的其他服务使用，而无需公开每个 pod 的实际专用 IP 地址。可以使用 Kubernetes 服务来使应用程序可供集群内的其他 pod 使用，也可以将应用程序公开到因特网。在本教程中，您将通过一个自动分配给工作程序节点的公共 IP 地址和一个公共端口，使用 Kubernetes 服务从因特网访问正在运行的应用程序。
 
-要使应用程序具有更高可用性，可以在标准集群中创建多个工作程序节点以运行应用程序的更多副本。本教程中未涉及此任务，但请记住这一概念，以便将来改进应用程序可用性时加以运用。
+要使应用程序具有更高可用性，可以在标准集群中创建跨多个专区的工作程序池，并且每个专区中含有多个工作程序节点，以用于运行应用程序的更多副本。本教程中未涉及此任务，但请记住这一概念，以便将来改进应用程序可用性时加以运用。
 
 虽然只有其中一课涉及将 {{site.data.keyword.Bluemix_notm}} 服务集成到应用程序中，但您可以将这些服务用于任何复杂程度的应用程序。
 
@@ -57,7 +56,7 @@ lastupdated: "2018-05-24"
 
 ## 先决条件
 
-* [教程：在 {{site.data.keyword.containershort_notm}} 中创建 Kubernetes 集群](cs_tutorials.html#cs_cluster_tutorial)。
+* [教程：创建 Kubernetes 集群](cs_tutorials.html#cs_cluster_tutorial)。
 
 
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
@@ -69,8 +68,7 @@ lastupdated: "2018-05-24"
 下图显示通过完成本课部署的各组件。
 
 
-
-![部署设置](images/cs_app_tutorial_components1.png)
+![部署设置](images/cs_app_tutorial_mz-components1.png)
 
 要部署应用程序，请执行以下操作：
 
@@ -81,21 +79,21 @@ lastupdated: "2018-05-24"
     * `package.json`：有关应用程序的元数据。
 
     ```
-        git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
 2.  浏览到 `Lab 1` 目录。
 
     ```
-        cd 'container-service-getting-started-wt/Lab 1'
+    cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
 
-3.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请使用 `bx cs region-set` 命令。
+3.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请使用 `ibmcloud ks region-set` 命令。
 
     ```
-        bx login [--sso]
+    ibmcloud login [--sso]
     ```
     {: pre}
 
@@ -105,7 +103,7 @@ lastupdated: "2018-05-24"
     1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
         ```
-                bx cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -115,26 +113,26 @@ lastupdated: "2018-05-24"
         OS X 的示例：
 
         ```
-                export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
         ```
         {: screen}
 
 5.  登录到 {{site.data.keyword.registryshort_notm}} CLI。**注**：请确保已[安装](/docs/services/Registry/index.html#registry_cli_install) container-registry 插件。
 
     ```
-        bx cr login
+    ibmcloud cr login
     ```
     {: pre}
     -   如果忘记了 {{site.data.keyword.registryshort_notm}} 中的名称空间，请运行以下命令。
 
         ```
-                bx cr namespace-list
+        ibmcloud cr namespace-list
         ```
         {: pre}
 
 6.  启动 Docker。
     * 如果使用的是 Docker Community Edition，那么无需任何操作。
-    * 如果使用的是 Linux，请访问 [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/admin/)，以查找有关如何启动 Docker 的指示信息，具体取决于使用的 Linux 分发版。
+    * 如果使用的是 Linux，请访问 [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/config/daemon/)，以查找有关如何启动 Docker 的指示信息，具体取决于使用的 Linux 分发版。
     * 如果在 Windows 或 OSX 上使用的是 Docker Toolbox，那么可以使用 Docker Quickstart Terminal，该程序将为您启动 Docker。将 Docker Quickstart Terminal 用于后面的几个步骤以运行 Docker 命令，然后切换回在其中设置 `KUBECONFIG` 会话变量的 CLI。
 
 7.  构建包含 `Lab 1` 目录中应用程序文件的 Docker 映像。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。
@@ -144,7 +142,7 @@ lastupdated: "2018-05-24"
     1.  在本地构建映像。指定要使用的名称和标记。确保使用上一个教程中在 {{site.data.keyword.registryshort_notm}} 中创建的名称空间。使用名称空间信息来标记映像，可让 Docker 知道在后续步骤中应将映像推送到何处。在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。
 
         ```
-                docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
         ```
         {: pre}
 
@@ -158,33 +156,33 @@ lastupdated: "2018-05-24"
     2.  将映像推送到注册表名称空间。
 
         ```
-        docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
+docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
         ```
         {: pre}
 
         输出示例：
 
         ```
-        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-        ea2ded433ac8: Pushed
-        894eb973f4d3: Pushed
-        788906ca2c7e: Pushed
-        381c97ba7dc3: Pushed
-        604c78617f34: Pushed
-        fa18e5ffd316: Pushed
-        0a5e2b2ddeaa: Pushed
-        53c779688d06: Pushed
-        60a0858edcd5: Pushed
-        b6ca02dfe5e6: Pushed
-        1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-        43 size: 2398
-        ```
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
+  ea2ded433ac8: Pushed
+  894eb973f4d3: Pushed
+  788906ca2c7e: Pushed
+  381c97ba7dc3: Pushed
+  604c78617f34: Pushed
+  fa18e5ffd316: Pushed
+  0a5e2b2ddeaa: Pushed
+  53c779688d06: Pushed
+  60a0858edcd5: Pushed
+  b6ca02dfe5e6: Pushed
+  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
+  43 size: 2398
+  ```
         {: screen}
 
 8.  部署用于管理 pod；pod 包含应用程序的容器化实例。以下命令会将应用程序部署在单个 pod 中。对于本教程，部署名为 **hello-world-deployment**，但您可以根据需要为其指定任何名称。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -200,7 +198,7 @@ lastupdated: "2018-05-24"
 9.  通过将部署公开为 NodePort 服务，使应用程序可供公共访问。正如您可能会公开 Cloud Foundry 应用程序的端口，您公开的 NodePort 就是工作程序节点用于侦听流量的端口。
 
     ```
-    kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
+kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
     ```
     {: pre}
 
@@ -247,14 +245,14 @@ lastupdated: "2018-05-24"
     1.  获取有关服务的信息以查看分配的 NodePort。
 
         ```
-        kubectl describe service hello-world-service
+kubectl describe service hello-world-service
         ```
         {: pre}
 
         输出示例：
 
         ```
-        Name:                   hello-world-service
+Name:                   hello-world-service
         Namespace:              default
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
@@ -273,18 +271,18 @@ lastupdated: "2018-05-24"
     2.  获取集群中工作程序节点的公共 IP 地址。
 
         ```
-        bx cs workers <cluster_name_or_ID>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
         输出示例：
 
         ```
-        bx cs workers pr_firm_cluster
+        ibmcloud ks workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
         ```
         {: screen}
 
@@ -292,7 +290,7 @@ lastupdated: "2018-05-24"
 
 
     ```
-    Hello world! Your app is up and running in a cluster!
+  Hello world! Your app is up and running in a cluster!
     ```
     {: screen}
 
@@ -321,8 +319,7 @@ lastupdated: "2018-05-24"
 
 更高可用性意味着用户访问会在这三个实例之间分布。如果有过多用户尝试访问同一应用程序实例，他们可能会发现响应缓慢。而多个实例可提高对用户的响应速度。在本课中，您还将学习运行状况检查和部署更新可以如何用于 Kubernetes。下图包含通过完成本课进行部署的组件。
 
-
-![部署设置](images/cs_app_tutorial_components2.png)
+![部署设置](images/cs_app_tutorial_mz-components2.png)
 
 在上一个教程中，您已创建帐户以及含一个工作程序节点的集群。在本课中，您将配置部署并部署 Hello World 应用程序的三个实例。每个实例都会部署在一个 Kubernetes pod 中，作为工作程序节点中副本集的一部分。要使实例公开可用，也请创建 Kubernetes 服务。
 
@@ -389,14 +386,14 @@ lastupdated: "2018-05-24"
     2.  在**部署**部分中，记下 `replicas`。Replicas 是应用程序的实例数。应用程序的可用性在运行三个实例时高于仅运行一个实例时。
 
         ```
-        replicas: 3
+replicas: 3
         ```
         {: codeblock}
 
     3.  记下 HTTP 活性探测器，此探测器每 5 秒检查一次容器的运行状况。
 
         ```
-        livenessProbe:
+livenessProbe:
                     httpGet:
                       path: /healthz
                       port: 8080
@@ -425,7 +422,7 @@ lastupdated: "2018-05-24"
 7.  现在，部署工作已完成，您可以打开浏览器并检查应用程序。要构成 URL，请采用上一课中用于工作程序节点的公共 IP 地址，并将其与配置脚本中指定的 NodePort 组合在一起。要获取工作程序节点的公共 IP 地址，请执行以下操作：
 
   ```
-  bx cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -454,7 +451,7 @@ lastupdated: "2018-05-24"
 
 
     ```
-    Liveness probe failed: HTTP probe failed with statuscode: 500
+Liveness probe failed: HTTP probe failed with statuscode: 500
     Back-off restarting failed docker container
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
     ```
@@ -488,8 +485,7 @@ lastupdated: "2018-05-24"
 
 将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您可更新应用程序以使用更多副本将其向上扩展，使其可用性更高。下图包含通过完成本课进行部署的组件。
 
-![部署设置](images/cs_app_tutorial_components3.png)
-
+![部署设置](images/cs_app_tutorial_mz-components3.png)
 
 在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将在 {{site.data.keyword.Bluemix_notm}} 帐户中创建 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的实例，并配置两个部署，其中应用程序的每个组件对应一个部署。每个组件都会部署在工作程序节点的一个 Kubernetes pod 中。要使这两个组件公开可用，也请为每个组件创建一个 Kubernetes 服务。
 
@@ -511,14 +507,14 @@ lastupdated: "2018-05-24"
     1.  浏览到 `watson` 目录。
 
         ```
-        cd watson
+cd watson
         ```
         {: pre}
 
     2.  将应用程序的第一部分作为映像在本地进行构建和标记。同样，不要忘记在命令末尾输入句点 (`.`)。如果要使用 Docker Quickstart 终端来运行 Docker 命令，请确保切换 CLI。
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson .
+docker build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -526,14 +522,14 @@ lastupdated: "2018-05-24"
 
 
         ```
-        Successfully built <image_id>
+Successfully built <image_id>
         ```
         {: screen}
 
     3.  将应用程序的第一部分作为映像推送到专用注册表名称空间中。等待映像推送完后，再继续执行下一步。
 
         ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson
+docker push registry.<region>.bluemix.net/<namespace>/watson
         ```
         {: pre}
 
@@ -542,14 +538,14 @@ lastupdated: "2018-05-24"
     1.  浏览到 `watson-talk` 目录。
 
         ```
-        cd 'container-service-getting-started-wt/Lab 3/watson-talk'
+cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
         {: pre}
 
     2.  将应用程序的第二部分作为映像在本地进行构建和标记。同样，不要忘记在命令末尾输入句点 (`.`)。
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -557,28 +553,28 @@ lastupdated: "2018-05-24"
 
 
         ```
-        Successfully built <image_id>
+Successfully built <image_id>
         ```
         {: screen}
 
     3.  将应用程序的第二部分推送到专用注册表名称空间中。等待映像推送完后，再继续执行下一步。
 
         ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson-talk
+docker push registry.<region>.bluemix.net/<namespace>/watson-talk
         ```
         {: pre}
 
 5.  验证映像是否已成功添加到注册表名称空间。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
 
     ```
-    bx cr images
+    ibmcloud cr images
     ```
     {: pre}
 
     输出示例：
 
     ```
-    Listing images...
+Listing images...
 
     REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
     registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
@@ -595,14 +591,14 @@ lastupdated: "2018-05-24"
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+image: "registry.<region>.bluemix.net/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+image: "registry.<region>.bluemix.net/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -611,7 +607,7 @@ lastupdated: "2018-05-24"
 
 
         ```
-        volumes:
+volumes:
                 - name: service-bind-volume
                   secret:
                     defaultMode: 420
@@ -640,7 +636,7 @@ lastupdated: "2018-05-24"
     1.  要获取 watson pod 的名称，请运行以下命令。
 
         ```
-        kubectl get pods
+kubectl get pods
         ```
         {: pre}
 
@@ -678,7 +674,7 @@ lastupdated: "2018-05-24"
     示例：
 
     ```
-    http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
+http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
     {: screen}
 
@@ -698,8 +694,8 @@ lastupdated: "2018-05-24"
 1.  打开正在运行的部署的配置详细信息。
 
     ```
-    kubectl edit deployment/watson-talk-pod
-    ```
+        kubectl edit deployment/watson-talk-pod
+        ```
     {: pre}
 
     根据操作系统，将打开 vi 编辑器或文本编辑器。
@@ -707,7 +703,7 @@ lastupdated: "2018-05-24"
 2.  将映像的名称更改为 ibmliberty 映像。
 
     ```
-    spec:
+spec:
           containers:
           - image: registry.<region>.bluemix.net/ibmliberty:latest
     ```
@@ -718,15 +714,15 @@ lastupdated: "2018-05-24"
 4.  将更改应用于正在运行的部署。
 
     ```
-    kubectl rollout status deployment/watson-talk-pod
-    ```
+        kubectl rollout status deployment/watson-talk-pod
+        ```
     {: pre}
 
     等待有关应用完成的确认。
 
 
     ```
-    deployment "watson-talk-pod" successfully rolled out
+deployment "watson-talk-pod" successfully rolled out
     ```
     {: screen}
 
@@ -757,7 +753,7 @@ lastupdated: "2018-05-24"
   如果不希望保留集群，还可以删除该集群。
 
   ```
-  bx cs cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -768,4 +764,4 @@ lastupdated: "2018-05-24"
 
 - 完成存储库中[更复杂的实验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
 - 使用 {{site.data.keyword.containershort_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
-- 在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上浏览容器编排过程
+- 在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/technologies/container-orchestration/) 上浏览容器编排代码模式

@@ -1,29 +1,40 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
-IBM Cloud Container Service
+{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers/container_index.html"}
+IBM Cloud
+Kubernetes
+Service
 
     {: .navgroup id="learn"}
     container_index.md
     
-    
+
     {: .topicgroup}
     Sobre
         cs_why.md
         cs_tech.md
+
+    {: .topicgroup}
+    Sua estratégia de cluster
+        cs_responsibilities.md
         cs_secure.md
+        cs_ha.md
 
     {: .topicgroup}
     Tutoriais
         cs_tutorials.md
         cs_tutorials_apps.md
         cs_tutorials_istio.md
+        cs_tutorials_cf.md
+        cs_tutorials_policies.md
+        [Tutorial: mover um aplicativo baseado em VM para o Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: criar um cluster multiregion usando o Cloud Internet Services](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
-    
+
     {: .topicgroup}
     Administrando clusters
         cs_clusters.md
@@ -31,52 +42,61 @@ IBM Cloud Container Service
         cs_network_policy.md
         cs_cluster_update.md
         cs_users.md
-        cs_infrastructure.md
+        cs_psp.md
         cs_edge.md
         cs_health.md
-    
+
     cs_images.md
     cs_app.md
-    
+
     {: .topicgroup}
     Rede para expor apps
         cs_network_planning.md
         cs_nodeport.md
         cs_loadbalancer.md
         cs_ingress.md
+        cs_annotations.md
+        cs_ingress_health.md
         cs_vpn.md
         cs_subnets.md
-    
-    cs_storage.md
+
+    {: .topicgroup}
+    Armazenando dados em armazenamento persistente
+        cs_storage_planning.md
+        cs_storage_basics.md
+        cs_storage_file.md
+        cs_storage_block.md
+        cs_storage_remove.md
+
     cs_integrations.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_cli_reference.md
-    cs_versions.md
-    cs_regions.md
-    cs_annotations.md
+    cs_at_events.md
 
     {: .topicgroup}
-    IBM Cloud Dedicated
+    Versões do IBM Cloud Kubernetes Service
+        cs_versions.md
+        cs_versions_changelog.md
+
+    cs_regions.md
+    [Nuvem híbrida](cs_hybrid.html#hybrid_iks_icp)
+
+    {: .topicgroup}
+    Nuvem dedicada
         cs_dedicated.md
-        [Descontinuado: executando contêineres únicos e escaláveis](cs_classic.html)
-            [Migrando os contêineres únicos e escaláveis para clusters do Kubernetes](cs_classic.html#cs_classic_migrating)
-            [Sobre contêineres únicos e escaláveis](container_ov.html)
-            [Planejando contêineres únicos e escaláveis](container_planning.html)
-            [Segurança para contêineres únicos e escaláveis](container_security.html)
-            [Configurando a CLI para contêineres únicos e escaláveis](container_cli_cfic_install.html)
-            [Imagens da IBM](../services/RegistryImages/index.html)
-            [Executando tarefas de curto prazo como contêineres](container_single_ui.html)
-            [Executando grupos altamente disponíveis](container_ha.html)
-            [Armazenando dados persistentes para contêineres únicos e escaláveis](container_volumes_ov.html)
-            [Integração de serviços com contêineres únicos e escaláveis](container_integrations.html)
-            [Integração de serviços com contêineres únicos e escaláveis](container_cli_reference_cfic.html)
-            [Solução de problemas de contêineres únicos e escaláveis](container_troubleshoot.html)
+        [Descontinuado: executando contêineres únicos e escaláveis](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
     {: .navgroup-end}
 
     {: .navgroup id="help"}
-    cs_troubleshoot.md
-    cs_popular_topics.md
-    cs_rellinks.md
+    {: .topicgroup}
+    Resolução de problemas de clusters
+        cs_troubleshoot.md
+        cs_troubleshoot_clusters.md
+        cs_troubleshoot_storage.md
+        cs_troubleshoot_health.md
+        cs_troubleshoot_network.md
+
+    cs_popular_topics.md cs_rellinks.md
     {: .navgroup-end}

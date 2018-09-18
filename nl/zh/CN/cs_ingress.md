@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,43 +16,60 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-
-
 # 使用 Ingress 公开应用程序
 {: #ingress}
 
 通过创建在 {{site.data.keyword.containerlong}} 中由 IBM 提供的应用程序负载均衡器管理的 Ingress 资源，公开 Kubernetes 集群中的多个应用程序。
 {:shortdesc}
 
-## 使用 Ingress 管理网络流量
+## Ingress 组件和体系结构
 {: #planning}
 
-Ingress 是一种 Kubernetes 服务，通过将公共或专用请求转发到应用程序，均衡集群中的网络流量工作负载。可以使用 Ingress 通过唯一的公共或专用路径，向公用或专用网络公开多个应用程序服务。
+Ingress 是一种 Kubernetes 服务，通过将公共或专用请求转发到应用程序，均衡集群中的网络流量工作负载。可以使用 Ingress 通过唯一的公共或专用路径，向公共或专用网络公开多个应用程序服务。
 {:shortdesc}
 
-
-
-Ingress 由两个组件组成：
+**Ingress 随附了哪些组件？**</br>
+Ingress 由三个组件组成：
 <dl>
-<dt>应用程序负载均衡器</dt>
-<dd>应用程序负载均衡器 (ALB) 是一种外部负载均衡器，用于侦听入局 HTTP、HTTPS、TCP 或 UDP 服务请求，并将这些请求转发到相应的应用程序 pod。创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性 ALB，并为其分配唯一公共路径。该公共路径链接到在集群创建期间供应到 IBM Cloud infrastructure (SoftLayer) 帐户中的可移植公共 IP 地址。另外，还会自动创建缺省专用 ALB，但不会自动启用该 ALB。</dd>
 <dt>Ingress 资源</dt>
-<dd>要使用 Ingress 公开应用程序，必须为应用程序创建 Kubernetes 服务，并通过定义 Ingress 资源向 ALB 注册此服务。Ingress 资源是一种 Kubernetes 资源，定义了有关如何对应用程序的入局请求进行路由的规则。Ingress 资源还指定应用程序服务的路径，该路径附加到公共路径，以构成唯一的应用程序 URL，例如 `mycluster.us-south.containers.appdomain.cloud/myapp`。<br></br><strong>注</strong>：从 2018 年 5 月 24 日开始，更改了新集群的 Ingress 子域格式。<ul><li>对于 2018 年 5 月 24 日之后创建的集群，将为其分配新格式的子域：<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>。</li><li>2018 年 5 月 24 日之前创建的集群将继续使用分配的旧格式子域：<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>。</li></ul></dd>
+<dd>要使用 Ingress 公开应用程序，必须为应用程序创建 Kubernetes 服务，并通过定义 Ingress 资源向 Ingress 注册此服务。Ingress 资源是一种 Kubernetes 资源，定义了有关如何对应用程序的入局请求进行路由的规则。Ingress 资源还指定应用程序服务的路径，该路径附加到公共路径，以构成唯一的应用程序 URL，例如 `mycluster.us-south.containers.appdomain.cloud/myapp1`。<br></br>**注**：从 2018 年 5 月 24 日开始，更改了新集群的 Ingress 子域格式。新的子域格式中包含的区域或专区名称是根据在其中创建集群的专区生成的。如果您具有对一致应用程序域名的管道依赖项，那么可以使用自己的定制域，而不使用 IBM 提供的 Ingress 子域。<ul><li>对于 2018 年 5 月 24 日之后创建的所有集群，将为其分配新格式的子域：<code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>。</li><li>2018 年 5 月 24 日之前创建的单专区集群将继续使用旧格式的已分配子域：<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>。</li><li>如果您第一次通过[向集群添加专区](cs_clusters.html#add_zone)来更改在 2018 年 5 月 24 日之前创建的单专区集群，那么集群将继续使用旧格式的已分配子域 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>，同时会为其分配使用新格式的子域 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>。可以使用其中任一种子域。</li></ul></br>**多专区集群**：Ingress 资源是全局资源，对于多专区集群，每个名称空间只需要一个 Ingress 资源。</dd>
+<dt>应用程序负载均衡器 (ALB)</dt>
+<dd>应用程序负载均衡器 (ALB) 是一种外部负载均衡器，用于侦听入局 HTTP、HTTPS、TCP 或 UDP 服务请求。然后，ALB 会根据 Ingress 资源中定义的规则将请求转发到相应的应用程序 pod。创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性 ALB，并为其分配唯一公共路径。该公共路径链接到在集群创建期间供应到 IBM Cloud Infrastructure (SoftLayer) 帐户中的可移植公共 IP 地址。另外，还会自动创建缺省专用 ALB，但不会自动启用该 ALB。<br></br>**多专区集群**：向集群添加专区时，会添加一个可移植公用子网，并在该专区的子网上自动创建并启用新的公共 ALB。集群中的所有缺省公共 ALB 都共享一个公共路径，但具有不同的 IP 地址。另外，还会在每个专区中自动创建缺省专用 ALB，但不会自动将其启用。</dd>
+<dt>多专区负载均衡器 (MZLB)</dt>
+<dd><p>**多专区集群**：首次通过[向集群添加专区](cs_clusters.html#add_zone)将集群从单专区更改为多专区时，多专区负载均衡器 (MZLB) 会自动创建并部署到具有工作程序的每个专区中。MZLB 运行状况检查会检查集群的每个专区中的 ALB，并根据这些运行状况检查来使 DNS 查找结果保持更新。例如，如果 ALB 具有 IP 地址 `1.1.1.1`、`2.2.2.2` 和 `3.3.3.3`，那么 Ingress 子域的正常操作 DNS 查找将返回所有 3 个 IP，客户机可以随机访问其中 1 个 IP 地址。如果 IP 地址为 `3.3.3.3` 的 ALB 出于任何原因而变得不可用，那么 MZLB 运行状况检查会失败，DNS 查找将返回可用的 `1.1.1.1` 和 `2.2.2.2` ALB IP，并且客户机会访问其中一个可用的 ALB IP。</p>
+<p>MZLB 仅对使用 IBM 提供的 Ingress 子域的公共 ALB 进行负载均衡。如果仅使用了专用 ALB，那么必须手动检查 ALB 的运行状况，并更新 DNS 查找结果。如果使用的是采用定制域的公共 ALB，那么可以通过在 DNS 条目中创建 CNAME 以在 MZLB 负载均衡中包含这些 ALB，从而将请求从定制域转发到集群的 IBM 提供的 Ingress 子域。</p>
+<p><strong>注</strong>：如果使用 Calico DNAT 前网络策略来阻止所有入局流量流至 Ingress 服务，那么还必须将用于检查 ALB 运行状况的 <a href="https://www.cloudflare.com/ips/">Cloudflare 的 IPv4 IP <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 列入白名单。有关如何创建 Calico DNAT 前策略以将这些 IP 列入白名单的步骤，请参阅 <a href="cs_tutorials_policies.html#lesson3">Calico 网络策略教程</a>中的第 3 课。</dd>
 </dl>
 
-下图显示 Ingress 如何将通信从因特网定向到应用程序：
+**请求如何通过 Ingress 到达单专区集群中的应用程序？**</br>
+下图显示 Ingress 如何将通信从因特网定向到单专区集群中的应用程序：
 
-<img src="images/cs_ingress.png" width="550" alt="使用 Ingress 在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:550px; border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" alt="使用 Ingress 公开单专区集群中的应用程序" style="border-style: none"/>
 
 1. 用户通过访问应用程序的 URL 向应用程序发送请求。此 URL 是已公开应用程序的公共 URL，并附加有 Ingress 资源路径，例如 `mycluster.us-south.containers.appdomain.cloud/myapp`。
 
-2. 充当全局负载均衡器的 DNS 系统服务会将该 URL 解析为集群中缺省公共 ALB 的可移植公共 IP 地址。请求将路由到应用程序的 Kubernetes ALB 服务。
+2. DNS 系统服务将 URL 中的主机名解析为用于公开集群中 ALB 的负载均衡器的可移植公共 IP 地址。
 
-3. Kubernetes 服务将请求路由到 ALB。
+3. 根据解析的 IP 地址，客户机将请求发送到用于公开 ALB 的 LoadBalancer 服务。
 
-4. ALB 会检查集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么会根据在 Ingress 资源中定义的规则，将请求转发到部署了应用程序的 pod。如果集群中部署了多个应用程序实例，那么 ALB 会在应用程序 pod 之间对请求进行负载均衡。
+4. LoadBalancer 服务将请求路由到 ALB。
 
+5. ALB 会检查集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么会根据在 Ingress 资源中定义的规则，将请求转发到部署了应用程序的 pod。包的源 IP 地址将更改为运行应用程序 pod 的工作程序节点的公共 IP 地址。如果集群中部署了多个应用程序实例，那么 ALB 会在应用程序 pod 之间对请求进行负载均衡。
 
+**请求如何通过 Ingress 到达多专区集群中的应用程序？**</br>
+下图显示 Ingress 如何将通信从因特网定向到多专区集群中的应用程序：
+
+<img src="images/cs_ingress_multizone.png" alt="使用 Ingress 公开多专区集群中的应用程序" style="border-style: none"/>
+
+1. 用户通过访问应用程序的 URL 向应用程序发送请求。此 URL 是已公开应用程序的公共 URL，并附加有 Ingress 资源路径，例如 `mycluster.us-south.containers.appdomain.cloud/myapp`。
+
+2. 充当全局负载均衡器的 DNS 系统服务将 URL 中的主机名解析为 MZLB 报告为运行状况正常的可用 IP 地址。MZLB 会持续检查用于公开集群中公共 ALB 的 LoadBalancer 服务的可移植公共 IP 地址。IP 地址在循环周期中进行解析，确保请求在不同专区中运行状况正常的 ALB 之间进行均匀负载均衡。
+
+3. 客户机向用于公开 ALB 的 LoadBalancer 服务的 IP 地址发送请求。
+
+4. LoadBalancer 服务将请求路由到 ALB。
+
+5. ALB 会检查集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么会根据在 Ingress 资源中定义的规则，将请求转发到部署了应用程序的 pod。包的源 IP 地址将更改为运行应用程序 pod 的工作程序节点的公共 IP 地址。如果集群中部署了多个应用程序实例，那么 ALB 会在跨所有专区的应用程序 pod 之间对请求进行负载均衡。
 
 <br />
 
@@ -64,10 +81,13 @@ Ingress 由两个组件组成：
 {:shortdesc}
 
 **所有 Ingress 配置的先决条件：**
-- Ingress 仅可用于标准集群，并要求集群中至少有两个工作程序节点以确保高可用性，同时要求定期进行更新。
+- Ingress 仅可用于标准集群，并要求至少每个专区有两个工作程序节点以确保高可用性，同时要求定期进行更新。
 - 设置 Ingress 需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
-
+**在多专区集群中使用 Ingress 的先决条件**：
+ - 如果将网络流量限制为[边缘工作程序节点](cs_edge.html)，那么每个专区必须至少启用 2 个边缘工作程序节点，才可实现 Ingress pod 的高可用性。[创建边缘节点工作程序池](cs_clusters.html#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序节点。
+ - 要支持不同专区中的工作程序之间通过专用网络进行通信，必须启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+ - 如果某个专区发生故障，那么您可能会看到对该专区中 Ingress ALB 的请求中出现间歇性故障。
 
 <br />
 
@@ -84,22 +104,23 @@ Ingress 由两个组件组成：
 <br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="每个名称空间至少需要一个资源。" style="width:300px; border-style: none"/>
 </dd>
 <dt>应用程序位于多个名称空间中</dt>
-<dd>如果集群中的应用程序位于不同的名称空间中，那么必须为每个名称空间至少创建一个资源，以定义在其中公开的应用程序的规则。要向集群的 Ingress ALB 注册多个 Ingress 资源，必须使用通配符域。如果已注册通配符域（例如 `*.mycluster.us-sous.containers.appdomain.cloud`），那么多个子域将全部解析为同一主机。然后，可以在每个名称空间中创建 Ingress 资源，并在每个 Ingress 资源中指定不同的子域。
+<dd>如果集群中的应用程序位于不同的名称空间中，那么必须为每个名称空间至少创建一个资源，以定义在其中公开的应用程序的规则。要向集群的 Ingress ALB 注册多个 Ingress 资源，必须使用通配符域。如果已注册通配符域（例如 `*.domain.net`），那么多个子域将全部解析为同一主机。然后，可以在每个名称空间中创建 Ingress 资源，并在每个 Ingress 资源中指定不同的子域。
 <br><br>
 例如，假设有以下场景：<ul>
 <li>您有同一应用程序的两个版本 `app1` 和 `app3` 用于测试。</li>
 <li>您将应用程序部署在同一集群的两个不同名称空间中：`app1` 部署在开发名称空间中，`app3` 部署在编译打包名称空间中。</li></ul>
 要使用同一集群 ALB 来管理这两个应用程序的流量，请创建以下服务和资源：<ul>
 <li>在开发名称空间中创建 Kubernetes 服务，用于公开 `app1`。</li>
-<li>在开发名称空间中创建 Ingress 资源，用于将主机指定为 `dev.mycluster.us-south.containers.appdomain.cloud`。</li>
+<li>在将主机指定为 `dev.domain.net` 的开发名称空间中创建 Ingress 资源。</li>
 <li>在编译打包名称空间中创建 Kubernetes 服务，用于公开 `app3`。</li>
-<li>在编译打包名称空间中创建 Ingress 资源，用于将主机指定为 `stage.mycluster.us-south.containers.appdomain.cloud`。</li></ul></br>
+<li>在将主机指定为 `stage.domain.net` 的编译打包名称空间中创建 Ingress 资源。</li></ul></br>
 <img src="images/cs_ingress_multi_ns.png" alt="在名称空间内，使用一个或多个资源中的子域。" style="border-style: none"/>
-现在，这两个 URL 会解析为同一个域，因此都由同一 ALB 进行维护。但是，由于编译打包名称空间中的资源已向 `stage` 子域注册，因此 Ingress ALB 会将来自 `stage.mycluster.us-south.containers.appdomain.cloud/app3` URL 的请求正确路由到仅 `app3`。</dd>
+现在，这两个 URL 会解析为同一个域，因此都由同一 ALB 进行维护。但是，由于编译打包名称空间中的资源已向 `stage` 子域注册，因此 Ingress ALB 会将来自 `stage.domain.net/app3` URL 的请求正确路由到仅 `app3`。</dd>
 </dl>
 
+{: #wildcard_tls}
 **注**：
-* 缺省情况下，已为集群注册 IBM 提供的 Ingress 子域通配符 `*.<cluster_name>.<region>.containers.appdomain.cloud`。但是，IBM 提供的 Ingress 子域通配符不支持 TLS。
+* 缺省情况下，已为集群注册 IBM 提供的 Ingress 子域通配符 `*.<cluster_name>.<region>.containers.appdomain.cloud`。对于在 2018 年 6 月 6 日或之后创建的集群，IBM 提供的 Ingress 子域 TLS 证书是通配符证书，可用于已注册的通配符子域。对于在 2018 年 6 月 6 日之前创建的集群，在更新当前 TLS 证书时，TLS 证书会更新为通配符证书。
 * 如果要使用定制域，您必须将定制域注册为通配符域，例如 `*.custom_domain.net`。要使用 TLS，必须获取通配符证书。
 
 ### 一个名称空间内多个域
@@ -110,7 +131,7 @@ Ingress 由两个组件组成：
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="每个名称空间至少需要一个资源。" style="border-style: none"/>
 
 **注**：
-* 缺省情况下，已为集群注册 IBM 提供的 Ingress 子域通配符 `*.<cluster_name>.<region>.containers.appdomain.cloud`。但是，IBM 提供的 Ingress 子域通配符不支持 TLS。
+* 缺省情况下，已为集群注册 IBM 提供的 Ingress 子域通配符 `*.<cluster_name>.<region>.containers.appdomain.cloud`。对于在 2018 年 6 月 6 日或之后创建的集群，IBM 提供的 Ingress 子域 TLS 证书是通配符证书，可用于已注册的通配符子域。对于在 2018 年 6 月 6 日之前创建的集群，在更新当前 TLS 证书时，TLS 证书会更新为通配符证书。
 * 如果要使用定制域，您必须将定制域注册为通配符域，例如 `*.custom_domain.net`。要使用 TLS，必须获取通配符证书。
 
 <br />
@@ -124,9 +145,8 @@ Ingress 由两个组件组成：
 
 开始之前：
 
--   查看 Ingress [先决条件](#config_prereqs)。
--   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
--   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
+* 查看 Ingress [先决条件](#config_prereqs)。
+* [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
 ### 步骤 1：部署应用程序并创建应用程序服务
 {: #public_inside_1}
@@ -137,14 +157,14 @@ Ingress 由两个组件组成：
 1.  [将应用程序部署到集群](cs_app.html#app_cli)。确保在配置文件的 metadata 部分中向部署添加标签，例如 `app: code`。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
 2.   针对要公开的每个应用程序创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开才能被集群 ALB 包含在 Ingress 负载均衡中。
-      1.  打开首选编辑器，并创建服务配置文件，例如名为 `myapp_service.yaml`。
+      1.  打开首选编辑器，并创建服务配置文件，例如名为 `myappservice.yaml`。
       2.  针对 ALB 将公开的应用程序定义服务。
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -172,7 +192,7 @@ Ingress 由两个组件组成：
       4.  在集群中创建服务。如果应用程序部署在集群中的多个名称空间中，请确保该服务部署到要公开的应用程序所在的名称空间中。
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  针对要公开的每一个应用程序，重复上述步骤。
@@ -186,16 +206,16 @@ Ingress 由两个组件组成：
 
 <dl>
 <dt>域</dt>
-<dd>可以使用 IBM 提供的域（例如 <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>）通过因特网访问应用程序。要改为使用定制域，可以将定制域映射到 IBM 提供的域或 ALB 的公共 IP 地址。</dd>
+<dd>可以使用 IBM 提供的域（例如 <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>）通过因特网访问应用程序。要改为使用定制域，可以设置 CNAME 记录，以将定制域映射到 IBM 提供的域，或者通过使用 ALB 公共 IP 地址的 DNS 提供程序设置 A 记录。</dd>
 <dt>TLS 终止</dt>
-<dd>ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。如果使用的是 IBM 提供的 Ingress 子域，那么可以使用 IBM 提供的 TLS 证书。目前，IBM 提供的通配符子域不支持 TLS。如果使用的是定制域，那么可以使用您自己的 TLS 证书来管理 TLS 终止。</dd>
+<dd>ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。<ul><li>如果使用的是 IBM 提供的 Ingress 子域，那么可以使用 IBM 提供的 TLS 证书。IBM 提供的 TLS 证书由 LetsEncrypt 签署，并由 IBM 全面管理。证书将每 90 天到期一次，并在到期前 7 天会自动更新。</li><li>如果使用定制域，那么可以使用自己的 TLS 证书来管理 TLS 终止。如果仅在一个名称空间中具有应用程序，那么可以在同一名称空间中导入或创建证书的 TLS 私钥。如果在多个名称空间中具有应用程序，请在 <code>default</code> 名称空间中导入或创建证书的 TLS 私钥，以便 ALB 可以在每个名称空间中访问和使用该证书。</li></ul></dd>
 </dl>
 
 要使用 IBM 提供的 Ingress 域，请执行以下操作：
 1. 获取集群的详细信息。将 _&lt;cluster_name_or_ID&gt;_ 替换为要公开的应用程序部署所在集群的名称。
 
     ```
-        bx cs cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -206,38 +226,38 @@ Ingress 由两个组件组成：
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.7
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
 2. 获取 **Ingress subdomain** 字段中 IBM 提供的域。如果要使用 TLS，还请获取 **Ingress Secret** 字段中 IBM 提供的 TLS 私钥。
-    **注**：如果使用的是通配符子域，那么不支持 TLS。
+    **注**：有关通配符 TLS 证书的信息，请参阅[此注释](#wildcard_tls)。
 
 要使用定制域，请执行以下操作：
 1.    创建定制域。要注册定制域，请使用您的域名服务 (DNS) 提供者或 [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)。
       * 如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
 
 2.  配置域以将入局网络流量路由到 IBM 提供的 ALB。在以下选项之间进行选择：
-    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要找到 IBM 提供的 Ingress 域，请运行 `bx cs cluster-get <cluster_name>` 并查找 **Ingress subdomain** 字段。
-    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `bx cs alb-get <public_alb_ID>`.
-3.   可选：如果要使用 TLS，请导入或创建 TLS 证书和私钥。如果要使用通配符域，请确保导入或创建通配符证书。
+    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要查找 IBM 提供的 Ingress 域，请运行 `ibmcloud ks cluster-get <cluster_name>` 并查找 **Ingress subdomain** 字段。
+    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `ibmcloud ks alb-get <public_alb_ID>`。
+3.   可选：要使用 TLS，请导入或创建 TLS 证书和私钥。如果使用通配符域，请确保在 <code>default</code> 名称空间中导入或创建通配符证书，以便 ALB 可以在每个名称空间中访问并使用该证书。
       * 如果要使用存储在 {{site.data.keyword.cloudcerts_long_notm}} 中的 TLS 证书，那么可以通过运行以下命令，将其关联的私钥导入到集群：
         ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ```
         {: pre}
       * 如果还没有 TLS 证书，请执行以下步骤：
         1. 为域创建以 PEM 格式编码的 TLS 证书和密钥。
         2. 定义使用您的 TLS 证书和密钥的私钥。将 <em>&lt;tls_secret_name&gt;</em> 替换为您的 Kubernetes 私钥的名称，将 <em>&lt;tls_key_filepath&gt;</em> 替换为定制 TLS 密钥文件的路径，并将 <em>&lt;tls_cert_filepath&gt;</em> 替换为定制 TLS 证书文件的路径。
           ```
-            kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
-            ```
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
+          ```
           {: pre}
 
 
@@ -315,8 +335,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td><ul><li>如果要使用 IBM 提供的 Ingress 域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为 IBM 提供的 Ingress 私钥的名称。</li><li>如果要使用定制域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为您先前创建用于保存定制 TLS 证书和密钥的私钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。
-        </li><ul><td>
+    <td><ul><li>如果使用 IBM 提供的 Ingress 域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为 IBM 提供的 Ingress 私钥的名称。</li><li>如果使用定制域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为您先前创建用于保存定制 TLS 证书和密钥的私钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。</li><ul><td>
     </tr>
     <tr>
     <td><code>host</code></td>
@@ -352,7 +371,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
 4.   验证 Ingress 资源是否已成功创建。
 
       ```
-            kubectl describe ingress myingressresource
+      kubectl describe ingress myingressresource
       ```
       {: pre}
 
@@ -403,9 +422,8 @@ http://<subdomain2>.<domain>/<app1_path>
 开始之前：
 
 -   查看 Ingress [先决条件](#config_prereqs)。
--   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
--   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 -   确保要包含在集群负载均衡中的外部应用程序可以使用公共 IP 地址进行访问。
+-   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
 ### 步骤 1：创建应用程序服务和外部端点
 {: #public_outside_1}
@@ -418,7 +436,7 @@ http://<subdomain2>.<domain>/<app1_path>
     2.  针对 ALB 将公开的应用程序定义服务。
 
         ```
-        apiVersion: v1
+apiVersion: v1
         kind: Service
         metadata:
           name: myexternalservice
@@ -457,7 +475,7 @@ http://<subdomain2>.<domain>/<app1_path>
 
 
         ```
-        kind: Endpoints
+kind: Endpoints
         apiVersion: v1
         metadata:
           name: myexternalendpoint
@@ -491,7 +509,7 @@ http://<subdomain2>.<domain>/<app1_path>
     4.  为集群创建 Kubernetes 端点。
 
         ```
-                kubectl apply -f myexternalendpoint.yaml
+        kubectl apply -f myexternalendpoint.yaml
         ```
         {: pre}
 
@@ -503,16 +521,16 @@ http://<subdomain2>.<domain>/<app1_path>
 
 <dl>
 <dt>域</dt>
-<dd>可以使用 IBM 提供的域（例如 <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>）通过因特网访问应用程序。要改为使用定制域，可以将定制域映射到 IBM 提供的域或 ALB 的公共 IP 地址。</dd>
+<dd>可以使用 IBM 提供的域（例如 <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>）通过因特网访问应用程序。要改为使用定制域，可以设置 CNAME 记录，以将定制域映射到 IBM 提供的域，或者通过使用 ALB 公共 IP 地址的 DNS 提供程序设置 A 记录。</dd>
 <dt>TLS 终止</dt>
-<dd>ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。如果使用的是 IBM 提供的 Ingress 子域，那么可以使用 IBM 提供的 TLS 证书。目前，IBM 提供的通配符子域不支持 TLS。如果使用的是定制域，那么可以使用您自己的 TLS 证书来管理 TLS 终止。</dd>
+<dd>ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。<ul><li>如果使用的是 IBM 提供的 Ingress 子域，那么可以使用 IBM 提供的 TLS 证书。IBM 提供的 TLS 证书由 LetsEncrypt 签署，并由 IBM 全面管理。证书将每 90 天到期一次，并在到期前 7 天会自动更新。</li><li>如果使用定制域，那么可以使用自己的 TLS 证书来管理 TLS 终止。如果仅在一个名称空间中具有应用程序，那么可以在同一名称空间中导入或创建证书的 TLS 私钥。如果在多个名称空间中具有应用程序，请在 <code>default</code> 名称空间中导入或创建证书的 TLS 私钥，以便 ALB 可以在每个名称空间中访问和使用该证书。</li></ul></dd>
 </dl>
 
 要使用 IBM 提供的 Ingress 域，请执行以下操作：
 1. 获取集群的详细信息。将 _&lt;cluster_name_or_ID&gt;_ 替换为要公开的应用程序部署所在集群的名称。
 
     ```
-        bx cs cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -523,38 +541,38 @@ http://<subdomain2>.<domain>/<app1_path>
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.7
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
 2. 获取 **Ingress subdomain** 字段中 IBM 提供的域。如果要使用 TLS，还请获取 **Ingress Secret** 字段中 IBM 提供的 TLS 私钥。
-    **注**：如果使用的是通配符子域，那么不支持 TLS。
+    **注**：有关通配符 TLS 证书的信息，请参阅[此注释](#wildcard_tls)。
 
 要使用定制域，请执行以下操作：
 1.    创建定制域。要注册定制域，请使用您的域名服务 (DNS) 提供者或 [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)。
       * 如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
 
 2.  配置域以将入局网络流量路由到 IBM 提供的 ALB。在以下选项之间进行选择：
-    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要找到 IBM 提供的 Ingress 域，请运行 `bx cs cluster-get <cluster_name>` 并查找 **Ingress subdomain** 字段。
-    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `bx cs alb-get <public_alb_ID>`.
-3.   可选：如果要使用 TLS，请导入或创建 TLS 证书和私钥。如果要使用通配符域，请确保导入或创建通配符证书。
+    -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要查找 IBM 提供的 Ingress 域，请运行 `ibmcloud ks cluster-get <cluster_name>` 并查找 **Ingress subdomain** 字段。
+    -   通过将 IBM 提供的 ALB 的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找 ALB 的可移植公共 IP 地址，请运行 `ibmcloud ks alb-get <public_alb_ID>`.
+3.   可选：要使用 TLS，请导入或创建 TLS 证书和私钥。如果使用通配符域，请确保在 <code>default</code> 名称空间中导入或创建通配符证书，以便 ALB 可以在每个名称空间中访问并使用该证书。
       * 如果要使用存储在 {{site.data.keyword.cloudcerts_long_notm}} 中的 TLS 证书，那么可以通过运行以下命令，将其关联的私钥导入到集群：
         ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ```
         {: pre}
       * 如果还没有 TLS 证书，请执行以下步骤：
         1. 为域创建以 PEM 格式编码的 TLS 证书和密钥。
         2. 定义使用您的 TLS 证书和密钥的私钥。将 <em>&lt;tls_secret_name&gt;</em> 替换为您的 Kubernetes 私钥的名称，将 <em>&lt;tls_key_filepath&gt;</em> 替换为定制 TLS 密钥文件的路径，并将 <em>&lt;tls_cert_filepath&gt;</em> 替换为定制 TLS 证书文件的路径。
           ```
-            kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
-            ```
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
+          ```
           {: pre}
 
 
@@ -632,8 +650,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td><ul><li>如果要使用 IBM 提供的 Ingress 域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为 IBM 提供的 Ingress 私钥的名称。</li><li>如果要使用定制域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为您先前创建用于保存定制 TLS 证书和密钥的私钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。
-        </li><ul><td>
+    <td><ul><li>如果使用 IBM 提供的 Ingress 域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为 IBM 提供的 Ingress 私钥的名称。</li><li>如果使用定制域，请将 <em>&lt;tls_secret_name&gt;</em> 替换为您先前创建用于保存定制 TLS 证书和密钥的私钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。</li><ul><td>
     </tr>
     <tr>
     <td><code>rules/host</code></td>
@@ -669,7 +686,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
 4.   验证 Ingress 资源是否已成功创建。
 
       ```
-            kubectl describe ingress myingressresource
+      kubectl describe ingress myingressresource
       ```
       {: pre}
 
@@ -714,37 +731,42 @@ http://<subdomain2>.<domain>/<app1_path>
 ## 启用缺省专用 ALB
 {: #private_ingress}
 
-创建标准集群时，会创建 IBM 提供的专用应用程序负载均衡器 (ALB)，并为其分配可移植专用 IP 地址和专用路径。但是，不会自动启用缺省专用 ALB。要使用专用 ALB 对流至应用程序的专用网络流量进行负载均衡，必须先使用 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此 ALB。
+创建标准集群时，会在具有工作程序节点的每个专区中创建 IBM 提供的专用应用程序负载均衡器 (ALB)，并为其分配可移植专用 IP 地址和专用路径。但是，不会自动启用每个专区中的缺省专用 ALB。要使用缺省专用 ALB 对流至应用程序的专用网络流量进行负载均衡，必须先使用 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此 ALB。
 {:shortdesc}
 
 **注**：如果在创建集群时使用了 `--no-subnet` 标志，那么必须先添加可移植专用子网或用户管理的子网，然后才能启用专用 ALB。有关更多信息，请参阅[为集群请求更多子网](cs_subnets.html#request)。
 
 开始之前：
 
--   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
+-   在工作程序节点连接到[公用和专用 VLAN](cs_network_planning.html#private_both_vlans) 或连接到[仅专用 VLAN](cs_network_planning.html#private_vlan) 时，查看用于规划应用程序专用访问权的选项。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 
-要使用预先分配的 IBM 提供的可移植专用 IP 地址来启用专用 ALB，请执行以下操作：
+要使用预先分配的 IBM 提供的可移植专用 IP 地址来启用缺省专用 ALB，请执行以下操作：
 
-1. 列出集群中的可用 ALB，以获取专用 ALB 的标识。将 <em>&lt;cluser_name&gt;</em> 替换为部署了要公开的应用程序的集群的名称。
+1. 获取要启用的缺省专用 ALB 的标识。将 <em>&lt;cluster_name&gt;</em> 替换为部署了要公开的应用程序的集群的名称。
 
     ```
-        bx cs albs --cluster <cluser_name>
+    ibmcloud ks albs --cluster <cluster_name>
     ```
     {: pre}
 
     专用 ALB 的 **Status** 字段为 _disabled_。
     ```
-        ALB ID                                            Enabled   Status     Type      ALB IP
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
     ```
     {: screen}
+    在多专区集群中，ALB ID 的编号后缀指示添加 ALB 的顺序。
+    * 例如，ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` 的 `-alb1` 后缀指示这是创建的第一个缺省专用 ALB。它位于在其中创建集群的专区中。在以上示例中，集群是在 `dal10` 中创建的。
+    * ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` 的 `-alb2` 后缀指示这是创建的第二个缺省专用 ALB。它位于添加到集群的第二个专区中。在以上示例中，第二个专区为 `dal12`。
 
 2. 启用专用 ALB。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用 ALB 的标识。
 
    ```
-   bx cs alb-configure --albID <private_ALB_ID> --enable
+   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable
    ```
    {: pre}
 
@@ -754,7 +776,7 @@ http://<subdomain2>.<domain>/<app1_path>
 1. 为所选 IP 地址配置用户管理的子网，以在集群的专用 VLAN 上路由流量。
 
    ```
-   bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
+   ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
    ```
    {: pre}
 
@@ -764,7 +786,7 @@ http://<subdomain2>.<domain>/<app1_path>
    </thead>
    <tbody>
    <tr>
-   <td><code>&lt;cluser_name&gt;</code></td>
+   <td><code>&lt;cluster_name&gt;</code></td>
    <td>要公开的应用程序部署所在集群的名称或标识。</td>
    </tr>
    <tr>
@@ -773,29 +795,29 @@ http://<subdomain2>.<domain>/<app1_path>
    </tr>
    <tr>
    <td><code>&lt;private_VLAN_ID&gt;</code></td>
-   <td>可用的专用 VLAN 标识。可以通过运行 `bx cs vlans` 来查找可用专用 VLAN 的标识。</td>
+   <td>可用的专用 VLAN 标识。可以通过运行 `ibmcloud ks vlans` 来查找可用专用 VLAN 的标识。</td>
    </tr>
    </tbody></table>
 
 2. 列出集群中的可用 ALB，以获取专用 ALB 的标识。
 
     ```
-        bx cs albs --cluster <cluster_name>
+    ibmcloud ks albs --cluster <cluster_name>
     ```
     {: pre}
 
     专用 ALB 的 **Status** 字段为 _disabled_。
     ```
-        ALB ID                                            Enabled   Status     Type      ALB IP
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
     ```
     {: screen}
 
 3. 启用专用 ALB。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用 ALB 的标识，并将 <em>&lt;user_IP&gt;</em> 替换为要使用的用户管理子网中的 IP 地址。
 
    ```
-   bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
+   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
    ```
    {: pre}
 
@@ -810,10 +832,10 @@ http://<subdomain2>.<domain>/<app1_path>
 
 开始之前：
 * 查看 Ingress [先决条件](#config_prereqs)。
+* 在工作程序节点连接到[公用和专用 VLAN](cs_network_planning.html#private_both_vlans) 或连接到[仅专用 VLAN](cs_network_planning.html#private_vlan) 时，查看用于规划应用程序专用访问权的选项。
+    * 公用和专用 VLAN：要使用缺省外部 DNS 提供程序，必须[配置具有公共访问权的边缘节点](cs_edge.html#edge)以及[配置虚拟路由器设备 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)。
+    * 仅限专用 VLAN：必须配置[专用网络上可用的 DNS 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)。
 * [启用专用应用程序负载均衡器](#private_ingress)。
-* 如果您有专用工作程序节点并且要使用外部 DNS 提供者，那么必须[配置具有公用访问权的边缘节点](cs_edge.html#edge)，然后[配置虚拟路由器设备 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)。
-* 如果您有专用工作程序节点并且希望仅保持位于专用网络上，那么必须[配置专用内部部署 DNS 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)，以解析对应用程序的 URL 请求。
-
 
 ### 步骤 1：部署应用程序并创建应用程序服务
 {: #private_1}
@@ -824,14 +846,14 @@ http://<subdomain2>.<domain>/<app1_path>
 1.  [将应用程序部署到集群](cs_app.html#app_cli)。确保在配置文件的 metadata 部分中向部署添加标签，例如 `app: code`。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
 2.   针对要公开的每个应用程序创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开才能被集群 ALB 包含在 Ingress 负载均衡中。
-      1.  打开首选编辑器，并创建服务配置文件，例如名为 `myapp_service.yaml`。
+      1.  打开首选编辑器，并创建服务配置文件，例如名为 `myappservice.yaml`。
       2.  针对 ALB 将公开的应用程序定义服务。
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -859,7 +881,7 @@ http://<subdomain2>.<domain>/<app1_path>
       4.  在集群中创建服务。如果应用程序部署在集群中的多个名称空间中，请确保该服务部署到要公开的应用程序所在的名称空间中。
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  针对要公开的每一个应用程序，重复上述步骤。
@@ -875,19 +897,19 @@ ALB 会对流至应用程序的 HTTP 网络流量进行负载均衡。要同时�
 1.   创建定制域。要注册定制域，请使用您的域名服务 (DNS) 提供者或 [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)。
       * 如果希望 Ingress 公开的应用程序位于一个集群的不同名称空间中，请将定制域注册为通配符域，例如 `*.custom_domain.net`。
 
-2. 通过将 IBM 提供的专用 ALB 的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用 ALB 的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`.
-3.   可选：如果要使用 TLS，请导入或创建 TLS 证书和私钥。如果要使用通配符域，请确保导入或创建通配符证书。
+2. 通过将 IBM 提供的专用 ALB 的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用 ALB 的可移植专用 IP 地址，请运行 `ibmcloud ks albs --cluster <cluster_name>`.
+3.   可选：要使用 TLS，请导入或创建 TLS 证书和私钥。如果使用通配符域，请确保在 <code>default</code> 名称空间中导入或创建通配符证书，以便 ALB 可以在每个名称空间中访问并使用该证书。
       * 如果要使用存储在 {{site.data.keyword.cloudcerts_long_notm}} 中的 TLS 证书，那么可以通过运行以下命令，将其关联的私钥导入到集群：
         ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ```
         {: pre}
       * 如果还没有 TLS 证书，请执行以下步骤：
         1. 为域创建以 PEM 格式编码的 TLS 证书和密钥。
         2. 定义使用您的 TLS 证书和密钥的私钥。将 <em>&lt;tls_secret_name&gt;</em> 替换为您的 Kubernetes 私钥的名称，将 <em>&lt;tls_key_filepath&gt;</em> 替换为定制 TLS 密钥文件的路径，并将 <em>&lt;tls_cert_filepath&gt;</em> 替换为定制 TLS 证书文件的路径。
           ```
-            kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
-            ```
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
+          ```
           {: pre}
 
 
@@ -962,7 +984,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 ALB 的标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找 ALB 标识。有关此 Ingress 注释的更多信息，请参阅[专用应用程序负载均衡器路由](cs_annotations.html#alb-id)。</td>
+    <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 ALB 的标识。运行 <code>ibmcloud ks albs --cluster <my_cluster></code> 以查找 ALB 标识。有关此 Ingress 注释的更多信息，请参阅[专用应用程序负载均衡器路由](cs_annotations.html#alb-id)。</td>
     </tr>
     <tr>
     <td><code>tls/hosts</code></td>
@@ -973,8 +995,8 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td>将 <em>&lt;tls_secret_name&gt;</em> 替换为先前创建的私钥的名称，此私钥用于保存定制 TLS 证书和密钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。
-        </tr>
+    <td>将 <em>&lt;tls_secret_name&gt;</em> 替换为先前创建的私钥的名称，此私钥用于保存定制 TLS 证书和密钥。如果已从 {{site.data.keyword.cloudcerts_short}} 导入证书，那么可以运行 <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> 来查看与 TLS 证书关联的私钥。
+    </tr>
     <tr>
     <td><code>host</code></td>
     <td>将 <em>&lt;domain&gt;</em> 替换为定制域。
@@ -1009,7 +1031,7 @@ Ingress 资源定义 ALB 用于将流量路由到应用程序服务的路由规�
 4.   验证 Ingress 资源是否已成功创建。
 
       ```
-            kubectl describe ingress myingressresource
+      kubectl describe ingress myingressresource
       ```
       {: pre}
 
@@ -1021,7 +1043,11 @@ Ingress 资源已在应用程序服务所在的名称空间中创建。此名称
 ### 步骤 4：通过专用网络访问应用程序
 {: #private_4}
 
-在专用网络防火墙内，在 Web 浏览器中输入应用程序服务的 URL。
+1. 在访问应用程序之前，请确保可以访问 DNS 服务。
+  * 公用和专用 VLAN：要使用缺省外部 DNS 提供程序，必须[配置具有公共访问权的边缘节点](cs_edge.html#edge)以及[配置虚拟路由器设备 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)。
+  * 仅限专用 VLAN：必须配置[专用网络上可用的 DNS 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)。
+
+2. 在专用网络防火墙内，在 Web 浏览器中输入应用程序服务的 URL。
 
 ```
 https://<domain>/<app1_path>
@@ -1053,19 +1079,24 @@ http://<subdomain2>.<domain>/<app1_path>
 <br />
 
 
-## 可选的应用程序负载均衡器配置
-{: #configure_alb}
+## 使用注释定制 Ingress 资源
+{: #annotations}
 
-您可以使用以下选项进一步配置应用程序负载均衡器。
+要向 Ingress 应用程序负载均衡器 (ALB) 添加功能，可以将特定于 IBM 的注释添加为 Ingress 资源中的元数据。
+{: shortdesc}
 
--   [在 Ingress 应用程序负载均衡器中打开端口](#opening_ingress_ports)
--   [在 HTTP 级别配置 SSL 协议和 SSL 密码](#ssl_protocols_ciphers)
--   [定制 Ingress 日志格式](#ingress_log_format)
--   [使用注释定制应用程序负载均衡器](cs_annotations.html)
-{: #ingress_annotation}
+开始使用一些最常用的注释。
+* [redirect-to-https](cs_annotations.html#redirect-to-https)：将不安全的 HTTP 客户机请求转换为 HTTPS。
+* [rewrite-path](cs_annotations.html#rewrite-path)：将入局网络流量路由到后端应用程序侦听的其他路径。
+* [ssl-services](cs_annotations.html#ssl-services)：使用 TLS 加密流至需要 HTTPS 的上游应用程序的流量。
+* [client-max-body-size](cs_annotations.html#client-max-body-size)：设置客户机可以作为请求一部分发送的主体的最大大小。
+
+有关受支持注释的完整列表，请参阅[使用注释定制 Ingress](cs_annotations.html)。
+
+<br />
 
 
-### 在 Ingress 应用程序负载均衡器中打开端口
+## 在 Ingress ALB 中打开端口
 {: #opening_ingress_ports}
 
 缺省情况下，Ingress ALB 中仅公开端口 80 和 443。要公开其他端口，可以编辑 `ibm-cloud-provider-ingress-cm` 配置映射资源。
@@ -1074,7 +1105,7 @@ http://<subdomain2>.<domain>/<app1_path>
 1. 为 `ibm-cloud-provider-ingress-cm` 配置映射资源创建并打开配置文件的本地版本。
 
     ```
-        kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
@@ -1083,7 +1114,7 @@ http://<subdomain2>.<domain>/<app1_path>
     **重要信息**：缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何端口。未指定的任何端口都处于关闭状态。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。
 
     ```
-    apiVersion: v1
+apiVersion: v1
     data:
       public-ports: "80;443;<port3>"
       private-ports: "80;443;<port4>"
@@ -1115,23 +1146,99 @@ http://<subdomain2>.<domain>/<app1_path>
  ```
  {: pre}
 
- 输出：
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
+有关配置映射资源的更多信息，请参阅 [Kubernetes 文档](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)。
 
- Data
- ====
+<br />
 
-  public-ports: "80;443;9443"
- ```
- {: screen}
 
-有关配置映射资源的更多信息，请参阅 [Kubernetes 文档](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/)。
+## 保留源 IP 地址
+{: #preserve_source_ip}
 
-### 在 HTTP 级别配置 SSL 协议和 SSL 密码
+缺省情况下，不会保留客户机请求的源 IP 地址。对应用程序的客户机请求发送到集群时，该请求会路由到用于公开 ALB 的 LoadBalancer 服务的 pod。如果在 LoadBalancer 服务 pod 所在的工作程序节点上不存在应用程序 pod，那么负载均衡器会将该请求转发到其他工作程序节点上的应用程序 pod。软件包的源 IP 地址将更改为运行应用程序 pod 的工作程序节点的公共 IP 地址。
+
+要保留客户机请求的原始源 IP 地址，可以[启用源 IP 保留 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)。例如，在应用程序服务器必须应用安全性和访问控制策略的情况下，保留客户机的 IP 非常有用。
+
+**注**：如果[禁用 ALB](cs_cli_reference.html#cs_alb_configure)，那么对用于公开 ALB 的 LoadBalancer 服务进行的任何源 IP 更改都将丢失。重新启用 ALB 时，必须重新启用源 IP。
+
+要启用源 IP 保留，请编辑用于公开 Ingress ALB 的 LoadBalancer 服务：
+
+1. 为单个 ALB 或集群中的所有 ALB 启用源 IP 保留。
+    * 为单个 ALB 设置源 IP 保留：
+        1. 获取要为其启用源 IP 的 ALB 的标识。ALB 服务的格式类似于 `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`（对于公共 ALB）或 `private-cr18e61e63c6e94b658596ca93d087eed9-alb1`（对于专用 ALB）。
+            ```
+            kubectl get svc -n kube-system | grep alb
+            ```
+            {: pre}
+
+        2. 打开用于公开 ALB 的 LoadBalancer 服务的 YAML。
+            ```
+            kubectl edit svc <ALB_ID> -n kube-system
+            ```
+            {: pre}
+
+        3. 在 **spec** 下，将 **externalTrafficPolicy** 的值从 `Cluster` 更改为 `Local`。
+
+        4. 保存并关闭配置文件。输出将类似于以下内容：
+
+            ```
+            service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+            ```
+            {: screen}
+    * 要为集群中的所有公共 ALB 设置源 IP 保留，请运行以下命令：
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+
+        输出示例：
+        ```
+        "public-cr18e61e63c6e94b658596ca93d087eed9-alb1", "public-cr17e61e63c6e94b658596ca92d087eed9-alb2" patched
+        ```
+        {: screen}
+
+    * 要为集群中的所有专用 ALB 设置源 IP 保留，请运行以下命令：
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+
+        输出示例：
+        ```
+        "private-cr18e61e63c6e94b658596ca93d087eed9-alb1", "private-cr17e61e63c6e94b658596ca92d087eed9-alb2" patched
+        ```
+        {: screen}
+
+2. 在 ALB pod 日志中验证源 IP 是否得到保留。
+    1. 获取修改的 ALB 的 pod 的标识。
+        ```
+kubectl get pods -n kube-system | grep alb
+      ```
+        {: pre}
+
+    2. 打开该 ALB pod 的日志。验证 `client` 字段的 IP 地址是否为客户机请求 IP 地址，而不是 LoadBalancer 服务 IP 地址。
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+3. 现在，查找发送到后端应用程序的请求的标题时，可以在 `x-forwarded-for` 头中看到客户机 IP 地址。
+
+4. 如果您不再希望保留源 IP，那么可以还原对服务进行的更改。
+    * 要还原公共 ALB 的源 IP 保留，请运行以下命令：
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
+    * 要还原专用 ALB 的源 IP 保留，请运行以下命令：
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
+
+<br />
+
+
+## 在 HTTP 级别配置 SSL 协议和 SSL 密码
 {: #ssl_protocols_ciphers}
 
 通过编辑 `ibm-cloud-provider-ingress-cm` 配置映射，在全局 HTTP 级别启用 SSL 协议和密码。
@@ -1146,7 +1253,7 @@ http://<subdomain2>.<domain>/<app1_path>
 1. 为 `ibm-cloud-provider-ingress-cm` 配置映射资源创建并打开配置文件的本地版本。
 
     ```
-        kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
@@ -1173,138 +1280,179 @@ http://<subdomain2>.<domain>/<app1_path>
    ```
    {: pre}
 
-   输出：
-   ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
+<br />
 
- Data
- ====
 
-  ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
-  ssl-ciphers: "HIGH:!aNULL:!MD5"
- ```
-   {: screen}
+## 调整性能
+{: #perf_tuning}
 
-### 定制 Ingress 日志内容和格式
-{: #ingress_log_format}
+要优化 Ingress ALB 的性能，可以根据需要更改缺省设置。
+{: shortdesc}
 
-可以定制为 Ingress ALB 收集的日志的内容和格式。
-{:shortdesc}
 
-缺省情况下，Ingress 日志设置为 JSON 格式并显示公共日志字段。但是，您还可以创建定制日志格式。要选择转发哪些日志组成部分以及这些组成部分在日志输出中的排列方式，请执行以下操作：
+
+### 增大保持活动连接时间
+{: #keepalive_time}
+
+保持活动连接通过减少打开和关闭连接所需的 CPU 和网络开销，会对性能产生重大影响。要优化 ALB 的性能，可以更改 ALB 与客户机之间连接的保持活动时间的缺省设置。
+{: shortdesc}
+
+在 `ibm-cloud-provider-ingress-cm` Ingress 配置映射中，`keep-alive` 字段设置超时（以秒为单位），在此期间，保持活动客户机连接将保持向 Ingress ALB 打开。缺省情况下，`keep-alive` 设置为 `8s`。可以通过编辑 Ingress 配置映射来覆盖缺省值。
 
 1. 为 `ibm-cloud-provider-ingress-cm` 配置映射资源创建并打开配置文件的本地版本。
 
     ```
-        kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
-2. 添加 <code>data</code> 部分。添加 `log-format` 字段以及（可选）`log-format-escape-json` 字段。
+2. 将 `keep-alive` 的值从 `8s` 更改为更大的值。
 
-    ```
-        apiVersion: v1
-    data:
-      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: pre}
+   ```
+   apiVersion: v1
+   data:
+     keep-alive: "8s"
+   kind: ConfigMap
+   metadata:
+     name: ibm-cloud-provider-ingress-cm
+     namespace: kube-system
+   ```
+   {: codeblock}
 
-    <table>
-    <caption>YAML 文件的组成部分</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 log-format 配置</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>log-format</code></td>
-    <td>将 <code>&lt;key&gt;</code> 替换为日志组成部分的名称，并将 <code>&lt;log_variable&gt;</code> 替换为希望在日志条目中收集的日志组成部分的变量。可以包含希望日志条目包含的文本和标点符号，如用于将字符串值括起的引号，以及用于分隔日志组成部分的逗号。例如，将组成部分的格式设置为诸如 <code>request: "$request",</code> 会在日志条目中生成以下内容：<code>request: "GET / HTTP/1.1",</code>。有关可以使用的所有变量的列表，请参阅 <a href="http://nginx.org/en/docs/varindex.html">Nginx 变量索引</a>。<br><br>要记录其他头（例如 <em>x-custom-ID</em>），请将以下键/值对添加到定制日志内容：<br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>连字符 (<code>-</code>) 会转换为下划线 (<code>_</code>)，并且必须在定制头名称的前面附加 <code>$http_</code>。</td>
-    </tr>
-    <tr>
-    <td><code>log-format-escape-json</code></td>
-    <td>可选：缺省情况下，将生成文本格式的日志。要生成 JSON 格式的日志，请添加 <code>log-format-escape-json</code> 字段并使用值 <code>true</code>。</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    </dl>
+3. 保存配置文件。
 
-    例如，日志格式可能包含以下变量：
-    ```
-        apiVersion: v1
-    data:
-      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
-                    time_date: [$time_local], request: "$request",
-                    status: $status, http_referer: "$http_referer",
-                    http_user_agent: "$http_user_agent",
-                    request_id: $request_id}'
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: screen}
+4. 验证是否已应用配置映射更改。
 
-    符合此格式的日志条目类似于以下示例：
-    ```
-        remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
-    ```
-    {: screen}
-
-    要创建基于 ALB 日志的缺省格式的定制日志格式，请根据需要修改以下部分并将其添加到 configmap：
-    ```
-        apiVersion: v1
-    data:
-      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
-                    "host": "$http_host", "scheme": "$scheme",
-                    "request_method": "$request_method", "request_uri": "$uri",
-                    "request_id": "$request_id", "status": $status,
-                    "upstream_addr": "$upstream_addr", "upstream_status":
-                    $upstream_status, "request_time": $request_time,
-                    "upstream_response_time": $upstream_response_time,
-                    "upstream_connect_time": $upstream_connect_time,
-                    "upstream_header_time": $upstream_header_time}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: codeblock}
-
-4. 保存配置文件。
-
-5. 验证是否已应用配置映射更改。
-
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
-
- 输出示例：
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
-
- Data
- ====
-
-  log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-  log-format-escape-json: "true"
- ```
- {: screen}
-
-4. 要查看 Ingress ALB 日志，请在集群中[为 Ingress 服务创建日志记录配置](cs_health.html#logging)。
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
 
 <br />
 
 
+## 配置用户管理的 Ingress 控制器
+{: #user_managed}
 
+在利用分配给集群的 IBM 提供的 Ingress 子域和 TLS 证书时，可在 {{site.data.keyword.Bluemix_notm}} 上运行自己的 Ingress 控制器。
+{: shortdesc}
+
+当您有特定 Ingress 需求时，配置自己的定制 Ingress 控制器可能非常有用。运行自己的 Ingress 控制器而不是 IBM 提供的 Ingress ALB 时，由您负责提供控制器映像，维护控制器以及更新控制器。
+
+1. 获取缺省公共 ALB 的标识。公共 ALB 的格式类似于 `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`。
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
+
+2. 禁用缺省公共 ALB。`--disable-deployment` 标志会禁用 IBM 提供的 ALB 部署，但对于 IBM 提供的 Ingress 子域或用于公开 Ingress 控制器的 LoadBalancer 服务，不会除去其 DNS 注册。
+    ```
+    ibmcloud ks alb-configure --alb-ID <ALB_ID> --disable-deployment
+    ```
+    {: pre}
+
+3. 准备好 Ingress 控制器的配置文件。例如，可以将 YAML 配置文件用于 [Nginx 社区 Ingress 控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml)。
+
+4. 部署自己的 Ingress 控制器。**重要信息**：要继续使用用于公开控制器的 LoadBalancer 服务以及 IBM 提供的 Ingress 子域，您的控制器必须部署在 `kubbe-system` 名称空间中。
+    ```
+    kubectl apply -f customingress.yaml -n kube-system
+    ```
+    {: pre}
+
+5. 获取定制 Ingress 部署上的标签。
+    ```
+    kubectl get deploy nginx-ingress-controller -n kube-system --show-labels
+    ```
+    {: pre}
+
+    在以下示例输出中，标签值为 `ingress-nginx`：
+    ```
+    NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       LABELS
+    nginx-ingress-controller   1         1         1            1           1m        app=ingress-nginx
+    ```
+    {: screen}
+
+5. 使用步骤 1 中获取的 ALB ID，打开用于公开 ALB 的 LoadBalancer 服务。
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+6. 更新 LoadBalancer 服务以指向定制 Ingress 部署。在 `spec/selector` 下，从 `app` 标签中除去 ALB 标识，并添加在步骤 5 中获取的自己 Ingress 控制器的标签。
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      ...
+    spec:
+      clusterIP: 172.21.xxx.xxx
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 169.xx.xxx.xxx
+      ports:
+      - name: http
+        nodePort: 31070
+        port: 80
+        protocol: TCP
+        targetPort: 80
+      - name: https
+        nodePort: 31854
+        port: 443
+        protocol: TCP
+        targetPort: 443
+      selector:
+        app: <custom_controller_label>
+      ...
+    ```
+    {: codeblock}
+    1. 可选：缺省情况下，LoadBalancer 服务允许端口 80 和 443 上的流量。如果定制 Ingress 控制器需要一组不同的端口，请将这些端口添加到 `ports` 部分。
+
+7. 保存并关闭配置文件。输出将类似于以下内容：
+    ```
+    service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+    ```
+    {: screen}
+
+8. 验证 ALB 的 `Selector` 现在是否指向您的控制器。
+    ```
+    kubectl describe svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+    输出示例：
+    ```
+    Name:                     public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Namespace:                kube-system
+    Labels:                   app=public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Annotations:              service.kubernetes.io/ibm-ingress-controller-public=169.xx.xxx.xxx
+                              service.kubernetes.io/ibm-load-balancer-cloud-provider-zone=wdc07
+    Selector:                 app=ingress-nginx
+    Type:                     LoadBalancer
+    IP:                       172.21.xxx.xxx
+    IP:                       169.xx.xxx.xxx
+    LoadBalancer Ingress:     169.xx.xxx.xxx
+    Port:                     port-443  443/TCP
+    TargetPort:               443/TCP
+    NodePort:                 port-443  30087/TCP
+    Endpoints:                172.30.xxx.xxx:443
+    Port:                     port-80  80/TCP
+    TargetPort:               80/TCP
+    NodePort:                 port-80  31865/TCP
+    Endpoints:                172.30.xxx.xxx:80
+    Session Affinity:         None
+    External Traffic Policy:  Cluster
+    Events:                   <none>
+    ```
+    {: screen}
+
+8. 部署定制 Ingress 控制器所需的其他任何资源，例如配置映射。
+
+9. 如果您有多专区集群，请对每个 ALB 重复这些步骤。
+
+10. 通过执行[向公众公开集群内部的应用程序](#ingress_expose_public)中的步骤，为应用程序创建 Ingress 资源。
+
+现在，应用程序已由定制 Ingress 控制器公开。要复原 IBM 提供的 ALB 部署，请重新启用该 ALB。该 ALB 会重新部署，并且 LoadBalancer 服务会自动重新配置为指向该 ALB。
+
+```
+ibmcloud ks alb-configure --alb-ID <alb ID> --enable
+```
+{: pre}

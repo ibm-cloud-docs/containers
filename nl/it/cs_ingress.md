@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,44 +16,61 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-
-
 # Esposizione delle applicazioni con Ingress
 {: #ingress}
 
 Esponi più applicazioni nel tuo cluster Kubernetes creando risorse Ingress che vengono gestite dal programma di bilanciamento del carico dell'applicazione fornito da IBM in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-## Gestione del traffico di rete utilizzando Ingress
+## Componenti Ingress e architettura
 {: #planning}
 
 Ingress è un servizio Kubernetes che bilancia i carichi di lavoro del traffico di rete nel tuo cluster inoltrando le richieste pubbliche o private alle tue applicazioni. Puoi utilizzare Ingress per esporre più servizi dell'applicazione ad una rete pubblica o privata utilizzando una rotta pubblica o privata univoca.
 {:shortdesc}
 
-
-
-Ingress è composto da due componenti:
+**Cosa viene fornito con Ingress?**</br>
+Ingress è composto da tre componenti:
 <dl>
-<dt>Programma di bilanciamento del carico (ALB - Application load balancer)</dt>
-<dd>L'ALB è un programma di bilanciamento del carico esterno che ascolta le richieste di servizio HTTP, HTTPS, TCP o UDP in entrata e le inoltra al pod dell'applicazione appropriato. Quando crei un cluster standard, {{site.data.keyword.containershort_notm}} crea automaticamente un ALB altamente disponibile per il tuo cluster e gli assegna una rotta pubblica univoca. La rotta pubblica è collegata a un indirizzo IP pubblico portatile che viene fornito nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) durante la creazione del cluster. Viene inoltre creato automaticamente un ALB privato predefinito, ma non viene automaticamente abilitato.</dd>
 <dt>Risorsa Ingress</dt>
-<dd>Per esporre un'applicazione utilizzando Ingress, devi creare un servizio Kubernetes per la tua applicazione e registrare questo servizio con l'ALB definendo una risorsa Ingress. La risorsa Ingress è una risorsa Kubernetes che definisce le regole su come instradare le richieste in entrata per un'applicazione. La risorsa Ingress specifica anche il percorso al tuo servizio dell'applicazione che viene aggiunto alla rotta pubblica per formare un URL univoco dell'applicazione, ad esempio `mycluster.us-south.containers.appdomain.cloud/myapp`.
-<br></br><strong>Nota</strong>: a partire dal 24 maggio 2018, il formato del dominio secondario Ingress cambia per i nuovi cluster.<ul><li>I cluster creati dopo il 24 maggio 2018 vengono assegnati a un dominio secondario nel nuovo formato, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>I cluster creati prima del 24 maggio 2018 continuano ad utilizzare il dominio secondario assegnato nel vecchio formato, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
+<dd>Per esporre un'applicazione utilizzando Ingress, devi creare un servizio Kubernetes per la tua applicazione e registrare questo servizio con Ingress definendo una risorsa Ingress. La risorsa Ingress è una risorsa Kubernetes che definisce le regole su come instradare le richieste in entrata per le applicazioni. La risorsa Ingress specifica anche il percorso ai tuoi servizi dell'applicazione che vengono accodati all'instradamento pubblico per formare un URL applicazione univoco come ad esempio `mycluster.us-south.containers.appdomain.cloud/myapp1`. <br></br>**Nota**: a partire dal 24 maggio 2018, il formato del dominio secondario Ingress cambia per i nuovi cluster. Il nome della regione o della zona incluso nel nuovo formato del dominio secondario viene generato in base alla zona in cui è stato creato il cluster. Se hai dipendenze pipeline sui nomi dominio dell'applicazione coerenti, puoi usare il tuo dominio personalizzato invece del dominio secondario Ingress fornito da IBM.<ul><li>A tutti i cluster creati dopo il 24 maggio 2018 viene assegnato un dominio secondario nel nuovo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>I cluster a zona singola creati dopo il 24 maggio 2018 continuano a usare il dominio secondario assegnato nel vecchio formato, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>Se modifichi un cluster a zona singola creato prima del 24 maggio 2018 in uno multizona [aggiungendo una zona al cluster](cs_clusters.html#add_zone) per la prima volta, il cluster continuerà a usare il dominio secondario assegnato nel vecchio formato,
+<code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code> e gli verrà assegnato anche un dominio secondario nel nuovo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Possono essere utilizzati entrambi i domini secondari.</li></ul></br>**Cluster multizona**: la risorsa Ingress è globale ed è necessaria solo una risorsa Ingress per spazio dei nomi per un cluster multizona.</dd>
+<dt>ALB (programma di bilanciamento del carico dell'applicazione)</dt>
+<dd>L'ALB è un programma di bilanciamento del carico esterno che ascolta le richieste del servizio HTTP, HTTPS, TCP o UDP in entrata. L'ALB inoltra quindi le richieste al pod dell'applicazione appropriato in base alle regole definire nella risorsa Ingress. Quando crei un cluster standard, {{site.data.keyword.containershort_notm}} crea automaticamente un ALB altamente disponibile per il tuo cluster e gli assegna una rotta pubblica univoca. La rotta pubblica è collegata a un indirizzo IP pubblico portatile che viene fornito nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) durante la creazione del cluster. Viene inoltre creato automaticamente un ALB privato predefinito, ma non viene automaticamente abilitato.<br></br>**Cluster multizona**: quando aggiungi una zona al tuo cluster, viene aggiunta una sottorete pubblica portatile e viene creato e abilitato automaticamente un nuovo ALB pubblico sulla sottorete in tale zona. Tutti gli ALB pubblici predefiniti nel tuo cluster condividono un instradamento pubblico ma hanno indirizzi IP diversi. In ciascuna zona viene creato automaticamente anche un ALB privato predefinito, ma non viene abilitato automaticamente.</dd>
+<dt>MZLB (programma di bilanciamento del carico multizona)</dt>
+<dd><p>**Cluster multizona**: ogni volta che modifichi un cluster da zona singola a multizona [aggiungendo una zona al cluster](cs_clusters.html#add_zone) per la prima volta, viene creato e distribuito automaticamente un MZLB in ogni zona in cui hai nodi di lavoro. L'integrità di MZLB controlla gli ALB in ciascuna zona del tuo cluster e tiene aggiornati i risultati della ricerca DNS in base a questi controlli di integrità. Ad esempio, se i tuoi ALB hanno indirizzi IP `1.1.1.1`, `2.2.2.2` e `3.3.3.3`, una normale operazione di ricerca DNS del tuo dominio secondario Ingress restituisce tutti e 3 gli IP, il client accede a uno di essi in modo casuale. Se l'ALB con indirizzo IP `3.3.3.3` diventa non disponibile per un qualsiasi motivo, il controllo di integrità MZLB avrà esito negativo, la ricerca DNS restituirà gli IP ALB `1.1.1.1` e `2.2.2.2` disponibili e il client accederà a uno degli IP ALB disponibili.</p>
+<p>I programmi di bilanciamento del carico MZLB per gli ALB pubblici usano solo il dominio secondario Ingress fornito da IBM. Se usi solo ALB privati, devi controllare manualmente l'integrità degli ALB e aggiornare i risultati di ricerca DNS. Se usi ALB pubblici che usano un dominio personalizzato, puoi includere gli ALB nel bilanciamento del carico di MZLB creando un CNAME nella tua voce DNS per inoltrare le richieste dal tuo dominio personalizzato al dominio secondario Ingress fornito da IBM per il tuo cluster.</p>
+<p><strong>Nota</strong>: se usi politiche di rete ante-DNAT per bloccare tutto il traffico in entrata ai servizi Ingress, devi anche inserire in whitelist gli <a href="https://www.cloudflare.com/ips/">IP IPv4 di Cloudflare <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> usati per controllare l'integrità dei tuoi ALB. Per la procedura su come creare una politica Calico ante-DNAT per inserire in whitelist questi IP, vedi la Lezione 3 dell'<a href="cs_tutorials_policies.html#lesson3">esercitazione della politica di rete Calico</a>.</dd>
 </dl>
 
-Il seguente diagramma mostra come Ingress dirige la comunicazione da Internet a un'applicazione:
+**In che modo viene effettuata una richiesta alla mia applicazione con Ingress in un cluster a zona singola?**</br>
+Il seguente diagramma mostra in che modo Ingress indirizza la comunicazione da internet a un'applicazione in un cluster a zona singola:
 
-<img src="images/cs_ingress.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando Ingress" style="width:550px; border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" alt="Esponi un'applicazione in un cluster a zona singola utilizzando Ingress" style="border-style: none"/>
 
 1. Un utente invia una richiesta alla tua applicazione accedendo all'URL dell'applicazione. Questo URL è l'URL pubblico per la tua applicazione esposta a cui è aggiunto il percorso della risorsa Ingress, ad esempio `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. Un servizio di sistema DNS che funge da programma di bilanciamento del carico globale risolve l'URL nell'indirizzo IP pubblico portatile dell'ALB pubblico predefinito nel cluster. La richiesta viene instradata al servizio ALB Kubernetes per l'applicazione.
+2. Un servizio di sistema DNS risolve il nome host nell'URL nell'indirizzo IP pubblico portatile del programma di bilanciamento del carico che espone l'ALB nel tuo cluster.
 
-3. Il servizio Kubernetes instrada la richiesta all'ALB.
+3. In base all'indirizzo IP risolto, il client invia la richiesta al servizio del programma di bilanciamento del carico che espone l'ALB.
 
-4. L'ALB verifica se esiste una regola di instradamento per il percorso `myapp` nel cluster. Se viene trovata una regola corrispondente, la richiesta viene inoltrata in base alle regole definite nella risorsa Ingress al pod in cui è distribuita l'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, l'ALB bilancia il carico delle richieste tra i pod dell'applicazione.
+4. Il servizio del programma di bilanciamento del carico instrada la richiesta all'ALB.
 
+5. L'ALB verifica se esiste una regola di instradamento per il percorso `myapp` nel cluster. Se viene trovata una regola corrispondente, la richiesta viene inoltrata in base alle regole definite nella risorsa Ingress al pod in cui è distribuita l'applicazione. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP dell'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, l'ALB bilancia il carico delle richieste tra i pod dell'applicazione.
 
+**In che modo viene effettuata una richiesta alla mia applicazione con Ingress in un cluster multizona?**</br>
+Il seguente diagramma mostra in che modo Ingress indirizza la comunicazione da internet a un'applicazione in un cluster multizona:
+
+<img src="images/cs_ingress_multizone.png" alt="Esponi un'applicazione in un cluster multizona utilizzando Ingress" style="border-style: none"/>
+
+1. Un utente invia una richiesta alla tua applicazione accedendo all'URL dell'applicazione. Questo URL è l'URL pubblico per la tua applicazione esposta a cui è aggiunto il percorso della risorsa Ingress, ad esempio `mycluster.us-south.containers.appdomain.cloud/myapp`.
+
+2. Un servizio di sistema DNS, che funge da programma di bilanciamento del carico globale, risolve il nome host nell'URL in un indirizzo IP disponibile che è stato riportato come integro da MZLB. MZLB controlla continuamente gli indirizzi IP pubblici portatili dei servizi di bilanciamento del carico che espongono gli ALB pubblici nel tuo cluster. Gli indirizzi IP vengono risolti in un ciclo round-robin, ciò garantisce che le richieste vengono bilanciate equamente tra gli ALB integri nelle varie zone.
+
+3. Il client invia la richiesta all'indirizzo IP del servizio del programma di bilanciamento del carico che espone un ALB.
+
+4. Il servizio del programma di bilanciamento del carico instrada la richiesta all'ALB.
+
+5. L'ALB verifica se esiste una regola di instradamento per il percorso `myapp` nel cluster. Se viene trovata una regola corrispondente, la richiesta viene inoltrata in base alle regole definite nella risorsa Ingress al pod in cui è distribuita l'applicazione. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP dell'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, l'ALB bilancia il carico delle richieste tra i pod dell'applicazione tra tutte le zone.
 
 <br />
 
@@ -65,10 +82,13 @@ Prima di iniziare ad utilizzare Ingress, controlla i seguenti prerequisiti.
 {:shortdesc}
 
 **Prerequisiti per tutte le configurazioni Ingress:**
-- Ingress è disponibile solo per i cluster standard e richiede almeno due nodi di lavoro nel cluster per garantire l'alta disponibilità e l'applicazione di aggiornamenti periodici.
+- Ingress è disponibile solo per i cluster standard e richiede almeno due nodi di lavoro per zona per garantire l'alta disponibilità e l'applicazione di aggiornamenti periodici.
 - La configurazione di Ingress richiede una [politica di accesso Amministratore](cs_users.html#access_policies). Verifica la tua [politica di accesso](cs_users.html#infra_access) corrente.
 
-
+**Prerequisiti per l'uso di Ingress in cluster multizona**:
+ - Se limiti il traffico di rete a [nodo di lavoro edge](cs_edge.html), devi abilitare almeno 2 nodo di lavoro edge in ciascuna zona per l'alta disponibilità dei pod Ingress. [Crea un pool di nodi di lavoro del nodo edge](cs_clusters.html#add_pool) che si estenda tra tutte le zone del tuo cluster e che abbia almeno 2 nodi di lavoro per zona.
+ - Per abilitare la comunicazione sulla rete privata tra i nodi di lavoro che si trovano in zone diverse, devi abilitare lo [spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning). 
+ - Se una zona presenta un malfunzionamento, potresti riscontrare malfunzionamenti intermittenti nelle richieste all'ALB Ingress in tale zona.
 
 <br />
 
@@ -85,22 +105,23 @@ Prima di iniziare ad utilizzare Ingress, controlla i seguenti prerequisiti.
 <br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="È necessaria almeno una risorsa per spazio dei nomi" style="width:300px; border-style: none"/>
 </dd>
 <dt>Le applicazioni sono in più spazi dei nomi</dt>
-<dd>Se le applicazioni nel tuo cluster sono in spazi dei nomi differenti, devi creare almeno una risorsa per spazio dei nomi per definire le regole delle applicazioni qui esposte. Per registrare più risorse Ingress con l'ALB Ingress del cluster, devi utilizzare un dominio jolly. Quando viene registrato un dominio jolly come `*.mycluster.us-south.containers.appdomain.cloud`, tutti i domini multipli vengono risolti dallo stesso host. Quindi, puoi creare una risorsa Ingress in ogni spazio dei nomi e specificare un dominio secondario diverso in ogni risorsa Ingress.
+<dd>Se le applicazioni nel tuo cluster sono in spazi dei nomi differenti, devi creare almeno una risorsa per spazio dei nomi per definire le regole delle applicazioni qui esposte. Per registrare più risorse Ingress con l'ALB Ingress del cluster, devi utilizzare un dominio jolly. Quando viene registrato un dominio jolly come `*.domain.net`, tutti i domini multipli vengono risolti nello stesso host. Quindi, puoi creare una risorsa Ingress in ogni spazio dei nomi e specificare un dominio secondario diverso in ogni risorsa Ingress.
 <br><br>
 Ad esempio, considera il seguente scenario:<ul>
 <li>Hai due versioni della stessa applicazione, `app1` e `app3`, per scopi di test.</li>
 <li>Distribuisci le applicazioni in due spazi dei nomi differenti all'interno dello stesso cluster: `app1` nello spazio dei nomi di sviluppo e `app3` in quello di preparazione.</li></ul>
 Per utilizzare lo stesso ALB del cluster per gestire il traffico a queste applicazioni, crea i seguenti servizi e risorse:<ul>
 <li>Un servizio Kubernetes nello spazio dei nomi di sviluppo per esporre `app1`.</li>
-<li>Una risorsa Ingress nello spazio dei nomi di sviluppo che specifica l'host come `dev.mycluster.us-south.containers.appdomain.cloud`.</li>
+<li>Una risorsa Ingress nello spazio dei nodi di sviluppo che specifica l'host come `dev.domain.net`.</li>
 <li>Un servizio Kubernetes nello spazio dei nomi di preparazione per esporre `app3`.</li>
-<li>Una risorsa Ingress nello spazio dei nomi di preparazione che specifica l'host come `stage.mycluster.us-south.containers.appdomain.cloud`.</li></ul></br>
+<li>Una risorsa Ingress nello spazio dei nomi di preparazione che specifica l'host come `stage.domain.net`.</li></ul></br>
 <img src="images/cs_ingress_multi_ns.png" alt="All'interno di uno spazio dei nomi, utilizza i domini secondari in una o più risorse" style="border-style: none"/>
-Ora, entrambi gli URL risolvono lo stesso dominio e sono anche serviti dallo stesso ALB. Tuttavia, poiché la risorsa nello spazio dei nomi di preparazione viene registrata nel dominio secondario `stage`, l'ALB Ingress correttamente instrada le richieste dall'URL `stage.mycluster.us-south.containers.appdomain.cloud/app3` solo a `app3`.</dd>
+Ora, entrambi gli URL risolvono lo stesso dominio e sono anche serviti dallo stesso ALB. Tuttavia, poiché la risorsa nello spazio dei nomi di preparazione viene registrata nel dominio secondario `stage`, l'ALB Ingress instrada correttamente le richieste dall'URL `stage.domain.net/app3` solo a `app3`.</dd>
 </dl>
 
+{: #wildcard_tls}
 **Nota**:
-* Il dominio secondario jolly Ingress fornito da IBM, `*.<cluster_name>.<region>.containers.appdomain.cloud`, viene registrato per impostazione predefinita per il tuo cluster. Tuttavia, TLS non è supportato per il dominio secondario jolly Ingress fornito da IBM.
+* Il dominio secondario jolly Ingress fornito da IBM, `*.<cluster_name>.<region>.containers.appdomain.cloud`, viene registrato per impostazione predefinita per il tuo cluster. Per i cluster creati dopo il 6 giugno 2018, il certificato TLS del dominio secondario jolly Ingress fornito da IBM è un certificato jolly e può essere usato per il dominio secondario jolly registrato. Per i cluster creati prima del 6 giugno 2018, il certificato TLS verrà aggiornato a un certificato jolly quando verrà rinnovato il certificato TLS corrente.
 * Se vuoi utilizzare un dominio personalizzato, devi registrarlo come un dominio jolly come ad esempio `*.custom_domain.net`. Per utilizzare TLS, devi ottenere un certificato jolly.
 
 ### Più domini all'interno di uno spazio dei nomi.
@@ -110,7 +131,7 @@ All'interno di uno spazio dei nomi individuale, puoi utilizzare un dominio per a
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="È necessaria almeno una risorsa per spazio dei nomi." style="border-style: none"/>
 
 **Nota**:
-* Il dominio secondario jolly Ingress fornito da IBM, `*.<cluster_name>.<region>.containers.appdomain.cloud`, viene registrato per impostazione predefinita per il tuo cluster. Tuttavia, TLS non è supportato per il dominio secondario jolly Ingress fornito da IBM.
+* Il dominio secondario jolly Ingress fornito da IBM, `*.<cluster_name>.<region>.containers.appdomain.cloud`, viene registrato per impostazione predefinita per il tuo cluster. Per i cluster creati dopo il 6 giugno 2018, il certificato TLS del dominio secondario jolly Ingress fornito da IBM è un certificato jolly e può essere usato per il dominio secondario jolly registrato. Per i cluster creati prima del 6 giugno 2018, il certificato TLS verrà aggiornato a un certificato jolly quando verrà rinnovato il certificato TLS corrente.
 * Se vuoi utilizzare un dominio personalizzato, devi registrarlo come un dominio jolly come ad esempio `*.custom_domain.net`. Per utilizzare TLS, devi ottenere un certificato jolly.
 
 <br />
@@ -124,9 +145,8 @@ Esponi le applicazioni all'interno del tuo cluster al pubblico utilizzando l'ALB
 
 Prima di iniziare:
 
--   Esamina i [prerequisiti](#config_prereqs) Ingress.
--   Se non ne hai già uno, [crea un cluster standard](cs_clusters.html#clusters_ui).
--   [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi `kubectl`.
+* Esamina i [prerequisiti](#config_prereqs) Ingress.
+* [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi `kubectl`.
 
 ### Passo 1: Distribuisci le applicazioni e crea i servizi dell'applicazione.
 {: #public_inside_1}
@@ -137,14 +157,14 @@ Inizia distribuendo le tue applicazioni e creando i servizi Kubernetes per espor
 1.  [Distribuisci la tua applicazione al cluster](cs_app.html#app_cli). Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file di configurazione, ad esempio `app: code`. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione in modo che possano essere inclusi nel bilanciamento del carico Ingress.
 
 2.   Crea un servizio Kubernetes per ogni applicazione che desideri esporre. La tua applicazione deve essere esposta da un servizio Kubernetes per poter essere inclusa dall'ALB cluster nel bilanciamento del carico Ingress.
-      1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato, ad esempio, `myapp_service.yaml`.
+      1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato, ad esempio, `myappservice.yaml`.
       2.  Definisci un servizio per l'applicazione che l'ALB esporrà.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -172,7 +192,7 @@ Inizia distribuendo le tue applicazioni e creando i servizi Kubernetes per espor
       4.  Crea il servizio nel tuo cluster. Se le applicazioni vengono distribuite in più spazi dei nomi nel tuo cluster, assicurati che il servizio venga distribuito nello stesso spazio dei nomi dell'applicazione che vuoi esporre.
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Ripeti questi passi per ogni applicazione che vuoi esporre.
@@ -186,16 +206,16 @@ Quando configuri l'ALB pubblico, scegli il dominio tramite il quale saranno acce
 
 <dl>
 <dt>Dominio</dt>
-<dd>Puoi utilizzare il dominio fornito da IBM, come <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, per accedere alla tua applicazione da internet. Per utilizzare invece un dominio personalizzato, puoi associarlo al dominio fornito da IBM o all'indirizzo IP pubblico di ALB.</dd>
+<dd>Puoi utilizzare il dominio fornito da IBM, come <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, per accedere alla tua applicazione da internet. Per utilizzare invece un dominio personalizzato, puoi impostare un record CNAME per associarlo al dominio fornito da IBM o impostare un record con il tuo provider DNS utilizzando l'indirizzo IP pubblico dell'ALB.</dd>
 <dt>Terminazione TLS</dt>
-<dd>Il carico ALB bilancia il traffico di rete HTTP alle applicazioni nel tuo cluster. Per bilanciare anche il traffico delle connessioni HTTPS in entrata, puoi configurare l'ALB per decodificare il traffico di rete e inoltrare la richiesta decodificata alle applicazioni esposte nel tuo cluster. Se stai utilizzando il dominio secondario fornito da IBM, puoi utilizzare il certificato TLS fornito da IBM. TLS non è al momento supportato per i domini secondari jolly forniti da IBM. Se stai utilizzando un dominio personalizzato, puoi utilizzare il tuo certificato TLS per gestire la terminazione TLS.</dd>
+<dd>Il carico ALB bilancia il traffico di rete HTTP alle applicazioni nel tuo cluster. Per bilanciare anche il traffico delle connessioni HTTPS in entrata, puoi configurare l'ALB per decodificare il traffico di rete e inoltrare la richiesta decodificata alle applicazioni esposte nel tuo cluster. <ul><li>Se usi il dominio secondario Ingress fornito da IBM, puoi usare il certificato TLS fornito da IBM. I certificati TLS forniti da IBM vengono firmati da LetsEncrypt e vengono gestiti completamente da IBM. I certificati scadono ogni 90 giorni e vengono rinnovati automaticamente 7 giorni prima della scadenza.</li><li>Se usi un dominio personalizzato, puoi usare il tuo certificato TLS per gestire la terminazione TLS. Se hai applicazioni in un unico spazio dei nomi, puoi importare o creare un segreto TLS per il certificato in questo stesso spazio dei nomi. Se hai applicazioni in più spazi dei nomi, importa o crea un segreto TLS per il certificato nello spazio dei nomi <code>default</code> in modo tale che l'ALB possa accedere e usare il certificato in ogni spazio dei nomi.</li></ul></dd>
 </dl>
 
 Per utilizzare il dominio Ingress fornito da IBM:
 1. Ottieni i dettagli del tuo cluster. Sostituisci _&lt;cluster_name_or_ID&gt;_ con il nome del cluster in cui sono distribuite le applicazioni che vuoi esporre.
 
     ```
-    bx cs cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -206,37 +226,37 @@ Per utilizzare il dominio Ingress fornito da IBM:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.7
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
 2. Ottieni il dominio fornito da IBM nel campo **Dominio secondario Ingress**. Se vuoi utilizzare TLS, ottieni anche il segreto TLS fornito da IBM nel campo **Segreto Ingress**.
-    **Nota**: se stai utilizzando un dominio secondario jolly, TLS non è supportato.
+    **Nota**: per informazioni sulla certificazione TLS jolly, vedi [questa nota](#wildcard_tls).
 
 Per utilizzare un dominio personalizzato:
 1.    Crea un dominio personalizzato. Per registrare il tuo dominio personalizzato, utilizza il provider DNS (Domain Name Service) o il DNS [{{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * Se le applicazioni che vuoi che Ingress esponga in spazi dei nomi differenti in un cluster, registra il dominio personalizzato come un dominio jolly, ad esempio `*.custom_domain.net`.
 
 2.  Configura il tuo dominio per instradare il traffico di rete in entrata all'ALB fornito da IBM. Scegli tra queste opzioni:
-    -   Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `bx cs cluster-get <cluster_name>` e cerca il campo **Dominio secondario Ingress**.
-    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile dell'ALB fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP pubblico portatile dell'ALB, esegui `bx cs alb-get <public_alb_ID>`.
-3.   Facoltativo: se vuoi utilizzare TLS, importa o crea un certificato TLS e il segreto della chiave. Se stai utilizzando un dominio jolly, accertarti di aver importato o creato un certificato jolly.
+    -   Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `ibmcloud ks cluster-get <cluster_name>` e cerca il campo **Dominio secondario Ingress**.
+    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile dell'ALB fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP pubblico portatile dell'ALB, esegui `ibmcloud ks alb-get <public_alb_ID>`.
+3.   Facoltativo: per utilizzare TLS, importa o crea un certificato TLS e un segreto chiave. Se usi un dominio jolly, assicurati di importare o creare un certificato jolly nello spazio dei nomi <code>default</code> in modo che l'ALB possa accedere e usare il certificato in ciascuno spazio dei nomi.
       * Se in {{site.data.keyword.cloudcerts_long_notm}} è memorizzato un certificato TLS che vuoi utilizzare, puoi importare il suo segreto associato nel tuo cluster immettendo il seguente comando:
         ```
-        bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
         ```
         {: pre}
       * Se non hai un certificato TLS pronto, segui questa procedura:
         1. Crea un certificato e una chiave TLS per il tuo dominio codificati in formato PEM.
         2. Crea un segreto che utilizza il certificato e la chiave TLS. Sostituisci <em>&lt;tls_secret_name&gt;</em> con un nome per il tuo segreto Kubernetes, <em>&lt;tls_key_filepath&gt;</em> con il percorso al tuo file della chiave TLS personalizzato e <em>&lt;tls_cert_filepath&gt;</em> con il percorso al tuo file del certificato TLS personalizzato.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
@@ -315,7 +335,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td><ul><li>Se stai utilizzando il dominio fornito da IBM, sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto Ingress fornito da IBM.</li><li>Se stai utilizzando un dominio personalizzato, sostituisci <em>&lt;tls_secret_name&gt;</em> segreto che hai creato in precedenza che contiene il tuo certificato e la tua chiave TLS personalizzati. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per visualizzare i segreti associati a un certificato TLS.</li><ul><td>
+    <td><ul><li>Se usi il dominio Ingress fornito da IBM, sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto Ingress fornito da IBM.</li><li>Se usi un dominio personalizzato, sostituisci <em>&lt;tls_secret_name&gt;</em> con il segreto che hai creato precedentemente che contiene il tuo certificato TLS personalizzato e la tua chiave. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per vedere i segreti associati a un certificato TLS.</li><ul><td>
     </tr>
     <tr>
     <td><code>host</code></td>
@@ -393,7 +413,7 @@ http://<subdomain2>.<domain>/<app1_path>
 <br />
 
 
-## Esposizione delle applicazioni all'esterno del tuo cluster al pubblico 
+## Esposizione delle applicazioni all'esterno del tuo cluster al pubblico
 {: #external_endpoint}
 
 Esponi le applicazioni all'esterno del tuo cluster al pubblico includendole nel programma di bilanciamento del carico ALB Ingress pubblico. Le richieste pubbliche in entrata sul dominio fornito da IBM o sul tuo dominio personalizzato vengono inoltrate automaticamente all'applicazione esterna.
@@ -402,9 +422,8 @@ Esponi le applicazioni all'esterno del tuo cluster al pubblico includendole nel 
 Prima di iniziare:
 
 -   Esamina i [prerequisiti](#config_prereqs) Ingress.
--   Se non ne hai già uno, [crea un cluster standard](cs_clusters.html#clusters_ui).
--   [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi `kubectl`.
 -   Assicurati che l'applicazione esterna che desideri includere nel bilanciamento del carico del cluster sia accessibile mediante un indirizzo IP pubblico.
+-   [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi `kubectl`.
 
 ### Passo 1: Crea un servizio dell'applicazione e un endpoint esterno
 {: #public_outside_1}
@@ -412,7 +431,7 @@ Prima di iniziare:
 Inizia creando un servizio Kubernetes per esporre l'applicazione esterna e configurando un endpoint esterno Kubernetes per l'applicazione.
 {: shortdesc}
 
-1.  Crea un servizio Kubernetes per il tuo cluster che inoltrerà le richieste in entrata a un endpoint esterno che avrai già creato. 
+1.  Crea un servizio Kubernetes per il tuo cluster che inoltrerà le richieste in entrata a un endpoint esterno che avrai già creato.
     1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato, ad esempio, `myexternalservice.yaml`.
     2.  Definisci un servizio per l'applicazione che l'ALB esporrà.
 
@@ -501,16 +520,16 @@ Quando configuri l'ALB pubblico, scegli il dominio tramite il quale saranno acce
 
 <dl>
 <dt>Dominio</dt>
-<dd>Puoi utilizzare il dominio fornito da IBM, come <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, per accedere alla tua applicazione da internet. Per utilizzare invece un dominio personalizzato, puoi associarlo al dominio fornito da IBM o all'indirizzo IP pubblico di ALB.</dd>
+<dd>Puoi utilizzare il dominio fornito da IBM, come <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, per accedere alla tua applicazione da internet. Per utilizzare invece un dominio personalizzato, puoi impostare un record CNAME per associarlo al dominio fornito da IBM o impostare un record con il tuo provider DNS utilizzando l'indirizzo IP pubblico dell'ALB.</dd>
 <dt>Terminazione TLS</dt>
-<dd>Il carico ALB bilancia il traffico di rete HTTP alle applicazioni nel tuo cluster. Per bilanciare anche il traffico delle connessioni HTTPS in entrata, puoi configurare l'ALB per decodificare il traffico di rete e inoltrare la richiesta decodificata alle applicazioni esposte nel tuo cluster. Se stai utilizzando il dominio secondario fornito da IBM, puoi utilizzare il certificato TLS fornito da IBM. TLS non è al momento supportato per i domini secondari jolly forniti da IBM. Se stai utilizzando un dominio personalizzato, puoi utilizzare il tuo certificato TLS per gestire la terminazione TLS.</dd>
+<dd>Il carico ALB bilancia il traffico di rete HTTP alle applicazioni nel tuo cluster. Per bilanciare anche il traffico delle connessioni HTTPS in entrata, puoi configurare l'ALB per decodificare il traffico di rete e inoltrare la richiesta decodificata alle applicazioni esposte nel tuo cluster. <ul><li>Se usi il dominio secondario Ingress fornito da IBM, puoi usare il certificato TLS fornito da IBM. I certificati TLS forniti da IBM vengono firmati da LetsEncrypt e vengono gestiti completamente da IBM. I certificati scadono ogni 90 giorni e vengono rinnovati automaticamente 7 giorni prima della scadenza.</li><li>Se usi un dominio personalizzato, puoi usare il tuo certificato TLS per gestire la terminazione TLS. Se hai applicazioni in un unico spazio dei nomi, puoi importare o creare un segreto TLS per il certificato in questo stesso spazio dei nomi. Se hai applicazioni in più spazi dei nomi, importa o crea un segreto TLS per il certificato nello spazio dei nomi <code>default</code> in modo tale che l'ALB possa accedere e usare il certificato in ogni spazio dei nomi.</li></ul></dd>
 </dl>
 
 Per utilizzare il dominio Ingress fornito da IBM:
 1. Ottieni i dettagli del tuo cluster. Sostituisci _&lt;cluster_name_or_ID&gt;_ con il nome del cluster in cui sono distribuite le applicazioni che vuoi esporre.
 
     ```
-    bx cs cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -521,36 +540,36 @@ Per utilizzare il dominio Ingress fornito da IBM:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Zone:                   dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
-    Version:                1.9.7
+    Version:                1.10.5
     Owner Email:            owner@email.com
     Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
-2. Ottieni il dominio fornito da IBM nel campo **Dominio secondario Ingress**. Se vuoi utilizzare TLS, ottieni anche il segreto TLS fornito da IBM nel campo **Segreto Ingress**. **Nota**: se stai utilizzando un dominio secondario jolly, TLS non è supportato.
+2. Ottieni il dominio fornito da IBM nel campo **Dominio secondario Ingress**. Se vuoi utilizzare TLS, ottieni anche il segreto TLS fornito da IBM nel campo **Segreto Ingress**. **Nota**: per informazioni sulla certificazione TLS jolly, vedi [questa nota](#wildcard_tls).
 
 Per utilizzare un dominio personalizzato:
 1.    Crea un dominio personalizzato. Per registrare il tuo dominio personalizzato, utilizza il provider DNS (Domain Name Service) o il DNS [{{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * Se le applicazioni che vuoi che Ingress esponga in spazi dei nomi differenti in un cluster, registra il dominio personalizzato come un dominio jolly, ad esempio `*.custom_domain.net`.
 
 2.  Configura il tuo dominio per instradare il traffico di rete in entrata all'ALB fornito da IBM. Scegli tra queste opzioni:
-    -   Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `bx cs cluster-get <cluster_name>` e cerca il campo **Dominio secondario Ingress**.
-    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile dell'ALB fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP pubblico portatile dell'ALB, esegui `bx cs alb-get <public_alb_ID>`.
-3.   Facoltativo: se vuoi utilizzare TLS, importa o crea un certificato TLS e il segreto della chiave. Se stai utilizzando un dominio jolly, accertarti di aver importato o creato un certificato jolly.
+    -   Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `ibmcloud ks cluster-get <cluster_name>` e cerca il campo **Dominio secondario Ingress**.
+    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile dell'ALB fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP pubblico portatile dell'ALB, esegui `ibmcloud ks alb-get <public_alb_ID>`.
+3.   Facoltativo: per utilizzare TLS, importa o crea un certificato TLS e un segreto chiave. Se usi un dominio jolly, assicurati di importare o creare un certificato jolly nello spazio dei nomi <code>default</code> in modo che l'ALB possa accedere e usare il certificato in ciascuno spazio dei nomi.
       * Se in {{site.data.keyword.cloudcerts_long_notm}} è memorizzato un certificato TLS che vuoi utilizzare, puoi importare il suo segreto associato nel tuo cluster immettendo il seguente comando:
         ```
-        bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
         ```
         {: pre}
       * Se non hai un certificato TLS pronto, segui questa procedura:
         1. Crea un certificato e una chiave TLS per il tuo dominio codificati in formato PEM.
         2. Crea un segreto che utilizza il certificato e la chiave TLS. Sostituisci <em>&lt;tls_secret_name&gt;</em> con un nome per il tuo segreto Kubernetes, <em>&lt;tls_key_filepath&gt;</em> con il percorso al tuo file della chiave TLS personalizzato e <em>&lt;tls_cert_filepath&gt;</em> con il percorso al tuo file del certificato TLS personalizzato.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
@@ -629,7 +648,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td><ul><li>Se stai utilizzando il dominio fornito da IBM, sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto Ingress fornito da IBM.</li><li>Se stai utilizzando un dominio personalizzato, sostituisci <em>&lt;tls_secret_name&gt;</em> segreto che hai creato in precedenza che contiene il tuo certificato e la tua chiave TLS personalizzati. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per visualizzare i segreti associati a un certificato TLS.</li><ul><td>
+    <td><ul><li>Se usi il dominio Ingress fornito da IBM, sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto Ingress fornito da IBM.</li><li>Se usi un dominio personalizzato, sostituisci <em>&lt;tls_secret_name&gt;</em> con il segreto che hai creato precedentemente che contiene il tuo certificato TLS personalizzato e la tua chiave. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per vedere i segreti associati a un certificato TLS.</li><ul><td>
     </tr>
     <tr>
     <td><code>rules/host</code></td>
@@ -648,7 +667,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Sostituisci <em>&lt;app1_service&gt;</em> e <em>&lt;app2_service&gt;</em>, . con il nome dei servizi che hai creato per esporre le tue applicazioni esterne. Se le tue applicazioni sono esposte dai servizi in spazi dei nomi differenti nel cluster, includi solo i servizi dell'applicazione presenti nello stesso spazio dei nomi. Devi creare una risorsa Ingress per ogni spazio dei nomi in cui hai delle applicazioni da esporre.</td>
+    <td>Sostituisci <em>&lt;app1_service&gt;</em> e <em>&lt;app2_service&gt;</em>, ecc. con il nome dei servizi che hai creato per esporre le tue applicazioni esterne. Se le tue applicazioni sono esposte dai servizi in spazi dei nomi differenti nel cluster, includi solo i servizi dell'applicazione presenti nello stesso spazio dei nomi. Devi creare una risorsa Ingress per ogni spazio dei nomi in cui hai delle applicazioni da esporre.</td>
     </tr>
     <tr>
     <td><code>servicePort</code></td>
@@ -707,50 +726,55 @@ http://<subdomain2>.<domain>/<app1_path>
 <br />
 
 
-## Abilitazione dell'ALB privato predefinito 
+## Abilitazione di un ALB privato predefinito
 {: #private_ingress}
 
-Quando crei un cluster standard, viene creato un ALB (programma di bilanciamento del carico dell'applicazione) privato fornito da IBM a cui vengono assegnati un indirizzo IP privato portatile e una rotta privata. Tuttavia, l'ALB privato predefinito non viene abilitato automaticamente. Per utilizzare l'ALB privato per bilanciare il carico del traffico di rete privato alle tue applicazioni, devi prima abilitarlo con l'indirizzo IP privato portatile fornito da IBM o con il tuo proprio indirizzo IP privato portatile.
+Quando crei un cluster standard, in ogni zona in cui hai nodi di lavoro, viene creato un ALB fornito da IBM e viene assegnato un indirizzo IP privato portatile e una rotta privata. Tuttavia, l'ALB privato predefinito in ciascuna zona non viene abilitato automaticamente. Per usare l'ALB privato predefinito per bilanciare il carico del traffico di rete privato alle tue applicazioni, devi innanzitutto abilitarlo con l'indirizzo IP privato portatile fornito da IBM o con il tuo indirizzo IP privato portatile.
 {:shortdesc}
 
 **Nota**: se quando hai creato il cluster hai utilizzato l'indicatore `--no-subnet`, devi aggiungere una sottorete privata portatile o una sottorete gestita dall'utente prima di poter abilitare l'ALB privato. Per ulteriori informazioni, vedi [Richiesta di più sottoreti per il tuo cluster](cs_subnets.html#request).
 
 Prima di iniziare:
 
--   Se non ne hai già uno, [crea un cluster standard](cs_clusters.html#clusters_ui).
+-   Esamina le opzioni per la pianificazione dell'accesso privato alle applicazioni quando i nodi di lavoro vengono connessi a [una VLAN pubblica e a una privata](cs_network_planning.html#private_both_vlans) oppure [solo a una VLAN privata](cs_network_planning.html#private_vlan).
 -   [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 
-Per abilitare l'ALB privato utilizzando l'indirizzo IP privato portatile pre-assegnato fornito da IBM:
+Per abilitare un ALB privato predefinito utilizzando l'indirizzo IP privato portatile fornito da IBM preassegnato:
 
-1. Elenca gli ALB disponibili nel tuo cluster per ottenere l'ID dell'ALB privato. Sostituisci <em>&lt;cluser_name&gt;</em> con il nome del cluster in cui è distribuita l'applicazione che vuoi esporre.
+1. Ottieni l'ID dell'ALB privato predefinito che vuoi abilitare. Sostituisci <em>&lt;cluster_name&gt;</em> con il nome del cluster in cui viene distribuita l'applicazione che vuoi esporre.
 
     ```
-    bx cs albs --cluster <cluser_name>
+    ibmcloud ks albs --cluster <cluster_name>
     ```
     {: pre}
 
-    Il campo **Status** per l'ALB privato è _disabled_.
+    Il campo **Status** per gli ALB privati è _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
     ```
     {: screen}
+    Nei cluster multizona, il suffisso numerato sull'ID ALB indica l'ordine in cui è stato aggiunto l'ALB.
+    * Ad esempio, il suffisso `-alb1` sull'ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` indica che è stato il primo ALB privato predefinito che è stato creato. È presente nella zona in cui hai creato il cluster. Nell'esempio sopra riportato, il cluster è stato creato in `dal10`.
+    * Il suffisso `-alb2` nell'ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` indica che è stato il secondo ALB privato predefinito che è stato creato. È presente nella seconda zona che hai aggiunto al tuo cluster. Nell'esempio sopra riportato, la seconda zona è `dal12`.
 
 2. Abilita l'ALB privato. Sostituisci <em>&lt;private_ALB_ID&gt;</em> con l'ID dell'ALB privato indicato nell'output nel passo precedente.
 
    ```
-   bx cs alb-configure --albID <private_ALB_ID> --enable
+   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable
    ```
    {: pre}
 
 <br>
-Per abilitare l'ALB privato utilizzando il tuo proprio indirizzo IP privato portatile: 
+Per abilitare l'ALB privato utilizzando il tuo proprio indirizzo IP privato portatile:
 
 1. Configura la sottorete gestita dall'utente dell'indirizzo IP che hai scelto per instradare il traffico sulla VLAN privata del tuo cluster.
 
    ```
-   bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
+   ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
    ```
    {: pre}
 
@@ -760,8 +784,8 @@ Per abilitare l'ALB privato utilizzando il tuo proprio indirizzo IP privato port
    </thead>
    <tbody>
    <tr>
-   <td><code>&lt;cluser_name&gt;</code></td>
-   <td>Il nome o l'ID del cluster in cui l'applicazione che vuoi esporre viene distribuita. </td>
+   <td><code>&lt;cluster_name&gt;</code></td>
+   <td>Il nome o l'ID del cluster in cui l'applicazione che vuoi esporre viene distribuita.</td>
    </tr>
    <tr>
    <td><code>&lt;subnet_CIDR&gt;</code></td>
@@ -769,29 +793,29 @@ Per abilitare l'ALB privato utilizzando il tuo proprio indirizzo IP privato port
    </tr>
    <tr>
    <td><code>&lt;private_VLAN_ID&gt;</code></td>
-   <td>Un ID della VLAN privata disponibile. Puoi trovare l'ID di una VLAN privata disponibile eseguendo `bx cs vlans`.</td>
+   <td>Un ID della VLAN privata disponibile. Puoi trovare l'ID di una VLAN privata disponibile eseguendo `ibmcloud ks vlans`.</td>
    </tr>
    </tbody></table>
 
 2. Elenca gli ALB disponibili nel tuo cluster per ottenere l'ID dell'ALB privato.
 
     ```
-    bx cs albs --cluster <cluster_name>
+    ibmcloud ks albs --cluster <cluster_name>
     ```
     {: pre}
 
     Il campo **Status** per l'ALB privato è _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
     ```
     {: screen}
 
 3. Abilita l'ALB privato. Sostituisci <em>&lt;private_ALB_ID&gt;</em> con l'ID dell'ALB privato indicato nell'output nel passo precedente e <em>&lt;user_IP&gt;</em> con l'indirizzo IP dalla sottorete gestita dall'utente che vuoi utilizzare.
 
    ```
-   bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
+   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
    ```
    {: pre}
 
@@ -806,9 +830,10 @@ Esponi le applicazioni a una rete privata utilizzando l'ALB Ingress privato.
 
 Prima di iniziare:
 * Esamina i [prerequisiti](#config_prereqs) Ingress.
+* Esamina le opzioni per la pianificazione dell'accesso privato alle applicazioni quando i nodi di lavoro vengono connessi a [una VLAN pubblica e a una privata](cs_network_planning.html#private_both_vlans) oppure [solo a una VLAN privata](cs_network_planning.html#private_vlan).
+    * VLAN pubblica e privata: per usare il provider DNS esterno predefinito, devi [configurare i nodi edge con l'accesso pubblico](cs_edge.html#edge) e [configurare una VRA (Virtual Router Appliance) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+    * Solo VLAN privata: devi configurare un [servizio DNS che sia disponibile sulla rete privata ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 * [Abilita il programma di bilanciamento del carico dell'applicazione privato](#private_ingress).
-* Se hai dei nodi di lavoro privati e desideri utilizzare un provider DNS esterno, devi [configurare i nodi edge con l'accesso pubblico](cs_edge.html#edge) e [configurare un VRA (Virtual Router Appliance) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-* Se hai nodi di lavoro privati e desideri rimanere solo su una rete privata, devi [configurare un servizio DNS in loco e privato ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) per risolvere le richieste URL alle tue applicazioni.
 
 ### Passo 1: Distribuisci le applicazioni e crea i servizi dell'applicazione.
 {: #private_1}
@@ -819,14 +844,14 @@ Inizia distribuendo le tue applicazioni e creando i servizi Kubernetes per espor
 1.  [Distribuisci la tua applicazione al cluster](cs_app.html#app_cli). Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file di configurazione, ad esempio `app: code`. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione in modo che possano essere inclusi nel bilanciamento del carico Ingress.
 
 2.   Crea un servizio Kubernetes per ogni applicazione che desideri esporre. La tua applicazione deve essere esposta da un servizio Kubernetes per poter essere inclusa dall'ALB cluster nel bilanciamento del carico Ingress.
-      1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato, ad esempio, `myapp_service.yaml`.
+      1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato, ad esempio, `myappservice.yaml`.
       2.  Definisci un servizio per l'applicazione che l'ALB esporrà.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -854,7 +879,7 @@ Inizia distribuendo le tue applicazioni e creando i servizi Kubernetes per espor
       4.  Crea il servizio nel tuo cluster. Se le applicazioni vengono distribuite in più spazi dei nomi nel tuo cluster, assicurati che il servizio venga distribuito nello stesso spazio dei nomi dell'applicazione che vuoi esporre.
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Ripeti questi passi per ogni applicazione che vuoi esporre.
@@ -870,18 +895,18 @@ Il carico ALB bilancia il traffico di rete HTTP alle tue applicazioni. Per bilan
 1.   Crea un dominio personalizzato. Per registrare il tuo dominio personalizzato, utilizza il provider DNS (Domain Name Service) o il DNS [{{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * Se le applicazioni che vuoi che Ingress esponga in spazi dei nomi differenti in un cluster, registra il dominio personalizzato come un dominio jolly, ad esempio `*.custom_domain.net`.
 
-2. Associa il tuo dominio personalizzato all'indirizzo IP privato portatile dell'ALB privato fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP privato portatile dell'ALB privato, esegui `bx cs albs --cluster <cluster_name>`.
-3.   Facoltativo: se vuoi utilizzare TLS, importa o crea un certificato TLS e il segreto della chiave. Se stai utilizzando un dominio jolly, accertarti di aver importato o creato un certificato jolly.
+2. Associa il tuo dominio personalizzato all'indirizzo IP privato portatile dell'ALB privato fornito da IBM aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP privato portatile dell'ALB privato, esegui `ibmcloud ks albs --cluster <cluster_name>`.
+3.   Facoltativo: per utilizzare TLS, importa o crea un certificato TLS e un segreto chiave. Se usi un dominio jolly, assicurati di importare o creare un certificato jolly nello spazio dei nomi <code>default</code> in modo che l'ALB possa accedere e usare il certificato in ciascuno spazio dei nomi.
       * Se in {{site.data.keyword.cloudcerts_long_notm}} è memorizzato un certificato TLS che vuoi utilizzare, puoi importare il suo segreto associato nel tuo cluster immettendo il seguente comando:
         ```
-        bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+        ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
         ```
         {: pre}
       * Se non hai un certificato TLS pronto, segui questa procedura:
         1. Crea un certificato e una chiave TLS per il tuo dominio codificati in formato PEM.
         2. Crea un segreto che utilizza il certificato e la chiave TLS. Sostituisci <em>&lt;tls_secret_name&gt;</em> con un nome per il tuo segreto Kubernetes, <em>&lt;tls_key_filepath&gt;</em> con il percorso al tuo file della chiave TLS personalizzato e <em>&lt;tls_cert_filepath&gt;</em> con il percorso al tuo file del certificato TLS personalizzato.
           ```
-          kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
+          kubectl create secret tls <tls_secret_name> --key=<tls_key_filepath> --cert=<tls_cert_filepath>
           ```
           {: pre}
 
@@ -896,7 +921,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
 
 1. Apri il tuo editor preferito e crea un file di configurazione Ingress denominato, ad esempio, `myingressresource.yaml`.
 
-2.  Definisci una risorsa Ingress nel tuo file di configurazione che utilizza il tuo dominio personalizzato per instradare il traffico di rete in entrata ai servizi che hai creato in precedenza. 
+2.  Definisci una risorsa Ingress nel tuo file di configurazione che utilizza il tuo dominio personalizzato per instradare il traffico di rete in entrata ai servizi che hai creato in precedenza.
 
     YAML di esempio che non utilizza TLS:
     ```
@@ -957,7 +982,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Sostituisci <em>&lt;private_ALB_ID&gt;</em> con l'ID del tuo ALB privato. Per trovare l'ID ALB, esegui <code>bx cs albs --cluster <my_cluster></code>. Per ulteriori informazioni su questa annotazione Ingress, consulta [Instradamento del programma di bilanciamento del carico dell'applicazione privato](cs_annotations.html#alb-id).</td>
+    <td>Sostituisci <em>&lt;private_ALB_ID&gt;</em> con l'ID del tuo ALB privato. Esegui <code>ibmcloud ks albs --cluster <my_cluster></code> per trovare l'ID ALB. Per ulteriori informazioni su questa annotazione Ingress, consulta [Instradamento del programma di bilanciamento del carico dell'applicazione privato](cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls/hosts</code></td>
@@ -968,7 +993,7 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td>Sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto che hai creato in precedenza e che contiene la tua chiave e il tuo certificato TLS personalizzati. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per visualizzare i segreti associati a un certificato TLS.
+    <td>Sostituisci <em>&lt;tls_secret_name&gt;</em> con il nome del segreto che hai creato in precedenza e che contiene la tua chiave e il tuo certificato TLS personalizzati. Se hai importato un certificato da {{site.data.keyword.cloudcerts_short}}, puoi eseguire <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> per vedere i segreti associati a un certificato TLS.
     </tr>
     <tr>
     <td><code>host</code></td>
@@ -1013,10 +1038,14 @@ Le risorse Ingress definiscono le regole di instradamento che l'ALB utilizza per
 
 La tua risorsa Ingress viene creata nello stesso spazio dei nomi dei tuoi servizi dell'applicazione. Le tue applicazioni in questo spazio dei nomi vengono registrate con l'ALB Ingress del cluster.
 
-### Passo 4: Accedi alla tua applicazione dalla tua rete privata 
+### Passo 4: Accedi alla tua applicazione dalla tua rete privata
 {: #private_4}
 
-Dall'interno del tuo firewall della rete privata, immetti l'URL del servizio dell'applicazione in un browser web.
+1. Prima di poter accedere alla tua applicazione, assicurati di poter accedere a un servizio DNS.
+  * VLAN pubblica e privata: per usare il provider DNS esterno predefinito, devi [configurare i nodi edge con l'accesso pubblico](cs_edge.html#edge) e [configurare una VRA (Virtual Router Appliance) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+  * Solo VLAN privata: devi configurare un [servizio DNS che sia disponibile sulla rete privata ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+
+2. Dall'interno del tuo firewall della rete privata, immetti l'URL del servizio dell'applicazione in un browser web.
 
 ```
 https://<domain>/<app1_path>
@@ -1048,19 +1077,24 @@ Per un'esercitazione completa su come proteggere le comunicazioni tra i microser
 <br />
 
 
-## Configurazioni facoltative per i programmi di bilanciamento del carico dell'applicazione
-{: #configure_alb}
+## Personalizzazione di una risorsa Ingress con le annotazioni
+{: #annotations}
 
-Puoi ulteriormente configurare un programma di bilanciamento del carico dell'applicazione con le seguenti opzioni.
+Per aggiungere funzionalità al tuo ALB Ingress, puoi aggiungere le annotazioni specifiche di IBM come metadati in una risorsa Ingress.
+{: shortdesc}
 
--   [Apertura di porte nel programma di bilanciamento del carico dell'applicazione Ingress](#opening_ingress_ports)
--   [Configurazione di protocolli SSL e cifrature SSL a livello di HTTP](#ssl_protocols_ciphers)
--   [Personalizzazione del formato di log Ingress](#ingress_log_format)
--   [Personalizzazione del tuo programma di bilanciamento del carico dell'applicazione con le annotazioni](cs_annotations.html)
-{: #ingress_annotation}
+Inizia con alcune delle annotazioni usate più comunemente.
+* [redirect-to-https](cs_annotations.html#redirect-to-https): converte le richieste client HTTP non sicure in HTTPS.
+* [rewrite-path](cs_annotations.html#rewrite-path): instrada il traffico di rete in entrata a un percorso diverso su cui è in ascolto la tua applicazione di backend.
+* [ssl-services](cs_annotations.html#ssl-services): usa TLS per crittografare il traffico verso le tue applicazioni upstream che richiedono HTTPS.
+* [client-max-body-size](cs_annotations.html#client-max-body-size): imposta la dimensione massima del corpo che il client può inviare come parte di una richiesta. 
+
+Per un elenco completo delle annotazioni supportate, vedi [Personalizzazione di Ingress con le annotazioni](cs_annotations.html).
+
+<br />
 
 
-### Apertura di porte nel programma di bilanciamento del carico dell'applicazione Ingress
+## Apertura delle porte nell'ALB Ingress
 {: #opening_ingress_ports}
 
 Per impostazione predefinita, solo le porte 80 e 443 sono esposte nell'ALB Ingress. Per esporre altre porte, puoi modificare la risorsa della mappa di configurazione `ibm-cloud-provider-ingress-cm`.
@@ -1075,7 +1109,7 @@ Per impostazione predefinita, solo le porte 80 e 443 sono esposte nell'ALB Ingre
 
 2. Aggiungi una sezione <code>data</code> e specifica le porte pubbliche `80`, `443` e le altre porte che vuoi esporre separate da un punto e virgola (;).
 
-    **Importante**: per impostazione predefinita, le porte 80 e 443 sono aperte. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte che specifichi nel campo `public-ports`. Qualsiasi porta che non sia specificata viene chiusa. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`. 
+    **Importante**: per impostazione predefinita, le porte 80 e 443 sono aperte. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte che specifichi nel campo `public-ports`. Qualsiasi porta che non sia specificata viene chiusa. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`.
 
     ```
     apiVersion: v1
@@ -1110,23 +1144,99 @@ Per impostazione predefinita, solo le porte 80 e 443 sono esposte nell'ALB Ingre
  ```
  {: pre}
 
- Output:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
+Per ulteriori informazioni sulle risorse della mappa di configurazione, consulta la [documentazione di Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
- Data
- ====
+<br />
 
-  public-ports: "80;443;9443"
- ```
- {: screen}
 
-Per ulteriori informazioni sulle risorse della mappa di configurazione, consulta la [documentazione di Kubernetes](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
+## Conservazione dell'indirizzo IP di origine
+{: #preserve_source_ip}
 
-### Configurazione di protocolli SSL e cifrature SSL a livello di HTTP
+Per impostazione predefinita, l'indirizzo IP di origine della richiesta client non viene conservato. Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, la richiesta viene instradata a un pod per il servizio di programma di bilanciamento del carico che espone l'ALB. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.
+
+Per conservare l'indirizzo IP di origine originale della richiesta client, puoi [abilitare la conservazione dell'IP di origine ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). La conservazione dell'IP del client è utile quando, ad esempio, i server delle applicazioni devono applicare le politiche di sicurezza e di controllo dell'accesso.
+
+**Nota**: se [disabiliti un ALB](cs_cli_reference.html#cs_alb_configure), le modifiche dell'IP di origine che apporti al servizio di bilanciamento del carico che espone l'ALB andranno perse. Quando riabiliti l'ALB, devi abilitare di nuovo l'IP di origine.
+
+Per abilitare la conservazione dell'IP di origine, modifica il servizio del programma di bilanciamento del carico che espone un ALB Ingress: 
+
+1. Abilita la conservazione dell'IP di origine per un singolo ALB o per tutti gli ALB nel tuo cluster.
+    * Per impostare la conservazione dell'IP di origine per un singolo ALB:
+        1. Ottieni l'ID dell'ALB per il quale vuoi abilitare l'IP di origine. I servizi ALB hanno un formato simile a `public-cr18e61e63c6e94b658596ca93d087eed9-alb1` per un ALB pubblico o `private-cr18e61e63c6e94b658596ca93d087eed9-alb1` per un ALB privato.
+            ```
+            kubectl get svc -n kube-system | grep alb
+            ```
+            {: pre}
+
+        2. Apri il file YAML per il servizio del programma di bilanciamento del carico che espone l'ALB.
+            ```
+            kubectl edit svc <ALB_ID> -n kube-system
+            ```
+            {: pre}
+
+        3. In **spec**, modifica il valore di **externalTrafficPolicy** da `Cluster` a `Local`.
+
+        4. Salva e chiudi il file di configurazione. L'output è simile al seguente: 
+
+            ```
+            service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+            ```
+            {: screen}
+    * Per impostare la conservazione dell'IP di origine per tutti gli ALB pubblici nel tuo cluster, esegui questo comando:
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+
+        Output di esempio:
+        ```
+        "public-cr18e61e63c6e94b658596ca93d087eed9-alb1", "public-cr17e61e63c6e94b658596ca92d087eed9-alb2" patched
+        ```
+        {: screen}
+
+    * Per impostare la conservazione dell'IP di origine per tutti gli ALB privati nel tuo cluster, esegui questo comando:
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+
+        Output di esempio:
+        ```
+        "private-cr18e61e63c6e94b658596ca93d087eed9-alb1", "private-cr17e61e63c6e94b658596ca92d087eed9-alb2" patched
+        ```
+        {: screen}
+
+2. Verifica che l'IP di origine venga conservato nei log dei tuoi pod ALB. 
+    1. Ottieni l'ID di un pod per l'ALB che hai modificato.
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+
+    2. Apri i log relativi a tale pod ALB. Verifica che l'indirizzo IP per il campo `client` sia l'indirizzo IP della richiesta client invece dell'indirizzo IP del servizio del programma di bilanciamento del carico.
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+3. Ora, quando nelle intestazioni ricerchi le richieste inviate alla tua applicazione backend, puoi vedere l'indirizzo IP del client nell'intestazione `x-forwarded-for`.
+
+4. Se non vuoi più conservare l'IP di origine, puoi ripristinare le modifiche apportate al servizio. 
+    * Per ripristinare la conservazione dell'IP di origine per i tuoi ALB pubblici:
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
+    * Per ripristinare la conservazione dell'IP di origine per i tuoi ALB privati:
+        ```
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
+
+<br />
+
+
+## Configurazione di protocolli SSL e cifrature SSL a livello di HTTP
 {: #ssl_protocols_ciphers}
 
 Abilita i protocolli e le cifrature SSL a livello globale HTTP modificando la mappa di configurazione `ibm-cloud-provider-ingress-cm`.
@@ -1168,28 +1278,24 @@ Per modificare la mappa di configurazione per l'abilitazione di protocolli e cif
    ```
    {: pre}
 
-   Output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
+<br />
 
-   Data
- ====
 
-    ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
-  ssl-ciphers: "HIGH:!aNULL:!MD5"
-   ```
-   {: screen}
+## Ottimizzazione delle prestazioni
+{: #perf_tuning}
 
-### Personalizzazione del formato e del contenuto del log Ingress
-{: #ingress_log_format}
+Per ottimizzare le prestazioni dei tuoi ALB Ingress, puoi modificare le impostazioni predefinite in base alle tue necessità.
+{: shortdesc}
 
-Puoi personalizzare il contenuto e il formato dei log raccolti per l'ALB Ingress.
-{:shortdesc}
 
-Per impostazione predefinita, il formato dei log Ingress è JSON e mostrano i campi log comuni. Tuttavia, puoi anche creare un formato di log personalizzato. Per scegliere quali componenti di log verranno inoltrati e come verranno organizzati nell'output del log: 
+
+### Aumento del tempo di connessione keepalive
+{: #keepalive_time}
+
+Le connessioni keepalive possono avere un impatto maggiore sulle prestazioni riducendo il sovraccarico di CPU e di rete necessari per aprire e chiudere le connessioni. Per ottimizzare le prestazioni dei tuoi ALB, puoi modificare l'impostazione predefinita del tempo keepalive per le connessioni tra l'ALB e il client.
+{: shortdesc}
+
+Nella mappa di configurazione Ingress `ibm-cloud-provider-ingress-cm`, il campo `keep-alive` imposta il timeout, in secondi, durante il quale la connessione client keepalive rimane aperta nell'ALB Ingress. Per impostazione predefinita, `keep-alive` è impostato su `8s`. Puoi sovrascrivere il valore predefinito modificando la mappa di configurazione Ingress. 
 
 1. Crea e apri una versione locale del file di configurazione per la risorsa della mappa di configurazione `ibm-cloud-provider-ingress-cm`.
 
@@ -1198,108 +1304,153 @@ Per impostazione predefinita, il formato dei log Ingress è JSON e mostrano i ca
     ```
     {: pre}
 
-2. Aggiungi una sezione <code>data</code>. Aggiungi il campo `log-format` e, facoltativamente, il campo `log-format-escape-json`. 
+2. Modifica il valore di `keep-alive` da `8s` a un valore più grande 
 
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: pre}
+   ```
+   apiVersion: v1
+   data:
+     keep-alive: "8s"
+   kind: ConfigMap
+   metadata:
+     name: ibm-cloud-provider-ingress-cm
+     namespace: kube-system
+   ```
+   {: codeblock}
 
-    <table>
-    <caption>Componenti del file YAML </caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione della configurazione del formato di log</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>log-format</code></td>
-    <td>Sostituisci <code>&lt;key&gt;</code> con il nome del componente di log e <code>&lt;log_variable&gt;</code> con una variabile per il componente di cui desideri raccogliere le voci di log. Puoi includere il testo e la punteggiatura che desideri nella voce di log, ad esempio le virgolette nei valori stringa e le virgole per separare i componenti di log. Ad esempio, se formatti un componente utilizzando <code>request: "$request"</code>, generi quanto segue in una voce del log: <code>request: "GET / HTTP/1.1",</code> . Per un elenco di tutte le variabili che puoi utilizzare, vedi l'<a href="http://nginx.org/en/docs/varindex.html">elenco di variabili Nginx</a>.<br><br>Per registrare un'intestazione aggiuntiva come ad esempio <em>x-custom-ID</em>, aggiungi la seguente coppia chiave-valore al contenuto del log personalizzato: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>I trattini (<code>-</code>) vengono convertiti in caratteri di sottolineatura (<code>_</code>) e <code>$http_</code> deve essere aggiunto come prefisso al nome intestazione personalizzato. </td>
-    </tr>
-    <tr>
-    <td><code>log-format-escape-json</code></td>
-    <td>Facoltativo: per impostazione predefinita, i log vengono generati in formato testo. Per generare i log in formato JSON, aggiungi il campo <code>log-format-escape-json</code> e utilizza il valore <code>true</code>.</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    </dl>
+3. Salva il file di configurazione.
 
-    Ad esempio, il tuo formato di log potrebbe contenere le seguenti variabili:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
-                    time_date: [$time_local], request: "$request",
-                    status: $status, http_referer: "$http_referer",
-                    http_user_agent: "$http_user_agent",
-                    request_id: $request_id}'
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: screen}
+4. Verifica che le modifiche alla mappa di configurazione siano state applicate.
 
-    Una voce di log basata su questo formato sarà simile al seguente esempio:
-    ```
-    remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
-    ```
-    {: screen}
-
-    Per creare un formato di log personalizzato basato sul formato predefinito per i log ALB, modifica la seguente sezione come necessario e aggiungila alla tua mappa di configurazione:
-    ```
-    apiVersion: v1
-    data:
-      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
-                    "host": "$http_host", "scheme": "$scheme",
-                    "request_method": "$request_method", "request_uri": "$uri",
-                    "request_id": "$request_id", "status": $status,
-                    "upstream_addr": "$upstream_addr", "upstream_status":
-                    $upstream_status, "request_time": $request_time,
-                    "upstream_response_time": $upstream_response_time,
-                    "upstream_connect_time": $upstream_connect_time,
-                    "upstream_header_time": $upstream_header_time}'
-      log-format-escape-json: "true"
-    kind: ConfigMap
-    metadata:
-      name: ibm-cloud-provider-ingress-cm
-      namespace: kube-system
-    ```
-    {: codeblock}
-
-4. Salva il file di configurazione.
-
-5. Verifica che le modifiche alla mappa di configurazione siano state applicate.
-
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
-
- Output di esempio:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:    kube-system
- Labels:        <none>
- Annotations:    <none>
-
- Data
- ====
-
-  log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-  log-format-escape-json: "true"
- ```
- {: screen}
-
-4. Per visualizzare i log ALB Ingress, [crea una configurazione di registrazione per il servizio Ingress](cs_health.html#logging) nel tuo cluster.
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
 
 <br />
 
 
+## Configurazione di un controller Ingress gestito dall'utente
+{: #user_managed}
 
+Esegui il tuo controllo Ingress su {{site.data.keyword.Bluemix_notm}} mentre usi il dominio secondario Ingress fornito da IBM e il certificato TLS assegnato al tuo cluster.
+{: shortdesc}
+
+La configurazione del tuo controller Ingress personalizzato può essere utile quando hai requisiti Ingress specifici. Quando esegui il tuo controller Ingress invece dell'ALB Ingress fornito da IBM, sei responsabile della fornitura della sua immagine, della sua gestione e del suo aggiornamento. 
+
+1. Ottieni l'ID dell'ALB pubblico predefinito. L'ALB pubblico ha un formato simile a `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
+
+2. Disabilita l'ALB pubblico predefinito. L'indicatore `--disable-deployment` disabilita la distribuzione ALB fornita da IBM, ma non rimuove la registrazione DNS per il dominio secondario Ingress fornito da IBM o il servizio del programma di bilanciamento del carico usato per esporre il controller Ingress.
+    ```
+    ibmcloud ks alb-configure --alb-ID <ALB_ID> --disable-deployment
+    ```
+    {: pre}
+
+3. Prepara il file di configurazione per il tuo controller Ingress. Ad esempio, puoi usare il file di configurazione YAML per il [controller Ingress della community conginx ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
+
+4. Distribuisci il tuo controller Ingress. **Importante**: per continuare a usare il servizio del programma di bilanciamento del carico che espone il controller e il dominio secondario Ingress fornito da IBM, il tuo controller deve essere distribuito nello spazio dei nomi `kube-system`.
+    ```
+    kubectl apply -f customingress.yaml -n kube-system
+    ```
+    {: pre}
+
+5. Ottieni l'etichetta sulla tua distribuzione Ingress personalizzata.
+    ```
+    kubectl get deploy nginx-ingress-controller -n kube-system --show-labels
+    ```
+    {: pre}
+
+    Nel seguente output di esempio, il valore dell'etichetta è `ingress-nginx`:
+    ```
+    NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       LABELS
+    nginx-ingress-controller   1         1         1            1           1m        app=ingress-nginx
+    ```
+    {: screen}
+
+5. Usando l'ID ALB sei entrato nel passo 1, l'apertura del servizio del programma di bilanciamento del carico che espone l'ALB.
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+6. Aggiorna il servizio del programma di bilanciamento del carico in modo che punti alla tua distribuzione Ingress personalizzata. In `spec/selector`, rimuovi l'ID ALB dall'etichetta `app` e aggiungi l'etichetta per il tuo controller Ingress che hai ottenuto nel passo 5.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      ...
+    spec:
+      clusterIP: 172.21.xxx.xxx
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 169.xx.xxx.xxx
+      ports:
+      - name: http
+        nodePort: 31070
+        port: 80
+        protocol: TCP
+        targetPort: 80
+      - name: https
+        nodePort: 31854
+        port: 443
+        protocol: TCP
+        targetPort: 443
+      selector:
+        app: <custom_controller_label>
+      ...
+    ```
+    {: codeblock}
+    1. Facoltativo: per impostazione predefinita, il servizio del programma di bilanciamento del carico consente il traffico sulla porta 80 e 443. Se il tuo controller Ingress personalizzato richiede una diversa serie di porte, aggiungi tali porte alla sezione `ports`.
+
+7. Salva e chiudi il file di configurazione. L'output è simile al seguente:
+    ```
+    service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+    ```
+    {: screen}
+
+8. Verifica che ora l'ALB `Selector` punti al tuo controller.
+    ```
+    kubectl describe svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+    Output di esempio:
+    ```
+    Name:                     public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Namespace:                kube-system
+    Labels:                   app=public-cre58bff97659a4f41bc927362d5a8ee7a-alb1
+    Annotations:              service.kubernetes.io/ibm-ingress-controller-public=169.xx.xxx.xxx
+                              service.kubernetes.io/ibm-load-balancer-cloud-provider-zone=wdc07
+    Selector:                 app=ingress-nginx
+    Type:                     LoadBalancer
+    IP:                       172.21.xxx.xxx
+    IP:                       169.xx.xxx.xxx
+    LoadBalancer Ingress:     169.xx.xxx.xxx
+    Port:                     port-443  443/TCP
+    TargetPort:               443/TCP
+    NodePort:                 port-443  30087/TCP
+    Endpoints:                172.30.xxx.xxx:443
+    Port:                     port-80  80/TCP
+    TargetPort:               80/TCP
+    NodePort:                 port-80  31865/TCP
+    Endpoints:                172.30.xxx.xxx:80
+    Session Affinity:         None
+    External Traffic Policy:  Cluster
+    Events:                   <none>
+    ```
+    {: screen}
+
+8. Distribuisci le altre risorse necessarie al tuo controller Ingress personalizzato, ad esempio la mappa di configurazione. 
+
+9. Se hai un cluster multizona, ripeti questi passi per ciascun ALB.
+
+10. Crea le risorse Ingress per le tue applicazioni seguendo i passi presenti in [Esposizione delle applicazioni all'interno del tuo cluster al pubblico](#ingress_expose_public).
+
+Ora le tue applicazioni sono esposte dal tuo controller Ingress personalizzato. Per ripristinare la distribuzione ALB fornita da IBM, abilita di nuovo l'ALB. L'ALB viene ridistribuito e il servizio del programma di bilanciamento del carico viene riconfigurato automaticamente per puntare all'ALB.
+
+```
+ibmcloud ks alb-configure --alb-ID <alb ID> --enable
+```
+{: pre}

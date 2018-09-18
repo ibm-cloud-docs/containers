@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -23,6 +23,57 @@ lastupdated: "2018-05-24"
 
 与 {{site.data.keyword.containerlong}} 中的内容保持同步。了解要探索的新功能、试用技巧或其他开发者当下认为很有用的一些热门主题。
 {:shortdesc}
+
+## 2018 年 7 月的热门主题
+{: #july18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 7 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>7 月 30 日</td>
+<td>[自带 Ingress 控制器](cs_ingress.html#user_managed)</td>
+<td>您对集群的 Ingress 控制器有非常具体的安全性或其他定制需求吗？如果有，那么您可能希望运行自己的 Ingress 控制器，而不是缺省 Ingress 控制器。</td>
+</tr>
+<tr>
+<td>7 月 10 日</td>
+<td>引入多专区集群</td>
+<td>想要提高集群可用性吗？现在，您可以使集群跨精选大城市区域中的多个专区。有关更多信息，请参阅[在 {{site.data.keyword.containershort_notm}} 中创建多专区集群](cs_clusters.html#multizone)。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 6 月的热门主题
+{: #june18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 6 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>6 月 13 日</td>
+<td>`bx` CLI 命令名称将更改为 `ic` CLI</td>
+<td>下载最新版本的 {{site.data.keyword.Bluemix_notm}} CLI 后，现在是使用 `ic` 前缀而不是 `bx` 来运行命令。例如，通过运行 `ibmcloud ks clusters` 列出集群。</td>
+</tr>
+<tr>
+<td>6 月 12 日</td>
+<td>[pod 安全策略](cs_psp.html)</td>
+<td>对于运行 Kubernetes 1.10.3 或更高版本的集群，可以配置 pod 安全策略以授权谁可以在 {{site.data.keyword.containerlong_notm}} 中创建和更新 pod。</td>
+</tr>
+<tr>
+<td>6 月 6 日</td>
+<td>[对 IBM 提供的 Ingress 通配符子域的 TLS 支持](cs_ingress.html#wildcard_tls)</td>
+<td>对于在 2018 年 6 月 6 日或之后创建的集群，现在 IBM 提供的 Ingress 子域 TLS 证书是通配符证书，可用于已注册的通配符子域。对于在 2018 年 6 月 6 日之前创建的集群，在更新当前 TLS 证书时，TLS 证书会更新为通配符证书。</td>
+</tr>
+</tbody></table>
 
 ## 2018 年 5 月的热门主题
 {: #may18}
@@ -75,7 +126,7 @@ lastupdated: "2018-05-24"
 <tr>
 <td>4 月 17 日</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>安装 {{site.data.keyword.Bluemix_notm}} Block Storage [插件](cs_storage.html#install_block)以在块存储器中保存持久数据。然后，可以为集群[创建新的](cs_storage.html#create)块存储器或[使用现有](cs_storage.html#existing_block)块存储器。</td>
+<td>安装 {{site.data.keyword.Bluemix_notm}} Block Storage [插件](cs_storage_block.html#install_block)以在块存储器中保存持久数据。然后，可以为集群[创建新的](cs_storage_block.html#add_block)块存储器或[使用现有](cs_storage_block.html#existing_block)块存储器。</td>
 </tr>
 <tr>
 <td>4 月 13 日</td>
@@ -112,13 +163,13 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
 <td>3 月 13 日</td>
-<td>[在圣保罗提供了位置](cs_regions.html)</td>
-<td>欢迎将巴西圣保罗作为美国南部区域的一个新位置。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此位置以及您集群所在区域内的其他位置。</td>
+<td>[在圣保罗提供了专区](cs_regions.html)</td>
+<td>欢迎巴西圣保罗成为美国南部区域的一个新专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此专区以及您集群所在区域内的其他专区。</td>
 </tr>
 <tr>
 <td>3 月 12 日</td>
 <td>[刚刚使用试用帐户加入 {{site.data.keyword.Bluemix_notm}}？请试用免费 Kubernetes 集群！](container_index.html#clusters)</td>
-<td>通过试用 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)，您可以部署一个免费集群并使用 21 天，以测试 Kubernetes 功能。</td>
+<td>通过试用 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)，您可以部署一个免费集群并使用 30 天，以测试 Kubernetes 功能。</td>
 </tr>
 </tbody></table>
 
@@ -136,7 +187,7 @@ lastupdated: "2018-05-24"
 <tr>
 <td>2 月 27 日</td>
 <td>工作程序节点的硬件虚拟机 (HVM) 映像</td>
-<td>通过 HVM 映像来提高工作负载的 I/O 性能。使用 `bx cs worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `bx cs worker-update` [命令](cs_cli_reference.html#cs_worker_update)在每个现有工作程序节点上进行激活。</td>
+<td>通过 HVM 映像来提高工作负载的 I/O 性能。使用 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)在每个现有工作程序节点上进行激活。</td>
 </tr>
 <tr>
 <td>2 月 26 日</td>
@@ -160,8 +211,8 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
 <td>2 月 14 日</td>
-<td>[在首尔提供了位置](cs_regions.html)</td>
-<td>将 Kubernetes 集群部署到亚太地区北部区域的首尔，刚好赶上奥运会。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此位置以及您集群所在区域内的其他位置。</td>
+<td>[在首尔提供了专区](cs_regions.html)</td>
+<td>将 Kubernetes 集群部署到亚太地区北部区域的首尔，刚好赶上奥运会。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此专区以及您集群所在区域内的其他专区。</td>
 </tr>
 <tr>
 <td>2 月 8 日</td>
@@ -187,8 +238,8 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
 <td>1 月 23 日</td>
-<td>[在新加坡和加拿大蒙特利尔提供了位置](cs_regions.html)</td>
-<td>新加坡和蒙特利尔是 {{site.data.keyword.containershort_notm}} 亚太地区北部和美国东部区域中可用的位置。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于这些位置以及您集群所在区域内的其他位置。</td>
+<td>[在新加坡和加拿大蒙特利尔提供了专区](cs_regions.html)</td>
+<td>新加坡和蒙特利尔是 {{site.data.keyword.containershort_notm}} 亚太地区北部和美国东部区域中可用的专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于这些专区以及您集群所在区域内的其他专区。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>

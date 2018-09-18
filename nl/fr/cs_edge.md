@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -25,8 +25,8 @@ Les noeuds worker de périphérie peuvent améliorer la sécurité de votre clus
 
 Lorsque ces noeuds worker sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 
-
-
+Si vous disposez d'un cluster à zones multiples et que vous voulez limiter le trafic réseau aux noeuds worker de périphérie, au moins deux noeuds worker de périphérie doivent être activés dans chaque zone pour assurer la haute disponibilité de l'équilibreur de charge ou des pods Ingress. Créez un pool de noeuds worker de périphérie couvrant toutes les zones de votre cluster, avec au moins 2 noeuds worker par zone.
+{: tip}
 
 ## Etiquetage de noeuds worker en tant que noeuds de périphérie
 {: #edge_nodes}
@@ -36,24 +36,24 @@ Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque 
 
 Avant de commencer :
 
-- [Créez un cluster standard.
-](cs_clusters.html#clusters_cli)
+- [Créez un cluster standard.](cs_clusters.html#clusters_cli)
 - Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+- [Créez un nouveau pool de noeuds worker](cs_clusters.html#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
 
 Pour étiqueter des noeuds worker en tant que noeuds de périphérie :
 
-1. Répertoriez tous les noeuds worker présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds worker sur chaque VLAN public comme noeuds worker de périphérie. Ingress nécessite au moins deux noeuds worker dans chaque zone pour fournir la haute disponibilité. 
+1. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker de périphérie. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
-2. Etiquetez les noeuds worker `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
+2. Etiquetez les noeuds worker `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les services d'équilibreur de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
 
   ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 

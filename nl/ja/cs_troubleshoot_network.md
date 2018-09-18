@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -49,7 +49,7 @@ lastupdated: "2018-05-24"
 1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、ロード・バランサー・サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
 
   ```
-  bx cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -73,7 +73,7 @@ lastupdated: "2018-05-24"
     {: pre}
 
     1.  サービスのタイプとして **LoadBalancer** を定義したことを確認します。
-    2.  LoadBalancer サービスの `spec.selector` セクションで、`<selector_key>` および `<selector_value>` が、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
+    2.  LoadBalancer サービスの `spec.selector` セクションで、`<selector_key>` および `<selector_value>` が、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用したキーと値のペアと同じであることを確認します。 ラベルが一致しない場合、LoadBalancer サービスの**「エンドポイント」**セクションに **<none>** と表示され、インターネットからアプリにアクセスできません。
     3.  アプリで listen している **port** を使用していることを確認します。
 
 3.  ロード・バランサー・サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
@@ -87,11 +87,11 @@ lastupdated: "2018-05-24"
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>ロード・バランサー・サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="cs_subnets.html#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **loadBalancerIP** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。スクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 構成スクリプトの **loadBalancerIP** セクションで、既存の IP アドレスを削除し、使用可能なポータブル・パブリック IP アドレスの 1 つを追加します。 スクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにすることもできます。</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。</li>
     <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li><code>kubectl get nodes</code> コマンドと <code>bx cs [&lt;cluster_name_or_ID&gt;] worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
+    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li><code>kubectl get nodes</code> コマンドと <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
 
 4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
     1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
@@ -128,7 +128,7 @@ Ingress のトラブルシューティングを行うには、以下のように
 1.  完全にデプロイされており、ALB の高可用性を確保するために 2 つ以上のワーカー・ノードがある標準クラスターをセットアップしたことを確認します。
 
   ```
-  bx cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -139,7 +139,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     1.  ALB サブドメインを取得します。
 
       ```
-      bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
+      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
@@ -192,7 +192,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     ```
     {: codeblock}
 
-    1.  ALB のサブドメインと TLS 証明書が正しいことを確認します。 IBM 提供のサブドメインと TLS 証明書を見つけるには、`bx cs cluster-get <cluster_name_or_ID>` を実行します。
+    1.  ALB のサブドメインと TLS 証明書が正しいことを確認します。 IBM 提供のサブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行します。
     2.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、**/** をパスとして含めます。
 5.  Ingress デプロイメントを確認して、警告メッセージやエラー・メッセージがないか探します。
 
@@ -256,7 +256,7 @@ Ingress のトラブルシューティングを行うには、以下のように
 {: tsSymptoms}
 Ingress アプリケーション・ロード・バランサー (ALB) のシークレットをクラスターにデプロイした後で、{{site.data.keyword.cloudcerts_full_notm}} 内の証明書を参照したところ、`Description` フィールドがシークレット名で更新されていません。
 
-ALB シークレットに関する情報をリストすると、状況は `*_failed` となっています。例えば、`create_failed`、`update_failed`、`delete_failed` などです。
+ALB シークレットに関する情報をリストすると、状況は `*_failed` となっています。 例えば、`create_failed`、`update_failed`、`delete_failed` などです。
 
 {: tsResolve}
 以下に示す、ALB シークレットが失敗する理由と対応するトラブルシューティング手順を確認してください。
@@ -270,7 +270,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  <tbody>
  <tr>
  <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
- <td>アカウント管理者に問い合わせて、{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**オペレーター**と**エディター**の両方の役割を割り当てるように依頼してください。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</td>
+ <td>アカウント管理者に問い合わせて、{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**の両方の役割を割り当てるように依頼してください。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</td>
  </tr>
  <tr>
  <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
@@ -278,11 +278,11 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  </tr>
  <tr>
  <td>作成時に提供された証明書 CRN が正しくない。</td>
- <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確であることがわかった場合は、<code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットの更新を試行します。</li><li>このコマンドの結果が <code>update_failed</code> 状況になる場合は、<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code> を実行して、シークレットを削除します。</li><li><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットを再デプロイします。</li></ol></td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確であることがわかった場合は、<code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットの更新を試行します。</li><li>このコマンドの結果が <code>update_failed</code> 状況になる場合は、<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code> を実行して、シークレットを削除します。</li><li><code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットを再デプロイします。</li></ol></td>
  </tr>
  <tr>
  <td>更新時に提供された証明書 CRN が正しくない。</td>
- <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確であることを確認した場合は、<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code> を実行して、シークレットを削除します。</li><li><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットを再デプロイします。</li><li><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットの更新を試行します。</li></ol></td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確であることを確認した場合は、<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code> を実行して、シークレットを削除します。</li><li><code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットを再デプロイします。</li><li><code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code> を実行して、シークレットの更新を試行します。</li></ol></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.cloudcerts_long_notm}} サービスがダウンしている。</td>
@@ -297,7 +297,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-`bx cs cluster-get <cluster>` を実行すると、クラスターが `normal` 状態であるのに、**Ingress サブドメイン**が表示されません。
+`ibmcloud ks cluster-get <cluster>` を実行すると、クラスターが `normal` 状態であるのに、**Ingress サブドメイン**が表示されません。
 
 次のようなエラー・メッセージが表示される可能性があります。
 
@@ -307,23 +307,47 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 {: screen}
 
 {: tsCauses}
-クラスターを作成する際、指定した VLAN で 8 つのパブリック・ポータブル・サブネットと 8 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containershort_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 クラスターの VLAN が既にその上限に達している場合、**Ingress サブドメイン**をプロビジョンできません。
+標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。{{site.data.keyword.containershort_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress Subdomain** をプロビジョンできません。
 
 VLAN のサブネット数を表示するには、以下のようにします。
 1.  [IBM Cloud インフラストラクチャー (SoftLayer) コンソール](https://control.bluemix.net/)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
 2.  クラスターの作成に使用した VLAN の **「VLAN の数 (VLAN Number)」**をクリックします。 **「サブネット」**セクションで、サブネットが 40 個以上存在するかどうかを確認します。
 
 {: tsResolve}
-新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/get-support/howtogetsupport.html#getting-customer-support)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](cs_cli_reference.html#cs_cluster_create)。
+新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans/order-vlan.html#order-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](cs_cli_reference.html#cs_cluster_create)。
 
-使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。
+使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。
 
 VLAN に使用していないサブネットがある場合、クラスターでサブネットを再利用できます。
-1.  使用したいサブネットが使用可能であることを確認します。 **注**: 使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 その場合、**バインドされたクラスター**があるサブネットを表示するために `bx cs subnets` コマンドを実行しても、自分のクラスターの情報しか表示できません。 サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。
+1.  使用したいサブネットが使用可能であることを確認します。 **注**: 使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 その場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報しか表示できません。 サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。
 
-2.  サービスが新規サブネットの作成を試行しないように、`--no-subnet` オプションを指定して [クラスターを作成](cs_cli_reference.html#cs_cluster_create)します。 再利用できるサブネットがある場所と VLAN を指定します。
+2.  サービスが新規サブネットの作成を試行しないように、`--no-subnet` オプションを指定して [クラスターを作成](cs_cli_reference.html#cs_cluster_create)します。 再利用できるサブネットがあるゾーンと VLAN を指定します。
 
-3.  `bx cs cluster-subnet-add` [コマンド](cs_cli_reference.html#cs_cluster_subnet_add)を使用して、既存のサブネットをクラスターに追加します。 詳しくは、[Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再利用する](cs_subnets.html#custom)を参照してください。
+3.  `ibmcloud ks cluster-subnet-add` [コマンド](cs_cli_reference.html#cs_cluster_subnet_add)を使用して、既存のサブネットをクラスターに追加します。 詳しくは、[Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再利用する](cs_subnets.html#custom)を参照してください。
+
+<br />
+
+
+## Ingress ALB がゾーンにデプロイされない
+{: #cs_multizone_subnet_limit}
+
+{: tsSymptoms}
+複数ゾーン・クラスターがある場合、`ibmcloud ks albs <cluster>` を実行しても、ALB はゾーンにデプロイされません。例えば、3 つのゾーンにワーカー・ノードがある場合、パブリック ALB が 3 番目のゾーンにデプロイされなかった次のような出力が表示される場合があります。
+```
+ALB ID                                            Enabled   Status     Type      ALB IP   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
+private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
+public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
+public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
+```
+{: screen}
+
+{: tsCauses}
+各ゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。{{site.data.keyword.containershort_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターのパブリック VLAN が既にその上限に達している場合、そのゾーン用の Ingress ALB をプロビジョンできません。
+
+{: tsResolve}
+VLAN 上のサブネットの数を確認する場合、および別の VLAN の取得方法に関する手順については、[Ingress ALB のサブドメインを取得できない](#cs_subnet_limit)を参照してください。
 
 <br />
 
@@ -390,6 +414,48 @@ strongSwan Helm チャートとの VPN 接続を確立しようとすると、�
     <br />
 
 
+## 新しい strongSwan Helm チャートのリリースをインストールできない
+{: #cs_strongswan_release}
+
+{: tsSymptoms}
+ご使用の strongSwan Helm チャートを変更して、`helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan` を実行して、新しいリリースをインストールしようとします。しかし、次のエラーが表示されます。
+```
+Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
+```
+{: screen}
+
+{: tsCauses}
+このエラーは、前のリリースの strongSwan チャートが完全にはアンインストールされなかったことを示しています。
+
+{: tsResolve}
+
+1. 前のチャートのリリースを削除します。
+    ```
+    helm delete --purge <old_release_name>
+    ```
+    {: pre}
+
+2. 前のリリースのデプロイメントを削除します。デプロイメントおよび関連付けられているポッドの削除には、最大で 1 分かかります。
+    ```
+    kubectl delete deploy -n kube-system vpn-strongswan
+    ```
+    {: pre}
+
+3. デプロイメントが削除されたことを確認します。デプロイメントの `vpn-strongswan` がリストに表示されません。
+    ```
+    kubectl get deployments -n kube-system
+    ```
+    {: pre}
+
+4. 更新された strongSwan Helm チャートを、新しいリリース名で再インストールします。
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
+    ```
+    {: pre}
+
+<br />
+
+
 ## ワーカー・ノードの追加または削除後に strongSwan VPN 接続が失敗する
 {: #cs_vpn_fails_worker_add}
 
@@ -401,7 +467,7 @@ strongSwan Helm チャートとの VPN 接続を確立しようとすると、�
 * 新しいワーカー・ノード上で実行されているポッドからリモート・ネットワークにアクセスできない
 
 {: tsCauses}
-ワーカー・ノードを追加した場合:
+ワーカー・ノードをワーカー・プールに追加した場合:
 
 * 既存の `localSubnetNAT` 設定または `local.subnet` 設定によって VPN 接続を介して公開されていない、新しいプライベート・サブネットに、ワーカー・ノードがプロビジョンされました。
 * ワーカー・ノードのテイントまたはラベルが既存の `tolerations` または `nodeSelector` 設定に含まれていないため、VPN 経路をワーカー・ノードに追加できません。
@@ -453,7 +519,7 @@ strongSwan Helm チャートとの VPN 接続を確立しようとすると、�
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>追加したワーカーは、他のワーカーがある既存のサブネットとは異なる、新しいプライベート・サブネット上にデプロイされる可能性があります。プライベート・ネットワークの NodePort または LoadBalancer サービスでアプリが公開されており、追加したワーカー上にそれらのアプリがある場合は、この設定に新しいサブネットの CIDR を追加してください。**注**: `local.subnet` に値を追加する場合は、オンプレミス・サブネットの VPN 設定を確認して、それらの設定も更新する必要があるかどうか判断してください。</td>
+     <td>追加したワーカーは、他のワーカーがある既存のサブネットとは異なる、新しいプライベート・サブネット上にデプロイされる可能性があります。 プライベート・ネットワークの NodePort または LoadBalancer サービスでアプリが公開されており、追加したワーカー上にそれらのアプリがある場合は、この設定に新しいサブネットの CIDR を追加してください。 **注**: `local.subnet` に値を追加する場合は、オンプレミス・サブネットの VPN 設定を確認して、それらの設定も更新する必要があるかどうか判断してください。</td>
      </tr>
      </tbody></table>
 
@@ -539,7 +605,7 @@ strongSwan Helm チャートとの VPN 接続を確立しようとすると、�
 - `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-Calico ポリシーを使用するには、クラスターの Kubernetes バージョン、Calico CLI バージョン、Calico 構成ファイル構文、およびポリシーの表示コマンドの 4 つの要因すべてが正しい組み合わせになっている必要があります。これらの要因のうち 1 つ以上が、正しいバージョンになっていません。
+Calico ポリシーを使用するには、クラスターの Kubernetes バージョン、Calico CLI バージョン、Calico 構成ファイル構文、およびポリシーの表示コマンドの 4 つの要因すべてが正しい組み合わせになっている必要があります。 これらの要因のうち 1 つ以上が、正しいバージョンになっていません。
 
 {: tsResolve}
 [Kubernetes バージョン 1.10 以降](cs_versions.html)のクラスターでは、Calico CLI v3.1、`calicoctl.cfg` v3 構成ファイル構文、および `calicoctl get GlobalNetworkPolicy` コマンドと `calicoctl get NetworkPolicy` コマンドを使用する必要があります。
@@ -550,17 +616,17 @@ Calico ポリシーを使用するには、クラスターの Kubernetes バー�
 
 1. クラスターの Kubernetes バージョンを表示します
     ```
-    bx cs cluster-get <cluster_name>
+    ibmcloud ks cluster-get <cluster_name>
     ```
     {: pre}
 
     * クラスターが Kubernetes バージョン 1.10 以降である場合は、以下のようにします。
-        1. [バージョン 3.1.1 Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。この構成には、Calico v3 構文を使用するように `calicoctl.cfg` ファイルを手動で更新することも含まれます。
-        2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
+        1. [バージョン 3.1.1 Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。 この構成には、Calico v3 構文を使用するように `calicoctl.cfg` ファイルを手動で更新することも含まれます。
+        2. 作成してクラスターに適用するすべてのポリシーで、[Calico v3 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) が使用されていることを確認します。 既存のポリシー `.yaml` または `.json` ファイルで Calico v2 構文が使用されている場合は、[`calicoctl convert` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert) を使用して、これらを Calico v3 構文に変換できます。
         3. [ポリシーを表示](cs_network_policy.html#1.10_examine_policies)するには、必ず `calicoctl get GlobalNetworkPolicy` (グローバル・ポリシーの場合) および `calicoctl get NetworkPolicy --namespace <policy_namespace>` (特定の名前空間にスコープ設定されたポリシーの場合) を使用します。
 
     * クラスターが Kubernetes バージョン 1.9 以前である場合は、以下のようにします。
-        1. [バージョン 1.6.3 Calico CLI をインストールして構成します](cs_network_policy.html#1.9_install)。`calicoctl.cfg` ファイルで Calico v2 構文が使用されていることを確認します。
+        1. [バージョン 1.6.3 Calico CLI をインストールして構成します](cs_network_policy.html#1.9_install)。 `calicoctl.cfg` ファイルで Calico v2 構文が使用されていることを確認します。
         2. 作成してクラスターに適用するすべてのポリシーで、 [Calico v2 構文 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) が使用されていることを確認します。
         3. [ポリシーを表示](cs_network_policy.html#1.9_examine_policies)するには、必ず `calicoctl get policy` を使用します。
 
@@ -568,6 +634,73 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
 {: tip}
 
 <br />
+
+
+## 無効な VLAN ID が原因でワーカー・ノードを追加できない
+{: #suspended}
+
+{: tsSymptoms}
+ご使用の {{site.data.keyword.Bluemix_notm}} アカウントが一時停止されたか、クラスター内のすべてのワーカー・ノードが削除されました。アカウントが再アクティブ化された後、ワーカー・プールのサイズ変更または再バランス化を試みた場合、ワーカー・ノードを追加することはできません。次のようなエラー・メッセージが表示されます。
+
+```
+SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
+```
+{: screen}
+
+{: tsCauses}
+アカウントが一時停止されると、アカウント内のワーカー・ノードは削除されます。クラスターにワーカー・ノードがない場合、IBM Cloud インフラストラクチャー (SoftLayer) は、関連付けられたパブリック VLAN とプライベート VLAN を再利用します。ただし、クラスターのワーカー・プールのメタデータには前の VLAN ID があり、プールの再バランス化またはサイズ変更時にこれらの使用不可の ID が使用されます。各 VLAN は既にこのクラスターに関連付けられていないため、ノードを作成できません。
+
+{: tsResolve}
+
+[既存のワーカー・プールを削除](cs_cli_reference.html#cs_worker_pool_rm)してから、[新しいワーカー・プールを作成](cs_cli_reference.html#cs_worker_pool_create)できます。
+
+また、新しい VLAN をオーダーし、これらを使用してプール内に新しいワーカー・ノードを作成することによって、既存のワーカー・プールを保持することもできます。
+
+始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
+
+1.  新しい VLAN ID を必要とする対象のゾーンを取得するには、次のコマンドの出力の **Location** をメモします。**注**: クラスターが複数ゾーンの場合、ゾーンごとに VLAN ID が必要です。
+
+    ```
+    ibmcloud ks clusters
+    ```
+    {: pre}
+
+2.  [{{site.data.keyword.Bluemix_notm}} サポートに連絡する](/docs/infrastructure/vlans/order-vlan.html#order-vlans)ことによって、クラスターが含まれているゾーンごとに新しいプライベート VLAN とパブリック VLAN を取得します。
+
+3.  ゾーンごとの新しいプライベート VLAN ID と新しいパブリック VLAN ID をメモします。
+
+4.  ワーカー・プールの名前をメモします。
+
+    ```
+    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+5.  `zone-network-set` [コマンド](cs_cli_reference.html#cs_zone_network_set)を使用して、ワーカー・プールのネットワーク・メタデータを変更します。
+
+    ```
+    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
+    ```
+    {: pre}
+
+6.  **複数ゾーン・クラスターのみ**: クラスター内のゾーンごとに、**ステップ 5** を繰り返します。
+
+7.  ワーカー・プールの再バランス化またはサイズ変更を行って、新しい VLAN ID を使用するワーカー・ノードを追加します。以下に例を示します。
+
+    ```
+    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
+    ```
+    {: pre}
+
+8.  ワーカー・ノードが作成されたことを確認します。
+
+    ```
+    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
+    ```
+    {: pre}
+
+<br />
+
 
 
 ## ヘルプとサポートの取得
@@ -590,5 +723,5 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
 -   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
 
 {: tip}
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`bx cs clusters` を実行します。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
 

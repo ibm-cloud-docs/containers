@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -110,7 +110,7 @@ um ein privates Image aus einem Namensbereich in {{site.data.keyword.registrysho
     ```
     {: codeblock}
 
-    **Tipp:** Führen Sie `bx cr namespace-list` aus, um Ihre Namensbereichsinformationen abzurufen.
+    **Tipp:** Führen Sie `ibmcloud cr namespace-list` aus, um Ihre Namensbereichsinformationen abzurufen.
 
 3.  Erstellen Sie die Bereitstellung in Ihrem Cluster.
 
@@ -214,7 +214,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
 2.  Listen Sie die Tokens in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto auf.
 
     ```
-    bx cr token-list
+    ibmcloud cr token-list
     ```
     {: pre}
 
@@ -222,7 +222,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
 4.  Rufen Sie den Wert für Ihr Token ab. Ersetzen Sie <em>&lt;token-id&gt;</em> durch die ID des Tokens, das sie im vorherigen Schritt abgerufen haben.
 
     ```
-    bx cr token-get <token-id>
+    ibmcloud cr token-get <token-id>
     ```
     {: pre}
 
@@ -255,7 +255,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker-benutzername&gt;</em></code></td>
-    <td>Erforderlich. Der Benutzername für die Anmeldung bei Ihrer privaten Registry. Für {{site.data.keyword.registryshort_notm}} wurde als Benutzername <code>token</code> festgelegt.</td>
+    <td>Erforderlich. Der Benutzername für die Anmeldung bei Ihrer privaten Registry. Für {{site.data.keyword.registryshort_notm}} wird der Benutzername auf den Wert <strong><code>token</code></strong> gesetzt.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;tokenwert&gt;</em></code></td>
@@ -404,11 +404,11 @@ Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist das 
     </tr>
     <tr>
     <td><code><em>&lt;name_des_namensbereichs&gt;</em></code></td>
-    <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `bx cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
+    <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `ibmcloud cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
     </tr>
     <tr>
     <td><code><em>&lt;imagename&gt;</em></code></td>
-    <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl `bx cr image-list` aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}} aufzulisten.</td>
+    <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl `ibmcloud cr image-list` aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}}-Konto aufzulisten.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -64,9 +64,9 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
   <tr>
     <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
       <td>Para cambiar los permisos de acceso para el propietario de la cuenta:
-      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html">Gestión de acceso a clústeres</a>.</li>
-      <li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Tiene una configuración de creación de registro de aplicación con un enlace simbólico en la vía de acceso de la app.</td>
@@ -152,5 +152,5 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
 

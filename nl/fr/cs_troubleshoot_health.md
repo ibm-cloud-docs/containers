@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -64,9 +64,9 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
   <tr>
     <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur  ou Auditeur n'ont pas été affectées au propriétaire du compte sur cet espace.</td>
       <td>Pour modifier les droits d'accès du propriétaire du compte :
-      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html">Gestion de l'accès au cluster</a>.</li>
-      <li>Pour actualiser le jeton d'accès après modification des droits d'accès, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <li>Pour actualiser le jeton d'accès après une modification des droits d'accès, exécutez la commande <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Vous avez une configuration de consignation d'application avec un lien symbolique dans le chemin de votre application.</td>
@@ -77,7 +77,7 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
 
 Pour tester les modifications apportées lors de la résolution des incidents, vous pouvez déployer l'exemple de pod *Noisy*, lequel génère plusieurs événements de journal sur un noeud worker dans votre cluster.
 
-  1. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous voulez lancer la génération de journaux.
+  1. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster dans lequel vous voulez lancer la génération de journaux.
 
   2. Créez le fichier de configuration `deploy-noisy.yaml`.
 
@@ -147,11 +147,10 @@ Vous avez encore des problèmes avec votre cluster ?
 
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
-    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
-pour plus d'informations sur l'utilisation des forums.
+    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
 
 -   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
+Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`.
 

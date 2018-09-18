@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -38,10 +38,10 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 ## 전제조건
 
-- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성하십시오](../services/Registry/index.html).
+- [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](../services/Registry/index.html)하십시오.
 - [클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
-- [CLI에서 클러스터를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
-- [Docker 및 Kubernetes 용어에 대해 학습하십시오](cs_tech.html).
+- [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- [Docker 및 Kubernetes 용어에 대해 학습](cs_tech.html)하십시오.
 
 
 <br />
@@ -66,8 +66,8 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     a. 카탈로그의 **표준 유형**에서 **Python Flask**를 클릭하십시오. 이 표준 유형에는 Python 2 앱 및 Python 3 앱 모두를 위한 런타임 환경이 포함되어 있습니다.
 
-    b. 앱 이름 `cf-py-<name>`을 입력하고 **작성**을 클릭하십시오. 표준 유형의 앱 코드에 액세스하려면 먼저 CF 앱을 클라우드에 배치해야 합니다. 앱에는 어떤 이름이든 사용할 수 있습니다. 이 예의 이름을 사용하거나, `<name>`을 `cf-py-msx`와 같이 고유 ID로 대체할 수도 있습니다.
-    
+    b. 앱 이름 `cf-py-<name>`을 입력하고 **작성**을 클릭하십시오. 표준 유형의 앱 코드에 액세스하려면 먼저 CF 앱을 클라우드에 배치해야 합니다. 앱에는 어떤 이름이든 사용할 수 있습니다. 이 예의 이름을 사용하는 경우 `<name>`을 `cf-py-msx`와 같은 고유 ID로 대체하십시오.
+
     **주의**: 개인 정보를 앱, 컨테이너 이미지 또는 Kubernetes 리소스 이름으로 사용하지 마십시오.
 
     앱이 배치되면 "명령 인터페이스를 사용한 앱 다운로드, 수정 및 재배치"에 대한 지시사항이 표시됩니다.
@@ -127,7 +127,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 4. 앱 코드를 포함하는 Docker 이미지를 빌드하고 이 이미지를 개인용 레지스트리에 푸시하십시오.
 
   ```
-  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +147,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>고유 네임스페이스 및 이미지 이름을 포함하는 개인용 레지스트리 경로입니다. 이 예에서는 이미지에 대해 앱 디렉토리와 동일한 이름이 사용되었으나, 개인용 레지스트리의 이미지에 대해서는 어떤 이름이든 선택할 수 있습니다. 자신의 네임스페이스가 무엇인지 모르는 경우에는 `bx cr namespaces` 명령을 실행하여 찾아보십시오.</td>
+  <td>고유 네임스페이스 및 이미지 이름을 포함하는 개인용 레지스트리 경로입니다. 이 예에서는 이미지에 대해 앱 디렉토리와 동일한 이름이 사용되었으나, 개인용 레지스트리의 이미지에 대해서는 어떤 이름이든 선택할 수 있습니다. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오. </td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +156,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   </tbody>
   </table>
 
-  이미지가 개인용 레지스트리에 작성됩니다. `bx cr images` 명령을 실행하여 이미지가 작성되었는지 확인할 수 있습니다.
+  이미지가 개인용 레지스트리에 작성됩니다. `ibmcloud cr images` 명령을 실행하여 이미지가 작성되었는지 확인할 수 있습니다. 
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +222,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 모르는 경우에는 `bx cr namespaces` 명령을 실행하여 찾아보십시오.</td>
+  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오. </td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,7 +250,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
     a.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오.
 
     ```
-    bx cs workers <cluster_name>
+    ibmcloud ks workers <cluster_name>
     ```
     {: pre}
 
@@ -258,7 +258,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -63,9 +63,9 @@ lastupdated: "2018-05-24"
   </tr>
   <tr>
     <td>如果您在创建集群时指定了空间，帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。</td>
-      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>。</li>
+      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>。</li>
       <li>要授予帐户所有者对空间的 {{site.data.keyword.containershort_notm}}“管理员”、“开发者”或“审计员”访问许可权，请参阅<a href="cs_users.html">管理集群访问权</a>。</li>
-      <li>要在更改许可权后刷新日志记录令牌，请运行 <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
+      <li>要在更改许可权后刷新日志记录令牌，请运行 <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
     </tr>
     <tr>
       <td>您的应用程序日志记录配置的应用程序路径中有符号链接。</td>
@@ -81,7 +81,7 @@ lastupdated: "2018-05-24"
   2. 创建 `deploy-noisy.yaml` 配置文件。
 
       ```
-      apiVersion: v1
+apiVersion: v1
       kind: Pod
       metadata:
         name: noisy
@@ -98,7 +98,7 @@ lastupdated: "2018-05-24"
   3. 在集群上下文中运行该配置文件。
 
         ```
-                kubectl apply -f noisy.yaml
+        kubectl apply -f noisy.yaml
         ```
         {:pre}
 
@@ -151,5 +151,5 @@ lastupdated: "2018-05-24"
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
+报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 

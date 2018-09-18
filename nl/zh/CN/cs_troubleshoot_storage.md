@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -29,6 +29,23 @@ lastupdated: "2018-05-24"
 如果您有更常规的问题，请尝试[集群调试](cs_troubleshoot.html)。
 {: tip}
 
+## 在多专区集群中，持久性卷安装到 pod 失败
+{: #mz_pv_mount}
+
+{: tsSymptoms}
+集群先前是具有独立工作程序节点（不在工作程序池中）的单专区集群。您已成功安装了持久性卷申领 (PVC)，其中描述了要用于应用程序的 pod 部署的持久性卷 (PV)。现在，您已具有工作程序池，并且已向集群添加专区，但是 PV 安装到 pod 失败。
+
+{: tsCauses}
+对于多专区集群，PV 必须具有以下标签，这样 pod 就不会尝试在其他专区中安装卷。
+* `failure-domain.beta.kubernetes.io/region`
+* `failure-domain.beta.kubernetes.io/zone`
+
+具有可跨多个专区的工作程序池的新集群在缺省情况下会对 PV 进行标记。如果在引入工作程序池之前创建了集群，那么必须手动添加标签。
+
+{: tsResolve}
+[使用区域和专区标签更新集群中的 PV](cs_storage_basics.html#multizone)。
+
+<br />
 
 
 ## 工作程序节点的文件系统更改为只读
@@ -45,9 +62,9 @@ lastupdated: "2018-05-24"
 
 {: tsResolve}
 1.  备份可能存储在工作程序节点或容器中的任何数据。
-2.  要对现有工作程序节点进行短时间修订，请重新装入工作程序节点。<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+2.  要对现有工作程序节点进行短时间修订，请重新装入工作程序节点。<pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-对于长时间修订，请[通过添加其他工作程序节点来更新机器类型](cs_cluster_update.html#machine_type)。
+对于长期生效的修订，请[更新工作程序池的机器类型](cs_cluster_update.html#machine_type)。
 
 <br />
 
@@ -57,7 +74,7 @@ lastupdated: "2018-05-24"
 {: #nonroot}
 
 {: tsSymptoms}
-向部署[添加 NFS 存储器](cs_storage.html#app_volume_mount)后，容器的部署失败。检索容器的日志时，您可能会看到“write-permission”或“do not have required permission”之类的错误。pod 发生故障，并且卡在重新装入循环中。
+向部署[添加 NFS 存储器](cs_storage_file.html#app_volume_mount)后，容器的部署失败。检索容器的日志时，您可能会看到“write-permission”或“do not have required permission”之类的错误。pod 发生故障，并且卡在重新装入循环中。
 
 {: tsCauses}
 缺省情况下，非 root 用户在支持 NFS 的存储器的卷安装路径上没有写许可权。一些公共应用程序映像（例如，Jenkins 和 Nexus3）会在 Dockerfile 中指定拥有安装路径的非 root 用户。通过此 Dockerfile 创建容器时，由于安装路径上非 root 用户的许可权不足，创建容器会失败。要授予写许可权，可以修改 Dockerfile，以在更改安装路径许可权之前将非 root 用户临时添加到 root 用户组，或者使用 init 容器。
@@ -80,7 +97,7 @@ lastupdated: "2018-05-24"
     **示例**：
 
     ```
-        FROM openjdk:8-jdk
+    FROM openjdk:8-jdk
 
     
 
@@ -106,7 +123,7 @@ lastupdated: "2018-05-24"
 2.  通过创建持久性卷申领 (PVC) 将持久性存储器添加到应用程序。此示例使用 `ibmc-file-bronze` 存储类。要查看可用的存储类，请运行 `kubectl get storageclasses`。
 
     ```
-    apiVersion: v1
+apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
       name: mypvc
@@ -124,14 +141,14 @@ lastupdated: "2018-05-24"
 3.  创建 PVC。
 
     ```
-        kubectl apply -f mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
 4.  在部署 `.yaml` 文件中，添加 init 容器。包含您先前检索到的 UID 和 GID。
 
     ```
-    initContainers:
+initContainers:
     - name: initContainer # Or you can replace with any name
       image: alpine:latest
       command: ["/bin/sh", "-c"]
@@ -146,7 +163,7 @@ lastupdated: "2018-05-24"
     Jenkins 部署的**示例**：
 
     ```
-    apiVersion: apps/v1
+apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: my_pod
@@ -182,21 +199,21 @@ lastupdated: "2018-05-24"
 5.  创建 pod 并将 PVC 安装到该 pod。
 
     ```
-        kubectl apply -f my_pod.yaml
+    kubectl apply -f my_pod.yaml
     ```
     {: pre}
 
 6. 验证卷是否已成功安装到 pod。记下 pod 名称和 **Containers/Mounts** 路径。
 
     ```
-        kubectl describe pod <my_pod>
+    kubectl describe pod <my_pod>
     ```
     {: pre}
 
     **示例输出**：
 
     ```
-        Name:		    mypod-123456789
+    Name:		    mypod-123456789
     Namespace:	default
     ...
     Init Containers:
@@ -234,21 +251,21 @@ lastupdated: "2018-05-24"
 7.  使用先前记下的 pod 名称登录到 pod。
 
     ```
-        kubectl exec -it <my_pod-123456789> /bin/bash
+    kubectl exec -it <my_pod-123456789> /bin/bash
     ```
     {: pre}
 
 8. 验证容器安装路径的许可权。在示例中，安装路径为 `/var/jenkins_home`。
 
     ```
-        ls -ln /var/jenkins_home
+    ls -ln /var/jenkins_home
     ```
     {: pre}
 
     **示例输出**：
 
     ```
-        jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
+    jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
     total 12
     -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
     drwxr-xr-x 2 1000 1000 4096 Mar  9 19:58 init.groovy.d
@@ -289,7 +306,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-您具有设置为使用 `XFS` 文件系统的现有块存储设备。为了将此设备安装到 pod，您已[创建 PV](cs_storage.html#existing_block)，其中在 `spec/flexVolume/fsType` 部分中指定 `ext4` 作为文件系统，或者未指定任何文件系统。如果未定义任何文件系统，PV 将缺省为 `ext4`。PV 已成功创建，并且已链接到现有块存储器实例。但是，尝试使用匹配的 PVC 将 PV 安装到集群时，卷安装失败。无法将使用 `ext4` 文件系统的 `XFS` 块存储器实例安装到 pod。
+您具有设置为使用 `XFS` 文件系统的现有块存储设备。为了将此设备安装到 pod，您已[创建 PV](cs_storage_block.html#existing_block)，其中在 `spec/flexVolume/fsType` 部分中指定 `ext4` 作为文件系统，或者未指定任何文件系统。如果未定义任何文件系统，PV 将缺省为 `ext4`。PV 已成功创建，并且已链接到现有块存储器实例。但是，尝试使用匹配的 PVC 将 PV 安装到集群时，卷安装失败。无法将使用 `ext4` 文件系统的 `XFS` 块存储器实例安装到 pod。
 
 {: tsResolve}
 将现有 PV 中的文件系统从 `ext4` 更新为 `XFS`。
@@ -355,5 +372,5 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
+报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 

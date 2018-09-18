@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -45,28 +45,28 @@ Esta tarefa inclui as informações para instalar essas CLIs e plug-ins:
 <br>
 Para instalar as CLIs:
 
-1.  Como um pré-requisito para o plug-in do {{site.data.keyword.containershort_notm}}, instale a CLI do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://clis.ng.bluemix.net/ui/home.html). O prefixo para executar comandos usando a CLI do {{site.data.keyword.Bluemix_notm}} é `bx`.
+1.  Como um pré-requisito para o plug-in do {{site.data.keyword.containershort_notm}}, instale a [CLI do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](../cli/index.html#overview). O prefixo para executar comandos usando a CLI do {{site.data.keyword.Bluemix_notm}} é `ibmcloud`.
 
 2.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas.
 
     ```
-    bx login
+    ibmcloud login
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use `bx login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
 
-3.  Para criar clusters do Kubernetes e gerenciar nós do trabalhador, instale o plug-in do {{site.data.keyword.containershort_notm}}. O prefixo para executar comandos usando o plug-in do {{site.data.keyword.containershort_notm}} é `bx cs`.
+3.  Para criar clusters do Kubernetes e gerenciar nós do trabalhador, instale o plug-in do {{site.data.keyword.containershort_notm}}. O prefixo para executar comandos usando o plug-in do {{site.data.keyword.containershort_notm}} é `ibmcloud ks`.
 
     ```
-    bx plugin install container-service -r Bluemix
+    ibmcloud plugin install container-service -r Bluemix
     ```
     {: pre}
 
     Para verificar se o plug-in está instalado adequadamente, execute o comando a seguir:
 
     ```
-    bx plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -74,11 +74,11 @@ Para instalar as CLIs:
 
 4.  {: #kubectl}Para visualizar uma versão local do painel do Kubernetes e implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). O prefixo para executar comandos usando o Kubernetes CLI é `kubectl`.
 
-    1.  Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containershort_notm}} é 1.9.7. **Nota**: se você usar uma versão da CLI `kubectl` que não corresponda pelo menos à versão `major.minor` de seus clusters, poderá ter resultados inesperados. Certifique-se de manter as versões de cluster e de CLI do Kubernetes atualizadas.
+    1.  Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão do Kubernetes atual do {{site.data.keyword.containershort_notm}} padrão é 1.10.5. **Nota**: se você usar uma versão da CLI `kubectl` que não corresponda pelo menos à versão `major.minor` de seus clusters, poderá ter resultados inesperados. Certifique-se de manter as versões de cluster e de CLI do Kubernetes atualizadas.
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
+        - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl)
+        - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl)
+        - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe)
 
     2.  **Para OSX e Linux**: conclua as etapas a seguir.
         1.  Mova o arquivo executável para o diretório `/usr/local/bin`.
@@ -112,17 +112,17 @@ Para instalar as CLIs:
     3.  **Para Windows**: instale a CLI do Kubernetes no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas
 mudanças de caminho de arquivo ao executar comandos posteriormente.
 
-5.  Para gerenciar um repositório de imagem privada, instale o plug-in do {{site.data.keyword.registryshort_notm}}. Use esse plug-in para configurar o seu próprio namespace em um registro de imagem privada de múltiplos locatários, altamente disponível e escalável que é hospedado pela IBM e para armazenar e compartilhar imagens do Docker com outros usuários. As imagens do Docker são necessárias para implementar contêineres em um cluster. O prefixo para executar comandos de registro é `bx cr`.
+5.  Para gerenciar um repositório de imagem privada, instale o plug-in do {{site.data.keyword.registryshort_notm}}. Use esse plug-in para configurar o seu próprio namespace em um registro de imagem privada de múltiplos locatários, altamente disponível e escalável que é hospedado pela IBM e para armazenar e compartilhar imagens do Docker com outros usuários. As imagens do Docker são necessárias para implementar contêineres em um cluster. O prefixo para executar comandos de registro é `ibmcloud cr`.
 
     ```
-    bx plugin install container-registry -r Bluemix
+    ibmcloud plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     Para verificar se o plug-in está instalado adequadamente, execute o comando a seguir:
 
     ```
-    bx plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -134,10 +134,10 @@ Em seguida, inicie [Criando clusters do Kubernetes por meio da CLI com o {{site.
 
 Para obter informações de referência sobre essas CLIs, veja a documentação para essas ferramentas.
 
--   [Comandos `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
--   [Comandos `bx cs`](cs_cli_reference.html#cs_cli_reference)
+-   [Comandos `ibmcloud`](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
+-   [ Comandos ` ibmcloud ks `  ](cs_cli_reference.html#cs_cli_reference)
 -   [Comandos `kubectl` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [Comandos `bx cr`](/docs/cli/plugins/registry/index.html)
+-   [ Comandos ` ibmcloud cr `  ](/docs/cli/plugins/registry/index.html)
 
 <br />
 
@@ -164,7 +164,7 @@ Em vez de instalar cada uma das CLIs individualmente em seu computador, é poss�
     ```
     {: pre}
   
-3. Inicie executando os comandos `bx cs` e `kubectl` no shell interativo. Se você criar dados que deseja salvar, salve esses dados no volume montado. Quando você sair do shell, o contêiner será parado. 
+3. Inicie executando os comandos `ibmcloud ks` e `kubectl` no shell interativo. Se você criar dados que deseja salvar, salve esses dados no volume montado. Quando você sair do shell, o contêiner será parado. 
 
 <br />
 
@@ -176,27 +176,27 @@ Em vez de instalar cada uma das CLIs individualmente em seu computador, é poss�
 É possível usar os comandos que são fornecidos com a CLI do Kubernetes para gerenciar clusters no {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Todos os comandos `kubectl` que estão disponíveis no Kubernetes 1.9.7 são suportados para uso com clusters no {{site.data.keyword.Bluemix_notm}}. Após criar um cluster, configure o contexto para sua CLI local para esse cluster com uma variável de ambiente. Então, é possível executar os comandos `kubectl` do Kubernetes para trabalhar com o seu cluster no {{site.data.keyword.Bluemix_notm}}.
+Todos os comandos `kubectl` que estão disponíveis no Kubernetes 1.10.5 são suportados para uso com clusters no {{site.data.keyword.Bluemix_notm}}. Após criar um cluster, configure o contexto para sua CLI local para esse cluster com uma variável de ambiente. Então, é possível executar os comandos `kubectl` do Kubernetes para trabalhar com o seu cluster no {{site.data.keyword.Bluemix_notm}}.
 
 Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_cli_install) e [crie um cluster](cs_clusters.html#clusters_cli).
 
 1.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, [inclua o terminal de API](cs_regions.html#bluemix_regions).
 
     ```
-    bx login
+    ibmcloud login
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use `bx login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
 
 2.  Selecione uma conta do {{site.data.keyword.Bluemix_notm}}. Se você estiver designado para múltiplas organizações do {{site.data.keyword.Bluemix_notm}}, selecione a organização na qual o cluster foi criado. Os clusters são específicos para uma organização, mas são independentes de um espaço do {{site.data.keyword.Bluemix_notm}}. Portanto, não é necessário selecionar um espaço.
 
-3.  Para criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você selecionou anteriormente, execute `bx cs region-set`.
+3.  Para criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você selecionou anteriormente, execute `ibmcloud ks region-set`.
 
 4.  Liste todos os clusters na conta para obter o nome do cluster.
 
     ```
-    bx cs clusters
+    ibmcloud ks clusters
     ```
     {: pre}
 
@@ -204,7 +204,7 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
     1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -218,6 +218,9 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
         {: screen}
 
     2.  Copie e cole o comando que é exibido em seu terminal para configurar a variável de ambiente `KUBECONFIG`.
+
+        **Usuário do Mac ou Linux**: em vez de executar o comando `ibmcloud ks cluster-config` e copiar a variável de ambiente `KUBECONFIG`, é possível executar `(ibmcloud ks cluster-config "<cluster-name>" | grep export) `.
+        {:tip}
 
     3.  Verifique se a variável de ambiente `KUBECONFIG` está configurada corretamente.
 
@@ -244,7 +247,7 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
     Saída de exemplo:
 
     ```
-    Versão do cliente: v1.9.7 Versão do servidor: v1.9.7
+    Versão do cliente: v1.10.5 Versão do servidor: v1.10.5
     ```
     {: screen}
 
@@ -266,36 +269,36 @@ Esta tarefa inclui as informações para atualizar essas CLIs.
 
 -   CLI do {{site.data.keyword.Bluemix_notm}} versão 0.5.0 ou mais recente
 -   Plug-in do {{site.data.keyword.containershort_notm}}
--   Kubernetes CLI versão version 1.9.7 ou posterior
+-   CLI do Kubernetes versão 1.10.5 ou mais recente
 -   Plug-in do {{site.data.keyword.registryshort_notm}}
 -   Docker versão 1.9. ou posterior
 
 <br>
 Para atualizar as CLIs:
 
-1.  Atualize a CLI do {{site.data.keyword.Bluemix_notm}}. Faça download da [versão mais recente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://clis.ng.bluemix.net/ui/home.html) e execute o instalador.
+1.  Atualize a CLI do {{site.data.keyword.Bluemix_notm}}. Faça download da [versão mais recente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](../cli/index.html#overview) e execute o instalador.
 
 2. Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, [inclua o terminal de API](cs_regions.html#bluemix_regions).
 
     ```
-    bx login
+    ibmcloud login
     ```
     {: pre}
 
-     **Nota:** se você tiver um ID federado, use `bx login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+     **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
 
 3.  Atualize o plug-in {{site.data.keyword.containershort_notm}}.
     1.  Instale a atualização do repositório do plug-in do {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-service -r Bluemix
+        ibmcloud plugin update container-service -r Bluemix
         ```
         {: pre}
 
     2.  Verifique a instalação do plug-in executando o comando a seguir e verificando a lista dos plug-ins instalados.
 
         ```
-        bx plugin list
+        ibmcloud plugin list
         ```
         {: pre}
 
@@ -304,7 +307,7 @@ Para atualizar as CLIs:
     3.  Inicialize a CLI.
 
         ```
-        bx cs init
+        ibmcloud ks init
         ```
         {: pre}
 
@@ -314,14 +317,14 @@ Para atualizar as CLIs:
     1.  Instale a atualização do repositório do plug-in do {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-registry -r Bluemix
+        ibmcloud plugin update container-registry -r Bluemix
         ```
         {: pre}
 
     2.  Verifique a instalação do plug-in executando o comando a seguir e verificando a lista dos plug-ins instalados.
 
         ```
-        bx plugin list
+        ibmcloud plugin list
         ```
         {: pre}
 
@@ -354,21 +357,21 @@ Para desinstalar as CLIs:
 1.  Desinstale o plug-in do {{site.data.keyword.containershort_notm}}.
 
     ```
-    bx plugin uninstall container-service
+    ibmcloud plugin uninstall container-service
     ```
     {: pre}
 
 2.  Desinstale o plug-in do {{site.data.keyword.registryshort_notm}}.
 
     ```
-    bx plugin uninstall container-registry
+    ibmcloud plugin uninstall container-registry
     ```
     {: pre}
 
 3.  Verifique se os plug-ins foram desinstalados executando o comando a seguir e verificando a lista dos plug-ins instalados.
 
     ```
-    bx plugin list
+    ibmcloud plugin list
     ```
     {: pre}
 
@@ -389,7 +392,10 @@ Para desinstalar as CLIs:
 É possível usar a API do {{site.data.keyword.containershort_notm}} para automatizar a criação, a implementação e o gerenciamento de seus clusters do Kubernetes.
 {:shortdesc}
 
-A API do {{site.data.keyword.containershort_notm}} requer informações do cabeçalho que devem ser fornecidas na solicitação de API e que podem variar, dependendo da API que você deseja usar. Para determinar quais informações do cabeçalho são necessárias para sua API, veja a [{{site.data.keyword.containershort_notm}}documentação da API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api).
+A API do {{site.data.keyword.containershort_notm}} requer informações do cabeçalho que devem ser fornecidas na solicitação de API e que podem variar, dependendo da API que você deseja usar. Para determinar quais informações do cabeçalho são necessárias para sua API, veja a [{{site.data.keyword.containershort_notm}}documentação da API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api). 
+
+Também é possível usar o [arquivo JSON do swagger de API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger-api-json) para gerar um cliente que possa interagir com a API como parte de seu trabalho de automação.
+{: tip}
 
 **Nota:** para autenticar com o {{site.data.keyword.containershort_notm}}, deve-se fornecer um token Identity and Access Management (IAM) que é gerado com suas credenciais do {{site.data.keyword.Bluemix_notm}} e que inclui o ID da conta do {{site.data.keyword.Bluemix_notm}} na qual o cluster foi criado. Dependendo da maneira que se autenticar com o {{site.data.keyword.Bluemix_notm}}, será possível escolher entre as opções a seguir para automatizar a criação de seu token IAM.
 
@@ -415,7 +421,7 @@ A API do {{site.data.keyword.containershort_notm}} requer informações do cabe�
   - _&lt;username&gt;_: seu nome de usuário do {{site.data.keyword.Bluemix_notm}}.
   - _&lt;password&gt;_: sua senha do {{site.data.keyword.Bluemix_notm}}.
   - _&lt;api_key&gt;_: sua chave API do {{site.data.keyword.Bluemix_notm}}.
-  - _&lt;passcode&gt;_: O {{site.data.keyword.Bluemix_notm}} senha descartável. Execute `bx login --sso` e siga as instruções em sua saída da CLI para recuperar sua senha única usando seu navegador da web.
+  - _&lt;passcode&gt;_: O {{site.data.keyword.Bluemix_notm}} senha descartável. Execute `ibmcloud login --sso` e siga as instruções em sua saída da CLI para recuperar sua senha descartável usando o navegador da web.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -721,4 +727,3 @@ Use as etapas a seguir se desejar criar um token IAM ou se desejar obter um novo
     É possível localizar seu novo token IAM no **access_token** e o token de atualização IAM no campo **refresh_token** da saída de API.
 
 2.  Continue trabalhando com a [{{site.data.keyword.containershort_notm}}documentação da API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api) usando o token da etapa anterior.
-

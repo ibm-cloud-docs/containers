@@ -1,29 +1,38 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
-IBM Cloud Container Service
+{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers/container_index.html"}
+IBM Cloud Kubernetes 服务
 
     {: .navgroup id="learn"}
     container_index.md
     
-    
+
     {: .topicgroup}
     关于
         cs_why.md
         cs_tech.md
+
+    {: .topicgroup}
+    集群策略
+        cs_responsibilities.md
         cs_secure.md
+        cs_ha.md
 
     {: .topicgroup}
     教程
         cs_tutorials.md
         cs_tutorials_apps.md
         cs_tutorials_istio.md
+        cs_tutorials_cf.md
+        cs_tutorials_policies.md
+        [教程：将基于 VM 的应用程序移至 Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [教程：使用 Cloud Internet Services 创建多区域集群](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
-    
+
     {: .topicgroup}
     管理集群
         cs_clusters.md
@@ -31,52 +40,62 @@ IBM Cloud Container Service
         cs_network_policy.md
         cs_cluster_update.md
         cs_users.md
-        cs_infrastructure.md
+        cs_psp.md
         cs_edge.md
         cs_health.md
-    
+
     cs_images.md
     cs_app.md
-    
+
     {: .topicgroup}
-    联网以公开应用程序
+    用于公开应用程序的联网
         cs_network_planning.md
         cs_nodeport.md
         cs_loadbalancer.md
         cs_ingress.md
+        cs_annotations.md
+        cs_ingress_health.md
         cs_vpn.md
         cs_subnets.md
-    
-    cs_storage.md
+
+    {: .topicgroup}
+    在持久性存储器上存储数据
+        cs_storage_planning.md
+        cs_storage_basics.md
+        cs_storage_file.md
+        cs_storage_block.md
+        cs_storage_remove.md
+
     cs_integrations.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_cli_reference.md
-    cs_versions.md
-    cs_regions.md
-    cs_annotations.md
+    cs_at_events.md
 
     {: .topicgroup}
-    IBM Cloud Dedicated
+    IBM Cloud Kubernetes 服务版本
+        cs_versions.md
+        cs_versions_changelog.md
+
+    cs_regions.md
+    [混合云](cs_hybrid.html#hybrid_iks_icp)
+
+    {: .topicgroup}
+    专用云
         cs_dedicated.md
-        [已弃用：运行单个和可扩展容器](cs_classic.html)
-            [将单个和可扩展容器迁移到 Kubernetes 集群](cs_classic.html#cs_classic_migrating)
-            [关于单个和可扩展容器](container_ov.html)
-            [规划单个和可扩展容器](container_planning.html)
-            [单个和可扩展容器的安全性](container_security.html)
-            [设置单个和可扩展容器的 CLI](container_cli_cfic_install.html)
-            [IBM 映像](../services/RegistryImages/index.html)
-            [作为容器运行短期任务](container_single_ui.html)
-            [运行具备高可用性的组](container_ha.html)
-            [为单个和可扩展容器存储持久数据](container_volumes_ov.html)
-            [将服务与单个和可扩展容器集成](container_integrations.html)
-            [单个和可扩展容器的 CLI 参考](container_cli_reference_cfic.html)
-            [单个和可扩展容器的故障诊断](container_troubleshoot.html)
+        [不推荐：运行单个容器和可扩展容器](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
     {: .navgroup-end}
 
     {: .navgroup id="help"}
-    cs_troubleshoot.md
+    {: .topicgroup}
+    集群故障诊断
+        cs_troubleshoot.md
+        cs_troubleshoot_clusters.md
+        cs_troubleshoot_storage.md
+        cs_troubleshoot_health.md
+        cs_troubleshoot_network.md
+
     cs_popular_topics.md
     cs_rellinks.md
     {: .navgroup-end}

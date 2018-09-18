@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -23,6 +23,58 @@ lastupdated: "2018-05-24"
 
 Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}}. Découvrez les nouvelles fonctions à explorer, une astuce pour les expérimenter ou quelques rubriques populaires que d'autres développeurs jugent désormais utiles.
 {:shortdesc}
+
+## Rubriques les plus consultées en juillet 2018
+{: #july18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en juillet 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>30 juillet</td>
+<td>[Fournissez votre propre contrôleur Ingress](cs_ingress.html#user_managed)</td>
+<td>Vous avez des exigences spécifiques en matière de sécurité ou d'autres exigences particulières pour le contrôleur Ingress de votre cluster ? Dans ce cas, vous pouvez envisager d'exécuter votre propre contrôleur Ingress au lieu du contrôleur par défaut.</td>
+</tr>
+<tr>
+<td>10 juillet</td>
+<td>Introduction des clusters à zones multiples</td>
+<td>Vous voulez améliorer la disponibilité de votre cluster ? Vous pouvez désormais étendre votre cluster dans plusieurs zones de certaines régions métropolitaines. Pour plus d'informations, voir [Création de clusters à zones multiples dans {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+</tr>
+</tbody></table>
+
+## Rubriques les plus consultées en juin 2018
+{: #june18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en juin 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>13 juin</td>
+<td>Le nom de la commande `bx` de l'interface de ligne de commande a été remplacé par `ic`</td>
+<td>Lorsque vous téléchargez la version la plus récente de l'interface de ligne de commande (CLI) d'{{site.data.keyword.Bluemix_notm}}, vous exécutez désormais les commandes en utilisant le préfixe `ic` au lieu de `bx`. Par exemple, pour afficher la liste de vos clusters, vous exécutez la commande `ibmcloud ks clusters`.</td>
+</tr>
+<tr>
+<td>12 juin</td>
+<td>[Politiques de sécurité de pod](cs_psp.html)</td>
+<td>Pour les clusters exécutant Kubernetes version 1.10.3 ou ultérieur, vous pouvez
+configurer des politiques de sécurité de pod pour autoriser certaines personnes à créer et mettre à jour des pods dans {{site.data.keyword.containerlong_notm}}.</td>
+</tr>
+<tr>
+<td>6 juin</td>
+<td>[Prise en charge de TLS pour le sous-domaine générique Ingress fourni par IBM](cs_ingress.html#wildcard_tls)</td>
+<td>Pour les clusters créés à partir du 6 juin 2018, le certificat TLS du sous-domaine Ingress fourni par IBM est désormais un certificat générique pouvant être utilisé pour le sous-domaine générique enregistré. Pour les clusters créés avant le 6 juin 2018, le certificat TLS sera mis à jour et remplacé par un certificat générique lors du renouvellement du certificat TLS utilisé actuellement.</td>
+</tr>
+</tbody></table>
 
 ## Rubriques les plus consultées en mai 2018
 {: #may18}
@@ -75,7 +127,7 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 <tr>
 <td>17 avril</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Installez le [plug-in](cs_storage.html#install_block) {{site.data.keyword.Bluemix_notm}} Block Storage pour sauvegarder les données persistantes dans un stockage par blocs. Ensuite, vous pouvez [créer](cs_storage.html#create) ou [utiliser du stockage par blocs existant](cs_storage.html#existing_block) pour votre cluster.</td>
+<td>Installez le [plug-in](cs_storage_block.html#install_block) {{site.data.keyword.Bluemix_notm}} Block Storage pour sauvegarder des données persistantes dans du stockage par blocs. Ensuite, vous pouvez [créer](cs_storage_block.html#add_block) ou [utiliser du stockage par blocs existant](cs_storage_block.html#existing_block) pour votre cluster.</td>
 </tr>
 <tr>
 <td>13 avril</td>
@@ -112,13 +164,13 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 </tr>
 <tr>
 <td>13 mars</td>
-<td>[Emplacement disponible à São Paulo](cs_regions.html)</td>
-<td>Bienvenue à São Paulo au Brésil comme nouvelle implantation dans la région Sud des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) pour cet emplacement ainsi que les autres ports situés dans la région où se trouve votre cluster.</td>
+<td>[Zone disponible à São Paulo](cs_regions.html)</td>
+<td>Bienvenue à São Paulo au Brésil, nouvelle zone intégrée dans la région Sud des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à cette zone et aux autres zones situées dans la région où se trouve votre cluster.</td>
 </tr>
 <tr>
 <td>12 mars</td>
 <td>[Vous venez juste de rejoindre {{site.data.keyword.Bluemix_notm}} avec un compte d'essai ? Essayez gratuitement un cluster Kubernetes !](container_index.html#clusters)</td>
-<td>Avec un [compte d'essai {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/), vous pouvez déployer un cluster gratuit pendant 21 jours pour tester les fonctions de Kubernetes.</td>
+<td>Avec un [compte d'essai {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/), vous pouvez déployer un cluster gratuit pendant 30 jours pour expérimenter les fonctions de Kubernetes.</td>
 </tr>
 </tbody></table>
 
@@ -136,7 +188,7 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 <tr>
 <td>27 février</td>
 <td>Images HVM (Hardware virtual machine) pour les noeuds worker</td>
-<td>Améliorez les performances d'E-S de vos charges de travail avec des images HVM. Activez cette fonction sur chaque noeud worker en place à l'aide de la [commande](cs_cli_reference.html#cs_worker_reload) `bx cs worker-reload` ou de la [commande](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.</td>
+<td>Améliorez les performances d'E-S de vos charges de travail avec des images HVM. Activez cette fonction sur chaque noeud worker en place à l'aide de la [commande](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou de la [commande](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>26 février</td>
@@ -160,8 +212,8 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 </tr>
 <tr>
 <td>14 février</td>
-<td>[Emplacement disponible à Séoul](cs_regions.html)</td>
-<td>Juste au bon moment pour les Jeux Olympiques, déployez un cluster Kubernetes à Séoul dans la région Asie-Pacifique nord. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) pour cet emplacement ainsi que les autres ports situés dans la région où se trouve votre cluster.</td>
+<td>[Zone disponible à Séoul](cs_regions.html)</td>
+<td>Juste au bon moment pour les Jeux Olympiques, déployez un cluster Kubernetes à Séoul dans la région Asie-Pacifique nord. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à cette zone et aux autres zones situées dans la région où se trouve votre cluster.</td>
 </tr>
 <tr>
 <td>8 février</td>
@@ -187,8 +239,8 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 </tr>
 <tr>
 <td>23 janvier</td>
-<td>[Emplacements disponibles à Singapour et Montréal (Canada)](cs_regions.html)</td>
-<td>Singapour et Montréal sont les emplacements disponibles dans les régions {{site.data.keyword.containershort_notm}} Asie-Pacifique nord et Est des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) pour ces emplacements ainsi que les autres ports situés dans la région où se trouve votre cluster.</td>
+<td>[Zones disponibles à Singapour et Montréal (Canada)](cs_regions.html)</td>
+<td>Singapour et Montréal sont les zones disponibles dans les régions {{site.data.keyword.containershort_notm}} Asie-Pacifique nord et Est des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à ces zones et aux autres zones situées dans la région où se trouve votre cluster.</td>
 </tr>
 <tr>
 <td>8 janvier</td>

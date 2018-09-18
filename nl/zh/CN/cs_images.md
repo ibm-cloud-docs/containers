@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -94,7 +94,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 
     ```
-    apiVersion: apps/v1beta1
+apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -111,19 +111,19 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     ```
     {: codeblock}
 
-    **提示**：要检索名称空间信息，请运行 `bx cr namespace-list`。
+    **提示**：要检索名称空间信息，请运行 `ibmcloud cr namespace-list`。
 
 3.  在集群中创建部署。
 
     ```
-        kubectl apply -f mydeployment.yaml
+    kubectl apply -f mydeployment.yaml
     ```
     {: pre}
 
     **提示：**您还可以部署现有配置文件，如 IBM 提供的其中一个公共映像。此示例使用美国南部区域中的 **ibmliberty** 映像。
 
     ```
-        kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
+    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
     ```
     {: pre}
 
@@ -215,7 +215,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 2.  列出您的 {{site.data.keyword.Bluemix_notm}} 帐户中的令牌。
 
     ```
-        bx cr token-list
+    ibmcloud cr token-list
     ```
     {: pre}
 
@@ -223,7 +223,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 4.  检索令牌的值。将 <em>&lt;token_ID&gt;</em> 替换为在上一步中检索到的令牌的标识。
 
     ```
-        bx cr token-get <token_id>
+    ibmcloud cr token-get <token_id>
     ```
     {: pre}
 
@@ -232,7 +232,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 5.  创建 Kubernetes 私钥以用于存储令牌信息。
 
     ```
-        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
@@ -256,7 +256,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必需。用于登录到专用注册表的用户名。对于 {{site.data.keyword.registryshort_notm}}，用户名设置为 <code>token</code>。</td>
+    <td>必需。用于登录到专用注册表的用户名。对于 {{site.data.keyword.registryshort_notm}}，用户名设置为值 <strong><code>token</code></strong>。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -271,7 +271,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 6.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建 imagePullSecret 的名称空间。
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -293,7 +293,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 1.  创建 Kubernetes 私钥以用于存储专用注册表凭证。
 
     ```
-        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
@@ -333,7 +333,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -404,11 +404,11 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>存储映像的名称空间。要列出可用名称空间，请运行 `bx cr namespace-list`。</td>
+    <td>存储映像的名称空间。要列出可用名称空间，请运行 `ibmcloud cr namespace-list`。</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `bx cr image-list`。</td>
+    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `ibmcloud cr image-list`。</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -29,6 +29,23 @@ Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presente queste tecni
 Se hai un problema più generale, prova a [eseguire il debug del cluster](cs_troubleshoot.html).
 {: tip}
 
+## In un cluster multizona, il montaggio di un volume persistente in un pod non riesce
+{: #mz_pv_mount}
+
+{: tsSymptoms}
+Il tuo cluster era, in precedenza, un cluster a zona singola con dei nodi di lavoro autonomi che non si trovavano in pool di nodi di lavoro. Hai montato correttamente un'attestazione del volume persistente (o PVC, persistent volume claim) che descriveva il volume persistente (o PV, persistent volume) da utilizzare per la distribuzione del pod della tua applicazione. Tuttavia, ora che hai dei pool di nodi di lavoro e delle zone aggiunte al tuo cluster, il montaggio del PV al pod non riesce.
+
+{: tsCauses}
+Per i cluster multizona, i PV devono avere le seguenti etichette in modo che i pod non provino a montare i volumi in una zona differente.
+* `failure-domain.beta.kubernetes.io/region`
+* `failure-domain.beta.kubernetes.io/zone`
+
+I nuovi cluster con dei pool di nodi di lavoro che possono estendersi a più zone etichettano i PV per impostazione predefinita. Se hai creato i tuoi cluster prima che fossero introdotti i pool di nodi di lavoro, devi aggiungere le etichette manualmente.
+
+{: tsResolve}
+[Aggiorna i PV nel tuo cluster con le etichette di regione e zona](cs_storage_basics.html#multizone).
+
+<br />
 
 
 ## I file system per i nodi di lavoro diventano di sola lettura
@@ -46,9 +63,9 @@ Il file system nel nodo di lavoro è in sola lettura.
 {: tsResolve}
 1.  Esegui il backup di tutti i dati che possono venire archiviati nel nodo di lavoro o nei tuoi contenitori.
 2.  Per una correzione a breve termine per il nodo di lavoro esistente, ricarica il nodo di lavoro.
-    <pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-Per una correzione a lungo termine, [aggiorna il tipo di macchina aggiungendo un altro nodo di lavoro](cs_cluster_update.html#machine_type).
+Per una correzione a lungo termine, [aggiorna il tipo di macchina del tuo pool di nodi di lavoro](cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -58,10 +75,10 @@ Per una correzione a lungo termine, [aggiorna il tipo di macchina aggiungendo un
 {: #nonroot}
 
 {: tsSymptoms}
-Dopo aver [aggiunto l'archiviazione NFS](cs_storage.html#app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Una volta recuperati i log relativi al tuo contenitore, potresti vedere errori di tipo "write-permission" o "do not have required permission". Il pod genera un errore e si blocca in un ciclo di ricaricamento.
+Dopo aver [aggiunto l'archiviazione NFS](cs_storage_file.html#app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Una volta recuperati i log relativi al tuo contenitore, potresti vedere errori di tipo "write-permission" o "do not have required permission". Il pod genera un errore e si blocca in un ciclo di ricaricamento.
 
 {: tsCauses}
-Per impostazione predefinita, gli utenti non root non dispongono dell'autorizzazione di scrittura sul percorso di montaggio del volume per l'archiviazione con supporto NFS. Alcune immagini comuni dell'applicazione, come Jenkins e Nexus3, specificano un utente non root che possiede il percorso di montaggio nel Dockerfile. Quando crei un contenitore da questo Dockerfile, la creazione del contenitore non riesce a causa di autorizzazioni insufficienti dell'utente non root sul percorso di montaggio. Per concedere l'autorizzazione di scrittura, puoi modificare il Dockerfile per aggiungere temporaneamente l'utente non root al gruppo di utenti root prima di modificare le autorizzazioni del percorso di montaggio o utilizzare un contenitore init. 
+Per impostazione predefinita, gli utenti non root non dispongono dell'autorizzazione di scrittura sul percorso di montaggio del volume per l'archiviazione con supporto NFS. Alcune immagini comuni dell'applicazione, come Jenkins e Nexus3, specificano un utente non root che possiede il percorso di montaggio nel Dockerfile. Quando crei un contenitore da questo Dockerfile, la creazione del contenitore non riesce a causa di autorizzazioni insufficienti dell'utente non root sul percorso di montaggio. Per concedere l'autorizzazione di scrittura, puoi modificare il Dockerfile per aggiungere temporaneamente l'utente non root al gruppo di utenti root prima di modificare le autorizzazioni del percorso di montaggio o utilizzare un contenitore init.
 
 Se utilizzi un grafico Helm per distribuire l'immagine, modifica la distribuzione Helm in modo che utilizzi un contenitore init.
 {:tip}
@@ -69,7 +86,7 @@ Se utilizzi un grafico Helm per distribuire l'immagine, modifica la distribuzion
 
 
 {: tsResolve}
-Quando includi un [contenitore init![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) nella tua distribuzione,  puoi fornire a un utente non root specificato nel Dockerfile le autorizzazioni di scrittura sul percorso di montaggio del volume all'interno del contenitore. Il contenitore init viene avviato prima del contenitore dell'applicazione. Il contenitore init crea il percorso di montaggio del volume all'interno del contenitore, modifica il percorso di montaggio in modo che sia di proprietà dell'utente corretto (non root) e si chiude. Quindi, viene avviato il contenitore dell'applicazione con l'utente non root che deve scrivere sul percorso di montaggio. Poiché il percorso è già di proprietà dell'utente non root, la scrittura sul percorso di montaggio ha esito positivo. Se non vuoi utilizzare un contenitore init, puoi modificare il Dockerfile per aggiungere l'accesso utente non root all'archiviazione file NFS.
+Quando includi un [contenitore init![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) nella tua distribuzione, puoi fornire a un utente non root specificato nel Dockerfile le autorizzazioni di scrittura sul percorso di montaggio del volume all'interno del contenitore. Il contenitore init viene avviato prima del contenitore dell'applicazione. Il contenitore init crea il percorso di montaggio del volume all'interno del contenitore, modifica il percorso di montaggio in modo che sia di proprietà dell'utente corretto (non root) e si chiude. Quindi, viene avviato il contenitore dell'applicazione con l'utente non root che deve scrivere sul percorso di montaggio. Poiché il percorso è già di proprietà dell'utente non root, la scrittura sul percorso di montaggio ha esito positivo. Se non vuoi utilizzare un contenitore init, puoi modificare il Dockerfile per aggiungere l'accesso utente non root all'archiviazione file NFS.
 
 
 Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
@@ -261,10 +278,10 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 Dopo aver [aggiunto l'accesso utente non root all'archiviazione persistente](#nonroot) o la distribuzione di un grafico Helm con un ID utente non root specificato, l'utente non può scrivere nell'archiviazione montata.
 
 {: tsCauses}
-La distribuzione o la configurazione del grafico Helm specifica il [contesto di sicurezza](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per `fsGroup` (ID gruppo) e `runAsUser` (ID utente) del pod. Attualmente, {{site.data.keyword.containershort_notm}} non supporta la specifica `fsGroup` e supporta solo `runAsUser` impostato come `0` (autorizzazioni root). 
+La distribuzione o la configurazione del grafico Helm specifica il [contesto di sicurezza](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per `fsGroup` (ID gruppo) e `runAsUser` (ID utente) del pod. Attualmente, {{site.data.keyword.containershort_notm}} non supporta la specifica `fsGroup` e supporta solo `runAsUser` impostato come `0` (autorizzazioni root).
 
 {: tsResolve}
-Rimuovi i campi `securityContext` della configurazione per `fsGroup` e `runAsUser` dal file di configurazione dell'immagine, della distribuzione o del grafico Helm e riesegui la distribuzione. Se devi modificare la proprietà del percorso di montaggio da `nobody`, [aggiungi l'accesso utente non root](#nonroot). Una volta aggiunto [non-root initContainer](#nonroot), imposta `runAsUser` a livello di contenitore, non a livello di pod. 
+Rimuovi i campi `securityContext` della configurazione per `fsGroup` e `runAsUser` dal file di configurazione dell'immagine, della distribuzione o del grafico Helm e riesegui la distribuzione. Se devi modificare la proprietà del percorso di montaggio da `nobody`, [aggiungi l'accesso utente non root](#nonroot). Una volta aggiunto [non-root initContainer](#nonroot), imposta `runAsUser` a livello di contenitore, non a livello di pod.
 
 <br />
 
@@ -282,7 +299,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Hai un dispositivo di archiviazione blocchi esistente configurato con un file system `XFS`. Per montare questo dispositivo nel tuo pod, [hai creato un PV](cs_storage.html#existing_block) che ha specificato `ext4` come tuo file system o nessun file system nella sezione `spec/flexVolume/fsType`. Se non viene definito un file system, viene utilizzato il valore predefinito del PV `ext4`.
+Hai un dispositivo di archiviazione blocchi esistente configurato con un file system `XFS`. Per montare questo dispositivo nel tuo pod, [hai creato un PV](cs_storage_block.html#existing_block) che ha specificato `ext4` come tuo file system o nessun file system nella sezione `spec/flexVolume/fsType`. Se non viene definito un file system, viene utilizzato il valore predefinito del PV `ext4`.
 Il PV era stato creato correttamente e collegato alla tua istanza dell'archiviazione blocchi esistente. Tuttavia, quando tenti di montare il PV nel tuo cluster utilizzando un PVC corrispondente, il montaggio del volume non riesce. Non puoi montare la tua istanza dell'archiviazione blocchi `XFS` con un file system `ext4` nel pod.
 
 {: tsResolve}
@@ -301,7 +318,7 @@ Aggiorna il file system nel PV esistente da `ext4` a `XFS`.
    {: pre}
 
 3. Apri il file yaml e modifica `fsType` da `ext4` a `xfs`.
-4. Sostituisci il PV nel tuo cluster. 
+4. Sostituisci il PV nel tuo cluster.
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>
    ```
@@ -353,5 +370,5 @@ e `containers`.
 -   Contatta il supporto IBM aprendo un ticket. Per informazioni su come aprire un ticket di supporto IBM o sui livelli di supporto e sulla gravità dei ticket, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `bx cs clusters`.
+Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`.
 

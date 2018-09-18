@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-05-24"
 您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 方法来部署容器中的应用程序，并确保这些应用程序始终保持启动并正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
 {: shortdesc}
 
-通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。
+通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。要首先了解基础知识吗？请试用[部署应用程序教程](cs_tutorials_apps.html#cs_apps_tutorial)。
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="基本部署过程"/>
 <map name="d62e18" id="d62e18">
@@ -34,8 +34,9 @@ lastupdated: "2018-05-24"
 <area href="#cli_dashboard" target="_blank" alt="选项 2：在本地启动 Kubernetes 仪表板，然后运行配置文件。" title="选项 2：在本地启动 Kubernetes 仪表板，然后运行配置文件。" shape="rect" coords="544, 141, 728, 204" />
 </map>
 
-
 <br />
+
+
 
 
 ## 规划高可用性部署
@@ -47,15 +48,13 @@ lastupdated: "2018-05-24"
 查看以下潜在的应用程序设置（按可用性程度从低到高排序）。
 
 
-![应用程序的高可用性阶段](images/cs_app_ha_roadmap.png)
+![应用程序的高可用性阶段](images/cs_app_ha_roadmap-mz.png)
 
-1.  部署具有 n+2 个 pod，这些 pod 由副本集管理。
-2.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨同一位置的多个节点分布（反亲缘关系）。
-3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同位置的多个节点分布（反亲缘关系）。
-4.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同区域的多个节点分布（反亲缘关系）。
+1.  部署具有 n+2 个 pod，这些 pod 由单专区集群中单个节点中的副本集管理。
+2.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨单专区集群的多个节点分布（反亲缘关系）。
+3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并在多个专区中跨多专区集群的多个节点分布（反亲缘关系）。
 
-
-
+您还可以[使用全局负载均衡器连接不同区域中的多个集群](cs_clusters.html#multiple_clusters)，以提高高可用性。
 
 ### 提高应用程序的可用性
 {: #increase_availability}
@@ -75,10 +74,20 @@ lastupdated: "2018-05-24"
     <p><strong>部署 YAML 文件示例</strong>：<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有首选 pod 反亲缘关系的 Nginx 应用程序。</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有必需 pod 反亲缘关系的 IBM® WebSphere® Application Server Liberty 应用程序。</a></li></ul></p>
+    
     </dd>
 <dt>跨多个专区或区域分布 pod</dt>
-  <dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关更多信息，请参阅[集群的高可用性](cs_clusters.html#clusters)。</dd>
+  <dd><p>要保护应用程序不受专区故障的影响，可以在不同专区中创建多个集群，或者向多专区集群的工作程序池添加专区。多专区集群仅在[特定大城市区域](cs_regions.html#zones)（例如，达拉斯）中可用。如果在不同专区中创建多个集群，那么必须[设置全局负载均衡器](cs_clusters.html#multiple_clusters)。</p>
+  <p>使用副本集并指定 pod 反亲缘关系时，Kubernetes 会跨节点分布应用程序 pod。如果节点位于多个专区中，那么 pod 会跨这些专区分布，从而提高应用程序的可用性。如果要限制应用程序仅在一个专区中运行，您可以配置 pod 亲缘关系，或者在一个专区中创建并标记工作程序池。有关更多信息，请参阅[多专区集群的高可用性](cs_clusters.html#ha_clusters)。</p>
+  <p><strong>在多专区集群部署中，应用程序 pod 会跨节点均匀分布吗？</strong></p>
+  <p>pod 会跨专区均匀分布，但不一定会跨节点均匀分布。例如，如果有一个集群在 3 个专区中分别有 1 个节点，并且部署了包含 6 个 pod 的副本集，那么每个节点会获得 2 个 pod。但是，如果集群在 3 个专区中分别有 2 个节点，并且部署了包含 6 个 pod 的副本集，那么每个专区会安排 2 个 pod，这 2 个 pod 可能会每个节点安排 1 个，也可能 2 个 pod 都安排在一个节点上。要对安排具有更多控制权，可以[设置 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
+  <p><strong>如果某个专区发生故障，如何将 pod 重新安排到其他专区中的剩余节点上？</strong></br>这取决于您在部署中使用的安排策略。如果包含[特定于节点的 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，那么不会重新安排 pod。如果未包含此策略，那么会在其他专区中的可用工作程序节点上创建 pod，但可能不会对这些 pod 进行均衡。例如，2 个 pod 可能分布在 2 个可用节点上，也可能都安排到 1 个具有可用容量的节点上。与此类似，当不可用专区恢复时，不会自动删除 pod 并跨节点对这些 pod 进行重新均衡。如果要在该专区恢复后跨专区重新均衡 pod，请考虑使用 [Kubernetes Descheduler ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/descheduler)。</p>
+  <p><strong>提示</strong>：在多专区集群中，请尽量使每个专区的工作程序节点容量保持在 50%，以便您有足够的容量来保护集群不受专区故障的影响。</p>
+  <p><strong>如果要跨区域分布应用程序该怎么做？</strong></br>要保护应用程序不受区域故障的影响，请在另一个区域中创建第二个集群，[设置全局负载均衡器](cs_clusters.html#multiple_clusters)以连接集群，并使用部署 YAML 为应用程序部署具有 [pod 反亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 的重复副本集。</p>
+  <p><strong>如果应用程序需要持久性存储器该怎么做？</strong></p>
+  <p>使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。</p></dd>
 </dl>
+
 
 
 ### 最低应用程序部署
@@ -131,6 +140,8 @@ spec:
 
 
 
+
+
 ## 启动 Kubernetes 仪表板
 {: #cli_dashboard}
 
@@ -138,7 +149,7 @@ spec:
 [在 GUI 中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
 {:shortdesc}
 
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
+开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 
 可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
@@ -151,78 +162,53 @@ spec:
 4.  在**集群**页面上，单击要访问的集群。
 5.  在集群详细信息页面中，单击 **Kubernetes 仪表板**按钮。
 
+</br>
+</br>
+
 **通过 CLI 启动 Kubernetes 仪表板**
 {: #db_cli}
 
-*  对于带有 Kubernetes V1.7.16 或更低版本主节点的集群：
+1.  获取 Kubernetes 的凭证。
 
-    1.  使用缺省端口号设置代理。
+    ```
+    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+    ```
+    {: pre}
 
-        ```
-                kubectl proxy
-        ```
-        {: pre}
+2.  复制输出中显示的 **id-token** 值。
 
-        输出：
+3.  使用缺省端口号设置代理。
 
-        ```
-                Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
+    ```
+    kubectl proxy
+    ```
+    {: pre}
 
-    2.  在 Web 浏览器中打开 Kubernetes 仪表板。
+    输出示例：
 
-        ```
-                http://localhost:8001/ui
-        ```
-        {: codeblock}
+    ```
+    Starting to serve on 127.0.0.1:8001
+    ```
+    {: screen}
 
-*  对于带有 Kubernetes V1.8.2 或更高版本主节点的集群：
+4.  登录到仪表板。
 
-    1.  获取 Kubernetes 的凭证。
+  1.  在浏览器中，浏览至以下 URL：
 
-        ```
-                kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-        ```
-        {: pre}
-
-    2.  复制输出中显示的 **id-token** 值。
-
-    3.  使用缺省端口号设置代理。
-
-        ```
-                kubectl proxy
-        ```
-        {: pre}
-
-        输出示例：
-
-        ```
-                Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    4.  登录到仪表板。
-
-      1.  在浏览器中，浏览至以下 URL：
-
-          ```
-                      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+      ```
+            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
-          {: codeblock}
+      {: codeblock}
 
-      2.  在登录页面中，选择**令牌**认证方法。
+  2.  在登录页面中，选择**令牌**认证方法。
 
-      3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
+  3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
 
 对 Kubernetes 仪表板操作完毕后，使用 `CTRL+C` 以退出 `proxy` 命令。退出后，Kubernetes 仪表板不再可用。运行 `proxy` 命令以重新启动 Kubernetes 仪表板。
 
 [接下来，可以通过仪表板来运行配置文件。](#app_ui)
 
-
 <br />
-
-
 
 
 ## 创建私钥
@@ -231,80 +217,125 @@ spec:
 Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）的安全方法。
 {:shortdesc}
 
-<table>
-<caption>要通过任务以私钥形式存储的必需文件</caption>
-<thead>
-<th>任务</th>
-<th>要以私钥形式存储的必需文件</th>
-</thead>
-<tbody>
-<tr>
-<td>向集群添加服务</td>
-<td>无。将服务绑定到集群时，会创建私钥。</td>
-</tr>
-<tr>
-<td>可选：如果不打算使用 ingress-secret，请将 Ingress 服务配置为使用 TLS。<p><b>注</b>：缺省情况下已启用 TLS，并且已经为 TLS 连接创建私钥。
+查看以下需要私钥的任务。有关在私钥中可以存储哪些内容的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/secret/)。
 
+### 向集群添加服务
+{: #secrets_service}
 
-要查看缺省 TLS 私钥：
-<pre>
-bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
-</pre>
-</p>
-要改为创建自己的私钥，请完成本主题中的步骤。</td>
-<td>服务器证书和密钥：<code>server.crt</code> 和 <code>server.key</code></td>
-<tr>
-<td>创建相互认证注释。</td>
-<td>CA 证书：<code>ca.crt</code></td>
-</tr>
-</tbody>
-</table>
+将服务绑定到集群时，无需创建私钥。系统将自动创建私钥。有关更多信息，请参阅[向集群添加 Cloud Foundry 服务](cs_integrations.html#adding_cluster)。
 
-有关在私钥中可以存储哪些内容的更多信息，请参阅 [Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/secret/)。
+### 将 Ingress ALB 配置为使用 TLS
+{: #secrets_tls}
 
+ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。要同时对入局 HTTPS 连接进行负载均衡，可以配置 ALB 来解密网络流量，然后将已解密的请求转发到集群中公开的应用程序。
 
+如果使用的是 IBM 提供的 Ingress 子域，那么可以[使用 IBM 提供的 TLS 证书](cs_ingress.html#public_inside_2)。要查看 IBM 提供的 TLS 私钥，请运行以下命令：
+```
+ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
+```
+{: pre}
 
-要使用证书创建私钥，请执行以下操作：
-
-1. 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。如果是为了进行测试，您可以生成自签名证书。
-
- **重要信息**：请确保每个证书的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
-
- 必须验证客户机证书和客户机密钥，一直验证到可信根证书（在本例中为 CA 证书）。示例：
-
- ```
- 客户机证书：由中间证书签发
- 中间证书：由根证书签发
- 根证书：由其自身签发
- ```
- {: codeblock}
-
-2. 将证书创建为 Kubernetes 私钥。
-
-   ```
-   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
-   ```
-   {: pre}
-
-     示例：
-   - TLS 连接：
-
+如果使用的是定制域，那么可以使用您自己的证书来管理 TLS 终止。要创建自己的 TLS 私钥，请执行以下操作：
+1. 通过下列其中一种方式生成密钥和证书：
+    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。**重要信息**：请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
+    * 出于测试目的，可以使用 OpenSSL 创建自签名证书。有关更多信息，请参阅此[自签名 SSL 证书教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.akadia.com/services/ssh_test_certificate.html)。
+        1. 创建 `tls.key`。
+            ```
+            openssl genrsa -out tls.key 2048
+            ```
+            {: pre}
+        2. 使用密钥创建 `tls.crt`。
+            ```
+            openssl req -new -x509 -key tls.key -out tls.crt
+            ```
+            {: pre}
+2. [将证书和密钥转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
+3. 使用证书和密钥创建私钥 YAML 文件。
      ```
-          kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       tls.crt: <client_certificate>
+       tls.key: <client_key>
+     ```
+     {: codeblock}
+
+4. 将证书创建为 Kubernetes 私钥。
+     ```
+     kubectl create -f ssl-my-test
      ```
      {: pre}
 
-   - 相互认证注释：
+### 使用 SSL 服务注释定制 Ingress ALB
+{: #secrets_ssl_services}
 
+可以使用 [`ingress.bluemix.net/ssl-services` 注释](cs_annotations.html#ssl-services)通过 Ingress ALB 加密流至上游应用程序的流量。要创建私钥，请执行以下操作：
+
+1. 从上游服务器获取认证中心 (CA) 密钥和证书。
+2. [将证书转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
+3. 使用证书创建私钥 YAML 文件。
      ```
-          kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       trusted.crt: <ca_certificate>
+     ```
+     {: codeblock}
+     **注**：如果您还希望对上游流量强制执行相互认证，那么除了 data 部分中的 `trusted.crt` 外，还可以提供 `client.crt` 和 `client.key`。
+4. 将证书创建为 Kubernetes 私钥。
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
+
+### 使用相互认证注释定制 Ingress ALB
+{: #secrets_mutual_auth}
+
+可以使用 [`ingress.bluemix.net/mutual-auth` 注释](cs_annotations.html#mutual-auth)来配置 Ingress ALB 的下游流量相互认证。要创建相互认证私钥，请执行以下操作:
+
+1. 通过下列其中一种方式生成密钥和证书：
+    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。**重要信息**：请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
+    * 出于测试目的，可以使用 OpenSSL 创建自签名证书。有关更多信息，请参阅此[自签名 SSL 证书教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.akadia.com/services/ssh_test_certificate.html)。
+        1. 创建 `ca.key`。
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. 使用密钥创建 `ca.crt`。
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. 使用 `ca.crt` 创建自签名证书。
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [将证书转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
+3. 使用证书创建私钥 YAML 文件。
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
+     ```
+     {: codeblock}
+4. fg将证书创建为 Kubernetes 私钥。
+     ```
+     kubectl create -f ssl-my-test
      ```
      {: pre}
 
 <br />
-
-
-
 
 
 ## 使用 GUI 部署应用程序
@@ -362,7 +393,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  在集群上下文中运行配置文件。
 
     ```
-        kubectl apply -f config.yaml
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -371,6 +402,98 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 <br />
 
 
+## 使用标签将应用程序部署到特定工作程序节点
+{: #node_affinity}
+
+部署应用程序时，应用程序 pod 会不加选择地部署到集群中的各种工作程序节点。在某些情况下，您可能希望限制应用程序 pod 部署到的工作程序节点。例如，您可能希望应用程序 pod 仅部署到特定工作程序池中的工作程序节点，因为这些工作程序节点位于裸机机器上。要指定应用程序 pod 必须部署到的工作程序节点，请将亲缘关系规则添加到应用程序部署。
+{:shortdesc}
+
+开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+
+1. 获取要将应用程序 pod 部署到的工作程序池的名称。
+    ```
+    ibmcloud ks worker-pools <cluster_name_or_ID>
+    ```
+    {:pre}
+
+    这些步骤使用工作程序池名称作为示例。要根据其他因素将应用程序 pod 部署到特定工作程序节点，请改为获取该因素的值。例如，要仅将应用程序 pod 部署到特定 VLAN 上的工作程序节点，请通过运行 `ibmcloud ks vlans <zone>` 来获取 VLAN 标识。
+    {: tip}
+
+2. 向应用程序部署[添加亲缘关系规则 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)（针对工作程序池名称）。
+
+    示例 YAML：
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: with-node-affinity
+    spec:
+      template:
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: workerPool
+                    operator: In
+                    values:
+                    - <worker_pool_name>
+    ...
+    ```
+    {: codeblock}
+
+    在示例 YAML 的 **affinity** 部分中，`workerPool` 为 `key`，`<worker_pool_name>` 为 `value`。
+
+3. 应用已更新的部署配置文件。
+    ```
+    kubectl apply -f with-node-affinity.yaml
+    ```
+    {: pre}
+
+4. 验证应用程序 pod 是否部署到正确的工作程序节点。
+
+    1. 列出集群中的 pod。
+        ```
+        kubectl get pods -o wide
+        ```
+        {: pre}
+
+        输出示例：
+        ```
+                NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
+        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
+        ```
+        {: screen}
+
+    2. 在输出中，确定应用程序的 pod。记下该 pod 所在的工作程序节点的 **NODE** 专用 IP 地址。
+
+        在上面的示例输出中，应用程序 pod `cf-py-d7b7d94db-vp8pq` 位于 IP 地址为 `10.176.48.78` 的工作程序节点上。
+
+    3. 列出在应用程序部署中指定的工作程序池中的工作程序节点。
+
+        ```
+        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ```
+        {: pre}
+
+        输出示例：
+
+        ```
+        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        ```
+        {: screen}
+
+        如果基于其他因素创建了应用程序亲缘关系规则，请改为获取该因素的值。例如，要验证部署到特定 VLAN 上工作程序节点的应用程序 pod，请通过运行 `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` 查看工作程序节点所在的 VLAN。
+        {: tip}
+
+    4. 在输出中，验证在先前步骤中识别的具有专用 IP 地址的工作程序节点是否部署在此工作程序池中。
+
+<br />
 
 
 ## 在 GPU 机器上部署应用程序
@@ -541,7 +664,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
     在此示例中，您看到两个 GPU 都用于执行作业，因为这两个 GPU 均已安排在工作程序节点中。如果限制设置为 1，那么仅显示 1 个 GPU。
 
-## 扩展应用程序 
+## 扩展应用程序
 {: #app_scaling}
 
 使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
@@ -560,7 +683,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 
     ```
-        kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -593,7 +716,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
-        kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
     ```
     {: pre}
 
@@ -634,28 +757,28 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     1.  获取部署名称。
 
         ```
-                kubectl get deployments
+        kubectl get deployments
         ```
         {: pre}
 
     2.  获取 pod 名称。
 
         ```
-                    kubectl get pods
+            kubectl get pods
             ```
         {: pre}
 
     3.  获取在 pod 中运行的容器的名称。
 
         ```
-                kubectl describe pod <pod_name>
+        kubectl describe pod <pod_name>
         ```
         {: pre}
 
     4.  设置新映像以供部署使用。
 
         ```
-                kubectl set image deployment/<deployment_name><container_name>=<image_name>
+        kubectl set image deployment/<deployment_name><container_name>=<image_name>
         ```
         {: pre}
 
@@ -664,7 +787,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  检查部署的状态。
 
     ```
-        kubectl rollout status deployments/<deployment_name>
+    kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
@@ -672,21 +795,21 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     1.  查看部署的应用历史记录，并确定上次部署的修订版号。
 
         ```
-                kubectl rollout history deployment/<deployment_name>
+        kubectl rollout history deployment/<deployment_name>
         ```
         {: pre}
 
         **提示**：要查看特定修订版的详细信息，请包含相应的修订版号。
 
         ```
-                kubectl rollout history deployment/<deployment_name> --revision=<number>
+        kubectl rollout history deployment/<deployment_name> --revision=<number>
         ```
         {: pre}
 
     2.  回滚到先前的版本或指定修订版。要回滚到先前的版本，请使用以下命令。
 
         ```
-                kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
+        kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
 

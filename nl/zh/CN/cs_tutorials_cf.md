@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -67,7 +67,7 @@ lastupdated: "2018-05-24"
     a. 在目录的**样板**中，单击 **Python Flask**。此样板包含适用于 Python 2 和 Python 3 应用程序的运行时环境。
 
     b. 输入应用程序名称 `cf-py-<name>`，然后单击**创建**。要访问样板的应用程序代码，必须首先将 CF 应用程序部署到云。可以对应用程序使用任何名称。如果使用示例中的名称，请将 `<name>` 替换为唯一标识，例如 `cf-py-msx`。
-    
+
     **注意**：不要在任何应用程序、容器映像或 Kubernetes 资源名称中使用个人信息。
 
     部署应用程序后，将显示“使用命令行界面下载、修改和重新部署应用程序”的指示信息。
@@ -127,7 +127,7 @@ lastupdated: "2018-05-24"
 4. 构建包含应用程序代码的 Docker 映像，并将其推送到专用注册表。
 
   ```
-  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +147,7 @@ lastupdated: "2018-05-24"
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>专用注册表路径，其中包含唯一名称空间以及映像的名称。对于本示例，用于映像的名称与应用程序目录相同，但您可以为专用注册表中的映像选择任何名称。如果不确定哪个是您的名称空间，请运行 `bx cr namespaces` 命令进行查找。</td>
+  <td>专用注册表路径，其中包含唯一名称空间以及映像的名称。对于本示例，用于映像的名称与应用程序目录相同，但您可以为专用注册表中的映像选择任何名称。如果不确定哪个是您的名称空间，请运行 `ibmcloud cr namespaces` 命令进行查找。</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +156,7 @@ lastupdated: "2018-05-24"
   </tbody>
   </table>
 
-  映像已在注册表中创建。您可以运行 `bx cr images` 命令来验证是否已创建映像。
+  映像已在注册表中创建。您可以运行 `ibmcloud cr images` 命令来验证是否已创建映像。
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +222,7 @@ lastupdated: "2018-05-24"
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，将 &lt;registry_namespace&gt; 替换为专用映像注册表的名称空间。如果不确定哪个是您的名称空间，请运行 `bx cr namespaces` 命令进行查找。</td>
+  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，将 &lt;registry_namespace&gt; 替换为专用映像注册表的名称空间。如果不确定哪个是您的名称空间，请运行 `ibmcloud cr namespaces` 命令进行查找。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,15 +250,15 @@ lastupdated: "2018-05-24"
     a.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-        bx cs workers <cluster_name>
+    ibmcloud ks workers <cluster_name>
     ```
     {: pre}
 
     输出：
 
     ```
-    ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
+ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
     ```
     {: screen}
 

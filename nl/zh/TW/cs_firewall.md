@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-05-24"
 請檢閱下列狀況，在下列狀況時，您可能需要在防火牆中為 {{site.data.keyword.containerlong}} 開啟特定的埠和 IP 位址。
 {:shortdesc}
 
-* 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `bx` 指令](#firewall_bx)。
+* 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `ibmcloud` 指令](#firewall_bx)。
 * 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `kubectl` 指令](#firewall_kubectl)。
 * 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `calicoctl` 指令](#firewall_calicoctl)。
 * 當已針對工作者節點設定防火牆，或是在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中自訂防火牆設定時，[容許 Kubernetes 主節點與工作者節點之間的通訊](#firewall_outbound)。
@@ -33,10 +33,10 @@ lastupdated: "2018-05-24"
 <br />
 
 
-## 在防火牆的保護下執行 `bx cs` 指令
+## 在防火牆的保護下執行 `ibmcloud ks` 指令
 {: #firewall_bx}
 
-如果組織網路原則導致無法透過 Proxy 或防火牆從本端系統存取公用端點，則若要執行 `bx cs` 指令，您必須容許 {{site.data.keyword.containerlong_notm}} 的 TCP 存取。
+如果組織網路原則導致無法透過 Proxy 或防火牆從本端系統存取公用端點，則若要執行 `ibmcloud ks` 指令，您必須容許 {{site.data.keyword.containerlong_notm}} 的 TCP 存取。
 {:shortdesc}
 
 1. 容許埠 443 上對 `containers.bluemix.net` 的存取。
@@ -71,35 +71,35 @@ lastupdated: "2018-05-24"
 
 建立叢集時，會從 20000-32767 內隨機指派主要 URL 中的埠。您可以針對任何可能建立的叢集選擇開啟埠範圍 20000-32767，或選擇容許存取特定現有叢集。
 
-開始之前，請容許[執行 `bx cs` 指令](#firewall_bx)的存取。
+開始之前，請容許[執行 `ibmcloud ks` 指令](#firewall_bx)的存取。
 
 若要容許存取特定叢集，請執行下列動作：
 
 1. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。如果您有聯合帳戶，請包含 `--sso` 選項。
 
    ```
-    bx login [--sso]
-    ```
+   ibmcloud login [--sso]
+   ```
    {: pre}
 
 2. 選取您叢集所在的地區。
 
    ```
-   bx cs region-set
+   ibmcloud ks region-set
    ```
    {: pre}
 
 3. 取得叢集的名稱。
 
    ```
-      bx cs clusters
-      ```
+   ibmcloud ks clusters
+   ```
    {: pre}
 
 4. 擷取叢集的**主要 URL**。
 
    ```
-   bx cs cluster-get <cluster_name_or_ID>
+   ibmcloud ks cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -153,7 +153,7 @@ lastupdated: "2018-05-24"
 如果組織網路原則導致無法透過 Proxy 或防火牆從本端系統存取公用端點，則若要執行 `calicoctl` 指令，您必須容許 Calico 指令的 TCP 存取。
 {:shortdesc}
 
-開始之前，請容許執行 [`bx` 指令](#firewall_bx)及 [`kubectl` 指令](#firewall_kubectl)的存取。
+開始之前，請容許執行 [`ibmcloud` 指令](#firewall_bx)及 [`kubectl` 指令](#firewall_kubectl)的存取。
 
 1. 從用來容許 [`kubectl` 指令](#firewall_kubectl)的主要 URL 中擷取 IP 位址。
 
@@ -175,21 +175,21 @@ lastupdated: "2018-05-24"
 讓您的叢集從防火牆之後存取基礎架構資源及服務，例如 {{site.data.keyword.containershort_notm}} 地區、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud 基礎架構 (SoftLayer) 專用 IP，以及持續性磁區要求的出口。
 {:shortdesc}
 
-  1.  記下叢集中所有工作者節點的公用 IP 位址。
+  1.  記下叢集裡所有工作者節點的公用 IP 位址。
 
       ```
-             bx cs workers <cluster_name_or_ID>
-       ```
+      ibmcloud ks workers <cluster_name_or_ID>
+      ```
       {: pre}
 
   2.  容許從來源 _<each_worker_node_publicIP>_ 到目的地 TCP/UDP 埠範圍 20000-32767 和埠 443 以及下列 IP 位址和網路群組的送出網路資料流量。如果您的組織防火牆導致本端機器無法存取公用網際網路端點，請針對來源工作者節點及本端機器執行此步驟。
-      - **重要事項**：對於地區內的所有位置，您必須容許對埠 443 的送出資料流量，以平衡引導處理程序期間的負載。例如，如果您的叢集是在美國南部，則對於所有位置（dal10、dal12 及 dal13），您必須容許從埠 443 到 IP 位址的資料流量。
+      - **重要事項**：對於地區內的所有區域，您必須容許對埠 443 的送出資料流量，以平衡引導處理程序期間的負載。例如，如果您的叢集是在美國南部，則對於所有區域（dal10、dal12 及 dal13），您必須容許從埠 443 到 IP 位址的資料流量。
       <p>
-  <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+  <table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
   <caption>針對送出資料流量開啟的 IP 位址</caption>
       <thead>
       <th>地區</th>
-      <th>位置</th>
+      <th>區域</th>
       <th>IP 位址</th>
       </thead>
     <tbody>
@@ -231,7 +231,7 @@ lastupdated: "2018-05-24"
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - 將 <em>&lt;registry_publicIP&gt;</em> 取代為您要容許資料流量的登錄 IP 位址。全球登錄會儲存 IBM 提供的公用映像檔，地區登錄會儲存您自己的專用或公用映像檔。
         <p>
-<table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+<table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
   <caption>針對「登錄」資料流量開啟的 IP 位址</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} 地區</th>
@@ -271,7 +271,7 @@ lastupdated: "2018-05-24"
   4.  選用項目：容許從工作者節點到 {{site.data.keyword.monitoringlong_notm}} 及 {{site.data.keyword.loganalysislong_notm}} 服務的送出網路資料流量：
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - 將 <em>&lt;monitoring_public_IP&gt;</em> 取代為您要容許資料流量的監視地區的所有位址：
-        <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+        <p><table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
   <caption>針對監視資料流量開啟的 IP 位址</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} 地區</th>
@@ -282,7 +282,7 @@ lastupdated: "2018-05-24"
         <tr>
          <td>歐盟中部</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
+         <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>英國南部</td>
@@ -290,7 +290,7 @@ lastupdated: "2018-05-24"
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>美國東部、美國南部、亞太地區北部</td>
+          <td>美國東部、美國南部、亞太地區北部、亞太地區南部</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -300,8 +300,8 @@ lastupdated: "2018-05-24"
 </p>
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - 將 <em>&lt;logging_public_IP&gt;</em> 取代為您要容許資料流量的記載地區的所有位址：
-        <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <caption>針對記載資料流量開啟的 IP 位址</caption>
+        <p><table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
+<caption>針對記載資料流量開啟的 IP 位址</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} 地區</th>
         <th>記載位址</th>
@@ -332,15 +332,18 @@ lastupdated: "2018-05-24"
        </table>
 </p>
 
-  5. 對於專用防火牆，容許適當的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請參閱[此鏈結](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)，從 **Backend (private) Network** 小節開始。
-      - 新增所使用[地區內的所有位置](cs_regions.html#locations)。
-      - 請注意，您必須新增 dal01 位置（資料中心）。
+  5. 對於專用防火牆，容許適當的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請參閱[此鏈結](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)，從 **Backend (private) Network** 小節開始。
+      - 新增所使用[地區內的所有區域](cs_regions.html#zones)。
+      - 請注意，您必須新增 `dal01` 區域（資料中心）。
       - 開啟埠 80 及 443，以容許叢集引導處理程序。
+      - 開啟 Kubernetes 儀表板的埠 10250。
+      - 開啟埠 53 進行 DNS 存取。
+      - 因為所有 Pod 對 Pod 資料流量都會經過專用網路，所以會開啟 Pod 用來通訊的所有埠，或開啟叢集裡工作者節點的所有埠。
 
-  6. {: #pvc}若要建立資料儲存空間的持續性磁區宣告，請透過防火牆容許對叢集所在位置（資料中心）的 [IBM Cloud 基礎架構 (SoftLayer) IP 位址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)進行 Egress 存取。
-      - 若要尋找叢集的位置（資料中心），請執行 `bx cs clusters`。
+  6. {: #pvc}若要建立資料儲存空間的持續性磁區要求，請透過防火牆容許對叢集所在區域的 [IBM Cloud 基礎架構 (SoftLayer) IP 位址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)進行 Egress 存取。
+      - 若要尋找叢集的區域，請執行 `ibmcloud ks clusters`。
       - 容許存取**前端（公用）網路**及**後端（專用）網路**的 IP 範圍。
-      - 請注意，您必須針對**後端（專用）網路**新增 dal01 位置（資料中心）。
+      - 請注意，您必須針對**後端（專用）網路**新增 `dal01` 區域（資料中心）。
 
 <br />
 

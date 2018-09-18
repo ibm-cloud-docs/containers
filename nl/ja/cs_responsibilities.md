@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -44,15 +44,18 @@ lastupdated: "2018-05-24"
 - [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために {{site.data.keyword.Bluemix_notm}} アカウントを構成する](cs_troubleshoot_clusters.html#cs_credentials)
 - [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](cs_app.html#app_cli)
 - [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](cs_app.html#highly_available_apps)
-- [CLI を使用してワーカー・ノードを追加または削除することで、クラスターのキャパシティーを追加または削除する](cs_cli_reference.html#cs_worker_add)
+- [ワーカー・プールのサイズを変更することで、クラスターの容量を追加または削除する](cs_clusters.html#add_workers)
+- [VLAN のスパンニングを有効にし、ゾーン間で複数ゾーン・ワーカー・プールのバランスを維持する](cs_clusters.html#ha_clusters)
 - [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[ワーカー・ノードの VLAN 接続](cs_clusters.html#worker_vlan_connection)を参照してください。 </p>
+- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 </p>
 - [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](cs_cluster_update.html#master)
 - [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](cs_cluster_update.html#worker_node)
-- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
+- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`ibmcloud ks` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
 - [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
 - [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html)
+- クラスターの正常性とパフォーマンスをサポートするために[ロギング](cs_health.html#logging)・サービスと[モニタリング](cs_health.html#view_metrics)・サービスをセットアップする
 - [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](cs_health.html#autorecovery)
+- クラスター内のリソースを変更するイベントを監査する。例えば [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) を使用して、ユーザーによって開始された {{site.data.keyword.containershort_notm}} インスタンスの状態を変更するアクティビティーを確認したりする
 
 <br />
 

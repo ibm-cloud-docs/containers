@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -29,6 +29,23 @@ Si utiliza {{site.data.keyword.containerlong}}, tenga en cuenta estas técnicas 
 Si tiene un problema más general, pruebe la [depuración del clúster](cs_troubleshoot.html).
 {: tip}
 
+## En un clúster multizona, un volumen persistente no se puede montar en un pod
+{: #mz_pv_mount}
+
+{: tsSymptoms}
+El clúster era anteriormente un clúster de una sola zona con nodos trabajadores autónomos que no estaban en agrupaciones de nodos trabajadores. Ha montado correctamente una reclamación de volumen persistente (PVC) que describía el volumen persistente (PV) que se utilizará para el despliegue del pod de la aplicación. Sin embargo, ahora que tiene agrupaciones de nodos trabajadores y que ha añadido zonas al clúster, el PV no se puede montar en un pod.
+
+{: tsCauses}
+Para los clústeres multizona, los PV deben tener las siguientes etiquetas para que los pods no intenten montar volúmenes en otra zona.
+* `failure-domain.beta.kubernetes.io/region`
+* `failure-domain.beta.kubernetes.io/zone`
+
+Los nuevos clústeres con agrupaciones de nodos trabajadores que pueden abarcar varias zonas etiquetan los PV de forma predeterminada. Si ha creado clústeres antes de que se hayan incorporado las agrupaciones de nodos trabajadores, debe añadir las etiquetas manualmente.
+
+{: tsResolve}
+[Actualice los PV en el clúster con las etiquetas de región y de zona](cs_storage_basics.html#multizone).
+
+<br />
 
 
 ## Los sistemas de archivos de los nodos trabajadores pasan a ser de sólo lectura
@@ -46,9 +63,9 @@ El sistema de archivos del nodo trabajador es de sólo lectura.
 {: tsResolve}
 1.  Haga una copia de seguridad de los datos que puedan estar almacenados en el nodo trabajador o en los contenedores.
 2.  Para un arreglo a corto plazo para el nodo trabajador existente, recargue el nodo trabajador.
-    <pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-Para un arreglo a largo plazo, [actualice el tipo de máquina añadiendo otro nodo trabajador](cs_cluster_update.html#machine_type).
+Para un arreglo a largo plazo, [actualice el tipo de máquina de la agrupación de nodos trabajadores](cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -58,7 +75,7 @@ Para un arreglo a largo plazo, [actualice el tipo de máquina añadiendo otro no
 {: #nonroot}
 
 {: tsSymptoms}
-Después de [añadir almacenamiento NFS](cs_storage.html#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como, "write-permission" o "do not have required permission". El pod falla y queda atascado en un ciclo de recarga.
+Después de [añadir almacenamiento NFS](cs_storage_file.html#app_volume_mount) a su despliegue, el despliegue de su contenedor falla. Al recuperar los registros del contenedor, podría ver errores como, "write-permission" o "do not have required permission". El pod falla y queda atascado en un ciclo de recarga.
 
 {: tsCauses}
 De forma predeterminada, los usuarios no root no tienen permiso de escritura sobre la vía de acceso de montaje del volumen para el almacenamiento respaldado por NFS. Algunas imágenes comunes de app, como por ejemplo Jenkins y Nexus3, especifican un usuario no root que posee la vía de acceso de montaje en Dockerfile. Cuando se crea un contenedor desde este Dockerfile, la creación del contenedor falla debido a permisos insuficientes del usuario no root en la vía de acceso de montaje. Para otorgar permiso de escritura, puede modificar el Dockerfile para añadir temporalmente el usuario no root al grupo de usuarios root antes de cambiar los permisos de la vía de acceso de montaje, o utilizar un contenedor de inicialización.
@@ -282,7 +299,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Puede tener un dispositivo de almacenamiento en bloques configurado con un sistema de archivos `XFS`. Para montar este dispositivo en el pod, [creó un PV](cs_storage.html#existing_block) que especificaba `ext4` como su sistema de archivos o bien no se especificaba ningún sistema de archivos en la sección `spec/flexVolume/fsType`. Si no se define un sistema de archivos, el valor predeterminado para el PV es `ext4`.
+Puede tener un dispositivo de almacenamiento en bloques configurado con un sistema de archivos `XFS`. Para montar este dispositivo en el pod, [creó un PV](cs_storage_block.html#existing_block) que especificaba `ext4` como su sistema de archivos o bien no se especificaba ningún sistema de archivos en la sección `spec/flexVolume/fsType`. Si no se define un sistema de archivos, el valor predeterminado para el PV es `ext4`.
 El PV se creó satisfactoriamente y se enlazó a la instancia de almacenamiento en bloques existente. Sin embargo, cuando se intentó montar el PV a su clúster mediante una PVC coincidente, el volumen no se pudo montar. No se puede montar una instancia de almacenamiento en bloques `XFS` con un sistema de archivos `ext4` en el pod.
 
 {: tsResolve}
@@ -349,5 +366,5 @@ Actualice el sistema de archivos en el PV existente de `ext4` a `XFS`.
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
 

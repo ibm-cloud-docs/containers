@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,38 +26,39 @@ lastupdated: "2018-05-24"
 僅在標示這些工作者節點可以進行網路連線時，其他工作負載才無法取用工作者節點的記憶體，並干擾網路連線。
 
 
-
-
+如果您有多區域叢集且想要將網路資料流量限制為邊緣工作者節點，則必須在每一個區域中至少啟用 2 個邊緣工作者節點，以取得負載平衡器或 Ingress Pod 的高可用性。建立邊緣節點工作者節點儲存區，以跨越叢集裡的所有區域，而每個區域至少具有 2 個工作者節點。
+{: tip}
 
 ## 將工作者節點標示為邊緣節點
 {: #edge_nodes}
 
-將 `dedicated=edge` 標籤新增至叢集中每一個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器只會部署至那些工作者節點。
+將 `dedicated=edge` 標籤新增至叢集裡每一個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器只會部署至那些工作者節點。
 {:shortdesc}
 
 開始之前：
 
 - [建立標準叢集。](cs_clusters.html#clusters_cli)
 - 確保您的叢集至少具有一個公用 VLAN。僅具有專用 VLAN 的叢集無法使用邊緣工作者節點。
+- [建立新工作者節點儲存區](cs_clusters.html#add_pool)，以跨越叢集裡的所有區域，而每個區域至少具有 2 個工作者節點。
 - [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
 若要將工作者節點標示為邊緣節點，請執行下列動作：
 
-1. 列出叢集中的所有工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。在每一個公用 VLAN 上至少選取兩個工作者節點作為邊緣工作者節點。Ingress 需要每一個區域中至少有兩個工作者節點來提供高可用性。 
+1. 列出邊緣節點工作者節點儲存區中的工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
 2. 使用 `dedicated=edge` 來標示工作者節點。在使用 `dedicated=edge` 標示工作者節點之後，所有後續的 Ingress 及負載平衡器都會部署至邊緣工作者節點。
 
   ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
-3. 擷取叢集中所有現有的負載平衡器服務。
+3. 擷取叢集裡所有現有的負載平衡器服務。
 
   ```
   kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
@@ -71,7 +72,7 @@ lastupdated: "2018-05-24"
   ```
   {: screen}
 
-4. 使用來自前一個步驟的輸出，複製並貼到每一個 `kubectl get service` 指令行。此指令會將負載平衡器重新部署至邊緣工作者節點。只有公用負載平衡器必須重新部署。
+4. 使用來自前一個步驟的輸出，複製並貼到每一個 `kubectl get service` 指令行。這個指令會將負載平衡器重新部署至邊緣工作者節點。只有公用負載平衡器必須重新部署。
 
   輸出範例：
 
@@ -102,7 +103,7 @@ lastupdated: "2018-05-24"
   ```
   {: pre}
 
-2. 將污點套用至每一個工作者節點，以避免 Pod 在工作者節點上執行，並從工作者節點中移除沒有 `dedicated=edge` 標籤的 Pod。移除的 Pod 會重新部署在有容量的其他工作者節點上。
+2. 將污點套用至每一個工作者節點，以避免 Pod 在工作者節點上執行，並從工作者節點移除沒有 `dedicated=edge` 標籤的 Pod。移除的 Pod 會重新部署在有容量的其他工作者節點上。
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute

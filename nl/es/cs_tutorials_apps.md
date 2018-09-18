@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-# Guía de aprendizaje: Despliegue de apps en clústeres
+# Guía de aprendizaje: Despliegue de apps en clústeres Kubernetes
 {: #cs_apps_tutorial}
 
 Puede aprender a utilizar {{site.data.keyword.containerlong}} para desplegar unan app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
@@ -26,14 +26,13 @@ En este escenario, una empresa PR ficticia utiliza el servicio {{site.data.keywo
 
 Mediante el clúster de Kubernetes creado en la última guía de aprendizaje, el desarrollador de apps de la empresa PR despliega una versión de Hello World de la app. Basándose en cada lección de esta guía, el desarrollador de apps despliega versiones cada vez más complicadas de la misma app. El siguiente diagrama muestra los componentes de cada despliegue por lección.
 
-
-![Componentes de la lección](images/cs_app_tutorial_roadmap.png)
+![Componentes de la lección](images/cs_app_tutorial_mz-roadmap.png)
 
 Tal como ilustra el diagrama, Kubernetes utiliza varios tipos de recursos para configurar y ejecutar sus apps en los clústeres. En Kubernetes, los despliegues y los servicios trabajan conjuntamente. Los despliegues incluyen las definiciones de la app. Por ejemplo, la imagen que se utilizará para el contenedor y el puerto que se debe exponer para la app. Cuando crea un despliegue, se crea un pod de Kubernetes para cada contenedor que haya definido en el despliegue. Para que la app resulte más resistente, puede definir varias instancias de la misma app en su despliegue y dejar que Kubernetes cree automáticamente una réplica. El conjunto de réplicas supervisa los pods y garantiza que el número especificado de pods están siempre activos y en ejecución. Si uno de los pods deja de responder, el pod se vuelve a crear automáticamente.
 
 Los servicios agrupan un conjunto de pods y proporciona conexión de red a estos pods para otros servicios del clúster sin exponer la dirección IP privada real de cada pod. Puede utilizar los servicios de Kubernetes para poner una app a disposición de otros pods dentro del clúster o para exponer una app en Internet. En esta guía de aprendizaje, utilizará un servicio de Kubernetes para acceder a la app en ejecución desde Internet utilizando una dirección IP pública que se asigna automáticamente a un nodo trabajador y un puerto público.
 
-Para hacer que la app esté aún más disponible, en los clústeres estándares puede crear varios nodos trabajadores para ejecutar incluso más réplicas de la app. Esta tarea no se trata en esta guía de aprendizaje, pero tenga en cuenta este concepto para futuras mejoras de la disponibilidad de una app.
+Para hacer que la app esté aún más disponible, en los clústeres estándares puede crear una agrupación de nodos trabajadores que abarque varias zonas con nodos trabajadores en cada zona para ejecutar incluso más réplicas de la app. Esta tarea no se trata en esta guía de aprendizaje, pero tenga en cuenta este concepto para futuras mejoras de la disponibilidad de una app.
 
 Solo una de las lecciones incluye la integración de un servicio de {{site.data.keyword.Bluemix_notm}} en una app, pero puede utilizarlo para apps tan sencillas o complejas como pueda imaginar.
 
@@ -56,7 +55,7 @@ Los desarrolladores de software y administradores de la red que despliegan apps 
 
 ## Requisitos previos
 
-* [Guía de aprendizaje: Creación de clústeres de Kubernetes en {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
+* [Guía de aprendizaje: Creación de clústeres de Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
 
 
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
@@ -67,8 +66,7 @@ En la guía de aprendizaje anterior, ha creado un clúster con un nodo trabajado
 
 Los componentes que desplegará al completar esta lección se muestran en el siguiente diagrama.
 
-
-![Configuración del despliegue](images/cs_app_tutorial_components1.png)
+![Configuración del despliegue](images/cs_app_tutorial_mz-components1.png)
 
 Para desplegar la app:
 
@@ -90,10 +88,10 @@ Para desplegar la app:
     {: pre}
 
 3.  Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Escriba
-sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, utilice el mandato `bx cs region-set`.
+sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, utilice el mandato `ibmcloud ks region-set`.
 
     ```
-    bx login [--sso]
+    ibmcloud login [--sso]
     ```
     {: pre}
 
@@ -103,7 +101,7 @@ sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Pa
     1.  Obtenga el mandato para establecer la variable de entorno y descargar los archivos de configuración de Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -121,19 +119,19 @@ Kubernetes como variable de entorno.
 5.  Inicie la sesión en la CLI de {{site.data.keyword.registryshort_notm}}. **Nota**: Asegúrese de que el plugin container-registry está [instalado](/docs/services/Registry/index.html#registry_cli_install).
 
     ```
-    bx cr login
+    ibmcloud cr login
     ```
     {: pre}
     -   Si ha olvidado el espacio de nombres de {{site.data.keyword.registryshort_notm}}, ejecute el mandato siguiente.
 
         ```
-        bx cr namespace-list
+        ibmcloud cr namespace-list
         ```
         {: pre}
 
 6.  Inicie Docker.
     * Si utiliza Docker Community Edition, no se requiere ninguna acción.
-    * Si utiliza Linux, siga la [documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/admin/) para encontrar instrucciones sobre cómo iniciar Docker en función de la distribución de Linux que utilice.
+    * Si utiliza Linux, siga la [documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/config/daemon/) para encontrar instrucciones sobre cómo iniciar Docker en función de la distribución de Linux que utilice.
     * Si utiliza Docker Toolbox en Windows u OSX, puede utilizar el Docker Quickstart Terminal, que inicia Docker automáticamente. Utilice Docker Quickstart Terminal en los siguientes pasos para ejecutar los mandatos de
 Docker y luego vuelva a la CLI en la que ha definido la variable de sesión `KUBECONFIG`.
 
@@ -275,18 +273,18 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
     2.  Obtenga la dirección IP pública del nodo trabajador en el clúster.
 
         ```
-        bx cs workers <cluster_name_or_ID>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Salida de ejemplo:
 
         ```
-        bx cs workers pr_firm_cluster
+        ibmcloud ks workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
         ```
         {: screen}
 
@@ -323,8 +321,7 @@ En esta lección, desplegará tres instancias de la app Hello World en un clúst
 
 Mayor disponibilidad significa que el acceso de usuario se divide entre las tres instancias. Cuando hay demasiados usuarios que intentan acceder a la misma instancia de la app, es posible que el tiempo de respuesta sea lento. Varias instancias puede significar mejores tiempos de respuesta para los usuarios. En esta lección, también aprenderá cómo funcionan las comprobaciones de estado y las actualizaciones de despliegue con Kubernetes. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
-
-![Configuración del despliegue](images/cs_app_tutorial_components2.png)
+![Configuración del despliegue](images/cs_app_tutorial_mz-components2.png)
 
 En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes.
 
@@ -426,7 +423,7 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
 7.  Una vez realizado todo el trabajo de despliegue, puede abrir un navegador y comprobar la app. Para formar el URL, tome la misma dirección IP pública que ha utilizado en la lección anterior para el nodo trabajador y combínela con el NodePort especificado en el script de configuración. Para obtener la dirección IP pública para el nodo trabajador:
 
   ```
-  bx cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -487,8 +484,7 @@ En las lecciones anteriores, las apps se han desplegado como componentes únicos
 
 La separación de componentes en distintos contenedores garantiza que puede actualizar uno sin que afecte a los otros. A continuación, actualizará la app para ampliarla con más réplicas a fin de aumentar su disponibilidad. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
-![Configuración del despliegue](images/cs_app_tutorial_components3.png)
-
+![Configuración del despliegue](images/cs_app_tutorial_mz-components3.png)
 
 En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, creará una instancia del servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} en su cuenta de {{site.data.keyword.Bluemix_notm}} y configurará dos despliegues, uno para cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente.
 
@@ -568,7 +564,7 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
 5.  Compruebe que las imágenes se han añadido correctamente al espacio de nombres del registro. Si utiliza el terminal Docker Quickstart para ejecutar los mandatos de Docker, asegúrese de volver a la CLI que ha utilizado para establecer la variable de sesión `KUBECONFIG`.
 
     ```
-    bx cr images
+    ibmcloud cr images
     ```
     {: pre}
 
@@ -751,7 +747,7 @@ service "watson-talk-service" deleted
   Si no desea conservar el clúster, también puede suprimirlo.
 
   ```
-  bx cs cluster-rm <cluster_name_or_ID>
+  ibmcloud ks cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -762,4 +758,4 @@ Ahora que ya domina los conceptos básicos, puede pasar a actividades más avanz
 
 - Completar un [laboratorio más complejo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) en el repositorio
 - [Escalar automáticamente sus apps](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
-- Explorar los trayectos de orquestación de contenedores en [developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- Explore los patrones de código de orquestación de contenedores en [developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/technologies/container-orchestration/)

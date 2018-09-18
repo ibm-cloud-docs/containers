@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -23,6 +23,57 @@ lastupdated: "2018-05-24"
 
 Manténgase al día con lo que está pasando con {{site.data.keyword.containerlong}}. Explore las nuevas características, obtenga consejos o conozca temas populares que otros desarrolladores ahora mismo han encontrado útiles.
 {:shortdesc}
+
+## Temas populares en julio de 2018
+{: #july18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en julio de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>30 de julio</td>
+<td>[Traiga su propio controlador Ingress](cs_ingress.html#user_managed)</td>
+<td>¿Tiene requisitos de seguridad específicos u otros requisitos personalizados para el controlador Ingress del clúster? Si es así, es posible que desee ejecutar su propio controlador de Ingress en lugar de utilizar el controlador predeterminado.</td>
+</tr>
+<tr>
+<td>10 de julio</td>
+<td>Incorporación de clústeres multizona</td>
+<td>¿Desea mejorar la disponibilidad del clúster? Ahora puede distribuir el clúster en varias zonas en determinadas áreas metropolitanas. Para obtener más información, consulte [Creación de clústeres multizona en {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+</tr>
+</tbody></table>
+
+## Temas populares en junio de 2018
+{: #june18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en junio de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>13 de junio</td>
+<td>El nombre del mandato de CLI `bx` se ha cambiado por la CLI `ic`</td>
+<td>Cuando descargue la versión más reciente de la CLI de {{site.data.keyword.Bluemix_notm}}, ahora ejecute mandatos utilizando el prefijo `ic` en lugar de `bx`. Por ejemplo, para obtener una lista de clústeres, ejecute `ibmcloud ks clusters`.</td>
+</tr>
+<tr>
+<td>12 de junio</td>
+<td>[Políticas de seguridad de pod](cs_psp.html)</td>
+<td>Para los clústeres que ejecutan Kubernetes 1.10.3 o posterior, puede configurar políticas de seguridad de pod para definir quién puede crear y actualizar pods en {{site.data.keyword.containerlong_notm}}.</td>
+</tr>
+<tr>
+<td>6 de junio</td>
+<td>[Soporte de TLS para el subdominio comodín de Ingress suministrado por IBM](cs_ingress.html#wildcard_tls)</td>
+<td>Para los clústeres creados a partir del 6 de junio de 2018, el certificado TLS del subdominio de Ingress proporcionado por IBM ahora es un certificado comodín y se puede utilizar para el subdominio comodín registrado. Para los clústeres creados antes del 6 de junio de 2018, el certificado TLS se actualizará a un certificado comodín cuando se renueve el certificado TLS actual.</td>
+</tr>
+</tbody></table>
 
 ## Temas populares en mayo de 2018
 {: #may18}
@@ -75,7 +126,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 <tr>
 <td>17 de abril</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Instale el [plugin](cs_storage.html#install_block) {{site.data.keyword.Bluemix_notm}} Block Storage para guardar datos persistentes en el almacenamiento en bloque. A continuación, puede [crear nuevo almacenamiento en bloque](cs_storage.html#create) o [utilizar almacenamiento en bloque existente](cs_storage.html#existing_block) para su clúster.</td>
+<td>Instale el [plugin](cs_storage_block.html#install_block) {{site.data.keyword.Bluemix_notm}} Block Storage para guardar datos persistentes en el almacenamiento en bloque. A continuación, puede [crear nuevo almacenamiento en bloque](cs_storage_block.html#add_block) o [utilizar almacenamiento en bloque existente](cs_storage_block.html#existing_block) para su clúster.</td>
 </tr>
 <tr>
 <td>13 de abril</td>
@@ -112,13 +163,13 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 </tr>
 <tr>
 <td>13 de marzo</td>
-<td>[Ubicación disponible en São Paulo](cs_regions.html)</td>
-<td>Damos la bienvenida a São Paulo, Brasil, como nueva ubicación en la región EE.UU. sur. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para esta ubicación y los otros dentro de la región en la que se encuentra el clúster.</td>
+<td>[Zona disponible en São Paulo](cs_regions.html)</td>
+<td>Damos la bienvenida a São Paulo, Brasil, como nueva zona en la región EE.UU. sur. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para esta zona y para las otras dentro de la región en la que se encuentra el clúster.</td>
 </tr>
 <tr>
 <td>12 de marzo</td>
 <td>[¿Se acaba de unir a {{site.data.keyword.Bluemix_notm}} con una cuenta de prueba? Pruebe un clúster de Kubernetes gratuito.](container_index.html#clusters)</td>
-<td>Con una [cuenta de {{site.data.keyword.Bluemix_notm}} de prueba](https://console.bluemix.net/registration/), puede desplegar un clúster gratuito durante 21 días para probar las funciones de Kubernetes.</td>
+<td>Con una [cuenta de {{site.data.keyword.Bluemix_notm}} de prueba](https://console.bluemix.net/registration/), puede desplegar un clúster gratuito durante 30 días para probar las funciones de Kubernetes.</td>
 </tr>
 </tbody></table>
 
@@ -136,7 +187,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 <tr>
 <td>27 de febrero</td>
 <td>Imágenes de máquina virtual de hardware (HVM) para nodos trabajadores</td>
-<td>Aumente el rendimiento de E/S de las cargas de trabajo con imágenes de HVM. Active la función en cada nodo trabajador existente mediante el [mandato](cs_cli_reference.html#cs_worker_reload) `bx cs worker-reload` o el [mandato](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.</td>
+<td>Aumente el rendimiento de E/S de las cargas de trabajo con imágenes de HVM. Active la función en cada nodo trabajador existente mediante el [mandato](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` o el [mandato](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>26 de febrero</td>
@@ -160,8 +211,8 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 </tr>
 <tr>
 <td>14 de febrero</td>
-<td>[Ubicación disponible en Seúl](cs_regions.html)</td>
-<td>Justo a tiempo para los Juegos Olímpicos, despliegue un clúster de Kubernetes en Seúl en la región AP Norte. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para esta ubicación y los otros dentro de la región en la que se encuentra el clúster.</td>
+<td>[Zona disponible en Seúl](cs_regions.html)</td>
+<td>Justo a tiempo para los Juegos Olímpicos, despliegue un clúster de Kubernetes en Seúl en la región AP Norte. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para esta zona y para las otras dentro de la región en la que se encuentra el clúster.</td>
 </tr>
 <tr>
 <td>8 de febrero</td>
@@ -187,8 +238,8 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 </tr>
 <tr>
 <td>23 de enero</td>
-<td>[Ubicaciones disponibles en Singapur y Montreal, CA](cs_regions.html)</td>
-<td>Singapur y Montreal son ubicaciones disponibles en las regiones AP Norte y EE.UU. este de {{site.data.keyword.containershort_notm}}. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para estas ubicaciones y los otros dentro de la región en la que se encuentra el clúster.</td>
+<td>[Zonas disponibles en Singapur y Montreal, CA](cs_regions.html)</td>
+<td>Singapur y Montreal son zonas disponibles en las regiones AP Norte y EE.UU. este de {{site.data.keyword.containershort_notm}}. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para estas zonas y para las otras dentro de la región en la que se encuentra el clúster.</td>
 </tr>
 <tr>
 <td>8 de enero</td>

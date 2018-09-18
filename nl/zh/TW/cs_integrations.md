@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2018-05-24"
 
 
 ## 應用程式服務
+{: #application_services}
 <table summary="可存取性摘要">
 <caption>應用程式服務</caption>
 <thead>
@@ -47,6 +48,7 @@ lastupdated: "2018-05-24"
 
 
 ## DevOps Services
+{: #devops_services}
 <table summary="可存取性摘要">
 <caption>DevOps Services</caption>
 <thead>
@@ -62,7 +64,7 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是 Kubernetes 套件管理程式。您可以建立新的 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。<p>如需相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中設定 Helm](cs_integrations.html#helm)。</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是 Kubernetes 套件管理程式。您可以建立新的 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集裡執行的複式 Kubernetes 應用程式。<p>如需相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中設定 Helm](cs_integrations.html#helm)。</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -80,6 +82,7 @@ lastupdated: "2018-05-24"
 
 
 ## 記載及監視服務
+{: #health_services}
 <table summary="可存取性摘要">
 <caption>記載及監視服務</caption>
 <thead>
@@ -98,12 +101,16 @@ lastupdated: "2018-05-24"
 <td>使用 <a href="https://www.datadoghq.com/" target="_blank">Dataloadog <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視您的叢集，並檢視基礎架構和應用程式效能度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">使用 Datadog 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
+<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>透過 Grafana 分析日誌，來監視叢集裡所做的管理活動。如需服務的相關資訊，請參閱 [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) 文件。如需您可追蹤之事件類型的相關資訊，請參閱 [Activity Tracker 事件](/cs_at_events.html)。</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
 <td>使用 {{site.data.keyword.loganalysisfull_notm}} 來擴充日誌收集、保留及搜尋能力。如需相關資訊，請參閱<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">啟用叢集日誌的自動收集 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>使用 {{site.data.keyword.monitoringlong_notm}} 定義規則及警示，以擴充度量值收集及保留功能。如需相關資訊，請參閱<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">針對已部署在 Kubernetes 叢集中的應用程式，在 Grafana 中分析度量值 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+<td>使用 {{site.data.keyword.monitoringlong_notm}} 定義規則及警示，以擴充度量值收集和保留功能。如需相關資訊，請參閱<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">針對已部署在 Kubernetes 叢集裡的應用程式，在 Grafana 中分析度量值 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -111,7 +118,7 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus 是一個特別針對 Kubernetes 所設計的開放程式碼監視、記載及警示工具。Prometheus 會根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。針對叢集中執行的每一個容器收集 CPU、記憶體、I/O 及網路活動。您可以使用自訂查詢或警示中所收集的資料，來監視叢集中的效能及工作負載。
+<td>Prometheus 是一個特別針對 Kubernetes 所設計的開放程式碼監視、記載及警示工具。Prometheus 會根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。針對叢集裡執行的每一個容器收集 CPU、記憶體、I/O 及網路活動。您可以使用自訂查詢或警示中所收集的資料，來監視叢集裡的效能及工作負載。
 
 <p>若要使用 Prometheus，請遵循 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 指示 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</p>
 </td>
@@ -138,6 +145,7 @@ lastupdated: "2018-05-24"
 
 
 ## 安全服務
+{: #security_services}
 <table summary="可存取性摘要">
 <caption>安全服務</caption>
 <thead>
@@ -153,7 +161,7 @@ lastupdated: "2018-05-24"
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.aquasec.com/" target="_blank">Aqua Security<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，透過減少容許應用程式執行的內容來改善容器部署的安全。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">使用 Aqua Security 保護 {{site.data.keyword.Bluemix_notm}} 上的容器部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  <td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.aquasec.com/" target="_blank">Aqua Security<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，透過減少容許應用程式執行的內容來改善容器部署的安全。如需相關資訊，請參閱<a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">使用 Aqua Security 保護 {{site.data.keyword.Bluemix_notm}} 上的容器部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -179,6 +187,7 @@ lastupdated: "2018-05-24"
 
 
 ## 儲存服務
+{: #storage_services}
 <table summary="可存取性摘要">
 <caption>儲存服務</caption>
 <thead>
@@ -194,7 +203,7 @@ lastupdated: "2018-05-24"
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>與 {{site.data.keyword.cos_short}} 一起儲存的資料會加密及分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。您可以使用 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) 來配置服務，以針對叢集中的資料進行一次性或排定的備份。如需服務的一般資訊，請參閱 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  <td>與 {{site.data.keyword.cos_short}} 一起儲存的資料會加密及分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。您可以使用 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) 來配置服務，以針對叢集裡的資料進行一次性或排定的備份。如需服務的一般資訊，請參閱 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
@@ -222,13 +231,13 @@ lastupdated: "2018-05-24"
 
 1. [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
 2. [要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
-   **附註：**若要在華盛頓特區中建立服務實例，您必須使用 CLI。
+   **附註：**若要在華盛頓特區區域中建立服務實例，您必須使用 CLI。
 3. 支援 Cloud Foundry 服務與叢集連結，但不支援其他服務。在建立服務實例之後，您會看到不同的服務類型，且會在儀表板中將服務分組為 **Cloud Foundry 服務**及**服務**。若要連結**服務**區段中的服務與叢集，[請先建立 Cloud Foundry 別名](#adding_resource_cluster)。
 
 **附註：**
 <ul><ul>
 <li>您只能新增支援服務金鑰的 {{site.data.keyword.Bluemix_notm}} 服務。如果服務不支援服務金鑰，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/apps/reqnsi.html#accser_external)。</li>
-<li>必須完全部署叢集及工作者節點，才能新增服務。</li>
+<li>必須完全部署叢集和工作者節點，才能新增服務。</li>
 </ul></ul>
 
 
@@ -236,14 +245,14 @@ lastupdated: "2018-05-24"
 2.  列出可用的 {{site.data.keyword.Bluemix_notm}} 服務。
 
     ```
-        bx service list
+    ibmcloud service list
     ```
     {: pre}
 
     CLI 輸出範例：
 
     ```
-        name                      service           plan    bound apps   last operation   
+    name                      service           plan    bound apps   last operation
     <service_instance_name>   <service_name>    spark                create succeeded
     ```
     {: screen}
@@ -253,31 +262,31 @@ lastupdated: "2018-05-24"
     -   列出現有名稱空間，並選擇您要使用的名稱空間。
 
         ```
-                kubectl get namespaces
+        kubectl get namespaces
         ```
         {: pre}
 
-    -   在叢集中建立名稱空間。
+    -   在叢集裡建立名稱空間。
 
         ```
-                kubectl create namespace <namespace_name>
+        kubectl create namespace <namespace_name>
         ```
         {: pre}
 
 5.  將服務新增至叢集。
 
     ```
-        bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     將服務順利新增至叢集之後，即會建立叢集密碼，以保留服務實例認證。CLI 輸出範例：
 
     ```
-        bx cs cluster-service-bind mycluster mynamespace cleardb 
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mynamespace
+    Namespace:	mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
@@ -285,11 +294,11 @@ lastupdated: "2018-05-24"
 6.  驗證已在叢集名稱空間中建立密碼。
 
     ```
-        kubectl get secrets --namespace=<namespace>
+    kubectl get secrets --namespace=<namespace>
     ```
     {: pre}
 
-若要在叢集中所部署的 Pod 中使用服務，叢集使用者必須存取服務認證。使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法為[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](#adding_app)。
+若要在叢集裡所部署的 Pod 中使用服務，叢集使用者必須存取服務認證。使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法為[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](#adding_app)。
 
 <br />
 
@@ -297,7 +306,7 @@ lastupdated: "2018-05-24"
 ## 為其他 {{site.data.keyword.Bluemix_notm}} 服務資源建立 Cloud Foundry 別名
 {: #adding_resource_cluster}
 
-支援 Cloud Foundry 服務與叢集連結。若要將不是 Cloud Foundry 服務的 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集，請為該服務實例建立 Cloud Foundry 別名。
+支援 Cloud Foundry 服務與叢集連結。在建立服務實例之後，您會看到不同的服務類型，且會在儀表板中將服務分組為 **Cloud Foundry 服務**及**服務**。若要將不是 Cloud Foundry 服務的 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集，請為該服務實例建立 Cloud Foundry 別名。
 {:shortdesc}
 
 開始之前，先[要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
@@ -307,26 +316,26 @@ lastupdated: "2018-05-24"
 1. 將建立服務實例的組織及空間設為目標。
 
     ```
-    bx target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. 記下服務實例名稱。
     ```
-    bx resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. 建立服務實例的 Cloud Foundry 別名。
     ```
-    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. 驗證已建立服務別名。
 
     ```
-    bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -429,21 +438,21 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 5.  建立 Pod，並裝載密碼磁區。
 
     ```
-        kubectl apply -f secret-test.yaml
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
 6.  驗證已建立 Pod。
 
     ```
-        kubectl get pods --namespace=<my_namespace>
+    kubectl get pods --namespace=<my_namespace>
     ```
     {: pre}
 
     CLI 輸出範例：
 
     ```
-        NAME                           READY     STATUS    RESTARTS   AGE
+    NAME                           READY     STATUS    RESTARTS   AGE
     secret-test-1111454598-gfx32   1/1       Running   0          1m
     ```
     {: screen}
@@ -452,7 +461,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 8.  取得有關 Pod 的詳細資料，並尋找密碼名稱。
 
     ```
-        kubectl describe pod <pod_name>
+    kubectl describe pod <pod_name>
     ```
     {: pre}
 
@@ -480,10 +489,10 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 ## 在 {{site.data.keyword.containershort_notm}} 中設定 Helm
 {: #helm}
 
-[Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/) 是 Kubernetes 套件管理程式。您可以建立 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。
+[Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh) 是 Kubernetes 套件管理程式。您可以建立 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集裡執行的複式 Kubernetes 應用程式。
 {:shortdesc}
 
-在使用 Helm 圖表與 {{site.data.keyword.containershort_notm}} 搭配之前，您必須先在叢集中安裝及起始設定 Helm 實例。然後，您可以將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
+在使用 Helm 圖表與 {{site.data.keyword.containershort_notm}} 搭配之前，您必須先在叢集裡安裝及起始設定 Helm 實例。然後，您可以將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要在其中使用 Helm 圖表的叢集。
 
@@ -493,8 +502,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 
     1. 在偏好的編輯器中，建立下列檔案，並將它儲存為`rbac-config.yaml`。
       **附註**：
-        * 在 Kubernetes 叢集中，依預設會建立 `cluster-admin` 叢集角色，因此您不需要明確定義它。
-        * 如果您使用的是 1.7.x 版叢集，請將 `apiVersion` 變更為 `rbac.authorization.k8s.io/v1beta1`。
+        * 若要使用服務帳戶及叢集角色連結在 `kube-system` 名稱空間中安裝 Tiller，您必須具有 [`cluster-admin` 角色](cs_users.html#access_policies)。您可以選擇 `kube-system` 以外的名稱空間，但必須在 `kube-system` 中安裝所有 IBM Helm 圖表。只要您執行 `helm` 指令，就必須使用 `tiller-namespace <namespace>` 旗標指向已安裝 Tiller 的其他名稱空間。
 
       ```
       apiVersion: v1
@@ -521,28 +529,28 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     2. 建立服務帳戶及叢集角色連結。
 
         ```
-                kubectl create -f rbac-config.yaml
+        kubectl create -f rbac-config.yaml
         ```
         {: pre}
 
 3. 利用您所建立的服務帳戶，來起始設定 Helm 並安裝 `tiller`。
 
     ```
-        helm init --service-account tiller
+    helm init --service-account tiller
     ```
     {: pre}
 
-4. 驗證 `tiller - deploy` Pod 在叢集中的 **Status** 為 `Running`。
+4. 驗證 `tiller - deploy` Pod 在叢集裡的 **Status** 為 `Running`。
 
     ```
-            kubectl get pods -n kube-system -l app=helm
-        ```
+    kubectl get pods -n kube-system -l app=helm
+    ```
     {: pre}
 
     輸出範例：
 
     ```
-        NAME                            READY     STATUS    RESTARTS   AGE
+    NAME                            READY     STATUS    RESTARTS   AGE
     tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
     ```
     {: screen}
@@ -550,14 +558,14 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 5. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
 
     ```
-        helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
 6. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
 
     ```
-        helm search ibm
+    helm search ibm
     ```
     {: pre}
 
@@ -566,7 +574,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     例如，若要檢視 strongSwan IPSec 服務 helm 圖表的設定、文件及預設值，請執行下列指令：
 
     ```
-        helm inspect ibm/strongswan
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -593,26 +601,26 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
 
 
 若要搭配使用 Weave Scope 與叢集，請執行下列動作：
-2.  在叢集中部署其中一個提供的 RBAC 許可權配置檔。
+2.  在叢集裡部署其中一個提供的 RBAC 許可權配置檔。
 
     若要啟用讀寫許可權，請執行下列指令：
 
     ```
-        kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac.yaml"
     ```
     {: pre}
 
     若要啟用唯讀許可權，請執行下列動作：
 
     ```
-        kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
+    kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
     ```
     {: pre}
 
     輸出：
 
     ```
-        clusterrole "weave-scope-mgr" created
+    clusterrole "weave-scope-mgr" created
     clusterrolebinding "weave-scope-mgr-role-binding" created
     ```
     {: screen}
@@ -626,7 +634,7 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
     輸出：
 
     ```
-        serviceaccount "weave-scope" created
+    serviceaccount "weave-scope" created
     deployment "weave-scope-app" created
     service "weave-scope-app" created
     daemonset "weave-scope-agent" created
@@ -636,7 +644,7 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
 4.  在您的電腦上執行埠轉遞指令，以開啟服務。下次存取 Weave Scope 時，您就可以執行此埠轉遞指令，而不需要再次完成先前的配置步驟。
 
     ```
-        kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+    kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
     ```
     {: pre}
 
@@ -649,7 +657,7 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
     ```
     {: screen}
 
-5.  開啟 Web 瀏覽器，並前往 `http://localhost:4040`。若未部署預設元件，您會看到下圖。您可以選擇檢視拓蹼圖，或叢集中的 Kubernetes 資源表格。
+5.  開啟 Web 瀏覽器，並前往 `http://localhost:4040`。若未部署預設元件，您會看到下圖。您可以選擇檢視拓蹼圖，或叢集裡的 Kubernetes 資源表格。
 
      <img src="images/weave_scope.png" alt="來自 Weave Scope 的拓蹼範例" style="width:357px;" />
 

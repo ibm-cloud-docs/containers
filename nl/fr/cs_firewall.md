@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -24,19 +24,19 @@ lastupdated: "2018-05-24"
 Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux pour {{site.data.keyword.containerlong}} :
 {:shortdesc}
 
-* [Pour exécuter des commandes `bx`](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
-* [Pour exécuter des commandes `kubectl`](#firewall_kubectl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
-* [Pour exécuter des commandes `calicoctl`](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `ibmcloud`](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux de l'Internet public via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `kubectl`](#firewall_kubectl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux de l'Internet public via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `calicoctl`](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux de l'Internet public via des proxies ou des pare-feux.
 * [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-* [Pour accéder au service NodePort, au service LoasBalancer, ou à Ingress de l'extérieur du cluster](#firewall_inbound).
+* [Pour accéder aux services NodePort, LoadBalancer et Ingress de l'extérieur du cluster](#firewall_inbound).
 
 <br />
 
 
-## Exécution  de commandes `bx cs` derrière un pare-feu
+## Exécution de commandes `ibmcloud ks` derrière un pare-feu
 {: #firewall_bx}
 
-Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `bx cs`, vous devez autoriser l'accès TCP pour {{site.data.keyword.containerlong_notm}}.
+Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `ibmcloud ks`, vous devez autoriser l'accès TCP pour {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 1. Autorisez l'accès à `containers.bluemix.net` sur le port 443.
@@ -69,37 +69,37 @@ Si les règles réseau de l'entreprise empêchent l'accès depuis votre système
 Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `kubectl`, vous devez autoriser l'accès TCP pour le cluster.
 {:shortdesc}
 
-Lorsqu'un cluster est créé, le port dans l'URL maîtresse est affecté aléatoirement sur la plage 20000 à 32767. Vous pouvez choisir d'ouvrir la plage de ports 20000 à 32767 pour n'importe quel cluster pouvant être créé ou bien autoriser l'accès pour un cluster existant spécifique.
+Lorsqu'un cluster est créé, le port dans l'URL maître est affecté aléatoirement sur la plage 20000 à 32767. Vous pouvez choisir d'ouvrir la plage de ports 20000 à 32767 pour n'importe quel cluster pouvant être créé ou bien autoriser l'accès pour un cluster existant spécifique.
 
-Avant de commencer, autorisez l'accès aux commandes [run `bx cs`](#firewall_bx).
+Avant de commencer, autorisez l'accès pour [exécuter des commandes `ibmcloud ks`](#firewall_bx).
 
 Pour autoriser l'accès à un cluster spécifique :
 
 1. Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Si vous disposez d'un compte fédéré, incluez l'option `--sso`.
 
    ```
-   bx login [--sso]
+   ibmcloud login [--sso]
    ```
    {: pre}
 
 2. Sélectionnez la région où réside votre cluster.
 
    ```
-   bx cs region-set
+   ibmcloud ks region-set
    ```
    {: pre}
 
 3. Obtenez le nom de votre cluster.
 
    ```
-   bx cs clusters
+   ibmcloud ks clusters
    ```
    {: pre}
 
 4. Extrayez la valeur **Master URL** pour votre cluster.
 
    ```
-   bx cs cluster-get <cluster_name_or_ID>
+   ibmcloud ks cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -153,9 +153,9 @@ Pour autoriser l'accès à un cluster spécifique :
 Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `calicoctl`, vous devez autoriser l'accès TCP pour les commandes Calico.
 {:shortdesc}
 
-Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#firewall_bx) et [`kubectl`](#firewall_kubectl).
+Avant de commencer, autorisez l'accès pour exécuter des commandes [`ibmcloud`](#firewall_bx) et [`kubectl`](#firewall_kubectl).
 
-1. Extrayez l'adresse IP de l'URL maîtresse que vous avez utilisée pour autoriser les commandes [`kubectl`](#firewall_kubectl).
+1. Extrayez l'adresse IP de l'URL maître que vous avez utilisée pour autoriser les commandes [`kubectl`](#firewall_kubectl).
 
 2. Obtenez le port pour ETCD.
 
@@ -164,7 +164,7 @@ Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#fire
   ```
   {: pre}
 
-3. Autorisez l'accès pour les règles Calico via l'adresse IP et le port ETCD de l'URL maîtresse.
+3. Autorisez l'accès pour les règles Calico via l'adresse IP et le port ETCD de l'URL maître.
 
 <br />
 
@@ -172,24 +172,24 @@ Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#fire
 ## Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services
 {: #firewall_outbound}
 
-Laissez votre cluster accéder aux ressources d'infrastructure et aux services derrière un pare-feu, comme pour les régions {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et l'accès sortant pour les réservations de volume persistant.
+Laissez votre cluster accéder aux services et aux ressources d'infrastructure derrière un pare-feu, comme pour les régions {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et l'accès sortant pour les réservations de volume persistant.
 {:shortdesc}
 
   1.  Notez l'adresse IP publique pour tous vos noeuds worker dans le cluster.
 
       ```
-      bx cs workers <cluster_name_or_ID>
+      ibmcloud ks workers <cluster_name_or_ID>
       ```
       {: pre}
 
-  2.  Autorisez le trafic entrant depuis la source _<each_worker_node_publicIP>_ vers la plage de ports TCP/UDP de destination 20000 à 32767 et le port 443, et aux adresses IP et groupes réseau suivants. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux Internet publics, effectuez cette étape tant pour vos noeuds worker source que pour votre machine locale.
-      - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour tous les emplacements de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic du port 443 vers les adresses IP de les emplacements (dal10, dal12 et dal13).
+  2.  Autorisez le trafic entrant depuis la source _<each_worker_node_publicIP>_ vers la plage de ports de destination TCP/UDP 20000 à 32767 et le port 443, et les adresses IP et groupes de réseau suivants. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux de l'Internet public, effectuez cette étape tant pour vos noeuds worker source que pour votre machine locale.
+      - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour toutes les zones de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic depuis le port 443 vers les adresses IP de toutes les zones (dal10, dal12 et dal13).
       <p>
-  <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+  <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
   <caption>Adresses IP à ouvrir pour le trafic sortant</caption>
       <thead>
       <th>Région</th>
-      <th>Emplacement</th>
+      <th>Zone</th>
       <th>Adresse IP</th>
       </thead>
     <tbody>
@@ -227,11 +227,11 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
     </table>
 </p>
 
-  3.  Autorisez le trafic réseau sortant depuis les noeuds worker vers les [régions {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions):
+  3.  Autorisez le trafic réseau sortant depuis les noeuds worker vers les [régions {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions) :
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - Remplacez <em>&lt;registry_publicIP&gt;</em> par les adresses IP du registre auxquelles vous désirez autoriser le trafic. Le registre global héberge des images publiques fournies par IBM et les registres régionaux vos propres images privées ou publiques.
         <p>
-<table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+<table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
   <caption>Adresses IP à ouvrir pour le trafic du registre</caption>
       <thead>
         <th>Région {{site.data.keyword.containershort_notm}}</th>
@@ -271,7 +271,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
   4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds worker vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Remplacez <em>&lt;monitoring_public_IP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
-        <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+        <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième."> 
   <caption>Adresses IP à ouvrir pour gérer le trafic</caption>
         <thead>
         <th>Région {{site.data.keyword.containershort_notm}}</th>
@@ -282,7 +282,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
         <tr>
          <td>Europe centrale</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
+         <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>Sud du Royaume-Uni</td>
@@ -290,7 +290,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord</td>
+          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord et Asie-Pacifique sud</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -300,7 +300,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
 </p>
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Remplacez <em>&lt;logging_public_IP&gt;</em> par toutes les adresses des régions de consignation auxquelles vous voulez autoriser le trafic :
-        <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+        <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième."> 
 <caption>Adresses IP à ouvrir pour consigner le trafic</caption>
         <thead>
         <th>Région {{site.data.keyword.containershort_notm}}</th>
@@ -332,28 +332,31 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
        </table>
 </p>
 
-  5. Dans le cas de pare-feux privés, autorisez les plages d'adresses IP privées d'infrastructure IBM Cloud (SoftLayer) appropriées. Consultez [ce lien](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) en commençant par la section **Backend (private) Network**.
-      - Ajoutez tous les [emplacements dans les régions](cs_regions.html#locations) que vous utilisez.
-      - Notez que vous devez ajouter l'emplacement dal01 (centre de données).
+  5. Dans le cas de pare-feux privés, autorisez les plages d'adresses IP privées d'infrastructure IBM Cloud (SoftLayer) appropriées. Consultez [ce lien](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) en commençant par la section **Backend (private) Network**.
+      - Ajoutez toutes les [zones dans les régions](cs_regions.html#zones) que vous utilisez.
+      - Notez que vous devez ajouter la zone `dal01` (centre de données).
       - Ouvrez les ports 80 et 443 pour permettre le processus d'amorçage de cluster.
+      - Ouvrez le port 10250 pour le tableau de bord Kubernetes.
+      - Ouvrez le port 53 pour l'accès DNS.
+      - Comme tout le trafic de pod à pod passe par le réseau privé, ouvrez tous les ports utilisés par les pods pour communiquer ou ouvrez tous les ports pour les noeuds worker figurant dans le cluster.
 
-  6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP de l'infrastructure IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) de l'emplacement (centre de données) où réside votre cluster.
-      - Pour déterminer l'emplacement (centre de données) de votre cluster, exécutez la commande `bx cs clusters`.
-      - Autorisez l'accès à la plage d'adresses IP tant pour le réseau **Frontend (public) network** que **Backend (privé)**.
-      - Notez que vous devez ajouter l'emplacement dal01 (centre de données) pour le réseau **Backend (privé)**.
+  6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP de l'infrastructure IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) de la zone dans laquelle réside votre cluster.
+      - Pour savoir dans quelle zone se trouve votre cluster, exécutez la commande `ibmcloud ks clusters`.
+      - Autorisez l'accès à la plage d'adresses IP tant pour le réseau de front end public (**Frontend (public) Network**) que pour le réseau de back end privé (**Backend (private) Network**).
+      - Notez que vous devez ajouter la zone (centre de données) `dal01` du réseau de back end privé (**Backend (private) Network**).
 
 <br />
 
 
-## Accès à NodePort, à l'équilibreur de charge et aux services Ingress de l'extérieur du cluster
+## Accès aux services NodePort, LoadBalancer et Ingress de l'extérieur du cluster
 {: #firewall_inbound}
 
-Vous pouvez autoriser l'accès entrant au NodePort, à l'équilibreur de charge et aux services Ingress.
+Vous pouvez autoriser l'accès entrant aux services NodePort, LoadBalancer et Ingress.
 {:shortdesc}
 
 <dl>
   <dt>Service NodePort</dt>
-  <dd>Ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur les adresses IP publiques pour tous les noeuds worker vers lesquels autoriser le trafic. Pour identifier le port, exécutez la commande `kubectl get svc`. Le port est situé sur la plage 20000 à 32000.<dd>
+  <dd>Ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur les adresses IP publiques pour tous les noeuds worker vers lesquels autoriser le trafic. Pour identifier le port, exécutez la commande `kubectl get svc`. Le port est compris dans une plage de 20000 à 32000.<dd>
   <dt>Service LoadBalancer</dt>
   <dd>Ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur l'adresse IP publique du service d'équilibrage de charge.</dd>
   <dt>Ingress</dt>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,6 +26,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 ## Services d'application
+{: #application_services}
 <table summary="Récapitulatif de l'accessibilité">
 <caption>Services d'application</caption>
 <thead>
@@ -47,6 +48,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 ## Services DevOps
+{: #devops_services}
 <table summary="Récapitulatif de l'accessibilité">
 <caption>Services DevOps</caption>
 <thead>
@@ -62,7 +64,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un gestionnaire de package Kubernetes. Vous pouvez créer de nouvelles chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}. <p>Pour plus d'informations, voir [Configuration de Helm dans {{site.data.keyword.containershort_notm}}](cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un gestionnaire de package Kubernetes. Vous pouvez créer de nouvelles chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}. <p>Pour plus d'informations, voir [Configuration de Helm dans {{site.data.keyword.containershort_notm}}](cs_integrations.html#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -70,7 +72,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un service open source qui permet aux développeurs de connecter, de sécuriser et de gérer de manière uniforme un réseau de microservices, également dénommé maillage de services, sur des plateformes d'orchestration cloud telles que Kubernetes. Pour en savoir plus sur le projet open source, consultez l'article de blogue rappelant qu'<a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM a cofondé et a lancé Istio<img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour installer Istio sur votre cluster Kubernetes dans {{site.data.keyword.containershort_notm}} et commencer à utiliser l'exemple d'application, voir [Tutoriel : Gestion de microservices avec Istio](cs_tutorials_istio.html#istio_tutorial).</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un service open source qui permet aux développeurs de connecter, de sécuriser et de gérer de manière uniforme un réseau de microservices, également dénommé maillage de services, sur des plateformes d'orchestration cloud telles que Kubernetes. Pour en savoir plus sur le projet open source, consultez l'article de blogue qui révèle <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">comment IBM a cofondé et lancé Istio<img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour installer Istio sur votre cluster Kubernetes dans {{site.data.keyword.containershort_notm}} et commencer à utiliser un modèle d'application, voir [Tutoriel : Gestion de microservices avec Istio](cs_tutorials_istio.html#istio_tutorial).</td>
 </tr>
 </tbody>
 </table>
@@ -80,6 +82,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 ## Services de consignation et de surveillance
+{: #health_services}
 <table summary="Récapitulatif de l'accessibilité">
 <caption>Services de consignation et de surveillance</caption>
 <thead>
@@ -96,6 +99,10 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 <tr>
 <td>Datadog</td>
 <td>Vous pouvez surveiller votre cluster et examiner les performances de l'infrastructure et les métriques d'application à l'aide de <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour plus d'informations, voir <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+</tr>
+<tr>
+<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Surveillez les activités d'administration intervenant dans votre cluster en analysant les journaux via Grafana. Pour plus d'informations sur ce service, voir la documentation d'[Activity Tracker](/docs/services/cloud-activity-tracker/index.html). Pour plus d'informations sur les types d'événement dont vous pouvez assurer le suivi, voir [Evénements Activity Tracker](/cs_at_events.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -137,6 +144,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 ## Services de sécurité
+{: #security_services}
 <table summary="Récapitulatif de l'accessibilité">
 <caption>Services de sécurité</caption>
 <thead>
@@ -152,7 +160,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>En complément de <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, vous pouvez utiliser <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour renforcer la sécurité de vos déploiements de conteneurs en limitant ce que votre application est autorisée à effectuer. Pour plus d'informations, voir <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protecting container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+  <td>En complément de <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, vous pouvez utiliser <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour renforcer la sécurité de vos déploiements de conteneurs en limitant ce que votre application est autorisée à effectuer. Pour plus d'informations, voir l'article <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -178,6 +186,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 ## Services de stockage
+{: #storage_services}
 <table summary="Récapitulatif de l'accessibilité">
 <caption>Services de stockage</caption>
 <thead>
@@ -219,9 +228,9 @@ Ajoutez une instance de service Cloud Foundry existante à votre cluster pour pe
 
 Avant de commencer :
 
-1. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
+1. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
 2. [Demandez une instance du service {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
-   **Remarque :** pour créer une instance de service sur le site Washington DC, vous devez utiliser l'interface CLI.
+   **Remarque :** pour créer une instance de service dans la zone Washington DC, vous devez utiliser l'interface CLI.
 3. Les services Cloud Foundry sont pris en charge pour la liaison avec des clusters, alors que d'autres services ne le sont pas. Vous pouvez voir les différents types de service une fois que vous avez créé l'instance de service. Les services sont regroupés dans le tableau de bord sous **Services Cloud Foundry** et **Services**. Pour lier les services de la section **Services** avec des clusters, [créez d'abord des alias Cloud Foundry](#adding_resource_cluster).
 
 **Remarque :**
@@ -235,7 +244,7 @@ Pour ajouter un service, procédez comme suit :
 2.  Répertoriez les services {{site.data.keyword.Bluemix_notm}} disponibles.
 
     ```
-    bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -266,17 +275,17 @@ Pour ajouter un service, procédez comme suit :
 5.  Ajoutez le service à votre cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     Une fois que le service a été correctement ajouté à votre cluster, une valeur confidentielle de cluster est créée pour héberger les données d'identification de votre instance de service. Exemple de sortie d'interface CLI :
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mynamespace
+    Namespace:	mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
@@ -296,7 +305,7 @@ Pour utiliser le service dans un pod qui est déployé dans le cluster, les util
 ## Création d'alias Cloud Foundry pour d'autres ressources de service {{site.data.keyword.Bluemix_notm}}
 {: #adding_resource_cluster}
 
-Les services Cloud Foundry sont pris en charge pour la liaison avec des clusters. Pour lier un service {{site.data.keyword.Bluemix_notm}} qui n'est pas un service Cloud Foundry à votre cluster, créez un alias Cloud Foundry pour l'instance de service.
+Les services Cloud Foundry sont pris en charge pour la liaison avec des clusters. Vous pouvez voir les différents types de service une fois que vous avez créé l'instance de service. Les services sont regroupés dans le tableau de bord sous **Services Cloud Foundry** et **Services**. Pour lier un service {{site.data.keyword.Bluemix_notm}} qui n'est pas un service Cloud Foundry à votre cluster, créez un alias Cloud Foundry pour l'instance de service.
 {:shortdesc}
 
 Avant de commencer, [demandez une instance du service {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
@@ -306,26 +315,26 @@ Pour créer un alias Cloud Foundry pour l'instance de service :
 1. Ciblez l'organisation et l'espace de création de l'instance de service.
 
     ```
-    bx target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. Notez le nom de l'instance de service.
     ```
-    bx resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. Créez un alias Cloud Foundry pour l'instance de service.
     ```
-    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. Vérifiez que l'alias du service a été créé.
 
     ```
-    bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -346,7 +355,7 @@ Les valeurs confidentielles Kubernetes permettent de stocker de manière sécuri
 
 Lorsque vous montez un volume secret sur votre pod, un fichier nommé `binding` est stocké dans le répertoire de montage du volume. Le fichier `binding` comprend toutes les informations et données d'identification dont vous avez besoin pour accéder au service {{site.data.keyword.Bluemix_notm}}.
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster. Vérifiez que le service {{site.data.keyword.Bluemix_notm}} que vous souhaitez utiliser dans votre application
+Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster. Vérifiez que le service {{site.data.keyword.Bluemix_notm}} que vous souhaitez utiliser dans votre application
 a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administrateur du cluster.
 
 1.  Répertoriez les valeurs confidentielles disponibles dans l'espace de nom de votre cluster.
@@ -365,8 +374,7 @@ a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administ
     ```
     {: screen}
 
-2.  Recherchez une valeur confidentielle du type **Opaque** et notez le
-**nom** de cette valeur confidentielle. S'il existe plusieurs valeurs confidentielles, contactez l'administrateur de votre cluster pour identifier la valeur confidentielle appropriée.
+2.  Recherchez une valeur confidentielle du type **Opaque** et notez le **nom** de cette valeur confidentielle. S'il existe plusieurs valeurs confidentielles, contactez l'administrateur de votre cluster pour identifier la valeur confidentielle appropriée.
 
 3.  Ouvrez l'éditeur de votre choix.
 
@@ -481,12 +489,12 @@ Vous pouvez à présent accéder aux informations détaillées et aux données d
 ## Configuration de Helm dans {{site.data.keyword.containershort_notm}}
 {: #helm}
 
-[Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://helm.sh/) est un gestionnaire de packages Kubernetes. Vous pouvez créer des chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}.
+[Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://helm.sh) est un gestionnaire de packages Kubernetes. Vous pouvez créer des chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Avant d'utiliser des chartes Helm avec {{site.data.keyword.containershort_notm}}, vous devez installer et initialiser une instance Helm pour votre cluster. Vous pouvez ensuite ajouter le référentiel Helm {{site.data.keyword.Bluemix_notm}} à votre instance Helm.
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous désirez utiliser une charte Helm.
+Avant de commencer, [ciblez votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) sur le cluster dans lequel vous désirez utiliser une charte Helm.
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande Helm  <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.
 
@@ -494,8 +502,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_
 
     1. Dans l'éditeur de votre choix, créez le fichier suivant et sauvegardez-le avec le nom `rbac-config.yaml`.
       **Remarque **:
-        * Le rôle de cluster `cluster-admin` est créé par défaut dans les clusters Kubernetes, par conséquent, vous n'avez pas à le définir de manière explicite.
-        * Si vous utilisez un cluster de version 1.7.x, remplacez `apiVersion` par `rbac.authorization.k8s.io/v1beta1`.
+        * Pour installer Tiller avec le compte de service et la liaison de rôle de cluster dans l'espace de nom `kube-system`, vous devez disposer du [rôle `cluster-admin`](cs_users.html#access_policies). Vous pouvez choisir un autre espace de nom que `kube-system`, mais toutes les chartes IBM Helm doivent être installées dans `kube-system`. Chaque fois que vous exécutez une commande `helm`, vous devez utiliser l'indicateur `tiller-namespace <namespace>` pour pointer vers l'autre espace de nom dans lequel est installé Tiller.
 
       ```
       apiVersion: v1
@@ -590,7 +597,7 @@ Avant de commencer :
 
 -   Prenez soin de ne pas exposer les informations de votre cluster sur l'Internet public. Procédez comme suit pour déployer de manière sécurisée Weave Scope et y accéder en local depuis un navigateur Web.
 -   Si ce n'est déjà fait, [créez un cluster standard](cs_clusters.html#clusters_ui). Weave Scope peut solliciter énormément l'unité centrale, surtout l'application. Exécutez Weave Scope avec des clusters standard plus volumineux et non pas des clusters gratuits.
--   [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) votre cluster pour exécuter des commandes `kubectl`.
+-   [Ciblez votre interface CLI](cs_cli_install.html#cs_cli_configure) sur votre cluster pour exécuter des commandes `kubectl`.
 
 
 Pour utiliser Weave Scope avec un cluster, procédez comme suit :

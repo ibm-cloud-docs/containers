@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-# Esercitazione: distribuzione delle applicazioni nei cluster
+# Esercitazione: Distribuzione di applicazioni nei cluster Kubernetes
 {: #cs_apps_tutorial}
 
 Puoi imparare ad utilizzare {{site.data.keyword.containerlong}} per distribuire un'applicazione
@@ -28,8 +28,7 @@ utilizza il servizio {{site.data.keyword.Bluemix_notm}} per analizzare i propri 
 
 Utilizzando il cluster Kubernetes creato nell'ultima esercitazione, lo sviluppatore dell'applicazione dell'agenzia di PR distribuisce una versione Hello World dell'applicazione. Completando ogni lezione in questa esercitazione, lo sviluppatore dell'applicazione distribuisce progressivamente versioni più complicate della stessa applicazione. Il seguente diagramma mostra i componenti di ogni distribuzione per lezione.
 
-
-![Componenti della lezione](images/cs_app_tutorial_roadmap.png)
+![Componenti della lezione](images/cs_app_tutorial_mz-roadmap.png)
 
 Come illustrato nel diagramma, Kubernetes utilizza diversi tipi di risorse per rendere operative le tue applicazioni nei cluster. In Kubernetes, le distribuzioni e i servizi lavorano insieme. Le distribuzioni includono le definizioni per l'applicazione. Ad esempio, l'immagine da utilizzare per il contenitore e quale porta deve essere esposta per l'applicazione. Quando crei una distribuzione, viene creato un pod Kubernetes per ogni contenitore che definisci nella
 distribuzione. Per una maggiore resilienza della tua applicazione, puoi definire più istanze della stessa applicazione
@@ -42,10 +41,9 @@ cluster senza esporre il reale indirizzo IP privato di ogni pod. Puoi utilizzare
 per rendere disponibile un'applicazione agli altri pod all'interno del cluster o per esporre un'applicazione
 a Internet. In questa esercitazione, utilizzi un servizio Kubernetes per accedere alla tua applicazione in esecuzione
 da internet utilizzando un indirizzo IP pubblico, che viene assegnato automaticamente a un nodo di lavoro e una porta
-pubblica. 
+pubblica.
 
-Per rendere la tua applicazione ancora più disponibile, nei cluster standard, puoi creare più nodi di lavoro
-per eseguire ancora più repliche della tua applicazione. Questa attività non è trattata in questa esercitazione, ma tieni
+Per aumentare ancora di più l'elevata disponibilità della tua applicazione, nei cluster standard puoi creare un pool di nodi di lavoro che si estende a più zone con dei nodi di lavoro in ciascuna zona per eseguire un numero ancora maggiore di repliche della tua applicazione. Questa attività non è trattata in questa esercitazione, ma tieni
 a mente questo concetto per futuri miglioramenti alla disponibilità di un'applicazione.
 
 Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword.Bluemix_notm}} in un'applicazione, ma puoi utilizzarle con un'applicazione tanto semplice come complessa.
@@ -65,14 +63,14 @@ Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword
 
 ## Destinatari
 
-Gli sviluppatori software e gli amministratori di rete che stanno distribuendo un'applicazione in un cluster Kubernetes per la prima volta. 
+Gli sviluppatori software e gli amministratori di rete che stanno distribuendo un'applicazione in un cluster Kubernetes per la prima volta.
 
 ## Prerequisiti
 
-* [Esercitazione: Creazione dei cluster Kubernetes in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
+* [Esercitazione: Creazione di cluster Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
 
 
-## Lezione 1: distribuzione di singole applicazioni dell'istanza ai cluster Kubernetes
+## Lezione 1: Distribuzione di singole applicazioni dell'istanza ai cluster Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
 Nell'esercitazione precedente, hai creato un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci una sola istanza dell'applicazione in un pod Kubernetes nel nodo di lavoro.
@@ -80,8 +78,7 @@ Nell'esercitazione precedente, hai creato un cluster con un nodo di lavoro. In q
 
 Il seguente diagramma include i componenti che distribuisci completando questa lezione.
 
-
-![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)
+![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components1.png)
 
 Per distribuire l'applicazione:
 
@@ -103,20 +100,20 @@ Per distribuire l'applicazione:
     {: pre}
 
 3.  Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
-{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}}, utilizza il comando `bx cs region-set`.
+{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}}, utilizza il comando `ibmcloud ks region-set`.
 
     ```
-    bx login [--sso]
+    ibmcloud login [--sso]
     ```
     {: pre}
 
     **Nota**: se il comando di accesso ha esito negativo, potresti avere un ID federato. Tenta aggiungendo l'indicatore `--sso` al comando. Utilizza l'URL fornito nell'output della CLI per richiamare la passcode monouso.
 
-4.  Configura il contesto del cluster nella tua CLI.
+4.  Imposta il contesto del cluster nella tua CLI.
     1.  Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -130,23 +127,23 @@ Per distribuire l'applicazione:
         ```
         {: screen}
 
-5.  Accedi alla CLI {{site.data.keyword.registryshort_notm}}. **Nota**: assicurati che il plugin container-registry [sia installato](/docs/services/Registry/index.html#registry_cli_install).
+5.  Accedi alla CLI {{site.data.keyword.registryshort_notm}}. **Nota**: assicurati che il plug-in container-registry [sia installato](/docs/services/Registry/index.html#registry_cli_install).
 
     ```
-    bx cr login
+    ibmcloud cr login
     ```
     {: pre}
     -   Se hai dimenticato il tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}},
 esegui il seguente comando.
 
         ```
-        bx cr namespace-list
+        ibmcloud cr namespace-list
         ```
         {: pre}
 
 6.  Avvia Docker.
     * Se stai utilizzando Docker Community Edition, non è necessaria alcuna azione.
-    * Se stai utilizzando Linux, segui la [Documentazione Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/engine/admin/) per trovare le istruzioni su come avviare Docker in base alla distribuzione Linux che utilizzi.
+    * Se stai utilizzando Linux, segui la [Documentazione Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/config/daemon/) per trovare le istruzioni su come avviare Docker in base alla distribuzione Linux che utilizzi.
     * Se stai utilizzando Docker Toolbox su Windows o OSX, puoi utilizzare il Docker Quickstart Terminal,
 che avvia Docker per te. Utilizza il Docker Quickstart Terminal per i prossimi pochi passi per eseguire i comandi
 Docker e quindi ritorna alla CLI in cui hai configurato la variabile della sessione `KUBECONFIG`.
@@ -181,18 +178,18 @@ dell'immagine.
 
         ```
         The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
+        ea2ded433ac8: Pushed
+        894eb973f4d3: Pushed
+        788906ca2c7e: Pushed
+        381c97ba7dc3: Pushed
+        604c78617f34: Pushed
+        fa18e5ffd316: Pushed
+        0a5e2b2ddeaa: Pushed
+        53c779688d06: Pushed
+        60a0858edcd5: Pushed
+        b6ca02dfe5e6: Pushed
+        1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
+        43 size: 2398
         ```
         {: screen}
 
@@ -212,7 +209,7 @@ dell'immagine.
 
     Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le risorse Kubernetes.
 
-9.  Rendi la tua applicazione accessibile al mondo esponendo la distribuzione come un servizio NodePort. Così come puoi esporre una porta per un'applicazione Cloud Foundry, la NodePort esposta è la porta su cui il nodo di lavoro è in ascolto per il traffico. 
+9.  Rendi la tua applicazione accessibile al mondo esponendo la distribuzione come un servizio NodePort. Così come puoi esporre una porta per un'applicazione Cloud Foundry, la NodePort esposta è la porta su cui il nodo di lavoro è in ascolto per il traffico.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -227,7 +224,7 @@ dell'immagine.
     {: screen}
 
     <table summary=“Information about the expose command parameters.”>
-    <caption>Ulteriori informazioni sui parametri di esposizione </caption>
+    <caption>Ulteriori informazioni sui parametri di esposizione</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Ulteriori informazioni sui parametri di esposizione</th>
     </thead>
@@ -246,7 +243,7 @@ dell'immagine.
     </tr>
     <tr>
     <td><code>--port=<em>&lt;8080&gt;</em></code></td>
-    <td>La porta che il servizio utilizza. </td>
+    <td>La porta che il servizio utilizza.</td>
     </tr>
     <tr>
     <td><code>--type=NodePort</code></td>
@@ -288,18 +285,18 @@ dell'immagine.
     2.  Ottieni l'indirizzo IP pubblico per il nodo di lavoro nel cluster.
 
         ```
-        bx cs workers <cluster_name_or_ID>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Output di esempio:
 
         ```
-        bx cs workers pr_firm_cluster
+        ibmcloud ks workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
         ```
         {: screen}
 
@@ -327,7 +324,7 @@ Troppi comandi in questa lezione? D'accordo. Come l'utilizzo di uno script di co
 <br />
 
 
-## Lezione 2: distribuzione e aggiornamento delle applicazioni con elevata disponibilità
+## Lezione 2: Distribuzione e aggiornamento delle applicazioni con elevata disponibilità
 {: #cs_apps_tutorial_lesson2}
 
 In questa lezione, distribuisci tre istanze dell'applicazione Hello World in un cluster per una maggiore disponibilità rispetto alla prima versione dell'applicazione.
@@ -335,8 +332,7 @@ In questa lezione, distribuisci tre istanze dell'applicazione Hello World in un 
 
 Maggiore disponibilità significa che l'accesso dell'utente è diviso tra le tre istanze. Quando troppi utenti stanno tentando di accedere alla stessa istanza dell'applicazione, potrebbero ravvisare tempi di risposta lenti. Più istanze possono voler dire tempi di risposta più veloci per i tuoi utenti. In questa lezione, impari anche come i controlli di integrità e gli aggiornamenti della distribuzione possono funzionare con Kubernetes. Il seguente diagramma include i componenti che distribuisci completando questa lezione.
 
-
-![Impostazioni di distribuzione](images/cs_app_tutorial_components2.png)
+![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components2.png)
 
 Nell'esercitazione precedente, hai creato il tuo account e un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci tre istanze dell'applicazione Hello World. Ogni istanza viene distribuita in un pod Kubernetes come parte di una serie di repliche nel nodo di lavoro. Per renderla pubblicamente disponibile, crea anche un servizio Kubernetes.
 
@@ -406,7 +402,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
         ```
         {: codeblock}
 
-    3.  Nota che l'analisi di attività HTTP controlla l'integrità del contenitore ogni 5 secondi. 
+    3.  Nota che l'analisi di attività HTTP controlla l'integrità del contenitore ogni 5 secondi.
 
         ```
         livenessProbe:
@@ -438,7 +434,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 7.  Ora che il lavoro di distribuzione è stato effettuato puoi aprire un browser e controllare l'applicazione. Per creare l'URL, prendi lo stesso indirizzo IP pubblico che hai utilizzato nella lezione precedente per il tuo nodo di lavoro e combinalo con la NodePort specificata nello script di configurazione. Per ottenere l'indirizzo IP pubblico per il nodo di lavoro:
 
   ```
-  bx cs workers <cluster_name_or_ID>
+  ibmcloud ks workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -491,7 +487,7 @@ service "hw-demo-service" deleted
 <br />
 
 
-## Lezione 3: distribuzione e aggiornamento dell'applicazione Watson Tone Analyzer
+## Lezione 3: Distribuzione e aggiornamento dell'applicazione Watson Tone Analyzer
 {: #cs_apps_tutorial_lesson3}
 
 Nelle precedenti lezioni, le applicazioni sono state distribuite come singoli componenti in un nodo di lavoro. In questa lezione, puoi distribuire due componenti di un'applicazione in un cluster che utilizza il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
@@ -499,13 +495,12 @@ Nelle precedenti lezioni, le applicazioni sono state distribuite come singoli co
 
 Separare i componenti in contenitori differenti ti assicura di poterne aggiornare uno senza influenzare gli altri. Quindi, aggiorni l'applicazione per scalarla con più repliche per renderla altamente disponibile. Il seguente diagramma include i componenti che distribuisci completando questa lezione.
 
-![Impostazioni di distribuzione](images/cs_app_tutorial_components3.png)
-
+![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components3.png)
 
 Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di lavoro. In questa lezione, crea un'istanza del servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nel tuo account {{site.data.keyword.Bluemix_notm}} e configura due distribuzioni, una per ogni componente dell'applicazione. Ogni componente viene distribuito in un pod Kubernetes nel nodo di lavoro. Per rendere entrambi questi componenti pubblicamente disponibili, crea anche un servizio Kubernetes per ogni componente.
 
 
-### Lezione 3a: distribuzione dell'applicazione {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
+### Lezione 3a: Distribuzione dell'applicazione {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
 {: #lesson3a}
 
 1.  In una CLI, passa alla directory `Lab 3`.
@@ -580,7 +575,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
 5.  Verifica che le immagini siano state correttamente aggiunte al tuo spazio dei nomi del registro. Se hai utilizzato il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di ritornare alla CLI che hai utilizzato per impostare la variabile della sessione `KUBECONFIG`.
 
     ```
-    bx cr images
+    ibmcloud cr images
     ```
     {: pre}
 
@@ -743,7 +738,7 @@ distribuzione iniziale sia completa.
 
 [Verifica la tua conoscenza e fai un quiz! ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-Congratulazioni! Hai distribuito l'applicazione {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. L'agenzia di PR può iniziare ad utilizzare questa distribuzione per iniziare l'analisi dei propri comunicati stampa. 
+Congratulazioni! Hai distribuito l'applicazione {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. L'agenzia di PR può iniziare ad utilizzare questa distribuzione per iniziare l'analisi dei propri comunicati stampa.
 
 Pronto a eliminare quello che hai precedentemente creato? Puoi utilizzare lo script di configurazione per eliminare le risorse che hai creato.
 
@@ -765,8 +760,7 @@ service "watson-talk-service" deleted
   Se non lo vuoi conservare, puoi eliminare anche il cluster.
 
   ```
-  bx cs cluster-rm <cluster_name_or_ID
-   >
+  ibmcloud ks cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -777,4 +771,4 @@ Ora che hai acquisito le basi, puoi passare ad attività più avanzate. Prendi i
 
 - Completa un [lab più complicato ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) nel repository
 - [Ridimensiona automaticamente le tue applicazioni](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
-- Esplora il percorso di orchestrazione del contenitore in [developerWorks ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- Esplora i modelli di codice di orchestrazione del contenitore in [developerWorks ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/technologies/container-orchestration/)

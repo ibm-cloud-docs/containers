@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2018-05-24"
 
 
 ## Serviços de aplicativos
+{: #application_services}
 <table summary="Resumo para acessibilidade">
 <caption>Serviços de aplicativos</caption>
 <thead>
@@ -48,6 +49,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 
 ## Serviços DevOps
+{: #devops_services}
 <table summary="Resumo para acessibilidade">
 <caption>Serviços DevOps</caption>
 <thead>
@@ -63,7 +65,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">O Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> é um gerenciador de pacote do Kubernetes. É possível criar novos gráficos Helm ou usar gráficos Helm preexistente para definir, instalar e fazer upgrade de aplicativos complexos do Kubernetes que são executados em clusters do {{site.data.keyword.containerlong_notm}}. <p>Para obter mais informações, veja [Configurando o Helm no {{site.data.keyword.containershort_notm}}](cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">O Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> é um gerenciador de pacote do Kubernetes. É possível criar novos gráficos Helm ou usar gráficos Helm preexistente para definir, instalar e fazer upgrade de aplicativos complexos do Kubernetes que são executados em clusters do {{site.data.keyword.containerlong_notm}}. <p>Para obter mais informações, veja [Configurando o Helm no {{site.data.keyword.containershort_notm}}](cs_integrations.html#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -81,6 +83,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 
 ## Serviços de criação de log e de monitoramento
+{: #health_services}
 <table summary="Resumo para acessibilidade">
 <caption>Serviços de criação de log e de monitoramento</caption>
 <thead>
@@ -97,6 +100,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 <tr>
 <td>Datadog</td>
 <td>Monitore seu cluster e visualize as métricas de desempenho da infraestrutura e do aplicativo com o <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. Para obter mais informações, veja <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitorando o {{site.data.keyword.containershort_notm}} com o Datadog <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
+</tr>
+<tr>
+<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Monitore a atividade administrativa feita em seu cluster, analisando logs por meio do Grafana. Para obter mais informações sobre o serviço, consulte a documentação do [Activity Tracker](/docs/services/cloud-activity-tracker/index.html). Para obter mais informações sobre os tipos de eventos que podem ser rastreados, consulte [Eventos do Activity Tracker](/cs_at_events.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -138,6 +145,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 
 ## Serviços de segurança
+{: #security_services}
 <table summary="Resumo para acessibilidade">
 <caption>Serviços de segurança</caption>
 <thead>
@@ -153,7 +161,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>Como um suplemento para o <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, é possível usar o <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para melhorar a segurança de implementações de contêiner, reduzindo o que seu app pode fazer. Para obter mais informações, veja <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protegendo implementações de contêiner no {{site.data.keyword.Bluemix_notm}} com Aqua Security <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
+  <td>Como um suplemento para o <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, é possível usar o <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para melhorar a segurança de implementações de contêiner, reduzindo o que seu app pode fazer. Para obter mais informações, consulte <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Protegendo implementações de contêiner no {{site.data.keyword.Bluemix_notm}} com Aqua Security <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -179,6 +187,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 
 ## Serviços de Armazenamento
+{: #storage_services}
 <table summary="Resumo para acessibilidade">
 <caption>Serviços de Armazenamento</caption>
 <thead>
@@ -222,7 +231,7 @@ Antes de iniciar:
 
 1. [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
 2. [Solicite uma instância do serviço do {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
-   **Nota:** para criar uma instância de um serviço no local Washington DC, deve-se usar a CLI.
+   **Nota:** para criar uma instância de um serviço na zona Washington DC, deve-se usar a CLI.
 3. Os serviços do Cloud Foundry são suportados para ligação com clusters, mas outros serviços não são. É possível ver os diferentes tipos de serviço depois de criar a instância de serviço e os serviços serem agrupados no painel como **Serviços do Cloud Foundry** e **Serviços**. Para ligar os serviços na seção **Serviços** com clusters, [primeiro crie aliases do Cloud Foundry](#adding_resource_cluster).
 
 **Nota:**
@@ -236,7 +245,7 @@ Para incluir um serviço:
 2.  Liste os serviços do {{site.data.keyword.Bluemix_notm}} disponíveis.
 
     ```
-    bx service list
+    Lista de serviços ibmcloud
     ```
     {: pre}
 
@@ -267,17 +276,17 @@ Para incluir um serviço:
 5.  Inclua o serviço em seu cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     Quando o serviço é incluído com sucesso em seu cluster, é criado um segredo de cluster que contém as credenciais de sua instância de serviço. Exemplo de saída da CLI:
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mynamespace
+    Namespace:	mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
@@ -297,7 +306,7 @@ Para usar o serviço em um pod que está implementado no cluster, os usuários d
 ## Criando aliases do Cloud Foundry para outros recursos de serviço do {{site.data.keyword.Bluemix_notm}}
 {: #adding_resource_cluster}
 
-Os serviços do Cloud Foundry são suportados para ligação com clusters. Para ligar um serviço {{site.data.keyword.Bluemix_notm}} que não é um serviço Cloud Foundry a seu cluster, crie um alias do Cloud Foundry para a instância de serviço.
+Os serviços do Cloud Foundry são suportados para ligação com clusters. É possível ver os diferentes tipos de serviço depois de criar a instância de serviço e os serviços serem agrupados no painel como **Serviços do Cloud Foundry** e **Serviços**. Para ligar um serviço {{site.data.keyword.Bluemix_notm}} que não é um serviço Cloud Foundry a seu cluster, crie um alias do Cloud Foundry para a instância de serviço.
 {:shortdesc}
 
 Antes de iniciar, [solicite uma instância do serviço do {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
@@ -307,26 +316,26 @@ Para criar um alias do Cloud Foundry para a instância de serviço:
 1. Destine a organização e um espaço no qual a instância de serviço é criada.
 
     ```
-    bx target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. Anote o nome da instância de serviço.
     ```
-    bx resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. Crie um alias do Cloud Foundry para a instância de serviço.
     ```
-    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. Verifique se o alias do serviço foi criado.
 
     ```
-    bx service list
+    Lista de serviços ibmcloud
     ```
     {: pre}
 
@@ -481,7 +490,7 @@ Agora é possível acessar os detalhes e as credenciais de serviço do {{site.da
 ## Configurando o Helm no {{site.data.keyword.containershort_notm}}
 {: #helm}
 
-[Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://helm.sh/) é um gerenciador de pacote do Kubernetes. É possível criar gráficos Helm ou usar gráficos Helm preexistentes para definir, instalar e fazer upgrade de aplicativos complexos do Kubernetes complexo de upgrade que são executados em clusters do {{site.data.keyword.containerlong_notm}}.
+[Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://helm.sh) é um gerenciador de pacote do Kubernetes. É possível criar gráficos Helm ou usar gráficos Helm preexistentes para definir, instalar e fazer upgrade de aplicativos complexos do Kubernetes complexo de upgrade que são executados em clusters do {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Antes de usar gráficos Helm com o {{site.data.keyword.containershort_notm}}, deve-se instalar e inicializar uma instância do Helm em seu cluster. É possível então incluir o repositório do Helm do {{site.data.keyword.Bluemix_notm}} em sua instância do Helm.
@@ -494,8 +503,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para o
 
     1. Em seu editor preferencial, crie o arquivo a seguir e salve-o como `rbac-config.yaml`.
       **Nota**:
-        * A função de cluster `cluster-admin` é criada por padrão nos clusters do Kubernetes, portanto, não é necessário defini-la explicitamente.
-        * Se você estiver usando um cluster versão 1.7.x, mude a `apiVersion` para `rbac.authorization.k8s.io/v1beta1`.
+        * Para instalar o Tiller com a conta do serviço e a ligação de função de cluster no namespace `kube-system`, deve-se ter a função [`cluster-admin`](cs_users.html#access_policies). É possível escolher um namespace diferente de `kube-system`, mas todos os gráficos Helm da IBM devem ser instalados em `kube-system`. Sempre que você executa um comando `helm`, deve-se usar a sinalização `tiller-namespace <namespace>` para apontar para o outro namespace no qual o Tiller está instalado.
 
       ```
       apiVersion: v1

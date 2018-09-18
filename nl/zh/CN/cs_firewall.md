@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -24,19 +24,19 @@ lastupdated: "2018-05-24"
 查看以下情况，在这些情况下，您可能需要在防火墙中为 {{site.data.keyword.containerlong}} 打开特定端口和 IP 地址。
 {:shortdesc}
 
-* 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `bx` 命令](#firewall_bx)。
+* 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `ibmcloud` 命令](#firewall_bx)。
 * 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `kubectl` 命令](#firewall_kubectl)。
 * 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `calicoctl` 命令](#firewall_calicoctl)。
-* 为工作程序节点设置防火墙或在 IBM Cloud infrastructure (SoftLayer) 帐户中定制防火墙设置时，[允许 Kubernetes 主节点与工作程序节点之间进行通信](#firewall_outbound)。
+* 为工作程序节点设置防火墙或在 IBM Cloud Infrastructure (SoftLayer) 帐户中定制防火墙设置时，[允许 Kubernetes 主节点与工作程序节点之间进行通信](#firewall_outbound)。
 * [从集群外部访问 NodePort 服务、LoadBalancer 服务或 Ingress](#firewall_inbound)。
 
 <br />
 
 
-## 从防火墙后运行 `bx cs` 命令
+## 从防火墙后运行 `ibmcloud` 命令
 {: #firewall_bx}
 
-如果企业网络策略阻止通过代理或防火墙从本地系统访问公共端点，那么要运行 `bx cs` 命令，必须允许 {{site.data.keyword.containerlong_notm}} 的 TCP 访问。
+如果企业网络策略阻止通过代理或防火墙从本地系统访问公共端点，那么要运行 `ibmcloud ks` 命令，必须允许 {{site.data.keyword.containerlong_notm}} 的 TCP 访问。
 {:shortdesc}
 
 1. 允许在端口 443 上访问 `containers.bluemix.net`。
@@ -71,35 +71,35 @@ lastupdated: "2018-05-24"
 
 创建集群时，将从 20000-32767 中随机分配主 URL 中的端口。您可以选择为可能创建的任何集群打开端口范围 20000-32767，也可以选择允许对特定现有集群进行访问。
 
-开始之前，允许访问以[运行 `bx cs` 命令](#firewall_bx)。
+开始之前，允许访问以[运行 `ibmcloud ks` 命令](#firewall_bx)。
 
 要允许访问特定集群：
 
 1. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。如果您有联合帐户，请包括 `--sso` 选项。
 
    ```
-    bx login [--sso]
-    ```
+   ibmcloud login [--sso]
+   ```
    {: pre}
 
 2. 选择集群所在的区域。
 
    ```
-   bx cs region-set
+   ibmcloud ks region-set
    ```
    {: pre}
 
 3. 获取集群的名称。
 
    ```
-        bx cs clusters
-        ```
+   ibmcloud ks clusters
+   ```
    {: pre}
 
 4. 检索集群的**主 URL**。
 
    ```
-   bx cs cluster-get <cluster_name_or_ID>
+   ibmcloud ks cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -153,7 +153,7 @@ lastupdated: "2018-05-24"
 如果企业网络策略阻止通过代理或防火墙从本地系统访问公共端点，那么要运行 `calicoctl` 命令，必须允许 Calico 命令的 TCP 访问。
 {:shortdesc}
 
-开始之前，允许访问以运行 [`bx` 命令](#firewall_bx)和 [`kubectl` 命令](#firewall_kubectl)。
+开始之前，允许访问以运行 [`ibmcloud` 命令](#firewall_bx)和 [`kubectl` 命令](#firewall_kubectl)。
 
 1. 从用于允许 [`kubectl` 命令](#firewall_kubectl)的主 URL 中检索 IP 地址。
 
@@ -178,18 +178,18 @@ lastupdated: "2018-05-24"
   1.  记下用于集群中所有工作程序节点的公共 IP 地址。
 
       ```
-             bx cs workers <cluster_name_or_ID>
-       ```
+      ibmcloud ks workers <cluster_name_or_ID>
+      ```
       {: pre}
 
   2.  允许从源 _<each_worker_node_publicIP>_ 到目标 TCP/UDP 端口范围 20000-32767 和端口 443 以及以下 IP 地址和网络组的出站网络流量。如果您拥有的公司防火墙阻止您的本地机器访问公用因特网端点，请对源工作程序节点和本地机器执行此步骤。
-      - **重要事项**：针对区域内的所有位置，必须允许出站流量从端口 443 流出，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至所有位置（dal10、dal12 和 dal13）的 IP 地址。
+      - **重要信息**：针对区域内的所有专区，必须允许从端口 443 发出的出局流量，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至所有专区（dal10、dal12 和 dal13）的 IP 地址。
       <p>
-  <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+  <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为出局流量打开的 IP 地址</caption>
       <thead>
       <th>区域</th>
-      <th>位置</th>
+      <th>专区</th>
       <th>IP 地址</th>
       </thead>
     <tbody>
@@ -231,7 +231,7 @@ lastupdated: "2018-05-24"
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量流至的注册表 IP 地址。全局注册表存储 IBM 提供的公共映像，区域注册表存储您自己的专用或公共映像。
         <p>
-<table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+<table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为注册表流量打开的 IP 地址</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} 区域</th>
@@ -271,7 +271,7 @@ lastupdated: "2018-05-24"
   4.  可选：允许出站网络流量从工作程序节点流至 {{site.data.keyword.monitoringlong_notm}} 和 {{site.data.keyword.loganalysislong_notm}} 服务：
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - 将 <em>&lt;monitoring_public_IP&gt;</em> 替换为要允许流量流至的监视区域的所有地址：
-        <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+        <p><table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为监视流量打开的 IP 地址</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} 区域</th>
@@ -282,7 +282,7 @@ lastupdated: "2018-05-24"
         <tr>
          <td>欧洲中部</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
+         <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>英国南部</td>
@@ -290,7 +290,7 @@ lastupdated: "2018-05-24"
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>美国东部、美国南部和亚太地区北部</td>
+          <td>美国东部、美国南部、亚太地区北部和亚太地区南部</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -300,8 +300,8 @@ lastupdated: "2018-05-24"
 </p>
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - 将 <em>&lt;logging_public_IP&gt;</em> 替换为要允许流量流至的日志记录区域的所有地址：
-        <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <caption>要对日志记录流量打开的 IP 地址</caption>
+        <p><table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
+<caption>要对日志记录流量打开的 IP 地址</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}} 区域</th>
         <th>日志记录地址</th>
@@ -332,15 +332,18 @@ lastupdated: "2018-05-24"
        </table>
 </p>
 
-  5. 对于专用防火墙，允许适当的 IBM Cloud infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
-      - 添加您正在使用的所有[区域内的位置](cs_regions.html#locations)。
-      - 请注意，必须添加 dal01 位置（数据中心）。
+  5. 对于专用防火墙，允许适当的 IBM Cloud Infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)。
+      - 添加您正在使用的所有[区域内的专区](cs_regions.html#zones)。
+      - 请注意，必须添加 `dal01` 专区（数据中心）。
       - 打开端口 80 和 443 以允许集群引导过程。
+      - 打开端口 10250 用于 Kubernetes 仪表板。
+      - 打开端口 53 用于 DNS 访问。
+      - 由于所有 pod 到 pod 的流量都是通过专用网络传输的，因此请打开 pod 用于通信的所有端口，或者打开用于集群中工作程序节点的所有端口。
 
-  6. {: #pvc}要为数据存储创建持久性卷申领，请针对集群所在位置（数据中心）的 [IBM Cloud Infrastructure (SoftLayer) IP 地址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)允许通过防火墙进行流出访问。
-      - 要找到集群的位置（数据中心），请运行 `bx cs clusters`。
+  6. {: #pvc}要为数据存储创建持久性卷申领，请针对集群所在专区的 [IBM Cloud Infrastructure (SoftLayer) IP 地址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)允许通过防火墙进行流出访问。
+      - 要查找集群的专区，请运行 `ibmcloud ks clusters`。
       - 允许访问**前端（公共）网络**和**后端（专用）网络**的 IP 范围。
-      - 请注意，必须添加**后端（专用）网络**的 dal01 位置（数据中心）。
+      - 请注意，必须为**后端（专用）网络**添加 `dal01` 专区（数据中心）。
 
 <br />
 

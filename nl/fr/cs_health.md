@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -22,256 +22,47 @@ lastupdated: "2018-05-24"
 Configurez les fonctions de consignation et de surveillance dans {{site.data.keyword.containerlong}} pour vous aider à identifier et résoudre les incidents et améliorer l'état de santé et les performances de vos applications et clusters Kubernetes.
 {: shortdesc}
 
-
-## Configuration de l'acheminement des journaux de cluster et d'application
+## Description de l'acheminement des journaux de cluster et d'application
 {: #logging}
 
-Avec un cluster Kubernetes standard dans {{site.data.keyword.containershort_notm}}, vous pouvez transférer des journaux de sources différentes dans {{site.data.keyword.loganalysislong_notm}} et/ou sur un serveur syslog externe.
+La surveillance et la consignation en continu est essentielle à la détection des attaques sur votre cluster et au traitement des incidents lorsqu'ils se produisent. En exerçant la surveillance continue de votre cluster, vous êtes en mesure de mieux comprendre la capacité de votre cluster et la disponibilité des ressources disponibles dans votre application. Vous pouvez ainsi vous préparer en connaissance de cause pour protéger vos applications de toute période d'indisponibilité. Pour configurer la consignation, vous devez utiliser un cluster Kubernetes standard dans {{site.data.keyword.containershort_notm}}.
 {: shortdesc}
 
-Pour transférer les journaux d'une source vers les deux serveurs collecteurs, vous devez créer deux configurations de consignation.
-{: tip}
 
-Recherchez dans le tableau suivant les informations concernant les différentes sources de journal.
+**Mon cluster est-il géré par IBM ?**
+Tous les maîtres Kubernetes sont surveillés en continu par IBM. {{site.data.keyword.containershort_notm}} analyse automatiquement tous les noeuds sur lesquels est déployé le maître Kubernetes pour rechercher les vulnérabilités détectées dans Kubernetes et les correctifs de sécurité spécifiques au système d'exploitation. Si des vulnérabilités sont détectées, {{site.data.keyword.containershort_notm}} applique automatiquement les correctifs appropriés et résout les vulnérabilités pour l'utilisateur. Vous êtes chargé de surveiller et d'analyser les journaux pour le reste de votre cluster.
+
+**Quelles sont les sources pour lesquelles je peux configurer la consignation ?**
+
+Dans la figure suivante, vous pouvez voir l'emplacement des sources configurables pour la consignation.
+
+![Sources de journal](images/log_sources.png)
+
+<ol>
+<li><p><code>application</code> : informations sur les événements qui se produisent au niveau de l'application. Il peut s'agir d'une notification signalant un événement, par exemple une connexion établie, un avertissement concernant le stockage ou d'autres opérations pouvant être effectuées au niveau de l'application.</p> <p>Chemins d'accès : vous pouvez définir les chemins d'accès vers lesquels sont transférés vos journaux. Toutefois, pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation, autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique. Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont réellement acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></li>
+
+<li><p><code>container</code> : informations consignées par un conteneur en cours d'exécution.</p> <p>Chemins d'accès : ce qui est écrit dans <code>STDOUT</code> ou <code>STDERR</code>.</p></li>
+
+<li><p><code>ingress</code> : informations relatives au trafic réseau entrant dans un cluster via l'équilibreur de charge d'application Ingress. Pour obtenir des informations de configuration spécifiques, consultez la [documentation Ingress](cs_ingress.html#ingress_log_format).</p> <p>Chemins d'accès : <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+
+<li><p><code>kube-audit</code> : informations sur les actions associées au cluster qui sont envoyées au serveur d'API Kubernetes, notamment la date et l'heure, l'utilisateur et la ressource concernée.</p></li>
+
+<li><p><code>kubernetes</code> : informations provenant de kubelet, de kube-proxy et autres événements qui se produisent dans le noeuds worker qui s'exécute dans l'espace de nom kube-system.</p><p>Chemins d'accès : <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
+
+<li><p><code>worker</code> : informations spécifiques à la configuration de l'infrastructure dont vous disposez pour votre noeud worker. Les journaux de noeud worker sont capturés dans syslog et contiennent les événements du système d'exploitation. Dans le fichier auth.log, vous pouvez trouver des informations sur les demandes d'authentification effectuées sur le système d'exploitation. </p><p>Chemins d'accès : <code>/var/log/syslog</code> et <code>/var/log/auth.log</code></p></li>
+</ol>
+
+</br>
+
+**Quelles sont les options de configuration dont je dispose ?**
+
+Le tableau suivant présente les différentes options dont vous disposez lors de la configuration de la consignation, ainsi que leur description.
 
 <table>
-<caption>Sources de journal</caption>
+<caption> Description des options de configuration de consignation</caption>
   <thead>
-    <tr>
-      <th>Source de journal</th>
-      <th>Caractéristiques</th>
-      <th>Chemins d'accès au journal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>conteneur</code></td>
-      <td>Journaux pour votre conteneur s'exécutant dans un cluster Kubernetes. Tout ce qui est consigné dans STDOUT ou STDERR.</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>application</code></td>
-      <td>Journaux de votre application qui s'exécute dans un cluster Kubernetes.</td>
-      <td><p>Vous pouvez définir les chemins d'accès. Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique.</p>
-      <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont réellement acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
-    </tr>
-    <tr>
-      <td><code>worker</code></td>
-      <td>Journaux des noeuds worker de machine virtuelle dans un cluster Kubernetes.</td>
-      <td><code>/var/log/syslog</code>, <code>/var/log/auth.log</code></td>
-    </tr>
-    <tr>
-      <td><code>kubernetes</code></td>
-      <td>Journaux du composant système Kubernetes.</td>
-      <td><code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></td>
-    </tr>
-    <tr>
-      <td><code>ingress</code></td>
-      <td>Journaux d'un équilibreur de charge d'application Ingress qui gère le trafic réseau entrant dans un cluster.</td>
-      <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
-    </tr>
-    <tr>
-      <td><code>kube-audit</code></td>
-      <td>Journaux correspondant à votre serveur d'API Kubernetes.</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-Pour activer la consignation au niveau du compte ou pour configurer la consignation de l'application, utilisez l'interface de ligne de commande (CLI).
-{: tip}
-
-
-### Activation de l'acheminement des journaux avec l'interface graphique
-{: #enable-forwarding-ui}
-
-Vous pouvez définir une configuration de consignation dans le tableau de bord {{site.data.keyword.containershort_notm}}. Ce processus peut prendre quelques minutes, donc si vous ne voyez pas les journaux immédiatement, patientez quelques minutes avant de revérifier.
-
-1. Accédez à l'onglet **Présentation** du tableau de bord.
-2. Sélectionnez l'organisation et l'espace Cloud Foundry depuis lesquels vous voulez transférer les journaux. Lorsque vous configurez l'acheminement des journaux dans le tableau de bord, les journaux sont envoyés au noeud final {{site.data.keyword.loganalysisshort_notm}} par défaut de votre cluster. Pour transférer les journaux à un serveur externe ou à un autre noeud final {{site.data.keyword.loganalysisshort_notm}}, vous pouvez utiliser l'interface de ligne de commande pour configurer la consignation.
-3. Sélectionnez les sources de journal depuis lesquelles vous voulez transférer les journaux.
-
-    Pour configurer la consignation de l'application ou des espaces de nom de conteneur spécifiques, utilisez l'interface de ligne de commande pour définir votre configuration de consignation.
-    {: tip}
-4. Cliquez sur **Créer**.
-
-### Activation de l'acheminement des journaux avec l'interface de ligne de commande
-{: #enable-forwarding}
-
-Vous pouvez créer une configuration pour la consignation de cluster. Vous pouvez faire la distinction entre les différentes sources de journal en utilisant des indicateurs. Vous pouvez consulter la liste complète des options de configuration dans le [guide de référence de l'interface de ligne de commande (CLI)](cs_cli_reference.html#logging_commands).
-
-**Avant de commencer**
-
-1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}} doivent disposer des droits Responsable, Développeur ou Auditeur dans cet espace.
-  * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}}, exécutez la commande suivante.
-      ```
-      bx cs api-key-info <cluster_name>
-      ```
-      {: pre}
-  * Pour appliquer immédiatement les modifications que vous avez apportées à vos droits, exécutez la commande suivante.
-      ```
-      bx cs logging-config-refresh <cluster_name>
-      ```
-      {: pre}
-
-  Pour plus d'informations sur la modification des droits et règles d'accès {{site.data.keyword.containershort_notm}}, voir [Gestion de l'accès au cluster](cs_users.html#access_policies).
-  {: tip}
-
-2. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
-
-  Si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
-  {: tip}
-
-3. Pour acheminer les journaux à syslog, configurez un serveur qui accepte un protocole syslog, en utilisant l'une de ces deux méthodes :
-  * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de consignation du fournisseur de consignation. Votre serveur syslog doit accepter le protocole UDP.
-  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.
-
-    Vous pouvez retirer les préfixes syslog pour voir vos journaux au format JSON valide en ajoutant le code suivant au début de votre fichier `etc/rsyslog.conf` où s'exécute votre serveur rsyslog.</br>
-    ```$template customFormat,"%msg%\n"
-    $ActionFileDefaultTemplate customFormat
-    ```
-    {: tip}
-
-
-**Acheminement des journaux**
-
-1. Créez une configuration d'acheminement des journaux.
-  ```
-  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-  ```
-  {: pre}
-
-    * Exemple de configuration de consignation de conteneur pour l'espace de nom nommé default et résultat :
-      ```
-      bx cs logging-config-create cluster1 --namespace default
-      Creating logging configuration for container logs in cluster cluster1...
-      OK
-      Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-      af7d1ff4-33e6-4275-8167-b52eb3c5f0ee   container   default     ingest-au-syd.logging.bluemix.net✣  9091✣   -     -       ibm        -                        -
-
-      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysislong_notm}} service.
-
-      ```
-      {: screen}
-
-    * Exemple de configuration de consignation d'application et résultat :
-      ```
-      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-      Creating logging configuration for application logs in cluster cluster2...
-      OK
-      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application   Containers   Paths
-      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣  9091✣   -     -       ibm        container1,container2,container3   /var/log/apps.log
-      ```
-      {: screen}
-
-      Si vous disposez d'applications qui s'exécutent dans vos conteneurs qui ne peuvent pas être configurées pour écrire des journaux dans STDOUT ou STDERR, vous pouvez créer une configuration de consignation pour transférer les journaux à partir de fichiers journaux d'application.
-      {: tip}
-
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>Nom ou ID du cluster.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_source&gt;</em></code></td>
-        <td>Source depuis laquelle vous désirez acheminer les journaux. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> et <code>kube-audit</code>. </td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-        <td>Facultatif : espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. L'acheminement des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur n'est valide que pour la source de journal <code>container</code>. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du cluster utilisent cette configuration.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-        <td><p>Pour {{site.data.keyword.loganalysisshort_notm}}, utilisez l'[URL d'ingestion](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si vous n'en indiquez pas, le noeud final de la région dans laquelle vous avez créé le cluster est utilisé.</p>
-        <p>Pour syslog, indiquez le nom d'hôte ou l'adresse IP du service collecteur de journal.</p></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;port&gt;</em></code></td>
-        <td>Port d'ingestion. Si vous n'en indiquez aucun, le port standard, <code>9091</code>, est utilisé.
-        <p>Pour syslog, indiquez le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_space&gt;</em></code></td>
-        <td>Facultatif : nom de l'espace Cloud Foundry auquel envoyer les journaux. Lors du transfert des journaux vers {{site.data.keyword.loganalysisshort_notm}}, l'espace et l'organisation sont indiqués dans le point d'ingestion. Si vous n'indiquez aucun espace, les journaux sont envoyés au niveau du compte.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_org&gt;</em></code></td>
-        <td>Nom de l'organisation Cloud Foundry où réside l'espace. Cette valeur est obligatoire si vous avez spécifié un espace.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;type&gt;</em></code></td>
-        <td>Destination de transfert de vos journaux. Les options possibles sont : <code>ibm</code> pour transférer vos journaux vers {{site.data.keyword.loganalysisshort_notm}} et <code>syslog</code> pour les transférer vers un serveur externe.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-        <td>Chemin d'accès à un conteneur utilisé par les applications pour la consignation. Pour transférer des journaux avec le type de source <code>application</code>, vous devez indiquer un chemin. Pour indiquer plusieurs chemins, utilisez une liste séparée par des virgules. Exemple : <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;containers&gt;</em></code></td>
-        <td>Facultatif : pour acheminer les journaux à partir d'une application, vous pouvez indiquer le nom du conteneur contenant votre application. Vous pouvez spécifier plusieurs conteneurs en utilisant une liste séparée par des virgules. Si aucun conteneur n'est indiqué, les journaux sont transférés à partir de tous les conteneurs contenant les chemins que vous avez fournis.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;protocol&gt;</em></code></td>
-        <td>Lorsque le type de consignation <code>syslog</code>, il s'agit du protocole de couche de transport. Valeurs admises : <code>TCP</code> et la valeur par défaut <code>UDP</code>. Lors du transfert vers un serveur rsyslog avec le protocole <code>udp</code>, les journaux dont la taille est supérieure à 1 ko sont tronqués.</td>
-      </tr>
-      <tr>
-        <td><code><em>--skip-validation</em></code></td>
-        <td>Facultatif : ignore la validation des noms d'organisation et d'espace lorsqu'ils sont spécifiés. Cette opération permet de réduire le temps de traitement, mais une configuration de consignation non valide ne transférera pas correctement les journaux.</td>
-      </tr>
-    </tbody>
-  </table>
-
-2. Vérifiez que votre configuration est correcte à l'aide d'une des deux méthodes :
-
-    * Pour répertorier toutes les configurations de consignation dans un cluster :
-      ```
-      bx cs logging-config-get <cluster_name_or_ID>
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.xxx.xxx                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
-      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
-      ```
-      {: screen}
-
-    * Pour répertorier les configurations de consignation d'un seul type de source de journal :
-      ```
-      bx cs logging-config-get <cluster_name_or_ID> --logsource worker
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.xxx.xxx                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
-
-## Mise à jour de l'acheminement des journaux
-{: #updating-forwarding}
-
-1. Mettez à jour une configuration d'acheminement des journaux.
-    ```
-    bx cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <log_type> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
-    ```
-    {: pre}
-
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    <th>Option</th>
+    <th>Description</th>
   </thead>
   <tbody>
     <tr>
@@ -279,209 +70,262 @@ Vous pouvez créer une configuration pour la consignation de cluster. Vous pouve
       <td>Nom ou ID du cluster.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;log_config_id&gt;</em></code></td>
-      <td>ID de la configuration à mettre à jour.</td>
+      <td><code><em>--log_source</em></code></td>
+      <td>Source depuis laquelle vous désirez acheminer les journaux. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> et <code>kube-audit</code>.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;namespace&gt;</em></code></td>
-      <td>Facultatif : espace de nom Kubernetes depuis lequel acheminer les journaux. L'acheminement des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur n'est valide que pour la source de journal <code>container</code>. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du cluster utilisent la configuration.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_type&gt;</em></code></td>
+      <td><code><em>--type</em></code></td>
       <td>Destination de transfert de vos journaux. Les options possibles sont : <code>ibm</code> pour transférer vos journaux vers {{site.data.keyword.loganalysisshort_notm}} et <code>syslog</code> pour les transférer vers un serveur externe.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+      <td><code><em>--namespace</em></code></td>
+      <td>Facultatif : espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. L'acheminement des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur n'est valide que pour la source de journal <code>container</code>. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du cluster utilisent cette configuration.</td>
+    </tr>
+    <tr>
+      <td><code><em>--hostname</em></code></td>
       <td><p>Pour {{site.data.keyword.loganalysisshort_notm}}, utilisez l'[URL d'ingestion](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si vous n'en indiquez pas, le noeud final de la région dans laquelle vous avez créé le cluster est utilisé.</p>
       <p>Pour syslog, indiquez le nom d'hôte ou l'adresse IP du service collecteur de journal.</p></td>
     </tr>
     <tr>
-      <td><code><em>&lt;port&gt;</em></code></td>
+      <td><code><em>--port</em></code></td>
       <td>Port d'ingestion. Si vous n'en indiquez aucun, le port standard, <code>9091</code>, est utilisé.
       <p>Pour syslog, indiquez le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Facultatif : nom de l'espace Cloud Foundry auquel envoyer les journaux. Lors du transfert des journaux vers {{site.data.keyword.loganalysisshort_notm}}, l'espace et l'organisation sont indiqués dans le point d'ingestion. Si vous n'indiquez aucun espace, les journaux sont envoyés au niveau du compte.</td>
+      <td><code><em>--space</em></code></td>
+      <td>Facultatif : nom de l'espace Cloud Foundry auquel envoyer les journaux. Lors du transfert des journaux vers {{site.data.keyword.loganalysisshort_notm}}, l'espace et l'organisation sont indiqués dans le point d'ingestion. Si vous ne spécifiez pas d'espace, les journaux sont envoyés au niveau du compte. Si vous indiquez un espace, vous devez également spécifier une organisation.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>Nom de l'organisation Cloud Foundry où réside l'espace. Cette valeur est obligatoire si vous avez spécifié un espace.</td>
+      <td><code><em>--org</em></code></td>
+      <td>Facultatif : nom de l'organisation Cloud Foundry où réside l'espace. Cette valeur est obligatoire si vous avez spécifié un espace.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>Chemin dans un ou plusieurs conteneurs utilisé par les applications pour la consignation. Pour transférer des journaux avec le type de source <code>application</code>, vous devez indiquer un chemin. Pour indiquer plusieurs chemins, utilisez une liste séparée par des virgules. Exemple : <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
+      <td><code><em>--app-containers</em></code></td>
       <td>Facultatif : pour acheminer les journaux à partir d'une application, vous pouvez indiquer le nom du conteneur contenant votre application. Vous pouvez spécifier plusieurs conteneurs en utilisant une liste séparée par des virgules. Si aucun conteneur n'est indiqué, les journaux sont transférés à partir de tous les conteneurs contenant les chemins que vous avez fournis.</td>
     </tr>
+    <tr>
+      <td><code><em>--app-paths</em></code></td>
+      <td>Chemin d'accès à un conteneur utilisé par les applications pour la consignation. Pour transférer des journaux avec le type de source <code>application</code>, vous devez indiquer un chemin. Pour indiquer plusieurs chemins, utilisez une liste séparée par des virgules. Exemple : <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>--syslog-protocol</em></code></td>
+      <td>Lorsque le type de consignation <code>syslog</code>, il s'agit du protocole de couche de transport. Vous pouvez utiliser les protocoles suivants : `udp`, `tls` ou `tcp`. Lors du transfert vers un serveur rsyslog avec le protocole <code>udp</code>, les journaux dont la taille est supérieure à 1 ko sont tronqués.</td>
+    </tr>
+    <tr>
+      <td><code><em>--ca-cert</em></code></td>
+      <td>Obligatoire : lorsque le type de consignation est <code>syslog</code> et que le protocole est <code>tls</code>, nom de la valeur confidentielle (secret) Kubernetes qui contient le certificat de l'autorité de certification.</td>
+    </tr>
+    <tr>
+      <td><code><em>--verify-mode</em></code></td>
+      <td>Lorsque le type de consignation est <code>syslog</code> et que le protocole est <code>tls</code>, mode de vérification. Valeurs admises : <code>verify-peer</code> et la valeur par défaut <code>verify-none</code>.</td>
+    </tr>
+    <tr>
+      <td><code><em>--skip-validation</em></code></td>
+      <td>Facultatif : ignore la validation des noms d'organisation et d'espace lorsqu'ils sont spécifiés. Cette opération permet de réduire le temps de traitement, mais une configuration de consignation non valide ne transférera pas correctement les journaux.</td>
+    </tr>
   </tbody>
-  </table>
+</table>
+
+**Suis-je responsable de conserver Fluentd à jour pour la consignation ?**
+
+Pour apporter des modifications dans vos configurations de consignation ou de filtrage, le module complémentaire de consignation Fluentd doit être au niveau de version le plus récent. Par défaut, des mises à jour automatiques de ce module sont activées. Pour désactiver les mises à jour automatiques, voir [Mise à jour de modules complémentaires de cluster : Fluentd utilisé pour la consignation](cs_cluster_update.html#logging).
 
 <br />
 
 
+## Configuration de l'acheminement des journaux
+{: #configuring}
 
-## Filtrage des journaux
-{: #filter-logs}
+Vous pouvez configurer la consignation pour {{site.data.keyword.containershort_notm}} via l'interface graphique ou l'interface de ligne de commande (CLI).
+{: shortdesc}
 
-Vous pouvez déterminer les journaux que vous allez transférer en filtrant des journaux spécifiques sur une période donnée.
+### Activation de l'acheminement des journaux avec l'interface graphique
+{: #enable-forwarding-ui}
 
-1. Créez un filtre de consignation.
-  ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Obligatoire : nom ou ID du cluster pour lequel vous souhaitez créer un filtre de consignation.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;log_type&gt;</code></td>
-        <td>Type des journaux auquel vous voulez appliquer le filtre. Les types <code>all</code>, <code>container</code> et <code>host</code> sont actuellement pris en charge.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Facultatif : liste séparée par des virgules contenant les ID de vos configurations de consignation. Si cette liste n'est pas fournie, le filtre s'applique à toutes les configurations de consignation du cluster qui sont transmises au filtre. Vous pouvez afficher les configurations de journal qui correspondent au filtre en utilisant l'indicateur <code>--show-matching-configs</code> avec la commande.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Facultatif : espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. Cet indicateur s'applique uniquement lorsque vous utilisez le type de journal <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Facultatif : nom du conteneur depuis lequel vous voulez filtrer les journaux.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Facultatif : filtre les journaux dont le niveau est inférieur ou égal au niveau spécifié. Les valeurs admises, par ordre canonique, sont : <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> et <code>trace</code>. Par exemple, si vous avez filtré les journaux au niveau <code>info</code>, les niveaux <code>debug</code> et <code>trace</code> sont également filtrés. **Remarque** : vous pouvez utiliser cet indicateur uniquement si les messages de journal sont au format JSON et contiennent une zone de niveau. Pour afficher vos messages au format JSON, ajoutez l'indicateur <code>--json</code> dans la commande.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Facultatif : filtre les journaux qui contiennent un message particulier écrit sous forme d'expression régulière. </td>
-      </tr>
-    </tbody>
-  </table>
+Vous pouvez configurer le transfert des journaux dans le tableau de bord {{site.data.keyword.containershort_notm}}. Ce processus peut prendre quelques minutes, donc si vous ne voyez pas les journaux immédiatement, patientez quelques minutes avant de revérifier.
 
-2. Affichez le filtre de journal que vous avez créé.
+Pour créer une configuration au niveau du compte, pour un espace de nom de conteneur spécifique ou pour la consignation d'une application, utilisez l'interface CLI.
+{: tip}
 
-  ```
-  bx cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
-  ```
-  {: pre}
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Obligatoire : nom ou ID du cluster pour lequel vous souhaitez créer un filtre de consignation.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Facultatif : ID du filtre de journal que vous voulez afficher.</td>
-      </tr>
-      <tr>
-        <td><code>--show-matching-configs</code></td>
-        <td>Affiche les configurations de consignation auxquelles s'applique chaque filtre.</td>
-      </tr>
-    </tbody>
-  </table>
+1. Accédez à l'onglet **Présentation** du tableau de bord.
+2. Sélectionnez l'organisation et l'espace Cloud Foundry depuis lesquels vous voulez transférer les journaux. Lorsque vous configurez l'acheminement des journaux dans le tableau de bord, les journaux sont envoyés au noeud final {{site.data.keyword.loganalysisshort_notm}} par défaut de votre cluster. Pour transférer les journaux à un serveur externe ou à un autre noeud final {{site.data.keyword.loganalysisshort_notm}}, vous pouvez utiliser l'interface de ligne de commande pour configurer la consignation.
+3. Sélectionnez les sources de journal depuis lesquelles vous voulez transférer les journaux.
+4. Cliquez sur **Créer**.
 
-3. Mettez à jour le filtre de journal que vous avez créé.
-  ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Obligatoire : nom ou ID du cluster pour lequel vous souhaitez mettre à jour un filtre de consignation.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>ID du filtre de journal que vous voulez mettre à jour.</td>
-      </tr>
-      <tr>
-        <td><code><&lt;log_type&gt;</code></td>
-        <td>Type des journaux auquel vous voulez appliquer le filtre. Les types <code>all</code>, <code>container</code> et <code>host</code> sont actuellement pris en charge.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Facultatif : liste séparée par des virgules de tous les ID des configurations de consignation auxquelles vous voulez appliquer le filtre. Si cette liste n'est pas fournie, le filtre s'applique à toutes les configurations de consignation du cluster qui sont transmises au filtre. Vous pouvez afficher les configurations de journal qui correspondent au filtre en utilisant l'indicateur <code>--show-matching-configs</code> avec la commande <code>bx cs logging-filter-get</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Facultatif : espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. Cet indicateur s'applique uniquement lorsque vous utilisez le type de journal <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Facultatif : nom du conteneur depuis lequel vous voulez filtrer les journaux. Cet indicateur s'applique uniquement lorsque vous utilisez le type de journal <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Facultatif : filtre les journaux dont le niveau est inférieur ou égal au niveau spécifié. Les valeurs admises, par ordre canonique, sont : <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> et <code>trace</code>. Par exemple, si vous avez filtré les journaux au niveau <code>info</code>, les niveaux <code>debug</code> et <code>trace</code> sont également filtrés. **Remarque** : vous pouvez utiliser cet indicateur uniquement si les messages de journal sont au format JSON et contiennent une zone de niveau.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Facultatif : filtre les journaux qui contiennent un message particulier écrit sous forme d'expression régulière. </td>
-      </tr>
-    </tbody>
-  </table>
+</br>
+</br>
 
-4. Supprimez un filtre de journal que vous avez créé.
+### Activation de l'acheminement des journaux avec l'interface de ligne de commande
+{: #enable-forwarding}
 
-  ```
-  bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
-  ```
-  {: pre}
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>&lt;cluster_name_or_ID&gt;</code></td>
-        <td>Obligatoire : nom ou ID du cluster pour lequel vous souhaitez supprimer un filtre de consignation.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Facultatif : ID du filtre de journal que vous voulez supprimer.</td>
-      </tr>
-      <tr>
-        <td><code>--all</code></td>
-        <td>Facultatif : supprime tous vos filtres d'acheminement de journaux.</td>
-      </tr>
-    </tbody>
-  </table>
+Vous pouvez créer une configuration pour la consignation de cluster. Vous pouvez faire la distinction entre les différentes options de consignation en utilisant des indicateurs. 
 
-<br />
+**Acheminement des journaux à IBM**
+
+1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}} doivent disposer des [droits](cs_users.html#access_policies) Responsable, Développeur ou Auditeur dans cet espace.
+  * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}}, exécutez la commande suivante.
+      ```
+      ibmcloud ks api-key-info <cluster_name>
+      ```
+      {: pre}
+  * Pour appliquer immédiatement les modifications que vous avez effectuées, exécutez la commande suivante.
+      ```
+      ibmcloud ks logging-config-refresh <cluster_name>
+      ```
+      {: pre}
+
+2. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster où se trouve la source de journal.
+
+  Si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
+  {: tip}
+
+3. Créez une configuration d'acheminement des journaux.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --type ibm --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+    ```
+    {: pre}
+
+  * Exemple de configuration de consignation de conteneur pour l'espace de nom nommé default et résultat :
+    ```
+    ibmcloud ks logging-config-create mycluster
+    Creating cluster mycluster logging configurations...
+    OK
+    ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
+    4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
+
+  * Exemple de configuration de consignation d'application et résultat :
+    ```
+    ibmcloud ks logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+    Creating logging configuration for application logs in cluster cluster2...
+    OK
+    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
+    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
+
+Si vous disposez d'applications qui s'exécutent dans vos conteneurs qui ne peuvent pas être configurées pour écrire des journaux dans STDOUT ou STDERR, vous pouvez créer une configuration de consignation pour transférer les journaux à partir de fichiers journaux d'application.
+{: tip}
+
+</br>
+</br>
 
 
+**Acheminement des journaux vers votre propre serveur via les protocoles `udp` ou `tcp`**
+
+1. Pour acheminer les journaux à syslog, configurez un serveur qui accepte un protocole syslog, en utilisant l'une de ces deux méthodes :
+  * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de consignation du fournisseur de consignation.
+
+  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.
+
+  Vous pouvez voir vos journaux en tant que fichiers JSON valides en supprimant les préfixes syslog. Pour cela, ajoutez le code suivant au début de votre fichier <code>etc/rsyslog.conf</code> dans lequel s'exécute votre serveur rsyslog : <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+2. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster où se trouve la source de journal. Si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
+
+3. Créez une configuration d'acheminement des journaux.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br>
+</br>
 
 
-## Affichage des journaux
+**Acheminement des journaux vers votre propre serveur via le protocole `tls`**
+
+Les étapes suivantes sont des instructions générales. Avant d'utiliser le conteneur dans un environnement de production, veillez à ce que toutes les exigences en matière de sécurité soient remplies.
+{: tip}
+
+1. Configurez un serveur acceptant un protocole syslog de l'une des manières suivantes :
+  * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de consignation du fournisseur de consignation.
+
+  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog. Il vous faudra injecter les certificats de l'autorité de certification et les certificats côté serveur, ainsi que mettre à jour le fichier `syslog.conf` pour activer `tls` sur votre serveur.
+
+2. Sauvegardez le certificat de l'autorité de certification dans un fichier nommé `ca-cert`. Ce nom précis doit être utilisé.
+
+3. Créez une valeur confidentielle (secret) dans l'espace de nom `kube-system` pour le fichier `ca-cert`. Lorsque vous créez la configuration de consignation, vous utiliserez le nom de cette valeur confidentielle pour l'indicateur `--ca-cert`.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+4. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster où se trouve la source de journal. Si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
+
+3. Créez une configuration d'acheminement des journaux.
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+
+### Vérification de l'acheminement des journaux
+{: verify-logging}
+
+Vous pouvez vérifier si votre configuration est définie correctement de l'une des deux manières suivantes :
+
+* Pour répertorier toutes les configurations de consignation dans un cluster :
+    ```
+    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+* Pour répertorier les configurations de consignation d'un seul type de source de journal :
+    ```
+    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+### Mise à jour de l'acheminement des journaux
+{: #updating-forwarding}
+
+Vous pouvez mettre à jour une configuration de consignation que vous avez déjà créée.
+
+1. Mettez à jour une configuration d'acheminement des journaux.
+    ```
+    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+### Arrêt de l'acheminement des journaux
+{: #log_sources_delete}
+
+Vous pouvez arrêter l'acheminement des journaux en supprimant une ou toutes les configurations de consignation d'un cluster.
+{: shortdesc}
+
+1. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster où se trouve la source de journal.
+
+2. Supprimez la configuration de consignation.
+  <ul>
+  <li>Pour supprimer une configuration de consignation :</br>
+    <pre><code>ibmcloud ks logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+  <li>Pour supprimer toutes les configurations de consignation :</br>
+    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+  </ul>
+
+</br>
+</br>
+
+### Affichage des journaux
 {: #view_logs}
 
 Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser les fonctions de consignation standard de Kubernetes et Docker.
 {:shortdesc}
 
-### {{site.data.keyword.loganalysislong_notm}}
+**{{site.data.keyword.loganalysislong_notm}}**
 {: #view_logs_k8s}
 
 Vous pouvez afficher les journaux que vous avez transférés vers {{site.data.keyword.loganalysislong_notm}} via le tableau de bord Kibana.
@@ -497,47 +341,95 @@ Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et 
 
 Pour plus d'informations sur l'affichage des journaux, voir [Accès à Kibana à partir d'un navigateur Web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
-### Journaux Docker
-{: #view_logs_docker}
+</br>
 
-Vous pouvez exploiter les capacités de consignation intégrées de Docker pour examiner les activités sur les flux de sortie
-STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+**Journaux Docker**
+
+Vous pouvez exploiter les capacités de consignation intégrées de Docker pour examiner les activités sur les flux de sortie STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
 
+## Filtrage des journaux
+{: #filter-logs}
 
-## Arrêt de l'acheminement des journaux
-{: #log_sources_delete}
+Vous pouvez déterminer les journaux que vous allez transférer en filtrant des journaux spécifiques sur une période donnée. Vous pouvez faire la distinction entre les différentes options de filtrage en utilisant des indicateurs. 
 
-Vous pouvez arrêter l'acheminement des journaux en supprimant une ou toutes les configurations de consignation d'un cluster.
-{: shortdesc}
+<table>
+<caption>Description des options de filtrage des journaux</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des options de filtrage des journaux</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;cluster_name_or_ID&gt;</td>
+      <td>Obligatoire : nom ou ID du cluster dont vous souhaitez filtrer les journaux.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;log_type&gt;</code></td>
+      <td>Type des journaux auquel vous voulez appliquer le filtre. Les types <code>all</code>, <code>container</code> et <code>host</code> sont actuellement pris en charge.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;configs&gt;</code></td>
+      <td>Facultatif : liste séparée par des virgules contenant les ID de vos configurations de consignation. Si cette liste n'est pas fournie, le filtre s'applique à toutes les configurations de consignation du cluster qui sont transmises au filtre. Vous pouvez afficher les configurations de journal qui correspondent au filtre en utilisant l'option <code>--show-matching-configs</code>. </td>
+    </tr>
+    <tr>
+      <td><code>&lt;kubernetes_namespace&gt;</code></td>
+      <td>Facultatif : espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. Cet indicateur s'applique uniquement lorsque vous utilisez le type de journal <code>container</code>.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;container_name&gt;</code></td>
+      <td>Facultatif : nom du conteneur depuis lequel vous voulez filtrer les journaux.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;logging_level&gt;</code></td>
+      <td>Facultatif : filtre les journaux dont le niveau est inférieur ou égal au niveau spécifié. Les valeurs admises, par ordre canonique, sont : <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> et <code>trace</code>. Par exemple, si vous avez filtré les journaux au niveau <code>info</code>, les niveaux <code>debug</code> et <code>trace</code> sont également filtrés. **Remarque** : vous pouvez utiliser cet indicateur uniquement si les messages de journal sont au format JSON et contiennent une zone de niveau. Pour afficher vos messages au format JSON, ajoutez l'indicateur <code>--json</code> dans la commande.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;message&gt;</code></td>
+      <td>Facultatif : filtre les journaux qui contiennent un message particulier écrit sous forme d'expression régulière.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;filter_ID&gt;</code></td>
+      <td>Facultatif : ID du filtre de journal.</td>
+    </tr>
+    <tr>
+      <td><code>--show-matching-configs</code></td>
+      <td>Facultatif : affiche les configurations de consignation concernant chaque filtre.</td>
+    </tr>
+    <tr>
+      <td><code>--all</code></td>
+      <td>Facultatif : supprime tous vos filtres de transfert de journaux.</td>
+    </tr>
+  </tbody>
+</table>
 
-1. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
 
-2. Supprimez la configuration de consignation.
-<ul>
-<li>Pour supprimer une configuration de consignation :</br>
-  <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>Nom du cluster dans lequel figure la configuration de consignation.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_config_ID&gt;</em></code></td>
-        <td>ID de la configuration de source de journal.</td>
-      </tr>
-    </tbody>
-  </table></li>
-<li>Pour supprimer toutes les configurations de consignation :</br>
-  <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
-</ul>
+1. Créez un filtre de consignation.
+  ```
+  ibmcloud ks logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+2. Affichez le filtre de journal que vous avez créé.
+
+  ```
+  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ```
+  {: pre}
+
+3. Mettez à jour le filtre de journal que vous avez créé.
+  ```
+  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+4. Supprimez un filtre de journal que vous avez créé.
+
+  ```
+  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ```
+  {: pre}
 
 <br />
 
@@ -575,18 +467,18 @@ Vous pouvez transférer vos journaux d'audit du serveur d'API Kubernetes à {{si
 1. Créez une configuration de consignation.
 
     ```
-    bx cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
     ```
     {: pre}
 
     Exemple de commande et de sortie :
 
     ```
-    bx cs logging-config-create myCluster --logsource kube-audit
+    ibmcloud ks logging-config-create myCluster --logsource kube-audit
     Creating logging configuration for kube-audit logs in cluster myCluster...
     OK
-    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
 
     ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
 
@@ -621,33 +513,20 @@ Vous pouvez transférer vos journaux d'audit du serveur d'API Kubernetes à {{si
 2. Affichez la configuration de consignation de votre cluster pour vérifier qu'elle a été implémentée comme vous l'avez prévu.
 
     ```
-    bx cs logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get <cluster_name_or_ID>
     ```
     {: pre}
 
     Exemple de commande et de sortie :
     ```
-    bx cs logging-config-get myCluster
+    ibmcloud ks logging-config-get myCluster
     Retrieving cluster myCluster logging configurations...
     OK
-    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
     ```
     {: screen}
-
-  <table>
-  <caption>Description des composantes de cette commande</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>Nom ou ID du cluster.</td>
-      </tr>
-    </tbody>
-  </table>
 
 3. Facultatif : si vous voulez arrêter le transfert des journaux d'audit, vous pouvez [supprimer votre configuration](#log_sources_delete).
 
@@ -669,7 +548,7 @@ Pour transférer des journaux d'audit d'API Kubernetes, procédez comme suit :
 1. Configurez le webhook. Si vous ne soumettez pas d'informations dans les indicateurs, une configuration par défaut est utilisée.
 
     ```
-    bx cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud ks apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
     ```
     {: pre}
 
@@ -705,7 +584,7 @@ Pour transférer des journaux d'audit d'API Kubernetes, procédez comme suit :
 2. Vérifiez que l'acheminement des journaux a été activé en affichant l'URL du service de consignation distant.
 
     ```
-    bx cs apiserver-config-get audit-webhook <cluster_name_or_ID>
+    ibmcloud ks apiserver-config-get audit-webhook <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -719,23 +598,23 @@ Pour transférer des journaux d'audit d'API Kubernetes, procédez comme suit :
 3. Appliquez la mise à jour de la configuration en redémarrant le maître Kubernetes.
 
     ```
-    bx cs apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
 
 4. Facultatif : si vous voulez arrêter le transfert des journaux d'audit, vous pouvez désactiver votre configuration.
-    1. [Ciblez avec votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) le cluster depuis lequel vous désirez cesser de collecter les journaux d'audit du serveur d'API.
+    1. [Ciblez votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) sur le cluster depuis lequel vous désirez cesser de collecter les journaux d'audit du serveur d'API.
     2. Désactivez la configuration de back end du webhook pour le serveur d'API du cluster.
 
         ```
-        bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ibmcloud ks apiserver-config-unset audit-webhook <cluster_name_or_ID>
         ```
         {: pre}
 
     3. Appliquez la mise à jour de la configuration en redémarrant le maître Kubernetes.
 
         ```
-        bx cs apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -747,18 +626,38 @@ Des métriques vous aident à surveiller l'état de santé et les performances d
 
 <dl>
   <dt>Page des informations détaillées sur le cluster dans {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containershort_notm}} fournit des informations sur l'état de santé et la capacité de votre
-cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette page de l'interface graphique pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser cette page, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
+    <dd>{{site.data.keyword.containershort_notm}} fournit des informations sur l'état de santé et la capacité de votre cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette page de l'interface graphique pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser cette page, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
   <dt>Tableau de bord Kubernetes</dt>
     <dd>Le tableau de bord Kubernetes est une interface Web d'administration dans laquelle vous pouvez examiner l'état de santé de vos noeuds worker, rechercher des ressources Kubernetes, déployer des applications conteneurisées et résoudre les incidents liés aux applications avec les informations de consignation et de surveillance. Pour plus d'informations sur l'accès à votre tableau de bord Kubernetes, voir [Lancement du tableau de bord Kubernetes pour {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Les métriques des clusters standard se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les métriques se trouvent dans cet espace. Les métriques de conteneur sont collectées automatiquement pour tous les conteneurs déployés dans un cluster. Ces métriques sont envoyées et mises à disposition via Grafana. Pour plus d'informations sur les métriques, voir [Surveillance d'{{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
-    <p>Pour accéder au tableau de bord Grafana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.
-      <ul>
-        <li>Sud et Est des Etats-Unis : https://metrics.ng.bluemix.net</li>
-        <li>Sud du Royaume-Uni : https://metrics.eu-gb.bluemix.net</li>
-        <li>Europe centrale : https://metrics.eu-de.bluemix.net</li>
-      </ul></p></dd>
+    <p>Pour accéder au tableau de bord Grafana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.</p> <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
+  <caption>Adresses IP à ouvrir pour gérer le trafic</caption>
+        <thead>
+        <th>Région {{site.data.keyword.containershort_notm}}</th>
+        <th>Adresse de surveillance</th>
+        <th>Adresses IP de surveillance</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>Europe centrale</td>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>158.177.65.80/30</code></td>
+        </tr>
+        <tr>
+         <td>Sud du Royaume-Uni</td>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord et Asie-Pacifique sud</td>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+ </dd>
 </dl>
 
 ### Autres outils de surveillance de l'état de santé
@@ -779,10 +678,10 @@ Vous pouvez configurer d'autres outils pour disposer de capacités de surveillan
 Le système de reprise automatique d'{{site.data.keyword.containerlong_notm}} peut être déployé dans des clusters existants de Kubernetes version 1.7 ou ultérieure.
 {: shortdesc}
 
-Le système de reprise automatique effectue diverses vérifications pour obtenir l'état de santé des noeuds worker. Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Un seul noeud worker à la fois fait l'objet d'une mesure corrective. La mesure corrective doit réussir sur le noeud worker pour que d'autre noeuds worker bénéficient d'une mesure corrective. Pour plus d'informations, reportez-vous à cet [article du blogue Autorecovery ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
+Le système de reprise automatique effectue diverses vérifications pour obtenir l'état de santé des noeuds worker. Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Un seul noeud worker à la fois fait l'objet d'une mesure corrective. La mesure corrective doit réussir sur le noeud worker pour que d'autre noeuds worker bénéficient d'une mesure corrective. Pour plus d'informations, reportez-vous à cet [article de blogue sur la reprise automatique ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
 **Remarque** : le système de reprise automatique nécessite qu'au moins un noeud worker soit opérationnel pour fonctionner correctement. Configurez le système de reprise automatique avec des vérifications actives uniquement dans les clusters contenant au moins deux noeuds worker.
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous voulez vérifier les statuts des noeuds worker.
+Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster dans lequel vous voulez vérifier les statuts des noeuds worker.
 
 1. [Installez Helm pour votre cluster et ajoutez le référentiel {{site.data.keyword.Bluemix_notm}} dans votre instance Helm](cs_integrations.html#helm).
 
@@ -852,19 +751,19 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que chaque noeud worker est à l'état <code>Ready</code> (Prêt). La vérification d'un noeud worker spécifique compte comme un échec si ce noeud n'est pas à l'état <code>Ready</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>.<br></br>La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.</td>
+   <td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que chaque noeud worker est à l'état <code>Ready</code> (Prêt). La vérification d'un noeud worker spécifique compte comme un échec si ce noeud n'est pas à l'état <code>Ready</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reload</code>. <br></br>La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou tant que vous ne supprimez pas la vérification.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Définit une vérification de pod d'API Kubernetes qui vérifie le pourcentage total de pods avec l'état <code>NotReady</code> sur un noeud worker par rapport à tous les pods affectés à ce noeud. La vérification d'un noeud worker spécifique compte comme un échec si le pourcentage total de pods à l'état <code>NotReady</code> est supérieur à la valeur définie pour <code>PodFailureThresholdPercent</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>. Par exemple, le pourcentage du seuil d'échecs des pods (<code>PodFailureThresholdPercent</code>) par défaut est 50 %. Si le pourcentage de pods à l'état <code>NotReady</code> est supérieur à 50 % trois fois de suite, le noeud worker est rechargé. <br></br>Par défaut, les pods de tous les espaces de nom sont vérifiés. Pour limiter la vérification aux pods d'un espace de nom spécifié, ajoutez à la vérification la zone <code>Namespace</code>. La vérification de pod est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.
+   Définit une vérification de pod d'API Kubernetes qui vérifie le pourcentage total de pods avec l'état <code>NotReady</code> sur un noeud worker par rapport à tous les pods affectés à ce noeud. La vérification d'un noeud worker spécifique compte comme un échec si le pourcentage total de pods à l'état <code>NotReady</code> est supérieur à la valeur définie pour <code>PodFailureThresholdPercent</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reload</code>. Par exemple, le pourcentage du seuil d'échecs des pods (<code>PodFailureThresholdPercent</code>) par défaut est 50 %. Si le pourcentage de pods à l'état <code>NotReady</code> est supérieur à 50 % trois fois de suite, le noeud worker est rechargé. <br></br>Par défaut, les pods de tous les espaces de nom sont vérifiés. Pour limiter la vérification aux pods d'un espace de nom spécifié, ajoutez à la vérification la zone <code>Namespace</code>. La vérification de pod est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou tant que vous ne supprimez pas la vérification.
    </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>Définit une vérification HTTP qui s'assure qu'un serveur HTTP qui s'exécute sur votre noeud worker est sain. Pour utiliser cette vérification, vous devez déployer un serveur HTTP sur tous les noeuds worker de votre cluster à l'aide d'un [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Vous devez implémenter un diagnostic d'intégrité accessible dans le chemin <code>/myhealth</code> pouvant vérifier si votre serveur HTTP est sain. Vous pouvez définir d'autres chemins en modifiant le paramètre <strong>Route</strong>. Si le serveur HTTP est sain, vous devez renvoyer le code réponse HTTP qui est défini dans le paramètre <strong>ExpectedStatus</strong>. Le serveur HTTP doit être configuré pour être à l'écoute sur l'adresse IP privée du noeud worker. Pour identifier cette adresse, exécutez la commande <code>kubectl get nodes</code>.<br></br>
    Par exemple, considérez deux noeuds dans un cluster avec les adresses IP privées 10.10.10.1 et 10.10.10.2. Dans cet exemple, deux routes sont vérifiées à la recherche d'un code réponse HTTP 200 : <code>http://10.10.10.1:80/myhealth</code> et <code>http://10.10.10.2:80/myhealth</code>.
-   La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est réamorcé. Cette action est équivalente à la commande <code>bx cs worker-reboot</code>.<br></br>La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
+   La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est réamorcé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reboot</code>. <br></br>La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
    </tr>
    </tbody>
    </table>
@@ -944,7 +843,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     ```
     {: pre}
 
-4. Déployez le système de reprise automatiqe sur votre cluster en installant la charte Helm `ibm-worker-recovery`.
+4. Déployez le système de reprise automatique sur votre cluster en installant la charte Helm `ibm-worker-recovery`.
 
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system

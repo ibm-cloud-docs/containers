@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -25,44 +25,13 @@ lastupdated: "2018-05-24"
 {{site.data.keyword.containerlong}}에서 클러스터가 있는 단일 및 확장 가능 그룹에 대해 사용한 이미지 레지스트리에 대한 만료되지 않는 토큰을 작성합니다.
 {:shortdesc}
 
-1.  {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 로그인하십시오.
-
+1.  현재 세션에 대한 영구 레지스트리 토큰을 요청하십시오. 이 토큰은 현재 네임스페이스의 이미지에 대한 액세스 권한을 부여합니다.
     ```
-    bx login -a api.<dedicated_domain>
-    ```
-    {: pre}
-
-2.  현재 세션에 대한 `oauth-token`을 요청하고 이를 변수로서 저장하십시오.
-
-    ```
-    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    ibmcloud cr token-add --description "<description>" --non-expiring -q
     ```
     {: pre}
 
-3.  현재 세션에 대한 조직의 ID를 요청하고 이를 변수로 저장하십시오.
-
-    ```
-    ORG_GUID=`bx iam org <org_name> --guid`
-    ```
-    {: pre}
-
-4.  현재 세션에 대한 영구 레지스트리 토큰을 요청하십시오. `<dedicated_domain>`을 {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 대한 도메인으로 대체하십시오. 이 토큰은 현재 네임스페이스의 이미지에 대한 액세스 권한을 부여합니다.
-
-    ```
-    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
-    ```
-    {: pre}
-
-    출력:
-
-    ```
-    {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
-    }
-    ```
-    {: screen}
-
-5.  Kubernetes 시크릿을 확인하십시오.
+2.  Kubernetes 시크릿을 확인하십시오.
 
     ```
     kubectl describe secrets
@@ -71,7 +40,7 @@ lastupdated: "2018-05-24"
 
     이 시크릿을 사용하여 {{site.data.keyword.containerlong}}에 대해 작업할 수 있습니다.
 
-6.  토큰 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
+3.  토큰 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -110,7 +79,7 @@ lastupdated: "2018-05-24"
     </tr>
     </tbody></table>
 
-7.  imagePullSecret을 참조하는 팟(Pod)을 작성하십시오.
+4.  imagePullSecret을 참조하는 팟(Pod)을 작성하십시오.
 
     1.  선호하는 텍스트 편집기를 열고 mypod.yaml이라는 이름의 팟(Pod) 구성 스크립트를 작성하십시오.
     2.  레지스트리에 액세스하기 위해 사용할 imagePullSecret 및 팟(Pod)을 정의하십시오. 네임스페이스에서 개인용 이미지를 사용하려면 다음을 작성하십시오.
@@ -123,7 +92,7 @@ lastupdated: "2018-05-24"
         spec:
           containers:
             - name: <container_name>
-              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>  
+              image: registry.<dedicated_domain>/<my_namespace>/<my_image>:<tag>
           imagePullSecrets:
             - name: <secret_name>
         ```
@@ -145,10 +114,10 @@ lastupdated: "2018-05-24"
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `bx cr namespace-list`를 실행하십시오.</td>
+        <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오. </td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 <code>bx cr image-list</code>을 실행하십시오.</td>
+        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 <code>ibmcloud cr image-list</code>를 실행하십시오. </td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
@@ -168,4 +137,3 @@ lastupdated: "2018-05-24"
           kubectl apply -f mypod.yaml
           ```
           {: pre}
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2018-05-24"
 
 
 ## 애플리케이션 서비스
+{: #application_services}
 <table summary="접근성 요약">
 <caption>애플리케이션 서비스</caption>
 <thead>
@@ -48,6 +49,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 
 ## DevOps 서비스
+{: #devops_services}
 <table summary="접근성 요약">
 <caption>DevOps 서비스</caption>
 <thead>
@@ -63,7 +65,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 새 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다. <p>자세한 정보는 [{{site.data.keyword.containershort_notm}}에서 Helm 설정](cs_integrations.html#helm)을 참조하십시오.</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 새 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다. <p>자세한 정보는 [{{site.data.keyword.containershort_notm}}에서 Helm 설정](cs_integrations.html#helm)을 참조하십시오.</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -81,6 +83,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 
 ## 서비스 로깅 및 모니터링
+{: #health_services}
 <table summary="접근성 요약">
 <caption>서비스 로깅 및 모니터링</caption>
 <thead>
@@ -97,6 +100,10 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 <tr>
 <td>Datadog</td>
 <td><a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클러스터를 모니터하고 인프라 및 애플리케이션 성능 메트릭을 봅니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Datadog를 사용하여 {{site.data.keyword.containershort_notm}} 모니터링 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
+</tr>
+<tr>
+<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Grafana를 통해 로그를 분석하여 클러스터에서 작성된 관리 활동을 모니터합니다. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker/index.html) 문서를 참조하십시오. 추적할 수 있는 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](/cs_at_events.html)를 참조하십시오. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -138,6 +145,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 
 ## 보안 서비스
+{: #security_services}
 <table summary="접근성 요약">
 <caption>보안 서비스</caption>
 <thead>
@@ -153,7 +161,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>를 보완하여 <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하면 앱에서 수행하도록 허용되는 항목을 줄여서 컨테이너 배치의 보안을 향상시킬 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Aqua Security를 사용하여 {{site.data.keyword.Bluemix_notm}}의 컨테이너 배치 보호 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+  <td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>를 보완하여 <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하면 앱에서 수행하도록 허용되는 항목을 줄여서 컨테이너 배치의 보안을 향상시킬 수 있습니다. 자세한 정보는 <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Aqua Security를 사용하여 {{site.data.keyword.Bluemix_notm}}에서 컨테이너 배치 보호 <img src="../icons/launch-glyph.svg" alt="외부링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -179,6 +187,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 
 ## 스토리지 서비스
+{: #storage_services}
 <table summary="접근성 요약">
 <caption>스토리지 서비스</caption>
 <thead>
@@ -220,9 +229,9 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 시작하기 전에:
 
-1. 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+1. 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 2. [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/apps/reqnsi.html#req_instance)하십시오.
-   **참고:** 워싱턴 DC 위치에 서비스 인스턴스를 작성하려면 CLI를 사용해야 합니다.
+   **참고:** 워싱턴 DC 구역에서 서비스의 인스턴스를 작성하려면 CLI를 사용해야 합니다. 
 3. Cloud Foundry 서비스는 클러스터와 바인딩하는 데 지원되지만 기타 서비스는 지원되지 않습니다. 서비스 인스턴스를 작성하고 서비스가 **Cloud Foundry 서비스** 및 **서비스**로 대시보드에 그룹화된 후 다른 서비스 유형을 볼 수 있습니다. **서비스** 섹션의 서비스를 클러스터와 바인딩하려면 [먼저 Cloud Foundry 별명을 작성](#adding_resource_cluster)하십시오.
 
 **참고:**
@@ -236,7 +245,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 2.  사용 가능한 {{site.data.keyword.Bluemix_notm}} 서비스를 나열하십시오.
 
     ```
-     bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -267,17 +276,17 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 5.  서비스를 클러스터에 추가하십시오.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     서비스가 클러스터에 정상적으로 추가되면 서비스 인스턴스의 신임 정보를 보유하는 클러스터 시크릿이 작성됩니다. CLI 출력 예:
 
     ```
-    bx cs cluster-service-bind mycluster mynamespace cleardb 
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mynamespace
+    Namespace:	mynamespace
     Secret name:     binding-<service_instance_name>
     ```
     {: screen}
@@ -289,7 +298,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
     ```
     {: pre}
 
-팟(Pod)에서 클러스터에 배치된 서비스를 사용하려면 클러스터 사용자가 서비스 신임 정보에 액세스해야 합니다. 사용자는 [Kubernetes 시크릿을 시크릿 볼륨으로 팟(Pod)에 마운트하여](#adding_app) {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 신임 정보에 액세스할 수 있습니다.
+팟(Pod)에서 클러스터에 배치된 서비스를 사용하려면 클러스터 사용자가 서비스 신임 정보에 액세스해야 합니다. 사용자는 [Kubernetes 시크릿을 시크릿 볼륨으로 팟(Pod)에 마운트](#adding_app)하여 {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 신임 정보에 액세스할 수 있습니다.
 
 <br />
 
@@ -297,7 +306,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 ## 기타 {{site.data.keyword.Bluemix_notm}} 서비스 리소스에 대한 Cloud Foundry 별명 작성
 {: #adding_resource_cluster}
 
-Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니다. Cloud Foundry 서비스가 아닌 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인딩하려면 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하십시오.
+Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니다. 서비스 인스턴스를 작성하고 서비스가 **Cloud Foundry 서비스** 및 **서비스**로 대시보드에 그룹화된 후 다른 서비스 유형을 볼 수 있습니다. Cloud Foundry 서비스가 아닌 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인딩하려면 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하십시오.
 {:shortdesc}
 
 시작하기 전에 [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/apps/reqnsi.html#req_instance)하십시오.
@@ -307,26 +316,26 @@ Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니�
 1. 서비스 인스턴스가 작성된 조직 및 영역을 대상으로 지정하십시오.
 
     ```
-    bx target -o <org_name> -s <space_name>
+    ibmcloud target -o <org_name> -s <space_name>
     ```
     {: pre}
 
 2. 서비스 인스턴스 이름을 기록해 두십시오.
     ```
-    bx resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하십시오.
     ```
-    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
     ```
     {: pre}
 
 4. 서비스 별명이 작성되었는지 확인하십시오.
 
     ```
-     bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -347,7 +356,7 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 
 시크릿 볼륨을 팟(Pod)에 마운트하면 `binding`이라는 파일이 볼륨 마운트 디렉토리에 저장됩니다. `binding` 파일에는 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하는 데 필요한 모든 정보와 신임 정보가 포함되어 있습니다.
 
-시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 앱에서 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터 관리자가 [클러스터에 추가](cs_integrations.html#adding_cluster)하게 하십시오.
+시작하기 전에 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 앱에서 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터 관리자가 [클러스터에 추가](cs_integrations.html#adding_cluster)하게 하십시오.
 
 1.  클러스터 네임스페이스에서 사용 가능한 시크릿을 나열하십시오.
 
@@ -359,8 +368,8 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     출력 예:
 
     ```
-    NAME                                    TYPE                                  DATA      AGE
-    binding-<service_instance_name>         Opaque                                1         3m
+    NAME                              TYPE            DATA      AGE
+    binding-<service_instance_name>   Opaque          1         3m
 
     ```
     {: screen}
@@ -480,21 +489,20 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 ## {{site.data.keyword.containershort_notm}}에서 Helm 설정
 {: #helm}
 
-[Helm ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://helm.sh/)은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다.
+[Helm ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://helm.sh)은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다.
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}}에 Helm 차트를 사용하려면 먼저 클러스터에 Helm 인스턴스를 설치하고 초기화해야 합니다. 그런 다음, {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가할 수 있습니다.
 
-시작하기 전에 Helm 차트를 사용할 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+시작하기 전에 Helm 차트를 사용할 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
-2. **중요**: 클러스터 보안을 유지하려면 `kube-system` 네임스페이스에 tiller에 대한 서비스 계정을 작성하고 `tiller-deploy` 팟(Pod)에 대한 Kubernetes RBAC 클러스터 역할 바인딩을 작성하십시오.
+2. **중요**: 클러스터 보안을 유지하려면 `kube-system` 네임스페이스에 Tiller에 대한 서비스 계정을 작성하고 `tiller-deploy` 팟(Pod)에 대한 Kubernetes RBAC 클러스터 역할 바인딩을 작성하십시오.
 
     1. 선호하는 편집기에서 다음 파일을 작성하고 `rbac-config.yaml`로 저장하십시오.
       **참고**:
-        * `cluster-admin` 클러스터 역할은 Kubernetes 클러스터에서 기본적으로 작성되므로 이를 명시적으로 정의할 필요는 없습니다.
-        * 버전 1.7.x 클러스터를 사용하고 있는 경우에는 `apiVersion`을 `rbac.authorization.k8s.io/v1beta1`로 변경하십시오.
+        * `kube-system` 네임스페이스에서 서비스 계정 및 클러스터 역할 바인딩을 사용하여 Tiller를 설치하려면 [`cluster-admin` 역할](cs_users.html#access_policies)이 있어야 합니다. `kube-system` 이외의 네임스페이스를 선택할 수 있지만, 모든 IBM Helm 차트가 `kube-system`에 설치되어 있어야 합니다. `helm` 명령을 실행할 때마다 `tiller-namespace <namespace>` 플래그를 사용하여 Tiller가 설치된 기타 네임스페이스를 지시해야 합니다. 
 
       ```
       apiVersion: v1
@@ -535,7 +543,7 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 4. `tiller-deploy` 팟(Pod)이 클러스터에서 `Running` **상태**인지 확인하십시오.
 
     ```
-        kubectl get pods -n kube-system -l app=helm
+    kubectl get pods -n kube-system -l app=helm
     ```
     {: pre}
 
@@ -644,7 +652,7 @@ Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스 등을 포함하�
 
     ```
     Forwarding from 127.0.0.1:4040 -> 4040
-    Forwarding from [::1]:4040 -> 4040
+    Forwarding from [::1]: :1]:4040 -> 4040
     Handling connection for 4040
     ```
     {: screen}

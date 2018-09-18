@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -64,9 +64,9 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
   <tr>
     <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
       <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:
-      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code>.</li>
+      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner des Clusters zu ermitteln: <code>ibmcloud ks api-key-info &lt;clustername_oder_-id&gt;</code>.</li>
       <li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html">Clusterzugriff verwalten</a>.</li>
-      <li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
+      <li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>ibmcloud ks logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Sie haben eine Anwendungsprotokollierungskonfiguration mit einer symbolischen Verbindung in Ihrem App-Pfad.</td>
@@ -155,5 +155,5 @@ finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-
 -   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

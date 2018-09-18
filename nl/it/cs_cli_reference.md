@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-09"
 
 ---
 
@@ -25,18 +25,18 @@ lastupdated: "2018-05-24"
 Fai riferimento a questi comandi per creare e gestire i cluster Kubernetes in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-Per installare il plug-in della CLI, vedi [Installazione della CLI](cs_cli_install.html#cs_cli_install_steps).
+Per installare il plugin della CLI, vedi [Installazione della CLI](cs_cli_install.html#cs_cli_install_steps).
 
-Cerchi i comandi `bx cr`? Consulta i riferimenti CLI [{{site.data.keyword.registryshort_notm}} ](/docs/cli/plugins/registry/index.html). Stai cercando i comandi `kubectl`? Consulta la [Documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Cerchi i comandi `ibmcloud cr`? Consulta i riferimenti CLI [{{site.data.keyword.registryshort_notm}} ](/docs/cli/plugins/registry/index.html). Stai cercando i comandi `kubectl`? Consulta la [Documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
-## Comandi bx cs
+## Comandi ibmcloud ks
 {: #cs_commands}
 
 **Suggerimento:** per visualizzare la versione del plugin {{site.data.keyword.containershort_notm}}, esegui il seguente comando.
 
 ```
-bx plugin list
+ibmcloud plugin list
 ```
 {: pre}
 
@@ -52,15 +52,15 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs api](#cs_api)</td>
-    <td>[bx cs api-key-info](#cs_api_key_info)</td>
-    <td>[bx cs api-key-reset](#cs_api_key_reset)</td>
-    <td>[bx cs apiserver-config-get](#cs_apiserver_config_get)</td>
+    <td>[ibmcloud ks api](#cs_api)</td>
+    <td>[ibmcloud ks api-key-info](#cs_api_key_info)</td>
+    <td>[ibmcloud ks api-key-reset](#cs_api_key_reset)</td>
+    <td>[ibmcloud ks apiserver-config-get](#cs_apiserver_config_get)</td>
   </tr>
   <tr>
-    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
-    <td>[bx cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
-    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td>[ibmcloud ks apiserver-config-set](#cs_apiserver_config_set)</td>
+    <td>[ibmcloud ks apiserver-config-unset](#cs_apiserver_config_unset)</td>
+    <td>[ibmcloud ks apiserver-refresh](#cs_apiserver_refresh)</td>
     <td></td>
  </tr>
 </tbody>
@@ -78,11 +78,9 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[  bx cs help
-  ](#cs_help)</td>
-    <td>[        bx cs init
-        ](#cs_init)</td>
-    <td>[bx cs messages](#cs_messages)</td>
+    <td>[ibmcloud ks help](#cs_help)</td>
+    <td>[ibmcloud ks init](#cs_init)</td>
+    <td>[ibmcloud ks messages](#cs_messages)</td>
     <td></td>
   </tr>
 </tbody>
@@ -100,17 +98,16 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs cluster-config](#cs_cluster_config)</td>
-    <td>[bx cs cluster-create](#cs_cluster_create)</td>
-    <td>[bx cs cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[bx cs cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
+    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
+    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
+    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
-    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
-    <td>[bx cs cluster-update](#cs_cluster_update)</td>
-    <td>[      bx cs clusters
-      ](#cs_clusters)</td>
-    <td>[bx cs kube-versions](#cs_kube_versions)</td>
+    <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
+    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+    <td>[ibmcloud ks clusters](#cs_clusters)</td>
+    <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
   </tr>
 </tbody>
 </table>
@@ -127,10 +124,13 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
-    <td>[bx cs cluster-services](#cs_cluster_services)</td>
-    <td>[bx cs webhook-create](#cs_webhook_create)</td>
+    <td>[ibmcloud ks cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[ibmcloud ks cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[ibmcloud ks cluster-services](#cs_cluster_services)</td>
+    <td>[ibmcloud ks va](#cs_va)</td>
+  </tr>
+    <td>[ibmcloud ks webhook-create](#cs_webhook_create)</td>
+  <tr>
   </tr>
 </tbody>
 </table>
@@ -147,14 +147,13 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+    <td>[ibmcloud ks cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[ibmcloud ks cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[ibmcloud ks cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[ibmcloud ks cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
   </tr>
   <tr>
-    <td>[    bx cs subnets
-    ](#cs_subnets)</td>
+    <td>[ibmcloud ks subnets](#cs_subnets)</td>
     <td></td>
     <td></td>
     <td></td>
@@ -174,11 +173,10 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs credentials-set](#cs_credentials_set)</td>
-    <td>[  bx cs credentials-unset
-  ](#cs_credentials_unset)</td>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
-    <td>[bx cs vlans](#cs_vlans)</td>
+    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
+    <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
 </tbody>
 </table>
@@ -197,16 +195,16 @@ bx plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
-      <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
-      <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
-      <td>[bx cs alb-certs](#cs_alb_certs)</td>
+      <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
+      <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
+      <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
+      <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
     </tr>
     <tr>
-      <td>[bx cs alb-configure](#cs_alb_configure)</td>
-      <td>[bx cs alb-get](#cs_alb_get)</td>
-      <td>[bx cs alb-types](#cs_alb_types)</td>
-      <td>[bx cs albs](#cs_albs)</td>
+      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
+      <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
+      <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
+      <td>[ibmcloud ks albs](#cs_albs)</td>
     </tr>
   </tbody>
 </table>
@@ -225,22 +223,22 @@ bx plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[bx cs logging-config-create](#cs_logging_create)</td>
-      <td>[bx cs logging-config-get](#cs_logging_get)</td>
-      <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
-      <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
+      <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
+      <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
+      <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
     </tr>
     <tr>
-      <td>[bx cs logging-config-update](#cs_logging_update)</td>
-      <td>[bx cs logging-filter-create](#cs_log_filter_create)</td>
-      <td>[bx cs logging-filter-update](#cs_log_filter_update)</td>
-      <td>[bx cs logging-filter-get](#cs_log_filter_view)</td>
+      <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
+      <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
+      <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
+      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
     </tr>
     <tr>
-      <td>[bx cs logging-filter-rm](#cs_log_filter_delete)</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
+      <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
+      <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
+      <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
     </tr>
   </tbody>
 </table>
@@ -257,11 +255,10 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[  bx cs locations
-  ](#cs_datacenters)</td>
-    <td>[bx cs region](#cs_region)</td>
-    <td>[bx cs region-set](#cs_region-set)</td>
-    <td>[bx cs regions](#cs_regions)</td>
+    <td>[ibmcloud ks zones](#cs_datacenters)</td>
+    <td>[ibmcloud ks region](#cs_region)</td>
+    <td>[ibmcloud ks region-set](#cs_region-set)</td>
+    <td>[ibmcloud ks regions](#cs_regions)</td>
   </tr>
 </tbody>
 </table>
@@ -278,16 +275,50 @@ bx plugin list
  </thead>
  <tbody>
     <tr>
-      <td>[bx cs worker-add](#cs_worker_add)</td>
-      <td>[bx cs worker-get](#cs_worker_get)</td>
-      <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
-      <td>[bx cs worker-reload](#cs_worker_reload)</td></staging>
+      <td>Obsoleto: [ibmcloud ks worker-add](#cs_worker_add)</td>
+      <td>[ibmcloud ks worker-get](#cs_worker_get)</td>
+      <td>[ibmcloud ks worker-reboot](#cs_worker_reboot)</td>
+      <td>[ibmcloud ks worker-reload](#cs_worker_reload)</td>
     </tr>
     <tr>
-      <td>[bx cs worker-rm](#cs_worker_rm)</td>
-      <td>[bx cs worker-update](#cs_worker_update)</td>
-      <td>[bx cs workers](#cs_workers)</td>
-      <td></td>
+      <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
+      <td>[ibmcloud ks worker-update](#cs_worker_update)</td>
+      <td>[ibmcloud ks workers](#cs_workers)</td>
+      <td>[ibmcloud ks worker-get](#cs_worker_get)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks worker-reboot](#cs_worker_reboot)</td>
+      <td>[ibmcloud ks worker-reload](#cs_worker_reload)</td>
+      <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
+      <td>[ibmcloud ks workers](#cs_workers)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table summary="Tabella comandi pool di lavoro">
+<caption>Comandi pool di lavoro</caption>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi pool di lavoro</th>
+ </thead>
+ <tbody>
+    <tr>
+      <td>[ibmcloud ks worker-pool-create](#cs_worker_pool_create)</td>
+      <td>[ibmcloud ks worker-pool-get](#cs_worker_pool_get)</td>
+      <td>[ibmcloud ks worker-pool-rebalance](#cs_rebalance)</td>
+      <td>[ibmcloud ks worker-pool-resize](#cs_worker_pool_resize)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks worker-pool-rm](#cs_worker_pool_rm)</td>
+      <td>[ibmcloud ks worker-pools](#cs_worker_pools)</td>
+      <td>[ibmcloud ks zone-add](#cs_zone_add)</td>
+      <td>[ibmcloud ks zone-network-set](#cs_zone_network_set)</td>
+    </tr>
+    <tr>
+     <td>[ibmcloud ks zone-rm](#cs_zone_rm)</td>
+     <td></td>
     </tr>
   </tbody>
 </table>
@@ -295,18 +326,18 @@ bx plugin list
 ## Comandi API
 {: #api_commands}
 
-### bx cs api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
+### ibmcloud ks api --endpoint ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
 Specifica l'endpoint API per {{site.data.keyword.containershort_notm}}. Se non specifichi un endpoint, puoi visualizzare le informazioni sull'endpoint corrente che viene specificato.
 
-Cambio di regioni? Utilizza invece il comando `bx cs region-set` [](#cs_region-set).
+Cambio di regioni? Utilizza invece il comando `ibmcloud ks region-set` [](#cs_region-set).
 {: tip}
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>ENDPOINT</em></code></dt>
+   <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
    <dd>L'endpoint API {{site.data.keyword.containershort_notm}}. Tieni presente che questo endpoint è diverso dagli endpoint {{site.data.keyword.Bluemix_notm}}. Questo valore è obbligatorio per configurare l'endpoint API. I valori accettati sono:<ul>
    <li>Endpoint globale: https://containers.bluemix.net</li>
    <li>Endpoint Asia Pacifico Nord: https://ap-north.containers.bluemix.net</li>
@@ -333,7 +364,7 @@ Cambio di regioni? Utilizza invece il comando `bx cs region-set` [](#cs_region-s
 
 **Esempio**: visualizza le informazioni sull'endpoint API corrente che viene specificato.
 ```
-bx cs api
+ibmcloud ks api
 ```
 {: pre}
 
@@ -346,7 +377,7 @@ Region:                us-south
 {: screen}
 
 
-### bx cs api-key-info CLUSTER [--json][-s]
+### ibmcloud ks api-key-info --cluster CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
 Visualizza il nome e l'indirizzo e-mail del proprietario della chiave API IAM in una regione {{site.data.keyword.containershort_notm}}.
@@ -355,14 +386,14 @@ La chiave API IAM (Identity and Access Management) viene impostata automaticamen
 
 Quando un altro utente esegue un'azione in questa regione che richiede l'interazione con il portfolio dell'infrastruttura IBM Cloud (SoftLayer), come la creazione di un nuovo cluster o il ricaricamento di un nodo di lavoro, la chiave API memorizzata viene utilizzata per determinare se esistono autorizzazioni sufficienti per eseguire tale azione. Per garantire che le azioni relative all'infrastruttura nel tuo cluster possano essere eseguite correttamente, assegna ai tuoi utenti amministratore {{site.data.keyword.containershort_notm}} la politica di accesso all'infrastruttura **Super utente**. Per ulteriori informazioni, vedi [Gestione dell'accesso utente](cs_users.html#infra_access).
 
-Se ritieni di dover aggiornare la chiave API memorizzata per una regione, puoi farlo eseguendo il comando [bx cs api-key-reset](#cs_api_key_reset). Questo comando richiede la politica di accesso come amministratore {{site.data.keyword.containershort_notm}} e memorizza la chiave API dell'utente che esegue questo comando nell'account.
+Se ritieni di dover aggiornare la chiave API memorizzata per una regione, puoi farlo eseguendo il comando [ibmcloud ks api-key-reset](#cs_api_key_reset). Questo comando richiede la politica di accesso come amministratore {{site.data.keyword.containershort_notm}} e memorizza la chiave API dell'utente che esegue questo comando nell'account.
 
-**Suggerimento:** la chiave API restituita in questo comando potrebbe non essere utilizzata se le credenziali dell'infrastruttura IBM Cloud (SoftLayer) sono state impostate manualmente utilizzando il comando [bx cs credentials-set](#cs_credentials_set).
+**Suggerimento:** la chiave API restituita in questo comando potrebbe non essere utilizzata se le credenziali dell'infrastruttura IBM Cloud (SoftLayer) sono state impostate manualmente utilizzando il comando [ibmcloud ks credentials-set](#cs_credentials_set).
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--json</code></dt>
@@ -376,17 +407,17 @@ Se ritieni di dover aggiornare la chiave API memorizzata per una regione, puoi f
 **Esempio**:
 
   ```
-  bx cs api-key-info my_cluster
+  ibmcloud ks api-key-info --cluster my_cluster
   ```
   {: pre}
 
 
-### bx cs api-key-reset [-s]
+### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
 Sostituisci la chiave API IAM corrente in una regione {{site.data.keyword.containershort_notm}}.
 
-Questo comando richiede la politica di accesso come amministratore {{site.data.keyword.containershort_notm}} e memorizza la chiave API dell'utente che esegue questo comando nell'account. La chiave API IAM è necessaria per ordinare l'infrastruttura dal portfolio dell'infrastruttura IBM Cloud (SoftLayer). Una volta memorizzata, la chiave API viene utilizzata per ogni azione in una regione che richiede autorizzazioni di infrastruttura indipendenti dall'utente che esegue questo comando. Per ulteriori informazioni su come funzionano le chiavi API IAM, vedi il [comando `bx cs api-key-info`](#cs_api_key_info).
+Questo comando richiede la politica di accesso come amministratore {{site.data.keyword.containershort_notm}} e memorizza la chiave API dell'utente che esegue questo comando nell'account. La chiave API IAM è necessaria per ordinare l'infrastruttura dal portfolio dell'infrastruttura IBM Cloud (SoftLayer). Una volta memorizzata, la chiave API viene utilizzata per ogni azione in una regione che richiede autorizzazioni di infrastruttura indipendenti dall'utente che esegue questo comando. Per ulteriori informazioni su come funzionano le chiavi API IAM, vedi il [comando `ibmcloud ks api-key-info`](#cs_api_key_info).
 
 **Importante:** prima di utilizzare questo comando, assicurati che l'utente che lo esegue abbia le [autorizzazioni necessarie per {{site.data.keyword.containershort_notm}} e l'infrastruttura IBM Cloud (SoftLayer)](cs_users.html#users).
 
@@ -401,17 +432,17 @@ Questo comando richiede la politica di accesso come amministratore {{site.data.k
 **Esempio**:
 
   ```
-  bx cs api-key-reset
+  ibmcloud ks api-key-reset
   ```
   {: pre}
 
 
-### bx cs apiserver-config-get
+### ibmcloud ks apiserver-config-get
 {: #cs_apiserver_config_get}
 
 Ottieni le informazioni su un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione per cui vuoi le informazioni.
 
-#### bx cs apiserver-config-get audit-webhook CLUSTER
+#### ibmcloud ks apiserver-config-get audit-webhook --cluster CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
 Visualizza l'URL del servizio di registrazione remoto a cui stai inviando i log di controllo del server API. L'URL è stato specificato quando hai creato il backend webhook per la configurazione del server API.
@@ -419,23 +450,23 @@ Visualizza l'URL del servizio di registrazione remoto a cui stai inviando i log 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs apiserver-config-get audit-webhook my_cluster
+  ibmcloud ks apiserver-config-get audit-webhook --cluster my_cluster
   ```
   {: pre}
 
-### bx cs apiserver-config-set
+### ibmcloud ks apiserver-config-set
 {: #cs_apiserver_config_set}
 
 Imposta un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione che vuoi impostare.
 
-#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+#### ibmcloud ks apiserver-config-set audit-webhook --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 Imposta il backend webhook per la configurazione del server API. Il backend webhook inoltra i log di controllo del server API a un server remoto. Una configurazione webhook viene creata in base alle informazioni che fornisci negli indicatori di questo comando. Se non fornisci alcuna informazione negli indicatori, viene utilizzata una configurazione webhook predefinita.
@@ -443,7 +474,7 @@ Imposta il backend webhook per la configurazione del server API. Il backend webh
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
@@ -462,17 +493,17 @@ Imposta il backend webhook per la configurazione del server API. Il backend webh
 **Esempio**:
 
   ```
-  bx cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
+  ibmcloud ks apiserver-config-set audit-webhook --cluster my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
   ```
   {: pre}
 
 
-### bx cs apiserver-config-unset
+### ibmcloud ks apiserver-config-unset
 {: #cs_apiserver_config_unset}
 
 Disabilita un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione che vuoi disabilitare.
 
-#### bx cs apiserver-config-unset audit-webhook CLUSTER
+#### ibmcloud ks apiserver-config-unset audit-webhook --cluster CLUSTER
 {: #cs_apiserver_api_webhook_unset}
 
 Disabilita la configurazione backend webhook per il server API del cluster. La disabilitazione del backend webhook arresta l'inoltro dei log di controllo del server API a un server remoto.
@@ -480,18 +511,18 @@ Disabilita la configurazione backend webhook per il server API del cluster. La d
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs apiserver-config-unset audit-webhook my_cluster
+  ibmcloud ks apiserver-config-unset audit-webhook --cluster my_cluster
   ```
   {: pre}
 
-### bx cs apiserver-refresh CLUSTER [-s]
+### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
 Riavvia il master Kubernetes nel cluster per applicare le modifiche alla configurazione del server API.
@@ -499,7 +530,7 @@ Riavvia il master Kubernetes nel cluster per applicare le modifiche alla configu
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>-s</code></dt>
@@ -510,7 +541,7 @@ Riavvia il master Kubernetes nel cluster per applicare le modifiche alla configu
 **Esempio**:
 
   ```
-  bx cs apiserver-refresh my_cluster
+  ibmcloud ks apiserver-refresh --cluster my_cluster
   ```
   {: pre}
 
@@ -521,7 +552,7 @@ Riavvia il master Kubernetes nel cluster per applicare le modifiche alla configu
 ## Comandi utilizzo plugin CLI
 {: #cli_plug-in_commands}
 
-### bx cs help
+### ibmcloud ks help
 {: #cs_help}
 
 Visualizzare un elenco di comandi e parametri supportati.
@@ -533,12 +564,12 @@ Visualizzare un elenco di comandi e parametri supportati.
 **Esempio**:
 
   ```
-  bx cs help
+  ibmcloud ks help
   ```
   {: pre}
 
 
-### bx cs init [--host HOST][--insecure] [-p][-u] [-s]
+### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
 Inizializza il plugin {{site.data.keyword.containershort_notm}} o specificare la regione in cui desideri creare o accedere ai cluster Kubernetes.
@@ -567,12 +598,12 @@ Inizializza il plugin {{site.data.keyword.containershort_notm}} o specificare la
 
 
 ```
-bx cs init --host https://uk-south.containers.bluemix.net
+ibmcloud ks init --host https://uk-south.containers.bluemix.net
 ```
 {: pre}
 
 
-### bx cs messages
+### ibmcloud ks messages
 {: #cs_messages}
 
 Visualizza i messaggi correnti dell'utente ID IBM.
@@ -580,7 +611,7 @@ Visualizza i messaggi correnti dell'utente ID IBM.
 **Esempio**:
 
 ```
-bx cs messages
+ibmcloud ks messages
 ```
 {: pre}
 
@@ -592,7 +623,7 @@ bx cs messages
 {: #cluster_mgmt_commands}
 
 
-### bx cs cluster-config CLUSTER [--admin][--export] [-s][--yaml]
+### ibmcloud ks cluster-config --cluster CLUSTER [--admin][--export] [-s][--yaml]
 {: #cs_cluster_config}
 
 Dopo aver eseguito l'accesso, scarica i certificati e i dati di configurazione Kubernetes per collegare il tuo cluster ed eseguire i comandi `kubectl`. I file vengono scaricati in `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
@@ -600,7 +631,7 @@ Dopo aver eseguito l'accesso, scarica i certificati e i dati di configurazione K
 **Opzioni comando**:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--admin</code></dt>
@@ -620,15 +651,15 @@ Dopo aver eseguito l'accesso, scarica i certificati e i dati di configurazione K
 **Esempio**:
 
 ```
-bx cs cluster-config my_cluster
+ibmcloud ks cluster-config --cluster my_cluster
 ```
 {: pre}
 
 
-### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt] [--trusted][-s]
+### ibmcloud ks cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt] [--trusted][-s]
 {: #cs_cluster_create}
 
-Crea un cluster nella tua organizzazione. Per i cluster gratuiti, specifica il nome del cluster; tutto il resto è impostato su un valore predefinito. Un cluster gratuito viene cancellato automaticamente dopo 21 giorni. Puoi avere un solo cluster gratuito alla volta. Per sfruttare tutte le funzionalità di Kubernetes, crea un cluster standard.
+Crea un cluster nella tua organizzazione. Per i cluster gratuiti, specifica il nome del cluster; tutto il resto è impostato su un valore predefinito. Un cluster gratuito viene cancellato automaticamente dopo 30 giorni. Puoi avere un solo cluster gratuito alla volta. Per sfruttare tutte le funzionalità di Kubernetes, crea un cluster standard.
 
 <strong>Opzioni comando</strong>
 
@@ -637,11 +668,11 @@ Crea un cluster nella tua organizzazione. Per i cluster gratuiti, specifica il n
 
 <dd>Il percorso del file YAML per creare il tuo cluster standard. Invece di definire le caratteristiche del cluster utilizzando le opzioni fornite in questo comando, puoi utilizzare un file YAML.  Questo valore è facoltativo per i cluster standard e non è disponibile per i cluster gratuiti.
 
-<p><strong>Nota:</strong> se fornisci la stessa opzione nel comando come parametro nel file YAML, il valore nel comando ha la precedenza rispetto al valore nel YAML. Ad esempio, definisci un'ubicazione nel tuo file YAML e utilizzi l'opzione <code>--location</code> nel comando, il valore che hai immesso nell'opzione del comando sovrascrive il valore nel file YAML.
+<p><strong>Nota:</strong> se fornisci la stessa opzione nel comando come parametro nel file YAML, il valore nel comando ha la precedenza rispetto al valore nel YAML. Ad esempio, definisci un'ubicazione nel tuo file YAML e utilizzi l'opzione <code>--zone</code> nel comando, il valore che hai immesso nell'opzione del comando sovrascrive il valore nel file YAML.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
-location: <em>&lt;location&gt;</em>
+zone: <em>&lt;zone&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_VLAN&gt;</em>
@@ -666,8 +697,8 @@ trusted: <em>true</em>
 </td>
     </tr>
     <tr>
-    <td><code><em>location</em></code></td>
-    <td>Sostituisci <code><em>&lt;location&gt;</em></code> con l'ubicazione in cui vuoi creare il tuo cluster. Le ubicazioni disponibili dipendono dalla regione in cui ha eseguito l'accesso. Per elencare le ubicazioni disponibili, esegui <code>bx cs locations</code>. </td>
+    <td><code><em>zone</em></code></td>
+    <td>Sostituisci <code><em>&lt;zone&gt;</em></code> con la zona in cui vuoi creare il tuo cluster. Le zone disponibili dipendono dalla regione a cui hai eseguito l'accesso. Per elencare le zone disponibili, esegui <code>ibmcloud ks zones</code>. </td>
      </tr>
      <tr>
      <td><code><em>no-subnet</em></code></td>
@@ -675,15 +706,15 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
+     <td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-type`.</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>Sostituisci <code><em>&lt;private_VLAN&gt;</em></code> con l'ID della VLAN privata che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code> e ricerca i router VLAN che iniziano con <code>bcr</code> (router di back-end).</td>
+     <td>Sostituisci <code><em>&lt;private_VLAN&gt;</em></code> con l'ID della VLAN privata che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> e ricerca i router VLAN che iniziano con <code>bcr</code> (router di back-end).</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>Sostituisci <code><em>&lt;public_VLAN&gt;</em></code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end).</td>
+     <td>Sostituisci <code><em>&lt;public_VLAN&gt;</em></code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end).</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
@@ -696,41 +727,38 @@ trusted: <em>true</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.
+      <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili, esegui <code>ibmcloud ks kube-versions</code>.
 </td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
+      <td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disk). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**Solo bare metal**: abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td></tr>
+      <td>**Solo bare metal**: abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td></tr>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>Il livello di isolamento hardware per il nodo di lavoro. Utilizza dedicato per avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso.  Questo valore è facoltativo per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
 
-<dt><code>--location <em>LOCATION</em></code></dt>
-<dd>L'ubicazione in cui vuoi creare il cluster. Le ubicazioni disponibili
-dipendono dalla regione {{site.data.keyword.Bluemix_notm}} in cui hai
-eseguito l'accesso. Per
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>La zona in cui vuoi creare il cluster. Le zone disponibili dipendono dalla regione {{site.data.keyword.Bluemix_notm}} a cui hai eseguito l'accesso. Per
 prestazioni ottimali, seleziona la regione fisicamente più vicina a te.  Questo valore è obbligatorio per i cluster standard ed è facoltativo per i cluster gratuiti.
 
-<p>Controlla le [ubicazioni disponibili](cs_regions.html#locations).
-</p>
+<p>Controlla le [zone disponibili](cs_regions.html#zones).</p>
 
-<p><strong>Nota:</strong> quando selezioni una posizione ubicata al di fuori del tuo paese, tieni presente che potresti aver bisogno di un'autorizzazione legale prima di poter fisicamente archiviare i dati in un paese straniero.</p>
+<p><strong>Nota:</strong> quando selezioni una zona che si trova al di fuori del tuo paese, tieni presente che potresti aver bisogno di un'autorizzazione legale prima di poter fisicamente archiviare i dati in un paese straniero.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
+<dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>Il nome del cluster.  Questo valore è obbligatorio. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.
+<dd>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili, esegui <code>ibmcloud ks kube-versions</code>.
 </dd>
 
 <dt><code>--no-subnet</code></dt>
@@ -741,28 +769,28 @@ prestazioni ottimali, seleziona la regione fisicamente più vicina a te.  Questo
 
 <ul>
 <li>Questo parametro non è disponibile per i cluster gratuiti.</li>
-<li>Se si tratta del primo cluster standard che crei in questa ubicazione, non includere questo indicatore. Alla creazione dei cluster, viene creata per te una VLAN privata.</li>
-<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato una VLAN privata nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN privata.
+<li>Se si tratta del primo cluster standard che crei in questa zona, non includere questo indicatore. Alla creazione dei cluster, viene creata per te una VLAN privata.</li>
+<li>Se hai creato prima un cluster standard in questa zona o hai creato una VLAN privata nell'infrastruttura IBM Cloud (SoftLayer), devi specificare tale VLAN privata.
 
 <p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></li>
 </ul>
 
-<p>Per scoprire se già hai una VLAN privata per una specifica ubicazione o per trovare il nome di una
-VLAN privata esistente, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>Per scoprire se già hai una VLAN privata per una specifica zona o per trovare il nome di una VLAN privata esistente, esegui <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
 <li>Questo parametro non è disponibile per i cluster gratuiti.</li>
-<li>Se si tratta del primo cluster standard che crei in questa ubicazione, non utilizzare questo indicatore. Alla creazione
+<li>Se si tratta del primo cluster standard che crei in questa zona, non utilizzare questo indicatore. Alla creazione
 del cluster, viene creata per te una VLAN pubblica.</li>
-<li>Se hai creato prima un cluster standard in questa ubicazione o hai creato una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), specifica tale VLAN pubblica. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione.
+<li>Se hai creato prima un cluster standard in questa zona o hai creato una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), specifica tale VLAN pubblica. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione.
 
 <p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></li>
 </ul>
 
-<p>Per scoprire se già hai una VLAN pubblica per una specifica ubicazione o per trovare il nome di una
-VLAN pubblica esistente, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>Per scoprire se già hai una VLAN pubblica per una specifica zona o per trovare il nome di una VLAN pubblica esistente, esegui <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
+
+
 
 <dt><code>--workers WORKER</code></dt>
 <dd>Il numero di nodi di lavoro che vuoi distribuire nel tuo cluster. Se non specifici
@@ -774,11 +802,11 @@ cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes d
 cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
+<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disk). Per disabilitare la codifica, includi questa opzione.</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**Solo bare metal**: abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</p>
-<p>Per verificare se il tipo di macchina bare metal supporta l'attendibilità, controlla il campo `Trustable` nell'output del [comando](#cs_machine_types) `bx cs machine-types <location>`. Per verificare che un cluster sia abilitato all'attendibilità, controlla il campo **Trust ready** nell'output del [comando](#cs_cluster_get) `bx cs cluster-get`. Per verificare che un nodo di lavoro bare metal sia abilitato all'attendibilità, controlla il campo **Trust** nell'output del [comando](#cs_worker_get) `bx cs worker-get`.</p></dd>
+<dd><p>**Solo bare metal**: abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</p>
+<p>Per verificare se il tipo di macchina bare metal supporta l'attendibilità, controlla il campo `Trustable` nell'output del [comando](#cs_machine_types) `ibmcloud ks machine-types <zone>`. Per verificare che un cluster sia abilitato all'attendibilità, controlla il campo **Trust ready** nell'output del [comando](#cs_cluster_get) `ibmcloud ks cluster-get`. Per verificare che un nodo di lavoro bare metal sia abilitato all'attendibilità, controlla il campo **Trust** nell'output del [comando](#cs_worker_get) `ibmcloud ks worker-get`.</p></dd>
 
 <dt><code>-s</code></dt>
 <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -786,38 +814,38 @@ cluster.</p></dd>
 
 **Esempi**:
 
-  
 
-  **Crea un cluster gratuito**: specifica solo il nome del cluster; tutto il resto è impostato su un valore predefinito. Un cluster gratuito viene cancellato automaticamente dopo 21 giorni. Puoi avere un solo cluster gratuito alla volta. Per sfruttare tutte le funzionalità di Kubernetes, crea un cluster standard.
+
+  **Crea un cluster gratuito**: specifica solo il nome del cluster; tutto il resto è impostato su un valore predefinito. Un cluster gratuito viene cancellato automaticamente dopo 30 giorni. Puoi avere un solo cluster gratuito alla volta. Per sfruttare tutte le funzionalità di Kubernetes, crea un cluster standard.
 
   ```
-  bx cs cluster-create --name my_cluster
+  ibmcloud ks cluster-create --name my_cluster
   ```
   {: pre}
 
-  **Crea il tuo primo cluster standard**: il primo cluster standard che viene creato in un'ubicazione crea inoltre una VLAN privata. Pertanto, non includere l'indicatore `--public-vlan`.
+  **Crea il tuo primo cluster standard**: il primo cluster standard che viene creato in una zona crea anche una VLAN privata. Pertanto, non includere l'indicatore `--public-vlan`.
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
-  **Crea i successivi cluster standard**: se hai già creato un cluster standard in questa ubicazione o hai creato una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), specifica tale VLAN pubblica con l'indicatore `--public-vlan`. Per scoprire se già hai una VLAN pubblica per una specifica ubicazione o per trovare il nome di una VLAN pubblica esistente, esegui `bx cs vlans <location>`.
+  **Crea i successivi cluster standard**: se hai già creato un cluster standard in questa zona o hai creato una VLAN pubblica nell'infrastruttura IBM Cloud (SoftLayer), specifica tale VLAN pubblica con l'indicatore `--public-vlan`. Per scoprire se già hai una VLAN pubblica per una specifica zona o per trovare il nome di una VLAN pubblica esistente, esegui `ibmcloud ks vlans <zone>`.
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
   **Crea un cluster in un ambiente {{site.data.keyword.Bluemix_dedicated_notm}}**:
 
   ```
-  bx cs cluster-create --machine-type machine-type --workers number --name cluster_name
+  ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
   ```
   {: pre}
 
-### bx cs cluster-feature-enable [-f] CLUSTER [--trusted][-s]
+### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted][-s]
 {: #cs_cluster_feature_enable}
 
 Abilita una funzione su un cluster esistente.
@@ -825,7 +853,7 @@ Abilita una funzione su un cluster esistente.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>-f</code></dt>
@@ -833,7 +861,7 @@ Abilita una funzione su un cluster esistente.
 
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Includi l'indicatore per abilitare [Trusted Compute](cs_secure.html#trusted_compute) per tutti i nodi di lavoro bare metal supportati che si trovano nel cluster. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente per il cluster.</p>
-   <p>Per verificare se il tipo di macchina bare metal supporta l'attendibilità, controlla il campo **Trustable** del [comando](#cs_machine_types) `bx cs machine-types <location>`. Per verificare che un cluster sia abilitato all'attendibilità, controlla il campo **Trust ready** nell'output del [comando](#cs_cluster_get) `bx cs cluster-get`. Per verificare che un nodo di lavoro bare metal sia abilitato all'attendibilità, controlla il campo **Trust** nell'output del [comando](#cs_worker_get) `bx cs worker-get`.</p></dd>
+   <p>Per verificare se il tipo di macchina bare metal supporta l'attendibilità, controlla il campo **Trustable** nell'output del [comando](#cs_machine_types) `ibmcloud ks machine-types <zone>`. Per verificare che un cluster sia abilitato all'attendibilità, controlla il campo **Trust ready** nell'output del [comando](#cs_cluster_get) `ibmcloud ks cluster-get`. Per verificare che un nodo di lavoro bare metal sia abilitato all'attendibilità, controlla il campo **Trust** nell'output del [comando](#cs_worker_get) `ibmcloud ks worker-get`.</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -842,11 +870,11 @@ Abilita una funzione su un cluster esistente.
 **Comando di esempio**:
 
   ```
-  bx cs cluster-feature-enable my_cluster --trusted=true
+  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
   ```
   {: pre}
 
-### bx cs cluster-get CLUSTER [--json][--showResources] [-s]
+### ibmcloud ks cluster-get --cluster CLUSTER [--json][--showResources] [-s]
 {: #cs_cluster_get}
 
 Visualizzare le informazioni su un cluster nella tua organizzazione.
@@ -854,7 +882,7 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--json</code></dt>
@@ -873,7 +901,7 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
 **Comando di esempio**:
 
   ```
-  bx cs cluster-get my_cluster --showResources
+  ibmcloud ks cluster-get --cluster my_cluster --showResources
   ```
   {: pre}
 
@@ -885,13 +913,15 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
   State:       normal
   Trust ready: false
   Created:     2018-01-01T17:19:28+0000
-  Location:    dal10
+  Zone:        dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
+  Master Location: Dallas
   Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
-  Workers:     3
-  Version:     1.7.16_1511* (1.8.11_1509 latest)
-  Owner Email: name@example.com
+  Workers:      3
+  Worker Zones: dal10
+  Version:      1.10.5
+  Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
   Addons
@@ -908,7 +938,7 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
   ```
   {: screen}
 
-### bx cs cluster-rm [-f] CLUSTER [-s]
+### ibmcloud ks cluster-rm --cluster CLUSTER [--force-delete-storage][-f] [-s]
 {: #cs_cluster_rm}
 
 Rimuovere un cluster dalla tua organizzazione.
@@ -916,8 +946,11 @@ Rimuovere un cluster dalla tua organizzazione.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--force-delete-storage</code></dt>
+   <dd>Elimina il cluster e l'archiviazione persistente utilizzata dal cluster. **Attenzione**: se includi questo indicatore, non sarà possibile ripristinare i dati memorizzati nel cluster o le sue istanze di archiviazione associate. Questo valore è facoltativo.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilizza questa opzione per forzare la rimozione di un cluster senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
@@ -930,12 +963,12 @@ Rimuovere un cluster dalla tua organizzazione.
 **Esempio**:
 
   ```
-  bx cs cluster-rm my_cluster
+  ibmcloud ks cluster-rm --cluster my_cluster
   ```
   {: pre}
 
 
-### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update] [-s]
+### ibmcloud ks cluster-update [-f] --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update] [-f][-s]
 {: #cs_cluster_update}
 
 Aggiorna il master Kubernetes alla versione API predefinita. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuite dall'utente non vengono modificate e continuano a essere eseguite.
@@ -945,17 +978,20 @@ Potresti dover modificare i tuoi file YAML per distribuzioni future. Controlla q
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versione Kubernetes del cluster. Se non specifichi una versione, il master Kubernetes viene aggiornato alla versione API predefinita. Per visualizzare le versioni disponibili. esegui [bx cs kube-versions](#cs_kube_versions). Questo valore è facoltativo.</dd>
+   <dd>La versione Kubernetes del cluster. Se non specifichi una versione, il master Kubernetes viene aggiornato alla versione API predefinita. Per visualizzare le versioni disponibili, esegui [ibmcloud ks kube-versions](#cs_kube_versions). Questo valore è facoltativo.</dd>
 
    <dt><code>-f</code></dt>
-   <dd>Utilizza questa opzione per forzare l'aggiornamento di un master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
+   <dd>Utilizza questa opzione per forzare l'aggiornamento del master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
 
    <dt><code>--force-update</code></dt>
    <dd>Tenta l'aggiornamento anche se la modifica è maggiore di due versioni secondarie. Questo valore è facoltativo.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>Forza l'esecuzione del comando senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -964,12 +1000,12 @@ Potresti dover modificare i tuoi file YAML per distribuzioni future. Controlla q
 **Esempio**:
 
   ```
-  bx cs cluster-update my_cluster
+  ibmcloud ks cluster-update --cluster my_cluster
   ```
   {: pre}
 
 
-### bx cs clusters [--json][-s]
+### ibmcloud ks clusters [--json][-s]
 {: #cs_clusters}
 
 Visualizzare un elenco di cluster nella tua organizzazione.
@@ -987,12 +1023,12 @@ Visualizzare un elenco di cluster nella tua organizzazione.
 **Esempio**:
 
   ```
-  bx cs clusters
+  ibmcloud ks clusters
   ```
   {: pre}
 
 
-### bx cs kube-versions [--json][-s]
+### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
 Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword.containershort_notm}}. Aggiorna i tuoi [master cluster](#cs_cluster_update) e [nodi di lavoro](cs_cli_reference.html#cs_worker_update) alla versione predefinita per le funzionalità stabili più recenti.
@@ -1010,11 +1046,9 @@ Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword
 **Esempio**:
 
   ```
-  bx cs kube-versions
+  ibmcloud ks kube-versions
   ```
   {: pre}
-
-
 
 <br />
 
@@ -1024,22 +1058,22 @@ Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword
 {: #cluster_services_commands}
 
 
-### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s]
+### ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [-s]
 {: #cs_cluster_service_bind}
 
-Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster. Per visualizzare i servizi {{site.data.keyword.Bluemix_notm}} disponibili dal catalogo {{site.data.keyword.Bluemix_notm}}, esegui `bx service offerings`. **Nota**: puoi aggiungere solo servizi {{site.data.keyword.Bluemix_notm}} che supportano le chiavi del servizio.
+Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster. Per visualizzare i servizi {{site.data.keyword.Bluemix_notm}} disponibili dal catalogo {{site.data.keyword.Bluemix_notm}}, esegui `ibmcloud service offerings`. **Nota**: puoi aggiungere solo servizi {{site.data.keyword.Bluemix_notm}} che supportano le chiavi del servizio.
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
+   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Il nome dello spazio dei nomi Kubernetes. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
-   <dd>Il nome dell'istanza del servizio {{site.data.keyword.Bluemix_notm}} di cui vuoi eseguire il bind. Per trovare il nome della tua istanza del servizio, esegui <code>bx service list</code>. Se nell'account più di un'istanza ha lo stesso nome, utilizza l'ID dell'istanza del servizio anziché il nome. Per trovare l'ID, esegui <code>bx service show <service instance name> --guid</code>. Uno di questi valori è obbligatorio.</dd>
+   <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
+   <dd>Il nome dell'istanza del servizio {{site.data.keyword.Bluemix_notm}} di cui vuoi eseguire il bind. Per trovare il nome della tua istanza del servizio, esegui <code>ibmcloud service list</code>. Se nell'account più di un'istanza ha lo stesso nome, utilizza l'ID dell'istanza del servizio anziché il nome. Per trovare l'ID, esegui <code>ibmcloud service show <service instance name> --guid</code>. Uno di questi valori è obbligatorio.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -1049,12 +1083,12 @@ Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster. Per visual
 **Esempio**:
 
   ```
-  bx cs cluster-service-bind my_cluster my_namespace my_service_instance
+  ibmcloud ks cluster-service-bind --cluster my_cluster --namespace my_namespace --service my_service_instance
   ```
   {: pre}
 
 
-### bx cs cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID [-s]
+### ibmcloud ks cluster-service-unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [-s]
 {: #cs_cluster_service_unbind}
 
 Rimuovi un servizio {{site.data.keyword.Bluemix_notm}} da un cluster.
@@ -1065,15 +1099,15 @@ si verificherà un errore perché non è possibile trovare le credenziali del se
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
+   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Il nome dello spazio dei nomi Kubernetes. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
+   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
    <dd>L'ID dell'istanza del servizio {{site.data.keyword.Bluemix_notm}}
-che vuoi rimuovere. Per trovare l'ID dell'istanza del servizio, esegui `bx cs cluster-services <cluster_name_or_ID>`.Questo valore è obbligatorio.</dd>
+che vuoi rimuovere. Per trovare l'ID dell'istanza del servizio, esegui `ibmcloud ks cluster-services <cluster_name_or_ID>`.Questo valore è obbligatorio.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -1083,12 +1117,12 @@ che vuoi rimuovere. Per trovare l'ID dell'istanza del servizio, esegui `bx cs cl
 **Esempio**:
 
   ```
-  bx cs cluster-service-unbind my_cluster my_namespace 8567221
+  ibmcloud ks cluster-service-unbind --cluster my_cluster --namespace my_namespace --service 8567221
   ```
   {: pre}
 
 
-### bx cs cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces] [--json][-s]
+### ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces] [--json][-s]
 {: #cs_cluster_services}
 
 Elencare i servizi associati a uno o a tutti gli spazi dei nomi Kubernetes in un cluster. Se non viene specificata
@@ -1097,7 +1131,7 @@ alcuna opzione, vengono visualizzati i servizi per lo spazio dei nomi predefinit
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code>, <code>-n
@@ -1105,26 +1139,57 @@ alcuna opzione, vengono visualizzati i servizi per lo spazio dei nomi predefinit
    <dd>Includi i servizi associati a uno specifico spazio dei nomi in un cluster. Questo valore è facoltativo.</dd>
 
    <dt><code>--all-namespaces</code></dt>
-    <dd>Includi i servizi associati a tutti gli spazi dei nomi in un cluster. Questo valore è facoltativo.</dd>
+   <dd>Includi i servizi associati a tutti gli spazi dei nomi in un cluster. Questo valore è facoltativo.</dd>
 
-    <dt><code>--json</code></dt>
-    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
 
-    <dt><code>-s</code></dt>
-    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
-
-    </dl>
+   <dt><code>-s</code></dt>
+   <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+   </dl>
 
 **Esempio**:
 
   ```
-  bx cs cluster-services my_cluster --namespace my_namespace
+  ibmcloud ks cluster-services --cluster my_cluster --namespace my_namespace
   ```
   {: pre}
 
+### ibmcloud ks va --container CONTAINER_ID [--extended][--vulnerabilities] [--configuration-issues][--json]
+{: #cs_va}
+
+Una volta che hai [installato il programma di scansione del contenitore](/docs/services/va/va_index.html#va_install_container_scanner), esamina un report dettagliato della valutazione della vulnerabilità per un contenitore nel tuo cluster.
+
+**Opzioni comando**:
+
+<dl>
+<dt><code>--container CONTAINER_ID</code></dt>
+<dd><p>L'ID del contenitore. Questo valore è obbligatorio.</p>
+<p>Per trovare l'ID del tuo contenitore:<ol><li>[Indirizza la CLI Kubernetes al tuo cluster](cs_cli_install.html#cs_cli_configure).</li><li>Elenca i tuoi pod eseguendo `kubectl get pods`.</li><li>Trova il campo **Container ID** nell'output del comando `kubectl describe pod <pod_name>`. Ad esempio, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Rimuovi il prefisso `docker://` dall'ID prima di utilizzare l'ID contenitore per il comando `ibmcloud ks va`. Ad esempio, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+
+<dt><code>--extended</code></dt>
+<dd><p>Estende l'output del comando per mostrare maggiori informazioni di correzione per i pacchetti vulnerabili. Questo valore è facoltativo.</p>
+<p>Per impostazione predefinita, i risultati della scansione mostrano l'ID, lo stato della politica, i pacchetti interessati e come risolvere il problema. Con l'indicatore `--extended`, aggiunge le informazioni come il riepilogo, gli avvisi di sicurezza del fornitore e il link all'avviso ufficiale.</p></dd>
+
+<dt><code>--vulnerabilities</code></dt>
+<dd>Limita l'output del comando in modo da visualizzare solo le vulnerabilità del pacchetto. Questo valore è facoltativo. Non puoi utilizzare questo indicatore se usi l'indicatore `--configuration-issues`.</dd>
+
+<dt><code>--configuration-issues</code></dt>
+<dd>Limita l'output del comando in modo da visualizzare solo i problemi di configurazione. Questo valore è facoltativo. Non puoi utilizzare questo indicatore se usi l'indicatore `--vulnerabilities` flag.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+</dl>
+
+**Esempio**:
+
+```
+ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15 --extended --vulnerabilities --json
+```
+{: pre}
 
 
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+### ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
 {: #cs_webhook_create}
 
 Registra un webhook.
@@ -1152,7 +1217,7 @@ Registra un webhook.
 **Esempio**:
 
   ```
-  bx cs webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
+  ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
   ```
   {: pre}
 
@@ -1163,25 +1228,26 @@ Registra un webhook.
 ## Comandi cluster: sottoreti
 {: #cluster_subnets_commands}
 
-### bx cs cluster-subnet-add CLUSTER SUBNET [-s]
+### ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 {: #cs_cluster_subnet_add}
 
-Rendere disponibile una sottorete in un account dell'infrastruttura IBM Cloud (SoftLayer) per un cluster specificato.
+Puoi aggiungere sottoreti pubbliche o private esistenti dal tuo account dell'infrastruttura IBM Cloud (SoftLayer) al tuo cluster Kubernetes oppure puoi riutilizzare le sottoreti da un cluster eliminato invece di utilizzare le sottoreti di cui viene eseguito automaticamente il provisioning.
 
 **Nota:**
+* Gli indirizzi IP pubblici portatili vengono addebitati mensilmente. Se rimuovi gli indirizzi IP pubblici portatili dopo aver eseguito il provisioning del tuo cluster, devi comunque pagare l'addebito mensile anche se li hai utilizzati solo per un breve periodo di tempo.
 * Quando rendi disponibile una sottorete a un cluster, gli indirizzi IP di questa sottorete vengono utilizzati per scopi di rete del cluster. Per evitare conflitti di indirizzi IP, assicurati
 di utilizzare una sottorete con un solo cluster. Non utilizzare una sottorete per più cluster o per altri
 scopi al di fuori di {{site.data.keyword.containershort_notm}}
 contemporaneamente.
-* Per instradare tra le sottoreti sulla stessa VLAN, devi [attivare lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+* Per consentire la comunicazione tra i nodi di lavoro che si trovano in diverse sottoreti sulla stessa VLAN, devi [abilitare l'instradamento tra le sottoreti sulla stessa VLAN](cs_subnets.html#subnet-routing).
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SUBNET</em></code></dt>
+   <dt><code>--subnet-id <em>SUBNET</em></code></dt>
    <dd>L'ID della sottorete. Questo valore è obbligatorio.</dd>
 
    <dt><code>-s</code></dt>
@@ -1192,12 +1258,12 @@ contemporaneamente.
 **Esempio**:
 
   ```
-  bx cs cluster-subnet-add my_cluster 1643389
+  ibmcloud ks cluster-subnet-add --cluster my_cluster --subnet-id 1643389
   ```
   {: pre}
 
 
-### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
+### ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
 Crea una sottorete in un account dell'infrastruttura IBM Cloud (SoftLayer) e la rende disponibile per un cluster specificato in {{site.data.keyword.containershort_notm}}.
@@ -1207,19 +1273,18 @@ Crea una sottorete in un account dell'infrastruttura IBM Cloud (SoftLayer) e la 
 di utilizzare una sottorete con un solo cluster. Non utilizzare una sottorete per più cluster o per altri
 scopi al di fuori di {{site.data.keyword.containershort_notm}}
 contemporaneamente.
-* Per instradare tra le sottoreti sulla stessa VLAN, devi [attivare lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+* Per consentire la comunicazione tra i nodi di lavoro che si trovano in diverse sottoreti sulla stessa VLAN, devi [abilitare l'instradamento tra le sottoreti sulla stessa VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
-   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio. Per elencare i tuoi cluster, utilizza il [comando](#cs_clusters) `bx cs clusters`.</dd>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio. Per elencare i tuoi cluster, utilizza il [comando](#cs_clusters) `ibmcloud ks clusters`.</dd>
 
-   <dt><code><em>SIZE</em></code></dt>
+   <dt><code>--size <em>SIZE</em></code></dt>
    <dd>Il nome di indirizzi IP della sottorete. Questo valore è obbligatorio. I valori possibili sono 8, 16, 32 o 64.</dd>
 
-   <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>La VLAN in cui creare la sottorete. Questo valore è obbligatorio. Per elencare le VLAN, utilizza il [comando](#cs_vlans) `bx cs vlans <location>`. </dd>
+   <dd>La VLAN in cui creare la sottorete. Questo valore è obbligatorio. Per elencare le VLAN disponibili, utilizza il [comando](#cs_vlans) `ibmcloud ks vlans <zone>`. Il provisioning della sottorete viene eseguito nella stessa zona in cui si trova la VLAN.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -1229,49 +1294,49 @@ contemporaneamente.
 **Esempio**:
 
   ```
-  bx cs cluster-subnet-create my_cluster 8 1764905
+  ibmcloud ks cluster-subnet-create --cluster my_cluster --size 8 --vlan 1764905
   ```
   {: pre}
 
 
-### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
 Porta la tua sottorete privata nei cluster {{site.data.keyword.containershort_notm}}.
 
-Questa sottorete privata non è una di quelle fornite dall'infrastruttura IBM Cloud (SoftLayer). In quanto tale, devi configurare l'instradamento del traffico di rete in entrata e in uscita per la sottorete. Per aggiungere una sottorete dell'infrastruttura IBM Cloud (SoftLayer), utilizza il [comando](#cs_cluster_subnet_add) `bx cs cluster-subnet-add`.
+Questa sottorete privata non è una di quelle fornite dall'infrastruttura IBM Cloud (SoftLayer). In quanto tale, devi configurare l'instradamento del traffico di rete in entrata e in uscita per la sottorete. Per aggiungere una sottorete dell'infrastruttura IBM Cloud (SoftLayer), utilizza il [comando](#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add`.
 
 **Nota**:
 * Quando aggiungi una sottorete utente privata a un cluster, gli indirizzi IP di questa sottorete vengono utilizzati per Load Balancers privati nel cluster. Per evitare conflitti di indirizzi IP, assicurati
 di utilizzare una sottorete con un solo cluster. Non utilizzare una sottorete per più cluster o per altri
 scopi al di fuori di {{site.data.keyword.containershort_notm}}
 contemporaneamente.
-* Per instradare tra le sottoreti sulla stessa VLAN, devi [attivare lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+* Per consentire la comunicazione tra i nodi di lavoro che si trovano in diverse sottoreti sulla stessa VLAN, devi [abilitare l'instradamento tra le sottoreti sulla stessa VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SUBNET_CIDR</em></code></dt>
+   <dt><code>--subnet-cidr <em>SUBNET_CIDR</em></code></dt>
    <dd>La sottorete CIDR (Classless InterDomain Routing). Questo valore è obbligatorio e non deve essere in conflitto con una delle sottoreti utilizzate dall'infrastruttura IBM Cloud (SoftLayer).
 
    L'intervallo di prefissi supportati è compreso tra `/30` (1 indirizzo IP) e `/24` (253 indirizzi IP). Se configuri il CIDR con una lunghezza di prefisso e successivamente devi modificarla, aggiungi prima il nuovo CIDR e quindi [rimuovi il vecchio CIDR](#cs_cluster_user_subnet_rm).</dd>
 
-   <dt><code><em>PRIVATE_VLAN</em></code></dt>
+   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
    <dd>L'ID della VLAN privata. Questo valore è obbligatorio. Deve corrispondere all'ID della VLAN privata di uno o più nodi di lavoro nel cluster.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs cluster-user-subnet-add my_cluster 169.xx.xxx.xxx/29 1502175
+  ibmcloud ks cluster-user-subnet-add --cluster my_cluster --subnet-cidr 169.xx.xxx.xxx/29 --private-vlan 1502175
   ```
   {: pre}
 
 
-### bx cs cluster-user-subnet-rm CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### ibmcloud ks cluster-user-subnet-rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
 {: #cs_cluster_user_subnet_rm}
 
 Rimuovi la tua propria sottorete privata da un cluster specificato.
@@ -1281,24 +1346,24 @@ Rimuovi la tua propria sottorete privata da un cluster specificato.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SUBNET_CIDR</em></code></dt>
-   <dd>La sottorete CIDR (Classless InterDomain Routing). Questo valore è obbligatorio e deve corrispondere al CIDR configurato dal [comando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
+   <dt><code>--subnet-cidr <em>SUBNET_CIDR</em></code></dt>
+   <dd>La sottorete CIDR (Classless InterDomain Routing). Questo valore è obbligatorio e deve corrispondere al CIDR configurato dal [comando](#cs_cluster_user_subnet_add) `ibmcloud ks cluster-user-subnet-add`.</dd>
 
-   <dt><code><em>PRIVATE_VLAN</em></code></dt>
-   <dd>L'ID della VLAN privata. Questo valore è obbligatorio e deve corrispondere all'ID della VLAN configurato dal [comando](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add`.</dd>
+   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+   <dd>L'ID della VLAN privata. Questo valore è obbligatorio e deve corrispondere all'ID della VLAN configurato dal [comando](#cs_cluster_user_subnet_add) `ibmcloud ks cluster-user-subnet-add`.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs cluster-user-subnet-rm my_cluster 169.xx.xxx.xxx/29 1502175
+  ibmcloud ks cluster-user-subnet-rm --cluster my_cluster --subnet-cidr 169.xx.xxx.xxx/29 --private-vlan 1502175
   ```
   {: pre}
 
-### bx cs subnets [--json][-s]
+### ibmcloud ks subnets [--json][-s]
 {: #cs_subnets}
 
 Visualizza un elenco di sottoreti disponibili in un account dell'infrastruttura IBM Cloud (SoftLayer).
@@ -1316,7 +1381,7 @@ Visualizza un elenco di sottoreti disponibili in un account dell'infrastruttura 
 **Esempio**:
 
   ```
-  bx cs subnets
+  ibmcloud ks subnets
   ```
   {: pre}
 
@@ -1327,7 +1392,7 @@ Visualizza un elenco di sottoreti disponibili in un account dell'infrastruttura 
 ## Comandi del programma di bilanciamento del carico dell'applicazione (ALB) Ingress
 {: #alb_commands}
 
-### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [-s]
+### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update][-s]
 {: #cs_alb_cert_deploy}
 
 Distribuisci o aggiorna un certificato dalla tua istanza {{site.data.keyword.cloudcerts_long_notm}} all'ALB in un cluster.
@@ -1360,19 +1425,19 @@ Distribuisci o aggiorna un certificato dalla tua istanza {{site.data.keyword.clo
 Esempio per distribuire un segreto dell'ALB:
 
    ```
-   bx cs alb-cert-deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ibmcloud ks alb-cert-deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
    ```
    {: pre}
 
 Esempio per aggiornare un segreto dell'ALB esistente:
 
  ```
- bx cs alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ibmcloud ks alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
  ```
  {: pre}
 
 
-### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [--json][-s]
+### ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [--json][-s]
 {: #cs_alb_cert_get}
 
 Visualizza le informazioni su un segreto dell'ALB in un cluster.
@@ -1403,19 +1468,19 @@ Visualizza le informazioni su un segreto dell'ALB in un cluster.
  Esempio per recuperare le informazioni su un segreto dell'ALB:
 
  ```
- bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret
+ ibmcloud ks alb-cert-get --cluster my_cluster --secret-name my_alb_secret
  ```
  {: pre}
 
  Esempio per recuperare le informazioni su tutti i segreti dell'ALB che corrispondono a un CRN del certificato specificato:
 
  ```
- bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ibmcloud ks alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
  ```
  {: pre}
 
 
-### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [-s]
+### ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN] [-s]
 {: #cs_alb_cert_rm}
 
 Rimuovi un segreto dell'ALB in un cluster.
@@ -1444,19 +1509,19 @@ Rimuovi un segreto dell'ALB in un cluster.
  Esempio per rimuovere un segreto dell'ALB:
 
  ```
- bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret
+ ibmcloud ks alb-cert-rm --cluster my_cluster --secret-name my_alb_secret
  ```
  {: pre}
 
  Esempio per rimuovere tutti i segreti dell'ALB che corrispondono a un CRN del certificato specificato:
 
  ```
- bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ibmcloud ks alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
  ```
  {: pre}
 
 
-### bx cs alb-certs --cluster CLUSTER [--json][-s]
+### ibmcloud ks alb-certs --cluster CLUSTER [--json][-s]
 {: #cs_alb_certs}
 
 Visualizza un elenco di segreti dell'ALB in un cluster.
@@ -1477,11 +1542,11 @@ Visualizza un elenco di segreti dell'ALB in un cluster.
 **Esempio**:
 
  ```
- bx cs alb-certs --cluster my_cluster
+ ibmcloud ks alb-certs --cluster my_cluster
  ```
  {: pre}
 
-### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP][-s]
+### ibmcloud ks alb-configure --albID ALB_ID [--enable][--disable] [--user-ip USERIP][-s]
 {: #cs_alb_configure}
 
 Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitato per impostazione predefinita.
@@ -1490,7 +1555,7 @@ Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitat
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>L'ID per un ALB. Esegui <code>bx cs albs <em>--cluster </em>CLUSTER</code> per visualizzare gli ID degli ALB in un cluster. Questo valore è obbligatorio.</dd>
+   <dd>L'ID per un ALB. Esegui <code>ibmcloud ks albs <em>--cluster </em>CLUSTER</code> per visualizzare gli ID degli ALB in un cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--enable</code></dt>
    <dd>Includi questo indicatore per abilitare un ALB in un cluster.</dd>
@@ -1517,25 +1582,25 @@ Abilita o disabilita un ALB nel tuo cluster standard. L'ALB pubblico è abilitat
   Esempio per abilitare un ALB:
 
   ```
-  bx cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
+  ibmcloud ks alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
   ```
   {: pre}
 
   Esempio per abilitare un ALB con un indirizzo IP fornito dall'utente:
 
   ```
-  bx cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip user_ip
+  ibmcloud ks alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip user_ip
   ```
   {: pre}
 
   Esempio per disabilitare un ALB:
 
   ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
   ```
   {: pre}
 
-### bx cs alb-get --albID ALB_ID [--json][-s]
+### ibmcloud ks alb-get --albID ALB_ID [--json][-s]
 {: #cs_alb_get}
 
 Visualizza i dettagli di un ALB.
@@ -1544,7 +1609,7 @@ Visualizza i dettagli di un ALB.
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>L'ID per un ALB. Esegui <code>bx cs albs --cluster <em>CLUSTER</em></code> per visualizzare gli ID degli ALB in un cluster. Questo valore è obbligatorio.</dd>
+   <dd>L'ID per un ALB. Esegui <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code> per visualizzare gli ID degli ALB in un cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
@@ -1557,11 +1622,11 @@ Visualizza i dettagli di un ALB.
 **Esempio**:
 
   ```
-  bx cs alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
+  ibmcloud ks alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
   ```
   {: pre}
 
-### bx cs alb-types [--json][-s]
+### ibmcloud ks alb-types [--json][-s]
 {: #cs_alb_types}
 
 Visualizza i tipi di ALB supportati nella regione.
@@ -1579,12 +1644,12 @@ Visualizza i tipi di ALB supportati nella regione.
 **Esempio**:
 
   ```
-  bx cs alb-types
+  ibmcloud ks alb-types
   ```
   {: pre}
 
 
-### bx cs albs --cluster CLUSTER [--json][-s]
+### ibmcloud ks albs --cluster CLUSTER [--json][-s]
 {: #cs_albs}
 
 Visualizza lo stato di tutti gli ALB in un cluster. Se non viene restituito alcun ID ALB, il cluster non ha una sottorete portatile. Puoi [creare](#cs_cluster_subnet_create) o [aggiungere](#cs_cluster_subnet_add) le sottoreti a un cluster.
@@ -1606,7 +1671,7 @@ Visualizza lo stato di tutti gli ALB in un cluster. Se non viene restituito alcu
 **Esempio**:
 
   ```
-  bx cs albs --cluster my_cluster
+  ibmcloud ks albs --cluster my_cluster
   ```
   {: pre}
 
@@ -1617,7 +1682,7 @@ Visualizza lo stato di tutti gli ALB in un cluster. Se non viene restituito alcu
 ## Comandi infrastruttura
 {: #infrastructure_commands}
 
-### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Imposta le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.containershort_notm}}.
@@ -1634,7 +1699,13 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>Nome utente dell'account dell'infrastruttura IBM Cloud (SoftLayer). Questo valore è obbligatorio.</dd>
+   <dd>Nome utente API dell'account dell'infrastruttura IBM Cloud (SoftLayer). Questo valore è obbligatorio. **Nota**: il nome utente API dell'infrastruttura non è lo stesso dell'IBMid. Per visualizzare il nome utente API dell'infrastruttura:
+   <ol><li>Accedi al portale [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/).</li>
+   <li>Dal menu che si espande, seleziona **Infrastruttura**.</li>
+   <li>Dalla barra dei menu, seleziona **Account** > **Utenti** > **Elenco utenti**.</li>
+   <li>Per l'utente che desideri visualizzare, fai clic su **IBMid o Nome utente**.</li>
+   <li>Nella sezione **Informazioni di accesso API**, esamina il **Nome utente API**.</li>
+   </ol></dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
@@ -1644,7 +1715,7 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
   Per generare una chiave API:
 
   <ol>
-  <li>Accedi al [portale dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://control.softlayer.com/).</li>
+  <li>Accedi al [portale dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://control.bluemix.net/).</li>
   <li>Seleziona <strong>Account</strong> e quindi <strong>Utenti</strong>.</li>
   <li>Fai clic su <strong>Genera</strong> per generare una chiave API dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account.</li>
   <li>Copia la chiave API da utilizzare in questo comando.</li>
@@ -1652,7 +1723,7 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
 
   Per visualizzare la tua chiave API esistente:
   <ol>
-  <li>Accedi al [portale dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://control.softlayer.com/).</li>
+  <li>Accedi al [portale dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://control.bluemix.net/).</li>
   <li>Seleziona <strong>Account</strong> e quindi <strong>Utenti</strong>.</li>
   <li>Fai clic su <strong>Visualizza</strong> per vedere la tua chiave API esistente.</li>
   <li>Copia la chiave API da utilizzare in questo comando.</li>
@@ -1667,12 +1738,12 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
 **Esempio**:
 
   ```
-  bx cs credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### bx cs credentials-unset
+### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
 Rimuovi le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) dal tuo account {{site.data.keyword.containershort_notm}}.
@@ -1689,139 +1760,25 @@ Dopo aver rimosso le credenziali, la [chiave API IAM](#cs_api_key_info) viene ut
 **Esempio**:
 
   ```
-  bx cs credentials-unset
+  ibmcloud ks credentials-unset
   ```
   {: pre}
 
 
-### bx cs machine-types LOCATION [--json][-s]
+### ibmcloud ks machine-types --zone ZONE [--json][-s]
 {: #cs_machine_types}
 
-Visualizzare un elenco di tipi di macchina disponibili per i tuoi nodi di lavoro. I tipi di macchina variano per ubicazione. Ogni tipo di macchina include
-la quantità di CPU virtuale, memoria e spazio su disco per ogni nodo di lavoro nel cluster. Per impostazione predefinita, la directory `/var/lib/docker`, in cui vengono memorizzati tutti i dati del contenitore, è codificata con la crittografia LUKS. Se l'opzione `disable-disk-encrypt` viene inclusa durante la creazione del cluster, i dati Docker dell'host non vengono codificati. [Ulteriori informazioni sulla codifica.](cs_secure.html#encrypted_disks)
+Visualizzare un elenco di tipi di macchina disponibili per i tuoi nodi di lavoro. I tipi di macchina variano per zona. Ogni tipo di macchina include
+la quantità di CPU virtuale, memoria e spazio su disco per ogni nodo di lavoro nel cluster. Per impostazione predefinita, la directory del disco di archiviazione secondario, in cui vengono memorizzati tutti i dati del contenitore, è codificata con la crittografia LUKS. Se l'opzione `disable-disk-encrypt` viene inclusa durante la creazione del cluster, i dati Docker dell'host non vengono codificati. [Ulteriori informazioni sulla crittografia](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-Puoi eseguire il provisioning del tuo nodo di lavoro come macchina virtuale su hardware condiviso o dedicato o come macchina fisica su bare metal.
-
-<dl>
-<dt>Perché dovrei utilizzare le macchine fisiche (bare metal)?</dt>
-<dd><p><strong>Più risorse di calcolo</strong>: puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal. Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno un'archiviazione locale maggiore rispetto a quelle virtuali e alcune dispongono di RAID per il backup dei dati locali.</p>
-<p><strong>Fatturazione mensile</strong>: i server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. I server bare metal vengono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. L'ordinazione e l'annullamento dei server bare metal è un processo manuale che viene eseguito tramite il tuo account dell'infrastruttura IBM Cloud (SoftLayer). Il suo completamento può richiedere più di un giorno lavorativo.</p>
-<p><strong>Opzione per abilitare Trusted Compute</strong>: abilita Trusted Compute per verificare i tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute è disponibile sui cluster su cui è in esecuzione Kubernetes versione 1.9 o successive e che hanno alcuni tipi di macchine bare metal. Quando esegui il comando `bx cs machine-types <location>` [](cs_cli_reference.html#cs_machine_types), puoi vedere quali macchine supportano l'attendibilità controllando il campo **Trustable**. Ad esempio, le caratteristiche GPU `mgXc` non supportano Trusted Compute.</p></dd>
-<dt>Perché dovrei utilizzare le macchine virtuali?</dt>
-<dd><p>Con le VM, ottieni maggiore flessibilità, tempi di provisioning più veloci e ulteriori funzioni di scalabilità automatica rispetto ai bare metal, ad un prezzo più conveniente. Puoi utilizzare le VM per casi di utilizzo più generali come gli ambienti di sviluppo e test, di preparazione e di produzione, i microservizi e le applicazioni di business. Tuttavia, è un compromesso nelle prestazioni. Se hai bisogno di calcolo di prestazioni elevate per la RAM-, i dati-, o i carichi di lavoro intensivi di GPU-, utilizza i bare metal.</p>
-<p><strong>Decidi tra la tenancy singola o multipla</strong>: quando crei un cluster virtuale standard, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).</p>
-<p>In una configurazione a più tenant, le risorse fisiche, come ad esempio la CPU e la memoria, vengono condivise tra tutte le
-macchine virtuali distribuite allo stesso hardware fisico. Per assicurare che ogni macchina virtuale
-possa essere eseguita indipendentemente, un monitoraggio della macchina virtuale, conosciuto anche come hypervisor,
-divide le risorse fisiche in entità isolate e le alloca come risorse dedicate
-a una macchina virtuale (isolamento hypervisor).</p>
-<p>In una configurazione a tenant singolo, tutte le risorse fisiche sono dedicate soltanto a te. Puoi distribuire
-più nodi di lavoro come macchine virtuali allo stesso host fisico. In modo simile alla configurazione a più tenant,
-l'hypervisor assicura che ogni nodo ottenga la propria condivisione di risorse
-fisiche disponibili.</p>
-<p>I nodi condivisi sono generalmente più economici dei nodi dedicati perché i costi dell'hardware sottostante
-sono condivisi tra più clienti. Tuttavia, quando decidi tra nodi condivisi e dedicati,
-potresti voler verificare con il tuo dipartimento legale e discutere sul livello di conformità e isolamento dell'infrastruttura
-che il tuo ambiente dell'applicazione necessita.</p>
-<p><strong>Caratteristiche delle macchine virtuali `u2c` o `b2c`</strong>: queste macchine utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Questi tipi di macchina contengono 25 GB di archiviazione su disco locale primaria per il file system del sistema operativo e 100 GB di archiviazione su disco locale secondaria per `/var/lib/docker`, ossia la directory in cui sono scritti tutti i dati del contenitore.</p>
-<p><strong>Cosa succede se ho tipi di macchine `u1c` o `b1c` obsoleti?</strong> Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, [aggiorna i tipi di macchina aggiungendo i nodi di lavoro](cs_cluster_update.html#machine_type).</p></dd>
-<dt>Tra quali caratteristiche della macchina fisica e virtuali posso scegliere?</dt>
-<dd><p>Molte! Seleziona il tipo di macchina che è migliore per il tuo caso di utilizzo. Ricorda che un pool di lavoro è composto da macchine che sono della stessa caratteristica. Se vuoi una combinazione di tipi di macchina nel tuo cluster, crea pool di lavoro separati per ogni caratteristica.</p>
-<p>I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `bx cs machine-types <zone_name>`.</p>
-<p><table>
-<caption>Tipi di macchina virtuale e fisica (bare metal) disponibili in {{site.data.keyword.containershort_notm}}.</caption>
-<thead>
-<th>Nome e caso di utilizzo</th>
-<th>Core / Memoria</th>
-<th>Disco primario / secondario</th>
-<th>Velocità di rete</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtuale, u2c.2x4</strong>: utilizza questa VM di dimensione minima per il test rapido, le prove di concetto e altri carichi di lavoro leggeri.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b2c.4x16</strong>: seleziona questa VM bilanciata per il test e lo sviluppo e altri carichi di lavoro leggeri.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b2c.16x64</strong>: seleziona questa VM bilanciata per carichi di lavoro di dimensione media.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b2c.32x128</strong>: seleziona questa VM bilanciata per carichi di lavoro medi o grandi, come un database e un sito web dinamico con molti utenti simultanei.</td></td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b2c.56x242</strong>: seleziona questa VM bilanciata per carichi di lavoro grandi, come un database e più applicazioni con molti utenti simultanei.</td></td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con RAM intensiva, mr1c.28x512</strong>: massimizza la disponibilità della RAM dei tuoi nodi di lavoro.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg1c.16x128</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa caratteristica ha 1 scheda fisica Tesla K80 con 2 GPU (graphics processing unit) per scheda per un totale di 2 GPU.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg1c.28x256</strong>: scegli questo tipo per i carichi di lavoro intensivi matematicamente come il calcolo di elevate prestazioni, il machine learning o le applicazioni 3D. Questa caratteristica ha 2 schede fisiche Tesla K80 con 2 GPU per scheda per un totale di 4 GPU.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con dai intensivi, md1c.16x64.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con dai intensivi, md1c.28x512.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
-<td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal bilanciato, mb1c.4x32</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal bilanciato, mb1c.16x64</strong>: utilizza per i carichi di lavoro bilanciati che richiedono ulteriori risorse di calcolo rispetto all'offerta delle macchine virtuali.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-</tbody>
-</table>
-</p>
-</dd>
-</dl>
-
+Puoi eseguire il provisioning del tuo nodo di lavoro come macchina virtuale su hardware condiviso o dedicato o come macchina fisica su bare metal. [Ulteriori informazioni sulle opzioni del tuo tipo di macchina](cs_clusters.html#shared_dedicated_node).
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Immetti l'ubicazione in cui vuoi elencare i tipi di macchina disponibili. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd>
+   <dt><code>--zone <em>ZONE</em></code></dt>
+   <dd>Immetti la zona in cui vuoi elencare i tipi di macchina disponibili. Questo valore è obbligatorio. Controlla le [zone disponibili](cs_regions.html#zones).</dd>
 
    <dt><code>--json</code></dt>
   <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
@@ -1833,43 +1790,21 @@ che il tuo ambiente dell'applicazione necessita.</p>
 **Comando di esempio**:
 
   ```
-  bx cs machine-types dal10
+  ibmcloud ks machine-types --zone dal10
   ```
   {: pre}
 
-**Output di esempio**:
-
-  ```
-  Getting machine types list...
-  OK
-  Machine Types
-  Name                 Cores   Memory   Network Speed   OS             Server Type   Storage   Secondary Storage   Trustable
-  u2c.2x4              2       4GB      1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.4x16             4       16GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.16x64            16      64GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.32x128           32      128GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.56x242           56      242GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  mb1c.4x32            4       32GB     10000Mbps       UBUNTU_16_64   physical      1000GB    2000GB              False
-  mb1c.16x64           16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  mr1c.28x512          28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  md1c.16x64.4x4tb     16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  md1c.28x512.4x4tb    28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  
-  ```
-  {: screen}
-
-
-### bx cs vlans LOCATION [--all][--json] [-s]
+### ibmcloud ks vlans --zone ZONE [--all][--json] [-s]
 {: #cs_vlans}
 
-Elenca le VLAN pubbliche e private disponibili per un'ubicazione nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per elencare le VLAN disponibili,
+Elenca le VLAN pubbliche e private disponibili per una zona nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per elencare le VLAN disponibili,
 devi avere un account a pagamento.
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Immetti l'ubicazione in cui vuoi elencare le tue VLAN pubbliche e private. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd>
+   <dt><code>--zone <em>ZONE</em></code></dt>
+   <dd>Immetti la zona in cui vuoi elencare le tue VLAN pubbliche e private. Questo valore è obbligatorio. Controlla le [zone disponibili](cs_regions.html#zones).</dd>
 
    <dt><code>--all</code></dt>
    <dd>Elenca tutte le VLAN disponibili. Per impostazione predefinita, le VLAN vengono filtrate per mostrare solo quelle VLAN che sono valide. Perché sia valida, una VLAN deve essere associata a un'infrastruttura in grado di ospitare un nodo di lavoro con archiviazione su disco locale.</dd>
@@ -1884,7 +1819,7 @@ devi avere un account a pagamento.
 **Esempio**:
 
   ```
-  bx cs vlans dal10
+  ibmcloud ks vlans --zone dal10
   ```
   {: pre}
 
@@ -1895,7 +1830,7 @@ devi avere un account a pagamento.
 ## Comandi registrazione
 {: #logging_commands}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS][--syslog-protocol PROTOCOL] --type LOG_TYPE [--json][--skip-validation] [-s]
+### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS][--syslog-protocol PROTOCOL]  [--json][--skip-validation] [--force-update][-s]
 {: #cs_logging_create}
 
 Crea una configurazione di registrazione. Puoi utilizzare questo comando per inoltrare i log dei contenitori, delle applicazioni, dei nodi di lavoro, dei cluster Kubernetes e dei programmi di bilanciamento del carico dell'applicazione Ingress a {{site.data.keyword.loganalysisshort_notm}} o a un server syslog esterno.
@@ -1903,11 +1838,14 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
-    <dd>'origine del log per abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>. Se non fornisci un'origine log, le configurazioni di registrazione vengono create per le origini log <code>container</code> e <code>ingress</code>.</dd>
+    <dd>'origine del log per abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>. Se non fornisci un'origine log, vengono create le configurazioni per <code>container</code> e <code>ingress</code>.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</dd>
 
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>Lo spazio dei nomi Kubernetes dal quale desideri inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine del log del contenitore ed è facoltativo. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</dd>
@@ -1919,19 +1857,16 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
     <dd>La porta del server di raccolta del log. Questo valore è facoltativo. Se non specifichi una porta, viene utilizzata la porta standard <code>514</code> per <code>syslog</code> e <code>9091</code> per <code>ibm</code>.</dd>
 
   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-    <dd>Il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</dd>
+    <dd>Facoltativo: il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account. Se lo specifichi, devi specificare anche un'organizzazione. </dd>
 
   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-    <dd>Il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
+    <dd>Facoltativo: il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
 
   <dt><code>--app-paths</code></dt>
     <dd>Il percorso sul contenitore a cui si collegano le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Questo valore è necessario per l'origine log <code>application</code>. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
 
   <dt><code>--syslog-protocol</code></dt>
-    <dd>Il protocollo del livello di trasferimento utilizzato quando il tipo di registrazione è <code>syslog</code>. I valori supportati sono <code>TCP</code> e il valore predefinito <code>UDP</code>. Quando esegui l'inoltro a un server rsyslog con il protocollo <code>udp</code>, i log superiori a 1KB vengono troncati.</dd>
-
-  <dt><code>--type <em>LOG_TYPE</em></code></dt>
-    <dd>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</dd>
+    <dd>Il protocollo del livello di trasferimento utilizzato quando il tipo di registrazione è <code>syslog</code>. I valori supportati sono <code>tcp</code>, <code>tls</code> e il valore predefinito <code>udp</code>. Quando esegui l'inoltro a un server rsyslog con il protocollo <code>udp</code>, i log superiori a 1KB vengono troncati.</dd>
 
   <dt><code>--app-containers</code></dt>
     <dd>Per inoltrare i log dalle applicazioni, puoi specificare il nome del contenitore che contiene la tua applicazione. Puoi specificare più di un contenitore utilizzando un elenco separato da virgole. Se non si specificano i contenitori, i log vengono inoltrati da tutti i contenitori che contengono i percorsi da te forniti. Questa opzione è valida solo per l'origine log <code>application</code>.</dd>
@@ -1942,6 +1877,9 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
   <dt><code>--skip-validation</code></dt>
     <dd>Ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltra correttamente i log. Questo valore è facoltativo.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
+
     <dt><code>-s</code></dt>
     <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
 </dl>
@@ -1951,25 +1889,25 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
 Esempio del tipo di log `ibm` che inoltra da un'origine log `container` sulla porta predefinita 9091:
 
   ```
-  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
+  ibmcloud ks logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
   ```
   {: pre}
 
 Esempio del tipo di log `syslog` che inoltra da un'origine log `container` sulla porta predefinita 514:
 
   ```
-  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
+  ibmcloud ks logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
   ```
   {: pre}
 
 Esempio di un tipo di log `syslog` che inoltra i log da un'origine `ingress` su una porta differente dalla predefinita:
 
   ```
-  bx cs logging-config-create my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
+  ibmcloud ks logging-config-create --cluster my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
   ```
   {: pre}
 
-### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json] [-s]
+### ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE][--json] [-s]
 {: #cs_logging_get}
 
 Visualizza tutte le configurazioni di inoltro di un cluster o filtrale in base all'origine del log.
@@ -1977,7 +1915,7 @@ Visualizza tutte le configurazioni di inoltro di un cluster o filtrale in base a
 <strong>Opzioni comando</strong>:
 
  <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
@@ -1996,12 +1934,12 @@ Visualizza tutte le configurazioni di inoltro di un cluster o filtrale in base a
 **Esempio**:
 
   ```
-  bx cs logging-config-get my_cluster --logsource worker
+  ibmcloud ks logging-config-get --cluster my_cluster --logsource worker
   ```
   {: pre}
 
 
-### bx cs logging-config-refresh CLUSTER [-s]
+### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update][-s]
 {: #cs_logging_refresh}
 
 Aggiorna la configurazione di registrazione per il cluster. Questo aggiorna il token di registrazione per tutte le configurazioni di registrazione che stanno eseguendo l'inoltro al livello dello spazio nel tuo cluster.
@@ -2009,8 +1947,11 @@ Aggiorna la configurazione di registrazione per il cluster. Questo aggiorna il t
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--force-update</code></dt>
+     <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
 
    <dt><code>-s</code></dt>
      <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -2019,12 +1960,12 @@ Aggiorna la configurazione di registrazione per il cluster. Questo aggiorna il t
 **Esempio**:
 
   ```
-  bx cs logging-config-refresh my_cluster
+  ibmcloud ks logging-config-refresh --cluster my_cluster
   ```
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER [--id LOG_CONFIG_ID][--all] [-s]
+### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID][--all] [--force-update][-s]
 {: #cs_logging_rm}
 
 Elimina una configurazione di inoltro dei log o tutte le configurazioni di registrazione per un cluster. Questo arresta l'inoltro dei log a un server syslog remoto o a {{site.data.keyword.loganalysisshort_notm}}.
@@ -2032,7 +1973,7 @@ Elimina una configurazione di inoltro dei log o tutte le configurazioni di regis
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
@@ -2041,6 +1982,9 @@ Elimina una configurazione di inoltro dei log o tutte le configurazioni di regis
   <dt><code>--all</code></dt>
    <dd>L'indicatore per rimuovere tutte le configurazioni di registrazione in un cluster.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
+
    <dt><code>-s</code></dt>
      <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
 </dl>
@@ -2048,12 +1992,12 @@ Elimina una configurazione di inoltro dei log o tutte le configurazioni di regis
 **Esempio**:
 
   ```
-  bx cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  ibmcloud ks logging-config-rm --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--namespace NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-paths PATH] [--app-containers PATH] --type LOG_TYPE [--json][--skipValidation] [-s]
+### ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-paths PATH] [--app-containers PATH][--json] [--skipValidation][--force-update] [-s]
 {: #cs_logging_update}
 
 Aggiorna i dettagli di una configurazione di inoltro del log.
@@ -2061,11 +2005,14 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>L'ID di configurazione di registrazione che desideri aggiornare. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+   <dd>Il protocollo di inoltro del log che desideri utilizzare. Al momento, sono supportati <code>syslog</code> e <code>ibm</code>. Questo valore è obbligatorio.</dd>
 
   <dt><code>--namespace <em>NAMESPACE</em></code>
     <dd>Lo spazio dei nomi Kubernetes dal quale desideri inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine log <code>container</code>. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</dd>
@@ -2077,10 +2024,10 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
    <dd>La porta del server di raccolta del log. Questo valore è facoltativo quando il tipo di registrazione è <code>syslog</code>. Se non specifichi una porta, viene utilizzata la porta standard <code>514</code> per <code>syslog</code> e <code>9091</code> per <code>ibm</code>.</dd>
 
    <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-   <dd>Il nome dello spazio a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</dd>
+   <dd>Facoltativo: il nome dello spazio a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account. Se lo specifichi, devi specificare anche un'organizzazione. </dd>
 
    <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-   <dd>Il nome dell'organizzazione in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
+   <dd>Facoltativo: il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
 
    <dt><code>--app-paths <em>PATH</em>,<em>PATH</em></code></dt>
      <dd>Un percorso file assoluto nel contenitore da cui raccogliere i log. Possono essere utilizzati i caratteri jolly, come '/var/log/*.log', ma non possono essere utilizzati i glob ricorrenti come '/var/log/**/test.log'. Per specificare più di un percorso, utilizza un elenco separato da virgole. Questo valore è obbligatorio quando specifichi 'application' per l'origine log. </dd>
@@ -2088,35 +2035,35 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
    <dt><code>--app-containers <em>PATH</em>,<em>PATH</em></code></dt>
      <dd>Il percorso nei contenitori a cui si collegano le applicazioni. Per inoltrare i log con il tipo di origine <code>application</code>, devi fornire un percorso. Per specificare più di un percorso, utilizza un elenco separato da virgole. Esempio: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
 
-   <dt><code>--type <em>LOG_TYPE</em></code></dt>
-   <dd>Il protocollo di inoltro del log che desideri utilizzare. Al momento, sono supportati <code>syslog</code> e <code>ibm</code>. Questo valore è obbligatorio.</dd>
-
    <dt><code>--json</code></dt>
-   <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
 
    <dt><code>--skipValidation</code></dt>
-   <dd>Ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltra correttamente i log. Questo valore è facoltativo.</dd>
+    <dd>Ignora la convalida dei nomi di organizzazione e spazio quando vengono specificati. La mancata convalida riduce il tempo di elaborazione, ma una configurazione di registrazione non valida non inoltra correttamente i log. Questo valore è facoltativo.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
 
    <dt><code>-s</code></dt>
      <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
-     </dl>
+  </dl>
 
 **Esempio di tipo di log `ibm`**:
 
   ```
-  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  ibmcloud ks logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **Esempio di tipo di log `syslog`**:
 
   ```
-  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  ibmcloud ks logging-config-update --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-### bx cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--regex-message MESSAGE][--json] [-s]
+### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--regex-message MESSAGE][--force-update]  [--json][-s]
 {: #cs_log_filter_create}
 
 Crea un filtro di registrazione. Puoi usare questo comando per filtrare le registrazioni che vengono inoltrate dalla tua configurazione di registrazione.
@@ -2124,7 +2071,7 @@ Crea un filtro di registrazione. Puoi usare questo comando per filtrare le regis
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster per il quale vuoi creare un filtro di registrazione. Questo valore è obbligatorio.</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
@@ -2145,6 +2092,9 @@ Crea un filtro di registrazione. Puoi usare questo comando per filtrare le regis
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
     <dd>Filtra i log che contengono un messaggio specificato scritto come un'espressione regolare in un qualsiasi punto nel log. Questo valore è facoltativo.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
+
   <dt><code>--json</code></dt>
     <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
 
@@ -2157,20 +2107,20 @@ Crea un filtro di registrazione. Puoi usare questo comando per filtrare le regis
 Questo esempio filtra tutti i log che sono stati inoltrati dai contenitori con il nome `test-container` nello spazio dei nomi predefinito che si trovano a livello debug o inferiore e che hanno un messaggio di log che contiene "GET request".
 
   ```
-  bx cs logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
+  ibmcloud ks logging-filter-create --cluster example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
   ```
   {: pre}
 
 Questo esempio filtra tutti i log che sono stati inoltrati, ad un livello info o inferiore, da uno specifico cluster. L'output viene restituito come un JSON.
 
   ```
-  bx cs logging-filter-create example-cluster --type all --level info --json
+  ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
   ```
   {: pre}
 
 
 
-### bx cs logging-filter-get CLUSTER [--id FILTER_ID][--show-matching-configs] [--show-covering-filters][--json] [-s]
+### ibmcloud ks logging-filter-get --cluster CLUSTER [--id FILTER_ID][--show-matching-configs] [--show-covering-filters][--json] [-s]
 {: #cs_log_filter_view}
 
 Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare questo comando per visualizzare i filtri di registrazione che hai creato.
@@ -2178,7 +2128,7 @@ Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare ques
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster dal quale desideri visualizzare i filtri. Questo valore è obbligatorio.</dd>
 
   <dt><code>--id <em>FILTER_ID</em></code></dt>
@@ -2198,7 +2148,7 @@ Visualizza la configurazione di un filtro di registrazione. Puoi utilizzare ques
 </dl>
 
 
-### bx cs logging-filter-rm CLUSTER [--id FILTER_ID][--all] [-s]
+### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID][--all] [--force-update][-s]
 {: #cs_log_filter_delete}
 
 Elimina un filtro di registrazione. Puoi utilizzare questo comando per eliminare un filtro di registrazione che hai creato.
@@ -2206,7 +2156,7 @@ Elimina un filtro di registrazione. Puoi utilizzare questo comando per eliminare
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster da cui desideri eliminare un filtro.</dd>
 
   <dt><code>--id <em>FILTER_ID</em></code></dt>
@@ -2215,12 +2165,14 @@ Elimina un filtro di registrazione. Puoi utilizzare questo comando per eliminare
   <dt><code>--all</code></dt>
     <dd>Elimina tutti i tuoi filtri di inoltro del log. Questo valore è facoltativo.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
+
   <dt><code>-s</code></dt>
     <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
 </dl>
 
-
-### bx cs logging-filter-update CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--json] [-s]
+### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--force-update] [--json][-s]
 {: #cs_log_filter_update}
 
 Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiornare un filtro di registrazione che hai creato.
@@ -2228,11 +2180,11 @@ Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiorna
 <strong>Opzioni comando</strong>:
 
 <dl>
-  <dt><code><em>CLUSTER</em></code></dt>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Il nome o l'ID del cluster per il quale vuoi aggiornare un filtro di registrazione. Questo valore è obbligatorio.</dd>
 
  <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>L'ID del filtro di log da aggiornare. </dd>
+    <dd>L'ID del filtro di log da aggiornare.</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Il tipo di log a cui desideri applicare il filtro. Attualmente sono supportati <code>all</code>, <code>container</code> e <code>host</code>.</dd>
@@ -2252,6 +2204,9 @@ Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiorna
   <dt><code>--message <em>MESSAGE</em></code></dt>
     <dd>Filtra i log che contengono un messaggio specificato in un qualsiasi punto nel log. Il messaggio viene messo in corrispondenza parola per parole e non come un'espressione. Esempio: i messaggi “Hello”, “!”e “Hello, World!”, si applicano al log come “Hello, World!”. Questo valore è facoltativo.</dd>
 
+  <dt><code>--force-update</code></dt>
+    <dd>Forza i tuoi pod Fluentd ad eseguire l'aggiornamento alla versione più recente. La versione di Fluentd deve essere la più recente per poter modificare le tue configurazioni di registrazione. </dd>
+
   <dt><code>--json</code></dt>
     <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
 
@@ -2259,8 +2214,41 @@ Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiorna
     <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
 </dl>
 
+### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+{: #cs_log_autoupdate_enable}
 
+Abilita l'aggiornamento automatico per i tuoi pod Fluentd in uno specifico cluster.
 
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster per il quale vuoi aggiornare un filtro di registrazione. Questo valore è obbligatorio.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+{: #cs_log_autoupdate_disable}
+
+Disabilita l'aggiornamento automatico per i tuoi pod Fluentd in uno specifico cluster.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster per il quale vuoi aggiornare un filtro di registrazione. Questo valore è obbligatorio.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+{: #cs_log_autoupdate_get}
+
+Visualizza se i tuoi pod Fluentd sono impostati per l'aggiornamento automatico in uno specifico cluster.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster per il quale vuoi aggiornare un filtro di registrazione. Questo valore è obbligatorio.</dd>
+</dl>
 
 <br />
 
@@ -2268,14 +2256,17 @@ Aggiorna un filtro di registrazione. Puoi utilizzare questo comando per aggiorna
 ## Comandi regione
 {: #region_commands}
 
-### bx cs locations [--json][-s]
+### ibmcloud ks zones [--region-only][--json] [-s]
 {: #cs_datacenters}
 
-Visualizzare un elenco di ubicazioni disponibili in cui creare un cluster. Le ubicazioni disponibili variano in base alla regione a cui hai eseguito l'accesso. Per selezionare la regione, esegui `bx cs region-set`.
+Visualizza un elenco delle zone disponibili in cui puoi creare un cluster. Le zone disponibili variano in base alla regione a cui hai eseguito l'accesso. Per selezionare la regione, esegui `ibmcloud ks region-set`.
 
 <strong>Opzioni comando</strong>:
 
    <dl>
+   <dt><code>--region-only</code></dt>
+   <dd>Elenca solo gli elementi multizona all'interno della regione a cui hai eseguito l'accesso. Questo valore è facoltativo.</dd>
+
    <dt><code>--json</code></dt>
    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
 
@@ -2286,20 +2277,20 @@ Visualizzare un elenco di ubicazioni disponibili in cui creare un cluster. Le ub
 **Esempio**:
 
   ```
-  bx cs locations
+  ibmcloud ks zones
   ```
   {: pre}
 
 
-### bx cs region
+### ibmcloud ks region
 {: #cs_region}
 
-Trova la regione {{site.data.keyword.containershort_notm}} in cui sei al momento. Crei e gestisci i cluster specifici della regione. Utilizza il comando `bx cs region-set` per modificare le regioni.
+Trova la regione {{site.data.keyword.containershort_notm}} in cui sei al momento. Crei e gestisci i cluster specifici della regione. Utilizza il comando `ibmcloud ks region-set` per modificare le regioni.
 
 **Esempio**:
 
 ```
-bx cs region
+ibmcloud ks region
 ```
 {: pre}
 
@@ -2309,30 +2300,30 @@ Region: us-south
 ```
 {: screen}
 
-### bx cs region-set [REGION]
+### ibmcloud ks region-set [--region REGION]
 {: #cs_region-set}
 
-Imposta la regione per {{site.data.keyword.containershort_notm}}. Crei e gestisci i cluster specifici della regione e puoi volere i cluster in più regioni per l'elevata disponibilità.
+Imposta la regione per {{site.data.keyword.containershort_notm}}. Crei e gestisci i cluster specifici della regione e puoi volere i cluster in più regioni per l'alta disponibilità. 
 
-Ad esempio, puoi accedere a {{site.data.keyword.Bluemix_notm}} nella regione Stati Uniti Sud e creare un cluster. Successivamente, puoi utilizzare `bx cs region-set eu-central` per specificare la regione Europa Centrale e creare un altro cluster. Infine, puoi utilizzare `bx cs region-set us-south` per ritornare alla regione Stati Uniti Sud per gestire il tuo cluster in tale regione.
+Ad esempio, puoi accedere a {{site.data.keyword.Bluemix_notm}} nella regione Stati Uniti Sud e creare un cluster. Successivamente, puoi utilizzare `ibmcloud ks region-set eu-central` per specificare la regione Europa Centrale e creare un altro cluster. Infine, puoi utilizzare `ibmcloud ks region-set us-south` per ritornare alla regione Stati Uniti Sud per gestire il tuo cluster in tale regione.
 
 **Opzioni comando**:
 
 <dl>
-<dt><code><em>REGION</em></code></dt>
+<dt><code>--region <em>REGION</em></code></dt>
 <dd>Immetti la regione che vuoi specificare. Questo valore è facoltativo. Se non fornisci la regione, puoi selezionarla dall'elenco nell'output.
 
-Per un elenco di regioni disponibili, controlla [regioni e ubicazioni](cs_regions.html) o utilizza il comando `bx cs regions` [](#cs_regions).</dd></dl>
+Per un elenco di regioni disponibili, controlla [regioni e zone](cs_regions.html) o utilizza il [comando](#cs_regions) `ibmcloud ks regions`.</dd></dl>
 
 **Esempio**:
 
 ```
-bx cs region-set eu-central
+ibmcloud ks region-set eu-central
 ```
 {: pre}
 
 ```
-bx cs region-set
+ibmcloud ks region-set
 ```
 {: pre}
 
@@ -2350,7 +2341,7 @@ OK
 ```
 {: screen}
 
-### bx cs regions
+### ibmcloud ks regions
 {: #cs_regions}
 
 Elenca le regioni disponibili. `Region Name` è il nome {{site.data.keyword.containershort_notm}} e `Region Alias` è il nome {{site.data.keyword.Bluemix_notm}} generale della regione.
@@ -2358,7 +2349,7 @@ Elenca le regioni disponibili. `Region Name` è il nome {{site.data.keyword.cont
 **Esempio**:
 
 ```
-bx cs regions
+ibmcloud ks regions
 ```
 {: pre}
 
@@ -2382,12 +2373,10 @@ us-south      us-south
 {: worker_node_commands}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt][-s]
+### Obsoleto: ibmcloud ks worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt][-s]
 {: #cs_worker_add}
 
-Aggiungere i nodi di lavoro al tuo cluster standard.
-
-
+Aggiungi i nodi di lavoro autonomi che non si trovano in un pool di lavoro al tuo cluster standard.
 
 <strong>Opzioni comando</strong>:
 
@@ -2402,7 +2391,7 @@ Aggiungere i nodi di lavoro al tuo cluster standard.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_ID&gt;</em>
-location: <em>&lt;location&gt;</em>
+zone: <em>&lt;zone&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_VLAN&gt;</em>
 public-vlan: <em>&lt;public_VLAN&gt;</em>
@@ -2421,20 +2410,20 @@ diskEncryption: <em>false</em></code></pre>
 <td>Sostituisci <code><em>&lt;cluster_name_or_ID&gt;</em></code> con il nome o l'ID del cluster in cui desideri aggiungere nodi di lavoro.</td>
 </tr>
 <tr>
-<td><code><em>location</em></code></td>
-<td>Sostituisci <code><em>&lt;location&gt;</em></code> con l'ubicazione in cui distribuire i tuoi nodi di lavoro. Le ubicazioni disponibili dipendono dalla regione in cui ha eseguito l'accesso. Per elencare le ubicazioni disponibili, esegui <code>bx cs locations</code>.</td>
+<td><code><em>zone</em></code></td>
+<td>Sostituisci <code><em>&lt;zone&gt;</em></code> con la zona in cui distribuire i tuoi nodi di lavoro. Le zone disponibili dipendono dalla regione a cui hai eseguito l'accesso. Per elencare le zone disponibili, esegui <code>ibmcloud ks zones</code>.</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`.</td>
+<td>Sostituisci <code><em>&lt;machine_type&gt;</em></code> con il tipo di macchina in cui vuoi distribuire i tuoi nodi di lavoro. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, vedi il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>Sostituisci <code><em>&lt;private_VLAN&gt;</em></code> con l'ID della VLAN privata che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans <em>&lt;location&gt;</em></code> e ricerca i router VLAN che iniziano con <code>bcr</code> (router di back-end).</td>
+<td>Sostituisci <code><em>&lt;private_VLAN&gt;</em></code> con l'ID della VLAN privata che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> e ricerca i router VLAN che iniziano con <code>bcr</code> (router di back-end).</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Sostituisci <code>&lt;public_VLAN&gt;</code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans &lt;location&gt;</code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end). <br><strong>Nota</strong>: {[private_VLAN_vyatta]}</td>
+<td>Sostituisci <code>&lt;public_VLAN&gt;</code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>ibmcloud ks vlans &lt;zone&gt;</code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end). <br><strong>Nota</strong>: {[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2446,16 +2435,16 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
+<td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disk). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>Il livello di isolamento hardware per il nodo di lavoro. Utilizza dedicato se vuoi avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso. Questo valore è facoltativo.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
+<dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
 
-<dt><code>--number <em>NUMBER</em></code></dt>
+<dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>Un numero intero che rappresenta il numero di nodi di lavoro da creare nel cluster. Il valore predefinito è 1. Questo valore è facoltativo.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
@@ -2469,7 +2458,7 @@ diskEncryption: <em>false</em></code></pre>
 <p><strong>Nota:</strong> i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). Quando crei un cluster e specifichi le VLAN private e pubbliche, la combinazione di numero e lettera dopo tali prefissi deve corrispondere.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
+<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disk). Per disabilitare la codifica, includi questa opzione.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
@@ -2479,158 +2468,18 @@ diskEncryption: <em>false</em></code></pre>
 **Esempi**:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
   ```
   {: pre}
 
   Esempio per {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
   ```
   {: pre}
 
- in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
-
-  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>Il numero di nodi di lavoro da creare in ogni zona. Questo valore è obbligatorio.</dd>
-
-  <dt><code>--kube-version <em>VERSION</em></code></dt>
-    <dd>La versione di Kubernetes con cui vuoi vengano creati i tuoi nodi di lavoro. Viene utilizzata la versione predefinita se questo valore non viene specificato.</dd>
-
-  <dt><code>--hardware <em>HARDWARE</em></code></dt>
-    <dd>Il livello di isolamento hardware per il nodo di lavoro. Utilizza dedicato se vuoi avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso. Questo valore è facoltativo.</dd>
-
-  <dt><code>--labels <em>LABELS</em></code></dt>
-    <dd>Le etichette che vuoi assegnare ai nodi di lavoro nel tuo pool. Esempio: <key1>=<val1>,<key2>=<val2></dd>
-
-  <dt><code>--private-only </code></dt>
-    <dd>Specifica che non esistono le VLAN pubbliche nel pool di lavoro. Il valore predefinito è <code>false</code>.</dd>
-
-  <dt><code>--diable-disk-encrpyt</code></dt>
-    <dd>Specifica che il disco non è crittografato. Il valore predefinito è <code>false</code>.</dd>
-
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pool-add my_cluster --machine-type u2c.2x4 --size-per-zone 6
-  ```
-  {: pre}
-
-### bx cs worker-pools --cluster CLUSTER
-{: #cs_worker_pools}
-
-Visualizza i pool di lavoro che hai in un cluster. 
-
-<strong>Opzioni comando</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
-    <dd>Il nome o l'ID del cluster per cui vuoi elencare i pool di lavoro. Questo valore è obbligatorio.</dd>
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pools --cluster my_cluster
-  ```
-  {: pre}
-
-### bx cs worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_get}
-
-Visualizza i dettagli di un pool di lavoro. 
-
-<strong>Opzioni comando</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>Il nome del pool del nodo di lavoro di cui vuoi visualizzare i dettagli. Questo valore è obbligatorio.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Il nome o l'ID del cluster in cui si trova il pool di lavoro. Questo valore è obbligatorio.</dd>
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
-  ```
-  {: pre}
-
-### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_update}
-
-Aggiorna tutti i nodi di lavoro nel tuo pool con l'ultima versione Kubernetes che corrisponde al master specificato.
-
-<strong>Opzioni comando</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>Il nome del pool del nodo di lavoro che vuoi aggiornare. Questo valore è obbligatorio.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Il nome o l'ID del cluster per cui vuoi aggiornare i pool di lavoro. Questo valore è obbligatorio.</dd>
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pool-update --worker-pool pool1 --cluster my_cluster
-  ```
-  {: pre}
-
-
-
-### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE
-{: #cs_worker_pool_resize}
-
-Ridimensiona il tuo pool di lavoro per aumentare o diminuire il numero di nodi di lavoro presenti in ogni zona del tuo cluster.
-
-<strong>Opzioni comando</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>Il nome del pool del nodo di lavoro che vuoi aggiornare. Questo valore è obbligatorio.</dd>
-
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Il nome o l'ID del cluster per cui vuoi ridimensionare i pool di lavoro. Questo valore è obbligatorio.</dd>
-
-  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>Il numero di nodi di lavoro che vuoi creare in ogni zona. Questo valore è obbligatorio.</dd>
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pool-update --cluster my_cluster --worker-pool pool1,pool2 --size-per-zone 3
-  ```
-  {: pre}
-
-### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_rm}
-
-Rimuovi un pool di lavoro dal tuo cluster. Tutti i nodi di lavoro nel pool vengono eliminati. I tuoi pod vengono ripianificati quando esegui un'eliminazione. Per evitare tempi di inattività, assicurati di avere abbastanza nodi di lavoro per eseguire il tuo carico di lavoro.
-
-<strong>Opzioni comando</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>Il nome del pool del nodo di lavoro che vuoi rimuovere. Questo valore è obbligatorio.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Il nome o l'ID del cluster da cui desideri rimuovere il pool di lavoro. Questo valore è obbligatorio.</dd>
-</dl>
-
-**Comando di esempio**:
-
-  ```
-  bx cs worker-pool-rm --cluster my_cluster --worker-pool pool1
-  ```
-  {: pre}
-
-</staging>
-
-### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json][-s]
+### ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json][-s]
 {: #cs_worker_get}
 
 Visualizza i dettagli di un nodo di lavoro.
@@ -2638,11 +2487,11 @@ Visualizza i dettagli di un nodo di lavoro.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
    <dd>Il nome o l'ID del cluster del nodo di lavoro. Questo valore è facoltativo.</dd>
 
-   <dt><code><em>WORKER_NODE_ID</em></code></dt>
-   <dd>Il nome del tuo nodo di lavoro. Esegui <code>bx cs workers <em>CLUSTER</em></code> per visualizzare gli ID per i nodi di lavoro in un cluster. Questo valore è obbligatorio.</dd>
+   <dt><code>--worker <em>WORKER_NODE_ID</em></code></dt>
+   <dd>Il nome del tuo nodo di lavoro. Esegui <code>ibmcloud ks workers <em>CLUSTER</em></code> per visualizzare gli ID per i nodi di lavoro in un cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
@@ -2654,7 +2503,7 @@ Visualizza i dettagli di un nodo di lavoro.
 **Comando di esempio**:
 
   ```
-  bx cs worker-get my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
+  ibmcloud ks worker-get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
   ```
   {: pre}
 
@@ -2675,7 +2524,7 @@ Visualizza i dettagli di un nodo di lavoro.
   ```
   {: screen}
 
-### bx cs worker-reboot [-f][--hard] CLUSTER WORKER [WORKER][-s]
+### ibmcloud ks worker-reboot [-f][--hard] --cluster CLUSTER --worker WORKER [WORKER][-s]
 {: #cs_worker_reboot}
 
 Riavvia un nodo di lavoro in un cluster. Durante il riavvio, lo stato del tuo nodo di lavoro non cambia.
@@ -2688,7 +2537,7 @@ Prima di riavviare il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
    ```
    kubectl get nodes
    ```
-   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `bx cs workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
+   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `ibmcloud ks workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
 2. Contrassegna il nodo di lavoro come non pianificabile in un processo noto come delimitazione. Quando delimiti un nodo di lavoro, lo rendi non disponibile per una futura pianificazione di pod. Utilizza il **nome** del nodo di lavoro che hai recuperato nel passo precedente.
    ```
    kubectl cordon <worker_name>
@@ -2707,9 +2556,9 @@ Prima di riavviare il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
     ```
     {: pre}
     Questo processo può richiedere qualche minuto.
- 5. Riavvia il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `bx cs workers <cluster_name_or_ID>`.
+ 5. Riavvia il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
-    bx cs worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
+    ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
     ```
     {: pre}
  6. Attendi circa 5 minuti prima di rendere disponibile il tuo nodo di lavoro per la pianificazione di pod per assicurarti che il riavvio sia terminato. Durante il riavvio, lo stato del tuo nodo di lavoro non cambia. Il riavvio di un nodo di lavoro viene in genere completato in pochi secondi.
@@ -2723,7 +2572,7 @@ Prima di riavviare il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>-f</code></dt>
@@ -2734,7 +2583,7 @@ Prima di riavviare il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
 al nodo di lavoro. Utilizza questa opzione se il nodo di lavoro non risponde o ha un blocco
 Docker. Questo valore è facoltativo.</dd>
 
-   <dt><code><em>WORKER</em></code></dt>
+   <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>Il nome o l'ID di uno o più nodi di lavoro. Utilizza uno spazio per elencare più
 nodi di lavoro. Questo valore è obbligatorio.</dd>
 
@@ -2745,12 +2594,12 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 **Esempio**:
 
   ```
-  bx cs worker-reboot my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud ks worker-reboot --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-### bx cs worker-reload [-f] CLUSTER WORKER [WORKER][-s]
+### ibmcloud ks worker-reload [-f] --cluster CLUSTER --worker WORKER [WORKER][-s]
 {: #cs_worker_reload}
 
 Ricarica tutte le configurazioni necessarie per un nodo di lavoro. Un ricaricamento può essere utile se il tuo nodo di lavoro riscontra dei problemi, come prestazioni scarse o se il nodo di lavoro è bloccato in uno stato non integro.
@@ -2764,7 +2613,7 @@ Prima di ricaricare il tuo nodo di lavoro, assicurati che i pod vengano ripianif
    ```
    kubectl get nodes
    ```
-   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `bx cs workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
+   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `ibmcloud ks workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
 2. Contrassegna il nodo di lavoro come non pianificabile in un processo noto come delimitazione. Quando delimiti un nodo di lavoro, lo rendi non disponibile per una futura pianificazione di pod. Utilizza il **nome** del nodo di lavoro che hai recuperato nel passo precedente.
    ```
    kubectl cordon <worker_name>
@@ -2783,9 +2632,9 @@ Prima di ricaricare il tuo nodo di lavoro, assicurati che i pod vengano ripianif
     ```
     {: pre}
     Questo processo può richiedere qualche minuto.
- 5. Ricarica il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `bx cs workers <cluster_name_or_ID>`.
+ 5. Ricarica il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
-    bx cs worker-reload <cluster_name_or_ID> <worker_name_or_ID>
+    ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
     ```
     {: pre}
  6. Attendi il termine del ricaricamento.
@@ -2797,13 +2646,13 @@ Prima di ricaricare il tuo nodo di lavoro, assicurati che i pod vengano ripianif
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilizza questa opzione per forzare il ricaricamento di un nodo di lavoro senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
 
-   <dt><code><em>WORKER</em></code></dt>
+   <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>Il nome o l'ID di uno o più nodi di lavoro. Utilizza uno spazio per elencare più
 nodi di lavoro. Questo valore è obbligatorio.</dd>
 
@@ -2814,15 +2663,15 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 **Esempio**:
 
   ```
-  bx cs worker-reload my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud ks worker-reload --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-### bx cs worker-rm [-f] CLUSTER WORKER [WORKER][-s]
+### ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER][-s]
 {: #cs_worker_rm}
 
-Rimuovere uno o più nodi di lavoro da un cluster. Se rimuovi un nodo di lavoro, il tuo cluster perde il bilanciamento. 
+Rimuovere uno o più nodi di lavoro da un cluster. Se rimuovi un nodo di lavoro, il tuo cluster perde il bilanciamento. Puoi bilanciare automaticamente di nuovo il tuo pool di lavoro eseguendo il [comando](#cs_rebalance) `ibmcloud ks worker-pool-rebalance`.
 
 Prima di rimuovere il tuo nodo di lavoro, assicurati che i pod vengano ripianificati su altri nodi di lavoro per evitare un periodo di inattività per la tua applicazione o il danneggiamento dei dati sul nodo di lavoro.
 {: tip}
@@ -2831,7 +2680,7 @@ Prima di rimuovere il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
    ```
    kubectl get nodes
    ```
-   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `bx cs workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
+   Il **nome** che viene restituito in questo comando è l'indirizzo IP privato che è assegnato al tuo nodo di lavoro. Puoi trovare ulteriori informazioni sul tuo nodo di lavoro quando esegui il comando `ibmcloud ks workers <cluster_name_or_ID>` e cerchi il nodo di lavoro con lo stesso indirizzo **IP privato**.
 2. Contrassegna il nodo di lavoro come non pianificabile in un processo noto come delimitazione. Quando delimiti un nodo di lavoro, lo rendi non disponibile per una futura pianificazione di pod. Utilizza il **nome** del nodo di lavoro che hai recuperato nel passo precedente.
    ```
    kubectl cordon <worker_name>
@@ -2850,27 +2699,27 @@ Prima di rimuovere il tuo nodo di lavoro, assicurati che i pod vengano ripianifi
    ```
    {: pre}
    Questo processo può richiedere qualche minuto.
-5. Rimuovi il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `bx cs workers <cluster_name_or_ID>`.
+5. Rimuovi il nodo di lavoro. Utilizza l'ID nodo di lavoro restituito dal comando `ibmcloud ks workers <cluster_name_or_ID>`.
    ```
-   bx cs worker-rm <cluster_name_or_ID> <worker_name_or_ID>
+   ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
    ```
    {: pre}
 
 6. Verifica che il nodo di lavoro venga rimosso.
    ```
-   bx cs workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
 </br>
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilizza questa opzione per forzare la rimozione di un nodo di lavoro senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
 
-   <dt><code><em>WORKER</em></code></dt>
+   <dt><code>--workers <em>WORKER</em></code></dt>
    <dd>Il nome o l'ID di uno o più nodi di lavoro. Utilizza uno spazio per elencare più
 nodi di lavoro. Questo valore è obbligatorio.</dd>
 
@@ -2881,19 +2730,17 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 **Esempio**:
 
   ```
-  bx cs worker-rm my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud ks worker-rm --cluster my_cluster --workers kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-###bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update][-s]
+### ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update][-s]
 {: #cs_worker_update}
 
-Aggiorna i nodi di lavoro per applicare le patch e gli aggiornamenti di sicurezza più recenti al sistema operativo e per aggiornare la versione Kubernetes in modo che corrisponda a quella del nodo master. Puoi aggiornare la versione Kubernetes del nodo master con il [comando](cs_cli_reference.html#cs_cluster_update) `bx cs cluster-update`.
+Aggiorna i nodi di lavoro per applicare le patch e gli aggiornamenti di sicurezza più recenti al sistema operativo e per aggiornare la versione Kubernetes in modo che corrisponda a quella del nodo master. Puoi aggiornare la versione Kubernetes del nodo master con il [comando](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update`.
 
-
-
-**Importante**: l'esecuzione di `bx cs worker-update` può causare tempi di inattività per le applicazioni e i servizi. Durante l'aggiornamento, tutti i pod vengono ripianificati in altri nodi di lavoro e i dati vengono eliminati se non archiviati al di fuori del pod. Per evitare il tempo di inattività, [assicurati di avere abbastanza nodi di lavoro per gestire il carico di lavoro mentre vengono aggiornati i nodi di lavoro selezionati](cs_cluster_update.html#worker_node).
+**Importante**: l'esecuzione di `ibmcloud ks worker-update` può causare tempi di inattività per le tue applicazioni e i tuoi servizi. Durante l'aggiornamento, tutti i pod vengono ripianificati in altri nodi di lavoro e i dati vengono eliminati se non archiviati al di fuori del pod. Per evitare il tempo di inattività, [assicurati di avere abbastanza nodi di lavoro per gestire il carico di lavoro mentre vengono aggiornati i nodi di lavoro selezionati](cs_cluster_update.html#worker_node).
 
 Potresti dover modificare i tuoi file YAML per le distribuzioni prima dell'aggiornamento. Controlla questa [nota sulla release](cs_versions.html) per i dettagli.
 
@@ -2901,11 +2748,11 @@ Potresti dover modificare i tuoi file YAML per le distribuzioni prima dell'aggio
 
    <dl>
 
-   <dt><em>CLUSTER</em></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster in cui elenchi i nodi di lavoro disponibili. Questo valore è obbligatorio.</dd>
 
    <dt><code>-f</code></dt>
-   <dd>Utilizza questa opzione per forzare l'aggiornamento di un master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
+   <dd>Utilizza questa opzione per forzare l'aggiornamento del master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
 
    <dt><code>--force-update</code></dt>
    <dd>Tenta l'aggiornamento anche se la modifica è maggiore di due versioni secondarie. Questo valore è facoltativo.</dd>
@@ -2913,7 +2760,7 @@ Potresti dover modificare i tuoi file YAML per le distribuzioni prima dell'aggio
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
      <dd>La versione di Kubernetes con cui vuoi vengano aggiornati i tuoi nodi di lavoro. Viene utilizzata la versione predefinita se questo valore non viene specificato.</dd>
 
-   <dt><code><em>WORKER</em></code></dt>
+   <dt><code>--workers <em>WORKER</em></code></dt>
    <dd>L'ID di uno o più nodi di lavoro. Utilizza uno spazio per elencare più
 nodi di lavoro. Questo valore è obbligatorio.</dd>
 
@@ -2925,12 +2772,11 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 **Esempio**:
 
   ```
-  bx cs worker-update my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud ks worker-update --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
-
-### bx cs workers CLUSTER [--show-deleted][--json] [-s]
+### ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL][--show-pools] [--show-deleted][--json] [-s]
 {: #cs_workers}
 
 Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
@@ -2938,10 +2784,16 @@ Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><em>CLUSTER</em></dt>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster dei nodi di lavoro disponibili. Questo valore è obbligatorio.</dd>
 
-   <dt><em>--show-deleted</em></dt>
+   <dt><code>--worker-pool <em>POOL</em></code></dt>
+   <dd>Visualizza solo i nodi di lavoro che appartengono al pool di lavoro. Per elencare i pool di lavoro disponibili, esegui `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`. Questo valore è facoltativo.</dd>
+
+   <dt><code>--show-pools</code></dt>
+   <dd>Elenca il pool di lavoro a cui appartiene ciascun nodo di lavoro. Questo valore è facoltativo.</dd>
+
+   <dt><code>--show-deleted</code></dt>
    <dd>Visualizza i nodi di lavoro che sono stati eliminati dal cluster, incluso il motivo dell'eliminazione. Questo valore è facoltativo.</dd>
 
    <dt><code>--json</code></dt>
@@ -2954,6 +2806,308 @@ Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
 **Esempio**:
 
   ```
-  bx cs workers my_cluster
+  ibmcloud ks workers --cluster my_cluster
+  ```
+  {: pre}
+
+<br />
+
+
+## Comandi pool di lavoro
+{: #worker-pool}
+
+### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE [--hardware ISOLATION][--labels LABELS] [--disable-disk-encrypt][-s] [--json]
+{: #cs_worker_pool_create}
+
+Puoi creare un pool di lavoro nel tuo cluster. Quando aggiungi un pool di lavoro, per impostazione predefinita, non viene assegnata una zona. Specifica il numero di nodi di lavoro che desideri in ciascuna zona e i tipi di macchina per i nodi di lavoro. Al pool di lavoro vengono fornite le versioni Kubernetes predefinite. Per terminare la creazione dei nodi di lavoro, [aggiungi una zona o le zone](#cs_zone_add) al tuo pool.
+
+<strong>Opzioni comando</strong>:
+<dl>
+
+  <dt><code>--name <em>POOL_NAME</em></code></dt>
+    <dd>Il nome che desideri utilizzare per il tuo pool di lavoro.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
+    <dd>Scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types`. Questo valore è obbligatorio per i cluster standard e non è disponibile per i cluster gratuiti.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>Il numero di nodi di lavoro da creare in ogni zona. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--hardware <em>HARDWARE</em></code></dt>
+    <dd>Il livello di isolamento hardware per il nodo di lavoro. Utilizza dedicato se vuoi avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso. Questo valore è facoltativo.</dd>
+
+  <dt><code>--labels <em>LABELS</em></code></dt>
+    <dd>Le etichette che vuoi assegnare ai nodi di lavoro nel tuo pool. Esempio: <key1>=<val1>,<key2>=<val2></dd>
+
+  <dt><code>--diable-disk-encrpyt</code></dt>
+    <dd>Specifica che il disco non è crittografato. Il valore predefinito è <code>false</code>.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Comando di esempio**:
+
+  ```
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ```
+  {: pre}
+
+### ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s][--json]
+{: #cs_worker_pool_get}
+
+Visualizza i dettagli di un pool di lavoro.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>Il nome del pool del nodo di lavoro di cui vuoi visualizzare i dettagli. Per elencare i pool di lavoro disponibili, esegui `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`. Questo valore è obbligatorio.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster in cui si trova il pool di lavoro. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Comando di esempio**:
+
+  ```
+  ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+**Output di esempio**:
+
+  ```
+  Name:               pool   
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
+  State:              active   
+  Hardware:           shared   
+  Zones:              dal10,dal12   
+  Workers per zone:   3   
+  Machine type:       b2c.4x16.encrypted   
+  Labels:             -   
+  Version:            1.10.5_1512
+  ```
+  {: screen}
+
+### ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+{: #cs_rebalance}
+
+Puoi bilanciare di nuovo il tuo pool di lavoro dopo aver eliminato un nodo di lavoro. Quando esegui questo comando, vengono aggiunti nuovi nodi di lavoro al tuo pool di lavoro. 
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code><em>--cluster CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+  <dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
+    <dd>Il pool di lavoro che desideri bilanciare di nuovo. Questo valore è obbligatorio.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Esempio**:
+
+  ```
+  ibmcloud ks worker-pool-rebalance --cluster my_cluster --worker-pool my_pool
+  ```
+  {: pre}
+
+### ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+{: #cs_worker_pool_resize}
+
+Ridimensiona il tuo pool di lavoro per aumentare o diminuire il numero di nodi di lavoro presenti in ogni zona del tuo cluster. Il tuo pool di lavoro deve avere almeno 1 nodo di lavoro.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>Il nome del pool del nodo di lavoro che vuoi aggiornare. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster per cui vuoi ridimensionare i pool di lavoro. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>Il numero di nodi di lavoro che vuoi avere in ciascuna zona. Questo valore è obbligatorio e deve essere pari a 1 o superiore. </dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+
+</dl>
+
+**Comando di esempio**:
+
+  ```
+  ibmcloud ks worker-pool-resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
+  ```
+  {: pre}
+
+### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
+{: #cs_worker_pool_rm}
+
+Rimuovi un pool di lavoro dal tuo cluster. Tutti i nodi di lavoro nel pool vengono eliminati. I tuoi pod vengono ripianificati quando esegui un'eliminazione. Per evitare tempi di inattività, assicurati di avere abbastanza nodi di lavoro per eseguire il tuo carico di lavoro.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>Il nome del pool del nodo di lavoro che vuoi rimuovere. Questo valore è obbligatorio.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster da cui desideri rimuovere il pool di lavoro. Questo valore è obbligatorio.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Comando di esempio**:
+
+  ```
+  ibmcloud ks worker-pool-rm --cluster my_cluster --worker-pool pool1
+  ```
+  {: pre}
+
+### ibmcloud ks worker-pools --cluster CLUSTER [--json][-s]
+{: #cs_worker_pools}
+
+Visualizza i pool di lavoro che hai in un cluster.
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
+    <dd>Il nome o l'ID del cluster per cui vuoi elencare i pool di lavoro. Questo valore è obbligatorio.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Comando di esempio**:
+
+  ```
+  ibmcloud ks worker-pools --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][--private-only] [--json][-s]
+{: #cs_zone_add}
+
+**Solo cluster multizona**: una volta creato un cluster o un pool di lavoro, puoi aggiungere una zona. Quando aggiungi una zona, i nodi di lavoro vengono aggiunti alla nuova zona in modo da corrispondere al numero di nodi di lavoro per zona che hai specificato per il pool di lavoro. 
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>La zona che desideri aggiungere. Deve essere una [zona che supporta il multizona](cs_regions.html#zones) all'interno della regione del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>Un elenco separato da virgole dei pool di lavoro a cui viene aggiunta la zona. È necessario almeno 1 pool di lavoro.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd><p>L'ID della VLAN privata. Questo valore è condizionato.</p>
+    <p>Se hai una VLAN privata nella zona, questo valore deve corrispondere all'ID VLAN privata di uno o più nodi di lavoro nel cluster. Per vedere le VLAN disponibili, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
+    <p>Se non hai una VLAN privata o pubblica in tale zona, non specificare questa opzione. Vengono create automaticamente per te una VLAN privata e una pubblica quando aggiungi inizialmente una nuova zona al tuo pool di lavoro. Quindi, <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >abilita lo spanning delle VLAN</a> per il tuo account in modo che i nodi di lavoro in diverse zone possano comunicare tra loro.</p>
+<p>**Nota**: i nuovi nodi di lavoro vengono aggiunti alle VLAN che hai specificato, ma le VLAN per i nodi di lavoro esistenti non vengono modificate.</p></dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd><p>L'ID della VLAN pubblica. Questo valore è obbligatorio se desideri esporre i carichi di lavoro sui nodi al pubblico una volta che hai creato il cluster. Deve corrispondere all'ID VLAN pubblica di uno o più nodi di lavoro nel cluster per la zona. Per vedere le VLAN disponibili, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
+    <p>Se non hai una VLAN privata o pubblica in tale zona, non specificare questa opzione. Vengono create automaticamente per te una VLAN privata e una pubblica quando aggiungi inizialmente una nuova zona al tuo pool di lavoro. Quindi, <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >abilita lo spanning delle VLAN</a> per il tuo account in modo che i nodi di lavoro in diverse zone possano comunicare tra loro.</p>
+    <p>**Nota**: i nuovi nodi di lavoro vengono aggiunti alle VLAN che hai specificato, ma le VLAN per i nodi di lavoro esistenti non vengono modificate.</p></dd>
+
+  <dt><code>--private-only </code></dt>
+    <dd>Utilizza questa opzione per impedire la creazione di una VLAN pubblica. Obbligatoria solo quando specifichi l'indicatore `--private-vlan` e non includi l'indicatore `--public-vlan`.  **Nota**: se vuoi un cluster solamente privato, devi configurare un'applicazione gateway per la connettività di rete. Per ulteriori informazioni, vedi [Pianificazione di una rete esterna privata per la configurazione di una VLAN solamente privata](cs_network_planning.html#private_vlan).</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Stampa l'output del comando in formato JSON. Questo valore è facoltativo.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Esempio**:
+
+  ```
+  ibmcloud ks zone-add --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+  ### ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][-f] [-s]
+  {: #cs_zone_network_set}
+
+  **Solo cluster multizona**: imposta i metadati di rete per un pool di lavoro per utilizzare una VLAN pubblica o privata diversa per la zona rispetto a quella utilizzata in precedenza. I nodi di lavoro che sono stati già creati nel pool continuano ad utilizzare la VLAN pubblica o privata precedente, ma i nuovi nodi di lavoro nel pool utilizzeranno i nuovi dati di rete.
+
+  <strong>Opzioni comando</strong>:
+
+  <dl>
+    <dt><code>--zone <em>ZONE</em></code></dt>
+      <dd>La zona che desideri aggiungere. Deve essere una [zona che supporta il multizona](cs_regions.html#zones) all'interno della regione del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>Un elenco separato da virgole dei pool di lavoro a cui viene aggiunta la zona. È necessario almeno 1 pool di lavoro.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd>L'ID della VLAN privata. Questo valore è obbligatorio. Deve corrispondere all'ID della VLAN privata di uno o più nodi di lavoro nel cluster. Per vedere le VLAN disponibili, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Se non ci sono VLAN disponibili, puoi <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >abilitare lo spanning delle VLAN</a> per il tuo account.<br><br>**Nota**: i nuovi nodi di lavoro vengono aggiunti alle VLAN che hai specificato, ma le VLAN per i nodi di lavoro esistenti non vengono modificate.</dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd>L'ID della VLAN pubblica. Questo valore è obbligatorio se desideri modificare la VLAN pubblica per la zona. Se non desideri modificare la VLAN privata con la VLAN pubblica, usa lo stesso ID VLAN privata. L'ID VLAN pubblica deve corrispondere a quello di uno o più nodi di lavoro nel cluster. Per vedere le VLAN disponibili, esegui <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Se non ci sono VLAN disponibili, puoi <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >abilitare lo spanning delle VLAN</a> per il tuo account.<br><br>**Nota**: i nuovi nodi di lavoro vengono aggiunti alle VLAN che hai specificato, ma le VLAN per i nodi di lavoro esistenti non vengono modificate.</dd>
+
+  <dt><code>-f</code></dt>
+    <dd>Forza l'esecuzione del comando senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+  </dl>
+
+  **Esempio**:
+
+  ```
+  ibmcloud ks zone-network-set --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+### ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f][-s]
+{: #cs_zone_rm}
+
+**Solo cluster multizona**: rimuovi una zona da tutti i pool di lavoro nel tuo cluster. Tutti i nodi di lavoro nel pool di lavoro per questa zona vengono eliminati.
+
+Prima di rimuovere una zona, assicurati di avere nodi di lavoro sufficienti in altre zone nel cluster in modo che i tuoi pod possano essere ripianificati per evitare un periodo di inattività per la tua applicazione o il danneggiamento dei dati sul nodo di lavoro.
+{: tip}
+
+<strong>Opzioni comando</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>La zona che desideri aggiungere. Deve essere una [zona che supporta il multizona](cs_regions.html#zones) all'interno della regione del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>-f</code></dt>
+    <dd>Forza l'aggiornamento senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Non visualizza il messaggio dei promemoria di aggiornamento o del giorno. Questo valore è facoltativo.</dd>
+</dl>
+
+**Esempio**:
+
+  ```
+  ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}

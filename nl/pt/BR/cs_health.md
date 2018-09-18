@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -22,257 +22,47 @@ lastupdated: "2018-05-24"
 Configure a criação de log e o monitoramento no {{site.data.keyword.containerlong}} para ajudá-lo a solucionar problemas e melhorar o funcionamento e o desempenho de seus clusters e apps do Kubernetes.
 {: shortdesc}
 
-
-## Configurando o encaminhamento de log do cluster e do app
+## Entendendo o cluster e o encaminhamento de log do app
 {: #logging}
 
-Com um cluster do Kubernetes padrão no {{site.data.keyword.containershort_notm}}, é possível encaminhar logs de diferentes origens para o {{site.data.keyword.loganalysislong_notm}}, para um servidor syslog externo ou para ambos.
+O monitoramento e a criação de log contínuos são a chave para detectar ataques em seu cluster e questões de resolução de problemas à medida que eles surgem. Monitoramento continuamente seu cluster, você é capaz de entender melhor a capacidade do cluster e a disponibilidade de recursos que estão disponíveis para seu app. Isso permite que você se prepare adequadamente para proteger seus apps com relação ao tempo de inatividade. Para configurar a criação de log, deve-se estar trabalhando com um cluster padrão do Kubernetes no {{site.data.keyword.containershort_notm}}.
 {: shortdesc}
 
-Se você deseja encaminhar logs de uma origem para ambos os servidores de coletor, deve-se criar duas configurações de criação de log.
-{: tip}
 
-Verifique a tabela a seguir para obter informações sobre as diferentes origens de log.
+**A IBM monitora o meu cluster?**
+Cada mestre do Kubernetes é monitorado continuamente pela IBM. O {{site.data.keyword.containershort_notm}} varre automaticamente cada nó no qual o mestre do Kubernetes é implementado para vulnerabilidades localizadas em correções de segurança específicas do Kubernetes e do S.O. Se vulnerabilidades forem localizadas, o {{site.data.keyword.containershort_notm}} aplicará automaticamente as correções e resolverá as vulnerabilidades em nome do usuário para assegurar proteção do nó principal. Você é responsável por monitorar e analisar os logs para o restante de seu cluster.
+
+**Quais são as origens para as quais eu posso configurar a criação de log?**
+
+Na imagem a seguir, é possível ver o local das origens para as quais é possível configurar a criação de log.
+
+![Log sources](images/log_sources.png)
+
+<ol>
+<li><p><code>application</code>: informações sobre eventos que ocorrem no nível do aplicativo. Isso pode ser uma notificação de que um evento ocorreu, como um login bem-sucedido, um aviso sobre armazenamento ou outras operações que podem ser executadas no nível do app.</p> <p>Caminhos: é possível configurar os caminhos para os quais seus logs são encaminhados. No entanto, para que os logs sejam enviados, é necessário usar um caminho absoluto em sua configuração de criação de log ou os logs não podem ser lidos. Se o seu caminho estiver montado em seu nó do trabalhador, ele poderá ter criado um link simbólico. Exemplo: se o caminho especificado for <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>, mas os logs realmente forem para <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, então os logs não poderão ser lidos.</p></li>
+
+<li><p><code>container</code>: informações que são registradas por um contêiner em execução.</p> <p>Caminhos: qualquer coisa gravada em <code>STDOUT</code> ou <code>STDERR</code>.</p></li>
+
+<li><p><code>ingress</code>: informações sobre o tráfego de rede que entra em um cluster por meio do Balanceador de Carga do Aplicativo do Ingress. Para obter informações de configuração específicas, efetue check-out da [documentação do Ingress](cs_ingress.html#ingress_log_format).</p> <p>Caminhos: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+
+<li><p><code>kube-audit</code>: informações sobre as ações relacionadas ao cluster que são enviadas para o servidor de API do Kubernetes; incluindo o horário, o usuário e o recurso afetado.</p></li>
+
+<li><p><code>kubernetes</code>: informações do kubelet, do kube-proxy e de outros eventos do Kubernetes que ocorrem no nó do trabalhador que são executados no namespace do kube-system.</p><p>Paths:  <code> /var/log/kubelet.log </code>,  <code> /var/log/kube-proxy.log </code>,  <code> /var/log/var/log/event-exporter/* .log </code></p></li>
+
+<li><p><code>worker</code>: informações que são específicas para a configuração de infraestrutura que você tem para o nó do trabalhador. Os logs do trabalhador são capturados no syslog e contêm eventos do sistema operacional. No auth.log, é possível localizar informações sobre as solicitações de autenticação que são feitas para o S.O. </p><p>Paths:  <code> /var/log/syslog </code>  e  <code> /var/log/auth.log </code></p></li>
+</ol>
+
+</br>
+
+**Quais são as opções de configuração que eu tenho? **
+
+A tabela a seguir mostra as diferentes opções que você tem ao configurar a criação de log e suas descrições.
 
 <table>
-<caption>Fontes de Log</caption>
+<caption> Entendendo as opções de configuração de criação</caption>
   <thead>
-    <tr>
-      <th>Origem de log</th>
-      <th>Características</th>
-      <th>Caminhos de log</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>contêiner</code></td>
-      <td>Logs para seu contêiner que são executados em um cluster do Kubernetes. Qualquer coisa que seja registrada em STDOUT ou STDERR.</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>aplicação</code></td>
-      <td>Logs para o seu próprio aplicativo que é executado em um cluster do Kubernetes.</td>
-      <td><p>É possível configurar os caminhos. Para que os logs sejam enviados, deve-se usar um caminho absoluto na configuração de criação de log ou os logs não poderão ser lidos. Se o seu caminho estiver montado em seu nó do trabalhador, ele poderá ter criado um link simbólico.</p>
-      <p>Exemplo: se o caminho especificado for <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>, mas os logs realmente forem para <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, então os logs não poderão ser lidos.</p></td>
-    </tr>
-    <tr>
-      <td><code>worker</code></td>
-      <td>Logs para os nós do trabalhador da máquina virtual em um cluster do Kubernetes.</td>
-      <td><code>/var/log/syslog</code>, <code>/var/log/auth.log</code></td>
-    </tr>
-    <tr>
-      <td><code>kubernetes</code></td>
-      <td>Logs para o componente do sistema Kubernetes.</td>
-      <td><code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></td>
-    </tr>
-    <tr>
-      <td><code>ingress</code></td>
-      <td>Logs para um balanceador de carga de aplicativo de Ingresso que gerencia o tráfego de rede que entra em um cluster.</td>
-      <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
-    </tr>
-    <tr>
-      <td><code>kube-audit</code></td>
-      <td>Logs para seu servidor da API do Kubernetes.</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-Para ativar a criação de log no nível de conta ou para configurar a criação de log do aplicativo, use a CLI.
-{: tip}
-
-
-### Ativando o encaminhamento de log com a GUI
-{: #enable-forwarding-ui}
-
-É possível definir uma configuração de criação de log no painel do {{site.data.keyword.containershort_notm}}. Pode levar alguns minutos para o processo ser concluído, então, se você não vir logs imediatamente, tente esperar alguns minutos e, em seguida, verifique novamente.
-
-1. Navegue para a guia **Visão geral** do painel.
-2. Selecione a organização e o espaço do Cloud Foundry dos quais você deseja encaminhar logs. Quando você configura o encaminhamento de log no painel, os logs são enviados para o terminal padrão do {{site.data.keyword.loganalysisshort_notm}} para seu cluster. Para encaminhar logs para um servidor externo ou para outro terminal do {{site.data.keyword.loganalysisshort_notm}}, é possível usar a CLI para configurar a criação de log.
-3. Selecione as origens de log das quais você deseja encaminhar logs.
-
-    Para configurar a criação de log de aplicativo ou namespaces de contêiner específicos, use a CLI para definir a sua configuração de criação de log.
-    {: tip}
-4. Clique em
-**Criar**.
-
-### Ativando o encaminhamento de log com a CLI
-{: #enable-forwarding}
-
-É possível criar uma configuração para a criação de log do cluster. É possível diferenciar entre as diversas origens de log usando sinalizações. É possível revisar uma lista completa das opções de configuração na [Referência da CLI](cs_cli_reference.html#logging_commands).
-
-**Antes de começar**
-
-1. Verifique as permissões. Se tiver especificado um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave do {{site.data.keyword.containershort_notm}} precisarão das permissões de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
-  * Se você não sabe quem é o proprietário da chave do {{site.data.keyword.containershort_notm}}, execute o comando a seguir.
-      ```
-      bx cs api-key-info <cluster_name>
-      ```
-      {: pre}
-  * Para aplicar imediatamente quaisquer mudanças feitas em suas permissões, execute o comando a seguir.
-      ```
-      bx cs logging-config-refresh <cluster_name>
-      ```
-      {: pre}
-
-  Para obter mais informações sobre como mudar políticas e permissões de acesso do {{site.data.keyword.containershort_notm}}, veja [Gerenciando o acesso ao cluster](cs_users.html#access_policies).
-  {: tip}
-
-2. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada.
-
-  Se você está usando uma conta Dedicada, deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar a sua organização e o espaço públicos para ativar o encaminhamento de log.
-  {: tip}
-
-3. Para encaminhar logs para o syslog, configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
-  * Configure e gerencie seu próprio servidor ou faça com que um provedor gerencie-o para você. Se um provedor gerenciar o servidor para você, obtenha o terminal de criação de log do provedor de criação de log. Seu servidor syslog deve aceitar o protocolo UDP.
-  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar este [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em um cluster do Kubernetes. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog.
-
-    É possível remover prefixos de syslog para ver seus logs como JSON válido, incluindo o código a seguir na parte superior de seu arquivo `etc/rsyslog.conf` no qual seu servidor rsyslog está em execução.</br>
-    ```$template customFormat,"%msg%\n"
-    $ActionFileDefaultTemplate customFormat
-    ```
-    {: tip}
-
-
-**Encaminhando logs**
-
-1. Crie uma configuração de encaminhamento de log.
-  ```
-  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-  ```
-  {: pre}
-
-    * Exemplo de configuração de criação de log do contêiner para o namespace e a saída padrão:
-      ```
-      bx cs logging-config-create cluster1 --namespace default
-      Creating logging configuration for container logs in cluster cluster1...
-      OK
-      Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-      af7d1ff4-33e6-4275-8167-b52eb3c5f0ee   container   default     ingest-au-syd.logging.bluemix.net✣  9091✣   -     -       ibm        -                        -
-
-      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysislong_notm}} service.
-
-      ```
-      {: screen}
-
-    * Exemplo de configuração de criação de log do aplicativo e saída:
-      ```
-      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-      Creating logging configuration for application logs in cluster cluster2...
-      OK
-      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application   Containers   Paths
-      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣  9091✣   -     -       ibm        container1,container2,container3   /var/log/apps.log
-      ```
-      {: screen}
-
-      Se você tiver apps que são executados em seus contêineres que não podem ser configurados para gravar logs no STDOUT ou STDERR, será possível criar uma configuração de criação de log para encaminhar logs de arquivos de log do app.
-      {: tip}
-
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>O nome ou ID do cluster.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_source&gt;</em></code></td>
-        <td>A origem da qual você deseja encaminhar logs. Os valores aceitos são <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-        <td>Opcional: o namespace do Kubernetes do qual você deseja encaminhar logs. O encaminhamento de log não é suportado para os namespaces do Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Esse valor é válido somente para a origem de log do <code>container</code>. Se você não especificar um namespace, todos os namespaces no cluster usarão essa configuração.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-        <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, use a [URL de ingestão](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se não especificar uma URL de ingestão, o terminal para a região na qual você criou o seu cluster será usado.</p>
-        <p>Para syslog, especifique o nome do host ou endereço IP do serviço do coletor do log.</p></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;port&gt;</em></code></td>
-        <td>A porta de ingestão. Se você não especificar uma porta, a porta padrão <code>9091</code> será usada.
-        <p>Para syslog, especifique a porta do servidor do coletor do log. Se você não especificar uma porta, a porta padrão <code>514</code> será usada.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_space&gt;</em></code></td>
-        <td>Opcional: o nome do espaço do Cloud Foundry para o qual você deseja enviar logs. Ao encaminhar logs para o {{site.data.keyword.loganalysisshort_notm}}, o espaço e a organização são especificados no ponto de ingestão. Se você não especificar um espaço, os logs serão enviados para o nível de conta.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_org&gt;</em></code></td>
-        <td>O nome da organização do Cloud Foundry em que o espaço está. Esse valor é necessário se você especificou um espaço.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;type&gt;</em></code></td>
-        <td>Onde você deseja encaminhar os logs. As opções são <code>ibm</code>, que encaminha os logs para o {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, que encaminha os logs para um servidor externo.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-        <td>O caminho em um contêiner no qual os apps são registrados. Para encaminhar logs com tipo de origem <code>application</code>, deve-se fornecer um caminho. Para especificar mais de um caminho, use uma lista separada por vírgula. Exemplo: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;containers&gt;</em></code></td>
-        <td>Opcional: para encaminhar logs por meio de apps, é possível especificar o nome do contêiner que contém o seu app. É possível especificar mais de um contêiner usando uma lista separada por vírgula. Se nenhum contêiner é especificado, os logs são encaminhados de todos os contêineres que contêm os caminhos que você forneceu.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;protocol&gt;</em></code></td>
-        <td>Quando o tipo de criação de log é <code>syslog</code>, o protocolo de camada de transporte. Os valores suportados são <code>TCP</code> e o <code>UDP</code> padrão. Ao encaminhar para um servidor rsyslog com o protocolo <code>udp</code>, os logs com mais de 1 KB serão truncados.</td>
-      </tr>
-      <tr>
-        <td><code><em>--skip-validation</em></code></td>
-        <td>Opcional: ignore a validação dos nomes de organização e espaço quando forem especificados. Ignorar a validação diminui o tempo de processamento, mas uma configuração de criação de log inválida não encaminhará os logs corretamente.</td>
-      </tr>
-    </tbody>
-  </table>
-
-2. Verifique se sua configuração está correta de uma de duas maneiras:
-
-    * Para listar todas as configurações de criação de log em um cluster:
-      ```
-      bx cs logging-config-get <cluster_name_or_ID>
-      ```
-      {: pre}
-
-      Saída de exemplo:
-
-      ```
-      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.xxx.xxx                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
-      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
-      ```
-      {: screen}
-
-    * Para listar as configurações de criação de log para um tipo de origem de log:
-      ```
-      bx cs logging-config-get <cluster_name_or_ID> --logsource worker
-      ```
-      {: pre}
-
-      Saída de exemplo:
-
-      ```
-      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.xxx.xxx                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
-
-## Atualizando o encaminhamento de log
-{: #updating-forwarding}
-
-1. Atualize uma configuração de encaminhamento de log.
-    ```
-    bx cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <log_type> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
-    ```
-    {: pre}
-
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
+    <th>Opção</th>
+    <th>Descrição</th>
   </thead>
   <tbody>
     <tr>
@@ -280,209 +70,263 @@ Para ativar a criação de log no nível de conta ou para configurar a criação
       <td>O nome ou ID do cluster.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;log_config_id&gt;</em></code></td>
-      <td>O ID da configuração que você deseja atualizar.</td>
+      <td><code> <em> -- log_source </em> </code></td>
+      <td>A origem da qual você deseja encaminhar logs. Os valores aceitos são <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>.</td>
     </tr>
     <tr>
-      <td><code><em>&lt; namespace&gt;</em></code></td>
-      <td>Opcional: o namespace do Kubernetes para encaminhar logs. O encaminhamento de log não é suportado para os namespaces do Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Esse valor é válido somente para a origem de log do <code>container</code>. Se você não especificar um namespace, todos os namespaces no cluster usarão a configuração.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_type&gt;</em></code></td>
+      <td><code> <em> -- type </em> </code></td>
       <td>Onde você deseja encaminhar os logs. As opções são <code>ibm</code>, que encaminha os logs para o {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, que encaminha os logs para um servidor externo.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+      <td><code> <em> -- namespace </em> </code></td>
+      <td>Opcional: o namespace do Kubernetes do qual você deseja encaminhar logs. O encaminhamento de log não é suportado para os namespaces do Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Esse valor é válido somente para a origem de log do <code>container</code>. Se você não especificar um namespace, todos os namespaces no cluster usarão essa configuração.</td>
+    </tr>
+    <tr>
+      <td><code> <em> -- hostname </em> </code></td>
       <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, use a [URL de ingestão](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se não especificar uma URL de ingestão, o terminal para a região na qual você criou o seu cluster será usado.</p>
       <p>Para syslog, especifique o nome do host ou endereço IP do serviço do coletor do log.</p></td>
     </tr>
     <tr>
-      <td><code><em>&lt;port&gt;</em></code></td>
+      <td><code><em>--port</em></code></td>
       <td>A porta de ingestão. Se você não especificar uma porta, a porta padrão <code>9091</code> será usada.
       <p>Para syslog, especifique a porta do servidor do coletor do log. Se você não especificar uma porta, a porta padrão <code>514</code> será usada.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Opcional: o nome do espaço do Cloud Foundry para o qual você deseja enviar logs. Ao encaminhar logs para o {{site.data.keyword.loganalysisshort_notm}}, o espaço e a organização são especificados no ponto de ingestão. Se você não especificar um espaço, os logs serão enviados para o nível de conta.</td>
+      <td><code><em>--space</em></code></td>
+      <td>Opcional: o nome do espaço do Cloud Foundry para o qual você deseja enviar logs. Ao encaminhar logs para o {{site.data.keyword.loganalysisshort_notm}}, o espaço e a organização são especificados no ponto de ingestão. Se você não especificar um espaço, os logs serão enviados para o nível de conta. Se você especifica um espaço, deve-se também especificar uma organização.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>O nome da organização do Cloud Foundry em que o espaço está. Esse valor é necessário se você especificou um espaço.</td>
+      <td><code> <em> -- org </em> </code></td>
+      <td>Opcional: o nome da organização do Cloud Foundry na qual o espaço estiver. Esse valor é necessário se você especificou um espaço.</td>
     </tr>
     <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>O caminho em um contêiner ou contêineres nos quais os apps estão sendo registrados. Para encaminhar logs com tipo de origem <code>application</code>, deve-se fornecer um caminho. Para especificar mais de um caminho, use uma lista separada por vírgula. Exemplo: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
+      <td><code><em>--app-containers</em></code></td>
       <td>Opcional: para encaminhar logs por meio de apps, é possível especificar o nome do contêiner que contém o seu app. É possível especificar mais de um contêiner usando uma lista separada por vírgula. Se nenhum contêiner é especificado, os logs são encaminhados de todos os contêineres que contêm os caminhos que você forneceu.</td>
     </tr>
+    <tr>
+      <td><code><em>--app-paths</em></code></td>
+      <td>O caminho em um contêiner no qual os apps são registrados. Para encaminhar logs com tipo de origem <code>application</code>, deve-se fornecer um caminho. Para especificar mais de um caminho, use uma lista separada por vírgula. Exemplo: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>-- syslog-protocol</em></code></td>
+      <td>Quando o tipo de criação de log é <code>syslog</code>, o protocolo de camada de transporte. É possível usar os protocolos a seguir: `udp`, `tls` ou `tcp`. Ao encaminhar para um servidor rsyslog com o protocolo <code>udp</code>, os logs com mais de 1 KB serão truncados.</td>
+    </tr>
+    <tr>
+      <td><code> <em> -- ca-cert </em> </code></td>
+      <td>Necessário: quando o tipo de criação de log for <code>syslog</code> e o protocolo for <code>tls</code>, o nome do segredo do Kubernetes que contém o certificado de Autoridade de certificação.</td>
+    </tr>
+    <tr>
+      <td><code> <em> -- verify-mode </em> </code></td>
+      <td>Quando o tipo de criação de log for <code>syslog</code> e o protocolo for <code>tls</code>, o modo de verificação. Os valores suportados são <code>verify-peer</code> e o padrão <code>verify-none</code>.</td>
+    </tr>
+    <tr>
+      <td><code><em>--skip-validation</em></code></td>
+      <td>Opcional: ignore a validação dos nomes de organização e espaço quando forem especificados. Ignorar a validação diminui o tempo de processamento, mas uma configuração de criação de log inválida não encaminhará os logs corretamente.</td>
+    </tr>
   </tbody>
-  </table>
+</table>
+
+**Sou responsável por manter o Fluentd para criação de log atualizado?**
+
+Para fazer mudanças em suas configurações de criação de log ou de filtro, o complemento de criação de log Fluentd deve estar na versão mais recente. Por padrão, as atualizações automáticas para o complemento são ativadas. Para desativar atualizações automáticas, consulte [Atualizando complementos do cluster: Fluentd para criação de log](cs_cluster_update.html#logging).
 
 <br />
 
 
+## Configurando o encaminhamento de log
+{: #configuring}
 
-## Filtrando logs
-{: #filter-logs}
+É possível configurar a criação de log para o {{site.data.keyword.containershort_notm}} por meio da GUI ou da CLI.
+{: shortdesc}
 
-É possível escolher quais logs encaminhar ao filtrar logs específicos por um período de tempo.
+### Ativando o encaminhamento de log com a GUI
+{: #enable-forwarding-ui}
 
-1. Crie um filtro de criação de log.
-  ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Necessário: o nome ou ID do cluster para o qual você deseja criar um filtro de criação de log.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;log_type&gt;</code></td>
-        <td>O tipo de logs nos quais você deseja aplicar o filtro. Atualmente <code>all</code>, <code>container</code> e <code>host</code> são suportados.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Opcional: uma lista separada por vírgula de seus IDs de configuração de criação de log. Se não fornecido, o filtro será aplicado a todas as configurações de criação de log de cluster que forem passadas para o filtro. É possível visualizar as configurações de log que correspondem ao filtro usando a sinalização <code>--show-matching-configs</code> com o comando.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Opcional: o namespace do Kubernetes do qual você deseja encaminhar logs. Essa sinalização se aplicará apenas quando você estiver usando o tipo de log <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Opcional: o nome do contêiner por meio do qual você deseja filtrar os logs.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Opcional: filtrará os logs que estiverem no nível especificado e menos. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Para exibir suas mensagens em JSON, anexe a sinalização <code>--json</code> ao comando.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Opcional: filtra os logs que contêm uma mensagem especificada que é gravada como uma expressão regular.</td>
-      </tr>
-    </tbody>
-  </table>
+É possível configurar o encaminhamento de log no painel do {{site.data.keyword.containershort_notm}}. Pode levar alguns minutos para o processo ser concluído, então, se você não vir logs imediatamente, tente esperar alguns minutos e, em seguida, verifique novamente.
 
-2. Visualize o filtro de log que você criou.
+Para criar uma configuração no nível de conta, para um namespace de contêiner específico ou para a criação de log do app, use a CLI.
+{: tip}
 
-  ```
-  bx cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
-  ```
-  {: pre}
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Necessário: o nome ou ID do cluster para o qual você deseja criar um filtro de criação de log.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Opcional: o ID do filtro de log que você deseja visualizar.</td>
-      </tr>
-      <tr>
-        <td><code>--show-matching-configs</code></td>
-        <td>Mostrar as configurações de criação de log a que cada filtro se aplica.</td>
-      </tr>
-    </tbody>
-  </table>
+1. Navegue para a guia **Visão geral** do painel.
+2. Selecione a organização e o espaço do Cloud Foundry dos quais você deseja encaminhar logs. Quando você configura o encaminhamento de log no painel, os logs são enviados para o terminal padrão do {{site.data.keyword.loganalysisshort_notm}} para seu cluster. Para encaminhar logs para um servidor externo ou para outro terminal do {{site.data.keyword.loganalysisshort_notm}}, é possível usar a CLI para configurar a criação de log.
+3. Selecione as origens de log das quais você deseja encaminhar logs.
+4. Clique em
+**Criar**.
 
-3. Atualize o filtro de log que você criou.
-  ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Necessário: o nome ou ID do cluster para o qual você deseja atualizar um filtro de criação de log.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>O ID do filtro de log que você deseja atualizar.</td>
-      </tr>
-      <tr>
-        <td><code><&lt;log_type&gt;</code></td>
-        <td>O tipo de logs nos quais você deseja aplicar o filtro. Atualmente <code>all</code>, <code>container</code> e <code>host</code> são suportados.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Opcional: uma lista separada por vírgula de todos os IDs de configuração de criação de log aos quais você deseja aplicar o filtro. Se não fornecido, o filtro será aplicado a todas as configurações de criação de log de cluster que forem passadas para o filtro. É possível visualizar as configurações de log que correspondem ao filtro usando a sinalização <code>--show-matching-configs</code> com o comando <code>bx cs logging-filter-get</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Opcional: o namespace do Kubernetes do qual você deseja encaminhar logs. Essa sinalização se aplicará apenas quando você estiver usando o tipo de log <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Opcional: o nome do contêiner por meio do qual você deseja filtrar os logs. Essa sinalização se aplicará apenas quando você estiver usando o tipo de log <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Opcional: filtrará os logs que estiverem no nível especificado e menos. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Opcional: filtra os logs que contêm uma mensagem especificada que é gravada como uma expressão regular.</td>
-      </tr>
-    </tbody>
-  </table>
+</br>
+</br>
 
-4. Exclua um filtro de log que você criou.
+### Ativando o encaminhamento de log com a CLI
+{: #enable-forwarding}
 
-  ```
-  bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
-  ```
-  {: pre}
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>&lt;cluster_name_or_ID&gt;</code></td>
-        <td>Necessário: o nome ou o ID do cluster do qual você deseja excluir um filtro de criação de log.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Opcional: o ID do filtro de log que você deseja remover.</td>
-      </tr>
-      <tr>
-        <td><code>--all</code></td>
-        <td>Opcional: exclua todos os seus filtros de encaminhamento de log.</td>
-      </tr>
-    </tbody>
-  </table>
+É possível criar uma configuração para a criação de log do cluster. É possível diferenciar entre as diferentes opções de criação de log usando sinalizações.
 
-<br />
+** Forwarding logs para a IBM **
+
+1. Verifique as permissões. Se você especificou um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave API do {{site.data.keyword.containershort_notm}} precisam de [permissões](cs_users.html#access_policies) de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
+  * Se você não souber quem é o proprietário da chave API do {{site.data.keyword.containershort_notm}}, execute o comando a seguir.
+      ```
+      ibmcloud ks api-key-info <cluster_name>
+      ```
+      {: pre}
+  * Para aplicar imediatamente quaisquer mudanças feitas, execute o comando a seguir.
+      ```
+      ibmcloud ks logging-config-refresh <cluster_name>
+      ```
+      {: pre}
+
+2. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada.
+
+  Se você está usando uma conta Dedicada, deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar a sua organização e o espaço públicos para ativar o encaminhamento de log.
+  {: tip}
+
+3. Crie uma configuração de encaminhamento de log.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --type ibm --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+    ```
+    {: pre}
+
+  * Exemplo de configuração de criação de log do contêiner para o namespace e a saída padrão:
+    ```
+    ibmcloud ks logging-config-create mycluster
+    Creating cluster mycluster logging configurations...
+    OK
+    ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
+    4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
+
+  * Exemplo de configuração de criação de log do aplicativo e saída:
+    ```
+    ibmcloud ks logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+    Creating logging configuration for application logs in cluster cluster2...
+    OK
+    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
+    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
+
+Se você tiver apps que são executados em seus contêineres que não podem ser configurados para gravar logs no STDOUT ou STDERR, será possível criar uma configuração de criação de log para encaminhar logs de arquivos de log do app.
+{: tip}
+
+</br>
+</br>
 
 
+**Encaminhando logs para seu próprio servidor sobre os protocolos `udp` ou `tcp`**
+
+1. Para encaminhar logs para o syslog, configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
+  * Configure e gerencie seu próprio servidor ou faça com que um provedor gerencie-o para você. Se um provedor gerenciar o servidor para você, obtenha o terminal de criação de log do provedor de criação de log.
+
+  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar este [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em um cluster do Kubernetes. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog.
+
+  É possível ver seus logs como JSON válido removendo prefixos de syslog. Para fazer isso, inclua o código a seguir na parte superior de seu arquivo <code>etc/rsyslog.conf</code> no qual o servidor rsyslog está em execução: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+2. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada. Se você está usando uma conta Dedicada, deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar a sua organização e o espaço públicos para ativar o encaminhamento de log.
+
+3. Crie uma configuração de encaminhamento de log.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br>
+</br>
 
 
-## Exibindo logs
+**Encaminhando logs para o seu próprio servidor sobre o protocolo `tls`**
+
+As etapas a seguir são instruções gerais. Antes de usar o contêiner em um ambiente de produção, certifique-se de que quaisquer requisitos de segurança necessários sejam atendidos.
+{: tip}
+
+1. Configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
+  * Configure e gerencie seu próprio servidor ou faça com que um provedor gerencie-o para você. Se um provedor gerenciar o servidor para você, obtenha o terminal de criação de log do provedor de criação de log.
+
+  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar este [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em um cluster do Kubernetes. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog. Será necessário injetar a Autoridade de Certificação e os certificados do lado do servidor relevantes e atualizar o `syslog.conf` para ativar `tls` em seu servidor.
+
+2. Salve seu certificado de Autoridade de certificação em um arquivo denominado `ca-cert`. Deve ser esse nome exato.
+
+3. Crie um segredo no namespace `kube-system` para o arquivo `ca-cert`. Ao criar sua configuração de criação de log, você usará o nome do segredo para a sinalização `--ca-cert`.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+4. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada. Se você está usando uma conta Dedicada, deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar a sua organização e o espaço públicos para ativar o encaminhamento de log.
+
+3. Crie uma configuração de encaminhamento de log.
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+
+### Verificando o encaminhamento de log
+{: verify-logging}
+
+É possível verificar se a configuração está definida corretamente de uma de duas maneiras:
+
+* Para listar todas as configurações de criação de log em um cluster:
+    ```
+    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+* Para listar as configurações de criação de log para um tipo de origem de log:
+    ```
+    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+### Atualizando o encaminhamento de log
+{: #updating-forwarding}
+
+É possível atualizar uma configuração de criação de log que você já criou.
+
+1. Atualize uma configuração de encaminhamento de log.
+    ```
+    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ```
+    {: pre}
+
+</br>
+</br>
+
+### Parando o encaminhamento de log
+{: #log_sources_delete}
+
+É possível parar o encaminhamento de logs em uma ou todas as configurações de criação de log para um cluster.
+{: shortdesc}
+
+1. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada.
+
+2. Exclua a configuração de criação de log.
+  <ul>
+  <li>Para excluir uma configuração de criação de log:</br>
+    <pre><code> ibmcloud ks logging-config-rm  &lt;cluster_name_or_ID&gt;  -- id  &lt;log_config_ID&gt;</pre></code></li>
+  <li>Para excluir todas as configurações de criação de log:</br>
+    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+  </ul>
+
+</br>
+</br>
+
+### Exibindo logs
 {: #view_logs}
 
 Para visualizar os logs para clusters e contêineres, é possível usar os recursos padrão do Kubernetes e de criação de log do Docker.
 {:shortdesc}
 
-### {{site.data.keyword.loganalysislong_notm}}
+**{{site.data.keyword.loganalysislong_notm}}**
 {: #view_logs_k8s}
 
 É possível visualizar os logs que você encaminhou para o {{site.data.keyword.loganalysislong_notm}} por meio do painel do Kibana.
@@ -498,46 +342,95 @@ Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a cont
 
 Para obter mais informações sobre como visualizar logs, veja [Navegando para o Kibana por meio de um navegador da web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
-### Logs do Docker
-{: #view_logs_docker}
+</br>
+
+**Logs do Docker**
 
 É possível alavancar os recursos de criação de log do Docker integrados para revisar as atividades nos fluxos de saída padrão STDOUT e STDERR. Para obter mais informações, veja [Visualizando logs de contêiner para um contêiner que é executado em um cluster do Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
 
+## Filtrando logs
+{: #filter-logs}
 
-## Parando o encaminhamento de log
-{: #log_sources_delete}
+É possível escolher quais logs encaminhar ao filtrar logs específicos por um período de tempo. É possível diferenciar entre as diferentes opções de filtragem usando sinalizações.
 
-É possível parar o encaminhamento de logs em uma ou todas as configurações de criação de log para um cluster.
-{: shortdesc}
+<table>
+<caption>Entendendo as opções para filtragem de log</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/>  Entendendo as opções de filtragem de log</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;cluster_name_or_ID&gt;</td>
+      <td>Necessário: o nome ou ID do cluster para o qual você deseja filtrar os logs.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;log_type&gt;</code></td>
+      <td>O tipo de logs nos quais você deseja aplicar o filtro. Atualmente <code>all</code>, <code>container</code> e <code>host</code> são suportados.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;configs&gt;</code></td>
+      <td>Opcional: uma lista separada por vírgula de seus IDs de configuração de criação de log. Se não fornecido, o filtro será aplicado a todas as configurações de criação de log de cluster que forem passadas para o filtro. É possível visualizar as configurações de log que correspondem ao filtro usando a opção <code>--show-matching-configs</code>.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;kubernetes_namespace&gt;</code></td>
+      <td>Opcional: o namespace do Kubernetes do qual você deseja encaminhar logs. Essa sinalização se aplicará apenas quando você estiver usando o tipo de log <code>container</code>.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;container_name&gt;</code></td>
+      <td>Opcional: o nome do contêiner por meio do qual você deseja filtrar os logs.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;logging_level&gt;</code></td>
+      <td>Opcional: filtrará os logs que estiverem no nível especificado e menos. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Para exibir suas mensagens em JSON, anexe a sinalização <code>--json</code> ao comando.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;message&gt;</code></td>
+      <td>Opcional: filtra os logs que contêm uma mensagem especificada que é gravada como uma expressão regular.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;filter_ID&gt;</code></td>
+      <td>Opcional: o ID do filtro de log.</td>
+    </tr>
+    <tr>
+      <td><code>--show-matching-configs</code></td>
+      <td>Opcional: mostre as configurações de criação de log às quais cada filtro se aplica.</td>
+    </tr>
+    <tr>
+      <td><code>--all</code></td>
+      <td>Opcional: exclua todos os seus filtros de encaminhamento de log.</td>
+    </tr>
+  </tbody>
+</table>
 
-1. [Destine a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual a origem de log está localizada.
 
-2. Exclua a configuração de criação de log.
-<ul>
-<li>Para excluir uma configuração de criação de log:</br>
-  <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>O nome do cluster em que a configuração de criação de log está.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_config_ID&gt;</em></code></td>
-        <td>O ID da configuração de origem de log.</td>
-      </tr>
-    </tbody>
-  </table></li>
-<li>Para excluir todas as configurações de criação de log:</br>
-  <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
-</ul>
+1. Crie um filtro de criação de log.
+  ```
+  ibmcloud ks logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+2. Visualize o filtro de log que você criou.
+
+  ```
+  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ```
+  {: pre}
+
+3. Atualize o filtro de log que você criou.
+  ```
+  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+4. Exclua um filtro de log que você criou.
+
+  ```
+  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ```
+  {: pre}
 
 <br />
 
@@ -575,18 +468,18 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 1. Crie uma configuração de criação de log.
 
     ```
-    bx cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
     ```
     {: pre}
 
     Exemplo de comando e saída:
 
     ```
-    bx cs logging-config-create myCluster --logsource kube-audit
+    ibmcloud ks logging-config-create myCluster --logsource kube-audit
     Creating logging configuration for kube-audit logs in cluster myCluster...
     OK
-    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
 
     ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
 
@@ -621,33 +514,20 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 2. Visualize sua configuração de criação de log de cluster para verificar se ela foi implementada da maneira desejada.
 
     ```
-    bx cs logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get <cluster_name_or_ID>
     ```
     {: pre}
 
     Exemplo de comando e saída:
     ```
-    bx cs logging-config-get myCluster
+    ibmcloud ks logging-config-get myCluster
     Retrieving cluster myCluster logging configurations...
     OK
-    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
     ```
     {: screen}
-
-  <table>
-  <caption>Entendendo os componentes deste comando</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>O nome ou ID do cluster.</td>
-      </tr>
-    </tbody>
-  </table>
 
 3. Opcional: se você desejar parar o encaminhamento de logs de auditoria, será possível [excluir a sua configuração](#log_sources_delete).
 
@@ -669,7 +549,7 @@ Para encaminhar logs de auditoria da API do Kubernetes:
 1. Configure o webhook. Se você não fornecer nenhuma informação nas sinalizações, uma configuração padrão será usada.
 
     ```
-    bx cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud ks apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
     ```
     {: pre}
 
@@ -705,7 +585,7 @@ Para encaminhar logs de auditoria da API do Kubernetes:
 2. Verifique se o encaminhamento de log foi ativado visualizando a URL para o serviço de criação de log remoto.
 
     ```
-    bx cs apiserver-config-get audit-webhook <cluster_name_or_ID>
+    ibmcloud ks apiserver-config-get audit-webhook <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -719,23 +599,23 @@ Para encaminhar logs de auditoria da API do Kubernetes:
 3. Aplique a atualização de configuração reiniciando o mestre dos Kubernetes.
 
     ```
-    bx cs apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
 
 4. Opcional: se você desejar parar o encaminhamento de logs de auditoria, será possível desativar sua configuração.
     1. [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster que você deseja parar a coleta de logs de auditoria do servidor de API.
-    2. Desativar a configuração de backend do webhook para o servidor de API do cluster.
+    2. Desative a configuração de backend de webhook para o servidor de API do cluster.
 
         ```
-        bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ibmcloud ks apiserver-config-unset audit-webhook <cluster_name_or_ID>
         ```
         {: pre}
 
     3. Aplique a atualização de configuração reiniciando o mestre dos Kubernetes.
 
         ```
-        bx cs apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -752,12 +632,33 @@ As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters.
     <dd>O painel do Kubernetes é uma interface administrativa da web na qual é possível revisar o funcionamento de seus nós do trabalhador, localizar recursos do Kubernetes, implementar apps conteinerizados e solucionar problemas de apps com informações de criação de log e de monitoramento. Para obter mais informações sobre como acessar o painel do Kubernetes, veja [Ativando o painel do Kubernetes para o {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>As métricas para clusters padrão estão localizadas na conta do {{site.data.keyword.Bluemix_notm}} para a qual o login foi efetuado quando o cluster do Kubernetes foi criado. Se você especificou um espaço do {{site.data.keyword.Bluemix_notm}} quando criou o cluster, as métricas estão localizadas nesse espaço. As métricas do contêiner são coletadas automaticamente para todos os contêineres que são implementados em um cluster. Essas métricas são enviadas e disponibilizadas por meio de Grafana. Para obter mais informações sobre métricas, veja [Monitoramento para o {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
-    <p>Para acessar o painel Grafana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} no qual você criou o cluster.
-      <ul>
-        <li>Sul e Leste dos EUA: https://metrics.ng.bluemix.net</li>
-        <li>Sul do Reino Unido: https://metrics.eu-gb.bluemix.net</li>
-        <li>UE Central: https://metrics.eu-de.bluemix.net</li>
-      </ul></p></dd>
+    <p>Para acessar o painel Grafana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} no qual você criou o cluster.</p> <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
+  <caption>Endereços IP a serem abertos para o tráfego de monitoramento</caption>
+        <thead>
+        <th>Região do {{site.data.keyword.containershort_notm}}</th>
+        <th>Endereço de monitoramento</th>
+        <th>Endereços IP de monitoramento</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>União Europeia Central</td>
+         <td>Metrics.eu-de.bluemix.net</td>
+         <td><code>158.177.65.80/30</code></td>
+        </tr>
+        <tr>
+         <td>Sul do Reino Unido</td>
+         <td>Metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>Leste dos EUA, Sul dos EUA, AP Norte, AP Sul</td>
+          <td>Metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+ </dd>
 </dl>
 
 ### Outras ferramentas de monitoramento de funcionamento
@@ -778,7 +679,7 @@ As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters.
 O sistema de Recuperação automática do {{site.data.keyword.containerlong_notm}} pode ser implementado em clusters existentes do Kubernetes versão 1.7 ou mais recente.
 {: shortdesc}
 
-O sistema de Recuperação automática usa várias verificações para consultar o status de funcionamento do nó do trabalhador. Se a Recuperação automática detecta um nó do trabalhador que não está saudável com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Somente um nó do trabalhador é submetido a uma ação corretiva por vez. O nó do trabalhador deve concluir com êxito a ação corretiva antes que qualquer nó do trabalhador seja submetido a uma ação corretiva. Para obter mais informações, consulte esta [postagem do blog automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
+O sistema de Recuperação automática usa várias verificações para consultar o status de funcionamento do nó do trabalhador. Se a Recuperação automática detecta um nó do trabalhador não funcional com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Somente um nó do trabalhador é submetido a uma ação corretiva por vez. O nó do trabalhador deve concluir com êxito a ação corretiva antes que qualquer nó do trabalhador seja submetido a uma ação corretiva. Para obter mais informações, consulte esta [postagem do blog automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
 **Nota**: a recuperação automática requer que pelo menos um nó funcional funcione corretamente. Configure a Recuperação automática com verificações ativas somente em clusters com dois ou mais nós do trabalhador.
 
 Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual você deseja verificar os status do nó do trabalhador.
@@ -851,19 +752,19 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Define uma verificação de nó da API do Kubernetes que verifica se cada nó do trabalhador está no estado <code>Ready</code>. A verificação de um nó do trabalhador específico será considerada uma falha se o nó do trabalhador não estiver no estado <code>Ready</code>. A verificação no YAML de exemplo é executada a cada 3 minutos. Se ele falhar três vezes consecutivas, o nó do trabalhador será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>.<br></br>A verificação de nó é ativada até que você configure o campo <b>Ativado</b> como <code>false</code> ou remova a verificação.</td>
+   <td>Define uma verificação de nó da API do Kubernetes que verifica se cada nó do trabalhador está no estado <code>Ready</code>. A verificação de um nó do trabalhador específico será considerada uma falha se o nó do trabalhador não estiver no estado <code>Ready</code>. A verificação no YAML de exemplo é executada a cada 3 minutos. Se ele falhar três vezes consecutivas, o nó do trabalhador será recarregado. Essa ação é equivalente a executar o <code>ibmcloud ks worker-reload</code>.<br></br>A verificação de nó é ativada até que você configure o campo <b>Ativado</b> como <code>false</code> ou remova a verificação.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Define uma verificação de pod da API do Kubernetes que verifica a porcentagem total de pods <code>NotReady</code> em um nó do trabalhador com base no total de pods designados a esse nó do trabalhador. A verificação de um nó do trabalhador específico será considerada uma falha se a porcentagem total de pods <code>NotReady</code> for maior que o <code>PodFailureThresholdPercent</code> definido. A verificação no YAML de exemplo é executada a cada 3 minutos. Se ele falhar três vezes consecutivas, o nó do trabalhador será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>. Por exemplo, o <code>PodFailureThresholdPercent</code> padrão é 50%. Se a porcentagem de pods <code>NotReady</code> for maior que 50% por três vezes consecutivas, o nó do trabalhador será recarregado. <br></br>Por padrão, os pods em todos os namespaces são verificados. Para restringir a verificação somente a pods em um namespace especificado, inclua o campo <code>Namespace</code> na verificação. A verificação de pod é ativada até que você configure o campo <b>Ativado</b> para <code>false</code> ou remova a verificação.
+   Define uma verificação de pod da API do Kubernetes que verifica a porcentagem total de pods <code>NotReady</code> em um nó do trabalhador com base no total de pods designados a esse nó do trabalhador. A verificação de um nó do trabalhador específico será considerada uma falha se a porcentagem total de pods <code>NotReady</code> for maior que o <code>PodFailureThresholdPercent</code> definido. A verificação no YAML de exemplo é executada a cada 3 minutos. Se ele falhar três vezes consecutivas, o nó do trabalhador será recarregado. Essa ação é equivalente a executar o <code>ibmcloud ks worker-reload</code>. Por exemplo, o <code>PodFailureThresholdPercent</code> padrão é 50%. Se a porcentagem de pods <code>NotReady</code> for maior que 50% por três vezes consecutivas, o nó do trabalhador será recarregado. <br></br>Por padrão, os pods em todos os namespaces são verificados. Para restringir a verificação somente a pods em um namespace especificado, inclua o campo <code>Namespace</code> na verificação. A verificação de pod é ativada até que você configure o campo <b>Ativado</b> para <code>false</code> ou remova a verificação.
    </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>Define uma verificação de HTTP que verifica se um servidor HTTP executado em seu nó do trabalhador está funcional. Para usar essa verificação, deve-se implementar um servidor HTTP em cada nó do trabalhador em seu cluster usando um [DaemonSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Deve-se implementar uma verificação de funcionamento que esteja disponível no caminho <code>/myhealth</code> e que possa verificar se o servidor HTTP está funcional. É possível definir outros caminhos mudando o parâmetro <strong>Route</strong>. Se o servidor HTTP estiver funcional, deve-se retornar o código de resposta HTTP definido em <strong>ExpectedStatus</strong>. O servidor HTTP deve ser configurado para atender no endereço IP privado do nó do trabalhador. É possível localizar o endereço IP privado executando <code>kubectl get nodes</code>.<br></br>
    Por exemplo, considere dois nós em um cluster que tenha os endereços IP privados 10.10.10.1 e 10.10.10.2. Nesse exemplo, duas rotas são verificadas para uma resposta HTTP 200: <code>http://10.10.10.1:80/myhealth</code> e <code>http://10.10.10.2:80/myhealth</code>.
-   A verificação no YAML de exemplo é executada a cada 3 minutos. Se ela falhar três vezes consecutivas, o nó do trabalhador será reinicializado. Essa ação é equivalente a executar <code>bx cs worker-reboot</code>.<br></br>A verificação de HTTP é desativada até que você configure o campo <b>Ativado</b> para <code>true</code>.</td>
+   A verificação no YAML de exemplo é executada a cada 3 minutos. Se ela falhar três vezes consecutivas, o nó do trabalhador será reinicializado. Essa ação é equivalente a executar <code>ibmcloud ks worker-reboot</code>.<br></br>A verificação de HTTP é desativada até que você configure o campo <b>Ativado</b> para <code>true</code>.</td>
    </tr>
    </tbody>
    </table>
@@ -888,7 +789,7 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>Quando o tipo de recurso for <code>POD</code>, insira o limite para a porcentagem de pods em um nó do trabalhador que pode estar em um estado [NotReady ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Essa porcentagem é baseada no número total de pods que estão planejados para um nó do trabalhador. Quando uma verificação determina que a porcentagem de pods não saudáveis é maior que o limite, a verificação conta como uma falha.</td>
+   <td>Quando o tipo de recurso for <code>POD</code>, insira o limite para a porcentagem de pods em um nó do trabalhador que pode estar em um estado [NotReady ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Essa porcentagem é baseada no número total de pods que estão planejados para um nó do trabalhador. Quando uma verificação determina que a porcentagem de pods não funcionais é maior que o limite, a verificação conta como uma falha.</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>

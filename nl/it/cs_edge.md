@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -25,10 +25,10 @@ I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster Kubernetes
 
 Quando questi nodi di lavoro sono contrassegnati solo per la rete, gli altri carichi di lavoro non possono consumare la CPU o la memoria del nodo di lavoro e interferire con la rete.
 
+Se hai un cluster multizona e vuoi limitare il traffico di rete ai nodi di lavoro edge, devi abilitare almeno 2 nodi di lavoro edge in ciascuna zona per l'alta disponibilità del programma di bilanciamento del carico o dei pod Ingress. Crea un pool di nodi di lavoro del nodo edge che si estenda tra tutte le zone del tuo cluster, con almeno 2 nodi di lavoro per zona.
+{: tip}
 
-
-
-## Etichettatura dei nodi di lavoro come nodi edge 
+## Etichettatura dei nodi di lavoro come nodi edge
 {: #edge_nodes}
 
 Aggiungi l'etichetta `dedicated=edge` a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i programmi di bilanciamento del carico e Ingress vengano distribuiti solo a quei nodi di lavoro.
@@ -38,26 +38,27 @@ Prima di iniziare:
 
 - [Crea un cluster standard.](cs_clusters.html#clusters_cli)
 - Assicurati che il tuo cluster abbia almeno una VLAN pubblica. I nodi di lavoro edge non sono disponibili per i cluster con solo le VLAN private.
+- [Crea un nuovo pool di lavoro](cs_clusters.html#add_pool) che si estenda tra tutte le zone del tuo cluster e che abbia almeno 2 nodi di lavoro per zona.
 - [Indirizza la CLI Kubernetes al
 cluster](cs_cli_install.html#cs_cli_configure).
 
-Per etichettare i nodi di lavoro come nodi edge: 
+Per etichettare i nodi di lavoro come nodi edge:
 
-1. Elenca tutti i nodi di lavoro nel cluster. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi. Seleziona almeno due nodi di lavoro su ogni VLAN pubblica per impostarli come nodi di lavoro edge. Ingress richiede almeno due nodi di lavoro in ogni zona per fornire l'elevata disponibilità. 
+1. Elenca i nodi di lavoro nel tuo pool di lavoro del nodo edge. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
 2. Etichetta i nodi di lavoro con `dedicated=edge`. Una volta che un nodo di lavoro è contrassegnato con `dedicated=edge`, tutti i successivi programmi di bilanciamento del carico e Ingress vengono distribuiti a un nodo di lavoro edge.
 
   ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
-3. Richiama tutti i servizi di bilanciamento del carico esistenti nel cluster. 
+3. Richiama tutti i servizi di bilanciamento del carico esistenti nel cluster.
 
   ```
   kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
@@ -71,7 +72,7 @@ Per etichettare i nodi di lavoro come nodi edge:
   ```
   {: screen}
 
-4. Utilizzando l'output dal passo precedente, copia e incolla ogni riga `kubectl get service`. Questo comando ridistribuisce il programma di bilanciamento del carico a un nodo di lavoro edge. Solo i programmi di bilanciamento del carico pubblici devono essere ridistribuiti. 
+4. Utilizzando l'output dal passo precedente, copia e incolla ogni riga `kubectl get service`. Questo comando ridistribuisce il programma di bilanciamento del carico a un nodo di lavoro edge. Solo i programmi di bilanciamento del carico pubblici devono essere ridistribuiti.
 
   Output di esempio:
 
@@ -85,7 +86,7 @@ Hai etichettato i nodi di lavoro con `dedicated=edge` e hai ridistribuito tutti 
 <br />
 
 
-## Blocco dell'esecuzione dei carichi di lavoro sui nodi di lavoro edge 
+## Blocco dell'esecuzione dei carichi di lavoro sui nodi di lavoro edge
 {: #edge_workloads}
 
 Uno dei vantaggi dei nodi di lavoro edge è che possono essere specificati per eseguire solo i servizi di rete.

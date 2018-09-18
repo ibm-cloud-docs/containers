@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,8 +26,8 @@ lastupdated: "2018-05-24"
 Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presenti queste tecniche per procedure generiche sulla risoluzione dei problemi e sull'esecuzione del debug per i tuoi cluster. Puoi anche verificare lo [stato del sistema {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
 {: shortdesc}
 
-Puoi eseguire questi passi generali per assicurarti che i tuoi cluster siano aggiornati: 
-- Controlla mensilmente la disponibilità delle patch di sicurezza e del sistema operativo per [aggiornare i tuoi nodi di lavoro](cs_cli_reference.html#cs_worker_update). 
+Puoi eseguire questi passi generali per assicurarti che i tuoi cluster siano aggiornati:
+- Controlla mensilmente la disponibilità delle patch di sicurezza e del sistema operativo per [aggiornare i tuoi nodi di lavoro](cs_cli_reference.html#cs_worker_update).
 - [Aggiorna il tuo cluster](cs_cli_reference.html#cs_cluster_update) alla [versione di Kubernetes](cs_versions.html) più recente predefinita per {{site.data.keyword.containershort_notm}}
 
 ## Debug dei cluster
@@ -38,11 +38,11 @@ Rivedi le opzioni per eseguire il debug dei tuoi cluster e trovare le cause prin
 1.  Elenca il tuo cluster e trova lo `Stato` del cluster.
 
   ```
-  bx cs clusters
+  ibmcloud ks clusters
   ```
   {: pre}
 
-2.  Riesamina lo `Stato` del cluster. Se il tuo cluster si trova in uno stato **Critico**, **Eliminazione non riuscita** o **Avvertenza** o rimane bloccato nello stato **In sospeso** per molto tempo, avvia il [debug dei nodi di lavoro](#debug_worker_nodes).
+2.  Esamina lo `Stato` del cluster. Se il tuo cluster si trova in uno stato **Critico**, **Eliminazione non riuscita** o **Avvertenza** o rimane bloccato nello stato **In sospeso** per molto tempo, avvia il [debug dei nodi di lavoro](#debug_worker_nodes).
 
     <table summary="Ogni riga della tabella deve essere letta da sinistra verso destra, con lo stato del cluster nella prima colonna e un descrizione nella seconda colonna.">
 <caption>Stati cluster</caption>
@@ -115,14 +115,14 @@ Rivedi le opzioni per eseguire il debug dei nodi di lavoro e trovare le cause pr
 1.  Se il tuo cluster si trova in uno stato **Critico**, **Eliminazione non riuscita** o **Avvertenza** o rimane bloccato nello stato **In sospeso** per molto tempo, controlla lo stato dei tuoi nodi di lavoro.
 
   ```
-  bx cs workers <cluster_name_or_id>
+  ibmcloud ks workers <cluster_name_or_id>
   ```
   {: pre}
 
 2.  Controlla il campo `State` e `Status` per ogni nodo di lavoro nell'output della CLI.
 
   <table summary="Ogni riga della tabella deve essere letta da sinistra verso destra, con lo stato del cluster nella prima colonna e un descrizione nella seconda colonna.">
-  <caption>Stati del nodo di lavoro </caption>
+  <caption>Stati del nodo di lavoro</caption>
     <thead>
     <th>Stato nodo di lavoro</th>
     <th>Descrizione</th>
@@ -177,12 +177,12 @@ richiede che alcuni indirizzi IP e porte siano aperti per consentire la comunica
 5.  Elenca i dettagli del nodo di lavoro. Se i dettagli includono un messaggio di errore, rivedi l'elenco di [messaggi di errore comuni per i nodi di lavoro](#common_worker_nodes_issues) per imparare come risolvere il problema.
 
    ```
-   bx cs worker-get <worker_id>
+   ibmcloud ks worker-get <worker_id>
    ```
    {: pre}
 
   ```
-  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
+  ibmcloud ks worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -207,29 +207,31 @@ Controlla i messaggi di errore comuni e impara come risolverli.
       </tr>
       <tr>
         <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile inserire l'ordine. Le risorse dietro il router 'router_name' non sono sufficienti a soddisfare la richiesta per i seguenti guest: 'worker_id'.</td>
-        <td>La VLAN che hai selezionato è associata a un pod nel data center con insufficiente spazio per il provisioning del tuo nodo di lavoro. Puoi scegliere tra le seguenti opzioni:<ul><li>Utilizza un data center differente per eseguire il provisioning del tuo nodo di lavoro. Esegui <code>bx cs locations</code> per elencare i data center disponibili.<li>Se disponi di una coppia di VLAN privata e pubblica esistente che è associata a un altro pod nel data center, utilizza invece questa coppia di VLAN.<li>Contatta il supporto {{site.data.keyword.Bluemix_notm}} aprendo un [{{site.data.keyword.Bluemix_notm}} ticket di supporto](#ts_getting_help).</ul></td>
+        <td>La VLAN che hai selezionato è associata a un pod nel data center con insufficiente spazio per il provisioning del tuo nodo di lavoro. Puoi scegliere tra le seguenti opzioni:<ul><li>Utilizza un data center differente per eseguire il provisioning del tuo nodo di lavoro. Esegui <code>ibmcloud ks zones</code> per elencare i data center disponibili.<li>Se disponi di una coppia di VLAN privata e pubblica esistente che è associata a un altro pod nel data center, utilizza invece questa coppia di VLAN.<li>Contatta il supporto {{site.data.keyword.Bluemix_notm}} aprendo un [{{site.data.keyword.Bluemix_notm}} ticket di supporto](#ts_getting_help).</ul></td>
       </tr>
       <tr>
-        <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile ottenere la VLAN di rete con ID: &lt;vlan id&gt;. </td>
-        <td>Non è stato possibile eseguire il provisioning del tuo nodo di lavoro perché non è stato possibile trovare l'ID della VLAN selezionato per uno dei seguenti motivi:<ul><li>Potresti aver specificato un numero della VLAN invece dell'ID. Il numero della VLAN è di 3 o 4 cifre, mentre l'ID è di 7. Esegui <code>bx cs vlans &lt;location&gt;</code> per richiamare l'ID della VLAN.<li>L'ID VLAN potrebbe non essere associato all'account dell'infrastruttura IBM Cloud (SoftLayer) da te utilizzato. Esegui <code>bx cs vlans &lt;location&gt;</code> per elencare gli ID della VLAN disponibili per il tuo account. Per modificare l'account dell'infrastruttura IBM Cloud (SoftLayer), vedi [`bx cs credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile ottenere la VLAN di rete con ID: &lt;vlan id&gt;.</td>
+        <td>Non è stato possibile eseguire il provisioning del tuo nodo di lavoro perché non è stato possibile trovare l'ID della VLAN selezionato per uno dei seguenti motivi:<ul><li>Potresti aver specificato un numero della VLAN invece dell'ID. Il numero della VLAN è di 3 o 4 cifre, mentre l'ID è di 7. Esegui <code>ibmcloud ks vlans &lt;zone&gt;</code> per richiamare l'ID della VLAN.<li>L'ID VLAN potrebbe non essere associato all'account dell'infrastruttura IBM Cloud (SoftLayer) da te utilizzato. Esegui <code>ibmcloud ks vlans &lt;zone&gt;</code> per elencare gli ID della VLAN disponibili per il tuo account. Per modificare l'account dell'infrastruttura IBM Cloud (SoftLayer), vedi [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: l'ubicazione fornita per questo ordine non è valida. (HTTP 500)</td>
-        <td>La tua infrastruttura IBM Cloud (SoftLayer) non è configurata per ordinare le risorse di calcolo nel data center selezionato. Contatta il [supporto {{site.data.keyword.Bluemix_notm}}](#ts_getting_help) per verificare che il tuo account sia configurato correttamente. </td>
+        <td>La tua infrastruttura IBM Cloud (SoftLayer) non è configurata per ordinare le risorse di calcolo nel data center selezionato. Contatta il [supporto {{site.data.keyword.Bluemix_notm}}](#ts_getting_help) per verificare che il tuo account sia configurato correttamente.</td>
        </tr>
        <tr>
         <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: l'utente non dispone della autorizzazioni dell'infrastruttura {{site.data.keyword.Bluemix_notm}} necessarie per aggiungere i server.
         </br></br>
-        Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: 'Elemento' deve essere ordinato con l'autorizzazione.</td>
-        <td>Potresti non disporre delle autorizzazioni necessarie per eseguire il provisioning di un nodo di lavoro dal portfolio dell'infrastruttura IBM Cloud (SoftLayer). Vedi [Configurazione dell'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer) per creare cluster Kubernetes standard](cs_troubleshoot_clusters.html#cs_credentials).</td>
+        Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: 'Elemento' deve essere ordinato con l'autorizzazione.
+        </br></br>
+        Impossibile convalidare le credenziali dell'infrastruttura IBM Cloud.</td>
+        <td>Potresti non disporre delle autorizzazioni necessarie per eseguire l'azione nel tuo portfolio dell'infrastruttura IBM Cloud (SoftLayer) oppure stai utilizzando le credenziali dell'infrastruttura errate. Vedi [Configurazione dell'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer) per creare cluster Kubernetes standard](cs_troubleshoot_clusters.html#cs_credentials).</td>
       </tr>
       <tr>
        <td>Il nodo di lavoro non riesce a comunicare con i server {{site.data.keyword.containershort_notm}}. Verifica che la configurazione del firewall consenta il traffico da questo nodo di lavoro.
-       <td><ul><li>Se hai un firewall, [configura le impostazioni del tuo firewall per consentire il traffico in uscita alle porte e agli indirizzi IP appropriati](cs_firewall.html#firewall_outbound).</li><li>Verifica se il tuo cluster non ha un IP pubblico eseguendo `bx cs workers <mycluster>`. Se non viene elencato alcun IP pubblico, il tuo cluster ha solo VLAN private. <ul><li>Se vuoi che il cluster abbia sono VLAN private, configura la tua [connessione VLAN](cs_clusters.html#worker_vlan_connection) e il tuo [firewall](cs_firewall.html#firewall_outbound).</li><li>Se vuoi che il cluster abbia un IP pubblico, [aggiungi nuovi nodi di lavoro](cs_cli_reference.html#cs_worker_add) con VLAN sia pubbliche che private.</li></ul></li></ul></td>
+       <td><ul><li>Se hai un firewall, [configura le impostazioni del tuo firewall per consentire il traffico in uscita alle porte e agli indirizzi IP appropriati](cs_firewall.html#firewall_outbound).</li><li>Controlla se il tuo cluster non ha un IP pubblico eseguendo `ibmcloud ks workers &lt;mycluster&gt;`. Se non viene elencato alcun IP pubblico, il tuo cluster ha solo VLAN private.<ul><li>Se vuoi che il cluster abbia sono VLAN private, configura la tua [connessione VLAN](cs_network_planning.html#private_vlan) e il tuo [firewall](cs_firewall.html#firewall_outbound).</li><li>Se vuoi che il cluster abbia un IP pubblico, [aggiungi nuovi nodi di lavoro](cs_cli_reference.html#cs_worker_add) con VLAN sia pubbliche che private.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Impossibile creare il token del portale IMS, poiché nessun account IMS è collegato all'account BSS selezionato</br></br>L'utente fornito non è stato trovato o non è attivo</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: lo stato dell'account utente è attualmente cancel_pending.</br></br>Attendere che la macchina sia visibile all'utente</td>
-  <td>Il proprietario della chiave API utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) non ha le autorizzazioni necessarie per eseguire l'azione o potrebbe essere in attesa di eliminazione. </br></br><strong>Come utente</strong>, completa la seguente procedura: <ol><li>Se hai accesso a più account, assicurati di essere collegato all'account in cui desideri lavorare con {{site.data.keyword.containerlong_notm}}. </li><li>Esegui <code>bx cs api-key-info</code> per visualizzare il proprietario della chiave API corrente utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). </li><li>Esegui <code>bx account list</code> per visualizzare il proprietario dell'account {{site.data.keyword.Bluemix_notm}} che usi attualmente. </li><li>Contatta il proprietario dell'account {{site.data.keyword.Bluemix_notm}} e segnala che il proprietario della chiave API non dispone di autorizzazioni sufficienti nell'infrastruttura IBM Cloud (SoftLayer) o potrebbe essere in attesa di eliminazione. </li></ol></br><strong>Come proprietario dell'account</strong>, completa la seguente procedura: <ol><li>Rivedi le [autorizzazioni necessarie nell'infrastruttura IBM Cloud (SoftLayer)](cs_users.html#infra_access) per eseguire l'azione precedentemente non riuscita. </li><li>Correggi le autorizzazioni del proprietario della chiave API o crea una nuova chiave API utilizzando il comando [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Se tu o un altro amministratore dell'account imposta manualmente le credenziali dell'infrastruttura IBM Cloud (SoftLayer) nel tuo account, esegui [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) per rimuovere le credenziali dal tuo account.</li></ol></td>
+  <td>Il proprietario della chiave API utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) non ha le autorizzazioni necessarie per eseguire l'azione o potrebbe essere in attesa di eliminazione.</br></br><strong>Come utente</strong>, completa la seguente procedura: <ol><li>Se hai accesso a più account, assicurati di essere collegato all'account in cui desideri lavorare con {{site.data.keyword.containerlong_notm}}. </li><li>Esegui <code>ibmcloud ks api-key-info</code> per visualizzare il proprietario della chiave API attuale utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). </li><li>Esegui <code>ibmcloud account list</code> per visualizzare il proprietario dell'account {{site.data.keyword.Bluemix_notm}} che usi attualmente. </li><li>Contatta il proprietario dell'account {{site.data.keyword.Bluemix_notm}} e segnala che il proprietario della chiave API non dispone di autorizzazioni sufficienti nell'infrastruttura IBM Cloud (SoftLayer) o potrebbe essere in attesa di eliminazione. </li></ol></br><strong>Come proprietario dell'account</strong>, completa la seguente procedura: <ol><li>Rivedi le [autorizzazioni necessarie nell'infrastruttura IBM Cloud (SoftLayer)](cs_users.html#infra_access) per eseguire l'azione precedentemente non riuscita. </li><li>Correggi le autorizzazioni del proprietario della chiave API o crea una nuova chiave API utilizzando il comando [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Se tu o un altro amministratore dell'account impostate manualmente le credenziali dell'infrastruttura IBM Cloud (SoftLayer) nel tuo account, eseguite [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) per rimuovere le credenziali dal tuo account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -251,7 +253,7 @@ Rivedi le opzioni di cui disponi per il debug delle tue distribuzioni dell'appli
  Esempio:
  <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
 
-2. [Verifica se i contenitori sono bloccati nello stato ContainerCreating](cs_troubleshoot_storage.html#stuck_creating_state). 
+2. [Verifica se i contenitori sono bloccati nello stato ContainerCreating](cs_troubleshoot_storage.html#stuck_creating_state).
 
 3. Verifica se il cluster è nello stato `Critico`. Se il cluster è in uno stato `Critico`, controlla le regole del firewall e verifica che il master possa comunicare con i nodi di lavoro.
 
@@ -304,8 +306,8 @@ Stai ancora avendo problemi con il tuo cluster?
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support/howtogetsupport.html#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
 
--   Contatta il supporto IBM aprendo un ticket. Per informazioni su come aprire un ticket di supporto IBM o sui livelli di supporto e sulla gravità dei ticket, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support). 
+-   Contatta il supporto IBM aprendo un ticket. Per informazioni su come aprire un ticket di supporto IBM o sui livelli di supporto e sulla gravità dei ticket, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `bx cs clusters`.
+Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`.
 

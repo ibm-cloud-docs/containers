@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-08-06"
 
 ---
 
@@ -26,6 +26,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 ## Anwendungsservices
+{: #application_services}
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
 <caption>Anwendungsservices</caption>
 <thead>
@@ -47,6 +48,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 ## DevOps-Services
+{: #devops_services}
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
 <caption>DevOps-Services</caption>
 <thead>
@@ -62,7 +64,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Kubernetes-Paketmanager. Sie können neue Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen. <p>Weitere Informationen finden Sie unter [Helm in {{site.data.keyword.containershort_notm}} konfigurieren](cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Kubernetes-Paketmanager. Sie können neue Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen. <p>Weitere Informationen finden Sie unter [Helm in {{site.data.keyword.containershort_notm}} konfigurieren](cs_integrations.html#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -80,6 +82,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 ## Protokollierungs- und Überwachungsservices
+{: #health_services}
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
 <caption>Protokollierungs- und Überwachungsservices</caption>
 <thead>
@@ -96,6 +99,10 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <tr>
 <td>Datadog</td>
 <td>Überwachen Sie Ihren Cluster und zeigen Sie Metriken für die Infrastruktur- und Anwendungsleistung mit <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+</tr>
+<tr>
+<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Überwachen Sie die in Ihrem Cluster vorgenommenen Verwaltungsaktivitäten, indem Sie die Protokolle über Grafana analysieren. Weitere Informationen zum Service finden Sie in der Dokumentation zu [Activity Tracker](/docs/services/cloud-activity-tracker/index.html). Weitere Informationen zu den Typen von Ereignissen, die Sie überwachen können, finden Sie im Abschnitt [Activity Tracker-Ereignisse](/cs_at_events.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -118,7 +125,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Sematext</td>
-<td>Zeigen Sie Metriken und Protokolle für Ihre containerisierten Anwendungen mithilfe von <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+<td>Zeigen Sie Metriken und Protokolle für Ihre containerisierten Anwendungen mithilfe von <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -137,6 +144,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 ## Sicherheitsservices
+{: #security_services}
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
 <caption>Sicherheitsservices</caption>
 <thead>
@@ -152,7 +160,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>Sie können <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> durch <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ergänzen, um die Sicherheit von Containerbereitstellungen zu optimieren, indem Sie die zulässigen Funktionen für Ihre Apps einschränken. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protecting container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+  <td>Sie können <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> durch <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ergänzen, um die Sicherheit von Containerbereitstellungen zu optimieren, indem Sie die zulässigen Funktionen für Ihre Apps einschränken. Weitere Informationen finden Sie in der Veröffentlichung <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -178,6 +186,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 ## Speicherservices
+{: #storage_services}
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
 <caption>Speicherservices</caption>
 <thead>
@@ -223,7 +232,7 @@ Vorbemerkungen:
 
 1. [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
 2. [Fordern Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/apps/reqnsi.html#req_instance) an.
-   **Hinweis:** Zur Erstellung einer Instanz eines Service am Standort 'Washington DC' müssen Sie die CLI verwenden.
+   **Hinweis:** Zur Erstellung einer Instanz eines Service in der Zone 'Washington DC' müssen Sie die CLI verwenden.
 3. Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt, andere Services jedoch nicht. Sie können die verschiedenen Servicetypen sehen, nachdem Sie die Serviceinstanz erstellt haben und die Services im Dashboard als **Cloud Foundry-Services** und **Services** gruppiert sind. Um die Services im Abschnitt **Services** mit Clustern zu binden, [erstellen Sie zuerst Cloud Foundry-Aliasnamen](#adding_resource_cluster).
 
 **Hinweis:**
@@ -237,7 +246,7 @@ Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
 2.  Listen Sie verfügbare {{site.data.keyword.Bluemix_notm}}-Services auf.
 
     ```
-    bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -268,17 +277,17 @@ Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
 5.  Fügen Sie den Service zu Ihrem Cluster hinzu.
 
     ```
-    bx cs cluster-service-bind <clustername_oder_-id> <namensbereich> <serviceinstanzname>
+    ibmcloud ks cluster-service-bind <clustername_oder_-id> <namensbereich> <serviceinstanzname>
     ```
     {: pre}
 
     Wenn der Service erfolgreich zu Ihrem Cluster hinzugefügt worden ist, wird ein geheimer Schlüssel für den Cluster erstellt, der die Berechtigungsnachweise Ihrer Serviceinstanz enthält. CLI-Beispielausgabe:
 
     ```
-    bx cs cluster-service-bind mein_cluster mein_namensbereich cleardb
+    ibmcloud ks cluster-service-bind mein_cluster mein_namensbereich cleardb
     Binding service instance to namespace...
     OK
-    Namespace: mein_namensbereich
+    Namespace:	mein_namensbereich
     Secret name:     binding-<serviceinstanzname>
     ```
     {: screen}
@@ -298,7 +307,7 @@ Um den Service in einem Pod zu verwenden, der im Cluster bereitgestellt ist, mü
 ## Cloud Foundry-Aliasnamen für andere Ressourcen des {{site.data.keyword.Bluemix_notm}}-Service erstellen
 {: #adding_resource_cluster}
 
-Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt. Um einen {{site.data.keyword.Bluemix_notm}}-Service an Ihr Cluster zu binden, der kein Cloud Foundry-Service ist, erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
+Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt. Sie können die verschiedenen Servicetypen sehen, nachdem Sie die Serviceinstanz erstellt haben und die Services im Dashboard als **Cloud Foundry-Services** und **Services** gruppiert sind. Um einen {{site.data.keyword.Bluemix_notm}}-Service an Ihr Cluster zu binden, der kein Cloud Foundry-Service ist, erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
 {:shortdesc}
 
 [Fordern Sie zunächst eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service an](/docs/apps/reqnsi.html#req_instance).
@@ -308,26 +317,26 @@ Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
 1. Geben Sie als Ziel die Organisation und den Bereich an, wo die Serviceinstanz erstellt wurde.
 
     ```
-    bx target -o <organisationsname> -s <bereichsname>
+    ibmcloud target -o <organisationsname> -s <bereichsname>
     ```
     {: pre}
 
 2. Notieren Sie den Namen der Serviceinstanz.
     ```
-    bx resource service-instances
+    ibmcloud resource service-instances
     ```
     {: pre}
 
 3. Erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
     ```
-    bx resource service-alias-create <servicealiasname> --instance-name <serviceinstanz>
+    ibmcloud resource service-alias-create <servicealiasname> --instance-name <serviceinstanz>
     ```
     {: pre}
 
 4. Überprüfen Sie, dass der Servicealiasname erstellt wurde.
 
     ```
-    bx service list
+    ibmcloud service list
     ```
     {: pre}
 
@@ -481,7 +490,7 @@ Sie können nun auf die Details für den {{site.data.keyword.Bluemix_notm}}-Serv
 ## Helm in {{site.data.keyword.containershort_notm}} konfigurieren
 {: #helm}
 
-[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh/) ist ein Kubernetes-Paketmanager. Sie können Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen.
+[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh) ist ein Kubernetes-Paketmanager. Sie können Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen.
 {:shortdesc}
 
 Vor der Verwendung von Helm-Diagrammen mit {{site.data.keyword.containershort_notm}} müssen Sie eine Helm-Instanz in Ihrem Cluster installieren und initialisieren. Sie können anschließend das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzufügen.
@@ -494,8 +503,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
 
     1. Erstellen Sie in Ihrem bevorzugten Editor die folgende Datei und speichern Sie sie als `rbac-config.yaml`.
       **Hinweis**:
-        * Die Clusterrolle `cluster-admin` wird standardmäßig in Kubernetes-Clustern erstellt, Sie müssen sie also nicht explizit definieren.
-        * Wenn Sie ein Cluster der Version 1.7.x verwenden, ändern Sie `apiVersion` in `rbac.authorization.k8s.io/v1beta1`.
+        * Wenn Sie Tiller mit dem Servicekonto und der Cluster-Rollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](cs_users.html#access_policies) verfügen. Sie können einen anderen Namensbereich als `kube-system` auswählen, aber alle IBM Helm-Diagramme müssen in `kube-system` installiert sein. Immer, wenn Sie den Befehl `helm` ausführen, müssen Sie mit dem Flag `tiller-namespace <namespace>` auf den anderen Namensbereich verweisen, in dem Tiller installiert ist.
 
       ```
       apiVersion: v1

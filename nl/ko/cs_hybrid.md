@@ -1,0 +1,102 @@
+---
+
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-08-06"
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:download: .download}
+{:tsSymptoms: .tsSymptoms}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+
+
+# {{site.data.keyword.Bluemix_notm}} Private에서 {{site.data.keyword.containerlong_notm}} 사용
+{: #hybrid_iks_icp}
+
+{{site.data.keyword.Bluemix}} Private 계정이 있으면 {{site.data.keyword.containerlong}}를 포함하여 선택된 {{site.data.keyword.Bluemix_notm}} 서비스에서 이를 사용할 수 있습니다. 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Private 및 IBM 퍼블릭 클라우드의 하이브리드 환경 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://ibm.biz/hybridJune2018)의 블로그를 참조하십시오.
+{: shortdesc}
+
+사용자는 [{{site.data.keyword.Bluemix_notm}} 오퍼링](cs_why.html#differentiation)을 이해하고 있습니다. 이제 [퍼블릭 및 프라이빗 클라우드에 연결](#hybrid_vpn)하고 [공용 컨테이너용 프라이빗 패키지를 재사용](#hybrid_ppa_importer)할 수 있습니다. 
+
+## 퍼블릭 및 프라이빗 클라우드를 strongSwan VPN과 연결
+{: #hybrid_vpn}
+
+공용 Kubernetes 클러스터와 {{site.data.keyword.Bluemix}} Private 인스턴스 간에 VPN 연결을 설정하여 양방향 통신을 허용합니다.
+{: shortdesc}
+
+1.  [{{site.data.keyword.Bluemix}} Private에서 클러스터를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)하십시오. 
+
+2.  {{site.data.keyword.Bluemix}} 퍼블릭의 {{site.data.keyword.containerlong}}에서 표준 클러스터를 작성하거나 기존 클러스터를 사용하십시오. 클러스터를 작성하려면 다음 옵션 중에서 선택하십시오.  
+    - [GUI에서 표준 클러스터를 작성](cs_clusters.html#clusters_ui)합니다. 
+    - [CLI에서 표준 클러스터를 작성](cs_clusters.html#clusters_cli)합니다. 
+    - [CAM(Cloud Automation Manager)을 사용하여 사전 정의된 템플리트로 클러스터를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)합니다. CAM을 사용하여 클러스터를 배치하면 Helm Tiller가 사용자를 위해 자동으로 설치됩니다. 
+
+3.  {{site.data.keyword.Bluemix}} Private 클러스터에서 strongSwan IPSec VPN 서비스를 배치하십시오. 
+
+    1.  [strongSwan IPSec VPN 임시 해결책을 완료 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html). 
+
+    2.  개인용 클러스터에 [strongSwan VPN Helm 차트를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)하십시오. 
+
+4.  {{site.data.keyword.Bluemix}} Private VPN 게이트웨이의 공인 IP 주소를 가져오십시오. IP 주소는 [개인용 클러스터 예비 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/prep_cluster.html)의 일부였습니다. 
+
+5.  {{site.data.keyword.Bluemix}} 퍼블릭의 클러스터에서 [strongSwan IPSec VPN 서비스를 배치](cs_vpn.html#vpn-setup)하십시오. 이전 단계의 공인 IP 주소를 사용하고, {{site.data.keyword.Bluemix}} 퍼블릭의 클러스터에서 VPN 연결이 시작될 수 있도록 반드시 [아웃바운드 연결](cs_vpn.html#strongswan_3)을 위한 {{site.data.keyword.Bluemix}} 퍼블릭의 VPN 게이트웨이를 구성하십시오.  
+
+6.  클러스터 간에 [VPN 연결을 테스트](cs_vpn.html#vpn_test)하십시오. 
+
+7.  연결할 각각의 클러스터에 대해 이러한 단계를 반복하십시오.  
+
+
+## 공용 Kubernetes 컨테이너에서 {{site.data.keyword.Bluemix_notm}} Private 이미지 실행
+{: #hybrid_ppa_importer}
+
+{{site.data.keyword.Bluemix_notm}} 퍼블릭의 클러스터에서 {{site.data.keyword.Bluemix_notm}} Private용으로 패키징된 선택되고 라이센싱된 IBM 제품을 실행할 수 있습니다.   
+{: shortdesc}
+
+라이센싱된 소프트웨어는 [IBM Passport Advantage ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www-01.ibm.com/software/passportadvantage/index.html)에서 사용 가능합니다. {{site.data.keyword.Bluemix_notm}} 퍼블릭의 클러스터에서 이 소프트웨어를 사용하려면 소프트웨어를 다운로드하고 이미지를 추출한 후에 해당 이미지를 {{site.data.keyword.registryshort}}의 네임스페이스로 업로드하십시오. 소프트웨어를 사용하고자 하는 환경과 무관하게, 사용자는 우선 제품에 대한 필수 라이센스를 받아야 합니다.  
+
+다음 표는 {{site.data.keyword.Bluemix_notm}} 퍼블릭의 클러스터에서 사용할 수 있는 사용 가능한 {{site.data.keyword.Bluemix_notm}} Private 제품의 개요입니다. 
+
+|제품 이름|버전 |부품 번호|
+| --- | --- | --- |
+| IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
+| IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
+| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM WebSphere Application Server Liberty | 16.0.0.3 | Docker Hub 이미지 |
+{: caption="표. {{site.data.keyword.Bluemix_notm}} 퍼블릭에서 사용할 수 있도록 지원되는 {{site.data.keyword.Bluemix_notm}} Private 제품. " caption-side="top"}
+
+시작하기 전에: 
+- [{{site.data.keyword.registryshort}} CLI 플러그인(`ibmcloud cr`)을 설치](/docs/services/Registry/registry_setup_cli_namespace.html#registry_cli_install)하십시오. 
+- [{{site.data.keyword.registryshort}}의 네임스페이스를 설정](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)하거나 `ibmcloud cr namespaces`를 실행하여 기존 네임스페이스를 검색하십시오.  
+- [클러스터에 `kubectl` CLI를 대상으로 지정](/docs/containers/cs_cli_install.html#cs_cli_configure)하십시오. 
+- [Helm CLI를 설치하고 클러스터에서 Tiller를 설정](/docs/containers/cs_integrations.html#helm)하십시오. 
+
+{{site.data.keyword.Bluemix_notm}} 퍼블릭의 클러스터에서 {{site.data.keyword.Bluemix_notm}} Private 이미지를 배치하려면 다음을 수행하십시오. 
+
+1.  [{{site.data.keyword.registryshort}} 문서](/docs/services/Registry/ts_index.html#ts_ppa)의 단계에 따라 IBM Passport Advantage에서 라이센싱된 소프트웨어를 다운로드하고 이미지를 네임스페이스에 푸시한 후에 클러스터에 Helm 차트를 설치하십시오.  
+
+    **IBM WebSphere Application Server Liberty의 경우**:
+    
+    1.  IBM Passport Advantage에서 이미지를 가져오는 대신에 [Docker Hub 이미지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/_/websphere-liberty/)를 사용하십시오. 프로덕션 라이센스 가져오기에 대한 지시사항은 [Docker Hub의 이미지를 프로덕션 이미지로 업그레이드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade)를 참조하십시오. 
+    
+    2.  [Liberty Helm 차트 지시사항 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html)을 따르십시오.  
+
+2.  Helm 차트의 **상태**가 `DEPLOYED`를 표시하는지 확인하십시오. 이를 표시하지 않으면 잠시 기다린 후에 다시 시도하십시오.
+    ```
+    helm status <helm_chart_name>
+    ```
+    {: pre}
+   
+3.  클러스터에서 제품을 구성하고 사용하는 방법에 대한 자세한 정보는 제품 특정 문서를 참조하십시오.  
+
+    - [IBM Db2 Direct Advanced Edition Server ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html) 
+    - [IBM MQ Advanced ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
+    - [IBM WebSphere Application Server Liberty ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html)
