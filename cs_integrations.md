@@ -146,6 +146,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## Security services
 {: #security_services}
+
+Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+{: shortdesc}
+
 <table summary="Summary for accessibility">
 <caption>Security services</caption>
 <thead>
@@ -170,6 +174,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
   <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
+  <td>{{site.data.keyword.keymanagementservicefull}}</td>
+  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](cs_secure.html#keyprotect).<br>For more information, see the <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -366,6 +374,7 @@ To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, 
 The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
 - [Mount the secret as a volume to your pod](#mount_secret)
 - [Reference the secret in environment variables](#reference_secret)
+
 
 Before your begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.

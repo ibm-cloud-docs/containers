@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-14"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -213,10 +213,10 @@ When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy
 ## Creating secrets
 {: #secrets}
 
-Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys.
+Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
 {:shortdesc}
 
-Review the following tasks that require secrets. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
+Review the following tasks that require secrets. 
 
 ### Adding a service to a cluster
 {: #secrets_service}
