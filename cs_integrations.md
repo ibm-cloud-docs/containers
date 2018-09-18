@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -716,17 +716,27 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     ```
     {: screen}
 
-5. Add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
+5. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
 
     ```
-    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    helm repo add ibm https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repository.
+    ```
+    helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+    ```
+    {: pre}
+
+6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+    ```
+    helm search ibm-charts
     ```
     {: pre}
 

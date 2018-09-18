@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -51,7 +51,7 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
-1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
+1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio).
     1. [Set up Helm in your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
     2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
@@ -60,7 +60,7 @@ Download and install Istio in your cluster.
         {: pre}
     3. Install the Helm chart to your cluster.
         ```
-        helm install ibm/ibm-istio --name=istio --namespace istio-system
+        helm install ibm-charts/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
 
