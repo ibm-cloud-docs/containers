@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -53,7 +53,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 2. Get the **GUID** of your {{site.data.keyword.cos_full_notm}} service instance. 
    ```
-   ibmcloud resource service-instance <service_name>
+   ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
   
