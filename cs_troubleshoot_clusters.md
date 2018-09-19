@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-14"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -31,6 +31,8 @@ If you have a more general issue, try out [cluster debugging](cs_troubleshoot.ht
 
 ## Unable to connect to your infrastructure account
 {: #cs_credentials}
+
+
 
 {: tsSymptoms}
 When you create a new Kubernetes cluster, you receive an error message similar to one of the following.
@@ -203,6 +205,8 @@ The account owner must set up the infrastructure account credentials properly. T
     1.  Check your worker VLAN connectivity.
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
+
+
 
 <br />
 
