@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-18"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -206,29 +206,6 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
 
 [Next, you can run a configuration file from the dashboard.](#app_ui)
-
-<br />
-
-
-## Creating secrets
-{: #secrets}
-
-Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
-{:shortdesc}
-
-Review the following tasks that require secrets. 
-
-### Adding a service to a cluster
-{: #secrets_service}
-
-When you bind a service to a cluster, you don't have to create a secret. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](cs_integrations.html#adding_cluster).
-
-### Encrypting traffic to your apps with TLS secrets
-{: #secrets_tls}
-
-The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. For more information, see the [Ingress configuration documentation](cs_ingress.html#public_inside_3).
-
-Additionally, if you have apps that require the HTTPS protocol and need traffic to stay encrypted, you can use one-way or mutual authentication secrets with the `ssl-services` annotation. For more information, see the [Ingress annotations documentation](cs_ingress.html#ssl-services).
 
 <br />
 
