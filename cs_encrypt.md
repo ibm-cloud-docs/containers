@@ -24,7 +24,11 @@ By default, your {{site.data.keyword.containerlong}} cluster uses encrypted disk
 
 For more information on securing your cluster, see [Security for {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).
 
+<<<<<<< HEAD
+## Understanding when to use secrets
+=======
 ## Creating secrets
+>>>>>>> origin/master
 {: #secrets}
 
 Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
@@ -35,7 +39,11 @@ Review the following tasks that require secrets.
 ### Adding a service to a cluster
 {: #secrets_service}
 
+<<<<<<< HEAD
+When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](cs_integrations.html#adding_cluster).
+=======
 When you bind a service to a cluster, you don't have to create a secret. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](cs_integrations.html#adding_cluster).
+>>>>>>> origin/master
 
 ### Encrypting traffic to your apps with TLS secrets
 {: #secrets_tls}
@@ -44,4 +52,16 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 Additionally, if you have apps that require the HTTPS protocol and need traffic to stay encrypted, you can use one-way or mutual authentication secrets with the `ssl-services` annotation. For more information, see the [Ingress annotations documentation](cs_ingress.html#ssl-services).
 
+<<<<<<< HEAD
+### Accessing your registry with credentials stored in a Kubernetes `imagePullSecret`
+{: #imagepullsecret}
+
+When you create a cluster, secrets for your {{site.data.keyword.registrylong}} credentials are automatically created for you in the `default` Kubernetes namespace. However, you must [create your own imagePullSecret for your cluster](cs_images.html#other) if you want to deploy a container in the following situations.
+* From an image in your {{site.data.keyword.registryshort_notm}} registry to a Kubernetes namespace other than `default`.
+* From an image in your {{site.data.keyword.registryshort_notm}} registry that is stored in a different {{site.data.keyword.Bluemix_notm}} region or {{site.data.keyword.Bluemix_notm}} account.
+* From an image that is stored in an {{site.data.keyword.Bluemix_notm}} Dedicated account.
+* From an image that is stored in an external, private registry.
+
+=======
+>>>>>>> origin/master
 
