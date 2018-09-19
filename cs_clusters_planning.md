@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -19,6 +19,8 @@ lastupdated: "2018-09-13"
 # Planning your cluster and worker node setup
 {: #plan_clusters}
 Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
+
+
 
 ## Highly available clusters
 {: #ha_clusters}
@@ -211,7 +213,7 @@ If you want to create a cluster that only has access on a private VLAN, you can 
 
 If you want to create a cluster that only has access on a private VLAN:
 
-1.  Review [Planning private-only cluster networking](cs_network_planning.html#private_vlan)
+1.  Review [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
 2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](cs_subnets.html#vra-routing) for the subnets.
 3.  [Create a cluster by using the CLI](cs_clusters.html#clusters_cli) by including the `--private-only` flag.
 4.  If you want to expose an app to a private network by using a private NodePort, LoadBalancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](cs_network_planning.html#private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
@@ -345,7 +347,7 @@ Bare metal gives you direct access to the physical resources on the machine, suc
 Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
 
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
-Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. 
+Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
 
 **Important**: Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.
 

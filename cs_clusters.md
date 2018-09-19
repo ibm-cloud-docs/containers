@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-18"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -57,7 +57,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 **To create a standard cluster**
 
-1. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
+1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -435,7 +435,7 @@ You can add worker nodes to your cluster by creating a new worker pool.
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
    {: pre}
-   
+
    Example output:
    ```
    ...
