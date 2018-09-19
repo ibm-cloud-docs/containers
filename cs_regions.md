@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -157,9 +157,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
   <tbody>
     <tr>
       <td>AP North</td>
-      <td>None</td>
-      <td><p>Tokyo: tok02</p>
-      <p>Hong Kong S.A.R. of the PRC: hkg02</p>
+      <td>Tokyo: tok02, tok04, tok05</td>
+      <td><p>Hong Kong S.A.R. of the PRC: hkg02</p>
       <p>Seoul: seo01</p>
       <p>Singapore: sng01</p></td>
     </tr>
