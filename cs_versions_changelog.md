@@ -41,7 +41,7 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
-### Changelog for  1.11.3_1521, released 20 September 2018
+### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
 
 <table summary="Changes that were made since version 1.11.2_1516">
@@ -258,7 +258,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
-### Changelog for worker node fix pack  1.10.7_1521, released 20 September 2018
+### Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018
 {: #1107_1521}
 
 <table summary="Changes that were made since version 1.10.7_1520">
@@ -659,7 +659,7 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for worker node fix pack  1.9.10_1524, released 20 September 2018
+### Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018
 {: #1910_1524}
 
 <table summary="Changes that were made since version 1.9.10_1523">
@@ -1043,7 +1043,7 @@ Review the following changes.
 
 Review the following changes.
 
-### Changelog for worker node fix pack  1.8.15_1521, released 20 September 2018
+### Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018
 {: #1815_1521}
 
 <table summary="Changes that were made since version 1.8.15_1520">
