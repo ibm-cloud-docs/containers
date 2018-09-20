@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-19"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -619,6 +619,8 @@ Steps:
 
 You can manage the rollout of your changes in an automated and controlled fashion. If your rollout isn't going according to plan, you can roll back your deployment to the previous revision.
 {:shortdesc}
+
+
 
 Before you begin, create a [deployment](#app_cli).
 
