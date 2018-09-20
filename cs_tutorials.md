@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-14"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -50,7 +50,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  A Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/)
--  The IBM Cloud infrastructure (SoftLayer) [**Super User** infrastructure role](cs_users.html#infra_access), or confirm that the [API key for the region is set](cs_users.html#apikey) with the appropriate permissions
+-  The IBM Cloud infrastructure (SoftLayer) [**Super User** infrastructure role](cs_users.html#infra_access), or confirm that the [API key for the region is set](cs_troubleshoot_clusters.html#apikey) with the appropriate permissions
 -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in
 
 
