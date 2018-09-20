@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-19"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -2257,6 +2257,8 @@ View whether your Fluentd pods are set to automatically update in a specific clu
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
 </dl>
+
+
 
 <br />
 
