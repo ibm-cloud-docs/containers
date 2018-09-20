@@ -41,6 +41,71 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for 1.11.3_1521, released 20 September 2018
+{: #1113_1521}
+
+<table summary="Changes that were made since version 1.11.2_1516">
+<caption>Changes since version  1.11.2_1516</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.2-71</td>
+<td>v1.11.3-91</td>
+<td>Updated to support Kubernetes 1.11.3 release.</td>
+</tr>
+<tr>
+<td>IBM file storage classes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node.<br><br>
+Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.2</td>
+<td>v1.11.3</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.3).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.1.2-r2</td>
+<td>1.2.0</td>
+<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.2.0).</td>
+</tr>
+<tr>
+<td>Log rotate</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
+</tr>
+<tr>
+<td>Root password expiration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](cs_cli_reference.html#cs_worker_update) or [reload](cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+</tr>
+<tr>
+<td>Worker node runtime components (`kubelet`, `kube-proxy`, `containerd`)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up.</td>
+</tr>
+<tr>
+<td>Systemd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.2_1516, released 04 September 2018
 {: #1112_1516}
@@ -193,7 +258,46 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018
+{: #1107_1521}
 
+<table summary="Changes that were made since version 1.10.7_1520">
+<caption>Changes since version  1.10.7_1520</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log rotate</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
+</tr>
+<tr>
+<td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up.</td>
+</tr>
+<tr>
+<td>Root password expiration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](cs_cli_reference.html#cs_worker_update) or [reload](cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+</tr>
+<tr>
+<td>Systemd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.7_1520, released 04 September 2018
 {: #1107_1520}
@@ -555,7 +659,46 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018
+{: #1910_1524}
 
+<table summary="Changes that were made since version 1.9.10_1523">
+<caption>Changes since version  1.9.10_1523</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log rotate</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
+</tr>
+<tr>
+<td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up.</td>
+</tr>
+<tr>
+<td>Root password expiration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](cs_cli_reference.html#cs_worker_update) or [reload](cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+</tr>
+<tr>
+<td>Systemd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.9.10_1523, released 04 September 2018
 {: #1910_1523}
@@ -900,7 +1043,46 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018
+{: #1815_1521}
 
+<table summary="Changes that were made since version 1.8.15_1520">
+<caption>Changes since version  1.8.15_1520</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log rotate</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update).</td>
+</tr>
+<tr>
+<td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up.</td>
+</tr>
+<tr>
+<td>Root password expiration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](cs_cli_reference.html#cs_worker_update) or [reload](cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+</tr>
+<tr>
+<td>Systemd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018
 {: #1815_1520}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-19"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -117,7 +117,7 @@ You might want to log in to another {{site.data.keyword.containerlong_notm}} reg
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
-To quickly switch regions, run `ibmcloud ks region-set`.
+To quickly switch regions, run [`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set).
 
 ### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
@@ -223,4 +223,4 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
     * [Managing network traffic by using Ingress](cs_ingress.html#planning)
     * [Increasing the availability of your app](cs_app.html#increase_availability)
 
-3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
