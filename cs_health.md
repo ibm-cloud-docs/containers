@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-15"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -617,6 +617,9 @@ To forward Kubernetes API audit logs:
         ibmcloud ks apiserver-refresh <cluster_name_or_ID>
         ```
         {: pre}
+
+
+
 
 ## Viewing metrics
 {: #view_metrics}
