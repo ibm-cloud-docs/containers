@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -51,8 +51,8 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
-1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
-    1. [Set up Helm in your cluster and add the IBM repository to your Helm instance](cs_integrations.html#helm).
+1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio).
+    1. [Set up Helm in your cluster and add the `ibm-charts` repository to your Helm instance](cs_integrations.html#helm).
     2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
@@ -60,7 +60,7 @@ Download and install Istio in your cluster.
         {: pre}
     3. Install the Helm chart to your cluster.
         ```
-        helm install ibm/ibm-istio --name=istio --namespace istio-system
+        helm install ibm-charts/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
 
@@ -250,6 +250,7 @@ If you're finished working with Istio and don't want to [continue exploring](#is
 ## What's next?
 {: #istio_tutorial_whatsnext}
 
+* Looking to expose your app with both {{site.data.keyword.containerlong_notm}} and Istio? Learn how to connect the {{site.data.keyword.containerlong_notm}} Ingress ALB and an Istio Gateway in this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/09/transitioning-your-service-mesh-from-ibm-cloud-kubernetes-service-ingress-to-istio-ingress/).
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
     * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
     * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.

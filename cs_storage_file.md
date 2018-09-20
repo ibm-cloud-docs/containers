@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -173,9 +173,9 @@ To add file storage:
 
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
 
-    -  **Example for bronze, silver, gold storage classes**:
+    - **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
-
+       
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -191,12 +191,12 @@ To add file storage:
          resources:
            requests:
              storage: 24Gi
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
-
+      
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -213,40 +213,40 @@ To add file storage:
            requests:
              storage: 45Gi
              iops: "300"
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
-        <table>
-        <caption>Understanding the YAML file components</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Enter the name of the PVC.</td>
-        </tr>
-        <tr>
-        <td><code>metadata/annotations</code></td>
-        <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
-        </tr>
-        <tr>
-          <td><code>metadata/labels/billingType</code></td>
+       <table>
+       <caption>Understanding the YAML file components</caption>
+       <thead>
+       <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+       </thead>
+       <tbody>
+       <tr>
+       <td><code>metadata/name</code></td>
+       <td>Enter the name of the PVC.</td>
+       </tr>
+       <tr>
+       <td><code>metadata/annotations</code></td>
+       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       </tr>
+       <tr>
+         <td><code>metadata/labels/billingType</code></td>
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
-        </tr>
-        <tr>
-        <td><code>spec/accessMode</code></td>
-        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/storage</code></td>
-        <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/iops</code></td>
-        <td>This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
-        </tr>
-        </tbody></table>
+       </tr>
+       <tr>
+       <td><code>spec/accessMode</code></td>
+       <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
+       </tr>
+       <tr>
+       <td><code>spec/resources/requests/storage</code></td>
+       <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
+       </tr>
+       <tr>
+       <td><code>spec/resources/requests/iops</code></td>
+       <td>This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
+       </tr>
+       </tbody></table>
 
     If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
     {: tip}
@@ -683,7 +683,7 @@ Review the following backup and restore options for your file storage:
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can [set up periodic snapshots for your file storage](/docs/infrastructure/FileStorage/snapshots.html), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your file storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. <strong>Note</strong>: If you have a Dedicated account, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>You can [set up periodic snapshots for your file storage](/docs/infrastructure/FileStorage/snapshots.html), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your file storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. <strong>Note</strong>: If you have a Dedicated account, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>To create a snapshot for your volume: </strong><ol><li>[Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. </li><li>Log in to the `ibmcloud sl` CLI. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>[{bx]} sl file volume-detail &lt;volume_ID&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Size (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Replicate snapshots to another zone</dt>
  <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to a file storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated file storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage. <strong>Note</strong>: If you have a Dedicated account, you cannot replicate snapshots to another zone.</p></dd>
  <dt>Duplicate storage</dt>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -31,6 +31,8 @@ If you have a more general issue, try out [cluster debugging](cs_troubleshoot.ht
 
 ## Unable to connect to your infrastructure account
 {: #cs_credentials}
+
+
 
 {: tsSymptoms}
 When you create a new Kubernetes cluster, you receive an error message similar to one of the following.
@@ -69,10 +71,11 @@ Users with other {{site.data.keyword.Bluemix_notm}} account types must configure
 * You have an existing IBM Cloud infrastructure (SoftLayer) account that predates your {{site.data.keyword.Bluemix_notm}} platform account and want to continue to use it.
 * You want to use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources in. For example, you might set up a team {{site.data.keyword.Bluemix_notm}} account to use a different infrastructure account for billing purposes.
 
+If you use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
+
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
 
-**Before you begin**:
 
 1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
 2.  Check if your cluster uses a different infrastructure account than the one that comes with your Pay-As-You-Go account.
@@ -80,10 +83,11 @@ The account owner must set up the infrastructure account credentials properly. T
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
-        * If you see an **Infrastructure User** field, your cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region. 
+        * If you see an **Infrastructure User** field, your cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region.
 3.  Decide what type of account you want to have to determine how to troubleshoot your infrastructure permission issue. For most users, the default linked Pay-As-You-Go account is sufficient.
     *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the infrastructure API key is set up with the correct permissions](#apikey). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
     *  Different {{site.data.keyword.Bluemix_notm}} platform and infrastructure accounts: Verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](#credentials).
+4.  If you cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
 
 ### Using the default infrastructure credentials for linked Pay-As-You-Go accounts with the API key
 {: #apikey}
@@ -103,9 +107,9 @@ The account owner must set up the infrastructure account credentials properly. T
 2.  Set the API key for the region that the cluster is in.
 
     1.  Log in to the terminal with the user whose infrastructure permissions you want to use.
-    
+
     2.  If you are in a different region, change to the region where you want to set the API key.
-    
+
         ```
         ibmcloud ks region-set
         ```
@@ -123,12 +127,12 @@ The account owner must set up the infrastructure account credentials properly. T
         ```
         {: pre}
 
-3.  **Optional**: If your Pay-As-You-Go account uses a different infrastructure account to provision clusters (for example, you used the `ibmcloud ks credentials-set` command), the account continues to use those infrastructure credentials instead of the API key. You must remove the associated infrastructure account so that the API key that you set in previous step is used.
+3.  **Optional**: If your Pay-As-You-Go account uses a different infrastructure account to provision clusters (for example, you used the `ibmcloud ks credentials-set` command), the account continues to use those infrastructure credentials instead of the API key. You must remove the associated infrastructure account so that the API key that you set in previous step is used. **Important**: Check that the cluster's worker nodes exist in the infrastructure account of the API key. If the worker nodes do not exist, delete the cluster to avoid [orphaning the cluster](#orphaned).
     ```
     ibmcloud ks credentials-unset
     ```
     {: pre}
-        
+
 4.  **Optional**: If you connect your public cluster to on-premises resources, check your network connectivity.
 
     1.  Check your worker VLAN connectivity.
@@ -201,6 +205,8 @@ The account owner must set up the infrastructure account credentials properly. T
     1.  Check your worker VLAN connectivity.
     2.  If required, [set up VPN connectivity](cs_vpn.html#vpn).
     3.  [Open the required ports in your firewall](cs_firewall.html#firewall).
+
+
 
 <br />
 
@@ -298,6 +304,57 @@ The machine ID can become inconsistent with the {{site.data.keyword.containerlon
 For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](cs_versions_changelog.html).
 
 You can also [delete the bare metal worker node](cs_cli_reference.html#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+
+<br />
+
+
+## Unable to modify or delete infrastructure in an orphaned cluster
+{: #orphaned}
+
+{: tsSymptoms}
+You cannot perform infrastructure-related commands on your cluster, such as:
+* Adding or removing worker nodes
+* Reloading or rebooting worker nodes
+* Resizing worker pools
+* Updating your cluster
+
+You cannot view the cluster worker nodes in your IBM Cloud infrastructure (SoftLayer) account. However, you can update and manage other clusters in the account.
+
+Further, you verified that you have the [proper infrastructure credentials](#cs_credentials).
+
+{: tsCauses}
+The cluster might be provisioned in an IBM Cloud infrastructure (SoftLayer) account that is no longer linked to your {{site.data.keyword.containerlong_notm}} account. The cluster is orphaned. Because the resources are in a different account, you do not have the infrastructure credentials to modify the resources.
+
+Consider the following scenario to understand how clusters might become orphaned.
+1.  You have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account.
+2.  You create a cluster named `Cluster1`. The worker nodes and other infrastructure resources are provisioned into the infrastructure account that comes with your Pay-As-You-Go account.
+3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure (SoftLayer) account. You use the `ibmcloud ks credentials-set` command to change the IBM Cloud infrastructure (SoftLayer) credentials to use your team account.
+4.  You create another cluster named `Cluster2`. The worker nodes and other infrastructure resources are provisioned into the team infrastructure account.
+5.  You notice that `Cluster1` needs a worker node update, a worker node reload, or you just want to clean it up by deleting it. However, because `Cluster1` was provisioned into a different infrastructure account, you cannot modify its infrastructure resources. `Cluster1` is orphaned.
+6.  You follow the resolution steps in the following section, but do not set your infrastructure credentials back to your team account. You can delete `Cluster1`, but now `Cluster2` is orphaned.
+7.  You change your infrastructure credentials back to the team account that created `Cluster2`. Now, you no longer have an orphaned cluster!
+
+<br>
+
+{: tsResolve}
+1.  Check which infrastructure account the region that your cluster is in currently uses to provision clusters.
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
+    2.  From the table, select your cluster.
+    3.  In the **Overview** tab, check for an **Infrastructure User** field. This field helps you determine if your {{site.data.keyword.containerlong_notm}} account uses a different infrastructure account than the default.
+        * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts. The cluster that cannot be modified might be provisioned in a different infrastructure account.
+        * If you see an **Infrastructure User** field, you use a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region. The cluster that cannot be modified might be provisioned in your Pay-As-You-Go or a different infrastructure account.
+2.  Check which infrastructure account was used to provision the cluster.
+    1.  In the **Worker Nodes** tab, select a worker node and note its **ID**.
+    2.  Open the expandable menu and click **Infrastructure**.
+    3.  From the infrastructure men, click **Devices > Device List**.
+    4.  Search for the worker node ID that you previously noted.
+    5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
+3.  Use the `ibmcloud ks credentials-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
+    **Note**: If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support ticket to remove the orphaned cluster.
+4.  [Delete the cluster](cs_clusters.html#remove).
+5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
+    * To set credentials to a different infrastructure account, use the `ibmcloud ks credentials-set` [command](cs_cli_reference.html#cs_credentials_set).
+    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credentials-unset` [command](cs_cli_reference.html#cs_credentials_unset).
 
 <br />
 
@@ -452,7 +509,7 @@ This service doesn't support creation of keys
 Some services in {{site.data.keyword.Bluemix_notm}}, such as {{site.data.keyword.keymanagementservicelong}} do not support the creation of service credentials, also referred to as service keys. Without the support of service keys, the service is not bindable to a cluster. To find a list of services that support the creation of service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external).
 
 {: tsResolve}
-To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/kms?language=curl). 
+To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/kms?language=curl).
 
 <br />
 
@@ -600,7 +657,7 @@ You can try one of the following solutions:
 When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
 
 {: tsCauses}
-If you just created the Kubernetes cluster, the worker nodes might still be configuring. 
+If you just created the Kubernetes cluster, the worker nodes might still be configuring.
 
 If this cluster is an existing one:
 *  You might not have enough capacity in your cluster to deploy the pod.
@@ -658,7 +715,7 @@ If this cluster is an existing one, check your cluster capacity.
         kubectl get pod <pod_name> -o yaml
         ```
         {: pre}
-    
+
     2.  If the request exceeds the available capacity, [add a new worker pool](cs_clusters.html#add_pool) with worker nodes that can fulfill the request.
 
 6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -40,6 +40,7 @@ For information about changes since the previous version, see the following chan
 {: #111_changelog}
 
 Review the following changes.
+
 
 ### Changelog for 1.11.2_1516, released 04 September 2018
 {: #1112_1516}
@@ -191,6 +192,8 @@ Review the following changes.
 {: #110_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for 1.10.7_1520, released 04 September 2018
 {: #1107_1520}
@@ -552,6 +555,8 @@ Review the following changes.
 
 Review the following changes.
 
+
+
 ### Changelog for 1.9.10_1523, released 04 September 2018
 {: #1910_1523}
 
@@ -894,6 +899,8 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018
 {: #1815_1520}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -57,7 +57,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 **To create a standard cluster**
 
-1. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
+1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -430,11 +430,18 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. List available zones and choose the zone where you want to deploy the worker nodes in your worker pool. If you plan on spreading your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
+1. Choose the **Worker Zones** in your cluster where you want to deploy the worker nodes in your worker pool. If you plan on spreading your worker nodes in an existing worker pool across multiple zones, choose or [add a new zone](#add_zone) to a [multizone-capable](cs_regions.html#zones) cluster. You can list available zones by running `ibmcloud ks zones`.
    ```
-   ibmcloud ks zones
+   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
    {: pre}
+
+   Example output:
+   ```
+   ...
+   Worker Zones: dal10, dal12, dal13
+   ```
+   {: screen}
 
 2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
    ```
@@ -442,25 +449,32 @@ You can add worker nodes to your cluster by creating a new worker pool.
    ```
    {: pre}
 
-3. Create a worker pool. For machine type options, review the [`machine-types` command](cs_cli_reference.html#cs_machine_types) documentation.
+3.  For each zone, review the [available machine types for worker nodes](cs_clusters_planning.html#shared_dedicated_node).
+
+    ```
+    ibmcloud ks machine-types <zone>
+    ```
+    {: pre}
+
+4. Create a worker pool. If you provision a bare metal worker pool, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone> --hardware <dedicated_or_shared>
    ```
    {: pre}
 
-4. Verify that the worker pool is created.
+5. Verify that the worker pool is created.
    ```
    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-5. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add zones to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command with a different multizone-capable zone.  
+6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.  
    ```
    ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
    ```
    {: pre}
 
-6. Verify that worker nodes provision in the zone that you added.
+7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
    ```
    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
    ```
@@ -469,8 +483,8 @@ You can add worker nodes to your cluster by creating a new worker pool.
    Example output:
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b2c.4x16          provision_pending   Ready   dal10   1.8.6_1504
    ```
    {: screen}
 

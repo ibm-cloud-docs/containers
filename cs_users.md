@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-20"
 
 
 ---
@@ -19,6 +19,8 @@ lastupdated: "2018-09-10"
 
 # Assigning cluster access
 {: #users}
+
+
 
 As a cluster administrator, you can define access policies for your Kubernetes cluster to create different levels of access for different users. For example, you can authorize certain users to work with cluster resources while others can deploy containers only.
 {: shortdesc}
@@ -63,7 +65,7 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 
   <dt>Is there a difference between the infrastructure credentials and the API key?</dt>
     <dd>Both the API key and the <code>ibmcloud ks credentials-set</code> command accomplish the same task. If you manually set credentials with the <code>ibmcloud ks credentials-set</code> command, then the set credentials override any access that is granted by the API key. However, if the user whose credentials are stored does not have the required permissions to order infrastructure then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail.</dd>
-    
+
   <dt>How do I know if my infrastructure account credentials are set to use a different account?</dt>
     <dd>Open the [{{site.data.keyword.containerlong_notm}} GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. In the **Overview** tab, look for an **Infrastructure User** field. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use a different infrastructure account credentials.</dd>
 
@@ -82,7 +84,7 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 Before you can understand which role can perform each action, it's important to understand how the roles fit together.
 {: shortdesc}
 
-The following image shows the roles that each type of person in your organization might need. However, it is different for every organization. You might notice that some users require custom permissions for infrastructure. Be sure to read through [Accessing the IBM Cloud infrastructure (SoftLayer) porfolio](#api_key) to learn about what IBM Cloud infrastructure (SoftLayer) permissions are and who needs which permissions. 
+The following image shows the roles that each type of person in your organization might need. However, it is different for every organization. You might notice that some users require custom permissions for infrastructure. Be sure to read through [Accessing the IBM Cloud infrastructure (SoftLayer) porfolio](#api_key) to learn about what IBM Cloud infrastructure (SoftLayer) permissions are and who needs which permissions.
 
 ![{{site.data.keyword.containerlong_notm}} access roles](/images/user-policies.png)
 
@@ -117,7 +119,7 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
     2. From the **Region** list, select a region.
     3. From the **Service instance** list, select the cluster to invite the user to. To find the ID of a specific cluster, run `ibmcloud ks clusters`.
 
-4. In the **Select roles** section, choose a role. 
+4. In the **Select roles** section, choose a role.
 
 5. Click **Assign**.
 
@@ -150,7 +152,7 @@ You can add users to an {{site.data.keyword.Bluemix_notm}} account to grant acce
         2. From the **Region** list, select a region.
         3. From the **Service instance** list, select the cluster to invite the user to. To find the ID of a specific cluster, run `ibmcloud ks clusters`.
 
-5. In the **Select roles** section, choose a role. 
+5. In the **Select roles** section, choose a role.
 
 6. Click **Assign**.
 
@@ -616,4 +618,6 @@ Downgrading permissions? It can take a few minutes for the action to complete.
 {: tip}
 
 <br />
+
+
 

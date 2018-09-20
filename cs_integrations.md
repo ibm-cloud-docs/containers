@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-20"
 
 ---
 
@@ -146,6 +146,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## Security services
 {: #security_services}
+
+Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+{: shortdesc}
+
 <table summary="Summary for accessibility">
 <caption>Security services</caption>
 <thead>
@@ -366,6 +370,7 @@ To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, 
 The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
 - [Mount the secret as a volume to your pod](#mount_secret)
 - [Reference the secret in environment variables](#reference_secret)
+
 
 Before your begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
@@ -716,17 +721,27 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     ```
     {: screen}
 
-5. Add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
+5. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
 
     ```
-    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    helm repo add ibm https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repository.
+    ```
+    helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+    ```
+    {: pre}
+
+6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+    ```
+    helm search ibm-charts
     ```
     {: pre}
 

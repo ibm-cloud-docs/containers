@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -100,6 +100,9 @@ For a complete list of changes, review the following information:
 <p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.11 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.11 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
+
+**Important**:
+Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
 
 ### Update before master
 {: #111_before}
@@ -200,6 +203,32 @@ To use an image that is built by using the manifest tool with `containerd`, choo
 
 **What is not affected? Do I need to change how I deploy my containers?**<br>
 In general, your container deployment processes do not change. You can still use a Dockerfile to define a Docker image and build a Docker container for your apps. If you use `docker` commands to build and push images to a registry, you can continue to use `docker` or use `ibmcloud cr` commands instead.
+
+### Preparing to update to Calico v3
+{: #111_calicov3}
+
+**Important**: If you are updating a cluster from Kubernetes version 1.9 or earlier to version 1.11, prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.11, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+
+**Note**: If you are updating a cluster from Kubernetes version 1.10 to version 1.11, skip these steps because you completed these steps when you updated to 1.10.
+
+Before you begin, your cluster master and all worker nodes must be running Kubernetes version 1.8 or 1.9, and must have at least one worker node.
+
+1.  Verify that your Calico pods are healthy.
+    ```
+    kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
+    ```
+    {: pre}
+
+2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue.
+
+3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
+
+4.  If you use [strongSwan](cs_vpn.html#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.11. [Update strongSwan](cs_vpn.html#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
+
+5.  [Update your cluster master to Kubernetes v1.11](cs_cluster_update.html#master).
+
+<br />
+
 
 ## Version 1.10
 {: #cs_v110}

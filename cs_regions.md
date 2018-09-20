@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-19"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2018-09-10"
 
 # Regions and zones
 
-A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure.
+A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure. 
 {:shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to. 
@@ -157,9 +157,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
   <tbody>
     <tr>
       <td>AP North</td>
-      <td>None</td>
-      <td><p>Tokyo: tok02</p>
-      <p>Hong Kong S.A.R. of the PRC: hkg02</p>
+      <td>Tokyo: tok02, tok04, tok05</td>
+      <td><p>Hong Kong S.A.R. of the PRC: hkg02</p>
       <p>Seoul: seo01</p>
       <p>Singapore: sng01</p></td>
     </tr>

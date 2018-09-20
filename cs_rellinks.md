@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-18"
 
 ---
 
@@ -47,6 +47,7 @@ lastupdated: "2018-09-10"
 - [{{site.data.keyword.containerlong_notm}} Cognitive Class learning path ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+- [Apply end-to-end security to a cloud application with {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.keymanagementservicelong_notm}}, {{site.data.keyword.appid_full_notm}}, and {{site.data.keyword.cos_full_notm}}](https://console.bluemix.net/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
 - [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
 - [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
 - [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)

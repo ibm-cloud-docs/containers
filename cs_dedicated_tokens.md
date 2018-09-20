@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-09-13"
 
 ---
 
@@ -62,19 +62,19 @@ Create a non-expiring token for an image registry that you used for single and s
     <td>Required. The name that you want to use for your imagePullSecret.</td>
     </tr>
     <tr>
-    <td><code>--docker-server &lt;registry_url&gt;</code></td>
+    <td><code>--docker-server=&lt;registry_url&gt;</code></td>
     <td>Required. The URL to the image registry where your namespace is set up: registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
-    <td><code>--docker-username &lt;docker_username&gt;</code></td>
-    <td>Required. The user name to log in to your private registry.</td>
+    <td><code>--docker-username=token</code></td>
+    <td>Required. Do not change this value.</td>
     </tr>
     <tr>
-    <td><code>--docker-password &lt;token_value&gt;</code></td>
+    <td><code>--docker-password=&lt;token_value&gt;</code></td>
     <td>Required. The value of your registry token that you retrieved earlier.</td>
     </tr>
     <tr>
-    <td><code>--docker-email &lt;docker-email&gt;</code></td>
+    <td><code>--docker-email=&lt;docker-email&gt;</code></td>
     <td>Required. If you have one, enter your Docker email address. If you do not have one, enter a fictional email address, as for example a@b.c. This email is mandatory to create a Kubernetes secret, but is not used after creation.</td>
     </tr>
     </tbody></table>
@@ -134,6 +134,6 @@ Create a non-expiring token for an image registry that you used for single and s
     4.  Create the deployment in your cluster.
 
           ```
-          kubectl apply -f mypod.yaml
+          kubectl apply -f mypod.yaml -n <namespace>
           ```
           {: pre}
