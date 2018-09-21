@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-09-21"
 
 
 ---
@@ -390,9 +390,9 @@ If you want to assign access to a service, such as a continuous delivery toolcha
         {: codeblock}
 
         <table>
-        <caption>Understanding this YAML components</caption>
+        <caption>Understanding the YAML components</caption>
           <thead>
-            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML components</th>
           </thead>
           <tbody>
             <tr>
@@ -468,9 +468,9 @@ If you want to assign access to a service, such as a continuous delivery toolcha
         {: codeblock}
 
         <table>
-        <caption>Understanding this YAML components</caption>
+        <caption>Understanding the YAML components</caption>
           <thead>
-            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML components</th>
           </thead>
           <tbody>
             <tr>
