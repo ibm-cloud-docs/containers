@@ -789,7 +789,7 @@ trusted: <em>true</em>
 <p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--private-only</code></dt>
-  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Planning private external networking for a private VLAN setup only](cs_network_planning.html#private_vlan).</dd>
+  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](cs_clusters_planning.html#private_clusters).</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -1527,7 +1527,7 @@ View a list of ALB secrets in a cluster.
  ```
  {: pre}
 
-### ibmcloud ks alb-configure --albID ALB_ID [--enable] [--disable] [--user-ip USERIP] [-s]
+### ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USERIP] [--disable] [--disable-deployment] [-s]
 {: #cs_alb_configure}
 
 Enable or disable an ALB in your standard cluster. The public ALB is enabled by default.
@@ -1543,6 +1543,9 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
 
    <dt><code>--disable</code></dt>
    <dd>Include this flag to disable an ALB in a cluster.</dd>
+
+   <dt><code>--disable-deployment</code></dt>
+   <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
    <dd>
@@ -3027,7 +3030,7 @@ View the worker pools that you have in a cluster.
     <p>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</p></dd>
 
   <dt><code>--private-only</code></dt>
-    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Planning private external networking for a private VLAN setup only](cs_network_planning.html#private_vlan).</dd>
+    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  **Note**: If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](cs_clusters_planning.html#private_clusters).</dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
