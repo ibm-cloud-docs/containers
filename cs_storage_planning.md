@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -223,7 +223,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Performance</td>
 <td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are shared between the pods that access the volume.</td>
 <td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are not shared between pods. </td>
-<td style="text-align:left">High for read operations, with lower latency than Block when reading from local cache. Not predictable for write operations.</td>
+<td style="text-align:left">High for read operations. Not predictable for write operations.</td>
 <td style="text-align:left">High if deployed to the same data center as your app.</td>
 </tr>
 <tr>
@@ -237,14 +237,15 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Durability</td>
 <td style="text-align:left">High</td>
 <td style="text-align:left">High</td>
-<td style="text-align:left">High</td>
+<td style="text-align:left">Very high as data slices are dispersed across a cluster of storage
+nodes. Every node stores only a part of the data. </td>
 <td style="text-align:left">High</td>
 </tr>
 <tr>
 <td style="text-align:left">Resiliency</td>
 <td style="text-align:left">Medium as specific to a data center. File storage server is clustered by IBM with redundant networking.</td>
 <td style="text-align:left">Medium as specific to a data center. Block storage server is clustered by IBM with redundant networking.</td>
-<td style="text-align:left">High as data is stored in at least 3 copies and distributed within one region or across regions.</td>
+<td style="text-align:left">High as data slices are dispersed across 3 zones or regions. Medium, when set up in a single zone only.</td>
 <td style="text-align:left">Depends on the DBaaS and your setup. </td>
 </tr>
 <tr>
@@ -265,7 +266,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Encryption</td>
 <td style="text-align:left">At rest</td>
 <td style="text-align:left">At rest</td>
-<td style="text-align:left">At rest</td>
+<td style="text-align:left">In transit and at rest</td>
 <td style="text-align:left">At rest</td>
 </tr>
 <tr>
@@ -279,7 +280,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Non-ideal use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Sharing data across multiple app instances</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li>><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li</ul></td>
 </tr>
 </tbody>
