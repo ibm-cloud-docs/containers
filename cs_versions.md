@@ -428,9 +428,6 @@ As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that 
 
 [Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
 
-<br />
-
-
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
 
