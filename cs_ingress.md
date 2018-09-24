@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -292,7 +292,28 @@ If you do not have a TLS certificate ready, follow these steps:
           openssl req -new -x509 -key tls.key -out tls.crt
           ```
           {: pre}
-2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+2. Convert the cert and key into base-64. 
+   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file. 
+      ```
+      openssl base64 -in tls.key -out tls.key.base64
+      ```
+      {: pre}
+      
+      ```
+      openssl base64 -in tls.crt -out tls.crt.base64
+      ```
+      {: pre}
+   2. View the base-64 encoded value for your cert and key. 
+      ```
+      cat tls.key.base64
+      ```
+      {: pre}
+      
+      ```
+      cat tls.crt.base64
+      ```
+      {: pre}
+        
 3. Create a secret YAML file using the cert and key.
      ```
      apiVersion: v1
@@ -766,7 +787,28 @@ If you do not have a TLS certificate ready, follow these steps:
           openssl req -new -x509 -key tls.key -out tls.crt
           ```
           {: pre}
-2. [Convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
+2. Convert the cert and key into base-64. 
+   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file. 
+      ```
+      openssl base64 -in tls.key -out tls.key.base64
+      ```
+      {: pre}
+      
+      ```
+      openssl base64 -in tls.crt -out tls.crt.base64
+      ```
+      {: pre}
+   2. View the base-64 encoded value for your cert and key. 
+      ```
+      cat tls.key.base64
+      ```
+      {: pre}
+      
+      ```
+      cat tls.crt.base64
+      ```
+      {: pre}
+        
 3. Create a secret YAML file using the cert and key.
      ```
      apiVersion: v1
