@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -488,7 +488,7 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permission for the file are preserved and not changed. 
+When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permissions for the file are preserved and not changed. 
 
 {: tsResolve}
 To access the file with a non-root user, the non-root user must have read and write permissions for the file. Changing the permission on a file as part of your pod deployment requires a write operation. {{site.data.keyword.cos_full_notm}} is not designed for write workloads. Updating permissions during the pod deployment might prevent your pod from getting into a `Running` state. 
