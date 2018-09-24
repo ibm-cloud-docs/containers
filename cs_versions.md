@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-21"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -31,7 +31,6 @@ lastupdated: "2018-09-21"
 - Latest: 1.11.3
 - Default: 1.10.7
 - Other: 1.9.10
-- Deprecated: 1.8.15, unsupported 22 September 2018
 
 </br>
 
@@ -74,7 +73,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
-   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
+   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.7 and you want to update to 1.10, you must update to 1.9 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 
@@ -422,76 +421,12 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 ## Archive
 {: #k8s_version_archive}
 
-### Version 1.8 (Deprecated, unsupported 22 September 2018)
+### Version 1.8 (Unsupported)
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.8 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.8 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.9](#cs_v19)).
 
-Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.8.
-
-<br/>
-
-### Update before master
-{: #18_before}
-
-<table summary="Kubernetes updates for versions 1.8">
-<caption>Changes to make before you update the master to Kubernetes 1.8</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>None</td>
-<td>No changes are required before you update the master</td>
-</tr>
-</tbody>
-</table>
-
-### Update after master
-{: #18_after}
-
-<table summary="Kubernetes updates for versions 1.8">
-<caption>Changes to make after you update the master to Kubernetes 1.8</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kubernetes dashboard login</td>
-<td>The URL for accessing the Kubernetes dashboard in version 1.8 changed, and the login process includes a new authentication step. For more information, see [accessing the Kubernetes dashboard](cs_app.html#cli_dashboard).</td>
-</tr>
-<tr>
-<td>Kubernetes dashboard permissions</td>
-<td>To force users to log in with their credentials to view cluster resources in version 1.8, remove the 1.7 ClusterRoleBinding RBAC authorization. Run `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`.</td>
-</tr>
-<tr>
-<td>`kubectl delete`</td>
-<td>The `kubectl delete` command no longer scales down workload API objects, like pods, before the object is deleted. If you require the object to scale down, use [`kubectl scale` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#scale) before you delete the object.</td>
-</tr>
-<tr>
-<td>`kubectl run`</td>
-<td>The `kubectl run` command must use multiple flags for `--env` instead of comma-separated arguments. For example, run <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code> and not <code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code>. </td>
-</tr>
-<tr>
-<td>`kubectl stop`</td>
-<td>The `kubectl stop` command is no longer available.</td>
-</tr>
-<tr>
-<td>Read-only API data volumes</td>
-<td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
-Previously, apps were allowed to write data to these volumes that might be
-reverted automatically by the system. This migration action is required to fix
-security vulnerability [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
-If your apps rely on the previous insecure behavior, modify them accordingly.</td>
-</tr>
-</tbody>
-</table>
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
 
 <br />
 
@@ -499,13 +434,13 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
 
-As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
+As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.9](#cs_v19)).
 
-[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.8.
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
 
 ### Version 1.5 (Unsupported)
 {: #cs_v1-5}
 
-As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
+As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support. 
 
-[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.8.
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](cs_clusters.html#clusters) and [migrate your apps](cs_app.html#app) to the cluster.

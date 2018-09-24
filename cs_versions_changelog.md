@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -1038,7 +1038,7 @@ Review the following changes.
 ## Archive
 {: #changelog_archive}
 
-### Version 1.8 changelog (Deprecated, unsupported 22 September 2018)
+### Version 1.8 changelog (Unsupported)
 {: #18_changelog}
 
 Review the following changes.
