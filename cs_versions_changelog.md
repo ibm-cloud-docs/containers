@@ -1038,6 +1038,10 @@ Review the following changes.
 ## Archive
 {: #changelog_archive}
 
+Unsupported Kubernetes versions:
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
 ### Version 1.8 changelog (Unsupported)
 {: #18_changelog}
 
