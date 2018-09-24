@@ -280,7 +280,7 @@ nodes. Every node stores only a part of the data. </td>
 <td style="text-align:left">Non-ideal use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Sharing data across multiple app instances</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li>><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li</ul></td>
 </tr>
 </tbody>
