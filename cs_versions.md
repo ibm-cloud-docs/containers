@@ -179,7 +179,7 @@ For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Do
 **How do I know if my apps rely on `docker` instead of `containerd`?**<br>
 Examples of times that you might rely on Docker as the container runtime:
 *  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.
-*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.
+*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check with your provider to make sure the tools are compatible with `containerd`.
 
 <br>
 
