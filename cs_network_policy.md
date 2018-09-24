@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -802,7 +802,7 @@ To isolate your cluster on the private network using Calico policies:
       ```
       {: pre}
 
-3. Set up the private host endpoint policy.
+3. Set up a policy for the private host endpoint.
     1. Open the `generic-privatehostendpoint.yaml` policy.
     2. Replace `<worker_name>` with the name of a worker node and `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
     3. Repeat this step in a new section for each worker node in your cluster.
