@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-24"
 
 ---
 
@@ -29,7 +29,7 @@ Review these situations in which you might need to open specific ports and IP ad
 * [To run `calicoctl` commands](#firewall_calicoctl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
 * [To allow communication between the Kubernetes master and the worker nodes](#firewall_outbound) when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account.
 * [To allow the cluster to access resources over a firewall on the private network](#firewall_private).
-* [To access the NodePort service, LoadBalancer service, or Ingress from outside of the cluster](#firewall_inbound).
+* [To access the NodePort service, load balancer service, or Ingress from outside of the cluster](#firewall_inbound).
 
 <br />
 
@@ -370,7 +370,7 @@ You can allow incoming access to NodePort, load balancer, and Ingress services.
 <dl>
   <dt>NodePort service</dt>
   <dd>Open the port that you configured when you deployed the service to the public IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.<dd>
-  <dt>LoadBalancer service</dt>
+  <dt>Load balancer service</dt>
   <dd>Open the port that you configured when you deployed the service to the load balancer service's public IP address.</dd>
   <dt>Ingress</dt>
   <dd>Open port 80 for HTTP or port 443 for HTTPS to the IP address for the Ingress application load balancer.</dd>
