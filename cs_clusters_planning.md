@@ -316,7 +316,7 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -326,7 +326,7 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
