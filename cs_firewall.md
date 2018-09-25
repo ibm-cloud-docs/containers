@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-24"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -221,8 +221,8 @@ Let your cluster access infrastructure resources and services from behind a fire
       </tr>
       <tr>
         <td>US South</td>
-        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
       </tr>
       </tbody>
     </table>
