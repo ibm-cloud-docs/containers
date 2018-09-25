@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-24"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -348,7 +348,7 @@ To add file storage:
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the <coode>root</code> directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path. </td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the <code>root</code> directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path. </td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>

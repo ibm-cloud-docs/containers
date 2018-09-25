@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -63,7 +63,7 @@ Create a non-expiring token for an image registry that you used for single and s
     </tr>
     <tr>
     <td><code>--docker-server=&lt;registry_url&gt;</code></td>
-    <td>Required. The URL to the image registry where your namespace is set up: registry.&lt;dedicated_domain&gt;</li></ul></td>
+    <td>Required. The URL to the image registry where your namespace is set up: <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username=token</code></td>

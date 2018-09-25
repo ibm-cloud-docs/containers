@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -469,7 +469,7 @@ You might used the wrong storage class to access your existing bucket, or you tr
 1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance. 
 2. Select **Buckets**. 
 3. Review the **Class** and **Location** information for your existing bucket. 
-4. Chose the appropriate [storage class](cs_storage_cos.html#storageclass_reference). 
+4. Choose the appropriate [storage class](cs_storage_cos.html#storageclass_reference). 
 
 <br />
 
@@ -488,7 +488,7 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permission for the file are preserved and not changed. 
+When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permissions for the file are preserved and not changed. 
 
 {: tsResolve}
 To access the file with a non-root user, the non-root user must have read and write permissions for the file. Changing the permission on a file as part of your pod deployment requires a write operation. {{site.data.keyword.cos_full_notm}} is not designed for write workloads. Updating permissions during the pod deployment might prevent your pod from getting into a `Running` state. 

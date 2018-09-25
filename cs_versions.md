@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-24"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -179,7 +179,7 @@ For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Do
 **How do I know if my apps rely on `docker` instead of `containerd`?**<br>
 Examples of times that you might rely on Docker as the container runtime:
 *  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime.
-*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check your provider to make sure the tools are compatible with `containerd`.
+*  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check with your provider to make sure the tools are compatible with `containerd`.
 
 <br>
 
@@ -427,9 +427,6 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.9](#cs_v19)).
 
 [Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
-
-<br />
-
 
 ### Version 1.7 (Unsupported)
 {: #cs_v17}

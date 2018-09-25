@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -190,7 +190,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
     <tr>
       <td>US South</td>
       <td>Dallas: dal10, dal12, dal13</td>
-      <td><p>São Paulo: sao01</p></td>
+      <td><p>San Jose: sjc03, sjc04</p>
+      <p>São Paulo: sao01</p></td>
     </tr>
   </tbody>
 </table>

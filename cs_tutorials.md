@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-24"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -50,6 +50,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  A Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/)
+-  The [**Administrator** platform role](cs_users.html#add_users) for the account or the {{site.data.keyword.containerlong_notm}} cluster instance. Note that if you are only an **Administrator** for the cluster, you also need the **Viewer** role for the entire region at the account level so that you can perform related account actions, such as listing possible VLANs to use when you create a cluster.
 -  The IBM Cloud infrastructure (SoftLayer) [**Super User** infrastructure role](cs_users.html#infra_access), or confirm that the [API key for the region is set](cs_troubleshoot_clusters.html#apikey) with the appropriate permissions
 -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in
 

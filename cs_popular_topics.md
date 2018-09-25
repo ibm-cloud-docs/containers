@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-13"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -35,6 +35,13 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>25 September</td>
+<td>[New zones available](cs_regions.html)</td>
+<td>Now you have even more options of where to deploy your apps!
+<ul><li>Welcome to San Jose as two new zones in the US South region, `sjc03` and `sjc04`. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the others within the region that your cluster is in.</li>
+<li>With two new `tok04` and `tok05` zones, you can now [create multizone clusters](cs_clusters_planning.html#multizone) in Tokyo in the AP North region.</li></ul></td>
+</tr>
 <tr>
 <td>05 September</td>
 <td>[Zone available in Oslo](cs_regions.html)</td>

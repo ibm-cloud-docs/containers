@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-21"
+lastupdated: "2018-09-25"
 
 ---
 
@@ -216,7 +216,7 @@ If you want to create a cluster that only has access on a private VLAN:
 1.  Review [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
 2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](cs_subnets.html#vra-routing) for the subnets.
 3.  [Create a cluster by using the CLI](cs_clusters.html#clusters_cli) by including the `--private-only` flag.
-4.  If you want to expose an app to a private network by using a private NodePort, LoadBalancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](cs_network_planning.html#private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
+4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](cs_network_planning.html#private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
 
 
 ## Worker pools and worker nodes
@@ -316,7 +316,7 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -326,7 +326,7 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a close balance of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
