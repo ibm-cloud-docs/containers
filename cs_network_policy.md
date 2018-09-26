@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -765,7 +765,7 @@ The policies target the worker node private interface (eth0) and the pod network
 
 **Worker nodes**
 
-* Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access.
+* Private interface egress is permitted only to pod IPs, workers in this cluster, and the UPD/TCP port 53 for DNS access, port 2049 for communication with NFS file servers, and ports 443 and 3260 for communication to block storage.
 * Private interface ingress is permitted only from workers in the cluster and only to DNS, kubelet, ICMP, and VRRP.
 
 **Pods**
@@ -813,7 +813,7 @@ To isolate your cluster on the private network using Calico policies:
 
       ```
       calicoctl apply -f allow-all-workers-private.yaml
-      calicoctl apply -f allow-dns-10250.yaml
+      calicoctl apply -f allow-ibm-ports-private.yaml
       calicoctl apply -f allow-egress-pods.yaml
       calicoctl apply -f allow-icmp-private.yaml
       calicoctl apply -f allow-vrrp-private.yaml
@@ -825,7 +825,7 @@ To isolate your cluster on the private network using Calico policies:
 
       ```
       calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-dns-10250.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-ibm-ports-private.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
       calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
