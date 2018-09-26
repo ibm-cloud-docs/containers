@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -114,7 +114,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Required: The name of the priority class that you want to create.</td>
     </tr>
     <tr>

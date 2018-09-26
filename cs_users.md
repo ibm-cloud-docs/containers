@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 
 ---
@@ -404,23 +404,23 @@ If you want to assign access to a service, such as a continuous delivery toolcha
               <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
             </tr>
             <tr>
-              <td><code>metadata/namespace</code></td>
+              <td><code>metadata.namespace</code></td>
               <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
             </tr>
             <tr>
-              <td><code>metadata/name</code></td>
+              <td><code>metadata.name</code></td>
               <td>Name the role and use the name later when you bind the role.</td>
             </tr>
             <tr>
-              <td><code>rules/apiGroups</code></td>
+              <td><code>rules.apiGroups</code></td>
               <td><ul><li>Specify the Kubernetes API groups that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. </li><li>For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</li><li>For more information, see [API groups![External link icon](../icons/launch-glyph.svg "External link icon")](https://v1-9.docs.kubernetes.io/docs/reference/api-overview/#api-groups) in the Kubernetes documentation.</li></ul></td>
             </tr>
             <tr>
-              <td><code>rules/resources</code></td>
+              <td><code>rules.resources</code></td>
               <td><ul><li>Specify the Kubernetes resources to which you want to grant access, such as `"daemonsets"`, `"deployments"`, `"events"`, or `"ingresses"`.</li><li>If you specify `"nodes"`, then the role kind must be `ClusterRole`.</li><li>For a list of resources, see the table of [Resource types![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) in the Kubernetes cheat sheet.</li></ul></td>
             </tr>
             <tr>
-              <td><code>rules/verbs</code></td>
+              <td><code>rules.verbs</code></td>
               <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).</li></ul></td>
             </tr>
           </tbody>
@@ -482,45 +482,45 @@ If you want to assign access to a service, such as a continuous delivery toolcha
               <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
             </tr>
             <tr>
-              <td><code>metadata/namespace</code></td>
+              <td><code>metadata.namespace</code></td>
               <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
             </tr>
             <tr>
-              <td><code>metadata/name</code></td>
+              <td><code>metadata.name</code></td>
               <td>Name the role binding.</td>
             </tr>
             <tr>
-              <td><code>subjects/kind</code></td>
+              <td><code>subjects.kind</code></td>
               <td>Specify the kind as one of the following:
               <ul><li>`User`: Bind the RBAC role to an individual user in your account.</li>
               <li>`Group`: For clusters that run Kubernetes 1.11 or later, bind the RBAC role to an [IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>`ServiceAccount`: Bind the RBAC role to a service account in a namespace in your cluster.</li></ul></td>
             </tr>
             <tr>
-              <td><code>subjects/name</code></td>
+              <td><code>subjects.name</code></td>
               <td><ul><li>**For `User`**: Append the individual user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`. For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li>
               <li>**For `Group`**: For clusters that run Kubernetes 1.11 or later, specify the name of the [IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>**For `ServiceAccount`**: Specify the service account name.</li></ul></td>
             </tr>
             <tr>
-              <td><code>subjects/apiGroup</code></td>
+              <td><code>subjects.apiGroup</code></td>
               <td><ul><li>**For `User` or `Group`**: use `rbac.authorization.k8s.io`.</li>
               <li>**For `ServiceAccount`**: Do not include this field.</li></ul></td>
             </tr>
             <tr>
-              <td><code>subjects/namespace</code></td>
+              <td><code>subjects.namespace</code></td>
               <td>**For `ServiceAccount` only**: Specify the name of the Kubernetes namespace that the service account is deployed to.</td>
             </tr>
             <tr>
-              <td><code>roleRef/kind</code></td>
+              <td><code>roleRef.kind</code></td>
               <td>Enter the same value as the `kind` in the role `.yaml` file: `Role` or `ClusterRole`.</td>
             </tr>
             <tr>
-              <td><code>roleRef/name</code></td>
+              <td><code>roleRef.name</code></td>
               <td>Enter the name of the role `.yaml` file.</td>
             </tr>
             <tr>
-              <td><code>roleRef/apiGroup</code></td>
+              <td><code>roleRef.apiGroup</code></td>
               <td>Use `rbac.authorization.k8s.io`.</td>
             </tr>
           </tbody>

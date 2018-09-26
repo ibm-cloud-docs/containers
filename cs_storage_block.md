@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -427,31 +427,31 @@ To add block storage:
        </thead>
        <tbody>
        <tr>
-       <td><code>metadata/name</code></td>
+       <td><code>metadata.name</code></td>
        <td>Enter the name of the PVC.</td>
        </tr>
        <tr>
-       <td><code>metadata/annotations</code></td>
+       <td><code>metadata.annotations</code></td>
        <td>The name of the storage class that you want to use to provision block storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
        </tr>
        <tr>
-         <td><code>metadata/labels/billingType</code></td>
+         <td><code>metadata.labels.billingType</code></td>
          <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "hourly".</td>
        </tr>
        <tr>
-       <td><code>metadata/labels/region</code></td>
+       <td><code>metadata.labels.region</code></td>
        <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
        </tr>
        <tr>
-       <td><code>metadata/labels/zone</code></td>
+       <td><code>metadata.labels.zone</code></td>
 	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
 	</tr>
         <tr>
-        <td><code>spec/resources/requests/storage</code></td>
+        <td><code>spec.resources.requests.storage</code></td>
         <td>Enter the size of the block storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
         <tr>
-        <td><code>spec/resources/requests/iops</code></td>
+        <td><code>spec.resources.requests.iops</code></td>
         <td>This option is available for the custom storage classes only (`ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
         </tbody></table>
@@ -532,39 +532,39 @@ To add block storage:
     </thead>
     <tbody>
         <tr>
-    <td><code>metadata/labels/app</code></td>
+    <td><code>metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
       <tr>
-        <td><code>spec/selector/matchLabels/app</code> <br/> <code>spec/template/metadata/labels/app</code></td>
+        <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
         <td>A label for your app.</td>
       </tr>
     <tr>
-    <td><code>template/metadata/labels/app</code></td>
+    <td><code>template.metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
     <tr>
-    <td><code>spec/containers/image</code></td>
+    <td><code>spec.containers.image</code></td>
     <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/name</code></td>
+    <td><code>spec.containers.name</code></td>
     <td>The name of the container that you want to deploy to your cluster.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td><code>spec.containers.volumeMounts.mountPath</code></td>
     <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td><code>spec.containers.volumeMounts.name</code></td>
     <td>The name of the volume to mount to your pod.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
+    <td><code>volumes.name</code></td>
     <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td><code>volumes.persistentVolumeClaim.claimName</code></td>
     <td>The name of the PVC that binds the PV that you want to use. </td>
     </tr>
     </tbody></table>
@@ -699,34 +699,34 @@ Before you can start to mount your existing storage to an app, you must retrieve
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Enter the name of the PV that you want to create.</td>
     </tr>
     <tr>
-    <td><code>metadata/labels</code></td>
+    <td><code>metadata.labels</code></td>
     <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](cs_storage_basics.html#multizone) to your PV.
     </tr>
     <tr>
-    <td><code>spec/flexVolume/fsType</code></td>
+    <td><code>spec.flexVolume.fsType</code></td>
     <td>Enter the file system type that is configured for your existing block storage. Choose between <code>ext4</code> or <code>xfs</code>. If you do not specify this option, the PV defaults to <code>ext4</code>. When the wrong fsType is defined, then the PV creation succeeds, but the mounting of the PV to a pod fails. </td></tr>	    
     <tr>
-    <td><code>spec/capacity/storage</code></td>
+    <td><code>spec.capacity.storage</code></td>
     <td>Enter the storage size of the existing block storage that you retrieved in the previous step as <code>capacity-gb</code>. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB).</td>
     </tr>
     <tr>
-    <td><code>flexVolume/options/Lun</code></td>
+    <td><code>flexVolume.options.Lun</code></td>
     <td>Enter the lun ID for your block storage that you retrieved earlier as <code>lunId</code>.</td>
     </tr>
     <tr>
-    <td><code>flexVolume/options/TargetPortal</code></td>
+    <td><code>flexVolume.options.TargetPortal</code></td>
     <td>Enter the IP address of your block storage that you retrieved earlier as <code>ip_addr</code>. </td>
     </tr>
     <tr>
-	    <td><code>flexVolume/options/VolumeId</code></td>
+	    <td><code>flexVolume.options.VolumeId</code></td>
 	    <td>Enter the ID of your block storage that you retrieved earlier as <code>id</code>.</td>
 	    </tr>
 	    <tr>
-		    <td><code>flexVolume/options/volumeName</code></td>
+		    <td><code>flexVolume.options.volumeName</code></td>
 		    <td>Enter a name for your volume.</td>
 	    </tr>
     </tbody></table>

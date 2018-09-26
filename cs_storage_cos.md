@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -101,27 +101,27 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata/name</code></td>
+   <td><code>metadata.name</code></td>
    <td>Enter a name for your {{site.data.keyword.cos_full_notm}} secret. </td>
    </tr>
    <tr>
-   <td><code>metadata/namespace</code></td>
+   <td><code>metadata.namespace</code></td>
    <td>Specify the namespace where you want to create the secret. The secret must be created in the same namespace where you want to create your PVC and the pod that accesses your {{site.data.keyword.cos_full_notm}} service instance.  </td>
    </tr>
    <tr>
-   <td><code>data/api-key</code></td>
+   <td><code>data.api-key</code></td>
    <td>Enter the API key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The API key must be base64 encoded. If you want to use HMAC authentication, specify the <code>data/access-key</code> and <code>data/secret-key</code> instead.  </td>
    </tr>
    <tr>
-   <td><code>data/access-key</code></td>
+   <td><code>data.access-key</code></td>
    <td>Enter the access key ID that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The access key ID must be base64 encoded. If you want to use OAuth2 authentication, specify the <code>data/api-key</code> instead.  </td>
    </tr>
    <tr>
-   <td><code>data/secret-key</code></td>
+   <td><code>data.secret-key</code></td>
    <td>Enter the secret access key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The secret access key must be base64 encoded. If you want to use OAuth2 authentication, specify the <code>data/api-key</code> instead.</td>
    </tr>
    <tr>
-   <td><code>data/service-instance-id</td>
+   <td><code>data.service-instance-id</td>
    <td>Enter the GUID of your {{site.data.keyword.cos_full_notm}} service instance that you retrieved earlier. The GUID must be base64 encoded. </td>
    </tr>
    </tbody>
@@ -653,11 +653,11 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata/name</code></td>
+   <td><code>metadata.name</code></td>
    <td>Enter the name of the PVC.</td>
    </tr>
    <tr>
-   <td><code>metadata/namespace</code></td>
+   <td><code>metadata.namespace</code></td>
    <td>Enter the namespace where you want to create the PVC. The PVC must be created in the same namespace where you created the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service credentials and where you want to run your pod. </td>
    </tr>
    <tr>
@@ -684,7 +684,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    <td>Enter the name of the secret that holds the {{site.data.keyword.cos_full_notm}} credentials that you created earlier. </td>
    </tr>
    <tr>
-   <td><code>resources/requests/storage</td>
+   <td><code>resources.requests.storage</td>
    <td>A fictitious size for your {{site.data.keyword.cos_full_notm}} bucket in gigabytes. The size is required by Kubernetes, but not respected in {{site.data.keyword.cos_full_notm}}. You can enter any size that you want. The actual space that you use in {{site.data.keyword.cos_full_notm}} might be different and is billed based on the [pricing table ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api). </td>
    </tr>
    </tbody>
@@ -751,43 +751,43 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
     </thead>
     <tbody>
         <tr>
-    <td><code>metadata/labels/app</code></td>
+    <td><code>metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
       <tr>
-        <td><code>spec/selector/matchLabels/app</code> <br/> <code>spec/template/metadata/labels/app</code></td>
+        <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
         <td>A label for your app.</td>
       </tr>
     <tr>
-    <td><code>template/metadata/labels/app</code></td>
+    <td><code>template.metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
     <tr>
-    <td><code>spec/containers/image</code></td>
+    <td><code>spec.containers.image</code></td>
     <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/name</code></td>
+    <td><code>spec.containers.name</code></td>
     <td>The name of the container that you want to deploy to your cluster.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/securityContext/runAsUser</code></td>
+    <td><code>spec.containers.securityContext.runAsUser</code></td>
     <td>Optional: To run the app with a non-root user, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod by defining the non-root user without setting the `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and impacts performance. Depending on how many files you have, updating the permissions might prevent your pod from coming up and getting into a <code>Running</code> state. </td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td><code>spec.containers.volumeMounts.mountPath</code></td>
     <td>The absolute path of the directory to where the volume is mounted inside the container.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td><code>spec.containers.volumeMounts.name</code></td>
     <td>The name of the volume to mount to your pod.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
+    <td><code>volumes.name</code></td>
     <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td><code>volumes.persistentVolumeClaim.claimName</code></td>
     <td>The name of the PVC that binds the PV that you want to use. </td>
     </tr>
     </tbody></table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-25"
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes and pod network namespaces in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom DaemonSet to your cluster. The DaemonSet alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
+Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom Kubernetes `DaemonSet` object to your cluster. The daemonset alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
 
 To optimize kernel settings for app pods, you can insert an initContainer into the `pod/ds/rs/deployment` YAML for each deployment. The initContainer is added to each app deployment that is in the pod network namespace for which you want to optimize performance.
 
@@ -32,11 +32,11 @@ For example, the samples in the following sections change the default maximum nu
 ## Optimizing worker node performance
 {: #worker}
 
-Apply a [DaemonSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) to change kernel parameters on the worker node host.
+Apply a [daemonset ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) to change kernel parameters on the worker node host.
 
 **Note**: You must have the [Administrator access role](cs_users.html#user-roles) to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
 
-1. Save the following DaemonSet in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example DaemonSet changes the values of the `net.core.somaxconn` and `net.ipv4.ip_local_port_range` parameters.
+1. Save the following daemonset in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemonset changes the values of the `net.core.somaxconn` and `net.ipv4.ip_local_port_range` parameters.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -91,7 +91,7 @@ Apply a [DaemonSet ![External link icon](../icons/launch-glyph.svg "External lin
     ```
     {: codeblock}
 
-2. Apply the DaemonSet to your worker nodes. The changes are applied immediately.
+2. Apply the daemonset to your worker nodes. The changes are applied immediately.
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -101,7 +101,7 @@ Apply a [DaemonSet ![External link icon](../icons/launch-glyph.svg "External lin
 
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
-1. Delete the DaemonSet. The initContainers that applied the custom settings are removed.
+1. Delete the daemonset. The initContainers that applied the custom settings are removed.
     ```
     kubectl delete ds kernel-optimization
     ```
