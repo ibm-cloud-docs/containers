@@ -452,7 +452,7 @@ If you want to assign access to a service, such as a continuous delivery toolcha
           namespace: default
         subjects:
         - kind: User
-          name: https://iam.ng.bluemix.net/kubernetes#user1@example.com
+          name: https://iam.ng.bluemix.net/IAM#user1@example.com
           apiGroup: rbac.authorization.k8s.io
         - kind: Group
           name: team1
@@ -498,7 +498,7 @@ If you want to assign access to a service, such as a continuous delivery toolcha
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>**For `User`**: Append the individual user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`. For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li>
+              <td><ul><li>**For `User`**: Append the individual user's email address to the following URL: `https://iam.ng.bluemix.net/IAM#`. For example, `https://iam.ng.bluemix.net/IAM#user1@example.com`</li>
               <li>**For `Group`**: For clusters that run Kubernetes 1.11 or later, specify the name of the [IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>**For `ServiceAccount`**: Specify the service account name.</li></ul></td>
             </tr>

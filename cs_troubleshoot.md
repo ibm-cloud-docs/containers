@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -234,7 +234,7 @@ Review common error messages and learn how to resolve them.
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
         The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
-        <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure (SoftLayer) portfolio, or you are using the wrong infrastructure credentials. See [Configure access to the IBM Cloud infrastructure (SoftLayer) portfolio to create standard Kubernetes clusters](cs_troubleshoot_clusters.html#cs_credentials).</td>
+        <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure (SoftLayer) portfolio, or you are using the wrong infrastructure credentials. See [Accessing the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials).</td>
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
