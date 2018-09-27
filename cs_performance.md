@@ -34,7 +34,7 @@ For example, the samples in the following sections change the default maximum nu
 
 Apply a [daemonset ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) to change kernel parameters on the worker node host.
 
-**Note**: You must have the [Administrator access role](cs_users.html#user-roles) to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
+**Note**: You must have the [Administrator access role](cs_users.html#access_policies) to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
 
 1. Save the following daemonset in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemonset changes the values of the `net.core.somaxconn` and `net.ipv4.ip_local_port_range` parameters.
     ```
@@ -118,7 +118,7 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 If you have specific workload demands, you can apply an [initContainer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) patch to change kernel parameters for app pods.
 {: shortdesc}
 
-**Note**: You must have the [Administrator access role](cs_users.html#user-roles) to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
+**Note**: You must have the [Administrator access role](cs_users.html#access_policies) to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
 
 1. Save the following initContainer patch in a file named `pod-patch.yaml` and add the fields and values for the `sysctl` parameters that you want to tune. This example initContainer changes the values of the `net.core.somaxconn` and `net.ipv4.ip_local_port_range` parameters.
     ```
