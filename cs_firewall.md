@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-26"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -253,7 +253,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <tr>
           <td>EU Central</td>
           <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>161.156.73.192/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
          </tr>
          <tr>
           <td>UK South</td>
