@@ -1040,7 +1040,7 @@ To create a Calico policy to log denied traffic:
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>This <code>Ingress</code> policy applies incoming traffic requests. <strong>Note:</strong> The value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to traffic only from the IBM Ingress ALB.</td>
+     <td>This <code>Ingress</code> policy applies to all incoming traffic requests. <strong>Note:</strong> The value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to traffic only from the IBM Ingress ALB.</td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
