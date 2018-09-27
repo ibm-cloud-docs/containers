@@ -138,10 +138,6 @@ Be sure that your cluster is configured to forward [Kubernetes API audit events]
     <td>A node was deleted.</td>
   </tr>
   <tr>
-    <td><code>nodes.delete</code></td>
-    <td>A node was deleted.</td>
-  </tr>
-  <tr>
     <td><code>nodes.patch</code></td>
     <td>A node was patched.</td>
   </tr>
