@@ -783,7 +783,7 @@ Before you begin:
 
 To isolate your cluster on the private network using Calico policies:
 
-1. Clone the `IBM-Cloud/kube-samples` respository.
+1. Clone the `IBM-Cloud/kube-samples` repository.
     ```
     git clone https://github.com/IBM-Cloud/kube-samples.git
     ```
