@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -662,6 +662,8 @@ Metrics help you monitor the health and performance of your clusters. You can us
       </table>
  </dd>
 </dl>
+
+
 
 ### Other health monitoring tools
 {: #health_tools}
