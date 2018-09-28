@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -295,6 +295,14 @@ Review the following changes.
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
+<li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -696,6 +704,14 @@ Review the following changes.
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
+<li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
