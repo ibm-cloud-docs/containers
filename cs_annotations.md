@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -1623,7 +1623,8 @@ Configure mutual authentication for the ALB.
 <dl>
 <dt>Description</dt>
 <dd>
-Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.
+Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.</br></br>
+Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the backend application.
 </dd>
 
 <dt>Pre-requisites</dt>
@@ -1734,7 +1735,9 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB handles the TLS termination and decrypts the request before forwarding the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to stay encrypted, use the `ssl-services` annotation to disable the default TLS termination of the ALB. The ALB terminates the TLS connection and re-encrypts SSL before sending traffic to the backend app.<br></br>Additionally, if your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</dd>
+When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB handles the TLS termination and decrypts the request before forwarding the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to stay encrypted, use the `ssl-services` annotation to disable the default TLS termination of the ALB. The ALB terminates the TLS connection and re-encrypts SSL before sending traffic to the backend app.</br></br>
+Additionally, if your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</br></br>
+Use the `ssl-services` annotation for SSL termination between the Ingress ALB and the backend application. Use the [`mutual-auth` annotation](#mutual-auth) for SSL termination between the client and the Ingress ALB. </dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
