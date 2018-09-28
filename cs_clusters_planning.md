@@ -20,8 +20,6 @@ lastupdated: "2018-09-28"
 {: #plan_clusters}
 Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
 
-
-
 ## Highly available clusters
 {: #ha_clusters}
 
