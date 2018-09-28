@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -385,7 +385,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
-	         region: us-south
+	   region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -408,7 +408,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
-	         region: us-south
+	   region: us-south
            zone: dal13
        spec:
          accessModes:
