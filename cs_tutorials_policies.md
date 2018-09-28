@@ -81,7 +81,7 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: screen}
 
-3. To expose the app to the public internet, create a LoadBalancer service configuration file called `webserver.yaml` in a text editor.
+3. To expose the app to the public internet, create a LoadBalancer service configuration file called `webserver-lb.yaml` in a text editor.
     ```
     apiVersion: v1
     kind: Service
