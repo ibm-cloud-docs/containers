@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -89,7 +89,6 @@ The following image shows how the webserver app will be exposed to the internet 
       labels:
         run: webserver
       name: webserver-lb
-      namespace: pr-firm
     spec:
       externalTrafficPolicy: Cluster
       ports:
