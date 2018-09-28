@@ -48,7 +48,7 @@ The list is divided into two parts:
 1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
     1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), click **Manage > Account > Users**.
     2.  From the table, select yourself.
-    3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for the entire account, or at least for {{site.data.keyword.containershort_notm}}. 
+    3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. 
 2.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters). 
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
