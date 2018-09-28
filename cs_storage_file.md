@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -909,7 +909,8 @@ parameters:
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"
-reclaimPolicy: "Delete"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
 ```
 {: codeblock}
 
