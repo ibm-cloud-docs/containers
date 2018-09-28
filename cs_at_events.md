@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -132,10 +132,6 @@ Be sure that your cluster is configured to forward [Kubernetes API audit events]
   <tr>
     <td><code>nodes.create</code></td>
     <td>A node is created.</td>
-  </tr>
-  <tr>
-    <td><code>nodes.delete</code></td>
-    <td>A node was deleted.</td>
   </tr>
   <tr>
     <td><code>nodes.delete</code></td>
@@ -542,20 +538,20 @@ Be sure that your cluster is configured to forward [Kubernetes API audit events]
     <td>For Kubernetes v1.10 and higher, a  pod security policy was updated.</td>
   </tr>
   <tr>
-    <td><code>poddisruptionbugets.create</code></td>
-    <td>A pod disruption buget was created.</td>
+    <td><code>poddisruptionbudgets.create</code></td>
+    <td>A pod disruption budget was created.</td>
   </tr>
   <tr>
-    <td><code>poddisruptionbugets.delete</code></td>
-    <td>A pod disruption buget was deleted.</td>
+    <td><code>poddisruptionbudgets.delete</code></td>
+    <td>A pod disruption budget was deleted.</td>
   </tr>
   <tr>
-    <td><code>poddisruptionbugets.patch</code></td>
-    <td>A pod disruption buget was patched.</td>
+    <td><code>poddisruptionbudgets.patch</code></td>
+    <td>A pod disruption budget was patched.</td>
   </tr>
   <tr>
-    <td><code>poddisruptionbugets.update</code></td>
-    <td>A pod disruption buget was updated.</td>
+    <td><code>poddisruptionbudgets.update</code></td>
+    <td>A pod disruption budget was updated.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -43,7 +43,7 @@ Before you begin:
 
 To label worker nodes as edge nodes:
 
-1. List the worker nodes in your edge node worker pool. Use the private IP address from the **NAME** column to identify the nodes.
+1. List the worker nodes in your edge node worker pool. Use the **Private IP** address to identify the nodes.
 
   ```
   ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
@@ -57,21 +57,33 @@ To label worker nodes as edge nodes:
   ```
   {: pre}
 
-3. Retrieve all of the existing load balancer services in the cluster.
+3. Retrieve all of the existing load balancers and Ingress application load balancers (ALBs) in the cluster.
 
   ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  kubectl get services --all-namespaces
   ```
   {: pre}
 
-  Example output:
+  In the output, look for services that have the **Type** of **LoadBalancer**. Note the **Namespace** and **Name** of each load balancer service. For example, in the following output, there are 3 load balancer services: the load balancer `webserver-lb` in the `default` namespace, and the Ingress ALBs, `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb2`, in the `kube-system` namespace.
 
   ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+  default       kubernetes                                       ClusterIP      172.21.0.1       <none>          443/TCP                      1h
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
+  kube-system   heapster                                         ClusterIP      172.21.101.189   <none>          80/TCP                       1h
+  kube-system   kube-dns                                         ClusterIP      172.21.0.10      <none>          53/UDP,53/TCP                1h
+  kube-system   kubernetes-dashboard                             ClusterIP      172.21.153.239   <none>          443/TCP                      1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
   ```
   {: screen}
 
-4. Using the output from the previous step, copy and paste each `kubectl get service` line. This command redeploys the load balancer to an edge worker node. Only public load balancers must be redeployed.
+4. Using the output from the previous step, run the following command for each load balancer and Ingress ALB. This command redeploys the load balancer or Ingress ALB to an edge worker node. Only public load balancers or ALBs must be redeployed.
+
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
 
   Example output:
 
@@ -106,6 +118,7 @@ Using the `dedicated=edge` toleration means that all load balancer and Ingress s
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  {: pre}
   Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
 3. If you choose to [enable source IP preservation for a load balancer service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -400,14 +400,14 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     </thead>
     <tbody>
     <tr>
-    <td><code>tls/hosts</code></td>
+    <td><code>tls.hosts</code></td>
     <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
     <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
-    <td><code>tls/secretName</code></td>
+    <td><code>tls.secretName</code></td>
     <td><ul><li>If you use the IBM-provided Ingress domain, replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret.</li><li>If you use a custom domain, replace <em>&lt;tls_secret_name&gt;</em> with the secret that you created earlier that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.</li><ul><td>
     </tr>
     <tr>
@@ -526,7 +526,7 @@ To expose apps that are outside your cluster to the public:
         </thead>
         <tbody>
         <tr>
-        <td><code>metadata/name</code></td>
+        <td><code>metadata.name</code></td>
         <td>Replace <em>&lt;myexternalservice&gt;</em> with a name for your service.<p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
         </tr>
         <tr>
@@ -903,11 +903,11 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
-    <td><code>tls/hosts</code></td>
+    <td><code>tls.hosts</code></td>
     <td>To use TLS, replace <em>&lt;domain&gt;</em> with your custom domain.</br></br><strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
-    <td><code>tls/secretName</code></td>
+    <td><code>tls.secretName</code></td>
     <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
     </tr>
     <tr>

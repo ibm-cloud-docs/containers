@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -427,19 +427,19 @@ To execute a workload on a GPU machine:
     <td>Give a name and a label for the job, and use the same name in both the file's metadata and the `spec template` metadata. For example, `nvidia-smi`.</td>
     </tr>
     <tr>
-    <td><code>containers/image</code></td>
+    <td><code>containers.image</code></td>
     <td>Provide the image that the container is a running instance of. In this example, the value is set to use the DockerHub CUDA image:<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
     </tr>
     <tr>
-    <td><code>containers/command</code></td>
+    <td><code>containers.command</code></td>
     <td>Specify a command to run in the container. In this example, the <code>[ "/usr/test/nvidia-smi" ]</code>command refers to a binary that is on the GPU machine, so you must also set up a volume mount.</td>
     </tr>
     <tr>
-    <td><code>containers/imagePullPolicy</code></td>
+    <td><code>containers.imagePullPolicy</code></td>
     <td>To pull a new image only if the image is not currently on the worker node, specify <code>IfNotPresent</code>.</td>
     </tr>
     <tr>
-    <td><code>resources/limits</code></td>
+    <td><code>resources.limits</code></td>
     <td>For GPU machines, you must specify the resource limit. The Kubernetes [Device Plug-in![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) sets the default resource request to match the limit.
     <ul><li>You must specify the key as <code>nvidia.com/gpu</code>.</li>
     <li>Enter the whole number of GPUs that you request, such as <code>2</code>. <strong>Note</strong>: Container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 `mg1c.16x128` machine, then you have only 2 GPUs in that machine and can specify a maximum of `2`.</li></ul></td>

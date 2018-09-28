@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-28"
 
 ---
 
@@ -223,27 +223,27 @@ To add file storage:
        </thead>
        <tbody>
        <tr>
-       <td><code>metadata/name</code></td>
+       <td><code>metadata.name</code></td>
        <td>Enter the name of the PVC.</td>
        </tr>
        <tr>
-       <td><code>metadata/annotations</code></td>
+       <td><code>metadata.annotations</code></td>
        <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
        </tr>
        <tr>
-         <td><code>metadata/labels/billingType</code></td>
+         <td><code>metadata.labels.billingType</code></td>
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
        </tr>
        <tr>
-       <td><code>spec/accessMode</code></td>
+       <td><code>spec.accessMode</code></td>
        <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
        </tr>
        <tr>
-       <td><code>spec/resources/requests/storage</code></td>
+       <td><code>spec.resources.requests.storage</code></td>
        <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
        </tr>
        <tr>
-       <td><code>spec/resources/requests/iops</code></td>
+       <td><code>spec.resources.requests.iops</code></td>
        <td>This option is available for the custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
        </tr>
        </tbody></table>
@@ -327,39 +327,39 @@ To add file storage:
     </thead>
     <tbody>
         <tr>
-    <td><code>metadata/labels/app</code></td>
+    <td><code>metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
       <tr>
-        <td><code>spec/selector/matchLabels/app</code> <br/> <code>spec/template/metadata/labels/app</code></td>
+        <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
         <td>A label for your app.</td>
       </tr>
     <tr>
-    <td><code>template/metadata/labels/app</code></td>
+    <td><code>template.metadata.labels.app</code></td>
     <td>A label for the deployment.</td>
       </tr>
     <tr>
-    <td><code>spec/containers/image</code></td>
+    <td><code>spec.containers.image</code></td>
     <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/name</code></td>
+    <td><code>spec.containers.name</code></td>
     <td>The name of the container that you want to deploy to your cluster.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td><code>spec.containers.volumeMounts.mountPath</code></td>
     <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the <code>root</code> directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path. </td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td><code>spec.containers.volumeMounts.name</code></td>
     <td>The name of the volume to mount to your pod.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
-    <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts/name</code>.</td>
+    <td><code>volumes.name</code></td>
+    <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts.name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td><code>volumes.persistentVolumeClaim.claimName</code></td>
     <td>The name of the PVC that binds the PV that you want to use. </td>
     </tr>
     </tbody></table>
@@ -491,19 +491,19 @@ If you want to use existing storage that you provisioned earlier, but never used
     <td>Enter the name of the PV object to create.</td>
     </tr>
     <tr>
-    <td><code>metadata/labels</code></td>
+    <td><code>metadata.labels</code></td>
     <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](cs_storage_basics.html#multizone) to your PV.
     </tr>
     <tr>
-    <td><code>spec/capacity/storage</code></td>
+    <td><code>spec.capacity.storage</code></td>
     <td>Enter the storage size of the existing NFS file share that you retrieved earlier. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB), and the size must match the size of the existing file share.</td>
     </tr>
     <tr>
-    <td><code>spec/accessMode</code></td>
+    <td><code>spec.accessMode</code></td>
     <td>Specify one of the following options: <ul><li><strong>ReadWriteMany: </strong>The PVC can be mounted by multiple pods. All pods can read from and write to the volume. </li><li><strong>ReadOnlyMany: </strong>The PVC can be mounted by multiple pods. All pods have read-only access. <li><strong>ReadWriteOnce: </strong>The PVC can be mounted by one pod only. This pod can read from and write to the volume. </li></ul></td>
     </tr>
     <tr>
-    <td><code>spec/nfs/server</code></td>
+    <td><code>spec.nfs.server</code></td>
     <td>Enter the NFS file share server ID that you retrieved earlier.</td>
     </tr>
     <tr>
@@ -909,7 +909,8 @@ parameters:
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"
-reclaimPolicy: "Delete"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
 ```
 {: codeblock}
 

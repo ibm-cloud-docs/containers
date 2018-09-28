@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -253,7 +253,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <tr>
           <td>EU Central</td>
           <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>161.156.73.192/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
          </tr>
          <tr>
           <td>UK South</td>
@@ -357,6 +357,7 @@ If you have a firewall on the private network, allow communication between worke
 2. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.
     - Allow outbound TCP and UDP to port 2049 to allow mounting file storage as volumes.
+    - Allow outbound TCP and UDP to port 3260 for communication to block storage.
     - Allow inbound TCP and UDP connections to port 10250 for the Kubernetes dashboard and commands such as `kubectl logs` and `kubectl exec`.
     - Allow inbound and outbound connections to TCP and UDP port 53 for DNS access.
 3. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -438,19 +438,19 @@ When you mount the secret as a volume to your pod, a file that is named `binding
     </thead>
     <tbody>
     <tr>
-    <td><code>volumeMounts/mountPath</code></td>
+    <td><code>volumeMounts.mountPath</code></td>
     <td>The absolute path of the directory to where the volume is mounted inside the container.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/name</code></br><code>volumes/name</code></td>
+    <td><code>volumeMounts.name</code></br><code>volumes.name</code></td>
     <td>The name of the volume to mount to your pod.</td>
     </tr>
     <tr>
-    <td><code>secret/defaultMode</code></td>
+    <td><code>secret.defaultMode</code></td>
     <td>The read and write permissions on the secret. Use `420` to set read-only permissions. </td>
     </tr>
     <tr>
-    <td><code>secret/secretName</code></td>
+    <td><code>secret.secretName</code></td>
     <td>The name of the secret that you noted in the previous step.</td>
     </tr></tbody></table>
 
@@ -594,15 +594,15 @@ You can add the service credentials and other key value pairs from your Kubernet
      </thead>
      <tbody>
      <tr>
-     <td><code>containers/env/name</code></td>
+     <td><code>containers.env.name</code></td>
      <td>The name of your environment variable.</td>
      </tr>
      <tr>
-     <td><code>env/valueFrom/secretKeyRef/name</code></td>
+     <td><code>env.valueFrom.secretKeyRef.name</code></td>
      <td>The name of the secret that you noted in the previous step.</td>
      </tr>
      <tr>
-     <td><code>env/valueFrom/secretKeyRef/key</code></td>
+     <td><code>env.valueFrom.secretKeyRef.key</code></td>
      <td>The key that is part of your secret and that you want to reference in your environment variable. To reference the service credentials, you must use the <strong>binding</strong> key.  </td>
      </tr>
      </tbody></table>
