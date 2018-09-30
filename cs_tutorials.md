@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -158,6 +158,12 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     {: pre}
 
     **Note:** If you have a federated ID, use the `--sso` flag to log in. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode.
+
+2.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
+   ```
+   ibmcloud target -g <resource_group_name>
+   ```
+   {: pre}
 
 2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
 

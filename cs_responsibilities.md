@@ -41,7 +41,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 
 **You are responsible for:**
 
-- [Configuring your {{site.data.keyword.Bluemix_notm}} account to access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_users.html#api_key)
+- [Configuring the {{site.data.keyword.containerlong_notm}} API key with the appropriate permissions to access the IBM Cloud infrastructure (SoftLayer) portfolio and other {{site.data.keyword.Bluemix_notm}} services](cs_users.html#api_key)
 - [Deploying and managing Kubernetes resources, such as pods, services, and deployments, within the cluster](cs_app.html#app_cli)
 - [Leveraging the capabilities of the service and Kubernetes to ensure high availability of apps](cs_app.html#highly_available_apps)
 - [Adding or removing cluster capacity by resizing your worker pools](cs_clusters.html#add_workers)
