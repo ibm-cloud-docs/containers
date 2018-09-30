@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -123,7 +123,7 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 **Why might I use this setup?**
 
 * You have an app in a single-zone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLAN.
-* You have an app in a multizone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLANs as your cluster. 
+* You have an app in a multizone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLANs as your cluster. However, because [VLAN spanning](cs_subnets.html#subnet-routing) must be enabled for multizone clusters, other systems that are connected to any private VLAN in the same IBM Cloud account can access the cluster. You want to isolate your multizone cluster from other systems.
 
 **What are my options for managing public and private access to my cluster?**</br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up private-only networking and lock down public networking for clusters that are connected to a public and a private VLAN.
 

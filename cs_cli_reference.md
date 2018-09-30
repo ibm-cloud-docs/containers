@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -657,7 +657,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: pre}
 
 
-### ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE]  --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+### ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.

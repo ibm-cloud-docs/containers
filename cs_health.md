@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -663,7 +663,8 @@ Metrics help you monitor the health and performance of your clusters. You can us
  </dd>
 </dl>
 
-
+To avoid conflicts when using the built in metric service, be sure that clusters across resource groups and regions have unique names.
+{: tip}
 
 ### Other health monitoring tools
 {: #health_tools}

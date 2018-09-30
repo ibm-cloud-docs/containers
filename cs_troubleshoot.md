@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -234,11 +234,11 @@ Review common error messages and learn how to resolve them.
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
         The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
-        <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure (SoftLayer) portfolio, or you are using the wrong infrastructure credentials. See [Accessing the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials).</td>
+        <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure (SoftLayer) portfolio, or you are using the wrong infrastructure credentials. See [Accessing the IBM Cloud infrastructure (SoftLayer) portfolio](cs_users.html#api_key).</td>
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_network_planning.html#private_vlan) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
+       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters_planning.html#private_clusters) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
