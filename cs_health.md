@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -618,7 +618,72 @@ To forward Kubernetes API audit logs:
         ```
         {: pre}
 
+<br />
 
+
+## Collecting master logs
+{: #collect_master}
+
+With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
+{: shortdesc}
+
+Because Kubernetes API Server logs are automatically streamed, they're also automatically deleted to make room for the new logs coming in. By keeping a snapshot of logs at a specific point in time, you can better troubleshoot issues, look into usage differences, and find patterns to help maintain more secure applications.
+
+**Before you begin**
+
+* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of Object Storage from the {{site.data.keyword.Bluemix_notm}} catalog.
+
+* Be sure that you have `Admin` privileges for the cluster that you're working with.
+
+**Creating a snapshot**
+
+1. Create an Object Storage bucket through the GUI by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+
+2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
+  1. In the **Service Credentials** tab of the Cloud Object Storage dashboard, click **New Credential**.
+  2. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
+
+3. Give the HMAC credentials the `Writer` IAM role.
+
+4. Through the CLI, make a request for a snapshot of your master logs.
+
+  ```
+  ibmcloud ks logging-collect --cluster <cluster name or ID>  --type <type_of_log_to_collect> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key> --type <log_type>
+  ```
+  {: pre}
+
+  Example command and response:
+
+  ```
+  ibmcloud ks logging-collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
+  There is no specified log type. The default master will be used.
+  Submitting log collection request for master logs for cluster mycluster...
+  OK
+  The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging-collect-status mycluster.
+  ```
+  {: screen}
+
+5. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. The response contains URLs that you can access through a browser to download your logs.
+
+  ```
+  ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+
+  ```
+  ibmcloud ks logging-collect-status --cluster mycluster
+  Getting the status of the last log collection request for cluster mycluster...
+  OK
+  State     Start Time             Error   Log URLs
+  success   2018-09-18 16:49 PDT   - s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-0-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-1-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  ```
+  {: screen}
+
+<br />
 
 
 ## Viewing metrics
