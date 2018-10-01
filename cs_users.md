@@ -170,7 +170,7 @@ To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.
 
 {{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure (SoftLayer) portfolio by using an API key. The API key stores the credentials of a user with access to an IBM Cloud infrastructure (SoftLayer) account. API keys are set by region within a resource group, and are shared by users in that region.
  
-To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials that you store in the API key must have the **Super User** infrastructure role and the **Administrator** platform role for IKS in you IBM Cloud account. 
+To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials that you store in the API key must have the **Super User** infrastructure role and the **Administrator** platform role for {{site.data.keyword.containerlong_notm}} in you IBM Cloud account. 
 
 **What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
 
