@@ -34,11 +34,11 @@ The list is divided into two parts:
 ### Account-level
 
 1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
-2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
+2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters: 
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
     *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}}.
-3.  Figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups).
+3.  Figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
@@ -50,11 +50,11 @@ The list is divided into two parts:
     1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), click **Manage > Account > Users**.
     2.  From the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}.
-2.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
+2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
+3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-3.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 4.  For standard clusters, you can [estimate the cost with the pricing calculator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for [outbound networking bandwidth ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth) varies by usage and is an additional charge beyond the charges in the pricing calculator.
 <br>
 <br>
