@@ -22,7 +22,7 @@ lastupdated: "2018-10-01"
 Every Kubernetes cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to LoadBalancer services, use Calico network policies.
+If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to load balancer services, use Calico network policies.
 
 <ul>
   <li>
@@ -33,14 +33,14 @@ If you have unique security requirements or you have a multizone cluster with VL
     <ul>
     <li>Allow or block network traffic on specific network interfaces regardless of the Kubernetes pod source or destination IP address or CIDR.</li>
     <li>Allow or block network traffic for pods across namespaces.</li>
-    <li>[Block inbound (ingress) traffic to LoadBalancer or NodePort Kubernetes services](#block_ingress).</li>
+    <li>[Block inbound (ingress) traffic to Kubernetes LoadBalancer or NodePort services](#block_ingress).</li>
     </ul>
   </li>
   </ul>
 
 Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
-To use Ingress and LoadBalancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the LoadBalancer IP address. If the VRRP protocol isn't present to manage the LoadBalancer IP, Ingress and LoadBalancer services do not work properly.
+To use Ingress and load balancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the load balancer IP address. If the VRRP protocol isn't present to manage the load balancer IP, Ingress and load balancer services do not work properly.
 {: tip}
 
 <br />
@@ -78,7 +78,7 @@ Review the following default Calico network policies that are automatically appl
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Allows incoming NodePort, LoadBalancer, and Ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
+      <td>Allows incoming node port, load balancer, and Ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -649,34 +649,29 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 <br />
 
 
-## Controlling inbound traffic to LoadBalancer or NodePort services
+## Controlling inbound traffic to load balancer or node port services
 {: #block_ingress}
 
 [By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can use Calico policies to block incoming traffic to your services based on traffic source or destination.
 {:shortdesc}
 
-A Kubernetes LoadBalancer service is also a NodePort service. A LoadBalancer service makes your app available over the LoadBalancer IP address and port and makes your app available over the service's NodePorts. NodePorts are accessible on every IP address (public and private) for every node within the cluster.
-
-The cluster administrator can use Calico `preDNAT` network policies to block:
-
-  - Traffic to NodePort services. Traffic to LoadBalancer services is allowed.
-  - Traffic that is based on a source address or CIDR.
+Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT iptables rules generated for these services. Calico `preDNAT` network policies can help you because they generate iptables rules based on a Calico
+network policy resource.
 
 Some common uses for Calico `preDNAT` network policies:
 
-  - Block traffic to public NodePorts of a private LoadBalancer service.
-  - Block traffic to public NodePorts on clusters that are running [edge worker nodes](cs_edge.html#edge). Blocking NodePorts ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+  - Block traffic to public node ports of a private load balancer service. A load balancer service makes your app available over the load balancer IP address and port and makes your app available over the service's node ports. Node ports are accessible on every IP address (public and private) for every node within the cluster. You might
+  - Block traffic to public node ports on clusters that are running [edge worker nodes](cs_edge.html#edge). Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+  - Block traffic from certain source IP addresses or CIDRs (blacklisting)
+  - Allow traffic from only certain source IP addresses or CIDRs (whitelisting), and block all other traffic.
 
-Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT iptables rules generated for these services.
-
-Calico `preDNAT` network policies can help you because they generate iptables rules based on a Calico
-network policy resource. Kubernetes version 1.10 or later clusters use [network policies with `calicoctl.cfg` v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Kubernetes version 1.9 or earlier clusters use [policies with `calicoctl.cfg` v2 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](cs_tutorials_policies.html#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+{: tip}
 
 1. Define a Calico `preDNAT` network policy for ingress (inbound traffic) access to Kubernetes services.
+    * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Kubernetes version 1.9 or earlier clusters must use [Calico v2 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
 
-    * Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
-
-        Example resource that blocks all NodePorts:
+        Example resource that blocks all node ports:
 
         ```
         apiVersion: projectcalico.org/v3
@@ -706,32 +701,6 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
         ```
         {: codeblock}
 
-    * Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
-
-        Example resource that blocks all NodePorts:
-
-        ```
-        apiVersion: v1
-        kind: policy
-        metadata:
-          name: deny-nodeports
-        spec:
-          preDNAT: true
-          selector: ibm.role in { 'worker_public', 'master_public' }
-          ingress:
-          - action: deny
-            protocol: tcp
-            destination:
-              ports:
-              - 30000:32767
-          - action: deny
-            protocol: udp
-            destination:
-              ports:
-              - 30000:32767
-        ```
-        {: codeblock}
-
 2. Apply the Calico preDNAT network policy. It takes about 1 minute for the
 policy changes to be applied throughout the cluster.
 
@@ -750,9 +719,6 @@ policy changes to be applied throughout the cluster.
     {: pre}
 
 3. Optional: In multizone clusters, a MZLB health checks the ALBs in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the [Calico network policy tutorial](cs_tutorials_policies.html#lesson3).
-
-To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](cs_tutorials_policies.html#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
-{: tip}
 
 ## Isolating clusters on the private network
 {: #isolate_workers}
