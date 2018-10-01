@@ -661,7 +661,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: screen}
 
-4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. The response contains URLs that you can access through a browser to download your logs.
+4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.Bluemix_notm}} UI to download the file.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
