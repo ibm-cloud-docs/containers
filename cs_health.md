@@ -632,8 +632,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of Object Storage from the {{site.data.keyword.Bluemix_notm}} catalog.
-
-* Be sure that you have `Admin` privileges for the cluster that you're working with.
+* Be sure that you have [the **Administrator IAM platform role](cs_users.html#platform) for the cluster that you're working with.
 
 **Creating a snapshot**
 
@@ -641,11 +640,10 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
   1. In the **Service Credentials** tab of the Cloud Object Storage dashboard, click **New Credential**.
-  2. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
+  2. Give the HMAC credentials the `Writer` IAM role.
+  3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
 
-3. Give the HMAC credentials the `Writer` IAM role.
-
-4. Through the CLI, make a request for a snapshot of your master logs.
+3. Through the CLI, make a request for a snapshot of your master logs.
 
   ```
   ibmcloud ks logging-collect --cluster <cluster name or ID>  --type <type_of_log_to_collect> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key> --type <log_type>
@@ -663,7 +661,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: screen}
 
-5. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. The response contains URLs that you can access through a browser to download your logs.
+4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. The response contains URLs that you can access through a browser to download your logs.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
