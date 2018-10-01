@@ -225,7 +225,6 @@ It depends on what type of account that you're using to access the IBM Cloud inf
     1. Navigate to **Manage > Account > Users**.
     2. Click the name of the user who you want to set the API key or whose credentials you want to set for the API key.
     3. If the user doesn't have the **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
-    4. To create clusters, the user also needs the **Administrator** role for {{site.data.keyword.registryshort_notm}}.
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
     1. From the expanding menu, select **Infrastructure**.

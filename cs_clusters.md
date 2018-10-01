@@ -37,7 +37,6 @@ The list is divided into two parts:
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters: 
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
-    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}}.
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
