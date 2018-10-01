@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -137,13 +137,12 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 When the cluster is up and running, you can check out the following tasks:
 
--   Spread worker nodes across multiple zones by [adding a zone to your cluster](#add_zone).
+-   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
-- If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
+-   If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+-   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
 <br />
 
@@ -393,7 +392,7 @@ To create a cluster:
 
 **What's next?**
 
--   Spread worker nodes across multiple zones by [adding a zone to your cluster](#add_zone).
+-   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
