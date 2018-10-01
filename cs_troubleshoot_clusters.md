@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -496,7 +496,7 @@ Make sure that the user or service account is authorized by a pod security polic
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
-1.  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+1.  [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 2.  Refresh the Kubernetes master to restore it.
 
     ```

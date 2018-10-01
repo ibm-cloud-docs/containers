@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -148,7 +148,7 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the GUI](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -218,8 +218,8 @@ When you deploy an app to your cluster by using the Kubernetes dashboard, a depl
 
 Before you begin:
 
--   Install the required [CLIs](cs_cli_install.html#cs_cli_install).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+-   [Install the required CLIs](cs_cli_install.html#cs_cli_install).
+-   [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To deploy your app:
 
@@ -247,7 +247,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 Before you begin:
 
 -   Install the required [CLIs](cs_cli_install.html#cs_cli_install).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+-   [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To deploy your app:
 
@@ -279,7 +279,7 @@ To deploy your app:
 When you deploy an app, the app pods indiscriminately deploy to various worker nodes in your cluster. In some cases, you might want to restrict the worker nodes that the app pods to deploy to. For example, you might want app pods to only deploy to worker nodes in a certain worker pool because those worker nodes are on bare metal machines. To designate the worker nodes that app pods must deploy to, add an affinity rule to your app deployment.
 {:shortdesc}
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Get the name of the worker pool that you want to deploy app pods to.
     ```
@@ -545,7 +545,7 @@ Looking for information about scaling Cloud Foundry applications? Check out [IBM
 {: tip}
 
 Before you begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - Heapster monitoring must be deployed in the cluster that you want to autoscale.
 
 Steps:

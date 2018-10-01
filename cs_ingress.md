@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -158,7 +158,7 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
+* [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -499,7 +499,7 @@ Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
-* [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
+* [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To expose apps that are outside your cluster to the public:
 

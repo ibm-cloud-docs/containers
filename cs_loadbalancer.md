@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -396,7 +396,7 @@ When your cluster is connected to multiple public or private VLANs, your app pod
 
 When source IP is enabled, schedule app pods on worker nodes that are the same VLAN as the load balancer's IP address by adding an affinity rule to the app deployment.
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Get the IP address of the load balancer service. Look for the IP address in the **LoadBalancer Ingress** field.
     ```

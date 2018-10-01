@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -233,7 +233,7 @@ Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes clust
 
 **Important:** You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external).
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:**<ul><li>Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.</li><li>You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.</li></ul>
@@ -373,7 +373,7 @@ The credentials of a service instance are base64 encoded and stored inside your 
 
 
 Before your begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#adding_cluster).
 
 ### Mounting the secret as a volume to your pod
@@ -662,7 +662,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 Before you use Helm charts with {{site.data.keyword.containerlong_notm}}, you must install and initialize a Helm instance in your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to use a Helm chart.
+Before you begin: [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 
@@ -773,7 +773,7 @@ Before you begin:
 
 -   Remember not to expose your cluster information on the public internet. Complete these steps to deploy Weave Scope securely and access it from a web browser locally.
 -   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
+-   [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 
 To use Weave Scope with a cluster:
