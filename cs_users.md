@@ -114,15 +114,12 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the `default` r
 After you [understand how roles, users, and resources in your account](#access_policies) can be managed, use the following checklist to configure user access in your cluster.
 {: shortdesc}
 
-1. Start by setting up a user with the proper {{site.data.keyword.Bluemix_notm}} platform and infrastructure permissions. Later, you store this user's credentials in an API key that is used for the cluster to access {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources.
-  1. To set the {{site.data.keyword.Bluemix_notm}} platform **Administrator** role, see [Granting users access the cluster through IAM](#platform).
-  2. To set the IBM Cloud infrastructure (SoftLayer) **Super User** role, see [Customizing infrastructure permissions](#infra_access).
-2. [Set the API key](#api_key) for all the regions that you want to create clusters in.
-3. Invite users to your account and [assign them IAM platform roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
-4. To allow users to bind services to the cluster or to view logs that are forwarded from cluster logging configurations, [grant users Cloud Foundry roles](/docs/iam/mngcf.html) for the org and space that the services are deployed to or where logs are collected.
-5. If you use Kubernetes namespaces to isolate resources within the cluster, [copy the Kubernetes RBAC role bindings for the **Viewer** and **Editor** IAM platform roles to other namespaces](#role-binding).
-6. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](#rbac).
-7. For other advanced configurations to control access to your cluster resources at the pod level, see [Configuring pod security](https://console.stage1.bluemix.net/docs/containers/cs_psp.html#psp).
+1. [Set the API key](#api_key) for all the regions that you want to create clusters in.
+2. Invite users to your account and [assign them IAM platform roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
+3. To allow users to bind services to the cluster or to view logs that are forwarded from cluster logging configurations, [grant users Cloud Foundry roles](/docs/iam/mngcf.html) for the org and space that the services are deployed to or where logs are collected.
+4. If you use Kubernetes namespaces to isolate resources within the cluster, [copy the Kubernetes RBAC role bindings for the **Viewer** and **Editor** IAM platform roles to other namespaces](#role-binding).
+5. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](#rbac).
+6. For other advanced configurations to control access to your cluster resources at the pod level, see [Configuring pod security](https://console.stage1.bluemix.net/docs/containers/cs_psp.html#psp).
 
 </br>
 
@@ -137,6 +134,7 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 
 To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio.
 {: shortdesc}
+ 
 
 **Does my account already have access to the IBM Cloud infrastructure (SoftLayer) portfolio?**</br>
 
