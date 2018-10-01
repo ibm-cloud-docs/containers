@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -21,19 +21,54 @@ lastupdated: "2018-09-28"
 Create clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial).
 {: shortdesc}
 
+## Preparing to create clusters
+{: #cluster_prepare}
+
+With {{site.data.keyword.containerlong_notm}}, you can create a highly available and secure environment for your apps, with many additional capabilities built in or configurable. The many possibilities that you have with clusters also mean that you have many decisions to make when you create a cluster. The following steps outline what you must consider for setting up your account, permissions, resource groups, VLAN spanning, cluster set up for zone and hardware, and billing information.
+{: shortdesc}
+
+The list is divided into two parts:
+*  **Account-level**: These are preparations that, after the account administrator makes them, you might not need to change them each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
+*  **Cluster-level**: These are preparations that impact your cluster each time that you create a cluster.
+
+### Account-level
+
+1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
+2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters: 
+    *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
+    *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
+3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
+    *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
+    *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
+    *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
+4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+
+### Cluster-level
+
+1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
+    1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), click **Manage > Account > Users**.
+    2.  From the table, select yourself.
+    3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}.
+2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
+3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
+    *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
+    *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
+    *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
+4.  For standard clusters, you can [estimate the cost with the pricing calculator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for [outbound networking bandwidth ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth) varies by usage and is an additional charge beyond the charges in the pricing calculator.
+<br>
+<br>
+
+**What's next?**
+* [Creating clusters with the GUI](#clusters_ui)
+* [Creating clusters with the CLI](#clusters_cli)
+
 ## Creating clusters with the GUI
 {: #clusters_ui}
 
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-**Before you begin**
-- You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials).
-- Check that you have the appropriate user permissions to create a cluster. These permissions include the **Administrator** cluster role and at least **Viewer** account role in {{site.data.keyword.containerlong_notm}}, and the **Super User** or API key with **Super User** infrastructure role in IBM Cloud infrastructure (SoftLayer).
-- Decide between a [free or standard cluster](cs_why.html#cluster_types).
-
-To fully-customize your clusters with your choice of hardware isolation, zone, API version and more, create a standard cluster.
-{: tip}
+Before you begin, check out the steps you need to take to [prepare to create a cluster](#cluster_prepare).
 
 **To create a free cluster**
 
@@ -58,6 +93,8 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 **To create a standard cluster**
 
 1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+
+2. Select a resource group in which to create your cluster. **Note**: A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -99,13 +136,12 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 When the cluster is up and running, you can check out the following tasks:
 
--   Spread worker nodes across multiple zones by [adding a zone to your cluster](#add_zone).
+-   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
-- If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
+-   If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+-   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
 <br />
 
@@ -117,12 +153,8 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 {:shortdesc}
 
 Before you begin:
-- You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials).
-- Check that you have the appropriate user permissions to create a cluster. These permissions include the **Administrator** cluster role and at least **Viewer** account role in {{site.data.keyword.containerlong_notm}}, and the **Super User** or API key with **Super User** infrastructure role in IBM Cloud infrastructure (SoftLayer).
-- Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
-- If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
-- Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
-- If you create a standard cluster, you can [estimate the cost with the pricing calculator![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for outbound networking bandwidth varies by usage and is an additional charge beyond the charges in the pricing calculator.
+* Check out the steps you need to take to [prepare to create a cluster](#cluster_prepare).
+* Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 
 To create a cluster:
 
@@ -139,7 +171,14 @@ To create a cluster:
 
     2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-    3.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
+    3.  The `default` resource group is automatically targeted. To create a cluster in another resource group, target that resource group. Free clusters are automatically created in the `default` resource group.
+        ```
+        ibmcloud target -g <resource_group_name>
+        ```
+        {: pre}
+
+    4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
+
 
 3.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
@@ -352,7 +391,7 @@ To create a cluster:
 
 **What's next?**
 
--   Spread worker nodes across multiple zones by [adding a zone to your cluster](#add_zone).
+-   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -236,7 +236,7 @@ Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes clust
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:** Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:**<ul><li>Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.</li><li>You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.</li></ul>
 
 2. Check the type of service that you created and make note of the service instance **Name**.
    - **Cloud Foundry services:**

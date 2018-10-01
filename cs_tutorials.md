@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -49,9 +49,7 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  A Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/).
-- The [**Administrator** platform role](cs_users.html#add_users) for the account or the {{site.data.keyword.containerlong_notm}} cluster instance. Note that if you are only an **Administrator** for the cluster, you also need the **Viewer** role for the entire region at the account level so that you can perform related account actions, such as listing possible VLANs to use when you create a cluster.
-- The IBM Cloud infrastructure (SoftLayer) [**Super User** infrastructure role](cs_users.html#infra_access), or confirm that the [API key for the region is set](cs_troubleshoot_clusters.html#apikey) with the appropriate permissions.
+-  Check out the steps you need to take to [prepare to create a cluster](cs_clusters.html#cluster_prepare).
 -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in.
 
 
@@ -160,6 +158,12 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     {: pre}
 
     **Note:** If you have a federated ID, use the `--sso` flag to log in. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode.
+
+2.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
+   ```
+   ibmcloud target -g <resource_group_name>
+   ```
+   {: pre}
 
 2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
 

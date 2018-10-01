@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-01"
 
 ---
 
@@ -247,6 +247,12 @@ ibmcloud plugin list
       <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
       <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
       <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
+      <td>[ibmcloud ks logging-collect-status](#cs_log_collect_status)</td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -657,7 +663,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 {: pre}
 
 
-### ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE]  --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+### ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -2254,7 +2260,89 @@ View whether your Fluentd pods are set to automatically update in a specific clu
     <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
 </dl>
 
+### ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+{: #cs_logging_collect}
 
+Make a request for a snapshot of your logs at a specific point in time and then store the logs in a Cloud Object Storage bucket.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+
+ <dt><code>--cos-bucket <em>BUCKET_NAME</em></code></dt>
+    <dd>The name of the Cloud Object Storage bucket that you want to store your logs in. This value is required.</dd>
+
+  <dt><code>--cos-endpoint <em>ENDPOINT</em></code></dt>
+    <dd>The Cloud Object Storage endpoint for the bucket that you are storing your logs in. This value is required.</dd>
+
+  <dt><code>--hmac-key-id <em>HMAC_KEY_ID</em></code></dt>
+    <dd>The unique ID for your HMAC credentials for your Object Storage instance. This value is required.</dd>
+
+  <dt><code>--hmac-key <em>HMAC_KEY</em></code></dt>
+    <dd>The HMAC key for your Object Storage instance. This value is required.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks logging-collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
+  There is no specified log type. The default master will be used.
+  Submitting log collection request for master logs for cluster mycluster...
+  ```
+  {: pre}
+
+**Example output**:
+
+  ```
+  OK
+  The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging-collect-status mycluster.
+  ```
+  {: screen}
+
+### ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
+{: #cs_logging_collect_status}
+
+Check the status of the log collection request for your cluster
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks logging-collect-status --cluster mycluster
+  ```
+  {: pre}
+
+**Example output**:
+
+  ```
+  Getting the status of the last log collection request for cluster mycluster...
+  OK
+  State     Start Time             Error   Log URLs
+  success   2018-09-18 16:49 PDT   - s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-0-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-1-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+  ```
+  {: screen}
 
 <br />
 

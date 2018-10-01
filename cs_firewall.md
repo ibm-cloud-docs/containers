@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -80,6 +80,12 @@ To allow access for a specific cluster:
 
    ```
    ibmcloud login [--sso]
+   ```
+   {: pre}
+
+2.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
+   ```
+   ibmcloud target -g <resource_group_name>
    ```
    {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -159,13 +159,13 @@ Before you begin, [install Docker ![External link icon](../icons/launch-glyph.sv
     {: pre}
 
 2. Deploy the image locally as a container and mount a volume to access local files.
-  
+
     ```
     docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: pre}
-  
-3. Begin running `ibmcloud ks` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
+
+3. Begin running `ibmcloud ks` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops.
 
 <br />
 
@@ -192,6 +192,12 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
+3.  The `default` resource group is automatically targeted. To work with clusters that are in another resource group, target that resource group.
+    ```
+    ibmcloud target -g <resource_group_name>
+    ```
+    {: pre}
+    
 3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
 4.  List all of the clusters in the account to get the name of the cluster.
@@ -381,7 +387,7 @@ To uninstall the CLIs:
 You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
 {:shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api). 
+The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
 
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}

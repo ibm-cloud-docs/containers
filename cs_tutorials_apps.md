@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-09-30"
 
 ---
 
@@ -95,6 +95,12 @@ To deploy the app:
     {: pre}
 
     **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
+
+4.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
+   ```
+   ibmcloud target -g <resource_group_name>
+   ```
+   {: pre}
 
 4.  Set the context for the cluster in your CLI.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
