@@ -62,7 +62,7 @@ The following table shows the cluster management permissions granted by each IAM
         <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li>
         <li>Create, update, and delete audit webhooks</li></ul>
       Logging:<ul>
-        <li>Create and delete log forwarding configurations</li>
+        <li>Create and delete log forwarding configurations for all types except `kube-audit`</li>
         <li>Update and refresh log forwarding configurations</li>
         <li>Create, update, and delete log filtering configurations</li></ul>
       Ingress:<ul>
@@ -101,6 +101,8 @@ The following table shows the cluster management permissions granted by each IAM
         <li>Set, view, and remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Assign and change IAM platform roles for other existing users in the account</li>
         <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul>
+      Logging:<ul>
+        <li>Create and update log forwarding configurations for type `kube-audit`</li></ul>
       Ingress:<ul>
         <li>List all or view details for ALB secrets in a cluster</li>
         <li>Deploy a certificate from your IBM Cloud Certificate Manager instance to an ALB</li>
