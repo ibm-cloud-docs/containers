@@ -123,7 +123,7 @@ After you [understand how roles, users, and resources in your account](#access_p
 
 </br>
 
-Feeling overwhelmed? Try out this tutorial about the [best practices for organizing users, teams, and applications](/docs/tutorials/users-teams-applications.html).
+For more information about setting up your account and resources, try out this tutorial about the [best practices for organizing users, teams, and applications](/docs/tutorials/users-teams-applications.html).
 {: tip}
 
 <br />
@@ -135,31 +135,41 @@ Feeling overwhelmed? Try out this tutorial about the [best practices for organiz
 To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio.
 {: shortdesc}
 
-In most cases, your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} access the portfolio, the account owner must set the API key for the region and resource group.
+**Most cases**: Your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} access the portfolio, the **account owner** must set the API key for the region and resource group.
 
-1.  Log in to the terminal as the account owner.
-2.  Target the resource group where you want to set the API key. If you do not target a resource group, the API key is set for the default resource group.
+1. Log in to the terminal as the account owner.
+    ```
+    ibmcloud login [--sso]
+    ```
+    {: pre}
+
+2. Target the resource group where you want to set the API key. If you do not target a resource group, the API key is set for the `default` resource group.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
-3.  If you're in a different region, change to the region where you want to set the API key.
+
+3. If you're in a different region, change to the region where you want to set the API key.
     ```
     ibmcloud ks region-set
     ```
     {: pre}
-4.  Set the API key for the region and resource group.
+
+4. Set the API key for the region and resource group.
     ```
     ibmcloud ks api-key-reset
     ```
     {: pre}    
-5.  Verify that the API key is set.
+
+5. Verify that the API key is set.
     ```
     ibmcloud ks api-key-info <cluster_name_or_ID>
     ```
     {: pre}
 
-For more information about accessing the infrastructure portfolio or for alternative options for setting up infrastructure portfolio access, check out the following sections.
+6. Repeat for each region and resource group that you want to create clusters in.
+
+*Alternative options and more information*: For different ways to access the IBM Cloud infrastructure (SoftLayer) portfolio, check out the following sections.
 * If you aren't sure whether your account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio, see [Understanding access to the IBM Cloud infrastructure (SoftLayer) portfolio](#understand_infra).
 * If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 * For more information about using your default account to set the API key, see [Accessing the infrastructure portfolio with your default {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](#default_account).
@@ -167,6 +177,9 @@ For more information about accessing the infrastructure portfolio or for alterna
 
 ### Understanding access to the IBM Cloud infrastructure (SoftLayer) portfolio
 {: #understand_infra}
+
+Determine whether your account has access to the IBM Cloud infrastructure (SoftLayer) portfolio and learn about how {{site.data.keyword.containerlong_notm}} uses the API key to access the portfolio.
+{: shortdesc}
 
 **Does my account already have access to the IBM Cloud infrastructure (SoftLayer) portfolio?**</br>
 
@@ -219,12 +232,16 @@ It depends on what type of account that you're using to access the IBM Cloud inf
 ### Ensuring that the API key or infrastructure credentials owner has the correct permissions
 {: #owner_permissions}
 
+To ensure that all infrastructure-related actions can be successfully completed in the cluster, the user whose credentials you want to set for the API key must have the proper permissions.
+{: shortdesc}
+
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
 
 2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct IAM platform roles.
     1. Navigate to **Manage > Account > Users**.
     2. Click the name of the user who you want to set the API key or whose credentials you want to set for the API key.
     3. If the user doesn't have the **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
+    4. If the user doesn't have at least the **Viewer** role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
     1. From the expanding menu, select **Infrastructure**.
@@ -357,7 +374,7 @@ Before you begin, verify that you're assigned the **Administrator** IAM platform
     5. In the **Select roles** section, choose an IAM platform access role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform). Note: If you assign a user the **Administrator** IAM platform role for only one cluster, you must also assign the user the **Viewer** role for all clusters in that region in the resource group.
     6. Click **Assign**.
 
-4. Users who manage billing, auditing, or other account management actions might need additional access to the resource group that clusters are in. You can assign these users the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
+4. If you want users with the **Administrator** role to be able to create clusters in a resource group other than `default`, or if you have users who manage billing, auditing, or other account management actions, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
   1. Click **Assign access within a resource group**.
   2. Select the resource group name.
   3. From the **Assign access to a resource group** list, select the **Viewer** role. This role permits users to access the resource group itself, but not to resources within the group.
@@ -400,7 +417,7 @@ Before you begin:
       ```
       {: pre}
 
-2. Users who manage billing, auditing, or other account management actions might need additional access to the resource group that clusters are in. You can assign these users the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
+2. If you want users with the **Administrator** role to be able to create clusters in a resource group other than `default`, or if you have users who manage billing, auditing, or other account management actions, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
     ```
     ibmcloud iam user-policy-create <user_email> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
     ```

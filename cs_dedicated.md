@@ -219,7 +219,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
         **Note**: You must log in to both your Dedicated account and your public account to create clusters. If you only want to log in to your Dedicated account, use the `--no-iam` flag when you log in to the Dedicated endpoint.
 
-    3.  To create or access clusters in the dedicated environment, you must set the region that is associated with that environment.
+    3.  To create or access clusters in the dedicated environment, you must set the region that is associated with that environment. **Note**: You cannot create clusters in resource groups other than `default`.
 
         ```
         ibmcloud ks region-set

@@ -83,7 +83,7 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-2.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
+2. If the cluster is in a resource group other than `default`, target that resource group. **Note**: You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
    ```
    ibmcloud target -g <resource_group_name>
    ```
