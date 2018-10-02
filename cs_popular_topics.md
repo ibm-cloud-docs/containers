@@ -24,6 +24,24 @@ lastupdated: "2018-10-02"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in October 2018
+{: #oct18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in August 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>01 October</td>
+<td>[Resource groups](cs_users.html#resource_groups)</td>
+<td>You can use resource groups to separate your {{site.data.keyword.Bluemix_notm}} resources into pipelines, departments, or other groupings to help assign access and meter usage. Now, {{site.data.keyword.containerlong_notm}} supports creating clusters in the `default` group or any other resource group that you create!</td>
+</tr>
+</tbody></table>
+
 ## Popular topics in September 2018
 {: #sept18}
 
