@@ -77,7 +77,7 @@ To set pod priority, you need to use a priority class.
 {: shortdesc}
 
 Before you begin:
-* [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 * [Create](cs_clusters.html#clusters_ui) or [update](cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
 
 1.  Optional: Use an existing priority class as a template for the new class.
@@ -156,7 +156,7 @@ Assign a priority class to your pod spec to set the pod's priority within your {
 {: shortdesc}
 
 Before you begin:
-* [Log in to your account, target the appropriate resource group and region, and set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 * [Create](cs_clusters.html#clusters_ui) or [update](cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
 * [Understand how priority scheduling works](#priority_scheduling), as priority can preempt existing pods and affect how your cluster's resources are consumed.
 
