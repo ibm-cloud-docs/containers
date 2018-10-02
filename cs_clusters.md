@@ -39,7 +39,7 @@ The list is divided into two parts:
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
-    *  If you want to create a cluster in a different resource group than `default`, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the `default` resource group. 
+    *  If you want to create a cluster in a different resource group than `default`, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the `default` resource group.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
     * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the `default` resource group only.
@@ -182,10 +182,10 @@ To create a cluster:
         * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
         * You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
         * Free clusters are automatically created in the `default` resource group.
-        ```
-        ibmcloud target -g <resource_group_name>
-        ```
-        {: pre}
+      ```
+      ibmcloud target -g <resource_group_name>
+      ```
+      {: pre}
 
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 

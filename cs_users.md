@@ -169,7 +169,7 @@ To successfully provision and work with clusters, you must ensure that your {{si
 
 6. Repeat for each region and resource group that you want to create clusters in.
 
-*Alternative options and more information*: For different ways to access the IBM Cloud infrastructure (SoftLayer) portfolio, check out the following sections.
+**Alternative options and more information**: For different ways to access the IBM Cloud infrastructure (SoftLayer) portfolio, check out the following sections.
 * If you aren't sure whether your account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio, see [Understanding access to the IBM Cloud infrastructure (SoftLayer) portfolio](#understand_infra).
 * If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 * For more information about using your default account to set the API key, see [Accessing the infrastructure portfolio with your default {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](#default_account).
