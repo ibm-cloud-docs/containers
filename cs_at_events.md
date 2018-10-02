@@ -19,6 +19,8 @@ lastupdated: "2018-10-02"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
+
+
 You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containerlong_notm}} cluster by using the {{site.data.keyword.cloudaccesstrailshort}} service.
 {: shortdesc}
 
@@ -686,3 +688,5 @@ Be sure that your cluster is configured to forward [Kubernetes API audit events]
     <td>A pod preset was updated.</td>
   </tr>
 </table>
+
+
