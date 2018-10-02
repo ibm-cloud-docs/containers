@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-01"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -124,7 +124,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.7
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.8
     ```
     {: screen}
 
@@ -139,7 +139,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.7
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.8
     ```
     {: screen}
 
