@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -80,7 +80,7 @@ You received a notification to update your worker nodes. What does that mean? As
 {: shortdesc}
 
 Before you begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
 - If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
@@ -257,7 +257,7 @@ You can update the machine types of your worker nodes by adding new worker nodes
 {: shortdesc}
 
 Before you begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
 
@@ -437,7 +437,7 @@ Review the following image to see how your cluster setup changes when you move f
 
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
    ```

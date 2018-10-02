@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -2788,7 +2788,7 @@ View the details of a worker pool.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.7_1512
+  Version:            1.10.8_1512
   ```
   {: screen}
 

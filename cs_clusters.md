@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-01"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -39,8 +39,10 @@ The list is divided into two parts:
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
+    *  If you want to create a cluster in a different resource group than `default`, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the `default` resource group.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
+    * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the `default` resource group only.
 4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 ### Cluster-level
@@ -94,7 +96,11 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
 
-2. Select a resource group in which to create your cluster. **Note**: A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
+2. Select a resource group in which to create your cluster.
+  **Note**:
+    * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
+    * Free clusters are automatically created in the `default` resource group.
+    * To create clusters in a resource group other than `default`, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -171,11 +177,15 @@ To create a cluster:
 
     2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-    3.  The `default` resource group is automatically targeted. To create a cluster in another resource group, target that resource group. Free clusters are automatically created in the `default` resource group.
-        ```
-        ibmcloud target -g <resource_group_name>
-        ```
-        {: pre}
+    3.  To create clusters in a resource group other than `default`, target that resource group.
+      **Note**:
+        * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
+        * You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
+        * Free clusters are automatically created in the `default` resource group.
+      ```
+      ibmcloud target -g <resource_group_name>
+      ```
+      {: pre}
 
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
@@ -312,7 +322,7 @@ To create a cluster:
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8
     ```
     {: screen}
 
@@ -329,7 +339,7 @@ To create a cluster:
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.7
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
     ```
     {: screen}
 

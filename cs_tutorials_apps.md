@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -87,38 +87,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `ibmcloud ks region-set` command.
-
-    ```
-    ibmcloud login [--sso]
-    ```
-    {: pre}
-
-    **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
-
-4.  The `default` resource group is automatically targeted. If the cluster is in another resource group, target that resource group.
-   ```
-   ibmcloud target -g <resource_group_name>
-   ```
-   {: pre}
-
-4.  Set the context for the cluster in your CLI.
-    1.  Get the command to set the environment variable and download the Kubernetes configuration files.
-
-        ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
-        ```
-        {: pre}
-
-        When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-    2.  Copy and paste the output to set the `KUBECONFIG` environment variable.
-
-        Example for OS X:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
-        ```
-        {: screen}
+3. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 5.  Log in to the {{site.data.keyword.registryshort_notm}} CLI. **Note**: Ensure that the container-registry plug-in is [installed](/docs/services/Registry/index.html#registry_cli_install).
 
@@ -261,7 +230,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
         ```
         {: screen}
 

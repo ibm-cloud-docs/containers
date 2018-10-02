@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -38,7 +38,7 @@ Review the following backup and restore options for your NFS file shares and blo
   <p>To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.objectstoragefull}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.objectstoragefull}} instance, use the restore script that is provided with the image.</p></dd>
 <dt>Copy data to and from pods and containers</dt>
 <dd><p>You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster.</p>
-<p>Before you begin, [target your Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to use. If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>
+<p>Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>
 <p>You can use the command in various ways:</p>
 <ul>
 <li>Copy data from your local machine to a pod in your cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

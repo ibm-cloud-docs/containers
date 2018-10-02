@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -558,7 +558,7 @@ You can [delete your existing worker pool](cs_cli_reference.html#cs_worker_pool_
 
 Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
 

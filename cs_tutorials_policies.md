@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -20,17 +20,17 @@ lastupdated: "2018-09-28"
 # Tutorial: Using Calico network policies to block traffic
 {: #policy_tutorial}
 
-By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, LoadBalancer, and Ingress services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
+By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from node port, load balancer, and Ingress services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 
 However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
-In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic hitting your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a LoadBalancer service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
+In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic hitting your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a load balancer service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
 
 ## Objectives
 
-- Learn to block all incoming traffic to all NodePorts by creating a high-order Pre-DNAT policy.
-- Learn to allow whitelisted source IP addresses to access the LoadBalancer public IP and port by creating a low-order Pre-DNAT policy. Lower order policies override higher-order policies.
-- Learn to block blacklisted source IP addresses from accessing the LoadBalancer public IP and port by creating a low-order Pre-DNAT policy.
+- Learn to block all incoming traffic to all node ports by creating a high-order Pre-DNAT policy.
+- Learn to allow whitelisted source IP addresses to access the load balancer public IP and port by creating a low-order Pre-DNAT policy. Lower order policies override higher-order policies.
+- Learn to block blacklisted source IP addresses from accessing the load balancer public IP and port by creating a low-order Pre-DNAT policy.
 
 ## Time required
 1 hour
@@ -48,17 +48,17 @@ This tutorial is intended for software developers and network administrators who
 <br />
 
 
-## Lesson 1: Deploy an app and expose it by using a LoadBalancer
+## Lesson 1: Deploy an app and expose it by using a load balancer
 {: #lesson1}
 
 The first lesson shows you how your app is exposed from multiple IP addresses and ports, and where public traffic is coming into your cluster.
 {: shortdesc}
 
-Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a LoadBalancer service. A LoadBalancer service makes your app available over both the LoadBalancer service IP address and the worker nodes' NodePorts.
+Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer service. A load balancer service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
 
-The following image shows how the webserver app will be exposed to the internet by the public NodePort and public LoadBalancer at the end of Lesson 1:
+The following image shows how the webserver app will be exposed to the internet by the public node port and public load balancer at the end of Lesson 1:
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the webserver app is exposed to the internet by the public NodePort and public LoadBalancer." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="At the end of Lesson 1, the webserver app is exposed to the internet by the public node port and public load balancer." style="width:450px; border-style: none"/>
 
 1. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers that it received in the connection.
     ```
@@ -81,7 +81,7 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: screen}
 
-3. To expose the app to the public internet, create a LoadBalancer service configuration file called `webserver-lb.yaml` in a text editor.
+3. To expose the app to the public internet, create a load balancer service configuration file called `webserver-lb.yaml` in a text editor.
     ```
     apiVersion: v1
     kind: Service
@@ -102,15 +102,15 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: codeblock}
 
-4. Deploy the LoadBalancer.
+4. Deploy the load balancer.
     ```
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-5. Verify that you can publicly access the app exposed by the LoadBalancer from your computer.
+5. Verify that you can publicly access the app exposed by the load balancer from your computer.
 
-    1. Get the public **EXTERNAL-IP** address of the LoadBalancer.
+    1. Get the public **EXTERNAL-IP** address of the load balancer.
         ```
         kubectl get svc -o wide
         ```
@@ -123,15 +123,15 @@ The following image shows how the webserver app will be exposed to the internet 
         ```
         {: screen}
 
-    2. Create a cheat sheet text file, and copy the LoadBalancer IP into the text file. The cheat sheet will help you more quickly use values in later lessons.
+    2. Create a cheat sheet text file, and copy the load balancer IP into the text file. The cheat sheet will help you more quickly use values in later lessons.
 
-    3. Verify that you can publicly access the external IP for the LoadBalancer.
+    3. Verify that you can publicly access the external IP for the load balancer.
         ```
         curl --connect-timeout 10 <loadbalancer_IP>:80
         ```
         {: pre}
 
-        The following example output confirms that the LoadBalancer exposes your app on the `169.1.1.1` public LoadBalancer IP address. The `webserver-855556f688-76rkp` app pod received the curl request:
+        The following example output confirms that the load balancer exposes your app on the `169.1.1.1` public load balancer IP address. The `webserver-855556f688-76rkp` app pod received the curl request:
         ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
@@ -155,15 +155,15 @@ The following image shows how the webserver app will be exposed to the internet 
         ```
         {: screen}
 
-6. Verify that you can publicly access the app exposed by the NodePort from your computer. A LoadBalancer service makes your app available over both the LoadBalancer service IP address and the worker nodes' NodePorts.
+6. Verify that you can publicly access the app exposed by the node port from your computer. A load balancer service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
 
-    1. Get the NodePort that the LoadBalancer assigned to the worker nodes. The NodePort is in the 30000 - 32767 range.
+    1. Get the node port that the load balancer assigned to the worker nodes. The node port is in the 30000 - 32767 range.
         ```
         kubectl get svc -o wide
         ```
         {: pre}
 
-        In the following example output, the NodePort is `31024`:
+        In the following example output, the node port is `31024`:
         ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
@@ -179,21 +179,21 @@ The following image shows how the webserver app will be exposed to the internet 
         Example output:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
         ```
         {: screen}
 
-    3. Copy the public IP of the worker node and the NodePort into your text cheat sheet to use in later lessons.
+    3. Copy the public IP of the worker node and the node port into your text cheat sheet to use in later lessons.
 
-    4. Verify that you can access the public IP address the worker node through the NodePort.
+    4. Verify that you can access the public IP address the worker node through the node port.
         ```
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```
         {: pre}
 
-        The following example output confirms that the request to your app came through the private IP address `10.1.1.1` for the worker node and the `31024` NodePort. The `webserver-855556f688-xd849` app pod received the curl request:
+        The following example output confirms that the request to your app came through the private IP address `10.1.1.1` for the worker node and the `31024` node port. The `webserver-855556f688-xd849` app pod received the curl request:
         ```
         Hostname: webserver-855556f688-xd849
         Pod Information:
@@ -217,18 +217,18 @@ The following image shows how the webserver app will be exposed to the internet 
         ```
         {: screen}
 
-At this point, your app is exposed from multiple IP addresses and ports. Most of these IPs are internal to the cluster and can be accessed only over the private network. Only the public NodePort and public LoadBalancer port are exposed to the public internet.
+At this point, your app is exposed from multiple IP addresses and ports. Most of these IPs are internal to the cluster and can be accessed only over the private network. Only the public node port and public load balancer port are exposed to the public internet.
 
 Next, you can start creating and applying Calico policies to block public traffic.
 
-## Lesson 2: Block all incoming traffic to all NodePorts
+## Lesson 2: Block all incoming traffic to all node ports
 {: #lesson2}
 
-To secure the PR firm's cluster, you must block public access to both the LoadBalancer service and NodePorts that are exposing your app. Start by blocking access to NodePorts. The following image shows how traffic will be permitted to the LoadBalancer but not to NodePorts at the end of Lesson 2:
+To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports. The following image shows how traffic will be permitted to the load balancer but not to node ports at the end of Lesson 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public LoadBalancer only." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public load balancer only." style="width:450px; border-style: none"/>
 
-1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all NodePorts.
+1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all node ports.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -277,25 +277,25 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
   ```
   {: screen}
 
-3. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and NodePort.
+3. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and node port.
     ```
     curl  --connect-timeout 10 <worker_IP>:<NodePort>
     ```
     {: pre}
 
-    The connection times out because the Calico policy you created is blocking traffic to NodePorts.
+    The connection times out because the Calico policy you created is blocking traffic to node ports.
     ```
     curl: (28) Connection timed out after 10016 milliseconds
     ```
     {: screen}
 
-4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
+4. Change the externalTrafficPolicy of the load balancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the load balancer in the next step.
     ```
     kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
-5. Using the value from your cheat sheet, verify that you can still publicly access the LoadBalancer external IP address.
+5. Using the value from your cheat sheet, verify that you can still publicly access the load balancer external IP address.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -324,24 +324,24 @@ To secure the PR firm's cluster, you must block public access to both the LoadBa
         -no body in request-
     ```
     {: screen}
-    In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the LoadBalancer sees your system's source IP address as the client IP address.
+    In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the load balancer sees your system's source IP address as the client IP address.
 
 6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
 
-Great! At this point, your app is exposed to the public internet from the public LoadBalancer port only. Traffic to the public NodePorts is blocked. You've partially locked down your cluster from unwanted traffic.
+Great! At this point, your app is exposed to the public internet from the public load balancer port only. Traffic to the public node ports is blocked. You've partially locked down your cluster from unwanted traffic.
 
 Next, you can create and apply Calico policies to whitelist traffic from certain source IPs.
 
-## Lesson 3: Allow incoming traffic from a whitelisted IP to the LoadBalancer
+## Lesson 3: Allow incoming traffic from a whitelisted IP to the load balancer
 {: #lesson3}
 
 You now decide to completely lock down traffic to the PR firm's cluster and test access by whitelisting only your own computer's IP address.
 {: shortdesc}
 
-First, in addition to the NodePorts, you must block all incoming traffic to the LoadBalancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public NodePorts and LoadBalancer will be blocked and only traffic from your whitelisted system IP will be allowed:
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="The webserver app is exposed by public LoadBalancer to your system IP only." style="width:600px; border-style: none"/>
+First, in addition to the node ports, you must block all incoming traffic to the load balancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and load balancer will be blocked and only traffic from your whitelisted system IP will be allowed:
+<img src="images/cs_tutorial_policies_L3.png" width="600" alt="The webserver app is exposed by public load balancer to your system IP only." style="width:600px; border-style: none"/>
 
-1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the LoadBalancer IP address and port. Replace `<loadbalancer_IP>` with the LoadBalancer public IP address from your cheat sheet.
+1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port. Replace `<loadbalancer_IP>` with the load balancer public IP address from your cheat sheet.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -389,13 +389,13 @@ First, in addition to the NodePorts, you must block all incoming traffic to the 
       ```
       {: pre}
 
-3. Using the value from your cheat sheet, verify that you now can't access the public LoadBalancer IP address. The connection times out because the Calico policy you created is blocking traffic to the LoadBalancer.
+3. Using the value from your cheat sheet, verify that you now can't access the public load balancer IP address. The connection times out because the Calico policy you created is blocking traffic to the load balancer.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the LoadBalancer IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the LoadBalancer and `<client_address>` with the public IP address of your system's source IP.
+4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the load balancer IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the load balancer and `<client_address>` with the public IP address of your system's source IP.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -438,28 +438,28 @@ First, in addition to the NodePorts, you must block all incoming traffic to the 
       {: pre}
   Your system's IP address is now whitelisted.
 
-6. Using the value from your cheat sheet, verify that you now can access the public LoadBalancer IP address.
+6. Using the value from your cheat sheet, verify that you now can access the public load balancer IP address.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-7. If you have access to another system that has a different IP address, try to access the LoadBalancer from that system.
+7. If you have access to another system that has a different IP address, try to access the load balancer from that system.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
     The connection times out because that system's IP address isn't whitelisted.
 
-At this point, all traffic to the public NodePorts and LoadBalancer is blocked. Only traffic from your whitelisted system IP is allowed.
+At this point, all traffic to the public node ports and load balancer is blocked. Only traffic from your whitelisted system IP is allowed.
 
-## Lesson 4: Deny incoming traffic from blacklisted IPs to the LoadBalancer
+## Lesson 4: Deny incoming traffic from blacklisted IPs to the load balancer
 {: #lesson4}
 
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
 
-In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public NodePorts will be blocked, and all traffic to the public LoadBalancer will be allowed. Only traffic from your blacklisted system IP to the LoadBalancer will be blocked:
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="The webserver app is exposed by public LoadBalancer to the internet. Traffic from your system IP only is blocked." style="width:600px; border-style: none"/>
+In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked:
+<img src="images/cs_tutorial_policies_L4.png" width="600" alt="The webserver app is exposed by public load balancer to the internet. Traffic from your system IP only is blocked." style="width:600px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.
     - Linux:
@@ -482,9 +482,9 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
       ```
       {: pre}
 
-    Now, all incoming TCP and UDP traffic from any source IP to the LoadBalancer IP address and port is permitted again.
+    Now, all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port is permitted again.
 
-2. To deny all incoming TCP and UDP traffic from your system's source IP address to the LoadBalancer IP address and port, create a low-order Pre-DNAT policy called `deny-lb-port-80.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the LoadBalancer and `<client_address>` with the public IP address of your system's source IP.
+2. To deny all incoming TCP and UDP traffic from your system's source IP address to the load balancer IP address and port, create a low-order pre-DNAT policy called `deny-lb-port-80.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the load balancer and `<client_address>` with the public IP address of your system's source IP.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -537,12 +537,12 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
       {: pre}
   Your system's IP address is now blacklisted.
 
-4. Using the value from your cheat sheet, verify from your system that you can't access the LoadBalancer IP because your system's IP is blacklisted.
+4. Using the value from your cheat sheet, verify from your system that you can't access the load balancer IP because your system's IP is blacklisted.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    At this point, all traffic to the public NodePorts is blocked, and all traffic to the public LoadBalancer is allowed. Only traffic from your blacklisted system IP to the LoadBalancer is blocked.
+    At this point, all traffic to the public node ports is blocked, and all traffic to the public load balancer is allowed. Only traffic from your blacklisted system IP to the load balancer is blocked.
 
 5. To clean up this blacklist policy:
 

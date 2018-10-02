@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -26,6 +26,58 @@ You can view, manage, and audit user-initiated activities in your {{site.data.ke
 
 For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} docs](/docs/services/cloud-activity-tracker/index.html). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
 
+## Finding the information for management events
+{: #mgmt-find}
+
+## Tracking management events
+{: #mgmt-events}
+
+Check out the following table for a list of the management events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>account.create</code></td>
+    <td>An account was created.</td>
+  </tr>
+  <tr>
+    <td><code>account.get</code></td>
+    <td>Account information was viewed.</td>
+  </tr>
+  <tr>
+    <td><code>albs</code></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>cluster.delete</code></td>
+    <td>A cluster was deleted</td>
+  </tr>
+  <tr>
+    <td><code>cluster.get</code></td>
+    <td>Cluster information was viewed.</td>
+  </tr>
+  <tr>
+    <td><code>cluster.update</code></td>
+    <td>A cluster was updated.</td>
+  </tr>
+  <tr>
+    <td><code>general.create</code></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>worker.update</code></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>worker.updates</code></td>
+    <td></td>
+  </tr>  
+</table>
+</staging>
 
 ## Finding the information for Kubernetes audit events
 {: #kube-find}

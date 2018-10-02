@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -66,7 +66,7 @@ policies allow the users to create and update privileged and unprivileged (restr
 You can modify these RBAC roles to remove or add admins, users, services, or nodes to the policy.
 
 Before you begin: 
-*  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 *  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](cs_users.html#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Note**: When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
 

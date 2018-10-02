@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-30"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -433,8 +433,8 @@ Manually update the reference of the private IP address to point to the correct 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.8
   ```
   {: screen}
 
@@ -496,7 +496,7 @@ Make sure that the user or service account is authorized by a pod security polic
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
-1.  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 2.  Refresh the Kubernetes master to restore it.
 
     ```

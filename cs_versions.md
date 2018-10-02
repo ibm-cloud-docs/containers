@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2018-09-27"
 **Supported Kubernetes versions**:
 
 - Latest: 1.11.3
-- Default: 1.10.7
+- Default: 1.10.8
 - Other: 1.9.10
 
 </br>
@@ -53,7 +53,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.10.7+IKS
+Server Version: v1.10.8+IKS
 ```
 {: screen}
 

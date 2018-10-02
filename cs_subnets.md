@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -76,8 +76,8 @@ Use this option to retain stable static IP addresses across cluster removals and
 
 **Note:** Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 
-Before you begin,
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin:
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
 
    ```
@@ -124,7 +124,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.7
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.8
     ```
     {: screen}
 
@@ -139,7 +139,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.7
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.8
     ```
     {: screen}
 
@@ -172,7 +172,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 
 To list only portable public IP addresses that are available to create load balancers, you can use the following steps:
 
-Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
 
@@ -227,7 +227,7 @@ Before you begin, [set the context for the cluster you want to use.](cs_cli_inst
 You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
 {:shortdesc}
 
-Before you begin, [set the context for the cluster you want to use.](cs_cli_install.html#cs_cli_configure)
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1.  List available services in your cluster.
 
@@ -261,7 +261,7 @@ By default, 4 portable public and 4 portable private IP addresses can be used to
 You can get more portable IPs for load balancer services by creating a new subnet in an IBM Cloud infrastructure (SoftLayer) account and making it available to your specified cluster.
 {:shortdesc}
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Provision a new subnet.
 

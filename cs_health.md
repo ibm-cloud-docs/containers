@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-01"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -162,7 +162,12 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 **Forwarding logs to IBM**
 
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} API key owner need Manager, Developer, or Auditor [permissions](cs_users.html#access_policies) in that space.
+1.  For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+    If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+    {: tip}
+
+2. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} API key owner need Manager, Developer, or Auditor [permissions](cs_users.html#access_policies) in that space.
   * If you don't know who the {{site.data.keyword.containerlong_notm}} API key owner is, run the following command.
       ```
       ibmcloud ks api-key-info <cluster_name>
@@ -173,11 +178,6 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ibmcloud ks logging-config-refresh <cluster_name>
       ```
       {: pre}
-
-2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
-
-  If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-  {: tip}
 
 3. Create a log forwarding configuration.
     ```
@@ -224,7 +224,7 @@ If you have apps that run in your containers that can't be configured to write l
   You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located. If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. Create a log forwarding configuration.
     ```
@@ -254,7 +254,7 @@ The following steps are general instructions. Prior to using the container in a 
     ```
     {: pre}
 
-4. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located. If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+4. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. Create a log forwarding configuration.
     ```
@@ -306,7 +306,7 @@ You can update a logging configuration that you already created.
 You can stop forwarding logs one or all of the logging configurations for a cluster.
 {: shortdesc}
 
-1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
+1. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 2. Delete the logging configuration.
   <ul>
@@ -460,7 +460,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
 
-2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 **Forwarding logs**
 
@@ -541,7 +541,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Set up a remote logging server where you can forward the logs. For example, you can [use Logstash with Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) to collect audit events.
 
-2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 To forward Kubernetes API audit logs:
 
@@ -603,7 +603,7 @@ To forward Kubernetes API audit logs:
     {: pre}
 
 4. Optional: If you want to stop forwarding audit logs, you can disable your configuration.
-    1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to stop collecting API server audit logs from.
+    1. For the cluster that you want to stop collecting API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
@@ -661,7 +661,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: screen}
 
-4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. The response contains URLs that you can access through a browser to download your logs.
+4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.Bluemix_notm}} UI to download the file.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -750,7 +750,7 @@ The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
 **Note**: Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to check worker node statuses.
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
 

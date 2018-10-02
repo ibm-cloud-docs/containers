@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-28"
+lastupdated: "2018-10-02"
 
 ---
 
@@ -41,11 +41,47 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for 1.11.3_1524, released 2 October 2018
+{: #1113_1524}
+
+<table summary="Changes that were made since version 1.11.3_1521">
+<caption>Changes since version 1.11.3_1521</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>1.1.3</td>
+<td>1.1.4</td>
+<td>See the [containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.4).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.3-91</td>
+<td>v1.11.3-100</td>
+<td>Updated the documentation link in load balancer error messages.</td>
+</tr>
+<tr>
+<td>IBM file storage classes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
 
 <table summary="Changes that were made since version 1.11.2_1516">
-<caption>Changes since version  1.11.2_1516</caption>
+<caption>Changes since version 1.11.2_1516</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -107,11 +143,11 @@ Also, now when you update the cluster master, the default IBM file storage class
 </tbody>
 </table>
 
-### Changelog for 1.11.2_1516, released 04 September 2018
+### Changelog for 1.11.2_1516, released 4 September 2018
 {: #1112_1516}
 
 <table summary="Changes that were made since version 1.11.2_1514">
-<caption>Changes since version  1.11.2_1514</caption>
+<caption>Changes since version 1.11.2_1514</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -152,7 +188,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #1112_1514}
 
 <table summary="Changes that were made since version 1.11.2_1513">
-<caption>Changes since version  1.11.2_1513</caption>
+<caption>Changes since version 1.11.2_1513</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -258,11 +294,53 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for 1.10.8_1524, released 2 October 2018
+{: #1108_1524}
+
+<table summary="Changes that were made since version 1.10.7_1520">
+<caption>Changes since version 1.10.7_1520</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.7</td>
+<td>v1.10.8</td>
+<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.1.2-r2</td>
+<td>1.2.0</td>
+<td>See the [Kubernetes DNS autoscaler release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.2.0).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.7-146</td>
+<td>v1.10.8-172</td>
+<td>Updated to support Kubernetes 1.10.8 release. Also, updated the documentation link in load balancer error messages.</td>
+</tr>
+<tr>
+<td>IBM file storage classes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018
 {: #1107_1521}
 
 <table summary="Changes that were made since version 1.10.7_1520">
-<caption>Changes since version  1.10.7_1520</caption>
+<caption>Changes since version 1.10.7_1520</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -307,11 +385,11 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.10.7_1520, released 04 September 2018
+### Changelog for 1.10.7_1520, released 4 September 2018
 {: #1107_1520}
 
 <table summary="Changes that were made since version 1.10.5_1519">
-<caption>Changes since version  1.10.5_1519</caption>
+<caption>Changes since version 1.10.5_1519</caption>
 <thead>
 <tr>
 <td>Calico</td>
@@ -350,7 +428,7 @@ Review the following changes.
 {: #1105_1519}
 
 <table summary="Changes that were made since version 1.10.5_1518">
-<caption>Changes since version  1.10.5_1518</caption>
+<caption>Changes since version 1.10.5_1518</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -667,11 +745,41 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for 1.9.10_1527, released 2 October 2018
+{: #1910_1527}
+
+<table summary="Changes that were made since version 1.9.10_1523">
+<caption>Changes since version 1.9.10_1523</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.10-192</td>
+<td>v1.9.10-219</td>
+<td>Updated the documentation link in load balancer error messages.</td>
+</tr>
+<tr>
+<td>IBM file storage classes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018
 {: #1910_1524}
 
 <table summary="Changes that were made since version 1.9.10_1523">
-<caption>Changes since version  1.9.10_1523</caption>
+<caption>Changes since version 1.9.10_1523</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -716,11 +824,11 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.9.10_1523, released 04 September 2018
+### Changelog for 1.9.10_1523, released 4 September 2018
 {: #1910_1523}
 
 <table summary="Changes that were made since version 1.9.9_1522">
-<caption>Changes since version  1.9.9_1522</caption>
+<caption>Changes since version 1.9.9_1522</caption>
 <thead>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -753,7 +861,7 @@ Review the following changes.
 {: #199_1522}
 
 <table summary="Changes that were made since version 1.9.9_1521">
-<caption>Changes since version  1.9.9_1521</caption>
+<caption>Changes since version 1.9.9_1521</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -1067,7 +1175,7 @@ Review the following changes.
 {: #1815_1521}
 
 <table summary="Changes that were made since version 1.8.15_1520">
-<caption>Changes since version  1.8.15_1520</caption>
+<caption>Changes since version 1.8.15_1520</caption>
 <thead>
 <tr>
 <th>Component</th>
@@ -1108,7 +1216,7 @@ Review the following changes.
 {: #1815_1520}
 
 <table summary="Changes that were made since version 1.8.15_1519">
-<caption>Changes since version  1.8.15_1519</caption>
+<caption>Changes since version 1.8.15_1519</caption>
 <thead>
 <tr>
 <th>Component</th>
