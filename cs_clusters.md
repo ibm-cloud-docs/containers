@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-03"
 
 ---
 
@@ -588,17 +588,22 @@ To add a zone with worker nodes to your worker pool:
 
     Example output:
     ```
-    Name:               mycluster
-    ID:                 a20a637238aa471f8d4a8b881aaa4988
-    State:              normal
-    Created:            2018-04-19T01:49:22+0000
-    Master zone:    us-south
-    Worker zones:       dal10,dal12
-    Master URL:         https://169.xx.xxx.xxx:21111
-    Ingress subdomain:  ...
-    Ingress secret:     ...
-    Workers:            6
-    Version:            1.8.6_1504
+    Name:                   mycluster
+    ID:                     df253b6025d64944ab99ed63bb4567b6
+    State:                  normal
+    Created:                2018-09-28T15:43:15+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:30426
+    Master Location:        Dallas
+    Master Status:          Ready (21 hours ago)
+    Ingress Subdomain:      ...
+    Ingress Secret:         mycluster
+    Workers:                6
+    Worker Zones:           dal10, dal12
+    Version:                1.11.3_1524
+    Owner:                  owner@email.com
+    Monitoring Dashboard:   ...
+    Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
     ```
     {: screen}  
 
