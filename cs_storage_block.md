@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -1016,8 +1016,17 @@ To make your data even more highly available and protect your app from a zone fa
 ## Sample customized storage classes
 {: #custom_storageclass}
 
+You can create a customized storage class and use the storage class in your PVC. 
+{: shortdesc}
+
+{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision block storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes. 
+
+To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_block). 
+
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}
+
+**Note:** Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).  
 
 The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these </br>
 
@@ -1033,6 +1042,7 @@ metadata:
 provisioner: ibm.io/ibmc-block
 parameters:
   zone: "dal12"
+  region: "us-south"
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"

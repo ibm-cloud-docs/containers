@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -101,20 +101,20 @@ Before you get started with Ingress, review the following prerequisites.
 ## Planning networking for single or multiple namespaces
 {: #multiple_namespaces}
 
-At least one Ingress resource is required per namespace where you have apps that you want to expose.
+One Ingress resource is required per namespace where you have apps that you want to expose.
 {:shortdesc}
 
 ### All apps are in one namespace
 {: #one-ns}
 
-If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
+If the apps in your cluster are all in the same namespace, one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
 
-<img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
+<img src="images/cs_ingress_single_ns.png" width="300" alt="One resource is required per namespace." style="width:300px; border-style: none"/>
 
 ### Apps are in multiple namespaces
 {: #multi-ns}
 
-If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
@@ -140,7 +140,7 @@ Now, both URLs resolve to the same domain and are thus both serviced by the same
 
 Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
 
-<img src="images/cs_ingress_single_ns_multi_subs.png" alt="At least one resource is required per namespace." style="border-style: none"/>
+<img src="images/cs_ingress_single_ns_multi_subs.png" alt="One resource is required per namespace." style="border-style: none"/>
 
 **Note**:
 * The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided Ingress TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.
@@ -340,7 +340,7 @@ If you do not have a TLS certificate ready, follow these steps:
 Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
 {: shortdesc}
 
-**Note:** If your cluster has multiple namespaces where apps are exposed, at least one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
+**Note:** If your cluster has multiple namespaces where apps are exposed, one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 
@@ -835,7 +835,7 @@ If you do not have a TLS certificate ready, follow these steps:
 Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
 {: shortdesc}
 
-**Note:** If your cluster has multiple namespaces where apps are exposed, at least one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
+**Note:** If your cluster has multiple namespaces where apps are exposed, one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 

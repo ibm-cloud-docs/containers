@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -499,7 +499,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     {: pre}
 
     ```
-    VLANs
+    Subnet VLANs
     VLAN ID   Subnet CIDR         Public       User-managed
     1555503   169.xx.xxx.xxx/24   true         false
     1555505   10.xxx.xx.xxx/24    false        false

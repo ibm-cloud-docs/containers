@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -909,21 +909,22 @@ View information about a cluster in your organization.
 **Example output**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
-  Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Name:                   mycluster
+  ID:                     df253b6025d64944ab99ed63bb4567b6
+  State:                  normal
+  Created:                2018-09-28T15:43:15+0000
+  Location:               dal10
+  Master URL:             https://169.xx.xxx.xxx:30426
+  Master Location:        Dallas
+  Master Status:          Ready (21 hours ago)
+  Ingress Subdomain:      ...
+  Ingress Secret:         mycluster
+  Workers:                6
+  Worker Zones:           dal10, dal12
+  Version:                1.11.3_1524
+  Owner:                  owner@email.com
+  Monitoring Dashboard:   ...
+  Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
 
   Addons
   Name                   Enabled
@@ -2261,7 +2262,7 @@ View whether your Fluentd pods are set to automatically update in a specific clu
 </dl>
 
 ### ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
-{: #cs_logging_collect}
+{: #cs_log_collect}
 
 Make a request for a snapshot of your logs at a specific point in time and then store the logs in a Cloud Object Storage bucket.
 
@@ -2308,7 +2309,7 @@ Make a request for a snapshot of your logs at a specific point in time and then 
   {: screen}
 
 ### ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
-{: #cs_logging_collect_status}
+{: #cs_log_collect_status}
 
 Check the status of the log collection request for your cluster
 

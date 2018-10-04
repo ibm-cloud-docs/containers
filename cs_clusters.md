@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -34,9 +34,14 @@ The list is divided into two parts:
 ### Account-level
 
 1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
-2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters: 
+2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
+    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}}.
+
+    Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
+    {: tip}
+    
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
     *  If you want to create a cluster in a different resource group than `default`, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the `default` resource group.
@@ -588,17 +593,22 @@ To add a zone with worker nodes to your worker pool:
 
     Example output:
     ```
-    Name:               mycluster
-    ID:                 a20a637238aa471f8d4a8b881aaa4988
-    State:              normal
-    Created:            2018-04-19T01:49:22+0000
-    Master zone:    us-south
-    Worker zones:       dal10,dal12
-    Master URL:         https://169.xx.xxx.xxx:21111
-    Ingress subdomain:  ...
-    Ingress secret:     ...
-    Workers:            6
-    Version:            1.8.6_1504
+    Name:                   mycluster
+    ID:                     df253b6025d64944ab99ed63bb4567b6
+    State:                  normal
+    Created:                2018-09-28T15:43:15+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:30426
+    Master Location:        Dallas
+    Master Status:          Ready (21 hours ago)
+    Ingress Subdomain:      ...
+    Ingress Secret:         mycluster
+    Workers:                6
+    Worker Zones:           dal10, dal12
+    Version:                1.11.3_1524
+    Owner:                  owner@email.com
+    Monitoring Dashboard:   ...
+    Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
     ```
     {: screen}  
 

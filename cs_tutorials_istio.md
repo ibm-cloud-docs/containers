@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -241,11 +241,17 @@ If you're finished working with Istio and don't want to [continue exploring](#is
     ```
     {: pre}
 
-3. **Optional**: If you are using Helm 2.9 or earlier and applied the Istio custom resource definitions, delete them.
-    ```
-    kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
-    ```
-    {: pre}
+3. If you used Helm 2.9 or earlier:
+    1. Delete the extra job resource.
+      ```
+      kubectl -n istio-system delete job --all
+      ```
+      {: pre}
+    2. Optional: Delete the Istio custom resource definitions.
+      ```
+      kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
+      ```
+      {: pre}
 
 ## What's next?
 {: #istio_tutorial_whatsnext}
