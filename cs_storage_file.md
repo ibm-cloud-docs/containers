@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -890,6 +890,13 @@ Review the following backup and restore options for your file storage:
 
 ## Sample customized storage classes
 {: #custom_storageclass}
+
+You can create a customized storage class and use the storage class in your PVC. 
+{: shortdesc}
+
+{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision file storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes. 
+
+To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file). 
 
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}
