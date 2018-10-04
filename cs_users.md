@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 
 ---
@@ -242,6 +242,7 @@ To ensure that all infrastructure-related actions can be successfully completed 
     2. Click the name of the user who you want to set the API key or whose credentials you want to set for the API key.
     3. If the user doesn't have the **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
     4. If the user doesn't have at least the **Viewer** role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
+    5. To create clusters, the user also needs the **Administrator** role for {{site.data.keyword.registryshort_notm}}.
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
     1. From the expanding menu, select **Infrastructure**.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -29,7 +29,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
 {: tip}
 
-## Unable to connect to your infrastructure account
+## Unable to create a cluster due to permission errors
 {: #cs_credentials}
 
 {: tsSymptoms}
@@ -62,8 +62,18 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 ```
 {: screen}
 
+```
+The cluster could not be configured with the registry. Make sure that you have the Administrator role for {{site.data.keyword.registrylong_notm}}.
+```
+{: screen}
+
 {: tsCauses}
-{{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration. If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
+You do not have the correct permissions to create a cluster. You need the following permissions to create a cluster:
+*  **Super User** role for IBM Cloud infrastructure (SoftLayer).
+*  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
+*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}}.
+
+For infrastructure-related errors, {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration. If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
 Users with other {{site.data.keyword.Bluemix_notm}} account types must configure their accounts to create standard clusters. Examples of when you might have a different account type are:
 * You have an existing IBM Cloud infrastructure (SoftLayer) account that predates your {{site.data.keyword.Bluemix_notm}} platform account and want to continue to use it.
@@ -82,7 +92,7 @@ The account owner must set up the infrastructure account credentials properly. T
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
         * If you see an **Infrastructure User** field, your cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region.
 3.  Decide what type of account you want to have to determine how to troubleshoot your infrastructure permission issue. For most users, the default linked Pay-As-You-Go account is sufficient.
-    *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the infrastructure API key is set up with the correct permissions](cs_users.html#default_account). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
+    *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the API key is set up with the correct permissions](cs_users.html#default_account). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
     *  Different {{site.data.keyword.Bluemix_notm}} platform and infrastructure accounts: Verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](cs_users.html#credentials).
 4.  If you cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
 

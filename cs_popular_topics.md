@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-04"
 
 ---
 
@@ -35,6 +35,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>04 October</td>
+<td>[{{site.data.keyword.registrylong}} is now integrated with {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
+<td>You can use IAM to control access to your registry resources, such as pulling, pushing, and building images. When you create a cluster, you also create a registry token so that the cluster can work with your registry. Therefore, you need the registry **Administrator** platform management role to create a cluster. To enable IAM for your registry account, see [Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users).</td>
+</tr>
 <tr>
 <td>01 October</td>
 <td>[Resource groups](cs_users.html#resource_groups)</td>
