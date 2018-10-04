@@ -913,6 +913,7 @@ metadata:
 provisioner: ibm.io/ibmc-file
 parameters:
   zone: "dal12"
+  region: "us-south"
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"
