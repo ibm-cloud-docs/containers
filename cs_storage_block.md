@@ -1042,6 +1042,7 @@ metadata:
 provisioner: ibm.io/ibmc-block
 parameters:
   zone: "dal12"
+  region: "us-south"
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"
