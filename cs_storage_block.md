@@ -428,7 +428,7 @@ To add block storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
-	   region: us-south
+	   region: us-south 
            zone: dal13
        spec:
          accessModes:
