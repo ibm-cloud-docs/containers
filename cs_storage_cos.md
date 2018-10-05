@@ -167,7 +167,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: screen}
       
-      If your worker node does not apply the latest patch version, you see an asterisk (*) in the **Version** column of your CLI output. 
+      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output. 
       
    2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
    
