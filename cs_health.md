@@ -624,14 +624,14 @@ To forward Kubernetes API audit logs:
 ## Collecting master logs
 {: #collect_master}
 
-With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
+With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
 {: shortdesc}
 
 Because Kubernetes API Server logs are automatically streamed, they're also automatically deleted to make room for the new logs coming in. By keeping a snapshot of logs at a specific point in time, you can better troubleshoot issues, look into usage differences, and find patterns to help maintain more secure applications.
 
 **Before you begin**
 
-* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of Object Storage from the {{site.data.keyword.Bluemix_notm}} catalog.
+* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
 * Be sure that you have [the **Administrator IAM platform role](cs_users.html#platform) for the cluster that you're working with.
 
 **Creating a snapshot**
@@ -639,7 +639,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 1. Create an Object Storage bucket through the GUI by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
-  1. In the **Service Credentials** tab of the Cloud Object Storage dashboard, click **New Credential**.
+  1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
   2. Give the HMAC credentials the `Writer` IAM role.
   3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
 

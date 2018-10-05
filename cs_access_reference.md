@@ -39,13 +39,16 @@ The following table shows the cluster management permissions granted by each IAM
     <td>**Viewer**</td>
     <td>
       Cluster:<ul>
-        <li>List all or view details for clusters, worker nodes, worker pools, services in namespaces, and webhooks</li>
-        <li>View the VLAN spanning status for the infrastructure account</li><li>List available VLANs in a zone</li>
-        <li>List available subnets in the infrastructure account</li>
-        <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul></ul>
+        <li>View the name and email address for the owner of the IAM API key for a resource group and region</li>
+        <li>List all or view details for clusters, worker nodes, worker pools, services in a cluster, and webhooks</li>
+        <li>View the VLAN spanning status for the infrastructure account</li>
+        <li>List available subnets in the infrastructure account</li></ul>
+        <li>When set for one cluster: List VLANs that the cluster is connected to in a zone</li>
+        <li>When set for all clusters in the account: List all available VLANs in a zone</li></ul>
       Logging:<ul>
         <li>View the default logging endpoint for the target region</li>
-        <li>List or view details for log forwarding and filtering configurations</li></ul>
+        <li>List or view details for log forwarding and filtering configurations</li>
+        <li>View the status for automatic updates of the Fluentd add-on</li></ul>
       Ingress:<ul>
         <li>List all or view details for ALBs in a cluster</li>
         <li>View ALB types that are supported in the region</li></ul>
@@ -59,9 +62,10 @@ The following table shows the cluster management permissions granted by each IAM
     <td>**Editor** <br/><br/><strong>Tip</strong>: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.</td>
     <td>This role has all permissions from the Viewer role, plus the following:</br></br>
       Cluster:<ul>
-        <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li>
-        <li>Create, update, and delete audit webhooks</li></ul>
+        <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li></ul>
       Logging:<ul>
+        <li>Create, update, and delete API server audit webhooks</li>
+        <li>Create cluster webhooks</li>
         <li>Create and delete log forwarding configurations for all types except `kube-audit`</li>
         <li>Update and refresh log forwarding configurations</li>
         <li>Create, update, and delete log filtering configurations</li></ul>
@@ -84,8 +88,7 @@ The following table shows the cluster management permissions granted by each IAM
         <li>Update the network configuration for a given zone in worker pools</li>
         <li>Resize and rebalance worker pools</li>
         <li>Create and add subnets to a cluster</li>
-        <li>Add existing subnets to a cluster</li>
-        <li>Add, view, and remove user-managed subnets from a cluster</li></ul>
+        <li>Add and remove user-managed subnets to and from a cluster</li></ul>
     </td>
     <td>The <code>admin</code> cluster role is applied by the <code>ibm-operate</code> cluster role binding, providing the following permissions:<ul>
       <li>Read/write access to resources inside a namespace but not to the namespace itself</li>
@@ -97,16 +100,19 @@ The following table shows the cluster management permissions granted by each IAM
       Cluster:<ul>
         <li>Create free or standard clusters</li>
         <li>Delete clusters</li>
+        <li>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}</li>
         <li>Set the API key for the {{site.data.keyword.Bluemix_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Set, view, and remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Assign and change IAM platform roles for other existing users in the account</li>
         <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul>
       Logging:<ul>
-        <li>Create and update log forwarding configurations for type `kube-audit`</li></ul>
+        <li>Create and update log forwarding configurations for type `kube-audit`</li>
+        <li>Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket</li>
+        <li>Enable and disable automatic updates for the Fluentd cluster add-on</li></ul>
       Ingress:<ul>
         <li>List all or view details for ALB secrets in a cluster</li>
         <li>Deploy a certificate from your IBM Cloud Certificate Manager instance to an ALB</li>
-        <li>Update or remove ALB secrets from a cluster</ul>
+        <li>Update or remove ALB secrets from a cluster</li>
       <strong>Note</strong>: To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** infrastructure role.
     </td>
     <td>The <code>cluster-admin</code> cluster role is applied by the <code>ibm-admin</code> cluster role binding, providing the following permissions:
@@ -184,4 +190,176 @@ The following table shows the infrastructure permissions required to complete gr
      <strong>Services</strong>:<ul><li>Manage DNS, Reverse DNS, and WHOIS</li><li>View Certificates (SSL)</li><li>Manage Certificates (SSL)</li></ul></td>
    </tr>
  </tbody>
+</table>
+
+<staging>
+
+## Minimum permissions required per command
+{: #commands}
+
+The following table shows the minimum permissions that are required to run each {{site.data.keyword.containerlong_notm}} CLI plug-in command. The commands that are listed as `None` indicate that any user in your account who downloads the plug-in and runs the command sees the result, even if the user has no assigned permissions.
+
+**Note**: This table shows the minimum required permissions for each command. The permissions allowed by some roles are included in other roles. For example, the **Administrator** IAM role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles. For more information, see the table for [IAM platform and Kubernetes RBAC roles](#platform).
+
+<table summary="Minimum required permissions for each command">
+ <caption>Minimum required permissions for <code>ibmcloud ks</code> commands</caption>
+ <thead>
+  <th>Command</th>
+  <th>Role required</th>
+ </thead>
+ <tbody>
+   <tr><td>ibmcloud ks alb-cert-deploy</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks alb-cert-get</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks alb-cert-rm</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks alb-certs</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks alb-configure</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks alb-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks alb-types</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks albs</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>   
+   <td>ibmcloud ks api</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks api-key-info</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks api-key-reset</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks apiserver-config-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks apiserver-config-set</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks apiserver-config-unset</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks apiserver-refresh</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks cluster-config</td>
+   <td>IAM: Viewer <br> RBAC: view</td></td></tr><tr>
+   <td>ibmcloud ks cluster-create</td>
+   <td>IAM: Administrator for {{site.data.keyword.containerlong_notm}}, Administrator for {{site.data.keyword.registrylong_notm}} <br> RBAC: cluster-admin <br> Infrastructure: Super User</td></tr><tr>
+   <td>ibmcloud ks cluster-feature-enable</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks cluster-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks cluster-rm</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks cluster-service-bind</td>
+   <td>IAM: Editor <br> RBAC: edit <br> Cloud Foundry: Developer in the space that the service is in</td></tr><tr>
+   <td>ibmcloud ks cluster-service-unbind</td>
+   <td>IAM: Editor <br> RBAC: edit <br> Cloud Foundry: Developer</td></tr><tr>
+   <td>ibmcloud ks cluster-services</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks cluster-subnet-add</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks cluster-subnet-create</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks cluster-update</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks cluster-user-subnet-add</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks cluster-user-subnet-rm</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks clusters</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks credentials-set</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks credentials-unset</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks help</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks init</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks key-protect-enable</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks kube-versions</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks logging-autoupdate-disable</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks logging-autoupdate-enable</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks logging-autoupdate-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks logging-collect</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks logging-collect-status</td>
+   <td>IAM: Administrator <br> RBAC: cluster-admin</td></tr><tr>
+   <td>ibmcloud ks logging-config-create</td>
+   <td>IAM: Editor for all log source except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td></tr><tr>
+   <td>ibmcloud ks logging-config-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks logging-config-refresh</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks logging-config-rm</td>
+   <td>IAM: Editor for all log source except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td></tr><tr>
+   <td>ibmcloud ks logging-config-update</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks logging-filter-create</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks logging-filter-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks logging-filter-rm</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks logging-filter-update</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks machine-types</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks messages</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks region</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks region-set</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks regions</td>
+   <td>None</td></tr><tr>
+   <td>ibmcloud ks subnets</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks va</td>
+   <td>IAM: Reader service access role for {{site.data.keyword.containerlong_notm}}</td></tr><tr>
+   <td>ibmcloud ks vlan-spanning-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks vlans</td>
+   <td>IAM: Viewer for all clusters in the account <br> RBAC: view</td></tr><tr>
+   <li>When set : List all available VLANs in a zone</li>
+   <td>ibmcloud ks webhook-create</td>
+   <td>IAM: Editor <br> RBAC: edit</td></tr><tr>
+   <td>ibmcloud ks worker-add (deprecated)</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks worker-pool-create</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-pool-get</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks worker-pool-rebalance</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-pool-resize</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-pool-rm</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-pools</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks worker-reboot</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-reload</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-rm</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks worker-update</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks workers</td>
+   <td>IAM: Viewer <br> RBAC: view</td></tr><tr>
+   <td>ibmcloud ks zone-add</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks zone-network-set</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks zone-rm</td>
+   <td>IAM: Operator <br> RBAC: admin</td></tr><tr>
+   <td>ibmcloud ks zones</td>
+   <td>None</td></tr>
+  </tbody>
 </table>
