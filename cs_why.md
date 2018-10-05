@@ -122,9 +122,3 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 
 
 
-
-{: #responsibilities}
-**Note**: Looking for your responsibilities and {{site.data.keyword.containerlong}} terms when you use the service?
-
-{: #terms}
-See [{{site.data.keyword.containerlong_notm}} responsibilities](cs_responsibilities.html).
