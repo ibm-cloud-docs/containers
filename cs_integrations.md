@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-04"
+lastupdated: "2018-10-05"
 
 ---
 
@@ -174,6 +174,10 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
   <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
+  <td>{{site.data.keyword.keymanagementservicefull}}</td>
+  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="cs_encrypt.html#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -370,7 +374,9 @@ To access an {{site.data.keyword.Bluemix_notm}} service instance from your app, 
 The credentials of a service instance are base64 encoded and stored inside your secret in JSON format. To access the data in your secret, choose among the following options:
 - [Mount the secret as a volume to your pod](#mount_secret)
 - [Reference the secret in environment variables](#reference_secret)
-
+<br>
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
+{: tip}
 
 Before your begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).

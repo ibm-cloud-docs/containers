@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-04"
+lastupdated: "2018-10-05"
 
 ---
 
@@ -35,6 +35,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>05 October</td>
+<td>Integration with {{site.data.keyword.keymanagementservicefull}}</td>
+<td>You can encrypt the Kubernetes secrets in your cluster by [enabling {{site.data.keyword.keymanagementserviceshort}} (beta)](cs_encrypt.html#keyprotect).</td>
+</tr>
 <tr>
 <td>04 October</td>
 <td>[{{site.data.keyword.registrylong}} is now integrated with {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
