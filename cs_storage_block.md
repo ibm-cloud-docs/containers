@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-04"
+lastupdated: "2018-10-05"
 
 ---
 
@@ -31,18 +31,39 @@ Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in with a Helm
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
+1. Make sure that your worker node applies the latest patch for your minor version. 
+   1. List the current patch version of your worker nodes. 
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      OK
+      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      ```
+      {: pre}
+      
+      If your worker node does not apply the latest patch version, you see an asterisk (*) in the **Version** column of your CLI output. 
+      
+   2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
+   
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node.
 
-1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+
+2. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
    **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
 
-2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+3. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-3. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+4. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -92,7 +113,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-4. Verify that the installation was successful.
+5. Verify that the installation was successful.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -107,7 +128,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
    The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-5. Verify that the storage classes for block storage were added to your cluster.
+6. Verify that the storage classes for block storage were added to your cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -126,7 +147,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-6. Repeat these steps for every cluster where you want to provision block storage.
+7. Repeat these steps for every cluster where you want to provision block storage.
 
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 
