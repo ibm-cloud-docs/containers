@@ -44,7 +44,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
       kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
       ```
-      {: pre}
+      {: screen}
       
       If your worker node does not apply the latest patch version, you see an asterisk (*) in the **Version** column of your CLI output. 
       
