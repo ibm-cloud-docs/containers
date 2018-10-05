@@ -286,7 +286,7 @@ To add file storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV. 
 
     If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#nonroot).
     {: tip}
