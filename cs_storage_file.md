@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-06"
 
 ---
 
@@ -395,8 +395,6 @@ To add file storage:
 <br />
 
 
-
-
 ## Using existing file storage in your cluster
 {: #existing_file}
 
@@ -582,6 +580,8 @@ If you want to use existing storage that you provisioned earlier, but never used
 You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV object.
 
 <br />
+
+
 
 
 
