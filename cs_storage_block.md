@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-06"
 
 ---
 
@@ -573,7 +573,7 @@ To add block storage:
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical file storage instance. To create directories in your physical file storage instance, you must create subdirectories in your mount path.</td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical block storage instance. To create directories in your physical block storage instance, you must create subdirectories in your mount path.</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -816,6 +816,8 @@ Before you can start to mount your existing storage to an app, you must retrieve
 You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
 
 <br />
+
+
 
 
 
