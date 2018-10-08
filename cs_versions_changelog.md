@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-08"
 
 ---
 
@@ -103,6 +103,12 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node.<br><br>
 Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+<tr>
+<td>Key Management Service Provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -308,6 +314,12 @@ Review the following changes.
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Key Management Service Provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
+</tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.7</td>
