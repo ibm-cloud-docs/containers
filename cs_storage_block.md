@@ -389,6 +389,9 @@ Before you begin:
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
 - [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
+Looking to deploy block storage in a stateful set? See [Using block storage in a stateful set](#block_statefulset) for more information. 
+{: tip}
+
 To add block storage:
 
 1.  Create a configuration file to define your persistent volume claim (PVC) and save the configuration as a `.yaml` file.
@@ -514,7 +517,7 @@ To add block storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV. 
 
     ```
     apiVersion: apps/v1beta1
