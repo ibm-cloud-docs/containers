@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-08"
 
 
 ---
@@ -86,7 +86,7 @@ You must also specify whether users have access to one cluster in a resource gro
 In IAM, you can assign user access roles to resource instances or to resource groups.
 {: shortdesc}
 
-When you create your {{site.data.keyword.Bluemix_notm}} account, the `default` resource group is created automatically. Resource instances belong to `default` resource group if you do not specify a different resource group when you create the resource. If you want to add a resource group in your account, see [Best practices for setting up your account](/docs/account/bp_account.html) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
+When you create your {{site.data.keyword.Bluemix_notm}} account, the `default` resource group is created automatically. Resource instances belong to `default` resource group if you do not specify a different resource group when you create the resource. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
 
 <dl>
 <dt>Resource instance</dt>
