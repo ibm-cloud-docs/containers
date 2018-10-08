@@ -169,7 +169,7 @@ Before you begin:
 
   **Tip:** If you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, follow the steps in this topic to provision storage by using your customized storage class.
   
-  Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information. 
+Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information. 
 {: tip}
 
 To add file storage:
