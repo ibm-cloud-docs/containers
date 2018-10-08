@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-08"
 
 ---
 
@@ -66,7 +66,7 @@ You can encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagem
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
-* Check that your cluster runs Kubernetes version 1.11.3_1521, or later by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and checking the **Version** field.
+* Check that your cluster runs Kubernetes version 1.10.8_1524, 1.11.3_1521, or later by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and checking the **Version** field.
 * Verify that you have [**Administrator** permissions](cs_users.html#access_policies) to complete these steps.
 * Make sure that the API key that is set for the region that your cluster is in is authorized to use Key Protect. To check the API key owner whose credentials are stored for the region, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
