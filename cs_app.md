@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-08"
 
 ---
 
@@ -614,10 +614,10 @@ Steps:
 <br />
 
 
-## Managing rolling deployments
+## Managing rolling deployments to update your apps
 {: #app_rolling}
 
-You can manage the rollout of your changes in an automated and controlled fashion. If your rollout isn't going according to plan, you can roll back your deployment to the previous revision.
+You can manage the rollout of your app changes in an automated and controlled fashion for workloads with a pod template such as deployments. If your rollout isn't going according to plan, you can roll back your deployment to the previous revision.
 {:shortdesc}
 
 
