@@ -195,64 +195,24 @@ The following table shows the infrastructure permissions required to complete gr
 ## Minimum permissions required per action
 {: #commands}
 
-The following table shows the minimum permissions that are required to run each action as a {{site.data.keyword.containerlong_notm}} CLI plug-in command or API call. The actions that are listed as `None` indicate that any user in your account who runs the CLI command or makes the API call sees the result, even if the user has no assigned permissions.
+The following tables show the minimum permissions that are required to run each cluster management, logging, or Ingress action as a {{site.data.keyword.containerlong_notm}} CLI plug-in command or API call. The actions that are listed as `None` indicate that any user in your account who runs the CLI command or makes the API call sees the result, even if the user has no assigned permissions.
 
-**Note**: This table shows the minimum required permissions for each action. The permissions allowed by some roles are included in other roles. For example, the **Administrator** IAM role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles. For more information, see the table for [IAM platform and Kubernetes RBAC roles](#platform).
+**Note**: These tables show the minimum required permissions for each action. [The permissions allowed by some roles](#platform) are included in other roles as follows:
+•	The **Administrator** IAM role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles.
+•	The **Editor** and **Operator** roles include the permissions that are granted by **Viewer**.
+•	The **Viewer** role includes the permissions that are granted by None role.
 
-<table summary="Minimum required permissions for each action">
-<caption>Minimum required permissions for each action</caption>
+The tables are organized alphabetically by CLI command name.
+
+<table summary="Minimum required permissions for each cluster management action">
+<caption>Minimum required permissions for each cluster management action</caption>
 <thead>
 <th>Command</th>
 <th>Role required</th>
 </thead>
 <tbody>
+
 <tr>
-<td>Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB.
-<ul><li>[ibmcloud ks alb-cert-deploy](cs_cli_reference.html#cs_alb_cert_deploy)</li>
-<li>[POST /albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/CreateALBSecret) or [PUT /albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/UpdateALBSecret)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>View details for an ALB secret in a cluster.
-<ul><li>[ibmcloud ks alb-cert-get](cs_cli_reference.html#cs_alb_cert_get)</li>
-<li>[GET /clusters/{idOrName}/albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>Remove an ALB secret from a cluster.
-<ul><li>[ibmcloud ks alb-cert-rm](cs_cli_reference.html#cs_alb_cert_rm)</li>
-<li>[DELETE /clusters/{idOrName}/albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>List all ALB secrets in a cluster.
-<ul><li>[ibmcloud ks alb-certs](cs_cli_reference.html#cs_alb_certs)</li>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>Enable or disable an Ingress ALB.
-<ul><li>[ibmcloud ks alb-configure](cs_cli_reference.html#cs_alb_configure)</li>
-<li>[POST /albs](https://containers.bluemix.net/swagger-alb-api/#!/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#/)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>View information for an Ingress ALB.
-<ul><li>[ibmcloud ks alb-get](cs_cli_reference.html#cs_alb_get)</li>
-<li>[GET /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALB)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>View ALB types that are supported in the region.
-<ul><li>[ibmcloud ks alb-types](cs_cli_reference.html#cs_alb_types)</li>
-<li>[GET /albtypes](https://containers.bluemix.net/swagger-alb-api/#!/util/GetAvailableALBTypes)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>List all Ingress ALBs in a cluster.<ul><li>[ibmcloud ks albs](cs_cli_reference.html#cs_albs)</li>
-<li>[GET /clusters/{idOrName}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALBs)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
 <td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.
 <ul><li>[ibmcloud ks api](cs_cli_reference.html#cs_api)</li></ul></td>
 <td>None</td>
@@ -268,24 +228,6 @@ The following table shows the minimum permissions that are required to run each 
 <ul><li>[ibmcloud ks api-key-reset](cs_cli_reference.html#cs_api_key_reset)</li>
 <li>[POST /v1/keys](https://containers.bluemix.net/swagger-api/#!/accounts/ResetUserAPIKey)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>View details for an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-get](cs_cli_reference.html#s_apiserver_config_get)</li>
-<li>[GET /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/GetAuditWebhook)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Create an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-set](cs_cli_reference.html#s_apiserver_config_set)</li>
-<li>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>Delete an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-unset](cs_cli_reference.html#s_apiserver_config_unset)</li>
-<li>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
 </tr><tr>
 
 <td>Refresh the Kubernetes master.
@@ -423,116 +365,6 @@ The following table shows the minimum permissions that are required to run each 
 <td>View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. <ul><li>[ibmcloud ks kube-versions](cs_cli_reference.html#cs_kube_versions)</li>
 <li>[GET /v1/kube-versions](https://containers.bluemix.net/swagger-api/#!/util/GetKubeVersions)</li></ul></td>
 <td>None</td>
-</tr><tr>
-
-<td>Disable automatic updates for the Fluentd cluster add-on.
-<ul><li>[ibmcloud ks logging-autoupdate-disable](cs_cli_reference.html#cs_log_autoupdate_disable)</li>
-<li>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>Enable automatic updates for the Fluentd cluster add-on.
-<ul><li>[ibmcloud ks logging-autoupdate-enable](cs_cli_reference.html#cs_log_autoupdate_enable)</li>
-<li>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>View the status for automatic updates of the Fluentd add-on.<ul><li>[ibmcloud ks logging-autoupdate-get](cs_cli_reference.html#cs_log_autoupdate_get)</li>
-<li>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/GetUpdatePolicy)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket.
-<ul><li>[ibmcloud ks logging-collect](cs_cli_reference.html#cs_log_collect)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>See the status of the API server logs snapshot request.
-<ul><li>[ibmcloud ks logging-collect-status](cs_cli_reference.html#cs_log_collect_status)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>View the default logging endpoint for the target region.
-<ul><li>[GET /v1/logging/{idOrName}/default](https://containers.bluemix.net/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Create a log forwarding configuration.
-<ul><li>[ibmcloud ks logging-config-create](cs_cli_reference.html#cs_logging_create)</li>
-<li>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/CreateLoggingConfig)</li></ul></td>
-<td>IAM: Editor for all log sources except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td>
-</tr><tr>
-
-<td>View information for a log forwarding configuration.
-<ul><li>[ibmcloud ks logging-config-get](cs_cli_reference.html#cs_logging_get)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Refresh a log forwarding configuration.
-<ul><li>[ibmcloud ks logging-config-refresh](cs_cli_reference.html#cs_logging_refresh)</li>
-<li>[PUT /v1/logging/{idOrName}/refresh](https://containers.bluemix.net/swagger-logging/#!/logging/RefreshLoggingConfig)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>Delete a log forwarding configuration.
-<ul><li>[ibmcloud ks logging-config-rm](cs_cli_reference.html#cs_logging_rm)</li>
-<li>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfig)</li></ul></td>
-<td>IAM: Editor for all log source except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td>
-</tr><tr>
-
-<td>Update a log forwarding configuration.
-<ul><li>[ibmcloud ks logging-config-update](cs_cli_reference.html#cs_logging_update)</li>
-<li>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/UpdateLoggingConfig)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>Delete all log forwarding configurations for a cluster.
-<ul><li>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfigs)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>List all log forwarding configurations in the cluster.
-<ul><li>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigs)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>List all log forwarding configurations for a log source in the cluster.
-<ul><li>[GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Delete all logging filter configurations for the Kubernetes cluster.
-<ul><li>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfigs)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>List all logging filter configurations in the cluster.
-<ul><li>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfigs)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Create a log filtering configuration.
-<ul><li>[ibmcloud ks logging-filter-create](cs_cli_reference.html#cs_log_filter_create)</li>
-<li>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/CreateFilterConfig)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>View information for a log filtering configuration.
-<ul><li>[ibmcloud ks logging-filter-get](cs_cli_reference.html#cs_log_filter_view)</li>
-<li>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfig)</li></ul></td>
-<td>IAM: Viewer <br> RBAC: view</td>
-</tr><tr>
-
-<td>Delete a log filtering configuration.
-<ul><li>[ibmcloud ks logging-filter-rm](cs_cli_reference.html#cs_log_filter_delete)</li>
-<li>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfig)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
-</tr><tr>
-
-<td>Update a log filtering configuration.
-<ul><li>[ibmcloud ks logging-filter-update](cs_cli_reference.html#cs_log_filter_update)</li>
-<li>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/UpdateFilterConfig)</li></ul></td>
-<td>IAM: Editor <br> RBAC: edit</td>
 </tr><tr>
 
 <td>View a list of available machine types for your worker nodes.
@@ -699,3 +531,199 @@ The following table shows the minimum permissions that are required to run each 
 <td>None</td></tr>
 </tbody>
 </table>
+
+
+<table summary="Minimum required permissions for each logging action">
+<caption>Minimum required permissions for each logging action</caption>
+<thead>
+<th>Command</th>
+<th>Role required</th>
+</thead>
+<tbody>
+<tr>
+
+<td>View details for an API server audit webhook.
+<ul><li>[ibmcloud ks apiserver-config-get](cs_cli_reference.html#s_apiserver_config_get)</li>
+<li>[GET /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/GetAuditWebhook)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Create an API server audit webhook.
+<ul><li>[ibmcloud ks apiserver-config-set](cs_cli_reference.html#s_apiserver_config_set)</li>
+<li>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>Delete an API server audit webhook.
+<ul><li>[ibmcloud ks apiserver-config-unset](cs_cli_reference.html#s_apiserver_config_unset)</li>
+<li>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>Disable automatic updates for the Fluentd cluster add-on.
+<ul><li>[ibmcloud ks logging-autoupdate-disable](cs_cli_reference.html#cs_log_autoupdate_disable)</li>
+<li>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>Enable automatic updates for the Fluentd cluster add-on.
+<ul><li>[ibmcloud ks logging-autoupdate-enable](cs_cli_reference.html#cs_log_autoupdate_enable)</li>
+<li>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>View the status for automatic updates of the Fluentd add-on.<ul><li>[ibmcloud ks logging-autoupdate-get](cs_cli_reference.html#cs_log_autoupdate_get)</li>
+<li>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/GetUpdatePolicy)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket.
+<ul><li>[ibmcloud ks logging-collect](cs_cli_reference.html#cs_log_collect)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>See the status of the API server logs snapshot request.
+<ul><li>[ibmcloud ks logging-collect-status](cs_cli_reference.html#cs_log_collect_status)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>View the default logging endpoint for the target region.
+<ul><li>[GET /v1/logging/{idOrName}/default](https://containers.bluemix.net/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Create a log forwarding configuration.
+<ul><li>[ibmcloud ks logging-config-create](cs_cli_reference.html#cs_logging_create)</li>
+<li>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/CreateLoggingConfig)</li></ul></td>
+<td>IAM: Editor for all log sources except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td>
+</tr><tr>
+
+<td>View information for a log forwarding configuration.
+<ul><li>[ibmcloud ks logging-config-get](cs_cli_reference.html#cs_logging_get)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Refresh a log forwarding configuration.
+<ul><li>[ibmcloud ks logging-config-refresh](cs_cli_reference.html#cs_logging_refresh)</li>
+<li>[PUT /v1/logging/{idOrName}/refresh](https://containers.bluemix.net/swagger-logging/#!/logging/RefreshLoggingConfig)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>Delete a log forwarding configuration.
+<ul><li>[ibmcloud ks logging-config-rm](cs_cli_reference.html#cs_logging_rm)</li>
+<li>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfig)</li></ul></td>
+<td>IAM: Editor for all log source except <code>kube-audit</code>, Administrator for log source <code>kube-audit</code> <br> RBAC: edit for all log source except <code>kube-audit</code>, cluster-admin for log source <code>kube-audit</code></td>
+</tr><tr>
+
+<td>Update a log forwarding configuration.
+<ul><li>[ibmcloud ks logging-config-update](cs_cli_reference.html#cs_logging_update)</li>
+<li>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/UpdateLoggingConfig)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>Delete all log forwarding configurations for a cluster.
+<ul><li>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfigs)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>List all log forwarding configurations in the cluster.
+<ul><li>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigs)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>List all log forwarding configurations for a log source in the cluster.
+<ul><li>[GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Delete all logging filter configurations for the Kubernetes cluster.
+<ul><li>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfigs)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>List all logging filter configurations in the cluster.
+<ul><li>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfigs)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Create a log filtering configuration.
+<ul><li>[ibmcloud ks logging-filter-create](cs_cli_reference.html#cs_log_filter_create)</li>
+<li>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/CreateFilterConfig)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>View information for a log filtering configuration.
+<ul><li>[ibmcloud ks logging-filter-get](cs_cli_reference.html#cs_log_filter_view)</li>
+<li>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfig)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Delete a log filtering configuration.
+<ul><li>[ibmcloud ks logging-filter-rm](cs_cli_reference.html#cs_log_filter_delete)</li>
+<li>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfig)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>Update a log filtering configuration.
+<ul><li>[ibmcloud ks logging-filter-update](cs_cli_reference.html#cs_log_filter_update)</li>
+<li>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/UpdateFilterConfig)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+</tbody></table>
+
+
+<table summary="Minimum required permissions for each Ingress action">
+<caption>Minimum required permissions for each Ingress action</caption>
+<thead>
+<th>Command</th>
+<th>Role required</th>
+</thead>
+<tbody>
+<tr>
+<td>Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB.
+<ul><li>[ibmcloud ks alb-cert-deploy](cs_cli_reference.html#cs_alb_cert_deploy)</li>
+<li>[POST /albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/CreateALBSecret) or [PUT /albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/UpdateALBSecret)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>View details for an ALB secret in a cluster.
+<ul><li>[ibmcloud ks alb-cert-get](cs_cli_reference.html#cs_alb_cert_get)</li>
+<li>[GET /clusters/{idOrName}/albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>Remove an ALB secret from a cluster.
+<ul><li>[ibmcloud ks alb-cert-rm](cs_cli_reference.html#cs_alb_cert_rm)</li>
+<li>[DELETE /clusters/{idOrName}/albsecrets](https://containers.bluemix.net/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</li></ul></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>List all ALB secrets in a cluster.
+<ul><li>[ibmcloud ks alb-certs](cs_cli_reference.html#cs_alb_certs)</li>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+</tr><tr>
+
+<td>Enable or disable an Ingress ALB.
+<ul><li>[ibmcloud ks alb-configure](cs_cli_reference.html#cs_alb_configure)</li>
+<li>[POST /albs](https://containers.bluemix.net/swagger-alb-api/#!/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#/)</li></ul></td>
+<td>IAM: Editor <br> RBAC: edit</td>
+</tr><tr>
+
+<td>View information for an Ingress ALB.
+<ul><li>[ibmcloud ks alb-get](cs_cli_reference.html#cs_alb_get)</li>
+<li>[GET /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALB)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>View ALB types that are supported in the region.
+<ul><li>[ibmcloud ks alb-types](cs_cli_reference.html#cs_alb_types)</li>
+<li>[GET /albtypes](https://containers.bluemix.net/swagger-alb-api/#!/util/GetAvailableALBTypes)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>List all Ingress ALBs in a cluster.<ul><li>[ibmcloud ks albs](cs_cli_reference.html#cs_albs)</li>
+<li>[GET /clusters/{idOrName}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALBs)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr>
+</tbody></table>
