@@ -198,17 +198,15 @@ The following table shows the infrastructure permissions required to complete gr
 The following tables show the minimum permissions that are required to run each cluster management, logging, or Ingress action as a {{site.data.keyword.containerlong_notm}} CLI plug-in command or API call. The actions that are listed as `None` indicate that any user in your account who runs the CLI command or makes the API call sees the result, even if the user has no assigned permissions.
 
 **Note**: These tables show the minimum required permissions for each action. [The permissions allowed by some roles](#platform) are included in other roles as follows:
-•	The **Administrator** IAM role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles.
-•	The **Editor** and **Operator** roles include the permissions that are granted by **Viewer**.
-•	The **Viewer** role includes the permissions that are granted by None role.
+*	The **Administrator** IAM role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles.
+*	The **Editor** and **Operator** roles include the permissions that are granted by **Viewer**.
+*	The **Viewer** role includes the permissions that are granted by None role.
 
 The tables are organized alphabetically by CLI command name.
 
-<table summary="Minimum required permissions for each cluster management action">
 <caption>Minimum required permissions for each cluster management action</caption>
 <thead>
-<th>Command</th>
-<th>Role required</th>
+<th colspan=2>Minimum required permissions for each cluster management action</th>
 </thead>
 <tbody>
 
@@ -533,11 +531,9 @@ The tables are organized alphabetically by CLI command name.
 </table>
 
 
-<table summary="Minimum required permissions for each logging action">
 <caption>Minimum required permissions for each logging action</caption>
 <thead>
-<th>Command</th>
-<th>Role required</th>
+<th colspan=2>Minimum required permissions for each logging action</th>
 </thead>
 <tbody>
 <tr>
@@ -673,11 +669,9 @@ The tables are organized alphabetically by CLI command name.
 </tbody></table>
 
 
-<table summary="Minimum required permissions for each Ingress action">
 <caption>Minimum required permissions for each Ingress action</caption>
 <thead>
-<th>Command</th>
-<th>Role required</th>
+<th colspan=2>Minimum required permissions for each Ingress action</th>
 </thead>
 <tbody>
 <tr>

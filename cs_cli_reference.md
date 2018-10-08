@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-08"
 
 ---
 
@@ -655,6 +655,8 @@ ibmcloud ks messages
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 
+Minimum required permissions</strong>: None
+
 **Command options**:
 
    <dl>
@@ -688,7 +690,10 @@ ibmcloud ks cluster-config --cluster my_cluster
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}, **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}}, and **Super User**infrastructure role for IBM Cloud infrastructure (SoftLayer).
+<strong>Minimum required permissions</strong>:
+* **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+* **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}}
+* **Super User**infrastructure role for IBM Cloud infrastructure (SoftLayer).
 
 <strong>Command options</strong>
 
