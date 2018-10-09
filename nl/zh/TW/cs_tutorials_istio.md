@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/info/istio) 是一種開放平台，能夠連接、保護、控制及觀察雲端平台上的服務，例如 {{site.data.keyword.containerlong}} 中的 Kubernetes。使用 Istio，您可以管理網路資料流量、微服務之間的負載平衡、強制執行存取原則、驗證服務身分等等。
 {:shortdesc}
 
-在本指導教學中，您可以看到如何為一個稱為 BookInfo 的簡單模擬書店應用程式，一起安裝 Istio 及四個微服務。微服務包括產品網頁、書籍詳細資料、檢閱及評等。將 BookInfo 的微服務部署至已安裝 Istio 的 {{site.data.keyword.containershort}} 叢集時，即會在每一個微服務的 Pod 中注入 Istio Envoy Sidecar Proxy。
+在本指導教學中，您可以看到如何為一個稱為 BookInfo 的簡單模擬書店應用程式，一起安裝 Istio 及四個微服務。微服務包括產品網頁、書籍詳細資料、檢閱及評等。將 BookInfo 的微服務部署至已安裝 Istio 的 {{site.data.keyword.containerlong}} 叢集時，即會在每一個微服務的 Pod 中注入 Istio Envoy Sidecar Proxy。
 
 ## 目標
 
@@ -41,8 +41,8 @@ lastupdated: "2018-08-06"
 
 ## 必要條件
 
--  [安裝 IBM Cloud CLI、{{site.data.keyword.containershort_notm}} 外掛程式及 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes 1.9 版或以上版本。請務必安裝符合叢集之 Kubernetes 版本的 `kubectl` CLI 版本。
--  [建立叢集](cs_clusters.html#clusters_cli)，其 Kubernetes 版本為 1.9 或以上版本。
+-  [安裝 IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} 外掛程式及 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes 1.9 版或以上版本。請務必安裝符合叢集之 Kubernetes 版本的 `kubectl` CLI 版本。
+-  [建立執行 Kubernetes 1.9 版或更新版本](cs_clusters.html#clusters_cli)的叢集，或[將現有叢集更新至 1.9 版](cs_versions.html#cs_v19)。
 -  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
 ## 課程 1：下載並安裝 Istio
@@ -52,8 +52,8 @@ lastupdated: "2018-08-06"
 {:shortdesc}
 
 1. 使用 [IBM Istio Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio) 來安裝 Istio。
-    1. [為您的叢集安裝 Helm，並將 IBM 儲存庫新增至您的 Helm 實例](cs_integrations.html#helm)。
-    2. 安裝 Istio 的自訂資源定義。
+    1. [在叢集中設定 Helm，並將 IBM 儲存庫新增至 Helm 實例](cs_integrations.html#helm)。
+    2.  **僅限 Helm 2.9 版或更早版本**：安裝 Istio 的自訂資源定義。
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -63,11 +63,6 @@ lastupdated: "2018-08-06"
         helm install ibm/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
-    4. 將 `istioctl` 用戶端新增至 PATH。例如，在 MacOS 或 Linux 系統上執行下列指令：
-       ```
-       export PATH=$PWD/istio-1.0/bin:$PATH
-       ```
-       {: pre}
 
 2. 在繼續之前，確定已完全部署適用於 9 Istio 服務及 Prometheus 的 Pod。
     ```
@@ -102,21 +97,23 @@ lastupdated: "2018-08-06"
 這四個微服務包括產品網頁、書籍詳細資料、檢閱（含數個版本的檢閱微服務）及評等。當您部署 BookInfo 時，會先將 Envoy Sidecar Proxy 當成容器注入至應用程式微服務的 Pod，再部署微服務 Pod。Istio 會使用延伸版本的 Envoy Proxy 來調解服務網中所有微服務的所有入埠及出埠資料流量。如需 Envoy 的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy)。
 
 1. 下載包含必要 BookInfo 檔案的 Istio 套件。
-    1. 直接從 [https://github.com/istio/istio/releases ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/istio/istio/releases) 下載 Istio，或使用 curl 取得最新版本：
-
+    1. 直接從 [https://github.com/istio/istio/releases ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/istio/istio/releases) 下載 Istio，並解壓縮安裝檔案，或使用 cURL 取得最新版本：
        ```
        curl -L https://git.io/getLatestIstio | sh -
        ```
        {: pre}
 
-    2. 解壓縮安裝檔案。
-
-    3. 將目錄切換至 Istio 檔案位置。
-
+    2. 切換至 Istio 檔案位置的目錄。
        ```
-       cd filepath/istio-1.0
+       cd <filepath>/istio-1.0
        ```
        {: pre}
+
+    3. 將 `istioctl` 用戶端新增至 PATH。例如，在 MacOS 或 Linux 系統上執行下列指令：
+       ```
+       export PATH=$PWD/istio-1.0/bin:$PATH
+       ```
+        {: pre}
 
 2. 使用 `istio-injection=enabled` 來標示 `default` 名稱空間。
     ```
@@ -124,14 +121,14 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-2. 部署 BookInfo 應用程式。部署應用程式微服務時，也會將 Envoy Sidecar 部署在每一個微服務 Pod 中。
+3. 部署 BookInfo 應用程式。部署應用程式微服務時，也會將 Envoy Sidecar 部署在每一個微服務 Pod 中。
 
    ```
    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
-3. 確定已部署微服務及其對應的 Pod：
+4. 確定已部署微服務及其對應的 Pod：
     ```
     kubectl get svc
     ```
@@ -140,7 +137,6 @@ lastupdated: "2018-08-06"
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
@@ -155,9 +151,6 @@ lastupdated: "2018-08-06"
     ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    guestbook-76897854cc-6zsws               1/1       Running     0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
     ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
     reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
@@ -166,7 +159,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. 若要驗證應用程式部署，請取得叢集的公用位址。
+5. 若要驗證應用程式部署，請取得叢集的公用位址。
     * 標準叢集：
         1. 若要在公用 Ingress IP 上公開您的應用程式，請部署 BookInfo 閘道。
             ```
@@ -184,6 +177,7 @@ lastupdated: "2018-08-06"
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
+            {: pre}
 
         4. 建立一個使用 Ingress 主機及埠的 `GATEWAY_URL` 環境變數。
 
@@ -211,7 +205,19 @@ lastupdated: "2018-08-06"
      ```
      {: pre}
 
-6. 在瀏覽器中，移至 `http://$GATEWAY_URL/productpage` 以檢視 BookInfo 網頁。
+6.  在瀏覽器中檢視 BookInfo 網頁。
+
+    若為 Mac OS 或 Linux：
+    ```
+    open http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
+
+    若為 Windows：
+    ```
+    start http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 7. 嘗試多次重新整理頁面。不同版本的檢閱區段會循環使用紅色星星、黑色星星及無任何星星。
 
@@ -235,7 +241,7 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-3. 刪除 Istio 自訂資源定義。
+3. **選用**：如果您使用的是 Helm 2.9 或更早版本，並已套用 Istio 自訂資源定義，請刪除它們。
     ```
     kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
     ```

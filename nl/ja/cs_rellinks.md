@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # 関連リンク
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **一般**
@@ -44,8 +44,7 @@ lastupdated: "2018-08-06"
 **チュートリアル、デモ、およびコース**
 
 - [既存の Java Web アプリ (JPetStore) のモダナイズと拡張 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [developerWorks コンテナー・オーケストレーション・ジャーニー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [developerWorks のコース ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [{{site.data.keyword.containerlong_notm}} Cognitive Class の学習パス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [IKS で Web アプリを作成する方法 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [複数地域にまたがるクラスターを Cloud Internet Service (CIS) によって保護する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [アプリのログを分析し、正常性をモニターする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

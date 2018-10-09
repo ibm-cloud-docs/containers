@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -73,7 +73,7 @@ Per ripulire i dati persistenti:
    **Importante:** se l'addebito a tuo carico per la tua archiviazione è a base mensile, ti verrà comunque addebitato l'intero mese, anche se rimuovi l'archiviazione prima della fine del ciclo di fatturazione. 
    
 3. Rimuovi gli eventuali pod che montano la PVC. 
-   1. Elenca i pod che montano la PVC.
+   1. Elenca i pod che montano la PVC. 
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
@@ -87,13 +87,13 @@ Per ripulire i dati persistenti:
     
       Se non viene restituito alcun pod nel tuo output della CLI, non hai alcun pod che utilizza la PVC. 
     
-   2. Rimuovi il pod che utilizza la PVC. Se il pod fa parte di una distribuzione, rimuovi la distribuzione.
+   2. Rimuovi il pod che utilizza la PVC. Se il pod fa parte di una distribuzione, rimuovi la distribuzione. 
       ```
       kubectl delete pod <pod_name>
       ```
       {: pre}
       
-   3. Verifica che il pod venga rimosso.
+   3. Verifica che il pod venga rimosso. 
       ```
       kubectl get pods
       ```
@@ -140,13 +140,13 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
      
-   Se hai rimosso il tuo cluster e non riesci a richiamare il nome del PV, sostituisci `grep <pv_name>` con `grep <cluster_id>` per elencare tutti i dispositivi di archiviazione associati al tuo cluster.
+   Se hai rimosso il tuo cluster e non riesci a richiamare il nome del PV, sostituisci `grep <pv_name>` con `grep <cluster_id>` per elencare tutti i dispositivi di archiviazione associati al tuo cluster. 
    {: tip}
      
    Output di esempio: 
    ```
    id         notes
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z 
    ```
    {: screen}
      
@@ -177,12 +177,12 @@ Per ripulire i dati persistenti:
 
    **Archiviazione file:** 
    ```
-   ibmcloud sl file volume-list
+   ibmcloud sl file volume-list 
    ```
    {: pre}
    **Archiviazione blocchi:**
    ```
-   ibmcloud sl block volume-list
+   ibmcloud sl block volume-list 
    ```
    {: pre}
  

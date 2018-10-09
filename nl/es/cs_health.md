@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ Configure el registro y la supervisión en {{site.data.keyword.containerlong}} p
 ## Visión general del reenvío de registros de clúster y de app
 {: #logging}
 
-La supervisión y el registro continuos son la clave para detectar ataques en el clúster y para resolver problemas a medida que surjan. Mediante la supervisión continua del clúster, puede comprender mejor la capacidad del clúster y la disponibilidad de los recursos que están disponibles para la app. Esto le permite prepararse en consecuencia para proteger sus apps frente a un tiempo de inactividad. Para configurar el registro, debe trabajar con un clúster de Kubernetes estándar en {{site.data.keyword.containershort_notm}}.
+La supervisión y el registro continuos son la clave para detectar ataques en el clúster y para resolver problemas a medida que surjan. Mediante la supervisión continua del clúster, puede comprender mejor la capacidad del clúster y la disponibilidad de los recursos que están disponibles para la app. Esto le permite prepararse en consecuencia para proteger sus apps frente a un tiempo de inactividad. Para configurar el registro, debe trabajar con un clúster de Kubernetes estándar en {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
 **¿Supervisa IBM mi clúster?**
-IBM supervisa continuamente cada nodo maestro de Kubernetes. {{site.data.keyword.containershort_notm}} explora automáticamente cada nodo en el que se ha desplegado el nodo maestro de Kubernetes en busca de vulnerabilidades y arreglos de seguridad específicos de Kubernetes y del sistema operativo. Si se encuentran vulnerabilidades, {{site.data.keyword.containershort_notm}} aplica automáticamente los arreglos y soluciona las vulnerabilidades en nombre del usuario para asegurarse de la protección del nodo maestro. El usuario es el responsable de supervisar y analizar los registros para el resto del clúster.
+IBM supervisa continuamente cada nodo maestro de Kubernetes. {{site.data.keyword.containerlong_notm}} explora automáticamente cada nodo en el que se ha desplegado el nodo maestro de Kubernetes en busca de vulnerabilidades y arreglos de seguridad específicos de Kubernetes y del sistema operativo. Si se encuentran vulnerabilidades, {{site.data.keyword.containerlong_notm}} aplica automáticamente los arreglos y soluciona las vulnerabilidades en nombre del usuario para asegurarse de la protección del nodo maestro. El usuario es el responsable de supervisar y analizar los registros para el resto del clúster.
 
 **¿Para qué códigos fuente puedo configurar el registro?**
 
@@ -83,17 +83,17 @@ En la tabla siguiente se muestran las distintas opciones que tiene para configur
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, utilice el [URL de ingestión](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si no especifica un URL de ingestión, se utiliza el punto final de la región en la que ha creado el clúster.</p>
+      <td><p>Para {{site.data.keyword.loganalysisshort_notm}}, utilice el [URL de ingesta](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si no especifica un URL de ingesta, se utiliza el punto final de la región en la que ha creado el clúster.</p>
       <p>Para syslog, especifique el nombre de host o la dirección IP del servicio del recopilador de registros.</p></td>
     </tr>
     <tr>
       <td><code><em>--port</em></code></td>
-      <td>El puerto de ingestión. Si no especifica un puerto, se utiliza el puerto estándar, <code>9091</code>.
+      <td>El puerto de ingesta. Si no especifica un puerto, se utiliza el puerto estándar, <code>9091</code>.
       <p>Para syslog, especifique el puerto del servicio del recopilador de registros. Si no especifica un puerto, se utiliza el puerto estándar, <code>514</code>.</td>
     </tr>
     <tr>
       <td><code><em>--space</em></code></td>
-      <td>Opcional: el nombre del espacio de Cloud Foundry al que desea enviar registros. Al reenviar registros a {{site.data.keyword.loganalysisshort_notm}}, el espacio y la organización se especifican en el punto de ingestión. Si no especifica un espacio, los registros se envían al nivel de cuenta. Si especifica un espacio, también debe especificar una organización.</td>
+      <td>Opcional: el nombre del espacio de Cloud Foundry al que desea enviar registros. Al reenviar registros a {{site.data.keyword.loganalysisshort_notm}}, el espacio y la organización se especifican en el punto de ingesta. Si no especifica un espacio, los registros se envían al nivel de cuenta. Si especifica un espacio, también debe especificar una organización.</td>
     </tr>
     <tr>
       <td><code><em>--org</em></code></td>
@@ -136,13 +136,13 @@ Para poder realizar cambios en las configuraciones de registro o de filtro, debe
 ## Configuración del reenvío
 {: #configuring}
 
-Puede configurar el registro para {{site.data.keyword.containershort_notm}} mediante la GUI o la CLI.
+Puede configurar el registro para {{site.data.keyword.containerlong_notm}} mediante la GUI o la CLI.
 {: shortdesc}
 
 ### Habilitación del reenvío de registros con la GUI
 {: #enable-forwarding-ui}
 
-Puede configurar el reenvío de registros en el panel de control de {{site.data.keyword.containershort_notm}}. Puede llevar varios minutos el completar el proceso, por lo que si no ve los registros de forma inmediata, espere un poco más y compruébelo de nuevo.
+Puede configurar el reenvío de registros en el panel de control de {{site.data.keyword.containerlong_notm}}. Puede llevar varios minutos el completar el proceso, por lo que si no ve los registros de forma inmediata, espere un poco más y compruébelo de nuevo.
 
 Para crear una configuración a nivel de cuenta para un espacio de nombres de contenedor específico o para el registro de app, utilice la CLI.
 {: tip}
@@ -162,8 +162,8 @@ Puede crear una configuración para los registros del clúster. Puede diferencia
 
 **Reenvío de registros a IBM**
 
-1. Verifique los permisos. Si ha especificado un espacio al crear el clúster o la configuración de registro, tanto el propietario de la cuenta como el propietario de la clave de API de {{site.data.keyword.containershort_notm}} necesitan los [permisos](cs_users.html#access_policies) de gestor, desarrollador o auditor en dicho espacio.
-  * Si desconoce quién es el propietario de la clave de API de {{site.data.keyword.containershort_notm}}, ejecute el mandato siguiente.
+1. Verifique los permisos. Si ha especificado un espacio al crear el clúster o la configuración de registro, tanto el propietario de la cuenta como el propietario de la clave de API de {{site.data.keyword.containerlong_notm}} necesitan los [permisos](cs_users.html#access_policies) de gestor, desarrollador o auditor en dicho espacio.
+  * Si desconoce quién es el propietario de la clave de API de {{site.data.keyword.containerlong_notm}}, ejecute el mandato siguiente.
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
@@ -322,7 +322,7 @@ Puede detener el reenvío de registros de una o de todas las configuraciones de 
 ### Visualización de registros
 {: #view_logs}
 
-Para ver los registros de clústeres y contenedores, puede utilizar las características estándares de registro de Kubernetes y Docker.
+Para ver los registros de clústeres y contenedores, puede utilizar las características estándares de registro de tiempo de ejecución de contenedor y Kubernetes.
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -331,11 +331,11 @@ Para ver los registros de clústeres y contenedores, puede utilizar las caracter
 Puede ver los registros que se reenvían a {{site.data.keyword.loganalysislong_notm}} mediante el panel de control de Kibana.
 {: shortdesc}
 
-Si ha utilizado los valores predeterminados para crear el archivo de configuración, entonces los registros pueden encontrarse en la cuenta, o la organización y el espacio, en los que se ha creado el clúster. Si ha especificado una organización y un espacio en el archivo de configuración, puede encontrar los registros en ese espacio. Para obtener más información sobre el registro, consulte [Registro para {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Si ha utilizado los valores predeterminados para crear el archivo de configuración, entonces los registros pueden encontrarse en la cuenta, o la organización y el espacio, en los que se ha creado el clúster. Si ha especificado una organización y un espacio en el archivo de configuración, puede encontrar los registros en ese espacio. Para obtener más información sobre el registro, consulte [Registro para {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta o el espacio de {{site.data.keyword.Bluemix_notm}} en el que haya configurado el reenvío de registro para el clúster.
 - EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
-- UK sur: https://logging.eu-gb.bluemix.net
+- RU sur: https://logging.eu-gb.bluemix.net
 - UE central: https://logging.eu-fra.bluemix.net
 - AP sur: https://logging.au-syd.bluemix.net
 
@@ -343,9 +343,9 @@ Para obtener más información sobre la visualización de registros, consulte [N
 
 </br>
 
-**Registros de Docker**
+**Registros de contenedor**
 
-Puede aprovechar las funciones incorporadas de registro de Docker para revisar las actividades de las secuencias de salida estándar STDOUT y STDERR. Para obtener más información, consulte [Visualización de registros de contenedor para un contenedor que se ejecute en un clúster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Puede aprovechar las funciones incorporadas de registro de tiempo de ejecución de contenedor para revisar las actividades de las secuencias de salida estándar STDOUT y STDERR. Para obtener más información, consulte [Visualización de registros de contenedor para un contenedor que se ejecute en un clúster de Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
@@ -458,7 +458,7 @@ Existe la posibilidad de reenviar los registros de auditoría del servidor de AP
 
 **Antes de empezar**
 
-1. Verifique los permisos. Si ha especificado un espacio al crear el clúster o la configuración de registro, tanto el propietario de la cuenta como el propietario de claves de {{site.data.keyword.containershort_notm}} necesitan permisos de gestor, desarrollador o auditor en ese espacio.
+1. Verifique los permisos. Si ha especificado un espacio al crear el clúster o la configuración de registro, tanto el propietario de la cuenta como el propietario de claves de {{site.data.keyword.containerlong_notm}} necesitan permisos de gestor, desarrollador o auditor en ese espacio.
 
 2. [Dirija su CLI](cs_cli_install.html#cs_cli_configure) al clúster del que desea recopilar registros de auditoría de servidor de API. **Nota**: Si utiliza una cuenta dedicada, debe iniciar sesión en el punto final de {{site.data.keyword.cloud_notm}} público y definir como objetivo el espacio y la organización públicos para permitir el reenvío de registros.
 
@@ -497,11 +497,11 @@ Existe la posibilidad de reenviar los registros de auditoría del servidor de AP
         </tr>
         <tr>
           <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>El punto final al que desea reenviar los registros. Si no especifica un [URL de ingestión](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), se utilizará el punto final de la región en la que creó su clúster.</td>
+          <td>El punto final al que desea reenviar los registros. Si no especifica un [URL de ingesta](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), se utilizará el punto final de la región en la que creó su clúster.</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_space&gt;</em></code></td>
-          <td>Opcional: el nombre del espacio de Cloud Foundry al que desea enviar registros. Al reenviar registros a {{site.data.keyword.loganalysisshort_notm}}, el espacio y la organización se especifican en el punto de ingestión. Si no especifica un espacio, los registros se envían al nivel de cuenta.</td>
+          <td>Opcional: el nombre del espacio de Cloud Foundry al que desea enviar registros. Al reenviar registros a {{site.data.keyword.loganalysisshort_notm}}, el espacio y la organización se especifican en el punto de ingesta. Si no especifica un espacio, los registros se envían al nivel de cuenta.</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_org&gt;</em></code></td>
@@ -621,37 +621,37 @@ Para reenviar registros de auditoría de API de Kubernetes:
 ## Visualización de métricas
 {: #view_metrics}
 
-Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústeres. Puede utilizar las funciones estándares de Kubernetes y Docker para supervisar el estado de sus clústeres y apps. **Nota**: La supervisión se soporta solo para los clústeres estándares.
+Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústeres. Puede utilizar las funciones estándares de tiempo de ejecución de contenedor y Kubernetes para supervisar el estado de sus clústeres y apps. **Nota**: La supervisión se soporta solo para los clústeres estándares.
 {:shortdesc}
 
 <dl>
   <dt>Página de detalles del clúster en {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containershort_notm}} proporciona información sobre el estado y la capacidad del clúster y sobre el uso de los recursos del clúster. Puede utilizar esta
-GUI para escalar los clústeres, trabajar con el almacenamiento permanente y añadir funciones adicionales al clúster mediante la vinculación de servicios de {{site.data.keyword.Bluemix_notm}}. Para ver la página de detalles de un clúster, vaya al **Panel de control de {{site.data.keyword.Bluemix_notm}}** y seleccione un clúster.</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} proporciona información sobre el estado y la capacidad del clúster y sobre el uso de los recursos del clúster. Puede utilizar esta
+GUI para escalar los clústeres, trabajar con el almacenamiento persistente y añadir funciones adicionales al clúster mediante la vinculación de servicios de {{site.data.keyword.Bluemix_notm}}. Para ver la página de detalles de un clúster, vaya al **Panel de control de {{site.data.keyword.Bluemix_notm}}** y seleccione un clúster.</dd>
   <dt>Panel de control de Kubernetes</dt>
-    <dd>El panel de control de Kubernetes es una interfaz web administrativa que puede utilizar para revisar el estado de los nodos trabajadores, buscar recursos de Kubernetes, desplegar apps contenerizadas y resolver problemas de apps con la información de registro y supervisión. Para obtener más información sobre cómo acceder al panel de control de Kubernetes, consulte [Inicio del panel de control de Kubernetes para {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
+    <dd>El panel de control de Kubernetes es una interfaz web administrativa que puede utilizar para revisar el estado de los nodos trabajadores, buscar recursos de Kubernetes, desplegar apps contenerizadas y resolver problemas de apps con la información de registro y supervisión. Para obtener más información sobre cómo acceder al panel de control de Kubernetes, consulte [Inicio del panel de control de Kubernetes para {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>En el caso de los clústeres estándares, las métricas se encuentran en el espacio de {{site.data.keyword.Bluemix_notm}} al que se inició sesión cuando se creó el clúster de Kubernetes. Si ha especificado un espacio de {{site.data.keyword.Bluemix_notm}} al crear el clúster, entonces las métricas están ubicados en el espacio en cuestión. Las métricas de contenedor se recopilan automáticamente para todos los contenedores desplegados en un clúster. Estas métricas se envían y se ponen a disponibilidad mediante Grafana. Para obtener más información sobre las métricas, consulte el tema sobre [Supervisión de {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>En el caso de los clústeres estándares, las métricas se encuentran en el espacio de {{site.data.keyword.Bluemix_notm}} al que se inició sesión cuando se creó el clúster de Kubernetes. Si ha especificado un espacio de {{site.data.keyword.Bluemix_notm}} al crear el clúster, entonces las métricas están ubicados en el espacio en cuestión. Las métricas de contenedor se recopilan automáticamente para todos los contenedores desplegados en un clúster. Estas métricas se envían y se ponen a disponibilidad mediante Grafana. Para obtener más información sobre las métricas, consulte el tema sobre [Supervisión de {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
     <p>Para acceder al panel de control de Grafana, vaya a uno de los siguientes URL y seleccione la cuenta o espacio de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster.</p> <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas deben leerse de izquierda a derecha, con la zona de servidor en la columna una y las direcciones IP coincidentes en la columna dos.">
   <caption>Direcciones IP para abrir para el tráfico de supervisión</caption>
         <thead>
-        <th>Región de {{site.data.keyword.containershort_notm}}</th>
+        <th>Región de {{site.data.keyword.containerlong_notm}}</th>
         <th>Dirección de supervisión</th>
         <th>Direcciones IP de supervisión</th>
         </thead>
       <tbody>
         <tr>
-         <td>UE Central</td>
+         <td>UE central</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
-         <td>UK Sur</td>
+         <td>RU sur</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>EE.UU. Este, EE.UU. Sur, AP Norte, AP Sur</td>
+          <td>EE.UU. este, EE.UU. sur, AP norte, AP sur</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -667,7 +667,7 @@ GUI para escalar los clústeres, trabajar con el almacenamiento permanente y añ
 Puede configurar otras herramientas para disponer de funciones adicionales.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus es una herramienta de supervisión, registro y generación de alertas diseñada para Kubernetes. La herramienta recupera información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Para obtener información sobre la configuración, consulte [Integración de servicios con {{site.data.keyword.containershort_notm}}](cs_integrations.html#integrations).</dd>
+    <dd>Prometheus es una herramienta de supervisión, registro y generación de alertas diseñada para Kubernetes. La herramienta recupera información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Para obtener información sobre la configuración, consulte [Integración de servicios con {{site.data.keyword.containerlong_notm}}](cs_integrations.html#integrations).</dd>
 </dl>
 
 <br />
@@ -757,7 +757,7 @@ Antes de empezar, seleccione el clúster cuyos estados de nodos trabajadores des
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Define una comprobación de pod de API que comprueba el porcentaje total de pods <code>NotReady</code> en un nodo trabajador en relación con el número total de pods que se asignan a dicho nodo trabajador. La comprobación de un nodo trabajador específico cuenta como fallo si el porcentaje total de pods <code>NotReady</code> es superior al definido en <code>PodFailureThresholdPercent</code>. La comprobación del YAML de ejemplo se ejecuta cada 3 minutos. Si falla tres veces consecutivas, se recarga el nodo trabajador. Esta acción equivale a ejecutar <code>ibmcloud ks worker-reload</code>. Por ejemplo, el valor predeterminado de <code>PodFailureThresholdPercent</code> es 50%. Si el porcentaje de pods <code>NotReady</code> es mayor del 50% tres veces consecutivas, se recargará el nodo trabajador. <br></br>De forma predeterminada, se comprueban los pods en todos los espacios de nombres. Para restringir la selección sólo a los pods en un espacio de nombres especificado, añada el campo <code>Namespace</code> a la selección. La comprobación de pod está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.
+   Define una comprobación de pod de API de Kubernetes que comprueba el porcentaje total de pods <code>NotReady</code> en un nodo trabajador en relación con el número total de pods que se asignan a dicho nodo trabajador. La comprobación de un nodo trabajador específico cuenta como fallo si el porcentaje total de pods <code>NotReady</code> es superior al definido en <code>PodFailureThresholdPercent</code>. La comprobación del YAML de ejemplo se ejecuta cada 3 minutos. Si falla tres veces consecutivas, se recarga el nodo trabajador. Esta acción equivale a ejecutar <code>ibmcloud ks worker-reload</code>. Por ejemplo, el valor predeterminado de <code>PodFailureThresholdPercent</code> es 50%. Si el porcentaje de pods <code>NotReady</code> es mayor del 50% tres veces consecutivas, se recargará el nodo trabajador. <br></br>De forma predeterminada, se comprueban los pods en todos los espacios de nombres. Para restringir la selección sólo a los pods en un espacio de nombres especificado, añada el campo <code>Namespace</code> a la selección. La comprobación de pod está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.
    </td>
    </tr>
    <tr>

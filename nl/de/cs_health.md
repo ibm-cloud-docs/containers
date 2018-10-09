@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ Legen Sie die Protokollierung und Überwachung in {{site.data.keyword.containerl
 ## Informationen zur Protokollweiterleitung für Cluster und Apps
 {: #logging}
 
-Die kontinuierliche Überwachung und Protokollierung ist der Schlüssel, um Angriffe auf Ihren Cluster zu erkennen und Probleme zu lösen, sobald diese auftreten. Wenn Sie Ihren Cluster kontinuierlich überwachen, können Sie die Clusterkapazität und Verfügbarkeit von Ressourcen für Ihre App besser verstehen. Dadurch können Sie sich entsprechend vorbereiten, um Ihre Apps vor Ausfallzeiten zu schützen. Um die Protokollierung zu konfigurieren, müssen Sie mit einem Kubernetes-Standardcluster in {{site.data.keyword.containershort_notm}} arbeiten.
+Die kontinuierliche Überwachung und Protokollierung ist der Schlüssel, um Angriffe auf Ihren Cluster zu erkennen und Probleme zu lösen, sobald diese auftreten. Wenn Sie Ihren Cluster kontinuierlich überwachen, können Sie die Clusterkapazität und Verfügbarkeit von Ressourcen für Ihre App besser verstehen. Dadurch können Sie sich entsprechend vorbereiten, um Ihre Apps vor Ausfallzeiten zu schützen. Um die Protokollierung zu konfigurieren, müssen Sie mit einem Kubernetes-Standardcluster in {{site.data.keyword.containerlong_notm}} arbeiten.
 {: shortdesc}
 
 
 **Überwacht IBM meinen Cluster?**
-Jeder Kubernetes-Master wird kontinuierlich von IBM überwacht. {{site.data.keyword.containershort_notm}} überprüft automatisch alle Knoten, auf denen der Kubernetes-Master implementiert ist, auf Sicherheitslücken, die in Kubernetes- und betriebssystemspezifischen Sicherheitskorrekturen gefunden werden. Werden Schwachstellen bzw. Sicherheitslücken festgestellt, wendet {{site.data.keyword.containershort_notm}} automatisch entsprechende Korrekturen (Fixes) und beseitigt Schwachstellen bzw. Sicherheitslücken zugunsten des Benutzers, um den Schutz des Masterknotens sicherzustellen. Sie sind für die Überwachung und Analyse der Protokolle für den Rest Ihres Clusters verantwortlich.
+Jeder Kubernetes-Master wird kontinuierlich von IBM überwacht. {{site.data.keyword.containerlong_notm}} überprüft automatisch jeden Knoten, auf dem der Kubernetes-Master bereitgestellt ist, auf Schwachstellen bzw. Sicherheitslücken, die in Kubernetes festgestellt wurden, und auf betriebssystemspezifische Korrekturen (Fixes) für die Sicherheit. Werden Schwachstellen bzw. Sicherheitslücken festgestellt, wendet {{site.data.keyword.containerlong_notm}} automatisch entsprechende Korrekturen (Fixes) und beseitigt Schwachstellen bzw. Sicherheitslücken zugunsten des Benutzers, um den Schutz des Masterknotens sicherzustellen. Sie sind für die Überwachung und Analyse der Protokolle für den Rest Ihres Clusters verantwortlich.
 
 **Für was für Quellen kann ich die Protokollierung konfigurieren?**
 
@@ -49,7 +49,7 @@ In der folgenden Abbildung sehen Sie die Position der Quellen, für die Sie die 
 
 <li><p><code>kubernetes</code>: Informationen von 'kubelet, 'kube-proxy' und anderen Kubernetes-Ereignissen, die im Workerknoten auftreten können, die im Namensbereich 'kube-system' ausgeführt werden.</p><p>Pfade: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
 
-<li><p><code>worker</code>: Informationen, die für die Infrastrukturkonfiguratin spezifisch sind, die Sie für Ihren Workerknoten konfiguriert haben. Workerprotokolle werden in Syslog erfasst und enthalten Betriebssystemereignisse. In der Datei 'auth.log' finden Sie Informationen zu den Authentifizierungsanforderungen, die an das Betriebssystem gestellt werden. </p><p>Pfade: <code>/var/log/syslog</code> und <code>/var/log/auth.log</code></p></li>
+<li><p><code>worker</code>: Informationen, die für die Infrastrukturkonfiguration spezifisch sind, die Sie für Ihren Workerknoten konfiguriert haben. Workerprotokolle werden in Syslog erfasst und enthalten Betriebssystemereignisse. In der Datei 'auth.log' finden Sie Informationen zu den Authentifizierungsanforderungen, die an das Betriebssystem gestellt werden. </p><p>Pfade: <code>/var/log/syslog</code> und <code>/var/log/auth.log</code></p></li>
 </ol>
 
 </br>
@@ -128,8 +128,7 @@ In der folgenden Tabelle sind die verschiedenen Optionen aufgeführt, die Ihnen 
 
 **Bin ich dafür verantwortlich, dass Fluentd für die Protokollierung aktualisiert wird?**
 
-Um Änderungen an Ihren Protokollierungs- oder Filterkonfigurationen vornehmen zu können, muss das Fluentd-Protokollierungs-Add-on die aktuelle Version aufweisen. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert.
-Informationen zum Inaktivieren automatischer Aktualisierungen finden Sie im Abschnitt [Cluster-Add-ons aktualisieren: Fluentd für die Protokollierung](cs_cluster_update.html#logging).
+Um Änderungen an Ihren Protokollierungs- oder Filterkonfigurationen vornehmen zu können, muss das Fluentd-Protokollierungs-Add-on die aktuelle Version aufweisen. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert. Informationen zum Inaktivieren automatischer Aktualisierungen finden Sie im Abschnitt [Cluster-Add-ons aktualisieren: Fluentd für die Protokollierung](cs_cluster_update.html#logging).
 
 <br />
 
@@ -137,13 +136,13 @@ Informationen zum Inaktivieren automatischer Aktualisierungen finden Sie im Absc
 ## Protokollweiterleitung konfigurieren
 {: #configuring}
 
-Sie können die Protokollierung für {{site.data.keyword.containershort_notm}} über die GUI oder über die Befehlszeilenschnittstelle konfigurieren.
+Sie können die Protokollierung für {{site.data.keyword.containerlong_notm}} über die GUI oder über die Befehlszeilenschnittstelle konfigurieren.
 {: shortdesc}
 
 ### Protokollweiterleitung über die GUI aktivieren
 {: #enable-forwarding-ui}
 
-Sie können die Protokollweiterleitung im {{site.data.keyword.containershort_notm}}-Dashboard konfigurieren. Es kann einige Minuten dauern, bis der Vorgang abgeschlossen ist. Wenn Sie die Protokolle also nicht sofort sehen, warten Sie einige Minuten und überprüfen Sie die Konfiguration dann nochmals.
+Sie können die Protokollweiterleitung im {{site.data.keyword.containerlong_notm}}-Dashboard konfigurieren. Es kann einige Minuten dauern, bis der Vorgang abgeschlossen ist. Wenn Sie die Protokolle also nicht sofort sehen, warten Sie einige Minuten und überprüfen Sie die Konfiguration dann nochmals.
 
 Um eine Konfiguration auf Kontoebene, für einen bestimmten Containernamensbereich oder für die Anwendungsprotokollierung zu erstellen, verwenden Sie die CLI.
 {: tip}
@@ -159,12 +158,12 @@ Um eine Konfiguration auf Kontoebene, für einen bestimmten Containernamensberei
 ### Protokollweiterleitung über die CLI aktivieren
 {: #enable-forwarding}
 
-Sie können eine Konfiguration für die Clusterprotokollierung erstellen. Sie können zwischen den verschiedenen Protokollierungsoptionen unterscheiden, indem Sie Flags setzen. 
+Sie können eine Konfiguration für die Clusterprotokollierung erstellen. Sie können zwischen den verschiedenen Protokollierungsoptionen unterscheiden, indem Sie Flags setzen.
 
 **Weiterleitung von Protokollen an IBM**
 
-1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containershort_notm}}-API-Schlüsseleigner Manager-, Entwickler- oder Auditor-[Berechtigungen](cs_users.html#access_policies) in diesem Bereich.
-  * Wenn Sie wissen, wer der {{site.data.keyword.containershort_notm}}-API-Schlüsseleigner ist, führen Sie den folgenden Befehl aus:
+1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containerlong_notm}}-API-Schlüsseleigner Manager-, Entwickler- oder Auditor-[Berechtigungen](cs_users.html#access_policies) in diesem Bereich.
+  * Wenn Sie wissen, wer der {{site.data.keyword.containerlong_notm}}-API-Schlüsseleigner ist, führen Sie den folgenden Befehl aus:
       ```
       ibmcloud ks api-key-info <clustername>
       ```
@@ -323,7 +322,7 @@ Sie können die Weiterleitung von einem oder allen Protokollen der Protokollieru
 ### Protokolle anzeigen
 {: #view_logs}
 
-Zum Anzeigen von Protokollen für Cluster und Container können Sie die Standardprotokollierungsfunktionen von Kubernetes und Docker verwenden.
+Zum Anzeigen von Protokollen für Cluster und Container können Sie die Standardprotokollfunktionen von Kubernetes und Containerlaufzeit verwenden.
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -332,7 +331,7 @@ Zum Anzeigen von Protokollen für Cluster und Container können Sie die Standard
 Sie können die Protokolle anzeigen, die Sie über das Kibana-Dashboard an {{site.data.keyword.loganalysislong_notm}} weitergeleitet haben.
 {: shortdesc}
 
-Wenn Sie die Standardwerte zum Erstellen Ihrer Konfigurationsdatei verwenden, können Ihre Protokolle im Konto oder in der Organisation und im Bereich gefunden werden, in dem der Cluster erstellt wurde. Wenn Sie eine Organisation und einen Bereich in Ihrer Konfigurationsdatei angegeben haben, können Sie Ihre Protokolle in diesem Bereich finden. Weitere Informationen zur Protokollierung finden Sie unter [Protokollierung für {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Wenn Sie die Standardwerte zum Erstellen Ihrer Konfigurationsdatei verwenden, können Ihre Protokolle im Konto oder in der Organisation und im Bereich gefunden werden, in dem der Cluster erstellt wurde. Wenn Sie eine Organisation und einen Bereich in Ihrer Konfigurationsdatei angegeben haben, können Sie Ihre Protokolle in diesem Bereich finden. Weitere Informationen zur Protokollierung finden Sie unter [Protokollierung für {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie die Protokollweiterleitung für den Cluster konfiguriert haben.
 - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
@@ -344,9 +343,9 @@ Weitere Informationen zum Anzeigen von Protokollen finden Sie im Abschnitt zum [
 
 </br>
 
-**Docker-Protokolle**
+**Containerprotokolle**
 
-Sie können die in Docker integrierten Protokollierungsfunktion nutzen, um Aktivitäten in den Standardausgabedatenströmen STDOUT und STDERR zu prüfen. Weitere Informationen finden Sie unter [Container-Protokolle für einen Container anzeigen, der in einem Kubernetes-Cluster ausgeführt wird](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Sie können die in Docker integrierten Funktionen für die Containerlaufzeitprotokollierung nutzen, um Aktivitäten in den Standardausgabedatenströmen STDOUT und STDERR zu prüfen. Weitere Informationen finden Sie unter [Container-Protokolle für einen Container anzeigen, der in einem Kubernetes-Cluster ausgeführt wird](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
@@ -354,7 +353,7 @@ Sie können die in Docker integrierten Protokollierungsfunktion nutzen, um Aktiv
 ## Protokolle filtern
 {: #filter-logs}
 
-Sie können auswählen, welche Protokolle Sie weiterleiten, indem Sie bestimmte Protokolle für einen bestimmten Zeitraum herausfiltern. Sie können zwischen den verschiedenen Filteroptionen unterscheiden, indem Sie Flags setzen. 
+Sie können auswählen, welche Protokolle Sie weiterleiten, indem Sie bestimmte Protokolle für einen bestimmten Zeitraum herausfiltern. Sie können zwischen den verschiedenen Filteroptionen unterscheiden, indem Sie Flags setzen.
 
 <table>
 <caption>Informationen zu den Optionen für die Protokollfilterung</caption>
@@ -459,7 +458,7 @@ Sie können die Auditprotokolle des Kubernetes-API-Servers an {{site.data.keywor
 
 **Vorbereitende Schritte**
 
-1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containershort_notm}}-Schlüsseleigner Manager-, Entwickler- oder Auditor-Berechtigungen in diesem Bereich.
+1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containerlong_notm}}-Schlüsseleigner Manager-, Entwickler- oder Auditor-Berechtigungen in diesem Bereich.
 
 2. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem Sie API-Serverauditprotokolle erfassen möchten. **Hinweis**: Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
 
@@ -546,7 +545,7 @@ Sie können die Auditprotokolle des Kubernetes-API-Servers an {{site.data.keywor
 
 Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
 
-1. Richten Sie den Weebhook ein. Wenn Sie keine Informationen in den Flags bereitstellen, wird eine Standardkonfiguration verwendet.
+1. Richten Sie den Webhook ein. Wenn Sie keine Informationen in den Flags bereitstellen, wird eine Standardkonfiguration verwendet.
 
     ```
     ibmcloud ks apiserver-config-set audit-webhook <clustername_oder_-id> --remoteServer <server-URL_oder_IP> --caCert <pfad_des_zertifizierungsstellenzertifikats> --clientCert <pfad_des_clientzertifikats> --clientKey <pfad_des_clientschlüssels>
@@ -622,20 +621,20 @@ Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
 ## Metriken anzeigen
 {: #view_metrics}
 
-Mit Metriken können Sie den Zustand und die Leistung Ihrer Cluster überwachen. Sie können die Standardfeatures von Kubernetes und Docker verwenden, um den Zustand Ihrer Cluster und Apps zu überwachen. **Hinweis**: Die Überwachung wird nur für Standardcluster unterstützt.
+Mit Metriken können Sie den Zustand und die Leistung Ihrer Cluster überwachen. Sie können die Standardfeatures von Kubernetes und der Containerlaufzeit verwenden, um den Zustand Ihrer Cluster und Apps zu überwachen. **Hinweis**: Die Überwachung wird nur für Standardcluster unterstützt.
 {:shortdesc}
 
 <dl>
   <dt>Seite mit Clusterdetails in {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containershort_notm}} stellt Information zum Zustand und zur Kapazität Ihres Clusters sowie zur Nutzung Ihrer Clusterressourcen bereit. Über diese grafische Benutzerschnittstelle (GUI) können Sie Ihren Cluster horizontal skalieren, mit dem persistenten Speicher arbeiten und weitere Funktionalität durch Binden von {{site.data.keyword.Bluemix_notm}}-Services zu Ihrem Cluster hinzufügen. Um die Seite mit Clusterdetails anzuzeigen, wählen Sie im **{{site.data.keyword.Bluemix_notm}}-Dashboard** einen Cluster aus.</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} stellt Information zum Zustand und zur Kapazität Ihres Clusters sowie zur Nutzung Ihrer Clusterressourcen bereit. Über diese grafische Benutzerschnittstelle (GUI) können Sie Ihren Cluster horizontal skalieren, mit dem persistenten Speicher arbeiten und weitere Funktionalität durch Binden von {{site.data.keyword.Bluemix_notm}}-Services zu Ihrem Cluster hinzufügen. Um die Seite mit Clusterdetails anzuzeigen, wählen Sie im **{{site.data.keyword.Bluemix_notm}}-Dashboard** einen Cluster aus.</dd>
   <dt>Kubernetes-Dashboard</dt>
-    <dd>Das Kubernetes-Dashboard ist eine Webschnittstelle für die Verwaltung, über die Sie den Zustand Ihrer Workerknoten überprüfen, Kubernetes-Ressourcen suchen, containerisierte Apps bereitstellen und Fehler bei Apps mithilfe von Protokollierungs- und Überwachungsdaten suchen und beheben können. Weitere Informationen dazu, wie Sie auf das Kubernetes-Dashboard zugreifen, finden Sie unter [Kubernetes-Dashboard für {{site.data.keyword.containershort_notm}} starten](cs_app.html#cli_dashboard).</dd>
+    <dd>Das Kubernetes-Dashboard ist eine Webschnittstelle für die Verwaltung, über die Sie den Zustand Ihrer Workerknoten überprüfen, Kubernetes-Ressourcen suchen, containerisierte Apps bereitstellen und Fehler bei Apps mithilfe von Protokollierungs- und Überwachungsdaten suchen und beheben können. Weitere Informationen dazu, wie Sie auf das Kubernetes-Dashboard zugreifen, finden Sie unter [Kubernetes-Dashboard für {{site.data.keyword.containerlong_notm}} starten](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>Metriken für Standardcluster befinden sich in dem {{site.data.keyword.Bluemix_notm}}-Konto, das angemeldet war, als der Kubernetes-Cluster erstellt wurde. Wenn Sie beim Erstellen des Clusters einen {{site.data.keyword.Bluemix_notm}}-Bereich angegeben haben, befinden sich die Metriken in diesem Bereich. Containermetriken werden automatisch für alle Container erfasst, die in einem Cluster bereitgestellt werden. Diese Metriken werden durch Grafana gesendet und verfügbar gemacht. Weitere Informationen zu Metriken finden Sie unter [Überwachung für {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>Metriken für Standardcluster befinden sich in dem {{site.data.keyword.Bluemix_notm}}-Konto, das angemeldet war, als der Kubernetes-Cluster erstellt wurde. Wenn Sie beim Erstellen des Clusters einen {{site.data.keyword.Bluemix_notm}}-Bereich angegeben haben, befinden sich die Metriken in diesem Bereich. Containermetriken werden automatisch für alle Container erfasst, die in einem Cluster bereitgestellt werden. Diese Metriken werden durch Grafana gesendet und verfügbar gemacht. Weitere Informationen zu Metriken finden Sie unter [Überwachung für {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
     <p>Zum Zugriff auf das Grafana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.</p> <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
   <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}}-Region</th>
+        <th>{{site.data.keyword.containerlong_notm}}-Region</th>
         <th>Überwachungsadresse</th>
         <th>IP-Adressen für die Überwachung</th>
         </thead>
@@ -667,7 +666,7 @@ Mit Metriken können Sie den Zustand und die Leistung Ihrer Cluster überwachen.
 Sie können weitere Tools für zusätzliche Überwachungsfunktionen konfigurieren.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus ist ein Open-Source-Tool für die Überwachung, Protokollierung und Benachrichtigung bei Alerts, das für Kubernetes entwickelt wurde. Das Tool ruft auf Grundlage der Kubernetes-Protokollierungsinformationen detaillierte Informationen zu Cluster, Workerknoten und Bereitstellungszustand ab. Weitere Informationen zur Einrichtung finden Sie unter [Services mit {{site.data.keyword.containershort_notm}} integrieren](cs_integrations.html#integrations).</dd>
+    <dd>Prometheus ist ein Open-Source-Tool für die Überwachung, Protokollierung und Benachrichtigung bei Alerts, das für Kubernetes entwickelt wurde. Das Tool ruft auf Grundlage der Kubernetes-Protokollierungsinformationen detaillierte Informationen zu Cluster, Workerknoten und Bereitstellungszustand ab. Weitere Informationen zur Einrichtung finden Sie unter [Services mit {{site.data.keyword.containerlong_notm}} integrieren](cs_integrations.html#integrations).</dd>
 </dl>
 
 <br />
@@ -757,7 +756,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Workerknoten zugewiesenen Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Workerknoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung von <code>ibmcloud ks worker-reload</code>.Der Standardwert für <code>PodFailureThresholdPercent</code> ist beispielsweise 50 %. Wenn der Prozentsatz der Pods mit dem Status <code>NotReady</code> dreimal hintereinander höher als 50 % ist, wird der Workerknoten neu geladen. <br></br>Standardmäßig werden Pods in allen Namensbereichen geprüft. Um nur Pods in einem angegebenen Namensbereich zu prüfen, fügen Sie das Feld <code>Namespace</code> zur Prüfung hinzu. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.
+   Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Workerknoten zugewiesenen Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Workerknoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung von <code>ibmcloud ks worker-reload</code>. Der Standardwert für <code>PodFailureThresholdPercent</code> ist beispielsweise 50 %. Wenn der Prozentsatz der Pods mit dem Status <code>NotReady</code> dreimal hintereinander höher als 50 % ist, wird der Workerknoten neu geladen. <br></br>Standardmäßig werden Pods in allen Namensbereichen geprüft. Um nur Pods in einem angegebenen Namensbereich zu prüfen, fügen Sie das Feld <code>Namespace</code> zur Prüfung hinzu. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.
    </td>
    </tr>
    <tr>

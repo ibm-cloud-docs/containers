@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 Exponha uma porta e use um endereço IP móvel para um balanceador de carga da Camada 4 para acessar um app conteinerizado.
 {:shortdesc}
 
+
+
 ## Componentes e arquitetura do balanceador de carga
 {: #planning}
 
-Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente uma sub-rede pública móvel e uma sub-rede privada móvel.
+Ao criar um cluster padrão, o {{site.data.keyword.containerlong_notm}} provisiona automaticamente uma sub-rede pública móvel e uma sub-rede privada móvel.
 
 * A sub-rede pública móvel fornece 1 endereço IP público móvel que é usado pelo [ALB do Ingresso público](cs_ingress.html) padrão. Os outros 4 endereços IP públicos móveis podem ser usados para expor apps únicos para a Internet, criando um serviço de balanceador de carga público.
 * A sub-rede privada móvel fornece 1 endereço IP privado móvel que é usado pelo [ALB do Ingresso privado](cs_ingress.html#private_ingress) padrão. Os outros 4 endereços IP privados móveis podem ser usados para expor apps únicos para uma rede privada, criando um serviço de balanceador de carga privado.
@@ -37,7 +39,7 @@ Um serviço de balanceador de carga também torna seu app disponível nos NodePo
 
 O serviço LoadBalancer serve como o ponto de entrada externo para solicitações recebidas para o app. Para acessar o serviço LoadBalancer por meio da Internet, use o endereço IP público do balanceador de carga e a porta designada no formato `<IP_address>:<port>`. O diagrama a seguir mostra como um balanceador de carga direciona a comunicação da Internet para um app.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exponha um app no {{site.data.keyword.containerlong_notm}} usando um balanceador de carga" style="width:550px; border-style: none"/>
 
 1. Uma solicitação para seu app usa o endereço IP público de seu balanceador de carga e a porta designada no nó do trabalhador.
 
@@ -71,9 +73,9 @@ Nota:
 
 Antes de iniciar:
   * Um serviço de balanceador de carga com um endereço IP privado móvel ainda tem um NodePort público aberto em cada nó do trabalhador. Para incluir uma política de rede para evitar o tráfego público, consulte [Bloqueando tráfego recebido](cs_network_policy.html#block_ingress).
-  * Em cada zona, pelo menos uma VLAN pública deve ter sub-redes móveis disponíveis para os serviços Ingresso e LoadBalancer. Para incluir os serviços privados Ingresss e LoadBalancer, deve-se especificar pelo menos uma VLAN privada com sub-redes móveis disponíveis. Para incluir sub-redes, consulte [Configurando sub-redes para clusters](cs_subnets.html).
+  * Deve-se implementar um balanceador de carga em cada zona e cada balanceador de carga é designado a seu próprio endereço IP nessa zona. Para criar balanceadores de carga públicos, pelo menos uma VLAN pública deverá ter sub-redes móveis disponíveis em cada zona. Para incluir serviços de balanceador de carga privado, pelo menos uma VLAN privada deve ter sub-redes móveis disponíveis em cada zona. Para incluir sub-redes, consulte [Configurando sub-redes para clusters](cs_subnets.html).
   * Se você restringir o tráfego de rede aos nós do trabalhador de borda, assegure-se de que pelo menos 2 [nós do trabalhador de borda](cs_edge.html#edge) estejam ativados em cada zona. Se os nós do trabalhador de borda forem ativados em algumas zonas, mas não em outras, os balanceadores de carga não serão implementados uniformemente. Os balanceadores de carga serão implementados em nós de borda em algumas zonas, mas em nós do trabalhador regulares em outras zonas.
-  * Para ativar a comunicação na rede privada entre os trabalhadores que estiverem em zonas diferentes, deve-se ativar a [ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+  * Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster multizona, deve-se ativar o [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se você está usando o {{site.data.keyword.BluDirectLink}}, deve-se usar um [ Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para ativar o VRF, entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer).
 
 
 Para configurar um serviço LoadBalancer em um cluster de múltiplas zonas:
@@ -487,3 +489,4 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
         {: screen}
 
     4. Na seção **Rótulos** da saída, verifique se a VLAN pública ou privada é a VLAN que você designou nas etapas anteriores.
+

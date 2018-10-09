@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Verwenden Sie diese Befehle, um Cluster in {{site.data.keyword.Bluemix_notm}} zu
 ## ibmcloud ks-Befehle
 {: #cs_commands}
 
-**Tipp:** Sie können die Version des {{site.data.keyword.containershort_notm}}-Plug-ins abrufen, indem Sie den folgenden Befehl ausführen.
+**Tipp:** Sie können die Version des {{site.data.keyword.containerlong_notm}}-Plug-ins abrufen, indem Sie den folgenden Befehl ausführen.
 
 ```
 ibmcloud plugin list
@@ -324,7 +324,7 @@ ibmcloud plugin list
 ### ibmcloud ks api ENDPUNKT [--insecure][--skip-ssl-validation] [--api-version WERT][-s]
 {: #cs_api}
 
-Legen Sie den API-Endpunkt als ziel für {{site.data.keyword.containershort_notm}} fest. Wenn Sie keinen Endpunkt angeben, können Sie Informationen zu dem aktuellen Endpunkt anzeigen, der als Ziel angegeben wurde.
+Legen Sie den API-Endpunkt als ziel für {{site.data.keyword.containerlong_notm}} fest. Wenn Sie keinen Endpunkt angeben, können Sie Informationen zu dem aktuellen Endpunkt anzeigen, der als Ziel angegeben wurde.
 
 Zwischen Regionen wechseln? Verwenden Sie stattdessen den [Befehl `ibmcloud ks region-set`](#cs_region-set).
 {: tip}
@@ -333,7 +333,7 @@ Zwischen Regionen wechseln? Verwenden Sie stattdessen den [Befehl `ibmcloud ks r
 
    <dl>
    <dt><code><em>ENDPOINT</em></code></dt>
-   <dd>Der {{site.data.keyword.containershort_notm}}-API-Endpunkt. Beachten Sie, dass sich dieser Endpunkt von {{site.data.keyword.Bluemix_notm}}-Endpunkten unterscheidet. Dieser Wert ist zum Festlegen der API-Endpunkte erforderlich. Folgende Werte sind zulässig:<ul>
+   <dd>Der {{site.data.keyword.containerlong_notm}}-API-Endpunkt. Beachten Sie, dass sich dieser Endpunkt von {{site.data.keyword.Bluemix_notm}}-Endpunkten unterscheidet. Dieser Wert ist zum Festlegen der API-Endpunkte erforderlich. Folgende Werte sind zulässig:<ul>
    <li>Globaler Endpunkt: https://containers.bluemix.net</li>
    <li>Endpunkt für Asien-Pazifik (Norden): https://ap-north.containers.bluemix.net</li>
    <li>Endpunkt für Asien-Pazifik (Süden): https://ap-south.containers.bluemix.net</li>
@@ -375,13 +375,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containershort_notm}}-Region an.
+Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containerlong_notm}}-Region an.
 
-Der IAM-API-Schlüssel (IAM, Identity and Access Management) wird automatisch für eine Region festgelegt, wenn die erste Aktion ausgeführt wird, für die die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie ausgeführt werden muss. Zum Beispiel erstellt einer Ihrer Benutzer mit Administratorberechtigung den ersten Cluster in der Region `Vereinigte Staaten (Süden)`. Dadurch wird der IAM-API-Schlüssel für diesen Benutzer in dem Konto für diese Region gespeichert. Der API-Schlüssel wird verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, z. B. neue Workerknoten oder VLANs.
+Der IAM-API-Schlüssel (IAM, Identity and Access Management) wird automatisch für eine Region festgelegt, wenn die erste Aktion ausgeführt wird, für die die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie ausgeführt werden muss. Zum Beispiel erstellt einer Ihrer Benutzer mit Administratorberechtigung den ersten Cluster in der Region `Vereinigte Staaten (Süden)`. Dadurch wird der IAM-API-Schlüssel für diesen Benutzer in dem Konto für diese Region gespeichert. Der API-Schlüssel wird verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, z. B. neue Workerknoten oder VLANs.
 
-Wenn ein anderer Benutzer eine Aktion in dieser Region ausführt, die eine Interaktion mit dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) erfordert, wie z. B. die Erstellung eines neuen Clusters oder das erneute Laden eines Workerknotens, wird der gespeicherte API-Schlüssel verwendet, um festzustellen, ob ausreichende Berechtigungen vorhanden sind, um diese Aktion auszuführen. Um sicherzustellen, dass infrastrukturbezogene Aktionen in Ihrem Cluster erfolgreich ausgeführt werden können, weisen Sie Ihre {{site.data.keyword.containershort_notm}}-Benutzer mit Administratorberechtigung der Infrastrukturzugriffsrichtlinie **Superuser** zu. Weitere Informationen finden unter [Benutzerzugriff verwalten](cs_users.html#infra_access).
+Wenn ein anderer Benutzer eine Aktion in dieser Region ausführt, die eine Interaktion mit dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) erfordert, wie z. B. die Erstellung eines neuen Clusters oder das erneute Laden eines Workerknotens, wird der gespeicherte API-Schlüssel verwendet, um festzustellen, ob ausreichende Berechtigungen vorhanden sind, um diese Aktion auszuführen. Um sicherzustellen, dass infrastrukturbezogene Aktionen in Ihrem Cluster erfolgreich ausgeführt werden können, weisen Sie Ihre {{site.data.keyword.containerlong_notm}}-Benutzer mit Administratorberechtigung der Infrastrukturzugriffsrichtlinie **Superuser** zu. Weitere Informationen finden unter [Benutzerzugriff verwalten](cs_users.html#infra_access).
 
-Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies tun, indem Sie den Befehl [ibmcloud ks api-key-reset](#cs_api_key_reset) ausführen. Dieser Befehl erfordert die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
+Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies tun, indem Sie den Befehl [ibmcloud ks api-key-reset](#cs_api_key_reset) ausführen. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
 
 **Tipp:** Der API-Schlüssel, der in diesem Befehl zurückgegeben wird, wird möglicherweise nicht verwendet, wenn die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) manuell mithilfe des Befehls [ibmcloud ks credentials-set](#cs_credentials_set) festgelegt wurden.
 
@@ -410,11 +410,11 @@ Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der fü
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containershort_notm}}-Region.
+Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containerlong_notm}}-Region.
 
-Dieser Befehl erfordert die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto. Der IAM-API-Schlüssel ist erforderlich, um Infrastruktur aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen. Einmal gespeichert, wird der API-Schlüssel unabhängig vom Benutzer, der diesen Befehl ausführt, für jede Aktion in einer Region verwendet, die Infrastrukturberechtigungen erfordert. Weitere Informationen zur Funktionsweise von IAM-API-Schlüsseln finden Sie im Abschnitt zum [Befehl `ibmcloud ks api-key-info`](#cs_api_key_info).
+Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto. Der IAM-API-Schlüssel ist erforderlich, um Infrastruktur aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen. Einmal gespeichert, wird der API-Schlüssel unabhängig vom Benutzer, der diesen Befehl ausführt, für jede Aktion in einer Region verwendet, die Infrastrukturberechtigungen erfordert. Weitere Informationen zur Funktionsweise von IAM-API-Schlüsseln finden Sie im Abschnitt zum [Befehl `ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Wichtig** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, der diesen Befehl ausführt, über die erforderlichen Berechtigungen für [{{site.data.keyword.containershort_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt.](cs_users.html#users).
+**Wichtig** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, der diesen Befehl ausführt, über die erforderlichen Berechtigungen für [{{site.data.keyword.containerlong_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt.](cs_users.html#users).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -567,13 +567,13 @@ Anzeigen einer Liste der unterstützten Befehle und Parameter.
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-Initialisieren des {{site.data.keyword.containershort_notm}}-Plug-ins oder Angeben der Region, in der Sie Kubernetes-Cluster erstellen oder darauf zugreifen möchten.
+Initialisieren des {{site.data.keyword.containerlong_notm}}-Plug-ins oder Angeben der Region, in der Sie Kubernetes-Cluster erstellen oder darauf zugreifen möchten.
 
 <strong>Befehlsoptionen</strong>:
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>Der zu verwendende {{site.data.keyword.containershort_notm}}-API-Endpunkt.  Dieser Wert ist optional. [Zeigen Sie die verfügbaren API-Endpunktwerte an.](cs_regions.html#container_regions)</dd>
+   <dd>Der zu verwendende {{site.data.keyword.containerlong_notm}}-API-Endpunkt.  Dieser Wert ist optional. [Zeigen Sie die verfügbaren API-Endpunktwerte an.](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Lässt eine unsichere HTTP-Verbindung zu.</dd>
@@ -693,8 +693,7 @@ trusted: <em>true</em>
     </tr>
     <tr>
     <td><code><em>zone</em></code></td>
-    <td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der der Cluster erstellt werden soll. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.
-</td>
+    <td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der der Cluster erstellt werden soll. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen. </td>
      </tr>
      <tr>
      <td><code><em>kein_teilnetz</em></code></td>
@@ -702,7 +701,7 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>maschinentyp</em></code></td>
-     <td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types). </td>
+     <td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types).</td>
      </tr>
      <tr>
      <td><code><em>privates_vlan</em></code></td>
@@ -737,7 +736,7 @@ trusted: <em>true</em>
 <dd>Der Grad an Hardware-Isolation für Ihren Workerknoten. Verwenden Sie 'dedicated', wenn Sie verfügbare physische Ressourcen haben möchten, die nur Sie nutzen können, oder 'shared', um zuzulassen, dass physische Ressourcen mit anderen IBM Kunden gemeinsam genutzt werden können. Die Standardeinstellung ist 'shared'.  Dieser Wert ist für Standardcluster optional und steht für kostenlose Cluster nicht zur Verfügung.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Die Zone, in der der Cluster erstellt werden soll. Die Zonen, die Ihnen zur Verfügung stehen, hängen von der {{site.data.keyword.Bluemix_notm}}-Region ab, in der Sie angemeldet sind. Wählen Sie die Region aus, die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten. Dieser Wert ist für Standardcluster erforderlich und für kostenlose Cluster optional.
+<dd>Die Zone, in der der Cluster erstellt werden soll. Die Zonen, die Ihnen zur Verfügung stehen, hängen von der {{site.data.keyword.Bluemix_notm}}-Region ab, in der Sie angemeldet sind. Wählen Sie die Region aus, die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten.  Dieser Wert ist für Standardcluster erforderlich und für kostenlose Cluster optional.
 
 <p>Überprüfen Sie die [verfügbaren Zonen](cs_regions.html#zones).</p>
 
@@ -897,7 +896,7 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
 **Beispielausgabe**:
 
   ```
-  Name:        mein_cluster
+  Name:        my_cluster
   ID:          abc1234567
   State:       normal
   Trust ready: false
@@ -905,11 +904,11 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
   Zone:        dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
   Master Location: Dallas
-  Ingress subdomain: mein_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    mein_cluster
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -968,8 +967,7 @@ Möglicherweise müssen Sie Ihre YAML-Dateien für zukünftige Bereitstellungen 
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>Die Kubernetes-Version des Clusters. Wenn Sie keine Version angeben, wird der Kubernetes-Master auf die API-Standardversion aktualisiert. Führen Sie den Befehl [ibmcloud ks kube-versions](#cs_kube_versions) aus, um die verfügbaren Versionen anzuzeigen.
-Dieser Wert ist optional.</dd>
+   <dd>Die Kubernetes-Version des Clusters. Wenn Sie keine Version angeben, wird der Kubernetes-Master auf die API-Standardversion aktualisiert. Führen Sie den Befehl [ibmcloud ks kube-versions](#cs_kube_versions) aus, um die verfügbaren Versionen anzuzeigen. Dieser Wert ist optional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Geben Sie diese Option an, um die Aktualisierung des Masters ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
@@ -1015,7 +1013,7 @@ Anzeigen einer Liste der Cluster in Ihrer Organisation.
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-Anzeigen einer Liste der Kubernetes-Versionen, die in {{site.data.keyword.containershort_notm}} unterstützt werden. Aktualisieren Sie den [Cluster-Master](#cs_cluster_update) und die [Workerknoten](cs_cli_reference.html#cs_worker_update) auf die Standardversion für die aktuellen und stabilen Leistungsmerkmale.
+Anzeigen einer Liste der Kubernetes-Versionen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden. Aktualisieren Sie den [Cluster-Master](#cs_cluster_update) und die [Workerknoten](cs_cli_reference.html#cs_worker_update) auf die Standardversion für die aktuellen und stabilen Leistungsmerkmale.
 
 **Befehlsoptionen**:
 
@@ -1151,7 +1149,7 @@ Nachdem Sie [den Container-Scanner installiert haben](/docs/services/va/va_index
 
 <dt><code>--extended</code></dt>
 <dd><p>Erweitern Sie die Befehlsausgabe, um mehr Korrekturinformationen für anfällige Pakete anzuzeigen. Dieser Wert ist optional.</p>
-<p>Standardmäßig enthalten die Scanergebnisse die ID, den Richtliniestatus, die betroffenen Pakete und einen Lösungsvorschlag. Mit dem Flag `--extended` werden Informationen wie die Zusammenfassung, der Sicherheitshinweis für Anbieter und der Link zum offiziellen Hinweis hinzugefügt.</p></dd>
+<p>Standardmäßig enthalten die Scanergebnisse die ID, den Richtlinienstatus, die betroffenen Pakete und einen Lösungsvorschlag. Mit dem Flag `--extended` werden Informationen wie die Zusammenfassung, der Sicherheitshinweis für Anbieter und der Link zum offiziellen Hinweis hinzugefügt.</p></dd>
 
 <dt><code>--vulnerabilities</code></dt>
 <dd>Beschränken Sie die Befehlsausgabe so, dass nur Paketschwachstellen angezeigt werden. Dieser Wert ist optional. Sie können dieses Flag nicht verwenden, wenn Sie das Flag `--configuration-issues` verwenden.</dd>
@@ -1217,7 +1215,7 @@ Sie können vorhandene portierbare öffentliche oder private Teilnetze von Ihrem
 **Hinweis:**
 * Portierbare öffentliche IP-Adressen werden monatlich berechnet. Wenn Sie nach der Bereitstellung Ihres Clusters portierbare öffentliche IP-Adressen entfernen, müssen Sie trotzdem die monatliche Gebühr bezahlen, auch wenn sie sie nur über einen kurzen Zeitraum genutzt haben.
 * Wenn Sie ein Teilnetz in einem Cluster verfügbar machen, werden IP-Adressen dieses Teilnetzes zum Zweck von Clusternetzen verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
 * Um zwischen Teilnetzen in demselben VLAN weiterzuleiten, müssen Sie [VLAN-Spanning aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Befehlsoptionen</strong>:
@@ -1245,11 +1243,11 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 ### ibmcloud ks cluster-subnet-create CLUSTER GRÖSSE VLAN-ID [-s]
 {: #cs_cluster_subnet_create}
 
-Erstellung eines Teilnetzes in einem Konto der IBM Cloud-Infrastruktur (SoftLayer) und Zurverfügungstellung dieses Teilnetzes für einen angegebenen Cluster in {{site.data.keyword.containershort_notm}}.
+Erstellung eines Teilnetzes in einem Konto der IBM Cloud-Infrastruktur (SoftLayer) und Zurverfügungstellung dieses Teilnetzes für einen angegebenen Cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Hinweis:**
 * Wenn Sie ein Teilnetz in einem Cluster verfügbar machen, werden IP-Adressen dieses Teilnetzes zum Zweck von Clusternetzen verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
 * Um zwischen Teilnetzen in demselben VLAN weiterzuleiten, müssen Sie [VLAN-Spanning aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Befehlsoptionen</strong>:
@@ -1280,13 +1278,13 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 ### ibmcloud ks cluster-user-subnet-add CLUSTER TEILNETZ-CIDR PRIVATES_VLAN
 {: #cs_cluster_user_subnet_add}
 
-Verwenden Sie das eigene private Teilnetz in Ihren {{site.data.keyword.containershort_notm}}-Clustern.
+Verwenden Sie das eigene private Teilnetz in Ihren {{site.data.keyword.containerlong_notm}}-Clustern.
 
 Dieses private Teilnetz wird nicht von der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Deshalb müssen Sie das gesamte Routing für ein- und ausgehenden Netzverkehr für das Teilnetz konfigurieren. Wenn Sie ein Teilnetz der IBM Cloud-Infrastruktur (SoftLayer) hinzufügen möchten, dann verwenden Sie den [Befehl `ibmcloud ks cluster-subnet-add`](#cs_cluster_subnet_add).
 
 **Hinweis**:
 * Wenn Sie ein privates Benutzerteilnetz zu einem Cluster hinzufügen, werden die IP-Adressen dieses Teilnetzes für private Lastausgleichsfunktionen im Cluster verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
 * Um zwischen Teilnetzen in demselben VLAN weiterzuleiten, müssen Sie [VLAN-Spanning aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Befehlsoptionen</strong>:
@@ -1661,15 +1659,15 @@ Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (ALBs) in ei
 ### ibmcloud ks credentials-set --infrastructure-api-key API-SCHLÜSSEL --infrastructure-username BENUTZERNAME [-s]
 {: #cs_credentials_set}
 
-Festlegen von Berechtigungsnachweisen für das Konto der IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.containershort_notm}}-Konto.
+Festlegen von Berechtigungsnachweisen für das Konto der IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.containerlong_notm}}-Konto.
 
 Wenn Sie über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto verfügen, haben Sie standardmäßig Zugriff auf das Portfolio der IBM Cloud-Infrastruktur. Es kann jedoch sein, dass Sie ein anderes IBM Cloud-Infrastrukturkonto (SoftLayer) verwenden möchten, das Sie bereits für die Infrastrukturbestellung verwenden. Sie können dieses Infrastrukturkonto über den folgenden Befehl mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verknüpfen.
 
 Falls die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) manuell definiert wurden, werden diese Berechtigungsnachweise für die Bestellung von Infrastruktur verwendet, selbst wenn bereits ein [IAM-API-Schlüssel](#cs_api_key_info) für das Konto vorhanden ist. Wenn der Benutzer, dessen Berechtigungsnachweise gespeichert wurden, nicht über die erforderlichen Berechtigungen zum Bestellen von Infrastruktur verfügt, können infrastrukturbezogene Aktionen, wie z. B. das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen.
 
-Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.containershort_notm}}-Konto festlegen. Jedes {{site.data.keyword.containershort_notm}}-Konto ist nur mit einem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verbunden.
+Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.containerlong_notm}}-Konto festlegen. Jedes {{site.data.keyword.containerlong_notm}}-Konto ist nur mit einem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verbunden.
 
-**Wichtig:** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, dessen Berechtigungsnachweise verwendet werden, über die erforderlichen Berechtigungen für [{{site.data.keyword.containershort_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt](cs_users.html#users).
+**Wichtig:** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, dessen Berechtigungsnachweise verwendet werden, über die erforderlichen Berechtigungen für [{{site.data.keyword.containerlong_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt](cs_users.html#users).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -1722,7 +1720,7 @@ Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.co
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-Entfernen der Kontoberechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) aus Ihrem {{site.data.keyword.containershort_notm}}-Konto.
+Entfernen Sie die Kontoberechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) aus Ihrem {{site.data.keyword.containerlong_notm}}-Konto.
 
 Nachdem Sie die Berechtigungsnachweise entfernt haben, wird der [IAM-API-Schlüssel](#cs_api_key_info) verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen.
 
@@ -1747,7 +1745,7 @@ Nachdem Sie die Berechtigungsnachweise entfernt haben, wird der [IAM-API-Schlüs
 Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Maschinentypen variieren je nach Zone. Jeder Maschinentyp enthält die Menge an virtueller CPU, an Hauptspeicher und an Plattenspeicher für jeden Workerknoten im Cluster. Das sekundäre Speicherplattenverzeichnis, in dem alle Containerdaten gespeichert sind, wird standardmäßig mit der LUKS-Verschlüsselung verschlüsselt. Wenn die Option `disable-disk-encrypt` während der Clustererstellung eingeschlossen wird, werden die Docker-Daten des Hosts nicht verschlüsselt. [Erfahren Sie mehr über die Verschlüsselung](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-Sie können Ihre Workerknoten als virtuelle Maschine auf gemeinsam genutzter oder dedizierter Hardware bereitstellen oder als physische Maschine auf Bare-Metal-Systemen. [Erfahren Sie mehr über die Optionen für Maschinentypen](cs_clusters.html#shared_dedicated_node).
+Sie können Ihre Workerknoten als virtuelle Maschine auf gemeinsam genutzter oder dedizierter Hardware bereitstellen oder als physische Maschine auf Bare-Metal-Systemen. [Erfahren Sie mehr über die Optionen für Maschinentypen](cs_clusters_planning.html#shared_dedicated_node).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -2202,7 +2200,7 @@ Zeigen Sie eine Liste der verfügbaren Zonen an, in dem Sie einen Cluster erstel
 ### ibmcloud ks region
 {: #cs_region}
 
-Suchen Sie nach der {{site.data.keyword.containershort_notm}}-Region, in der Sie sich aktuell befinden. Sie erstellen und verwalten Cluster, die für diese Region spezifisch sind. Verwenden Sie den Befehl `ibmcloud ks region-set`, um die Region zu ändern.
+Suchen Sie nach der {{site.data.keyword.containerlong_notm}}-Region, in der Sie sich aktuell befinden. Sie erstellen und verwalten Cluster, die für diese Region spezifisch sind. Verwenden Sie den Befehl `ibmcloud ks region-set`, um die Region zu ändern.
 
 **Beispiel**:
 
@@ -2220,7 +2218,7 @@ Region: us-south
 ### ibmcloud ks region-set [REGION]
 {: #cs_region-set}
 
-Legen Sie die Region für {{site.data.keyword.containershort_notm}} fest. Sie erstellen und verwalten Cluster, die für die Region spezifisch sind, und benötigen zum Zwecke der Hochverfügbarkeit unter Umständen Cluster in mehreren Regionen.
+Legen Sie die Region für {{site.data.keyword.containerlong_notm}} fest. Sie erstellen und verwalten Cluster, die für die Region spezifisch sind, und benötigen zum Zwecke der Hochverfügbarkeit unter Umständen Cluster in mehreren Regionen.
 
 Sie können sich beispielsweise bei {{site.data.keyword.Bluemix_notm}} in der Region 'Vereinigte Staaten (Süden)' anmelden und einen Cluster erstellen. Anschließend können Sie `ibmcloud ks region-set eu-central` verwenden, um die Region 'Zentraleuropa' als Ziel festzulegen, und einen weiteren Cluster erstellen. Schließlich können Sie `ibmcloud ks region-set us-south` verwenden, um zur Region 'Vereinigte Staaten (Süden)' zurückzukehren und Ihren Cluster in dieser Region zu verwalten.
 
@@ -2261,7 +2259,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-Listet die verfügbaren Regionen auf. Der `Region Name` ist der {{site.data.keyword.containershort_notm}}-Name und der `Region Alias` ist der allgemeine {{site.data.keyword.Bluemix_notm}}-Name für die Region.
+Listet die verfügbaren Regionen auf. Der `Region Name` ist der {{site.data.keyword.containerlong_notm}}-Name und der `Region Alias` ist der allgemeine {{site.data.keyword.Bluemix_notm}}-Name für die Region.
 
 **Beispiel**:
 
@@ -2328,8 +2326,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>zone</em></code></td>
-<td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der die Workerknoten bereitgestellt werden sollen. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.
-</td>
+<td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der die Workerknoten bereitgestellt werden sollen. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.</td>
 </tr>
 <tr>
 <td><code><em>maschinentyp</em></code></td>
@@ -2341,7 +2338,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>öffentliches_vlan</code></td>
-<td>Ersetzen Sie <code>&lt;öffentliches_vlan&gt;</code> durch die ID des öffentlichen VLANs, das Sie für Ihre Workerknoten verwenden möchten. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus und suchen Sie nach VLAN-Routern, die mit <code>fcr</code> (Front-End-Router) beginnen, um verfügbare VLANs aufzulisten.<br><strong>Hinweis</strong>: {[privates_vlan_vyatta]}</td>
+<td>Ersetzen Sie <code>&lt;öffentliches_vlan&gt;</code> durch die ID des öffentlichen VLANs, das Sie für Ihre Workerknoten verwenden möchten. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus und suchen Sie nach VLAN-Routern, die mit <code>fcr</code> (Front-End-Router) beginnen, um verfügbare VLANs aufzulisten. <br><strong>Hinweis</strong>: {[privates_vlan_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2729,7 +2726,7 @@ Anzeigen einer Liste der Workerknoten und ihres jeweiligen Status in einem Clust
 ### ibmcloud ks worker-pool-create --name POOLNAME --cluster CLUSTER --machine-type MASCHINENTYP--size-per-zone WORKER_PRO_ZONE [--hardware ISOLATION][--labels LABELS] [--disable-disk-encrypt]
 {: #cs_worker_pool_create}
 
-Sie können einen Worker-Pool in Ihrem Cluster erstellen. Wenn Sie einen Worker-Pool hinzufügen, wird ihm standardmäßig keine Zone zugeordnet. Sie geben die gewünschte Anzahl von Workern für jede Zone und die Maschinentypen für die Worker an. Der Worker-Pool erhält die Standardversionen von Kubernetes. Um das Erstellen der Worker zu beenden, [fügen Sie eimne Zone oder Zonen](#cs_zone_add) zu Ihrem Pool hinzu.
+Sie können einen Worker-Pool in Ihrem Cluster erstellen. Wenn Sie einen Worker-Pool hinzufügen, wird ihm standardmäßig keine Zone zugeordnet. Sie geben die gewünschte Anzahl von Workern für jede Zone und die Maschinentypen für die Worker an. Der Worker-Pool erhält die Standardversionen von Kubernetes. Um das Erstellen der Worker zu beenden, [fügen Sie eine Zone oder Zonen](#cs_zone_add) zu Ihrem Pool hinzu.
 
 <strong>Befehlsoptionen</strong>:
 <dl>
@@ -2796,7 +2793,7 @@ Zeigen Sie die Details eines Worker-Pools an.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 
@@ -2929,7 +2926,7 @@ Zeigen Sie die Worker-Pools in einem Cluster an.
     <p>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>Verwenden Sie diese Option, um zu verhindern, dass ein öffentliches VLAN erstellt wird. Dieser Wert ist nur erforderlich, wenn Sie das Flag `--private-vlan` angeben und das Flag `--public-vlan` nicht einschließen. **Hinweis**: Wenn Sie mit einem ausschließlich privaten Cluster (private-only) arbeiten möchten, müssen sie eine Gateway-Appliance für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie im Abschnitt [Nur private externe Netze für private VLAN-Konfiguration planen](cs_network_planning.html#private_vlan).</dd>
+    <dd>Verwenden Sie diese Option, um zu verhindern, dass ein öffentliches VLAN erstellt wird. Dieser Wert ist nur erforderlich, wenn Sie das Flag `--private-vlan` angeben und das Flag `--public-vlan` nicht einschließen.  **Hinweis**: Wenn Sie mit einem ausschließlich privaten Cluster (private-only) arbeiten möchten, müssen sie eine Gateway-Appliance für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie im Abschnitt [Nur private externe Netze für private VLAN-Konfiguration planen](cs_network_planning.html#private_vlan).</dd>
 
   <dt><code>--json</code></dt>
     <dd>Druckt die Befehlsausgabe im JSON-Format. Dieser Wert ist optional.</dd>

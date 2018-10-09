@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -33,6 +33,9 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
 
 
 1. Siga as [instruções](cs_integrations.html#helm) para instalar o cliente Helm em sua máquina local, instalar o servidor Helm (tiller) em seu cluster e incluir o repositório de gráfico Helm do {{site.data.keyword.Bluemix_notm}} no cluster no qual você deseja usar o plug-in do {{site.data.keyword.Bluemix_notm}} Block Storage.
+
+   **Importante:** se você usar o Helm versão 2.9 ou superior, certifique-se de ter instalado o tiller com uma [conta do serviço](cs_integrations.html#helm).
+
 2. Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
    ```
    helm repo update
@@ -41,7 +44,7 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
 
 3. Instale o {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. Quando você instala o plug-in, classes de armazenamento de bloco predefinidas são incluídas no cluster.
    ```
-   Helm install ibm/ibmcloud-block-storage-plugin
+   helm install ibm/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -85,7 +88,7 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
    ibmcloud-block-storage-plugin  0s
 
    NOTES:
-   Thank you for installing: ibmcloud-block-storage-plugin.   A liberação é denominado: careca-olm
+   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: bald-olm
    ```
    {: screen}
 
@@ -139,8 +142,8 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
    helm repo update
    ```
    {: pre}
-   
-2. Opcional: faça download do gráfico Helm mais recente em sua máquina local. Em seguida, descompacte o arquivo ZIP do pacote e revise o arquivo `release.md` para localizar as informações mais recentes sobre a liberação. 
+
+2. Opcional: faça download do gráfico Helm mais recente em sua máquina local. Em seguida, descompacte o arquivo ZIP do pacote e revise o arquivo `release.md` para localizar as informações mais recentes sobre a liberação.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
@@ -154,7 +157,7 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
 
    Saída de exemplo:
    ```
-   myhelmchart 	1 	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
    ```
    {: screen}
 
@@ -178,10 +181,10 @@ Se você não deseja provisionar e usar o {{site.data.keyword.Bluemix_notm}} Blo
 **Nota:** a remoção do plug-in não remove os PVCs, PVs ou dados existentes. Quando você remove o plug-in, todos os pods e conjuntos de daemon relacionados são removidos do cluster. Não é possível provisionar novo armazenamento de bloco para seu cluster ou usar PVCs e PVs de armazenamento de bloco existentes depois de remover o plug-in.
 
 Antes de iniciar:
-- [ Direcione sua CLI ](cs_cli_install.html#cs_cli_configure)  para o cluster. 
+- [Direcione sua CLI](cs_cli_install.html#cs_cli_configure)  para o cluster.
 - Certifique-se de que você não tenha nenhum PVC ou PV em seu cluster que use armazenamento de bloco.
 
-Para remover o plug-in: 
+Para remover o plug-in:
 
 1. Localize o nome do gráfico do Helm de armazenamento de bloco que você instalou em seu cluster.
    ```
@@ -191,7 +194,7 @@ Para remover o plug-in:
 
    Saída de exemplo:
    ```
-   myhelmchart 	1 	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
    ```
    {: screen}
 
@@ -227,7 +230,7 @@ O {{site.data.keyword.containerlong}} fornece classes de armazenamento predefini
 
 Cada classe de armazenamento especifica o tipo de armazenamento de bloco que você provisiona, incluindo o tamanho disponível, o IOPS, o sistema de arquivos e a política de retenção.  
 
-**Importante:** escolha a sua configuração de armazenamento com cuidado para ter capacidade suficiente para armazenar os seus dados. Após você provisionar um tipo específico de armazenamento usando uma classe de armazenamento, não será possível mudar o tamanho, o tipo, o IOPS ou a política de retenção para o dispositivo de armazenamento. Se você precisar de mais armazenamento ou armazenamento com uma configuração diferente, deverá [criar uma nova instância de armazenamento e copiar os dados](cs_storage_basics.html#update_storageclass) da instância de armazenamento antiga para a sua nova. 
+**Importante:** escolha a sua configuração de armazenamento com cuidado para ter capacidade suficiente para armazenar os seus dados. Após você provisionar um tipo específico de armazenamento usando uma classe de armazenamento, não será possível mudar o tamanho, o tipo, o IOPS ou a política de retenção para o dispositivo de armazenamento. Se você precisar de mais armazenamento ou armazenamento com uma configuração diferente, deverá [criar uma nova instância de armazenamento e copiar os dados](cs_storage_basics.html#update_storageclass) da instância de armazenamento antiga para a sua nova.
 
 1. Liste as classes de armazenamento disponíveis no  {{site.data.keyword.containerlong}}.
     ```
@@ -235,7 +238,7 @@ Cada classe de armazenamento especifica o tipo de armazenamento de bloco que voc
     ```
     {: pre}
 
-    Saída de exemplo: 
+    Saída de exemplo:
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
@@ -250,20 +253,20 @@ Cada classe de armazenamento especifica o tipo de armazenamento de bloco que voc
     ```
     {: screen}
 
-2. Revise a configuração de uma classe de armazenamento. 
+2. Revise a configuração de uma classe de armazenamento.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
-   
+
    Para obter mais informações sobre cada classe de armazenamento, consulte a [referência de classe de armazenamento](#storageclass_reference). Se você não localizar o que está procurando, considere criar a sua própria classe de armazenamento customizada. Para iniciar, efetue check-out das [amostras de classe de armazenamento customizada](#custom_storageclass).
    {: tip}
-   
-3. Escolha o tipo de armazenamento de bloco que você deseja provisionar. 
+
+3. Escolha o tipo de armazenamento de bloco que você deseja provisionar.
    - **Classes de armazenamento bronze, prata e ouro:** essas classes de armazenamento provisionam [Armazenamento do Endurance ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage). O armazenamento do Endurance permite que você escolha o tamanho do armazenamento em gigabytes em camadas do IOPS predefinidas.
-   - **Classe de armazenamento customizada:** essa classe de armazenamento provisiona [Armazenamento de desempenho ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/performance-storage). Com o armazenamento de desempenho, você tem mais controle sobre o tamanho do armazenamento e do IOPS. 
-     
-4. Escolha o tamanho e o IOPS para seu armazenamento de bloco. O tamanho e o número de IOPS definem o número total de IOPS (operações de entrada/saída por segundo) que serve como um indicador de quão rápido o seu armazenamento é. Quanto mais total de IOPS o seu armazenamento tiver, mais rápido ele processará operações de leitura e gravação. 
+   - **Classe de armazenamento customizada:** essa classe de armazenamento provisiona [Armazenamento de desempenho ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/performance-storage). Com o armazenamento de desempenho, você tem mais controle sobre o tamanho do armazenamento e do IOPS.
+
+4. Escolha o tamanho e o IOPS para seu armazenamento de bloco. O tamanho e o número de IOPS definem o número total de IOPS (operações de entrada/saída por segundo) que serve como um indicador de quão rápido o seu armazenamento é. Quanto mais total de IOPS o seu armazenamento tiver, mais rápido ele processará operações de leitura e gravação.
    - **Classes de armazenamento bronze, prata e ouro:** essas classes de armazenamento vêm com um número fixo de IOPS por gigabyte e são provisionadas em discos rígidos SSD. O número total de IOPS depende do tamanho do armazenamento que você escolher. É possível selecionar qualquer número inteiro de gigabyte dentro do intervalo de tamanho permitido, como 20 Gi, 256 Gi ou 11854 Gi. Para determinar o número total de IOPS, deve-se multiplicar o IOPS com o tamanho selecionado. Por exemplo, se você selecionar um tamanho de armazenamento de bloco de 1000Gi na classe de armazenamento prata que é fornecida com 4 IOPS por GB, seu armazenamento terá um total de 4.000 IOPS.  
      <table>
          <caption>Tabela de intervalos de tamanho de classe de armazenamento e IOPS por gigabyte</caption>
@@ -289,7 +292,7 @@ Cada classe de armazenamento especifica o tipo de armazenamento de bloco que voc
          <td>20 - 4.000 Gi</td>
          </tr>
          </tbody></table>
-   - **Classe de armazenamento customizada:** quando você escolhe essa classe de armazenamento, tem mais controle sobre o tamanho e o IOPS desejados. Para o tamanho, é possível selecionar qualquer número inteiro de gigabyte dentro do intervalo de tamanho permitido. O tamanho que você escolher determinará o intervalo de IOPS que estará disponível para você. É possível escolher um IOPS que é um múltiplo de 100 que esteja no intervalo especificado. O IOPS que você escolhe é estático e não escala com o tamanho do armazenamento. Por exemplo, se você escolher 40 Gi com 100 IOPS, o seu IOPS total permanecerá 100. </br></br>A razão de IOPS para gigabyte também determina o tipo de disco rígido que é provisionado para você. Por exemplo, se você tiver 500 Gi a 100 IOPS, a sua razão de IOPS para gigabyte será 0,2. O armazenamento com uma razão menor ou igual a 0,3 é provisionado em discos rígidos SATA. Se a sua razão for maior que 0,3, o armazenamento será provisionado em discos rígidos SSD. 
+   - **Classe de armazenamento customizada:** quando você escolhe essa classe de armazenamento, tem mais controle sobre o tamanho e o IOPS desejados. Para o tamanho, é possível selecionar qualquer número inteiro de gigabyte dentro do intervalo de tamanho permitido. O tamanho que você escolher determinará o intervalo de IOPS que estará disponível para você. É possível escolher um IOPS que é um múltiplo de 100 que esteja no intervalo especificado. O IOPS que você escolhe é estático e não escala com o tamanho do armazenamento. Por exemplo, se você escolher 40 Gi com 100 IOPS, o seu IOPS total permanecerá 100. </br></br>A razão de IOPS para gigabyte também determina o tipo de disco rígido que é provisionado para você. Por exemplo, se você tiver 500 Gi a 100 IOPS, a sua razão de IOPS para gigabyte será 0,2. O armazenamento com uma razão menor ou igual a 0,3 é provisionado em discos rígidos SATA. Se a sua razão for maior que 0,3, o armazenamento será provisionado em discos rígidos SSD.
      <table>
          <caption>Tabela de intervalos de tamanho de classe de armazenamento customizado e IOPS</caption>
          <thead>
@@ -343,11 +346,11 @@ Cada classe de armazenamento especifica o tipo de armazenamento de bloco que voc
          </tr>
          </tbody></table>
 
-5. Escolha se você deseja manter os seus dados após o cluster ou a solicitação de volume persistente (PVC) ser excluída. 
-   - Se você desejar manter seus dados, escolha uma classe de armazenamento `retain`. Quando você exclui o PVC, somente ele é excluído. O PV, o dispositivo de armazenamento físico em sua conta de infraestrutura do IBM Cloud (SoftLayer) e os seus dados ainda existem. Para recuperar o armazenamento e usá-lo em seu cluster novamente, deve-se remover o PV e seguir as etapas para [usar armazenamento de bloco existente](#existing_block). 
+5. Escolha se você deseja manter os seus dados após o cluster ou a solicitação de volume persistente (PVC) ser excluída.
+   - Se você desejar manter seus dados, escolha uma classe de armazenamento `retain`. Quando você exclui o PVC, somente ele é excluído. O PV, o dispositivo de armazenamento físico em sua conta de infraestrutura do IBM Cloud (SoftLayer) e os seus dados ainda existem. Para recuperar o armazenamento e usá-lo em seu cluster novamente, deve-se remover o PV e seguir as etapas para [usar armazenamento de bloco existente](#existing_block).
    - Se desejar que o PV, os dados e seu dispositivo de armazenamento de bloco físico sejam excluídos quando você excluir o PVC, escolha uma classe de armazenamento sem `retain`.
-   
-6. Escolha se você deseja ser faturado por hora ou mensalmente. Verifique a [precificação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/block-storage/pricing) para obter mais informações. Por padrão, todos os dispositivos de armazenamento de bloco são provisionados com um tipo de faturamento por hora. 
+
+6. Escolha se você deseja ser faturado por hora ou mensalmente. Verifique a [precificação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/block-storage/pricing) para obter mais informações. Por padrão, todos os dispositivos de armazenamento de bloco são provisionados com um tipo de faturamento por hora.
 
 <br />
 
@@ -364,14 +367,14 @@ Crie um persistent volume claim (PVC) para [provisionar dinamicamente](cs_storag
 Antes de iniciar:
 - Se você tiver um firewall, [permita o acesso ao egresso](cs_firewall.html#pvc) para os intervalos de IP de infraestrutura do IBM Cloud (SoftLayer) das zonas nas quais os seus clusters estiverem para que seja possível criar PVCs.
 - Instale o  [ plug-in de armazenamento de bloco do {{site.data.keyword.Bluemix_notm}}  ](#install_block).
-- [Decida sobre uma classe de armazenamento predefinida](#predefined_storageclass) ou crie uma [classe de armazenamento customizada](#custom_storageclass). 
+- [Decida sobre uma classe de armazenamento predefinida](#predefined_storageclass) ou crie uma [classe de armazenamento customizada](#custom_storageclass).
 
 Para incluir o armazenamento de bloco:
 
 1.  Crie um arquivo de configuração para definir a sua solicitação de volume persistente (PVC) e salve a configuração como um arquivo `.yaml`.
 
     -  **Exemplo para classes de armazenamento bronze, prata, ouro**:
-o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `"ibmc-block-silver"`, faturada `"hourly"`, com um tamanho de gigabyte de `24Gi`. 
+       O arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `"ibmc-block-silver"`, faturada `"hourly"`, com um tamanho de gigabyte de `24Gi`.
 
        ```
        apiVersion: v1
@@ -382,7 +385,7 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
            volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
-	   region: us-south
+	         region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -394,7 +397,7 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
         {: codeblock}
 
     -  **Exemplo para usar a classe de armazenamento customizada**:
-o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `ibmc-block-retain-custom`, faturada `"hourly"`, com um tamanho de gigabyte de `45Gi` e IOPS de `"300"`. 
+       O arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `ibmc-block-retain-custom`, faturada `"hourly"`, com um tamanho de gigabyte de `45Gi` e IOPS de `"300"`.
 
        ```
        apiVersion: v1
@@ -405,7 +408,7 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
            volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
-	   region: us-south
+           region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -436,11 +439,11 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
           <td>Especifique a frequência para a qual sua conta de armazenamento é calculada, como "mensal" ou "por hora". O padrão é "horária".</td>
         </tr>
 	<tr>
-	<td><code> metadata/region </code></td>
+	<td><code> metadata/labels/region </code></td>
         <td>Especifique a região na qual você deseja provisionar seu armazenamento de bloco. Se você especifica a região, deve-se também especificar uma zona. Se você não especifica uma região ou a região especificada não é localizada, o armazenamento é criado na mesma região que o seu cluster. </br><strong>Nota:</strong> essa opção é suportada somente com o plug-in do IBM Cloud Block Storage versão 1.0.1 ou superior. Para versões de plug-in mais antigas, se você tiver um cluster de múltiplas zonas, a zona na qual o seu armazenamento for provisionado será selecionada em uma base round-robin para balancear as solicitações de volume uniformemente em todas as zonas. Se você desejar especificar a zona para o seu armazenamento, crie uma [classe de armazenamento customizada](#multizone_yaml) primeiro. Em seguida, crie um PVC com a sua classe de armazenamento customizada.</td>
 	</tr>
 	<tr>
-	<td><code> metadata/zone </code></td>
+	<td><code> metadata/labels/zone </code></td>
 	<td>Especifique a zona na qual você deseja provisionar seu armazenamento de bloco. Se você especifica a zona, deve-se também especificar uma região. Se você não especifica uma zona ou a zona especificada não é localizada em um cluster de múltiplas zonas, a zona é selecionada em uma base round-robin. </br><strong>Nota:</strong> essa opção é suportada somente com o plug-in do IBM Cloud Block Storage versão 1.0.1 ou superior. Para versões de plug-in mais antigas, se você tiver um cluster de múltiplas zonas, a zona na qual o seu armazenamento for provisionado será selecionada em uma base round-robin para balancear as solicitações de volume uniformemente em todas as zonas. Se você desejar especificar a zona para o seu armazenamento, crie uma [classe de armazenamento customizada](#multizone_yaml) primeiro. Em seguida, crie um PVC com a sua classe de armazenamento customizada.</td>
 	</tr>
         <tr>
@@ -473,9 +476,9 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
     Saída de exemplo:
 
     ```
-    Name: mypvc
-    Namespace: default
-    StorageClass: ""
+    Name:		mypvc
+    Namespace:	default
+    StorageClass:	""
     Status:		Bound
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
@@ -484,9 +487,9 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
-      3m 3m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal Provisioning External provisioner is provisioning volume  for claim "default/my-persistent-volume-claim"
-       3m 1m	 10 {persistentvolume-controller } Normal ExternalProvisioning cannot find provisioner "ibm.io/ibmc-block", expecting that  a volume for the claim is provisioned either manually or via external software
-       1m 1m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal ProvisioningSucceeded	Successfully provisioned volume  pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+      3m		3m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
+      3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-block", expecting that a volume for the claim is provisioned either manually or via external software
+      1m		1m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
 
     ```
     {: screen}
@@ -550,7 +553,7 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner.</td>
+    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner. Os dados que são gravados no caminho de montagem são armazenados sob o diretório-raiz em sua instância de armazenamento de arquivo físico. Para criar diretórios em sua instância de armazenamento de arquivo físico, deve-se criar subdiretórios em seu caminho de montagem.</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -593,7 +596,7 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
         ReadOnly: false
      ```
      {: screen}
-     
+
 <br />
 
 
@@ -638,26 +641,26 @@ Para que seja possível iniciar a montagem de seu armazenamento existente em um 
     ```
     {: screen}
 
-7.  Anote o `id`, `ip_addr`, `capacity_gb`, `datacenter` e `lunId` do dispositivo de armazenamento de bloco que você deseja montar em seu cluster. **Nota:** para montar o armazenamento existente em um cluster, deve-se ter um nó do trabalhador na mesma zona que seu armazenamento. Para verificar a zona de seu nó do trabalhador, execute `ibmcloud ks workers <cluster_name_or_ID>`. 
+7.  Anote o `id`, `ip_addr`, `capacity_gb`, `datacenter` e `lunId` do dispositivo de armazenamento de bloco que você deseja montar em seu cluster. **Nota:** para montar o armazenamento existente em um cluster, deve-se ter um nó do trabalhador na mesma zona que seu armazenamento. Para verificar a zona de seu nó do trabalhador, execute `ibmcloud ks workers <cluster_name_or_ID>`.
 
 ### Etapa 2: Criando um volume persistente (PV) e uma solicitação de volume persistente correspondente (PVC)
 
-1.  Opcional: se você tiver o armazenamento provisionado com uma classe de armazenamento `retain`, quando remover o PVC, o PV e o dispositivo de armazenamento físico não serão removidos. Para reutilizar o armazenamento em seu cluster, deve-se remover o PV primeiro. 
-    1. Liste PVs existentes. 
+1.  Opcional: se você tiver o armazenamento provisionado com uma classe de armazenamento `retain`, quando remover o PVC, o PV e o dispositivo de armazenamento físico não serão removidos. Para reutilizar o armazenamento em seu cluster, deve-se remover o PV primeiro.
+    1. Liste PVs existentes.
        ```
        kubectl get pv
        ```
        {: pre}
-     
-       Procure o PV que pertence ao seu armazenamento persistente. O PV está em um estado `released`. 
-     
-    2. Remova o PV. 
+
+       Procure o PV que pertence ao seu armazenamento persistente. O PV está em um estado `released`.
+
+    2. Remova o PV.
        ```
        kubectl delete pv <pv_name>
        ```
        {: pre}
-   
-    3. Verifique se o PV foi removido. 
+
+    3. Verifique se o PV foi removido.
        ```
        kubectl get pv
        ```
@@ -671,8 +674,8 @@ Para que seja possível iniciar a montagem de seu armazenamento existente em um 
     metadata:
       name: mypv
       labels:
-         failure-domain.beta.kubernetes.io/region=<region>
-         failure-domain.beta.kubernetes.io/zone=<zone>
+         failure-domain.beta.kubernetes.io/region: <region>
+         failure-domain.beta.kubernetes.io/zone: <zone>
     spec:
       capacity:
         storage: "<storage_size>"
@@ -795,7 +798,7 @@ Você criou com êxito um PV e ligou-o a um PVC. Os usuários do cluster agora p
 
 
 
-## Backup e restauração de dados 
+## Backup e restauração de dados
 {: #backup_restore}
 
 O armazenamento de bloco é provisionado no mesmo local que os nós do trabalhador em seu cluster. O armazenamento é hospedado em servidores em cluster pela IBM para fornecer disponibilidade no caso de um servidor ficar inativo. No entanto, o armazenamento de bloco não será submetido a backup automaticamente e poderá estar inacessível se o local inteiro falhar. Para proteger seus dados contra perda ou danos, será possível configurar backups periódicos que poderão ser usados para restaurar seus dados quando necessário.
@@ -804,14 +807,15 @@ Revise as opções de backup e restauração a seguir para seu armazenamento de 
 
 <dl>
   <dt>Configurar capturas instantâneas periódicas</dt>
-  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de bloco](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de bloco. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. É possível restaurar dados de uma captura instantânea se um usuário acidentalmente remove dados importantes do volume. </br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O tamanho e o IOPS são mostrados na seção <strong>Labels</strong> de sua saída da CLI. Para localizar o ID do volume, revise a anotação <code>ibm.io/network-storage-id</code> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Snapshot Capacity (GB)</strong> em sua saída da CLI muda de 0 para o tamanho que você pediu. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de bloco](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de bloco. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. É possível restaurar dados de uma captura instantânea se um usuário acidentalmente remove dados importantes do volume. <strong>Nota</strong>: se você tiver uma conta Dedicada, deverá <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">abrir um chamado de suporte</a>.</br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O tamanho e o IOPS são mostrados na seção <strong>Labels</strong> de sua saída da CLI. Para localizar o ID do volume, revise a anotação <code>ibm.io/network-storage-id</code> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre">
+<code>slcli block volume-detail &lt;volume_id&gt;</code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Snapshot Capacity (GB)</strong> em sua saída da CLI muda de 0 para o tamanho que você pediu. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>Replicar capturas instantâneas para outra zona</dt>
- <dd><p>Para proteger seus dados de uma falha de zona, é possível [replicar capturas instantâneas](/docs/infrastructure/BlockStorage/replication.html#replicating-data) para uma instância de armazenamento de bloco que está configurada em outra zona. Os dados podem ser replicados do armazenamento primário para o armazenamento de backup somente. Não é possível montar uma instância de armazenamento de bloco replicada em um cluster. Quando seu armazenamento primário falha, é possível configurar manualmente o armazenamento de backup replicado para ser o primário. Em seguida, é possível montá-lo para seu cluster. Depois que o armazenamento primário é restaurado, é possível restaurar os dados do armazenamento de backup.</p></dd>
+ <dd><p>Para proteger seus dados de uma falha de zona, é possível [replicar capturas instantâneas](/docs/infrastructure/BlockStorage/replication.html#replicating-data) para uma instância de armazenamento de bloco que está configurada em outra zona. Os dados podem ser replicados do armazenamento primário para o armazenamento de backup somente. Não é possível montar uma instância de armazenamento de bloco replicada em um cluster. Quando seu armazenamento primário falha, é possível configurar manualmente o armazenamento de backup replicado para ser o primário. Em seguida, é possível montá-lo para seu cluster. Depois que o armazenamento primário é restaurado, é possível restaurar os dados do armazenamento de backup. <strong>Nota</strong>: se você tiver uma conta Dedicada, não será possível replicar capturas instantâneas para outra zona.</p></dd>
  <dt>Armazenamento duplicado</dt>
- <dd><p>É possível [duplicar sua instância de armazenamento de bloco](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) na mesma zona que a instância de armazenamento original. Uma duplicata tem os mesmos dados que a instância de armazenamento original no momento em que é criada. Diferentemente de réplicas, use a duplicata como uma instância de armazenamento independente da original. Para duplicar, primeiramente configure capturas instantâneas para o volume.</p></dd>
+ <dd><p>É possível [duplicar sua instância de armazenamento de bloco](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) na mesma zona que a instância de armazenamento original. Uma duplicata tem os mesmos dados que a instância de armazenamento original no momento em que é criada. Diferentemente de réplicas, use a duplicata como uma instância de armazenamento independente da original. Para duplicar, primeiramente configure capturas instantâneas para o volume. <strong>Nota</strong>: se você tiver uma conta Dedicada, deverá <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">abrir um chamado de suporte</a>.</p></dd>
   <dt>Faça backup dos dados para {{site.data.keyword.cos_full}}</dt>
-  <dd><p>É possível usar a [**imagem ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) para ativar um backup e restaurar o pod em seu cluster. Esse pod contém um script para executar um backup único ou periódico para qualquer persistent volume claim (PVC) em seu cluster. Os dados são armazenados em sua instância do {{site.data.keyword.cos_full} que você configurou em uma zona.</p><strong>Nota:</strong> o armazenamento de bloco é montado com um modo de acesso RWO. Esse acesso permite que somente um pod seja montado no armazenamento de bloco de cada vez. Para fazer backup de seus dados, deve-se desmontar o pod de app do armazenamento, montá-lo em seu pod de backup, fazer backup dos dados e remontar o armazenamento em seu pod de app. </br></br>
-Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app de uma falha de zona, configure uma segunda instância do {{site.data.keyword.cos_full}} e replique dados entre as zonas. Se você precisa restaurar dados de sua instância do {{site.data.keyword.cos_full}}, use o script de restauração que é fornecido com a imagem.</dd>
+  <dd><p>É possível usar a [**imagem ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) para ativar um backup e restaurar o pod em seu cluster. Esse pod contém um script para executar um backup único ou periódico para qualquer persistent volume claim (PVC) em seu cluster. Os dados são armazenados em sua instância do {{site.data.keyword.cos_full}} que você configurou em uma zona.</p><strong>Nota:</strong> o armazenamento de bloco é montado com um modo de acesso RWO. Esse acesso permite que somente um pod seja montado no armazenamento de bloco de cada vez. Para fazer backup de seus dados, deve-se desmontar o pod de app do armazenamento, montá-lo em seu pod de backup, fazer backup dos dados e remontar o armazenamento em seu pod de app. </br></br>
+Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app de uma falha de zona, configure uma segunda instância do {{site.data.keyword.cos_short}} e replique dados entre as zonas. Se você precisa restaurar dados de sua instância do {{site.data.keyword.cos_short}}, use o script de restauração que é fornecido com a imagem.</dd>
 <dt>Copiar dados de e para pods e contêineres</dt>
 <dd><p>É possível usar o [comando `kubectl cp` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) para copiar arquivos e diretórios de pods ou contêineres específicos ou para eles em seu cluster.</p>
 <p>Antes de iniciar, [direcione sua CLI do Kubernetes](cs_cli_install.html#cs_cli_configure) para o cluster que deseja usar. Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
@@ -819,7 +823,7 @@ Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app
 <ul>
 <li>Copiar dados de sua máquina local para um pod no cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>Copiar dados de um pod em seu cluster para a máquina local: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>Copiar dados de um pod em seu cluster para um contêiner específico em outro pod: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>Copiar dados de sua máquina local para um contêiner específico que é executado em um pod em seu cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -1017,7 +1021,7 @@ Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app
 
 O arquivo `.yaml` a seguir customiza uma classe de armazenamento que é baseada na classe de armazenamento sem retenção `ibm-block-silver`: o `type` é `"Endurance"`, o `iopsPerGB` é `4`, o `sizeRange` é `"[20-12000]Gi"` e o `reclaimPolicy` é configurado para `"Delete"`. A zona é especificada como `dal12`. É possível revisar as informações anteriores sobre as classes de armazenamento `ibmc` para ajudar a escolher valores aceitáveis para esses </br>
 
-Para usar uma classe de armazenamento diferente como sua base, consulte a [referência de classe de armazenamento](#storageclass_reference). 
+Para usar uma classe de armazenamento diferente como sua base, consulte a [referência de classe de armazenamento](#storageclass_reference).
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -1039,7 +1043,7 @@ reclaimPolicy: "Delete"
 ### Montando o armazenamento de bloco com um sistema de arquivos `XFS`
 {: #xfs}
 
-O exemplo a seguir cria uma classe de armazenamento que é denominada `ibmc-block-custom-xfs` e que provisiona o armazenamento de bloco de desempenho com um sistema de arquivos `XFS`. 
+O exemplo a seguir cria uma classe de armazenamento que é denominada `ibmc-block-custom-xfs` e que provisiona o armazenamento de bloco de desempenho com um sistema de arquivos `XFS`.
 
 ```
 apiVersion: storage.k8s.io/v1

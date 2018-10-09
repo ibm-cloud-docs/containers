@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Consulte esses comandos para criar e gerenciar clusters no {{site.data.keyword.B
 ## ibmcloud ks commands
 {: #cs_commands}
 
-**Dica:** para ver a versão do plug-in do {{site.data.keyword.containershort_notm}}, execute o comando a seguir.
+**Dica:** para ver a versão do plug-in do {{site.data.keyword.containerlong_notm}}, execute o comando a seguir.
 
 ```
 ibmcloud plugin list
@@ -290,7 +290,7 @@ ibmcloud plugin list
   </tbody>
 </table>
 
-<table summary="Tabela de comandos do conjunto de trabalhadores">
+<table summary="Worker pool commands table">
 <caption>Comandos do conjunto do trabalhador</caption>
 <col width="25%">
 <col width="25%">
@@ -324,7 +324,7 @@ ibmcloud plugin list
 ### ibmcloud ks api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
-Destine o terminal de API para o {{site.data.keyword.containershort_notm}}. Se você não especificar um terminal, será possível visualizar informações sobre o terminal atual que está destinado.
+Destine o terminal da API para o {{site.data.keyword.containerlong_notm}}. Se você não especificar um terminal, será possível visualizar informações sobre o terminal atual que está destinado.
 
 Alternando regiões? Use o comando `ibmcloud ks region-set` [](#cs_region-set) como alternativa.
 {: tip}
@@ -333,7 +333,7 @@ Alternando regiões? Use o comando `ibmcloud ks region-set` [](#cs_region-set) c
 
    <dl>
    <dt><code><em>ENDPOINT</em></code></dt>
-   <dd>O {{site.data.keyword.containershort_notm}} API endpoint. Observe que esse terminal é diferente dos terminais do {{site.data.keyword.Bluemix_notm}}. Este valor é necessário para configurar o terminal de API. Os valores aceitos são:<ul>
+   <dd>O terminal da API do  {{site.data.keyword.containerlong_notm}} . Observe que esse terminal é diferente dos terminais do {{site.data.keyword.Bluemix_notm}}. Este valor é necessário para configurar o terminal de API. Os valores aceitos são:<ul>
    <li>Terminal global: https://containers.bluemix.net</li>
    <li>Terminal Norte AP: https://ap-north.containers.bluemix.net</li>
    <li>Terminal Sul AP: https://ap-south.containers.bluemix.net</li>
@@ -375,13 +375,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info CLUSTER  [ -- json ][-s]
 {: #cs_api_key_info}
 
-Visualize o nome e o endereço de e-mail para o proprietário da chave API do IAM em uma região do {{site.data.keyword.containershort_notm}}.
+Visualize o nome e o endereço de e-mail para o proprietário da chave API do IAM em uma região do {{site.data.keyword.containerlong_notm}}.
 
-A chave API do Identity and Access Management (IAM) é configurada automaticamente para uma região quando a primeira ação que requer a política de acesso de administrador do {{site.data.keyword.containershort_notm}} é executada. Por exemplo, um dos seus usuários administradores cria o primeiro cluster na região `us-south`. Ao fazer isso, a chave API do IAM para esse usuário é armazenada na conta para essa região. A chave API é usada para pedir recursos na infraestrutura do IBM Cloud (SoftLayer), como nós do trabalhador novo ou VLANs.
+A chave API do Identity and Access Management (IAM) é configurada automaticamente para uma região quando a primeira ação que requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} é executada. Por exemplo, um dos seus usuários administradores cria o primeiro cluster na região `us-south`. Ao fazer isso, a chave API do IAM para esse usuário é armazenada na conta para essa região. A chave API é usada para pedir recursos na infraestrutura do IBM Cloud (SoftLayer), como nós do trabalhador novo ou VLANs.
 
-Quando um usuário diferente executa uma ação nessa região que requer interação com o portfólio da infraestrutura do IBM Cloud (SoftLayer), como a criação de um novo cluster ou o recarregamento de um nó do trabalhador, a chave API armazenada é usada para determinar se existem permissões suficientes para executar essa ação. Para certificar-se de que as ações relacionadas à infraestrutura em seu cluster possam ser executadas com sucesso, designe a seus usuários administradores do {{site.data.keyword.containershort_notm}} a política de acesso de infraestrutura do **Superusuário**. Para obter mais informações, veja [Gerenciando o acesso de usuário](cs_users.html#infra_access).
+Quando um usuário diferente executa uma ação nessa região que requer interação com o portfólio da infraestrutura do IBM Cloud (SoftLayer), como a criação de um novo cluster ou o recarregamento de um nó do trabalhador, a chave API armazenada é usada para determinar se existem permissões suficientes para executar essa ação. Para certificar-se de que as ações relacionadas à infraestrutura em seu cluster possam ser executadas com sucesso, designe a seus usuários administradores do {{site.data.keyword.containerlong_notm}} a política de acesso de infraestrutura **Superusuário**. Para obter mais informações, veja [Gerenciando o acesso de usuário](cs_users.html#infra_access).
 
-Se você descobrir que é necessário atualizar a chave API que está armazenada para uma região, será possível fazer isso executando o comando [ibmcloud ks api-key-reset](#cs_api_key_reset). Esse comando requer a política de acesso de administrador do {{site.data.keyword.containershort_notm}} e armazena a chave API do usuário que executa esse comando na conta.
+Se você descobrir que é necessário atualizar a chave API que está armazenada para uma região, será possível fazer isso executando o comando [ibmcloud ks api-key-reset](#cs_api_key_reset). Esse comando requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} e armazena a chave API do usuário que executa esse comando na conta.
 
 **Dica:** a chave API que é retornada nesse comando poderá não ser usada se as credenciais de infraestrutura do IBM Cloud (SoftLayer) foram configuradas manualmente usando o comando [ibmcloud ks credentials-set](#cs_credentials_set).
 
@@ -410,11 +410,11 @@ Se você descobrir que é necessário atualizar a chave API que está armazenada
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-Substitua a chave API do IAM atual em uma região do {{site.data.keyword.containershort_notm}}.
+Substitua a chave API do IAM atual em uma região do {{site.data.keyword.containerlong_notm}}.
 
-Esse comando requer a política de acesso de administrador do {{site.data.keyword.containershort_notm}} e armazena a chave API do usuário que executa esse comando na conta. A chave API do IAM é necessária para pedir infraestrutura do portfólio da infraestrutura do IBM Cloud (SoftLayer). Quando armazenada, a chave API é usada para cada ação em uma região que requer permissões de infraestrutura independentemente do usuário que executa esse comando. Para obter mais informações sobre como as chaves API do IAM funcionam, consulte o comando [`ibmcloud ks api-key-info`](#cs_api_key_info).
+Esse comando requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} e armazena a chave API do usuário que executa esse comando na conta. A chave API do IAM é necessária para pedir infraestrutura do portfólio da infraestrutura do IBM Cloud (SoftLayer). Quando armazenada, a chave API é usada para cada ação em uma região que requer permissões de infraestrutura independentemente do usuário que executa esse comando. Para obter mais informações sobre como as chaves API do IAM funcionam, consulte o comando [`ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Importante** antes de usar esse comando, certifique-se de que o usuário que executa esse comando tenha as [permissões necessárias do {{site.data.keyword.containershort_notm}} e da infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#users).
+**Importante:** antes de usar esse comando, certifique-se de que o usuário que executa esse comando tenha as permissões necessárias do [{{site.data.keyword.containerlong_notm}} e de infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#users).
 
 <strong>Opções de comando</strong>:
 
@@ -567,13 +567,13 @@ Visualizar uma lista de comandos e parâmetros suportados.
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-Inicialize o plug-in do {{site.data.keyword.containershort_notm}} ou especifique a região em que você deseja criar ou acessar clusters do Kubernetes.
+Inicialize o plug-in do {{site.data.keyword.containerlong_notm}} ou especifique a região em que você deseja criar ou acessar clusters do Kubernetes.
 
 <strong>Opções de comando</strong>:
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>O terminal de API do {{site.data.keyword.containershort_notm}} a ser usado.  Esse valor é opcional. [Visualize os valores de terminal de API disponíveis.](cs_regions.html#container_regions)</dd>
+   <dd>O  {{site.data.keyword.containerlong_notm}}  terminal de API a ser usado.  Esse valor é opcional. [Visualize os valores de terminal de API disponíveis.](cs_regions.html#container_regions)</dd>
 
    <dt><code>-- inseguro</code></dt>
    <dd>Permitir uma conexão HTTP insegura.</dd>
@@ -898,7 +898,7 @@ Visualizar informações sobre um cluster em sua organização.
 **Saída de exemplo**:
 
   ```
-  Name: my_cluster ID: abc1234567 State: normal Trust ready: false Created: 2018-01-01T17:19:28+0000 Zone: dal10 Master URL: https://169.xx.xxx.xxx:xxxxx Master Location: Dallas Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud Ingress secret: my_cluster Workers: 3 Worker Zones: dal10 Version: 1.10.5 Owner Email: name@example.com Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Nome: my_cluster ID: abc1234567 Estado: normal Confiança pronta: false Criado: 2018-01-01T17:19:28+0000 Zona: dal10 URL do mestre: https://169.xx.xxx.xxx:xxxxx Local do mestre: Dallas Subdomínio do Ingress: my_cluster.us-south.containers.appdomain.cloud Segredo do Ingress: my_cluster Trabalhadores: 3 Zonas do trabalhador: dal10 Versão: 1.11.2 E-mail do proprietário: name@example.com Painel de monitoramento: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
   Addons
   Name                   Enabled
@@ -998,7 +998,7 @@ Visualizar uma lista de clusters em sua organização.
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-Visualize uma lista de versões do Kubernetes suportadas em {{site.data.keyword.containershort_notm}}. Atualize o seu [cluster mestre](#cs_cluster_update) e [nós do trabalhador](cs_cli_reference.html#cs_worker_update) para a versão padrão para os recursos mais recentes, estáveis.
+Visualize uma lista de versões do Kubernetes suportadas no {{site.data.keyword.containerlong_notm}}. Atualize o seu [cluster mestre](#cs_cluster_update) e [nós do trabalhador](cs_cli_reference.html#cs_worker_update) para a versão padrão para os recursos mais recentes, estáveis.
 
 **Opções de comando**:
 
@@ -1130,7 +1130,7 @@ Após você [instalar o scanner de contêiner](/docs/services/va/va_index.html#v
 <dl>
 <dt><code> CONTAINER_ID </code></dt>
 <dd><p>O ID do contêiner. Este valor é obrigatório.</p>
-<p>Para localizar o ID de seu contêiner:<ol><li>[Direcione a CLI do Kubernetes para o seu cluster](cs_cli_install.html#cs_cli_configure).</li><li>Liste os seus pods executando `kubectl get pods`.</li><li>Localize o campo **ID do contêiner** na saída do `kubectl describe pod <pod_name>`. Por exemplo, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remova o prefixo `docker://` do ID antes de usar o ID do contêiner para o comando `ibmcloud ks va`. Por exemplo, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>Para localizar o ID de seu contêiner:<ol><li>[Direcione a CLI do Kubernetes para o seu cluster](cs_cli_install.html#cs_cli_configure).</li><li>Liste os seus pods executando `kubectl get pods`.</li><li>Localize o campo **ID do contêiner** na saída do comando `kubectl describe pod <pod_name>`. Por exemplo, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remova o prefixo `docker://` do ID antes de usar o ID do contêiner para o comando `ibmcloud ks va`. Por exemplo, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Estenda a saída de comando para mostrar mais informações de correção para pacotes vulneráveis. Esse valor é opcional.</p>
@@ -1201,7 +1201,7 @@ Registre um webhook.
 * Os endereços IP públicos móveis são cobrados mensalmente. Se você remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda terá que pagar o encargo mensal, mesmo se os tiver usado apenas por um curto período de tempo.
 * Quando você torna uma sub-rede disponível para um cluster, os endereços IP
 dessa sub-rede são usados para propósitos de rede do cluster. Para evitar conflitos de endereço IP, certifique-se de usar uma sub-rede com somente um cluster. Não use uma sub-rede para múltiplos clusters ou para outros
-propósitos fora do {{site.data.keyword.containershort_notm}} ao mesmo
+propósitos fora do {{site.data.keyword.containerlong_notm}} ao mesmo
 tempo.
 * Para rotear entre sub-redes na mesma VLAN, deve-se [ativar a ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
@@ -1230,12 +1230,12 @@ tempo.
 ### ibmcloud ks cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
-Crie uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) e torne-a disponível para um cluster especificado em {{site.data.keyword.containershort_notm}}.
+Crie uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) e torne-a disponível para um cluster especificado em {{site.data.keyword.containerlong_notm}}.
 
 **Nota:**
 * Quando você torna uma sub-rede disponível para um cluster, os endereços IP
 dessa sub-rede são usados para propósitos de rede do cluster. Para evitar conflitos de endereço IP, certifique-se de usar uma sub-rede com somente um cluster. Não use uma sub-rede para múltiplos clusters ou para outros
-propósitos fora do {{site.data.keyword.containershort_notm}} ao mesmo
+propósitos fora do {{site.data.keyword.containerlong_notm}} ao mesmo
 tempo.
 * Para rotear entre sub-redes na mesma VLAN, deve-se [ativar a ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
@@ -1249,7 +1249,7 @@ tempo.
    <dd>O número de endereços IP de sub-rede. Este valor é necessário. Os valores possíveis são 8, 16, 32 ou 64.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>A VLAN na qual criar a sub-rede. Este valor é necessário. Para listar as VLANS disponíveis, use o `ibmcloud ks vlans <zone>` [](#cs_vlans). A sub-rede é provisionada na mesma zona em que a VLAN está.</dd>
+   <dd>A VLAN na qual criar a sub-rede. Este valor é necessário. Para listar as VLANS disponíveis, use o comando `ibmcloud ks vlans <zone>` [](#cs_vlans). A sub-rede é provisionada na mesma zona em que a VLAN está.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Não mostrar a mensagem do dia ou os lembretes de atualização. Esse valor é opcional.</dd>
@@ -1267,13 +1267,13 @@ tempo.
 ### ibmcloud ks cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-Traga a sua própria sub-rede privada para os seus clusters do {{site.data.keyword.containershort_notm}}.
+Traga a sua própria sub-rede privada para os seus clusters do {{site.data.keyword.containerlong_notm}}.
 
 Essa sub-rede privada não é uma fornecida pela infraestrutura do IBM Cloud (SoftLayer). Como tal, deve-se configurar qualquer roteamento de tráfego de rede de entrada e saída para a sub-rede. Para incluir uma sub-rede de infraestrutura do IBM Cloud (SoftLayer), use o comando `ibmcloud ks cluster-subnet-add` [](#cs_cluster_subnet_add).
 
 **Nota**:
 * Quando você inclui uma sub-rede privada de usuário em um cluster, os endereços IP dessa sub-rede são usados para Load Balancers privados no cluster. Para evitar conflitos de endereço IP, certifique-se de usar uma sub-rede com somente um cluster. Não use uma sub-rede para múltiplos clusters ou para outros
-propósitos fora do {{site.data.keyword.containershort_notm}} ao mesmo
+propósitos fora do {{site.data.keyword.containerlong_notm}} ao mesmo
 tempo.
 * Para rotear entre sub-redes na mesma VLAN, deve-se [ativar a ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
@@ -1649,15 +1649,15 @@ Visualize o status de todos os ALBs em um cluster. Se nenhum ID de ALB for retor
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-Configure as credenciais de conta de infraestrutura do IBM Cloud (SoftLayer) para a sua conta do {{site.data.keyword.containershort_notm}}.
+Configure as credenciais de conta de infraestrutura do IBM Cloud (SoftLayer) para a sua conta do {{site.data.keyword.containerlong_notm}}.
 
 Se você tiver uma {{site.data.keyword.Bluemix_notm}}conta pré-paga, terá acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer) por padrão. No entanto, talvez você queira usar uma conta de infraestrutura do IBM Cloud (SoftLayer) diferente da que você já tem para pedir a infraestrutura. É possível vincular essa conta de infraestrutura à sua conta do {{site.data.keyword.Bluemix_notm}} conta usando este comando.
 
 Se as credenciais de infraestrutura do IBM Cloud (SoftLayer) são configuradas manualmente, essas credenciais são usadas para pedir infraestrutura, mesmo se uma [chave API do IAM](#cs_api_key_info) já existe para a conta. Se o usuário cujas credenciais estão armazenadas não tiver as permissões necessárias para pedir a infraestrutura, as ações relacionadas à infraestrutura, como a criação de um cluster ou o recarregamento de um nó do trabalhador, poderão falhar.
 
-Não é possível configurar múltiplas credenciais para uma conta do {{site.data.keyword.containershort_notm}}. Cada conta do {{site.data.keyword.containershort_notm}} é vinculada a um portfólio de infraestrutura do IBM Cloud (SoftLayer) apenas.
+Não é possível configurar múltiplas credenciais para uma conta do {{site.data.keyword.containerlong_notm}}. Cada conta do {{site.data.keyword.containerlong_notm}} é vinculada a um portfólio de infraestrutura do IBM Cloud (SoftLayer) apenas.
 
-**Importante:** antes de usar esse comando, certifique-se de que o usuário cujas credenciais são usadas tem as [permissões necessárias do {{site.data.keyword.containershort_notm}} e da infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#users).
+**Importante:** antes de usar esse comando, certifique-se de que o usuário cujas credenciais são usadas tenha as permissões necessárias do [{{site.data.keyword.containerlong_notm}} e de infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#users).
 
 <strong>Opções de comando</strong>:
 
@@ -1710,7 +1710,7 @@ Não é possível configurar múltiplas credenciais para uma conta do {{site.dat
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-Remova as credenciais da conta de infraestrutura do IBM Cloud (SoftLayer) de sua conta do {{site.data.keyword.containershort_notm}}.
+Remova as credenciais da conta de infraestrutura do IBM Cloud (SoftLayer) de sua conta do {{site.data.keyword.containerlong_notm}}.
 
 Depois de remover as credenciais, a [chave API do IAM](#cs_api_key_info) é usada para pedir recursos em infraestrutura do IBM Cloud (SoftLayer).
 
@@ -1736,7 +1736,7 @@ Visualizar uma lista de tipos de máquina disponíveis para seus nós do trabalh
 quantia de CPU, memória e espaço em disco virtual para cada nó do trabalhador no cluster. Por padrão, o diretório do disco de armazenamento secundário em que todos os dados do contêiner são armazenados é criptografado com a criptografia LUKS. Se a opção `disable-disk-encrypt` for incluída durante a criação do cluster, os dados do Docker do host não estarão criptografados. [Saiba mais sobre a criptografia](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-É possível provisionar o nó do trabalhador como uma máquina virtual em hardware compartilhado ou dedicado ou como uma máquina física em bare metal. [Saiba mais sobre as suas opções de tipo de máquina](cs_clusters.html#shared_dedicated_node).
+É possível provisionar o nó do trabalhador como uma máquina virtual em hardware compartilhado ou dedicado ou como uma máquina física em bare metal. [Saiba mais sobre suas opções de tipo de máquina](cs_clusters_planning.html#shared_dedicated_node).
 
 <strong>Opções de comando</strong>:
 
@@ -1900,7 +1900,7 @@ Visualize todas as configurações de encaminhamento de log para um cluster ou f
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh CLUSTER [ -s ]
+### ibmcloud ks logging-config-refresh CLUSTER [-s]
 {: #cs_logging_refresh}
 
 Atualize a configuração de criação de log para o cluster. Isso atualiza o token de criação de log para qualquer configuração de criação de log que está encaminhando para o nível de espaço em seu cluster.
@@ -2192,7 +2192,7 @@ Visualize uma lista de zonas disponíveis nas quais você criará um cluster. As
 ### ibmcloud ks region
 {: #cs_region}
 
-Localize a região do {{site.data.keyword.containershort_notm}} na qual você está atualmente. É possível criar e gerenciar clusters específicos para a região. Use o comando `ibmcloud ks region-set` para mudar regiões.
+Localize a região do {{site.data.keyword.containerlong_notm}} na qual você está atualmente. É possível criar e gerenciar clusters específicos para a região. Use o comando `ibmcloud ks region-set` para mudar regiões.
 
 **Exemplo**:
 
@@ -2210,7 +2210,7 @@ Região: us-south
 ### ibmcloud ks region-set [ REGION ]
 {: #cs_region-set}
 
-Configure a região para o {{site.data.keyword.containershort_notm}}. É possível criar e gerenciar clusters específicos para a região e você pode querer clusters em múltiplas regiões para alta disponibilidade.
+Configure a região para o  {{site.data.keyword.containerlong_notm}}. É possível criar e gerenciar clusters específicos para a região e você pode querer clusters em múltiplas regiões para alta disponibilidade.
 
 Por exemplo, é possível efetuar login no {{site.data.keyword.Bluemix_notm}} na região sul dos EUA e criar um cluster. Em seguida, é possível usar `ibmcloud ks region-set eu-central` para destinar a região central da UE e criar outro cluster. Finalmente, é possível usar `ibmcloud ks region-set us-south` para retornar para o Sul dos EUA para gerenciar o seu cluster nessa região.
 
@@ -2251,7 +2251,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-Lista as regiões disponíveis. O `Region Name` é o nome do {{site.data.keyword.containershort_notm}} e o `Region Alias` é o nome geral do {{site.data.keyword.Bluemix_notm}} para a região.
+Lista as regiões disponíveis. O `Region Name` é o nome do {{site.data.keyword.containerlong_notm}} e o `Region Alias` é o nome geral do {{site.data.keyword.Bluemix_notm}} para a região.
 
 **Exemplo**:
 
@@ -2453,7 +2453,7 @@ Antes de reinicializar o nó do trabalhador, certifique-se de que os pods estão
     ```
     {: pre}
     Esse processo pode levar alguns minutos.
- 5. Reinicialize o nó do trabalhador. Use o ID do trabalhador que é retornado do `ibmcloud ks workers <cluster_name_or_ID>`.
+ 5. Reinicialize o nó do trabalhador. Use o ID do trabalhador que é retornado do comando `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
     ibmcloud ks worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
     ```
@@ -2528,7 +2528,7 @@ Antes de recarregar seu nó do trabalhador, certifique-se de que os pods estejam
     ```
     {: pre}
     Esse processo pode levar alguns minutos.
- 5. Recarregue o nó do trabalhador. Use o ID do trabalhador que é retornado do `ibmcloud ks workers <cluster_name_or_ID>`.
+ 5. Recarregue o nó do trabalhador. Use o ID do trabalhador que é retornado do comando `ibmcloud ks workers <cluster_name_or_ID>`.
     ```
     ibmcloud ks worker-reload <cluster_name_or_ID> <worker_name_or_ID>
     ```
@@ -2595,7 +2595,7 @@ Antes de remover o seu nó do trabalhador, certifique-se de que os pods estejam 
    ```
    {: pre}
    Esse processo pode levar alguns minutos.
-5. Remova o nó do trabalhador. Use o ID do trabalhador que é retornado do `ibmcloud ks workers <cluster_name_or_ID>`.
+5. Remova o nó do trabalhador. Use o ID do trabalhador que é retornado do comando `ibmcloud ks workers <cluster_name_or_ID>`.
    ```
    ibmcloud ks worker-rm <cluster_name_or_ID> <worker_name_or_ID>
    ```
@@ -2772,7 +2772,7 @@ Visualize os detalhes de um conjunto de trabalhadores.
 **Saída de exemplo**:
 
   ```
-  Name: pool ID: a1a11b2222222bb3c33c3d4d44d555e5-f6f777g State: active Hardware: shared Zones: dal10,dal12 Workers per zone: 3 Machine type: b2c.4x16.encrypted Labels: - Version: 1.10.5_1512
+  Nome: pool ID: a1a11b2222222bb3c33c3d4d44d555e5-f6f777g Estado: active Hardware: shared Zonas: dal10,dal12 Trabalhadores por zona: 3 Tipo de máquina: b2c.4x16.encrypted Rótulos: - Versão: 1.10.7_1512
   ```
   {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # 相关链接
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **常规**
@@ -44,8 +44,7 @@ lastupdated: "2018-08-06"
 **教程、演示和课程**
 
 - [现代化和扩展现有 Java Web 应用程序 (JPetStore) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [developerWorks 容器编排之旅 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [developerWorks 课程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [{{site.data.keyword.containerlong_notm}} Cognitive Class 学习路径 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [如何在 IKS 上构建 Web 应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [使用 Cloud Internet Service (CIS) 保护多区域集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [分析日志并监视应用程序的运行状况 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 公开一个端口，并使用第 4 层负载均衡器的可移植 IP 地址来访问容器化应用程序。
 {:shortdesc}
 
+
+
 ## 负载均衡器组件和体系结构
 {: #planning}
 
-创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动供应可移植公共子网和可移植专用子网。
+创建标准集群时，{{site.data.keyword.containerlong_notm}} 会自动供应可移植公共子网和可移植专用子网。
 
 * 可移植公共子网提供了 1 个由缺省[公共 Ingress ALB](cs_ingress.html) 使用的可移植公共 IP 地址。剩余 4 个可移植公共 IP 地址可用于通过创建公共 LoadBalancer 服务向因特网公开单个应用程序。
 * 可移植专用子网提供了 1 个由缺省[专用 Ingress ALB](cs_ingress.html#private_ingress) 使用的可移植专用 IP 地址。剩余 4 个可移植专用 IP 地址可用于通过创建专用 LoadBalancer 服务向专用网络公开单个应用程序。
@@ -37,7 +39,7 @@ LoadBalancer 服务还可使应用程序在服务的 NodePort 上可用。对于
 
 LoadBalancer 服务充当应用程序入局请求的外部入口点。要从因特网访问 LoadBalancer 服务，请使用负载均衡器的公共 IP 地址以及分配的端口，格式为 `<IP_address>:<port>`. 下图显示负载均衡器如何将通信从因特网定向到应用程序。
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用负载均衡器公开 {{site.data.keyword.containershort_notm}} 中的应用程序" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用负载均衡器在 {{site.data.keyword.containerlong_notm}} 中公开应用程序" style="width:550px; border-style: none"/>
 
 1. 发送到应用程序的请求使用负载均衡器的公共 IP 地址和工作程序节点上分配的端口。
 
@@ -71,9 +73,9 @@ LoadBalancer 服务充当应用程序入局请求的外部入口点。要从因�
 
 开始之前：
   * 具有可移植专用 IP 地址的 LoadBalancer 服务仍会在每个工作程序节点上打开一个公共 NodePort。要添加网络策略以防止公共流量，请参阅[阻止入局流量](cs_network_policy.html#block_ingress)。
-  * 在每个专区中，至少有一个公用 VLAN 必须具有可用于 Ingress 和 LoadBalancer 服务的可移植子网。要添加专用 Ingress 和 LoadBalancer 服务，必须至少指定一个具有可用可移植子网的专用 VLAN。要添加子网，请参阅[为集群配置子网](cs_subnets.html)。
+  * 必须在每个专区中部署一个负载均衡器，并且每个负载均衡器都在该专区中分配有自己的 IP 地址。要创建公共负载均衡器，在每个专区中至少有一个公用 VLAN 必须具有可用的可移植子网。要添加专用负载均衡器服务，在每个专区中至少有一个专用 VLAN 必须具有可用的可移植子网。要添加子网，请参阅[为集群配置子网](cs_subnets.html)。
   * 如果将网络流量限制为流至边缘工作程序节点，请确保每个专区中必须至少启用 2 个[边缘工作程序节点](cs_edge.html#edge)。如果边缘工作程序节点在一些专区中已启用，而在其他专区中未启用，那么负载均衡器不会均匀进行部署。在一些专区中，负载均衡器将部署到边缘节点上，但在其他专区中，将部署到常规工作程序节点上。
-  * 要支持不同专区中的工作程序之间通过专用网络进行通信，必须启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+  * 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
 
 
 要在多专区集群中设置 LoadBalancer 服务，请执行以下操作：
@@ -350,7 +352,7 @@ Name:                   myloadbalancer
 
 
 * 您具有有污点的边缘节点，所以只有 LoadBalancer 服务 pod 才能部署到这些节点。不允许应用程序 pod 部署到这些节点。
-* 集群连接到多个公共或专用 VLAN，但应用程序 pod 可能会部署到仅连接到一个 VLAN 的工作程序节点。LoadBalancer 服务 pod 可能不会部署到这些工作程序节点，因为负载均衡器 IP 地址连接到的 VLAN 与工作程序节点连接到的不同。
+* 集群连接到多个公用或专用 VLAN，但应用程序 pod 可能会部署到仅连接到一个 VLAN 的工作程序节点。LoadBalancer 服务 pod 可能不会部署到这些工作程序节点，因为负载均衡器 IP 地址连接到的 VLAN 与工作程序节点连接到的不同。
 
 要强制将应用程序部署到 LoadBalancer 服务 pod 也可以部署到的特定工作程序节点，必须将亲缘关系规则和容忍度添加到应用程序部署。
 
@@ -390,10 +392,10 @@ spec:
 
 **affinity** 和 **tolerations** 部分都将 `dedicated` 作为 `key`，将 `edge` 作为 `value`。
 
-### 为多个公共或专用 VLAN 添加亲缘关系规则
+### 为多个公用或专用 VLAN 添加亲缘关系规则
 {: #edge_nodes_multiple_vlans}
 
-集群连接到多个公共或专用 VLAN 时，应用程序 pod 可能会部署到仅连接到一个 VLAN 的工作程序节点。如果负载均衡器 IP 地址连接到的 VLAN 与这些工作程序节点连接到的不同，那么 LoadBalancer 服务 pod 不会部署到这些工作程序节点。
+集群连接到多个公用或专用 VLAN 时，应用程序 pod 可能会部署到仅连接到一个 VLAN 的工作程序节点。如果负载均衡器 IP 地址连接到的 VLAN 与这些工作程序节点连接到的不同，那么 LoadBalancer 服务 pod 不会部署到这些工作程序节点。
 {:shortdesc}
 
 启用源 IP 后，通过将亲缘关系规则添加到应用程序部署，将应用程序 pod 安排在负载均衡器的 IP 地址所在的 VLAN 中的工作程序节点上。
@@ -506,4 +508,5 @@ apiVersion: extensions/v1beta1
         ```
         {: screen}
 
-    4. 在输出的 **Labels** 部分中，验证公共或专用 VLAN 是否为在先前步骤中指定的 VLAN。
+    4. 在输出的 **Labels** 部分中，验证公用或专用 VLAN 是否为在先前步骤中指定的 VLAN。
+

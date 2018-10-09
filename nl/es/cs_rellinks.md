@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # Enlaces relacionados
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **General**
@@ -43,9 +43,8 @@ lastupdated: "2018-08-06"
 
 **Guías de aprendizaje, demos y cursos**
 
-- [Modernización y ampliación de una aplicación web Java existente (JPetStore)![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [Trayectos de orquestación de contenedores developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [Cursos de developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [Modernización y ampliación de una app web Java existente (JPetStore)![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://github.com/IBM-Cloud/jpetstore-kubernetes)
+- [Vía de acceso de aprendizaje de la clase cognitiva de {{site.data.keyword.containerlong_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [Cómo crear una app web en IKS ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Protección de clústeres de varias regiones con Cloud Internet Service (CIS) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Análisis de registros y supervisión del estado de las apps ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
@@ -63,7 +62,7 @@ lastupdated: "2018-08-06"
 
 **Tecnologías integradas de código abierto**
 
-- [![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/)
+- [Documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/)
 - [Documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para la gestión de paquetes de Kubernetes
 - Plataforma [Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/) para conectarse, gestionar y proteger microservicios.

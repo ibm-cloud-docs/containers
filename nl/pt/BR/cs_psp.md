@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-06"
 {: #psp}
 
 Com as [ políticas de segurança de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), é possível
-configurar políticas para autorizar quem pode criar e atualizar os pods no {{site.data.keyword.containerlong}}. Os clusters que executam os fix packs do Kubernetes versões 1.10.3, 1.9.8 e 1.8.13 ou mais recentes suportam o controlador de admissão `PodSecurityPolicy` que cumpre essas políticas.
+configurar políticas para autorizar quem pode criar e atualizar os pods no {{site.data.keyword.containerlong}}. Os clusters que executam os fix packs do Kubernetes versões 1.10.3, 1.9.8 e 1.8.13 ou mais recentes suportam o controlador de admissão `PodSecurityPolicy` que cumpre essas políticas. 
 {: shortdesc}
 
 Usando uma versão mais antiga do Kubernetes? [ Atualize seu cluster ](cs_cluster_update.html)  hoje.
@@ -30,11 +30,11 @@ Como um administrador de cluster, você deseja controlar o que acontece em seu c
 
 Com o controlador de admissão `PodSecurityPolicy`, nenhum pod pode ser criado até que você [autorize as políticas](#customize_psp). A configuração de políticas de segurança de pod pode ter efeitos colaterais indesejados, portanto, certifique-se de testar uma implementação depois de mudar a política. Para implementar apps, as contas de usuário e de serviço devem ser todas autorizadas pelas políticas de segurança de pod que são necessárias para implementar pods. Por exemplo, se você instala apps usando [Helm](cs_integrations.html#helm_links), o componente Helm tiller cria os pods e, portanto, deve-se ter a autorização de política de segurança de pod correta.
 
-Tentando controlar quais usuários têm acesso ao {{site.data.keyword.containershort_notm}}? Consulte [Designando acesso ao cluster](cs_users.html#users) para configurar permissões de IAM e de infraestrutura.
+Tentando controlar quais usuários têm acesso ao {{site.data.keyword.containerlong_notm}}? Consulte [Designando acesso ao cluster](cs_users.html#users) para configurar permissões de IAM e de infraestrutura.
 {: tip}
 
 ** Há alguma política definida por padrão? O que posso incluir? **</br>
-Por padrão, o {{site.data.keyword.containershort_notm}} configura o controlador de admissão `PodSecurityPolicy` com os [recursos para o gerenciamento de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que não é possível excluir ou modificar. Também não é possível desativar o controlador de admissão. 
+Por padrão, o {{site.data.keyword.containerlong_notm}} configura o controlador de admissão `PodSecurityPolicy` com [recursos para o gerenciamento de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que não é possível excluir ou modificar. Também não é possível desativar o controlador de admissão. 
 
 As ações de pod não são bloqueadas por padrão. Em vez disso, dois recursos de controle de acesso baseado na função (RBAC) no cluster autorizam todos os administradores, usuários, serviços e nós a criar pods privilegiados e não privilegiados. Se você deseja evitar que determinados usuários criem ou atualizem pods, é possível [modificar esses recursos RBAC ou criar o seu próprio](#customize_psp).
 
@@ -177,7 +177,7 @@ Certifique-se de ter modificado as políticas existentes de modo que a nova pol�
 ## Entendendo os recursos padrão para o gerenciamento de cluster do  {{site.data.keyword.IBM_notm}}
 {: #ibm_psp}
 
-Seu cluster do Kubernetes no {{site.data.keyword.containershort_notm}} contém as políticas de
+Seu cluster do Kubernetes no {{site.data.keyword.containerlong_notm}} contém as políticas de
 segurança de pod a seguir e os recursos RBAC relacionados para permitir que a {{site.data.keyword.IBM_notm}} gerencie adequadamente seu cluster.
 {: shortdesc}
 

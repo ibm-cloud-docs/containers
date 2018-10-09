@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -85,7 +85,7 @@ Antes de empezar:
 - Realice los cambios marcados con _Actualización después de nodo maestro_ del apartado sobre [Cambios en Kubernetes](cs_versions.html).
 - Si desea aplicar una actualización de parche, consulte el [registro de cambios de versión de Kubernetes](cs_versions_changelog.html#changelog). </br>
 
-**Atención**: las actualizaciones a los nodos trabajadores pueden hacer que las apps y los servicios estén un tiempo inactivos. Los datos se suprimen si no se [almacenan fuera del pod](cs_storage_planning.html#persistent).
+**Atención**: las actualizaciones a los nodos trabajadores pueden hacer que las apps y los servicios estén un tiempo inactivos. Los datos se suprimen si no se [almacenan fuera del pod](cs_storage_planning.html#persistent_storage_overview).
 
 
 **¿Qué sucede con mis apps durante una actualización?**</br>
@@ -258,10 +258,10 @@ Puede actualizar los tipos de máquina que utilizan los nodos trabajadores añad
 
 Antes de empezar:
 - Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
-- Si almacena datos en su nodo trabajador, los datos se suprimen si no los [almacena fuera del nodo trabajador](cs_storage_planning.html#persistent).
+- Si almacena datos en su nodo trabajador, los datos se suprimen si no los [almacena fuera del nodo trabajador](cs_storage_planning.html#persistent_storage_overview).
 
 
-**Atención**: las actualizaciones a los nodos trabajadores pueden hacer que las apps y los servicios estén un tiempo inactivos. Los datos se suprimen si no se [almacenan fuera del pod](cs_storage_planning.html#persistent).
+**Atención**: las actualizaciones a los nodos trabajadores pueden hacer que las apps y los servicios estén un tiempo inactivos. Los datos se suprimen si no se [almacenan fuera del pod](cs_storage_planning.html#persistent_storage_overview).
 
 1. Obtenga una lista de los nodos trabajadores disponibles y anote su dirección IP privada.
    - **Para los nodos trabajadores de una agrupación de nodos trabajadores**:
@@ -367,14 +367,33 @@ Antes de empezar:
 ## Actualización de complementos de clúster
 {: #addons}
 
-El clúster de {{site.data.keyword.containershort_notm}} se suministra con **complementos**, como Fluentd para registro, que se instalan automáticamente cuando se suministra el clúster. Estos complementos se deben actualizar por separado de los nodos maestro y trabajador.
+El clúster de {{site.data.keyword.containerlong_notm}} se suministra con **complementos**, como Fluentd para registro, que se instalan automáticamente cuando se suministra el clúster. Estos complementos se deben actualizar por separado de los nodos maestro y trabajador.
 {: shortdesc}
 
 **¿Qué complementos predeterminados tengo que actualizar por separado del clúster?**
 * [Fluentd para registro](#logging)
 
+**¿Hay algún complemento que no tenga que actualizar y que no pueda cambiar?**</br>
+Sí, el clúster se despliega con los siguientes complementos gestionados y recursos asociados que no se pueden cambiar. Si intenta modificar uno de estos complementos de despliegue, se restauran sus valores originales con un intervalo regular. 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+Puede ver estos recursos utilizando la etiqueta `addonmanager.kubernetes.io/mode: Reconcile`. Por ejemplo:
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **¿Puedo instalar otros complementos que no sean el predeterminado?**</br>
-Sí. {{site.data.keyword.containershort_notm}} proporciona otros complementos entre los que puede elegir para añadir funciones al clúster. Por ejemplo, quizás desee [utilizar diagramas de Helm](cs_integrations.html#helm) para instalar el [complemento de almacenamiento en bloque](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) o [strongSwan VPN](cs_vpn.html#vpn-setup). Debe actualizar cada complemento por separado siguiendo las instrucciones para actualizar los diagramas de Helm.
+Sí. {{site.data.keyword.containerlong_notm}} proporciona otros complementos entre los que puede elegir para añadir funciones al clúster. Por ejemplo, quizás desee [utilizar diagramas de Helm](cs_integrations.html#helm) para instalar el [complemento de almacenamiento en bloque](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) o [strongSwan VPN](cs_vpn.html#vpn-setup). Debe actualizar cada complemento por separado siguiendo las instrucciones para actualizar los diagramas de Helm.
 
 ### Fluentd para registro
 {: #logging}
@@ -453,13 +472,13 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
       ```
       {: pre}
 
-   2. **Para añadir la zona a varias agrupaciones de nodos trabajadores**: añada varias agrupaciones de nodos trabajadores al mandato `ibmcloud ks zone-add`. Para añadir varias agrupaciones de trabajadores a una zona, debe tener una VLAN privada y pública existente en dicha zona. Si no tiene una VLAN pública y privada en dicha zona, considere la posibilidad de añadir primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN pública y una VLAN privada. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores. </br></br>Es importante que los nodos trabajadores de todas las agrupaciones de nodos trabajadores se suministran en todas las zonas para asegurarse de que el clúster está equilibrado entre zonas. Si desea utilizar distintas VLAN para distintas agrupaciones de nodos trabajadores, repita este mandato con la VLAN que desea utilizar para la agrupación de nodos trabajadores. Para habilitar la comunicación en la red privada entre nodos trabajadores de distintas zonas, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+   2. **Para añadir la zona a varias agrupaciones de nodos trabajadores**: añada varias agrupaciones de nodos trabajadores al mandato `ibmcloud ks zone-add`. Para añadir varias agrupaciones de trabajadores a una zona, debe tener una VLAN privada y pública existente en dicha zona. Si no tiene una VLAN pública y privada en dicha zona, considere la posibilidad de añadir primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN pública y una VLAN privada. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores. </br></br>Es importante que los nodos trabajadores de todas las agrupaciones de nodos trabajadores se suministran en todas las zonas para asegurarse de que el clúster está equilibrado entre zonas. Si desea utilizar distintas VLAN para distintas agrupaciones de nodos trabajadores, repita este mandato con la VLAN que desea utilizar para la agrupación de nodos trabajadores. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. ** Para añadir varias zonas a las agrupaciones de nodos trabajadores**: repita el mandato `ibmcloud ks zone-add` con una zona distinta y especifique las agrupaciones de nodos trabajadores que desea suministrar en dicha zona. Al añadir más zonas al clúster, el clúster pasa de ser un clúster de una sola zona a ser un [clúster multizona](cs_clusters.html#multi_zone).
+   3. ** Para añadir varias zonas a las agrupaciones de nodos trabajadores**: repita el mandato `ibmcloud ks zone-add` con una zona distinta y especifique las agrupaciones de nodos trabajadores que desea suministrar en dicha zona. Al añadir más zonas al clúster, el clúster pasa de ser un clúster de una sola zona a ser un [clúster multizona](cs_clusters_planning.html#multizone).
 
 6. Espere a que se desplieguen los nodos trabajadores en cada zona.
    ```
@@ -501,4 +520,4 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 
 
 **¿Qué es lo siguiente?** </br>
-Ahora que ha actualizado el clúster para que utilice agrupaciones de nodos trabajadores, puede mejorar la disponibilidad añadiendo más zonas al clúster. Al añadir más zonas al clúster, el clúster pasa de ser un clúster de una sola zona a ser un [clúster multizona](cs_clusters.html#ha_clusters). Cuando cambie el clúster de una sola zona a un clúster multizona, el dominio de Ingress pasa de `<cluster_name>.<region>.containers.mybluemix.net` a `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. El dominio de Ingress existente sigue siendo válido y se puede utilizar para enviar solicitudes a sus apps.
+Ahora que ha actualizado el clúster para que utilice agrupaciones de nodos trabajadores, puede mejorar la disponibilidad añadiendo más zonas al clúster. Al añadir más zonas al clúster, el clúster pasa de ser un clúster de una sola zona a ser un [clúster multizona](cs_clusters_planning.html#ha_clusters). Cuando cambie el clúster de una sola zona a un clúster multizona, el dominio de Ingress pasa de `<cluster_name>.<region>.containers.mybluemix.net` a `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. El dominio de Ingress existente sigue siendo válido y se puede utilizar para enviar solicitudes a sus apps.

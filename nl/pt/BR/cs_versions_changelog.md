@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -29,15 +29,258 @@ Para obter um resumo das ações de migração, veja [Versões do Kubernetes](cs
 {: tip}
 
 Para obter informações sobre mudanças desde a versão anterior, veja os logs de mudanças a seguir.
+-  Versão 1.11  [ changelog ](#111_changelog).
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
--  [Log de mudanças](#18_changelog) da Versão 1.8.
 -  [Archive](#changelog_archive) de logs de mudanças para versões descontinuadas ou não suportadas.
+
+</br>
+
+## Versão 1.11 changelog
+{: #111_changelog}
+
+Revise as mudanças a seguir.
+
+### Log de mudanças para 1.11.2_1516, liberado em 04 de setembro de 2018
+{: #1112_1516}
+
+<table summary="Mudanças que foram feitas desde a versão 1.11.2_1514">
+<caption>Mudanças desde a versão 1.11.2_1514</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.1.3</td>
+<td>v3.2.1</td>
+<td>Consulte as [notas sobre a liberação do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.2/releases/#v321).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.2</td>
+<td>1.1.3</td>
+<td>Consulte as [notas sobre a liberação do `containerd` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.3).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.11.2-60</td>
+<td>v1.11.2-71</td>
+<td>A configuração do provedor em nuvem mudou para manipular melhor as atualizações para serviços do balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
+</tr>
+<tr>
+<td>Configuração do plug-in de armazenamento de arquivo IBM</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack 1.11.2_1514 do nó do trabalhador, liberado em 23 de agosto de 2018
+{: #1112_1514}
+
+<table summary="Mudanças que foram feitas desde a versão 1.11.2_1513">
+<caption>Mudanças desde a versão 1.11.2_1513</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>` systemd `</td>
+<td>229</td>
+<td>230</td>
+<td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Atualizadas as imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3620,CVE-2018-3646 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para 1.11.2_1513, liberado em 14 de agosto de 2018
+{: #1112_1513}
+
+<table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
+<caption>Mudanças desde a versão 1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>N/A</td>
+<td>1.1.2</td>
+<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes. Consulte as [notas sobre a liberação do `containerd` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Para ações que devem ser executadas, consulte [Migrando para `containerd` como o tempo de execução do contêiner](cs_versions.html#containerd).</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>O `containerd` substitui o Docker como o novo tempo de execução do contêiner para Kubernetes, para aprimorar o desempenho. Para ações que devem ser executadas, consulte [Migrando para `containerd` como o tempo de execução do contêiner](cs_versions.html#containerd).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.2.14</td>
+<td>v3.2.18</td>
+<td>Consulte as [notas sobre a liberação do etcd ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/coreos/etcd/releases/v3.2.18).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.10.5-118</td>
+<td>v1.11.2-60</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.11. Além disso, os pods do balanceador de carga agora usam a nova classe de prioridade do pod `ibm-app-cluster-critical`.</td>
+</tr>
+<tr>
+<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>334</td>
+<td>338</td>
+<td>Atualizada a versão do `incubator` para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster de múltiplas zonas e precise [incluir os rótulos de região e zona](cs_storage_basics.html#multizone).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.11.2</td>
+<td>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizada a configuração do OpenID Connect para o servidor da API do Kubernetes do cluster para suportar os grupos de acesso do {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM). `Priority` foi incluído na opção `--enable-admission-plugins` para o servidor da API do Kubernetes do cluster e o cluster foi configurado para suportar de pod. Para obter informações adicionais, veja:
+<ul><li>[ Grupos de acesso do IAM ](cs_users.html#rbac)</li>
+<li>[ Configurando a prioridade do pod ](cs_pod_priority.html#pod_priority)</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes Heapster</td>
+<td>V1.5.2</td>
+<td>v.1.5.4</td>
+<td>Limites de recurso aumentados para o contêiner `heapster-nanny`. Consulte as [notas sobre a liberação do Kubernetes Heapster ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
+</tr>
+<tr>
+<td>Configuração de criação de log</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>O diretório de log do contêiner é agora `/var/log/pods/` em vez do `/var/lib/docker/containers/` anterior.</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## Version 1.10 log
 {: #110_changelog}
 
 Revise as mudanças a seguir.
+
+### Log de mudanças para 1.10.7_1520, liberado em 04 de setembro de 2018
+{: #1107_1520}
+
+<table summary="Mudanças que foram feitas desde a versão 1.10.5_1519">
+<caption>Mudanças desde a versão 1.10.5_1519</caption>
+<tr>
+<th>Calico</th>
+<th>v3.1.3</th>
+<th>v3.2.1</th>
+<td>Veja as [notas sobre a liberação do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.2/releases/#v321).</td>
+</tr>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.10.5-118</td>
+<td>v1.10.7-146</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.10.7. Além disso, a configuração do provedor em nuvem foi mudada para manipular melhor as atualizações para serviços de balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
+</tr>
+<tr>
+<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>334</td>
+<td>338</td>
+<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster multizona e precise incluir os rótulos de região e zona.<br><br> Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.10.7</td>
+<td>Veja as [notas sobre a liberação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes Heapster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Limites de recurso aumentados para o contêiner `heapster-nanny`.</td>
+</tr>
+</table>
+
+### Log de mudanças para o fix pack 1.10.5_1519 do nó do trabalhador, liberado em 23 de agosto de 2018
+{: #1105_1519}
+
+<table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
+<caption>Mudanças desde a versão 1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>` systemd `</td>
+<td>229</td>
+<td>230</td>
+<td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Atualizadas as imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3620,CVE-2018-3646 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Log de mudanças para o fix pack 1.10.5_1518 do nó do trabalhador, liberado em 13 de agosto de 2018
+{: #1105_1518}
+
+<table summary="Mudanças que foram feitas desde a versão 1.10.5_1517">
+<caption>Mudanças desde a versão 1.10.5_1517</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
 
 ### Log de mudanças para 1.10.5_1517, liberado em 27 de julho de 2018
 {: #1105_1517}
@@ -187,7 +430,7 @@ Revise as mudanças a seguir.
 <td>Atualização do kernel</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>Novas imagens do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>Novas imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -294,15 +537,102 @@ Revise as mudanças a seguir.
 <td>Suporte de GPU</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>O suporte para as [cargas de trabalho do contêiner de unidade de processamento de gráfico (GPU)](cs_app.html#gpu_app) está agora disponível para planejamento e execução. Para obter uma lista de tipos de máquina de GPU disponíveis, veja [Hardware para nós do trabalhador](cs_clusters.html#shared_dedicated_node). Para obter mais informações, veja a documentação do Kubernetes para [Planejar GPUs ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>O suporte para as [cargas de trabalho do contêiner de unidade de processamento de gráfico (GPU)](cs_app.html#gpu_app) está agora disponível para planejamento e execução. Para obter uma lista de tipos de máquina de GPU disponíveis, veja [Hardware para nós do trabalhador](cs_clusters_planning.html#shared_dedicated_node). Para obter mais informações, veja a documentação do Kubernetes para [Planejar GPUs ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## Version 1.9 log
 {: #19_changelog}
 
 Revise as mudanças a seguir.
+
+### Log de mudanças para 1.9.10_1523, liberado em 04 de setembro de 2018
+{: #1910_1523}
+
+<table summary="Mudanças que foram feitas desde a versão 1.9.9_1522">
+<caption>Mudanças desde a versão 1.9.9_1522</caption>
+<tr>
+<td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.9.9-167</td>
+<td>v1.9.10-192</td>
+<td>Atualizado para suportar a liberação do Kubernetes 1.9.10. Além disso, a configuração do provedor em nuvem foi mudada para manipular melhor as atualizações para serviços de balanceador de carga com `externalTrafficPolicy` configurado como `local`.</td>
+</tr>
+<tr>
+<td>Plug-in de armazenamento de arquivo IBM</td>
+<td>334</td>
+<td>338</td>
+<td>Atualizada a versão de incubadora para 1.8. O armazenamento de arquivo é provisionado para a zona específica que você seleciona. Não é possível atualizar os rótulos de uma instância de PV existente (estática), a menos que você esteja usando um cluster multizona e precise incluir os rótulos de região e zona.<br><br>Removida a versão do NFS padrão das opções de montagem nas classes de armazenamento de arquivo fornecidas pela IBM. O sistema operacional do host agora negocia a versão do NFS com o servidor NFS da infraestrutura do IBM Cloud (SoftLayer). Para configurar manualmente uma versão específica do NFS ou para mudar a versão do NFS de seu PV que foi negociada pelo sistema operacional do host, veja [Mudando a versão padrão do NFS](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.9</td>
+<td>v1.9.10</td>
+<td>Veja as [notas sobre a liberação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10).</td>
+</tr>
+<tr>
+<td>Configuração do Kubernetes Heapster</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Limites de recurso aumentados para o contêiner `heapster-nanny`.</td>
+</tr>
+</table>
+
+### Log de mudanças para o fix pack 1.9.9_1522 do nó do trabalhador, liberado em 23 de agosto de 2018
+{: #199_1522}
+
+<table summary="Mudanças que foram feitas desde a versão 1.9.9_1521">
+<caption>Mudanças desde a versão 1.9.9_1521</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>` systemd `</td>
+<td>229</td>
+<td>230</td>
+<td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Atualizadas as imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3620,CVE-2018-3646 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Log de mudanças para o fix pack 1.9.9_1521 do nó do trabalhador, liberado em 13 de agosto de 2018
+{: #199_1521}
+
+<table summary="Mudanças que foram feitas desde a versão 1.9.9_1520">
+<caption>Mudanças desde a versão 1.9.9_1520</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
 
 ### Log de mudanças para 1.9.9_1520, liberado em 27 de julho de 2018
 {: #199_1520}
@@ -458,7 +788,7 @@ Revise as mudanças a seguir.
 <td>Atualização do kernel</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>Novas imagens do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>Novas imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -527,7 +857,7 @@ Revise as mudanças a seguir.
 <td>Kubernetes</td>
 <td>V1.9.3</td>
 <td>v1.9.7	</td>
-<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps poderiam gravar dados nesses volumes que o sistema poderia reverter automaticamente. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
+<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps podiam gravar dados nesses volumes, mas o sistema podia reverter automaticamente os dados. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
 </tr>
 <tr>
 <td>Configuração do Kubernetes</td>
@@ -550,10 +880,68 @@ Revise as mudanças a seguir.
 </tbody>
 </table>
 
-## Log de mudanças da Versão 1.8
+<br />
+
+
+## Archive
+{: #changelog_archive}
+
+### Log de mudanças da Versão 1.8 (descontinuado, não suportado em 22 de setembro de 2018)
 {: #18_changelog}
 
 Revise as mudanças a seguir.
+
+### Log de mudanças para o fix pack 1.8.15_1520 do nó do trabalhador, liberado em 23 de agosto de 2018
+{: #1815_1520}
+
+<table summary="Mudanças que foram feitas desde a versão 1.8.15_1519">
+<caption>Mudanças desde a versão 1.8.15_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>` systemd `</td>
+<td>229</td>
+<td>230</td>
+<td>` systemd `  atualizado para corrigir o vazamento  ` cgroup ` .</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Atualizadas as imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3620,CVE-2018-3646 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+### Log de mudanças para o fix pack 1.8.15_1519 do nó do trabalhador, liberado em 13 de agosto de 2018
+{: #1815_1519}
+
+<table summary="Mudanças que foram feitas desde a versão 1.8.15_1518">
+<caption>Mudanças desde a versão 1.8.15_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Prévio</th>
+<th>Atual</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacotes do Ubuntu</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Atualizações para pacotes do Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
 
 ### Log de mudanças para 1.8.15_1518, liberado em 27 de julho de 2018
 {: #1815_1518}
@@ -709,7 +1097,7 @@ Revise as mudanças a seguir.
 <td>Atualização do kernel</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>Novas imagens do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>Novas imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -780,7 +1168,7 @@ Revise as mudanças a seguir.
 <td>Kubernetes</td>
 <td>v1.8.8</td>
 <td>v1.8.11	</td>
-<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps poderiam gravar dados nesses volumes que o sistema poderia reverter automaticamente. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
+<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps podiam gravar dados nesses volumes, mas o sistema podia reverter automaticamente os dados. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
 </tr>
 <tr>
 <td>Pause a imagem do contêiner</td>
@@ -803,8 +1191,8 @@ Revise as mudanças a seguir.
 </tbody>
 </table>
 
-## Archive
-{: #changelog_archive}
+<br />
+
 
 ### Version 1.7 changelog (Unsupported)
 {: #17_changelog}
@@ -829,7 +1217,7 @@ Revise as mudanças a seguir.
 <td>Atualização do kernel</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>Novas imagens do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+<td>Novas imagens do nó do trabalhador com atualização do kernel para [CVE-2018-3639 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
 </tr>
 </tbody>
 </table>
@@ -898,7 +1286,7 @@ Revise as mudanças a seguir.
 <td>Kubernetes</td>
 <td>v1.7.4</td>
 <td>v1.7.16	</td>
-<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps poderiam gravar dados nesses volumes que o sistema poderia reverter automaticamente. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
+<td><p>Veja as [Notas sobre a liberação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Essa liberação trata das vulnerabilidades [CVE-2017-1002101 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: agora, `secret`, `configMap`, `downwardAPI` e volumes projetados são montados como somente leitura. Anteriormente, os apps podiam gravar dados nesses volumes, mas o sistema podia reverter automaticamente os dados. Se os seus apps dependerem do comportamento inseguro prévio, modifique-os de modo correspondente.</p></td>
 </tr>
 <td>Provedor do {{site.data.keyword.Bluemix_notm}}</td>
 <td>v1.7.4-133</td>

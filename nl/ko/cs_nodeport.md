@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 다음 다이어그램은 NodePort 서비스가 구성될 때 인터넷에서 앱으로 통신이 이루어지는 방식을 표시합니다.
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort를 사용하여 {{site.data.keyword.containershort_notm}}에서 앱 노출" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort를 사용하여 {{site.data.keyword.containerlong_notm}}에서 앱 노출" style="width:550px; border-style: none"/>
 
 1. 작업자 노드에서 NodePort와 작업자 노드의 공인 IP 주소를 사용하여 앱에 요청을 전송합니다.
 
@@ -114,9 +114,9 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 **다음에 수행할 작업:**
 
 앱이 배치된 경우에는 작업자 노드의 공인 IP 주소와 NodePort를 사용하여
-브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다. 작업자 노드가 사설 VLAN에만 연결된 경우, 사설 NodePort 서비스가 작성되었으며 이는 q 작업자 노드의 사설 IP 주소를 통해 액세스가 가능합니다. 
+브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다. 작업자 노드가 사설 VLAN에만 연결된 경우, 사설 NodePort 서비스가 작성되었으며 이는 q 작업자 노드의 사설 IP 주소를 통해 액세스가 가능합니다.
 
-1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오. 사설 네트워크의 작업자 노드에 액세스하려면 사설 IP 주소를 대신 가져오십시오. 
+1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오. 사설 네트워크의 작업자 노드에 액세스하려면 사설 IP 주소를 대신 가져오십시오.
 
     ```
     ibmcloud ks workers <cluster_name>

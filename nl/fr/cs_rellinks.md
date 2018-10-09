@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # Liens connexes
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **Général**
@@ -44,8 +44,7 @@ lastupdated: "2018-08-06"
 **Tutoriels, démonstrations et cours**
 
 - [Moderniser et étendre une application Web Java existante (JPetStore) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [Méthodologies d'orchestration de conteneur dans developerWorks  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [Cours developerWorks ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [Chemin d'apprentissage Cognitive Class pour {{site.data.keyword.containerlong_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [Comment générer une application Web dans IKS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Sécurisation de clusters dans plusieurs régions avec Cloud Internet Service (CIS) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Analyse des journaux et surveillance de l'état de santé des applications ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

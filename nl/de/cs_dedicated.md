@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 Wenn Sie über ein {{site.data.keyword.Bluemix_dedicated}}-Konto verfügen, können Sie Kubernetes-Cluster in einer dedizierten Cloudumgebung (`https://<my-dedicated-cloud-instance>.bluemix.net`) bereitstellen und eine Verbindung mit den vorausgewählten {{site.data.keyword.Bluemix_notm}}-Services herstellen, die ebenfalls darin ausgeführt werden.
 {:shortdesc}
 
-Wenn Sie nicht über ein {{site.data.keyword.Bluemix_dedicated_notm}}-Konto verfügen, können Sie [Ihre ersten Schritte mit {{site.data.keyword.containershort_notm}}](container_index.html) in einem {{site.data.keyword.Bluemix_notm}} Public-Konto ausführen.
+Wenn Sie nicht über ein {{site.data.keyword.Bluemix_dedicated_notm}}-Konto verfügen, können Sie [Ihre ersten Schritte mit {{site.data.keyword.containerlong_notm}}](container_index.html) in einem {{site.data.keyword.Bluemix_notm}} Public-Konto ausführen.
 
 ## Informationen zur Dedicated-Cloudumgebung
 {: #dedicated_environment}
 
 Bei einem {{site.data.keyword.Bluemix_dedicated_notm}}-Konto sind die verfügbaren physischen Ressourcen nur Ihrem Cluster zugeordnet und werden nicht mit Clustern von anderen {{site.data.keyword.IBM_notm}} Kunden geteilt. Sie können eine {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung einrichten, wenn Sie eine Isolation für Ihren Cluster sowie eine Isolation für die anderen, von Ihnen genutzten {{site.data.keyword.Bluemix_notm}}-Services benötigen. Wenn Sie nicht über ein Dedicated-Konto verfügen, können Sie [Cluster mit dedizierter Hardware in {{site.data.keyword.Bluemix_notm}}  Public-Konten erstellen](cs_clusters.html#clusters_ui).
 
-Mit {{site.data.keyword.Bluemix_dedicated_notm}} können Sie Cluster aus dem Katalog in der Dedicated-Konsole oder mithilfe der {{site.data.keyword.containershort_notm}}-CLI erstellen. Um die Dedicated-Konsole zu verwenden, melden Sie sich mit Ihrer IBMid sowohl bei Ihren Dedicated- als auch den Public-Konten gleichzeitig an. Dank dieser dualen Anmeldung können Sie auf Ihre Public-Cluster über Ihre Dedicated-Konsole zugreifen. Um die CLI zu verwenden, melden Sie sich mithilfe Ihres Dedicated-Endpunkts (`api.<my-dedicated-cloud-instance>.bluemix.net.`) an. Legen Sie dann den {{site.data.keyword.containershort_notm}}-API-Endpunkt der öffentlichen Region, die der Dedicated-Umgebung zugeordnet ist, als Ziel fest.
+Mit {{site.data.keyword.Bluemix_dedicated_notm}} können Sie Cluster aus dem Katalog in der Dedicated-Konsole oder mithilfe der {{site.data.keyword.containerlong_notm}}-CLI erstellen. Um die Dedicated-Konsole zu verwenden, melden Sie sich mit Ihrer IBMid sowohl bei Ihren Dedicated- als auch den Public-Konten gleichzeitig an. Dank dieser dualen Anmeldung können Sie auf Ihre Public-Cluster über Ihre Dedicated-Konsole zugreifen. Um die CLI zu verwenden, melden Sie sich mithilfe Ihres Dedicated-Endpunkts (`api.<my-dedicated-cloud-instance>.bluemix.net.`) an. Legen Sie dann den {{site.data.keyword.containerlong_notm}}-API-Endpunkt der öffentlichen Region, die der Dedicated-Umgebung zugeordnet ist, als Ziel fest.
 
 Die wichtigsten Unterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public- und Bluemix Dedicated-Konten sind die folgenden.
 
@@ -82,13 +82,13 @@ Die wichtigsten Unterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public-
  </tr>
  <tr>
  <td>Auf die Registry zugreifen</td>
- <td>Die einzelnen Optionen sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containershort_notm}} verwenden](cs_images.html) beschrieben.</td>
- <td><ul><li>Die einzelnen Optionen für neue Namensbereiche sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containershort_notm}} verwenden](cs_images.html) beschrieben.</li><li>Für Namensbereiche, die für einzelne und skalierbare Gruppen eingerichtet wurden: [Verwenden Sie ein Token und erstellen Sie einen geheimen Kubernetes-Schlüssel](cs_dedicated_tokens.html#cs_dedicated_tokens) zur Authentifizierung.</li></ul></td>
+ <td>Die einzelnen Optionen sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containerlong_notm}} verwenden](cs_images.html) beschrieben.</td>
+ <td><ul><li>Die einzelnen Optionen für neue Namensbereiche sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containerlong_notm}} verwenden](cs_images.html) beschrieben.</li><li>Für Namensbereiche, die für einzelne und skalierbare Gruppen eingerichtet wurden: [Verwenden Sie ein Token und erstellen Sie einen geheimen Kubernetes-Schlüssel](cs_dedicated_tokens.html#cs_dedicated_tokens) zur Authentifizierung.</li></ul></td>
  </tr>
  <tr>
  <td>Mehrzonencluster</td>
- <td>Erstellen Sie [Mehrzonencluster](cs_clusters.html#multi_zone), indem Sie Ihren Worker-Pools weitere Zonen hinzufügen.</td>
- <td>Erstellen Sie [Einzelzonencluster](cs_clusters.html#single_zone). Die verfügbare Zone wurde vordefiniert, als die {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung eingerichtet wurde. Standardmäßig wird ein Einzelzonencluster mit einem Worker-Pool konfiguriert, der den Namen `default` hat. Der Worker-Pool gruppiert Workerknoten mit derselben Konfiguration, wie z. B. dem Maschinentyp, die Sie während der Clustererstellung definiert haben. Sie können Ihrem Cluster weitere Workerknoten hinzufügen, indem Sie [die Größe eines vorhandenen Worker-Pools ändern](cs_clusters.html#resize_pool) oder [einen neuen Worker-Pool hinzufügen](cs_clusters.html#add_pool). Wenn Sie einen Worker-Pool hinzufügen, müssen Sie die verfügbare Zone zum Worker-Pool hinzufügen, damit die Worker in der Zone bereitgestellt werden können. Sie können jedoch keine anderen Zonen zu Ihren Worker-Pools hinzufügen.</td>
+ <td>Erstellen Sie [Mehrzonencluster](cs_clusters_planning.html#multizone), indem Sie Ihren Worker-Pools weitere Zonen hinzufügen.</td>
+ <td>Erstellen Sie [Einzelzonencluster](cs_clusters_planning.html#single_zone). Die verfügbare Zone wurde vordefiniert, als die {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung eingerichtet wurde. Standardmäßig wird ein Einzelzonencluster mit einem Worker-Pool konfiguriert, der den Namen `default` hat. Der Worker-Pool gruppiert Workerknoten mit derselben Konfiguration, wie z. B. dem Maschinentyp, die Sie während der Clustererstellung definiert haben. Sie können Ihrem Cluster weitere Workerknoten hinzufügen, indem Sie [die Größe eines vorhandenen Worker-Pools ändern](cs_clusters.html#resize_pool) oder [einen neuen Worker-Pool hinzufügen](cs_clusters.html#add_pool). Wenn Sie einen Worker-Pool hinzufügen, müssen Sie die verfügbare Zone zum Worker-Pool hinzufügen, damit die Worker in der Zone bereitgestellt werden können. Sie können jedoch keine anderen Zonen zu Ihren Worker-Pools hinzufügen.</td>
  </tr>
 </tbody></table>
 {: caption="Funktionsunterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public und {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -107,12 +107,12 @@ Integrierte Sicherheitsfeatures stellen die Isolation, die Funktionalität für 
 
 *Kubernetes-Architektur und Netzbetrieb in {{site.data.keyword.Bluemix_dedicated_notm}}*
 
-![{{site.data.keyword.containershort_notm}} Kubernetes-Architektur unter {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur unter {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## {{site.data.keyword.containershort_notm}} unter Dedicated einrichten
+## {{site.data.keyword.containerlong_notm}} unter Dedicated einrichten
 {: #dedicated_setup}
 
 Jede {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung verfügt über ein öffentliches, zum Client gehörendes Unternehmenskonto in {{site.data.keyword.Bluemix_notm}}. Damit Benutzer in der Dedicated-Umgebung Cluster erstellen können, muss der Administrator die Benutzer zu einem öffentlichen Unternehmenskonto hinzufügen.
@@ -257,7 +257,7 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 
     1. Geben Sie bei **Cluster Name** einen Namen für den Cluster ein. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne setzt sich aus dem Clusternamen und der Region zusammen, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt.
 
-    2. Wählen Sie die **Zone** aus, in der der Cluster implementiert werden soll. Die verfügbare Zone wurde vordefiniert, als die {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung eingerichtet wurde. 
+    2. Wählen Sie die **Zone** aus, in der der Cluster implementiert werden soll. Die verfügbare Zone wurde vordefiniert, als die {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung eingerichtet wurde.
 
     3. Wählen Sie die Kubernetes-API-Serverversion für den Cluster-Masterknoten aus.
 
@@ -275,9 +275,9 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
     6. Wählen Sie für **Number of worker nodes** die benötigte Anzahl von Workerknoten aus. Wählen Sie den Wert `3` aus, um Hochverfügbarkeit für Ihren Cluster sicherzustellen.
 
     7. Wählen Sie ein **öffentliches VLAN** (optional) und ein **privates VLAN** (erforderlich) aus. Die verfügbaren öffentlichen und privaten VLANs werden während der Einrichtung der {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung vordefiniert. Beide VLANs kommunizieren zwischen Workerknoten, das öffentliche VLAN kommuniziert jedoch auch mit dem von IBM verwalteten Kubernetes-Master. Sie können dasselbe VLAN für mehrere Cluster verwenden.
-        **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren.
+        **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan). 
 
-    8. Standardmäßig ist **Lokale Festplatte verschlüsseln** ausgewählt. Wenn Sie dieses Kontrollkästchen abwählen, werden die Docker-Daten des Hosts nicht verschlüsselt. [Weitere Informationen zur Verschlüsselung](cs_secure.html#encrypted_disk).
+    8. Standardmäßig ist **Lokale Festplatte verschlüsseln** ausgewählt. Wenn Sie dieses Kontrollkästchen abwählen, werden die Containerlaufzeitdaten des Hosts nicht verschlüsselt. [Weitere Informationen zur Verschlüsselung](cs_secure.html#encrypted_disk).
 
 6. Klicken Sie auf **Cluster einrichten**. Auf der Registerkarte **Workerknoten** können Sie den Fortschritt der Bereitstellung des Workerknotens überprüfen. Nach Abschluss der Bereitstellung können Sie auf der Registerkarte **Übersicht** sehen, dass Ihr Cluster bereit ist.
     **Hinweis:** Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach dem Erstellen des Clusters nicht manuell geändert werden dürfen. Wenn die ID oder der Domänenname geändert wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
@@ -285,7 +285,7 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 ### Cluster über die CLI erstellen
 {: #dedicated_creating_cli}
 
-1.  Installieren Sie die {{site.data.keyword.Bluemix_notm}}-CLI sowie das [{{site.data.keyword.containershort_notm}}-Plug-in](cs_cli_install.html#cs_cli_install).
+1.  Installieren Sie die {{site.data.keyword.Bluemix_notm}}-CLI sowie das [{{site.data.keyword.containerlong_notm}}-Plug-in](cs_cli_install.html#cs_cli_install).
 2.  Melden Sie sich beim Endpunkt für Ihre {{site.data.keyword.Bluemix_dedicated_notm}}-Instanz an. Geben Sie Ihre Berechtigungsnachweise für {{site.data.keyword.Bluemix_notm}} ein und wählen Sie Ihr Konto aus, wenn Sie dazu aufgefordert werden.
 
     ```
@@ -322,11 +322,11 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;maschinentyp&gt;</em></code></td>
-    <td>Geben Sie einen Maschinentyp ein. Sie können Ihre Workerknoten als virtuelle Maschinen auf dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types). </td>
+    <td>Geben Sie einen Maschinentyp ein. Sie können Ihre Workerknoten als virtuelle Maschinen auf dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types).</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;maschinentyp&gt;</em></code></td>
-    <td>Geben Sie die ID des öffentlichen VLAN  ein, das Ihre Dedicated-Umgebung verwenden soll. Wenn Sie Ihre Workerknoten nur mit einem private VLAN verbinden möchten, geben Sie diese Option nicht an. **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren.</td>
+    <td>Geben Sie die ID des öffentlichen VLAN  ein, das Ihre Dedicated-Umgebung verwenden soll. Wenn Sie Ihre Workerknoten nur mit einem private VLAN verbinden möchten, geben Sie diese Option nicht an. **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan). </td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;maschinentyp&gt;</em></code></td>
@@ -374,7 +374,7 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -391,7 +391,7 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -454,14 +454,14 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 ### Workerknoten hinzufügen
 {: #add_workers}
 
-Mit {{site.data.keyword.Bluemix_dedicated_notm}} können Sie nur [Einzelzonencluster](cs_clusters.html#single_zone) erstellen. Standardmäßig wird ein Einzelzonencluster mit einem Worker-Pool konfiguriert, der den Namen `default` hat. Der Worker-Pool gruppiert Workerknoten mit derselben Konfiguration, wie z. B. dem Maschinentyp, die Sie während der Clustererstellung definiert haben. Sie können Ihrem Cluster weitere Workerknoten hinzufügen, indem Sie [die Größe eines vorhandenen Worker-Pools ändern](cs_clusters.html#resize_pool) oder [einen neuen Worker-Pool hinzufügen](cs_clusters.html#add_pool). Wenn Sie einen Worker-Pool hinzufügen, müssen Sie die verfügbare Zone zum Worker-Pool hinzufügen, damit die Worker in der Zone bereitgestellt werden können. Sie können jedoch keine anderen Zonen zu Ihren Worker-Pools hinzufügen.
+Mit {{site.data.keyword.Bluemix_dedicated_notm}} können Sie nur [Einzelzonencluster](cs_clusters_planning.html#single_zone) erstellen. Standardmäßig wird ein Einzelzonencluster mit einem Worker-Pool konfiguriert, der den Namen `default` hat. Der Worker-Pool gruppiert Workerknoten mit derselben Konfiguration, wie z. B. dem Maschinentyp, die Sie während der Clustererstellung definiert haben. Sie können Ihrem Cluster weitere Workerknoten hinzufügen, indem Sie [die Größe eines vorhandenen Worker-Pools ändern](cs_clusters.html#resize_pool) oder [einen neuen Worker-Pool hinzufügen](cs_clusters.html#add_pool). Wenn Sie einen Worker-Pool hinzufügen, müssen Sie die verfügbare Zone zum Worker-Pool hinzufügen, damit die Worker in der Zone bereitgestellt werden können. Sie können jedoch keine anderen Zonen zu Ihren Worker-Pools hinzufügen.
 
 ### Private und öffentliche Image-Registrys verwenden
 {: #dedicated_images}
 
 Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.
 
-Die einzelnen Optionen für neue Namensbereiche sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containershort_notm}} verwenden](cs_images.html) beschrieben. Für Namensbereiche, die für einzelne und skalierbare Gruppen eingerichtet wurden: [Verwenden Sie ein Token und erstellen Sie einen geheimen Kubernetes-Schlüssel](cs_dedicated_tokens.html#cs_dedicated_tokens) zur Authentifizierung.
+Die einzelnen Optionen für neue Namensbereiche sind unter [Private und öffentliche Image-Registrys mit {{site.data.keyword.containerlong_notm}} verwenden](cs_images.html) beschrieben. Für Namensbereiche, die für einzelne und skalierbare Gruppen eingerichtet wurden: [Verwenden Sie ein Token und erstellen Sie einen geheimen Kubernetes-Schlüssel](cs_dedicated_tokens.html#cs_dedicated_tokens) zur Authentifizierung.
 
 ### Clustern Teilnetze hinzufügen
 {: #dedicated_cluster_subnet}
@@ -471,7 +471,7 @@ Die einzelnen Optionen für neue Namensbereiche sind unter [Private und öffentl
 #### Weitere vom Benutzer verwaltete Teilnetze und IP-Adressen zu Ihren Kubernetes-Clustern hinzufügen
 {: #dedicated_byoip_subnets}
 
-Stellen Sie weitere eigene Teilnetze aus einem lokalen Netz zur Verfügung, über das auf {{site.data.keyword.containershort_notm}} zugegriffen werden soll. Sie können private IP-Adressen aus diesen Teilnetzen zu Ingress und zu den LoadBalancer-Services in Ihrem Kubernetes-Cluster hinzufügen. Benutzerverwaltete Teilnetze können auf zwei Arten konfiguriert sein, abhängig von dem Format des Teilnetzes, das Sie verwenden möchten.
+Stellen Sie weitere eigene Teilnetze aus einem lokalen Netz zur Verfügung, über das auf {{site.data.keyword.containerlong_notm}} zugegriffen werden soll. Sie können private IP-Adressen aus diesen Teilnetzen zu Ingress und zu den LoadBalancer-Services in Ihrem Kubernetes-Cluster hinzufügen. Benutzerverwaltete Teilnetze können auf zwei Arten konfiguriert sein, abhängig von dem Format des Teilnetzes, das Sie verwenden möchten.
 
 Voraussetzungen:
 - Vom Benutzer verwaltete Teilnetze können nur zu privaten VLANs hinzugefügt werden.
@@ -507,7 +507,7 @@ Vorab müssen Sie das Routing des Netzverkehrs zwischen Ihrem Unternehmensnetz u
     ```
     {: screen}
 
-4. **Wichtig**: Um die Kommunikation zwischen Workern, die sich in verschiedenen Teilnetzen im selben VLAN befinden, zu aktivieren, müssen Sie [die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+4. **Wichtig**: Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 
 5. Wählen Sie eine der folgenden Optionen aus, um lokale und interne Kontokonnektivität zu konfigurieren:
   - Wenn Sie einen privaten IP-Adressbereich 10.x.x.x für das Teilnetz verwendet haben, nutzen Sie gültige IPs aus diesem Bereich, um lokale und interne Kontokonnektivität mit Ingress und einer Lastausgleichsfunktion zu konfigurieren. Weitere Informationen finden Sie unter [Netze mit NodePort-, LoadBalancer- oder Ingress-Services planen](cs_network_planning.html#planning).
@@ -558,4 +558,6 @@ Wenn Sie öffentliche IP-Adressen für die Ingress-Lastausgleichsfunktion für A
 ### Persistenten Speicher erstellen
 {: #dedicated_apps_volume_claim}
 
-Informationen zu Optionen für das Erstellen von permanentem Speicher finden Sie unter [Persistenter Datenspeicher](cs_storage_planning.html#persistent). Um eine Sicherung für Ihre Datenträger, eine Wiederherstellung von Ihren Datenträgern oder das Löschen von Datenträgern ausführen zu können, müssen Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Informationen zu Optionen für das Erstellen von permanentem Speicher finden Sie unter "Optionen für persistenten Datenspeicher mit hoher Verfügbarkeit" (cs_storage_planning.html#persistent_storage_overview). Um eine Sicherung für Ihre Datenträger, eine Wiederherstellung von Ihren Datenträgern, das Löschen von Datenträgern oder regelmäßige Snapshots des Dateispeichers ausführen zu können, müssen Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+Wenn Sie die Bereitstellung von [Dateispeicher](cs_storage_file.html#predefined_storageclass) auswählen, wählen Sie Speicherklassen ohne 'retain' aus. Durch Auswahl von Speicherklassen ohne 'retain' kann verhindert werden, dass verwaiste Instanzen von permanentem Speicher in der IBM Cloud-Infrastruktur (SoftLayer) entstehen, die Sie nur entfernen können, wenn Sie ein Support-Ticket öffnen.

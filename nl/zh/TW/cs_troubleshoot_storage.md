@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2018-08-06"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
+ 
 
 
 # 叢集儲存空間的疑難排解
@@ -48,7 +48,7 @@ lastupdated: "2018-08-06"
 <br />
 
 
-## 工作者節點的檔案系統變更為唯讀
+## 檔案儲存空間：工作者節點的檔案系統變更為唯讀
 {: #readonly_nodes}
 
 {: tsSymptoms}
@@ -70,7 +70,7 @@ lastupdated: "2018-08-06"
 
 
 
-## 當非 root 使用者擁有 NFS 檔案儲存空間裝載路徑時，應用程式會失敗
+## 檔案儲存空間：當非 root 使用者擁有 NFS 檔案儲存空間裝載路徑時，應用程式會失敗
 {: #nonroot}
 
 {: tsSymptoms}
@@ -278,14 +278,14 @@ apiVersion: apps/v1
 <br />
 
 
-## 新增非 root 使用者對持續性儲存空間的存取權失敗
+## 檔案儲存空間：新增非 root 使用者對持續性儲存空間的存取權失敗
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
 在您[新增非 root 使用者對持續性儲存空間的存取權](#nonroot)或在指定非 root 使用者 ID 的情況下部署 Helm 圖表之後，使用者無法寫入已裝載的儲存空間。
 
 {: tsCauses}
-部署或 Helm 圖表配置為 Pod 的 `fsGroup`（群組 ID）及 `runAsUser`（使用者 ID）指定[安全環境定義](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。目前，{{site.data.keyword.containershort_notm}} 不支援 `fsGroup` 規格，僅支援 `runAsUser` 設為 `0`（root 許可權）。
+部署或 Helm 圖表配置為 Pod 的 `fsGroup`（群組 ID）及 `runAsUser`（使用者 ID）指定[安全環境定義](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。目前，{{site.data.keyword.containerlong_notm}} 不支援 `fsGroup` 規格，僅支援 `runAsUser` 設為 `0`（root 許可權）。
 
 {: tsResolve}
 請從映像檔、部署或 Helm 圖表配置檔中，移除 `fsGroup` 及 `runAsUser` 的配置的 `securityContext` 欄位，然後重新部署。如果您需要變更 `nobody` 的裝載路徑的所有權，請[新增非 root 使用者存取權](#nonroot)。在您新增[非 root initContainer](#nonroot) 之後，請在容器層次設定 `runAsUser`，而不是 Pod 層次。
@@ -295,7 +295,7 @@ apiVersion: apps/v1
 
 
 
-## 將現有區塊儲存空間裝載至 Pod 失敗，因為檔案系統錯誤
+## 區塊儲存空間：將現有區塊儲存空間裝載至 Pod 失敗，因為檔案系統錯誤
 {: #block_filesystem}
 
 {: tsSymptoms}
@@ -353,21 +353,305 @@ PV 已順利建立並鏈結至現有區塊儲存空間實例。不過，當您�
 
 
 
+## 物件儲存空間：安裝 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 外掛程式失敗
+{: #cos_helm_fails}
+
+{: tsSymptoms}
+當您安裝 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 外掛程式時，安裝失敗，錯誤如下： 
+```
+Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
+```
+{: screen}
+
+{: tsCauses}
+安裝 `ibmc` Helm 外掛程式時，會建立從 `./helm/plugins/helm-ibmc` 目錄到本端系統上 `ibmc` Helm 外掛程式所在目錄（通常在 `./ibmcloud-object-storage-plugin/helm-ibmc` 中）的符號鏈結。當您從本端系統中移除 `ibmc` Helm 外掛程式時，或將 `ibmc` Helm 外掛程式目錄移至不同的位置時，不會移除符號鏈結。
+
+{: tsResolve}
+1. 移除 {{site.data.keyword.cos_full_notm}} Helm 外掛程式。 
+   ```
+   rm -rf ~/.helm/plugins/helm-ibmc
+   ```
+   {: pre}
+   
+2. [安裝 {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos)。 
+
+<br />
+
+
+## 物件儲存空間：因為找不到 Kubernetes 密碼，所以無法建立 PVC 或 Pod
+{: #cos_secret_access_fails}
+
+{: tsSymptoms}
+當您建立 PVC 或部署可裝載 PVC 的 Pod 時，建立或部署會失敗。 
+
+- PVC 建立失敗的錯誤訊息範例： 
+  ```
+  pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
+  ```
+  {: screen}
+
+- Pod 建立失敗的錯誤訊息範例： 
+  ```
+  persistentvolumeclaim "pvc-3" not found (repeated 3 times)
+  ```
+  {: screen}
+  
+{: tsCauses}
+儲存 {{site.data.keyword.cos_full_notm}} 服務認證的 Kubernetes 的密碼、PVC 及 Pod 不是都在相同的 Kubernetes 名稱空間中。將密碼部署至與 PVC 或 Pod 不同的名稱空間時，無法存取密碼。 
+
+{: tsResolve}
+1. 列出叢集中的密碼，並檢閱已建立 {{site.data.keyword.cos_full_notm}} 服務實例之 Kubernetes 密碼的 Kubernetes 名稱空間。密碼必須將 `ibm/ibmc-s3fs` 顯示為**類型**。 
+   ```
+   kubectl get secrets --all-namespaces
+   ```
+   {: pre}
+   
+2. 檢查 PVC 及 Pod 的 YAML 配置檔，驗證您已使用相同的名稱空間。如果您要將 Pod 部署至與密碼所在名稱空間不同的名稱空間，則請在所需名稱空間中[建立另一個密碼](cs_storage_cos.html#create_cos_secret)。 
+   
+3. 建立 PVC，或在所需名稱空間中部署 Pod。 
+
+<br />
+
+
+## 物件儲存空間：PVC 建立失敗，因為認證錯誤或拒絕存取
+{: #cred_failure}
+
+{: tsSymptoms}
+當您建立 PVC 時，會看到與下列其中一則類似的錯誤訊息： 
+
+```
+SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
+```
+{: screen}
+
+```
+AccessDenied: Access Denied status code: 403 
+```
+{: screen}
+
+```
+CredentialsEndpointError: failed to load credentials
+```
+{: screen}
+
+{: tsCauses}
+您用來存取服務實例的 {{site.data.keyword.cos_full_notm}} 服務認證可能錯誤，或只容許對儲存區進行讀取。
+
+{: tsResolve}
+1. 在「服務詳細資料」頁面的導覽中，按一下**服務認證**。
+2. 尋找您的認證，然後按一下**檢視認證**。 
+3. 驗證您在 Kubernetes 密碼中使用正確的 **access_key_id** 及 **secret_access_key**。否則，請更新 Kubernetes 密碼。 
+   1. 取得您用來建立密碼的 YAML。
+      ```
+      kubectl get secret <secret_name> -o yaml
+      ```
+      {: pre}
+      
+   2. 更新 **access_key_id** 及 **secret_access_key**。 
+   3. 更新密碼。
+      ```
+      kubectl apply -f secret.yaml
+      ```
+      {: pre}
+      
+4. 在 **iam_role_crn** 區段中，驗證您具有 `Writer` 或 `Manager` 角色。如果您沒有正確的角色，則必須[建立具有正確許可權的新 {{site.data.keyword.cos_full_notm}} 服務認證](cs_storage_cos.html#create_cos_service)。然後，更新現有密碼，或使用新的服務認證來[建立新的密碼](cs_storage_cos.html#create_cos_secret)。 
+
+<br />
+
+
+## 物件儲存空間：無法存取現有儲存區
+
+{: tsSymptoms}
+當您建立 PVC 時，無法存取 {{site.data.keyword.cos_full_notm}} 中的儲存區。您會看到與下列內容類似的錯誤訊息： 
+
+```
+Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
+```
+{: screen}
+
+{: tsCauses}
+您可能使用錯誤的儲存空間類別來存取現有儲存區，或嘗試存取您未建立的儲存區。 
+
+{: tsResolve}
+1. 從 [{{site.data.keyword.Bluemix_notm}} 儀表板 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/dashboard/apps) 中，選取 {{site.data.keyword.cos_full_notm}} 服務實例。 
+2. 選取**儲存區**。 
+3. 檢閱現有儲存區的**類別**及**位置**資訊。 
+4. 選擇適當的[儲存空間類別](cs_storage_cos.html#storageclass_reference)。 
+
+<br />
+
+
+## 物件儲存空間：使用非 root 使用者身分存取檔案失敗
+{: #cos_nonroot_access}
+
+{: tsSymptoms}
+您已使用 GUI 或 REST API，將檔案上傳至 {{site.data.keyword.cos_full_notm}} 服務實例。當您嘗試在應用程式部署中以使用 `runAsUser` 所定義的非 root 使用者身分存取這些檔案時，會拒絕對檔案的存取。 
+
+{: tsCauses}
+在 Linux 中，檔案或目錄有 3 個存取群組：`Owner`、`Group` 及 `Other`。當您使用 GUI 或 REST API 將檔案上傳至 {{site.data.keyword.cos_full_notm}} 時，會移除 `Owner`、`Group` 及 `Other` 的許可權。每個檔案的許可權都如下所示： 
+
+```
+d--------- 1 root root 0 Jan 1 1970 <file_name>
+```
+{: screen}
+
+當您使用 {{site.data.keyword.cos_full_notm}} 外掛程式上傳檔案時，檔案的許可權會加以保留而且不會變更。 
+
+{: tsResolve}
+若要使用非 root 使用者身分存取檔案，非 root 使用者必須具有該檔案的讀取及寫入權。在 Pod 部署期間變更檔案的許可權，需要寫入作業。{{site.data.keyword.cos_full_notm}} 不是針對寫入工作負載所設計。在 Pod 部署期間更新許可權可能會讓您的 Pod 無法進入 `Running` 狀態。 
+
+若要解決此問題，在將 PVC 裝載至應用程式 Pod 之前，請建立另一個 Pod 以設定非 root 使用者的正確許可權。 
+
+1. 檢查儲存區中您檔案的許可權。 
+   1. 建立 `test-permission` Pod 的配置檔，並將檔案命名為 `test-permission.yaml`。
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: test-permission
+      spec:
+        containers:
+        - name: test-permission
+          image: nginx
+          volumeMounts:
+          - name: cos-vol
+            mountPath: /test
+        volumes:
+        - name: cos-vol
+          persistentVolumeClaim:
+            claimName: <pvc_name>
+      ```
+      {: codeblock}
+        
+   2. 建立 `test-permission` Pod。
+      ```
+      kubectl apply -f test-permission.yaml
+      ```
+      {: pre}
+      
+   3. 登入 Pod。
+      ```
+      kubectl exec test-permission -it bash
+      ```
+      {: pre}
+   
+   4. 導覽至您的裝載路徑，並列出檔案的許可權。
+      ```
+      cd test && ls -al
+      ```
+      {: pre}
+      
+      輸出範例：
+        ```
+      d--------- 1 root root 0 Jan 1 1970 <file_name>
+      ```
+      {: screen}
+      
+2. 刪除 Pod。 
+   ```
+   kubectl delete pod test-permission
+   ```
+   {: pre}
+      
+3. 建立您用來更正檔案許可權之 Pod 的配置檔，並將它命名為 `fix-permission.yaml`。 
+   ```
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: fix-permission 
+     namespace: <namespace>
+   spec:
+     containers:
+     - name: fix-permission
+       image: busybox
+       command: ['sh', '-c']
+       args: ['chown -R <nonroot_userID> <mount_path>/*; find <mount_path>/ -type d -print -exec chmod u=+rwx,g=+rx {} \;']
+       volumeMounts:
+       - mountPath: "<mount_path>"
+         name: cos-volume
+     volumes:
+     - name: cos-volume
+       persistentVolumeClaim:
+         claimName: <pvc_name>
+    ```
+    {: codeblock}
+    
+3. 建立 `fix-permission` Pod。 
+   ```
+   kubectl apply -f fix-permission.yaml
+   ```
+   {: pre}
+   
+4. 等待 Pod 進入 `Completed` 狀態。  
+   ```
+   kubectl get pod fix-permission
+   ```
+   {: pre}
+
+5. 刪除 `fix-permission` Pod。 
+   ```
+   kubectl delete pod fix-permission
+   ```
+   {: pre} 
+   
+5. 重建您稍早用來檢查許可權的 `test-permission` Pod。 
+   ```
+   kubectl apply -f test-permission.yaml
+   ```
+   {: pre}
+   
+5. 驗證已更新檔案的許可權。 
+   1. 登入 Pod。
+      ```
+      kubectl exec test-permission -it bash
+      ```
+      {: pre}
+   
+   2. 導覽至您的裝載路徑，並列出檔案的許可權。
+      ```
+      cd test && ls -al
+      ```
+      {: pre}
+
+      輸出範例：
+      ```
+      -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
+      ```
+      {: screen}
+      
+6. 刪除 `test-permission` Pod。 
+   ```
+   kubectl delete pod test-permission
+   ```
+   {: pre}
+   
+7. 使用非 root 使用者身分，將 PVC 裝載至應用程式。 
+
+   **重要事項：**將非 root 使用者定義為 `runAsUser`，而不需要同時在部署 YAML 中設定 `fsGroup`。設定 `fsGroup`，即會在部署 Pod 時觸發 {{site.data.keyword.cos_full_notm}} 外掛程式更新儲存區中所有檔案的群組許可權。更新許可權是一項寫入作業，而且可能會讓您的 Pod 無法進入 `Running` 狀態。 
+
+在您於 {{site.data.keyword.cos_full_notm}} 服務實例中設定正確的檔案許可權之後，請不要使用 GUI 或 REST API 來上傳檔案。請使用 {{site.data.keyword.cos_full_notm}} 外掛程式，將檔案新增至服務實例。
+{: tip}
+
+<br />
+
+
 ## 取得協助及支援
 {: #ts_getting_help}
 
 叢集仍有問題？
 {: shortdesc}
 
+-  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
+
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
 
 如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
 
-    -   如果您在使用 {{site.data.keyword.containershort_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
-    -   若為服務及開始使用指示的相關問題，請使用 [IBM developerWorks dW Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
+    -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
+    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
 -   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 

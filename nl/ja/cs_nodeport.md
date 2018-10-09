@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 次の図は、NodePort サービスが構成されているときに、インターネットからアプリへの通信がどのように誘導されるかを示しています。
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort を使用した {{site.data.keyword.containershort_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort を使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:550px; border-style: none"/>
 
 1. ワーカー・ノードのパブリック IP アドレスとワーカー・ノード上の NodePort を使用して、要求がアプリに送信されます。
 
@@ -95,7 +95,8 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td><code><em>&lt;my-selector-key&gt;</em></code> および <code><em>&lt;my-selector-value&gt;</em></code> を、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアに置き換えます。 サービスをデプロイメントに関連付けるには、セレクターがデプロイメント・ラベルと一致する必要があります。</tr>
+      <td><code><em>&lt;my-selector-key&gt;</em></code> および <code><em>&lt;my-selector-value&gt;</em></code> を、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアに置き換えます。 サービスをデプロイメントに関連付けるには、セレクターがデプロイメント・ラベルと一致する必要があります。
+      </tr>
     <tr>
     <td><code>ports.port</code></td>
     <td><code><em>&lt;8081&gt;</em></code> を、サービスが listen するポートに置き換えます。 </td>
@@ -114,7 +115,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 アプリをデプロイする時に、いずれかのワーカー・ノードのパブリック IP アドレスと NodePort を使用して、ブラウザーでそのアプリにアクセスするためのパブリック URL を作成できます。 ワーカー・ノードをプライベート VLAN にのみ接続した場合は、プライベート NodePort サービスが作成されているので、q ワーカー・ノードのプライベート IP アドレスを使用してアクセスできます。
 
-1.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。プライベート・ネットワーク上のワーカー・ノードにアクセスする場合は、代わりにプライベート IP アドレスを取得してください。
+1.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。 プライベート・ネットワーク上のワーカー・ノードにアクセスする場合は、代わりにプライベート IP アドレスを取得してください。
 
     ```
     ibmcloud ks workers <cluster_name>

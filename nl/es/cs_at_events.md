@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # Sucesos de {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
-Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de {{site.data.keyword.containershort_notm}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.
+Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de {{site.data.keyword.containerlong_notm}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-## Búsqueda de la información
-{: #at-find}
+
+
+Para obtener más información sobre cómo funciona el servicio, consulte la [documentación de {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Para obtener información sobre las acciones de Kubernetes que se rastrean, revise la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/home/).
+
+
+## Búsqueda de la información para sucesos de auditoría de Kubernetes
+{: #kube-find}
 
 Los sucesos de {{site.data.keyword.cloudaccesstrailshort}} están disponibles en el **dominio de cuenta** de {{site.data.keyword.cloudaccesstrailshort}} que está disponible en la región de {{site.data.keyword.Bluemix_notm}} en la que se generan los sucesos. Los sucesos de {{site.data.keyword.cloudaccesstrailshort}} están disponibles en el **dominio de espacio** de {{site.data.keyword.cloudaccesstrailshort}} que está asociado al espacio de Cloud Foundry en el que se suministra el servicio {{site.data.keyword.cloudaccesstrailshort}}.
 
 Para supervisar la actividad administrativa:
 
 1. Inicie sesión en su cuenta de {{site.data.keyword.Bluemix_notm}}.
-2. Desde el catálogo, suministre una instancia del servicio {{site.data.keyword.cloudaccesstrailshort}} en la misma cuenta que la instancia de {{site.data.keyword.containershort_notm}}.
+2. Desde el catálogo, suministre una instancia del servicio {{site.data.keyword.cloudaccesstrailshort}} en la misma cuenta que la instancia de {{site.data.keyword.containerlong_notm}}.
 3. En el separador **Gestión** del panel de control de {{site.data.keyword.cloudaccesstrailshort}}, pulse **Ver en Kibana**.
 4. Establezca el intervalo de tiempo para el que desea ver los registros. El valor predeterminado es 15 minutos.
 5. En la lista **Campos disponibles**, pulse **Tipo**. Pulse el icono de lupa de **Activity Tracker** para limitar los registros a aquellos que el servicio rastrea.
 6. Puede utilizar los otros campos disponibles para limitar la búsqueda.
 
+Para permitir que otros usuarios vean sucesos de cuenta y espacio, consulte [Concesión de permisos para ver sucesos de cuentas](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+{: tip}
 
+## Seguimiento de sucesos de auditoría de Kubernetes
+{: #kube-events}
 
-## Sucesos de seguimiento
-{: #events}
+Consulte la tabla siguiente para ver una lista de los sucesos que se envían a {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
 
-Consulte las tablas siguientes para ver una lista de los sucesos que se envían a {{site.data.keyword.cloudaccesstrailshort}}.
+**Antes de empezar**
 
-Para obtener más información sobre cómo funciona el servicio, consulte la [documentación de {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html).
+Asegúrese de que el clúster está configurado para reenviar [Sucesos de auditoría de API de Kubernetes](cs_health.html#api_forward).
 
-Para obtener información sobre las acciones de Kubernetes que se rastrean, revise la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/home/).
+**Sucesos reenviados**
 
 <table>
   <tr>

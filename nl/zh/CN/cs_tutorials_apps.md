@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -130,56 +130,33 @@ lastupdated: "2018-08-06"
         ```
         {: pre}
 
-6.  启动 Docker。
-    * 如果使用的是 Docker Community Edition，那么无需任何操作。
-    * 如果使用的是 Linux，请访问 [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/config/daemon/)，以查找有关如何启动 Docker 的指示信息，具体取决于使用的 Linux 分发版。
-    * 如果在 Windows 或 OSX 上使用的是 Docker Toolbox，那么可以使用 Docker Quickstart Terminal，该程序将为您启动 Docker。将 Docker Quickstart Terminal 用于后面的几个步骤以运行 Docker 命令，然后切换回在其中设置 `KUBECONFIG` 会话变量的 CLI。
+6.  构建包含 `Lab 1` 目录的应用程序文件的 Docker 映像，然后将该映像推送到在前一个教程中创建的 {{site.data.keyword.registryshort_notm}} 名称空间。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。**注**：使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
-7.  构建包含 `Lab 1` 目录中应用程序文件的 Docker 映像。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。
+    在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。
 
-    使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ```
+    {: pre}
 
-    1.  在本地构建映像。指定要使用的名称和标记。确保使用上一个教程中在 {{site.data.keyword.registryshort_notm}} 中创建的名称空间。使用名称空间信息来标记映像，可让 Docker 知道在后续步骤中应将映像推送到何处。在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。
+    构建完成后，请验证是否看到以下成功消息：
+        
 
-        ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
-        ```
-        {: pre}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-        构建完成后，请验证是否看到以下成功消息：
-        ```
-        Successfully built <image_id>
-        Successfully tagged <image_tag>
-        ```
-        {: screen}
-
-    2.  将映像推送到注册表名称空间。
-
-        ```
-docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
-        ```
-        {: pre}
-
-        输出示例：
-
-        ```
-  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-  ```
-        {: screen}
-
-8.  部署用于管理 pod；pod 包含应用程序的容器化实例。以下命令会将应用程序部署在单个 pod 中。对于本教程，部署名为 **hello-world-deployment**，但您可以根据需要为其指定任何名称。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
+7.  部署用于管理 pod；pod 包含应用程序的容器化实例。以下命令会将应用程序部署在单个 pod 中。对于本教程，部署名为 **hello-world-deployment**，但您可以根据需要为该部署指定任何名称。
 
     ```
 kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -195,7 +172,7 @@ kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namesp
 
     使用 Kubernetes 资源时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
-9.  通过将部署公开为 NodePort 服务，使应用程序可供公共访问。正如您可能会公开 Cloud Foundry 应用程序的端口，您公开的 NodePort 就是工作程序节点用于侦听流量的端口。
+8.  通过将部署公开为 NodePort 服务，使应用程序可供公共访问。正如您可能会公开 Cloud Foundry 应用程序的端口，您公开的 NodePort 就是工作程序节点用于侦听流量的端口。
 
     ```
 kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -241,7 +218,7 @@ kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --n
     </tr>
     </tbody></table>
 
-10. 现在所有的部署工作均已完成，您可以在浏览器中测试应用程序。获取详细信息以构成 URL。
+9. 现在所有的部署工作均已完成，您可以在浏览器中测试应用程序。获取详细信息以构成 URL。
     1.  获取有关服务的信息以查看分配的 NodePort。
 
         ```
@@ -282,11 +259,11 @@ Name:                   hello-world-service
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
         ```
         {: screen}
 
-11. 打开浏览器并通过以下 URL 检查应用程序：`http://<IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
+10. 打开浏览器并通过以下 URL 检查应用程序：`http://<IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
 
 
     ```
@@ -297,12 +274,12 @@ Name:                   hello-world-service
     要查看该应用程序是否公开可用，请尝试在手机上的浏览器中输入该应用程序。
     {: tip}
 
-12. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+11. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
 
     如果在 [{{site.data.keyword.Bluemix_notm}}GUI](https://console.bluemix.net/) 中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
     {: tip}
 
-13. 在**工作负载**选项卡中，可以查看已创建的资源。
+12. 在**工作负载**选项卡中，可以查看已创建的资源。
 
 祝贺您！您已部署了应用程序的第一个版本。
 
@@ -334,48 +311,31 @@ Name:                   hello-world-service
 
 2.  如果启动了新的 CLI 会话，请登录并设置集群上下文。
 
-3.  将应用程序的第二个版本作为映像在本地进行构建和标记。同样，不要忘记在命令末尾输入句点 (`.`)。
+3.  构建和标记应用程序，并将应用程序作为映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间。同样，不要忘记在命令末尾输入句点 (`.`)。
 
-  ```
-  docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+      ```
+    {: pre}
 
-  验证是否看到成功消息。
+    验证是否看到成功消息。
 
 
-  ```
-  Successfully built <image_id>
-  ```
-  {: screen}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-4.  将映像的第二个版本推送到注册表名称空间中。等待映像推送完后，再继续执行下一步。
-
-  ```
-  docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
-  ```
-  {: pre}
-
-  输出示例：
-
-  ```
-  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-  ```
-  {: screen}
-
-5.  使用文本编辑器打开 `Lab 2` 目录中的 `healthcheck.yml` 文件。此配置脚本包含上一课中的若干步骤，用于同时创建部署和服务。公关公司的应用程序开发者在进行更新或要通过重新创建 pod 对问题进行故障诊断时，可以使用这些脚本。
+4.  使用文本编辑器打开 `Lab 2` 目录中的 `healthcheck.yml` 文件。此配置脚本包含上一课中的若干步骤，用于同时创建部署和服务。公关公司的应用程序开发者在进行更新或要通过重新创建 pod 对问题进行故障诊断时，可以使用这些脚本。
     1. 在专用注册表名称空间中更新映像的详细信息。
 
         ```
@@ -404,7 +364,7 @@ livenessProbe:
 
     4.  在**服务**部分中，记下 `NodePort`。与上一课中生成随机 NodePort 不同，您可以指定 30000-32767 范围内的端口。此示例使用 30072。
 
-6.  切换回用于设置集群上下文和运行配置脚本的 CLI。创建了部署和服务后，应用程序可供公关公司用户查看。
+5.  切换回用于设置集群上下文和运行配置脚本的 CLI。创建了部署和服务后，应用程序可供公关公司用户查看。
 
   ```
   kubectl apply -f healthcheck.yml
@@ -419,7 +379,7 @@ livenessProbe:
   ```
   {: screen}
 
-7.  现在，部署工作已完成，您可以打开浏览器并检查应用程序。要构成 URL，请采用上一课中用于工作程序节点的公共 IP 地址，并将其与配置脚本中指定的 NodePort 组合在一起。要获取工作程序节点的公共 IP 地址，请执行以下操作：
+6.  现在，部署工作已完成，您可以打开浏览器并检查应用程序。要构成 URL，请采用上一课中用于工作程序节点的公共 IP 地址，并将其与配置脚本中指定的 NodePort 组合在一起。要获取工作程序节点的公共 IP 地址，请执行以下操作：
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -445,17 +405,26 @@ livenessProbe:
   ```
   {: screen}
 
-8.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+7.  检查 pod 阶段状态，以监视 Kubernetes 中应用程序的运行状况。可以通过 CLI 或 Kubernetes 仪表板 GUI 来检查阶段状态。
 
-9. 在**工作负载**选项卡中，可以查看已创建的资源。在此选项卡中，可以持续刷新并查看运行状况检查是否在运行。在 **Pod** 部分中，可以查看在重新创建 pod 中的容器时，pod 重新启动的次数。如果在仪表板中偶然遇到以下错误，此消息指示运行状况检查遇到问题。请等待几分钟，然后重新刷新。您会看到每个 pod 的重新启动次数发生变化。
+    *  **通过 CLI**：监视 pod 更改阶段状态时所发生的情况。
+       ```
+       kubectl get pods -o wide -w
+       ```
+       {: pre}
+
+    *  **通过 GUI**：
+
+       1.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
+       2.  在**工作负载**选项卡中，可以查看已创建的资源。在此选项卡中，可以持续刷新并查看运行状况检查是否在运行。在 **Pod** 部分中，可以查看在重新创建 pod 中的容器时，pod 重新启动的次数。如果在仪表板中偶然遇到以下错误，此消息指示运行状况检查遇到问题。请等待几分钟，然后重新刷新。您会看到每个 pod 的重新启动次数发生变化。
 
 
-    ```
+       ```
 Liveness probe failed: HTTP probe failed with statuscode: 500
     Back-off restarting failed docker container
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
     ```
-    {: screen}
+       {: screen}
 
 祝贺您！您已部署了应用程序的第二个版本。您在此过程中必须使用更少的命令，学习了运行状况检查如何运行，并编辑了部署，非常不错！Hello World 应用程序已通过公关公司的测试。现在，您可以为公关公司部署更有用的应用程序，以开始分析新闻稿。
 
@@ -511,10 +480,10 @@ cd watson
         ```
         {: pre}
 
-    2.  将应用程序的第一部分作为映像在本地进行构建和标记。同样，不要忘记在命令末尾输入句点 (`.`)。如果要使用 Docker Quickstart 终端来运行 Docker 命令，请确保切换 CLI。
+    2.  构建和标记 `watson` 应用程序，并将该应用程序作为映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间。同样，不要忘记在命令末尾输入句点 (`.`)。
 
         ```
-docker build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -525,13 +494,6 @@ docker build -t registry.<region>.bluemix.net/<namespace>/watson .
 Successfully built <image_id>
         ```
         {: screen}
-
-    3.  将应用程序的第一部分作为映像推送到专用注册表名称空间中。等待映像推送完后，再继续执行下一步。
-
-        ```
-docker push registry.<region>.bluemix.net/<namespace>/watson
-        ```
-        {: pre}
 
 4.  构建 {{site.data.keyword.watson}}-talk 映像。
 
@@ -542,10 +504,10 @@ cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
         {: pre}
 
-    2.  将应用程序的第二部分作为映像在本地进行构建和标记。同样，不要忘记在命令末尾输入句点 (`.`)。
+    2.  构建和标记 `watson-talk` 应用程序，并将该应用程序作为映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间。同样，不要忘记在命令末尾输入句点 (`.`)。
 
         ```
-docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -557,14 +519,7 @@ Successfully built <image_id>
         ```
         {: screen}
 
-    3.  将应用程序的第二部分推送到专用注册表名称空间中。等待映像推送完后，再继续执行下一步。
-
-        ```
-docker push registry.<region>.bluemix.net/<namespace>/watson-talk
-        ```
-        {: pre}
-
-5.  验证映像是否已成功添加到注册表名称空间。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
+5.  验证映像是否已成功添加到注册表名称空间。
 
     ```
     ibmcloud cr images
@@ -763,5 +718,5 @@ deployment "watson-talk-pod" successfully rolled out
 现在，您已掌握了基础知识，可以移至更高级的活动。请考虑尝试下列其中一项：
 
 - 完成存储库中[更复杂的实验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
-- 使用 {{site.data.keyword.containershort_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
-- 在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/technologies/container-orchestration/) 上浏览容器编排代码模式
+- 使用 {{site.data.keyword.containerlong_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
+- 在 [IBM Developer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/technologies/container-orchestration/) 上浏览容器编排代码模式

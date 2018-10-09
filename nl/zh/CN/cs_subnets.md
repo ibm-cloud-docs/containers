@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -37,11 +37,13 @@ lastupdated: "2018-08-06"
 <dt>免费集群的 VLAN</dt>
 <dd>在免费集群中，缺省情况下集群的工作程序节点会连接到 IBM 拥有的公用 VLAN 和专用 VLAN。因为是 IBM 控制 VLAN、子网和 IP 地址，所以无法创建多专区集群或向集群添加子网，而只能使用 NodePort 服务来公开应用程序。</dd>
 <dt>标准集群的 VLAN</dt>
-<dd>在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。对于在该专区中创建的每个后续集群，可复用相同的公用和专用 VLAN，因为多个集群可以共享 VLAN。</br></br>可以将工作程序节点连接到公用 VLAN 和专用 VLAN，也可以仅连接到专用 VLAN。如果要将工作程序节点仅连接到专用 VLAN，那么可以在集群创建期间使用现有专用 VLAN 的标识，或者[创建专用 VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) 并使用其标识。</dd></dl>
+<dd>在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。对于在该专区中创建的每个后续集群，可复用相同的公用和专用 VLAN，因为多个集群可以共享 VLAN。</br></br>可以将工作程序节点连接到公用 VLAN 和专用 VLAN，也可以仅连接到专用 VLAN。如果要将工作程序节点仅连接到专用 VLAN，那么可以在集群创建期间使用现有专用 VLAN 的标识，或者[创建专用 VLAN](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) 并使用其标识。</dd></dl>
 
-要查看每个专区中为帐户供应的 VLAN，请运行 `ibmcloud ks vlans <zone>`。要查看供应一个集群的 VLAN，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`，并查找 **Subnet VLANs** 部分。
+要查看每个专区中为帐户供应的 VLAN，请运行 `ibmcloud ks vlans <zone>.` 要查看供应一个集群的 VLAN，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`，并查找 **Subnet VLANs** 部分。
 
-**注**：如果有多专区集群、有多个 VLAN 用于单专区集群，或者在同一 VLAN 上有多个子网，那么必须开启 VLAN 生成，以便工作程序节点可以在专用网络上相互通信。有关指示信息，请参阅[启用或禁用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+**注**：
+* 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+* IBM Cloud infrastructure (SoftLayer) 管理在专区中创建第一个集群时自动供应的 VLAN。如果使 VLAN 变为未使用（例如，从 VLAN 中除去所有工作程序节点），那么 IBMCloud infrastructure (SoftLayer) 将回收此 VLAN。此后，如果需要新 VLAN，[请联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)。
 
 ### 子网和 IP 地址
 {: #subnets_ips}
@@ -60,7 +62,7 @@ lastupdated: "2018-08-06"
 
 要查看帐户中供应的所有子网，请运行 `ibmcloud ks subnets`。要查看绑定到一个集群的可移植公用子网和可移植专用子网，可以运行 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`，并查找 **Subnet VLANs** 部分。
 
-**注**：在 {{site.data.keyword.containershort_notm}} 中，VLAN 的子网数限制为 40 个。如果达到此限制，请首先检查以了解是否可以[在 VLAN 中复用子网以创建新集群](#custom)。如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)进行订购。然后，[创建集群](cs_cli_reference.html#cs_cluster_create)以使用这一新的 VLAN。
+**注**：在 {{site.data.keyword.containerlong_notm}} 中，VLAN 的子网数限制为 40 个。如果达到此限制，请首先检查以了解是否可以[在 VLAN 中复用子网以创建新集群](#custom)。如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)进行订购。然后，[创建集群](cs_cli_reference.html#cs_cluster_create)以使用这一新的 VLAN。
 
 <br />
 
@@ -80,8 +82,8 @@ lastupdated: "2018-08-06"
 - 要复用不再需要的集群中的子网，请删除不再需要的集群。请立即创建新集群，因为不复用的子网会在 24 小时内删除。
 
    ```
-   ibmcloud ks cluster-rm <cluster_name_or_ID>
-   ```
+  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  ```
    {: pre}
 
 要将 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中的现有子网与定制防火墙规则或可用 IP 地址配合使用，请执行以下操作：
@@ -110,7 +112,7 @@ lastupdated: "2018-08-06"
     ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
-    如果记不住 VLAN 所在的专区以用于 `--zone` 标志，您可以通过运行 `ibmcloud ks vlans <zone>` 来检查 VLAN 是否位于某个专区中。
+    如果记不住 VLAN 所在的专区以用于 `--zone` 标志，您可以通过运行 `ibmcloud ks vlans <zone>`.
     {: tip}
 
 3.  验证集群是否已创建。**注**：可能需要最长 15 分钟时间，才能订购好工作程序节点机器，并且在您的帐户中设置并供应集群。
@@ -124,7 +126,7 @@ lastupdated: "2018-08-06"
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.5
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.7
     ```
     {: screen}
 
@@ -139,7 +141,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.5
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.7
     ```
     {: screen}
 
@@ -254,7 +256,7 @@ apiVersion: v1
 缺省情况下，4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址可用于通过[创建 LoadBalancer 服务](cs_loadbalancer.html)向公共或专用网络公开单个应用程序。要创建 4 个以上的公共负载均衡器或 4 个以上的专用负载均衡器，可以通过向集群添加网络子网来获取更多可移植 IP 地址。
 
 **注：**
-* 使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containershort_notm}} 外部的其他用途。
+* 使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containerlong_notm}} 外部的其他用途。
 * 可移植公共 IP 地址按月收费。如果在供应子网后除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。
 
 ### 通过订购更多子网来添加可移植 IP
@@ -392,7 +394,7 @@ Subnet VLANs
 ## 管理子网路由
 {: #subnet-routing}
 
-如果有多专区集群、有多个 VLAN 用于单专区集群，或者在同一 VLAN 上有多个子网，那么必须开启 VLAN 生成，以便工作程序节点可以在专用网络上相互通信。有关指示信息，请参阅[启用或禁用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
 
 请查看以下场景，其中还需要 VLAN 生成。
 
@@ -406,9 +408,15 @@ Subnet VLANs
 
 要确保同一 VLAN 上的这些主子网中的工作程序可以进行通信，必须开启 VLAN 生成。有关指示信息，请参阅[启用或禁用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
 
+要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](cs_cli_reference.html#cs_vlan_spanning_get)。
+{: tip}
+
 ### 管理网关设备的子网路由
 {: #vra-routing}
 
 创建集群时，会在集群连接到的 VLAN 上订购可移植公用子网和可移植专用子网。这些子网提供用于 Ingress 和负载均衡器联网服务的 IP 地址。
 
 但是，如果您有现有路由器设备（例如，[虚拟路由器设备 (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about)），那么不会在路由器上配置集群连接到的这些 VLAN 中新添加的可移植子网。要使用 Ingress 或负载均衡器联网服务，必须通过[启用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)确保网络设备可以在同一 VLAN 上的不同子网之间进行路由。
+
+要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](cs_cli_reference.html#cs_vlan_spanning_get)。
+{: tip}

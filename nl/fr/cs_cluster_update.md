@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -37,7 +37,7 @@ Dès que des mises à jour sont disponibles, vous recevez une notification dans 
 **Combien de versions peut avoir le maître derrière la version la plus récente ?**</br>
 En principe, IBM prend en charge 3 versions de Kubernetes à un moment donné. Vous ne pouvez pas mettre à jour le serveur d'API Kubernetes à une version deux fois supérieure à sa version actuelle.
 
-Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.7 et que vous voulez le mettre à jour à la version 1.10, vous devez d'abord effectuer une mise à jour vers la version 1.8 ou 1.9. Vous pouvez forcer la mise à jour, mais au-delà de trois versions secondaires, une mise à jour peut entraîner des échecs ou des résultats inattendus. 
+Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.7 et que vous voulez le mettre à jour à la version 1.10, vous devez d'abord effectuer une mise à jour vers la version 1.8 ou 1.9. Vous pouvez forcer la mise à jour, mais au-delà de trois versions secondaires, une mise à jour peut entraîner des échecs ou des résultats inattendus.
 
 Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour. Par conséquent, maintenez votre cluster à jour pour éviter des répercussions opérationnelles.
 
@@ -85,7 +85,7 @@ Avant de commencer :
 - Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](cs_versions.html).
 - Pour appliquer une mise à jour de module de correction, consultez les [journaux de modifications de version Kubernetes](cs_versions_changelog.html#changelog). </br>
 
-**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent).
+**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent_storage_overview).
 
 
 **Qu'advient-il de mes applications au cours d'une mise à jour ?**</br>
@@ -195,7 +195,7 @@ Pour créer une mappe de configuration et mettre à jour des noeuds worker :
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
-        <td>Quantité maximale de noeuds pouvant être indisponibles pour un libellé clé-valeur spécifique, exprimée en pourcentage. Un noeud worker est indisponible lorsqu'il est en cours de déploiement, de rechargement ou de mise à disposition. Les noeuds worker en file d'attente sont bloqués pour la mise à jour s'ils dépassent un pourcentage maximum de noeuds indisponibles défini.</td>
+        <td>Quantité maximale de noeuds pouvant être indisponibles pour un libellé clé-valeur spécifique, exprimée en pourcentage. Un noeud worker est indisponible lorsqu'il est en cours de déploiement, de rechargement ou de mise à disposition. Les noeuds worker en file d'attente sont bloqués pour la mise à jour s'ils dépassent un pourcentage maximum de noeuds indisponibles défini. </td>
       </tr>
       <tr>
         <td><code>NodeSelectorKey</code></td>
@@ -258,10 +258,10 @@ Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant
 
 Avant de commencer :
 - [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
-- Si vous stockez des données sur votre noeud worker, les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage_planning.html#persistent).
+- Si vous stockez des données sur votre noeud worker, les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage_planning.html#persistent_storage_overview).
 
 
-**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent).
+**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent_storage_overview).
 
 1. Affichez la liste des noeuds worker disponibles et notez leur adresse IP privée.
    - **Pour les noeuds worker figurant dans un pool de noeuds worker** :
@@ -367,14 +367,33 @@ Avant de commencer :
 ## Mise à jour de modules complémentaires de cluster
 {: #addons}
 
-Votre cluster {{site.data.keyword.containershort_notm}} est livré avec des **modules complémentaires**, par exemple Fluentd utilisé pour la consignation. Ces modules s'installent automatiquement lorsque vous mettez à disposition le cluster. Ils peuvent être mis à jour séparément du maître et des noeuds worker.
+Votre cluster {{site.data.keyword.containerlong_notm}} est livré avec des **modules complémentaires**, par exemple Fluentd utilisé pour la consignation. Ces modules s'installent automatiquement lorsque vous mettez à disposition le cluster. Ils peuvent être mis à jour séparément du maître et des noeuds worker.
 {: shortdesc}
 
 **Quels sont les modules complémentaires par défaut que je dois mettre à jour séparément du cluster ?**
 * [Fluentd utilisé pour la consignation](#logging)
 
+**Existe-t-il des modules complémentaires que je n'ai pas besoin de mettre à jour et que je ne peux pas modifier ?**</br>
+Oui, votre cluster est déployé avec les modules complémentaires gérés suivants et les ressources associées qui ne sont pas modifiables. Si vous essayez de modifier l'un de ces modules de déploiement, les paramètres d'origine sont restaurés à intervalles réguliers. 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+Vous pouvez afficher ces ressources en utilisant le libellé `addonmanager.kubernetes.io/mode: Reconcile`. Exemple :
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **Puis-je installer d'autres modules complémentaires que ceux par défaut ?**</br>
-Oui. {{site.data.keyword.containershort_notm}} offre d'autres modules complémentaires que vous pouvez sélectionner pour ajouter des fonctionnalités à votre cluster. Par exemple, vous envisagerez peut-être d'[utiliser des chartes Helm](cs_integrations.html#helm) pour installer le [plug-in Block Storage](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) ou le [VPN strongSwan](cs_vpn.html#vpn-setup). Vous devez mettre à jour chacun de ces modules séparément en suivant les instructions de mise à jour des chartes Helm.
+Oui. {{site.data.keyword.containerlong_notm}} offre d'autres modules complémentaires que vous pouvez sélectionner pour ajouter des fonctionnalités à votre cluster. Par exemple, vous envisagerez peut-être d'[utiliser des chartes Helm](cs_integrations.html#helm) pour installer le [plug-in Block Storage](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) ou le [VPN strongSwan](cs_vpn.html#vpn-setup). Vous devez mettre à jour chacun de ces modules séparément en suivant les instructions de mise à jour des chartes Helm.
 
 ### Fluentd utilisé pour la consignation
 {: #logging}
@@ -445,21 +464,21 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
    {: pre}
 
 5. Ajoutez la zone dans votre pool de noeuds worker. Lorsque vous ajoutez une zone dans un pool de noeuds worker, les noeuds worker définis dans votre pool de noeuds worker sont mis à disposition dans cette zone et pris en compte pour la planification des charges de travail à venir. {{site.data.keyword.containerlong}} ajoute automatiquement le libellé `failure-domain.beta.kubernetes.io/region` pour la région et le libellé `failure-domain.beta.kubernetes.io/zone` pour la zone à chaque noeud worker. Le planificateur de Kubernetes utilise ces libellés pour répartir les pods sur les zones situées dans la même région.
-   1. **Pour ajouter une zone à un pool de noeuds worker** : remplacez `<pool_name>` par le nom de votre pool de noeuds worker et indiquez l'ID de cluster, la zone et les VLAN avec les informations que vous avez récupérées précédemment. Si vous ne disposez pas de VLAN public et privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous. 
+   1. **Pour ajouter une zone à un pool de noeuds worker** : remplacez `<pool_name>` par le nom de votre pool de noeuds worker et indiquez l'ID de cluster, la zone et les VLAN avec les informations que vous avez récupérées précédemment. Si vous ne disposez pas de VLAN public et privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous.
 
       Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande pour chaque VLAN et les pools de noeuds worker correspondants associés. Les nouveaux noeuds worker sont ajoutés aux VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.
-   ```
+      ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker.</br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Pour activer la communication sur le réseau privé entre les noeuds worker situés dans différentes zones, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker. </br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **Pour ajouter plusieurs zones dans vos pools de noeuds worker** : répétez la commande `ibmcloud ks zone-add` avec une zone différente et indiquez les pools de noeuds worker que vous voulez mettre à disposition dans cette zone. En ajoutant des zones supplémentaires dans votre cluster, vous passez d'un cluster à zone unique à un [cluster à zones multiples](cs_clusters.html#multi_zone).
+   3. **Pour ajouter plusieurs zones dans vos pools de noeuds worker** : répétez la commande `ibmcloud ks zone-add` avec une zone différente et indiquez les pools de noeuds worker que vous voulez mettre à disposition dans cette zone. En ajoutant des zones supplémentaires dans votre cluster, vous passez d'un cluster à zone unique à un [cluster à zones multiples](cs_clusters_planning.html#multizone).
 
 6. Patientez jusqu'à la fin du déploiement des noeuds worker dans chaque zone.
    ```
@@ -501,4 +520,4 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
 
 
 **Etape suivante ?** </br>
-Maintenant que vous avez mis à jour votre cluster pour utiliser des pools de noeuds worker, vous pouvez améliorer la disponibilité en ajoutant d'autres zones dans votre cluster. L'ajout de zones supplémentaires dans votre cluster, vous fait passer d'un cluster à zone unique à un [cluster à zones multiples](cs_clusters.html#ha_clusters). Lorsque vous passez d'un cluster à zone unique à un cluster à zones multiples, votre domaine Ingress `<cluster_name>.<region>.containers.mybluemix.net` devient `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Le domaine Ingress existant est toujours valide et peut être utilisé pour envoyer des demandes à vos applications.
+Maintenant que vous avez mis à jour votre cluster pour utiliser des pools de noeuds worker, vous pouvez améliorer la disponibilité en ajoutant d'autres zones dans votre cluster. L'ajout de zones supplémentaires dans votre cluster, vous fait passer d'un cluster à zone unique à un [cluster à zones multiples](cs_clusters_planning.html#ha_clusters). Lorsque vous passez d'un cluster à zone unique à un cluster à zones multiples, votre domaine Ingress `<cluster_name>.<region>.containers.mybluemix.net` devient `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Le domaine Ingress existant est toujours valide et peut être utilisé pour envoyer des demandes à vos applications.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,20 +20,22 @@ lastupdated: "2018-08-06"
 地區是您可部署應用程式、服務及其他 {{site.data.keyword.Bluemix}} 資源的特定地理位置。[{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containerlong}} 地區](#container_regions)不同。地區包含一個以上的區域，這些區域是實體資料中心，用於管理運算、網路和儲存空間資源以及管理服務和應用程式的相關散熱及電源。區域彼此隔離，以確保不會共用單一失敗點。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} 是在全球各地管理。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containershort_notm}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
+{{site.data.keyword.Bluemix_notm}} 是在全球各地管理。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong_notm}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
+ 
 
+**附註**：您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 
-![{{site.data.keyword.containershort_notm}} 地區及區域](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 地區及區域](/images/regions-mz.png)
 
-_{{site.data.keyword.containershort_notm}} 地區及區域_
+_{{site.data.keyword.containerlong_notm}} 地區及區域_
 
-支援的 {{site.data.keyword.containershort_notm}} 地區如下：
-  * 亞太地區北部
-  * 亞太地區南部
-  * 歐盟中部
-  * 英國南部
-  * 美國東部
-  * 美國南部
+支援的 {{site.data.keyword.containerlong_notm}} 地區如下：
+* 亞太地區北部（僅限標準叢集）
+* 亞太地區南部
+* 歐盟中部
+* 英國南部
+* 美國東部（僅限標準叢集）
+* 美國南部
 
 <br />
 
@@ -83,22 +85,24 @@ _{{site.data.keyword.containershort_notm}} 地區及區域_
 <br />
 
 
-## {{site.data.keyword.containershort_notm}} 中的地區
+## {{site.data.keyword.containerlong_notm}} 中的地區
 {: #container_regions}
 
-透過使用 {{site.data.keyword.containershort_notm}} 地區，您可以在您登入的 {{site.data.keyword.Bluemix_notm}} 地區以外的地區建立或存取 Kubernetes 叢集。{{site.data.keyword.containershort_notm}} 地區端點特指 {{site.data.keyword.containershort_notm}}，而不是 {{site.data.keyword.Bluemix_notm}} 整體。
+透過使用 {{site.data.keyword.containerlong_notm}} 地區，您可以在您登入的 {{site.data.keyword.Bluemix_notm}} 地區以外的地區建立或存取 Kubernetes 叢集。{{site.data.keyword.containerlong_notm}} 地區端點特指 {{site.data.keyword.containerlong_notm}}，而不是 {{site.data.keyword.Bluemix_notm}} 整體。
 {:shortdesc}
 
-支援的 {{site.data.keyword.containershort_notm}} 地區：
-  * 亞太地區北部
+**附註**：您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
+
+支援的 {{site.data.keyword.containerlong_notm}} 地區：
+  * 亞太地區北部（僅限標準叢集）
   * 亞太地區南部
   * 歐盟中部
   * 英國南部
-  * 美國東部
+  * 美國東部（僅限標準叢集）
   * 美國南部
 
-您可以透過某個廣域端點 `https://containers.bluemix.net/v1` 來存取 {{site.data.keyword.containershort_notm}}。
-* 若要檢查您目前所在的 {{site.data.keyword.containershort_notm}} 地區，請執行 `ibmcloud ks region`。
+您可以透過某個廣域端點 `https://containers.bluemix.net/v1` 來存取 {{site.data.keyword.containerlong_notm}}。
+* 若要檢查您目前所在的 {{site.data.keyword.containerlong_notm}} 地區，請執行 `ibmcloud ks region`。
 * 若要擷取可用地區及其端點的清單，請執行 `ibmcloud ks regions`。
 
 若要使用 API 搭配廣域端點，請在您的所有要求中，在 `X-Region` 標頭傳遞地區名稱。
@@ -107,11 +111,11 @@ _{{site.data.keyword.containershort_notm}} 地區及區域_
 ### 登入不同的 {{site.data.keyword.containerlong_notm}} 地區
 {: #container_login_endpoints}
 
-您可以使用 {{site.data.keyword.containershort_notm}} CLI 來變更地區。
+您可以使用 {{site.data.keyword.containerlong_notm}} CLI 來變更地區。
 {:shortdesc}
 
-您可能因為下列原因而想要登入另一個 {{site.data.keyword.containershort_notm}} 地區：
-  * 您已在其中一個地區中建立 {{site.data.keyword.Bluemix_notm}} 服務或專用 Docker 映像檔，並且想要在另一個地區中將它們與 {{site.data.keyword.containershort_notm}} 搭配使用。
+您可能因為下列原因而想要登入另一個 {{site.data.keyword.containerlong_notm}} 地區：
+  * 您已在其中一個地區中建立 {{site.data.keyword.Bluemix_notm}} 服務或專用 Docker 映像檔，並且想要在另一個地區中將它們與 {{site.data.keyword.containerlong_notm}} 搭配使用。
   * 您要在與您登入的預設 {{site.data.keyword.Bluemix_notm}} 地區不同的地區中存取叢集。
 
 若要快速切換地區，請執行 `ibmcloud ks region-set`。
@@ -119,7 +123,7 @@ _{{site.data.keyword.containershort_notm}} 地區及區域_
 ### 使用 {{site.data.keyword.containerlong_notm}} API 指令
 {: #containers_api}
 
-若要與 {{site.data.keyword.containershort_notm}} API 互動，請輸入指令類型，並在廣域端點附加 `/v1/command`。
+若要與 {{site.data.keyword.containerlong_notm}} API 互動，請輸入指令類型，並在廣域端點附加 `/v1/command`。
 {:shortdesc}
 
 `GET /clusters` API 的範例：
@@ -135,7 +139,7 @@ _{{site.data.keyword.containershort_notm}} 地區及區域_
 
 若要檢視 API 指令的文件，請檢視 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。
 
-## {{site.data.keyword.containershort_notm}} 中的區域
+## {{site.data.keyword.containerlong_notm}} 中的區域
 {: #zones}
 
 區域是指 {{site.data.keyword.Bluemix_notm}} 地區內可用的實體資料中心。地區是組織區域的概念工具，可包括不同國家/地區中的區域（資料中心）。下表依地區顯示可用的區域。
@@ -170,6 +174,7 @@ _{{site.data.keyword.containershort_notm}} 地區及區域_
       <td>歐盟中部</td>
       <td>法蘭克福：fra02、fra04、fra05</td>
       <td><p>阿姆斯特丹：ams03</p>
+      <p>奧斯陸：osl01</p>
       <p>巴黎：par01</p>
       </td>
     </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -18,11 +18,52 @@ lastupdated: "2018-08-06"
 
 
 
-# {{site.data.keyword.containershort_notm}} 的热门主题
+# {{site.data.keyword.containerlong_notm}} 的热门主题
 {: #cs_popular_topics}
 
-与 {{site.data.keyword.containerlong}} 中的内容保持同步。了解要探索的新功能、试用技巧或其他开发者当下认为很有用的一些热门主题。
+与 {{site.data.keyword.containerlong}} 中的内容保持同步。了解要探索的新功能、试用技巧或其他开发者目前在产品中发现有用的一些热门主题。
 {:shortdesc}
+
+## 2018 年 9 月的热门主题
+{: #sept18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 8 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>9 月 5 日</td>
+<td>[在奥斯陆提供了专区](cs_regions.html)</td>
+<td>欢迎使用欧洲中部区域挪威奥斯陆的新专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此专区以及您集群所在区域内的其他专区。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 8 月的热门主题
+{: #aug18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 8 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>8 月 31 日</td>
+<td>{{site.data.keyword.cos_full_notm}} 现在与 {{site.data.keyword.containerlong}} 相集成</td>
+<td>使用 Kubernetes 本机持久性卷声明 (PVC) 以向集群供应 {{site.data.keyword.cos_full_notm}}。{{site.data.keyword.cos_full_notm}} 最适合用于读取密集型工作负载，以及在多专区集群中跨多个专区存储数据。从在集群上[创建 {{site.data.keyword.cos_full_notm}} 服务实例](cs_storage_cos.html#create_cos_service)和[安装 {{site.data.keyword.cos_full_notm}} 插件](cs_storage_cos.html#install_cos)开始。</br></br>不确定哪种存储解决方案适合您？请从[此处](cs_storage_planning.html#choose_storage_solution)开始分析数据并针对数据选择相应的存储解决方案。</td>
+</tr>
+<tr>
+<td>8 月 14 日</td>
+<td>将集群更新为 Kubernetes V1.11 以分配 pod 优先级</td>
+<td>在将集群更新为 [Kubernetes V1.11](cs_versions.html#cs_v111) 后，可利用新功能，例如，使用 `containerd` 提高的容器运行时性能或[分配 pod 优先级](cs_pod_priority.html#pod_priority)。</td>
+</tr>
+</tbody></table>
 
 ## 2018 年 7 月的热门主题
 {: #july18}
@@ -43,7 +84,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>7 月 10 日</td>
 <td>引入多专区集群</td>
-<td>想要提高集群可用性吗？现在，您可以使集群跨精选大城市区域中的多个专区。有关更多信息，请参阅[在 {{site.data.keyword.containershort_notm}} 中创建多专区集群](cs_clusters.html#multizone)。</td>
+<td>想要提高集群可用性吗？现在，您可以使集群跨精选大城市区域中的多个专区。有关更多信息，请参阅[在 {{site.data.keyword.containerlong_notm}} 中创建多专区集群](cs_clusters_planning.html#multizone)。</td>
 </tr>
 </tbody></table>
 
@@ -95,7 +136,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>5 月 14 日</td>
 <td>[更新：在全球范围内的 GPU 裸机上部署工作负载](cs_app.html#gpu_app)</td>
-<td>如果集群中有[裸机图形处理单元 (GPU) 机器类型](cs_clusters.html#shared_dedicated_node)，那么可以安排数学密集型应用程序。GPU 工作程序节点可以处理 CPU 和 GPU 上的应用程序工作负载以提高性能。</td>
+<td>如果集群中有[裸机图形处理单元 (GPU) 机器类型](cs_clusters_planning.html#shared_dedicated_node)，那么可以安排数学密集型应用程序。GPU 工作程序节点可以处理 CPU 和 GPU 上的应用程序工作负载以提高性能。</td>
 </tr>
 <tr>
 <td>5 月 3 日</td>
@@ -153,13 +194,13 @@ lastupdated: "2018-08-06"
 <tbody>
 <tr>
 <td>3 月 16 日</td>
-<td>[供应具有可信计算的裸机集群](cs_clusters.html#shared_dedicated_node)</td>
+<td>[供应具有可信计算的裸机集群](cs_clusters_planning.html#shared_dedicated_node)</td>
 <td>创建运行 [Kubernetes V1.9](cs_versions.html#cs_v19) 或更高版本的裸机集群，并启用“可信计算”来验证工作程序节点是否被篡改。</td>
 </tr>
 <tr>
 <td>3 月 14 日</td>
 <td>[使用 {{site.data.keyword.appid_full}} 安全登录](cs_integrations.html#appid)</td>
-<td>通过要求用户登录，增强了在 {{site.data.keyword.containershort_notm}} 中运行的应用程序的功能。</td>
+<td>通过要求用户登录，增强了在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序的功能。</td>
 </tr>
 <tr>
 <td>3 月 13 日</td>
@@ -207,7 +248,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>2 月 19 日</td>
 <td>[设置 strongSwan IPSec VPN](cs_vpn.html#vpn-setup)</td>
-<td>快速部署 strongSwan IPSec VPN Helm 图表，无需虚拟路由器设备就能将 {{site.data.keyword.containershort_notm}} 集群安全地连接到内部部署数据中心。</td>
+<td>快速部署 strongSwan IPSec VPN Helm 图表，无需虚拟路由器设备就能将 {{site.data.keyword.containerlong_notm}} 集群安全地连接到内部部署数据中心。</td>
 </tr>
 <tr>
 <td>2 月 14 日</td>
@@ -239,7 +280,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>1 月 23 日</td>
 <td>[在新加坡和加拿大蒙特利尔提供了专区](cs_regions.html)</td>
-<td>新加坡和蒙特利尔是 {{site.data.keyword.containershort_notm}} 亚太地区北部和美国东部区域中可用的专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于这些专区以及您集群所在区域内的其他专区。</td>
+<td>新加坡和蒙特利尔是 {{site.data.keyword.containerlong_notm}} 亚太地区北部和美国东部区域中可用的专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于这些专区以及您集群所在区域内的其他专区。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>
@@ -251,7 +292,7 @@ lastupdated: "2018-08-06"
 ## 在 Slack 上与志趣相投的开发人员交谈
 {: #slack}
 
-您可以在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中查看其他人正在讨论的内容并提出自己的问题。
+您可以在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中查看其他人正在讨论的内容并提出自己的问题。
 {:shortdesc}
 
 如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。

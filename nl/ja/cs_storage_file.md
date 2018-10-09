@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -30,7 +30,7 @@ lastupdated: "2018-08-06"
 
 ストレージ・クラスごとに、プロビジョンされるファイル・ストレージのタイプ (使用可能なサイズ、IOPS、ファイル・システム、保存ポリシーなど) が指定されています。  
 
-**重要:** データを保管できる十分な容量が得られるように、ストレージ構成は慎重に選択してください。ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのサイズ、タイプ、IOPS、保存ポリシーを変更することはできません。さらに容量が必要になった場合や、別の構成のストレージが必要になった場合は、[新規ストレージ・インスタンスを作成し、前のストレージ・インスタンスから新規ストレージ・インスタンスにデータをコピー](cs_storage_basics.html#update_storageclass)する必要があります。
+**重要:** データを保管できる十分な容量が得られるように、ストレージ構成は慎重に選択してください。 ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのサイズ、タイプ、IOPS、保存ポリシーを変更することはできません。 さらに容量が必要になった場合や、別の構成のストレージが必要になった場合は、[新規ストレージ・インスタンスを作成し、前のストレージ・インスタンスから新規ストレージ・インスタンスにデータをコピー](cs_storage_basics.html#update_storageclass)する必要があります。
 
 1. {{site.data.keyword.containerlong}} で使用可能なストレージ・クラスをリストします。
     ```
@@ -59,15 +59,15 @@ lastupdated: "2018-08-06"
    ```
    {: pre}
 
-   各ストレージ・クラスについて詳しくは、[ストレージ・クラス・リファレンス](#storageclass_reference)を参照してください。ニーズに合うものがない場合は、カスタマイズした独自のストレージ・クラスを作成することを検討してください。まずは、[ストレージ・クラスのカスタマイズ例](#custom_storageclass)を確認してください。
+   各ストレージ・クラスについて詳しくは、[ストレージ・クラス・リファレンス](#storageclass_reference)を参照してください。 ニーズに合うものがない場合は、カスタマイズした独自のストレージ・クラスを作成することを検討してください。 まずは、[ストレージ・クラスのカスタマイズ例](#custom_storageclass)を確認してください。
    {: tip}
 
 3. プロビジョンするファイル・ストレージのタイプを選択します。
-   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage) をプロビジョンします。エンデュランス・ストレージの場合、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
-   - **カスタム・ストレージ・クラス:** このストレージ・クラスは、[パフォーマンス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage) をプロビジョンします。パフォーマンス・ストレージの場合は、より柔軟にストレージのサイズと IOPS を選択できます。
+   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage) をプロビジョンします。 エンデュランス・ストレージの場合、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
+   - **カスタム・ストレージ・クラス:** このストレージ・クラスは、[パフォーマンス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage) をプロビジョンします。 パフォーマンス・ストレージの場合は、より柔軟にストレージのサイズと IOPS を選択できます。
 
-4. ファイル・ストレージのサイズと IOPS を選択します。IOPS のサイズと数値によって、合計 IOPS (1 秒あたりの入出力操作数) が決まります。これは、ストレージの速度を示す指標となります。ストレージの合計 IOPS が多いほど、読み取り/書き込み操作の処理が高速になります。
-   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、1 ギガバイトあたりの IOPS 数が固定されていて、SSD ハード・ディスクにプロビジョンされます。合計の IOPS 数は、選択したストレージのサイズによって決まります。指定可能なサイズの範囲内で、任意の整数のギガバイト (20 Gi、256 Gi、11854 Gi など) を選択できます。合計 IOPS 数を求めるには、選択したサイズと IOPS を乗算します。例えば、4 IOPS/GB のシルバー・ストレージ・クラスで、1000Gi のファイル・ストレージ・サイズを選択すると、ストレージの合計 IOPS は 4000 になります。
+4. ファイル・ストレージのサイズと IOPS を選択します。 IOPS のサイズと数値によって、合計 IOPS (1 秒あたりの入出力操作数) が決まります。これは、ストレージの速度を示す指標となります。 ストレージの合計 IOPS が多いほど、読み取り/書き込み操作の処理が高速になります。
+   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、1 ギガバイトあたりの IOPS 数が固定されていて、SSD ハード・ディスクにプロビジョンされます。 合計の IOPS 数は、選択したストレージのサイズによって決まります。 指定可能なサイズの範囲内で、任意の整数のギガバイト (20 Gi、256 Gi、11854 Gi など) を選択できます。 合計 IOPS 数を求めるには、選択したサイズと IOPS を乗算します。 例えば、4 IOPS/GB のシルバー・ストレージ・クラスで、1000Gi のファイル・ストレージ・サイズを選択すると、ストレージの合計 IOPS は 4000 になります。
      <table>
          <caption>ストレージ・クラスのサイズの範囲と IOPS/GB を示す表</caption>
          <thead>
@@ -92,8 +92,7 @@ lastupdated: "2018-08-06"
          <td>20 から 4000 Gi</td>
          </tr>
          </tbody></table>
-   - **カスタム・ストレージ・クラス:** このストレージ・クラスを選択した場合は、より柔軟に、希望するサイズと IOPS を選択できます。サイズについては、指定可能なサイズの範囲内で、任意の整数のギガバイトを選択できます。選択したサイズに応じて、選択可能な IOPS の範囲が決まります。指定された範囲にある 100 の倍数で IOPS を選択できます。選択する IOPS は静的であり、ストレージのサイズに合わせてスケーリングされません。 例えば、40Gi と 100 IOPS を選択した場合、合計 IOPS は 100 のままです。</br></br> ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプも決まります。例えば、500Gi を 100 IOPS で選択した場合、ギガバイトに対する IOPS の比率は 0.2 となります。0.3 以下の比率のストレージは、SATA ハード・ディスクにプロビジョンされます。0.3 より大きい比率のストレージは、SSD ハード・ディスクにプロビジョンされます。
-       
+   - **カスタム・ストレージ・クラス:** このストレージ・クラスを選択した場合は、より柔軟に、希望するサイズと IOPS を選択できます。 サイズについては、指定可能なサイズの範囲内で、任意の整数のギガバイトを選択できます。 選択したサイズに応じて、選択可能な IOPS の範囲が決まります。 指定された範囲にある 100 の倍数で IOPS を選択できます。 選択する IOPS は静的であり、ストレージのサイズに合わせてスケーリングされません。 例えば、40Gi と 100 IOPS を選択した場合、合計 IOPS は 100 のままです。 </br></br> ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプも決まります。 例えば、500Gi を 100 IOPS で選択した場合、ギガバイトに対する IOPS の比率は 0.2 となります。 0.3 以下の比率のストレージは、SATA ハード・ディスクにプロビジョンされます。 0.3 より大きい比率のストレージは、SSD ハード・ディスクにプロビジョンされます。  
      <table>
          <caption>カスタム・ストレージ・クラスのサイズ範囲と IOPS を示す表</caption>
          <thead>
@@ -148,10 +147,10 @@ lastupdated: "2018-08-06"
          </tbody></table>
 
 5. クラスターまたは永続ボリューム請求 (PVC) が削除された後もデータを保持するかどうかを選択します。
-   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の物理ストレージ・デバイスと、データは残ります。ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のファイル・ストレージを使用する](#existing_file)手順に従う必要があります。
-   - PVC を削除するときに PV、データ、物理ファイル・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。
+   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のファイル・ストレージを使用する](#existing_file)手順に従う必要があります。
+   - PVC を削除するときに PV、データ、物理ファイル・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。 **注**: 専用アカウントがある場合は、`retain` を指定せずにストレージ・クラスを選択し、IBM Cloud インフラストラクチャー (SoftLayer) 内の孤立ボリュームを防止します。
 
-6. 時間単位と月単位のどちらの課金方法にするかを選択します。詳しくは、[料金設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing) を参照してください。デフォルトでは、すべてのファイル・ストレージ・デバイスが時間単位の課金タイプでプロビジョンされます。
+6. 時間単位と月単位のどちらの課金方法にするかを選択します。 詳しくは、[料金設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing) を参照してください。 デフォルトでは、すべてのファイル・ストレージ・デバイスが時間単位の課金タイプでプロビジョンされます。
    **注:** 月単位の課金タイプを選択した場合は、永続ストレージを短期間しか使用せずに削除しても、月額料金を支払うことになります。
 
 <br />
@@ -161,14 +160,14 @@ lastupdated: "2018-08-06"
 ## ファイル・ストレージをアプリに追加する
 {: #add_file}
 
-ファイル・ストレージをクラスターに[動的にプロビジョン](cs_storage_basics.html#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで物理ストレージ・デバイスが注文されます。
+ファイル・ストレージをクラスターに[動的にプロビジョン](cs_storage_basics.html#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで物理ストレージ・デバイスが注文されます。
 {:shortdesc}
 
 開始前に、以下のことを行います。
 - ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲に[発信アクセスを許可](cs_firewall.html#pvc)し、PVC を作成できるようにします。
 - [事前定義されたストレージ・クラスを選択する](#predefined_storageclass)か、または[カスタマイズしたストレージ・クラス](#custom_storageclass)を作成します。
 
-  **ヒント:** 複数ゾーン・クラスターを利用している場合は、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。それから、このトピックの手順に従って、カスタマイズしたストレージ・クラスを使用してストレージをプロビジョンします。
+  **ヒント:** 複数ゾーン・クラスターを利用している場合は、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。 ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。 それから、このトピックの手順に従って、カスタマイズしたストレージ・クラスを使用してストレージをプロビジョンします。
 
 ファイル・ストレージを追加するには、以下のようにします。
 
@@ -229,11 +228,15 @@ lastupdated: "2018-08-06"
         </tr>
         <tr>
         <td><code>metadata/annotations</code></td>
-        <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。</br> ストレージ・クラスを指定しなかった場合は、デフォルト・ストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。<p>**ヒント:** デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</p></td>
+        <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。 </br> ストレージ・クラスを指定しなかった場合は、デフォルト・ストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。<p>**ヒント:** デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</p></td>
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
-          <td>ストレージの課金額を計算する頻度として「monthly」または「hourly」を指定します。 課金タイプを指定しない場合、ストレージは時間単位 (hourly) の課金タイプでプロビジョンされます。</td>
+          <td>ストレージの課金額を計算する頻度として「monthly」または「hourly」を指定します。 課金タイプを指定しない場合、ストレージは時間単位 (hourly) の課金タイプでプロビジョンされます。 </td>
+        </tr>
+        <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>次のオプションのいずれかを指定してください。 <ul><li><strong>ReadWriteMany: </strong>PVC は複数のポッドによってマウントできます。すべてのポッドは、ボリュームに対する読み取りと書き込みを行うことができます。 </li><li><strong>ReadOnlyMany: </strong>PVC は複数のポッドによってマウントできます。すべてのポッドには読み取り専用アクセス権限があります。<li><strong>ReadWriteOnce: </strong>PVC は 1 つのポッドのみによってマウントできます。このポッドは、ボリュームに対して読み取りと書き込みを行うことができます。</li></ul></td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -241,7 +244,7 @@ lastupdated: "2018-08-06"
         </tr>
         <tr>
         <td><code>spec/resources/requests/iops</code></td>
-        <td>このオプションは、カスタム・ストレージ・クラス (`ibmc-file-custom / ibmc-file-retain-custom`) でのみ使用できます。許容範囲内で 100 の倍数を選択して、ストレージの合計 IOPS を指定します。 リストされているもの以外の IOPS を選択した場合、その IOPS は切り上げられます。</td>
+        <td>このオプションは、カスタム・ストレージ・クラス (`ibmc-file-custom / ibmc-file-retain-custom`) でのみ使用できます。 許容範囲内で 100 の倍数を選択して、ストレージの合計 IOPS を指定します。 リストされているもの以外の IOPS を選択した場合、その IOPS は切り上げられます。</td>
         </tr>
         </tbody></table>
 
@@ -345,7 +348,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。</td>
+    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。 マウント・パスに書き込まれるデータは、物理ファイル・ストレージ・インスタンスの <code>root</code> ディレクトリーに格納されます。物理ファイル・ストレージ・インスタンス内にディレクトリーを作成するには、マウント・パスにサブディレクトリーを作成する必要があります。</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -357,7 +360,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>volumes/persistentVolumeClaim/claimName</code></td>
-    <td>使用する PV をバインドする PVC の名前。</td>
+    <td>使用する PV をバインドする PVC の名前。 </td>
     </tr>
     </tbody></table>
 
@@ -406,7 +409,7 @@ lastupdated: "2018-08-06"
 アプリへの既存のストレージのマウントを開始するには、その前に、PV に関する必要な情報をすべて取得し、クラスターでストレージにアクセスできるように準備する必要があります。  
 
 **`retain` ストレージ・クラスを指定してプロビジョンされたストレージの場合** </br>
-`retain` ストレージ・クラスを指定してストレージをプロビジョンした場合、PVC を削除しても、PV と物理ストレージ・デバイスは自動的に削除されません。そのストレージをクラスターで再使用するには、残っている PV をまず削除する必要があります。
+`retain` ストレージ・クラスを指定してストレージをプロビジョンした場合、PVC を削除しても、PV と物理ストレージ・デバイスは自動的に削除されません。 そのストレージをクラスターで再使用するには、残っている PV をまず削除する必要があります。
 
 既存のストレージを、プロビジョンしたクラスターとは別のクラスターで使用するには、[クラスターの外部で作成されたストレージ](#external_storage)の手順に従って、ストレージをワーカー・ノードのサブネットに追加してください。
 {: tip}
@@ -417,7 +420,7 @@ lastupdated: "2018-08-06"
    ```
    {: pre}
 
-   対象の永続ストレージに属する PV を探します。PV は `released` 状態になっています。
+   対象の永続ストレージに属する PV を探します。 PV は `released` 状態になっています。
 
 2. PV の詳細情報を取得します。
    ```
@@ -444,13 +447,15 @@ lastupdated: "2018-08-06"
 **クラスターの外部にプロビジョンされた永続ストレージの場合** </br>
 以前にプロビジョンして、まだクラスターで使用したことがない既存のストレージを使用するには、そのストレージをワーカー・ノードと同じサブネットで使用できるようにする必要があります。
 
+**注**: 専用アカウントがある場合は、[サポート・チケットを開く](/docs/get-support/howtogetsupport.html#getting-customer-support)必要があります。
+
 1.  {: #external_storage}[IBM Cloud インフラストラクチャー (SoftLayer) ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://control.bluemix.net/) で、**「ストレージ」**をクリックします。
 2.  **「File Storage」**をクリックして、**「アクション」**メニューから**「ホストの許可」**を選択します。
 3.  **「サブネット」**を選択します。
 4.  ドロップダウン・リストから、ワーカー・ノードが接続されているプライベート VLAN サブネットを選択します。 ワーカー・ノードのサブネットを見つけるには、`ibmcloud ks workers <cluster_name>` を実行して、ワーカー・ノードの `Private IP` をドロップダウン・リストにあるサブネットと比較します。
 5.  **「送信」**をクリックします。
 6.  ファイル・ストレージの名前をクリックします。
-7.  `マウント・ポイント`、`サイズ`、`ロケーション`のフィールドをメモします。`マウント・ポイント`のフィールドは `<server>:/<path>` として表示されます。
+7.  `マウント・ポイント`、`サイズ`、`ロケーション`のフィールドをメモします。 `マウント・ポイント`のフィールドは `<nfs_server>:<file_storage_path>` として表示されます。
 
 ### ステップ 2: 永続ボリューム (PV) および対応する永続ボリューム請求 (PVC) を作成する
 
@@ -487,11 +492,15 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>metadata/labels</code></td>
-    <td>先ほど取得した地域とゾーンを入力します。クラスターでストレージをマウントするには、永続ストレージと同じ地域およびゾーンに少なくとも 1 つのワーカー・ノードが存在していなければなりません。ストレージの PV が既に存在する場合は、PV に[ゾーンおよび地域のラベルを追加](cs_storage_basics.html#multizone)します。
+    <td>先ほど取得した地域とゾーンを入力します。 クラスターでストレージをマウントするには、永続ストレージと同じ地域およびゾーンに少なくとも 1 つのワーカー・ノードが存在していなければなりません。 ストレージの PV が既に存在する場合は、PV に[ゾーンおよび地域のラベルを追加](cs_storage_basics.html#multizone)します。
     </tr>
     <tr>
     <td><code>spec/capacity/storage</code></td>
-    <td>先ほど取得した既存の NFS ファイル共有のストレージ・サイズを入力します。このストレージ・サイズはギガバイト単位 (例えば、20Gi (20 GB) や 1000Gi (1 TB) など) で入力する必要があり、そのサイズは既存のファイル共有のサイズと一致している必要があります。</td>
+    <td>先ほど取得した既存の NFS ファイル共有のストレージ・サイズを入力します。 このストレージ・サイズはギガバイト単位 (例えば、20Gi (20 GB) や 1000Gi (1 TB) など) で入力する必要があり、そのサイズは既存のファイル共有のサイズと一致している必要があります。</td>
+    </tr>
+    <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>次のオプションのいずれかを指定してください。 <ul><li><strong>ReadWriteMany: </strong>PVC は複数のポッドによってマウントできます。すべてのポッドは、ボリュームに対する読み取りと書き込みを行うことができます。 </li><li><strong>ReadOnlyMany: </strong>PVC は複数のポッドによってマウントできます。すべてのポッドには読み取り専用アクセス権限があります。<li><strong>ReadWriteOnce: </strong>PVC は 1 つのポッドのみによってマウントできます。このポッドは、ボリュームに対して読み取りと書き込みを行うことができます。</li></ul></td>
     </tr>
     <tr>
     <td><code>spec/nfs/server</code></td>
@@ -506,7 +515,7 @@ lastupdated: "2018-08-06"
 3.  クラスターに PV を作成します。
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -538,7 +547,7 @@ lastupdated: "2018-08-06"
 6.  PVC を作成します。
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -590,7 +599,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 1. プロビジョンする NFS バージョンを指定して、[カスタマイズしたストレージ・クラス](#nfs_version_class)を作成します。
 2. クラスター内にストレージ・クラスを作成します。
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -610,7 +619,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    ```
    {: pre}
 
-2. PV にアノテーションを追加します。`<version_number>` を、使用する NFS バージョンで置き換えます。 例えば、NFS バージョン 3.0 に変更するには、**3** を入力します。  
+2. PV にアノテーションを追加します。 `<version_number>` を、使用する NFS バージョンで置き換えます。 例えば、NFS バージョン 3.0 に変更するには、**3** を入力します。  
    ```
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
    ```
@@ -631,7 +640,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
    3. ポッドを再作成します。
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
@@ -667,18 +676,18 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## データのバックアップとリストア
 {: #backup_restore}
 
-ファイル・ストレージは、クラスター内のワーカー・ノードと同じロケーションにプロビジョンされます。サーバーがダウンした場合の可用性を確保するために、IBM は、クラスター化したサーバーでストレージをホストしています。 ただし、ファイル・ストレージは自動的にはバックアップされないため、ロケーション全体で障害が発生した場合はアクセス不能になる可能性があります。 データの損失や損傷を防止するために、定期バックアップをセットアップすると、必要時にバックアップを使用してデータをリストアできます。
+ファイル・ストレージは、クラスター内のワーカー・ノードと同じロケーションにプロビジョンされます。 サーバーがダウンした場合の可用性を確保するために、IBM は、クラスター化したサーバーでストレージをホストしています。 ただし、ファイル・ストレージは自動的にはバックアップされないため、ロケーション全体で障害が発生した場合はアクセス不能になる可能性があります。 データの損失や損傷を防止するために、定期バックアップをセットアップすると、必要時にバックアップを使用してデータをリストアできます。
 {: shortdesc}
 
 ファイル・ストレージのバックアップとリストアのための以下のオプションを検討してください。
 
 <dl>
   <dt>定期的なスナップショットをセットアップする</dt>
-  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage/snapshots.html)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。 </br></br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> ボリューム ID、サイズ、および IOPS は CLI 出力の <strong>Labels</strong> セクションにあります。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>CLI 出力の <strong>Snapshot Capacity (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。 </li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage/snapshots.html)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、[サポート・チケットを開く](/docs/get-support/howtogetsupport.html#getting-customer-support)必要があります。</br></br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> ボリューム ID、サイズ、および IOPS は CLI 出力の <strong>Labels</strong> セクションにあります。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>CLI 出力の <strong>Snapshot Capacity (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。 </li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>スナップショットを別のゾーンにレプリケーションする</dt>
- <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたファイル・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/FileStorage/replication.html#replicating-data)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたファイル・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。 </p></dd>
+ <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたファイル・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/FileStorage/replication.html#replicating-data)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたファイル・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、スナップショットを別のゾーンに複製することはできません。</p></dd>
  <dt>ストレージを複製する</dt>
- <dd><p>元のストレージ・インスタンスと同じゾーンに、[ファイル・ストレージ・インスタンスを複製](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)できます。複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、[ボリュームのスナップショットをセットアップします](/docs/infrastructure/FileStorage/snapshots.html)。</p></dd>
+ <dd><p>元のストレージ・インスタンスと同じゾーンに、[ファイル・ストレージ・インスタンスを複製](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)できます。 複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、[ボリュームのスナップショットをセットアップします](/docs/infrastructure/FileStorage/snapshots.html)。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">サポート・チケットを開く</a>必要があります。</p></dd>
   <dt>{{site.data.keyword.cos_full}} にデータをバックアップする</dt>
   <dd><p>[**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) を使用して、クラスター内にバックアップとリストアのポッドをスピンアップできます。 このポッドには、クラスター内の任意の永続ボリューム請求 (PVC) のために 1 回限りのバックアップまたは定期バックアップを実行するスクリプトが含まれています。 データは、ゾーンにセットアップした {{site.data.keyword.cos_full}} インスタンスに保管されます。</p>
   <p>データを可用性をさらに高め、アプリをゾーン障害から保護するには、2 つ目の {{site.data.keyword.cos_full}} インスタンスをセットアップして、ゾーン間でデータを複製します。 {{site.data.keyword.cos_full}} インスタンスからデータをリストアする必要がある場合は、イメージに付属するリストア・スクリプトを使用します。</p></dd>
@@ -689,7 +698,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 <ul>
 <li>ローカル・マシンからクラスター内のポッドにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>クラスター内のポッドからローカル・マシンにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>クラスター内のあるポッドから別のポッドの特定のコンテナーにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>ローカル・マシンからクラスター内のポッドで実行される特定のコンテナーにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -863,7 +872,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>ハード・ディスク</td>
-<td>ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプが決まります。ギガバイトに対する IOPS の比率を求めるには、IOPS をストレージ・サイズで除算します。</br></br>例: </br>100 IOPS で 500Gi のストレージを選択しました。比率は 0.2 です (100 IOPS/500Gi)。</br></br><strong>比率に応じた大まかなハード・ディスクのタイプ</strong><ul><li>0.3 以下: SATA</li><li>0.3 より大: SSD</li></ul></td>
+<td>ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプが決まります。 ギガバイトに対する IOPS の比率を求めるには、IOPS をストレージ・サイズで除算します。 </br></br>例: </br>100 IOPS で 500Gi のストレージを選択しました。 比率は 0.2 です (100 IOPS/500Gi)。 </br></br><strong>比率に応じた大まかなハード・ディスクのタイプ</strong><ul><li>0.3 以下: SATA</li><li>0.3 より大: SSD</li></ul></td>
 </tr>
 <tr>
 <td>課金</td>
@@ -885,7 +894,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ### 複数ゾーン・クラスターのゾーンを指定する
 {: #multizone_yaml}
 
-次の `.yaml` ファイルでカスタマイズしているストレージ・クラスは、非 retain の `ibm-file-silver` ストレージ・クラスに基づいています。`type` は `"Endurance"`、`iopsPerGB` は `4`、`sizeRange` は `"[20-12000]Gi"`、`reclaimPolicy` の設定は `"Delete"` です。ゾーンは `dal12` と指定しています。各項目に指定可能な値を選択するときには、`ibmc` ストレージ・クラスについての前述の情報が参考になります。</br>
+次の `.yaml` ファイルでカスタマイズしているストレージ・クラスは、非 retain の `ibm-file-silver` ストレージ・クラスに基づいています。`type` は `"Endurance"`、`iopsPerGB` は `4`、`sizeRange` は `"[20-12000]Gi"`、`reclaimPolicy` の設定は `"Delete"` です。 ゾーンは `dal12` と指定しています。 各項目に指定可能な値を選択するときには、`ibmc` ストレージ・クラスについての前述の情報が参考になります。 </br>
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -904,10 +913,10 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### デフォルトの NFS バージョンを変更する
+### デフォルトの NFS バージョンの変更
 {: #nfs_version_class}
 
-次のストレージ・クラスは、[`ibmc-file-bronze` ストレージ・クラス](#bronze)を基にしてカスタマイズしたものであり、プロビジョンする NFS バージョンを定義できます。例えば、NFS バージョン 3.0 をプロビジョンする場合は、`<nfs_version>` を **3.0** に置き換えます。
+次のストレージ・クラスは、[`ibmc-file-bronze` ストレージ・クラス](#bronze)を基にしてカスタマイズしたものであり、プロビジョンする NFS バージョンを定義できます。 例えば、NFS バージョン 3.0 をプロビジョンする場合は、`<nfs_version>` を **3.0** に置き換えます。
 ```
 apiVersion: storage.k8s.io/v1
    kind: StorageClass

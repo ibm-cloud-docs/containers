@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -31,23 +31,25 @@ lastupdated: "2018-08-06"
 ## 安装 CLI
 {: #cs_cli_install_steps}
 
-安装必需的 CLI 以在 {{site.data.keyword.containershort_notm}} 中创建和管理 Kubernetes 集群，并将容器化应用程序部署到集群。
+安装必需的 CLI 以在 {{site.data.keyword.containerlong_notm}} 中创建和管理 Kubernetes 集群，并将容器化应用程序部署到集群。
 {:shortdesc}
 
 此任务包含用于安装这些 CLI 和插件的信息：
 
--   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
--   {{site.data.keyword.containershort_notm}} 插件
+-   {{site.data.keyword.Bluemix_notm}} CLI V0.8.0 或更高版本
+-   {{site.data.keyword.containerlong_notm}} 插件
 -   与集群的 `major.minor` 版本相匹配的 Kubernetes CLI 版本
 -   可选：{{site.data.keyword.registryshort_notm}} 插件
--   可选：Docker V1.9 或更高版本
 
 <br>
 要安装 CLI，请执行以下操作：
 
 
 
-1.  作为 {{site.data.keyword.containershort_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](../cli/index.html#overview)。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
+1.  作为 {{site.data.keyword.containerlong_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](../cli/index.html#overview)。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
+
+    计划大量使用 CLI 吗？尝试[针对 {{site.data.keyword.Bluemix_notm}} CLI 启动 shell 自动完成（仅限 Linux/MacOS）](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-)。
+    {: tip}
 
 2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
 
@@ -58,10 +60,10 @@ lastupdated: "2018-08-06"
 
     **注**：如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
-3.  要创建 Kubernetes 集群以及管理工作程序节点，请安装 {{site.data.keyword.containershort_notm}} 插件。用于通过 {{site.data.keyword.containershort_notm}} 插件运行命令的前缀是 `ibmcloud ks`。
+3.  要创建 Kubernetes 集群以及管理工作程序节点，请安装 {{site.data.keyword.containerlong_notm}} 插件。用于通过 {{site.data.keyword.containerlong_notm}} 插件运行命令的前缀是 `ibmcloud ks`。
 
     ```
-    ibmcloud plugin install container-service -r Bluemix
+    ibmcloud plugin install container-service 
     ```
     {: pre}
 
@@ -72,16 +74,16 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-    {{site.data.keyword.containershort_notm}} 插件会在结果中显示为 container-service。
+    {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 container-service。
 
 4.  {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.10.5。**注**：如果使用的 `kubectl` CLI 版本并未至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
+    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.10.7。**注**：如果使用的 `kubectl` CLI 版本并未至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
 
 
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl)
-        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl)
-        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe)
+        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl)
+        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl)
+        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe)
 
     2.  **对于 OSX 和 Linux**：完成以下步骤。
         1.  将可执行文件移至 `/usr/local/bin` 目录。
@@ -117,7 +119,7 @@ lastupdated: "2018-08-06"
 5.  要管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可扩展性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `ibmcloud cr`。
 
     ```
-    ibmcloud plugin install container-registry -r Bluemix
+    ibmcloud plugin install container-registry 
     ```
     {: pre}
 
@@ -130,9 +132,7 @@ lastupdated: "2018-08-06"
 
     该插件会在结果中显示为 container-registry。
 
-6.  要在本地构建映像并将其推送到注册表名称空间，请[安装 Docker ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/)。Docker CLI 用于将应用程序构建成映像。用于通过 Docker CLI 运行命令的前缀是 `docker`。
-
-接下来，开始[使用 {{site.data.keyword.containershort_notm}} 通过 CLI 创建 Kubernetes 集群](cs_clusters.html#clusters_cli)。
+接下来，开始[使用 {{site.data.keyword.containerlong_notm}} 通过 CLI 创建 Kubernetes 集群](cs_clusters.html#clusters_cli)。
 
 有关这些 CLI 的参考信息，请参阅那些工具的文档。
 
@@ -151,6 +151,8 @@ lastupdated: "2018-08-06"
 
 您可以将多个 CLI 安装到计算机上运行的一个容器中，而不必分别将每个 CLI 安装在计算机上。
 {:shortdesc}
+
+开始之前，[安装 Docker ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download) 以在本地构建并运行映像。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
 
 1. 基于提供的 Dockerfile 创建映像。
 
@@ -178,7 +180,7 @@ docker run -it -v /local/path:/container/volume <image_name>
 您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。
 {:shortdesc}
 
-支持 Kubernetes 1.10.5 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+支持 Kubernetes 1.10.7 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 
 
@@ -251,8 +253,8 @@ docker run -it -v /local/path:/container/volume <image_name>
     输出示例：
 
     ```
-    Client Version: v1.10.5
-    Server Version: v1.10.5
+    Client Version: v1.10.7
+    Server Version: v1.10.7
     ```
     {: screen}
 
@@ -272,11 +274,10 @@ docker run -it -v /local/path:/container/volume <image_name>
 
 此任务包含用于更新这些 CLI 的信息。
 
--   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
--   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.10.5 或更高版本
+-   {{site.data.keyword.Bluemix_notm}} CLI V0.8.0 或更高版本
+-   {{site.data.keyword.containerlong_notm}} 插件
+-   Kubernetes CLI V1.10.7 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
--   Docker V1.9 或更高版本
 
 <br>
 要更新 CLI，请执行以下操作：
@@ -293,11 +294,11 @@ docker run -it -v /local/path:/container/volume <image_name>
 
      **注**：如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
-3.  更新 {{site.data.keyword.containershort_notm}} 插件。
+3.  更新 {{site.data.keyword.containerlong_notm}} 插件。
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        ibmcloud plugin update container-service -r Bluemix
+        ibmcloud plugin update container-service 
         ```
         {: pre}
 
@@ -308,7 +309,7 @@ docker run -it -v /local/path:/container/volume <image_name>
         ```
         {: pre}
 
-        {{site.data.keyword.containershort_notm}} 插件会在结果中显示为 container-service。
+        {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 container-service。
 
     3.  初始化 CLI。
 
@@ -323,7 +324,7 @@ docker run -it -v /local/path:/container/volume <image_name>
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        ibmcloud plugin update container-registry -r Bluemix
+        ibmcloud plugin update container-registry 
         ```
         {: pre}
 
@@ -335,10 +336,6 @@ docker run -it -v /local/path:/container/volume <image_name>
         {: pre}
 
         Registry 插件会在结果中显示为 container-registry。
-
-6.  更新 Docker。
-    -   如果您使用 Docker Community Edition，请启动 Docker，单击 **Docker** 图标并单击**检查更新**。
-    -   如果使用的是 Docker Toolbox，请下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/) 并运行安装程序。
 
 <br />
 
@@ -352,17 +349,15 @@ docker run -it -v /local/path:/container/volume <image_name>
 此任务包含用于除去以下 CLI 的信息：
 
 
--   {{site.data.keyword.containershort_notm}} 插件
+-   {{site.data.keyword.containerlong_notm}} 插件
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 插件
--   Docker V1.9 或更高版本
-
 <br>
 要卸载 CLI，请执行以下操作：
 
 
 
-1.  卸载 {{site.data.keyword.containershort_notm}} 插件。
+1.  卸载 {{site.data.keyword.containerlong_notm}} 插件。
 
     ```
     ibmcloud plugin uninstall container-service
@@ -385,28 +380,22 @@ docker run -it -v /local/path:/container/volume <image_name>
 
     container-service 和 container-registry 插件未显示在结果中。
 
-6.  卸载 Docker。有关卸载 Docker 的指示信息因您使用的操作系统不同而有所不同。
-
-    - [OSX ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
-    - [Linux ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
-
 <br />
 
 
 ## 使用 API 自动部署集群
 {: #cs_api}
 
-可以使用 {{site.data.keyword.containershort_notm}} API 来自动创建、部署和管理 Kubernetes 集群。
+可以使用 {{site.data.keyword.containerlong_notm}} API 来自动创建、部署和管理 Kubernetes 集群。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} API 需要您必须在 API 请求中提供的头信息，根据您要使用的 API，这些头信息可以有所不同。
-要确定 API 需要哪些头信息，请参阅 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api)。 
+{{site.data.keyword.containerlong_notm}} API 需要您必须在 API 请求中提供的头信息，根据您要使用的 API，这些头信息可以有所不同。
+要确定 API 需要哪些头信息，请参阅 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api)。 
 
 您还可以使用 [API Swagger JSON 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api-json) 来生成可与 API 交互（作为自动化工作的一部分）的客户机。
 {: tip}
 
-**注：**要向 {{site.data.keyword.containershort_notm}} 进行认证，必须提供使用 {{site.data.keyword.Bluemix_notm}} 凭证生成的 Identity and Access Management (IAM) 令牌，并包括创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户标识。根据您向 {{site.data.keyword.Bluemix_notm}} 进行认证的方式，可以在下列选项之间进行选择，以自动创建 IAM 令牌。
+**注：**要向 {{site.data.keyword.containerlong_notm}} 进行认证，必须提供使用 {{site.data.keyword.Bluemix_notm}} 凭证生成的 Identity and Access Management (IAM) 令牌，并包括创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户标识。根据您向 {{site.data.keyword.Bluemix_notm}} 进行认证的方式，可以在下列选项之间进行选择，以自动创建 IAM 令牌。
 
 <table>
 <caption>标识类型和选项</caption>
@@ -659,7 +648,7 @@ docker run -it -v /local/path:/container/volume <image_name>
      </tbody>
      </table>
 
-5.  请查看 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
+5.  请查看 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
 
 <br />
 
@@ -676,7 +665,7 @@ docker run -it -v /local/path:/container/volume <image_name>
 - **API 密钥：**如下所示检索您的 [{{site.data.keyword.Bluemix_notm}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/) API 密钥。
    1. 在菜单栏中，单击**管理** > **安全性** > **平台 API 密钥**。
    2. 单击**创建**。
-   3. 输入 API 密钥的**名称**和**描述**，然后单击 **创建**。
+   3. 输入 API 密钥的**名称**和**描述**，然后单击**创建**。
    4. 单击**显示**以查看生成的 API 密钥。
    5. 复制 API 密钥，以便可以将其用于检索新的 IAM 访问令牌。
 
@@ -740,4 +729,4 @@ docker run -it -v /local/path:/container/volume <image_name>
 
     您可以在 API 输出的 **access_token** 字段中找到新的 IAM 令牌，在 **refresh_token** 字段中找到 IAM 刷新令牌。
 
-2.  使用上一步中的令牌，继续执行 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api) 中的操作。
+2.  使用上一步中的令牌，继续执行 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api) 中的操作。

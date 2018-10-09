@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-08-06"
 
 以下の一般的な手順を実行して、クラスターが最新の状態であることを確認できます。
 - [ワーカー・ノードを更新](cs_cli_reference.html#cs_worker_update)するためのセキュリティー・パッチやオペレーティング・システム・パッチが使用可能になっていないか、毎月確認してください。
-- クラスターを {{site.data.keyword.containershort_notm}} 用の [Kubernetes の最新のデフォルト・バージョン](cs_versions.html)に[更新](cs_cli_reference.html#cs_cluster_update)します
+- クラスターを {{site.data.keyword.containerlong_notm}} 用の [Kubernetes の最新のデフォルト・バージョン](cs_versions.html)に[更新](cs_cli_reference.html#cs_cluster_update)します
 
 ## クラスターのデバッグ
 {: #debug_clusters}
@@ -103,6 +103,9 @@ lastupdated: "2018-08-06"
  </table>
 
 
+**注**: [Kubernetes マスター](cs_tech.html#architecture)は、クラスターを稼働状態に保つための主要なコンポーネントです。マスターは、クラスターの真実の単一点 (Single Point of Truth) として機能する etcd データベースに、クラスター・リソースとその構成を保管します。Kubernetes API サーバーは、ワーカー・ノードからマスターへのすべてのクラスター管理要求、またはクラスター・リソースと対話する場合のメインエントリー・ポイントです。<br><br>マスターに障害が発生した場合、ワークロードは引き続きワーカー・ノードで実行されますが、`kubectl` コマンドを使用してクラスター・リソースを操作したり、マスターの Kubernetes API サーバーがバックアップされるまでクラスターの正常性を表示したりすることはできません。マスターの障害時にポッドがダウンすると、ワーカー・ノードが再び Kubernetes API サーバーに到達できるまで、ポッドをスケジュール変更することはできません。<br><br>マスターの障害時にも、`ibmcloud ks` コマンドを {{site.data.keyword.containerlong_notm}} API に対して実行して、ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを操作することができます。クラスターに対してワーカー・ノードを追加または削除して現在のクラスター構成を変更する場合、マスターがバックアップされるまで変更は行われません。**注**: マスターの障害時はワーカー・ノードを再始動またはリブートしないでください。このアクションにより、ワーカー・ノードからポッドが削除されます。Kubernetes API サーバーが使用不可のため、ポッドをクラスター内の他のワーカー・ノードにスケジュール変更することはできません。
+
+
 <br />
 
 
@@ -130,12 +133,16 @@ lastupdated: "2018-08-06"
     <tbody>
   <tr>
       <td>Critical</td>
-      <td>ワーカー・ノードは、次のようなさまざまな理由で Critical 状態になることがあります。 <ul><li>閉鎖と排出を行わずに、ワーカー・ノードのリブートを開始した。。 ワーカー・ノードをリブートすると、<code>docker</code>、<code>kubelet</code>、<code>kube-proxy</code>、<code>calico</code> でデータ破損が発生する可能性があります。 </li><li>ワーカー・ノードにデプロイしたポッドが、[メモリー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) と [CPU ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) のリソース制限を使用していない。 リソース制限を使用しないと、ポッドが、使用可能なリソースをすべて使い果たして、このワーカー・ノード上の他のポッドを実行するためのリソースがなくなる可能性があります。 この過剰なワークロードにより、ワーカー・ノードに障害が発生します。 </li><li>何百、何千ものコンテナーを長時間実行した後、<code>Docker</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。 </li><li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containershort_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li><li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li></ul> 多くの場合、ワーカー・ノードを[再ロードする](cs_cli_reference.html#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](cs_versions.html#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](cs_health.html#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
+      <td>ワーカー・ノードは、次のようなさまざまな理由で Critical 状態になることがあります。 <ul><li>閉鎖と排出を行わずに、ワーカー・ノードのリブートを開始した。。 ワーカー・ノードをリブートすると、<code>containerd</code>、<code>kubelet</code>、<code>kube-proxy</code>、および <code>calico</code> でデータ破損が発生する可能性があります。</li><li>ワーカー・ノードにデプロイしたポッドが、[メモリー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) と [CPU ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) のリソース制限を使用していない。 リソース制限を使用しないと、ポッドが、使用可能なリソースをすべて使い果たして、このワーカー・ノード上の他のポッドを実行するためのリソースがなくなる可能性があります。 この過剰なワークロードにより、ワーカー・ノードに障害が発生します。 </li><li>数百、数千ものコンテナーを長時間実行した後、<code>containerd</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。</li><li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li><li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li></ul> 多くの場合、ワーカー・ノードを[再ロードする](cs_cli_reference.html#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](cs_versions.html#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](cs_health.html#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
       </td>
+     </tr>
+     <tr>
+     <td>Deployed</td>
+     <td>更新はワーカー・ノードに正常にデプロイされました。更新がデプロイされた後、{{site.data.keyword.containerlong_notm}} によって、ワーカー・ノードでヘルス・チェックが開始されます。ヘルス・チェックが正常に完了したら、ワーカー・ノードは <code>Normal</code> 状態になります。<code>Deployed</code> 状態のワーカー・ノードは、通常、ワークロードを受信する準備ができています。これをチェックするには、<code>kubectl get nodes</code> を実行して状態に <code>Normal</code> が表示されることを確認します。</td>
      </tr>
       <tr>
         <td>Deploying</td>
-        <td>ワーカー・ノードの Kubernetes バージョンを更新する際には、更新をインストールするためにワーカー・ノードが再デプロイされます。 ワーカー・ノードが長時間この状態になっている場合は、次のステップに進み、デプロイメント中に問題が発生したかどうかを調べてください。 </td>
+        <td>ワーカー・ノードの Kubernetes バージョンを更新する際には、更新をインストールするためにワーカー・ノードが再デプロイされます。 ワーカー・ノードを再ロードまたはリブートすると、ワーカー・ノードが再デプロイされて、最新のパッチ・バージョンが自動的にインストールされます。ワーカー・ノードが長時間この状態になっている場合は、次のステップに進み、デプロイメント中に問題が発生したかどうかを調べてください。 </td>
      </tr>
         <tr>
         <td>Normal</td>
@@ -163,7 +170,7 @@ lastupdated: "2018-08-06"
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](cs_troubleshoot_clusters.html#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
+       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](cs_troubleshoot_clusters.html#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -204,8 +211,14 @@ lastupdated: "2018-08-06"
         <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントは、コンピュート・リソースの注文を制限されている可能性があります。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
-        <td>選択した VLAN に関連付けられているデータ・センター内のポッドのスペースが不足しているため、ワーカー・ノードをプロビジョンできません。 以下の選択肢があります。<ul><li>別のデータ・センターを使用してワーカー・ノードをプロビジョンします。 使用可能なデータ・センターをリストするには、<code>ibmcloud ks zones</code> を実行します。<li>データ・センター内の別のポッドに関連付けられているパブリック VLAN とプライベート VLAN の既存のペアがある場合は、代わりにその VLAN ペアを使用します。<li>[{{site.data.keyword.Bluemix_notm}} サポート・チケット](#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</ul></td>
+      <td>{{site.data.keyword.Bluemix_notm}} infrastructure exception: Could not place order.<br><br>
+      {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
+      <td>選択したゾーンに、ワーカー・ノードをプロビジョンするための十分なインフラストラクチャー容量がない可能性があります。または、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの制限を超えた可能性があります。解決するには、以下のいずれかのオプションを試してください。
+      <ul><li>ゾーン内のインフラストラクチャー・リソースの可用性は、頻繁に変動します。数分待ってから、再試行してください。</li>
+      <li>単一ゾーン・クラスターの場合は、別のゾーンにクラスターを作成します。複数ゾーン・クラスターの場合は、クラスターにゾーンを追加します。</li>
+      <li>IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、ワーカー・ノードに対してパブリック VLAN とプライベート VLAN の異なるペアを指定します。ワーカー・プール内にあるワーカー・ノードの場合は、<code>ibmcloud ks zone-network-set</code> [コマンド](cs_cli_reference.html#cs_zone_network_set)を使用できます。</li>
+      <li>IBM Cloud インフラストラクチャー (SoftLayer) アカウント・マネージャーに連絡して、グローバルな割り当て量などのアカウント制限を超えないことを確認してください。</li>
+      <li>[IBM Cloud インフラストラクチャー (SoftLayer) サポート・チケット](#ts_getting_help)を開きます。</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
@@ -220,11 +233,11 @@ lastupdated: "2018-08-06"
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
-        The IBM Cloud infrastructure credentials could not be validated.</td>
-        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオでアクションを実行するために必要なアクセス権限がない可能性があるか、または正しくないインフラストラクチャー資格情報を使用しています。[IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_troubleshoot_clusters.html#cs_credentials)を参照してください。</td>
+        The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
+        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオでアクションを実行するために必要なアクセス権限がない可能性があるか、または正しくないインフラストラクチャー資格情報を使用しています。 [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_troubleshoot_clusters.html#cs_credentials)を参照してください。</td>
       </tr>
       <tr>
-       <td>Worker unable to talk to {{site.data.keyword.containershort_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
+       <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
        <td><ul><li>ファイアウォールがある場合は、[該当するポートと IP アドレスへの発信トラフィックを許可するようにファイアウォール設定を構成します](cs_firewall.html#firewall_outbound)。</li><li>`ibmcloud ks workers &lt;mycluster&gt;` を実行して、クラスターにパブリック IP が含まれていないかどうかを確認します。 パブリック IP がリストされない場合、クラスターにはプライベート VLAN だけがあります。<ul><li>クラスターにプライベート VLAN のみが含まれるようにするには、[VLAN 接続](cs_network_planning.html#private_vlan)と[ファイアウォール](cs_firewall.html#firewall_outbound)をセットアップします。</li><li>パブリック IP があるクラスターにするには、パブリック VLAN とプライベート VLAN の両方を指定して[新しいワーカー・ノードを追加](cs_cli_reference.html#cs_worker_add)します。</li></ul></li></ul></td>
      </tr>
       <tr>
@@ -289,15 +302,17 @@ lastupdated: "2018-08-06"
 まだクラスターに問題がありますか?
 {: shortdesc}
 
+-  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
+
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
--   [{{site.data.keyword.containershort_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
+-   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
 
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
 
-    -   {{site.data.keyword.containershort_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
-    -   サービスや概説の説明について質問がある場合は、[IBM developerWorks dW Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
+    -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
+    -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
 
 -   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。

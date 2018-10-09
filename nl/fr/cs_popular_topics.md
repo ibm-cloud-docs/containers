@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -18,11 +18,52 @@ lastupdated: "2018-08-06"
 
 
 
-# Rubriques les plus consultées pour {{site.data.keyword.containershort_notm}}
+# Rubriques les plus consultées pour {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
 Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}}. Découvrez les nouvelles fonctions à explorer, une astuce pour les expérimenter ou quelques rubriques populaires que d'autres développeurs jugent désormais utiles.
 {:shortdesc}
+
+## Rubriques les plus consultées en septembre 2018
+{: #sept18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en septembre 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>5 septembre</td>
+<td>[Zone disponible à Oslo](cs_regions.html)</td>
+<td>Bienvenue à Oslo en Norvège, une nouvelle zone dans la région Europe centrale. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à cette zone et aux autres zones situées dans la région où se trouve votre cluster.</td>
+</tr>
+</tbody></table>
+
+## Rubriques les plus consultées en août 2018
+{: #aug18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en août 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>31 août</td>
+<td>{{site.data.keyword.cos_full_notm}} est désormais intégré avec {{site.data.keyword.containerlong}}</td>
+<td>Utilisez des réservations de volume persistant (PVC) Kubernetes natives pour mettre à disposition {{site.data.keyword.cos_full_notm}} dans votre cluster. {{site.data.keyword.cos_full_notm}} convient le mieux aux charges de travail à lecture intensive et pour le stockage de données sur plusieurs zones dans un cluster à zones multiples. Commencez par [créer une instance de service {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#create_cos_service) et [installer le plug-in {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos) dans votre cluster. </br></br>Vous n'êtes pas certain de la solution de stockage qui vous convient le mieux ? Commencez [ici](cs_storage_planning.html#choose_storage_solution) pour analyser vos données et choisir la solution de stockage appropriée pour vos données. </td>
+</tr>
+<tr>
+<td>14 août</td>
+<td>Mettez à jour vos cluster avec Kubernetes version 1.11 pour affecter des priorités aux pods</td>
+<td>Après avoir mis à jour votre cluster vers [Kubernetes version 1.11](cs_versions.html#cs_v111), vous pouvez tirer parti des nouvelles fonctions, telles que des performances d'environnement d'exécution de conteneur accrues avec `containerd` ou l'[affectation de priorité aux pods](cs_pod_priority.html#pod_priority).</td>
+</tr>
+</tbody></table>
 
 ## Rubriques les plus consultées en juillet 2018
 {: #july18}
@@ -43,7 +84,7 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 <tr>
 <td>10 juillet</td>
 <td>Introduction des clusters à zones multiples</td>
-<td>Vous voulez améliorer la disponibilité de votre cluster ? Vous pouvez désormais étendre votre cluster dans plusieurs zones de certaines régions métropolitaines. Pour plus d'informations, voir [Création de clusters à zones multiples dans {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+<td>Vous voulez améliorer la disponibilité de votre cluster ? Vous pouvez désormais étendre votre cluster dans plusieurs zones de certaines régions métropolitaines. Pour plus d'informations, voir [Création de clusters à zones multiples dans {{site.data.keyword.containerlong_notm}}](cs_clusters_planning.html#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -96,7 +137,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 <tr>
 <td>14 mai</td>
 <td>[Mise à jour : déployez vos charges de travail sur des unités bare metal GPU dans le monde entier](cs_app.html#gpu_app)</td>
-<td>Si vous disposez d'un [type de machine d'unité de traitement graphique (GPU)](cs_clusters.html#shared_dedicated_node) dans votre cluster, vous pouvez planifier des applications nécessitant de nombreux calculs mathématiques. Le noeud worker GPU peut traiter la charge de travail de votre application à la fois sur l'unité centrale (UC) et l'unité de traitement graphique (GPU) pour améliorer les performances.</td>
+<td>Si vous disposez d'un [type de machine d'unité de traitement graphique (GPU)](cs_clusters_planning.html#shared_dedicated_node) dans votre cluster, vous pouvez planifier des applications nécessitant de nombreux calculs mathématiques. Le noeud worker GPU peut traiter la charge de travail de votre application à la fois sur l'unité centrale (UC) et l'unité de traitement graphique (GPU) pour améliorer les performances.</td>
 </tr>
 <tr>
 <td>3 mai</td>
@@ -154,13 +195,13 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 <tbody>
 <tr>
 <td>16 mars</td>
-<td>[Mise à disposition d'un cluster bare metal avec calcul sécurisé](cs_clusters.html#shared_dedicated_node)</td>
+<td>[Mise à disposition d'un cluster bare metal avec calcul sécurisé](cs_clusters_planning.html#shared_dedicated_node)</td>
 <td>Créez un cluster bare metal qui exécute [Kubernetes version 1.9](cs_versions.html#cs_v19) ou ultérieure et activez la fonction de calcul sécurisé pour vérifier que vos noeuds worker ne font pas l'objet de falsification.</td>
 </tr>
 <tr>
 <td>14 mars</td>
 <td>[Connexion sécurisée avec {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
-<td>Améliorez vos applications qui s'exécutent dans {{site.data.keyword.containershort_notm}} en obligeant les utilisateurs à se connecter.</td>
+<td>Améliorez vos applications qui s'exécutent dans {{site.data.keyword.containerlong_notm}} en obligeant les utilisateurs à se connecter.</td>
 </tr>
 <tr>
 <td>13 mars</td>
@@ -208,7 +249,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 <tr>
 <td>19 février</td>
 <td>[Configuration du VPN IPSec strongSwan](cs_vpn.html#vpn-setup)</td>
-<td>Déployez rapidement la charte Helm du VPN IPsec strongSwan pour connecter votre cluster {{site.data.keyword.containershort_notm}} de manière sécurisée à votre centre de données sur site sans dispositif de routeur virtuel (VRA).</td>
+<td>Déployez rapidement la charte Helm du VPN IPSec strongSwan pour connecter votre cluster {{site.data.keyword.containerlong_notm}} de manière sécurisée à votre centre de données sur site sans dispositif de routeur virtuel (VRA).</td>
 </tr>
 <tr>
 <td>14 février</td>
@@ -240,7 +281,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 <tr>
 <td>23 janvier</td>
 <td>[Zones disponibles à Singapour et Montréal (Canada)](cs_regions.html)</td>
-<td>Singapour et Montréal sont les zones disponibles dans les régions {{site.data.keyword.containershort_notm}} Asie-Pacifique nord et Est des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à ces zones et aux autres zones situées dans la région où se trouve votre cluster.</td>
+<td>Singapour et Montréal sont les zones disponibles dans les régions {{site.data.keyword.containerlong_notm}} Asie-Pacifique nord et Est des Etats-Unis. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à ces zones et aux autres zones situées dans la région où se trouve votre cluster.</td>
 </tr>
 <tr>
 <td>8 janvier</td>
@@ -252,7 +293,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 ## Discussion avec des développeurs partageant les mêmes idées sur Slack
 {: #slack}
 
-Vous pouvez voir les thèmes de discussion d'autres personnes et poser vos propres questions dans [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
+Vous pouvez voir les thèmes de discussion d'autres personnes et poser vos propres questions dans [{{site.data.keyword.containerlong_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
 Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.

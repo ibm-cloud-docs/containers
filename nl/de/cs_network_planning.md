@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,16 +16,17 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# Clustervernetzung planen
+# Zugänglichmachen Ihrer Apps mit externer Vernetzung planen
 {: #planning}
 
-Mit {{site.data.keyword.containerlong}} können Sie sowohl die externe Vernetzung verwalten, indem Sie Apps öffentlich oder privat zugänglich machen, sowie die interne Vernetzung in Ihrem Cluster.
+Mit {{site.data.keyword.containerlong}} können Sie die externe Vernetzung verwalten, indem Sie Apps öffentlich oder privat zugänglich machen.
 {: shortdesc}
 
 ## NodePort-, LoadBalancer- oder Ingress-Service auswählen
 {: #external}
 
-Wenn Sie Ihre Apps extern über das [öffentliche Internet](#public_access) oder ein [privates Netz](#private_both_vlans) zugänglich machen möchten, unterstützt {{site.data.keyword.containershort_notm}} drei Netzservices.{:shortdesc}
+Wenn Sie Ihre Apps extern über das öffentliche Internet oder ein privates Netz zugänglich machen möchten, unterstützt {{site.data.keyword.containerlong_notm}} drei Netzservices.
+{:shortdesc}
 
 **[NodePort-Service](cs_nodeport.html)** (kostenlose Cluster und Standardcluster)
 * Machen Sie auf jedem Workerknoten einen Port zugänglich und verwenden Sie die öffentliche oder private IP-Adresse der einzelnen Workerknoten, um auf Ihren Service im Cluster zuzugreifen.
@@ -63,17 +64,20 @@ Um den besten Netzservice für Ihre App auszuwählen, können Sie diesem Entsche
 ## Öffentliche externe Vernetzung planen
 {: #public_access}
 
-Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} erstellen, können Sie den Cluster mit einem öffentlichen VLAN verbinden. Das öffentliche VLAN bestimmt die öffentliche IP-Adresse, die dem jeweiligen Workerknoten zugeordnet ist. Diese Adresse stellt jedem Workerknoten eine öffentliche Netzschnittstelle bereit.{:shortdesc}
+Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, können Sie den Cluster mit einem öffentlichen VLAN verbinden. Das öffentliche VLAN bestimmt die öffentliche IP-Adresse, die dem jeweiligen Workerknoten zugeordnet ist. Diese Adresse stellt jedem Workerknoten eine öffentliche Netzschnittstelle bereit.
+{:shortdesc}
 
 Um eine App öffentlich für das Internet verfügbar zu machen, können Sie einen NodePort-, LoadBalancer- oder Ingress-Service erstellen. Informationen zum Vergleichen der einzelnen Services finden Sie im Abschnitt [NodePort-, LoadBalancer- oder Ingress-Service auswählen](#external).
 
-Das folgende Diagramm zeigt, wie Kubernetes den öffentlichen Netzverkehr in {{site.data.keyword.containershort_notm}} weiterleitet.
+Das folgende Diagramm zeigt, wie Kubernetes den öffentlichen Netzverkehr in {{site.data.keyword.containerlong_notm}} weiterleitet.
 
-![{{site.data.keyword.containershort_notm}} Kubernetes-Architektur](images/networking.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/networking.png)
 
-*Kubernetes-Datenebene in {{site.data.keyword.containershort_notm}}*
+*Kubernetes-Datenebene in {{site.data.keyword.containerlong_notm}}*
 
 Die öffentliche Netzschnittstelle für die Workerknoten in kostenlosen Clustern und in Standardclustern wird durch Calico-Netzrichtlinien geschützt. Diese Richtlinien blockieren standardmäßig den Großteil des eingehenden Datenverkehrs. Allerdings wird der eingehende Datenverkehr, der zur ordnungsgemäßen Funktion von Kubernetes erforderlich ist, zugelassen. Dies gilt auch für die Verbindungen zu NodePort-, LoadBalancer- und Ingress-Services. Weitere Informationen zu diesen Richtlinien und zur Vorgehensweise bei der Änderung dieser Richtlinien finden Sie in [Netzrichtlinien](cs_network_policy.html#network_policies).
+
+Weitere Informationen zum Einrichten Ihres Clusters für den Netzbetrieb, einschließlich Informationen zu Teilnetzen, Firewalls und VPNs, finden Sie unter [Standardclustervernetzung planen](cs_network_cluster.html#both_vlans).
 
 <br />
 
@@ -81,18 +85,7 @@ Die öffentliche Netzschnittstelle für die Workerknoten in kostenlosen Clustern
 ## Private externe Vernetzung für ein öffentliches und privates VLAN-Setup planen
 {: #private_both_vlans}
 
-Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} erstellen, müssen Sie Ihren Cluster mit einem privaten VLAN verbinden. Das private VLAN bestimmt die private IP-Adresse, die dem jeweiligen Workerknoten zugeordnet ist. Diese Adresse stellt jedem Workerknoten eine private Netzschnittstelle bereit.{:shortdesc}
-
-Wenn Ihre Apps nur mit einem privaten Netz verbunden sein sollen, können Sie die private Netzschnittstelle für die Workerknoten in Standardclustern verwenden. Wenn die Workerknoten jedoch sowohl mit einem öffentlichen als auch mit einem privaten VLAN verbunden sind, müssen Sie auch die Netzrichtlinien von Calico verwenden, um Ihren Cluster vor unerwünschtem öffentlichen Zugriff zu schützen.
-
-In den folgenden Abschnitten werden die Funktionen in {{site.data.keyword.containershort_notm}} beschrieben, die Sie verwenden können, um Anwendungen einem privaten Netz zugänglich zu machen und Ihren Cluster vor unerwünschtem öffentlichen Zugriff zu schützen. Optional können Sie die Netzarbeitslast auch isolieren und Ihren Cluster mit Ressourcen in einem lokalen Netz verbinden.
-
-### Apps mit privaten Netzservices zugänglich machen und den Cluster mit Calico-Netzrichtlinien schützen
-{: #private_both_vlans_calico}
-
-Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte Calico-Netzrichtlinieneinstellungen](cs_network_policy.html#default_policy) geschützt, die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Standardmäßig ist für alle Workerknoten der gesamte ausgehende Netzverkehr zulässig. Der eingehende Netzverkehr wird mit Ausnahme einiger Ports blockiert, die geöffnet werden, damit der Netzverkehr von IBM überwacht werden und IBM Sichheitsupdates für den Kubernetes-Master automatisch aktualisieren kann. Der Zugriff auf den Kubelet des Workerknotens wird durch einen OpenVPN-Tunnel gesichert. Weitere Informationen finden Sie im Abschnitt mit der [{{site.data.keyword.containershort_notm}}-Architektur](cs_tech.html).
-
-Wenn Sie Ihre Apps mit einem NodePort-Service, einem LoadBalancer-Service oder einer Ingress-ALB bereitstellen, ermöglichen die standardmäßigen Calico-Richtlinien auch eingehenden Netzverkehr vom Internet an diese Services. Um die App nur über ein privates Netz zugänglich zu machen, können Sie nur private NodePort-, LoadBalancer- oder Ingress-Services verwenden und den gesamten öffentlichen Datenverkehr für die Services blockieren.
+Wenn die Workerknoten sowohl mit einem öffentlichen als auch mit einem privaten VLAN verbunden sind, können Sie Ihre App ausschließlich über ein privates Netz zugänglich machen, indem Sie private NodePort-, LoadBalancer- oder Ingress-Services verwenden. Anschließend können Sie Calico-Richtlinien erstellen, um den öffentlichen Datenverkehr an die Services zu blockieren.
 
 **NodePort**
 * [Erstellen Sie einen NodePort-Service](cs_nodeport.html). Zusätzlich zur öffentlichen IP-Adresse steht ein NodePort-Service über die private IP-Adresse eines Workerknotens zur Verfügung.
@@ -106,45 +99,22 @@ Wenn Sie Ihre Apps mit einem NodePort-Service, einem LoadBalancer-Service oder e
 * Wenn Sie einen Cluster erstellen, werden automatisch eine öffentliche und eine private Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellt. Da die öffentliche ALB aktiviert ist und die private ALB standardmäßig inaktiviert ist, müssen Sie [die öffentliche ALB inaktivieren](cs_cli_reference.html#cs_alb_configure) und [die private ALB aktivieren](cs_ingress.html#private_ingress).
 * Erstellen Sie anschließend [einen privaten Ingress-Service](cs_ingress.html#ingress_expose_private).
 
-Weitere Informationen zu den einzelnen Services finden Sie unter [ NodePort-, LoadBalancer- oder Ingress-Service auswählen](#external).
+Beispiel: Angenommen, Sie haben einen privaten Lastausgleichsservice erstellt. Außerdem haben Sie eine Calico-PreDNAT-Richtlinie erstellt, um den öffentlichen Datenverkehr zu blockieren, sodass er nicht zu den öffentlichen NodePorts gelangt, die von der Lastausgleichsfunktion geöffnet werden. Auf diese private Lastausgleichsfunktion ist der Zugriff wie folgt möglich:
+* Von einem beliebigen Pod in demselben Cluster
+* Von einem Pod in einem beliebigen Cluster in demselben IBM Cloud-Konto
+* Von allen Systemen, die mit einem der privaten VLANs in demselben IBM Cloud-Konto verbunden sind (wenn das [VLAN-Spanning aktiviert](cs_subnets.html#subnet-routing) ist) 
+* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die Lastausgleichsfunktion befindet (wenn Sie sich nicht im IBM Cloud-Konto, aber dennoch hinter der Unternehmensfirewall befinden)
+* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die Lastausgleichsfunktion befindet (wenn Sie sich in einem anderen IBM Cloud-Konto befinden)
 
-### Optional: Netzarbeitslasten für Edge-Workerknoten isolieren
-{: #private_both_vlans_edge}
-
-Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird.
-Um sicherzustellen, dass Ingress- und Lastausgleichsfunktions-Pods nur auf den angegebenen Workerknoten bereitgestellt werden, [kennzeichnen Sie die Workerknoten als Edge-Knoten](cs_edge.html#edge_nodes). Um außerdem zu verhindern, dass andere Arbeitslasten auf Edge-Knoten ausgeführt werden, [wenden Sie Taints auf die Edge-Knoten an](cs_edge.html#edge_workloads).
-
-Verwenden Sie dann eine [Calico-PreDNAT-Netzrichtlinie](cs_network_policy.html#block_ingress), um den Datenverkehr an öffentlichen Knotenports in Clustern zu blockieren, in denen Edge-Workerknoten ausgeführt werden. Durch das Blockieren von Knotenports wird sichergestellt, dass die Edge-Workerknoten die einzigen Workerknoten sind, die eingehenden Datenverkehr verarbeiten.
-
-### Optional: Verbindung zu einer lokalen Datenbank mithilfe des strongSwan-VPN-Service herstellen
-{: #private_both_vlans_vpn}
-
-Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz herzustellen, können Sie einen [strongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) einrichten. Der strongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec - Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den StrongSwan-IPSec-VPN-Service](cs_vpn.html#vpn-setup) direkt in einem Pod in Ihrem Cluster.
+Weitere Informationen zum Einrichten Ihres Clusters für den Netzbetrieb, einschließlich Informationen zu Teilnetzen, Firewalls und VPNs, finden Sie unter [Standardclustervernetzung planen](cs_network_cluster.html#both_vlans).
 
 <br />
 
 
-## Nur private externe Netze für private VLAN-Konfiguration planen
+## Private externe Netze ausschließlich für private VLAN-Konfiguration planen
 {: #private_vlan}
 
-Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} erstellen, müssen Sie Ihren Cluster mit einem privaten VLAN verbinden. Das private VLAN bestimmt die private IP-Adresse, die dem jeweiligen Workerknoten zugeordnet ist. Diese Adresse stellt jedem Workerknoten eine private Netzschnittstelle bereit.
-{:shortdesc}
-
-Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden sind, können Sie die private Netzschnittstelle für die Workerknoten verwenden, um Apps nur mit dem privaten Netz zu verbinden. Sie können dann eine Gateway-Appliance verwenden, um Ihren Cluster vor unerwünschtem öffentlichen Zugriff zu schützen.
-
-In den folgenden Abschnitten werden die Funktionen in {{site.data.keyword.containershort_notm}} beschrieben, die Sie verwenden können, um Ihren Cluster vor unerwünschtem öffentlichen Zugriff zu schützen, Apps einem privaten Netz zugänglich zu machen und eine Verbindung zu Ressourcen in einem lokalen Netz herzustellen.
-
-### Gateway-Appliance konfigurieren
-{: #private_vlan_gateway}
-
-Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Sie können eine Firewall mit angepassten Netzrichtlinien einrichten, um für Ihren Standardcluster dedizierte Netzsicherheit bereitzustellen und unbefugten Zugriff zu erkennen und zu unterbinden. Sie können beispielsweise [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) oder [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) als Ihre Firewall und zum Blockieren unerwünschten Datenverkehrs einrichten. Wenn Sie eine Firewall einrichten, [müssen Sie auch die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](cs_firewall.html#firewall_outbound), damit der Master und die Workerknoten kommunizieren können. 
-
-**Hinweis**: Wenn Sie über eine vorhandene VRA-Instanz verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt wurden, nicht auf der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN-Spanning aktivieren](cs_subnets.html#vra-routing).
-
-### Apps mit privaten Netzservices zugänglich machen
-{: #private_vlan_services}
-
-Um Ihre App nur über ein privates Netz zugänglich zu machen, können Sie private NodePort-, LoadBalancer- oder Ingress-Services verwenden. Da Ihre Workerknoten nicht mit einem öffentlichen VLAN verbunden sind, wird kein öffentlicher Datenverkehr an diese Services weitergeleitet.
+Wenn die Workerknoten nur mit einem privaten VLAN verbunden sind, können Sie Ihre App ausschließlich über ein privates Netz zugänglich machen, indem Sie private NodePort-, LoadBalancer- oder Ingress-Services verwenden. Da Ihre Workerknoten nicht mit einem öffentlichen VLAN verbunden sind, wird kein öffentlicher Datenverkehr an diese Services weitergeleitet.
 
 **NodePort**:
 * [Erstellen Sie einen privaten NodePort-Service](cs_nodeport.html). Der Service ist über die private IP-Adresse eines Workerknotens verfügbar.
@@ -155,30 +125,9 @@ Um Ihre App nur über ein privates Netz zugänglich zu machen, können Sie priva
 * Öffnen Sie in der privaten Firewall den Port, den Sie bei der Bereitstellung des LoadBalancer-Service an der privaten IP-Adresse konfiguriert haben.
 
 **Ingress**:
+* Sie müssen einen [DNS-Service konfigurieren, der im privaten Netz verfügbar ist ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 * Wenn Sie einen Cluster erstellen, wird automatisch eine private Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellt, die jedoch standardmäßig nicht aktiviert ist. Sie müssen [die private ALB aktivieren](cs_ingress.html#private_ingress).
 * Erstellen Sie anschließend [einen privaten Ingress-Service](cs_ingress.html#ingress_expose_private).
 * Öffnen Sie in Ihrer privaten Firewall Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die private ALB.
 
-
-Weitere Informationen zu den einzelnen Services finden Sie unter [ NodePort-, LoadBalancer- oder Ingress-Service auswählen](#external).
-
-### Optional: Verbindung zu einer lokalen Datenbank mithilfe der Gateway-Appliance herstellen
-{: #private_vlan_vpn}
-
-Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz herzustellen, müssen Sie ein VPN-Gateway einrichten. Sie können die [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) oder [Fortigate Security Appliance (FSA)](/docs/infrastructure/fortigate-10g/about.html) verwenden, die Sie als Firewall eingerichtet haben, um auch einen IPSec-VPN-Endpunkt zu konfigurieren. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](cs_vpn.html#vyatta).
-
-<br />
-
-
-## Netzbetrieb in Clustern planen
-{: #in-cluster}
-
-Alle Pods, die auf einem Workerknoten bereitgestellt werden, erhalten im Bereich 172.30.0.0/16 eine private IP-Adresse und werden nur zwischen den Workerknoten weitergeleitet. Vermeiden Sie Konflikte, indem Sie diesen IP-Bereich nicht auf Knoten verwenden, die mit Ihren Workerknoten kommunizieren. Workerknoten und Pods können im privaten Netz durch die Verwendung von privaten IP-Adressen sicher kommunizieren. Wenn ein Pod ausfällt oder ein Workerknoten neu erstellt werden muss, wird jedoch eine neue private IP-Adresse zugewiesen.
-
-Standardmäßig ist es schwierig, sich ändernde private IP-Adressen für Apps nachzuverfolgen, die hoch verfügbar sein müssen. Stattdessen können Sie die integrierten Erkennungsfunktionen des Kubernetes-Service nutzen, um Anwendungen als Cluster-IP-Services im privaten Netz zugänglich zu machen. Ein Kubernetes-Service fasst eine Gruppe von Pods zusammen und stellt diesen Pods eine Netzverbindung für andere Services im Cluster zur Verfügung, ohne hierbei die tatsächlichen, privaten IP-Adressen der einzelnen Pods preiszugeben. Services wird eine IP-Cluster-IP-Adresse zugeordnet, auf die nur innerhalb des Clusters zugegriffen werden kann.
-* **Ältere Cluster**: In Clustern, die vor Februar 2018 in der Zone 'dal13' oder vor Oktober 2017 in einer anderen Zone erstellt wurden, wird den Services eine der 254 IPs im Bereich 10.10.10.0/24 zugeordnet. Wenn Sie den Grenzwert von 254 Services erreicht haben und mehr Services benötigen, müssen Sie einen neuen Cluster erstellen.
-* **Ältere Cluster**: In Clustern, die nach Februar 2018 in der Zone 'dal13' oder nach Oktober 2017 in einer anderen Zone erstellt wurden, wird den Services eine der 65.000 IPs im Bereich 172.21.0.0/16 zugeordnet. 
-
-Vermeiden Sie Konflikte, indem Sie diesen IP-Bereich nicht auf Knoten verwenden, die mit Ihren Workerknoten kommunizieren. Es wird auch ein Eintrag für die DNS-Suche für den Service erstellt und in der Komponente `kube-dns` des Clusters gespeichert. Der DNS-Eintrag enthält den Namen des Service, den Namensbereich, in dem der Service erstellt wurde, und den Link zu der zugeordneten IP-Adresse, die im Cluster enthalten ist.
-
-Um auf einen Pod hinter einem Cluster-IP-Service zuzugreifen, können Apps entweder die IP-Adresse des Service im Cluster verwenden oder eine Anforderung mit dem Namen des Service senden. Wenn Sie den Namen des Service verwenden, wird dieser in der Komponente `kube-dns` gesucht und an die IP-Adresse des Service im Cluster weitergeleitet. Wenn eine Anforderung den Service erreicht, stellt der Service sicher, dass alle Anforderungen gleichmäßig an die Pods weitergeleitet werden, unabhängig von ihren jeweiligen IP-Adressen im Cluster und dem Workerknoten, auf dem sie implementiert sind.
+Weitere Informationen zum Einrichten Ihres Clusters für den Netzbetrieb, einschließlich Informationen zu Teilnetzen und Gateway-Appliances, finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 公開埠並使用可攜式 IP 位址，讓第 4 層負載平衡器可以存取容器化應用程式。
 {:shortdesc}
 
+
+
 ## 負載平衡器元件及架構
 {: #planning}
 
-當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路及 1 個可攜式專用子網路。
+當您建立標準叢集時，{{site.data.keyword.containerlong_notm}} 會自動佈建 1 個可攜式公用子網路及 1 個可攜式專用子網路。
 
 * 可攜式公用子網路提供預設[公用 Ingress ALB](cs_ingress.html) 所使用的 1 個可攜式公用 IP 位址。藉由建立公用負載平衡器服務，即可使用其餘 4 個可攜式公用 IP 位址，將單一應用程式公開至網際網路。
 * 可攜式專用子網路提供預設[專用 Ingress ALB](cs_ingress.html#private_ingress) 所使用的 1 個可攜式專用 IP 位址。藉由建立專用負載平衡器服務，即可使用其餘 4 個可攜式專用 IP 位址，將單一應用程式公開至專用網路。
@@ -37,7 +39,7 @@ lastupdated: "2018-08-06"
 
 LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要從網際網路存取 LoadBalancer 服務，請使用負載平衡器的公用 IP 位址以及 `<IP_address>:<port>` 格式的已指派埠。下圖顯示負載平衡器如何將通訊從網際網路導向應用程式。
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用負載平衡器在 {{site.data.keyword.containershort_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用負載平衡器在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
 
 1. 應用程式的要求使用負載平衡器的公用 IP 位址及工作者節點上的已指派埠。
 
@@ -71,9 +73,9 @@ LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要�
 
 開始之前：
   * 具有可攜式專用 IP 位址的負載平衡器服務仍然會在每個工作者節點上開啟一個公用 NodePort。若要新增網路原則以防止公用資料流量，請參閱[封鎖送入的資料流量](cs_network_policy.html#block_ingress)。
-  * 在每一個區域中，至少一個公用 VLAN 必須具有可用於 Ingress 及 LoadBalancer 服務的可攜式子網路。若要新增專用 Ingress 及 LoadBalancer 服務，您必須至少指定一個具有可用可攜式子網路的專用 VLAN。若要新增子網路，請參閱[配置叢集的子網路](cs_subnets.html)。
+  * 您必須在每一個區域中部署負載平衡器，且每一個負載平衡器獲指派其本身在該區域的 IP 位址。若要建立公用負載平衡器，則必須至少有一個公用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增專用負載平衡器服務，則必須至少有一個專用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增子網路，請參閱[配置叢集的子網路](cs_subnets.html)。
   * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每一個區域中至少啟用 2 個[邊緣工作者節點](cs_edge.html#edge)。如果在部分區域中啟用邊緣工作者節點，但在其他區域中未啟用，則不會統一部署負載平衡器。負載平衡器將會部署至部分區域中的邊緣節點，但不會部署至其他區域中的一般工作者節點。
-  * 若要在位於不同區域的工作者節點之間啟用專用網路的通訊，您必須啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+  * 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
 
 
 若要在多區域叢集裡設定 LoadBalancer 服務，請執行下列動作：
@@ -177,8 +179,7 @@ LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要�
     ```
     {: screen}
 
-        **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
-
+    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
 
 4.  如果您已建立公用負載平衡器，請從網際網路存取您的應用程式。
     1.  開啟偏好的 Web 瀏覽器。
@@ -506,3 +507,4 @@ spec:
         {: screen}
 
     4. 在輸出的 **Labels** 區段中，驗證公用或專用 VLAN 是否為您在先前步驟中指定的 VLAN。
+

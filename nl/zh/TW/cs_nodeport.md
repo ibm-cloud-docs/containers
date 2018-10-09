@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ lastupdated: "2018-08-06"
 
 下圖顯示配置 NodePort 服務時，通訊如何從網際網路導向應用程式：
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 在 {{site.data.keyword.containershort_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
 
 1. 使用工作者節點的公用 IP 位址以及工作者節點上的 NodePort，將要求傳送至應用程式。
 

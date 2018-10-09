@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,9 +34,9 @@ Para conectar seus nós do trabalhador e apps a um data center no local, é poss
 Use um gráfico Helm para configurar e implementar o serviço de VPN IPSec strongSwan dentro de um pod do Kubernetes.
 {:shortdesc}
 
-Como o strongSwan está integrado ao cluster, não é necessário um dispositivo de gateway externo. Quando a conectividade de VPN é estabelecida, as rotas são configuradas automaticamente em todos os nós do trabalhador no cluster. Essas rotas permitem a conectividade bidirecional por meio do túnel VPN entre pods em qualquer nó do trabalhador e o sistema remoto. Por exemplo, o diagrama a seguir mostra como um app no {{site.data.keyword.containershort_notm}} pode se comunicar com um servidor local por meio de uma conexão VPN do strongSwan:
+Como o strongSwan está integrado ao cluster, não é necessário um dispositivo de gateway externo. Quando a conectividade de VPN é estabelecida, as rotas são configuradas automaticamente em todos os nós do trabalhador no cluster. Essas rotas permitem a conectividade bidirecional por meio do túnel VPN entre pods em qualquer nó do trabalhador e o sistema remoto. Por exemplo, o diagrama a seguir mostra como um app no {{site.data.keyword.containerlong_notm}} pode se comunicar com um servidor local por meio de uma conexão VPN do strongSwan:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Expor um app no {{site.data.keyword.containerlong_notm}} usando um balanceador de carga" style="width:700px; border-style: none"/>
 
 1. Um app em seu cluster, `myapp`, recebe uma solicitação de um serviço Ingress ou LoadBalancer e precisa conectar-se com segurança a dados em sua rede local.
 
@@ -454,9 +454,9 @@ Além disso, algumas configurações de tempo limite do `ipsec.conf` que foram c
 O [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) fornece o sistema operacional Vyatta 5600 mais recente para servidores bare metal x86. É possível usar um VRA como um gateway de VPN para se conectar com segurança a uma rede no local.
 {:shortdesc}
 
-Todo o tráfego de rede pública e privada que entra ou sai das VLANs do cluster é roteado por meio de um VRA. É possível usar o VRA como um terminal de VPN para criar um túnel IPSec criptografado entre servidores na infraestrutura do IBM Cloud (SoftLayer) e recursos no local. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containershort_notm}} pode se comunicar com um servidor no local por meio de uma conexão VPN do VRA:
+Todo o tráfego de rede pública e privada que entra ou sai das VLANs do cluster é roteado por meio de um VRA. É possível usar o VRA como um terminal de VPN para criar um túnel IPSec criptografado entre servidores na infraestrutura do IBM Cloud (SoftLayer) e recursos no local. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containerlong_notm}} pode se comunicar com um servidor no local por meio de uma conexão VPN do VRA:
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando um balanceador de carga" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Expor um app no {{site.data.keyword.containerlong_notm}} usando um balanceador de carga" style="width:725px; border-style: none"/>
 
 1. Um app em seu cluster, `myapp2`, recebe uma solicitação de um serviço Ingress ou LoadBalancer e precisa conectar-se com segurança a dados na rede local.
 
@@ -476,4 +476,4 @@ Para configurar um Virtual Router Appliance:
 
 3. Para ativar uma conexão VPN usando o VRA, [configure VRRP no VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
 
-**Nota**: se você tiver um dispositivo roteador existente e, em seguida, incluir um cluster, as novas sub-redes móveis que são ordenadas para o cluster não serão configuradas no dispositivo do roteador. Para usar os serviços de rede, deve-se ativar o roteamento entre as sub-redes na mesma VLAN [ativando o VLAN Spanning](cs_subnets.html#subnet-routing).
+**Nota**: se você tiver um dispositivo roteador existente e, em seguida, incluir um cluster, as novas sub-redes móveis que são ordenadas para o cluster não serão configuradas no dispositivo do roteador. Para usar os serviços de rede, deve-se ativar o roteamento entre as sub-redes na mesma VLAN [ativando o VLAN Spanning](cs_subnets.html#subnet-routing). Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -44,7 +44,7 @@ devono essere configurati dall'amministratore del cluster per assicurare che le 
 siano disponibili agli utenti del cluster.
 
 
-Puoi utilizzare più registri con {{site.data.keyword.containershort_notm}} per distribuire le applicazioni al tuo cluster.
+Puoi utilizzare più registri con {{site.data.keyword.containerlong_notm}} per distribuire le applicazioni al tuo cluster.
 
 |Registro|Descrizione|Vantaggi|
 |--------|-----------|-------|
@@ -93,7 +93,7 @@ memorizzata nel tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}.
 Quando crei un cluster, i segreti e i token del registro senza scadenza vengono creati automaticamente per [il registro regionale più vicino e il registro globale](/docs/services/Registry/registry_overview.html#registry_regions). Il registro globale archivia in modo sicuro le immagini fornite da IBM pubbliche a cui puoi fare riferimento nelle tue distribuzioni invece di avere riferimenti differenti per le immagini archiviate in ogni registro regionale. Il registro regionale archivia in modo sicuro le tue proprie immagini Docker, così come le stesse immagini pubbliche che vengono archiviate nel registro globale. I token sono utilizzati per autorizzare l'accesso in sola lettura a tutti i tuoi spazi dei nomi che hai configurato in {{site.data.keyword.registryshort_notm}} in modo che puoi utilizzare queste immagini pubbliche (registro globale) e private (registri regionali).
 
 Ogni token deve essere memorizzato in un `imagePullSecret` Kubernetes per poter essere accessibile da un cluster Kubernetes
-quando distribuisci un'applicazione inserita in un contenitore. Quando il tuo cluster viene creato, {{site.data.keyword.containershort_notm}} memorizza automaticamente i token per il registro globale (immagini pubbliche fornite da IBM) e il regionale nei segreti di pull dell'immagine Kubernetes. I segreti di pull dell'immagine sono aggiunti allo spazio dei nomi Kubernetes `default`, all'elenco predefinito dei segreti in `ServiceAccount` per tale spazio dei nomi e allo spazio dei nomi `kube-system`.
+quando distribuisci un'applicazione inserita in un contenitore. Quando il tuo cluster viene creato, {{site.data.keyword.containerlong_notm}} memorizza automaticamente i token per il registro globale (immagini pubbliche fornite da IBM) e il regionale nei segreti di pull dell'immagine Kubernetes. I segreti di pull dell'immagine sono aggiunti allo spazio dei nomi Kubernetes `default`, all'elenco predefinito dei segreti in `ServiceAccount` per tale spazio dei nomi e allo spazio dei nomi `kube-system`.
 
 **Nota:** utilizzando questa configurazione iniziale, puoi distribuire i contenitori da qualsiasi immagine disponibile in
 uno spazio dei nomi del tuo account {{site.data.keyword.Bluemix_notm}} allo
@@ -511,5 +511,4 @@ Ogni spazio dei nomi ha un account di servizio Kubernetes denominato `default`. 
    {: pre}
 
 <br />
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -57,68 +57,85 @@ Infrastructure permissions to add servers
 ```
 {: screen}
 
+```
+IAM token exchange request failed: Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+```
+{: screen}
+
 {: tsCauses}
-Gli account Pagamento a consumo di {{site.data.keyword.Bluemix_notm}} che sono stati creati dopo l'abilitazione del collegamento automatico degli account sono già configurati con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Puoi acquistare le risorse dell'infrastruttura per il tuo cluster senza ulteriori configurazioni.
+Gli account Pagamento a consumo di {{site.data.keyword.Bluemix_notm}} che sono stati creati dopo l'abilitazione del collegamento automatico degli account sono già configurati con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Puoi acquistare le risorse dell'infrastruttura per il tuo cluster senza ulteriori configurazioni. Se hai un account Pagamento a consumo valido e ricevi questo messaggio di errore, è possibile che tu non stia utilizzando le credenziali dell'account dell'infrastruttura IBM Cloud (SoftLayer) corrette per accedere alle risorse dell'infrastruttura.
 
-Gli utenti con altri tipi di account {{site.data.keyword.Bluemix_notm}} o quelli che hanno un account dell'infrastruttura IBM Cloud (SoftLayer) esistente non collegato al loro account {{site.data.keyword.Bluemix_notm}}, devono configurare i propri account per creare i cluster standard. 
-
-Se hai un account Pagamento a consumo valido e ricevi questo messaggio di errore, è possibile che tu non stia utilizzando le credenziali dell'account dell'infrastruttura IBM Cloud (SoftLayer) corrette per accedere alle risorse dell'infrastruttura.
+Gli utenti con altri tipi di account {{site.data.keyword.Bluemix_notm}} devono configurare i loro account per creare dei cluster standard. Sono di seguito riportati degli esempi di quando potresti avere un tipo di account differente:
+* Hai un account dell'infrastruttura IBM Cloud (SoftLayer) che ha una data anteriore al tuo account della piattaforma {{site.data.keyword.Bluemix_notm}} e vuoi continuare a utilizzarlo.
+* Vuoi utilizzare un account dell'infrastruttura IBM Cloud (SoftLayer) differente per eseguire il provisioning di risorse dell'infrastruttura. Ad esempio, potresti configurare un account {{site.data.keyword.Bluemix_notm}} di team per utilizzare un account dell'infrastruttura differente per scopi di fatturazione.
 
 {: tsResolve}
 Il proprietario dell'account deve configurare correttamente le credenziali dell'account dell'infrastruttura. Le credenziali dipendono dal tipo di account dell'infrastruttura che stai utilizzando.
-*  Se hai un account {{site.data.keyword.Bluemix_notm}} Pagamento a consumo recente, l'account viene fornito con un account dell'infrastruttura collegato che puoi utilizzare.[Verifica che la chiave API dell'infrastruttura sia collegata con le autorizzazioni corrette](#apikey).
-*  Se hai un tipo di account {{site.data.keyword.Bluemix_notm}} differente, verifica che puoi accedere al portfolio dell'infrastruttura e che [le credenziali dell'account dell'infrastruttura siano configurate con le autorizzazioni corrette](#credentials).
 
-Per controllare se il tuo cluster utilizza l'account dell'infrastruttura collegato oppure un account dell'infrastruttura differente:
+**Prima di iniziare**:
+
 1.  Verifica di avere accesso a un account dell'infrastruttura. Esegui l'accesso alla [console {{site.data.keyword.Bluemix_notm}}![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/) e, dal menu espandibile, fai clic su **Infrastruttura**. Se vedi il dashboard dell'infrastruttura, hai accesso a un account dell'infrastruttura.
-2.  Controlla se il tuo cluster utilizza un account dell'infrastruttura differente. Dal menu espandibile, fai clic su **Contenitori > Cluster**.
-3.  Dalla tabella, seleziona il tuo cluster. 
-4.  Nella scheda **Panoramica**, se vedi un campo **Utente infrastruttura**, il cluster utilizza un account dell'infrastruttura diverso da quello fornito con il tuo account Pagamento a consumo
+2.  Controlla se il tuo cluster utilizza un account dell'infrastruttura differente da quello fornito con il tuo account Pagamento a consumo.
+    1.  Dal menu espandibile, fai clic su **Contenitori > Cluster**.
+    2.  Dalla tabella, seleziona il tuo cluster.
+    3.  Nella scheda **Panoramica**. controlla l'eventuale presenza di un campo **Utente infrastruttura**.
+        * Se non vedi il campo **Utente infrastruttura**, hai un account Pagamento a consumo collegato che utilizza le stesse credenziali per i tuoi account dell'infrastruttura e della piattaforma.
+        * Se vedi un campo **Utente infrastruttura**, il tuo cluster utilizza un account dell'infrastruttura differente da quello che era stato fornito con il tuo account Pagamento a consumo. Queste credenziali differenti si applicano a tutti i cluster nella regione. 
+3.  Decidi quale tipo di account vuoi avere per determinare come risolvere il tuo problema di autorizzazione dell'infrastruttura. Per la maggior parte degli utenti, l'account Pagamento a consumo collegato predefinito è sufficiente.
+    *  Account {{site.data.keyword.Bluemix_notm}} Pagamento a consumo collegato: [verifica che la chiave API dell'infrastruttura sia configurata con le autorizzazioni corrette](#apikey). Se il tuo cluster sta utilizzando un account dell'infrastruttura differente, devi annullare l'impostazione di queste credenziali come parte del processo.
+    *  Account {{site.data.keyword.Bluemix_notm}} della piattaforma e dell'infrastruttura differenti: verifica che puoi accedere al portfolio dell'infrastruttura e che [le credenziali dell'account dell'infrastruttura siano configurate con le autorizzazioni corrette](#credentials).
 
-### Configurazione delle credenziali dell'API dell'infrastruttura per gli account collegati
+### Utilizzo delle credenziali dell'infrastruttura predefinite per gli account Pagamento a consumo collegati con la chiave API
 {: #apikey}
 
 1.  Verifica che l'utente di cui si vuoi utilizzare le credenziali per le azioni dell'infrastruttura disponga delle autorizzazioni corrette.
 
     1.  Accedi alla [console {{site.data.keyword.Bluemix_notm}}![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/).
-        
+
     2.  Dal menu che si espande, seleziona **Infrastruttura**.
-        
+
     3.  Dalla barra dei menu, seleziona **Account** > **Utenti** > **Elenco utenti**.
 
     4.  Nella colonna **Chiave API**, verifica che l'utente abbia una chiave API oppure fai clic su **Genera**.
 
     5.  Verifica o assegna all'utente le [autorizzazioni di infrastruttura corrette](cs_users.html#infra_access).
 
-2.  Reimposta la chiave API per la regione in cui si trova il cluster in modo che appartenga all'utente.
+2.  Imposta la chiave API per la regione in cui si trova il cluster.
+
+    1.  Accedi al terminale con l'utente di cui vuoi utilizzare le autorizzazioni di infrastruttura.
     
-    1.  Accedi al terminale come utente corretto.
+    2.  Se ti trovi in una regione differente, passa alla regione dove vuoi impostare la chiave API.
     
-    2.  Reimposta la chiave API su questo utente.
+        ```
+        ibmcloud ks region-set
+        ```
+        {: pre}
+
+    3.  Imposta la chiave API dell'utente per la regione.
         ```
         ibmcloud ks api-key-reset
         ```
         {: pre}    
-    
-    3.  Verifica che la chiave API sia impostata.
+
+    4.  Verifica che la chiave API sia impostata.
         ```
         ibmcloud ks api-key-info <cluster_name_or_ID>
         ```
         {: pre}
+
+3.  **Facoltativo**: se il tuo account Pagamento a consumo utilizza un account dell'infrastruttura differente per eseguire il provisioning di cluster (ad esempio, se hai utilizzato il comando `ibmcloud ks credentials-set`), l'account continua a utilizzare tali credenziali dell'infrastruttura invece della chiave API. Devi rimuovere l'account dell'infrastruttura associato in modo che venga utilizzata la chiave API che hai impostato nel passo precedente.
+    ```
+    ibmcloud ks credentials-unset
+    ```
+    {: pre}
         
-    4.  **Facoltativo**: se hai precedentemente impostato manualmente le credenziali con il comando `ibmcloud ks credentials-set`, rimuovi l'account dell'infrastruttura associato. Ora, la chiave API che hai impostato nei passi secondari precedenti viene utilizzata per ordinare l'infrastruttura.
-        ```
-        ibmcloud ks credentials-unset
-        ```
-        {: pre}
+4.  **Facoltativo**: se connetti il tuo cluster pubblico a risorse in loco, controlla la tua connettività di rete.
 
-3.  **Facoltativo**: se connetti il tuo cluster pubblico a risorse in loco, controlla la tua connettività di rete.
-
-    1.  Controlla la connettività della VLAN di lavoro. 
+    1.  Controlla la connettività della VLAN di lavoro.
     2.  Se necessario, [imposta la connettività VPN](cs_vpn.html#vpn).
     3.  [Apri le porte richieste nel tuo firewall](cs_firewall.html#firewall).
 
-### Configurazione delle credenziali dell'account dell'infrastruttura per i diversi account
+### Configurazione delle credenziali dell'infrastruttura per diversi account dell'infrastruttura e della piattaforma
 {: #credentials}
 
 1.  Ottieni l'account dell'infrastruttura che vuoi utilizzare per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Hai diverse opzioni che dipendono dal tuo tipo di account corrente.
@@ -140,15 +157,11 @@ Per controllare se il tuo cluster utilizza l'account dell'infrastruttura collega
         </tr>
         <tr>
           <td>**Gli account Pagamento a consumo meno recenti** che erano stati creati prima che fosse disponibile il collegamento automatico degli account non erano forniti con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer).<p>Se hai un account dell'infrastruttura IBM Cloud (SoftLayer) esistente, non puoi collegarlo a un vecchio account Pagamento a consumo.</p></td>
-          <td><p><strong>Opzione 1: </strong> [Crea un nuovo account Pagamento a consumo](/docs/account/index.html#paygo) che è configurato con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Se scegli questa opzione,
-hai due account e fatture {{site.data.keyword.Bluemix_notm}}
-separati.</p><p>Per continuare a utilizzare il tuo vecchio account Pagamento a consumo, puoi utilizzare il nuovo account Pagamento a consumo per generare una chiave API per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer).</p><p><strong>Opzione 2:</strong> se hai già un account dell'infrastruttura IBM Cloud (SoftLayer) esistente che vuoi utilizzare, puoi impostare le credenziali nel tuo account {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** quando colleghi manualmente un account dell'infrastruttura IBM Cloud (SoftLayer), le credenziali vengono utilizzate per ogni azione specifica nell'infrastruttura IBM Cloud (SoftLayer) nel tuo account {{site.data.keyword.Bluemix_notm}}. Devi assicurarti che la chiave API che hai inviato abbia [autorizzazioni dell'infrastruttura sufficienti](cs_users.html#infra_access) in modo che gli utenti possano creare e utilizzare i cluster.</p><p>**Per entrambe le opzioni, continua con il passo successivo**.</p></td>
+          <td><p><strong>Opzione 1: </strong> [Crea un nuovo account Pagamento a consumo](/docs/account/index.html#paygo) che è configurato con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Se scegli questa opzione, hai due account e fatture {{site.data.keyword.Bluemix_notm}} separati.</p><p>Per continuare a utilizzare il tuo vecchio account Pagamento a consumo, puoi utilizzare il nuovo account Pagamento a consumo per generare una chiave API per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). </p><p><strong>Opzione 2:</strong> se hai già un account dell'infrastruttura IBM Cloud (SoftLayer) esistente che vuoi utilizzare, puoi impostare le credenziali nel tuo account {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** quando colleghi manualmente un account dell'infrastruttura IBM Cloud (SoftLayer), le credenziali vengono utilizzate per ogni azione specifica nell'infrastruttura IBM Cloud (SoftLayer) nel tuo account {{site.data.keyword.Bluemix_notm}}. Devi assicurarti che la chiave API che hai inviato abbia [autorizzazioni dell'infrastruttura sufficienti](cs_users.html#infra_access) in modo che gli utenti possano creare e utilizzare i cluster.</p><p>**Per entrambe le opzioni, continua con il passo successivo**.</p></td>
         </tr>
         <tr>
           <td>**Gli account Sottoscrizione** non sono configurati con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer).</td>
-          <td><p><strong>Opzione 1: </strong> [Crea un nuovo account Pagamento a consumo](/docs/account/index.html#paygo) che è configurato con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Se scegli questa opzione,
-hai due account e fatture {{site.data.keyword.Bluemix_notm}}
-separati.</p><p>Se vuoi continuare a utilizzare il tuo account Sottoscrizione, puoi utilizzare il nuovo account Pagamento a consumo per generare una chiave API nell'infrastruttura IBM Cloud (SoftLayer). Devi quindi impostare manualmente la chiave API dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account Sottoscrizione. Ricorda che le risorse dell'infrastruttura IBM Cloud (SoftLayer) vengono fatturate attraverso il tuo nuovo account Pagamento a consumo.</p><p><strong>Opzione 2:</strong> se hai già un account dell'infrastruttura IBM Cloud (SoftLayer) esistente che vuoi utilizzare, puoi impostare manualmente le credenziali dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** quando colleghi manualmente un account dell'infrastruttura IBM Cloud (SoftLayer), le credenziali vengono utilizzate per ogni azione specifica nell'infrastruttura IBM Cloud (SoftLayer) nel tuo account {{site.data.keyword.Bluemix_notm}}. Devi assicurarti che la chiave API che hai inviato abbia [autorizzazioni dell'infrastruttura sufficienti](cs_users.html#infra_access) in modo che gli utenti possano creare e utilizzare i cluster.</p><p>**Per entrambe le opzioni, continua con il passo successivo**.</p></td>
+          <td><p><strong>Opzione 1: </strong> [Crea un nuovo account Pagamento a consumo](/docs/account/index.html#paygo) che è configurato con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Se scegli questa opzione, hai due account e fatture {{site.data.keyword.Bluemix_notm}} separati.</p><p>Se vuoi continuare a utilizzare il tuo account Sottoscrizione, puoi utilizzare il nuovo account Pagamento a consumo per generare una chiave API nell'infrastruttura IBM Cloud (SoftLayer). Devi quindi impostare manualmente la chiave API dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account Sottoscrizione. Ricorda che le risorse dell'infrastruttura IBM Cloud (SoftLayer) vengono fatturate attraverso il tuo nuovo account Pagamento a consumo.</p><p><strong>Opzione 2:</strong> se hai già un account dell'infrastruttura IBM Cloud (SoftLayer) esistente che vuoi utilizzare, puoi impostare manualmente le credenziali dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** quando colleghi manualmente un account dell'infrastruttura IBM Cloud (SoftLayer), le credenziali vengono utilizzate per ogni azione specifica nell'infrastruttura IBM Cloud (SoftLayer) nel tuo account {{site.data.keyword.Bluemix_notm}}. Devi assicurarti che la chiave API che hai inviato abbia [autorizzazioni dell'infrastruttura sufficienti](cs_users.html#infra_access) in modo che gli utenti possano creare e utilizzare i cluster.</p><p>**Per entrambe le opzioni, continua con il passo successivo**.</p></td>
         </tr>
         <tr>
           <td>**Account dell'infrastruttura IBM Cloud (SoftLayer)**, nessun account {{site.data.keyword.Bluemix_notm}}</td>
@@ -160,9 +173,9 @@ separati.</p><p>Se vuoi continuare a utilizzare il tuo account Sottoscrizione, p
 2.  Verifica che l'utente di cui si vuoi utilizzare le credenziali per le azioni dell'infrastruttura disponga delle autorizzazioni corrette.
 
     1.  Accedi alla [console {{site.data.keyword.Bluemix_notm}}![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/).
-        
+
     2.  Dal menu che si espande, seleziona **Infrastruttura**.
-        
+
     3.  Dalla barra dei menu, seleziona **Account** > **Utenti** > **Elenco utenti**.
 
     4.  Nella colonna **Chiave API**, verifica che l'utente abbia una chiave API oppure fai clic su **Genera**.
@@ -172,18 +185,20 @@ separati.</p><p>Se vuoi continuare a utilizzare il tuo account Sottoscrizione, p
 3.  Imposta le credenziali dell'API dell'infrastruttura con l'utente per l'account corretto.
 
     1.  Ottieni le credenziali dell'API dell'infrastruttura dell'utente. **Nota**: le credenziali sono diverse dall'ID IBM.
-            
+
         1.  Dalla tabella di [console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/) **Infrastruttura** > **Account** > **Utenti** > **Elenco utenti**, fai clic su **ID IBM o Nome utente**.
-            
+
         2.  Nella sezione **Informazioni di accesso API**, visualizza il **Nome utente API** e la **Chiave di autenticazione**.    
-        
+
     2.  Imposta le credenziali API dell'infrastruttura da utilizzare.
         ```
         ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-  
+        ```
+        {: pre}
+
 4.  **Facoltativo**: se connetti il tuo cluster pubblico a risorse in loco, controlla la tua connettività di rete.
 
-    1.  Controlla la connettività della VLAN di lavoro. 
+    1.  Controlla la connettività della VLAN di lavoro.
     2.  Se necessario, [imposta la connettività VPN](cs_vpn.html#vpn).
     3.  [Apri le porte richieste nel tuo firewall](cs_firewall.html#firewall).
 
@@ -241,8 +256,8 @@ Se kubectl proxy ha esito positivo, ma il dashboard non è disponibile, potresti
 
 
 {: tsCauses}
-Potresti aver configurato un altro firewall o personalizzato le tue impostazioni firewall esistenti nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}}
-richiede che alcuni indirizzi IP e porte siano aperti per consentire la comunicazione dal nodo di lavoro al master Kubernetes e viceversa. Un altro motivo potrebbe essere che i tuoi nodi di lavoro sono bloccati in un loop di ricaricamento.
+Potresti aver configurato un altro firewall o personalizzato le tue impostazioni firewall esistenti nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). {{site.data.keyword.containerlong_notm}}
+richiede che alcuni indirizzi IP e porte siano aperti per consentire le comunicazioni dal nodo di lavoro al master Kubernetes e viceversa. Un altro motivo potrebbe essere che i tuoi nodi di lavoro sono bloccati in un loop di ricaricamento.
 
 {: tsResolve}
 [Consenti al cluster di accedere alle risorse dell'infrastruttura e ad altri servizi](cs_firewall.html#firewall_outbound). Questa attività richiede una [politica di accesso Amministratore](cs_users.html#access_policies). Verifica la tua [politica di accesso](cs_users.html#infra_access) corrente.
@@ -278,21 +293,21 @@ Instance ID inconsistent with worker records
 {: screen}
 
 {: tsCauses}
-L'ID macchina può diventare incongruente con il record di lavoro {{site.data.keyword.containershort_notm}} quando la macchina riscontra dei problemi hardware. Quando l'infrastruttura IBM Cloud (SoftLayer) risolve questo problema, un componente può subire delle variazioni all'interno del sistema che il servizio non identifica.
+L'ID macchina può diventare incongruente con il record di lavoro {{site.data.keyword.containerlong_notm}} quando la macchina riscontra dei problemi hardware. Quando l'infrastruttura IBM Cloud (SoftLayer) risolve questo problema, un componente può subire delle variazioni all'interno del sistema che il servizio non identifica.
 
 {: tsResolve}
-Perché {{site.data.keyword.containershort_notm}} identifichi nuovamente la macchina, [ricarica il nodo di lavoro bare metal](cs_cli_reference.html#cs_worker_reload). **Nota**: il ricaricamento aggiorna anche la [versione patch](cs_versions_changelog.html) della macchina.
+Perché {{site.data.keyword.containerlong_notm}} identifichi nuovamente la macchina, [ricarica il nodo di lavoro bare metal](cs_cli_reference.html#cs_worker_reload). **Nota**: il ricaricamento aggiorna anche la [versione patch](cs_versions_changelog.html) della macchina.
 
 Puoi anche [eliminare il nodo di lavoro bare metal](cs_cli_reference.html#cs_cluster_rm). **Nota**: le istanze bare metal vengono fatturate mensilmente.
 
 <br />
 
 
-## `kubectl exec` e `kubectl logs` non funzionano
+## `kubectl` commands time out
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-Se esegui `kubectl exec` o `kubectl logs`, visualizzi il seguente messaggio.
+Se esegui comandi quali `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward` o `kubectl logs`, vedi il seguente messaggio:
 
   ```
   <workerIP>:10250: getsockopt: connection timed out
@@ -303,7 +318,7 @@ Se esegui `kubectl exec` o `kubectl logs`, visualizzi il seguente messaggio.
 La connessione OpenVPN tra il nodo master e i nodi di lavoro non funziona correttamente.
 
 {: tsResolve}
-1. Abilita lo [spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+1. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
 2. Riavvia il pod client OpenVPN.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -423,6 +438,25 @@ Per associare i servizi a un cluster, devi avere il ruolo utente di sviluppatore
 <br />
 
 
+## L'esecuzione del bind di un servizio a un cluster provoca un errore che indica che il servizio non supporta le chiavi di servizio
+{: #cs_service_keys}
+
+{: tsSymptoms}
+Quando esegui `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, visualizzi il seguente messaggio.
+
+```
+This service doesn't support creation of keys
+```
+{: screen}
+
+{: tsCauses}
+Alcuni servizi in {{site.data.keyword.Bluemix_notm}}, come ad esempio {{site.data.keyword.keymanagementservicelong}}, non supportano la creazione delle credenziali del servizio, indicate anche come chiavi del servizio. Senza il supporto delle chiavi del servizio, non è possibile eseguire il bind del servizio a un cluster. Per trovare un elenco dei servizi che supportano la creazione delle chiavi del servizio, vedi [Abilitazione di applicazioni esterne a utilizzare servizi {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#accser_external).
+
+{: tsResolve}
+Per integrare i servizi che non supportano le chiavi del servizio, controlla se il servizio fornisce un'API che puoi utilizzare per accedere al servizio direttamente dalla tua applicazione. Ad esempio, se vuoi utilizzare {{site.data.keyword.keymanagementservicelong}}, vedi la [guida di riferimento API ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/apidocs/kms?language=curl). 
+
+<br />
+
 
 ## Dopo aver aggiornato o ricaricato un nodo di lavoro, vengono visualizzati i pod e i nodi duplicati
 {: #cs_duplicate_nodes}
@@ -465,8 +499,8 @@ Aggiorna manualmente i riferimenti all'indirizzo IP privato in modo che puntino 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.5
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.5
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
   ```
   {: screen}
 
@@ -568,7 +602,11 @@ Quando esegui `kubectl get pods`, puoi visualizzare i pod
 che rimangono in uno stato **In sospeso**.
 
 {: tsCauses}
-Se hai appena creato il cluster Kubernetes, i nodi di lavoro potrebbero essere ancora in fase di configurazione. Se questo cluster è un cluster che già esiste, potresti non avere abbastanza capacità nel tuo cluster per distribuire il pod.
+Se hai appena creato il cluster Kubernetes, i nodi di lavoro potrebbero essere ancora in fase di configurazione. 
+
+Se questo cluster è un cluster che già esiste:
+*  Potresti non disporre di sufficiente capacità nel tuo cluster per distribuire il pod.
+*  Il pod potrebbe aver superato una richiesta o un limite di risorse.
 
 {: tsResolve}
 Questa attività richiede una [politica di accesso Amministratore](cs_users.html#access_policies). Verifica la tua [politica di accesso](cs_users.html#infra_access) corrente.
@@ -615,13 +653,22 @@ Se questo cluster è un cluster che già esiste, controlla la capacità del tuo 
         ```
         {: pre}
 
-5.  Se i tuoi pod sono ancora nello stato **in attesa** dopo che il nodo di lavoro è stato completamente distribuito,
+5.  Facoltativo: controlla le tue richieste di risorse del pod.
+
+    1.  Conferma che i valori `resources.requests` non siano superiori alla capacità del nodo di lavoro. Ad esempio, se la richiesta del pod è `cpu: 4000m`, oppure 4 core, ma la dimensione del nodo di lavoro è solo di 2 core, il pod non può essere distribuito.
+
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+    
+    2.  Se la richiesta supera la capacità disponibile, [aggiungi un nuovo pool di nodi di lavoro](cs_clusters.html#add_pool) con i nodi di lavoro che possono soddisfare la richiesta.
+
+6.  Se i tuoi pod sono ancora nello stato **in attesa** dopo che il nodo di lavoro è stato completamente distribuito,
 controlla la [ Documentazione Kubernetes
 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) per ulteriore risoluzione dei problemi sullo stato in attesa del tuo pod.
 
 <br />
-
-
 
 
 ## I contenitori non si avviano
@@ -636,8 +683,9 @@ I contenitori potrebbero non essere stati avviati quando è stata raggiunta la q
 {: tsResolve}
 [Libera archiviazione in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-<br />
 
+
+<br />
 
 
 ## Impossibile installare un grafico Helm con valori di configurazione aggiornati
@@ -708,18 +756,20 @@ Per risolvere i problemi relativi al tuo grafico Helm:
 Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
+-  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plug-in e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
+
 -   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
--   Pubblica una domanda in [{{site.data.keyword.containershort_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
+-   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
 
     Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
     {: tip}
 -   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
 
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
-{{site.data.keyword.containershort_notm}}, inserisci la tua domanda in
+{{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.
-    -   Per domande sul servizio e sulle istruzioni per l'utilizzo iniziale, utilizza il forum
-[IBM developerWorks dW Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
+    -   Per domande sul servizio e istruzioni introduttive, utilizza il forum
+[IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support/howtogetsupport.html#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
 

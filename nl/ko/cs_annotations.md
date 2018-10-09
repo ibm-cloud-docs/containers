@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 Ingress 리소스에서 어노테이션을 메타데이터로 지정할 수 있습니다.
 {: shortdesc}
 
-**중요**: 어노테이션을 사용하려면 우선 [Ingress에서 앱 노출](cs_ingress.html)의 단계에 따라 Ingress 서비스 구성이 올바르게 설정되었는지 확인하십시오. 일단 기본 구성으로 Ingress ALB를 설정한 경우에는 Ingress 리소스 파일에 어노테이션을 추가하여 해당 기능을 확장할 수 있습니다. 
+**중요**: 어노테이션을 사용하려면 우선 [Ingress에서 앱 노출](cs_ingress.html)의 단계에 따라 Ingress 서비스 구성이 올바르게 설정되었는지 확인하십시오. 일단 기본 구성으로 Ingress ALB를 설정한 경우에는 Ingress 리소스 파일에 어노테이션을 추가하여 해당 기능을 확장할 수 있습니다.
 
 <table>
 <caption>일반 어노테이션</caption>
@@ -49,7 +49,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
  <tr>
  <td><a href="#location-snippets">위치 스니펫</a></td>
  <td><code>location-snippets</code></td>
- <td>서비스에 대한 사용자 정의 위치 블록 구성을 추가합니다. </td>
+ <td>서비스에 대한 사용자 정의 위치 블록 구성을 추가합니다.</td>
  </tr>
  <tr>
  <td><a href="#alb-id">사설 ALB 라우팅</a></td>
@@ -64,7 +64,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
  <tr>
  <td><a href="#server-snippets">서버 스니펫</a></td>
  <td><code>server-snippets</code></td>
- <td>사용자 정의 서버 블록 구성을 추가합니다. </td>
+ <td>사용자 정의 서버 블록 구성을 추가합니다.</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">TCP 포트</a></td>
@@ -114,7 +114,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
   <tr>
   <td><a href="#upstream-fail-timeout">업스트림 실패 제한시간</a></td>
   <td><code>upstream-fail-timeout</code></td>
-  <td>서버가 사용 불가능하다고 간주되기 전에 ALB가 서버에 연결을 시도할 수 있는 기간을 설정합니다. </td>
+  <td>서버가 사용 불가능하다고 간주되기 전에 ALB가 서버에 연결을 시도할 수 있는 기간을 설정합니다.</td>
   </tr>
   <tr>
   <td><a href="#upstream-keepalive">업스트림 Keepalive</a></td>
@@ -124,7 +124,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
   <tr>
   <td><a href="#upstream-max-fails">업스트림 최대 실패 횟수</a></td>
   <td><code>upstream-max-fails</code></td>
-  <td>서버가 사용 불가능하다고 간주되기 전에 서버와의 통신 시도에 실패한 최대 횟수를 설정합니다. </td>
+  <td>서버가 사용 불가능하다고 간주되기 전에 서버와의 통신 시도에 실패한 최대 횟수를 설정합니다.</td>
   </tr>
   </tbody></table>
 
@@ -244,7 +244,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
 <tr>
 <td><a href="#add-host-port">호스트 헤더에 서버 포트 추가</a></td>
 <td><code>add-host-port</code></td>
-<td>요청을 라우팅하기 위해 호스트에 서버 포트를 추가합니다. </td>
+<td>요청을 라우팅하기 위해 호스트에 서버 포트를 추가합니다.</td>
 </tr>
 <tr>
 <td><a href="#client-max-body-size">클라이언트 요청 본문 크기</a></td>
@@ -457,7 +457,7 @@ tls:
 
 <dl>
 <dt>설명</dt>
-<dd>서버 블록은 ALB 가상 서버에 대한 구성을 정의하는 nginx 지시문입니다. 위치 블록은 서버 블록 내에 정의된 nginx 지시문입니다. 위치 블록은 도메인 이름이나 IP 주소 및 포트 이후에 나오는 요청의 일부 또는 요청 URI를 Ingress가 처리하는 방법을 정의합니다. <br><br>서버 블록에서 요청을 수신하면 위치 블록은 URI를 경로와 일치시키며 요청은 앱이 배치된 팟(Pod)의 IP 주소로 전달됩니다. <code>location-snippets</code> 어노테이션을 사용하면 위치 블록이 특정 서비스로 요청을 전달하는 방법을 수정할 수 있습니다. <br><br>대신에 서버 블록을 전체적으로 수정하려면 <a href="#server-snippets">server-snippets</a> 어노테이션을 참조하십시오. </dd>
+<dd>서버 블록은 ALB 가상 서버에 대한 구성을 정의하는 nginx 지시문입니다. 위치 블록은 서버 블록 내에 정의된 nginx 지시문입니다. 위치 블록은 도메인 이름이나 IP 주소 및 포트 이후에 나오는 요청의 일부 또는 요청 URI를 Ingress가 처리하는 방법을 정의합니다.<br><br>서버 블록에서 요청을 수신하면 위치 블록은 URI를 경로와 일치시키며 요청은 앱이 배치된 팟(Pod)의 IP 주소로 전달됩니다. <code>location-snippets</code> 어노테이션을 사용하면 위치 블록이 특정 서비스로 요청을 전달하는 방법을 수정할 수 있습니다.<br><br>대신에 서버 블록을 전체적으로 수정하려면 <a href="#server-snippets">server-snippets</a> 어노테이션을 참조하십시오.</dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -475,7 +475,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -498,11 +498,11 @@ paths:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 서비스의 이름으로 대체합니다. </td>
+<td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 서비스의 이름으로 대체합니다.</td>
 </tr>
 <tr>
 <td>위치 스니펫</td>
-<td>지정된 서비스에 사용할 구성 스니펫을 제공하십시오. 이 샘플 스니펫은 프록시 요청 버퍼링을 끄고 로그 재작성을 켜며 <code>myservice</code> 서비스로 요청 전달 시에 추가 헤더를 설정하도록 위치 블록을 구성합니다. </td>
+<td>지정된 서비스에 사용할 구성 스니펫을 제공하십시오. 이 샘플 스니펫은 프록시 요청 버퍼링을 끄고 로그 재작성을 켜며 <code>myservice</code> 서비스로 요청 전달 시에 추가 헤더를 설정하도록 위치 블록을 구성합니다.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -555,7 +555,7 @@ paths:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>사설 ALB의 ID입니다. 사설 ALB ID를 찾으려면 <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>를 실행하십시오. <p>
+<td>사설 ALB의 ID입니다. 사설 ALB ID를 찾으려면 <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>를 실행하십시오.<p>
 둘 이상의 사설 ALB가 사용되는 다중 구역 클러스터가 있는 경우에는 <code>;</code>로 분리된 ALB ID의 목록을 제공할 수 있습니다. 예: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
@@ -628,7 +628,7 @@ tls:
 
 <dl>
 <dt>설명</dt>
-<dd>서버 블록은 ALB 가상 서버에 대한 구성을 정의하는 nginx 지시문입니다. <code>server-snippets</code> 어노테이션을 사용하면 사용자 정의 구성 스니펫을 제공하여 ALB가 요청을 처리하는 방법을 수정할 수 있습니다. </dd>
+<dd>서버 블록은 ALB 가상 서버에 대한 구성을 정의하는 nginx 지시문입니다. <code>server-snippets</code> 어노테이션을 사용하면 사용자 정의 구성 스니펫을 제공하여 ALB가 요청을 처리하는 방법을 수정할 수 있습니다.</dd>
 
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
@@ -666,7 +666,7 @@ paths:
 <tbody>
 <tr>
 <td>서버 스니펫</td>
-<td>사용할 구성 스니펫을 제공하십시오. 이 샘플 스니펫은 <code>/health</code> 요청을 처리하기 위한 위치 블록을 지정합니다. 위치 블록은 정상적인 응답을 리턴하고 요청 전달 시에 헤더를 추가하도록 구성되어 있습니다. </td>
+<td>사용할 구성 스니펫을 제공하십시오. 이 샘플 스니펫은 <code>/health</code> 요청을 처리하기 위한 위치 블록을 지정합니다. 위치 블록은 정상적인 응답을 리턴하고 요청 전달 시에 헤더를 추가하도록 구성되어 있습니다.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -686,7 +686,7 @@ paths:
 <dd>
 TCP 스트림 워크로드를 실행 중인 앱에 이 어노테이션을 사용합니다.
 
-<p>**참고**: ALB는 패스 스루 모드에서 작동하고 백엔드 앱으로 트래픽을 전달합니다. 이 경우에 SSL 종료는 지원되지 않습니다.</p>
+<p>**참고**: ALB는 패스 스루(pass-through) 모드에서 작동하고 백엔드 앱으로 트래픽을 전달합니다. 이 경우에 SSL 종료는 지원되지 않습니다. TLS 연결은 종료되지 않으며 영향 없이 패스 스루(pass through)됩니다. </p>
 </dd>
 
 
@@ -767,12 +767,12 @@ CLI 출력이 다음과 유사하게 나타납니다.
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>비표준 TCP 포트를 통해 앱에 액세스하도록 Ingress를 구성하십시오. 이 참조서에 있는 샘플 YAML 파일을 사용하십시오. </li>
-<li>ALB 구성을 업데이트하십시오.
+<li>ALB 리소스를 작성하거나 기존 ALB 구성을 업데이트하십시오.
 <pre class="pre">
 <code>         kubectl apply -f myingress.yaml
         </code></pre>
 </li>
-<li>선호하는 웹 브라우저를 열어 앱에 액세스하십시오. 예를 들면, <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code>입니다.</li></ol></dd></dl>
+<li>Ingress 하위 도메인에 대해 Curl을 실행하여 앱에 액세스하십시오. 예: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -1175,7 +1175,7 @@ tls:
 </tr>
 <tr>
 <td><code>fail-timeout</code></td>
-<td><code>&lt;<em>fail_timeout</em>&gt;</code>을 서버가 사용 불가능하다고 간주되기 전에 ALB가 서버에 연결을 시도할 수 있는 기간으로 대체합니다. 기본값은 <code>10s</code>입니다. 시간은 초 단위여야 합니다. </td>
+<td><code>&lt;<em>fail_timeout</em>&gt;</code>을 서버가 사용 불가능하다고 간주되기 전에 ALB가 서버에 연결을 시도할 수 있는 기간으로 대체합니다. 기본값은 <code>10s</code>입니다. 시간은 초 단위여야 합니다.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -1251,7 +1251,7 @@ tls:
 <dl>
 <dt>설명</dt>
 <dd>
-서버가 사용 불가능하다고 간주되기 전에 ALB가 서버와의 연결에 실패할 수 있는 최대 횟수를 설정합니다. 서버가 사용 불가능하다고 간주될 수 있으려면 <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> 어노테이션</a>에 의해 설정된 기간 내에 ALB가 최대 횟수에 도달해야 합니다. 서버가 사용 불가능하다고 간주되는 기간은 <code>upstream-fail-timeout</code> 어노테이션에 의해서도 설정됩니다. </dd>
+서버가 사용 불가능하다고 간주되기 전에 ALB가 서버와의 연결에 실패할 수 있는 최대 횟수를 설정합니다. 서버가 사용 불가능하다고 간주될 수 있으려면 <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> 어노테이션</a>에 의해 설정된 기간 내에 ALB가 최대 횟수에 도달해야 합니다. 서버가 사용 불가능하다고 간주되는 기간은 <code>upstream-fail-timeout</code> 어노테이션에 의해서도 설정됩니다.</dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -1289,7 +1289,7 @@ tls:
 </tr>
 <tr>
 <td><code>max-fails</code></td>
-<td><code>&lt;<em>max_fails</em>&gt;</code>를 ALB가 서버와 통신을 시도하는 데 실패할 수 있는 최대 횟수로 대체합니다. 기본값은 <code>1</code>입니다. <code>0</code> 값을 지정하면 어노테이션이 사용되지 않습니다. </td>
+<td><code>&lt;<em>max_fails</em>&gt;</code>를 ALB가 서버와 통신을 시도하는 데 실패할 수 있는 최대 횟수로 대체합니다. 기본값은 <code>1</code>입니다. <code>0</code> 값을 지정하면 어노테이션이 사용되지 않습니다.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -1350,7 +1350,7 @@ tls:
 <tbody>
 <tr>
 <td><code>bindSecret</code></td>
-<td><em><code>&lt;bind_secret&gt;</code></em>을 {{site.data.keyword.appid_short_notm}} 서비스 인스턴스에 대한 바인드 시크릿을 저장하는 Kubernetes 시크릿으로 대체합니다. </td>
+<td><em><code>&lt;bind_secret&gt;</code></em>을 {{site.data.keyword.appid_short_notm}} 서비스 인스턴스에 대한 바인드 시크릿을 저장하는 Kubernetes 시크릿으로 대체합니다.</td>
 </tr>
 <tr>
 <td><code>namespace</code></td>
@@ -1362,7 +1362,7 @@ tls:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td><code><em>&lt;myservice&gt;</em></code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다. 이는 필수 필드입니다. 서비스 이름이 포함되지 않으면 어노테이션은 모든 서비스에 대해 사용으로 설정됩니다.  서비스 이름이 포함되면 어노테이션은 해당 서비스에 대해서만 사용으로 설정됩니다. 여러 개의 서비스는 쉼표(,)로 구분하십시오. </td>
+<td><code><em>&lt;myservice&gt;</em></code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다. 이는 필수 필드입니다. 서비스 이름이 포함되지 않으면 어노테이션은 모든 서비스에 대해 사용으로 설정됩니다.  서비스 이름이 포함되면 어노테이션은 해당 서비스에 대해서만 사용으로 설정됩니다. 여러 개의 서비스는 쉼표(,)로 구분하십시오.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -1370,26 +1370,26 @@ tls:
 
 애플리케이션이 인증에 {{site.data.keyword.appid_short_notm}}를 사용하므로, 사용자는 {{site.data.keyword.appid_short_notm}} 인스턴스를 프로비저닝하고 유효한 경로 재지정 URI로 인스턴스를 구성한 후에 해당 인스턴스를 클러스터에 바인딩하여 바인드 시크릿을 생성해야 합니다. 
 
-1. 새 {{site.data.keyword.appid_short_notm}} 인스턴스를 작성하거나 기존 인스턴스를 선택하십시오. 
-    * 기존 인스턴스를 사용하려면 서비스 인스턴스 이름에 공백이 포함되지 않음을 확인하십시오. 공백을 제거하려면 서비스 인스턴스 이름 옆의 추가 옵션 메뉴를 선택하고 **서비스 이름 바꾸기**를 선택하십시오. 
-    * [새 {{site.data.keyword.appid_short_notm}} 인스턴스](https://console.bluemix.net/catalog/services/app-id)를 프로비저닝하려면 다음을 수행하십시오. 
+1. 새 {{site.data.keyword.appid_short_notm}} 인스턴스를 작성하거나 기존 인스턴스를 선택하십시오.
+    * 기존 인스턴스를 사용하려면 서비스 인스턴스 이름에 공백이 포함되지 않음을 확인하십시오. 공백을 제거하려면 서비스 인스턴스 이름 옆의 추가 옵션 메뉴를 선택하고 **서비스 이름 바꾸기**를 선택하십시오.
+    * [새 {{site.data.keyword.appid_short_notm}} 인스턴스](https://console.bluemix.net/catalog/services/app-id)를 프로비저닝하려면 다음을 수행하십시오.
         1. 자동으로 채워진 **서비스 이름**을 서비스 인스턴스의 고유 이름으로 대체하십시오.
-            **중요**: 서비스 인스턴스 이름에는 공백이 포함될 수 없습니다. 
-        2. 클러스터가 배치된 동일 지역을 선택하십시오. 
+            **중요**: 서비스 인스턴스 이름에는 공백이 포함될 수 없습니다.
+        2. 클러스터가 배치된 동일 지역을 선택하십시오.
         3. **작성**을 클릭하십시오.
-2. 앱에 대한 경로 재지정 URL을 추가하십시오. 경로 재지정 URL은 앱의 콜백 엔드포인트입니다. 피싱 공격 방지를 위해 앱 ID는 경로 재지정 URL의 화이트리스트에 대해 요청 URL의 유효성을 검증합니다. 
-    1. {{site.data.keyword.appid_short_notm}} 관리 콘솔에서 **ID 제공자 > 관리**로 이동하십시오. 
-    2. ID 제공자가 선택되었는지 확인하십시오. ID 제공자가 선택되지 않으면 사용자가 인증되지 않지만, 앱에 대한 익명 액세스를 위해 액세스 토큰이 사용자에게 발행됩니다. 
-    3. **웹 경로 재지정 URL 추가** 필드에서 `http://<hostname>/<app_path>/appid_callback` 또는 `https://<hostname>/<app_path>/appid_callback` 형식으로 앱에 대한 경로 재지정 URL을 추가하십시오. 
-        * 예를 들어, IBM Ingress 하위 도메인에 등록된 앱은 `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`처럼 보일 수 있습니다. 
-        * 사용자 정의 도메인에 등록된 앱은 `http://mydomain.net/myapp2path/appid_callback`처럼 보일 수 있습니다. 
+2. 앱에 대한 경로 재지정 URL을 추가하십시오. 경로 재지정 URL은 앱의 콜백 엔드포인트입니다. 피싱 공격 방지를 위해 앱 ID는 경로 재지정 URL의 화이트리스트에 대해 요청 URL의 유효성을 검증합니다.
+    1. {{site.data.keyword.appid_short_notm}} 관리 콘솔에서 **ID 제공자 > 관리**로 이동하십시오.
+    2. ID 제공자가 선택되었는지 확인하십시오. ID 제공자가 선택되지 않으면 사용자가 인증되지 않지만, 앱에 대한 익명 액세스를 위해 액세스 토큰이 사용자에게 발행됩니다.
+    3. **웹 경로 재지정 URL 추가** 필드에서 `http://<hostname>/<app_path>/appid_callback` 또는 `https://<hostname>/<app_path>/appid_callback` 형식으로 앱에 대한 경로 재지정 URL을 추가하십시오.
+        * 예를 들어, IBM Ingress 하위 도메인에 등록된 앱은 `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`처럼 보일 수 있습니다.
+        * 사용자 정의 도메인에 등록된 앱은 `http://mydomain.net/myapp2path/appid_callback`처럼 보일 수 있습니다.
 
 3. {{site.data.keyword.appid_short_notm}} 서비스 인스턴스를 클러스터에 바인드하십시오.
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
-서비스가 클러스터에 정상적으로 추가되면 서비스 인스턴스의 신임 정보를 보유하는 클러스터 시크릿이 작성됩니다. CLI 출력 예:
+서비스가 클러스터에 정상적으로 추가되면 서비스 인스턴스의 인증 정보를 보유하는 클러스터 시크릿이 작성됩니다. CLI 출력 예:
     ```
     ibmcloud ks cluster-service-bind mycluster mynamespace appid1
     Binding service instance to namespace...
@@ -1405,7 +1405,7 @@ tls:
     ```
     {: pre}
 
-5. 바인드 시크릿 및 클러스터 네임스페이스를 사용하여 `appid-auth` 어노테이션을 Ingress 리소스에 추가하십시오. 
+5. 바인드 시크릿 및 클러스터 네임스페이스를 사용하여 `appid-auth` 어노테이션을 Ingress 리소스에 추가하십시오.
 
 <br />
 
@@ -1419,8 +1419,7 @@ HTTP(포트 80) 및 HTTPS(포트 443) 네트워크 트래픽에 대한 기본 �
 
 <dl>
 <dt>설명</dt>
-<dd>기본적으로 Ingress ALB는 수신 HTTP 네트워크 트래픽을 포트 80에서 청취하고 수신 HTTPS 네트워크 트래픽은 포트 443에서 청취하도록 구성됩니다. ALB 도메인에 보안을 추가하거나 HTTPS 포트만 사용하도록 기본 포트를 변경할 수 있습니다.
-</dd>
+<dd>기본적으로 Ingress ALB는 수신 HTTP 네트워크 트래픽을 포트 80에서 청취하고 수신 HTTPS 네트워크 트래픽은 포트 443에서 청취하도록 구성됩니다. ALB 도메인에 보안을 추가하거나 HTTPS 포트만 사용하도록 기본 포트를 변경할 수 있습니다.<p><strong>참고</strong>: 포트에서 상호 인증을 사용하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)한 후에 [`mutual-auth` 어노테이션](#mutual-auth)에서 해당 포트를 지정하십시오. `custom-port` 어노테이션을 사용하여 상호 인증을 위한 포트를 지정하지 마십시오. </p></dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -1459,7 +1458,7 @@ paths:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>수신 HTTP 또는 HTTPS 네트워크 트래픽에 사용할 포트 번호를 입력하십시오. <p><strong>참고:</strong> HTTP 또는 HTTPS에 대한 사용자 정의 포트가 지정된 경우 HTTP 및 HTTPS에 대한 기본 포트가 더 이상 유효하지 않습니다. 예를 들어, HTTPS에 대한 기본 포트를 8443으로 변경하지만 HTTP에는 기본 포트를 사용하려면 <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>과 같이 둘 다에 대한 사용자 정의 포트를 설정해야 합니다.</p></td>
+ <td>수신 HTTP 또는 HTTPS 네트워크 트래픽에 사용할 포트 번호를 입력하십시오.  <p><strong>참고:</strong> HTTP 또는 HTTPS에 대한 사용자 정의 포트가 지정된 경우 HTTP 및 HTTPS에 대한 기본 포트가 더 이상 유효하지 않습니다. 예를 들어, HTTPS에 대한 기본 포트를 8443으로 변경하지만 HTTP에는 기본 포트를 사용하려면 <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>과 같이 둘 다에 대한 사용자 정의 포트를 설정해야 합니다.</p></td>
  </tr>
  </tbody></table>
 
@@ -1626,14 +1625,14 @@ ALB에 대한 상호 인증을 구성합니다.
 <dl>
 <dt>설명</dt>
 <dd>
-Ingress ALB에 대한 다운스트림 트래픽의 상호 인증을 구성합니다. 외부 클라이언트가 서버를 인증하고 또한 서버는 인증서를 사용하여 클라이언트를 인증합니다. 상호 인증은 인증서 기반 인증 또는 양방향 인증이라고도 합니다.
+Ingress ALB에 대한 다운스트림 트래픽의 상호 인증을 구성합니다. 외부 클라이언트가 서버를 인증하고 또한 서버는 인증서를 사용하여 클라이언트를 인증합니다. 상호 인증은 인증서 기반 인증 또는 양방향(two-way) 인증이라고도 합니다.
 </dd>
 
 <dt>전제조건</dt>
 <dd>
 <ul>
-<li>필수 <code>ca.crt</code>가 포함된 올바른 상호 인증 시크릿이 있어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_mutual_auth)을 참조하십시오. </li>
-<li>443 외 포트에서의 상호 인증을 가능하게 하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)하십시오.</li>
+<li>필수 <code>ca.crt</code>가 포함된 올바른 상호 인증 시크릿이 있어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_mutual_auth)을 참조하십시오.</li>
+<li>443 이외의 포트에서 상호 인증을 사용하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)한 후에 이 어노테이션에서 해당 포트를 지정하십시오. `custom-port` 어노테이션을 사용하여 상호 인증을 위한 포트를 지정하지 마십시오. </li>
 </ul>
 </dd>
 
@@ -1697,64 +1696,7 @@ HTTPS 요청을 허용하고 업스트림 앱에 대한 트래픽을 암호화�
 <dl>
 <dt>설명</dt>
 <dd>
-Ingress 리소스 구성에 TLS 섹션이 있는 경우, Ingress ALB는 앱에 대한 HTTPS 보안 URL 요청을 처리할 수 있습니다. 그러나 ALB는 앱에 트래픽을 전달하기 전에 요청을 복호화합니다. HTTS가 필요하며 해당 업스트림 앱으로 전달되기 전에 트래픽의 암호화가 필요한 앱이 있는 경우에는 `ssl-services` 어노테이션을 사용할 수 있습니다. 업스트림 앱이 TLS를 처리할 수 있는 경우 선택적으로 TLS 시크릿에 포함된 인증서를 제공할 수 있습니다.<br></br>**선택사항**: 이 어노테이션에 [단방향 인증 또는 상호 인증](#ssl-services-auth)을 추가할 수 있습니다.</dd>
-
-
-<dt>샘플 Ingress 리소스 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-name: &lt;myingressname&gt;
-annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>어노테이션 컴포넌트 이해</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 어노테이션 컴포넌트 이해</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>선택사항: TLS 시크릿을 사용하려고 하고 업스트림 앱이 TLS를 처리할 수 있는 경우 <code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스에 대한 시크릿으로 대체하십시오. 시크릿을 제공하는 경우, 값에는 업스트림 서버의 <code>trusted.crt</code>가 포함되어야 합니다. TLS 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_ssl_services)을 참조하십시오. </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### 인증을 통한 SSL 서비스 지원
-{: #ssl-services-auth}
-
-<dl>
-<dt>설명</dt>
-<dd>
-HTTPS 요청을 허용하고 추가 보안을 위해 단방향 또는 상호 인증을 사용하여 업스트림 앱에 대한 트래픽을 암호화합니다.
-</dd>
-
+Ingress 리소스 구성에 TLS 섹션이 있는 경우, Ingress ALB는 앱에 대한 HTTPS 보안 URL 요청을 처리할 수 있습니다. 그러나 트래픽을 앱에 전달하기 전에 ALB는 TLS 종료를 처리하고 요청을 복호화합니다. HTTPS 프로토콜이 필요하며 트래픽의 암호화 유지가 필요한 앱이 있는 경우에는 `ssl-services` 어노테이션을 사용하여 ALB의 기본 TLS 종료를 사용하지 않도록 설정하십시오. ALB는 백엔드 앱으로 트래픽을 전송하기 전에 TLS 연결을 종료하고 SSL을 다시 암호화합니다. <br></br>또한 백엔드 앱이 TLS를 처리할 수 있으며 사용자가 보안을 더 추가하려는 경우, 사용자는 시크릿에 포함된 인증서를 제공하여 단방향 또는 상호 인증을 추가할 수 있습니다. </dd>
 
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
@@ -1799,7 +1741,7 @@ tls:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스에 대한 상호 인증 시크릿으로 대체하십시오. 상호 인증 시크릿에는 필수 <code>ca.crt</code>가 포함되어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_mutual_auth)을 참조하십시오. </td>
+  <td>백엔드 앱이 TLS를 처리할 수 있으며 사용자가 보안을 더 추가하려는 경우에는 <code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스에 대한 단방향(one-way) 또는 상호(mutual) 인증 시크릿으로 대체하십시오. <ul><li>단방향 인증 시크릿을 제공하는 경우, 값에는 업스트림 서버의 <code>trusted.crt</code>가 포함되어야 합니다. TLS 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_ssl_services)을 참조하십시오.</li><li>상호 인증 시크릿을 제공하는 경우, 값에는 앱이 클라이언트로부터 기대하는 필수 <code>ca.crt</code> 및 <code>ca.key</code>가 포함되어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets_mutual_auth)을 참조하십시오.</li></ul><strong>경고</strong>: 시크릿을 제공하지 않으면 비보안 연결이 허용됩니다. 연결을 테스트하고자 하며 인증서가 준비되어 있지 않은 경우 또는 인증서가 만료되었으며 비보안 연결을 허용하려는 경우에는 시크릿을 생략하도록 선택할 수 있습니다. </td>
   </tr>
   </tbody></table>
 
@@ -1872,7 +1814,7 @@ tls:
 <tbody>
 <tr>
 <td><code>enable</code></td>
-  <td>Istio 관리 서비스에 대한 트래픽 라우팅을 사용으로 설정하려면 <code>True</code>로 설정하십시오.</td>
+  <td>Istio 관리 서비스에 대한 트래픽 라우팅을 사용하려면 <code>True</code>로 설정하십시오. </td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1899,13 +1841,13 @@ tls:
 
 <dt>사용</dt></dl>
 
-1. 앱을 배치하십시오. 이러한 단계에서 제공된 예제 리소스에서는 `istio-0.7.1/samples/bookinfo/kube` 저장소에서 찾을 수 있는 [BookInfo ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html)라고 하는 Istio 샘플 앱을 사용합니다. 
+1. 앱을 배치하십시오. 이러한 단계에서 제공된 예제 리소스에서는 `istio-0.7.1/samples/bookinfo/kube` 저장소에서 찾을 수 있는 [BookInfo ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html)라고 하는 Istio 샘플 앱을 사용합니다.
    ```
    kubectl apply -f bookinfo.yaml -n istio-system
    ```
    {: pre}
 
-2. 앱에 대한 Istio 라우팅 규칙을 설정하십시오. 예를 들어, BookInfo라고 하는 Istio 샘플 앱에서 [각 마이크로서비스에 대한 라우팅 규칙 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html)은 `route-rule-all-v1.yaml` 파일에 정의되어 있습니다. 
+2. 앱에 대한 Istio 라우팅 규칙을 설정하십시오. 예를 들어, BookInfo라고 하는 Istio 샘플 앱에서 [각 마이크로서비스에 대한 라우팅 규칙 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html)은 `route-rule-all-v1.yaml` 파일에 정의되어 있습니다.
 
 3. Istio Ingress 리소스를 작성하여 Istio Ingress 제어기에 앱을 노출하십시오. 이 리소스는 모니터링 및 라우팅 규칙 등의 Istio 기능이 클러스터에 유입되는 트래픽에 적용되도록 허용합니다.
     예를 들어, BookInfo 앱에 대한 다음의 리소스는 `bookinfo.yaml` 파일에 사전 정의되어 있습니다.
@@ -1944,7 +1886,7 @@ tls:
     kubectl create -f istio-ingress-resource.yaml -n istio-system
     ```
     {: pre}
-    앱이 Istio Ingress 제어기에 연결되었습니다. 
+    앱이 Istio Ingress 제어기에 연결되었습니다.
 
 5. 클러스터에 대한 IBM **Ingress 하위 도메인** 및 **Ingress 시크릿**을 가져오십시오. 하위 도메인 및 시크릿은 클러스터에 대해 사전 등록되어 있으며 앱에 대한 고유 공용 URL로서 사용됩니다.
     ```
@@ -1995,7 +1937,7 @@ tls:
     ```
     {: pre}
 
-8. 브라우저에서 `https://<hostname>/frontend`로 이동하여 앱 웹 페이지를 보십시오. 
+8. 브라우저에서 `https://<hostname>/frontend`로 이동하여 앱 웹 페이지를 보십시오.
 
 <br />
 
@@ -2252,7 +2194,7 @@ paths:
 
 <dl>
 <dt>설명</dt>
-<dd>요청을 백엔드 앱에 전달하기 전에 `:server_port`를 클라이언트 요청의 호스트 헤더에 추가하십시오. 
+<dd>요청을 백엔드 앱에 전달하기 전에 `:server_port`를 클라이언트 요청의 호스트 헤더에 추가하십시오.
 
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
@@ -2286,7 +2228,7 @@ paths:
  <tbody>
  <tr>
  <td><code>enabled</code></td>
-   <td>호스트에 대해 server_port의 설정을 사용하려면 <code>true</code>로 설정하십시오. </td>
+   <td>호스트에 대해 server_port의 설정을 사용하려면 <code>true</code>로 설정하십시오.</td>
  </tr>
  <tr>
  <td><code>serviceName</code></td>
@@ -2327,7 +2269,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-serviceName=<myservice1> {
+      serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2349,11 +2291,11 @@ metadata:
 annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2414,7 +2356,7 @@ tls:
 
 <dl>
 <dt>설명</dt>
-<dd>Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. ALB로 전송된 백엔드 앱의 클라이언트 응답은 처리(프록시)되어 새 응답에 넣어진 후 새 응답이 ALB에서 클라이언트 웹 브라우저로 전송됩니다. 응답을 프록시 처리하면 백엔드 앱에서 처음에 전송된 http 헤더 정보가 제거되지만 이 프로세스에서는 모든 백엔드 앱 고유 헤더를 제거하지 않을 수 있습니다. 응답이 ALB에서 클라이언트 웹 브라우저로 전달되기 전에 클라이언트 응답에서 헤더 정보를 제거하십시오. </dd>
+<dd>Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. ALB로 전송된 백엔드 앱의 클라이언트 응답은 처리(프록시)되어 새 응답에 넣어진 후 새 응답이 ALB에서 클라이언트 웹 브라우저로 전송됩니다. 응답을 프록시 처리하면 백엔드 앱에서 처음에 전송된 http 헤더 정보가 제거되지만 이 프로세스에서는 모든 백엔드 앱 고유 헤더를 제거하지 않을 수 있습니다. 응답이 ALB에서 클라이언트 웹 브라우저로 전달되기 전에 클라이언트 응답에서 헤더 정보를 제거하십시오.</dd>
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -2492,7 +2434,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
 tls:
  - hosts:

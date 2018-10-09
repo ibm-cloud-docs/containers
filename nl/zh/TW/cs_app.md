@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -54,7 +54,7 @@ lastupdated: "2018-08-06"
 2.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於單一區域叢集的多個節點（反親緣性）中。
 3.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於各區域的多區域叢集的多個節點（反親緣性）中。
 
-您也可以[使用廣域負載平衡器連接不同地區中的多個叢集](cs_clusters.html#multiple_clusters)，以增加高可用性。
+您也可以[使用廣域負載平衡器連接不同地區中的多個叢集](cs_clusters_planning.html#multiple_clusters)，以增加高可用性。
 
 ### 增加應用程式的可用性
 {: #increase_availability}
@@ -77,13 +77,13 @@ lastupdated: "2018-08-06"
     
     </dd>
 <dt>將 Pod 分散在多個區域或地區</dt>
-  <dd><p>若要保護應用程式不發生區域失敗，您可以在不同區域中建立多個叢集，或將區域新增至多區域叢集裡的工作者節點儲存區。多區域叢集僅適用於[特定都會區域](cs_regions.html#zones)（例如達拉斯）。如果您在不同區域中建立多個叢集，則必須[設定廣域負載平衡器](cs_clusters.html#multiple_clusters)。</p>
-  <p>當您使用抄本集並指定 Pod 反親緣性時，Kubernetes 會將應用程式 Pod 分散到各節點。如果您的節點位於多個區域中，則會將 Pod 分散到各區域，以增加應用程式的可用性。如果您要限制應用程式只在某個區域中執行，則可以配置 Pod 親緣性，或在某個區域中建立及標示工作者節點儲存區。如需相關資訊，請參閱[多區域叢集的高可用性](cs_clusters.html#ha_clusters)。</p>
+  <dd><p>若要保護應用程式不發生區域失敗，您可以在不同區域中建立多個叢集，或將區域新增至多區域叢集裡的工作者節點儲存區。多區域叢集僅適用於[特定都會區域](cs_regions.html#zones)（例如達拉斯）。如果您在不同區域中建立多個叢集，則必須[設定廣域負載平衡器](cs_clusters_planning.html#multiple_clusters)。</p>
+  <p>當您使用抄本集並指定 Pod 反親緣性時，Kubernetes 會將應用程式 Pod 分散到各節點。如果您的節點位於多個區域中，則會將 Pod 分散到各區域，以增加應用程式的可用性。如果您要限制應用程式只在某個區域中執行，則可以配置 Pod 親緣性，或在某個區域中建立及標示工作者節點儲存區。如需相關資訊，請參閱[多區域叢集的高可用性](cs_clusters_planning.html#ha_clusters)。</p>
   <p><strong>在多區域叢集部署中，應用程式 Pod 是否平均分佈到各節點？</strong></p>
   <p>Pod 會平均分佈到各區域，但不一定會分佈到各節點。例如，如果您叢集的 3 個區域各有 1 個節點，並且部署 6 個 Pod 的抄本集，則每個節點都會取得 2 個 Pod。不過，如果您叢集的 3 個區域各有 2 個節點，並且部署 6 個 Pod 的抄本集，則每個區域會排定 2 個 Pod，而且每個節點或許會排定 1 個 Pod 也或許未排定。如需進一步控制排程，您可以[設定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
   <p><strong>如果區域關閉，如何將 Pod 重新排定至其他區域中的其餘節點？</strong></br>它取決於您在部署中使用的排程原則。如果您已包括[節點特定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，則不會重新排定 Pod。如果您未這麼做，則會在其他區域的可用工作者節點上建立 Pod，但它們可能不平衡。例如，2 個 Pod 可能會分散到 2 個可用節點，或者它們可能會同時排定到具有可用容量的 1 個節點。同樣地，傳回無法使用區域時，不會自動刪除 Pod，也不會重新讓它在各節點之間保持平衡。如果您要在備份區域之後重新讓 Pod 在各區域之間保持平衡，請考慮使用 [Kubernetes 取消排程器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes-incubator/descheduler)。</p>
   <p><strong>提示</strong>：在多區域叢集中，請嘗試將每個區域的工作者節點容量保持為 50%，讓您有足夠的剩餘容量來保護叢集不發生區域失敗。</p>
-  <p><strong>如果我要將應用程式分散到各地區，該怎麼辨？</strong></br>為了保護應用程式不發生地區失敗，請在另一個地區建立第二個叢集、[設定廣域負載平衡器](cs_clusters.html#multiple_clusters)以連接叢集，以及使用部署 YAML，以利用應用程式的 [Pod 反親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 來部署重複抄本集。</p>
+  <p><strong>如果我要將應用程式分散到各地區，該怎麼辨？</strong></br>為了保護應用程式不發生地區失敗，請在另一個地區建立第二個叢集、[設定廣域負載平衡器](cs_clusters_planning.html#multiple_clusters)以連接叢集，以及使用部署 YAML，以利用應用程式的 [Pod 反親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 來部署重複抄本集。</p>
   <p><strong>如果應用程式需要持續性儲存空間，該怎麼辨？</strong></p>
   <p>請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)）。</p></dd>
 </dl>
@@ -498,7 +498,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ## 在 GPU 機器上部署應用程式
 {: #gpu_app}
 
-如果您有[裸機圖形處理裝置 (GPU) 機型](cs_clusters.html#shared_dedicated_node)，則可以將數學運算密集的工作負載排定在工作者節點上。例如，您可以執行 3D 應用程式，而此應用程式會使用「統一計算裝置架構 (CUDA) 」平台來共用 GPU 和 CPU 之間的處理負載，以提高效能。
+如果您有[裸機圖形處理裝置 (GPU) 機型](cs_clusters_planning.html#shared_dedicated_node)，則可以將數學運算密集的工作負載排定在工作者節點上。例如，您可以執行 3D 應用程式，而此應用程式會使用「統一計算裝置架構 (CUDA) 」平台來共用 GPU 和 CPU 之間的處理負載，以提高效能。
 {:shortdesc}
 
 在下列步驟中，您將學習如何部署需要 GPU 的工作負載。您也可以[部署應用程式](#app_ui)，不需要在 GPU 和 CPU 之間處理它們的工作負載。之後，您可能發現使用[此 Kubernetes 示範 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) 來嘗試數學運算密集的工作負載（例如 [TensorFlow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.tensorflow.org/) 機器學習架構）很有用。

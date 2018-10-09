@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 Exposez un port et utilisez une adresse IP pour un équilibreur de charge (couche 4) pour accéder à une application conteneurisée.
 {:shortdesc}
 
+
+
 ## Composants et architecture d'un équilibreur de charge
 {: #planning}
 
-Lorsque vous créez un cluster standard, un sous-réseau public portable et un sous-réseau privé portable sont fournis automatiquement par {{site.data.keyword.containershort_notm}}.
+Lorsque vous créez un cluster standard, un sous-réseau public portable et un sous-réseau privé portable sont fournis automatiquement par {{site.data.keyword.containerlong_notm}}.
 
 * Le sous-réseau public portable fournit 1 adresse IP publique portable utilisée par l'[équilibreur de charge d'application (ALB) Ingress public](cs_ingress.html) par défaut. Les 4 autres adresses IP publiques portables peuvent être utilisées pour exposer des applications individuelles sur Internet en créant un service d'équilibreur de charge public.
 * Le sous-réseau privé portable fournit 1 adresse IP privée portable utilisée par l'[équilibreur de charge d'application (ALB) Ingress privé](cs_ingress.html#private_ingress) par défaut. Les 4 autres adresses IP privées portables peuvent être utilisées pour exposer des applications individuelles sur un réseau privé en créant un service d'équilibreur de charge privé.
@@ -37,7 +39,7 @@ Un service d'équilibreur de charge rend votre application accessible via les po
 
 Le service LoadBalancer fait office de point d'entrée externe pour les demandes entrantes vers votre application. Pour accéder au service LoadBalancer depuis Internet, utilisez l'adresse IP publique de votre équilibreur de charge et le port affecté en utilisant le format `<IP_address>:<port>`. Le diagramme suivant montre comment un équilibreur de charge achemine la communication vers une application depuis Internet.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containershort_notm}} à l'aide d'un équilibreur de charge" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} à l'aide d'un équilibreur de charge" style="width:550px; border-style: none"/>
 
 1. Une demande adressée à votre application utilise l'adresse IP publique de votre équilibreur de charge et le port affecté sur le noeud worker.
 
@@ -71,9 +73,9 @@ Remarque :
 
 Avant de commencer :
   * Un service d'équilibreur de charge avec une adresse IP privée portable comporte toujours un port de noeud (NodePort) public ouvert sur tous les noeuds worker. Pour ajouter une règle réseau afin d'éviter tout trafic public, voir [Blocage de trafic entrant](cs_network_policy.html#block_ingress).
-  * Dans chaque zone, au moins un réseau local privé (VLAN) doit disposer de sous-réseaux portables disponibles pour les services Ingress et LoadBalancer. Pour ajouter des services Ingress et LoadBalancer privés, vous devez indiquer au moins un VLAN privé avec des sous-réseaux portables disponibles. Pour ajouter des sous-réseaux, voir [Configuration de sous-réseaux pour les clusters](cs_subnets.html).
+  * Vous devez déployer un équilibreur de charge dans chaque zone et à chaque équilibreur de charge est affectée sa propre adresse IP dans cette zone. Pour créer des équilibreurs de charge publics, au moins un VLAN public doit disposer de sous-réseaux portables disponibles dans chaque zone. Pour ajouter des services d'équilibreur de charge privés, au moins un VLAN privé doit disposer de sous-réseaux portables disponibles dans chaque zone. Pour ajouter des sous-réseaux, voir [Configuration de sous-réseaux pour les clusters](cs_subnets.html).
   * Si vous limitez le trafic réseau aux noeuds worker de périphérie, vérifiez qu'au moins 2 [noeuds worker de périphérie](cs_edge.html#edge) sont activés dans chaque zone. S'ils ne sont activés que dans certaines zones et pas d'autres, les équilibreurs de charge ne pourront pas se déployer uniformément. Les équilibreurs de charge seront déployés sur des noeuds de périphérie dans certaines zones mais sur des noeuds worker normaux dans d'autres zones.
-  * Pour activer la communication sur le réseau privé entre les noeuds worker situés dans des zones différentes, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning). 
+  * Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
 
 
 Pour configurer un service LoadBalancer dans un cluster à zones multiples :
@@ -503,3 +505,4 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
         {: screen}
 
     4. Dans la section **Labels** de la sortie, vérifiez que le VLAN public ou privé correspond au VLAN que vous avez désigné dans les étapes précédentes.
+

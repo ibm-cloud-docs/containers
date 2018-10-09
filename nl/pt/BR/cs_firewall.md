@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,6 +28,7 @@ Revise estas situações nas quais pode ser necessário abrir portas e endereço
 * [Para executar comandos `kubectl`](#firewall_kubectl) em seu sistema local quando políticas de rede corporativas evitam acesso a terminais de Internet pública por meio de proxies ou de firewalls.
 * [Para executar comandos `calicoctl` ](#firewall_calicoctl)de seu sistema local quando as políticas de rede corporativa impedem o acesso aos terminais de Internet pública por meio de proxies ou de firewalls.
 * [Para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador](#firewall_outbound) quando um firewall for configurado para os nós do trabalhador ou as configurações de firewall forem customizadas em sua conta de infraestrutura do IBM Cloud (SoftLayer).
+* [Para permitir que o cluster acesse recursos por meio de um firewall na rede privada](#firewall_private).
 * [Para acessar o serviço NodePort, o serviço LoadBalancer ou o Ingress de fora do cluster](#firewall_inbound).
 
 <br />
@@ -172,19 +173,19 @@ Antes de iniciar, permita o acesso para executar [comandos `ibmcloud`](#firewall
 ## Permitindo o cluster para acessar recursos de infraestrutura e outros serviços
 {: #firewall_outbound}
 
-Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para regiões do {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados de infraestrutura do IBM Cloud (SoftLayer) e egresso para solicitações de volume persistente.
+Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para regiões do {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados de infraestrutura do IBM Cloud (SoftLayer) e egresso para solicitações de volume persistente.
 {:shortdesc}
 
-  1.  Anote o endereço IP público para todos os nós do trabalhador no cluster.
+1.  Anote o endereço IP público para todos os nós do trabalhador no cluster.
 
-      ```
-      ibmcloud ks workers <cluster_name_or_ID>
-      ```
-      {: pre}
+    ```
+    ibmcloud ks workers <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  2.  Permita tráfego de rede de saída da origem _<each_worker_node_publicIP>_ para o intervalo de portas TCP/UDP de destino 20000 a 32767 e a porta 443 e os seguintes endereços IP e grupos de rede. Se você tiver um firewall corporativo que impede sua máquina local de acessar terminais de Internet pública, execute essa etapa para os nós do trabalhador de origem e sua máquina local.
-      - **Importante**: deve-se permitir o tráfego de saída para a porta 443 para todas as zonas dentro da região, para balancear a carga durante o processo de autoinicialização. Por exemplo, se o seu cluster está no Sul dos EUA, deve-se permitir o tráfego da porta 443 para os endereços IP para todas as zonas (dal10, dal12 e dal13).
-      <p>
+2.  Permita tráfego de rede de saída da origem _<each_worker_node_publicIP>_ para o intervalo de portas TCP/UDP de destino 20000 a 32767 e a porta 443 e os seguintes endereços IP e grupos de rede. Se você tiver um firewall corporativo que impede sua máquina local de acessar terminais de Internet pública, execute essa etapa para os nós do trabalhador de origem e sua máquina local.
+    - **Importante**: deve-se permitir o tráfego de saída para a porta 443 para todas as zonas dentro da região, para balancear a carga durante o processo de autoinicialização. Por exemplo, se seu cluster está no Sul dos EUA, deve-se permitir o tráfego dos IPs públicos de cada um dos nós do trabalhador para a porta 443 do endereço IP para todas as zonas (dal10, dal12, dal13).
+    <p>
   <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
   <caption>Endereços IP a serem abertos para o tráfego de saída</caption>
       <thead>
@@ -205,8 +206,8 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </tr>
       <tr>
          <td>União Europeia Central</td>
-         <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code> 169.51.73.50 </code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sul do Reino Unido</td>
@@ -227,20 +228,20 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
     </table>
 </p>
 
-  3.  Permita o tráfego de rede de saída dos nós do trabalhador para [regiões do {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions):
-      - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - Substitua <em>&lt;registry_publicIP&gt;</em> pelos endereços IP de registro para os quais você deseja permitir o tráfego. O registro global armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas.
-        <p>
+3.  Permita o tráfego de rede de saída dos nós do trabalhador para [regiões do {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions):
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+    - Substitua <em>&lt;registry_publicIP&gt;</em> pelos endereços IP de registro para os quais você deseja permitir o tráfego. O registro global armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas.
+      <p>
 <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
   <caption>Endereços IP a serem abertos para o tráfego de Registro</caption>
       <thead>
-        <th>Região do {{site.data.keyword.containershort_notm}}</th>
+        <th>Região do {{site.data.keyword.containerlong_notm}}</th>
         <th>Endereço de registro</th>
         <th>Endereço IP de registro</th>
       </thead>
       <tbody>
         <tr>
-          <td>Registro global em {{site.data.keyword.containershort_notm}} regiões</td>
+          <td>Registro global em {{site.data.keyword.containerlong_notm}} regiões</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -268,13 +269,13 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </table>
 </p>
 
-  4.  Opcional: permita o tráfego de rede de saída dos nós do trabalhador para os serviços do {{site.data.keyword.monitoringlong_notm}} e do {{site.data.keyword.loganalysislong_notm}}:
-      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-      - Substitua <em>&lt;monitoring_public_IP&gt;</em> por todos os endereços das regiões de monitoramento para as quais você deseja permitir o tráfego:
-        <p><table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
+4. Opcional: permita o tráfego de rede de saída dos nós do trabalhador para os serviços do {{site.data.keyword.monitoringlong_notm}} e do {{site.data.keyword.loganalysislong_notm}}:
+    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+    - Substitua <em>&lt;monitoring_public_IP&gt;</em> por todos os endereços das regiões de monitoramento para as quais você deseja permitir o tráfego:
+      <p><table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
   <caption>Endereços IP a serem abertos para o tráfego de monitoramento</caption>
         <thead>
-        <th>Região do {{site.data.keyword.containershort_notm}}</th>
+        <th>Região do {{site.data.keyword.containerlong_notm}}</th>
         <th>Endereço de monitoramento</th>
         <th>Endereços IP de monitoramento</th>
         </thead>
@@ -298,12 +299,12 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-      - Substitua <em>&lt;logging_public_IP&gt;</em> por todos os endereços das regiões de criação de log para as quais você deseja permitir o tráfego:
-        <p><table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
+    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+    - Substitua <em>&lt;logging_public_IP&gt;</em> por todos os endereços das regiões de criação de log para as quais você deseja permitir o tráfego:
+      <p><table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
 <caption>Endereços IP a serem abertos para o tráfego de criação de log</caption>
         <thead>
-        <th>Região do {{site.data.keyword.containershort_notm}}</th>
+        <th>Região do {{site.data.keyword.containerlong_notm}}</th>
         <th>Endereço de criação de log</th>
         <th>Endereços IP de log</th>
         </thead>
@@ -332,21 +333,33 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
        </table>
 </p>
 
-  5. Para firewalls privados, permita os intervalos de IP privado da infraestrutura apropriada do IBM Cloud (SoftLayer). Consulte [este link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) iniciando com a seção **Rede de backend (privada)**.
-      - Inclua todas as [zonas dentro das regiões](cs_regions.html#zones) que você está usando.
-      - Observe que se deve incluir a zona `dal01` (data center).
-      - Abra as portas 80 e 443 para permitir o processo de autoinicialização do cluster.
-      - Abra a porta 10250 para o painel do Kubernetes.
-      - Abra a porta 53 para acesso DNS.
-      - Como todo o tráfego de pod para pod passa pela rede privada, abra todas as portas que os pods estão usando para se comunicar ou abra todas as portas para os nós do trabalhador no cluster.
+5. Se você usar os serviços de balanceador de carga, assegure-se de que todo o tráfego usando o protocolo VRRP seja permitido entre os nós do trabalhador nas interfaces pública e privada. O {{site.data.keyword.containerlong_notm}} usa o protocolo VRRP para gerenciar endereços IP para balanceadores de carga públicos e privados.
 
-  6. {: #pvc}Para criar solicitações de volume persistente para armazenamento de dados, permita o acesso de saída por meio de seu firewall para os [endereços IP de infraestrutura do IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) da zona em que seu cluster está.
-      - Para localizar a zona de seu cluster, execute `ibmcloud ks clusters`.
-      - Permita acesso ao intervalo de IP para a **Rede frontend (pública)** e a **Rede backend (privada)**.
-      - Observe que se deve incluir a zona `dal01` (data center) para a **Rede de backend (privada)**.
+6. {: #pvc}Para criar solicitações de volume persistente para armazenamento de dados, permita o acesso de saída por meio de seu firewall para os [endereços IP de infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges) da zona em que seu cluster está.
+    - Para localizar a zona de seu cluster, execute `ibmcloud ks clusters`.
+    - Permita acesso ao intervalo de IP para a [**Rede frontend (pública)**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) e a [**Rede backend (privada)**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
+    - Observe que se deve incluir a zona `dal01` (data center) para a **Rede de backend (privada)**.
 
 <br />
 
+
+## Permitindo que o cluster acesse recursos por meio de um firewall privado
+{: #firewall_private}
+
+Se você tiver um firewall na rede privada, permita a comunicação entre os nós do trabalhador e permita que seu cluster acesse recursos de infraestrutura por meio da rede privada.
+{:shortdesc}
+
+**Nota**: se você também tem um firewall na rede pública ou se tem um cluster somente de VLAN privada e está usando um dispositivo de gateway como um firewall, deve-se também permitir os IPs e portas especificados em [Permitindo que o cluster acesse recursos de infraestrutura e outros serviços](#firewall_outbound).
+
+1. Permita os intervalos de IP privado da infraestrutura do IBM Cloud (SoftLayer) para que seja possível criar nós do trabalhador em seu cluster.
+    1. Permita os intervalos apropriados de IP privado de infraestrutura do IBM Cloud (SoftLayer). Consulte  [ Rede de backend (privada) ](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
+    2. Permita os intervalos de IP privado da infraestrutura do IBM Cloud (SoftLayer) para todas as [zonas](cs_regions.html#zones) que você está usando. Observe que é necessário incluir IPs para as zonas `dal01` e `wdc04`. Consulte  [ Rede de Serviço (na rede backend / privada) ](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
+2. Abra as portas a seguir:
+    - Permita conexões TCP e UDP de saída dos trabalhadores para as portas 80 e 443 para permitir atualizações e recarregamentos do nó do trabalhador.
+    - Permita TCP e UDP de saída para a porta 2049 para permitir o armazenamento de arquivo de montagem como volumes.
+    - Permita conexões TCP e UDP de entrada para a porta 10250 para o painel e comandos do Kubernetes, como `kubectl logs` e `kubectl exec`.
+    - Permita conexões de entrada e de saída para a porta TCP e UDP 53 para acesso de DNS.
+3. Se você usar políticas do Calico ou se tiver firewalls em cada zona de um cluster de múltiplas zonas, um firewall poderá bloquear a comunicação entre os nós do trabalhador. Deve-se abrir todos os nós do trabalhador no cluster entre si usando as portas dos trabalhadores, os endereços IP privados dos trabalhadores ou o rótulo do nó do trabalhador do Calico.
 
 ## Acessando o NodePort, o balanceador de carga e os serviços do Ingress de fora do cluster
 {: #firewall_inbound}

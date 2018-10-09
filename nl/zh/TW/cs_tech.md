@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2018-08-06"
 {: #docker_containers}
 
 建置在現有 Linux 容器技術 (LXC) 上的開放程式碼專案 Docker，定義了如何將軟體包裝成標準化單位（稱為容器）的範本，容器中包含了執行應用程式所需要的所有元素。
+{{site.data.keyword.containerlong_notm}} 使用 `containerd` 作為容器運行環境，將容器從 Docker 容器映像檔部署到叢集中。
 {:shortdesc}
 
 瞭解一些基本 Docker 概念：
@@ -34,7 +35,7 @@ lastupdated: "2018-08-06"
 <dt>映像檔</dt>
 <dd>容器映像檔是您要執行的每個容器的基礎。容器映像檔是從 Dockerfile 所建置的，Dockerfile 是一個文字檔，定義了如何建置映像檔，以及要包含在其中的建置構件，例如應用程式、應用程式配置及其相依關係。映像檔一律是從其他映像檔建置而成，這使得它們可以快速地配置。讓其他人對映像檔執行大量工作，然後針對您的用途調整映像檔。</dd>
 <dt>登錄</dt>
-<dd>映像檔登錄是儲存、擷取及共用容器映像檔的位置。登錄中所儲存的映像檔可公開使用（公用登錄）或供一小群使用者存取（專用登錄）。{{site.data.keyword.containershort_notm}} 提供公用映像檔（例如 ibmliberty），您可以用來建立第一個容器化應用程式。如果是企業應用程式，請使用專用登錄（例如 {{site.data.keyword.Bluemix_notm}} 中提供的專用登錄）來防止未獲授權的使用者使用您的映像檔。</dd>
+<dd>映像檔登錄是儲存、擷取及共用容器映像檔的位置。登錄中所儲存的映像檔可公開使用（公用登錄）或供一小群使用者存取（專用登錄）。{{site.data.keyword.containerlong_notm}} 提供公用映像檔（例如 ibmliberty），您可以用來建立第一個容器化應用程式。如果是企業應用程式，請使用專用登錄（例如 {{site.data.keyword.Bluemix_notm}} 中提供的專用登錄）來防止未獲授權的使用者使用您的映像檔。</dd>
 <dt>容器</dt>
 <dd>每個容器都是從映像檔所建立。容器是具有其所有相依關係的已包裝應用程式，因此應用程式能夠在環境之間移動，並且不需變更即可執行。容器與虛擬機器不同，容器不會將裝置、其作業系統及基礎硬體虛擬化。只有應用程式碼、運行環境、系統工具、程式庫及設定會包裝在容器中。容器會以隔離的處理程序形式在 Ubuntu 運算主機上執行，並且共用主機作業系統及其硬體資源。此方式讓容器比起虛擬機器顯得更輕量、可攜性更高且更有效率。</dd>
 </dl>
@@ -60,7 +61,7 @@ lastupdated: "2018-08-06"
 
 <p>進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
 
-<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></p>
+<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></p>
 
 </dl>
 
@@ -104,7 +105,7 @@ lastupdated: "2018-08-06"
 
 <p>準備好深入瞭解 Kubernetes 嗎？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></li></ul>
 
 
 </dl>
@@ -115,14 +116,14 @@ lastupdated: "2018-08-06"
 ## 服務架構
 {: #architecture}
 
-在 {{site.data.keyword.containershort_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
+在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
 {: shortdesc}
 
 下圖顯示您的叢集元件及其互動方式。
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
- <figcaption>{{site.data.keyword.containershort_notm}} 架構</figcaption>
+ <figcaption>{{site.data.keyword.containerlong_notm}} 架構</figcaption>
 </figure>
 </p>
 
@@ -180,7 +181,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <td>Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</td>
     </tr>
     <tr>
-    <td>IBM 儲存空間提供者</td>
+    <td>儲存空間提供者</td>
     <td>kube-system</td>
     <td>每個叢集都會設定一個外掛程式，以佈建檔案儲存空間。您可以選擇安裝其他附加程式，例如區塊儲存空間。</td>
     </tr>
@@ -210,17 +211,17 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <td>Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</td>
     </tr>
     <tr>
-    <td>IBM Logging and Metrics</td>
+    <td>記載及測量</td>
     <td>ibm-system</td>
     <td>您可以使用整合式 {{site.data.keyword.loganalysislong_notm}} 及 {{site.data.keyword.monitoringlong_notm}} 服務，在使用日誌及度量值時，擴展您的收集和保留功能。</td>
     </tr>
     <tr>
-    <td>IBM Ingress ALB</td>
+    <td>Ingress ALB</td>
     <td>ibm-system</td>
     <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用及專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
     </tr>
     <tr>
-    <td>IBM Load Balancer</td>
+    <td>負載平衡器</td>
     <td>ibm-system</td>
     <td>負載平衡器是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給應用程式，以平衡叢集裡的網路資料流量工作負載。</td>
     </tr>
@@ -242,7 +243,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>kubelet</td>
     <td>n/a</td>
-    <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及備妥探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
+    <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及就緒探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
     </tr>
     </tbody></table></dd>
 </dl>

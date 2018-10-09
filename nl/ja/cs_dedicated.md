@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 {{site.data.keyword.Bluemix_dedicated}} アカウントがある場合、Kubernetes クラスターを専用クラウド環境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) にデプロイし、同じくそこで実行されている事前選択された {{site.data.keyword.Bluemix_notm}} サービスに接続することができます。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} アカウントがない場合、{{site.data.keyword.Bluemix_notm}} Public アカウントを使用して [{{site.data.keyword.containershort_notm}} を開始](container_index.html)できます。
+{{site.data.keyword.Bluemix_dedicated_notm}} アカウントがない場合、{{site.data.keyword.Bluemix_notm}} Public アカウントを使用して [{{site.data.keyword.containerlong_notm}} を開始](container_index.html)できます。
 
 ## Dedicated クラウド環境について
 {: #dedicated_environment}
 
 {{site.data.keyword.Bluemix_dedicated_notm}} アカウントを使用するとき、使用可能な物理リソースはお客様のクラスター専用であり、{{site.data.keyword.IBM_notm}} の他のお客様のクラスターと共有されません。 クラスターの分離が必要であり、使用する他の {{site.data.keyword.Bluemix_notm}} サービスに分離が必要な場合は、{{site.data.keyword.Bluemix_dedicated_notm}} 環境をセットアップすることも選択できます。 Dedicated アカウントがない場合は、[{{site.data.keyword.Bluemix_notm}} Public で専用ハードウェアを使用してクラスターを作成](cs_clusters.html#clusters_ui)できます。
 
-{{site.data.keyword.Bluemix_dedicated_notm}} では、Dedicated コンソール内のカタログから、または {{site.data.keyword.containershort_notm}} CLI を使用することにより、クラスターを作成することができます。 Dedicated コンソールを使用するには、IBM ID を使用して Dedicated と Public の両方のアカウントに同時にログインします。 この二重ログインにより、Dedicated コンソールを使用してパブリック・クラスターにアクセスすることができます。 CLI を使用するには、Dedicated エンドポイント (`api.<my-dedicated-cloud-instance>.bluemix.net.`) を使用してログインします。 次に、Dedicated 環境に関連付けられたパブリック地域の {{site.data.keyword.containershort_notm}} API エンドポイントをターゲットにします。
+{{site.data.keyword.Bluemix_dedicated_notm}} では、Dedicated コンソール内のカタログから、または {{site.data.keyword.containerlong_notm}} CLI を使用することにより、クラスターを作成することができます。 Dedicated コンソールを使用するには、IBM ID を使用して Dedicated と Public の両方のアカウントに同時にログインします。 この二重ログインにより、Dedicated コンソールを使用してパブリック・クラスターにアクセスすることができます。 CLI を使用するには、Dedicated エンドポイント (`api.<my-dedicated-cloud-instance>.bluemix.net.`) を使用してログインします。 次に、Dedicated 環境に関連付けられたパブリック地域の {{site.data.keyword.containerlong_notm}} API エンドポイントをターゲットにします。
 
 {{site.data.keyword.Bluemix_notm}} Public と Dedicated の間の最も大きな違いは以下の点です。
 
@@ -82,13 +82,13 @@ lastupdated: "2018-08-06"
  </tr>
  <tr>
  <td>レジストリーへのアクセス</td>
- <td>[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。</td>
- <td><ul><li>新しい名前空間の場合は、[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。</li><li>単一グループとスケーラブル・グループ用にセットアップされた名前空間の場合は、[トークンを使用し、Kubernetes シークレットを作成](cs_dedicated_tokens.html#cs_dedicated_tokens)して認証を受けます。</li></ul></td>
+ <td>[{{site.data.keyword.containerlong_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。</td>
+ <td><ul><li>新しい名前空間の場合は、[{{site.data.keyword.containerlong_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。</li><li>単一グループとスケーラブル・グループ用にセットアップされた名前空間の場合は、[トークンを使用し、Kubernetes シークレットを作成](cs_dedicated_tokens.html#cs_dedicated_tokens)して認証を受けます。</li></ul></td>
  </tr>
  <tr>
  <td>複数ゾーン・クラスター</td>
- <td>ワーカー・プールにさらにゾーンを追加して、[複数ゾーン・クラスター](cs_clusters.html#multi_zone)を作成します。</td>
- <td>[単一ゾーン・クラスター](cs_clusters.html#single_zone)を作成します。{{site.data.keyword.Bluemix_dedicated_notm}} 環境がセットアップされている場合、使用可能なゾーンが事前定義されています。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。[既存のワーカー・プールのサイズを変更](cs_clusters.html#resize_pool)するか、[新しいワーカー・プールを追加](cs_clusters.html#add_pool)して、クラスターにワーカー・ノードを追加できます。ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。ただし、他のゾーンをワーカー・プールに追加することはできません。</td>
+ <td>ワーカー・プールにさらにゾーンを追加して、[複数ゾーン・クラスター](cs_clusters_planning.html#multizone)を作成します。</td>
+ <td>[単一ゾーン・クラスター](cs_clusters_planning.html#single_zone)を作成します。 {{site.data.keyword.Bluemix_dedicated_notm}} 環境がセットアップされている場合、使用可能なゾーンが事前定義されています。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](cs_clusters.html#resize_pool)するか、[新しいワーカー・プールを追加](cs_clusters.html#add_pool)して、クラスターにワーカー・ノードを追加できます。 ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。</td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} パブリックと {{site.data.keyword.Bluemix_dedicated_notm}} のフィーチャーの相違点" caption-side="top"}
@@ -107,12 +107,12 @@ lastupdated: "2018-08-06"
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} での Kubernetes アーキテクチャーとネットワーキング*
 
-![{{site.data.keyword.Bluemix_dedicated_notm}} 上の {{site.data.keyword.containershort_notm}} Kubernetes のアーキテクチャー](images/cs_dedicated_arch.png)
+![{{site.data.keyword.Bluemix_dedicated_notm}} での {{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## Dedicated での {{site.data.keyword.containershort_notm}} のセットアップ
+## Dedicated での {{site.data.keyword.containerlong_notm}} のセットアップ
 {: #dedicated_setup}
 
 各 {{site.data.keyword.Bluemix_dedicated_notm}} 環境には、{{site.data.keyword.Bluemix_notm}} 内にパブリック、クライアント所有、そして企業のアカウントがあります。 Dedicated 環境のユーザーがクラスターを作成するためには、管理者がそのユーザーをパブリック企業アカウントに追加する必要があります。
@@ -275,9 +275,9 @@ lastupdated: "2018-08-06"
     6. 必要な**ワーカー・ノードの数**を選択します。 `3` を選択して、クラスターの高可用性を確保します。
 
     7. **パブリック VLAN** (オプション) と**プライベート VLAN** (必須) を選択します。 使用可能なパブリック VLAN とプライベート VLAN は、{{site.data.keyword.Bluemix_dedicated_notm}} 環境のセットアップ時に事前定義されています。 どちらの VLAN もワーカー・ノード間で通信を行いますが、パブリック VLAN は IBM 管理の Kubernetes マスターとも通信を行います。 複数のクラスターで同じ VLAN を使用できます。
-        **注**: ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。
+        **注**: ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を参照してください。
 
-    8. デフォルトでは、**「ローカル・ディスクの暗号化 (Encrypt local disk)」**が選択されます。 このチェック・ボックスをクリアした場合、ホストの Docker データは暗号化されません。 [暗号化について詳しくは、こちらをご覧ください](cs_secure.html#encrypted_disk)。
+    8. デフォルトでは、**「ローカル・ディスクの暗号化 (Encrypt local disk)」**が選択されます。 チェック・ボックスをクリアした場合、ホストのコンテナー・ランタイムのデータは暗号化されません。[暗号化について詳しくは、こちらをご覧ください](cs_secure.html#encrypted_disk)。
 
 6. **「クラスターの作成」**をクリックします。 **「ワーカー・ノード」**タブでワーカー・ノードのデプロイメントの進行状況を確認できます。 デプロイメントが完了すると、クラスターが**「概要」**タブに準備されていることが分かります。
     **注:** ワーカー・ノードごとに、固有のワーカー・ノード ID とドメイン名が割り当てられます。クラスターが作成された後にこれらを手動で変更してはいけません。 ID またはドメイン名を変更すると、Kubernetes マスターがクラスターを管理できなくなります。
@@ -285,7 +285,7 @@ lastupdated: "2018-08-06"
 ### CLI でのクラスターの作成
 {: #dedicated_creating_cli}
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI と [{{site.data.keyword.containershort_notm}} プラグイン](cs_cli_install.html#cs_cli_install)をインストールします。
+1.  {{site.data.keyword.Bluemix_notm}} CLI と [{{site.data.keyword.containerlong_notm}} プラグイン](cs_cli_install.html#cs_cli_install)をインストールします。
 2.  {{site.data.keyword.Bluemix_dedicated_notm}} インスタンス のパブリック・エンドポイントにログインします。 {{site.data.keyword.Bluemix_notm}} 資格情報を入力し、プロンプトが出されたらアカウントを選択します。
 
     ```
@@ -326,7 +326,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Dedicated 環境で使用されるように構成されているパブリック VLAN の ID を入力します。 ワーカー・ノードをプライベート VLAN だけに接続する場合は、このオプションを指定しないでください。 **注**: ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。</td>
+    <td>Dedicated 環境で使用されるように構成されているパブリック VLAN の ID を入力します。 ワーカー・ノードをプライベート VLAN だけに接続する場合は、このオプションを指定しないでください。 **注**: ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を参照してください。</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -374,7 +374,7 @@ lastupdated: "2018-08-06"
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -391,7 +391,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -454,14 +454,14 @@ lastupdated: "2018-08-06"
 ### ワーカー・ノードの追加
 {: #add_workers}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} では、[単一ゾーン・クラスター](cs_clusters.html#single_zone)のみ作成できます。デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。[既存のワーカー・プールのサイズを変更](cs_clusters.html#resize_pool)するか、[新しいワーカー・プールを追加](cs_clusters.html#add_pool)して、クラスターにワーカー・ノードを追加できます。ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。ただし、他のゾーンをワーカー・プールに追加することはできません。
+{{site.data.keyword.Bluemix_dedicated_notm}} では、[単一ゾーン・クラスター](cs_clusters_planning.html#single_zone)のみ作成できます。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](cs_clusters.html#resize_pool)するか、[新しいワーカー・プールを追加](cs_clusters.html#add_pool)して、クラスターにワーカー・ノードを追加できます。 ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。
 
 ### プライベートとパブリックのイメージ・レジストリーの使用
 {: #dedicated_images}
 
 コンテナー・イメージを使用する際の[個人情報の保護](cs_secure.html#pi)の詳細を確認してください。
 
-新しい名前空間の場合は、[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。 単一グループとスケーラブル・グループ用にセットアップされた名前空間の場合は、[トークンを使用し、Kubernetes シークレットを作成](cs_dedicated_tokens.html#cs_dedicated_tokens)して認証を受けます。
+新しい名前空間の場合は、[{{site.data.keyword.containerlong_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。 単一グループとスケーラブル・グループ用にセットアップされた名前空間の場合は、[トークンを使用し、Kubernetes シークレットを作成](cs_dedicated_tokens.html#cs_dedicated_tokens)して認証を受けます。
 
 ### クラスターへのサブネットの追加
 {: #dedicated_cluster_subnet}
@@ -471,7 +471,7 @@ lastupdated: "2018-08-06"
 #### ユーザー管理サブネットと IP アドレスを Kubernetes クラスターにさらに追加する
 {: #dedicated_byoip_subnets}
 
-{{site.data.keyword.containershort_notm}} にアクセスするために使用するオンプレミス・ネットワークに属するユーザー独自のサブネットをさらに指定します。 それらのサブネットにあるプライベート IP アドレスを、Kubernetes クラスター内の Ingress サービスとロード・バランサー・サービスに追加できます。 ユーザー管理のサブネットは、使用するサブネットのフォーマットに応じて、2 つの方法のいずれかにより構成されます。
+{{site.data.keyword.containerlong_notm}} にアクセスするために使用するオンプレミス・ネットワークに属するユーザー独自のサブネットをさらに指定します。 それらのサブネットにあるプライベート IP アドレスを、Kubernetes クラスター内の Ingress サービスとロード・バランサー・サービスに追加できます。 ユーザー管理のサブネットは、使用するサブネットのフォーマットに応じて、2 つの方法のいずれかにより構成されます。
 
 要件:
 - ユーザー管理のサブネットを追加できるのは、プライベート VLAN のみです。
@@ -507,7 +507,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. **重要**: 同じ VLAN の別々のサブネットにあるワーカーが通信できるようにするには、[同じ VLAN 上のサブネット間のルーティングを有効にする](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)必要があります。
+4. **重要**: 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。{{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
 
 5. オンプレミスと内部アカウントの接続を構成するには、以下のオプションの間から選択します。
   - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用した場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスと内部アカウントの接続を構成します。 詳しくは、[NodePort、LoadBalancer、または Ingress サービスを使用したネットワーキングの計画](cs_network_planning.html#planning)を参照してください。
@@ -558,4 +558,6 @@ Ingress ALB にパブリック IP アドレスを使用する場合、企業フ�
 ### 永続ストレージの作成
 {: #dedicated_apps_volume_claim}
 
-永続ストレージを作成するためのオプションを確認するには、[永続データ・ストレージ](cs_storage_planning.html#persistent)を参照してください。ボリュームのバックアップ、ボリュームからのリストア、ボリュームの削除を要求するには、[サポート・チケットを開く](/docs/get-support/howtogetsupport.html#getting-customer-support)必要があります。
+永続ストレージの作成に関するオプションを確認するには、[高可用性のための永続データ・ストレージ・オプション](cs_storage_planning.html#persistent_storage_overview)を参照してください。ボリュームのバックアップ、ボリュームからのリストア、ボリュームの削除、またはファイル・ストレージの定期的なスナップショットを要求するには、[サポート・チケットを開く](/docs/get-support/howtogetsupport.html#getting-customer-support)必要があります。
+
+[ファイル・ストレージ](cs_storage_file.html#predefined_storageclass)のプロビジョンを選択する場合は、非保存のストレージ・クラスを選択します。非保存のストレージ・クラスを選択すると、IBM Cloud インフラストラクチャー (SoftLayer) 内の孤立永続ストレージ・インスタンスの発生を防止できます。このインスタンスは、サポート・チケットを開くことによってのみ削除できます。

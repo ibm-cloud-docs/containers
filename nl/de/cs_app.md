@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -45,7 +45,7 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 Je breiter gefächert Sie Ihre Containerkonfiguration auf mehrere Workerknoten und Cluster verteilen, umso geringer ist die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten mit Ihrer App verzeichnen.
 {: shortdesc}
 
-Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
+Betrachten Sie die folgenden potenziellen App-Konfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
 
 ![Stufen der Hochverfügbarkeit für eine App](images/cs_app_ha_roadmap-mz.png)
 
@@ -53,7 +53,7 @@ Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmend
 2.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem einzelnen Cluster mit einer Zone verteilt sind.
 3.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem Cluster mit mehreren Zonen verteilt sind.
 
-Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen Lastausgleichsfunktion verbinden](cs_clusters.html#multiple_clusters), um die hohe Verfügbarkeit zu erweitern.
+Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen Lastausgleichsfunktion verbinden](cs_clusters_planning.html#multiple_clusters), um die hohe Verfügbarkeit zu erweitern.
 
 ### Verfügbarkeit Ihrer App erhöhen
 {: #increase_availability}
@@ -76,13 +76,13 @@ Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen L
     
     </dd>
 <dt>Pods auf mehrere Zonen oder Regionen verteilen</dt>
-  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metro-Bereichen](cs_regions.html#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](cs_clusters.html#multiple_clusters).</p>
-  <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](cs_clusters.html#ha_clusters).</p>
+  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metro-Bereichen](cs_regions.html#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](cs_clusters_planning.html#multiple_clusters).</p>
+  <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>Sind in einer Bereitstellung mit Mehrzonencluster meine App-Pods gleichmäßig über die Knoten hinweg verteilt?</strong></p>
   <p>Die Pods sind gleichmäßig über die Zonen verteilt, aber nicht immer über Knoten hinweg. Wenn Sie beispielsweise über einen Cluster mit einem Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods implementieren, erhält jeder Knoten zwei Pods. Wenn Sie jedoch über einen Cluster mit zwei Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods bereitstellen, sind für jede Zone zwei Pods geplant und es kann ein Pod pro Knoten geplant werden (oder auch nicht). Für mehr Kontrolle über die Zeitplanung können Sie [die Pod-Affinität festlegen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>Wie werden Pods auf den verbleibenden Knoten in den anderen Zonen erneut geplant, wenn eine Zone inaktiv wird?</strong></br>Dies hängt von Ihrer Planungsrichtlinie ab, die Sie in der Bereitstellung verwendet haben. Wenn Sie eine [knotenspezifische Pod-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) angegeben haben, werden die Pods nicht erneut geplant. Wenn Sie dies nicht getan haben, werden die Pods auf verfügbaren Workerknoten in anderen Zonen erstellt, aber sie sind möglicherweise nicht ausgeglichen. Die beiden Pods können beispielsweise über die beiden verfügbaren Knoten verteilt sein, oder sie können beide für einen Knoten mit verfügbarer Kapazität geplant werden. In ähnlicher Weise werden Pods nicht automatisch neu gelöscht und über Knoten hinweg verteilt, wenn die nicht verfügbare Zone wieder verfügbar wird. Wenn Sie möchten, dass die Pods in den Zonen neu verteilt werden, wenn die Zone wieder aktiv ist, sollten Sie den [Kubernetes Descheduler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/descheduler) verwenden.</p>
   <p><strong>Tipp</strong>: Versuchen Sie in Mehrzonenclustern, die Workerknotenkapazität bei 50 % pro Zone zu halten, damit Ihnen ausreichend Kapazität bleibt, um Ihren Cluster vor einem Zonenausfall zu schützen.</p>
-  <p><strong>Was ist, wenn ich meine App auf Regionen verteilen möchte?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](cs_clusters.html#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
+  <p><strong>Was ist, wenn ich meine App auf Regionen verteilen möchte?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](cs_clusters_planning.html#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
   <p><strong>Was ist, wenn meine Apps persistenten Speicher benötigen?</strong></p>
   <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -145,7 +145,7 @@ Um mehr über die einzelnen Komponenten zu erfahren, lesen Sie sich den Abschnit
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
-Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der GUI](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashoard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
+Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der GUI](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
@@ -405,7 +405,8 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 ## Apps für bestimmte Workerknoten mithilfe von Bezeichnungen bereitstellen
 {: #node_affinity}
 
-Wenn Sie eine App bereitstellen, werden die App-Pods willkürlich auf verschiedenen Workerknoten in Ihrem Cluster implementiert. In einigen Fällen kann es sein, dass Sie die Workerknoten einschränken möchten, auf denen die App-Pods implementiert werden sollen. Beispiel: Sie möchten, dass App-Pods nur auf Workerknoten in einem bestimmten Worker-Pool implementiert werden, weil sich diese Workerknoten auf Bare-Metal-Maschinen befinden. Fügen Sie eine Affinitätsregel zu Ihrer App-Bereitstellung hinzu, um die Workerknoten anzugeben, auf denen die App-Pods implementiert werden müssen.{:shortdesc}
+Wenn Sie eine App bereitstellen, werden die App-Pods willkürlich auf verschiedenen Workerknoten in Ihrem Cluster implementiert. In einigen Fällen kann es sein, dass Sie die Workerknoten einschränken möchten, auf denen die App-Pods implementiert werden sollen. Beispiel: Sie möchten, dass App-Pods nur auf Workerknoten in einem bestimmten Worker-Pool implementiert werden, weil sich diese Workerknoten auf Bare-Metal-Maschinen befinden. Fügen Sie eine Affinitätsregel zu Ihrer App-Bereitstellung hinzu, um die Workerknoten anzugeben, auf denen die App-Pods implementiert werden müssen.
+{:shortdesc}
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
 
@@ -498,7 +499,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 ## Eine App auf einer GPU-Maschine bereitstellen
 {: #gpu_app}
 
-Wenn Sie über einen [Bare-Metal-GPU-Maschinentyp (Graphics Processing Unit)](cs_clusters.html#shared_dedicated_node) verfügen, können Sie rechenintensive Workloads für den Workerknoten terminieren. Sie können beispielsweise eine 3D-App ausführen, die die CUDA-Plattform (CUDA, Compute Unified Device Architecture) verwendet, um zur Leistungssteigerung die Systembelastung auf die GPU und CPU aufzuteilen.
+Wenn Sie über einen [Bare-Metal-GPU-Maschinentyp (Graphics Processing Unit)](cs_clusters_planning.html#shared_dedicated_node) verfügen, können Sie rechenintensive Workloads für den Workerknoten terminieren. Sie können beispielsweise eine 3D-App ausführen, die die CUDA-Plattform (CUDA, Compute Unified Device Architecture) verwendet, um zur Leistungssteigerung die Systembelastung auf die GPU und CPU aufzuteilen.
 {:shortdesc}
 
 In den nachfolgenden Abschnitten erfahren Sie, wie Sie Workloads bereitstellen, für die die GPU erforderlich ist. Sie können auch [Apps bereitstellen](#app_ui), die ihre Workloads nicht auf der GPU und der CPU verarbeiten müssen. Anschließend kann es hilfreich sein, sich mit rechenintensiven Workloads, wie dem Framework [TensorFlow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.tensorflow.org/) für maschinelles Lernen mit [dieser Kubernetes-Demo ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) vertraut zu machen.
@@ -674,7 +675,7 @@ Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie 
 
 Vorbemerkungen:
 - [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
-- Die Heapsterüberwachung muss in dem Cluster bereitgestellt werden, den Sie automatisch skalieren möchten.
+- Die Heapster-Überwachung muss in dem Cluster bereitgestellt werden, den Sie automatisch skalieren möchten.
 
 Schritte:
 

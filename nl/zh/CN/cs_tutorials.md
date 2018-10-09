@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -28,11 +28,11 @@ lastupdated: "2018-08-06"
 
 ## 目标
 
-在第一个教程中，您将充当 PR 公司的网络管理员。您可在 {{site.data.keyword.containershort_notm}} 中配置定制 Kubernetes 集群，以用于部署和测试应用程序的 Hello World 版本。
+在第一个教程中，您将充当 PR 公司的网络管理员。您可在 {{site.data.keyword.containerlong_notm}} 中配置定制 Kubernetes 集群，以用于部署和测试应用程序的 Hello World 版本。
 {:shortdesc}
 
 -   使用具有 1 个工作程序节点的 1 个工作程序池创建集群。
--   安装 CLI 以运行 [Kubernetes 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/) 并管理 Docker 映像。
+-   安装 CLI 以在 {{site.data.keyword.registrylong_notm}} 中运行 [Kubernetes 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/) 并管理 Docker 映像。
 -   在 {{site.data.keyword.registrylong_notm}} 中创建专用映像存储库以存储映像。
 -   将 {{site.data.keyword.toneanalyzershort}} 服务添加到集群，以便集群中的任何应用程序都可使用该服务。
 
@@ -50,7 +50,8 @@ lastupdated: "2018-08-06"
 ## 先决条件
 
 -  现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/registration/)
--  要在其中工作的集群空间中的 [Cloud Foundry 开发者角色](/docs/iam/mngcf.html#mngcf)。
+-  IBM Cloud Infrastructure (SoftLayer) [**超级用户**基础架构角色](cs_users.html#infra_access)，或确认是否[区域的 API 密钥已设置](cs_troubleshoot_clusters.html#apikey)有相应的许可权
+-  要在其中工作的集群空间中的 [Cloud Foundry **开发者**角色](/docs/iam/mngcf.html#mngcf)。
 
 
 ## 第 1 课：创建集群并设置 CLI
@@ -70,18 +71,17 @@ lastupdated: "2018-08-06"
 
 集群供应后，请安装用于管理集群的以下 CLI：
 -   {{site.data.keyword.Bluemix_notm}} CLI 
--   {{site.data.keyword.containershort_notm}} 插件
+-   {{site.data.keyword.containerlong_notm}} 插件
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 插件
--   Docker CLI
 
 </br>
 **安装 CLI 及其必备软件**
 
-1.  作为 {{site.data.keyword.containershort_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html)。要运行 {{site.data.keyword.Bluemix_notm}} CLI 命令，请使用前缀 `ibmcloud`。
+1.  作为 {{site.data.keyword.containerlong_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html)。要运行 {{site.data.keyword.Bluemix_notm}} CLI 命令，请使用前缀 `ibmcloud`。
 2.  遵循提示来选择帐户和 {{site.data.keyword.Bluemix_notm}} 组织。集群是特定于帐户的，但又独立于 {{site.data.keyword.Bluemix_notm}} 组织或空间。
 
-4.  安装 {{site.data.keyword.containershort_notm}} 插件以创建 Kubernetes 集群并管理工作程序节点。要运行 {{site.data.keyword.containershort_notm}} 插件命令，请使用前缀 `ibmcloud ks`。
+4.  安装 {{site.data.keyword.containerlong_notm}} 插件以创建 Kubernetes 集群并管理工作程序节点。要运行 {{site.data.keyword.containerlong_notm}} 插件命令，请使用前缀 `ibmcloud ks`。
 
     ```
     ibmcloud plugin install container-service -r Bluemix
@@ -89,13 +89,13 @@ lastupdated: "2018-08-06"
     {: pre}
 
 5.  要将应用程序部署到集群中，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。要使用 Kubernetes CLI 运行命令，请使用前缀 `kubectl`。
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.10.5。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.10.7。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe)
 
           **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
 
@@ -142,8 +142,6 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-7. 要在本地构建映像并将其推送到专用映像存储库，请[安装 Docker Community Edition CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
-
 祝贺您！您已成功安装了以下课程和教程的 CLI。接下来，设置集群环境并添加 {{site.data.keyword.toneanalyzershort}} 服务。
 
 
@@ -162,7 +160,7 @@ lastupdated: "2018-08-06"
 
     **注：**如果您有联合标识，请使用 `--sso` 标志登录。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。
 
-2.  在 {{site.data.keyword.registryshort_notm}} 中设置自己的专用映像存储库，以安全地存储 Docker 映像并与所有集群用户共享这些映像。{{site.data.keyword.Bluemix_notm}} 中的专用映像存储库由名称空间标识。名称空间用于创建映像存储库的唯一 URL，开发者可使用此 URL 来访问专用 Docker 映像。
+2.  在 {{site.data.keyword.registryshort_notm}} 中设置您自己的专用映像存储库，以安全地存储 Docker 映像并与所有集群用户共享这些映像。{{site.data.keyword.Bluemix_notm}} 中的专用映像存储库由名称空间标识。名称空间用于创建映像存储库的唯一 URL，开发者可使用此 URL 来访问专用 Docker 映像。
 
     使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
@@ -184,7 +182,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.5
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -240,8 +238,8 @@ lastupdated: "2018-08-06"
     输出示例：
 
     ```
-    Client Version: v1.10.5
-    Server Version: v1.10.5
+    Client Version: v1.10.7
+    Server Version: v1.10.7
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,9 +34,9 @@ Pour connecter vos noeuds worker et vos applications à un centre de données su
 Utilisez une charte Helm pour configurer et déployer le service VPN IPsec strongSwan à l'intérieur d'un pod Kubernetes.
 {:shortdesc}
 
-Etant donné que strongSwan est intégré dans votre cluster, vous n'avez pas besoin d'un dispositif de passerelle externe. Lorsque la connectivité VPN est établie, des routes sont automatiquement configurées sur tous les noeuds worker dans le cluster. Ces routes permettent d'établir une connectivité bidirectionnelle via le tunnel VPN entre les pods d'un noeud worker et le système distant. Par exemple, le diagramme suivant illustre comment une application dans {{site.data.keyword.containershort_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN strongSwan :
+Etant donné que strongSwan est intégré dans votre cluster, vous n'avez pas besoin d'un dispositif de passerelle externe. Lorsque la connectivité VPN est établie, des routes sont automatiquement configurées sur tous les noeuds worker dans le cluster. Ces routes permettent d'établir une connectivité bidirectionnelle via le tunnel VPN entre les pods d'un noeud worker et le système distant. Par exemple, le diagramme suivant illustre comment une application dans {{site.data.keyword.containerlong_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN strongSwan :
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Exposition d'une application dans {{site.data.keyword.containershort_notm}} à l'aide d'un équilibreur de charge" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} en utilisant un équilibreur de charge" style="width:700px; border-style: none"/>
 
 1. Une application dans votre cluster nommée `myapp` reçoit une demande d'un service Ingress ou LoadBalancer et nécessite une connexion sécurisée aux données de votre réseau sur site.
 
@@ -121,7 +121,7 @@ Lorsque vous configurez une connexion VPN strongSwan, vous déterminez si la con
 Pour établir une connexion VPN entrante, modifiez les paramètres suivants :
 1. Vérifiez que le paramètre `ipsec.auto` est défini avec la valeur `add`.
 2. Facultatif : définissez  `loadBalancerIP` avec une adresse IP publique portable pour le service VPN strongSwan. La spécification d'une adresse IP est utile lorsque vous avez besoin d'une adresse IP stable, par exemple lorsque vous devez désigner quelles sont les adresses IP autorisées via un pare-feu local. Le cluster doit disposer d'au moins une adresse IP d'équilibreur de charge publique disponible. [Vous pouvez vérifier quelles sont vos adresses IP publiques disponibles](cs_subnets.html#review_ip) ou [libérer une adresse IP utilisée](cs_subnets.html#free).<br>**Remarque **:
-    * Si vous laissez ce paramètre vide, une des adresses IP publiques portables disponibles est utilisée. 
+    * Si vous laissez ce paramètre vide, une des adresses IP publiques portables disponibles est utilisée.
     * Vous devez également configurer l'adresse IP publique que vous sélectionnez ou l'adresse IP publique affectée pour le point de terminaison VPN du cluster sur le point de terminaison VPN sur site.
 
 Pour établir une connexion VPN sortante, modifiez les paramètres suivants :
@@ -153,7 +153,7 @@ Déterminez les ressources du cluster qui doivent être accessibles au réseau d
     **Remarque** : si `ipsec.keyexchange` est défini avec `ikev1`, vous ne pouvez indiquer qu'un seul sous-réseau. Vous pouvez toutefois utiliser le paramètre `localSubnetNAT` pour combiner plusieurs sous-réseaux de cluster dans un seul sous-réseau.
 
 2. Facultatif : remappez les sous-réseaux du cluster en utilisant le paramètre `localSubnetNAT`. La conversion d'adresses réseau NAT pour les sous réseaux fournit une solution de contournement en cas de conflit entre le réseau du cluster et le réseau distant local. Vous pouvez utiliser la conversion NAT pour remapper les sous-réseaux IP locaux privés du cluster, le sous-réseau du pod (172.30.0.0/16) ou le sous-réseau du service de pod (172.21.0.0/16) vers un autre sous-réseau privé. Le tunnel VPN voit les sous-réseaux IP remappés au lieu des sous-réseaux d'origine. Le remappage intervient avant l'envoi des paquets via le tunnel VPN et après l'arrivée des paquets en provenance du tunnel VPN. Vous pouvez exposer les sous-réseaux remappés et non remappés en même temps via le VPN. Pour activer la conversion NAT, vous pouvez ajouter un sous-réseau complet ou des adresses IP individuelles.
-    * Si vous ajoutez un sous-réseau complet au format `10.171.42.0/24=10.10.10.0/24`, le remappage s'effectue en mode 1 à 1 : toutes les adresses IP figurant dans le sous-réseau du réseau interne sont mappées au sous-réseau du réseau externe et inversement. 
+    * Si vous ajoutez un sous-réseau complet au format `10.171.42.0/24=10.10.10.0/24`, le remappage s'effectue en mode 1 à 1 : toutes les adresses IP figurant dans le sous-réseau du réseau interne sont mappées au sous-réseau du réseau externe et inversement.
     * Si vous ajoutez des adresses IP individuelles au format `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32`, seules ces adresses IP internes sont mappées aux adresses IP externes spécifiées.
 
 3. Facultatif pour les chartes Helm strongSwan à partir de la version 2.2.0 : masquez toutes les adresses IP du cluster derrière une seule adresse IP en définissant la paramètre `enableSingleSourceIP` avec la valeur `true`. Cette option offre l'une des configurations les plus sécurisées pour la connexion VPN car aucune connexion de réseau distant revenant vers le cluster n'est autorisée.
@@ -173,7 +173,8 @@ Déterminez les ressources du cluster qui doivent être accessibles au réseau d
 Déterminez les ressources du réseau distant qui doivent être accessibles au cluster via la connexion VPN.
 {: shortdesc}
 
-1. Ajoutez les routages CIDR d'un ou de plusieurs sous-réseaux privés sur site dans le paramètre `remote.subnet`. <br>**Remarque** : si `ipsec.keyexchange` est défini avec `ikev1`, vous ne pouvez indiquer qu'un seul sous-réseau.
+1. Ajoutez les routages CIDR d'un ou de plusieurs sous-réseaux privés sur site dans le paramètre `remote.subnet`.
+    <br>**Remarque** : si `ipsec.keyexchange` est défini avec `ikev1`, vous ne pouvez indiquer qu'un seul sous-réseau.
 2. Facultatif pour les chartes Helm strongSwan à partir de la version 2.2.0 : remappez les sous-réseaux du réseau distant en utilisant le paramètre `remoteSubnetNAT`. La conversion d'adresses réseau NAT pour les sous réseaux fournit une solution de contournement en cas de conflit entre le réseau du cluster et le réseau distant local. Vous pouvez utiliser la conversion NAT pour remapper les sous-réseaux IP du réseau distant à un sous-réseau privé différent. Le tunnel VPN voit les sous-réseaux IP remappés au lieu des sous-réseaux d'origine. Le remappage intervient avant l'envoi des paquets via le tunnel VPN et après l'arrivée des paquets en provenance du tunnel VPN. Vous pouvez exposer les sous-réseaux remappés et non remappés en même temps via le VPN.
 
 ### Etape 6 : Déployez la charte Helm
@@ -453,9 +454,9 @@ Vous pouvez désactiver la connexion VPN en supprimant la charte Helm.
 Le [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) fournit le système d'exploitation Vyatta 5600 le plus récent pour serveurs bare metal x86. Vous pouvez utiliser un dispositif VRA comme passerelle VPN pour vous connecter de manière sécurisée à un réseau sur site.
 {:shortdesc}
 
-Tout le trafic réseau public et privé qui entre ou sort des VLAN du cluster est acheminé via le dispositif VRA. Vous pouvez utiliser le dispositif VRA comme point de terminaison VPN pour créer un tunnel IPSec chiffré entre les serveurs dans l'infrastructure IBM Cloud (SoftLayer) et les ressources sur site. Par exemple, le diagramme suivant illustre comment une application sur un noeud worker uniquement privé dans {{site.data.keyword.containershort_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN VRA :
+Tout le trafic réseau public et privé qui entre ou sort des VLAN du cluster est acheminé via le dispositif VRA. Vous pouvez utiliser le dispositif VRA comme point de terminaison VPN pour créer un tunnel IPSec chiffré entre les serveurs dans l'infrastructure IBM Cloud (SoftLayer) et les ressources sur site. Par exemple, le diagramme suivant illustre comment une application sur un noeud worker uniquement privé dans {{site.data.keyword.containerlong_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN VRA :
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Exposition d'une application dans {{site.data.keyword.containershort_notm}} à l'aide d'un équilibreur de charge" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} en utilisant un équilibreur de charge" style="width:725px; border-style: none"/>
 
 1. Une application dans votre cluster nommée `myapp2` reçoit une demande d'un service Ingress ou LoadBalancer et nécessite une connexion sécurisée aux données de votre réseau sur site.
 
@@ -475,4 +476,4 @@ Pour configurer un dispositif de routeur virtuel (VRA) :
 
 3. Pour activer une connexion VPN en utilisant le dispositif VRA, [configurez VRRP sur le dispositif VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
 
-**Remarque** : si vous disposez déjà d'un dispositif de routeur et que vous ajoutez ensuite un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](cs_subnets.html#subnet-routing).
+**Remarque** : si vous disposez déjà d'un dispositif de routeur et que vous ajoutez ensuite un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](cs_subnets.html#subnet-routing). Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. 

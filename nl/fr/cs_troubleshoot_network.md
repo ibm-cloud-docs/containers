@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,9 +26,8 @@ lastupdated: "2018-08-06"
 Lorsque vous utilisez {{site.data.keyword.containerlong}}, envisagez l'utilisation de ces techniques pour identifier et résoudre les incidents liés à la mise en réseau au sein d'un cluster.
 {: shortdesc}
 
-Si vous rencontrez un problème d'ordre plus général, expérimentez le [débogage de cluster](cs_troubleshoot.html).
+Vous rencontrez des difficultés pour connecter votre application via Ingress ? Essayez de [déboguer Ingress](cs_troubleshoot_debug_ingress.html).
 {: tip}
-
 
 ## Impossible de se connecter à une application via un service d'équilibreur de charge
 {: #cs_loadbalancer_fails}
@@ -106,146 +105,23 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 <br />
 
 
-
-
 ## Impossible de se connecter à une application via Ingress
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
 Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application en utilisant l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application (ALB) Ingress, la connexion a échoué ou expiré.
 
-{: tsCauses}
-Il se peut qu'Ingress ne fonctionne pas correctement pour les raisons suivantes :
-<ul><ul>
-<li>Le cluster n'est pas encore complètement déployé.
-<li>Le cluster a été configuré en tant que cluster gratuit ou standard avec un seul noeud worker.
-<li>Le script de configuration Ingress contient des erreurs.
-</ul></ul>
-
 {: tsResolve}
-Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
-
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre équilibreur de charge ALB.
-
-  ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
-  {: pre}
-
-    Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
-
-2.  Récupérez le sous-domaine et l'adresse IP publique de l'équilibreur de charge ALB, puis exécutez une commande PING vers chacun d'eux.
-
-    1.  Récupérez le sous-domaine de l'équilibreur de charge ALB.
-
-      ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
-      ```
-      {: pre}
-
-    2.  Exécutez une commande ping vers le sous-domaine de l'équilibreur de charge ALB.
-
-      ```
-      ping <ingress_subdomain>
-      ```
-      {: pre}
-
-    3.  Récupérez l'adresse IP publique de votre équilibreur de charge ALB.
-
-      ```
-      nslookup <ingress_subdomain>
-      ```
-      {: pre}
-
-    4.  Exécutez une commande PING vers l'adresse IP publique de l'équilibreur de charge ALB.
-
-      ```
-      ping <ALB_IP>
-      ```
-      {: pre}
-
-    Si l'interface CLI renvoie un dépassement de délai d'attente pour l'adresse IP publique ou le sous-domaine de l'équilibreur de charge ALB, et que vous avez configuré un pare-feu personnalisé pour protéger vos noeuds worker, ouvrez des ports et des groupes réseau supplémentaires dans votre [pare-feu](cs_troubleshoot_clusters.html#cs_firewall).
-
-3.  Si vous utilisez un domaine personnalisé, assurez-vous qu'il est mappé à l'adresse IP publique ou au sous-domaine de l'équilibreur de charge ALB fourni par IBM avec votre fournisseur DNS.
-    1.  Si vous avez utilisé le sous-domaine de l'équilibreur de charge ALB, vérifiez le nom canonique (enregistrement CNAME).
-    2.  Si vous avez utilisé l'adresse IP publique de l'équilibreur de charge ALB, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable dans le pointeur (enregistrement PTR).
-4.  Vérifiez le fichier de configuration de ressource Ingress.
-
+Vérifiez d'abord que votre cluster est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre équilibreur de charge ALB.
     ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: myingress
-    spec:
-      tls:
-      - hosts:
-        - <ingress_subdomain>
-        secretName: <ingress_tls_secret>
-      rules:
-      - host: <ingress_subdomain>
-        http:
-          paths:
-          - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 80
-    ```
-    {: codeblock}
-
-    1.  Vérifiez que le sous-domaine de l'équilibreur de charge ALB et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine fournis par IBM, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.
-    2.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre contrôleur Ingress. Si votre application est configurée pour être en mode écoute sur le chemin racine, ajoutez **/** comme chemin.
-5.  Vérifiez le déploiement du contrôleur Ingress et recherchez les éventuels messages d'erreur ou d'avertissement.
-
-    ```
-    kubectl describe ingress <myingress>
+    ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
-    Par exemple, dans la section **Events** de la sortie, vous pouvez voir des messages d'avertissement à propos de valeurs non valides dans votre ressource Ingress ou dans certaines annotations que vous avez utilisées.
+Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
 
-    ```
-    Name:             myingress
-    Namespace:        default
-    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
-    Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
-    Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-    ```
-    {: screen}
-
-6.  Vérifiez les journaux de votre équilibreur de charge ALB.
-    1.  Récupérez l'ID des pods Ingress qui sont en cours d'exécution dans votre cluster.
-
-      ```
-      kubectl get pods -n kube-system | grep alb
-      ```
-      {: pre}
-
-    2.  Récupérez les journaux pour chaque pod Ingress.
-
-      ```
-      kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
-      ```
-      {: pre}
-
-    3.  Recherchez les messages d'erreur dans les journaux de l'équilibreur de charge ALB.
+* Si votre cluster standard est entièrement déployé et comporte au moins 2 noeuds worker par zone, mais qu'aucun **sous-domaine Ingress** n'est disponible, voir [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](cs_troubleshoot_network.html#cs_subnet_limit).
+* Pour résoudre d'autres problèmes, traitez les incidents relatifs à votre configuration Ingress en suivant les étapes indiquées dans la section [Débogage d'Ingress](cs_troubleshoot_debug_ingress.html).
 
 <br />
 
@@ -307,7 +183,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containershort_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition.
+Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition.
 
 Pour afficher le nombre de sous-réseaux d'un VLAN :
 1.  Dans la [console de l'infrastructure IBM Cloud (SoftLayer)](https://control.bluemix.net/), sélectionnez **Réseau** > **Gestion IP** > **VLAN**.
@@ -316,7 +192,7 @@ Pour afficher le nombre de sous-réseaux d'un VLAN :
 {: tsResolve}
 Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
 
-Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles.
+Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser des sous-réseaux dans le cluster.
 1.  Vérifiez que les sous-réseaux que vous souhaitez utiliser sont disponibles. **Remarque** : le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.
@@ -344,10 +220,36 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: screen}
 
 {: tsCauses}
-Dans chaque zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containershort_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN public du cluster d'une zone a déjà atteint cette limite, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition.
+Dans chaque zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN public du cluster d'une zone a déjà atteint cette limite, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition.
 
 {: tsResolve}
 Pour vérifier le nombre de sous-réseaux d'un VLAN et obtenir les étapes à suivre pour obtenir un autre VLAN, voir [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](#cs_subnet_limit).
+
+<br />
+
+
+## La connexion via WebSocket s'interrompt au bout de 60 secondes
+{: #cs_ingress_websocket}
+
+{: tsSymptoms}
+Votre service Ingress expose une application qui utilise WebSocket. Cependant, la connexion entre un client et votre application WebSocket s'interrompt lorsqu'aucun trafic n'est échangé entre eux durant 60 secondes.
+
+{: tsCauses}
+La connexion à votre application WebSocket peut être abandonnée au bout de 60 secondes d'inactivité pour l'une des raisons suivantes :
+
+* Votre connexion Internet a un proxy ou un pare-feu qui ne tolère pas les connexions longues.
+* Une expiration de délai dans l'ALB pour l'application WebSocket met fin à la connexion.
+
+{: tsResolve}
+Pour empêcher l'interruption de la connexion au bout de 60 secondes d'inactivité :
+
+1. Si vous vous connectez à votre application WebSocket via un proxy ou un pare-feu, veillez à ce que ce proxy ou ce pare-feu ne soit pas configuré pour mettre fin automatiquement aux connexions longues.
+
+2. Pour maintenir la connexion, vous pouvez augmenter la valeur du délai d'expiration ou définir un signal de présence dans votre application.
+<dl><dt>Modifier le délai d'expiration</dt>
+<dd>Augmentez la valeur du paramètre `proxy-read-timeout` dans la configuration de votre équilibreur de charge d'application (ALB). Par exemple, pour remplacer le délai de `60s` par une valeur supérieure, telle que `300s`, ajoutez cette [annotation](cs_annotations.html#connection) au fichier de la ressource Ingress : `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Le délai est modifié pour tous les ALB publics figurant dans votre cluster.</dd>
+<dt>Configurer un signal de présence</dt>
+<dd>Si vous n'envisagez pas de modifier la valeur du délai de lecture par défaut de l'ALB, configurez un signal de présence dans votre application WebSocket. Lorsque vous configurez un protocole de signal de présence à l'aide d'une infrastructure de type [WAMP ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://wamp-proto.org/), le serveur en amont de l'application envoie périodiquement un message "ping" à intervalles réguliers et le client répond par un message "pong". Définissez l'intervalle du signal de présence avec une valeur inférieure ou égale à 58 secondes pour que le trafic "ping/pong" conserve la connexion active avant la fin effective du délai d'expiration.</dd></dl>
 
 <br />
 
@@ -456,7 +358,7 @@ Cette erreur indique que l'édition précédente de la charte strongSwan n'a pas
 <br />
 
 
-## La connectivité VPN strongSwan échoue après l'ajout ou la suppression d'un noeud worker
+## La connectivité VPN strongSwan échoue après l'ajout ou la suppression de noeuds worker
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}
@@ -648,7 +550,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: screen}
 
 {: tsCauses}
-Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte sont supprimés. S'il n'y a aucun noeud worker dans un cluster, l'infractructure IBM Cloud (SoftLayer) récupère les VLAN public et privé associés. Cependant, le pool de noeuds worker dispose toujours des ID de VLAN précédents parmi ses métadonnées et il utilise ces deux ID qui ne sont plus disponibles lors du rééquilibrage ou du redimensionnement du pool. Les noeuds ne parviennent pas à être créés car ces VLAN ne sont plus associés au cluster.
+Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte sont supprimés. S'il n'y a aucun noeud worker dans un cluster, l'infrastructure IBM Cloud (SoftLayer) récupère les VLAN public et privé associés. Cependant, le pool de noeuds worker dispose toujours des ID de VLAN précédents parmi ses métadonnées et il utilise ces deux ID qui ne sont plus disponibles lors du rééquilibrage ou du redimensionnement du pool. Les noeuds ne parviennent pas à être créés car ces VLAN ne sont plus associés au cluster.
 
 {: tsResolve}
 
@@ -709,15 +611,17 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
 Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
+-  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
+
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+-   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
 
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
 
-    -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
-    -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
+    -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
+    -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
 
 -   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).

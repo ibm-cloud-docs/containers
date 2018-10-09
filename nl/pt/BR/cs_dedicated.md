@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 Se você tiver uma conta do {{site.data.keyword.Bluemix_dedicated}}, será possível implementar clusters do Kubernetes em um ambiente de nuvem dedicado (`https://<my-dedicated-cloud-instance>.bluemix.net`) e conectar-se aos serviços pré-selecionados do {{site.data.keyword.Bluemix_notm}} que também estão em execução aí.
 {:shortdesc}
 
-Se você não tiver uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, será possível [iniciar com {{site.data.keyword.containershort_notm}}](container_index.html) em uma conta pública do {{site.data.keyword.Bluemix_notm}}.
+Se você não tiver uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, será possível [iniciar com {{site.data.keyword.containerlong_notm}}](container_index.html) em uma conta pública do {{site.data.keyword.Bluemix_notm}}.
 
 ## Sobre o ambiente de nuvem dedicada
 {: #dedicated_environment}
 
 Com uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, os recursos físicos disponíveis são dedicados somente ao seu cluster e não são compartilhados com clusters de outros clientes da {{site.data.keyword.IBM_notm}}. Você pode escolher configurar um ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} quando deseja isolamento para seu cluster e requer isolamento para os outros serviços do {{site.data.keyword.Bluemix_notm}} usados. Se você não tem uma conta dedicada, é possível [criar clusters com hardware dedicado no {{site.data.keyword.Bluemix_notm}} público](cs_clusters.html#clusters_ui).
 
-Com o {{site.data.keyword.Bluemix_dedicated_notm}}, é possível criar clusters usando o catálogo no console dedicado ou usando a CLI do {{site.data.keyword.containershort_notm}}. Para usar o console Dedicated, você efetua login nas contas Dedicated e pública simultaneamente usando seu IBMid. É possível usar o login dual para acessar seus clusters públicos usando seu console Dedicated. Para usar a CLI, você efetua login usando seu terminal Dedicated (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Em seguida, destine o terminal de API do {{site.data.keyword.containershort_notm}} da região pública que está associada ao ambiente Dedicated.
+Com o {{site.data.keyword.Bluemix_dedicated_notm}}, é possível criar clusters usando o catálogo no console dedicado ou usando a CLI do {{site.data.keyword.containerlong_notm}}. Para usar o console Dedicated, você efetua login nas contas Dedicated e pública simultaneamente usando seu IBMid. É possível usar o login dual para acessar seus clusters públicos usando seu console Dedicated. Para usar a CLI, você efetua login usando seu terminal Dedicated (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Em seguida, destine o terminal de API do {{site.data.keyword.containerlong_notm}} da região pública que está associada ao ambiente Dedicated.
 
 As diferenças mais significativas entre o {{site.data.keyword.Bluemix_notm}} público e dedicado são as seguintes.
 
@@ -85,14 +85,14 @@ estático](cs_storage_basics.html#static_provisioning) de volumes.</td>
  </tr>
  <tr>
  <td>Acessando o registro</td>
- <td>Veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
- <td><ul><li>Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
+ <td>Consulte as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containerlong_notm}}](cs_images.html).</td>
+ <td><ul><li>Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containerlong_notm}}](cs_images.html).</li><li>Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
 Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.</li></ul></td>
  </tr>
  <tr>
  <td>Clusters de múltiplas zonas</td>
- <td>Crie [clusters de múltiplas zonas](cs_clusters.html#multi_zone) incluindo mais zonas em seus conjuntos de trabalhadores.</td>
- <td>Crie [clusters de zona única](cs_clusters.html#single_zone). A zona disponível foi predefinida quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} foi configurado. Por padrão, um cluster de zona única é configurado com um conjunto de trabalhadores denominado `default`. O conjunto de trabalhadores agrupa nós do trabalhador com a mesma configuração, tal como o tipo de máquina, que você definiu durante a criação do cluster. É possível incluir mais nós do trabalhador em seu cluster [redimensionando um conjunto de trabalhadores existente](cs_clusters.html#resize_pool) ou [incluindo um novo conjunto de trabalhadores](cs_clusters.html#add_pool). Ao incluir um conjunto de trabalhadores, deve-se incluir a zona disponível no conjunto de trabalhadores para que os trabalhadores possam implementar na zona. No entanto, não é possível incluir outras zonas em seus conjuntos de trabalhadores.</td>
+ <td>Crie [clusters de múltiplas zonas](cs_clusters_planning.html#multizone) incluindo mais zonas em seus conjuntos de trabalhadores.</td>
+ <td>Crie  [ clusters de zona única ](cs_clusters_planning.html#single_zone). A zona disponível foi predefinida quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} foi configurado. Por padrão, um cluster de zona única é configurado com um conjunto de trabalhadores denominado `default`. O conjunto de trabalhadores agrupa nós do trabalhador com a mesma configuração, tal como o tipo de máquina, que você definiu durante a criação do cluster. É possível incluir mais nós do trabalhador em seu cluster [redimensionando um conjunto de trabalhadores existente](cs_clusters.html#resize_pool) ou [incluindo um novo conjunto de trabalhadores](cs_clusters.html#add_pool). Ao incluir um conjunto de trabalhadores, deve-se incluir a zona disponível no conjunto de trabalhadores para que os trabalhadores possam implementar na zona. No entanto, não é possível incluir outras zonas em seus conjuntos de trabalhadores.</td>
  </tr>
 </tbody></table>
 {: caption="Diferenças de recursos entre o {{site.data.keyword.Bluemix_notm}} público e o {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -111,12 +111,12 @@ Recursos de segurança integrados fornecem isolamento, capacidades de gerenciame
 
 *Arquitetura e rede do Kubernetes no {{site.data.keyword.Bluemix_dedicated_notm}}*
 
-![{{site.data.keyword.containershort_notm}} Arquitetura do Kubernetes no {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes no {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## Configurando o {{site.data.keyword.containershort_notm}} no dedicado
+## Configurando o  {{site.data.keyword.containerlong_notm}}  no Dedicated
 {: #dedicated_setup}
 
 Cada ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} tem uma conta corporativa pública, de propriedade do cliente, no {{site.data.keyword.Bluemix_notm}}. Para que os usuários no ambiente Dedicado criem clusters, o administrador deve incluir os usuários em uma conta corporativa pública.
@@ -279,9 +279,9 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     6. Escolha o **Número de nós do trabalhador** que você precisa. Selecione `3` para assegurar a alta disponibilidade de seu cluster.
 
     7. Selecione uma **VLAN pública** (opcional) e uma **VLAN privada** (necessário). As VLANs pública e privada disponíveis são predefinidas quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} é configurado. Ambas as VLANs se comunicam entre os nós do trabalhador, mas a VLAN pública também se comunica com o mestre do Kubernetes gerenciado pela IBM. É possível usar a mesma VLAN para múltiplos clusters.
-        **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede.
+        **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).
 
-    8. Por padrão, **Criptografar disco local** é selecionado. Se você escolher limpar a caixa de seleção, os dados do Docker do host não serão criptografados. [ Saiba mais sobre a criptografia ](cs_secure.html#encrypted_disk).
+    8. Por padrão, **Criptografar disco local** é selecionado. Se você escolher limpar a caixa de seleção, os dados de tempo de execução do contêiner do host não serão criptografados. [ Saiba mais sobre a criptografia ](cs_secure.html#encrypted_disk).
 
 6. Clique em **Criar cluster**. É possível ver o progresso da implementação do nó do trabalhador na guia **Nós do trabalhador**. Quando a implementação é feita, é possível ver que seu cluster está pronto na guia **Visão geral**.
     **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
@@ -289,7 +289,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 ### Criando clusters com a CLI
 {: #dedicated_creating_cli}
 
-1.  Instale a CLI do {{site.data.keyword.Bluemix_notm}} e o plug-in do [{{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
+1.  Instale a CLI do  {{site.data.keyword.Bluemix_notm}}  e o  [ plug-in do {{site.data.keyword.containerlong_notm}}  ](cs_cli_install.html#cs_cli_install).
 2.  Efetue login no endpoint para a sua instância do {{site.data.keyword.Bluemix_dedicated_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} e selecione sua conta quando solicitado.
 
     ```
@@ -330,7 +330,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Insira o ID da VLAN pública que seu ambiente dedicado está configurado para usar. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, não especifique esta opção. **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede.</td>
+    <td>Insira o ID da VLAN pública que seu ambiente dedicado está configurado para usar. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, não especifique esta opção. **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -377,7 +377,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     Quando o fornecimento do cluster é concluído, o status do cluster muda para **implementado**.
 
     ```
-    Name ID State Created Workers Zone Version my_cluster paf97e8843e29941b49c598f516de72101 deployed 20170201162433 1 mil01 1.10.5
+    Name ID State Created Workers Zone Version my_cluster paf97e8843e29941b49c598f516de72101 deployed 20170201162433 1 mil01 1.10.7
     ```
     {: screen}
 
@@ -393,7 +393,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
 
     ```
-    ID Public IP Private IP Machine Type State Status Zone Version kube-mil01-paf97e8843e29941b49c598f516de72101-w1 169.xx.xxx.xxx 10.xxx.xx.xxx free normal Ready mil01 1.10.5
+    ID Public IP Private IP Machine Type State Status Zone Version kube-mil01-paf97e8843e29941b49c598f516de72101-w1 169.xx.xxx.xxx 10.xxx.xx.xxx free normal Ready mil01 1.10.7
     ```
     {: screen}
 
@@ -456,14 +456,14 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 ### Incluindo nós do trabalhador
 {: #add_workers}
 
-Com um {{site.data.keyword.Bluemix_dedicated_notm}}, é possível criar apenas [clusters de zona única](cs_clusters.html#single_zone). Por padrão, um cluster de zona única é configurado com um conjunto de trabalhadores denominado `default`. O conjunto de trabalhadores agrupa nós do trabalhador com a mesma configuração, tal como o tipo de máquina, que você definiu durante a criação do cluster. É possível incluir mais nós do trabalhador em seu cluster [redimensionando um conjunto de trabalhadores existente](cs_clusters.html#resize_pool) ou [incluindo um novo conjunto de trabalhadores](cs_clusters.html#add_pool). Ao incluir um conjunto de trabalhadores, deve-se incluir a zona disponível no conjunto de trabalhadores para que os trabalhadores possam implementar na zona. No entanto, não é possível incluir outras zonas em seus conjuntos de trabalhadores.
+Com um {{site.data.keyword.Bluemix_dedicated_notm}}, é possível criar somente [clusters de zona única](cs_clusters_planning.html#single_zone). Por padrão, um cluster de zona única é configurado com um conjunto de trabalhadores denominado `default`. O conjunto de trabalhadores agrupa nós do trabalhador com a mesma configuração, tal como o tipo de máquina, que você definiu durante a criação do cluster. É possível incluir mais nós do trabalhador em seu cluster [redimensionando um conjunto de trabalhadores existente](cs_clusters.html#resize_pool) ou [incluindo um novo conjunto de trabalhadores](cs_clusters.html#add_pool). Ao incluir um conjunto de trabalhadores, deve-se incluir a zona disponível no conjunto de trabalhadores para que os trabalhadores possam implementar na zona. No entanto, não é possível incluir outras zonas em seus conjuntos de trabalhadores.
 
 ### Usando registros de imagem privada e pública
 {: #dedicated_images}
 
 Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.
 
-Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html). Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
+Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containerlong_notm}}](cs_images.html). Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
 Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.
 
 ### Incluindo sub-redes nos clusters
@@ -474,7 +474,7 @@ Mude o conjunto de endereços IP públicos móveis disponíveis, incluindo sub-r
 #### Incluindo mais sub-redes gerenciadas pelo usuário e endereços IP em seus clusters do Kubernetes
 {: #dedicated_byoip_subnets}
 
-Forneça mais de suas próprias redes de uma rede no local que você deseja usar para acessar o {{site.data.keyword.containershort_notm}}. É possível incluir endereços IP privados dessas sub-redes nos serviços Ingress e de balanceamento de carga em seu cluster do Kubernetes. Sub-redes gerenciadas pelos usuários são configuradas de uma das duas maneiras, dependendo do formato da sub-rede que você deseja usar.
+Forneça mais de suas próprias sub-redes por meio de uma rede no local que você deseja usar para acessar o {{site.data.keyword.containerlong_notm}}. É possível incluir endereços IP privados dessas sub-redes nos serviços Ingress e de balanceamento de carga em seu cluster do Kubernetes. Sub-redes gerenciadas pelos usuários são configuradas de uma das duas maneiras, dependendo do formato da sub-rede que você deseja usar.
 
 Requisitos:
 - Sub-redes gerenciadas pelo usuário podem ser incluídas em VLANs privadas apenas.
@@ -510,7 +510,7 @@ Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de su
     ```
     {: screen}
 
-4. **Importante**: para ativar a comunicação entre trabalhadores que estiverem em sub-redes diferentes na mesma VLAN, deve-se [ativar o roteamento entre sub-redes na mesma VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+4. **Importante**: se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar o [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se você está usando o {{site.data.keyword.BluDirectLink}}, deve-se usar um [ Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para ativar o VRF, entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer).
 
 5. Para configurar a conectividade de conta local e interna, escolha entre estas opções:
   - Se você usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade de conta local e interna com o Ingress e um balanceador de carga. Para obter mais informações, veja [Planejando a rede com os serviços do NodePort, LoadBalancer ou Ingress](cs_network_planning.html#planning).
@@ -561,4 +561,6 @@ Se você deseja usar endereços IP públicos para o ALB de Ingresso, assegure-se
 ### Criando armazenamento persistente
 {: #dedicated_apps_volume_claim}
 
-Para revisar as opções para criar armazenamento persistente, consulte [armazenamento de dados persistentes](cs_storage_planning.html#persistent). Para solicitar um backup para seus volumes, uma restauração de seus volumes ou uma exclusão de volumes, deve-se [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Para revisar as opções para criar armazenamento persistente, consulte as Opções de armazenamento de dados persistentes para alta disponibilidade](cs_storage_planning.html#persistent_storage_overview). Para solicitar um backup para seus volumes, uma restauração de seus volumes, uma exclusão de volumes ou uma captura instantânea periódica do armazenamento de arquivo, deve-se [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+Se você escolher provisionar o [armazenamento de arquivo](cs_storage_file.html#predefined_storageclass), escolha as classes de armazenamento não retidas. A escolha das classes de armazenamento não retidas ajuda a evitar instâncias de armazenamento persistente órfãs na infraestrutura do IBM Cloud (SoftLayer) que é possível remover somente abrindo um chamado de suporte.

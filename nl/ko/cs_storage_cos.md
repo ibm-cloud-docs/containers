@@ -1,0 +1,1001 @@
+---
+
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-09-10"
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:download: .download}
+
+
+# IBM Cloud Object Storage에 데이터 저장
+{: #object_storage}
+
+## 오브젝트 스토리지 서비스 인스턴스 작성
+{: #create_cos_service}
+
+클러스터에서 {{site.data.keyword.cos_full_notm}} 사용을 시작하려면 우선 계정에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 프로비저닝해야 합니다.
+{: shortdesc}
+
+1. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 배치하십시오.
+   1.  [{{site.data.keyword.cos_full_notm}} 카탈로그 페이지](https://console.bluemix.net/catalog/services/cloud-object-storage)를 여십시오.
+   2.  서비스 인스턴스의 이름(예: `cos-backup`)을 입력하고 리소스 그룹으로 **default**를 선택하십시오. 
+   3.  가격 정보에 대해 [플랜 옵션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 검토하고 플랜을 선택하십시오. 
+   4.  **작성**을 클릭하십시오. 서비스 세부사항 페이지가 열립니다. 
+2. {: #service_credentials}{{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 검색하십시오. 
+   1.  서비스 세부사항 페이지의 탐색에서 **서비스 인증 정보**를 클릭하십시오.
+   2.  **새 인증 정보**를 클릭하십시오. 대화 상자가 표시됩니다.
+   3.  인증 정보의 이름을 입력하십시오. 
+   4.  **역할** 드롭 다운에서 `Writer` 또는 `Manager`를 선택하십시오. `Reader`를 선택하면 인증 정보를 사용하여 {{site.data.keyword.cos_full_notm}}에서 버킷을 작성하고 이에 데이터를 쓸 수 없습니다. 
+   5.  선택사항: **인라인 구성 매개변수 추가(선택사항)**에서 `{"HMAC":true}`를 입력하여 {{site.data.keyword.cos_full_notm}} 서비스에 대한 추가 HMAC 인증 정보를 작성하십시오. HMAC 인증은 만료되거나 랜덤하게 작성된 OAuth2 토큰의 오용을 방지함으로써 기본 OAuth2 인증에 추가 보안 계층을 추가합니다. 
+   6.  **추가**를 클릭하십시오. 새 인증 정보가 **서비스 인증 정보** 테이블에 나열됩니다. 
+   7.  **인증 정보 보기**를 클릭하십시오.
+   8.  {{site.data.keyword.cos_full_notm}} 서비스의 인증에 OAuth2 토큰을 사용하려면 **apikey**를 기록해 두십시오. HMAC 인증의 경우에는 **cos_hmac_keys** 섹션에서 **access_key_id** 및 **secret_access_key**를 기록해 두십시오.
+3. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 액세스가 가능하도록 [클러스터 내의 Kubernetes 시크릿에 서비스 인증 정보를 저장](#create_cos_secret)하십시오. 
+
+## 오브젝트 스토리지 서비스 인증 정보의 시크릿 작성
+{: #create_cos_secret}
+
+{{site.data.keyword.cos_full_notm}} 서비스  인스턴스에 액세스하여 데이터를 읽고 쓰려면 Kubernetes 시크릿에 서비스 인증 정보를 안전하게 저장해야 합니다. {{site.data.keyword.cos_full_notm}} 플러그인은 버킷에 대한 모든 읽기 또는 쓰기 오퍼레이션에 이러한 인증 정보를 사용합니다.
+{: shortdesc}
+
+시작하기 전에 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+1. [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보](#service_credentials)의 **apikey** 또는 **access_key_id** 및 **secret_access_key**를 검색하십시오. 
+
+2. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 **GUID**를 가져오십시오. 
+   ```
+   ibmcloud resource service-instance <service_name>
+   ```
+   {: pre}
+
+3. 이전에 검색한 {{site.data.keyword.cos_full_notm}} **GUID**와 **apikey** 또는 **access_key_id**와 **secret_access_key**를 base64로 인코딩하고, base64 인코딩된 값을 모두 기록해 두십시오. 각 매개변수에 대해 이 명령을 반복하여 base64 인코딩된 값을 검색하십시오. 
+   ```
+   echo -n "<key_value>" | base64
+   ```
+   {: pre}
+
+4. Kubernetes 시크릿을 정의하기 위한 구성 파일을 작성하십시오. 
+
+   **API 키 사용의 예:**
+   ```
+   apiVersion: v1
+   kind: Secret
+   type: ibm/ibmc-s3fs
+   metadata:
+     name: <secret_name>
+     namespace: <namespace>
+   data:
+     api-key: <base64_apikey>
+     service-instance-id: <base64_guid>
+   ```
+   {: codeblock}
+
+   **HMAC 인증 사용의 예:**
+   ```
+   apiVersion: v1
+   kind: Secret
+   type: ibm/ibmc-s3fs
+   metadata:
+     name: <secret_name>
+     namespace: <namespace>
+   data:
+     access-key: <base64_access_key_id>
+     secret-key: <base64_secret_access_key>
+     service-instance-id: <base64_guid>
+   ```
+   {: codeblock}
+
+   <table>
+   <caption>YAML 파일 컴포넌트 이해</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>metadata/name</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 시크릿의 이름을 입력하십시오. </td>
+   </tr>
+   <tr>
+   <td><code>metadata/namespace</code></td>
+   <td>시크릿을 작성할 네임스페이스를 지정하십시오. 시크릿은 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 액세스하는 팟(Pod) 및 PVC가 작성될 동일한 네임스페이스에서 작성되어야 합니다.</td>
+   </tr>
+   <tr>
+   <td><code>data/api-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 API 키를 입력하십시오. API 키는 base64 인코딩되어야 합니다. HMAC 인증을 사용하려면 <code>data/access-key</code> 및 <code>data/secret-key</code>를 대신 지정하십시오. </td>
+   </tr>
+   <tr>
+   <td><code>data/access-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 액세스 키 ID를 입력하십시오. 액세스 키 ID는 base64 인코딩되어야 합니다. OAuth2 인증을 사용하려면 <code>data/api-key</code>를 대신 지정하십시오. </td>
+   </tr>
+   <tr>
+   <td><code>data/secret-key</code></td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 시크릿 액세스 키를 입력하십시오. 시크릿 액세스 키는 base64 인코딩되어야 합니다. OAuth2 인증을 사용하려면 <code>data/api-key</code>를 대신 지정하십시오. </td>
+   </tr>
+   <tr>
+   <td><code>data/service-instance-id</code></td>
+   <td>이전에 검색한 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 GUID를 입력하십시오. GUID는 base64 인코딩되어야 합니다. </td>
+   </tr>
+   </tbody>
+   </table>
+
+5. 클러스터의 시크릿을 작성하십시오. 
+   ```
+   kubectl apply -f filepath/secret.yaml
+   ```
+   {: pre}
+
+6. 시크릿이 네임스페이스에서 작성되었는지 확인하십시오. 
+   ```
+   kubectl get secret
+   ```
+   {: pre}
+
+7. [{{site.data.keyword.cos_full_notm}} 플러그인을 설치](#install_cos)하십시오. 또는 플러그인을 이미 설치한 경우에는 {{site.data.keyword.cos_full_notm}} 버킷에 대한 [구성을 결정]( #configure_cos)하십시오. 
+
+## IBM Cloud Object Storage 플러그인 설치
+{: #install_cos}
+
+Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 {{site.data.keyword.cos_full_notm}}에 대한 사전 정의된 스토리지 클래스를 설정하십시오. 이러한 스토리지 클래스를 사용하여 앱의 {{site.data.keyword.cos_full_notm}}를 프로비저닝하기 위한 PVC를 작성할 수 있습니다.
+{: shortdesc}
+
+{{site.data.keyword.cos_full_notm}} 플러그인의 업데이트 또는 제거 방법에 대한 지시사항을 찾으십니까? [플러그인 업데이트](#update_cos_plugin) 및 [플러그인 제거](#remove_cos_plugin)를 참조하십시오.
+{: tip}
+
+시작하기 전에 {{site.data.keyword.cos_full_notm}} 플러그인을 설치할 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+
+1. [지시사항](cs_integrations.html#helm)에 따라 로컬 머신에 Helm 클라이언트를 설치하고 클러스터에 Helm 서버(Tiller)를 설치한 후에 {{site.data.keyword.Bluemix_notm}} Helm 차트 저장소를 {{site.data.keyword.cos_full_notm}} 플러그인이 사용될 클러스터에 추가하십시오. 
+
+    **중요:** Helm 버전 2.9 이상을 사용 중이면 [서비스 계정](cs_integrations.html#helm)으로 Tiller를 설치했는지 확인하십시오.
+2. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오. 
+   ```
+            helm repo add ibm  https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
+
+3. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+   ```
+   helm repo update
+   ```
+   {: pre}
+
+4. {{site.data.keyword.cos_full_notm}} Helm 플러그인 `ibmc`를 설치하십시오. 플러그인을 사용하면 클러스터 위치를 자동 검색하고 스토리지 클래스의 {{site.data.keyword.cos_full_notm}} 버킷에 대한 API 엔드포인트를 설정할 수 있습니다. 
+   1. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.     
+      ```
+      helm fetch --untar ibm/ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+   2. Helm 플러그인을 설치하십시오.
+      ```
+      helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
+      ```
+      {: pre}
+
+      출력 예:
+      ```
+      설치된 플러그인: ibmc
+      ```
+      {: screen}
+
+5. `ibmc` 플러그인이 성공적으로 설치되었는지 확인하십시오. 
+   ```
+   helm ibmc --help
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   Install or upgrade Helm charts in IBM K8S Service
+
+   Available Commands:
+    helm ibmc install [CHART] [flags]              Install a Helm chart
+    helm ibmc upgrade [RELEASE] [CHART] [flags]    Upgrades the release to a new version of the Helm chart
+
+   Available Flags:
+    --verbos                      (Optional) Verbosity intensifies... ...
+    -f, --values valueFiles       (Optional) specify values in a YAML file (can specify multiple) (default [])
+    -h, --help                    (Optional) This text.
+    -u, --update                  (Optional) Update this plugin to the latest version
+
+   Example Usage:
+    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   ```
+   {: screen}
+
+6. 선택사항: {{site.data.keyword.cos_full_notm}} 서비스 인증 정보가 보관된 Kubernetes 시크릿만 액세스하도록 {{site.data.keyword.cos_full_notm}} 플러그인을 제한하십시오. 기본적으로, 플러그인은 클러스터의 모든 Kubernetes 시크릿에 액세스할 권한이 있습니다. 
+   1. [{{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성](#create_cos_service)하십시오. 
+   2. [Kubernetes 시크릿에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 저장](#create_cos_secret)하십시오.
+   3. `templates` 디렉토리로 이동하여 사용 가능한 파일을 나열하십시오.   
+      ```
+      cd ibmcloud-object-storage-plugin/templates && ls
+      ```
+      {: pre}
+
+   4. `provisioner-sa.yaml` 파일을 열고 `ibmcloud-object-storage-secret-reader` ClusterRole 정의를 찾으십시오. 
+   6. `resourceNames` 섹션에서 플러그인이 액세스할 수 있는 시크릿의 목록에 이전에 작성한 시크릿의 이름을 추가하십시오.
+      ```
+      kind: ClusterRole
+      apiVersion: rbac.authorization.k8s.io/v1beta1
+      metadata:
+        name: ibmcloud-object-storage-secret-reader
+      rules:
+      - apiGroups: [""]
+        resources: ["secrets"]
+        resourceNames: ["<secret_name1>","<secret_name2>"]
+        verbs: ["get"]
+      ```
+      {: codeblock}
+   7. 변경사항을 저장하십시오.
+
+8. {{site.data.keyword.cos_full_notm}} 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 스토리지 클래스가 클러스터에 추가됩니다. 
+
+   **특정 Kubernetes 시크릿에 대한 제한사항이 없는 설치:**
+   ```
+   helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+   ```
+   {: pre}
+
+   **이전 단계에서 설명한 대로 특정 Kubernetes 시크릿에 대한 제한사항이 있는 설치:**
+   ```
+   helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   Installing the Helm chart
+   DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
+   NAME:   mewing-duck
+   LAST DEPLOYED: Mon Jul 30 13:12:59 2018
+   NAMESPACE: default
+   STATUS: DEPLOYED
+
+   RESOURCES:
+   ==> v1/Pod(related)
+   NAME                                             READY  STATUS             RESTARTS  AGE
+   ibmcloud-object-storage-driver-hzqp9             0/1    ContainerCreating  0         1s
+   ibmcloud-object-storage-driver-jtdb9             0/1    ContainerCreating  0         1s
+   ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
+   ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
+
+   ==> v1beta1/StorageClass
+   NAME                                  PROVISIONER       AGE
+   ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-flex-cross-region           ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-flex-perf-cross-region      ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-flex-perf-regional          ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-flex-regional               ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-standard-cross-region       ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-standard-perf-cross-region  ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-standard-perf-regional      ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-standard-regional           ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-vault-cross-region          ibm.io/ibmc-s3fs  1s
+   ibmc-s3fs-vault-regional              ibm.io/ibmc-s3fs  1s
+
+   ==> v1/ServiceAccount
+   NAME                            SECRETS  AGE
+   ibmcloud-object-storage-driver  1        1s
+   ibmcloud-object-storage-plugin  1        1s
+
+   ==> v1beta1/ClusterRole
+   NAME                                   AGE
+   ibmcloud-object-storage-secret-reader  1s
+   ibmcloud-object-storage-plugin         1s
+
+   ==> v1beta1/ClusterRoleBinding
+   NAME                                   AGE
+   ibmcloud-object-storage-plugin         1s
+   ibmcloud-object-storage-secret-reader  1s
+
+   ==> v1beta1/DaemonSet
+   NAME                            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
+   ibmcloud-object-storage-driver  3        3        0      3           0          <none>         1s
+
+   ==> v1beta1/Deployment
+   NAME                            DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+   ibmcloud-object-storage-plugin  1        1        1           0          1s
+
+   NOTES:
+   Thank you for installing: ibmcloud-object-storage-plugin.   Your release is named: mewing-duck
+
+   Please refer Chart README.md file for creating a sample PVC.
+   Please refer Chart RELEASE.md to see the release details/fixes.
+   ```
+   {: screen}
+
+9. 플러그인이 올바르게 설치되었는지 확인하십시오.
+   ```
+   kubectl get pod -n kube-system -o wide | grep object
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
+   ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
+   ```
+   {: screen}
+
+   하나의 `ibmcloud-object-storage-plugin` 팟(Pod)과 하나 이상의 `ibmcloud-object-storage-driver` 팟(Pod)이 나타나면 설치가 완료된 것입니다. `ibmcloud-object-storage-driver` 팟(Pod)의 수는 클러스터의 작업자 노드 수와 동일합니다. 플러그인이 제대로 작동하려면 모든 팟(Pod)이 `Running` 상태여야 합니다. 팟(Pod)이 실패하는 경우에는 `kubectl describe pod -n kube-system <pod_name>`을 실행하여 실패의 근본 원인을 찾으십시오. 
+
+10. 스토리지 클래스가 성공적으로 작성되었는지 확인하십시오.
+   ```
+   kubectl get storageclass | grep s3
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
+   ```
+   {: screen}
+
+11. 사용자가 {{site.data.keyword.cos_full_notm}} 버킷에 액세스할 모든 클러스터에 대해 단계를 반복하십시오. 
+
+### IBM Cloud Object Storage 플러그인 업데이트
+{: #update_cos_plugin}
+
+기존 {{site.data.keyword.cos_full_notm}} 플러그인을 후속 버전으로 업그레이드할 수 있습니다.
+{: shortdesc}
+
+1. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+   ```
+   helm repo update
+   ```
+   {: pre}
+
+2. 최신 Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오. 
+   ```
+   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   ```
+
+3. Helm 차트의 설치 이름을 찾으십시오. 
+   ```
+   helm ls | grep ibmcloud-object-storage-plugin
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+   ```
+   {: screen}
+
+4. {{site.data.keyword.cos_full_notm}} 플러그인을 최신 버전으로 업그레이드하십시오. 
+   ```   
+   helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   ```
+   {: pre}
+
+5. `ibmcloud-object-storage-plugin`이 성공적으로 업그레이드되었는지 확인하십시오.   
+   ```
+   kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
+   ```
+   {: pre}
+
+   CLI 출력에 `deployment "ibmcloud-object-storage-plugin" successfully rolled out`이 나타나면 플러그인의 업그레이드가 완료된 것입니다. 
+
+6. `ibmcloud-object-storage-driver`가 성공적으로 업그레이드되었는지 확인하십시오. 
+   ```
+   kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
+   ```
+   {: pre}
+
+   CLI 출력에 `daemon set "ibmcloud-object-storage-driver" successfully rolled out`이 나타나면 플러그인의 업그레이드가 완료된 것입니다. 
+
+7. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 `Running` 상태인지 확인하십시오. 
+   ```
+   kubectl get pods -n kube-system -o wide | grep object-storage
+   ```
+   {: pre}
+
+
+### IBM Cloud Object Storage 플러그인 제거
+{: #remove_cos_plugin}
+
+클러스터에서 {{site.data.keyword.cos_full_notm}}의 프로비저닝과 사용을 원하지 않으면 Helm 차트를 설치 제거할 수 있습니다. 
+
+**참고:** 이 플러그인을 제거해도 기존 PVC, PV 또는 데이터는 제거되지 않습니다. 플러그인을 제거할 때는 모든 관련 팟(Pod) 및 디먼 세트만 클러스터에서 제거됩니다. {{site.data.keyword.cos_full_notm}} API를 직접 사용하도록 앱을 구성하지 않는 한, 플러그인 제거 이후에 기존 PVC 및 PV를 사용하거나 클러스터의 새 {{site.data.keyword.cos_full_notm}}를 프로비저닝할 수 없습니다. 
+
+시작하기 전에:
+
+- [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- {{site.data.keyword.cos_full_notm}}를 사용하는 클러스터에 PVC 또는 PV가 없는지 확인하십시오. 특정 PVC를 마운트하는 모든 팟(Pod)을 나열하려면 다음을 실행하십시오. `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`
+
+플러그인을 제거하려면 다음을 수행하십시오.
+
+1. Helm 차트의 설치 이름을 찾으십시오. 
+   ```
+   helm ls | grep ibmcloud-object-storage-plugin
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+   ```
+   {: screen}
+
+2. Helm 차트를 제거하여 {{site.data.keyword.cos_full_notm}} 플러그인을 삭제하십시오. 
+   ```
+   helm delete --purge <helm_chart_name>
+   ```
+   {: pre}
+
+3. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 제거되었는지 확인하십시오. 
+   ```
+   kubectl get pod -n kube-system | grep object-storage
+   ```
+   {: pre}
+
+      CLI 출력에 팟(Pod)이 표시되지 않으면 팟(Pod) 제거가 성공한 것입니다.
+
+4. 스토리지 클래스가 제거되었는지 확인하십시오. 
+   ```
+   kubectl get storageclasses | grep s3
+   ```
+   {: pre}
+
+      CLI 출력에 스토리지 클래스가 표시되지 않으면 스토리지 클래스 제거가 성공한 것입니다.
+
+5. `ibmc` Helm 플러그인을 제거하십시오. 
+   ```
+   rm -rf ~/.helm/plugins/helm-ibmc
+   ```
+   {: pre}
+
+6. `ibmc` 플러그인이 제거되었는지 확인하십시오. 
+   ```
+   helm plugin list
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   NAME	VERSION	DESCRIPTION
+   ```
+   {: screen}
+
+   `ibmc` 플러그인이 CLI 출력에 나열되지 않으면 `ibmc` 플러그인이 성공적으로 제거된 것입니다. 
+
+
+## 오브젝트 스토리지 구성 결정
+{: #configure_cos}
+
+{{site.data.keyword.containerlong_notm}}는 특정 구성의 버킷을 작성하는 데 사용할 수 있는 사전 정의된 스토리지 클래스를 제공합니다. 
+
+1. {{site.data.keyword.containerlong_notm}}에서 사용 가능한 스토리지 클래스를 나열하십시오.
+   ```
+   kubectl get storageclasses | grep s3
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
+   ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
+   ```
+   {: screen}
+
+2. 데이터 액세스 요구사항에 맞는 스토리지 클래스를 선택하십시오. 스토리지 클래스는 스토리지 용량, 읽기/쓰기 오퍼레이션 및 버킷에 대한 아웃바운드 대역폭에 대한 [가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 판별합니다. 사용자에게 적합한 옵션은 서비스 인스턴스에 대한 데이터 읽기/쓰기의 빈도를 기반으로 합니다. 
+   - **표준**: 이 옵션은 자주 액세스되는 핫(hot) 데이터에 사용됩니다. 일반적인 유스 케이스는 웹 또는 모바일 앱입니다. 
+   - **Vault**: 이 옵션은 자주 액세스되지 않는 워크로드 또는 쿨(cool) 데이터에 사용됩니다(예: 1개월에 1회 이하). 일반적인 유스 케이스는 아카이브, 단기 데이터 보유, 디지털 자산 보존, 테이프 교체 및 재해 복구입니다. 
+   - **Cold**: 이 옵션은 거의 액세스되지 않는 콜드(cold) 데이터(매 90일마다 또는 이보다 덜 액세스됨) 또는 비활성 데이터에 사용됩니다. 일반적인 유스 케이스는 아카이브, 장기 백업, 준수용으로 보관되는 히스토리 데이터 또는 거의 액세스되지 않는 워크로드와 앱입니다. 
+   - **Flex**: 이 옵션은 특정 사용 패턴을 따르지 않는 또는 너무 커서 사용 패턴의 결정이나 예측이 어려운 워크로드와 데이터에 사용됩니다. 
+**팁:** 일반 스토리지 계층과 비교하여 Flex 스토리지 클래스의 작동 방법에 대해 알아보려면 이 [블로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/)를 확인하십시오.    
+
+3. 버킷에 저장된 데이터의 복원성 레벨을 결정하십시오. 
+   - **교차 지역(Cross-region)**: 이 옵션을 사용하면 데이터가 고가용성을 위해 지리적 위치 내의 3개 지역에 걸쳐 저장됩니다. 지역 간에 분산된 워크로드가 있으면 최인접 지역 엔드포인트로 요청이 라우트됩니다. 지리적 위치에 대한 API 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibmc` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷에 대해 `US GEO` API 엔드포인트를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오.   
+   - **지역적(Regional)**: 이 옵션을 사용하면 데이터가 한 지역 내의 다중 구역 간에 복제됩니다. 동일한 지역에 있는 워크로드가 있는 경우에는 교차 지역 설정보다 낮은 대기 시간과 더 높은 성능이 나타납니다. 지역적 엔드포인트는 클러스터가 있는 위치를 기반으로 이전에 설치된 `ibm` Helm 플러그인에 의해 자동으로 설정됩니다. 예를 들어, 클러스터가 `US South`에 있으면 버킷의 지역적 엔드포인트로서 `US South`를 사용하도록 스토리지 클래스가 구성됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. 
+
+4. 스토리지 클래스의 세부 {{site.data.keyword.cos_full_notm}} 버킷 구성을 검토하십시오. 
+   ```
+   kubectl describe storageclass <storageclass_name>
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   Name:                  ibmc-s3fs-standard-cross-region
+   IsDefaultClass:        No
+   Annotations:           <none>
+   Provisioner:           ibm.io/ibmc-s3fs
+   Parameters:            ibm.io/chunk-size-mb=16,ibm.io/curl-debug=false,ibm.io/debug-level=warn,ibm.io/iam-endpoint=https://iam.bluemix.net,ibm.io/kernel-cache=true,ibm.io/multireq-max=20,ibm.io/object-store-endpoint=https://s3-api.dal-us-geo.objectstorage.service.networklayer.com,ibm.io/object-store-storage-class=us-standard,ibm.io/parallel-count=2,ibm.io/s3fs-fuse-retry-count=5,ibm.io/stat-cache-size=100000,ibm.io/tls-cipher-suite=AESGCM
+   AllowVolumeExpansion:  <unset>
+   MountOptions:          <none>
+   ReclaimPolicy:         Delete
+   VolumeBindingMode:     Immediate
+   Events:                <none>
+   ```
+   {: screen}
+
+   <table>
+   <caption>스토리지 클래스 세부사항 이해</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>ibm.io/chunk-size-mb</code></td>
+   <td>{{site.data.keyword.cos_full_notm}}에서 읽거나 이에 쓴 데이터 청크의 크기(MB)입니다. 자체 이름에 <code>perf</code>가 있는 스토리지 클래스는 52MB로 설정됩니다. 자체 이름에 <code>perf</code>가 없는 스토리지 클래스는 16MB 청크를 사용합니다. 예를 들어, 1GB인 파일을 읽으려는 경우 플러그인은 16 또는 52MB 청크의 배수로 이 파일을 읽습니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/curl-debug</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스로 전송된 요청의 로깅을 사용합니다. 이를 사용하면 로그가 `syslog`로 전송되며 사용자가 [로그를 외부 로깅 서버로 전달](cs_health.html#logging)할 수 있습니다. 기본적으로 모든 스토리지 클래스는 이 로깅 기능을 사용하지 않도록 <strong>false</strong>로 설정됩니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/debug-level</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 플러그인에서 설정한 로깅 레벨입니다. 모든 스토리지 클래스는 <strong>WARN</strong> 로깅 레벨로 설정되어 있습니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/iam-endpoint</code></td>
+   <td>IAM(Identity and Access Management)에 대한 API 엔드포인트입니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/kernel-cache</code></td>
+   <td>볼륨 마운트 지점에 대해 커널 버퍼 캐시를 사용하거나 사용하지 않습니다. 이를 사용하면 데이터에 대한 빠른 읽기 액세스를 보장할 수 있도록 {{site.data.keyword.cos_full_notm}}에서 읽은 데이터가 커널 캐시에 저장됩니다. 이를 사용하지 않으면 데이터가 캐시되지 않으며 항상 {{site.data.keyword.cos_full_notm}}에서 데이터를 읽습니다. 커널 캐시는 <code>standard</code> 및 <code>flex</code> 스토리지 클래스에 사용되며, <code>cold</code> 및 <code>vault</code> 스토리지 클래스에는 사용되지 않습니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/multireq-max</code></td>
+   <td>단일 디렉토리의 파일을 나열하기 위해 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 전송될 수 있는 병렬 요청의 최대 수입니다. 모든 스토리지 클래스는 최대 20개의 병렬 요청으로 설정됩니다.  </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/object-store-endpoint</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷에 액세스하는 데 사용할 API 엔드포인트입니다. 엔드포인트는 클러스터의 지역에 따라 자동으로 설정됩니다. </br></br><strong>참고:</strong> 클러스터가 있는 지역이 아닌 다른 지역에 있는 기존 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷에 대한 API 엔드포인트를 사용해야 합니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/object-store-storage-class</code></td>
+   <td>스토리지 클래스의 이름입니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/parallel-count</code></td>
+   <td>단일 읽기 또는 쓰기 오퍼레이션에 대해 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 전송될 수 있는 병렬 요청의 최대 수입니다. 자체 이름에 <code>perf</code>가 있는 스토리지 클래스는 최대 20개의 병렬 요청으로 설정됩니다.  <code>perf</code>가 없는 스토리지 클래스는 기본적으로 2개의 병렬 요청으로 설정됩니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/s3fs-fuse-retry-count</code></td>
+   <td>오퍼레이션이 실패로 간주되기 전에 읽기 및 쓰기 오퍼레이션의 최대 재시도 횟수입니다. 모든 스토리지 클래스는 최대 5번의 재시도로 설정됩니다.  </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/stat-cache-size</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 메타데이터 캐시에 보관되는 최대 레코드 수입니다. 모든 레코드는 0.5KB까지 가능합니다. 모든 스토리지 클래스는 기본적으로 최대 레코드 수를 100000으로 설정합니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/tls-cipher-suite</code></td>
+   <td>{{site.data.keyword.cos_full_notm}}에 대한 연결이 HTTPS 엔드포인트를 통해 설정될 때 사용되어야 하는 TLS 암호 스위트입니다. 암호 스위트의 값은 [OpenSSL 형식 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html)을 따라야 합니다. 모든 스토리지 클래스는 기본적으로 <strong>AESGCM</strong> 암호 스위트를 사용합니다.  </td>
+   </tr>
+   </tbody>
+   </table>
+
+   각 스토리지 클래스에 대한 자세한 정보는 [스토리지 클래스 참조](#storageclass_reference)를 참조하십시오. 사전 설정된 값을 변경하려면 자체 [사용자 정의된 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하십시오.
+   {: tip}
+
+5. 버킷의 이름을 결정하십시오. 버킷 이름은 {{site.data.keyword.cos_full_notm}}에서 고유해야 합니다. {{site.data.keyword.cos_full_notm}} 플러그인에 의한 버킷 이름 자동 작성을 선택할 수도 있습니다. 버킷의 데이터를 구성하기 위해 서브디렉토리를 작성할 수 있습니다. 
+
+   **참고:** 이전에 선택한 스토리지 클래스는 전체 버킷의 가격을 결정합니다. 서브디렉토리에 대해 상이한 스토리지 클래스를 정의할 수 없습니다. 서로 다른 액세스 요구사항의 데이터를 저장하려면 다중 PVC를 사용한 다중 버킷 작성을 고려하십시오. 
+
+6. 클러스터 또는 지속적 볼륨 클레임(PVC)이 삭제된 후에 데이터와 버킷을 보관하고자 하는지를 선택하십시오. PVC를 삭제하면 PV가 항상 삭제됩니다. PVC를 삭제할 때 데이터와 버킷도 자동으로 삭제할지 여부를 선택할 수 있습니다. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스는 데이터에 대해 선택한 보관 정책과는 무관하며, 이는 PVC 삭제 시에 제거되지 않습니다. 
+
+이제 원하는 구성을 결정했으므로 {{site.data.keyword.cos_full_notm}}를 프로비저닝하기 위한 [PVC 작성](#add_cos) 준비가 되었습니다. 
+
+## 앱에 오브젝트 스토리지 추가
+{: #add_cos}
+
+클러스터에 대해 {{site.data.keyword.cos_full_notm}}를 프로비저닝하기 위한 지속적 볼륨 클레임(PVC)을 작성하십시오.
+{: shortdesc}
+
+PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.cos_full_notm}}를 프로비저닝할 수 있습니다. 
+- [동적 프로비저닝](cs_storage_basics.html#dynamic_provisioning): PVC를 작성하면 일치하는 지속적 볼륨(PV) 및 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷이 자동으로 작성됩니다. 
+- [정적 프로비저닝](cs_storage_basics.html#static_provisioning): PVC의 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 기존 버킷을 참조할 수 있습니다. PVC를 작성하면 일치하는 PV만 자동으로 작성되며 {{site.data.keyword.cos_full_notm}}의 기존 버킷에 링크됩니다. 
+
+시작하기 전에:
+- [{{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성하고 준비](#create_cos_service)하십시오. 
+- [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 저장할 시크릿을 작성](#create_cos_secret)하십시오. 
+- [{{site.data.keyword.cos_full_notm}}의 구성을 결정](#configure_cos)하십시오. 
+
+{{site.data.keyword.cos_full_notm}}를 클러스터에 추가하려면 다음을 수행하십시오. 
+
+1. 지속적 볼륨 클레임(PVC)을 정의하기 위한 구성 파일을 작성하십시오. 
+   ```
+   kind: PersistentVolumeClaim
+   apiVersion: v1
+   metadata:
+     name: <pvc_name>
+     namespace: <namespace>
+     annotations:
+       volume.beta.kubernetes.io/storage-class: "<storage_class>"
+       ibm.io/auto-create-bucket: "<true_or_false>"
+       ibm.io/auto-delete-bucket: "<true_or_false>"
+       ibm.io/bucket: "<bucket_name>"
+       ibm.io/object-path: "<bucket_subdirectory>"
+       ibm.io/secret-name: "<secret_name>"
+   spec:
+     accessModes:
+       - ReadWriteOnce
+     resources:
+       requests:
+         storage: 8Gi # Enter a fictitious value
+   ```
+   {: codeblock}
+
+   <table>
+   <caption>YAML 파일 컴포넌트 이해</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>metadata/name</code></td>
+   <td>PVC의 이름을 입력하십시오.</td>
+   </tr>
+   <tr>
+   <td><code>metadata/namespace</code></td>
+   <td>PVC가 작성될 네임스페이스를 입력하십시오. {{site.data.keyword.cos_full_notm}} 서비스 인증 정보의 Kubernetes 시크릿이 작성되었으며 팟(Pod)이 실행될 동일 네임스페이스에서 PVC를 작성해야 합니다. </td>
+   </tr>
+   <tr>
+   <td><code>volume.beta.kubernetes.io/storage-class</code></td>
+   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><code>ibm.io/auto-create-bucket</code>이 <strong>true</strong>로 설정된 경우: 새 버킷에 사용할 스토리지 클래스를 입력하십시오. </li><li><code>ibm.io/auto-create-bucket</code>이 <strong>false</strong>로 설정된 경우: 기존 버킷의 작성에 사용된 스토리지 클래스를 입력하십시오. </br></br>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 버킷을 수동으로 작성한 경우 또는 사용하던 스토리지 클래스가 기억나지 않는 경우에는 {{site.data.keyword.Bluemix}} 대시보드에서 서비스 인스턴스를 찾고 기존 버킷의 <strong>클래스</strong> 및 <strong>위치</strong>를 검토하십시오. 그리고 적합한 [스토리지 클래스](#storageclass_reference)를 사용하십시오. </br></br><strong>참고:</strong> 스토리지 클래스에서 설정된 {{site.data.keyword.cos_full_notm}} API 엔드포인트는 클러스터가 있는 지역을 기반으로 합니다. 클러스터가 있는 지역이 아닌 다른 지역에 있는 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷에 대한 적합한 API 엔드포인트를 사용해야 합니다. </li></ul>  </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/auto-create-bucket</code></td>
+   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><strong>true</strong>: PVC를 작성하면 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷 및 PV가 자동으로 작성됩니다. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 새 버킷을 작성하려면 이 옵션을 선택하십시오. </li><li><strong>false</strong>: 기존 버킷의 데이터에 액세스하려면 이 옵션을 선택하십시오. PVC를 작성하면 PV가 자동으로 작성되며 <code>ibm.io/bucket</code>에서 지정된 버킷에 링크됩니다. </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/auto-delete-bucket</code></td>
+   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><strong>true</strong>: PVC를 삭제할 때 데이터, 버킷 및 PV가 자동으로 제거됩니다. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스는 그대로 유지되며 삭제되지 않습니다. 이 옵션을 <strong>true</strong>로 설정하도록 선택한 경우에는 <code>tmp-s3fs-xxxx</code> 형식의 이름으로 버킷이 자동 작성되도록 <code>ibm.io/auto-create-bucket: true</code> 및 <code>ibm.io/bucket: ""</code>을 설정해야 합니다. </li><li><strong>false</strong>: PVC를 삭제하면 PV는 자동으로 삭제되지만 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 데이터와 버킷은 그대로 유지됩니다. 데이터에 액세스하려면 기존 버킷의 이름으로 새 PVC를 작성해야 합니다. </li></ul>
+   <tr>
+   <td><code>ibm.io/bucket</code></td>
+   <td>다음 선택사항 중 하나를 선택하십시오. <ul><li><code>ibm.io/auto-create-bucket</code>이 <strong>true</strong>로 설정된 경우: {{site.data.keyword.cos_full_notm}}에서 작성한 버킷의 이름을 입력하십시오. 또한 <code>ibm.io/auto-delete-bucket</code>이 <strong>true</strong>로 설정된 경우, 사용자는 버킷에 <code>tmp-s3fs-xxxx</code> 형식의 이름을 자동으로 지정할 수 있도록 이 필드를 공백 상태로 두어야 합니다. 이름은 {{site.data.keyword.cos_full_notm}}에서 고유해야 합니다. </li><li>
+<code>ibm.io/auto-create-bucket</code>이 <strong>false</strong>로 설정된 경우: 클러스터에서 액세스할 기존 버킷의 이름을 입력하십시오. </li></ul> </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/object-path</code></td>
+   <td>선택사항: 마운트할 버킷의 기존 서브디렉토리 이름을 입력하십시오. 전체 버킷이 아닌 서브디렉토리만 마운트하려면 이 옵션을 사용하십시오. 서브디렉토리를 마운트하려면 <code>ibm.io/auto-create-bucket: "false"</code>를 설정하고 <code>ibm.io/bucket</code>의 버킷 이름을 제공해야 합니다. </li></ul> </td>
+   </tr>
+   <tr>
+   <td><code>ibm.io/secret-name</code></td>
+   <td>이전에 작성한 {{site.data.keyword.cos_full_notm}} 인증 정보를 보유하는 시크릿의 이름을 입력하십시오. </td>
+   </tr>
+   <tr>
+   <td><code>resources/requests/storage</code></td>
+   <td>{{site.data.keyword.cos_full_notm}} 버킷의 가상 크기(기가바이트)입니다. Kubernetes에서는 이 크기가 필요하지만, {{site.data.keyword.cos_full_notm}}에서는 무시됩니다. 원하는 크기를 입력할 수 있습니다. {{site.data.keyword.cos_full_notm}}에서 사용되는 실제 영역은 다를 수 있으며, [가격 테이블 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 기반으로 비용이 청구됩니다. </td>
+   </tr>
+   </tbody>
+   </table>
+
+2. PVC를 작성하십시오.
+   ```
+   kubectl apply -f filepath/pvc.yaml
+   ```
+   {: pre}
+
+3. PVC가 작성되고 PV에 바인딩되는지 확인하십시오.
+   ```
+kubectl get pvc
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   NAME                  STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                     AGE
+   s3fs-test-pvc         Bound     pvc-b38b30f9-1234-11e8-ad2b-t910456jbe12   8Gi        RWO            ibmc-s3fs-standard-cross-region  1h
+   ```
+   {: screen}
+
+4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 GUI 또는 API를 직접 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 파일을 추가한 경우에는 앱이 필요 시에 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한](cs_troubleshoot_storage.html#cos_nonroot_access)이 지정되어 있는지 확인하십시오. 
+
+4.  {: #app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
+
+    ```
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    metadata:
+      name: <deployment_name>
+      labels:
+        app: <deployment_label>
+    spec:
+      selector:
+        matchLabels:
+          app: <app_name>
+      template:
+        metadata:
+          labels:
+            app: <app_name>
+        spec:
+          containers:
+          - image: <image_name>
+            name: <container_name>
+            securityContext:
+              runAsUser: <non_root_user>
+            volumeMounts:
+            - name: <volume_name>
+              mountPath: /<file_path>
+          volumes:
+          - name: <volume_name>
+            persistentVolumeClaim:
+              claimName: <pvc_name>
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>YAML 파일 컴포넌트 이해</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+        <tr>
+    <td><code>metadata/labels/app</code></td>
+    <td>배치의 레이블입니다.</td>
+      </tr>
+      <tr>
+        <td><code>spec/selector/matchLabels/app</code> <br/> <code>spec/template/metadata/labels/app</code></td>
+        <td>앱의 레이블입니다.</td>
+      </tr>
+    <tr>
+    <td><code>template/metadata/labels/app</code></td>
+    <td>배치의 레이블입니다.</td>
+      </tr>
+    <tr>
+    <td><code>spec/containers/image</code></td>
+    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.registryshort_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `ibmcloud cr image-list`를 실행하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/name</code></td>
+    <td>클러스터에 배치하려는 컨테이너의 이름입니다.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/securityContext/runAsUser</code></td>
+    <td>선택사항: 비-루트 사용자로 앱을 실행하려면 동시에 배치 YAML에 `fsGroup`을 설정하지 않고 비-루트 사용자를 정의하여 팟(Pod)에 대한 [보안 컨텍스트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)를 지정하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며 성능에 영향을 줍니다. 보유한 파일의 수에 따라서는 권한 업데이트 때문에 팟(Pod)이 구동되어 <code>Running</code> 상태가 되지 못할 수 있습니다. </td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td>팟(Pod)에 마운트할 볼륨의 이름입니다.</td>
+    </tr>
+    <tr>
+    <td><code>volumes/name</code></td>
+    <td>팟(Pod)에 마운트할 볼륨의 이름입니다. 일반적으로 이 이름은 <code>volumeMounts/name</code>과 동일합니다.</td>
+    </tr>
+    <tr>
+    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td>사용하려는 PV를 바인드하는 PVC의 이름입니다. </td>
+    </tr>
+    </tbody></table>
+
+5.  배치를 작성하십시오.
+     ```
+     kubectl apply -f <local_yaml_path>
+     ```
+     {: pre}
+
+6.  PV가 성공적으로 마운트되었는지 확인하십시오.
+
+     ```
+     kubectl describe deployment <deployment_name>
+     ```
+     {: pre}
+
+     마운트 지점은 **Volume Mounts** 필드에 있고 볼륨은 **Volumes** 필드에 있습니다.
+
+     ```
+      Volume Mounts:
+           /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+           /volumemount from myvol (rw)
+     ...
+     Volumes:
+       myvol:
+         Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+         ClaimName:	mypvc
+         ReadOnly:	false
+     ```
+     {: screen}
+
+7. {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 데이터를 쓸 수 있는지 확인하십시오. 
+   1. PV를 마운트하는 팟(Pod)에 로그인하십시오.
+      ```
+      kubectl exec <pod_name> -it bash
+      ```
+      {: pre}
+
+   2. 앱 배치에서 정의한 볼륨 마운트 경로로 이동하십시오. 
+   3. 텍스트 파일을 작성하십시오.
+      ```
+      echo "This is a test" > test.txt
+      ```
+      {: pre}
+
+   4. {{site.data.keyword.Bluemix}} 대시보드에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스로 이동하십시오. 
+   5. 메뉴에서 **버킷**을 선택하십시오. 
+   6. 버킷을 열고 작성된 `test.txt`가 나타나는지 확인하십시오. 
+
+
+## 데이터 백업 및 복원
+{: #backup_restore}
+
+{{site.data.keyword.cos_full_notm}}가 데이터에 대한 높은 내구성을 제공하도록 설정되어 있으므로, 이는 데이터가 유실되지 않도록 방지합니다. [{{site.data.keyword.cos_full_notm}} 서비스 이용 약관 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7857-03)에서 SLA를 찾을 수 있습니다.
+{: shortdesc}
+
+**중요** {{site.data.keyword.cos_full_notm}}에서는 데이터에 대한 버전 히스토리를 제공하지 않습니다. 데이터의 이전 버전을 유지보수하고 액세스해야 하는 경우에는 데이터 히스토리를 관리하거나 대체 백업 솔루션을 구현하도록 앱을 설정해야 합니다. 예를 들어, 사용자가 온프레미스 데이터베이스에 {{site.data.keyword.cos_full_notm}} 데이터를 저장하거나 테이프를 사용하여 데이터를 아카이브하고자 할 수 있습니다. 
+
+## 스토리지 클래스 참조
+{: #storageclass_reference}
+
+### 표준
+{: #standard}
+
+<table>
+<caption>오브젝트 스토리지 클래스: 표준</caption>
+<thead>
+<th>특성</th>
+<th>설정</th>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td><code>ibmc-s3fs-standard-cross-region</code></br><code>ibmc-s3fs-standard-perf-cross-region</code></br><code>ibmc-s3fs-standard-regional</code></br><code>ibmc-s3fs-standard-perf-regional</code></td>
+</tr>
+<tr>
+<td>기본 복원성 엔드포인트</td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>청크 크기</td>
+<td>`perf`가 없는 스토리지 클래스: 16MB</br>`perf`가 있는 스토리지 클래스: 52MB</td>
+</tr>
+<tr>
+<td>커널 캐시</td>
+<td>사용</td>
+</tr>
+<tr>
+<td>비용 청구</td>
+<td>매월</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>[가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</td>
+</tr>
+</tbody>
+</table>
+
+### Vault
+{: #Vault}
+
+<table>
+<caption>오브젝트 스토리지 클래스: vault</caption>
+<thead>
+<th>특성</th>
+<th>설정</th>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td><code>ibmc-s3fs-vault-cross-region</code></br><code>ibmc-s3fs-vault-regional</code></td>
+</tr>
+<tr>
+<td>기본 복원성 엔드포인트</td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>청크 크기</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>커널 캐시</td>
+<td>사용 안함</td>
+</tr>
+<tr>
+<td>비용 청구</td>
+<td>매월</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>[가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</td>
+</tr>
+</tbody>
+</table>
+
+### Cold
+{: #cold}
+
+<table>
+<caption>오브젝트 스토리지 클래스: cold</caption>
+<thead>
+<th>특성</th>
+<th>설정</th>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td><code>ibmc-s3fs-flex-cross-region</code></br><code>ibmc-s3fs-flex-perf-cross-region</code></br><code>ibmc-s3fs-flex-regional</code></br><code>ibmc-s3fs-flex-perf-regional</code></td>
+</tr>
+<tr>
+<td>기본 복원성 엔드포인트</td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>청크 크기</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>커널 캐시</td>
+<td>사용 안함</td>
+</tr>
+<tr>
+<td>비용 청구</td>
+<td>매월</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>[가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</td>
+</tr>
+</tbody>
+</table>
+
+### Flex
+{: #flex}
+
+<table>
+<caption>오브젝트 스토리지 클래스: flex</caption>
+<thead>
+<th>특성</th>
+<th>설정</th>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td><code>ibmc-s3fs-cold-cross-region</code></br><code>ibmc-s3fs-flex-perf-cross-region</code></br><code>ibmc-s3fs-cold-regional</code></br><code>ibmc-s3fs-flex-perf-regional</code></td>
+</tr>
+<tr>
+<td>기본 복원성 엔드포인트</td>
+<td>복원성 엔드포인트는 클러스터가 있는 위치에 따라 자동으로 설정됩니다. 자세한 정보는 [지역 및 엔드포인트](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>청크 크기</td>
+<td>`perf`가 없는 스토리지 클래스: 16MB</br>`perf`가 있는 스토리지 클래스: 52MB</td>
+</tr>
+<tr>
+<td>커널 캐시</td>
+<td>사용</td>
+</tr>
+<tr>
+<td>비용 청구</td>
+<td>매월</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>[가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</td>
+</tr>
+</tbody>
+</table>

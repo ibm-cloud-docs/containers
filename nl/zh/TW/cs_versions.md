@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -28,17 +28,18 @@ lastupdated: "2018-08-06"
 
 **支援的 Kubernetes 版本**:
 
-- 最新：1.10.5
-- 預設：1.10.5
-- 其他：1.9.9、1.8.15
+- 最新：1.11.2
+- 預設：1.10.7
+- 其他：1.9.10
+- 已淘汰：1.8.15，自 2018 年 9 月 22 日起不受支援
 
 </br>
 
 **已淘汰的版本**：當叢集在已淘汰的 Kubernetes 版本上執行時，在版本變成不受支援之前，您有 30 天的時間可以檢閱並更新至受支援的 Kubernetes 版本。在淘汰期間，仍完全支援您的叢集。不過，您無法建立新的叢集來使用已淘汰的版本。
 
-**不受支援的版本**：如果您在不受支援的 Kubernetes 版本上執行叢集，請針對更新[檢閱潛在影響](#version_types)，然後立即[更新叢集](cs_cluster_update.html#update)，以繼續接收重要的安全更新和支援。 
-*  **注意**：如果您等到叢集在支援的版本後有三個以上的次要版本，則必須強制更新，這可能導致非預期的結果或失敗。 
-*  不受支援的叢集無法新增或重新載入現有的工作者節點。 
+**不受支援的版本**：如果您在不受支援的 Kubernetes 版本上執行叢集，請針對更新[檢閱潛在影響](#version_types)，然後立即[更新叢集](cs_cluster_update.html#update)，以繼續接收重要的安全更新和支援。
+*  **注意**：如果您等到叢集在支援的版本後有三個以上的次要版本，則必須強制更新，這可能導致非預期的結果或失敗。
+*  不受支援的叢集無法新增或重新載入現有的工作者節點。
 *  將叢集更新為支援的版本之後，您的叢集可以繼續正常作業並繼續接收支援。
 
 </br>
@@ -53,7 +54,7 @@ kubectl version  --short | grep -i server
 輸出範例：
 
 ```
-Server Version: v1.10.5+IKS
+Server Version: v1.10.7+IKS
 ```
 {: screen}
 
@@ -81,9 +82,9 @@ Server Version: v1.10.5+IKS
 <br/>
 
 此資訊彙總當您將叢集從舊版更新為新版本時，可能會對已部署的應用程式造成影響的更新。
+-  1.11 版[移轉動作](#cs_v111)。
 -  1.10 版[移轉動作](#cs_v110)。
 -  1.9 版[移轉動作](#cs_v19)。
--  1.8 版[移轉動作](#cs_v18)。
 -  已淘汰或不受支援版本的[保存檔](#k8s_version_archive)。
 
 <br/>
@@ -92,10 +93,119 @@ Server Version: v1.10.5+IKS
 * [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
 * [IBM 版本變更日誌](cs_versions_changelog.html)。
 
+</br>
+
+## 1.11 版
+{: #cs_v111}
+
+<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.11 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.11 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+
+請檢閱從舊版 Kubernetes 更新至 1.11 版時，您可能需要進行的變更。
+
+### 在主節點之前更新
+{: #111_before}
+
+<table summary="1.11 版的 Kubernetes 更新">
+<caption>在將主節點更新至 Kubernetes 1.11 之前要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`containerd` 新的 Kubernetes 容器運行環境</td>
+<td><strong>重要事項</strong>：`containerd` 會將 Docker 取代為 Kubernetes 的新容器運行環境。如需您必須採取的動作，請參閱[移轉至 `containerd` 作為容器運行環境](#containerd)。</td>
+</tr>
+<tr>
+<td>Kubernetes 容器磁區裝載傳播</td>
+<td>容器 `VolumeMount` 的 [`mountPropagation` 欄位 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) 預設值已從 `HostToContainer` 變更為 `None`。此變更會還原 Kubernetes 1.9 版及更早版本中存在的行為。如果您的 Pod 規格依賴 `HostToContainer` 作為預設值，請予以更新。</td>
+</tr>
+<tr>
+<td>Kubernetes API 伺服器 JSON 解除序列化程式</td>
+<td>Kubernetes API 伺服器 JSON 解除序列化程式現在區分大小寫。此變更會還原 Kubernetes 1.7 版及更早版本中存在的行為。如果您 JSON 資源定義使用的大小寫不正確，請予以更新。<br><br>**附註**：只會影響直接 Kubernetes API 伺服器要求。`kubectl` CLI 已在 Kubernetes 1.7 版及更新版本中繼續強制執行區分大小寫金鑰，因此，如果您使用 `kubectl` 嚴格管理資源，則不受影響。</td>
+</tr>
+</tbody>
+</table>
+
+### 在主節點之後更新
+{: #111_after}
+
+<table summary="1.11 版的 Kubernetes 更新">
+<caption>在將主節點更新至 Kubernetes 1.11 之後要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>叢集記載配置</td>
+<td>即使停用 `logging-autoupdate`，還是會使用 1.11 版自動更新 `fluentd` 叢集附加程式。<br><br>
+容器日誌目錄已從 `/var/lib/docker/` 變更為 `/var/log/pods/`。如果您使用自己的記載解決方案來監視前一個目錄，則請相應地更新。</td>
+</tr>
+<tr>
+<td>重新整理 Kubernetes 配置</td>
+<td>已更新叢集 Kubernetes API 伺服器的 OpenID Connect 配置，以支援 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 存取群組。因此，您必須在主節點 Kubernetes 1.11 版更新之後，執行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 來重新整理叢集的 Kubernetes 配置。<br><br>如果您未重新整理配置，則叢集動作會失敗，錯誤訊息如下：`You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>`kubectl` CLI</td>
+<td>Kubernetes 1.11 版的 `kubectl` CLI 需要 `apps/v1` API。因此，1.11 版 `kubectl` CLI 不適用於執行 Kubernetes 1.8 版或更早版本的叢集。請使用與叢集之 Kubernetes API 伺服器版本相符的 `kubectl` CLI 版本。</td>
+</tr>
+<tr>
+<td>`kubectl auth can-i`</td>
+<td>現在，使用者未獲授權時，`kubectl auth can-i` 指令會失敗，並出現 `exit code 1`。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>現在，依預設，使用選取準則（例如標籤）刪除資源時，`kubectl delete` 指令會忽略 `not found` 錯誤。如果您的 Script 依賴先前的行為，請予以更新。</td>
+</tr>
+<tr>
+<td>Kubernetes `sysctls` 特性</td>
+<td>現在已忽略 `security.alpha.kubernetes.io/sysctls` 註釋。相反地，Kubernetes 已將欄位新增至 `PodSecurityPolicy` 及 `Pod` 物件，以指定及控制 `sysctls`。如需相關資訊，請參閱[在 Kubernetes 中使用 sysctls ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/)。<br><br>在您更新叢集主節點及工作者節點之後，請更新 `PodSecurityPolicy` 及 `Pod` 物件，以使用新的 `sysctls` 欄位。</td>
+</tr>
+</tbody>
+</table>
+
+### 移轉至 `containerd` 作為容器運行環境
+{: #containerd}
+
+對於執行 Kubernetes 1.11 版或更新版本的叢集，`containerd` 會將 Docker 取代為 Kubernetes 的新容器運行環境來加強效能。如果您的 Pod 依賴 Docker 作為 Kubernetes 容器運行環境，則您必須更新它們以處理 `containerd` 作為容器運行環境。如需相關資訊，請參閱 [Kubernetes containerd 公告 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/)。
+{: shortdesc}
+
+**如何知道我的應用程式依賴 `docker` 而非 `containerd`？**<br>
+您可能依賴 Docker 作為容器運行環境的情況範例：
+*  如果您使用特許容器直接存取 Docker 引擎或 API，則請更新 Pod 以支援 `containerd` 作為運行環境。
+*  您在叢集中安裝的部分協力廠商附加程式（例如記載及監視工具）可能依賴 Docker 引擎。請檢查您的提供者，確定工具與 `containerd` 相容。
+
+<br>
+
+**除了依賴運行環境之外，我是否還需要採取其他移轉動作？**<br>
+
+**manifest 工具**：如果您的多平台映像檔是使用 Docker 18.06 版之前的實驗性 `docker manifest` [工具 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) 所建置，則無法使用 `containerd` 從 DockerHub 取回映像檔。
+
+當您檢查 Pod 事件時，可能會看到如下錯誤：
+```
+failed size validation
+```
+{: screen}
+
+若要搭配使用利用 manifest 工具所建置的映像檔與 `containerd`，請從下列選項中選擇。
+
+*  使用 [manifest 工具 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/estesp/manifest-tool) 來重建映像檔。
+*  在您更新為 Docker 18.06 版或更新版本之後，請使用 `docker-manifest` 工具來重建映像檔。
+
+<br>
+
+**不受影響的項目為何？我需要變更容器的部署方式嗎？**<br>
+一般而言，容器部署處理程序不會變更。您仍然可以使用 Dockerfile 來定義 Docker 映像檔，並為您的應用程式建置 Docker 容器。如果您使用 `docker` 指令來建置映像檔，並將其推送至登錄，則可以繼續使用 `docker`，或改為使用 `ibmcloud cr` 指令。
+
 ## 1.10 版
 {: #cs_v110}
 
-<p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.10 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.10 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+<p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.10 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.10 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.10 版時，您可能需要進行的變更。
 
@@ -279,10 +389,13 @@ Server Version: v1.10.5+IKS
 
 
 
-## 1.8 版
+## 保存
+{: #k8s_version_archive}
+
+### 1.8 版（已淘汰，自 2018 年 9 月 22 日起不受支援）
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.8 版時，您可能需要進行的變更。
 
@@ -351,20 +464,16 @@ Server Version: v1.10.5+IKS
 <br />
 
 
-
-## 保存
-{: #k8s_version_archive}
-
 ### 1.7 版（不受支援）
 {: #cs_v17}
 
-自 2018 年 6 月 21 日起，不支援執行 [Kubernetes 1.7 版](cs_versions_changelog.html#changelog_archive)的 {{site.data.keyword.containershort_notm}} 叢集。1.7 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.8](#cs_v18))。
+自 2018 年 6 月 21 日起，不支援執行 [Kubernetes 1.7 版](cs_versions_changelog.html#changelog_archive)的 {{site.data.keyword.containerlong_notm}} 叢集。1.7 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.8](#cs_v18))。
 
 針對每一個 Kubernetes 版本更新[檢閱潛在影響](cs_versions.html#cs_versions)，然後立即[將您的叢集更新](cs_cluster_update.html#update)為至少 1.8。
 
 ### 1.5 版（不受支援）
 {: #cs_v1-5}
 
-自 2018 年 4 月 4 日起，不支援執行 [Kubernetes 1.5 版](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)的 {{site.data.keyword.containershort_notm}} 叢集。1.5 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.8](#cs_v18))。
+自 2018 年 4 月 4 日起，不支援執行 [Kubernetes 1.5 版](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)的 {{site.data.keyword.containerlong_notm}} 叢集。1.5 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.8](#cs_v18))。
 
 針對每一個 Kubernetes 版本更新[檢閱潛在影響](cs_versions.html#cs_versions)，然後立即[將您的叢集更新](cs_cluster_update.html#update)為至少 1.8。

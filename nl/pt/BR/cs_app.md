@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -54,7 +54,7 @@ Revise as potenciais configurações de app a seguir que são ordenadas com grau
 2.  Uma implementação com n+2 pods que são gerenciados por um conjunto de réplicas e difundidos em múltiplos nós (antiafinidade) em um cluster de zona única.
 3.  Uma implementação com n+2 pods que são gerenciados por um conjunto de réplicas e difundidos entre múltiplos nós (antiafinidade) em um cluster de múltiplas zonas entre zonas.
 
-Também é possível [conectar múltiplos clusters em regiões diferentes com um balanceador de carga global](cs_clusters.html#multiple_clusters) para aumentar a alta disponibilidade.
+Também é possível [conectar múltiplos clusters em regiões diferentes com um balanceador de carga global](cs_clusters_planning.html#multiple_clusters) para aumentar a alta disponibilidade.
 
 ### Aumentando a disponibilidade de seu app
 {: #increase_availability}
@@ -85,13 +85,13 @@ proteção contra duas falhas simultâneas, inclua duas réplicas extras. Essa c
     
     </dd>
 <dt>Distribuir pods em múltiplas zonas ou regiões</dt>
-  <dd><p>Para proteger seu app de uma falha de zona, é possível criar múltiplos clusters em zonas separadas ou incluir zonas em um conjunto de trabalhadores em um cluster de múltiplas zonas. Os clusters de múltiplas zonas estão disponíveis somente em [determinadas áreas metropolitanas](cs_regions.html#zones), como Dallas. Se você cria múltiplos clusters em zonas separadas, deve-se [configurar um balanceador de carga global](cs_clusters.html#multiple_clusters).</p>
-  <p>Ao usar um conjunto de réplicas e especificar a antiafinidade do pod, o Kubernetes difunde seus pods de app entre os nós. Se os seus nós estiverem em múltiplas zonas, os pods serão difundidos pelas zonas, aumentando a disponibilidade do seu app. Se você desejar limitar seus apps para serem executados somente em uma zona, será possível configurar a afinidade de pod ou criar e rotular um conjunto de trabalhadores em uma zona. Para obter mais informações, consulte [Alta disponibilidade para clusters de múltiplas zonas](cs_clusters.html#ha_clusters).</p>
+  <dd><p>Para proteger seu app de uma falha de zona, é possível criar múltiplos clusters em zonas separadas ou incluir zonas em um conjunto de trabalhadores em um cluster de múltiplas zonas. Os clusters de múltiplas zonas estão disponíveis somente em [determinadas áreas metropolitanas](cs_regions.html#zones), como Dallas. Se você cria múltiplos clusters em zonas separadas, deve-se [configurar um balanceador de carga global](cs_clusters_planning.html#multiple_clusters).</p>
+  <p>Ao usar um conjunto de réplicas e especificar a antiafinidade do pod, o Kubernetes difunde seus pods de app entre os nós. Se os seus nós estiverem em múltiplas zonas, os pods serão difundidos pelas zonas, aumentando a disponibilidade do seu app. Se você desejar limitar seus apps para serem executados somente em uma zona, será possível configurar a afinidade de pod ou criar e rotular um conjunto de trabalhadores em uma zona. Para obter mais informações, consulte [Alta disponibilidade para clusters de múltiplas zonas](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>Em uma implementação de cluster de múltiplas zonas, meus pods de app são distribuídos uniformemente entre os nós?</strong></p>
   <p>Os pods são distribuídos uniformemente entre as zonas, mas nem sempre entre os nós. Por exemplo, se você tiver um cluster com 1 nó em cada uma das 3 zonas e implementar um conjunto de réplicas de 6 pods, cada nó obterá dois pods. No entanto, se você tiver um cluster com 2 nós em cada uma das 3 zonas e implementar um conjunto de réplicas de 6 pods, cada zona terá 2 pods planejados e poderá ou não planejar 1 pod por nó. Para obter mais controle sobre o planejamento, é possível [configurar a afinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong> Se uma zona ficar inativa, como os pods serão reprogramados para os nós restantes nas outras zonas?</strong></br>Isso depende da política de planejamento que você usou na implementação. Se você incluiu a [afinidade de pod específica do nó ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), seus pods não serão reprogramados. Se você não tiver feito isso, os pods serão criados em nós do trabalhador disponíveis em outras zonas, mas eles podem não ser balanceados. Por exemplo, os 2 pods podem ser difundidos entre os 2 nós disponíveis ou ambos podem ser planejados para 1 nó com capacidade disponível. Da mesma forma, quando a zona indisponível retornar, os pods não serão excluídos e rebalanceados automaticamente entre os nós. Se desejar que os pods sejam rebalanceados entre as zonas depois que a zona estiver de volta, considere usar o [Desplanejador do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Dica</strong>: em clusters de múltiplas zonas, tente manter a capacidade do seu nó do trabalhador em 50% por zona, para que você tenha capacidade suficiente para proteger o seu cluster com relação a uma falha zonal.</p>
-  <p><strong>E se eu desejar difundir meu app entre regiões?</strong></br>Para proteger seu app de uma falha de região, crie um segundo cluster em outra região, [configure um balanceador de carga global](cs_clusters.html#multiple_clusters) para conectar seus clusters e use um YAML de implementação para implementar um conjunto de réplicas duplicado com [antiafinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para seu app.</p>
+  <p><strong>E se eu desejar difundir meu app entre regiões?</strong></br>Para proteger seu app de uma falha de região, crie um segundo cluster em outra região, [configure um balanceador de carga global](cs_clusters_planning.html#multiple_clusters) para conectar seus clusters e use um YAML de implementação para implementar um conjunto de réplicas duplicado com [antiafinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para seu app.</p>
   <p><strong>E se meus apps precisarem de armazenamento persistente?</strong></p>
   <p>Use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -426,7 +426,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
     ```
     {:pre}
 
-    Essas etapas usam um nome do conjunto de trabalhadores como um exemplo. Para implementar os pods de app em determinados nós do trabalhador com base em outro fator, obtenha esse valor no lugar. Por exemplo, para implementar pods de app somente em nós do trabalhador em uma VLAN específica, obterá o ID de VLAN executando `ibmcloud ks vlans<zone>`.
+    Essas etapas usam um nome do conjunto de trabalhadores como um exemplo. Para implementar os pods de app em determinados nós do trabalhador com base em outro fator, obtenha esse valor no lugar. Por exemplo, para implementar pods de app somente em nós do trabalhador em uma VLAN específica, obterá o ID de VLAN executando `ibmcloud ks vlans <zone>`.
     {: tip}
 
 2. [Inclua uma regra de afinidade ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) para o nome do conjunto de trabalhos para a implementação de app.
@@ -508,7 +508,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 ## Implementando um app em uma máquina de GPU
 {: #gpu_app}
 
-Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters.html#shared_dedicated_node), é possível planejar cargas de trabalho matematicamente intensivas no nó do trabalhador. Por exemplo, você pode executar um app 3D que usa a plataforma Compute Unified Device Architecture (CUDA) para compartilhar a carga de processamento da GPU e CPU para aumentar o desempenho.
+Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters_planning.html#shared_dedicated_node), é possível planejar cargas de trabalho matematicamente intensivas no nó do trabalhador. Por exemplo, você pode executar um app 3D que usa a plataforma Compute Unified Device Architecture (CUDA) para compartilhar a carga de processamento da GPU e CPU para aumentar o desempenho.
 {:shortdesc}
 
 Nas etapas a seguir, você aprenderá como implementar cargas de trabalho que requerem a GPU. Também é possível [implementar apps](#app_ui) que não precisam processar suas cargas de trabalho na GPU e CPU. Depois, você pode achar útil experimentar cargas de trabalho matematicamente intensivas, como a estrutura de aprendizado de máquina [TensorFlow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.tensorflow.org/) com [esta demo do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).

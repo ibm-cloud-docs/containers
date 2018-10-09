@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -85,7 +85,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 - 落实在 [Kubernetes 更改](cs_versions.html)中标记为_在主节点后更新_的任何更改。
 - 如果要应用补丁更新，请查看 [Kubernetes 版本更改日志](cs_versions_changelog.html#changelog)。</br>
 
-**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent)，那么将删除数据。
+**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
 
 
 **更新期间应用程序会发生什么情况？**</br>
@@ -258,10 +258,10 @@ kubectl get nodes
 
 开始之前：
 - [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
-- 如果是将数据存储在工作程序节点上，而没有[存储在工作程序节点外部](cs_storage_planning.html#persistent)，那么将删除数据。
+- 如果是将数据存储在工作程序节点上，而没有[存储在工作程序节点外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
 
 
-**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent)，那么将删除数据。
+**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
 
 1. 列出可用的工作程序节点，并记录其专用 IP 地址。
    - **对于工作程序池中的工作程序节点**：
@@ -283,7 +283,8 @@ kubectl get nodes
         ```
         {: pre}
 
-   - **不推荐:对于独立工作程序节点**:
+   - **不推荐：对于独立工作程序节点**：
+        
      1. 列出可用的工作程序节点。
         ```
         ibmcloud ks workers <cluster_name_or_ID>
@@ -304,7 +305,7 @@ kubectl get nodes
 
 3. 创建具有新机器类型的工作程序节点。
    - **对于工作程序池中的工作程序节点**：
-     1. 创建具有要替换的工作程序节点数的工作程序池。
+     1. 创建工作程序池，其中的工作程序节点数与要替换的节点数相同。
         ```
         ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
         ```
@@ -367,14 +368,33 @@ kubectl get nodes
 ## 更新集群附加组件
 {: #addons}
 
-{{site.data.keyword.containershort_notm}} 集群随附在供应集群时自动安装的**附加组件**，例如用于日志记录的 Fluentd。这些附加组件必须独立于主节点和工作程序节点进行更新。
+{{site.data.keyword.containerlong_notm}} 集群随附在供应集群时自动安装的**附加组件**，例如用于日志记录的 Fluentd。这些附加组件必须独立于主节点和工作程序节点进行更新。
 {: shortdesc}
 
 **必须单独更新集群中的哪些缺省附加组件？**
 * [用于日志记录的 Fluentd](#logging)
 
+**是否存在不需要更新且无法更改的附加组件？**</br>
+是的，集群部署有以下无法更改的受管附加组件以及关联资源。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+您可以使用 `addonmanager.kubernetes.io/mode: Reconcile` 标签来查看这些资源。例如：
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **可以安装其他非缺省附加组件吗？**</br>
-可以。{{site.data.keyword.containershort_notm}} 提供了其他附加组件，您可以选择这些附加组件以向集群添加功能。例如，您可能希望[使用 Helm 图表](cs_integrations.html#helm)来安装[块存储器插件](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必须通过遵循指示信息来更新 Helm 图表，从而分别更新每个附加组件。
+可以。{{site.data.keyword.containerlong_notm}} 提供了其他附加组件，您可以选择这些附加组件以向集群添加功能。例如，您可能希望[使用 Helm 图表](cs_integrations.html#helm)来安装[块存储器插件](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必须通过遵循指示信息来更新 Helm 图表，从而分别更新每个附加组件。
 
 ### 用于日志记录的 Fluentd
 {: #logging}
@@ -432,7 +452,7 @@ kubectl get nodes
    ```
    {: pre}
 
-3. 列出可用专区，并确定要供应工作程序池中工作程序节点的位置。要查看供应独立工作程序节点的专区，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。如果要跨多个专区分布工作程序节点，请选择[支持多专区的专区](cs_regions.html#zones)。
+3. 列出可用专区，并确定要供应工作程序池中工作程序节点的位置。要查看供应独立工作程序节点的专区，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`. 如果要跨多个专区分布工作程序节点，请选择[支持多专区的专区](cs_regions.html#zones)。
    ```
    ibmcloud ks zones
    ```
@@ -453,13 +473,13 @@ kubectl get nodes
       ```
       {: pre}
 
-   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。要支持不同专区中的工作程序之间通过专用网络进行通信，必须启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **将多个专区添加到多个工作程序池**：使用不同专区重复 `ibmcloud ks zone-add` 命令，并指定要在该专区中供应的工作程序池。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](cs_clusters.html#multi_zone)。
+   3. **将多个专区添加到多个工作程序池**：使用不同专区重复 `ibmcloud ks zone-add` 命令，并指定要在该专区中供应的工作程序池。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](cs_clusters_planning.html#multizone)。
 
 6. 等待工作程序节点在每个专区中进行部署。
    ```
@@ -481,8 +501,8 @@ kubectl get nodes
       {: pre}
    3. 验证是否已对工作程序节点禁用了 pod 安排。
       ```
-      kubectl get nodes
-      ```
+kubectl get nodes
+```
       {: pre}
    如果阶段状态显示为 **SchedulingDisabled**，说明已禁止工作程序节点用于 pod 安排。
 
@@ -501,5 +521,6 @@ kubectl get nodes
    6. 重复这些步骤，直到除去所有独立工作程序节点。
 
 
-**接下来要做什么？**</br>
-现在，您已将集群更新为使用工作程序池，因此可以通过向集群添加更多专区来提高可用性。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](cs_clusters.html#ha_clusters)。将单专区集群更改为多专区集群时，Ingress 域会从 `<cluster_name>.<region>.containers.mybluemix.net` 更改为 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。现有 Ingress 域仍然有效，可用于向应用程序发送请求。
+**接下来要做什么？**
+</br>
+现在，您已将集群更新为使用工作程序池，因此可以通过向集群添加更多专区来提高可用性。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](cs_clusters_planning.html#ha_clusters)。将单专区集群更改为多专区集群时，Ingress 域会从 `<cluster_name>.<region>.containers.mybluemix.net` 更改为 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。现有 Ingress 域仍然有效，可用于向应用程序发送请求。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,6 +20,102 @@ lastupdated: "2018-08-06"
 
 Personnalisez la consignation dans les journaux et configurez la surveillance pour vous aider à identifier et résoudre les erreurs et à améliorer les performances de la configuration de votre service Ingress.
 {: shortdesc}
+
+## Affichage des journaux Ingress
+{: #ingress_logs}
+
+Les journaux sont automatiquement collectés pour vos équilibreurs de charge d'application (ALB) Ingress. Pour afficher les journaux de l'ALB, vous avez le choix entre deux options :
+* [Créer une configuration de consignation pour le service Ingress](cs_health.html#configuring) dans votre cluster.
+* Consulter les journaux à partir de l'interface de ligne de commande (CLI).
+    1. Obtenez l'ID d'un pod pour un équilibreur de charge ALB.
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+
+    2. Ouvrez les journaux correspondant à ce pod d'ALB. Vérifiez que les journaux sont conformes au nouveau format.
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+</br>Par défaut, le contenu des journaux est au format JSON et affiche des zones courantes qui décrivent la session de connexion entre un client et votre application. Voici un exemple de journal avec les zones par défaut :
+
+```
+{"time_date": "2018-08-21T17:33:19+00:00", "client": "108.162.248.42", "host": "albhealth.multizone.us-south.containers.appdomain.cloud", "scheme": "http", "request_method": "GET", "request_uri": "/", "request_id": "c2bcce90cf2a3853694da9f52f5b72e6", "status": 200, "upstream_addr": "192.168.1.1:80", "upstream_status": 200, "request_time": 0.005, "upstream_response_time": 0.005, "upstream_connect_time": 0.000, "upstream_header_time": 0.005}
+```
+{: screen}
+
+<table>
+<caption>Description des zones au format de journal Ingress par défaut</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des zones au format de journal Ingress par défaut</th>
+</thead>
+<tbody>
+<tr>
+<td><code>"time_date": "$time_iso8601"</code></td>
+<td>Heure locale au format ISO 8601 standard au moment de l'écriture dans le journal.</td>
+</tr>
+<tr>
+<td><code>"client": "$remote_addr"</code></td>
+<td>Adresse IP du package de demande que le client a envoyé à votre application. Cette adresse IP change en fonction des situations suivantes :<ul><li>Lorsqu'une demande client vers votre application est envoyée à votre cluster, elle est acheminée à un pod pour le service d'équilibreur de charge qui expose l'équilibreur de charge d'application (ALB). S'il n'existe aucun pod d'application sur le même noeud worker que le pod de service d'équilibreur de charge, l'équilibreur de charge transmet la demande à un pod d'application sur un autre noeud worker. L'adresse IP source du package de demande est remplacée par l'adresse IP publique du noeud worker sur lequel s'exécute le pod d'application.</li><li>Si la [conservation de l'adresse IP source est activée](cs_ingress.html#preserve_source_ip), l'adresse IP d'origine de la demande du client à votre application est enregistrée à la place.</li></ul></td>
+</tr>
+<tr>
+<td><code>"host": "$http_host"</code></td>
+<td>Hôte ou sous-domaine, via lequel vos applications sont accessibles. Cet hôte est configuré dans les fichiers de la ressource Ingress pour vos équilibreurs de charge d'application (ALB).</td>
+</tr>
+<tr>
+<td><code>"scheme": "$scheme"</code></td>
+<td>Type de demande : <code>HTTP</code> ou <code>HTTPS</code>.</td>
+</tr>
+<tr>
+<td><code>"request_method": "$request_method"</code></td>
+<td>Méthode d'appel de la demande à l'application de back end, par exemple <code>GET</code> ou <code>POST</code>.</td>
+</tr>
+<tr>
+<td><code>"request_uri": "$uri"</code></td>
+<td>URI de la demande d'origine vers votre chemin d'application. Les ALB traitent les chemins sur lesquels les applications sont à l'écoute en tant que préfixes. Lorsqu'un ALB reçoit une demande d'un client vers une application, il recherche un chemin (en tant que préfixe) dans la ressource Ingress, qui correspond au chemin dans l'URI.</td>
+</tr>
+<tr>
+<td><code>"request_id": "$request_id"</code></td>
+<td>Identificateur unique de la demande généré à partir de 16 octets aléatoires.</td>
+</tr>
+<tr>
+<td><code>"status": $status</code></td>
+<td>Code indiquant le statut de la session de connexion.<ul>
+<li><code>200</code> : la session s'est terminée correctement</li>
+<li><code>400</code> : les données du client n'ont pas pu être analysées</li>
+<li><code>403</code> : accès interdit, par exemple lorsque l'accès est limité à certaines adresses IP client</li>
+<li><code>500</code> : erreur de serveur interne</li>
+<li><code>502</code> : passerelle incorrecte, par exemple si un serveur en amont est inaccessible ou qu'il est impossible de le sélectionner</li>
+<li><code>503</code> : service non disponible, par exemple lorsque l'accès est limité à un certain nombre de connexions</li>
+</ul></td>
+</tr>
+<tr>
+<td><code>"upstream_addr": "$upstream_addr"</code></td>
+<td>Adresse IP et port ou chemin vers le socket du domaine UNIX du serveur en amont. Si plusieurs serveurs sont contactés lors du traitement de la demande, leurs adresses sont séparées par des virgules : <code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock"</code>. Si la demande est redirigée en interne d'un groupe de serveurs à un autre, les adresses de serveur des différents groupes sont séparées par des points-virgules : <code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock : 192.168.10.1:80, 192.168.10.2:80"</code>. Si l'équilibreur de charge ALB ne parvient pas à sélectionner un serveur, le nom du groupe de serveurs est consigné à la place.</td>
+</tr>
+<tr>
+<td><code>"upstream_status": $upstream_status</code></td>
+<td>Code indiquant le statut de la réponse obtenue du serveur en amont pour l'application de back end, par exemple codes de réponse HTTP standard. Les codes de statut de plusieurs réponses sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. Si l'ALB ne parvient pas à sélectionner un serveur, le code de statut 502 (Passerelle incorrecte) est consigné.</td>
+</tr>
+<tr>
+<td><code>"request_time": $request_time</code></td>
+<td>Temps de traitement de la demande, mesuré en secondes avec une résolution en millisecondes. Il démarre lorsque l'ALB lit les premiers octets de la demande du client et prend fin lorsque l'ALB envoie les derniers octets de la réponse au client. L'écriture dans le journal s'effectue immédiatement dès que le temps de traitement de la demande s'arrête.</td>
+</tr>
+<tr>
+<td><code>"upstream_response_time": $upstream_response_time</code></td>
+<td>Temps nécessaire à l'ALB pour recevoir la réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs réponses sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+</tr>
+<tr>
+<td><code>"upstream_connect_time": $upstream_connect_time</code></td>
+<td>Temps nécessaire à l'ALB pour établir une connexion avec le serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Si TLS/SSL est activé dans la configuration de la ressource Ingress, ce temps comprend la durée d'établissement de la liaison. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+</tr>
+<tr>
+<td><code>"upstream_header_time": $upstream_header_time</code></td>
+<td>Temps nécessaire à l'ALB pour recevoir l'en-tête de réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+</tr>
+</tbody></table>
 
 ## Personnalisation du contenu et du format des journaux Ingress
 {: #ingress_log_format}

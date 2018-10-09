@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -29,15 +29,258 @@ Per un riepilogo delle azioni di migrazione, vedi [Versioni Kubernetes](cs_versi
 {: tip}
 
 Per informazioni sulle modifiche dalla versione precedente, vedi i seguenti changelog.
+-  [Changelog](#111_changelog) versione 1.11.
 -  [Changelog](#110_changelog) Versione 1.10.
 -  [Changelog](#19_changelog) Versione 1.9.
--  [Changelog](#18_changelog) Versione 1.8.
 -  [Archivio](#changelog_archive) dei changelog per le versioni obsolete o non supportate.
+
+</br>
+
+## Changelog Versione 1.11
+{: #111_changelog}
+
+Esamina le seguenti modifiche.
+
+### Changelog per 1.11.2_1516, rilasciato il 04 settembre 2018
+{: #1112_1516}
+
+<table summary="Modifiche apportate a partire dalla versione 1.11.2_1514">
+<caption>Modifiche a partire dalla versione 1.11.2_1514</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.1.3</td>
+<td>v3.2.1</td>
+<td>Vedi le [note sulla release Calico![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.2/releases/#v321). </td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.2</td>
+<td>1.1.3</td>
+<td>Vedi le [note sulla release `containerd` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/containerd/containerd/releases/tag/v1.1.3).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.2-60</td>
+<td>v1.11.2-71</td>
+<td>È stata modificata la configurazione del provider cloud per gestire meglio gli aggiornamenti per i servizi del programma di bilanciamento del carico con `externalTrafficPolicy` impostata su `local`.</td>
+</tr>
+<tr>
+<td>Configurazione del plug-in di archiviazione file IBM</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>È stata rimossa la versione NFS predefinita dalle opzioni di montaggio nelle classi di archiviazione file fornite da IBM. Il sistema operativo dell'host ora negozia la versione NFS con il server NFS dell'infrastruttura IBM Cloud (SoftLayer). Per impostare manualmente una specifica versione NFS, o modificare la versione NFS del tuo PV che era stato negoziato dal sistema operativo dell'host, vedi [Modifica della versione NFS predefinita](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack di nodo di lavoro 1.11.2_1514, rilasciato il 23 agosto 2018
+{: #1112_1514}
+
+<table summary="Modifiche apportate a partire dalla versione 1.11.2_1513">
+<caption>Modifiche a partire dalla versione 1.11.2_1513</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>`systemd` è stato aggiornato per correggere la perdita `cgroup`.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Le immagini del nodo di lavoro sono state aggiornate con l'aggiornamento kernel per [CVE-2018-3620,CVE-2018-3646 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.11.2_1513, rilasciato il 14 agosto 2018
+{: #1112_1513}
+
+<table summary="Modifiche apportate a partire dalla versione 1.10.5_1518">
+<caption>Modifiche a partire dalla versione 1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>N/D</td>
+<td>1.1.2</td>
+<td>`containerd` sostituisce Docker come nuovo runtime del contenitore per Kubernetes. Vedi le [note sulla release `containerd` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/containerd/containerd/releases/tag/v1.1.2).Per le azioni che devi eseguire, vedi [Migrazione a `containerd` come runtime del contenitore](cs_versions.html#containerd).</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>`containerd` sostituisce Docker come nuovo runtime del contenitore per Kubernetes, per migliorare le prestazioni. Per le azioni che devi eseguire, vedi [Migrazione a `containerd` come runtime del contenitore](cs_versions.html#containerd).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.2.14</td>
+<td>v3.2.18</td>
+<td>Vedi le [note sulla release etcd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/etcd/releases/v3.2.18).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.5-118</td>
+<td>v1.11.2-60</td>
+<td>Aggiornato per supportare la release Kubernetes 1.11. Inoltre, i pod del programma di bilanciamento del carico ora usano la nuova classe di priorità del pod `ibm-app-cluster-critical`.</td>
+</tr>
+<tr>
+<td>Plug-in di archiviazione file IBM</td>
+<td>334</td>
+<td>338</td>
+<td>La versione di `incubator` è stata aggiornata alla 1.8. Il provisioning dell'archiviazione file viene eseguito alla specifica zona da te selezionata. Non puoi aggiornare delle etichette di un'istanza PV (statica) esistente a meno che tu non stia utilizzando un cluster multizona e debba [aggiungere le etichette di regione e zona](cs_storage_basics.html#multizone).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.11.2</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2).</td>
+</tr>
+<tr>
+<td>Configurazione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione OpenID Connect è stata aggiornata per il server API Kubernetes del cluster per supportare i gruppi di accesso {{site.data.keyword.Bluemix_notm}} IAM (Identity Access and Management). È stata aggiunta `Priority` all'opzione `--enable-admission-plugins` per il server API Kubernetes del cluster ed è stato configurato il cluster per supportare la priorità dei pod.Per ulteriori informazioni, consulta:
+<ul><li>[Gruppi di accesso IAM](cs_users.html#rbac)</li>
+<li>[Configurazione della priorità dei pod](cs_pod_priority.html#pod_priority)</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes Heapster</td>
+<td>v1.5.2</td>
+<td>v.1.5.4</td>
+<td>Sono stati aumentati i limiti di risorsa per il contenitore `heapster-nanny`. Vedi le [note sulla release di Kubernetes Heapster![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4).</td>
+</tr>
+<tr>
+<td>Configurazione della registrazione</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La directory dei log del contenitore è ora `/var/log/pods/` invece della precedente `/var/lib/docker/containers/`.</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## Changelog Versione 1.10
 {: #110_changelog}
 
 Esamina le seguenti modifiche.
+
+### Changelog per 1.10.7_1520, rilasciato il 04 settembre 2018
+{: #1107_1520}
+
+<table summary="Modifiche apportate a partire dalla versione 1.10.5_1519">
+<caption>Modifiche a partire dalla versione 1.10.5_1519</caption>
+<tr>
+<th>Calico</th>
+<th>v3.1.3</th>
+<th>v3.2.1</th>
+<td>Consulta le [note sulla release Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.2/releases/#v321).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.5-118</td>
+<td>v1.10.7-146</td>
+<td>Aggiornato per supportare la release Kubernetes 1.10.7. È stata inoltre modificata la configurazione del provider cloud per gestire meglio gli aggiornamenti per i servizi del programma di bilanciamento del carico con `externalTrafficPolicy` impostata su `local`.</td>
+</tr>
+<tr>
+<td>Plug-in di archiviazione file IBM</td>
+<td>334</td>
+<td>338</td>
+<td>La versione di incubator è stata aggiornata alla 1.8. Il provisioning dell'archiviazione file viene eseguito alla specifica zona da te selezionata. Non puoi aggiornare delle etichette di un'istanza PV (statica) esistente a meno che tu non stia utilizzando un cluster multizona e debba aggiungere le etichette di regione e zona.<br><br> È stata rimossa la versione NFS predefinita dalle opzioni di montaggio nelle classi di archiviazione file fornite da IBM. Il sistema operativo dell'host ora negozia la versione NFS con il server NFS dell'infrastruttura IBM Cloud (SoftLayer). Per impostare manualmente una specifica versione NFS, o modificare la versione NFS del tuo PV che era stato negoziato dal sistema operativo dell'host, vedi [Modifica della versione NFS predefinita](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.5</td>
+<td>v1.10.7</td>
+<td>Vedi le [note sulla release Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7).</td>
+</tr>
+<tr>
+<td>Configurazione di Kubernetes Heapster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Sono stati aumentati i limiti di risorsa per il contenitore `heapster-nanny`. </td>
+</tr>
+</table>
+
+### Changelog per il fix pack di nodo di lavoro 1.10.5_1519, rilasciato il 23 agosto 2018
+{: #1105_1519}
+
+<table summary="Modifiche apportate a partire dalla versione 1.10.5_1518">
+<caption>Modifiche a partire dalla versione 1.10.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>`systemd` è stato aggiornato per correggere la perdita `cgroup`.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Le immagini del nodo di lavoro sono state aggiornate con l'aggiornamento kernel per [CVE-2018-3620,CVE-2018-3646 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Changelog per il fix pack di nodo di lavoro 1.10.5_1518, rilasciato il 13 agosto 2018
+{: #1105_1518}
+
+<table summary="Modifiche apportate a partire dalla versione 1.10.5_1517">
+<caption>Modifiche a partire dalla versione 1.10.5_1517</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog per 1.10.5_1517, rilasciato il 27 luglio 2018
 {: #1105_1517}
@@ -175,7 +418,7 @@ Esamina le seguenti modifiche.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.10.1-52</td>
 <td>v1.10.3-85</td>
-<td>Aggiornato per supportare la release Kubernetes 1.10.3. </td>
+<td>Aggiornato per supportare la release Kubernetes 1.10.3.</td>
 </tr>
 <tr>
 <td>CLient OpenVPN</td>
@@ -294,15 +537,102 @@ Esamina le seguenti modifiche.
 <td>Supporto GPU</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Il supporto per i [carichi di lavoro del contenitore GPU (graphics processing unit)](cs_app.html#gpu_app) è ora disponibile per la pianificazione e l'esecuzione. Per un elenco di tipi di macchina GPU disponibili, consulta [Hardware per i nodi di lavoro](cs_clusters.html#shared_dedicated_node). Per ulteriori informazioni, consulta la documentazione Kubernetes in [Schedule GPUs ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Il supporto per i [carichi di lavoro del contenitore GPU (graphics processing unit)](cs_app.html#gpu_app) è ora disponibile per la pianificazione e l'esecuzione. Per un elenco di tipi di macchina GPU disponibili, consulta [Hardware per i nodi di lavoro](cs_clusters_planning.html#shared_dedicated_node). Per ulteriori informazioni, consulta la documentazione Kubernetes in [Schedule GPUs ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## Changelog Versione 1.9
 {: #19_changelog}
 
 Esamina le seguenti modifiche.
+
+### Changelog per 1.9.10_1523, rilasciato il 04 settembre 2018
+{: #1910_1523}
+
+<table summary="Modifiche apportate a partire dalla versione 1.9.9_1522">
+<caption>Modifiche a partire dalla versione 1.9.9_1522</caption>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.9-167</td>
+<td>v1.9.10-192</td>
+<td>Aggiornato per supportare la release Kubernetes 1.9.10. È stata inoltre modificata la configurazione del provider cloud per gestire meglio gli aggiornamenti per i servizi del programma di bilanciamento del carico con `externalTrafficPolicy` impostata su `local`.</td>
+</tr>
+<tr>
+<td>Plug-in di archiviazione file IBM</td>
+<td>334</td>
+<td>338</td>
+<td>La versione di incubator è stata aggiornata alla 1.8. Il provisioning dell'archiviazione file viene eseguito alla specifica zona da te selezionata. Non puoi aggiornare delle etichette di un'istanza PV (statica) esistente a meno che tu non stia utilizzando un cluster multizona e debba aggiungere le etichette di regione e zona.<br><br>È stata rimossa la versione NFS predefinita dalle opzioni di montaggio nelle classi di archiviazione file fornite da IBM. Il sistema operativo dell'host ora negozia la versione NFS con il server NFS dell'infrastruttura IBM Cloud (SoftLayer). Per impostare manualmente una specifica versione NFS, o modificare la versione NFS del tuo PV che era stato negoziato dal sistema operativo dell'host, vedi [Modifica della versione NFS predefinita](cs_storage_file.html#nfs_version_class).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.9</td>
+<td>v1.9.10</td>
+<td>Vedi le [note sulla release Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10).</td>
+</tr>
+<tr>
+<td>Configurazione di Kubernetes Heapster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Sono stati aumentati i limiti di risorsa per il contenitore `heapster-nanny`. </td>
+</tr>
+</table>
+
+### Changelog per il fix pack di nodo di lavoro 1.9.9_1522, rilasciato il 23 agosto 2018
+{: #199_1522}
+
+<table summary="Modifiche apportate a partire dalla versione 1.9.9_1521">
+<caption>Modifiche a partire dalla versione 1.9.9_1521</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>`systemd` è stato aggiornato per correggere la perdita `cgroup`.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Le immagini del nodo di lavoro sono state aggiornate con l'aggiornamento kernel per [CVE-2018-3620,CVE-2018-3646 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+
+### Changelog per il fix pack di nodo di lavoro 1.9.9_1521, rilasciato il 13 agosto 2018
+{: #199_1521}
+
+<table summary="Modifiche apportate a partire dalla versione 1.9.9_1520">
+<caption>Modifiche a partire dalla versione 1.9.9_1520</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog per 1.9.9_1520, rilasciato il 27 luglio 2018
 {: #199_1520}
@@ -428,7 +758,7 @@ Esamina le seguenti modifiche.
 <td>IBM Cloud Provider</td>
 <td>v1.9.7-102</td>
 <td>v1.9.8-141</td>
-<td>Aggiornato per supportare la release Kubernetes 1.9.8. </td>
+<td>Aggiornato per supportare la release Kubernetes 1.9.8.</td>
 </tr>
 <tr>
 <td>CLient OpenVPN</td>
@@ -527,7 +857,7 @@ Esamina le seguenti modifiche.
 <td>Kubernetes</td>
 <td>v1.9.3</td>
 <td>v1.9.7	</td>
-<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi che il sistema poteva ripristinare automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
+<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi ma il sistema poteva ripristinare i dati automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
 </tr>
 <tr>
 <td>Configurazione Kubernetes</td>
@@ -550,10 +880,68 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-## Changelog Versione 1.8
+<br />
+
+
+## Archivio
+{: #changelog_archive}
+
+### Changelog versione 1.8 (obsoleto, 22 settembre 2018)
 {: #18_changelog}
 
 Esamina le seguenti modifiche.
+
+### Changelog per il fix pack di nodo di lavoro 1.8.15_1520, rilasciato il 23 agosto 2018
+{: #1815_1520}
+
+<table summary="Modifiche apportate a partire dalla versione 1.8.15_1519">
+<caption>Modifiche a partire dalla versione 1.8.15_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>`systemd` è stato aggiornato per correggere la perdita `cgroup`.</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>Le immagini del nodo di lavoro sono state aggiornate con l'aggiornamento kernel per [CVE-2018-3620,CVE-2018-3646 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://usn.ubuntu.com/3741-1/).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack di nodo di lavoro 1.8.15_1519, rilasciato il 13 agosto 2018
+{: #1815_1519}
+
+<table summary="Modifiche apportate a partire dalla versione 1.8.15_1518">
+<caption>Modifiche a partire dalla versione 1.8.15_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog per 1.8.15_1518, rilasciato il 27 luglio 2018
 {: #1815_1518}
@@ -679,7 +1067,7 @@ Esamina le seguenti modifiche.
 <td>IBM Cloud Provider</td>
 <td>v1.8.11-126</td>
 <td>v1.8.13-176</td>
-<td>Aggiornato per supportare la release Kubernetes 1.8.13. </td>
+<td>Aggiornato per supportare la release Kubernetes 1.8.13.</td>
 </tr>
 <tr>
 <td>CLient OpenVPN</td>
@@ -780,7 +1168,7 @@ Esamina le seguenti modifiche.
 <td>Kubernetes</td>
 <td>v1.8.8</td>
 <td>v1.8.11	</td>
-<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi che il sistema poteva ripristinare automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
+<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi ma il sistema poteva ripristinare i dati automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
 </tr>
 <tr>
 <td>Sospensione immagine contenitore</td>
@@ -803,8 +1191,8 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-## Archivio
-{: #changelog_archive}
+<br />
+
 
 ### Changelog versione 1.7 (non supportato)
 {: #17_changelog}
@@ -898,7 +1286,7 @@ Esamina le seguenti modifiche.
 <td>Kubernetes</td>
 <td>v1.7.4</td>
 <td>v1.7.16	</td>
-<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi che il sistema poteva ripristinare automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
+<td><p>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Questa release risolve le vulnerabilità [CVE-2017-1002101 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) e [CVE-2017-1002102 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Nota</strong>: ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati come di sola lettura. In precedenza, le applicazioni potevano scrivere i dati in questi volumi ma il sistema poteva ripristinare i dati automaticamente. Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</p></td>
 </tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.7.4-133</td>

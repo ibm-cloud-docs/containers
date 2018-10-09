@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -35,7 +35,7 @@ un NodePort comprendido entre 30000 y 32767 y una dirección IP de clúster inte
 
 El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a una app cuando se configura un servicio NodePort:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containershort_notm}} utilizando NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante NodePort" style="width:550px; border-style: none"/>
 
 1. Se envía una solicitud a la app mediante la dirección IP pública del nodo trabajador y el NodePort del nodo trabajador.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Los contenedores son una forma estándar de empaquetar apps y todas sus dependen
 
 Pulse en una opción para empezar:
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Pulse un icono para empezar rápidamente con {{site.data.keyword.containershort_notm}}. Con {{site.data.keyword.Bluemix_dedicated_notm}}, pulse este icono para ver las opciones." style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Pulse un icono para empezar a utilizar rápidamente {{site.data.keyword.containerlong_notm}}. Con {{site.data.keyword.Bluemix_dedicated_notm}}, pulse este icono para ver sus opciones." style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="Iniciación a clústeres de Kubernetes en {{site.data.keyword.Bluemix_notm}}" title="Iniciación a clústeres de Kubernetes en {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="Instale las CLI." title="Instale las CLI." shape="rect" coords="155, -1, 289, 210" />
@@ -54,7 +54,7 @@ infraestructura de IBM Cloud (SoftLayer) para crear y utilizar en clústeres est
 
 Para crear un clúster gratuito:
 
-1.  En el [**catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione **{{site.data.keyword.containershort_notm}}** y pulse **Crear**. Se abre una página de configuración del clúster. De forma predeterminada, se selecciona **Clúster gratuito**.
+1.  En el [**catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione **{{site.data.keyword.containerlong_notm}}** y pulse **Crear**. Se abre una página de configuración del clúster. De forma predeterminada, se selecciona **Clúster gratuito**.
 
 2. Dele un nombre exclusivo al clúster.
 
@@ -71,8 +71,8 @@ Enhorabuena. Ha creado su primer clúster de Kubernetes. Estos son algunos detal
 **¿Qué es lo siguiente?**</br>
 Pruebe lo siguiente en su clúster gratuito antes de que caduque.
 
-* Vaya a la [primera guía de aprendizaje de {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial) para crear un clúster de Kubernetes, instalar la CLI, crear un registro privado, configurar el entorno de clúster y añadir un servicio al clúster.
-* Dedíquele un tiempo a la [segunda guía de aprendizaje de {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial), donde se explica cómo desplegar apps en el clúster.
+* Vaya a la [primera guía de aprendizaje de {{site.data.keyword.containerlong_notm}}](cs_tutorials.html#cs_cluster_tutorial) para crear un clúster de Kubernetes, instalar la CLI, crear un registro privado, configurar el entorno de clúster y añadir un servicio al clúster.
+* Dedíquele un tiempo a la [segunda guía de aprendizaje de {{site.data.keyword.containerlong_notm}}](cs_tutorials_apps.html#cs_apps_tutorial), donde se explica cómo desplegar apps en el clúster.
 * [Cree un clúster estándar](cs_clusters.html#clusters_ui) con varios nodos para conseguir una mayor disponibilidad.
 
 

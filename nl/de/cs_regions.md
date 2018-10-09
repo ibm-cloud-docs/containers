@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,19 +20,21 @@ lastupdated: "2018-08-06"
 Eine Region ist ein bestimmter Standort, an dem Sie Apps, Services und andere {{site.data.keyword.Bluemix}}-Ressourcen bereitstellen können. [{{site.data.keyword.Bluemix_notm}}-Regionen](#bluemix_regions) unterscheiden sich von [{{site.data.keyword.containerlong}}-Regionen](#container_regions). Regionen bestehen aus einer oder mehreren Zonen, bei denen es sich um physische Rechenzentren handelt, in denen die Berechnungs-, Netz- und Speicherressourcen sowie die zugehörige Kühlung und Stromversorgung für Services und Anwendungen gehostet werden. Zonen sind isoliert voneinander, wodurch sichergestellt wird, dass es keinen gemeinsamen Fehlerpunkt gibt.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben.
+{{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben. 
 
-![{{site.data.keyword.containershort_notm}}-Regionen und -Zonen](/images/regions-mz.png)
+**Hinweis**: Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 
-_{{site.data.keyword.containershort_notm}}-Regionen und -Zonen_
+![{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen](/images/regions-mz.png)
 
-Folgende {{site.data.keyword.containershort_notm}}-Regionen werden unterstützt:
-  * Asien-Pazifik (Norden)
-  * Asien-Pazifik (Süden)
-  * Zentraleuropa
-  * Großbritannien (Süden)
-  * Vereinigte Staaten (Osten)
-  * Vereinigte Staaten (Süden)
+_{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen_
+
+Folgende {{site.data.keyword.containerlong_notm}}-Regionen werden unterstützt:
+* Asien-Pazifik (nur Standardcluster)
+* Asien-Pazifik (Süden)
+* Zentraleuropa
+* Großbritannien (Süden)
+* Vereinigte Staaten (Osten) (nur Standardcluster)
+* Vereinigte Staaten (Süden)
 
 <br />
 
@@ -82,22 +84,24 @@ Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-
 <br />
 
 
-## Regionen in {{site.data.keyword.containershort_notm}}
+## Regionen in {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
-Mithilfe von {{site.data.keyword.containershort_notm}}-Regionen können Sie Kubernetes-Cluster erstellen oder auf Kubernetes-Cluster in einer Region zugreifen, die von der {{site.data.keyword.Bluemix_notm}}-Region abweicht, in der Sie angemeldet sind. Die Endpunkte für die {{site.data.keyword.containershort_notm}}-Region verweisen speziell auf {{site.data.keyword.containershort_notm}} und nicht auf {{site.data.keyword.Bluemix_notm}} im Allgemeinen.
+Mithilfe von {{site.data.keyword.containerlong_notm}}-Regionen können Sie Kubernetes-Cluster erstellen oder auf Kubernetes-Cluster in einer Region zugreifen, die von der {{site.data.keyword.Bluemix_notm}}-Region abweicht, in der Sie angemeldet sind. Die Endpunkte für die {{site.data.keyword.containerlong_notm}}-Region verweisen speziell auf {{site.data.keyword.containerlong_notm}} und nicht auf {{site.data.keyword.Bluemix_notm}} im Allgemeinen.
 {:shortdesc}
 
-Unterstützte {{site.data.keyword.containershort_notm}}-Regionen:
-  * Asien-Pazifik (Norden)
+**Hinweis**: Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+
+Unterstützte {{site.data.keyword.containerlong_notm}}-Regionen:
+  * Asien-Pazifik (nur Standardcluster)
   * Asien-Pazifik (Süden)
   * Zentraleuropa
   * Großbritannien (Süden)
-  * Vereinigte Staaten (Osten)
+  * Vereinigte Staaten (Osten) (nur Standardcluster)
   * Vereinigte Staaten (Süden)
 
-Sie können auf {{site.data.keyword.containershort_notm}} über einen globalen Endpunkt zugreifen: `https://containers.bluemix.net/v1`.
-* Um zu überprüfen, in welcher {{site.data.keyword.containershort_notm}}-Region Sie sich momentan befinden, führen Sie `ibmcloud ks region` aus.
+Sie können auf {{site.data.keyword.containerlong_notm}} über einen globalen Endpunkt zugreifen: `https://containers.bluemix.net/v1`.
+* Um zu überprüfen, in welcher {{site.data.keyword.containerlong_notm}}-Region Sie sich momentan befinden, führen Sie `ibmcloud ks region` aus.
 * Um eine Liste der verfügbaren Region samt den zugehörigen Endpunkten abzurufen, führen Sie den Befehl `ibmcloud ks regions` aus.
 
 Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren Anforderungen den Regionsnamen im Header vom Typ `X-Region`.
@@ -106,11 +110,11 @@ Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren
 ### Bei einer anderen {{site.data.keyword.containerlong_notm}}-Region anmelden
 {: #container_login_endpoints}
 
-Sie können Regionen mithilfe der {{site.data.keyword.containershort_notm}}-CLI ändern.
+Sie können Regionen mithilfe der {{site.data.keyword.containerlong_notm}}-CLI ändern.
 {:shortdesc}
 
-Sie können sich beispielsweise aus den folgenden Gründen bei einer anderen Region als der {{site.data.keyword.containershort_notm}}-Region anmelden:
-  * Sie haben {{site.data.keyword.Bluemix_notm}}-Services oder private Docker-Images in einer Region erstellt und wollen sie mit {{site.data.keyword.containershort_notm}} in einer anderen Region verwenden.
+Sie können sich beispielsweise aus den folgenden Gründen bei einer anderen Region als der {{site.data.keyword.containerlong_notm}}-Region anmelden:
+  * Sie haben {{site.data.keyword.Bluemix_notm}}-Services oder private Docker-Images in einer Region erstellt und wollen sie mit {{site.data.keyword.containerlong_notm}} in einer anderen Region verwenden.
   * Sie möchten auf einen Cluster in einer Region zugreifen, die sich von der {{site.data.keyword.Bluemix_notm}}-Standardregion unterscheidet, bei der Sie angemeldet sind.
 
 Um schnell zwischen Regionen zu wechseln, führen Sie den Befehl `ibmcloud ks region-set` aus.
@@ -118,7 +122,7 @@ Um schnell zwischen Regionen zu wechseln, führen Sie den Befehl `ibmcloud ks re
 ### {{site.data.keyword.containerlong_notm}}-API-Befehle verwenden
 {: #containers_api}
 
-Um mit der {{site.data.keyword.containershort_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den globalen Endpunkt die Zeichenfolge `/v1/command` anfügen.
+Um mit der {{site.data.keyword.containerlong_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den globalen Endpunkt die Zeichenfolge `/v1/command` anfügen.
 {:shortdesc}
 
 Beispiel für die API `GET /clusters`:
@@ -134,7 +138,7 @@ Um die API mit dem globalen Endpunkt zu verwenden, übergeben Sie in allen Ihren
 
 Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
 
-## Zonen in {{site.data.keyword.containershort_notm}}
+## Zonen in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_notm}}-Region verfügbar sind. Regionen sind ein konzeptionelles Hilfsmittel, um Zonen zu organisieren. Sie können Zonen (Rechenzentren) in verschiedenen Ländern umfassen. Die folgende Tabelle zeigt die pro Region verfügbaren Zonen.
@@ -169,6 +173,7 @@ Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_not
       <td>Zentraleuropa</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
+      <p>Oslo: osl01</p>
       <p>Paris: par01</p>
       </td>
     </tr>

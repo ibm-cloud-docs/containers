@@ -26,7 +26,7 @@ Servicio Kubernetes de IBM Cloud
         cs_tutorials_istio.md
         cs_tutorials_cf.md
         cs_tutorials_policies.md
-        [Guía de aprendizaje: Traslado de una aplicación basada en VM a ](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [Guía de aprendizaje: Traslado de una aplicación basada en VM a Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
         [Guía de aprendizaje: Creación de un clúster de varias regiones mediante Cloud Internet Services](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
     {: .navgroup-end}
 

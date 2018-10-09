@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -32,23 +32,23 @@ lastupdated: "2018-08-06"
 {:shortdesc}
 
 **마스터의 업데이트 시점을 어떻게 압니까?**</br>
-업데이트가 사용 가능하게 되면 GUI 및 CLI에서 알림을 받습니다. [지원되는 버전](cs_versions.html) 페이지에서 확인할 수도 있습니다. 
+업데이트가 사용 가능하게 되면 GUI 및 CLI에서 알림을 받습니다. [지원되는 버전](cs_versions.html) 페이지에서 확인할 수도 있습니다.
 
 **마스터는 최신 버전 이전에 몇 개의 버전까지 가능합니까?**</br>
-IBM은 일반적으로 주어진 시점에 3개의 Kubernetes 버전을 지원합니다. 사용자는 현재 버전 이전의 2개 버전까지만 Kubernetes API 서버를 업데이트할 수 있습니다. 
+IBM은 일반적으로 주어진 시점에 3개의 Kubernetes 버전을 지원합니다. 사용자는 현재 버전 이전의 2개 버전까지만 Kubernetes API 서버를 업데이트할 수 있습니다.
 
-예를 들어, 현재 Kubernetes API 서버가 버전 1.7이고 1.10으로 업데이트하려면 먼저 1.8 또는 1.9로 업데이트해야 합니다. 업데이트를 강제로 실행할 수 있지만, 3개 이상의 부 버전을 업데이트하면 예상치 못한 결과나 장애가 발생할 수 있습니다. 
+예를 들어, 현재 Kubernetes API 서버가 버전 1.7이고 1.10으로 업데이트하려면 먼저 1.8 또는 1.9로 업데이트해야 합니다. 업데이트를 강제로 실행할 수 있지만, 3개 이상의 부 버전을 업데이트하면 예상치 못한 결과나 장애가 발생할 수 있습니다.
 
-클러스터에서 지원되지 않는 Kubernetes 버전이 실행되는 경우 업데이트를 강제 실행해야 할 수 있습니다. 따라서 운영 상의 영향을 피하려면 클러스터를 최신 상태로 유지하십시오. 
+클러스터에서 지원되지 않는 Kubernetes 버전이 실행되는 경우 업데이트를 강제 실행해야 할 수 있습니다. 따라서 운영 상의 영향을 피하려면 클러스터를 최신 상태로 유지하십시오.
 
 **내 작업자 노드가 마스터보다 이후 버전을 실행할 수 있습니까?**</br>
-아니오. 우선 최신 Kubernetes 버전으로 [마스터를 업데이트](#update_master)하십시오. 그리고 클러스터의 [작업자 노드를 업데이트](#worker_node)하십시오. 마스터와는 달리 사용자는 각 패치 버전에 대한 작업자도 업데이트해야 합니다. 
+아니오. 우선 최신 Kubernetes 버전으로 [마스터를 업데이트](#update_master)하십시오. 그리고 클러스터의 [작업자 노드를 업데이트](#worker_node)하십시오. 마스터와는 달리 사용자는 각 패치 버전에 대한 작업자도 업데이트해야 합니다.
 
 **마스터 업데이트 중에 무슨 일이 발생합니까?**</br>
 Kubernetes API 서버를 업데이트할 때 API 서버가 약 5 - 10분 동안 작동 중지됩니다. 업데이트 중에는 클러스터에 액세스하거나 클러스터를 변경할 수 없습니다. 그러나 클러스터 사용자가 배치한 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
 
 **업데이트를 롤백할 수 있습니까?**</br>
-아니오. 일단 업데이트 프로세스가 발생되면 클러스터를 이전 버전으로 롤백할 수 없습니다. 프로덕션 마스터를 업데이트하기 전에 잠재적인 문제를 처리하기 위해 테스트 클러스터를 사용하고 지시사항을 따르십시오.
+아니오. 일단 업데이트 프로세스가 발생되면 클러스터를 이전 버전으로 롤백할 수 없습니다. 프로덕션 마스터를 업데이트하기 전에 테스트 클러스터를 사용하는지 확인한 다음 지시사항에 따라 잠재적인 문제를 처리하십시오.
 
 **마스터를 업데이트하기 위해 수행할 수 있는 프로세스는 무엇입니까?**</br>
 다음 다이어그램은 마스터 업데이트 시 수행 가능한 프로세스를 보여줍니다.
@@ -58,13 +58,13 @@ Kubernetes API 서버를 업데이트할 때 API 서버가 약 5 - 10분 동안 
 그림 1. Kubernetes 마스터 업데이트 프로세스 다이어그램
 
 {: #update_master}
-Kubernetes 마스터 _주_ 또는 _부_ 버전을 업데이트하려면 다음을 수행하십시오. 
+Kubernetes 마스터 _주_ 또는 _부_ 버전을 업데이트하려면 다음을 수행하십시오.
 
 1.  [Kubernetes 변경사항](cs_versions.html)을 검토하고 _마스터 이전 업데이트_로 표시된 변경사항을 작성하십시오.
 
-2.  GUI를 사용하거나 CLI `ibmcloud ks cluster-update` [명령](cs_cli_reference.html#cs_cluster_update)을 실행하여 Kubernetes API 서버 및 이와 연관된 Kubernetes 마스터 컴포넌트를 업데이트하십시오. 
+2.  GUI를 사용하거나 CLI `ibmcloud ks cluster-update` [명령](cs_cli_reference.html#cs_cluster_update)을 실행하여 Kubernetes API 서버 및 이와 연관된 Kubernetes 마스터 컴포넌트를 업데이트하십시오.
 
-3.  잠시 기다린 후에 업데이트가 완료되었는지 확인하십시오. {{site.data.keyword.Bluemix_notm}} 대시보드에서 Kubernetes API 서버 버전을 검토하거나 `ibmcloud ks clusters`를 실행하십시오. 
+3.  잠시 기다린 후에 업데이트가 완료되었는지 확인하십시오. {{site.data.keyword.Bluemix_notm}} 대시보드에서 Kubernetes API 서버 버전을 검토하거나 `ibmcloud ks clusters`를 실행하십시오.
 
 4.  Kubernetes 마스터에서 실행되는 Kubernetes API 서버 버전과 일치하는 [`kubectl cli`](cs_cli_install.html#kubectl)의 버전을 설치하십시오.
 
@@ -82,33 +82,33 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 시작하기 전에:
 - 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 - [Kubernetes 마스터를 업데이트](#master)하십시오. 작업자 노드 Kubernetes 버전은 Kubernetes 마스터에서 실행되는 Kubernetes API 서버 버전보다 상위 버전일 수 없습니다.
-- [Kubernetes 변경사항](cs_versions.html)에서 _마스터 이후 업데이트_로 표시된 변경사항을 작성하십시오. 
+- [Kubernetes 변경사항](cs_versions.html)에서 _마스터 이후 업데이트_로 표시된 변경사항을 작성하십시오.
 - 패치 업데이트를 적용하려는 경우에는 [Kubernetes 버전 변경 로그](cs_versions_changelog.html#changelog)를 검토하십시오. </br>
 
-**주의**: 작업자 노드로 업데이트하면 앱과 서비스의 작동이 중단될 수 있습니다. [팟(Pod)의 외부에 저장](cs_storage_planning.html#persistent)되지 않은 경우 데이터가 삭제됩니다.
+**주의**: 작업자 노드로 업데이트하면 앱과 서비스의 작동이 중단될 수 있습니다. [팟(Pod)의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됩니다.
 
 
 **업데이트 중에 내 앱에 무슨 일이 발생합니까**?</br>
-업데이트 중인 작업자 노드에서 배치의 일부로서 앱을 실행하는 경우, 해당 앱은 클러스터의 기타 작업자 노드로 다시 스케줄됩니다. 이러한 작업자 노드는 다른 작업자 풀에 있을 수 있습니다. 또는 독립형 작업자 노드가 있으면 앱이 독립형 작업자 노드로 스케줄될 수 있습니다. 앱의 작동 중단 시간을 방지하려면 워크로드를 감당할 만한 충분한 용량이 클러스터에 있는지 확인해야 합니다. 
+업데이트 중인 작업자 노드에서 배치의 일부로서 앱을 실행하는 경우, 해당 앱은 클러스터의 기타 작업자 노드로 다시 스케줄됩니다. 이러한 작업자 노드는 다른 작업자 풀에 있을 수 있습니다. 또는 독립형 작업자 노드가 있으면 앱이 독립형 작업자 노드로 스케줄될 수 있습니다. 앱의 작동 중단 시간을 방지하려면 워크로드를 감당할 만한 충분한 용량이 클러스터에 있는지 확인해야 합니다.
 
 **업데이트 중에 주어진 시점에 작동 중지되는 작업자 노드의 수를 어떻게 제어합니까? **
 모든 작업자 노드가 시작하여 실행되어야 하는 경우에는 작업자 노드를 더 추가할 수 있도록 [작업자 풀 크기 조정](cs_cli_reference.html#cs_worker_pool_resize) 또는 [독립형 작업자 노드 추가](cs_cli_reference.html#cs_worker_add)를 고려하십시오. 업데이트가 완료되면 추가적인 작업자 노드를 제거할 수 있습니다.
 
-또한 업데이트 중에 사용 불가능할 수 있는 작업자 노드의 최대 수를 지정하는 Kubernetes 구성 맵을 작성할 수 있습니다. 작업자 노드는 작업자 노드 레이블로 식별됩니다. IBM 제공 레이블을 사용하거나 사용자가 작업자 노드에 추가한 사용자 정의 레이블을 사용할 수 있습니다. 
+또한 업데이트 중에 사용 불가능할 수 있는 작업자 노드의 최대 수를 지정하는 Kubernetes 구성 맵을 작성할 수 있습니다. 작업자 노드는 작업자 노드 레이블로 식별됩니다. IBM 제공 레이블을 사용하거나 사용자가 작업자 노드에 추가한 사용자 정의 레이블을 사용할 수 있습니다.
 
 **구성 맵을 정의하지 않도록 선택하면 어떻게 됩니까?**</br>
-구성 맵을 정의하지 않으면 기본값이 사용됩니다. 기본적으로, 각 클러스터의 전체 작업자 노드에서 최대 20% 는 업데이트 프로세스 중에 사용이 불가능할 수 있습니다. 
+구성 맵을 정의하지 않으면 기본값이 사용됩니다. 기본적으로, 각 클러스터의 전체 작업자 노드에서 최대 20% 는 업데이트 프로세스 중에 사용이 불가능할 수 있습니다.
 
-구성 맵을 작성하고 작업자 노드를 업데이트하려면 다음을 수행하십시오. 
+구성 맵을 작성하고 작업자 노드를 업데이트하려면 다음을 수행하십시오.
 
-1.  사용 가능한 작업자 노드를 나열하고 사설 IP 주소를 기록해 두십시오. 
+1.  사용 가능한 작업자 노드를 나열하고 사설 IP 주소를 기록해 두십시오.
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
-2. 작업자 노드의 레이블을 보십시오. CLI 출력의 **Labels** 섹션에서 작업자 노드 레이블을 찾을 수 있습니다. 모든 레이블은 `NodeSelectorKey` 및 `NodeSelectorValue`로 구성되어 있습니다. 
+2. 작업자 노드의 레이블을 보십시오. CLI 출력의 **Labels** 섹션에서 작업자 노드 레이블을 찾을 수 있습니다. 모든 레이블은 `NodeSelectorKey` 및 `NodeSelectorValue`로 구성되어 있습니다.
    ```
    kubectl describe node <private_worker_IP>
    ```
@@ -137,9 +137,9 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
    ```
    {: screen}
 
-3. 구성 맵을 작성하고 작업자 노드에 대한 비가용성 규칙을 정의하십시오. 다음의 예에서는 4개의 검사, `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` 및 검사 템플리트를 보여줍니다. 이러한 예제 검사를 사용하여 특정 구역(`zonecheck.json`), 지역(`regioncheck.json`)의 작업자 노드에 대해 또는 구성 맵(`defaultcheck.json`)에서 정의한 검사와 일치하지 않는 모든 작업자 노드에 대해 규칙을 정의할 수 있습니다. 검사 템플리트를 사용하여 자체 검사를 작성하십시오. 모든 검사에 대해, 작업자 노드를 식별하려면 이전 단계에서 검색한 작업자 노드 레이블 중 하나를 선택해야 합니다.   
+3. 구성 맵을 작성하고 작업자 노드에 대한 비가용성 규칙을 정의하십시오. 다음의 예에서는 4개의 검사, `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` 및 검사 템플리트를 보여줍니다. 이러한 예제 검사를 사용하여 특정 구역(`zonecheck.json`), 지역(`regioncheck.json`)의 작업자 노드에 대해 또는 구성 맵(`defaultcheck.json`)에서 정의한 검사와 일치하지 않는 모든 작업자 노드에 대해 규칙을 정의할 수 있습니다. 검사 템플리트를 사용하여 자체 검사를 작성하십시오. 모든 검사에 대해, 작업자 노드를 식별하려면 이전 단계에서 검색한 작업자 노드 레이블 중 하나를 선택해야 합니다.  
 
-   **참고:** 모든 검사에 대해, <code>NodeSelectorKey</code> 및 <code>NodeSelectorValue</code>에 대한 하나의 값만 설정할 수 있습니다. 둘 이상의 지역, 구역 또는 기타 작업자 노드 레이블에 대해 규칙을 설정하려면 새 검사를 작성하십시오. 구성 맵에서 최대 10개까지 검사를 정의하십시오. 검사를 더 추가하는 경우에 이는 무시됩니다. 
+   **참고:** 모든 검사에 대해, <code>NodeSelectorKey</code> 및 <code>NodeSelectorValue</code>에 대한 하나의 값만 설정할 수 있습니다. 둘 이상의 지역, 구역 또는 기타 작업자 노드 레이블에 대해 규칙을 설정하려면 새 검사를 작성하십시오. 구성 맵에서 최대 10개까지 검사를 정의하십시오. 검사를 더 추가하는 경우에 이는 무시됩니다.
 
    예:
    ```
@@ -187,7 +187,7 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td>지정된 <code>NodeSelectorKey</code> 및 <code>NodeSelectorValue</code>로 식별할 수 있는 작업자 노드 세트에 대한 규칙을 정의하는 2개의 검사입니다. <code>zonecheck.json</code>은 해당 구역 레이블을 기반으로 작업자 노드를 식별하며, <code>regioncheck.json</code>은 프로비저닝 중에 모든 작업자 노드에 추가된 구역 레이블을 사용합니다. 이 예제에서는 자체 구역 레이블이 <code>dal13</code>인 모든 작업자 노드 중 30% 와 <code>us-south</code>의 모든 작업자 노드 중 20% 가 업데이트 중에 사용 불가능할 수 있습니다. </td>
+        <td>지정된 <code>NodeSelectorKey</code> 및 <code>NodeSelectorValue</code>로 식별할 수 있는 작업자 노드 세트에 대한 규칙을 정의하는 2개의 검사입니다. <code>zonecheck.json</code>은 해당 구역 레이블을 기반으로 작업자 노드를 식별하며, <code>regioncheck.json</code>은 프로비저닝 중에 모든 작업자 노드에 추가된 구역 레이블을 사용합니다. 이 예제에서는 자체 구역 레이블이 <code>dal13</code>인 모든 작업자 노드 중 30% 와 <code>us-south</code>의 모든 작업자 노드 중 20% 가 업데이트 중에 사용 불가능할 수 있습니다.</td>
       </tr>
       <tr>
         <td><code>defaultcheck.json</code></td>
@@ -214,26 +214,26 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
    ```
    {: pre}
 
-5. 구성 맵이 작성되었는지 확인하십시오. 
+5. 구성 맵이 작성되었는지 확인하십시오.
    ```
    kubectl get configmap --namespace kube-system
    ```
    {: pre}
 
-6.  작업자 노드를 업데이트하십시오. 
+6.  작업자 노드를 업데이트하십시오.
 
     ```
     ibmcloud ks worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
-7. 선택사항: 발생하는 유효성 검증 오류 및 구성 맵에 의해 트리거되는 이벤트를 확인하십시오. 이벤트는 CLI 출력의 **Events** 섹션에서 검토가 가능합니다. 
+7. 선택사항: 발생하는 유효성 검증 오류 및 구성 맵에 의해 트리거되는 이벤트를 확인하십시오. 이벤트는 CLI 출력의 **Events** 섹션에서 검토가 가능합니다.
    ```
    kubectl describe -n kube-system cm ibm-cluster-update-configuration
    ```
    {: pre}
 
-8. 작업자 노드의 Kubernetes 버전을 검토하여 업데이트가 완료되었는지 확인하십시오.   
+8. 작업자 노드의 Kubernetes 버전을 검토하여 업데이트가 완료되었는지 확인하십시오.  
    ```
    kubectl get nodes
    ```
@@ -258,12 +258,12 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 
 시작하기 전에:
 - 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-- 작업자 노드에 데이터를 저장하면 [작업자 노드의 외부에 저장](cs_storage_planning.html#persistent)되지 않은 경우 데이터가 삭제됩니다.
+- 작업자 노드에 데이터를 저장하면 [작업자 노드의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됩니다.
 
 
-**주의**: 작업자 노드로 업데이트하면 앱과 서비스의 작동이 중단될 수 있습니다. [팟(Pod)의 외부에 저장](cs_storage_planning.html#persistent)되지 않은 경우 데이터가 삭제됩니다.
+**주의**: 작업자 노드로 업데이트하면 앱과 서비스의 작동이 중단될 수 있습니다. [팟(Pod)의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됩니다.
 
-1. 사용 가능한 작업자 노드를 나열하고 사설 IP 주소를 기록해 두십시오. 
+1. 사용 가능한 작업자 노드를 나열하고 사설 IP 주소를 기록해 두십시오.
    - **작업자 풀의 작업자 노드의 경우**:
      1. 클러스터에서 사용 가능한 작업자 풀을 나열하십시오.
         ```
@@ -296,13 +296,13 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
         ```
         {: pre}
 
-2. 구역에서 사용 가능한 머신 유형을 나열하십시오. 
+2. 구역에서 사용 가능한 머신 유형을 나열하십시오.
    ```
    ibmcloud ks machine-types <zone>
    ```
    {: pre}
 
-3. 새 머신 유형으로 작업자 노드를 작성하십시오. 
+3. 새 머신 유형으로 작업자 노드를 작성하십시오.
    - **작업자 풀의 작업자 노드의 경우**:
      1. 대체할 작업자 노드의 수로 작업자 풀을 작성하십시오.
         ```
@@ -328,13 +328,13 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
        ```
        {: pre}
 
-4. 작업자 노드가 배치될 때까지 대기하십시오. 
+4. 작업자 노드가 배치될 때까지 대기하십시오.
    ```
    ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
-   작업자 노드 상태가 **정상**으로 변경되면 배치가 완료된 것입니다. 
+   작업자 노드 상태가 **정상**으로 변경되면 배치가 완료된 것입니다.
 
 5. 이전의 작업자 노드를 제거하십시오. **참고**: 월별로 비용이 청구되는 머신 유형(예: 베어메탈)을 제거하는 경우 한 달의 요금이 청구됩니다.
    - **작업자 풀의 작업자 노드의 경우**:
@@ -351,30 +351,49 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
         {: pre}
 
    - **더 이상 사용되지 않음: 독립형 작업자 노드의 경우**:
-       ```
+      ```
       ibmcloud ks worker-rm <cluster_name> <worker_node>
       ```
       {: pre}
 
-6. 작업자 노드가 클러스터에서 제거되었는지 확인하십시오. 
+6. 작업자 노드가 클러스터에서 제거되었는지 확인하십시오.
    ```
    ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
-7. 이러한 단계를 반복하여 기타 작업자 풀 또는 독립형 작업자 노드를 다른 머신 유형으로 업데이트하십시오. 
+7. 이러한 단계를 반복하여 기타 작업자 풀 또는 독립형 작업자 노드를 다른 머신 유형으로 업데이트하십시오.
 
 ## 클러스터 추가 기능 업데이트
 {: #addons}
 
-{{site.data.keyword.containershort_notm}} 클러스터는 클러스터를 프로비저닝할 때 자동으로 설치된 **추가 기능**(예: 로깅을 위한 Fluentd)과 함께 제공됩니다. 이러한 추가 기능은 마스터 및 작업자 노드와 별도로 업데이트되어야 합니다.
+{{site.data.keyword.containerlong_notm}} 클러스터는 클러스터를 프로비저닝할 때 자동으로 설치된 **추가 기능**(예: 로깅을 위한 Fluentd)과 함께 제공됩니다. 이러한 추가 기능은 마스터 및 작업자 노드와 별도로 업데이트되어야 합니다.
 {: shortdesc}
 
 **클러스터와 별도로 업데이트해야 하는 기본 추가 기능은 무엇입니까?**
 * [로깅을 위한 Fluentd](#logging)
 
+**업데이트가 필요 없으며 변경 불가능한 추가 기능이 있습니까?**</br>
+예, 클러스터는 변경 불가능한 다음의 관리 추가 기능 및 연관 리소스와 함께 배치됩니다. 이러한 배치 추가 기능 중 하나를 변경하려고 시도하면 일정 간격마다 이의 원래 설정이 복원됩니다.  
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+`addonmanager.kubernetes.io/mode: Reconcile` 레이블을 사용하여 이러한 리소스를 볼 수 있습니다. 예를 들어, 다음과 같습니다.
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **기본 기능 이외에 기타 추가 기능을 설치할 수 있습니까?**</br>
-예. {{site.data.keyword.containershort_notm}}에서는 클러스터에 기능 추가를 위해 선택할 수 있는 기타 추가 기능을 제공합니다. 예를 들어, [Helm 차트를 사용](cs_integrations.html#helm)하여 [블록 스토리지 플러그인](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) 또는 [strongSwan VPN](cs_vpn.html#vpn-setup)을 설치하고자 할 수 있습니다. Helm 차트를 업데이트하는 지시사항에 따라 각각의 추가 기능을 별도로 업데이트해야 합니다. 
+예. {{site.data.keyword.containerlong_notm}}에서는 클러스터에 기능 추가를 위해 선택할 수 있는 기타 추가 기능을 제공합니다. 예를 들어, [Helm 차트를 사용](cs_integrations.html#helm)하여 [블록 스토리지 플러그인](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) 또는 [strongSwan VPN](cs_vpn.html#vpn-setup)을 설치하고자 할 수 있습니다. Helm 차트를 업데이트하는 지시사항에 따라 각각의 추가 기능을 별도로 업데이트해야 합니다.
 
 ### 로깅을 위한 Fluentd
 {: #logging}
@@ -382,20 +401,20 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 로깅 또는 필터 구성을 변경하려면 Fluentd 추가 기능이 최신 버전이어야 합니다. 기본적으로는 추가 기능에 대한 자동 업데이트가 사용됩니다.
 {: shortdesc}
 
-`ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [명령](cs_cli_reference.html#cs_log_autoupdate_get)을 실행하여 자동 업데이트가 사용되는지 확인할 수 있습니다. 
+`ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [명령](cs_cli_reference.html#cs_log_autoupdate_get)을 실행하여 자동 업데이트가 사용되는지 확인할 수 있습니다.
 
-자동 업데이트를 사용하지 않으려면 `ibmcloud ks logging-autoupdate-disable` [명령](cs_cli_reference.html#cs_log_autoupdate_disable)을 실행하십시오. 
+자동 업데이트를 사용하지 않으려면 `ibmcloud ks logging-autoupdate-disable` [명령](cs_cli_reference.html#cs_log_autoupdate_disable)을 실행하십시오.
 
-자동 업데이트가 사용되지 않지만 구성을 변경해야 하는 경우에는 두 가지 옵션이 있습니다. 
+자동 업데이트가 사용되지 않지만 구성을 변경해야 하는 경우에는 두 가지 옵션이 있습니다.
 
-*  Fluentd 팟(Pod)에 대해 자동 업데이트를 켭니다. 
+*  Fluentd 팟(Pod)에 대해 자동 업데이트를 켭니다.
 
     ```
     ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-*  `--force-update` 옵션이 포함된 로깅 명령을 사용할 때 일회성 업데이트를 강제 실행합니다. **참고**: 팟(Pod)은 Fluentd 추가 기능의 최신 버전으로 업데이트되지만 Fluentd는 자동으로 최신 버전으로 업데이트되지 않습니다. 
+*  `--force-update` 옵션이 포함된 로깅 명령을 사용할 때 일회성 업데이트를 강제 실행합니다. **참고**: 팟(Pod)은 Fluentd 추가 기능의 최신 버전으로 업데이트되지만 Fluentd는 자동으로 최신 버전으로 업데이트되지 않습니다.
 
     명령 예:
 
@@ -410,43 +429,42 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
 다중 구역 클러스터의 도입에 따라, 동일한 구성(예: 머신 유형)의 작업자 노드는 작업자 풀로 그룹화되어 있습니다. 새 클러스터를 작성하면 이름이 `default`인 작업자 풀이 사용자를 위해 자동으로 작성됩니다.
 {: shortdesc}
 
-작업자 풀을 사용하여 작업자 노드를 구역 간에 균등하게 전개하고 밸런스가 유지된 클러스터를 빌드할 수 있습니다. 밸런스가 유지된 클러스터는 가용성이 보다 높으며 장애에 대한 복원성이 보다 우수합니다. 작업자 노드가 구역에서 제거되면 사용자가 작업자 풀을 리밸런싱하고 새 작업자 노드를 해당 구역에 자동으로 프로비저닝할 수 있습니다. 작업자 풀은 모든 작업자 노드에 대한 Kubernetes 버전 업데이트를 설치하는 데도 사용됩니다.   
+작업자 풀을 사용하여 작업자 노드를 구역 간에 균등하게 전개하고 밸런스가 유지된 클러스터를 빌드할 수 있습니다. 밸런스가 유지된 클러스터는 가용성이 보다 높으며 장애에 대한 복원성이 보다 우수합니다. 작업자 노드가 구역에서 제거되면 사용자가 작업자 풀을 리밸런싱하고 새 작업자 노드를 해당 구역에 자동으로 프로비저닝할 수 있습니다. 작업자 풀은 모든 작업자 노드에 대한 Kubernetes 버전 업데이트를 설치하는 데도 사용됩니다.  
 
 **중요:** 다중 구역이 사용 가능하게 되기 전에 클러스터를 작성한 경우, 작업자 노드는 여전히 독립형이며 자동으로 작업자 풀로 그룹화되지 않습니다. 작업자 풀을 사용하려면 이러한 클러스터를 업데이트해야 합니다. 업데이트되지 않으면 단일 구역 클러스터를 다중 구역 클러스터로 변경할 수 없습니다.
 
-독립형 작업자 노드에서 작업자 풀로 이동할 때 클러스터 설정이 변경되는 방법을 확인하려면 다음 이미지를 검토하십시오. 
+독립형 작업자 노드에서 작업자 풀로 이동할 때 클러스터 설정이 변경되는 방법을 확인하려면 다음 이미지를 검토하십시오.
 
 <img src="images/cs_cluster_migrate.png" alt="독립형 작업자 노드에서 작업자 풀로 클러스터 업데이트" width="600" style="width:600px; border-style: none"/>
 
 시작하기 전에 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
-1. 클러스터의 기존 독립형 작업자 노드를 나열하고 **ID**, **머신 유형** 및 **사설 IP**를 기록해 두십시오. 
+1. 클러스터의 기존 독립형 작업자 노드를 나열하고 **ID**, **머신 유형** 및 **사설 IP**를 기록해 두십시오.
    ```
    ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
 
-2. 작업자 풀을 작성하고 풀에 추가할 작업자 노드의 수와 머신 유형을 결정하십시오. 
+2. 작업자 풀을 작성하고 풀에 추가할 작업자 노드의 수와 머신 유형을 결정하십시오.
    ```
    ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
 3. 사용 가능한 구역을 나열하고 작업자 풀에서 작업자 노드를 프로비저닝할 위치를 결정하십시오. 독립형 작업자 노드가 프로비저닝된 구역을 보려면 `ibmcloud ks cluster-get <cluster_name_or_ID>`를 실행하십시오. 다중 구역 간에 작업자 노드를 전개하려면 [다중 구역 가능 구역](cs_regions.html#zones)을 선택하십시오.
-        
    ```
    ibmcloud ks zones
    ```
    {: pre}
 
-4. 이전 단계에서 선택한 구역에 대해 사용 가능한 VLAN을 나열하십시오. 해당 구역에 아직 VLAN이 없는 경우에는 구역을 작업자 풀에 추가할 때 VLAN이 사용자를 위해 자동으로 작성됩니다. 
+4. 이전 단계에서 선택한 구역에 대해 사용 가능한 VLAN을 나열하십시오. 해당 구역에 아직 VLAN이 없는 경우에는 구역을 작업자 풀에 추가할 때 VLAN이 사용자를 위해 자동으로 작성됩니다.
    ```
    ibmcloud ks vlans <zone>
    ```
    {: pre}
 
-5. 작업자 풀에 구역을 추가하십시오. 작업자 풀에 구역을 추가하면 작업자 풀에서 정의된 작업자 노드가 구역에서 프로비저닝되며 향후 워크로드 스케줄을 위해 고려됩니다. {{site.data.keyword.containerlong}}는 지역에 대한 `failure-domain.beta.kubernetes.io/region` 레이블과 구역에 대한 `failure-domain.beta.kubernetes.io/zone` 레이블을 각 작업자 노드에 자동으로 추가합니다. Kubernetes 스케줄러는 이러한 레이블을 사용하여 동일한 지역 내의 구역 간에 팟(Pod)을 전개합니다. 
-   1. **하나의 작업자 풀에 구역 추가**: `<pool_name>`을 작업자 풀의 이름으로 대체하고 이전에 검색한 정보를 사용하여 클러스터 ID, 구역 및 VLAN을 채우십시오. 해당 구역에 사설 및 공용 VLAN이 없는 경우에는 이 옵션을 지정하지 마십시오. 사설 및 공용 VLAN이 사용자를 위해 자동으로 작성됩니다. 
+5. 작업자 풀에 구역을 추가하십시오. 작업자 풀에 구역을 추가하면 작업자 풀에서 정의된 작업자 노드가 구역에서 프로비저닝되며 향후 워크로드 스케줄을 위해 고려됩니다. {{site.data.keyword.containerlong}}는 지역에 대한 `failure-domain.beta.kubernetes.io/region` 레이블과 구역에 대한 `failure-domain.beta.kubernetes.io/zone` 레이블을 각 작업자 노드에 자동으로 추가합니다. Kubernetes 스케줄러는 이러한 레이블을 사용하여 동일한 지역 내의 구역 간에 팟(Pod)을 전개합니다.
+   1. **하나의 작업자 풀에 구역 추가**: `<pool_name>`을 작업자 풀의 이름으로 대체하고 이전에 검색한 정보를 사용하여 클러스터 ID, 구역 및 VLAN을 채우십시오. 해당 구역에 사설 및 공용 VLAN이 없는 경우에는 이 옵션을 지정하지 마십시오. 사설 및 공용 VLAN이 사용자를 위해 자동으로 작성됩니다.
 
       서로 다른 작업자 풀에 대해 서로 다른 VLAN을 사용하려면 각 VLAN 및 이의 대응되는 작업자 풀에 대해 이 명령을 반복하십시오. 지정된 VLAN에 임의의 새 작업자 노드가 추가되지만, 기존 작업자 노드에 대한 VLAN은 변경되지 않습니다.
       ```
@@ -454,20 +472,20 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
       ```
       {: pre}
 
-   2. **다중 작업자 풀에 구역 추가**: 다중 작업자 풀을 `ibmcloud ks zone-add` 명령에 추가하십시오. 다중 작업자 풀을 구역에 추가하려면 해당 구역에 기존 사설 및 공용 VLAN이 있어야 합니다. 해당 구역에 공용 및 사설 VLAN이 없는 경우에는 공용 및 사설 VLAN이 사용자를 위해 작성되도록 우선 구역을 하나의 작업자 풀에 추가하는 것을 고려하십시오. 그리고 구역을 기타 작업자 풀에 추가할 수 있습니다. </br></br>구역 간에 클러스터의 밸런스가 유지될 수 있도록 모든 작업자 풀의 작업자 노드가 모든 구역으로 프로비저닝되는 것이 중요합니다. 서로 다른 작업자 풀에 대해 서로 다른 VLAN을 사용하려면 작업자 풀에 사용할 VLAN에서 이 명령을 반복 실행하십시오. 서로 다른 구역에 있는 작업자 간에 사설 네트워크의 통신을 사용 가능하게 하려면 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다.
+   2. **다중 작업자 풀에 구역 추가**: 다중 작업자 풀을 `ibmcloud ks zone-add` 명령에 추가하십시오. 다중 작업자 풀을 구역에 추가하려면 해당 구역에 기존 사설 및 공용 VLAN이 있어야 합니다. 해당 구역에 공용 및 사설 VLAN이 없는 경우에는 공용 및 사설 VLAN이 사용자를 위해 작성되도록 우선 구역을 하나의 작업자 풀에 추가하는 것을 고려하십시오. 그리고 구역을 기타 작업자 풀에 추가할 수 있습니다. </br></br>구역 간에 클러스터의 밸런스가 유지될 수 있도록 모든 작업자 풀의 작업자 노드가 모든 구역으로 프로비저닝되는 것이 중요합니다. 서로 다른 작업자 풀에 대해 서로 다른 VLAN을 사용하려면 작업자 풀에 사용할 VLAN에서 이 명령을 반복 실행하십시오. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **작업자 풀에 다중 구역 추가**: 다른 구역에서 `ibmcloud ks zone-add` 명령을 반복 실행하고 해당 구역에서 프로비저닝하고자 하는 작업자 풀을 지정하십시오. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](cs_clusters.html#multi_zone)로 클러스터가 변경됩니다. 
+   3. **작업자 풀에 다중 구역 추가**: 다른 구역에서 `ibmcloud ks zone-add` 명령을 반복 실행하고 해당 구역에서 프로비저닝하고자 하는 작업자 풀을 지정하십시오. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](cs_clusters_planning.html#multizone)로 클러스터가 변경됩니다.
 
-6. 각 구역에서 작업자 노드가 배치될 때까지 대기하십시오. 
+6. 각 구역에서 작업자 노드가 배치될 때까지 대기하십시오.
    ```
    ibmcloud ks workers <cluster_name_or_ID>
    ```
    {: pre}
-   작업자 노드 상태가 **정상**으로 변경되면 배치가 완료된 것입니다. 
+   작업자 노드 상태가 **정상**으로 변경되면 배치가 완료된 것입니다.
 
 7. 독립형 작업자 노드를 제거하십시오. 독립형 작업자 노드가 여러 개인 경우에는 한 번에 하나씩 제거하십시오.
    1. 클러스터의 작업자 노드를 나열하고 이 명령의 사설 IP 주소를 맨 처음에 검색한 사설 IP 주소와 비교하여 독립형 작업자 노드를 찾으십시오.
@@ -491,15 +509,15 @@ Kubernetes API 서버 업데이트가 완료되면 작업자 노드를 업데이
       kubectl drain <worker_name> --ignore-daemonsets
       ```
       {: pre}
-      이 프로세스에는 몇 분 정도 소요될 수 있습니다. 
+      이 프로세스에는 몇 분 정도 소요될 수 있습니다.
 
    5. 독립형 작업자 노드를 제거하십시오. `ibmcloud ks workers <cluster_name_or_ID>` 명령에서 리턴되는 작업자 ID를 사용하십시오.
       ```
       ibmcloud ks worker-rm <cluster_name_or_ID> <worker_ID>
       ```
       {: pre}
-   6. 모든 독립형 작업자 노드가 제거될 때까지 이러한 단계를 반복하십시오. 
+   6. 모든 독립형 작업자 노드가 제거될 때까지 이러한 단계를 반복하십시오.
 
 
 **다음에 수행할 작업** </br>
-이제 작업자 풀을 사용하도록 클러스터를 업데이트했으므로 클러스터에 구역을 더 추가하여 가용성을 높일 수 있습니다. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](cs_clusters.html#ha_clusters)로 클러스터가 변경됩니다. 단일 구역 클러스터를 다중 구역 클러스터로 변경하면 Ingress 도메인이 `<cluster_name>.<region>.containers.mybluemix.net`에서 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`로 변경됩니다. 기존 Ingress 도메인은 여전히 유효하며 앱으로 요청을 전송하는 데 사용될 수 있습니다. 
+이제 작업자 풀을 사용하도록 클러스터를 업데이트했으므로 클러스터에 구역을 더 추가하여 가용성을 높일 수 있습니다. 클러스터에 구역을 더 추가하면 단일 구역 클러스터에서 [다중 구역 클러스터](cs_clusters_planning.html#ha_clusters)로 클러스터가 변경됩니다. 단일 구역 클러스터를 다중 구역 클러스터로 변경하면 Ingress 도메인이 `<cluster_name>.<region>.containers.mybluemix.net`에서 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`로 변경됩니다. 기존 Ingress 도메인은 여전히 유효하며 앱으로 요청을 전송하는 데 사용될 수 있습니다.

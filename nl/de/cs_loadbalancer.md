@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Layer 4-Lastausgleichsfunktion, um auf eine containerisierte App zuzugreifen.
 {:shortdesc}
 
+
+
 ## Komponenten und Architektur der Lastausgleichsfunktion
 {: #planning}
 
-Wenn Sie einen Standardcluster erstellen, stellt {{site.data.keyword.containershort_notm}} automatisch ein portierbares öffentliches Teilnetz und ein portierbares privates Teilnetz bereit.
+Wenn Sie einen Standardcluster erstellen, stellt {{site.data.keyword.containerlong_notm}} automatisch ein portierbares öffentliches Teilnetz und ein portierbares privates Teilnetz bereit.
 
 * Das portierbare öffentliche Teilnetz stellt eine portierbare öffentliche IP-Adresse bereit, die von der [öffentlichen Ingress-Standard-ALB](cs_ingress.html) verwendet wird. Die restlichen vier portablen öffentlichen IP-Adressen können verwendet werden, um einzelne Apps dem Internet zugänglich zu machen, indem ein öffentlicher LoadBalancer-Service erstellt wird.
 * Das portierbare öffentliche Teilnetz stellt eine portierbare private IP-Adresse bereit, die von der [privaten Ingress-Standard-ALB](cs_ingress.html#private_ingress) verwendet wird. Die restlichen vier portierbaren privaten IP-Adressen können verwendet werden, um einzelne Apps einem privaten Netz zugänglich zu machen, indem ein privater LoadBalancer-Service erstellt wird.
@@ -37,7 +39,7 @@ Ein LoadBalancer-Service macht Ihre App auch über die NodePort-Instanzen des Se
 
 Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Um vom Internet aus auf den LoadBalancer-Service zuzugreifen, können Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion in Verbindung mit der zugewiesenen Portnummer im Format `<IP_address>:<port>`. Das folgende Diagramm veranschaulicht, wie eine Lastausgleichsfunktion die Kommunikation vom Internet an eine App leitet.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Stellen Sie ein App in {{site.data.keyword.containershort_notm}} bereit, indem Sie eine Lastausgleichsfunktion verwenden" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="App in {{site.data.keyword.containerlong_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:550px; border-style: none"/>
 
 1. Eine Anforderung an Ihre App verwendet die öffentliche IP-Adresse der Lastausgleichsfunktion und den zugeordneten Port auf dem Workerknoten.
 
@@ -71,9 +73,9 @@ Hinweis:
 
 Vorbemerkungen:
   * Ein Service für die Lastausgleichsfunktion mit einer portierbaren privaten IP-Adresse verfügt weiterhin auf jedem Workerknoten über einen offenen öffentlichen Knotenport. Informationen zum Hinzufügen einer Netzrichtlinie zur Verhinderung von öffentlichem Datenverkehr finden Sie unter dem Thema [Eingehenden Datenverkehr blockieren](cs_network_policy.html#block_ingress).
-  * In jeder Zone muss mindestens ein öffentliches VLAN über portierbare Teilnetze verfügen, die für Ingress- und LoadBalancer-Services zur Verfügung stehen. Um private Ingress- und LoadBalancer-Services hinzuzufügen, müssen Sie mindestens ein privates VLAN mit verfügbaren portierbaren Teilnetzen angeben. Informationen zum Hinzufügen von Teilnetzen finden Sie im Abschnitt [Teilnetze für Cluster konfigurieren](cs_subnets.html).
+  * Sie müssen in jeder Zone eine Lastausgleichsfunktion bereitstellen und jeder Lastausgleichsfunktion wird in dieser Zone eine eigene IP-Adresse zugewiesen. Um öffentliche Lastausgleichsfunktionen zu erstellen, muss mindestens ein öffentliches VLAN portierbare Teilnetze aufweisen, die in jeder Zone verfügbar sind. Um private Lastausgleichsfunktionsservices hinzufügen zu können, muss mindestens ein privates VLAN portierbare Teilnetze aufweisen, die in jeder Zone verfügbar sind. Informationen zum Hinzufügen von Teilnetzen finden Sie im Abschnitt [Teilnetze für Cluster konfigurieren](cs_subnets.html).
   * Wenn Sie den Datenaustausch im Netz auf Edge-Workerknoten beschränken, müssen Sie sicherstellen, dass in jeder Zone mindestens zwei [Edge-Workerknoten](cs_edge.html#edge) aktiviert sind. Wenn Edge-Workerknoten in einigen Zonen aktiviert sind, in anderen jedoch nicht, werden die Lastausgleichsfunktionen nicht gleichmäßig implementiert. Lastausgleichsfunktionen werden in einigen Zonen auf Edge-Knoten, in anderen Zonen jedoch auf regulären Knoten bereitgestellt.
-  * Um die Kommunikation zwischen Workern, die sich in unterschiedlichen Zonen befinden, im privaten Netz zu aktivieren, müssen Sie das [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) aktivieren.
+  * Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 
 
 Gehen Sie wie folgt vor, um einen LoadBalancer-Service in einem Mehrzonencluster einzurichten:
@@ -192,7 +194,7 @@ Gehen Sie wie folgt vor, um einen LoadBalancer-Service in einem Mehrzonencluster
 
 6. Um eingehende Anforderungen von anderen Zonen an Ihre App zu bearbeiten, wiederholen Sie die obigen Schritte, um eine Lastausgleichsfunktion in jeder Zone hinzuzufügen.
 
-7. Optional: Ein LoadBalancer-Service macht Ihre App auch über die NodePort-Instanzen des Service verfügbar. Auf [Knotenports (NodePorts)](cs_nodeport.html) kann über jede öffentliche und private IP-Adresse für jeden Knoten innerhalb des Clusters zugegriffen werden. Informationen zum Blockieren des Datenverkehrs an Knotenports während der Verwendung eines LoadBalencer-Service finden Sie im Abschnitt [eingehender Datenverkehr an LoadBalancer- oder NodePort-Services steuern](cs_network_policy.html#block_ingress).
+7. Optional: Ein LoadBalancer-Service macht Ihre App auch über die NodePort-Instanzen des Service verfügbar. Auf [Knotenports (NodePorts)](cs_nodeport.html) kann über jede öffentliche und private IP-Adresse für jeden Knoten innerhalb des Clusters zugegriffen werden. Informationen zum Blockieren des Datenverkehrs an Knotenports während der Verwendung eines LoadBalencer-Service finden Sie im Abschnitt [Eingehenden Datenverkehr an LoadBalancer- oder NodePort-Services steuern](cs_network_policy.html#block_ingress).
 
 ## Öffentlichen oder privaten Zugriff auf eine App in einem Einzelzonencluster aktivieren
 {: #config}
@@ -339,7 +341,7 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
 ## Knotenaffinität und Tolerierungen zu App-Pods für eine Quellen-IP hinzufügen
 {: #node_affinity_tolerations}
 
-Wenn eine Clientanforderung an Ihre App an Ihren Cluster gesendet wird, wird die Anforderung an den Pod für den LoadBalancer-Service weitergeleitet, der Ihre App verfügbar macht. Wenn ein App-Pod nicht auf demselben Workernoten vorhanden ist wie der Lastausgleichsfunktions-Pod, leitet die Lastausgleichsfunktion die Anforderung an einen App-Pod auf einem anderen Workerknoten weiter. Die Quellen-IP-Adresse des Pakets wird in die öffentliche IP-Adresse des Workerknotens geändert, auf dem der App-Pod ausgeführt wird.
+Wenn eine Clientanforderung an Ihre App an Ihren Cluster gesendet wird, wird die Anforderung an den Pod für den LoadBalancer-Service weitergeleitet, der Ihre App verfügbar macht. Wenn ein App-Pod nicht auf demselben Workerknoten vorhanden ist wie der Lastausgleichsfunktions-Pod, leitet die Lastausgleichsfunktion die Anforderung an einen App-Pod auf einem anderen Workerknoten weiter. Die Quellen-IP-Adresse des Pakets wird in die öffentliche IP-Adresse des Workerknotens geändert, auf dem der App-Pod ausgeführt wird.
 
 Um die ursprüngliche Quellen-IP-Adresse der Clientanforderung beizubehalten, können Sie die [Quellen-IP ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) für LoadBalancer-Services aktivieren. Die TCP-Verbindung wird bis zu den App-Pods fortgesetzt, sodass die App die tatsächliche IP-Adresse des Initiators sehen kann. Das Beibehalten der IP des Clients ist nützlich, z. B. wenn App-Server Sicherheits- und Zugriffssteuerungsrichtlinien genügen müssen.
 
@@ -503,3 +505,4 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
         {: screen}
 
     4. Überprüfen Sie im Abschnitt **Labels** der Ausgabe, dass es sich bei dem öffentlichen oder privaten VLAN um das VLAN handelt, das Sie in den vorherigen Schritten angegeben haben.
+

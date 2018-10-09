@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -83,9 +83,9 @@ Vorbemerkungen:
 - [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
 - [Aktualisieren Sie den Kubernetes-Master](#master). Die Kubernetes-Version der Workerknoten darf nicht höher als die Version des API-Servers von Kubernetes sein.
 - Führen Sie alle Änderungen durch, die mit der Markierung _Nach Master aktualisieren_ in [Kubernetes-Änderungen](cs_versions.html) versehen sind.
-- Wenn Sie eine Patchaktualisierung anwenden möchten, lesen Sie sich die Informationen im [Kubernetes-Änderungsprotokoll](cs_versions_changelog.html#changelog) durch.</br>
+- Wenn Sie eine Patchaktualisierung anwenden möchten, lesen Sie sich die Informationen im [Kubernetes-Änderungsprotokoll](cs_versions_changelog.html#changelog) durch. </br>
 
-**Achtung**: Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Die Daten werden gelöscht, wenn sie nicht [außerhalb des Pods gespeichert werden](cs_storage_planning.html#persistent).
+**Achtung**: Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Die Daten werden gelöscht, wenn sie nicht [außerhalb des Pods gespeichert werden](cs_storage_planning.html#persistent_storage_overview).
 
 
 **Was passiert mit meinen Apps während einer Aktualisierung?**</br>
@@ -258,10 +258,10 @@ Sie können die Maschinentypen der Workerknoten aktualisieren, indem Sie neue Wo
 
 Vorbemerkungen:
 - [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
-- Wenn Sie Daten auf dem Workerknoten speichern, werden die Daten gelöscht, wenn sie nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent).
+- Wenn Sie Daten auf dem Workerknoten speichern, werden die Daten gelöscht, wenn sie nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview).
 
 
-**Achtung**: Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Die Daten werden gelöscht, wenn sie nicht [außerhalb des Pods gespeichert werden](cs_storage_planning.html#persistent).
+**Achtung**: Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Die Daten werden gelöscht, wenn sie nicht [außerhalb des Pods gespeichert werden](cs_storage_planning.html#persistent_storage_overview).
 
 1. Listen Sie verfügbare Workerknoten auf und notieren Sie deren private IP-Adressen.
    - **Für Workerknoten in einem Worker-Pool**:
@@ -367,14 +367,33 @@ Vorbemerkungen:
 ## Cluster-Add-ons aktualisieren
 {: #addons}
 
-Ihr {{site.data.keyword.containershort_notm}}-Cluster wird mit **Add-ons** geliefert, z. B. Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen. Diese Add-ons müssen separat von den Master- und Workerknoten aktualisiert werden.
+Ihr {{site.data.keyword.containerlong_notm}}-Cluster wird mit **Add-ons** geliefert, z. B. Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen. Diese Add-ons müssen separat von den Master- und Workerknoten aktualisiert werden.
 {: shortdesc}
 
 **Welche Standard-Add-ons müssen ich separat vom Cluster aktualisieren?**
 * [Fluentd für Protokollierung](#logging)
 
+**Gibt es Add-ons, die ich nicht aktualisieren muss und die ich nicht ändern kann?**</br>
+Ja, Ihr Cluster wird mit den folgenden verwalteten Add-ons und zugehörigen Ressourcen bereitgestellt, die nicht geändert werden können. Wenn Sie versuchen, eines dieser Add-ons für die Bereitstellung zu ändern, werden ihre ursprünglichen Einstellungen in einem regelmäßigen Intervall wiederhergestellt. 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+Sie können diese Ressourcen anzeigen, indem Sie die Bezeichnung `addonmanager.kubernetes.io/mode: Reconcile` verwenden. Beispiel:
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **Kann ich andere Add-Ons als den Standard installieren?**</br>
-Ja. {{site.data.keyword.containershort_notm}} stellt weitere Add-ons zur Verfügung, die Sie auswählen können, um Ihrem Cluster Funktionen hinzuzufügen. Sie können z. B. [Helm-Diagramme verwenden](cs_integrations.html#helm) , um das [Blockspeicher-Plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) oder das [strongSwan-VPN](cs_vpn.html#vpn-setup) zu installieren. Sie müssen jedes Add-on separat aktualisieren, indem Sie die Anweisungen zum Aktualisieren der Helm-Diagramme befolgen.
+Ja. {{site.data.keyword.containerlong_notm}} stellt weitere Add-ons zur Verfügung, die Sie auswählen können, um Ihrem Cluster Funktionen hinzuzufügen. Sie können z. B. [Helm-Diagramme verwenden](cs_integrations.html#helm) , um das [Blockspeicher-Plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) oder das [strongSwan-VPN](cs_vpn.html#vpn-setup) zu installieren. Sie müssen jedes Add-on separat aktualisieren, indem Sie die Anweisungen zum Aktualisieren der Helm-Diagramme befolgen.
 
 ### Fluentd für Protokollierung
 {: #logging}
@@ -453,13 +472,13 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
       ```
       {: pre}
 
-   2. **So fügen Sie die Zone zu mehreren Worker-Pools hinzu**: Fügen Sie mehrere Worker-Pools zum Befehl `ibmcloud ks zone-add` hinzu. Wenn Sie mehrere Worker-Pools zu einer Zone hinzufügen möchten, müssen Sie über ein vorhandenes privates und öffentliches VLAN in dieser Zone verfügen. Wenn Sie kein öffentliches und privates VLAN in dieser Zone haben, sollten Sie die Zone zuerst einem Worker-Pool hinzufügen, damit ein öffentliches und ein privates VLAN für Sie erstellt werden. Anschließend können Sie die Zone zu anderen Worker-Pools hinzufügen. </br></br>Es ist wichtig, dass die Workerknoten in allen Worker-Pools in allen Zonen bereitgestellt werden, um sicherzustellen, dass Ihr Cluster in allen Zonen verteilt ist. Wenn Sie verschiedene VLANs für verschiedene Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl mit dem VLAN, das Sie für Ihren Worker-Pool verwenden wollen. Um die Kommunikation zwischen Workern, die sich in unterschiedlichen Zonen befinden, im privaten Netz zu aktivieren, müssen Sie das [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) aktivieren.
+   2. **So fügen Sie die Zone zu mehreren Worker-Pools hinzu**: Fügen Sie mehrere Worker-Pools zum Befehl `ibmcloud ks zone-add` hinzu. Wenn Sie mehrere Worker-Pools zu einer Zone hinzufügen möchten, müssen Sie über ein vorhandenes privates und öffentliches VLAN in dieser Zone verfügen. Wenn Sie kein öffentliches und privates VLAN in dieser Zone haben, sollten Sie die Zone zuerst einem Worker-Pool hinzufügen, damit ein öffentliches und ein privates VLAN für Sie erstellt werden. Anschließend können Sie die Zone zu anderen Worker-Pools hinzufügen. </br></br>Es ist wichtig, dass die Workerknoten in allen Worker-Pools in allen Zonen bereitgestellt werden, um sicherzustellen, dass Ihr Cluster in allen Zonen verteilt ist. Wenn Sie verschiedene VLANs für verschiedene Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl mit dem VLAN, das Sie für Ihren Worker-Pool verwenden wollen. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer).
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname1,poolname2,poolname3> --private-vlan <private_vlan-id> --public-vlan <öffentliche_vlan-id>
       ```
       {: pre}
 
-   3. **So fügen Sie mehrere Zonen zu Ihren Worker-Pools hinzu**: Wiederholen Sie den Befehl `ibmcloud ks zone-add` mit einer anderen Zone und geben Sie die Worker-Pools an, die in dieser Zone bereitgestellt werden sollen. Wenn Sie Ihrem Cluster weitere Zonen hinzufügen, ändern Sie den Cluster von einem Einzelzonencluster in einen [Mehrzonencluster](cs_clusters.html#multi_zone).
+   3. **So fügen Sie mehrere Zonen zu Ihren Worker-Pools hinzu**: Wiederholen Sie den Befehl `ibmcloud ks zone-add` mit einer anderen Zone und geben Sie die Worker-Pools an, die in dieser Zone bereitgestellt werden sollen. Wenn Sie Ihrem Cluster weitere Zonen hinzufügen, ändern Sie den Cluster von einem Einzelzonencluster in einen [Mehrzonencluster](cs_clusters_planning.html#multizone).
 
 6. Warten Sie, bis die Workerknoten in jeder Zone bereitgestellt wurden.
    ```
@@ -501,4 +520,4 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 
 
 **Womit möchten Sie fortfahren?** </br>
-Nachdem Sie den Cluster aktualisiert haben, um Worker-Pools zu verwenden, können Sie die Verfügbarkeit verbessern, indem Sie Ihrem Cluster weitere Zonen hinzufügen. Durch das Hinzufügen weiterer Zonen zu Ihrem Cluster wird Ihr Cluster von einem Einzelzonencluster in einen [Mehrzonencluster](cs_clusters.html#ha_clusters) geändert. Wenn Sie Ihren Einzelzonencluster in einen Mehrzonencluster ändern,, ändert sich die Ingress-Domäne von `<cluster_name>.<region>.containers.mybluemix.net` in `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Die vorhandene Ingress-Domäne ist weiterhin gültig und kann zum Senden von Anforderungen an Ihre Apps verwendet werden.
+Nachdem Sie den Cluster aktualisiert haben, um Worker-Pools zu verwenden, können Sie die Verfügbarkeit verbessern, indem Sie Ihrem Cluster weitere Zonen hinzufügen. Durch das Hinzufügen weiterer Zonen zu Ihrem Cluster wird Ihr Cluster von einem Einzelzonencluster in einen [Mehrzonencluster](cs_clusters_planning.html#ha_clusters) geändert. Wenn Sie Ihren Einzelzonencluster in einen Mehrzonencluster ändern, ändert sich die Ingress-Domäne von `<cluster_name>.<region>.containers.mybluemix.net` in `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Die vorhandene Ingress-Domäne ist weiterhin gültig und kann zum Senden von Anforderungen an Ihre Apps verwendet werden.

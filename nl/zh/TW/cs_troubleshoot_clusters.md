@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -57,69 +57,86 @@ Infrastructure permissions to add servers
 ```
 {: screen}
 
+```
+IAM token exchange request failed: Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+```
+{: screen}
+
 {: tsCauses}
 在啟用自動帳戶鏈結之後所建立的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。您可以購買叢集的基礎架構資源，而不需要進行額外配置。
-
-
-具有其他 {{site.data.keyword.Bluemix_notm}} 帳戶類型的使用者，或具有未鏈結至其 {{site.data.keyword.Bluemix_notm}} 帳戶之現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶的使用者，必須配置其帳戶以建立標準叢集。 
-
 如果您具有一個有效的「隨收隨付制」帳戶，並收到此錯誤訊息，則可能未使用正確的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來存取基礎架構資源。
+
+具有其他 {{site.data.keyword.Bluemix_notm}} 帳戶類型的使用者必須配置其帳戶以建立標準叢集。您可能會有不同帳戶類型的情況範例如下：
+* 您現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶的日期早於 {{site.data.keyword.Bluemix_notm}} 平台帳戶，並想要繼續使用它。
+* 您要使用不同的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來佈建基礎架構資源。例如，您可以設定團隊 {{site.data.keyword.Bluemix_notm}} 帳戶，使用不同的基礎架構帳戶來進行計費。
 
 {: tsResolve}
 帳戶擁有者必須適當地設定基礎架構認證帳戶。認證取決於您所使用的基礎架構帳戶類型。
-*  如果您有最新的「隨收隨付制」{{site.data.keyword.Bluemix_notm}} 帳戶，則帳戶會隨附一個您可以使用的鏈結基礎架構帳戶。[驗證已使用正確的許可權設定基礎架構 API 金鑰](#apikey)。
-*  如果您具有不同的 {{site.data.keyword.Bluemix_notm}} 帳戶類型，請驗證您可以存取基礎架構組合，以及[已使用正確的許可權設定基礎架構帳戶認證](#credentials)。
 
-若要檢查您的叢集是使用鏈結的基礎架構帳戶，還是不同的基礎架構帳戶，請執行下列動作：
+**開始之前**：
+
 1.  驗證您可以存取基礎架構帳戶。登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)，然後從可展開的功能表中，按一下**基礎架構**。如果您看到基礎架構儀表板，則可以存取基礎架構帳戶。
-2.  檢查您的叢集是否使用不同的基礎架構帳戶。從可展開的功能表中，按一下**容器 > 叢集**。
-3.  從表格中，選取您的叢集。 
-4.  在**概觀**標籤中，如果您看到**基礎架構使用者**欄位，表示叢集使用不同的基礎架構帳戶，而不是「隨收隨付制」帳戶隨附的基礎架構帳戶。
+2.  檢查您的叢集是否使用不同的基礎架構帳戶，而不是「隨收隨付制」帳戶隨附的基礎架構帳戶。
+    1.  從可展開的功能表中，按一下**容器 > 叢集**。
+    2.  從表格中，選取您的叢集。
+    3.  在**概觀**標籤中，檢查**基礎架構使用者**欄位。
+        * 如果您看不到**基礎架構使用者**欄位，表示您的已鏈結「隨收隨付制」帳戶會將相同的認證用於基礎架構及平台帳戶。
+        * 如果您看到**基礎架構使用者**欄位，表示您的叢集使用不同的基礎架構帳戶，而不是「隨收隨付制」帳戶隨附的基礎架構帳戶。這些不同的認證適用於地區內的所有叢集。 
+3.  決定您要有哪種類型的帳戶，才能判斷如何對基礎架構許可權問題進行疑難排解。對於大部分使用者而言，預設已鏈結「隨收隨付制」帳戶就已足夠。
+    *  已鏈結「隨收隨付制」{{site.data.keyword.Bluemix_notm}} 帳戶：[驗證已使用正確的許可權設定基礎架構 API 金鑰](#apikey)。如果您的叢集使用不同的基礎架構帳戶，則您必須在處理程序期間將這些認證解除設定。
+    *  不同的 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構帳戶：驗證您可以存取基礎架構組合，以及[已使用正確的許可權設定基礎架構帳戶認證](#credentials)。
 
-### 為已鏈結帳戶配置基礎架構 API 認證
+### 搭配使用已鏈結「隨收隨付制」帳戶的預設基礎架構認證與 API 金鑰
 {: #apikey}
 
 1.  驗證您要將其認證用於基礎架構動作的使用者具有正確的許可權。
 
     1.  登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)。
-        
+
     2.  從展開功能表中，選取**基礎架構**。
-        
+
     3.  從功能表列中，選取**帳戶** > **使用者** > **使用者清單**。
 
     4.  在 **API 金鑰**直欄中，驗證使用者具有 API 金鑰，或按一下**產生**。
 
     5.  驗證使用者具有[正確的基礎架構許可權](cs_users.html#infra_access)，或將該許可權指派給使用者。
 
-2.  重設叢集所在區域的 API 金鑰，讓它屬於使用者。
+2.  設定叢集所在地區的 API 金鑰。
+
+    1.  使用您要使用其基礎架構許可權的使用者身分，登入終端機。
     
-    1.  以正確的使用者身分登入終端機。
+    2.  如果您在不同的地區，請切換至您要設定 API 金鑰的地區。
     
-    2.  將 API 金鑰重設為此使用者。
+        ```
+        ibmcloud ks region-set
+        ```
+        {: pre}
+
+    3.  設定地區的使用者 API 金鑰。
         ```
         ibmcloud ks api-key-reset
         ```
         {: pre}    
-    
-    3.  驗證已設定 API 金鑰。
+
+    4.  驗證已設定 API 金鑰。
         ```
         ibmcloud ks api-key-info <cluster_name_or_ID>
         ```
         {: pre}
+
+3.  **選用項目**：如果您的「隨收隨付制」帳戶使用不同的基礎架構帳戶來佈建叢集（例如，您已使用 `ibmcloud ks credentials-set` 指令），則帳戶會繼續使用那些基礎架構認證，而不是 API 金鑰。您必須移除相關聯的基礎架構帳戶，才能使用您在前一個步驟中設定的 API 金鑰。
+    ```
+    ibmcloud ks credentials-unset
+    ```
+    {: pre}
         
-    4.  **選用**：如果先前已使用 `ibmcloud ks credentials-set` 指令手動設定認證，請移除關聯的基礎架構帳戶。現在，會使用您在先前子步驟中設定的 API 密鑰來訂購基礎架構。
-        ```
-        ibmcloud ks credentials-unset
-        ```
-        {: pre}
+4.  **選用**：如果您將公用叢集連接至內部部署資源，請檢查您的網路連線功能。
 
-3.  **選用**：如果您將公用叢集連接至內部部署資源，請檢查您的網路連線功能。
-
-    1.  檢查您的工作者節點 VLAN 連線功能。 
+    1.  檢查您的工作者節點 VLAN 連線功能。
     2.  必要時，請[設定 VPN 連線功能](cs_vpn.html#vpn)。
     3.  [開啟防火牆中的必要埠](cs_firewall.html#firewall)。
 
-### 配置不同帳戶的基礎架構帳戶認證
+### 配置不同平台及基礎架構帳戶的基礎架構認證
 {: #credentials}
 
 1.  取得您要用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的基礎架構帳戶。取決於現行帳戶類型，您會有不同的選項。
@@ -157,9 +174,9 @@ Infrastructure permissions to add servers
 2.  驗證您要將其認證用於基礎架構動作的使用者具有正確的許可權。
 
     1.  登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)。
-        
+
     2.  從展開功能表中，選取**基礎架構**。
-        
+
     3.  從功能表列中，選取**帳戶** > **使用者** > **使用者清單**。
 
     4.  在 **API 金鑰**直欄中，驗證使用者具有 API 金鑰，或按一下**產生**。
@@ -169,18 +186,20 @@ Infrastructure permissions to add servers
 3.  使用正確帳戶的使用者來設定基礎架構 API 認證。
 
     1.  取得使用者的基礎架構 API 認證。**附註**：認證不同於 IBM ID。
-            
+
         1.  從 [{{site.data.keyword.Bluemix_notm}} ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/) 主控台的**基礎架構** > **帳戶** > **使用者** > **使用者清單**表格中，按一下 **IBM ID 或使用者名稱**。
-            
+
         2.  在 **API 存取資訊**區段中，檢視 **API 使用者名稱**及**鑑別金鑰**。    
-        
+
     2.  設定要使用的基礎架構 API 認證。
         ```
         ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-  
+        ```
+        {: pre}
+
 4.  **選用**：如果您將公用叢集連接至內部部署資源，請檢查您的網路連線功能。
 
-    1.  檢查您的工作者節點 VLAN 連線功能。 
+    1.  檢查您的工作者節點 VLAN 連線功能。
     2.  必要時，請[設定 VPN 連線功能](cs_vpn.html#vpn)。
     3.  [開啟防火牆中的必要埠](cs_firewall.html#firewall)。
 
@@ -238,7 +257,7 @@ Infrastructure permissions to add servers
 
 
 {: tsCauses}
-您可能已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定另一個防火牆，或自訂現有防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。另一個原因可能是工作者節點停留在重新載入的迴圈中。
+您可能已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定另一個防火牆，或自訂現有防火牆設定。{{site.data.keyword.containerlong_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。另一個原因可能是工作者節點停留在重新載入的迴圈中。
 
 {: tsResolve}
 [容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
@@ -274,21 +293,21 @@ Instance ID inconsistent with worker records
 {: screen}
 
 {: tsCauses}
-當機器遭遇硬體問題時，機器 ID 可能變成與 {{site.data.keyword.containershort_notm}} 工作者節點記錄不一致。當 IBM Cloud 基礎架構 (SoftLayer) 解決此問題時，元件可在服務未識別的系統內變更。
+當機器遭遇硬體問題時，機器 ID 可能變成與 {{site.data.keyword.containerlong_notm}} 工作者節點記錄不一致。當 IBM Cloud 基礎架構 (SoftLayer) 解決此問題時，元件可在服務未識別的系統內變更。
 
 {: tsResolve}
-若要讓 {{site.data.keyword.containershort_notm}} 重新識別機器，請[重新載入裸機工作者節點](cs_cli_reference.html#cs_worker_reload)。**附註**：重新載入也會更新機器的[修補程式版本](cs_versions_changelog.html)。
+若要讓 {{site.data.keyword.containerlong_notm}} 重新識別機器，請[重新載入裸機工作者節點](cs_cli_reference.html#cs_worker_reload)。**附註**：重新載入也會更新機器的[修補程式版本](cs_versions_changelog.html)。
 
 您也可以 [刪除裸機工作者節點](cs_cli_reference.html#cs_cluster_rm)。**附註**：裸機實例按月計費。
 
 <br />
 
 
-## `kubectl exec` 及 `kubectl logs` 未運作
+## `kubectl` 指令逾時
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-如果您執行 `kubectl exec` 或 `kubectl logs`，則會看到下列訊息。
+如果您執行 `kubectl exec`、`kubectl attach`、`kubectl proxy`、`kubectl port-forward` 或 `kubectl logs` 這類指令，則會看到下列訊息。
 
   ```
   <workerIP>:10250: getsockopt: connection timed out
@@ -299,7 +318,7 @@ Instance ID inconsistent with worker records
 主節點與工作者節點之間的 OpenVPN 連線未正常運作。
 
 {: tsResolve}
-1. 啟用 IBM Cloud 基礎架構 (SoftLayer) 帳戶的 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+1. 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
 2. 重新啟動 OpenVPN 用戶端 Pod。
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -419,6 +438,25 @@ ibmcloud login
 <br />
 
 
+## 將服務連結至叢集導致服務不支援服務金鑰錯誤
+{: #cs_service_keys}
+
+{: tsSymptoms}
+當您執行 `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 時，會看到下列訊息。
+
+```
+This service doesn't support creation of keys
+```
+{: screen}
+
+{: tsCauses}
+{{site.data.keyword.Bluemix_notm}} 中的部分服務（例如 {{site.data.keyword.keymanagementservicelong}}）不支援建立服務認證（也稱為服務金鑰）。如果不支援服務金鑰，則服務無法連結至叢集。若要尋找支援建立服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/apps/reqnsi.html#accser_external)。
+
+{: tsResolve}
+若要整合不支援服務金鑰的服務，請確認服務是否提供您可用來從應用程式直接存取服務的 API。例如，如果您要使用 {{site.data.keyword.keymanagementservicelong}}，請參閱 [API 參考資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/apidocs/kms?language=curl)。 
+
+<br />
+
 
 ## 工作者節點更新或重新載入之後，出現重複的節點及 Pod
 {: #cs_duplicate_nodes}
@@ -461,8 +499,8 @@ ibmcloud login
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.5
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.5
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
   ```
   {: screen}
 
@@ -563,7 +601,11 @@ unable to validate against any pod security policy
 當您執行 `kubectl get pods` 時，可以看到保持 **Pending** 狀況的 Pod。
 
 {: tsCauses}
-如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。如果此叢集是現有叢集，則您的叢集裡可能沒有足夠的容量可部署 Pod。
+如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。 
+
+如果此叢集是現有叢集，請執行下列動作：
+*  您的叢集中可能沒有足夠的容量可部署 Pod。
+*  Pod 可能已超出資源要求或限制。
 
 {: tsResolve}
 此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
@@ -609,11 +651,20 @@ kubectl get nodes
         ```
         {: pre}
 
-5.  如果您的 Pod 在工作者節點完整部署之後仍然保持 **pending** 狀況，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)，以進一步對 Pod 的擱置中狀況進行疑難排解。
+5.  選用項目：檢查您的 Pod 資源要求。
+
+    1.  確認 `resources.requests` 值不大於工作者節點的容量。例如，如果 Pod 要求 `cpu: 4000m` 或 4 個核心，但工作者節點大小只有 2 個核心，則無法部署 Pod。
+
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+    
+    2.  如果要求超出可用的容量，則請[新增工作者節點儲存區](cs_clusters.html#add_pool)，而其具有可滿足要求的工作者節點。
+
+6.  如果您的 Pod 在工作者節點完整部署之後仍然保持 **pending** 狀況，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)，以進一步對 Pod 的擱置中狀況進行疑難排解。
 
 <br />
-
-
 
 
 ## 容器未啟動
@@ -628,8 +679,9 @@ Pod 順利部署至叢集，但容器未啟動。
 {: tsResolve}
 [請釋放 {{site.data.keyword.registryshort_notm}} 中的儲存空間。](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-<br />
 
+
+<br />
 
 
 ## 無法安裝具有已更新配置值的 Helm 圖表
@@ -700,15 +752,17 @@ Pod 順利部署至叢集，但容器未啟動。
 叢集仍有問題？
 {: shortdesc}
 
+-  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
+
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
 
     如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
 
-    -   如果您在使用 {{site.data.keyword.containershort_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
-    -   若為服務及開始使用指示的相關問題，請使用 [IBM developerWorks dW Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
+    -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
+    -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
 -   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -28,17 +28,18 @@ lastupdated: "2018-08-06"
 
 **支持的 Kubernetes 版本**：
 
-- 最新版本：1.10.5
-- 缺省版本：1.10.5
-- 其他版本：1.9.9 和 1.8.15
+- 最新版本：1.11.2
+- 缺省版本：1.10.7
+- 其他版本：1.9.10
+- 不推荐的版本：1.8.15，自 2018 年 9 月 22 日起不再支持
 
 </br>
 
 **不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您有 30 天的时间来复查并更新到支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，系统仍完全支持您的集群。但是，不能创建使用不推荐的版本的新集群。
 
-**不支持的版本**：如果是在不支持的 Kubernetes 版本上运行集群，请[查看潜在影响](#version_types)（与更新相关），然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。 
-*  **注意**：如果您等到集群低于受支持版本三个或更多次版本时才更新，那么必须强制更新，但这可能会导致意外结果或失败。 
-*  不支持的集群无法添加或重新装入现有工作程序节点。 
+**不支持的版本**：如果是在不支持的 Kubernetes 版本上运行集群，请[查看潜在影响](#version_types)（与更新相关），然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。
+*  **注意**：如果您等到集群低于受支持版本三个或更多次版本时才更新，那么必须强制更新，但这可能会导致意外结果或失败。
+*  不支持的集群无法添加或重新装入现有工作程序节点。
 *  将集群更新为支持的版本后，集群可以恢复正常运行并继续接收支持。
 
 </br>
@@ -53,7 +54,7 @@ kubectl version  --short | grep -i server
 输出示例：
 
 ```
-Server Version: v1.10.5+IKS
+Server Version: v1.10.7+IKS
 ```
 {: screen}
 
@@ -82,9 +83,9 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 <br/>
 
 以下信息总结了在将集群从先前版本更新到新版本时，可能会对已部署应用程序产生影响的更新。
+-  V1.11 [迁移操作](#cs_v111)。
 -  V1.10 [迁移操作](#cs_v110)。
 -  V1.9 [迁移操作](#cs_v19)。
--  V1.8 [迁移操作](#cs_v18)。
 -  对不推荐使用或不受支持版本的[归档](#k8s_version_archive)。
 
 <br/>
@@ -92,6 +93,115 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 有关完整的更改列表，请查看以下信息：
 * [Kubernetes 更改日志 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
 * [IBM 版本更改日志](cs_versions_changelog.html)。
+
+</br>
+
+## V1.11
+{: #cs_v111}
+
+<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.11 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V11.1 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
+
+查看 Kubernetes 从先前版本更新到 V1.11 时可能需要进行的更改。
+
+### 在更新主节点之前更新
+{: #111_before}
+
+<table summary="适用于 V1.11 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.11 之前要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`containerd`：新的 Kubernetes 容器运行时</td>
+<td><strong>重要信息</strong>：`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](#containerd)。</td>
+</tr>
+<tr>
+<td>Kubernetes 容器卷安装传播</td>
+<td>容器 `VolumeMount` 的 [`mountPropagation` 字段 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) 的缺省值已从 `HostToContainer` 更改为 `None`。此更改复原在 Kubernetes V1.9 以及更低版本中存在的行为。如果 pod 规范依赖于 `HostToContainer` 成为缺省值，请进行更新。</td>
+</tr>
+<tr>
+<td>Kubernetes API 服务器 JSON 反序列化器</td>
+<td>Kubernetes API 服务器 JSON 反序列化器现在区分大小写。此更改复原在 Kubernetes V1.7 以及更低版本中存在的行为。如果 JSON 资源定义使用不正确的大小写，请进行更新。<br><br>**注**：仅影响直接 Kubernetes API 服务器请求。`kubectl` CLI 继续在 Kubernetes V1.7 以及更高版本中强制实施区分大小写的密钥，因此如果使用 `kubectl` 严格管理资源，那么您不会受到影响。</td>
+</tr>
+</tbody>
+</table>
+
+### 在更新主节点之后更新
+{: #111_after}
+
+<table summary="适用于 V1.11 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.11 之后要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群日志记录配置</td>
+<td>`fluentd` 集群附加组件自动更新为 V1.11，即使禁用了 `logging-autoupdate`。<br><br>
+容器日志目录已从 `/var/lib/docker/` 更改为 `/var/log/pods/`。如果使用自己的日志记录解决方案来监视先前目录，请相应更新。</td>
+</tr>
+<tr>
+<td>刷新 Kubernetes 配置</td>
+<td>更新集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 访问组。因此，在通过运行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 更新主 Kubernetes v1.11 后，必须刷新集群的 Kubernetes 配置。<br><br>如果不刷新配置，那么集群操作将失败，并显示以下错误消息：`You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>`kubectl` CLI</td>
+<td>`kubectl` CLI for Kubernetes V1.11 需要 `apps/v1` API。因此，V1.11 `kubectl` CLI 不适用于运行 Kubernetes V1.8 或更低版本的集群。使用与集群的 Kubernetes API 服务器版本相匹配的 `kubectl` CLI 的版本。</td>
+</tr>
+<tr>
+<td>`kubectl auth can-i`</td>
+<td>现在，如果未授权用户，那么 `kubectl auth can-i` 命令失败，并返回 `exit code 1`。如果脚本依赖于先前的行为，请进行更新。</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>现在，在使用选择条件（例如，标签）删除资源时，缺省情况下，`kubectl delete` 命令忽略 `not found` 错误。如果脚本依赖于先前的行为，请更新这些脚本。</td>
+</tr>
+<tr>
+<td>Kubernetes `sysctls` 功能</td>
+<td>现在会忽略 `security.alpha.kubernetes.io/sysctls` 注释。相反，Kubernetes 向 `PodSecurityPolicy` 和 `Pod` 对象添加字段以指定和控制 `sysctls`。有关更多信息，请参阅[在 Kubernetes 中使用 sysctls ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/)。<br><br>在更新集群主节点和工作程序后，更新 `PodSecurityPolicy` 和 `Pod` 对象以使用新的 `sysctls` 字段。</td>
+</tr>
+</tbody>
+</table>
+
+### 作为容器运行时迁移至 `containerd`
+{: #containerd}
+
+对于运行 Kubernetes V1.11 或更高版本的集群，`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。如果 pod 依赖于 Docker 作为 Kubernetes 容器运行时，那么必须更新它们以作为容器运行时处理 `containerd`。有关更多信息，请参阅 [Kubernetes containerd 声明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/)。
+{: shortdesc}
+
+**如何知道应用程序是否依赖于 `docker` 而不是 `containerd`？**<br>
+依赖于 Docker 作为容器运行时的情况的示例：
+*  如果使用特权容器直接访问 Docker 引擎或 API，那么更新 pod 以支持 `containerd` 作为运行时。
+*  集群中安装的某些第三方附加组件（例如，日志记录和监视工具）可能依赖于 Docker 引擎。请检查提供程序以确保工具兼容 `containerd`。
+
+<br>
+
+**除了依赖于运行时，是否还需要执行其他迁移操作？**<br>
+
+**清单工具**：如果您具有使用 Docker V18.06 之前的试验性 `docker manifest` [工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) 构建的多平台映像，那么无法使用 `containerd` 从 DockerHub 拉取映像。
+
+在检查 pod 事件时，可能会看到如下错误。
+```
+failed size validation
+```
+{: screen}
+
+要使用通过清单工具以及 `containerd` 构建的映像，请从以下选项中进行选择。
+
+*  使用[清单工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/estesp/manifest-tool) 重新构建映像。
+*  在更新为 Docker V18.06 或更高版本后，使用 `docker-manifest` 工具重新构建映像。
+
+<br>
+
+**什么不受影响？是否需要更改部署容器的方式？**<br>
+通常，容器部署过程不会更改。您仍可以使用 Dockerfile 来定义 Docker 映像并针对应用程序构建 Docker 容器。如果使用 `docker` 命令来构建映像并将其推送到注册表，那么可继续使用 `docker` 或者改为使用 `ibmcloud cr` 命令。
 
 ## V1.10
 {: #cs_v110}
@@ -135,7 +245,7 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 <tr>
 <td>strongSwan VPN
 </td>
-<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么在更新集群之前，必须通过运行 `helm delete --purge <release_name>` 除去图表。集群更新完成后，请重新安装 strongSwan Helm 图表。</td>
+<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么在更新集群之前，必须通过运行 `helm delete --purge <release_name>`. 集群更新完成后，请重新安装 strongSwan Helm 图表。</td>
 </tr>
 </tbody>
 </table>
@@ -278,7 +388,10 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 
 
 
-## V1.8
+## 归档
+{: #k8s_version_archive}
+
+### V1.8（不推荐使用，自 2018 年 9 月 22 日起不再支持）
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.8 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.8 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
@@ -349,20 +462,16 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 <br />
 
 
-
-## 归档
-{: #k8s_version_archive}
-
 ### V1.7（不支持）
 {: #cs_v17}
 
-自 2018 年 6 月 21 日开始，不支持使用运行 [Kubernetes V1.7](cs_versions_changelog.html#changelog_archive) 的 {{site.data.keyword.containershort_notm}} 集群。V1.7 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
+自 2018 年 6 月 21 日开始，不支持使用运行 [Kubernetes V1.7](cs_versions_changelog.html#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.7 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
 
 对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.8。
 
 ### V1.5（不受支持）
 {: #cs_v1-5}
 
-自 2018 年 4 月 4 日开始，不支持使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containershort_notm}} 集群。V1.5 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
+自 2018 年 4 月 4 日开始，不支持使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.5 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
 
 对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.8。

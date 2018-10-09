@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -18,11 +18,52 @@ lastupdated: "2018-08-06"
 
 
 
-# {{site.data.keyword.containershort_notm}} 的熱門主題
+# {{site.data.keyword.containerlong_notm}} 的熱門主題
 {: #cs_popular_topics}
 
 掌握 {{site.data.keyword.containerlong}} 中發生的情況。瞭解要探索的新特性、要試用的訣竅，或其他開發人員目前發現很有用的一些熱門主題。
 {:shortdesc}
+
+## 2018 年 9 月的熱門主題
+{: #sept18}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2018 年 8 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>05 年 9 月</td>
+<td>[奧斯陸現在為可用區域](cs_regions.html)</td>
+<td>挪威奧斯陸已成為歐盟中部地區的新區域。如果您有防火牆，務必針對此區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 8 月的熱門主題
+{: #aug18}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2018 年 8 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>8 月 31 日</td>
+<td>{{site.data.keyword.cos_full_notm}} 現在與 {{site.data.keyword.containerlong}} 整合</td>
+<td>使用 Kubernetes 原生持續性磁區要求 (PVC) 來將 {{site.data.keyword.cos_full_notm}} 佈建給叢集。{{site.data.keyword.cos_full_notm}} 最適用於讀取密集工作量，以及您是否要將資料儲存在多區域叢集中的多個區域中。從[建立 {{site.data.keyword.cos_full_notm}} 服務實例](cs_storage_cos.html#create_cos_service)及在叢集上[安裝 {{site.data.keyword.cos_full_notm}} 外掛程式](cs_storage_cos.html#install_cos)開始。</br></br>不確定您適用哪一個儲存空間解決方案？[在這裡](cs_storage_planning.html#choose_storage_solution)開始分析您的資料，並為您的資料選擇適當的儲存空間解決方案。</td>
+</tr>
+<tr>
+<td>8 月 14 日</td>
+<td>將叢集更新為 Kubernetes 1.11 版以指派 Pod 優先順序</td>
+<td>在將叢集更新為 [Kubernetes 1.11 版](cs_versions.html#cs_v111)之後，您可以充分運用新功能，例如，使用 `containerd` 來增加容器運行環境效能或[指派 Pod 優先順序](cs_pod_priority.html#pod_priority)。</td>
+</tr>
+</tbody></table>
 
 ## 2018 年 7 月的熱門主題
 {: #july18}
@@ -43,7 +84,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>7 月 10 日</td>
 <td>多區域叢集簡介</td>
-<td>要改善叢集可用性嗎？現在，您可以跨越精選都會區域中跨多個區域的叢集。如需相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中建立多區域叢集](cs_clusters.html#multizone)。</td>
+<td>要改善叢集可用性嗎？現在，您可以跨越精選都會區域中跨多個區域的叢集。如需相關資訊，請參閱[在 {{site.data.keyword.containerlong_notm}} 中建立多區域叢集](cs_clusters_planning.html#multizone)。</td>
 </tr>
 </tbody></table>
 
@@ -95,7 +136,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>5 月 14 日</td>
 <td>[更新：在全球 GPU 裸機上部署工作負載](cs_app.html#gpu_app)</td>
-<td>如果您的叢集裡有[裸機圖形處理裝置 (GPU) 機型](cs_clusters.html#shared_dedicated_node)，則可以排定數學運算密集的應用程式。GPU 工作者節點可以同時跨 CPU 及 GPU 處理應用程式的工作負載，以增進效能。</td>
+<td>如果您的叢集裡有[裸機圖形處理裝置 (GPU) 機型](cs_clusters_planning.html#shared_dedicated_node)，則可以排定數學運算密集的應用程式。GPU 工作者節點可以同時跨 CPU 及 GPU 處理應用程式的工作負載，以增進效能。</td>
 </tr>
 <tr>
 <td>5 月 3 日</td>
@@ -153,13 +194,13 @@ lastupdated: "2018-08-06"
 <tbody>
 <tr>
 <td>3 月 16 日</td>
-<td>[使用授信運算佈建裸機叢集](cs_clusters.html#shared_dedicated_node)</td>
+<td>[使用授信運算佈建裸機叢集](cs_clusters_planning.html#shared_dedicated_node)</td>
 <td>建立執行 [Kubernetes 1.9 版](cs_versions.html#cs_v19)或更新版本的裸機叢集，並啟用「授信運算」來驗證工作者節點是否遭到竄改。</td>
 </tr>
 <tr>
 <td>3 月 14 日</td>
 <td>[安全登入 {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
-<td>要求使用者登入，以加強在 {{site.data.keyword.containershort_notm}} 中執行的應用程式。</td>
+<td>要求使用者登入，以加強在 {{site.data.keyword.containerlong_notm}} 中執行的應用程式。</td>
 </tr>
 <tr>
 <td>3 月 13 日</td>
@@ -207,7 +248,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>2 月 19 日</td>
 <td>[設定 strongSwan IPSec VPN](cs_vpn.html#vpn-setup)</td>
-<td>快速部署 strongSwan IPSec VPN Helm 圖表，以將 {{site.data.keyword.containershort_notm}} 叢集安全地連接至內部部署的資料中心，而不使用 Virtual Router Appliance。</td>
+<td>快速部署 strongSwan IPSec VPN Helm 圖表，以將 {{site.data.keyword.containerlong_notm}} 叢集安全地連接至內部部署的資料中心，而不使用 Virtual Router Appliance。</td>
 </tr>
 <tr>
 <td>2 月 14 日</td>
@@ -239,7 +280,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>1 月 23 日</td>
 <td>[新加坡及加拿大蒙特婁現在為可用區域](cs_regions.html)</td>
-<td>新加坡及蒙特婁是位於 {{site.data.keyword.containershort_notm}} 亞太地區北部及美國東部地區的可用區域。如果您有防火牆，務必針對這些區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+<td>新加坡及蒙特婁是位於 {{site.data.keyword.containerlong_notm}} 亞太地區北部及美國東部地區的可用區域。如果您有防火牆，務必針對這些區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>
@@ -251,7 +292,7 @@ lastupdated: "2018-08-06"
 ## 與 Slack 上志同道合的開發人員會談
 {: #slack}
 
-您可以看到別人談論的內容，也可以在 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 中提出自己的問題。
+您可以看到別人談論的內容，也可以在 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 中提出自己的問題。
 {:shortdesc}
 
 如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。

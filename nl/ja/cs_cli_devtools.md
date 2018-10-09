@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-08-06"
 ## ibmcloud ks コマンド
 {: #cs_commands}
 
-**ヒント:** {{site.data.keyword.containershort_notm}} プラグインのバージョンを表示するには、以下のコマンドを実行します。
+**ヒント:** {{site.data.keyword.containerlong_notm}} プラグインのバージョンを表示するには、以下のコマンドを実行します。
 
 ```
 ibmcloud plugin list
@@ -250,8 +250,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[  ibmcloud ks zones
-  ](#cs_datacenters)</td>
+    <td>[   ibmcloud ks zones
+   ](#cs_datacenters)</td>
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
@@ -325,7 +325,7 @@ ibmcloud plugin list
 ### ibmcloud ks api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
-API エンドポイントを {{site.data.keyword.containershort_notm}} のターゲットとして設定します。 エンドポイントを指定しない場合、ターゲットとして設定されている現行エンドポイントに関する情報を表示できます。
+API エンドポイントを {{site.data.keyword.containerlong_notm}} のターゲットとして設定します。 エンドポイントを指定しない場合、ターゲットとして設定されている現行エンドポイントに関する情報を表示できます。
 
 地域を切り替えますか? `ibmcloud ks region-set` [コマンド](#cs_region-set)を代わりに使用します。
 {: tip}
@@ -334,7 +334,7 @@ API エンドポイントを {{site.data.keyword.containershort_notm}} のター
 
    <dl>
    <dt><code><em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containershort_notm}} API エンドポイント。 このエンドポイントは、{{site.data.keyword.Bluemix_notm}} エンドポイントとは異なることに注意してください。 この値は、API エンドポイントを設定するために必須です。 指定できる値は以下のとおりです。<ul>
+   <dd>{{site.data.keyword.containerlong_notm}} API エンドポイント。 このエンドポイントは、{{site.data.keyword.Bluemix_notm}} エンドポイントとは異なることに注意してください。 この値は、API エンドポイントを設定するために必須です。 指定できる値は以下のとおりです。<ul>
    <li>グローバル・エンドポイント: https://containers.bluemix.net</li>
    <li>北アジア太平洋地域エンドポイント: https://ap-north.containers.bluemix.net</li>
    <li>南アジア太平洋地域エンドポイント: https://ap-south.containers.bluemix.net</li>
@@ -376,13 +376,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-{{site.data.keyword.containershort_notm}} 地域の IAM API キーの所有者の名前と E メール・アドレスを表示します。
+{{site.data.keyword.containerlong_notm}} 地域の IAM API キーの所有者の名前と E メール・アドレスを表示します。
 
-IAM (ID およびアクセス管理) の API キーは、{{site.data.keyword.containershort_notm}} 管理アクセス・ポリシーを必要とする最初のアクションを実行したときに、地域に対して自動的に設定されます。 例えば、管理ユーザーの 1 人が `us-south` 地域に最初のクラスターを作成したとします。 これにより、その地域に対してこのユーザーの IAM API キーがアカウントに保管されます。 新しいワーカー・ノードや VLAN などのリソースを IBM Cloud インフラストラクチャー (SoftLayer) で注文する際には、この API キーが使用されます。
+IAM (ID およびアクセス管理) の API キーは、{{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーを必要とする最初のアクションを実行したときに、地域に対して自動的に設定されます。 例えば、管理ユーザーの 1 人が `us-south` 地域に最初のクラスターを作成したとします。 これにより、その地域に対してこのユーザーの IAM API キーがアカウントに保管されます。 新しいワーカー・ノードや VLAN などのリソースを IBM Cloud インフラストラクチャー (SoftLayer) で注文する際には、この API キーが使用されます。
 
-IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオとのやりとりが必要なアクション (例えば、新規クラスターの作成やワーカー・ノードの再ロードなど) を別のユーザーがこの地域で実行すると、保管されている API キーを基に、そのアクションを実行できるだけの権限があるかどうかが判断されます。 インフラストラクチャー関連のアクションをクラスター内で正常に実行するためには、{{site.data.keyword.containershort_notm}} 管理ユーザーにインフラストラクチャー・アクセス・ポリシーの**スーパーユーザー**を割り当ててください。 詳しくは、[ユーザー・アクセスの管理](cs_users.html#infra_access)を参照してください。
+IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオとのやりとりが必要なアクション (例えば、新規クラスターの作成やワーカー・ノードの再ロードなど) を別のユーザーがこの地域で実行すると、保管されている API キーを基に、そのアクションを実行できるだけの権限があるかどうかが判断されます。 インフラストラクチャー関連のアクションをクラスター内で正常に実行するためには、{{site.data.keyword.containerlong_notm}} 管理ユーザーにインフラストラクチャー・アクセス・ポリシーの**スーパーユーザー**を割り当ててください。 詳しくは、[ユーザー・アクセスの管理](cs_users.html#infra_access)を参照してください。
 
-地域に対して保管されている API キーを更新する必要がある場合は、[ibmcloud ks api-key-reset](#cs_api_key_reset) コマンドを実行して更新できます。 このコマンドには {{site.data.keyword.containershort_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。
+地域に対して保管されている API キーを更新する必要がある場合は、[ibmcloud ks api-key-reset](#cs_api_key_reset) コマンドを実行して更新できます。 このコマンドには {{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。
 
 **ヒント:** [ibmcloud ks credentials-set](#cs_credentials_set) コマンドを使用して IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動で設定した場合、このコマンドで返される API キーは使用されない場合があります。
 
@@ -411,11 +411,11 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオと
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-{{site.data.keyword.containershort_notm}} 地域の現在の IAM API キーを置き換えます。
+{{site.data.keyword.containerlong_notm}} 地域の現在の IAM API キーを置き換えます。
 
-このコマンドには {{site.data.keyword.containershort_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。 その IAM API キーが、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにインフラストラクチャーを注文する際に必要になります。 保管された API キーは、このコマンドを実行したユーザーに関係なく、地域内で実行される、インフラストラクチャー権限を必要とするあらゆるアクションに使用されます。 IAM API キーの仕組みについて詳しくは、[`ibmcloud ks api-key-info` コマンド](#cs_api_key_info)を参照してください。
+このコマンドには {{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。 その IAM API キーが、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにインフラストラクチャーを注文する際に必要になります。 保管された API キーは、このコマンドを実行したユーザーに関係なく、地域内で実行される、インフラストラクチャー権限を必要とするあらゆるアクションに使用されます。 IAM API キーの仕組みについて詳しくは、[`ibmcloud ks api-key-info` コマンド](#cs_api_key_info)を参照してください。
 
-**重要** このコマンドを使用する前に、このコマンドを実行するユーザーに必要な [{{site.data.keyword.containershort_notm}} 権限と IBM Cloud インフラストラクチャー (SoftLayer) 権限](cs_users.html#users)があることを確認してください。
+**重要** このコマンドを使用する前に、このコマンドを実行するユーザーに必要な [{{site.data.keyword.containerlong_notm}} 権限と IBM Cloud インフラストラクチャー (SoftLayer) 権限](cs_users.html#users)があることを確認してください。
 
 <strong>コマンド・オプション</strong>:
 
@@ -568,13 +568,13 @@ API サーバー構成への変更を適用するには、クラスター内の 
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-{{site.data.keyword.containershort_notm}} プラグインを初期化するか、Kubernetes クラスターを作成またはアクセスする地域を指定します。
+{{site.data.keyword.containerlong_notm}} プラグインを初期化するか、Kubernetes クラスターを作成またはアクセスする地域を指定します。
 
 <strong>コマンド・オプション</strong>:
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>使用する {{site.data.keyword.containershort_notm}} API エンドポイント。  この値はオプションです。 [API エンドポイントの選択可能な値を表示します。](cs_regions.html#container_regions)</dd>
+   <dd>使用する {{site.data.keyword.containerlong_notm}} API エンドポイント。  この値はオプションです。 [API エンドポイントの選択可能な値を表示します。](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>非セキュアな HTTP 接続を許可します。</dd>
@@ -909,7 +909,7 @@ trusted: <em>true</em>
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -1014,7 +1014,7 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-{{site.data.keyword.containershort_notm}} でサポートされている Kubernetes のバージョンのリストを表示します。 最新の安定した機能を使用するために、[クラスター・マスター](#cs_cluster_update)と[ワーカー・ノード](cs_cli_reference.html#cs_worker_update)をデフォルト・バージョンに更新してください。
+{{site.data.keyword.containerlong_notm}} でサポートされている Kubernetes のバージョンのリストを表示します。 最新の安定した機能を使用するために、[クラスター・マスター](#cs_cluster_update)と[ワーカー・ノード](cs_cli_reference.html#cs_worker_update)をデフォルト・バージョンに更新してください。
 
 **コマンド・オプション**:
 
@@ -1145,18 +1145,17 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 <dl>
 <dt><code>CONTAINER_ID</code></dt>
 <dd><p>コンテナーの ID。 この値は必須です。</p>
-<p>コンテナーの ID を確認するには、次のようにします。<ol><li>[クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。</li><li>`kubectl get pods` を実行して、ポッドをリストします。</li><li>`kubectl describe pod <pod_name>` コマンドの出力内で **Container ID** フィールドを見つけます。例えば、`Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15` などです。</li><li>`ibmcloud ks va` コマンドのコンテナー ID から `docker://` 接頭部を削除してから、その ID を使用します。上記の例では、`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15` の部分です。</li></ol></p></dd>
+<p>コンテナーの ID を確認するには、次のようにします。<ol><li>[クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。</li><li>`kubectl get pods` を実行して、ポッドをリストします。</li><li>`kubectl describe pod <pod_name>` コマンドの出力内で **Container ID** フィールドを見つけます。 例えば、`Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15` などです。</li><li>`ibmcloud ks va` コマンドのコンテナー ID から `docker://` 接頭部を削除してから、その ID を使用します。 上記の例では、`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15` の部分です。</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
-<dd><p>脆弱なパッケージについてより多くの修正情報を表示するようにコマンド出力を拡張します。この値はオプションです。</p>
-<p>デフォルトでは、スキャン結果には ID、ポリシーの状況、影響を受けるパッケージ、解決方法が表示されます。
-`--extended` フラグを使用すると、要約、ベンダーのセキュリティー上の注意、公式通知のリンクなどの情報が追加されます。</p></dd>
+<dd><p>脆弱なパッケージについてより多くの修正情報を表示するようにコマンド出力を拡張します。 この値はオプションです。</p>
+<p>デフォルトでは、スキャン結果には ID、ポリシーの状況、影響を受けるパッケージ、解決方法が表示されます。 `--extended` フラグを使用すると、要約、ベンダーのセキュリティー上の注意、公式通知のリンクなどの情報が追加されます。</p></dd>
 
 <dt><code>--vulnerabilities</code></dt>
-<dd>コマンド出力にパッケージの脆弱性のみが表示されるように制限します。この値はオプションです。 このフラグを `--configuration-issues` フラグと併用することはできません。</dd>
+<dd>コマンド出力にパッケージの脆弱性のみが表示されるように制限します。 この値はオプションです。 このフラグを `--configuration-issues` フラグと併用することはできません。</dd>
 
 <dt><code>--configuration-issues</code></dt>
-<dd>構成の問題のみを表示するようにコマンド出力を制限します。この値はオプションです。 `--vulnerabilities` フラグを使用する場合は、このフラグは使用できません。</dd>
+<dd>構成の問題のみを表示するようにコマンド出力を制限します。 この値はオプションです。 `--vulnerabilities` フラグを使用する場合は、このフラグは使用できません。</dd>
 
 <dt><code>--json</code></dt>
 <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
@@ -1215,7 +1214,7 @@ Web フックを登録します。
 
 **注:**
 * ポータブル・パブリック IP アドレスは、月単位で課金されます。 クラスターをプロビジョンした後にポータブル・パブリック IP アドレスを削除した場合、短時間しか使用していなくても月額料金を支払う必要があります。
-* クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containershort_notm}}の外部で使用したりしないでください。
+* クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。
 * 同じ VLAN 上のサブネット間でルーティングするには、[VLAN スパンニングをオンにする](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)必要があります。
 
 <strong>コマンド・オプション</strong>:
@@ -1243,10 +1242,10 @@ Web フックを登録します。
 ### ibmcloud ks cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
-IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブネットを作成し、{{site.data.keyword.containershort_notm}} において指定されたクラスターでそのサブネットを使用できるようにします。
+IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブネットを作成し、{{site.data.keyword.containerlong_notm}} において指定されたクラスターでそのサブネットを使用できるようにします。
 
 **注:**
-* クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containershort_notm}}の外部で使用したりしないでください。
+* クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。
 * 同じ VLAN 上のサブネット間でルーティングするには、[VLAN スパンニングをオンにする](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)必要があります。
 
 <strong>コマンド・オプション</strong>:
@@ -1277,12 +1276,12 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
 ### ibmcloud ks cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-{{site.data.keyword.containershort_notm}} のクラスターに独自のプライベート・サブネットを追加します。
+{{site.data.keyword.containerlong_notm}} のクラスターに独自のプライベート・サブネットを追加します。
 
 このプライベート・サブネットは、IBM Cloud インフラストラクチャー (SoftLayer) から提供されたプライベート・サブネットではありません。 このため、そのサブネットに対してインバウンドおよびアウトバウンドのネットワーク・トラフィックのルーティングをすべて構成する必要があります。 IBM Cloud インフラストラクチャー (SoftLayer) のサブネットを追加する場合は、`ibmcloud ks cluster-subnet-add` [コマンド](#cs_cluster_subnet_add)を使用します。
 
 **注:**
-* ユーザーのプライベート・サブネットをクラスターに追加する場合、そのクラスター内のプライベートの Load Balancers でこのサブネットの IP アドレスが使用されます。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containershort_notm}}の外部で使用したりしないでください。
+* ユーザーのプライベート・サブネットをクラスターに追加する場合、そのクラスター内のプライベートの Load Balancers でこのサブネットの IP アドレスが使用されます。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containerlong_notm}}の外部で使用したりしないでください。
 * 同じ VLAN 上のサブネット間でルーティングするには、[VLAN スパンニングをオンにする](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)必要があります。
 
 <strong>コマンド・オプション</strong>:
@@ -1657,21 +1656,22 @@ ALB の詳細を表示します。
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-{{site.data.keyword.containershort_notm}} アカウントに IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を設定します。
+{{site.data.keyword.containerlong_notm}} アカウントに IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を設定します。
 
 {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントがあれば、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにデフォルトでアクセスできます。 しかし、既に所有している別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用して、インフラストラクチャーを注文したい場合もあるでしょう。 このコマンドを使用すると、そのようなインフラストラクチャー・アカウントを {{site.data.keyword.Bluemix_notm}} アカウントにリンクできます。
 
 IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動で設定した場合は、アカウントに既に [IAM API キー](#cs_api_key_info)が存在していても、それらの資格情報がインフラストラクチャーの注文に使用されます。 資格情報が保管されているユーザーにインフラストラクチャーを注文するために必要な権限がない場合、クラスターを作成したりワーカー・ノードを再ロードしたりするインフラストラクチャー関連のアクションは失敗する可能性があります。
 
-1 つの {{site.data.keyword.containershort_notm}} アカウントに複数の資格情報を設定することはできません。 それぞれの {{site.data.keyword.containershort_notm}} アカウントは、1 つの IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオだけにリンクされます。
+1 つの {{site.data.keyword.containerlong_notm}} アカウントに複数の資格情報を設定することはできません。 それぞれの {{site.data.keyword.containerlong_notm}} アカウントは、1 つの IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオだけにリンクされます。
 
-**重要:** このコマンドを使用する前に、使用する資格情報を所有するユーザーに、必要な [{{site.data.keyword.containershort_notm}} 権限と IBM Cloud インフラストラクチャー (SoftLayer) 権限](cs_users.html#users)があることを確認してください。
+**重要:** このコマンドを使用する前に、使用する資格情報を所有するユーザーに、必要な [{{site.data.keyword.containerlong_notm}} 権限と IBM Cloud インフラストラクチャー (SoftLayer) 権限](cs_users.html#users)があることを確認してください。
 
 <strong>コマンド・オプション</strong>:
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API ユーザー名。 この値は必須です。 **注**: インフラストラクチャー API ユーザー名は、IBMid と同じではありません。インフラストラクチャーの API ユーザー名を表示するには、以下のようにします。<ol><li>[{{site.data.keyword.Bluemix_notm}} ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインします。</li>
+   <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API ユーザー名。 この値は必須です。 **注**: インフラストラクチャー API ユーザー名は、IBMid と同じではありません。 インフラストラクチャーの API ユーザー名を表示するには、以下のようにします。
+   <ol><li>[{{site.data.keyword.Bluemix_notm}} ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインします。</li>
    <li>メニューを展開して、**「インフラストラクチャー」**を選択します。</li>
    <li>メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。</li>
    <li>表示するユーザーの**「IBM ID またはユーザー名」**をクリックします。</li>
@@ -1717,7 +1717,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-{{site.data.keyword.containershort_notm}} アカウントから IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を削除します。
+{{site.data.keyword.containerlong_notm}} アカウントから IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を削除します。
 
 資格情報を削除すると、[IAM API キー](#cs_api_key_info)が、IBM Cloud インフラストラクチャー (SoftLayer) のリソースの注文に使用されます。
 
@@ -1739,10 +1739,10 @@ IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動
 ### ibmcloud ks machine-types ZONE [--json][-s]
 {: #cs_machine_types}
 
-ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 マシン・タイプはゾーンによって異なります。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。 デフォルトでは、すべてのコンテナー・データが格納される 2 次ストレージ・ディスク・ディレクトリーは、LUKS 暗号で暗号化されます。クラスターの作成時に `disable-disk-encrypt` オプションが指定された場合、ホストの Docker データは暗号化されません。 [暗号化について詳しくは、こちらをご覧ください](cs_secure.html#encrypted_disk)。
+ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 マシン・タイプはゾーンによって異なります。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。 デフォルトでは、すべてのコンテナー・データが格納される 2 次ストレージ・ディスク・ディレクトリーは、LUKS 暗号で暗号化されます。 クラスターの作成時に `disable-disk-encrypt` オプションが指定された場合、ホストの Docker データは暗号化されません。 [暗号化について詳しくは、こちらをご覧ください](cs_secure.html#encrypted_disk)。
 {:shortdesc}
 
-ワーカー・ノードは、共有または専用ハードウェア上に仮想マシンとしてプロビジョンすることも、ベア・メタル上に物理マシンとしてプロビジョンすることもできます。 [マシン・タイプのオプションについて詳しくは、こちらをご覧ください](cs_clusters.html#shared_dedicated_node)。
+ワーカー・ノードは、共有または専用ハードウェア上に仮想マシンとしてプロビジョンすることも、ベア・メタル上に物理マシンとしてプロビジョンすることもできます。 [マシン・タイプのオプションについて詳しくは、こちらをご覧ください](cs_clusters_planning.html#shared_dedicated_node)。
 
 <strong>コマンド・オプション</strong>:
 
@@ -2197,7 +2197,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を手動
 ### ibmcloud ks region
 {: #cs_region}
 
-現在自分が属している {{site.data.keyword.containershort_notm}} 地域を見つけます。 その地域に固有のクラスターを作成して管理します。 地域を変更するには、`ibmcloud ks region-set` コマンドを使用します。
+現在自分が属している {{site.data.keyword.containerlong_notm}} 地域を見つけます。 その地域に固有のクラスターを作成して管理します。 地域を変更するには、`ibmcloud ks region-set` コマンドを使用します。
 
 **例**:
 
@@ -2215,7 +2215,7 @@ Region: us-south
 ### ibmcloud ks region-set [REGION]
 {: #cs_region-set}
 
-{{site.data.keyword.containershort_notm}} の地域を設定します。 その地域に固有のクラスターを作成して管理します。高可用性を確保するために、複数の地域にクラスターを作成することもできます。
+{{site.data.keyword.containerlong_notm}} の地域を設定します。 その地域に固有のクラスターを作成して管理します。高可用性を確保するために、複数の地域にクラスターを作成することもできます。
 
 例えば、米国南部地域の {{site.data.keyword.Bluemix_notm}} にログインしてクラスターを作成できます。 次に `ibmcloud ks region-set eu-central` を使用して中欧地域をターゲットにし、別のクラスターを作成できます。 最後に、`ibmcloud ks region-set us-south` を使用して米国南部地域に戻り、その地域のクラスターを管理できます。
 
@@ -2256,7 +2256,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-選択可能な地域をリストします。 `Region Name` は {{site.data.keyword.containershort_notm}} 名、`Region Alias` はその地域の一般的な {{site.data.keyword.Bluemix_notm}} 名です。
+選択可能な地域をリストします。 `Region Name` は {{site.data.keyword.containerlong_notm}} 名、`Region Alias` はその地域の一般的な {{site.data.keyword.Bluemix_notm}} 名です。
 
 **例**:
 
@@ -2695,7 +2695,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>使用可能なワーカー・ノードのクラスターの名前または ID。 この値は必須です。</dd>
 
    <dt><code>--worker-pool <em>POOL</em></code></dt>
-   <dd>ワーカー・プールに属するワーカー・ノードのみを表示します。使用可能なワーカー・プールをリストするには、`ibmcloud ks worker-pools --cluster <cluster_name_or_ID>` を実行します。 この値はオプションです。</dd>
+   <dd>ワーカー・プールに属するワーカー・ノードのみを表示します。 使用可能なワーカー・プールをリストするには、`ibmcloud ks worker-pools --cluster <cluster_name_or_ID>` を実行します。 この値はオプションです。</dd>
 
    <dt><code>--show-deleted</code></dt>
    <dd>クラスターから削除されたワーカー・ノードを、削除理由も含めて表示します。 この値はオプションです。</dd>
@@ -2723,7 +2723,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE [--hardware ISOLATION][--labels LABELS] [--disable-disk-encrypt]
 {: #cs_worker_pool_create}
 
-クラスター内にワーカー・プールを作成できます。デフォルトでは、ワーカー・プールの追加時にゾーンは割り当てられません。各ゾーンに必要なワーカー数と、ワーカーのマシン・タイプを指定します。デフォルトの Kubernetes バージョンがワーカー・プールに付与されます。ワーカーの作成を終了するには、プールに [1 つまたは複数のゾーンを追加](#cs_zone_add)します。
+クラスター内にワーカー・プールを作成できます。 デフォルトでは、ワーカー・プールの追加時にゾーンは割り当てられません。 各ゾーンに必要なワーカー数と、ワーカーのマシン・タイプを指定します。 デフォルトの Kubernetes バージョンがワーカー・プールに付与されます。 ワーカーの作成を終了するには、プールに [1 つまたは複数のゾーンを追加](#cs_zone_add)します。
 
 <strong>コマンド・オプション</strong>:
 <dl>
@@ -2790,14 +2790,14 @@ diskEncryption: <em>false</em></code></pre>
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 
 ### ibmcloud ks worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
 {: #cs_rebalance}
 
-ワーカー・ノードの削除後に、ワーカー・プールのバランスを再調整できます。このコマンドを実行すると、新しいワーカーが 1 つ以上ワーカー・プールに追加されます。
+ワーカー・ノードの削除後に、ワーカー・プールのバランスを再調整できます。 このコマンドを実行すると、新しいワーカーが 1 つ以上ワーカー・プールに追加されます。
 
 <strong>コマンド・オプション</strong>:
 
@@ -2805,7 +2805,7 @@ diskEncryption: <em>false</em></code></pre>
   <dt><code><em>--cluster CLUSTER</em></code></dt>
     <dd>クラスターの名前または ID。 この値は必須です。</dd>
   <dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
-    <dd>バランスを再調整するワーカー・プール。この値は必須です。</dd>
+    <dd>バランスを再調整するワーカー・プール。 この値は必須です。</dd>
   <dt><code>-s</code></dt>
     <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
 </dl>
@@ -2832,7 +2832,7 @@ diskEncryption: <em>false</em></code></pre>
     <dd>ワーカー・プールをサイズ変更するクラスターの名前または ID。 この値は必須です。</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>各ゾーンに必要なワーカーの数。この値は必須です。1 以上の値にする必要があります。</dd>
+    <dd>各ゾーンに必要なワーカーの数。 この値は必須です。1 以上の値にする必要があります。</dd>
 
   <dt><code>-s</code></dt>
     <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>
@@ -2897,33 +2897,33 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][--private-only] [--json][-s]
 {: #cs_zone_add}
 
-**複数ゾーン・クラスターのみ**: クラスターまたはワーカー・プールを作成した後、ゾーンを追加できます。ゾーンを追加すると、ワーカー・プールに対して指定した「ゾーンあたりのワーカー数」を満たすように新しいゾーンにワーカー・ノードが追加されます。
+**複数ゾーン・クラスターのみ**: クラスターまたはワーカー・プールを作成した後、ゾーンを追加できます。 ゾーンを追加すると、ワーカー・プールに対して指定した「ゾーンあたりのワーカー数」を満たすように新しいゾーンにワーカー・ノードが追加されます。
 
 <strong>コマンド・オプション</strong>:
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>追加するゾーン。クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。この値は必須です。</dd>
+    <dd>追加するゾーン。 クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。 この値は必須です。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>クラスターの名前または ID。 この値は必須です。</dd>
 
   <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
-    <dd>ゾーンを追加するワーカー・プールのコンマ区切りリスト。少なくとも 1 つのワーカー・プールが必要です。</dd>
+    <dd>ゾーンを追加するワーカー・プールのコンマ区切りリスト。 少なくとも 1 つのワーカー・プールが必要です。</dd>
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd><p>プライベート VLAN の ID。 この値は条件付きです。</p>
-    <p>ゾーンにプライベート VLAN がある場合、この値は、クラスターのワーカー・ノードが 1 つ以上存在するプライベート VLAN ID と一致していなければなりません。使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。</p>
-    <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。その後、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効化</a>すると、別々のゾーンにあるワーカー・ノードが相互に通信できるようになります。</p>
+    <p>ゾーンにプライベート VLAN がある場合、この値は、クラスターのワーカー・ノードが 1 つ以上存在するプライベート VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。</p>
+    <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。 新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。 その後、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効化</a>すると、別々のゾーンにあるワーカー・ノードが相互に通信できるようになります。</p>
 <p>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd><p>パブリック VLAN の ID。 クラスターの作成後にノード上のワークロードをパブリックに公開する場合は、この値が必要です。この値は、このゾーンでクラスターのワーカー・ノードが 1 つ以上存在するパブリック VLAN ID と一致していなければなりません。使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。</p>
-    <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。その後、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効化</a>すると、別々のゾーンにあるワーカー・ノードが相互に通信できるようになります。</p>
+    <dd><p>パブリック VLAN の ID。 クラスターの作成後にノード上のワークロードをパブリックに公開する場合は、この値が必要です。 この値は、このゾーンでクラスターのワーカー・ノードが 1 つ以上存在するパブリック VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。</p>
+    <p>このゾーン内にプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。 新規ゾーンをワーカー・プールに初めて追加するときに、プライベート VLAN とパブリック VLAN が自動的に作成されます。 その後、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効化</a>すると、別々のゾーンにあるワーカー・ノードが相互に通信できるようになります。</p>
     <p>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。`--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。**注**: プライベート専用クラスターが必要な場合は、ネットワーク接続用にゲートウェイ・アプライアンスを構成する必要があります。詳しくは、[プライベート VLAN セットアップ専用のプライベート外部ネットワーキングの計画](cs_network_planning.html#private_vlan)を参照してください。</dd>
+    <dd>このオプションは、パブリック VLAN が作成されるのを防止するために使用します。 `--private-vlan` フラグを指定する場合にしか必要でないため、`--public-vlan` フラグは含めないでください。  **注**: プライベート専用クラスターが必要な場合は、ネットワーク接続用にゲートウェイ・アプライアンスを構成する必要があります。 詳しくは、[プライベート VLAN セットアップ専用のプライベート外部ネットワーキングの計画](cs_network_planning.html#private_vlan)を参照してください。</dd>
 
   <dt><code>--json</code></dt>
     <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
@@ -2942,25 +2942,25 @@ diskEncryption: <em>false</em></code></pre>
   ### ibmcloud ks zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN][--json] [-s]
   {: #cs_zone_network_set}
 
-  **複数ゾーン・クラスターのみ**: これまで使用していたものとは別のパブリック VLAN またはプライベート VLAN をゾーンで使用するように、ワーカー・プールのネットワーク・メタデータを設定します。プール内に既に作成済みのワーカー・ノードは、これまでと同じパブリック VLAN またはプライベート VLAN を使用し続けますが、プール内の新しいワーカー・ノードは新しいネットワーク・データを使用します。
+  **複数ゾーン・クラスターのみ**: これまで使用していたものとは別のパブリック VLAN またはプライベート VLAN をゾーンで使用するように、ワーカー・プールのネットワーク・メタデータを設定します。 プール内に既に作成済みのワーカー・ノードは、これまでと同じパブリック VLAN またはプライベート VLAN を使用し続けますが、プール内の新しいワーカー・ノードは新しいネットワーク・データを使用します。
 
   <strong>コマンド・オプション</strong>:
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>追加するゾーン。クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。この値は必須です。</dd>
+      <dd>追加するゾーン。 クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。 この値は必須です。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>クラスターの名前または ID。 この値は必須です。</dd>
 
   <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
-    <dd>ゾーンを追加するワーカー・プールのコンマ区切りリスト。少なくとも 1 つのワーカー・プールが必要です。</dd>
+    <dd>ゾーンを追加するワーカー・プールのコンマ区切りリスト。 少なくとも 1 つのワーカー・プールが必要です。</dd>
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-    <dd>プライベート VLAN の ID。 この値は必須です。 この値は、クラスター内にある 1 つ以上のワーカー・ノードのプライベート VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。使用可能な VLAN がない場合は、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効にする</a>ことができます。<br><br>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</dd>
+    <dd>プライベート VLAN の ID。 この値は必須です。 この値は、クラスター内にある 1 つ以上のワーカー・ノードのプライベート VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。 使用可能な VLAN がない場合は、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効にする</a>ことができます。<br><br>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd>パブリック VLAN の ID。 この値は、ゾーンのパブリック VLAN を変更する場合に必要です。パブリック VLAN と一緒にプライベート VLAN を変更したくない場合は、同じプライベート VLAN ID を使用してください。このパブリック VLAN ID は、クラスターのワーカー・ノードが 1 つ以上存在するパブリック VLAN ID と一致していなければなりません。使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。使用可能な VLAN がない場合は、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効にする</a>ことができます。<br><br>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</dd>
+    <dd>パブリック VLAN の ID。 この値は、ゾーンのパブリック VLAN を変更する場合に必要です。 パブリック VLAN と一緒にプライベート VLAN を変更したくない場合は、同じプライベート VLAN ID を使用してください。 このパブリック VLAN ID は、クラスターのワーカー・ノードが 1 つ以上存在するパブリック VLAN ID と一致していなければなりません。 使用可能な VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行します。 使用可能な VLAN がない場合は、アカウントの <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN スパンニングを有効にする</a>ことができます。<br><br>**注**: 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。</dd>
 
   <dt><code>--json</code></dt>
     <dd>コマンド出力を JSON フォーマットで出力します。 この値はオプションです。</dd>
@@ -2979,7 +2979,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f][-s]
 {: #cs_zone_rm}
 
-**複数ゾーン・クラスターのみ**: クラスター内のすべてのワーカー・プールからゾーンを削除します。ワーカー・プールからそのゾーンのワーカー・ノードがすべて削除されます。
+**複数ゾーン・クラスターのみ**: クラスター内のすべてのワーカー・プールからゾーンを削除します。 ワーカー・プールからそのゾーンのワーカー・ノードがすべて削除されます。
 
 アプリのダウン時間やワーカー・ノードのデータ破損を防止するために、必ず、ゾーンを削除する前に、クラスター内の他のゾーンに、ポッドがスケジュールを変更できるだけの十分な数のワーカー・ノードが存在することを確認してください。
 {: tip}
@@ -2988,13 +2988,13 @@ diskEncryption: <em>false</em></code></pre>
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>追加するゾーン。クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。この値は必須です。</dd>
+    <dd>追加するゾーン。 クラスターの地域内の [複数ゾーン対応ゾーン](cs_regions.html#zones)でなければなりません。 この値は必須です。</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>クラスターの名前または ID。 この値は必須です。</dd>
 
   <dt><code>-f</code></dt>
-    <dd>ユーザー・プロンプトなしで更新を強制的に実行します。この値はオプションです。</dd>
+    <dd>ユーザー・プロンプトなしで更新を強制的に実行します。 この値はオプションです。</dd>
 
   <dt><code>-s</code></dt>
     <dd>その日のメッセージを表示せず、リマインダーも更新しません。 この値はオプションです。</dd>

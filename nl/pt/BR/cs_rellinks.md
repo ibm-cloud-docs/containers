@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # Links relacionados
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **Consultas**
@@ -45,8 +45,7 @@ lastupdated: "2018-08-06"
 ** Tutoriais, Demonstrações e Cursos **
 
 - [Modernizar e ampliar um app da web Java existente (JPetStore) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [Jornadas de orquestração de contêiner do developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [Cursos do developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [Linha de aprendizagem do {{site.data.keyword.containerlong_notm}} Cognitive Class ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [Como construir um app da web no IKS ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Clusters multiregion seguros com o Cloud Internet Service (CIS) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Analisar logs e monitorar o funcionamento de apps ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

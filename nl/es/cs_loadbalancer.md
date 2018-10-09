@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,10 +23,12 @@ lastupdated: "2018-08-06"
 Exponga un puerto y utilice una dirección IP portátil para que el equilibrador de carga de capa 4 acceda a la app contenerizada.
 {:shortdesc}
 
+
+
 ## Componentes y arquitectura del equilibrador de carga
 {: #planning}
 
-Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} suministra automáticamente una subred pública portátil y una subred privada portátil.
+Cuando se crea un clúster estándar, {{site.data.keyword.containerlong_notm}} suministra automáticamente una subred pública portátil y una subred privada portátil.
 
 * La subred pública portátil proporciona 1 dirección IP pública portátil que utiliza el [ALB público de Ingress](cs_ingress.html) predeterminado. Las 4 direcciones IP públicas portátiles restantes se pueden utilizar para exponer apps individuales en internet mediante la creación de un servicio público de equilibrador de carga.
 * La subred privada portátil proporciona 1 dirección IP privada portátil que utiliza el [ALB privado de Ingress](cs_ingress.html#private_ingress) predeterminado. Las 4 direcciones IP privadas portátiles restantes se pueden utilizar para exponer apps individuales en una red privada mediante la creación de un servicio privado de equilibrador de carga.
@@ -37,7 +39,7 @@ Un servicio de equilibrador de carga también hace que la app esté disponible a
 
 El servicio LoadBalancer sirve como punto de entrada externo para las solicitudes entrantes para la app. Para acceder al servicio LoadBalancer desde Internet, utilice la dirección IP pública del equilibrador de carga y el puerto asignado en el formato `<IP_address>:<port>`. El siguiente diagrama muestra cómo se dirige la comunicación del equilibrador de carga desde Internet a una app.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containershort_notm}} utilizando un equilibrador de carga" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante un equilibrador de carga" style="width:550px; border-style: none"/>
 
 1. Una solicitud enviada a la app utiliza la dirección IP pública del equilibrador de carga y el puerto asignado en el nodo trabajador.
 
@@ -71,9 +73,9 @@ Nota:
 
 Antes de empezar:
   * Un servicio de equilibrador de carga con una dirección IP privada portátil sigue teniendo un NodePort público abierto en cada nodo trabajador. Para añadir una política de red para impedir el tráfico público, consulte [Bloqueo del tráfico de entrada](cs_network_policy.html#block_ingress).
-  * En cada zona, al menos una VLAN pública debe tener subredes portátiles disponibles para los servicios Ingress y LoadBalancer. Para añadir los servicios Ingress y LoadBalancer privados, debe especificar al menos una VLAN privada con las subredes portátiles disponibles. Para añadir subredes, consulte [Configuración de subredes para clústeres](cs_subnets.html).
+  * Debe desplegar un equilibrador de carga en cada zona, y a cada equilibrador de carga se le asigna su propia dirección IP en esa zona. Para crear equilibradores de carga públicos, al menos una VLAN pública debe tener subredes portátiles disponibles en cada zona. Para añadir servicios de equilibrador de carga privado, al menos una VLAN privada debe tener subredes portátiles disponibles en cada zona. Para añadir subredes, consulte [Configuración de subredes para clústeres](cs_subnets.html).
   * Si restringe el tráfico de red a los nodos trabajadores de extremo, asegúrese de que haya al menos 2 [nodos trabajadores de extremo](cs_edge.html#edge) habilitados en cada zona. Si los nodos trabajadores de extremo están habilitados en algunas zonas pero no en otras, los equilibradores de carga no se desplegarán uniformemente. Los equilibradores de carga se desplegarán en nodos de extremo en algunas zonas, pero en nodos trabajadores normales en otras zonas.
-  * Para habilitar la comunicación en la red privada entre nodos trabajadores de distintas zonas, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+  * Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
 
 
 Para configurar un servicio LoadBalancer en un clúster multizona:
@@ -503,3 +505,4 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
         {: screen}
 
     4. En la sección **Labels** de la salida, verifique que la VLAN privada o pública es la VLAN es que haya designado en los pasos anteriores.
+

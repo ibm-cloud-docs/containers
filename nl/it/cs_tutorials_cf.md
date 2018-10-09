@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster
 {: #cf_tutorial}
 
-Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cloud Foundry e distribuire lo stesso codice presente in un contenitore in un cluster Kubernetes in {{site.data.keyword.containershort_notm}}.
+Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cloud Foundry e distribuire lo stesso codice presente in un contenitore in un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
@@ -42,6 +42,7 @@ Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud 
 - [Crea un
 cluster](cs_clusters.html#clusters_ui).
 - [Indirizza la tua CLI al cluster](cs_cli_install.html#cs_cli_configure).
+- [Assicurati di disporre del ruolo della piattaforma **Editor**, **Operatore** o **Amministratore**](cs_users.html#add_users_cli).
 - [Acquisisci informazioni sulla terminologia Docker e Kubernetes](cs_tech.html).
 
 
@@ -261,7 +262,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

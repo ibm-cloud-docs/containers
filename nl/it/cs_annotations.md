@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 Per aggiungere funzionalità al tuo programma di bilanciamento del carico dell'applicazione (o ALB, application load balancer) Ingress, puoi specificare delle annotazioni sotto forma di metadati in una risorsa Ingress.
 {: shortdesc}
 
-**Importante**: prima di utilizzare le annotazioni, assicurati di aver impostato correttamente la configurazione del tuo servizio Ingress seguendo la procedura presente in [Esposizione delle applicazioni con Ingress](cs_ingress.html). Una volta impostato l'ALB Ingress con una configurazione di base, puoi espanderne le capacità aggiungendo le annotazioni al file della risorsa Ingress.
+**Importante**: prima di utilizzare le annotazioni, assicurati di aver impostato correttamente la configurazione del tuo servizio Ingress seguendo la procedura presente in [Esposizione delle applicazioni con Ingress](cs_ingress.html). Una volta impostato l'ALB Ingress con una configurazione di base, puoi espanderne le capacità aggiungendo le annotazioni al file di risorse Ingress.
 
 <table>
 <caption>Annotazioni generali</caption>
@@ -369,7 +369,7 @@ Modifica il modo in cui l'ALB mette in corrispondenza l'URI della richiesta con 
 
 <dl>
 <dt>Descrizione</dt>
-<dd>Per impostazione predefinita, gli ALB elaborano i percorsi che le applicazioni ascoltano sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione.<br><br><strong>Nota</strong>: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria.</dd>
+<dd>Per impostazione predefinita, gli ALB elaborano i percorsi su cui le applicazioni sono in ascolto sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione.<br><br><strong>Nota</strong>: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria.</dd>
 
 <dt>Modificatori supportati</dt>
 <dd>
@@ -475,7 +475,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -688,7 +688,7 @@ Accedi a un'applicazione tramite una porta TCP non standard.
 <dd>
 Utilizza questa annotazione per un'applicazione che esegue un carico di lavoro di flussi TCP.
 
-<p>**Nota**: l'ALB funziona in modalità pass-through e inoltra il traffico alle applicazioni di back-end. In questo caso, la terminazione SSL non è supportata.</p>
+<p>**Nota**: l'ALB funziona in modalità pass-through e inoltra il traffico alle applicazioni di back-end. In questo caso, la terminazione SSL non è supportata. La connessione TLS non viene terminata e ne viene eseguito il pass-through senza alcuna variazione.</p>
 </dd>
 
 
@@ -769,12 +769,12 @@ L'output della CLI sarà simile al seguente:
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Configura Ingress per accedere alla tua applicazione tramite una porta TCP non standard. Utilizza il file YAML di esempio in questo riferimento. </li>
-<li>Aggiorna la configurazione del tuo ALB.
+<li>Crea la tua risorsa ALB oppure aggiorna la tua configurazione ALB esistente.
 <pre class="pre">
 <code>        kubectl apply -f myingress.yaml
         </code></pre>
 </li>
-<li>Apri il tuo browser web preferito per accedere alla tua applicazione. Esempio: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Esegui il curl del dominio secondario Ingress per accedere alla una applicazione. Esempio: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -1371,7 +1371,7 @@ spec:
 </dd>
 <dt>Utilizzo</dt></dl>
 
-Poiché l'applicazione utilizza {{site.data.keyword.appid_short_notm}} per l'autenticazione, devi eseguire il provisioning di un'istanza {{site.data.keyword.appid_short_notm}}, configurare l'istanza con URI di reindirizzamento validi e generare un segreto di bind collegando l'istanza al tuo cluster.
+Poiché l'applicazione utilizza {{site.data.keyword.appid_short_notm}} per l'autenticazione, devi eseguire il provisioning di un'istanza {{site.data.keyword.appid_short_notm}}, configurare l'istanza con URI di reindirizzamento validi e generare un segreto di bind eseguendo il bind dell'istanza al tuo cluster.
 
 1. Scegli un'istanza esistente oppure crea una nuova istanza {{site.data.keyword.appid_short_notm}}.
     * Per utilizzare un'istanza esistente, assicurati che il nome dell'istanza del servizio non contenga spazi. Per rimuovere gli spazi, seleziona il menu di opzioni aggiuntive accanto al nome della tua istanza di servizio e seleziona **Ridenomina servizio**.
@@ -1424,8 +1424,7 @@ Modifica le porte predefinite per il traffico di rete HTTP (porta 80) e HTTPS (p
 
 <dl>
 <dt>Descrizione</dt>
-<dd>Per impostazione predefinita, l'ALB Ingress è configurato per l'ascolto del traffico di rete HTTP in entrata sulla porta 80 e del traffico di rete HTTPS in entrata sulla porta 443. Puoi modificare le porte predefinite per aggiungere sicurezza al tuo dominio ALB o per abilitare solo una porta HTTPS.
-</dd>
+<dd>Per impostazione predefinita, l'ALB Ingress è configurato per l'ascolto del traffico di rete HTTP in entrata sulla porta 80 e del traffico di rete HTTPS in entrata sulla porta 443. Puoi modificare le porte predefinite per aggiungere sicurezza al tuo dominio ALB o per abilitare solo una porta HTTPS.<p><strong>Nota</strong>: per abilitare l'autenticazione reciproca su una porta, [configura l'ALB per aprire la porta valida](cs_ingress.html#opening_ingress_ports) e specifica quindi tale porta nell'annotazione [`mutual-auth`](#mutual-auth). Non utilizzare l'annotazione `custom-port` per specificare una porta per l'autenticazione reciproca.</p></dd>
 
 
 <dt>YAML risorsa Ingress di esempio</dt>
@@ -1638,7 +1637,7 @@ Configura l'autenticazione reciproca del traffico di downstream per l'ALB Ingres
 <dd>
 <ul>
 <li>Devi disporre di un segreto di autenticazione reciproca valido che contenga la <code>ca.crt</code> richiesta. Per creare un segreto di autenticazione reciproca, vedi [Creazione dei segreti](cs_app.html#secrets_mutual_auth).</li>
-<li>Per abilitare l'autenticazione reciproca su una porta diversa da 443, [configura l'ALB per aprire la porta valida](cs_ingress.html#opening_ingress_ports).</li>
+<li>Per abilitare l'autenticazione reciproca su una porta diversa da 443, [configura l'ALB per aprire la porta valida](cs_ingress.html#opening_ingress_ports) e specifica quindi tale porta in questa annotazione. Non utilizzare l'annotazione `custom-port` per specificare una porta per l'autenticazione reciproca.</li>
 </ul>
 </dd>
 
@@ -1702,64 +1701,7 @@ Consenti le richieste HTTPS e crittografa il traffico alle tue applicazioni upst
 <dl>
 <dt>Descrizione</dt>
 <dd>
-Quando la tua configurazione della risorsa Ingress contiene una sezione TLS, l'ALB Ingress può gestire le richieste URL protette da HTTPS nella tua applicazione. Tuttavia, l'ALB decrittografa la richiesta prima di inoltrare il traffico alle tue applicazioni. Se hai delle applicazioni che richiedono HTTPS e hanno bisogno che il traffico venga crittografato prima di essere inoltrato a queste applicazioni upstream, puoi utilizzare l'annotazione `ssl-services`. Se le tue applicazioni upstream possono gestire TLS, puoi facoltativamente fornire un certificato contenuto in un segreto TLS.<br></br>**Facoltativo**: a questa annotazione, puoi aggiungere [l'autenticazione unidirezionale o l'autenticazione reciproca](#ssl-services-auth).</dd>
-
-
-<dt>YAML risorsa Ingress di esempio</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;myingressname&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>Descrizione dei componenti dell'annotazione</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona idea"/> Descrizione dei componenti dell'annotazione</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio che richiede HTTPS. Il traffico viene crittografato dall'ALB a questo servizio dell'applicazione.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Facoltativo: se vuoi utilizzare un segreto TLS e la tua applicazione upstream può gestire TLS, sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto del servizio. Se fornisci un segreto, il valore deve contenere il <code>trusted.crt</code> proveniente dal server upstream. Per creare un segreto TLS, vedi [Creazione dei segreti](cs_app.html#secrets_ssl_services).</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### Supporto dei servizi SSL con l'autenticazione
-{: #ssl-services-auth}
-
-<dl>
-<dt>Descrizione</dt>
-<dd>
-Consenti le richieste HTTPS e crittografa il traffico alle tue applicazioni upstream con l'autorizzazione unidirezionale o reciproca per garantire ulteriore sicurezza.
-</dd>
-
+Quando la tua configurazione della risorsa Ingress contiene una sezione TLS, l'ALB Ingress può gestire le richieste URL protette da HTTPS nella tua applicazione. Tuttavia, l'ALB gestisce la terminazione TLS e decrittografa la richiesta prima di inoltrare il traffico alle tue applicazioni. Se hai delle applicazioni che richiedono il protocollo HTTPS e hanno bisogno che il traffico sia crittografato, utilizza l'annotazione `ssl-services` per disabilitare la terminazione TLS predefinita dell'ALB. L'ALB termina la connessione TLS e ricrittografa SSL prima di inviare il traffico all'applicazione di backend.<br></br>Inoltre, se la tua applicazione di backend può gestire TLS e vuoi aggiungere ulteriore sicurezza, puoi aggiungere l'autenticazione unidirezionale o reciproca fornendo un certificato contenuto in un segreto.</dd>
 
 <dt>YAML risorsa Ingress di esempio</dt>
 <dd>
@@ -1804,7 +1746,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto dell'autenticazione reciproca per il servizio. Il segreto di autenticazione reciproca deve contenere la <code>ca.crt</code> richiesta. Per creare un segreto di autenticazione reciproca, vedi [Creazione dei segreti](cs_app.html#secrets_mutual_auth).</td>
+  <td>Se la tua applicazione di backend può gestire TLS e vuoi aggiungere ulteriore sicurezza, sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto di autenticazione unidirezionale o reciproco per il servizio.<ul><li>Se fornisci un segreto di autenticazione unidirezionale, il valore deve contenere il <code>trusted.crt</code> dal server di upstream. Per creare un segreto TLS, vedi [Creazione dei segreti](cs_app.html#secrets_ssl_services).</li><li>Se fornisci un segreto di autenticazione reciproco, il valore deve contenere il <code>ca.crt</code> e il <code>ca.key</code> richiesti che la tua applicazione si sta aspettando dal client. Per creare un segreto di autenticazione reciproca, vedi [Creazione dei segreti](cs_app.html#secrets_mutual_auth).</li></ul><strong>Avvertenza</strong>: se non fornisci un segreto, sono consentite connessioni non sicure. Puoi scegliere di omettere un segreto se vuoi testare la connessione e non hai dei certificati pronti oppure se i tuoi certificati sono scaduti e vuoi consentire connessioni non sicure.</td>
   </tr>
   </tbody></table>
 
@@ -1877,7 +1819,7 @@ spec:
 <tbody>
 <tr>
 <td><code>enable</code></td>
-  <td>Per abilitare l'instradamento del traffico ai servizi gestiti da Istio, deve essere impostato su <code>True</code>.</td>
+  <td>Per abilitare l'instradamento del traffico ai servizi gestiti da Istio, esegui l'impostazione su <code>True</code>.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -2332,7 +2274,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
+  serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2354,11 +2296,11 @@ metadata:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2497,7 +2439,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
  tls:
  - hosts:

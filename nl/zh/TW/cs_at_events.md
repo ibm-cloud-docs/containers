@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # {{site.data.keyword.cloudaccesstrailshort}} 事件
 {: #at_events}
 
-您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服務，檢檢視、管理及審核 {{site.data.keyword.containershort_notm}} 叢集裡的使用者起始活動。
+您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服務，在 {{site.data.keyword.containerlong_notm}} 叢集中檢視、管理及審核使用者起始的活動。
 {: shortdesc}
 
-## 尋找資訊
-{: #at-find}
+
+
+如需服務如何運作的相關資訊，請參閱 [{{site.data.keyword.cloudaccesstrailshort}} 文件](/docs/services/cloud-activity-tracker/index.html)。如需所追蹤 Kubernetes 動作的相關資訊，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/home/)。
+
+
+## 尋找 Kubernetes 審核事件的資訊
+{: #kube-find}
 
 {{site.data.keyword.cloudaccesstrailshort}} 事件位於 {{site.data.keyword.cloudaccesstrailshort}} **帳戶網域** 中，而此帳戶網域位於產生事件的 {{site.data.keyword.Bluemix_notm}} 地區中。{{site.data.keyword.cloudaccesstrailshort}} 事件位於 {{site.data.keyword.cloudaccesstrailshort}} **空間網域**中，而此空間網域與佈建 {{site.data.keyword.cloudaccesstrailshort}} 服務的 Cloud Foundry 空間相關聯。
 
 若要監視管理活動，請執行下列動作：
 
 1. 登入 {{site.data.keyword.Bluemix_notm}} 帳戶。
-2. 從型錄中，在與 {{site.data.keyword.containershort_notm}} 實例相同的帳戶中佈建 {{site.data.keyword.cloudaccesstrailshort}} 服務實例。
+2. 從型錄中，在與 {{site.data.keyword.containerlong_notm}} 實例相同的帳戶中佈建 {{site.data.keyword.cloudaccesstrailshort}} 服務實例。
 3. 在 {{site.data.keyword.cloudaccesstrailshort}} 儀表板的**管理**標籤上，按一下**在 Kibana 中檢視**。
 4. 設定您要檢視其日誌的時間範圍。預設值為 15 分鐘。
 5. 在**可用的欄位**清單中，按一下**類型**。按一下 **Activity Tracker** 的放大鏡圖示，將日誌限制為僅服務所追蹤的日誌。
 6. 您可以使用其他可用的欄位，來縮小搜尋範圍。
 
+若要讓其他使用者檢視帳戶及空間事件，請參閱[授與許可權來查看帳戶事件](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions)。
+{: tip}
 
+## 追蹤 Kubernetes 審核事件
+{: #kube-events}
 
-## 追蹤事件
-{: #events}
+請查看下列表格，以取得傳送至 {{site.data.keyword.cloudaccesstrailshort}} 的事件清單。
+{: shortdesc}
 
-請查看下列各表來取得傳送至 {{site.data.keyword.cloudaccesstrailshort}} 的事件清單。
+**開始之前**
 
-如需服務運作方式的相關資訊，請參閱 [{{site.data.keyword.cloudaccesstrailshort}} 文件](/docs/services/cloud-activity-tracker/index.html)。
+請確定您的叢集已配置成轉遞 [Kubernetes API 審核事件](cs_health.html#api_forward)。
 
-如需所追蹤 Kubernetes 動作的相關資訊，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/home/)。
+**轉遞事件**
 
 <table>
   <tr>

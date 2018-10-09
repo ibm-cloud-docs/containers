@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -53,7 +53,7 @@ Examinez les configurations potentielles d'application suivantes, classées par 
 2.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans un cluster à zone unique.
 3.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans un cluster à zones multiples entre différentes zones.
 
-Vous pouvez également [connecter plusieurs clusters dans différentes régions avec un équilibreur de charge global](cs_clusters.html#multiple_clusters) pour une haute disponibilité accrue.
+Vous pouvez également [connecter plusieurs clusters dans différentes régions avec un équilibreur de charge global](cs_clusters_planning.html#multiple_clusters) pour une haute disponibilité accrue.
 
 ### Augmentation de la disponibilité de votre application
 {: #increase_availability}
@@ -76,13 +76,13 @@ Vous pouvez également [connecter plusieurs clusters dans différentes régions 
     
     </dd>
 <dt>Disséminez les pods entre plusieurs zones ou régions</dt>
-  <dd><p>Pour protéger votre application en cas de défaillance d'une zone, vous pouvez créer plusieurs clusters dans des zones distinctes ou ajouter des zones dans un pool de noeuds worker dans un cluster à zones multiples. Les clusters à zones multiples sont disponibles uniquement dans certaines [métropoles](cs_regions.html#zones), comme Dallas. Si vous créez plusieurs clusters dans des zones distinctes, vous devez [configurer un équilibreur de charge global](cs_clusters.html#multiple_clusters).</p>
-  <p>Lorsque vous utilisez un jeu de répliques et spécifiez l'anti-affinité pour les pods, Kubernetes répartit les pods d'application sur les différents noeuds. Si vos noeuds se trouvent dans plusieurs zones, les pods sont répartis entre les zones, pour augmenter la disponibilité de votre application. Si vous souhaitez limiter l'exécution de vos applications à une seule zone, vous pouvez configurer l'affinité de pod pour créer et labelliser un pool de noeuds worker dans une zone. Pour plus d'informations, voir [Haute disponibilité pour les clusters à zones multiples](cs_clusters.html#ha_clusters).</p>
+  <dd><p>Pour protéger votre application en cas de défaillance d'une zone, vous pouvez créer plusieurs clusters dans des zones distinctes ou ajouter des zones dans un pool de noeuds worker dans un cluster à zones multiples. Les clusters à zones multiples sont disponibles uniquement dans certaines [métropoles](cs_regions.html#zones), comme Dallas. Si vous créez plusieurs clusters dans des zones distinctes, vous devez [configurer un équilibreur de charge global](cs_clusters_planning.html#multiple_clusters).</p>
+  <p>Lorsque vous utilisez un jeu de répliques et spécifiez l'anti-affinité pour les pods, Kubernetes répartit les pods d'application sur les différents noeuds. Si vos noeuds se trouvent dans plusieurs zones, les pods sont répartis entre les zones, pour augmenter la disponibilité de votre application. Si vous souhaitez limiter l'exécution de vos applications à une seule zone, vous pouvez configurer l'affinité de pod pour créer et labelliser un pool de noeuds worker dans une zone. Pour plus d'informations, voir [Haute disponibilité pour les clusters à zones multiples](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>Dans le déploiement d'un cluster à zones multiples, mes pods d'application sont-ils répartis uniformément entre les noeuds ?</strong></p>
   <p>Les pods sont répartis uniformément entre les zones mais pas toujours entre les noeuds. Par exemple, si vous disposez d'un cluster avec un noeud dans chacune des trois zones et que vous déployez un jeu de répliques de 6 pods, chaque noeud obtient 2 pods. Cependant, si vous avez un cluster avec 2 noeuds dans chacune des 3 zones et que vous déployez un jeu de répliques de 6 pods, chaque zone dispose de deux pods planifiés et peut ou non planifier 1 pod par noeud. Pour avoir plus de contrôle sur la planification, vous pouvez [définir l'affinité entre les pods  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>En cas de défaillance d'une zone, comment sont replanifiés les pods sur les noeuds restants dans les autres zones ?</strong></br>Tout dépend de la règle de planification que vous avez utilisée dans le déploiement. Si vous avez inclus l'[affinité entre pods de noeuds spécifiques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), vos pods ne sont pas replanifiés. Si vous ne l'avez pas fait, les pods sont créés sur les noeuds worker disponibles dans d'autres zones, mais risquent de ne pas être équilibrés. Par exemple, les 2 pods peuvent être répartis sur les 2 noeuds disponibles ou peuvent être planifiés tous les deux sur 1 noeud doté de la capacité disponible. De même, lorsque la zone indisponible est restaurée, les pods ne sont pas automatiquement supprimés et rééquilibrés entre les noeuds. Pour que les pods soient rééquilibrés entre les zones une fois qu'une zone redevient opérationnelle, envisagez l'utilisation de l'[outil de déplanification de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Astuce</strong> : dans les clusters à zones multiples, tâchez de maintenir la capacité de vos noeuds worker à 50% par zone de sorte à disposer d'une capacité disponible suffisante pour protéger votre cluster en cas de défaillance de zone.</p>
-  <p><strong>Que faire pour répartir mon application entre les différentes régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](cs_clusters.html#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application.</p>
+  <p><strong>Que faire pour répartir mon application entre les différentes régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](cs_clusters_planning.html#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application.</p>
   <p><strong>Que faire si mes applications nécessitent du stockage persistant ?</strong></p>
   <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -471,7 +471,7 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
 
         Dans la sortie de l'exemple ci-dessus, le pod d'application `cf-py-d7b7d94db-vp8pq` se trouve sur un noeud worker dont l'adresse IP est `10.176.48.78`.
 
-    3. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker que vous avez désigné dans le déploiement de votre application. 
+    3. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker que vous avez désigné dans le déploiement de votre application.
 
         ```
         ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
@@ -499,7 +499,7 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
 ## Déploiement d'une application sur une machine GPU
 {: #gpu_app}
 
-Si vous disposez d'un [type de machine d'unité de traitement graphique (GPU)](cs_clusters.html#shared_dedicated_node), vous pouvez planifier des charges de travail nécessitant de nombreux calculs mathématiques sur le noeud worker. Par exemple, vous pouvez exécutez une application en 3D qui utilise la plateforme CUDA (Compute Unified Device Architecture) pour partager la charge de traitement entre l'unité GPU et l'UC pour améliorer les performances.
+Si vous disposez d'un [type de machine d'unité de traitement graphique (GPU)](cs_clusters_planning.html#shared_dedicated_node), vous pouvez planifier des charges de travail nécessitant de nombreux calculs mathématiques sur le noeud worker. Par exemple, vous pouvez exécutez une application en 3D qui utilise la plateforme CUDA (Compute Unified Device Architecture) pour partager la charge de traitement entre l'unité GPU et l'UC pour améliorer les performances.
 {:shortdesc}
 
 Dans les étapes suivantes, vous apprendrez à déployer des charges de travail nécessitant l'unité GPU. Vous pouvez également [déployer des applications](#app_ui) qui n'ont pas besoin de passer par l'unité GPU et l'UC pour traiter leurs charges de travail. Par la suite, vous trouverez peut-être utile d'expérimenter des charges de travail nécessitant de nombreux calculs par exemple avec l'infrastructure d'apprentissage automatique [TensorFlow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.tensorflow.org/) avec [cette démonstration Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -86,7 +86,7 @@ lastupdated: "2018-08-06"
 
 
         ```
-        apiVersion: v1
+apiVersion: v1
         kind: Pod
         metadata:
           name: <pod_name>

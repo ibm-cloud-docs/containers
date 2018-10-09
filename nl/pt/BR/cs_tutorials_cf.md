@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # Tutorial: Migrando um app do Cloud Foundry para um cluster
 {: #cf_tutorial}
 
-É possível usar um app implementado anteriormente usando o Cloud Foundry e implementar o mesmo código em um contêiner para um cluster do Kubernetes no {{site.data.keyword.containershort_notm}}.
+É possível usar um app implementado anteriormente usando o Cloud Foundry e implementar o mesmo código em um contêiner para um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 - [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Criar um cluster](cs_clusters.html#clusters_ui).
 - [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
+- [Certifique-se de que você tenha a função de plataforma **Editor**, **Operador** ou **Administrador**](cs_users.html#add_users_cli).
 - [Conhecer a terminologia do Docker e do Kubernetes](cs_tech.html).
 
 
@@ -260,7 +261,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

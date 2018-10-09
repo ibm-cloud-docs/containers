@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -18,11 +18,52 @@ lastupdated: "2018-08-06"
 
 
 
-# Tópicos populares para {{site.data.keyword.containershort_notm}}
+# Tópicos populares para {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
 Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprenda sobre os novos recursos para explorar, um truque para experimentar ou alguns tópicos populares que outros desenvolvedores estão achando úteis agora.
 {:shortdesc}
+
+## Tópicos populares em setembro de 2018
+{: #sept18}
+
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>05 de setembro</td>
+<td>[ Zona disponível em Oslo ](cs_regions.html)</td>
+<td>Bem-vindo Oslo, Noruega, como uma nova zona na região Central da UE. Se você tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para essa zona e as outras dentro da região em que seu cluster estiver.</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em agosto de 2018
+{: #aug18}
+
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>31 de agosto</td>
+<td>{{site.data.keyword.cos_full_notm}}  está agora integrado com o  {{site.data.keyword.containerlong}}</td>
+<td>Use solicitações de volume persistente (PVC) nativas do Kubernetes para provisionar o {{site.data.keyword.cos_full_notm}} para seu cluster. O {{site.data.keyword.cos_full_notm}} é melhor usado para cargas de trabalho de leitura intensiva e se você deseja armazenar dados entre múltiplas zonas em um cluster de múltiplas zonas. Inicie [criando uma instância de serviço do {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#create_cos_service) e [instalando o plug-in do {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos) em seu cluster. </br></br>Não tem certeza de qual solução de armazenamento pode ser a correta para você? Inicie [aqui](cs_storage_planning.html#choose_storage_solution) para analisar seus dados e escolher a solução de armazenamento apropriada para seus dados. </td>
+</tr>
+<tr>
+<td>14 de agosto</td>
+<td>Atualizar seus clusters para o Kubernetes versões 1.11 para designar prioridade do pod</td>
+<td>Depois de atualizar seu cluster para o [Kubernetes versão 1.11](cs_versions.html#cs_v111), é possível aproveitar novos recursos, como aumento de desempenho do tempo de execução do contêiner com `containerd` ou [designando a prioridade do pod](cs_pod_priority.html#pod_priority).</td>
+</tr>
+</tbody></table>
 
 ## Tópicos populares em julho de 2018
 {: #july18}
@@ -43,7 +84,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>10 de julho</td>
 <td>Introducing multizone clusters</td>
-<td>Deseja melhorar a disponibilidade do cluster? Agora, é possível estender seu cluster em múltiplas zonas em áreas metro selecionadas. Para obter mais informações, veja [Criando clusters multizona no {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
+<td>Deseja melhorar a disponibilidade do cluster? Agora, é possível estender seu cluster em múltiplas zonas em áreas metro selecionadas. Para obter mais informações, veja [Criando clusters multizona no {{site.data.keyword.containerlong_notm}}](cs_clusters_planning.html#multizone).</td>
 </tr>
 </tbody></table>
 
@@ -96,7 +137,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tr>
 <td>14 de maio</td>
 <td>[Atualização: implementar cargas de trabalho na GPU bare metal no mundo todo](cs_app.html#gpu_app)</td>
-<td>Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters.html#shared_dedicated_node) em seu cluster, é possível planejar apps matematicamente intensivos. O nó do trabalhador de GPU pode processar a carga de trabalho de seu app na CPU e GPU para aumentar o desempenho.</td>
+<td>Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters_planning.html#shared_dedicated_node) em seu cluster, é possível planejar apps matematicamente intensivos. O nó do trabalhador de GPU pode processar a carga de trabalho de seu app na CPU e GPU para aumentar o desempenho.</td>
 </tr>
 <tr>
 <td>Maio 03</td>
@@ -154,13 +195,13 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tbody>
 <tr>
 <td>16 de março</td>
-<td>[Provisionar um cluster bare metal com Cálculo confiável](cs_clusters.html#shared_dedicated_node)</td>
+<td>[Provisionar um cluster bare metal com Cálculo confiável](cs_clusters_planning.html#shared_dedicated_node)</td>
 <td>Crie um cluster bare metal que execute o [Kubernetes versão 1.9](cs_versions.html#cs_v19) ou mais recente e ative o Cálculo confiável para verificar os nós do trabalhador com relação à violação.</td>
 </tr>
 <tr>
 <td>14 de março</td>
 <td>[Conexão segura com o {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
-<td>Aprimore seus apps que estão em execução no {{site.data.keyword.containershort_notm}} requerendo que os usuários se conectem.</td>
+<td>Aprimore seus apps que estão em execução no {{site.data.keyword.containerlong_notm}} requerendo que os usuários se conectem.</td>
 </tr>
 <tr>
 <td>13 de março</td>
@@ -208,7 +249,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tr>
 <td>19 de fevereiro</td>
 <td>[Configurar a VPN IPSec do strongSwan](cs_vpn.html#vpn-setup)</td>
-<td>Implemente rapidamente o gráfico Helm da VPN IPSec strongSwan para conectar seu cluster do {{site.data.keyword.containershort_notm}} de forma segura a seu data center no local sem um Virtual Router Appliance.</td>
+<td>Implemente rapidamente o gráfico Helm da VPN IPSec strongSwan para conectar seu cluster do {{site.data.keyword.containerlong_notm}} de forma segura a seu data center no local sem um Virtual Router Appliance.</td>
 </tr>
 <tr>
 <td>14 de fevereiro</td>
@@ -240,7 +281,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 <tr>
 <td>23 de janeiro</td>
 <td>[Zonas disponíveis em Singapura e Montreal, CA](cs_regions.html)</td>
-<td>Singapura e Montreal são zonas disponíveis nas regiões Norte de AP e Leste dos EUA do {{site.data.keyword.containershort_notm}}. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para essas zonas e as outras dentro da região em que seu cluster está.</td>
+<td>Singapura e Montreal são zonas disponíveis nas regiões Norte de AP e Leste dos EUA do {{site.data.keyword.containerlong_notm}}. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para essas zonas e as outras dentro da região em que seu cluster está.</td>
 </tr>
 <tr>
 <td>08 de janeiro</td>
@@ -252,7 +293,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Bate-papo com desenvolvedores com os mesmos interesses no Slack
 {: #slack}
 
-É possível ver sobre o que os outros estão falando e fazer suas próprias perguntas no [{{site.data.keyword.containershort_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
+É possível ver sobre o que os outros estão falando e fazer as suas próprias perguntas no [{{site.data.keyword.containerlong_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
 Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.

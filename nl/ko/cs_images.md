@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -33,16 +33,16 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 {:shortdesc}
 
 공용 레지스트리(예: Docker Hub)는 클러스터에서 첫 번째 컨테이너화된 앱을 작성하기 위해 Docker 및 Kubernetes를 시작하는 데 사용될 수 있습니다. 그러나 엔터프라이즈 애플리케이션인 경우에는 {{site.data.keyword.registryshort_notm}}에 제공된 레지스트리와 같은 개인용 레지스트리를 사용하여 권한 없는 사용자가 이미지를 사용하고 변경하지 못하도록 보호하십시오. 
-개인용 레지스트리에 액세스하기 위한 신임 정보를 클러스터 사용자가 사용할 수 있도록 보장하기 위해,
+개인용 레지스트리에 액세스하기 위한 인증 정보를 클러스터 사용자가 사용할 수 있도록 보장하기 위해,
 개인용 레지스트리는 클러스터 관리자에 의해 설정되어야 합니다.
 
 
-{{site.data.keyword.containershort_notm}}에서 다중 레지스트리를 사용하여 클러스터에 앱을 배치할 수 있습니다.
+{{site.data.keyword.containerlong_notm}}에서 다중 레지스트리를 사용하여 클러스터에 앱을 배치할 수 있습니다.
 
 |레지스트리|설명|이점|
 |--------|-----------|-------|
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|이 옵션을 사용하면 이미지를 안전하게 저장하고 이를 클러스터 사용자 간에 공유할 수 있는 {{site.data.keyword.registryshort_notm}}의 사용자 고유의 보안 Docker 이미지 저장소를 설정할 수 있습니다.|<ul><li>계정에서 이미지에 대한 액세스 권한을 관리합니다.</li><li>{{site.data.keyword.IBM_notm}}이 제공하는 이미지와 샘플 앱 {{site.data.keyword.IBM_notm}} Liberty를 상위 이미지로서 사용하고 이에 자체 앱 코드를 추가합니다.</li><li>Vulnerability Advisor에 의해 잠재적 취약점에 대한 이미지의 자동 스캐닝(이를 해결하기 위한 OS 특정 권장사항 포함).</li></ul>|
-|기타 개인용 레지스트리|[imagePullSecret ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/containers/images/)을 작성하여 기존 개인용 레지스트리를 클러스터에 연결합니다. 시크릿은 Kubernetes 시크릿에 레지스트리 URL과 신임 정보를 안전하게 저장하는 데 사용됩니다.|<ul><li>자체 소스(Docker Hub, 조직이 소유하는 레지스트리 또는 기타 프라이빗 클라우드 레지스트리)와는 무관하게 기존 개인용 레지스트리를 사용합니다.</li></ul>|
+|기타 개인용 레지스트리|[imagePullSecret ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/containers/images/)을 작성하여 기존 개인용 레지스트리를 클러스터에 연결합니다. 시크릿은 Kubernetes 시크릿에 레지스트리 URL과 인증 정보를 안전하게 저장하는 데 사용됩니다.|<ul><li>자체 소스(Docker Hub, 조직이 소유하는 레지스트리 또는 기타 프라이빗 클라우드 레지스트리)와는 무관하게 기존 개인용 레지스트리를 사용합니다.</li></ul>|
 |[공용 Docker Hub ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/){: #dockerhub}|Dockerfile 변경이 필요하지 않은 경우 [Kubernetes 배치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)에서 Docker Hub의 기존 공용 이미지를 직접 사용하려면 이 옵션을 사용하십시오. <p>**참고:** 이 옵션이 조직의 보안 요구사항을 충족하지 않을 수 있음을 유념하십시오(예: 액세스 관리, 취약성 스캐닝 또는 앱 개인정보 보호정책).</p>|<ul><li>클러스터에 대한 추가 단계가 필요하지 않습니다.</li><li>다양한 오픈 소스 애플리케이션이 포함됩니다.</li></ul>|
 {: caption="공용 및 개인용 이미지 레지스트리 옵션" caption-side="top"}
 
@@ -76,7 +76,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 
 클러스터를 작성할 때 만료되지 않는 레지스트리 토큰과 시크릿이 [가장 근접한 지역 레지스트리와 글로벌 레지스트리](/docs/services/Registry/registry_overview.html#registry_regions) 둘 다에 대해 자동으로 작성됩니다. 글로벌 레지스트리는 개별 지역 레지스트리에 저장된 이미지에 대한 서로 다른 참조를 가지는 대신 배치 전반에서 참조할 수 있는 공용 IBM 제공 이미지를 저장합니다. 지역 레지스트리는 글로벌 레지스트리에 저장된 동일한 공용 이미지 외에도 사용자의 개인용 Docker 이미지를 안전하게 저장합니다. 토큰을 사용하여 이러한 공용(글로벌 레지스트리) 및 개인용(지역 레지스트리) 이미지로 작업할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여합니다.
 
-개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containershort_notm}}에서 Kubernetes 이미지 풀 시크릿의 글로벌(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다.
+개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containerlong_notm}}에서 Kubernetes 이미지 풀 시크릿의 글로벌(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다.
 
 **참고:** 이 초기 설정을 사용하면 {{site.data.keyword.Bluemix_notm}} 계정의 네임스페이스에서 사용할 수 있는 이미지에서 클러스터의 **기본** 네임스페이스로 컨테이너를 배치할 수 있습니다. 클러스터의 다른 네임스페이스로 컨테이너를 배치하거나 다른 {{site.data.keyword.Bluemix_notm}} 지역이나 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하려면 [클러스터에 대한 사용자 고유의 imagePullSecret을 작성](#other)해야 합니다.
 
@@ -110,7 +110,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
     ```
     {: codeblock}
 
-    **팁:** 네임스페이스 정보를 검색하려면 `ibmcloud cr namespace-list`를 실행하십시오. 
+    **팁:** 네임스페이스 정보를 검색하려면 `ibmcloud cr namespace-list`를 실행하십시오.
 
 3.  클러스터에 배치를 작성하십시오.
 
@@ -207,7 +207,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 ### 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정의 이미지에 액세스하는 imagePullSecret 작성
 {: #other_regions_accounts}
 
-다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정의 이미지에 액세스하려면 레지스트리 토큰을 작성하고 imagePullSecret에 신임 정보를 저장해야 합니다.
+다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정의 이미지에 액세스하려면 레지스트리 토큰을 작성하고 imagePullSecret에 인증 정보를 저장해야 합니다.
 {: shortdesc}
 
 1.  토큰이 없는 경우 [액세스할 레지스트리의 토큰을 작성](/docs/services/Registry/registry_tokens.html#registry_tokens_create)하십시오.
@@ -255,7 +255,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>필수. 개인용 레지스트리에 로그인하기 위한 사용자 이름입니다. {{site.data.keyword.registryshort_notm}}의 경우, 사용자 이름은 <strong><code>token</code></strong> 값으로 설정됩니다. </td>
+    <td>필수. 개인용 레지스트리에 로그인하기 위한 사용자 이름입니다. {{site.data.keyword.registryshort_notm}}의 경우, 사용자 이름은 <strong><code>token</code></strong> 값으로 설정됩니다.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -279,7 +279,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 ### 다른 개인용 레지스트리에 저장된 이미지에 액세스
 {: #private_images}
 
-개인용 레지스트리가 이미 있는 경우 레지스트리 신임 정보를 Kubernetes imagePullSecret에 저장하고 구성 파일에서 이 시크릿을 참조해야 합니다.
+개인용 레지스트리가 이미 있는 경우 레지스트리 인증 정보를 Kubernetes imagePullSecret에 저장하고 구성 파일에서 이 시크릿을 참조해야 합니다.
 {:shortdesc}
 
 시작하기 전에:
@@ -289,7 +289,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 
 imagePullSecret을 작성하려면 다음을 수행하십시오.
 
-1.  개인용 레지스트리 신임 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
+1.  개인용 레지스트리 인증 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
@@ -402,11 +402,11 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오. </td>
+    <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `ibmcloud cr image-list`를 실행하십시오. </td>
+    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `ibmcloud cr image-list`를 실행하십시오.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -487,5 +487,4 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
    {: pre}
 
 <br />
-
 

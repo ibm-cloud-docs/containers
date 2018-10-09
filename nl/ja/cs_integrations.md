@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -61,11 +61,11 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 <tbody>
 <tr>
 <td>Codeship</td>
-<td>コンテナーの継続的な統合とデリバリーのために <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td>コンテナーの継続的な統合とデリバリーのために <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は Kubernetes パッケージ・マネージャーです。 新しい Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。 <p>詳しくは、[{{site.data.keyword.containershort_notm}} での Helm のセットアップ](cs_integrations.html#helm)を参照してください。</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は Kubernetes パッケージ・マネージャーです。 新しい Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。 <p>詳しくは、[{{site.data.keyword.containerlong_notm}} での Helm のセットアップ](cs_integrations.html#helm)を参照してください。</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -73,7 +73,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は 、Kubernetes などのクラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (別名、サービス・メッシュ) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。 このオープン・ソース・プロジェクトの詳細については、<a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM が Istio を共同創設して立ち上げた経過 <img src="../icons/launch-glyph.svg" alt=" 外部リンク・アイコン"></a> に関するブログ投稿を参照してください。 {{site.data.keyword.containershort_notm}} の Kubernetes クラスターに Istio をインストールしてサンプル・アプリの使用を開始するには、[Istio を使用したマイクロサービスの管理に関するチュートリアル](cs_tutorials_istio.html#istio_tutorial)を参照してください。</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は 、Kubernetes などのクラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (別名、サービス・メッシュ) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。 このオープン・ソース・プロジェクトの詳細については、<a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM が Istio を共同創設して立ち上げた経過 <img src="../icons/launch-glyph.svg" alt=" 外部リンク・アイコン"></a> に関するブログ投稿を参照してください。 {{site.data.keyword.containerlong_notm}} の Kubernetes クラスターに Istio をインストールしてサンプル・アプリの使用を開始するには、[Istio を使用したマイクロサービスの管理に関するチュートリアル](cs_tutorials_istio.html#istio_tutorial)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -95,15 +95,15 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 <tbody>
 <tr>
 <td>CoScale</td>
-<td><a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ワーカー・ノード、コンテナー、レプリカ・セット、レプリケーション・コントローラー、サービスをモニターします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ワーカー・ノード、コンテナー、レプリカ・セット、レプリケーション・コントローラー、サービスをモニターします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>Datadog</td>
-<td><a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスターをモニターし、インフラストラクチャーとアプリケーションのパフォーマンス・メトリックを表示します。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスターをモニターし、インフラストラクチャーとアプリケーションのパフォーマンス・メトリックを表示します。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td> {{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Grafana を使用してログを分析し、クラスター内で実行された管理アクティビティーをモニターします。このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker/index.html) の資料を参照してください。追跡できるイベントのタイプについて詳しくは、[Activity Tracker イベント](/cs_at_events.html)を参照してください。</td>
+<td>Grafana を使用してログを分析し、クラスター内で実行された管理アクティビティーをモニターします。 このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker/index.html) の資料を参照してください。 追跡できるイベントのタイプについて詳しくは、[Activity Tracker イベント](/cs_at_events.html)を参照してください。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -115,7 +115,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は、アプリを自動的に検出してマップする GUI を使用して、インフラストラクチャーとアプリのパフォーマンス・モニターを提供します。 Istana はアプリに対するすべての要求をキャプチャーするので、その情報を使用してトラブルシューティングと根本原因分析を行い、問題の再発を防げるようになります。 詳しくは、<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} での Istana のデプロイ <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に関するブログ投稿を参照してください。</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は、アプリを自動的に検出してマップする GUI を使用して、インフラストラクチャーとアプリのパフォーマンス・モニターを提供します。 Istana はアプリに対するすべての要求をキャプチャーするので、その情報を使用してトラブルシューティングと根本原因分析を行い、問題の再発を防げるようになります。 詳しくは、<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containerlong_notm}} での Istana のデプロイ <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> に関するブログ投稿を参照してください。</td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -130,11 +130,11 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Sysdig</td>
-<td><a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、単一の計測ポイントでアプリ、コンテナー、statsd、ホストのメトリックをキャプチャーします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、単一の計測ポイントでアプリ、コンテナー、statsd、ホストのメトリックをキャプチャーします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope は、Kubernetes クラスター内のリソース (サービス、ポッド、コンテナー、プロセス、ノードなど) のビジュアル図を表示します。 Weave Scope は CPU とメモリーのインタラクティブ・メトリックを示し、コンテナーの中で追尾したり実行したりするツールも備えています。<p>詳しくは、[Weave Scope と {{site.data.keyword.containershort_notm}} での Kubernetes クラスター・リソースの視覚化](cs_integrations.html#weavescope)を参照してください。</p></li></ol>
+<td>Weave Scope は、Kubernetes クラスター内のリソース (サービス、ポッド、コンテナー、プロセス、ノードなど) のビジュアル図を表示します。 Weave Scope は CPU とメモリーのインタラクティブ・メトリックを示し、コンテナーの中で追尾したり実行したりするツールも備えています。<p>詳しくは、[Weave Scope と {{site.data.keyword.containerlong_notm}} での Kubernetes クラスター・リソースの視覚化](cs_integrations.html#weavescope)を参照してください。</p></li></ol>
 </td>
 </tr>
 </tbody>
@@ -161,11 +161,11 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリで実行できる動作を減らすことで、コンテナー・デプロイメントのセキュリティーを強化できます。 詳しくは、<a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリで実行できる動作を減らすことで、コンテナー・デプロイメントのセキュリティーを強化できます。 詳しくは、<a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td><a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリの SSL 証明書を保管および管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリの SSL 証明書を保管および管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -177,7 +177,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Twistlock</td>
-<td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ファイアウォール、脅威防御、インシデント対応を管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ファイアウォール、脅威防御、インシデント対応を管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 </tbody>
 </table>
@@ -221,67 +221,89 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 
 
-## Cloud Foundry サービスをクラスターに追加する
+## {{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加する
 {: #adding_cluster}
 
-既存の Cloud Foundry サービス・インスタンスをクラスターに追加すると、クラスターのユーザーがアプリをクラスターにデプロイする際にその  サービスにアクセスして使用できるようになります。
+{{site.data.keyword.Bluemix_notm}} サービスを追加して、Watson AI、データ、セキュリティー、モノのインターネット (IoT) などの領域の追加機能によって Kubernetes クラスターを拡張します。
 {:shortdesc}
 
-開始前に、以下のことを行います。
+**重要:** サービス・キーをサポートするサービスのみをバインドできます。サービス・キーをサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/apps/reqnsi.html#accser_external)を参照してください。
 
-1. [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
-2. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを要求します](/docs/apps/reqnsi.html#req_instance)。
-   **注:** ワシントン DC のゾーンでサービスのインスタンスを作成するには、CLI を使用する必要があります。
-3. Cloud Foundry サービスはクラスターとのバインドがサポートされていますが、他のサービスはサポートされていません。 サービス・インスタンスを作成するとさまざまなサービス・タイプが表示され、それらのサービスはダッシュボード内で**「Cloud Foundry サービス」**および**「サービス」**としてグループ化されます。 **「サービス」**セクション内のサービスをクラスターにバインドするには、[まず Cloud Foundry 別名を作成します](#adding_resource_cluster)。
+始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
 
-**注:**
-<ul><ul>
-<li>サービス・キーをサポートする {{site.data.keyword.Bluemix_notm}} サービスだけを追加できます。 このサービスでサービス・キーがサポートされていない場合は、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/apps/reqnsi.html#accser_external)を参照してください。</li>
-<li>サービスを追加するには、その前にクラスターとワーカー・ノードを完全にデプロイしておく必要があります。</li>
-</ul></ul>
+クラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加するには、以下の手順を実行します。
+1. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを作成します](/docs/apps/reqnsi.html#req_instance)。 </br></br>**注:** 一部の {{site.data.keyword.Bluemix_notm}} サービスは、選択された地域でのみ使用可能です。サービスがクラスターと同じ地域で使用可能な場合にのみ、サービスをクラスターにバインドできます。さらに、ワシントン DC ゾーンでサービス・インスタンスを作成する場合は、CLI を使用する必要があります。
 
+2. 作成したサービスのタイプを確認し、サービス・インスタンスの**名前**をメモします。
+   - **Cloud Foundry サービス:**
+     ```
+     ibmcloud service list
+     ```
+     {: pre}
 
-サービスを追加するには、以下のようにします。
-2.  使用可能な {{site.data.keyword.Bluemix_notm}} サービスをリストします。
+     出力例:
+     ```
+     name                         service           plan    bound apps   last operation
+     <cf_service_instance_name>   <service_name>    spark                create succeeded
+     ```
+     {: screen}
 
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
+  - **IAM 対応サービス:**
+     ```
+     ibmcloud resource service-instances
+     ```
+     {: pre}
 
-    CLI 出力例:
+     出力例:
+     ```
+     Name                          Location   State    Type               Tags   
+     <iam_service_instance_name>   <region>   active   service_instance      
+     ```
+     {: screen}
 
-    ```
-    name                      service           plan    bound apps   last operation   
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
+   ダッシュボードに異なるサービス・タイプが**「Cloud Foundry サービス」**および**「サービス」**として表示される場合もあります。
 
-3.  クラスターに追加するサービス・インスタンスの**名前**をメモします。
-4.  サービスを追加するために使用するクラスターの名前空間を識別します。 次のいずれかのオプションを選択します。
-    -   既存の名前空間をリストして、使用する名前空間を選択します。
+3. IAM 対応サービスの場合は、このサービスをクラスターにバインドできるように Cloud Foundry 別名を作成します。サービスが既に Cloud Foundry サービスである場合、このステップは不要です。次のステップに進むことができます。
+   1. Cloud Foundry の組織およびスペースをターゲットにします。
+      ```
+      ibmcloud target --cf
+      ```
+      {: pre}
 
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
+   2. サービス・インスタンスの Cloud Foundry 別名を作成します。
+      ```
+      ibmcloud resource service-alias-create <service_alias_name> --instance-name <iam_service_instance_name>
+      ```
+      {: pre}
 
-    -   クラスターに名前空間を作成します。
+   3. サービス別名が作成されたことを確認します。
+      ```
+      ibmcloud service list
+      ```
+      {: pre}
 
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
+4. サービスを追加するために使用するクラスターの名前空間を識別します。 次のいずれかのオプションを選択します。
+   - 既存の名前空間をリストして、使用する名前空間を選択します。
+     ```
+     kubectl get namespaces
+     ```
+     {: pre}
 
-5.  サービスをクラスターに追加します。
+   - クラスターに名前空間を作成します。
+     ```
+     kubectl create namespace <namespace_name>
+     ```
+     {: pre}
 
+5.  サービスをクラスターに追加します。 IAM 対応サービスの場合は、前に作成した Cloud Foundry 別名を使用します。
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
-    サービスがクラスターに正常に追加されると、サービス・インスタンスの資格情報を保持するクラスター・シークレットが作成されます。 CLI 出力例:
+    サービスがクラスターに正常に追加されると、サービス・インスタンスの資格情報を保持するクラスター・シークレットが作成されます。 シークレットは、データを保護するために etcd では自動的に暗号化されます。
 
+    出力例:
     ```
     ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
@@ -291,77 +313,74 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
     ```
     {: screen}
 
-6.  クラスターの名前空間内にシークレットが作成されたことを確認します。
+6.  Kubernetes シークレットでサービス資格情報を確認します。
+    1. シークレットの詳細を取得し、**binding** 値をメモします。**binding** 値は base64 エンコードであり、サービス・インスタンスの資格情報を JSON 形式で保持します。
+       ```
+       kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+       ```
+       {: pre}
 
-    ```
-    kubectl get secrets --namespace=<namespace>
-    ```
-    {: pre}
+       出力例:
+       ```
+       apiVersion: v1
+       data:
+         binding: <binding>
+       kind: Secret
+       metadata:
+         annotations:
+           service-instance-id: 1111aaaa-a1aa-1aa1-1a11-111aa111aa11
+           service-key-id: 2b22bb2b-222b-2bb2-2b22-b22222bb2222
+         creationTimestamp: 2018-08-07T20:47:14Z
+         name: binding-<service_instance_name>
+         namespace: <namespace>
+         resourceVersion: "6145900"
+         selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+         uid: 33333c33-3c33-33c3-cc33-cc33333333c
+       type: Opaque
+       ```
+       {: screen}
 
-クラスター・ユーザーは、クラスターにデプロイされたポッドでサービスを使用するために、サービス資格情報にアクセスする必要があります。 ユーザーは、この [Kubernetes シークレットをシークレット・ボリュームとしてポッドにマウントする](#adding_app)ことで、{{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報にアクセスできます。
+    2. binding 値をデコードします
+       ```
+       echo "<binding>" | base64 -D
+       ```
+       {: pre}
 
-<br />
+       出力例:
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
 
+    3. オプション: 前のステップでデコードしたサービス資格情報を、{{site.data.keyword.Bluemix_notm}} ダッシュボードのサービス・インスタンスで検索したサービス資格情報と比較します。
 
-## 他の {{site.data.keyword.Bluemix_notm}} サービス・リソース用のクラウド Foundry 別名の作成
-{: #adding_resource_cluster}
-
-Cloud Foundry サービスは、クラスターとのバインディングをサポートされます。 サービス・インスタンスを作成するとさまざまなサービス・タイプが表示され、それらのサービスはダッシュボード内で**「Cloud Foundry サービス」**および**「サービス」**としてグループ化されます。 Cloud Foundry サービスではない {{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドするには、サービス・インスタンスの Cloud Foundry 別名を作成します。
-{:shortdesc}
-
-始める前に、[{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを要求します](/docs/apps/reqnsi.html#req_instance)。
-
-サービス・インスタンスの Cloud Foundry 別名を作成するには、以下のようにします。
-
-1. サービス・インスタンスが作成された組織とスペースをターゲットにします。
-
-    ```
-    ibmcloud target -o <org_name> -s <space_name>
-    ```
-    {: pre}
-
-2. サービス・インスタンス名をメモします。
-    ```
-    ibmcloud resource service-instances
-    ```
-    {: pre}
-
-3. サービス・インスタンスの Cloud Foundry 別名を作成します。
-    ```
-    ibmcloud resource service-alias-create <service_alias_name> --instance-name <service_instance>
-    ```
-    {: pre}
-
-4. サービス別名が作成されたことを確認します。
-
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
-
-5. [Cloud Foundry の別名をクラスターにバインドします](#adding_cluster)。
+7. これでサービスがクラスターにバインドされたため、[Kubernetes シークレットのサービス資格情報にアクセスする](#adding_app)ために、アプリを構成する必要があります。
 
 
-
-<br />
-
-
-## サービスをアプリに追加する
+## アプリからのサービス資格情報へのアクセス
 {: #adding_app}
 
-暗号化した Kubernetes シークレットを使用して、{{site.data.keyword.Bluemix_notm}} サービスの詳細情報や資格情報を保管し、サービスとクラスターの間のセキュアな通信を確保します。
-{:shortdesc}
+アプリから {{site.data.keyword.Bluemix_notm}} サービス・インスタンスにアクセスするには、Kubernetes シークレットに保管されているサービス資格情報をアプリで使用可能にする必要があります。
+{: shortdesc}
 
-Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。 機密情報を環境変数として公開したり、Dockerfile に直接書き込んだりする代わりに、シークレットをポッドにマウントできます。 それにより、それらのシークレットに、ポッド内で実行中のコンテナーからアクセスできます。
+サービス・インスタンスの資格情報は base64 エンコードであり、JSON 形式でシークレットの内部に保管されます。シークレットにあるデータにアクセスするには、次のオプションの中から選択します。
+- [シークレットをボリュームとしてポッドにマウントする](#mount_secret)
+- [環境変数でシークレットを参照する](#reference_secret)
 
-シークレット・ボリュームをポッドにマウントすると、`binding` という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。 `binding` ファイルに、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするために必要なすべての情報と資格情報が格納されます。
+始める前に
+- [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
+- [{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加します](#adding_cluster)。
 
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。 アプリで使用する {{site.data.keyword.Bluemix_notm}} サービスが、クラスター管理者によって[クラスターに追加されていること](cs_integrations.html#adding_cluster)を確認してください。
+### シークレットをボリュームとしてポッドにマウントする
+{: #mount_secret}
 
-1.  クラスターの名前空間で使用できるシークレットのリストを表示します。
+シークレットをボリュームとしてポッドにマウントすると、`binding` という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。JSON 形式の `binding` ファイルには、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするために必要なすべての情報と資格情報が格納されます。
+{: shortdesc}
+
+1.  クラスター内の使用可能なシークレットをリストし、シークレットの **name** をメモします。**Opaque** タイプのシークレットを探します。複数のシークレットが存在する場合は、クラスター管理者に連絡して、サービスに対応する正しいシークレットを確認してください。
 
     ```
-    kubectl get secrets --namespace=<my_namespace>
+    kubectl get secrets
     ```
     {: pre}
 
@@ -374,12 +393,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
     ```
     {: screen}
 
-2.  **Opaque** タイプのシークレットを探して、そのシークレットの **NAME** を書き留めます。 複数のシークレットが存在する場合は、クラスター管理者に連絡して、サービスに対応する正しいシークレットを確認してください。
-
-3.  任意のエディターを開きます。
-
-4.  YAML ファイルを作成し、シークレット・ボリュームによってサービスの詳細情報にアクセスできるポッドを構成します。 複数のサービスをバインドした場合は、各シークレットが正しいサービスに関連付けられていることを確認してください。
-
+2.  Kubernetes デプロイメントの YAML ファイルを作成し、シークレットをボリュームとしてポッドにマウントします。
     ```
     apiVersion: apps/v1beta1
     kind: Deployment
@@ -399,13 +413,13 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
             app: secret-test
         spec:
           containers:
-          - image: nginx
+          - image: registry.bluemix.net/ibmliberty:latest
             name: secret-test
             volumeMounts:
-            - mountPath: /opt/service-bind
-              name: service-bind-volume
+            - mountPath: <mount_path>
+              name: <volume_name>
           volumes:
-          - name: service-bind-volume
+          - name: <volume_name>
             secret:
               defaultMode: 420
               secretName: binding-<service_instance_name>
@@ -420,32 +434,30 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
     <tbody>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>コンテナーにマウントするシークレット・ボリュームの名前。</td>
+    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
-    <td>コンテナーにマウントするシークレット・ボリュームの名前を入力します。</td>
+    <td><code>volumeMounts/name</code></br><code>volumes/name</code></td>
+    <td>ポッドにマウントするボリュームの名前。</td>
     </tr>
     <tr>
     <td><code>secret/defaultMode</code></td>
-    <td>サービスのシークレットに対する読み取り専用アクセス権を設定します。</td>
+    <td>シークレットに対する読み取りおよび書き込みアクセス権。読み取り専用アクセス権を設定するには、`420` を使用します。</td>
     </tr>
     <tr>
     <td><code>secret/secretName</code></td>
-    <td>先ほど書き留めたシークレットの名前を入力します。</td>
+    <td>前のステップでメモしたシークレットの名前。</td>
     </tr></tbody></table>
 
-5.  ポッドを作成して、シークレット・ボリュームをマウントします。
-
+3.  ポッドを作成して、シークレットをボリュームとしてマウントします。
     ```
     kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
-6.  ポッドが作成されたことを確認します。
-
+4.  ポッドが作成されたことを確認します。
     ```
-    kubectl get pods --namespace=<my_namespace>
+    kubectl get pods
     ```
     {: pre}
 
@@ -457,42 +469,193 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
     ```
     {: screen}
 
-7.  ポッドの **NAME** を書き留めます。
-8.  ポッドの詳細情報を取得して、シークレットの名前を探します。
+5.  サービス資格情報にアクセスします。
+    1. ポッドにログインします。
+       ```
+       kubectl exec <pod_name> -it bash
+       ```
+       {: pre}
+
+    2. 先ほど定義したボリューム・マウント・パスにナビゲートし、ボリューム・マウント・パスのファイルをリストします。
+       ```
+       cd <volume_mountpath> && ls
+       ```
+       {: pre}
+
+       出力例:
+       ```
+       バインド
+       ```
+       {: screen}
+
+       `binding` ファイルには、Kubernetes シークレットに保管したサービス資格情報が含まれています。
+
+    4. サービス資格情報を表示します。資格情報は、JSON 形式でキー値ペアとして保管されています。
+       ```
+       cat binding
+       ```
+       {: pre}
+
+       出力例:
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
+
+    5. JSON コンテンツを解析してサービスにアクセスするために必要な情報を取得するようにアプリを構成します。
+
+
+### 環境変数でシークレットを参照する
+{: #reference_secret}
+
+Kubernetes シークレットのサービス資格情報およびその他のキー値ペアを、環境変数としてデプロイメントに追加できます。   
+{: shortdesc}
+
+1. クラスター内の使用可能なシークレットをリストし、シークレットの **name** をメモします。**Opaque** タイプのシークレットを探します。複数のシークレットが存在する場合は、クラスター管理者に連絡して、サービスに対応する正しいシークレットを確認してください。
 
     ```
-    kubectl describe pod <pod_name>
+    kubectl get secrets
     ```
     {: pre}
 
-    出力:
+    出力例:
 
     ```
-    ...
-    Volumes:
-      service-bind-volume:
-        Type:       Secret (a volume populated by a Secret)
-        SecretName: binding-<service_instance_name>
-    ...
+    NAME                                    TYPE                                  DATA      AGE
+    binding-<service_instance_name>         Opaque                                1         3m
     ```
     {: screen}
 
-    
+2. シークレットの詳細を入手して、ポッドで環境変数として参照できる潜在的なキー値ペアを検索します。サービス資格情報は、シークレットの `binding` キーに保管されています。
+   ```
+   kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+   ```
+   {: pre}
 
-9.  マウント・ディレクトリーで `binding` シークレット・ファイルを見つけ、その JSON コンテンツを解析して、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするための URL とサービス資格情報を判別するという一連の操作を行うようにアプリを構成します。
+   出力例:
+   ```
+   apiVersion: v1
+   data:
+     binding: <binding>
+   kind: Secret
+   metadata:
+     annotations:
+       service-instance-id: 7123acde-c3ef-4ba2-8c52-439ac007fa70
+       service-key-id: 9h30dh8a-023f-4cf4-9d96-d12345ec7890
+     creationTimestamp: 2018-08-07T20:47:14Z
+     name: binding-<service_instance_name>
+     namespace: <namespace>
+     resourceVersion: "6145900"
+     selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+     uid: 12345a31-9a83-11e8-ba83-cd49014748f
+   type: Opaque
+   ```
+   {: screen}
 
-{{site.data.keyword.Bluemix_notm}} サービスの詳細情報や資格情報にアクセスできるようになりました。 {{site.data.keyword.Bluemix_notm}} サービスを利用するために、マウント・ディレクトリーでサービスのシークレット・ファイルを見つけ、JSON コンテンツを解析してサービスの詳細情報を判別できるようにアプリを構成してください。
+3. Kubernetes デプロイメントの YAML ファイルを作成し、`binding` キーを参照する環境変数を指定します。
+   ```
+   apiVersion: apps/v1beta1
+   kind: Deployment
+   metadata:
+     labels:
+       app: secret-test
+     name: secret-test
+     namespace: <my_namespace>
+   spec:
+     selector:
+       matchLabels:
+         app: secret-test
+     template:
+       metadata:
+         labels:
+           app: secret-test
+       spec:
+         containers:
+         - image: registry.bluemix.net/ibmliberty:latest
+           name: secret-test
+           env:
+           - name: BINDING
+             valueFrom:
+               secretKeyRef:
+                 name: binding-<service_instance_name>
+                 key: binding
+     ```
+     {: codeblock}
 
-<br />
+     <table>
+     <caption>YAML ファイルの構成要素について</caption>
+     <thead>
+     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td><code>containers/env/name</code></td>
+     <td>環境変数の名前。</td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/name</code></td>
+     <td>前のステップでメモしたシークレットの名前。</td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/key</code></td>
+     <td>シークレットの一部であり、環境変数で参照するキー。サービス資格情報を参照するには、<strong>binding</strong> キーを使用する必要があります。</td>
+     </tr>
+     </tbody></table>
 
+4. シークレットの `binding` キーを環境変数として参照するポッドを作成します。
+   ```
+   kubectl apply -f secret-test.yaml
+   ```
+   {: pre}
 
-## {{site.data.keyword.containershort_notm}} での Helm のセットアップ
+5. ポッドが作成されたことを確認します。
+   ```
+   kubectl get pods
+   ```
+   {: pre}
+
+   CLI 出力例:
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+    secret-test-1111454598-gfx32   1/1       Running   0          1m
+   ```
+   {: screen}
+
+6. 環境変数が正しく設定されていることを確認します。
+   1. ポッドにログインします。
+      ```
+      kubectl exec <pod_name> -it bash
+      ```
+      {: pre}
+
+   2. すべての環境変数をポッド内にリストします。
+      ```
+      env
+      ```
+      {: pre}
+
+      出力例:
+      ```
+      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      ```
+      {: screen}
+
+7. 環境変数を読み取り、JSON コンテンツを解析してサービスにアクセスするために必要な情報を取得するようにアプリを構成します。
+
+   Python のコード例:
+   ```
+   if os.environ.get('BINDING'):
+        credentials = json.loads(os.environ.get('BINDING'))
+   ```
+   {: codeblock}
+
+## {{site.data.keyword.containerlong_notm}} での Helm のセットアップ
 {: #helm}
 
 [Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh) は Kubernetes パッケージ・マネージャーです。 Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。
 {:shortdesc}
 
-Helm チャートを {{site.data.keyword.containershort_notm}} で使用する前に、クラスターに Helm インスタンスをインストールして初期化する必要があります。 その後、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加できます。
+Helm チャートを {{site.data.keyword.containerlong_notm}} で使用する前に、クラスターに Helm インスタンスをインストールして初期化する必要があります。その後、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加できます。
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、Helm チャートを使用するクラスターに設定してください。
 
@@ -500,9 +663,7 @@ Helm チャートを {{site.data.keyword.containershort_notm}} で使用する�
 
 2. **重要**: クラスターのセキュリティーを維持するため、Tiller のサービス・アカウントを `kube-system` 名前空間に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。
 
-    1. 任意のエディターで、以下のファイルを作成し、`rbac-config.yaml` として保存します。
-      **注:**
-        * `kube-system` 名前空間のサービス・アカウントとクラスター役割バインディングを使用して Tiller をインストールするには、[`cluster-admin` 役割](cs_users.html#access_policies)が必要です。`kube-system` 以外の名前空間を選択できますが、IBM Helm チャートはすべて `kube-system` にインストールする必要があります。`helm` コマンドを実行するときに、必ず、`tiller-namespace<namespace>` フラグを使用して、Tiller がインストールされている他の名前空間を指定する必要があります。
+    1. 任意のエディターで、以下のファイルを作成し、`rbac-config.yaml` として保存します。 **注**: `kube-system` 名前空間のサービス・アカウントとクラスター役割バインディングを使用して Tiller をインストールするには、[`cluster-admin` 役割](cs_users.html#access_policies)が必要です。 `kube-system` 以外の名前空間を選択できますが、IBM Helm チャートはすべて `kube-system` にインストールする必要があります。 `helm` コマンドを実行するときに、必ず、`tiller-namespace<namespace>` フラグを使用して、Tiller がインストールされている他の名前空間を指定する必要があります。
 
       ```
       apiVersion: v1

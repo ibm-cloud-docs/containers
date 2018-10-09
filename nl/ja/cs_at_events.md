@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-{{site.data.keyword.cloudaccesstrailshort}} サービスを使用して、{{site.data.keyword.containershort_notm}} クラスター内の user-initated アクティビティーを表示、管理、および監査することができます。
+{{site.data.keyword.cloudaccesstrailshort}} サービスを使用して、{{site.data.keyword.containerlong_notm}} クラスター内でユーザーによって開始されたアクティビティーを表示、管理、および監査することができます。
 {: shortdesc}
 
-## 情報の検出
-{: #at-find}
 
-{{site.data.keyword.cloudaccesstrailshort}} イベントは、イベントが生成される {{site.data.keyword.Bluemix_notm}} 地域内にある {{site.data.keyword.cloudaccesstrailshort}} **アカウント・ドメイン**で使用可能です。{{site.data.keyword.cloudaccesstrailshort}} イベントは、{{site.data.keyword.cloudaccesstrailshort}} サービスがプロビジョンされている Cloud Foundry スペースに関連付けられている {{site.data.keyword.cloudaccesstrailshort}} **スペース・ドメイン** で使用可能です。
+
+サービスの仕組みについて詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker/index.html)を参照してください。追跡される Kubernetes アクションの詳細については、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/home/) を参照してください。
+
+
+## Kubernetes 監査イベントの情報の検索
+{: #kube-find}
+
+{{site.data.keyword.cloudaccesstrailshort}} イベントは、イベントが生成される {{site.data.keyword.Bluemix_notm}} 地域内にある {{site.data.keyword.cloudaccesstrailshort}} **アカウント・ドメイン**で使用可能です。 {{site.data.keyword.cloudaccesstrailshort}} イベントは、{{site.data.keyword.cloudaccesstrailshort}} サービスがプロビジョンされている Cloud Foundry スペースに関連付けられている {{site.data.keyword.cloudaccesstrailshort}} **スペース・ドメイン** で使用可能です。
 
 管理アクティビティーをモニターするには、次の手順を実行します。
 
 1. {{site.data.keyword.Bluemix_notm}} アカウントにログインします。
-2. カタログから、{{site.data.keyword.containershort_notm}} のインスタンスと同じアカウントで、{{site.data.keyword.cloudaccesstrailshort}} サービスのインスタンスをプロビジョンします。
+2. カタログから、{{site.data.keyword.containerlong_notm}} のインスタンスと同じアカウントで、{{site.data.keyword.cloudaccesstrailshort}} サービスのインスタンスをプロビジョンします。
 3. {{site.data.keyword.cloudaccesstrailshort}} ダッシュボードの **「管理」** タブで、**「Kibana で表示」**をクリックします。
-4. ログを表示する時間フレームを設定します。デフォルトは 15 分です。
-5. **「使用可能なフィールド」**リストで、**「タイプ」**をクリックします。**アクティビティー・トラッカー**の虫眼鏡のアイコンをクリックして、サービスによって追跡されるもののみにログを制限します。
+4. ログを表示する時間フレームを設定します。 デフォルトは 15 分です。
+5. **「使用可能なフィールド」**リストで、**「タイプ」**をクリックします。 **アクティビティー・トラッカー**の虫眼鏡のアイコンをクリックして、サービスによって追跡されるもののみにログを制限します。
 6. その他の使用可能なフィールドを使用して、検索を絞り込むことができます。
 
+他のユーザーがアカウントとスペースのイベントを表示できるようにするには、[Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions) を参照してください。
+{: tip}
 
-
-## イベントの追跡
-{: #events}
+## Kubernetes 監査イベントの追跡
+{: #kube-events}
 
 {{site.data.keyword.cloudaccesstrailshort}} に送信されるイベントのリストについては、以下の表を確認してください。
+{: shortdesc}
 
-サービスの仕組みについて詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker/index.html)を参照してください。
+**始める前に**
 
-追跡される Kubernetes アクションの詳細については、[Kubernetes の資料 ![外部リンク](../icons/launch-glyph.svg "外部リンク")](https://kubernetes.io/docs/home/) を参照してください。
+[Kubernetes API 監査イベント](cs_health.html#api_forward)を転送するようにクラスターが構成されていることを確認してください。
+
+**転送されるイベント**
 
 <table>
   <tr>
@@ -54,11 +63,11 @@ lastupdated: "2018-08-06"
   </tr>
   <tr>
     <td><code>bindings.create</code></td>
-    <td>バインディングが作成されます。</td>
+    <td>バインディングが作成されました。</td>
   </tr>
   <tr>
     <td><code>configmaps.create</code></td>
-    <td>構成マップが作成されます。</td>
+    <td>構成マップが作成されました。</td>
   </tr>
   <tr>
     <td><code>configmaps.delete</code></td>
@@ -66,11 +75,11 @@ lastupdated: "2018-08-06"
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>構成マップにパッチが適用されます。</td>
+    <td>構成マップにパッチが適用されました。</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
-    <td>構成マップが更新されます。</td>
+    <td>構成マップが更新されました。</td>
   </tr>
   <tr>
     <td><code>events.create</code></td>
@@ -90,7 +99,7 @@ lastupdated: "2018-08-06"
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>範囲制限が作成されます。</td>
+    <td>範囲制限が作成されました。</td>
   </tr>
   <tr>
     <td><code>limitranges.delete</code></td>
@@ -106,7 +115,7 @@ lastupdated: "2018-08-06"
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
-    <td>名前空間が作成されます。</td>
+    <td>名前空間が作成されました。</td>
   </tr>
   <tr>
     <td><code>namespaces.delete</code></td>

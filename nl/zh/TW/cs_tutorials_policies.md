@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -43,6 +43,7 @@ lastupdated: "2018-08-06"
 - [建立 1.10 版叢集](cs_clusters.html#clusters_ui)或[將現有叢集更新為 1.10 版](cs_versions.html#cs_v110)。若要在本指導教學中使用 3.1.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
 - [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 - [安裝並配置 Calico CLI](cs_network_policy.html#1.10_install)。
+- [確定您具有**編輯器**、**運算子**或**管理者**平台角色](cs_users.html#add_users_cli)。
 
 <br />
 
@@ -59,22 +60,16 @@ lastupdated: "2018-08-06"
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 課結束時，會藉由公用 NodePort 及公用 LoadBalancer，在網際網路公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
 
-1. 建立要在整個指導教學中使用的測試名稱空間，稱為 `pr-firm`。
+1. 部署範例 Web 伺服器應用程式。與 Web 伺服器應用程式建立連線時，應用程式會以其在連線中收到的 HTTP 標頭回應。
     ```
-    kubectl create ns pr-firm
-    ```
-    {: pre}
-
-2. 部署範例 Web 伺服器應用程式。與 Web 伺服器應用程式建立連線時，應用程式會以其在連線中收到的 HTTP 標頭回應。
-    ```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-3. 驗證 Web 伺服器應用程式 Pod 的 **STATUS** 為 `Running`。
+2. 驗證 Web 伺服器應用程式 Pod 的 **STATUS** 為 `Running`。
     ```
-    kubectl get pods -n pr-firm -o wide
-    ```
+        kubectl get pods -o wide
+        ```
     {: pre}
 
     輸出範例：
@@ -86,7 +81,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. 若要在公用網際網路公開應用程式，請在文字編輯器中建立一個稱為 `webserver.yaml` 的 LoadBalancer 服務配置檔。
+3. 若要在公用網際網路公開應用程式，請在文字編輯器中建立一個稱為 `webserver.yaml` 的 LoadBalancer 服務配置檔。
     ```
     apiVersion: v1
     kind: Service
@@ -108,17 +103,17 @@ lastupdated: "2018-08-06"
     ```
     {: codeblock}
 
-5. 部署 LoadBalancer。
+4. 部署 LoadBalancer。
     ```
-    kubectl apply -f filepath/webserver.yaml
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. 驗證您可以從電腦公開存取 LoadBalancer 所公開的應用程式。
+5. 驗證您可以從電腦公開存取 LoadBalancer 所公開的應用程式。
 
     1. 取得 LoadBalancer 的公用 **EXTERNAL-IP** 位址。
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -165,7 +160,7 @@ lastupdated: "2018-08-06"
 
     1. 取得 LoadBalancer 已指派給工作者節點的 NodePort。NodePort 位於 30000 到 32767 範圍內。
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -185,9 +180,9 @@ lastupdated: "2018-08-06"
         輸出範例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
         ```
         {: screen}
 
@@ -277,8 +272,8 @@ lastupdated: "2018-08-06"
       calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-輸出範例：
-        ```
+  輸出範例：
+  ```
   Successfully applied 1 'GlobalNetworkPolicy' resource(s)
   ```
   {: screen}
@@ -297,7 +292,7 @@ lastupdated: "2018-08-06"
 
 4. 將您在前一課中建立之 LoadBalancer 的 externalTrafficPolicy 從 `Cluster` 變更為 `Local`。`Local` 確保在下一步您對 LoadBalancer 的外部 IP 進行 Crul 處理時，會保留系統的來源 IP。
     ```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -341,7 +336,7 @@ lastupdated: "2018-08-06"
 ## 第 3 課：容許將資料流量從列入白名單的 IP 送入 LoadBalancer
 {: #lesson3}
 
-您現在決定完全鎖定，不准資料流量送入公關公司的叢集，並將您自己電腦的 IP 位址列入白名單來測試存取。
+您現在決定將資料流量完全鎖定至 PR 公司的叢集，並按白名單僅選取自己的電腦的 IP 位址，以進行測試存取。
 {: shortdesc}
 
 首先，除了 NodePorts 之外，您必須封鎖所有資料流量送入公開應用程式的 LoadBalancer。然後，您可以建立一個原則，將系統的 IP 位址列入白名單。在第 3 課結束時，將封鎖所有送至公用 NodePort 及 LoadBalancer 的資料流量，而且僅容許來自列入白名單之系統 IP 的資料流量：
@@ -466,14 +461,27 @@ lastupdated: "2018-08-06"
 在本課程中，您將藉由封鎖來自您自己系統之來源 IP 位址的資料流量，來測試黑名單。在第 4 課結束時，將封鎖所有送至公用 NodePort 的資料流量，而且將容許所有送至公用 LoadBalancer 的資料流量。只會封鎖從列入黑名單之系統 IP 送至 LoadBalancer 的資料流量：
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="Web 伺服器應用程式是由公用 LoadBalancer 在網際網路公開。只封鎖來自您系統 IP 的資料流量。" style="width:600px; border-style: none"/>
 1. 清除您在前一課中建立的白名單原則。
-    ```
-    calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
-    {: pre}
-    ```
-    calicoctl delete GlobalNetworkPolicy whitelist
-    ```
-    {: pre}
+    
+    - Linux：
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist
+      ```
+      {: pre}
+
+    - Windows 及 OS X：
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
     現有，再次允許將所有 TCP 及 UDP 資料流量從任何來源 IP 送入 LoadBalancer IP 位址及埠。
 
 2. 若要拒絕將所有 TCP 及 UDP 資料流量從您系統的來源 IP 位址送入 LoadBalancer IP 位址及埠，請在文字編輯器中建立一個稱為 `deny-lb-port-80.yaml` 的低階 Pre-DNAT 原則。使用來自提要的值，將 `<loadbalancer_IP>` 取代為 LoadBalancer 的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
@@ -510,7 +518,7 @@ lastupdated: "2018-08-06"
       order: 500
       types:
       - Ingress
-        ```
+    ```
     {: codeblock}
 
 3. 套用原則。
@@ -537,10 +545,18 @@ lastupdated: "2018-08-06"
     此時，會封鎖所有送至公用 NodePort 的資料流量，而且容許所有送至公用 LoadBalancer 的資料流量。只會封鎖從列入黑名單之系統 IP 送至 LoadBalancer 的資料流量。
 
 5. 若要清除此黑名單原則，請執行下列指令：
-    ```
-    calicoctl delete GlobalNetworkPolicy blacklist
-    ```
-    {: pre}
+
+    - Linux：
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist
+      ```
+      {: pre}
+
+    - Windows 及 OS X：
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 做得好！您已順利控制進入應用程式的資料流量，方法為使用 Calico Pre-DNAT 原則，將來源 IP 列入白名單及黑名單。
 

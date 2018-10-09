@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -452,7 +452,7 @@ spec:
 ### Fragments d'emplacement (location-snippets)
 {: #location-snippets}
 
-Ajouter la configuration d'un bloc d'emplacement personnalisé pour un service.
+Ajoutez la configuration d'un bloc d'emplacement personnalisé pour un service.
 {:shortdesc}
 
 <dl>
@@ -475,7 +475,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -555,7 +555,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>ID de votre équilibreur de charge d'application (ALB) privé. Pour identifier l'ID de l'ALB privé, exécutez la commande <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>. <p>
+<td>ID de votre équilibreur de charge d'application (ALB) privé. Pour identifier l'ID de l'ALB privé, exécutez la commande <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>.<p>
 Si vous disposez d'un cluster à zones multiples avec plusieurs AB privés activés, vous pouvez fournir une liste d'ID ALB séparés par un point-virgule (<code>;</code>). Par exemple : <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
@@ -623,7 +623,8 @@ spec:
 ### Fragments de serveur (server-snippets)
 {: #server-snippets}
 
-Ajouter la configuration d'un bloc de serveur personnalisé.{:shortdesc}
+Ajoutez la configuration d'un bloc de serveur personnalisé.
+{:shortdesc}
 
 <dl>
 <dt>Description</dt>
@@ -685,7 +686,7 @@ Accédez à une application via un port TCP non standard.
 <dd>
 Utiliser cette annotation pour une application qui s'exécute sur une charge de travail de flux TCP.
 
-<p>**Remarque** : l'équilibreur de charge ALB opère en mode passe-système et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas.</p>
+<p>**Remarque** : l'équilibreur de charge ALB opère en mode passe-système et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas. La connexion TLS est maintenue et fonctionne sans aucun changement.</p>
 </dd>
 
 
@@ -766,12 +767,12 @@ La sortie de votre interface CLI sera similaire à ceci :
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Configurez Ingress pour accéder à votre application via un port TCP non standard. Utilisez l'exemple de fichier YAML dans cette référence. </li>
-<li>Mettez à jour la configuration de votre équilibreur de charge ALB.
+<li>Créez votre ressource ALB ou mettez à jour la configuration de votre équilibreur de charge ALB existant.
 <pre class="pre">
 <code>        kubectl apply -f myingress.yaml
         </code></pre>
 </li>
-<li>Ouvrez le navigateur Web de votre choix pour accéder à votre application. Exemple : <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Exécutez une commande curl sur le sous-domaine Ingress pour accéder à votre application. Exemple : <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -1361,7 +1362,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Remplacez <code><em>&lt;myservice&gt;</em></code> par le nom du service Kubernetes que vous avez créé pour votre application. Cette zone est obligatoire. Si aucun nom de service n'est inclus, l'annotation est activée pour tous les services.  Si un nom de service est inclus, l'annotation est activée uniquement pour ce service. S'il y a plusieurs services, séparez-les par une virgule (,). </td>
+<td>Remplacez <code><em>&lt;myservice&gt;</em></code> par le nom du service Kubernetes que vous avez créé pour votre application. Cette zone est obligatoire. Si aucun nom de service n'est inclus, l'annotation est activée pour tous les services.  Si un nom de service est inclus, l'annotation est activée uniquement pour ce service. S'il y a plusieurs services, séparez-les par une virgule (,).</td>
 </tr>
 </tbody></table>
 </dd>
@@ -1418,8 +1419,7 @@ Modifiez les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (p
 
 <dl>
 <dt>Description</dt>
-<dd>Par défaut, l'équilibreur de charge d'application (ALB) Ingress est configuré pour écouter le trafic réseau HTTP entrant sur le port 80 et pour le trafic réseau HTTPS entrant sur le port 443. Vous pouvez modifier les ports par défaut pour renforcer la sécurité de votre domaine ALB ou pour activer uniquement un port HTTPS.
-</dd>
+<dd>Par défaut, l'équilibreur de charge d'application (ALB) Ingress est configuré pour écouter le trafic réseau HTTP entrant sur le port 80 et pour le trafic réseau HTTPS entrant sur le port 443. Vous pouvez modifier les ports par défaut pour renforcer la sécurité de votre domaine ALB ou pour activer uniquement un port HTTPS.<p><strong>Remarque</strong> : pour activer l'authentification mutuelle sur un port, [configurez l'ALB pour ouvrir le port valide](cs_ingress.html#opening_ingress_ports), puis spécifiez ce port dans l'annotation [`mutual-auth`](#mutual-auth). N'utilisez pas l'annotation `custom-port` pour spécifier un port pour l'authentification mutuelle.</p></dd>
 
 
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
@@ -1632,7 +1632,7 @@ Configurer l'authentification mutuelle du trafic en aval pour l'équilibreur de 
 <dd>
 <ul>
 <li>Vous devez disposer d'une valeur confidentielle d'authentification mutuelle valide qui contient l'élément <code>ca.crt</code>. Pour créer une valeur confidentielle d'authentification mutuelle, voir [Création de valeurs confidentielles](cs_app.html#secrets_mutual_auth).</li>
-<li>Pour activer l'authentification mutuelle sur un autre port que le port 443, [configurez l'équilibreur de charge ALB de manière à ouvrir un port valide](cs_ingress.html#opening_ingress_ports).</li>
+<li>Pour activer l'authentification mutuelle sur un autre port que le port 443, [configurez l'équilibreur de charge ALB de manière à ouvrir le port valide](cs_ingress.html#opening_ingress_ports), puis spécifiez ce port dans cette annotation. N'utilisez pas l'annotation `custom-port` pour spécifier un port pour l'authentification mutuelle.</li>
 </ul>
 </dd>
 
@@ -1696,64 +1696,7 @@ Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amon
 <dl>
 <dt>Description</dt>
 <dd>
-Lorsque la configuration de votre ressource Ingress comporte une section TLS, l'équilibreur de charge ALB Ingress peut traiter les demandes URL sécurisées par HTTPS vers votre application. Toutefois, l'ALB déchiffre la demande avant de transférer tout trafic vers vos applications. Si vous disposez d'applications nécessitant HTTPS et que vous devez chiffrer le trafic avant son transfert vers ces applications en amont, vous pouvez utiliser l'annotation `ssl-services`. Si vos applications en amont sont compatibles avec TLS, vous pouvez éventuellement fournir un certificat inclus dans une valeur confidentielle TLS.<br></br>**Facultatif** : vous pouvez ajouter [l'authentification unidirectionnelle ou l'authentification mutuelle](#ssl-services-auth) à cette annotation.</dd>
-
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;nom_ingress&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>Description des composants de l'annotation</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants de l'annotation</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service qui nécessite HTTPS. Le trafic est chiffré de l'équilibreur de charge ALB jusqu'au service de cette application.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Facultatif : si vous voulez utiliser une valeur confidentielle TLS et que votre application en amont est compatible avec TLS, remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par la valeur confidentielle utilisée pour le service. Si vous fournissez une valeur confidentielle, cette valeur doit contenir l'élément <code>trusted.crt</code> du serveur en amont. Pour créer une valeur confidentielle TLS, voir [Création de valeurs confidentielles](cs_app.html#secrets_ssl_services).</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### Support des services SSL avec authentification
-{: #ssl-services-auth}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Autoriser les demandes HTTPS et chiffrer le trafic vers vos applications en amont avec authentification unidirectionnelle ou mutuelle pour une sécurité renforcée.
-</dd>
-
+Lorsque la configuration de votre ressource Ingress comporte une section TLS, l'équilibreur de charge ALB Ingress peut traiter les demandes URL sécurisées par HTTPS vers votre application. Toutefois, l'ALB gère la terminaison TLS et déchiffre la demande avant de transférer le trafic vers vos applications. Si vous disposez d'applications qui nécessitent le protocole HTTPS et que vous avez besoin que le trafic reste chiffré, utilisez l'annotation `ssl-services` pour désactiver la terminaison TLS par défaut de l'ALB. L'ALB met fin à la connexion TLS et effectue à nouveau le chiffrement SSL avant d'envoyer le trafic à l'application de back end.<br></br>En outre, si votre application de back end peut gérer TLS et que vous souhaitez renforcer la sécurité, vous pouvez ajouter l'authentification unidirectionnelle ou mutuelle en fournissant un certificat inclus dans une valeur confidentielle.</dd>
 
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -1798,7 +1741,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par la valeur confidentielle d'authentification mutuelle pour le service. Cette valeur confidentielle doit contenir l'élément <code>ca.crt</code> requis. Pour créer une valeur confidentielle d'authentification mutuelle, voir [Création de valeurs confidentielles](cs_app.html#secrets_mutual_auth).</td>
+  <td>Si votre application de back end peut gérer TLS et que vous souhaitez renforcer la sécurité, remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par la valeur confidentielle de l'authentification unidirectionnelle ou mutuelle du service.<ul><li>Si vous fournissez une valeur confidentielle d'authentification unidirectionnelle, cette valeur doit contenir le certificat <code>trusted.crt</code> du serveur en amont. Pour créer une valeur confidentielle TLS, voir [Création de valeurs confidentielles](cs_app.html#secrets_ssl_services).</li><li>Si vous fournissez une valeur confidentielle d'authentification mutuelle, cette valeur doit contenir les éléments <code>ca.crt</code> et <code>ca.key</code> requis que votre application attend du client. Pour créer une valeur confidentielle d'authentification mutuelle, voir [Création de valeurs confidentielles](cs_app.html#secrets_mutual_auth).</li></ul><strong>Avertissement</strong> : si vous ne fournissez pas de valeur confidentielle, les connexions non sécurisées sont autorisées. Vous pouvez décider d'omettre une valeur confidentielle pour tester la connexion et si vous ne disposez pas d'un certificat ou si votre certificat a expiré et que vous voulez autoriser les connexions non sécurisées.</td>
   </tr>
   </tbody></table>
 
@@ -2326,7 +2269,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
+  serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2348,11 +2291,11 @@ metadata:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2491,7 +2434,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
  tls:
  - hosts:

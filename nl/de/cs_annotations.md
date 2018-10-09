@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -47,7 +47,7 @@ Um Ihrer Lastausgleichsfunktion für Ingress-Anwendungen (ALB) Funktionalität h
  <td>Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad abgleicht.</td>
  </tr>
  <tr>
- <td><a href="#location-snippets">Positionsnippets</a></td>
+ <td><a href="#location-snippets">Positionssnippets</a></td>
  <td><code>location-snippets</code></td>
  <td>Angepasste Positionsblockkonfiguration für einen Service hinzufügen.</td>
  </tr>
@@ -308,7 +308,8 @@ Hinzufügen von Pfaddefinitionen zu externen Services, wie beispielsweise in {{s
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Verwenden Sie diese Annotation nur dann, wenn Ihre App für einen externen Service, nicht für einen Back-End-Service, betrieben wird. Wenn Sie diese Annotation verwenden, um eine externe Serviceroute zu erstellen, dann werden zusammen mit ihr nur die Annotationen `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` und `proxy-buffering` unterstützt. Darüber hinaus werden keine weiteren Annotationen zusammen mit `proxy-external-service` unterstützt.<br><br><strong>Hinweis</strong>: Es ist nicht möglich, mehrere Hosts für einen einzelnen Service und Pfad anzugeben.</dd>
+<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Verwenden Sie diese Annotation nur dann, wenn Ihre App für einen externen Service, nicht für einen Back-End-Service, betrieben wird. Wenn Sie diese Annotation verwenden, um eine externe Serviceroute zu erstellen, dann werden zusammen mit ihr nur die Annotationen `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` und `proxy-buffering` unterstützt. Darüber hinaus werden keine weiteren Annotationen zusammen mit `proxy-external-service` unterstützt.<br><br><strong>Hinweis</strong>: Es ist nicht möglich, mehrere Hosts für einen einzelnen Service und Pfad anzugeben.
+</dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
 
@@ -448,7 +449,7 @@ spec:
 <br />
 
 
-### Positionsnippets (location-snippets)
+### Positionssnippets (location-snippets)
 {: #location-snippets}
 
 Angepasste Positionsblockkonfiguration für einen Service hinzufügen.
@@ -474,7 +475,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -685,7 +686,7 @@ Zugriff auf eine App über einen vom Standard abweichenden TC-Port.
 <dd>
 Verwenden Sie diese Annotation für eine App, für die eine Arbeitslast für TCP-Datenströme ausgeführt wird.
 
-<p>**Hinweis**: Die Lastausgleichsfunktion für Anwendungen (ALB) arbeitet im Durchgriffsmodus und leitet den Datenverkehr an Backend-Apps weiter. Die SSL-Terminierung wird in diesem Fall nicht unterstützt.</p>
+<p>**Hinweis**: Die Lastausgleichsfunktion für Anwendungen (ALB) arbeitet im Durchgriffsmodus und leitet den Datenverkehr an Backend-Apps weiter. Die SSL-Terminierung wird in diesem Fall nicht unterstützt. Die TLS-Verbindung wird nicht beendet und der Durchgriff erfolgt ungehindert. </p>
 </dd>
 
 
@@ -766,12 +767,12 @@ Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>Konfigurieren Sie Ingress für den Zugriff auf Ihre App über einen vom Standard abweichenden TCP-Port. Verwenden Sie die YAML-Beispieldatei in dieser Referenz. </li>
-<li>Aktualisieren Sie Ihre ALB-Konfiguration.
+<li>Erstellen Sie entweder eine ALB-Ressource oder aktualisieren Sie Ihre vorhandene ALB-Konfiguration.
 <pre class="pre">
 <code>        kubectl apply -f myingress.yaml
         </code></pre>
 </li>
-<li>Öffnen Sie Ihren bevorzugten Web-Browser, um auf Ihre App zuzugreifen. Beispiel: <code>https://&lt;ibm domäne&gt;:&lt;ingress-port&gt;/</code></li></ol></dd></dl>
+<li>Führen Sie den Befehl 'curl' für die Ingress-Unterdomäne aus, um auf Ihre App zuzugreifen. Beispiel: <code>curl &lt;domäne&gt;:&lt;ingress-port&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -794,7 +795,7 @@ Nachdem die Lastausgleichsfunktion für Anwendungen (ALB) mit der Back-End-App v
 </br></br>
 Ein Verbindungszeitlimit und Lesezeitlimit von 60 Sekunden ist die Standardeinstellung auf einem Proxy und sollte in der Regel nicht geändert werden.
 </br></br>
-Falls die Verfügbarkeit Ihrer App nicht durchgehend gewährleistet ist oder Ihre App aufgrund hoher Workloads langsam antwortet, können Sie die Vebindungs- und Lesezeitlimits nach oben korrigieren. Denken Sie daran, dass sich das Erhöhen des Zeitlimits negativ auf die Leistung der Lastausgleichsfunktion für Anwendungen (ALB) auswirken kann, da die Verbindung mit der Back-End-App geöffnet bleiben muss, bis das Zeitlimit erreicht wurde.
+Falls die Verfügbarkeit Ihrer App nicht durchgehend gewährleistet ist oder Ihre App aufgrund hoher Workloads langsam antwortet, können Sie die Verbindungs- und Lesezeitlimits nach oben korrigieren. Denken Sie daran, dass sich das Erhöhen des Zeitlimits negativ auf die Leistung der Lastausgleichsfunktion für Anwendungen (ALB) auswirken kann, da die Verbindung mit der Back-End-App geöffnet bleiben muss, bis das Zeitlimit erreicht wurde.
 </br></br>
 Sie können andererseits das Zeitlimit nach unten korrigieren, um die Leistung der Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern. Stellen Sie sicher, dass Ihre Back-End-App Anforderungen auch bei höheren Workloads innerhalb des angegebenen Zeitlimits verarbeiten kann.</dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -972,7 +973,7 @@ Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server überg
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige Appkonfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben.<br><br><strong>Hinweis</strong>: Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige App-Konfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben.<br><br><strong>Hinweis</strong>: Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -1058,7 +1059,7 @@ Verwenden Sie die permanente Cookie-Annotation, um Ihrer Lastausgleichsfunktion 
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen Appkonfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen (ALB) so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
+<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen App-Konfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen (ALB) so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
 
 </br></br>
 Jeder Client, der eine Verbindung mit Ihrer Back-End-App herstellt, wird durch die Lastausgleichsfunktion für Anwendungen (ALB) einem der verfügbaren Upstream-Server zugewiesen. Die Lastausgleichsfunktion für Anwendungen (ALB) erstellt ein Sitzungscookie, das in der App des Clients gespeichert wird und das in die Headerinformationen jeder Anforderung zwischen der ALB und dem Client eingeschlossen wird. Die Informationen im Cookie stellen sicher, dass alle Anforderungen während der gesamten Sitzung von demselben Upstream-Server verarbeitet werden.
@@ -1418,8 +1419,7 @@ Da die Anwendung  {{site.data.keyword.appid_short_notm}} für die Authentifizier
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Standardmäßig ist die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) so konfiguriert, dass sie für eingehenden HTTP-Netzverkehr am Port mit der Nummer 80 und für eingehenden HTTPS-Netzverkehr am Port mit der Nummer 443 empfangsbereit ist. Sie können die Standardports ändern, um die Sicherheit der Domäne Ihrer Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern oder um ausschließlich einen HTTPS-Port zu aktivieren.
-</dd>
+<dd>Standardmäßig ist die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) so konfiguriert, dass sie für eingehenden HTTP-Netzverkehr am Port mit der Nummer 80 und für eingehenden HTTPS-Netzverkehr am Port mit der Nummer 443 empfangsbereit ist. Sie können die Standardports ändern, um die Sicherheit der Domäne Ihrer Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern oder um ausschließlich einen HTTPS-Port zu aktivieren.<p><strong>Hinweis</strong>: Um die gegenseitige Authentifizierung an einem Port zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in der Annotation [`mutual-auth` an](#mutual-auth). Verwenden Sie nicht die Annotation `custom-port`, um einen Port für die gegenseitige Authentifizierung anzugeben. </p></dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -1458,7 +1458,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Geben Sie die Portnummer ein, die für den eingehenden HTTP- oder HTTPS-Datenaustausch im Netz verwendet werden soll. <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Geben Sie die Portnummer ein, die für den eingehenden HTTP- oder HTTPS-Datenaustausch im Netz verwendet werden soll.  <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1632,7 +1632,7 @@ Konfigurieren Sie die gegenseitige Authentifizierung für Downstream-Datenverkeh
 <dd>
 <ul>
 <li>Sie müssen über einen gültigen geheimen Schlüssel für die gegenseitige Authentifizierung verfügen, der die erforderliche Datei <code>ca.crt</code> enthält. Informationen zum Erstellen eines geheimen Schlüssels für die gegenseitige Authentifizierung finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets_mutual_auth).</li>
-<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports).</li>
+<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in dieser Annotation an. Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben. </li>
 </ul>
 </dd>
 
@@ -1697,65 +1697,7 @@ Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren U
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Wenn Ihre Ingress-Ressourcenkonfiguration über einen TLS-Abschnitt verfügt, kann die Ingress-ALB mit HTTPS gesicherte URL-Anforderungen an Ihre App verarbeiten. Die ALB entschlüsselt die Anforderung jedoch, bevor der Datenverkehr an Ihre Apps weitergeleitet wird. Wenn Sie über Apps verfügen, die HTTS benötigen und für die der Datenverkehr verschlüsselt werden müssen, bevor sie an diese Upstream-Apps weitergeleitet werden, können Sie die Annotation `ssl-services` verwenden. Wenn Ihre Upstream-Apps TLS verarbeiten können, können Sie optional ein Zertifikat bereitstellen, das in einem geheimen TLS-Schlüssel enthalten ist.<br></br>**Optional**: Sie können die [unidirektionale Authentifizierung oder die gegenseitige Authentifizierung](#ssl-services-auth) zu dieser Annotation hinzufügen.</dd>
-
-
-<dt>YAML-Beispiel einer Ingress-Ressource</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;mein_ingress-name&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;mein_service1&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_für_service1&gt;];ssl-service=&lt;mein_service2&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_für_service2&gt;]"
-spec:
-  rules:
-  - host: meine_domäne
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: mein_service1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: mein_service2
-          servicePort: 8444
-          </code></pre>
-
-<table>
-<caption>Erklärung der Komponenten von Annotationen</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Optional: Wenn Sie einen geheimen TLS-Schlüssel verwenden möchten und Ihre Upstream-App TLS verarbeiten kann, ersetzen Sie <code>&lt;<em>service-ssl-secret</em>&gt;</code> durch den geheimen Schlüssel für den Service. Wenn Sie einen geheimen Schlüssel bereitstellen, muss er <code>trusted.crt</code> vom Upstream-Server enthalten. Informationen zum Erstellen eines geheimen TLS-Schlüssels finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets_ssl_services).</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### Unterstützung für SSL-Services mit Authentifizierung
-{: #ssl-services-auth}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>
-Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren Upstream-Apps für zusätzliche Sicherheit mit der unidirektionalen oder gegenseitigen Authentifizierung.
-</dd>
-
+Wenn Ihre Ingress-Ressourcenkonfiguration über einen TLS-Abschnitt verfügt, kann die Ingress-ALB mit HTTPS gesicherte URL-Anforderungen an Ihre App verarbeiten. Die ALB verarbeitet die TLS-Terminierung und entschlüsselt die Anforderung, bevor der Datenverkehr an Ihre Apps weitergeleitet wird. Wenn Sie über Apps verfügen, die das HTTPS-Protokoll benötigen und für die der Datenverkehr verschlüsselt bleiben muss, verwenden Sie die Annotation `ssl-services`, um die TLS-Standardbeendigung des ALB zu inaktivieren. Der ALB beendet die TLS-Verbindung und verschlüsselt SSL erneut, bevor der Datenverkehr an die Back-End-App gesendet wird.<br></br>Wenn Ihre Back-End-App darüber hinaus TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, können Sie eine unidirektionale oder gegenseitige Authentifizierung hinzufügen, indem Sie ein Zertifikat bereitstellen, das in einem geheimen Schlüssel enthalten ist.</dd>
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -1800,7 +1742,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für die gegenseitige Authentifizierung für den Service. Der geheime Schlüssel für die gegenseitige Authentifizierung muss die erforderliche Datei <code>ca.crt</code> enthalten. Informationen zum Erstellen eines geheimen Schlüssels für die gegenseitige Authentifizierung finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets_mutual_auth).</td>
+  <td>Wenn Ihre Back-End-App TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, ersetzen Sie <code>&lt;<em>service-ssl-secret</em>&gt;</code> durch den geheimen Schlüssel mit unidirektionaler oder gegenseitiger Authentifizierung für den Service. <ul><li>Wenn Sie einen geheimen Schlüssel mit unidirektionaler Authentifizierung bereitstellen, muss er <code>trusted.crt</code> vom Upstream-Server enthalten. Informationen zum Erstellen eines geheimen TLS-Schlüssels finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets_ssl_services).</li><li>Wenn Sie einen geheimen Schlüssel mit gegenseitiger Authentifizierung bereitstellen, muss der Wert die erforderlichen Angaben für <code>ca.crt</code> und <code>ca.key</code> enthalten, die Ihre App vom Client erwartet. Informationen zum Erstellen eines geheimen Schlüssels für die gegenseitige Authentifizierung finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets_mutual_auth).</li></ul><strong>Warnung</strong>: Wenn Sie keinen geheimen Schlüssel angeben, werden unsichere Verbindungen zugelassen. Sie können auf den geheimen Schlüssel verzichten, wenn Sie die Verbindung testen möchten und keine Zertifikate vorliegen oder wenn Ihre Zertifikate abgelaufen sind und Sie unsichere Verbindungen zulassen möchten.</td>
   </tr>
   </tbody></table>
 
@@ -1908,7 +1850,8 @@ spec:
 
 2. Richten Sie Istio-Routing-Regeln für die App ein. In der Istio-Beispielapp namens BookInfo sind beispielsweise [Routing-Regeln für die einzelnen Mikroservices ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) in der Datei `route-rule-all-v1.yaml` definiert.
 
-3. Stellen Sie die App für den Istio Ingress-Controller durch das Erstellen einer Istio Ingress-Ressource bereit. Die Ressource ermöglicht die Anwendung von Istio-Funktionen, wie z. B. Überwachungs- und Routenregeln, auf den Datenverkehr, der in den Cluster eindringt. Die folgende Ressource für die App 'BookInfo' ist beispielsweise in der Datei `bookinfo.yaml` vordefiniert:
+3. Stellen Sie die App für den Istio Ingress-Controller durch das Erstellen einer Istio Ingress-Ressource bereit. Die Ressource ermöglicht die Anwendung von Istio-Funktionen, wie z. B. Überwachungs- und Routenregeln, auf den Datenverkehr, der in den Cluster eindringt.
+    Die folgende Ressource für die App 'BookInfo' ist beispielsweise in der Datei `bookinfo.yaml` vordefiniert:
     ```
     apiVersion: extensions/v1beta1
     kind: Ingress
@@ -2328,7 +2271,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<mein_service1> {
+  serviceName=&lt;mein_service1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2350,11 +2293,11 @@ metadata:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;mein_service1&gt; {
-      &lt;header1&gt;: &lt;wert1&gt;;
-      &lt;header2&gt;: &lt;wert2&gt;;
+      &lt;header1&gt; &lt;wert1&gt;;
+      &lt;header2&gt; &lt;wert2&gt;;
       }
       serviceName=&lt;mein_service2&gt; {
-      &lt;header3&gt;: &lt;wert3&gt;;
+      &lt;header3&gt; &lt;wert3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;mein_service1&gt; {
@@ -2493,7 +2436,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;größe&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;größe&gt;"
 spec:
  tls:
  - hosts:

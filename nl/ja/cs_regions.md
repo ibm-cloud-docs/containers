@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -17,23 +17,25 @@ lastupdated: "2018-08-06"
 
 # 地域とゾーン
 
-地域は、アプリ、サービス、およびその他の {{site.data.keyword.Bluemix}} リソースをデプロイできる特定の地理的な場所です。[{{site.data.keyword.Bluemix_notm}} 地域](#bluemix_regions)は [{{site.data.keyword.containerlong}} 地域](#container_regions)とは異なります。 地域は 1 つ以上のゾーンで構成されます。
-ゾーンは物理データ・センターであり、サービスとアプリケーションをホストするためのコンピュート・リソース、ネットワーク・リソース、ストレージ・リソース、関連冷却機器および電源機器をホストしています。単一障害点を共有しないようにゾーンは互いに独立しています。
+地域は、アプリ、サービス、およびその他の {{site.data.keyword.Bluemix}} リソースをデプロイできる特定の地理的な場所です。 [{{site.data.keyword.Bluemix_notm}} 地域](#bluemix_regions)は [{{site.data.keyword.containerlong}} 地域](#container_regions)とは異なります。 地域は 1 つ以上のゾーンで構成されます。
+ゾーンは物理データ・センターであり、サービスとアプリケーションをホストするためのコンピュート・リソース、ネットワーク・リソース、ストレージ・リソース、関連冷却機器および電源機器をホストしています。 単一障害点を共有しないようにゾーンは互いに独立しています。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} は、世界中でホストされています。 {{site.data.keyword.Bluemix_notm}} 内のサービスは、グローバルに使用できるものもありますし、特定の地域内で使用できるものもあります。 {{site.data.keyword.containershort_notm}} で Kubernetes クラスターを作成すると、そのリソースは、クラスターをデプロイした地域に残ります。
+{{site.data.keyword.Bluemix_notm}} は、世界中でホストされています。 {{site.data.keyword.Bluemix_notm}} 内のサービスは、グローバルに使用できるものもありますし、特定の地域内で使用できるものもあります。 {{site.data.keyword.containerlong_notm}} で Kubernetes クラスターを作成すると、そのリソースは、クラスターをデプロイした地域に残ります。 
 
-![{{site.data.keyword.containershort_notm}} 地域とゾーン](/images/regions-mz.png)
+**注**: サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で標準クラスターを作成できます。フリー・クラスターは、選択地域でのみ使用可能です。
 
-_{{site.data.keyword.containershort_notm}} 地域とゾーン_
+![{{site.data.keyword.containerlong_notm}} 地域とゾーン](/images/regions-mz.png)
 
-サポートされる {{site.data.keyword.containershort_notm}} 地域は次のとおりです。
-  * 北アジア太平洋地域
-  * 南アジア太平洋地域
-  * 中欧
-  * 英国南部
-  * 米国東部
-  * 米国南部
+_{{site.data.keyword.containerlong_notm}} 地域とゾーン_
+
+サポートされる {{site.data.keyword.containerlong_notm}} 地域は次のとおりです。
+* 北アジア太平洋地域 (標準クラスターのみ)
+* 南アジア太平洋地域
+* 中欧
+* 英国南部
+* 米国東部 (標準クラスターのみ)
+* 米国南部
 
 <br />
 
@@ -83,22 +85,24 @@ _{{site.data.keyword.containershort_notm}} 地域とゾーン_
 <br />
 
 
-## {{site.data.keyword.containershort_notm}} の地域
+## {{site.data.keyword.containerlong_notm}} の地域
 {: #container_regions}
 
-{{site.data.keyword.containershort_notm}} 地域を使用して、ログインしている {{site.data.keyword.Bluemix_notm}} 地域以外の地域で、Kubernetes クラスターの作成とアクセスを行うことができます。 {{site.data.keyword.containershort_notm}} 地域のエンドポイントとは、{{site.data.keyword.Bluemix_notm}} 全体ではなく、{{site.data.keyword.containershort_notm}} のみを指します。
+{{site.data.keyword.containerlong_notm}} 地域を使用して、ログインしている {{site.data.keyword.Bluemix_notm}} 地域以外の地域で、Kubernetes クラスターの作成とアクセスを行うことができます。 {{site.data.keyword.containerlong_notm}} 地域のエンドポイントとは、{{site.data.keyword.Bluemix_notm}} 全体ではなく、{{site.data.keyword.containerlong_notm}} のみを指します。
 {:shortdesc}
 
-サポートされる {{site.data.keyword.containershort_notm}} 地域は次のとおりです。
-  * 北アジア太平洋地域
+**注**: サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で標準クラスターを作成できます。フリー・クラスターは、選択地域でのみ使用可能です。
+
+サポートされる {{site.data.keyword.containerlong_notm}} 地域は次のとおりです。
+  * 北アジア太平洋地域 (標準クラスターのみ)
   * 南アジア太平洋地域
   * 中欧
   * 英国南部
-  * 米国東部
+  * 米国東部 (標準クラスターのみ)
   * 米国南部
 
-1 つのグローバルなエンドポイント `https://containers.bluemix.net/v1` を使用して、{{site.data.keyword.containershort_notm}} にアクセスできます。
-* 現在自分が属する {{site.data.keyword.containershort_notm}} 地域を確認するには、`ibmcloud ks region` を実行します。
+1 つのグローバルなエンドポイント `https://containers.bluemix.net/v1` を使用して、{{site.data.keyword.containerlong_notm}} にアクセスできます。
+* 現在自分が属する {{site.data.keyword.containerlong_notm}} 地域を確認するには、`ibmcloud ks region` を実行します。
 * 使用可能な地域とそのエンドポイントのリストを取得するには、`ibmcloud ks regions` を実行します。
 
 グローバル・エンドポイントと共に API を使用するには、すべての要求で、`X-Region` ヘッダーによって地域名を渡します。
@@ -107,11 +111,11 @@ _{{site.data.keyword.containershort_notm}} 地域とゾーン_
 ### 別の{{site.data.keyword.containerlong_notm}}地域へのログイン
 {: #container_login_endpoints}
 
-{{site.data.keyword.containershort_notm}} CLI を使用して、地域を変更できます。
+{{site.data.keyword.containerlong_notm}} CLI を使用して、地域を変更できます。
 {:shortdesc}
 
-以下の理由で、別の {{site.data.keyword.containershort_notm}} 地域にログインしたい場合があります。
-  * ある地域で作成した {{site.data.keyword.Bluemix_notm}} サービスまたはプライベート Docker イメージを、別の地域の {{site.data.keyword.containershort_notm}} で使用したい。
+以下の理由で、別の {{site.data.keyword.containerlong_notm}} 地域にログインしたい場合があります。
+  * ある地域で作成した {{site.data.keyword.Bluemix_notm}} サービスまたはプライベート Docker イメージを、別の地域の {{site.data.keyword.containerlong_notm}} で使用したい。
   * ログインしているデフォルトの {{site.data.keyword.Bluemix_notm}} 地域とは別の地域のクラスターにアクセスしたい。
 
 地域をすぐに切り替えるには、`ibmcloud ks region-set` を実行します。
@@ -119,7 +123,7 @@ _{{site.data.keyword.containershort_notm}} 地域とゾーン_
 ### {{site.data.keyword.containerlong_notm}} の API コマンドの使用
 {: #containers_api}
 
-{{site.data.keyword.containershort_notm}} API と対話するには、コマンド・タイプを入力し、グローバルなエンドポイントに `/v1/command` を追加します。
+{{site.data.keyword.containerlong_notm}} API と対話するには、コマンド・タイプを入力し、グローバルなエンドポイントに `/v1/command` を追加します。
 {:shortdesc}
 
 `GET /clusters` API の例を示します。
@@ -135,14 +139,14 @@ _{{site.data.keyword.containershort_notm}} 地域とゾーン_
 
 API コマンドの資料を参照するには、[https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/) を表示してください。
 
-## {{site.data.keyword.containershort_notm}} のゾーン
+## {{site.data.keyword.containerlong_notm}} のゾーン
 {: #zones}
 
 ゾーンとは、各 {{site.data.keyword.Bluemix_notm}} 地域で使用できる物理データ・センターのことです。 地域は、ゾーンを編成するための概念的なツールであり、さまざまな国のゾーン (データ・センター) を含めることができます。 以下の表に、地域別に使用可能なゾーンを示します。
 {:shortdesc}
 
 * **複数ゾーンの大都市**: 複数ゾーンの大都市に作成されたクラスター内のワーカー・ノードは、複数のゾーンに分散されます。
-* **単一ゾーンの都市**: 単一ゾーンの都市に作成されたクラスター内のワーカー・ノードは、1 つのゾーンにとどまります。ワーカー・ノードを複数のゾーンに分散させることはできません。
+* **単一ゾーンの都市**: 単一ゾーンの都市に作成されたクラスター内のワーカー・ノードは、1 つのゾーンにとどまります。 ワーカー・ノードを複数のゾーンに分散させることはできません。
 
 <table summary="この表は、利用可能なゾーンを地域別に示しています。行は左から右に読みます。1 列目は地域、2 列目は複数ゾーンの大都市、3 列目は単一ゾーンの都市です。">
 <caption>利用可能な単一ゾーンと複数ゾーン (地域別)。</caption>
@@ -170,6 +174,7 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
       <td>中欧</td>
       <td>フランクフルト: fra02、fra04、fra05</td>
       <td><p>アムステルダム: ams03</p>
+      <p>オスロ: osl01</p>
       <p>パリ: par01</p>
       </td>
     </tr>
@@ -195,7 +200,7 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
 ### 単一ゾーンのクラスター
 {: #single_zone}
 
-単一ゾーンのクラスターでは、クラスターのリソースは、クラスターがデプロイされたゾーンにとどまります。以下の図は、米国東部の地域の例における単一ゾーン・クラスターのコンポーネントの関係を表しています。
+単一ゾーンのクラスターでは、クラスターのリソースは、クラスターがデプロイされたゾーンにとどまります。 以下の図は、米国東部の地域の例における単一ゾーン・クラスターのコンポーネントの関係を表しています。
 
 ![クラスターのリソースが存在する場所について](/images/region-cluster-resources.png)
 
@@ -212,9 +217,9 @@ _単一ゾーンのクラスターのリソースが存在する場所につい�
 
 複数ゾーン・クラスターでは、マスター・ノードは複数ゾーン対応のゾーンにデプロイされ、クラスターのリソースは複数のゾーンに分散されます。
 
-1.  ワーカー・ノードは、クラスターの可用性を向上させるために、1 つの地域内の複数のゾーンに分散されます。マスターは、クラスターをデプロイしたのと同じ複数ゾーン対応のゾーンにとどまります。ローカル・コンテナーのオーケストレーション操作 (`kubectl` コマンドなど) を開始すると、地域エンドポイントを介してマスター・ノードとワーカー・ノードの間で情報が交換されます。
+1.  ワーカー・ノードは、クラスターの可用性を向上させるために、1 つの地域内の複数のゾーンに分散されます。 マスターは、クラスターをデプロイしたのと同じ複数ゾーン対応のゾーンにとどまります。 ローカル・コンテナーのオーケストレーション操作 (`kubectl` コマンドなど) を開始すると、地域エンドポイントを介してマスター・ノードとワーカー・ノードの間で情報が交換されます。
 
-2.  ストレージ、ネットワーキング、コンピュート、ポッドで実行されるアプリなど、他のクラスター・リソースは、さまざまな方法で複数ゾーン・クラスターにデプロイできます。詳しくは、以下のトピックを参照してください。
+2.  ストレージ、ネットワーキング、コンピュート、ポッドで実行されるアプリなど、他のクラスター・リソースは、さまざまな方法で複数ゾーン・クラスターにデプロイできます。 詳しくは、以下のトピックを参照してください。
     * 複数ゾーン・クラスターで [ファイル・ストレージ](cs_storage_file.html#add_file)と[ブロック・ストレージ](cs_storage_block.html#add_block)をセットアップする
     * [複数ゾーン・クラスターで LoadBalancer サービスを使用してアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする](cs_loadbalancer.html#multi_zone_config)
     * [Ingress を使用してネットワーク・トラフィックを管理する](cs_ingress.html#planning)

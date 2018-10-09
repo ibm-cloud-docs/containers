@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ Wenn Sie Ihre App durch Erstellen eines Kubernetes-Service vom Typ 'NodePort' zu
 
 Das folgende Diagramm veranschaulicht, wie die Kommunikation vom Internet an eine App geleitet wird, wenn ein NodePort-Service konfiguriert ist:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Stellen Sie eine App in {{site.data.keyword.containershort_notm}} bereit, indem Sie NodePort" style="width:550px; border-style: none"/> verwenden.
+<img src="images/cs_nodeport_planning.png" width="550" alt="Eine App in {{site.data.keyword.containerlong_notm}} mithilfe von NodePort zugänglich machen" style="width:550px; border-style: none"/>
 
 1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihres Workerknotens und des Knotenports (NodePort) auf dem Workerknoten verwendet wird.
 

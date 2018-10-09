@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # 튜토리얼: Cloud Foundry에서 클러스터로 앱 마이그레이션
 {: #cf_tutorial}
 
-Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 내 코드를 {{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터에 배치할 수 있습니다.
+Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 내 코드를 {{site.data.keyword.containerlong_notm}}의 Kubernetes 클러스터에 배치할 수 있습니다.
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 - [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](../services/Registry/index.html)하십시오.
 - [클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
 - [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- [**편집자**, **운영자** 또는 **관리자** 플랫폼 역할을 보유 중인지 확인](cs_users.html#add_users_cli)하십시오. 
 - [Docker 및 Kubernetes 용어에 대해 학습](cs_tech.html)하십시오.
 
 
@@ -147,7 +148,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>고유 네임스페이스 및 이미지 이름을 포함하는 개인용 레지스트리 경로입니다. 이 예에서는 이미지에 대해 앱 디렉토리와 동일한 이름이 사용되었으나, 개인용 레지스트리의 이미지에 대해서는 어떤 이름이든 선택할 수 있습니다. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오. </td>
+  <td>고유 네임스페이스 및 이미지 이름을 포함하는 개인용 레지스트리 경로입니다. 이 예에서는 이미지에 대해 앱 디렉토리와 동일한 이름이 사용되었으나, 개인용 레지스트리의 이미지에 대해서는 어떤 이름이든 선택할 수 있습니다. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +157,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   </tbody>
   </table>
 
-  이미지가 개인용 레지스트리에 작성됩니다. `ibmcloud cr images` 명령을 실행하여 이미지가 작성되었는지 확인할 수 있습니다. 
+  이미지가 개인용 레지스트리에 작성됩니다. `ibmcloud cr images` 명령을 실행하여 이미지가 작성되었는지 확인할 수 있습니다.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +223,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오. </td>
+  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -258,7 +259,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

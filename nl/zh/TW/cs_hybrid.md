@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -33,26 +33,59 @@ lastupdated: "2018-08-06"
 建立公用 Kubernetes 叢集與「{{site.data.keyword.Bluemix}} 專用」實例之間的 VPN 連線功能，以容許雙向通訊。
 {: shortdesc}
 
-1.  [在 {{site.data.keyword.Bluemix}} 專用中建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)。
-
-2.  在 {{site.data.keyword.Bluemix}} 公用中使用 {{site.data.keyword.containerlong}} 建立標準叢集，或使用現有叢集。若要建立叢集，請選擇下列選項： 
+1.  建立標準叢集，讓 {{site.data.keyword.Bluemix_notm}} Public 中有 {{site.data.keyword.containerlong}}，或使用現有的叢集。若要建立叢集，請選擇下列選項： 
     - [從 GUI 建立標準叢集](cs_clusters.html#clusters_ui)。 
     - [從 CLI 建立標準叢集](cs_clusters.html#clusters_cli)。 
     - [使用 Cloud Automation Manager (CAM) 利用預先定義的範本來建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。當您使用 CAM 部署叢集時，會自動為您安裝 Helm tiller。
 
-3.  在「{{site.data.keyword.Bluemix}} 專用」叢集中，部署 strongSwan IPSec VPN 服務。
+2.  在 {{site.data.keyword.containerlong_notm}} 叢集中，[遵循指示來設定 strongSwan IPSec VPN 服務](cs_vpn.html#vpn_configure)。 
+
+    *  對於[步驟 2](cs_vpn.html#strongswan_2)，請注意：
+
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `local.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `remote.id` 的 ID。 
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `remote.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `local.id` 的 ID。
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `preshared.secret` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `preshared.secret` 的密碼。
+
+    *  對於[步驟 3](cs_vpn.html#strongswan_3)，請配置**入埠** VPN 連線的 strongSwan。
+
+       ```
+       ipsec.auto: add
+       loadBalancerIP: <portable_public_IP>
+       ```
+       {: codeblock}
+
+3.  記下您設為 `loadbalancerIP` 的可攜式公用 IP 位址。
+
+    ```
+    kubectl get svc vpn-strongswan
+    ```
+    {: pre}
+
+4.  [在 {{site.data.keyword.Bluemix_notm}} 專用中建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)。
+
+5.  在「{{site.data.keyword.Bluemix_notm}} 專用」叢集中，部署 strongSwan IPSec VPN 服務。
 
     1.  [完成 strongSwan IPSec VPN 暫行解決方法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html)。 
 
-    2.  在專用叢集中，[安裝 strongSwan VPN Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。
+    2.  在專用叢集中[設定 strongSwan VPN Helm 圖表![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。 
+    
+        *  在配置參數中，將**遠端閘道**欄位設為您已設為 {{site.data.keyword.containerlong_notm}} 叢集的 `loadbalancerIP` 的可攜式公用 IP 位址的值。
+    
+           ```
+           Operation at startup: start
+           ...
+           Remote gateway: <portable_public_IP>
+           ...
+           ```
+           {: codeblock}
+    
+        *  請記住，專用 `local.id` 必須符合公用 `remote.id`，專用 `remote.id` 必須符合公用 `local.id`，而專用和公用的 `preshared.secret` 值必須相符。
+        
+        現在，您可以起始從 {{site.data.keyword.Bluemix_notm}} Private 叢集到 {{site.data.keyword.containerlong_notm}} 叢集的連線。
 
-4.  取得「{{site.data.keyword.Bluemix}} 專用」VPN 閘道的公用 IP 位址。IP 位址是[專用叢集初步設定 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/prep_cluster.html) 的一部分。
+7.  [測試叢集之間的 VPN 連線](cs_vpn.html#vpn_test)。
 
-5.  在「{{site.data.keyword.Bluemix}} 公用」叢集中，[部署 strongSwan IPSec VPN 服務](cs_vpn.html#vpn-setup)。使用前一個步驟的公用 IP 位址，並且務必在「{{site.data.keyword.Bluemix}} 公用」中配置 VPN 閘道來進行[出埠連線](cs_vpn.html#strongswan_3)，以從「{{site.data.keyword.Bluemix}} 公用」中的叢集起始 VPN 連線。 
-
-6.  [測試叢集之間的 VPN 連線](cs_vpn.html#vpn_test)。
-
-7.  針對每一個您要連接的叢集，重複這些步驟。 
+8.  針對每一個您要連接的叢集，重複這些步驟。 
 
 
 ## 在公用 Kubernetes 容器中執行 {{site.data.keyword.Bluemix_notm}} 專用映像檔

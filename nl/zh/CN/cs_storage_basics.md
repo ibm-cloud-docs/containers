@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -99,10 +99,10 @@ lastupdated: "2018-08-06"
 **何时使用静态供应？**</br>
 
 查看以下静态供应持久性存储器的常见用例： 
-1. **使保留的数据可供集群使用：**使用动态供应通过保留存储类供应了持久性存储器。您除去了 PVC，但是相应的 PV、IBM Cloud Infrastructure (SoftLayer) 中的物理存储器以及数据仍然存在。您希望通过集群中的应用程序访问保留的数据。 
-2. **使用现有存储设备：**直接在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应了持久性存储器，并且希望在集群中使用此存储设备。 
-3. **在同一专区中的集群之间共享持久性存储器：**为集群供应了持久性存储器。要与同一专区中的其他集群共享同一持久性存储器实例，您必须在其他集群中手动创建 PV 和匹配的 PVC。**注：**仅当集群和存储器实例位于同一专区中时，才可在集群之间共享持久存储器。 
-4. **在同一集群中的名称空间之间共享持久性存储器：**在集群的名称空间中供应了持久性存储器。您希望将相同的存储器实例用于部署到该集群中其他名称空间的应用程序 pod。 
+1. **使保留的数据可供集群使用：**使用动态供应通过保留存储类供应持久性存储器。您除去了 PVC，但是相应的 PV、IBM Cloud Infrastructure (SoftLayer) 中的物理存储器以及数据仍然存在。您希望通过集群中的应用程序访问保留的数据。 
+2. **使用现有存储设备：**直接在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应持久性存储器，并且希望在集群中使用此存储设备。 
+3. **在同一专区中的集群之间共享持久性存储器：**为集群供应持久性存储器。要与同一专区中的其他集群共享同一持久性存储器实例，您必须在其他集群中手动创建 PV 和匹配的 PVC。**注：**仅当集群和存储器实例位于同一专区中时，才可在集群之间共享持久存储器。 
+4. **在同一集群中的名称空间之间共享持久性存储器：**在集群的名称空间中供应持久性存储器。您希望将相同的存储器实例用于部署到该集群中其他名称空间的应用程序 pod。 
 
 有关如何静态供应存储器的更多信息，请参阅：
 - [文件存储器](cs_storage_file.html#predefined_storageclass)
@@ -114,7 +114,7 @@ lastupdated: "2018-08-06"
 要动态供应持久性存储器，必须定义所需的存储器的类型和配置。
 {: shortdesc}
 
-Kubernetes 存储类用于抽象 {{site.data.keyword.Bluemix_notm}} 中支持的底层存储平台，以便您无需了解有关支持的大小、IOPS 或保留策略的所有详细信息，就能成功在集群中供应持久性存储器。{{site.data.keyword.containershort_notm}} 为支持的每种类型的存储器提供预定义的存储类。每个存储类都设计为抽象支持的存储层，同时让您可以选择所需大小、IOPS 和保留策略。 
+Kubernetes 存储类用于抽象 {{site.data.keyword.Bluemix_notm}} 中支持的底层存储平台，以便您无需了解有关支持的大小、IOPS 或保留策略的所有详细信息，就能成功在集群中供应持久性存储器。{{site.data.keyword.containerlong_notm}} 为支持的每种类型的存储器提供预定义的存储类。每个存储类都设计为抽象支持的存储层，同时让您可以选择所需大小、IOPS 和保留策略。 
 
 有关预定义存储类的规范，请参阅： 
 - [文件存储器](cs_storage_file.html#storageclass_reference)
@@ -126,7 +126,7 @@ Kubernetes 存储类用于抽象 {{site.data.keyword.Bluemix_notm}} 中支持的
 ### 定制存储类
 {: #customized_storageclass}
 
-如果无法使用提供的某个存储类，那么可以创建自己的定制存储类。
+如果无法使用提供的某个存储类，那么可以创建您自己的定制存储类。
 {: shortdesc}
 
 1. 创建定制存储类。您可以首先使用其中一个预定义的存储类，或者查看样本定制存储类。 
@@ -218,7 +218,7 @@ Kubernetes 存储类用于抽象 {{site.data.keyword.Bluemix_notm}} 中支持的
 
 开始之前：
 - [设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
-- 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，以便工作程序节点可以在专用网络上彼此通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成** > [基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。作为 VLAN 生成的替代方法，如果在 IBM Cloud Infrastructure (SoftLayer) 帐户中启用了虚拟路由器功能 (VRF)，那么可以使用 VRF。
+- 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
 
 更新现有 PV：
 

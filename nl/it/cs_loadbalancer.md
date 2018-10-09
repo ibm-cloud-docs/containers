@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,15 +23,17 @@ lastupdated: "2018-08-06"
 Esponi una porta e usa un indirizzo IP portatile per un programma di bilanciamento del carico di livello 4 per accedere a un'applicazione inserita in un contenitore.
 {:shortdesc}
 
+
+
 ## Componenti del programma di bilanciamento del carico e architettura
 {: #planning}
 
-Quando crei un cluster standard, {{site.data.keyword.containershort_notm}} esegue automaticamente il provisioning di una sottorete pubblica portatile e di una sottorete privata portatile. 
+Quando crei un cluster standard, {{site.data.keyword.containerlong_notm}} esegue automaticamente il provisioning di una sottorete pubblica portatile e di una sottorete privata portatile.
 
-* La sottorete pubblica portatile fornisce un indirizzo IP pubblico portatile che viene usato dall'[ALB Ingress pubblico](cs_ingress.html) predefinito. I restanti 4 indirizzi IP pubblici portatili possono essere usati per esporre le singole applicazioni su internet creando un servizio del programma di bilanciamento del carico pubblico. 
-* La sottorete privata portatile fornisce un indirizzo IP privato portatile che viene usato dall'[ALB Ingress privato](cs_ingress.html#private_ingress) predefinito. I restanti 4 indirizzi IP privati portatili possono essere usati per esporre le singole applicazioni su una rete privata creando un servizio del programma di bilanciamento del carico privato. 
+* La sottorete pubblica portatile fornisce un indirizzo IP pubblico portatile che viene usato dall'[ALB Ingress pubblico](cs_ingress.html) predefinito. I restanti 4 indirizzi IP pubblici portatili possono essere usati per esporre le singole applicazioni su internet creando un servizio del programma di bilanciamento del carico pubblico.
+* La sottorete privata portatile fornisce un indirizzo IP privato portatile che viene usato dall'[ALB Ingress privato](cs_ingress.html#private_ingress) predefinito. I restanti 4 indirizzi IP privati portatili possono essere usati per esporre le singole applicazioni su una rete privata creando un servizio del programma di bilanciamento del carico privato.
 
-Gli indirizzi IP pubblici e privati portatili sono statici e non cambiano quando viene rimosso un nodo di lavoro. Se il nodo di lavoro su cui si trova l'indirizzo IP del programma di bilanciamento del carico viene rimosso, un daemon keepalive, che monitora costantemente l'IP, sposta automaticamente l'IP in un altro nodo di lavoro. Puoi assegnare una qualsiasi porta al tuo programma di bilanciamento del carico e non è associata a un dato intervallo di porte. 
+Gli indirizzi IP pubblici e privati portatili sono statici e non cambiano quando viene rimosso un nodo di lavoro. Se il nodo di lavoro su cui si trova l'indirizzo IP del programma di bilanciamento del carico viene rimosso, un daemon keepalive, che monitora costantemente l'IP, sposta automaticamente l'IP in un altro nodo di lavoro. Puoi assegnare una qualsiasi porta al tuo programma di bilanciamento del carico e non è associata a un dato intervallo di porte.
 
 Un servizio del programma di bilanciamento del carico rende anche disponibili le applicazioni sulle NodePorts del servizio. Puoi accedere alle [NodePorts](cs_nodeport.html) da ogni indirizzo IP pubblico e privato per ogni nodo all'interno del cluster. Per bloccare il traffico alle NodePorts mentre stai usando un servizio del programma di bilanciamento del carico, vedi [Controllo del traffico in entrata nei servizi LoadBalancer o NodePort](cs_network_policy.html#block_ingress).
 
@@ -39,9 +41,9 @@ Il servizio
 LoadBalancer funge da punto di ingresso per le richieste in entrata per l'applicazione. Per accedere al servizio LoadBalancer da internet,
 utilizza l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e la porta assegnata nel formato `<IP_address>:<port>`. Il seguente diagramma mostra come un programma di bilanciamento del carico dirige la comunicazione da Internet a un'applicazione.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando un programma di bilanciamento del carico" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando un programma di bilanciamento del carico" style="width:550px; border-style: none"/>
 
-1. Una richiesta alla tua applicazione usa l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e la porta assegnata sul nodo di lavoro. 
+1. Una richiesta alla tua applicazione usa l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e la porta assegnata sul nodo di lavoro.
 
 2. La richiesta viene inoltrata automaticamente alla porta e all'indirizzo IP del cluster interno del servizio di bilanciamento del carico. L'indirizzo IP del cluster interno è accessibile solo all'interno del cluster.
 
@@ -51,13 +53,13 @@ utilizza l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e
 
 **Cluster multizona**:
 
-Se hai un cluster multizona, le istanze dell'applicazione vengono distribuite nei pod sui nodi di lavoro tra le diverse zone. Esamina queste configurazioni del LoadBalancer per le richieste di bilanciamento del carico alle tue istanze dell'applicazione in più zone. 
+Se hai un cluster multizona, le istanze dell'applicazione vengono distribuite nei pod sui nodi di lavoro tra le diverse zone. Esamina queste configurazioni del LoadBalancer per le richieste di bilanciamento del carico alle tue istanze dell'applicazione in più zone.
 
 <img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="Usa un servizio LoadBalancer per bilanciare il carico delle applicazioni in cluster multizona" style="width:700px; border-style: none"/>
 
-1. **Disponibilità più bassa: programma di bilanciamento del carico che viene distribuito in una zona.** Per impostazione predefinita, ogni programma di bilanciamento del carico viene configurato solo in una zona. Quando viene distribuito un solo programma di bilanciamento del carico, quest'ultimo deve instradare le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone. 
+1. **Disponibilità più bassa: programma di bilanciamento del carico che viene distribuito in una zona.** Per impostazione predefinita, ogni programma di bilanciamento del carico viene configurato solo in una zona. Quando viene distribuito un solo programma di bilanciamento del carico, quest'ultimo deve instradare le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone.
 
-2. **Disponibilità più alta: programmi di bilanciamento del carico che vengono distribuiti in ciascuna zona.** Puoi ottenere una disponibilità più alta quando distribuisci un programma di bilanciamento del carico in ogni zona in cui hai istanze dell'applicazione. Le richieste vengono gestite dai programmi di bilanciamento del carico in diverse zone in un ciclo round-robin. Inoltre, ciascun programma di bilanciamento del carico instrada le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone. 
+2. **Disponibilità più alta: programmi di bilanciamento del carico che vengono distribuiti in ciascuna zona.** Puoi ottenere una disponibilità più alta quando distribuisci un programma di bilanciamento del carico in ogni zona in cui hai istanze dell'applicazione. Le richieste vengono gestite dai programmi di bilanciamento del carico in diverse zone in un ciclo round-robin. Inoltre, ciascun programma di bilanciamento del carico instrada le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone.
 
 
 <br />
@@ -74,25 +76,25 @@ la puoi esporre utilizzando [Ingress](cs_ingress.html) o configurare la tua appl
 
 Prima di iniziare:
   * Un servizio del programma di bilanciamento del carico con un indirizzo IP privato portatile dispone ancora di un NodePort pubblico aperto per i nodi di lavoro. Per aggiungere una politica di rete per evitare il traffico pubblico, consulta [Blocco del traffico in entrata](cs_network_policy.html#block_ingress).
-  * In ciascuna zona, almeno una VLAN pubblica deve avere sottoreti portatili disponibili per i servizi Ingress e LoadBalancer. Per aggiungere servizi Ingress e LoadBalancer privati, devi specificare almeno una VLAN privata con sottoreti portatili disponibili. Per aggiungere sottoreti, vedi [Configurazione delle sottoreti per i cluster](cs_subnets.html).
-  * Se limiti il traffico di rete ai nodi di lavoro edge, assicurati che siano abilitati almeno 2 [nodi di lavoro edge](cs_edge.html#edge) in ciascuna zona. Se i nodi di lavoro edge sono abilitati in alcune zone ma non in altre, i programmi di bilanciamento del carico non verranno distribuiti uniformemente. I programmi di bilanciamento del carico verranno distribuiti sui nodi edge in alcune zone ma non sui nodi di lavoro regolari in altre zone. 
-  * Per abilitare la comunicazione sulla rete privata tra i nodi di lavoro che si trovano in zone diverse, devi abilitare lo [spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning). 
+  * Devi distribuire un programma di bilanciamento del carico in ciascuna zona e a ciascun programma di bilanciamento del carico viene assegnato un proprio indirizzo IP in tale zona. Per creare dei programmi di bilanciamento del carico pubblici, almeno una VLAN pubblica deve avere delle sottoreti portatili disponibili in ciascuna zona. Per aggiungere dei servizi di programma di bilanciamento del carico privati, almeno una VLAN privata deve avere delle sottoreti portatili disponibili in ciascuna zona. Per aggiungere sottoreti, vedi [Configurazione delle sottoreti per i cluster](cs_subnets.html).
+  * Se limiti il traffico di rete ai nodi di lavoro edge, assicurati che siano abilitati almeno 2 [nodi di lavoro edge](cs_edge.html#edge) in ciascuna zona. Se i nodi di lavoro edge sono abilitati in alcune zone ma non in altre, i programmi di bilanciamento del carico non verranno distribuiti uniformemente. I programmi di bilanciamento del carico verranno distribuiti sui nodi edge in alcune zone ma non sui nodi di lavoro regolari in altre zone.
+  * Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
 
 
 Per configurare un servizio LoadBalancer in un cluster multizona:
 1.  [Distribuisci la tua applicazione al cluster](cs_app.html#app_cli). Quando distribuisci la tua applicazione al cluster,
 vengono creati uno o più pod che eseguono la tua applicazione in un
 contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
-di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione in modo che possano essere inclusi nel bilanciamento del carico. 
+di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione in modo che possano essere inclusi nel bilanciamento del carico.
 
 2.  Crea un servizio del programma di bilanciamento del carico per l'applicazione che desideri esporre. Per rendere la tua applicazione disponibile
 pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per la tua applicazione. Configura il tuo servizio per includere tutti i pod che compongono la tua applicazione nel bilanciamento del carico.
   1. Crea uno file di configurazione del servizio denominato, ad esempio, `myloadbalancer.yaml`.
-  2. Definisci un servizio del programma di bilanciamento del carico per l'applicazione che vuoi esporre. Puoi specificare un indirizzo IP dalla tua sottorete portatile privata o pubblica e una zona. 
-      - Per scegliere sia una zona che un indirizzo IP, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona e il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato che si trova in tale zona. 
-      - Per scegliere solo un indirizzo IP, usa il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN dell'indirizzo IP. 
-      - Per scegliere solo una zona, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona. Viene usato un indirizzo IP portatile proveniente dalla zona specificata. 
-      - Se non specifichi un indirizzo IP o una zona, e il tuo cluster si trova in una VLAN pubblica, verrà usato un indirizzo IP pubblico portatile. Molti cluster sono su una VLAN pubblica. Se il tuo cluster è disponibile solo su una VLAN privata, viene quindi utilizzato un indirizzo IP privato portatile. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN. 
+  2. Definisci un servizio del programma di bilanciamento del carico per l'applicazione che vuoi esporre. Puoi specificare un indirizzo IP dalla tua sottorete portatile privata o pubblica e una zona.
+      - Per scegliere sia una zona che un indirizzo IP, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona e il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato che si trova in tale zona.
+      - Per scegliere solo un indirizzo IP, usa il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN dell'indirizzo IP.
+      - Per scegliere solo una zona, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona. Viene usato un indirizzo IP portatile proveniente dalla zona specificata.
+      - Se non specifichi un indirizzo IP o una zona, e il tuo cluster si trova in una VLAN pubblica, verrà usato un indirizzo IP pubblico portatile. Molti cluster sono su una VLAN pubblica. Se il tuo cluster è disponibile solo su una VLAN privata, viene quindi utilizzato un indirizzo IP privato portatile. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN.
 
       Il servizio LoadBalancer che usa le annotazioni per specificare un programma di bilanciamento pubblico o privato e una zona e la sezione `loadBalancerIP` per specificare un indirizzo IP:
 
@@ -197,7 +199,7 @@ pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per
 
 5. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](cs_loadbalancer.html#edge_nodes). I pod dell'applicazione devono essere pianificati nei nodi edge per ricevere le richieste in entrata.
 
-6. Per gestire le richieste in entrata alla tua applicazione dalle altre zone, ripeti i passi sopra riportati per aggiungere un programma di bilanciamento del carico in ciascuna zona. 
+6. Per gestire le richieste in entrata alla tua applicazione dalle altre zone, ripeti i passi sopra riportati per aggiungere un programma di bilanciamento del carico in ciascuna zona.
 
 7. Facoltativo: un servizio del programma di bilanciamento del carico rende anche disponibile la tua applicazione sulle NodePorts del servizio. Puoi accedere alle [NodePorts](cs_nodeport.html) da ogni indirizzo IP pubblico e privato per ogni nodo all'interno del cluster. Per bloccare il traffico alle NodePorts mentre stai usando un servizio del programma di bilanciamento del carico, vedi [Controllo del traffico in entrata nei servizi LoadBalancer o NodePort](cs_network_policy.html#block_ingress).
 
@@ -360,7 +362,7 @@ Una volta abilitato l'IP di origine, i pod del servizio di bilanciamento del car
 * Hai nodi edge corrotti in cui puoi distribuire solo i pod del servizio di bilanciamento del carico. I pod dell'applicazione non possono essere distribuiti in questi nodi.
 * Il tuo cluster è connesso a più VLAN pubbliche o private e i tuoi pod dell'applicazione possono essere distribuiti ai nodi di lavoro che sono connessi solo ad una VLAN. I pod del servizio di bilanciamento del carico non possono essere distribuiti in tali nodi di lavoro in quanto l'indirizzo IP del programma di bilanciamento è connesso ad una VLAN diversa da quella dei nodi di lavoro.
 
-Per forzare la tua applicazione alla distribuzione in specifici nodi di lavoro in cui possono essere distribuiti anche i pod del servizio di bilanciamento del carico, devi aggiungere le regole di affinità e le tolleranze alla tua distribuzione dell'applicazione. 
+Per forzare la tua applicazione alla distribuzione in specifici nodi di lavoro in cui possono essere distribuiti anche i pod del servizio di bilanciamento del carico, devi aggiungere le regole di affinità e le tolleranze alla tua distribuzione dell'applicazione.
 
 ### Aggiunta delle regole di affinità e delle tolleranze del nodo edge
 {: #edge_nodes}
@@ -515,3 +517,4 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
         {: screen}
 
     4. Nella sezione **Labels** dell'output, verifica che la VLAN pubblica o privata sia la VLAN che hai designato nei passi precedenti.
+

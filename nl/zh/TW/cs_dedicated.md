@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帳戶，則可以在專用雲端環境中部署 Kubernetes 叢集 (`https://<my-dedicated-cloud-instance>.bluemix.net`)，並與也在該處執行且預先選取的 {{site.data.keyword.Bluemix_notm}} 服務連接。
 {:shortdesc}
 
-如果您沒有 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，則可以在公用 {{site.data.keyword.Bluemix_notm}} 帳戶中[開始使用 {{site.data.keyword.containershort_notm}}](container_index.html)。
+如果您沒有 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，則可以在公用 {{site.data.keyword.Bluemix_notm}} 帳戶中[開始使用 {{site.data.keyword.containerlong_notm}}](container_index.html)。
 
 ## 關於專用雲端環境
 {: #dedicated_environment}
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶，可用的實體資源只供您的叢集專用，無法與其他 {{site.data.keyword.IBM_notm}} 客戶的叢集共用。當想要隔離您的叢集，而且需要隔離您所使用的其他 {{site.data.keyword.Bluemix_notm}} 服務時，您可以選擇設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境。如果您沒有「專用」帳戶，則可以[在 {{site.data.keyword.Bluemix_notm}} Public 建立具有專用硬體的叢集](cs_clusters.html#clusters_ui)。
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在「專用」主控台中從型錄建立叢集，或使用 {{site.data.keyword.containershort_notm}} CLI 來建立叢集。若要使用「專用」主控台，請同時使用 IBM ID 來登入「專用」及公用帳戶。您可以使用雙重登入，使用「專用」主控台來存取公用叢集。若要使用 CLI，請使用您的「專用」端點 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) 登入。然後，將目標設為與「專用」環境相關聯之公用地區的 {{site.data.keyword.containershort_notm}} API 端點。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在「專用」主控台中從型錄建立叢集，或使用 {{site.data.keyword.containerlong_notm}} CLI 來建立叢集。若要使用「專用」主控台，請同時使用 IBM ID 來登入「專用」及公用帳戶。您可以使用雙重登入，使用「專用」主控台來存取公用叢集。若要使用 CLI，請使用您的「專用」端點 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) 登入。然後，將目標設為與「專用」環境相關聯之公用地區的 {{site.data.keyword.containerlong_notm}} API 端點。
 
 {{site.data.keyword.Bluemix_notm}} Public 與 Dedicated 之間的最重要差異如下。
 
@@ -82,13 +82,13 @@ lastupdated: "2018-08-06"
  </tr>
  <tr>
  <td>存取登錄</td>
- <td>請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。</td>
- <td><ul><li>若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。</li><li>若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。</li></ul></td>
+ <td>請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的選項。</td>
+ <td><ul><li>若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的選項。</li><li>若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。</li></ul></td>
  </tr>
  <tr>
  <td>多區域叢集</td>
- <td>藉由將其他區域新增至工作者節點儲存區，來建立[多區域叢集](cs_clusters.html#multi_zone)。</td>
- <td>建立[單一區域叢集](cs_clusters.html#single_zone)。在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時，已預先定義可用區域。依預設，單一區域叢集已設定名為 `default` 的工作者節點儲存區。工作者節點儲存區會將具有您在建立叢集期間所定義之相同配置（例如機型）的工作者節點分組在一起。您可以藉由[調整現有工作者節點儲存區大小](cs_clusters.html#resize_pool)或[新增工作者節點儲存區](cs_clusters.html#add_pool)，來將更多工作者節點新增至叢集裡。當您新增工作者節點儲存區時，必須將可用區域新增至工作者節點儲存區，讓工作者節點可以部署至該區域。不過，您無法將其他區域新增至工作者節點儲存區。</td>
+ <td>藉由將其他區域新增至工作者節點儲存區，來建立[多區域叢集](cs_clusters_planning.html#multizone)。</td>
+ <td>建立[單一區域叢集](cs_clusters_planning.html#single_zone)。在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時，已預先定義可用區域。依預設，單一區域叢集已設定名為 `default` 的工作者節點儲存區。工作者節點儲存區會將具有您在建立叢集期間所定義之相同配置（例如機型）的工作者節點分組在一起。您可以藉由[調整現有工作者節點儲存區大小](cs_clusters.html#resize_pool)或[新增工作者節點儲存區](cs_clusters.html#add_pool)，來將更多工作者節點新增至叢集裡。當您新增工作者節點儲存區時，必須將可用區域新增至工作者節點儲存區，讓工作者節點可以部署至該區域。不過，您無法將其他區域新增至工作者節點儲存區。</td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} 公用與 {{site.data.keyword.Bluemix_dedicated_notm}} 的特性差異" caption-side="top"}
@@ -107,12 +107,12 @@ lastupdated: "2018-08-06"
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 架構及網路*
 
-![{{site.data.keyword.containershort_notm}} {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## 在專用上設定 {{site.data.keyword.containershort_notm}}
+## 在專用上設定 {{site.data.keyword.containerlong_notm}}
 {: #dedicated_setup}
 
 每一個 {{site.data.keyword.Bluemix_dedicated_notm}} 環境都具有 {{site.data.keyword.Bluemix_notm}} 中的公用、用戶端擁有的公司帳戶。為了讓「專用」環境中的使用者建立叢集，管理者必須將使用者新增至公用公司帳戶。
@@ -274,16 +274,16 @@ lastupdated: "2018-08-06"
 
     6. 選擇您需要的**工作者節點數目**。選取 `3`，確保叢集的高可用性。
 
-    7. 選取**公用 VLAN**（選用）和**專用 VLAN**（必要）。在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時，會預先定義可用的公用和專用 VLAN。兩個 VLAN 會在工作者節點之間進行通訊，但公用 VLAN 也與 IBM 管理的 Kubernetes 主節點通訊。您可以將相同的 VLAN 用於多個叢集。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。
+    7. 選取**公用 VLAN**（選用）和**專用 VLAN**（必要）。在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時，會預先定義可用的公用和專用 VLAN。兩個 VLAN 會在工作者節點之間進行通訊，但公用 VLAN 也與 IBM 管理的 Kubernetes 主節點通訊。您可以將相同的 VLAN 用於多個叢集。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。
 
-    8. 依預設，會選取**加密本端磁碟**。如果您選擇清除這個勾選框，則主機的 Docker 資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disk)。
+    8. 依預設，會選取**加密本端磁碟**。如果您選擇清除這個勾選框，則主機的容器運行環境資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disk)。
 
 6. 按一下**建立叢集**。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已備妥。**附註：**每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，在叢集建立之後即不得手動予以變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。
 
 ### 使用 CLI 建立叢集
 {: #dedicated_creating_cli}
 
-1.  安裝 {{site.data.keyword.Bluemix_notm}} CLI 及 [{{site.data.keyword.containershort_notm}} 外掛程式](cs_cli_install.html#cs_cli_install)。
+1.  安裝 {{site.data.keyword.Bluemix_notm}} CLI 及 [{{site.data.keyword.containerlong_notm}} 外掛程式](cs_cli_install.html#cs_cli_install)。
 2.  登入 {{site.data.keyword.Bluemix_dedicated_notm}} 實例的端點。當系統提示時，請輸入 {{site.data.keyword.Bluemix_notm}} 認證，然後選取帳戶。
 
     ```
@@ -324,7 +324,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>輸入您配置「專用」環境使用之公用 VLAN 的 ID。如果您只要將工作者節點連接至專用 VLAN，請不要指定此選項。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。</td>
+    <td>輸入您配置「專用」環境使用之公用 VLAN 的 ID。如果您只要將工作者節點連接至專用 VLAN，請不要指定此選項。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -371,7 +371,7 @@ lastupdated: "2018-08-06"
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -388,7 +388,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -411,7 +411,7 @@ lastupdated: "2018-08-06"
         {: screen}
 
     2.  複製並貼上輸出中的指令，以設定 `KUBECONFIG` 環境變數。
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
+    3.  驗證已適當地設定 `KUBECONFIG` 環境變數。
 
         OS X 的範例：
 
@@ -451,14 +451,14 @@ lastupdated: "2018-08-06"
 ### 新增工作者節點
 {: #add_workers}
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您只能建立[單一區域叢集](cs_clusters.html#single_zone)。依預設，單一區域叢集已設定名為 `default` 的工作者節點儲存區。工作者節點儲存區會將具有您在建立叢集期間所定義之相同配置（例如機型）的工作者節點分組在一起。您可以藉由[調整現有工作者節點儲存區大小](cs_clusters.html#resize_pool)或[新增工作者節點儲存區](cs_clusters.html#add_pool)，來將更多工作者節點新增至叢集裡。當您新增工作者節點儲存區時，必須將可用區域新增至工作者節點儲存區，讓工作者節點可以部署至該區域。不過，您無法將其他區域新增至工作者節點儲存區。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您只能建立[單一區域叢集](cs_clusters_planning.html#single_zone)。依預設，單一區域叢集已設定名為 `default` 的工作者節點儲存區。工作者節點儲存區會將具有您在建立叢集期間所定義之相同配置（例如機型）的工作者節點分組在一起。您可以藉由[調整現有工作者節點儲存區大小](cs_clusters.html#resize_pool)或[新增工作者節點儲存區](cs_clusters.html#add_pool)，來將更多工作者節點新增至叢集裡。當您新增工作者節點儲存區時，必須將可用區域新增至工作者節點儲存區，讓工作者節點可以部署至該區域。不過，您無法將其他區域新增至工作者節點儲存區。
 
 ### 使用專用及公用映像檔登錄
 {: #dedicated_images}
 
 進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。
 
-若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。
+若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的選項。若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。
 
 ### 將子網路新增至叢集
 {: #dedicated_cluster_subnet}
@@ -468,7 +468,7 @@ lastupdated: "2018-08-06"
 #### 將其他使用者管理的子網路及 IP 位址新增至 Kubernetes 叢集
 {: #dedicated_byoip_subnets}
 
-從您要用來存取 {{site.data.keyword.containershort_notm}} 的內部部署網路，提供更多自己的子網路。您可以將專用 IP 位址從這些子網路新增至 Kubernetes 叢集裡的 Ingress 及負載平衡器服務。根據您要使用的子網路格式，使用兩種方式中的其中一種來配置使用者管理的子網路。
+從您要用來存取 {{site.data.keyword.containerlong_notm}} 的內部部署網路，提供更多自己的子網路。您可以將專用 IP 位址從這些子網路新增至 Kubernetes 叢集裡的 Ingress 及負載平衡器服務。根據您要使用的子網路格式，使用兩種方式中的其中一種來配置使用者管理的子網路。
 
 需求：
 - 使用者管理的子網路只能新增至專用 VLAN。
@@ -504,7 +504,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. **重要事項**：若要為位於相同 VLAN 之不同子網路上的工作者節點，啟用它們之間的通訊，您必須[在相同 VLAN 的子網路之間啟用遞送](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+4. **重要事項**：如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
 
 5. 若要配置內部部署及內部帳戶連線功能，請從下列選項中進行選擇：
   - 如果您已使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署及內部帳戶連線功能。如需相關資訊，請參閱[規劃搭配 NodePort、LoadBalancer 或 Ingress 服務的網路](cs_network_planning.html#planning)。
@@ -555,4 +555,6 @@ lastupdated: "2018-08-06"
 ### 建立持續性儲存空間
 {: #dedicated_apps_volume_claim}
 
-若要檢閱用於建立持續性儲存空間的選項，請參閱[持續性資料儲存空間](cs_storage_planning.html#persistent)。若要要求備份磁區、從磁區還原，或刪除磁區，您必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+若要檢閱用於建立持續性儲存空間的選項，請參閱[高可用性的持續資料儲存空間選項](cs_storage_planning.html#persistent_storage_overview)。若要求備份磁區、從磁區還原、刪除磁區或產生檔案儲存空間的定期 Snapshot，您必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
+如果您選擇佈建[檔案儲存空間](cs_storage_file.html#predefined_storageclass)，請選擇不保留儲存類別。選擇不保留儲存類別有助於防止 IBM Cloud 基礎架構 (SoftLayer) 中產生孤立的持續性儲存空間實例，您只能透過開立支援問題單來移除它們。

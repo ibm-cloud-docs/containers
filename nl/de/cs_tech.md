@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,8 +25,7 @@ Weitere Informationen zur Technologie hinter {{site.data.keyword.containerlong}}
 ## Docker-Container
 {: #docker_containers}
 
-Das auf die Basis von vorhandener Linux-Containertechnologie (LXC) aufbauende Open Source-Projekt Docker definiert Vorlagen, mit denen Software als standardisierte Einheiten gepackt wird, die als 'Container' bezeichnet werden und die alle Elemente enthalten, die Apps für die Ausführung benötigen.
-{:shortdesc}
+Das auf die Basis von vorhandener Linux-Containertechnologie (LXC) aufbauende Open Source-Projekt Docker definiert Vorlagen, mit denen Software als standardisierte Einheiten gepackt wird, die als 'Container' bezeichnet werden und die alle Elemente enthalten, die Apps für die Ausführung benötigen. {{site.data.keyword.containerlong_notm}} verwendet `containerd` als Containerlaufzeit, um Container aus Docker-Container-Images in Ihrem Cluster bereitzustellen.{:shortdesc}
 
 Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 
@@ -34,7 +33,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 <dt>Image</dt>
 <dd>Die Basis jedes Containers, den Sie ausführen möchten, ist ein Containerimage. Container-Images werden auf der Grundlage einer Dockerfile erstellt, bei der es sich um eine Textdatei handelt, die definiert, wie das Image erstellt wird und welche Buildartefakte darin enthalten sein sollen, z. B. die App, die Konfiguration der App und ihre Abhängigkeiten. Images werden immer auf der Grundlage anderer Images erstellt, wodurch sie schneller konfiguriert werden können. So wird die Hauptarbeit für ein Image von jemand anderem ausgeführt und Sie müssen das Image nur noch für Ihre Nutzung optimieren.</dd>
 <dt>Registry</dt>
-<dd>In einer 'Image-Registry' werden Docker-Images gespeichert, abgerufen und gemeinsam genutzt. Die in einer Registry gespeicherten Images können öffentlich verfügbar sein (öffentliche Registry) oder aber für eine kleine Gruppe von Benutzern zugänglich sein (private Registry). {{site.data.keyword.containershort_notm}} bietet öffentliches Images, z. B. 'ibmliberty', mit denen Sie Ihre erste containerisierte App erstellen können. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.Bluemix_notm}} bereitgestellte Registry) verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet werden.
+<dd>In einer 'Image-Registry' werden Docker-Images gespeichert, abgerufen und gemeinsam genutzt. Die in einer Registry gespeicherten Images können öffentlich verfügbar sein (öffentliche Registry) oder aber für eine kleine Gruppe von Benutzern zugänglich sein (private Registry). {{site.data.keyword.containerlong_notm}} bietet öffentliches Images, z. B. 'ibmliberty', mit denen Sie Ihre erste containerisierte App erstellen können. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.Bluemix_notm}} bereitgestellte Registry) verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet werden.
 </dd>
 <dt>Container</dt>
 <dd>Jeder Container wird auf der Grundlage eines Images erstellt. Ein Container ist eine gepackte App mit den zugehörigen Abhängigkeiten, sodass die App in eine andere Umgebungen verlagert und dort ohne Änderungen ausgeführt werden kann. Im Unterschied zu virtuellen Maschinen virtualisieren Container keine Einheiten, die zugehörigen Betriebssysteme und die zugrunde liegende Hardware. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in dem Container gepackt. Container werden als isolierte Prozesse auf Ubuntu-Rechenhosts ausgeführt und nutzen dasselbe Hostbetriebssystem und dieselben Hardwareressourcen. Dadurch ist ein Container schlanker, leichter portierbar und effizienter als eine virtuelle Maschine.</dd>
@@ -61,7 +60,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 
 <p>Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.</p>
 
-<p>Sind Sie bereit, mehr über Docker zu erfahren? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Erfahren Sie, wie Docker und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></p>
+<p>Sind Sie bereit, mehr über Docker zu erfahren? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Erfahren Sie, wie Docker und {{site.data.keyword.containerlong_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></p>
 
 </dl>
 
@@ -104,7 +103,7 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 
 <p>Sind Sie bereit, mehr über Kubernetes zu erfahren?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Erweitern Sie Ihr terminologisches Wissen mithilfe des Lernprogramms "Cluster erstellen"</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Erfahren Sie, wie Kubernetes und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Erfahren Sie, wie Kubernetes und {{site.data.keyword.containerlong_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></li></ul>
 
 
 </dl>
@@ -115,14 +114,14 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 ## Servicearchitektur
 {: #architecture}
 
-In einem Kubernetes-Cluster, der auf {{site.data.keyword.containershort_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Ganz genau genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Der Kubernetes Master und die Arbeitsknoten kommunizieren über sichere TLS-Zertifikate und eine openVPN-Verbindung miteinander, um Ihre Clusterkonfigurationen zu koordinieren.
+In einem Kubernetes-Cluster, der auf {{site.data.keyword.containerlong_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Ganz genau genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Der Kubernetes Master und die Arbeitsknoten kommunizieren über sichere TLS-Zertifikate und eine openVPN-Verbindung miteinander, um Ihre Clusterkonfigurationen zu koordinieren.
 {: shortdesc}
 
 Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion.
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur">
- <figcaption>{{site.data.keyword.containershort_notm}}-Architektur</figcaption>
+ <figcaption>{{site.data.keyword.containerlong_notm}}-Architektur</figcaption>
 </figure>
 </p>
 
@@ -130,7 +129,8 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
 
 <dl>
   <dt>Kubernetes-Master</dt>
-    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen.</br></br>In der folgenden Tabelle werden die Komponenten des Kubernetes-Masters beschrieben.     <table>
+    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen.</br></br>In der folgenden Tabelle werden die Komponenten des Kubernetes-Masters beschrieben.
+    <table>
     <caption>Komponenten des Kubernetes-Masters</caption>
     <thead>
     <th>Masterkomponente</th>
@@ -180,14 +180,14 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <td>Der Richtliniencontroller von Calico überwacht den eingehenden und ausgehenden Netzverkehr auf Konformität mit festgelegten Netzrichtlinien. Wenn der Datenverkehr im Cluster nicht zulässig ist, wird der Zugriff auf den Cluster blockiert. Der Richtliniencontroller von Calico wird auch verwendet, um Netzrichtlinien für einen Cluster zu erstellen und festzulegen.</td>
     </tr>
     <tr>
-    <td>IBM Storage Provider</td>
+    <td>Storage Provider</td>
     <td>kube-system</td>
-    <td>Jeder Cluster ist mit einem Plug-in für die Bereitstellung von Dateispeicher konfiguriert. Sie können auswählen, weitere Add-ons zu installieren, wie z. B. Block Storage. </td>
+    <td>Jeder Cluster ist mit einem Plug-in für die Bereitstellung von Dateispeicher konfiguriert. Sie können auswählen, weitere Add-ons zu installieren, wie z. B. Block Storage.</td>
     </tr>
     <tr>
     <td>kube-proxy</td>
     <td>kube-system</td>
-    <td>Der Kubernetes-Netzproxy ist ein Dämonprozess, der auf allen Workerknoten ausgeführt wird und der TCP-und UDP-Netzverkehr für im Cluster ausgeführte Services weiterleitet oder deren Last verteilt.</td>
+    <td>Der Kubernetes-Netzproxy ist ein Dämonprozess, der auf allen Workerknoten ausgeführt wird und der TCP- und UDP-Netzverkehr für im Cluster ausgeführte Services weiterleitet oder deren Last verteilt.</td>
     </tr>
     <tr>
     <td>kube-dashboard</td>
@@ -215,7 +215,7 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <td>Sie können die integrierten Services {{site.data.keyword.loganalysislong_notm}} und {{site.data.keyword.monitoringlong_notm}} verwenden, um Ihre Erfassungs- und Aufbewahrungsmöglichkeiten bei der Arbeit mit Protokollen und Metriken zu erweitern.</td>
     </tr>
     <tr>
-    <td>Ingress-Lastausgleichsfunktion für Anwendungen (ALB)</td>
+    <td>Ingress-ALB</td>
     <td>ibm-system</td>
     <td>Ingress ist ein Kubernetes-Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
     </tr>
@@ -237,8 +237,7 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <tr>
     <td>calico-ipam</td>
     <td>Nicht zutreffend</td>
-    <td>Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern.
-</td>
+    <td>Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern.</td>
     </tr>
     <tr>
     <td>kubelet</td>

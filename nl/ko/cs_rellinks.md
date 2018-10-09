@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,12 +21,12 @@ lastupdated: "2018-08-06"
 # 관련 링크
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **일반사항**
 
-- [클러스터용 가격 책정 계산기![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [클러스터용 가격 계산기![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
@@ -44,8 +44,7 @@ lastupdated: "2018-08-06"
 **튜토리얼, 데모 및 코스**
 
 - [기존 Java 웹 앱 최신화 및 확장(JPetStore) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [developerWorks 컨테이너 구성 과정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [developerWorks 과정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [{{site.data.keyword.containerlong_notm}} 코그너티브 클래스 학습 경로 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [IKS에서 웹 앱 빌드 방법 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [CIS(Cloud Internet Service)에서 다중 지역 클러스터 보호 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [로그 분석 및 앱 상태 모니터 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

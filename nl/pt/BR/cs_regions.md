@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,19 +20,21 @@ lastupdated: "2018-08-06"
 Uma região é uma localização geográfica específica na qual é possível implementar apps, serviços e outros recursos do {{site.data.keyword.Bluemix}}. [ {{site.data.keyword.Bluemix_notm}}  regiões ](#bluemix_regions)  diferem de  [ {{site.data.keyword.containerlong}}  regiões ](#container_regions). As regiões consistem em uma ou mais zonas, que são data centers físicos que hospedam os recursos de cálculo, rede e armazenamento e o resfriamento e energia relacionados que hospedam serviços e aplicativos. As zonas são isoladas umas das outras, o que assegura nenhum ponto único de falha compartilhado.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} é hospedado no mundo todo. Os serviços no {{site.data.keyword.Bluemix_notm}} podem ficar disponíveis globalmente ou dentro de uma região específica. Ao criar um cluster do Kubernetes no {{site.data.keyword.containershort_notm}}, seus recursos permanecem na região na qual você implementa o cluster.
+{{site.data.keyword.Bluemix_notm}} é hospedado no mundo todo. Os serviços no {{site.data.keyword.Bluemix_notm}} podem ficar disponíveis globalmente ou dentro de uma região específica. Ao criar um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}, seus recursos permanecem na região na qual você implementa o cluster. 
+
+**Nota**: é possível criar clusters padrão em cada região suportada do {{site.data.keyword.containerlong_notm}}. Os clusters grátis estão disponíveis somente em regiões selecionadas.
 
 ![{} regions and zones](/images/regions-mz.png)
 
-_ {{site.data.keyword.containershort_notm}}  regiões e zonas _
+_Regiões e zonas do {{site.data.keyword.containerlong_notm}}_
 
-Suportado {{site.data.keyword.containershort_notm}} regiões são os seguintes:
-  * AP Norte
-  * AP Sul
-  * União Europeia Central
-  * Sul do Reino Unido
-  * Leste dos EUA
-  * SUL dos EUA
+Suportado {{site.data.keyword.containerlong_notm}} regiões são os seguintes:
+* AP Norte (somente clusters padrão)
+* AP Sul
+* União Europeia Central
+* Sul do Reino Unido
+* Leste dos EUA (somente clusters padrão)
+* SUL dos EUA
 
 <br />
 
@@ -82,22 +84,24 @@ Por exemplo, é possível usar os comandos a seguir para efetuar login nos termi
 <br />
 
 
-## Regiões no  {{site.data.keyword.containershort_notm}}
+## Regiões no  {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
-Usando regiões do {{site.data.keyword.containershort_notm}}, é possível criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você está com login efetuado. Os terminais de região do {{site.data.keyword.containershort_notm}} referem-se especificamente ao {{site.data.keyword.containershort_notm}}, não ao {{site.data.keyword.Bluemix_notm}} como um todo.
+Usando regiões do {{site.data.keyword.containerlong_notm}}, é possível criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você está com login efetuado. Os terminais de região do {{site.data.keyword.containerlong_notm}} referem-se especificamente ao {{site.data.keyword.containerlong_notm}}, não ao {{site.data.keyword.Bluemix_notm}} como um todo.
 {:shortdesc}
 
-Regiões do {{site.data.keyword.containershort_notm}} suportadas:
-  * AP Norte
+**Nota**: é possível criar clusters padrão em cada região suportada do {{site.data.keyword.containerlong_notm}}. Os clusters grátis estão disponíveis somente em regiões selecionadas.
+
+Regiões do {{site.data.keyword.containerlong_notm}} suportadas:
+  * AP Norte (somente clusters padrão)
   * AP Sul
   * União Europeia Central
   * Sul do Reino Unido
-  * Leste dos EUA
+  * Leste dos EUA (somente clusters padrão)
   * SUL dos EUA
 
-É possível acessar o {{site.data.keyword.containershort_notm}} por meio de um terminal global: ` https://containers.bluemix.net/v1`.
-* Para verificar em qual região do {{site.data.keyword.containershort_notm}} você está atualmente, execute `ibmcloud ks region`.
+É possível acessar o {{site.data.keyword.containerlong_notm}} por meio de um terminal global: ` https://containers.bluemix.net/v1`.
+* Para verificar em qual região do {{site.data.keyword.containerlong_notm}} você está atualmente, execute `ibmcloud ks region`.
 * Para recuperar uma lista de regiões disponíveis e os seus terminais, execute `ibmcloud ks regions`.
 
 Para usar a API com o terminal global em todas as suas solicitações, passe o nome da região no cabeçalho `X-Region`.
@@ -106,11 +110,11 @@ Para usar a API com o terminal global em todas as suas solicitações, passe o n
 ### Efetuando login em uma região  {{site.data.keyword.containerlong_notm}}  diferente
 {: #container_login_endpoints}
 
-É possível mudar regiões usando a CLI do {{site.data.keyword.containershort_notm}}.
+É possível mudar regiões usando a CLI do {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-Talvez queira efetuar login em outra região do {{site.data.keyword.containershort_notm}} pelas razões a seguir:
-  * Você criou serviços do {{site.data.keyword.Bluemix_notm}} ou imagens privadas do Docker em uma região e deseja utilizá-los com o {{site.data.keyword.containershort_notm}} em outra região.
+Talvez queira efetuar login em outra região do {{site.data.keyword.containerlong_notm}} pelas razões a seguir:
+  * Você criou serviços do {{site.data.keyword.Bluemix_notm}} ou imagens privadas do Docker em uma região e deseja utilizá-los com o {{site.data.keyword.containerlong_notm}} em outra região.
   * Você deseja acessar um cluster em uma região que é diferente da região padrão do {{site.data.keyword.Bluemix_notm}} à qual está conectado.
 
 Para alternar regiões rapidamente, execute `ibmcloud ks region-set`.
@@ -118,7 +122,7 @@ Para alternar regiões rapidamente, execute `ibmcloud ks region-set`.
 ### Usando comandos da API {{site.data.keyword.containerlong_notm}}
 {: #containers_api}
 
-Para interagir com a API do {{site.data.keyword.containershort_notm}}, insira o tipo de comando e anexe `/v1/command` no terminal global.
+Para interagir com a API do {{site.data.keyword.containerlong_notm}}, insira o tipo de comando e anexe `/v1/command` no terminal global.
 {:shortdesc}
 
 Exemplo da API `GET /clusters`:
@@ -134,7 +138,7 @@ Para usar a API com o terminal global em todas as suas solicitações, passe o n
 
 Para visualizar a documentação nos comandos da API, visualize [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
 
-## Zonas no  {{site.data.keyword.containershort_notm}}
+## Zonas no  {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 Zonas são data centers físicos que estão disponíveis em uma região do {{site.data.keyword.Bluemix_notm}}. Regiões são uma ferramenta conceitual para organizar zonas e podem incluir zonas (data centers) em diferentes países. A tabela a seguir exibe as zonas disponíveis por região.
@@ -169,6 +173,7 @@ Zonas são data centers físicos que estão disponíveis em uma região do {{sit
       <td>União Europeia Central</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdã: ams03</p>
+      <p>Oslo: osl01</p>
       <p>Paris: par01</p>
       </td>
     </tr>

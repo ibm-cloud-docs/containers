@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,20 +21,22 @@ lastupdated: "2018-08-06"
 {:shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
-在 {{site.data.keyword.containershort_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
+在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
+ 
 
+**注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
 
-![{{site.data.keyword.containershort_notm}} 区域和专区](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 区域和专区](/images/regions-mz.png)
 
-_{{site.data.keyword.containershort_notm}} 区域和专区_
+_{{site.data.keyword.containerlong_notm}} 区域和专区_
 
-支持的 {{site.data.keyword.containershort_notm}} 区域如下所示：
-  * 亚太地区北部
-  * 亚太地区南部
-  * 欧洲中部
-  * 英国南部
-  * 美国东部
-  * 美国南部
+支持的 {{site.data.keyword.containerlong_notm}} 区域如下所示：
+* 亚太地区北部（仅限标准集群）
+* 亚太地区南部
+* 欧洲中部
+* 英国南部
+* 美国东部（仅限标准集群）
+* 美国南部
 
 <br />
 
@@ -84,23 +86,25 @@ _{{site.data.keyword.containershort_notm}} 区域和专区_
 <br />
 
 
-## {{site.data.keyword.containershort_notm}} 中的区域
+## {{site.data.keyword.containerlong_notm}} 中的区域
 {: #container_regions}
 
-通过使用 {{site.data.keyword.containershort_notm}} 区域，您可以在除您登录的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kibernetes 集群。
-{{site.data.keyword.containershort_notm}} 区域端点具体参考 {{site.data.keyword.containershort_notm}}，而不是作为一个整体参考 {{site.data.keyword.Bluemix_notm}}。
+通过使用 {{site.data.keyword.containerlong_notm}} 区域，您可以在除您登录的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kibernetes 集群。
+{{site.data.keyword.containerlong_notm}} 区域端点具体参考 {{site.data.keyword.containerlong_notm}}，而不是作为一个整体参考 {{site.data.keyword.Bluemix_notm}}。
 {:shortdesc}
 
-支持的 {{site.data.keyword.containershort_notm}} 区域：
-  * 亚太地区北部
+**注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+
+支持的 {{site.data.keyword.containerlong_notm}} 区域：
+  * 亚太地区北部（仅限标准集群）
   * 亚太地区南部
   * 欧洲中部
   * 英国南部
-  * 美国东部
+  * 美国东部（仅限标准集群）
   * 美国南部
 
-您可以通过一个全局端点来访问 {{site.data.keyword.containershort_notm}}：`https://containers.bluemix.net/v1`。
-* 要检查您当前所在的 {{site.data.keyword.containershort_notm}} 区域，请运行 `ibmcloud ks region`。
+您可以通过一个全局端点来访问 {{site.data.keyword.containerlong_notm}}：`https://containers.bluemix.net/v1`。
+* 要检查您当前所在的 {{site.data.keyword.containerlong_notm}} 区域，请运行 `ibmcloud ks region`。
 * 要检索可用区域及其端点的列表，请运行 `ibmcloud ks regions`。
 
 要将 API 用于全球端点，请在所有请求的 `X-Region` 头中传递区域名称。
@@ -109,11 +113,11 @@ _{{site.data.keyword.containershort_notm}} 区域和专区_
 ### 登录到其他 {{site.data.keyword.containerlong_notm}} 区域
 {: #container_login_endpoints}
 
-可以使用 {{site.data.keyword.containershort_notm}} CLI 来更改区域。
+可以使用 {{site.data.keyword.containerlong_notm}} CLI 来更改区域。
 {:shortdesc}
 
-出于以下原因，您可能希望登录到其他 {{site.data.keyword.containershort_notm}} 区域：
-  * 您在一个区域中创建了 {{site.data.keyword.Bluemix_notm}} 服务或专用 Docker 映像，并希望将其用于另一个区域中的 {{site.data.keyword.containershort_notm}}。
+出于以下原因，您可能希望登录到其他 {{site.data.keyword.containerlong_notm}} 区域：
+  * 您在一个区域中创建了 {{site.data.keyword.Bluemix_notm}} 服务或专用 Docker 映像，并希望将其用于另一个区域中的 {{site.data.keyword.containerlong_notm}}。
   * 您希望访问与登录到的缺省 {{site.data.keyword.Bluemix_notm}} 区域不同的区域中的集群。
 
 要快速切换区域，请运行 `ibmcloud ks region-set`。
@@ -121,7 +125,7 @@ _{{site.data.keyword.containershort_notm}} 区域和专区_
 ### 使用 {{site.data.keyword.containerlong_notm}} API 命令
 {: #containers_api}
 
-要与 {{site.data.keyword.containershort_notm}} API 交互，请输入命令类型并将 `/v1/command` 附加到全局端点。
+要与 {{site.data.keyword.containerlong_notm}} API 交互，请输入命令类型并将 `/v1/command` 附加到全局端点。
 {:shortdesc}
 
 `GET /clusters` API 的示例：
@@ -137,7 +141,7 @@ _{{site.data.keyword.containershort_notm}} 区域和专区_
 
 要查看有关 API 命令的文档，请查看 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。
 
-## {{site.data.keyword.containershort_notm}} 中的专区
+## {{site.data.keyword.containerlong_notm}} 中的专区
 {: #zones}
 
 专区是 {{site.data.keyword.Bluemix_notm}} 区域内可用的物理数据中心。区域是用于组织专区的概念工具，可以包含不同国家或地区中的专区（数据中心）。下表按区域显示可用的专区。
@@ -172,6 +176,7 @@ _{{site.data.keyword.containershort_notm}} 区域和专区_
       <td>欧洲中部</td>
       <td>法兰克福：fra02、fra04、fra05</td>
       <td><p>阿姆斯特丹：ams03</p>
+      <p>奥斯陆：osl01</p>
       <p>巴黎：par01</p>
       </td>
     </tr>

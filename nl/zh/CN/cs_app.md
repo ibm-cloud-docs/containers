@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -54,7 +54,7 @@ lastupdated: "2018-08-06"
 2.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨单专区集群的多个节点分布（反亲缘关系）。
 3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并在多个专区中跨多专区集群的多个节点分布（反亲缘关系）。
 
-您还可以[使用全局负载均衡器连接不同区域中的多个集群](cs_clusters.html#multiple_clusters)，以提高高可用性。
+您还可以[使用全局负载均衡器连接不同区域中的多个集群](cs_clusters_planning.html#multiple_clusters)，以提高高可用性。
 
 ### 提高应用程序的可用性
 {: #increase_availability}
@@ -77,13 +77,13 @@ lastupdated: "2018-08-06"
     
     </dd>
 <dt>跨多个专区或区域分布 pod</dt>
-  <dd><p>要保护应用程序不受专区故障的影响，可以在不同专区中创建多个集群，或者向多专区集群的工作程序池添加专区。多专区集群仅在[特定大城市区域](cs_regions.html#zones)（例如，达拉斯）中可用。如果在不同专区中创建多个集群，那么必须[设置全局负载均衡器](cs_clusters.html#multiple_clusters)。</p>
-  <p>使用副本集并指定 pod 反亲缘关系时，Kubernetes 会跨节点分布应用程序 pod。如果节点位于多个专区中，那么 pod 会跨这些专区分布，从而提高应用程序的可用性。如果要限制应用程序仅在一个专区中运行，您可以配置 pod 亲缘关系，或者在一个专区中创建并标记工作程序池。有关更多信息，请参阅[多专区集群的高可用性](cs_clusters.html#ha_clusters)。</p>
+  <dd><p>要保护应用程序不受专区故障的影响，可以在不同专区中创建多个集群，或者向多专区集群的工作程序池添加专区。多专区集群仅在[特定大城市区域](cs_regions.html#zones)（例如，达拉斯）中可用。如果在不同专区中创建多个集群，那么必须[设置全局负载均衡器](cs_clusters_planning.html#multiple_clusters)。</p>
+  <p>使用副本集并指定 pod 反亲缘关系时，Kubernetes 会跨节点分布应用程序 pod。如果节点位于多个专区中，那么 pod 会跨这些专区分布，从而提高应用程序的可用性。如果要限制应用程序仅在一个专区中运行，您可以配置 pod 亲缘关系，或者在一个专区中创建并标记工作程序池。有关更多信息，请参阅[多专区集群的高可用性](cs_clusters_planning.html#ha_clusters)。</p>
   <p><strong>在多专区集群部署中，应用程序 pod 会跨节点均匀分布吗？</strong></p>
   <p>pod 会跨专区均匀分布，但不一定会跨节点均匀分布。例如，如果有一个集群在 3 个专区中分别有 1 个节点，并且部署了包含 6 个 pod 的副本集，那么每个节点会获得 2 个 pod。但是，如果集群在 3 个专区中分别有 2 个节点，并且部署了包含 6 个 pod 的副本集，那么每个专区会安排 2 个 pod，这 2 个 pod 可能会每个节点安排 1 个，也可能 2 个 pod 都安排在一个节点上。要对安排具有更多控制权，可以[设置 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
   <p><strong>如果某个专区发生故障，如何将 pod 重新安排到其他专区中的剩余节点上？</strong></br>这取决于您在部署中使用的安排策略。如果包含[特定于节点的 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，那么不会重新安排 pod。如果未包含此策略，那么会在其他专区中的可用工作程序节点上创建 pod，但可能不会对这些 pod 进行均衡。例如，2 个 pod 可能分布在 2 个可用节点上，也可能都安排到 1 个具有可用容量的节点上。与此类似，当不可用专区恢复时，不会自动删除 pod 并跨节点对这些 pod 进行重新均衡。如果要在该专区恢复后跨专区重新均衡 pod，请考虑使用 [Kubernetes Descheduler ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/descheduler)。</p>
   <p><strong>提示</strong>：在多专区集群中，请尽量使每个专区的工作程序节点容量保持在 50%，以便您有足够的容量来保护集群不受专区故障的影响。</p>
-  <p><strong>如果要跨区域分布应用程序该怎么做？</strong></br>要保护应用程序不受区域故障的影响，请在另一个区域中创建第二个集群，[设置全局负载均衡器](cs_clusters.html#multiple_clusters)以连接集群，并使用部署 YAML 为应用程序部署具有 [pod 反亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 的重复副本集。</p>
+  <p><strong>如果要跨区域分布应用程序该怎么做？</strong></br>要保护应用程序不受区域故障的影响，请在另一个区域中创建第二个集群，[设置全局负载均衡器](cs_clusters_planning.html#multiple_clusters)以连接集群，并使用部署 YAML 为应用程序部署具有 [pod 反亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 的重复副本集。</p>
   <p><strong>如果应用程序需要持久性存储器该怎么做？</strong></p>
   <p>使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。</p></dd>
 </dl>
@@ -151,7 +151,7 @@ spec:
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 
-可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
+您可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
 **通过 GUI 启动 Kubernetes 仪表板**
 {: #db_gui}
@@ -171,8 +171,8 @@ spec:
 1.  获取 Kubernetes 的凭证。
 
     ```
-    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-    ```
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+        ```
     {: pre}
 
 2.  复制输出中显示的 **id-token** 值。
@@ -180,15 +180,15 @@ spec:
 3.  使用缺省端口号设置代理。
 
     ```
-    kubectl proxy
-    ```
+        kubectl proxy
+        ```
     {: pre}
 
     输出示例：
 
     ```
-    Starting to serve on 127.0.0.1:8001
-    ```
+        Starting to serve on 127.0.0.1:8001
+        ```
     {: screen}
 
 4.  登录到仪表板。
@@ -235,7 +235,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ```
 {: pre}
 
-如果使用的是定制域，那么可以使用您自己的证书来管理 TLS 终止。要创建自己的 TLS 私钥，请执行以下操作：
+如果您使用的是定制域，那么可以使用自己的证书来管理 TLS 终止。要创建您自己的 TLS 私钥，请执行以下操作：
 1. 通过下列其中一种方式生成密钥和证书：
     * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。**重要信息**：请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
     * 出于测试目的，可以使用 OpenSSL 创建自签名证书。有关更多信息，请参阅此[自签名 SSL 证书教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.akadia.com/services/ssh_test_certificate.html)。
@@ -329,7 +329,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
        ca.crt: <ca_certificate>
      ```
      {: codeblock}
-4. fg将证书创建为 Kubernetes 私钥。
+4. 将证书创建为 Kubernetes 私钥。
      ```
      kubectl create -f ssl-my-test
      ```
@@ -416,7 +416,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
     ```
     {:pre}
 
-    这些步骤使用工作程序池名称作为示例。要根据其他因素将应用程序 pod 部署到特定工作程序节点，请改为获取该因素的值。例如，要仅将应用程序 pod 部署到特定 VLAN 上的工作程序节点，请通过运行 `ibmcloud ks vlans <zone>` 来获取 VLAN 标识。
+    这些步骤使用工作程序池名称作为示例。要根据其他因素将应用程序 pod 部署到特定工作程序节点，请改为获取该因素的值。例如，要仅将应用程序 pod 部署到特定 VLAN 上的工作程序节点，请通过运行 `ibmcloud ks vlans <zone>`.
     {: tip}
 
 2. 向应用程序部署[添加亲缘关系规则 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)（针对工作程序池名称）。
@@ -424,7 +424,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
     示例 YAML：
 
     ```
-    apiVersion: extensions/v1beta1
+apiVersion: extensions/v1beta1
     kind: Deployment
     metadata:
       name: with-node-affinity
@@ -488,7 +488,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
         ```
         {: screen}
 
-        如果基于其他因素创建了应用程序亲缘关系规则，请改为获取该因素的值。例如，要验证部署到特定 VLAN 上工作程序节点的应用程序 pod，请通过运行 `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` 查看工作程序节点所在的 VLAN。
+        如果基于其他因素创建了应用程序亲缘关系规则，请改为获取该因素的值。例如，要验证部署到特定 VLAN 上工作程序节点的应用程序 pod，请通过运行 `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
         {: tip}
 
     4. 在输出中，验证在先前步骤中识别的具有专用 IP 地址的工作程序节点是否部署在此工作程序池中。
@@ -499,7 +499,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ## 在 GPU 机器上部署应用程序
 {: #gpu_app}
 
-如果您有[裸机图形处理单元 (GPU) 机器类型](cs_clusters.html#shared_dedicated_node)，那么可以在工作程序节点上安排数学密集型工作负载。例如，您可以运行使用计算统一设备体系结构 (CUDA) 平台的 3D 应用程序，使处理负载在 GPU 和 CPU 上共享以提高性能。
+如果您有[裸机图形处理单元 (GPU) 机器类型](cs_clusters_planning.html#shared_dedicated_node)，那么可以在工作程序节点上安排数学密集型工作负载。例如，您可以运行使用计算统一设备体系结构 (CUDA) 平台的 3D 应用程序，使处理负载在 GPU 和 CPU 上共享以提高性能。
 {:shortdesc}
 
 在以下步骤中，您将了解如何部署需要 GPU 的工作负载。您还可以[部署应用程序](#app_ui)，这些应用程序无需处理 GPU 和 CPU 上的工作负载。之后，您可能会发现使用数学密集型工作负载（例如，[此 Kubernetes 演示 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) 中的 [TensorFlow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.tensorflow.org/) 机器学习框架）非常有用。
@@ -586,14 +586,14 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 2.  应用 YAML 文件。例如：
 
     ```
-    kubectl apply -f nvidia-smi.yaml
+kubectl apply -f nvidia-smi.yaml
     ```
     {: pre}
 
 3.  通过按 `nvipia-sim` 标签过滤 pod 来检查作业 pod。验证 **STATUS** 是否为 **Completed**。
 
     ```
-    kubectl get pod -a -l 'name in (nvidia-sim)'
+kubectl get pod -a -l 'name in (nvidia-sim)'
     ```
     {: pre}
 
@@ -609,7 +609,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
     * 在 Events 中，验证是否已将 pod 分配给 GPU 工作程序节点。
 
     ```
-    kubectl describe pod nvidia-smi-ppkd4
+kubectl describe pod nvidia-smi-ppkd4
     ```
     {: pre}
 
@@ -634,7 +634,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 5.  要验证作业是否使用了 GPU 来计算其工作负载，可以检查日志。从作业发出的 `[ "/usr/test/nvidia-smi" ]` 命令查询 GPU 工作程序节点上的 GPU 设备状态。
 
     ```
-    kubectl logs nvidia-sim-ppkd4
+kubectl logs nvidia-sim-ppkd4
     ```
     {: pre}
 
@@ -764,8 +764,8 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
     2.  获取 pod 名称。
 
         ```
-            kubectl get pods
-            ```
+kubectl get pods
+        ```
         {: pre}
 
     3.  获取在 pod 中运行的容器的名称。

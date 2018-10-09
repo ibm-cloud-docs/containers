@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -28,17 +28,18 @@ lastupdated: "2018-08-06"
 
 **Versioni Kubernetes supportate**:
 
-- Più recente: 1.10.5
-- Predefinita: 1.10.5
-- Altro: 1.9.9, 1.8.15
+- Più recente: 1.11.2
+- Predefinita: 1.10.7
+- Altro: 1.9.10
+- Obsoleta: 1.8.15, non supportata 22 settembre 2018
 
 </br>
 
 **Versioni obsolete**: quando i cluster sono in esecuzione su una versione Kubernetes obsoleta, hai 30 giorni per controllare ed effettuare l'aggiornamento a una versione di Kubernetes supportata prima che la versione non sia più supportata. Durante il periodo di obsolescenza, il tuo cluster continua a essere pienamente supportato. Tuttavia, non puoi creare nuovi cluster che utilizzano la versione obsoleta.
 
-**Versioni non supportate**: se esegui i cluster in una versione Kubernetes che non è supportata, [controlla i potenziali impatti](#version_types) per gli aggiornamenti e quindi [aggiorna il cluster](cs_cluster_update.html#update) immediatamente per continuare a ricevere il supporto e gli aggiornamenti di sicurezza importanti. 
-*  **Attenzione**: se attendi finché il tuo cluster è a tre o più versioni secondarie indietro rispetto a una versione supportata, devi forzare l'aggiornamento e questo potrebbe causare dei risultati non previsti o una condizione di errore. 
-*  I cluster non supportati non possono aggiungere o ricaricare i nodi di lavoro esistenti. 
+**Versioni non supportate**: se esegui i cluster in una versione Kubernetes che non è supportata, [controlla i potenziali impatti](#version_types) per gli aggiornamenti e quindi [aggiorna il cluster](cs_cluster_update.html#update) immediatamente per continuare a ricevere il supporto e gli aggiornamenti di sicurezza importanti.
+*  **Attenzione**: se attendi finché il tuo cluster è a tre o più versioni secondarie indietro rispetto a una versione supportata, devi forzare l'aggiornamento e questo potrebbe causare dei risultati non previsti o una condizione di errore.
+*  I cluster non supportati non possono aggiungere o ricaricare i nodi di lavoro esistenti.
 *  Dopo che lo hai aggiornato a una versione supportata, il tuo cluster può riprendere le normali operazioni e continuare a ricevere supporto.
 
 </br>
@@ -53,7 +54,7 @@ kubectl version  --short | grep -i server
 Output di esempio:
 
 ```
-Server Version: v1.10.5+IKS
+Server Version: v1.10.7+IKS
 ```
 {: screen}
 
@@ -80,9 +81,9 @@ Quando gli aggiornamenti diventano disponibili, ricevi una notifica quando visua
 <br/>
 
 Queste informazioni riassumono gli aggiornamenti che potrebbero avere un impatto sulle applicazioni distribuite quando aggiorni un cluster a una nuova versione dalla versione precedente.
+-  [Azioni di migrazione](#cs_v111) Versione 1.11.
 -  [Azioni di migrazione](#cs_v110) Versione 1.10.
 -  [Azioni di migrazione](#cs_v19) Versione 1.9.
--  [Azioni di migrazione](#cs_v18) Versione 1.8.
 -  [Archiviazione](#k8s_version_archive) di versioni obsolete o non supportate.
 
 <br/>
@@ -90,6 +91,115 @@ Queste informazioni riassumono gli aggiornamenti che potrebbero avere un impatto
 Per un elenco completo delle modifiche, esamina le seguenti informazioni:
 * [Changelog Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [Changelog versione IBM](cs_versions_changelog.html).
+
+</br>
+
+## Versione 1.11
+{: #cs_v111}
+
+<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="Questo badge indica che la certificazione Kubernetes versione 1.11 per IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} è un prodotto certificato Kubernetes per la versione 1.11 in base al programma CNCF Kubernetes Software Conformance Certification. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
+
+Riesamina le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.11.
+
+### Aggiorna prima il master
+{: #111_before}
+
+<table summary="Aggiornamenti Kubernetes per la versione 1.11">
+<caption>Modifiche da apportare prima di aggiornare il master a Kubernetes 1.11</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuovo runtime del contenitore Kubernetes `containerd`</td>
+<td><strong>Importante</strong>: `containerd` sostituisce Docker come nuovo runtime del contenitore per Kubernetes. Per le azioni che devi eseguire, vedi [Migrazione a `containerd` come runtime del contenitore](#containerd).</td>
+</tr>
+<tr>
+<td>Propagazione del montaggio del volume del contenitore Kubernetes</td>
+<td>Il valore predefinito per il campo [`mountPropagation` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) per un `VolumeMount` del contenitore è stato modificato da `HostToContainer` a `None`. Questa modifica ripristina la modalità di funzionamento che esisteva in Kubernetes versione 1.9 e precedente. Se le tue specifiche del pod si basano su `HostToContainer` come valore predefinito, eseguine l'aggiornamento.</td>
+</tr>
+<tr>
+<td>Deserializzatore JSON del server API Kubernetes</td>
+<td>Il deserializzatore JSON del server API Kubernetes è ora sensibile a maiuscole/minuscole. Questa modifica ripristina la modalità di funzionamento che esisteva in Kubernetes versione 1.7 e precedente. Se le tue definizioni di risorsa JSON utilizzano maiuscole/minuscole non corrette, procedi ad aggiornarle. <br><br>**Nota**: sono interessate solo le richieste server API Kubernetes dirette. La CLI `kubectl` ha continuato a implementare chiavi sensibile a maiuscole/minuscole in Kubernetes versione 1.7 e successive; quindi, se gestisci le tue risorse strettamente con `kubectl`, non sei interessato.</td>
+</tr>
+</tbody>
+</table>
+
+### Aggiorna dopo il master
+{: #111_after}
+
+<table summary="Aggiornamenti Kubernetes per la versione 1.11">
+<caption>Modifiche da apportare dopo aver aggiornato il master a Kubernetes 1.11</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurazione della registrazione cluster</td>
+<td>Il componente aggiuntivo del cluster `fluentd` viene aggiornato automaticamente con la versione 1.11, anche quando `logging-autoupdate` è disabilitata.<br><br>
+La directory del log del contenitore è stata modificata da `/var/lib/docker/` a `/var/log/pods/`. Se utilizzi una tua soluzione di registrazione che monitora la directory precedente, procedi a un aggiornamento in modo conforme.</td>
+</tr>
+<tr>
+<td>Aggiorna la configurazione di Kubernetes</td>
+<td>La configurazione OpenID Connect per il server API Kubernetes del cluster viene aggiornata per supportare i gruppi di accesso {{site.data.keyword.Bluemix_notm}} IAM (Identity Access and Management). Come risultato, devi aggiornare la configurazione Kubernetes del tuo cluster dopo l'aggiornamento del master Kubernetes v1.11 eseguendo `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. <br><br>Se non aggiorni la configurazione, le azioni del cluster non riescono con il seguente messaggio di errore: `You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>`kubectl` CLI</td>
+<td>La CLI `kubectl` per Kubernetes versione 1.11 richiede le API `apps/v1`. Come risultato, la CLI `kubectl` v1.11 non funziona per i cluster che eseguono Kubernetes versione 1.8 o precedenti. Utilizza la versione della CLI `kubectl` che corrisponde alla versione del server API Kubernetes del tuo cluster.</td>
+</tr>
+<tr>
+<td>`kubectl auth can-i`</td>
+<td>Ora, quando un utente non è autorizzato, il comando `kubectl auth can-i` non riesce con `exit code 1`. Se i tuoi script si basano sulla modalità di funzionamento precedente, aggiornali.</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>Ora, quando si eliminano risorse utilizzando criteri di selezione quali le etichette, il comando `kubectl delete` ignora gli errori `not found` per impostazione predefinita. Se i tuoi script si basano sul comportamento precedente, aggiornarli.</td>
+</tr>
+<tr>
+<td>Funzione `sysctls` di Kubernetes</td>
+<td>L'annotazione `security.alpha.kubernetes.io/sysctls` viene ora ignorata. Kubernetes ha invece aggiunto dei campi agli oggetti `PodSecurityPolicy` e `Pod` per specificare e controllare `sysctls`. Per ulteriori informazioni, vedi [Using sysctls in Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/). <br><br>Dopo che hai aggiornato i nodi di lavoro e il master del cluster, aggiorna i tuoi oggetti `PodSecurityPolicy` e `Pod` per utilizzare i nuovi campi `sysctls`.</td>
+</tr>
+</tbody>
+</table>
+
+### Migrazione a `containerd` come runtime del contenitore
+{: #containerd}
+
+Per i cluster che eseguono Kubernetes versione 1.11 o successive, `containerd` sostituisce Docker come nuovo runtime del contenitore per Kubernetes per migliorare le prestazioni. Se i tuoi pod si basano su Docker come runtime del contenitore Kubernetes, devi aggiornarli per gestire `containerd` come runtime del contenitore. Per ulteriori informazioni, vedi l'[annuncio relativo a containerd di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).
+{: shortdesc}
+
+**Come faccio a sapere se le mie applicazioni si basano su `docker` invece di `containerd`?**<br>
+Esempi di volte in cui ti potresti basare su Docker come runtime del contenitore:
+*  Se accedi all'API o al Docker Engine direttamente utilizzando contenitori privilegiati, aggiorna i tuoi pod per supportare `containerd` come runtime.
+*  Alcuni componenti aggiuntivi di terze parti, come gli strumenti di registrazione e monitoraggio, che installi nel tuo cluster potrebbero basarsi su Docker Engine. Controlla con il tuo provider per assicurarti che gli strumenti siano compatibili con `containerd`.
+
+<br>
+
+**Oltre a basarmi sul runtime, devo eseguire altre azioni di migrazione?**<br>
+
+**Strumento manifest**: se hai delle immagini multipiattaforma create con lo strumento sperimentale `docker manifest` [![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) prima di Docker versione 18.06, non puoi estrarre l'immagine da DockerHub utilizzando `containerd`.
+
+Quando controlli gli eventi pod, potresti vedere un errore simile al seguente:
+```
+failed size validation
+```
+{: screen}
+
+Per utilizzare un'immagine creata utilizzando lo strumento manifest con `containerd`, scegli dalle seguenti opzioni:
+
+*  Ricrea l'immagine con lo [strumento manifest ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/estesp/manifest-tool).
+*  Ricrea l'immagine con lo strumento `docker-manifest` dopo che hai eseguito l'aggiornamento a Docker versione 18.06 o successive.
+
+<br>
+
+**Cosa non è influenzato? Devo modificare il modo in cui distribuisco i miei contenitori?**<br>
+In generale, i tuoi processi di distribuzione dei contenitori non cambiano. Puoi continuare a utilizzare un Dockerfile per definire un'immagine Docker e creare un contenitore Docker per le tue applicazioni. Se utilizzi i comandi `docker` per creare immagini ed eseguirne il push a un registro, puoi continuare a usare invece i comandi `docker` o `ibmcloud cr`.
 
 ## Versione 1.10
 {: #cs_v110}
@@ -128,7 +238,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 </tr>
 <tr>
 <td>Suite di cifratura</td>
-<td>La suite di cifratura supportata dal <code>server API Kubernetes</code> e dall'API Kubelet è ora limitata a un sottoinsieme con codifica molto elevata (128 bit o più). Se hai risorse o un'automazione esistenti che utilizzano una cifratura meno sicura e che si basano sulla comunicazione con il <code>server API Kubernetes</code> o l'API Kubelet, abilita una cifratura più elevata prima di aggiornare il master.</td>
+<td>La suite di cifratura supportata dal <code>server API Kubernetes</code> e dall'API Kubelet è ora limitata a un sottoinsieme con codifica molto elevata (128 bit o più). Se hai risorse o un'automazione esistenti che utilizzano una cifratura meno sicura e che si basano sulle comunicazioni con il <code>server API Kubernetes</code> o l'API Kubelet, abilita una cifratura più elevata prima di aggiornare il master.</td>
 </tr>
 <tr>
 <td>VPN strongSwan</td>
@@ -179,7 +289,7 @@ Se le tue applicazioni si basano sul comportamento non sicuro precedente, modifi
 ### Preparazione dell'aggiornamento a Calico v3
 {: #110_calicov3}
 
-Prima di iniziare, il tuo master del cluster e tutti i nodi di lavoro devono essere in esecuzione alla versione Kubernetes 1.8 o successiva e devono avere almeno un nodo di lavoro.
+Prima di iniziare, il tuo master del cluster e tutti i nodi di lavoro devono essere in esecuzione alla versione Kubernetes 1.8 o successive e devono avere almeno un nodo di lavoro.
 
 **Importante**: prepara l'aggiornamento a Calico v3 prima di aggiornare il master. Durante l'upgrade del master a Kubernetes v1.10, non vengono pianificati nuovi pod o nuove politiche di rete Kubernetes o Calico. La quantità di tempo dell'aggiornamento impedisce nuove variazioni di pianificazione. I cluster piccoli possono impiegare pochi minuti, con pochi minuti extra per ogni 10 nodi. I pod e le politiche di rete esistenti continuano ad essere in esecuzione.
 
@@ -280,10 +390,13 @@ Se viene restituito `Action required`, modifica di conseguenza le tolleranze del
 
 
 
-## Versione 1.8
+## Archivio
+{: #k8s_version_archive}
+
+### Versione 1.8 (obsoleta, non supportata a partire dal 22 settembre 2018)
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.8 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.8 nel programma CNCF Kubernetes Software Conformance Certification. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.8 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.8 in base al programma CNCF Kubernetes Software Conformance Certification. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
 
 Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.8.
 
@@ -354,20 +467,16 @@ Se le tue applicazioni si basano sul comportamento non sicuro precedente, modifi
 <br />
 
 
-
-## Archivio
-{: #k8s_version_archive}
-
 ### Versione 1.7 (non supportata)
 {: #cs_v17}
 
-A partire dal 21 giugno 2018, i cluster {{site.data.keyword.containershort_notm}} che eseguono [Kubernetes versione 1.7](cs_versions_changelog.html#changelog_archive) non sono supportati. I cluster versione 1.7 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.8](#cs_v18)).
+A partire dal 21 giugno 2018, i cluster {{site.data.keyword.containerlong_notm}} che eseguono [Kubernetes versione 1.7](cs_versions_changelog.html#changelog_archive) non sono supportati. I cluster versione 1.7 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.8](#cs_v18)).
 
 [Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente almeno alla 1.8.
 
 ### Versione 1.5 (non supportata)
 {: #cs_v1-5}
 
-A partire dal 4 aprile 2018, i cluster {{site.data.keyword.containershort_notm}} che eseguono [Kubernetes versione 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) non sono supportati. I cluster versione 1.5 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.8](#cs_v18)).
+A partire dal 4 aprile 2018, i cluster {{site.data.keyword.containerlong_notm}} che eseguono [Kubernetes versione 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) non sono supportati. I cluster versione 1.5 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.8](#cs_v18)).
 
 [Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente almeno alla 1.8.

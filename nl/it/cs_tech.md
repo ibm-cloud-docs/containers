@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,7 +25,7 @@ Scopri di più sulla tecnologia che sta dietro {{site.data.keyword.containerlong
 ## Contenitori Docker
 {: #docker_containers}
 
-Sviluppato sulla tecnologia dei contenitori Linux (LXC) esistente, il progetto open source denominato Docker ha definito del template relativi a come assemblare software in unità standardizzate, denominate contenitori, che includono tutti gli elementi che occorrono a un'applicazione per l'esecuzione
+Sviluppato sulla tecnologia dei contenitori Linux (LXC) esistente, il progetto open source denominato Docker ha definito del template relativi a come assemblare software in unità standardizzate, denominate contenitori, che includono tutti gli elementi che occorrono a un'applicazione per l'esecuzione {{site.data.keyword.containerlong_notm}} utilizza `containerd` come il runtime del contenitore per distribuire i contenitori da immagini del contenitore Docker nel tuo cluster.
 {:shortdesc}
 
 Ulteriori informazioni sui concetti Docker di base:
@@ -35,7 +35,7 @@ Ulteriori informazioni sui concetti Docker di base:
 <dd>Un'immagine del contenitore è la base per ogni contenitore che vuoi eseguire. Le immagini contenitore vengono sviluppate da un Dockerfile, un file di testo che definisce come creare l'immagine e quali risorse di build includere in essa, come ad esempio l'applicazione, la configurazione dell'applicazione e le relative dipendenze. Le immagini vengono sempre create da altre immagini, rendendole veloci da configurare. Lascia che qualcun altro faccia il grosso del lavoro su un'immagine e perfezionala prima di utilizzarla.</dd>
 <dt>Registro</dt>
 <dd>Un registro delle immagini è un luogo dove si archiviano, richiamano e condividono immagini contenitore. Le immagini archiviate in un registro possono essere disponibili pubblicamente (registro pubblico)
-o essere accessibili da un piccolo gruppo di utenti (registro privato). {{site.data.keyword.containershort_notm}} offre immagini pubbliche, come ibmliberty, che puoi utilizzare per creare la tua prima applicazione caricata in un contenitore. Quando si tratta di applicazioni aziendali, utilizza un registro privato come quello fornito in {{site.data.keyword.Bluemix_notm}} per proteggere le tue immagini da utilizzi da parte di utenti non autorizzati.
+o essere accessibili da un piccolo gruppo di utenti (registro privato). {{site.data.keyword.containerlong_notm}} offre immagini pubbliche, come ibmliberty, che puoi utilizzare per creare la tua prima applicazione caricata in un contenitore. Quando si tratta di applicazioni aziendali, utilizza un registro privato come quello fornito in {{site.data.keyword.Bluemix_notm}} per proteggere le tue immagini da utilizzi da parte di utenti non autorizzati.
 </dd>
 <dt>Contenitore</dt>
 <dd>Ogni contenitore viene creato da un'immagine. Un contenitore è un'applicazione in pacchetto con tutte le sue dipendenze in modo che l'applicazione possa essere spostata tra gli ambienti ed eseguita senza modifiche. A differenza delle macchine virtuali, i contenitori non virtualizzano un dispositivo, il suo sistema operativo e l'hardware sottostante. Nel contenitore sono impacchettati solo il codice dell'applicazione, il runtime, gli strumenti di sistema, le librerie e le impostazioni. I contenitori sono eseguiti come processi isolati su host di calcolo Ubuntu e condividono il sistema operativo host e le sue risorse hardware. Questo approccio rende un contenitore più leggero, portatile ed efficiente di una macchina virtuale.</dd>
@@ -63,7 +63,7 @@ ambienti standardizzati alle distribuzioni di sviluppo e produzione. Il runtime 
 
 <p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.</p>
 
-<p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Impara come Docker e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></p>
+<p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Impara come Docker e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></p>
 
 </dl>
 
@@ -111,7 +111,7 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 
 <p>Pronto per approfondire le informazioni su Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplia la tua conoscenza della terminologia con l'esercitazione Creazione dei cluster</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containerlong_notm}} funzionano insieme completando questo corso.</a></li></ul>
 
 
 </dl>
@@ -122,14 +122,14 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 ## Architettura del servizio
 {: #architecture}
 
-In un cluster Kubernetes eseguito su {{site.data.keyword.containershort_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. Il master Kubernetes e i nodi di lavoro comunicano tra loro tramite certificati TLS protetti e una connessione openVPN per orchestrare le configurazioni del tuo cluster.
+In un cluster Kubernetes eseguito su {{site.data.keyword.containerlong_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. Il master Kubernetes e i nodi di lavoro comunicano tra loro tramite certificati TLS protetti e una connessione openVPN per orchestrare le configurazioni del tuo cluster.
 {: shortdesc}
 
 La seguente immagine mostra i componenti del tuo cluster e il modo in cui interagiscono.
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containershort_notm}} architecture</figcaption>
+ <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
 </figure>
 </p>
 
@@ -188,7 +188,7 @@ non viene distribuito nel cluster.</td>
     <td>Il controller politiche Calico controlla il traffico di rete in entrata e in uscita per la conformità alle politiche di rete impostate. Se il traffico non è consentito nel cluster, l'accesso al cluster viene bloccato. Il controller politiche Calico viene inoltre utilizzato per creare e impostare le politiche di rete per un cluster.</td>
     </tr>
     <tr>
-    <td>IBM Storage Provider</td>
+    <td>Provider di archiviazione</td>
     <td>kube-system</td>
     <td>Ogni cluster è configurato con un plug-in per eseguire il provisioning dell'archiviazione file. Puoi scegliere di installare altri componenti aggiuntivi, come ad esempio l'archiviazione blocchi.</td>
     </tr>
@@ -218,17 +218,17 @@ non viene distribuito nel cluster.</td>
     <td>Il nodo Calico è un contenitore che raccoglie insieme i vari componenti richiesti per i contenitori di rete con Calico.</td>
     </tr>
     <tr>
-    <td>IBM Logging and Metrics</td>
+    <td>Registrazione e metriche</td>
     <td>ibm-system</td>
     <td>Puoi utilizzare i servizi {{site.data.keyword.loganalysislong_notm}} e {{site.data.keyword.monitoringlong_notm}} integrati per espandere le tue funzionalità di raccolta e conservazione quando lavori con log e metriche.</td>
     </tr>
     <tr>
-    <td>IBM Ingress ALB</td>
+    <td>ALB Ingress</td>
     <td>ibm-system</td>
     <td>Ingress è un servizio Kubernetes che puoi utilizzare per bilanciare i carichi di lavoro del traffico di rete nel tuo cluster inoltrando le richieste pubbliche o private a più applicazioni nel tuo cluster. Per esporre le tue applicazioni sulla rete pubblica o privata, devi creare una risorsa Ingress per registrare le tue applicazioni con il programma di bilanciamento del carico (ALB - application load balancer) Ingress. È quindi possibile accedere a più applicazioni utilizzando un singolo URL o indirizzo IP.</td>
     </tr>
     <tr>
-    <td>IBM Load Balancer</td>
+    <td>Programma di bilanciamento del carico</td>
     <td>ibm-system</td>
     <td>Un programma di bilanciamento del carico è un servizio Kubernetes che può essere utilizzato per bilanciare i carichi di lavoro del traffico di rete nel tuo cluster inoltrando richieste pubbliche o private a un'applicazione.</td>
     </tr>

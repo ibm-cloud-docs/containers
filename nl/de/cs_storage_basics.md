@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-08-06"
 ## Persistente Datenträger und Anforderungen nach persistenten Datenträgern (Persistent Volume Claim)
 {: #pvc_pv}
 
-Vor der Bereitstellung von Speicher ist es wichtig, die Kubernetes-Konzepte 'Persistent Volume (PV)' (persistenter Datenträger) und 'Persistent Volume Claim (PVC)' (Anforderung nach persistentem Datenträger) sowie deren Zusammenwirken in einem Cluster zu verstehen.
+Vor der Bereitstellung von Speicher ist es wichtig, die Kubernetes-Konzepte 'Persistent Volume (PV)' (persistenter Datenträger) und 'Persistent Volume Claim (PVC)' (Anforderung nach persistentem Datenträger) sowie deren Zusammenwirken in einem Cluster zu verstehen. 
 {: shortdesc}
 
 Die folgende Abbildung zeigt die Speicherkomponenten in einem Kubernetes-Cluster. 
@@ -42,7 +42,7 @@ Weitere Informationen zur Vorgehensweise beim Erstellen und Verwenden von PVCs, 
 ## Dynamische Bereitstellung
 {: #dynamic_provisioning}
 
-Verwenden Sie die dynamische Bereitstellung, wenn Sie Entwicklern die Entscheidung überlassen wollen, wann Speicher bereitgestellt werden soll.
+Verwenden Sie die dynamische Bereitstellung, wenn Sie Entwicklern die Entscheidung überlassen wollen, wann Speicher bereitgestellt werden soll. 
 {: shortdesc}
 
 **Wie funktioniert das?**</br>
@@ -60,7 +60,7 @@ Die folgende Abbildung zeigt, wie Dateispeicher in einem Cluster dynamisch berei
 1. Der Benutzer erstellt einen Persistent Volume Claim (PVC), der den Speichertyp, die Speicherklasse, die Größe in Gigabyte, die Anzahl der E/A-Operationen pro Sekunde und den Abrechnungstyp angibt. Die Speicherklasse bestimmt den Typ des bereitgestellten Speichers und die zulässigen Bereiche für Größe und E/A-Operationen pro Sekunde. Wenn Sie einen PVC in einem Cluster erstellen, wird das Speicher-Plug-in für den angeforderten Typ von Speicher automatisch ausgelöst, um Speicher mit der angegebenen Spezifikation bereitzustellen. 
 2. Die Speichereinheit wird automatisch bestellt und in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Der Abrechnungszyklus für Ihre Speichereinheit wird gestartet. 
 3. Das Speicher-Plug-in erstellt automatisch einen persistenten Datenträger (PV) im Cluster, eine virtuelle Speichereinheit, die auf die tatsächliche Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) verweist. 
-4. Der Persistent Volume Claim und der persistente Datenträger werden automatisch miteinander verbunden. Der Status des PVC und des persistenten Datenträgers ändert sich in `Bound`. Sie können den PVC jetzt verwenden, um persistenten Speicher an Ihre App anzuhängen. Wenn Sie den PVC löschen, wird der persistente Datenträger und die zugehörige Speicherinstanz auch gelöscht.</br>
+4. Der Persistent Volume Claim und der persistente Datenträger werden automatisch miteinander verbunden. Der Status des PVC und des persistenten Datenträgers ändert sich in `Bound`. Sie können den PVC jetzt verwenden, um persistenten Speicher an Ihre App anzuhängen. Wenn Sie den PVC löschen, wird der persistente Datenträger und die zugehörige Speicherinstanz auch gelöscht. </br>
 
 **In welchen Fällen verwende ich die dynamische Bereitstellung?**</br>
 
@@ -76,7 +76,7 @@ Weitere Informationen zur Vorgehensweise beim dynamischen Bereitstellen von pers
 ## Statische Bereitstellung
 {: #static_provisioning}
 
-Wenn Sie über eine vorhandene persistente Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) verfügen, können Sie die Speicherinstanz mithilfe der statischen Bereitstellung für Ihren Cluster verfügbar machen.
+Wenn Sie über eine vorhandene persistente Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) verfügen, können Sie die Speicherinstanz mithilfe der statischen Bereitstellung für Ihren Cluster verfügbar machen. 
 {: shortdesc}
 
 **Wie funktioniert das?**</br>
@@ -94,7 +94,7 @@ Die folgende Abbildung zeigt, wie Dateispeicher in einem Cluster statisch bereit
 1. Der Clusteradministrator erfasst alle Details zur vorhandenen Speichereinheit und erstellt einen persistenten Datenträger (PV) im Cluster. 
 2. Auf der Basis der Speicherdetails im persistenten Datenträger verbindet das Speicher-Plug-in den persistenten Datenträger mit der in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) vorhandenen Speichereinheit. 
 3. Der Clusteradministrator oder ein Entwickler erstellt einen PVC. Da der persistente Datenträger und die Speichereinheit bereits vorhanden sind, wird im PVC keine Speicherklasse angegeben. 
-4. Nachdem der PVC erstellt wurde, versucht das Speicher-Plug-in, einen vorhandenen persistenten Datenträger zu finden, der mit dem PVC übereinstimmt. Der PVC und der persistente Datenträger stimmen überein, wenn im PVC und dem persistenten Datenträger dieselben Werte für Größe, E/A-Operationen pro Sekunde und Zugriffsmodus verwendet werden. Wenn PVC und persistenter Datenträger übereinstimmen, ändert sich der Status des PVC und des persistenten Datenträgers in `Bound`. Sie können den PVC jetzt verwenden, um persistenten Speicher an Ihre App anzuhängen. Wenn Sie den PVC löschen, werden der persistente Datenträger und die physische Speicherinstanz nicht entfernt. Sie müssen den PVC, den persistenten Datenträger und die physische Speicherinstanz separat voneinander entfernen.</br>
+4. Nachdem der PVC erstellt wurde, versucht das Speicher-Plug-in, einen vorhandenen persistenten Datenträger zu finden, der mit dem PVC übereinstimmt. Der PVC und der persistente Datenträger stimmen überein, wenn im PVC und dem persistenten Datenträger dieselben Werte für Größe, E/A-Operationen pro Sekunde und Zugriffsmodus verwendet werden. Wenn PVC und persistenter Datenträger übereinstimmen, ändert sich der Status des PVC und des persistenten Datenträgers in `Bound`. Sie können den PVC jetzt verwenden, um persistenten Speicher an Ihre App anzuhängen. Wenn Sie den PVC löschen, werden der persistente Datenträger und die physische Speicherinstanz nicht entfernt. Sie müssen den PVC, den persistenten Datenträger und die physische Speicherinstanz separat voneinander entfernen.  </br>
 
 **In welchen Fällen verwende ich die statische Bereitstellung?**</br>
 
@@ -111,10 +111,10 @@ Weitere Informationen zur Vorgehensweise beim statischen Bereitstellen von Speic
 ## Speicherklassen
 {: #storageclasses}
 
-Um persistenten Speicher dynamisch bereitzustellen, müssen Sie den Typ und die Konfiguration des gewünschten Speichers definieren.
+Um persistenten Speicher dynamisch bereitzustellen, müssen Sie den Typ und die Konfiguration des gewünschten Speichers definieren. 
 {: shortdesc}
 
-Eine Kubernetes-Speicherklasse wird verwendet, um die in {{site.data.keyword.Bluemix_notm}} unterstützte, zugrundeliegende Speicherplattform zusammenzufassen, damit Sie nicht sämtliche Details zu unterstützten Größen, E/A-Operationen pro Sekunde oder Aufbewahrungsrichtlinien kennen müssen, um erfolgreich persistenten Speicher in einem Cluster bereitzustellen. {{site.data.keyword.containershort_notm}} stellt für jeden unterstützten Speichertyp vordefinierte Speicherklassen bereit. Jede Speicherklasse ist so konzipiert, dass das unterstützte Speichertier zusammengefasst wird, während Sie die Möglichkeit haben, nach Ihren Wünschen Größe, E/A-Operationen pro Sekunde und die Aufbewahrungsrichtlinie festzulegen. 
+Eine Kubernetes-Speicherklasse wird verwendet, um die in {{site.data.keyword.Bluemix_notm}} unterstützte, zugrundeliegende Speicherplattform zusammenzufassen, damit Sie nicht sämtliche Details zu unterstützten Größen, E/A-Operationen pro Sekunde oder Aufbewahrungsrichtlinien kennen müssen, um erfolgreich persistenten Speicher in einem Cluster bereitzustellen. {{site.data.keyword.containerlong_notm}} stellt für jeden unterstützten Speichertyp vordefinierte Speicherklassen bereit. Jede Speicherklasse ist so konzipiert, dass das unterstützte Speichertier zusammengefasst wird, während Sie die Möglichkeit haben, nach Ihren Wünschen Größe, E/A-Operationen pro Sekunde und die Aufbewahrungsrichtlinie festzulegen. 
 
 Informationen zu den vordefinierten Spezifikationen für Speicherklassen finden Sie im Folgenden: 
 - [File Storage](cs_storage_file.html#storageclass_reference)
@@ -126,7 +126,7 @@ Sie finden nicht das, wonach Sie suchen? Sie können auch eine eigene angepasste
 ### Speicherklasse anpassen
 {: #customized_storageclass}
 
-Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können Sie Ihre eigene angepasste Speicherklasse erstellen.
+Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können Sie Ihre eigene angepasste Speicherklasse erstellen. 
 {: shortdesc}
 
 1. Erstellen Sie eine angepasste Speicherklasse. Sie können beginnen, indem Sie eine der vordefinierten Speicherklassen verwenden oder unter den Beispielen für angepasste Speicherklassen wählen. 
@@ -144,7 +144,7 @@ Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können S
    {: pre}
 
 3.  Überprüfen Sie, ob die angepasste Speicherklasse erstellt wurde.
-```
+    ```
     kubectl get storageclasses                                                        
     ```
     {: pre}
@@ -153,7 +153,7 @@ Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können S
    - [File Storage](cs_storage_file.html#add_file)
    - [Block Storage](cs_storage_block.html#add_block)
    
-5. Überprüfen Sie, ob Ihr PVC erstellt und an einen persistenten Datenträger gebunden wurde. Dieser Prozess kann einige Minuten dauern.  
+5. Überprüfen Sie, ob Ihr PVC erstellt und an einen persistenten Datenträger gebunden wurde. Dieser Prozess kann einige Minuten dauern. 
    ```
    kubectl get pvc
    ```
@@ -179,27 +179,27 @@ Wenn Sie die Größe, die E/A-Operationen pro Sekunde, den Typ oder die Aufbewah
    - [Block Storage](cs_storage_block.html#backup_restore)
    
 4. Aktualisieren Sie Ihre App-Bereitstellung, um auf die neue Speichereinheit zu verweisen. 
-   1. Rufen Sie den Namen des von Ihnen zuvor erstellten Persistent Volume Claims (PVC) ab.
-```
+   1. Rufen Sie den Namen des von Ihnen zuvor erstellten Persistent Volume Claims (PVC) ab. 
+      ```
       kubectl get pvc
       ```
       {: pre}
       
-   2. Listen Sie die in Ihrem Cluster vorhandenen Bereitstellungen auf.
-```
+   2. Listen Sie die in Ihrem Cluster vorhandenen Bereitstellungen auf. 
+      ```
       kubectl get deployments
       ```
       {: pre}
       
-   3. Rufen Sie die YAML-Bereitstellungsdatei für die Bereitstellung ab, die die alte persistente Speichereinheit verwendet.
-```
+   3. Rufen Sie die YAML-Bereitstellungsdatei für die Bereitstellung ab, die die alte persistente Speichereinheit verwendet. 
+      ```
       kubectl get deployment <bereitstellungsname> -o yaml
       ```
       {: pre}
       
    4. Ändern Sie den Namen des PVC im Abschnitt `spec.volumes` Ihrer Implementierung.
-   5. Wenden Sie die Änderungen auf Ihre Bereitstellung an. Wenn Sie Änderungen anwenden, wird ein neuer Pod erstellt und der PVC, der den persistenten Datenträger bindet, wird an Ihren Pod angehängt. Der Pod, der die alte persistente Speicherinstanz angehängt hat, wird entfernt.
-```
+   5. Wenden Sie die Änderungen auf Ihre Bereitstellung an. Wenn Sie Änderungen anwenden, wird ein neuer Pod erstellt und der PVC, der den persistenten Datenträger bindet, wird an Ihren Pod angehängt. Der Pod, der die alte persistente Speicherinstanz angehängt hat, wird entfernt. 
+      ```
       kubectl apply -f deployment.yaml
       ```
       {: pre}
@@ -217,11 +217,11 @@ Verwenden Sie ein Script, um alle persistenten Datenträger in Ihrem Cluster zu 
 
 Vorbemerkungen:
 - [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
-- Aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto der IBM Cloud-Infrastruktur (SoftLayer), damit Ihre Workerknoten im privaten Netz miteinander kommunizieren können. Zum Ausführen dieser Aktion benötigen Sie die **Netz > VLAN-Spanning für das Netz verwalten** [Infrastrukturberechtigung](cs_users.html#infra_access) oder Sie können die Aktivierung der Berechtigung beim Kontoeigner anfordern. Als Alternative zum VLAN-Spanning können Sie eine Virtual Router Function (VRF, virtuelle Routerfunktion) verwenden, falls diese in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) aktiviert ist.
+- Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 
 Gehen Sie wie folgt vor, um vorhandene persistente Datenträger zu aktualisieren:
 
-1.  Wenden Sie die Mehrzonenbezeichnungen auf Ihre persistenten Datenträger an, indem Sie das Script ausführen. Ersetzen Sie <mycluster> durch den Namen Ihres Clusters. Bestätigen Sie die Aktualisierung Ihrer persistenten Datenträger, wenn Sie dazu aufgefordert werden.
+1.  Wenden Sie die Mehrzonenbezeichnungen auf Ihre persistenten Datenträger an, indem Sie das Script ausführen.  Ersetzen Sie <mycluster> durch den Namen Ihres Clusters. Bestätigen Sie die Aktualisierung Ihrer persistenten Datenträger, wenn Sie dazu aufgefordert werden.
 
     ```
     bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -149,8 +149,7 @@ lastupdated: "2018-08-06"
   <tr>
   <td><a href="#custom-port">定制 HTTP 和 HTTPS 端口</a></td>
   <td><code>custom-port</code></td>
-  <td>更改 HTTP（端口 80）和 HTTPS（端口 443）网络流量的缺省端口。
-</td>
+  <td>更改 HTTP（端口 80）和 HTTPS（端口 443）网络流量的缺省端口。</td>
   </tr>
   <tr>
   <td><a href="#redirect-to-https">HTTP 重定向到 HTTPS</a></td>
@@ -309,7 +308,8 @@ lastupdated: "2018-08-06"
 
 <dl>
 <dt>描述</dt>
-<dd>添加外部服务的路径定义。仅当应用程序在外部服务（而不是后端服务）上运行时，才可使用此注释。使用此注释来创建外部服务路径时，仅支持 `client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout` 和 `proxy-buffering` 注释一起使用。不支持其他任何注释与 `proxy-external-service` 一起使用。<br><br><strong>注</strong>：不能为单个服务和路径指定多个主机。
+<dd>添加外部服务的路径定义。仅当应用程序在外部服务（而不是后端服务）上运行时，才可使用此注释。使用此注释来创建外部服务路径时，仅支持 `client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout` 和 `proxy-buffering` 注释一起使用。不支持其他任何注释与 `proxy-external-service` 一起使用。
+<br><br><strong>注</strong>：不能为单个服务和路径指定多个主机。
 </dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -320,10 +320,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: cafe-ingress
-  annotations:
+annotations:
     ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -412,11 +412,11 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -468,7 +468,7 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/location-snippets: |
     serviceName=&lt;myservice&gt;
@@ -476,16 +476,16 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
   - mydomain
-  secretName: mytlssecret
-rules:
+    secretName: mytlssecret
+  rules:
 - host: mydomain
   http:
-    paths:
+paths:
     - path: /
       backend:
         serviceName: &lt;myservice&gt;
@@ -531,18 +531,18 @@ rules:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
     ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
 spec:
 tls:
 - hosts:
   - mydomain
-  secretName: mytlssecret
-rules:
+    secretName: mytlssecret
+  rules:
 - host: mydomain
   http:
-    paths:
+paths:
     - path: /
         backend:
           serviceName: myservice
@@ -556,7 +556,8 @@ rules:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>专用 ALB 的标识。要查找专用 ALB 标识，请运行 <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>。<p>
+<td>专用 ALB 的标识。要查找专用 ALB 标识，请运行 <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>。
+<p>
 如果您的多专区集群启用了多个专用 ALB，那么可以提供使用 <code>;</code> 分隔的 ALB 标识的列表。例如：<code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
@@ -583,10 +584,10 @@ rules:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -638,7 +639,7 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/server-snippets: |
     location = /health {
@@ -649,11 +650,11 @@ spec:
 tls:
 - hosts:
   - mydomain
-  secretName: mytlssecret
-rules:
+    secretName: mytlssecret
+  rules:
 - host: mydomain
   http:
-    paths:
+paths:
     - path: /
       backend:
         serviceName: &lt;myservice&gt;
@@ -689,7 +690,7 @@ rules:
 
 
 
-<p>**注**：ALB 以通过方式运行，并将流量转发到后端应用程序。在此情况下，不支持 SSL 终止。</p>
+<p>**注**：ALB 以通过方式运行，并将流量转发到后端应用程序。在此情况下，不支持 SSL 终止。TLS 连接不会终止，也不会通过非接触方式传递。</p>
 </dd>
 
 
@@ -700,7 +701,7 @@ rules:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
 spec:
@@ -771,12 +772,11 @@ CLI 输出类似于以下内容：
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>将 Ingress 配置为通过非标准 TCP 端口访问应用程序。在此引用中使用样本 YAML 文件。</li>
-<li>更新 ALB 配置。
+<li>创建 ALB 资源或更新现有 ALB 配置。
 <pre class="pre">
-<code>        kubectl apply -f myingress.yaml
-        </code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>打开首选 Web 浏览器以访问您的应用程序。示例：<code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>通过 Curl 命令获取用于访问应用程序的 Ingress 子域。示例：<code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -811,7 +811,7 @@ ALB 连接到后端应用程序后，ALB 会从后端应用程序读取响应数
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
+  name: myingress
 annotations:
    ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
    ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
@@ -819,11 +819,11 @@ spec:
 tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+    secretName: mytlssecret
+  rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -871,18 +871,18 @@ tls:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
 spec:
 tls:
 - hosts:
   - mydomain
-  secretName: mytlssecret
-rules:
+    secretName: mytlssecret
+  rules:
 - host: mydomain
   http:
-    paths:
+paths:
     - path: /
       backend:
         serviceName: &lt;myservice&gt;
@@ -931,18 +931,18 @@ rules:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+    secretName: mytlssecret
+  rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -979,7 +979,8 @@ spec:
 <dl>
 <dt>描述</dt>
 <dd>
-Ingress ALB 充当客户机应用程序和您的应用程序之间的代理。某些应用程序设置需要多个上游服务器来处理来自 ALB 的入局客户机请求。有时，ALB 使用的代理服务器无法与应用程序使用的上游服务器建立连接。于是 ALB 可以尝试与下一个上游服务器建立连接，以改为将请求传递到这一个上游服务器。可以使用 `proxy-next-upstream-config` 注释来设置在哪些情况下 ALB 可以尝试将请求传递到下一个上游服务器，以及尝试的时间长度和次数。<br><br><strong>注</strong>：使用 `proxy-next-upstream-config` 时，始终会配置超时，所以不要将 `timeout=true` 添加到此注释。</dd>
+Ingress ALB 充当客户机应用程序和您的应用程序之间的代理。某些应用程序设置需要多个上游服务器来处理来自 ALB 的入局客户机请求。有时，ALB 使用的代理服务器无法与应用程序使用的上游服务器建立连接。于是 ALB 可以尝试与下一个上游服务器建立连接，以改为将请求传递到这一个上游服务器。可以使用 `proxy-next-upstream-config` 注释来设置在哪些情况下 ALB 可以尝试将请求传递到下一个上游服务器，以及尝试的时间长度和次数。<br><br><strong>注</strong>：使用 `proxy-next-upstream-config` 时，始终会配置超时，所以不要将 `timeout=true` 添加到此注释。
+</dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -987,10 +988,10 @@ Ingress ALB 充当客户机应用程序和您的应用程序之间的代理。�
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -1026,11 +1027,13 @@ spec:
 </tr>
 <tr>
 <td><code>error</code></td>
-<td>如果设置为 <code>true</code>，那么在与第一个上游服务器建立连接，向其传递请求或读取响应头时发生错误的情况下，ALB 会将请求传递到下一个上游服务器。</td>
+<td>如果设置为 <code>true</code>，那么在与第一个上游服务器建立连接，向其传递请求或读取响应头时发生错误的情况下，ALB 会将请求传递到下一个上游服务器。
+</td>
 </tr>
 <tr>
 <td><code>invalid_header</code></td>
-<td>如果设置为 <code>true</code>，那么在第一个上游服务器返回空响应或无效响应时，ALB 会将请求传递到下一个上游服务器。</td>
+<td>如果设置为 <code>true</code>，那么在第一个上游服务器返回空响应或无效响应时，ALB 会将请求传递到下一个上游服务器。
+</td>
 </tr>
 <tr>
 <td><code>http_502</code></td>
@@ -1079,10 +1082,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1141,7 +1144,8 @@ spec:
 <dl>
 <dt>描述</dt>
 <dd>
-设置在服务器被视为不可用之前，ALB 可以尝试连接到服务器的时间量。如果要将服务器视为不可用，ALB 必须在设置的时间量内达到 <a href="#upstream-max-fails"><code>upstream-max-fails</code> 注释</a>设置的最大失败连接尝试次数。此时间量还可确定服务器被视为不可用的持续时间。</dd>
+设置在服务器被视为不可用之前，ALB 可以尝试连接到服务器的时间量。如果要将服务器视为不可用，ALB 必须在设置的时间量内达到 <a href="#upstream-max-fails"><code>upstream-max-fails</code> 注释</a>设置的最大失败连接尝试次数。此时间量还可确定服务器被视为不可用的持续时间。
+</dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -1152,10 +1156,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/upstream-fail-timeout: "serviceName=&lt;myservice&gt; fail-timeout=&lt;fail_timeout&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1209,10 +1213,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;myservice&gt; keepalive=&lt;max_connections&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1266,10 +1270,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/upstream-max-fails: "serviceName=&lt;myservice&gt; max-fails=&lt;max_fails&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1330,10 +1334,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
       ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1372,12 +1376,12 @@ spec:
 </dd>
 <dt>用法</dt></dl>
 
-由于应用程序使用 {{site.data.keyword.appid_short_notm}} 进行认证，因此必须供应 {{site.data.keyword.appid_short_notm}} 实例，使用有效的重定向 URI 来配置实例，并通过将实例绑定到集群来生成绑定密钥。
+由于应用程序使用 {{site.data.keyword.appid_short_notm}} 进行认证，因此必须供应 {{site.data.keyword.appid_short_notm}} 实例，使用有效的重定向 URI 来配置实例，并通过将实例绑定到集群来生成绑定私钥。
 
 1. 选择现有或创建新的 {{site.data.keyword.appid_short_notm}} 实例。
     * 要使用现有实例，请确保服务实例名称不包含空格。要除去空格，请选择服务实例名称旁边的“更多选项”菜单，然后选择**重命名服务**。
     * 要供应[新 {{site.data.keyword.appid_short_notm}} 实例](https://console.bluemix.net/catalog/services/app-id)，请执行以下操作：
-        1. 将自动填充的**服务名称**替换为自己服务实例的唯一名称。
+        1. 将自动填充的**服务名称**替换为您自己的服务实例唯一名称。
             **重要信息**：服务实例名称不能包含空格。
         2. 选择部署了您的集群的区域。
         3. 单击**创建**。
@@ -1425,7 +1429,7 @@ spec:
 <dt>描述</dt>
 <dd>缺省情况下，Ingress ALB 配置为在端口 80 上侦听入局 HTTP 网络流量，在端口 443 上侦听入局 HTTPS 网络流量。您可以更改缺省端口以向 ALB 域添加安全性，或仅启用 HTTPS 端口。
 
-</dd>
+<p><strong>注</strong>：要在端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)，然后在 [`mutual-auth` 注释](#mutual-auth)中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。</p></dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -1435,18 +1439,18 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
     ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -1504,8 +1508,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 <li>配置 Ingress 以在将入局网络流量路由到服务时使用非缺省端口。在此引用中使用样本 YAML 文件。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
-<code>        kubectl apply -f myingress.yaml
-        </code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
 <li>打开首选 Web 浏览器以访问您的应用程序。示例：<code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
 
@@ -1535,22 +1538,22 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
     ingress.bluemix.net/redirect-to-https: "True"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 </dd>
 
@@ -1577,10 +1580,10 @@ HSTS 指示浏览器仅使用 HTTPS 访问域。即使用户输入或访问普�
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -1641,7 +1644,7 @@ spec:
 <dd>
 <ul>
 <li>您必须具有包含所需 <code>ca.crt</code> 的有效相互认证私钥。要创建相互认证私钥，请参阅[创建私钥](cs_app.html#secrets_mutual_auth)。</li>
-<li>要在 443 之外的端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)。</li>
+<li>要在 443 之外的端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)，然后在此注释中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。</li>
 </ul>
 </dd>
 
@@ -1652,11 +1655,11 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
+  name: myingress
 annotations:
   ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -1705,64 +1708,7 @@ spec:
 <dl>
 <dt>描述</dt>
 <dd>
-Ingress 资源配置具有 TLS 部分时，Ingress ALB 可以处理向应用程序发出的通过 HTTPS 保护的 URL 请求。但是，ALB 会在将流量转发到应用程序之前对请求解密。如果您具有需要 HTTPS 的应用程序，并且在将流量转发到这些上游应用程序之前需要对流量进行加密，那么可以使用 `ssl-services` 注释。如果上游应用程序可以处理 TLS，那么可以选择提供 TLS 私钥中包含的证书。<br></br>**可选**：可以向此注释添加[单向认证或相互认证](#ssl-services-auth)。</dd>
-
-
-<dt>样本 Ingress 资源 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;myingressname&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>了解注释的组成部分</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解注释的组成部分</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>将 <code>&lt;<em>myservice</em>&gt;</code> 替换为需要 HTTPS 的服务的名称。将加密从 ALB 到此应用程序服务的流量。</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>可选：如果要使用 TLS 私钥，并且上游应用程序可以处理 TLS，请将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为该服务的私钥。如果提供私钥，那么该值必须包含来自上游服务器的 <code>trusted.crt</code>。要创建 TLS 私钥，请参阅[创建私钥](cs_app.html#secrets_ssl_services)。</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### 使用认证的 SSL 服务支持
-{: #ssl-services-auth}
-
-<dl>
-<dt>描述</dt>
-<dd>
-允许向上游应用程序发出 HTTPS 请求，以及使用单向认证或相互认证加密流入上游应用程序的流量，以实现额外的安全性。
-</dd>
-
+Ingress 资源配置具有 TLS 部分时，Ingress ALB 可以处理向应用程序发出的通过 HTTPS 保护的 URL 请求。但是，ALB 会处理 TLS 终止并在将流量转发到应用程序之前对请求解密。如果您具有需要 HTTPS 协议且需要流量保持加密的应用程序，请使用 `ssl-services` 注释来禁用 ALB 的缺省 TLS 终止。ALB 会终止 TLS 连接并重新加密 SSL，然后再将流量发送到后端应用程序。<br></br>此外，如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，那么可以通过提供私钥中包含的证书来添加单向或相互认证。</dd>
 
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -1772,12 +1718,12 @@ spec:
 kind: Ingress
 metadata:
   name: &lt;myingressname&gt;
-  annotations:
+annotations:
     ingress.bluemix.net/ssl-services: |
       ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
       ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mysecret
@@ -1807,7 +1753,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为服务的相互认证私钥。相互认证私钥必须包含所需的 <code>ca.crt</code>。要创建相互认证私钥，请参阅[创建私钥](cs_app.html#secrets_mutual_auth)。</td>
+  <td>如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，请将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为该服务的单向或相互认证私钥。<ul><li>如果提供了单向认证私钥，那么该值必须包含来自上游服务器的 <code>trusted.crt</code>。要创建 TLS 私钥，请参阅[创建私钥](cs_app.html#secrets_ssl_services)。</li><li>如果提供了相互认证私钥，那么值必须包含应用程序期望从客户机收到的必需的 <code>ca.crt</code> 和 <code>ca.key</code>。要创建相互认证私钥，请参阅[创建私钥](cs_app.html#secrets_mutual_auth)。</li></ul><strong>警告</strong>：如果未提供私钥，系统会允许不安全连接。如果要测试连接并且证书尚未就绪，或者如果证书已到期并且您希望允许不安全的连接，那么可选择省略私钥。</td>
   </tr>
   </tbody></table>
 
@@ -1852,10 +1798,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -2033,18 +1979,18 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
    ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -2081,7 +2027,8 @@ spec:
 <dl>
 <dt>描述</dt>
 <dd>
-设置缓冲区的数目和大小，这些缓冲区用于读取来自通过代理传递的服务器的单个连接的响应。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE number=2 size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>number=2 size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。</dd>
+设置缓冲区的数目和大小，这些缓冲区用于读取来自通过代理传递的服务器的单个连接的响应。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE number=2 size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>number=2 size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。
+</dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -2139,8 +2086,7 @@ paths:
 <dl>
 <dt>描述</dt>
 <dd>
-设置缓冲区的大小，该缓冲区用于读取从通过代理传递的服务器收到的响应的第一部分。响应的这一部分通常包含小型响应头。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。
-</dd>
+设置缓冲区的大小，该缓冲区用于读取从通过代理传递的服务器收到的响应的第一部分。响应的这一部分通常包含小型响应头。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。</dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -2200,7 +2146,8 @@ paths:
 <dl>
 <dt>描述</dt>
 <dd>
-限制在尚未完全读取响应期间，向客户机发送响应的任何缓冲区的大小。在此期间，其余缓冲区可用于读取响应，并可以根据需要将响应的一部分缓冲到临时文件。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。</dd>
+限制在尚未完全读取响应期间，向客户机发送响应的任何缓冲区的大小。在此期间，其余缓冲区可用于读取响应，并可以根据需要将响应的一部分缓冲到临时文件。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。
+</dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -2223,9 +2170,10 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+         </code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2267,18 +2215,18 @@ paths:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
    ingress.bluemix.net/add-host-port: "enabled=&lt;true&gt; serviceName=&lt;myservice&gt;"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -2333,7 +2281,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-serviceName=<myservice1> {
+      serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2352,14 +2300,14 @@ serviceName=<myservice1> {
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2370,7 +2318,7 @@ metadata:
       &lt;header3&gt;: &lt;value3&gt;;
       }
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -2428,7 +2376,7 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/response-remove-headers: |
       serviceName=&lt;myservice1&gt; {
       "&lt;header1&gt;";
@@ -2438,7 +2386,7 @@ metadata:
       "&lt;header3&gt;";
       }
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -2496,18 +2444,18 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+  name: myingress
+annotations:
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -2547,18 +2495,18 @@ spec:
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: myingress
- annotations:
+  name: myingress
+annotations:
    ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
 spec:
- tls:
+tls:
  - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
  - host: mydomain
    http:
-     paths:
+paths:
      - path: /
         backend:
           serviceName: myservice
@@ -2611,10 +2559,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret
@@ -2674,10 +2622,10 @@ spec:
 kind: Ingress
 metadata:
   name: myingress
-  annotations:
+annotations:
     ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
 spec:
-  tls:
+tls:
   - hosts:
     - mydomain
     secretName: mytlssecret

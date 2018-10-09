@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ Lorsque vous exposez votre application en créant un service Kubernetes du type 
 
 Le diagramme suivant montre comment la communication est dirigée vers une application depuis Internet lorsqu'un service NodePort est configuré :
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containershort_notm}} avec NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} en utilisant NodePort" style="width:550px; border-style: none"/>
 
 1. Une demande est envoyée à votre application en utilisant l'adresse IP publique de votre noeud worker et le port de noeud (NodePort) sur le noeud worker.
 

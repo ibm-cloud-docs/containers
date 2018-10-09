@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,23 +23,25 @@ lastupdated: "2018-08-06"
 포트를 노출하고 계층 4 로드 밸런서의 포터블 IP 주소를 사용하여 컨테이너화된 앱에 액세스하십시오.
 {:shortdesc}
 
+
+
 ## 로드 밸런서 컴포넌트 및 아키텍처
 {: #planning}
 
-표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}에서 포터블 공용 서브넷과 포터블 사설 서브넷을 자동으로 프로비저닝합니다. 
+표준 클러스터를 작성하면 {{site.data.keyword.containerlong_notm}}에서 포터블 공용 서브넷과 포터블 사설 서브넷을 자동으로 프로비저닝합니다.
 
-* 포터블 공용 서브넷은 기본 [공용 Ingress ALB](cs_ingress.html)에서 사용하는 1개의 포터블 공인 IP 주소를 제공합니다. 나머지 4개의 포터블 공인 IP 주소는 공용 로드 밸런서 서비스 작성을 통해 단일 앱을 인터넷에 노출하는 데 사용될 수 있습니다. 
-* 포터블 사설 서브넷은 기본 [사설 Ingress ALB](cs_ingress.html#private_ingress)에서 사용하는 1개의 포터블 사설 IP 주소를 제공합니다. 나머지 4개의 포터블 사설 IP 주소는 사설 로드 밸런서 서비스 작성을 통해 단일 앱을 사설 네트워크에 노출하는 데 사용될 수 있습니다. 
+* 포터블 공용 서브넷은 기본 [공용 Ingress ALB](cs_ingress.html)에서 사용하는 1개의 포터블 공인 IP 주소를 제공합니다. 나머지 4개의 포터블 공인 IP 주소는 공용 로드 밸런서 서비스 작성을 통해 단일 앱을 인터넷에 노출하는 데 사용될 수 있습니다.
+* 포터블 사설 서브넷은 기본 [사설 Ingress ALB](cs_ingress.html#private_ingress)에서 사용하는 1개의 포터블 사설 IP 주소를 제공합니다. 나머지 4개의 포터블 사설 IP 주소는 사설 로드 밸런서 서비스 작성을 통해 단일 앱을 사설 네트워크에 노출하는 데 사용될 수 있습니다.
 
-      포터블 공인 및 사설 IP 주소는 정적이며 작업자 노드가 제거될 때 변경되지 않습니다. 로드 밸런서 IP 주소가 켜져 있는 작업자 노드가 제거되는 경우에는 IP를 지속적으로 모니터하는 keepalive 디먼이 IP를 다른 작업자 노드로 자동으로 이동시킵니다. 사용자는 로드 밸런서에 포트를 지정할 수 있으며 특정 포트 범위에 바인딩되지 않습니다. 
+      포터블 공인 및 사설 IP 주소는 정적이며 작업자 노드가 제거될 때 변경되지 않습니다. 로드 밸런서 IP 주소가 켜져 있는 작업자 노드가 제거되는 경우에는 IP를 지속적으로 모니터하는 keepalive 디먼이 IP를 다른 작업자 노드로 자동으로 이동시킵니다. 사용자는 로드 밸런서에 포트를 지정할 수 있으며 특정 포트 범위에 바인딩되지 않습니다.
 
-로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오. 
+로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오.
 
 LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 인터넷에서 LoadBalancer 서비스에 액세스하려면, `<IP_address>:<port>` 형식의 지정된 포트와 로드 밸런서의 공인 IP 주소를 사용하십시오. 다음 다이어그램은 로드 밸런서가 인터넷에서 앱으로 통신하는 방식을 표시합니다.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="로드 밸런서를 사용하여 {{site.data.keyword.containershort_notm}}에 앱 노출" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="로드 밸런서를 사용하여 {{site.data.keyword.containerlong_notm}}에서 앱 노출" style="width:550px; border-style: none"/>
 
-1. 앱에 대한 요청은 작업자 노드에서 지정된 포트와 로드 밸런서의 공인 IP 주소를 사용합니다. 
+1. 앱에 대한 요청은 작업자 노드에서 지정된 포트와 로드 밸런서의 공인 IP 주소를 사용합니다.
 
 2. 요청은 자동으로 로드 밸런서 서비스의 내부 클러스터 IP 주소 및 포트로 전달됩니다. 내부 클러스터 IP 주소는 클러스터 내에서만 액세스가 가능합니다.
 
@@ -49,13 +51,13 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
 
 **다중 구역 클러스터**:
 
-다중 구역 클러스터가 있는 경우, 앱 인스턴스는 서로 다른 구역 간에 작업자의 팟(Pod)에 배치됩니다. 다중 구역의 앱 인스턴스에 대한 로드 밸런싱 요청의 경우 이러한 LoadBalancer 설정을 검토하십시오. 
+다중 구역 클러스터가 있는 경우, 앱 인스턴스는 서로 다른 구역 간에 작업자의 팟(Pod)에 배치됩니다. 다중 구역의 앱 인스턴스에 대한 로드 밸런싱 요청의 경우 이러한 LoadBalancer 설정을 검토하십시오.
 
 <img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="LoadBalancer 서비스를 사용하여 다중 구역 클러스터의 앱에 대한 로드 밸런싱 수행" style="width:700px; border-style: none"/>
 
-1. **낮은 가용성: 하나의 구역에 배치된 로드 밸런서입니다.** 기본적으로 각 로드 밸런서는 하나의 구역에서만 설정됩니다. 하나의 로드 밸런서만 배치된 경우, 로드 밸런서는 자체 구역의 앱 인스턴스와 기타 구역의 앱 인스턴스로 요청을 라우팅해야 합니다. 
+1. **낮은 가용성: 하나의 구역에 배치된 로드 밸런서입니다.** 기본적으로 각 로드 밸런서는 하나의 구역에서만 설정됩니다. 하나의 로드 밸런서만 배치된 경우, 로드 밸런서는 자체 구역의 앱 인스턴스와 기타 구역의 앱 인스턴스로 요청을 라우팅해야 합니다.
 
-2. **높은 가용성: 각 구역에 배치된 로드 밸런서입니다.** 앱 인스턴스가 있는 모든 구역에서 로드 밸런서를 배치할 때 보다 높은 가용성을 달성할 수 있습니다. 요청은 라운드 로빈 주기로 다양한 구역에서 로드 밸런서에 의해 처리됩니다. 또한 각 로드 밸런서는 자체 구역의 앱 인스턴스와 기타 구역의 앱 인스턴스로 요청을 라우팅합니다. 
+2. **높은 가용성: 각 구역에 배치된 로드 밸런서입니다.** 앱 인스턴스가 있는 모든 구역에서 로드 밸런서를 배치할 때 보다 높은 가용성을 달성할 수 있습니다. 요청은 라운드 로빈 주기로 다양한 구역에서 로드 밸런서에 의해 처리됩니다. 또한 각 로드 밸런서는 자체 구역의 앱 인스턴스와 기타 구역의 앱 인스턴스로 요청을 라우팅합니다.
 
 
 <br />
@@ -71,23 +73,23 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
 
 시작하기 전에:
   * 포터블 사설 IP 주소를 사용하는 로드 밸런서 서비스에는 여전히 모든 작업자 노드에서 열려 있는 공용 NodePort가 있습니다. 공용 트래픽을 방지하기 위한 네트워크 정책을 추가하려면 [수신 트래픽 차단](cs_network_policy.html#block_ingress)을 참조하십시오.
-  * 각 구역에서 최소한 하나의 공용 VLAN에는 Ingress 및 LoadBalancer 서비스에 사용할 수 있는 포터블 서브넷이 있어야 합니다. 개인용 Ingress 및 LoadBalancer 서비스를 추가하려면 사용 가능한 포터블 서브넷이 있는 최소한 하나의 사설 VLAN을 지정해야 합니다. 서브넷을 추가하려면 [클러스터에 대한 서브넷 구성](cs_subnets.html)을 참조하십시오. 
-  * 에지 작업자 노드로 네트워크 트래픽을 제한하는 경우에는 각 구역에서 최소한 2개의 [에지 작업자 노드](cs_edge.html#edge)가 사용으로 설정되었는지 확인하십시오. 에지 작업자 노드가 일부 구역에서는 사용으로 설정되었지만 기타 구역에서는 사용으로 설정되지 않는 경우에는 로드 밸런서가 균등하게 배치되지 않습니다. 로드 밸런서는 일부 구역에서는 에지 노드에 배치되지만 기타 구역에서는 일반 작업자 노드에 배치됩니다. 
-  * 서로 다른 구역에 있는 작업자 간에 사설 네트워크의 통신을 사용 가능하게 하려면 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 
+  * 각 구역에 로드 밸런서를 배치해야 하며, 각 로드 밸런서에는 해당 구역의 자체 IP 주소가 지정됩니다. 공용 로드 밸런서를 작성하려면 하나 이상의 공용 VLAN에 각 구역에서 사용 가능한 포터블 서브넷이 있어야 합니다. 개인용 로드 밸런서 서비스를 작성하려면 하나 이상의 사설 VLAN에 각 구역에서 사용 가능한 포터블 서브넷이 있어야 합니다. 서브넷을 추가하려면 [클러스터에 대한 서브넷 구성](cs_subnets.html)을 참조하십시오.
+  * 에지 작업자 노드로 네트워크 트래픽을 제한하는 경우에는 각 구역에서 최소한 2개의 [에지 작업자 노드](cs_edge.html#edge)가 사용으로 설정되었는지 확인하십시오. 에지 작업자 노드가 일부 구역에서는 사용으로 설정되었지만 기타 구역에서는 사용으로 설정되지 않는 경우에는 로드 밸런서가 균등하게 배치되지 않습니다. 로드 밸런서는 일부 구역에서는 에지 노드에 배치되지만 기타 구역에서는 일반 작업자 노드에 배치됩니다.
+  * 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오. 
 
 
-다중 구역 클러스터에서 LoadBalancer 서비스를 설정하려면 다음을 수행하시시오. 
-1.  [클러스터에 앱을 배치](cs_app.html#app_cli)하십시오. 클러스터에 앱을 배치하면 컨테이너에서 앱을 실행하는 사용자에 대한 하나 이상의 팟(Pod)이 작성됩니다. 구성 파일의 메타데이터 섹션에서 배치에 레이블을 추가했는지 확인하십시오. 이 레이블은 로드 밸런싱에 포함될 수 있도록 앱이 실행 중인 모든 팟(Pod)을 식별하는 데 필요합니다. 
+다중 구역 클러스터에서 LoadBalancer 서비스를 설정하려면 다음을 수행하시시오.
+1.  [클러스터에 앱을 배치](cs_app.html#app_cli)하십시오. 클러스터에 앱을 배치하면 컨테이너에서 앱을 실행하는 사용자에 대한 하나 이상의 팟(Pod)이 작성됩니다. 구성 파일의 메타데이터 섹션에서 배치에 레이블을 추가했는지 확인하십시오. 이 레이블은 로드 밸런싱에 포함될 수 있도록 앱이 실행 중인 모든 팟(Pod)을 식별하는 데 필요합니다.
 
 2.  노출시키려는 앱에 대해 로드 밸런서 서비스를 정의하십시오. 공용 인터넷 또는 사설 네트워크에서 앱을 사용할 수 있으려면 앱에 대한 Kubernetes 서비스를 작성하십시오. 앱을 구성하는 모든 팟(Pod)을 로드 밸런싱에 포함하도록 서비스를 구성하십시오.
   1. 예를 들어, `myloadbalancer.yaml`이라는 이름의 서비스 구성 파일을 작성하십시오.
-  2. 노출하려는 앱에 대한 로드 밸런서 서비스를 정의하십시오. 사설 및 공용 포터블 서브넷 및 구역에서 IP 주소를 지정할 수 있습니다. 
-      - 구역 및 IP 주소를 둘 다 선택하려면 `ibm-load-balancer-cloud-provider-zone` 어노테이션을 사용하여 구역을 지정하고 `loadBalancerIP` 필드를 사용하여 해당 구역에 있는 공인 또는 사설 IP 주소를 지정하십시오. 
-      - IP 주소만 선택하려면 `loadBalancerIP` 필드를 사용하여 공인 또는 사설 IP 주소를 지정하십시오. 로드 밸런서는 IP 주소의 VLAN이 있는 구역에서 작성됩니다. 
-      - 구역만 선택하려면 `ibm-load-balancer-cloud-provider-zone` 어노테이션을 사용하여 구역을 지정하십시오. 지정된 구역의 포터블 IP 주소가 사용됩니다. 
-      - IP 주소 또는 구역을 지정하지 않으며 클러스터가 공용 VLAN에 있는 경우에는 포터블 공인 IP 주소가 사용됩니다. 대부분의 클러스터는 공용 VLAN에 있습니다. 클러스터가 사설 VLAN에서만 사용 가능한 경우 포터블 사설 IP 주소가 사용됩니다. 로드 밸런서는 VLAN이 있는 구역에서 작성됩니다. 
+  2. 노출하려는 앱에 대한 로드 밸런서 서비스를 정의하십시오. 사설 및 공용 포터블 서브넷 및 구역에서 IP 주소를 지정할 수 있습니다.
+      - 구역 및 IP 주소를 둘 다 선택하려면 `ibm-load-balancer-cloud-provider-zone` 어노테이션을 사용하여 구역을 지정하고 `loadBalancerIP` 필드를 사용하여 해당 구역에 있는 공인 또는 사설 IP 주소를 지정하십시오.
+      - IP 주소만 선택하려면 `loadBalancerIP` 필드를 사용하여 공인 또는 사설 IP 주소를 지정하십시오. 로드 밸런서는 IP 주소의 VLAN이 있는 구역에서 작성됩니다.
+      - 구역만 선택하려면 `ibm-load-balancer-cloud-provider-zone` 어노테이션을 사용하여 구역을 지정하십시오. 지정된 구역의 포터블 IP 주소가 사용됩니다.
+      - IP 주소 또는 구역을 지정하지 않으며 클러스터가 공용 VLAN에 있는 경우에는 포터블 공인 IP 주소가 사용됩니다. 대부분의 클러스터는 공용 VLAN에 있습니다. 클러스터가 사설 VLAN에서만 사용 가능한 경우 포터블 사설 IP 주소가 사용됩니다. 로드 밸런서는 VLAN이 있는 구역에서 작성됩니다.
 
-      어노테이션을 사용하여 개인용 또는 공용 로드 밸런서 및 구역을 지정하는 LoadBalancer 서비스 및 IP 주소 지정을 위한 `loadBalancerIP` 섹션: 
+      어노테이션을 사용하여 개인용 또는 공용 로드 밸런서 및 구역을 지정하는 LoadBalancer 서비스 및 IP 주소 지정을 위한 `loadBalancerIP` 섹션:
 
       ```
       apiVersion: v1
@@ -120,7 +122,7 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>구역을 지정하기 위한 어노테이션입니다. 구역을 보려면 <code>ibmcloud ks zones</code>를 실행하십시오. </td>
+        <td>구역을 지정하기 위한 어노테이션입니다. 구역을 보려면 <code>ibmcloud ks zones</code>를 실행하십시오.</td>
       </tr>
       <tr>
         <td><code>selector</code></td>
@@ -190,9 +192,9 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
 
 5. [로드 밸런서 서비스에 대해 소스 IP 유지를 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)하도록 선택하는 경우에는 [에지 노드 친화성을 앱 팟(Pod)에 추가](cs_loadbalancer.html#edge_nodes)하여 앱 팟(Pod)이 에지 작업자 노드에 스케줄되도록 하십시오. 수신 요청을 받도록 앱 팟(Pod)이 에지 노드에 스케줄되어야 합니다.
 
-6. 다른 구역에서 앱에 대한 수신 요청을 처리하려면 위의 단계를 반복하여 각 구역에 로드 밸런서를 추가하십시오. 
+6. 다른 구역에서 앱에 대한 수신 요청을 처리하려면 위의 단계를 반복하여 각 구역에 로드 밸런서를 추가하십시오.
 
-7. 선택사항: 로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오. 
+7. 선택사항: 로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오.
 
 ## 단일 구역 클러스터에서 앱에 대한 공용 또는 개인용 액세스 사용
 {: #config}
@@ -331,7 +333,7 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
 
 5. [로드 밸런서 서비스에 대해 소스 IP 유지를 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)하도록 선택하는 경우에는 [에지 노드 친화성을 앱 팟(Pod)에 추가](cs_loadbalancer.html#edge_nodes)하여 앱 팟(Pod)이 에지 작업자 노드에 스케줄되도록 하십시오. 수신 요청을 받도록 앱 팟(Pod)이 에지 노드에 스케줄되어야 합니다.
 
-6. 선택사항: 로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오. 
+6. 선택사항: 로드 밸런서 서비스는 또한 서비스의 NodePort를 통해 앱을 사용할 수 있도록 합니다. [NodePort](cs_nodeport.html)는 클러스터 내의 모든 노드에 대한 모든 공인 및 사설 IP 주소에서 액세스가 가능합니다. 로드 밸런서 서비스를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [LoadBalancer 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](cs_network_policy.html#block_ingress)를 참조하십시오.
 
 <br />
 
@@ -348,12 +350,12 @@ LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할
 * 로드 밸런서 서비스 팟(Pod)만 배치할 수 있도록 오염(taint)된 에지 노드가 있습니다. 이러한 노드에는 앱 팟(Pod)을 배치할 수 없습니다.
 * 클러스터가 여러 공용 또는 사설 VLAN에 연결되어 있으며 앱 팟(Pod)이 하나의 VLAN에만 연결된 작업자 노드에 배치될 가능성이 있습니다. 로드 밸런서 서비스 팟(Pod)이 작업자 노드와 다른 VLAN에 연결되어 있어 이러한 작업자 노드에 로드 밸런서 서비스 팟(Pod)을 배치하지 못할 수 있습니다.
 
-로드 밸런서 서비스 팟(Pod) 역시 배치할 수 있는 특정 작업자 노드에 배치하도록 앱을 강제 실행하려면 앱 배치에 친화성 규칙(affinity rule) 및 결함 허용(toleration)을 추가해야 합니다. 
+로드 밸런서 서비스 팟(Pod) 역시 배치할 수 있는 특정 작업자 노드에 배치하도록 앱을 강제 실행하려면 앱 배치에 친화성 규칙(affinity rule) 및 결함 허용(toleration)을 추가해야 합니다.
 
 ### 에지 노드 친화성 규칙 및 결함 허용 추가
 {: #edge_nodes}
 
-[작업자 노드의 레이블을 에지 노드로 지정](cs_edge.html#edge_nodes)하고 [에지 노드를 오염](cs_edge.html#edge_workloads)시키면 로드 밸런서 서비스 팟(Pod)이 해당 에지 노드에만 배치되며 앱 팟(Pod)을 에지 노드에 배치할 수 없습니다. 소스 IP가 로드 밸런서 서비스에 대해 사용으로 설정되면 에지 노드의 로드 밸런서 팟(Pod)이 다른 작업자 노드의 앱 팟(Pod)에 수신 요청을 전달할 수 없습니다.
+[작업자 노드의 레이블을 에지 노드로 지정](cs_edge.html#edge_nodes)하고 [에지 노드를 오염(taint)](cs_edge.html#edge_workloads)시키면 로드 밸런서 서비스 팟(Pod)이 해당 에지 노드에만 배치되며 앱 팟(Pod)을 에지 노드에 배치할 수 없습니다. 소스 IP가 로드 밸런서 서비스에 대해 사용으로 설정되면 에지 노드의 로드 밸런서 팟(Pod)이 다른 작업자 노드의 앱 팟(Pod)에 수신 요청을 전달할 수 없습니다.
 {:shortdesc}
 
 앱 팟(Pod)이 에지 노드에 배치되도록 강제하려면 앱 배치에 에지 노드 [친화성 규칙 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) 및 [결함 허용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts)을 추가하십시오.
@@ -503,3 +505,4 @@ spec:
         {: screen}
 
     4. 출력의 **Labels** 섹션에서 공용 또는 사설 VLAN이 이전 단계에서 지정한 VLAN인지 확인하십시오.
+

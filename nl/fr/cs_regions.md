@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,19 +20,21 @@ lastupdated: "2018-08-06"
 Une région est un emplacement géographique spécifique dans lequel vous pouvez déployer des applications, des services et d'autres ressources {{site.data.keyword.Bluemix}}. [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des [régions {{site.data.keyword.containerlong}}](#container_regions). Les régions se composent d'une ou de plusieurs zones, lesquelles correspondent à des centres de données physiques qui hébergent les ressources de calcul, les ressources réseau et les ressources de stockage, ainsi que les systèmes de refroidissement et les appareils électriques hébergeant les services et les applications. Les zones sont isolées les unes des autres pour garantir qu'aucun point de défaillance unique ne sera partagé.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containershort_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
+{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster. 
 
-![Régions et zones {{site.data.keyword.containershort_notm}}](/images/regions-mz.png)
+**Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
 
-_Régions et zones {{site.data.keyword.containershort_notm}}_
+![Régions et zones {{site.data.keyword.containerlong_notm}}](/images/regions-mz.png)
 
-Les régions {{site.data.keyword.containershort_notm}} sont les suivantes :
-  * Asie-Pacifique nord
-  * Asie-Pacifique sud
-  * Europe centrale
-  * Sud du Royaume-Uni
-  * Est des Etats-Unis
-  * Sud des Etats-Unis
+_Régions et zones {{site.data.keyword.containerlong_notm}}_
+
+Les régions {{site.data.keyword.containerlong_notm}} sont les suivantes :
+* Asie-Pacifique nord (clusters standard uniquement)
+* Asie-Pacifique sud
+* Europe centrale
+* Sud du Royaume-Uni
+* Est des Etats-Unis (clusters standard uniquement)
+* Sud des Etats-Unis
 
 <br />
 
@@ -82,22 +84,24 @@ Vous pouvez, par exemple, utiliser les commandes suivantes pour vous connecter a
 <br />
 
 
-## Régions dans {{site.data.keyword.containershort_notm}}
+## Régions dans {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
-En utilisant des régions {{site.data.keyword.containershort_notm}}, vous pouvez créer des clusters  Kubernetes ou y accéder dans une région différente de la région {{site.data.keyword.Bluemix_notm}} où vous êtes connecté. Les noeuds finaux de régions {{site.data.keyword.containershort_notm}} se réfèrent spécifiquement au service {{site.data.keyword.containershort_notm}}, et non pas à {{site.data.keyword.Bluemix_notm}} dans son ensemble.
+En utilisant des régions {{site.data.keyword.containerlong_notm}}, vous pouvez créer des clusters  Kubernetes ou y accéder dans une région différente de la région {{site.data.keyword.Bluemix_notm}} où vous êtes connecté. Les noeuds finaux de régions {{site.data.keyword.containerlong_notm}} se réfèrent spécifiquement au service {{site.data.keyword.containerlong_notm}}, et non pas à {{site.data.keyword.Bluemix_notm}} dans son ensemble.
 {:shortdesc}
 
-Régions {{site.data.keyword.containershort_notm}} prises en charge :
-  * Asie-Pacifique nord
+**Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
+
+Régions {{site.data.keyword.containerlong_notm}} prises en charge :
+  * Asie-Pacifique nord (clusters standard uniquement)
   * Asie-Pacifique sud
   * Europe centrale
   * Sud du Royaume-Uni
-  * Est des Etats-Unis
+  * Est des Etats-Unis (clusters standard uniquement)
   * Sud des Etats-Unis
 
-Vous pouvez accéder à {{site.data.keyword.containershort_notm}} via un noeud final global : `https://containers.bluemix.net/v1`.
-* Pour vérifier dans quelle région {{site.data.keyword.containershort_notm}} vous vous trouvez actuellement,  exécutez la commande `ibmcloud ks region`.
+Vous pouvez accéder à {{site.data.keyword.containerlong_notm}} via un noeud final global : `https://containers.bluemix.net/v1`.
+* Pour vérifier dans quelle région {{site.data.keyword.containerlong_notm}} vous vous trouvez actuellement,  exécutez la commande `ibmcloud ks region`.
 * Pour extraire la liste des régions disponibles et de leurs noeuds finaux, exécutez la commande `ibmcloud ks regions`.
 
 Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transmettez le nom de région dans l'en-tête `X-Region`.
@@ -106,11 +110,11 @@ Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transm
 ### Connexion à une autre région d'{{site.data.keyword.containerlong_notm}}
 {: #container_login_endpoints}
 
-Vous pouvez changer de région en utilisant l'interface de ligne de commande (CLI) d'{{site.data.keyword.containershort_notm}}.
+Vous pouvez changer de région en utilisant l'interface de ligne de commande (CLI) d'{{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyword.containershort_notm}} pour les raisons suivantes :
-  * Vous avez créé des services {{site.data.keyword.Bluemix_notm}} ou des images Docker privées dans une région et vous souhaitez les utiliser avec {{site.data.keyword.containershort_notm}} dans une autre région.
+Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyword.containerlong_notm}} pour les raisons suivantes :
+  * Vous avez créé des services {{site.data.keyword.Bluemix_notm}} ou des images Docker privées dans une région et vous souhaitez les utiliser avec {{site.data.keyword.containerlong_notm}} dans une autre région.
   * Vous souhaitez accéder à un cluster dans une région différente de la région {{site.data.keyword.Bluemix_notm}} par défaut à laquelle vous êtes connecté.
 
 Pour basculer rapidement d'une région à une autre, exécutez la commande `ibmcloud ks region-set`.
@@ -118,7 +122,7 @@ Pour basculer rapidement d'une région à une autre, exécutez la commande `ibmc
 ### Utilisation des commandes d'API {{site.data.keyword.containerlong_notm}}
 {: #containers_api}
 
-Pour interagir avec l'API {{site.data.keyword.containershort_notm}}, entrez le type de commande et ajoutez `/v1/command` au noeud final global.
+Pour interagir avec l'API {{site.data.keyword.containerlong_notm}}, entrez le type de commande et ajoutez `/v1/command` au noeud final global.
 {:shortdesc}
 
 Exemple d'API `GET /clusters` :
@@ -134,7 +138,7 @@ Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transm
 
 Pour afficher la documentation sur les commandes d'API, accédez à [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
 
-## Zones dans {{site.data.keyword.containershort_notm}}
+## Zones dans {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 Les zones sont des centres de données physiques disponibles au sein d'une région {{site.data.keyword.Bluemix_notm}}. Les régions constituent un outil conceptuel permettant d'organiser les zones et peuvent inclure des zones (centres de données) dans différents pays. Le tableau suivant affiche les zones disponibles par région.
@@ -169,6 +173,7 @@ Les zones sont des centres de données physiques disponibles au sein d'une régi
       <td>Europe centrale</td>
       <td>Francfort : fra02, fra04, fra05</td>
       <td><p>Amsterdam : ams03</p>
+      <p>Oslo : osl01</p>
       <p>Paris : par01</p>
       </td>
     </tr>
@@ -209,7 +214,7 @@ _Comprendre où résident les ressources de votre cluster à zone unique._
 ### Clusters à zones multiples
 {: #multizone}
 
-Dans un cluster à zones multiples, le noeud maître est déployé dans une zone compatible avec plusieurs zones et les ressources de votre cluster sont réparties sur plusieurs zones. 
+Dans un cluster à zones multiples, le noeud maître est déployé dans une zone compatible avec plusieurs zones et les ressources de votre cluster sont réparties sur plusieurs zones.
 
 1.  Les noeuds worker sont répartis sur plusieurs zones d'une région pour offrir une plus grande disponibilité à votre cluster. Le maître reste dans la zone compatible avec plusieurs zones dans laquelle vous avez déployé le cluster. Lorsque vous initiez des actions d'orchestration de conteneurs locaux, par exemple avec des commandes `kubectl`, les informations s'échangent entre le maître et vos noeuds worker via un noeud final régional.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -128,44 +128,23 @@ Para implementar o app:
         ```
         {: pre}
 
-6.  Inicie o Docker.
-    * Se você estiver usando o Docker Community Edition, nenhuma ação será necessária.
-    * Se você estiver usando o Linux, siga a [documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/config/daemon/) para localizar instruções sobre como iniciar o Docker, dependendo da distribuição Linux usada.
-    * Se estiver usando o Docker Toolbox no Windows ou OSX, será possível usar o Docker Quickstart Terminal, que inicia o Docker para você. Use o Docker Quickstart Terminal nas próximas etapas para executar os comandos do Docker e, em seguida, altere novamente para a CLI na qual a variável de sessão `KUBECONFIG` é configurada.
+6.  Construa uma imagem do Docker que inclua os arquivos de app do diretório `Lab 1` e envie por push a imagem para o namespace do {{site.data.keyword.registryshort_notm}} que você criou no tutorial anterior. Caso seja necessário fazer uma mudança no app no futuro, repita estas etapas para criar outra versão da imagem. **Nota**: saiba mais sobre [proteção de suas informações pessoais](cs_secure.html#pi) quando você trabalhar com imagens de contêiner.
 
-7.  Construa uma imagem do Docker que inclua os arquivos de app do diretório `Lab 1`. Caso seja necessário fazer uma mudança no app no futuro, repita estas etapas para criar outra versão da imagem.
+    Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a imagem.
 
-    Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ```
+    {: pre}
 
-    1.  Construa a imagem localmente. Especifique o nome e a tag que você deseja usar. Certifique-se de usar o namespace que você criou no {{site.data.keyword.registryshort_notm}} no tutorial anterior. Identificar a imagem com as informações de namespace indica ao Docker para onde enviar por push a imagem em uma etapa posterior. Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a imagem.
+    Quando a construção estiver completa, verifique se você vê a mensagem de êxito a seguir:
 
-        ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
-        ```
-        {: pre}
+    ```
+    Construído com êxito <image_ID> Registro identificado com êxito.<region>.bluemix.net/<namespace>/hello-world:1 O push refere-se a um repositório [registry.<region>.bluemix.net/<namespace>/hello-world] 29042bc0b00c: Enviado por push f31d9ee9db57: Enviado por push 33c64488a635: Pushed 0804854a4553: A camada já existe 6bd4a62f5178: A camada já existe 9dfa40a0da3b: A camada já existe 1: compilação: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 tamanho: 1576
+    ```
+    {: screen}
 
-        Quando a construção estiver completa, verifique se você vê a mensagem de êxito a seguir:
-        ```
-        Successfully built <image_id>
-        Successfully tagged <image_tag>
-        ```
-        {: screen}
-
-    2.  Envie por push a imagem para o seu namespace de registro.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
-        ```
-        {: pre}
-
-        Saída de exemplo:
-
-        ```
-        O push refere-se a um repositório [registry.ng.bluemix.net/pr_firm/hello-world] ea2ded433ac8: Pushed 894eb973f4d3: Pushed 788906ca2c7e: Pushed 381c97ba7dc3: Pushed 604c78617f34: Pushed fa18e5ffd316: Pushed 0a5e2b2ddeaa: Pushed 53c779688d06: Pushed 60a0858edcd5: Pushed b6ca02dfe5e6: Pushed 1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405 43 size: 2398
-        ```
-        {: screen}
-
-8.  As implementações são usadas para gerenciar pods, que incluem instâncias conteinerizadas de um app. O comando a seguir implementa o app em um único pod. Para os propósitos deste tutorial, a implementação é denominada **hello-world-deployment**, mas é possível dar qualquer nome que você deseja. Se tiver usado o terminal Docker Quickstart para executar comandos do Docker, certifique-se de alterar novamente para a CLI usada para configurar a variável de sessão `KUBECONFIG`.
+7.  As implementações são usadas para gerenciar pods, que incluem instâncias conteinerizadas de um app. O comando a seguir implementa o app em um único pod. Para os propósitos deste tutorial, a implementação é denominada **hello-world-deployment**, mas é possível fornecer à implementação qualquer nome que você desejar.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -181,7 +160,7 @@ Para implementar o app:
 
     Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com recursos do Kubernetes.
 
-9.  Torne o app acessível ao mundo expondo a implementação como um serviço NodePort. Assim como você pode expor uma porta para um app Cloud Foundry, o NodePort que você expõe é a porta na qual o nó do trabalhador atende o tráfego.
+8.  Torne o app acessível ao mundo expondo a implementação como um serviço NodePort. Assim como você pode expor uma porta para um app Cloud Foundry, o NodePort que você expõe é a porta na qual o nó do trabalhador atende o tráfego.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -227,7 +206,7 @@ Para implementar o app:
     </tr>
     </tbody></table>
 
-10. Agora que todo o trabalho de implementação está pronto, é possível testar seu app em um navegador. Obtenha os detalhes para formar a URL.
+9. Agora que todo o trabalho de implementação está pronto, é possível testar seu app em um navegador. Obtenha os detalhes para formar a URL.
     1.  Obtenha informações sobre o serviço para ver qual NodePort foi designado.
 
         ```
@@ -268,11 +247,11 @@ Para implementar o app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
         ```
         {: screen}
 
-11. Abra um navegador e verifique o app com a URL a seguir: `http://<IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. Ao inserir essa URL em um navegador, é possível ver o texto a seguir.
+10. Abra um navegador e verifique o app com a URL a seguir: `http://<IP_address>:<NodePort>`. Com os valores de exemplo, a URL é `http://169.xx.xxx.xxx:30872`. Ao inserir essa URL em um navegador, é possível ver o texto a seguir.
 
     ```
     Hello world! Seu app está funcionando em um contêiner!
@@ -282,12 +261,12 @@ Para implementar o app:
     Para ver se o app está publicamente disponível, tente inseri-lo em um navegador em seu telefone celular.
     {: tip}
 
-12. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+11. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
     Se selecionar seu cluster na GUI do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
     {: tip}
 
-13. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
+12. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
 
 Parabéns! Você implementou sua primeira versão do app.
 
@@ -319,35 +298,21 @@ Conforme definido no script de configuração, o Kubernetes pode usar uma verifi
 
 2.  Se tiver iniciado uma nova sessão da CLI, efetue login e configure o contexto do cluster.
 
-3.  Construa e identifique a segunda versão do app localmente como uma imagem. Novamente, não esqueça o ponto (`.`) no final do comando.
+3.  Construa, identifique e envie por push o app como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}. Novamente, não esqueça o ponto (`.`) no final do comando.
 
-  ```
-  docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+      ```
+    {: pre}
 
-  Verifique se você vê a mensagem de êxito.
+    Verifique se você vê a mensagem de êxito.
 
-  ```
-  Successfully built <image_id>
-  ```
-  {: screen}
+    ```
+    Construído com êxito <image_ID> Registro identificado com êxito.<region>.bluemix.net/<namespace>/hello-world:1 O push refere-se a um repositório [registry.<region>.bluemix.net/<namespace>/hello-world] 29042bc0b00c: Enviado por push f31d9ee9db57: Enviado por push 33c64488a635: Pushed 0804854a4553: A camada já existe 6bd4a62f5178: A camada já existe 9dfa40a0da3b: A camada já existe 1: compilação: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 tamanho: 1576
+    ```
+    {: screen}
 
-4.  Envie por push a segunda versão da imagem em seu namespace de registro. Espere a imagem ser enviada por push antes de continuar para a próxima etapa.
-
-  ```
-  docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
-  ```
-  {: pre}
-
-  Saída de exemplo:
-
-  ```
-  O push refere-se a um repositório [registry.ng.bluemix.net/pr_firm/hello-world] ea2ded433ac8: Pushed 894eb973f4d3: Pushed 788906ca2c7e: Pushed 381c97ba7dc3: Pushed 604c78617f34: Pushed fa18e5ffd316: Pushed 0a5e2b2ddeaa: Pushed 53c779688d06: Pushed 60a0858edcd5: Pushed b6ca02dfe5e6: Pushed 1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405 43 size: 2398
-  ```
-  {: screen}
-
-5.  Abra o arquivo `healthcheck.yml`, no diretório `Lab 2`, com um editor de texto. Esse script de configuração combina algumas etapas da lição anterior para criar uma implementação e um serviço ao mesmo tempo. Os desenvolvedores de app da firma PR podem usar esses scripts quando atualizações são feitas ou para solucionar problemas ao recriar os pods.
+4.  Abra o arquivo `healthcheck.yml`, no diretório `Lab 2`, com um editor de texto. Esse script de configuração combina algumas etapas da lição anterior para criar uma implementação e um serviço ao mesmo tempo. Os desenvolvedores de app da firma PR podem usar esses scripts quando atualizações são feitas ou para solucionar problemas ao recriar os pods.
     1. Atualize os detalhes para a imagem em seu namespace de registro privado.
 
         ```
@@ -378,7 +343,7 @@ do que apenas uma instância.
 
     4.  Na seção **Serviço**, observe o `NodePort`. Em vez de gerar um NodePort aleatório como você fez na lição anterior, é possível especificar uma porta no intervalo 30000 - 32767. Esse exemplo usa 30072.
 
-6.  Altere novamente para a CLI que foi usada para configurar o contexto do cluster e execute o script de configuração. Quando a implementação e o serviço são criados, o app fica disponível para os usuários da firma PR verem.
+5.  Altere novamente para a CLI que foi usada para configurar o contexto do cluster e execute o script de configuração. Quando a implementação e o serviço são criados, o app fica disponível para os usuários da firma PR verem.
 
   ```
   kubectl apply -f healthcheck.yml
@@ -393,7 +358,7 @@ do que apenas uma instância.
   ```
   {: screen}
 
-7.  Agora que o trabalho de implementação está pronto, é possível abrir um navegador e efetuar check-out do app. Para formar a URL, tome o mesmo endereço IP público que você usou na lição anterior para seu nó do trabalhador e combine-o com o NodePort que foi especificado no script de configuração. Para obter o endereço IP público para o nó do trabalhador:
+6.  Agora que o trabalho de implementação está pronto, é possível abrir um navegador e efetuar check-out do app. Para formar a URL, tome o mesmo endereço IP público que você usou na lição anterior para seu nó do trabalhador e combine-o com o NodePort que foi especificado no script de configuração. Para obter o endereço IP público para o nó do trabalhador:
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -418,16 +383,25 @@ do que apenas uma instância.
   ```
   {: screen}
 
-8.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+7.  Verifique seu status do pod para monitorar o funcionamento de seu app no Kubernetes. É possível verificar o status na CLI ou na GUI do painel do Kubernetes.
 
-9. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Nessa guia, é possível atualizar continuamente e ver que a verificação de funcionamento está funcionando. Na seção **Pods**, é possível ver quantas vezes os pods são reiniciados quando os contêineres neles são recriados. Se acontecer de você capturar o erro a seguir no painel, esta mensagem indicará que a verificação de funcionamento capturou um problema. Aguarde alguns minutos e atualize novamente. Você verá o número de mudança de reinicializações para cada pod.
+    *  **Na CLI**: consulte o que está acontecendo com seus pods à medida que eles mudam o status.
+       ```
+       kubectl get pods -o wide -w
+       ```
+       {: pre}
 
-    ```
-    Liveness probe failed: HTTP probe failed with statuscode: 500
+    *  ** A partir da GUI **:
+
+       1.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
+       2.  Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Nessa guia, é possível atualizar continuamente e ver que a verificação de funcionamento está funcionando. Na seção **Pods**, é possível ver quantas vezes os pods são reiniciados quando os contêineres neles são recriados. Se acontecer de você capturar o erro a seguir no painel, esta mensagem indicará que a verificação de funcionamento capturou um problema. Aguarde alguns minutos e atualize novamente. Você verá o número de mudança de reinicializações para cada pod.
+
+       ```
+       Liveness probe failed: HTTP probe failed with statuscode: 500
     Back-off restarting failed docker container
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-    ```
-    {: screen}
+       ```
+       {: screen}
 
 Parabéns! A segunda versão do app foi implementada. Você teve que usar menos comandos,
 aprendeu como as verificações de funcionamento trabalham e editou uma implementação, o que é ótimo! O app Hello World passou no teste para a firma PR. Agora, é possível implementar um app mais útil para que a firma PR comece a analisar os press releases.
@@ -484,10 +458,10 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: pre}
 
-    2.  Construa e identifique a primeira parte do app localmente como uma imagem. Novamente, não esqueça o ponto (`.`) no final do comando. Se você estiver usando o terminal do Docker QuickStart para executar comandos do Docker, certifique-se de alternar as CLIs.
+    2.  Construa, identifique e envie por push o app `watson` como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}. Novamente, não esqueça o ponto (`.`) no final do comando.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -497,13 +471,6 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         Successfully built <image_id>
         ```
         {: screen}
-
-    3.  Envie por push a primeira parte do app como uma imagem em seu namespace de registro privado. Espere a imagem ser enviada por push antes de continuar para a próxima etapa.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson
-        ```
-        {: pre}
 
 4.  Construa a imagem de conversa do {{site.data.keyword.watson}}.
 
@@ -514,10 +481,10 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: pre}
 
-    2.  Construa e identifique a segunda parte do app localmente como uma imagem. Novamente, não esqueça o ponto (`.`) no final do comando.
+    2.  Construa, identifique e envie por push o app `watson-talk` como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}. Novamente, não esqueça o ponto (`.`) no final do comando.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -528,14 +495,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: screen}
 
-    3.  Envie por push a segunda parte do app como uma imagem em seu namespace de registro privado. Espere a imagem ser enviada por push antes de continuar para a próxima etapa.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson-talk
-        ```
-        {: pre}
-
-5.  Verifique se as imagens foram incluídas com êxito em seu namespace de registro. Se tiver usado o terminal Docker Quickstart para executar comandos do Docker, certifique-se de alterar novamente para a CLI usada para configurar a variável de sessão `KUBECONFIG`.
+5.  Verifique se as imagens foram incluídas com êxito em seu namespace de registro.
 
     ```
     imagens ibmcloud cr
@@ -730,5 +690,5 @@ service "watson-talk-service" deleted
 Agora que você conquistou o básico, é possível mover para atividades mais avançadas. Considere experimentar um dos seguintes:
 
 - Conclua um [laboratório mais complicado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) no repositório
-- [Escalar automaticamente seus apps](cs_app.html#app_scaling) com o {{site.data.keyword.containershort_notm}}
-- Explore os padrões de código de orquestração de contêiner no [developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- [Escalar automaticamente seus apps](cs_app.html#app_scaling) com o {{site.data.keyword.containerlong_notm}}
+- Explore os padrões de código de orquestração de contêiner no [IBM Developer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/technologies/container-orchestration/)

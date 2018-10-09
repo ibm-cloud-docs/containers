@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-08-06"
 
 您可以执行以下常规步骤来确保集群是最新的：
 - 每月检查可用安全性和操作系统补丁以[更新工作程序节点](cs_cli_reference.html#cs_worker_update)。
-- [更新集群](cs_cli_reference.html#cs_cluster_update)到 {{site.data.keyword.containershort_notm}} 的最新缺省 [Kubernetes 版本](cs_versions.html)
+- [更新集群](cs_cli_reference.html#cs_cluster_update)到 {{site.data.keyword.containerlong_notm}} 的最新缺省 [Kubernetes 版本](cs_versions.html)
 
 ## 调试集群
 {: #debug_clusters}
@@ -103,6 +103,9 @@ lastupdated: "2018-08-06"
  </table>
 
 
+**注**：[Kubernetes 主节点](cs_tech.html#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。**注**：在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
+
+
 <br />
 
 
@@ -130,11 +133,15 @@ lastupdated: "2018-08-06"
     <tbody>
   <tr>
       <td>Critical</td>
-      <td>工作程序节点可能由于许多原因而进入 Critical 状态：<ul><li>对工作程序节点启动了重新引导，但并未对工作程序节点执行封锁和放弃操作。重新引导工作程序节点可能会导致 <code>docker</code>、<code>kubelet</code>、<code>kube-proxy</code> 和 <code>calico</code> 中发生数据损坏。</li><li>部署到工作程序节点的 pod 不会对[内存 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) 和 [CPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) 使用资源限制。如果没有资源限制，那么 pod 可以使用所有可用资源，这样就没有资源可供其他 pod 在此工作程序节点上运行。这一过度落实工作负载的情况会导致工作程序节点失败。</li><li>在运行数百个或数千个容器一段时间后，<code>Docker</code>、<code>kubelet</code> 或 <code>calico</code> 进入了不可恢复的状态。</li><li>为工作程序节点设置了虚拟路由器设备，但虚拟路由器设备已停止运行并切断了工作程序节点与 Kubernetes 主节点之间的通信。</li><li> {{site.data.keyword.containershort_notm}} 或 IBM Cloud Infrastructure (SoftLayer) 中导致工作程序节点与 Kubernetes 主节点之间通信失败的当前网络问题。</li><li>工作程序节点的容量不足。检查工作程序节点的 <strong>Status</strong>，以查看它是显示 <strong>Out of disk</strong> 还是 <strong>Out of memory</strong>。如果工作程序节点的容量不足，请考虑减少工作程序节点上的工作负载，或者向集群添加工作程序节点来帮助对工作负载进行负载均衡。</li></ul> 在许多情况下，[重新装入](cs_cli_reference.html#cs_worker_reload)工作程序节点可以解决此问题。重新装入工作程序节点时，最新的[补丁版本](cs_versions.html#version_types)会应用于工作程序节点。主版本和次版本不会更改。在重新装入工作程序节点之前，请务必对工作程序节点执行封锁和放弃操作，以确保正常终止现有 pod 并将其重新安排到剩余的工作程序节点上。</br></br> 如果重新装入工作程序节点无法解决此问题，请转至下一步以继续对工作程序节点进行故障诊断。</br></br><strong>提示：</strong>可以[为工作程序节点配置运行状况检查并启用自动恢复](cs_health.html#autorecovery)。如果自动恢复根据配置的检查，检测到运行状况欠佳的工作程序节点，那么自动恢复会触发更正操作，例如在工作程序节点上重装操作系统。有关自动恢复的工作方式的更多信息，请参阅[自动恢复博客 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。</td>
+      <td>工作程序节点可能由于许多原因而进入 Critical 状态：<ul><li>对工作程序节点启动了重新引导，但并未对工作程序节点执行封锁和放弃操作。重新引导工作程序节点可能会导致 <code>containerd</code>、<code>kubelet</code>、<code>kube-proxy</code> 和 <code>calico</code> 中发生数据损坏。</li><li>部署到工作程序节点的 pod 不会对[内存 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) 和 [CPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) 使用资源限制。如果没有资源限制，那么 pod 可以使用所有可用资源，这样就没有资源可供其他 pod 在此工作程序节点上运行。这一过度落实工作负载的情况会导致工作程序节点失败。</li><li>在运行数百个或数千个容器一段时间后，<code>containerd</code>、<code>kubelet</code> 或 <code>calico</code> 进入了不可恢复的状态。</li><li>为工作程序节点设置了虚拟路由器设备，但虚拟路由器设备已停止运行并切断了工作程序节点与 Kubernetes 主节点之间的通信。</li><li> {{site.data.keyword.containerlong_notm}} 或 IBM Cloud Infrastructure (SoftLayer) 中导致工作程序节点与 Kubernetes 主节点之间通信失败的当前网络问题。</li><li>工作程序节点的容量不足。检查工作程序节点的 <strong>Status</strong>，以查看它是显示 <strong>Out of disk</strong> 还是 <strong>Out of memory</strong>。如果工作程序节点的容量不足，请考虑减少工作程序节点上的工作负载，或者向集群添加工作程序节点来帮助对工作负载进行负载均衡。</li></ul> 在许多情况下，[重新装入](cs_cli_reference.html#cs_worker_reload)工作程序节点可以解决此问题。重新装入工作程序节点时，最新的[补丁版本](cs_versions.html#version_types)会应用于工作程序节点。主版本和次版本不会更改。在重新装入工作程序节点之前，请务必对工作程序节点执行封锁和放弃操作，以确保正常终止现有 pod 并将其重新安排到剩余的工作程序节点上。</br></br> 如果重新装入工作程序节点无法解决此问题，请转至下一步以继续对工作程序节点进行故障诊断。</br></br><strong>提示：</strong>可以[为工作程序节点配置运行状况检查并启用自动恢复](cs_health.html#autorecovery)。如果自动恢复根据配置的检查，检测到运行状况欠佳的工作程序节点，那么自动恢复会触发更正操作，例如在工作程序节点上重装操作系统。有关自动恢复的工作方式的更多信息，请参阅[自动恢复博客 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。</td>
+     </tr>
+     <tr>
+     <td>已部署</td>
+     <td>已成功将更新部署到工作程序节点。在部署更新后，{{site.data.keyword.containerlong_notm}} 在工作程序节点上启动运行状况检查。在运行状况检查成功后，工作程序节点进入 <code>Normal</code> 状态。<code>Deployed</code> 状态的工作程序节点通常已准备好接收工作负载，可通过运行 <code>kubectl get nodes</code> 并确认状态显示 <code>Normal</code> 进行检查。</td>
      </tr>
       <tr>
         <td>Deploying</td>
-        <td>更新工作程序节点的 Kubernetes 版本时，将重新部署工作程序节点以安装更新。如果工作程序节点长时间卡在此状态，请继续执行下一步，以查看在部署期间是否发生了问题。</td>
+        <td>更新工作程序节点的 Kubernetes 版本时，将重新部署工作程序节点以安装更新。如果重新装入或重新引导工作程序节点，那么将重新部署工作程序节点以自动安装最新的补丁版本。如果工作程序节点长时间卡在此状态，请继续执行下一步，以查看在部署期间是否发生了问题。</td>
      </tr>
         <tr>
         <td>Normal</td>
@@ -162,7 +169,7 @@ lastupdated: "2018-08-06"
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
+       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containerlong_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -203,8 +210,13 @@ lastupdated: "2018-08-06"
         <td>您的 IBM Cloud Infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下订单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
-        <td>所选的 VLAN 与数据中心内没有足够空间来供应工作程序节点的 pod 相关联。有以下选项可供选择：<ul><li>使用其他数据中心来供应工作程序节点。运行 <code>ibmcloud ks zones</code> 以列出可用的数据中心。<li>如果您有与数据中心内另一个 pod 相关联的现有公用和专用 VLAN 对，请改为使用此 VLAN 对。<li>请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</ul></td>
+      <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。<br><br>
+      {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
+      <td>选择的专区可能没有足够的基础架构容量来供应工作程序节点。或者，您可能已超出 IBM Cloud infrastructure (SoftLayer) 帐户中的限制。要解决此问题，请尝试以下某个选项：<ul><li>专区中的基础架构资源可用性可能经常波动。请稍等几分钟，然后重试。</li>
+      <li>对于单专区集群，请在另一个专区中创建集群。对于多专区集群，请将专区添加到集群。</li>
+      <li>在 IBM Cloud infrastructure (SoftLayer) 帐户中，为工作程序节点指定不同的公共和专用 VLAN 对。对于位于工作程序池中的工作程序节点，您可以使用 <code>ibmcloud ks zone-network-set</code> [命令](cs_cli_reference.html#cs_zone_network_set)。</li>
+      <li>请联系 IBM Cloud infrastructure (SoftLayer) 帐户管理员以验证未超过帐户限制，例如，全球配额。</li>
+      <li>开具 [IBM Cloud infrastructure (SoftLayer) 支持凭单](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基础架构异常：无法获取标识为 &lt;vlan id&gt; 的网络 VLAN。</td>
@@ -218,11 +230,11 @@ lastupdated: "2018-08-06"
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
 </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</br></br>
-        无法验证 IBM Cloud 基础架构凭证。</td>
+无法验证 {{site.data.keyword.Bluemix_notm}} infrastructure 凭证。</td>
         <td>您可能没有必需的许可权在 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中执行操作，或者使用的基础架构凭证不正确。请参阅[配置对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_troubleshoot_clusters.html#cs_credentials)。</td>
       </tr>
       <tr>
-       <td>工作程序无法与 {{site.data.keyword.containershort_notm}} 服务器通信。请验证防火墙设置是否允许来自此工作程序的流量。
+       <td>工作程序无法与 {{site.data.keyword.containerlong_notm}} 服务器通信。请验证防火墙设置是否允许来自此工作程序的流量。
        <td><ul><li>如果您有防火墙，请[配置防火墙设置以允许出局流量流至相应的端口和 IP 地址](cs_firewall.html#firewall_outbound)。</li><li>通过运行 `ibmcloud ks workers &lt;mycluster&gt;` 来检查集群是否没有公共 IP。如果未列出任何公共 IP，说明集群仅具有专用 VLAN。<ul><li>如果希望集群仅具有专用 VLAN，请设置 [VLAN 连接](cs_network_planning.html#private_vlan)和[防火墙](cs_firewall.html#firewall_outbound)。</li><li>如果希望集群具有公共 IP，请[添加新的工作程序节点](cs_cli_reference.html#cs_worker_add)（具有公用和专用 VLAN）。</li></ul></li></ul></td>
      </tr>
       <tr>
@@ -289,15 +301,17 @@ lastupdated: "2018-08-06"
 集群仍然有问题吗？
 {: shortdesc}
 
+-  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
+
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
 
 如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
 
-    -   如果您有关于使用 {{site.data.keyword.containershort_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
-    -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
+    -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
+    -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。

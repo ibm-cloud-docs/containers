@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ lastupdated: "2018-08-06"
 ## 了解集群和应用程序日志转发
 {: #logging}
 
-持续监视和日志记录是检测对集群的攻击，并在发生问题时对问题进行故障诊断的关键。通过持续监视集群，可以更好地了解集群容量以及可供应用程序使用的资源的可用性。这允许您相应地做好准备以保护应用程序免受停机时间的影响。要配置日志记录，必须使用 {{site.data.keyword.containershort_notm}} 中的标准 Kubernetes 集群。
+持续监视和日志记录是检测对集群的攻击，并在发生问题时对问题进行故障诊断的关键。通过持续监视集群，可以更好地了解集群容量以及可供应用程序使用的资源的可用性。这允许您相应地做好准备以保护应用程序免受停机时间的影响。要配置日志记录，必须使用 {{site.data.keyword.containerlong_notm}} 中的标准 Kubernetes 集群。
 {: shortdesc}
 
 
 **IBM 会监视集群吗？**
-每个 Kubernetes 主节点都由 IBM 持续监视。{{site.data.keyword.containershort_notm}} 会自动扫描部署了 Kubernetes 主节点的每个节点，以确定是否有在 Kubernetes 中找到的漏洞，以及特定于操作系统的安全修订。如果找到了漏洞，{{site.data.keyword.containershort_notm}} 会自动代表用户应用修订并解决漏洞，以确保保护主节点。您负责监视和分析集群其余部分的日志。
+每个 Kubernetes 主节点都由 IBM 持续监视。{{site.data.keyword.containerlong_notm}} 会自动扫描部署了 Kubernetes 主节点的每个节点，以确定是否有在 Kubernetes 中找到的漏洞，以及特定于操作系统的安全修订。如果找到了漏洞，{{site.data.keyword.containerlong_notm}} 会自动代表用户应用修订并解决漏洞，以确保保护主节点。您负责监视和分析集群其余部分的日志。
 
 **可以为哪些源配置日志记录？**
 
@@ -136,13 +136,13 @@ lastupdated: "2018-08-06"
 ## 配置日志转发
 {: #configuring}
 
-可以通过 GUI 或 CLI 为 {{site.data.keyword.containershort_notm}} 配置日志记录。
+可以通过 GUI 或 CLI 为 {{site.data.keyword.containerlong_notm}} 配置日志记录。
 {: shortdesc}
 
 ### 使用 GUI 启用日志转发
 {: #enable-forwarding-ui}
 
-可以在 {{site.data.keyword.containershort_notm}} 仪表板中配置日志转发。完成此过程可能需要几分钟时间，因此，如果您未立即看到日志，请尝试等待几分钟，然后再检查。
+可以在 {{site.data.keyword.containerlong_notm}} 仪表板中配置日志转发。完成此过程可能需要几分钟时间，因此，如果您未立即看到日志，请尝试等待几分钟，然后再检查。
 
 要在帐户级别、针对特定容器名称空间或针对应用程序日志记录创建配置，请使用 CLI。
 {: tip}
@@ -162,8 +162,8 @@ lastupdated: "2018-08-06"
 
 **将日志转发到 IBM**
 
-1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containershort_notm}} API 密钥所有者都需要该空间的“管理员”、“开发者”或“审计员”[许可权](cs_users.html#access_policies)。
-  * 如果您不知道谁是 {{site.data.keyword.containershort_notm}} API 密钥所有者，请运行以下命令。
+1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containerlong_notm}} API 密钥所有者都需要该空间的“管理员”、“开发者”或“审计员”[许可权](cs_users.html#access_policies)。
+  * 如果您不知道谁是 {{site.data.keyword.containerlong_notm}} API 密钥所有者，请运行以下命令。
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
@@ -216,10 +216,10 @@ lastupdated: "2018-08-06"
 </br>
 
 
-**通过 `udp` 或 `tcp` 协议将日志转发到自己的服务器**
+**通过 `udp` 或 `tcp` 协议将日志转发到您自己的服务器**
 
 1. 要将日志转发到 syslog，请通过以下两种方式之一来设置接受 syslog 协议的服务器：
-  * 设置和管理自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
+  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
 
   * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在 Kubernetes 集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。
 
@@ -239,13 +239,13 @@ lastupdated: "2018-08-06"
 </br>
 
 
-**通过 `tls` 协议将日志转发到自己的服务器**
+**通过 `tls` 协议将日志转发到您自己的服务器**
 
 以下步骤是常规指示信息。在生产环境中使用容器之前，请确保满足所需的任何安全需求。
 {: tip}
 
 1. 通过以下两种方式之一来设置接受 syslog 协议的服务器：
-  * 设置和管理自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
+  * 设置和管理您自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
 
   * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在 Kubernetes 集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。您将需要注入相关认证中心和服务器端证书，并更新 `syslog.conf` 以在服务器上启用 `tls`。
 
@@ -326,7 +326,7 @@ lastupdated: "2018-08-06"
 ### 查看日志
 {: #view_logs}
 
-要查看集群和容器的日志，可以使用标准的 Kubernetes 和 Docker 日志记录功能。
+要查看集群和容器的日志，可以使用标准的 Kubernetes 和容器运行时日志记录功能。
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -335,7 +335,7 @@ lastupdated: "2018-08-06"
 可以通过 Kibana 仪表板查看转发到 {{site.data.keyword.loganalysislong_notm}} 的日志。
 {: shortdesc}
 
-如果使用缺省值来创建配置文件，那么可以在创建集群的帐户或者组织和空间中找到日志。如果在配置文件中指定了组织和空间，那么可以在该空间中找到日志。有关日志记录的更多信息，请参阅 [{{site.data.keyword.containershort_notm}} 的日志记录](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+如果使用缺省值来创建配置文件，那么可以在创建集群的帐户或者组织和空间中找到日志。如果在配置文件中指定了组织和空间，那么可以在该空间中找到日志。有关日志记录的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的日志记录](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
 
 要访问 Kibana 仪表板，请转至下列其中一个 URL，然后选择在其中配置了集群日志转发的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。
 - 美国南部和美国东部：https://logging.ng.bluemix.net
@@ -347,9 +347,9 @@ lastupdated: "2018-08-06"
 
 </br>
 
-**Docker 日志**
+**容器日志**
 
-可以利用内置 Docker 日志记录功能来查看标准 STDOUT 和 STDERR 输出流上的活动。有关更多信息，请参阅[查看在 Kubernetes 集群中运行的容器的容器日志](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+可以利用内置容器运行时日志记录功能来查看标准 STDOUT 和 STDERR 输出流上的活动。有关更多信息，请参阅[查看在 Kubernetes 集群中运行的容器的容器日志](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
 
 <br />
 
@@ -462,7 +462,7 @@ Kubernetes 会自动审计通过 API 服务器传递的任何事件。可以将�
 
 **开始之前**
 
-1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containershort_notm}} 密钥所有者需要该空间的“管理员”、“开发者”或“审计员”许可权。
+1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containerlong_notm}} 密钥所有者需要该空间的“管理员”、“开发者”或“审计员”许可权。
 
 2. [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为要从中收集 API 服务器审计日志的集群。**注**：如果使用的是 Dedicated 帐户，那么必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
 
@@ -629,21 +629,21 @@ Kubernetes 会自动审计通过 API 服务器传递的任何事件。可以将�
 ## 查看度量值
 {: #view_metrics}
 
-度量值可帮助您监视集群的运行状况和性能。您可以使用标准 Kubernetes 和 Docker 功能来监视集群和应用程序的运行状况。
+度量值可帮助您监视集群的运行状况和性能。您可以使用标准 Kubernetes 和容器运行时功能来监视集群和应用程序的运行状况。
 **注**：仅标准集群支持监视功能。
 {:shortdesc}
 
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}} 中的集群详细信息页面</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 提供了有关集群的运行状况和容量以及集群资源使用情况的信息。可以使用此 GUI 通过 {{site.data.keyword.Bluemix_notm}} 服务绑定来向外扩展集群、使用持久性存储器以及向集群添加更多功能。要查看集群详细信息页面，请转至 **{{site.data.keyword.Bluemix_notm}} 仪表板**，然后选择集群。</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} 提供了有关集群的运行状况和容量以及集群资源使用情况的信息。可以使用此 GUI 通过 {{site.data.keyword.Bluemix_notm}} 服务绑定来向外扩展集群、使用持久性存储器以及向集群添加更多功能。要查看集群详细信息页面，请转至 **{{site.data.keyword.Bluemix_notm}} 仪表板**，然后选择集群。</dd>
   <dt>Kubernetes 仪表板</dt>
-    <dd>Kubernetes 仪表板是一个管理 Web 界面，可以在其中查看工作程序节点的运行状况，查找 Kubernetes 资源，部署容器化应用程序，以及使用日志记录和监视信息对应用程序进行故障诊断。有关如何访问 Kubernetes 仪表板的更多信息，请参阅[启动 {{site.data.keyword.containershort_notm}} 的 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</dd>
+    <dd>Kubernetes 仪表板是一个管理 Web 界面，可以在其中查看工作程序节点的运行状况，查找 Kubernetes 资源，部署容器化应用程序，以及使用日志记录和监视信息对应用程序进行故障诊断。有关如何访问 Kubernetes 仪表板的更多信息，请参阅[启动 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>标准集群的度量值位于创建 Kubernetes 集群时登录到的 {{site.data.keyword.Bluemix_notm}} 帐户中。如果在创建集群时指定了 {{site.data.keyword.Bluemix_notm}} 空间，那么度量值将位于该空间中。将为集群中部署的所有容器自动收集容器度量值。这些度量值会通过 Grafana 发送并使其可用。有关度量值的更多信息，请参阅[监视 {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)。</p>
+    <dd><p>标准集群的度量值位于创建 Kubernetes 集群时登录到的 {{site.data.keyword.Bluemix_notm}} 帐户中。如果在创建集群时指定了 {{site.data.keyword.Bluemix_notm}} 空间，那么度量值将位于该空间中。将为集群中部署的所有容器自动收集容器度量值。这些度量值会通过 Grafana 发送并使其可用。有关度量值的更多信息，请参阅[监视 {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)。</p>
     <p>要访问 Grafana 仪表板，请转至以下某个 URL，然后选择在其中已创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。</p> <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为监视流量打开的 IP 地址</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}} 区域</th>
+        <th>{{site.data.keyword.containerlong_notm}} 区域</th>
         <th>监视地址</th>
         <th>监视 IP 地址</th>
         </thead>
@@ -675,7 +675,7 @@ Kubernetes 会自动审计通过 API 服务器传递的任何事件。可以将�
 可以配置其他工具来执行更多监视功能。
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计。该工具基于 Kubernetes 日志记录信息来检索有关集群、工作程序节点和部署运行状况的详细信息。有关设置信息，请参阅[将服务与 {{site.data.keyword.containershort_notm}} 集成](cs_integrations.html#integrations)。</dd>
+    <dd>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计。该工具基于 Kubernetes 日志记录信息来检索有关集群、工作程序节点和部署运行状况的详细信息。有关设置信息，请参阅[将服务与 {{site.data.keyword.containerlong_notm}} 集成](cs_integrations.html#integrations)。</dd>
 </dl>
 
 <br />

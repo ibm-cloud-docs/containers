@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-09"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -27,13 +27,15 @@ Verwenden Sie diese Befehle, um Kubernetes-Cluster im {{site.data.keyword.contai
 
 Informationen zum Installieren des CLI-Plug-ins finden Sie im Abschnitt [CLI installieren](cs_cli_install.html#cs_cli_install_steps).
 
+Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
+
 Suchen Sie nach `ibmcloud cr`-Befehlen? Werfen Sie einen Blick in die [{{site.data.keyword.registryshort_notm}}-CLI-Referenz ](/docs/cli/plugins/registry/index.html). Suchen Sie nach `kubectl`-Befehlen? Werfen Sie einen Blick in die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
 ## ibmcloud ks-Befehle
 {: #cs_commands}
 
-**Tipp:** Sie können die Version des {{site.data.keyword.containershort_notm}}-Plug-ins abrufen, indem Sie den folgenden Befehl ausführen.
+**Tipp:** Sie können die Version des {{site.data.keyword.containerlong_notm}}-Plug-ins abrufen, indem Sie den folgenden Befehl ausführen.
 
 ```
 ibmcloud plugin list
@@ -177,6 +179,12 @@ ibmcloud plugin list
     <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
+  </tr>
+  <tr>
+    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -329,7 +337,7 @@ ibmcloud plugin list
 ### ibmcloud ks api --endpoint ENDPUNKT [--insecure][--skip-ssl-validation] [--api-version WERT][-s]
 {: #cs_api}
 
-Legen Sie den API-Endpunkt als ziel für {{site.data.keyword.containershort_notm}} fest. Wenn Sie keinen Endpunkt angeben, können Sie Informationen zu dem aktuellen Endpunkt anzeigen, der als Ziel angegeben wurde.
+Legen Sie den API-Endpunkt als ziel für {{site.data.keyword.containerlong_notm}} fest. Wenn Sie keinen Endpunkt angeben, können Sie Informationen zu dem aktuellen Endpunkt anzeigen, der als Ziel angegeben wurde.
 
 Zwischen Regionen wechseln? Verwenden Sie stattdessen den [Befehl `ibmcloud ks region-set`](#cs_region-set).
 {: tip}
@@ -338,7 +346,7 @@ Zwischen Regionen wechseln? Verwenden Sie stattdessen den [Befehl `ibmcloud ks r
 
    <dl>
    <dt><code>--endpoint <em>ENDPUNKT</em></code></dt>
-   <dd>Der {{site.data.keyword.containershort_notm}}-API-Endpunkt. Beachten Sie, dass sich dieser Endpunkt von {{site.data.keyword.Bluemix_notm}}-Endpunkten unterscheidet. Dieser Wert ist zum Festlegen der API-Endpunkte erforderlich. Folgende Werte sind zulässig:<ul>
+   <dd>Der {{site.data.keyword.containerlong_notm}}-API-Endpunkt. Beachten Sie, dass sich dieser Endpunkt von {{site.data.keyword.Bluemix_notm}}-Endpunkten unterscheidet. Dieser Wert ist zum Festlegen der API-Endpunkte erforderlich. Folgende Werte sind zulässig:<ul>
    <li>Globaler Endpunkt: https://containers.bluemix.net</li>
    <li>Endpunkt für Asien-Pazifik (Norden): https://ap-north.containers.bluemix.net</li>
    <li>Endpunkt für Asien-Pazifik (Süden): https://ap-south.containers.bluemix.net</li>
@@ -380,13 +388,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info --cluster CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containershort_notm}}-Region an.
+Zeigen Sie den Namen und die E-Mail-Adresse für den Eigner des IAM-API-Schlüssels in einer {{site.data.keyword.containerlong_notm}}-Region an.
 
-Der IAM-API-Schlüssel (IAM, Identity and Access Management) wird automatisch für eine Region festgelegt, wenn die erste Aktion ausgeführt wird, für die die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie ausgeführt werden muss. Zum Beispiel erstellt einer Ihrer Benutzer mit Administratorberechtigung den ersten Cluster in der Region `Vereinigte Staaten (Süden)`. Dadurch wird der IAM-API-Schlüssel für diesen Benutzer in dem Konto für diese Region gespeichert. Der API-Schlüssel wird verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, z. B. neue Workerknoten oder VLANs.
+Der IAM-API-Schlüssel (IAM, Identity and Access Management) wird automatisch für eine Region festgelegt, wenn die erste Aktion ausgeführt wird, für die die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie ausgeführt werden muss. Zum Beispiel erstellt einer Ihrer Benutzer mit Administratorberechtigung den ersten Cluster in der Region `Vereinigte Staaten (Süden)`. Dadurch wird der IAM-API-Schlüssel für diesen Benutzer in dem Konto für diese Region gespeichert. Der API-Schlüssel wird verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, z. B. neue Workerknoten oder VLANs.
 
-Wenn ein anderer Benutzer eine Aktion in dieser Region ausführt, die eine Interaktion mit dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) erfordert, wie z. B. die Erstellung eines neuen Clusters oder das erneute Laden eines Workerknotens, wird der gespeicherte API-Schlüssel verwendet, um festzustellen, ob ausreichende Berechtigungen vorhanden sind, um diese Aktion auszuführen. Um sicherzustellen, dass infrastrukturbezogene Aktionen in Ihrem Cluster erfolgreich ausgeführt werden können, weisen Sie Ihre {{site.data.keyword.containershort_notm}}-Benutzer mit Administratorberechtigung der Infrastrukturzugriffsrichtlinie **Superuser** zu. Weitere Informationen finden unter [Benutzerzugriff verwalten](cs_users.html#infra_access).
+Wenn ein anderer Benutzer eine Aktion in dieser Region ausführt, die eine Interaktion mit dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) erfordert, wie z. B. die Erstellung eines neuen Clusters oder das erneute Laden eines Workerknotens, wird der gespeicherte API-Schlüssel verwendet, um festzustellen, ob ausreichende Berechtigungen vorhanden sind, um diese Aktion auszuführen. Um sicherzustellen, dass infrastrukturbezogene Aktionen in Ihrem Cluster erfolgreich ausgeführt werden können, weisen Sie Ihre {{site.data.keyword.containerlong_notm}}-Benutzer mit Administratorberechtigung der Infrastrukturzugriffsrichtlinie **Superuser** zu. Weitere Informationen finden unter [Benutzerzugriff verwalten](cs_users.html#infra_access).
 
-Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies tun, indem Sie den Befehl [ibmcloud ks api-key-reset](#cs_api_key_reset) ausführen. Dieser Befehl erfordert die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
+Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies tun, indem Sie den Befehl [ibmcloud ks api-key-reset](#cs_api_key_reset) ausführen. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
 
 **Tipp:** Der API-Schlüssel, der in diesem Befehl zurückgegeben wird, wird möglicherweise nicht verwendet, wenn die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) manuell mithilfe des Befehls [ibmcloud ks credentials-set](#cs_credentials_set) festgelegt wurden.
 
@@ -415,11 +423,11 @@ Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der fü
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containershort_notm}}-Region.
+Ersetzen Sie den aktuellen IAM-API-Schlüssel in einer {{site.data.keyword.containerlong_notm}}-Region.
 
-Dieser Befehl erfordert die {{site.data.keyword.containershort_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto. Der IAM-API-Schlüssel ist erforderlich, um Infrastruktur aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen. Einmal gespeichert, wird der API-Schlüssel unabhängig vom Benutzer, der diesen Befehl ausführt, für jede Aktion in einer Region verwendet, die Infrastrukturberechtigungen erfordert. Weitere Informationen zur Funktionsweise von IAM-API-Schlüsseln finden Sie im Abschnitt zum [Befehl `ibmcloud ks api-key-info`](#cs_api_key_info).
+Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto. Der IAM-API-Schlüssel ist erforderlich, um Infrastruktur aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen. Einmal gespeichert, wird der API-Schlüssel unabhängig vom Benutzer, der diesen Befehl ausführt, für jede Aktion in einer Region verwendet, die Infrastrukturberechtigungen erfordert. Weitere Informationen zur Funktionsweise von IAM-API-Schlüsseln finden Sie im Abschnitt zum [Befehl `ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Wichtig** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, der diesen Befehl ausführt, über die erforderlichen Berechtigungen für [{{site.data.keyword.containershort_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt.](cs_users.html#users).
+**Wichtig** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, der diesen Befehl ausführt, über die erforderlichen Berechtigungen für [{{site.data.keyword.containerlong_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt.](cs_users.html#users).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -572,13 +580,13 @@ Anzeigen einer Liste der unterstützten Befehle und Parameter.
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-Initialisieren des {{site.data.keyword.containershort_notm}}-Plug-ins oder Angeben der Region, in der Sie Kubernetes-Cluster erstellen oder darauf zugreifen möchten.
+Initialisieren des {{site.data.keyword.containerlong_notm}}-Plug-ins oder Angeben der Region, in der Sie Kubernetes-Cluster erstellen oder darauf zugreifen möchten.
 
 <strong>Befehlsoptionen</strong>:
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>Der zu verwendende {{site.data.keyword.containershort_notm}}-API-Endpunkt.  Dieser Wert ist optional. [Zeigen Sie die verfügbaren API-Endpunktwerte an.](cs_regions.html#container_regions)</dd>
+   <dd>Der zu verwendende {{site.data.keyword.containerlong_notm}}-API-Endpunkt.  Dieser Wert ist optional. [Zeigen Sie die verfügbaren API-Endpunktwerte an.](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Lässt eine unsichere HTTP-Verbindung zu.</dd>
@@ -698,8 +706,7 @@ trusted: <em>true</em>
     </tr>
     <tr>
     <td><code><em>zone</em></code></td>
-    <td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der der Cluster erstellt werden soll. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.
-</td>
+    <td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der der Cluster erstellt werden soll. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen. </td>
      </tr>
      <tr>
      <td><code><em>kein_teilnetz</em></code></td>
@@ -707,7 +714,7 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>maschinentyp</em></code></td>
-     <td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types). </td>
+     <td>Ersetzen Sie <code><em>&lt;maschinentyp&gt;</em></code> durch den Maschinentyp, auf dem Sie Ihre Workerknoten bereitstellen möchten. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-type`](cs_cli_reference.html#cs_machine_types).</td>
      </tr>
      <tr>
      <td><code><em>privates_vlan</em></code></td>
@@ -793,7 +800,8 @@ die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten.  Die
 
 <p>Führen Sie <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> aus, um herauszufinden, ob Sie bereits über ein öffentliches VLAN für einen bestimmten Standort verfügen, oder um den Namen eines vorhandenen öffentlichen VLANs zu erfahren.</p></dd>
 
-
+<dt><code>--private-only </code></dt>
+  <dd>Verwenden Sie diese Option, um zu verhindern, dass ein öffentliches VLAN erstellt wird. Dieser Wert ist nur erforderlich, wenn Sie das Flag `--private-vlan` angeben und das Flag `--public-vlan` nicht einschließen.  **Hinweis**: Wenn Sie mit einem ausschließlich privaten Cluster (private-only) arbeiten möchten, müssen sie eine Gateway-Appliance für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie im Abschnitt [Nur private externe Netze für private VLAN-Konfiguration planen](cs_network_planning.html#private_vlan).</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>Die Anzahl von Workerknoten, die Sie in Ihrem Cluster bereitstellen wollen. Wenn Sie diese Option nicht angeben, wird ein Cluster mit einem Workerknoten erstellt. Dieser Wert ist für Standardcluster optional und steht für kostenlose Cluster nicht zur Verfügung.
@@ -908,7 +916,7 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
 **Beispielausgabe**:
 
   ```
-  Name:        mein_cluster
+  Name:        my_cluster
   ID:          abc1234567
   State:       normal
   Trust ready: false
@@ -920,7 +928,7 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -1031,7 +1039,7 @@ Anzeigen einer Liste der Cluster in Ihrer Organisation.
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-Anzeigen einer Liste der Kubernetes-Versionen, die in {{site.data.keyword.containershort_notm}} unterstützt werden. Aktualisieren Sie den [Cluster-Master](#cs_cluster_update) und die [Workerknoten](cs_cli_reference.html#cs_worker_update) auf die Standardversion für die aktuellen und stabilen Leistungsmerkmale.
+Anzeigen einer Liste der Kubernetes-Versionen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden. Aktualisieren Sie den [Cluster-Master](#cs_cluster_update) und die [Workerknoten](cs_cli_reference.html#cs_worker_update) auf die Standardversion für die aktuellen und stabilen Leistungsmerkmale.
 
 **Befehlsoptionen**:
 
@@ -1163,11 +1171,11 @@ Nachdem Sie [den Container-Scanner installiert haben](/docs/services/va/va_index
 <dl>
 <dt><code>--container CONTAINER-ID</code></dt>
 <dd><p>Die ID des Containers. Dieser Wert ist erforderlich.</p>
-<p>Gehen Sie wie folgt vor, um nach der ID Ihres Containers zu suchen:<ol><li>[Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).</li><li>Listen Sie Ihre Pods auf, indem Sie `kubectl get pods` ausführen.</li><li>Suchen Sie nach dem Feld **Container ID** in der Ausgabe des Befehls `kubectl describe pod <pod_name>`. Beispiel: `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Entfernen Sie das Präfix `docker://` aus der ID, bevor Sie die Container-ID für den Befehl `ibmcloud ks va` verwenden. Beispiel: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>Gehen Sie wie folgt vor, um nach der ID Ihres Containers zu suchen:<ol><li>[Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).</li><li>Listen Sie Ihre Pods auf, indem Sie `kubectl get pods` ausführen.</li><li>Suchen Sie nach dem Feld **Container ID** in der Ausgabe des Befehls `kubectl describe pod <pod_name>`. Beispiel: `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Entfernen Sie das Präfix `containerd://` aus der ID, bevor Sie die Container-ID für den Befehl `ibmcloud ks va` verwenden. Beispiel: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Erweitern Sie die Befehlsausgabe, um mehr Korrekturinformationen für anfällige Pakete anzuzeigen. Dieser Wert ist optional.</p>
-<p>Standardmäßig enthalten die Scanergebnisse die ID, den Richtliniestatus, die betroffenen Pakete und einen Lösungsvorschlag. Mit dem Flag `--extended` werden Informationen wie die Zusammenfassung, der Sicherheitshinweis für Anbieter und der Link zum offiziellen Hinweis hinzugefügt.</p></dd>
+<p>Standardmäßig enthalten die Scanergebnisse die ID, den Richtlinienstatus, die betroffenen Pakete und einen Lösungsvorschlag. Mit dem Flag `--extended` werden Informationen wie die Zusammenfassung, der Sicherheitshinweis für Anbieter und der Link zum offiziellen Hinweis hinzugefügt.</p></dd>
 
 <dt><code>--vulnerabilities</code></dt>
 <dd>Beschränken Sie die Befehlsausgabe so, dass nur Paketschwachstellen angezeigt werden. Dieser Wert ist optional. Sie können dieses Flag nicht verwenden, wenn Sie das Flag `--configuration-issues` verwenden.</dd>
@@ -1233,7 +1241,7 @@ Sie können vorhandene portierbare öffentliche oder private Teilnetze von Ihrem
 **Hinweis:**
 * Portierbare öffentliche IP-Adressen werden monatlich berechnet. Wenn Sie nach der Bereitstellung Ihres Clusters portierbare öffentliche IP-Adressen entfernen, müssen Sie trotzdem die monatliche Gebühr bezahlen, auch wenn sie sie nur über einen kurzen Zeitraum genutzt haben.
 * Wenn Sie ein Teilnetz in einem Cluster verfügbar machen, werden IP-Adressen dieses Teilnetzes zum Zweck von Clusternetzen verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
 * Um die Kommunikation zwischen Workern, die sich in verschiedenen Teilnetzen im selben VLAN befinden, zu aktivieren, müssen Sie [die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren](cs_subnets.html#subnet-routing).
 
 <strong>Befehlsoptionen</strong>:
@@ -1261,12 +1269,12 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 ### ibmcloud ks cluster-subnet-create --cluster CLUSTER --size GRÖSSE --vlan VLAN-ID [-s]
 {: #cs_cluster_subnet_create}
 
-Erstellung eines Teilnetzes in einem Konto der IBM Cloud-Infrastruktur (SoftLayer) und Zurverfügungstellung dieses Teilnetzes für einen angegebenen Cluster in {{site.data.keyword.containershort_notm}}.
+Erstellung eines Teilnetzes in einem Konto der IBM Cloud-Infrastruktur (SoftLayer) und Zurverfügungstellung dieses Teilnetzes für einen angegebenen Cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Hinweis:**
 * Wenn Sie ein Teilnetz in einem Cluster verfügbar machen, werden IP-Adressen dieses Teilnetzes zum Zweck von Clusternetzen verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
-* Um die Kommunikation zwischen Workern, die sich in verschiedenen Teilnetzen im selben VLAN befinden, zu aktivieren, müssen Sie [die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
+* Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 
 <strong>Befehlsoptionen</strong>:
 
@@ -1295,14 +1303,14 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 ### ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr TEILNETZ-CIDR --private-vlan PRIVATES_VLAN
 {: #cs_cluster_user_subnet_add}
 
-Verwenden Sie das eigene private Teilnetz in Ihren {{site.data.keyword.containershort_notm}}-Clustern.
+Verwenden Sie das eigene private Teilnetz in Ihren {{site.data.keyword.containerlong_notm}}-Clustern.
 
 Dieses private Teilnetz wird nicht von der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Deshalb müssen Sie das gesamte Routing für ein- und ausgehenden Netzverkehr für das Teilnetz konfigurieren. Um ein Teilnetz der IBM Cloud-Infrastruktur (SoftLayer) hinzuzufügen, verwenden Sie den [Befehl `ibmcloud ks cluster-subnet-add`](#cs_cluster_subnet_add).
 
 **Hinweis**:
 * Wenn Sie ein privates Benutzerteilnetz zu einem Cluster hinzufügen, werden die IP-Adressen dieses Teilnetzes für private Lastausgleichsfunktionen im Cluster verwendet. Vermeiden Sie IP-Adresskonflikte, indem Sie ein Teilnetz mit nur einem Cluster verwenden. Verwenden Sie kein Teilnetz für mehrere Cluster oder für andere
-Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
-* Um die Kommunikation zwischen Workern, die sich in verschiedenen Teilnetzen im selben VLAN befinden, zu aktivieren, müssen Sie [die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+Zwecke außerhalb von {{site.data.keyword.containerlong_notm}} gleichzeitig.
+* Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 
 <strong>Befehlsoptionen</strong>:
 
@@ -1676,15 +1684,15 @@ Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (ALBs) in ei
 ### ibmcloud ks credentials-set --infrastructure-api-key API-SCHLÜSSEL --infrastructure-username BENUTZERNAME [-s]
 {: #cs_credentials_set}
 
-Festlegen von Berechtigungsnachweisen für das Konto der IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.containershort_notm}}-Konto.
+Festlegen von Berechtigungsnachweisen für das Konto der IBM Cloud-Infrastruktur (SoftLayer) für eine {{site.data.keyword.containerlong_notm}}-Region.
 
 Wenn Sie über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto verfügen, haben Sie standardmäßig Zugriff auf das Portfolio der IBM Cloud-Infrastruktur. Es kann jedoch sein, dass Sie ein anderes IBM Cloud-Infrastrukturkonto (SoftLayer) verwenden möchten, das Sie bereits für die Infrastrukturbestellung verwenden. Sie können dieses Infrastrukturkonto über den folgenden Befehl mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verknüpfen.
 
-Falls die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) manuell definiert wurden, werden diese Berechtigungsnachweise für die Bestellung von Infrastruktur verwendet, selbst wenn bereits ein [IAM-API-Schlüssel](#cs_api_key_info) für das Konto vorhanden ist. Wenn der Benutzer, dessen Berechtigungsnachweise gespeichert wurden, nicht über die erforderlichen Berechtigungen zum Bestellen von Infrastruktur verfügt, können infrastrukturbezogene Aktionen, wie z. B. das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen.
+Falls die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) für eine Region manuell definiert wurden, werden diese Berechtigungsnachweise für die Bestellung von Infrastruktur für alle Cluster in der Region verwendet. Diese Berechtigungsnachweise werden verwendet, um Infrastrukturberechtigungen zu bestimmen, selbst wenn bereits ein [IAM-API-Schlüssel](#cs_api_key_info) für die Region vorhanden ist. Wenn der Benutzer, dessen Berechtigungsnachweise gespeichert wurden, nicht über die erforderlichen Berechtigungen zum Bestellen von Infrastruktur verfügt, können infrastrukturbezogene Aktionen, wie z. B. das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen.
 
-Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.containershort_notm}}-Konto festlegen. Jedes {{site.data.keyword.containershort_notm}}-Konto ist nur mit einem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verbunden.
+Sie können nicht mehrere Berechtigungsnachweise für dieselbe {{site.data.keyword.containerlong_notm}}-Region festlegen.
 
-**Wichtig:** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, dessen Berechtigungsnachweise verwendet werden, über die erforderlichen Berechtigungen für [{{site.data.keyword.containershort_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt](cs_users.html#users).
+**Wichtig:** Stellen Sie vor Verwendung dieses Befehls sicher, dass der Benutzer, dessen Berechtigungsnachweise verwendet werden, über die erforderlichen Berechtigungen für [{{site.data.keyword.containerlong_notm}} und die IBM Cloud-Infrastruktur (SoftLayer) verfügt](cs_users.html#users).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -1737,7 +1745,7 @@ Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.co
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-Entfernen Sie die Kontoberechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) aus Ihrem {{site.data.keyword.containershort_notm}}-Konto.
+Entfernen Sie die Kontoberechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) aus einer {{site.data.keyword.containerlong_notm}}-Region.
 
 Nachdem Sie die Berechtigungsnachweise entfernt haben, wird der [IAM-API-Schlüssel](#cs_api_key_info) verwendet, um Ressourcen in der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen.
 
@@ -1759,10 +1767,10 @@ Nachdem Sie die Berechtigungsnachweise entfernt haben, wird der [IAM-API-Schlüs
 ### ibmcloud ks machine-types --zone ZONE [--json][-s]
 {: #cs_machine_types}
 
-Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Maschinentypen variieren je nach Zone. Jeder Maschinentyp enthält die Menge an virtueller CPU, an Hauptspeicher und an Plattenspeicher für jeden Workerknoten im Cluster. Das sekundäre Speicherplattenverzeichnis, in dem alle Containerdaten gespeichert sind, wird standardmäßig mit der LUKS-Verschlüsselung verschlüsselt. Wenn die Option `disable-disk-encrypt` während der Clustererstellung eingeschlossen wird, werden die Docker-Daten des Hosts nicht verschlüsselt. [Erfahren Sie mehr über die Verschlüsselung](cs_secure.html#encrypted_disk).
+Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Maschinentypen variieren je nach Zone. Jeder Maschinentyp enthält die Menge an virtueller CPU, an Hauptspeicher und an Plattenspeicher für jeden Workerknoten im Cluster. Das sekundäre Speicherplattenverzeichnis, in dem alle Containerdaten gespeichert sind, wird standardmäßig mit der LUKS-Verschlüsselung verschlüsselt. Wenn die Option `disable-disk-encrypt` während der Clustererstellung eingeschlossen wird, werden die Containerlaufzeitdaten des Hosts nicht verschlüsselt. [Weitere Informationen zur Verschlüsselung](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-Sie können Ihre Workerknoten als virtuelle Maschine auf gemeinsam genutzter oder dedizierter Hardware bereitstellen oder als physische Maschine auf Bare-Metal-Systemen. [Erfahren Sie mehr über die Optionen für Maschinentypen](cs_clusters.html#shared_dedicated_node).
+Sie können Ihre Workerknoten als virtuelle Maschine auf gemeinsam genutzter oder dedizierter Hardware bereitstellen oder als physische Maschine auf Bare-Metal-Systemen. [Erfahren Sie mehr über die Optionen für Maschinentypen](cs_clusters_planning.html#shared_dedicated_node).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -1812,6 +1820,28 @@ Auflisten der öffentlichen und der privaten VLANs, die in einer Zone in Ihrem K
   ```
   {: pre}
 
+
+### ibmcloud ks vlan-spanning-get [--json][-s]
+{: #cs_vlan_spanning_get}
+
+Anzeigen des VLAN-Spanning-Status für ein Konto der IBM Cloud-Infrastruktur (SoftLayer). Über das VLAN-Spanning können alle Geräte eines Kontos über das private Netz miteinander kommunizieren, unabhängig von dem zugeordneten VLAN.
+
+<strong>Befehlsoptionen</strong>:
+
+   <dl>
+    <dt><code>--json</code></dt>
+      <dd>Druckt die Befehlsausgabe im JSON-Format. Dieser Wert ist optional.</dd>
+
+    <dt><code>-s</code></dt>
+      <dd>Die Tagesnachricht wird nicht angezeigt oder es werden keine Erinnerungen aktualisiert. Dieser Wert ist optional.</dd>
+   </dl>
+
+**Beispiel**:
+
+  ```
+  ibmcloud ks vlan-spanning-get
+  ```
+  {: pre}
 
 <br />
 
@@ -2274,7 +2304,7 @@ Zeigen Sie eine Liste der verfügbaren Zonen an, in denen Sie einen Cluster erst
 ### ibmcloud ks region
 {: #cs_region}
 
-Suchen Sie nach der {{site.data.keyword.containershort_notm}}-Region, in der Sie sich aktuell befinden. Sie erstellen und verwalten Cluster, die für diese Region spezifisch sind. Verwenden Sie den Befehl `ibmcloud ks region-set`, um die Region zu ändern.
+Suchen Sie nach der {{site.data.keyword.containerlong_notm}}-Region, in der Sie sich aktuell befinden. Sie erstellen und verwalten Cluster, die für diese Region spezifisch sind. Verwenden Sie den Befehl `ibmcloud ks region-set`, um die Region zu ändern.
 
 **Beispiel**:
 
@@ -2292,7 +2322,7 @@ Region: us-south
 ### ibmcloud ks region-set [--region REGION]
 {: #cs_region-set}
 
-Legen Sie die Region für {{site.data.keyword.containershort_notm}} fest. Sie erstellen und verwalten Cluster, die für die Region spezifisch sind, und benötigen zum Zwecke der Hochverfügbarkeit unter Umständen Cluster in mehreren Regionen.
+Legen Sie die Region für {{site.data.keyword.containerlong_notm}} fest. Sie erstellen und verwalten Cluster, die für die Region spezifisch sind, und benötigen zum Zwecke der Hochverfügbarkeit unter Umständen Cluster in mehreren Regionen.
 
 Sie können sich beispielsweise bei {{site.data.keyword.Bluemix_notm}} in der Region 'Vereinigte Staaten (Süden)' anmelden und einen Cluster erstellen. Anschließend können Sie `ibmcloud ks region-set eu-central` verwenden, um die Region 'Zentraleuropa' als Ziel festzulegen, und einen weiteren Cluster erstellen. Schließlich können Sie `ibmcloud ks region-set us-south` verwenden, um zur Region 'Vereinigte Staaten (Süden)' zurückzukehren und Ihren Cluster in dieser Region zu verwalten.
 
@@ -2333,7 +2363,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-Listet die verfügbaren Regionen auf. Der `Region Name` ist der {{site.data.keyword.containershort_notm}}-Name und der `Region Alias` ist der allgemeine {{site.data.keyword.Bluemix_notm}}-Name für die Region.
+Listet die verfügbaren Regionen auf. Der `Region Name` ist der {{site.data.keyword.containerlong_notm}}-Name und der `Region Alias` ist der allgemeine {{site.data.keyword.Bluemix_notm}}-Name für die Region.
 
 **Beispiel**:
 
@@ -2400,8 +2430,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>zone</em></code></td>
-<td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der die Workerknoten bereitgestellt werden sollen. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.
-</td>
+<td>Ersetzen Sie <code><em>&lt;zone&gt;</em></code> durch die Zone, in der die Workerknoten bereitgestellt werden sollen. Die verfügbaren Zonen sind abhängig von der Region, in der Sie angemeldet sind. Führen Sie den Befehl <code>ibmcloud ks zones</code> aus, um die verfügbaren Zonen aufzuführen.</td>
 </tr>
 <tr>
 <td><code><em>maschinentyp</em></code></td>
@@ -2413,7 +2442,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Ersetzen Sie <code>&lt;öffentliches_vlan&gt;</code> durch die ID des öffentlichen VLANs, das Sie für Ihre Workerknoten verwenden möchten. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus und suchen Sie nach VLAN-Routern, die mit <code>fcr</code> (Front-End-Router) beginnen, um verfügbare VLANs aufzulisten.<br><strong>Hinweis</strong>: {[privates_vlan_vyatta]}</td>
+<td>Ersetzen Sie <code>&lt;öffentliches_vlan&gt;</code> durch die ID des öffentlichen VLANs, das Sie für Ihre Workerknoten verwenden möchten. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus und suchen Sie nach VLAN-Routern, die mit <code>fcr</code> (Front-End-Router) beginnen, um verfügbare VLANs aufzulisten. <br><strong>Hinweis</strong>: {[privates_vlan_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2523,7 +2552,7 @@ Zeigen Sie die Details eines Workerknotens an.
 ### ibmcloud ks worker-reboot [-f][--hard] --cluster CLUSTER --worker WORKER [WORKER][-s]
 {: #cs_worker_reboot}
 
-Führen Sie einen Warmstart eines Workerknotens in einem Cluster durch. Während des Warmstarts ändert sich der Status Ihres Workerknotens nicht.
+Führen Sie einen Warmstart eines Workerknotens in einem Cluster durch. Während des Warmstarts ändert sich der Status Ihres Workerknotens nicht. Sie können z. B. einen Warmstart durchführen, wenn der Status des Workerknotens in der IBM Cloud-Infrastruktur (SoftLayer) `Powered Off` (ausgeschaltet) lautet und Sie den Workerknoten aktivieren müssen.
 
 **Achtung:** Der Warmstart eines Workerknotens kann zu Datenverlust auf dem Workerknoten führen. Verwenden Sie diesen Befehl mit Bedacht und wenn Sie wissen, dass ein Warmstart die Wiederherstellung Ihres Workerknotens unterstützen kann. In allen anderen Fällen sollten Sie stattdessen [Ihren Workerknoten erneut laden](#cs_worker_reload).
 
@@ -2575,7 +2604,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
    <dd>Verwenden Sie diese Option, um den Neustart des Workerknotens ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
 
    <dt><code>--hard</code></dt>
-   <dd>Geben Sie diese Option an, um einen plötzlichen Neustart eines Workerknotens zu erzwingen, indem Sie die Stromversorgung zum Workerknoten kappen. Verwenden Sie diese Option, wenn der Workerknoten nicht antwortet oder Docker blockiert ist. Dieser Wert ist optional.</dd>
+   <dd>Geben Sie diese Option an, um einen plötzlichen Neustart eines Workerknotens zu erzwingen, indem Sie die Stromversorgung zum Workerknoten kappen. Verwenden Sie diese Option, wenn der Workerknoten oder die Containerlaufzeit des Workerknotens nicht antwortet. Dieser Wert ist optional.</dd>
 
    <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>Der Name oder die ID einzelner oder mehrerer Workerknoten. Trennen Sie bei einer Auflistung mehrerer Workerknoten die einzelnen Auflistungselemente jeweils durch ein Leerzeichen. Dieser Wert ist erforderlich.</dd>
@@ -2809,7 +2838,7 @@ Anzeigen einer Liste der der Workerknoten und ihres jeweiligen Status in einem C
 ### ibmcloud ks worker-pool-create --name POOLNAME --cluster CLUSTER --machine-type MASCHINENTYP --size-per-zone WORKER_PRO_ZONE [--hardware ISOLATION][--labels LABELS] [--disable-disk-encrypt][-s] [--json]
 {: #cs_worker_pool_create}
 
-Sie können einen Worker-Pool in Ihrem Cluster erstellen. Wenn Sie einen Worker-Pool hinzufügen, wird ihm standardmäßig keine Zone zugeordnet. Sie geben die gewünschte Anzahl von Workern für jede Zone und die Maschinentypen für die Worker an. Der Worker-Pool erhält die Standardversionen von Kubernetes. Um das Erstellen der Worker zu beenden, [fügen Sie eimne Zone oder Zonen](#cs_zone_add) zu Ihrem Pool hinzu.
+Sie können einen Worker-Pool in Ihrem Cluster erstellen. Wenn Sie einen Worker-Pool hinzufügen, wird ihm standardmäßig keine Zone zugeordnet. Sie geben die gewünschte Anzahl von Workern für jede Zone und die Maschinentypen für die Worker an. Der Worker-Pool erhält die Standardversionen von Kubernetes. Um das Erstellen der Worker zu beenden, [fügen Sie eine Zone oder Zonen](#cs_zone_add) zu Ihrem Pool hinzu.
 
 <strong>Befehlsoptionen</strong>:
 <dl>
@@ -2824,7 +2853,7 @@ Sie können einen Worker-Pool in Ihrem Cluster erstellen. Wenn Sie einen Worker-
     <dd>Wählen Sie einen Maschinentyp aus. Sie können Ihre Workerknoten als virtuelle Maschinen auf gemeinsam genutzter oder dedizierter Hardware oder als physische Maschinen auf Bare-Metal-Systemen bereitstellen. Die Typen der verfügbaren physischen und virtuellen Maschinen variieren je nach der Zone, in der Sie den Cluster implementieren. Weitere Informationen finden Sie in der Dokumentation zum [Befehl `ibmcloud ks machine-types`](cs_cli_reference.html#cs_machine_types). Dieser Wert ist für Standardcluster erforderlich und steht für kostenlose Cluster nicht zur Verfügung.</dd>
 
   <dt><code>--size-per-zone <em>WORKER_PRO_ZONE</em></code></dt>
-    <dd>Die Anzahl der Worker, die in jeder Zone erstellt werden sollen. Dieser Wert ist erforderlich.</dd>
+    <dd>Die Anzahl der Worker, die in jeder Zone erstellt werden sollen. Dieser Wert ist erforderlich und muss '1' oder größer sein.</dd>
 
   <dt><code>--hardware <em>HARDWARE</em></code></dt>
     <dd>Der Grad an Hardware-Isolation für Ihren Workerknoten. Verwenden Sie 'dedicated', wenn
@@ -2890,7 +2919,7 @@ Zeigen Sie die Details eines Worker-Pools an.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 
@@ -3012,16 +3041,18 @@ Zeigen Sie die Worker-Pools in einem Cluster an.
   <dt><code>--private-vlan <em>PRIVATES_VLAN</em></code></dt>
     <dd><p>Die ID des privaten VLAN. Dieser Wert ist bedingt.</p>
     <p>Wenn Sie über ein privates VLAN in der Zone verfügen, muss dieser Wert mit der privaten VLAN-ID von mindestens einem Workerknoten im Cluster übereinstimmen. Wenn Sie die verfügbaren VLANs anzeigen möchten, führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> aus.</p>
-    <p>Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt, wenn Sie Ihrem Worker-Pool anfänglich eine neue Zone hinzufügen. Anschließend können Sie <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN-Spanning</a> für Ihr Konto aktivieren, damit die Workerknoten in verschiedenen Zonen miteinander kommunizieren können.</p>
+    <p>Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt, wenn Sie Ihrem Worker-Pool anfänglich eine neue Zone hinzufügen.</p>
+    <p>Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). </p>
 <p>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</p></dd>
 
   <dt><code>--public-vlan <em>ÖFFENTLICHES_VLAN</em></code></dt>
     <dd><p>Die ID des öffentlichen VLANs. Dieser Wert ist erforderlich, wenn Sie Workloads auf den Knoten der Öffentlichkeit zugänglich machen möchten, nachdem Sie den Cluster erstellt haben. Die ID muss mit der öffentlichen VLAN-ID eines oder mehrerer Workerknoten im Cluster für die Zone übereinstimmen. Wenn Sie die verfügbaren VLANs anzeigen möchten, führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> aus.</p>
-    <p>Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt, wenn Sie Ihrem Worker-Pool anfänglich eine neue Zone hinzufügen. Anschließend können Sie <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN-Spanning</a> für Ihr Konto aktivieren, damit die Workerknoten in verschiedenen Zonen miteinander kommunizieren können.</p>
+    <p>Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt, wenn Sie Ihrem Worker-Pool anfänglich eine neue Zone hinzufügen.</p>
+    <p>Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). </p>
     <p>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</p></dd>
 
   <dt><code>--private-only </code></dt>
-    <dd>Verwenden Sie diese Option, um zu verhindern, dass ein öffentliches VLAN erstellt wird. Dieser Wert ist nur erforderlich, wenn Sie das Flag `--private-vlan` angeben und das Flag `--public-vlan` nicht einschließen. **Hinweis**: Wenn Sie mit einem ausschließlich privaten Cluster (private-only) arbeiten möchten, müssen sie eine Gateway-Appliance für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie im Abschnitt [Nur private externe Netze für private VLAN-Konfiguration planen](cs_network_planning.html#private_vlan).</dd>
+    <dd>Verwenden Sie diese Option, um zu verhindern, dass ein öffentliches VLAN erstellt wird. Dieser Wert ist nur erforderlich, wenn Sie das Flag `--private-vlan` angeben und das Flag `--public-vlan` nicht einschließen.  **Hinweis**: Wenn Sie mit einem ausschließlich privaten Cluster (private-only) arbeiten möchten, müssen sie eine Gateway-Appliance für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie im Abschnitt [Nur private externe Netze für private VLAN-Konfiguration planen](cs_network_planning.html#private_vlan).</dd>
 
   <dt><code>--json</code></dt>
     <dd>Druckt die Befehlsausgabe im JSON-Format. Dieser Wert ist optional.</dd>
@@ -3042,6 +3073,18 @@ Zeigen Sie die Worker-Pools in einem Cluster an.
 
   **Nur Mehrzonencluster**: Legen Sie die Netzmetadaten für einen Worker-Pool so fest, dass sie ein anderes öffentliches oder privates VLAN als zuvor für die Zone verwenden. Workerknoten, die bereits im Pool erstellt wurden, verwenden weiterhin das vorherige öffentliche oder private VLAN, neue Workerknoten in dem Pool verwenden jedoch die neuen Netzdaten.
 
+  Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.
+  <ol><li>Überprüfen Sie die VLANs, die in Ihrem Cluster verfügbar sind. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;clustername_oder_-id&gt; --showResources</code></pre><p>Beispielausgabe:</p>
+  <pre class="screen"><code>Subnet VLANs
+VLAN ID   Subnet CIDR         Public   User-managed
+229xxxx   169.xx.xxx.xxx/29   true     false
+229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
+  <li>Prüfen Sie, ob die öffentlichen und privaten VLAN-IDs, die Sie verwenden möchten, kompatibel sind. Um kompatibel zu sein, muss der <strong>Router</strong> dieselbe Pod-ID aufweisen.<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>Beispielausgabe:</p>
+  <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
+229xxxx          1234     private   bcr01a.dal12   true
+229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Beachten Sie, dass die Pod-IDs des <strong>Routers</strong> übereinstimmen: `01a` und `01a`. Wenn eine Pod-ID `01a` und die andere Pod-ID `02a` ist, können Sie diese öffentlichen und privaten VLAN-IDs nicht für Ihren Worker-Pool festlegen.</p></li>
+  <li>Wenn keine VLANs verfügbar sind, können Sie <a href="/docs/infrastructure/vlans/order-vlan.html#order-vlans">neue VLANs bestellen</a>.</li></ol>
+
   <strong>Befehlsoptionen</strong>:
 
   <dl>
@@ -3055,10 +3098,10 @@ Zeigen Sie die Worker-Pools in einem Cluster an.
     <dd>Eine durch Kommas getrennte Liste der Worker-Pools, zu denen die Zone hinzugefügt wird. Es ist mindestens ein Worker-Pool erforderlich.</dd>
 
   <dt><code>--private-vlan <em>PRIVATES_VLAN</em></code></dt>
-    <dd>Die ID des privaten VLAN. Dieser Wert ist erforderlich. Er muss mit der ID des privaten VLAN für mindestens einen Workerknoten im Cluster übereinstimmen. Wenn Sie die verfügbaren VLANs anzeigen möchten, führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> aus. Wenn keine VLANs verfügbar sind, können Sie das <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN-Spanning für Ihr Konto aktivieren</a>.<br><br>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</dd>
+    <dd>Die ID des privaten VLAN. Dieser Wert ist erforderlich, unabhängig davon, ob Sie dasselbe oder ein anderes privates VLAN als dasjenige verwenden möchten, das Sie für Ihre anderen Workerknoten verwendet haben. <br><br><strong>Wichtig</strong>: Die privaten und öffentlichen VLANs müssen kompatibel sein, was sich anhand des ID-Präfix **Router** bestimmen lässt.<br><br>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</dd>
 
   <dt><code>--public-vlan <em>ÖFFENTLICHES_VLAN</em></code></dt>
-    <dd>Die ID des öffentlichen VLANs. Dieser Wert ist erforderlich, wenn Sie das öffentliche VLAN für die Zone ändern möchten. Wenn Sie das private VLAN nicht mit dem öffentlichen VLAN ändern möchten, verwenden Sie die gleiche private VLAN-ID. Die öffentliche VLAN-ID muss mit der öffentlichen VLAN-ID eines oder mehrerer Workerknoten im Cluster übereinstimmen. Wenn Sie die verfügbaren VLANs anzeigen möchten, führen Sie den Befehl <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> aus. Wenn keine VLANs verfügbar sind, können Sie das <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >VLAN-Spanning für Ihr Konto aktivieren</a>.<br><br>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</dd>
+    <dd>Die ID des öffentlichen VLANs. Dieser Wert ist nur erforderlich, wenn Sie das öffentliche VLAN für die Zone ändern möchten. Um das öffentliche VLAN zu ändern, müssen Sie immer ein kompatibles privates VLAN angeben.<br><br><strong>Wichtig</strong>: Die privaten und öffentlichen VLANs müssen kompatibel sein, was sich anhand des ID-Präfix **Router** bestimmen lässt.<br><br>**Hinweis**: Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.</dd>
 
   <dt><code>-f</code></dt>
     <dd>Erzwingen Sie die Ausführung des Befehls ohne Eingabeaufforderungen. Dieser Wert ist optional.</dd>

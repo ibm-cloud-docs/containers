@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # チュートリアル: Cloud Foundry からクラスターへのアプリのマイグレーション
 {: #cf_tutorial}
 
-Cloud Foundry を使用して以前にデプロイしたアプリを取得し、コンテナー内の同じコードを {{site.data.keyword.containershort_notm}} 内の Kubernetes クラスターにデプロイできます。
+Cloud Foundry を使用して以前にデプロイしたアプリを取得し、コンテナー内の同じコードを {{site.data.keyword.containerlong_notm}} 内の Kubernetes クラスターにデプロイできます。
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 - [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](../services/Registry/index.html)。
 - [クラスターを作成します](cs_clusters.html#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
+- [**Editor**、**Operator**、または **Administrator** のプラットフォーム役割があることを確認します](cs_users.html#add_users_cli)。
 - [Docker および Kubernetes の用語について学習します](cs_tech.html)。
 
 
@@ -258,7 +259,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

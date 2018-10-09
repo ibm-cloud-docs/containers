@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -60,11 +60,11 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <tbody>
 <tr>
 <td>Codeship</td>
-<td>Mit <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> können Sie die kontinuierliche Integration und Bereitstellung von Containern vorantreiben. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Mit <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> können Sie die kontinuierliche Integration und Bereitstellung von Containern vorantreiben. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Kubernetes-Paketmanager. Sie können neue Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen. <p>Weitere Informationen finden Sie unter [Helm in {{site.data.keyword.containershort_notm}} konfigurieren](cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Kubernetes-Paketmanager. Sie können neue Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen. <p>Weitere Informationen finden Sie unter [Helm in {{site.data.keyword.containerlong_notm}} konfigurieren](cs_integrations.html#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -72,7 +72,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudorchestrierungsplattformen wie Kubernetes bietet. Lesen Sie den Blogbeitrag darüber, <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">wie IBM Istio mitgegründet und auf den Markt gebracht hat <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu dem Open-Source-Projekt zu erhalten. Weitere Informationen zum Installieren von Istio aud Ihrem Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} und zu den ersten Schritten mit einer Beispiel-App erhalten Sie im [Lernprogramm: Mikroservices mit Istio verwalten](cs_tutorials_istio.html#istio_tutorial).</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudorchestrierungsplattformen wie Kubernetes bietet. Lesen Sie den Blogbeitrag darüber, <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">wie IBM Istio mitgegründet und auf den Markt gebracht hat <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu dem Open-Source-Projekt zu erhalten. Weitere Informationen zum Installieren von Istio auf Ihrem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} und zu den ersten Schritten mit einer Beispiel-App erhalten Sie im [Lernprogramm: Mikroservices mit Istio verwalten](cs_tutorials_istio.html#istio_tutorial).</td>
 </tr>
 </tbody>
 </table>
@@ -94,11 +94,11 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>Überwachen Sie Workerknoten, Container, Replikatgruppen, Replikationscontroller und Services mit <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Überwachen Sie Workerknoten, Container, Replikatgruppen, Replikationscontroller und Services mit <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>Datadog</td>
-<td>Überwachen Sie Ihren Cluster und zeigen Sie Metriken für die Infrastruktur- und Anwendungsleistung mit <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Überwachen Sie Ihren Cluster und zeigen Sie Metriken für die Infrastruktur- und Anwendungsleistung mit <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td> {{site.data.keyword.cloudaccesstrailfull}}</td>
@@ -114,7 +114,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> bietet eine Leistungsüberwachung von Infrastrukturen und Apps über eine grafische Benutzerschnittstelle, die automatisch Apps erkennt und zuordnet. Istana erfasst alle Anforderungen an Ihre Apps und ermöglicht Ihnen damit die Durchführung von Fehler- und Ursachenanalysen, um zu vermeiden, dass Probleme erneut auftreten. Lesen Sie dazu den Blogeintrag zur <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">Bereitstellung von Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu erhalten.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> bietet eine Leistungsüberwachung von Infrastrukturen und Apps über eine grafische Benutzerschnittstelle, die automatisch Apps erkennt und zuordnet. Istana erfasst alle Anforderungen an Ihre Apps und ermöglicht Ihnen damit die Durchführung von Fehler- und Ursachenanalysen, um zu vermeiden, dass Probleme erneut auftreten. Lesen Sie dazu den Blogeintrag zur <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">Bereitstellung von Istana in {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu erhalten.</td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -129,11 +129,11 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Sysdig</td>
-<td>Erfassen Sie App-, Container-, statsd- und Hostmetriken über einen einzigen Instrumentierungspunkt mithilfe von <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Erfassen Sie App-, Container-, statsd- und Hostmetriken über einen einzigen Instrumentierungspunkt mithilfe von <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope liefert eine grafisch orientierte Diagrammdarstellung Ihrer Ressourcen in einem Kubernetes-Cluster unter Einbeziehung von Services, Pods, Containern, Prozessen, Knoten und vielem mehr. Weave Scope stellt interaktive Metriken für CPU und Speicher bereit und bietet Tools, um 'tail'- und 'exec'-Aufrufe in einem Container durchzuführen.<p>Weitere Informationen finden Sie unter [Kubernetes-Clusterressourcen mit Weave Scope und {{site.data.keyword.containershort_notm}} grafisch darstellen](cs_integrations.html#weavescope).</p></li></ol>
+<td>Weave Scope liefert eine grafisch orientierte Diagrammdarstellung Ihrer Ressourcen in einem Kubernetes-Cluster unter Einbeziehung von Services, Pods, Containern, Prozessen, Knoten und vielem mehr. Weave Scope stellt interaktive Metriken für CPU und Speicher bereit und bietet Tools, um 'tail'- und 'exec'-Aufrufe in einem Container durchzuführen.<p>Weitere Informationen finden Sie unter [Kubernetes-Clusterressourcen mit Weave Scope und {{site.data.keyword.containerlong_notm}} grafisch darstellen](cs_integrations.html#weavescope).</p></li></ol>
 </td>
 </tr>
 </tbody>
@@ -164,7 +164,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>Sie können <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um SSL-Zertifikate für Ihre Apps zu speichern und zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Sie können <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um SSL-Zertifikate für Ihre Apps zu speichern und zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -176,7 +176,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>Twistlock</td>
-<td>Sie können <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> durch <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ergänzen, um Firewalls, den Schutz vor Bedrohungen und die Behebung von Störfällen zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Sie können <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a> durch <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ergänzen, um Firewalls, den Schutz vor Bedrohungen und die Behebung von Störfällen zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 </tbody>
 </table>
@@ -220,69 +220,89 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 
-## Cloud Foundry-Services zu Clustern hinzufügen
+## {{site.data.keyword.Bluemix_notm}}-Services zu Clustern hinzufügen
 {: #adding_cluster}
 
-Sie können eine vorhandene Cloud Foundry-Serviceinstanz
-zu Ihrem Cluster hinzufügen, um den Benutzern Ihres Clusters den Zugriff auf den
-Service sowie seine Verwendung zu ermöglichen, wenn sie eine App auf dem Cluster bereitstellen.
+Fügen Sie {{site.data.keyword.Bluemix_notm}}-Services hinzu, um Ihren Kubernetes-Cluster mit zusätzlichen Funktionen in Bereichen wie Watson AI, Daten, Sicherheit und Internet of Things (IoT) zu erweitern.
 {:shortdesc}
 
-Vorbemerkungen:
+**Wichtig:** Sie können nur Services binden, die Serviceschlüssel unterstützen. Eine Liste mit Services, die Serviceschlüssel unterstützen, finden Sie im Abschnitt [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external).
 
-1. [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
-2. [Fordern Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/apps/reqnsi.html#req_instance) an.
-   **Hinweis:** Zur Erstellung einer Instanz eines Service in der Zone 'Washington DC' müssen Sie die CLI verwenden.
-3. Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt, andere Services jedoch nicht. Sie können die verschiedenen Servicetypen sehen, nachdem Sie die Serviceinstanz erstellt haben und die Services im Dashboard als **Cloud Foundry-Services** und **Services** gruppiert sind. Um die Services im Abschnitt **Services** mit Clustern zu binden, [erstellen Sie zuerst Cloud Foundry-Aliasnamen](#adding_resource_cluster).
+Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
 
-**Hinweis:**
-<ul><ul>
-<li>Es können nur {{site.data.keyword.Bluemix_notm}}-Services hinzugefügt werden, die Serviceschlüssel unterstützen. Wenn der Service keine Serviceschlüssel unterstützt, dann sollten Sie die Informationen zum Thema [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external) lesen.</li>
-<li>Der Cluster und die Workerknoten müssen vollständig bereitgestellt werden, bevor Sie einen Service hinzufügen können.</li>
-</ul></ul>
+Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzuzufügen:
+1. [Erstellen Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/apps/reqnsi.html#req_instance). </br></br>**Hinweis:** Bestimmte {{site.data.keyword.Bluemix_notm}}-Services sind nur in ausgewählten Regionen verfügbar. Sie können einen Service nur an Ihren Cluster binden, wenn der Service in derselben Region wie Ihr Cluster verfügbar ist. Wenn Sie eine Serviceinstanz in der Zone 'Washington DC' erstellen wollen, müssen Sie außerdem die CLI verwenden.
 
+2. Überprüfen Sie den Servicetyp, den Sie erstellt haben, und notieren Sie die Serviceinstanz **Name**.
+   - **Cloud Foundry-Services:**
+     ```
+     ibmcloud service list
+     ```
+     {: pre}
 
-Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
-2.  Listen Sie verfügbare {{site.data.keyword.Bluemix_notm}}-Services auf.
+     Beispielausgabe:
+     ```
+     name                         service           plan    bound apps   last operation
+     <cf-serviceinstanzname>   <servicename>    spark                create succeeded
+     ```
+     {: screen}
 
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
+  - **IAM-fähige Services:**
+     ```
+     ibmcloud resource service-instances
+     ```
+     {: pre}
 
-    CLI-Beispielausgabe:
+     Beispielausgabe:
+     ```
+     Name                          Location   State    Type               Tags   
+     <iam-serviceinstanzname>   <region>   active   service_instance      
+     ```
+     {: screen}
 
-    ```
-    name                      service           plan    bound apps   last operation
-    <serviceinstanzname>   <servicename>    spark                create succeeded
-    ```
-    {: screen}
+   Sie können die verschiedenen Servicetypen auch in Ihrem Dashboard als **Cloud Foundry Services** und **Services** sehen.
 
-3.  Notieren Sie unter **name** den Namen der Serviceinstanz, die Sie zu Ihrem Cluster hinzufügen wollen.
-4.  Geben Sie den Clusternamensbereich an, den Sie verwenden wollen, um Ihren Service hinzuzufügen. Wählen Sie eine der folgenden Optionen aus.
-    -   Lassen Sie eine Liste der vorhandenen Namensbereiche anzeigen und wählen Sie einen Namensbereich aus, den Sie verwenden wollen.
+3. Erstellen Sie für IAM-fähige Services einen Cloud Foundry-Aliasnamen, sodass Sie diesen Service an Ihren Cluster binden können. Wenn es sich bei Ihrem Service bereits um einen Cloud Foundry-Service handelt, ist dieser Schritt nicht erforderlich und Sie können mit dem nächsten Schritt fortfahren.
+   1. Wählen Sie eine Cloud Foundry-Organisation und einen Cloud Foundry-Bereich als Ziel aus.
+      ```
+      ibmcloud target --cf
+      ```
+      {: pre}
 
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
+   2. Erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
+      ```
+      ibmcloud resource service-alias-create <servicealiasname> --instance-name <iam-serviceinstanzname>
+      ```
+      {: pre}
 
-    -   Erstellen Sie einen Namensbereich in Ihrem Cluster.
+   3. Überprüfen Sie, dass der Servicealiasname erstellt wurde.
+```
+      ibmcloud service list
+      ```
+      {: pre}
 
-        ```
-        kubectl create namespace <name_des_namensbereichs>
-        ```
-        {: pre}
+4. Geben Sie den Clusternamensbereich an, den Sie verwenden wollen, um Ihren Service hinzuzufügen. Wählen Sie eine der folgenden Optionen aus.
+   - Lassen Sie eine Liste der vorhandenen Namensbereiche anzeigen und wählen Sie einen Namensbereich aus, den Sie verwenden wollen.
+     ```
+     kubectl get namespaces
+     ```
+     {: pre}
 
-5.  Fügen Sie den Service zu Ihrem Cluster hinzu.
+   - Erstellen Sie einen Namensbereich in Ihrem Cluster.
+     ```
+     kubectl create namespace <name_des_namensbereichs>
+     ```
+     {: pre}
 
+5.  Fügen Sie den Service zu Ihrem Cluster hinzu. Stellen Sie bei IAM-fähigen Services sicher, dass Sie den Cloud Foundry-Aliasnamen verwenden, den Sie zuvor erstellt haben.
     ```
     ibmcloud ks cluster-service-bind <clustername_oder_-id> <namensbereich> <serviceinstanzname>
     ```
     {: pre}
 
-    Wenn der Service erfolgreich zu Ihrem Cluster hinzugefügt worden ist, wird ein geheimer Schlüssel für den Cluster erstellt, der die Berechtigungsnachweise Ihrer Serviceinstanz enthält. CLI-Beispielausgabe:
+    Wenn der Service erfolgreich zu Ihrem Cluster hinzugefügt worden ist, wird ein geheimer Schlüssel für den Cluster erstellt, der die Berechtigungsnachweise Ihrer Serviceinstanz enthält. Geheime Schlüssel werden automatisch in 'etcd' verschlüsselt, um Ihre Daten zu schützen.
 
+    Beispielausgabe:
     ```
     ibmcloud ks cluster-service-bind mein_cluster mein_namensbereich cleardb
     Binding service instance to namespace...
@@ -292,77 +312,74 @@ Gehen Sie wie folgt vor, um einen Service hinzuzufügen:
     ```
     {: screen}
 
-6.  Stellen Sie sicher, dass der geheime Schlüssel im Namensbereich Ihres Clusters erstellt wurde.
+6.  Überprüfen Sie die Serviceberechtigungsnachweise in Ihrem geheimen Kubernetes-Schlüssel.
+    1. Rufen Sie die Details des geheimen Schlüssels ab und notieren Sie den **binding**-Wert. Der **binding**-Wert ist Base64-codiert und enthält die Berechtigungsnachweise für Ihre Serviceinstanz im JSON-Format.
+       ```
+       kubectl get secrets binding-<serviceinstanzname> --namespace=<namensbereich> -o yaml
+       ```
+       {: pre}
 
-    ```
-    kubectl get secrets --namespace=<namensbereich>
-    ```
-    {: pre}
+       Beispielausgabe:
+       ```
+       apiVersion: v1
+       data:
+         binding: <bindung>
+       kind: Secret
+       metadata:
+         annotations:
+           service-instance-id: 1111aaaa-a1aa-1aa1-1a11-111aa111aa11
+           service-key-id: 2b22bb2b-222b-2bb2-2b22-b22222bb2222
+         creationTimestamp: 2018-08-07T20:47:14Z
+         name: binding-<serviceinstanzname>
+         namespace: <namensbereich>
+         resourceVersion: "6145900"
+         selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+         uid: 33333c33-3c33-33c3-cc33-cc33333333c
+       type: Opaque
+       ```
+       {: screen}
 
-Um den Service in einem Pod zu verwenden, der im Cluster bereitgestellt ist, müssen Clusterbenutzer auf die Serviceberechtigungsnachweise zugreifen. Benutzer können auf die Serviceberechtigungsnachweise des {{site.data.keyword.Bluemix_notm}}-Service zugreifen, indem sie [den geheimen Kubernetes-Schlüssel als Datenträger für geheime Schlüssel an einen Pod anhängen](#adding_app).
+    2. Decodieren Sie den 'bindung'-Wert.
+       ```
+       echo "<bindung>" | base64 -D
+       ```
+       {: pre}
 
-<br />
+       Beispielausgabe:
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
 
+    3. Optional: Vergleichen Sie die Serviceberechtigungsnachweise, die Sie im vorherigen Schritt decodiert haben, mit den Serviceberechtigungsnachweisen, die Sie für Ihre Serviceinstanz im {{site.data.keyword.Bluemix_notm}}-Dashboard finden.
 
-## Cloud Foundry-Aliasnamen für andere Ressourcen des {{site.data.keyword.Bluemix_notm}}-Service erstellen
-{: #adding_resource_cluster}
-
-Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt. Sie können die verschiedenen Servicetypen sehen, nachdem Sie die Serviceinstanz erstellt haben und die Services im Dashboard als **Cloud Foundry-Services** und **Services** gruppiert sind. Um einen {{site.data.keyword.Bluemix_notm}}-Service an Ihr Cluster zu binden, der kein Cloud Foundry-Service ist, erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
-{:shortdesc}
-
-[Fordern Sie zunächst eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service an](/docs/apps/reqnsi.html#req_instance).
-
-Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
-
-1. Geben Sie als Ziel die Organisation und den Bereich an, wo die Serviceinstanz erstellt wurde.
-
-    ```
-    ibmcloud target -o <organisationsname> -s <bereichsname>
-    ```
-    {: pre}
-
-2. Notieren Sie den Namen der Serviceinstanz.
-    ```
-    ibmcloud resource service-instances
-    ```
-    {: pre}
-
-3. Erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
-    ```
-    ibmcloud resource service-alias-create <servicealiasname> --instance-name <serviceinstanz>
-    ```
-    {: pre}
-
-4. Überprüfen Sie, dass der Servicealiasname erstellt wurde.
-
-    ```
-    ibmcloud service list
-    ```
-    {: pre}
-
-5. [Binden Sie den Cloud Foundry-Aliasnamen an den Cluster](#adding_cluster).
+7. Ihr Service ist nun an Ihren Cluster gebunden und Sie müssen Ihre App für den [Zugriff auf die Serviceberechtigungsnachweise im geheimen Kubernetes-Schlüssel](#adding_app) konfigurieren.
 
 
-
-<br />
-
-
-## Services zu Apps hinzufügen
+## Von Ihren Apps auf Serviceberechtigungsnachweise zugreifen
 {: #adding_app}
 
-Zum Speichern der Detailinformationen und Berechtigungsnachweise für {{site.data.keyword.Bluemix_notm}}-Services und zur Sicherstellung der sicheren Kommunikation zwischen dem Service und dem Cluster werden verschlüsselte Kubernetes-Schlüssel verwendet.
-{:shortdesc}
+Um über Ihre App auf eine {{site.data.keyword.Bluemix_notm}}-Serviceinstanz zuzugreifen, müssen Sie die im geheimen Kubernetes-Schlüssel gespeicherten Serviceberechtigungsnachweise für Ihre App verfügbar machen.
+{: shortdesc}
 
-Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar. Statt vertrauliche Informationen über Umgebungsvariablen oder direkt in der Dockerfile selbst offenzulegen, können Sie geheime Schlüssel an einen Pod anhängen. Auf diese geheimen Schlüssel kann anschließend über einen aktiven Container in einem Pod zugegriffen werden.
+Die Berechtigungsnachweise einer Serviceinstanz sind Base64-codiert und werden in Ihrem geheimen Schlüssel im JSON-Format gespeichert. Wählen Sie eine der folgenden Optionen aus, um auf die Daten in Ihrem geheimen Schlüssel zuzugreifen:
+- [Geheimen Schlüssel als Datenträger an Ihren Pod anhängen](#mount_secret)
+- [Auf den geheimen Schlüssel in Umgebungsvariablen verweisen](#reference_secret)
 
-Wenn Sie einen Datenträger für geheime Schlüssel an Ihren Pod anhängen, wird im Mountverzeichnis des Datenträgers eine Datei namens `binding` gespeichert. Die Datei `binding` enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+Vorbereitende Schritte:
+- [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
+- [Fügen Sie einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzu](#adding_cluster).
 
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus. Stellen Sie sicher, dass der {{site.data.keyword.Bluemix_notm}}-Service, den Sie in Ihrer App verwenden wollen, vom Clusteradministrator [zu dem Cluster hinzugefügt](cs_integrations.html#adding_cluster) wurde.
+### Geheimen Schlüssel als Datenträger an Ihren Pod anhängen
+{: #mount_secret}
 
-1.  Listen Sie die verfügbaren geheimen Schlüssel im Namensbereich Ihres Clusters auf.
+Wenn Sie den geheimen Schlüssel als Datenträger an Ihren Pod anhängen, wird eine Datei mit dem Namen `binding` im Mountverzeichnis des Datenträgers gespeichert. Die Datei `binding` im JSON-Format enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+{: shortdesc}
+
+1.  Listen Sie die verfügbaren geheimen Schlüssel in Ihrem Cluster auf und notieren Sie den **Namen** Ihres geheimen Schlüssels. Suchen Sie nach einem Schlüssel des Typs **Opaque**. Sollten mehrere geheime Schlüssel vorhanden sein, wenden Sie sich an Ihren Clusteradministrator, damit dieser den geheimen Schlüssel für den gewünschten Service ermittelt.
 
     ```
-    kubectl get secrets --namespace=<mein_namensbereich>
+    kubectl get secrets
     ```
     {: pre}
 
@@ -375,12 +392,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     ```
     {: screen}
 
-2.  Suchen Sie nach einem Schlüssel des Typs **Opaque** und notieren Sie den **Namen** des geheimen Schlüssels. Sollten mehrere geheime Schlüssel vorhanden sein, wenden Sie sich an Ihren Clusteradministrator, damit dieser den geheimen Schlüssel für den gewünschten Service ermittelt.
-
-3.  Öffnen Sie Ihren bevorzugten Editor.
-
-4.  Erstellen Sie eine YAML-Datei, um einen Pod zu konfigurieren, der in der Lage ist, über einen Datenträger für geheime Schlüssel auf die Servicedetails zuzugreifen. Wenn Sie mehr als einen Service gebunden haben, stellen Sie sicher, dass jeder geheime Schlüssel dem richtigen Service zugeordnet ist.
-
+2.  Erstellen Sie eine YAML-Datei für Ihre Kubernetes-Bereitstellung und hängen Sie den geheimen Schlüssel als Datenträger an Ihren Pod an.
     ```
     apiVersion: apps/v1beta1
     kind: Deployment
@@ -400,16 +412,16 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
             app: secret-test
         spec:
           containers:
-          - image: nginx
+          - image: registry.bluemix.net/ibmliberty:latest
             name: secret-test
             volumeMounts:
-            - mountPath: /opt/service-bind
-              name: service-bind-volume
+            - mountPath: <mountpfad>
+              name: <datenträgername>
           volumes:
-          - name: service-bind-volume
+          - name: <datenträgername>
             secret:
               defaultMode: 420
-              secretName: binding-<name_der_serviceinstanz>
+              secretName: binding-<serviceinstanzname>
     ```
     {: codeblock}
 
@@ -421,32 +433,30 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     <tbody>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>Der Name des Datenträgers für geheime Schlüssel, der an den Container angehängt werden soll.</td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
-    <td>Geben Sie einen Namen für den Datenträger für geheime Schlüssel ein, der an den Container angehängt werden soll.</td>
+    <td><code>volumeMounts/name</code></br><code>volumes/name</code></td>
+    <td>Der Name des Datenträgers, der an Ihren Pod angehängt werden soll.</td>
     </tr>
     <tr>
     <td><code>secret/defaultMode</code></td>
-    <td>Legen Sie Schreibschutz für den geheimen Schlüssel des Service fest.</td>
+    <td>Die Lese- und Schreibberechtigungen für den geheimen Schlüssel. Verwenden Sie `420`, um Leseberechtigungen festzulegen.</td>
     </tr>
     <tr>
     <td><code>secret/secretName</code></td>
-    <td>Geben Sie den Namen des geheimen Schlüssels ein, den Sie zuvor notiert haben.</td>
+    <td>Der Name des geheimen Schlüssels, den Sie im vorherigen Schritt notiert haben.</td>
     </tr></tbody></table>
 
-5.  Erstellen Sie den Pod und hängen Sie den Datenträger für geheime Schlüssel an.
-
+3.  Erstellen Sie den Pod und hängen Sie den geheimen Schlüssel als Datenträger an.
     ```
     kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
-6.  Stellen Sie sicher, dass der Pod erstellt wurde.
-
+4.  Stellen Sie sicher, dass der Pod erstellt wurde.
     ```
-    kubectl get pods --namespace=<mein_namensbereich>
+    kubectl get pods
     ```
     {: pre}
 
@@ -458,42 +468,193 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     ```
     {: screen}
 
-7.  Notieren Sie die Namensangabe für Ihren Pod unter **NAME**.
-8.  Rufen Sie die Details zum Pod ab und suchen Sie den Namen des geheimen Schlüssels.
+5.  Greifen Sie auf die Serviceberechtigungsnachweise zu.
+    1. Melden Sie sich beim Pod an.
+       ```
+       kubectl exec <podname> -it bash
+       ```
+       {: pre}
+
+    2. Navigieren Sie zu Ihrem Datenträgermountpfad, den Sie zuvor definiert haben, und listen Sie die Dateien in Ihrem Datenträgermountpfad auf.
+       ```
+       cd <datenträger-mountpfad> && ls
+       ```
+       {: pre}
+
+       Beispielausgabe:
+       ```
+       binding
+       ```
+       {: screen}
+
+       Die `binding`-Datei enthält die Serviceberechtigungsnachweise, die Sie im geheimen Kubernetes-Schlüssel gespeichert haben.
+
+    4. Zeigen Sie die Serviceberechtigungsnachweise an. Die Berechtigungsnachweise werden als Schlüssel/Wert-Paare im JSON-Format gespeichert.
+       ```
+       cat binding
+       ```
+       {: pre}
+
+       Beispielausgabe:
+       ```
+       {"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+       ```
+       {: screen}
+
+    5. Konfigurieren Sie Ihre App, um den JSON-Inhalt zu parsen und die Informationen abzurufen, die Sie für den Zugriff auf den Service benötigen.
+
+
+### Auf den geheimen Schlüssel in Umgebungsvariablen verweisen
+{: #reference_secret}
+
+Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare aus Ihrem geheimen Kubernetes-Schlüssel als Umgebungsvariablen zur Ihrer Bereitstellung hinzufügen.   
+{: shortdesc}
+
+1. Listen Sie die verfügbaren geheimen Schlüssel in Ihrem Cluster auf und notieren Sie den **Namen** Ihres geheimen Schlüssels. Suchen Sie nach einem Schlüssel des Typs **Opaque**. Sollten mehrere geheime Schlüssel vorhanden sein, wenden Sie sich an Ihren Clusteradministrator, damit dieser den geheimen Schlüssel für den gewünschten Service ermittelt.
 
     ```
-    kubectl describe pod <podname>
+    kubectl get secrets
     ```
     {: pre}
 
-    Ausgabe:
+    Beispielausgabe:
 
     ```
-    ...
-    Volumes:
-      service-bind-volume:
-        Type:       Secret (Datenträger, der mit einem geheimen Schlüssel belegt ist)
-        SecretName: binding-<serviceinstanzname>
-    ...
+    NAME                                    TYPE                                  DATA      AGE
+    binding-<serviceinstanzname>         Opaque                                1         3m
     ```
     {: screen}
 
-    
+2. Rufen Sie die Details Ihres geheimen Schlüssels ab, um potenzielle Schlüssel/Wert-Paare zu finden, auf die Sie als Umgebungsvariablen in Ihrem Pod verweisen können. Die Serviceberechtigungsnachweise werden im Schlüssel `bindung` Ihres geheimen Schlüssels gespeichert.
+   ```
+       kubectl get secrets binding-<serviceinstanzname> --namespace=<namensbereich> -o yaml
+       ```
+   {: pre}
 
-9.  Konfigurieren Sie Ihre App beim Implementieren so, dass sie die Datei `binding` mit dem geheimen Schlüssel im Mountverzeichnis finden, den JSON-Inhalt parsen und die URL sowie die Berechtigungsnachweise für den Service ermitteln kann, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+   Beispielausgabe:
+   ```
+   apiVersion: v1
+   data:
+     binding: <bindung>
+   kind: Secret
+   metadata:
+     annotations:
+       service-instance-id: 7123acde-c3ef-4ba2-8c52-439ac007fa70
+       service-key-id: 9h30dh8a-023f-4cf4-9d96-d12345ec7890
+     creationTimestamp: 2018-08-07T20:47:14Z
+     name: binding-<serviceinstanzname>
+     namespace: <namensbereich>
+     resourceVersion: "6145900"
+     selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+     uid: 12345a31-9a83-11e8-ba83-cd49014748f
+   type: Opaque
+   ```
+   {: screen}
 
-Sie können nun auf die Details für den {{site.data.keyword.Bluemix_notm}}-Service und die zugehörigen Berechtigungsnachweise zugreifen. Um mit Ihrem {{site.data.keyword.Bluemix_notm}}-Service arbeiten zu können, stellen Sie sicher, dass Ihre App so konfiguriert ist, dass sie die Datei mit dem geheimen Schlüssel für den Service im Mountverzeichnis finden, den JSON-Inhalt parsen und die Servicedetails ermitteln kann.
+3. Erstellen Sie eine YAML-Datei für Ihre Kubernetes-Bereitstellung und geben Sie eine Umgebungsvariable an, die auf den Schlüssel `binding` verweist.
+   ```
+   apiVersion: apps/v1beta1
+   kind: Deployment
+   metadata:
+     labels:
+       app: secret-test
+     name: secret-test
+     namespace: <mein_namensbereich>
+   spec:
+     selector:
+       matchLabels:
+         app: secret-test
+     template:
+       metadata:
+         labels:
+           app: secret-test
+       spec:
+         containers:
+         - image: registry.bluemix.net/ibmliberty:latest
+           name: secret-test
+           env:
+           - name: BINDING
+             valueFrom:
+               secretKeyRef:
+                 name: binding-<serviceinstanzname>
+                 key: binding
+     ```
+     {: codeblock}
 
-<br />
+     <table>
+     <caption>Erklärung der Komponenten der YAML-Datei</caption>
+     <thead>
+     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td><code>containers/env/name</code></td>
+     <td>Der Name Ihrer Umgebungsvariablen. </td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/name</code></td>
+     <td>Der Name des geheimen Schlüssels, den Sie im vorherigen Schritt notiert haben.</td>
+     </tr>
+     <tr>
+     <td><code>env/valueFrom/secretKeyRef/key</code></td>
+     <td>Der Schlüssel, der Teil Ihres geheimen Schlüssels ist und auf den Sie in Ihrer Umgebungsvariablen verweisen möchten. Wenn Sie auf die Serviceberechtigungsnachweise verweisen möchten, müssen Sie den Schlüssel <strong>binding</strong> verwenden.</td>
+     </tr>
+     </tbody></table>
 
+4. Erstellen Sie den Pod, der auf den Schlüssel `binding` des geheimen Schlüssels als Umgebungsvariable verweist.
+   ```
+   kubectl apply -f secret-test.yaml
+   ```
+   {: pre}
 
-## Helm in {{site.data.keyword.containershort_notm}} konfigurieren
+5. Stellen Sie sicher, dass der Pod erstellt wurde.
+   ```
+   kubectl get pods
+   ```
+   {: pre}
+
+   CLI-Beispielausgabe:
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+    secret-test-1111454598-gfx32   1/1       Running   0          1m
+   ```
+   {: screen}
+
+6. Stellen Sie sicher, dass die Umgebungsvariable richtig festgelegt ist.
+   1. Melden Sie sich beim Pod an.
+      ```
+      kubectl exec <podname> -it bash
+      ```
+      {: pre}
+
+   2. Listen Sie alle Umgebungsvariablen im Pod auf.
+      ```
+      env
+      ```
+      {: pre}
+
+      Beispielausgabe:
+      ```
+      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      ```
+      {: screen}
+
+7. Konfigurieren Sie Ihre App zum Lesen der Umgebungsvariablen und zum Parsen des JSON-Inhalts, um die Informationen abzurufen, die Sie für den Zugriff auf den Service benötigen.
+
+   Beispielcode in Python:
+   ```
+   if os.environ.get('BINDING'):
+        credentials = json.loads(os.environ.get('BINDING'))
+   ```
+   {: codeblock}
+
+## Helm in {{site.data.keyword.containerlong_notm}} konfigurieren
 {: #helm}
 
 [Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh) ist ein Kubernetes-Paketmanager. Sie können Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen.
 {:shortdesc}
 
-Vor der Verwendung von Helm-Diagrammen mit {{site.data.keyword.containershort_notm}} müssen Sie eine Helm-Instanz in Ihrem Cluster installieren und initialisieren. Sie können anschließend das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzufügen.
+Vor der Verwendung von Helm-Diagrammen mit {{site.data.keyword.containerlong_notm}} müssen Sie eine Helm-Instanz in Ihrem Cluster installieren und initialisieren. Sie können anschließend das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzufügen.
 
 Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem Sie ein Helm-Diagramm verwenden möchten.
 
@@ -501,9 +662,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
 
 2. **Wichtig**: Um Clustersicherheit zu bewahren, erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`.
 
-    1. Erstellen Sie in Ihrem bevorzugten Editor die folgende Datei und speichern Sie sie als `rbac-config.yaml`.
-      **Hinweis**:
-        * Wenn Sie Tiller mit dem Servicekonto und der Cluster-Rollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](cs_users.html#access_policies) verfügen. Sie können einen anderen Namensbereich als `kube-system` auswählen, aber alle IBM Helm-Diagramme müssen in `kube-system` installiert sein. Immer, wenn Sie den Befehl `helm` ausführen, müssen Sie mit dem Flag `tiller-namespace <namespace>` auf den anderen Namensbereich verweisen, in dem Tiller installiert ist.
+    1. Erstellen Sie in Ihrem bevorzugten Editor die folgende Datei und speichern Sie sie als `rbac-config.yaml`. **Hinweis**: Wenn Sie Tiller mit dem Servicekonto und der Cluster-Rollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](cs_users.html#access_policies) verfügen. Sie können einen anderen Namensbereich als `kube-system` auswählen, aber alle IBM Helm-Diagramme müssen in `kube-system` installiert sein. Immer, wenn Sie den Befehl `helm` ausführen, müssen Sie mit dem Flag `tiller-namespace <namespace>` auf den anderen Namensbereich verweisen, in dem Tiller installiert ist.
 
       ```
       apiVersion: v1

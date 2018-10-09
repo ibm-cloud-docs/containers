@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -31,21 +31,23 @@ lastupdated: "2018-08-06"
 ## CLI のインストール
 {: #cs_cli_install_steps}
 
-{{site.data.keyword.containershort_notm}} での Kubernetes クラスターの作成と管理、およびクラスターへのコンテナー化アプリのデプロイに必要な CLI をインストールします。
+{{site.data.keyword.containerlong_notm}} での Kubernetes クラスターの作成と管理、およびクラスターへのコンテナー化アプリのデプロイに必要な CLI をインストールします。
 {:shortdesc}
 
 このタスクには、次の CLI とプラグインをインストールするための情報が含まれています。
 
--   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
--   {{site.data.keyword.containershort_notm}} プラグイン
+-   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.8.0 以降
+-   {{site.data.keyword.containerlong_notm}} プラグイン
 -   クラスターの `major.minor` バージョンと一致する Kubernetes CLI バージョン
 -   オプション: {{site.data.keyword.registryshort_notm}} プラグイン
--   オプション: Docker バージョン 1.9 以降
 
 <br>
 CLI をインストールするには、以下のことを行います。
 
-1.  {{site.data.keyword.containershort_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../cli/index.html#overview) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud` です。
+1.  {{site.data.keyword.containerlong_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../cli/index.html#overview) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud` です。
+
+    CLI を多用する計画ですか? [{{site.data.keyword.Bluemix_notm}} CLI の shell オートコンプリート機能の有効化 (Linux/MacOS のみ)](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-) を試してみてください。
+    {: tip}
 
 2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
 
@@ -56,10 +58,10 @@ CLI をインストールするには、以下のことを行います。
 
     **注:** フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
-3.  Kubernetes クラスターを作成し、ワーカー・ノードを管理するには、{{site.data.keyword.containershort_notm}} プラグインをインストールします。 {{site.data.keyword.containershort_notm}} プラグインを使用してコマンドを実行するための接頭部は、`ibmcloud ks` です。
+3.  Kubernetes クラスターを作成し、ワーカー・ノードを管理するには、{{site.data.keyword.containerlong_notm}} プラグインをインストールします。 {{site.data.keyword.containerlong_notm}} プラグインを使用してコマンドを実行するための接頭部は、`ibmcloud ks` です。
 
     ```
-    ibmcloud plugin install container-service -r Bluemix
+    ibmcloud plugin install container-service 
     ```
     {: pre}
 
@@ -70,15 +72,15 @@ CLI をインストールするには、以下のことを行います。
     ```
     {: pre}
 
-    {{site.data.keyword.containershort_notm}} プラグインは container-service として結果に表示されます。
+    {{site.data.keyword.containerlong_notm}} プラグインは container-service として結果に表示されます。
 
 4.  {: #kubectl}Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.10.5 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
+    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.10.7 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe)
 
     2.  **OSX および Linux の場合**: 以下の手順を実行します。
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
@@ -114,7 +116,7 @@ CLI をインストールするには、以下のことを行います。
 5.  プライベート・イメージ・リポジトリーを管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。 レジストリー・コマンドを実行するための接頭部は、`ibmcloud cr` です。
 
     ```
-    ibmcloud plugin install container-registry -r Bluemix
+    ibmcloud plugin install container-registry 
     ```
     {: pre}
 
@@ -127,9 +129,7 @@ CLI をインストールするには、以下のことを行います。
 
     プラグインは container-registry として結果に表示されます。
 
-6.  ローカルにイメージを作成して、それらをレジストリー名前空間にプッシュするには、[Docker をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。 Docker CLI は、イメージ内にアプリを構築するために使用されます。 Docker CLI を使用してコマンドを実行するための接頭部は、`docker` です。
-
-次に、[{{site.data.keyword.containershort_notm}} における CLI からの Kubernetes クラスターの作成](cs_clusters.html#clusters_cli)を開始します。
+次に、[{{site.data.keyword.containerlong_notm}} における CLI からの Kubernetes クラスターの作成](cs_clusters.html#clusters_cli)を開始します。
 
 以下の CLI に関する参照情報については、それらのツールの資料を参照してください。
 
@@ -148,6 +148,8 @@ CLI をインストールするには、以下のことを行います。
 
 コンピューターに個別に各 CLI をインストールする代わりに、コンピューター上で実行するコンテナーに CLI をインストールすることができます。
 {:shortdesc}
+
+始めに、[Docker をインストール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download) し、ローカルにイメージをビルドして実行します。Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
 
 1. 提供された Dockerfile からイメージを作成します。
 
@@ -175,7 +177,7 @@ CLI をインストールするには、以下のことを行います。
 Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
 {:shortdesc}
 
-Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes 1.10.7 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
 
@@ -246,8 +248,8 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
     出力例:
 
     ```
-    Client Version: v1.10.5
-    Server Version: v1.10.5
+    Client Version: v1.10.7
+    Server Version: v1.10.7
     ```
     {: screen}
 
@@ -267,11 +269,10 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
 
 このタスクには、これらの CLI を更新するための情報が含まれています。
 
--   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
--   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.10.5 以降
+-   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.8.0 以降
+-   {{site.data.keyword.containerlong_notm}} プラグイン
+-   Kubernetes CLI バージョン 1.10.7 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
--   Docker バージョン 1.9. 以降
 
 <br>
 CLI を更新するには、以下のようにします。
@@ -287,11 +288,11 @@ CLI を更新するには、以下のようにします。
 
      **注:** フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
-3.  {{site.data.keyword.containershort_notm}} プラグインを更新します。
+3.  {{site.data.keyword.containerlong_notm}} プラグインを更新します。
     1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
-        ibmcloud plugin update container-service -r Bluemix
+        ibmcloud plugin update container-service 
         ```
         {: pre}
 
@@ -302,7 +303,7 @@ CLI を更新するには、以下のようにします。
         ```
         {: pre}
 
-        {{site.data.keyword.containershort_notm}} プラグインは container-service として結果に表示されます。
+        {{site.data.keyword.containerlong_notm}} プラグインは container-service として結果に表示されます。
 
     3.  CLI を初期化します。
 
@@ -317,7 +318,7 @@ CLI を更新するには、以下のようにします。
     1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
-        ibmcloud plugin update container-registry -r Bluemix
+        ibmcloud plugin update container-registry 
         ```
         {: pre}
 
@@ -329,10 +330,6 @@ CLI を更新するには、以下のようにします。
         {: pre}
 
         レジストリー・プラグインが container-registry として結果に表示されます。
-
-6.  Docker を更新します。
-    -   Docker Community Edition を使用している場合は、Docker を開始し、**Docker** アイコンをクリックし、**「Check for updatess (更新のチェック)」**をクリックします。
-    -   Docker Toolbox を使用する場合は、[最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をダウンロードし、インストーラーを実行します。
 
 <br />
 
@@ -346,15 +343,13 @@ CLI を更新するには、以下のようにします。
 このタスクには、次の CLI を削除するための情報が含まれています。
 
 
--   {{site.data.keyword.containershort_notm}} プラグイン
+-   {{site.data.keyword.containerlong_notm}} プラグイン
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} プラグイン
--   Docker バージョン 1.9. 以降
-
 <br>
 CLI をアンインストールするには、以下のようにします。
 
-1.  {{site.data.keyword.containershort_notm}} プラグインをアンインストールします。
+1.  {{site.data.keyword.containerlong_notm}} プラグインをアンインストールします。
 
     ```
     ibmcloud plugin uninstall container-service
@@ -377,27 +372,21 @@ CLI をアンインストールするには、以下のようにします。
 
     container-service プラグインと container-registry プラグインは結果に表示されません。
 
-6.  Docker をアンインストールします。 Docker をアンインストールする手順は、ご使用のオペレーティング・システムによって異なります。
-
-    - [OSX ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
-    - [Linux ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
-
 <br />
 
 
 ## API を使用したクラスターのデプロイメントの自動化
 {: #cs_api}
 
-{{site.data.keyword.containershort_notm}} API を使用して、Kubernetes クラスターの作成、デプロイメント、管理を自動化できます。
+{{site.data.keyword.containerlong_notm}} API を使用して、Kubernetes クラスターの作成、デプロイメント、管理を自動化できます。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照してください。 
+{{site.data.keyword.containerlong_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照してください。 
 
 [API Swagger JSON ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api-json) を使用して、自動化作業の一部として API と対話可能なクライアントを生成することもできます。
 {: tip}
 
-**注:** {{site.data.keyword.containershort_notm}} で認証するには、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成された IAM (ID およびアクセス管理) トークンを提供する必要があります。このトークンには、クラスターの作成に使用された {{site.data.keyword.Bluemix_notm}} アカウント ID が入っています。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、IAM トークンの作成を自動化するための次のオプションから選択できます。
+**注:** {{site.data.keyword.containerlong_notm}} で認証するには、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成された IAM (ID およびアクセス管理) トークンを提供する必要があります。このトークンには、クラスターの作成に使用された {{site.data.keyword.Bluemix_notm}} アカウント ID が入っています。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、IAM トークンの作成を自動化するための次のオプションから選択できます。
 
 <table>
 <caption>ID タイプとオプション</caption>
@@ -644,7 +633,7 @@ CLI をアンインストールするには、以下のようにします。
      </tbody>
      </table>
 
-5.  [{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api) を参照して、サポートされている API のリストを確認します。
+5.  [{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api) を参照して、サポートされている API のリストを確認します。
 
 <br />
 
@@ -722,4 +711,4 @@ IAM トークンを作成する場合、または新しいリフレッシュ・�
 
     API 出力の **access_token** フィールドに新しい IAM トークンがあり、**refresh_token** フィールドに IAM リフレッシュ・トークンがあります。
 
-2.  前の手順のトークンを使用して、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) の作業を進めます。
+2.  前の手順のトークンを使用して、[{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) の作業を進めます。

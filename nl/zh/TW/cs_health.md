@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ lastupdated: "2018-08-06"
 ## 瞭解叢集和應用程式日誌轉遞
 {: #logging}
 
-持續監視及記載是偵測叢集上攻擊以及疑難排解它們所造成之問題的關鍵。持續監視叢集，即可更充分地瞭解叢集容量以及您應用程式可用的資源可用性。這容許您做相應的準備，以保護應用程式免於關閉。若要配置記載，您必須在 {{site.data.keyword.containershort_notm}} 中使用標準 Kubernetes 叢集。
+持續監視及記載是偵測叢集上攻擊以及疑難排解它們所造成之問題的關鍵。持續監視叢集，即可更充分地瞭解叢集容量以及您應用程式可用的資源可用性。這容許您做相應的準備，以保護應用程式免於關閉。若要配置記載，您必須在 {{site.data.keyword.containerlong_notm}} 中使用標準 Kubernetes 叢集。
 {: shortdesc}
 
 
 **IBM 是否會監視我的叢集？**
-IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containershort_notm}} 會自動掃描每個已部署 Kubernetes 主節點的節點，以尋找 Kubernetes 及 OS 特定安全修正程式中存在的漏洞。如果找到漏洞，{{site.data.keyword.containershort_notm}} 會自動套用修正程式，並代表使用者來解決漏洞以確保主節點保護。您負責監視及分析叢集其餘部分的日誌。
+IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlong_notm}} 會自動掃描每個已部署 Kubernetes 主節點的節點，以尋找 Kubernetes 及 OS 特定安全修正程式中存在的漏洞。如果找到漏洞，{{site.data.keyword.containerlong_notm}} 會自動套用修正程式，並代表使用者來解決漏洞以確保主節點保護。您負責監視及分析叢集其餘部分的日誌。
 
 **我可以配置記載的來源為何？**
 
@@ -135,13 +135,13 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containersh
 ## 配置日誌轉遞
 {: #configuring}
 
-您可以透過 GUI 或 CLI 來配置 {{site.data.keyword.containershort_notm}} 的記載。
+您可以透過 GUI 或 CLI 來配置 {{site.data.keyword.containerlong_notm}} 的記載。
 {: shortdesc}
 
 ### 使用 GUI 啟用日誌轉遞
 {: #enable-forwarding-ui}
 
-您可以在 {{site.data.keyword.containershort_notm}} 儀表板中配置日誌轉遞。可能需要一些時間才能完成此處理程序，因此，如果您未立即看到日誌，請嘗試等待幾分鐘，然後再重新檢查。
+您可以在 {{site.data.keyword.containerlong_notm}} 儀表板中配置日誌轉遞。可能需要一些時間才能完成此處理程序，因此，如果您未立即看到日誌，請嘗試等待幾分鐘，然後再重新檢查。
 
 若要建立帳戶層次的配置，針對特定容器名稱空間，或針對應用程式記載，請使用 CLI。
 {: tip}
@@ -161,8 +161,8 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containersh
 
 **將日誌轉遞至 IBM**
 
-1. 驗證許可權。如果您已在建立叢集或記載配置時指定空間，則帳戶擁有者及 {{site.data.keyword.containershort_notm}} API 金鑰擁有者都需要有該空間的「管理員」、「開發人員」或「審核員」[許可權](cs_users.html#access_policies)。
-  * 如果您不知道 {{site.data.keyword.containershort_notm}} API 金鑰擁有者是誰，請執行下列指令。
+1. 驗證許可權。如果您已在建立叢集或記載配置時指定空間，則帳戶擁有者及 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者都需要有該空間的「管理員」、「開發人員」或「審核員」[許可權](cs_users.html#access_policies)。
+  * 如果您不知道 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者是誰，請執行下列指令。
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
@@ -323,7 +323,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containersh
 ### 檢視日誌
 {: #view_logs}
 
-若要檢視叢集和容器的日誌，您可以使用標準 Kubernetes 及 Docker 記載特性。
+若要檢視叢集及容器的日誌，您可以使用標準 Kubernetes 及容器運行環境記載功能。
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -332,7 +332,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containersh
 您可以透過 Kibana 儀表板來檢視您轉遞至 {{site.data.keyword.loganalysislong_notm}} 的日誌。
 {: shortdesc}
 
-如果您已使用預設值來建立配置檔，則可以在建立該叢集的帳戶或組織和空間中找到您的日誌。如果您在配置檔中指定了組織及空間，則可以在該空間中找到您的日誌。如需記載的相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 的記載功能](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+如果您已使用預設值來建立配置檔，則可以在建立該叢集的帳戶或組織和空間中找到您的日誌。如果您在配置檔中指定了組織及空間，則可以在該空間中找到您的日誌。如需記載的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的記載功能](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
 
 若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您針對叢集配置日誌轉遞所在的 {{site.data.keyword.Bluemix_notm}} 帳戶或空間。
 - 美國南部及美國東部：https://logging.ng.bluemix.net
@@ -344,9 +344,9 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containersh
 
 </br>
 
-**Docker 日誌**
+**容器日誌**
 
-您可以運用內建 Docker 記載功能來檢閱標準 STDOUT 及 STDERR 輸出串流的活動。如需相關資訊，請參閱[檢視在 Kubernetes 叢集裡執行的容器的容器日誌](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+您可以運用內建容器運行環境記載功能，來檢閱標準 STDOUT 及 STDERR 輸出串流的活動。如需相關資訊，請參閱[檢視在 Kubernetes 叢集裡執行的容器的容器日誌](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
 
 <br />
 
@@ -459,7 +459,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 
 **開始之前**
 
-1. 驗證許可權。如果您在建立叢集或記載配置時指定一個空間，則帳戶擁有者及 {{site.data.keyword.containershort_notm}} 金鑰擁有者都需要有該空間的「管理員」、「開發人員」或「審核員」許可權。
+1. 驗證許可權。如果您在建立叢集或記載配置時指定一個空間，則帳戶擁有者及 {{site.data.keyword.containerlong_notm}} 金鑰擁有者都需要有該空間的「管理員」、「開發人員」或「審核員」許可權。
 
 2. 將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要從該處收集 API 伺服器審核日誌的叢集。**附註**：如果您是使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
 
@@ -622,20 +622,20 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 ## 檢視度量值
 {: #view_metrics}
 
-度量值可以協助您監視叢集的性能及效能。您可以使用標準 Kubernetes 及 Docker 特性，來監視叢集和應用程式的性能。**附註**：只有標準叢集支援監視。
+度量值可以協助您監視叢集的性能及效能。您可以使用標準 Kubernetes 及容器運行環境功能，來監視叢集及應用程式的性能。**附註**：只有標準叢集支援監視。
 {:shortdesc}
 
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}} 中的叢集詳細資料頁面</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 提供叢集性能及容量以及叢集資源用量的相關資訊。您可以使用此 GUI 來橫向擴充叢集、使用持續性儲存空間，以及透過 {{site.data.keyword.Bluemix_notm}} 服務連結將更多功能新增至叢集。若要檢視叢集詳細資料頁面，請移至 **{{site.data.keyword.Bluemix_notm}} 儀表板**，然後選取一個叢集。</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} 提供叢集性能及容量以及叢集資源用量的相關資訊。您可以使用此 GUI 來橫向擴充叢集、使用持續性儲存空間，以及透過 {{site.data.keyword.Bluemix_notm}} 服務連結將更多功能新增至叢集。若要檢視叢集詳細資料頁面，請移至 **{{site.data.keyword.Bluemix_notm}} 儀表板**，然後選取一個叢集。</dd>
   <dt>Kubernetes 儀表板</dt>
-    <dd>Kubernetes 儀表板是一種管理 Web 介面，您可以在此介面中檢閱工作者節點的性能、尋找 Kubernetes 資源、部署容器化應用程式，以及使用記載和監視資訊對應用程式進行疑難排解。如需如何存取 Kubernetes 儀表板的相關資訊，請參閱[啟動 {{site.data.keyword.containershort_notm}} 的 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</dd>
+    <dd>Kubernetes 儀表板是一種管理 Web 介面，您可以在此介面中檢閱工作者節點的性能、尋找 Kubernetes 資源、部署容器化應用程式，以及使用記載和監視資訊對應用程式進行疑難排解。如需如何存取 Kubernetes 儀表板的相關資訊，請參閱[啟動 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>標準叢集的度量值位於在建立 Kubernetes 叢集時所登入的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了 {{site.data.keyword.Bluemix_notm}} 空間，則度量值位於該空間中。會自動收集叢集裡所部署的所有容器的容器度量值。這些度量值會透過 Grafana 傳送並設為可供使用。如需度量值的相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 的監視功能](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)。</p>
+    <dd><p>標準叢集的度量值位於在建立 Kubernetes 叢集時所登入的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了 {{site.data.keyword.Bluemix_notm}} 空間，則度量值位於該空間中。會自動收集叢集裡所部署的所有容器的容器度量值。這些度量值會透過 Grafana 傳送並設為可供使用。如需度量值的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的監視功能](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)。</p>
     <p>若要存取 Grafana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶或空間。</p> <table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
   <caption>針對監視資料流量開啟的 IP 位址</caption>
         <thead>
-        <th>{{site.data.keyword.containershort_notm}} 地區</th>
+        <th>{{site.data.keyword.containerlong_notm}} 地區</th>
         <th>監視位址</th>
         <th>監視 IP 位址</th>
         </thead>
@@ -667,7 +667,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 您可以配置其他工具來取得更多的監視功能。
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus 是一個針對 Kubernetes 所設計的開放程式碼監視、記載及警示工具。此工具會根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。如需設定資訊，請參閱[整合服務與 {{site.data.keyword.containershort_notm}}](cs_integrations.html#integrations)。</dd>
+    <dd>Prometheus 是一個針對 Kubernetes 所設計的開放程式碼監視、記載及警示工具。此工具會根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。如需設定資訊，請參閱[整合服務與 {{site.data.keyword.containerlong_notm}}](cs_integrations.html#integrations)。</dd>
 </dl>
 
 <br />

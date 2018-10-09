@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
 - Supervisar la salud de los nodos trabajadores y proporcionar automatización para la actualización y recuperación de los nodos trabajadores
 - Realizar tareas de automatización sobre su cuenta de la infraestructura, incluida la adición de nodos trabajadores, la eliminación de nodos trabajadores y la creación de una subred predeterminada
 - Gestionar, actualizar y recuperar los componentes operativos dentro del clúster, como por ejemplo el equilibrador de carga de aplicación de Ingress y el plug-in de almacenamiento
-- Suministrar volúmenes de almacenamiento cuando lo soliciten las reclamaciones de volumen permanente
+- Suministrar volúmenes de almacenamiento cuando lo soliciten las reclamaciones de volumen persistente
 - Proporcionar valores de seguridad en todos los nodos trabajadores
 
 </br>
@@ -45,17 +45,17 @@ Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
 - [Desplegar y gestionar los recursos de Kubernetes, como pods, servicios y despliegues, dentro del clúster](cs_app.html#app_cli)
 - [Aprovechar la capacidad del servicio y de Kubernetes para garantizar la alta disponibilidad de las apps](cs_app.html#highly_available_apps)
 - [Adición o eliminación de capacidad de clúster mediante el redimensionamiento de las agrupaciones de nodos trabajadores](cs_clusters.html#add_workers)
-- [Habilitación de la expansión de VLAN y mantenimiento del equilibrio de las agrupaciones de nodos trabajadores multizona entre zonas](cs_clusters.html#ha_clusters)
+- [Habilitación de la expansión de VLAN y mantenimiento del equilibrio de las agrupaciones de nodos trabajadores multizona entre zonas](cs_clusters_planning.html#ha_clusters)
 - [Crear VLAN públicas y privadas en la infraestructura de IBM Cloud (SoftLayer) para el aislamiento de la red del clúster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Garantizar que todos los nodos trabajadores tienen conectividad de red con el URL maestro de Kubernetes](cs_firewall.html#firewall) <p>**Nota**: Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. </p>
+- [Garantizar que todos los nodos trabajadores tienen conectividad de red con el URL maestro de Kubernetes](cs_firewall.html#firewall) <p>**Nota**: Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan). </p>
 - [La actualización del maestro kube-apiserver cuando haya disponibles actualizaciones de versión de Kubernetes](cs_cluster_update.html#master)
 - [Mantenimiento actualizado de nodos trabajadores para versiones mayores, menores y parches](cs_cluster_update.html#worker_node)
 - [Recuperar nodos trabajadores con problemas ejecutando los mandatos `kubectl`, tales como `cordon` o `drain`, y ejecutando los mandatos `ibmcloud ks`, tales como `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Añadir o eliminar subredes en la infraestructura de IBM Cloud (SoftLayer) cuando sea necesario](cs_subnets.html#subnets)
-- [Hacer copia de seguridad y restaurar datos en el almacenamiento permanente en la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](../services/RegistryImages/ibm-backup-restore/index.html)
+- [Hacer copia de seguridad y restaurar datos en el almacenamiento persistente en la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](../services/RegistryImages/ibm-backup-restore/index.html)
 - Configuración de los servicios de [registro](cs_health.html#logging) y de [supervisión](cs_health.html#view_metrics) para dar soporte al buen estado y al rendimiento del clúster
 - [Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática](cs_health.html#autorecovery)
-- Auditoría de sucesos que cambian recursos en el clúster, por ejemplo mediante el uso de [ {{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events), para ver las actividades iniciadas por el usuario que cambian el estado de la instancia de {{site.data.keyword.containershort_notm}}
+- Auditoría de sucesos que cambian recursos en el clúster, por ejemplo mediante el uso de [ {{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events), para ver las actividades iniciadas por el usuario que cambian el estado de la instancia de {{site.data.keyword.containerlong_notm}}
 
 <br />
 
@@ -63,14 +63,14 @@ Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
 ## Abuso en {{site.data.keyword.containerlong_notm}}
 {: #terms}
 
-Los clientes no puede utilizar {{site.data.keyword.containershort_notm}} de forma inapropiada.
+Los clientes no puede utilizar {{site.data.keyword.containerlong_notm}} de forma inapropiada.
 {:shortdesc}
 
 Entre los usos no apropiados se incluye:
 
 *   Cualquier actividad ilegal
 *   Distribuir o ejecutar malware
-*   Provocar cualquier daño a {{site.data.keyword.containershort_notm}} o interferir a cualquier usuario con la utilización de {{site.data.keyword.containershort_notm}}
+*   Provocar cualquier daño a {{site.data.keyword.containerlong_notm}} o interferir a cualquier usuario con la utilización de {{site.data.keyword.containerlong_notm}}
 *   Provocar daños o interferir la utilización de otros usuarios con cualquier otro sistema o servicio
 *   Acceder de forma no autorizada a los servicios o sistemas
 *   Realizar modificaciones no autorizadas de los servicios o sistemas

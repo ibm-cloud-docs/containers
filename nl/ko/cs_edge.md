@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -38,7 +38,7 @@ lastupdated: "2018-08-06"
 
 - [표준 클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
 - 클러스터에 하나 이상의 공용 VLAN을 가지고 있는지 확인하십시오. 에지 작업자 노드는 사설 VLAN만 있는 클러스터에서는 사용할 수 없습니다.
-- 구역당 최소한 2개의 작업자가 있으며 클러스터의 모든 구역에 전개된 [새 작업자 풀](cs_clusters.html#add_pool)을 작성하십시오. 
+- 구역당 최소한 2개의 작업자가 있으며 클러스터의 모든 구역에 전개된 [새 작업자 풀](cs_clusters.html#add_pool)을 작성하십시오.
 - [클러스터에 Kubernetes CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 에지 노드로 작업자 노드에 레이블을 지정하려면 다음을 수행하십시오.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Reportez-vous aux commandes suivantes pour créer et gérer des clusters dans {{
 ## Commandes ibmcloud ks
 {: #cs_commands}
 
-**Astuce :** pour identifier la version du plug-in {{site.data.keyword.containershort_notm}}, exécutez la commande suivante :
+**Astuce :** pour identifier la version du plug-in {{site.data.keyword.containerlong_notm}}, exécutez la commande suivante :
 
 ```
 ibmcloud plugin list
@@ -324,7 +324,7 @@ ibmcloud plugin list
 ### ibmcloud ks api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
-Permet de cibler le noeud final d'API pour {{site.data.keyword.containershort_notm}}. Si vous n'indiquez pas de noeud final, vous pourrez voir les informations sur le noeud final actuellement ciblé.
+Permet de cibler le noeud final d'API pour {{site.data.keyword.containerlong_notm}}. Si vous n'indiquez pas de noeud final, vous pourrez voir les informations sur le noeud final actuellement ciblé.
 
 Vous changez de région ? Utilisez la [commande](#cs_region-set) `ibmcloud ks region-set` à la place.
 {: tip}
@@ -333,7 +333,7 @@ Vous changez de région ? Utilisez la [commande](#cs_region-set) `ibmcloud ks re
 
    <dl>
    <dt><code><em>ENDPOINT</em></code></dt>
-   <dd>Noeud final d'API {{site.data.keyword.containershort_notm}}. Notez que ce noeud final est différent des noeuds finaux {{site.data.keyword.Bluemix_notm}}. Cette valeur est obligatoire pour définir le noeud final d'API. Valeurs admises :<ul>
+   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}}. Notez que ce noeud final est différent des noeuds finaux {{site.data.keyword.Bluemix_notm}}. Cette valeur est obligatoire pour définir le noeud final d'API. Valeurs admises :<ul>
    <li>Noeud final global : https://containers.bluemix.net</li>
    <li>Noeud final d'Asie-Pacifique nord : https://ap-north.containers.bluemix.net</li>
    <li>Noeud final d'Asie-Pacifique sud : https://ap-south.containers.bluemix.net</li>
@@ -375,13 +375,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-Permet d'afficher le nom et l'adresse e-mail du propriétaire de la clé d'API IAM dans une région {{site.data.keyword.containershort_notm}}.
+Permet d'afficher le nom et l'adresse e-mail du propriétaire de la clé d'API IAM dans une région {{site.data.keyword.containerlong_notm}}.
 
-La clé d'API IAM (Identity and Access Management) est définie automatiquement pour une région lorsque la première action qui nécessite la règle d'accès admin {{site.data.keyword.containershort_notm}} est effectuée. Par exemple, supposons que l'un de vos administrateurs crée le premier cluster dans la région `us-south`. Pour cette opération, la clé d'API IAM de cet utilisateur est stockée dans le compte correspondant à cette région. La clé d'API est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer), par exemple de nouveaux noeuds worker ou réseaux locaux virtuels (VLAN).
+La clé d'API IAM (Identity and Access Management) est définie automatiquement pour une région lorsque la première action qui nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} est effectuée. Par exemple, supposons que l'un de vos administrateurs crée le premier cluster dans la région `us-south`. Pour cette opération, la clé d'API IAM de cet utilisateur est stockée dans le compte correspondant à cette région. La clé d'API est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer), par exemple de nouveaux noeuds worker ou réseaux locaux virtuels (VLAN).
 
-Lorsqu'un autre utilisateur effectue une action qui nécessite une interaction avec le portefeuille d'infrastructure IBM Cloud (SoftLayer) dans cette région, par exemple la création d'un nouveau cluster ou le rechargement d'un noeud worker, la clé d'API stockée est utilisée pour déterminer s'il dispose des droits suffisants requis pour effectuer cette action. Pour vous assurer que les actions liées à l'infrastructure dans votre cluster peuvent être effectuées sans problème, affectez à vos administrateurs {{site.data.keyword.containershort_notm}} la règle d'accès **Superutilisateur** de l'infrastructure. Pour plus d'informations, voir [Gestion de l'accès utilisateur](cs_users.html#infra_access).
+Lorsqu'un autre utilisateur effectue une action qui nécessite une interaction avec le portefeuille d'infrastructure IBM Cloud (SoftLayer) dans cette région, par exemple la création d'un nouveau cluster ou le rechargement d'un noeud worker, la clé d'API stockée est utilisée pour déterminer s'il dispose des droits suffisants requis pour effectuer cette action. Pour vous assurer que les actions liées à l'infrastructure dans votre cluster peuvent être effectuées sans problème, affectez à vos administrateurs {{site.data.keyword.containerlong_notm}} la règle d'accès **Superutilisateur** de l'infrastructure. Pour plus d'informations, voir [Gestion de l'accès utilisateur](cs_users.html#infra_access).
 
-Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [ibmcloud ks api-key-reset](#cs_api_key_reset). Cette commande nécessite la règle d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
+Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [ibmcloud ks api-key-reset](#cs_api_key_reset). Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
 
 **Astuce :** la clé d'API renvoyée par cette commande ne peut pas être utilisée si les données d'identification ont été définies manuellement à l'aide de la commande [ibmcloud ks credentials-set](#cs_credentials_set).
 
@@ -410,11 +410,11 @@ Si vous constatez que la clé d'API stockée pour une région nécessite une mis
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-Permet de remplacer la clé d'API IAM actuelle dans une région {{site.data.keyword.containershort_notm}}.
+Permet de remplacer la clé d'API IAM actuelle dans une région {{site.data.keyword.containerlong_notm}}.
 
-Cette commande nécessite la règle d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la [commande `ibmcloud ks api-key-info`](#cs_api_key_info).
+Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la [commande `ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des droits [{{site.data.keyword.containershort_notm}} et des droit de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
+**Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des droits [{{site.data.keyword.containerlong_notm}} et des droit de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
 <strong>Options de commande</strong> :
 
@@ -567,13 +567,13 @@ Affichez la liste des commandes et des paramètres pris en charge.
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-Initialisez le plug-in {{site.data.keyword.containershort_notm}} ou spécifiez la région dans laquelle vous souhaitez créer ou accéder à des clusters Kubernetes.
+Initialisez le plug-in {{site.data.keyword.containerlong_notm}} ou spécifiez la région dans laquelle vous souhaitez créer ou accéder à des clusters Kubernetes.
 
 <strong>Options de commande</strong> :
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>Noeud final d'API {{site.data.keyword.containershort_notm}} à utiliser.  Cette valeur est facultative. [Afficher les valeurs de noeud final d'API disponibles.](cs_regions.html#container_regions)</dd>
+   <dd>Noeud final d'API {{site.data.keyword.containerlong_notm}} à utiliser.  Cette valeur est facultative. [Afficher les valeurs de noeud final d'API disponibles.](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Autoriser une connexion HTTP non sécurisée.</dd>
@@ -908,7 +908,7 @@ Affichez des informations sur un cluster dans votre organisation.
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -1013,7 +1013,7 @@ Affichez la liste des clusters dans votre organisation.
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-Affichez la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containershort_notm}}. Mettez à jour votre [maître de cluster](#cs_cluster_update) et vos [noeuds worker](cs_cli_reference.html#cs_worker_update) à la version par défaut pour bénéficier des fonctionnalités stables les plus récentes.
+Affichez la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containerlong_notm}}. Mettez à jour votre [maître de cluster](#cs_cluster_update) et vos [noeuds worker](cs_cli_reference.html#cs_worker_update) à la version par défaut pour bénéficier des fonctionnalités stables les plus récentes.
 
 **Options de commande** :
 
@@ -1212,7 +1212,7 @@ Depuis votre compte d'infrastructure IBM Cloud (SoftLayer), vous pouvez ajouter 
 
 **Remarque :**
 * Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
-* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.
 * Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Options de commande</strong> :
@@ -1240,10 +1240,10 @@ Depuis votre compte d'infrastructure IBM Cloud (SoftLayer), vous pouvez ajouter 
 ### ibmcloud ks cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
-Créez un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et le rend disponible pour le cluster spécifié dans {{site.data.keyword.containershort_notm}}.
+Créez un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et le rend disponible pour le cluster spécifié dans {{site.data.keyword.containerlong_notm}}.
 
 **Remarque :**
-* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.
 * Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Options de commande</strong> :
@@ -1274,12 +1274,12 @@ Créez un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et 
 ### ibmcloud ks cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-Mettez à disposition votre propre sous-réseau privé sur vos clusters {{site.data.keyword.containershort_notm}}.
+Mettez à disposition votre propre sous-réseau privé sur vos clusters {{site.data.keyword.containerlong_notm}}.
 
 Ce sous-réseau privé n'est pas celui qui est fourni par l'infrastructure IBM Cloud (SoftLayer). De ce fait, vous devez configurer tout routage de trafic entrant et sortant pour le sous-réseau. Pour ajouter un sous-réseau d'infrastructure IBM Cloud (SoftLayer), utilisez la [commande](#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add`.
 
 **Remarque **:
-* Lorsque vous ajoutez un sous-réseau utilisateur privé à un cluster, les adresses IP de ce sous-réseau sont utilisées pour les équilibreurs de charge privés figurant dans le cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Lorsque vous ajoutez un sous-réseau utilisateur privé à un cluster, les adresses IP de ce sous-réseau sont utilisées pour les équilibreurs de charge privés figurant dans le cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.
 * Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 <strong>Options de commande</strong> :
@@ -1654,15 +1654,15 @@ Affichage du statut de tous les équilibreurs de charge ALB dans un cluster. Si 
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-Définissez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.containershort_notm}}.
+Définissez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.containerlong_notm}}.
 
 Si vous disposez d'un compte de paiement à la carte {{site.data.keyword.Bluemix_notm}}, vous avez accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) par défaut. Cependant, vous pouvez utiliser un autre compte d'infrastructure IBM Cloud (SoftLayer) dont vous disposez déjà pour commander l'infrastructure. Vous pouvez lier le compte de cette infrastructure à votre compte {{site.data.keyword.Bluemix_notm}} en utilisant cette commande.
 
 Si les données d'identification de l'infrastructure IBM Cloud (SoftLayer) sont définies manuellement, ces données sont utilisées pour commander l'infrastructure, même s'il existe déjà une  [clé d'API IAM](#cs_api_key_info) pour le compte. Si l'utilisateur dont les données d'identification sont stockées ne dispose pas des droits requis pour commander l'infrastructure, les actions liées à l'infrastructure, par exemple la création d'un cluster ou le rechargement d'un noeud worker risquent d'échouer.
 
-Vous ne pouvez pas définir plusieurs données d'identification pour un compte {{site.data.keyword.containershort_notm}}. Tout compte {{site.data.keyword.containershort_notm}} est lié à un seul portefeuille d'infrastructure IBM Cloud (SoftLayer).
+Vous ne pouvez pas définir plusieurs données d'identification pour un compte {{site.data.keyword.containerlong_notm}}. Tout compte {{site.data.keyword.containerlong_notm}} est lié à un seul portefeuille d'infrastructure IBM Cloud (SoftLayer).
 
-**Important :** avant d'utiliser cette commande, assurez-vous que l'utilisateur dont les données d'identification sont utilisées dispose des droits [{{site.data.keyword.containershort_notm}} et des droits de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
+**Important :** avant d'utiliser cette commande, assurez-vous que l'utilisateur dont les données d'identification sont utilisées dispose des droits [{{site.data.keyword.containerlong_notm}} et des droits de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
 <strong>Options de commande</strong> :
 
@@ -1715,7 +1715,7 @@ Vous ne pouvez pas définir plusieurs données d'identification pour un compte {
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) de votre compte {{site.data.keyword.containershort_notm}}.
+Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) de votre compte {{site.data.keyword.containerlong_notm}}.
 
 Après avoir supprimé les données d'identification, la [clé d'API IAM](#cs_api_key_info) est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer).
 
@@ -1740,7 +1740,7 @@ Après avoir supprimé les données d'identification, la [clé d'API IAM](#cs_ap
 Affichez la liste des types de machine disponibles pour vos noeuds worker. Les types de machine varient en fonction de la zone. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster. Par défaut, le répertoire du disque de stockage secondaire dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS. Si l'option `disable-disk-encrypt` est incluse lors de la création du cluster, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement](cs_secure.html#encrypted_disk).
 {:shortdesc}
 
-Vous pouvez mettre à disposition votre noeud worker en tant que machine virtuelle sur un matériel dédié ou partagé, ou en tant que machine physique sur un serveur bare metal. [En savoir plus sur les options correspondant à votre type de machine](cs_clusters.html#shared_dedicated_node).
+Vous pouvez mettre à disposition votre noeud worker en tant que machine virtuelle sur un matériel dédié ou partagé, ou en tant que machine physique sur un serveur bare metal. [En savoir plus sur les options correspondant à votre type de machine](cs_clusters_planning.html#shared_dedicated_node).
 
 <strong>Options de commande</strong> :
 
@@ -2195,7 +2195,7 @@ Affichez la liste de toutes les zones disponibles pour créer un cluster. Ces zo
 ### ibmcloud ks region
 {: #cs_region}
 
-Identifiez la région {{site.data.keyword.containershort_notm}} où vous êtes actuellement situé. Vous pouvez créer et gérer des clusters spécifiques à la région. Utilisez la commande `ibmcloud ks region-set` pour changer de région.
+Identifiez la région {{site.data.keyword.containerlong_notm}} où vous êtes actuellement situé. Vous pouvez créer et gérer des clusters spécifiques à la région. Utilisez la commande `ibmcloud ks region-set` pour changer de région.
 
 **Exemple** :
 
@@ -2213,7 +2213,7 @@ Region: us-south
 ### ibmcloud ks region-set [REGION]
 {: #cs_region-set}
 
-Définissez la région pour {{site.data.keyword.containershort_notm}}. Vous pouvez créer et gérer des clusters spécifiques à la région, et aussi désirer disposer de clusters dans plusieurs régions en vue d'une haute disponibilité.
+Définissez la région pour {{site.data.keyword.containerlong_notm}}. Vous pouvez créer et gérer des clusters spécifiques à la région, et aussi désirer disposer de clusters dans plusieurs régions en vue d'une haute disponibilité.
 
 Par exemple, vous pourriez vous connecter à {{site.data.keyword.Bluemix_notm}} dans la région Sud des Etats-Unis et y créer un cluster. Vous pourriez ensuite utiliser la commande `ibmcloud ks region-set eu-central` pour cibler la région Europe centrale et y créer un autre cluster. Enfin, vous pourriez utiliser la commande `ibmcloud ks region-set us-south` pour revenir à la région Sud des Etats-Unis et gérer votre cluster dans cette région.
 
@@ -2254,7 +2254,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-Répertorie les régions disponibles. Le nom indiqué dans `Region Name` correspond au nom {{site.data.keyword.containershort_notm}} et `Region Alias` correspond au nom {{site.data.keyword.Bluemix_notm}} général pour la région.
+Répertorie les régions disponibles. Le nom indiqué dans `Region Name` correspond au nom {{site.data.keyword.containerlong_notm}} et `Region Alias` correspond au nom {{site.data.keyword.Bluemix_notm}} général pour la région.
 
 **Exemple** :
 
@@ -2321,7 +2321,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>zone</em></code></td>
-<td>Remplacez <code><em>&lt;zone&gt;</em></code> par la zone dans laquelle déployer vos noeuds worker. Les zones disponibles dépendent de la région à laquelle vous êtes connecté. Pour afficher les zones disponibles, exécutez la commande <code>ibmcloud ks zones</code>. </td>
+<td>Remplacez <code><em>&lt;zone&gt;</em></code> par la zone dans laquelle déployer vos noeuds worker. Les zones disponibles dépendent de la région à laquelle vous êtes connecté. Pour afficher les zones disponibles, exécutez la commande <code>ibmcloud ks zones</code>.</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
@@ -2333,7 +2333,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Remplacez <code>&lt;public_VLAN&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>ibmcloud ks vlans &lt;zone&gt;</code> et recherchez les routeurs VLAN commençant par <code>fcr</code> (routeur de front-end).<br><strong>Remarque</strong> : {[private_VLAN_vyatta]}</td>
+<td>Remplacez <code>&lt;public_VLAN&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>ibmcloud ks vlans &lt;zone&gt;</code> et recherchez les routeurs VLAN commençant par <code>fcr</code> (routeur de front-end). <br><strong>Remarque</strong> : {[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2605,7 +2605,7 @@ Avant de supprimer le noeud worker, assurez-vous que les pods sont replanifiés 
    ```
    {: pre}
    Ce processus peut prendre quelques minutes.
-5. Supprimez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `ibmcloud ks workers <cluster_name_or_ID>`. 
+5. Supprimez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `ibmcloud ks workers <cluster_name_or_ID>`.
    ```
    ibmcloud ks worker-rm <cluster_name_or_ID> <worker_name_or_ID>
    ```
@@ -2645,7 +2645,7 @@ Avant de supprimer le noeud worker, assurez-vous que les pods sont replanifiés 
 
 Mettez à jour les noeuds worker pour appliquer les correctifs et mises à jour de sécurité les plus récents sur le système d'exploitation et mettre à jour la version Kubernetes de sorte à ce qu'elle corresponde à celle du noeud maître. Vous pouvez mettre à jour la version du noeud maître Kubernetes avec la [commande](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update`.
 
-**Important** : l'exécution de la commande `ibmcloud ks worker-update` peut entraîner l'indisponibilité de vos services et applications. Lors de la mise à jour, tous les pods sont replanifiés sur d'autres noeuds worker et les données sont supprimées si elles elles ne sont pas stockées hors du pod. Pour éviter des temps d'indisponibilité, [vérifiez que vous disposez de suffisamment de noeuds worker pour traiter votre charge de travail alors que les noeuds worker sélectionnés sont en cours de mise à jour](cs_cluster_update.html#worker_node).
+**Important** : l'exécution de la commande `ibmcloud ks worker-update` peut entraîner l'indisponibilité de vos services et applications. Lors de la mise à jour, tous les pods sont replanifiés sur d'autres noeuds worker et les données sont supprimées si elles ne sont pas stockées hors du pod. Pour éviter des temps d'indisponibilité, [vérifiez que vous disposez de suffisamment de noeuds worker pour traiter votre charge de travail alors que les noeuds worker sélectionnés sont en cours de mise à jour](cs_cluster_update.html#worker_node).
 
 Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant la mise à jour. Consultez cette [note sur l'édition](cs_versions.html) pour plus de détails.
 
@@ -2788,7 +2788,7 @@ Affichez les détails d'un pool worker.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 
@@ -2977,7 +2977,7 @@ Affichez les pools de noeuds worker dont vous disposez dans un cluster.
 ### ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f][-s]
 {: #cs_zone_rm}
 
-**Clusters à zones multiples uniquement** : supprimez une zone de tous les pools de noeuds worker dans votre cluster. Tous les noeuds worker du pool correspondant à cette zone sont supprimés. 
+**Clusters à zones multiples uniquement** : supprimez une zone de tous les pools de noeuds worker dans votre cluster. Tous les noeuds worker du pool correspondant à cette zone sont supprimés.
 
 Avant de supprimer une zone, assurez-vous de disposer d'un nombre de noeuds worker suffisants dans d'autres zones du cluster de sorte que vos pods puissent être replanifiés afin d'éviter toute indisponibilité de votre application ou l'altération des données sur votre noeud worker.
 {: tip}

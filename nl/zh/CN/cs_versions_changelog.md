@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -29,15 +29,257 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 {: tip}
 
 有关自上一个版本以来的更改的信息，请参阅以下更改日志。
+-  V1.11 [更改日志](#111_changelog)。
 -  V1.10 [更改日志](#110_changelog)。
 -  V1.9 [更改日志](#19_changelog)。
--  V1.8 [更改日志](#18_changelog)。
 -  对不推荐使用或不受支持的版本的更改日志[归档](#changelog_archive)。
+
+</br>
+
+## V1.11 更改日志
+{: #111_changelog}
+
+查看以下更改。
+
+### 2018 年 9 月 4 日发布的 1.11.2_1516 的更改日志
+{: #1112_1516}
+
+<table summary="自 V1.11.2_1514 以来进行的更改">
+<caption>自 V1.11.2_1514 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.1.3</td>
+<td>V3.2.1</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.2/releases/#v321)。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.2</td>
+<td>1.1.3</td>
+<td>请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.3)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.2-60</td>
+<td>V1.11.2-71</td>
+<td>通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
+</tr>
+<tr>
+<td>IBM File Storage 插件配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 8 月 23 日发布的工作程序节点 FP1.11.2_1514 的更改日志
+{: #1112_1514}
+
+<table summary="自 V1.11.2_1513 以来进行的更改">
+<caption>自 V1.11.2_1513 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>更新了 `systemd` 以修复 `cgroup` 泄漏。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>使用 [CVE-2018-3620、CVE-2018-3646 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3741-1/) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 8 月 14 日发布的 1.11.2_1513 的更改日志
+{: #1112_1513}
+
+<table summary="自 V1.10.5_1518 以来进行的更改">
+<caption>自 V1.10.5_1518 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>不适用</td>
+<td>1.1.2</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](cs_versions.html#containerd)。</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](cs_versions.html#containerd)。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.2.14</td>
+<td>V3.2.18</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.2.18)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.5-118</td>
+<td>V1.11.2-60</td>
+<td>更新为支持 Kubernetes 1.11 发行版。此外，负载均衡器 pod 现在使用新的 `ibm-app-cluster-critical` pod 优先级类。</td>
+</tr>
+<tr>
+<td>IBM File Storage 插件</td>
+<td>334</td>
+<td>338</td>
+<td>已将 `incubator` 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例标签，除非使用多专区集群并且需要[添加区域和专区标签](cs_storage_basics.html#multizone)。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.10.5</td>
+<td>V1.11.2</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.2)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) 访问组。向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `Priority`，并将集群配置为支持 pod 优先级。有关更多信息，请参阅：<ul><li>[IAM 访问组](cs_users.html#rbac)</li>
+<li>[配置 pod 优先级](cs_pod_priority.html#pod_priority)</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes Heapster</td>
+<td>V1.5.2</td>
+<td>V1.5.4</td>
+<td>提高了 `heapster-nanny` 容器的资源限制。请参阅 [Kubernetes Heapster 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/heapster/releases/tag/v1.5.4)。</td>
+</tr>
+<tr>
+<td>日志记录配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>容器日志目录现在为 `/var/log/pods/`，而不是先前的 `/var/lib/docker/containers/`。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## V1.10 更改日志
 {: #110_changelog}
 
 查看以下更改。
+
+### 2018 年 9 月 4 日发布的 1.10.7_1520 的更改日志
+{: #1107_1520}
+
+<table summary="自 V1.10.5_1519 以来进行的更改">
+<caption>自 V1.10.5_1519 以来的更改</caption>
+<tr>
+<th>Calico</th>
+<th>V3.1.3</th>
+<th>V3.2.1</th>
+<td>请参阅 Calico [发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.2/releases/#v321)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.5-118</td>
+<td>V1.10.7-146</td>
+<td>更新为支持 Kubernetes 1.10.7 发行版。此外，通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
+</tr>
+<tr>
+<td>IBM File Storage 插件</td>
+<td>334</td>
+<td>338</td>
+<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br> 已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.10.5</td>
+<td>V1.10.7</td>
+<td>请参阅 Kubernetes [发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.7)。</td>
+</tr>
+<tr>
+<td>Kubernetes Heapster 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>提高了 `heapster-nanny` 容器的资源限制。</td>
+</tr>
+</table>
+
+### 2018 年 8 月 23 日发布的工作程序节点 FP1.10.5_1519 的更改日志
+{: #1105_1519}
+
+<table summary="自 V1.10.5_1518 以来进行的更改">
+<caption>自 V1.10.5_1518 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>更新了 `systemd` 以修复 `cgroup` 泄漏。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>使用 [CVE-2018-3620、CVE-2018-3646 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3741-1/) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2018 年 8 月 13 日发布的工作程序节点 FP1.10.5_1518 的更改日志
+{: #1105_1518}
+
+<table summary="自 V1.10.5_1517 以来进行的更改">
+<caption>自 V1.10.5_1517 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 7 月 27 日发布的 1.10.5_1517 的更改日志
 {: #1105_1517}
@@ -187,7 +429,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>内核更新</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>新工作程序映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
+<td>新工作程序节点映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
 </tr>
 </tbody>
 </table>
@@ -198,7 +440,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 {: #1101_1510}
 
 <table summary="自 V1.10.1_1509 以来进行的更改">
-<caption>自 1.10.1_1509 以来的更改</caption>
+<caption>自 V1.10.1_1509 以来的更改</caption>
 <thead>
 <tr>
 <th>组件</th>
@@ -294,15 +536,102 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>GPU 支持</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](cs_app.html#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](cs_clusters.html#shared_dedicated_node)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
+<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](cs_app.html#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](cs_clusters_planning.html#shared_dedicated_node)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## V1.9 更改日志
 {: #19_changelog}
 
 查看以下更改。
+
+### 2018 年 9 月 4 日发布的 1.9.10_1523 的更改日志
+{: #1910_1523}
+
+<table summary="自 V1.9.9_1522 以来进行的更改">
+<caption>自 V1.9.9_1522 以来的更改</caption>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.9.9-167</td>
+<td>V1.9.10-192</td>
+<td>更新为支持 Kubernetes 1.9.10 发行版。此外，通过将 `externalTrafficPolicy` 设置为 `local`，更改了 Cloud Provider 配置以更好地处理负载均衡器服务的更新。</td>
+</tr>
+<tr>
+<td>IBM File Storage 插件</td>
+<td>334</td>
+<td>338</td>
+<td>已将 incubator 版本更新为 1.8。将向选择的特定专区供应文件存储。您无法更新现有（静态）PV 实例的标签，除非使用多专区集群并且需要添加区域和专区标签。<br><br>已从 IBM 提供的文件存储类的安装选项中除去缺省 NFS 版本。主机的操作系统现在与 IBM Cloud infrastructure (SoftLayer) NFS 服务器协商 NFS 版本。要手动设置特定 NFS 版本，或者更改主机操作系统协商的 PV 的 NFS 版本，请参阅[更改缺省 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.9.9</td>
+<td>V1.9.10</td>
+<td>请参阅 Kubernetes [发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.10)。</td>
+</tr>
+<tr>
+<td>Kubernetes Heapster 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>提高了 `heapster-nanny` 容器的资源限制。</td>
+</tr>
+</table>
+
+### 2018 年 8 月 23 日发布的工作程序节点 FP1.9.9_1522 的更改日志
+{: #199_1522}
+
+<table summary="自 V1.9.9_1521 以来进行的更改">
+<caption>自 V1.9.9_1521 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>更新了 `systemd` 以修复 `cgroup` 泄漏。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>使用 [CVE-2018-3620、CVE-2018-3646 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3741-1/) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2018 年 8 月 13 日发布的工作程序节点 FP1.9.9_1521 的更改日志
+{: #199_1521}
+
+<table summary="自 V1.9.9_1520 以来进行的更改">
+<caption>自 V1.9.9_1520 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 7 月 27 日发布的 1.9.9_1520 的更改日志
 {: #199_1520}
@@ -458,7 +787,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>内核更新</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>新工作程序映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
+<td>新工作程序节点映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
 </tr>
 </tbody>
 </table>
@@ -527,7 +856,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>Kubernetes</td>
 <td>V1.9.3</td>
 <td>V1.9.7</td>
-<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入系统可能会自动还原的这些卷。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
+<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
 </tr>
 <tr>
 <td>Kubernetes 配置</td>
@@ -550,10 +879,68 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 </tbody>
 </table>
 
-## V1.8 更改日志
+<br />
+
+
+## 归档
+{: #changelog_archive}
+
+### V1.8 更改日志（不推荐使用，自 2018 年 9 月 22 日起不再支持）
 {: #18_changelog}
 
 查看以下更改。
+
+### 2018 年 8 月 23 日发布的工作程序节点 FP1.8.15_1520 的更改日志
+{: #1815_1520}
+
+<table summary="自 V1.8.15_1519 以来进行的更改">
+<caption>自 V1.8.15_1519 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`systemd`</td>
+<td>229</td>
+<td>230</td>
+<td>更新了 `systemd` 以修复 `cgroup` 泄漏。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-127</td>
+<td>4.4.0-133</td>
+<td>使用 [CVE-2018-3620、CVE-2018-3646 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://usn.ubuntu.com/3741-1/) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 8 月 13 日发布的工作程序节点 FP1.8.15_1519 的更改日志
+{: #1815_1519}
+
+<table summary="自 V1.8.15_1518 以来进行的更改">
+<caption>自 V1.8.15_1518 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 7 月 27 日发布的 1.8.15_1518 的更改日志
 {: #1815_1518}
@@ -709,7 +1096,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>内核更新</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>新工作程序映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
+<td>新工作程序节点映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
 </tr>
 </tbody>
 </table>
@@ -780,7 +1167,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>Kubernetes</td>
 <td>V1.8.8</td>
 <td>V1.8.11</td>
-<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入系统可能会自动还原的这些卷。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
+<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
 </tr>
 <tr>
 <td>暂停容器映像</td>
@@ -803,8 +1190,8 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 </tbody>
 </table>
 
-## 归档
-{: #changelog_archive}
+<br />
+
 
 ### V1.7 更改日志（不受支持）
 {: #17_changelog}
@@ -829,7 +1216,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>内核更新</td>
 <td>4.4.0-116</td>
 <td>4.4.0-127</td>
-<td>新工作程序映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
+<td>新工作程序节点映像具有 [CVE-2018-3639 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639) 的内核更新。</td>
 </tr>
 </tbody>
 </table>
@@ -898,7 +1285,7 @@ IBM 会自动将补丁级别的更新应用于主节点，但您必须[更新工
 <td>Kubernetes</td>
 <td>V1.7.4</td>
 <td>V1.7.16</td>
-<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入系统可能会自动还原的这些卷。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
+<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
 </tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.7.4-133</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2018-08-06"
 {: #docker_containers}
 
 名为 Docker 的开放式源代码项目基于现有 Linux 容器技术 (LXC) 构建，定义了模板，用于指示如何将软件打包成标准化单元（称为容器）以包含应用程序运行所需的所有元素。
+{{site.data.keyword.containerlong_notm}} 将 `containerd` 用作容器运行时，用于将 Docker 容器映像中的容器部署到集群中。
 {:shortdesc}
 
 了解一些基本 Docker 概念：
@@ -34,7 +35,7 @@ lastupdated: "2018-08-06"
 <dt>映像</dt>
 <dd>容器映像是要运行的每一个容器的基础。容器映像通过 Dockerfile 进行构建，此文本文件可定义如何构建映像以及要包含在其中的构建工件（例如，应用程序、应用程序配置及其依赖项）。映像始终从其他映像构建，从而使它们的配置更加快速。让其他人来做大部分的映像构建工作，您只需稍作调整即可使用。</dd>
 <dt>注册表</dt>
-<dd>映像注册表是用于存储、检索和共享容器映像的位置。存储在注册表中的映像可以公共可用（公共注册表），也可以供一小组用户访问（专用注册表）。{{site.data.keyword.containershort_notm}} 提供了公共映像（如 ibmliberty），可用于创建第一个容器化应用程序。对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.Bluemix_notm}} 中提供的注册表）来保护映像不被未经授权的用户使用。</dd>
+<dd>映像注册表是用于存储、检索和共享容器映像的位置。存储在注册表中的映像可以公共可用（公共注册表），也可以供一小组用户访问（专用注册表）。{{site.data.keyword.containerlong_notm}} 提供了公共映像（如 ibmliberty），可用于创建第一个容器化应用程序。对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.Bluemix_notm}} 中提供的注册表）来保护映像不被未经授权的用户使用。</dd>
 <dt>容器</dt>
 <dd>每个容器都是通过映像创建的。容器是一个打包应用程序，其具有所有依赖项，以便可以在环境之间移动应用程序并在不进行更改的情况下运行。与虚拟机不同，容器不会对设备、其操作系统和底层硬件进行虚拟化。在容器中只打包应用程序代码、运行时、系统工具、库和设置。容器在 Ubuntu 计算主机上作为隔离进程运行，并共享主机操作系统及其硬件资源。这种方式使得容器比虚拟机更轻便、可移植性更高且更高效。</dd>
 </dl>
@@ -60,7 +61,7 @@ lastupdated: "2018-08-06"
 
 <p>使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。</p>
 
-<p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containershort_notm}}</a>。</p>
+<p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containerlong_notm}}</a>。</p>
 
 </dl>
 
@@ -101,7 +102,7 @@ lastupdated: "2018-08-06"
 
 <p>准备好进一步了解 Kubernetes 了吗？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">通过“创建集群”教程扩大对术语的了解</a>。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containershort_notm}}</a>。</li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containerlong_notm}}</a>。</li></ul>
 
 
 </dl>
@@ -112,14 +113,14 @@ lastupdated: "2018-08-06"
 ## 服务体系结构
 {: #architecture}
 
-在 {{site.data.keyword.containershort_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
+在 {{site.data.keyword.containerlong_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
 {: shortdesc}
 
 下图显示了集群的组件及其交互方式。
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构">
- <figcaption>{{site.data.keyword.containershort_notm}} 体系结构</figcaption>
+ <figcaption>{{site.data.keyword.containerlong_notm}} 体系结构</figcaption>
 </figure>
 </p>
 
@@ -141,7 +142,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN 服务器与 OpenVPN 客户机配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 apiserver 代理。</td>
+    <td>OpenVPN 服务器与 OpenVPN 客户机配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
     </tr>
     <tr>
     <td>etcd</td>
@@ -169,7 +170,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN 客户机与 OpenVPN 服务器配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 apiserver 代理。</td>
+    <td>OpenVPN 客户机与 OpenVPN 服务器配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
     </tr>
     <tr>
     <td>calico-policy-controller</td>
@@ -177,7 +178,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <td>Calico 策略控制器监视入站和出站网络流量，以确定是否符合设置的网络策略。如果集群中不允许该流量，那么会阻止对该集群的访问。Calico 策略控制器还用于为集群创建和设置网络策略。</td>
     </tr>
     <tr>
-    <td>IBM Storage Provider</td>
+    <td>存储器提供者</td>
     <td>kube-system</td>
     <td>每个集群都设置有一个插件，用于供应文件存储器。您可以选择安装其他附加组件，例如块存储器。</td>
     </tr>
@@ -207,17 +208,17 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <td>Calico 节点是一个容器，用于将使用 Calico 对容器联网所需的各种组件捆绑在一起。</td>
     </tr>
     <tr>
-    <td>IBM Logging and Metrics</td>
+    <td>日志记录和度量</td>
     <td>ibm-system</td>
     <td>在使用日志和度量值时，可以使用集成的 {{site.data.keyword.loganalysislong_notm}} 和 {{site.data.keyword.monitoringlong_notm}} 服务来扩展收集和保留功能。</td>
     </tr>
     <tr>
-    <td>IBM Ingress ALB</td>
+    <td>Ingress ALB</td>
     <td>ibm-system</td>
     <td>Ingress 是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到集群中的多个应用程序，均衡集群中的网络流量工作负载。要通过公用或专用网络公开应用程序，必须创建 Ingress 资源，以向 Ingress 应用程序负载均衡器 (ALB) 注册应用程序。然后，可以使用单个 URL 或 IP 地址来访问多个应用程序。</td>
     </tr>
     <tr>
-    <td>IBM Load Balancer</td>
+    <td>负载均衡器</td>
     <td>ibm-system</td>
     <td>负载均衡器是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到应用程序，均衡集群中的网络流量工作负载。</td>
     </tr>

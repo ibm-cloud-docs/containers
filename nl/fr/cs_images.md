@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -35,7 +35,7 @@ Les images sont généralement stockées dans un registre d'images pouvant être
 Des registres publics, tel que Docker Hub, peuvent être utilisés pour vous familiariser avec Docker et Kubernetes pour créer votre première application conteneurisée dans un cluster. Dans le cas d'applications d'entreprise, utilisez un registre privé, tel que celui fourni dans {{site.data.keyword.registryshort_notm}}, pour empêcher l'utilisation et la modification de vos images par des utilisateurs non habilités. Les registres privés sont mis en place par l'administrateur du cluster pour garantir que les données d'identification pour accès au registre privé sont disponibles aux utilisateurs du cluster.
 
 
-Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containershort_notm}} pour déployer des applications dans votre cluster.
+Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containerlong_notm}} pour déployer des applications dans votre cluster.
 
 |Registre|Description|Avantage|
 |--------|-----------|-------|
@@ -74,7 +74,7 @@ Vous pouvez déployer dans votre cluster des conteneurs depuis une image fournie
 
 Lorsque vous créez un cluster, des jetons de registre sans date d'expiration et des valeurs confidentielles sont créés automatiquement pour le [registre régional le plus proche, tout comme pour le registre global](/docs/services/Registry/registry_overview.html#registry_regions). Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke de manière sécurisée vos propres images Docker privées, tout comme les mêmes images publiques hébergées dans le registre global. Les jetons sont utilisés pour autoriser un accès en lecture seule aux espaces nom de votre choix que vous configurez dans {{site.data.keyword.registryshort_notm}} afin que vous puissiez utiliser ces images publiques (registre global) et privées (registres régionaux).
 
-Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containershort_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'images (imagePullSecret) sont ajoutées à l'espace nom Kubernetes nommé `default`, la liste par défaut des valeurs confidentielles dans l'élément `ServiceAccount` pour cet espace nom, et l'espace nom `kube-system`.
+Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containerlong_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'images (imagePullSecret) sont ajoutées à l'espace nom Kubernetes nommé `default`, la liste par défaut des valeurs confidentielles dans l'élément `ServiceAccount` pour cet espace nom, et l'espace nom `kube-system`.
 
 **Remarque :** avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}}, ou dans un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre élément imagePullSecret pour votre cluster](#other).
 
@@ -485,5 +485,4 @@ Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vo
    {: pre}
 
 <br />
-
 

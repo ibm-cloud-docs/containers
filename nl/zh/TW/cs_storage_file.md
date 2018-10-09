@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -67,7 +67,8 @@ lastupdated: "2018-08-06"
    - **自訂儲存空間類別：**此儲存空間類別會佈建[效能儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)。使用效能儲存空間，您更能控制儲存空間大小及 IOPS。
 
 4. 選擇檔案儲存空間的大小及 IOPS。大小及 IOPS 數目定義 IOPS（每秒的輸入/輸出作業數）總數，此 IOPS 可作為儲存空間有多快的指示器。您的儲存空間的 IOPS 總數越大，其處理讀取及寫入作業的速度就越快。
-   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別隨附每 GB 固定數目的 IOPS，並佈建在 SSD 硬碟上。IOPS 總數取決於您選擇的儲存空間大小。您可以選取所容許大小範圍內的任何整數的 GB 大小，例如 20 Gi、256 Gi 或 11854 Gi。若要決定 IOPS 總數，您必須將 IOPS 乘以選取的大小。例如，如果您在隨附每 GB 4 個 IOPS 的銀級儲存空間類別中選取 1000Gi 檔案儲存空間大小，則您的儲存空間總共有 4000 個 IOPS。<table>
+   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別隨附每 GB 固定數目的 IOPS，並佈建在 SSD 硬碟上。IOPS 總數取決於您選擇的儲存空間大小。您可以選取所容許大小範圍內的任何整數的 GB 大小，例如 20 Gi、256 Gi 或 11854 Gi。若要決定 IOPS 總數，您必須將 IOPS 乘以選取的大小。例如，如果您在隨附每 GB 4 個 IOPS 的銀級儲存空間類別中選取 1000Gi 檔案儲存空間大小，則您的儲存空間總共有 4000 個 IOPS。
+     <table>
          <caption>儲存空間類別大小範圍及每 GB IOPS 數目的表格</caption>
          <thead>
          <th>儲存空間類別</th>
@@ -148,7 +149,7 @@ lastupdated: "2018-08-06"
 
 5. 選擇是否要在刪除叢集或持續性磁區要求 (PVC) 之後保留您的資料。
    - 如果要保留資料，則請選擇 `retain` 儲存空間類別。當您刪除 PVC 時，只會刪除 PVC。PV、IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，以及您的資料仍然存在。若要收回儲存空間，並再次在您的叢集裡使用它，您必須移除 PV，並遵循[使用現有檔案儲存空間](#existing_file)的步驟。
-   - 如果您想要在刪除 PVC 時一併刪除 PV、資料及實體檔案儲存裝置，請選擇沒有 `retain` 的儲存空間類別。
+   - 如果您想要在刪除 PVC 時一併刪除 PV、資料及實體檔案儲存裝置，請選擇沒有 `retain` 的儲存空間類別。**附註**：如果您有「專用」帳戶，請選擇沒有 `retain` 的儲存空間類別，以防止 IBM Cloud 基礎架構 (SoftLayer) 中的孤立磁區。
 
 6. 選擇您要按小時還是按月計費。如需相關資訊，請檢查[定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)。依預設，所有檔案儲存裝置都是搭配每小時計費類型進行佈建。**附註：**如果您選擇每月計費類型，則移除持續性儲存空間時，仍須支付一個月的費用，即使您只是短時間使用。
 
@@ -230,6 +231,10 @@ lastupdated: "2018-08-06"
         <tr>
           <td><code>metadata/labels/billingType</code></td>
           <td>指定計算儲存空間費用的頻率為 "monthly" 或 "hourly"。如果未指定計費類型，則會佈建計費類型為每小時的儲存空間。</td>
+        </tr>
+        <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>指定下列其中一個選項：<ul><li><strong>ReadWriteMany：</strong>多個 Pod 可以裝載 PVC。所有 Pod 都可以讀取及寫入至磁區。</li><li><strong>ReadOnlyMany：</strong>多個 Pod 可以裝載 PVC。所有 Pod 都具有唯讀存取權。<li><strong>ReadWriteOnce：</strong>只有一個 Pod 可以裝載 PVC。此 Pod 可以讀取及寫入至磁區。</li></ul></td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -341,7 +346,7 @@ apiVersion: apps/v1beta1
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>容器內裝載磁區之目錄的絕對路徑。</td>
+    <td>容器內裝載磁區之目錄的絕對路徑。寫入至裝載路徑的資料會儲存至實體檔案儲存空間實例的 <coode>root</code> 目錄下。若要在實體檔案儲存空間實例中建立目錄，您必須在裝載路徑中建立子目錄。</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -440,13 +445,15 @@ apiVersion: apps/v1beta1
 **若為在叢集外佈建的持續性儲存空間：** </br>
 如果您想要使用先前佈建、但之前從未在叢集裡使用的現有儲存空間，您必須讓儲存空間可在與工作者節點相同的子網路中使用。
 
+**附註**：如果您有「專用」帳戶，則必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
 1.  {: #external_storage}從 [IBM Cloud 基礎架構 (SoftLayer) 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://control.bluemix.net/) 中，按一下**儲存空間**。
 2.  按一下**檔案儲存空間**，並從**動作**功能表中選取**授權主機**。
 3.  選取**子網路**。
 4.  從下拉清單中，選取您的工作者節點所連接的專用 VLAN 子網路。若要尋找工作者節點的子網路，請執行 `ibmcloud ks Worker <cluster_name>`，並且比較工作者節點的 `Private IP` 與您在下拉清單中找到的子網路。
 5.  按一下**提交**。
 6.  按一下檔案儲存空間的名稱。
-7.  記下 `Mount Point`、`size` 及 `Location` 欄位。`Mount Point` 欄位會顯示為 `<server>:/<path>`。
+7.  記下 `Mount Point`、`size` 及 `Location` 欄位。`Mount Point` 欄位會顯示為 `<nfs_server>:<file_storage_path>`。
 
 ### 步驟 2：建立持續性磁區 (PV) 及相符的持續性磁區要求 (PVC)
 
@@ -489,6 +496,10 @@ apiVersion: apps/v1beta1
     <td>輸入您先前擷取之現有 NFS 檔案共用的儲存空間大小。儲存空間大小必須以 GB 為單位寫入（例如，20Gi (20 GB) 或 1000Gi (1 TB)），而且大小必須符合現有檔案共用的大小。</td>
     </tr>
     <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>指定下列其中一個選項：<ul><li><strong>ReadWriteMany：</strong>多個 Pod 可以裝載 PVC。所有 Pod 都可以讀取及寫入至磁區。</li><li><strong>ReadOnlyMany：</strong>多個 Pod 可以裝載 PVC。所有 Pod 都具有唯讀存取權。<li><strong>ReadWriteOnce：</strong>只有一個 Pod 可以裝載 PVC。此 Pod 可以讀取及寫入至磁區。</li></ul></td>
+    </tr>
+    <tr>
     <td><code>spec/nfs/server</code></td>
     <td>輸入您先前擷取的 NFS 檔案共用伺服器 ID。</td>
     </tr>
@@ -501,7 +512,7 @@ apiVersion: apps/v1beta1
 3.  在叢集裡建立 PV。
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -533,7 +544,7 @@ apiVersion: apps/v1beta1
 6.  建立您的 PVC。
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -585,7 +596,7 @@ apiVersion: apps/v1beta1
 1. 使用您要佈建的 NFS 版本來建立[自訂的儲存空間類別](#nfs_version_class)。
 2. 在叢集裡建立儲存空間類別。
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -626,7 +637,7 @@ apiVersion: apps/v1beta1
 
    3. 重建 Pod。
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
@@ -669,14 +680,14 @@ apiVersion: apps/v1beta1
 
 <dl>
   <dt>設定定期 Snapshot</dt>
-  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。</br></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可在 CLI 輸出的 <strong>Labels</strong> 區段中找到磁區 ID、大小及 IOPS。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>CLI 輸出中的 <strong>Snapshot 容量 (GB)</strong> 從 0 變更為您訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。</br></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可在 CLI 輸出的 <strong>Labels</strong> 區段中找到磁區 ID、大小及 IOPS。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>CLI 輸出中的 <strong>Snapshot 容量 (GB)</strong> 從 0 變更為您訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>將 Snapshot 抄寫至另一個區域</dt>
- <dd><p>若要在發生區域失敗時保護資料，您可以[將 Snapshot 抄寫](/docs/infrastructure/FileStorage/replication.html#replicating-data)至另一個區域中設定的檔案儲存空間實例。資料只能從主要儲存空間抄寫至備份儲存空間。您無法將抄寫的檔案儲存空間實例裝載至叢集。當主要儲存空間失敗時，您可以手動將抄寫的備份儲存空間設為主要儲存空間。然後，您可以將它裝載至叢集。還原主要儲存空間之後，您可以從備份儲存空間中還原資料。</p></dd>
+ <dd><p>若要在發生區域故障時保護資料，您可以[將 Snapshot 抄寫](/docs/infrastructure/FileStorage/replication.html#replicating-data)至另一個區域中設定的檔案儲存空間實例。資料只能從主要儲存空間抄寫至備份儲存空間。您無法將抄寫的檔案儲存空間實例裝載至叢集。當主要儲存空間失敗時，您可以手動將抄寫的備份儲存空間設為主要儲存空間。然後，您可以將它裝載至叢集。還原主要儲存空間之後，您可以從備份儲存空間中還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則無法將 Snapshot 抄寫至另一個區域。</p></dd>
  <dt>複製儲存空間</dt>
- <dd><p>您可以在與原始儲存空間實例相同的區域中[複製檔案儲存空間實例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先[設定磁區的 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)。</p></dd>
+ <dd><p>您可以在與原始儲存空間實例相同的區域中[複製檔案儲存空間實例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先[設定磁區的 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援問題單</a>。</p></dd>
   <dt>將資料備份至 {{site.data.keyword.cos_full}}</dt>
   <dd><p>您可以使用 [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)，在叢集裡啟動一個備份及還原 Pod。這個 Pod 包含一個 Script，它會針對叢集裡的任何持續性磁區要求 (PVC) 執行一次性或定期備份。資料會儲存在您於區域中設定的 {{site.data.keyword.cos_full}} 實例中。</p>
-  <p>若要讓資料有更高的可用性，並在發生區域失敗時保護應用程式，請設定第二個 {{site.data.keyword.cos_full}} 實例，並在區域之間抄寫資料。如果您需要從 {{site.data.keyword.cos_full}} 實例還原資料，請使用隨該映像檔所提供的還原 Script。</p></dd>
+  <p>若要讓資料有更高的可用性，並在發生區域故障時保護應用程式，請設定第二個 {{site.data.keyword.cos_full}} 實例，並在區域之間抄寫資料。如果您需要從 {{site.data.keyword.cos_full}} 實例還原資料，請使用隨該映像檔所提供的還原 Script。</p></dd>
 <dt>在 Pod 與容器之間複製資料</dt>
 <dd><p>您可以使用 `kubectl cp` [指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/#cp)，在叢集的 Pod 或特定容器之間複製檔案及目錄。</p>
 <p>開始之前，請先將 [Kubernetes CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您想要使用的叢集。如果未使用 <code>-c</code> 來指定容器，則指令會使用 Pod 中第一個可用的容器。</p>
@@ -684,7 +695,7 @@ apiVersion: apps/v1beta1
 <ul>
 <li>將資料從本端機器複製到叢集裡的 Pod：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>將資料從叢集裡的 Pod 複製到本端機器：<pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>將資料從叢集裡的 Pod 複製到另一個 Pod 中的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>將本端機器中的資料複製至叢集之 Pod 中所執行的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -900,7 +911,7 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### 變更預設 NFS 版本
+### 變更預設 NFS 版本
 {: #nfs_version_class}
 
 下列自訂的儲存空間類別是以 [`ibmc-file-bronze` 儲存空間類別](#bronze)為基礎，並讓您可以定義您要佈建的 NFS 版本。例如，若要佈建 NFS 3.0 版，請將 `<nfs_version>` 取代為 **3.0**。

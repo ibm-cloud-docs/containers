@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 {{site.data.keyword.Bluemix_dedicated}} 계정이 있는 경우 데디케이티드 클라우드 환경(`https://<my-dedicated-cloud-instance>.bluemix.net`)에서 Kubernetes 클러스터를 배치하고 이 환경에서 실행 중인 사전 선택된 {{site.data.keyword.Bluemix_notm}} 서비스와 연결할 수 있습니다.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} 계정이 없는 경우 퍼블릭 {{site.data.keyword.Bluemix_notm}} 계정에서 [{{site.data.keyword.containershort_notm}}를 시작](container_index.html)할 수 있습니다.
+{{site.data.keyword.Bluemix_dedicated_notm}} 계정이 없으면 퍼블릭 {{site.data.keyword.Bluemix_notm}} 계정으로 [{{site.data.keyword.containerlong_notm}}를 시작](container_index.html)할 수 있습니다. 
 
 ##  데디케이티드 클라우드 환경 정보
 {: #dedicated_environment}
 
 {{site.data.keyword.Bluemix_dedicated_notm}} 계정을 사용하는 경우 사용 가능한 실제 리소스는 사용자의 클러스터에만 데디케이티드되며, 기타 {{site.data.keyword.IBM_notm}} 고객의 클러스터와는 공유되지 않습니다. 클러스터에 대한 격리를 원할 때 {{site.data.keyword.Bluemix_dedicated_notm}} 환경을 설정하도록 선택할 수 있으며, 사용하는 다른 {{site.data.keyword.Bluemix_notm}} 서비스에 대한 격리가 필요합니다. 전용 계정이 없는 경우, [{{site.data.keyword.Bluemix_notm}} 퍼블릭에서 전용 하드웨어로 클러스터를 작성](cs_clusters.html#clusters_ui)할 수 있습니다.
 
-{{site.data.keyword.Bluemix_dedicated_notm}}를 사용하여, 전용 콘솔의 카탈로그에서 또는 {{site.data.keyword.containershort_notm}} CLI를 사용하여 클러스터를 작성할 수 있습니다. 전용 콘솔을 사용하려면 IBM ID를 사용하여 데디케이티드 및 퍼블릭 계정에 동시에 로그인합니다. 이중 로그인을 사용하면 데디케이티드 콘솔을 통해 퍼블릭 클러스터에 액세스할 수 있습니다. CLI를 사용하려면 데디케이티드 엔드포인트(`api.<my-dedicated-cloud-instance>.bluemix.net.`)를 사용하여 로그인합니다. 그런 다음 데디케이티드 환경과 연관된 공용 지역의 {{site.data.keyword.containershort_notm}} API 엔드포인트를 대상으로 지정합니다.
+{{site.data.keyword.Bluemix_dedicated_notm}}를 사용하여, 전용 콘솔의 카탈로그에서 또는 {{site.data.keyword.containerlong_notm}} CLI를 사용하여 클러스터를 작성할 수 있습니다. 전용 콘솔을 사용하려면 IBM ID를 사용하여 데디케이티드 및 퍼블릭 계정에 동시에 로그인합니다. 이중 로그인을 사용하면 데디케이티드 콘솔을 통해 퍼블릭 클러스터에 액세스할 수 있습니다. CLI를 사용하려면 데디케이티드 엔드포인트(`api.<my-dedicated-cloud-instance>.bluemix.net.`)를 사용하여 로그인합니다. 그런 다음 데디케이티드 환경과 연관된 공용 지역의 {{site.data.keyword.containerlong_notm}} API 엔드포인트를 대상으로 지정합니다.
 
 {{site.data.keyword.Bluemix_notm}} 퍼블릭과 Dediicated의 가장 중요한 차이점은 다음과 같습니다.
 
@@ -58,7 +58,7 @@ lastupdated: "2018-08-06"
  <tr>
  <td>클러스터 하드웨어 및 소유권</td>
  <td>표준 클러스터에서 하드웨어는 기타 {{site.data.keyword.IBM_notm}} 고객과 공유되거나 사용자에게만 전용될 수 있습니다. 사용자가 IBM Cloud 인프라(SoftLayer) 계정으로 공용 및 사설 VLAN을 소유하고 관리합니다.</td>
- <td>{{site.data.keyword.Bluemix_dedicated_notm}}의 클러스터에서 하드웨어는 항상 전용입니다. 클러스터 작성에 사용할 수 있는 공인 및 사설 VLAN은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되며, IBM은 사용자 대신 이들을 소유하고 관리합니다. 클러스터 작성 중에 사용 가능한 구역은 {{site.data.keyword.Bluemix_notm}} 환경에 대해서도 사전 정의되어 있습니다. </td>
+ <td>{{site.data.keyword.Bluemix_dedicated_notm}}의 클러스터에서 하드웨어는 항상 전용입니다. 클러스터 작성에 사용할 수 있는 공인 및 사설 VLAN은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되며, IBM은 사용자 대신 이들을 소유하고 관리합니다. 클러스터 작성 중에 사용 가능한 구역은 {{site.data.keyword.Bluemix_notm}} 환경에 대해서도 사전 정의되어 있습니다.</td>
  </tr>
  <tr>
  <td>로드 밸런서 및 Ingress 네트워킹</td>
@@ -82,14 +82,14 @@ lastupdated: "2018-08-06"
  </tr>
  <tr>
  <td>레지스트리에 액세스</td>
- <td>[{{site.data.keyword.containershort_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오.</td>
- <td><ul><li>새로운 네임스페이스의 경우 [{{site.data.keyword.containershort_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오.</li><li>단일 및 확장 가능 그룹에 대해 설정된 네임스페이스의 경우에는 인증을 위해
+ <td>[{{site.data.keyword.containerlong_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오. </td>
+ <td><ul><li>새로운 네임스페이스의 경우 [{{site.data.keyword.containerlong_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오. </li><li>단일 및 확장 가능 그룹에 대해 설정된 네임스페이스의 경우에는 인증을 위해
 [토큰을 사용하고 Kubernetes 시크릿을 작성](cs_dedicated_tokens.html#cs_dedicated_tokens)하십시오.</li></ul></td>
  </tr>
  <tr>
  <td>다중 구역 클러스터</td>
- <td>작업자 풀에 구역을 더 추가하여 [다중 구역 클러스터](cs_clusters.html#multi_zone)를 작성합니다. </td>
- <td>[단일 구역 클러스터](cs_clusters.html#single_zone)를 작성합니다. 사용 가능한 구역은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되었습니다. 기본적으로, 단일 구역 클러스터는 이름이 `default`인 작업자 풀로 설정됩니다. 작업자 풀은 클러스터 작성 중에 정의한 것과 동일한 구성(예: 머신 유형)으로 작업자 노드를 그룹화합니다. [기존 작업자 풀의 크기를 조정](cs_clusters.html#resize_pool)하거나 [새 작업자 풀을 추가](cs_clusters.html#add_pool)하여 클러스터에 작업자 노드를 더 추가할 수 있습니다. 작업자 풀을 추가할 때는 작업자가 구역에 배치할 수 있도록 사용 가능한 구역을 작업자 풀에 추가해야 합니다. 그러나 작업자 풀에 기타 구역을 추가할 수는 없습니다. </td>
+ <td>작업자 풀에 구역을 더 추가하여 [다중 구역 클러스터](cs_clusters_planning.html#multizone)를 작성합니다.</td>
+ <td>[단일 구역 클러스터](cs_clusters_planning.html#single_zone)를 작성합니다. 사용 가능한 구역은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되었습니다. 기본적으로, 단일 구역 클러스터는 이름이 `default`인 작업자 풀로 설정됩니다. 작업자 풀은 클러스터 작성 중에 정의한 것과 동일한 구성(예: 머신 유형)으로 작업자 노드를 그룹화합니다. [기존 작업자 풀의 크기를 조정](cs_clusters.html#resize_pool)하거나 [새 작업자 풀을 추가](cs_clusters.html#add_pool)하여 클러스터에 작업자 노드를 더 추가할 수 있습니다. 작업자 풀을 추가할 때는 작업자가 구역에 배치할 수 있도록 사용 가능한 구역을 작업자 풀에 추가해야 합니다. 그러나 작업자 풀에 기타 구역을 추가할 수는 없습니다.</td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} 퍼블릭과 {{site.data.keyword.Bluemix_dedicated_notm}} 간의 기능 차이점" caption-side="top"}
@@ -108,12 +108,12 @@ lastupdated: "2018-08-06"
 
 *{{site.data.keyword.Bluemix_dedicated_notm}}의 Kubernetes 아키텍처 및 네트워킹*
 
-![{{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.containershort_notm}} Kubernetes 아키텍처](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처: {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## 데디케이티드에서 {{site.data.keyword.containershort_notm}} 설정
+## 데디케이티드에서 {{site.data.keyword.containerlong_notm}} 설정
 {: #dedicated_setup}
 
 각 {{site.data.keyword.Bluemix_dedicated_notm}} 환경에는 {{site.data.keyword.Bluemix_notm}}에 퍼블릭, 클라이언트 소유 및 회사 계정이 있습니다. 데디케이티드 환경에서 사용자가 클러스터를 작성하려면 관리자가 해당 사용자를 데디케이티드 환경의 퍼블릭 회사 계정에 추가해야 합니다.
@@ -127,7 +127,7 @@ lastupdated: "2018-08-06"
 {{site.data.keyword.Bluemix_dedicated_notm}} 사용자가 클러스터에 액세스할 수 있도록 하려면 다음을 수행하십시오.
 
 1.  퍼블릭 {{site.data.keyword.Bluemix_notm}} 계정의 소유자는 API 키를 생성해야 합니다.
-    1.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. 퍼블릭 계정 소유자의 {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고 프롬프트가 표시되면 사용자의 계정을 선택하십시오.
+    1.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. 퍼블릭 계정 소유자의 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하고 프롬프트가 표시되면 사용자의 계정을 선택하십시오.
 
         ```
         ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
@@ -151,7 +151,7 @@ lastupdated: "2018-08-06"
         {: pre}
 
 2.  {{site.data.keyword.Bluemix_dedicated_notm}} 계정의 소유자는 단일 또는 여러 사용자를 퍼블릭 계정으로 초대할 수 있습니다.
-    1.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. 데디케이티드 계정 소유자의 {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고 프롬프트가 표시되면 사용자의 계정을 선택하십시오.
+    1.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. 데디케이티드 계정 소유자의 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하고 프롬프트가 표시되면 사용자의 계정을 선택하십시오.
 
         ```
         ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
@@ -258,7 +258,7 @@ lastupdated: "2018-08-06"
 
     1. **클러스터 이름**을 입력하십시오. 이름은 문자로 시작해야 하며 35자 이하의 문자, 숫자 및 하이픈(-)을 포함할 수 있습니다. 클러스터 이름과 클러스터가 배치된 지역이 Ingress 하위 도메인의 완전한 이름을 형성합니다. 특정 Ingress 하위 도메인이 지역 내에서 고유하도록 하기 위해 클러스터 이름을 자르고 Ingress 도메인 이름 내의 무작위 값을 추가할 수 있습니다.
 
-    2. 클러스터가 배치될 **구역**을 선택하십시오. 사용 가능한 구역은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되었습니다. 
+    2. 클러스터가 배치될 **구역**을 선택하십시오. 사용 가능한 구역은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되었습니다.
 
     3. 클러스터 마스터 노드의 Kubernetes API 서버 버전을 선택하십시오.
 
@@ -276,9 +276,9 @@ lastupdated: "2018-08-06"
     6. 필요한 **작업자 노드의 수**를 선택하십시오. 클러스터의 고가용성을 보장하려면 `3`을 선택하십시오.
 
     7. **공용 VLAN**(선택사항) 및 **사설 VLAN**(필수)을 선택하십시오. 사용 가능한 공인 및 사설 VLAN은 {{site.data.keyword.Bluemix_dedicated_notm}} 환경이 설정될 때 사전 정의되었습니다. 두 VLAN 모두 작업자 노드 간에 통신하지만 공용 VLAN은 IBM 관리 Kubernetes 마스터와도 통신합니다. 다중 클러스터에 대해 동일한 VLAN을 사용할 수 있습니다.
-        **참고**: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다.
+        **참고**: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오.
 
-    8. 기본적으로 **로컬 디스크 암호화**가 선택되어 있습니다. 이 선택란을 선택 취소하도록 선택하면 호스트의 Docker 데이터가 암호화되지 않습니다. [암호화에 대해 자세히 알아보십시오](cs_secure.html#encrypted_disk).
+    8. 기본적으로 **로컬 디스크 암호화**가 선택되어 있습니다. 이 선택란을 선택 취소하도록 선택하면 호스트의 컨테이너 런타임 데이터가 암호화되지 않습니다. [암호화에 대해 자세히 알아보십시오](cs_secure.html#encrypted_disk).
 
 6. **클러스터 작성**을 클릭하십시오. **작업자 노드** 탭에서 작업자 노드 배치의 진행상태를 볼 수 있습니다. 배치가 완료되면 **개요** 탭에서 클러스터가 준비되었음을 확인할 수 있습니다.
     **참고:** 모든 작업자 노드에는 클러스터가 작성된 이후 수동으로 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. 
@@ -287,8 +287,8 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 ### CLI에서 클러스터 작성
 {: #dedicated_creating_cli}
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containershort_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오.
-2.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고, 프롬프트가 표시되면 계정을 선택하십시오.
+1.  {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containerlong_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오.
+2.  {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스의 엔드포인트에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하고, 프롬프트가 표시되면 계정을 선택하십시오.
 
     ```
     ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
@@ -297,7 +297,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 
     **참고:** 연합 ID가 있는 경우에는 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
 
-3.  지역을 대상으로 지정하려면 `ibmcloud ks region-set`를 실행하십시오. 
+3.  지역을 대상으로 지정하려면 `ibmcloud ks region-set`를 실행하십시오.
 
 4.  `cluster-create` 명령을 사용하여 클러스터를 작성하십시오. 표준 클러스터를 작성하는 경우, 작업자 노드의 하드웨어는 사용 시간을 기준으로 비용이 청구됩니다.
 
@@ -320,15 +320,15 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
     </tr>
     <tr>
     <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>데디케이티드 환경이 사용하도록 구성된 {{site.data.keyword.Bluemix_notm}} 구역 ID를 입력하십시오. </td>
+    <td>데디케이티드 환경이 사용하도록 구성된 {{site.data.keyword.Bluemix_notm}} 구역 ID를 입력하십시오.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>머신 유형을 입력하십시오. 전용 하드웨어에 가상 머신으로서, 또는 베어메탈에 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-type` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오. </td>
+    <td>머신 유형을 입력하십시오. 전용 하드웨어에 가상 머신으로서, 또는 베어메탈에 실제 머신으로서 작업자 노드를 배치할 수 있습니다. 사용 가능한 실제 및 가상 머신 유형은 클러스터가 배치되는 구역에 따라 다양합니다. 자세한 정보는 `ibmcloud ks machine-type` [명령](cs_cli_reference.html#cs_machine_types)에 대한 문서를 참조하십시오.</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>데디케이티드 환경이 사용하도록 구성된 공용 VLAN의 ID를 입력하십시오. 작업자 노드가 사설 VLAN에만 연결하려는 경우 이 옵션을 지정하지 마십시오. **참고**: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다.</td>
+    <td>데디케이티드 환경이 사용하도록 구성된 공용 VLAN의 ID를 입력하십시오. 작업자 노드가 사설 VLAN에만 연결하려는 경우 이 옵션을 지정하지 마십시오. **참고**: 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오.</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -376,7 +376,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -394,7 +394,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -457,14 +457,14 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 ### 작업자 노드 추가
 {: #add_workers}
 
-{{site.data.keyword.Bluemix_dedicated_notm}}에서는 [단일 구역 클러스터](cs_clusters.html#single_zone)만 작성할 수 있습니다. 기본적으로, 단일 구역 클러스터는 이름이 `default`인 작업자 풀로 설정됩니다. 작업자 풀은 클러스터 작성 중에 정의한 것과 동일한 구성(예: 머신 유형)으로 작업자 노드를 그룹화합니다. [기존 작업자 풀의 크기를 조정](cs_clusters.html#resize_pool)하거나 [새 작업자 풀을 추가](cs_clusters.html#add_pool)하여 클러스터에 작업자 노드를 더 추가할 수 있습니다. 작업자 풀을 추가할 때는 작업자가 구역에 배치할 수 있도록 사용 가능한 구역을 작업자 풀에 추가해야 합니다. 그러나 작업자 풀에 기타 구역을 추가할 수는 없습니다. 
+{{site.data.keyword.Bluemix_dedicated_notm}}에서는 [단일 구역 클러스터](cs_clusters_planning.html#single_zone)만 작성할 수 있습니다. 기본적으로, 단일 구역 클러스터는 이름이 `default`인 작업자 풀로 설정됩니다. 작업자 풀은 클러스터 작성 중에 정의한 것과 동일한 구성(예: 머신 유형)으로 작업자 노드를 그룹화합니다. [기존 작업자 풀의 크기를 조정](cs_clusters.html#resize_pool)하거나 [새 작업자 풀을 추가](cs_clusters.html#add_pool)하여 클러스터에 작업자 노드를 더 추가할 수 있습니다. 작업자 풀을 추가할 때는 작업자가 구역에 배치할 수 있도록 사용 가능한 구역을 작업자 풀에 추가해야 합니다. 그러나 작업자 풀에 기타 구역을 추가할 수는 없습니다.
 
 ### 개인용 및 공용 이미지 레지스트리 사용
 {: #dedicated_images}
 
 컨테이너 이미지에 대해 작업하는 경우 [개인 정보 보호](cs_secure.html#pi)에 대해 자세히 알아보십시오.
 
-새로운 네임스페이스의 경우 [{{site.data.keyword.containershort_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오. 단일 및 확장 가능 그룹에 대해 설정된 네임스페이스의 경우에는 인증을 위해
+새로운 네임스페이스의 경우 [{{site.data.keyword.containerlong_notm}}에서 개인용 및 공용 이미지 레지스트리 사용](cs_images.html)의 옵션을 참조하십시오. 단일 및 확장 가능 그룹에 대해 설정된 네임스페이스의 경우에는 인증을 위해
 [토큰을 사용하고 Kubernetes 시크릿을 작성](cs_dedicated_tokens.html#cs_dedicated_tokens)하십시오.
 
 ### 클러스터에 서브넷 추가
@@ -475,7 +475,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 #### Kubernetes 클러스터에 추가적인 사용자 관리 서브넷 및 IP 주소 추가
 {: #dedicated_byoip_subnets}
 
-{{site.data.keyword.containershort_notm}}에 액세스하는 데 사용할 온프레미스 네트워크에서 더 많은 고유 서브넷을 제공하십시오. 해당 서브넷의 사설 IP 주소를 Kubernetes 클러스터의 Ingress 및 로드 밸런스 서비스에 추가할 수 있습니다. 사용자 관리 서브넷은 사용할 서브넷의 형식에 따라 두 가지 방법 중 하나로 구성됩니다.
+{{site.data.keyword.containerlong_notm}}에 액세스하는 데 사용할 온프레미스 네트워크에서 더 많은 고유 서브넷을 제공하십시오. 해당 서브넷의 사설 IP 주소를 Kubernetes 클러스터의 Ingress 및 로드 밸런스 서비스에 추가할 수 있습니다. 사용자 관리 서브넷은 사용할 서브넷의 형식에 따라 두 가지 방법 중 하나로 구성됩니다.
 
 요구사항:
 - 사용자가 관리하는 서브넷은 사설 VLAN에만 추가할 수 있습니다.
@@ -493,7 +493,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
     ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
     ```
     {: pre}
-    <em>&lt;cluster_name&gt;</em>을 클러스터의 이름 또는 ID로 대체하고, <em>&lt;subnet_CIDR&gt;</em>을 지원 티켓에서 제공되는 서브넷 CIDR 중 하나로 대체하고, <em>&lt;private_VLAN&gt;</em>을 사용 가능한 사설 VLAN ID로 대체하십시오. `ibmcloud ks vlans`를 실행하여 사용 가능한 사설 VLAN의 ID를 찾을 수 있습니다. 
+    <em>&lt;cluster_name&gt;</em>을 클러스터의 이름 또는 ID로 대체하고, <em>&lt;subnet_CIDR&gt;</em>을 지원 티켓에서 제공되는 서브넷 CIDR 중 하나로 대체하고, <em>&lt;private_VLAN&gt;</em>을 사용 가능한 사설 VLAN ID로 대체하십시오. `ibmcloud ks vlans`를 실행하여 사용 가능한 사설 VLAN의 ID를 찾을 수 있습니다.
 
 3. 서브넷이 클러스터에 추가되었는지 확인하십시오. 사용자 제공 서브넷의 **User-managed** 필드가 _`true`_입니다.
 
@@ -511,7 +511,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
     ```
     {: screen}
 
-4. **중요**: 동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 설정해야 합니다. 
+4. **중요**: 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오. 
 
 5. 온프레미스 및 내부 계정 연결을 구성하려면 다음 옵션 중에서 선택하십시오.
   - 서브넷에 대해 10.x.x.x 사설 IP 주소 범위를 사용한 경우에는 해당 범위에서 유효한 IP를 사용하여 Ingress 및 로드 밸런서로 온프레미스 및 내부 계정 연결을 구성하십시오. 자세한 정보는 [NodePort, LoadBalancer 또는 Ingress 서비스와의 네트워킹 계획](cs_network_planning.html#planning)을 참조하십시오.
@@ -562,4 +562,6 @@ Ingress ALB에 대해 공인 IP 주소를 사용하려면 엔터프라이즈 방
 ### 지속적 스토리지 작성
 {: #dedicated_apps_volume_claim}
 
-지속적 스토리지 작성을 위한 옵션을 검토하려면 [지속적 데이터 스토리지](cs_storage_planning.html#persistent)를 참조하십시오. 볼륨에 대한 백업, 볼륨에서 복원 또는 볼륨 삭제를 요청하려면 [지원 티켓을 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다. 
+지속적 스토리지 작성을 위한 옵션을 검토하려면 [고가용성을 위한 지속적 데이터 스토리지 옵션](cs_storage_planning.html#persistent_storage_overview)을 참조하십시오. 볼륨에 대한 백업, 볼륨에서 복원, 볼륨 삭제 또는 파일 스토리지의 주기적 스냅샷을 요청하려면 [지원 티켓을 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다. 
+
+[파일 스토리지](cs_storage_file.html#predefined_storageclass)를 프로비저닝하도록 선택한 경우에는 비-보유(non-retain) 스토리지 클래스를 선택하십시오. 비-보유 스토리지 클래스를 선택하면 지원 티켓 열기로만 제거가 가능한 IBM Cloud 인프라(SoftLayer)의 고아 지속적 스토리지 인프라를 방지하는 데 도움이 됩니다. 

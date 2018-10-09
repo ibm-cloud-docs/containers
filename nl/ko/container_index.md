@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 
 시작하려면 옵션을 클릭하십시오.
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="{{site.data.keyword.containershort_notm}}를 빠르게 시작하려면 아이콘을 클릭하십시오. {{site.data.keyword.Bluemix_dedicated_notm}}에서 이 아이콘을 클릭하면 옵션이 표시됩니다. " style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="빠르게 {{site.data.keyword.containerlong_notm}}를 시작하려면 아이콘을 클릭하십시오. {{site.data.keyword.Bluemix_dedicated_notm}}에서 사용자 옵션을 보려면 이 아이콘을 클릭하십시오. " style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="{{site.data.keyword.Bluemix_notm}}에서 Kubernetes 클러스터 시작하기" title="{{site.data.keyword.Bluemix_notm}}에서 Kubernetes 클러스터 시작하기" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="CLI를 설치하십시오." title="CLI를 설치하십시오." shape="rect" coords="155, -1, 289, 210" />
@@ -46,14 +46,14 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 
 **시작하기 전에**
 
-올바른 [{{site.data.keyword.Bluemix_notm}} 계정](https://console.bluemix.net/registration/) 유형을 가져오십시오. 
-* **종량과금제 또는 구독**: 무료 평가판 클러스터를 작성할 수 있습니다. 표준 클러스터에서 작성 및 사용하기 위한 IBM Cloud 인프라(SoftLayer) 리소스를 프로비저닝할 수도 있습니다. 
-* **라이트**: 무료 또는 표준 클러스터를 작성할 수 없습니다. 종량과금제 또는 구독으로 [계정을 업그레이드](/docs/account/account_faq.html#changeacct)하십시오. 
-* **평가판(교육용)**: 서비스에 익숙해지기 위해 30일 동안 사용할 수 있는 하나의 무료 클러스터를 작성할 수 있습니다. 
+올바른 [{{site.data.keyword.Bluemix_notm}} 계정](https://console.bluemix.net/registration/) 유형을 가져오십시오.
+* **종량과금제 또는 구독**: 무료 평가판 클러스터를 작성할 수 있습니다. 표준 클러스터에서 작성 및 사용하기 위한 IBM Cloud 인프라(SoftLayer) 리소스를 프로비저닝할 수도 있습니다.
+* **Lite**: 무료 또는 표준 클러스터를 작성할 수 없습니다. 종량과금제 또는 구독으로 [계정을 업그레이드](/docs/account/account_faq.html#changeacct)하십시오.
+* **평가판(교육용)**: 서비스에 익숙해지기 위해 30일 동안 사용할 수 있는 하나의 무료 클러스터를 작성할 수 있습니다.
 
 무료 클러스터를 작성하려면 다음을 수행하십시오.
 
-1.  [{{site.data.keyword.Bluemix_notm}} **카탈로그** ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 **{{site.data.keyword.containershort_notm}}**를 선택하고 **작성**을 클릭하십시오. 클러스터 구성 페이지가 열립니다. 기본적으로 **무료 클러스터**가 선택되어 있습니다.
+1.  [{{site.data.keyword.Bluemix_notm}} **카탈로그** ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 **{{site.data.keyword.containerlong_notm}}**를 선택하고 **작성**을 클릭하십시오. 클러스터 구성 페이지가 열립니다. 기본적으로 **무료 클러스터**가 선택되어 있습니다.
 
 2. 클러스터에 고유 이름을 지정하십시오.
 
@@ -68,10 +68,10 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 
 
 **다음에 수행할 작업**</br>
-만료되기 전에 무료 클러스터로 일부 작업을 시도해 보십시오. 
+만료되기 전에 무료 클러스터로 일부 작업을 시도해 보십시오.
 
-* Kubernetes 클러스터 작성, CLI 설치, 개인용 레지스트리 작성, 클러스터 환경 설정 및 클러스터에 서비스 추가에 대해서는 [첫 번째 {{site.data.keyword.containershort_notm}} 튜토리얼](cs_tutorials.html#cs_cluster_tutorial)을 살펴보십시오. 
-* 클러스터에 앱 배치에 대한 [두 번째 {{site.data.keyword.containershort_notm}} 튜토리얼](cs_tutorials_apps.html#cs_apps_tutorial)을 계속 진행하십시오. 
-* 고가용성을 위해 다중 노드의 [표준 클러스터를 작성](cs_clusters.html#clusters_ui)하십시오. 
+* Kubernetes 클러스터 작성, CLI 설치, 개인용 레지스트리 작성, 클러스터 환경 설정 및 클러스터에 서비스 추가에 대해서는 [첫 번째 {{site.data.keyword.containerlong_notm}} 튜토리얼](cs_tutorials.html#cs_cluster_tutorial)을 살펴보십시오.
+* 클러스터에 앱 배치에 대한 [두 번째 {{site.data.keyword.containerlong_notm}} 튜토리얼](cs_tutorials_apps.html#cs_apps_tutorial)을 계속 진행하십시오.
+* 고가용성을 위해 다중 노드의 [표준 클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
 
 

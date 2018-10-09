@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 集群，并使用也在其中运行的预先选择的 {{site.data.keyword.Bluemix_notm}} 服务进行连接。
 {:shortdesc}
 
-如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containershort_notm}}](container_index.html)。
+如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containerlong_notm}}](container_index.html)。
 
 ## 关于 Dedicated 云环境
 {: #dedicated_environment}
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，可用物理资源仅供您的集群专用，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。如果您希望对集群进行隔离，并且需要对您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行隔离，可选择设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。如果您没有 Dedicated 帐户，那么可以[在 {{site.data.keyword.Bluemix_notm}} Public 中创建具有专用硬件的集群](cs_clusters.html#clusters_ui)。
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containershort_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) . 然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containershort_notm}} API 端点设定为目标。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containerlong_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) . 然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containerlong_notm}} API 端点设定为目标。
 
 {{site.data.keyword.Bluemix_notm}} Public 和 Dedicated 之间的最显著区别如下所示。
 
@@ -82,13 +82,13 @@ lastupdated: "2018-08-06"
  </tr>
  <tr>
  <td>访问注册表</td>
- <td>请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。</td>
- <td><ul><li>有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。</li><li>对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。</li></ul></td>
+ <td>请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。</td>
+ <td><ul><li>有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。</li><li>对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。</li></ul></td>
  </tr>
  <tr>
  <td>多专区集群</td>
- <td>通过向工作程序池添加更多专区来创建[多区域集群](cs_clusters.html#multi_zone)。</td>
- <td>创建[单专区集群](cs_clusters.html#single_zone)。设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时，已预定义了可用专区。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。</td>
+ <td>通过向工作程序池添加更多专区来创建[多区域集群](cs_clusters_planning.html#multizone)。</td>
+ <td>创建[单专区集群](cs_clusters_planning.html#single_zone)。设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时，已预定义了可用专区。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。</td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_dedicated_notm}} 之间的功能差异" caption-side="top"}
@@ -108,12 +108,12 @@ lastupdated: "2018-08-06"
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 体系结构和联网情况*
 
-![{{site.data.keyword.Bluemix_dedicated_notm}} 上的 {{site.data.keyword.containershort_notm}} Kubernetes 体系结构](images/cs_dedicated_arch.png)
+![{{site.data.keyword.Bluemix_dedicated_notm}} 上的 {{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## 在 Dedicated 上设置 {{site.data.keyword.containershort_notm}}
+## 在 Dedicated 上设置 {{site.data.keyword.containerlong_notm}}
 {: #dedicated_setup}
 
 每个 {{site.data.keyword.Bluemix_dedicated_notm}} 环境在 {{site.data.keyword.Bluemix_notm}} 中都有一个公共的客户机拥有的企业帐户。为了让 Dedicated 环境中的用户能够创建集群，管理员必须将这些用户添加到公共公司帐户中。
@@ -276,9 +276,9 @@ lastupdated: "2018-08-06"
     6. 选择需要的**工作程序节点数**。选择 `3` 以确保集群的高可用性。
 
     7. 选择**公用 VLAN**（可选）和**专用 VLAN**（必需）。可用的公用和专用 VLAN 会在设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时进行预定义。两个 VLAN 在工作程序节点之间进行通信，但公用 VLAN 还与 IBM 管理的 Kubernetes 主节点进行通信。可以对多个集群使用相同的 VLAN。
-**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。
+**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。
 
-    8. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么不会加密主机的 Docker 数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disk)。
+    8. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么不会加密主机的容器运行时数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disk)。
 
 6. 单击**创建集群**。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
     **注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
@@ -286,7 +286,7 @@ lastupdated: "2018-08-06"
 ### 使用 CLI 创建集群
 {: #dedicated_creating_cli}
 
-1.  安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containershort_notm}} 插件](cs_cli_install.html#cs_cli_install)。
+1.  安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containerlong_notm}} 插件](cs_cli_install.html#cs_cli_install)。
 2.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 实例的端点。在提示时输入 {{site.data.keyword.Bluemix_notm}} 凭证并选择您的帐户。
 
     ```
@@ -327,7 +327,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>输入 Dedicated 环境配置为使用的公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。</td>
+    <td>输入 Dedicated 环境配置为使用的公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -375,7 +375,7 @@ lastupdated: "2018-08-06"
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -392,7 +392,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -457,14 +457,14 @@ lastupdated: "2018-08-06"
 ### 添加工作程序节点
 {: #add_workers}
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}} 时，您只能创建[单专区集群](cs_clusters.html#single_zone)。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}} 时，您只能创建[单专区集群](cs_clusters_planning.html#single_zone)。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。
 
 ### 使用专用和公共映像注册表
 {: #dedicated_images}
 
 使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
-有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。
+有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。
 
 ### 向集群添加子网
 {: #dedicated_cluster_subnet}
@@ -474,7 +474,7 @@ lastupdated: "2018-08-06"
 #### 将更多由用户管理的子网和 IP 地址添加到 Kubernetes 集群
 {: #dedicated_byoip_subnets}
 
-从要用于访问 {{site.data.keyword.containershort_notm}} 的内部部署网络提供更多您自己的子网。您可以将这些子网中的专用 IP 地址添加到 Kubernetes 集群中的 Ingress 和 LoadBalancer 服务。根据您要使用的子网格式，以两种方式之一来配置用户管理的子网。
+从要用于访问 {{site.data.keyword.containerlong_notm}} 的内部部署网络提供更多您自己的子网。您可以将这些子网中的专用 IP 地址添加到 Kubernetes 集群中的 Ingress 和 LoadBalancer 服务。根据您要使用的子网格式，以两种方式之一来配置用户管理的子网。
 
 需求：
 - 用户管理的子网只能添加到专用 VLAN。
@@ -510,7 +510,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. **重要信息**：要启用同一 VLAN 的不同子网上的工作程序之间的通信，必须[启用同一 VLAN 上子网之间的路由](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+4. **重要信息**：如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
 
 5. 要配置内部部署和内部帐户连接，请在以下选项之间进行选择：
   - 如果将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署和内部帐户连接。有关更多信息，请参阅[使用 NodePort、LoadBalancer 或 Ingress 服务规划联网](cs_network_planning.html#planning)。
@@ -561,4 +561,6 @@ lastupdated: "2018-08-06"
 ### 创建持久性存储器
 {: #dedicated_apps_volume_claim}
 
-要查看用于创建持久性存储的选项，请参阅[持久性数据存储](cs_storage_planning.html#persistent)。要请求对卷执行备份、从卷复原或删除卷，必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+要查看用于创建持久性存储的选项，请参阅“用于高可用性的持久性数据存储选项”(cs_storage_planning.html#persistent_storage_overview)。要请求对卷执行备份、从卷复原、删除卷或者定期生成文件存储快照，必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
+如果选择供应[文件存储](cs_storage_file.html#predefined_storageclass)，请选择非保留存储类。选择非保留存储类可帮助防止 IBM Cloud Infrastructure (SoftLayer) 中出现孤线程持久性存储实例（只能通过开具支持凭单除去）。

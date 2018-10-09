@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # Lernprogramm: App aus Cloud Foundry in einen Cluster migrieren
 {: #cf_tutorial}
 
-Sie können eine App nehmen, die Sie zuvor mithilfe von Cloud Foundry bereitgestellt haben, und denselben Code in einen Container auf einem Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} bereitstellen.
+Sie können eine App nehmen, die Sie zuvor mithilfe von Cloud Foundry bereitgestellt haben, und denselben Code in einen Container auf einem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} bereitstellen.
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 - [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Erstellen Sie einen Cluster](cs_clusters.html#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
+- [Stellen Sie sicher, dass Sie die Plattformrolle **Bearbeiter**, **Operator** oder **Administrator** haben](cs_users.html#add_users_cli).
 - [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](cs_tech.html).
 
 
@@ -258,7 +259,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

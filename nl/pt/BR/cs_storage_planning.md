@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,80 +16,271 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-
-
 # Planejando armazenamento persistente altamente disponível
 {: #storage_planning}
 
-## Opções de armazenamento de dados não persistentes
-{: #non_persistent}
+## Escolhendo uma solução de armazenamento
+{: #choose_storage_solution}
 
-É possível usar as opções de armazenamento não persistente se os dados não precisam ser armazenados persistentemente ou se os dados não precisam ser compartilhados entre as instâncias do app. As opções de armazenamento não persistente também podem ser usadas para teste de unidade de seus componentes do app ou para tentar novos recursos.
+Antes de decidir qual tipo de armazenamento é a solução correta para você, deve-se entender os requisitos do app, o tipo de dados que deseja armazenar e a frequência com que deseja acessar esses dados.
+{: shortdesc}
+
+1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos em um determinado momento.
+   - **Armazenamento persistente:** seus dados ainda devem estar disponíveis, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido. Use armazenamento persistente nos cenários a seguir:
+       - Apps stateful
+       - Dados de negócios principais
+       - Dados que devem estar disponíveis em razão de requisitos legais, como um período de retenção definido
+       - Auditoria
+       - Os dados que devem ser acessados e compartilhados entre as instâncias do app
+   - **Armazenamento não persistente:** seus dados podem ser removidos quando o contêiner, o nó do trabalhador ou o cluster é removido. O armazenamento não persistente é geralmente usado para registrar informações, como logs do sistema ou logs de contêiner, teste de desenvolvimento ou quando você deseja acessar dados do sistema de arquivos do host. Para localizar uma visão geral de opções de armazenamento não persistente disponíveis, consulte [Comparação de opções de armazenamento não persistente](#non_persistent_overview).
+
+2. Se seus dados devem ser persistidos, analise se o app requer um tipo específico de armazenamento. Quando você usa um app existente, o app pode ser projetado para armazenar dados de uma das maneiras a seguir:  
+   - **Em um sistema de arquivos:** os dados podem ser armazenados como um arquivo em um diretório. Por exemplo, você poderia armazenar esse arquivo em seu disco rígido local. Alguns apps requerem que os dados sejam armazenados em um sistema de arquivos específico, como `nfs` ou `ext4`, para otimizar o armazenamento de dados e atingir os objetivos de desempenho.
+   - **Em um banco de dados:** os dados devem ser armazenados em um banco de dados que segue um esquema específico. Alguns apps vêm com uma interface de banco de dados que pode ser usada para armazenar dados. Por exemplo, o WordPress é otimizado para armazenar dados em um banco de dados MySQL. Nesses casos, o tipo de armazenamento é selecionado para você.
+
+3. Se seu app não tem uma limitação no tipo de armazenamento que se deve usar, determine o tipo de dados que você deseja armazenar.
+   - **Dados estruturados:** dados que podem ser armazenados em um banco de dados relacional no qual você tem uma tabela com colunas e linhas. Os dados em tabelas podem ser conectados usando chaves e geralmente são fáceis de acessar devido ao modelo de dados predefinido. Exemplos são números de telefone, números de conta, números de Seguridade Social ou CEPs.
+   - **Dados semiestruturados:** dados que não se ajustam a um banco de dados relacional, mas que vêm com algumas propriedades organizacionais que podem ser usadas para ler e analisar esses dados mais facilmente. Exemplos são arquivos de linguagem de marcações, como CSV, XML ou JSON.  
+   - **Dados não estruturados:** dados que não seguem um padrão organizacional e que são tão complexos que não é possível armazená-los em um banco de dados relacional com modelos de dados predefinidos. Para acessar esses dados, você precisa de ferramentas e software avançados. Exemplos são mensagens de e-mail, vídeos, fotos, arquivos de áudio, apresentações, dados de mídia social ou páginas da web.
+
+   Se você tiver dados estruturados e não estruturados, tente armazenar cada tipo de dados separadamente em uma solução de armazenamento que seja projetada para esse tipo de dados. Usar uma solução de armazenamento apropriada para o seu tipo de dados facilita o acesso aos seus dados e fornece os benefícios de desempenho, escalabilidade, durabilidade e consistência.
+   {: tip}
+
+4. Analise como você deseja acessar os seus dados. As soluções de armazenamento são geralmente projetadas e otimizadas para suportar operações de leitura ou gravação.  
+   - ** Somente leitura: **  seus dados são somente leitura. Você não deseja gravar ou mudar seus dados.
+   - **Leitura e gravação:** você deseja ler, gravar e mudar seus dados. Para dados que são lidos e gravados, é importante entender se as operações são de leitura pesada, de gravação pesada ou balanceada.
+
+4. Determine a frequência em que seus dados são acessados. Entender a frequência de acesso a dados pode ajudar a entender o desempenho requerido para seu armazenamento. Por exemplo, os dados que são acessados frequentemente geralmente residem em armazenamento rápido.
+   - **Dados quentes:** dados que são acessados frequentemente. Casos de uso comuns são apps da web ou móveis.
+   - **Dados frescos ou mornos:** dados que são acessados infrequentemente, como uma vez por mês ou menos. Os casos de uso comuns são archives, retenção de dados de curto prazo ou recuperação de desastre.
+   - **Dados frios:** dados que são raramente acessados, se forem. Os casos de uso comuns são archives, backups de longo prazo, dados históricos.
+   - **Dados congelados:** dados que não são acessados e que você precisa manter devido a motivos jurídicos.
+
+   Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se as cargas de trabalho são de leitura pesada, de gravação pesada ou balanceada. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.containerlong_notm}} fornece uma classe de armazenamento `flex` que considera com que frequência os dados são acessados em um mês e considera essa medida para otimizar o faturamento mensal.
+   {: tip}
+
+5. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões.
+   - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Outras soluções de armazenamento permitem que você compartilhe o mesmo volume entre múltiplos pods.
+   - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas.
+
+6. Entenda outras características de armazenamento que impactam sua opção.
+   - **Consistência:** a garantia de que uma operação de leitura retorna a versão mais recente de um arquivo. As soluções de armazenamento podem fornecer `strong consistency` quando você tem garantia de sempre receber a versão mais recente de um arquivo ou `eventual consistency` quando a operação de leitura pode não retornar a versão mais recente. Frequentemente, você localiza uma consistência eventual em sistemas distribuídos geograficamente em que uma operação de gravação deve primeiro ser replicada em todas as instâncias.
+   - **Desempenho:** o tempo que leva para concluir uma operação de leitura ou gravação.
+   - **Durabilidade:** a garantia de que uma operação de gravação que está confirmada em seu armazenamento mantenha-se permanentemente e não seja corrompida ou perdida, mesmo se gigabytes ou terabytes de dados forem gravados em seu armazenamento ao mesmo tempo.
+   - **Resiliência:** a capacidade de se recuperar de uma indisponibilidade e continuar as operações, mesmo se um componente de hardware ou software falhou. Por exemplo, seu armazenamento físico experimenta uma indisponibilidade de energia, uma indisponibilidade de rede ou é destruído durante um desastre natural.
+   - **Disponibilidade:** a capacidade de fornecer acesso a seus dados, mesmo que um data center ou uma região esteja indisponível. A disponibilidade para seus dados é geralmente obtida pela inclusão de redundância e configuração de mecanismos de failover.
+   - **Escalabilidade:** a capacidade de ampliar a capacidade e customizar o desempenho com base em suas necessidades.
+   - **Criptografia:** o mascaramento de dados para evitar visibilidade quando os dados são acessados por um usuário não autorizado.
+
+7. [Revise as soluções de armazenamento persistente disponíveis](#persistent_storage_overview) e escolha a solução que melhor se ajuste ao seu app e aos requisitos de dados.
+
+## Comparação de Opções de Armazenamento não Persistente
+{: #non_persistent_overview}
+
+Será possível usar as opções de armazenamento não persistente se os seus dados não precisarem ser armazenados persistentemente ou se você desejar fazer teste de unidade de seus componentes de app.
 {: shortdesc}
 
 A imagem a seguir mostra as opções de armazenamento de dados não persistentes disponíveis no {{site.data.keyword.containerlong_notm}}. Essas opções estão disponíveis para clusters grátis e padrão.
 <p>
 <img src="images/cs_storage_nonpersistent.png" alt="Opções de armazenamento de dados não persistentes" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="A tabela mostra as opções de armazenamento não persistentes. As linhas devem ser lidas da esquerda para a direita, com o número da opção na coluna um, o título da opção na coluna dois e uma descrição na coluna três." style="width: 100%">
-<caption>Opções de armazenamento não persistente</caption>
-  <thead>
-  <th>Opção</th>
-  <th>Descrição</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. Dentro do contêiner ou pod</td>
-      <td>Os contêineres e os pods são, pelo design, de curta duração e podem falhar inesperadamente. No entanto, é possível gravar dados no sistema de arquivos local do contêiner para armazenar dados em todo o ciclo de vida do contêiner. Os dados dentro de um contêiner não podem ser compartilhados com outros contêineres ou pods e são perdidos quando o contêiner trava ou é removido. Para obter mais informações, veja [Armazenando dados em um contêiner](https://docs.docker.com/storage/).</td>
-    </tr>
-  <tr>
-    <td>2. No nó do trabalhador</td>
-    <td>Cada nó do trabalhador é configurado com armazenamento primário e secundário que é determinado pelo tipo de máquina que você seleciona para o seu nó do trabalhador. O armazenamento primário é usado para armazenar dados do sistema operacional e pode ser acessado usando um [volume <code>hostPath</code> do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath). O armazenamento secundário é usado para armazenar dados do `kubelet` e do mecanismo de tempo de execução do contêiner. É possível acessar o armazenamento secundário usando um [volume <code>emptyDir</code> do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)<br/><br/>Embora os volumes <code>hostPath</code> sejam usados para montar os arquivos do sistema de arquivos do nó do trabalhador em seu pod, <code>emptyDir</code> cria um diretório vazio que é designado a um pod em seu cluster. Todos os contêineres nesse pod podem ler e gravar nesse volume. Como o
-volume está designado a um pod específico, os dados não podem ser compartilhados com outros pods em um conjunto de réplicas.<br/><br/><p>Um volume <code>hostPath</code> ou <code>emptyDir</code> e seus dados são removidos quando: <ul><li>O nó do trabalhador é excluído.</li><li>O nó do trabalhador é recarregado ou atualizado.</li><li>O cluster é excluído.</li><li>A conta do {{site.data.keyword.Bluemix_notm}} atinge um estado suspenso. </li></ul></p><p>Além disso, os dados em um volume <code>emptyDir</code> são removidos quando: <ul><li>O pod designado é excluído permanentemente do nó do trabalhador.</li><li>O pod designado é planejado em outro nó do trabalhador.</li></ul></p><p><strong>Nota:</strong> se o contêiner dentro do pod travar, os dados no volume ainda ficarão disponíveis no nó do trabalhador.</p></td>
-    </tr>
-    </tbody>
-    </table>
+<table>
+<thead>
+<th style="text-align:left">Características</th>
+<th style="text-align:left">Dentro do contêiner</th>
+<th style="text-align:left">No disco primário ou secundário do nó do trabalhador</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Capacidade Multizone</td>
+<td style="text-align:left">Não</td>
+<td style="text-align:left">Não</td>
+</tr>
+<tr>
+<td style="text-align:left">Tipos de Dados</td>
+<td style="text-align:left">Todos</td>
+<td style="text-align:left">Todos</td>
+</tr>
+<tr>
+<td style="text-align:left">Capacidade</td>
+<td style="text-align:left">Limitada ao disco secundário disponível do nó do trabalhador. Para limitar a quantia de armazenamento secundário que é consumido por seu pod, use solicitações de recurso e limites para o [armazenamento efêmero ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+<td style="text-align:left">Limitada ao espaço disponível do nó do trabalhador no disco primário (hostPath) ou secundário (emptyDir). Para limitar a quantia de armazenamento secundário que é consumido por seu pod, use solicitações de recurso e limites para o [armazenamento efêmero ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+</tr>
+<tr>
+<td style="text-align:left">Padrão de acesso a dados</td>
+<td style="text-align:left">Operações de leitura e gravação de qualquer frequência</td>
+<td style="text-align:left">Operações de leitura e gravação de qualquer frequência</td>
+</tr>
+<tr>
+<td style="text-align:left">Access</td>
+<td style="text-align:left">Através do sistema de arquivos local do contêiner</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Por meio do [volume <code>hostPath</code> do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) para acesso ao armazenamento primário do nó do trabalhador. </li><li style="margin:0px; padding:0px">Por meio do [volume <code>emptyDir</code> do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) para acesso ao armazenamento secundário do nó do trabalhador.</td>
+</tr>
+<tr>
+<td style="text-align:left">Desempenho</td>
+<td style="text-align:left">Alta</td>
+<td style="text-align:left">Alto com latência inferior ao usar SSD</td>
+</tr>
+<tr>
+<td style="text-align:left">Consistência</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+</tr>
+<tr>
+<td style="text-align:left">Resiliência</td>
+<td style="text-align:left">Baixo</td>
+<td style="text-align:left">Baixo</td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilidade</td>
+<td style="text-align:left">Específica para o contêiner</td>
+<td style="text-align:left">Específico para o nó do trabalhador</td>
+</tr>
+<tr>
+<td style="text-align:left">Escalabilidade</td>
+<td style="text-align:left">Difícil de ampliar conforme limitado à capacidade do disco secundário do nó do trabalhador</td>
+<td style="text-align:left">Difícil de ampliar conforme limitado à capacidade do disco primário e secundário do nó do trabalhador</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabillity</td>
+<td style="text-align:left">Os dados são perdidos quando o contêiner trava ou é removido. </td>
+<td style="text-align:left">Os dados em volumes <code>hostPath</code> ou <code>emptyDir</code> são perdidos quando: <ul><li>O nó do trabalhador é excluído.</li><li>O nó do trabalhador é recarregado ou atualizado.</li><li>O cluster é excluído.</li><li>A conta do {{site.data.keyword.Bluemix_notm}} atinge um estado suspenso. </li></ul></p><p>Além disso, os dados em um volume <code>emptyDir</code> são removidos quando: <ul><li>O pod designado é excluído permanentemente do nó do trabalhador.</li><li>O pod designado é planejado em outro nó do trabalhador.</li></ul>
+</tr>
+<tr>
+<td style="text-align:left">Casos de uso comuns</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache de imagem local</li><li style="margin:0px; padding:0px">Logs do contêiner</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache local de alto desempenho</li><li style="margin:0px; padding:0px">Acessar arquivos do sistema de arquivos do nó do trabalhador</li><li style="margin:0px; padding:0px">Testes de Unidade</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Casos de uso não ideais</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Armazenamento de dados persistentes</li><li style="margin:0px; padding:0px">Compartilhando dados entre contêineres</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Armazenamento de dados persistentes</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 
-## Opções de armazenamento de dados persistentes para alta disponibilidade
-{: #persistent}
+## Comparação de opções de armazenamento persistente
+{: #persistent_storage_overview}
 
-O principal desafio quando você cria apps stateful altamente disponíveis é persistir dados entre múltiplas instâncias de app em múltiplas zonas e manter os dados em sincronização sempre. Para dados altamente disponíveis, você deseja assegurar que tenha um banco de dados principal com múltiplas instâncias que são difundidas em múltiplos data centers ou mesmo em múltiplas regiões. Esse banco de dados principal deve ser replicado continuamente para manter uma fonte isolada de verdade. Todas as instâncias no cluster devem ler e gravar nesse banco de dados principal. No caso de uma instância do mestre estar inativa, outras instâncias assumem o controle da carga de trabalho para que você não experiencie o tempo de inatividade para seus apps.
+Use as opções de armazenamento persistente para quaisquer dados que você deseja manter permanentemente, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido.
 {: shortdesc}
 
-A imagem a seguir mostra as opções que você tem no {{site.data.keyword.containerlong_notm}} para tornar os dados altamente disponíveis em um cluster padrão. A opção que é certa para você depende dos fatores a seguir:
-  * **O tipo de app que você tem:** por exemplo, você pode ter um app que deve armazenar dados em uma base de arquivo em vez de dentro de um banco de dados.
-  * **Requisitos jurídicos de onde armazenar e rotear os dados:** por exemplo, você pode ser obrigado a armazenar e rotear dados somente nos Estados Unidos e não é possível usar um serviço que está localizado na Europa.
-  * **Opções de backup e restauração:** cada opção de armazenamento vem com recursos para fazer backup e restaurar dados. Verifique se as opções de backup e restauração disponíveis atendem aos requisitos do plano de recuperação de desastres, como a frequência de backups ou os recursos de armazenamento de dados fora do seu data center primário.
-  * **Replicação global:** para alta disponibilidade, você pode desejar configurar múltiplas instâncias de armazenamento que são distribuídas e replicadas entre os data centers em todo o mundo.
+**Nota:** as opções de armazenamento de dados persistentes estão disponíveis somente para clusters padrão.
 
-<br/>
+Procurando conectar seu cluster a um banco de dados no local? Consulte [Configurando a conectividade de VPN para o cluster](cs_vpn.html#vpn).
+{: tip}
+
+A imagem a seguir mostra as opções que você tem no {{site.data.keyword.containerlong_notm}} para armazenar permanentemente seus dados e tornar seus dados altamente disponíveis em um cluster.
+
 <img src="images/cs_storage_mz-ha.png" alt="High availability options for persistent storage"/>
 
-<table summary="A tabela mostra as opções de armazenamento persistente. As linhas devem ser lidas da esquerda para a direita, com o número da opção na coluna um, o título da opção na coluna dois e uma descrição na coluna três." style="width: 100%">
-<caption>Opções de armazenamento persistente</caption>
-  <thead>
-  <th>Opção</th>
-  <th>Descrição</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>1. Armazenamento NFS ou de bloco</td>
-  <td>Com essa opção, é possível persistir os dados do app e do contêiner dentro da mesma zona usando volumes persistentes do Kubernetes. </br></br><strong>Como posso provisionar o armazenamento de arquivo ou de bloco?</strong></br>Para provisionar armazenamento de arquivo e armazenamento de bloco em um cluster, você [usa persistent volumes (PVs) e persistent volume claims (PVCs)](cs_storage_basics.html#pvc_pv). Os PVCs e PVs são conceitos do Kubernetes que abstraem a API para provisionar o arquivo físico ou o dispositivo de armazenamento de bloco. É possível criar PVCs e PVs usando o fornecimento [dinâmico](cs_storage_basics.html#dynamic_provisioning) ou [estático](cs_storage_basics.html#static_provisioning). </br></br><strong>Posso usar o armazenamento de arquivo ou de bloco em um cluster de múltiplas zonas?</strong></br> Os dispositivos de armazenamento de arquivo e de bloco são específicos de uma zona e não podem ser compartilhados entre zonas ou regiões. Para usar esse tipo de armazenamento em um cluster, deve-se ter pelo menos um nó do trabalhador na mesma zona que seu armazenamento. </br></br>Se você [provisionar dinamicamente](cs_storage_basics.html#dynamic_provisioning) o armazenamento de arquivo e de bloco em um cluster que abrange múltiplas zonas, o armazenamento será provisionado em somente uma zona selecionada em uma base round-robin. Para provisionar armazenamento persistente em todas as zonas de seu cluster de múltiplas zonas, repita as etapas para provisionar o armazenamento dinâmico para cada zona. Por exemplo, se o seu cluster abranger as zonas `dal10`, `dal12` e `dal13`, na primeira vez em que você provisionar dinamicamente o armazenamento persistente, poderá provisionar o armazenamento em `dal10`. Crie mais dois PVCs para cobrir `dal12` e `dal13`. </br></br><strong>E se eu desejar compartilhar dados entre zonas?</strong></br>Se você desejar compartilhar dados entre zonas, use um serviço de banco de dados em nuvem, como [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). </td>
-  </tr>
-  <tr id="cloud-db-service">
-    <td>2. Serviço de banco de dados em nuvem</td>
-    <td>Com essa opção, é possível persistir dados usando um serviço de banco de dados do {{site.data.keyword.Bluemix_notm}}, como o [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). </br></br><strong>Posso usar um serviço de banco de dados em nuvem para meu cluster de múltiplas zonas?</strong></br>Com um serviço de banco de dados em nuvem, os dados são armazenados fora do cluster na instância de serviço especificada. A instância de serviço é provisionada em uma zona. No entanto, cada instância de serviço é fornecida com uma interface externa que pode ser usada para acessar seus dados. Quando você usa um serviço de banco de dados para um cluster de múltiplas zonas, é possível compartilhar dados entre clusters, zonas e regiões. Para tornar sua instância de serviço mais disponível, é possível escolher configurar múltiplas instâncias entre as zonas e a replicação entre as instâncias para maior disponibilidade. </br></br><strong>Como posso incluir um serviço de banco de dados em nuvem em meu cluster?</strong></br>Para usar um serviço em seu cluster, deve-se [ligar o serviço do {{site.data.keyword.Bluemix_notm}} serviço](cs_integrations.html#adding_app) a um namespace em seu cluster. Ao ligar o serviço ao cluster, um segredo do Kubernetes é criado. O segredo do Kubernetes retém a informação confidencial sobre o serviço, como a URL para o serviço, seu nome do usuário e a senha. É possível montar o
-segredo como um volume de segredo em seu pod e acessar o serviço usando as credenciais no segredo. Montando o volume de segredo em outros pods, também é possível compartilhar dados entre os pods. Quando um
-contêiner trava ou um pod é removido de um nó do trabalhador, os dados não são removidos e ainda podem ser
-acessados por outros pods que montam o volume de segredo. </br></br>A maioria dos serviços de banco de dados do {{site.data.keyword.Bluemix_notm}} fornecem espaço em disco para
-uma pequena quantia de dados sem custo, para que você possa testar seus recursos.</p></td>
-  </tr>
-  <tr>
-    <td>3. Banco de dados no local</td>
-    <td>Se seus dados devem ser armazenados no local por razões jurídicas, é possível [configurar uma conexão VPN](cs_vpn.html#vpn) para seu banco de dados no local e usar os mecanismos de armazenamento, backup e replicação existentes em seu data center.</td>
-  </tr>
-  </tbody>
-  </table>
-
-{: caption="Tabela. Opções de armazenamento de dados persistentes para implementações em clusters do Kubernetes" caption-side="top"}
+<table>
+<thead>
+<th style="text-align:left">Características</th>
+<th style="text-align:left">Arquivo</th>
+<th style="text-align:left">Bloqueio</th>
+<th style="text-align:left">Objeto</th>
+<th style="text-align:left">DBaaS</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Multizone-capaz</td>
+<td style="text-align:left">Não, conforme específico para um data center. Os dados não podem ser compartilhados entre as zonas, a menos que você implemente sua própria replicação de dados.</td>
+<td style="text-align:left">Não, conforme específico para um data center. Os dados não podem ser compartilhados entre as zonas, a menos que você implemente sua própria replicação de dados.</td>
+<td style="text-align:left">Sim</td>
+<td style="text-align:left">Sim</td>
+</tr>
+<tr>
+<td style="text-align:left">Tipos de dados Ideal</td>
+<td style="text-align:left">Todos</td>
+<td style="text-align:left">Todos</td>
+<td style="text-align:left">Dados Semi-Estruturados e não Estruturados</td>
+<td style="text-align:left">Depende do DBaaS</ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Padrão de uso de dados</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Operações de leitura/gravação aleatória</li><li style="margin:0px; padding:0px">Operações de leitura/gravação sequencial</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Operações de leitura/gravação aleatória</li><li style="margin:0px; padding:0px">Cargas de trabalho de gravação intensiva</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cargas de trabalho de leitura intensiva</li><li style="margin:0px; padding:0px">Poucas ou nenhuma operação de gravação</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cargas de trabalho de leitura/gravação intensiva</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Access</td>
+<td style="text-align:left">Via sistema de arquivos no volume montado</td>
+<td style="text-align:left">Via sistema de arquivos no volume montado</td>
+<td style="text-align:left">Via sistema de arquivos no volume montado (plug-in) ou via API de REST em seu app</td>
+<td style="text-align:left">Via API REST a partir de seu app</td>
+</tr>
+<tr>
+<td style="text-align:left">Suportadas gravações de acesso do Kubernetes</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A quando acessado no app diretamente</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Desempenho</td>
+<td style="text-align:left">Previsível devido ao IOPS e tamanho designados. Os IOPS são compartilhados entre os pods que acessam o volume.</td>
+<td style="text-align:left">Previsível devido ao IOPS e tamanho designados. Os IOPS não são compartilhados entre os pods. </td>
+<td style="text-align:left">Alto para operações de leitura, com latência mais baixa do que Bloco ao ler no cache local. Não previsível para operações de gravação.</td>
+<td style="text-align:left">Alto, se implementado no mesmo data center que seu app.</td>
+</tr>
+<tr>
+<td style="text-align:left">Consistência</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Eventual</td>
+<td style="text-align:left">Depende do DBaaS</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilidade</td>
+<td style="text-align:left">Alta</td>
+<td style="text-align:left">Alta</td>
+<td style="text-align:left">Alta</td>
+<td style="text-align:left">Alta</td>
+</tr>
+<tr>
+<td style="text-align:left">Resiliência</td>
+<td style="text-align:left">Medium conforme específico para um data center. O servidor de armazenamento de arquivo é agrupado pela IBM com rede redundante.</td>
+<td style="text-align:left">Medium conforme específico para um data center. O servidor de armazenamento de bloco é agrupado pela IBM com rede redundante.</td>
+<td style="text-align:left">Alta quando os dados são armazenados em pelo menos 3 cópias e distribuídos em uma região ou entre regiões.</td>
+<td style="text-align:left">Depende do DBaaS e de sua configuração. </td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilidade</td>
+<td style="text-align:left">Medium conforme específico para um data center.</td>
+<td style="text-align:left">Medium conforme específico para um data center.</td>
+<td style="text-align:left">Alta devido à distribuição entre zonas ou regiões. </td>
+<td style="text-align:left">Alta se você configurar múltiplas instâncias. </td>
+</tr>
+<tr>
+<td style="text-align:left">Escalabilidade</td>
+<td style="text-align:left">Difícil de ampliar além do data center. Não é possível mudar uma camada de armazenamento existente. </td>
+<td style="text-align:left">Difícil de ampliar além do data center. Não é possível mudar uma camada de armazenamento existente.</td>
+<td style="text-align:left">Fácil de escalar.</td>
+<td style="text-align:left">Fácil de escalar.</td>
+</tr>
+<tr>
+<td style="text-align:left">Criptografia</td>
+<td style="text-align:left">Em repouso</td>
+<td style="text-align:left">Em repouso</td>
+<td style="text-align:left">Em repouso</td>
+<td style="text-align:left">Em repouso</td>
+</tr>
+<tr>
+<td style="text-align:left">Casos de uso comuns</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Armazenamento em Massa ou Arquivo Único</li><li style="margin:0px; padding:0px">Compartilhamento de arquivo em um cluster de zona única</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Conjuntos stateful</li><li style="margin:0px; padding:0px">Armazenamento auxiliar quando você executa seu próprio banco de dados</li><li style="margin:0px; padding:0px">Acesso de alto desempenho para pods únicos</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters de múltiplas zonas</li><li style="margin:0px; padding:0px">Dados distribuídos geograficamente</li><li style="margin:0px; padding:0px">Dados grandes estáticos</li><li style="margin:0px; padding:0px">Conteúdo estático de multimídia</li><li style="margin:0px; padding:0px">Apps da web</li><li style="margin:0px; padding:0px">Backups</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters de múltiplas zonas</li><li style="margin:0px; padding:0px">Bancos de dados relacionais e não relacionais</li><li style="margin:0px; padding:0px">Dados distribuídos geograficamente</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Casos de uso não ideais</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters de múltiplas zonas</li><li style="margin:0px; padding:0px">Dados distribuídos geograficamente</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters de múltiplas zonas</li><li style="margin:0px; padding:0px">Dados distribuídos geograficamente</li><li style="margin:0px; padding:0px">Compartilhando dados em múltiplas instâncias do app</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cargas de trabalho de gravação intensiva</li><li style="margin:0px; padding:0px">Operações de gravação aleatória</li><li style="margin:0px; padding:0px">Atualizações de dados incrementais</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App que é projetado para gravar em um sistema de arquivos</li></ul></td>
+</tr>
+</tbody>
+</table>

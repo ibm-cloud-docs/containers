@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -24,9 +24,9 @@ Con la connettività VPN, puoi collegare in modo sicuro le applicazioni di un cl
 
 Per collegare i tuoi nodi di lavoro e applicazioni a un data center in loco, puoi configurare una delle seguenti opzioni.
 
-- **Servizio VPN IPSec strongSwan**: puoi configurare un [Servizio VPN IPSec strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/about.html) che collega in modo sicuro il tuo cluster Kubernetes a una rete in loco. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end protetto su Internet basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore. Per configurare una connessione sicura tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](#vpn-setup) direttamente in un pod nel tuo cluster.
+- **Servizio VPN IPSec strongSwan**: puoi configurare un [Servizio VPN IPSec strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/about.html) che collega in modo sicuro il tuo cluster Kubernetes a una rete in loco. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end protetto su Internet basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore. Per configurare una connessione protetta tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](#vpn-setup) direttamente in un pod nel tuo cluster.
 
-- **VRA (Virtual Router Appliance) o FSA (Fortigate Security Appliance)**: puoi scegliere di configurare un [VRA](/docs/infrastructure/virtual-router-appliance/about.html) o un [FSA](/docs/infrastructure/fortigate-10g/about.html) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a più cluster su una singola VPN o hai bisogno di una VPN basata sugli instradamenti. Per configurare un VRA, vedi [Configurazione della connettività VPN con VRA](#vyatta).
+- **VRA (Virtual Router Appliance) o FSA (Fortigate Security Appliance)**: puoi scegliere di configurare una [VRA](/docs/infrastructure/virtual-router-appliance/about.html) o una [FSA](/docs/infrastructure/fortigate-10g/about.html) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a più cluster su una singola VPN o hai bisogno di una VPN basata sugli instradamenti. Per configurare una VRA, vedi [Configurazione della connettività VPN con VRA](#vyatta).
 
 ## Utilizzo del grafico Helm del servizio VPN IPSec strongSwan
 {: #vpn-setup}
@@ -34,9 +34,9 @@ Per collegare i tuoi nodi di lavoro e applicazioni a un data center in loco, puo
 Utilizza un grafico Helm per configurare e distribuire il servizio VPN IPSec strongSwan all'interno di un pod Kubernetes.
 {:shortdesc}
 
-Poiché strongSwan è integrato con il tuo cluster, non hai bisogno di un dispositivo gateway esterno. Quando viene stabilita la connettività VPN, le rotte vengono configurate automaticamente su tutti i nodi di lavoro nel cluster. Queste rotte consentono una connettività a due vie tramite il tunnel VPN tra i pod su un qualsiasi nodo di lavoro e il sistema remoto. Ad esempio, il seguente diagramma mostra in che modo un'applicazione in {{site.data.keyword.containershort_notm}} può comunicare con un server in loco tramite una connessione VPN strongSwan:
+Poiché strongSwan è integrato con il tuo cluster, non hai bisogno di un dispositivo gateway esterno. Quando viene stabilita la connettività VPN, le rotte vengono configurate automaticamente su tutti i nodi di lavoro nel cluster. Queste rotte consentono una connettività a due vie tramite il tunnel VPN tra i pod su un qualsiasi nodo di lavoro e il sistema remoto. Ad esempio, il seguente diagramma mostra in che modo un'applicazione in {{site.data.keyword.containerlong_notm}} può comunicare con un server in loco tramite una connessione VPN strongSwan:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Esposizione di un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando un programma di bilanciamento del carico" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando un programma di bilanciamento del carico" style="width:700px; border-style: none"/>
 
 1. Un'applicazione nel tuo cluster, `myapp`, riceve una richiesta da un servizio Ingress o LoadBalancer e deve connettersi in modo sicuro alla tua rete in loco.
 
@@ -97,7 +97,7 @@ Per ulteriori informazioni su ciascuna impostazione, leggi la documentazione for
     * Se `ipsec.keyexchange` è impostata su `ikev1`, devi specificare questa impostazione.
     * Se `ipsec.keyexchange` è impostata su `ikev2`, questa impostazione è facoltativa.
     * Se lasci vuota questa impostazione, per la connessione vengono utilizzati gli algoritmi strongSwan `aes128-sha1,3des-sha1` predefiniti.
-3. Imposta `ipsec.ike` su un elenco degli algoritmi di autenticazione e crittografia IKE/ISAKMP SA utilizzati dal tuo endpoint del tunnel VPN in loco per la connessione.Gli algoritmi devono essere specifici nel formato `encryption-integrity[-prf]-dhgroup`.
+3. Imposta `ipsec.ike` su un elenco degli algoritmi di autenticazione e crittografia IKE/ISAKMP SA utilizzati dal tuo endpoint del tunnel VPN in loco per la connessione. Gli algoritmi devono essere specifici nel formato `encryption-integrity[-prf]-dhgroup`.
     * Se `ipsec.keyexchange` è impostata su `ikev1`, devi specificare questa impostazione.
     * Se `ipsec.keyexchange` è impostata su `ikev2`, questa impostazione è facoltativa.
     * Se lasci vuota questa impostazione, per la connessione vengono utilizzati gli algoritmi strongSwan `aes128-sha1-modp2048,3des-sha1-modp1536` predefiniti.
@@ -154,7 +154,7 @@ Determina le risorse cluster che devono essere accessibili dalla rete remota sul
     **Nota**: se `ipsec.keyexchange` è impostata su `ikev1`, puoi specificare solo una sottorete. Puoi tuttavia utilizzare l'impostazione `localSubnetNAT` per combinare più sottoreti del cluster in una singola sottorete.
 
 2. Facoltativo: riassocia le sottoreti del cluster utilizzando l'impostazione `localSubnetNAT`. NAT (Network Address Translation) per le sottoreti fornisce una soluzione temporanea per i conflitti di sottorete tra la rete del cluster e la rete remota in loco. Puoi utilizzare NAT per riassociare le sottoreti IP locali private del cluster, la sottorete del pod (172.30.0.0/16) o la sottorete del servizio pod (172.21.0.0/16) a una sottorete privata diversa. Il tunnel VPN vede le sottoreti IP riassociate invece delle sottoreti originali. La riassociazione avviene prima che i pacchetti vengano inviati attraverso il tunnel VPN e dopo che i pacchetti arrivano dal tunnel VPN. Puoi esporre contemporaneamente entrambe le sottoreti riassociate e non riassociate sulla VPN. Per abilitare NAT, puoi aggiungere un'intera sottorete o singoli indirizzi IP.
-    * Se aggiungi un'intera sottorete nel formato `10.171.42.0/24=10.10.10.0/24`, per la riassociazione si applica un rapporto di 1 a 1: tutti gli indirizzi IP nella sottorete della rete interna vengono associati alla sottorete della rete esterna e viceversa. 
+    * Se aggiungi un'intera sottorete nel formato `10.171.42.0/24=10.10.10.0/24`, per la riassociazione si applica un rapporto di 1 a 1: tutti gli indirizzi IP nella sottorete della rete interna vengono associati alla sottorete della rete esterna e viceversa.
     * Se aggiungi singoli indirizzi IP nel formato `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32`, solo quegli indirizzi IP interni vengono associati agli indirizzi IP esterni specificati.
 
 3. Facoltativo per i grafici Helm strongSwan versione 2.2.0 e successive: nascondi tutti gli indirizzi IP del cluster dietro un singolo indirizzo IP impostando `enableSingleSourceIP` su `true`. Questa opzione fornisce una delle configurazioni più sicure per la connessione VPN perché non è consentita alcuna connessione dalla rete remota che vada nuovamente nel cluster.
@@ -452,16 +452,16 @@ Puoi disabilitare la connessione VPN eliminando il grafico Helm.
 ## Utilizzo di una VRA (Virtual Router Appliance)
 {: #vyatta}
 
-Il [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) fornisce l'ultimo sistema operativo Vyatta 5600 per i server bare metal x86. Puoi utilizzare un VRA come un gateway VPN per connetterti in modo sicuro ad una rete in loco.
+La VRA ([)](/docs/infrastructure/virtual-router-appliance/about.html) fornisce il sistema operativo Vyatta 5600 più recente per i server bare metal x86. Puoi utilizzare una VRA come un gateway VPN per connetterti in modo sicuro ad una rete in loco.
 {:shortdesc}
 
-Tutto il traffico di rete pubblico e privato che entra o esce dalle VLAN del cluster viene instradato tramite un VRA. Puoi utilizzare VRA come un endpoint VPN per creare un tunnel IPSec crittografato tra i server nell'infrastruttura IBM Cloud (SoftLayer) e le risorse in loco. Ad esempio, il seguente diagramma mostra in che modo un'applicazione su un nodo di lavoro solamente privato in {{site.data.keyword.containershort_notm}} può comunicare con un server in loco tramite una connessione VPN VRA:
+Tutto il traffico di rete pubblico e privato che entra o esce dalle VLAN del cluster viene instradato tramite una VRA. Puoi utilizzare la VRA come un endpoint VPN per creare un tunnel IPSec crittografato tra i server nell'infrastruttura IBM Cloud (SoftLayer) e le risorse in loco. Ad esempio, il seguente diagramma mostra in che modo un'applicazione su un nodo di lavoro solamente privato in {{site.data.keyword.containerlong_notm}} può comunicare con un server in loco tramite una connessione VPN VRA:
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Esposizione di un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando un programma di bilanciamento del carico" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando un programma di bilanciamento del carico" style="width:725px; border-style: none"/>
 
 1. Un'applicazione nel tuo cluster, `myapp2`, riceve una richiesta da un servizio Ingress o LoadBalancer e deve connettersi in modo sicuro alla tua rete in loco.
 
-2. Poiché `myapp2` si trova su un nodo di lavoro che si trova solo su una VLAN privata, VRA funge da connessione sicura tra i nodi di lavoro e la rete in loco. VRA usa l'indirizzo IP di destinazione per determinare quali pacchetti di rete inviare alla rete in loco.
+2. Poiché `myapp2` si trova su un nodo di lavoro che si trova solo su una VLAN privata, la VRA funge da connessione protetta tra i nodi di lavoro e la rete in loco. La VRA usa l'indirizzo IP di destinazione per determinare quali pacchetti di rete inviare alla rete in loco.
 
 3. La richiesta viene crittografata e inviata sul tunnel VPN nel data center in loco.
 
@@ -469,12 +469,12 @@ Tutto il traffico di rete pubblico e privato che entra o esce dalle VLAN del clu
 
 5. L'endpoint del tunnel VPN (router) inoltra la richiesta al mainframe o al server in loco a seconda dell'indirizzo IP di destinazione specificato nel passo 2. I dati necessari vengono reinviati tramite la connessione VPN a `myapp2` seguendo lo stesso processo.
 
-Per configurare un VRA (Virtual Router Appliance):
+Per configurare una VRA (Virtual Router Appliance):
 
-1. [Ordina un VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html).
+1. [Ordina una VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html).
 
-2. [Configura la VLAN privata nel VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
+2. [Configura la VLAN privata nella VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
 
-3. Per abilitare una connessione VPN utilizzando il VRA, [configura VRRP nel VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
+3. Per abilitare una connessione VPN utilizzando la VRA, [configura VRRP nella VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
 
-**Nota**: se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non sono configurate sull'applicazione router. Per utilizzare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning delle VLAN](cs_subnets.html#subnet-routing).
+**Nota**: se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non sono configurate sull'applicazione router. Per utilizzare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning delle VLAN](cs_subnets.html#subnet-routing). Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.

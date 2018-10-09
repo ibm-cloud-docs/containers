@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,9 +34,9 @@ lastupdated: "2018-08-06"
 使用 Helm 图表在 Kubernetes pod 内配置并部署 strongSwan IPSec VPN 服务。
 {:shortdesc}
 
-由于 strongSwan 已在集群中集成，因此无需外部网关设备。建立 VPN 连接时，会在集群中的所有工作程序节点上自动配置路径。这些路径允许在任何工作程序节点和远程系统上的 pod 之间通过 VPN 隧道进行双向连接。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中的应用程序可以如何通过 strongSwan VPN 连接与内部部署服务器进行通信：
+由于 strongSwan 已在集群中集成，因此无需外部网关设备。建立 VPN 连接时，会在集群中的所有工作程序节点上自动配置路径。这些路径允许在任何工作程序节点和远程系统上的 pod 之间通过 VPN 隧道进行双向连接。例如，下图显示了 {{site.data.keyword.containerlong_notm}} 中的应用程序可以如何通过 strongSwan VPN 连接与内部部署服务器进行通信：
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="使用负载均衡器在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="使用负载均衡器在 {{site.data.keyword.containerlong_notm}} 中公开应用程序" style="width:700px; border-style: none"/>
 
 1. 集群中的应用程序 `myapp` 接收来自 Ingress 或 LoadBalancer 服务的请求，并且需要安全地连接到内部部署网络中的数据。
 
@@ -129,9 +129,9 @@ lastupdated: "2018-08-06"
 2. 将 `remote.gateway` 设置为远程网络中内部部署 VPN 端点的公共 IP 地址。
 3. 对于集群 VPN 端点的 IP 地址，选择下列其中一个选项：
     * **集群专用网关的公共 IP 地址**：如果工作程序节点仅连接到专用 VLAN，那么出站 VPN 请求会通过专用网关进行路由，以访问因特网。专用网关的公共 IP 地址用于 VPN 连接。
-    * **运行 strongSwan pod 的工作程序节点的公共 IP 地址**：如果运行 strongSwan pod 的工作程序节点连接到公共 VLAN，那么该工作程序节点的公共 IP 地址将用于 VPN 连接。<br>**注**：
+    * **运行 strongSwan pod 的工作程序节点的公共 IP 地址**：如果运行 strongSwan pod 的工作程序节点连接到公用 VLAN，那么该工作程序节点的公共 IP 地址将用于 VPN 连接。<br>**注**：
         * 如果删除了 strongSwan pod 并将其重新安排到集群中的其他工作程序节点上，那么 VPN 的公共 IP 地址会更改。远程网络的内部部署 VPN 端点必须允许从任何集群工作程序节点的公共 IP 地址建立 VPN 连接。
-        * 如果远程 VPN 端点无法处理来自多个公共 IP 地址的 VPN 连接，请限制 strongSwan VPN pod 部署到的节点。将 `nodeSelector` 设置为特定工作程序节点的 IP 地址或工作程序节点标签。例如，值 `kubernetes.io/hostname: 10.232.xx.xx` 允许将 VPN pod 仅部署到该工作程序节点。值 `strongswan: vpn` 将 VPN pod 限制为在具有该标签的任何工作程序节点上运行。可以使用任何工作程序节点标签。要允许不同的工作程序节点用于不同的 Helm 图表部署，请使用 `strongswan: <release_name>`。为实现高可用性，请至少选择两个工作程序节点。
+        * 如果远程 VPN 端点无法处理来自多个公共 IP 地址的 VPN 连接，请限制 strongSwan VPN pod 部署到的节点。将 `nodeSelector` 设置为特定工作程序节点的 IP 地址或工作程序节点标签。例如，值 `kubernetes.io/hostname: 10.232.xx.xx` 允许将 VPN pod 仅部署到该工作程序节点。值 `strongswan: vpn` 将 VPN pod 限制为在具有该标签的任何工作程序节点上运行。可以使用任何工作程序节点标签。要允许不同的工作程序节点用于不同的 Helm 图表部署，请使用 `strongswan: <release_name>`. 为实现高可用性，请至少选择两个工作程序节点。
     * **strongSwan 服务的公共 IP 地址**：要使用 strongSwan VPN 服务的 IP 地址来建立连接，请将 `connectUsingLoadBalancerIP` 设置为 `true`。strongSwan 服务 IP 地址是可以在 `loadBalancerIP` 设置中指定的可移植公共 IP 地址，也可以是自动分配给服务的可用可移植公共 IP 地址。
         <br>**注**：
         * 如果选择使用 `loadBalancerIP` 设置来选择 IP 地址，那么集群必须至少具有一个可用的公共负载均衡器 IP 地址。[可以检查以确定可用的公共 IP 地址](cs_subnets.html#review_ip)或[释放使用的 IP 地址](cs_subnets.html#free)。
@@ -147,7 +147,7 @@ lastupdated: "2018-08-06"
 1. 将一个或多个集群子网的 CIDR 添加到 `local.subnet` 设置。必须在内部部署 VPN 端点上配置本地子网 CIDR。此列表可包含以下子网：  
     * Kubernetes pod 子网 CIDR：`172.30.0.0/16`。将启用所有集群 pod 与 `remote.subnet` 设置中列出的远程网络子网中的任何主机之间的双向通信。如果出于安全原因，必须阻止任何 `remote.subnet` 主机访问集群 pod，请不要将 Kubernetes pod 子网添加到 `local.subnet` 设置。
     * Kubernetes 服务子网 CIDR：`172.21.0.0/16`。服务 IP 地址提供了一种方法，用于公开在单个 IP 后面的多个工作程序节点上部署的多个应用程序 pod。
-    * 如果应用程序由专用网络上的 NodePort 服务或专用 Ingress ALB 公开，请添加工作程序节点的专用子网 CIDR。通过运行 `ibmcloud ks worker <cluster_name>` 来检索工作程序专用 IP 地址的前三个八位元。例如，如果检索到的是 `10.176.48.xx`，请记下 `10.176.48`。接下来，通过运行以下命令来获取工作程序专用子网 CIDR，并将 `<xxx.yyy.zz>` 替换为先前检索到的八位元：`ibmcloud sl subnet list | grep <xxx.yyy.zzz>`。<br>**注**：如果在新的专用子网上添加了工作程序节点，那么必须将新的专用子网 CIDR 添加到 `local.subnet` 设置和内部部署 VPN 端点。然后，必须重新启动 VPN 连接。
+    * 如果应用程序由专用网络上的 NodePort 服务或专用 Ingress ALB 公开，请添加工作程序节点的专用子网 CIDR。通过运行 `ibmcloud ks worker <cluster_name>`. 例如，如果检索到的是 `10.176.48.xx`，请记下 `10.176.48`。接下来，通过运行以下命令来获取工作程序专用子网 CIDR，并将 `<xxx.yyy.zz>` 替换为先前检索到的八位元：`ibmcloud sl subnet list | grep <xxx.yyy.zzz>`.<br>**注**：如果在新的专用子网上添加了工作程序节点，那么必须将新的专用子网 CIDR 添加到 `local.subnet` 设置和内部部署 VPN 端点。然后，必须重新启动 VPN 连接。
     * 如果应用程序由专用网络上的 LoadBalancer 服务公开，请添加集群的由用户管理的专用子网 CIDR。要查找这些值，请运行 `ibmcloud ks cluster-get <cluster_name> --showResources`。在 **VLANS** 部分中，查找 **Public** 值为 `false` 的 CIDR。<br>
     **注**：如果 `ipsec.keyexchange` 设置为 `ikev1`，那么只能指定一个子网。但是，可以使用 `localSubnetNAT` 设置将多个集群子网组合成单个子网。
 
@@ -453,9 +453,9 @@ helm install -f config.yaml --name=<release_name> ibm/strongswan
 [虚拟路由器设备 (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) 为 x86 裸机服务器提供最新的 Vyatta 5600 操作系统。可以使用 VRA 作为 VPN 网关来安全地连接到内部部署网络。
 {:shortdesc}
 
-所有进出集群 VLAN 的公用和专用网络流量都将通过 VRA 进行路由。可以使用 VRA 作为 VPN 端点，以在 IBM Cloud Infrastructure (SoftLayer) 和内部部署资源中的服务器之间创建加密的 IPSec 隧道。例如，下图显示了 {{site.data.keyword.containershort_notm}} 中仅限专用的工作程序节点上的应用程序可以如何通过 VRA VPN 连接与内部部署服务器进行通信：
+所有进出集群 VLAN 的公用和专用网络流量都将通过 VRA 进行路由。可以使用 VRA 作为 VPN 端点，以在 IBM Cloud Infrastructure (SoftLayer) 和内部部署资源中的服务器之间创建加密的 IPSec 隧道。例如，下图显示了 {{site.data.keyword.containerlong_notm}} 中仅限专用的工作程序节点上的应用程序可以如何通过 VRA VPN 连接与内部部署服务器进行通信：
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="使用负载均衡器在 {{site.data.keyword.containershort_notm}} 中公开应用程序" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="使用负载均衡器在 {{site.data.keyword.containerlong_notm}} 中公开应用程序" style="width:725px; border-style: none"/>
 
 1. 集群中的应用程序 `myapp2` 接收来自 Ingress 或 LoadBalancer 服务的请求，并且需要安全地连接到内部部署网络中的数据。
 
@@ -475,4 +475,4 @@ helm install -f config.yaml --name=<release_name> ibm/strongswan
 
 3. 要使用 VRA 来启用 VPN 连接，请[在 VRA 上配置 VRRP](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp)。
 
-**注**：如果您有现有路由器设备，然后添加集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过[启用 VLAN 生成](cs_subnets.html#subnet-routing)启用同一 VLAN 上子网之间的路由。
+**注**：如果您有现有路由器设备，然后添加集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过 [启用 VLAN 生成](cs_subnets.html#subnet-routing)启用同一 VLAN 上子网之间的路由。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-06"
 {: #psp}
 
 Mit [Pod-Sicherheitsrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) können Sie
-Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf. Cluster, die die Kubernetes-Versionen 1.10.3, 1.9.8 und 1.8.13 oder spätere Fixpacks ausführen, unterstützen den Zugangscontroller `PodSecurityPolicy`, der diese Richtlinien durchsetzt.
+Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf. Cluster, die die Kubernetes-Versionen 1.10.3, 1.9.8 und 1.8.13 oder spätere Fixpacks ausführen, unterstützen den Zugangscontroller `PodSecurityPolicy`, der diese Richtlinien durchsetzt. 
 {: shortdesc}
 
 Sie verwenden eine ältere Version von Kubernetes? [Aktualisieren Sie Ihren Cluster](cs_cluster_update.html) noch heute.
@@ -30,11 +30,11 @@ Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, in
 
 Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](cs_integrations.html#helm_links) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
 
-Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containershort_notm}} haben? Informationen zum Festlegen von IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](cs_users.html#users).
+Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](cs_users.html#users).
 {: tip}
 
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
-Standardmäßig konfiguriert {{site.data.keyword.containershort_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für das {{site.data.keyword.IBM_notm}} Cluster-Management](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren. 
+Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für das {{site.data.keyword.IBM_notm}} Cluster-Management](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren. 
 
 Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
@@ -181,7 +181,7 @@ Stellen Sie sicher, dass Sie die vorhandenen Richtlinien so geändert haben, das
 ## Informationen zu Standardressourcen für die {{site.data.keyword.IBM_notm}} Cluster-Management
 {: #ibm_psp}
 
-Ihr Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} enthält die folgenden
+Ihr Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} enthält die folgenden
 Pod-Sicherheitsrichtlinien und zugehörigen RBAC-Ressourcen, damit {{site.data.keyword.IBM_notm}} Ihren Cluster ordnungsgemäß verwalten kann.
 {: shortdesc}
 

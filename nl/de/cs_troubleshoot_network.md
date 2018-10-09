@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,9 +26,8 @@ lastupdated: "2018-08-06"
 Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgenden Verfahren für die Fehlerbehebung für Clusternetze in Betracht.
 {: shortdesc}
 
-Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_troubleshoot.html).
+Haben Sie Schwierigkeiten, über Ingress eine Verbindung zu Ihrer App herzustellen? Versuchen Sie, [Ingress zu debuggen](cs_troubleshoot_debug_ingress.html).
 {: tip}
-
 
 ## Verbindung mit einer App über einen Lastausgleichsservice kann nicht hergestellt werden
 {: #cs_loadbalancer_fails}
@@ -46,11 +45,11 @@ Ihr Lastausgleichsservice funktioniert aus einem der folgenden Gründe mögliche
 {: tsResolve}
 Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 
-1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Lastausgleichsservice zu gewährleisten.
+1.  Prüfen Sie, ob Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Lastausgleichsservice sicherzustellen.
 
   ```
-    ibmcloud ks workers <clustername_oder_-id>
-    ```
+  ibmcloud ks workers <clustername_oder_-id>
+  ```
   {: pre}
 
     Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
@@ -74,7 +73,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 
     1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
     2.  Stellen Sie sicher, dass die Werte für `<selector_key>` und `<selector_value>`, die Sie im Abschnitt `spec.selector` des LoadBalancer-Service verwenden, dem Schlüssel/Wert-Paar entsprechen, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei angegeben haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
-    3.  Prüfen Sie, dass Sie den **Port** verwendet haben, den Ihre App überwacht.
+    3.  Prüfen Sie, ob Sie den **Port** verwendet haben, den Ihre App überwacht.
 
 3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
 
@@ -88,7 +87,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den Lastausgleichsservice verwenden zu können, müssen Sie über ein Standardcluster mit mindestens zwei Workerknoten verfügen.</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem Lastausgleichsservice zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter <a href="cs_subnets.html#subnets">Clustern Teilnetze hinzufügen</a>. Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der Lastausgleichsservice automatisch erstellt.</li>
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Entfernen Sie im Abschnitt **loadBalancerIP** des Konfigurationsscripts die vorhandene IP-Adresse und fügen Sie eine der vorhandenen portierbaren öffentlichen IP-Adressen hinzu. Sie können auch den Abschnitt **loadBalancerIP** aus Ihrem Script entfernen, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr ale einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr als einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
     <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;clustername_oder_-id&gt;] &lt;worker-id&gt;</code></pre></li>
     <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen <code>kubectl get nodes</code> und <code>ibmcloud ks [&lt;clustername_oder_-id&gt;] worker-get</code> zurückgegeben wurden, übereinstimmen.</li></ol></li></ul>
@@ -101,11 +100,9 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
         ```
         {: pre}
 
-    2.  Prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
+    2.  Prüfen Sie, ob Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
 
 <br />
-
-
 
 
 ## Verbindung mit einer App über Ingress kann nicht hergestellt werden
@@ -114,138 +111,17 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 {: tsSymptoms}
 Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse oder Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen (ALB) herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
 
-{: tsCauses}
-Ingress funktioniert aus den folgenden Gründen möglicherweise nicht ordnungsgemäß:
-<ul><ul>
-<li>Der Cluster ist noch nicht vollständig bereitgestellt.
-<li>Der Cluster wurde als kostenloser Cluster oder als Standardcluster mit nur einem Workerknoten eingerichtet.
-<li>Das Ingress-Konfigurationsscript enthält Fehler.
-</ul></ul>
-
 {: tsResolve}
-Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
-
-1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihre Lastausgleichsfunktion für Anwendungen zu gewährleisten.
-
-  ```
-  ibmcloud ks workers <clustername_oder_-id>
-  ```
-  {: pre}
-
-    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
-
-2.  Rufen Sie die Unterdomäne und die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen ab und setzen Sie anschließend ein Pingsignal an beide ab.
-
-    1.  Rufen Sie die Unterdomäne der Lastausgleichsfunktion für Anwendungen ab.
-
-      ```
-      ibmcloud ks cluster-get <clustername_oder_-id> | grep "Ingress subdomain"
-      ```
-      {: pre}
-
-    2.  Setzen Sie ein Pingsignal an die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen ab.
-
-      ```
-      ping <ingress-unterdomäne>
-      ```
-      {: pre}
-
-    3.  Rufen Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion für Anwendungen ab.
-
-      ```
-      nslookup <ingress-unterdomäne>
-      ```
-      {: pre}
-
-    4.  Setzen Sie ein Pingsignal an die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen ab.
-
-      ```
-      ping <ip_der_lastausgleichsfunktion_für_anwendungen>
-      ```
-      {: pre}
-
-    Falls die CLI eine Zeitlimitüberschreitung für die öffentliche IP-Adresse oder die Unterdomäne der Lastausgleichsfunktion für Anwendungen zurückgibt und Sie eine angepasste Firewall eingerichtet haben, die Ihre Workerknoten schützt, öffnen Sie weitere Ports und Netzgruppen in Ihrer [Firewall](cs_troubleshoot_clusters.html#cs_firewall).
-
-3.  Wenn Sie eine angepasste Domäne verwenden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse oder Unterdomäne der von IBM bereitgestellten Lastausgleichsfunktion für Anwendungen mit Ihrem DNS-Anbieter (Domain Name Service) zugeordnet ist.
-    1.  Wenn Sie die Unterdomäne der Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie Ihren CNAME-Datensatz (Canonical Name, kanonischer Name).
-    2.  Wenn Sie die öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse im Zeigerdatensatz (PTR) zugeordnet ist.
-4.  Prüfen Sie Ihre Ingress-Ressourcenkonfigurationsdatei.
-
+Überprüfen Sie zunächst, ob Ihr Cluster vollständig bereitgestellt ist und mindestens zwei Workerknoten pro Zone verfügbar sind, um eine hohe Verfügbarkeit für Ihren ALB sicherzustellen.
     ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: myingress
-    spec:
-      tls:
-      - hosts:
-        - <ingress-unterdomäne>
-        secretName: <geheimer_ingress-tls-schlüssel>
-      rules:
-      - host: <ingress-unterdomäne>
-        http:
-          paths:
-          - path: /
-        backend:
-          serviceName: mein_service
-          servicePort: 80
-    ```
-    {: codeblock}
-
-    1.  Prüfen Sie, dass die Unterdomäne der Lastausgleichsfunktion für Anwendungen und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den Befehl `ibmcloud ks cluster-get <cluster_name_or_ID>` aus.
-    2.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, schließen Sie **/** als Ihren Pfad ein.
-5.  Überprüfen Sie Ihre Ingress-Bereitstellung und suchen Sie nach möglichen Warnungen und Fehlernachrichten.
-
-    ```
-    kubectl describe ingress <myingress>
+    ibmcloud ks workers <clustername_oder_-id>
     ```
     {: pre}
 
-    Im Abschnitt **Ereignisse** der Ausgabe sehen Sie möglicherweise Nachrichten zu ungültigen Werten in Ihrer Ingress-Ressource oder in bestimmten Annotationen, die Sie verwendet haben.
+Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
 
-    ```
-    Name:             myingress
-    Namespace:        default
-    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
-    Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
-    Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-    ```
-    {: screen}
-
-6.  Überprüfen Sie die Protokolle für Ihre Lastausgleichsfunktion für Anwendungen.
-    1.  Rufen Sie die ID der Ingress-Pods ab, die in Ihrem Cluster ausgeführt werden.
-
-      ```
-      kubectl get pods -n kube-system | grep alb
-      ```
-      {: pre}
-
-    2.  Rufen Sie die Protokolle für jeden Ingress-Pod ab.
-
-      ```
-      kubectl logs <ingress-pod-id> nginx-ingress -n kube-system
-      ```
-      {: pre}
-
-    3.  Suchen Sie nach Fehlernachrichten in den Protokollen der Lastausgleichsfunktion für Anwendungen.
+* Wenn Ihr Standardcluster vollständig bereitgestellt ist und mindestens 2 Workerknoten pro Zone aufweist, aber keine **Ingress-Unterdomäne** verfügbar ist, finden Sie weitere Informationen hierzu im Abschnitt [Es kann keine Unterdomäne für die Ingress-ALB abgerufen werden](cs_troubleshoot_network.html#cs_subnet_limit).
+* Bei anderen Problemen können Sie die Ingress-Konfigurationsfehler beheben, indem Sie die Schritte im Abschnitt [Debugging für Ingress](cs_troubleshoot_debug_ingress.html) befolgen.
 
 <br />
 
@@ -307,7 +183,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containershort_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die **Ingress-Unterdomäne** nicht bereitgestellt werden.
+Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die **Ingress-Unterdomäne** nicht bereitgestellt werden.
 
 So zeigen Sie die Anzahl von Teilnetzen eines VLAN an:
 1.  Wählen Sie in der [IBM Cloud Infrastructure-Konsole (SoftLayer)](https://control.bluemix.net/) **Netz** > **IP-Management** > **VLANs** aus.
@@ -316,10 +192,10 @@ So zeigen Sie die Anzahl von Teilnetzen eines VLAN an:
 {: tsResolve}
 Wenn Sie ein neues VLAN benötigen, fordern Sie eines an, indem Sie den [{{site.data.keyword.Bluemix_notm}}-Support kontaktieren](/docs/infrastructure/vlans/order-vlan.html#order-vlans). [Erstellen Sie dann einen Cluster](cs_cli_reference.html#cs_cluster_create), der dieses neue VLAN verwendet.
 
-Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden.
+Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im Cluster wiederverwenden.
-1.  Prüfen Sie, dass die Teilnetze, die Sie verwenden möchten, verfügbar sind. **Hinweis**: Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. Ist dies der Fall, können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.
+1.  Prüfen Sie, ob die Teilnetze, die Sie verwenden möchten, verfügbar sind. **Hinweis**: Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. Ist dies der Fall, können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.
 
 2.  [Erstellen Sie einen Cluster](cs_cli_reference.html#cs_cluster_create) mit der Option `--no-subnet`, sodass der Service nicht versucht, neue Teilnetze zu erstellen. Geben Sie die Zone und das VLAN an, in denen sich die für eine Wiederverwendung verfügbaren Teilnetze befinden.
 
@@ -344,10 +220,36 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: screen}
 
 {: tsCauses}
-In jeder Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containershort_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das öffentliche VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die öffentliche Ingress-ALB für diese Zone nicht bereitgestellt werden.
+In jeder Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das öffentliche VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die öffentliche Ingress-ALB für diese Zone nicht bereitgestellt werden.
 
 {: tsResolve}
 Informationen zum Überprüfen der Anzahl der Teilnetze in einem VLAN und die Schritte zum Abrufen eines anderen VLANs finden Sie im Abschnitt [Unterdomäne für Ingress-ALB kann nicht abgerufen werden](#cs_subnet_limit).
+
+<br />
+
+
+## Verbindung über WebSocket schließt nach 60 Sekunden
+{: #cs_ingress_websocket}
+
+{: tsSymptoms}
+Ihr Ingress-Service macht eine App verfügbar, die ein WebSocket verwendet. Die Verbindung zwischen einem Client und Ihrer WebSocket-App wird jedoch geschlossen, wenn für 60 Sekunden kein Datenverkehr zwischen ihnen übertragen wird.
+
+{: tsCauses}
+Die Verbindung zu Ihrer WebSocket-App kann aus einem der folgenden Gründe nach 60 Sekunden Inaktivität unterbrochen werden:
+
+* Ihre Internetverbindung beinhaltet einen Proxy oder eine Firewall, der bzw. die eine lange Verbindung nicht toleriert.
+* Eine Zeitlimitüberschreitung im ALB an die WebSocket-App beendet die Verbindung.
+
+{: tsResolve}
+Gehen Sie wie folgt vor, um zu verhindern, dass die Verbindung nach 60 Sekunden Inaktivität schließt:
+
+1. Wenn Sie über einen Proxy oder eine Firewall eine Verbindung zu Ihrer WebSocket-App herstellen, müssen Sie sicherstellen, dass der Proxy oder die Firewall nicht so konfiguriert ist, dass lange Verbindungen automatisch beendet werden.
+
+2. Um die Verbindung aktiv zu halten, können Sie den Wert des Zeitlimits erhöhen oder einen Heartbeat (Überwachungssignal) in Ihrer App einrichten.
+<dl><dt>Zeitlimit ändern</dt>
+<dd>Erhöhen Sie den Wert von `proxy-read-timeout` in der ALB-Konfiguration. Wenn Sie beispielsweise das Zeitlimit `60s` in einen höheren Wert wie `300s`ändern möchten, fügen Sie diese [Annotation](cs_annotations.html#connection) zur Ingress-Ressourcendatei hinzu: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Das Zeitlimit wird für alle öffentlichen ALBs in Ihrem Cluster geändert.</dd>
+<dt>Heartbeat einrichten</dt>
+<dd>Wenn Sie den Standardwert für das Lesezeitlimit von ALB nicht ändern möchten, müssen Sie in der WebSocket-App einen Heartbeat einrichten. Wenn Sie ein Heartbeatprotokoll einrichten, indem Sie ein Framework wie [WAMP![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://wamp-proto.org/) verwenden, sendet der Upstream-Server der App regelmäßig eine "Ping"-Nachricht in einem vorgegebenen Zeitintervall und der Client antwortet mit einer "Pong" -Nachricht. Legen Sie das Heartbeatintervall auf 58 Sekunden oder weniger fest, sodass der "Ping/Pong"-Datenverkehr die Verbindung offen hält, bevor das 60-Sekunden-Zeitlimit durchgesetzt wird.</dd></dl>
 
 <br />
 
@@ -372,7 +274,7 @@ Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erste
     <li>Installieren Sie das neue Helm-Diagramm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<releasename> bluemix/strongswan</code></pre></li>
     </ol>
 
-2. Falls der VPN-Pod den Status `ERROR` hat oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationsmap des Diagramms liegen.
+2. Falls der VPN-Pod den Status `ERROR` hat oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen.
 
     <ol>
     <li>Überprüfen Sie alle Gültigkeitsfehler in den strongSwan-Pod-Protokollen.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
@@ -390,7 +292,7 @@ Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erste
     <li>Löschen Sie das vorhandene Helm-Diagramm.</br><pre class="codeblock"><code>helm delete --purge <releasename></code></pre></li>
     <li>Korrigieren Sie die falschen Werte in der Datei <code>config.yaml</code> und speichern Sie die aktualisiert Datei.</li>
     <li>Installieren Sie das neue Helm-Diagramm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<releasename> bluemix/strongswan</code></pre></li>
-    <li>Gehen Sie wie folgt vor, um Ihre Änderungen zu überprüfen:<ol><li>Rufen Sie die aktuellen Test-Pods ab.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Bereinigen Sie die aktuellen Testpods.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Führen Sie die Tests erneut aus.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
+    <li>Gehen Sie wie folgt vor, um Ihre Änderungen zu überprüfen:<ol><li>Rufen Sie die aktuellen Testpods ab.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Bereinigen Sie die aktuellen Testpods.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Führen Sie die Tests erneut aus.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
     </ol></ol>
 
 4. Führen Sie das VPN-Debugging-Tool aus, das im Paket des VPN-Pod-Image enthalten ist.
@@ -430,25 +332,25 @@ Dieser Fehler gibt an, dass das Vorgängerrelease des StrongSwan-Diagramms nicht
 {: tsResolve}
 
 1. Löschen Sie das vorherige Diagrammrelease.
-```
+    ```
     helm delete --purge <name_des_alten_release>
     ```
     {: pre}
 
 2. Löschen Sie die Bereitstellung des Vorgängerrelease. Das Löschen der Bereitstellung und des zugehörigen Pods dauert bis zu einer Minute.
-```
+    ```
     kubectl delete deploy -n kube-system vpn-strongswan
     ```
     {: pre}
 
 3. Überprüfen Sie, dass die Bereitstellung gelöscht wurde. Die Bereitstellung `vpn-strongswan` wird in der Liste nicht angezeigt.
-```
+    ```
     kubectl get deployments -n kube-system
     ```
     {: pre}
 
 4. Installieren Sie das aktualisierte StrongSwan-Helm-Diagramm mit einem neuen Releasenamen.
-```
+    ```
     helm install -f config.yaml --namespace=kube-system --name=<name_des_neuen_release> bluemix/strongswan
     ```
     {: pre}
@@ -709,8 +611,10 @@ Geben Sie zuerst als [Ziel Ihrer Befehlszeilenschnittstelle](cs_cli_install.html
 Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
+-  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
+
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
 
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
@@ -718,8 +622,8 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
 
-    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containershort_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
-    -   Verwenden Sie für Fragen zum Service und zu ersten Schritten das Forum [IBM developerWorks dW Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
+    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
+    -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 

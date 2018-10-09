@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,10 +20,10 @@ lastupdated: "2018-08-06"
 # チュートリアル: {{site.data.keyword.containerlong_notm}} での Istio のインストール
 {: #istio_tutorial}
 
-[Istio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} での Kubernetes などのクラウド・プラットフォーム上のサービスを接続、保護、制御、および監視するためのオープン・プラットフォームです。Istio を使用すると、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス ID の検証などを行うことができます。
+[Istio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} での Kubernetes などのクラウド・プラットフォーム上のサービスを接続、保護、制御、および監視するためのオープン・プラットフォームです。 Istio を使用すると、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス ID の検証などを行うことができます。
 {:shortdesc}
 
-このチュートリアルでは、BookInfo と呼ばれる単純な演習用ブックストア・アプリ用に、Istio と一緒に 4 つのマイクロサービスをインストールする方法を確認できます。 このマイクロサービスには、製品 Web ページ、本の詳細情報、レビュー、評価が含まれます。 Istio をインストールする {{site.data.keyword.containershort}} クラスターに BookInfo のマイクロサービスをデプロイする際には、各マイクロサービスのポッド内に Istio Envoy サイドカー・プロキシーを挿入します。
+このチュートリアルでは、BookInfo と呼ばれる単純な演習用ブックストア・アプリ用に、Istio と一緒に 4 つのマイクロサービスをインストールする方法を確認できます。 このマイクロサービスには、製品 Web ページ、本の詳細情報、レビュー、評価が含まれます。 Istio をインストールする {{site.data.keyword.containerlong}} クラスターに BookInfo のマイクロサービスをデプロイする際には、各マイクロサービスのポッド内に Istio Envoy サイドカー・プロキシーを挿入します。
 
 ## 達成目標
 
@@ -41,8 +41,8 @@ lastupdated: "2018-08-06"
 
 ## 前提条件
 
--  [IBM Cloud CLI、{{site.data.keyword.containershort_notm}} プラグイン、および Kubernetes CLI をインストールします](cs_cli_install.html#cs_cli_install_steps)。Istio には Kubernetes バージョン 1.9 以上が必要です。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
--  バージョン 1.9 以上の Kubernetes で[クラスターを作成します](cs_clusters.html#clusters_cli)。
+-  [IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} プラグイン、および Kubernetes CLI をインストールします](cs_cli_install.html#cs_cli_install_steps)。 Istio には Kubernetes バージョン 1.9 以上が必要です。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
+-  [Kubernetes バージョン 1.9 以降を実行するクラスターを作成](cs_clusters.html#clusters_cli)するか、[既存のクラスターをバージョン 1.9 に更新](cs_versions.html#cs_v19)します。
 -  [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 
 ## レッスン 1: Istio をダウンロードしてインストールする
@@ -52,8 +52,8 @@ lastupdated: "2018-08-06"
 {:shortdesc}
 
 1. [IBM Istio Helm チャート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio) を使用して、Istio をインストールします。
-    1. [クラスター用の Helm をインストールし、Helm インスタンスに IBM リポジトリーを追加します](cs_integrations.html#helm)。
-    2. Istio のカスタムのリソース定義をインストールします。
+    1. [クラスターで Helm をセットアップし、Helm インスタンスに IBM リポジトリーを追加します](cs_integrations.html#helm)。
+    2.  **バージョン 2.9 以前の Helm の場合のみ**: Istio のカスタム・リソース定義をインストールします。
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -63,11 +63,6 @@ lastupdated: "2018-08-06"
         helm install ibm/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
-    4. `istioctl` クライアントを PATH に追加します。 例えば、MacOS または Linux システムでは以下のコマンドを実行します。
-       ```
-       export PATH=$PWD/istio-1.0/bin:$PATH
-       ```
-       {: pre}
 
 2. 9 つの Istio サービス用のポッドと Prometheus 用のポッドが完全にデプロイされていることを確認してから、先に進みます。
     ```
@@ -102,21 +97,23 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
 これらの 4 つのマイクロサービスには、製品 Web ページ、本の詳細情報、レビュー (レビューのマイクロサービスには複数のバージョンがあります)、評価が含まれます。 BookInfo をデプロイする際には、Envoy サイドカー・プロキシーがコンテナーとしてアプリのマイクロサービスのポッド内に挿入された後に、マイクロサービスのポッドがデプロイされます。 Istio は拡張バージョンの Envoy プロキシーを使用して、サービス・メッシュ内のすべてのマイクロサービスに関するすべてのインバウンド・トラフィックとアウトバウンド・トラフィックを仲介します。 Envoy について詳しくは、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy) を参照してください。
 
 1. 必要な BookInfo ファイルが含まれた Istio パッケージをダウンロードします。
-    1. Istio を [https://github.com/istio/istio/releases ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/istio/istio/releases) から直接ダウンロードするか、以下のように curl を使用して最新バージョンを取得します。
-
+    1. Istio を [https://github.com/istio/istio/releases ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/istio/istio/releases) から直接ダウンロードしてインストール・ファイルを抽出するか、以下のように cURL を使用して最新バージョンを取得します。
        ```
        curl -L https://git.io/getLatestIstio | sh -
        ```
        {: pre}
 
-    2. インストール・ファイルを解凍します。
-
-    3. ディレクトリーを Istio ファイルの場所に切り替えます。
-
+    2. ディレクトリーを Istio ファイルの場所に切り替えます。
        ```
-       cd filepath/istio-1.0
+       cd <filepath>/istio-1.0
        ```
        {: pre}
+
+    3. `istioctl` クライアントを PATH に追加します。 例えば、MacOS または Linux システムでは以下のコマンドを実行します。
+        ```
+        export PATH=$PWD/istio-1.0/bin:$PATH
+        ```
+        {: pre}
 
 2. `default` 名前空間に `istio-injection=enabled` というラベルを付けます。
     ```
@@ -124,14 +121,14 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
     ```
     {: pre}
 
-2. BookInfo アプリをデプロイします。 アプリのマイクロサービスをデプロイする際に、Envoy サイドカーも各マイクロサービス・ポッド内にデプロイされます。
+3. BookInfo アプリをデプロイします。 アプリのマイクロサービスをデプロイする際に、Envoy サイドカーも各マイクロサービス・ポッド内にデプロイされます。
 
    ```
    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
-3. マイクロサービスとその対応するポッドがデプロイされていることを確認します。
+4. マイクロサービスとその対応するポッドがデプロイされていることを確認します。
     ```
     kubectl get svc
     ```
@@ -140,7 +137,6 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
@@ -155,9 +151,6 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
     ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    guestbook-76897854cc-6zsws               1/1       Running     0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
     ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
     reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
@@ -166,7 +159,7 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
     ```
     {: screen}
 
-4. アプリ・デプロイメントを確認するには、クラスターのパブリック・アドレスを取得します。
+5. アプリ・デプロイメントを確認するには、クラスターのパブリック・アドレスを取得します。
     * 標準クラスター:
         1. アプリをパブリック ingress IP で公開するには、BookInfo ゲートウェイをデプロイします。
             ```
@@ -184,6 +177,7 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
+            {: pre}
 
         4. ingress のホストとポートを使用する `GATEWAY_URL` 環境変数を作成します。
 
@@ -211,7 +205,19 @@ BookInfo サンプル・アプリのマイクロサービスを Kubernetes ク�
      ```
      {: pre}
 
-6. ブラウザーで、`http://$GATEWAY_URL/productpage` に移動し、BookInfo の Web ページを表示します。
+6.  ブラウザーで BookInfo Web ページを表示します。
+
+    Mac OS または Linux の場合は、以下のようにします。
+    ```
+    open http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
+
+    Windows の場合は、以下のようにします。
+    ```
+    start http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 7. ページの最新表示を複数回試行します。 さまざまなバージョンのレビュー・セクションが、赤い星形、黒い星形、星形なしの間でラウンドロビンします。
 
@@ -235,7 +241,7 @@ Istio での作業を終了し、[次の作業](#istio_tutorial_whatsnext)に進
     ```
     {: pre}
 
-3. Istio のカスタムのリソース定義を削除します。
+3. **オプション**: Helm 2.9 以前を使用していて、Istio カスタム・リソース定義を適用した場合は、それらを削除します。
     ```
     kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
     ```
@@ -247,5 +253,5 @@ Istio での作業を終了し、[次の作業](#istio_tutorial_whatsnext)に進
 * Istio についてさらに詳しく知るには、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) でその他のガイドを参照できます。
     * [Intelligent Routing ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/intelligent-routing.html): この例では、Istio のトラフィック管理機能を使用して、特定のバージョンの BookInfo のレビューと評価のマイクロサービスにトラフィックをルーティングする方法を示しています。
     * [In-Depth Telemetry ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/telemetry.html): この例では、Istio Mixer と Envoy プロキシーを使用して、BookInfo のマイクロサービス間で統一されたメトリック、ログ、トレースを取得する方法を示しています。
-* [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/) を受講します。**注**: このコースの Istio のインストールのセクションはスキップできます。
-*  [Vistio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) の使用に関するこのブログ投稿を確認して、お客様の Istio サービス・メッシュを視覚化します。
+* [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/) を受講します。 **注**: このコースの Istio のインストールのセクションはスキップできます。
+* [Vistio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) の使用に関するこのブログ投稿を確認して、お客様の Istio サービス・メッシュを視覚化します。

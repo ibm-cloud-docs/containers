@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,41 +25,43 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
 ## 클러스터의 기본 VLAN, 서브넷 및 IP
 {: #default_vlans_subnets}
 
-클러스터 작성 중에 클러스터 작업자 노드 및 기본 서브넷은 자동으로 VLAN에 연결됩니다. 
+클러스터 작성 중에 클러스터 작업자 노드 및 기본 서브넷은 자동으로 VLAN에 연결됩니다.
 
 ### VLAN
 {: #vlans}
 
-클러스터를 작성하면 클러스터의 작업자 노드가 VLAN에 자동으로 연결됩니다. VLAN은 동일한 실제 회선에 연결된 것처럼 작업자 노드 및 팟(Pod)의 그룹을 구성하며, 작업자 및 팟(Pod) 간의 연결을 위한 채널을 제공합니다. 
+클러스터를 작성하면 클러스터의 작업자 노드가 VLAN에 자동으로 연결됩니다. VLAN은 동일한 실제 회선에 연결된 것처럼 작업자 노드 및 팟(Pod)의 그룹을 구성하며, 작업자 및 팟(Pod) 간의 연결을 위한 채널을 제공합니다.
 
 <dl>
 <dt>무료 클러스터의 VLAN</dt>
-<dd>무료 클러스터의 경우에는 기본적으로 클러스터의 작업자 노드가 IBM 소유의 공용 VLAN 및 사설 VLAN에 연결됩니다. IBM에서 VLAN, 서브넷 및 IP 주소를 제어하므로 사용자는 다중 구역 클러스터를 작성하거나 클러스터에 서브넷을 추가할 수 없습니다. 오직 NodePort 서비스를 사용한 앱 노출만 수행할 수 있습니다. </dd>
+<dd>무료 클러스터의 경우에는 기본적으로 클러스터의 작업자 노드가 IBM 소유의 공용 VLAN 및 사설 VLAN에 연결됩니다. IBM에서 VLAN, 서브넷 및 IP 주소를 제어하므로 사용자는 다중 구역 클러스터를 작성하거나 클러스터에 서브넷을 추가할 수 없습니다. 오직 NodePort 서비스를 사용한 앱 노출만 수행할 수 있습니다.</dd>
 <dt>표준 클러스터의 VLAN</dt>
-<dd>표준 클러스터에서 구역의 클러스터를 처음으로 작성하는 경우, 해당 구역의 공용 VLAN 및 사설 VLAN은 IBM Cloud 인프라(SoftLayer) 계정에서 사용자를 위해 자동으로 프로비저닝됩니다.  다중 클러스터가 VLAN을 공유할 수 있으므로, 해당 구역에서 작성된 모든 후속 클러스터에 대해 동일한 공용 및 사설 VLAN을 재사용할 수 있습니다. </br></br>작업자 노드를 공용 VLAN 및 사설 VLAN 모두에 연결하거나 사설 VLAN에만 연결할 수 있습니다. 작업자 노드를 사설 VLAN에만 연결하려는 경우에는 기존 사설 VLAN의 ID를 사용하거나 [새 사설 VLAN을 작성](/docs/cli/reference/softlayer/index.html#sl_vlan_create)하여 클러스터 작성 중에 해당 ID를 사용할 수 있습니다.</dd></dl>
+<dd>표준 클러스터에서 구역의 클러스터를 처음으로 작성하는 경우, 해당 구역의 공용 VLAN 및 사설 VLAN은 IBM Cloud 인프라(SoftLayer) 계정에서 사용자를 위해 자동으로 프로비저닝됩니다. 다중 클러스터가 VLAN을 공유할 수 있으므로, 해당 구역에서 작성된 모든 후속 클러스터에 대해 동일한 공용 및 사설 VLAN을 재사용할 수 있습니다.</br></br>작업자 노드를 공용 VLAN 및 사설 VLAN 모두에 연결하거나 사설 VLAN에만 연결할 수 있습니다. 작업자 노드를 사설 VLAN에만 연결하려는 경우에는 기존 사설 VLAN의 ID를 사용하거나 [새 사설 VLAN을 작성](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create)하여 클러스터 작성 중에 해당 ID를 사용할 수 있습니다.</dd></dl>
 
-계정에 대해 각 구역에서 프로비저닝되는 VLAN을 보려면 `ibmcloud ks vlans <zone>`을 실행하십시오. 하나의 클러스터가 프로비저닝된 VLAN을 보려면 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`를 실행하고 **Subnet VLANs** 섹션을 찾으십시오. 
+계정에 대해 각 구역에서 프로비저닝되는 VLAN을 보려면 `ibmcloud ks vlans <zone>`을 실행하십시오. 하나의 클러스터가 프로비저닝된 VLAN을 보려면 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`를 실행하고 **Subnet VLANs** 섹션을 찾으십시오.
 
-**참고**: 다중 구역 클러스터, 단일 구역 클러스터용 다중 VLAN 또는 동일한 VLAN의 다중 서브넷이 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 VLAN Spanning을 켜야 합니다. 지시사항은 [VLAN Spanning 사용 또는 사용 안함](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 참조하십시오.
+**참고**:
+* 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오. 
+* IBM Cloud 인프라(SoftLayer)는 구역의 첫 번째 클러스터가 작성될 때 자동으로 프로비저닝되는 VLAN을 관리합니다. VLAN을 미사용 상태로 두면(예: VLAN에서 모든 작업자 노드를 제거하여) IBM Cloud 인프라(SoftLayer)가 VLAN을 재확보합니다. 향후에 새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원에 문의](/docs/infrastructure/vlans/order-vlan.html#order-vlans)하십시오. 
 
 ### 서브넷 및 IP 주소
 {: #subnets_ips}
 
-작업자 노드 및 팟(Pod)에 추가하여 서브넷도 자동으로 VLAN에 프로비저닝됩니다. 서브넷은 클러스터 컴포넌트에 IP 주소를 지정하여 이에 대한 네트워크 연결을 제공합니다. 
+작업자 노드 및 팟(Pod)에 추가하여 서브넷도 자동으로 VLAN에 프로비저닝됩니다. 서브넷은 클러스터 컴포넌트에 IP 주소를 지정하여 이에 대한 네트워크 연결을 제공합니다.
 
-다음의 서브넷이 기본 공용 및 사설 VLAN에서 자동으로 프로비저닝됩니다. 
+다음의 서브넷이 기본 공용 및 사설 VLAN에서 자동으로 프로비저닝됩니다.
 
 **공용 VLAN 서브넷**
-* 기본 공용 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 공인 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 공용 서브넷을 공유할 수 있습니다. 
-* 포터블 공용 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 공인 IP 주소를 클러스터에 제공합니다. 3개의 IP는 Softlayer 기능용으로 예약되어 있습니다. 1개의 IP는 기본 공용 Ingress ALB에 의해 사용되며, 4개의 IP는 공용 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 공인 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 공용 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](#adding_ips)를 참조하십시오. 
+* 기본 공용 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 공인 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 공용 서브넷을 공유할 수 있습니다.
+* 포터블 공용 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 공인 IP 주소를 클러스터에 제공합니다. 3개의 IP는 Softlayer 기능용으로 예약되어 있습니다. 1개의 IP는 기본 공용 Ingress ALB에 의해 사용되며, 4개의 IP는 공용 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 공인 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 공용 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](#adding_ips)를 참조하십시오.
 
 **사설 VLAN 서브넷**
-* 기본 사설 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 사설 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 사설 서브넷을 공유할 수 있습니다. 
-* 포터블 사설 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 사설 IP 주소를 클러스터에 제공합니다. 3개의 IP는 Softlayer 기능용으로 예약되어 있습니다. 1개의 IP는 기본 사설 Ingress ALB에 의해 사용되며, 4개의 IP는 사설 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 사설 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 사설 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](#adding_ips)를 참조하십시오. 
+* 기본 사설 서브넷은 클러스터 작성 중에 작업자 노드에 지정된 사설 IP 주소를 판별합니다. 동일한 VLAN의 다중 클러스터는 하나의 기본 사설 서브넷을 공유할 수 있습니다.
+* 포터블 사설 서브넷은 하나의 클러스터에만 바인드되어 있으며 8개의 사설 IP 주소를 클러스터에 제공합니다. 3개의 IP는 Softlayer 기능용으로 예약되어 있습니다. 1개의 IP는 기본 사설 Ingress ALB에 의해 사용되며, 4개의 IP는 사설 로드 밸런서 네트워킹 서비스 작성에 사용될 수 있습니다. 포터블 사설 IP는 인터넷을 통해 로드 밸런서 서비스에 액세스하기 위해 사용될 수 있는 영구적인 고정 IP 주소입니다. 사설 로드 밸런서에 대해 5개 이상의 IP가 필요하면 [포터블 IP 주소 추가](#adding_ips)를 참조하십시오.
 
-계정에서 프로비저닝된 서브넷을 모두 보려면 `ibmcloud ks subnets`를 실행하십시오. 하나의 클러스터에 바인드된 포터블 공인 및 포터블 사설 서브넷을 보려면 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`를 실행하고 **Subnet VLANs** 섹션을 찾으십시오. 
+계정에서 프로비저닝된 서브넷을 모두 보려면 `ibmcloud ks subnets`를 실행하십시오. 하나의 클러스터에 바인드된 포터블 공인 및 포터블 사설 서브넷을 보려면 `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources`를 실행하고 **Subnet VLANs** 섹션을 찾으십시오.
 
-**참고**: {{site.data.keyword.containershort_notm}}에서 VLAN의 서브넷 한계는 40개입니다. 이 한계에 도달하면 우선 [VLAN의 서브넷을 재사용하여 새 클러스터를 작성](#custom)할 수 있는지 여부를 확인하십시오. 새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원에 문의](/docs/infrastructure/vlans/order-vlan.html#order-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](cs_cli_reference.html#cs_cluster_create)하십시오.
+**참고**: {{site.data.keyword.containerlong_notm}}에서 VLAN의 서브넷 한계는 40개입니다. 이 한계에 도달하면 우선 [VLAN의 서브넷을 재사용하여 새 클러스터를 작성](#custom)할 수 있는지 여부를 확인하십시오. 새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원에 문의](/docs/infrastructure/vlans/order-vlan.html#order-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](cs_cli_reference.html#cs_cluster_create)하십시오.
 
 <br />
 
@@ -76,7 +78,7 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
 
 시작하기 전에 다음 작업을 수행하십시오.
 - 클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-- 더 이상 필요하지 않은 클러스터의 서브넷을 재사용하려면 필요하지 않은 클러스터를 삭제하십시오. 재사용하지 않으면 24시간 내에 서브넷이 삭제되므로, 새 클러스터를 즉시 작성하십시오. 
+- 더 이상 필요하지 않은 클러스터의 서브넷을 재사용하려면 필요하지 않은 클러스터를 삭제하십시오. 재사용하지 않으면 24시간 내에 서브넷이 삭제되므로, 새 클러스터를 즉시 작성하십시오.
 
    ```
    ibmcloud ks cluster-rm <cluster_name_or_ID>
@@ -85,7 +87,7 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
 
 사용자 정의 방화벽 규칙 또는 사용 가능한 IP 주소를 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오의 기존 서브넷을 사용하려면 다음을 수행하십시오.
 
-1. 사용하고자 하는 서브넷의 ID와 서브넷이 위치한 VLAN의 ID를 가져오십시오. 
+1. 사용하고자 하는 서브넷의 ID와 서브넷이 위치한 VLAN의 ID를 가져오십시오.
 
     ```
     ibmcloud ks subnets
@@ -111,18 +113,18 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
     `--zone` 플래그에 대해 VLAN이 있는 구역을 기억할 수 없는 경우에는 `ibmcloud ks vlans <zone>`을 실행하여 VLAN이 특정 구역에 있는지 여부를 확인할 수 있습니다.
     {: tip}
 
-3.  클러스터가 작성되었는지 확인하십시오. **참고:** 작업자 노드 시스템을 정렬하고 클러스터를 설정하며 계정에서 프로비저닝하는 데는 최대 15분 정도 소요될 수 있습니다. 
+3.  클러스터가 작성되었는지 확인하십시오. **참고:** 작업자 노드 시스템을 정렬하고 클러스터를 설정하며 계정에서 프로비저닝하는 데는 최대 15분 정도 소요될 수 있습니다.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-    클러스터가 완전히 프로비저닝되면 **상태(State)**가 `deployed`로 변경됩니다. 
+    클러스터가 완전히 프로비저닝되면 **상태(State)**가 `deployed`로 변경됩니다.
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.5
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.7
     ```
     {: screen}
 
@@ -133,22 +135,22 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
     ```
     {: pre}
 
-    다음 단계를 계속하려면 우선 작업자 노드가 준비되어 있어야 합니다. **상태(State)**가 `normal`로 변경되며 **상태(Status)**는 `Ready`입니다. 
+    다음 단계를 계속하려면 우선 작업자 노드가 준비되어 있어야 합니다. **상태(State)**가 `normal`로 변경되며 **상태(Status)**는 `Ready`입니다.
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.5
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.7
     ```
     {: screen}
 
-5.  서브넷 ID를 지정하여 클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우에는 사용자가 사용할 수 있는 모든 사용 가능한 포터블 공인 IP 주소가 포함된 Kubernetes configmap이 사용자를 위해 작성됩니다. 서브넷의 VLAN이 있는 구역에 Ingress ALB가 존재하지 않는 경우에는 하나의 포터블 공인 및 하나의 포터블 사설 IP 주소를 자동으로 사용하여 해당 구역에 대한 공용 및 사설 ALB를 작성합니다. 사용자는 서브넷의 기타 모든 포터블 공인 및 사설 IP 주소를 사용하여 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다. 
+5.  서브넷 ID를 지정하여 클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우에는 사용자가 사용할 수 있는 모든 사용 가능한 포터블 공인 IP 주소가 포함된 Kubernetes configmap이 사용자를 위해 작성됩니다. 서브넷의 VLAN이 있는 구역에 Ingress ALB가 존재하지 않는 경우에는 하나의 포터블 공인 및 하나의 포터블 사설 IP 주소를 자동으로 사용하여 해당 구역에 대한 공용 및 사설 ALB를 작성합니다. 사용자는 서브넷의 기타 모든 포터블 공인 및 사설 IP 주소를 사용하여 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다.
 
     ```
     ibmcloud ks cluster-subnet-add mycluster 807861
     ```
     {: pre}
 
-6. **중요**: 동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](#subnet-routing)을 설정해야 합니다. 
+6. **중요**: 동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](#subnet-routing)을 설정해야 합니다.
 
 <br />
 
@@ -156,19 +158,19 @@ Kubernetes 클러스터에 서브넷을 추가하여 로드 밸런서 서비스�
 ## 기존 포터블 IP 주소 관리
 {: #managing_ips}
 
-기본적으로, 4개의 포터블 공인 및 4개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)으로 단일 앱을 공용 또는 사설 네트워크에 노출시키는 데 사용될 수 있습니다. 로드 밸런서 서비스를 작성하려면 사용 가능한 올바른 유형의 포터블 IP 주소가 1개 이상 있어야 합니다. 사용 가능한 포터블 IP 주소를 보거나 사용된 포터블 IP 주소를 해제할 수 있습니다. 
+기본적으로, 4개의 포터블 공인 및 4개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)으로 단일 앱을 공용 또는 사설 네트워크에 노출시키는 데 사용될 수 있습니다. 로드 밸런서 서비스를 작성하려면 사용 가능한 올바른 유형의 포터블 IP 주소가 1개 이상 있어야 합니다. 사용 가능한 포터블 IP 주소를 보거나 사용된 포터블 IP 주소를 해제할 수 있습니다.
 
 ### 사용 가능한 포터블 공인 IP 주소 보기
 {: #review_ip}
 
-사용되는 클러스터와 사용 가능한 클러스터 모두의 모든 포터블 IP 주소를 나열하려면 다음을 실행할 수 있습니다. 
+사용되는 클러스터와 사용 가능한 클러스터 모두의 모든 포터블 IP 주소를 나열하려면 다음을 실행할 수 있습니다.
 
 ```
 kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}
 
-로드 밸런서를 작성하는 데 사용할 수 있는 포터블 공인 IP 주소만 나열하려면 다음 단계를 사용할 수 있습니다. 
+로드 밸런서를 작성하는 데 사용할 수 있는 포터블 공인 IP 주소만 나열하려면 다음 단계를 사용할 수 있습니다.
 
 시작하기 전에, [사용할 클러스터의 컨텍스트를 설정하십시오.](cs_cli_install.html#cs_cli_configure)
 
@@ -247,13 +249,13 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ## 포터블 IP 주소 추가
 {: #adding_ips}
 
-기본적으로, 4개의 포터블 공인 및 4개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)으로 단일 앱을 공용 또는 사설 네트워크에 노출시키는 데 사용될 수 있습니다. 4개 이상의 공용 또는 4개 이상의 사설 로드 밸런서를 작성하기 위해 클러스터에 네트워크 서브넷을 추가하여 더 많은 포터블 IP 주소를 가져올 수 있습니다. 
+기본적으로, 4개의 포터블 공인 및 4개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)으로 단일 앱을 공용 또는 사설 네트워크에 노출시키는 데 사용될 수 있습니다. 4개 이상의 공용 또는 4개 이상의 사설 로드 밸런서를 작성하기 위해 클러스터에 네트워크 서브넷을 추가하여 더 많은 포터블 IP 주소를 가져올 수 있습니다.
 
 **참고:**
 * 클러스터에 서브넷을 사용 가능하게 하면 이 서브넷의 IP 주소가 클러스터 네트워킹 목적으로 사용됩니다. IP 주소 충돌을 피하려면 하나의 클러스터만 있는 서브넷을 사용해야 합니다. 동시에
-{{site.data.keyword.containershort_notm}}의 외부에서
+{{site.data.keyword.containerlong_notm}}의 외부에서
 다른 목적으로 또는 다중 클러스터에 대한 서브넷으로 사용하지 마십시오.
-* 포터블 공인 IP 주소는 매월 비용이 청구됩니다. 서브넷이 프로비저닝된 후에 포터블 공인 IP 주소를 제거한 경우에는 짧은 시간 동안만 사용했어도 여전히 월별 비용을 지불해야 합니다. 
+* 포터블 공인 IP 주소는 매월 비용이 청구됩니다. 서브넷이 프로비저닝된 후에 포터블 공인 IP 주소를 제거한 경우에는 짧은 시간 동안만 사용했어도 여전히 월별 비용을 지불해야 합니다.
 
 ### 추가로 서브넷을 주문하여 포터블 IP 추가
 {: #request}
@@ -290,11 +292,11 @@ IBM Cloud 인프라(SoftLayer) 계정에서 새 서브넷을 작성하고 지정
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td><code>&lt;VLAN_ID&gt;</code>를 포터블 공인 또는 사설 IP 주소를 할당할 공용 또는 사설 VLAN의 ID로 대체하십시오. 기존 작업자 노드가 연결되어 있는 공용 또는 사설 VLAN을 선택해야 합니다. 작업자 노드에 대한 공용 또는 사설 VLAN을 검토하려면 <code>ibmcloud ks worker-get &lt;worker_id&gt;</code> 명령을 실행하십시오. <서브넷은 VLAN이 있는 동일 구역에서 프로비저닝됩니다. </td>
+    <td><code>&lt;VLAN_ID&gt;</code>를 포터블 공인 또는 사설 IP 주소를 할당할 공용 또는 사설 VLAN의 ID로 대체하십시오. 기존 작업자 노드가 연결되어 있는 공용 또는 사설 VLAN을 선택해야 합니다. 작업자 노드에 대한 공용 또는 사설 VLAN을 검토하려면 <code>ibmcloud ks worker-get &lt;worker_id&gt;</code> 명령을 실행하십시오. <서브넷은 VLAN이 있는 동일 구역에서 프로비저닝됩니다.</td>
     </tr>
     </tbody></table>
 
-2. 서브넷이 정상적으로 작성되어 클러스터에 추가되었는지 확인하십시오. 서브넷 CIDR은 **Subnet VLANs** 섹션에 나열되어 있습니다. 
+2. 서브넷이 정상적으로 작성되어 클러스터에 추가되었는지 확인하십시오. 서브넷 CIDR은 **Subnet VLANs** 섹션에 나열되어 있습니다.
 
     ```
     ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
@@ -311,7 +313,7 @@ IBM Cloud 인프라(SoftLayer) 계정에서 새 서브넷을 작성하고 지정
     ```
     {: screen}
 
-3. **중요**: 동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](#subnet-routing)을 설정해야 합니다. 
+3. **중요**: 동일한 VLAN의 서로 다른 서브넷에 있는 작업자 간에 통신을 사용 가능하게 하려면 [동일한 VLAN의 서브넷 간에 라우팅 사용](#subnet-routing)을 설정해야 합니다.
 
 <br />
 
@@ -389,9 +391,9 @@ Subnet VLANs
 ## 서브넷 라우팅 관리
 {: #subnet-routing}
 
-다중 구역 클러스터, 단일 구역 클러스터용 다중 VLAN 또는 동일한 VLAN의 다중 서브넷이 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 VLAN Spanning을 켜야 합니다. 지시사항은 [VLAN Spanning 사용 또는 사용 안함](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 참조하십시오.
+클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오. 
 
-VLAN Spanning이 역시 필요한 다음의 시나리오를 검토하십시오. 
+VLAN Spanning이 역시 필요한 다음의 시나리오를 검토하십시오.
 
 ### 동일한 VLAN의 기본 서브넷 간에 라우팅 사용
 {: #vlan-spanning}
@@ -399,13 +401,19 @@ VLAN Spanning이 역시 필요한 다음의 시나리오를 검토하십시오.
 클러스터를 작성하는 경우에는 `/26`에서 끝나는 서브넷이 기본 사설 기본 VLAN에서 프로비저닝됩니다. 사설 기본 서브넷은 최대 62개의 작업자 노드에 대한 IP를 제공할 수 있습니다.
 {:shortdesc}
 
-이 62개의 작업자 노드 한계는 동일한 VLAN에 있는 단일 지역의 대형 클러스터 또는 여러 소형 클러스터에서 초과될 수 있습니다. 62개의 작업자 노드 한계에 도달하는 경우에는 동일한 VLAN의 두 번째 사설 기본 서브넷이 주문됩니다. 
+이 62개의 작업자 노드 한계는 동일한 VLAN에 있는 단일 지역의 대형 클러스터 또는 여러 소형 클러스터에서 초과될 수 있습니다. 62개의 작업자 노드 한계에 도달하는 경우에는 동일한 VLAN의 두 번째 사설 기본 서브넷이 주문됩니다.
 
 동일한 VLAN의 이러한 기본 서브넷에서 작업자가 통신할 수 있도록 보장하려면 VLAN Spanning을 켜야 합니다. 지시사항은 [VLAN Spanning 사용 또는 사용 안함](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 참조하십시오.
+
+VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오.
+{: tip}
 
 ### 게이트웨이 어플라이언스에 대한 서브넷 라우팅 관리
 {: #vra-routing}
 
-표준 클러스터를 작성하면 클러스터가 연결된 VLAN에서 포터블 공인 및 포터블 사설 서브넷이 주문됩니다. 이러한 서브넷은 Ingress 및 로드 밸런서 네트워킹 서비스에 대한 IP 주소를 제공합니다. 
+표준 클러스터를 작성하면 클러스터가 연결된 VLAN에서 포터블 공인 및 포터블 사설 서브넷이 주문됩니다. 이러한 서브넷은 Ingress 및 로드 밸런서 네트워킹 서비스에 대한 IP 주소를 제공합니다.
 
-그러나 [VRA(Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html#about) 등의 기존 라우터 어플라이언스가 있는 경우에는 클러스터가 연결된 해당 VLAN의 새로 추가된 포터블 서브넷이 라우터에 구성되어 있지 않습니다. Ingress 또는 로드 밸런서 네트워킹 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)하여 네트워크 디바이스가 동일한 VLAN의 서로 다른 서브넷 간에 라우팅할 수 있도록 보장해야 합니다. 
+그러나 [VRA(Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html#about) 등의 기존 라우터 어플라이언스가 있는 경우에는 클러스터가 연결된 해당 VLAN의 새로 추가된 포터블 서브넷이 라우터에 구성되어 있지 않습니다. Ingress 또는 로드 밸런서 네트워킹 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)하여 네트워크 디바이스가 동일한 VLAN의 서로 다른 서브넷 간에 라우팅할 수 있도록 보장해야 합니다.
+
+VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오.
+{: tip}

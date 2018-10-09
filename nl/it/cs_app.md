@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -53,7 +53,7 @@ Rivedi queste potenziali configurazioni delle applicazioni ordinate con diversi 
 2.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed estesi a più nodi (anti-affinità) in un singolo cluster di zone.
 3.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed estesi a più nodi (anti-affinità) in un cluster multizona tra zone.
 
-Puoi anche [collegare più cluster in regioni diverse con un programma di bilanciamento del carico globale](cs_clusters.html#multiple_clusters) per aumentare l'alta disponibilità.
+Puoi anche [collegare più cluster in regioni diverse con un programma di bilanciamento del carico globale](cs_clusters_planning.html#multiple_clusters) per aumentare l'alta disponibilità.
 
 ### Aumento della disponibilità della tua applicazione
 {: #increase_availability}
@@ -76,13 +76,13 @@ Puoi anche [collegare più cluster in regioni diverse con un programma di bilanc
     
     </dd>
 <dt>Distribuisci i pod tra più zone o regioni</dt>
-  <dd><p>Per proteggere la tua applicazione da un malfunzionamento della zona, puoi creare più cluster in zone separate o aggiungere zone ad un pool di lavoro in un cluster multizona. I cluster multizona sono disponibili solo in [determinate aree metropolitane](cs_regions.html#zones), ad esempio Dallas. Se crei più cluster in zone separate, devi [impostare un programma di bilanciamento del carico globale](cs_clusters.html#multiple_clusters).</p>
-  <p>Quando usi una serie di repliche e specifichi l'anti-affinità pod, Kubernetes espande i pod dell'applicazione tra i nodi. Se i tuoi nodi si trovano in più zone, i pod vengono estesi tra le zone, aumentando la disponibilità della tua applicazione. Se vuoi limitare le tue applicazioni affinché vengano eseguite in una sola zona, puoi configurare l'affinità pod o creare ed etichettare un pool di lavoro in una zona. Per ulteriori informazioni, vedi [Alta disponibilità per i cluster multizona](cs_clusters.html#ha_clusters).</p>
+  <dd><p>Per proteggere la tua applicazione da un malfunzionamento della zona, puoi creare più cluster in zone separate o aggiungere zone ad un pool di nodi di lavoro in un cluster multizona. I cluster multizona sono disponibili solo in [determinate aree metropolitane](cs_regions.html#zones), ad esempio Dallas. Se crei più cluster in zone separate, devi [impostare un programma di bilanciamento del carico globale](cs_clusters_planning.html#multiple_clusters).</p>
+  <p>Quando usi una serie di repliche e specifichi l'anti-affinità pod, Kubernetes espande i pod dell'applicazione tra i nodi. Se i tuoi nodi si trovano in più zone, i pod vengono estesi tra le zone, aumentando la disponibilità della tua applicazione. Se vuoi limitare le tue applicazioni affinché vengano eseguite in una sola zona, puoi configurare l'affinità pod o creare ed etichettare un pool di nodi di lavoro in una zona. Per ulteriori informazioni, vedi [Alta disponibilità per i cluster multizona](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>In una distribuzione cluster multizona, i miei pod dell'applicazione vengono distribuiti uniformemente tra i nodi?</strong></p>
   <p>I pod vengono distribuiti uniformemente tra le zone, ma non sempre tra i nodi. Ad esempio, se hai un cluster con un nodo in ciascuna delle tre zone e distribuisci una serie di repliche di sei pod, ciascun nodo ottiene due pod. Tuttavia, se hai un cluster con due nodi in ciascuna delle tre zone e distribuisci una serie di repliche di sei pod, ciascuna zona ha due pod pianificati e potrebbe pianificare o meno un pod per nodo. Per un maggiore controllo sulla pianificazione, puoi [impostare l'affinità pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>Se una zona si disattiva, in che modo i pod vengono ripianificati sui nodi rimanenti nelle altre zone?</strong></br>Dipende dalla politica di pianificazione che hai utilizzato nella distribuzione. Se hai incluso l'[affinità pod specifica del nodo ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), i tuoi pod non verranno ripianificati. Se non l'hai inclusa, i pod verranno creati sui nodi di lavoro disponibili nelle altre zone, ma potrebbero non essere bilanciati. Ad esempio, due pod potrebbero essere estesi tra due nodi disponibili oppure potrebbero essere entrambi pianificati su un nodo con capacità disponibile. Allo stesso modo, quando la zona non disponibile torna disponibile, i pod non vengono eliminati e ribilanciati automaticamente tra i nodi. Se vuoi che i pod vengano ribilanciati tra le zone una volta che la zona torna attiva, prendi in considerazione di utilizzare il [programma di annullamento della pianificazione (descheduler) Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/descheduler).</p>
-  <p><strong>Suggerimento</strong>: nei cluster multizona, prova a tenere la capacità del tuo nodo di lavoro al 50% per zona in modo da avere capacità sufficiente per proteggere il tuo cluster da un malfunzionamento della zona. </p>
-  <p><strong>Se voglio estendere la mia applicazione tra le regioni?</strong></br>Per proteggere la tua applicazione da un malfunzionamento della regione, crea un secondo cluster in un'altra regione, [imposta un programma di bilanciamento del carico globale](cs_clusters.html#multiple_clusters) per connettere i tuoi cluster e usa file YAML di distribuzione per distribuire una serie di repliche duplicata con l'[anti-affinità pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) nella tua applicazione.</p>
+  <p><strong>Suggerimento</strong>: nei cluster multizona, prova a tenere la capacità del tuo nodo di lavoro al 50% per zona in modo da avere capacità sufficiente per proteggere il tuo cluster da un malfunzionamento della zona.</p>
+  <p><strong>Se voglio estendere la mia applicazione tra le regioni?</strong></br>Per proteggere la tua applicazione da un malfunzionamento della regione, crea un secondo cluster in un'altra regione, [imposta un programma di bilanciamento del carico globale](cs_clusters_planning.html#multiple_clusters) per connettere i tuoi cluster e usa file YAML di distribuzione per distribuire una serie di repliche duplicata con l'[anti-affinità pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) nella tua applicazione.</p>
   <p><strong>Se le mie applicazioni hanno bisogno di memoria persistente?</strong></p>
   <p>Usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -405,21 +405,21 @@ Per distribuire la tua applicazione:
 ## Distribuzione delle applicazioni a specifici nodi di lavoro utilizzando le etichette
 {: #node_affinity}
 
-Quando distribuisci un'applicazione, i pod dell'applicazione vengono distribuiti indiscriminatamente ai vari nodi di lavoro nel tuo cluster. In alcuni casi, potresti voler limitare i nodi di lavori a cui distribuire i pod dell'applicazione. Ad esempio, potresti voler distribuire i pod dell'applicazione solo ai nodi di lavoro in un determinato pool di lavoro in quanto tali nodi di lavoro si trovano su macchine bare metal. Per indicare i nodi di lavoro a cui devono essere distribuiti tali pod dell'applicazione, aggiungi una regola di affinità alla tua distribuzione dell'applicazione.
+Quando distribuisci un'applicazione, i pod dell'applicazione vengono distribuiti indiscriminatamente ai vari nodi di lavoro nel tuo cluster. In alcuni casi, potresti voler limitare i nodi di lavori a cui distribuire i pod dell'applicazione. Ad esempio, potresti voler distribuire i pod dell'applicazione solo ai nodi di lavoro in un determinato pool di nodi di lavoro in quanto tali nodi di lavoro si trovano su macchine bare metal. Per indicare i nodi di lavoro a cui devono essere distribuiti tali pod dell'applicazione, aggiungi una regola di affinità alla tua distribuzione dell'applicazione.
 {:shortdesc}
 
 Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 
-1. Ottieni il nome del pool di lavoro a cui desideri distribuire i pod dell'applicazione.
+1. Ottieni il nome del pool di nodi di lavoro a cui desideri distribuire i pod dell'applicazione.
     ```
     ibmcloud ks worker-pools <cluster_name_or_ID>
     ```
     {:pre}
 
-    Questa procedura utilizza un nome pool di lavoro come esempio. Per distribuire i pod dell'applicazione a determinati nodi di lavoro in base ad un altro valore, usa invece tale valore. Ad esempio, per distribuire i pod dell'applicazione solo a nodi di lavoro su una specifica VLAN, ottieni l'ID VLAN eseguendo `ibmcloud ks vlans <zone>`.
+    Questa procedura utilizza un nome pool di nodi di lavoro come esempio. Per distribuire i pod dell'applicazione a determinati nodi di lavoro in base ad un altro valore, usa invece tale valore. Ad esempio, per distribuire i pod dell'applicazione solo a nodi di lavoro su una specifica VLAN, ottieni l'ID VLAN eseguendo `ibmcloud ks vlans <zone>`.
     {: tip}
 
-2. [Aggiungi una regola di affinità ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) per il nome pool di lavoro alla distribuzione dell'applicazione.
+2. [Aggiungi una regola di affinità ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) per il nome pool di nodi di lavoro alla distribuzione dell'applicazione.
 
     yaml di esempio:
 
@@ -471,7 +471,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 
         Nell'output di esempio sopra riportato, il pod dell'applicazione `cf-py-d7b7d94db-vp8pq` si trova su un nodo di lavoro con indirizzo IP `10.176.48.78`.
 
-    3. Elenca i nodi di lavoro nel pool di lavoro che hai indicato nella tua distribuzione dell'applicazione.
+    3. Elenca i nodi di lavoro nel pool di nodi di lavoro che hai indicato nella tua distribuzione dell'applicazione.
 
         ```
         ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
@@ -491,7 +491,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
         Se hai creato una regola di affinità dell'applicazione basata su un altro fattore, utilizza tale valore. Ad esempio, per verificare che il pod dell'applicazione venga distribuito ai nodi di lavoro su una specifica VLAN, visualizza la VLAN su cui è in esecuzione il nodo di lavoro eseguendo `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
         {: tip}
 
-    4. Nell'output, verifica che il nodo di lavoro con l'indirizzo IP privato che hai identificato nel passo precedente venga distribuito in questo pool di lavoro.
+    4. Nell'output, verifica che il nodo di lavoro con l'indirizzo IP privato che hai identificato nel passo precedente venga distribuito in questo pool di nodi di lavoro.
 
 <br />
 
@@ -499,14 +499,14 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 ## Distribuzione di un'applicazione a una macchina GPU.
 {: #gpu_app}
 
-Se hai un [tipo di macchina GPU (graphics processing unit) bare metal](cs_clusters.html#shared_dedicated_node), puoi pianificare i carichi di lavoro intensivi in modo matematico nel nodo di lavoro. Ad esempio, potresti eseguire un'applicazione 3D che utilizza la piattaforma CUDA (Compute Unified Device Architecture) per condividere il carico di elaborazione tra la GPU e la CPU per aumentare le prestazioni.
+Se hai un [tipo di macchina GPU (graphics processing unit) bare metal](cs_clusters_planning.html#shared_dedicated_node), puoi pianificare i carichi di lavoro intensivi in modo matematico nel nodo di lavoro. Ad esempio, potresti eseguire un'applicazione 3D che utilizza la piattaforma CUDA (Compute Unified Device Architecture) per condividere il carico di elaborazione tra la GPU e la CPU per aumentare le prestazioni.
 {:shortdesc}
 
 Nella seguente procedura, imparerai come distribuire i carichi di lavoro che richiedono la GPU. Puoi anche [distribuire le applicazioni](#app_ui) che non hanno bisogno di elaborare i loro carichi di lavoro sia tramite la GPU che la CPU. Dopo, potresti trovare utile approfondire i carichi di lavoro intensivi in modo matematico come il framework di machine learning [TensorFlow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.tensorflow.org/) con [questa demo Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
 
 Prima di iniziare:
 * [Crea un tipo di macchina GPU bare metal](cs_clusters.html#clusters_cli). Tieni presente che il completamento di questo processo può richiedere più di 1 giorno lavorativo.
-* Il tuo master del cluster e il nodo di lavoro GPU devono eseguire Kubernetes alla versione 1.10 o successiva.
+* Il tuo master del cluster e il nodo di lavoro GPU devono eseguire Kubernetes alla versione 1.10 o successive.
 
 Per eseguire un carico di lavoro su una macchina GPU:
 1.  Crea un file YAML. In questo esempio, un `Job` YAML gestisce i carichi di lavoro come batch creando un pod di breve durata che viene eseguito finché il comando pianificato per il completamento non viene terminato correttamente.

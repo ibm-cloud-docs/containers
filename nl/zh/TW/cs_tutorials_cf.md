@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # 指導教學：將應用程式從 Cloud Foundry 移轉至叢集
 {: #cf_tutorial}
 
-您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containershort_notm}} 中的 Kubernet 叢集。
+您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernet 叢集。
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ lastupdated: "2018-08-06"
 - [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](../services/Registry/index.html)。
 - [建立叢集](cs_clusters.html#clusters_ui)。
 - [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
+- [確定您具有**編輯器**、**運算子**或**管理者**平台角色](cs_users.html#add_users_cli)。
 - [瞭解 Docker 和 Kubernetes 術語](cs_tech.html)。
 
 
@@ -258,7 +259,7 @@ lastupdated: "2018-08-06"
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -471,7 +471,7 @@ annotations:
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-header-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
 spec:
 tls:
 - hosts:
@@ -680,7 +680,7 @@ Acesse um app através de uma porta TCP não padrão.
 <dd>
 Use essa anotação para um app que está executando uma carga de trabalho de fluxos de TCP.
 
-<p>**Nota**: o ALB opera no modo de passagem e encaminha o tráfego para apps de backend. A finalização de SSL não é suportada neste caso.</p>
+<p>**Nota**: o ALB opera no modo de passagem e encaminha o tráfego para apps de backend. A finalização de SSL não é suportada neste caso. A conexão TLS não é finalizada e passa intacta.</p>
 </dd>
 
 
@@ -759,11 +759,11 @@ A saída da CLI é semelhante à seguinte:
 <code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 109d</code></pre></li>
 <li>Configure seu Ingresso para acessar seu app por meio de uma porta TCP não padrão. Use o arquivo YAML de amostra nesta referência. </li>
-<li>Atualize sua configuração do ALB.
+<li>Crie seu recurso ALB ou atualize a configuração existente do ALB.
 <pre class="pre">
 <code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>Abra seu navegador da web preferencial para acessar seu app. Exemplo: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Use curl no subdomínio do Ingress para acessar seu app. Exemplo:  <code> curl  &lt;domain&gt;: &lt;ingressPort&gt; </code></li></ol></dd></dl>
 
 <br />
 
@@ -921,7 +921,7 @@ metadados:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
 spec:
  tls:
- - System z:
+ - hosts:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -1404,8 +1404,7 @@ Mude as portas padrão para o tráfego de rede HTTP (porta 80) e HTTPS (porta 44
 
 <dl>
 <dt>Descrição</dt>
-<dd>Por padrão, o ALB de Ingresso está configurado para atender ao tráfego de rede HTTP recebido na porta 80 e para o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.
-</dd>
+<dd>Por padrão, o ALB de Ingresso está configurado para atender ao tráfego de rede HTTP recebido na porta 80 e para o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.<p><strong>Nota</strong>: para ativar a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports) e, em seguida, especifique essa porta na [anotação `mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.</p></dd>
 
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
@@ -1608,7 +1607,7 @@ Configure a autenticação mútua de tráfego de recebimento de dados para o ALB
 <dd>
 <ul>
 <li>Deve-se ter um segredo de autenticação mútua válido que contenha o <code>ca.crt</code> necessário. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets_mutual_auth).</li>
-<li>Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports).</li>
+<li>Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports) e, em seguida, especifique essa porta nesta anotação. Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.</li>
 </ul>
 </dd>
 
@@ -1672,58 +1671,7 @@ Permitir solicitações de HTTPS e criptografar o tráfego para seus apps de env
 <dl>
 <dt>Descrição</dt>
 <dd>
-Quando a sua configuração do recurso Ingresss tem uma seção TLS, o ALB do Ingresso pode manipular solicitações de URL protegida por HTTPS para o seu app. No entanto, o ALB decriptografa a solicitação antes do encaminhamento do tráfego para seus apps. Se você tiver apps que requerem HTTS e precisar do tráfego para ser criptografado antes de ser encaminhado para esses apps de envio de dados, será possível usar a anotação `ssl-services`. Se seus apps de envio de dados podem manipular TLS, é possível opcionalmente fornecer um certificado que esteja contido em um segredo do TLS.<br></br>**Opcional**: é possível incluir [autenticação unidirecional ou autenticação mútua](#ssl-services-auth) nessa anotação.</dd>
-
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: &lt;myingressname&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
-spec:
-  regras:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path backend: serviceName: myservice1 servicePort: 8443
-      - path: /service2_path backend: serviceName: myservice2 servicePort: 8444 </code></pre>
-
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço que requer HTTPS. O tráfego é criptografado do ALB para o serviço desse app.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Opcional: se você desejar usar um segredo do TLS e seu app de envio de dados puder manipular TLS, substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo para o serviço. Se você fornecer um segredo, o valor deverá conter o <code>trusted.crt</code> do servidor de envio de dados. Para criar um segredo do TLS, consulte [Criando segredos](cs_app.html#secrets_ssl_services).</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### Suporte de serviços SSL com autenticação
-{: #ssl-services-auth}
-
-<dl>
-<dt>Descrição</dt>
-<dd>
-Permita as solicitações de HTTPS e criptografe o tráfego para seus apps de envio de dados com autenticação unilateral ou mútua para segurança adicional.
-</dd>
-
+Quando a sua configuração do recurso Ingresss tem uma seção TLS, o ALB do Ingresso pode manipular solicitações de URL protegida por HTTPS para o seu app. No entanto, o ALB manipula a finalização do TLS e decriptografa a solicitação antes de encaminhar o tráfego para seus apps. Se você tiver apps que requerem o protocolo HTTPS e precisar do tráfego para permanecer criptografado, use a anotação `ssl-services` para desativar a finalização do TLS padrão do ALB. O ALB finaliza a conexão do TLS e criptografa novamente o SSL antes de enviar o tráfego para o app de backend.<br></br>Além disso, se seu app de backend puder manipular o TLS e você desejar incluir segurança adicional, será possível incluir a autenticação unilateral ou mútua fornecendo um certificado que está contido em um segredo.</dd>
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
@@ -1759,7 +1707,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo de autenticação mútua para o serviço. O segredo de autenticação mútua deve conter o <code>ca.crt</code> necessário. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets_mutual_auth).</td>
+  <td>Se seu app de backend puder manipular o TLS e você desejar incluir segurança adicional, substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo de autenticação unilateral ou mútua para o serviço.<ul><li>Se você fornecer um segredo de autenticação unilateral, o valor deverá conter o <code>trusted.crt</code> do servidor de envio de dados. Para criar um segredo do TLS, consulte [Criando segredos](cs_app.html#secrets_ssl_services).</li><li>Se você fornecer um segredo de autenticação mútua, o valor deverá conter o <code>ca.crt</code> e o <code>ca.key</code> necessários que seu app está esperando do cliente. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets_mutual_auth).</li></ul><strong>Aviso</strong>: se você não fornecer um segredo, as conexões não seguras serão permitidas. Você pode escolher omitir um segredo se desejar testar a conexão e não tiver certificados prontos ou se seus certificados estiverem expirados e você desejar permitir conexões não seguras.</td>
   </tr>
   </tbody></table>
 
@@ -2263,7 +2211,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
+  serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2285,11 +2233,11 @@ metadados:
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2416,7 +2364,7 @@ kind: Ingress
 metadados:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
 spec:
  tls:
  - hosts:

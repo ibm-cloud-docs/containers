@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-08-06"
 ## ibmcloud ks 指令
 {: #cs_commands}
 
-**提示：**若要查看 {{site.data.keyword.containershort_notm}} 外掛程式的版本，請執行下列指令。
+**提示：**若要查看 {{site.data.keyword.containerlong_notm}} 外掛程式的版本，請執行下列指令。
 
 ```
 ibmcloud plugin list
@@ -324,7 +324,7 @@ ibmcloud plugin list
 ### ibmcloud ks api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
-將目標設為 {{site.data.keyword.containershort_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
+將目標設為 {{site.data.keyword.containerlong_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
 
 要切換地區嗎？請改用 `ibmcloud ks region-set` [指令](#cs_region-set)。
 {: tip}
@@ -333,7 +333,7 @@ ibmcloud plugin list
 
    <dl>
    <dt><code><em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containershort_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。接受值如下：<ul>
+   <dd>{{site.data.keyword.containerlong_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。接受值如下：<ul>
    <li>全球端點：https://containers.bluemix.net</li>
    <li>亞太地區北部端點：https://ap-north.containers.bluemix.net</li>
    <li>亞太地區南部端點：https://ap-south.containers.bluemix.net</li>
@@ -375,13 +375,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-檢視 {{site.data.keyword.containershort_notm}} 地區中 IAM API 金鑰的擁有者的名稱及電子郵件位址。
+檢視 {{site.data.keyword.containerlong_notm}} 地區中 IAM API 金鑰的擁有者的名稱及電子郵件位址。
 
-當執行第一個需要 {{site.data.keyword.containershort_notm}} 管理存取原則的動作時，會針對地區自動設定 Identity and Access Management (IAM) API 金鑰。例如，其中一位管理使用者會在 `us-south` 地區中建立第一個叢集。如此一來，這位使用者的 IAM API 金鑰就會儲存在這個地區的帳戶中。此 API 金鑰是用來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源，例如新的工作者節點或 VLAN。
+執行第一個需要 {{site.data.keyword.containerlong_notm}} 管理存取原則的動作時，會針對地區自動設定 Identity and Access Management (IAM) API 金鑰。例如，其中一位管理使用者會在 `us-south` 地區中建立第一個叢集。如此一來，這位使用者的 IAM API 金鑰就會儲存在這個地區的帳戶中。此 API 金鑰是用來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源，例如新的工作者節點或 VLAN。
 
-當另一位使用者在此地區中執行需要與 IBM Cloud 基礎架構 (SoftLayer) 組合互動的動作（例如建立新叢集或重新載入工作者節點）時，會使用儲存的 API 金鑰來判斷是否有足夠的許可權可執行該動作。若要確保可以順利執行叢集裡的基礎架構相關動作，請對 {{site.data.keyword.containershort_notm}} 管理使用者指派**超級使用者**基礎架構存取原則。如需相關資訊，請參閱[管理使用者存取](cs_users.html#infra_access)。
+當另一位使用者在此地區中執行需要與 IBM Cloud 基礎架構 (SoftLayer) 組合互動的動作（例如建立新叢集或重新載入工作者節點）時，會使用儲存的 API 金鑰來判斷是否有足夠的許可權可執行該動作。為了確保可以順利在叢集裡執行基礎架構相關動作，請對 {{site.data.keyword.containerlong_notm}} 管理使用者指派**超級使用者**基礎架構存取原則。如需相關資訊，請參閱[管理使用者存取](cs_users.html#infra_access)。
 
-如果您發現需要更新針對某地區而儲存的 API 金鑰，則可以執行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 指令來達成此目的。這個指令需要 {{site.data.keyword.containershort_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
+如果您發現需要更新針對某地區而儲存的 API 金鑰，則可以執行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 指令來達成此目的。這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
 
 **提示：**如果使用 [ibmcloud ks credentials-set](#cs_credentials_set) 指令手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證，則可能無法使用這個指令所傳回的 API 金鑰。
 
@@ -410,11 +410,11 @@ Region:                us-south
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-取代 {{site.data.keyword.containershort_notm}} 地區中的現行 IAM API 金鑰。
+取代 {{site.data.keyword.containerlong_notm}} 地區中的現行 IAM API 金鑰。
 
-這個指令需要 {{site.data.keyword.containershort_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。需要有 IAM API 金鑰，才能訂購 IBM Cloud 基礎架構 (SoftLayer) 組合中的基礎架構。儲存之後，API 金鑰即會用於地區中的每個動作，這些動作需要基礎架構許可權（與執行這個指令的使用者無關）。如需 IAM API 金鑰運作方式的相關資訊，請參閱 [`ibmcloud ks api-key-info` 指令](#cs_api_key_info)。
+這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。需要有 IAM API 金鑰，才能訂購 IBM Cloud 基礎架構 (SoftLayer) 組合中的基礎架構。儲存之後，API 金鑰即會用於地區中的每個動作，這些動作需要基礎架構許可權（與執行這個指令的使用者無關）。如需 IAM API 金鑰運作方式的相關資訊，請參閱 [`ibmcloud ks api-key-info` 指令](#cs_api_key_info)。
 
-**重要事項**：在使用這個指令之前，請確定執行這個指令的使用者具有必要的 [{{site.data.keyword.containershort_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
+**重要事項**：在使用這個指令之前，請確定執行這個指令的使用者具有必要的 [{{site.data.keyword.containerlong_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
 
 <strong>指令選項</strong>：
 
@@ -567,13 +567,13 @@ Region:                us-south
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-起始設定 {{site.data.keyword.containershort_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
+起始設定 {{site.data.keyword.containerlong_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
 
 <strong>指令選項</strong>：
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端點。這是選用值。[檢視可用的 API 端點值。](cs_regions.html#container_regions)</dd>
+   <dd>要使用的 {{site.data.keyword.containerlong_notm}} API 端點。這是選用值。[檢視可用的 API 端點值。](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>容許不安全的 HTTP 連線。</dd>
@@ -906,7 +906,7 @@ trusted: <em>true</em>
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -1011,7 +1011,7 @@ trusted: <em>true</em>
 ### ibmcloud ks kube-versions [--json] [-s]
 {: #cs_kube_versions}
 
-檢視 {{site.data.keyword.containershort_notm}} 中支援的 Kubernetes 版本清單。將您的[主要叢集](#cs_cluster_update)及[工作者節點](cs_cli_reference.html#cs_worker_update)更新為最新且功能穩定的預設版本。
+檢視 {{site.data.keyword.containerlong_notm}} 中支援的 Kubernetes 版本清單。將您的[主要叢集](#cs_cluster_update)及[工作者節點](cs_cli_reference.html#cs_worker_update)更新為最新且功能穩定的預設版本。
 
 **指令選項**：
 
@@ -1210,7 +1210,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 
 **附註：**
 * 可攜式公用 IP 位址是按月計費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用也是一樣。
-* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
 * 若要在相同 VLAN 上的子網路之間遞送，您必須[開啟 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
 
 <strong>指令選項</strong>：
@@ -1238,10 +1238,10 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ### ibmcloud ks cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
-在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供 {{site.data.keyword.containershort_notm}} 中指定的叢集使用。
+在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供 {{site.data.keyword.containerlong_notm}} 中指定的叢集使用。
 
 **附註：**
-* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
 * 若要在相同 VLAN 上的子網路之間遞送，您必須[開啟 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
 
 <strong>指令選項</strong>：
@@ -1272,12 +1272,12 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ### ibmcloud ks cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-將您自己的專用子網路帶到 {{site.data.keyword.containershort_notm}} 叢集。
+將您自己的專用子網路帶到 {{site.data.keyword.containerlong_notm}} 叢集。
 
 這個專用子網路不是 IBM Cloud 基礎架構 (SoftLayer) 所提供的專用子網路。因此，您必須配置子網路的任何入埠及出埠網路資料流量遞送。若要新增 IBM Cloud 基礎架構 (SoftLayer) 子網路，請使用 `ibmcloud ks cluster-subnet-add` [指令](#cs_cluster_subnet_add)。
 
 **附註**：
-* 當您將專用使用者子網路新增至叢集時，這個子網路的 IP 位址會用於叢集裡的專用「負載平衡器」。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+* 當您將專用使用者子網路新增至叢集時，這個子網路的 IP 位址會用於叢集裡的專用「負載平衡器」。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
 * 若要在相同 VLAN 上的子網路之間遞送，您必須[開啟 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
 
 <strong>指令選項</strong>：
@@ -1652,15 +1652,15 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-針對 {{site.data.keyword.containershort_notm}} 帳戶設定 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
+針對 {{site.data.keyword.containerlong_notm}} 帳戶設定 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 
 如果您有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶，依預設，您便可以存取 IBM Cloud 基礎架構 (SoftLayer) 組合。不過，建議您使用您已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購基礎架構。您可以使用這個指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。
 
 如果手動設定了 IBM Cloud 基礎架構 (SoftLayer) 認證，則即使帳戶已有 [IAM API 金鑰](#cs_api_key_info)，也會使用這些認證來訂購基礎架構。如果已儲存其認證的使用者沒有訂購基礎架構的必要許可權，則基礎架構相關動作（例如建立叢集或重新載入工作者節點）可能會失敗。
 
-您無法為一個 {{site.data.keyword.containershort_notm}} 帳戶設定多個認證。每個 {{site.data.keyword.containershort_notm}} 帳戶僅會鏈結至一個 IBM Cloud 基礎架構 (SoftLayer) 組合。
+您無法為一個 {{site.data.keyword.containerlong_notm}} 帳戶設定多個認證。每個 {{site.data.keyword.containerlong_notm}} 帳戶僅會鏈結至一個 IBM Cloud 基礎架構 (SoftLayer) 組合。
 
-**重要事項：**在使用這個指令之前，請確定使用其認證的使用者具有必要的 [{{site.data.keyword.containershort_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
+**重要事項：**在使用這個指令之前，請確定使用其認證的使用者具有必要的 [{{site.data.keyword.containerlong_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
 
 <strong>指令選項</strong>：
 
@@ -1713,7 +1713,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-從您的 {{site.data.keyword.containershort_notm}} 帳戶移除 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
+從您的 {{site.data.keyword.containerlong_notm}} 帳戶移除 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 
 移除認證之後，會使用 [IAM API 金鑰](#cs_api_key_info)來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源。
 
@@ -1738,7 +1738,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 檢視工作者節點的可用機型清單。機型因區域而異。每一個機型都包括叢集裡每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。依預設，儲存所有容器資料的次要儲存空間磁碟目錄是使用 LUKS 加密來進行加密。如果在建立叢集的期間包含了 `disable-disk-encrypt` 選項，則主機的 Docker 資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disk)。
 {:shortdesc}
 
-您可以將工作者節點佈建為共用或專用硬體上的虛擬機器，或佈建為裸機上的實體機器。[進一步瞭解機型選項](cs_clusters.html#shared_dedicated_node)。
+您可以將工作者節點佈建為共用或專用硬體上的虛擬機器，或佈建為裸機上的實體機器。[進一步瞭解機型選項](cs_clusters_planning.html#shared_dedicated_node)。
 
 <strong>指令選項</strong>：
 
@@ -2193,7 +2193,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ### ibmcloud ks region
 {: #cs_region}
 
-尋找您目前所在的 {{site.data.keyword.containershort_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
+尋找您目前所在的 {{site.data.keyword.containerlong_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
 
 **範例**：
 
@@ -2211,7 +2211,7 @@ Region: us-south
 ### ibmcloud ks region-set [REGION]
 {: #cs_region-set}
 
-設定 {{site.data.keyword.containershort_notm}} 的地區。您可以建立及管理地區特定的叢集，而且可能要多個地區中都有叢集，才能獲得高可用性。
+設定 {{site.data.keyword.containerlong_notm}} 的地區。您可以建立及管理地區特定的叢集，而且可能要多個地區中都有叢集，才能獲得高可用性。
 
 例如，您可以在美國南部地區登入 {{site.data.keyword.Bluemix_notm}}，並建立叢集。接下來，您可以使用 `ibmcloud ks region-set eu-central` 來將目標設為歐盟中部地區，並建立另一個叢集。最後，您可以使用 `ibmcloud ks region-set us-south` 回到美國南部，以管理該地區中的叢集。
 
@@ -2254,7 +2254,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-列出可用的地區。`Region Name` 是 {{site.data.keyword.containershort_notm}} 名稱，而 `Region Alias` 是地區的一般 {{site.data.keyword.Bluemix_notm}} 名稱。
+列出可用的地區。`Region Name` 是 {{site.data.keyword.containerlong_notm}} 名稱，而 `Region Alias` 是地區的一般 {{site.data.keyword.Bluemix_notm}} 名稱。
 
 **範例**：
 
@@ -2790,7 +2790,7 @@ diskEncryption: <em>false</em></code></pre>
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,7 +29,7 @@ Per migliorare la reperibilità di informazioni di archiviazione, gli argomenti 
 *  [Modifica della versione dell'archiviazione file NFS predefinita](cs_storage_file.html#nfs_version)
 *  [Configurazione di archiviazione persistente blocchi e NFS nei cluster multizona](cs_storage_basics.html#multizone)
 *  Installazione della CLI dell'infrastruttura IBM Cloud (SoftLayer): Ora puoi usare i comandi `ibmcloud sl` invece di installare la `slcli`.
-*  [Installazione del plug-in di archiviazione blocchi {{site.data.keyword.Bluemix_notm}} sul tuo cluster](cs_storage_block.html#install_block)
+*  [Installazione del plug-in {{site.data.keyword.Bluemix_notm}} Block Storage sul tuo cluster](cs_storage_block.html#install_block)
 *  Configurazione delle soluzioni di backup e ripristino per le condivisioni file NFS e l'archiviazione blocchi
     * [Archiviazione file](cs_storage_file.html#backup_restore)
     * [Archiviazione blocchi](cs_storage_block.html#backup_restore)

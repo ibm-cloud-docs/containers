@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -38,7 +38,7 @@ lastupdated: "2018-08-06"
 开始之前：
 
 - [创建标准集群](cs_clusters.html#clusters_cli)。
-- 确保集群至少具有一个公共 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
+- 确保集群至少具有一个公用 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
 - [创建新的工作程序池](cs_clusters.html#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序。
 - [设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 

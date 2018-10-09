@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -64,9 +64,9 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
   <tr>
     <td>클러스터 작성시 영역을 지정한 경우, 계정 소유자에게 해당 영역에 대한 관리자, 개발자 또는 감사자 권한이 없습니다.</td>
       <td>계정 소유자의 액세스 권한을 변경하려면 다음을 수행하십시오.
-      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>를 실행하십시오. </li>
-      <li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containershort_notm}} 액세스 권한을 부여하려면 <a href="cs_users.html">클러스터 액세스 관리</a>를 참조하십시오.</li>
-      <li>권한이 변경된 후에 로깅 토큰을 새로 고치려면 <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>를 실행하십시오. </li></ol></td>
+      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li>
+      <li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containerlong_notm}} 액세스 권한을 부여하려면 <a href="cs_users.html">클러스터 액세스 관리</a>를 참조하십시오.</li>
+      <li>권한이 변경된 후에 로깅 토큰을 새로 고치려면 <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li></ol></td>
     </tr>
     <tr>
       <td>애플리케이션 로깅 구성의 앱 경로에 symlink가 포함되어 있습니다.</td>
@@ -138,19 +138,21 @@ Kubernetes 대시보드에 액세스할 때 사용률 그래프는 표시되지 
 클러스터에 여전히 문제점이 있습니까?
 {: shortdesc}
 
+-  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오. 
+
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
--   [{{site.data.keyword.containershort_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
+-   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
 
 {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
 
-    -   {{site.data.keyword.containershort_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
-    -   시작하기 지시사항과 서비스에 대한 질문은 [IBM developerWorks dW 응답![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
+    -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
+    -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
 
 -   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 
 {: tip}
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 
+문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
 

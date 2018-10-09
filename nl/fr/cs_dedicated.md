@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 Si vous disposez d'un compte {{site.data.keyword.Bluemix_dedicated}}, vous pouvez déployer des clusters Kubernetes dans un environnement de cloud dédié (`https://<my-dedicated-cloud-instance>.bluemix.net`) et vous connecter aux services {{site.data.keyword.Bluemix_notm}} présélectionnés qui s'exécutent également à cet emplacement.
 {:shortdesc}
 
-Si vous ne disposez pas d'un compte {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez vous [initier à {{site.data.keyword.containershort_notm}}](container_index.html) dans un compte {{site.data.keyword.Bluemix_notm}} public.
+Si vous ne disposez pas d'un compte {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez vous [initier à {{site.data.keyword.containerlong_notm}}](container_index.html) dans un compte {{site.data.keyword.Bluemix_notm}} public.
 
 ## A propos de l'environnement de cloud Dedicated
 {: #dedicated_environment}
 
 Avec un compte {{site.data.keyword.Bluemix_dedicated_notm}}, les ressources physiques disponibles sont dédiées exclusivement à votre cluster et ne sont pas partagées avec des clusters d'autres clients {{site.data.keyword.IBM_notm}}. Vous pouvez opter pour la mise en place d'un environnement {{site.data.keyword.Bluemix_dedicated_notm}} si vous voulez un isolement de votre cluster et que vous devez isoler les autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez. Si vous ne disposez pas d'un compte Dedicated, vous pouvez [créer des clusters avec du matériel dédié dans un compte {{site.data.keyword.Bluemix_notm}} public](cs_clusters.html#clusters_ui).
 
-Avec la version {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez créer des clusters depuis le catalogue dans la console Dedicated ou à l'aide de l'interface de ligne de commande d'{{site.data.keyword.containershort_notm}}. Pour utiliser la console Dedicated, vous vous connectez simultanément à vos comptes Dedicated et public en utilisant votre IBMid. Vous pouvez utiliser cette double connexion pour accéder à vos clusters publics en utilisant votre console Dedicated. Pour utiliser l'interface de ligne de commande, vous vous connectez via votre noeud final Dedicated (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Vous ciblez ensuite le noeud final d'API {{site.data.keyword.containershort_notm}} de la région publique associée à l'environnement Dedicated.
+Avec la version {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez créer des clusters depuis le catalogue dans la console Dedicated ou à l'aide de l'interface de ligne de commande d'{{site.data.keyword.containerlong_notm}}. Pour utiliser la console Dedicated, vous vous connectez simultanément à vos comptes Dedicated et public en utilisant votre IBMid. Vous pouvez utiliser cette double connexion pour accéder à vos clusters publics en utilisant votre console Dedicated. Pour utiliser l'interface de ligne de commande, vous vous connectez via votre noeud final Dedicated (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Vous ciblez ensuite le noeud final d'API {{site.data.keyword.containerlong_notm}} de la région publique associée à l'environnement Dedicated.
 
 Les différences les plus significatives entre {{site.data.keyword.Bluemix_notm}} Public et Dedicated sont les suivantes.
 
@@ -82,13 +82,13 @@ Les différences les plus significatives entre {{site.data.keyword.Bluemix_notm}
  </tr>
  <tr>
  <td>Accès au registre</td>
- <td>Voir les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
- <td><ul><li>Pour les nouveaux espaces de nom, examinez les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Pour les espaces de nom configurés pour des groupes uniques et évolutifs, [utilisez un jeton et créez une valeur confidentielle Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) pour l'authentification.</li></ul></td>
+ <td>Voir les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containerlong_notm}}](cs_images.html).</td>
+ <td><ul><li>Pour les nouveaux espaces de nom, examinez les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containerlong_notm}}](cs_images.html).</li><li>Pour les espaces de nom configurés pour des groupes uniques et évolutifs, [utilisez un jeton et créez une valeur confidentielle Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) pour l'authentification.</li></ul></td>
  </tr>
  <tr>
  <td>Clusters à zones multiples</td>
- <td>Créez des [clusters à zones multiples](cs_clusters.html#multi_zone) en ajoutant des zones supplémentaires dans vos pools de noeuds worker.</td>
- <td>Créez des [clusters à zone unique](cs_clusters.html#single_zone). La zone disponible a été prédéfinie lors de la configuration de l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}. Par défaut, un cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](cs_clusters.html#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](cs_clusters.html#add_pool). Lorsque vous ajoutez un pool de noeuds worker, vous devez ajouter la zone disponible pour ce pool de sorte que les noeuds worker puissent se déployer dans cette zone. En revanche, vous ne pouvez pas ajouter d'autres zones à vos pools de noeuds worker.</td>
+ <td>Créez des [clusters à zones multiples](cs_clusters_planning.html#multizone) en ajoutant des zones supplémentaires dans vos pools de noeuds worker.</td>
+ <td>Créez des [clusters à zone unique](cs_clusters_planning.html#single_zone). La zone disponible a été prédéfinie lors de la configuration de l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}. Par défaut, un cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](cs_clusters.html#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](cs_clusters.html#add_pool). Lorsque vous ajoutez un pool de noeuds worker, vous devez ajouter la zone disponible pour ce pool de sorte que les noeuds worker puissent se déployer dans cette zone. En revanche, vous ne pouvez pas ajouter d'autres zones à vos pools de noeuds worker.</td>
  </tr>
 </tbody></table>
 {: caption="Comparaison des fonctions entre {{site.data.keyword.Bluemix_notm}} public et {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -99,7 +99,7 @@ Les différences les plus significatives entre {{site.data.keyword.Bluemix_notm}
 ### Architecture de service
 {: #dedicated_ov_architecture}
 
-Chaque noeud worker est configuré avec des ressources de cacul, des ressources réseau et un service de volume distincts.
+Chaque noeud worker est configuré avec des ressources de calcul, des ressources réseau et un service de volume distincts.
 {:shortdesc}
 
 Des fonctions de sécurité intégrées fournissent l'isolement, les capacités de gestion des ressources et la conformité en matière de sécurité du noeud worker. Le noeud worker communique avec le maître par l'entremise de certificats TLS sécurisés et d'une connexion openVPN.
@@ -107,12 +107,12 @@ Des fonctions de sécurité intégrées fournissent l'isolement, les capacités 
 
 *Architecture Kubernetes et opération réseau dans {{site.data.keyword.Bluemix_dedicated_notm}}*
 
-![Architecture {{site.data.keyword.containershort_notm}} Kubernetes sur {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![Architecture Kubernetes {{site.data.keyword.containerlong_notm}} sur {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## Configuration d'{{site.data.keyword.containershort_notm}} sur l'environnement Dedicated
+## Configuration d'{{site.data.keyword.containerlong_notm}} sur l'environnement Dedicated
 {: #dedicated_setup}
 
 Chaque environnement {{site.data.keyword.Bluemix_dedicated_notm}} dispose d'un compte d'entreprise public, dont est propriétaire le client, dans {{site.data.keyword.Bluemix_notm}}. Pour que les utilisateurs dans l'environnement Dedicated puissent créer des clusters, l'administrateur doit ajouter ces utilisateurs à un compte d'entreprise public.
@@ -257,7 +257,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 
     1. Entrez un **nom de cluster**. Le nom doit commencer par une lettre, peut contenir des lettres, des nombres et des tirets (-) et ne doit pas dépasser 35 caractères. Le nom du cluster et la région dans laquelle est déployé le cluster constituent le nom de domaine qualifié complet du sous-domaine Ingress. Pour garantir que ce sous-domaine est unique dans une région, le nom de cluster peut être tronqué et complété par une valeur aléatoire dans le nom de domaine Ingress.
 
-    2. Sélectionnez la **Zone** dans laquelle déployer votre cluster. La zone disponible a été prédéfinie lors de la configuration de l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}. 
+    2. Sélectionnez la **Zone** dans laquelle déployer votre cluster. La zone disponible a été prédéfinie lors de la configuration de l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}.
 
     3. Sélectionnez la version du serveur d'API Kubernetes pour le noeud maître du cluster.
 
@@ -275,9 +275,9 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
     6. Sélectionnez le **nombre de noeuds worker** dont vous avez besoin. Sélectionnez `3` pour assurer une haute disponibilité de votre cluster.
 
     7. Sélectionnez un **VLAN public** (facultatif) et un **VLAN privé** (obligatoire). Les VLAN public et privé sont prédéfinis lorsque l'environnement {{site.data.keyword.Bluemix_dedicated_notm}} est configuré. Ces deux réseaux VLAN communiquent entre les noeuds worker mais le réseau VLAN public communique également avec le noeud maître Kubernetes géré par IBM. Vous pouvez utiliser le même VLAN pour plusieurs clusters.
-        **Remarque** : si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau.
+        **Remarque** : si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau. Pour plus d'informations, voir [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan).
 
-    8. Par défaut, l'option **Chiffrer le disque local** est sélectionnée. Si vous décochez cette case, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement](cs_secure.html#encrypted_disk).
+    8. Par défaut, l'option **Chiffrer le disque local** est sélectionnée. Si vous décochez cette case, les données de l'environnement d'exécution de conteneur de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement](cs_secure.html#encrypted_disk).
 
 6. Cliquez sur **Créer un cluster**. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds worker**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Présentation**.
     **Remarque :** à chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître Kubernetes de gérer votre cluster.
@@ -285,7 +285,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 ### Création de clusters depuis l'interface CLI
 {: #dedicated_creating_cli}
 
-1.  Installez l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}} et le [plug-in {{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
+1.  Installez l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}} et le [plug-in {{site.data.keyword.containerlong_notm}}](cs_cli_install.html#cs_cli_install).
 2.  Connectez-vous au noeud final pour votre instance {{site.data.keyword.Bluemix_dedicated_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}} et sélectionnez votre compte.
 
     ```
@@ -326,7 +326,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Entrez l'ID du VLAN public que votre environnement dédié est configuré pour utiliser. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, n'indiquez pas cette option. **Remarque** : si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau.</td>
+    <td>Entrez l'ID du VLAN public que votre environnement dédié est configuré pour utiliser. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, n'indiquez pas cette option. **Remarque** : si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau. Pour plus d'informations, voir [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan).</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -374,7 +374,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -391,7 +391,7 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -454,14 +454,14 @@ Concevez la configuration de votre cluster {{site.data.keyword.Bluemix_dedicated
 ### Ajout de noeuds worker
 {: #add_workers}
 
-Avec {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez uniquement créer des [clusters à zone unique](cs_clusters.html#single_zone). Par défaut, un cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](cs_clusters.html#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](cs_clusters.html#add_pool). Lorsque vous ajoutez un pool de noeuds worker, vous devez ajouter la zone disponible pour ce pool de sorte que les noeuds worker puissent se déployer dans cette zone. En revanche, vous ne pouvez pas ajouter d'autres zones à vos pools de noeuds worker.
+Avec {{site.data.keyword.Bluemix_dedicated_notm}}, vous pouvez uniquement créer des [clusters à zone unique](cs_clusters_planning.html#single_zone). Par défaut, un cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](cs_clusters.html#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](cs_clusters.html#add_pool). Lorsque vous ajoutez un pool de noeuds worker, vous devez ajouter la zone disponible pour ce pool de sorte que les noeuds worker puissent se déployer dans cette zone. En revanche, vous ne pouvez pas ajouter d'autres zones à vos pools de noeuds worker.
 
 ### Utilisation de registres d'images privés et publics
 {: #dedicated_images}
 
 Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des images de conteneur.
 
-Pour les nouveaux espaces de nom, examinez les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containershort_notm}}](cs_images.html). Pour les espaces de nom configurés pour des groupes uniques et évolutifs, [utilisez un jeton et créez une valeur confidentielle Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) pour l'authentification.
+Pour les nouveaux espaces de nom, examinez les options dans [Utilisation de registres d'images privés et publics avec {{site.data.keyword.containerlong_notm}}](cs_images.html). Pour les espaces de nom configurés pour des groupes uniques et évolutifs, [utilisez un jeton et créez une valeur confidentielle Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) pour l'authentification.
 
 ### Ajout de sous-réseaux à des clusters
 {: #dedicated_cluster_subnet}
@@ -471,7 +471,7 @@ Vous pouvez modifier le pool d'adresses IP publiques portables disponibles en aj
 #### Ajout à vos clusters Kubernetes de sous-réseaux et d'adresses IP supplémentaires gérés par l'utilisateur
 {: #dedicated_byoip_subnets}
 
-Vous pouvez ajouter un nombre supplémentaire de vos propres sous-réseaux depuis un réseau sur site, que vous désirez utiliser pour accéder à {{site.data.keyword.containershort_notm}}. Vous pouvez ajouter des adresses IP de ces sous-réseaux à Ingress et aux services d'équilibreur de charge dans votre cluster Kubernetes. Les sous-réseaux gérés par l'utilisateur sont configurés de deux manières selon le format du sous-réseau que vous désirez utiliser.
+Vous pouvez ajouter un nombre supplémentaire de vos propres sous-réseaux depuis un réseau sur site, que vous désirez utiliser pour accéder à {{site.data.keyword.containerlong_notm}}. Vous pouvez ajouter des adresses IP de ces sous-réseaux à Ingress et aux services d'équilibreur de charge dans votre cluster Kubernetes. Les sous-réseaux gérés par l'utilisateur sont configurés de deux manières selon le format du sous-réseau que vous désirez utiliser.
 
 Conditions requises :
 - Les sous-réseaux gérés par l'utilisateur peuvent être ajoutés uniquement à des réseaux locaux virtuels (VLAN) privés.
@@ -507,7 +507,7 @@ Avant de commencer : Configurez le routage entrant et sortant du trafic réseau 
     ```
     {: screen}
 
-4. **Important** : pour activer la communication entre des noeuds worker qui se trouvent dans différents sous-réseaux d'un même VLAN, vous devez [activer le routage entre les sous-réseaux sur le même VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+4. **Important** : si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
 
 5. Pour configurer une connectivité sur site et de compte interne, sélectionnez entre les options suivantes :
   - Si vous avez sélectionné une plage d'adresses IP privées 10.x.x.x pour le sous-réseau, utilisez des adresses IP valides sur cette plage pour configurer la connectivité sur site et du compte interne avec Ingress et un équilibreur de charge. Pour plus d'informations, voir [Planification réseau avec les services NodePort, LoadBalancer ou Ingress](cs_network_planning.html#planning).
@@ -558,4 +558,6 @@ Si vous désirez utiliser des adresses IP publiques pour l'équilibreur de charg
 ### Création de stockage persistant
 {: #dedicated_apps_volume_claim}
 
-Pour examiner les options de création de stockage persistant, voir [Options de stockage de données persistant](cs_storage_planning.html#persistent). Pour demander une sauvegarde de vos volumes, une restauration à partir de vos volumes ou une suppression de volumes, vous devez [ouvrir un ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Pour examiner les options de création de stockage persistant, voir la rubrique correspondant aux options de stockage de données persistant. Pour demander une sauvegarde de vos volumes, une restauration à partir de vos volumes, une suppression de volumes ou la prise d'instantané régulière de votre stockage de fichiers, vous devez [ouvrir un ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+Si vous choisissez de mettre à disposition du [stockage de fichiers](cs_storage_file.html#predefined_storageclass), sélectionnez des classes de stockage sans retain. Les classes de stockage sans retain permettent d'éviter les instances de stockage persistant orphelines dans l'infrastructure IBM Cloud (SoftLayer) que vous ne pouvez supprimer qu'en ouvrant un ticket de demande de service.

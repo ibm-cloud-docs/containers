@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2018-08-06"
 
 按一下選項以開始使用：
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="按一下圖示，以快速開始使用 {{site.data.keyword.containershort_notm}}。透過 {{site.data.keyword.Bluemix_dedicated_notm}}，按一下此圖示以查看選項。" style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="按一下圖示，以快速開始使用 {{site.data.keyword.containerlong_notm}}。透過 {{site.data.keyword.Bluemix_dedicated_notm}}，按一下此圖示以查看選項。" style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" title="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="安裝 CLI。" title="安裝 CLI。" shape="rect" coords="155, -1, 289, 210" />
@@ -54,7 +54,7 @@ lastupdated: "2018-08-06"
 
 若要建立免費叢集，請執行下列動作：
 
-1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **{{site.data.keyword.containershort_notm}}**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
+1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **{{site.data.keyword.containerlong_notm}}**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
 
 2. 為叢集提供唯一名稱。
 
@@ -71,8 +71,8 @@ lastupdated: "2018-08-06"
 **下一步為何？**</br>
 在到期之前，請試著使用您的免費叢集來做一些事情。
 
-* 瀏覽[第一個 {{site.data.keyword.containershort_notm}} 指導教學](cs_tutorials.html#cs_cluster_tutorial)來建立 Kubernetes 叢集、安裝 CLI、建立專用登錄、設定叢集環境，以及將服務新增至叢集。
-* 使用將應用程式部署至叢集的[第二個 {{site.data.keyword.containershort_notm}} 指導教學](cs_tutorials_apps.html#cs_apps_tutorial)持續執行作業。
+* 瀏覽[第一個 {{site.data.keyword.containerlong_notm}} 指導教學](cs_tutorials.html#cs_cluster_tutorial)來建立 Kubernetes 叢集、安裝 CLI、建立專用登錄、設定叢集環境，以及將服務新增至叢集。
+* 使用將應用程式部署至叢集的[第二個 {{site.data.keyword.containerlong_notm}} 指導教學](cs_tutorials_apps.html#cs_apps_tutorial)持續執行作業。
 * [建立標準叢集](cs_clusters.html#clusters_ui)（含多個節點），以提高可用性。
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 [Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/info/istio) é uma plataforma aberta para conectar, proteger, controlar e observar serviços em plataformas em nuvem, como o Kubernetes no {{site.data.keyword.containerlong}}. Com o Istio, é possível gerenciar o tráfego de rede, fazer o balanceamento de carga entre microsserviços, cumprir políticas de acesso e verificar a identidade de serviço e muito mais.
 {:shortdesc}
 
-Neste tutorial, será possível ver como instalar o Istio com quatro microsserviços para um app mock simples de livraria chamado BookInfo. Os microsserviços incluem uma página da web do produto, detalhes do livro, revisões e classificações. Ao implementar microsserviços de BookInfo em um cluster do {{site.data.keyword.containershort}} no qual o Istio está instalado, você injeta os proxies de sidecar Istio Envoy nos pods de cada microsserviço.
+Neste tutorial, será possível ver como instalar o Istio com quatro microsserviços para um app mock simples de livraria chamado BookInfo. Os microsserviços incluem uma página da web do produto, detalhes do livro, revisões e classificações. Ao implementar microsserviços de BookInfo em um cluster do {{site.data.keyword.containerlong}} no qual o Istio está instalado, você injeta os proxies de sidecar Istio Envoy nos pods de cada microsserviço.
 
 ## Objetivos
 
@@ -41,8 +41,8 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 
 ## Pré-requisitos
 
--  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containershort_notm}} e a CLI do Kubernetes](cs_cli_install.html#cs_cli_install_steps). O Istio requer o Kubernetes versão 1.9 ou superior. Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
--  [Crie um cluster](cs_clusters.html#clusters_cli) com uma versão do Kubernetes de 1.9 ou superior.
+-  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containerlong_notm}} e a CLI do Kubernetes](cs_cli_install.html#cs_cli_install_steps). O Istio requer o Kubernetes versão 1.9 ou superior. Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
+-  [Crie um cluster que execute o Kubernetes versão 1.9 ou mais recente](cs_clusters.html#clusters_cli) ou [atualize um cluster existente para a versão 1.9](cs_versions.html#cs_v19).
 -  [Destino a CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lição 1: Fazer download e instalar o Istio
@@ -52,8 +52,8 @@ Faça download e instale o Istio em seu cluster.
 {:shortdesc}
 
 1. Instale o Istio usando o [gráfico Helm do IBM Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio).
-    1. [Instale o Helm para seu cluster e inclua o repositório IBM em sua instância do Helm](cs_integrations.html#helm).
-    2. Instale as definições de recurso customizado do Istio.
+    1. [Configure o Helm em seu cluster e inclua o repositório IBM em sua instância do Helm](cs_integrations.html#helm).
+    2.  **Somente para Helm versões 2.9 ou anterior**: instale as definições de recurso customizado do Istio.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -63,13 +63,8 @@ Faça download e instale o Istio em seu cluster.
         helm install ibm/ibm-istio -- name=istio -- namespace istio-system
         ```
         {: pre}
-    4. Inclua o cliente `istioctl` em seu PATH. Por exemplo, execute o comando a seguir em um sistema Linux ou MacOS:
-       ```
-       export PATH=$PWD/istio-1.0/bin: $PATH
-       ```
-       {: pre}
 
-2. Assegure-se de que os pods para os 9 serviços Istio e para o Prometheus estejam totalmente implementados antes de continuar.
+2. Assegure-se de que os pods para os 9 serviços do Istio e o pod para o Prometheus estejam totalmente implementados antes de continuar.
     ```
     kubectl get pods -n istio-system
     ```
@@ -102,22 +97,23 @@ Implemente os microsserviços do aplicativo de amostra BookInfo para seu cluster
 Esses quatro microsserviços incluem uma página da web do produto, detalhes do livro, revisões (com várias versões do microsserviço de revisão) e classificações. Quando você implementa o BookInfo, os proxies sidecar do Envoy são injetados como contêineres nos pods dos microsserviços do app antes dos pods do microsserviço serem implementados. O Istio usa uma versão estendida do proxy do Envoy para mediar todo o tráfego de entrada e de saída para todos os microsserviços na rede de serviços. Para saber mais sobre o Envoy, consulte a [documentação do Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
 1. Faça o download do pacote do Istio contendo os arquivos necessários do BookInfo.
-    1. Faça download do Istio diretamente do [https://github.com/istio/istio/releases ![Ícone de linkexterno](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/istio/istio/releases) ou obtenha a versão mais recente usando curl:
-
-
+    1. Faça download do Istio diretamente de [https://github.com/istio/istio/releases ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/istio/istio/releases) e extraia os arquivos de instalação ou obtenha a versão mais recente usando cURL:
        ```
        curl -L https://git.io/getLatestIstio | sh -
        ```
        {: pre}
 
-    2. Extraia os arquivos de instalação.
-
-    3. Mude o diretório para o local do arquivo Istio.
-
+    2. Mude o diretório para o local do arquivo Istio.
        ```
-       cd filepath/istio-1.0
+       cd < filepath> /istio-1.0
        ```
        {: pre}
+
+    3. Inclua o cliente `istioctl` em seu PATH. Por exemplo, execute o comando a seguir em um sistema Linux ou MacOS:
+        ```
+        export PATH=$PWD/istio-1.0/bin: $PATH
+        ```
+        {: pre}
 
 2. Rotule o namespace  ` padrão `  com  ` istio-injection=enabled `.
     ```
@@ -125,14 +121,14 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
     ```
     {: pre}
 
-2. Implemente o app BookInfo. Quando os microsserviços do app são implementados, o sidecar do Envoy também é implementado em cada pod de microsserviço.
+3. Implemente o app BookInfo. Quando os microsserviços do app são implementados, o sidecar do Envoy também é implementado em cada pod de microsserviço.
 
    ```
    kubectl apply -f samples / bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
-3. Assegure-se de que os microsserviços e seus pods correspondentes sejam implementados:
+4. Assegure-se de que os microsserviços e seus pods correspondentes sejam implementados:
     ```
     kubectl get svc
     ```
@@ -141,7 +137,6 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
@@ -156,9 +151,6 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
     ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    guestbook-76897854cc-6zsws               1/1       Running     0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
     ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
     reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
@@ -167,7 +159,7 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
     ```
     {: screen}
 
-4. Para verificar a implementação do app, obtenha o endereço público para seu cluster.
+5. Para verificar a implementação do app, obtenha o endereço público para seu cluster.
     * Clusters padrão:
         1. Para expor seu app em um IP de ingresso público, implemente o gateway do BookInfo.
             ```
@@ -185,6 +177,7 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name == "http2 ") ] .port } ')
             ```
+            {: pre}
 
         4. Crie uma variável de ambiente `GATEWAY_URL` que use o host e a porta do ingresso.
 
@@ -212,7 +205,19 @@ Esses quatro microsserviços incluem uma página da web do produto, detalhes do 
      ```
      {: pre}
 
-6. Em um navegador, acesse `http://$GATEWAY_URL/productpage` para visualizar a página da web do BookInfo.
+6.  Visualize a página da web do BookInfo em um navegador.
+
+    Para Mac OS ou Linux:
+    ```
+    open http:// $GATEWAY_URL/productpage
+    ```
+    {: pre}
+
+    Para o Windows:
+    ```
+    start http:// $GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 7. Tente atualizar a página várias vezes. Versões diferentes da seção de revisões executam round robin entre estrelas vermelhas, estrelas pretas e nenhuma estrela.
 
@@ -236,7 +241,7 @@ Se você concluiu o trabalho com o Istio e não deseja [continuar explorando](#i
     ```
     {: pre}
 
-3. Exclua as definições de recurso customizado do Istio.
+3. **Opcional**: se você estiver usando Helm 2.9 ou anterior e aplicou as definições de recurso customizado do Istio, exclua-as.
     ```
     kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
     ```

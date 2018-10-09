@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -52,73 +52,91 @@ mit einer Verbindung zum Konto der IBM Cloud-Infrastruktur (SoftLayer) verfügen
 ```
 {: screen}
 
+```
+IAM token exchange request failed: Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+```
+{: screen}
+
 {: tsCauses}
-Nutzungsabhängige {{site.data.keyword.Bluemix_notm}}-Konten, die erstellt wurden, nachdem die automatische Kontoverknüpfung aktiviert wurde, haben bereits Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer). Somit können Sie Infrastrukturressourcen für Ihren Cluster ohne weitere Konfiguration kaufen.
+Nutzungsabhängige {{site.data.keyword.Bluemix_notm}}-Konten, die erstellt wurden, nachdem die automatische Kontoverknüpfung aktiviert wurde, haben bereits Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer). Somit können Sie Infrastrukturressourcen für Ihren Cluster ohne weitere Konfiguration kaufen. Wenn Sie über ein gültiges nutzungsabhängiges Konto verfügen und diese Fehlernachricht erhalten, verwenden Sie möglicherweise nicht die richtigen Berechtigungsnachweise für das Konto der IBM Cloud-Infrastruktur (SoftLayer), um auf Infrastrukturressourcen zuzugreifen.
 
-Benutzer mit anderen {{site.data.keyword.Bluemix_notm}}-Kontotypen oder Benutzer, die bereits ein Konto von IBM Cloud Infrastructure (SoftLayer) haben, das mit dem {{site.data.keyword.Bluemix_notm}}-Konto noch nicht verknüpft ist, müssen ihre Konten konfigurieren, um Standardcluster zu erstellen. 
-
-Wenn Sie über ein gültiges nutzungsabhängiges Konto verfügen und diese Fehlernachricht erhalten, verwenden Sie möglicherweise nicht die richtigen Berechtigungsnachweise für das Konto der IBM Cloud-Infrastruktur (SoftLayer), um auf Infrastrukturressourcen zuzugreifen.
+Benutzer mit anderen {{site.data.keyword.Bluemix_notm}}-Kontotypen müssen ihre Konten konfigurieren, um Standardcluster zu erstellen. Beispiele für den Fall, dass Sie einen anderen Kontotyp haben:
+* Sie haben ein IBM Cloud Infrastructure-Konto (SoftLayer), das älter als Ihr {{site.data.keyword.Bluemix_notm}}-Plattformkonto ist, und Sie möchten es weiterhin verwenden.
+* Sie möchten ein anderes IBM Cloud-Infrastrukturkonto (SoftLayer) verwenden, in dem die Infrastrukturressourcen eingerichtet werden sollen. Sie können beispielsweise ein {{site.data.keyword.Bluemix_notm}}-Teamkonto einrichten, um ein anderes Infrastrukturkonto für Abrechnungszwecke zu verwenden.
 
 {: tsResolve}
 Der Kontoeigner muss die Berechtigungsnachweise für das Infrastrukturkonto ordnungsgemäß einrichten. Die Berechtigungsnachweise richten sich nach dem Typ des von Ihnen verwendeten Infrastrukturkontos.
-*  Wenn Sie ein aktuelles nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto haben, wird es mit einem verknüpften Infrastrukturkonto geliefert, das Sie verwenden können. [Stellen Sie sicher, dass der API-Schlüssel mit den richtigen Berechtigungen konfiguriert wurde](#apikey).
-*  Wenn Sie einen anderen Typ von {{site.data.keyword.Bluemix_notm}}-Konto haben, überprüfen Sie, ob Sie auf das Infrastruktur-Portfolio zugreifen können und dass [die Berechtigungsnachweise für das Infrastrukturkonto mit den richtigen Berechtigungen eingerichtet sind](#credentials).
 
-Gehen Sie wie folgt vor, um zu überprüfen, ob Ihr Cluster das verknüpfte Infrastrukturkonto oder ein anderes Infrastrukturkonto verwendet:
+**Vorbereitende Schritte**:
+
 1.  Überprüfen Sie, dass Sie Zugriff auf ein Infrastrukturkonto haben. Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/) an und klicken Sie im erweiterbaren Menü auf **Infrastruktur**. Wenn das Dashboard 'Infrastruktur' angezeigt wird, haben Sie Zugriff auf ein Infrastrukturkonto.
-2.  Überprüfen Sie, ob Ihr Cluster ein anderes Infrastrukturkonto verwendet. Klicken Sie im erweiterbaren Menü auf **Container > Cluster**.
-3.  Wählen Sie Ihren Cluster in der Tabelle aus. 
-4.  Wenn auf der Registerkarte **Übersicht** das Feld für den **Infrastrukturbenutzer** angezeigt wird, verwendet der Cluster ein anderes Infrastrukturkonto als das zusammen mit Ihrem nutzungsabhängigen Konto gelieferte Konto.
+2.  Überprüfen Sie, ob Ihr Cluster ein anderes Infrastrukturkonto verwendet als das zusammen mit Ihrem nutzungsabhängigen Konto gelieferte Konto.
+    1.  Klicken Sie im erweiterbaren Menü auf **Container > Cluster**.
+    2.  Wählen Sie Ihren Cluster in der Tabelle aus.
+    3.  Suchen Sie auf der Registerkarte **Übersicht** nach dem Feld **Infrastrukturbenutzer**.
+        * Wenn das Feld **Infrastrukturbenutzer** nicht angezeigt wird, verfügen Sie über ein verlinktes nutzungsabhängiges Konto, das für Ihre Infrastruktur- und Plattformkonten dieselben Berechtigungsnachweise verwendet.
+        * Wenn ein Feld für den **Infrastrukturbenutzer** angezeigt wird, verwendet der Cluster ein anderes Infrastrukturkonto als das zusammen mit Ihrem nutzungsabhängigen Konto gelieferte Konto. Diese verschiedenen Berechtigungsnachweise gelten für alle Cluster in der Region. 
+3.  Entscheiden Sie, welche Art von Konto Sie verwenden möchten, um festzustellen, wie Sie das Problem mit der Infrastrukturberechtigung beheben können. Für die meisten Benutzer ist das standardmäßig verknüpfte nutzungsabhängige Konto ausreichend.
+    *  Verknüpftes nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto: [Stellen Sie sicher, dass der API-Schlüssel mit den richtigen Berechtigungen konfiguriert wurde](#apikey). Wenn Ihr Cluster ein anderes Infrastrukturkonto verwendet, müssen Sie diese Berechtigungsnachweise im Rahmen des Prozesses inaktivieren.
+    *  Andere {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturkonten: Überprüfen Sie, ob Sie auf das Infrastruktur-Portfolio zugreifen können und dass [die Berechtigungsnachweise für das Infrastrukturkonto mit den richtigen Berechtigungen eingerichtet sind](#credentials).
 
-### Infrastruktur-API-Berechtigungsnachweise für verknüpfte Konten konfigurieren
+### Standard-Infrastrukturberechtigungsnachweise für verknüpfte nutzungsabhängige Konten mit dem API-Schlüssel verwenden
 {: #apikey}
 
 1.  Stellen Sie sicher, dass der Benutzer, dessen Berechtigungsnachweise für Infrastrukturaktionen verwendet werden sollen, über die richtigen Berechtigungen verfügt.
 
     1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/) an.
-        
+
     2.  Wählen Sie im erweiterbaren Menü **Infrastruktur** aus.
-        
+
     3.  Wählen Sie in der Menüleiste **Konto** > **Benutzer** > **Benutzerliste** aus.
 
     4.  Stellen Sie in der Spalte **API-Schlüssel** sicher, dass der Benutzer über einen API-Schlüssel verfügt, oder klicken Sie auf die Option zum **Generieren**.
 
     5.  Bestätigen Sie die [Richtigkeit der Infrastrukturberechtigungen](cs_users.html#infra_access) oder weisen Sie dem Benutzer solche zu.
 
-2.  Setzen Sie für die Region, in der sich der Cluster befindet, den API-Schlüssel zurück, sodass er dem Benutzer gehört.
+2.  Legen Sie für die Region, in der sich der Cluster befindet, den API-Schlüssel fest.
+
+    1.  Melden Sie sich bei dem Terminal als der Benutzer an, dessen Infrastrukturberechtigungen Sie verwenden möchten.
     
-    1.  Melden Sie sich am Terminal als der richtige Benutzer an.
+    2.  Wenn Sie sich in einer anderen Region befinden, wechseln Sie in die Region, in der Sie den API-Schlüssel festlegen möchten.
     
-    2.  Setzen Sie den API-Schlüssel auf diesen Benutzer zurück.
-```
+        ```
+        ibmcloud ks region-set
+        ```
+        {: pre}
+
+    3.  Legen Sie den API-Schlüssel für die Region fest.
+        ```
         ibmcloud ks api-key-reset
         ```
         {: pre}    
-    
-    3.  Überprüfen Sie, dass der API-Schlüssel festgelegt wurde.
-```
+
+    4.  Überprüfen Sie, dass der API-Schlüssel festgelegt wurde.
+        ```
         ibmcloud ks api-key-info <clustername_oder-_id>
         ```
         {: pre}
+
+3.  **Optional**: Wenn Ihr nutzungsabhängiges Konto ein anderes Infrastrukturkonto verwendet, um Cluster zur Verfügung zu stellen (wenn Sie z. B. den Befehl `ibmcloud ks credentials-set` verwendet haben), verwendet das Konto weiterhin diese Infrastrukturberechtigungsnachweise anstelle des API-Schlüssels. Sie müssen das zugehörige Infrastrukturkonto entfernen, damit der API-Schlüssel, den Sie im vorherigen Schritt festgelegt haben, verwendet wird.
+    ```
+    ibmcloud ks credentials-unset
+    ```
+    {: pre}
         
-    4.  **Optional**: Wenn Sie zuvor Berechtigungsnachweise manuell mit dem Befehl `ibmcloud ks credentials-set` festgelegt haben, entfernen Sie das zugeordnete Infrastrukturkonto. Der API-Schlüssel, den Sie in den vorherigen Unterschritten festgelegt haben, wird nun zum Bestellen von Infrastruktur verwendet.
-```
-        ibmcloud ks credentials-unset
-        ```
-        {: pre}
+4.  **Optional**: Wenn Sie Ihren öffentlichen Cluster mit lokalen Ressourcen verbinden, müssen Sie die Netzkonnektivität überprüfen.
 
-3.  **Optional**: Wenn Sie Ihren öffentlichen Cluster mit lokalen Ressourcen verbinden, müssen Sie die Netzkonnektivität überprüfen.
-
-    1.  Überprüfen Sie die VLAN-Konnektivität Ihrer Worker. 
+    1.  Überprüfen Sie die VLAN-Konnektivität Ihrer Worker.
     2.  [Richten Sie die VPN-Konnektivität ein](cs_vpn.html#vpn), falls erforderlich.
     3.  [Öffnen Sie in Ihrer Firewall die erforderlichen Ports](cs_firewall.html#firewall).
 
-### Für unterschiedliche Konten Berechtigungsnachweise für Infrastrukturkonto konfigurieren
+### Berechtigungsnachweise für die Infrastruktur für unterschiedliche Plattform- und Infrastrukturkonten konfigurieren
 {: #credentials}
 
 1.  Rufen Sie das Infrastrukturkonto ab, das Sie für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwenden möchten. Sie haben verschiedene Optionen, die sich nach Ihrem aktuellen Kontotyp richten.
 
-    <table summary="In der Tabelle werden die Standardoptionen für die Clustererstellung nach Kontotyp angezeigt. Die Zeilen sind von links nach rechts zu lesen, mit der Kontobeschreibung in Spalte eins und den Optionen zum Erstellen eines Standardclusters in Spalte 2.">  <caption>Erstellungsoptionen für Standardcluster nach Kontotyp</caption>
+    <table summary="In der Tabelle werden die Standardoptionen für die Clustererstellung nach Kontotyp angezeigt. Die Zeilen sind von links nach rechts zu lesen, mit der Kontobeschreibung in Spalte eins und den Optionen zum Erstellen eines Standardclusters in Spalte 2.">
+    <caption>Erstellungsoptionen für Standardcluster nach Kontotyp</caption>
       <thead>
       <th>Kontobeschreibung</th>
       <th>Optionen zum Erstellen eines Standardclusters</th>
@@ -134,11 +152,11 @@ Gehen Sie wie folgt vor, um zu überprüfen, ob Ihr Cluster das verknüpfte Infr
         </tr>
         <tr>
           <td>**Ältere nutzungsabhängige Konten**, die erstellt wurden, bevor die automatische Kontoverknüpfung verfügbar war, haben keinen Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer).<p>Wenn Sie ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, können Sie dieses Konto nicht mit einem älteren nutzungsabhängigen Konto verknüpfen.</p></td>
-          <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account/index.html#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Rechnungen.</p><p>Um Ihr altes nutzungsabhängiges Konto weiterhin zu verwenden, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel generieren. Mit diesem API-Schlüssel greifen Sie auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto festlegen.</p><p>**Anmerkung:** Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur (SoftLayer) herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur (SoftLayer) spezifische Aktion in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](cs_users.html#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p><p>**Fahren Sie bei beiden Optionen mit dem nächsten Schritt fort**.</p></td>
+          <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account/index.html#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Abrechnungen.</p><p>Um Ihr altes nutzungsabhängiges Konto weiterhin zu verwenden, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel generieren. Mit diesem API-Schlüssel greifen Sie auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto festlegen.</p><p>**Anmerkung:** Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur (SoftLayer) herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur (SoftLayer) spezifische Aktion in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](cs_users.html#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p><p>**Fahren Sie bei beiden Optionen mit dem nächsten Schritt fort**.</p></td>
         </tr>
         <tr>
           <td>**Abonnementkonten** werden ohne Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet.</td>
-          <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account/index.html#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet ist. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Abrechnungen.</p><p>Wenn Sie Ihr Abonnementkonto weiterhin verwenden möchten, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel in der IBM Cloud-Infrastruktur (SoftLayer) generieren. Anschließend müssen Sie für Ihr Abonnementkonto den API-Schlüssel der IBM Cloud-Infrastruktur (SoftLayer) manuell festlegen. Beachten Sie, dass Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.Bluemix_notm}}-Konto manuell festlegen.</p><p>**Anmerkung:** Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur (SoftLayer) herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur (SoftLayer) spezifische Aktion in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](cs_users.html#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p><p>**Fahren Sie bei beiden Optionen mit dem nächsten Schritt fort**.</p></td>
+          <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account/index.html#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Abrechnungen.</p><p>Wenn Sie Ihr Abonnementkonto weiterhin verwenden möchten, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel in der IBM Cloud-Infrastruktur (SoftLayer) generieren. Anschließend müssen Sie für Ihr Abonnementkonto den API-Schlüssel der IBM Cloud-Infrastruktur (SoftLayer) manuell festlegen. Beachten Sie, dass Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.Bluemix_notm}}-Konto manuell festlegen.</p><p>**Anmerkung:** Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur (SoftLayer) herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur (SoftLayer) spezifische Aktion in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](cs_users.html#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p><p>**Fahren Sie bei beiden Optionen mit dem nächsten Schritt fort**.</p></td>
         </tr>
         <tr>
           <td>**Konten der IBM Cloud-Infrastruktur (SoftLayer)**, kein {{site.data.keyword.Bluemix_notm}}-Konto</td>
@@ -150,9 +168,9 @@ Gehen Sie wie folgt vor, um zu überprüfen, ob Ihr Cluster das verknüpfte Infr
 2.  Stellen Sie sicher, dass der Benutzer, dessen Berechtigungsnachweise für Infrastrukturaktionen verwendet werden sollen, über die richtigen Berechtigungen verfügt.
 
     1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/) an.
-        
+
     2.  Wählen Sie im erweiterbaren Menü **Infrastruktur** aus.
-        
+
     3.  Wählen Sie in der Menüleiste **Konto** > **Benutzer** > **Benutzerliste** aus.
 
     4.  Stellen Sie in der Spalte **API-Schlüssel** sicher, dass der Benutzer über einen API-Schlüssel verfügt, oder klicken Sie auf die Option zum **Generieren**.
@@ -162,18 +180,20 @@ Gehen Sie wie folgt vor, um zu überprüfen, ob Ihr Cluster das verknüpfte Infr
 3.  Legen Sie die Infrastruktur-API-Berechtigungsnachweise mit dem richtigen Benutzer für das Konto fest.
 
     1.  Rufen Sie die Infrastruktur-API-Berechtigungsnachweise des Benutzers ab. **Anmerkung**: Die Berechtigungsnachweise lauten anders als die IBMid.
-            
+
         1.  Klicken Sie in der Tabelle **Infrastruktur** > **Konto** > **Benutzer** > **Benutzerliste** der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/) auf **IBMid** oder **Benutzername**.
-            
+
         2.  Zeigen Sie im Abschnitt **API-Zugriffsinformationen** die Werte für **API-Benutzername** und **Authentifizierungsschlüssel** an.    
-        
+
     2.  Legen Sie die zu verwendenden Berechtigungsnachweise für die Infrastruktur-API fest.
-```
+        ```
         ibmcloud ks credentials-set --infrastructure-username <infrastruktur-api-benutzername> --infrastructure-api-key <infrastruktur-api-authentifizierungsschlüssel>
-  
+        ```
+        {: pre}
+
 4.  **Optional**: Wenn Sie Ihren öffentlichen Cluster mit lokalen Ressourcen verbinden, müssen Sie die Netzkonnektivität überprüfen.
 
-    1.  Überprüfen Sie die VLAN-Konnektivität Ihrer Worker. 
+    1.  Überprüfen Sie die VLAN-Konnektivität Ihrer Worker.
     2.  [Richten Sie die VPN-Konnektivität ein](cs_vpn.html#vpn), falls erforderlich.
     3.  [Öffnen Sie in Ihrer Firewall die erforderlichen Ports](cs_firewall.html#firewall).
 
@@ -231,7 +251,7 @@ Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard je
 
 
 {: tsCauses}
-Möglicherweise wurde eine weitere Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
+Möglicherweise wurde eine weitere Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
 
 {: tsResolve}
 [Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_firewall.html#firewall_outbound). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
@@ -267,21 +287,21 @@ Instance ID inconsistent with worker records
 {: screen}
 
 {: tsCauses}
-Die Maschinen-ID und der {{site.data.keyword.containershort_notm}}-Workerdatensatz können inkonsistent werden, wenn die Maschine Hardwareprobleme hat. Wenn die IBM Cloud-Infrastruktur (SoftLayer) dieses Problem behebt, kann sich eine Komponente innerhalb des Systems ändern, die der Service nicht identifiziert.
+Die Maschinen-ID und der {{site.data.keyword.containerlong_notm}}-Workerdatensatz können inkonsistent werden, wenn die Maschine Hardwareprobleme hat. Wenn die IBM Cloud-Infrastruktur (SoftLayer) dieses Problem behebt, kann sich eine Komponente innerhalb des Systems ändern, die der Service nicht identifiziert.
 
 {: tsResolve}
-Damit {{site.data.keyword.containershort_notm}} die Maschine erneut identifizieren kann, [laden Sie den Bare-Metal-Workerknoten erneut](cs_cli_reference.html#cs_worker_reload). **Anmerkung**: Durch das erneute Laden wird außerdem die [Patchversion](cs_versions_changelog.html) der Maschine aktualisiert.
+Damit {{site.data.keyword.containerlong_notm}} die Maschine erneut identifizieren kann, [laden Sie den Bare-Metal-Workerknoten erneut](cs_cli_reference.html#cs_worker_reload). **Anmerkung**: Durch das erneute Laden wird außerdem die [Patchversion](cs_versions_changelog.html) der Maschine aktualisiert.
 
 Sie können auch [den Bare-Metal-Workerknoten löschen](cs_cli_reference.html#cs_cluster_rm). **Anmerkung**: Die Abrechnung für Bare-Metal-Instanzen erfolgt monatlich.
 
 <br />
 
 
-## `kubectl exec` und `kubectl logs` funktionieren nicht
+## `kubectl`-Befehle überschreiten Zeitlimit
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-Wenn Sie `kubectl exec` oder `kubectl logs` ausführen, wird die folgende Nachricht angezeigt.
+Wenn Sie Befehle wie `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward` oder `kubectl logs` ausführen, wird die folgende Nachricht angezeigt: 
 
   ```
   <worker-ip>:10250: getsockopt: connection timed out
@@ -292,7 +312,7 @@ Wenn Sie `kubectl exec` oder `kubectl logs` ausführen, wird die folgende Nachri
 Die OpenVPN-Verbindung zwischen dem Masterknoten und dem Workerknoten funktioniert möglicherweise nicht ordnungsgemäß.
 
 {: tsResolve}
-1. Aktivieren Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr IBM Cloud-Infrastructure-Konto (SoftLayer).
+1. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). 
 2. Starten Sie den OpenVPN-Client-Pod erneut.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -412,6 +432,25 @@ Um Services an einen Cluster zu binden, müssen Sie über die Benutzerrolle des 
 <br />
 
 
+## Bindung eines Service an einen Cluster führt zu einem Fehler des Typs 'Service unterstützt Serviceschlüssel nicht'
+{: #cs_service_keys}
+
+{: tsSymptoms}
+Wenn Sie `ibmcloud ks cluster-service-bind <clustername> <namensbereich> <serviceinstanzname>` ausführen, wird die folgende Nachricht angezeigt:
+
+```
+Dieser Service unterstützt nicht das Erstellen von Schlüsseln.
+```
+{: screen}
+
+{: tsCauses}
+Bestimmte Services in {{site.data.keyword.Bluemix_notm}}, wie z. B. {{site.data.keyword.keymanagementservicelong}}, unterstützen nicht das Erstellen von Serviceberechtigungsnachweisen, die auch als Serviceschlüssel bezeichnet werden. Ohne die Unterstützung von Serviceschlüsseln kann ein Cluster nicht gebunden werden. Informationen zum Suchen einer Liste von Services, die das Erstellen von Serviceschlüsseln unterstützen, finden Sie unter [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external).
+
+{: tsResolve}
+Wenn Sie Services integrieren möchten, die keine Serviceschlüssel unterstützen, überprüfen Sie, ob der Service eine API bereitstellt, die Sie für den direkten Zugriff auf den Service über Ihre App verwenden können. Wenn Sie z. B. {{site.data.keyword.keymanagementservicelong}} verwenden möchten, finden Sie weitere Informationen hierzu in der [API-Referenz![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://console.bluemix.net/apidocs/kms?language=curl). 
+
+<br />
+
 
 ## Nachdem ein Workerknoten aktualisiert oder erneut geladen wurde, werden doppelte Knoten und Pods angezeigt
 {: #cs_duplicate_nodes}
@@ -454,8 +493,8 @@ Aktualisieren Sie die Referenz der privaten IP-Adresse manuell, um auf den korre
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.5
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.5
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
   ```
   {: screen}
 
@@ -556,7 +595,11 @@ Sie können eine der folgenden Lösungen ausprobieren:
 Beim Ausführen von `kubectl get pods` verbleiben Pods weiterhin im Status **Pending** (Anstehend).
 
 {: tsCauses}
-Wenn Sie den Kubernetes-Cluster gerade erst erstellt haben, werden die Workerknoten möglicherweise noch konfiguriert. Falls dieser Cluster bereits vorhanden ist, steht unter Umständen nicht ausreichend Kapazität für die Bereitstellung des Pods in Ihrem Cluster zur Verfügung.
+Wenn Sie den Kubernetes-Cluster gerade erst erstellt haben, werden die Workerknoten möglicherweise noch konfiguriert. 
+
+Falls dieser Cluster bereits vorhanden ist: 
+*  Möglicherweise ist in Ihrem Cluster nicht ausreichend Kapazität verfügbar, um den Pod bereitzustellen.
+*  Der Pod kann eine Ressourcenanforderung oder einen Grenzwert überschritten haben.
 
 {: tsResolve}
 Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
@@ -602,11 +645,20 @@ Falls dieser Cluster bereits vorhanden ist, prüfen Sie Ihre Clusterkapazität.
         ```
         {: pre}
 
-5.  Falls Ihre Pods auch weiterhin im Status **Pending** (Anstehend) verweilen, obwohl der Workerknoten voll bereitgestellt wurde, ziehen Sie die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) zurate, um die Ursache für den andauernden Status 'Pending' Ihres Pods zu ermitteln und den Fehler zu beheben.
+5.  Optional: Überprüfen Sie Ihre Podressourcenanforderungen.
+
+    1.  Vergewissern Sie sich, dass die Werte für `resources.requests` nicht größer sind als die Kapazität des Workerknotens. Beispiel: Wenn die Podanforderung `cpu: 4000m` - oder 4 Kerne - beträgt, der Workerknoten aber nur 2 Kerne umfasst, kann der Pod nicht bereitgestellt werden.
+
+        ```
+        kubectl get pod <podname> -o yaml
+        ```
+        {: pre}
+    
+    2.  Wenn die Anforderung die verfügbare Kapazität überschreitet, [fügen Sie einen neuen Worker-Pool](cs_clusters.html#add_pool) mit Workerknoten hinzu, die die Anforderung erfüllen können.
+
+6.  Falls Ihre Pods auch weiterhin im Status **Pending** (Anstehend) verweilen, obwohl der Workerknoten voll bereitgestellt wurde, ziehen Sie die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) zurate, um die Ursache für den andauernden Status 'Pending' Ihres Pods zu ermitteln und den Fehler zu beheben.
 
 <br />
-
-
 
 
 ## Container werden nicht gestartet
@@ -621,8 +673,9 @@ Die Container werden möglicherweise nicht gestartet, wenn die Registry-Quote er
 {: tsResolve}
 [Geben Sie Speicherplatz in {{site.data.keyword.registryshort_notm}} frei.](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-<br />
 
+
+<br />
 
 
 ## Ein Helm-Diagramm kann nicht mit aktualisierten Konfigurationswerten installiert werden.
@@ -693,15 +746,17 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Helm-Diagramm zu beheben:
 Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
+-  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
+
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
 
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
 
-    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containershort_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
-    -   Verwenden Sie für Fragen zum Service und zu ersten Schritten das Forum [IBM developerWorks dW Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
+    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
+    -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
 -   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).

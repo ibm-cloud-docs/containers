@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,7 +25,7 @@ Découvrez la technologie sur laquelle s'appuie {{site.data.keyword.containerlon
 ## Conteneurs Docker
 {: #docker_containers}
 
-S'appuyant sur la technologie de conteneur Linux (LXC), le projet open source Docker a défini des modèles pour conditionner des logiciels dans des unités normalisées, appelées des conteneurs, incluant tous les éléments dont une application a besoin pour s'exécuter.
+S'appuyant sur la technologie de conteneur Linux (LXC), le projet open source Docker a défini des modèles pour conditionner des logiciels dans des unités normalisées, appelées des conteneurs, incluant tous les éléments dont une application a besoin pour s'exécuter. {{site.data.keyword.containerlong_notm}} utilise `containerd` comme environnement d'exécution de conteneur pour déployer des conteneurs à partir d'une image de conteneur Docker dans votre cluster.
 {:shortdesc}
 
 En savoir plus sur certains concepts de base Docker :
@@ -34,7 +34,7 @@ En savoir plus sur certains concepts de base Docker :
 <dt>Image</dt>
 <dd>Une image de conteneur sert de base pour tous les conteneurs que vous souhaitez exécuter. Les images de conteneur sont générées à partir d'un fichier Dockerfile, qui correspond à un fichier texte définissant comment construire l'image et qui génère les artefacts à inclure dedans, comme par exemple l'application, la configuration de l'application et les dépendances associées. Les images sont toujours construites à partir d'autres images, ce qui les rend faciles à configurer. Quelqu'un d'autre peut faire le gros du travail sur une image en vous laissant le soin de la personnaliser.</dd>
 <dt>Registre</dt>
-<dd>Un registre d'images est un endroit où stocker, extraire et partager des images de conteneur. Les images stockées dans un registre peuvent être accessibles au public (registre public) ou uniquement à un petit groupe d'utilisateurs (registre privé). {{site.data.keyword.containershort_notm}} propose des images publiques, telles que ibmliberty, que vous pouvez utiliser pour créer votre première application conteneurisée. Dans le cas d'applications d'entreprise, utilisez un registre privé tel que celui fourni dans {{site.data.keyword.Bluemix_notm}} pour protéger vos images contre une utilisation par des utilisateurs non autorisés.
+<dd>Un registre d'images est un endroit où stocker, extraire et partager des images de conteneur. Les images stockées dans un registre peuvent être accessibles au public (registre public) ou uniquement à un petit groupe d'utilisateurs (registre privé). {{site.data.keyword.containerlong_notm}} propose des images publiques, telles que ibmliberty, que vous pouvez utiliser pour créer votre première application conteneurisée. Dans le cas d'applications d'entreprise, utilisez un registre privé tel que celui fourni dans {{site.data.keyword.Bluemix_notm}} pour protéger vos images contre une utilisation par des utilisateurs non autorisés.
 </dd>
 <dt>Conteneur</dt>
 <dd>Chaque conteneur est créé à partir d'une image. Un conteneur est un package d'application avec toutes ses dépendances de sorte que l'application puisse être transférée entre des environnements et exécutée sans modifications. Contrairement aux machines virtuelles, les conteneurs ne virtualisent pas une unité, son système d'exploitation et le matériel sous-jacent. Seuls le code d'application, l'environnement d'exécution, les outils système, les bibliothèques et les paramètres sont inclus dans le conteneur. Les conteneurs opèrent sous forme de processus isolés sur des hôtes de calcul Ubuntu et partagent le système d'exploitation hôte et ses ressources matérielles. Cette approche rend le conteneur encore plus léger, portable et efficace qu'une machine virtuelle.</dd>
@@ -61,7 +61,7 @@ En savoir plus sur certains concepts de base Docker :
 
 <p>Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des images de conteneur.</p>
 
-<p>Prêt à en savoir plus sur Docker ? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Découvrez comment Docker et {{site.data.keyword.containershort_notm}} fonctionnent ensemble en suivant ce cours.</a></p>
+<p>Prêt à en savoir plus sur Docker ? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Découvrez comment Docker et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></p>
 
 </dl>
 
@@ -104,7 +104,7 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 
 <p>Prêt à en savoir plus sur Kubernetes ?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Développez vos connaissances en termes de terminologie avec le tutoriel Création de clusters</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Découvrez comment Kubernetes et {{site.data.keyword.containershort_notm}} fonctionnent ensemble en suivant ce cours.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Découvrez comment Kubernetes et {{site.data.keyword.containerlong_notm}} fonctionnent ensemble en suivant ce cours.</a></li></ul>
 
 
 </dl>
@@ -115,14 +115,14 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 ## Architecture de service
 {: #architecture}
 
-Dans un cluster Kubernetes qui s'exécute sur {{site.data.keyword.containershort_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Plus précisément, les applications s'exécutent dans des pods et ces pods sont hébergés sur des noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. Le maître Kubernetes et les noeuds worker communiquent entre eux au moyen de certificats TLS sécurisés et d'une connexion OpenVPN pour orchestrer vos configurations de cluster.
+Dans un cluster Kubernetes qui s'exécute sur {{site.data.keyword.containerlong_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Plus précisément, les applications s'exécutent dans des pods et ces pods sont hébergés sur des noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. Le maître Kubernetes et les noeuds worker communiquent entre eux au moyen de certificats TLS sécurisés et d'une connexion OpenVPN pour orchestrer vos configurations de cluster.
 {: shortdesc}
 
 La figure suivante présente les composants de votre cluster et montre comment ils interagissent.
 <p>
 <figure>
  <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - Architecture">
- <figcaption>Architecture d'{{site.data.keyword.containershort_notm}}</figcaption>
+ <figcaption>Architecture d'{{site.data.keyword.containerlong_notm}}</figcaption>
 </figure>
 </p>
 
@@ -164,7 +164,7 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     <table>
     <caption>Composants des noeuds worker</caption>
     <thead>
-    <th>Composant du noeud worker</th>
+    <th>Composant de noeud worker</th>
     <th>Espace de nom</th>
     <th>Description</th>
     </thead>
@@ -180,7 +180,7 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     <td>Le contrôleur Calico Policy Controller examine le trafic réseau entrant et sortant pour voir s'il est conforme aux règles de sécurité établies. Si le trafic n'est pas autorisé dans le cluster, l'accès au cluster est bloqué. Calico Policy Controller est également utilisé pour créer et définir des règles réseau pour un cluster.</td>
     </tr>
     <tr>
-    <td>IBM Storage Provider</td>
+    <td>Storage Provider</td>
     <td>kube-system</td>
     <td>Tous les clusters sont configurés avec un plug-in pour mettre à disposition du stockage de fichiers. Vous pouvez opter pour l'installation d'autres modules complémentaires, comme par exemple le stockage par blocs.</td>
     </tr>
@@ -210,19 +210,19 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
     <td>Le noeud Calico est un conteneur qui regroupe les différents composants requis pour mettre en réseau les conteneurs avec Calico.</td>
     </tr>
     <tr>
-    <td>IBM Logging and Metrics</td>
+    <td>Logging and Metrics</td>
     <td>ibm-system</td>
     <td>Vous pouvez recourir aux services intégrés {{site.data.keyword.loganalysislong_notm}} et {{site.data.keyword.monitoringlong_notm}} pour étendre vos fonctions de collecte et de conservation lorsque vous utiliser des journaux et des indicateurs.</td>
     </tr>
     <tr>
-    <td>ALB Ingress IBM</td>
+    <td>ALB Ingress</td>
     <td>ibm-system</td>
     <td>Ingress est un service Kubernetes que vous pouvez utiliser pour l'équilibrage de vos charges de travail réseau dans votre cluster en transférant des demandes publiques ou privées à plusieurs applications dans votre cluster. Pour exposer vos applications sur le réseau public ou privé, vous devez créer une ressource Ingress pour enregistrer vos applications auprès de l'équilibreur de charge d'application (ALB) Ingress. L'accès à plusieurs applications peut alors s'effectuer en utilisant une seule adresse URL ou une seule adresse IP.</td>
     </tr>
     <tr>
-    <td>IBM Load Balancer</td>
+    <td>Equilibreur de charge</td>
     <td>ibm-system</td>
-    <td>Un équilibreur de charge est un service Kubernetes que vous pouvez utiliser pour l'équilibrage de vos charges de travail réseau dans votre cluster en transférant des demandes publiques ou privées à une application. </td>
+    <td>Un équilibreur de charge est un service Kubernetes que vous pouvez utiliser pour l'équilibrage de vos charges de travail réseau dans votre cluster en transférant des demandes publiques ou privées à une application.</td>
     </tr>
     <tr>
     <td>Pods et services d'application</td>

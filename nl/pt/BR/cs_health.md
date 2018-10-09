@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ Configure a criação de log e o monitoramento no {{site.data.keyword.containerl
 ## Entendendo o cluster e o encaminhamento de log do app
 {: #logging}
 
-O monitoramento e a criação de log contínuos são a chave para detectar ataques em seu cluster e questões de resolução de problemas à medida que eles surgem. Monitoramento continuamente seu cluster, você é capaz de entender melhor a capacidade do cluster e a disponibilidade de recursos que estão disponíveis para seu app. Isso permite que você se prepare adequadamente para proteger seus apps com relação ao tempo de inatividade. Para configurar a criação de log, deve-se estar trabalhando com um cluster padrão do Kubernetes no {{site.data.keyword.containershort_notm}}.
+O monitoramento e a criação de log contínuos são a chave para detectar ataques em seu cluster e questões de resolução de problemas à medida que eles surgem. Monitoramento continuamente seu cluster, você é capaz de entender melhor a capacidade do cluster e a disponibilidade de recursos que estão disponíveis para seu app. Isso permite que você se prepare adequadamente para proteger seus apps com relação ao tempo de inatividade. Para configurar a criação de log, deve-se estar trabalhando com um cluster padrão do Kubernetes no {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
 **A IBM monitora o meu cluster?**
-Cada mestre do Kubernetes é monitorado continuamente pela IBM. O {{site.data.keyword.containershort_notm}} varre automaticamente cada nó no qual o mestre do Kubernetes é implementado para vulnerabilidades localizadas em correções de segurança específicas do Kubernetes e do S.O. Se vulnerabilidades forem localizadas, o {{site.data.keyword.containershort_notm}} aplicará automaticamente as correções e resolverá as vulnerabilidades em nome do usuário para assegurar proteção do nó principal. Você é responsável por monitorar e analisar os logs para o restante de seu cluster.
+Cada mestre do Kubernetes é monitorado continuamente pela IBM. O {{site.data.keyword.containerlong_notm}} varre automaticamente cada nó no qual o mestre do Kubernetes é implementado para vulnerabilidades localizadas em correções de segurança específicas do Kubernetes e do S.O. Se vulnerabilidades forem localizadas, o {{site.data.keyword.containerlong_notm}} aplicará automaticamente as correções e resolverá as vulnerabilidades em nome do usuário para assegurar proteção do nó principal. Você é responsável por monitorar e analisar os logs para o restante de seu cluster.
 
 **Quais são as origens para as quais eu posso configurar a criação de log?**
 
@@ -136,13 +136,13 @@ Para fazer mudanças em suas configurações de criação de log ou de filtro, o
 ## Configurando o encaminhamento de log
 {: #configuring}
 
-É possível configurar a criação de log para o {{site.data.keyword.containershort_notm}} por meio da GUI ou da CLI.
+É possível configurar a criação de log para o {{site.data.keyword.containerlong_notm}} por meio da GUI ou da CLI.
 {: shortdesc}
 
 ### Ativando o encaminhamento de log com a GUI
 {: #enable-forwarding-ui}
 
-É possível configurar o encaminhamento de log no painel do {{site.data.keyword.containershort_notm}}. Pode levar alguns minutos para o processo ser concluído, então, se você não vir logs imediatamente, tente esperar alguns minutos e, em seguida, verifique novamente.
+É possível configurar o encaminhamento de log no painel do {{site.data.keyword.containerlong_notm}}. Pode levar alguns minutos para o processo ser concluído, então, se você não vir logs imediatamente, tente esperar alguns minutos e, em seguida, verifique novamente.
 
 Para criar uma configuração no nível de conta, para um namespace de contêiner específico ou para a criação de log do app, use a CLI.
 {: tip}
@@ -163,8 +163,8 @@ Para criar uma configuração no nível de conta, para um namespace de contêine
 
 ** Forwarding logs para a IBM **
 
-1. Verifique as permissões. Se você especificou um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave API do {{site.data.keyword.containershort_notm}} precisam de [permissões](cs_users.html#access_policies) de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
-  * Se você não souber quem é o proprietário da chave API do {{site.data.keyword.containershort_notm}}, execute o comando a seguir.
+1. Verifique as permissões. Se você especificou um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave API do {{site.data.keyword.containerlong_notm}} precisam de [permissões](cs_users.html#access_policies) de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
+  * Se você não souber quem é o proprietário da chave API do {{site.data.keyword.containerlong_notm}}, execute o comando a seguir.
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
@@ -323,7 +323,7 @@ As etapas a seguir são instruções gerais. Antes de usar o contêiner em um am
 ### Exibindo logs
 {: #view_logs}
 
-Para visualizar os logs para clusters e contêineres, é possível usar os recursos padrão do Kubernetes e de criação de log do Docker.
+Para visualizar logs para clusters e contêineres, é possível usar os recursos padrão de criação de log do Kubernetes e de tempo de execução do contêiner.
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -332,7 +332,7 @@ Para visualizar os logs para clusters e contêineres, é possível usar os recur
 É possível visualizar os logs que você encaminhou para o {{site.data.keyword.loganalysislong_notm}} por meio do painel do Kibana.
 {: shortdesc}
 
-Se você usou os valores padrão para criar seu arquivo de configuração, seus logs podem ser localizados na conta, ou organização e espaço, em que o cluster foi criado. Se você especificou uma organização e espaço em seu arquivo de configuração, é possível localizar seus logs nesse espaço. Para obter mais informações sobre a criação de log, veja [Criação de log para o {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Se você usou os valores padrão para criar seu arquivo de configuração, seus logs podem ser localizados na conta, ou organização e espaço, em que o cluster foi criado. Se você especificou uma organização e espaço em seu arquivo de configuração, é possível localizar seus logs nesse espaço. Para obter mais informações sobre criação de log, consulte [Criação de log para o {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} no qual você configurou o encaminhamento de log para o cluster.
 - Sul e Leste dos EUA: https://logging.ng.bluemix.net
@@ -344,9 +344,9 @@ Para obter mais informações sobre como visualizar logs, veja [Navegando para o
 
 </br>
 
-**Logs do Docker**
+** Logs do contêiner **
 
-É possível alavancar os recursos de criação de log do Docker integrados para revisar as atividades nos fluxos de saída padrão STDOUT e STDERR. Para obter mais informações, veja [Visualizando logs de contêiner para um contêiner que é executado em um cluster do Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+É possível alavancar os recursos de criação de log de tempo de execução do contêiner integrado para revisar as atividades nos fluxos de saída padrão STDOUT e STDERR. Para obter mais informações, veja [Visualizando logs de contêiner para um contêiner que é executado em um cluster do Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
@@ -459,7 +459,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 
 **Antes de começar**
 
-1. Verifique as permissões. Se tiver especificado um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave do {{site.data.keyword.containershort_notm}} precisarão das permissões de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
+1. Verifique as permissões. Se tiver especificado um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave do {{site.data.keyword.containerlong_notm}} precisarão das permissões de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
 
 2. [Destino sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster no qual você deseja coletar os logs de auditoria do servidor de API. **Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
 
@@ -622,20 +622,21 @@ Para encaminhar logs de auditoria da API do Kubernetes:
 ## Visualizando métricas
 {: #view_metrics}
 
-As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters. É possível usar os recursos padrão do Kubernetes e do Docker para monitorar o funcionamento de seus clusters e apps. **Nota**: o monitoramento é suportado somente para clusters padrão.
+As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters. É possível usar os recursos padrão do Kubernetes e do tempo de execução do contêiner para monitorar o funcionamento de seus clusters e apps. **Nota**: o monitoramento é suportado somente para clusters padrão.
 {:shortdesc}
 
 <dl>
   <dt>Página de detalhes do cluster no {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>O {{site.data.keyword.containershort_notm}} fornece informações sobre o funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar essa GUI para ampliar o cluster, trabalhar com seu armazenamento persistente e incluir mais recursos em seu cluster por meio da ligação de serviços do {{site.data.keyword.Bluemix_notm}}. Para visualizar a página de detalhes do cluster, acesse o **Painel do {{site.data.keyword.Bluemix_notm}}** e selecione um cluster.</dd>
+    <dd>O {{site.data.keyword.containerlong_notm}} fornece informações sobre o
+funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar essa GUI para ampliar o cluster, trabalhar com seu armazenamento persistente e incluir mais recursos em seu cluster por meio da ligação de serviços do {{site.data.keyword.Bluemix_notm}}. Para visualizar a página de detalhes do cluster, acesse o **Painel do {{site.data.keyword.Bluemix_notm}}** e selecione um cluster.</dd>
   <dt>Painel do Kubernetes</dt>
-    <dd>O painel do Kubernetes é uma interface administrativa da web na qual é possível revisar o funcionamento de seus nós do trabalhador, localizar recursos do Kubernetes, implementar apps conteinerizados e solucionar problemas de apps com informações de criação de log e de monitoramento. Para obter mais informações sobre como acessar o painel do Kubernetes, veja [Ativando o painel do Kubernetes para o {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
+    <dd>O painel do Kubernetes é uma interface administrativa da web na qual é possível revisar o funcionamento de seus nós do trabalhador, localizar recursos do Kubernetes, implementar apps conteinerizados e solucionar problemas de apps com informações de criação de log e de monitoramento. Para obter mais informações sobre como acessar o painel do Kubernetes, veja [Ativando o painel do Kubernetes para o {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>As métricas para clusters padrão estão localizadas na conta do {{site.data.keyword.Bluemix_notm}} para a qual o login foi efetuado quando o cluster do Kubernetes foi criado. Se você especificou um espaço do {{site.data.keyword.Bluemix_notm}} quando criou o cluster, as métricas estão localizadas nesse espaço. As métricas do contêiner são coletadas automaticamente para todos os contêineres que são implementados em um cluster. Essas métricas são enviadas e disponibilizadas por meio de Grafana. Para obter mais informações sobre métricas, veja [Monitoramento para o {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>As métricas para clusters padrão estão localizadas na conta do {{site.data.keyword.Bluemix_notm}} para a qual o login foi efetuado quando o cluster do Kubernetes foi criado. Se você especificou um espaço do {{site.data.keyword.Bluemix_notm}} quando criou o cluster, as métricas estão localizadas nesse espaço. As métricas do contêiner são coletadas automaticamente para todos os contêineres que são implementados em um cluster. Essas métricas são enviadas e disponibilizadas por meio de Grafana. Para obter mais informações sobre métricas, veja [Monitoramento para o {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
     <p>Para acessar o painel Grafana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} no qual você criou o cluster.</p> <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
   <caption>Endereços IP a serem abertos para o tráfego de monitoramento</caption>
         <thead>
-        <th>Região do {{site.data.keyword.containershort_notm}}</th>
+        <th>Região do {{site.data.keyword.containerlong_notm}}</th>
         <th>Endereço de monitoramento</th>
         <th>Endereços IP de monitoramento</th>
         </thead>
@@ -667,7 +668,7 @@ As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters.
 É possível configurar outras ferramentas para mais recursos de monitoramento.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus é uma ferramenta de monitoramento, criação de log e alerta de software livre que foi projetada para o Kubernetes. A ferramenta recupera informações detalhadas sobre o cluster, os nós do trabalhador e o funcionamento de implementação com base nas informações de criação de log do Kubernetes. Para obter informações de configuração, veja [Integrando serviços com o {{site.data.keyword.containershort_notm}}](cs_integrations.html#integrations).</dd>
+    <dd>Prometheus é uma ferramenta de monitoramento, criação de log e alerta de software livre que foi projetada para o Kubernetes. A ferramenta recupera informações detalhadas sobre o cluster, os nós do trabalhador e o funcionamento de implementação com base nas informações de criação de log do Kubernetes. Para obter informações de configuração, veja [Integrando serviços com o {{site.data.keyword.containerlong_notm}}](cs_integrations.html#integrations).</dd>
 </dl>
 
 <br />

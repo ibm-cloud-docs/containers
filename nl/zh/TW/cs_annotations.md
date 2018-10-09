@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -477,7 +477,7 @@ apiVersion: extensions/v1beta1
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
-    <EOS>
+    &lt;EOS&gt;
  spec:
    tls:
 - hosts:
@@ -690,7 +690,7 @@ apiVersion: extensions/v1beta1
 
 
 
-<p>**附註**：ALB 係以透通模式運作，並將資料流量轉遞至後端應用程式。在此情況下，不支援 SSL 終止。</p>
+<p>**附註**：ALB 係以透通模式運作，並將資料流量轉遞至後端應用程式。在此情況下，不支援 SSL 終止。TLS 連線不會終止，並會通過不受影響。</p>
 </dd>
 
 
@@ -772,11 +772,11 @@ CLI 輸出會與下列內容類似：
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>配置 Ingress 透過非標準 TCP 埠來存取您的應用程式。請在此參照中使用範例 YAML。</li>
-<li>更新 ALB 配置。
+<li>請建立您的 ALB 資源，或更新現有的 ALB 配置。
 <pre class="pre">
 <code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>開啟偏好的 Web 瀏覽器以存取您的應用程式。範例：<code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Curl Ingress 子網域，以存取應用程式。範例：<code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -1422,7 +1422,7 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 <dl>
 <dt>說明</dt>
 <dd>依預設，Ingress ALB 是配置為在埠 80 接聽送入的 HTTP 網路資料流量，並在埠 443 接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來增加 ALB 網域的安全，或只啟用 HTTPS 埠。
-</dd>
+<p><strong>附註</strong>: ：若要在埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)，然後在 [`mutual-auth` 註釋中指定該埠](#mutual-auth)。請不要使用 `custom-port` 註釋來指定用於交互鑑別的埠。</p></dd>
 
 
 <dt>Ingress 資源範例 YAML</dt>
@@ -1445,9 +1445,9 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -1542,9 +1542,9 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 </dd>
 
@@ -1635,7 +1635,7 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 <dd>
 <ul>
 <li>您必須具有包含必要 <code>ca.crt</code> 的有效交互鑑別密碼。若要建立交互鑑別密碼，請參閱[建立密碼](cs_app.html#secrets_mutual_auth)。</li>
-<li>若要在 443 以外的埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)。</li>
+<li>若要在 443 以外的埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)，然後在此註釋中指定該埠。請不要使用 `custom-port` 註釋來指定用於交互鑑別的埠。</li>
 </ul>
 </dd>
 
@@ -1700,64 +1700,7 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 <dl>
 <dt>說明</dt>
 <dd>
-當您的 Ingress 資源配置具有 TLS 區段時，Ingress ALB 可以處理應用程式的 HTTPS 保護 URL 要求。不過，ALB 會先解密要求，再將資料流量轉遞至應用程式。如果您的應用程式需要 HTTPS，並且需要在轉遞至這些上游應用程式之前加密資料流量，則可以使用 `ssl-services` 註釋。如果您的上游應用程式可以處理 TLS，則您可以選擇性地提供 TLS 密碼中包含的憑證。<br></br>**選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。</dd>
-
-
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: &lt;myingressname&gt;
-   annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
- spec:
-  rules:
-  - host: mydomain
-     http:
-       paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>瞭解註釋元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為需要 HTTPS 的服務名稱。系統會加密從 ALB 到此應用程式之服務的資料流量。</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>選用項目：如果您要使用 TLS 密碼，且您的上游應用程式可以處理 TLS，請將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的密碼。如果您提供密碼，則此值必須包含來自上游伺服器的 <code>trusted.crt</code>。若要建立 TLS 密碼，請參閱[建立密碼](cs_app.html#secrets_ssl_services)。</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### SSL 服務支援與鑑別
-{: #ssl-services-auth}
-
-<dl>
-<dt>說明</dt>
-<dd>
-容許 HTTPS 要求，並使用單向或交互鑑別，加密要送至上游應用程式的資料流量，以取得額外的安全。
-</dd>
-
+當您的 Ingress 資源配置具有 TLS 區段時，Ingress ALB 可以處理應用程式的 HTTPS 保護 URL 要求。不過，ALB 會處理 TLS 終止，並先解密要求，再將資料流量轉遞至應用程。如果您的應用程式需要 HTTPS 通訊協定，並且需要資料流量保持加密，請使用 `ssl-services` 註釋來停用 ALB 的預設 TLS 終止。ALB 會先終止 TLS 連線，並在將資料流量傳送至後端應用程式之前重新加密 SSL。<br></br>此外，如果後端應用程式可以處理 TLS，而且您想要新增其他安全，則可以藉由提供密碼中包含的憑證，來新增單向或交互鑑別。</dd>
 
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
@@ -1802,7 +1745,7 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的交互鑑別密碼。交互鑑別密碼必須包含必要 <code>ca.crt</code>。若要建立交互鑑別密碼，請參閱[建立密碼](cs_app.html#secrets_mutual_auth)。</td>
+  <td>如果後端應用程式可以處理 TLS，而且您想要新增其他安全，請將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的單向或交互鑑別密碼。<ul><li>如果您提供單向密碼，則此值必須包含來自上游伺服器的 <code>trusted.crt</code>。若要建立 TLS 密碼，請參閱[建立密碼](cs_app.html#secrets_ssl_services)。</li><li>如果您提供交互鑑別密碼，則此值必須包含您應用程式預期來自用戶端的必要 <code>ca.crt</code> 及 <code>ca.key</code>。若要建立交互鑑別密碼，請參閱[建立密碼](cs_app.html#secrets_mutual_auth)。</li></ul><strong>警告</strong>：如果您未提供密碼，則允許不安全的連線。如果要測試連線且未備妥憑證，或者您的憑證已過期且您想要允許不安全的連線，您可以選擇省略密碼。</td>
   </tr>
   </tbody></table>
 
@@ -2040,9 +1983,9 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -2096,9 +2039,9 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -2277,9 +2220,9 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -2330,7 +2273,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-serviceName=<myservice1> {
+      serviceName=&lt;myservice1&gt; {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2352,11 +2295,11 @@ serviceName=<myservice1> {
    annotations:
     ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;: &lt;value1&gt;;
-      &lt;header2&gt;: &lt;value2&gt;;
+      &lt;header1&gt; &lt;value1&gt;;
+      &lt;header2&gt; &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;: &lt;value3&gt;;
+      &lt;header3&gt; &lt;value3&gt;;
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2495,7 +2438,7 @@ serviceName=<myservice1> {
  metadata:
    name: myingress
    annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
  spec:
    tls:
  - hosts:
@@ -2506,9 +2449,9 @@ serviceName=<myservice1> {
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -2557,9 +2500,9 @@ serviceName=<myservice1> {
    http:
      paths:
      - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>

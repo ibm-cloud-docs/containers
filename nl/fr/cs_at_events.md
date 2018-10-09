@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # Evénements {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
-Vous pouvez afficher et gérer des activités initiées par l'utilisateur ou effectuer un audit de ces activités dans votre cluster {{site.data.keyword.containershort_notm}} en utilisant le service {{site.data.keyword.cloudaccesstrailshort}}.
+Vous pouvez afficher et gérer des activités initiées par l'utilisateur ou effectuer un audit de ces activités dans votre cluster {{site.data.keyword.containerlong_notm}} en utilisant le service {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-## Recherche des informations
-{: #at-find}
+
+
+Pour plus d'informations sur le fonctionnement des services Kubernetes, voir les [documents d'{{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [documentation de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/home/).
+
+
+## Recherche d'informations sur les événements d'audit de Kubernetes
+{: #kube-find}
 
 Les événements {{site.data.keyword.cloudaccesstrailshort}} sont disponibles dans le **domaine de compte** {{site.data.keyword.cloudaccesstrailshort}} qui se trouve dans la région {{site.data.keyword.Bluemix_notm}} où les événements sont générés. Les événements {{site.data.keyword.cloudaccesstrailshort}} sont disponibles dans le **domaine espace** {{site.data.keyword.cloudaccesstrailshort}} associé à votre espace Cloud Foundry dans lequel le service {{site.data.keyword.cloudaccesstrailshort}} est mis à disposition.
 
 Pour surveiller les activités d'administration :
 
 1. Connectez-vous à votre compte {{site.data.keyword.Bluemix_notm}}.
-2. Dans le catalogue, mettez à disposition une instance du service {{site.data.keyword.cloudaccesstrailshort}} dans le même compte que votre instance {{site.data.keyword.containershort_notm}}.
+2. Dans le catalogue, mettez à disposition une instance du service {{site.data.keyword.cloudaccesstrailshort}} dans le même compte que votre instance {{site.data.keyword.containerlong_notm}}.
 3. Dans l'onglet  **Gérer** du tableau de bord {{site.data.keyword.cloudaccesstrailshort}}, cliquez sur **Afficher dans Kibana**.
 4. Définissez la période pour laquelle vous désirez consulter les journaux. La valeur par défaut est 15 min.
 5. Dans la liste **Zones disponibles**, cliquez sur **type**. Cliquez sur l'icône représentant une loupe pour qu'**Activity Tracker** limite les journaux uniquement à ceux dont le suivi est assuré par le service.
 6. Vous pouvez utiliser les autres zones disponibles pour affiner la recherche.
 
+Pour laisser d'autres utilisateurs afficher les événements liés aux espaces et aux comptes, voir [octroi de droits pour afficher les événements de compte](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+{: tip}
 
+## Suivi des événements d'audit de Kubernetes
+{: #kube-events}
 
-## Suivi des événements
-{: #events}
+Consultez le tableau ci-dessous pour la liste des événements qui sont envoyés à {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
 
-Consultez les tableaux suivants pour obtenir la liste des événements envoyés à {{site.data.keyword.cloudaccesstrailshort}}.
+**Avant de commencer**
 
-Pour plus d'informations sur le fonctionnement de ce service, voir les [documents sur {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html).
+Veillez à ce que votre cluster soit configuré pour transférer les [événements d'audit de l'API Kubernetes](cs_health.html#api_forward).
 
-Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [documentation de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/home/).
+**Evénements transférés**
 
 <table>
   <tr>
@@ -66,7 +75,7 @@ Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [do
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>Un correctif d'application a été appliqué à la mappe de configuration.</td>
+    <td>Un correctif a été appliqué à une mappe de configuration.</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
@@ -298,7 +307,7 @@ Pour plus d'informations sur les actions de Kubernetes suivies, consultez la [do
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une configuration de weekhook de mutation.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une configuration de webhook de mutation.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>

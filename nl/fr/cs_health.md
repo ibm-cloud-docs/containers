@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,12 +25,12 @@ Configurez les fonctions de consignation et de surveillance dans {{site.data.key
 ## Description de l'acheminement des journaux de cluster et d'application
 {: #logging}
 
-La surveillance et la consignation en continu est essentielle à la détection des attaques sur votre cluster et au traitement des incidents lorsqu'ils se produisent. En exerçant la surveillance continue de votre cluster, vous êtes en mesure de mieux comprendre la capacité de votre cluster et la disponibilité des ressources disponibles dans votre application. Vous pouvez ainsi vous préparer en connaissance de cause pour protéger vos applications de toute période d'indisponibilité. Pour configurer la consignation, vous devez utiliser un cluster Kubernetes standard dans {{site.data.keyword.containershort_notm}}.
+La surveillance et la consignation en continu est essentielle à la détection des attaques sur votre cluster et au traitement des incidents lorsqu'ils se produisent. En exerçant la surveillance continue de votre cluster, vous êtes en mesure de mieux comprendre la capacité de votre cluster et la disponibilité des ressources disponibles dans votre application. Vous pouvez ainsi vous préparer en connaissance de cause pour protéger vos applications de toute période d'indisponibilité. Pour configurer la consignation, vous devez utiliser un cluster Kubernetes standard dans {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
 **Mon cluster est-il géré par IBM ?**
-Tous les maîtres Kubernetes sont surveillés en continu par IBM. {{site.data.keyword.containershort_notm}} analyse automatiquement tous les noeuds sur lesquels est déployé le maître Kubernetes pour rechercher les vulnérabilités détectées dans Kubernetes et les correctifs de sécurité spécifiques au système d'exploitation. Si des vulnérabilités sont détectées, {{site.data.keyword.containershort_notm}} applique automatiquement les correctifs appropriés et résout les vulnérabilités pour l'utilisateur. Vous êtes chargé de surveiller et d'analyser les journaux pour le reste de votre cluster.
+Tous les maîtres Kubernetes sont surveillés en continu par IBM. {{site.data.keyword.containerlong_notm}} analyse automatiquement tous les noeuds sur lesquels est déployé le maître Kubernetes pour rechercher les vulnérabilités détectées dans Kubernetes et les correctifs de sécurité spécifiques au système d'exploitation. Si des vulnérabilités sont détectées, {{site.data.keyword.containerlong_notm}} applique automatiquement les correctifs appropriés et résout les vulnérabilités pour l'utilisateur. Vous êtes chargé de surveiller et d'analyser les journaux pour le reste de votre cluster.
 
 **Quelles sont les sources pour lesquelles je peux configurer la consignation ?**
 
@@ -136,13 +136,13 @@ Pour apporter des modifications dans vos configurations de consignation ou de fi
 ## Configuration de l'acheminement des journaux
 {: #configuring}
 
-Vous pouvez configurer la consignation pour {{site.data.keyword.containershort_notm}} via l'interface graphique ou l'interface de ligne de commande (CLI).
+Vous pouvez configurer la consignation pour {{site.data.keyword.containerlong_notm}} via l'interface graphique ou l'interface de ligne de commande (CLI).
 {: shortdesc}
 
 ### Activation de l'acheminement des journaux avec l'interface graphique
 {: #enable-forwarding-ui}
 
-Vous pouvez configurer le transfert des journaux dans le tableau de bord {{site.data.keyword.containershort_notm}}. Ce processus peut prendre quelques minutes, donc si vous ne voyez pas les journaux immédiatement, patientez quelques minutes avant de revérifier.
+Vous pouvez configurer le transfert des journaux dans le tableau de bord {{site.data.keyword.containerlong_notm}}. Ce processus peut prendre quelques minutes, donc si vous ne voyez pas les journaux immédiatement, patientez quelques minutes avant de revérifier.
 
 Pour créer une configuration au niveau du compte, pour un espace de nom de conteneur spécifique ou pour la consignation d'une application, utilisez l'interface CLI.
 {: tip}
@@ -158,12 +158,12 @@ Pour créer une configuration au niveau du compte, pour un espace de nom de cont
 ### Activation de l'acheminement des journaux avec l'interface de ligne de commande
 {: #enable-forwarding}
 
-Vous pouvez créer une configuration pour la consignation de cluster. Vous pouvez faire la distinction entre les différentes options de consignation en utilisant des indicateurs. 
+Vous pouvez créer une configuration pour la consignation de cluster. Vous pouvez faire la distinction entre les différentes options de consignation en utilisant des indicateurs.
 
 **Acheminement des journaux à IBM**
 
-1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}} doivent disposer des [droits](cs_users.html#access_policies) Responsable, Développeur ou Auditeur dans cet espace.
-  * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}}, exécutez la commande suivante.
+1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}} doivent disposer des [droits](cs_users.html#access_policies) Responsable, Développeur ou Auditeur dans cet espace.
+  * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}}, exécutez la commande suivante.
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
@@ -322,7 +322,7 @@ Vous pouvez arrêter l'acheminement des journaux en supprimant une ou toutes les
 ### Affichage des journaux
 {: #view_logs}
 
-Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser les fonctions de consignation standard de Kubernetes et Docker.
+Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser les fonctions de consignation standard de Kubernetes et de l'environnement d'exécution de conteneur.
 {:shortdesc}
 
 **{{site.data.keyword.loganalysislong_notm}}**
@@ -331,7 +331,7 @@ Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser 
 Vous pouvez afficher les journaux que vous avez transférés vers {{site.data.keyword.loganalysislong_notm}} via le tableau de bord Kibana.
 {: shortdesc}
 
-Si vous avez utilisé les valeurs par défaut pour créer le fichier de configuration, vos journaux peuvent se trouver dans le compte, ou dans l'organisation et dans l'espace dans lesquels a été créé le cluster. Si vous avez indiqué une organisation et un espace dans votre fichier de configuration, vous pourrez trouver vos journaux dans cet espace. Pour plus d'informations sur la consignation, voir [Consignation pour {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Si vous avez utilisé les valeurs par défaut pour créer le fichier de configuration, vos journaux peuvent se trouver dans le compte, ou dans l'organisation et dans l'espace dans lesquels a été créé le cluster. Si vous avez indiqué une organisation et un espace dans votre fichier de configuration, vous pourrez trouver vos journaux dans cet espace. Pour plus d'informations sur la consignation, voir [Consignation pour {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez configuré l'acheminement des journaux pour le cluster.
 - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
@@ -343,9 +343,9 @@ Pour plus d'informations sur l'affichage des journaux, voir [Accès à Kibana à
 
 </br>
 
-**Journaux Docker**
+**Journaux de conteneur**
 
-Vous pouvez exploiter les capacités de consignation intégrées de Docker pour examiner les activités sur les flux de sortie STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Vous pouvez tirer parti des capacités de consignation intégrées de l'environnement d'exécution de conteneur pour examiner les activités sur les flux de sortie STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
@@ -353,7 +353,7 @@ Vous pouvez exploiter les capacités de consignation intégrées de Docker pour 
 ## Filtrage des journaux
 {: #filter-logs}
 
-Vous pouvez déterminer les journaux que vous allez transférer en filtrant des journaux spécifiques sur une période donnée. Vous pouvez faire la distinction entre les différentes options de filtrage en utilisant des indicateurs. 
+Vous pouvez déterminer les journaux que vous allez transférer en filtrant des journaux spécifiques sur une période donnée. Vous pouvez faire la distinction entre les différentes options de filtrage en utilisant des indicateurs.
 
 <table>
 <caption>Description des options de filtrage des journaux</caption>
@@ -371,7 +371,7 @@ Vous pouvez déterminer les journaux que vous allez transférer en filtrant des 
     </tr>
     <tr>
       <td><code>&lt;configs&gt;</code></td>
-      <td>Facultatif : liste séparée par des virgules contenant les ID de vos configurations de consignation. Si cette liste n'est pas fournie, le filtre s'applique à toutes les configurations de consignation du cluster qui sont transmises au filtre. Vous pouvez afficher les configurations de journal qui correspondent au filtre en utilisant l'option <code>--show-matching-configs</code>. </td>
+      <td>Facultatif : liste séparée par des virgules contenant les ID de vos configurations de consignation. Si cette liste n'est pas fournie, le filtre s'applique à toutes les configurations de consignation du cluster qui sont transmises au filtre. Vous pouvez afficher les configurations de journal qui correspondent au filtre en utilisant l'option <code>--show-matching-configs</code>.</td>
     </tr>
     <tr>
       <td><code>&lt;kubernetes_namespace&gt;</code></td>
@@ -458,7 +458,7 @@ Vous pouvez transférer vos journaux d'audit du serveur d'API Kubernetes à {{si
 
 **Avant de commencer**
 
-1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containershort_notm}} doivent disposer des droits Responsable, Développeur ou Auditeur dans cet espace.
+1. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}} doivent disposer des droits Responsable, Développeur ou Auditeur dans cet espace.
 
 2. [Ciblez votre interface de ligne de commande ](cs_cli_install.html#cs_cli_configure) sur le cluster depuis lequel vous désirez collecter des journaux d'audit de serveur d'API. **Remarque** : si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
 
@@ -621,20 +621,20 @@ Pour transférer des journaux d'audit d'API Kubernetes, procédez comme suit :
 ## Affichage des métriques
 {: #view_metrics}
 
-Des métriques vous aident à surveiller l'état de santé et les performances de vos clusters. Vous pouvez utiliser les fonctions standard de Kubernetes et Docker pour surveiller l'état de santé de vos clusters et de vos applications. **Remarque** : la surveillance n'est prise en charge que pour les clusters standard.
+Des métriques vous aident à surveiller l'état de santé et les performances de vos clusters. Vous pouvez utiliser les fonctions standard de Kubernetes et de l'environnement d'exécution de conteneur pour surveiller l'état de santé de vos clusters et de vos applications. **Remarque** : la surveillance n'est prise en charge que pour les clusters standard.
 {:shortdesc}
 
 <dl>
   <dt>Page des informations détaillées sur le cluster dans {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containershort_notm}} fournit des informations sur l'état de santé et la capacité de votre cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette page de l'interface graphique pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser cette page, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} fournit des informations sur l'état de santé et la capacité de votre cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette page de l'interface graphique pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser cette page, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
   <dt>Tableau de bord Kubernetes</dt>
-    <dd>Le tableau de bord Kubernetes est une interface Web d'administration dans laquelle vous pouvez examiner l'état de santé de vos noeuds worker, rechercher des ressources Kubernetes, déployer des applications conteneurisées et résoudre les incidents liés aux applications avec les informations de consignation et de surveillance. Pour plus d'informations sur l'accès à votre tableau de bord Kubernetes, voir [Lancement du tableau de bord Kubernetes pour {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
+    <dd>Le tableau de bord Kubernetes est une interface Web d'administration dans laquelle vous pouvez examiner l'état de santé de vos noeuds worker, rechercher des ressources Kubernetes, déployer des applications conteneurisées et résoudre les incidents liés aux applications avec les informations de consignation et de surveillance. Pour plus d'informations sur l'accès à votre tableau de bord Kubernetes, voir [Lancement du tableau de bord Kubernetes pour {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>Les métriques des clusters standard se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les métriques se trouvent dans cet espace. Les métriques de conteneur sont collectées automatiquement pour tous les conteneurs déployés dans un cluster. Ces métriques sont envoyées et mises à disposition via Grafana. Pour plus d'informations sur les métriques, voir [Surveillance d'{{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>Les métriques des clusters standard se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les métriques se trouvent dans cet espace. Les métriques de conteneur sont collectées automatiquement pour tous les conteneurs déployés dans un cluster. Ces métriques sont envoyées et mises à disposition via Grafana. Pour plus d'informations sur les métriques, voir [Surveillance d'{{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
     <p>Pour accéder au tableau de bord Grafana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.</p> <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
   <caption>Adresses IP à ouvrir pour gérer le trafic</caption>
         <thead>
-        <th>Région {{site.data.keyword.containershort_notm}}</th>
+        <th>Région {{site.data.keyword.containerlong_notm}}</th>
         <th>Adresse de surveillance</th>
         <th>Adresses IP de surveillance</th>
         </thead>
@@ -666,7 +666,7 @@ Des métriques vous aident à surveiller l'état de santé et les performances d
 Vous pouvez configurer d'autres outils pour disposer de capacités de surveillance supplémentaires.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus est un outil open source de surveillance, de consignation et d'alerte conçu pour Kubernetes. Cet outil extrait des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. Pour obtenir des informations de configuration, voir [Intégration de services avec {{site.data.keyword.containershort_notm}}](cs_integrations.html#integrations).</dd>
+    <dd>Prometheus est un outil open source de surveillance, de consignation et d'alerte conçu pour Kubernetes. Cet outil extrait des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. Pour obtenir des informations de configuration, voir [Intégration de services avec {{site.data.keyword.containerlong_notm}}](cs_integrations.html#integrations).</dd>
 </dl>
 
 <br />
@@ -751,7 +751,7 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que chaque noeud worker est à l'état <code>Ready</code> (Prêt). La vérification d'un noeud worker spécifique compte comme un échec si ce noeud n'est pas à l'état <code>Ready</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reload</code>. <br></br>La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou tant que vous ne supprimez pas la vérification.</td>
+   <td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que chaque noeud worker est à l'état <code>Ready</code> (Prêt). La vérification d'un noeud worker spécifique compte comme un échec si ce noeud n'est pas à l'état <code>Ready</code>. La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est rechargé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reload</code>.<br></br>La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou tant que vous ne supprimez pas la vérification.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
@@ -763,7 +763,7 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
    <td><code>checkhttp.json</code></td>
    <td>Définit une vérification HTTP qui s'assure qu'un serveur HTTP qui s'exécute sur votre noeud worker est sain. Pour utiliser cette vérification, vous devez déployer un serveur HTTP sur tous les noeuds worker de votre cluster à l'aide d'un [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Vous devez implémenter un diagnostic d'intégrité accessible dans le chemin <code>/myhealth</code> pouvant vérifier si votre serveur HTTP est sain. Vous pouvez définir d'autres chemins en modifiant le paramètre <strong>Route</strong>. Si le serveur HTTP est sain, vous devez renvoyer le code réponse HTTP qui est défini dans le paramètre <strong>ExpectedStatus</strong>. Le serveur HTTP doit être configuré pour être à l'écoute sur l'adresse IP privée du noeud worker. Pour identifier cette adresse, exécutez la commande <code>kubectl get nodes</code>.<br></br>
    Par exemple, considérez deux noeuds dans un cluster avec les adresses IP privées 10.10.10.1 et 10.10.10.2. Dans cet exemple, deux routes sont vérifiées à la recherche d'un code réponse HTTP 200 : <code>http://10.10.10.1:80/myhealth</code> et <code>http://10.10.10.2:80/myhealth</code>.
-   La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est réamorcé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reboot</code>. <br></br>La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
+   La vérification dans l'exemple YAML s'exécute toutes les 3 minutes. Si elle échoue à trois reprises, le noeud worker est réamorcé. Cette action est équivalente à l'exécution de la commande <code>ibmcloud ks worker-reboot</code>.<br></br>La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
    </tr>
    </tbody>
    </table>

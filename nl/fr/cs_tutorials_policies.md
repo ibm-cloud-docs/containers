@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -43,6 +43,7 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 - [Créez un cluster en version 1.10](cs_clusters.html#clusters_ui) ou [mettez à jour un cluster à la version 1.10](cs_versions.html#cs_v110). Vous devez disposer d'un cluster Kubernetes de version 1.10 ou ultérieure pour utiliser l'interface de ligne de commande de Calico 3.1.1 et la syntaxe des règles Calico v3 dans ce tutoriel.
 - [Ciblez votre interface CLI sur le cluster](cs_cli_install.html#cs_cli_configure).
 - [Installez et configurez l'interface de ligne de commande de Calico](cs_network_policy.html#1.10_install).
+- [Assurez-vous de disposer du rôle de plateforme **Editeur**, **Opérateur** ou **Administrateur**](cs_users.html#add_users_cli).
 
 <br />
 
@@ -53,27 +54,21 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 La première leçon vous montre comment est exposée votre application depuis plusieurs adresses IP et ports et par où passe le trafic public pour atteindre votre cluster.
 {: shortdesc}
 
-Commencez par déployer un modèle d'application de serveur Web à utiliser tout au long de ce tutoriel. Le serveur Web `echoserver` présente les données de la connexion établie avec le cluster à partir du client et vous laisse tester l'accès au cluster de l'entreprise de relations publiques (PR). Exposez ensuite l'application en créant un service LoadBalancer. Un service LoadBalancer rend votre application accessible via l'adresse IP du service LoadBalancer et les services NodePorts des noeuds worker.
+Commencez par déployer un modèle d'application de serveur Web à utiliser tout au long de ce tutoriel. Le serveur Web `echoserver` présente les données de la connexion établie avec le cluster à partir du client et vous laisse tester l'accès au cluster de l'entreprise de relations publiques (RP). Exposez ensuite l'application en créant un service LoadBalancer. Un service LoadBalancer rend votre application accessible via l'adresse IP du service LoadBalancer et les services NodePorts des noeuds worker.
 
 L'image suivante montre comment l'application de serveur Web sera exposée sur Internet par les services NodePort et LoadBalancer publics à la fin de la leçon 1 :
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="A la fin de la leçon 1, l'application de serveur Web est exposée sur Internet par les services NodePort et LoadBalancer publics." style="width:450px; border-style: none"/>
 
-1. Créez un espace de nom de test nommé `pr-firm` à utiliser tout au long de ce tutoriel.
+1. Déployez le modèle d'application de serveur Web. Lorsqu'une connexion à l'application de serveur Web est établie, l'application répond avec les en-têtes HTTP qu'elle a reçus dans la connexion.
     ```
-    kubectl create ns pr-firm
-    ```
-    {: pre}
-
-2. Déployez le modèle d'application de serveur Web. Lorsqu'une connexion à l'application de serveur Web est établie, l'application répond avec les en-têtes HTTP qu'elle reçoit dans la connexion.
-    ```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-3. Vérifiez que la zone **STATUS** des pods de l'application de serveur Web a la valeur `Running`.
+2. Vérifiez que la zone **STATUS** des pods de l'application de serveur Web a la valeur `Running`.
     ```
-    kubectl get pods -n pr-firm -o wide
+    kubectl get pods -o wide
     ```
     {: pre}
 
@@ -86,7 +81,7 @@ L'image suivante montre comment l'application de serveur Web sera exposée sur I
     ```
     {: screen}
 
-4. Pour exposer l'application sur l'Internet public, créez un fichier de configuration de service LoadBalancer nommé `webserver.yaml` dans un éditeur de texte.
+3. Pour exposer l'application sur l'Internet public, créez un fichier de configuration de service LoadBalancer nommé `webserver.yaml` dans un éditeur de texte.
     ```
     apiVersion: v1
     kind: Service
@@ -108,17 +103,17 @@ L'image suivante montre comment l'application de serveur Web sera exposée sur I
     ```
     {: codeblock}
 
-5. Déployez le service LoadBalancer.
+4. Déployez le service LoadBalancer.
     ```
-    kubectl apply -f filepath/webserver.yaml
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. Vérifiez que vous disposez d'un accès public à l'application exposée par le service LoadBalancer sur votre ordinateur.
+5. Vérifiez que vous disposez d'un accès public à l'application exposée par le service LoadBalancer sur votre ordinateur.
 
     1. Obtenez l'adresse IP publique (**EXTERNAL-IP**) du service LoadBalancer.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -165,7 +160,7 @@ L'image suivante montre comment l'application de serveur Web sera exposée sur I
 
     1. Obtenez la valeur NodePort affectée par le service LoadBalancer aux noeuds worker. La valeur de NodePort est comprise entre 30000 et 32767.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -185,9 +180,9 @@ L'image suivante montre comment l'application de serveur Web sera exposée sur I
         Exemple de sortie :
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
         ```
         {: screen}
 
@@ -297,7 +292,7 @@ Pour sécuriser le cluster de l'entreprise de relations publiques, vous devez bl
 
 4. Modifiez la règle externalTrafficPolicy du service LoadBalancer que vous avez créée dans la leçon précédente en remplaçant `Cluster` par `Local`. `Local` garantit que l'adresse IP source de votre système est conservée lorsque vous utilisez curl sur l'adresse IP du service LoadBalancer à l'étape suivante.
     ```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -341,7 +336,7 @@ Ensuite, vous pouvez créer et appliquer des règles Calico pour inscrire sur li
 ## Leçon 3 : Autorisation de trafic entrant à partir d'une adresse IP sur liste blanche vers le service LoadBalancer
 {: #lesson3}
 
-A présent, vous décidez de bloquer l'intégralité du trafic vers le cluster de l'entreprise de relations publiques et de tester l'accès en inscrivant l'adresse IP de votre ordinateur sur liste blanche.
+A présent, vous décidez de bloquer l'intégralité du trafic vers le cluster de l'entreprise de relations publiques et de tester l'accès en inscrivant uniquement l'adresse IP de votre ordinateur sur liste blanche.
 {: shortdesc}
 
 Tout d'abord, en plus des services NodePorts, vous devez bloquer tout le trafic entrant vers le service LoadBalancer exposant l'application. Ensuite, vous pouvez créer une règle pour inscrire l'adresse IP de votre système sur liste blanche. A la fin de la leçon 3, tout le trafic vers les services NodePorts et LoadBalancer publics est verrouillé et seul le trafic en provenance de l'adresse IP de votre système sur liste blanche est autorisé :
@@ -468,14 +463,26 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="L'application de serveur Web est exposée sur Internet par le service LoadBalancer public. Seul le trafic en provenance de l'adresse IP de votre système est bloqué." style="width:600px; border-style: none"/>
 
 1. Supprimez les règles d'inscription sur liste blanche que vous avez créées dans la leçon précédente.
-    ```
-    calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
-    {: pre}
-    ```
-    calicoctl delete GlobalNetworkPolicy whitelist
-    ```
-    {: pre}
+    - Linux :
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist
+      ```
+      {: pre}
+
+    - Windows et OS X :
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
     Désormais, tout le trafic TCP et UDP entrant en provenance de n'importe quelle source IP vers l'adresse IP et le port du service LoadBalancer est à nouveau autorisé.
 
 2. Pour refuser tout le trafic TCP et UDP entrant en provenance de l'adresse IP source de votre système vers l'adresse IP et le port du service LoadBalancer, créez une règle Pre-DNAT de poids faible nommée `deny-lb-port-80.yaml` dans un éditeur de texte. En utilisant les valeurs de votre aide-mémoire, remplacez `<loadbalancer_IP>` par l'adresse IP publique du service LoadBalancer et `<client_address>` par l'adresse IP publique de l'adresse IP source de votre système.
@@ -539,10 +546,18 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
     A ce stade, tout le trafic vers les services NodePorts publics est bloqué et tout le trafic vers le service LoadBalancer public est autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers le service LoadBalancer est bloqué.
 
 5. Pour supprimer cette règle de liste noire :
-    ```
-    calicoctl delete GlobalNetworkPolicy blacklist
-    ```
-    {: pre}
+
+    - Linux :
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist
+      ```
+      {: pre}
+
+    - Windows et OS X :
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 Parfait ! Vous avez réussi à contrôler le trafic dans votre application en utilisant des règles Calico Pre-DNAT pour placer des adresses IP source sur liste blanche ou sur liste noire.
 

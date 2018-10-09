@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -28,7 +28,7 @@ Ein Container ist ein Standardverfahren zum Packen von Apps mit den zugehörigen
 
 Klicken Sie auf eine Option für den Start:
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Klicken Sie auf ein Symbol, um schnell Ihre ersten Schritte mit {{site.data.keyword.containershort_notm}} zu machen. Klicken Sie in {{site.data.keyword.Bluemix_dedicated_notm}} auf dieses Symbol, um Ihre Optionen anzuzeigen." style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Klicken Sie auf ein Symbol, um schnell Ihre ersten Schritte mit {{site.data.keyword.containerlong_notm}} auszuführen. Klicken Sie in {{site.data.keyword.Bluemix_dedicated_notm}} dieses Symbol, um Ihre Optionen anzuzeigen." style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="Einführung zu Kubernetes-Clustern in {{site.data.keyword.Bluemix_notm}}" title="Einführung zu Kubernetes-Clustern in {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="Installieren Sie die CLIs." title="Installieren Sie die CLIs." shape="rect" coords="155, -1, 289, 210" />
@@ -47,13 +47,13 @@ Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Net
 **Vorbereitende Schritte**
 
 Rufen Sie den für Sie geeigneten [{{site.data.keyword.Bluemix_notm}}-Kontotyp](https://console.bluemix.net/registration/) ab:
-* **Nutzungsabhängiges Konto oder Abonnementenkonto**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
-* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) auf ein nutzungsabhängiges oder ein Abonnementenkonto.
+* **Nutzungsabhängiges Konto oder Abonnementkonto**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
+* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) auf ein nutzungsabhängiges oder ein Abonnementkonto.
 * **Testversion (zu Schulungszwecken)**: Sie können einen kostenlosen Cluster erstellen, den Sie 30 Tage lang verwenden können, um sich mit dem Service vertraut zu machen.
 
 Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:
 
-1.  Wählen Sie im [-{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) die Option **{{site.data.keyword.containershort_notm}}** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
+1.  Wählen Sie im [-{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) die Option **{{site.data.keyword.containerlong_notm}}** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
 
 2. Geben Sie dem Cluster einen eindeutigen Namen.
 
@@ -70,8 +70,8 @@ Hervorragend! Sie haben Ihren ersten Kubernetes-Cluster erstellt. Im Folgenden f
 **Womit möchten Sie fortfahren? **</br>
 Probieren Sie verschiedene Dinge mit dem kostenlosen Cluster aus, bevor dieser abläuft.
 
-* Arbeiten Sie das [erste {{site.data.keyword.containershort_notm}}-Lernprogramm](cs_tutorials.html#cs_cluster_tutorial) durch, um einen Kubernetes-Cluster zu erstellen, die CLI zu installieren, eine private Registry zu erstellen, die Clusterumgebung einzurichten und einen Service zu Ihrem Cluster hinzuzufügen.
-* Behalten Sie Ihren Schwung mit dem [zweiten {{site.data.keyword.containershort_notm}}-Lernprogramm](cs_tutorials_apps.html#cs_apps_tutorial) über die Bereitstellung von Apps im Cluster bei.
+* Arbeiten Sie das [erste {{site.data.keyword.containerlong_notm}}-Lernprogramm](cs_tutorials.html#cs_cluster_tutorial) durch, um einen Kubernetes-Cluster zu erstellen, die CLI zu installieren, eine private Registry zu erstellen, die Clusterumgebung einzurichten und einen Service zu Ihrem Cluster hinzuzufügen.
+* Behalten Sie Ihren Schwung mit dem [zweiten {{site.data.keyword.containerlong_notm}}-Lernprogramm](cs_tutorials_apps.html#cs_apps_tutorial) über die Bereitstellung von Apps im Cluster bei.
 * [Erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui) mit mehreren Knoten für eine höhere Verfügbarkeit.
 
 

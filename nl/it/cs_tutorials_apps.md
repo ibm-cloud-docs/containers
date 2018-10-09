@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -54,7 +54,7 @@ Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword
 * Eseguire il push di un'immagine al tuo spazio dei nomi del registro in {{site.data.keyword.registryshort_notm}}
 * Rendere pubblicamente accessibile un'applicazione
 * Distribuire una singola istanza di un'applicazione in un cluster utilizzando un comando Kubernetes e uno script
-* Distribuire più istanze di un'applicazione in contenitori che vengono ricreati durante i controlli di integrità
+* Distribuire più istanze di un'applicazione in contenitori che vengono ricreati durante i controlli dell'integrità
 * Distribuire un'applicazione che utilizza funzionalità da un servizio {{site.data.keyword.Bluemix_notm}}
 
 ## Tempo richiesto
@@ -141,59 +141,33 @@ esegui il seguente comando.
         ```
         {: pre}
 
-6.  Avvia Docker.
-    * Se stai utilizzando Docker Community Edition, non è necessaria alcuna azione.
-    * Se stai utilizzando Linux, segui la [Documentazione Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/config/daemon/) per trovare le istruzioni su come avviare Docker in base alla distribuzione Linux che utilizzi.
-    * Se stai utilizzando Docker Toolbox su Windows o OSX, puoi utilizzare il Docker Quickstart Terminal,
-che avvia Docker per te. Utilizza il Docker Quickstart Terminal per i prossimi pochi passi per eseguire i comandi
-Docker e quindi ritorna alla CLI in cui hai configurato la variabile della sessione `KUBECONFIG`.
+6.  Crea un'immagine Docker che include i file dell'applicazione della directory `Lab 1` ed esegui il push dell'immagine allo spazio dei nomi {{site.data.keyword.registryshort_notm}} che hai creato nell'esercitazione precedente. Se hai bisogno di effettuare una modifica all'applicazione in futuro, ripeti questi passi per creare un'altra versione
+dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.
 
-7.  Crea un'immagine Docker che include i file dell'applicazione della directory `Lab 1`. Se hai bisogno di effettuare una modifica all'applicazione in futuro, ripeti questi passi per creare un'altra versione
-dell'immagine.
+    Utilizza caratteri alfanumerici minuscoli o di sottolineatura (`_`) solo nei nomi di immagine. Non dimenticare il punto (`.`) alla fine del comando. Il punto indica a Docker di guardare all'interno della directory corrente per trovare il Dockerfile e le risorse di build per creare l'immagine.
 
-    Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ```
+    {: pre}
 
-    1.  Crea l'immagine in locale. Specifica il nome e la tag che vuoi utilizzare. Assicurati di utilizzare lo spazio dei nomi che hai creato in {{site.data.keyword.registryshort_notm}} nella precedente esercitazione. L'inserimento di tag nell'immagine con le informazioni dello spazio dei nomi indica a Docker dove eseguire il push dell'immagine in una fase successiva. Utilizza caratteri alfanumerici minuscoli o di sottolineatura (`_`) solo nei nomi di immagine. Non dimenticare il punto (`.`) alla fine del comando. Il punto indica a Docker di guardare all'interno della directory corrente per trovare il Dockerfile e le risorse di build per creare l'immagine.
+    Quando la creazione è completa, verifica di ricevere il seguente messaggio di esito positivo:
 
-        ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
-        ```
-        {: pre}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-        Quando la creazione è completa, verifica di ricevere il seguente messaggio di esito positivo:
-        ```
-        Successfully built <image_id>
-        Successfully tagged <image_tag>
-        ```
-        {: screen}
-
-    2.  Invia l'immagine al tuo spazio dei nomi del registro.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
-        ```
-        {: pre}
-
-        Output di esempio:
-
-        ```
-        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-        ea2ded433ac8: Pushed
-        894eb973f4d3: Pushed
-        788906ca2c7e: Pushed
-        381c97ba7dc3: Pushed
-        604c78617f34: Pushed
-        fa18e5ffd316: Pushed
-        0a5e2b2ddeaa: Pushed
-        53c779688d06: Pushed
-        60a0858edcd5: Pushed
-        b6ca02dfe5e6: Pushed
-        1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-        43 size: 2398
-        ```
-        {: screen}
-
-8.  Le distribuzioni sono utilizzate per gestire i pod, che includono le istanze inserite nel contenitore di un'applicazione. Il seguente comando distribuisce l'applicazione in un solo pod. Per gli scopi di questa esercitazione, la distribuzione viene denominata **hello-world-deployment**, ma puoi fornirle qualsiasi nome tu voglia. Se hai utilizzato il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di ritornare alla CLI che hai utilizzato per impostare la variabile della sessione `KUBECONFIG`.
+7.  Le distribuzioni sono utilizzate per gestire i pod, che includono le istanze inserite nel contenitore di un'applicazione. Il seguente comando distribuisce l'applicazione in un singolo pod. Per gli scopi di questa esercitazione, la distribuzione viene denominata **hello-world-deployment** ma puoi fornirle qualsiasi nome tu voglia.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -209,7 +183,7 @@ dell'immagine.
 
     Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le risorse Kubernetes.
 
-9.  Rendi la tua applicazione accessibile al mondo esponendo la distribuzione come un servizio NodePort. Così come puoi esporre una porta per un'applicazione Cloud Foundry, la NodePort esposta è la porta su cui il nodo di lavoro è in ascolto per il traffico.
+8.  Rendi la tua applicazione accessibile al mondo esponendo la distribuzione come un servizio NodePort. Così come puoi esporre una porta per un'applicazione Cloud Foundry, la NodePort esposta è la porta su cui il nodo di lavoro è in ascolto per il traffico.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -255,7 +229,7 @@ dell'immagine.
     </tr>
     </tbody></table>
 
-10. Ora che tutto il lavoro di distribuzione è stato effettuato, puoi verificare la tua applicazione in un browser. Ottieni i dettagli dal formato dell'URL.
+9. Ora che tutto il lavoro di distribuzione è stato effettuato, puoi verificare la tua applicazione in un browser. Ottieni i dettagli dal formato dell'URL.
     1.  Ottieni le informazioni sul servizio per visualizzare quale NodePort è stata assegnata.
 
         ```
@@ -280,7 +254,9 @@ dell'immagine.
         ```
         {: screen}
 
-        Le NodePort sono assegnate casualmente quando vengono generate con il comando `expose`, ma comprese nell'intervallo 30000-32767. In questo esempio, la NodePort è 30872.
+        Le
+NodePort sono assegnate casualmente quando vengono generate con il comando `expose`,
+ma comprese nell'intervallo 30000-32767. In questo esempio, la NodePort è 30872.
 
     2.  Ottieni l'indirizzo IP pubblico per il nodo di lavoro nel cluster.
 
@@ -296,11 +272,11 @@ dell'immagine.
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
         ```
         {: screen}
 
-11. Apri un browser e controlla l'applicazione con il seguente URL: `http://<IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30872`. Quando immetti tale URL in un browser, puoi visualizzare il seguente testo.
+10. Apri un browser e controlla l'applicazione con il seguente URL: `http://<IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30872`. Quando immetti tale URL in un browser, puoi visualizzare il seguente testo.
 
     ```
     Hello world! La tua applicazione è attiva e in esecuzione in un cluster!
@@ -310,12 +286,12 @@ dell'immagine.
     Per vedere se l'applicazione è disponibile pubblicamente, tenta di immetterla in un browser nel tuo cellulare.
     {: tip}
 
-12. [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
+11. [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
 
     Se selezioni il tuo cluster nella [GUI {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
-13. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
+12. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
 
 Congratulazioni! Hai distribuito la tua prima versione dell'applicazione.
 
@@ -330,13 +306,13 @@ Troppi comandi in questa lezione? D'accordo. Come l'utilizzo di uno script di co
 In questa lezione, distribuisci tre istanze dell'applicazione Hello World in un cluster per una maggiore disponibilità rispetto alla prima versione dell'applicazione.
 {:shortdesc}
 
-Maggiore disponibilità significa che l'accesso dell'utente è diviso tra le tre istanze. Quando troppi utenti stanno tentando di accedere alla stessa istanza dell'applicazione, potrebbero ravvisare tempi di risposta lenti. Più istanze possono voler dire tempi di risposta più veloci per i tuoi utenti. In questa lezione, impari anche come i controlli di integrità e gli aggiornamenti della distribuzione possono funzionare con Kubernetes. Il seguente diagramma include i componenti che distribuisci completando questa lezione.
+Maggiore disponibilità significa che l'accesso dell'utente è diviso tra le tre istanze. Quando troppi utenti stanno tentando di accedere alla stessa istanza dell'applicazione, potrebbero ravvisare tempi di risposta lenti. Più istanze possono voler dire tempi di risposta più veloci per i tuoi utenti. In questa lezione, impari anche come i controlli dell'integrità e gli aggiornamenti della distribuzione possono funzionare con Kubernetes. Il seguente diagramma include i componenti che distribuisci completando questa lezione.
 
 ![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components2.png)
 
 Nell'esercitazione precedente, hai creato il tuo account e un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci tre istanze dell'applicazione Hello World. Ogni istanza viene distribuita in un pod Kubernetes come parte di una serie di repliche nel nodo di lavoro. Per renderla pubblicamente disponibile, crea anche un servizio Kubernetes.
 
-Come definito nello script di configurazione, Kubernetes può utilizzare un controllo di disponibilità per visualizzare se un contenitore in un pod è in esecuzione o meno. Ad esempio, questi controlli potrebbero individuare dei deadlock, dove un'applicazione è in esecuzione, ma non è in grado di fare progressi. Riavviare un contenitore in questa condizione può aiutare a rendere l'applicazione più disponibile nonostante i bug. Quindi, Kubernetes utilizza un controllo di disponibilità per conoscere quando un contenitore è pronto per iniziare ad accettare nuovamente il traffico. Un pod è considerato pronto quanto il suo contenitore è pronto. Quando il pod è pronto, viene riavviato. In questa versione dell'applicazione, ogni 15 secondi va in timeout. Con un controllo di integrità configurato nello script di configurazione, i contenitori vengono ricreati se il controllo di integrità trova un problema con l'applicazione.
+Come definito nello script di configurazione, Kubernetes può utilizzare un controllo di disponibilità per visualizzare se un contenitore in un pod è in esecuzione o meno. Ad esempio, questi controlli potrebbero individuare dei deadlock, dove un'applicazione è in esecuzione, ma non è in grado di fare progressi. Riavviare un contenitore in questa condizione può aiutare a rendere l'applicazione più disponibile nonostante i bug. Quindi, Kubernetes utilizza un controllo di disponibilità per conoscere quando un contenitore è pronto per iniziare ad accettare nuovamente il traffico. Un pod è considerato pronto quanto il suo contenitore è pronto. Quando il pod è pronto, viene riavviato. In questa versione dell'applicazione, ogni 15 secondi va in timeout. Con un controllo dell'integrità configurato nello script di configurazione, i contenitori vengono ricreati se il controllo dell'integrità trova un problema con l'applicazione.
 
 1.  In una CLI, passa alla directory `Lab 2`.
 
@@ -347,47 +323,32 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 
 2.  Se hai avviato una nuova sessione della CLI, accedi e configura il contenuto del cluster.
 
-3.  Crea e contrassegna con tag la seconda versione dell'applicazione localmente come un'immagine. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
+3.  Crea, apponi tag ed esegui il push dell'applicazione come un'immagine nel tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}.  Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
-  ```
-  docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+      ```
+    {: pre}
 
-  Verifica di poter visualizzare il messaggio di esito positivo.
+    Verifica di poter visualizzare il messaggio di esito positivo.
 
-  ```
-  Successfully built <image_id>
-  ```
-  {: screen}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-4.  Trasmetti la seconda versione dell'immagine al tuo spazio dei nomi del registro. Attendi che l'immagine sia stata trasmessa prima di continuare con il passo successivo.
-
-  ```
-  docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
-  ```
-  {: pre}
-
-  Output di esempio:
-
-  ```
-  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-  ```
-  {: screen}
-
-5.  Apri il file `healthcheck.yml`, nella directory `Lab 2`, con un editor di testo. Questo script di configurazione combina alcuni passi dalla lezione precedente per creare una distribuzione e un servizio contemporaneamente. Gli sviluppatori dell'applicazione dell'agenzia di PR possono utilizzare questi script quando effettuano degli aggiornamenti o per risolvere i problemi ricreando i pod.
+4.  Apri il file `healthcheck.yml`, nella directory `Lab 2`, con un editor di testo. Questo script di configurazione combina alcuni passi dalla lezione precedente per creare una distribuzione
+e un servizio contemporaneamente. Gli sviluppatori dell'applicazione dell'agenzia di PR possono utilizzare questi script quando effettuano degli aggiornamenti
+o per risolvere i problemi ricreando i pod.
     1. Aggiorna i dettagli dell'immagine nel tuo spazio dei nomi del registro privato.
 
         ```
@@ -416,7 +377,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 
     4.  Nella sezione **Servizio**, prendi nota di `NodePort`. Invece di generare una NodePort casuale come hai fatto nella precedente lezione, puoi specificare una porta nell'intervallo 30000 - 32767. Questo esempio utilizza 30072.
 
-6.  Ritorna alla CLI che hai utilizzato per configurare il tuo contesto del cluster ed esegui lo script di configurazione. Una volta creati la distribuzione e il servizio, l'applicazione è disponibile per la visualizzazione da parte degli utenti dell'agenzia di PR.
+5.  Ritorna alla CLI che hai utilizzato per configurare il tuo contesto del cluster ed esegui lo script di configurazione. Una volta creati la distribuzione e il servizio, l'applicazione è disponibile per la visualizzazione da parte degli utenti dell'agenzia di PR.
 
   ```
   kubectl apply -f healthcheck.yml
@@ -431,7 +392,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
   ```
   {: screen}
 
-7.  Ora che il lavoro di distribuzione è stato effettuato puoi aprire un browser e controllare l'applicazione. Per creare l'URL, prendi lo stesso indirizzo IP pubblico che hai utilizzato nella lezione precedente per il tuo nodo di lavoro e combinalo con la NodePort specificata nello script di configurazione. Per ottenere l'indirizzo IP pubblico per il nodo di lavoro:
+6.  Ora che il lavoro di distribuzione è stato effettuato puoi aprire un browser e controllare l'applicazione. Per creare l'URL, prendi lo stesso indirizzo IP pubblico che hai utilizzato nella lezione precedente per il tuo nodo di lavoro e combinalo con la NodePort specificata nello script di configurazione. Per ottenere l'indirizzo IP pubblico per il nodo di lavoro:
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -456,18 +417,27 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
   ```
   {: screen}
 
-8.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
+7.  Controlla lo stato del tuo pod per monitorare l'integrità della tua applicazione in Kubernetes. Puoi controllare lo stato dalla CLI oppure nella GUI del dashboard Kubernetes.
 
-9. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Da questa scheda, puoi continuamente aggiornare e visualizzare che il controllo di integrità stia funzionando. Nella sezione **Pod**, puoi visualizzare quante volte i pod sono riavviati quando i contenitori in essi vengono ricreati. Se ti capita di ricevere il seguente errore nel dashboard, questo messaggio indica che il controllo di integrità ha rilevato un problema. Attendi alcuni minuti e aggiorna di nuovo. Vedrai che il numero di riavvii cambia per ogni pod.
+    *  **Dalla CLI**: guarda cosa sta accadendo ai tuoi pod mentre cambiano stato.
+       ```
+       kubectl get pods -o wide -w
+       ```
+       {: pre}
 
-    ```
-    Liveness probe failed: HTTP probe failed with statuscode: 500
+    *  **Dalla GUI**:
+
+       1.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
+       2.  Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Da questa scheda, puoi continuamente aggiornare e visualizzare che il controllo dell'integrità stia funzionando. Nella sezione **Pod**, puoi visualizzare quante volte i pod sono riavviati quando i contenitori in essi vengono ricreati. Se ti capita di ricevere il seguente errore nel dashboard, questo messaggio indica che il controllo dell'integrità ha rilevato un problema. Attendi alcuni minuti e aggiorna di nuovo. Vedrai che il numero di riavvii cambia per ogni pod.
+
+       ```
+       Liveness probe failed: HTTP probe failed with statuscode: 500
     Back-off restarting failed docker container
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-    ```
-    {: screen}
+       ```
+       {: screen}
 
-Congratulazioni! Hai distribuito la seconda versione dell'applicazione. Hai dovuto utilizzare pochi comandi, hai imparato come funzionano i controlli di integrità e modificato una distribuzione, il che è fantastico! L'applicazione Hello world ha superato il test per l'agenzia di PR. Ora, puoi distribuire un'applicazione più utile per l'agenzia di PR per iniziare l'analisi dei comunicati stampa.
+Congratulazioni! Hai distribuito la seconda versione dell'applicazione. Hai dovuto utilizzare pochi comandi, hai imparato come funzionano i controlli dell'integrità e modificato una distribuzione, il che è fantastico! L'applicazione Hello world ha superato il test per l'agenzia di PR. Ora, puoi distribuire un'applicazione più utile per l'agenzia di PR per iniziare l'analisi dei comunicati stampa.
 
 Pronto a eliminare quello che hai precedentemente creato prima di continuare? Questa volta, puoi utilizzare lo stesso script di configurazione per eliminare le risorse che hai creato.
 
@@ -521,10 +491,10 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-    2.  Crea e contrassegna con tag la prima parte dell'applicazione localmente come un'immagine. Nuovamente, non dimenticare il punto (`.`) alla fine del comando. Se stai utilizzando il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di spostarti tra le CLI.
+    2.  Crea, apponi tag ed esegui il push dell'applicazione `watson` come un'immagine al tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -534,13 +504,6 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         Successfully built <image_id>
         ```
         {: screen}
-
-    3.  Trasmetti la prima parte dell'applicazione con un'immagine al tuo spazio dei nomi del registro privato. Attendi che l'immagine sia stata trasmessa prima di continuare con il passo successivo.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson
-        ```
-        {: pre}
 
 4.  Crea l'immagine {{site.data.keyword.watson}}-talk.
 
@@ -551,10 +514,10 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-    2.  Crea e contrassegna con tag la seconda parte dell'applicazione localmente come un'immagine. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
+    2.  Crea, apponi tag ed esegui il push dell'applicazione `watson-talk` come un'immagine al tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -565,14 +528,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: screen}
 
-    3.  Trasmetti la seconda parte dell'applicazione al tuo spazio dei nomi del registro privato. Attendi che l'immagine sia stata trasmessa prima di continuare con il passo successivo.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namespace>/watson-talk
-        ```
-        {: pre}
-
-5.  Verifica che le immagini siano state correttamente aggiunte al tuo spazio dei nomi del registro. Se hai utilizzato il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di ritornare alla CLI che hai utilizzato per impostare la variabile della sessione `KUBECONFIG`.
+5.  Verifica che le immagini siano state correttamente aggiunte al tuo spazio dei nomi del registro.
 
     ```
     ibmcloud cr images
@@ -770,5 +726,5 @@ service "watson-talk-service" deleted
 Ora che hai acquisito le basi, puoi passare ad attività più avanzate. Prendi in considerazione di provarne una delle seguenti:
 
 - Completa un [lab più complicato ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) nel repository
-- [Ridimensiona automaticamente le tue applicazioni](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
-- Esplora i modelli di codice di orchestrazione del contenitore in [developerWorks ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- [Ridimensiona automaticamente le tue applicazioni](cs_app.html#app_scaling) con {{site.data.keyword.containerlong_notm}}
+- Esplora i modelli di codice di orchestrazione del contenitore in [IBM Developer ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/technologies/container-orchestration/)

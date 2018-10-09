@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-09"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -27,13 +27,15 @@ lastupdated: "2018-08-09"
 
 若要安裝 CLI 外掛程式，請參閱[安裝 CLI](cs_cli_install.html#cs_cli_install_steps)。
 
+在終端機中，當您更新至 `ibmcloud`CLI 和外掛程式時，會通知您。務必將 CLI 保持為最新狀態，以使用所有可用的指令及旗標。
+
 要尋找 `ibmcloud cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/cli/plugins/registry/index.html)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)。
 {:tip}
 
 ## ibmcloud ks 指令
 {: #cs_commands}
 
-**提示：**若要查看 {{site.data.keyword.containershort_notm}} 外掛程式的版本，請執行下列指令。
+**提示：**若要查看 {{site.data.keyword.containerlong_notm}} 外掛程式的版本，請執行下列指令。
 
 ```
 ibmcloud plugin list
@@ -177,6 +179,12 @@ ibmcloud plugin list
     <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
+  </tr>
+  <tr>
+    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -329,7 +337,7 @@ ibmcloud plugin list
 ### ibmcloud ks api --endpoint ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
 {: #cs_api}
 
-將目標設為 {{site.data.keyword.containershort_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
+將目標設為 {{site.data.keyword.containerlong_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
 
 要切換地區嗎？請改用 `ibmcloud ks region-set` [指令](#cs_region-set)。
 {: tip}
@@ -338,7 +346,7 @@ ibmcloud plugin list
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>{{site.data.keyword.containershort_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。接受值如下：<ul>
+   <dd>{{site.data.keyword.containerlong_notm}} API 端點。請注意，此端點與 {{site.data.keyword.Bluemix_notm}} 端點不同。設定 API 端點需要此值。接受值如下：<ul>
    <li>全球端點：https://containers.bluemix.net</li>
    <li>亞太地區北部端點：https://ap-north.containers.bluemix.net</li>
    <li>亞太地區南部端點：https://ap-south.containers.bluemix.net</li>
@@ -380,13 +388,13 @@ Region:                us-south
 ### ibmcloud ks api-key-info --cluster CLUSTER [--json][-s]
 {: #cs_api_key_info}
 
-檢視 {{site.data.keyword.containershort_notm}} 地區中 IAM API 金鑰的擁有者的名稱及電子郵件位址。
+檢視 {{site.data.keyword.containerlong_notm}} 地區中 IAM API 金鑰的擁有者的名稱及電子郵件位址。
 
-當執行第一個需要 {{site.data.keyword.containershort_notm}} 管理存取原則的動作時，會針對地區自動設定 Identity and Access Management (IAM) API 金鑰。例如，其中一位管理使用者會在 `us-south` 地區中建立第一個叢集。如此一來，這位使用者的 IAM API 金鑰就會儲存在這個地區的帳戶中。此 API 金鑰是用來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源，例如新的工作者節點或 VLAN。
+執行第一個需要 {{site.data.keyword.containerlong_notm}} 管理存取原則的動作時，會針對地區自動設定 Identity and Access Management (IAM) API 金鑰。例如，其中一位管理使用者會在 `us-south` 地區中建立第一個叢集。如此一來，會在帳戶中針對這個地區儲存這位使用者的 IAM API 金鑰。此 API 金鑰是用來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源，例如新的工作者節點或 VLAN。
 
-當另一位使用者在此地區中執行需要與 IBM Cloud 基礎架構 (SoftLayer) 組合互動的動作（例如建立新叢集或重新載入工作者節點）時，會使用儲存的 API 金鑰來判斷是否有足夠的許可權可執行該動作。若要確保可以順利執行叢集裡的基礎架構相關動作，請對 {{site.data.keyword.containershort_notm}} 管理使用者指派**超級使用者**基礎架構存取原則。如需相關資訊，請參閱[管理使用者存取](cs_users.html#infra_access)。
+當另一位使用者在此地區中執行需要與 IBM Cloud 基礎架構 (SoftLayer) 組合互動的動作（例如建立新叢集或重新載入工作者節點）時，會使用儲存的 API 金鑰來判斷是否有足夠的許可權可執行該動作。為了確保可以順利在叢集裡執行基礎架構相關動作，請對 {{site.data.keyword.containerlong_notm}} 管理使用者指派**超級使用者**基礎架構存取原則。如需相關資訊，請參閱[管理使用者存取](cs_users.html#infra_access)。
 
-如果您發現需要更新針對某地區而儲存的 API 金鑰，則可以執行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 指令來達成此目的。這個指令需要 {{site.data.keyword.containershort_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
+如果您發現需要更新針對某地區而儲存的 API 金鑰，則可以執行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 指令來達成此目的。這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
 
 **提示：**如果使用 [ibmcloud ks credentials-set](#cs_credentials_set) 指令手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證，則可能無法使用這個指令所傳回的 API 金鑰。
 
@@ -415,11 +423,11 @@ Region:                us-south
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-取代 {{site.data.keyword.containershort_notm}} 地區中的現行 IAM API 金鑰。
+取代 {{site.data.keyword.containerlong_notm}} 地區中的現行 IAM API 金鑰。
 
-這個指令需要 {{site.data.keyword.containershort_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。需要有 IAM API 金鑰，才能訂購 IBM Cloud 基礎架構 (SoftLayer) 組合中的基礎架構。儲存之後，API 金鑰即會用於地區中的每個動作，這些動作需要基礎架構許可權（與執行這個指令的使用者無關）。如需 IAM API 金鑰運作方式的相關資訊，請參閱 [`ibmcloud ks api-key-info` 指令](#cs_api_key_info)。
+這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。需要有 IAM API 金鑰，才能訂購 IBM Cloud 基礎架構 (SoftLayer) 組合中的基礎架構。儲存之後，API 金鑰即會用於地區中的每個動作，這些動作需要基礎架構許可權（與執行這個指令的使用者無關）。如需 IAM API 金鑰運作方式的相關資訊，請參閱 [`ibmcloud ks api-key-info` 指令](#cs_api_key_info)。
 
-**重要事項**：在使用這個指令之前，請確定執行這個指令的使用者具有必要的 [{{site.data.keyword.containershort_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
+**重要事項**：在使用這個指令之前，請確定執行這個指令的使用者具有必要的 [{{site.data.keyword.containerlong_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
 
 <strong>指令選項</strong>：
 
@@ -572,13 +580,13 @@ Region:                us-south
 ### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
 {: #cs_init}
 
-起始設定 {{site.data.keyword.containershort_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
+起始設定 {{site.data.keyword.containerlong_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
 
 <strong>指令選項</strong>：
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端點。這是選用值。[檢視可用的 API 端點值。](cs_regions.html#container_regions)</dd>
+   <dd>要使用的 {{site.data.keyword.containerlong_notm}} API 端點。這是選用值。[檢視可用的 API 端點值。](cs_regions.html#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>容許不安全的 HTTP 連線。</dd>
@@ -785,7 +793,8 @@ trusted: <em>true</em>
 
 <p>若要找出您是否已有特定區域的公用 VLAN，或尋找現有公用 VLAN 的名稱，請執行 <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>。</p></dd>
 
-
+<dt><code>--private-only </code></dt>
+  <dd>使用此選項，以防止建立公用 VLAN。只有在您指定 `--private-vlan` 旗標時才為必要項目，並且請不要包括 `--public-vlan` 旗標。**附註**：如果您想要僅限專用叢集，則必須配置閘道應用裝置來連接網路。如需相關資訊，請參閱[僅規劃專用 VLAN 設定的專用外部網路](cs_network_planning.html#private_vlan)。</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>您要在叢集裡部署的工作者節點數目。如果您未指定此選項，則會建立具有 1 個工作者節點的叢集。此值對於標準叢集是選用的，不適用於免費叢集。
@@ -911,7 +920,7 @@ trusted: <em>true</em>
   Ingress secret:    my_cluster
   Workers:      3
   Worker Zones: dal10
-  Version:      1.10.5
+  Version:      1.11.2
   Owner Email:  name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
@@ -1022,7 +1031,7 @@ trusted: <em>true</em>
 ### ibmcloud ks kube-versions [--json][-s]
 {: #cs_kube_versions}
 
-檢視 {{site.data.keyword.containershort_notm}} 中支援的 Kubernetes 版本清單。將您的[主要叢集](#cs_cluster_update)及[工作者節點](cs_cli_reference.html#cs_worker_update)更新為最新且功能穩定的預設版本。
+檢視 {{site.data.keyword.containerlong_notm}} 中支援的 Kubernetes 版本清單。將您的[主要叢集](#cs_cluster_update)及[工作者節點](cs_cli_reference.html#cs_worker_update)更新為最新且功能穩定的預設版本。
 
 **指令選項**：
 
@@ -1152,7 +1161,7 @@ trusted: <em>true</em>
 <dl>
 <dt><code>--container CONTAINER_ID</code></dt>
 <dd><p>容器的 ID。這是必要值。</p>
-<p>若要尋找容器的 ID，請執行下列動作：<ol><li>[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。</li><li>執行 `kubectl get pods`，以列出 Pod。</li><li>尋找 `kubectl describe pod <pod_name>` 指令輸出中的 **Container ID** 欄位。例如，`Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>先移除 ID 中的 `docker://` 字首，再使用 `ibmcloud ks va` 指令的容器 ID。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
+<p>若要尋找容器的 ID，請執行下列動作：<ol><li>[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。</li><li>執行 `kubectl get pods`，以列出 Pod。</li><li>尋找 `kubectl describe pod <pod_name>` 指令輸出中的 **Container ID** 欄位。例如，`Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>先移除 ID 中的 `containerd://` 字首，再使用 `ibmcloud ks va` 指令的容器 ID。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>擴充指令輸出，以顯示有漏洞之套件的更多修正資訊。這是選用值。</p>
@@ -1221,7 +1230,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 
 **附註：**
 * 可攜式公用 IP 位址是按月計費。如果您在佈建叢集之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用也是一樣。
-* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
 * 若要啟用相同 VLAN 之不同子網路上的工作者節點之間的通訊，您必須[在相同 VLAN 的子網路之間啟用遞送](cs_subnets.html#subnet-routing)。
 
 <strong>指令選項</strong>：
@@ -1249,11 +1258,11 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
-在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供 {{site.data.keyword.containershort_notm}} 中指定的叢集使用。
+在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供 {{site.data.keyword.containerlong_notm}} 中指定的叢集使用。
 
 **附註：**
-* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
-* 若要啟用相同 VLAN 之不同子網路上的工作者節點之間的通訊，您必須[在相同 VLAN 的子網路之間啟用遞送](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
+* 如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
 
 <strong>指令選項</strong>：
 
@@ -1282,13 +1291,13 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks cluster-user-subnet-add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-將您自己的專用子網路帶到 {{site.data.keyword.containershort_notm}} 叢集。
+將您自己的專用子網路帶到 {{site.data.keyword.containerlong_notm}} 叢集。
 
 這個專用子網路不是 IBM Cloud 基礎架構 (SoftLayer) 所提供的專用子網路。因此，您必須配置子網路的任何入埠及出埠網路資料流量遞送。若要新增 IBM Cloud 基礎架構 (SoftLayer) 子網路，請使用 `ibmcloud ks cluster-subnet-add` [指令](#cs_cluster_subnet_add)。
 
 **附註**：
-* 當您將專用使用者子網路新增至叢集時，這個子網路的 IP 位址會用於叢集裡的專用「負載平衡器」。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
-* 若要啟用相同 VLAN 之不同子網路上的工作者節點之間的通訊，您必須[在相同 VLAN 的子網路之間啟用遞送](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+* 當您將專用使用者子網路新增至叢集時，這個子網路的 IP 位址會用於叢集裡的專用「負載平衡器」。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
+* 如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
 
 <strong>指令選項</strong>：
 
@@ -1662,15 +1671,15 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
-針對 {{site.data.keyword.containershort_notm}} 帳戶設定 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
+設定 {{site.data.keyword.containerlong_notm}} 地區的 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 
 如果您有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶，依預設，您便可以存取 IBM Cloud 基礎架構 (SoftLayer) 組合。不過，建議您使用您已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購基礎架構。您可以使用這個指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。
 
-如果手動設定了 IBM Cloud 基礎架構 (SoftLayer) 認證，則即使帳戶已有 [IAM API 金鑰](#cs_api_key_info)，也會使用這些認證來訂購基礎架構。如果已儲存其認證的使用者沒有訂購基礎架構的必要許可權，則基礎架構相關動作（例如建立叢集或重新載入工作者節點）可能會失敗。
+如果已手動設定地區的 IBM Cloud 基礎架構 (SoftLayer) 認證，則會使用這些認證來訂購該地區內所有叢集的基礎架構。這些認證是用來判斷基礎架構許可權，即使該地區已有 [IAM API 金鑰](#cs_api_key_info)。如果已儲存其認證的使用者沒有訂購基礎架構的必要許可權，則基礎架構相關動作（例如建立叢集或重新載入工作者節點）可能會失敗。
 
-您無法為一個 {{site.data.keyword.containershort_notm}} 帳戶設定多個認證。每個 {{site.data.keyword.containershort_notm}} 帳戶僅會鏈結至一個 IBM Cloud 基礎架構 (SoftLayer) 組合。
+您無法為同一個 {{site.data.keyword.containerlong_notm}} 地區設定多個認證。
 
-**重要事項：**在使用這個指令之前，請確定使用其認證的使用者具有必要的 [{{site.data.keyword.containershort_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
+**重要事項：**在使用這個指令之前，請確定使用其認證的使用者具有必要的 [{{site.data.keyword.containerlong_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 許可權](cs_users.html#users)。
 
 <strong>指令選項</strong>：
 
@@ -1723,7 +1732,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
-從您的 {{site.data.keyword.containershort_notm}} 帳戶移除 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
+移除 {{site.data.keyword.containerlong_notm}} 地區的 IBM Cloud 基礎架構 (SoftLayer) 帳戶認證。
 
 移除認證之後，會使用 [IAM API 金鑰](#cs_api_key_info)來訂購 IBM Cloud 基礎架構 (SoftLayer) 中的資源。
 
@@ -1745,10 +1754,10 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks machine-types --zone ZONE [--json][-s]
 {: #cs_machine_types}
 
-檢視工作者節點的可用機型清單。機型因區域而異。每一個機型都包括叢集裡每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。依預設，儲存所有容器資料的次要儲存空間磁碟目錄是使用 LUKS 加密來進行加密。如果在建立叢集的期間包含了 `disable-disk-encrypt` 選項，則主機的 Docker 資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disk)。
+檢視工作者節點的可用機型清單。機型因區域而異。每一個機型都包括叢集裡每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。依預設，儲存所有容器資料的次要儲存空間磁碟目錄是使用 LUKS 加密來進行加密。如果在建立叢集的期間包括 `disable-disk-encrypt` 選項，則主機的容器運行環境資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disk)。
 {:shortdesc}
 
-您可以將工作者節點佈建為共用或專用硬體上的虛擬機器，或佈建為裸機上的實體機器。[進一步瞭解機型選項](cs_clusters.html#shared_dedicated_node)。
+您可以將工作者節點佈建為共用或專用硬體上的虛擬機器，或佈建為裸機上的實體機器。[進一步瞭解機型選項](cs_clusters_planning.html#shared_dedicated_node)。
 
 <strong>指令選項</strong>：
 
@@ -1798,6 +1807,28 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
   ```
   {: pre}
 
+
+### ibmcloud ks vlan-spanning-get [--json][-s]
+{: #cs_vlan_spanning_get}
+
+檢視 IBM Cloud 基礎架構 (SoftLayer) 帳戶的 VLAN Spanning 狀態。VLAN 跨越會讓帳戶上的所有裝置都透過專用網路彼此通訊，而不論其指派的 VLAN 為何。
+
+<strong>指令選項</strong>：
+
+   <dl>
+    <dt><code>--json</code></dt>
+      <dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
+
+    <dt><code>-s</code></dt>
+      <dd>不要顯示日或更新提示的訊息。這是選用值。</dd>
+   </dl>
+
+**範例**：
+
+  ```
+  ibmcloud ks vlan-spanning-get
+  ```
+  {: pre}
 
 <br />
 
@@ -2260,7 +2291,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks region
 {: #cs_region}
 
-尋找您目前所在的 {{site.data.keyword.containershort_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
+尋找您目前所在的 {{site.data.keyword.containerlong_notm}} 地區。您可以建立及管理地區特定的叢集。使用 `ibmcloud ks region-set` 指令來變更地區。
 
 **範例**：
 
@@ -2278,7 +2309,7 @@ Region: us-south
 ### ibmcloud ks region-set [--region REGION]
 {: #cs_region-set}
 
-設定 {{site.data.keyword.containershort_notm}} 的地區。您可以建立及管理地區特定的叢集，而且可能要多個地區中都有叢集，才能獲得高可用性。
+設定 {{site.data.keyword.containerlong_notm}} 的地區。您可以建立及管理地區特定的叢集，而且可能要多個地區中都有叢集，才能獲得高可用性。
 
 例如，您可以在美國南部地區登入 {{site.data.keyword.Bluemix_notm}}，並建立叢集。接下來，您可以使用 `ibmcloud ks region-set eu-central` 來將目標設為歐盟中部地區，並建立另一個叢集。最後，您可以使用 `ibmcloud ks region-set us-south` 回到美國南部，以管理該地區中的叢集。
 
@@ -2321,7 +2352,7 @@ OK
 ### ibmcloud ks regions
 {: #cs_regions}
 
-列出可用的地區。`Region Name` 是 {{site.data.keyword.containershort_notm}} 名稱，而 `Region Alias` 是地區的一般 {{site.data.keyword.Bluemix_notm}} 名稱。
+列出可用的地區。`Region Name` 是 {{site.data.keyword.containerlong_notm}} 名稱，而 `Region Alias` 是地區的一般 {{site.data.keyword.Bluemix_notm}} 名稱。
 
 **範例**：
 
@@ -2506,7 +2537,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [-s]
 {: #cs_worker_reboot}
 
-重新啟動叢集裡的工作者節點。在重新啟動期間，工作者節點的狀況不會變更。
+重新啟動叢集裡的工作者節點。在重新啟動期間，工作者節點的狀況不會變更。例如，如果 IBM Cloud 基礎架構 (SoftLayer) 中的工作者節點狀態為 `Powered Off`，且您需要開啟工作程式節點，則可以使用重新開機。
 
 **注意：**重新啟動工作者節點，可能會造成工作者節點上的資料毀損。當您知道重新啟動可以協助回復工作者節點時，請小心使用這個指令。除此之外，請改為[重新載入工作者節點](#cs_worker_reload)。
 
@@ -2558,7 +2589,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>使用此選項，以強制重新啟動工作者節點，而不出現使用者提示。這是選用值。</dd>
 
    <dt><code>--hard</code></dt>
-   <dd>使用此選項，透過切斷工作者節點的電源來強制執行強迫重新啟動工作者節點。如果工作者節點無回應，或工作者節點的 Docker 當掉，請使用此選項。這是選用值。</dd>
+   <dd>使用此選項，透過切斷工作者節點的電源來強制執行強迫重新啟動工作者節點。如果工作者節點沒有回應，或工作者節點的容器運行環境沒有回應，請使用此選項。這是選用值。</dd>
 
    <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>一個以上工作者節點的名稱或 ID。請使用空格來列出多個工作者節點。這是必要值。</dd>
@@ -2807,7 +2838,7 @@ diskEncryption: <em>false</em></code></pre>
     <dd>選擇機型。您可以將工作者節點部署為共用或專用硬體上的虛擬機器，或部署為裸機上的實體機器。可用的實體及虛擬機器類型會因您部署叢集所在的區域而不同。如需相關資訊，請參閱 `ibmcloud ks machine-types` [指令](cs_cli_reference.html#cs_machine_types)的文件。此值對於標準叢集是必要的，不適用於免費叢集。</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>要在每一個區域中建立的工作者節點數目。這是必要值。</dd>
+    <dd>要在每一個區域中建立的工作者節點數目。這是必要值，而且必須是 1 或更大的值。</dd>
 
   <dt><code>--hardware <em>HARDWARE</em></code></dt>
     <dd>工作者節點的硬體隔離層次。如果您希望可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 shared。這是選用值。</dd>
@@ -2870,7 +2901,7 @@ diskEncryption: <em>false</em></code></pre>
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.5_1512
+  Version:            1.10.7_1512
   ```
   {: screen}
 
@@ -2992,12 +3023,14 @@ diskEncryption: <em>false</em></code></pre>
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd><p>專用 VLAN 的 ID。此值是有條件的。</p>
     <p>如果您在區域中有專用 VLAN，則此值必須符合叢集裡一個以上工作者節點的專用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。</p>
-    <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。然後，針對您的帳戶<a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >啟用 VLAN Spanning</a>，讓不同區域中的工作者節點可以彼此通訊。</p>
+    <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
+    <p>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p>
 <p>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>公用 VLAN 的 ID。如果您要在建立叢集之後將節點上的工作負載公開給大眾使用，則這是必要值。它必須符合區域之叢集裡一個以上工作者節點的公用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。</p>
-    <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。然後，針對您的帳戶<a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >啟用 VLAN Spanning</a>，讓不同區域中的工作者節點可以彼此通訊。</p>
+    <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
+    <p>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p>
     <p>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p></dd>
 
   <dt><code>--private-only </code></dt>
@@ -3022,6 +3055,18 @@ diskEncryption: <em>false</em></code></pre>
 
   **僅限多區域叢集**：將工作者節點儲存區的網路 meta 資料設定成使用與先前使用之區域不同的公用或專用 VLAN。已在儲存區中建立的工作者節點會繼續使用前一個公用或專用 VLAN，但儲存區中的新工作者節點會使用新的網路資料。
 
+  專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。
+  <ol><li>請檢查叢集中可用的 VLAN。<pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>輸出範例：</p>
+  <pre class="screen"><code>Subnet VLANs
+VLAN ID   Subnet CIDR         Public   User-managed
+229xxxx   169.xx.xxx.xxx/29   true     false
+229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
+  <li>檢查您要使用的公用及專用 VLAN ID 是相容的。為了能夠相容，<strong>路由器</strong>必須具有相同的 Pod ID。<pre class="pre"><code>ibmcloud ks vlans --zone &lt;zone&gt;</code></pre><p>輸出範例：</p>
+  <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
+229xxxx          1234     private   bcr01a.dal12   true
+229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>請注意，<strong>路由器</strong> Pod ID 相符項：`01a` 及 `01a`。如果有一個 Pod ID 是 `01a`，而另一個是 `02a`，則您無法對工作者節點儲存區設定這些公用及專用 VLAN ID。</p></li>
+  <li>如果您沒有任何可用的 VLAN，則可以<a href="/docs/infrastructure/vlans/order-vlan.html#order-vlans">訂購新的 VLAN</a>。</li></ol>
+
   <strong>指令選項</strong>：
 
   <dl>
@@ -3035,10 +3080,10 @@ diskEncryption: <em>false</em></code></pre>
     <dd>在其中新增區域的工作者節點儲存區清單（以逗點區隔）。需要至少 1 個工作者節點儲存區。</dd>
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-    <dd>專用 VLAN 的 ID。這是必要值。它必須符合叢集裡一個以上工作者節點的專用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。如果您沒有任何可用的 VLAN，則可以針對帳戶<a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >啟用 VLAN Spanning</a>。<br><br>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</dd>
+    <dd>專用 VLAN 的 ID。不論您是要使用與用於其他工作者節點相同還是不同的專用 VLAN，都需要此值。<br><br><strong>重要事項</strong>：專用及公用 VLAN 必須相容，您可以從**路由器** ID 字首判定。<br><br>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd>公用 VLAN 的 ID。如果您要變更區域的公用 VLAN，則這是必要值。如果您不要將專用 VLAN 變更為公用 VLAN，請使用相同的專用 VLAN ID。公用 VLAN ID 必須符合叢集裡一個以上工作者節點的公用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。如果您沒有任何可用的 VLAN，則可以針對帳戶<a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >啟用 VLAN Spanning</a>。<br><br>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</dd>
+    <dd>公用 VLAN 的 ID。只有在您要變更區域的公用 VLAN 時，才需要此值。若要變更公用 VLAN，您必須一律提供相容的專用 VLAN。<br><br><strong>重要事項</strong>：專用及公用 VLAN 必須相容，您可以從**路由器** ID 字首判定。<br><br>**附註**：新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</dd>
 
   <dt><code>-f</code></dt>
     <dd>強制執行指令，而不出現使用者提示。這是選用值。</dd>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -39,7 +39,7 @@ lastupdated: "2018-08-06"
 
 Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來強制執行這些原則（包括任何會自動轉換為 Calico 原則的 Kubernetes 網路原則）。iptables 規則作為工作者節點的防火牆，以定義網路資料流量必須符合才能轉遞至目標資源的特徵。
 
-若要使用 Ingress 及 LoadBalancer 服務，請使用 Calico 及 Kubernetes 原則來管理進出叢集的網路資料流量。請不要使用 IBM Cloud 基礎架構 (SoftLayer) [安全群組](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)。IBM Cloud 基礎架構 (SoftLayer) 安全群組會套用至單一虛擬伺服器的網路介面，以過濾 Hypervisor 層次的資料流量。不過，安全群組不支援 VRRP 通訊協定，而 {{site.data.keyword.containershort_notm}} 使用此通訊協定來管理 LoadBalancer IP 位址。如果沒有 VRRP 通訊協定可以管理 LoadBalancer IP，則 Ingress 及 LoadBalancer 服務無法正常運作。
+若要使用 Ingress 及 LoadBalancer 服務，請使用 Calico 及 Kubernetes 原則來管理進出叢集的網路資料流量。請不要使用 IBM Cloud 基礎架構 (SoftLayer) [安全群組](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)。IBM Cloud 基礎架構 (SoftLayer) 安全群組會套用至單一虛擬伺服器的網路介面，以過濾 Hypervisor 層次的資料流量。不過，安全群組不支援 VRRP 通訊協定，而 {{site.data.keyword.containerlong_notm}} 使用此通訊協定來管理 LoadBalancer IP 位址。如果沒有 VRRP 通訊協定可以管理 LoadBalancer IP，則 Ingress 及 LoadBalancer 服務無法正常運作。
 {: tip}
 
 <br />
@@ -125,7 +125,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 ### 針對執行 Kubernets 1.10 版或更新版本的叢集，安裝並配置 3.1.1 版 Calico CLI
 {: #1.10_install}
 
-開始之前，請[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括「超級使用者」角色的金鑰，您需要此金鑰才能執行 Calico 指令。
+開始之前，請[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
 
   ```
   ibmcloud ks cluster-config <cluster_name> --admin
@@ -301,7 +301,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 ### 針對執行 Kubernets 1.9 版或更早版本的叢集，安裝並配置 1.6.3 版 Calico CLI
 {: #1.9_install}
 
-開始之前，請[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括「超級使用者」角色的金鑰，您需要此金鑰才能執行 Calico 指令。
+開始之前，請[將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
 
   ```
   ibmcloud ks cluster-config <cluster_name> --admin
@@ -482,7 +482,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括「超級使用者」角色的金鑰，您需要此金鑰才能執行 Calico 指令。
+2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
     ```
     ibmcloud ks cluster-config <cluster_name> --admin
     ```
@@ -499,7 +499,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 ### 檢視執行 Kubernetes 1.10 版或更新版本之叢集裡的網路原則
 {: #1.10_examine_policies}
 
-Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calicoctl.cfg` 旗標。
+Linux 和 Mac 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calicoctl.cfg` 旗標。
 {: tip}
 
 1. 檢視 Calico 主機端點。
@@ -586,7 +586,7 @@ Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calic
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
-2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括「超級使用者」角色的金鑰，您需要此金鑰才能執行 Calico 指令。
+2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
     ```
     ibmcloud ks cluster-config <cluster_name> --admin
     ```
@@ -747,6 +747,85 @@ Calico `preDNAT` 網路原則可以協助您，因為它們會根據 Calico 網�
 若要查看如何將來源 IP 位址列入白名單或黑名單，請嘗試[使用 Calico 網路原則封鎖資料流量指導教學](cs_tutorials_policies.html#policy_tutorial)。如需其他控制資料流量進出叢集的範例 Calico 網路原則，請參閱[主要原則展示 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 及[進階網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)。
 {: tip}
 
+## 隔離專用網路上的叢集
+{: #isolate_workers}
+
+如果您有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，則必須[啟用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。不過，當啟用 VLAN Spanning 時，任何已連接至相同 IBM Cloud 帳戶中的任何專用 VLAN 的系統都可以與工作者節點通訊。
+
+您可以套用 [Calico 專用網路原則![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation)，將您的叢集與專用網路上的其他系統隔離。這一組 Calico 原則和主機端點隔離叢集的專用網路資料流量與該帳戶的專用網路中的其他資源。
+
+原則以工作者節點專用介面 (eth0) 及叢集的 Pod 網路為鎖定目標。
+
+**工作者節點**
+
+* 專用介面 egress 僅允許到 Pod IP、此叢集中的工作者節點及 UPD/TCP 埠 53（用於 DNS 存取）。
+* 專用介面 ingress 僅允許來自叢集中的工作者節點，且僅允許到 DNS、kubelet、ICMP 及 VRRP。
+
+**Pod**
+
+* Pod 的所有 ingress 僅允許來自叢集中的工作者節點。
+* Pod 的 egress 僅限於到公用 IP、DNS、kubelet 及叢集中的其他 Pod。
+
+開始之前：
+1. [安裝並配置 Calico CLI。](#cli_install)
+2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+若要使用 Calico 原則隔離專用網路上的叢集，請執行下列動作：
+
+1. 複製 `IBM-Cloud/kube-samples` 儲存庫。
+    ```
+    git clone https://github.com/IBM-Cloud/kube-samples.git
+    ```
+    {: pre}
+
+2. 導覽至與您的叢集版本相容的 Calico 版本的專用原則目錄。
+    * Kubernetes 1.10 版或更新版本的叢集：
+      ```
+      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
+      ```
+      {: pre}
+
+    * Kubernetes 1.9 版或更舊版本的叢集：
+      ```
+      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
+      ```
+      {: pre}
+
+3. 設定專用主機端點原則。
+    1. 開啟 `generic-privatehostendpoint.yaml` 原則。
+    2. 將 `<worker_name>` 取代為工作者節點的名稱，並將 `<worker-node-private-ip>` 取代為工作者節點的專用 IP 位址。若要查看工作者節點專用 IP，請執行 `ibmcloud ks workers --cluster <my_cluster>`.
+    3. 在新的一節針對叢集中的每一個工作者節點重複此步驟。
+    **附註**：每次將工作者節點新增至叢集時，您必須使用新項目來更新主機端點檔案。
+
+4. 將所有原則套用至叢集。
+    - Linux 及 OS X：
+
+      ```
+      calicoctl apply -f allow-all-workers-private.yaml
+      calicoctl apply -f allow-dns-10250.yaml
+      calicoctl apply -f allow-egress-pods.yaml
+      calicoctl apply -f allow-icmp-private.yaml
+      calicoctl apply -f allow-vrrp-private.yaml
+      calicoctl apply -f generic-privatehostendpoint.yaml
+      ```
+      {: pre}
+
+    - Windows：
+
+      ```
+      calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-dns-10250.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
 ## 控制 Pod 之間的資料流量
 {: #isolate_services}
 
@@ -820,7 +899,7 @@ spec:
 
 下列情境示範如何管理跨多個名稱空間的應用程式微服務之間的資料流量。
 
-不同子團隊所擁有的服務需要通訊，但服務會部署至相同叢集內的不同名稱空間。Accounts 團隊會將應用程式 Srv1 的前端、後端及資料庫服務部署至 accounts 名稱空間。Finance 團隊會將應用程式 Srv2 的前端、後端及資料庫服務部署至 finance 名稱空間。兩個團隊都會將每個服務標上 `app: Srv1` 或 `app: Srv2` 標籤，以及 `tier: frontend`、`tier: backend` 或 `tier: db` 標籤。他們也會將名稱空間標上 `usage: finance` 或 `usage: accounts` 標籤。
+不同子團隊所擁有的服務需要通訊，但服務會部署至相同叢集內的不同名稱空間。Accounts 團隊會將應用程式 Srv1 的前端、後端及資料庫服務部署至 accounts 名稱空間。Finance 團隊會將應用程式 Srv2 的前端、後端及資料庫服務部署至 finance 名稱空間。兩個團隊都會將每個服務標上 `app: Srv1` 或 `app: Srv2` 標籤，以及 `tier: frontend`、`tier: backend` 或 `tier: db` 標籤。它們也會為名稱空間加上 `usage: accounts` 或 `usage: finance` 標籤。
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="使用網路原則管理跨名稱空間資料流量。" style="width:475px; border-style: none"/>
 
@@ -852,3 +931,129 @@ spec:
 資料流量現在可以從 finance 微服務流向 accounts Srv1 後端。accounts Srv1 後端可以回應 finance 微服務，但無法建立反向資料流量連線。
 
 **附註**：您無法容許來自另一個名稱空間中特定應用程式 Pod 的資料流量，因為無法結合 `podSelector` 及 `namespaceSelector`。在此範例中，允許來自 finance 名稱空間中所有微服務的所有資料流量。
+
+## 記載被拒絕的資料流量
+{: #log_denied}
+
+若要記載針對叢集中的特定 Pod 而被拒絕的資料流量要求，您可以建立 Calico 日誌網路原則。
+{: shortdesc}
+
+當您設定網路原則來限制應用程式 Pod 的資料流量時，這些原則所不允許的資料流量要求會遭到拒絕及捨棄。在某些情況下，您可能想要取得被拒絕之資料流量要求的相關資訊。例如，您可能會注意到不斷被您的其中一個網路原則拒絕的一些異常資料流量。若要監視潛在的安全威脅，您可以設定記載，在每次原則拒絕所指定的應用程式 Pod 的嘗試動作時就進行記錄。
+
+開始之前：
+1. [安裝及配置 Calico CLI。](#cli_install)**附註**：這些步驟中的原則使用與執行 Kubernets 1.10 版或更新版本的叢集相容的 Calico 第 3 版語法。對於執行 Kgbernets 1.9 版或更舊版本的叢集，您必須使用 [Calico 第 2 版原則語法![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)。
+2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+若要建立 Calico 原則來記載被拒絕的叢集，請執行下列動作：
+
+1. 建立或使用現有的 Kubernetes 或 Calico 網路原則，以封鎖或限制送入的資料流量。例如，若要控制 Pod 之間的資料流量，您可以使用限制存取 NGINX 應用程式的下列 Kubernetes 原則範例，名稱為 `access-nginx`。具有 "run=nginx" 標籤的 Pod 的送入資料流量，只能是來自具有 "run=access" 標籤的 Pod。"run=nginx" 應用程式 Pod 的所有其他送入的資料流量會遭到封鎖。
+    ```
+    kind: NetworkPolicy
+    apiVersion: extensions/v1beta1
+    metadata:
+      name: access-nginx
+    spec:
+      podSelector:
+        matchLabels:
+          run: nginx
+      ingress:
+        - from:
+          - podSelector:
+              matchLabels:
+                run: access
+    ```
+    {: codeblock}
+
+2. 套用原則。
+    * 若要套用 Kubernetes 原則：
+        ```
+        kubectl apply -f <policy_name>.yaml
+        ```
+        {: pre}
+        Kubernetes 原則會自動轉換為 Calico NetworkPolicy，以便 Calico 可以將其套用為 iptables 規則。
+
+    * 若要套用 Calico 原則：
+        ```
+        calicoctl apply -f <policy_name>.yaml --config=<filepath>/calicoctl.cfg
+        ```
+        {: pre}
+
+3. 如果您已套用 Kubernetes 原則，請檢閱自動建立的 Calico 原則的語法，並複製 `spec.selector` 欄位的值。
+    ```
+    calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
+    ```
+    {: pre}
+
+    例如，在套用及轉換之後，`access-nginx` 原則具有下列 Calico 第 3 版語法。`spec.selector` 欄位含有此值：`projectcalico.org/orchestrator == 'k8s' && run =='nginx'`。
+    ```
+    apiVersion: projectcalico.org/v3
+    kind: NetworkPolicy
+    metadata:
+      name: access-nginx
+    spec:
+      ingress:
+      - action: Allow
+        destination: {}
+        source:
+          selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
+      order: 1000
+      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+      types:
+      - Ingress
+        ```
+    {: screen}
+
+4. 若要記載您先前建立的 Calico 原則所拒絕的所有資料流量，請建立一個名稱為 `log-denied-packets` 的 Calico NetworkPolicy。例如，使用下列原則來記載您在步驟 1 定義的網路原則所拒絕的所有封包。日誌原則會使用與範例 `access-nginx` 原則相同的 Pod 選取器，而將此原則新增至 Calico iptables 規則鏈。透過使用更高的順序號碼（例如 `3000`），您可確保將此規則新增至 iptables 規則鏈的結尾。來自 "run=access" Pod 的任何要求封包若符合 `access-nginx` 原則規則，即為 "run=nginx" Pod 所接受。但是，當來自任何其他來源的封包嘗試符合低順序 `access-nginx` 原則規則時，就會遭到拒絕。之後，這些封包會嘗試符合高順序 `log-denied-packets` 原則規則。`log-denied-packets` 會記載所有到達它的封包，因此只會記載 "run=nginx" Pod 所拒絕的封包。在記載封包的嘗試之後，即捨棄封包。
+    ```
+    apiVersion: projectcalico.org/v3
+    kind: NetworkPolicy
+    metadata:
+      name: log-denied-packets
+    spec:
+      types:
+      - Ingress
+      ingress:
+      - action: Log
+        destination: {}
+        source: {}
+      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+      order: 3000
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>瞭解日誌原則 YAML 元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/>瞭解日誌原則 YAML 元件</th>
+    </thead>
+    <tbody>
+    <tr>
+     <td><code>types</code></td>
+     <td>這個 <code>Ingress</code> 原則套用送入的資料流量要求。<strong>附註：</strong>值 <code>Ingress</code> 是所有送入的資料流量的通稱，而不是僅指來自於 IBM Ingress ALB 的資料流量。</td>
+    </tr>
+     <tr>
+      <td><code>ingress</code></td>
+      <td><ul><li><code>action</code>：<code>Log</code> 動作會將符合此原則的任何要求的日誌項目寫入到工作者節點上的 `/var/log/syslog` 路徑。</li><li><code>destination</code>：不指定任何目的地，因為 <code>selector</code> 會將此原則套用至具有特定標籤的所有 Pod。</li><li><code>source</code>：此原則套用至來自任何來源的要求。</td>
+     </tr>
+     <tr>
+      <td><code>selector</code></td>
+      <td>請將 &lt;selector&gt; 取代為您在步驟 1 的 Calico 原則中使用於 `spec.selector` 欄位的相同選取器，或您在步驟 3 中針對 Kubernetes 原則而在 Calico 語法中找到的選取器。例如，使用選取器 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>，此原則的規則會新增至與步驟 1 的 <code>access-nginx</code> 範例網路原則規則相同的 iptables 鏈。此原則僅適用於使用相同 Pod 選取器標籤的 Pod 的送入網路資料流量。</td>
+     </tr>
+     <tr>
+      <td><code>order</code></td>
+      <td>Calico 原則含有順序可判定其何時套用至送入的要求封包。會先套用含有低順序的原則（例如 <code>1000</code>）。會在較低順序的原則之後套用較高順序的原則。例如，具有非常高順序的原則（例如 <code>3000</code>），實際上會在套用所有較低順序的原則之後最後套用。</br></br>送入的要求封包會經過 iptables 規則鏈，並嘗試先符合較低順序原則的規則。如果封包符合任何規則，則接受封包。不過，如果封包不符合任何規則，它會抵達 iptables 規則鏈中具有最高順序的最後一個規則。若要確定這是規則鏈中的最後一個原則，請使用較高順序，例如 <code>3000</code>，而不是您在步驟 1 建立的原則。</td>
+     </tr>
+    </tbody>
+    </table>
+
+5. 套用原則。
+    ```
+    calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+    ```
+    {: pre}
+
+6. [轉遞日誌](cs_health.html#configuring)，從 `/var/log/syslog` 到 {{site.data.keyword.loganalysislong}}，或到外部 syslog 伺服器。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 [Istio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/info/istio) 是一种开放式平台，用于连接、保护、控制和观察云平台（例如，{{site.data.keyword.containerlong}} 中的 Kubernetes）上的服务。通过 Istio，可管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，验证服务身份，等等。
 {:shortdesc}
 
-在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containershort}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar sidecar 代理。
+在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containerlong}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar sidecar 代理。
 
 ## 目标
 
@@ -41,8 +41,8 @@ lastupdated: "2018-08-06"
 
 ## 先决条件
 
--  [安装 IBM Cloud CLI、{{site.data.keyword.containershort_notm}} 插件和 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes V1.9 或更高版本。确保安装与集群的 Kubernetes 版本相匹配的 `kubectl` CLI 版本。
--  使用 Kubernetes V1.9 或更高版本来[创建集群](cs_clusters.html#clusters_cli)。
+-  [安装 IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} 插件和 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes V1.9 或更高版本。确保安装与集群的 Kubernetes 版本相匹配的 `kubectl` CLI 版本。
+-  [创建运行 Kubernetes V1.9 或更高版本的集群](cs_clusters.html#clusters_cli)，或者[将现有集群更新为 V1.9](cs_versions.html#cs_v19)。
 -  [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 
 ## 第 1 课：下载并安装 Istio
@@ -52,8 +52,8 @@ lastupdated: "2018-08-06"
 {:shortdesc}
 
 1. 使用 [IBM Istio Helm 图表 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm/ibm-istio) 安装 Istio。
-    1. [为集群安装 Helm，然后将 IBM 存储库添加到 Helm 实例](cs_integrations.html#helm)。
-    2. 安装 Istio 的定制资源定义。
+    1. [在集群中设置 Helm 并将 IBM 存储库添加到 Helm 实例](cs_integrations.html#helm)。
+    2.  ****仅限 Helm V2.9 或更低版本**：安装 Istio 的定制资源定义。
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
@@ -63,11 +63,6 @@ lastupdated: "2018-08-06"
         helm install ibm/ibm-istio --name=istio --namespace istio-system
         ```
         {: pre}
-    4. 向 PATH 添加 `istioctl` 客户机。例如，在 MacOS 或 Linux 系统上运行以下命令：
-       ```
-       export PATH=$PWD/istio-1.0/bin:$PATH
-       ```
-       {: pre}
 
 2. 确保在继续之前完全部署了全部 9 个 Istio 服务的 pod 和 Prometheus 的 pod。
     ```
@@ -102,21 +97,23 @@ lastupdated: "2018-08-06"
 这四个微服务包括产品 Web 页面、书籍详细信息、评论（具有多个版本的评论微服务）和评级。部署 BookInfo 时，在部署微服务 pod 之前，Envoy sidecar 代理会作为容器注入到应用程序微服务的 pod 中。Istio 使用 Envoy 代理的扩展版本来调解服务网中所有微服务的所有入站和出站流量。有关 Envoy 的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy)。
 
 1. 下载包含必要 BookInfo 文件的 Istio 包。
-    1. 直接从 [https://github.com/istio/istio/releases ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/istio/istio/releases) 下载 Istio，或使用 curl 获取最新版本：
-
+    1. 直接从 [https://github.com/istio/istio/releases ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/istio/istio/releases) 下载 Istio 并解压缩安装文件，或使用 cURL 获取最新版本：
        ```
    curl -L https://git.io/getLatestIstio | sh -
    ```
        {: pre}
 
-    2. 解压缩安装文件。
-
-    3. 将目录切换到 Istio 文件位置。
-
+    2. 将目录切换到 Istio 文件位置。
        ```
-       cd filepath/istio-1.0
+       cd <filepath>/istio-1.0
        ```
        {: pre}
+
+    3. 向 PATH 添加 `istioctl` 客户机。例如，在 MacOS 或 Linux 系统上运行以下命令：
+        ```
+       export PATH=$PWD/istio-1.0/bin:$PATH
+       ```
+        {: pre}
 
 2. 使用 `istio-injection=enabled` 标记 `default` 名称空间。
     ```
@@ -124,14 +121,14 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-2. 部署 BookInfo 应用程序。当应用程序微服务部署时，每个微服务 pod 中也会部署 Envoy sidecar。
+3. 部署 BookInfo 应用程序。当应用程序微服务部署时，每个微服务 pod 中也会部署 Envoy sidecar。
 
    ```
    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
    ```
    {: pre}
 
-3. 确保已部署微服务及其相应的 pod：
+4. 确保已部署微服务及其相应的 pod：
     ```
     kubectl get svc
     ```
@@ -140,7 +137,6 @@ lastupdated: "2018-08-06"
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
     details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    guestbook                 LoadBalancer   172.21.164.94    169.46.5.163   3000:32135/TCP   1m
     productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
     ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
     reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
@@ -155,9 +151,6 @@ lastupdated: "2018-08-06"
     ```
     NAME                                     READY     STATUS      RESTARTS   AGE
     details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-    guestbook-76897854cc-6zsws               1/1       Running     0          2m
-    guestbook-76897854cc-pcp4v               1/1       Running     0          2m
-    guestbook-76897854cc-tlqhs               1/1       Running     0          2m
     productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
     ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
     reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
@@ -166,7 +159,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. 要验证应用程序部署，请获取集群的公共地址。
+5. 要验证应用程序部署，请获取集群的公共地址。
     * 标准集群：
         1. 要在公共 Ingress IP 上公开应用程序，请部署 BookInfo 网关。
             ```
@@ -184,6 +177,7 @@ lastupdated: "2018-08-06"
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
+            {: pre}
 
         4. 创建使用 Ingress 主机和端口的 `GATEWAY_URL` 环境变量。
 
@@ -195,8 +189,8 @@ lastupdated: "2018-08-06"
     * 免费集群：
         1. 获取集群中任何工作程序节点的公共 IP 地址。
             ```
-            ibmcloud ks workers <cluster_name_or_ID>
-            ```
+        ibmcloud ks workers <cluster_name_or_ID>
+        ```
             {: pre}
 
         2. 创建使用工作程序节点公共 IP 地址的 GATEWAY_URL 环境变量。
@@ -211,7 +205,19 @@ lastupdated: "2018-08-06"
      ```
      {: pre}
 
-6. 在浏览器中，转至 `http://$GATEWAY_URL/productpage` 以查看 BookInfo Web 页面。
+6.  在浏览器中查看 BookInfo Web 页面。
+
+    对于 Mac OS 或 Linux：
+    ```
+    open http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
+
+    对于 Windows：
+    ```
+    start http://$GATEWAY_URL/productpage
+    ```
+    {: pre}
 
 7. 尝试多次刷新该页面。不同版本的评论部分会以红色星星、黑色星星和无星星进行循环。
 
@@ -235,7 +241,7 @@ lastupdated: "2018-08-06"
     ```
     {: pre}
 
-3. 删除 Istio 定制资源定义。
+3. ****可选**：如果使用的是 Helm 2.9 或更低版本并且应用了 Istio 定制资源定义，请删除这些定义。
     ```
     kubectl delete -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
     ```

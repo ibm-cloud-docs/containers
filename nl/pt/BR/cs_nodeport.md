@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -35,7 +35,7 @@ serviço. Para acessar o serviço por meio da Internet, será possível usar o e
 
 O diagrama a seguir mostra como a comunicação é direcionada da Internet para um app quando um serviço NodePort está configurado:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containerlong_notm}} usando NodePort" style="width:550px; border-style: none"/>
 
 1. Uma solicitação é enviada para seu app usando o endereço IP público do seu nó do trabalhador e o NodePort no nó do trabalhador.
 

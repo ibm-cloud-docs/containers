@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-08-06"
 # Link correlati
 {: #cs_rellinks}
 
-## {{site.data.keyword.containershort_notm}}
+## {{site.data.keyword.containerlong_notm}}
 {: #containers}
 
 **Generale**
@@ -44,12 +44,11 @@ lastupdated: "2018-08-06"
 **Esercitazioni, demo e corsi**
 
 - [Modernizza ed estendi un'applicazione web Java esistente (JPetStore) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
-- [developerWorks container orchestration journeys ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-- [developerWorks courses ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
+- [Percorso di apprendimento Cognitive Class di {{site.data.keyword.containerlong_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
 - [Come creare un'applicazione web in IKS ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Proteggi i cluster multiregione con CIS (Cloud Internet Service)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Analizza i log e monitora l'integrità delle applicazioni![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
-- [Configura l'integrazione e la fornitura continue per {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
+- [Configura l'integrazione e la fornitura continue per {{site.data.keyword.containerlong}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
 - [Migra un'applicazione VM al cloud ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
 - [Migra un'applicazione CF al cloud ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
 - [Orchestra carichi di lavoro a lunga esecuzione per le applicazioni con un servizio di messaggistica basato su Apache Kafka ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,9 +26,8 @@ lastupdated: "2018-08-06"
 Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presente queste tecniche per la risoluzione dei problemi di rete del cluster.
 {: shortdesc}
 
-Se hai un problema più generale, prova a [eseguire il debug del cluster](cs_troubleshoot.html).
+Hai problemi a connetterti alla tua applicazione tramite Ingress? Prova ad eseguire il [debug di Ingress](cs_troubleshoot_debug_ingress.html).
 {: tip}
-
 
 ## Impossibile collegarsi a un'applicazione tramite un servizio di programma di bilanciamento del carico
 {: #cs_loadbalancer_fails}
@@ -46,7 +45,7 @@ Il tuo servizio di programma di bilanciamento del carico potrebbe non funzionare
 {: tsResolve}
 Per risolvere i problemi del tuo servizio di programma di bilanciamento del carico:
 
-1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità al tuo servizio di programma di bilanciamento del carico.
+1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità per il tuo servizio di programma di bilanciamento del carico.
 
   ```
   ibmcloud ks workers <cluster_name_or_ID>
@@ -106,146 +105,23 @@ Per risolvere i problemi del tuo servizio di programma di bilanciamento del cari
 <br />
 
 
-
-
 ## Impossibile collegarsi a un'applicazione tramite Ingress
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
 Hai esposto pubblicamente la tua applicazione creando una risorsa Ingress per la tua applicazione nel tuo cluster. Quando tenti di collegarti alla tua applicazione tramite il dominio secondario o l'indirizzo IP pubblico del programma di bilanciamento del carico (ALB) dell'applicazione Ingress, la connessione non riesce o va in timeout.
 
-{: tsCauses}
-Ingress potrebbe non funzionare correttamente per i seguenti motivi:
-<ul><ul>
-<li>Il cluster non è ancora stato completamente distribuito.
-<li>Il cluster è stato configurato come un cluster gratuito o standard con solo un nodo di lavoro.
-<li>Lo script di configurazione Ingress include degli errori.
-</ul></ul>
-
 {: tsResolve}
-Per risolvere i problemi con Ingress:
-
-1.  Verifica di aver configurato un cluster standard che è stato completamente distribuito e che abbia almeno due nodi di lavoro per garantire l'elevata disponibilità al tuo ALB.
-
-  ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
-  {: pre}
-
-    Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro visualizzi **Pronto** e che il **Tipo di macchina** sia diverso da **gratuito**.
-
-2.  Richiama l'indirizzo IP pubblico e il dominio secondario dell'ALB e quindi esegui il ping ad entrambi.
-
-    1.  Richiama il dominio secondario ALB.
-
-      ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
-      ```
-      {: pre}
-
-    2.  Esegui il ping del dominio secondario ALB.
-
-      ```
-      ping <ingress_subdomain>
-      ```
-      {: pre}
-
-    3.  Richiama l'indirizzo IP pubblico del tuo ALB.
-
-      ```
-      nslookup <ingress_subdomain>
-      ```
-      {: pre}
-
-    4.  Esegui il ping dell'indirizzo IP pubblico dell'ALB.
-
-      ```
-      ping <ALB_IP>
-      ```
-      {: pre}
-
-    Se la CLI restituisce un timeout per il dominio secondario o per l'indirizzo IP pubblico dell'ALB e hai configurato un firewall personalizzato che protegge i tuoi nodi di lavoro, apri ulteriori porte e gruppi di rete nel tuo [firewall](cs_troubleshoot_clusters.html#cs_firewall).
-
-3.  Se stai utilizzando un dominio personalizzato, assicurati che sia associato al dominio secondario o all'indirizzo IP pubblico dell'ALB fornito da IBM con il tuo provider DNS.
-    1.  Se hai utilizzato il dominio secondario dell'ALB subdomain, verifica il tuo record di nome canonico (CNAME).
-    2.  Se hai utilizzato l'indirizzo IP pubblico dell'ALB, verifica che il tuo dominio personalizzato sia associato all'indirizzo IP pubblico portatile nel record di puntatore (PTR).
-4.  Verifica il tuo file di configurazione della risorsa Ingress.
-
+Controlla innanzitutto che il tuo cluster sia completamente distribuito e che abbia almeno 2 nodi di lavoro disponibili per zona per garantire l'elevata disponibilità per il tuo ALB.
     ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: myingress
-    spec:
-      tls:
-      - hosts:
-        - <ingress_subdomain>
-        secretName: <ingress_tls_secret>
-      rules:
-      - host: <ingress_subdomain>
-        http:
-          paths:
-          - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 80
-    ```
-    {: codeblock}
-
-    1.  Verifica che il dominio secondario dell'ALB e il certificato TLS siano corretti. Per trovare il dominio secondario e il certificato TLS forniti da IBM, esegui `ibmcloud ks cluster-get <cluster_name_or_ID>`.
-    2.  Assicurati che la tua applicazione sia in ascolto sullo stesso percorso configurato nella sezione **percorso** del tuo Ingress. Se la tua applicazione è configurata per essere in ascolto nel percorso root, includi **/** al tuo percorso.
-5.  Controlla la distribuzione di Ingress e cerca potenziali messaggi di avvertenza o di errore.
-
-    ```
-    kubectl describe ingress <myingress>
+    ibmcloud ks workers <cluster_name_or_ID>
     ```
     {: pre}
 
-    Ad esempio, nella sezione **Eventi** dell'output, potresti vedere dei messaggi di avvertenza sui valori non validi nella risorsa Ingress o in alcune annotazioni che hai utilizzato.
+Nel tuo output della CLI, assicurati che lo **Stato** del tuo nodo di lavoro visualizzi **Pronto** e che il **Tipo di macchina** sia diverso da **gratuito**.
 
-    ```
-    Name:             myingress
-    Namespace:        default
-    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
-    Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
-    Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-    ```
-    {: screen}
-
-6.  Verifica i log del tuo ALB.
-    1.  Richiama l'ID dei pod Ingress in esecuzione nel tuo cluster.
-
-      ```
-      kubectl get pods -n kube-system | grep alb
-      ```
-      {: pre}
-
-    2.  Richiama i log per ogni pod Ingress.
-
-      ```
-      kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
-      ```
-      {: pre}
-
-    3.  Ricerca messaggi di errore nei log dell'ALB.
+* Se il tuo cluster standard è completamente distribuito e ha almeno 2 nodi di lavoro per zona, ma non è disponibile alcun **Dominio secondario Ingress**, vedi [Impossibile ottenere un dominio secondario per l'ALB Ingress](cs_troubleshoot_network.html#cs_subnet_limit).
+* Per altre situazioni di cui occuparsi, risolvi i problemi della tua impostazione Ingress attenendoti alla procedura in [Debug di Ingress](cs_troubleshoot_debug_ingress.html).
 
 <br />
 
@@ -307,7 +183,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). In tale zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containershort_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN del cluster in una zona ha già raggiunto tale limite, il provisioning del **dominio secondario Ingress** non riesce.
+Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). In tale zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN del cluster in una zona ha già raggiunto tale limite, il provisioning del **dominio secondario Ingress** non riesce.
 
 Per visualizzare quante sottoreti sono presenti in una VLAN:
 1.  Dalla [console dell'infrastruttura IBM Cloud (SoftLayer)](https://control.bluemix.net/), seleziona **Rete** > **Gestione IP** > **VLAN**.
@@ -316,7 +192,7 @@ Per visualizzare quante sottoreti sono presenti in una VLAN:
 {: tsResolve}
 Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Quindi [crea un cluster](cs_cli_reference.html#cs_cluster_create) che utilizzi questa nuova VLAN.
 
-Se hai un'altra VLAN disponibile, puoi [configurare lo spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili.
+Se hai un'altra VLAN disponibile, puoi [configurare lo spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. 
 
 Se non stai utilizzando tutte le sottoreti nella VLAN, puoi riutilizzare le sottoreti nel cluster.
 1.  Controlla che le sottoreti che desideri utilizzare siano disponibili. **Nota**: l'account dell'infrastruttura che stai utilizzando potrebbe essere condiviso tra più account {{site.data.keyword.Bluemix_notm}}. Se è questo il caso, anche se esegui il comando `ibmcloud ks subnets` per vedere le sottoreti con **Bound Clusters**, potrai vedere le informazioni solo per i tuoi cluster. Controlla con il proprietario dell'account dell'infrastruttura per assicurarti che le sottoreti siano disponibili e non in uso da parte di un altro account o team.
@@ -344,10 +220,36 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: screen}
 
 {: tsCauses}
-In ciascuna zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containershort_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN pubblica del cluster in una zona ha già raggiunto tale limite, il provisioning dell'ALB Ingress pubblico per tale zona non riesce.
+In ciascuna zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN pubblica del cluster in una zona ha già raggiunto tale limite, il provisioning dell'ALB Ingress pubblico per tale zona non riesce.
 
 {: tsResolve}
 Per controllare il numero di sottoreti in una VLAN e per la procedura su come ottenere un'altra VLAN, vedi [Impossibile ottenere un dominio secondario per l'ALB Ingress](#cs_subnet_limit).
+
+<br />
+
+
+## La connessione tramite WebSocket si chiude dopo 60 secondi
+{: #cs_ingress_websocket}
+
+{: tsSymptoms}
+Il tuo servizio Ingress espone un'applicazione che utilizza un WebSocket. Tuttavia, la connessione tra un client e la tua applicazione WebSocket viene chiusa quando non viene inviato traffico tra di essi per 60 secondi.
+
+{: tsCauses}
+La connessione alla tua applicazione WebSocket potrebbe essere interrotta dopo 60 secondi di inattività per uno dei seguenti motivi:
+
+* La tua connessione Internet ha un proxy o un firewall che non tollerano lunghe connessioni.
+* Un timeout nell'ALB all'applicazione WebSocket termina la connessione.
+
+{: tsResolve}
+Per evitare che la connessione venga chiusa dopo 60 secondi di inattività:
+
+1. Se stabilisci una connessione alla tua applicazione WebSocket tramite un proxy o un firewall, assicurati che il proxy o il firewall non siano configurati per terminare automaticamente le connessioni lunghe.
+
+2. Per mantenere attiva la connessione, puoi aumentare il valore del timeout oppure configurare un heartbeat nella tua applicazione.
+<dl><dt>Modifica il timeout</dt>
+<dd>Aumenta il valore del `proxy-read-timeout` nella tua configurazione dell'ALB. Ad esempio, per modificare il timeout da `60s` a un valore più grande come `300s`, aggiungi questa [annotazione](cs_annotations.html#connection) al tuo file di risorse Ingress `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. Il timeout viene modificato per tutti gli ALB pubblici nel tuo cluster.</dd>
+<dt>Configura un heartbeat</dt>
+<dd>Se non vuoi modificare il valore di timeout della lettura predefinito di ALB, configura un heartbeat nella tua applicazione WebSocket. Quando configuri un protocollo heartbeat utilizzando un framework come [WAMP ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://wamp-proto.org/), il server di upstream dell'applicazione invia periodicamente un messaggio "ping" a un intervallo prestabilito e il client risponde con un messaggio "pong". Configura l'intervallo di heartbeat su 58 secondi o meno in modo che il traffico "ping/pong" mantenga la connessione aperta prima che venga implementato il timeout di 60 secondi.</dd></dl>
 
 <br />
 
@@ -456,7 +358,7 @@ Questo errore indica che la release precedente del grafico strongSwan non era st
 <br />
 
 
-## La connettività VPN strongSwan si interrompe dopo l'aggiunta o l'eliminazione del nodo di lavoro
+## La connettività VPN strongSwan si interrompe dopo che aggiungi o elimini nodi di lavoro
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}
@@ -608,9 +510,9 @@ Quando tenti di visualizzare le politiche di rete Calico nel tuo cluster eseguen
 Per utilizzare le politiche Calico, quattro fattori devono essere allineati: la tua versione del cluster Kubernetes, la versione della CLI Calico, la sintassi del file di configurazione Calico e i comandi di visualizzazione della politica. Uno o più di questi fattori non è alla versione corretta.
 
 {: tsResolve}
-Quando il tuo cluster è alla [versione Kubernetes 1.10 o successiva](cs_versions.html), devi utilizzare la CLI Calico v3.1, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
+Quando il tuo cluster è alla [versione Kubernetes 1.10 o successive](cs_versions.html), devi utilizzare la CLI Calico v3.1, la sintassi del file di configurazione `calicoctl.cfg` v3 e i comandi `calicoctl get GlobalNetworkPolicy` e `calicoctl get NetworkPolicy`.
 
-Quando il tuo cluster è alla [versione Kubernetes 1.9 o precedente](cs_versions.html), devi utilizzare la CLI Calico v1.6.3, la sintassi del file di configurazione `calicoctl.cfg` v2 e il comando `calicoctl get policy`.
+Quando il tuo cluster è alla [versione Kubernetes 1.9 o precedenti](cs_versions.html), devi utilizzare la CLI Calico v1.6.3, la sintassi del file di configurazione `calicoctl.cfg` v2 e il comando `calicoctl get policy`.
 
 Per assicurarti che tutti i fattori Calico siano allineati:
 
@@ -620,17 +522,17 @@ Per assicurarti che tutti i fattori Calico siano allineati:
     ```
     {: pre}
 
-    * Se il tuo cluster è alla versione Kubernetes 1.10 o successiva:
+    * Se il tuo cluster è alla versione Kubernetes 1.10 o successive:
         1. [Installa e configura la CLI Calico versione 3.1.1](cs_network_policy.html#1.10_install). La configurazione include l'aggiornamento manuale del file `calicoctl.cfg` per utilizzare la sintassi Calico v3.
         2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente alla sintassi Calico v2, puoi convertirlo a Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
         3. Per [visualizzare le politiche](cs_network_policy.html#1.10_examine_policies), assicurati di stare utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche dedicate a spazi dei nomi specifici.
 
-    * Se il tuo cluster è alla versione Kubernetes 1.9 o precedente:
+    * Se il tuo cluster è alla versione Kubernetes 1.9 o precedenti:
         1. [Installa e configura la CLI Calico versione 1.6.3](cs_network_policy.html#1.9_install). Assicurati che il file `calicoctl.cfg` utilizzi la sintassi Calico v2.
         2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v2 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
         3. Per [visualizzare le politiche](cs_network_policy.html#1.9_examine_policies), assicurati di stare utilizzando `calicoctl get policy`.
 
-Prima di aggiornare il tuo cluster da Kubernetes versione 1.9 o precedente alla versione 1.10 o successiva, rivedi [Preparazione dell'aggiornamento a Calico v3](cs_versions.html#110_calicov3).
+Prima di aggiornare il tuo cluster da Kubernetes versione 1.9 o precedenti alla versione 1.10 o successive, rivedi [Preparazione dell'aggiornamento a Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 <br />
@@ -709,18 +611,20 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
+-  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plug-in e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
+
 -   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
--   Pubblica una domanda in [{{site.data.keyword.containershort_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
+-   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
 
     Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
     {: tip}
 -   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
 
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
-{{site.data.keyword.containershort_notm}}, inserisci la tua domanda in
+{{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.
-    -   Per domande sul servizio e sulle istruzioni per l'utilizzo iniziale, utilizza il forum
-[IBM developerWorks dW Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
+    -   Per domande sul servizio e istruzioni introduttive, utilizza il forum
+[IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support/howtogetsupport.html#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,19 +20,21 @@ lastupdated: "2018-08-06"
 Una región es una ubicación geográfica específica en la que puede desplegar apps, servicios y otros recursos de {{site.data.keyword.Bluemix}}. Las [regiones de {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) difieren de las [regiones de {{site.data.keyword.containerlong}}](#container_regions). Las regiones constan de una o más zonas, que son centros de datos físicos que alojan los recursos de cálculo, de red, de almacenamiento y los recursos relacionados con refrigeración y alimentación que alojan los servicios y las aplicaciones. Las zonas están aisladas unas de otras, lo que garantiza que no haya un punto único de error compartido.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containershort_notm}}, sus recursos permanecen en la región en la que se despliega el clúster.
+{{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, sus recursos permanecen en la región en la que se despliega el clúster. 
 
-![Regiones y zonas de {{site.data.keyword.containershort_notm}}](/images/regions-mz.png)
+**Nota**: Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 
-_Regiones y zonas de {{site.data.keyword.containershort_notm}}_
+![Regiones y zonas de {{site.data.keyword.containerlong_notm}}](/images/regions-mz.png)
 
-Las regiones soportadas de {{site.data.keyword.containershort_notm}} son las siguientes:
-  * AP Norte
-  * AP Sur
-  * UE Central
-  * UK Sur
-  * EE.UU. Este
-  * EE.UU. Sur
+_Regiones y zonas de {{site.data.keyword.containerlong_notm}}_
+
+Las regiones soportadas de {{site.data.keyword.containerlong_notm}} son las siguientes:
+* AP norte (solo clústeres estándares)
+* AP sur
+* UE central
+* RU sur
+* EE.UU. este (solo clústeres estándares)
+* EE.UU. sur
 
 <br />
 
@@ -49,7 +51,7 @@ Se puede acceder a las regiones de {{site.data.keyword.Bluemix_notm}} especifica
 
 Por ejemplo, utilice los siguientes mandatos para iniciar una sesión en los puntos finales de API de región de {{site.data.keyword.Bluemix_notm}}:
 
-  * EE.UU. Sur
+  * EE.UU. sur
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
@@ -82,22 +84,24 @@ Por ejemplo, utilice los siguientes mandatos para iniciar una sesión en los pun
 <br />
 
 
-## Regiones de {{site.data.keyword.containershort_notm}}
+## Regiones de {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
-Mediante regiones de {{site.data.keyword.containershort_notm}}, puede crear o acceder a clústeres de Kubernetes de una región distinta de la región de {{site.data.keyword.Bluemix_notm}} en la que ha iniciado la sesión. Los puntos finales de regiones de {{site.data.keyword.containershort_notm}} hacen referencia específicamente a {{site.data.keyword.containershort_notm}}, no a {{site.data.keyword.Bluemix_notm}} en general.
+Mediante regiones de {{site.data.keyword.containerlong_notm}}, puede crear o acceder a clústeres de Kubernetes de una región distinta de la región de {{site.data.keyword.Bluemix_notm}} en la que ha iniciado la sesión. Los puntos finales de regiones de {{site.data.keyword.containerlong_notm}} hacen referencia específicamente a {{site.data.keyword.containerlong_notm}}, no a {{site.data.keyword.Bluemix_notm}} en general.
 {:shortdesc}
 
-Regiones de {{site.data.keyword.containershort_notm}} soportadas:
-  * AP Norte
-  * AP Sur
-  * UE Central
-  * UK Sur
-  * EE.UU. Este
-  * EE.UU. Sur
+**Nota**: Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 
-Puede acceder a {{site.data.keyword.containershort_notm}} a través de un punto final global: `https://containers.bluemix.net/v1`.
-* Para comprobar la región de {{site.data.keyword.containershort_notm}} en la que está actualmente, ejecute `ibmcloud ks region`.
+Regiones de {{site.data.keyword.containerlong_notm}} soportadas:
+  * AP norte (solo clústeres estándares)
+  * AP sur
+  * UE central
+  * RU sur
+  * EE.UU. este (solo clústeres estándares)
+  * EE.UU. sur
+
+Puede acceder a {{site.data.keyword.containerlong_notm}} a través de un punto final global: `https://containers.bluemix.net/v1`.
+* Para comprobar la región de {{site.data.keyword.containerlong_notm}} en la que está actualmente, ejecute `ibmcloud ks region`.
 * Para recuperar una lista de regiones disponibles y sus puntos finales, ejecute `ibmcloud ks regions`.
 
 Para utilizar la API con el punto final global, en todas las solicitudes, pase el nombre de región en una cabecera `X-Region`.
@@ -106,11 +110,11 @@ Para utilizar la API con el punto final global, en todas las solicitudes, pase e
 ### Inicio de sesión en otra región de {{site.data.keyword.containerlong_notm}}
 {: #container_login_endpoints}
 
-Puede cambiar las regiones utilizando la CLI de {{site.data.keyword.containershort_notm}}.
+Puede cambiar las regiones utilizando la CLI de {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-Supongamos que desea iniciar una sesión en otra región de {{site.data.keyword.containershort_notm}} por las siguientes razones:
-  * Ha creado servicios de {{site.data.keyword.Bluemix_notm}} o imágenes de Docker privadas en una región y desea utilizarlos con {{site.data.keyword.containershort_notm}} en otra región.
+Supongamos que desea iniciar una sesión en otra región de {{site.data.keyword.containerlong_notm}} por las siguientes razones:
+  * Ha creado servicios de {{site.data.keyword.Bluemix_notm}} o imágenes de Docker privadas en una región y desea utilizarlos con {{site.data.keyword.containerlong_notm}} en otra región.
   * Desea acceder a un clúster de una región distinta de la región de {{site.data.keyword.Bluemix_notm}} predeterminada en la que ha iniciado la sesión.
 
 Para cambiar regiones rápidamente, ejecute `ibmcloud ks region-set`.
@@ -118,7 +122,7 @@ Para cambiar regiones rápidamente, ejecute `ibmcloud ks region-set`.
 ### Utilización de mandatos de API de {{site.data.keyword.containerlong_notm}}
 {: #containers_api}
 
-Para interactuar con la API de {{site.data.keyword.containershort_notm}}, especifique el tipo de mandato y añada `/v1/command` al punto final global.
+Para interactuar con la API de {{site.data.keyword.containerlong_notm}}, especifique el tipo de mandato y añada `/v1/command` al punto final global.
 {:shortdesc}
 
 Ejemplo de API `GET /clusters`:
@@ -134,7 +138,7 @@ Para utilizar la API con el punto final global, en todas las solicitudes, pase e
 
 Para ver la documentación sobre los mandatos de API, consulte [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
 
-## Zonas de {{site.data.keyword.containershort_notm}}
+## Zonas de {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 Las zonas son centros de datos físicos que están disponibles dentro de una región de {{site.data.keyword.Bluemix_notm}}. Las regiones son una herramienta conceptual para organizar zonas y pueden incluir zonas (centros de datos) en diferentes países. La tabla siguiente muestra las zonas disponibles por región.
@@ -152,7 +156,7 @@ Las zonas son centros de datos físicos que están disponibles dentro de una reg
   </thead>
   <tbody>
     <tr>
-      <td>AP Norte</td>
+      <td>AP norte</td>
       <td>Ninguno</td>
       <td><p>Tokio: tok02</p>
       <p>Hong Kong R.A.E. de la RPC: hkg02</p>
@@ -160,31 +164,32 @@ Las zonas son centros de datos físicos que están disponibles dentro de una reg
       <p>Singapur: sng01</p></td>
     </tr>
     <tr>
-      <td>AP Sur</td>
+      <td>AP sur</td>
       <td>Ninguno</td>
       <td><p>Sídney: syd01, syd04</p>
       <p>Melbourne: mel01</p></td>
     </tr>
     <tr>
-      <td>UE Central</td>
+      <td>UE central</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
+      <p>Oslo: osl01</p>
       <p>París: par01</p>
       </td>
     </tr>
     <tr>
-      <td>UK Sur</td>
+      <td>RU sur</td>
       <td>Londres: lon02, lon04, lon06</td>
       <td></td>
     </tr>
     <tr>
-      <td>EE.UU. Este</td>
+      <td>EE.UU. este</td>
       <td>Washington DC: wdc04, wdc06, wdc07</td>
       <td><p>Montreal: mon01</p>
       <p>Toronto: tor01</p></td>
     </tr>
     <tr>
-      <td>EE.UU. Sur</td>
+      <td>EE.UU. sur</td>
       <td>Dallas: dal10, dal12, dal13</td>
       <td><p>São Paulo: sao01</p></td>
     </tr>

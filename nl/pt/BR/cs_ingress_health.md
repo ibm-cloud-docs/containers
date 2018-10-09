@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,6 +20,102 @@ lastupdated: "2018-08-06"
 
 Customize a criação de log e configure o monitoramento para ajudar a solucionar problemas e melhorar o desempenho de sua configuração do Ingress.
 {: shortdesc}
+
+## Visualizando logs do Ingresso
+{: #ingress_logs}
+
+Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualizar os logs do ALB, escolha entre duas opções.
+* [Crie uma configuração de criação de log para o serviço Ingress](cs_health.html#configuring) em seu cluster.
+* Verifique os logs a partir da CLI.
+    1. Obtenha o ID de um pod para um ALB.
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+
+    2. Abra os logs para esse pod do ALB. Verifique se os logs seguem o formato atualizado.
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+</br>O conteúdo do log do Ingress padrão é formatado em JSON e exibe campos comuns que descrevem a sessão de conexão entre um cliente e seu app. Um log de exemplo com os campos padrão é semelhante ao seguinte:
+
+```
+{"time_date": "2018-08-21T17:33:19+00:00", "client": "108.162.248.42", "host": "albhealth.multizone.us-south.containers.appdomain.cloud", "scheme": "http", "request_method": "GET", "request_uri": "/", "request_id": "c2bcce90cf2a3853694da9f52f5b72e6", "status": 200, "upstream_addr": "192.168.1.1:80", "upstream_status": 200, "request_time": 0.005, "upstream_response_time": 0.005, "upstream_connect_time": 0.000, "upstream_header_time": 0.005}
+```
+{: screen}
+
+<table>
+<caption>Entendendo os campos no formato de log do Ingress padrão</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Entendendo os campos no formato de log do Ingress padrão</th>
+</thead>
+<tbody>
+<tr>
+<td><code> "time_date": "$time_iso8601" </code></td>
+<td>O horário local no formato padrão ISO 8601 quando o log é gravado.</td>
+</tr>
+<tr>
+<td><code> "client": "$remote_addr" </code></td>
+<td>O endereço IP do pacote de solicitação que o cliente enviou ao seu app. Esse IP pode mudar com base nas situações a seguir:<ul><li>Quando uma solicitação do cliente para o seu app for enviada para o seu cluster, a solicitação será roteada para um pod para o serviço do balanceador de carga que expõe o ALB. Se nenhum pod de app existir no mesmo nó do trabalhador que o pod de serviço de balanceador de carga, o balanceador de carga encaminhará a solicitação para um pod de app em um nó do trabalhador diferente. O endereço IP de origem do pacote de solicitação é mudado para o endereço IP público do nó do trabalhador no qual o pod de app está em execução.</li><li>Se a [preservação de IP de origem estiver ativada](cs_ingress.html#preserve_source_ip), o endereço IP original da solicitação do cliente para seu app será registrado no lugar.</li></ul></td>
+</tr>
+<tr>
+<td><code> "host": "$http_host" </code></td>
+<td>O host, ou subdomínio, por meio do qual seus apps são acessíveis. Esse host é configurado nos arquivos de recursos do Ingress para seus ALBs.</td>
+</tr>
+<tr>
+<td><code> "esquema": "$scheme" </code></td>
+<td>O tipo de solicitação: <code>HTTP</code> ou <code>HTTPS</code>.</td>
+</tr>
+<tr>
+<td><code> "request_method": "$request_method" </code></td>
+<td>O método da chamada de solicitação para o app de backend, como <code>GET</code> ou <code>POST</code>.</td>
+</tr>
+<tr>
+<td><code> "request_uri": "$uri" </code></td>
+<td>O URI da solicitação original para seu caminho de app. Os ALBs processam os caminhos que os apps atendem como prefixos. Quando um ALB recebe uma solicitação de um cliente para um app, o ALB verifica o recurso Ingress para um caminho (como um prefixo) que corresponde ao caminho no URI da solicitação.</td>
+</tr>
+<tr>
+<td><code> "request_id": "$request_id" </code></td>
+<td>Um identificador de solicitação exclusivo gerado a partir de 16 bytes aleatórios.</td>
+</tr>
+<tr>
+<td><code>"status": $status</code></td>
+<td>O código de status para a sessão de conexão.<ul>
+<li><code> 200 </code>: Sessão concluída com sucesso</li>
+<li><code>400</code>: os dados de cliente não podem ser analisados</li>
+<li><code>403</code>: acesso proibido; por exemplo, quando o acesso é limitado para determinados endereços IP do cliente</li>
+<li><code> 500 </code>: erro do servidor interno</li>
+<li><code>502</code>: gateway ruim; por exemplo, se um servidor de envio de dados não puder ser selecionado ou atingido</li>
+<li><code>503</code>: serviço indisponível; por exemplo, quando o acesso é limitado pelo número de conexões</li>
+</ul></td>
+</tr>
+<tr>
+<td><code> "upstream_addr": "$upstream_addr" </code></td>
+<td>O endereço IP e a porta ou o caminho para o soquete do domínio do UNIX do servidor de envio de dados. Se vários servidores forem contatados durante o processamento de solicitação, seus endereços serão separados por vírgulas: <code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock"</code>. Se a solicitação for redirecionada internamente de um grupo de servidores para outro, os endereços do servidor de diferentes grupos serão separados por dois-pontos: <code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock : 192.168.10.1:80, 192.168.10.2:80"</code>. Se o ALB não puder selecionar um servidor, o nome do grupo de servidores será registrado no lugar.</td>
+</tr>
+<tr>
+<td><code> "upstream_status": $upstream_status </code></td>
+<td>O código de status da resposta obtida do servidor de envio de dados para o app de backend, como códigos de resposta de HTTP padrão. Os códigos de status de várias respostas são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>. Se o ALB não puder selecionar um servidor, o código de status 502 (Gateway ruim) será registrado.</td>
+</tr>
+<tr>
+<td><code> "request_time": $request_time </code></td>
+<td>O tempo de processamento da solicitação, medido em segundos com uma resolução de milissegundos. Esse tempo inicia quando o ALB lê os primeiros bytes da solicitação do cliente e para quando o ALB envia os últimos bytes da resposta para o cliente. O log será gravado imediatamente após o tempo de processamento da solicitação parar.</td>
+</tr>
+<tr>
+<td><code> "upstream_response_time": $upstream_response_time </code></td>
+<td>O tempo que leva para o ALB receber a resposta do servidor de envio de dados para o app de backend, medido em segundos com uma resolução de milissegundos. Os tempos de várias respostas são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+</tr>
+<tr>
+<td><code> "upstream_connect_time": $upstream_connect_time </code></td>
+<td>O tempo que leva para o ALB estabelecer uma conexão com o servidor de envio de dados para o app de backend, medido em segundos com uma resolução de milissegundos. Se o TLS/SSL estiver ativado em sua configuração do recurso Ingress, esse tempo incluirá o tempo gasto no handshake. Os tempos de várias conexões são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+</tr>
+<tr>
+<td><code> "upstream_header_time": $upstream_header_time </code></td>
+<td>O tempo que leva para o ALB receber o cabeçalho de resposta do servidor de envio de dados para o app de backend, medido em segundos com uma resolução de milissegundos. Os tempos de várias conexões são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+</tr>
+</tbody></table>
 
 ## Customizando o conteúdo e o formato de log do Ingress
 {: #ingress_log_format}

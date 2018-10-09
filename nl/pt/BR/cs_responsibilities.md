@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -45,9 +45,9 @@ Revise as responsabilidades que você compartilha com a IBM para gerenciar seus 
 - [Implementar e gerenciar recursos do Kubernetes, como pods, serviços e implementações no cluster](cs_app.html#app_cli)
 - [Usar os recursos do serviço e o Kubernetes para assegurar a alta disponibilidade de apps](cs_app.html#highly_available_apps)
 - [Incluindo ou removendo a capacidade do cluster redimensionando seus conjuntos de trabalhadores](cs_clusters.html#add_workers)
-- [Ativando o VLAN Spanning e mantendo os seus conjuntos de trabalhadores de múltiplas zonas balanceados entre as zonas](cs_clusters.html#ha_clusters)
+- [Ativando o VLAN Spanning e mantendo os seus conjuntos de trabalhadores de múltiplas zonas balanceados entre as zonas](cs_clusters_planning.html#ha_clusters)
 - [Criar VLANs públicas e privadas na infraestrutura do IBM Cloud (SoftLayer) para isolamento da rede de seu cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_firewall.html#firewall) <p>**Nota**: se um nó do trabalhador possuir duas VLANs públicas e privadas, a conectividade de rede será configurada. Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. </p>
+- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_firewall.html#firewall) <p>**Nota**: se um nó do trabalhador possuir duas VLANs públicas e privadas, a conectividade de rede será configurada. Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan). </p>
 - [Atualizando o kube-apiserver mestre quando atualizações de versão do Kubernetes estão disponíveis](cs_cluster_update.html#master)
 - [Mantendo os nós do trabalhador atualizados em versões principais, secundárias e de correção](cs_cluster_update.html#worker_node)
 - [Recuperando nós do trabalhador problemáticos executando comandos `kubectl`, como `cordon` ou `drain`, e executando comandos `ibmcloud ks`, como `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
@@ -55,7 +55,7 @@ Revise as responsabilidades que você compartilha com a IBM para gerenciar seus 
 - [Fazer backup e restaurar dados no armazenamento persistente na infraestrutura do IBM Cloud (SoftLayer) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](../services/RegistryImages/ibm-backup-restore/index.html)
 - Configurando os serviços de [criação de log](cs_health.html#logging) e de [monitoramento](cs_health.html#view_metrics) para suportar o funcionamento e o desempenho de seu cluster
 - [Configurando o monitoramento de funcionamento para os nós do trabalhador com Recuperação automática](cs_health.html#autorecovery)
-- Auditando eventos que mudam recursos em seu cluster, como usando [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) para visualizar atividades iniciadas pelo usuário que mudam o estado de sua instância do {{site.data.keyword.containershort_notm}}
+- Auditando eventos que mudam recursos em seu cluster, como usando [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) para visualizar atividades iniciadas pelo usuário que mudam o estado de sua instância do {{site.data.keyword.containerlong_notm}}
 
 <br />
 
@@ -63,15 +63,15 @@ Revise as responsabilidades que você compartilha com a IBM para gerenciar seus 
 ## Abuso do {{site.data.keyword.containerlong_notm}}
 {: #terms}
 
-Os clientes não podem fazer uso inadequado do {{site.data.keyword.containershort_notm}}.
+Os clientes não podem fazer uso inadequado do {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Uso inadequado inclui:
 
 *   Qualquer atividade ilegal
 *   Distribuição ou execução de malware
-*   Prejudicar o {{site.data.keyword.containershort_notm}} ou interferir no
-uso de alguém do {{site.data.keyword.containershort_notm}}
+*   Prejudicar o {{site.data.keyword.containerlong_notm}} ou interferir no
+uso de alguém do {{site.data.keyword.containerlong_notm}}
 *   Prejudicar ou interferir no uso de alguém de qualquer outro serviço ou sistema
 *   Acesso não autorizado a qualquer serviço ou sistema
 *   Modificação não autorizada de qualquer serviço ou sistema

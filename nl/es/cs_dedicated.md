@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,14 +22,14 @@ lastupdated: "2018-08-06"
 Si tiene una cuenta de {{site.data.keyword.Bluemix_dedicated}}, puede desplegar clústeres de Kubernetes en un entorno de nube dedicado (`https://<my-dedicated-cloud-instance>.bluemix.net`) y conectarse a servicios de {{site.data.keyword.Bluemix_notm}} preseleccionados que también se ejecuten allí.
 {:shortdesc}
 
-Si no tiene cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, puede [empezar a trabajar con {{site.data.keyword.containershort_notm}}](container_index.html) en una cuenta pública de {{site.data.keyword.Bluemix_notm}}.
+Si no tiene cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, puede [empezar a trabajar con {{site.data.keyword.containerlong_notm}}](container_index.html) en una cuenta pública de {{site.data.keyword.Bluemix_notm}}.
 
 ## Acerca del entorno de nube dedicada
 {: #dedicated_environment}
 
 Con una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}}, los recursos físicos disponibles se dedican únicamente a su clúster y no se comparten con otros clústeres de otros clientes de {{site.data.keyword.IBM_notm}}. Podría elegir configurar un entorno {{site.data.keyword.Bluemix_dedicated_notm}} cuando desee aislamiento para el clúster y requerir aislamiento para otros servicios de {{site.data.keyword.Bluemix_notm}} que utilice. Si no tiene una cuenta dedicada, puede [crear clústeres con hardware dedicado en {{site.data.keyword.Bluemix_notm}} público](cs_clusters.html#clusters_ui).
 
-Con {{site.data.keyword.Bluemix_dedicated_notm}}, puede crear clústeres desde el catálogo en la consola dedicada o mediante la CLI de {{site.data.keyword.containershort_notm}}. Para utilizar la consola dedicada, se inicia sesión en la cuenta dedicada y en la pública simultáneamente con el IBMid. Utilice el inicio de sesión dual para acceder a los clústeres públicos utilizando la consola dedicada. Para utilizar la CLI, inicie una sesión utilizando el punto final dedicado (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Defina como destino el punto final de la API de {{site.data.keyword.containershort_notm}} de la región pública que está asociada con el entorno dedicado.
+Con {{site.data.keyword.Bluemix_dedicated_notm}}, puede crear clústeres desde el catálogo en la consola dedicada o mediante la CLI de {{site.data.keyword.containerlong_notm}}. Para utilizar la consola dedicada, se inicia sesión en la cuenta dedicada y en la pública simultáneamente con el IBMid. Utilice el inicio de sesión dual para acceder a los clústeres públicos utilizando la consola dedicada. Para utilizar la CLI, inicie una sesión utilizando el punto final dedicado (`api.<my-dedicated-cloud-instance>.bluemix.net.`). Defina como destino el punto final de la API de {{site.data.keyword.containerlong_notm}} de la región pública que está asociada con el entorno dedicado.
 
 Las diferencias más importantes entre {{site.data.keyword.Bluemix_notm}} público y dedicado son las siguientes.
 
@@ -77,18 +77,18 @@ Las diferencias más importantes entre {{site.data.keyword.Bluemix_notm}} públi
  </tr>
  <tr>
  <td>URL de registro de imágenes en {{site.data.keyword.registryshort_notm}}</td>
- <td><ul><li>EE.UU. Sur y EE.UU. Este: <code>registry.ng bluemix.net</code></li><li>UK Sur: <code>registry.eu-gb.bluemix.net</code></li><li>UE Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sídney): <code>registry.au-syd.bluemix.net</code></li></ul></td>
+ <td><ul><li>EE.UU. sur y EE.UU. este: <code>registry.ng bluemix.net</code></li><li>RU sur: <code>registry.eu-gb.bluemix.net</code></li><li>UE central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sídney): <code>registry.au-syd.bluemix.net</code></li></ul></td>
  <td><ul><li>Para los nuevos espacios de nombres, utilice los mismos registros basados en regiones que los definidos para el entorno de {{site.data.keyword.Bluemix_notm}} público.</li><li>Para los espacios de nombres que se configuraron para contenedores escalables y únicos en {{site.data.keyword.Bluemix_dedicated_notm}}, utilice <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
  </tr>
  <tr>
  <td>Acceso al registro</td>
- <td>Consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
- <td><ul><li>Para los espacios de nombres nuevos, consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Para espacios de nombres que se configuraron para grupos escalables y únicos, se [utiliza una señal para crear un secreto de Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para la autenticación.</li></ul></td>
+ <td>Consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containerlong_notm}}](cs_images.html).</td>
+ <td><ul><li>Para los espacios de nombres nuevos, consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containerlong_notm}}](cs_images.html).</li><li>Para espacios de nombres que se configuraron para grupos escalables y únicos, se [utiliza una señal para crear un secreto de Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para la autenticación.</li></ul></td>
  </tr>
  <tr>
  <td>Clústeres multizona</td>
- <td>Para crear [clústeres multizona](cs_clusters.html#multi_zone), añada más zonas a las agrupaciones de nodos trabajadores.</td>
- <td>Cree [clústeres de una sola zona](cs_clusters.html#single_zone). La zona disponible se ha definido previamente al configurar el entorno {{site.data.keyword.Bluemix_dedicated_notm}}. De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](cs_clusters.html#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool). Cuando añada una agrupación de nodos trabajadores, debe añadir la zona disponible a la agrupación de nodos trabajadores para que los nodos trabajadores se puedan desplegar en la zona. Sin embargo, no puede añadir otras zonas a las agrupaciones de nodos trabajadores.</td>
+ <td>Para crear [clústeres multizona](cs_clusters_planning.html#multizone), añada más zonas a las agrupaciones de nodos trabajadores.</td>
+ <td>Cree [clústeres de una sola zona](cs_clusters_planning.html#single_zone). La zona disponible se ha definido previamente al configurar el entorno {{site.data.keyword.Bluemix_dedicated_notm}}. De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](cs_clusters.html#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool). Cuando añada una agrupación de nodos trabajadores, debe añadir la zona disponible a la agrupación de nodos trabajadores para que los nodos trabajadores se puedan desplegar en la zona. Sin embargo, no puede añadir otras zonas a las agrupaciones de nodos trabajadores.</td>
  </tr>
 </tbody></table>
 {: caption="Diferencias entre las características de {{site.data.keyword.Bluemix_notm}} público y {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -107,12 +107,12 @@ Las características integradas de seguridad proporcionan aislamiento, funciones
 
 *Arquitectura de Kubernetes y sistema de red en {{site.data.keyword.Bluemix_dedicated_notm}}*
 
-![{{site.data.keyword.containershort_notm}} Arquitectura de Kubernetes en {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
+![{{site.data.keyword.containerlong_notm}} Arquitectura de Kubernetes en {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## Configuración de {{site.data.keyword.containershort_notm}} en Dedicado
+## Configuración de {{site.data.keyword.containerlong_notm}} en Dedicado
 {: #dedicated_setup}
 
 Cada entorno de {{site.data.keyword.Bluemix_dedicated_notm}} tiene una cuenta corporativa pública y propiedad del cliente en {{site.data.keyword.Bluemix_notm}}. Para que los usuarios en el entorno dedicado creen clústeres, el administrador debe añadir a los usuarios a una cuenta corporativa pública.
@@ -276,9 +276,9 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
     6. Elija el **Número de nodos trabajadores** que necesita. Seleccione `3` para garantizar una alta disponibilidad del clúster.
 
     7. Seleccione una **VLAN pública** (opcional) y una **VLAN privada** (obligatorio). Las VLAN públicas y privadas se definen de forma previa al configurar el entorno de {{site.data.keyword.Bluemix_dedicated_notm}}. Ambas VLAN comunican entre nodos trabajadores, pero la VLAN pública también se comunica con el maestro de Kubernetes gestionado por IBM. Puede utilizar la misma VLAN para varios clústeres.
-        **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red.
+        **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).
 
-    8. De forma predeterminada, **Cifrar disco local** está seleccionado. Si elige desmarcar el recuadro de selección, no se cifran los datos de Docker del host. [Más información sobre el cifrado](cs_secure.html#encrypted_disk).
+    8. De forma predeterminada, **Cifrar disco local** está seleccionado. Si elige desmarcar el recuadro de selección, no se cifran los datos de tiempo de ejecución de contenedor del host. [Más información sobre el cifrado](cs_secure.html#encrypted_disk).
 
 6. Pulse **Crear clúster**. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
     **Nota:** A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.
@@ -286,7 +286,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
 ### Creación de clústeres con la CLI
 {: #dedicated_creating_cli}
 
-1.  Instale la CLI de {{site.data.keyword.Bluemix_notm}} y el plug-in de [{{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
+1.  Instale la CLI de {{site.data.keyword.Bluemix_notm}} y el [plugin de {{site.data.keyword.containerlong_notm}}](cs_cli_install.html#cs_cli_install).
 2.  Inicie una sesión en el punto final de la instancia de {{site.data.keyword.Bluemix_dedicated_notm}}. Especifique sus credenciales de {{site.data.keyword.Bluemix_notm}} y seleccione la cuenta cuando se le solicite.
 
     ```
@@ -327,7 +327,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Especifique el ID de la VLAN pública configurada para utilizar con el entorno dedicado. Si desea conectar los nodos trabajadores solo a una VLAN privada, no especifique esta opción. **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red.</td>
+    <td>Especifique el ID de la VLAN pública configurada para utilizar con el entorno dedicado. Si desea conectar los nodos trabajadores solo a una VLAN privada, no especifique esta opción. **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -375,7 +375,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.5
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
     ```
     {: screen}
 
@@ -392,7 +392,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
     ```
     {: screen}
 
@@ -456,14 +456,14 @@ Kubernetes como variable de entorno.
 ### Adición de nodos trabajadores
 {: #add_workers}
 
-Con {{site.data.keyword.Bluemix_dedicated_notm}}, solo puede crear [clústeres de una sola zona](cs_clusters.html#single_zone). De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](cs_clusters.html#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool). Cuando añada una agrupación de nodos trabajadores, debe añadir la zona disponible a la agrupación de nodos trabajadores para que los nodos trabajadores se puedan desplegar en la zona. Sin embargo, no puede añadir otras zonas a las agrupaciones de nodos trabajadores.
+Con {{site.data.keyword.Bluemix_dedicated_notm}}, solo puede crear [clústeres de una sola zona](cs_clusters_planning.html#single_zone). De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](cs_clusters.html#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool). Cuando añada una agrupación de nodos trabajadores, debe añadir la zona disponible a la agrupación de nodos trabajadores para que los nodos trabajadores se puedan desplegar en la zona. Sin embargo, no puede añadir otras zonas a las agrupaciones de nodos trabajadores.
 
 ### Utilización de registros de imagen privada y pública
 {: #dedicated_images}
 
 Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.
 
-Para los espacios de nombres nuevos, consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containershort_notm}}](cs_images.html). Para espacios de nombres que se configuraron para grupos escalables y únicos, se [utiliza una señal para crear un secreto de Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para la autenticación.
+Para los espacios de nombres nuevos, consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containerlong_notm}}](cs_images.html). Para espacios de nombres que se configuraron para grupos escalables y únicos, se [utiliza una señal para crear un secreto de Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para la autenticación.
 
 ### Adición de subredes a clústeres
 {: #dedicated_cluster_subnet}
@@ -473,7 +473,7 @@ Cambie la agrupación de las direcciones IP públicas portátiles disponibles a�
 #### Adición de más subredes y direcciones IP gestionadas por el usuario a los clústeres de Kubernetes
 {: #dedicated_byoip_subnets}
 
-Proporcione más subredes propias desde una red local que desee utilizar para acceder a {{site.data.keyword.containershort_notm}}. Puede añadir direcciones IP privadas desde dichas subredes a servicios de Ingress y del equilibrador de carga en el clúster de Kubernetes. Las subredes gestionadas por el usuario se configuran de dos maneras, según el formato de la subred que desee utilizar.
+Proporcione más subredes propias desde una red local que desee utilizar para acceder a {{site.data.keyword.containerlong_notm}}. Puede añadir direcciones IP privadas desde dichas subredes a servicios de Ingress y del equilibrador de carga en el clúster de Kubernetes. Las subredes gestionadas por el usuario se configuran de dos maneras, según el formato de la subred que desee utilizar.
 
 Requisitos:
 - Las subredes gestionadas por el usuario solo se pueden añadir a VLAN privadas.
@@ -509,7 +509,7 @@ Antes de empezar: configure el direccionamiento del tráfico de red de entrada y
     ```
     {: screen}
 
-4. **Importante**: para habilitar la comunicación entre nodos trabajadores que están en distintas subredes en la misma VLAN, debe [habilitar el direccionamiento entre subredes en la misma VLAN ](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+4. **Importante**: Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
 
 5. Para configurar la conectividad de cuenta interna y local, elija una de estas opciones:
   - Si ha utilizado un rango de direcciones IP privadas 10.x.x.x para la subred, utilice IP válidas de ese rango para configurar la conectividad de cuenta interna y local con Ingress y un equilibrador de carga. Para obtener más información, consulte [Planificación de red con los servicios de Ingres, NodePort o LoadBalancer](cs_network_planning.html#planning).
@@ -557,7 +557,9 @@ Si desea utilizar direcciones IP públicas para el equilibrador de carga, asegú
 
 Si desea utilizar direcciones IP públicas para Ingress ALB, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos en [Exposición de apps al público](cs_ingress.html#ingress_expose_public).
 
-### Creación de almacenamiento permanente
+### Creación de almacenamiento persistente
 {: #dedicated_apps_volume_claim}
 
-Para revisar las opciones para crear almacenamiento persistente, consulte [Almacenamiento de datos permanentes](cs_storage_planning.html#persistent). Para solicitar una copia de seguridad de los volúmenes, una restauración de volúmenes o una supresión de volúmenes, debe [abrir una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Para revisar las opciones para crear almacenamiento persistente, consulte Opciones de almacenamiento de datos persistentes de alta disponibilidad (cs_storage_planning.html#persistent_storage_overview). Para solicitar una copia de seguridad de los volúmenes, una restauración de los volúmenes, una supresión de volúmenes o una instantánea periódica de almacenamiento de archivos, debe [abrir una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+Si decide suministrar [almacenamiento de archivos](cs_storage_file.html#predefined_storageclass), seleccione clases de almacenamiento sin retención. Elegir clases de almacenamiento sin retención permite evitar las instancias de almacenamiento persistente huérfanas en la infraestructura de IBM Cloud (SoftLayer) que sólo puede eliminar abriendo una incidencia de soporte.

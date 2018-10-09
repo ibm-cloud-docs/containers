@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2018-08-06"
 
 单击以下选项以开始：
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="单击图标以快速开始使用 {{site.data.keyword.containershort_notm}}。使用 {{site.data.keyword.Bluemix_dedicated_notm}}，单击此图标以查看选项。" style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="单击图标可快速开始使用 {{site.data.keyword.containerlong_notm}}。对于 {{site.data.keyword.Bluemix_dedicated_notm}}，单击此图标可查看选项。" style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" title="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="安装 CLI。" title="安装 CLI。" shape="rect" coords="155, -1, 289, 210" />
@@ -54,7 +54,7 @@ lastupdated: "2018-08-06"
 
 要创建免费集群，请执行以下操作：
 
-1.  在 [{{site.data.keyword.Bluemix_notm}} **目录** ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containershort_notm}}**，然后单击**创建**。这将打开集群配置页面。缺省情况下，已选择**免费集群**。
+1.  在 [{{site.data.keyword.Bluemix_notm}} **目录** ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containerlong_notm}}**，然后单击**创建**。这将打开集群配置页面。缺省情况下，已选择**免费集群**。
 
 2. 为集群提供唯一名称。
 
@@ -71,8 +71,8 @@ lastupdated: "2018-08-06"
 **接下来要做什么？**</br>
 在免费集群到期之前，使用免费集群试用一些功能。
 
-* 完成[第一个 {{site.data.keyword.containershort_notm}} 教程](cs_tutorials.html#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
-* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containershort_notm}} 教程](cs_tutorials_apps.html#cs_apps_tutorial)。
+* 完成[第一个 {{site.data.keyword.containerlong_notm}} 教程](cs_tutorials.html#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
+* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](cs_tutorials_apps.html#cs_apps_tutorial)。
 * [创建标准集群](cs_clusters.html#clusters_ui)（具有多个节点），以实现更高的可用性。
 
 

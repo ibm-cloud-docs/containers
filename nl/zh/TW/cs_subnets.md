@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -36,11 +36,13 @@ lastupdated: "2018-08-06"
 <dt>免費叢集的 VLAN</dt>
 <dd>在免費叢集裡，叢集的工作者節點依預設會連接至 IBM 擁有的公用 VLAN 及專用 VLAN。由於 IBM 控制了 VLAN、子網路及 IP 位址，所以您無法建立多區域叢集，或將子網路新增至您的叢集，只能使用 NodePort 服務來公開您的應用程式。</dd>
 <dt>標準叢集的 VLAN</dt>
-<dd>在標準叢集裡，第一次在區域中建立叢集時，會在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，自動為您在該區域中佈建公用 VLAN 及專用 VLAN。針對您在該區域建立的每個後續叢集，您可以重複使用相同的公用及專用 VLAN，因為多個叢集可以共用 VLAN。</br></br>您可以將工作者節點同時連接至公用 VLAN 及專用 VLAN，或僅連接至專用 VLAN。如果您只想要將工作者節點連接至專用 VLAN，則可以使用現有專用 VLAN 的 ID，或[建立專用 VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create)，並在建立叢集期間使用該 ID。</dd></dl>
+<dd>在標準叢集裡，第一次在區域中建立叢集時，會在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，自動為您在該區域中佈建公用 VLAN 及專用 VLAN。針對您在該區域建立的每個後續叢集，您可以重複使用相同的公用及專用 VLAN，因為多個叢集可以共用 VLAN。</br></br>您可以將工作者節點同時連接至公用 VLAN 及專用 VLAN，或僅連接至專用 VLAN。如果您只想要將工作者節點連接至專用 VLAN，則可以使用現有專用 VLAN 的 ID，或[建立專用 VLAN](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create)，並在建立叢集期間使用該 ID。</dd></dl>
 
 若要查看每一個區域中針對您帳戶佈建的 VLAN，請執行 `ibmcloud ks vlans <zone>`。若要查看某一個叢集佈建所在的 VLAN，請執行 `ibmcloud ks cluster-get<cluster_name_or_ID> --showResources`，並找出 **Subnet VLANs** 區段。
 
-**附註**：如果您具有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，您必須開啟 VLAN Spanning，讓工作者節點可以在專用網路上彼此通訊。如需指示，請參閱[啟用或停用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+**附註**：
+* 如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
+* IBM Cloud 基礎架構 (SoftLayer) 管理在您於區域中建立第一個叢集時所自動供應的 VLAN。如果您讓 VLAN 變成未使用（例如移除 VLAN 中的所有工作者節點），IBM Cloud 基礎架構 (SoftLayer) 會收回此 VLAN。之後，如果您需要新建的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans/order-vlan.html#order-vlans)。
 
 ### 子網路及 IP 位址
 {: #subnets_ips}
@@ -59,7 +61,7 @@ lastupdated: "2018-08-06"
 
 若要查看您帳戶中佈建的所有子網路，請執行 `ibmcloud ks subnets`。若要查看連結至某一個叢集的可攜式公用及可攜式專用子網路，您可以執行 `ibmcloud ks cluster-get<cluster_name_or_ID> --showResources`，並找出 **Subnet VLANs** 區段。
 
-**附註**：在 {{site.data.keyword.containershort_notm}} 中，VLAN 的限制為 40 個子網路。如果您達到此限制，首先請查看您是否可以[重複使用 VLAN 中的子網路來建立新的叢集](#custom)。如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans/order-vlan.html#order-vlans)，進行訂購。然後，[建立叢集](cs_cli_reference.html#cs_cluster_create)，而叢集使用這個新的 VLAN。
+**附註**：在 {{site.data.keyword.containerlong_notm}} 中，VLAN 的限制為 40 個子網路。如果您達到此限制，首先請查看您是否可以[重複使用 VLAN 中的子網路來建立新的叢集](#custom)。如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans/order-vlan.html#order-vlans)，進行訂購。然後，[建立叢集](cs_cli_reference.html#cs_cluster_create)，而叢集使用這個新的 VLAN。
 
 <br />
 
@@ -76,14 +78,14 @@ lastupdated: "2018-08-06"
 
 開始之前，
 - [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
-- 若要重複使用來自您不再需要之叢集裡的子網路，請刪除不需要的叢集。請立即建立新的叢集，因為如果您未重複使用子網路，這些子網路會在 24 小時內遭到刪除。
+- 若要重複使用來自您不再需要之叢集的子網路，請刪除不需要的叢集。請立即建立新的叢集，因為如果您未重複使用子網路，這些子網路會在 24 小時內遭到刪除。
 
    ```
    ibmcloud ks cluster-rm <cluster_name_or_ID>
    ```
    {: pre}
 
-若要使用 IBM Cloud 基礎架構 (SoftLayer) 組合中的現有子網路，來搭配自訂防火牆規則或可用的 IP 位址，請執行下列動作：
+若要使用 IBM Cloud 基礎架構 (SoftLayer) 組合中的現有子網路來搭配自訂防火牆規則或可用的 IP 位址，請執行下列動作：
 
 1. 取得您要使用之子網路的 ID，以及子網路所在 VLAN 的 ID。
 
@@ -94,12 +96,11 @@ lastupdated: "2018-08-06"
 
     在此輸出範例中，子網路 ID 是 `1602829`，而 VLAN ID 是 `2234945`：
     ```
-        Getting subnet list...
+    Getting subnet list...
     OK
     ID        Network             Gateway          VLAN ID   Type      Bound Cluster
     1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
     1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
-
     ```
     {: screen}
 
@@ -123,7 +124,7 @@ lastupdated: "2018-08-06"
 
     ```
     Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.5
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.7
     ```
     {: screen}
 
@@ -138,7 +139,7 @@ lastupdated: "2018-08-06"
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.5
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.7
     ```
     {: screen}
 
@@ -165,8 +166,8 @@ lastupdated: "2018-08-06"
 若要列出您叢集裡的所有可攜式 IP 位址，包括已使用及可用的可攜式 IP 位址，您可以執行：
 
 ```
-  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
-  ```
+kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
+```
 {: pre}
 
 若只要列出可用來建立負載平衡器的可攜式公用 IP 位址，您可以使用下列步驟：
@@ -251,7 +252,7 @@ lastupdated: "2018-08-06"
 依預設，藉由[建立負載平衡器服務](cs_loadbalancer.html)，即可使用 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。若要建立超過 4 個公用或 4 個專用負載平衡器，您可以將網路子網路新增至叢集來取得更多的可攜式 IP 位址。
 
 **附註：**
-* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
+* 當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。
 * 可攜式公用 IP 位址是按月計費。如果您在佈建子網路之後移除可攜式公用 IP 位址，則仍須支付一個月的費用，即使您只是短時間使用。
 
 ### 透過訂購更多子網路來新增可攜式 IP
@@ -388,7 +389,7 @@ lastupdated: "2018-08-06"
 ## 管理子網路遞送
 {: #subnet-routing}
 
-如果您具有多區域叢集、單一區域叢集的多個 VLAN，或相同 VLAN 上的多個子網路，您必須開啟 VLAN Spanning，讓工作者節點可以在專用網路上彼此通訊。如需指示，請參閱[啟用或停用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
 
 檢閱下列也需要 VLAN Spanning 的情境。
 
@@ -402,9 +403,15 @@ lastupdated: "2018-08-06"
 
 若要確保相同 VLAN 上這些主要子網路中的工作者節點可以通訊，您必須開啟 VLAN Spanning。如需指示，請參閱[啟用或停用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
 
+若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
+{: tip}
+
 ### 管理閘道應用裝置的子網路遞送
 {: #vra-routing}
 
 建立叢集時，會在連接叢集的 VLAN 上訂購可攜式公用及可攜式專用子網路。這些子網路會提供 Ingress 及負載平衡器網路服務的 IP 位址。
 
 不過，如果您具有現有的路由器應用裝置，例如 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about)，則不會在路由器上配置剛新增的可攜式子網路，這些子網路來自叢集連接到的那些 VLAN。若要使用 Ingress 或負載平衡器網路服務，您必須藉由[啟用 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，確保網路裝置可以在相同 VLAN 上的不同子網路之間遞送。
+
+若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
+{: tip}

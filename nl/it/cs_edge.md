@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -38,13 +38,13 @@ Prima di iniziare:
 
 - [Crea un cluster standard.](cs_clusters.html#clusters_cli)
 - Assicurati che il tuo cluster abbia almeno una VLAN pubblica. I nodi di lavoro edge non sono disponibili per i cluster con solo le VLAN private.
-- [Crea un nuovo pool di lavoro](cs_clusters.html#add_pool) che si estenda tra tutte le zone del tuo cluster e che abbia almeno 2 nodi di lavoro per zona.
+- [Crea un nuovo pool di nodi di lavoro](cs_clusters.html#add_pool) che si estenda tra tutte le zone del tuo cluster e che abbia almeno 2 nodi di lavoro per zona.
 - [Indirizza la CLI Kubernetes al
 cluster](cs_cli_install.html#cs_cli_configure).
 
 Per etichettare i nodi di lavoro come nodi edge:
 
-1. Elenca i nodi di lavoro nel tuo pool di lavoro del nodo edge. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi.
+1. Elenca i nodi di lavoro nel tuo pool di nodi di lavoro del nodo edge. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi.
 
   ```
   ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>

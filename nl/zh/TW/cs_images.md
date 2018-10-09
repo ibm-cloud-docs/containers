@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -36,7 +36,7 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 公用登錄（例如 Docker Hub）可用來開始使用 Docker 及 Kubernetes 在叢集裡建立第一個容器化應用程式。但是，如果是企業應用程式，則請使用專用登錄（例如 {{site.data.keyword.registryshort_notm}} 中提供的登錄）來防止未授權使用者使用及變更映像檔。叢集管理者必須設定專用登錄，以確保叢集使用者可以使用存取專用登錄的認證。
 
 
-您可以搭配使用多個登錄與 {{site.data.keyword.containershort_notm}}，以將應用程式部署至叢集。
+您可以搭配使用多個登錄與 {{site.data.keyword.containerlong_notm}}，以將應用程式部署至叢集。
 
 |登錄|說明|優點|
 |--------|-----------|-------|
@@ -75,7 +75,7 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 
 當您建立叢集時，會自動為[最近的地區登錄和全球登錄](/docs/services/Registry/registry_overview.html#registry_regions)建立不會過期的登錄記號與密碼。全球登錄會安全地儲存公用、IBM 提供的映像檔，您可以在各部署之間參照它們，而不必針對每個地區登錄中儲存的映像檔有不同的參照。地區登錄會安全地儲存您自己的專用 Docker 映像檔，以及全球登錄中儲存的相同公用映像檔。記號用來授權對 {{site.data.keyword.registryshort_notm}} 中所設定之任何名稱空間的唯讀存取，因此您可以使用這些公用（全球登錄）及專用（地區登錄）映像檔。
 
-當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containershort_notm}} 會自動將全球（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回密碼中。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間、該名稱空間的 `ServiceAccount` 中的預設密碼清單，以及 `kube-system` 名稱空間。
+當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containerlong_notm}} 會自動將全球（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回密碼中。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間、該名稱空間的 `ServiceAccount` 中的預設密碼清單，以及 `kube-system` 名稱空間。
 
 **附註：**使用此起始設定，即可將容器從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔，部署至叢集的 **default** 名稱空間。若要將容器部署至叢集的其他名稱空間，或者若要使用儲存在另一個 {{site.data.keyword.Bluemix_notm}} 地區或另一個 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，則必須[為叢集建立您自己的 imagePullSecret](#other)。
 
@@ -488,5 +488,4 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
    {: pre}
 
 <br />
-
 

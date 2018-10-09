@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -114,10 +114,10 @@ lastupdated: "2018-08-06"
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오. </td>
+        <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 <code>ibmcloud cr image-list</code>를 실행하십시오. </td>
+        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 <code>ibmcloud cr image-list</code>를 실행하십시오.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>

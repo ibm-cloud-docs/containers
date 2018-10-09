@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-08-06"
 # 教程：将应用程序从 Cloud Foundry 迁移到集群
 {: #cf_tutorial}
 
-您可以采用先前通过 Cloud Foundry 部署的应用程序，并将容器中的相同代码部署到 {{site.data.keyword.containershort_notm}} 中的 Kubernetes 集群。
+您可以采用先前通过 Cloud Foundry 部署的应用程序，并将容器中的相同代码部署到 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 集群。
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ lastupdated: "2018-08-06"
 - [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](../services/Registry/index.html)。
 - [创建集群](cs_clusters.html#clusters_ui)。
 - [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
+- [确保您具有**编辑者**、**操作员**或**管理员**平台角色](cs_users.html#add_users_cli)。
 - [了解有关 Docker 和 Kubernetes 术语的信息](cs_tech.html)。
 
 
@@ -60,7 +61,7 @@ lastupdated: "2018-08-06"
   ```
   {: pre}
 
-2. 将应用程序代码以及所有相关文件复制到该目录中。可以使用自己的应用程序代码，也可以从目录下载样板。本教程使用 Python Fldask 样板。但是，您也可以将相同的基本步骤用于 Node.js、Java 或 [Kitura](https://github.com/IBM-Cloud/Kitura-Starter) 应用程序。
+2. 将应用程序代码以及所有相关文件复制到该目录中。可以使用您自己的应用程序代码，也可以从目录下载样板。本教程使用 Python Fldask 样板。但是，您也可以将相同的基本步骤用于 Node.js、Java 或 [Kitura](https://github.com/IBM-Cloud/Kitura-Starter) 应用程序。
 
     要下载 Python Flask 应用程序代码，请执行以下操作：
 
@@ -250,15 +251,15 @@ lastupdated: "2018-08-06"
     a.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-    ibmcloud ks workers <cluster_name>
-    ```
+        ibmcloud ks workers <cluster_name>
+        ```
     {: pre}
 
     输出：
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
     ```
     {: screen}
 

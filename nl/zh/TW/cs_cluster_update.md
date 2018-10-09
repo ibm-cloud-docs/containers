@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -85,7 +85,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 - 進行 [Kubernetes 變更](cs_versions.html)中標示為_在主節點之後更新_ 的所有變更。
 - 如果您要套用修補程式更新，請檢閱 [Kubernetes 版本變更日誌](cs_versions_changelog.html#changelog)。</br>
 
-**注意**：更新工作者節點可能會導致應用程式及服務關閉。如果[資料未儲存在 Pod 外](cs_storage_planning.html#persistent)，即會刪除資料。
+**注意**：更新工作者節點可能會導致應用程式及服務關閉。如果[資料未儲存在 Pod 外](cs_storage_planning.html#persistent_storage_overview)，即會刪除資料。
 
 
 **應用程式在更新期間會發生什麼情況？**</br>
@@ -258,10 +258,10 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
 開始之前：
 - [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
-- 如果您在工作者節點上儲存資料，若資料不是[儲存在工作者節點外，即會刪除資料](cs_storage_planning.html#persistent)。
+- 如果您在工作者節點上儲存資料，若資料不是[儲存在工作者節點外，即會刪除資料](cs_storage_planning.html#persistent_storage_overview)。
 
 
-**注意**：更新工作者節點可能會導致應用程式及服務關閉。如果[資料未儲存在 Pod 外](cs_storage_planning.html#persistent)，即會刪除資料。
+**注意**：更新工作者節點可能會導致應用程式及服務關閉。如果[資料未儲存在 Pod 外](cs_storage_planning.html#persistent_storage_overview)，即會刪除資料。
 
 1. 列出可用的工作者節點，並記下其專用 IP 位址。
    - **針對工作者節點儲存區中的工作者節點**：
@@ -367,14 +367,33 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 ## 更新叢集附加程式
 {: #addons}
 
-{{site.data.keyword.containershort_notm}} 叢集會隨附佈建叢集時自動安裝的**附加程式**（例如 Fluentd 以進行記載）。必須分別更新主節點及工作者節點的這些附加程式。
+{{site.data.keyword.containerlong_notm}} 叢集會隨附佈建叢集時自動安裝的**附加程式**（例如 Fluentd 以進行記載）。必須分別更新主節點及工作者節點的這些附加程式。
 {: shortdesc}
 
 **哪些預設附加程式必須與叢集分別更新？**
 * [Fluentd 以進行記載](#logging)
 
+**是否有我不需要更新且無法變更的附加程式？**</br>
+是的，您的叢集已部署下列受管理的附加程式，以及無法變更的關聯資源。如果您嘗試變更其中一個部署附加程式，則會定期還原其原始設定。 
+
+* `heapster`
+* `ibm-file-plugin`
+* `ibm-storage-watcher`
+* `ibm-keepalived-watcher`
+* `kube-dns-amd64`
+* `kube-dns-autoscaler`
+* `kubernetes-dashboard`
+* `vpn`
+
+您可以使用 `addonmanager.kubernetes.io/mode: Reconcile` 標籤來檢視這些資源。例如：
+
+```
+kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **是否可以安裝預設值以外的其他附加程式？**</br>
-是。{{site.data.keyword.containershort_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](cs_integrations.html#helm)來安裝[區塊儲存空間外掛程式](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
+是。{{site.data.keyword.containerlong_notm}} 提供可從中選擇的其他附加程式，以將功能新增至叢集。例如，您可能要[使用 Helm 圖表](cs_integrations.html#helm)來安裝[區塊儲存空間外掛程式](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必須遵循 Helm 圖表的更新指示，分別更新每個附加程式。
 
 ### Fluentd 以進行記載
 {: #logging}
@@ -454,13 +473,13 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
       ```
       {: pre}
 
-   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。若要在位於不同區域的工作者節點之間啟用專用網路的通訊，您必須啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。
+   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **將多個區域新增至工作者節點儲存區**：向不同的區域重複 `ibmcloud ks zone-add` 指令，並指定您要在該區域中佈建的工作者節點儲存區。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters.html#multi_zone)。
+   3. **將多個區域新增至工作者節點儲存區**：向不同的區域重複 `ibmcloud ks zone-add` 指令，並指定您要在該區域中佈建的工作者節點儲存區。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters_planning.html#multizone)。
 
 6. 等待在每個區域中部署工作者節點。
    ```
@@ -503,4 +522,4 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 
 **下一步為何？**
 </br>
-既然您已將叢集更新成使用工作者節點儲存區，則可以藉由將其他區域新增至叢集來改善可用性。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters.html#ha_clusters)。當您將單一區域叢集變更為多區域叢集時，Ingress 網域會從 `<cluster_name>.<region>.containers.mybluemix.net` 變更為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。現有 Ingress 網域仍然有效，而且可以用來將要求傳送至應用程式。
+既然您已將叢集更新成使用工作者節點儲存區，則可以藉由將其他區域新增至叢集來改善可用性。將其他區域新增至叢集，即可將叢集從單一區域叢集變更為[多區域叢集](cs_clusters_planning.html#ha_clusters)。當您將單一區域叢集變更為多區域叢集時，Ingress 網域會從 `<cluster_name>.<region>.containers.mybluemix.net` 變更為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。現有 Ingress 網域仍然有效，而且可以用來將要求傳送至應用程式。

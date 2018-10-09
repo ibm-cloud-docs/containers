@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -20,29 +20,30 @@ lastupdated: "2018-08-06"
 # 튜토리얼: Calico 네트워크 정책을 사용한 트래픽 차단
 {: #policy_tutorial}
 
-기본적으로 Kubernetes NodePort, LoadBalancer 및 Ingress 서비스는 모든 공용 및 사설 클러스터 네트워크 인터페이스에서 앱을 사용할 수 있도록 합니다. `allow-node-port-dnat` 기본 Calico 정책은 NodePort, LoadBalancer 및 Ingress 서비스로부터 해당 서비스가 노출하는 앱 팟(Pod)으로의 수신 트래픽을 허용합니다. Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)으로 전달합니다. 
+기본적으로 Kubernetes NodePort, LoadBalancer 및 Ingress 서비스는 모든 공용 및 사설 클러스터 네트워크 인터페이스에서 앱을 사용할 수 있도록 합니다. `allow-node-port-dnat` 기본 Calico 정책은 NodePort, LoadBalancer 및 Ingress 서비스로부터 해당 서비스가 노출하는 앱 팟(Pod)으로의 수신 트래픽을 허용합니다. Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)으로 전달합니다.
 
-그러나 보안상의 이유 때문에 사용자는 특정 소스 IP 주소에서 네트워킹 서비스로의 트래픽만 허용해야 할 수 있습니다. [Calico 사전-DNAT 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)을 사용하여 특정 IP 주소와의 양방향 트래픽을 화이트리스트 또는 블랙리스트에 추가할 수 있습니다. Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 적용되므로, 사전-DNAT 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다. Calico 사전-DNAT 정책을 작성하는 경우, 사용자는 소스 IP 주소를 화이트리스트 또는 블랙리스트에 추가하는지 여부를 선택합니다. 알려지고 허용된 소스 IP 주소의 트래픽을 제외한 모든 트래픽이 차단되므로, 대부분의 시나리오에서는 화이트리스트 작성이 가장 안전한 구성을 제공합니다. 블랙리스트 작성은 일반적으로 소규모 IP 주소 세트의 공격 방지 등의 시나리오에만 유용합니다. 
+그러나 보안상의 이유 때문에 사용자는 특정 소스 IP 주소에서 네트워킹 서비스로의 트래픽만 허용해야 할 수 있습니다. [Calico 사전-DNAT 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)을 사용하여 특정 IP 주소와의 양방향 트래픽을 화이트리스트 또는 블랙리스트에 추가할 수 있습니다. Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 적용되므로, 사전-DNAT 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다. Calico 사전-DNAT 정책을 작성하는 경우, 사용자는 소스 IP 주소를 화이트리스트 또는 블랙리스트에 추가하는지 여부를 선택합니다. 알려지고 허용된 소스 IP 주소의 트래픽을 제외한 모든 트래픽이 차단되므로, 대부분의 시나리오에서는 화이트리스트 작성이 가장 안전한 구성을 제공합니다. 블랙리스트 작성은 일반적으로 소규모 IP 주소 세트의 공격 방지 등의 시나리오에만 유용합니다.
 
-이 시나리오에서 사용자는 PR 회사의 네트워킹 관리자 역할을 수행하고 일부 비정상적인 트래픽이 앱에 도달함을 감지합니다. 이 튜토리얼의 학습에서는 샘플 웹 서버 앱 작성, LoadBalancer 서비스를 사용한 앱 노출, 그리고 화이트리스트 및 블랙리스트 Calico 정책을 모두 사용하여 원치 않는 비정상적 트래픽으로부터 앱 보호를 안내합니다. 
+이 시나리오에서 사용자는 PR 회사의 네트워킹 관리자 역할을 수행하고 일부 비정상적인 트래픽이 앱에 도달함을 감지합니다. 이 튜토리얼의 학습에서는 샘플 웹 서버 앱 작성, LoadBalancer 서비스를 사용한 앱 노출, 그리고 화이트리스트 및 블랙리스트 Calico 정책을 모두 사용하여 원치 않는 비정상적 트래픽으로부터 앱 보호를 안내합니다.
 
 ## 목표
 
-- 상위 사전-DNAT 정책을 작성하여 모든 NodePort로의 모든 수신 트래픽을 차단하는 방법을 알아봅니다. 
-- 하위 사전-DNAT 정책을 작성하여 화이트리스트의 소스 IP 주소가 LoadBalancer 공인 IP 및 포트에 액세스할 수 있도록 허용하는 방법을 알아봅니다. 하위 정책은 상위 정책을 대체합니다. 
-- 하위 사전-DNAT 정책을 작성하여 블랙리스트의 소스 IP 주소가 LoadBalancer 공인 IP 및 포트에 액세스하지 못하도록 차단하는 방법을 알아봅니다. 
+- 상위 사전-DNAT 정책을 작성하여 모든 NodePort로의 모든 수신 트래픽을 차단하는 방법을 알아봅니다.
+- 하위 사전-DNAT 정책을 작성하여 화이트리스트의 소스 IP 주소가 LoadBalancer 공인 IP 및 포트에 액세스할 수 있도록 허용하는 방법을 알아봅니다. 하위 정책은 상위 정책을 대체합니다.
+- 하위 사전-DNAT 정책을 작성하여 블랙리스트의 소스 IP 주소가 LoadBalancer 공인 IP 및 포트에 액세스하지 못하도록 차단하는 방법을 알아봅니다.
 
 ## 소요 시간
 1시간
 
 ## 대상
-이 튜토리얼은 앱에 대한 네트워크 트래픽을 관리하고자 하는 네트워크 관리자와 소프트웨어 개발자용으로 작성되었습니다. 
+이 튜토리얼은 앱에 대한 네트워크 트래픽을 관리하고자 하는 네트워크 관리자와 소프트웨어 개발자용으로 작성되었습니다.
 
 ## 전제조건
 
-- [버전 1.10 클러스터를 작성](cs_clusters.html#clusters_ui)하거나 [기존 클러스터를 버전 1.10으로 업데이트](cs_versions.html#cs_v110)하십시오. 이 튜토리얼에서 3.1.1 Calico CLI 및 Calico v3 정책 구문을 사용하려면 Kubernetes 버전 1.10 이상 클러스터가 필요합니다. 
+- [버전 1.10 클러스터를 작성](cs_clusters.html#clusters_ui)하거나 [기존 클러스터를 버전 1.10으로 업데이트](cs_versions.html#cs_v110)하십시오. 이 튜토리얼에서 3.1.1 Calico CLI 및 Calico v3 정책 구문을 사용하려면 Kubernetes 버전 1.10 이상 클러스터가 필요합니다.
 - [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 - [Calico CLI를 설치하고 구성](cs_network_policy.html#1.10_install)하십시오.
+- [**편집자**, **운영자** 또는 **관리자** 플랫폼 역할을 보유 중인지 확인](cs_users.html#add_users_cli)하십시오. 
 
 <br />
 
@@ -53,27 +54,21 @@ lastupdated: "2018-08-06"
 첫 번째 학습에서는 다중 IP 주소와 포트에서 앱이 노출되는 방법과 트래픽이 클러스터로 유입되는 위치를 보여줍니다.
 {: shortdesc}
 
-튜토리얼 전체에서 사용할 샘플 웹 서버 앱을 배치하여 시작하십시오. `echoserver` 웹 서버는 클라이언트에서 클러스터로 설정된 연결에 대한 데이터를 보여주며, 이를 통해 PR 회사의 클러스터에 대한 액세스를 테스트할 수 있습니다. 그리고 LoadBalancer 서비스를 작성하여 앱을 노출하십시오. LoadBalancer 서비스는 LoadBalancer 서비스 IP 주소와 작업자 노드의 NodePort 모두에서 앱을 사용할 수 있도록 합니다. 
+튜토리얼 전체에서 사용할 샘플 웹 서버 앱을 배치하여 시작하십시오. `echoserver` 웹 서버는 클라이언트에서 클러스터로 설정된 연결에 대한 데이터를 보여주며, 이를 통해 PR 회사의 클러스터에 대한 액세스를 테스트할 수 있습니다. 그리고 LoadBalancer 서비스를 작성하여 앱을 노출하십시오. LoadBalancer 서비스는 LoadBalancer 서비스 IP 주소와 작업자 노드의 NodePort 모두에서 앱을 사용할 수 있도록 합니다.
 
-다음 이미지는 학습 1의 끝에서 공인 NodePort 및 공인 LoadBalancer에 의해 웹 서버 앱이 인터넷에 노출되는 방법을 보여줍니다. 
+다음 이미지는 학습 1의 끝에서 공인 NodePort 및 공인 LoadBalancer에 의해 웹 서버 앱이 인터넷에 노출되는 방법을 보여줍니다.
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="학습 1의 끝에서 웹 서버 앱이 공인 NodePort 및 공인 LoadBalancer에 의해 인터넷에 노출됩니다." style="width:450px; border-style: none"/>
 
-1. 이 튜토리얼 전체에서 사용할 `pr-firm`이라고 하는 테스트 네임스페이스를 작성하십시오.
+1. 샘플 웹 서버 앱을 배치하십시오. 웹 서버 앱에 연결되면 앱이 연결에서 수신된 HTTP 헤더로 응답합니다.
     ```
-    kubectl create ns pr-firm
-    ```
-    {: pre}
-
-2. 샘플 웹 서버 앱을 배치하십시오. 웹 서버 앱에 대한 연결이 작성되면 앱은 연결에서 수신하는 HTTP 헤더로 응답합니다.
-    ```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-3. 웹 서버 앱 팟(Pod)의 **상태**가 `Running`인지 확인하십시오.
+2. 웹 서버 앱 팟(Pod)의 **상태**가 `Running`인지 확인하십시오.
     ```
-    kubectl get pods -n pr-firm -o wide
+        kubectl get pods -o wide
     ```
     {: pre}
 
@@ -86,7 +81,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. 앱을 공용 인터넷에 노출하려면 텍스트 편집기에서 `webserver.yaml`이라고 하는 LoadBalancer 서비스 구성 파일을 작성하십시오.
+3. 앱을 공용 인터넷에 노출하려면 텍스트 편집기에서 `webserver.yaml`이라고 하는 LoadBalancer 서비스 구성 파일을 작성하십시오.
     ```
     apiVersion: v1
     kind: Service
@@ -108,17 +103,17 @@ lastupdated: "2018-08-06"
     ```
     {: codeblock}
 
-5. LoadBalancer를 배치하십시오.
+4. LoadBalancer를 배치하십시오.
     ```
-    kubectl apply -f filepath/webserver.yaml
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. 컴퓨터에서 LoadBalancer에 의해 노출된 앱에 공용으로 액세스할 수 있는지 확인하십시오. 
+5. 컴퓨터에서 LoadBalancer에 의해 노출된 앱에 공용으로 액세스할 수 있는지 확인하십시오.
 
     1. 로드 밸런서의 공용 **EXTERNAL-IP** 주소를 가져오십시오.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -129,7 +124,7 @@ lastupdated: "2018-08-06"
         ```
         {: screen}
 
-    2. 치트 시트 텍스트 파일을 작성하고 LoadBalancer IP를 텍스트 파일로 복사하십시오. 치트 시트는 향후 학습에서 값을 보다 빨리 사용할 수 있도록 도움을 줍니다. 
+    2. 치트 시트 텍스트 파일을 작성하고 LoadBalancer IP를 텍스트 파일로 복사하십시오. 치트 시트는 향후 학습에서 값을 보다 빨리 사용할 수 있도록 도움을 줍니다.
 
     3. LoadBalancer에 대한 외부 IP에 공용으로 액세스할 수 있는지 확인하십시오.
         ```
@@ -161,11 +156,11 @@ lastupdated: "2018-08-06"
         ```
         {: screen}
 
-6. 컴퓨터에서 NodePort에 의해 노출된 앱에 공용으로 액세스할 수 있는지 확인하십시오. LoadBalancer 서비스는 LoadBalancer 서비스 IP 주소와 작업자 노드의 NodePort 모두에서 앱을 사용할 수 있도록 합니다. 
+6. 컴퓨터에서 NodePort에 의해 노출된 앱에 공용으로 액세스할 수 있는지 확인하십시오. LoadBalancer 서비스는 LoadBalancer 서비스 IP 주소와 작업자 노드의 NodePort 모두에서 앱을 사용할 수 있도록 합니다.
 
     1. LoadBalancer가 작업자 노드에 지정한 NodePort를 가져오십시오. NodePort는 30000 - 32767 범위에 있습니다.
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -185,13 +180,13 @@ lastupdated: "2018-08-06"
         출력 예:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
         ```
         {: screen}
 
-    3. 작업자 노드 및 NodePort의 공인 IP를 향후 학습에서 사용할 텍스트 치트 시트에 복사하십시오. 
+    3. 작업자 노드 및 NodePort의 공인 IP를 향후 학습에서 사용할 텍스트 치트 시트에 복사하십시오.
 
     4. NodePort를 통해 작업자 노드의 공인 IP에 액세스할 수 있는지 확인하십시오.
         ```
@@ -223,14 +218,14 @@ lastupdated: "2018-08-06"
         ```
         {: screen}
 
-이 시점에서 앱은 다중 IP 주소 및 포트에서 노출됩니다. 이러한 IP 중 대부분은 클러스터에 대해 내부적이며 사설 네트워크를 통해만 액세스가 가능합니다. 공용 NodePort 및 공용 LoadBalancer 포트만 공용 인터넷에 노출됩니다. 
+이 시점에서 앱은 다중 IP 주소 및 포트에서 노출됩니다. 이러한 IP 중 대부분은 클러스터에 대해 내부적이며 사설 네트워크를 통해만 액세스가 가능합니다. 공용 NodePort 및 공용 LoadBalancer 포트만 공용 인터넷에 노출됩니다.
 
-그 다음에는 공용 트래픽을 차단하는 Calico 정책의 작성과 적용을 시작할 수 있습니다. 
+그 다음에는 공용 트래픽을 차단하는 Calico 정책의 작성과 적용을 시작할 수 있습니다.
 
 ## 학습 2: 모든 NodePort에 대한 모든 수신 트래픽 차단
 {: #lesson2}
 
-PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer 서비스와 NodePort 모두에 대한 공용 액세스를 차단해야 합니다. NodePort에 대한 액세스 차단부터 시작하십시오. 다음 이미지는 학습 2의 끝에서 LoadBalancer에 대한 트래픽은 허용하지만 NodePort에 대해서는 허용하지 않는 방법을 보여줍니다. 
+PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer 서비스와 NodePort 모두에 대한 공용 액세스를 차단해야 합니다. NodePort에 대한 액세스 차단부터 시작하십시오. 다음 이미지는 학습 2의 끝에서 LoadBalancer에 대한 트래픽은 허용하지만 NodePort에 대해서는 허용하지 않는 방법을 보여줍니다.
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="학습 2의 끝에서 웹 서버 앱이 공용 LoadBalancer에 의해서만 인터넷에 노출됩니다." style="width:450px; border-style: none"/>
 
@@ -297,7 +292,7 @@ PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer �
 
 4. 이전 학습에서 작성한 LoadBalancer의 externalTrafficPolicy를 `Cluster`에서 `Local`로 변경하십시오. `Local`은 다음 단계에서 LoadBalancer의 외부 IP에 대해 curl을 수행할 때 시스템의 소스 IP가 유지되도록 보장합니다.
     ```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -330,21 +325,21 @@ PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer �
         -no body in request-
     ```
     {: screen}
-    출력의 `Request Information` 섹션에서 소스 IP 주소(예: `client_address=1.1.1.1`)를 기록해 두십시오. 소스 IP 주소는 curl을 실행하기 위해 사용 중인 시스템의 공인 IP입니다. 혹은 프록시나 VPN을 통해 인터넷에 연결 중인 경우, 프록시나 VPN은 시스템의 실제 IP 주소를 숨길 수 있습니다. 두 경우에 LoadBalancer는 시스템의 소스 IP 주소를 클라이언트 IP 주소로 인식합니다. 
+    출력의 `Request Information` 섹션에서 소스 IP 주소(예: `client_address=1.1.1.1`)를 기록해 두십시오. 소스 IP 주소는 curl을 실행하기 위해 사용 중인 시스템의 공인 IP입니다. 혹은 프록시나 VPN을 통해 인터넷에 연결 중인 경우, 프록시나 VPN은 시스템의 실제 IP 주소를 숨길 수 있습니다. 두 경우에 LoadBalancer는 시스템의 소스 IP 주소를 클라이언트 IP 주소로 인식합니다.
 
-6. 시스템의 소스 IP 주소(이전 단계 출력의 `client_address=1.1.1.1`)를 향후 학습에서 사용할 치트 시트에 복사하십시오. 
+6. 시스템의 소스 IP 주소(이전 단계 출력의 `client_address=1.1.1.1`)를 향후 학습에서 사용할 치트 시트에 복사하십시오.
 
-좋습니다! 이 시점에서 앱은 공용 LoadBalancer 포트에서만 공용 인터넷에 노출됩니다. 공용 NodePort에 대한 트래픽은 차단되어 있습니다. 원하지 않는 트래픽으로부터 클러스터가 일부 잠금 상태입니다. 
+좋습니다! 이 시점에서 앱은 공용 LoadBalancer 포트에서만 공용 인터넷에 노출됩니다. 공용 NodePort에 대한 트래픽은 차단되어 있습니다. 원하지 않는 트래픽으로부터 클러스터가 일부 잠금 상태입니다.
 
-그 다음에는 특정 소스 IP의 트래픽을 화이트리스트에 추가하는 Calico 정책을 작성하고 적용할 수 있습니다. 
+그 다음에는 특정 소스 IP의 트래픽을 화이트리스트에 추가하는 Calico 정책을 작성하고 적용할 수 있습니다.
 
 ## 학습 3: 화이트리스트에 있는 IP에서 LoadBalancer로 수신 트래픽 허용
 {: #lesson3}
 
-이제 PR 회사의 클러스터에 대한 트래픽을 완전 잠금 상태로 지정하고 자체 컴퓨터의 IP 주소를 화이트리스트에 추가하여 액세스를 테스트합니다.
+이제 PR 회사의 클러스터에 대한 트래픽을 완전 차단하고 자체 컴퓨터의 IP 주소만 화이트리스트에 추가하여 액세스를 테스트하기로 결정합니다.
 {: shortdesc}
 
-우선 NodePort에 추가하여 앱을 노출 중인 LoadBalancer에 대한 모든 수신 트래픽을 차단해야 합니다. 그리고 시스템의 IP 주소를 화이트리스트에 추가하는 정책을 작성할 수 있습니다. 학습 3의 끝에서 공용 NodePort 및 LoadBalancer에 대한 모든 트래픽은 차단되며 화이트리스트에 있는 시스템 IP의 트래픽만 허용됩니다. 
+우선 NodePort에 추가하여 앱을 노출 중인 LoadBalancer에 대한 모든 수신 트래픽을 차단해야 합니다. 그리고 시스템의 IP 주소를 화이트리스트에 추가하는 정책을 작성할 수 있습니다. 학습 3의 끝에서 공용 NodePort 및 LoadBalancer에 대한 모든 트래픽은 차단되며 화이트리스트에 있는 시스템 IP의 트래픽만 허용됩니다.
 <img src="images/cs_tutorial_policies_L3.png" width="600" alt="웹 서버 앱이 공용 LoadBalancer에 의해 시스템 IP에만 노출됩니다." style="width:600px; border-style: none"/>
 
 1. 텍스트 편집기에서 임의의 소스 IP에서 LoadBalancer IP 주소와 포트로의 모든 수신 TCP 및 UDP 트래픽을 거부하는 `deny-lb-port-80.yaml`이라고 하는 상위 사전-DNAT 정책을 작성하십시오. `<loadbalancer_IP>`를 치트 시트의 LoadBalancer 공인 IP 주소로 대체하십시오.
@@ -442,7 +437,7 @@ PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer �
       calicoctl apply -f filepath/whitelist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-  시스템의 IP 주소가 이제 화이트리스트에 추가되었습니다. 
+  시스템의 IP 주소가 이제 화이트리스트에 추가되었습니다.
 
 6. 치트 시트의 값을 사용하여 이제 공용 LoadBalancer IP 주소에 액세스할 수 있는지 확인하십시오.
     ```
@@ -455,28 +450,40 @@ PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer �
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    시스템의 IP 주소가 화이트리스트에 없으므로 연결 제한시간이 초과됩니다. 
+    시스템의 IP 주소가 화이트리스트에 없으므로 연결 제한시간이 초과됩니다.
 
-이 시점에서 공용 NodePort 및 LoadBalancer에 대한 모든 트래픽은 차단됩니다. 화이트리스트에 있는 시스템 IP의 트래픽만 허용됩니다. 
+이 시점에서 공용 NodePort 및 LoadBalancer에 대한 모든 트래픽은 차단됩니다. 화이트리스트에 있는 시스템 IP의 트래픽만 허용됩니다.
 
 ## 학습 4: 블랙리스트에 있는 IP에서 LoadBalancer로의 수신 트래픽 거부
 {: #lesson4}
 
-이전 학습에서는 모든 트래픽과 화이트리스트의 일부 IP만 차단했습니다. 해당 시나리오는 일부 제어된 소스 IP 주소에 대해서만 액세스를 제한하고자 할 때 테스트 용도로 적합합니다. 그러나 PR 회사에는 공용으로 널리 사용 가능해야 하는 앱이 있습니다. 사용자는 일부 IP 주소에서 보이는 비정상적인 트래픽을 제외한 모든 트래픽이 허용되도록 보장해야 합니다. 소규모 IP 주소 세트의 공격 방지에 도움이 될 수 있으므로, 블랙리스트 작성은 이와 같은 시나리오에 유용합니다. 
+이전 학습에서는 모든 트래픽과 화이트리스트의 일부 IP만 차단했습니다. 해당 시나리오는 일부 제어된 소스 IP 주소에 대해서만 액세스를 제한하고자 할 때 테스트 용도로 적합합니다. 그러나 PR 회사에는 공용으로 널리 사용 가능해야 하는 앱이 있습니다. 사용자는 일부 IP 주소에서 보이는 비정상적인 트래픽을 제외한 모든 트래픽이 허용되도록 보장해야 합니다. 소규모 IP 주소 세트의 공격 방지에 도움이 될 수 있으므로, 블랙리스트 작성은 이와 같은 시나리오에 유용합니다.
 
-이 학습에서 사용자는 시스템의 소스 IP 주소의 트래픽을 차단하여 블랙리스트를 테스트합니다. 학습 4의 끝에서 공용 NodePort에 대한 모든 트래픽은 차단되며 공용 LoadBalancer에 대한 모든 트래픽은 허용됩니다. 블랙리스트에 있는 시스템 IP에서 LoadBalancer로의 트래픽만 차단됩니다. 
+이 학습에서 사용자는 시스템의 소스 IP 주소의 트래픽을 차단하여 블랙리스트를 테스트합니다. 학습 4의 끝에서 공용 NodePort에 대한 모든 트래픽은 차단되며 공용 LoadBalancer에 대한 모든 트래픽은 허용됩니다. 블랙리스트에 있는 시스템 IP에서 LoadBalancer로의 트래픽만 차단됩니다.
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="웹 서버 앱은 공용 LoadBalancer에 의해 인터넷에 노출됩니다. 시스템 IP의 트래픽만 차단됩니다." style="width:600px; border-style: none"/>
 
 1. 이전 학습에서 작성된 화이트리스트 정책을 정리하십시오.
-    ```
+    - Linux:
+      ```
     calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
-    {: pre}
-    ```
+      ```
+      {: pre}
+      ```
     calicoctl delete GlobalNetworkPolicy whitelist
-    ```
-    {: pre}
-    이제 소스 IP에서 LoadBalancer IP 주소와 포트로의 모든 수신 TCP 및 UDP 트래픽이 다시 허용됩니다. 
+      ```
+      {: pre}
+
+    - Windows 및 OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
+        이제 소스 IP에서 LoadBalancer IP 주소와 포트로의 모든 수신 TCP 및 UDP 트래픽이 다시 허용됩니다.
 
 2. 시스템의 소스 IP 주소에서 LoadBalancer IP 주소와 포트로의 모든 수신 TCP 및 UDP 트래픽을 거부하려면 텍스트 편집기에서 `deny-lb-port-80.yaml`이라고 하는 하위 사전-DNAT 정책을 작성하십시오. 치트 시트의 값을 사용하여 `<loadbalancer_IP>`를 LoadBalancer의 공인 IP 주소로 대체하고 `<client_address>`를 시스템의 소스 IP의 공인 IP 주소로 대체하십시오.
     ```
@@ -529,25 +536,33 @@ PR 회사의 클러스터를 보호하려면 앱을 노출 중인 LoadBalancer �
       calicoctl apply -f filepath/blacklist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-  시스템의 IP 주소가 이제 블랙리스트에 추가되었습니다. 
+  시스템의 IP 주소가 이제 블랙리스트에 추가되었습니다.
 
 4. 치트 시트의 값을 사용하여, 시스템의 IP가 블랙리스트에 있으므로 LoadBalancer IP에 액세스할 수 없음을 시스템에서 확인하십시오.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    이 시점에서 공용 NodePort에 대한 모든 트래픽은 차단되며 공용 LoadBalancer에 대한 모든 트래픽은 허용됩니다. 블랙리스트에 있는 시스템 IP에서 LoadBalancer로의 트래픽만 차단됩니다. 
+    이 시점에서 공용 NodePort에 대한 모든 트래픽은 차단되며 공용 LoadBalancer에 대한 모든 트래픽은 허용됩니다. 블랙리스트에 있는 시스템 IP에서 LoadBalancer로의 트래픽만 차단됩니다.
 
 5. 이 블랙리스트 정책을 정리하려면 다음을 실행하십시오.
-    ```
-    calicoctl delete GlobalNetworkPolicy blacklist
-    ```
-    {: pre}
 
-수고하셨습니다! 소스 IP를 화이트리스트 및 블랙리스트에 추가하는 Calico 사전-DNAT 정책을 사용하여 앱으로 유입되는 트래픽을 성공적으로 제어했습니다. 
+    - Linux:
+      ```
+    calicoctl delete GlobalNetworkPolicy blacklist
+      ```
+      {: pre}
+
+    - Windows 및 OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
+수고하셨습니다! 소스 IP를 화이트리스트 및 블랙리스트에 추가하는 Calico 사전-DNAT 정책을 사용하여 앱으로 유입되는 트래픽을 성공적으로 제어했습니다.
 
 ## 다음 단계
 {: #whats_next}
 
-* [네트워크 정책으로 트래픽 제어](cs_network_policy.html)에 대해 자세히 읽으십시오. 
-* 클러스터와의 양방향 트래픽을 제어하는 추가적인 예제 Calico 네트워크 정책을 보려면 [스타 정책 데모 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 및 [고급 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 체크아웃할 수 있습니다. 
+* [네트워크 정책으로 트래픽 제어](cs_network_policy.html)에 대해 자세히 읽으십시오.
+* 클러스터와의 양방향 트래픽을 제어하는 추가적인 예제 Calico 네트워크 정책을 보려면 [스타 정책 데모 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 및 [고급 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 체크아웃할 수 있습니다.

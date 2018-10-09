@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -52,71 +52,88 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 ```
 {: screen}
 
+```
+IAM token exchange request failed: Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+```
+{: screen}
+
 {: tsCauses}
-自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量制課金アカウントは、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。 追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。
+自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量制課金アカウントは、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。 追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。 有効な従量制課金アカウントを持っていて、このエラー・メッセージを受け取った場合は、インフラストラクチャー・リソースにアクセスするための正しい IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を使用していない可能性があります。
 
-他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザー、または {{site.data.keyword.Bluemix_notm}} アカウントにリンクされていない既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを持つユーザーは、標準クラスターを作成できるようにアカウントを構成する必要があります。 
-
-有効な従量制課金アカウントを持っていて、このエラー・メッセージを受け取った場合は、インフラストラクチャー・リソースにアクセスするための正しい IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を使用していない可能性があります。
+他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザーは、標準クラスターを作成するようにアカウントを構成する必要があります。異なるアカウント・タイプがある場合の例を以下に示します。
+* {{site.data.keyword.Bluemix_notm}} プラットフォーム・アカウントよりも前から存在する IBM Cloud インフラストラクチャー (SoftLayer) アカウントがあり、引き続きそれを使用する必要がある。
+* インフラストラクチャー・リソースのプロビジョンに異なる IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する必要がある。例えば、請求のために異なるインフラストラクチャー・アカウントを使用するようにチームの {{site.data.keyword.Bluemix_notm}} アカウントをセットアップできます。
 
 {: tsResolve}
-アカウント所有者は、インフラストラクチャー・アカウントの資格情報を正しくセットアップする必要があります。資格情報は、使用しているインフラストラクチャー・アカウントのタイプによって異なります。
-*  最近の従量制課金の {{site.data.keyword.Bluemix_notm}} アカウントをお持ちの場合、そのアカウントには使用可能なリンクされたインフラストラクチャー・アカウントが付いています。[インフラストラクチャー API キーが正しい許可 (権限) でセットアップされている](#apikey)ことを確認してください。
-*  異なる {{site.data.keyword.Bluemix_notm}} アカウント・タイプの場合は、インフラストラクチャー・ポートフォリオにアクセスできること、および[インフラストラクチャー・アカウントの資格情報が正しい許可 (権限) でセットアップされている](#credentials)ことを確認してください。
+アカウント所有者は、インフラストラクチャー・アカウントの資格情報を正しくセットアップする必要があります。 資格情報は、使用しているインフラストラクチャー・アカウントのタイプによって異なります。
 
-クラスターがリンクされたインフラストラクチャー・アカウントを使用しているか、別のインフラストラクチャー・アカウントを使用しているかを確認するには、次の手順を実行します。
-1.  インフラストラクチャー・アカウントに対するアクセス権限があることを確認します。[{{site.data.keyword.Bluemix_notm}} コンソール![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインし、展開可能メニューで**「インフラストラクチャー」**をクリックします。インフラストラクチャー・ダッシュボードが表示された場合は、インフラストラクチャー・アカウントへのアクセス権限があります。
-2.  クラスターが別のインフラストラクチャー・アカウントを使用しているかどうかを確認します。展開可能メニューで、**「コンテナー」 > 「クラスター」**をクリックします。
-3.  テーブルから、該当のクラスターを選択します。 
-4.  **「概要」**タブで、**「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドが表示されている場合、そのクラスターでは、ご使用の従量制課金アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しています。
+**始める前に**:
 
-### リンクされたアカウント用のインフラストラクチャー API 資格情報の構成
+1.  インフラストラクチャー・アカウントに対するアクセス権限があることを確認します。 [{{site.data.keyword.Bluemix_notm}} コンソール![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインし、展開可能メニューで**「インフラストラクチャー」**をクリックします。 インフラストラクチャー・ダッシュボードが表示された場合は、インフラストラクチャー・アカウントへのアクセス権限があります。
+2.  クラスターが従量課金 (PAYG) アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しているかどうかを確認します。
+    1.  展開可能メニューで、**「コンテナー」 > 「クラスター」**をクリックします。
+    2.  テーブルから、該当のクラスターを選択します。
+    3.  **「概要」**タブで、**「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドを確認します。
+        * **「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドが表示されない場合、インフラストラクチャー・アカウントとプラットフォーム・アカウントに同じ資格情報を使用する、リンクされた従量課金 (PAYG) アカウントがあります。
+        * **「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドが表示される場合、クラスターでは、従量課金 (PAYG) アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しています。これらの異なる資格情報は、地域内のすべてのクラスターに適用されます。 
+3.  インフラストラクチャー許可の問題をトラブルシューティングする方法を決定するために必要なアカウントのタイプを決定します。ほとんどのユーザーは、デフォルトのリンクされた従量課金 (PAYG) アカウントで十分です。
+    *  リンクされた従量課金 (PAYG) {{site.data.keyword.Bluemix_notm}} アカウント: [インフラストラクチャー API キーが正しい権限でセットアップされていることを確認します](#apikey)。クラスターで異なるインフラストラクチャー・アカウントを使用している場合は、その資格情報をプロセスの一部として設定解除する必要があります。
+    *  異なる {{site.data.keyword.Bluemix_notm}} プラットフォーム・アカウントおよびインフラストラクチャー・アカウント: インフラストラクチャー・ポートフォリオにアクセスできること、および[インフラストラクチャー・アカウントの資格情報が正しい権限でセットアップされていることを確認します](#credentials)。
+
+### API キーによるリンクされた従量課金 (PAYG) アカウントのデフォルトのインフラストラクチャー資格情報の使用
 {: #apikey}
 
 1.  インフラストラクチャーのアクションに使用する資格情報を持つユーザーの許可 (権限) が正しいことを確認してください。
 
     1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインします。
-        
+
     2.  メニューを展開して、**「インフラストラクチャー」**を選択します。
-        
+
     3.  メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。
 
     4.  **「API キー」**列で、ユーザーが「API キー」を保持していることを確認するか、または**「生成」**をクリックします。
 
     5.  ユーザーに[正しいインフラストラクチャーの許可](cs_users.html#infra_access)を割り当てるか、そうなっていることを確認します。
 
-2.  クラスターが所在する地域の API キーを、その API キーがユーザーに属すようにリセットします。
+2.  クラスターが所在する地域の API キーを設定します。
+
+    1.  使用するインフラストラクチャー許可を持つユーザーとして端末にログインします。
     
-    1.  正しいユーザーとして端末にログインします。
+    2.  別の地域にいる場合は、API キーを設定する地域に変更します。
     
-    2.  API キーをこのユーザーにリセットします。
+        ```
+        ibmcloud ks region-set
+        ```
+        {: pre}
+
+    3.  ユーザーの地域の API キーを設定します。
         ```
         ibmcloud ks api-key-reset
         ```
         {: pre}    
-    
-    3.  API キーが設定されていることを確認してください。
+
+    4.  API キーが設定されていることを確認してください。
         ```
         ibmcloud ks api-key-info <cluster_name_or_ID>
         ```
         {: pre}
+
+3.  **オプション**: ご使用の従量課金 (PAYG) アカウントで異なるインフラストラクチャー・アカウントを使用してクラスターをプロビジョンする場合 (例えば、`ibmcloud ks credentials-set` コマンドを使用した場合)、そのアカウントでは API キーではなくそれらのインフラストラクチャー資格情報を引き続き使用します。前のステップで設定した API キーが使用されるように、関連付けられたインフラストラクチャー・アカウントを削除する必要があります。
+    ```
+    ibmcloud ks credentials-unset
+    ```
+    {: pre}
         
-    4.  **オプション**: 前に `ibmcloud ks credentials-set` コマンドを使用して資格情報を手動で設定していた場合は、関連付けられているインフラストラクチャー・アカウントを削除します。これで、前のサブステップで設定した API キーがインフラストラクチャーを発注するために使用されます。
-        ```
-        ibmcloud ks credentials-unset
-        ```
-        {: pre}
+4.  **オプション**: パブリック・クラスターをオンプレミス・リソースに接続する場合は、ネットワーク接続を確認します。
 
-3.  **オプション**: パブリック・クラスターをオンプレミス・リソースに接続する場合は、ネットワーク接続を確認します。
-
-    1.  ワーカーの VLAN 接続を確認します。 
+    1.  ワーカーの VLAN 接続を確認します。
     2.  必要な場合、[VPN 接続をセットアップします](cs_vpn.html#vpn)。
     3.  [ファイアウォールで必要なポートを開きます](cs_firewall.html#firewall)。
 
-### 異なるアカウント用のインフラストラクチャー・アカウント資格情報の構成
+### 異なるプラットフォーム・アカウントおよびインフラストラクチャー・アカウントのインフラストラクチャー資格情報の構成
 {: #credentials}
 
-1.  IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために使用するインフラストラクチャー・アカウントを取得します。ご使用の現在のアカウント・タイプに依存する異なるオプションがあります。
+1.  IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために使用するインフラストラクチャー・アカウントを取得します。 ご使用の現在のアカウント・タイプに依存する異なるオプションがあります。
 
     <table summary="この表は、アカウント・タイプ別の標準クラスターの作成オプションを示しています。各行は、左から右に読む必要があります。1 番目の列にアカウントの説明があり、2 番目の列に標準クラスターを作成するためのオプションがあります。">
     <caption>アカウント・タイプ別の標準クラスター作成の選択肢</caption>
@@ -134,8 +151,7 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
           <td>標準クラスターを作成できます。 インフラストラクチャーの許可 (権限) をトラブルシューティングするには、[リンクされたアカウント用のインフラストラクチャー API 資格情報の構成](#apikey)を参照してください。</td>
         </tr>
         <tr>
-          <td>**以前の従量制課金アカウント**は、自動アカウント・リンクが使用可能になる前に作成されたアカウントで、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限が付属していませんでした。
-<p>既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントがあっても、そのアカウントを以前の従量制課金アカウントにリンクすることはできません。</p></td>
+          <td>**以前の従量制課金アカウント**は、自動アカウント・リンクが使用可能になる前に作成されたアカウントで、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限が付属していませんでした。<p>既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントがあっても、そのアカウントを以前の従量制課金アカウントにリンクすることはできません。</p></td>
           <td><p><strong>選択肢 1:</strong> [新しい従量制課金アカウントを作成します](/docs/account/index.html#paygo)。このアカウントには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスがセットアップされます。 この選択肢を取る場合は、2 つの異なる {{site.data.keyword.Bluemix_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。</p><p>以前の従量制課金アカウントを引き続き使用する場合は、新しい従量制課金アカウントを使用して、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための API キーを生成できます。</p><p><strong>選択肢 2:</strong> 既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する場合は、{{site.data.keyword.Bluemix_notm}} アカウントに資格情報を設定できます。</p><p>**注:** IBM Cloud インフラストラクチャー (SoftLayer) アカウントに手動でリンクする場合、資格情報は {{site.data.keyword.Bluemix_notm}} アカウントでの IBM Cloud インフラストラクチャー (SoftLayer) 固有のすべてのアクションに使用されます。 ユーザーがクラスターを作成して操作できるように、設定した API キーに[十分なインフラストラクチャー許可](cs_users.html#infra_access)があることを確認する必要があります。</p><p>**どちらのオプションについても、次のステップに進んでください**。</p></td>
         </tr>
         <tr>
@@ -144,7 +160,7 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
         </tr>
         <tr>
           <td>**IBM Cloud インフラストラクチャー (SoftLayer) アカウント**があり、{{site.data.keyword.Bluemix_notm}} アカウントはない</td>
-          <td><p>[{{site.data.keyword.Bluemix_notm}} 従量制課金アカウントを作成します](/docs/account/index.html#paygo)。このアカウントには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスがセットアップされます。 この選択肢を使用する場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントが自動的に作成されます。 2 つの別個の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを所有し、課金されることになります。</p><p>デフォルトでは、お客様の新規の {{site.keyword.data.Bluemix_notm}} アカウントでは新規のインフラストラクチャー・アカウントを使用します。古いインフラストラクチャー・アカウントを引き続き使用する場合は、次のステップに進んでください。</p></td>
+          <td><p>[{{site.data.keyword.Bluemix_notm}} 従量制課金アカウントを作成します](/docs/account/index.html#paygo)。このアカウントには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスがセットアップされます。 この選択肢を使用する場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントが自動的に作成されます。 2 つの別個の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを所有し、課金されることになります。</p><p>デフォルトでは、お客様の新規の {{site.keyword.data.Bluemix_notm}} アカウントでは新規のインフラストラクチャー・アカウントを使用します。 古いインフラストラクチャー・アカウントを引き続き使用する場合は、次のステップに進んでください。</p></td>
         </tr>
       </tbody>
       </table>
@@ -152,9 +168,9 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 2.  インフラストラクチャーのアクションに使用する資格情報を持つユーザーの許可 (権限) が正しいことを確認してください。
 
     1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインします。
-        
+
     2.  メニューを展開して、**「インフラストラクチャー」**を選択します。
-        
+
     3.  メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。
 
     4.  **「API キー」**列で、ユーザーが「API キー」を保持していることを確認するか、または**「生成」**をクリックします。
@@ -163,19 +179,21 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 
 3.  正しいアカウントのユーザーでインフラストラクチャー API 資格情報を設定します。
 
-    1.  ユーザーのインフラストラクチャー API 資格情報を取得します。**注**: 資格情報は IBMid とは異なります。
-            
+    1.  ユーザーのインフラストラクチャー API 資格情報を取得します。 **注**: 資格情報は IBMid とは異なります。
+
         1.  [{{site.data.keyword.Bluemix_notm}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) コンソールで、**「インフラストラクチャー」** > **「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**テーブルを選択し、**IBMid またはユーザー名**をクリックします。
-            
+
         2.  **「API アクセス情報」**セクションで、**「API ユーザー名」**と**「認証鍵」**を表示します。    
-        
+
     2.  使用するインフラストラクチャー API 資格情報を設定します。
         ```
         ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-  
+        ```
+        {: pre}
+
 4.  **オプション**: パブリック・クラスターをオンプレミス・リソースに接続する場合は、ネットワーク接続を確認します。
 
-    1.  ワーカーの VLAN 接続を確認します。 
+    1.  ワーカーの VLAN 接続を確認します。
     2.  必要な場合、[VPN 接続をセットアップします](cs_vpn.html#vpn)。
     3.  [ファイアウォールで必要なポートを開きます](cs_firewall.html#firewall)。
 
@@ -233,7 +251,7 @@ kubectl プロキシーが正常に実行されても、ダッシュボードを
 
 
 {: tsCauses}
-別のファイアウォールをセットアップしたか、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
+別のファイアウォールをセットアップしたか、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
 
 {: tsResolve}
 [クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスを許可](cs_firewall.html#firewall_outbound)します。 このタスクには、[管理者アクセス・ポリシー](cs_users.html#access_policies)が必要です。 現在の[アクセス・ポリシー](cs_users.html#infra_access)を確認してください。
@@ -269,21 +287,21 @@ Instance ID inconsistent with worker records
 {: screen}
 
 {: tsCauses}
-マシンでハードウェアの問題が発生した場合、マシン ID が {{site.data.keyword.containershort_notm}} のワーカー・レコードと不整合になる可能性があります。IBM Cloud インフラストラクチャー (SoftLayer) がこの問題を解決すると、サービスが識別していないシステム内で、あるコンポーネントが変化する可能性があります。
+マシンでハードウェアの問題が発生した場合、マシン ID が {{site.data.keyword.containerlong_notm}} のワーカー・レコードと不整合になる可能性があります。 IBM Cloud インフラストラクチャー (SoftLayer) がこの問題を解決すると、サービスが識別していないシステム内で、あるコンポーネントが変化する可能性があります。
 
 {: tsResolve}
-{{site.data.keyword.containershort_notm}} がそのマシンを再識別するには、[ベアメタルのワーカー・ノードを再ロードします](cs_cli_reference.html#cs_worker_reload)。**注**: 再ロードによって、マシンの[パッチ・バージョン](cs_versions_changelog.html)も更新されます。
+{{site.data.keyword.containerlong_notm}} がそのマシンを再識別するには、[ベアメタルのワーカー・ノードを再ロードします](cs_cli_reference.html#cs_worker_reload)。 **注**: 再ロードによって、マシンの[パッチ・バージョン](cs_versions_changelog.html)も更新されます。
 
-[ベアメタル・ワーカー・ノードは削除](cs_cli_reference.html#cs_cluster_rm)することもできます。**注**: ベア・メタル・インスタンスは月単位で請求されます。
+[ベアメタル・ワーカー・ノードは削除](cs_cli_reference.html#cs_cluster_rm)することもできます。 **注**: ベア・メタル・インスタンスは月単位で請求されます。
 
 <br />
 
 
-## `kubectl exec` および `kubectl logs` が機能しない
+## `kubectl` コマンドがタイムアウトする
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-`kubectl exec` または `kubectl logs` を実行すると、以下のメッセージが表示されます。
+`kubectl exec`、`kubectl attach`、`kubectl proxy`、`kubectl port-forward`、`kubectl logs` などのコマンドを実行すると、以下のメッセージが表示されます。
 
   ```
   <workerIP>:10250: getsockopt: connection timed out
@@ -294,7 +312,7 @@ Instance ID inconsistent with worker records
 マスター・ノードとワーカー・ノードの間の OpenVPN 接続が正しく機能していません。
 
 {: tsResolve}
-1. IBM Cloud インフラストラクチャー (SoftLayer) アカウントの [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にします。
+1. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。{{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
 2. OpenVPN クライアント・ポッドを再始動します。
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -414,6 +432,25 @@ The specified IBM Cloud service could not be found. If you just created the serv
 <br />
 
 
+## サービスをクラスターにバインドすると、サービス・キーがサポートされないというエラーが発生する
+{: #cs_service_keys}
+
+{: tsSymptoms}
+`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` を実行すると、以下のメッセージが表示されます。
+
+```
+This service doesn't support creation of keys
+```
+{: screen}
+
+{: tsCauses}
+{{site.data.keyword.Bluemix_notm}} の一部のサービス ({{site.data.keyword.keymanagementservicelong}} など) では、サービス資格情報 (サービス・キーとも呼ばれます) の作成はサポートされません。サービス・キーをサポートしない場合、サービスはクラスターにバインドできません。サービス・キーの作成をサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/apps/reqnsi.html#accser_external)を参照してください。
+
+{: tsResolve}
+サービス・キーをサポートしないサービスを統合するには、アプリから直接サービスにアクセスするために使用できる API がサービスで提供されているかどうかを確認します。例えば、{{site.data.keyword.keymanagementservicelong}} を使用する場合は、[API リファレンス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/apidocs/kms?language=curl) を参照してください。 
+
+<br />
+
 
 ## ワーカー・ノードが更新または再ロードされた後で、重複するノードとポッドが表示される
 {: #cs_duplicate_nodes}
@@ -456,8 +493,8 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.5
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.5
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
   ```
   {: screen}
 
@@ -510,12 +547,12 @@ unable to validate against any pod security policy
 {: screen}
 
 {: tsCauses}
-[`PodSecurityPolicy` アドミッション・コントローラー](cs_psp.html)は、ポッドを作成しようとしたユーザー・アカウントまたはサービス・アカウント (デプロイメントまたは Helm tiller など) の許可を検査します。ポッドのセキュリティー・ポリシーがユーザー・アカウントまたはサービス・アカウントをサポートしていない場合、`PodSecurityPolicy` アドミッション・コントローラーはポッドが作成されないようにします。
+[`PodSecurityPolicy` アドミッション・コントローラー](cs_psp.html)は、ポッドを作成しようとしたユーザー・アカウントまたはサービス・アカウント (デプロイメントまたは Helm tiller など) の許可を検査します。 ポッドのセキュリティー・ポリシーがユーザー・アカウントまたはサービス・アカウントをサポートしていない場合、`PodSecurityPolicy` アドミッション・コントローラーはポッドが作成されないようにします。
 
 [{{site.data.keyword.IBM_notm}} クラスター管理](cs_psp.html#ibm_psp)用のポッドのセキュリティー・ポリシー・リソースのいずれかを削除した場合、同様の問題が発生する場合があります。
 
 {: tsResolve}
-ユーザー・アカウントまたはサービス・アカウントがポッドのセキュリティー・ポリシーによって許可されていることを確認してください。[既存のポリシーを変更する](cs_psp.html#customize_psp)ことが必要になる場合があります。
+ユーザー・アカウントまたはサービス・アカウントがポッドのセキュリティー・ポリシーによって許可されていることを確認してください。 [既存のポリシーを変更する](cs_psp.html#customize_psp)ことが必要になる場合があります。
 
 {{site.data.keyword.IBM_notm}} クラスター管理リソースを削除した場合は、Kubernetes マスターをリフレッシュして復元します。
 
@@ -558,7 +595,11 @@ unable to validate against any pod security policy
 `kubectl get pods` を実行すると、ポッドの状態が **Pending** になる場合があります。
 
 {: tsCauses}
-Kubernetes クラスターを作成したばかりの場合は、まだワーカー・ノードが構成中の可能性があります。 クラスターが以前から存在するものである場合は、ポッドをデプロイするための十分な容量がクラスター内で不足している可能性があります。
+Kubernetes クラスターを作成したばかりの場合は、まだワーカー・ノードが構成中の可能性があります。 
+
+このクラスターが以前から存在するものである場合:
+*  ポッドをデプロイするための十分な容量がクラスター内にない可能性があります。
+*  ポッドがリソースの要求または制限を超えた可能性があります。
 
 {: tsResolve}
 このタスクには、[管理者アクセス・ポリシー](cs_users.html#access_policies)が必要です。 現在の[アクセス・ポリシー](cs_users.html#infra_access)を確認してください。
@@ -604,11 +645,20 @@ kubectl get nodes
         ```
         {: pre}
 
-5.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
+5.  オプション: ポッドのリソース要求を確認します。
+
+    1.  `resources.requests` 値がワーカー・ノードの容量を超えていないことを確認します。例えば、ポッド要求が `cpu: 4000m` (つまり 4 コア) で、ワーカー・ノード・サイズが 2 コアのみの場合、ポッドをデプロイすることはできません。
+
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+    
+    2.  要求が使用可能な容量を超える場合は、要求を満たすワーカー・ノードを使用して[新規ワーカー・プールを追加](cs_clusters.html#add_pool)します。
+
+6.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
 
 <br />
-
-
 
 
 ## コンテナーが開始しない
@@ -623,8 +673,9 @@ kubectl get nodes
 {: tsResolve}
 [{{site.data.keyword.registryshort_notm}} 内のストレージを解放してください。](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-<br />
 
+
+<br />
 
 
 ## 更新した構成値で Helm チャートをインストールできない
@@ -695,15 +746,17 @@ Helm チャートをトラブルシューティングするには、以下のよ
 まだクラスターに問題がありますか?
 {: shortdesc}
 
+-  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
+
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
--   [{{site.data.keyword.containershort_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
+-   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
 
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
 
-    -   {{site.data.keyword.containershort_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
-    -   サービスや概説の説明について質問がある場合は、[IBM developerWorks dW Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
+    -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
+    -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
 
 -   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。

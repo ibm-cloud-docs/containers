@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -53,7 +53,7 @@ lastupdated: "2018-08-06"
 2.  n+2 個のポッドをレプリカ・セットによって管理し、単一のゾーン・クラスター内の複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 3.  n+2 個のポッドをレプリカ・セットによって管理し、複数のゾーンにまたがる複数ゾーン・クラスター内の複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 
-また、[グローバル・ロード・バランサーを使用して異なる地域にある複数のクラスターを接続](cs_clusters.html#multiple_clusters)して、高可用性を向上させることもできます。
+また、[グローバル・ロード・バランサーを使用して異なる地域にある複数のクラスターを接続](cs_clusters_planning.html#multiple_clusters)して、高可用性を向上させることもできます。
 
 ### アプリの可用性の向上
 {: #increase_availability}
@@ -76,13 +76,13 @@ lastupdated: "2018-08-06"
     
     </dd>
 <dt>複数のゾーンまたは領域にポッドを分散させる</dt>
-  <dd><p>ゾーン障害からアプリを保護するには、別々のゾーンに複数のクラスターを作成するか、または複数ゾーン・クラスター内のワーカー・プールにゾーンを追加することができます。複数ゾーン・クラスターは、[特定のメトロ領域](cs_regions.html#zones) (ダラスなど) でのみ使用可能です。複数のクラスターを別々のゾーンに作成する場合は、[グローバル・ロード・バランサーをセットアップする](cs_clusters.html#multiple_clusters)必要があります。</p>
-  <p>レプリカ・セットを使用し、ポッドのアンチアフィニティーを指定すると、Kubernetes はアプリ・ポッドをノード間で分散させます。複数のゾーンにノードがある場合、ポッドはゾーン間で分散され、アプリの可用性が向上します。アプリを 1 つのゾーンのみで実行するように制限する場合は、ポッドのアフィニティーを構成するか、または 1 つのゾーン内にワーカー・プールを作成してラベル付けすることができます。詳しくは、[複数ゾーン・クラスターの高可用性](cs_clusters.html#ha_clusters)を参照してください。</p>
+  <dd><p>ゾーン障害からアプリを保護するには、別々のゾーンに複数のクラスターを作成するか、または複数ゾーン・クラスター内のワーカー・プールにゾーンを追加することができます。 複数ゾーン・クラスターは、[特定のメトロ領域](cs_regions.html#zones) (ダラスなど) でのみ使用可能です。 複数のクラスターを別々のゾーンに作成する場合は、[グローバル・ロード・バランサーをセットアップする](cs_clusters_planning.html#multiple_clusters)必要があります。</p>
+  <p>レプリカ・セットを使用し、ポッドのアンチアフィニティーを指定すると、Kubernetes はアプリ・ポッドをノード間で分散させます。 複数のゾーンにノードがある場合、ポッドはゾーン間で分散され、アプリの可用性が向上します。 アプリを 1 つのゾーンのみで実行するように制限する場合は、ポッドのアフィニティーを構成するか、または 1 つのゾーン内にワーカー・プールを作成してラベル付けすることができます。 詳しくは、[複数ゾーン・クラスターの高可用性](cs_clusters_planning.html#ha_clusters)を参照してください。</p>
   <p><strong>複数ゾーン・クラスター・デプロイメントでは、アプリ・ポッドはノード間で均等に分散されますか?</strong></p>
-  <p>ポッドはゾーン間で均等に分散されますが、ノード間では必ずしも均等になるとは限りません。例えば、3 つの各ゾーンにノードが 1 つずつあるクラスターがある場合、6 つのポッドからなるレプリカ・セットをデプロイすると、ポッドは各ノードに 2 つずつ配分されます。しかし、3 つの各ゾーンにノードが 2 つずつあるクラスターの場合は、6 つのポッドからなるレプリカ・セットをデプロイすると、各ゾーンに 2 つのポッドがスケジュールされますが、必ずしもノードごとに 1 つのポッドがスケジュールされるとは限りません。スケジューリングをより細かく制御するには、[ポッドのアフィニティーを設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node) することができます。</p>
-  <p><strong>あるゾーンがダウンした場合、ポッドは他のゾーンにある残りのノードにどのようにスケジュール変更されますか?</strong></br>それはデプロイメントに使用されているスケジューリング・ポリシーによって異なります。[ノード固有のポッド・アフィニティー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) を組み込んだ場合、ポッドはスケジュール変更されません。そうしていない場合、ポッドは他のゾーンの使用可能なワーカー・ノード上に作成されますが、バランスが取れていない可能性があります。例えば、2 つのポッドが使用可能な 2 つのノードに分散される場合もあれば、使用可能な容量がある 1 つのノードに両方のポッドがスケジュールされる場合もあります。同様に、使用不可になっていたゾーンが回復した場合も、ポッドが自動的に削除されて、ノード間でリバランスされるわけではありません。ゾーンが回復した後に、ゾーン間でポッドをリバランスする場合は、[Kubernetes デスケジューラー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/descheduler) の使用を検討してください。</p>
+  <p>ポッドはゾーン間で均等に分散されますが、ノード間では必ずしも均等になるとは限りません。 例えば、3 つの各ゾーンにノードが 1 つずつあるクラスターがある場合、6 つのポッドからなるレプリカ・セットをデプロイすると、ポッドは各ノードに 2 つずつ配分されます。 しかし、3 つの各ゾーンにノードが 2 つずつあるクラスターの場合は、6 つのポッドからなるレプリカ・セットをデプロイすると、各ゾーンに 2 つのポッドがスケジュールされますが、必ずしもノードごとに 1 つのポッドがスケジュールされるとは限りません。 スケジューリングをより細かく制御するには、[ポッドのアフィニティーを設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node) することができます。</p>
+  <p><strong>あるゾーンがダウンした場合、ポッドは他のゾーンにある残りのノードにどのようにスケジュール変更されますか?</strong></br>それはデプロイメントに使用されているスケジューリング・ポリシーによって異なります。 [ノード固有のポッド・アフィニティー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) を組み込んだ場合、ポッドはスケジュール変更されません。 そうしていない場合、ポッドは他のゾーンの使用可能なワーカー・ノード上に作成されますが、バランスが取れていない可能性があります。 例えば、2 つのポッドが使用可能な 2 つのノードに分散される場合もあれば、使用可能な容量がある 1 つのノードに両方のポッドがスケジュールされる場合もあります。 同様に、使用不可になっていたゾーンが回復した場合も、ポッドが自動的に削除されて、ノード間でリバランスされるわけではありません。 ゾーンが回復した後に、ゾーン間でポッドをリバランスする場合は、[Kubernetes デスケジューラー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/descheduler) の使用を検討してください。</p>
   <p><strong>ヒント</strong>: 複数ゾーン・クラスターでは、ワーカー・ノードの容量をゾーン当たり 50% に保ち、ゾーン障害時にクラスターを保護するために十分な容量を確保するようにしてください。</p>
-  <p><strong>アプリを複数の地域に分散させるにはどうすればよいですか?</strong></br>地域の障害からアプリを保護するには、別の地域に 2 番目のクラスターを作成し、[グローバル・ロード・バランサーをセットアップ](cs_clusters.html#multiple_clusters)してクラスター同士を接続し、デプロイメント YAML を使用して、アプリ用に[ポッドのアンチアフィニティー ![外部リンク・リンク](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) を設定した複製レプリカ・セットをデプロイします。</p>
+  <p><strong>アプリを複数の地域に分散させるにはどうすればよいですか?</strong></br>地域の障害からアプリを保護するには、別の地域に 2 番目のクラスターを作成し、[グローバル・ロード・バランサーをセットアップ](cs_clusters_planning.html#multiple_clusters)してクラスター同士を接続し、デプロイメント YAML を使用して、アプリ用に[ポッドのアンチアフィニティー ![外部リンク・リンク](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) を設定した複製レプリカ・セットをデプロイします。</p>
   <p><strong>アプリに永続ストレージが必要な場合はどうすればよいですか?</strong></p>
   <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)などのクラウド・サービスを使用します。</p></dd>
 </dl>
@@ -216,13 +216,12 @@ Kubernetes ダッシュボードでの作業が完了したら、`CTRL+C` を使
 Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。
 {:shortdesc}
 
-シークレットを必要とする以下のタスクを確認してください。シークレットに保管できるものについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/secret/) を参照してください。
+シークレットを必要とする以下のタスクを確認してください。 シークレットに保管できるものについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/secret/) を参照してください。
 
 ### クラスターへのサービスの追加
 {: #secrets_service}
 
-サービスをクラスターにバインドする場合は、シークレットを作成する必要はありません。
-シークレットは自動的に作成されます。詳しくは、[クラスターへの Cloud Foundry サービスの追加](cs_integrations.html#adding_cluster)を参照してください。
+サービスをクラスターにバインドする場合は、シークレットを作成する必要はありません。 シークレットは自動的に作成されます。 詳しくは、[クラスターへの Cloud Foundry サービスの追加](cs_integrations.html#adding_cluster)を参照してください。
 
 ### TLS を使用するように Ingress ALB を構成する
 {: #secrets_tls}
@@ -239,7 +238,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 1. 次のいずれかの方法で鍵と証明書を生成します。
     * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。
       **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
-    * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。詳しくは、この[自己署名 SSL 証明書 チュートリアル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html) を参照してください。
+    * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。 詳しくは、この[自己署名 SSL 証明書 チュートリアル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html) を参照してください。
         1. `tls.key` を作成します。
             ```
             openssl genrsa -out tls.key 2048
@@ -273,7 +272,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ### SSL サービス注釈を使用した Ingress ALB のカスタマイズ
 {: #secrets_ssl_services}
 
-[`ingress.bluemix.net/ssl-services` 注釈](cs_annotations.html#ssl-services)を使用して、Ingress ALB からアップストリーム・アプリへのトラフィックを暗号化することができます。シークレットを作成するには、次のようにします。
+[`ingress.bluemix.net/ssl-services` 注釈](cs_annotations.html#ssl-services)を使用して、Ingress ALB からアップストリーム・アプリへのトラフィックを暗号化することができます。 シークレットを作成するには、次のようにします。
 
 1. 認証局 (CA) 鍵と証明書をアップストリーム・サーバーから入手します。
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
@@ -298,13 +297,12 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
 ### 相互認証注釈を使用した Ingress ALB のカスタマイズ
 {: #secrets_mutual_auth}
 
-
-[`ingress.bluemix.net/mutual-auth` 注釈](cs_annotations.html#mutual-auth)を使用して、Ingress ALB のダウンストリーム・トラフィックの相互認証を構成できます。相互認証シークレットを作成するには、次のようにします。
+[`ingress.bluemix.net/mutual-auth` 注釈](cs_annotations.html#mutual-auth)を使用して、Ingress ALB のダウンストリーム・トラフィックの相互認証を構成できます。 相互認証シークレットを作成するには、次のようにします。
 
 1. 次のいずれかの方法で鍵と証明書を生成します。
     * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。
       **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
-    * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。詳しくは、この[自己署名 SSL 証明書 チュートリアル![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html)を参照してください。
+    * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。 詳しくは、この[自己署名 SSL 証明書 チュートリアル![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html)を参照してください。
         1. `ca.key` を作成します。
             ```
             openssl genrsa -out ca.key 1024
@@ -316,7 +314,7 @@ ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
             ```
             {: pre}
         3. `ca.crt` を使用して、自己署名証明書を作成します。
-```
+            ```
             openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
@@ -407,7 +405,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 ## ラベルを使用した特定のワーカー・ノードへのアプリのデプロイ
 {: #node_affinity}
 
-アプリをデプロイすると、アプリ・ポッドが、クラスター内のさまざまなワーカー・ノードに無差別にデプロイされます。場合に応じて、アプリ・ポッドがデプロイされるワーカー・ノードを制限することもできます。例えば、特定のワーカー・プールのワーカー・ノードがベア・メタル・マシン上にあるため、これらのワーカー・ノードにのみアプリ・ポッドがデプロイされるようにしたいとします。アプリ・ポッドをデプロイするワーカー・ノードを指定するには、アプリのデプロイメントにアフィニティー・ルールを追加します。
+アプリをデプロイすると、アプリ・ポッドが、クラスター内のさまざまなワーカー・ノードに無差別にデプロイされます。 場合に応じて、アプリ・ポッドがデプロイされるワーカー・ノードを制限することもできます。 例えば、特定のワーカー・プールのワーカー・ノードがベア・メタル・マシン上にあるため、これらのワーカー・ノードにのみアプリ・ポッドがデプロイされるようにしたいとします。 アプリ・ポッドをデプロイするワーカー・ノードを指定するには、アプリのデプロイメントにアフィニティー・ルールを追加します。
 {:shortdesc}
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
@@ -418,7 +416,8 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
     ```
     {:pre}
 
-    以下のステップでは、例としてワーカー・プール名を使用します。別の要因に基づいて特定のワーカー・ノードにアプリ・ポッドをデプロイするには、代わりにその値を取得してください。例えば、アプリ・ポッドを特定の VLAN 上のワーカー・ノードにのみデプロイするには、`ibmcloud ks vlans<zone>` を実行して VLAN ID を取得します。{: tip}
+    以下のステップでは、例としてワーカー・プール名を使用します。 別の要因に基づいて特定のワーカー・ノードにアプリ・ポッドをデプロイするには、代わりにその値を取得してください。 例えば、アプリ・ポッドを特定の VLAN 上のワーカー・ノードにのみデプロイするには、`ibmcloud ks vlans<zone>` を実行して VLAN ID を取得します。
+    {: tip}
 
 2. [ワーカー・プール名のアフィニティー・ルール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) をアプリのデプロイメントに追加します。
 
@@ -489,7 +488,8 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
         ```
         {: screen}
 
-        別の要因に基づいてアプリのアフィニティー・ルールを作成した場合は、代わりにその値を取得してください。例えば、特定の VLAN 上のワーカー・ノードにデプロイされたアプリ・ポッドを検証するには、`ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` を実行して、ワーカー・ノードがオンになっている VLAN を表示します。{: tip}
+        別の要因に基づいてアプリのアフィニティー・ルールを作成した場合は、代わりにその値を取得してください。 例えば、特定の VLAN 上のワーカー・ノードにデプロイされたアプリ・ポッドを検証するには、`ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` を実行して、ワーカー・ノードがオンになっている VLAN を表示します。
+        {: tip}
 
     4. 出力で、前のステップで指定したプライベート IP アドレスを持つワーカー・ノードがこのワーカー・プールにデプロイされていることを確認します。
 
@@ -499,7 +499,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 ## GPU マシンへのアプリのデプロイ
 {: #gpu_app}
 
-[ベア・メタル・グラフィックス処理装置 (GPU) マシン・タイプ](cs_clusters.html#shared_dedicated_node)がある場合は、数理計算主体のワークロードをワーカー・ノードにスケジュールできます。 例えば、Compute Unified Device Architecture (CUDA) プラットフォームを使用する 3D アプリを実行して GPU と CPU 間で処理負荷を分担し、パフォーマンスを向上させることができます。
+[ベア・メタル・グラフィックス処理装置 (GPU) マシン・タイプ](cs_clusters_planning.html#shared_dedicated_node)がある場合は、数理計算主体のワークロードをワーカー・ノードにスケジュールできます。 例えば、Compute Unified Device Architecture (CUDA) プラットフォームを使用する 3D アプリを実行して GPU と CPU 間で処理負荷を分担し、パフォーマンスを向上させることができます。
 {:shortdesc}
 
 以下のステップは、GPU を必要とするワークロードをデプロイする方法を示しています。 GPU と CPU の両方にわたってワークロードを処理する必要はない[アプリをデプロイする](#app_ui)こともできます。 後で、[この Kubernetes デモ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) を使用して、[TensorFlow ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.tensorflow.org/) 機械学習フレームワークなどの数理計算主体のワークロードを試してみることをお勧めします。

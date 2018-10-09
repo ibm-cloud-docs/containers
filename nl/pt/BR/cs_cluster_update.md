@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -85,7 +85,7 @@ Antes de iniciar:
 - Faça quaisquer mudanças marcadas com _Atualizar após o mestre_ em [Mudanças do Kubernetes](cs_versions.html).
 - Se desejar aplicar uma atualização de correção, revise o [log de mudanças de versão do Kubernetes](cs_versions_changelog.html#changelog). </br>
 
-**Atenção**: as atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Os dados serão excluídos se não [armazenados fora do pod](cs_storage_planning.html#persistent).
+**Atenção**: as atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Os dados serão excluídos se não [armazenados fora do pod](cs_storage_planning.html#persistent_storage_overview).
 
 
 **O que acontece com meus apps durante uma atualização?**</br>
@@ -258,10 +258,10 @@ Próximas etapas:
 
 Antes de iniciar:
 - [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
-- Se você armazenar dados em seu nó do trabalhador, os dados serão excluídos se não [armazenados fora do nó do trabalhador](cs_storage_planning.html#persistent).
+- Se você armazenar dados em seu nó do trabalhador, os dados serão excluídos se não [armazenados fora do nó do trabalhador](cs_storage_planning.html#persistent_storage_overview).
 
 
-**Atenção**: as atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Os dados serão excluídos se não [armazenados fora do pod](cs_storage_planning.html#persistent).
+**Atenção**: as atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços. Os dados serão excluídos se não [armazenados fora do pod](cs_storage_planning.html#persistent_storage_overview).
 
 1. Liste os nós do trabalhador disponíveis e anote o seu endereço IP privado.
    - **Para nós do trabalhador em um conjunto de trabalhadores**:
@@ -367,14 +367,33 @@ Antes de iniciar:
 ## Atualizando complementos de cluster
 {: #addons}
 
-Seu cluster do {{site.data.keyword.containershort_notm}} é fornecido com **complementos**, como Fluentd para criação de log, que são instalados automaticamente quando você provisiona o cluster. Esses complementos devem ser atualizados separadamente dos nós principal e do trabalhador.
+Seu cluster do {{site.data.keyword.containerlong_notm}} é fornecido com **complementos**, como Fluentd para criação de log, que são instalados automaticamente quando você provisiona o cluster. Esses complementos devem ser atualizados separadamente dos nós principal e do trabalhador.
 {: shortdesc}
 
 **Quais complementos padrão eu tenho que atualizar separadamente do cluster?**
 * [ Fluentd para criação de log ](#logging)
 
+**Existem complementos que eu não preciso atualizar e não posso mudar?**</br>
+Sim, o seu cluster é implementado com os complementos gerenciados a seguir e recursos associados que não podem ser mudados. Se você tentar mudar um desses complementos de implementação, suas configurações originais serão restauradas em um intervalo regular. 
+
+* `heapster`
+* `ibm-file-plugin`
+* ` ibm-storage-watcher `
+* ` ibm-keepalived-watcher `
+* ` kube-dns-amd64 `
+* ` kube-dns-autoscaler `
+* `kubernetes-painel`
+* ` vpn `
+
+É possível visualizar esses recursos usando o rótulo `addonmanager.kubernetes.io/mode: Reconcile`. Por exemplo:
+
+```
+kubectl get deployments -- all-namespaces -l addonmanager.kubernetes.io/mode=Reconcile
+```
+{: pre}
+
 **Posso instalar outros complementos além do padrão?**</br>
-Sim. O {{site.data.keyword.containershort_notm}} fornece outros complementos dentro os quais é possível escolher para incluir recursos em seu cluster. Por exemplo, você pode desejar [usar gráficos Helm](cs_integrations.html#helm) para instalar o [plug-in de armazenamento de bloco](cs_storage_block.html#install_block), o [Istio](cs_tutorials_istio.html#istio_tutorial) ou a [VPN strongSwan](cs_vpn.html#vpn-setup). Deve-se atualizar cada complemento separadamente seguindo as instruções para atualizar os gráficos Helm.
+Sim. O {{site.data.keyword.containerlong_notm}} fornece outros complementos dentro os quais é possível escolher para incluir recursos em seu cluster. Por exemplo, você pode desejar [usar gráficos Helm](cs_integrations.html#helm) para instalar o [plug-in de armazenamento de bloco](cs_storage_block.html#install_block), o [Istio](cs_tutorials_istio.html#istio_tutorial) ou a [VPN strongSwan](cs_vpn.html#vpn-setup). Deve-se atualizar cada complemento separadamente seguindo as instruções para atualizar os gráficos Helm.
 
 ### Fluentd para criação de log
 {: #logging}
@@ -453,13 +472,13 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
       ```
       {: pre}
 
-   2. **Para incluir a zona em múltiplos conjuntos de trabalhadores**: inclua múltiplos conjuntos de trabalhadores no comando `ibmcloud ks zone-add`. Para incluir múltiplos conjuntos de trabalhadores em uma zona, deve-se ter uma VLAN privada e uma pública existente nessa zona. Se não houver uma VLAN pública e privada nessa zona, considere incluir a zona em um conjunto de trabalhadores primeiro para que uma VLAN privada e uma pública sejam criadas para você. Em seguida, é possível incluir a zona em outros conjuntos de trabalhadores. </br></br>É importante que os nós do trabalhador em todos os seus conjuntos de trabalhadores sejam provisionados em todas as zonas para assegurar que o cluster esteja balanceado entre as zonas. Se deseja usar VLANs diferentes para conjuntos de trabalhadores diferentes, repita esse comando com a VLAN que você deseja usar para o seu conjunto de trabalhadores. Para ativar a comunicação na rede privada entre os trabalhadores que estiverem em zonas diferentes, deve-se ativar a [ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+   2. **Para incluir a zona em múltiplos conjuntos de trabalhadores**: inclua múltiplos conjuntos de trabalhadores no comando `ibmcloud ks zone-add`. Para incluir múltiplos conjuntos de trabalhadores em uma zona, deve-se ter uma VLAN privada e uma pública existente nessa zona. Se não houver uma VLAN pública e privada nessa zona, considere incluir a zona em um conjunto de trabalhadores primeiro para que uma VLAN privada e uma pública sejam criadas para você. Em seguida, é possível incluir a zona em outros conjuntos de trabalhadores. </br></br>É importante que os nós do trabalhador em todos os seus conjuntos de trabalhadores sejam provisionados em todas as zonas para assegurar que o cluster esteja balanceado entre as zonas. Se deseja usar VLANs diferentes para conjuntos de trabalhadores diferentes, repita esse comando com a VLAN que você deseja usar para o seu conjunto de trabalhadores. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster multizona, deve-se ativar o [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se você está usando o {{site.data.keyword.BluDirectLink}}, deve-se usar um [ Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para ativar o VRF, entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer).
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **Para incluir múltiplas zonas em seus conjuntos de trabalhadores**: repita o comando `ibmcloud ks zone-add` com uma zona diferente e especifique os conjuntos de trabalhadores que você deseja provisionar nessa zona. Incluindo mais zonas em seu cluster, você muda o seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](cs_clusters.html#multi_zone).
+   3. **Para incluir múltiplas zonas em seus conjuntos de trabalhadores**: repita o comando `ibmcloud ks zone-add` com uma zona diferente e especifique os conjuntos de trabalhadores que você deseja provisionar nessa zona. Incluindo mais zonas em seu cluster, você muda o seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](cs_clusters_planning.html#multizone).
 
 6. Espere os nós do trabalhador serem implementados em cada zona.
    ```
@@ -501,4 +520,4 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 
 
 **O que vem a seguir?** </br>
-Agora que você atualizou seu cluster para usar conjuntos de trabalhadores, é possível melhorar a disponibilidade incluindo mais zonas em seu cluster. A inclusão de mais zonas em seu cluster muda seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](cs_clusters.html#ha_clusters). Quando você muda seu cluster de zona única para um cluster de múltiplas zonas, seu domínio do Ingresso muda de `<cluster_name>.<region>.containers.mybluemix.net` para `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. O domínio do Ingresso existente ainda é válido e pode ser usado para enviar solicitações para seus apps.
+Agora que você atualizou seu cluster para usar conjuntos de trabalhadores, é possível melhorar a disponibilidade incluindo mais zonas em seu cluster. A inclusão de mais zonas em seu cluster muda seu cluster de um cluster de zona única para um [cluster de múltiplas zonas](cs_clusters_planning.html#ha_clusters). Quando você muda seu cluster de zona única para um cluster de múltiplas zonas, seu domínio do Ingresso muda de `<cluster_name>.<region>.containers.mybluemix.net` para `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. O domínio do Ingresso existente ainda é válido e pode ser usado para enviar solicitações para seus apps.

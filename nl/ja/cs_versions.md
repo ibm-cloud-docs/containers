@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -28,17 +28,18 @@ lastupdated: "2018-08-06"
 
 **サポートされる Kubernetes バージョン**:
 
-- 最新: 1.10.5
-- デフォルト: 1.10.5
-- その他: 1.9.9、1.8.15
+- 最新: 1.11.2
+- デフォルト: 1.10.7
+- その他: 1.9.10
+- 非推奨: 1.8.15 (2018 年 9 月 22 日、非サポート)
 
 </br>
 
-**非推奨バージョン**: 非推奨 Kubernetes バージョンでクラスターを実行している場合は、そのバージョンがサポートされなくなるまでの 30 日の間に、サポートされるバージョンの Kubernetes を確認したうえで更新してください。 非推奨の期間中は、クラスターはまだ完全にサポートされています。ただし、非推奨バージョンを使用する新規クラスターは作成できません。
+**非推奨バージョン**: 非推奨 Kubernetes バージョンでクラスターを実行している場合は、そのバージョンがサポートされなくなるまでの 30 日の間に、サポートされるバージョンの Kubernetes を確認したうえで更新してください。 非推奨の期間中は、クラスターはまだ完全にサポートされています。 ただし、非推奨バージョンを使用する新規クラスターは作成できません。
 
-**非サポート・バージョン**: サポートされないバージョンの Kubernetes でクラスターを実行している場合は、更新が[与える可能性のある影響を確認](#version_types)したうえで、ただちに[クラスターを更新](cs_cluster_update.html#update)して、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。 
-*  **重要**: クラスターが、サポートされるバージョンの 3 つ以上マイナーのバージョンになった場合は、強制的に更新を実行する必要があり、この場合、予期しない結果または障害が発生する可能性があります。 
-*  非サポートのクラスターは、既存のワーカー・ノードを追加したり再ロードしたりすることはできません。 
+**非サポート・バージョン**: サポートされないバージョンの Kubernetes でクラスターを実行している場合は、更新が[与える可能性のある影響を確認](#version_types)したうえで、ただちに[クラスターを更新](cs_cluster_update.html#update)して、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。
+*  **重要**: クラスターが、サポートされるバージョンの 3 つ以上マイナーのバージョンになった場合は、強制的に更新を実行する必要があり、この場合、予期しない結果または障害が発生する可能性があります。
+*  非サポートのクラスターは、既存のワーカー・ノードを追加したり再ロードしたりすることはできません。
 *  サポートされるバージョンにクラスターを更新した後は、クラスターで、通常の操作を再開し、引き続きサポートを受けることができます。
 
 </br>
@@ -53,7 +54,7 @@ kubectl version  --short | grep -i server
 出力例:
 
 ```
-Server Version: v1.10.5+IKS
+Server Version: v1.10.7+IKS
 ```
 {: screen}
 
@@ -80,9 +81,9 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
 <br/>
 
 この情報は、クラスターを前のバージョンから新しいバージョンに更新した場合に、デプロイされているアプリに影響を与える可能性がある更新についてまとめたものです。
+-  バージョン 1.11 [マイグレーションの操作](#cs_v111)。
 -  バージョン 1.10 [マイグレーションの操作](#cs_v110)。
 -  バージョン 1.9 [マイグレーションの操作](#cs_v19)。
--  バージョン 1.8 [マイグレーションの操作](#cs_v18)。
 -  非推奨または非サポートのバージョンの[アーカイブ](#k8s_version_archive)。
 
 <br/>
@@ -90,6 +91,115 @@ Kubernetes クラスターには、メジャー、マイナー、およびパッ
 変更内容の完全なリストは、以下の情報を参照してください。
 * [Kubernetes の変更ログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
 * [IBM バージョンの変更ログ](cs_versions_changelog.html)。
+
+</br>
+
+## バージョン 1.11
+{: #cs_v111}
+
+<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud コンテナー・サービスが Kubernetes バージョン 1.11 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.11 の Kubernetes 製品です。__</p>
+
+Kubernetes を前のバージョンから 1.11 に更新する場合に必要な可能性がある変更作業について説明します。
+
+### マスターの前に行う更新
+{: #111_before}
+
+<table summary="バージョン 1.11 の Kubernetes の更新">
+<caption>マスターを Kubernetes 1.11 に更新する前に行う変更</caption>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`containerd` の新しい Kubernetes コンテナー・ランタイム</td>
+<td><strong>重要</strong>: `containerd` は、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。実行する必要があるアクションについては、[コンテナー・ランタイムとしての `containerd` へのマイグレーション](#containerd)を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes コンテナー・ボリューム・マウント伝搬</td>
+<td>コンテナー `VolumeMount` の [`mountPropagation` フィールド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) のデフォルト値は、`HostToContainer` から `None` に変更されました。この変更により、Kubernetes バージョン 1.9 以前に存在していた動作が復元されます。ポッドの仕様がデフォルトの `HostToContainer` に依存している場合は、それらを更新します。</td>
+</tr>
+<tr>
+<td>Kubernetes API サーバー JSON デシリアライザー</td>
+<td>Kubernetes API サーバー JSON デシリアライザーで、大/小文字が区別されるようになりました。この変更により、Kubernetes バージョン 1.7 以前に存在していた動作が復元されます。JSON リソース定義で正しくない大/小文字が使用されている場合は、それらを更新します。<br><br>**注**: 影響を受けるのは、直接の Kubernetes API サーバー要求のみです。`kubectl` CLI では、Kubernetes バージョン 1.7 以降で大/小文字を区別するキーが引き続き強制されるため、`kubectl` でリソースを厳密に管理する場合は、影響を受けません。</td>
+</tr>
+</tbody>
+</table>
+
+### マスターの後に行う更新
+{: #111_after}
+
+<table summary="バージョン 1.11 の Kubernetes の更新">
+<caption>マスターを Kubernetes 1.11 に更新した後に行う変更</caption>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・ロギング構成</td>
+<td>`fluentd` クラスター・アドオンは、`logging-autoupdate` が無効になっている場合でも、バージョン 1.11 で自動的に更新されます。<br><br>
+コンテナー・ログ・ディレクトリーが `/var/lib/docker/` から `/var/log/pods/` に変更されました。以前のディレクトリーをモニターする独自のロギング・ソリューションを使用する場合は、それに応じて更新します。</td>
+</tr>
+<tr>
+<td>Kubernetes 構成のリフレッシュ</td>
+<td>クラスターの Kubernetes API サーバーの OpenID Connect 構成が、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) アクセス・グループをサポートするように更新されました。そのため、`ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` を実行して、マスター Kubernetes v1.11 の更新の後にクラスターの Kubernetes 構成をリフレッシュする必要があります。<br><br>構成をリフレッシュしないと、クラスター・アクションは失敗し、`You must be logged in to the server (Unauthorized).` というエラー・メッセージが表示されます。</td>
+</tr>
+<tr>
+<td>`kubectl` CLI</td>
+<td>Kubernetes バージョン 1.11 の `kubectl` CLI には、`apps/v1` API が必要です。そのため、v1.11 の `kubectl` CLI は、Kubernetes バージョン 1.8 以前を実行するクラスターでは機能しません。クラスターの Kubernetes API サーバーのバージョンに一致している `kubectl` CLI のバージョンを使用してください。</td>
+</tr>
+<tr>
+<td>`kubectl auth can-i`</td>
+<td>ユーザーが許可されていない場合、`kubectl auth can-i` コマンドが `exit code 1` で失敗するようになりました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>ラベルなどの選択基準を使用してリソースを削除すると、デフォルトでは `kubectl delete` コマンドで `not found` エラーが無視されるようになりました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+</tr>
+<tr>
+<td>Kubernetes `sysctls` 機能</td>
+<td>`security.alpha.kubernetes.io/sysctls` アノテーションが無視されるようになりました。代わりに、Kubernetes では、`sysctls` を指定および制御できるように `PodSecurityPolicy` オブジェクトと `Pod` オブジェクトにフィールドが追加されました。詳しくは、[Using sysctls in Kubernetes ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/) を参照してください。<br><br>クラスターのマスターおよびワーカーを更新したら、新しい `sysctls` フィールドを使用するように `PodSecurityPolicy` オブジェクトと `Pod` オブジェクトを更新します。</td>
+</tr>
+</tbody>
+</table>
+
+### コンテナー・ランタイムとしての `containerd` へのマイグレーション
+{: #containerd}
+
+Kubernetes バージョン 1.11 以降を実行するクラスターの場合、`containerd` は、パフォーマンスを向上させるために、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。ご使用のポッドが Kubernetes コンテナー・ランタイムとしての Docker に依存している場合は、これらを更新して、`containerd` をコンテナー・ランタイムとして処理する必要があります。詳しくは、[Kubernetes の containerd についての発表 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/) を参照してください。
+{: shortdesc}
+
+**アプリが `containerd` ではなく `docker` に依存しているかどうかを確認するには、どうすればよいですか?**<br>
+コンテナー・ランタイムとしての Docker に依存している可能性のある場合の例:
+*  特権コンテナーを使用して Docker エンジンまたは API に直接アクセスする場合は、ランタイムとしての `containerd` をサポートするようにポッドを更新します。
+*  クラスター内にインストールするロギング・ツールやモニター・ツールなどの一部のサード・パーティー・アドオンは、Docker エンジンに依存している場合があります。ツールが `containerd` と互換性があることをプロバイダーに確認してください。
+
+<br>
+
+**ランタイムへの依存以外に、マイグレーション・アクションを実行する必要がありますか?**<br>
+
+**マニフェスト・ツール**: Docker バージョン 18.06 より前の試験的な `docker manifest` [ツール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) を使用してビルドされたマルチプラットフォーム・イメージがある場合は、`containerd` を使用して DockerHub からイメージをプルすることはできません。
+
+ポッドのイベントを確認すると、次のようなエラーが表示されることがあります。
+```
+failed size validation
+```
+{: screen}
+
+マニフェスト・ツールを使用してビルドされたイメージとともに `containerd` を使用するには、以下のオプションのいずれかを選択します。
+
+*  [マニフェスト・ツール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/estesp/manifest-tool) を使用してイメージを再ビルドします。
+*  Docker バージョン 18.06 以降に更新した後で `docker-manifest` ツールを使用してイメージを再ビルドします。
+
+<br>
+
+**影響を受けないものは何ですか? コンテナーのデプロイ方法を変更する必要がありますか?**<br>
+一般に、コンテナー・デプロイメント・プロセスは変更されません。引き続き Dockerfile を使用して Docker イメージを定義し、アプリの Docker コンテナーをビルドできます。`docker` コマンドを使用して、イメージをビルドしてレジストリーにプッシュする場合は、引き続き `docker` を使用することも、代わりに `ibmcloud cr` コマンドを使用することもできます。
 
 ## バージョン 1.10
 {: #cs_v110}
@@ -132,7 +242,7 @@ Kubernetes を前のバージョンから 1.10 に更新する場合に必要な
 </tr>
 <tr>
 <td>strongSwan VPN</td>
-<td>VPN 接続に [strongSwan](cs_vpn.html#vpn-setup) を使用している場合、クラスターを更新する前に、`helm delete --purge <release_name>` を実行してチャートを削除する必要があります。クラスターの更新が完了した後、strongSwan Helm チャートを再インストールします。</td>
+<td>VPN 接続に [strongSwan](cs_vpn.html#vpn-setup) を使用している場合、クラスターを更新する前に、`helm delete --purge <release_name>` を実行してチャートを削除する必要があります。 クラスターの更新が完了した後、strongSwan Helm チャートを再インストールします。</td>
 </tr>
 </tbody>
 </table>
@@ -277,7 +387,10 @@ Kubernetes を前のバージョンから 1.9 に更新する場合に必要な�
 
 
 
-## バージョン 1.8
+## アーカイブ
+{: #k8s_version_archive}
+
+### バージョン 1.8 (非推奨、2018 年 9 月 22 日非サポート)
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service が Kubernetes バージョン 1.8 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.8 の Kubernetes 製品です。 __</p>
@@ -350,20 +463,16 @@ Kubernetes を前のバージョンから 1.8 に更新する場合に必要な�
 <br />
 
 
-
-## アーカイブ
-{: #k8s_version_archive}
-
 ### バージョン 1.7 (サポート対象外)
 {: #cs_v17}
 
-2018 年 6 月 21 日現在、[Kubernetes バージョン 1.7](cs_versions_changelog.html#changelog_archive) を実行する {{site.data.keyword.containershort_notm}} クラスターはサポートされていません。 バージョン 1.7 クラスターは、次に最新のバージョン ([Kubernetes 1.8](#cs_v18)) に更新しない限り、セキュリティー更新もサポートも受けられません。
+2018 年 6 月 21 日現在、[Kubernetes バージョン 1.7](cs_versions_changelog.html#changelog_archive) を実行する {{site.data.keyword.containerlong_notm}} クラスターはサポートされていません。 バージョン 1.7 クラスターは、次に最新のバージョン ([Kubernetes 1.8](#cs_v18)) に更新しない限り、セキュリティー更新もサポートも受けられません。
 
 各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](cs_versions.html#cs_versions)したうえで、少なくとも 1.8 にただちに[クラスターを更新](cs_cluster_update.html#update)してください。
 
 ### バージョン 1.5 (サポート対象外)
 {: #cs_v1-5}
 
-2018 年 4 月 4 日現在、[Kubernetes バージョン 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) を実行する {{site.data.keyword.containershort_notm}} クラスターはサポートされていません。 バージョン 1.5 クラスターは、次に最新のバージョン ([Kubernetes 1.8](#cs_v18)) に更新しない限り、セキュリティー更新もサポートも受けられません。
+2018 年 4 月 4 日現在、[Kubernetes バージョン 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) を実行する {{site.data.keyword.containerlong_notm}} クラスターはサポートされていません。 バージョン 1.5 クラスターは、次に最新のバージョン ([Kubernetes 1.8](#cs_v18)) に更新しない限り、セキュリティー更新もサポートも受けられません。
 
 各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](cs_versions.html#cs_versions)したうえで、少なくとも 1.8 にただちに[クラスターを更新](cs_cluster_update.html#update)してください。

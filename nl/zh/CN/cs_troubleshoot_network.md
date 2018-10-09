@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -26,9 +26,8 @@ lastupdated: "2018-08-06"
 在使用 {{site.data.keyword.containerlong}} 时，请考虑用于对集群联网进行故障诊断的以下方法。
 {: shortdesc}
 
-如果您有更常规的问题，请尝试[集群调试](cs_troubleshoot.html)。
+通过 Ingress 连接到应用程序时遇到问题？请尝试[调试 Ingress](cs_troubleshoot_debug_ingress.html)。
 {: tip}
-
 
 ## 无法通过 LoadBalancer 服务连接到应用程序
 {: #cs_loadbalancer_fails}
@@ -110,146 +109,23 @@ kubectl describe service <service_name> | grep "LoadBalancer Ingress"
 <br />
 
 
-
-
 ## 无法通过 Ingress 连接到应用程序
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
 您已通过为集群中的应用程序创建 Ingress 资源来向公众公开应用程序。但尝试使用 Ingress 应用程序负载均衡器 (ALB) 的公共 IP 地址或子域连接到应用程序时，连接失败或超时。
 
-{: tsCauses}
-由于以下原因，Ingress 可能未正常运行：
-<ul><ul>
-<li>集群尚未完全部署。
-<li>集群设置为免费集群，或设置为仅具有一个工作程序节点的标准集群。
-<li>Ingress 配置脚本包含错误。
-</ul></ul>
-
 {: tsResolve}
-要对 Ingress 进行故障诊断，请执行以下操作：
-
-1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 ALB 具有高可用性。
-
-  ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
-  {: pre}
-
-    在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
-
-2.  检索 ALB 子域和公共 IP 地址，然后对每一项执行 ping 操作。
-
-    1.  检索 ALB 子域。
-
-      ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
-      ```
-      {: pre}
-
-    2.  对 ALB 子域执行 ping 操作。
-
-      ```
-ping <ingress_subdomain>
-      ```
-      {: pre}
-
-    3.  检索 ALB 的公共 IP 地址。
-
-      ```
-nslookup <ingress_subdomain>
-      ```
-      {: pre}
-
-    4.  对 ALB 公共 IP 地址执行 ping 操作。
-
-      ```
-ping <ALB_IP>
-      ```
-      {: pre}
-
-    如果对于 ALB 的公共 IP 地址或子域，CLI 返回超时，并且您已设置定制防火墙来保护工作程序节点，请在[防火墙](cs_troubleshoot_clusters.html#cs_firewall)中打开更多端口和联网组。
-
-3.  如果使用的是定制域，请确保定制域已通过 DNS 提供者映射到 IBM 提供的 ALB 的公共 IP 地址或子域。
-    1.  如果使用的是 ALB 子域，请检查规范名称记录 (CNAME)。
-    2.  如果使用的是 ALB 公共 IP 地址，请检查定制域是否已映射到指针记录 (PTR) 中的可移植公共 IP 地址。
-4.  检查 Ingress 资源配置文件。
-
+首先，检查集群是否已完全部署并且每个专区至少有 2 个工作程序节点，以确保 ALB 的高可用性。
     ```
-apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: myingress
-    spec:
-      tls:
-      - hosts:
-        - <ingress_subdomain>
-        secretName: <ingress_tls_secret>
-      rules:
-      - host: <ingress_subdomain>
-        http:
-          paths:
-          - path: /
-            backend:
-              serviceName: myservice
-              servicePort: 80
+        ibmcloud ks workers <cluster_name_or_ID>
     ```
-    {: codeblock}
-
-    1.  检查 ALB 子域和 TLS 证书是否正确。要查找 IBM 提供的子域和 TLS 证书，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
-    2.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请包含 **/** 以作为路径。
-5.  检查 Ingress 部署，并查找潜在的警告或错误消息。
-
-    ```
-  kubectl describe ingress <myingress>
-  ```
     {: pre}
 
-    例如，在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。
+在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
 
-    ```
-Name:             myingress
-    Namespace:        default
-    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host                                             Path  Backends
-      ----                                             ----  --------
-      mycluster.us-south.containers.appdomain.cloud
-                                                       /tea      myservice1:80 (<none>)
-                                                       /coffee   myservice2:80 (<none>)
-    Annotations:
-      custom-port:        protocol=http port=7490; protocol=https port=4431
-      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
-    Events:
-      Type     Reason             Age   From                                                            Message
-      ----     ------             ----  ----                                                            -------
-      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
-      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-    ```
-    {: screen}
-
-6.  检查 ALB 的日志。
-    1.  检索正在集群中运行的 Ingress pod 的标识。
-
-      ```
-kubectl get pods -n kube-system | grep alb
-      ```
-      {: pre}
-
-    2.  检索每个 Ingress pod 的日志。
-
-      ```
-      kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
-      ```
-      {: pre}
-
-    3.  在 ALB 日志中查找错误消息。
+* 如果标准集群已完全部署并且每个专区至少有 2 个工作程序节点，但是 **Ingress 子域**不可用，请参阅[无法获取 Ingress ALB 的子域](cs_troubleshoot_network.html#cs_subnet_limit)。
+* 对于其他问题，请遵循[调试 Ingress](cs_troubleshoot_debug_ingress.html) 中的步骤来对 Ingress 设置进行故障诊断。
 
 <br />
 
@@ -311,7 +187,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。在该专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containershort_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的 VLAN 已达到该限制，那么供应 **Ingress 子域**会失败。
+在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。在该专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containerlong_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的 VLAN 已达到该限制，那么供应 **Ingress 子域**会失败。
 
 要查看 VLAN 的子网数，请执行以下操作：
 1.  在 [IBM Cloud Infrastructure (SoftLayer) 控制台](https://control.bluemix.net/)中，选择**网络** > **IP 管理** > **VLAN**。
@@ -320,7 +196,7 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: tsResolve}
 如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)进行订购。然后，[创建集群](cs_cli_reference.html#cs_cluster_create)以使用这一新的 VLAN。
 
-如果有其他 VLAN 可用，那么可以在现有集群中[设置 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。在此之后，即可将新的工作程序节点添加到集群，这些节点将使用具有可用子网的其他 VLAN。
+如果有其他 VLAN 可用，那么可以在现有集群中[设置 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。在此之后，即可将新的工作程序节点添加到集群，这些节点将使用具有可用子网的其他 VLAN。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](cs_cli_reference.html#cs_vlan_spanning_get)。
 
 如果并未使用 VLAN 中的所有子网，那么可以在集群中复用子网。
 1.  检查要使用的子网是否可用。**注**：使用的 Infrastructure 帐户可能在多个 {{site.data.keyword.Bluemix_notm}} 帐户之间共享。在这种情况下，即便运行 `ibmcloud ks subnets` 命令来查看 **Bound Cluster** 的子网，也只能看到您的集群的信息。请与 Infrastructure 帐户所有者核实以确保这些子网可用，并且未由其他任何帐户或团队使用。
@@ -348,10 +224,36 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: screen}
 
 {: tsCauses}
-在每个专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containershort_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的公用 VLAN 已达到该限制，那么供应该专区的公共 Ingress ALB 会失败。
+在每个专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containerlong_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的公用 VLAN 已达到该限制，那么供应该专区的公共 Ingress ALB 会失败。
 
 {: tsResolve}
 要检查 VLAN 上的子网数量以及了解如何获取其他 VLAN 的步骤，请参阅[无法为 Ingress ALB 获取子域](#cs_subnet_limit)。
+
+<br />
+
+
+## 60 秒后，通过 WebSocket 的连接关闭
+{: #cs_ingress_websocket}
+
+{: tsSymptoms}
+Ingress 服务公开使用 WebSocket 的应用程序。但是，客户机与 WebSocket 应用程序之间的连接会在它们之间不发送流量 60 秒后关闭。
+
+{: tsCauses}
+由于以下某个原因停止活动 60 秒后，与 WebSocket 应用程序的连接可能断开：
+
+* 因特网连接具有一个代理或防火墙，不容许长时间连接。
+* ALB 到 WebSocket 应用程序的超时终止连接。
+
+{: tsResolve}
+为避免连接在停止活动 60 秒后关闭：
+
+1. 如果通过代理或防火墙连接到 WebSocket 应用程序，确保未将代理或防火墙配置为自动终止长时间连接。
+
+2. 要保持连接活动，您可以增大超时值或者在应用程序中设置脉动信号。
+<dl><dt>更改超时</dt>
+<dd>增大 ALB 配置中 `proxy-read-timeout` 的值。例如，要将超时从 `60s` 更改为更大的值，例如，`300s`，请将以下[注释](cs_annotations.html#connection)添加到 Ingress 资源文件：`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`。将更改集群中所有公共 ALB 的超时。</dd>
+<dt>设置脉动信号</dt>
+<dd>如果不想要更改 ALB 的缺省读取超时值，请在 WebSocket 应用程序中设置脉动信号。在使用框架（例如，[WAMP ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://wamp-proto.org/)）设置脉动信号协议时，应用程序的上游服务器按照时间间隔定期发送“ping”消息，并且客户机以“pong”消息进行响应。将脉动信号间隔设置为 58 秒或更小，从而在实施 60 秒超时前，“ping/pong”流量保持连接打开。</dd></dl>
 
 <br />
 
@@ -460,7 +362,7 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 <br />
 
 
-## 添加或删除工作程序节点后，strongSwan VPN 连接失败
+## 在添加或删除工作程序节点后，strongSwan VPN 连接失败
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}
@@ -487,8 +389,8 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 1. 删除现有的 Helm 图表。
 
     ```
-    helm delete --purge <release_name>
-    ```
+  helm delete --purge <release_name>
+  ```
     {: pre}
 
 2. 打开 strongSwan VPN 服务的配置文件。
@@ -712,15 +614,17 @@ SoftLayerAPIError(SoftLayer_Exception_Public)：无法获取标识为 #123456 �
 集群仍然有问题吗？
 {: shortdesc}
 
+-  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
+
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
 
 如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
 
-    -   如果您有关于使用 {{site.data.keyword.containershort_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
-    -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
+    -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
+    -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。

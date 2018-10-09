@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # {{site.data.keyword.cloudaccesstrailshort}} 事件
 {: #at_events}
 
-您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服务来查看、管理和审计 {{site.data.keyword.containershort_notm}} 集群中用户启动的活动。
+您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服务来查看、管理和审计 {{site.data.keyword.containerlong_notm}} 集群中用户启动的活动。
 {: shortdesc}
 
-## 查找信息
-{: #at-find}
+
+
+有关该服务如何工作的更多信息，请参阅 [{{site.data.keyword.cloudaccesstrailshort}} 文档](/docs/services/cloud-activity-tracker/index.html)。有关跟踪的 Kubernetes 操作的更多信息，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/home/)。
+
+
+## 查找 Kubernetes 审计事件的信息
+{: #kube-find}
 
 {{site.data.keyword.cloudaccesstrailshort}} 事件在生成这些事件的 {{site.data.keyword.Bluemix_notm}} 区域中可用的 {{site.data.keyword.cloudaccesstrailshort}} **帐户域**中提供。{{site.data.keyword.cloudaccesstrailshort}} 事件还在与供应 {{site.data.keyword.cloudaccesstrailshort}} 服务的 Cloud Foundry 空间相关联的 {{site.data.keyword.cloudaccesstrailshort}} **空间域**中提供。
 
 要监视管理活动，请执行以下操作：
 
 1. 登录到 {{site.data.keyword.Bluemix_notm}} 帐户。
-2. 在目录中，在 {{site.data.keyword.containershort_notm}} 的实例所在的帐户中供应 {{site.data.keyword.cloudaccesstrailshort}} 服务的实例。
+2. 在目录中，在 {{site.data.keyword.containerlong_notm}} 的实例所在的帐户中供应 {{site.data.keyword.cloudaccesstrailshort}} 服务的实例。
 3. 在 {{site.data.keyword.cloudaccesstrailshort}} 仪表板的 **管理** 选项卡上，单击**在 Kibana 中查看**。
 4. 设置要查看其日志的时间范围。缺省值为 15 分钟。
 5. 在**可用字段**列表中，单击**类型**。单击 **Activity Tracker** 的放大镜图标，以将日志仅限于该服务跟踪的日志。
 6. 可以使用其他可用字段来缩小搜索范围。
 
+要允许其他用户查看帐户和空间事件，请参阅[授予查看帐户事件的许可权](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions)。
+{: tip}
 
-
-## 跟踪事件
-{: #events}
+## 跟踪 Kubernetes 审计事件
+{: #kube-events}
 
 查看下表以获取发送到 {{site.data.keyword.cloudaccesstrailshort}} 的事件的列表。
+{: shortdesc}
 
-有关服务如何工作的更多信息，请参阅 [{{site.data.keyword.cloudaccesstrailshort}} 文档](/docs/services/cloud-activity-tracker/index.html)。
+**开始之前**
 
-有关跟踪的 Kubernetes 操作的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/home/)。
+确保将集群配置为转发 [Kubernetes API 审计事件](cs_health.html#api_forward)。
+
+**转发的事件**
 
 <table>
   <tr>

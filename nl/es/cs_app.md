@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -53,7 +53,7 @@ Revise las siguientes configuraciones potenciales de apps que están ordenadas p
 2.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en un clúster de una sola zona.
 3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en varias zonas de un clúster multizona.
 
-También puede [conectar varios clústeres en distintas regiones con un equilibrador de carga global](cs_clusters.html#multiple_clusters) para aumentar la alta disponibilidad.
+También puede [conectar varios clústeres en distintas regiones con un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters) para aumentar la alta disponibilidad.
 
 ### Cómo aumentar la disponibilidad de la app
 {: #increase_availability}
@@ -72,18 +72,18 @@ También puede [conectar varios clústeres en distintas regiones con un equilibr
     <p><strong>Nota</strong>: Con la antiafinidad necesaria, únicamente puede desplegar un número de réplicas para las que tenga nodos de trabajador. Por ejemplo, si tiene 3 nodos de trabajador en su clúster y define 5 réplicas en su archivo YAML, únicamente se desplegarán 3 réplicas. Cada réplica se basa en un nodo trabajador diferente. Las 2 réplicas sobrantes quedarán pendientes. Si añade otro nodo trabajador al clúster, una de las réplicas sobrantes se desplegará de forma automática en el nuevo nodo trabajador.<p>
     <p><strong>Ejemplo de archivos YAML de despliegue</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de Nginx con antiafinidad de pod preferida. </a></li>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de IBM WebSphere Application Server Liberty con antiafinidad de pod requerida. </a></li></ul></p>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de IBM® WebSphere® Application Server Liberty con antiafinidad de pod requerida. </a></li></ul></p>
     
     </dd>
 <dt>Distribución de pods entre varias zonas o regiones</dt>
-  <dd><p>Para proteger la app frente a un error de zona, puede crear varios clústeres en distintas zonas o puede añadir zonas a una agrupación de nodos trabajadores en un clúster multizona. Los clústeres multizona solo están disponibles en [determinadas áreas metropolitanas](cs_regions.html#zones), como Dallas. Si crea varios clústeres en distintas zonas, debe [configurar un equilibrador de carga global](cs_clusters.html#multiple_clusters).</p>
-  <p>Cuando se utiliza un conjunto de réplicas y se especifica la antiafinidad de pod, Kubernetes distribuye los pods de la app entre los nodos. Si los nodos están en varias zonas, los pods se distribuyen entre las zonas, lo que aumenta la disponibilidad de la app. Si desea limitar las aplicaciones de modo que solo se ejecuten en una zona, puede configurar la afinidad de pod, o puede crear y etiquetar una agrupación de nodos trabajadores en una zona. Para obtener más información, consulte [Alta disponibilidad de clústeres multizona](cs_clusters.html#ha_clusters).</p>
+  <dd><p>Para proteger la app frente a un error de zona, puede crear varios clústeres en distintas zonas o puede añadir zonas a una agrupación de nodos trabajadores en un clúster multizona. Los clústeres multizona solo están disponibles en [determinadas áreas metropolitanas](cs_regions.html#zones), como Dallas. Si crea varios clústeres en distintas zonas, debe [configurar un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters).</p>
+  <p>Cuando se utiliza un conjunto de réplicas y se especifica la antiafinidad de pod, Kubernetes distribuye los pods de la app entre los nodos. Si los nodos están en varias zonas, los pods se distribuyen entre las zonas, lo que aumenta la disponibilidad de la app. Si desea limitar las apps de modo que solo se ejecuten en una zona, puede configurar la afinidad de pod, o puede crear y etiquetar una agrupación de nodos trabajadores en una zona. Para obtener más información, consulte [Alta disponibilidad de clústeres multizona](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>En un despliegue de clúster multizona, ¿se distribuyen mis pods de app de forma uniforme entre los nodos? </strong></p>
   <p>Los pods se distribuyen uniformemente entre las zonas, pero no siempre entre los nodos. Por ejemplo, si tiene un clúster con 1 nodo en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada nodo obtiene 2 pods. Sin embargo, si tiene un clúster con 2 nodos en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada zona tiene 2 pods planificados, y puede que planifique 1 pod por nodo o puede que no. Para obtener más control sobre la planificación, puede [establecer la afinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>Si cae una zona, ¿cómo se replanifican los pods en los nodos restantes de las otras zonas?</strong></br>Depende de la política de planificación que haya utilizado en el despliegue. Si ha incluido la [afinidad de pod específica del nodo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), los pods no se vuelven a planificar. Si no lo ha hecho, los pods se crean en los nodos trabajadores disponibles en otras zonas, pero es posible que no estén equilibrados. Por ejemplo, es posible que los 2 pods se distribuyan entre los 2 nodos disponibles, o puede que ambos se planifiquen en 1 nodo con capacidad disponible. De forma similar, cuando la zona no disponible vuelve a estar activa, los pods no se suprimen y se reequilibran automáticamente entre los nodos. Si desea que los pods se reequilibren entre las zonas cuando la zona vuelve a estar activa, tenga en cuenta la posibilidad de utilizar el [deplanificador de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Consejo</strong>: en clústeres multizona, intente mantener una capacidad de nodo trabajador del 50 % por zona para disponer de suficiente capacidad para proteger el clúster frente un error de la zona.</p>
-  <p><strong>¿Qué ocurre si quiero distribuir mi app entre regiones?</strong></br>Para proteger la app frente a un error de región, cree un segundo clúster en otra región, [configure un equilibrador de carga global](cs_clusters.html#multiple_clusters) para conectar los clústeres y utilice un YAML de despliegue para desplegar un conjunto de réplicas duplicado con [antiafinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para la app.</p>
-  <p><strong>¿Qué pasa si mis apps necesitan almacenamiento permanente?</strong></p>
+  <p><strong>¿Qué ocurre si quiero distribuir mi app entre regiones?</strong></br>Para proteger la app frente a un error de región, cree un segundo clúster en otra región, [configure un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters) para conectar los clústeres y utilice un YAML de despliegue para desplegar un conjunto de réplicas duplicado con [antiafinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para la app.</p>
+  <p><strong>¿Qué pasa si mis apps necesitan almacenamiento persistente?</strong></p>
   <p>Utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
@@ -357,7 +357,7 @@ Para desplegar la app:
   * Seleccione **Especificar detalles de app a continuación** y especifique los detalles.
   * Seleccione **Cargar un archivo YAML o JSON** para cargar su [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
 
-  ¿Necesita ayuda con su archivo de configuración? Consulte este [archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). En este ejemplo, se despliega un contenedor desde la imagen **ibmliberty** en la región EE.UU. Sur. Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.
+  ¿Necesita ayuda con su archivo de configuración? Consulte este [archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). En este ejemplo, se despliega un contenedor desde la imagen **ibmliberty** en la región EE.UU. sur. Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.
   {: tip}
 
 3.  Verifique que ha desplegado satisfactoriamente la app de una de las siguientes formas.
@@ -499,7 +499,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 ## Despliegue de una app en una máquina con GPU
 {: #gpu_app}
 
-Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](cs_clusters.html#shared_dedicated_node), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
+Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](cs_clusters_planning.html#shared_dedicated_node), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
 {:shortdesc}
 
 En los pasos siguientes, aprenderá a desplegar cargas de trabajo que requieren la GPU. También puede [desplegar apps](#app_ui) que no tienen la necesidad de procesar sus cargas de trabajo entre la GPU y la CPU. Después, podría encontrar útil probar con cargas de trabajo matemáticas intensivas como por ejemplo las de la infraestructura de aprendizaje máquina de [TensorFlow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.tensorflow.org/) con [esta demo de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).

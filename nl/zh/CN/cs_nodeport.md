@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -34,7 +34,7 @@ lastupdated: "2018-08-06"
 
 下图显示配置 NodePort 服务后，如何将通信从因特网定向到应用程序：
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 公开 {{site.data.keyword.containershort_notm}} 中的应用程序" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 在 {{site.data.keyword.containerlong_notm}} 中公开应用程序" style="width:550px; border-style: none"/>
 
 1. 使用工作程序节点的公共 IP 地址和工作程序节点上的 NodePort，将请求发送到应用程序。
 
@@ -120,8 +120,8 @@ apiVersion: v1
 1.  获取集群中工作程序节点的公共 IP 地址。如果要访问专用网络上的工作程序节点，请改为获取专用 IP 地址。
 
     ```
-    ibmcloud ks workers <cluster_name>
-    ```
+        ibmcloud ks workers <cluster_name>
+        ```
     {: pre}
 
     输出：

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,7 +25,7 @@ Saiba mais sobre a tecnologia por trás do {{site.data.keyword.containerlong}}.
 ## Contêineres do Docker
 {: #docker_containers}
 
-Construído sobre a tecnologia Linux container (LXC) existente, o projeto de software livre denominado Docker definiu modelos sobre como empacotar o software em unidades padronizadas, chamadas contêineres, que incluem todos os elementos que um app precisa para ser executado.
+Construído sobre a tecnologia Linux container (LXC) existente, o projeto de software livre denominado Docker definiu modelos sobre como empacotar o software em unidades padronizadas, chamadas contêineres, que incluem todos os elementos que um app precisa para ser executado. O {{site.data.keyword.containerlong_notm}} usa o `containerd` como um tempo de execução de contêiner para implementar contêineres de imagens de contêiner do Docker em seu cluster.
 {:shortdesc}
 
 Aprenda alguns conceitos básicos do Docker:
@@ -34,7 +34,7 @@ Aprenda alguns conceitos básicos do Docker:
 <dt>Image</dt>
 <dd>Uma imagem de contêiner é a base para cada contêiner que você deseja executar. As imagens de contêiner são construídas por meio de um Dockerfile, um arquivo de texto que define como construir a imagem e quais artefatos de construção incluir nele, como o app, a configuração do app e suas dependências. As imagens sempre são construídas usando outras imagens, tornando-as rápidas de serem configuradas. Deixe alguém fazer a maior parte do trabalho em uma imagem e, em seguida, ajuste-a para seu uso.</dd>
 <dt>Registro</dt>
-<dd>Um registro de imagem é um local para armazenar, recuperar e compartilhar imagens de contêiner. As imagens que são armazenadas em um registro podem estar publicamente disponíveis (registro público) ou acessíveis por um pequeno grupo de usuários (registro privado). O {{site.data.keyword.containershort_notm}} oferece imagens públicas, como o ibmliberty, que podem ser usadas para criar seu primeiro app conteinerizado. Quando se trata de aplicativos corporativos, use um registro privado como aquele que é fornecido no {{site.data.keyword.Bluemix_notm}} para proteger suas imagens de serem usadas por usuários não autorizados.
+<dd>Um registro de imagem é um local para armazenar, recuperar e compartilhar imagens de contêiner. As imagens que são armazenadas em um registro podem estar publicamente disponíveis (registro público) ou acessíveis por um pequeno grupo de usuários (registro privado). O {{site.data.keyword.containerlong_notm}} oferece imagens públicas, como o ibmliberty, que podem ser usadas para criar seu primeiro app conteinerizado. Quando se trata de aplicativos corporativos, use um registro privado como aquele que é fornecido no {{site.data.keyword.Bluemix_notm}} para proteger suas imagens de serem usadas por usuários não autorizados.
 </dd>
 <dt>Contêiner</dt>
 <dd>Cada contêiner é criado de uma imagem. Um contêiner é um app empacotado com todas as suas dependências, para que o app possa ser movido entre ambientes e ser executado sem mudanças. Ao contrário de máquinas virtuais, os contêineres não virtualizam um dispositivo, seu sistema operacional e o hardware subjacente. Somente o código de app, o tempo de execução,
@@ -63,7 +63,7 @@ uma máquina virtual.</dd>
 
 <p>Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) quando trabalhar com imagens de contêiner.</p>
 
-<p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></p>
+<p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></p>
 
 </dl>
 
@@ -108,7 +108,7 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 
 <p>Pronto para obter um conhecimento mais profundo do Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expanda seu conhecimento de terminologia com o tutorial Criando clusters</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containerlong_notm}} trabalham juntos concluindo este curso.</a></li></ul>
 
 
 </dl>
@@ -119,14 +119,14 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 ## Arquitetura de serviço
 {: #architecture}
 
-Em um cluster do Kubernetes que é executado no {{site.data.keyword.containershort_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Bem, para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
+Em um cluster do Kubernetes que é executado no {{site.data.keyword.containerlong_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Bem, para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
 {: shortdesc}
 
 A imagem a seguir mostra os componentes de seu cluster e como eles interagem.
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes">
- <figcaption>Arquitetura do {{site.data.keyword.containershort_notm}}</figcaption>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+ <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
 </figure>
 </p>
 
@@ -185,7 +185,7 @@ no cluster.</td>
     <td>O controlador de política do Calico observa o tráfego de rede de entrada e de saída para conformidade com as políticas de rede configuradas. Se o tráfego não for permitido no cluster, o acesso ao cluster será bloqueado. O controlador de política do Calico também é usado para criar e configurar políticas de rede para um cluster.</td>
     </tr>
     <tr>
-    <td>Provedor de armazenamento IBM</td>
+    <td>Provedor de armazenamento</td>
     <td>kube-system</td>
     <td>Cada cluster é configurado com um plug-in para provisionar armazenamento de arquivo. É possível escolher instalar outros complementos, como armazenamento de bloco.</td>
     </tr>
@@ -215,17 +215,17 @@ no cluster.</td>
     <td>O nó Calico é um contêiner que empacota os vários componentes necessários para integrar em rede os contêineres com o Calico.</td>
     </tr>
     <tr>
-    <td>Criação de log e métricas IBM</td>
+    <td>Criação de Log e Métricas</td>
     <td>ibm-system</td>
     <td>É possível usar os serviços integrados {{site.data.keyword.loganalysislong_notm}} e {{site.data.keyword.monitoringlong_notm}} para expandir seus recursos de coleção e retenção ao trabalhar com logs e métricas.</td>
     </tr>
     <tr>
-    <td>IBM Ingress ALB</td>
+    <td>ALB do Ingresso</td>
     <td>ibm-system</td>
     <td>O Ingresso é um serviço do Kubernetes que pode ser usado para balancear cargas de trabalho do tráfego de rede em seu cluster, encaminhando solicitações públicas ou privadas para múltiplos apps em seu cluster. Para expor seus apps por meio da rede pública ou privada, deve-se criar um recurso Ingresso para registrar seus apps com o balanceador de carga do aplicativo (ALB) de ingresso. Múltiplos apps podem então ser acessados usando uma única URL ou endereço IP.</td>
     </tr>
     <tr>
-    <td>Balanceador de carga IBM</td>
+    <td>Equilibrador de carga</td>
     <td>ibm-system</td>
     <td>Um balanceador de carga é um serviço do Kubernetes que pode ser usado para balancear as cargas de trabalho de tráfego de rede em seu cluster, encaminhando solicitações públicas ou privadas para um app.</td>
     </tr>

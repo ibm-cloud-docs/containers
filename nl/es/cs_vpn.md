@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -35,9 +35,9 @@ Internet Protocol Security (IPSec) estándar del sector. Para configurar una con
 Utilice un diagrama de Helm para configurar y desplegar el servicio VPN IPSec de strongSwan dentro de un pod de Kubernetes.
 {:shortdesc}
 
-Puesto que strongSwan está integrado en su clúster, no necesita un dispositivo de pasarela externo. Cuando se establece una conectividad de VPN, las rutas se configuran automáticamente en todos los nodos trabajadores del clúster. Estas rutas permiten la conectividad bidireccional a través del túnel VPN entre pods en cualquier nodo trabajador y el sistema remoto. Por ejemplo, en el diagrama siguiente se muestra cómo una app en {{site.data.keyword.containershort_notm}} puede comunicarse con un servidor local a través de una conexión VPN strongSwan:
+Puesto que strongSwan está integrado en su clúster, no necesita un dispositivo de pasarela externo. Cuando se establece una conectividad de VPN, las rutas se configuran automáticamente en todos los nodos trabajadores del clúster. Estas rutas permiten la conectividad bidireccional a través del túnel VPN entre pods en cualquier nodo trabajador y el sistema remoto. Por ejemplo, en el diagrama siguiente se muestra cómo una app en {{site.data.keyword.containerlong_notm}} puede comunicarse con un servidor local a través de una conexión VPN strongSwan:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Exponer una app en {{site.data.keyword.containershort_notm}} mediante la utilización de un equilibrador de carga" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante un equilibrador de carga" style="width:700px; border-style: none"/>
 
 1. Una app en el clúster, `myapp`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local.
 
@@ -455,9 +455,9 @@ Puede inhabilitar la conexión VPN suprimiendo el diagrama de Helm.
 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) proporciona el último sistema operativo Vyatta 5600 para servidores nativos x86. Puede utilizar VRA como una pasarela VPN para conectarse de forma segura a una red local.
 {:shortdesc}
 
-Todo el tráfico de red privado y público que entre o salga de las VLAN del clúster se direcciona a través de VRA. Puede utilizar VRA como un punto final de VPN para crear un túnel IPSec cifrado entre servidores en la infraestructura (Softlayer) de IBM Cloud y los recursos locales. Por ejemplo, en el diagrama siguiente se muestra cómo una app en un nodo trabajador privado en {{site.data.keyword.containershort_notm}} puede comunicarse con un servidor local a través de una conexión VPN Vyatta:
+Todo el tráfico de red privado y público que entre o salga de las VLAN del clúster se direcciona a través de VRA. Puede utilizar VRA como un punto final de VPN para crear un túnel IPSec cifrado entre servidores en la infraestructura (Softlayer) de IBM Cloud y los recursos locales. Por ejemplo, en el diagrama siguiente se muestra cómo una app en un nodo trabajador privado en {{site.data.keyword.containerlong_notm}} puede comunicarse con un servidor local a través de una conexión VPN Vyatta:
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Exposición de una app en {{site.data.keyword.containershort_notm}} mediante la utilización de un equilibrador de carga" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Exponer una app en {{site.data.keyword.containerlong_notm}} mediante un equilibrador de carga" style="width:725px; border-style: none"/>
 
 1. Una app en el clúster, `myapp2`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local.
 
@@ -477,4 +477,4 @@ Para configurar un Virtual Router Appliance:
 
 3. Para habilitar una conexión VPN utilizando el VRA, [configure VRRP en el VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
 
-**Nota**: si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](cs_subnets.html#subnet-routing).
+**Nota**: si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](cs_subnets.html#subnet-routing). Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
