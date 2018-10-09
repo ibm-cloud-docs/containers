@@ -153,7 +153,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 ## Infrastructure
 {: #infra}
 
-**Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
+**Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 
@@ -181,11 +181,11 @@ The following table shows the infrastructure permissions required to complete gr
    </tr>
    <tr>
      <td><strong>Private Networking</strong>: <ul><li>Manage private VLANs for in-cluster networking.</li><li>Set up VPN connectivity to private networks.</li></ul></td>
-     <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li><li>Manage IPSEC Network Tunnels</li><li>Manage Network Gateways</li><li>VPN Administration</li></ul></td>
+     <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li></ul></td>
    </tr>
    <tr>
      <td><strong>Public Networking</strong>:<ul><li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
-     <td><strong>Devices</strong>:<ul><li>Manage Load Balancers</li><li>Edit Hostname/Domain</li><li>Manage Port Control</li></ul>
+     <td><strong>Devices</strong>:<ul><li>Edit Hostname/Domain</li><li>Manage Port Control</li></ul>
      <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Add IP Addresses</li></ul>
      <strong>Services</strong>:<ul><li>Manage DNS, Reverse DNS, and WHOIS</li><li>View Certificates (SSL)</li><li>Manage Certificates (SSL)</li></ul></td>
    </tr>
