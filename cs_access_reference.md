@@ -204,6 +204,9 @@ The following tables show the minimum permissions that are required to run each 
 
 The tables are organized alphabetically by CLI command name.
 
+### Cluster management actions
+{: #cluster-actions}
+
 <table>
 <caption>Minimum required permissions for each cluster management action</caption>
 <thead>
@@ -531,6 +534,9 @@ The tables are organized alphabetically by CLI command name.
 </tbody>
 </table>
 
+### Logging actions
+{: #logging-actions}
+
 <table>
 <caption>Minimum required permissions for each logging action</caption>
 <thead>
@@ -668,6 +674,9 @@ The tables are organized alphabetically by CLI command name.
 </tr><tr>
 
 </tbody></table>
+
+### Ingress actions
+{: #ingress-actions}
 
 <table>
 <caption>Minimum required permissions for each Ingress action</caption>
