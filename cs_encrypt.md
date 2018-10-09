@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-08"
+lastupdated: "2018-10-09"
 
 ---
 
@@ -27,7 +27,7 @@ For more information on securing your cluster, see [Security for {{site.data.key
 ## Understanding when to use secrets
 {: #secrets}
 
-Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
+Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. If you need confidential information encrypted, [enable {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) to encrypt the secrets. For more information on what you can store in secrets, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/).
 {:shortdesc}
 
 Review the following tasks that require secrets.
@@ -56,13 +56,15 @@ When you create a cluster, secrets for your {{site.data.keyword.registrylong}} c
 <br />
 
 
-## Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}} (beta)
+## Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}
 {: #keyprotect}
 
-You can encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
+You can encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11.
 {: shortdesc}
 
-**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+By default, Kubernetes secrets are stored on an encrypted disk in the `etcd` component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in the cluster. When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt Kubernetes secrets, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to your secrets, you can delete the root key.
+
+**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster afterward.
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
