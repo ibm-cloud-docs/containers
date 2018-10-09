@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-08"
+lastupdated: "2018-10-09"
 
 
 ---
@@ -42,7 +42,7 @@ The following table shows the cluster management permissions granted by each IAM
         <li>View the name and email address for the owner of the IAM API key for a resource group and region</li>
         <li>List all or view details for clusters, worker nodes, worker pools, services in a cluster, and webhooks</li>
         <li>View the VLAN spanning status for the infrastructure account</li>
-        <li>List available subnets in the infrastructure account</li></ul>
+        <li>List available subnets in the infrastructure account</li>
         <li>When set for one cluster: List VLANs that the cluster is connected to in a zone</li>
         <li>When set for all clusters in the account: List all available VLANs in a zone</li></ul>
       Logging:<ul>
@@ -204,6 +204,7 @@ The following tables show the minimum permissions that are required to run each 
 
 The tables are organized alphabetically by CLI command name.
 
+<table>
 <caption>Minimum required permissions for each cluster management action</caption>
 <thead>
 <th colspan=2>Minimum required permissions for each cluster management action</th>
@@ -530,7 +531,7 @@ The tables are organized alphabetically by CLI command name.
 </tbody>
 </table>
 
-
+<table>
 <caption>Minimum required permissions for each logging action</caption>
 <thead>
 <th colspan=2>Minimum required permissions for each logging action</th>
@@ -668,7 +669,7 @@ The tables are organized alphabetically by CLI command name.
 
 </tbody></table>
 
-
+<table>
 <caption>Minimum required permissions for each Ingress action</caption>
 <thead>
 <th colspan=2>Minimum required permissions for each Ingress action</th>
