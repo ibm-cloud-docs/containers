@@ -52,14 +52,12 @@ In the following image you can see the location of the sources that you can conf
 
 1. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-1. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.
-  Paths:
+1. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.</br>Paths:
     * `/var/log/kubelet.log`
     * `/var/log/kube-proxy.log`
     * `/var/log/event-exporter/1..log`
 
-1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
-  Paths:
+1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.</br>Paths:
     * `/var/log/syslog`
     * `/var/log/auth.log`
 
