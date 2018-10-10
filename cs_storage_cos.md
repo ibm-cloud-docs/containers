@@ -299,7 +299,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           ```
           {: pre}
          
-   
    Example output: 
    ```
    Installing the Helm chart
