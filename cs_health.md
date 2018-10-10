@@ -38,23 +38,34 @@ In the following image you can see the location of the sources that you can conf
 
 ![Log sources](images/log_sources.png)
 
-<ol>
-<li><p><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</p> <p>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></li>
+1. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.
+  Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/<b>spark</b>/work/app-0546/0/stderr` but the logs actually go to `/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr`, then the logs cannot be read.
 
-<li><p><code>container</code>: Information that is logged by a running container.</p> <p>Paths: Anything written to <code>STDOUT</code> or <code>STDERR</code>.</p></li>
+1. `container`: Information that is logged by a running container.
+  Paths: Anything written to `STDOUT` or `STDERR`.
 
-<li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+1. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</br>Paths:
+    * `/var/log/alb/ids/&ast;.log`
+    * `/var/log/alb/ids/&ast;.err`
+    * `/var/log/alb/customerlogs/&ast;.log`
+    * `/var/log/alb/customerlogs/&ast;.err`
 
-<li><p><code>kube-audit</code>: Information about cluster-related actions that is sent to the Kubernetes API server; including the time, the user, and the affected resource.</p></li>
+1. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-<li><p><code>kubernetes</code>: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
+1. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.
+  Paths:
+    * `/var/log/kubelet.log`
+    * `/var/log/kube-proxy.log`
+    * `/var/log/event-exporter/1..log`
 
-<li><p><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In auth.log you can find information on the authentication requests that are made to the OS. </p><p>Paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></p></li>
-</ol>
+1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
+  Paths:
+    * `/var/log/syslog`
+    * `/var/log/auth.log`
 
 </br>
 
-**What are the configuration options that I have?**
+**What configuration options do I have?**
 
 The following table shows the different options that you have when configuring logging and their descriptions.
 
@@ -71,7 +82,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
