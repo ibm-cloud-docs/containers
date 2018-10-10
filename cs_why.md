@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-09"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -117,8 +117,5 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Option to provision bare metal workers with Trusted Compute](cs_clusters_planning.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}
-
-<br />
-
 
 
