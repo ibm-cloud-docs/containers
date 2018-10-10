@@ -168,7 +168,6 @@ You might have another firewall set up or customized your existing firewall sett
 
 
 {: tsCauses}
-
 In {{site.data.keyword.Bluemix_notm}}, each resource must be in a resource group. For example, cluster `mycluster` might exist in the `default` resource group. When the account owner gives you access to resources by assigning you an IAM platform role, the access can be to a specific resource or to the resource group. When you are given access to a specific resource, you don't have access to the resource group. In this case, you don't need to target a resource group to work with the clusters you have access to. If you target a different resource group than the group that the cluster is in, actions against that cluster can fail. Conversely, when you are given access to a resource as part of your access to a resource group, you must target a resource group to work with a cluster in that group. If you don't target your CLI session to the resource group that the cluster is in, actions against that cluster can fail.
 
 If you cannot find or work with a cluster, you might be experiencing one of the following issues:
@@ -177,7 +176,6 @@ If you cannot find or work with a cluster, you might be experiencing one of the 
 * You don't have access to the cluster.
 
 {: tsResolve}
-
 To check your user access permissions:
 
 1. List all of your user permissions.
@@ -197,7 +195,7 @@ To check your user access permissions:
                      Memo                  Policy applies to the resource group
         ```
         {: screen}
-    2. Look for a policy that has a **Resource Group Name** value of the cluster's resource group, a **Service Name** value of `containers-kubernetes` or no value, and a **Memo** value of `Policy applies to the resource(s) within the resource group`. If you this policy, you have access to all resources or to clusters within the resource group. For example, this policy indicates that a user has access to clusters in the `test-rg` resource group:
+    2. Look for a policy that has a **Resource Group Name** value of the cluster's resource group, a **Service Name** value of `containers-kubernetes` or no value, and a **Memo** value of `Policy applies to the resource(s) within the resource group`. If you this policy, you have access to clusters or to all resources within the resource group. For example, this policy indicates that a user has access to clusters in the `test-rg` resource group:
         ```
         Policy ID:   e0ad889d-56ba-416c-89ae-a03f3cd8eeea
         Roles:       Administrator
@@ -238,7 +236,7 @@ To check your user access permissions:
                      Resource Type
                      Resource
         ```
-        {: pre}
+        {: screen}
     3. If you have either of these policies, skip to the second bullet point of step 4. If you do not have either of these policies, skip to the third bullet point of step 4.
 
 4. Depending on your access policies, choose one of the following options.
