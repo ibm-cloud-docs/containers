@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,10 +17,10 @@ lastupdated: "2018-09-11"
 
 
 
-# 튜토리얼: Kubernetes 클러스터 작성
+# 튜토리얼: 클러스터 작성
 {: #cs_cluster_tutorial}
 
-이 튜토리얼을 이용하면 {{site.data.keyword.containerlong}}에서 Kubernetes 클러스터를 배치하고 관리할 수 있습니다. 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화하는 방법을 알아보십시오.
+{{site.data.keyword.containerlong}}에서 Kubernetes 클러스터를 배치하고 관리하십시오. 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
 {:shortdesc}
 
 이 튜토리얼 시리즈에서는 가상의 홍보(PR) 회사가 Kubernetes 기능을 사용하여 {{site.data.keyword.Bluemix_notm}}의 컨테이너화된 앱을 배치하는 방법을 보여줍니다. PR 회사에서는 Leveraging {{site.data.keyword.toneanalyzerfull}}를 활용하여 보도 자료를 분석하고 피드백을 받습니다.
@@ -28,11 +28,12 @@ lastupdated: "2018-09-11"
 
 ## 목표
 
-이 첫 번째 튜토리얼에서는 사용자가 PR 회사의 네트워킹 관리자 역할을 합니다. 사용자는 {{site.data.keyword.containerlong_notm}}에서 앱의 Hello World 버전을 배치하고 테스트하는 데 사용되는 사용자 정의 Kubernetes 클러스터를 구성합니다.
-{:shortdesc}
+이 첫 번째 튜토리얼에서는 사용자가 PR 회사의 네트워킹 관리자 역할을 합니다. 앱의 Hello World 버전을 배치하고 테스트하는 데 사용되는 사용자 정의 Kubernetes 클러스터를 구성합니다.
 
--   1개의 작업자 노드가 있는 1개 작성자 풀의 클러스터를 작성하십시오.
--   [Kubernetes 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/)을 실행하고 {{site.data.keyword.registrylong_notm}}의 Docker 이미지 관리를 위한 CLI를 설치하십시오. 
+인프라를 설정하려면 다음을 수행하십시오.
+
+-   하나의 작업자 노드가 있는 클러스터를 작성하십시오.
+-   Kubernetes 명령을 실행하고 Docker 이미지를 관리하기 위한 CLI를 설치하십시오.
 -   {{site.data.keyword.registrylong_notm}}에 이미지를 저장하기 위한 개인용 이미지 저장소를 작성하십시오.
 -   클러스터의 앱이 해당 서비스를 사용할 수 있도록 {{site.data.keyword.toneanalyzershort}} 서비스를 클러스터에 추가하십시오.
 
@@ -45,57 +46,57 @@ lastupdated: "2018-09-11"
 ## 대상
 
 이 튜토리얼은 처음으로 Kubernetes 클러스터를 작성하는 소프트웨어 개발자와 네트워크 관리자를 대상으로 합니다.
-{: shortdesc}
+
 
 ## 전제조건
 
 -  종량과금제 또는 구독 [{{site.data.keyword.Bluemix_notm}} 계정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/registration/)
--  IBM Cloud 인프라(SoftLayer) [**수퍼유저** 인프라 역할](cs_users.html#infra_access), 또는 올바른 권한으로 [지역에 대한 API 키가 설정](cs_troubleshoot_clusters.html#apikey)되었는지 확인 
--  작업하려는 클러스터 영역의 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html#mngcf)
+-  작업하려는 클러스터 영역의 [Cloud Foundry 개발자 역할](/docs/iam/mngcf.html#mngcf)
 
 
 ## 학습 1: 클러스터 작성 및 CLI 설정
 {: #cs_cluster_tutorial_lesson1}
 
-GUI에서 Kubernetes 클러스터를 작성하고 필수 CLI를 설치하십시오.
+GUI에서 클러스터를 작성하고 필수 CLI를 설치합니다.
 {: shortdesc}
 
 **클러스터를 작성하려면 다음을 수행하십시오.**
 
-프로비저닝하는 데 몇 분 정도 걸릴 수 있으므로 CLI를 설치하기 전에 클러스터를 작성하십시오.
+프로비저닝하는 데 몇 분이 걸릴 수 있으므로 CLI를 설치하기 전에 클러스터를 작성하십시오.
 
-1.  [GUI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create)에서 내부에 1개의 작업자 노드가 있는 1개 작업자 풀의 무료 또는 표준 클러스터를 작성하십시오.
+1.  [ GUI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create)에서 하나의 작업자 노드가 포함된 무료 또는 표준 클러스터를 작성하십시오. 
 
     [CLI에서 클러스터](cs_clusters.html#clusters_cli)를 작성할 수도 있습니다.
     {: tip}
 
 클러스터가 프로비저닝될 때 클러스터를 관리하는 데 사용되는 다음 CLI를 설치하십시오.
 -   {{site.data.keyword.Bluemix_notm}} CLI
--   {{site.data.keyword.containerlong_notm}} 플러그인
+-   {{site.data.keyword.containershort_notm}} 플러그인
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 플러그인
+-   Docker CLI
 
 </br>
 **CLI 및 해당 필수 소프트웨어를 설치하려면 다음을 수행하십시오.**
 
-1.  {{site.data.keyword.containerlong_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://clis.ng.bluemix.net/ui/home.html)를 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI 명령을 실행하려면 `ibmcloud` 접두부를 사용하십시오.
+1.  {{site.data.keyword.containershort_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://clis.ng.bluemix.net/ui/home.html)를 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI 명령을 실행하려면 `bx` 접두부를 사용하십시오.
 2.  프롬프트에 따라 계정 및 {{site.data.keyword.Bluemix_notm}} 조직을 선택하십시오. 클러스터는 계정에 특정하지만, {{site.data.keyword.Bluemix_notm}} 조직이나 영역에는 독립적입니다.
 
-4.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containerlong_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containerlong_notm}} 플러그인 명령을 실행하려면 `ibmcloud ks` 접두부를 사용하십시오.
+4.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containershort_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containershort_notm}} 플러그인 명령을 실행하려면 `bx cs` 접두부를 사용하십시오.
 
     ```
-    ibmcloud plugin install container-service -r Bluemix
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
 5.  클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하려면 `kubectl` 접두부를 사용하십시오.
-    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.7입니다. 
+    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.9.7입니다. 
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/darwin/amd64/kubectl)
+        OS X: [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.7/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
           **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
 
@@ -128,19 +129,21 @@ GUI에서 Kubernetes 클러스터를 작성하고 필수 CLI를 설치하십시�
             ```
             {: pre}
 
-6. {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하여 관리하려면 {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 레지스트리 명령을 실행하려면 `ibmcloud cr` 접두부를 사용하십시오.
+6. {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하여 관리하려면 {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 레지스트리 명령을 실행하려면 `bx cr` 접두부를 사용하십시오.
 
     ```
-    ibmcloud plugin install container-registry -r Bluemix
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     container-service 및 container-registry 플러그인이 올바르게 설치되었는지 확인하려면 다음 명령을 실행하십시오.
 
     ```
-    ibmcloud plugin list
+    bx plugin list
     ```
     {: pre}
+
+7. 이미지를 로컬로 빌드하여 개인용 이미지 저장소에 푸시하려면 [Docker Community Edition CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.docker.com/community-edition#/download)하십시오. Windows 8 이하를 사용 중인 경우 [Docker Toolbox ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/toolbox/toolbox_install_windows/)를 대신 설치할 수 있습니다.
 
 축하합니다! 다음 학습과 튜토리얼을 위한 CLI를 설치했습니다. 다음으로 클러스터 환경을 설정하고 {{site.data.keyword.toneanalyzershort}} 서비스를 추가하십시오.
 
@@ -148,13 +151,13 @@ GUI에서 Kubernetes 클러스터를 작성하고 필수 CLI를 설치하십시�
 ## 학습 2: 개인용 레지스트리 설정
 {: #cs_cluster_tutorial_lesson2}
 
-{{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하고, 앱이 {{site.data.keyword.toneanalyzershort}} 서비스에 액세스할 수 있도록 Kubernetes 클러스터에 시크릿을 추가하십시오.
+{{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하고 {{site.data.keyword.toneanalyzershort}} 서비스에 액세스할 수 있도록 클러스터에 시크릿을 추가하십시오.
 {: shortdesc}
 
-1.  프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.
+1.  프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 신임 정보를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.
 
     ```
-    ibmcloud login [--sso]
+    bx login [--sso]
     ```
     {: pre}
 
@@ -168,29 +171,29 @@ CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색�
     이 예에서 PR 회사는 _pr_firm_을 자체 네임스페이스로서 선택하여 자체 계정의 모든 이미지를 그룹화할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 하나의 이미지 저장소만 작성하고자 합니다. _&lt;namespace&gt;_를 튜토리얼과 관련이 없는, 선택한 네임스페이스로 대체하십시오.
 
     ```
-    ibmcloud cr namespace-add <namespace>
+    bx cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  다음 단계를 계속하기 전에 작업자 노드의 배치가 완료되었는지 확인하십시오.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    bx cs workers <cluster_name_or_ID>
     ```
     {: pre}
 
     작업자 노드의 프로비저닝이 완료되면 상태가 **준비**로 변경되며 {{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 시작할 수 있습니다.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.7
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.7
     ```
     {: screen}
 
 ## 학습 3: 클러스터 환경 설정
 {: #cs_cluster_tutorial_lesson3}
 
-CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
+CLI에서 클러스터의 컨텍스트를 설정하십시오.
 {: shortdesc}
 
 클러스터 관련 작업을 위해 {{site.data.keyword.containerlong}} CLI에 로그인할 때마다 사용자는 이러한 명령을 실행하여 클러스터의 구성 파일에 대한 경로를 세션 변수로 설정해야 합니다. Kubernetes CLI는 이 변수를 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터와 연결하는 데 필요한 로컬 구성 파일과 인증서를 찾습니다.
@@ -198,7 +201,7 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
 1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
 
     ```
-    ibmcloud ks cluster-config <cluster_name_or_ID>
+    bx cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -239,37 +242,36 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
     출력 예:
 
     ```
-    Client Version: v1.10.7
-    Server Version: v1.10.7
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
 ## 학습 4: 클러스터에 서비스 추가
 {: #cs_cluster_tutorial_lesson4}
 
-{{site.data.keyword.Bluemix_notm}} 서비스를 사용하면 앱에서 이미 개발된 앱을 활용할 수 있습니다. Kubernetes 클러스터에 바인딩된 {{site.data.keyword.Bluemix_notm}} 서비스는 해당 클러스터에 배치된 앱에 의해 사용될 수 있습니다. 앱에서 사용할 모든 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 다음 단계를 반복하십시오.
-{: shortdesc}
+{{site.data.keyword.Bluemix_notm}} 서비스를 사용하면 앱에서 이미 개발된 앱을 활용할 수 있습니다. 클러스터에 바인딩된 {{site.data.keyword.Bluemix_notm}} 서비스는 해당 클러스터에 배치된 앱에 의해 사용될 수 있습니다. 앱에서 사용할 모든 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 다음 단계를 반복하십시오.
 
 1.  {{site.data.keyword.toneanalyzershort}} 서비스를 {{site.data.keyword.Bluemix_notm}} 계정에 추가하십시오. <service_name>을 서비스 인스턴스의 이름으로 대체하십시오.
 
-    **참고:** {{site.data.keyword.toneanalyzershort}} 서비스를 계정에 추가하면 서비스가 무료가 아님을 알리는 메시지가 표시됩니다. API 호출을 제한하는 경우, 이 튜토리얼에서는 {{site.data.keyword.watson}} 서비스에 대한 비용을 발생시키지 않습니다. [{{site.data.keyword.watson}}{{site.data.keyword.toneanalyzershort}} 서비스의 가격 정보를 검토 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)하십시오.
+    **참고:** {{site.data.keyword.toneanalyzershort}} 서비스를 계정에 추가하면 서비스가 무료가 아님을 알리는 메시지가 표시됩니다. API 호출을 제한하는 경우, 이 튜토리얼에서는 {{site.data.keyword.watson}} 서비스에 대한 비용을 발생시키지 않습니다. [{{site.data.keyword.watson}}{{site.data.keyword.toneanalyzershort}} 서비스의 가격 책정 정보를 검토 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)하십시오.
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    bx service create tone_analyzer standard <service_name>
     ```
     {: pre}
 
 2.  {{site.data.keyword.toneanalyzershort}} 인스턴스를 클러스터의 `default` Kubernetes 네임스페이스에 바인딩하십시오. 나중에 Kubernetes 리소스에 대한 사용자 액세스 권한을 관리하는 고유 네임스페이스를 작성할 수 있지만 지금은 `default` 네임스페이스를 사용하십시오. Kubernetes 네임스페이스는 이전에 작성한 레지스트리 네임스페이스와는 다릅니다.
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    bx cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     출력:
 
     ```
-    ibmcloud ks cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
     OK
     Namespace:	default
@@ -277,7 +279,7 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
     ```
     {: screen}
 
-3.  Kubernetes 시크릿이 클러스터 네임스페이스에서 작성되었는지 확인하십시오. 모든 {{site.data.keyword.Bluemix_notm}} 서비스는 컨테이너가 액세스하는 데 사용하는 기밀 정보(예: 사용자 이름, 비밀번호 및 URL)가 포함된 JSON 파일로 정의됩니다. 이 정보를 안전하게 저장하기 위해 Kubernetes 시크릿이 사용됩니다. 이 예에서는 사용자 계정에서 프로비저닝된 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 인스턴스에 액세스하기 위한 인증 정보가 시크릿에 포함됩니다.
+3.  Kubernetes 시크릿이 클러스터 네임스페이스에서 작성되었는지 확인하십시오. 모든 {{site.data.keyword.Bluemix_notm}} 서비스는 컨테이너가 액세스하는 데 사용하는 기밀 정보(예: 사용자 이름, 비밀번호 및 URL)가 포함된 JSON 파일로 정의됩니다. 이 정보를 안전하게 저장하기 위해 Kubernetes 시크릿이 사용됩니다. 이 예에서는 사용자 계정에서 프로비저닝된 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 인스턴스에 액세스하기 위한 신임 정보가 시크릿에 포함됩니다.
 
     ```
      kubectl get secrets --namespace=default
@@ -301,4 +303,5 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
 {: #next}
 
 * 배운 내용을 테스트하고 [퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
-* [튜토리얼: Kubernetes 클러스터에 앱 배치](cs_tutorials_apps.html#cs_apps_tutorial)를 시도하여 작성한 클러스터에 PR 회사의 앱을 배치하십시오.
+
+* [튜토리얼: {{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터에 앱 배치](cs_tutorials_apps.html#cs_apps_tutorial)를 시도하여 작성한 클러스터에 PR 회사의 앱을 배치하십시오.

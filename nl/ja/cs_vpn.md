@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,19 +24,19 @@ VPN 接続を使用すると、{{site.data.keyword.containerlong}} 上の Kubern
 
 ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、以下のいずれかのオプションを構成します。
 
-- **strongSwan IPSec VPN サービス**: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/about.html) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPSec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、クラスター内のポッドに直接、[strongSwan IPSec VPN サービスを構成してデプロイします](#vpn-setup)。
+- **strongSwan IPSec VPN サービス**: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPsec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、クラスター内のポッドに直接、[strongSwan IPSec VPN サービスを構成してデプロイします](#vpn-setup)。
 
-- **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA](/docs/infrastructure/virtual-router-appliance/about.html) または [FSA](/docs/infrastructure/fortigate-10g/about.html) をセットアップして、IPSec VPN エンドポイントを構成することもできます。 このオプションは、クラスターが大きい場合、単一の VPN で複数のクラスターにアクセスする場合、ルート・ベース VPN が必要な場合に役立ちます。 VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
+- **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA](/docs/infrastructure/virtual-router-appliance/about.html) または [FSA](/docs/infrastructure/fortigate-10g/about.html) をセットアップして、IPSec VPN エンドポイントを構成することもできます。このオプションは、クラスターが大きい場合、VPN 経由で非 Kubernetes リソースにアクセスする場合、または 1 つの VPN で複数のクラスターにアクセスする場合に役立ちます。VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
 
-## strongSwan IPSec VPN サービスの Helm チャートの使用
+## strongSwan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ
 {: #vpn-setup}
 
 Helm チャートを使用して、Kubernetes ポッド内に strongSwan IPSec VPN サービスを構成してデプロイします。
 {:shortdesc}
 
-strongSwan はクラスターに組み込まれているので、外部ゲートウェイ・デバイスは必要ありません。 VPN 接続が確立されると、クラスター内のすべてのワーカー・ノードにルートが自動的に構成されます。 これらのルートにより、任意のワーカー・ノード上のポッドとリモート・システムの間で、VPN トンネルを介した両方向の接続が可能になります。 例えば、以下の図は、{{site.data.keyword.containerlong_notm}} 内のアプリがオンプレミス・サーバーと strongSwan VPN 接続を介して通信する方法を示しています。
+strongSwan はクラスターに組み込まれているので、外部ゲートウェイ・デバイスは必要ありません。 VPN 接続が確立されると、クラスター内のすべてのワーカー・ノードにルートが自動的に構成されます。 これらのルートにより、任意のワーカー・ノード上のポッドとリモート・システムの間で、VPN トンネルを介した両方向の接続が可能になります。 例えば、以下の図は、{{site.data.keyword.containershort_notm}} 内のアプリがオンプレミス・サーバーと strongSwan VPN 接続を介して通信する方法を示しています。
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="ロード・バランサーを使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="ロード・バランサーを使用した {{site.data.keyword.containershort_notm}} 内のアプリの公開" style="width:700px; border-style: none"/>
 
 1. クラスター内のアプリ `myapp` は、Ingress または LoadBalancer サービスから要求を受け取ると、オンプレミス・ネットワーク内のデータにセキュアに接続する必要があります。
 
@@ -48,29 +48,18 @@ strongSwan はクラスターに組み込まれているので、外部ゲート
 
 5. VPN トンネル・エンドポイント (ルーター) が、ステップ 2 で指定された宛先 IP アドレスに応じて、オンプレミスのサーバーまたはメインフレームに要求を転送します。同じプロセスにより、必要なデータが VPN 接続を介して `myapp` に送り返されます。
 
-## strongSwan VPN サービスの考慮事項
-{: strongswan_limitations}
-
-strongSwan Helm チャートを使用する前に、以下の考慮事項や制限を確認してください。
-
-* strongSwan Helm チャートでは、リモート VPN エンドポイントによって有効にされる NAT トラバーサルが必要です。 NAT トラバーサルでは、デフォルトの IPSec UDP ポート 500 に加えて、UDP ポート 4500 が必要です。 両方の UDP ポートは、構成されているすべてのファイアウォールの通過が許可される必要があります。
-* strongSwan Helm チャートでは、ルート・ベース IPSec VPN はサポートされません。
-* strongSwan Helm チャートでは、事前共有鍵を使用する IPSec VPN はサポートされますが、証明書を必要とする IPSec VPN はサポートされません。
-* strongSwan Helm チャートでは、複数のクラスターとその他の IaaS リソースで単一の VPN 接続を共有することは許可されません。
-* strongSwan Helm チャートは、クラスター内で Kubernetes ポッドとして実行されます。 VPN のパフォーマンスは、クラスター内で実行されている Kubernetes やその他のポッドのメモリーおよびネットワークの使用量の影響を受けます。 パフォーマンスが重要な環境の場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
-* strongSwan Helm チャートでは、IPSec トンネル・エンドポイントとして単一の VPN ポッドが実行されます。 ポッドに障害が発生すると、クラスターはポッドを再始動します。 ただし、新しいポッドが開始され、VPN 接続が再確立されるまで、わずかなダウン時間が発生する場合があります。 より迅速なエラー・リカバリーやより精緻な高可用性ソリューションが必要な場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
-* strongSwan Helm チャートでは、VPN 接続を介して流れるネットワーク・トラフィックのメトリックまたはモニターは提供されません。 サポートされるモニター・ツールのリストについては、[サービスのロギングとモニタリング](cs_integrations.html#health_services)を参照してください。
-
-## strongSwan Helm チャートの構成
+### strongSwan Helm chart を構成します。
 {: #vpn_configure}
 
 開始前に、以下のことを行います。
-* [オンプレミス・データ・センターに IPSec VPN ゲートウェイをインストールします](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection)。
-* [標準クラスターを作成します](cs_clusters.html#clusters_cli)。
+* [オンプレミス・データ・センターに IPsec VPN ゲートウェイをインストールします](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection)。
+* [標準クラスターを作成する](cs_clusters.html#clusters_cli)か、または[既存のクラスターをバージョン 1.7.16 以降に更新します](cs_cluster_update.html#master)。
+* クラスターに 1 つ以上の使用可能なパブリック・ロード・バランサー IP アドレスがなければなりません。 [使用可能なパブリック IP アドレスを確認](cs_subnets.html#manage)したり、[使用されている IP アドレスを解放](cs_subnets.html#free)したりすることができます。
 * [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
 
-### ステップ 1: strongSwan Helm チャートの取得
-{: #strongswan_1}
+strongSwan Chart のセットアップに使用する Helm コマンドについて詳しくは、<a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
+
+Helm chart を構成するには、以下のようにします。
 
 1. [クラスター用の Helm をインストールし、Helm インスタンスに {{site.data.keyword.Bluemix_notm}} リポジトリーを追加します](cs_integrations.html#helm)。
 
@@ -81,112 +70,83 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
     ```
     {: pre}
 
-3. `config.yaml` ファイルを開きます。
+3. `config.yaml` ファイルを開き、ご希望の VPN 構成に従ってデフォルト値に以下の変更を加えます。 この構成ファイルのコメントに、詳細設定についての説明があります。
 
-### ステップ 2: 基本 IPSec 設定の構成
-{: #strongswan_2}
+    **重要**: プロパティーを変更する必要がない場合は、そのプロパティーの前に `#` を付けてコメント化してください。
 
-VPN 接続の確立を制御するには、以下の基本 IPSec 設定を変更します。
+    <table>
+    <caption>この YAML の構成要素について</caption>
+    <col width="22%">
+    <col width="78%">
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>localSubnetNAT</code></td>
+    <td>サブネットのネットワーク・アドレス変換 (NAT) は、ローカル・ネットワークとオンプレミス・ネットワークの間のサブネット競合の回避策になります。 NAT を使用して、クラスターのプライベート・ローカル IP サブネット、ポッド・サブネット (172.30.0.0/16)、またはポッド・サービス・サブネット (172.21.0.0/16) を、異なるプライベート・サブネットに再マップすることができます。 VPN トンネルでは、元のサブネットではなく、再マップされた IP サブネットが認識されます。 再マッピングは、VPN トンネルを介してパケットが送信される前だけでなく、VPN トンネルからパケットが到着した後も行われます。 再マップされたサブネットと再マップされていないサブネットの両方を同時に VPN を介して公開できます。<br><br>NAT を有効にするには、サブネット全体を追加するか、個々の IP アドレスを追加します。 サブネット全体を追加する場合 (<code>10.171.42.0/24=10.10.10.0/24</code> の形式)、再マッピングは 1 対 1 になります。つまり、内部ネットワーク・サブネット内のすべての IP アドレスが外部ネットワーク・サブネットにマップされます。その逆も同様です。 個々の IP アドレスを追加する場合 ( <code>10.171.42.17/32=10.10.10.2/32, 10.171.42.29/32=10.10.10.3/32</code> の形式)、それらの内部 IP アドレスのみが、指定した外部 IP アドレスにマップされます。<br><br>このオプションを使用した場合、VPN 接続を介して公開されるローカル・サブネットは、「内部」サブネットがマップされている「外部」サブネットになります。
+    </td>
+    </tr>
+    <tr>
+    <td><code>loadBalancerIP</code></td>
+    <td>インバウンド VPN 接続用に strongSwan VPN サービスのポータブル・パブリック IP アドレスを指定する場合は、その IP アドレスを追加します。 IP アドレスを指定すると、オンプレミス・ファイアウォールの通過を許可する IP アドレスを指定する必要がある場合など、安定した IP アドレスが必要な場合に役立ちます。<br><br>このクラスターに割り当てられた使用可能なポータブル・パブリック IP アドレスを表示するには、[IP アドレスとサブネットの管理](cs_subnets.html#manage)を参照してください。 この設定をブランクのままにした場合は、空いているポータブル・パブリック IP アドレスが使用されます。 オンプレミス・ゲートウェイから VPN 接続を開始する (<code>ipsec.auto</code> を <code>add</code> に設定した) 場合は、このプロパティーを使用して、クラスターにオンプレミス・ゲートウェイの永続パブリック IP アドレスを構成できます。</td>
+    </tr>
+    <tr>
+    <td><code>connectUsingLoadBalancerIP</code></td>
+    <td><code>loadBalancerIP</code> に追加したロード・バランサー IP アドレスを使用して、アウトバウンド VPN 接続も確立できます。 このオプションを有効にする場合は、すべてのクラスター・ワーカー・ノードが同じパブリック VLAN 上に存在する必要があります。 あるいは、<code>nodeSelector</code> 設定を使用して、VPN ポッドを <code>loadBalancerIP</code> と同じパブリック VLAN 上のワーカー・ノードにデプロイする必要があります。 このオプションは、<code>ipsec.auto</code> が <code>add</code> に設定されている場合には無視されます。<p>指定可能な値:</p><ul><li><code>"false"</code>: ロード・バランサー IP を使用して VPN を接続しません。 VPN ポッドを実行しているワーカー・ノードのパブリック IP アドレスが代わりに使用されます。</li><li><code>"true"</code>: ロード・バランサー IP をローカル・ソース IP として使用して VPN を確立します。 <code>loadBalancerIP</code> を設定しない場合は、ロード・バランサー・サービスに割り当てられている外部 IP アドレスが使用されます。</li><li><code>"auto"</code>: <code>ipsec.auto</code> が <code>start</code> に設定され、<code>loadBalancerIP</code> が設定されている場合は、ロード・バランサー IP をローカル・ソース IP として使用して VPN を確立します。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>nodeSelector</code></td>
+    <td>strongSwan VPN ポッドのデプロイ先のノードを制限する場合に、特定のワーカー・ノードの IP アドレスまたはワーカー・ノードのラベルを追加します。 例えば、<code>kubernetes.io/hostname: 10.xxx.xx.xxx</code> という値を指定すると、そのワーカー・ノードでのみ実行するように VPN ポッドを制限できます。 <code>strongswan: vpn</code> という値を指定すると、そのラベルのワーカー・ノードで実行するように VPN ポッドを制限できます。 任意のワーカー・ノード・ラベルを使用できますが、このチャートのデプロイメントごとに別のワーカー・ノードを使用できるように <code>strongswan: &lt;release_name&gt;</code> を使用することをお勧めします。<br><br>クラスターから VPN 接続を開始する (<code>ipsec.auto</code> を <code>start</code> に設定した) 場合は、このプロパティーを使用して、オンプレミス・ゲートウェイに公開される VPN 接続のソース IP アドレスを制限できます。 この値はオプションです。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.keyexchange</code></td>
+    <td>オンプレミスの VPN トンネル・エンドポイントが、接続を初期化する際のプロトコルとして <code>ikev2</code> をサポートしていない場合は、この値を <code>ikev1</code> または <code>ike</code> に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.esp</code></td>
+    <td>オンプレミスの VPN トンネル・エンドポイントで接続に使用する ESP 暗号化と認証のアルゴリズムのリストを追加します。<ul><li><code>ipsec.keyexchange</code> が <code>ikev1</code> に設定されている場合、この設定値の指定は必須です。</li><li><code>ipsec.keyexchange</code> が <code>ikev2</code> に設定されている場合、この設定値の指定は任意です。 この設定をブランクにしておくと、デフォルトの strongSwan アルゴリズム <code>aes128-sha1,3des-sha1</code> が接続に使用されます。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>ipsec.ike</code></td>
+    <td>オンプレミスの VPN トンネル・エンドポイントで接続に使用される IKE/ISAKMP SA 暗号化と認証のアルゴリズムのリストを追加します。<ul><li><code>ipsec.keyexchange</code> が <code>ikev1</code> に設定されている場合、この設定値の指定は必須です。</li><li><code>ipsec.keyexchange</code> が <code>ikev2</code> に設定されている場合、この設定値の指定は任意です。 この設定をブランクにしておくと、デフォルトの strongSwan アルゴリズム <code>aes128-sha1-modp2048,3des-sha1-modp1536</code> が接続に使用されます。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>ipsec.auto</code></td>
+    <td>クラスターに VPN 接続を開始させる場合は、この値を <code>start</code> に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>local.subnet</code></td>
+    <td>この値を、VPN 接続を介してオンプレミス・ネットワークに公開するクラスター・サブネット CIDR のリストに変更します。 以下のサブネットをこのリストに含めることができます。 <ul><li>Kubernetes ポッドのサブネット CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes サービスのサブネット CIDR: <code>172.21.0.0/16</code></li><li>アプリをプライベート・ネットワークで NodePort サービスを使用して公開する場合は、ワーカー・ノードのプライベート・サブネット CIDR。 <code>bx cs worker &lt;cluster_name&gt;</code> を実行して、ワーカーのプライベート IP アドレスの先頭 3 オクテットを取得します。 例えば、それが <code>&lt;10.176.48.xx&gt;</code> の場合は <code>&lt;10.176.48&gt;</code> をメモします。 次に、<code>&lt;xxx.yyy.zz&gt;</code> を先ほど取得したオクテットに置き換えてコマンド <code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code> を実行し、ワーカーのプライベート・サブネット CIDR を取得します。</li><li>プライベート・ネットワーク上で LoadBalancer サービスによって公開されるアプリがある場合は、クラスターのプライベートまたはユーザー管理サブネット CIDR。 これらの値を見つけるには、<code>bx cs cluster-get &lt;cluster_name&gt; --showResources</code> を実行します。 **VLANS** セクションで、**Public** 値が <code>false</code> の CIDR を見つけます。</li></ul>**注**: <code>ipsec.keyexchange</code> が <code>ikev1</code> に設定されている場合、指定できるサブネットは 1 つだけです。</td>
+    </tr>
+    <tr>
+    <td><code>local.id</code></td>
+    <td>この値を、VPN トンネル・エンドポイントで接続に使用される、ローカル Kubernetes クラスター側のストリング ID に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>remote.gateway</code></td>
+    <td>この値を、オンプレミス VPN ゲートウェイのパブリック IP アドレスに変更します。 <code>ipsec.auto</code> を <code>start</code> に設定する場合は、この値が必須です。</td>
+    </tr>
+    <td><code>remote.subnet</code></td>
+    <td>この値を、Kubernetes クラスターからアクセスできるオンプレミスのプライベート・サブネット CIDR のリストに変更します。 **注**: <code>ipsec.keyexchange</code> が <code>ikev1</code> に設定されている場合、指定できるサブネットは 1 つだけです。</td>
+    </tr>
+    <tr>
+    <td><code>remote.id</code></td>
+    <td>この値を、VPN トンネル・エンドポイントで接続に使用される、リモートのオンプレミス側のストリング ID に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>remote.privateIPtoPing</code></td>
+    <td>Helm テスト検証プログラムで VPN ping 接続テストに使用するリモート・サブネット内のプライベート IP アドレスを追加します。 この値はオプションです。</td>
+    </tr>
+    <tr>
+    <td><code>preshared.secret</code></td>
+    <td>この値を、オンプレミスの VPN トンネル・エンドポイント・ゲートウェイで接続に使用される事前共有シークレットに変更します。 この値は <code>ipsec.secrets</code> に保管されます。</td>
+    </tr>
+    </tbody></table>
 
-各設定の詳細については、Helm チャートの `config.yaml` ファイル内で提供される資料をお読みください。
-{: tip}
+4. 更新した `config.yaml` ファイルを保存します。
 
-1. オンプレミスの VPN トンネル・エンドポイントで、接続を初期化するためのプロトコルとして `ikev2` がサポートされていない場合は、`ipsec.keyexchange` の値を `ikev1` または `ike` に変更します。
-2. オンプレミスの VPN トンネル・エンドポイントで接続に使用する ESP 暗号化と認証のアルゴリズムのリストに `ipsec.esp` を設定します。
-    * `ipsec.keyexchange` が `ikev1` に設定されている場合、この設定値の指定は必須です。
-    * `ipsec.keyexchange` が `ikev2` に設定されている場合、この設定値の指定は任意です。
-    * この設定をブランクにしておくと、デフォルトの strongSwan アルゴリズム `aes128-sha1,3des-sha1` が接続に使用されます。
-3. オンプレミスの VPN トンネル・エンドポイントで接続に使用する IKE/ISAKMP SA 暗号化と認証のアルゴリズムのリストに `ipsec.ike` を設定します。 アルゴリズムは、`encryption-integrity[-prf]-dhgroup` の形式で固有にする必要があります。
-    * `ipsec.keyexchange` が `ikev1` に設定されている場合、この設定値の指定は必須です。
-    * `ipsec.keyexchange` が `ikev2` に設定されている場合、この設定値の指定は任意です。
-    * この設定をブランクにしておくと、デフォルトの strongSwan アルゴリズム `aes128-sha1-modp2048,3des-sha1-modp1536` が接続に使用されます。
-4. `local.id` の値を VPN トンネル・エンドポイントで使用されるローカル Kubernetes クラスター側の識別に使用する任意のストリングに変更します。 デフォルトは `ibm-cloud` です。 一部の VPN 実装では、ローカル・エンドポイントのパブリック IP アドレスを使用する必要があります。
-5. `remote.id` の値を VPN トンネル・エンドポイントで使用されるリモート・オンプレミス側の識別に使用する任意のストリングに変更します。 デフォルトは `on-prem` です。 一部の VPN 実装では、リモート・エンドポイントのパブリック IP アドレスを使用する必要があります。
-6. `preshared.secret` の値を、オンプレミスの VPN トンネル・エンドポイント・ゲートウェイで接続に使用される事前共有シークレットに変更します。 この値は `ipsec.secrets` に保管されます。
-7. オプション: `remote.privateIPtoPing` を Helm 接続検証テストの一部として ping するリモート・サブネット内の任意のプライベート IP アドレスに設定します。
-
-### ステップ 3: インバウンドまたはアウトバウンド VPN 接続の選択
-{: #strongswan_3}
-
-strongSwan VPN 接続を構成する場合、VPN 接続をクラスターへのインバウンドにするか、またはクラスターからのアウトバウンドにするかを選択します。
-{: shortdesc}
-
-<dl>
-<dt>インバウンド</dt>
-<dd>リモート・ネットワークからのオンプレミス VPN エンドポイントが VPN 接続を開始し、クラスターが接続を listen します。</dd>
-<dt>アウトバウンド</dt>
-<dd>クラスターが VPN 接続を開始し、リモート・ネットワークからのオンプレミス VPN エンドポイントが接続を listen します。</dd>
-</dl>
-
-インバウンド VPN 接続を確立するには、以下の設定を変更します。
-1. `ipsec.auto` が `add` に設定されていることを確認します。
-2. オプション: `loadBalancerIP` を strongSwan VPN サービスのポータブル・パブリック IP アドレスに設定します。 IP アドレスを指定すると、オンプレミス・ファイアウォールの通過を許可する IP アドレスを指定する必要がある場合など、安定した IP アドレスが必要な場合に役立ちます。 クラスターに 1 つ以上の使用可能なパブリック・ロード・バランサー IP アドレスがなければなりません。 [使用可能なパブリック IP アドレスを確認](cs_subnets.html#review_ip)したり、[使用されている IP アドレスを解放](cs_subnets.html#free)したりすることができます。<br>**注:**
-    * この設定をブランクのままにすると、使用可能なポータブル・パブリック IP アドレスの 1 つが使用されます。
-    * オンプレミス VPN エンドポイントのクラスター VPN エンドポイントに対して選択したパブリック IP アドレス、または割り当てられたパブリック IP アドレスを構成する必要もあります。
-
-アウトバウンド VPN 接続を確立するには、以下の設定を変更します。
-1. `ipsec.auto` を `start` に変更します。
-2. `remote.gateway` をリモート・ネットワーク内のオンプレミス VPN エンドポイントのパブリック IP アドレスに設定します。
-3. クラスター VPN エンドポイントの IP アドレスについて、以下のいずれかのオプションを選択します。
-    * **クラスターの専用ゲートウェイのパブリック IP アドレス**: ワーカー・ノードがプライベート VLAN にのみ接続されている場合、アウトバウンド VPN 要求は、インターネットに到達するために専用ゲートウェイを介してルーティングされます。 専用ゲートウェイのパブリック IP アドレスが VPN 接続に使用されます。
-    * **strongSwan ポッドが実行されているワーカー・ノードのパブリック IP アドレス**: strongSwan ポッドが実行されているワーカー・ノードがパブリック VLAN に接続されている場合、ワーカー・ノードのパブリック IP アドレスが VPN 接続に使用されます。
-        <br>**注:**
-        * strongSwan ポッドが削除され、クラスター内の別のワーカー・ノードにスケジュール変更された場合は、VPN のパブリック IP アドレスは変更されます。 リモート・ネットワークのオンプレミス VPN エンドポイントは、いずれのクラスター・ワーカー・ノードのパブリック IP アドレスでも VPN 接続が確立されることを許可する必要があります。
-        * リモート VPN エンドポイントが複数のパブリック IP アドレスからの VPN 接続を処理できない場合は、strongSwan VPN ポッドがデプロイされるノードを制限してください。 `nodeSelector` を特定のワーカー・ノードまたはワーカー・ノード・ラベルの IP アドレスに設定します。 例えば、`kubernetes.io/hostname: 10.232.xx.xx` という値を指定すると、そのワーカー・ノードにのみ VPN ポッドのデプロイが許可されます。 `strongswan: vpn` という値を指定すると、そのラベルのワーカー・ノードで実行するように VPN ポッドを制限できます。 任意のワーカー・ノード・ラベルを使用できます。 別の helm チャート・デプロイメントで別のワーカー・ノードが使用されること許可するには、`strongswan: <release_name>` を使用します。 高可用性のためには、少なくとも 2 つのワーカー・ノードを選択します。
-    * **strongSwan サービスのパブリック IP アドレス**: strongSwan VPN サービスの IP アドレスを使用して接続を確立するには、`connectUsingLoadBalancerIP` を `true` に設定します。 strongSwan サービス IP アドレスは、`loadBalancerIP` 設定で指定できるポータブル・パブリック IP アドレスか、サービスに自動的に割り当てられる使用可能なポータブル・パブリック IP アドレスのいずれかです。
-        <br>**注:**
-        * `loadBalancerIP` 設定を使用して IP アドレスを選択する場合、クラスターに 1 つ以上の使用可能なパブリック・ロード・バランサー IP アドレスがなければなりません。 [使用可能なパブリック IP アドレスを確認](cs_subnets.html#review_ip)したり、[使用されている IP アドレスを解放](cs_subnets.html#free)したりすることができます。
-        * すべてのクラスター・ワーカー・ノードが同じパブリック VLAN 上に存在する必要があります。 あるいは、`nodeSelector` 設定を使用して、VPN ポッドを `loadBalancerIP` と同じパブリック VLAN 上のワーカー・ノードにデプロイする必要があります。
-        * `connectUsingLoadBalancerIP` が `true` に設定されていて、`ipsec.keyexchange` が `ikev1` に設定されている場合、`enableServiceSourceIP` を `true` に設定する必要があります。
-
-### ステップ 4: VPN 接続を介したクラスター・リソースへのアクセス
-{: #strongswan_4}
-
-VPN 接続を介してリモート・ネットワークがアクセスできるクラスター・リソースを決定します。
-{: shortdesc}
-
-1. 1 つ以上のクラスター・サブネットの CIDR を `local.subnet` 設定に追加します。 オンプレミス VPN エンドポイントでローカル・サブネット CIDR を構成する必要があります。 以下のサブネットをこのリストに含めることができます。  
-    * Kubernetes ポッドのサブネット CIDR: `172.30.0.0/16`。 すべてのクラスター・ポッドと、`remote.subnet` 設定でリストに入れたリモート・ネットワーク・サブネットのあらゆるホストの間で、双方向通信が使用可能になります。 セキュリティー上の理由から、`remote.subnet` ホストがクラスター・ポッドにアクセスできないようにする必要がある場合は、Kubernetes ポッドのサブネットを `local.subnet` 設定に追加しないでください。
-    * Kubernetes サービスのサブネット CIDR: `172.21.0.0/16`。 サービス IP アドレスは、単一 IP の背後にある複数のワーカー・ノードにデプロイされている複数のアプリ・ポッドを公開する方法を提供します。
-    * アプリがプライベート・ネットワークに NodePort サービスまたはプライベート Ingress ALB を使用して公開される場合は、ワーカー・ノードのプライベート・サブネット CIDR を追加します。 `ibmcloud ks worker <cluster_name>` を実行して、ワーカーのプライベート IP アドレスの先頭 3 オクテットを取得します。 例えば、それが `10.176.48.xx` の場合は `10.176.48` をメモします。 次に、`<xxx.yyy.zz>` を先ほど取得したオクテットに置き換えてコマンド `ibmcloud sl subnet list | grep <xxx.yyy.zzz>` を実行し、ワーカーのプライベート・サブネット CIDR を取得します。<br>**注**: ワーカー・ノードが新規プライベート・サブネットに追加された場合は、新規のプライベート・サブネット CIDR を `local.subnet` 設定およびオンプレミス VPN エンドポイントに追加する必要があります。 その後、VPN 接続を再始動する必要があります。
-    * プライベート・ネットワークに LoadBalancer サービスによって公開されるアプリがある場合は、クラスターのプライベート・ユーザー管理サブネット CIDR を追加します。 これらの値を見つけるには、`ibmcloud ks cluster-get <cluster_name> --showResources` を実行します。 **VLANS** セクションで、**Public** 値が `false` の CIDR を見つけます。<br>
-    **注**: `ipsec.keyexchange` が `ikev1` に設定されている場合、指定できるサブネットは 1 つだけです。 ただし、`localSubnetNAT` 設定を使用して、複数のクラスター・サブネットを単一のサブネットに結合することができます。
-
-2. オプション: `localSubnetNAT` 設定を使用して、クラスター・サブネットを再マップします。 サブネットのネットワーク・アドレス変換 (NAT) は、クラスター・ネットワークとオンプレミス・リモート・ネットワークの間のサブネット競合の回避策になります。 NAT を使用して、クラスターのプライベート・ローカル IP サブネット、ポッド・サブネット (172.30.0.0/16)、またはポッド・サービス・サブネット (172.21.0.0/16) を、異なるプライベート・サブネットに再マップすることができます。 VPN トンネルでは、元のサブネットではなく、再マップされた IP サブネットが認識されます。 再マッピングは、VPN トンネルを介してパケットが送信される前だけでなく、VPN トンネルからパケットが到着した後も行われます。 再マップされたサブネットと再マップされていないサブネットの両方を同時に VPN を介して公開できます。 NAT を有効にするには、サブネット全体を追加するか、個々の IP アドレスを追加します。
-    * サブネット全体を `10.171.42.0/24=10.10.10.0/24` の形式で追加する場合、再マッピングは 1 対 1 になります。つまり、内部ネットワーク・サブネット内のすべての IP アドレスが外部ネットワーク・サブネットにマップされます。その逆も同様です。
-    * 個々の IP アドレスを `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32` の形式で追加する場合、それらの内部 IP アドレスのみが、指定した外部 IP アドレスにマップされます。
-
-3. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `enableSingleSourceIP` を `true` に設定して、単一 IP アドレスの背後にあるすべてのクラスター IP アドレスを非表示にします。 このオプションによって、リモート・ネットワークからクラスターへのすべての接続が許可されなくなるため、非常に安全な VPN 接続の構成が提供されます。
-    <br>**注:**
-    * この設定では、VPN 接続を経由するすべてのデータ・フローは、VPN 接続がクラスターまたはリモート・ネットワークから確立されているかどうかに関係なく、アウトバウンドでなければなりません。
-    * `local.subnet` は、1 つの /32 サブネットにのみ設定する必要があります。
-
-4. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `localNonClusterSubnet` 設定を使用して、strongSwan サービスで、リモート・ネットワークからの着信要求をクラスター外部にあるサービスに経路指定できるようにします。
-    <br>**注:**
-    * 非クラスター・サービスは、同じプライベート・ネットワークにあるか、またはワーカー・ノードから到達可能なプライベート・ネットワークに存在する必要があります。
-    * 非クラスター・ワーカー・ノードは、VPN 接続を介するリモート・ネットワークへのトラフィックを開始することはできませんが、非クラスター・ノードは、リモート・ネットワークからの着信要求のターゲットになることはあります。
-    * `local.subnet` 設定の非クラスター・サブネットの CIDR をリストする必要があります。
-
-### ステップ 5: VPN 接続を介したリモート・ネットワーク・リソースへのアクセス
-{: #strongswan_5}
-
-VPN 接続を介してクラスターがアクセスできるリモート・ネットワーク・リソースを決定します。
-{: shortdesc}
-
-1. 1 つ以上のオンプレミス・プライベート・サブネットの CIDR を `remote.subnet` 設定に追加します。
-    <br>**注**: `ipsec.keyexchange` が `ikev1` に設定されている場合、指定できるサブネットは 1 つだけです。
-2. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `remoteSubnetNAT` 設定を使用して、リモート・ネットワーク・サブネットを再マップします。 サブネットのネットワーク・アドレス変換 (NAT) は、クラスター・ネットワークとオンプレミス・リモート・ネットワークの間のサブネット競合の回避策になります。 NAT を使用して、リモート・ネットワークの IP サブネットを、異なるプライベート・サブネットに再マップすることができます。 VPN トンネルでは、元のサブネットではなく、再マップされた IP サブネットが認識されます。 再マッピングは、VPN トンネルを介してパケットが送信される前だけでなく、VPN トンネルからパケットが到着した後も行われます。 再マップされたサブネットと再マップされていないサブネットの両方を同時に VPN を介して公開できます。
-
-### ステップ 6: Helm チャートのデプロイ
-{: #strongswan_6}
-
-1. 詳細設定を構成する必要がある場合は、Helm チャートの設定ごとに提供されている資料に従ってください。
-
-2. **重要**: Helm チャートの設定の必要がない場合は、そのプロパティーの前に `#` を付けてコメント化してください。
-
-3. 更新した `config.yaml` ファイルを保存します。
-
-4. 更新した `config.yaml` ファイルと共に Helm chart をクラスターにインストールします。 更新したプロパティーが、チャートの構成マップに保管されます。
+5. 更新した `config.yaml` ファイルと共に Helm chart をクラスターにインストールします。 更新したプロパティーが、チャートの構成マップに保管されます。
 
     **注**: 単一のクラスター内に複数の VPN デプロイメントがある場合は、`vpn` よりもわかりやすいリリース名を選択して、名前の競合を回避し、デプロイメントを区別できます。 切り捨てられないように、リリース名は 35 文字以下に制限してください。
 
@@ -195,21 +155,22 @@ VPN 接続を介してクラスターがアクセスできるリモート・ネ�
     ```
     {: pre}
 
-5. Chart のデプロイメント状況を確認します。 Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
+6. Chart のデプロイメント状況を確認します。 Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
 
     ```
     helm status vpn
     ```
     {: pre}
 
-6. Chart をデプロイし終えたら、`config.yaml` ファイル内の更新済みの設定が使用されたことを確認します。
+7. Chart をデプロイし終えたら、`config.yaml` ファイル内の更新済みの設定が使用されたことを確認します。
 
     ```
     helm get values vpn
     ```
     {: pre}
 
-## strongSwan VPN 接続のテストと検証
+
+### VPN 接続のテストと検証
 {: #vpn_test}
 
 Helm チャートをデプロイしたら、VPN 接続をテストします。
@@ -364,10 +325,8 @@ strongSwan Helm チャートを最新バージョンにアップグレードす�
   ```
   {: pre}
 
-**重要**: strongSwan 2.0.0 Helm チャートは Calico v3 または Kubernetes 1.10 では機能しません。 [クラスターを 1.10 に更新する](cs_versions.html#cs_v110)前に、Calico 2.6 および Kubernetes 1.8 および 1.9 との後方互換性がある 2.2.0 Helm チャートに strongSwan を更新してください。
+**重要**: strongSwan 2.0.0 Helm チャートは Calico v3 または Kubernetes 1.10 では機能しません。[クラスターを 1.10 に更新する](cs_versions.html#cs_v110)前に、Calico 2.6、および Kubernetes 1.7、1.8、および 1.9 との後方互換性がある 2.1.0 Helm チャートに strongSwan を更新してください。
 
-クラスターを Kubernetes 1.10 に更新していますか? 必ず strongSwan Helm チャートを最初に削除してください。 更新後に、それを再インストールします。
-{:tip}
 
 ### バージョン 1.0.0 からのアップグレード
 {: #vpn_upgrade_1.0.0}
@@ -448,15 +407,15 @@ Helm チャートを削除して、VPN 接続を無効にすることができ�
 <br />
 
 
-## Virtual Router Appliance の使用
+## Virtual Router Appliance を使用した VPN 接続のセットアップ
 {: #vyatta}
 
-[Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) は、x86 ベアメタル・サーバーに対応した最新の Vyatta 5600 オペレーティング・システムを提供します。 VRA を VPN ゲートウェイとして使用して、オンプレミス・ネットワークにセキュアに接続できます。
+[Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) は、x86 ベアメタル・サーバーに対応した最新の Vyatta 5600 オペレーティング・システムを提供します。VRA を VPN ゲートウェイとして使用して、オンプレミス・ネットワークにセキュアに接続できます。
 {:shortdesc}
 
-クラスター VLAN に出入りするすべてのパブリックおよびプライベートのネットワーク・トラフィックは、VRA を介して転送されます。 VRA を VPN エンドポイントとして使用して、IBM Cloud インフラストラクチャー (SoftLayer) 内のサーバーとオンプレミス・リソースの間に暗号化された IPSec トンネルを作成できます。 例えば、以下の図は、{{site.data.keyword.containerlong_notm}} 内のプライベート専用ワーカー・ノードにあるアプリがオンプレミス・サーバーと VRA VPN 接続を介して通信する方法を示しています。
+クラスター VLAN に出入りするすべてのパブリックおよびプライベートのネットワーク・トラフィックは、VRA を介して転送されます。VRA を VPN エンドポイントとして使用して、IBM Cloud インフラストラクチャー (SoftLayer) 内のサーバーとオンプレミス・リソースの間に暗号化された IPSec トンネルを作成できます。 例えば、以下の図は、{{site.data.keyword.containershort_notm}} 内のプライベート専用ワーカー・ノードにあるアプリがオンプレミス・サーバーと VRA VPN 接続を介して通信する方法を示しています。
 
-<img src="images/cs_vpn_vyatta.png" width="725" alt="ロード・バランサーを使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:725px; border-style: none"/>
+<img src="images/cs_vpn_vyatta.png" width="725" alt="ロード・バランサーを使用した {{site.data.keyword.containershort_notm}} 内のアプリの公開" style="width:725px; border-style: none"/>
 
 1. クラスター内のアプリ `myapp2` は、Ingress または LoadBalancer サービスから要求を受け取ると、オンプレミス・ネットワーク内のデータにセキュアに接続する必要があります。
 
@@ -475,5 +434,3 @@ Virtual Router Appliance をセットアップするには、以下のように�
 2. [VRA 上でプライベート VLAN を構成します](/docs/infrastructure/virtual-router-appliance/manage-vlans.html)。
 
 3. VRA を使用して VPN 接続を有効にするには、[VRA 上で VRRP を構成します](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp)。
-
-**注**: 既存のルーター・アプライアンスがある場合にクラスターを追加すると、クラスター用に注文した新しいポータブル・サブネットは、ルーター・アプライアンス上に構成されません。 ネットワーク・サービスを使用するには、[VLAN スパンニングを有効にして](cs_subnets.html#subnet-routing)、同じ VLAN 上のサブネット間の転送を可能にする必要があります。VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。

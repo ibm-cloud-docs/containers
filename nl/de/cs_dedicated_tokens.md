@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,13 +25,44 @@ lastupdated: "2018-09-10"
 Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für einzelne und skalierbare Gruppen mit Clustern in {{site.data.keyword.containerlong}} verwendet haben.
 {:shortdesc}
 
-1.  Fordern Sie ein permanentes Registry-Token für die aktuelle Sitzung an. Dieses Token gewährt Zugriff auf die Images im aktuellen Namensbereich.
+1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung an.
+
     ```
-    ibmcloud cr token-add --description "<beschreibung>" --non-expiring -q
+    bx login -a api.<dedizierte_domäne>
     ```
     {: pre}
 
-2.  Überprüfen Sie den geheimen Kubernetes-Schlüssel.
+2.  Fordern Sie ein `oauth-token` für die aktuelle Sitzung an und speichern Sie es als Variable.
+
+    ```
+    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    ```
+    {: pre}
+
+3.  Fordern Sie die ID der Organisation für die aktuelle Sitzung an und speichern Sie sie als Variable.
+
+    ```
+    ORG_GUID=`bx iam org <org_name> --guid`
+    ```
+    {: pre}
+
+4.  Fordern Sie ein permanentes Registry-Token für die aktuelle Sitzung an. Ersetzen Sie <dedizierte_domäne> durch die Domäne für Ihre {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung. Dieses Token gewährt Zugriff auf die Images im aktuellen Namensbereich.
+
+    ```
+    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedizierte_domäne>/api/v1/tokens?permanent=true
+    ```
+    {: pre}
+
+    Ausgabe:
+
+    ```
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
+    }
+    ```
+    {: screen}
+
+5.  Überprüfen Sie den geheimen Kubernetes-Schlüssel.
 
     ```
     kubectl describe secrets
@@ -40,7 +71,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
 
     Sie können diesen geheimen Schlüssel verwenden, um mit {{site.data.keyword.containerlong}} zu arbeiten.
 
-3.  Erstellen Sie den geheimen Kubernetes-Schlüssel, um Ihre Tokeninformationen zu speichern.
+6.  Erstellen Sie den geheimen Kubernetes-Schlüssel, um Ihre Tokeninformationen zu speichern.
 
     ```
     kubectl --namespace <kubernetes-namensbereich> create secret docker-registry <name_des_geheimen_schlüssels>  --docker-server=<registry-url> --docker-username=token --docker-password=<tokenwert> --docker-email=<docker-e-mail>
@@ -79,7 +110,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
     </tr>
     </tbody></table>
 
-4.  Erstellen Sie einen Pod, der das imagePullSecret referenziert.
+7.  Erstellen Sie einen Pod, der das imagePullSecret referenziert.
 
     1.  Öffnen Sie Ihren bevorzugten Texteditor und erstellen Sie ein Podkonfigurationsscript namens 'mypod.yaml'.
     2.  Definieren Sie den Pod und das imagePullSecret, das Sie für den Zugriff auf die Registry verwenden möchten. Gehen Sie wie folgt vor, um ein privates Image aus einem Namensbereich zu verwenden:
@@ -114,10 +145,10 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
         </tr>
         <tr>
         <td><code>&lt;mein_namensbereich&gt;</code></td>
-        <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `ibmcloud cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
+        <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `bx cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
         </tr>
         <td><code>&lt;mein_image&gt;</code></td>
-        <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl <code>ibmcloud cr image-list</code> aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}}-Konto aufzulisten.</td>
+        <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl <code>bx cr image-list</code> aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}} aufzulisten.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
@@ -137,3 +168,4 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-09-10"
 Puede utilizar las técnicas de Kubernetes en {{site.data.keyword.containerlong}} para desplegar apps en contenedores y asegurarse de que las estén siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.
 {: shortdesc}
 
-Conozca los pasos generales para desplegar apps pulsando en un área de la imagen siguiente. ¿Desea aprender primero los conceptos básicos? Consulte la [guía de aprendizaje para desplegar apps](cs_tutorials_apps.html#cs_apps_tutorial).
+Conozca los pasos generales para desplegar apps pulsando en un área de la imagen siguiente.
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Proceso de despliegue básico"/>
 <map name="d62e18" id="d62e18">
@@ -34,9 +34,8 @@ Conozca los pasos generales para desplegar apps pulsando en un área de la image
 <area href="#cli_dashboard" target="_blank" alt="Opción 2: Inicie el panel de control de Kubernetes localmente y ejecute los archivos de configuración." title="Opción 2: Inicie el panel de control de Kubernetes localmente y ejecute los archivos de configuración." shape="rect" coords="544, 141, 728, 204" />
 </map>
 
+
 <br />
-
-
 
 
 ## Planificación de despliegues de alta disponibilidad
@@ -47,13 +46,15 @@ Cuanto más ampliamente distribuya la configuración entre varios nodos trabajad
 
 Revise las siguientes configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente.
 
-![Etapas de alta disponibilidad de una app](images/cs_app_ha_roadmap-mz.png)
+![Etapas de alta disponibilidad de una app](images/cs_app_ha_roadmap.png)
 
-1.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas en un solo nodo de un clúster de una sola zona.
-2.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en un clúster de una sola zona.
-3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en varias zonas de un clúster multizona.
+1.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas.
+2.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en la misma ubicación.
+3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas ubicaciones.
+4.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas regiones.
 
-También puede [conectar varios clústeres en distintas regiones con un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters) para aumentar la alta disponibilidad.
+
+
 
 ### Cómo aumentar la disponibilidad de la app
 {: #increase_availability}
@@ -72,21 +73,12 @@ También puede [conectar varios clústeres en distintas regiones con un equilibr
     <p><strong>Nota</strong>: Con la antiafinidad necesaria, únicamente puede desplegar un número de réplicas para las que tenga nodos de trabajador. Por ejemplo, si tiene 3 nodos de trabajador en su clúster y define 5 réplicas en su archivo YAML, únicamente se desplegarán 3 réplicas. Cada réplica se basa en un nodo trabajador diferente. Las 2 réplicas sobrantes quedarán pendientes. Si añade otro nodo trabajador al clúster, una de las réplicas sobrantes se desplegará de forma automática en el nuevo nodo trabajador.<p>
     <p><strong>Ejemplo de archivos YAML de despliegue</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de Nginx con antiafinidad de pod preferida. </a></li>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de IBM® WebSphere® Application Server Liberty con antiafinidad de pod requerida. </a></li></ul></p>
-    
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de IBM WebSphere Application Server Liberty con antiafinidad de pod requerida. </a></li></ul></p>
     </dd>
 <dt>Distribución de pods entre varias zonas o regiones</dt>
-  <dd><p>Para proteger la app frente a un error de zona, puede crear varios clústeres en distintas zonas o puede añadir zonas a una agrupación de nodos trabajadores en un clúster multizona. Los clústeres multizona solo están disponibles en [determinadas áreas metropolitanas](cs_regions.html#zones), como Dallas. Si crea varios clústeres en distintas zonas, debe [configurar un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters).</p>
-  <p>Cuando se utiliza un conjunto de réplicas y se especifica la antiafinidad de pod, Kubernetes distribuye los pods de la app entre los nodos. Si los nodos están en varias zonas, los pods se distribuyen entre las zonas, lo que aumenta la disponibilidad de la app. Si desea limitar las apps de modo que solo se ejecuten en una zona, puede configurar la afinidad de pod, o puede crear y etiquetar una agrupación de nodos trabajadores en una zona. Para obtener más información, consulte [Alta disponibilidad de clústeres multizona](cs_clusters_planning.html#ha_clusters).</p>
-  <p><strong>En un despliegue de clúster multizona, ¿se distribuyen mis pods de app de forma uniforme entre los nodos? </strong></p>
-  <p>Los pods se distribuyen uniformemente entre las zonas, pero no siempre entre los nodos. Por ejemplo, si tiene un clúster con 1 nodo en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada nodo obtiene 2 pods. Sin embargo, si tiene un clúster con 2 nodos en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada zona tiene 2 pods planificados, y puede que planifique 1 pod por nodo o puede que no. Para obtener más control sobre la planificación, puede [establecer la afinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>Si cae una zona, ¿cómo se replanifican los pods en los nodos restantes de las otras zonas?</strong></br>Depende de la política de planificación que haya utilizado en el despliegue. Si ha incluido la [afinidad de pod específica del nodo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), los pods no se vuelven a planificar. Si no lo ha hecho, los pods se crean en los nodos trabajadores disponibles en otras zonas, pero es posible que no estén equilibrados. Por ejemplo, es posible que los 2 pods se distribuyan entre los 2 nodos disponibles, o puede que ambos se planifiquen en 1 nodo con capacidad disponible. De forma similar, cuando la zona no disponible vuelve a estar activa, los pods no se suprimen y se reequilibran automáticamente entre los nodos. Si desea que los pods se reequilibren entre las zonas cuando la zona vuelve a estar activa, tenga en cuenta la posibilidad de utilizar el [deplanificador de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/descheduler).</p>
-  <p><strong>Consejo</strong>: en clústeres multizona, intente mantener una capacidad de nodo trabajador del 50 % por zona para disponer de suficiente capacidad para proteger el clúster frente un error de la zona.</p>
-  <p><strong>¿Qué ocurre si quiero distribuir mi app entre regiones?</strong></br>Para proteger la app frente a un error de región, cree un segundo clúster en otra región, [configure un equilibrador de carga global](cs_clusters_planning.html#multiple_clusters) para conectar los clústeres y utilice un YAML de despliegue para desplegar un conjunto de réplicas duplicado con [antiafinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para la app.</p>
-  <p><strong>¿Qué pasa si mis apps necesitan almacenamiento persistente?</strong></p>
-  <p>Utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
+  <dd>Para proteger la app ante un error de la ubicación o de la región, puede crear un segundo clúster en otra ubicación o región y utilizar el archivo YAML de despliegue para desplegar un conjunto de réplicas duplicado para la app. Mediante la adición de una ruta compartida y un equilibrador de la carga frente a los clústeres, puede distribuir la carga de trabajo entre las ubicaciones y regiones. Para obtener más información, consulte [Alta disponibilidad de clústeres](cs_clusters.html#clusters).
+  </dd>
 </dl>
-
 
 
 ### Despliegue de una app mínima
@@ -140,15 +132,13 @@ Para obtener más información sobre cada componente, revise [Aspectos básicos 
 
 
 
-
-
 ## Inicio del panel de control de Kubernetes
 {: #cli_dashboard}
 
 Abra un panel de control de Kubernetes en el sistema local para ver información sobre un clúster y sus nodos trabajadores. [En la GUI](#db_gui), puede acceder al panel de control mediante una simple pulsación desde un botón. [Con la CLI](#db_cli), puede acceder al panel de control o utilizar los pasos en un proceso de automatización como, por ejemplo, para un conducto CI/CD.
 {:shortdesc}
 
-Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
 
 Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar el panel de control de Kubernetes para un clúster.
 
@@ -161,53 +151,78 @@ Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar 
 4.  En la página **Clústeres**, pulse el clúster al que desea acceder.
 5.  En la página de detalles del clúster, pulse el botón **Panel de control de Kubernetes**.
 
-</br>
-</br>
-
 **Inicio del panel de control de Kubernetes desde la CLI**
 {: #db_cli}
 
-1.  Obtenga las credenciales para Kubernetes.
+*  Para clústeres con una versión maestra de Kubernetes 1.7.16 o anterior:
 
-    ```
-    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-    ```
-    {: pre}
+    1.  Establezca el proxy con el número de puerto predeterminado.
 
-2.  Copie el valor **id-token** que se muestra en la salida.
+        ```
+        kubectl proxy
+        ```
+        {: pre}
 
-3.  Establezca el proxy con el número de puerto predeterminado.
+        Salida:
 
-    ```
-    kubectl proxy
-    ```
-    {: pre}
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
 
-    Salida de ejemplo:
+    2.  Abra el panel de control de Kubernetes en un navegador web.
 
-    ```
-    Starting to serve on 127.0.0.1:8001
-    ```
-    {: screen}
+        ```
+        http://localhost:8001/ui
+        ```
+        {: codeblock}
 
-4.  Inicie sesión en el panel de control.
+*  Para clústeres con una versión maestra de Kubernetes 1.8.2 o posterior:
 
-  1.  En el navegador, vaya al siguiente URL:
+    1.  Obtenga las credenciales para Kubernetes.
 
-      ```
-      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-      ```
-      {: codeblock}
+        ```
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+        ```
+        {: pre}
 
-  2.  En la página de inicio de sesión, seleccione el método de autenticación **Señal**.
+    2.  Copie el valor **id-token** que se muestra en la salida.
 
-  3.  A continuación, pegue el valor **id-token** que ha copiado anteriormente en el campo **Señal** y pulse **INICIAR SESIÓN**.
+    3.  Establezca el proxy con el número de puerto predeterminado.
+
+        ```
+        kubectl proxy
+        ```
+        {: pre}
+
+        Salida de ejemplo:
+
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
+
+    4.  Inicie sesión en el panel de control.
+
+      1.  En el navegador, vaya al siguiente URL:
+
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
+
+      2.  En la página de inicio de sesión, seleccione el método de autenticación **Señal**.
+
+      3.  A continuación, pegue el valor **id-token** que ha copiado anteriormente en el campo **Señal** y pulse **INICIAR SESIÓN**.
 
 Cuando termine de utilizar el panel de control de Kubernetes, utilice `CONTROL+C` para salir del mandato `proxy`. Después de salir, el panel de control Kubernetes deja de estar disponible. Ejecute el mandato `proxy` para reiniciar el panel de control de Kubernetes.
 
 [A continuación, puede ejecutar un archivo de configuración desde el panel de control.](#app_ui)
 
+
 <br />
+
+
 
 
 ## Creación de secretos
@@ -216,127 +231,79 @@ Cuando termine de utilizar el panel de control de Kubernetes, utilice `CONTROL+C
 Los secretos de Kubernetes constituyen una forma segura de almacenar información confidencial, como nombres de usuario, contraseñas o claves.
 {:shortdesc}
 
-Revise las siguientes tareas que requieren secretos. Para obtener más información sobre lo que puede almacenar en secretos, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/secret/).
+<table>
+<caption>Archivos necesarios para almacenar en secretos por tarea</caption>
+<thead>
+<th>Tarea</th>
+<th>Archivos necesarios para almacenar en secretos</th>
+</thead>
+<tbody>
+<tr>
+<td>Añadir un servicio a un clúster</td>
+<td>Ninguno. Un secreto se crea automáticamente al enlazar un servicio a un clúster.</td>
+</tr>
+<tr>
+<td>Opcional: Configure el servicio de Ingress con TLS, si no utiliza ingress-secret. <p><b>Nota</b>: TLS ya está habilitado de forma predeterminada y ya hay un secreto creado para la conexión TLS.
 
-### Adición de un servicio a un clúster
-{: #secrets_service}
+Para ver el secreto de TLS predeterminado:
+<pre>
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
+</pre>
+</p>
+Para crear su propio secreto, siga los pasos de este tema.</td>
+<td>Certificado de servidor y clave: <code>server.crt</code> y <code>server.key</code></td>
+<tr>
+<td>Cree la anotación de autenticación mutua.</td>
+<td>Certificado de CA: <code>ca.crt</code></td>
+</tr>
+</tbody>
+</table>
 
-Cuando enlaza un servicio a un clúster, no tiene que crear un secreto. El secreto se crea automáticamente. Para obtener más información, consulte [Adición de servicios de Cloud Foundry a clústeres](cs_integrations.html#adding_cluster).
+Para obtener más información sobre lo que se puede almacenar en secretos, consulte la [Documentación de Kubernetes](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-### Configuración de Ingress ALB para que utilice TLS
-{: #secrets_tls}
 
-El ALB equilibra carga de tráfico de red HTTP para las apps en su clúster. Para equilibrar también la carga de conexiones HTTPS entrantes, puede configurar el ALB para descifrar el tráfico de red y reenviar las solicitudes descifradas a las apps expuestas en su clúster.
 
-Si está utilizando el subdominio de Ingress proporcionado por IBM, puede [utilizar el certificado TLS proporcionado por IBM](cs_ingress.html#public_inside_2). Para ver el secreto de TLS proporcionado por IBM, ejecute el mandato siguiente:
-```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
-```
-{: pre}
+Para crear un secreto con un certificado:
 
-Si utiliza un dominio personalizado, puede utilizar su propio certificado para gestionar la terminación TLS. Para crear su propio secreto de TLS:
-1. Genere una clave y un certificado de una de estas formas:
-    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo.
-      **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
-    * A efectos de prueba, puede crear un certificado autofirmado mediante OpenSSL. Para obtener más información, consulte esta [guía de aprendizaje sobre los certificados SSL autofirmados ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Cree un `tls.key`.
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Utilice la clave para crear un `tls.crt`.
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
-2. [Convierta el certificado y la clave a base-64 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.base64encode.org/).
-3. Cree un archivo YAML secreto utilizando el certificado y la clave.
+1. Genere el certificado de la autoridad de certificados (CA) y la clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Para realizar pruebas, puede generar un certificado firmado de forma automática.
+
+ **Importante**: asegúrese de que [CN](https://support.dnsimple.com/articles/what-is-common-name/) sea diferente para cada certificado.
+
+ El certificado de cliente y la clave de cliente se deben verificar hasta el certificado raíz de confianza, que en este caso, es el certificado de CA. Ejemplo:
+
+ ```
+ Certificado de cliente: emitido por certificado intermedio
+ Certificado intermedio: emitido por certificado raíz
+ Certificado raíz: emitido por sí mismo
+ ```
+ {: codeblock}
+
+2. Cree el certificado como un secreto de Kubernetes.
+
+   ```
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
+   ```
+   {: pre}
+
+   Ejemplos:
+   - Conexión de TLS:
+
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <client_certificate>
-       tls.key: <client_key>
-     ```
-     {: codeblock}
-
-4. Cree el certificado como un secreto de Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-
-### Personalización de Ingress ALB con la anotación de los servicios SSL
-{: #secrets_ssl_services}
-
-Puede utilizar el tráfico cifrado con la [anotación `ingress.bluemix.net/ssl-services`](cs_annotations.html#ssl-services) para cargar sus apps desde Ingress ALB. Para crear el secreto:
-
-1. Obtenga la clave y el certificado de la entidad emisora de certificados (CA) desde el servidor de carga.
-2. [Convierta el certificado a base-64 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.base64encode.org/).
-3. Cree un archivo YAML secreto utilizando el certificado.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <ca_certificate>
-     ```
-     {: codeblock}
-     **Nota**: si también desea imponer la autenticación mutua para el tráfico en sentido ascendente, puede suministrar un archivo `client.crt` y un archivo `client.key` además de `trusted.crt` en la sección de datos.
-4. Cree el certificado como un secreto de Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
-### Personalización de Ingress ALB con la anotación de autenticación mutua
-{: #secrets_mutual_auth}
+   - Anotación de autenticación mutua:
 
-Puede utilizar la [anotación `ingress.bluemix.net/mutual-auth`](cs_annotations.html#mutual-auth) para configurar la autenticación mutua del tráfico en sentido descendente para Ingress ALB. Para crear un secreto de autenticación mutua:
-
-1. Genere una clave y un certificado de una de estas formas:
-    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo.
-      **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
-    * A efectos de prueba, puede crear un certificado autofirmado mediante OpenSSL. Para obtener más información, consulte esta [guía de aprendizaje sobre los certificados SSL autofirmados ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Cree un archivo `ca.key`.
-            ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Utilice la clave para crear un archivo `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
-            ```
-            {: pre}
-        3. Utilice el archivo `ca.crt` para crear un certificado autofirmado.
-            ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
-2. [Convierta el certificado a base-64 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.base64encode.org/).
-3. Cree un archivo YAML secreto utilizando el certificado.
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
-4. Cree el certificado como un secreto de Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
 <br />
+
+
+
 
 
 ## Despliegue de apps con la GUI
@@ -357,7 +324,7 @@ Para desplegar la app:
   * Seleccione **Especificar detalles de app a continuación** y especifique los detalles.
   * Seleccione **Cargar un archivo YAML o JSON** para cargar su [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
 
-  ¿Necesita ayuda con su archivo de configuración? Consulte este [archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). En este ejemplo, se despliega un contenedor desde la imagen **ibmliberty** en la región EE.UU. sur. Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.
+  ¿Necesita ayuda con su archivo de configuración? Consulte este [archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). En este ejemplo, se despliega un contenedor desde la imagen **ibmliberty** en la región EE.UU. Sur. Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.
   {: tip}
 
 3.  Verifique que ha desplegado satisfactoriamente la app de una de las siguientes formas.
@@ -402,104 +369,12 @@ Para desplegar la app:
 <br />
 
 
-## Despliegue de apps en nodos trabajadores específicos mediante la utilización de etiquetas
-{: #node_affinity}
-
-Cuando despliega una app, los pods de la app se despliegan de forma indiscriminada en varios nodos trabajadores del clúster. En algunos casos, es posible que desee restringir los nodos trabajadores en los que se despliegan los pods de la app. Por ejemplo, es posible que desee que los pods de la app solo se desplieguen en nodos trabajadores de una determinada agrupación de nodos trabajadores porque dichos nodos trabajadores están en máquinas vacías. Para designar los nodos trabajadores en los que deben desplegarse los pods de la app, añada una regla de afinidad al despliegue de la app.
-{:shortdesc}
-
-Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
-
-1. Obtenga el nombre de la agrupación de nodos trabajadores en la que desea desplegar los pods de la app.
-    ```
-    ibmcloud ks worker-pools <cluster_name_or_ID>
-    ```
-    {:pre}
-
-    En estos pasos se utiliza un nombre de agrupación de nodos trabajadores como ejemplo. Para desplegar pods de la app en determinados nodos trabajadores en función en otro factor, obtenga ese valor en su lugar. Por ejemplo, para desplegar los pods de la app solo en nodos trabajadores de una VLAN específica, obtenga el ID de VLAN con el mandato ` ibmcloud ks vlans <zone>`.
-    {: tip}
-
-2. [Añada una regla de afinidad ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) correspondiente al nombre de la agrupación de nodos trabajadores al despliegue de la app.
-
-    Archivo yaml de ejemplo:
-
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    metadata:
-      name: with-node-affinity
-    spec:
-      template:
-        spec:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: workerPool
-                    operator: In
-                    values:
-                    - <worker_pool_name>
-    ...
-    ```
-    {: codeblock}
-
-    En la sección **affinity** del archivo yaml de ejemplo, `workerPool` es la `clave (key)` y `<worker_pool_name>` es el `valor (value)`.
-
-3. Aplique el archivo de configuración de despliegue actualizado.
-    ```
-    kubectl apply -f with-node-affinity.yaml
-    ```
-    {: pre}
-
-4. Verifique que los pods de la app se han desplegado en los nodos trabajadores correctos.
-
-    1. Obtenga una lista de pods en el clúster.
-        ```
-        kubectl get pods -o wide
-        ```
-        {: pre}
-
-        Salida de ejemplo:
-        ```
-        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
-        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
-        ```
-        {: screen}
-
-    2. En la salida, identifique un pod para su app. Anote la dirección IP privada de **NODE** del nodo trabajador en el que está el pod.
-
-        En la salida de ejemplo anterior, el pod de la app `cf-py-d7b7d94db-vp8pq` está en un nodo trabajador con la dirección IP `10.176.48.78`.
-
-    3. Obtenga una lista de los nodos trabajadores de la agrupación de nodos trabajadores que ha designado en el despliegue de la app.
-
-        ```
-        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
-        ```
-        {: pre}
-
-        Salida de ejemplo:
-
-        ```
-        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
-        ```
-        {: screen}
-
-        Si ha creado una regla de afinidad de app basada en otro factor, obtenga ese valor en su lugar. Por ejemplo, para verificar que el pod de la app se ha desplegado en un nodo trabajador de una VLAN específica, visualice la VLAN en la que se encuentra el nodo trabajador con el mandato ` ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
-        {: tip}
-
-    4. En la salida, verifique que el nodo trabajadores con la dirección IP privada que ha identificado en el paso anterior se ha desplegado en esta agrupación de nodos trabajadores.
-
-<br />
 
 
 ## Despliegue de una app en una máquina con GPU
 {: #gpu_app}
 
-Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](cs_clusters_planning.html#shared_dedicated_node), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
+Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](cs_clusters.html#shared_dedicated_node), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
 {:shortdesc}
 
 En los pasos siguientes, aprenderá a desplegar cargas de trabajo que requieren la GPU. También puede [desplegar apps](#app_ui) que no tienen la necesidad de procesar sus cargas de trabajo entre la GPU y la CPU. Después, podría encontrar útil probar con cargas de trabajo matemáticas intensivas como por ejemplo las de la infraestructura de aprendizaje máquina de [TensorFlow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.tensorflow.org/) con [esta demo de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
@@ -664,7 +539,7 @@ Para ejecutar una carga de trabajo en una máquina con GPU:
 
     En este ejemplo, verá que ambas GPU se utilizaron para ejecutar el trabajo porque ambas GPU fueron planificadas en el nodo trabajador. Si el límite se establece en 1, solo se mostrará una GPU.
 
-## Escalado de apps
+## Escalado de apps 
 {: #app_scaling}
 
 Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar o disminuir automáticamente el número de instancias de las apps en función de la CPU.

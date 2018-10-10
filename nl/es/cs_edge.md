@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,8 +25,8 @@ Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de 
 
 Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
 
-Si tiene un clúster multizona y desea restringir el tráfico de red a los nodos trabajadores de extremo, debe haber al menos 2 nodos trabajadores de extremo en cada zona para conseguir una alta disponibilidad de los pods del equilibrador de carga o Ingress. Cree una agrupación de nodos trabajadores de extremo que abarque todas las zonas del clúster y tenga como mínimo 2 nodos trabajadores por zona.
-{: tip}
+
+
 
 ## Cómo etiquetar nodos trabajadores como nodos extremos
 {: #edge_nodes}
@@ -38,22 +38,21 @@ Antes de empezar:
 
 - [Cree un clúster estándar.](cs_clusters.html#clusters_cli)
 - Asegúrese de que el clúster tiene al menos una VLAN pública. Los nodos trabajadores de extremo no están disponibles para clústeres solo con VLAN privadas.
-- [Cree una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool) que abarque toda la zona del clúster y que tenga al menos 2 nodos trabajadores por zona.
 - [Defina el clúster como destino de la CLI de Kubernetes](cs_cli_install.html#cs_cli_configure).
 
 Para etiquetar nodos trabajadores como nodos extremos:
 
-1. Obtenga una lista de los nodos trabajadores de la agrupación de nodos trabajadores de extremo. Utilice la dirección IP privada de la columna **NAME** para identificar los nodos.
+1. Obtenga una lista de todos los nodos trabajadores del clúster. Utilice la dirección IP privada de la columna **NAME** para identificar los nodos. Seleccione al menos dos nodos trabajadores en cada VLAN pública para que sean nodos trabajadores de extremo. Ingress requiere al menos dos nodos trabajadores en cada zona para proporcionar alta disponibilidad. 
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
 2. Añada a los nodos trabajadores la etiqueta `dedicated=edge`. Cuando un nodo se ha marcado con `dedicated=edge`, todos los Ingress y equilibradores de carga posteriores se despliegan en un nodo trabajador de extremo.
 
   ```
-  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 

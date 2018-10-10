@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -30,7 +30,7 @@ Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
 **IBM è responsabile per:**
 
 - Distribuzione del master, dei nodi di lavoro e dei componenti di gestione all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress, al momento della creazione del cluster
-- Gestione degli aggiornamenti di sicurezza, del monitoraggio, dell'isolamento e del ripristino del master Kubernetes per il cluster
+- Gestione degli aggiornamenti di sicurezza, del monitoraggio, dell'isolamento e del ripristino del master Kubernetes per il cluster 
 - Monitoraggio dell'integrità dei nodi di lavoro e la fornitura dell'automazione dell'aggiornamento e del ripristino di tali nodi di lavoro
 - Esecuzione delle attività di automazione nel tuo account dell'infrastruttura, inclusi l'aggiunta e la rimozione dei nodi di lavoro e la creazione di una sottorete predefinita
 - Gestione, aggiornamento e ripristino dei componenti operativi all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress e il plug-in di archiviazione
@@ -44,18 +44,15 @@ Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
 - [Configurazione del tuo account {{site.data.keyword.Bluemix_notm}} per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer)](cs_troubleshoot_clusters.html#cs_credentials)
 - [Distribuzione e gestione delle risorse Kubernetes, come i pod, i servizi e le distribuzioni, all'interno del cluster](cs_app.html#app_cli)
 - [Utilizzo delle funzionalità del servizio e di Kubernetes per garantire l'elevata disponibilità alle applicazioni](cs_app.html#highly_available_apps)
-- [Aggiunta o rimozione della capacità del cluster ridimensionando i tuoi pool di nodi di lavoro](cs_clusters.html#add_workers)
-- [Abilitazione dello spanning delle VLAN e mantenimento del bilanciamento dei pool di nodi di lavoro multizona tra le zone](cs_clusters_planning.html#ha_clusters)
+- [Aggiunta o rimozione della capacità del cluster di utilizzare la CLI per aggiungere o rimuovere i nodi di lavoro](cs_cli_reference.html#cs_worker_add)
 - [Creazione delle VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per l'isolamento di rete del tuo cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete all'URL del master Kubernetes](cs_firewall.html#firewall) <p>**Nota**: se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Pianificazione della rete cluster solo privata](cs_network_cluster.html#private_vlan). </p>
+- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete all'URL del master Kubernetes](cs_firewall.html#firewall) <p>**Nota**: se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Connessione VLAN per i nodi di lavoro](cs_clusters.html#worker_vlan_connection). </p>
 - [Aggiornamento del kube-apiserver master quando sono disponibili aggiornamenti alla versione di Kubernetes](cs_cluster_update.html#master)
 - [Mantenere i nodi di lavoro aggiornati alle versioni patch, principale e secondaria](cs_cluster_update.html#worker_node)
-- [Ripristino dei nodi di lavoro con problemi eseguendo i comandi `kubectl`, come `cordon` o `drain`, ed eseguendo i comandi `ibmcloud ks`, come `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
+- [Ripristino dei nodi di lavoro con problemi eseguendo i comandi `kubectl`, come `cordon` o `drain` ed eseguendo i comandi `bx cs`, come `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Aggiunta o rimozione delle sottoreti nell'infrastruttura IBM Cloud (SoftLayer) secondo necessità](cs_subnets.html#subnets)
 - [Backup e ripristino dei dati nell'archiviazione persistente nell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](../services/RegistryImages/ibm-backup-restore/index.html)
-- Configurazione dei servizi [logging](cs_health.html#logging) e [monitoring](cs_health.html#view_metrics) per supportare l'integrità e le prestazioni del tuo cluster
 - [Configurazione del monitoraggio dell'integrità per i nodi di lavoro con Autorecovery](cs_health.html#autorecovery)
-- Controllo degli eventi che modificano le risorse nel tuo cluster, come ad esempio utilizzando [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) per visualizzare le attività avviate dall'utente che modificano lo stato della tua istanza {{site.data.keyword.containerlong_notm}}
 
 <br />
 
@@ -63,15 +60,15 @@ Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
 ## Abuso di {{site.data.keyword.containerlong_notm}}
 {: #terms}
 
-I clienti non possono usare impropriamente il {{site.data.keyword.containerlong_notm}}.
+I clienti non possono usare impropriamente il {{site.data.keyword.containershort_notm}}.
 {:shortdesc}
 
 L'utilizzo improprio include:
 
 *   Qualsiasi attività illegale
 *   La distribuzione o l'esecuzione di malware
-*   Il danneggiamento di {{site.data.keyword.containerlong_notm}} o l'interferenza
-con l'utilizzo di {{site.data.keyword.containerlong_notm}}
+*   Il danneggiamento di {{site.data.keyword.containershort_notm}} o l'interferenza
+con l'utilizzo di {{site.data.keyword.containershort_notm}}
 *   Il danneggiamento o l'interferenza con l'utilizzo di qualsiasi altro servizio o sistema
 *   L'accesso non autorizzato a qualsiasi servizio o sistema
 *   La modifica non autorizzata a qualsiasi servizio o sistema

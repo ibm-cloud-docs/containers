@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -18,25 +18,25 @@ lastupdated: "2018-09-10"
 
 
 
-# Apps mit Knotenports (NodePorts) zugänglich machen
+# Apps mit NodePorts zugänglich machen
 {: #nodeport}
 
 Sie können Ihre containerisierte App für den Internetzugriff verfügbar machen, indem Sie die öffentliche IP-Adresse eines beliebigen Workerknotens in einem Kubernetes-Cluster verwenden und einen Knotenport zugänglich machen. Verwenden Sie diese Option zum Testen in {{site.data.keyword.containerlong}} und zur Bereitstellung von öffentlichem Zugriff über einen kurzen Zeitraum.
 {:shortdesc}
 
-## Netzverkehr mithilfe von Knotenports (NodePorts) verwalten
+## Netzverkehr mithilfe von NodePorts verwalten
 {: #planning}
 
 Machen Sie auf Ihrem Workerknoten einen öffentlichen Port zugänglich und verwenden Sie die öffentliche IP-Adresse des Workerknotens, um öffentlich über das Internet auf Ihren Service im Cluster zuzugreifen.
 {:shortdesc}
 
-Wenn Sie Ihre App durch Erstellen eines Kubernetes-Service vom Typ 'NodePort' zugänglich machen, wird dem Service eine Knotenportnummer im Zahlenbereich 30000-32767 und eine interne Cluster-IP-Adresse zugewiesen. Der NodePort-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Der zugewiesene Knotenport (NodePort) wird in den kubeproxy-Einstellungen eines jeden Workerknotens im Cluster zugänglich gemacht. Jeder Workerknoten beginnt, am zugewiesenen Knotenport empfangsbereit für eingehende Anforderungen für den Service zu sein. Um vom Internet aus auf den Service zuzugreifen, können Sie die öffentliche IP-Adresse eines beliebigen Workerknotens, die bei der Clustererstellung zugewiesen wurde, in Verbindung mit der Knotenportnummer im Format `<IP_address>:<nodeport>`. Zusätzlich zur öffentlichen IP-Adresse steht ein NodePort-Service über die private IP-Adresse eines Workerknotens zur Verfügung.
+Wenn Sie Ihre App durch Erstellen eines Kubernetes-Service vom Typ 'NodePort' zugänglich machen, wird dem Service eine Knotenportnummer im Zahlenbereich 30000-32767 und eine interne Cluster-IP-Adresse zugewiesen. Der NodePort-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Der zugewiesene NodePort wird in den kubeproxy-Einstellungen eines jeden Workerknotens im Cluster zugänglich gemacht. Jeder Workerknoten beginnt, am zugewiesenen Knotenport empfangsbereit für eingehende Anforderungen für den Service zu sein. Um vom Internet aus auf den Service zuzugreifen, können Sie die öffentliche IP-Adresse eines beliebigen Workerknotens, die bei der Clustererstellung zugewiesen wurde, in Verbindung mit der Knotenportnummer im Format `<IP_address>:<nodeport>`. Zusätzlich zur öffentlichen IP-Adresse steht ein NodePort-Service über die private IP-Adresse eines Workerknotens zur Verfügung.
 
 Das folgende Diagramm veranschaulicht, wie die Kommunikation vom Internet an eine App geleitet wird, wenn ein NodePort-Service konfiguriert ist:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Eine App in {{site.data.keyword.containerlong_notm}} mithilfe von NodePort zugänglich machen" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Stellen Sie eine App in {{site.data.keyword.containershort_notm}} bereit, indem Sie NodePort" style="width:550px; border-style: none"/> verwenden.
 
-1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihres Workerknotens und des Knotenports (NodePort) auf dem Workerknoten verwendet wird.
+1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihres Workerknotens und des NodePort auf dem Workerknoten verwendet wird.
 
 2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des NodePort-Service weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden.
 
@@ -49,7 +49,7 @@ Das folgende Diagramm veranschaulicht, wie die Kommunikation vom Internet an ein
 <br />
 
 
-## Zugriff auf eine App mithilfe eines NodePort-Service aktivieren
+## Öffentlichen Zugriff auf eine App mithilfe eines NodePort-Service aktivieren
 {: #config}
 
 Sie können Ihre App als einen Kubernetes-NodePort-Service für kostenlose Cluster oder Standardcluster zugänglich machen.
@@ -95,7 +95,7 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Ersetzen Sie <code><em>&lt;mein_selektorschlüssel&gt;</em></code> und <code><em>&lt;mein_selektorwert&gt;</em></code> durch das Schlüssel/Wert-Paar, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer YAML-Bereitstellungsdatei verwendet haben. Wenn Sie den Service der Bereitstellung zuordnen möchten, muss der Selektor mit den Bereitstellungsbeschriftungen übereinstimmen.
+      <td>Ersetzen Sie <code><em>&lt;mein_selektorschlüssel&gt;</em></code> und <code><em>&lt;mein_selektorwert&gt;</em></code> durch das Schlüssel/Wert-Paar, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer YAML-Bereitstellungsdatei verwendet haben.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -113,12 +113,12 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
 
 **Womit möchten Sie fortfahren?**
 
-Bei Bereitstellung der App können Sie mithilfe der öffentlichen IP-Adresse jedes beliebigen Workerknotens und der für 'NodePort' festgelegten Portnummer die öffentliche URL erzeugen, mit der in einem Browser auf die App zugegriffen werden kann. Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden sind, wurde ein privater NodePort-Service erstellt, auf den über die private IP-Adresse des Warteschlangen-Workerknotens zugegriffen werden kann.
+Bei Bereitstellung der App können Sie mithilfe der öffentlichen IP-Adresse jedes beliebigen Workerknotens und der für 'NodePort' festgelegten Portnummer die öffentliche URL erzeugen, mit der in einem Browser auf die App zugegriffen werden kann.
 
-1.  Rufen Sie die öffentliche IP-Adresse für einen Workerknoten im Cluster ab. Wenn Sie auf den Workerknoten in einem privaten Netz zugreifen möchten, rufen Sie stattdessen die private IP-Adresse ab.
+1.  Rufen Sie die öffentliche IP-Adresse für einen Workerknoten im Cluster ab.
 
     ```
-    ibmcloud ks workers <clustername>
+    bx cs workers <clustername>
     ```
     {: pre}
 
@@ -158,4 +158,4 @@ Bei Bereitstellung der App können Sie mithilfe der öffentlichen IP-Adresse jed
     In diesem Beispiel lautet die Portnummer für 'NodePort' `30872`.</br>
     **Hinweis:** Wenn `<none>` im Abschnitt **Endpoints** angezeigt wird, überprüfen Sie die Werte für `<selectorkey>` und `<selectorvalue>`, die Sie im Abschnitt `spec.selector` des NodePort-Service verwenden. Stellen Sie sicher, dass es sich hierbei um dasselbe _Schlüssel/Wert_-Paar handelt, das Sie im Abschnitt `spec.template.metadata.labels` der YAML-Bereitstellungsdatei verwendet haben.
 
-3.  Bilden Sie die URL mit einer der IP-Adressen des Workerknotens und der Portnummer für 'NodePort'. Beispiel: `http://192.0.2.23:30872`
+3.  Bilden Sie die URL mit einer der öffentlichen IP-Adressen des Workerknotens und der Portnummer für 'NodePort'. Beispiel: `http://192.0.2.23:30872`

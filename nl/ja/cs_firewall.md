@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,20 +24,19 @@ lastupdated: "2018-09-10"
 {{site.data.keyword.containerlong}} のファイアウォールで特定のポートと IP アドレスを開く必要がある以下の状況について説明します。
 {:shortdesc}
 
-* [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `ibmcloud` コマンドを実行します](#firewall_bx)。
+* [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `bx` コマンドを実行します](#firewall_bx)。
 * [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `kubectl` コマンドを実行します](#firewall_kubectl)。
 * [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `calicoctl` コマンドを実行します](#firewall_calicoctl)。
 * [ワーカー・ノードに対してファイアウォールがセットアップされているとき、またはファイアウォール設定が IBM Cloud インフラストラクチャー (SoftLayer) アカウント内でカスタマイズされたときに、Kubernetes マスターとワーカー・ノード間の通信を可能にします](#firewall_outbound)。
-* [クラスターがプライベート・ネットワーク上のファイアウォールを介してリソースにアクセスすることを許可します](#firewall_private)。
 * [クラスター外から NodePort サービス、LoadBalancer サービス、または Ingress へアクセス](#firewall_inbound)します。
 
 <br />
 
 
-## ファイアウォール保護下での `ibmcloud ks` コマンドの実行
+## ファイアウォール保護下での `bx cs` コマンドの実行
 {: #firewall_bx}
 
-ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`ibmcloud ks` コマンドを実行するには、{{site.data.keyword.containerlong_notm}} における TCP アクセスを許可する必要があります。
+ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`bx cs` コマンドを実行するには、{{site.data.keyword.containerlong_notm}} における TCP アクセスを許可する必要があります。
 {:shortdesc}
 
 1. ポート 443 での `containers.bluemix.net` へのアクセスを許可します。
@@ -72,35 +71,35 @@ lastupdated: "2018-09-10"
 
 クラスターの作成時に、マスター URL 内のポートは 20000 から 32767 の間でランダムに割り当てられます。 作成される可能性のあるすべてのクラスターを対象に 20000 から 32767 までの範囲のポートを開くか、または特定の既存のクラスターを対象にアクセスを許可するかを選択できます。
 
-始めに、[`ibmcloud ks` コマンドを実行](#firewall_bx)するためのアクセスを許可します。
+始めに、[`bx cs` コマンドを実行](#firewall_bx)するためのアクセスを許可します。
 
 特定のクラスターを対象にアクセスを許可するには、以下のようにします。
 
 1. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 統合されたアカウントがある場合は、`--sso` オプションを含めます。
 
    ```
-   ibmcloud login [--sso]
+   bx login [--sso]
    ```
    {: pre}
 
 2. クラスターが属する地域を選択します。
 
    ```
-   ibmcloud ks region-set
+   bx cs region-set
    ```
    {: pre}
 
 3. クラスターの名前を取得します。
 
    ```
-   ibmcloud ks clusters
+   bx cs clusters
    ```
    {: pre}
 
 4. クラスターの**マスター URL** を取得します。
 
    ```
-   ibmcloud ks cluster-get <cluster_name_or_ID>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -154,7 +153,7 @@ lastupdated: "2018-09-10"
 ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`calicoctl` コマンドを実行するには、Calico コマンドにおける TCP アクセスを許可する必要があります。
 {:shortdesc}
 
-始めに、[`ibmcloud` コマンド](#firewall_bx)と [`kubectl` コマンド](#firewall_kubectl)を実行するためのアクセスを許可します。
+始めに、[`bx` コマンド](#firewall_bx)と [`kubectl` コマンド](#firewall_kubectl)を実行するためのアクセスを許可します。
 
 1. [`kubectl` コマンド](#firewall_kubectl)の許可に使用したマスター URL から IP アドレスを取得します。
 
@@ -173,24 +172,24 @@ lastupdated: "2018-09-10"
 ## クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可
 {: #firewall_outbound}
 
-{{site.data.keyword.containerlong_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信 (egress) などのために、クラスターがインフラストラクチャーのリソースとサービスにファイアウォールの背後からアクセスできるようにします。
+{{site.data.keyword.containershort_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信 (egress) などのために、クラスターがインフラストラクチャーのリソースとサービスにファイアウォールの背後からアクセスできるようにします。
 {:shortdesc}
 
-1.  クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
+  1.  クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
-    ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
-    {: pre}
+      ```
+      bx cs workers <cluster_name_or_ID>
+      ```
+      {: pre}
 
-2.  ソースの _<each_worker_node_publicIP>_ から、宛先の TCP/UDP ポート (20000 から 32767 までの範囲とポート 443) への発信ネットワーク・トラフィックと、以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。 ローカル・マシンから公共のインターネットのエンドポイントへのアクセスが企業ファイアウォールによって禁止されている場合は、ソースのワーカー・ノードとローカル・マシンの両方で以下のステップを実行します。
-    - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのゾーンのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、各ワーカー・ノードのパブリック IP からすべてのゾーン (dal10、dal12、dal13) の IP アドレスのポート 443 へのトラフィックを許可する必要があります。
-    <p>
-  <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+  2.  ソースの _<each_worker_node_publicIP>_ から、宛先の TCP/UDP ポート (20000 から 32767 までの範囲とポート 443) への発信ネットワーク・トラフィックと、以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。 ローカル・マシンから公共のインターネットのエンドポイントへのアクセスが企業ファイアウォールによって禁止されている場合は、ソースのワーカー・ノードとローカル・マシンの両方で以下のステップを実行します。
+      - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのロケーションのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、ポート 443 からすべてのロケーションの IP アドレス (dal10、dal12、dal13) へのトラフィックを許可する必要があります。
+      <p>
+  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
   <caption>発信トラフィック用に開く IP アドレス</caption>
       <thead>
       <th>地域</th>
-      <th>ゾーン</th>
+      <th>ロケーション</th>
       <th>IP アドレス</th>
       </thead>
     <tbody>
@@ -206,8 +205,8 @@ lastupdated: "2018-09-10"
       </tr>
       <tr>
          <td>中欧</td>
-         <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>169.51.73.50</code><br><code>159.8.86.149、159.8.98.170</code></td>
+         <td>ams03<br>fra02<br>mil01<br>par01</td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149、159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -228,20 +227,20 @@ lastupdated: "2018-09-10"
     </table>
 </p>
 
-3.  ワーカー・ノードから [{{site.data.keyword.registrylong_notm}} 地域](/docs/services/Registry/registry_overview.html#registry_regions)への発信ネットワーク・トラフィックを許可します。
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - <em>&lt;registry_publicIP&gt;</em> を、トラフィックを許可するレジストリー IP アドレスに置き換えます。 グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。
-      <p>
-<table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+  3.  ワーカー・ノードから [{{site.data.keyword.registrylong_notm}} 地域](/docs/services/Registry/registry_overview.html#registry_regions)への発信ネットワーク・トラフィックを許可します。
+      - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+      - <em>&lt;registry_publicIP&gt;</em> を、トラフィックを許可するレジストリー IP アドレスに置き換えます。 グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。
+        <p>
+<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
   <caption>レジストリー・トラフィック用に開く IP アドレス</caption>
       <thead>
-        <th>{{site.data.keyword.containerlong_notm}} 地域</th>
+        <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>レジストリー・アドレス</th>
         <th>レジストリー IP アドレス</th>
       </thead>
       <tbody>
         <tr>
-          <td>{{site.data.keyword.containerlong_notm}} 地域間のグローバル・レジストリー</td>
+          <td>{{site.data.keyword.containershort_notm}} 地域間のグローバル・レジストリー</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -269,13 +268,13 @@ lastupdated: "2018-09-10"
       </table>
 </p>
 
-4. オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+  4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
   <caption>モニター・トラフィック用に開く IP アドレス</caption>
         <thead>
-        <th>{{site.data.keyword.containerlong_notm}} 地域</th>
+        <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>モニタリング・アドレス</th>
         <th>モニタリング IP アドレス</th>
         </thead>
@@ -283,7 +282,7 @@ lastupdated: "2018-09-10"
         <tr>
          <td>中欧</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>158.177.65.80/30</code></td>
+         <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
          <td>英国南部</td>
@@ -291,7 +290,7 @@ lastupdated: "2018-09-10"
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>米国東部、米国南部、北アジア太平洋地域、南アジア太平洋地域</td>
+          <td>米国東部、米国南部、北アジア太平洋地域</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -299,12 +298,12 @@ lastupdated: "2018-09-10"
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
 <caption>ロギング・トラフィック用に開く IP アドレス</caption>
         <thead>
-        <th>{{site.data.keyword.containerlong_notm}} 地域</th>
+        <th>{{site.data.keyword.containershort_notm}} 地域</th>
         <th>ロギング・アドレス</th>
         <th>ロギング IP アドレス</th>
         </thead>
@@ -333,33 +332,18 @@ lastupdated: "2018-09-10"
        </table>
 </p>
 
-5. ロード・バランサー・サービスを使用している場合は、VRRP プロトコルを使用するすべてのトラフィックが、パブリック・インターフェースおよびプライベート・インターフェースでのワーカー・ノード間で許可されることを確認します。{{site.data.keyword.containerlong_notm}} では、パブリック・ロード・バランサーおよびプライベート・ロード・バランサーの IP アドレスを管理するために VRRP プロトコルが使用されます。
+  5. プライベート・ファイアウォールでは、IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP のために適切な範囲を許可します。 [このリンク](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)の **Backend (private) Network** で始まるセクションを参照してください。
+      - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します。
+      - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください。
+      - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします。
 
-6. {: #pvc}データ・ストレージの永続ボリューム請求を作成するには、クラスターのあるゾーンの [IBM Cloud インフラストラクチャー (SoftLayer) IP アドレス](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges)に対して、ファイアウォールを介した発信アクセスを許可します。
-    - クラスターのゾーンを確認するには、`ibmcloud ks clusters` を実行します。
-    - [**フロントエンド (パブリック) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)と[**バックエンド (プライベート) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)の両方の IP 範囲へのアクセスを許可します。
-    - **バックエンド (プライベート) ネットワーク**には、`dal01` のゾーン (データ・センター) を追加する必要があることに注意してください。
+  6. {: #pvc}データ・ストレージの永続ボリューム請求を作成するには、クラスターのあるロケーション (データ・センター) の [IBM Cloud インフラストラクチャー (SoftLayer) IP アドレス](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)における、ファイアウォールを介する発信 (egress) アクセスを許可します。
+      - クラスターのロケーション (データ・センター) を見つけるには、`bx cs clusters` を実行します。
+      - **フロントエンド (パブリック) ネットワーク**と**バックエンド (プライベート) ネットワーク**の両方の IP 範囲へのアクセスを許可します。
+      - **バックエンド (プライベート) ネットワーク**には、dal01 のロケーション (データ・センター) を追加する必要があることに注意してください。
 
 <br />
 
-
-## クラスターからのプライベート・ファイアウォールを介したリソースへのアクセスの許可
-{: #firewall_private}
-
-プライベート・ネットワーク上のファイアウォールがある場合、ワーカー・ノード間の通信を許可し、クラスターがプライベート・ネットワークを介してインフラストラクチャー・リソースにアクセスできるようにします。
-{:shortdesc}
-
-**注**: パブリック・ネットワークにもファイアウォールがある場合、またはプライベート VLAN 専用クラスターがあり、ファイアウォールとしてゲートウェイ・アプライアンスを使用している場合、[クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可](#firewall_outbound)で指定した IP およびポートも許可する必要があります。
-
-1. IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP の範囲を許可して、クラスター内にワーカー・ノードを作成できるようにします。
-    1. IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP のために適切な範囲を許可します。 [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) を参照してください。
-    2. 使用しているすべての[ゾーン](cs_regions.html#zones)のために IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP の範囲を許可します。`dal01` ゾーンおよび `wdc04` ゾーンの IP を追加する必要があることに注意してください。[Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-) を参照してください。
-2. 以下のポートを開きます。
-    - ワーカー・ノードの更新および再ロードを許可するために、ワーカーからポート 80 および 443 へのアウトバウンド TCP および UDP 接続を許可します。
-    - ボリュームとしてファイル・ストレージのマウントを許可するために、ポート 2049 へのアウトバウンド TCP および UDP を許可します。
-    - Kubernetes ダッシュボードおよび `kubectl logs` や `kubectl exec` などのコマンドのために、ポート 10250 へのインバウンド TCP および UDP 接続を許可します。
-    - DNS アクセスのために、TCP および UDP のポート 53 へのインバウンドおよびアウトバウンドの接続を許可します。
-3. Calico ポリシーを使用している場合や、複数ゾーン・クラスターの各ゾーンにファイアウォールがある場合は、ファイアウォールによってワーカー・ノード間の通信がブロックされることがあります。ワーカーのポート、ワーカーのプライベート IP アドレス、または Calico ワーカー・ノード・ラベルを使用して、クラスター内のすべてのワーカー・ノードを相互に開く必要があります。
 
 ## クラスター外から NodePort、ロード・バランサー、Ingress の各サービスへのアクセス
 {: #firewall_inbound}

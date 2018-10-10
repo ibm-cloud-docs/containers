@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,134 +20,74 @@ lastupdated: "2018-09-10"
 # LoadBalancer を使用してアプリを公開する
 {: #loadbalancer}
 
-ポートを公開し、レイヤー 4 のロード・バランサーのポータブル IP アドレスを使用してコンテナー化アプリにアクセスします。
+ポートを公開し、ロード・バランサーのポータブル IP アドレスを使用してコンテナー化アプリにアクセスします。
 {:shortdesc}
 
-
-
-## ロード・バランサーのコンポーネントとアーキテクチャー
+## LoadBalancer を使用してネットワーク・トラフィックを管理する
 {: #planning}
 
-標準クラスターを作成すると、{{site.data.keyword.containerlong_notm}} は、ポータブル・パブリック・サブネットとポータブル・プライベート・サブネットを自動的にプロビジョンします。
+標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} は自動的に以下のサブネットをプロビジョンします。
+* クラスター作成中にワーカー・ノードのパブリック IP アドレスを決定する 1 次パブリック・サブネット
+* クラスター作成中にワーカー・ノードのプライベート IP アドレスを決定する 1 次プライベート・サブネット
+* Ingress およびロード・バランサーのネットワーク・サービス用に 5 つのパブリック IP アドレスを提供するポータブル・パブリック・サブネット
+* Ingress およびロード・バランサーのネットワーク・サービス用に 5 つのプライベート IP アドレスを提供するポータブル・プライベート・サブネット
 
-* ポータブル・パブリック・サブネットには、デフォルトの [パブリック Ingress ALB](cs_ingress.html) で使用するポータブル・パブリック IP アドレスが 1 つ用意されています。 残りの 4 つのポータブル・パブリック IP アドレスは、パブリック・ロード・バランサー・サービスを作成して単一アプリをインターネットに公開するために使用できます。
-* ポータブル・プライベート・サブネットには、デフォルトの [プライベート Ingress ALB](cs_ingress.html#private_ingress) で使用するポータブル・プライベート IP アドレスが 1 つ用意されています。 残りの 4 つのポータブル・プライベート IP アドレスは、プライベート・ロード・バランサー・サービスを作成して単一アプリをプライベート・ネットワークに公開するために使用できます。
+ポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは静的で、ワーカー・ノードが削除されても変更されません。 サブネットごとに、1 つのポータブル・パブリック IP アドレスと 1 つのポータブル・プライベート IP アドレスがデフォルトの [Ingress アプリケーション・ロード・バランサー](cs_ingress.html)に使用されます。残りの 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、ロード・バランサー・サービスを作成して単一アプリをパブリック・ネットワークまたはプライベート・ネットワークに公開するために使用できます。
 
-ポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは静的で、ワーカー・ノードが削除されても変更されません。 ロード・バランサー IP アドレスがオンになっているワーカー・ノードが削除されると、IP を常にモニターしている keepalived デーモンが、IP を自動的に別のワーカー・ノードに移動します。 任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。
+パブリック VLAN のクラスター内に Kubernetes LoadBalancer サービスを作成する時、外部ロード・バランサーが 1 つ作成されます。 LoadBalancer サービスを作成するときには、IP アドレスに関して以下のオプションがあります。
 
-また、ロード・バランサー・サービスは、サービスの NodePort を介してアプリを使用できるようにします。 [NodePort](cs_nodeport.html) には、クラスター内のすべてのノードのすべてのパブリック IP アドレスおよびプライベート IP アドレスでアクセスできます。 ロード・バランサー・サービスを使用しつつ、NodePort へのトラフィックをブロックするには、[LoadBalancer または NodePort サービスへのインバウンド・トラフィックの制御](cs_network_policy.html#block_ingress)を参照してください。
+- クラスターがパブリック VLAN 上にある場合、使用可能な 4 つのポータブル・パブリック IP アドレスのいずれかが使用されます。
+- クラスターがプライベート VLAN 上にしかない場合、使用可能な 4 つのポータブル・プライベート IP アドレスのいずれかが使用されます。
+- 構成ファイルに次のアノテーションを追加することにより、LoadBalancer サービス用にポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスを要求できます: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
+
+LoadBalancer サービスに割り当てられるポータブル・パブリック IP アドレスは永続的なものであり、ワーカー・ノードが削除されたり再作成されたりしても変更されません。 したがって、LoadBalancer サービスの可用性は NodePort サービスより高くなります。 NodePort サービスの場合と異なり、任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。 LoadBalancer サービスを使用する場合は、任意のワーカー・ノードの各 IP アドレスで NodePort を使用することもできます。LoadBalancer サービスを使用しているときに NodePort へのアクセスをブロックするには、[着信トラフィックのブロック](cs_network_policy.html#block_ingress)を参照してください。
 
 LoadBalancer サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。 インターネットから LoadBalancer サービスにアクセスするには、ロード・バランサーのパブリック IP アドレスと割り当てられたポートを、`<IP_address>:<port>` という形式で使用します。 次の図は、ロード・バランサーがインターネットからアプリへの通信をどのように誘導するかを示しています。
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="ロード・バランサーを使用した {{site.data.keyword.containerlong_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="ロード・バランサーを使用した {{site.data.keyword.containershort_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
 
-1. アプリに対する要求では、ロード・バランサーのパブリック IP アドレスとワーカー・ノードに割り当てられたポートを使用します。
+1. ロード・バランサーのパブリック IP アドレスとワーカー・ノード上の割り当てられたポートを使用して、要求がアプリに送信されます。
 
-2. 要求が、ロード・バランサー・サービスの内部のクラスター IP アドレスとポートに自動的に転送されます。 内部クラスター IP アドレスはクラスター内でのみアクセス可能です。
+2. 要求が、ロード・バランサー・サービスの内部クラスター IP アドレスとポートに自動的に転送されます。 内部クラスター IP アドレスはクラスター内でのみアクセス可能です。
 
 3. `kube-proxy` が、要求をアプリの Kubernetes ロード・バランサー・サービスにルーティングします。
 
-4. 要求は、アプリ・ポッドのプライベート IP アドレスに転送されます。 要求パッケージのソース IP アドレスが、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。 複数のアプリ・インスタンスがクラスターにデプロイされている場合、ロード・バランサーは、アプリ・ポッド間で要求をルーティングします。
+4. 要求が、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。 複数のアプリ・インスタンスがクラスターにデプロイされている場合、ロード・バランサーは、アプリ・ポッド間で要求をルーティングします。
 
-**複数ゾーン・クラスター**:
 
-複数ゾーン・クラスターがある場合、アプリ・インスタンスはさまざまなゾーンにまたがってワーカーのポッドにデプロイされます。 複数ゾーンのアプリ・インスタンスに対する要求をロード・バランシングするための次の LoadBalancer のセットアップを見てみましょう。
-
-<img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="LoadBalancer サービスを使用して複数ゾーン・クラスターでアプリのロード・バランシングを行う" style="width:700px; border-style: none"/>
-
-1. **低い可用性: 1 ゾーンにロード・バランサーをデプロイ。** デフォルトでは、各ロード・バランサーが 1 ゾーンにのみセットアップされます。 1 つだけしかロード・バランサーをデプロイしない場合は、そのロード・バランサーが、デプロイ先のゾーンのアプリ・インスタンスへの要求と、他のゾーンのアプリ・インスタンスへの要求を転送する必要があります。
-
-2. **高い可用性: 各ゾーンにロード・バランサーをデプロイ。** アプリ・インスタンスが存在するすべてのゾーンにロード・バランサーをデプロイすると、より高い可用性を確保できます。 ラウンドロビン・サイクルでさまざまなゾーンのロード・バランサーが要求を処理します。 また、各ロード・バランサーは、デプロイ先のゾーンのアプリ・インスタンスへの要求と、他のゾーンのアプリ・インスタンスへの要求を転送します。
 
 
 <br />
 
 
+   </td>
+        </tr>
+        <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。ポッドをターゲットにしてサービス・ロード・バランシングに含めるには、<em>&lt;selectorkey&gt;</em> と <em>&lt;selectorvalue&gt;</em> の値を確認します。これらが、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用した<em>キーと値</em> のペアと同じであることを確認してください。</td>
+        </tr>
+        <tr>
+          <td><code>port</code></td>
+          <td>サービスが listen するポート。</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIP</code></td>
+          <td>プライベート LoadBalancer を作成するには、またはパブリック LoadBalancer 用に特定のポータブル IP アドレスを使用するには、<em>&lt;IP_address&gt;</em> を、使用する IP アドレスに置き換えます。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer) を参照してください。</td>
+        </tr>
+        </tbody></table>
 
-## 複数ゾーン・クラスターでアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする
-{: #multi_zone_config}
+      3. オプション: **spec** セクションに `loadBalancerSourceRanges` を指定してファイアウォールを構成します。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/) を参照してください。
 
-注:
-  * このフィーチャーを使用できるのは、標準クラスターの場合に限られます。
-  * LoadBalancer サービスは TLS 終端をサポートしていません。 アプリで TLS 終端が必要な場合は、[Ingress](cs_ingress.html) を使用してアプリを公開するか、または TLS 終端を管理するようにアプリを構成することができます。
+      4. クラスター内にサービスを作成します。
 
-開始前に、以下のことを行います。
-  * ポータブル・プライベート IP アドレスを持つロード・バランサー・サービスでは、すべてのワーカー・ノードでパブリック NodePort がまだ開いています。 パブリック・トラフィックを回避するためのネットワーク・ポリシーを追加する方法については、[着信トラフィックのブロック](cs_network_policy.html#block_ingress)を参照してください。
-  * ロード・バランサーは各ゾーンにデプロイする必要があり、各ロード・バランサーにはそのゾーン内の独自の IP アドレスが割り当てられます。パブリック・ロード・バランサーを作成するには、各ゾーンで使用できるポータブル・サブネットを含むパブリック VLAN が 1 つ以上必要です。プライベート・ロード・バランサー・サービスを追加するには、各ゾーンで使用できるポータブル・サブネットを含むプライベート VLAN が 1 つ以上必要です。サブネットを追加する方法については、[クラスターのサブネットの構成](cs_subnets.html)を参照してください。
-  * ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する場合は、各ゾーンで 2 つ以上の[エッジ・ワーカー・ノード](cs_edge.html#edge)を有効にしてください。 エッジ・ワーカー・ノードが有効なゾーンと有効でないゾーンがある場合、ロード・バランサーが均一にデプロイされません。 一部のゾーンではロード・バランサーがエッジ・ノードにデプロイされても、他のゾーンでは通常のワーカー・ノードにデプロイされます。
-  * 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](cs_users.html#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)を使用します。{{site.data.keyword.BluDirectLink}} を使用している場合は、代わりに[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) を使用する必要があります。VRF を有効にするには、IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください。
+          ```
+          kubectl apply -f myloadbalancer.yaml
+          ```
+          {: pre}
 
+          ロード・バランサー・サービスが作成される際に、ロード・バランサーにポータブル IP アドレスが自動的に割り当てられます。 使用可能なポータブル IP アドレスがなければ、ロード・バランサー・サービスは作成できません。
 
-複数ゾーン・クラスターで LoadBalancer サービスをセットアップするには、次の手順を実行します。
-1.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 アプリをクラスターにデプロイする際に、コンテナー内のアプリを実行するポッドが 1 つ以上自動的に作成されます。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルは、アプリが実行されるすべてのポッドを識別してロード・バランシングに含めるために必要です。
-
-2.  公開するアプリのロード・バランサー・サービスを作成します。 アプリを公共のインターネットまたはプライベート・ネットワーク上で利用可能にするには、アプリの Kubernetes サービスを作成します。 アプリを構成しているすべてのポッドをロード・バランシングに含めるようにサービスを構成します。
-  1. `myloadbalancer.yaml` などの名前のサービス構成ファイルを作成します。
-  2. 公開するアプリのロード・バランサー・サービスを定義します。 プライベートまたはパブリックのポータブル・サブネットの IP アドレスと、ゾーンを指定できます。
-      - ゾーンと IP アドレスの両方を選択するには、`ibm-load-balancer-cloud-provider-zone` アノテーションを使用してゾーンを指定し、`loadBalancerIP` フィールドを使用してそのゾーンに設定されているパブリック IP アドレスまたはプライベート IP アドレスを指定します。
-      - IP アドレスのみを選択するには、`loadBalancerIP` フィールドを使用して、パブリック IP アドレスまたはプライベート IP アドレスを指定します。 ロード・バランサーは、IP アドレスの VLAN があるゾーンに作成されます。
-      - ゾーンのみを選択するには、`ibm-load-balancer-cloud-provider-zone` アノテーションを使用してゾーンを指定します。 指定したゾーンのポータブル IP アドレスが使用されます。
-      - IP アドレスもゾーンも指定しない場合、クラスターがパブリック VLAN 上にあれば、ポータブル・パブリック IP アドレスが使用されます。 ほとんどのクラスターはパブリック VLAN 上にあります。 クラスターがプライベート VLAN 上でのみ使用可能な場合は、ポータブル・プライベート IP アドレスが使用されます。 ロード・バランサーは、VLAN があるゾーンに作成されます。
-
-      アノテーションを使用してプライベートまたはパブリックのロード・バランサーとゾーンを指定し、`loadBalancerIP` セクションを使用して IP アドレスを指定する LoadBalancer サービス。
-
-      ```
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: myloadbalancer
-        annotations:
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
-      spec:
-        type: LoadBalancer
-        selector:
-          <selector_key>: <selector_value>
-        ports:
-         - protocol: TCP
-             port: 8080
-          loadBalancerIP: <IP_address>
-      ```
-      {: codeblock}
-
-      <table>
-      <caption>YAML ファイルの構成要素について</caption>
-      <thead>
-      <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-      </thead>
-      <tbody>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-        <td>LoadBalancer のタイプを指定するアノテーション。 指定可能な値は <code>private</code> と <code>public</code> です。 パブリック VLAN 上のクラスターにパブリック LoadBalancer を作成する場合には、このアノテーションは必要ありません。</td>
-      </tr>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>ゾーンを指定するアノテーション。 ゾーンを表示するには、<code>ibmcloud ks zones</code> を実行します。</td>
-      </tr>
-      <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにしてサービス・ロード・バランシングに含めるには、<em>&lt;selectorkey&gt;</em> と <em>&lt;selectorvalue&gt;</em> の値を確認します。 これらが、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用した<em>キーと値</em> のペアと同じであることを確認してください。</td>
-      </tr>
-      <tr>
-        <td><code>port</code></td>
-        <td>サービスが listen するポート。</td>
-      </tr>
-      <tr>
-        <td><code>loadBalancerIP</code></td>
-        <td>プライベート LoadBalancer を作成するには、またはパブリック LoadBalancer 用に特定のポータブル IP アドレスを使用するには、<em>&lt;IP_address&gt;</em> を、使用する IP アドレスに置き換えます。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer) を参照してください。</td>
-      </tr>
-      </tbody></table>
-
-  3. オプション: **spec** セクションに `loadBalancerSourceRanges` を指定してファイアウォールを構成します。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/) を参照してください。
-
-  4. クラスター内にサービスを作成します。
-
-      ```
-      kubectl apply -f myloadbalancer.yaml
-      ```
-      {: pre}
-
-3. ロード・バランサー・サービスが正常に作成されたことを確認します。 _&lt;myservice&gt;_ を、前のステップで作成したロード・バランサー・サービスの名前に置き換えます。
+3.  ロード・バランサー・サービスが正常に作成されたことを確認します。_&lt;myservice&gt;_ を、前のステップで作成したロード・バランサー・サービスの名前に置き換えます。
 
     ```
     kubectl describe service myloadbalancer
@@ -164,7 +104,7 @@ LoadBalancer サービスは、アプリに対する着信要求のための外�
     Labels:                 <none>
     Selector:               app=liberty
     Type:                   LoadBalancer
-    Zone:                   dal10
+    Location:               dal10
     IP:                     172.21.xxx.xxx
     LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP
@@ -190,20 +130,20 @@ LoadBalancer サービスは、アプリに対する着信要求のための外�
         ```
         {: codeblock}        
 
-5. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+5. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
 
-6. 他のゾーンからのアプリへの着信要求を処理するには、上記の手順を繰り返して各ゾーンにロード・バランサーを追加します。
+6. オプション: 他のゾーンからのアプリへの着信要求を処理するには、各ゾーンでこれらのステップを繰り返してロード・バランサーを追加します。
 
-7. オプション: ロード・バランサー・サービスは、サービスの NodePort を介してアプリを使用できるようにします。 [NodePort](cs_nodeport.html) には、クラスター内のすべてのノードのすべてのパブリック IP アドレスおよびプライベート IP アドレスでアクセスできます。 ロード・バランサー・サービスを使用しつつ、NodePort へのトラフィックをブロックするには、[LoadBalancer または NodePort サービスへのインバウンド・トラフィックの制御](cs_network_policy.html#block_ingress)を参照してください。
+</staging>
 
-## 単一ゾーン・クラスターでアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする
+## LoadBalancer サービスを使用してアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする
 {: #config}
 
 開始前に、以下のことを行います。
 
 -   このフィーチャーを使用できるのは、標準クラスターの場合に限られます。
 -   ロード・バランサー・サービスに割り当てることのできるポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスが必要です。
--   ポータブル・プライベート IP アドレスを持つロード・バランサー・サービスでは、すべてのワーカー・ノードでパブリック NodePort がまだ開いています。 パブリック・トラフィックを回避するためのネットワーク・ポリシーを追加する方法については、[着信トラフィックのブロック](cs_network_policy.html#block_ingress)を参照してください。
+-   ポータブル・プライベート IP アドレスを持つロード・バランサー・サービスでは、すべてのワーカー・ノードでパブリック NodePort がまだ開いています。パブリック・トラフィックを回避するためのネットワーク・ポリシーを追加する方法については、[着信トラフィックのブロック](cs_network_policy.html#block_ingress)を参照してください。
 
 ロード・バランサー・サービスを作成するには、以下のようにします。
 
@@ -261,7 +201,7 @@ LoadBalancer サービスは、アプリに対する着信要求のための外�
         <tbody>
         <tr>
           <td><code>selector</code></td>
-          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにしてサービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> と <em>&lt;selector_value&gt;</em> の値を確認します。 これらが、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用した<em>キーと値</em> のペアと同じであることを確認してください。</td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。ポッドをターゲットにしてサービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> と <em>&lt;selector_value&gt;</em> の値を確認します。これらが、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用した<em>キーと値</em> のペアと同じであることを確認してください。</td>
         </tr>
         <tr>
           <td><code>port</code></td>
@@ -331,9 +271,7 @@ LoadBalancer サービスは、アプリに対する着信要求のための外�
         ```
         {: codeblock}
 
-5. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
-
-6. オプション: ロード・バランサー・サービスは、サービスの NodePort を介してアプリを使用できるようにします。 [NodePort](cs_nodeport.html) には、クラスター内のすべてのノードのすべてのパブリック IP アドレスおよびプライベート IP アドレスでアクセスできます。 ロード・バランサー・サービスを使用しつつ、NodePort へのトラフィックをブロックするには、[LoadBalancer または NodePort サービスへのインバウンド・トラフィックの制御](cs_network_policy.html#block_ingress)を参照してください。
+5. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
 
 <br />
 
@@ -341,21 +279,20 @@ LoadBalancer サービスは、アプリに対する着信要求のための外�
 ## ソース IP のためにノード・アフィニティーと耐障害性をアプリ・ポッドに追加する
 {: #node_affinity_tolerations}
 
-アプリへのクライアント要求がクラスターに送信されると、その要求は、アプリを公開しているロード・バランサー・サービス・ポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、ロード・バランサーは異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 パッケージのソース IP アドレスは、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。
+アプリ・ポッドをデプロイすると、必ず、ロード・バランサー・サービス・ポッドも、アプリ・ポッドをデプロイしたワーカー・ノードにデプロイされます。 しかし、次のように、ロード・バランサー・ポッドとアプリ・ポッドが同じワーカー・ノードにスケジュールされない状況もあります。
+{: shortdesc}
 
-クライアント要求の元のソース IP アドレスを保持するには、ロード・バランサー・サービスの[ソース IP を有効化 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) します。 TCP の接続先はアプリ・ポッドになるので、アプリはイニシエーターの実際のソース IP アドレスを認識できます。 クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。
-
-ソース IP を有効にした場合は、ロード・バランサー・サービス・ポッドは、同じワーカー・ノードにデプロイされているアプリ・ポッドにのみ要求を転送しなければなりません。 通常、ロード・バランサー・サービス・ポッドも、アプリ・ポッドをデプロイしたワーカー・ノードにデプロイされます。 しかし、次のように、ロード・バランサー・ポッドとアプリ・ポッドが同じワーカー・ノードにスケジュールされない状況もあります。
-
-* エッジ・ノードにテイントがあるため、これらのエッジ・ノードにデプロイできるのはロード・バランサー・サービス・ポッドのみです。 このようなノードにはアプリ・ポッドをデプロイできません。
+* エッジ・ノードにテイントがあるため、これらのエッジ・ノードにデプロイできるのはロード・バランサー・サービス・ポッドのみです。このようなノードにはアプリ・ポッドをデプロイできません。
 * 複数のパブリック VLAN またはプライベート VLAN にクラスターが接続されている場合、1 つの VLAN のみに接続されているワーカー・ノードにアプリ・ポッドはデプロイされます。 ロード・バランサーの IP アドレスがワーカー・ノードとは別の VLAN に接続されているという理由で、このようなワーカー・ノードにはロード・バランサー・サービス・ポッドはデプロイされない可能性があります。
 
-ロード・バランサー・サービス・ポッドもデプロイできる特定のワーカー・ノードに強制的にアプリをデプロイするには、アフィニティー・ルールと耐障害性をアプリのデプロイメントに追加する必要があります。
+アプリへのクライアント要求がクラスターに送信されると、その要求は、アプリを公開している Kubernetes ロード・バランサー・サービス・ポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、ロード・バランサーは異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。パッケージのソース IP アドレスは、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。
+
+クライアント要求の元のソース IP アドレスを保持するには、ロード・バランサー・サービスの[ソース IP を有効化 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) します。クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。 ソース IP を有効にした場合は、ロード・バランサー・サービス・ポッドは、同じワーカー・ノードにデプロイされているアプリ・ポッドにのみ要求を転送しなければなりません。 ロード・バランサー・サービス・ポッドもデプロイできる特定のワーカー・ノードに強制的にアプリをデプロイするには、アフィニティー・ルールと耐障害性をアプリのデプロイメントに追加する必要があります。
 
 ### エッジ・ノードのアフィニティー・ルールと耐障害性を追加する
 {: #edge_nodes}
 
-[ワーカー・ノードにエッジ・ノードのラベルを付け](cs_edge.html#edge_nodes)、さらに[エッジ・ノードにテイントを適用する](cs_edge.html#edge_workloads)場合、ロード・バランサー・サービス・ポッドはそれらのエッジ・ノードにのみデプロイされ、アプリ・ポッドはエッジ・ノードにデプロイできません。 ロード・バランサー・サービスでソース IP が有効になっている場合、エッジ・ノード上のロード・バランサー・ポッドは、着信要求を他のワーカー・ノード上のアプリ・ポッドに転送できません。
+[ワーカー・ノードにエッジ・ノードのラベルを付け](cs_edge.html#edge_nodes)、さらに[エッジ・ノードにテイントを適用する](cs_edge.html#edge_workloads)場合、ロード・バランサー・サービス・ポッドはそれらのエッジ・ノードにのみデプロイされ、アプリ・ポッドはエッジ・ノードにデプロイできません。ロード・バランサー・サービスでソース IP が有効になっている場合、エッジ・ノード上のロード・バランサー・ポッドは、着信要求を他のワーカー・ノード上のアプリ・ポッドに転送できません。
 {:shortdesc}
 
 アプリ・ポッドをエッジ・ノードに強制的にデプロイするには、エッジ・ノードの[アフィニティー・ルール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) と[耐障害性 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) をアプリのデプロイメントに追加します。
@@ -398,7 +335,7 @@ spec:
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
 
-1. ロード・バランサー・サービスのパブリック IP アドレスを取得します。 **LoadBalancer Ingress** フィールドの IP アドレスを確認してください。
+1. ロード・バランサー・サービスのパブリック IP アドレスを取得します。**LoadBalancer Ingress** フィールドの IP アドレスを確認してください。
     ```
     kubectl describe service <loadbalancer_service_name>
     ```
@@ -408,7 +345,7 @@ spec:
 
     1. クラスターのポータブル・パブリック VLAN をリストします。
         ```
-        ibmcloud ks cluster-get <cluster_name_or_ID> --showResources
+        bx cs cluster-get <cluster_name_or_ID> --showResources
         ```
         {: pre}
 
@@ -425,7 +362,7 @@ spec:
 
     2. **Subnet VLANs** の下にある出力で、先ほど取得したロード・バランサーの IP アドレスと一致するサブネット CIDR を見つけ、その VLAN ID をメモします。
 
-        例えば、ロード・バランサー・サービスの IP アドレスが `169.36.5.xxx` の場合、前のステップの出力例で一致するサブネットは `169.36.5.xxx/29` です。 そのサブネットが接続する VLAN ID は、`2234945` です。
+        例えば、ロード・バランサー・サービスの IP アドレスが `169.36.5.xxx` の場合、前のステップの出力例で一致するサブネットは `169.36.5.xxx/29` です。そのサブネットが接続する VLAN ID は、`2234945` です。
 
 3. アプリのデプロイメントに、前の手順でメモした VLAN ID に対する[アフィニティー・ルールを追加 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) します。
 
@@ -505,4 +442,3 @@ spec:
         {: screen}
 
     4. 出力の **Labels** セクションのパブリック VLAN またはプライベート VLAN が、前の手順で指定した VLAN であることを確認します。
-

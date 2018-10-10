@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-09-11"
 # チュートリアル: Cloud Foundry からクラスターへのアプリのマイグレーション
 {: #cf_tutorial}
 
-Cloud Foundry を使用して以前にデプロイしたアプリを取得し、コンテナー内の同じコードを {{site.data.keyword.containerlong_notm}} 内の Kubernetes クラスターにデプロイできます。
+Cloud Foundry を使用して以前にデプロイしたアプリを取得し、コンテナー内の同じコードを {{site.data.keyword.containershort_notm}} 内の Kubernetes クラスターにデプロイできます。
 {: shortdesc}
 
 
@@ -41,7 +41,6 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 - [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](../services/Registry/index.html)。
 - [クラスターを作成します](cs_clusters.html#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
-- [**Editor**、**Operator**、または **Administrator** のプラットフォーム役割があることを確認します](cs_users.html#add_users_cli)。
 - [Docker および Kubernetes の用語について学習します](cs_tech.html)。
 
 
@@ -68,7 +67,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
     a. カタログの**ボイラープレート**で、**Python Flask** をクリックします。 このボイラープレートには、Python 2 と Python 3 の両方のアプリ用のランタイム環境が含まれています。
 
     b. アプリ名 `cf-py-<name>` を入力して、**「作成」**をクリックします。 ボイラープレートのアプリ・コードにアクセスするには、まず CF アプリをクラウドにデプロイする必要があります。 アプリには任意の名前を使用できます。 例にある名前を使用する場合は、`<name>` を固有 ID で置き換えます (例: `cf-py-msx`)。
-
+    
     **注意**: アプリ、コンテナー・イメージ、Kubernetes リソースの名前には、個人情報を使用しないでください。
 
     アプリをデプロイすると、「コマンド・ライン・インターフェースでアプリをダウンロード、変更、および再デプロイする」ための指示が表示されます。
@@ -128,14 +127,14 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 4. アプリ・コードを含むイメージを作成し、それを専用レジストリーにプッシュします。
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
   <table>
   <caption>このコマンドの構成要素について</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="このアイコンは、このコマンドの構成要素の詳細を表示できることを示しています。"/> このコマンドの構成要素について</th>
+  <th colspan=2><img src="images/idea.png" alt="このアイコンは、このコマンドの構成要素の詳細を表示できることを示しています。"/> このコマンドの構成要素について理解する</th>
   </thead>
   <tbody>
   <tr>
@@ -148,7 +147,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>専用  レジストリーのパス。これには、固有の名前空間とイメージの名前が含まれます。 この例では、イメージの名前にアプリのディレクトリーと同じ名前を使用していますが、専用レジストリーのイメージには任意の名前を選択できます。 名前空間がわからない場合は、`ibmcloud cr namespaces` コマンドを実行して調べることができます。</td>
+  <td>専用  レジストリーのパス。これには、固有の名前空間とイメージの名前が含まれます。 この例では、イメージの名前にアプリのディレクトリーと同じ名前を使用していますが、専用レジストリーのイメージには任意の名前を選択できます。 名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -157,7 +156,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   </tbody>
   </table>
 
-  プライベート・レジストリー内にイメージが作成されます。 `ibmcloud cr images` コマンドを実行すると、イメージが作成されたことを確認できます。
+  プライベート・レジストリー内にイメージが作成されます。 `bx cr images` コマンドを実行すると、イメージが作成されたことを確認できます。
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -223,7 +222,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   <tbody>
   <tr>
   <td><code>イメージ</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。 名前空間がわからない場合は、`ibmcloud cr namespaces` コマンドを実行して調べることができます。</td>
+  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。 名前空間がわからない場合は、`bx cr namespaces` コマンドを実行して調べることができます。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -251,7 +250,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
     a.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -259,7 +258,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 

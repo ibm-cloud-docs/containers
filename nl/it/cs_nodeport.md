@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -40,7 +40,7 @@ che è stato assegnato durante la creazione del cluster e la NodePort nel format
 
 Il seguente diagramma mostra come viene diretta la comunicazione da Internet a un'applicazione quando è configurato un servizio NodePort:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containerlong_notm}} utilizzando NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando NodePort" style="width:550px; border-style: none"/>
 
 1. Viene inviata una richiesta alla tua applicazione utilizzando l'indirizzo IP pubblico del tuo nodo di lavoro e la NodePort sul nodo di lavoro.
 
@@ -51,14 +51,14 @@ Il seguente diagramma mostra come viene diretta la comunicazione da Internet a u
 4. La richiesta viene inoltrata all'indirizzo IP privato del pod in cui è distribuita l'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, il servizio NodePort instrada le richieste tra i pod dell'applicazione.
 
 **Nota:** l'indirizzo IP pubblico del nodo di lavoro non è permanente. Quando un nodo di lavoro viene rimosso
-o ricreato, a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Puoi utilizzare NodePort per testare l'accesso pubblico per la tua applicazione
+o ricreato, a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Puoi utilizzare NodePort per verificare l'accesso pubblico per la tua applicazione
 o se l'accesso pubblico è richiesto solo per un breve periodo. Quando hai bisogno di un indirizzo IP pubblico stabile
 e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione utilizzando un [Servizio LoadBalancer](cs_loadbalancer.html) o [Ingress](cs_ingress.html).
 
 <br />
 
 
-## Abilitazione dell'accesso a un'applicazione utilizzando un servizio NodePort
+## Abilitazione dell'accesso pubblico a un'applicazione utilizzando un servizio NodePort
 {: #config}
 
 Puoi esporre la tua applicazione come un servizio Kubernetes NodePort per i cluster gratuito o standard.
@@ -104,7 +104,7 @@ Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di ese
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Sostituisci <code><em>&lt;my-selector-key&gt;</em></code> e <code><em>&lt;my-selector-value&gt;</em></code> con la coppia chiave/valore che hai utilizzato nella sezione <code>spec.template.metadata.labels</code> del tuo file yaml di distribuzione. Per associare il servizio alla distribuzione, il selettore deve mettere in corrispondenza le etichette di distribuzione.
+      <td>Sostituisci <code><em>&lt;my-selector-key&gt;</em></code> e <code><em>&lt;my-selector-value&gt;</em></code> con la coppia chiave/valore che hai utilizzato nella sezione <code>spec.template.metadata.labels</code> del tuo file yaml di distribuzione.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -123,12 +123,12 @@ Se ancora non hai un'applicazione pronta, puoi utilizzare un'applicazione di ese
 
 **Operazioni successive:**
 
-Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro e la NodePort per formare l'URL pubblico per accedere all'applicazione da un browser. Se i tuoi nodi di lavoro sono connessi solo a una VLAN privata, è stato creato un servizio NodePort privato ed è possibile accedervi tramite l'indirizzo IP privato del nodo di lavoro.
+Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro e la NodePort per formare l'URL pubblico per accedere all'applicazione da un browser.
 
-1.  Ottieni l'indirizzo IP pubblico per un nodo di lavoro nel cluster. Se vuoi accedere al nodo di lavoro su una rete privata, ottieni invece l'indirizzo IP privato.
+1.  Ottieni l'indirizzo IP pubblico per un nodo di lavoro nel cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -166,6 +166,6 @@ Quando l'applicazione viene distribuita, puoi utilizzare l'indirizzo IP pubblico
     {: screen}
 
     In questo esempio, la NodePort è `30872`.</br>
-    **Nota:** se la sezione **Endpoints** mostra `<none>`, controlla `<selectorkey>` e `<selectorvalue>` che hai utilizzato nella sezione `spec.selector` del servizio NodePort. Assicurati che siano gli stessi della coppia _chiave/valore_ che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione.
+    **Nota:** se la sezione **Endpoints** mostra `<none>`, controlla `<selectorkey>` e `<selectorvalue>` che hai utilizzato nella sezione `spec.selector` del servizio NodePort. Assicurati che siano gli stessi della coppia _chiave/valore_ che hai utilizzato nella sezione `spec.template.metadata.labels` del tuo file yaml di distribuzione. 
 
-3.  Forma l'URL con uno degli indirizzi IP del nodo di lavoro e la NodePort. Esempio: `http://192.0.2.23:30872`
+3.  Forma l'URL con uno degli indirizzi IP pubblici del nodo di lavoro e la NodePort. Esempio: `http://192.0.2.23:30872`

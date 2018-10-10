@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -44,7 +44,7 @@ privados devem ser configurados pelo administrador de cluster para assegurar que
 privado estejam disponíveis para os usuários do cluster.
 
 
-É possível usar múltiplos registros com o {{site.data.keyword.containerlong_notm}} para implementar apps em seu cluster.
+É possível usar múltiplos registros com o {{site.data.keyword.containershort_notm}} para implementar apps em seu cluster.
 
 |Registro|Descrição|Benefício|
 |--------|-----------|-------|
@@ -88,7 +88,7 @@ Saiba mais sobre [como proteger suas informações pessoais](cs_secure.html#pi) 
 
 Ao criar um cluster, segredos e tokens de registro sem expiração são criados automaticamente para o [registro regional mais próximo e o registro global](/docs/services/Registry/registry_overview.html#registry_regions). O registro global armazena com segurança as imagens públicas fornecidas pela IBM às quais é possível se referir em suas implementações em vez de ter referências diferentes para imagens que são armazenadas em cada registro regional. O registro regional armazena com segurança suas próprias imagens privadas do Docker, bem como as mesmas imagens públicas que são armazenadas no registro global. Os tokens são usados para autorizar acesso somente leitura a qualquer um dos namespaces que você configurou no {{site.data.keyword.registryshort_notm}} para que possa trabalhar com essas imagens públicas (registro global) e privadas (registros regionais).
 
-Cada token deve ser armazenado em um `imagePullSecret` do Kubernetes para que ele seja acessível para um cluster do Kubernetes quando você implementa um app conteinerizado. Quando o cluster é criado, o {{site.data.keyword.containerlong_notm}} armazena automaticamente os tokens para os registros globais (imagens públicas fornecidas pela IBM) e regionais nos segredos de pull de imagem do Kubernetes. Os segredos de pull de imagem são incluídos no namespace do Kubernetes `default`, na lista padrão de segredos no `ServiceAccount` para esse namespace e no namespace `kube-system`.
+Cada token deve ser armazenado em um `imagePullSecret` do Kubernetes para que ele seja acessível para um cluster do Kubernetes quando você implementa um app conteinerizado. Quando o cluster é criado, o {{site.data.keyword.containershort_notm}} armazena automaticamente os tokens para os registros globais (imagens públicas fornecidas pela IBM) e regionais nos segredos de pull de imagem do Kubernetes. Os segredos de pull de imagem são incluídos no namespace do Kubernetes `default`, na lista padrão de segredos no `ServiceAccount` para esse namespace e no namespace `kube-system`.
 
 **Nota:** ao usar essa configuração inicial, será possível implementar contêineres de qualquer imagem que estiver disponível em um namespace na conta do {{site.data.keyword.Bluemix_notm}} no namespace **padrão** do cluster. Para implementar um contêiner em outros namespaces de seu cluster ou para usar uma imagem que está armazenada em outra região do {{site.data.keyword.Bluemix_notm}} ou em outra conta do {{site.data.keyword.Bluemix_notm}}, deve-se [criar seu próprio imagePullSecret para o cluster](#other).
 
@@ -122,7 +122,7 @@ Para implementar um contêiner no namespace **padrão** de seu cluster, crie um 
     ```
     {: codeblock}
 
-    **Dica:** para recuperar suas informações de namespace, execute `ibmcloud cr namespace-list`.
+    **Dica:** para recuperar informações de seu namespace, execute `bx cr namespace-list`.
 
 3.  Crie a implementação em seu cluster.
 
@@ -226,7 +226,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
 2.  Liste tokens em sua conta. {{site.data.keyword.Bluemix_notm}}
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -234,7 +234,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
 4.  Recupere o valor para seu token. Substitua <em>&lt;token_ID&gt;</em> pelo ID do token que você recuperou na etapa anterior.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -267,7 +267,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Necessário. O nome do usuário para efetuar login no seu registro privado. Para o {{site.data.keyword.registryshort_notm}}, o nome do usuário é configurado para o valor <strong><code>token</code></strong>.</td>
+    <td>Necessário. O nome do usuário para efetuar login no seu registro privado. Para {{site.data.keyword.registryshort_notm}}, o nome de usuário é configurado como <code>token</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -404,11 +404,11 @@ Ao se referir ao imagePullSecret em uma implementação do pod, o imagePullSecre
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>O namespace no qual a imagem é armazenada. Para listar os namespaces disponíveis, execute `ibmcloud cr namespace-list`.</td>
+    <td>O namespace no qual a imagem é armazenada. Para listar os namespaces disponíveis, execute `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `ibmcloud cr image-list`.</td>
+    <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `bx cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -489,4 +489,5 @@ Cada namespace tem uma conta de serviço do Kubernetes denominada `default`. É 
    {: pre}
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -17,13 +17,13 @@ lastupdated: "2018-09-10"
 
 
 
-# Customizando o Ingresso com Anotações
+# Anotações de ingresso
 {: #ingress_annotation}
 
 Para incluir recursos em seu application load balancer (ALB) de Ingresso, é possível especificar anotações como metadados em um recurso de Ingresso.
 {: shortdesc}
 
-**Importante**: antes de usar anotações, verifique se definiu corretamente a configuração do serviço Ingresso seguindo as etapas em [Expondo apps com o Ingresso](cs_ingress.html). Assim que você tiver configurado o ALB do Ingresso com uma configuração básica, será possível expandir os seus recursos incluindo anotações no arquivo do recurso Ingresso.
+Para obter informações gerais sobre os serviços Ingress e como começar a utilizá-los, veja [Gerenciando o tráfego de rede usando o Ingress](cs_ingress.html#planning).
 
 <table>
 <caption>Anotações gerais</caption>
@@ -47,11 +47,6 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
  <td>Modifique a maneira com que o ALB corresponde o URI de solicitação ao caminho do app.</td>
  </tr>
  <tr>
- <td><a href="#location-snippets"> Snippets de local </a></td>
- <td><code> location-snippets </code></td>
- <td>Inclua uma configuração de bloco de local customizado para um serviço.</td>
- </tr>
- <tr>
  <td><a href="#alb-id">Roteamento de ALB privado</a></td>
  <td><code>ALB-ID</code></td>
  <td>Roteie as solicitações recebidas para seus apps com um ALB privado.</td>
@@ -60,11 +55,6 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
  <td><a href="#rewrite-path">Gravar novamente caminhos</a></td>
  <td><code>rewrite-path</code></td>
  <td>Roteie o tráfego de rede recebido para um caminho diferente em que seu app backend atende.</td>
- </tr>
- <tr>
- <td><a href="#server-snippets"> Fragmentos do servidor </a></td>
- <td><code> server-snippets </code></td>
- <td>Inclua uma configuração de bloco do servidor customizado.</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">Portas TCP</a></td>
@@ -112,19 +102,9 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
   <td>Sempre rotear o tráfego de rede recebido para o mesmo servidor de envio de dados usando um cookie permanente.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-fail-timeout"> Failtimeout de envio de dados </a></td>
-  <td><code> upstream-fail-timeout </code></td>
-  <td>Configure a quantia de tempo durante a qual o ALB pode tentar se conectar ao servidor antes que o servidor seja considerado indisponível.</td>
-  </tr>
-  <tr>
   <td><a href="#upstream-keepalive">Envio de dados keep-alive</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>Configure o número máximo de conexões keep-alive inativas para um servidor de envio de dados.</td>
-  </tr>
-  <tr>
-  <td><a href="#upstream-max-fails"> maxfailover do envio de dados </a></td>
-  <td><code> upstream-max-falha </code></td>
-  <td>Configure o número máximo de tentativas malsucedidas para se comunicar com o servidor antes que o servidor seja considerado indisponível.</td>
   </tr>
   </tbody></table>
 
@@ -242,9 +222,14 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
 </thead>
 <tbody>
 <tr>
-<td><a href="#add-host-port"> Incluir a porta do servidor no cabeçalho do host </a></td>
-<td><code>add-host-port</code></td>
-<td>Inclua a porta do servidor para o host para solicitações de roteamento.</td>
+<td><a href="#proxy-add-headers">Solicitação do cliente ou cabeçalho de resposta adicional</a></td>
+<td><code>proxy-add-headers, response-add-headers</code></td>
+<td>Inclua informações do cabeçalho em uma solicitação do cliente antes de encaminhar a solicitação para seu app backend ou para uma resposta do cliente antes de enviar a resposta para o cliente.</td>
+</tr>
+<tr>
+<td><a href="#response-remove-headers">Remoção do cabeçalho de resposta do cliente</a></td>
+<td><code>response-remove-headers</code></td>
+<td>Remover informações do cabeçalho de uma resposta do cliente antes de encaminhar a resposta para o cliente.</td>
 </tr>
 <tr>
 <td><a href="#client-max-body-size">Tamanho do corpo da solicitação do cliente</a></td>
@@ -255,16 +240,6 @@ Para incluir recursos em seu application load balancer (ALB) de Ingresso, é pos
 <td><a href="#large-client-header-buffers">Buffers de cabeçalhos do cliente grandes</a></td>
 <td><code>large-client-header-buffers</code></td>
 <td>Configure o número e o tamanho máximo dos buffers que leem cabeçalhos de solicitação de cliente grandes.</td>
-</tr>
-<tr>
-<td><a href="#proxy-add-headers">Solicitação do cliente ou cabeçalho de resposta adicional</a></td>
-<td><code>proxy-add-headers, response-add-headers</code></td>
-<td>Inclua informações do cabeçalho em uma solicitação do cliente antes de encaminhar a solicitação para seu app backend ou para uma resposta do cliente antes de enviar a resposta para o cliente.</td>
-</tr>
-<tr>
-<td><a href="#response-remove-headers">Remoção do cabeçalho de resposta do cliente</a></td>
-<td><code>response-remove-headers</code></td>
-<td>Remover informações do cabeçalho de uma resposta do cliente antes de encaminhar a resposta para o cliente.</td>
 </tr>
 </tbody></table>
 
@@ -308,7 +283,7 @@ Inclua definições de caminho para serviços externos, como serviços hospedado
 
 <dl>
 <dt>Descrição</dt>
-<dd>Inclua definições de caminho para serviços externos. Use essa anotação somente quando seu app opera em um serviço externo em vez de um serviço de backend. Quando você usa essa anotação para criar uma rota de serviço externo, somente as anotações `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` e `proxy-buffer` são suportadas em conjunto. Quaisquer outras anotações não são suportadas em conjunto com `proxy-external-service`.<br><br><strong>Nota</strong>: não é possível especificar múltiplos hosts para um único serviço e caminho.
+<dd>Inclua definições de caminho para serviços externos. Use essa anotação somente quando seu app opera em um serviço externo em vez de um serviço de backend. Quando você usa essa anotação para criar uma rota de serviço externo, somente as anotações `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` e `proxy-buffer` são suportadas em conjunto. Quaisquer outras anotações não são suportadas em conjunto com `proxy-external-service`.
 </dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
@@ -323,7 +298,7 @@ metadados:
     ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -414,7 +389,7 @@ annotations:
   ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -445,68 +420,6 @@ spec:
 <br />
 
 
-### Fragmentos de local (location-snippets)
-{: #location-snippets}
-
-Inclua uma configuração de bloco de local customizado para um serviço.
-{:shortdesc}
-
-<dl>
-<dt>Descrição</dt>
-<dd>Um bloco do servidor é uma diretiva nginx que define a configuração para o servidor virtual do ALB. Um bloco de local é uma diretiva nginx definida dentro do bloco do servidor. Os blocos de local definem como o Ingresso processa o URI de solicitação ou a parte da solicitação que vem após o nome de domínio ou endereço IP e porta.<br><br>Quando um bloco de servidor recebe uma solicitação, o bloco de local corresponde ao URI para um caminho e a solicitação é encaminhada para o endereço IP do pod no qual o app está implementado. Usando a anotação <code>location-snippets</code>, é possível modificar como o bloco de local encaminha as solicitações para serviços específicos.<br><br>Para modificar o bloco do servidor como um todo, consulte a anotação <a href="#server-snippets">server-snippets</a>.</dd>
-
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-name: myingress
-annotations:
-  ingresso s.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice&gt;
-    # Exemplo de snippet de local
-    proxy_request_buffering off;
-    rewrite_log on;
-    proxy_set_header "x-header-test-header" "location-snippet-header";
-    &lt;EOS&gt;
-spec:
-tls:
-- hosts:
-  - mydomain
-    secretName: mytlssecret
-  rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
-
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço que você criou para seu app.</td>
-</tr>
-<tr>
-<td>Fragmento de local</td>
-<td>Forneça o fragmento de configuração que você deseja usar para o serviço especificado. Esse fragmento de amostra configura o bloco de local para desativar o armazenamento em buffer de solicitação de proxy, ativar regravações de log e configurar cabeçalhos adicionais quando ele encaminha uma solicitação para o serviço <code>myservice</code>.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
-
-<br />
-
-
 ### Roteamento de ALB privado (ALB-ID)
 {: #alb-id}
 
@@ -531,7 +444,7 @@ annotations:
   ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
 spec:
 tls:
-- hosts:
+- System z:
   - mydomain
     secretName: mytlssecret
   rules:
@@ -551,8 +464,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>O ID para seu ALB privado. Para localizar o ID de ALB privado, execute <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>.<p>
-Se você tiver um cluster de múltiplas zonas com mais de um ALB privado ativado, será possível fornecer uma lista de IDs de ALB separados por <code>;</code>. Por exemplo: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
+<td>O ID para seu ALB privado. Para localizar o ID de ALB privado, execute <code>bx cs albs --cluster &lt;my_cluster&gt;</code>.
 </td>
 </tr>
 </tbody></table>
@@ -582,7 +494,7 @@ metadados:
     ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -614,61 +526,6 @@ spec:
 <br />
 
 
-### Fragmentos do servidor (server-snippets)
-{: #server-snippets}
-
-Inclua uma configuração de bloco do servidor customizado.
-{:shortdesc}
-
-<dl>
-<dt>Descrição</dt>
-<dd>Um bloco do servidor é uma diretiva nginx que define a configuração para o servidor virtual do ALB. Usando a anotação <code>server-snippets</code>, é possível modificar como o ALB manipula solicitações fornecendo um fragmento de configuração customizada.</dd>
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-name: myingress
-annotations:
-  ingresso s.bluemix.net/server-snippets: |
-    location = /health {
-    return 200 'Healthy';
-    add_header Content-Type text/plain;
-    }
-spec:
-tls:
-- hosts:
-  - mydomain
-    secretName: mytlssecret
-  rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
-
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td>Fragmento do servidor</td>
-<td>Forneça o fragmento de configuração que você deseja usar. Esse fragmento de amostra especifica um bloco de local para manipular as solicitações <code>/health</code>. O bloco de local é configurado para retornar uma resposta funcional e incluir um cabeçalho quando ele encaminha uma solicitação.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
-
-<br />
-
-
 ### Portas TCP para balanceadores de carga de aplicativo (portas tcp)
 {: #tcp-ports}
 
@@ -680,7 +537,7 @@ Acesse um app através de uma porta TCP não padrão.
 <dd>
 Use essa anotação para um app que está executando uma carga de trabalho de fluxos de TCP.
 
-<p>**Nota**: o ALB opera no modo de passagem e encaminha o tráfego para apps de backend. A finalização de SSL não é suportada neste caso. A conexão TLS não é finalizada e passa intacta.</p>
+<p>**Nota**: o ALB opera no modo de passagem e encaminha o tráfego para apps de backend. A finalização de SSL não é suportada neste caso.</p>
 </dd>
 
 
@@ -696,7 +553,7 @@ annotations:
   ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -759,11 +616,11 @@ A saída da CLI é semelhante à seguinte:
 <code>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP 109d</code></pre></li>
 <li>Configure seu Ingresso para acessar seu app por meio de uma porta TCP não padrão. Use o arquivo YAML de amostra nesta referência. </li>
-<li>Crie seu recurso ALB ou atualize a configuração existente do ALB.
+<li>Atualize sua configuração do ALB.
 <pre class="pre">
 <code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>Use curl no subdomínio do Ingress para acessar seu app. Exemplo:  <code> curl  &lt;domain&gt;: &lt;ingressPort&gt; </code></li></ol></dd></dl>
+<li>Abra seu navegador da web preferencial para acessar seu app. Exemplo: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
 
 <br />
 
@@ -802,7 +659,7 @@ metadados:
    Ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -822,7 +679,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>O número de segundos ou minutos a aguardar para se conectar ao app de backend, por exemplo, <code>65s</code> ou <code>1m</code>. <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</td>
+ <td>O número de segundos ou minutos a esperar para se conectar ao app de backend, por exemplo <code>65s</code> ou <code>2m</code>. <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -861,7 +718,7 @@ annotations:
   ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
 spec:
 tls:
-- hosts:
+- System z:
   - mydomain
     secretName: mytlssecret
   rules:
@@ -921,7 +778,7 @@ metadados:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -977,7 +834,7 @@ metadados:
     ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -1067,7 +924,7 @@ metadados:
     ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -1111,61 +968,6 @@ spec:
 <br />
 
 
-### Failtimeout de envio de dados (upstream-fail-timeout)
-{: #upstream-fail-timeout}
-
-Configure a quantia de tempo durante a qual o ALB pode tentar se conectar ao servidor.
-{:shortdesc}
-
-<dl>
-<dt>Descrição</dt>
-<dd>
-Configure a quantia de tempo durante a qual o ALB pode tentar se conectar a um servidor antes que o servidor seja considerado indisponível. Para que um servidor seja considerado indisponível, o ALB deve atingir o número máximo de tentativas de conexão com falha configurado pela anotação <a href="#upstream-max-fails"><code>upstream-max-failed</code></a> dentro da quantia de tempo configurada. Essa quantia de tempo também determina por quanto tempo o servidor é considerado indisponível.
-</dd>
-
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: myingress
-  annotations:
-    ingresso s.bluemix.net/upstream-fail-timeout: "serviceName= &lt;myservice&gt;  fail-timeout= &lt;fail_timeout&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName(Optional)</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
-</tr>
-<tr>
-<td><code>fail-timeout</code></td>
-<td>Substitua <code>&lt;<em>fail_timeout</em>&gt;</code> pela quantia de tempo que o ALB pode tentar se conectar a um servidor antes que o servidor seja considerado indisponível. O padrão é  <code> 10s </code>. O tempo deve ser em segundos.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
-
-<br />
 
 
 ### Envio de dados keep-alive (upstream-keepalive)
@@ -1181,19 +983,19 @@ Configure o número máximo de conexões keep-alive inativas para o servidor de 
 </dd>
 
 
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
+ <dt>YAML do recurso de Ingresso de amostra</dt>
+ <dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadados:
   name: myingress
   annotations:
     ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;myservice&gt; keepalive=&lt;max_connections&gt;"
-spec:
+ spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -1205,81 +1007,27 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
-</tr>
-<tr>
-<td><code>keepalive</code></td>
-<td>Substitua <code>&lt;<em>max_connections</em>&gt;</code> pelo número máximo de conexões keep-alive inativas para o servidor de envio de dados. O padrão é <code>64</code>. Um valor <code>0</code> desativa conexões keep-alive de envio de dados para o serviço especificado.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
+ <table>
+ <caption>Entendendo os componentes de anotação</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
+  </tr>
+  <tr>
+  <td><code>keepalive</code></td>
+  <td>Substitua <code>&lt;<em>max_connections</em>&gt;</code> pelo número máximo de conexões keep-alive inativas para o servidor de envio de dados. O padrão é <code>64</code>. Um valor <code>0</code> desativa conexões keep-alive de envio de dados para o serviço especificado.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
 
 <br />
 
 
-### Upstream maxfailover (upstream-max-falha)
-{: #upstream-max-fails}
-
-Configure o número máximo de tentativas malsucedidas para se comunicar com o servidor.
-{:shortdesc}
-
-<dl>
-<dt>Descrição</dt>
-<dd>
-Configure o número máximo de vezes que o ALB pode falhar ao se conectar ao servidor antes que o servidor seja considerado indisponível. Para que o servidor seja considerado indisponível, o ALB deve atingir o número máximo dentro da duração de tempo configurada pela anotação <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code></a>. A duração de tempo em que o servidor é considerado indisponível também é configurada pela anotação <code>upstream-fail-timeout</code>.</dd>
-
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: myingress
-  annotations:
-    ingresso s.bluemix.net/upstream-max-falha: "serviceName= &lt;myservice&gt;  max-fails= &lt;max_fails&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName(Optional)</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
-</tr>
-<tr>
-<td><code> max-falha </code></td>
-<td>Substitua <code>&lt;<em>max_fails</em>&gt;</code> pelo número máximo de tentativas malsucedidas que o ALB pode fazer para se comunicar com o servidor. O padrão é <code>1</code>. Um valor <code>0</code> desativa a anotação.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
-
-<br />
 
 
 ## Anotações de autenticação HTTPS e TLS/SSL
@@ -1288,109 +1036,78 @@ spec:
 ### Autenticação do {{site.data.keyword.appid_short_notm}} (appid-auth)
 {: #appid-auth}
 
-Use {{site.data.keyword.appid_full_notm}} para autenticar com seu aplicativo.
-{:shortdesc}
+  Use {{site.data.keyword.appid_full_notm}} para autenticar com seu aplicativo.
+  {:shortdesc}
 
-<dl>
-<dt>Descrição</dt>
-<dd>
-Autentique solicitações HTTP/HTTPS da web ou da API com {{site.data.keyword.appid_short_notm}}.
+  <dl>
+  <dt>Descrição</dt>
+  <dd>
+  Autentique solicitações HTTP/HTTPS da web ou da API com {{site.data.keyword.appid_short_notm}}.
 
-<p>Se você configura o tipo de solicitação para <code>web</code>, uma solicitação da web que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a validação do token falha, a solicitação da web é rejeitada. Se a solicitação não contém um token de acesso, a solicitação é redirecionada para a página de login do {{site.data.keyword.appid_short_notm}}. <strong>Nota</strong>: para que a autenticação da web do {{site.data.keyword.appid_short_notm}} funcione, os cookies devem estar ativados no navegador do usuário.</p>
+  <p>Se você configura o tipo de solicitação para <code>web</code>, uma solicitação da web que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a validação do token falha, a solicitação da web é rejeitada. Se a solicitação não contém um token de acesso, a solicitação é redirecionada para a página de login do {{site.data.keyword.appid_short_notm}}. <strong>Nota</strong>: para que a autenticação da web do {{site.data.keyword.appid_short_notm}} funcione, os cookies devem estar ativados no navegador do usuário.</p>
 
-<p>Se você configura o tipo de solicitação para <code>api</code>, uma solicitação de API que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a solicitação não contém um token de acesso, uma mensagem de erro <code>401: Unauthorized</code> é retornada ao usuário.</p>
+  <p>Se você configura o tipo de solicitação para <code>api</code>, uma solicitação de API que contém um token de acesso do {{site.data.keyword.appid_short_notm}} é validada. Se a solicitação não contém um token de acesso, uma mensagem de erro <code>401: Unauthorized</code> é retornada ao usuário.</p>
 
-<p>**Nota**: por motivos de segurança, a autenticação {{site.data.keyword.appid_short_notm}} suporta apenas backends com TLS/SSL ativado.</p>
-</dd>
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
+  <p>**Nota**: por motivos de segurança, a autenticação {{site.data.keyword.appid_short_notm}} suporta apenas backends com TLS/SSL ativado.</p>
+  </dd>
+   <dt>YAML do recurso de Ingresso de amostra</dt>
+   <dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadados:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
+   spec:
+    tls:
+    - System z:
+      - mydomain
     secretName: mytlssecret
   rules:
-  - host: mydomain
+    - host: mydomain
     http:
       paths:
-      - path: /
+        - path: /
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>bindSecret</code></td>
-<td>Substitua <em><code>&lt;bind_secret&gt;</code></em> pelo segredo do Kubernetes que armazena o segredo de ligação para sua instância de serviço do {{site.data.keyword.appid_short_notm}}.</td>
-</tr>
-<tr>
-<td><code> namespace</code></td>
-<td>Substitua <em><code>&lt;namespace&gt;</code></em> pelo namespace do segredo de ligação. Este campo é padronizado para o namespace `padrão`.</td>
-</tr>
-<tr>
-<td><code>requestType</code></td>
-<td>Substitua <code><em>&lt;request_type&gt;</em></code> pelo tipo de solicitação que você deseja enviar para o {{site.data.keyword.appid_short_notm}}. Os valores aceitos são `web` ou `api`. O padrão é `api`.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Substitua <code><em>&lt;myservice&gt;</em></code> pelo nome do serviço Kubernetes que você criou para o seu app. Esse campo é obrigatório. Se um nome de serviço não está incluído, a anotação é ativada para todos os serviços.  Se um nome de serviço está incluído, a anotação é ativada somente para esse serviço. Separe múltiplos serviços com uma vírgula (,).</td>
-</tr>
-</tbody></table>
-</dd>
-<dt>Uso</dt></dl>
-
-Como o aplicativo usa o {{site.data.keyword.appid_short_notm}} para autenticação, deve-se provisionar uma instância do {{site.data.keyword.appid_short_notm}}, configurar a instância com URIs de redirecionamento válidos e gerar um segredo de ligação, ligando a instância a seu cluster.
-
-1. Escolha uma instância do {{site.data.keyword.appid_short_notm}} existente ou crie uma nova.
-    * Para usar uma instância existente, assegure-se de que o nome da instância de serviço não contenha espaços. Para remover espaços, selecione o menu de mais opções próximo ao nome de sua instância de serviço e selecione **Renomear serviço**.
-    * Para provisionar uma  [ nova instância do  {{site.data.keyword.appid_short_notm}}  ](https://console.bluemix.net/catalog/services/app-id):
-        1. Substitua o **Nome do serviço** preenchido automaticamente por seu próprio nome exclusivo para a instância de serviço.
-            **Importante**: o nome da instância de serviço não pode conter espaços.
-        2. Escolha a mesma região em que seu cluster está implementado.
-        3. Clique em
-**Criar**.
-2. Inclua URLs de redirecionamento para seu app. Uma URL de redirecionamento é o terminal de retorno de chamada de seu app. Para evitar ataques de phishing, o ID do app valida a URL de solicitação com relação à lista de desbloqueio de URLs de redirecionamento.
-    1. No console de gerenciamento do {{site.data.keyword.appid_short_notm}}, navegue para **Provedores de identidade > Gerenciar**.
-    2. Certifique-se de que você tenha um Provedor de Identidade selecionado. Se nenhum Provedor de Identidade estiver selecionado, o usuário não será autenticado, mas um token de acesso será emitido para acesso anônimo ao app.
-    3. No campo **Incluir URLs de redirecionamento da web**, inclua URLs de redirecionamento para seu app no formato `http://<hostname>/<app_path>/appid_callback `  ou  ` https://<hostname>/<app_path>/appid_callback `.
-        * Por exemplo, um app que está registrado com o subdomínio do IBM Ingress pode ser semelhante a `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
-        * Um app que está registrado com um domínio customizado pode ser semelhante a `http://mydomain.net/myapp2path/appid_callback`.
-
-3. Ligue a instância de serviço do {{site.data.keyword.appid_short_notm}} ao seu cluster.
-    ```
-    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
-    ```
-    {: pre}
-    Quando o serviço é incluído com sucesso em seu cluster, é criado um segredo de cluster que contém as credenciais de sua instância de serviço. Exemplo de saída da CLI:
-    ```
-    ibmcloud ks cluster-service-bind mycluster mynamespace appid1
-    Binding service instance to namespace...
-    OK
-    Namespace:    mynamespace
-    Secret name:  binding-<service_instance_name>
-    ```
-    {: screen}
-
-4. Obtenha o segredo que foi criado em seu namespace do cluster.
-    ```
-    kubectl get secrets --namespace=<namespace>
-    ```
-    {: pre}
-
-5. Use o segredo de ligação e o namespace do cluster para incluir a anotação `appid-auth` em seu recurso Ingress.
+   <table>
+   <caption>Entendendo os componentes de anotação</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>bindSecret</code></td>
+    <td>Substitua <em><code>&lt;bind_secret&gt;</code></em> pelo segredo do Kubernetes que armazena o segredo de ligação.</td>
+    </tr>
+    <tr>
+    <td><code> namespace</code></td>
+    <td>Substitua <em><code>&lt;namespace&gt;</code></em> pelo namespace do segredo de ligação. Este campo é padronizado para o namespace `padrão`.</td>
+    </tr>
+    <tr>
+    <td><code>requestType</code></td>
+    <td>Substitua <code><em>&lt;request_type&gt;</em></code> pelo tipo de solicitação que você deseja enviar para o {{site.data.keyword.appid_short_notm}}. Os valores aceitos são `web` ou `api`. O padrão é `api`.</td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Substitua <code><em>&lt;myservice&gt;</em></code> pelo nome do serviço Kubernetes que você criou para o seu app. Este campo é opcional. Se um nome de serviço não está incluído, a anotação é ativada para todos os serviços.  Se um nome de serviço está incluído, a anotação é ativada somente para esse serviço. Separe múltiplos serviços com um ponto e vírgula (;).</td>
+    </tr>
+    </tbody></table>
+    </dd>
+    <dt>Uso</dt>
+    <dd>Como o aplicativo usa o {{site.data.keyword.appid_short_notm}} para autenticação, deve-se provisionar uma instância do {{site.data.keyword.appid_short_notm}}, configurar a instância com URIs de redirecionamento válido e gerar um segredo de ligação.
+    <ol>
+    <li>Provisione uma [instância do {{site.data.keyword.appid_short_notm}}](https://console.bluemix.net/catalog/services/app-id).</li>
+    <li>No console de gerenciamento do {{site.data.keyword.appid_short_notm}}, inclua redirectURIs para seu app.</li>
+    <li>Crie um segredo de ligação.
+    <pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
+    <li>Configure a anotação <code>appid-auth</code>.</li>
+    </ol></dd>
+    </dl>
 
 <br />
 
@@ -1404,7 +1121,8 @@ Mude as portas padrão para o tráfego de rede HTTP (porta 80) e HTTPS (porta 44
 
 <dl>
 <dt>Descrição</dt>
-<dd>Por padrão, o ALB de Ingresso está configurado para atender ao tráfego de rede HTTP recebido na porta 80 e para o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.<p><strong>Nota</strong>: para ativar a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports) e, em seguida, especifique essa porta na [anotação `mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.</p></dd>
+<dd>Por padrão, o ALB de Ingresso está configurado para atender ao tráfego de rede HTTP recebido na porta 80 e para o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.
+</dd>
 
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
@@ -1419,7 +1137,7 @@ metadados:
    ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -1443,7 +1161,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Insira o número da porta a ser usado para o tráfego de rede recebido HTTP ou HTTPS.  <p><strong>Nota:</strong> quando uma porta customizada é especificada para HTTP ou HTTPS, as portas padrão não são mais válidas para HTTP e HTTPS. Por exemplo, para mudar a porta padrão para HTTPS para 8443, mas usar a porta padrão para HTTP, deve-se configurar portas customizadas para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Insira o número da porta que você deseja usar para o tráfego de rede recebido HTTP ou HTTPS.  <p><strong>Nota:</strong> quando uma porta customizada é especificada para HTTP ou HTTPS, as portas padrão não são mais válidas para HTTP e HTTPS. Por exemplo, para mudar a porta padrão para HTTPS para 8443, mas usar a porta padrão para HTTP, deve-se configurar portas customizadas para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1515,7 +1233,7 @@ metadados:
    ingress.bluemix.net/redirect-to-https: "True"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -1556,7 +1274,7 @@ metadados:
     Ingress.bluemix.net/hsts: enabled=true maxAge= &lt; 31536000 &gt; includeSubdomains = true
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -1606,10 +1324,11 @@ Configure a autenticação mútua de tráfego de recebimento de dados para o ALB
 <dt>Pré-requisitos</dt>
 <dd>
 <ul>
-<li>Deve-se ter um segredo de autenticação mútua válido que contenha o <code>ca.crt</code> necessário. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets_mutual_auth).</li>
-<li>Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports) e, em seguida, especifique essa porta nesta anotação. Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.</li>
+<li>[Deve-se ter um segredo válido que contenha a autoridade de certificação (CA) necessária](cs_app.html#secrets). O <code>client.key</code> e o <code>client.crt</code> também são necessários para autenticar com autenticação mútua.</li>
+<li>Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
+
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
@@ -1623,7 +1342,7 @@ annotations:
   ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -1671,7 +1390,58 @@ Permitir solicitações de HTTPS e criptografar o tráfego para seus apps de env
 <dl>
 <dt>Descrição</dt>
 <dd>
-Quando a sua configuração do recurso Ingresss tem uma seção TLS, o ALB do Ingresso pode manipular solicitações de URL protegida por HTTPS para o seu app. No entanto, o ALB manipula a finalização do TLS e decriptografa a solicitação antes de encaminhar o tráfego para seus apps. Se você tiver apps que requerem o protocolo HTTPS e precisar do tráfego para permanecer criptografado, use a anotação `ssl-services` para desativar a finalização do TLS padrão do ALB. O ALB finaliza a conexão do TLS e criptografa novamente o SSL antes de enviar o tráfego para o app de backend.<br></br>Além disso, se seu app de backend puder manipular o TLS e você desejar incluir segurança adicional, será possível incluir a autenticação unilateral ou mútua fornecendo um certificado que está contido em um segredo.</dd>
+Criptografe o tráfego que o Ingresso envia para apps de envio de dados que requerem HTTPS. Se seus apps de envio de dados podem manipular TLS, é possível opcionalmente fornecer um certificado que esteja contido em um segredo do TLS.<br></br>**Opcional**: é possível incluir [autenticação unidirecional ou autenticação mútua](#ssl-services-auth) nessa anotação.</dd>
+
+
+<dt>YAML do recurso de Ingresso de amostra</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadados:
+  name: &lt;myingressname&gt;
+  annotations:
+    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
+spec:
+  regras:
+  - host: mydomain
+    http:
+      paths:
+      - path: /service1_path backend: serviceName: myservice1 servicePort: 8443
+      - path: /service2_path backend: serviceName: myservice2 servicePort: 8444 </code></pre>
+
+<table>
+<caption>Entendendo os componentes de anotação</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>ssl-service</code></td>
+  <td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço que requer HTTPS. O tráfego é criptografado do ALB para o serviço desse app.</td>
+  </tr>
+  <tr>
+  <td><code>ssl-secret</code></td>
+  <td>Opcional: se você desejar usar um segredo do TLS e seu app de envio de dados puder manipular TLS, substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo para o serviço. Se você fornecer um segredo, o valor deverá conter o <code>trusted.crt</code>, <code>client.crt</code> e <code>client.key</code> que seu app está esperando do cliente. Para criar um segredo do TLS, primeiro [converta os certificados e a chave em base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/). Então, consulte [Criando segredos](cs_app.html#secrets).</td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+</dl>
+
+<br />
+
+
+#### Suporte de serviços SSL com autenticação
+{: #ssl-services-auth}
+
+<dl>
+<dt>Descrição</dt>
+<dd>
+Permita as solicitações de HTTPS e criptografe o tráfego para seus apps de envio de dados com autenticação unilateral ou mútua para segurança adicional.
+</dd>
+
 
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
@@ -1687,7 +1457,7 @@ metadados:
       ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -1707,7 +1477,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Se seu app de backend puder manipular o TLS e você desejar incluir segurança adicional, substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo de autenticação unilateral ou mútua para o serviço.<ul><li>Se você fornecer um segredo de autenticação unilateral, o valor deverá conter o <code>trusted.crt</code> do servidor de envio de dados. Para criar um segredo do TLS, consulte [Criando segredos](cs_app.html#secrets_ssl_services).</li><li>Se você fornecer um segredo de autenticação mútua, o valor deverá conter o <code>ca.crt</code> e o <code>ca.key</code> necessários que seu app está esperando do cliente. Para criar um segredo de autenticação mútua, veja [Criando segredos](cs_app.html#secrets_mutual_auth).</li></ul><strong>Aviso</strong>: se você não fornecer um segredo, as conexões não seguras serão permitidas. Você pode escolher omitir um segredo se desejar testar a conexão e não tiver certificados prontos ou se seus certificados estiverem expirados e você desejar permitir conexões não seguras.</td>
+  <td>Substitua <code>&lt;<em>service-ssl-secret</em>&gt;</code> pelo segredo de autenticação mútua para o serviço. O valor deve conter o certificado de CA que o seu app está esperando do cliente. Para criar um segredo de autenticação mútua, primeiro [converter o certificado e chave em base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/). Então, consulte [Criando segredos](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1723,166 +1493,87 @@ spec:
 ### Serviços do Istio (istio-services)
 {: #istio-services}
 
-Roteie o tráfego para serviços gerenciados pelo Istio.
-{:shortdesc}
+  Roteie o tráfego para serviços gerenciados pelo Istio.
+  {:shortdesc}
 
-<dl>
-<dt>Descrição</dt>
-<dd>
-<strong>Nota</strong>: essa anotação funciona somente com o Istio 0.7 e anterior.
-<br>Se você tiver os serviços gerenciados pelo Istio, será possível usar um ALB de cluster para rotear solicitações HTTP/HTTPS para o controlador do Ingress do Istio. O controlador do Ingress do Istio roteia então as solicitações para os serviços de app. Para rotear o tráfego, deve-se fazer mudanças nos recursos do Ingress para o ALB do cluster e o controlador do Ingress do Istio.
-<br><br>No recurso do Ingress para o ALB do cluster, deve-se:
-  <ul>
-    <li>especificar a anotação `istio-services`</li>
-    <li>definir o caminho de serviço como o caminho real no qual o app atende</li>
-    <li>definir a porta de serviço como a porta do controlador do Ingress do Istio</li>
-  </ul>
-<br>No recurso do Ingress para o controlador do Ingress do Istio, deve-se:
-  <ul>
-    <li>definir o caminho de serviço como o caminho real no qual o app atende</li>
-    <li>definir a porta de serviço como a porta de HTTP/HTTPS do serviço de app que é exposto pelo controlador do Ingress do Istio</li>
-</ul>
-</dd>
+  <dl>
+  <dt>Descrição</dt>
+  <dd>
+  Se você tiver os serviços gerenciados pelo Istio, será possível usar um ALB de cluster para rotear solicitações HTTP/HTTPS para o controlador do Ingress do Istio. O controlador do Ingress do Istio roteia então as solicitações para os serviços de app. Para rotear o tráfego, deve-se fazer mudanças nos recursos do Ingress para o ALB do cluster e o controlador do Ingress do Istio.
+    <br><br>No recurso do Ingress para o ALB do cluster, deve-se:
+      <ul>
+        <li>especificar a anotação `istio-services`</li>
+        <li>definir o caminho de serviço como o caminho real no qual o app atende</li>
+        <li>definir a porta de serviço como a porta do controlador do Ingress do Istio</li>
+      </ul>
+    <br>No recurso do Ingress para o controlador do Ingress do Istio, deve-se:
+      <ul>
+        <li>definir o caminho de serviço como o caminho real no qual o app atende</li>
+        <li>definir a porta de serviço como a porta de HTTP/HTTPS do serviço de app que é exposto pelo controlador do Ingress do Istio</li>
+    </ul>
+  </dd>
 
-<dt>YAML do recurso do Ingress de amostra para o ALB do cluster</dt>
-<dd>
+   <dt>YAML do recurso do Ingress de amostra para o ALB do cluster</dt>
+   <dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadados:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+   spec:
+    tls:
+    - System z:
+      - mydomain
     secretName: mytlssecret
   rules:
-  - host: mydomain
+    - host: mydomain
     http:
       paths:
-      - path: &lt;/myapp1&gt;
+        - path: &lt;/myapp1&gt;
           backend:
             serviceName: &lt;myservice1&gt;
             servicePort: &lt;istio_ingress_port&gt;
-      - path: &lt;/myapp2&gt;
+        - path: &lt;/myapp2&gt;
           backend:
             serviceName: &lt;myservice2&gt;
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
-<table>
-<caption>Entendendo os componentes de arquivo YAML</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-</thead>
-<tbody>
-<tr>
-<td><code>enable</code></td>
-  <td>Para ativar o roteamento de tráfego para os serviços gerenciados pelo Istio, configure como <code>True</code>.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Substitua <code><em>&lt;myservice1&gt;</em></code> pelo nome do serviço do Kubernetes que você criou para o app gerenciado pelo Istio. Separe múltiplos serviços com um ponto e vírgula (;). Este campo é opcional. Se você não especificar um nome de serviço, todos os serviços gerenciados pelo Istio serão ativadas para roteamento de tráfego.</td>
-</tr>
-<tr>
-<td><code>istioServiceNamespace</code></td>
-<td>Substitua <code><em>&lt;istio-namespace&gt;</em></code> pelo namespace do Kubernetes no qual o Istio está instalado. Este campo é opcional. Se você não especificar um namespace, o <code>istio-system</code> será usado.</td>
-</tr>
-<tr>
-<td><code>istioServiceName</code></td>
-<td>Substitua <code><em>&lt;istio-ingress-service&gt;</em></code> pelo nome do serviço Ingress do Istio. Este campo é opcional. Se você não especificar o nome do serviço Ingress do Istio, o nome de serviço <code>istio-ingress</code> será usado.</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-  <td>Para cada serviço gerenciado pelo Istio para o qual você deseja rotear o tráfego, substitua <code><em>&lt;/myapp1&gt;</em></code> pelo caminho de backend no qual o serviço gerenciado pelo Istio atende. O caminho deve corresponder ao caminho que você definiu no recurso do Ingress do Istio.</td>
-</tr>
-<tr>
-<td><code>servicePort</code></td>
-<td>Para cada serviço gerenciado pelo Istio para o qual você deseja rotear o tráfego, substitua <code><em>&lt;istio_ingress_port&gt;</em></code> pela porta do controlador do Ingress do Istio.</td>
-</tr>
-</tbody></table>
-</dd>
-
-<dt>Uso</dt></dl>
-
-1. Implemente seu app. Os recursos de exemplo fornecidos nestas etapas usam o aplicativo de amostra Istio chamado [BookInfo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html), que pode ser localizado no repositório `istio-0.7.1/samples/bookinfo/kube`.
-   ```
-   kubectl aplicar -f bookinfo.yaml -n istio-system
-   ```
-   {: pre}
-
-2. Configure as regras de roteamento do Istio para o app. Por exemplo, no aplicativo de amostra Istio chamado BookInfo, as [regras de roteamento para cada microsserviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) são definidas no arquivo `route-rule-all-v1.yaml`.
-
-3. Exponha o app ao controlador Istio Ingress criando um recurso Istio Ingress. O recurso permite que os recursos do Istio, como regras de monitoramento e de rota, sejam aplicados ao tráfego que entra no cluster.
-    Por exemplo, o recurso a seguir para o app BookInfo é predefinido no arquivo `bookinfo.yaml`:
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: istio-ingress-resource
-      annotations:
-        kubernetes.io/ingress.class: "istio"
-    spec:
-      rules:
-      - http:
-          paths:
-          - path: /productpage backend: serviceName: productpage servicePort: 9080
-          - path: /login backend: serviceName: productpage servicePort: 9080
-          - path: /logout backend: serviceName: productpage servicePort: 9080
-          - path: /api/v1/products.* backend: serviceName: productpage servicePort: 9080
-    ```
-    {: codeblock}
-
-4. Crie o recurso do Istio Ingress.
-    ```
-    kubectl create -f istio-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-    Seu app está conectado ao controlador Istio Ingress.
-
-5. Obtenha o **subdomínio do Ingress** e o **segredo do Ingress** da IBM para o seu cluster. O subdomínio e o segredo são pré-registrados para o seu cluster e são usados como uma URL pública exclusiva para o seu app.
-    ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
-    ```
-    {: pre}
-
-6. Conecte o controlador Istio Ingress ao ALB de Ingresso da IBM para seu cluster criando um recurso IBM Ingress.
-    Exemplo para o app BookInfo:
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: ibm-ingress-resource
-      annotations:
-        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
-    spec:
-      tls:
-      - hosts:
-        - mycluster-459249.us-south.containers.mybluemix.net
-        secretName: mycluster-459249
-      rules:
-      - host: mycluster-459249.us-south.containers.mybluemix.net
-        http:
-          paths:
-          - path: /productpage backend: serviceName: productpage servicePort: 9080
-          - path: /login backend: serviceName: productpage servicePort: 9080
-          - path: /logout backend: serviceName: productpage servicePort: 9080
-          - path: /api/v1/products.* backend: serviceName: productpage servicePort: 9080
-    ```
-    {: codeblock}
-
-7. Crie o recurso do IBM ALB Ingress.
-    ```
-    kubectl aplicar -f ibm-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-
-8. Em um navegador, vá para  ` https://<hostname>/frontend` para visualizar a página da web do app.
-
-<br />
-
+   <table>
+   <caption>Entendendo os componentes de arquivo YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>ativado</code></td>
+      <td>Para ativar o roteamento de tráfego para os serviços gerenciados pelo Istio, configure como <code>True</code>.</td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Substitua <code><em>&lt;myservice1&gt;</em></code> pelo nome do serviço do Kubernetes que você criou para o app gerenciado pelo Istio. Separe múltiplos serviços com um ponto e vírgula (;). Este campo é opcional. Se você não especificar um nome de serviço, todos os serviços gerenciados pelo Istio serão ativadas para roteamento de tráfego.</td>
+    </tr>
+    <tr>
+    <td><code>istioServiceNamespace</code></td>
+    <td>Substitua <code><em>&lt;istio-namespace&gt;</em></code> pelo namespace do Kubernetes no qual o Istio está instalado. Este campo é opcional. Se você não especificar um namespace, o <code>istio-system</code> será usado.</td>
+    </tr>
+    <tr>
+    <td><code>istioServiceName</code></td>
+    <td>Substitua <code><em>&lt;istio-ingress-service&gt;</em></code> pelo nome do serviço Ingress do Istio. Este campo é opcional. Se você não especificar o nome do serviço Ingress do Istio, o nome de serviço <code>istio-ingress</code> será usado.</td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+      <td>Para cada serviço gerenciado pelo Istio para o qual você deseja rotear o tráfego, substitua <code><em>&lt;/myapp1&gt;</em></code> pelo caminho de backend no qual o serviço gerenciado pelo Istio atende. O caminho deve corresponder ao caminho que você definiu no recurso do Ingress do Istio.</td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Para cada serviço gerenciado pelo Istio para o qual você deseja rotear o tráfego, substitua <code><em>&lt;istio_ingress_port&gt;</em></code> pela porta do controlador do Ingress do Istio.</td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
 
 ## Anotações de buffer de proxy
 {: #proxy-buffer}
@@ -1914,7 +1605,7 @@ metadados:
    Ingress.bluemix.net/proxy-buffering: "ativado=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -1970,7 +1661,7 @@ metadados:
    ingress.bluemix.net/proxy-buffers: "serviceName=&lt;myservice&gt; number=&lt;number_of_buffers&gt; size=&lt;size&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -2032,7 +1723,7 @@ metadados:
    ingress.bluemix.net/proxy-buffer-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -2093,7 +1784,7 @@ metadados:
    Ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; tamanho=&lt;size&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -2131,57 +1822,6 @@ spec:
 ## Anotações de solicitação e de resposta
 {: #request-response}
 
-### Incluir a porta do servidor no cabeçalho do host (add-host-port)
-{: #add-host-port}
-
-<dl>
-<dt>Descrição</dt>
-<dd>Inclua o `:server_port ` no cabeçalho do host de uma solicitação do cliente antes de encaminhar a solicitação para seu app de backend.
-
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
- name: myingress
- annotations:
-   ingresso s.bluemix.net/add-host-port: "enabled= &lt;true&gt;  serviceName= &lt;myservice&gt;"
-spec:
- tls:
- - hosts:
-   - mydomain
-    secretName: mytlssecret
-  rules:
- - host: mydomain
-   http:
-     paths:
-     - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-<caption>Entendendo os componentes de anotação</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
- </thead>
- <tbody>
- <tr>
- <td><code>ativado</code></td>
-   <td>Para ativar a configuração de server_port para o host, configure como <code>true</code>.</td>
- </tr>
- <tr>
- <td><code>serviceName</code></td>
- <td>Substitua <code><em>&lt;myservice&gt;</em></code> pelo nome do serviço Kubernetes que você criou para o seu app. Separe múltiplos serviços com um ponto e vírgula (;). Este campo é opcional. Se você não especificar um nome do serviço, todos os serviços usarão essa anotação.</td>
- </tr>
- </tbody></table>
- </dd>
- </dl>
-
-<br />
-
 
 ### Cabeçalho de solicitação ou resposta do cliente adicional (proxy-add-headers, response-add-headers)
 {: #proxy-add-headers}
@@ -2201,7 +1841,6 @@ Se o seu app backend requer informações do cabeçalho de HTTP, é possível us
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -2211,9 +1850,8 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-  serviceName=&lt;myservice1&gt; {
+  serviceName=<myservice1> {
   Host $host;
-  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -2249,7 +1887,7 @@ metadados:
       }
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -2288,55 +1926,55 @@ spec:
 {: #response-remove-headers}
 
 Remova as informações do cabeçalho que são incluídas na resposta do cliente do app final de backend antes de a resposta ser enviada para o cliente.
-{:shortdesc}
+ {:shortdesc}
 
-<dl>
-<dt>Descrição</dt>
-<dd>O ALB do Ingresso age como um proxy entre seu app backend e o navegador da web do cliente. As respostas do cliente do app backend que são enviadas para o ALB são processadas (por proxy) e colocadas em uma nova resposta que é então enviada do ALB para o navegador da web do cliente. Embora a transmissão de uma resposta por proxy remova as informações do cabeçalho de HTTP inicialmente enviadas do app backend, esse processo pode não remover todos os cabeçalhos específicos do app backend. Remova as informações do cabeçalho de uma resposta do cliente antes que a resposta seja encaminhada do ALB para o navegador da web do cliente.</dd>
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/response-remove-headers: |
-      serviceName=&lt;myservice1&gt; {
-      "&lt;header1&gt;";
-      "&lt;header2&gt;";
-      }
-      serviceName=&lt;myservice2&gt; {
-      "&lt;header3&gt;";
-      }
-spec:
-  tls:
-  - hosts:
-    - mydomain
+ <dl>
+ <dt>Descrição</dt>
+ <dd>O ALB do Ingresso age como um proxy entre seu app backend e o navegador da web do cliente. As respostas do cliente do app backend que são enviadas para o ALB são processadas (por proxy) e colocadas em uma nova resposta que é então enviada do ALB para o navegador da web do cliente. Embora a transmissão de uma resposta por proxy remova as informações do cabeçalho de HTTP inicialmente enviadas do app backend, esse processo pode não remover todos os cabeçalhos específicos do app backend. Remova as informações do cabeçalho de uma resposta do cliente antes que a resposta seja encaminhada do ALB para o navegador da web do cliente.</dd>
+ <dt>YAML do recurso de Ingresso de amostra</dt>
+ <dd>
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadados:
+   name: myingress
+   annotations:
+     ingress.bluemix.net/response-remove-headers: |
+       serviceName=&lt;myservice1&gt; {
+       "&lt;header1&gt;";
+       "&lt;header2&gt;";
+       }
+       serviceName=&lt;myservice2&gt; {
+       "&lt;header3&gt;";
+       }
+ spec:
+   tls:
+   - System z:
+     - mydomain
     secretName: mytlssecret
   rules:
-  - host: mydomain
+   - host: mydomain
     http:
       paths:
-      - path: /service1_path backend: serviceName: &lt;myservice1&gt; servicePort: 8080
-      - path: /service2_path backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
+       - path: /service1_path backend: serviceName: &lt;myservice1&gt; servicePort: 8080
+       - path: /service2_path backend: serviceName: &lt;myservice2&gt; servicePort: 80</code></pre>
 
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>service_name</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
-</tr>
-<tr>
-<td><code>&lt;header&gt;</code></td>
-<td>A chave do cabeçalho para remover da resposta do cliente.</td>
-</tr>
-</tbody></table>
-</dd></dl>
+  <table>
+  <caption>Entendendo os componentes de anotação</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>service_name</code></td>
+   <td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;header&gt;</code></td>
+   <td>A chave do cabeçalho para remover da resposta do cliente.</td>
+   </tr>
+   </tbody></table>
+   </dd></dl>
 
 <br />
 
@@ -2364,10 +2002,10 @@ kind: Ingress
 metadados:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -2387,7 +2025,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>O tamanho máximo do corpo de resposta do cliente. Por exemplo, para configurar o tamanho máximo para 200 megabytes, defina <code>200m</code>.  <strong>Nota:</strong> será possível configurar o tamanho como 0 para desativar a verificação do tamanho do corpo de solicitação do cliente.</td>
+ <td>O tamanho máximo do corpo de resposta do cliente. Por exemplo, para configurar o tamanho máximo para 200 megabytes, defina <code>200m</code>. <strong>Nota:</strong> será possível configurar o tamanho como 0 para desativar a verificação do tamanho do corpo de solicitação do cliente.</td>
  </tr>
  </tbody></table>
 
@@ -2418,7 +2056,7 @@ metadados:
    ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -2469,19 +2107,19 @@ Para todos os serviços, limite a taxa de processamento de solicitação e o nú
 </dd>
 
 
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
+ <dt>YAML do recurso de Ingresso de amostra</dt>
+ <dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadados:
   name: myingress
   annotations:
     ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
-spec:
+ spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -2493,28 +2131,28 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>chave</code></td>
-<td>Para configurar um limite global para as solicitações recebidas com base na zona ou serviço, use `key=zone`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
-</tr>
-<tr>
-<td><code>rate</code></td>
-<td>Substitua <code>&lt;<em>rate</em>&gt;</code> pela taxa de processamento. Insira um valor como uma taxa por segundo (r/s) ou taxa por minuto (r/m). Exemplo: <code>50r/m</code>.</td>
-</tr>
-<tr>
-<td><code>number-of_connections</code></td>
-<td>Substitua <code>&lt;<em>conn</em>&gt;</code> pelo número de conexões.</td>
-</tr>
-</tbody></table>
+ <table>
+ <caption>Entendendo os componentes de anotação</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>chave</code></td>
+  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
+  </tr>
+  <tr>
+  <td><code>rate</code></td>
+  <td>Substitua <code>&lt;<em>rate</em>&gt;</code> pela taxa de processamento. Insira um valor como uma taxa por segundo (r/s) ou taxa por minuto (r/m). Exemplo: <code>50r/m</code>.</td>
+  </tr>
+  <tr>
+  <td><code>number-of_connections</code></td>
+  <td>Substitua <code>&lt;<em>conn</em>&gt;</code> pelo número de conexões.</td>
+  </tr>
+  </tbody></table>
 
-</dd>
-</dl>
+  </dd>
+  </dl>
 
 <br />
 
@@ -2532,19 +2170,19 @@ Limitar a taxa de processamento de solicitação e o número de conexões para s
 </dd>
 
 
-<dt>YAML do recurso de Ingresso de amostra</dt>
-<dd>
+ <dt>YAML do recurso de Ingresso de amostra</dt>
+ <dd>
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadados:
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadados:
   name: myingress
   annotations:
     ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
-spec:
+ spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -2556,33 +2194,33 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
-<table>
-<caption>Entendendo os componentes de anotação</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName</code></td>
-<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço para o qual você deseja limitar a taxa de processamento.</li>
-</tr>
-<tr>
-<td><code>chave</code></td>
-<td>Para configurar um limite global para as solicitações recebidas com base na zona ou serviço, use `key=zone`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
-</tr>
-<tr>
-<td><code>rate</code></td>
-<td>Substitua <code>&lt;<em>rate</em>&gt;</code> pela taxa de processamento. Para definir uma taxa por segundo, use r/s: <code>10r/s</code>. Para definir uma taxa por minuto, use r/m: <code>50r/m</code>.</td>
-</tr>
-<tr>
-<td><code>number-of_connections</code></td>
-<td>Substitua <code>&lt;<em>conn</em>&gt;</code> pelo número de conexões.</td>
-</tr>
-</tbody></table>
-</dd>
-</dl>
+ <table>
+ <caption>Entendendo os componentes de anotação</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço para o qual você deseja limitar a taxa de processamento.</li>
+  </tr>
+  <tr>
+  <td><code>chave</code></td>
+  <td>Para configurar um limite global para solicitações recebidas baseadas no local ou no serviço, use `key=location`. Para configurar um limite global para solicitações recebidas com base no cabeçalho, use `X-USER-ID key=$http_x_user_id`.</td>
+  </tr>
+  <tr>
+  <td><code>rate</code></td>
+  <td>Substitua <code>&lt;<em>rate</em>&gt;</code> pela taxa de processamento. Para definir uma taxa por segundo, use r/s: <code>10r/s</code>. Para definir uma taxa por minuto, use r/m: <code>50r/m</code>.</td>
+  </tr>
+  <tr>
+  <td><code>number-of_connections</code></td>
+  <td>Substitua <code>&lt;<em>conn</em>&gt;</code> pelo número de conexões.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
 
-<br />
+  <br />
 
 
 

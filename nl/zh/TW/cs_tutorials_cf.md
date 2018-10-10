@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-09-11"
 # 指導教學：將應用程式從 Cloud Foundry 移轉至叢集
 {: #cf_tutorial}
 
-您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernet 叢集。
+您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containershort_notm}} 中的 Kubernet 叢集。
 {: shortdesc}
 
 
@@ -41,7 +41,6 @@ lastupdated: "2018-09-11"
 - [在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔登錄](../services/Registry/index.html)。
 - [建立叢集](cs_clusters.html#clusters_ui)。
 - [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
-- [確定您具有**編輯器**、**運算子**或**管理者**平台角色](cs_users.html#add_users_cli)。
 - [瞭解 Docker 和 Kubernetes 術語](cs_tech.html)。
 
 
@@ -68,7 +67,7 @@ lastupdated: "2018-09-11"
     a. 在型錄的**樣板**中，按一下 **Python Flask**。此樣板包括 Python 2 及 Python 3 應用程式的運行環境。
 
     b. 輸入應用程式名稱 `cf-py-<name>`，然後按一下**建立**。若要存取樣板的應用程式碼，您必須先將 CF 應用程式部署至雲端。您可以為應用程式使用任何名稱。如果您使用範例中的名稱，請將 `<name>` 取代為唯一 ID，例如 `cf-py-msx`。
-
+    
     **注意**：請勿在任何應用程式、容器映像檔或 Kubernetes 資源名稱中使用個人資訊。
 
     部署應用程式時，會顯示「請使用指令行下載、修改及重新部署應用程式」的指示。
@@ -128,12 +127,12 @@ lastupdated: "2018-09-11"
 4. 建置包含應用程式碼的 Docker 映像檔，並將它推送至您的專用登錄。
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
   <table>
-  <caption>瞭解這個指令的元件</caption>
+  <caption>瞭解此指令的元件</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="此圖示指出有相關資訊可供您瞭解這個指令的元件。"/> 瞭解這個指令的元件</th>
   </thead>
@@ -148,7 +147,7 @@ lastupdated: "2018-09-11"
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>您的專用登錄路徑，它包含您的唯一名稱空間及映像檔名稱。在此範例中，映像檔會使用與應用程式目錄相同的名稱，但您可以為專用登錄中的映像檔選擇任何名稱。如果您不確定名稱空間，請執行 `ibmcloud cr namespaces` 指令來尋找它。</td>
+  <td>您的專用登錄路徑，它包含您的唯一名稱空間及映像檔名稱。在此範例中，映像檔會使用與應用程式目錄相同的名稱，但您可以為專用登錄中的映像檔選擇任何名稱。如果您不確定名稱空間，請執行 `bx cr namespaces` 指令來尋找它。</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -157,7 +156,7 @@ lastupdated: "2018-09-11"
   </tbody>
   </table>
 
-  映像檔會建立在您的專用登錄中。您可以執行 `ibmcloud cr images` 指令，以驗證已建立映像檔。
+  映像檔會建立在您的專用登錄中。您可以執行 `bx cr images` 指令，以驗證已建立映像檔。
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -172,7 +171,7 @@ lastupdated: "2018-09-11"
 
 ## 課程 3：從映像檔部署容器
 
-將您的應用程式部署為 Kubernetes 叢集裡的容器。
+將您的應用程式部署為 Kubernetes 叢集中的容器。
 {: shortdesc}
 
 1. 建立名為 `cf-py.yaml` 的配置 YAML 檔案，然後將 `<registry_namespace>` 更新為您的專用映像檔登錄名稱。此配置檔會從您在前一課程建立的映像檔定義容器部署，以及一個服務，以便將應用程式公開給大眾使用。
@@ -223,7 +222,7 @@ lastupdated: "2018-09-11"
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，將 &lt;registry_namespace&gt; 取代為您的專用映像檔登錄的名稱空間。如果您不確定名稱空間，請執行 `ibmcloud cr namespaces` 指令來尋找它。</td>
+  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，將 &lt;registry_namespace&gt; 取代為您的專用映像檔登錄的名稱空間。如果您不確定名稱空間，請執行 `bx cr namespaces` 指令來尋找它。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -231,7 +230,7 @@ lastupdated: "2018-09-11"
   </tr>
   </tbody></table>
 
-2. 套用配置檔，以在叢集裡建立部署及服務。
+2. 套用配置檔，以在叢集中建立部署及服務。
 
   ```
   kubectl apply -f <filepath>/cf-py.yaml
@@ -248,18 +247,18 @@ lastupdated: "2018-09-11"
 
 3. 現在，所有部署工作都已完成，您可以在瀏覽器中測試您的應用程式。取得用來構成 URL 的詳細資料。
 
-    a.  取得工作者節點在叢集裡的公用 IP 位址。
+    a.  取得工作者節點在叢集中的公用 IP 位址。
 
     ```
-    ibmcloud ks workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
     輸出：
 
     ```
-ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
+    ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 

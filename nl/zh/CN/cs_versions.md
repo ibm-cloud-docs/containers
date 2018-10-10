@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -26,23 +26,15 @@ lastupdated: "2018-09-12"
 {{site.data.keyword.containerlong}} 同时支持多个版本的 Kubernetes。发布最新版本 (n) 时，支持最多低 2 (n-2) 的版本。比最新版本低 2 以上的版本 (n-3) 将首先不推荐使用，然后不再支持。
 {:shortdesc}
 
-**支持的 Kubernetes 版本**：
+当前支持的 Kubernetes 版本为：
 
-- 最新版本：1.11.2
-- 缺省版本：1.10.7
-- 其他版本：1.9.10
-- 不推荐的版本：1.8.15，自 2018 年 9 月 22 日起不再支持
+- 最新版本：1.10.1
+- 缺省版本：1.9.7
+- 支持的版本：1.8.11
 
-</br>
-
-**不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您有 30 天的时间来复查并更新到支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，系统仍完全支持您的集群。但是，不能创建使用不推荐的版本的新集群。
+**不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您有 30 天的时间来复查并更新到受支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，可以在集群中运行有限的命令来添加工作程序，重新装入工作程序并更新集群。不能在不推荐的版本中创建新集群。
 
 **不支持的版本**：如果是在不支持的 Kubernetes 版本上运行集群，请[查看潜在影响](#version_types)（与更新相关），然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。
-*  **注意**：如果您等到集群低于受支持版本三个或更多次版本时才更新，那么必须强制更新，但这可能会导致意外结果或失败。
-*  不支持的集群无法添加或重新装入现有工作程序节点。
-*  将集群更新为支持的版本后，集群可以恢复正常运行并继续接收支持。
-
-</br>
 
 要检查集群的服务器版本，请运行以下命令。
 
@@ -54,7 +46,7 @@ kubectl version  --short | grep -i server
 输出示例：
 
 ```
-Server Version: v1.10.7+IKS
+Server Version: v1.9.7+9d6e0610086578
 ```
 {: screen}
 
@@ -72,20 +64,20 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 |补丁|x.x.4_1510|IBM 和您|Kubernetes 补丁以及其他 {{site.data.keyword.Bluemix_notm}} Provider 组件更新，例如安全性和操作系统补丁。IBM 会自动更新主节点，但由您将补丁应用于工作程序节点。|
 {: caption="Kubernetes 更新的影响" caption-side="top"}
 
-更新可用时，您在查看有关工作程序节点的信息时（例如，使用 `ibmcloud ks workers <cluster>` 或 `ibmcloud ks worker-get <cluster> <worker>` 命令），会收到相应通知。
--  **主要更新和次要更新**：首先[更新主节点](cs_cluster_update.html#master)，然后[更新工作程序节点](cs_cluster_update.html#worker_node)。
-   - 缺省情况下，您最多只能跨 Kubernetes 主节点的两个次版本进行更新。例如，如果当前主节点的版本是 1.5，而您要更新到 1.8，那么必须先更新到 1.7。可以强制更新继续，但跨两个以上的次版本更新可能会导致意外结果或失败。
+更新可用时，您在查看有关工作程序节点的信息时（例如，使用 `bx cs workers <cluster>` 或 `bx cs worker-get <cluster> <worker>` 命令），会收到相应通知。
+-  **主要更新和次要更新**：首先[更新主节点](cs_cluster_update.html#master)，然后[更新工作程序节点](cs_cluster_update.html#worker_node)。 
+   - 缺省情况下，您最多只能跨 Kubernetes 主节点的两个次版本进行更新。例如，如果当前主节点的版本是 1.5，而您要更新到 1.8，那么必须先更新到 1.7。可以强制更新继续，但跨两个以上的次版本更新可能会导致意外结果。
 
    - 您使用的 `kubectl` CLI 版本至少应该与集群的 `major.minor` 版本相匹配，否则可能会遇到意外的结果。请确保 Kubernetes 集群版本和 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
 
--  **补丁更新**：每月检查以了解更新是否可用，并使用 `ibmcloud ks worker-update` [命令](cs_cli_reference.html#cs_worker_update)或 `ibmcloud ks worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)来应用这些安全性和操作系统补丁。有关更多信息，请参阅[版本更改日志](cs_versions_changelog.html)。
+-  **补丁更新**：每月检查以了解更新是否可用，并使用 `bx cs worker-update` [命令](cs_cli_reference.html#cs_worker_update)或 `bx cs worker-reload` [命令](cs_cli_reference.html#cs_worker_reload)来应用这些安全性和操作系统补丁。有关更多信息，请参阅[版本更改日志](cs_versions_changelog.html)。
 
 <br/>
 
 以下信息总结了在将集群从先前版本更新到新版本时，可能会对已部署应用程序产生影响的更新。
--  V1.11 [迁移操作](#cs_v111)。
 -  V1.10 [迁移操作](#cs_v110)。
 -  V1.9 [迁移操作](#cs_v19)。
+-  V1.8 [迁移操作](#cs_v18)。
 -  对不推荐使用或不受支持版本的[归档](#k8s_version_archive)。
 
 <br/>
@@ -93,115 +85,6 @@ Kubernetes 集群有三种类型的更新：主要更新、次要更新和补丁
 有关完整的更改列表，请查看以下信息：
 * [Kubernetes 更改日志 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
 * [IBM 版本更改日志](cs_versions_changelog.html)。
-
-</br>
-
-## V1.11
-{: #cs_v111}
-
-<p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.11 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V11.1 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
-
-查看 Kubernetes 从先前版本更新到 V1.11 时可能需要进行的更改。
-
-### 在更新主节点之前更新
-{: #111_before}
-
-<table summary="适用于 V1.11 的 Kubernetes 更新">
-<caption>在将主节点更新到 Kubernetes 1.11 之前要进行的更改</caption>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`containerd`：新的 Kubernetes 容器运行时</td>
-<td><strong>重要信息</strong>：`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](#containerd)。</td>
-</tr>
-<tr>
-<td>Kubernetes 容器卷安装传播</td>
-<td>容器 `VolumeMount` 的 [`mountPropagation` 字段 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) 的缺省值已从 `HostToContainer` 更改为 `None`。此更改复原在 Kubernetes V1.9 以及更低版本中存在的行为。如果 pod 规范依赖于 `HostToContainer` 成为缺省值，请进行更新。</td>
-</tr>
-<tr>
-<td>Kubernetes API 服务器 JSON 反序列化器</td>
-<td>Kubernetes API 服务器 JSON 反序列化器现在区分大小写。此更改复原在 Kubernetes V1.7 以及更低版本中存在的行为。如果 JSON 资源定义使用不正确的大小写，请进行更新。<br><br>**注**：仅影响直接 Kubernetes API 服务器请求。`kubectl` CLI 继续在 Kubernetes V1.7 以及更高版本中强制实施区分大小写的密钥，因此如果使用 `kubectl` 严格管理资源，那么您不会受到影响。</td>
-</tr>
-</tbody>
-</table>
-
-### 在更新主节点之后更新
-{: #111_after}
-
-<table summary="适用于 V1.11 的 Kubernetes 更新">
-<caption>在将主节点更新到 Kubernetes 1.11 之后要进行的更改</caption>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>集群日志记录配置</td>
-<td>`fluentd` 集群附加组件自动更新为 V1.11，即使禁用了 `logging-autoupdate`。<br><br>
-容器日志目录已从 `/var/lib/docker/` 更改为 `/var/log/pods/`。如果使用自己的日志记录解决方案来监视先前目录，请相应更新。</td>
-</tr>
-<tr>
-<td>刷新 Kubernetes 配置</td>
-<td>更新集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 访问组。因此，在通过运行 `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>` 更新主 Kubernetes v1.11 后，必须刷新集群的 Kubernetes 配置。<br><br>如果不刷新配置，那么集群操作将失败，并显示以下错误消息：`You must be logged in to the server (Unauthorized).`</td>
-</tr>
-<tr>
-<td>`kubectl` CLI</td>
-<td>`kubectl` CLI for Kubernetes V1.11 需要 `apps/v1` API。因此，V1.11 `kubectl` CLI 不适用于运行 Kubernetes V1.8 或更低版本的集群。使用与集群的 Kubernetes API 服务器版本相匹配的 `kubectl` CLI 的版本。</td>
-</tr>
-<tr>
-<td>`kubectl auth can-i`</td>
-<td>现在，如果未授权用户，那么 `kubectl auth can-i` 命令失败，并返回 `exit code 1`。如果脚本依赖于先前的行为，请进行更新。</td>
-</tr>
-<tr>
-<td>`kubectl delete`</td>
-<td>现在，在使用选择条件（例如，标签）删除资源时，缺省情况下，`kubectl delete` 命令忽略 `not found` 错误。如果脚本依赖于先前的行为，请更新这些脚本。</td>
-</tr>
-<tr>
-<td>Kubernetes `sysctls` 功能</td>
-<td>现在会忽略 `security.alpha.kubernetes.io/sysctls` 注释。相反，Kubernetes 向 `PodSecurityPolicy` 和 `Pod` 对象添加字段以指定和控制 `sysctls`。有关更多信息，请参阅[在 Kubernetes 中使用 sysctls ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/)。<br><br>在更新集群主节点和工作程序后，更新 `PodSecurityPolicy` 和 `Pod` 对象以使用新的 `sysctls` 字段。</td>
-</tr>
-</tbody>
-</table>
-
-### 作为容器运行时迁移至 `containerd`
-{: #containerd}
-
-对于运行 Kubernetes V1.11 或更高版本的集群，`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。如果 pod 依赖于 Docker 作为 Kubernetes 容器运行时，那么必须更新它们以作为容器运行时处理 `containerd`。有关更多信息，请参阅 [Kubernetes containerd 声明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/)。
-{: shortdesc}
-
-**如何知道应用程序是否依赖于 `docker` 而不是 `containerd`？**<br>
-依赖于 Docker 作为容器运行时的情况的示例：
-*  如果使用特权容器直接访问 Docker 引擎或 API，那么更新 pod 以支持 `containerd` 作为运行时。
-*  集群中安装的某些第三方附加组件（例如，日志记录和监视工具）可能依赖于 Docker 引擎。请检查提供程序以确保工具兼容 `containerd`。
-
-<br>
-
-**除了依赖于运行时，是否还需要执行其他迁移操作？**<br>
-
-**清单工具**：如果您具有使用 Docker V18.06 之前的试验性 `docker manifest` [工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) 构建的多平台映像，那么无法使用 `containerd` 从 DockerHub 拉取映像。
-
-在检查 pod 事件时，可能会看到如下错误。
-```
-failed size validation
-```
-{: screen}
-
-要使用通过清单工具以及 `containerd` 构建的映像，请从以下选项中进行选择。
-
-*  使用[清单工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/estesp/manifest-tool) 重新构建映像。
-*  在更新为 Docker V18.06 或更高版本后，使用 `docker-manifest` 工具重新构建映像。
-
-<br>
-
-**什么不受影响？是否需要更改部署容器的方式？**<br>
-通常，容器部署过程不会更改。您仍可以使用 Dockerfile 来定义 Docker 映像并针对应用程序构建 Docker 容器。如果使用 `docker` 命令来构建映像并将其推送到注册表，那么可继续使用 `docker` 或者改为使用 `ibmcloud cr` 命令。
 
 ## V1.10
 {: #cs_v110}
@@ -236,16 +119,11 @@ failed size validation
 </tr>
 <tr>
 <td>Kubelet API 访问</td>
-<td>现在，Kubelet API 授权已委派给 <code>Kubernetes API 服务器</code>。对 Kubelet API 的访问基于用于授予访问 <strong>node</strong> 子资源的许可权的 <code>ClusterRole</code>。缺省情况下，Kubernetes Heapster 具有 <code>ClusterRole</code> 和 <code>ClusterRoleBinding</code>。但是，如果其他用户或应用程序要使用 Kubelet API，您必须向其授予使用该 API 的许可权。请参阅 Kubernetes 文档中有关 [Kubelet 授权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-authentication-authorization/) 的信息。</td>
+<td>现在，Kubelet API 授权已委派给 <code>Kubernetes API 服务器</code>。对 Kubelet API 的访问基于用于授予访问 <strong>node</strong> 子资源的许可权的 <code>ClusterRole</code>。缺省情况下，Kubernetes Heapster 具有 <code>ClusterRole</code> 和 <code>ClusterRoleBinding</code>。但是，如果其他用户或应用程序要使用 Kubelet API，您必须向其授予使用该 API 的许可权。请参阅 Kubernetes 文档中有关 [Kubelet 授权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/kubelet-authentication-authorization/#kubelet-authorization) 的信息。</td>
 </tr>
 <tr>
 <td>密码套件</td>
 <td>现在，<code>Kubernetes API 服务器</code> 和 Kubelet API 的受支持密码套件仅限用于采用高强度加密（128 位或更多位）的子集。如果您有使用较低强度密码的现有自动化或资源，并且依赖于与 <code>Kubernetes API 服务器</code> 或 Kubelet API 进行通信，请在更新主节点之前启用更高强度的密码支持。</td>
-</tr>
-<tr>
-<td>strongSwan VPN
-</td>
-<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，那么在更新集群之前，必须通过运行 `helm delete --purge <release_name>`. 集群更新完成后，请重新安装 strongSwan Helm 图表。</td>
 </tr>
 </tbody>
 </table>
@@ -279,11 +157,6 @@ failed size validation
 <td>现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，允许应用程序将数据写入这些卷，但系统可能会自动还原这些卷。需要此迁移操作来修复安全漏洞 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102)。
 如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</td>
 </tr>
-<tr>
-<td>strongSwan VPN
-</td>
-<td>如果是将 [strongSwan](cs_vpn.html#vpn-setup) 用于 VPN 连接，并且在更新集群之前删除了图表，那么现在可以重新安装 strongSwan Helm 图表。</td>
-</tr>
 </tbody>
 </table>
 
@@ -299,7 +172,7 @@ failed size validation
     kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
     ```
     {: pre}
-
+    
 2.  如果任何 pod 未处于**正在运行**状态，请删除该 pod，并等到它处于**正在运行**状态后再继续。
 
 3.  如果是自动生成的 Calico 策略或其他 Calico 资源，请更新自动化工具，以使用 [Calico V3 语法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/) 生成这些资源。
@@ -388,10 +261,7 @@ failed size validation
 
 
 
-## 归档
-{: #k8s_version_archive}
-
-### V1.8（不推荐使用，自 2018 年 9 月 22 日起不再支持）
+## V1.8
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.8 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.8 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
@@ -462,16 +332,202 @@ failed size validation
 <br />
 
 
-### V1.7（不支持）
+
+## 归档
+{: #k8s_version_archive}
+
+### V1.7（不推荐）
 {: #cs_v17}
 
-自 2018 年 6 月 21 日开始，不支持使用运行 [Kubernetes V1.7](cs_versions_changelog.html#changelog_archive) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.7 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
+**自 2018 年 5 月 22 日开始，不推荐使用运行 Kubernetes V1.7 的 {{site.data.keyword.containershort_notm}} 集群**。在 2018 年 6 月 21 日后，V1.7 集群将无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
 
-对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.8。
+对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)。
+
+您仍在运行 Kubernetes V1.5？请查看以下信息以评估将集群从 V1.5 更新到 V1.7 会产生的影响。[更新集群](cs_cluster_update.html#update)至 V1.7，然后将其立即更新到至少 V1.8。
+{: tip}
+
+<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.7 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.7 的 Kubernetes 产品。</p>
+
+查看 Kubernetes 从先前版本更新到 V1.7 时可能需要进行的更改。
+
+<br/>
+
+#### 在更新主节点之前更新
+{: #17_before}
+
+<table summary="适用于 V1.7 和 V1.6 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.7 之前要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储器</td>
+<td>不允许带有父目录引用（如 `../to/dir`）的 `hostPath` 和 `mountPath` 的配置脚本。请将路径更改为简单的绝对路径，例如 `/path/to/dir`。<ol>
+  <li>确定是否需要更改存储器路径：</br>
+  ```
+  kubectl get pods --all-namespaces -o yaml | grep "\.\." && echo "Action required"
+  ```
+  </br>
+
+  <li>如果返回 `Action required`，请更改 pod 以引用绝对路径，然后更新所有工作程序节点。如果 pod 由其他资源（如部署）拥有，请更改该资源内的 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core)。
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+
+#### 在更新主节点之后更新
+{: #17_after}
+
+<table summary="适用于 V1.7 和 V1.6 的 Kubernetes 更新">
+<caption>在将主节点更新到 Kubernetes 1.7 之后要进行的更改</caption>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>部署 `apiVersion`</td>
+<td>从 Kubernetes 1.5 更新集群后，请将 `apps/v1beta1` 用于新的`部署` YAML 文件中的 `apiVersion` 字段。继续将 `extensions/v1beta1` 用于其他资源，例如 `Ingress`。</td>
+</tr>
+<tr>
+<td>“kubectl”</td>
+<td>`kubectl` CLI 更新后，这些 `kubectl create` 命令必须使用多个标志而不是以逗号分隔的自变量：<ul>
+ <li>`role`
+ <li>`clusterrole`
+ <li>`rolebinding`
+ <li>`clusterrolebinding`
+ <li>`secret`
+ </ul>
+</br>  例如，运行 `kubectl create role --resource-name <x> --resource-name <y>` 而非 `kubectl create role --resource-name <x>,<y>`.</td>
+</tr>
+<tr>
+<td>网络策略</td>
+<td>`net.beta.kubernetes.io/network-policy` 注释不再可用。<ol>
+  <li>确定是否需要更改策略：</br>
+  ```
+  kubectl get ns -o yaml | grep "net.beta.kubernetes.io/network-policy" | grep "DefaultDeny" && echo "Action required"
+  ```
+  <li>如果返回 `"Action required"`，请将以下网络策略添加到列出的每个 Kubernetes 名称空间：</br>
+
+  <pre class="codeblock">
+  <code>
+  kubectl create -n &lt;namespace&gt; -f - &lt;&lt;EOF
+  kind: NetworkPolicy
+  apiVersion: networking.k8s.io/v1
+metadata:
+    name: default-deny
+    namespace: &lt;namespace&gt;
+spec:
+    podSelector: {}
+  EOF
+  </code>
+  </pre>
+
+  <li> 添加网络策略后，除去 `net.beta.kubernetes.io/network-policy` 注释：
+  ```
+  kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
+  ```
+  </li></ol>
+</td></tr>
+<tr>
+<td>Pod 亲缘关系安排</td>
+<td> 不推荐使用 `scheduler.alpha.kubernetes.io/affinity` 注释。<ol>
+  <li>对于除 `ibm-system` 和 `kube-system` 之外的每个名称空间，确定是否需要更新 pod 亲缘关系安排：</br>
+  ```
+  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
+  ```
+  </br></li>
+  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/affinity` 注释。</li>
+</ol>
+</td></tr>
+<tr>
+<td>`default` `ServiceAccount` 的 RBAC</td>
+<td><p>除去了 `default` 名称空间中 `default` `ServiceAccount` 的管理员 `ClusterRoleBinding`，以提高集群安全性。在 `default` 名称空间中运行的应用程序不再具有对 Kubernetes API 的集群管理员特权，并且可能会遇到 `RBAC DENY` 许可权错误。检查应用程序及其 `.yaml` 文件，以了解应用程序是否在 `default` 名称空间中运行，是否使用 `default ServiceAccount`，以及是否访问 Kubernetes API。</p>
+<p>如果应用程序依赖于这些特权，请为应用程序[创建 RBAC 授权资源 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</p>
+  <p>更新应用程序 RBAC 策略时，您可能希望临时还原到先前的 `default`。使用 `kubectl apply -f FILENAME` 命令来复制、保存和应用以下文件。<strong>注</strong>：还原操作是为了给自己时间来更新所有应用程序资源，而不是作为长期解决方案。</p>
+
+<p><pre class="codeblock">
+<code>
+  kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+   name: admin-binding-nonResourceURLSs-default
+  subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-nonResourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+  - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+</code>
+</pre></p>
+</td>
+</tr>
+<tr>
+<td>只读 API 数据卷</td>
+<td>现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，允许应用程序将数据写入这些卷，但系统可能会自动还原这些卷。需要此迁移操作来修复安全漏洞 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102)。
+如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</td>
+</tr>
+<tr>
+<td>StatefulSet pod DNS</td>
+<td>更新主节点后，StatefulSet pod 会丢失其 Kubernetes DNS 条目。要恢复 DNS 条目，请删除 StatefulSet pod。Kubernetes 会重新创建 pod，并自动恢复 DNS 条目。有关更多信息，请参阅 [Kubernetes 问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/48327)。</td>
+</tr>
+<tr>
+<td>容忍度</td>
+<td>`scheduler.alpha.kubernetes.io/tolerations` 注释不再可用。
+<ol>
+  <li>对于除 `ibm-system` 和 `kube-system` 之外的每个名称空间，确定是否需要更改容忍度：</br>
+  ```
+  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/tolerations" && echo "Action required"
+  ```
+  </br>
+
+  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _tolerations_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/tolerations` 注释。</ol>
+</td></tr>
+<tr>
+<td>污点</td>
+<td>`scheduler.alpha.kubernetes.io/taints` 注释不再可用。
+<ol>
+  <li>确定是否需要更改污点：</br>
+  ```
+  kubectl get nodes -o yaml | grep "scheduler.alpha.kubernetes.io/taints" && echo "Action required"
+  ```
+  <li>如果返回 `"Action required"`，请除去每个节点的 `scheduler.alpha.kubernetes.io/taints` 注释：</br>
+  `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
+  <li>向每个节点添加污点：</br>
+  `kubectl taint node <node> <taint>`
+  </li></ol>
+</td></tr>
+</tbody>
+</table>
+
+<br />
+
 
 ### V1.5（不受支持）
 {: #cs_v1-5}
 
-自 2018 年 4 月 4 日开始，不支持使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containerlong_notm}} 集群。V1.5 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.8](#cs_v18))。
+自 2018 年 4 月 4 日开始，不支持使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containershort_notm}} 集群。V1.5 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.7](#cs_v17))。
 
-对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)，并且至少更新到 1.8。
+对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)。必须从一个版本更新到下一个最新版本，例如从 1.5 更新到 1.7 或者从 1.8 更新到 1.9。

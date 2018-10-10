@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -36,7 +36,7 @@ Images werden in der Regel in einer Registry gespeichert, auf die der Zugriff en
 um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet oder unbefugt Änderungen an ihnen vorgenommen werden. Private Registrys müssen vom Clusteradministrator eingerichtet werden, damit sichergestellt ist, dass die Berechtigungsnachweise für den Zugriff auf die private Registry den Clusterbenutzern zur Verfügung stehen.
 
 
-Für die Bereitstellung Ihrer Apps im Cluster können Sie mehrere Registrys mit {{site.data.keyword.containerlong_notm}} verwenden.
+Für die Bereitstellung Ihrer Apps im Cluster können Sie mehrere Registrys mit {{site.data.keyword.containershort_notm}} verwenden.
 
 |Registry|Beschreibung|Vorteil|
 |--------|-----------|-------|
@@ -75,7 +75,7 @@ Sie können Container aus einem von IBM bereitgestellten öffentlichen Image ode
 
 Wenn Sie einen Cluster erstellen, werden automatisch nicht ablaufende Registry-Tokens und geheime Schlüssel für die [nächstgelegene regionale Registry sowie die globale Registry](/docs/services/Registry/registry_overview.html#registry_regions) erstellt. Die globale Registry dient der sicheren Speicherung öffentlicher, von IBM bereitgestellter Images, auf die Sie in allen Ihren Bereitstellungen verweisen können, sodass es nicht notwendig ist, unterschiedliche Verweise für Images zu verwenden, die in den einzelnen regionalen Registrys gespeichert sind. Die regionale Registry dient der sicheren Speicherung Ihrer eigenen privaten Docker-Images sowie derselben öffentlichen Images, die in der globalen Registry gespeichert sind. Mithilfe der Tokens wird Lesezugriff auf alle Namensbereiche autorisiert, die Sie in {{site.data.keyword.registryshort_notm}} einrichten, sodass Sie mit diesen öffentlichen Images (in der globalen Registry) und privaten Images (in den regionalen Registrys) arbeiten können.
 
-Jedes Token muss in einem `imagePullSecret` von Kubernetes gespeichert sein, damit ein Kubernetes-Cluster darauf zugreifen kann, wenn Sie eine containerisierte App bereitstellen. Bei der Erstellung Ihres Clusters werden die Tokens für die globale Registry (mit den von IBM bereitgestellten öffentlichen Images) von {{site.data.keyword.containerlong_notm}} automatisch in geheimen Schlüsseln für Image-Pull-Operationen (imagePullSecrets) in Kubernetes gespeichert. Diese geheimen Schlüssel für Image-Pull-Operationen werden dem `standardmäßigen` Kubernetes-Namensbereich (default), der Standardliste mit geheimen Schlüsseln im Servicekonto (`ServiceAccount`) für diesen Namensbereich und dem Namensbereich `kube-system` hinzugefügt.
+Jedes Token muss in einem `imagePullSecret` von Kubernetes gespeichert sein, damit ein Kubernetes-Cluster darauf zugreifen kann, wenn Sie eine containerisierte App bereitstellen. Bei der Erstellung Ihres Clusters werden die Tokens für die globale Registry (mit den von IBM bereitgestellten öffentlichen Images) von {{site.data.keyword.containershort_notm}} automatisch in geheimen Schlüsseln für Image-Pulloperationen (imagePullSecrets) in Kubernetes gespeichert. Diese geheimen Schlüssel für Image-Pulloperationen werden dem `standardmäßigen` Kubernetes-Namensbereich (default), der Standardliste mit geheimen Schlüsseln im Servicekonto (`ServiceAccount`) für diesen Namensbereich und dem Namensbereich `kube-system` hinzugefügt.
 
 **Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Um einen Container in anderen Namensbereichen Ihres Clusters bereitstellen oder ein Image verwenden zu können, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes imagePullSecret für Ihren Cluster erstellen](#other).
 
@@ -110,7 +110,7 @@ um ein privates Image aus einem Namensbereich in {{site.data.keyword.registrysho
     ```
     {: codeblock}
 
-    **Tipp:** Führen Sie `ibmcloud cr namespace-list` aus, um Ihre Namensbereichsinformationen abzurufen.
+    **Tipp:** Führen Sie `bx cr namespace-list` aus, um Ihre Namensbereichsinformationen abzurufen.
 
 3.  Erstellen Sie die Bereitstellung in Ihrem Cluster.
 
@@ -214,7 +214,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
 2.  Listen Sie die Tokens in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto auf.
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -222,7 +222,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
 4.  Rufen Sie den Wert für Ihr Token ab. Ersetzen Sie <em>&lt;token-id&gt;</em> durch die ID des Tokens, das sie im vorherigen Schritt abgerufen haben.
 
     ```
-    ibmcloud cr token-get <token-id>
+    bx cr token-get <token-id>
     ```
     {: pre}
 
@@ -247,7 +247,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     </tr>
     <tr>
     <td><code><em>&lt;name_des_geheimen_schlüssels&gt;</em></code></td>
-    <td>Erforderlich. Der Name, den Sie für Ihren geheimen Schlüssel für Image-Pull-Operationen (imagePullSecret) verwenden wollen.</td>
+    <td>Erforderlich. Der Name, den Sie für Ihren geheimen Schlüssel für Image-Pulloperationen (imagePullSecret) verwenden wollen.</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry-url&gt;</em></code></td>
@@ -255,7 +255,7 @@ Um auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Regionen oder -Konte
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker-benutzername&gt;</em></code></td>
-    <td>Erforderlich. Der Benutzername für die Anmeldung bei Ihrer privaten Registry. Für {{site.data.keyword.registryshort_notm}} wird der Benutzername auf den Wert <strong><code>token</code></strong> gesetzt.</td>
+    <td>Erforderlich. Der Benutzername für die Anmeldung bei Ihrer privaten Registry. Für {{site.data.keyword.registryshort_notm}} wurde als Benutzername <code>token</code> festgelegt.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;tokenwert&gt;</em></code></td>
@@ -308,7 +308,7 @@ Gehen Sie wie folgt vor, um ein imagePullSecret zu erstellen:
     </tr>
     <tr>
     <td><code><em>&lt;name_des_geheimen_schlüssels&gt;</em></code></td>
-    <td>Erforderlich. Der Name, den Sie für Ihren geheimen Schlüssel für Image-Pull-Operationen (imagePullSecret) verwenden wollen.</td>
+    <td>Erforderlich. Der Name, den Sie für Ihren geheimen Schlüssel für Image-Pulloperationen (imagePullSecret) verwenden wollen.</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry-url&gt;</em></code></td>
@@ -404,11 +404,11 @@ Wenn Sie auf das imagePullSecret in einer Pod-Bereitstellung verweisen, ist das 
     </tr>
     <tr>
     <td><code><em>&lt;name_des_namensbereichs&gt;</em></code></td>
-    <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `ibmcloud cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
+    <td>Der Namensbereich, in dem das Image gespeichert ist. Führen Sie den Befehl `bx cr namespace-list` aus, um die verfügbaren Namensbereiche aufzulisten.</td>
     </tr>
     <tr>
     <td><code><em>&lt;imagename&gt;</em></code></td>
-    <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl `ibmcloud cr image-list` aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}}-Konto aufzulisten.</td>
+    <td>Der Name des Images, das Sie verwenden möchten. Führen Sie den Befehl `bx cr image-list` aus, um die verfügbaren Images in einem {{site.data.keyword.Bluemix_notm}} aufzulisten.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -489,4 +489,5 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
    {: pre}
 
 <br />
+
 

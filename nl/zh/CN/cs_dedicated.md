@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,20 +16,21 @@ lastupdated: "2018-09-10"
 {:download: .download}
 
 
+
 # 开始使用 {{site.data.keyword.Bluemix_dedicated_notm}} 中的集群
 {: #dedicated}
 
 如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 集群，并使用也在其中运行的预先选择的 {{site.data.keyword.Bluemix_notm}} 服务进行连接。
 {:shortdesc}
 
-如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containerlong_notm}}](container_index.html)。
+如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containershort_notm}}](container_index.html)。
 
 ## 关于 Dedicated 云环境
 {: #dedicated_environment}
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，可用物理资源仅供您的集群专用，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。如果您希望对集群进行隔离，并且需要对您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行隔离，可选择设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。如果您没有 Dedicated 帐户，那么可以[在 {{site.data.keyword.Bluemix_notm}} Public 中创建具有专用硬件的集群](cs_clusters.html#clusters_ui)。
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containerlong_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) . 然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containerlong_notm}} API 端点设定为目标。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containershort_notm}} CLI 在目录中创建集群。要使用 Dedicated 控制台，您可利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。可以使用此双登录通过 Dedicated 控制台来访问公共集群。要使用 CLI，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) 登录。然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containershort_notm}} API 端点设定为目标。
 
 {{site.data.keyword.Bluemix_notm}} Public 和 Dedicated 之间的最显著区别如下所示。
 
@@ -57,12 +58,12 @@ lastupdated: "2018-09-10"
  </tr>
  <tr>
  <td>集群硬件和所有权</td>
- <td>在标准集群中，硬件可由其他 {{site.data.keyword.IBM_notm}} 客户共享或仅供您专用。公用和专用 VLAN 由您在 IBM Cloud Infrastructure (SoftLayer) 帐户中所拥有和管理。</td>
- <td>在 {{site.data.keyword.Bluemix_dedicated_notm}} 上的集群中，硬件始终是专用的。可用于集群创建的公用和专用 VLAN 是在设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时预定义的，并且由 IBM 代表您拥有并进行管理。此外，还为 {{site.data.keyword.Bluemix_notm}} 环境预定义了集群创建期间可用的专区。</td>
+ <td>在标准集群中，硬件可由其他 {{site.data.keyword.IBM_notm}} 客户共享或仅供您专用。公用和专用 VLAN 由您在 IBM Cloud infrastructure (SoftLayer) 帐户中所拥有和管理。</td>
+ <td>在 {{site.data.keyword.Bluemix_dedicated_notm}} 上的集群中，硬件始终是专用的。可用于集群创建的公用和专用 VLAN 是在设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时预定义的，并且由 IBM 代表您拥有并进行管理。此外，还为 {{site.data.keyword.Bluemix_notm}} 环境预定义了集群创建期间可用的位置。</td>
  </tr>
  <tr>
  <td>负载均衡器和 Ingress 联网</td>
- <td>在标准集群供应期间，会自动执行以下操作。<ul><li>一个可移植的公共子网和一个可移植的专用子网将绑定到您的集群，并分配给您的 IBM Cloud Infrastructure (SoftLayer) 帐户。通过 IBM Cloud Infrastructure (SoftLayer) 帐户可以请求更多子网。</li></li><li>一个可移植公共 IP 地址用于高可用性 Ingress 应用程序负载均衡器 (ALB)，并分配了格式为 <code>&lt;cluster_name&gt;. containers.appdomain.cloud</code> 的唯一公共路径。您可以使用此路径向公众公开多个应用程序。一个可移植专用 IP 地址用于专用 ALB。</li><li>向集群分配了四个可移植公共 IP 地址和四个可移植专用 IP 地址，这些地址可用于 LoadBalancer 服务。</ul></td>
+ <td>在标准集群供应期间，会自动执行以下操作。<ul><li>一个可移植的公共子网和一个可移植的专用子网将绑定到您的集群，并分配给您的 IBM Cloud infrastructure (SoftLayer) 帐户。通过 IBM Cloud Infrastructure (SoftLayer) 帐户可以请求更多子网。</li></li><li>一个可移植公共 IP 地址用于高可用性 Ingress 应用程序负载均衡器 (ALB)，并分配了格式为 <code>&lt;cluster_name&gt;. containers.appdomain.cloud</code> 的唯一公共路径。您可以使用此路径向公众公开多个应用程序。一个可移植专用 IP 地址用于专用 ALB。</li><li>向集群分配了四个可移植公共 IP 地址和四个可移植专用 IP 地址，这些地址可用于 LoadBalancer 服务。</ul></td>
  <td>创建 Dedicated 帐户时，您会对如何公开和访问集群服务作出连接决策。要使用自己的企业 IP 范围（用户管理的 IP），您必须在[设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境](/docs/dedicated/index.html#setupdedicated)时提供这些 IP 范围。<ul><li>缺省情况下，不会将任何可移植公共子网绑定到您在 Dedicated 帐户中创建的集群。相反，您可以灵活地选择最适合于您企业的连接模型。</li><li>创建集群后，选择要绑定的子网类型，并与集群配合使用以获取负载均衡器或 Ingress 连接。<ul><li>对于公共或专用可移植子网，可以[向集群添加子网](cs_subnets.html#subnets)</li><li>对于在 Dedicated 上线时提供给 IBM 的用户管理的 IP 地址，您可以[向集群添加用户管理的子网](#dedicated_byoip_subnets)。</li></ul></li><li>将子网绑定到集群后，将创建 Ingress ALB。仅当使用可移植公共子网时，才会创建公共 Ingress 路径。</li></ul></td>
  </tr>
  <tr>
@@ -72,8 +73,8 @@ lastupdated: "2018-09-10"
  </tr>
  <tr>
  <td>持久性存储器</td>
- <td>使用卷的[动态供应](cs_storage_basics.html#dynamic_provisioning)或[静态供应](cs_storage_basics.html#static_provisioning)。</td>
- <td>使用卷的[动态供应](cs_storage_basics.html#dynamic_provisioning)。[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)以请求对卷执行备份、请求从卷复原以及请求其他存储功能。</li></ul></td>
+ <td>使用卷的[动态供应](cs_storage.html#create)或[静态供应](cs_storage.html#existing)。</td>
+ <td>使用卷的[动态供应](cs_storage.html#create)。[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)以请求对卷执行备份、请求从卷复原以及请求其他存储功能。</li></ul></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.registryshort_notm}} 中的映像注册表 URL</td>
@@ -82,13 +83,8 @@ lastupdated: "2018-09-10"
  </tr>
  <tr>
  <td>访问注册表</td>
- <td>请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。</td>
- <td><ul><li>有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。</li><li>对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。</li></ul></td>
- </tr>
- <tr>
- <td>多专区集群</td>
- <td>通过向工作程序池添加更多专区来创建[多区域集群](cs_clusters_planning.html#multizone)。</td>
- <td>创建[单专区集群](cs_clusters_planning.html#single_zone)。设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时，已预定义了可用专区。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。</td>
+ <td>请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。</td>
+ <td><ul><li>有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。</li><li>对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。</li></ul></td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_dedicated_notm}} 之间的功能差异" caption-side="top"}
@@ -99,7 +95,7 @@ lastupdated: "2018-09-10"
 ### 服务体系结构
 {: #dedicated_ov_architecture}
 
-每个工作程序节点均设置有独立的计算资源、联网和卷服务。
+每个工作程序节点均设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine、独立的计算资源、联网和卷服务。
 {:shortdesc}
 
 内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。工作程序节点使用安全 TLS 证书和 OpenVPN 连接与主节点进行通信。
@@ -108,12 +104,12 @@ lastupdated: "2018-09-10"
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 体系结构和联网情况*
 
-![{{site.data.keyword.Bluemix_dedicated_notm}} 上的 {{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/cs_dedicated_arch.png)
+![{{site.data.keyword.Bluemix_dedicated_notm}} 上的 {{site.data.keyword.containershort_notm}} Kubernetes 体系结构](images/cs_dedicated_arch.png)
 
 <br />
 
 
-## 在 Dedicated 上设置 {{site.data.keyword.containerlong_notm}}
+## 在 Dedicated 上设置 {{site.data.keyword.containershort_notm}}
 {: #dedicated_setup}
 
 每个 {{site.data.keyword.Bluemix_dedicated_notm}} 环境在 {{site.data.keyword.Bluemix_notm}} 中都有一个公共的客户机拥有的企业帐户。为了让 Dedicated 环境中的用户能够创建集群，管理员必须将这些用户添加到公共公司帐户中。
@@ -130,23 +126,23 @@ lastupdated: "2018-09-10"
     1.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 实例的端点。输入 Public 帐户所有者的 {{site.data.keyword.Bluemix_notm}} 凭证，并在提示时选择您的帐户。
 
         ```
-        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
-        ```
+            bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+    ```
         {: pre}
 
-        **注：**如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        **注：**如果您有联合标识，请使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
     2.  生成用于邀请用户加入公共帐户的 API 密钥。记下该 API 密钥值，Dedicated 帐户管理员在下一步中必须使用该值。
 
         ```
-        ibmcloud iam api-key-create <key_name> -d "Key to invite users to <dedicated_account_name>"
+                bx iam api-key-create <key_name> -d "Key to invite users to <dedicated_account_name>"
         ```
         {: pre}
 
     3.  记下您要邀请用户加入到的公共帐户组织的 GUID，Dedicated 帐户管理员在下一步中必须使用该 GUID。
 
         ```
-        ibmcloud account orgs
+                bx account orgs
         ```
         {: pre}
 
@@ -154,17 +150,17 @@ lastupdated: "2018-09-10"
     1.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 实例的端点。输入 Dedicated 帐户所有者的 {{site.data.keyword.Bluemix_notm}} 凭证，并在提示时选择您的帐户。
 
         ```
-        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
-        ```
+            bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+    ```
         {: pre}
 
-        **注：**如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        **注：**如果您有联合标识，请使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
     2.  邀请用户加入公共帐户。
         * 要邀请单个用户，请执行以下操作：
 
             ```
-            ibmcloud cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
+                        bx cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
             {: pre}
 
@@ -173,7 +169,7 @@ lastupdated: "2018-09-10"
         * 要邀请当前位于 Dedicated 帐户组织中的所有用户，请执行以下操作：
 
             ```
-            ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
+                        bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
             将 <em>&lt;dedicated_org_ID&gt;</em> 替换为 Dedicated 帐户组织标识，将 <em>&lt;public_API_key&gt;</em> 替换为上一步中生成的 API 密钥，将 <em>&lt;public_org_ID&gt;</em> 替换为公共帐户组织 GUID。有关此命令的更多信息，请参阅[邀请 IBM Cloud Dedicated 中的用户](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)。
@@ -183,7 +179,7 @@ lastupdated: "2018-09-10"
     4.  验证用户是否已添加到帐户。
 
         ```
-        ibmcloud cf bluemix-admin invite-users-status -apikey=<public_API_key>
+                bx cf bluemix-admin invite-users-status -apikey=<public_API_key>
         ```
         {: pre}
 
@@ -210,11 +206,11 @@ lastupdated: "2018-09-10"
     1.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 实例的端点。出现提示时，请输入您的 IBM 标识。
 
         ```
-        ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
-        ```
+            bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+    ```
         {: pre}
 
-        **注：**如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        **注：**如果您有联合标识，请使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
     2.  如果您是首次登录，请在提示时提供您的 Dedicated 用户标识和密码。这将对您的 Dedicated 帐户进行认证，并且会将 Dedicated 和公共帐户链接在一起。首次登录后每次再登录时，只要使用自己的 IBM 标识即可登录。有关更多信息，请参阅[将 Dedicated 标识连接到 Public IBM 标识](/docs/cli/connect_dedicated_id.html#connect_dedicated_id)。
 
@@ -223,14 +219,14 @@ lastupdated: "2018-09-10"
     3.  要在专用环境中创建或访问集群，必须设置与该环境关联的区域。
 
         ```
-        ibmcloud ks region-set
-        ```
+           bx cs region-set
+   ```
         {: pre}
 
 5.  如果要取消帐户链接，那么可以将您的 IBM 标识与 Dedicated 用户标识断开连接。有关更多信息，请参阅[断开 Dedicated 标识与 Public IBM 标识的连接](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid)。
 
     ```
-    ibmcloud iam dedicated-id-disconnect
+        bx iam dedicated-id-disconnect
     ```
     {: pre}
 
@@ -258,7 +254,7 @@ lastupdated: "2018-09-10"
 
     1. 输入**集群名称**。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
 
-    2. 选择要在其中部署集群的**专区**。设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时，已预定义了可用专区。
+    2. 选择要在其中部署集群的**位置**。可用位置是在设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时预定义的。
 
     3. 为集群主节点选择 Kubernetes API 服务器版本。
 
@@ -271,14 +267,14 @@ lastupdated: "2018-09-10"
         确保要供应裸机机器。因为裸机机器是按月计费的，所以如果在错误下单后立即将其取消，也仍然会按整月向您收费。
         {:tip}
 
-    5. 选择**机器类型**。机器类型用于定义在每个工作程序节点中设置并可供容器使用的虚拟 CPU 量、内存量和磁盘空间量。可用的裸机和虚拟机类型随部署集群的专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。创建集群后，可以通过将工作程序节点添加到集群来添加不同的机器类型。
+    5. 选择**机器类型**。机器类型用于定义在每个工作程序节点中设置并可供容器使用的虚拟 CPU 量、内存量和磁盘空间量。可用的裸机和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。创建集群后，可以通过将工作程序节点添加到集群来添加不同的机器类型。
 
     6. 选择需要的**工作程序节点数**。选择 `3` 以确保集群的高可用性。
 
     7. 选择**公用 VLAN**（可选）和**专用 VLAN**（必需）。可用的公用和专用 VLAN 会在设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境时进行预定义。两个 VLAN 在工作程序节点之间进行通信，但公用 VLAN 还与 IBM 管理的 Kubernetes 主节点进行通信。可以对多个集群使用相同的 VLAN。
-**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。
+**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。
 
-    8. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么不会加密主机的容器运行时数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disk)。
+    8. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么不会加密主机的 Docker 数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disks)。
 
 6. 单击**创建集群**。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
     **注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
@@ -286,24 +282,24 @@ lastupdated: "2018-09-10"
 ### 使用 CLI 创建集群
 {: #dedicated_creating_cli}
 
-1.  安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containerlong_notm}} 插件](cs_cli_install.html#cs_cli_install)。
+1.  安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containershort_notm}} 插件](cs_cli_install.html#cs_cli_install)。
 2.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 实例的端点。在提示时输入 {{site.data.keyword.Bluemix_notm}} 凭证并选择您的帐户。
 
     ```
-    ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
+        bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net
     ```
     {: pre}
 
-    **注：**如果您有联合标识，请使用 `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+    **注：**如果您有联合标识，请使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
 
-3.  要以区域为目标，请运行 `ibmcloud ks region-set`。
+3.  要以区域为目标，请运行 `bx cs region-set`。
 
 4.  使用 `cluster-create` 命令创建集群。创建标准集群时，将按小时数对工作程序节点硬件的使用量计费。
 
     示例：
 
     ```
-    ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --name <cluster_name> --workers <number>
+        bx cs cluster-create --location <location> --machine-type <machine_type> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
@@ -318,16 +314,16 @@ lastupdated: "2018-09-10"
     <td>此命令在 {{site.data.keyword.Bluemix_notm}} 组织中创建集群。</td>
     </tr>
     <tr>
-    <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>输入 Dedicated 环境配置为使用的 {{site.data.keyword.Bluemix_notm}} 专区标识。</td>
+    <td><code>--location <em>&lt;location&gt;</em></code></td>
+    <td>输入 Dedicated 环境配置为使用的 {{site.data.keyword.Bluemix_notm}} 位置标识。</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>输入机器类型。可以将工作程序节点作为虚拟机部署在专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。</td>
+    <td>输入机器类型。可以将工作程序节点作为虚拟机部署在专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>输入 Dedicated 环境配置为使用的公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</td>
+    <td>输入 Dedicated 环境配置为使用的公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。</td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -344,46 +340,46 @@ lastupdated: "2018-09-10"
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-    <td>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>ibmcloud ks kube-versions</code>。
+    <td>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。
 </td>
     </tr>
     <tr>
     <td><code>--disable-disk-encrypt</code></td>
-    <td>缺省情况下，工作程序节点具有[磁盘加密](cs_secure.html#encrypted_disk)功能。如果要禁用加密，请包括此选项。</td>
+    <td>缺省情况下，工作程序节点具有[磁盘加密](cs_secure.html#encrypted_disks)功能。如果要禁用加密，请包括此选项。</td>
     </tr>
     <tr>
     <td><code>--trusted</code></td>
-    <td>启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td>
+    <td>启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td>
     </tr>
     </tbody></table>
 
 5.  验证是否请求了创建集群。
 
     ```
-    ibmcloud ks clusters
-    ```
+            bx cs clusters
+        ```
     {: pre}
 
     **注：**
     * 对于虚拟机，可能需要几分钟时间，才能订购好工作程序节点机器并且在帐户中设置并供应集群。裸机物理机器通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。
     * 如果看到以下错误消息，请[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。
         ```
-        {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下订单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。 
+        {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。 
         ```
 
     当完成集群供应时，集群的状态会更改为**已部署**。
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.7
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.7
     ```
     {: screen}
 
 6.  检查工作程序节点的状态。
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
+           bx cs workers <cluster_name_or_ID>
+       ```
     {: pre}
 
     当工作程序节点已准备就绪时，状态会更改为 **normal**，而阶段状态为 **Ready**。节点阶段状态为 **Ready** 时，可以访问集群。
@@ -391,8 +387,8 @@ lastupdated: "2018-09-10"
     **注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
     ```
     {: screen}
 
@@ -401,7 +397,7 @@ lastupdated: "2018-09-10"
     1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+                bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -410,7 +406,7 @@ lastupdated: "2018-09-10"
         OS X 的示例：
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
+                export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
         ```
         {: screen}
 
@@ -420,14 +416,14 @@ lastupdated: "2018-09-10"
         OS X 的示例：
 
         ```
-        echo $KUBECONFIG
+                echo $KUBECONFIG
         ```
         {: pre}
 
         输出：
 
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
+                /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
 
         
 
@@ -438,43 +434,39 @@ lastupdated: "2018-09-10"
     1.  使用缺省端口号设置代理。
 
         ```
-        kubectl proxy
+                kubectl proxy
         ```
         {: pre}
 
         ```
-        Starting to serve on 127.0.0.1:8001
+                Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
     2.  在 Web 浏览器中打开以下 URL 以查看 Kubernetes 仪表板。
 
         ```
-        http://localhost:8001/ui
+                http://localhost:8001/ui
         ```
         {: codeblock}
-
-### 添加工作程序节点
-{: #add_workers}
-
-使用 {{site.data.keyword.Bluemix_dedicated_notm}} 时，您只能创建[单专区集群](cs_clusters_planning.html#single_zone)。缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](cs_clusters.html#resize_pool)或[添加新的工作程序池](cs_clusters.html#add_pool)，向集群添加更多工作程序节点。添加工作程序池时，必须向工作程序池添加可用专区，以便工作程序可以部署到该专区中。但是，不能将其他专区添加到工作程序池。
 
 ### 使用专用和公共映像注册表
 {: #dedicated_images}
 
 使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。
 
-有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containerlong_notm}}](cs_images.html) 中的选项。对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。
+有关新的名称空间，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的选项。对于为单个和可扩展组设置的名称空间，请[使用令牌并创建 Kubetnetes 私钥](cs_dedicated_tokens.html#cs_dedicated_tokens)以进行认证。
 
 ### 向集群添加子网
 {: #dedicated_cluster_subnet}
 
-通过向集群添加子网，更改可用的可移植公共 IP 地址池。有关更多信息，请参阅[向集群添加子网](cs_subnets.html#subnets)。请查看向 Dedicated 集群添加子网的下列差异。
+通过向集群添加子网，更改可用的可移植公共 IP 地址的池。
+有关更多信息，请参阅[向集群添加子网](cs_subnets.html#subnets)。请查看向 Dedicated 集群添加子网的下列差异。
 
 #### 将更多由用户管理的子网和 IP 地址添加到 Kubernetes 集群
 {: #dedicated_byoip_subnets}
 
-从要用于访问 {{site.data.keyword.containerlong_notm}} 的内部部署网络提供更多您自己的子网。您可以将这些子网中的专用 IP 地址添加到 Kubernetes 集群中的 Ingress 和 LoadBalancer 服务。根据您要使用的子网格式，以两种方式之一来配置用户管理的子网。
+从要用于访问 {{site.data.keyword.containershort_notm}} 的内部部署网络提供更多您自己的子网。您可以将这些子网中的专用 IP 地址添加到 Kubernetes 集群中的 Ingress 和 LoadBalancer 服务。根据您要使用的子网格式，以两种方式之一来配置用户管理的子网。
 
 需求：
 - 用户管理的子网只能添加到专用 VLAN。
@@ -489,20 +481,20 @@ lastupdated: "2018-09-10"
 2. 在 {{site.data.keyword.IBM_notm}} 供应用户管理的子网后，使子网可用于 Kubernetes 集群。
 
     ```
-    ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
-    ```
+       bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
+   ```
     {: pre}
-将 <em>&lt;cluster_name&gt;</em> 替换为集群的名称或标识，将 <em>&lt;subnet_CIDR&gt;</em> 替换为支持凭单中提供的一个子网 CIDR，并将 <em>&lt;private_VLAN&gt;</em> 替换为可用的专用 VLAN 标识。可以通过运行 `ibmcloud ks vlans` 来查找可用专用 VLAN 的标识。
+将 <em>&lt;cluster_name&gt;</em> 替换为集群的名称或标识，将 <em>&lt;subnet_CIDR&gt;</em> 替换为支持凭单中提供的一个子网 CIDR，并将 <em>&lt;private_VLAN&gt;</em> 替换为可用的专用 VLAN 标识。可以通过运行 `bx cs vlans` 来查找可用专用 VLAN 的标识。
 
 3. 验证是否已将子网添加到集群。用户提供的子网的 **User-managed** 字段为 _`true`_。
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name>
+        bx cs cluster-get --showResources <cluster_name>
     ```
     {: pre}
 
     ```
-    VLANs
+        VLANs
     VLAN ID   Subnet CIDR         Public       User-managed
     1555503   169.xx.xxx.xxx/24   true         false
     1555505   10.xxx.xx.xxx/24    false        false
@@ -510,11 +502,11 @@ lastupdated: "2018-09-10"
     ```
     {: screen}
 
-4. **重要信息**：如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+4. 可选：[启用同一 VLAN 上子网之间的路由](cs_subnets.html#vlan-spanning)。
 
 5. 要配置内部部署和内部帐户连接，请在以下选项之间进行选择：
   - 如果将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署和内部帐户连接。有关更多信息，请参阅[使用 NodePort、LoadBalancer 或 Ingress 服务规划联网](cs_network_planning.html#planning)。
-  - 如果未将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署连接。有关更多信息，请参阅[使用 NodePort、LoadBalancer 或 Ingress 服务规划联网](cs_network_planning.html#planning)。但是，您必须使用 IBM Cloud Infrastructure (SoftLayer) 可移植专用子网，在您的集群与其他基于 Cloud Foundry 的服务之前配置内部帐户连接。您可以使用 [`ibmcloud ks cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 命令来创建可移植专用子网。对于此场景，集群同时具有用于内部部署连接的用户管理子网和用于内部帐户连接的 IBM Cloud Infrastructure (SoftLayer) 可移植专用子网。
+  - 如果未将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署连接。有关更多信息，请参阅[使用 NodePort、LoadBalancer 或 Ingress 服务规划联网](cs_network_planning.html#planning)。但是，您必须使用 IBM Cloud infrastructure (SoftLayer) 可移植专用子网，在您的集群与其他基于 Cloud Foundry 的服务之前配置内部帐户连接。您可以使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 命令来创建可移植专用子网。对于此场景，集群同时具有用于内部部署连接的用户管理子网和用于内部帐户连接的 IBM Cloud infrastructure (SoftLayer) 可移植专用子网。
 
 ### 其他集群配置
 {: #dedicated_other}
@@ -561,6 +553,4 @@ lastupdated: "2018-09-10"
 ### 创建持久性存储器
 {: #dedicated_apps_volume_claim}
 
-要查看用于创建持久性存储的选项，请参阅“用于高可用性的持久性数据存储选项”(cs_storage_planning.html#persistent_storage_overview)。要请求对卷执行备份、从卷复原、删除卷或者定期生成文件存储快照，必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
-如果选择供应[文件存储](cs_storage_file.html#predefined_storageclass)，请选择非保留存储类。选择非保留存储类可帮助防止 IBM Cloud Infrastructure (SoftLayer) 中出现孤线程持久性存储实例（只能通过开具支持凭单除去）。
+要查看用于创建持久性存储的选项，请参阅[持久性数据存储](cs_storage.html#planning)。要请求对卷执行备份、从卷复原以及其他存储功能，必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。

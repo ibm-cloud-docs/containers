@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-09-10"
 # 클러스터 및 작업자 노드 문제점 해결
 {: #cs_troubleshoot_clusters}
 
-{{site.data.keyword.containerlong}}를 사용할 때 클러스터 및 작업자 노드 관련 문제점을 해결하려면 이러한 기술을 고려하십시오.
+{{site.data.keyword.containerlong}}를 사용할 때 클러스터 및 작업자 노드 관련 문제점을 해결하려면 이러한 방법을 고려하십시오.
 {: shortdesc}
 
 더 일반적인 문제점이 있는 경우에는 [클러스터 디버깅](cs_troubleshoot.html)을 시도해 보십시오.
@@ -33,172 +33,32 @@ lastupdated: "2018-09-10"
 {: #cs_credentials}
 
 {: tsSymptoms}
-새 Kubernetes 클러스터를 작성할 때 다음 중 하나와 유사한 오류 메시지를 수신합니다.
+새 Kubernetes 클러스터를 작성할 때 다음과 같은 메시지를 수신합니다.
 
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
 Creating a standard cluster requires that you have either a Pay-As-You-Go account
-that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the {{site.data.keyword.containerlong_notm}} CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
-```
-{: screen}
-
-```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
-'Item' must be ordered with permission.
-```
-{: screen}
-
-```
-{{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
-The user does not have the necessary {{site.data.keyword.Bluemix_notm}}
-Infrastructure permissions to add servers
-```
-{: screen}
-
-```
-IAM token exchange request failed: Cannot create IMS portal token, as no IMS account is linked to the selected BSS account
+that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the {{site.data.keyword.containerlong}} CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 {: tsCauses}
-자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있습니다. 추가 구성 없이 클러스터의 인프라 리소스를 구매할 수 있습니다. 종량과금제 계정을 보유 중이며 이 오류 메시지를 수신하는 경우, 인프라 리소스에 액세스하기 위한 올바른 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 사용 중이지 않을 수 있습니다.
+자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있습니다. 추가 구성 없이 클러스터의 인프라 리소스를 구매할 수 있습니다.
 
-기타 {{site.data.keyword.Bluemix_notm}} 계정 유형의 사용자가 표준 클러스터의 작성을 위해 자체 계정을 구성해야 합니다. 다른 계정 유형을 보유할 수 있는 경우의 예는 다음과 같습니다. 
-* 사용자가 {{site.data.keyword.Bluemix_notm}} 플랫폼 계정보다 앞서는 기존 IBM Cloud 인프라(SoftLayer) 계정을 보유 중이며 이를 계속 사용하고자 합니다. 
-* 사용자가 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하여 인프라 리소스를 프로비저닝하고자 합니다. 예를 들어, 비용 청구 용도로 다른 인프라 계정을 사용하도록 팀 {{site.data.keyword.Bluemix_notm}} 계정을 설정할 수 있습니다. 
+기타 {{site.data.keyword.Bluemix_notm}} 계정 유형을 사용하는 사용자 또는 해당 {{site.data.keyword.Bluemix_notm}} 계정에 연결되지 않은 기존 IBM Cloud 인프라(SoftLayer) 계정을 보유한 사용자는 표준 클러스터를 작성하도록 해당 계정을 구성해야 합니다.
+
 
 {: tsResolve}
-계정 소유자는 인프라 계정 인증 정보를 올바르게 설정해야 합니다. 인증 정보는 사용 중인 인프라 계정의 유형에 따라 다릅니다.
+IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하도록 계정을 구성하는 방법은 보유한 계정의 유형에 따라 다릅니다. 다음 표를 검토하여 각 계정 유형에 사용 가능한 옵션을 찾으십시오.
 
-**시작하기 전에**:
+|계정 유형|설명|표준 클러스터를 작성하기 위해 사용 가능한 옵션|
+|------------|-----------|----------------------------------------------|
+|라이트 계정|라이트 계정은 클러스터를 프로비저닝할 수 없습니다.|[라이트 계정을 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정](/docs/account/index.html#paygo)으로 업그레이드하십시오.|
+|이전 종량과금제 계정|자동 계정 링크가 사용 가능하기 전에 작성된 종량과금제 계정에서는 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한을 제공하지 않았습니다.<p>기존 IBM Cloud 인프라(SoftLayer) 계정이 있으면 이 계정을 이전 종량과금제 계정에 연결할 수 없습니다.</p>|<strong>옵션 1:</strong> IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/account/index.html#paygo)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다.<p>이전 종량과금제 계정을 계속 사용하려면 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다. 그런 다음 [이전 종량과금제 계정에 대한 IBM Cloud 인프라(SoftLayer) API 키를 설정](cs_cli_reference.html#cs_credentials_set)해야 합니다. </p><p><strong>옵션 2:</strong> 사용할 기존 IBM Cloud 인프라(SoftLayer) 계정이 이미 있는 경우에는 {{site.data.keyword.Bluemix_notm}} 계정의 [신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.</p><p>**참고:** IBM Cloud 인프라(SoftLayer) 계정에 수동으로 연결하는 경우 신임 정보가 {{site.data.keyword.Bluemix_notm}} 계정의 모든 IBM Cloud 인프라(SoftLayer) 특정 조치에 대해 사용됩니다. 사용자가 클러스터를 작성하고 작업할 수 있도록 설정한 API 키에 [충분한 인프라 권한](cs_users.html#infra_access)이 있는지 확인해야 합니다.</p>|
+|구독 계정|구독 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정되지 않습니다.|<strong>옵션 1:</strong> IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/account/index.html#paygo)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다.<p>계속해서 구독 계정을 사용하려는 경우 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer)에 API 키를 생성할 수 있습니다. 그런 다음, 수동으로 [구독 계정에 대한 IBM Cloud 인프라(SoftLayer) API 키를 설정](cs_cli_reference.html#cs_credentials_set)해야 합니다. IBM Cloud 인프라(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오.</p><p><strong>옵션 2:</strong> 사용할 기존 IBM Cloud 인프라(SoftLayer) 계정이 이미 있는 경우에는 수동으로 {{site.data.keyword.Bluemix_notm}} 계정의 [IBM Cloud 인프라(SoftLayer) 신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.<p>**참고:** IBM Cloud 인프라(SoftLayer) 계정에 수동으로 연결하는 경우 신임 정보가 {{site.data.keyword.Bluemix_notm}} 계정의 모든 IBM Cloud 인프라(SoftLayer) 특정 조치에 대해 사용됩니다. 사용자가 클러스터를 작성하고 작업할 수 있도록 설정한 API 키에 [충분한 인프라 권한](cs_users.html#infra_access)이 있는지 확인해야 합니다.</p>|
+|{{site.data.keyword.Bluemix_notm}} 계정이 아닌 IBM Cloud 인프라(SoftLayer) 계정|표준 클러스터를 작성하려면 {{site.data.keyword.Bluemix_notm}} 계정이 있어야 합니다.|<p>IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [종량과금제 계정을 작성](/docs/account/index.html#paygo)합니다. 이 옵션을 선택하면 IBM Cloud 인프라(SoftLayer) 계정이 작성됩니다. 두 개의 별도 IBM Cloud 인프라(SoftLayer) 계정과 비용 청구가 있습니다.</p>|
+{: caption="계정 유형별 표준 클러스터 작성 옵션" caption-side="top"}
 
-1.  인프라 계정에 대한 액세스 권한이 있는지 확인하십시오. [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/)에 로그인하고 펼치기 메뉴에서 **인프라**를 클릭하십시오. 인프라 대시보드가 나타나면 인프라 계정에 대한 액세스 권한이 있는 것입니다.
-2.  클러스터가 종량과금제 계정과 함께 제공된 계정이 아닌 다른 인프라 계정을 사용하는지 확인하십시오. 
-    1.  펼치기 메뉴에서 **컨테이너 > 클러스터**를 클릭하십시오.
-    2.  테이블에서 클러스터를 선택하십시오.
-    3.  **개요** 탭에서 **인프라 사용자** 필드를 확인하십시오.
-        * **인프라 사용자** 필드가 나타나지 않으면 사용자가 인프라 및 플랫폼 계정에 대해 동일한 인증 정보를 사용하는 연결된 종량과금제 계정을 보유 중입니다. 
-        * **인프라 사용자** 필드가 나타나는 경우, 클러스터는 종량과금제 계정과 함께 제공된 계정이 아닌 다른 인프라 계정을 사용합니다. 이러한 서로 다른 인증 정보는 지역 내의 모든 클러스터에 적용됩니다. 
-3.  인프라 권한 문제의 해결 방법을 결정하기 위해 보유하고자 하는 계정의 유형을 결정하십시오. 대부분의 사용자의 경우에는 기본적으로 연결된 종량과금제 계정만으로 충분합니다. 
-    *  연결된 종량과금제 {{site.data.keyword.Bluemix_notm}} 계정: [인프라 API 키가 올바른 권한으로 설정되어 있는지 확인](#apikey)하십시오. 클러스터가 다른 인프라 계정을 사용 중이면 프로세스의 일부로서 해당 인증 정보를 설정 해제해야 합니다. 
-    *  다른 {{site.data.keyword.Bluemix_notm}} 플랫폼 및 인프라 계정: 인프라 포트폴리오에 액세스할 수 있는지와 [인프라 계정 인증 정보가 올바른 권한으로 설정되어 있는지](#credentials) 확인하십시오. 
-
-### API 키로 연결된 종량과금제 계정의 기본 인프라 인증 정보 사용
-{: #apikey}
-
-1.  해당 인증 정보를 인프라 조치에 사용할 사용자에게 올바른 권한이 있는지 확인하십시오.
-
-    1.  [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/)에 로그인하십시오.
-
-    2.  펼치기 메뉴에서 **인프라**를 선택하십시오.
-
-    3.  메뉴 표시줄에서 **계정** > **사용자** > **사용자 목록**을 선택하십시오.
-
-    4.  **API 키** 열에서 사용자가 API 키를 보유하는지 확인하거나 **생성**을 클릭하십시오.
-
-    5.  사용자를 확인하거나 사용자에게 [올바른 인프라 권한](cs_users.html#infra_access)을 지정하십시오.
-
-2.  클러스터가 있는 지역에 대한 API키를 설정하십시오.
-
-    1.  사용하고자 하는 인프라 권한이 있는 사용자로 터미널에 로그인하십시오. 
-    
-    2.  다른 지역에 있는 경우에는 API 키를 설정하고자 하는 지역으로 변경하십시오. 
-    
-        ```
-        ibmcloud ks region-set
-        ```
-        {: pre}
-
-    3.  지역에 대한 사용자의 API 키를 설정하십시오.
-        ```
-        ibmcloud ks api-key-reset
-        ```
-        {: pre}    
-
-    4.  API 키가 설정되었는지 확인하십시오.
-        ```
-        ibmcloud ks api-key-info <cluster_name_or_ID>
-        ```
-        {: pre}
-
-3.  **선택사항**: 종량과금제 계정이 다른 인프라 계정을 사용하여 클러스터를 프로비저닝하는 경우(예: `ibmcloud ks credentials-set` 명령을 사용함), 계정은 API 키 대신에 계속 해당 인프라 인증 정보를 사용합니다. 이전 단계에서 설정한 API 키가 사용되도록 연관된 인프라 계정을 제거해야 합니다.
-    ```
-        ibmcloud ks credentials-unset
-    ```
-    {: pre}
-        
-4.  **선택사항**: 공용 클러스터를 온프레미스 리소스에 연결하는 경우에는 네트워크 연결을 확인하십시오.
-
-    1.  작업자 VLAN 연결을 확인하십시오.
-    2.  필요하면 [VPN 연결을 설정](cs_vpn.html#vpn)하십시오.
-    3.  [방화벽에서 필수 포트를 여십시오](cs_firewall.html#firewall).
-
-### 서로 다른 플랫폼 및 인프라 계정의 인프라 인증 정보 구성
-{: #credentials}
-
-1.  IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용할 인프라 계정을 가져오십시오. 현재 계정 유형에 따라 서로 다른 옵션이 있습니다.
-
-    <table summary="표에서는 계정 유형별로 표준 클러스터 작성 옵션을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 계정 설명은 1열에 있고 표준 클러스터 작성을 위한 옵션은 2열에 있습니다.">
-    <caption>계정 유형별 표준 클러스터 작성 옵션</caption>
-      <thead>
-      <th>계정 설명</th>
-      <th>표준 클러스터를 작성하기 위한 옵션</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>**Lite 계정**은 클러스터를 프로비저닝할 수 없습니다.</td>
-          <td>[Lite 계정을 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정](/docs/account/index.html#paygo)으로 업그레이드하십시오.</td>
-        </tr>
-        <tr>
-          <td>**최신 종량과금제** 계정은 인프라 포트폴리오에 대한 액세스 권한과 함께 제공됩니다.</td>
-          <td>표준 클러스터를 작성할 수 있습니다. 인프라 권한 문제를 해결하려면 [링크된 계정에 대한 인프라 API 인증 정보 구성](#apikey)을 참조하십시오.</td>
-        </tr>
-        <tr>
-          <td>자동 계정 링크가 사용 가능하게 되기 전에 작성된 **이전 종량과금제 계정**은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한과 함께 제공되지 않았습니다.<p>기존 IBM Cloud 인프라(SoftLayer) 계정이 있으면 이 계정을 이전 종량과금제 계정에 연결할 수 없습니다.</p></td>
-          <td><p><strong>옵션 1:</strong> IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/account/index.html#paygo)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다.</p><p>이전 종량과금제 계정을 계속 사용하려면 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다.</p><p><strong>옵션 2:</strong> 사용하고자 하는 기존 IBM Cloud 인프라(SoftLayer) 계정을 이미 보유 중이면 {{site.data.keyword.Bluemix_notm}} 계정에서 인증 정보를 설정할 수 있습니다.</p><p>**참고:** IBM Cloud 인프라(SoftLayer) 계정에 수동으로 연결하는 경우 인증 정보가 {{site.data.keyword.Bluemix_notm}} 계정의 모든 IBM Cloud 인프라(SoftLayer) 특정 조치에 대해 사용됩니다. 사용자가 클러스터를 작성하고 작업할 수 있도록 설정한 API 키에 [충분한 인프라 권한](cs_users.html#infra_access)이 있는지 확인해야 합니다.</p><p>**두 옵션 모두의 경우, 다음 단계를 계속하십시오**.</p></td>
-        </tr>
-        <tr>
-          <td>**구독 계정**은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정되어 있지 않습니다.</td>
-          <td><p><strong>옵션 1:</strong> IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/account/index.html#paygo)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다.</p><p>계속해서 구독 계정을 사용하려는 경우 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer)에 API 키를 생성할 수 있습니다. 그리고 구독 계정에 대한 IBM Cloud 인프라(SoftLayer) API 키를 수동으로 설정해야 합니다. IBM Cloud 인프라(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오.</p><p><strong>옵션 2:</strong> 사용하고자 하는 기존 IBM Cloud 인프라(SoftLayer) 계정을 이미 보유 중인 경우에는 {{site.data.keyword.Bluemix_notm}} 계정에 대한 IBM Cloud 인프라(SoftLayer) 인증 정보를 수동으로 설정할 수 있습니다.</p><p>**참고:** IBM Cloud 인프라(SoftLayer) 계정에 수동으로 연결하는 경우 인증 정보가 {{site.data.keyword.Bluemix_notm}} 계정의 모든 IBM Cloud 인프라(SoftLayer) 특정 조치에 대해 사용됩니다. 사용자가 클러스터를 작성하고 작업할 수 있도록 설정한 API 키에 [충분한 인프라 권한](cs_users.html#infra_access)이 있는지 확인해야 합니다.</p><p>**두 옵션 모두의 경우, 다음 단계를 계속하십시오**.</p></td>
-        </tr>
-        <tr>
-          <td>**IBM Cloud 인프라(SoftLayer) 계정**({{site.data.keyword.Bluemix_notm}} 계정이 아님)</td>
-          <td><p>[IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정](/docs/account/index.html#paygo)을 작성합니다. 이 옵션을 선택하면 IBM Cloud 인프라(SoftLayer) 계정이 작성됩니다. 두 개의 별도 IBM Cloud 인프라(SoftLayer) 계정과 비용 청구가 있습니다.</p><p>기본적으로 새 {{site.keyword.data.Bluemix_notm}} 계정은 새 인프라 계정을 사용합니다. 이전 인프라 계정을 계속 사용하려면 다음 단계를 계속하십시오.</p></td>
-        </tr>
-      </tbody>
-      </table>
-
-2.  해당 인증 정보를 인프라 조치에 사용할 사용자에게 올바른 권한이 있는지 확인하십시오.
-
-    1.  [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/)에 로그인하십시오.
-
-    2.  펼치기 메뉴에서 **인프라**를 선택하십시오.
-
-    3.  메뉴 표시줄에서 **계정** > **사용자** > **사용자 목록**을 선택하십시오.
-
-    4.  **API 키** 열에서 사용자가 API 키를 보유하는지 확인하거나 **생성**을 클릭하십시오.
-
-    5.  사용자를 확인하거나 사용자에게 [올바른 인프라 권한](cs_users.html#infra_access)을 지정하십시오.
-
-3.  올바른 계정의 사용자로 인프라 API 인증 정보를 설정하십시오.
-
-    1.  사용자의 인프라 API 인증 정보를 가져오십시오. **참고**: 인증 정보는 IBM ID와는 다릅니다.
-
-        1.  [{{site.data.keyword.Bluemix_notm}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/) 콘솔 **인프라** > **계정** > **사용자** > **사용자 목록** 테이블에서 **IBM ID 또는 사용자 이름**을 클릭하십시오.
-
-        2.  **API 액세스 정보** 섹션에서 **API 사용자 이름** 및 **인증 키**를 보십시오.    
-
-    2.  사용할 인프라 API 인증 정보를 설정하십시오.   
-        ```
-        ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-        ```
-        {: pre}
-
-4.  **선택사항**: 공용 클러스터를 온프레미스 리소스에 연결하는 경우에는 네트워크 연결을 확인하십시오.
-
-    1.  작업자 VLAN 연결을 확인하십시오.
-    2.  필요하면 [VPN 연결을 설정](cs_vpn.html#vpn)하십시오.
-    3.  [방화벽에서 필수 포트를 여십시오](cs_firewall.html#firewall).
 
 <br />
 
@@ -207,7 +67,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
-CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패합니다.
+CLI에서 `bx`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패합니다.
 
 {: tsCauses}
 로컬 시스템에서 프록시 또는 방화벽을 통해 공용 엔드포인트에 액세스하지 못하도록 방지하는 회사 네트워크 정책이 있을 수 있습니다.
@@ -254,7 +114,7 @@ kubectl proxy가 성공하지만 대시보드를 사용할 수 없는 경우 다
 
 
 {: tsCauses}
-IBM Cloud 인프라(SoftLayer) 계정에 다른 방화벽 설정이 있거나 기존 방화벽 설정을 사용자 정의했을 수 있습니다. {{site.data.keyword.containerlong_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 다른 이유는 작업자 노드가 다시 로드 루프에서 고착 상태에 빠졌기 때문일 수 있습니다.
+IBM Cloud 인프라(SoftLayer) 계정에 다른 방화벽 설정이 있거나 기존 방화벽 설정을 사용자 정의했을 수 있습니다. {{site.data.keyword.containershort_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 다른 이유는 작업자 노드가 다시 로드 루프에서 고착 상태에 빠졌기 때문일 수 있습니다.
 
 {: tsResolve}
 [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](cs_firewall.html#firewall_outbound)하십시오. 이 태스크에는 [관리자 액세스 정책](cs_users.html#access_policies)이 필요합니다. 현재 [액세스 정책](cs_users.html#infra_access)을 확인하십시오.
@@ -270,41 +130,19 @@ IBM Cloud 인프라(SoftLayer) 계정에 다른 방화벽 설정이 있거나 �
 SSH 연결을 사용하여 작업자 노드에 액세스할 수 없습니다.
 
 {: tsCauses}
-비밀번호에 의한 SSH를 작업자 노드에서 사용할 수 없습니다.
+비밀번호를 통한 SSH가 작업자 노드에서 사용되지 않습니다.
 
 {: tsResolve}
-모든 노드에서 실행해야 할 조치에 대한 [DaemonSets ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하거나, 실행해야 할 일회성 조치에 대한 작업을 사용하십시오.
+실행해야 하는 일회성 조치에 대한 모든 노드 또는 작업에 대해 실행해야 하는 전체 항목에 대해 [DaemonSets![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하십시오.
 
 <br />
 
 
-## 베어메탈 인스턴스 ID가 작업자 레코드와 일치하지 않음
-{: #bm_machine_id}
-
-{: tsSymptoms}
-베어메탈 작업자 노드에서 `ibmcloud ks worker` 명령을 사용할 때 다음과 유사한 메시지가 표시됩니다.
-
-```
-Instance ID inconsistent with worker records
-```
-{: screen}
-
-{: tsCauses}
-머신에서 하드웨어 문제가 발생하면 머신 ID가 {{site.data.keyword.containerlong_notm}} 작업자 레코드와 일치하지 않게 될 수 있습니다. IBM Cloud 인프라(SoftLayer)에서 이 문제를 해결하는 경우, 서비스가 식별하지 않는 시스템 내에서 컴포넌트가 변경될 수 있습니다.
-
-{: tsResolve}
-{{site.data.keyword.containerlong_notm}}가 머신을 다시 식별할 수 있도록 [베어메탈 작업자 노드를 다시 로드](cs_cli_reference.html#cs_worker_reload)하십시오. **참고**: 다시 로드하면 머신의 [패치 버전](cs_versions_changelog.html)도 업데이트됩니다.
-
-[베어메탈 작업자 노드를 삭제](cs_cli_reference.html#cs_cluster_rm)할 수도 있습니다. **참고**: 베어메탈 인스턴스는 월별로 비용이 청구됩니다.
-
-<br />
-
-
-## `kubectl` 명령 제한시간 초과
+## `kubectl exec` 및 `kubectl logs`가 작동하지 않음
 {: #exec_logs_fail}
 
 {: tsSymptoms}
-`kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward` 또는 `kubectl logs` 등의 명령을 실행하면 다음 메시지가 표시됩니다.
+`kubectl exec` 또는 `kubectl logs`를 실행하면 다음 메시지가 표시됩니다.
 
   ```
   <workerIP>:10250: getsockopt: connection timed out
@@ -315,7 +153,7 @@ Instance ID inconsistent with worker records
 마스터 노드와 작업자 노드 간의 OpenVPN 연결이 제대로 작동하지 않습니다.
 
 {: tsResolve}
-1. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오. 
+1. IBM Cloud 인프라(SoftLayer) 계정에 대한 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)을 사용으로 설정하십시오.
 2. OpenVPN 클라이언트 팟(Pod)을 다시 시작하십시오.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -330,11 +168,11 @@ Instance ID inconsistent with worker records
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
+`bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
 
 ```
 Multiple services with the same name were found.
-Run 'ibmcloud service list' to view available Bluemix service instances...
+Run 'bx service list' to view available Bluemix service instances...
 ```
 {: screen}
 
@@ -342,13 +180,13 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 서로 다른 지역에 동일한 이름의 서비스 인스턴스가 여러 개 있습니다.
 
 {: tsResolve}
-`ibmcloud ks cluster-service-bind` 명령에서 서비스 인스턴스 이름 대신 서비스 GUID를 사용하십시오.
+`bx cs cluster-service-bind` 명령에서 서비스 인스턴스 이름 대신 서비스 GUID를 사용하십시오.
 
 1. [바인딩할 서비스 인스턴스가 포함된 지역에 로그인하십시오.](cs_regions.html#bluemix_regions)
 
 2. 서비스 인스턴스의 GUID를 가져오십시오.
   ```
-  ibmcloud service show <service_instance_name> --guid
+  bx service show <service_instance_name> --guid
   ```
   {: pre}
 
@@ -358,9 +196,9 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
   <service_instance_GUID>
   ```
   {: screen}
-3. 서비스를 클러스터에 다시 바인딩하십시오.
+3. 서비스를 다시 클러스터에 바인딩하십시오.
   ```
-  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
   ```
   {: pre}
 
@@ -371,88 +209,69 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
+`bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
 
 ```
 Binding service to a namespace...
 FAILED
 
-The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ibmcloud service list'. (E0023)
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
 ```
 {: screen}
 
 {: tsCauses}
-서비스를 클러스터에 바인드하려면 서비스 인스턴스가 프로비저닝된 영역에 대한 Cloud Foundry 개발자 사용자 역할이 있어야 합니다. 또한 {{site.data.keyword.containerlong}}에 대한 IAM 편집자 액세스 권한이 있어야 합니다. 서비스 인스턴스에 액세스하려면 서비스 인스턴스가 프로비저닝된 영역에 로그인되어 있어야 합니다.
+서비스를 클러스터에 바인드하려면 서비스 인스턴스가 프로비저닝된 영역에 대한 Cloud Foundry 개발자 사용자 역할이 있어야 합니다. 또한 {{site.data.keyword.containerlong}}에 대한 IAM 편집자 액세스 권한이 있어야 합니다. 서비스 인스턴스에 액세스하려면 서비스 인스턴스가 프로비저닝된 영역에 로그인되어 있어야 합니다. 
 
 {: tsResolve}
 
 **사용자로서 다음을 수행하십시오.**
 
-1. {{site.data.keyword.Bluemix_notm}}에 로그인하십시오.
+1. {{site.data.keyword.Bluemix_notm}}에 로그인하십시오. 
    ```
-   ibmcloud login
-   ```
-   {: pre}
-
-2. 서비스 인스턴스가 프로비저닝된 조직 및 영역을 대상으로 지정하십시오.
-   ```
-   ibmcloud target -o <org> -s <space>
+           bx login
    ```
    {: pre}
-
-3. 서비스 인스턴스를 나열하여 올바른 영역에 있는지 확인하십시오.
+   
+2. 서비스 인스턴스가 프로비저닝된 조직 및 영역을 대상으로 지정하십시오. 
    ```
-   ibmcloud service list
+   bx target -o <org> -s <space>
    ```
    {: pre}
-
-4. 서비스를 다시 바인딩하십시오. 일부 오류가 발생하는 경우 계정 관리자에게 문의하여 서비스를 바인딩하기에 충분한 권한이 있는지 확인하십시오(다음 계정 관리자 단계 참조).
+   
+3. 서비스 인스턴스를 나열하여 올바른 영역에 있는지 확인하십시오. 
+   ```
+     bx service list 
+   ```
+   {: pre}
+   
+4. 서비스를 다시 바인딩하십시오. 일부 오류가 발생하는 경우 계정 관리자에게 문의하여 서비스를 바인딩하기에 충분한 권한이 있는지 확인하십시오(다음 계정 관리자 단계 참조). 
 
 **계정 관리자로서 다음을 수행하십시오.**
 
-1. 이 문제점이 발생한 사용자에게 [{{site.data.keyword.containerlong}}에 대한 편집자 권한](/docs/iam/mngiam.html#editing-existing-access)이 있는지 확인하십시오.
+1. 이 문제점이 발생한 사용자에게 [{{site.data.keyword.containerlong}}에 대한 편집자 권한](/docs/iam/mngiam.html#editing-existing-access)이 있는지 확인하십시오. 
 
-2. 이 문제점이 발생한 사용자에게 서비스가 프로비저닝되는 [영역에 대한 Cloud Foundry 개발자 역할](/docs/iam/mngcf.html#updating-cloud-foundry-access)이 있는지 확인하십시오.
+2. 이 문제점이 발생한 사용자에게 서비스가 프로비저닝되는 [영역에 대한 Cloud Foundry 개발자 역할](/docs/iam/mngcf.html#updating-cloud-foundry-access)이 있는지 확인하십시오. 
 
-3. 올바른 권한이 있는 경우 다른 권한을 지정한 후 필요한 권한을 다시 지정해 보십시오.
+3. 올바른 권한이 있는 경우 다른 권한을 지정한 후 필요한 권한을 다시 지정해 보십시오. 
 
-4. 몇 분 동안 기다린 후 사용자가 서비스 바인드를 다시 시도하도록 하십시오.
+4. 몇 분 동안 기다린 후 사용자가 서비스 바인드를 다시 시도하도록 하십시오. 
 
-5. 그래도 문제점이 해결되지 않으면 IAM 권한이 동기화되지 않고 직접 문제를 해결할 수 없습니다. 지원 티켓을 열어서 [IBM 지원에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)하십시오. 클러스터 ID, 사용자 ID 및 서비스 인스턴스 ID를 제공해야 합니다.
-   1. 클러스터 ID를 검색하십시오.
+5. 그래도 문제점이 해결되지 않으면 IAM 권한이 동기화되지 않고 직접 문제를 해결할 수 없습니다. 지원 티켓을 열어 [IBM 지원에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)하십시오. 클러스터 ID, 사용자 ID 및 서비스 인스턴스 ID를 제공해야 합니다. 
+   1. 클러스터 ID를 검색하십시오. 
       ```
-      ibmcloud ks clusters
+      bx cs clusters
       ```
       {: pre}
-
-   2. 서비스 인스턴스 ID를 검색하십시오.
+      
+   2. 서비스 인스턴스 ID를 검색하십시오. 
       ```
-      ibmcloud service show <service_name> --guid
+      bx service show <service_name> --guid
       ```
       {: pre}
 
 
 <br />
 
-
-## 서비스를 클러스터에 바인딩하면 서비스의 서비스 키 미지원 오류가 발생함
-{: #cs_service_keys}
-
-{: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
-
-```
-This service doesn't support creation of keys
-```
-{: screen}
-
-{: tsCauses}
-{{site.data.keyword.Bluemix_notm}}의 일부 서비스(예: {{site.data.keyword.keymanagementservicelong}})는 서비스 키라고도 하는 서비스 인증 정보의 작성을 지원하지 않습니다. 서비스 키의 지원이 없으면 서비스를 클러스터에 바인드할 수 없습니다. 서비스 키의 작성을 지원하는 서비스의 목록을 찾으려면 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용할 수 있도록 허용](/docs/apps/reqnsi.html#accser_external)을 참조하십시오. 
-
-{: tsResolve}
-서비스 키를 지원하지 않는 서비스를 통합하려면 앱에서 직접 서비스에 액세스하는 데 사용할 수 있는 API를 서비스가 제공하는지 확인하십시오. 예를 들어, {{site.data.keyword.keymanagementservicelong}}를 사용하려면 [API 참조 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/apidocs/kms?language=curl)를 참조하십시오.  
-
-<br />
 
 
 ## 작업자 노드가 업데이트되거나 다시 로드된 후 중복 노드 및 팟(Pod)이 표시됨
@@ -475,6 +294,66 @@ This service doesn't support creation of keys
 <br />
 
 
+## 작업자 노드가 업데이트되거나 다시 로드된 후 애플리케이션이 RBAC DENY 오류를 수신함
+{: #cs_rbac_deny}
+
+{: tsSymptoms}
+Kubernetes 버전 1.7로 업데이트한 후 애플리케이션이 `RBAC DENY` 오류를 수신합니다. 
+
+{: tsCauses}
+보안 강화를 위해 [Kubernetes 버전 1.7](cs_versions.html#cs_v17)부터는 `default` 네임스페이스에서 실행되는 애플리케이션에 더 이상 Kubernetes API에 대한 클러스터 관리자 권한이 부여되지 않습니다.
+
+앱이 `default` 네임스페이스에서 실행되며, `default ServiceAccount`를 사용하고, Kubernetes API에 액세스하는 경우에는 이 Kubernetes 변경사항의 영향을 받습니다. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/authorization/rbac/#upgrading-from-15)를 참조하십시오.
+
+{: tsResolve}
+시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+1.  **임치 조치**: 앱 RBAC 정책을 업데이트하면서 `default` 네임스페이스의 `default ServiceAccount`를 이전 `ClusterRoleBinding`으로 되돌릴 수 있습니다.
+
+    1.  다음 `.yaml` 파일을 복사하십시오.
+
+        ```yaml
+        kind: ClusterRoleBinding
+        apiVersion: rbac.authorization.k8s.io/v1beta1
+        metadata:
+         name: admin-binding-nonResourceURLSs-default
+        subjects:
+          - kind: ServiceAccount
+            name: default
+            namespace: default
+        roleRef:
+         kind: ClusterRole
+         name: admin-role-nonResourceURLSs
+         apiGroup: rbac.authorization.k8s.io
+        ---
+        kind: ClusterRoleBinding
+        apiVersion: rbac.authorization.k8s.io/v1beta1
+        metadata:
+         name: admin-binding-resourceURLSs-default
+        subjects:
+          - kind: ServiceAccount
+            name: default
+            namespace: default
+        roleRef:
+         kind: ClusterRole
+         name: admin-role-resourceURLSs
+         apiGroup: rbac.authorization.k8s.io
+        ```
+
+    2.  이 `.yaml` 파일을 클러스터에 적용하십시오.
+
+        ```
+        kubectl apply -f FILENAME
+        ```
+        {: pre}
+
+2.  [RBAC 권한 리소스를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)하여 `ClusterRoleBinding` 관리자 액세스 권한을 업데이트하십시오.
+
+3.  임시 클러스터 역할 바인딩을 작성한 경우에는 이를 제거하십시오.
+
+<br />
+
+
 ## 제한시간 초과로 인해 새 작업자 노드에서 팟(Pod)에 액세스하는 데 실패
 {: #cs_nodes_duplicate_ip}
 
@@ -490,14 +369,14 @@ This service doesn't support creation of keys
 1.  **사설 IP** 주소가 동일한 작업자 노드가 두 개 있는지 확인하십시오. 삭제된 작업자의 **사설 IP** 및 **ID**를 참고하십시오.
 
   ```
-  ibmcloud ks workers <CLUSTER_NAME>
+  bx cs workers <CLUSTER_NAME>
   ```
   {: pre}
 
   ```
-  ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.7
+  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.7
   ```
   {: screen}
 
@@ -526,7 +405,7 @@ This service doesn't support creation of keys
 5.  삭제되지 않은 작업자 노드를 다시 부팅하십시오.
 
   ```
-  ibmcloud ks worker-reboot CLUSTER_ID NODE_ID
+  bx cs worker-reboot CLUSTER_ID NODE_ID
   ```
   {: pre}
 
@@ -534,43 +413,6 @@ This service doesn't support creation of keys
 삭제된 노드는 더 이상 Calico에 나열되지 않습니다.
 
 <br />
-
-
-
-
-## 팟(Pod) 보안 정책으로 인한 팟(Pod) 배치 실패
-{: #cs_psp}
-
-{: tsSymptoms}
-팟(Pod)을 작성하거나 `kubectl get events`를 실행하여 팟(Pod) 배치를 확인한 후에 다음과 유사한 오류 메시지가 표시됩니다.
-
-```
-unable to validate against any pod security policy
-```
-{: screen}
-
-{: tsCauses}
-[`PodSecurityPolicy` 허가 제어기](cs_psp.html)는 팟(Pod) 작성을 시도한 배치 또는 Helm Tiller 등의 사용자 또는 서비스 계정에 대한 권한을 검사합니다. 팟(Pod) 보안 정책이 사용자 또는 서비스 계정을 지원하지 않는 경우, `PodSecurityPolicy` 허가 제어기는 팟(Pod)이 작성되지 않도록 합니다.
-
-[{{site.data.keyword.IBM_notm}} 클러스터 관리](cs_psp.html#ibm_psp)를 위한 팟(Pod) 보안 정책 리소스 중 하나를 삭제한 경우, 이와 유사한 문제가 발생할 수 있습니다.
-
-{: tsResolve}
-사용자 또는 서비스 계정이 팟(Pod) 보안 정책에 의해 권한이 부여되었는지 확인하십시오. [기존 정책을 수정](cs_psp.html#customize_psp)해야 할 수 있습니다.
-
-{{site.data.keyword.IBM_notm}} 클러스터 관리 리소스를 삭제한 경우에는 Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
-
-1.  클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-2.  Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
-
-    ```
-    ibmcloud ks apiserver-refresh
-    ```
-    {: pre}
-
-
-<br />
-
-
 
 
 ## 클러스터가 보류 상태를 유지함
@@ -585,8 +427,8 @@ unable to validate against any pod security policy
 {: tsResolve}
 
 다음 솔루션 중 하나를 수행할 수 있습니다.
-  - `ibmcloud ks clusters`를 실행하여 클러스터의 상태를 확인하십시오. 그리고 `ibmcloud ks workers <cluster_name>`을 실행하여 작업자 노드가 배치되었는지 확인하십시오.
-  - VLAN이 올바른지 확인하십시오. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다. `ibmcloud ks vlans <zone>`을 실행하여 [VLAN을 나열](/docs/containers/cs_cli_reference.html#cs_vlans)할 수 있으며, 해당 VLAN이 목록에 표시되지 않으면 이는 유효하지 않은 것입니다. 다른 VALN을 선택하십시오.
+  - `bx cs clusters`를 실행하여 클러스터의 상태를 확인하십시오. 그런 다음 `bx cs workers <cluster_name>`을 실행하여 작업자 노드가 배치되었는지 확인하십시오.
+  - VLAN이 올바른지 확인하십시오. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다. 목록에 VLAN이 표시되지 않으며 유효하지 않은 경우 `bx cs vlans <location>`을 실행하여 [VLAN을 나열](/docs/containers/cs_cli_reference.html#cs_vlans)할 수 있습니다. 다른 VALN을 선택하십시오.
 
 <br />
 
@@ -598,11 +440,7 @@ unable to validate against any pod security policy
 `kubectl get pods`를 실행할 때 **보류** 상태를 유지하는 팟(Pod)을 볼 수 있습니다.
 
 {: tsCauses}
-Kubernetes 클러스터를 방금 작성한 경우, 작업자 노드가 여전히 구성 중일 수 있습니다. 
-
-이 클러스터가 기존 클러스터인 경우: 
-*  클러스터에 팟(Pod)을 배치하기에 충분한 용량이 없을 수 있습니다. 
-*  팟(Pod)이 리소스 요청 또는 한계를 초과했을 수 있습니다. 
+Kubernetes 클러스터를 방금 작성한 경우, 작업자 노드가 여전히 구성 중일 수 있습니다. 이 클러스터가 기존 클러스터인 경우, 클러스터에 팟(Pod)을 배치할 만큼 충분한 용량이 없을 수 있습니다.
 
 {: tsResolve}
 이 태스크에는 [관리자 액세스 정책](cs_users.html#access_policies)이 필요합니다. 현재 [액세스 정책](cs_users.html#infra_access)을 확인하십시오.
@@ -632,36 +470,18 @@ kubectl get nodes
 
 3.  팟(Pod)을 배치하기에 충분한 용량이 클러스터에 있는지 확인하십시오.
 
-4.  클러스터에 충분한 용량이 없으면 작업자 풀의 크기를 조정하여 노드를 더 추가하십시오.
+4.  클러스터에 충분한 용량이 없으면 클러스터에 다른 작업자 노드를 추가하십시오.
 
-    1.  작업자 풀의 현재 크기와 머신 유형을 검토하여 크기를 조정할 대상을 결정하십시오.
+    ```
+    bx cs worker-add <cluster_name_or_ID> 1
+    ```
+    {: pre}
 
-        ```
-        ibmcloud ks worker-pools
-        ```
-        {: pre}
-
-    2.  작업자 풀의 크기를 조정하여 풀의 범위에 속한 각 구역에 노드를 더 추가하십시오.
-
-        ```
-        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
-        ```
-        {: pre}
-
-5.  선택사항: 팟(Pod) 리소스 요청을 확인하십시오. 
-
-    1.  `resources.requests` 값이 작업자 노드의 용량보다 크지 않은지 확인하십시오. 예를 들어, 팟(Pod)에서 `cpu: 4000m` 또는 4 코어를 요청하지만 작업자 노드 크기가 단지 2 코어이면 팟(Pod)을 배치할 수 없습니다. 
-
-        ```
-        kubectl get pod <pod_name> -o yaml
-        ```
-        {: pre}
-    
-    2.  요청이 사용 가능한 용량을 초과하면 요청을 이행할 수 있는 작업자 노드의 [새 작업자 풀을 추가](cs_clusters.html#add_pool)하십시오. 
-
-6.  작업자 노드를 완전히 배치한 후에도 팟(Pod)이 계속 **보류** 상태를 유지하면 [Kubernetes 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)를 검토하여 보류 상태인 팟(Pod)의 추가 문제점을 해결할 수 있습니다.
+5.  작업자 노드를 완전히 배치한 후에도 팟(Pod)이 계속 **보류** 상태를 유지하면 [Kubernetes 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)를 검토하여 보류 상태인 팟(Pod)의 추가 문제점을 해결할 수 있습니다.
 
 <br />
+
+
 
 
 ## 컨테이너가 시작되지 않음
@@ -676,9 +496,8 @@ kubectl get nodes
 {: tsResolve}
 [{{site.data.keyword.registryshort_notm}}의 스토리지를 비우십시오.](../services/Registry/registry_quota.html#registry_quota_freeup)
 
-
-
 <br />
+
 
 
 ## 업데이트된 구성 값을 사용하여 Helm 차트를 설치할 수 없음
@@ -726,7 +545,7 @@ Helm 차트의 문제점을 해결하려면 다음을 수행하십시오.
             ```
             {: pre}
 
-    * URL이 올바른 경우, 저장소에서 최신 업데이트를 가져오십시오.
+    * URL이 올바르지 않은 경우 저장소에서 최신 업데이트를 가져오십시오.
 
         ```
         helm repo update
@@ -749,21 +568,19 @@ Helm 차트의 문제점을 해결하려면 다음을 수행하십시오.
 클러스터에 여전히 문제점이 있습니까?
 {: shortdesc}
 
--  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오. 
-
--   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
--   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
+-   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")를 참조](https://developer.ibm.com/bluemix/support/#status)하십시오.
+-   [{{site.data.keyword.containershort_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
 
 {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
 
-    -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
-    -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
+    -   {{site.data.keyword.containershort_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [스택 오버플로우![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
+    -   시작하기 지시사항과 서비스에 대한 질문은 [IBM developerWorks dW 응답![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
 
 -   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 
 {: tip}
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
+문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `bx cs clusters`를 실행하십시오.
 

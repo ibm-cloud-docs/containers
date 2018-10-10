@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,137 +20,79 @@ lastupdated: "2018-09-10"
 # 使用 LoadBalancer 公開應用程式
 {: #loadbalancer}
 
-公開埠並使用可攜式 IP 位址，讓第 4 層負載平衡器可以存取容器化應用程式。
+公開埠並使用可攜式 IP 位址，讓負載平衡器可以存取容器化應用程式。
 {:shortdesc}
 
-
-
-## 負載平衡器元件及架構
+## 使用 LoadBalancer 管理網路資料流量
 {: #planning}
 
-當您建立標準叢集時，{{site.data.keyword.containerlong_notm}} 會自動佈建 1 個可攜式公用子網路及 1 個可攜式專用子網路。
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建下列子網路：
+    
+* 主要的公用子網路，用於在建立叢集期間判定工作者節點的公用 IP 位址
+* 主要的專用子網路，用於在建立叢集期間判定工作者節點的專用 IP 位址
+* 可攜式公用子網路，用於提供 5 個公用 IP 位址給 Ingress 及負載平衡器網路服務
+* 可攜式專用子網路，用於提供 5 個專用 IP 位址給 Ingress 及負載平衡器網路服務
 
-* 可攜式公用子網路提供預設[公用 Ingress ALB](cs_ingress.html) 所使用的 1 個可攜式公用 IP 位址。藉由建立公用負載平衡器服務，即可使用其餘 4 個可攜式公用 IP 位址，將單一應用程式公開至網際網路。
-* 可攜式專用子網路提供預設[專用 Ingress ALB](cs_ingress.html#private_ingress) 所使用的 1 個可攜式專用 IP 位址。藉由建立專用負載平衡器服務，即可使用其餘 4 個可攜式專用 IP 位址，將單一應用程式公開至專用網路。
+      可攜式公用及專用 IP 位址是靜態的，而且不會在移除工作者節點時變更。針對每一個子網路，一個可攜式公用及一個可攜式專用 IP 位址用於預設 [Ingress 應用程式負載平衡器](cs_ingress.html)。藉由建立負載平衡器服務，即可使用其餘四個可攜式公用 IP 位址及四個可攜式專用 IP 位址，將單一應用程式公開至公用或專用網路。
 
-      可攜式公用及專用 IP 位址是靜態的，而且不會在移除工作者節點時變更。如果移除負載平衡器 IP 位址所在的工作者節點，則持續監視 IP 的 keepalived 常駐程式會自動將 IP 移至另一個工作者節點。您可以將任何埠指派給負載平衡器，而且未連結至特定埠範圍。
+當您在公用 VLAN 上的叢集建立 Kubernetes LoadBalancer 服務時，會建立外部負載平衡器。當您建立 LoadBalancer 服務時，您的 IP 位址選項如下：
 
-負載平衡器服務也可讓您的應用程式透過服務的 NodePort 提供使用。叢集內每個節點的每個公用及專用 IP 位址上都可以存取 [NodePort](cs_nodeport.html)。若要在使用負載平衡器服務時封鎖流向 NodePort 的資料流量，請參閱[控制 LoadBalancer 或 NodePort 服務的入埠資料流量](cs_network_policy.html#block_ingress)。
+- 如果您的叢集是在公用 VLAN 上，則會使用四個可用的可攜式公用 IP 位址的其中一個。
+- 如果您的叢集只能在專用 VLAN 上使用，則會使用四個可用的可攜式專用 IP 位址的其中一個。
+- 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`。
+
+指派給 LoadBalancer 服務的可攜式公用 IP 位址是永久性的，在叢集中移除或重建工作者節點時並不會變更。因此，LoadBalancer 服務的可用性比 NodePort 服務高。與 NodePort 服務不同，您可以將任何埠指派給負載平衡器，而且未連結至特定埠範圍。如果您使用 LoadBalancer 服務，則任何工作者節點的每一個 IP 位址也都有一個 NodePort 可用。若要在使用 LoadBalancer 服務時封鎖對 NodePort 的存取，請參閱[封鎖送入的資料流量](cs_network_policy.html#block_ingress)。
 
 LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要從網際網路存取 LoadBalancer 服務，請使用負載平衡器的公用 IP 位址以及 `<IP_address>:<port>` 格式的已指派埠。下圖顯示負載平衡器如何將通訊從網際網路導向應用程式。
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用負載平衡器在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用負載平衡器在 {{site.data.keyword.containershort_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
 
-1. 應用程式的要求使用負載平衡器的公用 IP 位址及工作者節點上的已指派埠。
+1. 使用負載平衡器的公用 IP 位址及工作者節點上的已指派埠，將要求傳送至應用程式。
 
 2. 該要求會自動轉遞至負載平衡器服務的內部叢集 IP 位址及埠。內部叢集 IP 位址只能在叢集內部存取。
 
 3. `kube-proxy` 會將要求遞送至應用程式的 Kubernetes 負載平衡器服務。
 
-4. 要求會轉遞至應用程式 Pod 的專用 IP 位址。要求套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。如果叢集裡已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 之間遞送要求。
+4. 要求會轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果叢集中已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 之間遞送要求。
 
-**多區域叢集**：
 
-如果您有多區域叢集，則應用程式實例會部署至不同區域的工作者節點上的 Pod。請檢閱這些 LoadBalancer 設定，以負載平衡對多個區域中應用程式實例提出的要求。
-
-<img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="使用 LoadBalancer 服務，以負載平衡多區域叢集裡的應用程式" style="width:700px; border-style: none"/>
-
-1. **低可用性：部署在某個區域的負載平衡器。**依預設，每一個負載平衡器只會設定在某個區域中。只部署一個負載平衡器時，負載平衡器必須將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。
-
-2. **高可用性：部署在每一個區域的負載平衡器。**在您具有應用程式實例的每個區域中部署負載平衡器時，即可達到高可用性。各種區域中的負載平衡器會以循環式週期處理要求。此外，每一個負載平衡器都會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。
 
 
 <br />
 
 
+s`.</td>
+        </tr>
+        <tr>
+          <td><code>selector</code></td>
+          <td>輸入標籤索引鍵 (<em>&lt;selector_key&gt;</em>) 及值 (<em>&lt;selector_value&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。若要將 Pod 設為目標，並在服務負載平衡中包括它們，請勾選 <em>&lt;selectorkey&gt;</em> 及 <em>&lt;selectorvalue&gt;</em> 值。確定它們與您在部署 yaml 的 <code>spec.template.metadata.labels</code> 區段中所使用的<em>鍵值組</em> 相同。</td>
+        </tr>
+        <tr>
+          <td><code>port</code></td>
+          <td>服務所接聽的埠。</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIP</code></td>
+          <td>若要建立專用 LoadBalancer 或針對公用 LoadBalancer 使用特定的可攜式 IP 位址，請將 <em>&lt;IP_address&gt;</em> 取代為您要使用的 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
+        </tr>
+        </tbody></table>
 
-## 啟用多區域叢集裡應用程式的公用或專用存取
-{: #multi_zone_config}
+      3. 選用項目：在 **spec** 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
-附註：
-  * 只有標準叢集才能使用此特性。
-  * LoadBalancer 服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
+      4. 在叢集中建立服務。
 
-開始之前：
-  * 具有可攜式專用 IP 位址的負載平衡器服務仍然會在每個工作者節點上開啟一個公用 NodePort。若要新增網路原則以防止公用資料流量，請參閱[封鎖送入的資料流量](cs_network_policy.html#block_ingress)。
-  * 您必須在每一個區域中部署負載平衡器，且每一個負載平衡器獲指派其本身在該區域的 IP 位址。若要建立公用負載平衡器，則必須至少有一個公用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增專用負載平衡器服務，則必須至少有一個專用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增子網路，請參閱[配置叢集的子網路](cs_subnets.html)。
-  * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每一個區域中至少啟用 2 個[邊緣工作者節點](cs_edge.html#edge)。如果在部分區域中啟用邊緣工作者節點，但在其他區域中未啟用，則不會統一部署負載平衡器。負載平衡器將會部署至部分區域中的邊緣節點，但不會部署至其他區域中的一般工作者節點。
-  * 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
-
-
-若要在多區域叢集裡設定 LoadBalancer 服務，請執行下列動作：
-1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
-
-2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
-  1. 例如，建立名稱為 `myloadbalancer.yaml` 的服務配置檔。
-  2. 為您要公開的應用程式定義負載平衡器服務。您可以指定來自專用或公用可攜式子網路的 IP 位址，以及區域。
-      - 若要同時選擇區域及 IP 位址，請使用 `ibm-load-balancer-cloud-provider-zone` 註釋來指定區域，以及使用 `loadBalancerIP` 欄位來指定位在該區域中的公用或專用 IP 位址。
-      - 若只要選擇 IP 位址，請使用 `loadBalancerIP` 欄位來指定公用或專用 IP 位址。負載平衡器建立於 IP 位址的 VLAN 所在區域中。
-      - 若只要選擇區域，請使用 `ibm-load-balancer-cloud-provider-zone` 註釋來指定區域。會使用來自所指定區域的可攜式 IP 位址。
-      - 如果您未指定 IP 位址或區域，而且叢集位於公用 VLAN，則會使用可攜式公用 IP 位址。大部分叢集都在公用 VLAN 上。如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。負載平衡器建立於 VLAN 所在的區域中。
-
-      LoadBalancer 服務使用註釋來指定專用或公用負載平衡器及區域，而 `loadBalancerIP` 區段指定 IP 位址：
-
-      ```
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: myloadbalancer
-        annotations:
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
-      spec:
-        type: LoadBalancer
-        selector:
-          <selector_key>: <selector_value>
-        ports:
-         - protocol: TCP
-             port: 8080
-          loadBalancerIP: <IP_address>
+          ```
+                  kubectl apply -f myloadbalancer.yaml
         ```
-      {: codeblock}
+          {: pre}
 
-      <table>
-      <caption>瞭解 YAML 檔案元件</caption>
-      <thead>
-      <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-      </thead>
-      <tbody>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-          <td>要指定 LoadBalancer 類型的註釋。接受值為 <code>private</code> 及 <code>public</code>。如果您要在公用 VLAN 的叢集裡建立公用 LoadBalancer，則不需要此註釋。</td>
-      </tr>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>要指定區域的註釋。若要查看區域，請執行 <code>ibmcloud ks zones</code>。</td>
-      </tr>
-      <tr>
-        <td><code>selector</code></td>
-        <td>輸入標籤索引鍵 (<em>&lt;selector_key&gt;</em>) 及值 (<em>&lt;selector_value&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。若要將 Pod 設為目標，並在服務負載平衡中包括它們，請勾選 <em>&lt;selectorkey&gt;</em> 及 <em>&lt;selectorvalue&gt;</em> 值。確定它們與您在部署 yaml 的 <code>spec.template.metadata.labels</code> 區段中所使用的<em>鍵值組</em> 相同。</td>
-      </tr>
-      <tr>
-        <td><code>port</code></td>
-        <td>服務所接聽的埠。</td>
-      </tr>
-      <tr>
-        <td><code>loadBalancerIP</code></td>
-        <td>若要建立專用 LoadBalancer 或針對公用 LoadBalancer 使用特定的可攜式 IP 位址，請將 <em>&lt;IP_address&gt;</em> 取代為您要使用的 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
-      </tr>
-      </tbody></table>
+                  若已建立負載平衡器服務，可攜式 IP 位址即會自動指派給負載平衡器。如果沒有可用的可攜式 IP 位址，則無法建立負載平衡器服務。
 
-  3. 選用項目：在 **spec** 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
-  4. 在叢集裡建立服務。
-
-      ```
-        kubectl apply -f myloadbalancer.yaml
-        ```
-      {: pre}
-
-3. 驗證已順利建立負載平衡器服務。將 _&lt;myservice&gt;_ 取代為您在前一個步驟中建立之負載平衡器服務的名稱。
+3.  驗證已順利建立負載平衡器服務。將 _&lt;myservice&gt;_ 取代為您在前一個步驟中建立之負載平衡器服務的名稱。
 
     ```
-    kubectl describe service myloadbalancer
+        kubectl describe service myloadbalancer
     ```
     {: pre}
 
@@ -164,7 +106,7 @@ LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要�
     Labels:                 <none>
     Selector:               app=liberty
     Type:                   LoadBalancer
-    Zone:                   dal10
+    Location:               dal10
     IP:                     172.21.xxx.xxx
     LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP
@@ -179,24 +121,24 @@ LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要�
     ```
     {: screen}
 
-    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+        **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+
 
 4.  如果您已建立公用負載平衡器，請從網際網路存取您的應用程式。
     1.  開啟偏好的 Web 瀏覽器。
     2.  輸入負載平衡器的可攜式公用 IP 位址及埠。
 
         ```
-        http://169.xx.xxx.xxx:8080
+                http://169.xx.xxx.xxx:8080
         ```
         {: codeblock}        
 
 5. 如果您選擇[針對負載平衡器服務啟用來源 IP 保留 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，請確保藉由[將邊緣節點親緣性新增至應用程式 Pod](cs_loadbalancer.html#edge_nodes)，在邊緣工作者節點上排定應用程式 Pod。必須在邊緣節點上排定應用程式 Pod，才能接收送入要求。
 
-6. 若要處理來自其他區域送入您應用程式的要求，請重複上述步驟以在每一個區域中新增負載平衡器。
+6. 選用項目：若要處理來自其他區域送入您應用程式的要求，請重複這些步驟以在每一個區域中新增負載平衡器。
 
-7. 選用項目：負載平衡器服務也可讓您的應用程式透過服務的 NodePort 提供使用。叢集內每個節點的每個公用及專用 IP 位址上都可以存取 [NodePort](cs_nodeport.html)。若要在使用負載平衡器服務時封鎖流向 NodePort 的資料流量，請參閱[控制 LoadBalancer 或 NodePort 服務的入埠資料流量](cs_network_policy.html#block_ingress)。
-
-## 啟用單一區域叢集裡應用程式的公用或專用存取
+</staging>
+    ## 使用 LoadBalancer 服務來啟用應用程式的公用或專用存取
 {: #config}
 
 開始之前：
@@ -219,7 +161,7 @@ LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要�
         使用預設 IP 位址的 LoadBalancer 服務：
 
         ```
-apiVersion: v1
+        apiVersion: v1
         kind: Service
         metadata:
           name: myloadbalancer
@@ -269,7 +211,7 @@ apiVersion: v1
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>要指定 LoadBalancer 類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集裡建立公用 LoadBalancer，則不需要此註釋。</td>
+          <td>要指定 LoadBalancer 類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集中建立公用 LoadBalancer，則不需要此註釋。</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
@@ -279,10 +221,10 @@ apiVersion: v1
 
     3.  選用項目：在 **spec** 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
-    4.  在叢集裡建立服務。
+    4.  在叢集中建立服務。
 
         ```
-        kubectl apply -f myloadbalancer.yaml
+                kubectl apply -f myloadbalancer.yaml
         ```
         {: pre}
 
@@ -292,7 +234,7 @@ apiVersion: v1
 3.  驗證已順利建立負載平衡器服務。
 
     ```
-    kubectl describe service myloadbalancer
+        kubectl describe service myloadbalancer
     ```
     {: pre}
 
@@ -321,20 +263,19 @@ apiVersion: v1
     ```
     {: screen}
 
-    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+        **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+
 
 4.  如果您已建立公用負載平衡器，請從網際網路存取您的應用程式。
     1.  開啟偏好的 Web 瀏覽器。
     2.  輸入負載平衡器的可攜式公用 IP 位址及埠。
 
         ```
-        http://169.xx.xxx.xxx:8080
+                http://169.xx.xxx.xxx:8080
         ```
         {: codeblock}
 
 5. 如果您選擇[針對負載平衡器服務啟用來源 IP 保留 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，請確保藉由[將邊緣節點親緣性新增至應用程式 Pod](cs_loadbalancer.html#edge_nodes)，在邊緣工作者節點上排定應用程式 Pod。必須在邊緣節點上排定應用程式 Pod，才能接收送入要求。
-
-6. 選用項目：負載平衡器服務也可讓您的應用程式透過服務的 NodePort 提供使用。叢集內每個節點的每個公用及專用 IP 位址上都可以存取 [NodePort](cs_nodeport.html)。若要在使用負載平衡器服務時封鎖流向 NodePort 的資料流量，請參閱[控制 LoadBalancer 或 NodePort 服務的入埠資料流量](cs_network_policy.html#block_ingress)。
 
 <br />
 
@@ -342,17 +283,15 @@ apiVersion: v1
 ## 將節點親緣性及容忍新增至來源 IP 的應用程式 Pod
 {: #node_affinity_tolerations}
 
-將應用程式的用戶端要求傳送至叢集時，會將該要求遞送至可公開應用程式的負載平衡器服務 Pod。如果沒有應用程式 Pod 存在於與負載平衡器服務 Pod 相同的工作者節點上，則負載平衡器會將要求轉遞至不同工作者節點上的應用程式 Pod。套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。
-
-若要保留用戶端要求的原始來源 IP 位址，您可以針對負載平衡器服務[啟用來源 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip)。TCP 連線會繼續一路連線至應用程式 Pod，讓應用程式可以看到起始器的實際來源 IP 位址。例如，當應用程式伺服器必須套用安全及存取控制原則時，保留用戶端的 IP 是很有用的。
-
-在啟用來源 IP 之後，負載平衡器服務 Pod 必須將要求轉遞至僅部署至相同工作者節點的應用程式 Pod。一般而言，負載平衡器服務 Pod 也會部署至應用程式 Pod 部署至其中的工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定負載平衡器 Pod 及應用程式 Pod。
-
+每當您部署應用程式 Pod 時，負載平衡器服務 Pod 也會部署至應用程式 Pod 部署至其中的工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定負載平衡器 Pod 及應用程式 Pod。
+{: shortdesc}
 
 * 您有已受污染、因此僅負載平衡器服務 Pod 可以部署至其中的邊緣節點。不允許將應用程式 Pod 部署至那些節點。
 * 您的叢集連接至多個公用或專用 VLAN，但您的應用程式 Pod 可能部署至僅連接至某個 VLAN 的工作者節點。負載平衡器服務 Pod 可能未部署至那些工作者節點，因為負載平衡器 IP 位址連接至不同於工作者節點的 VLAN。
 
-若要將您的應用程式強制部署至負載平衡器服務 Pod 也可以部署至其中的特定工作者節點，您必須將親緣性規則及容忍新增至您的應用程式部署。
+將應用程式的用戶端要求傳送至叢集時，會將該要求遞送至公開應用程式之 Kubernetes 負載平衡器服務的 Pod。如果沒有應用程式 Pod 存在於與負載平衡器服務 Pod 相同的工作者節點上，則負載平衡器會將要求轉遞至不同工作者節點上的應用程式 Pod。套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。
+
+若要保留用戶端要求的原始來源 IP 位址，您可以針對負載平衡器服務[啟用來源 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)。例如，當應用程式伺服器必須套用安全及存取控制原則時，保留用戶端的 IP 是很有用的。在啟用來源 IP 之後，負載平衡器服務 Pod 必須將要求轉遞至僅部署至相同工作者節點的應用程式 Pod。若要將您的應用程式強制部署至負載平衡器服務 Pod 也可以部署至其中的特定工作者節點，您必須將親緣性規則及容忍新增至您的應用程式部署。
 
 ### 新增邊緣節點親緣性規則及容忍
 {: #edge_nodes}
@@ -410,7 +349,7 @@ spec:
 
     1. 列出叢集的可攜式公用 VLAN。
         ```
-        ibmcloud ks cluster-get <cluster_name_or_ID> --showResources
+        bx cs cluster-get <cluster_name_or_ID> --showResources
         ```
         {: pre}
 
@@ -464,7 +403,7 @@ spec:
 
 5. 驗證部署至工作者節點的應用程式 Pod 是否已連接至指定的 VLAN。
 
-    1. 列出叢集裡的 Pod。將 `<selector>` 取代為您用於應用程式的標籤。
+    1. 列出叢集中的 Pod。將 `<selector>` 取代為您用於應用程式的標籤。
         ```
         kubectl get pods -o wide app=<selector>
         ```
@@ -507,4 +446,3 @@ spec:
         {: screen}
 
     4. 在輸出的 **Labels** 區段中，驗證公用或專用 VLAN 是否為您在先前步驟中指定的 VLAN。
-

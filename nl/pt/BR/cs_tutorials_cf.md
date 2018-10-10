@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-09-11"
 # Tutorial: Migrando um app do Cloud Foundry para um cluster
 {: #cf_tutorial}
 
-É possível usar um app implementado anteriormente usando o Cloud Foundry e implementar o mesmo código em um contêiner para um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}.
+É possível usar um app implementado anteriormente usando o Cloud Foundry e implementar o mesmo código em um contêiner para um cluster do Kubernetes no {{site.data.keyword.containershort_notm}}.
 {: shortdesc}
 
 
@@ -41,7 +41,6 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 - [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Criar um cluster](cs_clusters.html#clusters_ui).
 - [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
-- [Certifique-se de que você tenha a função de plataforma **Editor**, **Operador** ou **Administrador**](cs_users.html#add_users_cli).
 - [Conhecer a terminologia do Docker e do Kubernetes](cs_tech.html).
 
 
@@ -68,7 +67,7 @@ Pegue seu código pronto para ir. Não tem nenhum código ainda? É possível fa
     a. No catálogo, em **Modelos**, clique em **Python Flask**. Esse modelo inclui um ambiente de tempo de execução para os apps Python 2 e Python 3.
 
     b. Insira o nome do app `cf-py-<name>` e clique em **CREATE**. Para acessar o código do app para o modelo, deve-se implementar o app CF na nuvem primeiro. É possível usar qualquer nome para o app. Se você usar o nome do exemplo, substitua `<name>` por um identificador exclusivo, como `cf-py-msx`.
-
+    
     **Atenção**: não use informações pessoais em nenhum app, imagem de contêiner ou nomes de recursos do Kubernetes.
 
     Conforme o app é implementado, instruções para "Fazer download, modificar e reimplementar seu app com a interface da linha de comandos" são exibidas.
@@ -129,7 +128,7 @@ computador. O exemplo a seguir mostra como criar um arquivo Dockerfile com o edi
 4. Construa uma imagem do Docker que inclua seu código de app e envie-o por push para seu registro privado.
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -149,7 +148,7 @@ computador. O exemplo a seguir mostra como criar um arquivo Dockerfile com o edi
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>O seu caminho do registro privado, que inclui seu namespace exclusivo e o nome da imagem. Para este exemplo, o mesmo nome é usado para a imagem como o diretório do app, mas é possível escolher qualquer nome para a imagem em seu registro privado. Se você estiver inseguro sobre qual é o seu namespace, execute o comando `ibmcloud cr namespaces` para localizá-lo.</td>
+  <td>O seu caminho do registro privado, que inclui seu namespace exclusivo e o nome da imagem. Para este exemplo, o mesmo nome é usado para a imagem como o diretório do app, mas é possível escolher qualquer nome para a imagem em seu registro privado. Se você não tiver certeza de qual é o seu espaço de nomes, execute o comando `bx cr namespaces` para localizá-lo.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -159,7 +158,7 @@ inclui o Dockerfile, insira um ponto (.). Caso contrário, use o caminho relativ
   </tbody>
   </table>
 
-  A imagem é criada em seu registro privado. É possível executar o comando `ibmcloud cr images` para verificar se a imagem foi criada.
+  A imagem é criada em seu registro privado. É possível executar o comando `bx cr images` para verificar se a imagem foi criada.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -225,7 +224,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
   <tbody>
   <tr>
   <td><code>imagem</code></td>
-  <td>Em `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, substitua &lt;registry_namespace&gt; pelo namespace de seu registro de imagem privada. Se você estiver inseguro sobre qual é o seu namespace, execute o comando `ibmcloud cr namespaces` para localizá-lo.</td>
+  <td>Em `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, substitua &lt;registry_namespace&gt; pelo namespace de seu registro de imagem privada. Se você não tiver certeza de qual é o seu espaço de nomes, execute o comando `bx cr namespaces` para localizá-lo.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -253,7 +252,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
     a.  Obtenha o endereço IP público para o nó do trabalhador no cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -261,7 +260,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 

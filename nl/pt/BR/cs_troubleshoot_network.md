@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -26,8 +26,9 @@ lastupdated: "2018-09-10"
 Ao usar o {{site.data.keyword.containerlong}}, considere estas técnicas para resolução de problemas de rede do cluster.
 {: shortdesc}
 
-Tendo problemas de conexão com seu app por meio do Ingress? Tente  [ Depurging Ingress ](cs_troubleshoot_debug_ingress.html).
+Se você tiver um problema mais geral, tente a [depuração do cluster](cs_troubleshoot.html).
 {: tip}
+
 
 ## Não é possível se conectar a um app por meio de um serviço de balanceador de carga
 {: #cs_loadbalancer_fails}
@@ -45,10 +46,10 @@ O serviço de balanceador de carga pode não estar funcionando corretamente por 
 {: tsResolve}
 Para solucionar problemas do serviço de balanceador de carga:
 
-1.  Verifique se você configurou um cluster padrão que está totalmente implementado e tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o serviço de balanceador de carga.
+1.  Verifique se configura um cluster padrão totalmente implementado e se tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o serviço de balanceador de carga.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -89,8 +90,8 @@ Para solucionar problemas do serviço de balanceador de carga:
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Você definiu um endereço IP público móvel para o serviço de balanceador de carga usando a seção **loadBalancerIP**, mas esse endereço IP público móvel não está disponível em sua sub-rede pública móvel. Na seção **loadBalancerIP** de seu script de configuração, remova o endereço IP existente e inclua um dos endereços IP públicos móveis disponíveis. Também é possível remover a seção **loadBalancerIP** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Você não tem nós do trabalhador suficientes para implementar um serviço de balanceador de carga. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.</li>
     <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>Certifique-se de que os IDs de VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos <code>kubectl get nodes</code> e <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> correspondam.</li></ol></li></ul>
+    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>Certifique-se de que os IDs da VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos <code>kubectl get nodes</code> e <code>bx cs [&lt;cluster_name_or_ID&gt;] worker-get</code> correspondam.</li></ol></li></ul>
 
 4.  Se você estiver usando um domínio customizado para se conectar ao serviço de balanceador de carga, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público do serviço de balanceador de carga.
     1.  Localize o endereço IP público do serviço de balanceador de carga.
@@ -105,23 +106,146 @@ Para solucionar problemas do serviço de balanceador de carga:
 <br />
 
 
+
+
 ## Não é possível se conectar a um app por meio de Ingresso
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
 Você expôs publicamente seu app criando um recurso de Ingresso para seu app no cluster. Quando tentou se conectar ao seu app usando o endereço IP público ou subdomínio do balanceador de carga do aplicativo (ALB) de Ingresso, a conexão falhou ou atingiu o tempo limite.
 
+{: tsCauses}
+O Ingresso pode não estar funcionando corretamente pelos motivos a seguir:
+<ul><ul>
+<li>O cluster não está totalmente implementado ainda.
+<li>O cluster foi configurado como um cluster grátis ou como um cluster padrão com somente um nó do trabalhador.
+<li>O script de configuração de Ingresso inclui erros.
+</ul></ul>
+
 {: tsResolve}
-Primeiro, verifique se seu cluster está totalmente implementado e tem pelo menos 2 nós do trabalhador disponíveis por zona para assegurar alta disponibilidade para o ALB.
+Para solucionar problemas do Ingresso:
+
+1.  Verifique se você configurou um cluster padrão que esteja totalmente implementado e tenha pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o ALB.
+
+  ```
+  bx cs workers <cluster_name_or_ID>
+  ```
+  {: pre}
+
+    Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
+
+2.  Recupere o subdomínio e o endereço IP público do ALB e, em seguida, execute ping de cada um.
+
+    1.  Recupere o subdomínio ALB.
+
+      ```
+      bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
+      ```
+      {: pre}
+
+    2.  Ping do subdomínio ALB.
+
+      ```
+      ping <ingress_subdomain>
+      ```
+      {: pre}
+
+    3.  Recupere o endereço IP público de seu ALB.
+
+      ```
+      nslookup <ingress_subdomain>
+      ```
+      {: pre}
+
+    4.  Ping o ALB endereço IP público.
+
+      ```
+      ping <ALB_IP>
+      ```
+      {: pre}
+
+    Se a CLI retornar um tempo limite para o endereço IP público ou subdomínio do ALB e você tiver configurado um firewall customizado que esteja protegendo seus nós do trabalhador, abra mais portas e grupos de rede em seu [firewall](cs_troubleshoot_clusters.html#cs_firewall).
+
+3.  Se você estiver usando um domínio customizado, certifique-se de que seu domínio customizado esteja mapeado para o endereço IP público ou subdomínio do ALB fornecido pela IBM com seu provedor DNS.
+    1.  Se você usou o subdomínio do ALB, verifique seu registro de Canonical Name (CNAME).
+    2.  Se você usou o endereço IP público do ALB, verifique se o seu domínio customizado está mapeado para o endereço IP público móvel no Registro de Ponteiro (PTR).
+4.  Verifique seu arquivo de configuração do recurso de Ingresso.
+
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingress
+    spec:
+      tls:
+      - hosts:
+        - <ingress_subdomain>
+        secretName: <ingress_tls_secret>
+      rules:
+      - host: <ingress_subdomain>
+        http:
+          paths:
+          - path: /
+            backend:
+              serviceName: myservice
+              servicePort: 80
+    ```
+    {: codeblock}
+
+    1.  Verifique se o subdomínio do ALB e o certificado TLS estão corretos. Para localizar o subdomínio fornecido pela IBM e o certificado TLS, execute `bx cs cluster-get <cluster_name_or_ID>`.
+    2.  Certifique-se de que seu app atenda no mesmo caminho configurado na seção de **caminho** de seu Ingresso. Se o seu app estiver configurado para atender no caminho raiz, inclua **/** como seu caminho.
+5.  Verifique a sua implementação do Ingresso e procure mensagens de aviso ou erro em potencial.
+
+    ```
+    kubectl describe ingress <myingress>
     ```
     {: pre}
 
-Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
+    Por exemplo, na seção **Eventos** da saída, você pode ver mensagens de aviso sobre valores inválidos em seu recurso de Ingresso ou em certas anotações usadas.
 
-* Se o seu cluster padrão estiver completamente implementado e tiver pelo menos 2 nós do trabalhador por zona, mas nenhum **Subdomínio do Ingress** estiver disponível, consulte [Não é possível obter um subdomínio para o ALB do Ingress](cs_troubleshoot_network.html#cs_subnet_limit).
-* Para outros problemas, solucione problemas de sua configuração do Ingress seguindo as etapas em [Depurando o Ingress](cs_troubleshoot_debug_ingress.html).
+    ```
+    Name:             myingress
+    Namespace:        default
+    Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
+    Default backend:  default-http-backend:80 (<none>)
+    Rules:
+      Host                                             Path  Backends
+      ----                                             ----  --------
+      mycluster.us-south.containers.appdomain.cloud
+                                                       /tea      myservice1:80 (<none>)
+                                                       /coffee   myservice2:80 (<none>)
+    Annotations:
+      custom-port:        protocol=http port=7490; protocol=https port=4431
+      location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
+    Events:
+      Type     Reason             Age   From                                                            Message
+      ----     ------             ----  ----                                                            -------
+      Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+      Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
+      Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+      Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
+      Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+      Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation cannot use ports 7481 - 7490
+      Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+    ```
+    {: screen}
+
+6.  Verifique os logs para o seu ALB.
+    1.  Recupere o ID dos pods do Ingresso que estão em execução no cluster.
+
+      ```
+      kubectl get pods -n kube-system | grep alb
+      ```
+      {: pre}
+
+    2.  Recupere os logs para cada pod do Ingresso.
+
+      ```
+      Kubectl logs < ingress_pod_ID> nginx-ingress -n kube-system
+      ```
+      {: pre}
+
+    3.  Procure mensagens de erro nos logs do ALB.
 
 <br />
 
@@ -146,7 +270,7 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
  <tbody>
  <tr>
  <td>Você não tem as funções de acesso necessárias para fazer download e atualizar os dados do certificado.</td>
- <td>Verifique com seu Administrador de conta para designar a você as funções **Gerenciador** e **Gravador** para sua instância do {{site.data.keyword.cloudcerts_full_notm}}. Para obter mais informações, veja <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gerenciando acesso de serviço</a> para {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Verifique com seu Administrador de conta para designar a você as funções de **Operador** e **Editor** para sua instância do {{site.data.keyword.cloudcerts_full_notm}}. Para obter mais informações, veja <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gerenciando acesso de serviço</a> para {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>O CRN do certificado fornecido no tempo de criação, atualização ou remoção não pertence à mesma conta que o cluster.</td>
@@ -154,11 +278,11 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
  </tr>
  <tr>
  <td>O CRN do certificado fornecido no tempo de criação está incorreto.</td>
- <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se o CRN do certificado for localizado como exato, tente atualizar o segredo: <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Se esse comando resultar no status <code>update_failed</code>, remova o segredo: <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Implemente o segredo novamente: <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se for constatado que o CRN do certificado está exato, tente atualizar o segredo: <code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Se esse comando resultar no status <code>update_failed</code>, remova o segredo: <code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Implemente o segredo novamente: <code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>O CRN do certificado fornecido no tempo de atualização está incorreto.</td>
- <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se o CRN do certificado for localizado como exato, remova o segredo: <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Implemente o segredo novamente: <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Tente atualizar o segredo: <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se for constatado que o CRN do certificado está exato, remova o segredo: <code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Implemente o segredo novamente: <code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Tente atualizar o segredo: <code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>O serviço {{site.data.keyword.cloudcerts_long_notm}} está tendo tempo de inatividade.</td>
@@ -173,7 +297,7 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Quando você executa `ibmcloud ks cluster-get <cluster>`< seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
+Quando você executa `bx cs cluster-get <cluster>`, seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
 
 É possível ver uma mensagem de erro semelhante à seguinte:
 
@@ -183,73 +307,23 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Em clusters padrão, na primeira vez que você criar um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona serão provisionadas automaticamente para você em sua conta de infraestrutura do IBM Cloud (SoftLayer). Nessa zona, 1 sub-rede móvel pública é solicitada na VLAN pública especificada e 1 sub-rede móvel privada é solicitada na VLAN privada especificada. Para o {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN do cluster em uma zona já tiver atingido esse limite, o **Subdomínio do Ingress** falhará ao provisionar.
+Ao criar um cluster, 8 sub-redes móveis públicas e 8 privadas são solicitadas na VLAN especificada. Para o {{site.data.keyword.containershort_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN do cluster já tiver atingido esse limite, o **Subdomínio do Ingress** falhará ao provisionar.
 
 Para visualizar quantas sub-redes uma VLAN tem:
 1.  No [console da infraestrutura do IBM Cloud (SoftLayer)](https://control.bluemix.net/), selecione **Rede** > **IP de gerenciamento** > **VLANs**.
 2.  Clique no **Número da VLAN** da VLAN usada para criar seu cluster. Revise a seção **Subnets** para ver se 40 ou mais sub-redes existem.
 
 {: tsResolve}
-Se você precisar de uma nova VLAN, peça uma [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Em seguida, [crie um cluster](cs_cli_reference.html#cs_cluster_create) que usa essa nova VLAN.
+Se você precisar de uma nova VLAN, peça uma [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support). Em seguida, [crie um cluster](cs_cli_reference.html#cs_cluster_create) que usa essa nova VLAN.
 
-Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis. Para verificar se o VLAN Spanning já está ativado, use o [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis.
 
 Se você não estiver usando todas as sub-redes na VLAN, será possível reutilizar sub-redes no cluster.
-1.  Verifique se as sub-redes que você deseja usar estão disponíveis. **Nota**: a conta de infraestrutura que você está usando pode ser compartilhada ao longo de múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Em caso positivo, mesmo se você executar o comando `ibmcloud ks subnets` para ver sub-redes com **Clusters ligados**, será possível ver informações somente para os seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.
+1.  Verifique se as sub-redes que você deseja usar estão disponíveis. **Nota**: a conta de infraestrutura que você está usando pode ser compartilhada ao longo de múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Em caso positivo, mesmo se você executar o comando `bx cs subnets` para ver sub-redes com **Clusters de ligação**, será possível ver informações apenas para seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.
 
-2.  [Crie um cluster](cs_cli_reference.html#cs_cluster_create) com a opção `--no-subnet` para que o serviço não tente criar novas sub-redes. Especifique a zona e a VLAN que tem as sub-redes que estão disponíveis para reutilização.
+2.  [Crie um cluster](cs_cli_reference.html#cs_cluster_create) com a opção `--no-subnet` para que o serviço não tente criar novas sub-redes. Especifique o local e a VLAN que têm as sub-redes disponíveis para reutilização.
 
-3.  Use o [comando](cs_cli_reference.html#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` para incluir sub-redes existentes em seu cluster. Para obter mais informações, veja [Incluindo ou reutilizando sub-redes customizadas e existentes nos clusters do Kubernetes](cs_subnets.html#custom).
-
-<br />
-
-
-## O ALB do Ingresso não é implementado em uma zona
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Quando você tem um cluster de múltiplas zonas e executa `ibmcloud ks albs <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
-```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
-```
-{: screen}
-
-{: tsCauses}
-Em cada zona, 1 sub-rede móvel pública é solicitada na VLAN pública especificada e 1 sub-rede móvel privada é solicitada na VLAN privada especificada. Para o {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN pública do cluster em uma zona já tiver atingido esse limite, o ALB do Ingresso público para essa zona falhará ao provisionar.
-
-{: tsResolve}
-Para verificar o número de sub-redes em uma VLAN e para obter as etapas sobre como obter outra VLAN, veja [Não é possível obter um subdomínio para ALB do Ingress](#cs_subnet_limit).
-
-<br />
-
-
-## A conexão via WebSocket é fechada após 60 segundos
-{: #cs_ingress_websocket}
-
-{: tsSymptoms}
-Seu serviço Ingresso expõe um app que usa um WebSocket. No entanto, a conexão entre um cliente e o app WebSocket é fechada quando nenhum tráfego é enviado entre eles por 60 segundos.
-
-{: tsCauses}
-A conexão com seu app WebSocket pode cair após 60 segundos de inatividade por um dos motivos a seguir:
-
-* A sua conexão de Internet tem um proxy ou firewall que não tolera conexões longas.
-* Um tempo limite no ALB para o app WebSocket finaliza a conexão.
-
-{: tsResolve}
-Para evitar que a conexão seja fechada após 60 segundos de inatividade:
-
-1. Se você se conectar ao seu app WebSocket por meio de um proxy ou firewall, certifique-se de que o proxy ou o firewall não esteja configurado para finalizar automaticamente as conexões longas.
-
-2. Para manter a conexão ativa, é possível aumentar o valor do tempo limite ou configurar uma pulsação em seu app.
-<dl><dt>Alterar o tempo limite</dt>
-<dd>Aumente o valor do `proxy-read-timeout` em sua configuração do ALB. Por exemplo, para mudar o tempo limite de `60s` para um valor maior, como `300s`, inclua esta [anotação](cs_annotations.html#connection) em seu arquivo de recursos do Ingress: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s " `. O tempo limite é mudado para todos os ALBs públicos em seu cluster.</dd>
-<dt>Configurar uma pulsação</dt>
-<dd>Se você não desejar mudar o valor de tempo limite de leitura padrão do ALB, configure uma pulsação em seu app WebSocket. Ao configurar um protocolo de pulsação usando uma estrutura como [WAMP ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://wamp-proto.org/), o servidor de envio de dados do app envia periodicamente uma mensagem "ping" em um intervalo cronometrado e o cliente responde com uma mensagem "pong". Configure o intervalo de pulsação para 58 segundos ou menos para que o tráfego "ping/pong" mantenha a conexão aberta antes que o tempo limite de 60 segundos seja cumprido.</dd></dl>
+3.  Use o [comando](cs_cli_reference.html#cs_cluster_subnet_add) `bx cs cluster-subnet-add` para incluir sub-redes existentes em seu cluster. Para obter mais informações, veja [Incluindo ou reutilizando sub-redes customizadas e existentes nos clusters do Kubernetes](cs_subnets.html#custom).
 
 <br />
 
@@ -316,49 +390,7 @@ Quando você tentar estabelecer a conectividade VPN com o gráfico Helm do stron
     <br />
 
 
-## Não é possível instalar uma nova liberação do gráfico Helm do strongSwan
-{: #cs_strongswan_release}
-
-{: tsSymptoms}
-Você modifica o gráfico Helm do strongSwan e tenta instalar sua nova liberação executando `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan `. No entanto, você vê o erro a seguir:
-```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
-```
-{: screen}
-
-{: tsCauses}
-Esse erro indica que a versão anterior do gráfico do strongSwan não foi completamente desinstalada.
-
-{: tsResolve}
-
-1. Exclua a liberação do gráfico anterior.
-    ```
-    helm delete --purge <old_release_name>
-    ```
-    {: pre}
-
-2. Exclua a implementação para a liberação anterior. A exclusão da implementação e do pod associado leva até 1 minuto.
-    ```
-    kubectl delete deploy -n kube-system vpn-strongswan
-    ```
-    {: pre}
-
-3. Verifique se a implementação foi excluída. A implementação `vpn-strongswan` não aparece na lista.
-    ```
-    kubectl get deployments -n kube-system
-    ```
-    {: pre}
-
-4. Reinstale o gráfico Helm do strongSwan atualizado com um novo nome de liberação.
-    ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
-    ```
-    {: pre}
-
-<br />
-
-
-## A conectividade VPN do strongSwan falha depois de incluir ou excluir nós do trabalhador
+## A conectividade VPN do StrongSwan falha após a adição ou exclusão do nó do trabalhador
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}
@@ -369,7 +401,7 @@ Você estabeleceu anteriormente uma conexão VPN de trabalho, usando o serviço 
 * Não é possível acessar a rede remota de pods que estão em execução em novos nós do trabalhador
 
 {: tsCauses}
-Se você incluiu um nó do trabalhador em um conjunto de trabalhadores:
+Se você tiver incluído um nó do trabalhador:
 
 * O nó do trabalhador foi provisionado em uma nova sub-rede privada que não é exposta sobre a conexão VPN por suas configurações `localSubnetNAT` ou `local.subnet` existentes
 * as rotas de VPN não podem ser incluídas no nó do trabalhador porque o trabalhador tem contaminações ou rótulos que não estão incluídos em suas configurações `tolerations` ou `nodeSelector` existentes
@@ -518,7 +550,7 @@ Para assegurar que todos os fatores do Calico estejam alinhados:
 
 1. Visualize seu cluster do Kubernetes versão.
     ```
-    ibmcloud ks cluster-get <cluster_name>
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
@@ -538,94 +570,25 @@ Antes de atualizar seu cluster do Kubernetes versão 1.9 ou anterior para a vers
 <br />
 
 
-## Não é possível incluir nós do trabalhador devido a um ID de VLAN inválido
-{: #suspended}
-
-{: tsSymptoms}
-A sua conta do {{site.data.keyword.Bluemix_notm}} foi suspensa ou todos os nós do trabalhador em seu cluster foram excluídos. Após a reativação da conta, não é possível incluir nós do trabalhador ao tentar redimensionar ou rebalancear seu conjunto de trabalhadores. Você vê uma mensagem de erro semelhante à seguinte:
-
-```
-SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
-```
-{: screen}
-
-{: tsCauses}
-Quando uma conta é suspensa, os nós do trabalhador dentro da conta são excluídos. Se um cluster não tem nós do trabalhador, a infraestrutura do IBM Cloud (SoftLayer) recupera as VLANs públicas e privadas associadas. No entanto, o conjunto de trabalhadores do cluster ainda tem os IDs de VLAN anteriores em seus metadados e usa esses IDs indisponíveis quando você rebalanceia ou redimensiona o conjunto. Os nós falham ao serem criados porque as VLANs não estão mais associadas ao cluster.
-
-{: tsResolve}
-
-É possível [excluir seu conjunto de trabalhadores existente](cs_cli_reference.html#cs_worker_pool_rm), em seguida, [criar um novo conjunto de trabalhadores](cs_cli_reference.html#cs_worker_pool_create).
-
-Como alternativa, é possível manter o seu conjunto de trabalhadores existente pedindo novas VLANs e usando-as para criar novos nós do trabalhador no conjunto.
-
-Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
-
-1.  Para obter as zonas para as quais você precisa de novos IDs de VLAN, anote o **Local** na saída de comando a seguir. **Nota**: se o seu cluster for de múltiplas zonas, serão necessários IDs de VLAN para cada zona.
-
-    ```
-    ibmcloud ks clusters
-    ```
-    {: pre}
-
-2.  Obtenha uma nova VLAN privada e pública para cada zona em que seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans).
-
-3.  Anote os novos IDs de VLAN privada e pública para cada zona.
-
-4.  Anote o nome de seus conjuntos de trabalhadores.
-
-    ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-5.  Use o [comando](cs_cli_reference.html#cs_zone_network_set) `zone-network-set` para mudar os metadados de rede do conjunto de trabalhadores.
-
-    ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
-    ```
-    {: pre}
-
-6.  **Somente cluster de múltiplas zonas**: repita a **Etapa 5** para cada zone em seu cluster.
-
-7.  Rebalanceie ou redimensione seu conjunto de trabalhadores para incluir nós do trabalhador que usam os novos IDs de VLAN. Por exemplo:
-
-    ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-8.  Verifique se os nós do trabalhador estão criados.
-
-    ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
-    ```
-    {: pre}
-
-<br />
-
-
-
 ## Obtendo ajuda e suporte
 {: #ts_getting_help}
 
 Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
--  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
-
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
--   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
+-   Poste uma pergunta no [{{site.data.keyword.containershort_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
 
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
 
-    -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
-    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
+    -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containershort_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique a sua pergunta com `ibm-cloud`, `kubernetes` e `containers`.
+    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum [IBM developerWorks dW Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
 
 -   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+Ao relatar um problema, inclua o ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
 

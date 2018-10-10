@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,35 +25,34 @@ Mit Edge-Workerknoten kann die Sicherheit des Kubernetes-Clusters verbessert wer
 
 Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
 
-Wenn Sie über einen Mehrzonencluster verfügen und den Datenaustausch im Netz auf Edge-Workerknoten beschränken möchten, müssen in jeder Zone mindestens zwei Edge-Workerknoten für die Hochverfügbarkeit von Lastausgleichsfunktions- oder Ingress-Pods aktiviert werden. Erstellen Sie einen Worker-Pool für Edge-Workerknoten, der sich über alle Zonen im Cluster erstreckt, mit mindestens zwei Workerknoten pro Zone.
-{: tip}
+
+
 
 ## Bezeichnung für Edge-Knoten zu Workerknoten hinzufügen
 {: #edge_nodes}
 
-Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und LoadBalancer-Services nur für diese Workerknoten bereitgestellt werden.
+Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und  Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.
 {:shortdesc}
 
 Vorbemerkungen:
 
 - [Erstellen Sie einen Standardcluster.](cs_clusters.html#clusters_cli)
 - Stellen Sie sicher, dass der Cluster mindestens über ein öffentliches VLAN verfügt. Edge-Workerknoten stehen nicht für Cluster mit ausschließlich privaten VLANs zur Verfügung.
-- [Erstellen Sie einen neuen Worker-Pool](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Worker pro Zone aufweist.
 - [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 Gehen Sie wie folgt vor, um eine Bezeichnung für Edge-Knoten zu Workerknoten hinzuzufügen:
 
-1. Listen Sie die Workerknoten im Worker-Pool für Edge-Knoten auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben.
+1. Listen Sie alle Workerknoten im Cluster auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben. Wählen Sie mindestens zwei Workerknoten in jedem öffentlichen VLAN als Edge-Workerknoten aus. Für Ingress sind mindestens zwei Workerknoten in jeder Zone zur Bereitstellung von Hochverfügbarkeit erforderlich. 
 
   ```
-  ibmcloud ks workers <clustername_oder_-id> --worker-pool <poolname_für_edge-knoten>
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
 2. Ordnen Sie den Workerknoten die Bezeichnung `dedicated=edge` zu. Nachdem ein Workerknoten mit der Bezeichnung `dedicated=edge` markiert wurde, werden alle Ingress- und LoadBalancer-Services auf einem Edge-Workerknoten bereitgestellt.
 
   ```
-  kubectl label nodes <knoten1-IP> <knoten2-IP> dedicated=edge
+  kubectl label nodes <knoten1_name> <knoten2_name> dedicated=edge
   ```
   {: pre}
 

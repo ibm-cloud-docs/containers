@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -26,8 +26,8 @@ lastupdated: "2018-09-10"
 当这些工作程序节点标记为仅用于联网时，其他工作负载无法使用工作程序节点的 CPU 或内存，也不会干扰联网。
 
 
-如果您有多专区集群，并要将网络流量限制为流至边缘工作程序节点，那么每个专区中必须至少启用 2 个边缘工作程序节点，才可实现负载均衡器或 Ingress pod 的高可用性。创建边缘节点工作程序池，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序节点。
-{: tip}
+
+
 
 ## 将工作程序节点标记为边缘节点
 {: #edge_nodes}
@@ -38,23 +38,22 @@ lastupdated: "2018-09-10"
 开始之前：
 
 - [创建标准集群](cs_clusters.html#clusters_cli)。
-- 确保集群至少具有一个公用 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
-- [创建新的工作程序池](cs_clusters.html#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序。
+- 确保集群至少具有一个公共 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
 - [设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 
 要将工作程序节点标记为边缘节点，请执行以下操作：
 
-1. 列出边缘节点工作程序池中的工作程序节点。使用 **NAME** 列中的专用 IP 地址来标识节点。
+1. 列出集群中的所有工作程序节点。使用 **NAME** 列中的专用 IP 地址来标识节点。请至少在每个公用 VLAN 上选择两个工作程序节点作为边缘工作程序节点。Ingress 在每个区域中至少需要两个工作程序节点，才可提供高可用性。 
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
 2. 使用 `dedicated=edge` 标记工作程序节点。工作程序节点标记有 `dedicated=edge` 后，所有后续 Ingress 和负载均衡器都会部署到边缘工作程序节点。
 
   ```
-  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 

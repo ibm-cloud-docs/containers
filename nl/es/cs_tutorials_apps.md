@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,23 +16,24 @@ lastupdated: "2018-09-10"
 {:download: .download}
 
 
-# Guía de aprendizaje: Despliegue de apps en clústeres de Kubernetes
+# Guía de aprendizaje: Despliegue de apps en clústeres
 {: #cs_apps_tutorial}
 
-Puede aprender a utilizar {{site.data.keyword.containerlong}} para desplegar una app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
+Puede aprender a utilizar {{site.data.keyword.containerlong}} para desplegar unan app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
 En este escenario, una empresa PR ficticia utiliza el servicio {{site.data.keyword.Bluemix_notm}} para analizar sus notas de prensa y recibir comentarios sobre el tono de sus mensajes.
 
 Mediante el clúster de Kubernetes creado en la última guía de aprendizaje, el desarrollador de apps de la empresa PR despliega una versión de Hello World de la app. Basándose en cada lección de esta guía, el desarrollador de apps despliega versiones cada vez más complicadas de la misma app. El siguiente diagrama muestra los componentes de cada despliegue por lección.
 
-![Componentes de la lección](images/cs_app_tutorial_mz-roadmap.png)
+
+![Componentes de la lección](images/cs_app_tutorial_roadmap.png)
 
 Tal como ilustra el diagrama, Kubernetes utiliza varios tipos de recursos para configurar y ejecutar sus apps en los clústeres. En Kubernetes, los despliegues y los servicios trabajan conjuntamente. Los despliegues incluyen las definiciones de la app. Por ejemplo, la imagen que se utilizará para el contenedor y el puerto que se debe exponer para la app. Cuando crea un despliegue, se crea un pod de Kubernetes para cada contenedor que haya definido en el despliegue. Para que la app resulte más resistente, puede definir varias instancias de la misma app en su despliegue y dejar que Kubernetes cree automáticamente una réplica. El conjunto de réplicas supervisa los pods y garantiza que el número especificado de pods están siempre activos y en ejecución. Si uno de los pods deja de responder, el pod se vuelve a crear automáticamente.
 
 Los servicios agrupan un conjunto de pods y proporciona conexión de red a estos pods para otros servicios del clúster sin exponer la dirección IP privada real de cada pod. Puede utilizar los servicios de Kubernetes para poner una app a disposición de otros pods dentro del clúster o para exponer una app en Internet. En esta guía de aprendizaje, utilizará un servicio de Kubernetes para acceder a la app en ejecución desde Internet utilizando una dirección IP pública que se asigna automáticamente a un nodo trabajador y un puerto público.
 
-Para hacer que la app esté aún más disponible, en los clústeres estándares puede crear una agrupación de nodos trabajadores que abarque varias zonas con nodos trabajadores en cada zona para ejecutar incluso más réplicas de la app. Esta tarea no se trata en esta guía de aprendizaje, pero tenga en cuenta este concepto para futuras mejoras de la disponibilidad de una app.
+Para hacer que la app esté aún más disponible, en los clústeres estándares puede crear varios nodos trabajadores para ejecutar incluso más réplicas de la app. Esta tarea no se trata en esta guía de aprendizaje, pero tenga en cuenta este concepto para futuras mejoras de la disponibilidad de una app.
 
 Solo una de las lecciones incluye la integración de un servicio de {{site.data.keyword.Bluemix_notm}} en una app, pero puede utilizarlo para apps tan sencillas o complejas como pueda imaginar.
 
@@ -55,7 +56,7 @@ Los desarrolladores de software y administradores de la red que despliegan apps 
 
 ## Requisitos previos
 
-* [Guía de aprendizaje: Creación de clústeres de Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
+* [Guía de aprendizaje: Creación de clústeres de Kubernetes en {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
 
 
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
@@ -66,7 +67,8 @@ En la guía de aprendizaje anterior, ha creado un clúster con un nodo trabajado
 
 Los componentes que desplegará al completar esta lección se muestran en el siguiente diagrama.
 
-![Configuración del despliegue](images/cs_app_tutorial_mz-components1.png)
+
+![Configuración del despliegue](images/cs_app_tutorial_components1.png)
 
 Para desplegar la app:
 
@@ -88,10 +90,10 @@ Para desplegar la app:
     {: pre}
 
 3.  Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Escriba
-sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, utilice el mandato `ibmcloud ks region-set`.
+sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, utilice el mandato `bx cs region-set`.
 
     ```
-    ibmcloud login [--sso]
+    bx login [--sso]
     ```
     {: pre}
 
@@ -101,7 +103,7 @@ sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Pa
     1.  Obtenga el mandato para establecer la variable de entorno y descargar los archivos de configuración de Kubernetes.
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -119,42 +121,67 @@ Kubernetes como variable de entorno.
 5.  Inicie la sesión en la CLI de {{site.data.keyword.registryshort_notm}}. **Nota**: Asegúrese de que el plugin container-registry está [instalado](/docs/services/Registry/index.html#registry_cli_install).
 
     ```
-    ibmcloud cr login
+    bx cr login
     ```
     {: pre}
     -   Si ha olvidado el espacio de nombres de {{site.data.keyword.registryshort_notm}}, ejecute el mandato siguiente.
 
         ```
-        ibmcloud cr namespace-list
+        bx cr namespace-list
         ```
         {: pre}
 
-6.  Cree una imagen de Docker que incluya los archivos de la app del directorio `Lab 1` y envíe por push la imagen al espacio de nombres de {{site.data.keyword.registryshort_notm}} que ha creado en la guía de aprendizaje anterior. Si tiene que realizar un cambio en la app en el futuro, repita estos pasos para crear otra versión de la imagen. **Nota**: Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.
+6.  Inicie Docker.
+    * Si utiliza Docker Community Edition, no se requiere ninguna acción.
+    * Si utiliza Linux, siga la [documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/admin/) para encontrar instrucciones sobre cómo iniciar Docker en función de la distribución de Linux que utilice.
+    * Si utiliza Docker Toolbox en Windows u OSX, puede utilizar el Docker Quickstart Terminal, que inicia Docker automáticamente. Utilice Docker Quickstart Terminal en los siguientes pasos para ejecutar los mandatos de
+Docker y luego vuelva a la CLI en la que ha definido la variable de sesión `KUBECONFIG`.
 
-    Utilice caracteres alfanuméricos en minúscula o guiones bajos (`_`) solo en el nombre de imagen. No olvide el punto (`.`) al final del mandato. El punto indica a Docker que debe buscar el Dockerfile y crear artefactos para crear la imagen dentro del directorio actual.
+7.  Cree una imagen de Docker que incluya los archivos de la app del directorio `Lab 1`. Si tiene que realizar un cambio en la app en el futuro, repita estos pasos para crear otra versión de la imagen.
 
-    ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
-    ```
-    {: pre}
+    Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja con imágenes de contenedor.
 
-    Cuando finalice la compilación, compruebe que aparece el siguiente mensaje de éxito:
+    1.  Cree la imagen localmente. Especifique el nombre y la etiqueta que desea utilizar. Asegúrese de utilizar el espacio de nombres que ha creado en {{site.data.keyword.registryshort_notm}} en la guía de aprendizaje anterior. El hecho de etiquetar la imagen con la información del espacio de nombres indica a Docker dónde enviar la imagen en un paso posterior. Utilice caracteres alfanuméricos en minúscula o guiones bajos (`_`) solo en el nombre de imagen. No olvide el punto (`.`) al final del mandato. El punto indica a Docker que debe buscar el Dockerfile y crear artefactos para crear la imagen dentro del directorio actual.
 
-    ```
-    Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
-    29042bc0b00c: Pushed
-    f31d9ee9db57: Pushed
-    33c64488a635: Pushed
-    0804854a4553: Layer already exists
-    6bd4a62f5178: Layer already exists
-    9dfa40a0da3b: Layer already exists
-    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
-    ```
-    {: screen}
+        ```
+        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+        ```
+        {: pre}
 
-7.  Los despliegues se utilizan para gestionar pods, lo que incluye instancias contenerizadas de una app. El mandato siguiente despliega la app en un solo pod. Para los efectos de esta guía, el despliegue se denomina despliegue **hello-world-deployment**, pero puede darle al despliegue cualquier nombre que desee.
+        Cuando finalice la compilación, compruebe que aparece el siguiente mensaje de éxito:
+        ```
+        Successfully built <image_id>
+        Successfully tagged <image_tag>
+        ```
+        {: screen}
+
+    2.  Envíe la imagen al espacio de nombres del registro.
+
+        ```
+        docker push registry.<region>.bluemix.net/<namespace>/hello-world:1
+        ```
+        {: pre}
+
+        Salida de ejemplo:
+
+        ```
+        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
+  ea2ded433ac8: Pushed
+  894eb973f4d3: Pushed
+  788906ca2c7e: Pushed
+  381c97ba7dc3: Pushed
+  604c78617f34: Pushed
+  fa18e5ffd316: Pushed
+  0a5e2b2ddeaa: Pushed
+  53c779688d06: Pushed
+  60a0858edcd5: Pushed
+  b6ca02dfe5e6: Pushed
+  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
+  43 size: 2398
+        ```
+        {: screen}
+
+8.  Los despliegues se utilizan para gestionar pods, lo que incluye instancias contenerizadas de una app. El mandato siguiente despliega la app en un solo pod. Para los efectos de esta guía, el despliegue se denomina despliegue **hello-world-deployment**, pero puede darle cualquier nombre que desee. Si utiliza el terminal Docker Quickstart para ejecutar los mandatos de Docker, asegúrese de volver a la CLI que ha utilizado para establecer la variable de sesión `KUBECONFIG`.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -170,7 +197,7 @@ Kubernetes como variable de entorno.
 
     Obtenga más información sobre cómo [proteger su información personal](cs_secure.html#pi) cuando se trabaja recursos de Kubernetes.
 
-8.  Facilite el acceso general a la app exponiendo el despliegue como un servicio NodePort. Al igual que expone un puerto para una app Cloud Foundry, el NodePort que expone es el puerto en el que el nodo trabajador escucha si hay tráfico.
+9.  Facilite el acceso general a la app exponiendo el despliegue como un servicio NodePort. Al igual que expone un puerto para una app Cloud Foundry, el NodePort que expone es el puerto en el que el nodo trabajador escucha si hay tráfico.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -216,7 +243,7 @@ Kubernetes como variable de entorno.
     </tr>
     </tbody></table>
 
-9. Ahora que ya se ha realizado todo el trabajo de despliegue, puede probar la app en un navegador. Obtenga los detalles para formar el URL.
+10. Ahora que ya se ha realizado todo el trabajo de despliegue, puede probar la app en un navegador. Obtenga los detalles para formar el URL.
     1.  Obtenga información acerca del servicio para ver qué NodePort se ha asignado.
 
         ```
@@ -248,22 +275,22 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
     2.  Obtenga la dirección IP pública del nodo trabajador en el clúster.
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        bx cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Salida de ejemplo:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.7
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
-10. Abra un navegador y compruebe la app con el siguiente URL: `http://<IP_address>:<NodePort>`. Con los valores de ejemplo, el URL es `http://169.xx.xxx.xxx:30872`. Cuando escriba
+11. Abra un navegador y compruebe la app con el siguiente URL: `http://<IP_address>:<NodePort>`. Con los valores de ejemplo, el URL es `http://169.xx.xxx.xxx:30872`. Cuando escriba
 dicho URL en un navegador, verá un mensaje parecido al siguiente.
 
     ```
@@ -274,12 +301,12 @@ dicho URL en un navegador, verá un mensaje parecido al siguiente.
     Para ver que la app está disponible públicamente, intente entrar en ella con un navegador en su teléfono móvil.
     {: tip}
 
-11. [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
+12. [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
 
     Si selecciona su clúster en la interfaz gráfica de usuario de [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
     {: tip}
 
-12. En el separador **Cargas de trabajo**, verá los recursos que ha creado.
+13. En el separador **Cargas de trabajo**, verá los recursos que ha creado.
 
 ¡Enhorabuena! Ha desplegado su primera versión de la app.
 
@@ -296,7 +323,8 @@ En esta lección, desplegará tres instancias de la app Hello World en un clúst
 
 Mayor disponibilidad significa que el acceso de usuario se divide entre las tres instancias. Cuando hay demasiados usuarios que intentan acceder a la misma instancia de la app, es posible que el tiempo de respuesta sea lento. Varias instancias puede significar mejores tiempos de respuesta para los usuarios. En esta lección, también aprenderá cómo funcionan las comprobaciones de estado y las actualizaciones de despliegue con Kubernetes. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
-![Configuración del despliegue](images/cs_app_tutorial_mz-components2.png)
+
+![Configuración del despliegue](images/cs_app_tutorial_components2.png)
 
 En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes.
 
@@ -311,30 +339,47 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
 
 2.  Si ha iniciado una nueva sesión de CLI, inicie sesión y establezca el contexto de clúster.
 
-3.  Cree, etiquete y envíe por push la app como una imagen al espacio de nombres en {{site.data.keyword.registryshort_notm}}. Como siempre, no olvide el punto (`.`) al final del mandato.
+3.  Cree y etiquete la segunda versión de la app localmente como una imagen. Como siempre, no olvide el punto (`.`) al final del mandato.
 
-    ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
-      ```
-    {: pre}
+  ```
+  docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+  ```
+  {: pre}
 
-    Verifique que aparece el mensaje de éxito.
+  Verifique que aparece el mensaje de éxito.
 
-    ```
-    Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
-    29042bc0b00c: Pushed
-    f31d9ee9db57: Pushed
-    33c64488a635: Pushed
-    0804854a4553: Layer already exists
-    6bd4a62f5178: Layer already exists
-    9dfa40a0da3b: Layer already exists
-    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
-    ```
-    {: screen}
+  ```
+  Successfully built <image_id>
+  ```
+  {: screen}
 
-4.  Abra el archivo `healthcheck.yml`, en el directorio `Lab 2`, con un editor de texto. Este script de configuración combina unos pocos pasos de la lección anterior para crear un despliegue y un servicio al mismo tiempo. Los desarrolladores de apps de la empresa PR pueden utilizar estos scripts cuando se realizan actualizaciones o para solucionar problemas cuando se vuelven a crear los pods.
+4.  Transmita la segunda versión de la imagen al espacio de nombres del registro. Espere a que se envíe la imagen antes de continuar con el paso siguiente.
+
+  ```
+  docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
+  ```
+  {: pre}
+
+  Salida de ejemplo:
+
+  ```
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
+  ea2ded433ac8: Pushed
+  894eb973f4d3: Pushed
+  788906ca2c7e: Pushed
+  381c97ba7dc3: Pushed
+  604c78617f34: Pushed
+  fa18e5ffd316: Pushed
+  0a5e2b2ddeaa: Pushed
+  53c779688d06: Pushed
+  60a0858edcd5: Pushed
+  b6ca02dfe5e6: Pushed
+  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
+  43 size: 2398
+  ```
+  {: screen}
+
+5.  Abra el archivo `healthcheck.yml`, en el directorio `Lab 2`, con un editor de texto. Este script de configuración combina unos pocos pasos de la lección anterior para crear un despliegue y un servicio al mismo tiempo. Los desarrolladores de apps de la empresa PR pueden utilizar estos scripts cuando se realizan actualizaciones o para solucionar problemas cuando se vuelven a crear los pods.
     1. Actualice los detalles de la imagen en el espacio de nombres del registro privado.
 
         ```
@@ -363,7 +408,7 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
 
     4.  En la sección **Service**, anote el valor de `NodePort`. En lugar de generar un NodePort aleatorio como hizo en la lección anterior, puede especificar un puerto comprendido entre 30000 y 32767. En este ejemplo se utiliza el valor 30072.
 
-5.  Vuelva a la CLI que ha utilizado para definir el contexto de clúster y ejecute el script de configuración. Cuando se hayan creado el despliegue y el servicio, la app estará disponible para que la vean los usuarios de la empresa PR.
+6.  Vuelva a la CLI que ha utilizado para definir el contexto de clúster y ejecute el script de configuración. Cuando se hayan creado el despliegue y el servicio, la app estará disponible para que la vean los usuarios de la empresa PR.
 
   ```
   kubectl apply -f healthcheck.yml
@@ -378,10 +423,10 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
   ```
   {: screen}
 
-6.  Una vez realizado todo el trabajo de despliegue, puede abrir un navegador y comprobar la app. Para formar el URL, tome la misma dirección IP pública que ha utilizado en la lección anterior para el nodo trabajador y combínela con el NodePort especificado en el script de configuración. Para obtener la dirección IP pública para el nodo trabajador:
+7.  Una vez realizado todo el trabajo de despliegue, puede abrir un navegador y comprobar la app. Para formar el URL, tome la misma dirección IP pública que ha utilizado en la lección anterior para el nodo trabajador y combínela con el NodePort especificado en el script de configuración. Para obtener la dirección IP pública para el nodo trabajador:
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -403,25 +448,16 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
   ```
   {: screen}
 
-7.  Compruebe el estado del pod para supervisar el estado de la app en Kubernetes. Puede comprobar el estado en la CLI o en la GUI del panel de control de Kubernetes.
+8.  [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
 
-    *  **Desde la CLI**: vea lo que sucede en los pods a medida que cambia su estado.
-       ```
-       kubectl get pods -o wide -w
-       ```
-       {: pre}
+9. En el separador **Cargas de trabajo**, verá los recursos que ha creado. Desde este separador, puede renovar continuamente y ver que la comprobación de estado funciona. En la sección **Pods**, puede ver el número de veces que se han reiniciado los pods cuando se vuelven a crear los contenedores que contienen. Si recibe el siguiente error en el panel de control, este mensaje indica que la comprobación de estado ha detectado un problema. Espere unos minutos y vuelva a renovar. Verá el número de cambios de reinicio para cada pod.
 
-    *  **Desde la interfaz gráfica de usuario**:
-
-       1.  [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
-       2.  En el separador **Cargas de trabajo**, verá los recursos que ha creado. Desde este separador, puede renovar continuamente y ver que la comprobación de estado funciona. En la sección **Pods**, puede ver el número de veces que se han reiniciado los pods cuando se vuelven a crear los contenedores que contienen. Si recibe el siguiente error en el panel de control, este mensaje indica que la comprobación de estado ha detectado un problema. Espere unos minutos y vuelva a renovar. Verá el número de cambios de reinicio para cada pod.
-
-       ```
-       Liveness probe failed: HTTP probe failed with statuscode: 500
+    ```
+    Liveness probe failed: HTTP probe failed with statuscode: 500
     Back-off restarting failed docker container
     Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-       ```
-       {: screen}
+    ```
+    {: screen}
 
 ¡Enhorabuena! Ha desplegado la segunda versión de la app. Ha tenido que utilizar menos mandatos, ha visto cómo funcionan las comprobaciones de seguridad y ha editado un despliegue, lo cual no está nada mal. La app Hello world ha pasado la prueba para la empresa PR. Ahora puede desplegar una app más útil para que la empresa PR empiece a analizar notas de prensa.
 
@@ -451,7 +487,8 @@ En las lecciones anteriores, las apps se han desplegado como componentes únicos
 
 La separación de componentes en distintos contenedores garantiza que puede actualizar uno sin que afecte a los otros. A continuación, actualizará la app para ampliarla con más réplicas a fin de aumentar su disponibilidad. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
-![Configuración del despliegue](images/cs_app_tutorial_mz-components3.png)
+![Configuración del despliegue](images/cs_app_tutorial_components3.png)
+
 
 En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, creará una instancia del servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} en su cuenta de {{site.data.keyword.Bluemix_notm}} y configurará dos despliegues, uno para cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente.
 
@@ -477,10 +514,10 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         ```
         {: pre}
 
-    2.  Cree, etiquete y envíe por push la app `watson` como una imagen al espacio de nombres en {{site.data.keyword.registryshort_notm}}. Como siempre, no olvide el punto (`.`) al final del mandato.
+    2.  Cree y etiquete la primera parte de la app localmente como una imagen. Como siempre, no olvide el punto (`.`) al final del mandato. Si está utilizando el terminal Docker Quickstart para ejecutar mandatos de Docker, asegúrese de cambiar las CLI.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        docker build -t registry.<region>.bluemix.net/<namespace>/watson .
         ```
         {: pre}
 
@@ -490,6 +527,13 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         Successfully built <image_id>
         ```
         {: screen}
+
+    3.  Transmita la primera parte de la app como una imagen al espacio de nombres del registro privado. Espere a que se envíe la imagen antes de continuar con el paso siguiente.
+
+        ```
+        docker push registry.<region>.bluemix.net/<namespace>/watson
+        ```
+        {: pre}
 
 4.  Cree la imagen {{site.data.keyword.watson}}-talk.
 
@@ -500,10 +544,10 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         ```
         {: pre}
 
-    2.  Cree, etiquete y envíe por push la app `watson-talk` como una imagen al espacio de nombres en {{site.data.keyword.registryshort_notm}}. Como siempre, no olvide el punto (`.`) al final del mandato.
+    2.  Cree y etiquete la segunda parte de la app localmente como una imagen. Como siempre, no olvide el punto (`.`) al final del mandato.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        docker build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -514,10 +558,17 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         ```
         {: screen}
 
-5.  Compruebe que las imágenes se han añadido correctamente al espacio de nombres del registro.
+    3.  Transmita la segunda parte de la app al espacio de nombres del registro privado. Espere a que se envíe la imagen antes de continuar con el paso siguiente.
+
+        ```
+        docker push registry.<region>.bluemix.net/<namespace>/watson-talk
+        ```
+        {: pre}
+
+5.  Compruebe que las imágenes se han añadido correctamente al espacio de nombres del registro. Si utiliza el terminal Docker Quickstart para ejecutar los mandatos de Docker, asegúrese de volver a la CLI que ha utilizado para establecer la variable de sesión `KUBECONFIG`.
 
     ```
-    ibmcloud cr images
+    bx cr images
     ```
     {: pre}
 
@@ -700,7 +751,7 @@ service "watson-talk-service" deleted
   Si no desea conservar el clúster, también puede suprimirlo.
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  bx cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -710,5 +761,5 @@ service "watson-talk-service" deleted
 Ahora que ya domina los conceptos básicos, puede pasar a actividades más avanzadas. Considere probar uno de los siguientes:
 
 - Completar un [laboratorio más complejo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) en el repositorio
-- [Escalar automáticamente sus apps](cs_app.html#app_scaling) con {{site.data.keyword.containerlong_notm}}
-- Explorar los trayectos de orquestación de contenedores en [IBM Developer ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- [Escalar automáticamente sus apps](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
+- Explorar los trayectos de orquestación de contenedores en [developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)

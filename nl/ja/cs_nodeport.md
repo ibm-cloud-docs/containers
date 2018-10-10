@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-10"
 # NodePort を使用してアプリを公開する
 {: #nodeport}
 
-Kubernetes クラスター内の任意のワーカー・ノードのパブリック IP アドレスを使用し、NodePort を公開することにより、コンテナー化アプリにインターネットからアクセスできるようにします。 このオプションは、{{site.data.keyword.containerlong}} でのテストや短期間のパブリック・アクセスのために使用します。
+Kubernetes クラスター内の任意のワーカー・ノードのパブリック IP アドレスを使用し、NodePort を公開することにより、コンテナー化アプリにインターネットからアクセスできるようにします。このオプションは、{{site.data.keyword.containerlong}} でのテストや短期間のパブリック・アクセスのために使用します。
 {:shortdesc}
 
 ## NodePort を使用してネットワーク・トラフィックを管理する
@@ -34,7 +34,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 次の図は、NodePort サービスが構成されているときに、インターネットからアプリへの通信がどのように誘導されるかを示しています。
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort を使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort を使用した {{site.data.keyword.containershort_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
 
 1. ワーカー・ノードのパブリック IP アドレスとワーカー・ノード上の NodePort を使用して、要求がアプリに送信されます。
 
@@ -49,7 +49,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 <br />
 
 
-## NodePort サービスを使用してアプリへのアクセスを有効にする
+## NodePort サービスを使用してアプリへのパブリック・アクセスを有効にする
 {: #config}
 
 フリー・クラスターでも標準クラスターでも、アプリは Kubernetes NodePort サービスとして公開できます。
@@ -95,7 +95,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td><code><em>&lt;my-selector-key&gt;</em></code> および <code><em>&lt;my-selector-value&gt;</em></code> を、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアに置き換えます。 サービスをデプロイメントに関連付けるには、セレクターがデプロイメント・ラベルと一致する必要があります。
+      <td><code><em>&lt;my-selector-key&gt;</em></code> および <code><em>&lt;my-selector-value&gt;</em></code> を、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアに置き換えます。
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -103,7 +103,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>オプション: <code><em>&lt;31514&gt;</em></code> を、30000 から 32767 の範囲の NodePort に置き換えます。 別のサービスで既に使用されている NodePort は指定しないでください。 NodePort を割り当てなければ、ランダムに割り当てられます。<br><br>NodePort を指定して、どの NodePort が既に使用されているかを確認するには、以下のコマンドを実行します。 <pre class="pre"><code>kubectl get svc</code></pre><p>使用中の NodePorts は、**Ports** フィールドの下に表示されます。</p></td>
+     <td>オプション: <code><em>&lt;31514&gt;</em></code> を、30000 から 32767 の範囲の NodePort に置き換えます。 別のサービスで既に使用されている NodePort は指定しないでください。 NodePort を割り当てなければ、ランダムに割り当てられます。<br><br>NodePort を指定して、どの NodePort が既に使用されているかを確認するには、以下のコマンドを実行します。<pre class="pre"><code>kubectl get svc</code></pre><p>使用中の NodePorts は、**Ports** フィールドの下に表示されます。</p></td>
      </tr>
      </tbody></table>
 
@@ -113,12 +113,12 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 **次の作業:**
 
-アプリをデプロイする時に、いずれかのワーカー・ノードのパブリック IP アドレスと NodePort を使用して、ブラウザーでそのアプリにアクセスするためのパブリック URL を作成できます。 ワーカー・ノードをプライベート VLAN にのみ接続した場合は、プライベート NodePort サービスが作成されているので、q ワーカー・ノードのプライベート IP アドレスを使用してアクセスできます。
+アプリをデプロイする時に、いずれかのワーカー・ノードのパブリック IP アドレスと NodePort を使用して、ブラウザーでそのアプリにアクセスするためのパブリック URL を作成できます。
 
-1.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。 プライベート・ネットワーク上のワーカー・ノードにアクセスする場合は、代わりにプライベート IP アドレスを取得してください。
+1.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -156,6 +156,6 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
     {: screen}
 
     この例では、NodePort は `30872` です。</br>
-    **注:** **Endpoints** セクションに `<none>` と示されている場合は、`<selectorkey>` および `<selectorvalue>` を確認してください。これは、NodePort サービスの `spec.selector` セクションで使用します。 これが、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用した_キーと値_ のペアと同じであることを確認してください。
+    **注:** **Endpoints** セクションに `<none>` と示されている場合は、`<selectorkey>` および `<selectorvalue>` を確認してください。これは、NodePort サービスの `spec.selector` セクションで使用します。これが、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用した_キーと値_ のペアと同じであることを確認してください。
 
-3.  ワーカー・ノードの IP アドレスの 1 つと NodePort を使用して URL を作成します。 例: `http://192.0.2.23:30872`
+3.  ワーカー・ノードのパブリック IP アドレスの 1 つと NodePort を使用して URL を作成します。 例: `http://192.0.2.23:30872`

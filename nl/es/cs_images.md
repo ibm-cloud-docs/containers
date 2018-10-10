@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -35,7 +35,7 @@ Las imágenes normalmente se almacenan en un registro que puede ser tanto de acc
 Los registros públicos, como por ejemplo Docker Hub, se pueden utilizar para empezar a trabajar con Docker y Kubernetes para crear la primera app contenerizada de un clúster. Pero, cuando se trate de aplicaciones de empresa, utilice un registro privado, como el que se suministra en {{site.data.keyword.registryshort_notm}}, para proteger sus imágenes frente a un posible uso y modificación por parte de usuarios no autorizados. El administrador del clúster debe configurar los registros privados para asegurarse de que las credenciales para acceder al registro privado están disponibles para los usuarios del clúster.
 
 
-Puede utilizar varios registros con {{site.data.keyword.containerlong_notm}} para desplegar apps en el clúster.
+Puede utilizar varios registros con {{site.data.keyword.containershort_notm}} para desplegar apps en el clúster.
 
 |Registro|Descripción|Ventaja|
 |--------|-----------|-------|
@@ -74,7 +74,7 @@ Puede desplegar contenedores en su clúster desde una imagen pública proporcion
 
 Cuando crea un clúster, se crean automáticamente señales y secretos tanto para [el registro regional más cercano y el registro global](/docs/services/Registry/registry_overview.html#registry_regions). El registro global almacena de forma segura imágenes públicas proporcionadas por IBM a las que puede hacer referencia en sus despliegues en lugar de tener referencias distintas para las imágenes que se almacenan en cada registro regional. El registro regional almacena de forma segura sus imágenes de Docker privadas así como las mismas imágenes públicas que se almacenan en el registro global. Las señales se utilizan para autorizar el acceso de solo lectura a cualquiera de los espacios de nombres que configure en {{site.data.keyword.registryshort_notm}} para que pueda trabajar con estas imágenes públicas (registro global) y privadas (registros regionales).
 
-Cada señal se debe guardar en `imagePullSecret` de Kubernetes para que resulte accesible para un clúster de Kubernetes cuando se despliegue una app contenerizada. Cuando se crea el clúster, {{site.data.keyword.containerlong_notm}} almacena automáticamente las señales para los registros global (imágenes públicas proporcionadas por IBM) y regionales en los secretos de extracción de imágenes de Kubernetes. Los secretos de extracción de imágenes se añaden al espacio de nombres `predeterminado` de Kubernetes, la lista predeterminada de secretos en la `ServiceAccount` de dicho espacio de nombres y el espacio de nombres `kube-system`.
+Cada señal se debe guardar en `imagePullSecret` de Kubernetes para que resulte accesible para un clúster de Kubernetes cuando se despliegue una app contenerizada. Cuando se crea el clúster, {{site.data.keyword.containershort_notm}} almacena automáticamente las señales para los registros global (imágenes públicas proporcionadas por IBM) y regionales en los secretos de extracción de imágenes de Kubernetes. Los secretos de extracción de imágenes se añaden al espacio de nombres `predeterminado` de Kubernetes, la lista predeterminada de secretos en la `ServiceAccount` de dicho espacio de nombres y el espacio de nombres `kube-system`.
 
 **Nota:** Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio imagePullSecret para el clúster](#other).
 
@@ -108,7 +108,7 @@ Para desplegar un contenedor en el espacio de nombres **default** del clúster, 
     ```
     {: codeblock}
 
-    **Sugerencia:** Para recuperar la información del espacio de nombres, ejecute `ibmcloud cr namespace-list`.
+    **Sugerencia:** Para recuperar la información del espacio de nombres, ejecute `bx cr namespace-list`.
 
 3.  Cree el despliegue en el clúster.
 
@@ -117,7 +117,7 @@ Para desplegar un contenedor en el espacio de nombres **default** del clúster, 
     ```
     {: pre}
 
-    **Sugerencia:** También puede desplegar un archivo de configuración existente, como por ejemplo una de las imágenes públicas proporcionadas por IBM. En este ejemplo se utiliza la imagen **ibmliberty** de la región EE.UU. sur.
+    **Sugerencia:** También puede desplegar un archivo de configuración existente, como por ejemplo una de las imágenes públicas proporcionadas por IBM. En este ejemplo se utiliza la imagen **ibmliberty** de la región EE.UU.-Sur.
 
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
@@ -212,7 +212,7 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
 2.  Obtenga una lista de las señales en la cuenta de {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
 4.  Recupere el valor de la señal. Sustituya <em>&lt;token_ID&gt;</em> por el ID de la señal que ha recuperado en el paso anterior.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -249,11 +249,11 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Obligatorio. El URL del registro de imágenes en el que está configurado el espacio de nombres.<ul><li>Para los espacios de nombres definidos en EE.UU. sur y EE.UU. este en registry.ng.bluemix.net</li><li>Para los espacios de nombres definidos en RU sur registry.eu-gb.bluemix.net</li><li>Para los espacios de nombres definidos en UE central (Frankfurt) registry.eu-de.bluemix.net</li><li>Para los espacios de nombres definidos en Australia (Sídney) registry.au-syd.bluemix.net</li><li>Para los espacios de nombres definidos en {{site.data.keyword.Bluemix_dedicated_notm}} registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>Obligatorio. El URL del registro de imágenes en el que está configurado el espacio de nombres.<ul><li>Para los espacios de nombres definidos en EE.UU. Sur y EE.UU. este en registry.ng.bluemix.net</li><li>Para los espacios definidos en UK-Sur registry.eu-gb.bluemix.net</li><li>Para los espacios de nombres definidos en UE-Central (Frankfurt) registry.eu-de.bluemix.net</li><li>Para los espacios de nombres definidos en Australia (Sidney) registry.au-syd.bluemix.net</li><li>Para los espacios definidos en {{site.data.keyword.Bluemix_dedicated_notm}} registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Obligatorio. El nombre de usuario para iniciar una sesión en su registro privado. Para {{site.data.keyword.registryshort_notm}}, el nombre de usuario se establece en el valor <strong><code>token</code></strong>.</td>
+    <td>Obligatorio. El nombre de usuario para iniciar una sesión en su registro privado. Para {{site.data.keyword.registryshort_notm}}, el nombre de usuario se establece en <code>token</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -400,11 +400,11 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, el imagePullS
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `ibmcloud cr namespace-list`.</td>
+    <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>El nombre del imagen que desea utilizar. Para ver una lista de todas las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute `ibmcloud cr image-list`.</td>
+    <td>El nombre del imagen que desea utilizar. Para ver una lista de las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute `bx cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -426,7 +426,7 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, el imagePullS
 ### Almacenamiento del imagePullSecret en la cuenta de servicio de Kubernetes para el espacio de nombres seleccionado
 {:#store_imagePullSecret}
 
-Cada espacio de nombres tiene una cuenta de servicio de Kubernetes que se denomina `default`. Puede añadir el imagePullSecret a esta cuenta de servicio para otorgar acceso a las imágenes en el registro. Los despliegues que automáticamente no especifican una cuenta de servicio utiliza la cuenta de servicio `default` para este espacio de nombres.
+Cada espacio de nombres tiene una cuenta de servicio que se denomina `default`. Puede añadir el imagePullSecret a esta cuenta de servicio para otorgar acceso a las imágenes en el registro. Los despliegues que automáticamente no especifican una cuenta de servicio utiliza la cuenta de servicio `default` para este espacio de nombres.
 {:shortdesc}
 
 1. Compruebe si ya existe un imagePullSecret para la cuenta de servicio predeterminada.
@@ -485,4 +485,5 @@ Cada espacio de nombres tiene una cuenta de servicio de Kubernetes que se denomi
    {: pre}
 
 <br />
+
 

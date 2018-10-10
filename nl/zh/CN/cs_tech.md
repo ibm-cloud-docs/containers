@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,17 +25,16 @@ lastupdated: "2018-09-10"
 ## Docker 容器
 {: #docker_containers}
 
-名为 Docker 的开放式源代码项目基于现有 Linux 容器技术 (LXC) 构建，定义了模板，用于指示如何将软件打包成标准化单元（称为容器）以包含应用程序运行所需的所有元素。
-{{site.data.keyword.containerlong_notm}} 将 `containerd` 用作容器运行时，用于将 Docker 容器映像中的容器部署到集群中。
+名为 Docker 的开放式源代码项目基于现有 Linux 容器技术 (LXC) 进行构建，已成为用于快速构建、测试、部署和扩展应用程序的软件平台。Docker 将软件打包成标准化单元（称为容器），其中包含应用程序运行所需的所有元素。
 {:shortdesc}
 
 了解一些基本 Docker 概念：
 
 <dl>
 <dt>映像</dt>
-<dd>容器映像是要运行的每一个容器的基础。容器映像通过 Dockerfile 进行构建，此文本文件可定义如何构建映像以及要包含在其中的构建工件（例如，应用程序、应用程序配置及其依赖项）。映像始终从其他映像构建，从而使它们的配置更加快速。让其他人来做大部分的映像构建工作，您只需稍作调整即可使用。</dd>
+<dd>Docker 映像通过 Dockerfile 进行构建，此文本文件可定义如何构建映像以及要包含在其中的构建工件（例如，应用程序、应用程序配置及其依赖项）。映像始终从其他映像构建，从而使它们的配置更加快速。让其他人来做大部分的映像构建工作，您只需稍作调整即可使用。</dd>
 <dt>注册表</dt>
-<dd>映像注册表是用于存储、检索和共享容器映像的位置。存储在注册表中的映像可以公共可用（公共注册表），也可以供一小组用户访问（专用注册表）。{{site.data.keyword.containerlong_notm}} 提供了公共映像（如 ibmliberty），可用于创建第一个容器化应用程序。对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.Bluemix_notm}} 中提供的注册表）来保护映像不被未经授权的用户使用。</dd>
+<dd>映像注册表是用于存储、检索和共享 Docker 映像的位置。存储在注册表中的映像可以公共可用（公共注册表），也可以供一小组用户访问（专用注册表）。{{site.data.keyword.containershort_notm}} 提供了公共映像（如 ibmliberty），可用于创建第一个容器化应用程序。对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.Bluemix_notm}} 中提供的注册表）来保护映像不被未经授权的用户使用。</dd>
 <dt>容器</dt>
 <dd>每个容器都是通过映像创建的。容器是一个打包应用程序，其具有所有依赖项，以便可以在环境之间移动应用程序并在不进行更改的情况下运行。与虚拟机不同，容器不会对设备、其操作系统和底层硬件进行虚拟化。在容器中只打包应用程序代码、运行时、系统工具、库和设置。容器在 Ubuntu 计算主机上作为隔离进程运行，并共享主机操作系统及其硬件资源。这种方式使得容器比虚拟机更轻便、可移植性更高且更高效。</dd>
 </dl>
@@ -61,7 +60,7 @@ lastupdated: "2018-09-10"
 
 <p>使用容器映像时，请了解有关[确保个人信息安全](cs_secure.html#pi)的更多信息。</p>
 
-<p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containerlong_notm}}</a>。</p>
+<p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containershort_notm}}</a>。</p>
 
 </dl>
 
@@ -102,7 +101,7 @@ lastupdated: "2018-09-10"
 
 <p>准备好进一步了解 Kubernetes 了吗？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">通过“创建集群”教程扩大对术语的了解</a>。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containerlong_notm}}</a>。</li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containershort_notm}}</a>。</li></ul>
 
 
 </dl>
@@ -113,137 +112,27 @@ lastupdated: "2018-09-10"
 ## 服务体系结构
 {: #architecture}
 
-在 {{site.data.keyword.containerlong_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
+在 {{site.data.keyword.containershort_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
 {: shortdesc}
-
-下图显示了集群的组件及其交互方式。
-<p>
-<figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构">
- <figcaption>{{site.data.keyword.containerlong_notm}} 体系结构</figcaption>
-</figure>
-</p>
 
 Kubernetes 主节点与工作程序节点之间有何区别？问得好。
 
 <dl>
   <dt>Kubernetes 主节点</dt>
-    <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点会确定具有足够资源来满足应用程序需求的工作程序节点。</br></br>下表描述了 Kubernetes 主节点的组件。
-    <table>
-    <caption>Kubernetes 主节点的组件</caption>
-    <thead>
-    <th>主节点组件</th>
-    <th>描述</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>kube-apiserver</td>
-    <td>Kubernetes API 服务器充当从工作程序节点到 Kubernetes 主节点的所有集群管理请求的主入口点。Kubernetes API 服务器会验证并处理更改 Kubernetes 资源（例如，pod 或服务）状态的请求，并将此状态存储在 etcd 中。</td>
-    </tr>
-    <tr>
-    <td>openvpn-server</td>
-    <td>OpenVPN 服务器与 OpenVPN 客户机配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
-    </tr>
-    <tr>
-    <td>etcd</td>
-    <td>etcd 是一种高可用性键值存储，用于存储集群的所有 Kubernetes 资源（例如，服务、部署和 pod）的状态。etcd 中的数据存储在由 IBM 管理并每天备份的加密磁盘上。</td>
-    </tr>
-    <tr>
-    <td>kube-scheduler</td>
-    <td>Kubernetes 调度程序监视新创建的 pod，并根据容量、性能需求、策略约束、反亲缘关系规范和工作负载需求来决定这些 pod 的部署位置。如果找不到与这些需求相匹配的工作程序节点，那么不会在集群中部署 pod。</td>
-    </tr>
-    <tr>
-    <td>kube-controller-manager</td>
-    <td>Kubernetes 控制器管理器是一种守护程序，用于监视集群资源（例如，副本集）的状态。当资源的状态更改时，例如，如果副本集内的 pod 停止运行，控制器管理器会开始更正操作以实现所需的状态。</td>
-    </tr>
-    </tbody></table></dd>
+    <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点会确定具有足够资源来满足应用程序需求的工作程序节点。</dd>
   <dt>工作程序节点</dt>
-    <dd>每个工作程序节点都是物理机器（裸机）或是在云环境中的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</br></br>下表描述了工作程序节点的组件。
-    <table>
-    <caption>工作程序节点的组件</caption>
-    <thead>
-    <th>工作程序组件</th>
-    <th>名称空间</th>
-    <th>描述</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>openvpn-client</td>
-    <td>kube-system</td>
-    <td>OpenVPN 客户机与 OpenVPN 服务器配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
-    </tr>
-    <tr>
-    <td>calico-policy-controller</td>
-    <td>kube-system</td>
-    <td>Calico 策略控制器监视入站和出站网络流量，以确定是否符合设置的网络策略。如果集群中不允许该流量，那么会阻止对该集群的访问。Calico 策略控制器还用于为集群创建和设置网络策略。</td>
-    </tr>
-    <tr>
-    <td>存储器提供者</td>
-    <td>kube-system</td>
-    <td>每个集群都设置有一个插件，用于供应文件存储器。您可以选择安装其他附加组件，例如块存储器。</td>
-    </tr>
-    <tr>
-    <td>kube-proxy</td>
-    <td>kube-system</td>
-    <td>Kubernetes 网络代理是一种守护程序，在每个工作程序节点上运行，并且为集群中运行的服务转发 TCP 和 UDP 网络流量或对这些流量进行负载均衡。</td>
-    </tr>
-    <tr>
-    <td>kube-dashboard</td>
-    <td>kube-system</td>
-    <td>Kubernetes 仪表板是一种基于 Web 的 UI，允许用户对集群和集群中运行的应用程序进行管理和故障诊断。</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS 安排集群上的 DNS pod 和服务。容器会自动使用 DNS 服务的 IP 来解析对其他 pod 和服务的搜索中的 DNS 名称。</td>
-    </tr>
-    <tr>
-    <td>heapster</td>
-    <td>kube-system</td>
-    <td>Heapster 是一种集群范围的监视和事件数据聚集器。Heapster pod 会发现集群中的所有节点，并查询每个节点的 kubelet 中的使用情况信息。可以在 Kubernetes 仪表板中找到利用率图形。</td>
-    </tr>
-    <tr>
-    <td>calico-node</td>
-    <td>kube-system</td>
-    <td>Calico 节点是一个容器，用于将使用 Calico 对容器联网所需的各种组件捆绑在一起。</td>
-    </tr>
-    <tr>
-    <td>日志记录和度量</td>
-    <td>ibm-system</td>
-    <td>在使用日志和度量值时，可以使用集成的 {{site.data.keyword.loganalysislong_notm}} 和 {{site.data.keyword.monitoringlong_notm}} 服务来扩展收集和保留功能。</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress 是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到集群中的多个应用程序，均衡集群中的网络流量工作负载。要通过公用或专用网络公开应用程序，必须创建 Ingress 资源，以向 Ingress 应用程序负载均衡器 (ALB) 注册应用程序。然后，可以使用单个 URL 或 IP 地址来访问多个应用程序。</td>
-    </tr>
-    <tr>
-    <td>负载均衡器</td>
-    <td>ibm-system</td>
-    <td>负载均衡器是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到应用程序，均衡集群中的网络流量工作负载。</td>
-    </tr>
-    <tr>
-    <td>应用程序 pod 和服务</td>
-    <td>default</td>
-    <td>在 <code>default</code> 名称空间或您创建的名称空间中，可以在 pod 和服务中部署应用程序，以与这些 pod 进行通信。</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>不适用</td>
-    <td>Calico 容器网络接口 (CNI) 管理容器的网络连接，并在删除容器时除去分配的资源。</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>不适用</td>
-    <td>Calico IPAM 管理容器的 IP 地址分配。</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>不适用</td>
-    <td>kubelet 是一个 pod，在每个工作程序节点上运行，负责监视在工作程序节点上运行的 pod 的运行状况，以及监视 Kubernetes API 服务器发送的事件。根据事件，kubelet 会创建或除去 pod，确保活性和就绪性探测，并向 Kubernetes API 服务器报告 pod 的阶段状态。</td>
-    </tr>
-    </tbody></table></dd>
+    <dd>每个工作程序节点都是物理机器（裸机）或是在云环境中的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</dd>
 </dl>
 
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构">
+ <figcaption>{{site.data.keyword.containershort_notm}} 体系结构</figcaption>
+</figure>
+</p>
+
 想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](cs_integrations.html#integrations)。
-{: tip}
+
+
+<br />
+

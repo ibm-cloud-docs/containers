@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,8 +25,8 @@ lastupdated: "2018-09-10"
 
 これらのワーカー・ノードがネットワーキング専用としてマーク付けされると、他のワークロードはワーカー・ノードの CPU やメモリーを消費してネットワーキングに干渉することがなくなります。
 
-複数ゾーン・クラスターがあり、エッジ・ワーカー・ノードへのネットワーク・トラフィックを制限する場合は、ロード・バランサーまたは Ingress ポッドの高可用性のために各ゾーンで少なくとも 2 つのエッジ・ワーカー・ノードを使用可能にする必要があります。 クラスター内のすべてのゾーンにかかるエッジ・ノード・ワーカー・プールを作成し、ゾーンごとに少なくとも 2 つのワーカー・ノードがあるようにします。
-{: tip}
+
+
 
 ## ワーカー・ノードにエッジ・ノードとしてラベル付けする
 {: #edge_nodes}
@@ -38,22 +38,21 @@ lastupdated: "2018-09-10"
 
 - [標準クラスターを作成します。](cs_clusters.html#clusters_cli)
 - クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
-- クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](cs_clusters.html#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
 - [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
 
 ワーカー・ノードにエッジ・ノードとしてラベル付けするには、以下のようにします。
 
-1. エッジ・ノード・ワーカー・プール内にあるワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。
+1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 各パブリック VLAN で少なくとも 2 つのワーカー・ノードをエッジ・ワーカー・ノードとして選択します。 Ingress は、高可用性を提供するために、各ゾーンに少なくとも 2 つのワーカー・ノードを必要とします。 
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
 2. `dedicated=edge` により、ワーカー・ノードにラベルを付けます。 `dedicated=edge` によりワーカー・ノードにマークが付けられると、すべての後続の Ingress とロード・バランサーは、エッジ・ワーカー・ノードにデプロイされます。
 
   ```
-  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -80,7 +79,7 @@ lastupdated: "2018-09-10"
   ```
   {: screen}
 
-ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](cs_network_policy.html#block_ingress)。
+ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](cs_network_policy.html#block_ingress)。
 
 <br />
 
@@ -108,4 +107,4 @@ lastupdated: "2018-09-10"
   ```
   これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
 
-3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。

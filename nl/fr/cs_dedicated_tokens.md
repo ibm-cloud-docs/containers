@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,13 +25,44 @@ lastupdated: "2018-09-10"
 Créez un jeton sans date d'expiration pour un registre d'images que vous utilisez pour des groupes de conteneurs uniques et évolutifs avec des clusters dans {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-1.  Extrayez un jeton de registre permanent pour la session actuelle. Ce jeton permet l'accès aux images dans l'espace de nom actuel.
+1.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}.
+
     ```
-    ibmcloud cr token-add --description "<description>" --non-expiring -q
+    bx login -a api.<dedicated_domain>
     ```
     {: pre}
 
-2.  Vérifiez la valeur confidentielle Kubernetes.
+2.  Extrayez un jeton `oauth-token` pour la session actuelle et enregistrez-le en tant que variable.
+
+    ```
+    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    ```
+    {: pre}
+
+3.  Extrayez l'ID de l'organisation pour la session actuelle et enregistrez-le en tant que variable.
+
+    ```
+    ORG_GUID=`bx iam org <org_name> --guid`
+    ```
+    {: pre}
+
+4.  Extrayez un jeton de registre permanent pour la session actuelle. Remplacez <dedicated_domain> par le domaine pour votre environnement {{site.data.keyword.Bluemix_dedicated_notm}}. Ce jeton permet l'accès aux images dans l'espace de nom actuel.
+
+    ```
+    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
+    ```
+    {: pre}
+
+    Sortie :
+
+    ```
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
+    }
+    ```
+    {: screen}
+
+5.  Vérifiez la valeur confidentielle Kubernetes.
 
     ```
     kubectl describe secrets
@@ -40,7 +71,7 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
 
     Vous pouvez utiliser cette valeur confidentielle pour travailler dans {{site.data.keyword.containerlong}}.
 
-3.  Créez la valeur confidentielle Kubernetes pour stocker votre information de jeton.
+6.  Créez la valeur confidentielle Kubernetes pour stocker votre information de jeton.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -79,7 +110,7 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
     </tr>
     </tbody></table>
 
-4.  Créez un pod référençant l'élément imagePullSecret.
+7.  Créez un pod référençant l'élément imagePullSecret.
 
     1.  Ouvrez l'éditeur de texte de votre choix et créez un script de configuration de pod nommé, par exemple, mypod.yaml.
     2.  Définissez le pod et la valeur imagePullSecret que vous désirez utiliser pour accéder au registre. Pour utiliser une image privée d'un espace de nom :
@@ -114,10 +145,10 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `ibmcloud cr namespace-list`.</td>
+        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>ibmcloud cr image-list</code>.</td>
+        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>bx cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
@@ -137,3 +168,4 @@ Créez un jeton sans date d'expiration pour un registre d'images que vous utilis
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+
