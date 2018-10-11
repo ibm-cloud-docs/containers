@@ -32,6 +32,10 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 **Does IBM monitor my cluster?**
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
 
+**How are logs collected?**
+
+Logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) add-on in your cluster. When you create a logging configuration for a source in your cluster, the Fluentd add-on collects logs from the paths for that source. Logs are then forwarded to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
+
 **What are the sources that I can configure logging for?**
 
 In the following image you can see the location of the sources that you can configure logging for.
@@ -136,6 +140,10 @@ The following table shows the different options that you have when configuring l
 **Am I responsible for keeping Fluentd for logging updated?**
 
 In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](cs_cluster_update.html#logging).
+
+**Can I use my own logging solution?**
+
+If you have special requirements, you can set up your own logging solution in your cluster. In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.
 
 <br />
 
