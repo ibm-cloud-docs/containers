@@ -48,7 +48,7 @@ In the following image you can see the location of the sources that you can conf
 
 2. `container`: Information that is logged by a running container.</br>Paths: Anything written to `STDOUT` or `STDERR`.
 
-3. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/<b>spark</b>/work/app-0546/0/stderr` but the logs actually go to `/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr`, then the logs cannot be read.
+3. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
 
 5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.</br>Paths:
     * `/var/log/kubelet.log`
@@ -58,10 +58,10 @@ In the following image you can see the location of the sources that you can conf
 6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
 7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</br>Paths:
-    * `/var/log/alb/ids/&ast;.log`
-    * `/var/log/alb/ids/&ast;.err`
-    * `/var/log/alb/customerlogs/&ast;.log`
-    * `/var/log/alb/customerlogs/&ast;.err`
+    * `/var/log/alb/ids/*.log`
+    * `/var/log/alb/ids/*.err`
+    * `/var/log/alb/customerlogs/*.log`
+    * `/var/log/alb/customerlogs/*.err`
 
 </br>
 
@@ -116,7 +116,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--app-paths</em></code></td>
-      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/*,/var/log/myApp2/*</code></td>
     </tr>
     <tr>
       <td><code><em>--syslog-protocol</em></code></td>
