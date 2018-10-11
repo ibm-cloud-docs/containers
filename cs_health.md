@@ -30,6 +30,7 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 
 
 **Does IBM monitor my cluster?**
+
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
 
 **How are logs collected?**
