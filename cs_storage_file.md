@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -168,8 +168,8 @@ Before you begin:
 - [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
   **Note:** If you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, follow the steps in this topic to provision storage by using your customized storage class.
-  
-Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information. 
+
+Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information.
 {: tip}
 
 To add file storage:
@@ -178,7 +178,7 @@ To add file storage:
 
     - **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"monthly"`, with a gigabyte size of `24Gi`.
-       
+
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -199,7 +199,7 @@ To add file storage:
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
-      
+
        ```
        apiVersion: v1
        kind: PersistentVolumeClaim
@@ -289,7 +289,7 @@ To add file storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV. 
+4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#nonroot).
     {: tip}
@@ -593,12 +593,12 @@ If you have a stateful app such as a database, you can create stateful sets that
 {: shortdesc}
 
 **What do I need to be aware of when adding file storage to a stateful set?** </br>
-To add storage to a stateful set, you specify your storage configuration in the `volumeClaimTemplates` section of your stateful set YAML. The `volumeClaimTemplates` is the basis for your PVC and can include the storage class and the size or IOPS of your file storage that you want to provision. However, if you want to include labels in your `volumeClaimTemplates`, Kubernetes does not include these labels when creating the PVC. Instead, you must add the labels directly to your stateful set. 
+To add storage to a stateful set, you specify your storage configuration in the `volumeClaimTemplates` section of your stateful set YAML. The `volumeClaimTemplates` is the basis for your PVC and can include the storage class and the size or IOPS of your file storage that you want to provision. However, if you want to include labels in your `volumeClaimTemplates`, Kubernetes does not include these labels when creating the PVC. Instead, you must add the labels directly to your stateful set.
 
 **Important:** You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
 
 **How can I create my stateful set in a specific zone?** </br>
-In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](#customized_storageclasses) and use this storage class in the `volumeClaimTemplates` section of your stateful set. 
+In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set. 
 
 **What options do I have to add file storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -606,32 +606,32 @@ If you want to automatically create your PVC when you create the stateful set, u
 ### Dynamically provision the PVC when you create a stateful set
 {: #dynamic_statefulset}
 
-Use this option if you want to automatically create the PVC when you create the stateful set. 
+Use this option if you want to automatically create the PVC when you create the stateful set.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). 
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1. Verify that all existing stateful sets in your cluster are fully deployed. If a stateful set is still being deployed, you cannot start creating your stateful set. You must wait until all stateful sets in your cluster are fully deployed to avoid unexpected results. 
+1. Verify that all existing stateful sets in your cluster are fully deployed. If a stateful set is still being deployed, you cannot start creating your stateful set. You must wait until all stateful sets in your cluster are fully deployed to avoid unexpected results.
    1. List existing stateful sets in your cluster.
       ```
       kubectl get statefulset --all-namespaces
       ```
       {: pre}
-   
-      Example output: 
+
+      Example output:
       ```
       NAME              DESIRED   CURRENT   AGE
       mystatefulset     3         3         6s
       ```
       {: screen}
-   
+
    2. View the **Pods Status** of each stateful set to ensure that the deployment of the stateful set is finished.  
       ```
       kubectl describe statefulset <statefulset_name>
       ```
       {: pre}
-   
-      Example output: 
+
+      Example output:
       ```
       Name:               nginx
       Namespace:          default
@@ -652,10 +652,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ...
       ```
       {: screen}
-   
-      A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed. 
-   
-3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications defined in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto a worker node that is located in `dal10`. 
+
+      A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
+
+3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications defined in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto a worker node that is located in `dal10`.
 
    ```
    apiVersion: v1
@@ -706,14 +706,14 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     volumeClaimTemplates:
     - metadata:
         annotations:
-          volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze 
+          volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze
         name: myvol
       spec:
         accessModes:
-        - ReadWriteOnce 
+        - ReadWriteOnce
         resources:
           requests:
-            storage: 20Gi 
+            storage: 20Gi
             iops: "300" #required only for performance storage
    ```
    {: codeblock}
@@ -765,60 +765,60 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     <td style="text-align:left">If you want to provision [performance storage](#predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
     </tr>
     </tbody></table>
-    
-4. Create your stateful set. 
+
+4. Create your stateful set.
    ```
    kubectl apply -f statefulset.yaml
    ```
    {: pre}
-   
-5. Wait for your stateful set to be deployed. 
+
+5. Wait for your stateful set to be deployed.
    ```
    kubectl describe statefulset <statefulset_name>
    ```
    {: pre}
-   
+
    To see the current status of your PVCs, run `kubectl get pvc`. The name of your PVC is formatted as `<volume_name>-<statefulset_name>-<replica_number>`.
    {: tip}
-   
+
 ### Pre-provisioning the PVC before creating the stateful set
 {: #static_statefulset}
 
-You can pre-provision your PVCs before creating your stateful set or use existing PVCs with your stateful set. 
+You can pre-provision your PVCs before creating your stateful set or use existing PVCs with your stateful set.
 {: shortdesc}
 
-When you [dynamically provision your PVCs when creating the stateful set](#dynamic_statefulset), the name of the PVC is assigned based on the values that you used in the stateful set YAML file. In order for the stateful set to use existing PVCs, the name of your PVCs must match the name that would automatically be created when using dynamic provisioning. 
+When you [dynamically provision your PVCs when creating the stateful set](#dynamic_statefulset), the name of the PVC is assigned based on the values that you used in the stateful set YAML file. In order for the stateful set to use existing PVCs, the name of your PVCs must match the name that would automatically be created when using dynamic provisioning.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). 
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1. Follow steps 1-3 in [Adding file storage to apps](#add_file) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`. 
-   - **`<volume_name>`**: Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`. 
-   - **`<statefulset_name>`**: Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`. 
-   - **`<replica_number>`**: Enter the number of your replica starting with 0. 
-   
+1. Follow steps 1-3 in [Adding file storage to apps](#add_file) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`.
+   - **`<volume_name>`**: Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`.
+   - **`<statefulset_name>`**: Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`.
+   - **`<replica_number>`**: Enter the number of your replica starting with 0.
+
    For example, if you must create 3 stateful set replicas, create 3 PVCs with the following names: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1`, and `nginxvol-nginx_statefulset-2`.  
-   
-2. Follow the steps in [Dynamically provision the PVC when you create a stateful set](#dynamic_statefulset) to create your stateful set. Make sure to use the values from your PVC names in the stateful set specification: 
-   - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` that you used in the previous step. 
-   - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step. 
-   - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier. 
-   
-   **Note:** If you created your PVCs in different zones, do not include a region or zone label in your stateful set. 
-   
-3. Verify that the PVCs are used in your stateful set replica pods. 
-   1. List the pods in your cluster. Identify the pods that belong to your stateful set. 
+
+2. Follow the steps in [Dynamically provision the PVC when you create a stateful set](#dynamic_statefulset) to create your stateful set. Make sure to use the values from your PVC names in the stateful set specification:
+   - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` that you used in the previous step.
+   - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step.
+   - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
+
+   **Note:** If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+
+3. Verify that the PVCs are used in your stateful set replica pods.
+   1. List the pods in your cluster. Identify the pods that belong to your stateful set.
       ```
       kubectl get pods
       ```
       {: pre}
-   
-   2. Verify that your existing PVC is mounted to your stateful set replica. Review the **ClaimName** in the **Volumes** section of your CLI output. 
+
+   2. Verify that your existing PVC is mounted to your stateful set replica. Review the **ClaimName** in the **Volumes** section of your CLI output.
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       Name:           nginx-0
       Namespace:      default
@@ -832,10 +832,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      ...
       ```
       {: screen}
-      
+
 <br />
 
-     
+
 ## Changing the default NFS version
 {: #nfs_version}
 
@@ -1142,12 +1142,12 @@ Review the following backup and restore options for your file storage:
 ## Sample customized storage classes
 {: #custom_storageclass}
 
-You can create a customized storage class and use the storage class in your PVC. 
+You can create a customized storage class and use the storage class in your PVC.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision file storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes. 
+{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision file storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes.
 
-To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file). 
+To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file).
 
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}

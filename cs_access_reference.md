@@ -546,19 +546,19 @@ The tables are organized alphabetically by CLI command name.
 <tr>
 
 <td>View details for an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-get](cs_cli_reference.html#s_apiserver_config_get)</li>
+<ul><li>[ibmcloud ks apiserver-config-get](cs_cli_reference.html#apiserver_config_get)</li>
 <li>[GET /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/GetAuditWebhook)</li></ul></td>
 <td>IAM: Viewer <br> RBAC: view</td>
 </tr><tr>
 
 <td>Create an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-set](cs_cli_reference.html#s_apiserver_config_set)</li>
+<ul><li>[ibmcloud ks apiserver-config-set](cs_cli_reference.html#apiserver_config_set)</li>
 <li>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</li></ul></td>
 <td>IAM: Editor <br> RBAC: edit</td>
 </tr><tr>
 
 <td>Delete an API server audit webhook.
-<ul><li>[ibmcloud ks apiserver-config-unset](cs_cli_reference.html#s_apiserver_config_unset)</li>
+<ul><li>[ibmcloud ks apiserver-config-unset](cs_cli_reference.html#apiserver_config_unset)</li>
 <li>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</li></ul></td>
 <td>IAM: Editor <br> RBAC: edit</td>
 </tr><tr>
