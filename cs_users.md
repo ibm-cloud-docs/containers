@@ -903,8 +903,9 @@ If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) accoun
 
 6.  In the **Device Access** tab, select the devices to grant access to.
 
-    * In the **Device Type** drop-down list, you can grant access to **All Devices**.
+    * In the **Device Type** drop-down list, you can grant access to **All Devices** so that users can work with both virtual and physical (bare metal hardware) machine types for worker nodes.
     * To allow users access to new devices that are created, select **Automatically grant access when new devices are added**.
+    * In the table of devices, make sure that the appropriate devices are selected.
     * To save your changes, click **Update Device Access**.
 
 Downgrading permissions? It can take a few minutes for the action to complete.
