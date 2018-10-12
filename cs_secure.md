@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -88,7 +88,7 @@ The following image shows the default cluster security settings that address aut
     </tr>
     <tr>
       <td>Fine-grained access control</td>
-      <td>As the account administrator you can [grant access to other users for {{site.data.keyword.containerlong_notm}}](cs_users.html#users) by using {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). IAM provides secure authentication with the {{site.data.keyword.Bluemix_notm}} platform, {{site.data.keyword.containerlong_notm}}, and all the resources in your account. Setting up proper user roles and permissions is key to limit who can access your resources and to limit the damage a user can do when legitimate permissions are misused. </br></br>You can select from the following pre-defined user roles that determine the set of actions that the user can perform: <ul><li><strong>Platform roles:</strong> Determine the cluster and worker node related actions that a user can perform in {{site.data.keyword.containerlong_notm}}.</li><li><strong>Infrastructure roles:</strong> Determine the permissions to order, update, or remove infrastructure resources, such as worker nodes, VLANs, or subnets.</li><li><strong>Kubernetes RBAC roles:</strong> Determine the `kubectl` commands that a user can execute when he is authorized to access a cluster. RBAC roles are automatically set up for the default namespace of a cluster. To use the same RBAC roles in other namespaces, you can copy RBAC roles from the default namespace.  </li></ul> </br> Instead of using the pre-defined user roles, you can choose to [customize infrastructure permissions](cs_users.html#infra_access) or [set up your own RBAC roles](cs_users.html#rbac) to add a more fine-grained access control. </td>
+      <td>As the account administrator you can [grant access to other users for {{site.data.keyword.containerlong_notm}}](cs_users.html#users) by using {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). IAM provides secure authentication with the {{site.data.keyword.Bluemix_notm}} platform, {{site.data.keyword.containerlong_notm}}, and all the resources in your account. Setting up proper user roles and permissions is key to limit who can access your resources and to limit the damage a user can do when legitimate permissions are misused. </br></br>You can select from the following pre-defined user roles that determine the set of actions that the user can perform: <ul><li><strong>Platform roles:</strong> Determine the cluster and worker node related actions that a user can perform in {{site.data.keyword.containerlong_notm}}.</li><li><strong>Infrastructure roles:</strong> Determine the permissions to order, update, or remove infrastructure resources, such as worker nodes, VLANs, or subnets.</li><li><strong>Kubernetes RBAC roles:</strong> Determine the `kubectl` commands that users can execute when they are authorized to access a cluster. RBAC roles are automatically set up for the default namespace of a cluster. To use the same RBAC roles in other namespaces, you can copy RBAC roles from the default namespace.  </li></ul> </br> Instead of using the pre-defined user roles, you can choose to [customize infrastructure permissions](cs_users.html#infra_access) or [set up your own RBAC roles](cs_users.html#rbac) to add a more fine-grained access control. </td>
     </tr>
     <tr>
       <td>Admission controllers</td>
