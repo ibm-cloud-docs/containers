@@ -911,5 +911,5 @@ Before you begin, make sure that you are the account owner or have **Super User*
     * In the table of devices, make sure that the appropriate devices are selected.
     * To save your changes, click **Update Device Access**.
 
-Downgrading permissions? It can take a few minutes for the action to complete.
+Downgrading permissions? The action can take a few minutes to complete.
 {: tip}
