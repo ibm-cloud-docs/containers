@@ -880,11 +880,14 @@ Now that you created and bound a custom Kubernetes RBAC role or cluster role, fo
 {: #infra_access}
 
 When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+{: shortdesc}
 
 For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credentials-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
 
 If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) account owner needs to turn on VLAN spanning so that the nodes in different zones can communicate within the cluster. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
 {: tip}
+
+Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 
 1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 
