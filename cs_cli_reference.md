@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-10-10"
 
 
 
-# {{site.data.keyword.containerlong_notm}} CLI reference
+# Command reference
 {: #cs_cli_reference}
 
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
@@ -2769,7 +2769,7 @@ View the details of a worker node.
   ```
   {: screen}
 
-### ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [-s]
+### ibmcloud ks worker-reboot [-f] [--hard] --cluster CLUSTER --worker WORKER [WORKER] [--skip-master-healthcheck] [-s]
 {: #cs_worker_reboot}
 
 Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node.
@@ -2831,6 +2831,9 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
    <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
 
+   <dt><code>--skip-master-healthcheck</code></dt>
+   <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -2843,7 +2846,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-### ibmcloud ks worker-reload [-f] --cluster CLUSTER --worker WORKER [WORKER] [-s]
+### ibmcloud ks worker-reload [-f] --cluster CLUSTER --worker WORKER [WORKER] [--skip-master-healthcheck] [-s]
 {: #cs_worker_reload}
 
 Reload all the necessary configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state.
@@ -2900,6 +2903,9 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 
    <dt><code>--worker <em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
+
+   <dt><code>--skip-master-healthcheck</code></dt>
+   <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
