@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 
 ---
@@ -903,7 +903,7 @@ If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) accoun
 
 6.  In the **Device Access** tab, select the devices to grant access to.
 
-    * In the **Device Type** drop-down list, you can grant access to **All Virtual Servers**.
+    * In the **Device Type** drop-down list, you can grant access to **All Devices**.
     * To allow users access to new devices that are created, select **Automatically grant access when new devices are added**.
     * To save your changes, click **Update Device Access**.
 
