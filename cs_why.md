@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-11"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -143,13 +143,12 @@ You can [use resource groups](/docs/resources/bestpractice_rgs.html#bp_resourceg
 
 Your charges depend on the type of resource that you use, and might be fixed, metered, tiered, or reserved. For more information, view [How you are charged](/docs/billing-usage/how_charged.html#charges).
 
-IBM Cloud infrastructure (SoftLayer) resources, such as worker nodes or storage instances, can be billed hourly or monthly. Typically, you choose whether you are billed hourly or monthly for a resource when you create the resource. However, some resources such as bare metal worker nodes, are always billed monthly.
+IBM Cloud infrastructure (SoftLayer) resources can be billed hourly or monthly in {{site.data.keyword.containerlong_notm}}.
+* Virtual machine (VM) worker nodes are billed hourly.
+* Physical (bare metal) worker nodes are billed monthly resources in {{site.data.keyword.containerlong_notm}}.
+* For other infrastructure resources, such as file or block storage, you might be able to choose between hourly or monthly billing when you create the resource.
 
-Monthly resources are billed based upon your anniversary date. Consider the following example scenario:
-1. You have an existing account with an anniversary date of the 15th of a month.
-2. You order a monthly resource such as a bare metal worker node on the 1st of the month.
-3. You are charged a prorated amount for the resource until the 15th of the month. After, your next charge for the resource is for the next full one-month cycle.
-4. You delete your bare metal worker node on the 30th of the month. You are still charged for the resource for the full one-month cycle, until the 15th of the next month.
+Monthly resources are billed based upon the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
 
 ### Can I estimate my costs?
 {: #estimate}
