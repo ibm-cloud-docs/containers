@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -32,6 +32,7 @@ The list is divided into two parts:
 *  **Cluster-level**: These are preparations that impact your cluster each time that you create a cluster.
 
 ### Account-level
+{: #prepare_account_level}
 
 1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
@@ -41,27 +42,28 @@ The list is divided into two parts:
 
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
     {: tip}
-    
+
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
-    *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the `default` resource group is automatically targeted.
-    *  If you want to create a cluster in a different resource group than `default`, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the `default` resource group.
+    *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
+    *  If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
-    * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the `default` resource group only.
+    * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the default resource group only.
 4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 ### Cluster-level
+{: #prepare_cluster_level}
 
 1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
     1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), click **Manage > Account > Users**.
     2.  From the table, select yourself.
-    3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}.
+    3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
 2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the pricing calculator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: You must add a **Dedicated Network (1 Subnet With 8 Portable Public IPs)** for each cluster to your estimate. Also, the cost for [outbound networking bandwidth ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth) varies by usage and is an additional charge beyond the charges in the pricing calculator.
+4.  For standard clusters, you can [estimate the cost with the pricing calculator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
 <br>
 <br>
 
@@ -104,8 +106,8 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 2. Select a resource group in which to create your cluster.
   **Note**:
     * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-    * Free clusters are automatically created in the `default` resource group.
-    * To create clusters in a resource group other than `default`, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
+    * Free clusters are automatically created in the default resource group.
+    * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
 
 2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
@@ -182,11 +184,11 @@ To create a cluster:
 
     2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-    3.  To create clusters in a resource group other than `default`, target that resource group.
+    3.  To create clusters in a resource group other than default, target that resource group.
       **Note**:
         * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
         * You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
-        * Free clusters are automatically created in the `default` resource group.
+        * Free clusters are automatically created in the the default resource group.
       ```
       ibmcloud target -g <resource_group_name>
       ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -23,29 +23,6 @@ lastupdated: "2018-10-05"
 
 You can use various external services and catalog services with a standard Kubernetes cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
-
-
-## Application services
-{: #application_services}
-<table summary="Summary for accessibility">
-<caption>Application services</caption>
-<thead>
-<tr>
-<th>Service</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{{site.data.keyword.blockchainfull}}</td>
-<td>Deploy a publicly available development environment for IBM Blockchain to a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}. Use this environment to develop and customize your own blockchain network to deploy apps that share an immutable ledger for recording the history of transactions. For more information, see <a href="https://ibm-blockchain.github.io" target="_blank">Develop in a cloud sandbox
-IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
-</tr>
-</tbody>
-</table>
-
-<br />
-
 
 
 ## DevOps services

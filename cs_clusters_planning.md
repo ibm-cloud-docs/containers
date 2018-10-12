@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -447,7 +447,7 @@ Choose a machine type with the right storage configuration to support your workl
 <th>Name and use case</th>
 <th>Cores / Memory</th>
 <th>Primary / Secondary disk</th>
-<th>Local storage</th>
+<th>Additional raw disks</th>
 <th>Network speed</th>
 </thead>
 <tbody>

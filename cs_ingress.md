@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -278,42 +278,29 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 If you do not have a TLS certificate ready, follow these steps:
-1. Generate a key and certificate in one of the following ways:
-  * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-    **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-  * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-      1. Create a `tls.key`.
-          ```
-          openssl genrsa -out tls.key 2048
-          ```
-          {: pre}
-      2. Use the key to create a `tls.crt`.
-          ```
-          openssl req -new -x509 -key tls.key -out tls.crt
-          ```
-          {: pre}
-2. Convert the cert and key into base-64. 
-   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file. 
+1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+2. Convert the cert and key into base-64.
+   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
       ```
       openssl base64 -in tls.key -out tls.key.base64
       ```
       {: pre}
-      
+
       ```
       openssl base64 -in tls.crt -out tls.crt.base64
       ```
       {: pre}
-   2. View the base-64 encoded value for your cert and key. 
+   2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
       ```
       {: pre}
-      
+
       ```
       cat tls.crt.base64
       ```
       {: pre}
-        
+
 3. Create a secret YAML file using the cert and key.
      ```
      apiVersion: v1
@@ -773,42 +760,29 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 If you do not have a TLS certificate ready, follow these steps:
-1. Generate a key and certificate in one of the following ways:
-  * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-    **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-  * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-      1. Create a `tls.key`.
-          ```
-          openssl genrsa -out tls.key 2048
-          ```
-          {: pre}
-      2. Use the key to create a `tls.crt`.
-          ```
-          openssl req -new -x509 -key tls.key -out tls.crt
-          ```
-          {: pre}
-2. Convert the cert and key into base-64. 
-   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file. 
+1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+2. Convert the cert and key into base-64.
+   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
       ```
       openssl base64 -in tls.key -out tls.key.base64
       ```
       {: pre}
-      
+
       ```
       openssl base64 -in tls.crt -out tls.crt.base64
       ```
       {: pre}
-   2. View the base-64 encoded value for your cert and key. 
+   2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
       ```
       {: pre}
-      
+
       ```
       cat tls.crt.base64
       ```
       {: pre}
-        
+
 3. Create a secret YAML file using the cert and key.
      ```
      apiVersion: v1

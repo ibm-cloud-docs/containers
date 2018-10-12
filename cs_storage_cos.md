@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -167,7 +167,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: screen}
       
-      If your worker node does not apply the latest patch version, you see an asterisk (*) in the **Version** column of your CLI output. 
+      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output. 
       
    2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
    
@@ -188,14 +188,15 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    helm repo update
    ```
    {: pre}
+   
+5. Download the Helm charts and unpack the charts in your current directory. 
+   ```
+   helm fetch --untar ibm/ibmcloud-object-storage-plugin
+   ```
+   {: pre}
 
-5. Install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. 
-   1. Download the Helm chart and unpack the chart in your current directory.    
-      ```
-      helm fetch --untar ibm/ibmcloud-object-storage-plugin
-      ```
-      {: pre}
-   2. Install the Helm plug-in. 
+6. If you use macOS or a Linux distribution, install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. If you use Windows as your operating system, continue with the next step. 
+   1. Install the Helm plug-in. 
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
       ```
@@ -207,30 +208,30 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: screen}
     
-6. Verify that the `ibmc` plug-in is installed successfully. 
-   ```
-   helm ibmc --help
-   ```
-   {: pre}
+   2. Verify that the `ibmc` plug-in is installed successfully. 
+      ```
+      helm ibmc --help
+      ```
+      {: pre}
    
-   Example output: 
-   ```
-   Install or upgrade Helm charts in IBM K8S Service
+      Example output: 
+      ```
+      Install or upgrade Helm charts in IBM K8S Service
 
-   Available Commands:
-    helm ibmc install [CHART] [flags]              Install a Helm chart
-    helm ibmc upgrade [RELEASE] [CHART] [flags]    Upgrades the release to a new version of the Helm chart
+      Available Commands:
+       helm ibmc install [CHART] [flags]              Install a Helm chart
+       helm ibmc upgrade [RELEASE] [CHART] [flags]    Upgrades the release to a new version of the Helm chart
 
-   Available Flags:
-    --verbos                      (Optional) Verbosity intensifies... ...
-    -f, --values valueFiles       (Optional) specify values in a YAML file (can specify multiple) (default [])
-    -h, --help                    (Optional) This text.
-    -u, --update                  (Optional) Update this plugin to the latest version
+      Available Flags:
+       --verbos                      (Optional) Verbosity intensifies... ...
+       -f, --values valueFiles       (Optional) specify values in a YAML file (can specify multiple) (default [])
+       -h, --help                    (Optional) This text.
+       -u, --update                  (Optional) Update this plugin to the latest version
 
-   Example Usage:
-    helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
-   ```
-   {: screen}
+      Example Usage:
+       helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+      ```
+      {: screen}
    
 7. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster. 
    1. [Create your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service). 
@@ -259,18 +260,45 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    
 8. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster. 
 
-   **Install without a limitation to specific Kubernetes secrets:**
-   ```
-   helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
-   ```
-   {: pre}
-   
-   **Install with a limitation to specific Kubernetes secrets as described in the previous step:**
-   ```
-   helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
-   ```
-   {: pre}
-   
+   - **For macOS and Linux:**
+     - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
+       ```
+       helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       ```
+       {: pre}
+       
+     - If you completed the previous step, install with a limitation to specific Kubernetes secrets. 
+       ```
+       helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       ```
+       {: pre}
+     
+   - **For Windows:**
+     1. Retrieve the zone where your cluster is deployed and store the zone in an environment variable. 
+        ```
+        export DC_NAME=$(kubectl get cm cluster-info -n kube-system -o jsonpath='{.data.cluster-config\.json}' | grep datacenter | awk -F ': ' '{print $2}' | sed 's/\"//g' |sed 's/,//g')
+        ```
+        {: pre}
+        
+     2. Verify that the environment variable is set. 
+        ```
+        printenv
+        ```
+        {: pre}
+        
+     3. Install the Helm chart. 
+        - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
+          ```
+          helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          ```
+          {: pre}
+          
+        - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
+          ```
+          helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          ```
+          {: pre}
+         
    Example output: 
    ```
    Installing the Helm chart
@@ -334,7 +362,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
    
-9. Verify that the plug-in is installed correctly. 
+8. Verify that the plug-in is installed correctly. 
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
@@ -349,7 +377,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       
    The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure. 
    
-10. Verify that the storage classes are created successfully. 
+9. Verify that the storage classes are created successfully. 
    ```
    kubectl get storageclass | grep s3
    ```
@@ -372,7 +400,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-11. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
+10. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
       
 ### Updating the IBM Cloud Object Storage plug-in
 {: #update_cos_plugin}
@@ -480,25 +508,26 @@ To remove the plug-in:
    
    The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
    
-5. Remove the `ibmc` Helm plug-in. 
-   ```
-   rm -rf ~/.helm/plugins/helm-ibmc
-   ```
-   {: pre}
+5. If you use macOS or a Linux distribution, remove the `ibmc` Helm plug-in. If you use Windows, this step is not required. 
+   1. Remove the `ibmc` plug-in. 
+      ```
+      rm -rf ~/.helm/plugins/helm-ibmc
+      ```
+      {: pre}
    
-6. Verify that the `ibmc` plug-in is removed. 
-   ```
-   helm plugin list
-   ```
-   {: pre}
+   2. Verify that the `ibmc` plug-in is removed. 
+      ```
+      helm plugin list
+      ```
+      {: pre}
    
-   Example output: 
-   ```
-   NAME	VERSION	DESCRIPTION
-   ```
-   {: screen}
+      Example output: 
+     ```
+     NAME	VERSION	DESCRIPTION
+     ```
+     {: screen}
    
-   The `ibmc` plug-in is removed successfully if the `ibmc` plug-in is not listed in your CLI output. 
+     The `ibmc` plug-in is removed successfully if the `ibmc` plug-in is not listed in your CLI output. 
 
    
 ## Deciding on the object storage configuration

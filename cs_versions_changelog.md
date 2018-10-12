@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -40,6 +40,36 @@ For information about changes since the previous version, see the following chan
 {: #111_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
+{: #1113_1525}
+
+<table summary="Changes that were made since version 1.11.3_1524">
+<caption>Changes since version 1.11.3_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-133</td>
+<td>4.4.0-137</td>
+<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+</tr>
+<tr>
+<td>Inactive session timeout</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Set the inactive session timeout to 5 minutes for compliance reasons.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for 1.11.3_1524, released 2 October 2018
 {: #1113_1524}
@@ -103,6 +133,12 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node.<br><br>
 Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+</tr>
+<tr>
+<td>Key Management Service Provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -294,6 +330,36 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018
+{: #1108_1525}
+
+<table summary="Changes that were made since version 1.10.8_1524">
+<caption>Changes since version 1.10.8_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-133</td>
+<td>4.4.0-137</td>
+<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+</tr>
+<tr>
+<td>Inactive session timeout</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Set the inactive session timeout to 5 minutes for compliance reasons.</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog for 1.10.8_1524, released 2 October 2018
 {: #1108_1524}
 
@@ -308,6 +374,12 @@ Review the following changes.
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Key Management Service Provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
+</tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.10.7</td>
@@ -744,6 +816,36 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #19_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018
+{: #1910_1528}
+
+<table summary="Changes that were made since version 1.9.10_1527">
+<caption>Changes since version 1.9.10_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-133</td>
+<td>4.4.0-137</td>
+<td>Updated worker node images with kernel update for [CVE-2018-14633, CVE-2018-17182 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-137.163/changelog).</td>
+</tr>
+<tr>
+<td>Inactive session timeout</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Set the inactive session timeout to 5 minutes for compliance reasons.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for 1.9.10_1527, released 2 October 2018
 {: #1910_1527}

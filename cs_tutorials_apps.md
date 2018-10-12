@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -645,7 +645,7 @@ Change the name of the image:
 
     When you roll out a change, another pod is created and tested by Kubernetes. When the test is successful, the old pod is removed.
 
-[Test your knowledge and take a quiz! ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+
 
 Congratulations! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app. The PR firm can start to use this deployment to start analyzing their press releases.
 

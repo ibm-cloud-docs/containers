@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -51,7 +51,87 @@ To monitor administrative activity:
 To let other users view account and space events, see [Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
 {: tip}
 
+## Tracking cluster management events
+{: #cluster-events}
 
+Check out the following list of the cluster management events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
+
+<table>
+<tr>
+<th>Action</th>
+<th>Description</th></tr><tr>
+<td><code>containers-kubernetes.account-credentials.set</code></td>
+<td>Infrastructure credentials in a region for a resource group were set.</td></tr><tr>
+<td><code>containers-kubernetes.account-credentials.unset</code></td>
+<td>Infrastructure credentials in a region for a resource group were unset.</td></tr><tr>
+<td><code>containers-kubernetes.alb.create</code></td>
+<td>An Ingress ALB was created.</td></tr><tr>
+<td><code>containers-kubernetes.alb.delete</code></td>
+<td>An Ingress ALB was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.alb.get</code></td>
+<td>Ingress ALB information was viewed.</td></tr><tr>
+<td><code>containers-kubernetes.apikey.reset</code></td>
+<td>An API key was reset for a region and resource group.</td></tr><tr>
+<td><code>containers-kubernetes.cluster.create</code></td>
+<td>A cluster was created.</td></tr><tr>
+<td><code>containers-kubernetes.cluster.delete</code></td>
+<td>A cluster was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.cluster-feature.enable</code></td>
+<td>A feature, such as Trusted Compute for bare metal worker nodes, was enabled on a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.cluster.get</code></td>
+<td>Cluster information was viewed.</td></tr><tr>
+<td><code>containers-kubernetes.logging-config.create</code></td>
+<td>A log forwarding configuration was created.</td></tr><tr>
+<td><code>containers-kubernetes.logging-config.delete</code></td>
+<td>A log forwarding configuration was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.logging-config.get</code></td>
+<td>Information for a log forwarding configuration was viewed.</td></tr><tr>
+<td><code>containers-kubernetes.logging-config.update</code></td>
+<td>A log forwarding configuration was updated.</td></tr><tr>
+<td><code>containers-kubernetes.logging-config.refresh</code></td>
+<td>A log forwarding configuration was refreshed.</td></tr><tr>
+<td><code>containers-kubernetes.logging-filter.create</code></td>
+<td>A logging filter was created.</td></tr><tr>
+<td><code>containers-kubernetes.logging-filter.delete</code></td>
+<td>A logging filter was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.logging-filter.get</code></td>
+<td>Information for a logging filter was viewed.</td></tr><tr>
+<td><code>containers-kubernetes.logging-filter.update</code></td>
+<td>A logging filter was updated.</td></tr><tr>
+<td><code>containers-kubernetes.logging-autoupdate.changed</code></td>
+<td>The logging add-on auto updater was enabled or disabled.</td></tr><tr>
+<td><code>containers-kubernetes.mzlb.create</code></td>
+<td>A multizone load balancer was created.</td></tr><tr>
+<td><code>containers-kubernetes.mzlb.delete</code></td>
+<td>A multizone load balancer was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.service.bind</code></td>
+<td>A service was bound to a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.service.unbind</code></td>
+<td>A service was unbound from a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.subnet.add</code></td>
+<td>An existing IBM Cloud infrastructure (SoftLayer) subnet was added to a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.subnet.create</code></td>
+<td>A subnet was created.</td></tr><tr>
+<td><code>containers-kubernetes.usersubnet.add</code></td>
+<td>A user-managed subnet was added to a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.usersubnet.delete</code></td>
+<td>A user-managed subnet was removed from a cluster.</td></tr><tr>
+<td><code>containers-kubernetes.version.update</code></td>
+<td>The Kubernetes version of a cluster master node was updated.</td></tr><tr>
+<td><code>containers-kubernetes.worker.create</code></td>
+<td>A worker node was created.</td></tr><tr>
+<td><code>containers-kubernetes.worker.delete</code></td>
+<td>A worker node was deleted.</td></tr><tr>
+<td><code>containers-kubernetes.worker.get</code></td>
+<td>Information for a worker node was viewed.</td></tr><tr>
+<td><code>containers-kubernetes.worker.reboot</code></td>
+<td>A worker node was rebooted.</td></tr><tr>
+<td><code>containers-kubernetes.worker.reload</code></td>
+<td>A worker node was reloaded.</td></tr><tr>
+<td><code>containers-kubernetes.worker.update</code></td>
+<td>A worker node was updated.</td></tr>
+</table>
 
 ## Tracking Kubernetes audit events
 {: #kube-events}

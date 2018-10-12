@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -30,7 +30,12 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 
 
 **Does IBM monitor my cluster?**
+
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster.
+
+**How are logs collected?**
+
+Logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) add-on in your cluster. When you create a logging configuration for a source in your cluster, the Fluentd add-on collects logs from the paths for that source. Logs are then forwarded to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
 
 **What are the sources that I can configure logging for?**
 
@@ -38,23 +43,30 @@ In the following image you can see the location of the sources that you can conf
 
 ![Log sources](images/log_sources.png)
 
-<ol>
-<li><p><code>application</code>: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</p> <p>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></li>
+1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.</br>Paths:
+    * `/var/log/syslog`
+    * `/var/log/auth.log`
 
-<li><p><code>container</code>: Information that is logged by a running container.</p> <p>Paths: Anything written to <code>STDOUT</code> or <code>STDERR</code>.</p></li>
+2. `container`: Information that is logged by a running container.</br>Paths: Anything written to `STDOUT` or `STDERR`.
 
-<li><p><code>ingress</code>: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</p> <p>Paths: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
+3. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>Paths: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
 
-<li><p><code>kube-audit</code>: Information about cluster-related actions that is sent to the Kubernetes API server; including the time, the user, and the affected resource.</p></li>
+5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.</br>Paths:
+    * `/var/log/kubelet.log`
+    * `/var/log/kube-proxy.log`
+    * `/var/log/event-exporter/1..log`
 
-<li><p><code>kubernetes</code>: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the worker node. that run in the kube-system namespace.</p><p>Paths: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
+6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-<li><p><code>worker</code>: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In auth.log you can find information on the authentication requests that are made to the OS. </p><p>Paths: <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></p></li>
-</ol>
+7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</br>Paths:
+    * `/var/log/alb/ids/*.log`
+    * `/var/log/alb/ids/*.err`
+    * `/var/log/alb/customerlogs/*.log`
+    * `/var/log/alb/customerlogs/*.err`
 
 </br>
 
-**What are the configuration options that I have?**
+**What configuration options do I have?**
 
 The following table shows the different options that you have when configuring logging and their descriptions.
 
@@ -71,7 +83,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
@@ -105,7 +117,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--app-paths</em></code></td>
-      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/*,/var/log/myApp2/*</code></td>
     </tr>
     <tr>
       <td><code><em>--syslog-protocol</em></code></td>
@@ -129,6 +141,10 @@ The following table shows the different options that you have when configuring l
 **Am I responsible for keeping Fluentd for logging updated?**
 
 In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](cs_cluster_update.html#logging).
+
+**Can I use my own logging solution?**
+
+If you have special requirements, you can set up your own logging solution in your cluster. In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.
 
 <br />
 
@@ -624,14 +640,14 @@ To forward Kubernetes API audit logs:
 ## Collecting master logs
 {: #collect_master}
 
-With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
+With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
 {: shortdesc}
 
 Because Kubernetes API Server logs are automatically streamed, they're also automatically deleted to make room for the new logs coming in. By keeping a snapshot of logs at a specific point in time, you can better troubleshoot issues, look into usage differences, and find patterns to help maintain more secure applications.
 
 **Before you begin**
 
-* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of Object Storage from the {{site.data.keyword.Bluemix_notm}} catalog.
+* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
 * Be sure that you have [the **Administrator IAM platform role](cs_users.html#platform) for the cluster that you're working with.
 
 **Creating a snapshot**
@@ -639,7 +655,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 1. Create an Object Storage bucket through the GUI by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
-  1. In the **Service Credentials** tab of the Cloud Object Storage dashboard, click **New Credential**.
+  1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
   2. Give the HMAC credentials the `Writer` IAM role.
   3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
 
