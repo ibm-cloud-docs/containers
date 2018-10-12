@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -40,6 +40,8 @@ For information about changes since the previous version, see the following chan
 {: #111_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
 {: #1113_1525}
@@ -329,6 +331,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #110_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018
 {: #1108_1525}
@@ -816,6 +820,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #19_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018
 {: #1910_1528}
