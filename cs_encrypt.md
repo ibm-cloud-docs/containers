@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -19,8 +19,10 @@ lastupdated: "2018-10-10"
 # Protecting sensitive information in your cluster
 {: #encryption}
 
-By default, your {{site.data.keyword.containerlong}} cluster uses encrypted disks to store information such as configurations in `etcd` or the container file system that runs on the worker node secondary disks. When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file or scripts. Instead, use [Kubernetes secrets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/). You can also encrypt data in Kubernetes secrets to prevent unauthorized users from accessing sensitive cluster information.
+By default, your {{site.data.keyword.containerlong}} cluster uses encrypted disks to store information such as configurations in `etcd` or the container file system that runs on the worker node secondary disks. When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/). You can also encrypt data in Kubernetes secrets to prevent unauthorized users from accessing sensitive cluster information.
 {: shortdesc}
+
+
 
 For more information on securing your cluster, see [Security for {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).
 
