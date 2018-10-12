@@ -2784,6 +2784,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
+   {: pre}
    The**name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud ks workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
@@ -2805,7 +2806,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
     This process can take a few minutes.
  5. Reboot the worker node. Use the worker ID that is returned from the `ibmcloud ks workers <cluster_name_or_ID>` command.
     ```
-    ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+    ibmcloud ks worker-reboot --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
     {: pre}
  6. Wait about 5 minutes before you make your worker node available for pod scheduling to ensure that the reboot is finished. During the reboot, the state of your worker node does not change. The reboot of a worker node is usually completed in a few seconds.
@@ -2814,6 +2815,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
     kubectl uncordon <worker_name>
     ```
     {: pre}
+
     </br>
 
 <strong>Command options</strong>:
@@ -2828,7 +2830,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
    <dt><code>--hard</code></dt>
    <dd>Use this option to force a hard restart of a worker node by cutting off power to the worker node. Use this option if the worker node is unresponsive or the worker node's container runtime is unresponsive. This value is optional.</dd>
 
-   <dt><code>--worker <em>WORKER</em></code></dt>
+   <dt><code>--workers <em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
 
    <dt><code>--skip-master-healthcheck</code></dt>
