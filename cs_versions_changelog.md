@@ -41,7 +41,34 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for 1.11.3_1527, released 15 October 2018
+{: #1113_1527}
 
+<table summary="Changes that were made since version 1.11.3_1524">
+<caption>Changes since version 1.11.3_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed `calico-node` container readiness probe to better handle node failures.</td>
+</tr>
+<tr>
+<td>Cluster update</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed problem with updating cluster add-ons when the master is updated from an unsupported version.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
 {: #1113_1525}
@@ -332,7 +359,34 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for 1.10.8_1527, released 15 October 2018
+{: #1108_1527}
 
+<table summary="Changes that were made since version 1.10.8_1524">
+<caption>Changes since version 1.10.8_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed `calico-node` container readiness probe to better handle node failures.</td>
+</tr>
+<tr>
+<td>Cluster update</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed problem with updating cluster add-ons when the master is updated from an unsupported version.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018
 {: #1108_1525}
@@ -821,7 +875,28 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for 1.9.10_1530 released 15 October 2018
+{: #1910_1530}
 
+<table summary="Changes that were made since version 1.9.10_1527">
+<caption>Changes since version 1.9.10_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster update</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed problem with updating cluster add-ons when the master is updated from an unsupported version.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018
 {: #1910_1528}
