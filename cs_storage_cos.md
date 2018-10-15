@@ -27,7 +27,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
    1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://console.bluemix.net/catalog/services/cloud-object-storage).
-   2.  Enter a name for your service instance, such as `cos-backup`, and select **default** as your resource group. 
+   2.  Enter a name for your service instance, such as `cos-backup`, and select the same resource group that your cluster is in. To view the resource group of your cluster, run `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
    3.  Review the [plan options ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for pricing information and select a plan. 
    4.  Click **Create**. The service details page opens. 
 2. {: #service_credentials}Retrieve the {{site.data.keyword.cos_full_notm}} service credentials.
@@ -35,7 +35,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
    2.  Click **New credential**. A dialog box displays. 
    3.  Enter a name for your credentials.
    4.  From the **Role** drop-down, select `Writer` or `Manager`. When you select `Reader`, then you cannot use the credentials to create buckets in {{site.data.keyword.cos_full_notm}} and write data to it. 
-   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the default OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. 
+   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. 
    6.  Click **Add**. Your new credentials are listed in the **Service Credentials** table.
    7.  Click **View credentials**. 
    8.  Make note of the **apikey** to use OAuth2 tokens to authenticate with the {{site.data.keyword.cos_full_notm}} service. For HMAC authentication, in the **cos_hmac_keys** section, note the **access_key_id** and the **secret_access_key**. 
