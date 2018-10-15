@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -888,7 +888,8 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    4. From the {{site.data.keyword.Bluemix}} dashboard, navigate to your {{site.data.keyword.cos_full_notm}} service instance. 
    5. From the menu, select **Buckets**. 
    6. Open your bucket, and verify that you can see the `test.txt` that you created. 
-    
+   
+
     
 ## Backing up and restoring data
 {: #backup_restore}
