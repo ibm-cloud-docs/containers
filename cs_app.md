@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-12"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -37,7 +37,90 @@ Learn the general steps for deploying apps by clicking an area of the following 
 <br />
 
 
+ |
+| [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use a daemonset when you must run the same pod on every worker node in your cluster. Pods that are managed by a daemonset are automatically scheduled when a worker node is added to a cluster. Typical use cases include log collectors, such as `logstash` or `prometheus`, that collect logs from every worker node to provide insight into the health of a cluster or an app. |
+| [`Job` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | A job ensures that one or more pods run successfully to completion. You might use a job for queues or batch jobs to support parallel processing of separate but related work items, such as a certain number of frames to render, emails to send, and files to convert. To schedule a job to run at certain times, use a [Cron Job ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
+{: caption="Types of Kubernetes workload objects that you can create." caption-side="top"}
 
+### How can I add capabilities to my Kubernetes app configuration?
+See [Specifying your app requirements in your YAML file](#app_yaml) for descriptions of what you might include in a deployment. The example includes:
+* [Replica sets](#replicaset)
+* [Labels](#label)
+* [Affinity](#affinity)
+* [Image policies](#image)
+* [Ports](#port)
+* [Resource requests and limits](#resourcereq)
+* [Liveness and readiness probes](#probe)
+* [Services](#service) to expose the app service on a port
+* [Configmaps](#configmap) to set container environment variables
+* [Secrets](#secret) to set container environment variables
+* [Persistent volumes](#pv) that are mounted to the container for storage
+
+### What if I want my Kubernetes app configuration to use variables? How do I add these to the YAML?
+{: #variables}
+
+To add variable information to your deployments instead of hard-coding the data into the YAML file, you can use a Kubernetes [`ConfigMap` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) or [`Secret` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/) object.
+
+To consume a configmap or secret, you need to mount it to the pod. The configmap or secret is combined with the pod just before the pod is run. You can reuse a deployment spec and image across many apps, but then swap out the customized configmaps and secrets. Secrets in particular can take up a lot of storage on the local node, so plan accordingly.
+
+Both resources define key-value pairs, but you use them for different situations.
+
+<dl>
+<dt>Configmap</dt>
+<dd>Provide non-sensitive configuration information for workloads that are specified in a deployment. You can use configmaps in three main ways.
+<ul><li><strong>Filesystem</strong>: You can mount an entire file or a set of variables to a pod. A file is created for each entry based on the key name contents of the file that are set to the value.</li>
+<li><strong>Environment variable</strong>: Dynamically set the environment variable for a container spec.</li>
+<li><strong>Command-line argument</strong>: Set the command-line argument that is used in a container spec.</li></ul></dd>
+
+<dt>Secret</dt>
+<dd>Provide sensitive information to your workloads, such as follows. Note that other users of the cluster might have access to the secret, so be sure that you know the secret information can be shared with those users.
+<ul><li><strong>Personally identifiable information (PII)</strong>: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.</li>
+<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](cs_integrations.html#adding_cluster) to your cluster, the credentials are stored in a secret.</li></ul></dd>
+</dl>
+
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets.
+{: tip}
+
+### How can I add IBM services to my app, such as Watson?
+See [Adding services to apps](cs_integrations.html#adding_app).
+
+### How can I make sure that my app has the right resources?
+When you [specify your app YAML file](#app_yaml), you can add Kubernetes functionalities to your app configuration that help your app get the right resources. In particular, [set resource limits and requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for each container that is defined in your YAML file.
+
+Additionally, your cluster admin might set up resource controls that can affect your app deployment, such as the following.
+*  [Resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+*  [Pod priority](cs_pod_priority.html#pod_priority)
+
+### How can I access my app?
+You can access your app privately within the cluster by [using a `clusterIP` service](cs_network_cluster.html#planning).
+
+If you want to expose your app publicly, you have different options that depend on your cluster type.
+*  **Free cluster**: You can expose your app by using a [NodePort service](cs_nodeport.html#nodeport).
+*  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#planning).
+*  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
+*  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#private_vlan). You also must open the port for the service's private IP address in your firewall.
+
+### After I deploy my app, how can I monitor its health?
+You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](cs_health.html#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](cs_integrations.html#health_services).
+
+### How can I keep my app up-to-date?
+If you want to dynamically add and remove apps in response to workload usage, see [Scaling apps](cs_app.html#app_scaling).
+
+If you want to manage updates to your app, see [Managing rolling deployments](cs_app.html#app_rolling).
+
+### How can I control who has access to my app deployments?
+The account and cluster admins can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
+
+With IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](cs_users.html#users).
+
+To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](cs_psp.html#psp).
+
+Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
+
+<br />
+
+
+</staging>
 
 ## Planning highly available deployments
 {: #highly_available_apps}
