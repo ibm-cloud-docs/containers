@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -250,6 +250,50 @@ To prevent the connection from closing after 60 seconds of inactivity:
 <dd>Increase the value of the `proxy-read-timeout` in your ALB configuration. For example, to change the timeout from `60s` to a larger value like `300s`, add this [annotation](cs_annotations.html#connection) to your Ingress resource file: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. The timeout is changed for all public ALBs in your cluster.</dd>
 <dt>Set up a heartbeat</dt>
 <dd>If you don't want to change the ALB's default read timeout value, set up a heartbeat in your WebSocket app. When you set up a heartbeat protocol by using a framework like [WAMP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://wamp-proto.org/), the app's upstream server periodically sends a "ping" message on a timed interval and the client responds with a "pong" message. Set the heartbeat interval to 58 seconds or less so that the "ping/pong" traffic keeps the connection open before the 60-second timeout is enforced.</dd></dl>
+
+<br />
+
+
+## Source IP preservation fails when using tainted nodes
+{: #cs_source_ip_fails}
+
+{: tsSymptoms}
+You enabled source IP preservation for a [ load balancer](cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
+
+{: tsCauses}
+When you enable source IP preservation for load balancer or Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed. Typically, load balancer or Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:
+
+* **Edge node taints**: You [added the `dedicated=edge` label](cs_edge.html#edge_nodes) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancer pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](cs_edge.html#edge_workloads) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the backend service for your app.
+
+* **Custom taints**: You used custom taints on several nodes so that only app pods with that taint toleration can deploy to those nodes. You added affinity rules and tolerations to the deployments of your app and load balancer or Ingress service so that their pods deploy to only those nodes. However, `ibm-cloud-provider-ip` `keepalived` pods that are automatically created in the `ibm-system` namespace ensure that the load balancer pods follow the app pods to the same nodes. These `keepalived` pods don't have the tolerations for the custom taints that you used. They can't be scheduled on the same tainted nodes that your app pods are running on, and no traffic reaches the backend service for your app.
+
+{: tsResolve}
+Resolve the issue by choosing one of the following options:
+
+* **Edge node taints**: To ensure that your load balancer and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](cs_loadbalancer.html#edge_nodes). Load balancer and Ingress ALB pods have these affinity rules and tolerations by default.
+
+* **Custom taints**: Remove custom taints that the `keepalived` pods don't have tolerations for. Instead, you can [label worker nodes as edge nodes, and then taint those edge nodes](cs_edge.html).
+
+If you complete one of the above options but the `keepalived` pods are still not scheduled, you can get more info information about the `keepalived` pods:
+
+1. Get the `keepalived` pods.
+    ```
+    kubectl get pods -n ibm-system
+    ```
+    {: pre}
+
+2. In the output, look for `ibm-cloud-provider-ip` pods that have a **Status** of `Pending`. Example:
+    ```
+    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t     0/1       Pending   0          2m        <none>          <none>
+    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-8ptvg     0/1       Pending   0          2m        <none>          <none>
+    ```
+    {:screen}
+
+3. Describe each `keepalived` pod and look for the **Events** section. Address any error or warning messages that are listed.
+    ```
+    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
+    ```
+    {: pre}
 
 <br />
 
