@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-12"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -40,7 +40,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>0.1.593</td>
 <td>10 Oct 2018</td>
 <td><ul><li>Adds the resource group ID to the output of <code>ibmcloud ks cluster-get</code>.</li>
-<li>When [{{site.data.keyword.keymanagementserviceshort}} is enabled](cs_encrypt.html#keyprotect) as a key management service (KMS) provider in your cluster, adds the KMS enabled field to output of <code>ibmcloud ks cluster-get</code>.</li></ul></td>
+<li>When [{{site.data.keyword.keymanagementserviceshort}} is enabled](cs_encrypt.html#keyprotect) as a key management service (KMS) provider in your cluster, adds the KMS enabled field in the output of <code>ibmcloud ks cluster-get</code>.</li></ul></td>
 </tr><tr>
 <td>0.1.591</td>
 <td>02 Oct 2018</td>
