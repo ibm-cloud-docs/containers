@@ -649,38 +649,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 
-2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod.
-
-    1. In your preferred editor, create the following file and save it as `rbac-config.yaml`. **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies). You can choose a namespace other than `kube-system`, but all IBM Helm charts must be installed in `kube-system`. Whenever you run a `helm` command, you must use the `tiller-namespace <namespace>` flag to point to the other namespace where Tiller is installed.
-
-      ```
-      apiVersion: v1
-      kind: ServiceAccount
-      metadata:
-        name: tiller
-        namespace: kube-system
-      ---
-      apiVersion: rbac.authorization.k8s.io/v1
-      kind: ClusterRoleBinding
-      metadata:
-        name: tiller
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: cluster-admin
-      subjects:
-        - kind: ServiceAccount
-          name: tiller
-          namespace: kube-system
-      ```
-      {: codeblock}
-
-    2. Create the service account and cluster role binding.
-
-        ```
-        kubectl create -f rbac-config.yaml
-        ```
-        {: pre}
+2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies).
+    ```
+    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
+    ```
+    {: pre}
 
 3. Initialize Helm and install `tiller` with the service account that you created.
 
