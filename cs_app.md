@@ -37,7 +37,27 @@ Learn the general steps for deploying apps by clicking an area of the following 
 <br />
 
 
- |
+## Planning to run apps in clusters
+{: #plan_apps}
+
+Ensure that your app is ready for deploying to {{site.data.keyword.containerlong_notm}}.
+{:shortdesc}
+
+### What type of Kubernetes objects can I make for my app?
+{: #object}
+
+When you prepare your app YAML file, you have many options to increase the app's availability, performance, and security. For example, instead of a single pod, you can use a Kubernetes controller object to manage your workload, such as a replica set, job, or daemon set. For more information about pods and controllers, view the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). A deployment that manages a replica set of pods is a common use case for an app.
+
+For example, a `kind: Deployment` object is a good choice to deploy an app pod because with it, you can specify a replica set for more availability for your pods.
+
+The following table describes why you might create different types of Kubernetes workload objects.
+
+| Object | Description | 
+| --- | --- |
+| [`Pod` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | A pod is the smallest deployable unit for your workloads, and can hold a single or multiple containers. Similar to containers, pods are designed to be disposable and are often used for unit testing of app features. To avoid downtime for your app, consider deploying pods with a Kubernetes controller, such as a deployment. A deployment helps you to manage multiple pods, replicas, pod scaling, rollouts, and more. |
+| [`ReplicaSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | A replica set makes sure that multiple replicas of your pod are running, and reschedules a pod if the pod goes down. You might create a replica set to test how pod scheduling works, but to manage app updates, rollouts, and scaling, create a deployment instead. |
+| [`Deployment` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | A deployment is a controller that manages a pod or [replica set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) of pod templates. You can create pods or replica sets without a deployment to test app features. For a production-level setup, use deployments to manage app updates, rollouts, and scaling. |
+| [`StatefulSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Similar to deployments, a stateful set is a controller that manages a replica set of pods. Unlike deployments, a stateful set ensures that your pod has a unique network identity that maintains its state across rescheduling. When you want to run workloads in the cloud, try to [design your app to be stateless](cs_kube_strategy.html#cloud_workloads) so that your service instances are independent from each other and can fail without a service interruption. However, some apps, such as databases, must be stateless. For those cases, consider to create a stateful set and use [file](cs_storage_file.html#file_statefulset), [block](cs_storage_block.html#block_statefulset), or [object](cs_storage_cos.html#cos_statefulset) storage as the persistent storage for your stateful set. |
 | [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use a daemonset when you must run the same pod on every worker node in your cluster. Pods that are managed by a daemonset are automatically scheduled when a worker node is added to a cluster. Typical use cases include log collectors, such as `logstash` or `prometheus`, that collect logs from every worker node to provide insight into the health of a cluster or an app. |
 | [`Job` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | A job ensures that one or more pods run successfully to completion. You might use a job for queues or batch jobs to support parallel processing of separate but related work items, such as a certain number of frames to render, emails to send, and files to convert. To schedule a job to run at certain times, use a [Cron Job ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Types of Kubernetes workload objects that you can create." caption-side="top"}
@@ -120,8 +140,6 @@ Within the app deployment YAML, you can set the security context for a pod or co
 <br />
 
 
-</staging>
-
 ## Planning highly available deployments
 {: #highly_available_apps}
 
@@ -151,12 +169,10 @@ You can also [connect multiple clusters in different regions with a global load 
   <dt>Include enough replicas for your app's workload, plus two</dt>
     <dd>To make your app even more highly available and more resilient to failure, consider including extra replicas than the minimum to handle the expected workload. Extra replicas can handle the workload in case a pod crashes and the replica set has not yet recovered the crashed pod. For protection against two simultaneous failures, include two extra replicas. This setup is an N+2 pattern, where N is the number of replicas to handle the incoming workload and +2 is an extra two replicas. As long as your cluster has enough space, you can have as many pods as you want.</dd>
   <dt>Spread pods across multiple nodes (anti-affinity)</dt>
-    <dd><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required. For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
-    <p><strong>Note</strong>: With required anti-affinity, you can only deploy the amount of replicas that you have worker nodes for. For example, if you have 3 worker nodes in your cluster but you define 5 replicas in your YAML file, then only 3 replicas deploy. Each replica lives on a different worker node. The leftover 2 replicas remain pending. If you add another worker node to your cluster, then one of the leftover replicas deploys to the new worker node automatically.<p>
-    <p><strong>Example deployment YAML files</strong>:<ul>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Nginx app with preferred pod anti-affinity.</a></li>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
-    
+    <dd><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required.
+      <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
+      <p>For an example of affinity in an app deployment, see [Making your app deployment YAML file](#app_yaml).</p>
+      </dd>
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
   <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters_planning.html#multiple_clusters).</p>
@@ -169,59 +185,6 @@ You can also [connect multiple clusters in different regions with a global load 
   <p><strong>What if my apps need persistent storage?</strong></p>
   <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
-
-
-
-### Minimal app deployment
-{: #minimal_app_deployment}
-
-A basic app deployment in a free or standard cluster might include the following components.
-{: shortdesc}
-
-![Deployment setup](images/cs_app_tutorial_components1.png)
-
-To deploy the components for a minimal app as depicted in the diagram, you use a configuration file similar to the following example:
-```
-apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: ibmliberty
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: ibmliberty
-    spec:
-      containers:
-      - name: ibmliberty
-        image: registry.bluemix.net/ibmliberty:latest
-        ports:
-        - containerPort: 9080        
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ibmliberty-service
-  labels:
-    app: ibmliberty
-spec:
-  selector:
-    app: ibmliberty
-  type: NodePort
-  ports:
-   - protocol: TCP
-     port: 9080
-```
-{: codeblock}
-
-**Note:** To expose your service, make sure that the key/value pair that you use in the `spec.selector` section of the service is the same as the key/value pair that you use in the `spec.template.metadata.labels` section of your deployment yaml.
-To learn more about each component, review the [Kubernetes basics](cs_tech.html#kubernetes_basics).
-
-<br />
-
-
-
 
 ## Specifying your app requirements in your YAML file
 {: #app_yaml}
@@ -1103,7 +1066,8 @@ Steps:
 You can manage the rollout of your app changes in an automated and controlled fashion for workloads with a pod template such as deployments. If your rollout isn't going according to plan, you can roll back your deployment to the previous revision.
 {:shortdesc}
 
-
+Want to prevent downtime during your rolling update? Be sure to specify a [readiness probe in your deployment](#probe) so that the rollout proceeds to the next app pod after the most recently updated pod is ready.
+{: tip}
 
 Before you begin, create a [deployment](#app_cli).
 
