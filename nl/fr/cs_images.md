@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -32,14 +32,14 @@ L'image est créée depuis un Dockerfile, lequel est un fichier contenant des in
 Les images sont généralement stockées dans un registre d'images pouvant être accessible au public (registre public)  ou, au contraire, dont l'accès est limité à un petit groupe d'utilisateurs (registre privé).
 {:shortdesc}
 
-Des registres publics, tel que Docker Hub, peuvent être utilisés pour vous familiariser avec Docker et Kubernetes pour créer votre première application conteneurisée dans un cluster. Dans le cas d'applications d'entreprise, utilisez un registre privé, tel que celui fourni dans {{site.data.keyword.registryshort_notm}}, pour empêcher l'utilisation et la modification de vos images par des utilisateurs non habilités. Les registres privés sont mis en place par l'administrateur du cluster pour garantir que les données d'identification pour accès au registre privé sont disponibles aux utilisateurs du cluster.
+Des registres publics, tel que Docker Hub, peuvent être utilisés pour vous familiariser avec Docker et Kubernetes en créant créer votre première application conteneurisée dans un cluster. Dans le cas d'applications d'entreprise, utilisez un registre privé, tel que celui fourni dans {{site.data.keyword.registryshort_notm}}, pour empêcher l'utilisation et la modification de vos images par des utilisateurs non habilités. Les registres privés sont mis en place par l'administrateur du cluster pour garantir que les données d'identification pour accès au registre privé sont disponibles aux utilisateurs du cluster.
 
 
 Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containershort_notm}} pour déployer des applications dans votre cluster.
 
 |Registre|Description|Avantage|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|Cette option vous permet de mettre en place votre propre référentiel d'images Docker sécurisé dans {{site.data.keyword.registryshort_notm}} où vous pourrez stocker en sécurité vos images et les partager avec les autres utilisateurs du cluster.|<ul><li>Gestion de l'accès aux images dans votre compte.</li><li>Utilisation d'images et de modèles d'application fournis par {{site.data.keyword.IBM_notm}}, comme {{site.data.keyword.IBM_notm}} Liberty,  en tant qu'image parent à laquelle vous ajouterez votre propre code d'application.</li><li>Analyse automatique des images pour détection de vulnérabilités potentielles par Vulnerability Advisor et soumission de recommandations spécifiques au système d'exploitation pour les corriger.</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|Cette option vous permet de mettre en place votre propre référentiel d'images Docker sécurisé dans {{site.data.keyword.registryshort_notm}} où vous pourrez stocker en sécurité vos images et les partager avec les autres utilisateurs du cluster.|<ul><li>Gestion de l'accès aux images dans votre compte.</li><li>Utilisation d'images et d'exemples d'application fournis par {{site.data.keyword.IBM_notm}}, comme {{site.data.keyword.IBM_notm}} Liberty,  en tant qu'image parent à laquelle vous ajouterez votre propre code d'application.</li><li>Analyse automatique des images pour détection de vulnérabilités potentielles par Vulnerability Advisor et soumission de recommandations spécifiques au système d'exploitation pour les corriger.</li></ul>|
 |Tout autre registre privé|Connexion de n'importe quel registre privé existant à votre cluster en créant un élément [imagePullSecret ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/containers/images/). Cette valeur est utilisée pour enregistrer de manière sécurisée l'URL de votre registre URL et ses données d'identification dans une valeur confidentielle Kubernetes.|<ul><li>Utilisation de registres privés existants indépendants de leur source (Docker Hub, registres dont l'organisation est propriétaire, autres registres Cloud privés).</li></ul>|
 |[Docker Hub public![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://hub.docker.com/){: #dockerhub}|Utilisez cette option pour utiliser directement des images publiques Docker Hub existantes dans votre [déploiement Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) lorsqu'il n'y a pas besoin d'effectuer des modifications dans Dockerfile. <p>**Remarque :** gardez à l'esprit que cette option peut ne pas satisfaire les exigences de sécurité de votre organisation (par exemple, en matière de gestion des accès, d'analyse des vulnérabilités ou de protection des données confidentielles de l'application).</p>|<ul><li>Aucune configuration supplémentaire du cluster n'est nécessaire.</li><li>Inclut un certain nombre d'applications en code source ouvert.</li></ul>|
 {: caption="Options de registre d'images public et privé" caption-side="top"}
@@ -81,7 +81,7 @@ Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` d
 Avant de commencer :
 1. [Configurez un espace de nom dans {{site.data.keyword.registryshort_notm}} sur {{site.data.keyword.Bluemix_notm}} public ou {{site.data.keyword.Bluemix_dedicated_notm}} et transférez par commande push des images dans cet espace de nom](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
 2. [Créez un cluster](cs_clusters.html#clusters_cli).
-3. [Ciblez votre interface CLI sur votre cluster](cs_cli_install.html#cs_cli_configure).
+3. [Ciblez avec votre interface CLI votre cluster](cs_cli_install.html#cs_cli_configure).
 
 Pour déployer un conteneur dans l'espace de nom **default** de votre cluster, créez un fichier de configuration.
 
@@ -108,7 +108,7 @@ Pour déployer un conteneur dans l'espace de nom **default** de votre cluster, c
     ```
     {: codeblock}
 
-    **Astuce :** pour extraire vos informations d'espace de nom, exécutez la commande `ibmcloud cr namespace-list`.
+    **Astuce :** pour extraire vos informations d'espace de nom, exécutez la commande `bx cr namespace-list`.
 
 3.  Créez le déploiement dans votre cluster.
 
@@ -142,7 +142,7 @@ Avant de commencer :
 
 1.  [Configurez un espace de nom dans {{site.data.keyword.registryshort_notm}} sur {{site.data.keyword.Bluemix_notm}} public ou {{site.data.keyword.Bluemix_dedicated_notm}} et transférez par commande push des images dans cet espace de nom](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
 2.  [Créez un cluster](cs_clusters.html#clusters_cli).
-3.  [Ciblez votre interface CLI sur votre cluster](cs_cli_install.html#cs_cli_configure).
+3.  [Ciblez avec votre interface CLI votre cluster](cs_cli_install.html#cs_cli_configure).
 
 <br/>
 Pour créer votre propre élément imagePullSecret, vous pouvez choisir une des options suivantes :
@@ -212,7 +212,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
 2.  Répertoriez les jetons dans votre compte {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
 4.  Extrayez la valeur de ce jeton. Remplacez <em>&lt;token_ID&gt;</em> par l'ID du jeton que vous avez récupéré à l'étape précédente.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -253,7 +253,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Obligatoire. Nom d'utilisateur pour connexion à votre registre privé. Pour {{site.data.keyword.registryshort_notm}}, le nom d'utilisateur est défini avec <strong><code>token</code></strong>.</td>
+    <td>Obligatoire. Nom d'utilisateur pour connexion à votre registre privé. Pour {{site.data.keyword.registryshort_notm}}, le nom d'utilisateur est défini avec <code>token</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -283,7 +283,7 @@ Si vous disposez déjà d'un registre privé, vous devez stocker les données d'
 Avant de commencer :
 
 1.  [Créez un cluster](cs_clusters.html#clusters_cli).
-2.  [Ciblez votre interface CLI sur votre cluster](cs_cli_install.html#cs_cli_configure).
+2.  [Ciblez avec votre interface CLI votre cluster](cs_cli_install.html#cs_cli_configure).
 
 Pour créer un élément imagePullSecret :
 
@@ -347,7 +347,7 @@ Sélectionnez l'une des options suivantes :
 
 Avant de commencer :
 * [Créez un élément imagePullSecret](#other) pour accéder aux images d'autres registres, d'autres espaces de nom Kubernetes ou d'autres régions ou comptes {{site.data.keyword.Bluemix_notm}}.
-* [Ciblez votre interface CLI sur votre cluster](cs_cli_install.html#cs_cli_configure).
+* [Ciblez avec votre interface CLI votre cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Référencer l'élément `imagePullSecret` dans votre déploiement de pod
 {: #pod_imagePullSecret}
@@ -400,11 +400,11 @@ Lorsque vous référencez l'élément imagePullSecret dans un déploiement de po
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>Espace de nom sous lequel l'image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `ibmcloud cr namespace-list`.</td>
+    <td>Espace de nom sous lequel l'image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande `ibmcloud cr image-list`.</td>
+    <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande `bx cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

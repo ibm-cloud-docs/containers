@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -33,149 +33,30 @@ Si tiene un problema más general, pruebe la [depuración del clúster](cs_troub
 {: #cs_credentials}
 
 {: tsSymptoms}
-Cuando crea un nuevo clúster de Kubernetes, recibe un mensaje de error parecido al siguiente.
+Cuando crea un nuevo clúster de Kubernetes, recibe el siguiente mensaje.
 
 ```
 No se ha podido conectar con la cuenta de IBM infraestructura de Cloud (SoftLayer).
-Para crear un clúster estándar, debe tener una cuenta de Pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de {{site.data.keyword.containerlong_notm}} para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
-```
-{: screen}
-
-```
-Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El elemento 'Item' se debe solicitar con permiso.
-```
-{: screen}
-
-```
-Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El usuario no tiene los permisos necesarios de la infraestructura de {{site.data.keyword.Bluemix_notm}} para añadir servidores
+Para crear un clúster estándar, debe tener una cuenta de Pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de {{site.data.keyword.containerlong}} para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
 {: tsCauses}
 Las cuentas de Pago según uso de {{site.data.keyword.Bluemix_notm}} creadas después de haber enlazado una cuenta automática ya se han configurado con acceso a la infraestructura de IBM Cloud (SoftLayer). Es posible adquirir recursos de la infraestructura para el clúster sin configuración adicional.
 
-Los usuarios con otros tipos de cuenta de {{site.data.keyword.Bluemix_notm}} o los usuarios con cuentas existentes de infraestructura de IBM Cloud (SoftLayer) no enlazadas a su cuenta de {{site.data.keyword.Bluemix_notm}} primero deben configurar sus cuentas para crear clústeres estándares. 
-
-Si tiene una cuenta de Pago según uso válida y recibe este mensaje de error, es posible que no esté utilizando las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer) correctas para acceder a los recursos de la infraestructura.
+Los usuarios con otros tipos de cuenta de {{site.data.keyword.Bluemix_notm}} o los usuarios con cuentas existentes de infraestructura de IBM Cloud (SoftLayer) no enlazadas a su cuenta de {{site.data.keyword.Bluemix_notm}} primero deben configurar sus cuentas para crear clústeres estándares.
 
 {: tsResolve}
-El propietario de la cuenta debe configurar correctamente las credenciales de la cuenta de la infraestructura. Las credenciales dependen del tipo de cuenta de infraestructura que esté utilizando.
-*  Si tiene una cuenta de {{site.data.keyword.Bluemix_notm}} de Pago según uso reciente, la cuenta se suministra con una cuenta de infraestructura vinculada que puede utilizar. [Compruebe que la clave de API de la infraestructura esté configurada con los permisos correctos](#apikey).
-*  Si tiene otro tipo de cuenta de {{site.data.keyword.Bluemix_notm}}, compruebe que puede acceder al portafolio de la infraestructura y que [las credenciales de la cuenta de la infraestructura están correctamente configuradas con los permisos correctos](#credentials).
+La configuración de la cuenta para acceder al portafolio de la infraestructura de IBM Cloud (SoftLayer) depende del tipo de cuenta que tenga. Revise la tabla para encontrar las opciones disponibles para cada tipo de cuenta.
 
-Para comprobar si el clúster utiliza la cuenta de infraestructura vinculada u otra cuenta de la infraestructura:
-1.  Verifique que tiene acceso a una cuenta de infraestructura. Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/) y, desde el menú emergente, pulse **Infraestructura**. Si ve el panel de control de la infraestructura, significa que tiene acceso a una cuenta de infraestructura.
-2.  Compruebe si el clúster utiliza otra cuenta de la infraestructura. En el menú emergente, pulse **Contenedores > Clústeres**.
-3.  En la tabla, seleccione el clúster. 
-4.  En el separador **Visión general**, si ve un campo **Usuario de infraestructura**, significa que el clúster utiliza una cuenta de infraestructura distinta de la que se ha suministrado con la cuenta de Pago según uso.
+|Tipo de cuenta|Descripción|Opciones disponibles para crear un clúster estándar|
+|------------|-----------|----------------------------------------------|
+|Cuentas Lite|Las cuentas Lite no pueden suministrar clústeres.|[Actualice su cuenta Lite a una cuenta de {{site.data.keyword.Bluemix_notm}} de Pago según uso](/docs/account/index.html#paygo) que está configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer).|
+|Cuenta antiguas de Pago según uso|Las cuentas de Pago según uso que se crearon antes de que estuviese disponible el enlace de cuentas automático, no tenían acceso al portafolio de infraestructura de IBM Cloud (SoftLayer).<p>Si tiene una cuenta existente de infraestructura de IBM Cloud (SoftLayer), no puede enlazarla a una cuenta antigua de Pago según uso.</p>|<strong>Opción 1: </strong> [Crear una nueva cuenta de Pago según uso](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, tendrá dos cuentas y dos facturaciones distintas para {{site.data.keyword.Bluemix_notm}}.<p>Para continuar utilizando su cuenta antigua de Pago según uso, debe utilizar su nueva cuenta de Pago según uso para generar una clave de API para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). A continuación, debe [configurar la clave de API para su cuenta de Pago según uso de la infraestructura de IBM Cloud (SoftLayer)](cs_cli_reference.html#cs_credentials_set). </p><p><strong>Opción 2:</strong> Si ya tiene una cuenta de infraestructura de IBM Cloud (SoftLayer) existente que desea utilizar, puede [configurar sus credenciales](cs_cli_reference.html#cs_credentials_set) en su cuenta de {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** Cuando enlaza de forma manual a una cuenta de infraestructura de IBM Cloud (SoftLayer), las credenciales se utilizan para cada acción específica de la infraestructura de IBM Cloud (SoftLayer) en su cuenta de {{site.data.keyword.Bluemix_notm}}. Debe asegurarse de que la clave de API que ha establecido tiene [suficientes permisos de infraestructura](cs_users.html#infra_access) para que los usuarios pueden crear y trabajar con clústeres.</p>|
+|Cuentas de Suscripción|Las cuentas de Suscripción no se configuran con acceso al portafolio de infraestructura de IBM Cloud (SoftLayer).|<strong>Opción 1: </strong> [Crear una nueva cuenta de Pago según uso](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, tendrá dos cuentas y dos facturaciones distintas para {{site.data.keyword.Bluemix_notm}}.<p>Si desea continuar utilizando su cuenta de Suscripción, debe utilizar su nueva cuenta de Pago según uso para generar una clave de API en la infraestructura de IBM Cloud (SoftLayer). A continuación, de forma manual, debe [configurar la clave de la API de la infraestructura de IBM Cloud (SoftLayer) para su cuenta de Suscripción. ](cs_cli_reference.html#cs_credentials_set). Tenga en cuenta que los recursos de infraestructura de IBM Cloud (SoftLayer) se facturarán a través de su nueva cuenta de Pago según uso.</p><p><strong>Opción 2:</strong> Si ya tiene una cuenta de infraestructura de IBM Cloud (SoftLayer) existente que desea utilizar, puede [configurar sus credenciales](cs_cli_reference.html#cs_credentials_set) de forma manual para su cuenta de {{site.data.keyword.Bluemix_notm}}.<p>**Nota:** Cuando enlaza de forma manual a una cuenta de infraestructura de IBM Cloud (SoftLayer), las credenciales se utilizan para cada acción específica de la infraestructura de IBM Cloud (SoftLayer) en su cuenta de {{site.data.keyword.Bluemix_notm}}. Debe asegurarse de que la clave de API que ha establecido tiene [suficientes permisos de infraestructura](cs_users.html#infra_access) para que los usuarios pueden crear y trabajar con clústeres.</p>|
+|Cuentas de infraestructura de IBM Cloud (SoftLayer), no cuenta de {{site.data.keyword.Bluemix_notm}}|Para crear un clúster estándar, debe tener una cuenta de {{site.data.keyword.Bluemix_notm}}.|<p>[Crear una cuenta de Pago según uso](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, se le crea en su nombre una cuenta de infraestructura de IBM Cloud (SoftLayer). Tiene dos cuentas y facturaciones separadas de infraestructura de IBM Cloud (SoftLayer).</p>|
+{: caption="Opciones de creación de clúster estándar por tipo de cuenta" caption-side="top"}
 
-### Configuración de las credenciales de API de la infraestructura para cuentas enlazadas
-{: #apikey}
-
-1.  Verifique que el usuario cuyas credenciales desea utilizar para acciones de la infraestructura tenga los permisos correctos.
-
-    1.  Inicie una sesión en [{{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/).
-        
-    2.  En el menú que aparece, seleccione **Infraestructura**.
-        
-    3.  En la barra de menús, seleccione **Cuenta** > **Usuarios** > **Lista de usuarios**.
-
-    4.  En la columna **Clave de API**, verifique que el usuario tiene una clave de API o pulse **Generar**.
-
-    5.  Verifique o asigne al usuario los [permisos de infraestructura correctos](cs_users.html#infra_access).
-
-2.  Restablezca la clave de API para la región en la que está el clúster de forma que pertenezca al usuario.
-    
-    1.  Inicie la sesión en el terminal como el usuario correcto.
-    
-    2.  Restablezca la clave de API en este usuario.
-        ```
-        ibmcloud ks api-key-reset
-        ```
-        {: pre}    
-    
-    3.  Compruebe que la clave de API está establecida.
-        ```
-        ibmcloud ks api-key-info <cluster_name_or_ID>
-        ```
-        {: pre}
-        
-    4.  **Opcional**: si ha establecido previamente las credenciales de forma manual con el mandato `ibmcloud ks credentials-set`, elimine la cuenta de infraestructura asociada. Ahora, la clave de API que ha establecido en los subpasos anteriores se utiliza para solicitar la infraestructura.
-        ```
-        ibmcloud ks credentials-unset
-        ```
-        {: pre}
-
-3.  **Opcional**: si conecta el clúster público a recursos locales, compruebe la conectividad de red.
-
-    1.  Compruebe la conectividad de VLAN del nodo trabajador. 
-    2.  Si es necesario, [configure la conectividad VPN](cs_vpn.html#vpn).
-    3.  [Abra los puertos necesarios en el cortafuegos](cs_firewall.html#firewall).
-
-### Configuración de las credenciales de cuenta de la infraestructura para distintas cuentas
-{: #credentials}
-
-1.  Obtenga la cuenta de la infraestructura que desea utilizar para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Dispone de distintas opciones que dependen del tipo de cuenta actual.
-
-    <table summary="En la tabla se muestran las opciones de creación de clúster estándar por tipo de cuenta. Las filas se leen de izquierda a derecha; la descripción de la cuenta está en la columna uno y las opciones para crear un clúster estándar en la columna dos.">
-    <caption>Opciones de creación de clúster estándar por tipo de cuenta</caption>
-      <thead>
-      <th>Descripción de la cuenta</th>
-      <th>Opciones para crear un clúster estándar</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Las **cuentas Lite** no pueden suministrar clústeres.</td>
-          <td>[Actualice su cuenta Lite a una cuenta de {{site.data.keyword.Bluemix_notm}} de Pago según uso](/docs/account/index.html#paygo) que está configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer).</td>
-        </tr>
-        <tr>
-          <td>Las cuentas de **Pago según uso reciente** se suministran con acceso al portafolio de la infraestructura.</td>
-          <td>Puede crear clústeres estándares. Para resolver los problemas de permisos de la infraestructura, consulte [Configuración de las credenciales de API de infraestructura para cuentas enlazadas](#apikey).</td>
-        </tr>
-        <tr>
-          <td>Las cuentas de **Pago según uso antiguas** que se crearon antes de que estuviese disponible el enlace de cuentas automático, no tenían acceso al portafolio de la infraestructura de IBM Cloud (SoftLayer).<p>Si tiene una cuenta existente de infraestructura de IBM Cloud (SoftLayer), no puede enlazarla a una cuenta antigua de Pago según uso.</p></td>
-          <td><p><strong>Opción 1: </strong> [Crear una nueva cuenta de Pago según uso](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, tendrá dos cuentas y dos facturaciones distintas para {{site.data.keyword.Bluemix_notm}}.</p><p>Para continuar utilizando su cuenta antigua de Pago según uso, debe utilizar su nueva cuenta de Pago según uso para generar una clave de API para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer).</p><p><strong>Opción 2:</strong> si ya tiene una cuenta de la infraestructura de IBM Cloud (SoftLayer) existente que desea utilizar, puede configurar sus credenciales en su cuenta de {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** Cuando enlaza de forma manual a una cuenta de infraestructura de IBM Cloud (SoftLayer), las credenciales se utilizan para cada acción específica de la infraestructura de IBM Cloud (SoftLayer) en su cuenta de {{site.data.keyword.Bluemix_notm}}. Debe asegurarse de que la clave de API que ha establecido tiene [suficientes permisos de infraestructura](cs_users.html#infra_access) para que los usuarios pueden crear y trabajar con clústeres.</p><p>**Para ambas opciones, continúe en el paso siguiente**.</p></td>
-        </tr>
-        <tr>
-          <td>Las **cuentas de Suscripción** no se configuran con acceso al portafolio de infraestructura de IBM Cloud (SoftLayer).</td>
-          <td><p><strong>Opción 1: </strong> [Crear una nueva cuenta de Pago según uso](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, tendrá dos cuentas y dos facturaciones distintas para {{site.data.keyword.Bluemix_notm}}.</p><p>Si desea continuar utilizando su cuenta de Suscripción, debe utilizar su nueva cuenta de Pago según uso para generar una clave de API en la infraestructura de IBM Cloud (SoftLayer). Debe configurar la clave de la API de la infraestructura de IBM Cloud (SoftLayer) de forma manual para su cuenta de Suscripción. Tenga en cuenta que los recursos de infraestructura de IBM Cloud (SoftLayer) se facturarán a través de su nueva cuenta de Pago según uso.</p><p><strong>Opción 2:</strong> si ya tiene una cuenta de la infraestructura de IBM Cloud (SoftLayer) existente que desea utilizar, puede configurar sus credenciales de forma manual para su cuenta de {{site.data.keyword.Bluemix_notm}}.</p><p>**Nota:** Cuando enlaza de forma manual a una cuenta de infraestructura de IBM Cloud (SoftLayer), las credenciales se utilizan para cada acción específica de la infraestructura de IBM Cloud (SoftLayer) en su cuenta de {{site.data.keyword.Bluemix_notm}}. Debe asegurarse de que la clave de API que ha establecido tiene [suficientes permisos de infraestructura](cs_users.html#infra_access) para que los usuarios pueden crear y trabajar con clústeres.</p><p>**Para ambas opciones, continúe en el paso siguiente**.</p></td>
-        </tr>
-        <tr>
-          <td>**Cuentas de infraestructura de IBM Cloud (SoftLayer)**, no cuenta de {{site.data.keyword.Bluemix_notm}}</td>
-          <td><p>[Crear una nueva cuenta de Pago según uso de {{site.data.keyword.Bluemix_notm}}](/docs/account/index.html#paygo) que esté configurada para acceder al portafolio de la infraestructura de IBM Cloud (SoftLayer). Cuando elige esta opción, se le crea en su nombre una cuenta de infraestructura de IBM Cloud (SoftLayer). Tiene dos cuentas y facturaciones separadas de infraestructura de IBM Cloud (SoftLayer).</p><p>De forma predeterminada, la nueva cuenta de {{site.keyword.data.Bluemix_notm}} utiliza la nueva cuenta de infraestructura. Para seguir utilizando la cuenta de infraestructura antigua, continúe en el paso siguiente.</p></td>
-        </tr>
-      </tbody>
-      </table>
-
-2.  Verifique que el usuario cuyas credenciales desea utilizar para acciones de la infraestructura tenga los permisos correctos.
-
-    1.  Inicie una sesión en [{{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/).
-        
-    2.  En el menú que aparece, seleccione **Infraestructura**.
-        
-    3.  En la barra de menús, seleccione **Cuenta** > **Usuarios** > **Lista de usuarios**.
-
-    4.  En la columna **Clave de API**, verifique que el usuario tiene una clave de API o pulse **Generar**.
-
-    5.  Verifique o asigne al usuario los [permisos de infraestructura correctos](cs_users.html#infra_access).
-
-3.  Establezca las credenciales de API de la infraestructura con el usuario correspondiente a la cuenta correcta.
-
-    1.  Obtenga las credenciales de API de la infraestructura del usuario. **Nota**: las credenciales difieren del IBMid.
-            
-        1.  En la tabla de la consola [{{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/) **Infraestructura** > **Cuenta** > **Usuarios** > **Lista de usuarios**, pulse **IBMid o nombre de usuario**.
-            
-        2.  En la sección **Información de acceso de API**, visualice el **Nombre de usuario de API** y la **Clave de autenticación**.    
-        
-    2.  Defina las credenciales de API de la infraestructura que desea utilizar.
-        ```
-        ibmcloud ks credentials-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
-  
-4.  **Opcional**: si conecta el clúster público a recursos locales, compruebe la conectividad de red.
-
-    1.  Compruebe la conectividad de VLAN del nodo trabajador. 
-    2.  Si es necesario, [configure la conectividad VPN](cs_vpn.html#vpn).
-    3.  [Abra los puertos necesarios en el cortafuegos](cs_firewall.html#firewall).
 
 <br />
 
@@ -184,7 +65,7 @@ Para comprobar si el clúster utiliza la cuenta de infraestructura vinculada u o
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
-Cuando ejecuta los mandatos `ibmcloud`, `kubectl` o `calicoctl` desde la CLI, fallan.
+Cuando ejecuta los mandatos `bx`, `kubectl` o `calicoctl` desde la CLI, fallan.
 
 {: tsCauses}
 Puede que tenga políticas de red corporativas que impidan el acceso desde el sistema local a los puntos finales públicos mediante proxies o cortafuegos.
@@ -247,32 +128,10 @@ Es posible que tenga otro cortafuegos configurado o que se hayan personalizado l
 No puede acceder an un nodo trabajador mediante una conexión SSH.
 
 {: tsCauses}
-SSH mediante contraseña no está disponible en los nodos trabajadores.
+SSH mediante contraseña está inhabilitado en los nodos trabajadores.
 
 {: tsResolve}
-Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para las acciones que debe ejecutar en cada nodo o bien utilice trabajos para acciones puntuales que deba ejecutar.
-
-<br />
-
-
-## El ID de instancia nativa no es coherente con los registros del nodo trabajador
-{: #bm_machine_id}
-
-{: tsSymptoms}
-Si utiliza mandatos `ibmcloud ks worker` con el nodo trabajador nativo, aparece un mensaje parecido al siguiente.
-
-```
-ID de instancia incoherente con los registros del nodo trabajador
-```
-{: screen}
-
-{: tsCauses}
-El ID de máquina puede ser incoherente con el registro del nodo trabajador de {{site.data.keyword.containershort_notm}} si la máquina experimenta problemas de hardware. Cuando IBM Cloud infraestructura (SoftLayer) soluciona este problema, es posible que un componente cambie dentro del sistema que el servicio no identifica.
-
-{: tsResolve}
-Para que {{site.data.keyword.containershort_notm}} pueda volver a identificar la máquina, [vuelva a cargar el nodo trabajador nativo](cs_cli_reference.html#cs_worker_reload). **Nota**: al volver a cargar, también se actualiza la [versión de parche](cs_versions_changelog.html) de la máquina.
-
-También puede [suprimir el nodo trabajador nativo](cs_cli_reference.html#cs_cluster_rm). **Nota**: las instancias nativas se facturan mensualmente.
+Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para lo que tenga que ejecutar en cada nodo o para los trabajos correspondientes a acciones únicas que deba ejecutar.
 
 <br />
 
@@ -292,7 +151,7 @@ Si ejecuta `kubectl exec` o `kubectl logs`, ve el siguiente mensaje.
 La conexión OpenVPN entre el nodo maestro y los nodos trabajadores no está funcionando correctamente.
 
 {: tsResolve}
-1. Habilite la [distribución de VLAN ](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para su cuenta de infraestructura de IBM Cloud (SoftLayer).
+1. Habilite la [distribución de VLAN ](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) para su cuenta de infraestructura de IBM Cloud (SoftLayer).
 2. Reinicie el pod de cliente de OpenVPN.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -307,11 +166,11 @@ La conexión OpenVPN entre el nodo maestro y los nodos trabajadores no está fun
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-Cuando ejecuta `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, ve el siguiente mensaje.
+Cuando ejecuta `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, ve el siguiente mensaje.
 
 ```
 Se han encontrado varios servicios con el mismo nombre.
-Ejecute 'ibmcloud service list' para ver las instancias disponibles del servicio Bluemix...
+Ejecute 'bx service list' para ver las instancias de servicio de Bluemix disponibles...
 ```
 {: screen}
 
@@ -319,13 +178,13 @@ Ejecute 'ibmcloud service list' para ver las instancias disponibles del servicio
 Varias instancias de servicio pueden tener el mismo nombre en distintas regiones.
 
 {: tsResolve}
-Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el mandato `ibmcloud ks cluster-service-bind`.
+Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el mandato `bx cs cluster-service-bind`.
 
 1. [Inicie sesión en la región que incluye la instancia de servicio que se debe enlazar.](cs_regions.html#bluemix_regions)
 
 2. Obtenga el GUID de la instancia de servicio.
   ```
-  ibmcloud service show <service_instance_name> --guid
+  bx service show <service_instance_name> --guid
   ```
   {: pre}
 
@@ -337,7 +196,7 @@ Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el m
   {: screen}
 3. Vuelva a enlazar el servicio al clúster.
   ```
-  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
   ```
   {: pre}
 
@@ -348,63 +207,63 @@ Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el m
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-Cuando ejecuta `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, ve el siguiente mensaje.
+Cuando ejecuta `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, ve el siguiente mensaje.
 
 ```
 Binding service to a namespace...
 FAILED
 
-The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ibmcloud service list'. (E0023)
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
 ```
 {: screen}
 
 {: tsCauses}
-Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio.
+Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio. 
 
 {: tsResolve}
 
 **Como usuario: **
 
-1. Inicie una sesión en {{site.data.keyword.Bluemix_notm}}.
+1. Inicie una sesión en {{site.data.keyword.Bluemix_notm}}. 
    ```
-   ibmcloud login
-   ```
-   {: pre}
-
-2. Defina como destino la organización y el espacio donde se haya suministrado la instancia de servicio.
-   ```
-   ibmcloud target -o <org> -s <space>
+   bx login
    ```
    {: pre}
-
-3. Liste las instancias de servicio para verificar que está en el espacio adecuado.
+   
+2. Defina como destino la organización y el espacio donde se haya suministrado la instancia de servicio. 
    ```
-   ibmcloud service list
+   bx target -o <org> -s <space>
    ```
    {: pre}
-
-4. Intente enlazar de nuevo el servicio. Si recibe el mismo error, póngase en contacto con el administrador de la cuenta y verifique que tiene los permisos suficientes para enlazar a los servicios (consulte los siguientes pasos de administración de la cuenta).
+   
+3. Liste las instancias de servicio para verificar que está en el espacio adecuado. 
+   ```
+   bx service list 
+   ```
+   {: pre}
+   
+4. Intente enlazar de nuevo el servicio. Si recibe el mismo error, póngase en contacto con el administrador de la cuenta y verifique que tiene los permisos suficientes para enlazar a los servicios (consulte los siguientes pasos de administración de la cuenta). 
 
 **Como administrador de la cuenta: **
 
-1. Verifique que el usuario que experimenta este problema tiene [permisos de editor para {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access).
+1. Verifique que el usuario que experimenta este problema tiene [permisos de editor para {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access). 
 
-2. Verifique que el usuario con este problema tiene el [rol de desarrollador de Cloud Foundry para el espacio](/docs/iam/mngcf.html#updating-cloud-foundry-access) en el que se ha suministrado el servicio.
+2. Verifique que el usuario con este problema tiene el [rol de desarrollador de Cloud Foundry para el espacio](/docs/iam/mngcf.html#updating-cloud-foundry-access) en el que se ha suministrado el servicio. 
 
-3. Si los permisos son los correctos, intente asignar un permiso diferente y, a continuación, vuelva a asignar los permisos necesarios.
+3. Si los permisos son los correctos, intente asignar un permiso diferente y, a continuación, vuelva a asignar los permisos necesarios. 
 
-4. Espere unos minutos y, a continuación, deje que el usuario intente enlazar el servicio de nuevo.
+4. Espere unos minutos y, a continuación, deje que el usuario intente enlazar el servicio de nuevo. 
 
-5. Si esto no resuelve el problema, entonces los permisos de IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el equipo de soporte de IBM](/docs/get-support/howtogetsupport.html#getting-customer-support) abriendo una incidencia de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio.
-   1. Recupere el ID de clúster.
+5. Si esto no resuelve el problema, entonces los permisos de IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el soporte de IBM](/docs/get-support/howtogetsupport.html#getting-customer-support) abriendo una incidencia de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio. 
+   1. Recupere el ID de clúster. 
       ```
-      ibmcloud ks clusters
+      bx cs clusters
       ```
       {: pre}
-
-   2. Recupere el ID de la instancia de servicio.
+      
+   2. Recupere el ID de la instancia de servicio. 
       ```
-      ibmcloud service show <service_name> --guid
+      bx service show <service_name> --guid
       ```
       {: pre}
 
@@ -433,6 +292,66 @@ El servicio no se interrumpe debido a estos duplicados, pero puede eliminar las 
 <br />
 
 
+## Después de que un nodo trabajador se actualice o recargue, las aplicaciones reciben errores de RBAC DENY.
+{: #cs_rbac_deny}
+
+{: tsSymptoms}
+Después de actualizar a Kubernetes versión 1.7, las aplicaciones reciben errores `RBAC DENY`.
+
+{: tsCauses}
+A partir de [Kubernetes versión 1.7](cs_versions.html#cs_v17), las aplicaciones que se ejecutan en el espacio de nombres `default` ya no poseen privilegios de administrador de clúster para la API de Kubernetes para una mayor seguridad.
+
+Si su app se ejecuta en el espacio de nombres `default`, utiliza el `default ServiceAccount`, y el acceso a la API de Kubernetes, se ve afectado por este cambio en Kubernetes. Para obtener más información, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/admin/authorization/rbac/#upgrading-from-15).
+
+{: tsResolve}
+Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+
+1.  **Acción temporal**: A medida que actualice las políticas de RBAC de las apps, es posible que desee volver temporalmente al valor `ClusterRoleBinding` anterior para el `default ServiceAccount` en el espacio de nombres `default`.
+
+    1.  Copie el siguiente archivo `.yaml`.
+
+        ```yaml
+        kind: ClusterRoleBinding
+        apiVersion: rbac.authorization.k8s.io/v1beta1
+        metadata:
+         name: admin-binding-nonResourceURLSs-default
+        subjects:
+          - kind: ServiceAccount
+            name: default
+            namespace: default
+        roleRef:
+         kind: ClusterRole
+         name: admin-role-nonResourceURLSs
+         apiGroup: rbac.authorization.k8s.io
+        ---
+        kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+          - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+        ```
+
+    2.  Aplique los archivos `.yaml` a su clúster.
+
+        ```
+        kubectl apply -f FILENAME
+        ```
+        {: pre}
+
+2.  [Cree recursos de autorización RBAC ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) para actualizar el acceso de administrador `ClusterRoleBinding`.
+
+3.  Si ha creado un enlace de rol de clúster temporal, elimínelo.
+
+<br />
+
+
 ## El acceso a un pod en un nodo trabajador nuevo falla con un tiempo de espera excedido
 {: #cs_nodes_duplicate_ip}
 
@@ -448,14 +367,14 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 1.  Confirme que tiene dos nodos trabajadores con la misma dirección **IP privada**. Anote la **IP privada** y el **ID** del nodo trabajador suprimido.
 
   ```
-  ibmcloud ks workers <CLUSTER_NAME>
+  bx cs workers <CLUSTER_NAME>
   ```
   {: pre}
 
   ```
-  ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.5
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.5
+  ID                                                 Public IP       Private IP       Machine Type   State     Status   Location   Version
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.9.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.9.7
   ```
   {: screen}
 
@@ -484,7 +403,7 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 5.  Rearranque el nodo trabajador que no se ha suprimido.
 
   ```
-  ibmcloud ks worker-reboot CLUSTER_ID NODE_ID
+  bx cs worker-reboot CLUSTER_ID NODE_ID
   ```
   {: pre}
 
@@ -492,43 +411,6 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 El nodo suprimido ya no aparece en Calico.
 
 <br />
-
-
-
-
-## Las pods no se pueden desplegar debido a una política de seguridad de pod
-{: #cs_psp}
-
-{: tsSymptoms}
-Después de crear un pod o de ejecutar `kubectl get events` para comprobar un despliegue de pod, ve un mensaje de error similar al siguiente.
-
-```
-no se puede validar con ninguna política de seguridad de pod
-```
-{: screen}
-
-{: tsCauses}
-[El controlador de admisiones `PodSecurityPolicy`](cs_psp.html) comprueba la autorización del usuario o de la cuenta de servicio, como un despliegue o tiller de Helm, que ha intentado crear el pod. Si no hay ninguna política de seguridad de pod que dé soporte a la cuenta de usuario o al servicio, el controlador de admisiones `PodSecurityPolicy` impide que se creen los pods.
-
-Si ha suprimido uno de los recursos de la política de seguridad de pod para [la gestión de clústeres de {{site.data.keyword.IBM_notm}}](cs_psp.html#ibm_psp), es posible que experimente problemas similares.
-
-{: tsResolve}
-Asegúrese de que el usuario o la cuenta de servicio tenga autorización de la política de seguridad de pod. Es posible que tenga que [modificar una política existente](cs_psp.html#customize_psp).
-
-Si ha suprimido un recurso de gestión de clústeres de {{site.data.keyword.IBM_notm}}, renueve el nodo maestro de Kubernetes para restaurarlo.
-
-1.  Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
-2.  Renueve el nodo maestro de Kubernetes para restaurarlo.
-
-    ```
-    ibmcloud ks apiserver-refresh
-    ```
-    {: pre}
-
-
-<br />
-
-
 
 
 ## El clúster permanece en un estado pendiente
@@ -543,8 +425,8 @@ Si acaba de crear el clúster, es posible que los nodos trabajadores aún se est
 {: tsResolve}
 
 Puede probar una de las siguientes soluciones:
-  - Compruebe el estado del clúster ejecutando `ibmcloud ks clusters`. Luego, compruebe que los nodos trabajadores están desplegados ejecutando `ibmcloud ks workers <cluster_name>`.
-  - Compruebe si la VLAN es válida. Para ser válida, una VLAN debe estar asociada con infraestructura que pueda alojar un trabajador con almacenamiento en disco local. Puede [ver una lista de las VLAN](/docs/containers/cs_cli_reference.html#cs_vlans) ejecutando `ibmcloud ks vlans <zone>`; si la VLAN no aparece en la lista, significa que no es válida. Elija una VLAN diferente.
+  - Compruebe el estado del clúster ejecutando `bx cs clusters`. Luego, compruebe que los nodos trabajadores están desplegados ejecutando `bx cs workers <cluster_name>`.
+  - Compruebe si la VLAN es válida. Para ser válida, una VLAN debe estar asociada con infraestructura que pueda alojar un trabajador con almacenamiento en disco local. Puede [ver una lista de las VLAN](/docs/containers/cs_cli_reference.html#cs_vlans) ejecutando `bx cs vlans <location>`; si la VLAN no se muestra en la lista, entonces no es válida. Elija una VLAN diferente.
 
 <br />
 
@@ -586,21 +468,12 @@ Si este clúster ya existe, compruebe la capacidad del clúster.
 
 3.  Compruebe si tiene suficiente capacidad en el clúster para desplegar el pod.
 
-4.  Si no tiene suficiente capacidad en el clúster, cambie el tamaño de la agrupación de nodos trabajadores para añadir más nodos.
+4.  Si no tiene suficiente capacidad en el clúster, añada otro nodo trabajador al clúster.
 
-    1.  Revise los tamaños y los tipos de máquina actuales de las agrupaciones de nodos trabajadores para decidir cuál va a redimensionar.
-
-        ```
-        ibmcloud ks worker-pools
-        ```
-        {: pre}
-
-    2.  Cambie el tamaño de las agrupaciones de nodos trabajadores para añadir más nodos a cada zona que abarque la agrupación.
-
-        ```
-        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
-        ```
-        {: pre}
+    ```
+    bx cs worker-add <cluster_name_or_ID> 1
+    ```
+    {: pre}
 
 5.  Si los pods continúan en estado **pending** después de que se despliegue por completo el nodo trabajador, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) para solucionar el estado pendiente del pod.
 
@@ -707,5 +580,5 @@ Para resolver el problema del diagrama de Helm:
 -   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.
 

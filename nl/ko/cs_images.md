@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -59,11 +59,11 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 서명되어 {{site.data.keyword.registryshort_notm}}에 저장된 신뢰할 수 있는 이미지로부터 컨테이너를 빌드하고, 서명되지 않거나 취약한 이미지를 사용한 배치를 방지할 수 있습니다.
 {:shortdesc}
 
-1.  [이미지를 신뢰할 수 있는 컨텐츠로 서명](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent)하십시오. 이미지에 대한 신뢰를 설정한 후에는 신뢰할 수 있는 컨텐츠와 레지스트리에 이미지를 푸시할 수 있는 서명자를 관리할 수 있습니다.
+1.  [이미지를 신뢰할 수 있는 컨텐츠로 서명하십시오](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). 이미지에 대한 신뢰를 설정한 후에는 신뢰할 수 있는 컨텐츠와 레지스트리에 이미지를 푸시할 수 있는 서명자를 관리할 수 있습니다.
 2.  클러스터 내에서 이미지를 빌드하는 데 서명된 이미지만 사용할 수 있도록 하는 정책을 적용하려면 [컨테이너 이미지 보안 적용(베타)을 추가](/docs/services/Registry/registry_security_enforce.html#security_enforce)하십시오.
 3.  앱을 배치하십시오.
-    1. [`default` Kubernetes 네임스페이스에 배치](#namespace)하십시오.
-    2. [다른 Kubernetes 네임스페이스에 배치하거나, 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정으로부터 배치](#other)하십시오.
+    1. [`default` Kubernetes 네임스페이스에 배치하십시오](#namespace).
+    2. [다른 Kubernetes 네임스페이스에 배치하거나, 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정으로부터 배치하십시오](#other).
 
 <br />
 
@@ -110,7 +110,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
     ```
     {: codeblock}
 
-    **팁:** 네임스페이스 정보를 검색하려면 `ibmcloud cr namespace-list`를 실행하십시오. 
+    **팁:** 네임스페이스 정보를 검색하려면 `bx cr namespace-list`를 실행하십시오.
 
 3.  클러스터에 배치를 작성하십시오.
 
@@ -148,9 +148,9 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 
 <br/>
 다음 선택사항 중 하나를 선택하여 고유 imagePullSecret을 작성할 수 있습니다.
-- [기본 네임스페이스에서 클러스터 내의 다른 네임스페이스로 imagePullSecret을 복사](#copy_imagePullSecret)합니다.
-- [다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정의 이미지에 액세스하는 imagePullSecret을 작성](#other_regions_accounts)합니다.
-- [외부 개인용 레지스트리에 액세스하는 imagePullSecret을 작성](#private_images)합니다.
+- [기본 네임스페이스에서 클러스터 내의 다른 네임스페이스로 imagePullSecret을 복사합니다](#copy_imagePullSecret).
+- [다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정의 이미지에 액세스하는 imagePullSecret을 작성합니다](#other_regions_accounts).
+- [외부 개인용 레지스트리에 액세스하는 imagePullSecret을 작성합니다](#private_images).
 
 <br/>
 배치에 사용할 imagePullSecret을 네임스페이스에 이미 작성한 경우에는 [작성된 imagePullSecret을 사용하여 컨테이너 배치](#use_imagePullSecret)를 참조하십시오.
@@ -163,7 +163,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 
 1. 클러스터에서 사용 가능한 네임스페이스를 나열하십시오.
    ```
-   kubectl get namespaces
+         kubectl get namespaces
    ```
    {: pre}
 
@@ -180,7 +180,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 
 2. 선택사항: 클러스터에 네임스페이스를 작성하십시오.
    ```
-   kubectl create namespace <namespace_name>
+        kubectl create namespace <namespace_name>
    ```
    {: pre}
 
@@ -214,7 +214,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 2.  {{site.data.keyword.Bluemix_notm}} 계정의 토큰을 나열하십시오.
 
     ```
-    ibmcloud cr token-list
+     bx cr token-list
     ```
     {: pre}
 
@@ -222,7 +222,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
 4.  토큰의 값을 검색하십시오. <em>&lt;token_ID&gt;</em>를 이전 단계에서 검색한 토큰의 ID로 대체하십시오.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -251,11 +251,11 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL입니다.<ul><li>미국 남부 및 미국 동부에 설정된 네임스페이스: registry.ng.bluemix.net</li><li>미국 남부에 설정된 네임스페이스: registry.eu-gb.bluemix.net</li><li>중앙 유럽(프랑크푸르트)에 설정된 네임스페이스: registry.eu-de.bluemix.net</li><li>호주(시드니)에 설정된 네임스페이스: registry.au-syd.bluemix.net</li><li>{{site.data.keyword.Bluemix_dedicated_notm}}에 설정된 네임스페이스의 경우: registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL입니다.<ul><li>미국 남부 및 미국 동부에 설정된 네임스페이스: registry.ng.bluemix.net</li><li>미국 남부에 설정된 네임스페이스: registry.eu-gb.bluemix.net</li><li>중앙 유럽(프랑크푸르트)에 설정된 네임스페이스: registry.eu-de.bluemix.net</li><li>호주(시드니)에 설정된 네임스페이스: registry.au-syd.bluemix.net</li><li>{{site.data.keyword.Bluemix_dedicated_notm}} 레지스트리에 설정된 네임스페이스의 경우.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>필수. 개인용 레지스트리에 로그인하기 위한 사용자 이름입니다. {{site.data.keyword.registryshort_notm}}의 경우, 사용자 이름은 <strong><code>token</code></strong> 값으로 설정됩니다. </td>
+    <td>필수. 개인용 레지스트리에 로그인하기 위한 사용자 이름입니다. {{site.data.keyword.registryshort_notm}}의 경우 사용자 이름이 <code>token</code>으로 설정됩니다.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -335,7 +335,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-3.  [imagePullSecret을 참조하는 팟(Pod)을 작성](#use_imagePullSecret)하십시오.
+3.  [imagePullSecret을 참조하는 팟(Pod)을 작성하십시오](#use_imagePullSecret).
 
 ## 작성된 imagePullSecret을 사용하여 컨테이너 배치
 {: #use_imagePullSecret}
@@ -402,11 +402,11 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `ibmcloud cr namespace-list`를 실행하십시오. </td>
+    <td>이미지가 저장된 네임스페이스입니다. 사용 가능한 네임스페이스를 나열하려면 `bx cr namespace-list`를 실행하십시오.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `ibmcloud cr image-list`를 실행하십시오. </td>
+    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `bx cr image-list`을 실행하십시오.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -421,7 +421,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 3.  변경사항을 저장하십시오.
 4.  클러스터에 배치를 작성하십시오.
     ```
-    kubectl apply -f mypod.yaml
+         kubectl apply -f mypod.yaml
     ```
     {: pre}
 
@@ -438,12 +438,12 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
    {: pre}
    **Image pull secrets** 항목에 `<none>`이 표시되면 imagePullSecret이 존재하지 않는 것입니다.  
 2. default 서비스 계정에 imagePullSecret을 추가하십시오.
-   - **imagePullSecret이 정의되어 있지 않을 때 imagePullSecret 추가:**
+   - **imagePullSecret이 정의되지 않은 상태에서 imagePullSecret을 추가하려는 경우: **
        ```
        kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<namespace_name>-secret-regional"}]}'
        ```
        {: pre}
-   - **imagePullSecret이 이미 정의되어 있을 때 imagePullSecret 추가: **
+   - **imagePullSecret이 이미 정의된 상태에서 imagePullSecret을 추가하려는 경우: **
        ```
        kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"bluemix-<namespace_name>-secret-regional"}}]'
        ```
@@ -482,7 +482,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 
 5. 클러스터에 배치를 작성하십시오.
    ```
-   kubectl apply -f mypod.yaml
+         kubectl apply -f mypod.yaml
    ```
    {: pre}
 

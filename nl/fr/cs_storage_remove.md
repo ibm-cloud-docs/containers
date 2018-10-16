@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -73,7 +73,7 @@ Pour nettoyer des données persistantes :
    **Important :** si vous êtes facturé au mois pour le stockage, vous êtes redevable pour le mois complet, même si vous supprimez le stockage avant la fin du cycle de facturation. 
    
 3. Supprimez les pods sur lesquels est montée la PVC. 
-   1. Répertoriez les pods sur lesquels est montée la PVC.
+   1. Répertoriez les pods sur lesquels est montée la PVC. 
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
@@ -87,13 +87,13 @@ Pour nettoyer des données persistantes :
     
       Si aucun pod n'est renvoyé dans la sortie de l'interface CLI, aucun pod n'utilise la PVC. 
     
-   2. Supprimez le pod utilisant la PVC. Si le pod fait partie d'un déploiement, supprimez le déploiement.
+   2. Supprimez le pod utilisant la PVC. Si le pod fait partie d'un déploiement, supprimez le déploiement. 
       ```
       kubectl delete pod <pod_name>
       ```
       {: pre}
       
-   3. Vérifiez que le pod est supprimé.
+   3. Vérifiez que le pod est supprimé. 
       ```
       kubectl get pods
       ```
@@ -140,7 +140,7 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
      
-   Si vous avez supprimé votre cluster et que vous n'arrivez pas à retrouver le nom du volume persistant, remplacez `grep <pv_name>` par `grep <cluster_id>` pour afficher toutes les unités de stockage associées à votre cluster.
+   Si vous avez supprimé votre cluster et que vous n'arrivez pas à retrouver le nom du volume persistant, remplacez `grep <pv_name>` par `grep <cluster_id>` pour afficher toutes les unités de stockage associées à votre cluster. 
    {: tip}
      
    Exemple de sortie : 

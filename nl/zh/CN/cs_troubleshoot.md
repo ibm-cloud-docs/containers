@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -38,8 +38,8 @@ lastupdated: "2018-08-06"
 1.  列出集群并找到集群的 `State`。
 
   ```
-  ibmcloud ks clusters
-  ```
+        bx cs clusters
+        ```
   {: pre}
 
 2.  复查集群的 `State`。如果集群处于 **Critical**、**Delete failed** 或 **Warning** 状态，或者长时间卡在 **Pending** 状态，请开始[调试工作程序节点](#debug_worker_nodes)。
@@ -115,7 +115,7 @@ lastupdated: "2018-08-06"
 1.  如果集群处于 **Critical**、**Delete failed** 或 **Warning** 状态，或者长时间卡在 **Pending** 状态，请复查工作程序节点的状态。
 
   ```
-  ibmcloud ks workers <cluster_name_or_id>
+  bx cs workers <cluster_name_or_id>
   ```
   {: pre}
 
@@ -174,12 +174,12 @@ lastupdated: "2018-08-06"
 5.  列出工作程序节点的详细信息。如果详细信息包含错误消息，请查看[工作程序节点的常见错误消息](#common_worker_nodes_issues)列表以了解如何解决问题。
 
    ```
-   ibmcloud ks worker-get <worker_id>
+   bx cs worker-get <worker_id>
    ```
    {: pre}
 
   ```
-  ibmcloud ks worker-get [<cluster_name_or_id>] <worker_node_id>
+  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -200,34 +200,33 @@ lastupdated: "2018-08-06"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：当前禁止您的帐户订购“计算实例”。</td>
-        <td>您的 IBM Cloud Infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
+        <td>您的 IBM Cloud infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下订单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
-        <td>所选的 VLAN 与数据中心内没有足够空间来供应工作程序节点的 pod 相关联。有以下选项可供选择：<ul><li>使用其他数据中心来供应工作程序节点。运行 <code>ibmcloud ks zones</code> 以列出可用的数据中心。<li>如果您有与数据中心内另一个 pod 相关联的现有公用和专用 VLAN 对，请改为使用此 VLAN 对。<li>请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</ul></td>
+        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
+        <td>所选的 VLAN 与数据中心内没有足够空间来供应工作程序节点的 pod 相关联。有以下选项可供选择：<ul><li>使用其他数据中心来供应工作程序节点。运行 <code>bx cs locations</code> 以列出可用的数据中心。<li>如果您有与数据中心内另一个 pod 相关联的现有公用和专用 VLAN 对，请改为使用此 VLAN 对。<li>请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基础架构异常：无法获取标识为 &lt;vlan id&gt; 的网络 VLAN。</td>
-        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Cloud Infrastructure (SoftLayer) 帐户相关联。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Cloud Infrastructure (SoftLayer) 帐户，请参阅 [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
+        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>bx cs vlans &lt;location&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Cloud infrastructure (SoftLayer) 帐户相关联。运行 <code>bx cs vlans &lt;location&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Cloud infrastructure (SoftLayer) 帐户，请参阅 [`bx cs credentials-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：为此订单提供的位置无效。(HTTP 500)</td>
-        <td>IBM Cloud Infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](#ts_getting_help)，以验证您的帐户是否正确设置。</td>
+        <td>IBM Cloud infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](#ts_getting_help)，以验证您的帐户是否正确设置。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
 </br></br>
-        {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</br></br>
-        无法验证 IBM Cloud 基础架构凭证。</td>
-        <td>您可能没有必需的许可权在 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中执行操作，或者使用的基础架构凭证不正确。请参阅[配置对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_troubleshoot_clusters.html#cs_credentials)。</td>
+        {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</td>
+        <td>您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_troubleshoot_clusters.html#cs_credentials)。</td>
       </tr>
       <tr>
        <td>工作程序无法与 {{site.data.keyword.containershort_notm}} 服务器通信。请验证防火墙设置是否允许来自此工作程序的流量。
-       <td><ul><li>如果您有防火墙，请[配置防火墙设置以允许出局流量流至相应的端口和 IP 地址](cs_firewall.html#firewall_outbound)。</li><li>通过运行 `ibmcloud ks workers &lt;mycluster&gt;` 来检查集群是否没有公共 IP。如果未列出任何公共 IP，说明集群仅具有专用 VLAN。<ul><li>如果希望集群仅具有专用 VLAN，请设置 [VLAN 连接](cs_network_planning.html#private_vlan)和[防火墙](cs_firewall.html#firewall_outbound)。</li><li>如果希望集群具有公共 IP，请[添加新的工作程序节点](cs_cli_reference.html#cs_worker_add)（具有公用和专用 VLAN）。</li></ul></li></ul></td>
+       <td><ul><li>如果您有防火墙，请[配置防火墙设置以允许出局流量流至相应的端口和 IP 地址](cs_firewall.html#firewall_outbound)。</li><li>通过运行 `bx cs workers <mycluster>` 来检查集群是否没有公共 IP。如果未列出任何公共 IP，说明集群仅具有专用 VLAN。<ul><li>如果希望集群仅具有专用 VLAN，请设置 [VLAN 连接](cs_clusters.html#worker_vlan_connection)和[防火墙](cs_firewall.html#firewall_outbound)。</li><li>如果希望集群具有公共 IP，请[添加新的工作程序节点](cs_cli_reference.html#cs_worker_add)（具有公用和专用 VLAN）。</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>无法创建 IMS 门户网站令牌，因为没有 IMS 帐户链接到所选的 BSS 帐户</br></br>找不到提供的用户或该用户不处于活动状态</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：用户帐户当前处于 cancel_pending 状态。</br></br>正在等待机器向用户显示</td>
-  <td>用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的 API 密钥的所有者没有执行此操作的必需许可权，或者可能处于暂挂待删除状态。</br></br><strong>以用户身份</strong>，执行以下步骤：<ol><li>如果您有权访问多个帐户，请确保您已登录到要使用 {{site.data.keyword.containerlong_notm}} 的帐户。</li><li>运行 <code>ibmcloud ks api-key-info</code> 以查看用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的当前 API 密钥所有者。</li><li>运行 <code>ibmcloud account list</code> 以查看当前使用的 {{site.data.keyword.Bluemix_notm}} 帐户的所有者。</li><li>请与 {{site.data.keyword.Bluemix_notm}} 帐户的所有者联系，并报告 API 密钥所有者在 IBM Cloud Infrastructure (SoftLayer) 中的许可权不足，或者可能暂挂待删除。</li></ol></br><strong>以帐户所有者身份</strong>，执行以下步骤：<ol><li>复查 [IBM Cloud Infrastructure (SoftLayer) 中的必需许可权](cs_users.html#infra_access)，即执行先前失败的操作所需的许可权。</li><li>使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来修正 API 密钥所有者的许可权或创建新的 API 密钥。</li><li>如果您或其他帐户管理员在您的帐户上手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，请运行 [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 以从您的帐户中除去这些凭证。</li></ol></td>
+  <td>用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的 API 密钥的所有者没有执行此操作的必需许可权，或者可能处于暂挂待删除状态。</br></br><strong>以用户身份</strong>，执行以下步骤：<ol><li>如果您有权访问多个帐户，请确保您已登录到要使用 {{site.data.keyword.containerlong_notm}} 的帐户。</li><li>运行 <code>bx cs api-key-info</code> 以查看用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的当前 API 密钥所有者。</li><li>运行 <code>bx account list</code> 以查看当前使用的 {{site.data.keyword.Bluemix_notm}} 帐户的所有者。</li><li>请与 {{site.data.keyword.Bluemix_notm}} 帐户的所有者联系，并报告 API 密钥所有者在 IBM Cloud Infrastructure (SoftLayer) 中的许可权不足，或者可能暂挂待删除。</li></ol></br><strong>以帐户所有者身份</strong>，执行以下步骤：<ol><li>复查 [IBM Cloud Infrastructure (SoftLayer) 中的必需许可权](cs_users.html#infra_access)，即执行先前失败的操作所需的许可权。</li><li>使用 [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来修正 API 密钥所有者的许可权或创建新的 API 密钥。</li><li>如果您或其他帐户管理员在您的帐户上手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，请运行 [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 以从您的帐户中除去凭证。</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -303,5 +302,5 @@ lastupdated: "2018-08-06"
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
+报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -45,28 +45,28 @@ lastupdated: "2018-08-06"
 <br>
 CLI をインストールするには、以下のことを行います。
 
-1.  {{site.data.keyword.containershort_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../cli/index.html#overview) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud` です。
+1.  {{site.data.keyword.containershort_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://clis.ng.bluemix.net/ui/home.html) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`bx` です。
 
 2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
 
     ```
-    ibmcloud login
+    bx login
     ```
     {: pre}
 
-    **注:** フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+    **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
-3.  Kubernetes クラスターを作成し、ワーカー・ノードを管理するには、{{site.data.keyword.containershort_notm}} プラグインをインストールします。 {{site.data.keyword.containershort_notm}} プラグインを使用してコマンドを実行するための接頭部は、`ibmcloud ks` です。
+3.  Kubernetes クラスターを作成し、ワーカー・ノードを管理するには、{{site.data.keyword.containershort_notm}} プラグインをインストールします。 {{site.data.keyword.containershort_notm}} プラグインを使用してコマンドを実行するための接頭部は、`bx cs` です。
 
     ```
-    ibmcloud plugin install container-service -r Bluemix
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
     プラグインが正常にインストールされていることを検証するには、以下のコマンドを実行します。
 
     ```
-    ibmcloud plugin list
+    bx plugin list
     ```
     {: pre}
 
@@ -74,11 +74,11 @@ CLI をインストールするには、以下のことを行います。
 
 4.  {: #kubectl}Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.10.5 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
+    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.9.7 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.5/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.9.7/bin/windows/amd64/kubectl.exe)
 
     2.  **OSX および Linux の場合**: 以下の手順を実行します。
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
@@ -111,17 +111,17 @@ CLI をインストールするには、以下のことを行います。
 
     3.  **Windows の場合**: Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
-5.  プライベート・イメージ・リポジトリーを管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。 レジストリー・コマンドを実行するための接頭部は、`ibmcloud cr` です。
+5.  プライベート・イメージ・リポジトリーを管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。 レジストリー・コマンドを実行するための接頭部は、`bx cr` です。
 
     ```
-    ibmcloud plugin install container-registry -r Bluemix
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
     プラグインが正常にインストールされていることを検証するには、以下のコマンドを実行します。
 
     ```
-    ibmcloud plugin list
+    bx plugin list
     ```
     {: pre}
 
@@ -133,10 +133,10 @@ CLI をインストールするには、以下のことを行います。
 
 以下の CLI に関する参照情報については、それらのツールの資料を参照してください。
 
--   [`ibmcloud` コマンド](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
--   [`ibmcloud ks` コマンド](cs_cli_reference.html#cs_cli_reference)
+-   [`bx` コマンド](/docs/cli/reference/bluemix_cli/bx_cli.html)
+-   [`bx cs` コマンド](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [`ibmcloud cr` コマンド](/docs/cli/plugins/registry/index.html)
+-   [`bx cr` コマンド](/docs/cli/plugins/registry/index.html)
 
 <br />
 
@@ -163,7 +163,7 @@ CLI をインストールするには、以下のことを行います。
     ```
     {: pre}
   
-3. 対話式シェルから `ibmcloud ks` コマンドと `kubectl` コマンドの実行を開始します。 保存するデータを作成する場合は、マウントしたボリュームにそのデータを保存します。 シェルを終了すると、コンテナーは停止します。 
+3. 対話式シェルから `bx cs` コマンドと `kubectl` コマンドの実行を開始します。保存するデータを作成する場合は、マウントしたボリュームにそのデータを保存します。シェルを終了すると、コンテナーは停止します。 
 
 <br />
 
@@ -175,27 +175,27 @@ CLI をインストールするには、以下のことを行います。
 Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
 {:shortdesc}
 
-Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes 1.9.7 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
 
 1.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントを含めます](cs_regions.html#bluemix_regions)。
 
     ```
-    ibmcloud login
+    bx login
     ```
     {: pre}
 
-    **注:** フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+    **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
 2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
-3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成またはアクセスを行うには、`ibmcloud ks region-set` を実行します。
+3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成またはアクセスを行うには、`bx cs region-set` を実行します。
 
 4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
 
     ```
-    ibmcloud ks clusters
+    bx cs clusters
     ```
     {: pre}
 
@@ -203,7 +203,7 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
     1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -217,9 +217,6 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
         {: screen}
 
     2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
-
-        **Mac または Linux ユーザー**: `ibmcloud ks cluster-config` コマンドを実行して `KUBECONFIG` 環境変数をコピーする代わりに、`(ibmcloud ks cluster-config "<cluster-name>" | grep export)` を実行することができます。
-        {:tip}
 
     3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
 
@@ -246,8 +243,8 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
     出力例:
 
     ```
-    Client Version: v1.10.5
-    Server Version: v1.10.5
+    Client Version: v1.9.7
+    Server Version: v1.9.7
     ```
     {: screen}
 
@@ -269,36 +266,36 @@ Kubernetes 1.10.5 内で使用できるすべての `kubectl` コマンドは、
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.10.5 以降
+-   Kubernetes CLI バージョン 1.9.7 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
 <br>
 CLI を更新するには、以下のようにします。
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI を更新します。 [最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../cli/index.html#overview) をダウンロードし、インストーラーを実行します。
+1.  {{site.data.keyword.Bluemix_notm}} CLI を更新します。 [最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://clis.ng.bluemix.net/ui/home.html) をダウンロードし、インストーラーを実行します。
 
 2. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントを含めます](cs_regions.html#bluemix_regions)。
 
     ```
-    ibmcloud login
+    bx login
     ```
     {: pre}
 
-     **注:** フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+     **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
 3.  {{site.data.keyword.containershort_notm}} プラグインを更新します。
     1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
-        ibmcloud plugin update container-service -r Bluemix
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
     2.  以下のコマンドを実行し、インストールされたプラグインのリストを確認することで、プラグインのインストールを検証します。
 
         ```
-        ibmcloud plugin list
+        bx plugin list
         ```
         {: pre}
 
@@ -307,7 +304,7 @@ CLI を更新するには、以下のようにします。
     3.  CLI を初期化します。
 
         ```
-        ibmcloud ks init
+        bx cs init
         ```
         {: pre}
 
@@ -317,14 +314,14 @@ CLI を更新するには、以下のようにします。
     1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
-        ibmcloud plugin update container-registry -r Bluemix
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
     2.  以下のコマンドを実行し、インストールされたプラグインのリストを確認することで、プラグインのインストールを検証します。
 
         ```
-        ibmcloud plugin list
+        bx plugin list
         ```
         {: pre}
 
@@ -357,21 +354,21 @@ CLI をアンインストールするには、以下のようにします。
 1.  {{site.data.keyword.containershort_notm}} プラグインをアンインストールします。
 
     ```
-    ibmcloud plugin uninstall container-service
+    bx plugin uninstall container-service
     ```
     {: pre}
 
 2.  {{site.data.keyword.registryshort_notm}} プラグインをアンインストールします。
 
     ```
-    ibmcloud plugin uninstall container-registry
+    bx plugin uninstall container-registry
     ```
     {: pre}
 
 3.  次のコマンドを実行し、インストールされているプラグインのリストを確認することで、プラグインがアンインストールされたことを検証します。
 
     ```
-    ibmcloud plugin list
+    bx plugin list
     ```
     {: pre}
 
@@ -392,10 +389,7 @@ CLI をアンインストールするには、以下のようにします。
 {{site.data.keyword.containershort_notm}} API を使用して、Kubernetes クラスターの作成、デプロイメント、管理を自動化できます。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照してください。 
-
-[API Swagger JSON ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api-json) を使用して、自動化作業の一部として API と対話可能なクライアントを生成することもできます。
-{: tip}
+{{site.data.keyword.containershort_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照してください。
 
 **注:** {{site.data.keyword.containershort_notm}} で認証するには、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成された IAM (ID およびアクセス管理) トークンを提供する必要があります。このトークンには、クラスターの作成に使用された {{site.data.keyword.Bluemix_notm}} アカウント ID が入っています。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、IAM トークンの作成を自動化するための次のオプションから選択できます。
 
@@ -421,7 +415,7 @@ CLI をアンインストールするには、以下のようにします。
   - _&lt;username&gt;_: {{site.data.keyword.Bluemix_notm}} ユーザー名。
   - _&lt;password&gt;_: {{site.data.keyword.Bluemix_notm}} パスワード。
   - _&lt;api_key&gt;_: {{site.data.keyword.Bluemix_notm}} API キー。
-  - _&lt;passcode&gt;_: {{site.data.keyword.Bluemix_notm}} ワンタイム・パスコード。 `ibmcloud login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。
+  - _&lt;passcode&gt;_: {{site.data.keyword.Bluemix_notm}} ワンタイム・パスコード。 `bx login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -723,3 +717,4 @@ IAM トークンを作成する場合、または新しいリフレッシュ・�
     API 出力の **access_token** フィールドに新しい IAM トークンがあり、**refresh_token** フィールドに IAM リフレッシュ・トークンがあります。
 
 2.  前の手順のトークンを使用して、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) の作業を進めます。
+

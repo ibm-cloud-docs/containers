@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -67,7 +67,7 @@ Obtenez votre code prêt à l'emploi. Vous n'avez pas encore de code ? Vous pouv
     a. Dans le catalogue, à la section **Boilerplates**, cliquez sur **Python Flask**. Ce conteneur boilerplate comprend un environnement d'exécution pour les applications Python 2 et Python 3.
 
     b. Entrez le nom de l'application `cf-py-<name>` et cliquez sur **CREATE**. Pour accéder au code d'application du conteneur boilerplate, vous devez d'abord déployer l'application CF dans le cloud. Vous pouvez utiliser n'importe quel nom pour l'application. Si vous utilisez le nom indiqué dans l'exemple, remplacez `<name>` par un identificateur unique, par exemple `cf-py-msx`.
-
+    
     **Attention** : n'utilisez pas d'informations personnelles dans les noms d'application, d'image de conteneur ou de ressource Kubernetes.
 
     A mesure que l'application est déployée, sont affichées des instructions pour le téléchargement, la modification et le redéploiement de votre application avec l'interface de ligne de commande.
@@ -127,7 +127,7 @@ Créez un fichier Dockerfile incluant votre code d'application et les configurat
 4. Générez une image Docker avec votre code d'application et transférez-la sur votre registre privé.
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +147,7 @@ Créez un fichier Dockerfile incluant votre code d'application et les configurat
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Chemin de votre registre privé comprenant votre espace de nom unique et le nom de l'image. Dans cet exemple, nous avons conservé pour l'image le même nom que le répertoire de l'application, mais vous pouvez choisir un nom de votre choix pour l'image dans votre registre privé. Si vous n'êtes pas sûr du nom de votre espace de nom, exécutez la commande `ibmcloud cr namespaces` pour le retrouver.</td>
+  <td>Chemin de votre registre privé comprenant votre espace de nom unique et le nom de l'image. Dans cet exemple, nous avons conservé pour l'image le même nom que le répertoire de l'application, mais vous pouvez choisir un nom de votre choix pour l'image dans votre registre privé. Si vous n'êtes pas sûr du nom de votre espace de nom, exécutez la commande `bx cr namespaces` pour le retrouver.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +156,7 @@ Créez un fichier Dockerfile incluant votre code d'application et les configurat
   </tbody>
   </table>
 
-  L'image est créée dans votre registre privé. Vous pouvez exécuter la commande `ibmcloud cr images` pour vérifier que l'image a bien été créée.
+  L'image est créée dans votre registre privé. Vous pouvez exécuter la commande `bx cr images` pour vérifier que l'image a bien été créée.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +222,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>Dans `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, remplacez &lt;registry_namespace&gt; par l'espace de nom de votre registre d'images privé. Si vous n'êtes pas sûr du nom de votre espace de nom, exécutez la commande `ibmcloud cr namespaces` pour le retrouver.</td>
+  <td>Dans `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, remplacez &lt;registry_namespace&gt; par l'espace de nom de votre registre d'images privé. Si vous n'êtes pas sûr du nom de votre espace de nom, exécutez la commande `bx cr namespaces` pour le retrouver.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,7 +250,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
     a.  Identifiez l'adresse IP publique du noeud worker dans le cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -258,7 +258,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
     ```
     {: screen}
 

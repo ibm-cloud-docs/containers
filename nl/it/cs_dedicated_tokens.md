@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,13 +25,45 @@ lastupdated: "2018-08-06"
 Crea un token senza scadenza per un registro di immagini che hai utilizzato per i gruppi singoli o scalabili con i cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-1.  Richiedi un token di registro permanente per la sessione corrente. Questo token concede l'accesso alle immagini nello spazio dei nomi corrente.
+1.  Accedi all'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}.
+
     ```
-    ibmcloud cr token-add --description "<description>" --non-expiring -q
+    bx login -a api.<dedicated_domain>
     ```
     {: pre}
 
-2.  Verifica il segreto Kubernetes.
+2.  Richiedi un `oauth-token` per la sessione corrente e salvalo come
+variabile.
+
+    ```
+    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    ```
+    {: pre}
+
+3.  Richiedi l'ID dell'organizzazione per la sessione corrente e salvalo come variabile.
+
+    ```
+    ORG_GUID=`bx iam org <org_name> --guid`
+    ```
+    {: pre}
+
+4.  Richiedi un token di registro permanente per la sessione corrente. Sostituisci <dedicated_domain> con il dominio del tuo ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Questo token concede l'accesso alle immagini nello spazio dei nomi corrente.
+
+    ```
+    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
+    ```
+    {: pre}
+
+    Output:
+
+    ```
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
+    }
+    ```
+    {: screen}
+
+5.  Verifica il segreto Kubernetes.
 
     ```
     kubectl describe secrets
@@ -40,7 +72,7 @@ Crea un token senza scadenza per un registro di immagini che hai utilizzato per 
 
     Puoi utilizzare questo segreto per lavorare con {{site.data.keyword.containerlong}}.
 
-3.  Crea il segreto Kubernetes per memorizzare le informazioni sul token.
+6.  Crea il segreto Kubernetes per memorizzare le informazioni sul token.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -79,9 +111,9 @@ Crea un token senza scadenza per un registro di immagini che hai utilizzato per 
     </tr>
     </tbody></table>
 
-4.  Crea un a pod che fa riferimento all'imagePullSecret.
+7.  Crea un a pod che fa riferimento all'imagePullSecret.
 
-    1.  Apri il tuo editor di testo preferito e crea uno script di configurazione del pod denominato mypod.yaml.
+    1.  Apri il tuo editor di testo preferito e crea uno script di configurazione del pod denominato mypod.yaml. 
     2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al registro. Per utilizzare un'immagine privata da uno spazio dei nomi:
 
         ```
@@ -114,10 +146,10 @@ Crea un token senza scadenza per un registro di immagini che hai utilizzato per 
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `ibmcloud cr namespace-list`.</td>
+        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>Il nome dell'immagine che vuoi utilizzare. Per elencare le immagini disponibili in un account {{site.data.keyword.Bluemix_notm}}, esegui <code>ibmcloud cr image-list</code>.</td>
+        <td>Il nome dell'immagine che vuoi utilizzare. Per elencare le immagini disponibili in un account {{site.data.keyword.Bluemix_notm}}, esegui <code>bx cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
@@ -137,3 +169,4 @@ Crea un token senza scadenza per un registro di immagini che hai utilizzato per 
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

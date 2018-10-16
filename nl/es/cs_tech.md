@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,16 +25,16 @@ Más información sobre la tecnología de {{site.data.keyword.containerlong}}.
 ## Contenedores de Docker
 {: #docker_containers}
 
-Basado en la tecnología de contenedor de Linux (LXC) existente, el proyecto de código abierto denominado Docker define plantillas para empaquetar software en unidades estandarizadas, denominados contenedores, que incluyen todos los elementos que una app necesita para ejecutarse.
+Basado en la tecnología existente de contenedores de Linux (LXC), el proyecto de código abierto denominado Docker se convirtió en una plataforma de software que se puede utilizar para crear, probar, desplegar y adaptar apps rápidamente. Docker incluye software en unidades estandarizadas denominadas contenedores que incluyen todos los elementos que una app necesita para ejecutarse.
 {:shortdesc}
 
 Obtenga información acerca de algunos aspectos básicos de Docker:
 
 <dl>
 <dt>Imagen</dt>
-<dd>Una imagen de contenedor es la base de cada contenedor que desee ejecutar. Las imágenes de contenedor se crean a partir de un Dockerfile, un archivo de texto que define cómo crear la imagen y qué artefactos incluir en ella, como la app, la configuración de la app y sus dependencias. Las imágenes siempre se crean a partir de otras imágenes, lo que agiliza su configuración. Deje que otra persona haga la mayor parte del trabajo en una imagen y entonces modifíquela para su uso.</dd>
+<dd>Una imagen de Docker se crea a partir de Dockerfile, un archivo de texto que define cómo crear la imagen y qué artefactos incluir en ella, como la app, la configuración de la app y sus dependencias. Las imágenes siempre se crean a partir de otras imágenes, lo que agiliza su configuración. Deje que otra persona haga la mayor parte del trabajo en una imagen y entonces modifíquela para su uso.</dd>
 <dt>Registro</dt>
-<dd>Un registro de imagen es un lugar para almacenar, recuperar y compartir imágenes de contenedor. Las imágenes que se almacenan en un registro pueden estar disponibles a nivel público (registro público) o pueden resultar accesibles para un pequeño grupo de usuarios (registro privado). {{site.data.keyword.containershort_notm}} ofrece imágenes públicas, como ibmliberty, que puede utilizar para crear su primera app contenerizada. Cuando se trate de aplicaciones de empresa, utilice un registro privado como el que se proporciona en {{site.data.keyword.Bluemix_notm}} para evitar que usuarios no autorizados utilicen sus imágenes.
+<dd>Un registro de imagen es un lugar para almacenar, recuperar y compartir imágenes de Docker. Las imágenes que se almacenan en un registro pueden estar disponibles a nivel público (registro público) o pueden resultar accesibles para un pequeño grupo de usuarios (registro privado). {{site.data.keyword.containershort_notm}} ofrece imágenes públicas, como ibmliberty, que puede utilizar para crear su primera app contenerizada. Cuando se trate de aplicaciones de empresa, utilice un registro privado como el que se proporciona en {{site.data.keyword.Bluemix_notm}} para evitar que usuarios no autorizados utilicen sus imágenes.
 </dd>
 <dt>Contenedor</dt>
 <dd>Cada contenedor se crea a partir de una imagen. Un contenedor es una app empaquetada con todas sus dependencias, de modo que la app se puede traspasar entre entornos y se puede ejecutar sin cambios. A diferencia de las máquinas virtuales, los contenedores no virtualizan un dispositivo, su sistema operativo y el hardware subyacente. El contenedor solo contiene código de la app, tiempo de ejecución, herramientas del sistema, bibliotecas y valores. Los contenedores se ejecutan como procesos aislados en los hosts de cálculo de Ubuntu y comparten el sistema operativo del host y sus recursos de hardware. Este enfoque hace que el contenedor sea más ligero, portátil y eficiente que una máquina virtual.</dd>
@@ -119,134 +119,24 @@ Defina estrategias para la app que incluyan el número de pods que desea añadir
 En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containershort_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. En realidad, para ser más específicos, las apps se ejecutan en pods, y los pods se alojan en nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. El maestro de Kubernetes y los nodos trabajadores se comunican entre sí mediante certificados TLS seguros y una conexión openVPN para organizar sus configuraciones de clúster.
 {: shortdesc}
 
-En la imagen siguiente se muestran los componentes del clúster y la forma en que interactúan.
-<p>
-<figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} - Arquitectura Kubernetes">
- <figcaption>{{site.data.keyword.containershort_notm}} - Arquitectura</figcaption>
-</figure>
-</p>
-
 ¿Cuál es la diferencia entre el maestro de Kubernetes y un nodo trabajador? Nos complace que lo pregunte.
 
 <dl>
   <dt>Maestro de Kubernetes</dt>
-    <dd>El maestro de Kubernetes está relacionado con la gestión de todos los recursos de cálculo, red y almacenamiento del clúster. El maestro de Kubernetes se asegura de que las apps y los servicios se desplieguen de igual forma en los nodos trabajadores del clúster. En función de cómo configurar la app y los servicios, el maestro determina el nodo trabajador que tiene los recursos suficientes para cumplir los requisitos de la app.</br></br>En la tabla siguiente se describen los componentes del nodo maestro de Kubernetes.
-    <table>
-    <caption>Componentes del nodo maestro de Kubernetes</caption>
-    <thead>
-    <th>Componente del nodo maestro</th>
-    <th>Descripción</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>kube-apiserver</td>
-    <td>El servidor de API de Kubernetes sirve como punto de entrada principal para todas las solicitudes de gestión del clúster procedentes del nodo trabajador destinadas al nodo maestro de Kubernetes. El servidor de API de Kubernetes valida y procesa las solicitudes que cambian el estado de los recursos de Kubernetes, como pods o servicios, y almacena este estado en etcd.</td>
-    </tr>
-    <tr>
-    <td>openvpn-server</td>
-    <td>El servidor OpenVPN funciona con el cliente OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión da soporte a kubectl exec, attach, logs y apiserver proxy.</td>
-    </tr>
-    <tr>
-    <td>etcd</td>
-    <td>etcd es un almacén de valores de claves de alta disponibilidad que almacena el estado de todos los recursos de Kubernetes de un clúster, como servicios, despliegues y pods. Los datos de etcd, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM.</td>
-    </tr>
-    <tr>
-    <td>kube-scheduler</td>
-    <td>El planificador de Kubernetes observa los pods recién creados y decide dónde se desplegarán en función de la capacidad, las necesidades de rendimiento, las restricciones de políticas, las especificaciones de antiafinidad y los requisitos de la carga de trabajo. Si no se encuentra ningún nodo trabajador que se ajuste a los requisitos, el pod no se despliega en el clúster.</td>
-    </tr>
-    <tr>
-    <td>kube-controller-manager</td>
-    <td>El gestor de controlador de Kubernetes es un daemon que observa el estado de los recursos del clúster, como por ejemplo los conjuntos de réplicas. Cuando cambia el estado de un recurso, por ejemplo si cae un pod de un conjunto de réplicas, el gestor del controlador inicia acciones de corrección para conseguir el estado deseado.</td>
-    </tr>
-    </tbody></table></dd>
+    <dd>El maestro de Kubernetes está relacionado con la gestión de todos los recursos de cálculo, red y almacenamiento del clúster. El maestro de Kubernetes se asegura de que las apps y los servicios se desplieguen de igual forma en los nodos trabajadores del clúster. En función de cómo configurar la app y los servicios, el maestro determina el nodo trabajador que tiene los recursos suficientes para cumplir los requisitos de la app.</dd>
   <dt>Nodo trabajador</dt>
-    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</br></br>En la tabla siguiente se describen los componentes de un nodo trabajador.
-    <table>
-    <caption>Componentes de los nodos trabajadores</caption>
-    <thead>
-    <th>Componente de nodo trabajador</th>
-    <th>Espacio de nombres</th>
-    <th>Descripción</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>openvpn-client</td>
-    <td>kube-system</td>
-    <td>El cliente OpenVPN funciona con el servidor OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión da soporte a kubectl exec, attach, logs y apiserver proxy.</td>
-    </tr>
-    <tr>
-    <td>calico-policy-controller</td>
-    <td>kube-system</td>
-    <td>El controlador de políticas de Calico observa el tráfico de red de entrada y de salida para comprobar la conformidad con las políticas de red establecidas. Si el tráfico no está permitido en el clúster, se bloquea el acceso al clúster. El controlador de políticas de Calico también se utiliza para crear y establecer políticas de red para un clúster.</td>
-    </tr>
-    <tr>
-    <td>IBM Storage Provider</td>
-    <td>kube-system</td>
-    <td>Cada clúster se configura con un plugin para suministrar almacenamiento de archivos. Si lo desea puede instalar otros complementos, como almacenamiento en bloque.</td>
-    </tr>
-    <tr>
-    <td>kube-proxy</td>
-    <td>kube-system</td>
-    <td>El proxy de red de Kubernetes es un daemon que se ejecuta en cada nodo trabajador y que reenvía o equilibra la carga del tráfico de red TCP y UDP para los servicios que se ejecutan en el clúster.</td>
-    </tr>
-    <tr>
-    <td>kube-dashboard</td>
-    <td>kube-system</td>
-    <td>El panel de control de Kubernetes es una interfaz de usuario basada en web que permite a los usuarios gestionar y resolver problemas en el clúster y en las aplicaciones que se ejecutan en el clúster.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS planifica un servicio y pod DNS en el clúster. Los contenedores utilizan automáticamente la IP del servicio DNS para resolver nombres de DNS en sus búsquedas de otros pods y servicios.</td>
-    </tr>
-    <tr>
-    <td>heapster</td>
-    <td>kube-system</td>
-    <td>Heapster es un agregador a nivel de clúster de datos de supervisión y de sucesos. El pod Heapster descubre todos los nodos del clúster y consulta información de uso del kubelet de cada nodo. En el panel de control de Kubernetes encontrará gráficos de utilización.</td>
-    </tr>
-    <tr>
-    <td>calico-node</td>
-    <td>kube-system</td>
-    <td>El nodo Calico es un contenedor que agrupa los distintos componentes necesarios para los contenedores de red con Calico.</td>
-    </tr>
-    <tr>
-    <td>IBM Logging and Metrics</td>
-    <td>ibm-system</td>
-    <td>Puede utilizar los servicios {{site.data.keyword.loganalysislong_notm}} y {{site.data.keyword.monitoringlong_notm}} integrados para ampliar las funciones de recopilación y retención cuando trabaje con registros y con métricas.</td>
-    </tr>
-    <tr>
-    <td>IBM Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress es un servicio de Kubernetes que puede utilizar para equilibrar las cargas de trabajo de tráfico de red en el clúster reenviando solicitudes públicas o privadas a varias apps del clúster. Para exponer sus apps a través de la red pública o privada, debe crear un recurso de Ingress para registrar sus apps con el equilibrador de carga de aplicación de Ingress (ALB). Un solo URL o dirección IP puede acceder a varias apps.</td>
-    </tr>
-    <tr>
-    <td>IBM Load Balancer</td>
-    <td>ibm-system</td>
-    <td>Un equilibrador de carga es un servicio de Kubernetes que se puede utilizar para equilibrar las cargas de trabajo de tráfico de red en el clúster reenviando solicitudes públicas o privadas a una app.</td>
-    </tr>
-    <tr>
-    <td>Servicios y pods de app</td>
-    <td>default</td>
-    <td>En el espacio de nombres <code>default</code> o en los espacios de nombres que cree, puede desplegar apps en pods y servicios para que se comuniquen con dichos pods.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/d</td>
-    <td>La interfaz de red de contenedor de Calico (CNI) gestiona la conectividad de red de los contenedores y elimina los recursos asignados cuando se suprime un contenedor.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/d</td>
-    <td>Calico IPAM gestiona la asignación de direcciones IP a contenedores.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/d</td>
-    <td>El kubelet es un pod que se ejecuta en cada nodo trabajador y que es el responsable de supervisar el estado de los pods que se ejecutan en el nodo trabajador y de ver los sucesos que envía el servidor de API de Kubernetes. Basándose en los sucesos, el kubelet crea o elimina pods, garantiza sondeos de actividad y de preparación e informa sobre el estado de los pods al servidor de API de Kubernetes.</td>
-    </tr>
-    </tbody></table></dd>
+    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</dd>
 </dl>
 
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} - Arquitectura Kubernetes">
+ <figcaption>{{site.data.keyword.containershort_notm}} - Arquitectura</figcaption>
+</figure> 
+</p>
+
 ¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](cs_integrations.html#integrations).
-{: tip}
+
+
+<br />
+

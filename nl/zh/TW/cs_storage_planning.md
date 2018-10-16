@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,76 +16,271 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-
-
 # 規劃高度可用的持續性儲存空間
 {: #storage_planning}
 
-## 非持續性資料儲存空間選項
-{: #non_persistent}
+## 選擇儲存空間解決方案
+{: #choose_storage_solution}
 
-若您的資料不需要持續儲存，或不需要在各個應用程式實例之間共用資料，您可以使用非持續性儲存空間選項。也可以使用非持續性儲存空間選項，針對您的應用程式元件進行單元測試，或嘗試新的特性。
+您必須先瞭解應用程式需求、您要儲存的資料類型，以及您要存取此資料的頻率，才能決定哪種類型的儲存空間是適合您的解決方案。
+{: shortdesc}
+
+1. 決定是否必須永久地儲存資料，或是否在任何給定時間移除資料。
+   - **持續性儲存空間：**您的資料仍然必須可用，即使移除容器、工作者節點或叢集也是一樣。在下列情境中，請使用持續性儲存空間：
+       - 有狀態的應用程式
+       - 核心商業資料
+       - 基於法律需求而必須可用的資料（例如定義的保留期間）
+       - 審核
+       - 必須跨應用程式實例存取及共用的資料
+   - **非持續性儲存空間：**移除容器、工作者節點或叢集時，即可移除您的資料。非持續性儲存空間通常用於記載資訊（例如系統日誌或容器日誌）、開發測試，或您要從主機的檔案系統存取資料時。若要尋找可用非持續性儲存空間選項的概觀，請參閱[非持續性儲存空間選項的比較](#non_persistent_overview)。
+
+2. 如果您必須持續保存資料，則請分析應用程式是否需要特定類型的儲存空間。當您使用現有應用程式時，可能設計應用程式以下列其中一種方式儲存資料：  
+   - **在檔案系統中：**資料可以儲存為目錄中的檔案。例如，您可以將此檔案儲存至本端硬碟。部分應用程式需要將資料儲存至特定檔案系統（例如 `nfs` 或 `ext4`），以最佳化資料儲存庫並達到效能目標。
+   - **在資料庫中：**資料必須儲存至遵循特定綱目的資料庫。部分應用程式附有資料庫介面，供您用來儲存資料。例如，已最佳化 WordPress，以將資料儲存至 MySQL 資料庫。在這些情況下，會為您選取儲存空間類型。
+
+3. 如果您的應用程式未限制您必須使用的儲存空間類型，則請決定您要儲存的資料類型。
+   - **結構化資料：**資料可以儲存在具有直欄及列之表格的關聯式資料庫。表格中的資料可以使用索引鍵連接，而且通常基於預先定義的資料模型而容易存取。範例為電話號碼、帳號、社會保險號碼或郵遞區號。
+   - **半結構化資料：**資料無法放入關聯式資料庫，但附有一些可用來更輕鬆地讀取及分析此資料的組織內容。範例為標記語言檔案（例如 CSV、XML 或 JSON）。  
+   - **非結構化資料：**資料未遵循組織型樣，而且複雜到無法將它儲存至具有預先定義資料模型的關聯式資料庫。若要存取此資料，您需要進階工具及軟體。範例為電子郵件訊息、視訊、照片、音訊檔案、簡報、社交媒體資料或網頁。
+
+   如果您有結構化及非結構化資料，請嘗試將每種資料類型個別地儲存至針對此資料類型所設計的儲存空間解決方案。使用適合您資料類型的儲存空間解決方案，可以輕鬆地存取您的資料，並提供效能、可調整性、延續性及一致性的好處。
+   {: tip}
+
+4. 分析您要如何存取資料。通常會設計及最佳化儲存空間解決方案，以支援讀取或寫入作業。  
+   - **唯讀：**您的資料是唯讀的。您不要寫入或變更資料。
+   - **讀取及寫入：**您要讀取、寫入及變更資料。針對已讀取及寫入的資料，請務必瞭解作業是大量讀取、大量寫入還是兩者平衡。
+
+4. 決定您資料的存取頻率。瞭解資料存取頻率可協助您瞭解儲存空間所需的效能。例如，經常存取的資料通常位於快速儲存空間上。
+   - **熱資料：**經常存取的資料。常見使用案例是 Web 或行動應用程式。
+   - **冷或暖資料：**不常存取的資料（例如一個月一次或更少）常見使用案例是保存檔、短期資料保留或災難回復。
+   - **冷資料：**很少存取（或根本未存取）的資料。常見使用案例是保存檔、長期備份、歷程資料。
+   - **凍結資料：**未存取且基於法律原因而需要保留的資料。
+
+   如果您無法預測頻率，或頻率未遵循嚴格型樣，請判斷工作負載是大量讀取、大量寫入還是兩者平衡。然後，查看適合您工作負載的儲存空間選項，並調查哪個儲存空間層級可為您提供所需的彈性。例如，{{site.data.keyword.containerlong_notm}} 提供 `flex` 儲存空間類別，而儲存空間類別會考量資料在一個月內的存取頻率，並將這項測量考慮在內來最佳化每月計費。
+   {: tip}
+
+5. 調查您的資料是否必須跨多個應用程式實例、區域或地區共用。
+   - **跨 Pod 存取：**當您使用 Kubernetes 持續性磁區來存取儲存空間時，可以決定可同時裝載磁區的 Pod 數目。部分儲存空間解決方案（例如區塊儲存空間）一次只能有一個 Pod 可以存取。其他儲存空間解決方案可讓您跨多個 Pod 共用相同的磁區。
+   - **跨區域及地區存取：**您可能需要跨區域或地區域存取資料。部分儲存空間解決方案（例如檔案及區塊儲存空間）是資料中心特有的，因此無法跨多區域叢集設定中的區域予以共用。
+
+6. 瞭解影響您選擇的其他儲存空間性質。
+   - **一致性：**保證讀取作業傳回檔案的最新版本。當您保證一律會收到檔案的最新版本時，儲存空間解決方案可以提供`強大一致性`，或者，當讀取作業可能未傳回最新版本時，可以提供`最終一致性`。在必須先將寫入作業抄寫到所有實例的地理分散式系統中，您通常會發現最終一致性。
+   - **效能：**完成讀取或寫入作業所需的時間。
+   - **延續性：**保證確定到儲存空間的寫入作業會永久地存活，而且不會毀損或遺失，即使同時將數 GB 或 TB 的資料寫入至儲存空間也是一樣。
+   - **備援：**可以從中斷回復並繼續作業，即使硬體或軟體元件失敗也是一樣。例如，您的實體儲存空間停電、網路中斷，或在天然災害期間毀損。
+   - **可用性：**可以存取資料，即使資料中心或地區無法使用也是一樣。透過新增備援以及設定失效接手機制，通常可以達到資料的可用性。
+   - **可調整性：**可以根據您的需要來擴充容量以及自訂效能。
+   - **加密：**未獲授權的使用者存取資料時，遮罩資料以防止可見性。
+
+7. [檢閱可用的持續性儲存空間解決方案](#persistent_storage_overview)，並挑選最適合您應用程式及資料需求的解決方案。
+
+## 非持續性儲存空間選項的比較
+{: #non_persistent_overview}
+
+如果您的資料不需要持續儲存，或要對應用程式元件執行單元測試，您可以使用非持續性儲存空間選項。
 {: shortdesc}
 
 下圖顯示 {{site.data.keyword.containerlong_notm}} 中可用的非持續性資料儲存空間選項。這些選項適用於免費叢集和標準叢集。
 <p>
 <img src="images/cs_storage_nonpersistent.png" alt="非持續性資料儲存空間選項" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="表格顯示非持續性儲存空間選項。列應該從左到右閱讀，第一欄為選項編號，第二欄為選項的標題，第三欄為說明。" style="width: 100%">
-<caption>非持續性儲存空間選項</caption>
-  <thead>
-  <th>選項</th>
-  <th>說明</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. 在容器或 Pod 內</td>
-      <td>容器及 Pod 在設計上是短暫存在的，且可能非預期地故障。不過，您可以將資料寫入至容器的本端檔案系統，以便在容器的整個生命週期中儲存資料。容器內的資料無法與其他容器或 Pod 共用，而且會在容器損毀或移除時遺失。如需相關資訊，請參閱[在容器中儲存資料](https://docs.docker.com/storage/)。</td>
-    </tr>
-  <tr>
-    <td>2. 在工作者節點上
-</td>
-    <td>每個工作者節點都設定有主要及次要儲存空間，此儲存空間是由您為工作者節點選取的機型所決定。主要儲存空間是用來儲存作業系統中的資料，並且可使用 [Kubernetes <code>hostPath</code> 磁區 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) 進行存取。次要儲存空間用來儲存 `kubelet` 及容器運行環境引擎中的資料。您可以使用 [Kubernetes<code>emptyDir</code> 磁區 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) 來存取次要儲存空間<br/><br/><code>hostPath</code> 磁區的用途是將工作者節點檔案系統上的檔案裝載至 Pod，而 <code>emptyDir</code> 則會建立一個空目錄來指派給叢集裡的 Pod。該 Pod 中的所有容器都可以對該磁區進行讀寫。因為磁區已指派給一個特定 Pod，所以無法與抄本集裡的其他 Pod 共用資料。<br/><br/><p>在下列情況下，會移除 <code>hostPath</code> 或 <code>emptyDir</code> 磁區及其資料：<ul><li>已刪除工作者節點。</li><li>已重新載入或更新工作者節點。</li><li>已刪除叢集。</li><li>{{site.data.keyword.Bluemix_notm}} 帳戶達到暫停狀況。</li></ul></p><p>此外，在下列情況下，會移除 <code>emptyDir</code> 磁區中的資料：<ul><li>已從工作者節點中永久地刪除指派的 Pod。</li><li>已在另一個工作者節點上排定指派的 Pod。</li></ul></p><p><strong>附註：</strong>如果 Pod 內的容器損毀，則在工作者節點上仍然可使用磁區中的資料。</p></td>
-    </tr>
-    </tbody>
-    </table>
+<table>
+<thead>
+<th style="text-align:left">特徵</th>
+<th style="text-align:left">在容器內</th>
+<th style="text-align:left">在工作者節點的主要或次要磁碟上</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">具多區域功能</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">否</td>
+</tr>
+<tr>
+<td style="text-align:left">資料類型</td>
+<td style="text-align:left">全部</td>
+<td style="text-align:left">全部</td>
+</tr>
+<tr>
+<td style="text-align:left">容量</td>
+<td style="text-align:left">限制為工作者節點的可用次要磁碟。若要限制 Pod 所使用的次要儲存空間數量，請使用資源要求，並限制[暫時儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage)。</td>
+<td style="text-align:left">限制為工作者節點在主要 (hostPath) 或次要磁碟 (emptyDir) 上的可用空間。若要限制 Pod 所使用的次要儲存空間數量，請使用資源要求，並限制[暫時儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage)。</td>
+</tr>
+<tr>
+<td style="text-align:left">資料存取型樣</td>
+<td style="text-align:left">任何頻率的讀取及寫入作業</td>
+<td style="text-align:left">任何頻率的讀取及寫入作業</td>
+</tr>
+<tr>
+<td style="text-align:left">存取</td>
+<td style="text-align:left">透過容器的本端檔案系統</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">透過 [Kubernetes <code>hostPath</code> 磁區 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) 來存取工作者節點主要儲存空間。</li><li style="margin:0px; padding:0px">透過 [Kubernetes <code>emptyDir</code> 磁區 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) 來存取工作者節點次要儲存空間。</td>
+</tr>
+<tr>
+<td style="text-align:left">效能</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">使用 SSD 時，為具有低延遲的高效能</td>
+</tr>
+<tr>
+<td style="text-align:left">一致性</td>
+<td style="text-align:left">強大</td>
+<td style="text-align:left">強大</td>
+</tr>
+<tr>
+<td style="text-align:left">備援</td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">低</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">容器特有</td>
+<td style="text-align:left">工作者節點特有</td>
+</tr>
+<tr>
+<td style="text-align:left">可調整性</td>
+<td style="text-align:left">受限於工作者節點的次要磁碟容量，因此很難擴充</td>
+<td style="text-align:left">受限於工作者節點的主要及次要磁碟容量，因此很難擴充</td>
+</tr>
+<tr>
+<td style="text-align:left">延續性</td>
+<td style="text-align:left">容器損毀或遭移除時，會遺失資料。</td>
+<td style="text-align:left">在下列情況下，會遺失 <code>hostPath</code> 或 <code>emptyDir</code> 磁區中的資料：<ul><li>已刪除工作者節點。</li><li>已重新載入或更新工作者節點。</li><li>已刪除叢集。</li><li>{{site.data.keyword.Bluemix_notm}} 帳戶達到暫停狀況。</li></ul></p><p>此外，在下列情況下，會移除 <code>emptyDir</code> 磁區中的資料：<ul><li>已從工作者節點中永久地刪除指派的 Pod。</li><li>已在另一個工作者節點上排定指派的 Pod。</li></ul>
+</tr>
+<tr>
+<td style="text-align:left">常見使用案例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">本端影像快取</li><li style="margin:0px; padding:0px">容器日誌</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">高效能本端快取</li><li style="margin:0px; padding:0px">從工作者節點檔案系統存取檔案</li><li style="margin:0px; padding:0px">單元測試</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">非理想使用案例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">持續資料儲存空間</li><li style="margin:0px; padding:0px">在容器之間共用資料</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">持續資料儲存空間</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 
-## 高可用性的持續性資料儲存空間選項
-{: #persistent}
+## 持續性儲存空間選項的比較
+{: #persistent_storage_overview}
 
-當您建立高可用性且有狀態的應用程式時，主要的挑戰是在多個區域中的多個應用程式實例之間持續保存資料，並隨時讓資料保持同步。對於高可用性資料，您會想要確保有一個主要資料庫，且有多個實例分散在多個資料中心或甚至多個地區。必須持續抄寫這個主要資料庫，以維持單一的事實來源。叢集裡的所有實例都必須對這個主要資料庫進行讀寫。如果主要資料庫的某一個實例關閉，其他實例會接管工作負載，因此您不會經歷應用程式的關閉時間。
+對您要永久保留的任何資料使用持續性儲存空間選項，即使移除容器、工作者節點或叢集也是一樣。
 {: shortdesc}
 
-下圖顯示您在 {{site.data.keyword.containerlong_notm}} 中具有的選項，可讓您的資料在標準叢集裡具有高可用性。適合您的選項，取決於下列因素：
-  * **您具有的應用程式類型：**例如，您的應用程式可能必須根據檔案來儲存資料，而不是儲存於資料庫內。
-  * **資料儲存及遞送地點的法律要求：**例如，您可能只能在美國儲存及遞送資料，而無法使用位於歐洲的服務。
-  * **備份及還原選項：**每個儲存空間選項都具有備份及還原資料的功能。請檢查可用的備份及還原選項是否符合災難回復計劃的需求，例如備份的頻率，或是在主要資料中心以外儲存資料的功能。
-  * **全球抄寫：**如需高可用性，建議您設定分散在全球資料中心並互相抄寫的多個儲存空間實例。
+**附註：**持續資料儲存空間選項僅適用於標準叢集。
 
-<br/>
+在尋找如何將叢集連接至內部部署資料庫嗎？請參閱[設定與叢集的 VPN 連線功能](cs_vpn.html#vpn)。
+{: tip}
+
+下圖顯示您在 {{site.data.keyword.containerlong_notm}} 中具有的選項，以永久儲存資料並使資料在叢集中具有高可用性。
+
 <img src="images/cs_storage_mz-ha.png" alt="持續性儲存空間的高可用性選項"/>
 
-<table summary="表格顯示持續性儲存空間選項。列應該從左到右閱讀，第一欄為選項編號，第二欄為選項的標題，第三欄為說明。" style="width: 100%">
-<caption>持續性儲存空間選項</caption>
-  <thead>
-  <th>選項</th>
-  <th>說明</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>1. NFS 或區塊儲存空間</td>
-  <td>使用此選項，您可以使用 Kubernetes 持續性磁區，在相同區域內持續保存應用程式及容器資料。</br></br><strong>如何佈建檔案或區塊儲存空間？</strong></br>若要在叢集裡佈建檔案儲存空間及區塊儲存空間，您可以[使用持續性磁區 (PV) 及持續性磁區要求 (PVC)](cs_storage_basics.html#pvc_pv)。PVC 及 PV 是使 API 抽象化以佈建實體檔案或區塊儲存裝置的 Kubernetes 概念。您可以使用[動態](cs_storage_basics.html#dynamic_provisioning)或[靜態](cs_storage_basics.html#static_provisioning)佈建來建立 PVC 及 PV。</br></br><strong>可在多區域叢集裡使用檔案或區塊儲存空間嗎？</strong></br> 檔案和區塊儲存裝置是區域所特有，無法跨區域或地區共用。若要在叢集裡使用此類型的儲存空間，您必須在與儲存空間相同的區域中至少具有一個工作者節點。</br></br>如果您在跨越多個區域的叢集裡[動態佈建](cs_storage_basics.html#dynamic_provisioning)檔案及區塊儲存空間，則儲存空間只會佈建在 1 個根據循環式基準選取的區域中。若要在多區域叢集的所有區域中佈建持續性儲存空間，請重複這些步驟，為每一個區域佈建動態儲存空間。例如，如果您的叢集跨越區域 `dal10`、`dal12` 及 `dal13`，則第一次動態佈建持續性儲存空間，可能會在 `dal10` 中佈建儲存空間。請額外建立兩個 PVC 來涵蓋 `dal12` 及 `dal13`。</br></br><strong>如果我要跨區域共用資料，該怎麼辦？</strong></br>如果您要跨區域共用資料，請使用雲端資料庫服務，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。</td>
-  </tr>
-  <tr id="cloud-db-service">
-    <td>2. Cloud 資料庫服務</td>
-    <td>使用此選項，您可以利用 {{site.data.keyword.Bluemix_notm}} 資料庫服務（例如 [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant)）來持續保存資料。</br></br><strong>我可以對多區域叢集使用雲端資料庫服務嗎？</strong></br>使用雲端資料庫服務時，資料會儲存在叢集以外的所指定服務實例中。服務實例會佈建至某一個區域。不過，每個服務實例都有一個外部介面，您可以用來存取資料。對多區域叢集使用資料庫服務時，您可以跨叢集、區域及地區來共用資料。若要讓您的服務實例更具可用性，您可以選擇跨區域設定多個實例，並在實例之間進行抄寫，以取得更高的可用性。</br></br><strong>如何將雲端資料庫服務新增至我的叢集？</strong></br>若要在您的叢集裡使用服務，您必須[將 {{site.data.keyword.Bluemix_notm}} 服務連結](cs_integrations.html#adding_app)至叢集裡的名稱空間。將服務連結至叢集時，即會建立 Kubernetes 密碼。Kubernetes 密碼會保留服務的機密資訊（例如服務的 URL、使用者名稱及密碼）。您可以將密碼以密碼磁區形式裝載至 Pod，並使用密碼中的認證來存取服務。透過將密碼磁區裝載至其他 Pod，您也可以在 Pod 之間共用資料。容器損毀或從工作者節點移除 Pod 時不會移除資料，您仍然可以透過裝載密碼磁區的其他 Pod 進行存取。</br></br>大部分 {{site.data.keyword.Bluemix_notm}} 資料庫服務會免費提供少量資料的磁碟空間，讓您可以測試其特性。</p></td>
-  </tr>
-  <tr>
-    <td>3. 內部部署資料庫</td>
-    <td>如果因為法律原因而必須現場儲存資料，您可以對內部部署資料庫[設定 VPN 連線](cs_vpn.html#vpn)，並在資料中心使用現有的儲存空間、備份及抄寫機制。</td>
-  </tr>
-  </tbody>
-  </table>
-
-{: caption="表.Kubernetes 叢集裡部署的持續性資料儲存空間選項" caption-side="top"}
+<table>
+<thead>
+<th style="text-align:left">特徵</th>
+<th style="text-align:left">檔案</th>
+<th style="text-align:left">區塊 (Block)</th>
+<th style="text-align:left">物件</th>
+<th style="text-align:left">DBaaS</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">具多區域功能</td>
+<td style="text-align:left">否，資料中心特有的。除非您實作自己的資料抄寫，否則無法跨區域共用資料。</td>
+<td style="text-align:left">否，資料中心特有的。除非您實作自己的資料抄寫，否則無法跨區域共用資料。</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">理想資料類型</td>
+<td style="text-align:left">全部</td>
+<td style="text-align:left">全部</td>
+<td style="text-align:left">半結構化及非結構化資料</td>
+<td style="text-align:left">與 DBaaS 相依</ul></td>
+</tr>
+<tr>
+<td style="text-align:left">資料使用型樣</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">隨機讀寫作業</li><li style="margin:0px; padding:0px">循序讀寫作業</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">隨機讀寫作業</li><li style="margin:0px; padding:0px">寫入密集工作負載</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">讀取密集工作負載</li><li style="margin:0px; padding:0px">少數或沒有寫入作業</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">讀寫密集工作負載</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">存取</td>
+<td style="text-align:left">透過裝載磁區上的檔案系統</td>
+<td style="text-align:left">透過裝載磁區上的檔案系統</td>
+<td style="text-align:left">透過裝載磁區上的檔案系統（外掛程式）或透過應用程式中的 REST API</td>
+<td style="text-align:left">透過應用程式中的 REST API</td>
+</tr>
+<tr>
+<td style="text-align:left">支援的 Kubernetes 存取寫入</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">直接從應用程式存取時為 N/A</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">效能</td>
+<td style="text-align:left">由於已指派的 IOPS 及大小而可預測。在存取磁區的 Pod 之間共用 IOPS。</td>
+<td style="text-align:left">由於已指派的 IOPS 及大小而可預測。在 Pod 之間不共用 IOPS。</td>
+<td style="text-align:left">針對讀取作業為高，而且延遲在從本端快取讀取時低於「區塊」。針對寫入作業為不可預測。</td>
+<td style="text-align:left">如果已部署到與應用程式相同的資料中心，則為高。</td>
+</tr>
+<tr>
+<td style="text-align:left">一致性</td>
+<td style="text-align:left">強大</td>
+<td style="text-align:left">強大</td>
+<td style="text-align:left">最終</td>
+<td style="text-align:left">與 DBaaS 相依</td>
+</tr>
+<tr>
+<td style="text-align:left">延續性</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left">備援</td>
+<td style="text-align:left">中，資料中心特有的。IBM 利用備援網路來叢集處理檔案儲存空間伺服器。</td>
+<td style="text-align:left">中，資料中心特有的。IBM 利用備援網路來叢集處理區塊儲存空間伺服器。</td>
+<td style="text-align:left">高，資料儲存在至少 3 個副本，並分散到一個地區或多個地區。</td>
+<td style="text-align:left">與 DBaaS 及您的設定相依。</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">中，資料中心特有的。</td>
+<td style="text-align:left">中，資料中心特有的。</td>
+<td style="text-align:left">基於分配到區域或地區而為高。</td>
+<td style="text-align:left">如果您設定多個實例，則為高。</td>
+</tr>
+<tr>
+<td style="text-align:left">可調整性</td>
+<td style="text-align:left">很難擴充到資料中心外部。您無法變更現有的儲存空間層級。</td>
+<td style="text-align:left">很難擴充到資料中心外部。您無法變更現有的儲存空間層級。</td>
+<td style="text-align:left">容易擴充。</td>
+<td style="text-align:left">容易擴充。</td>
+</tr>
+<tr>
+<td style="text-align:left">加密</td>
+<td style="text-align:left">靜止</td>
+<td style="text-align:left">靜止</td>
+<td style="text-align:left">靜止</td>
+<td style="text-align:left">靜止</td>
+</tr>
+<tr>
+<td style="text-align:left">常見使用案例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">大量或單一檔案儲存空間</li><li style="margin:0px; padding:0px">跨單一區域叢集的檔案共用</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">有狀態的集</li><li style="margin:0px; padding:0px">當您執行自己的資料庫時的後端儲存空間</li><li style="margin:0px; padding:0px">單一 Pod 的高效能存取</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多區域叢集</li><li style="margin:0px; padding:0px">地理分散式資料</li><li style="margin:0px; padding:0px">靜態海量資料</li><li style="margin:0px; padding:0px">靜態多媒體內容</li><li style="margin:0px; padding:0px">Web 應用程式</li><li style="margin:0px; padding:0px">備份</li><li style="margin:0px; padding:0px">保存檔</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多區域叢集</li><li style="margin:0px; padding:0px">關聯式及非關聯式資料庫</li><li style="margin:0px; padding:0px">地理分散式資料</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">非理想使用案例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多區域叢集</li><li style="margin:0px; padding:0px">地理分散式資料</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多區域叢集</li><li style="margin:0px; padding:0px">地理分散式資料</li><li style="margin:0px; padding:0px">跨多個應用程式實例共用資料</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">寫入密集工作負載</li><li style="margin:0px; padding:0px">隨機寫入作業</li><li style="margin:0px; padding:0px">漸進式資料更新</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">設計用來寫入檔案系統的應用程式</li></ul></td>
+</tr>
+</tbody>
+</table>

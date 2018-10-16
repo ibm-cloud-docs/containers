@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,57 +24,6 @@ lastupdated: "2018-08-06"
 掌握 {{site.data.keyword.containerlong}} 中發生的情況。瞭解要探索的新特性、要試用的訣竅，或其他開發人員目前發現很有用的一些熱門主題。
 {:shortdesc}
 
-## 2018 年 7 月的熱門主題
-{: #july18}
-
-<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
-<caption>2018 年 7 月關於容器及 Kubernetes 叢集的熱門主題</caption>
-<thead>
-<th>日期</th>
-<th>標題</th>
-<th>說明</th>
-</thead>
-<tbody>
-<tr>
-<td>7 月 30 日</td>
-<td>[自行準備 Ingress 控制器](cs_ingress.html#user_managed)</td>
-<td>您的叢集 Ingress 控制器有極特別的安全或其他自訂需求嗎？如果是，您可能要執行自己的 Ingress 控制器，而非預設值。</td>
-</tr>
-<tr>
-<td>7 月 10 日</td>
-<td>多區域叢集簡介</td>
-<td>要改善叢集可用性嗎？現在，您可以跨越精選都會區域中跨多個區域的叢集。如需相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中建立多區域叢集](cs_clusters.html#multizone)。</td>
-</tr>
-</tbody></table>
-
-## 2018 年 6 月的熱門主題
-{: #june18}
-
-<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
-<caption>2018 年 6 月關於容器及 Kubernetes 叢集的熱門主題</caption>
-<thead>
-<th>日期</th>
-<th>標題</th>
-<th>說明</th>
-</thead>
-<tbody>
-<tr>
-<td>6 月 13 日</td>
-<td>`bx` CLI 指令名稱會變更為 `ic` CLI</td>
-<td>下載最新版本的 {{site.data.keyword.Bluemix_notm}} CLI 後，您現在即可使用 `ic` 字首來執行指令，而非 `bx`。例如，執行 `ibmcloud ks clusters` 來列出叢集。</td>
-</tr>
-<tr>
-<td>6 月 12 日</td>
-<td>[Pod 安全原則](cs_psp.html)</td>
-<td>對於執行 Kubernetes 1.10.3 或更新版本的叢集，您可以配置 Pod 安全原則來授權誰可以在 {{site.data.keyword.containerlong_notm}} 中建立及更新 Pod。</td>
-</tr>
-<tr>
-<td>6 月 6 日</td>
-<td>[IBM 提供的 Ingress 萬用字元子網域的 TLS 支援](cs_ingress.html#wildcard_tls)</td>
-<td>對於在 2018 年 6 月 6 日或之後建立的叢集，IBM 提供的 Ingress 子網域 TLS 憑證現在是萬用字元憑證，可用於已登錄的萬用字元子網域。對於在 2018 年 6 月 6 日之前建立的叢集，更新現行 TLS 憑證時，會將 TLS 憑證更新為萬用字元憑證。</td>
-</tr>
-</tbody></table>
-
 ## 2018 年 5 月的熱門主題
 {: #may18}
 
@@ -95,7 +44,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>5 月 14 日</td>
 <td>[更新：在全球 GPU 裸機上部署工作負載](cs_app.html#gpu_app)</td>
-<td>如果您的叢集裡有[裸機圖形處理裝置 (GPU) 機型](cs_clusters.html#shared_dedicated_node)，則可以排定數學運算密集的應用程式。GPU 工作者節點可以同時跨 CPU 及 GPU 處理應用程式的工作負載，以增進效能。</td>
+<td>如果您的叢集中有[裸機圖形處理裝置 (GPU) 機型](cs_clusters.html#shared_dedicated_node)，則可以排定數學運算密集的應用程式。GPU 工作者節點可以同時跨 CPU 及 GPU 處理應用程式的工作負載，以增進效能。</td>
 </tr>
 <tr>
 <td>5 月 3 日</td>
@@ -126,12 +75,12 @@ lastupdated: "2018-08-06"
 <tr>
 <td>4 月 17 日</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>安裝 {{site.data.keyword.Bluemix_notm}} Block Storage [外掛程式](cs_storage_block.html#install_block)，以在區塊儲存空間中儲存持續資料。然後，您可以針對叢集[建立新的](cs_storage_block.html#add_block)或[使用現有的](cs_storage_block.html#existing_block)區塊儲存空間。</td>
+<td>安裝 {{site.data.keyword.Bluemix_notm}} Block Storage [外掛程式](cs_storage.html#install_block)，以在區塊儲存空間中儲存持續資料。然後，您可以針對叢集[建立新的](cs_storage.html#create)或[使用現有的](cs_storage.html#existing_block)區塊儲存空間。</td>
 </tr>
 <tr>
 <td>4 月 13 日</td>
 <td>[將 Cloud Foundry 應用程式移轉至叢集的新指導教學](cs_tutorials_cf.html#cf_tutorial)</td>
-<td>您有 Cloud Foundry 應用程式嗎？學習如何將該應用程式中的相同程式碼部署至 Kubernetes 叢集裡執行的容器。</td>
+<td>您有 Cloud Foundry 應用程式嗎？學習如何將該應用程式中的相同程式碼部署至 Kubernetes 叢集中執行的容器。</td>
 </tr>
 <tr>
 <td>4 月 5 日</td>
@@ -163,13 +112,13 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>3 月 13 日</td>
-<td>[聖保羅現在為可用區域](cs_regions.html)</td>
-<td>巴西聖保羅已成為美國南部地區的新區域。如果您有防火牆，務必針對此區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+<td>[聖保羅現在為可用位置](cs_regions.html)</td>
+<td>巴西聖保羅已成為美國南部地區的新位置。如果您有防火牆，務必針對此位置以及您叢集所在地區內的其他位置[開啟防火牆埠](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>3 月 12 日</td>
 <td>[要使用「試用」帳戶加入 {{site.data.keyword.Bluemix_notm}} 嗎？歡迎試用免費的 Kubernetes 叢集！](container_index.html#clusters)</td>
-<td>使用「試用」[{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)，您可以部署一個免費使用 30 天的叢集，來測試 Kubernetes 功能。</td>
+<td>使用「試用」[{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)，您可以部署一個免費使用 21 天的叢集，來測試 Kubernetes 功能。</td>
 </tr>
 </tbody></table>
 
@@ -187,17 +136,17 @@ lastupdated: "2018-08-06"
 <tr>
 <td>2 月 27 日</td>
 <td>工作者節點的硬體虛擬機器 (HVM) 映像檔</td>
-<td>增加 HVM 映像檔工作負載的 I/O 效能。使用 `ibmcloud ks worker-reload` [指令](cs_cli_reference.html#cs_worker_reload)或 `ibmcloud ks worker-update` [指令](cs_cli_reference.html#cs_worker_update)，在每個現有的工作者節點上啟動。</td>
+<td>增加 HVM 映像檔工作負載的 I/O 效能。使用 `bx cs worker-reload` [指令](cs_cli_reference.html#cs_worker_reload)或 `bx cs worker-update` [指令](cs_cli_reference.html#cs_worker_update)，在每一個現有的工作者節點上啟動。</td>
 </tr>
 <tr>
 <td>2 月 26 日</td>
-<td>[KubeDNS 自動調整](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
-<td>KubeDNS 現在會隨著叢集成長而調整。您可以使用下列指令來調整其調整量：`kubectl -n kube-system edit cm kube-dns-autoscaler`。</td>
+<td>[KubeDNS 自動擴充](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
+<td>KubeDNS 現在會隨著叢集成長而擴充。您可以使用下列指令來調整擴充量：`kubectl -n kube-system edit cm kube-dns-autoscaler`。</td>
 </tr>
 <tr>
 <td>2 月 23 日</td>
 <td>檢視 Web 使用者介面中的[記載](cs_health.html#view_logs)及[度量值](cs_health.html#view_metrics)</td>
-<td>使用改良的 Web 使用者介面，輕鬆檢視叢集和其元件的日誌及度量值資料。請參閱叢集詳細資料頁面來進行存取。</td>
+<td>使用改良的 Web 使用者介面，輕鬆檢視叢集及其元件的日誌及度量值資料。請參閱叢集詳細資料頁面來進行存取。</td>
 </tr>
 <tr>
 <td>2 月 20 日</td>
@@ -211,8 +160,8 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>2 月 14 日</td>
-<td>[首爾現在為可用區域](cs_regions.html)</td>
-<td>剛好來得及趕上奧林匹克運動會，將 Kubernetes 叢集部署至位於亞太地區北部的首爾。如果您有防火牆，務必針對此區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+<td>[首爾現在為可用位置](cs_regions.html)</td>
+<td>剛好來得及趕上奧林匹克運動會，將 Kubernetes 叢集部署至位於亞太地區北部的首爾。如果您有防火牆，務必針對此位置以及您叢集所在地區內的其他位置[開啟防火牆埠](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>2 月 8 日</td>
@@ -238,8 +187,8 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>1 月 23 日</td>
-<td>[新加坡及加拿大蒙特婁現在為可用區域](cs_regions.html)</td>
-<td>新加坡及蒙特婁是位於 {{site.data.keyword.containershort_notm}} 亞太地區北部及美國東部地區的可用區域。如果您有防火牆，務必針對這些區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+<td>[新加坡及加拿大蒙特婁現在為可用位置](cs_regions.html)</td>
+<td>新加坡及蒙特婁是位於 {{site.data.keyword.containershort_notm}} 亞太地區北部及美國東部地區的可用位置。如果您有防火牆，務必針對這些位置以及您叢集所在地區內的其他位置[開啟防火牆埠](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>

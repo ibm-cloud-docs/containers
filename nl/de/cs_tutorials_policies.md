@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -30,7 +30,7 @@ In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR
 
 - Erlernen Sie, wie der gesamte, zu allen NodePorts eingehende Datenverkehr durch Erstellen einer höchstwertigen Pre-DNAT-Richtlinie blockiert wird.
 - Erlernen Sie, wie sie auf eine Whitelist gesetzten Quellen-IP-Adressen den Zugriff auf die öffentliche LoadBalancer-IP und den Port ermöglichen, indem Sie eine niederwertige Pre-DNAT-Richtlinie erstellen. Niederwertigere Richtlinien setzen höherwertigere Richtlinien außer Kraft.
-- Erlernen Sie, wie sie für auf eine Blacklist gesetzte Quellen-IP-Adressen den Zugriff auf die öffentliche LoadBalancer-IP und den Port blockieren, indem Sie eine niederwertige Pre-DNAT-Richtlinie erstellen. 
+- Erlernen Sie, wie sie für auf eine Blacklist gesetzte Quellen-IP-Adressen den Zugriff auf die öffentliche LoadBalancer-IP und den Port blockieren, indem Sie eine niederwertige Pre-DNAT-Richtlinie erstellen.
 
 ## Erforderlicher Zeitaufwand
 1 Stunde
@@ -43,6 +43,7 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 - [Erstellen Sie einen Cluster der Version 1.10](cs_clusters.html#clusters_ui) oder [aktualisieren Sie einen vorhandenen Cluster auf Version 1.10](cs_versions.html#cs_v110). Ein Cluster mit Kubernetes Version 1.10 oder höher muss in diesem Lernprogramm die Calico-CLI der Version 3.1.1 und die Syntax für Calico Version 3-Richtlinien verwenden.
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
 - [Installieren und konfigurieren Sie die Calico-CLI](cs_network_policy.html#1.10_install).
+- [Stellen Sie sicher, dass Sie die Plattformrolle **Bearbeiter**, **Operator** oder **Administrator** haben](cs_users.html#add_users_cli).
 
 <br />
 
@@ -59,21 +60,15 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Am Ende von Lerneinheit 1 wird die Web-Server-App über den öffentlichen Knotenport und die öffentliche Lastausgleichsfunktion im Internet zugänglich gemacht." style="width:450px; border-style: none"/>
 
-1. Erstellen Sie einen Testnamensbereich mit dem Namen `pr-firm`, der während des Lernprogramms verwendet werden soll.
+1. Stellen Sie die Web-Server-Beispielapp bereit. Wenn eine Verbindung zur Web-Server-App hergestellt ist, antwortet die App mit den HTTP-Headern, die sie in der Verbindung empfangen hat.
 ```
-    kubectl create ns pr-firm
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-2. Stellen Sie die Web-Server-Beispielapp bereit. Wenn eine Verbindung zur Web-Server-App hergestellt ist, antwortet die App mit den HTTP-Headern, die sie in der Verbindung empfangen hat.
-```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+2. Stellen Sie sicher, dass der **STATUS** der Web-Server-App-Pods 'Aktiv' (`Running`) lautet.
     ```
-    {: pre}
-
-3. Stellen Sie sicher, dass der **STATUS** der Web-Server-App-Pods 'Aktiv' (`Running`) lautet.
-```
-    kubectl get pods -n pr-firm -o wide
+    kubectl get pods -o wide
     ```
     {: pre}
 
@@ -86,8 +81,8 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
     ```
     {: screen}
 
-4. Um die App im öffentlichen Internet zugänglich zu machen, erstellen Sie für den LoadBalancer-Service in einem Texteditor eine Konfigurationsdatei mit dem Namen `webserver.yaml`.
-```
+3. Um die App im öffentlichen Internet zugänglich zu machen, erstellen Sie für den LoadBalancer-Service in einem Texteditor eine Konfigurationsdatei mit dem Namen `webserver.yaml`.
+    ```
     apiVersion: v1
     kind: Service
     metadata:
@@ -108,17 +103,17 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
     ```
     {: codeblock}
 
-5. Stellen Sie die Lastausgleichsfunktion bereit.
-```
-    kubectl apply -f filepath/webserver.yaml
+4. Stellen Sie die Lastausgleichsfunktion bereit.
+    ```
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. Überprüfen Sie, dass Sie von Ihrem Computer aus öffentlich auf die App zugreifen können, die von der Lastausgleichsfunktion zugänglich gemacht wurde.
+5. Überprüfen Sie, dass Sie von Ihrem Computer aus öffentlich auf die App zugreifen können, die von der Lastausgleichsfunktion zugänglich gemacht wurde.
 
     1. Rufen Sie die öffentliche externe IP-Adresse (**EXTERNAL-IP**) der Lastausgleichsfunktion ab.
-```
-        kubectl get svc -n pr-firm -o wide
+        ```
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -132,13 +127,13 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
     2. Erstellen Sie eine Textdatei mit Spickzettel und kopieren Sie die IP der Lastausgleichsfunktion in die Textdatei. Mithilfe des Spickzettels können Sie in späteren Lerneinheiten Werte schneller verwenden.
 
     3. Überprüfen Sie, dass Sie öffentlich auf die externe IP der Lastausgleichsfunktion zugreifen können.
-```
+        ```
         curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
         ```
         {: pre}
 
         In der folgenden Beispielausgabe wird bestätigt, dass die Lastausgleichsfunktion Ihre App an der öffentlichen IP-Adresse `169.1.1.1` der Lastausgleichsfunktion zugänglich macht. Der App-Pod `webserver-855556f688-76rkp` hat die curl-Anforderung empfangen:
-```
+        ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
             -no pod information available-
@@ -164,8 +159,8 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
 6. Überprüfen Sie, dass Sie von Ihrem Computer aus öffentlich auf die App zugreifen können, die vom Knotenport zugänglich gemacht wurde. Ein LoadBalancer-Service macht Ihre App sowohl über die IP-Adresse des LoadBalancer-Service als auch über die Knotenports (NodePorts) der Workerknoten zugänglich.
 
     1. Rufen Sie den Knotenport ab, der von der Lastausgleichsfunktion den Workerknoten zugeordnet wurde. Der Knotenport befindet sich im Bereich 30000 - 32767.
-```
-        kubectl get svc -n pr-firm -o wide
+        ```
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -177,7 +172,7 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
         {: screen}  
 
     2. Rufen Sie die **Öffentliche IP** eines Workerknotens ab.
-```
+        ```
         ibmcloud ks workers <clustername>
         ```
         {: pre}
@@ -185,22 +180,22 @@ Die folgende Abbildung zeigt, wie die Web-Server-App am Ende von Lerneinheit 1 �
         Beispielausgabe:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
         ```
         {: screen}
 
     3. Kopieren Sie die öffentliche IP des Workerknotens und den Knotenport in Ihren Text-Spickzettel, um sie in späteren Lerneinheiten zu verwenden.
 
     4. Überprüfen Sie, dass Sie über den Knotenport auf die öffentliche IP-Adresse des Workerknotens zugreifen können.
-```
+        ```
         curl  --connect-timeout 10 <worker-ip>:<knotenport>
         ```
         {: pre}
 
         In der folgenden Beispielausgabe wird bestätigt, dass die Anforderung an Ihre App über die private IP-Adresse `10.1.1.1` des Workerknotens und über den Knotenport `31024` einging. Der App-Pod `webserver-855556f688-xd849` hat die curl-Anforderung empfangen:
-```
+        ```
         Hostname: webserver-855556f688-xd849
         Pod Information:
             -no pod information available-
@@ -235,7 +230,7 @@ Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowo
 <img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="Am Ende von Lerneinheit 2 wird die Web-Server-App im Internet nur über die öffentliche Lastausgleichsfunktion zugänglich gemacht." style="width:450px; border-style: none"/>
 
 1. Erstellen Sie in einem Texteditor eine höherwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-nodeports.yaml`, um eingehenden TCP- und UDP-Datenverkehr zurückzuweisen, der von beliebigen Quellen-IPs an alle Knotenports fließt.
-```
+    ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -284,27 +279,27 @@ Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowo
   {: screen}
 
 3. Stellen Sie anhand der Werte aus Ihrem Spickzettel sicher, dass Sie nicht auf die öffentliche IP-Adresse und den Knotenport des Workerknotens zugreifen können.
-```
+    ```
     curl  --connect-timeout 10 <worker-ip>:<knotenport>
     ```
     {: pre}
 
     Die Verbindung überschreitet das Zeitlimit, da die von Ihnen erstellte Calico-Richtlinie Datenverkehr zu den Knotenports blockiert.
-```
+    ```
     curl: (28) Connection timed out after 10016 milliseconds
     ```
     {: screen}
 
 4. Ändern Sie die Richtlinie für externen Datenverkehr (externalTrafficPolicy) der Lastausgleichsfunktion, die Sie in der vorherigen Lerneinheit erstellt haben, von `Cluster` in `Local`. Mit `Local` wird sichergestellt, dass die Quellen-IP Ihres Systems beibehalten wird, wenn Sie für die externe IP-Adresse der Lastausgleichsfunktion im nächsten Schritt den curl-Befehl ausführen.
-```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
 5. Prüfen Sie mithilfe des Werts aus Ihrem Spickzettel, ob Sie weiterhin öffentlich auf die externe IP-Adresse der Lastausgleichsfunktion zugreifen können.
-```
-        curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
-        ```
+    ```
+    curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
+    ```
     {: pre}
 
     Beispielausgabe:
@@ -330,7 +325,7 @@ Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowo
         -no body in request-
     ```
     {: screen}
-Beachten Sie im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe, dass die Quellen-IP-Adresse z. B. `client_address=1.1.1.1` lautet. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen sieht die Lastausgleichsfunktion die Quellen-IP-Adresse Ihres Systems als IP-Adresse des Clients an.
+    Beachten Sie im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe, dass die Quellen-IP-Adresse z. B. `client_address=1.1.1.1` lautet. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen sieht die Lastausgleichsfunktion die Quellen-IP-Adresse Ihres Systems als IP-Adresse des Clients an.
 
 6. Kopieren Sie die Quellen-IP-Adresse Ihres Systems (`client_address=1.1.1.1` in der Ausgabe des vorherigen Schritts) in Ihren Spickzettel, um sie in späteren Lerneinheiten zu verwenden.
 
@@ -341,7 +336,7 @@ Als Nächstes können Sie Calico-Richtlinien erstellen und anwenden, um Datenver
 ## Lerneinheit 3: Eingehenden Datenverkehr von einer Whitelist-IP an die Lastausgleichsfunktion zulassen
 {: #lesson3}
 
-Sie entscheiden sich nun, den Datenverkehr an den Cluster der PR-Firma vollständig zu sperren und den Zugriff zu testen, indem Sie die IP-Adresse Ihres eigenen Computers in der Whitelist aufführen.
+Sie entscheiden sich nun, den Datenverkehr an den Cluster der PR-Firma vollständig zu sperren und den Zugriff zu testen, indem Sie nur die IP-Adresse Ihres eigenen Computers in der Whitelist aufführen.
 {: shortdesc}
 
 Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenverkehr an die Lastausgleichsfunktion, die die App zugänglich macht, blockieren. Anschließend können Sie eine Richtlinie erstellen, mit der die IP-Adresse Ihres Systems auf die Whitelist gesetzt wird. Am Ende von Lerneinheit 3 wird der gesamte Datenverkehr an die öffentlichen Knotenports und an die Lastausgleichsfunktion blockiert und nur der Datenverkehr von Ihrer in der Whitelist aufgeführten IP-Adresse ist zulässig:
@@ -396,13 +391,13 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
       {: pre}
 
 3. Überprüfen Sie mithilfe des Werts aus Ihrem Spickzettel, dass Sie nun nicht auf die öffentliche IP-Adresse der Lastausgleichsfunktion zugreifen können. Die Verbindung überschreitet das Zeitlimit, da die von Ihnen erstellte Calico-Richtlinie den Datenverkehr an die Lastausgleichsfunktion blockiert.
-```
-        curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
-        ```
+    ```
+    curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
+    ```
     {: pre}
 
-4. Erstellen Sie in einem Texteditor eine niedrigstwertige Richtlinie des Typs Pre-DNAT mit dem Namen `whitelist.yaml`, um Datenverkehr von der IP Ihres Systems an die IP-Adresse und den Port der Lastausgleichsfunktion zuzulassen. Ersetzen Sie mithilfe der Werte aus Ihrem Spickzettel `<loadbalancer_IP>` durch die öffentliche IP-Adresse der Lastausgleichsfunktion und `<client_address>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
-```
+4. Erstellen Sie in einem Texteditor eine niederwertige Richtlinie des Typs Pre-DNAT mit dem Namen `whitelist.yaml`, um Datenverkehr von der IP Ihres Systems an die IP-Adresse und den Port der Lastausgleichsfunktion zuzulassen. Ersetzen Sie mithilfe der Werte aus Ihrem Spickzettel `<loadbalancer_IP>` durch die öffentliche IP-Adresse der Lastausgleichsfunktion und `<client_address>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
+    ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -442,20 +437,20 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
       calicoctl apply -f filepath/whitelist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-Die IP-Adresse Ihres Systems wird jetzt in der Whitelist aufgeführt.
+  Die IP-Adresse Ihres Systems wird jetzt in der Whitelist aufgeführt.
 
 6. Überprüfen Sie mithilfe des Werts aus Ihrem Spickzettel, dass Sie nun auf die öffentliche IP-Adresse der Lastausgleichsfunktion zugreifen können.
-```
-        curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
-        ```
+    ```
+    curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
+    ```
     {: pre}
 
 7. Wenn Sie Zugriff auf ein anderes System haben, das eine andere IP-Adresse hat, können Sie versuchen, von diesem System aus auf die Lastausgleichsfunktion zuzugreifen.
-```
-        curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
-        ```
+    ```
+    curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
+    ```
     {: pre}
-Die Verbindung überschreitet das Zeitlimit, weil die IP-Adresse des betreffenden Systems nicht in der Whitelist aufgeführt ist.
+    Die Verbindung überschreitet das Zeitlimit, weil die IP-Adresse des betreffenden Systems nicht in der Whitelist aufgeführt ist.
 
 Zu diesem Zeitpunkt ist der gesamte Datenverkehr an die öffentlichen Knotenports und die Lastausgleichsfunktion blockiert. Es ist nur Datenverkehr von der IP-Adresse Ihres Systems zulässig, die in der Whitelist aufgeführt ist.
 
@@ -468,18 +463,30 @@ In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den D
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="Die Web-Server-App wird durch die öffentliche Lastausgleichsfunktion im Internet zugänglich gemacht. Nur der Datenverkehr von Ihrer System-IP ist blockiert." style="width:600px; border-style: none"/>
 
 1. Bereinigen Sie die Whitelist-Richtlinien, die Sie in der vorherigen Lerneinheit erstellt haben.
-```
-    calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
-    {: pre}
-    ```
-    calicoctl delete GlobalNetworkPolicy whitelist
-    ```
-    {: pre}
-Nun ist der gesamte eingehende TCP- und UDP-Datenverkehr von beliebigen Quellen-IPs an die IP-Adresse der Lastausgleichsfunktion und an den Port erneut zugelassen.
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist
+      ```
+      {: pre}
+
+    - Windows und OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
+    Nun ist der gesamte eingehende TCP- und UDP-Datenverkehr von beliebigen Quellen-IPs an die IP-Adresse der Lastausgleichsfunktion und an den Port erneut zugelassen.
 
 2. Wenn Sie den gesamten TCP- und UDP-Datenverkehr von der Quellen-IP-Adresse Ihres Systems an die IP-Adresse und den Port der Lastausgleichsfunktion zurückweisen möchten, erstellen Sie in einem Texteditor eine niedrigwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-lb-port-80.yaml`. Ersetzen Sie mithilfe der Werte aus Ihrem Spickzettel `<loadbalancer_IP>` durch die öffentliche IP-Adresse der Lastausgleichsfunktion und `<client_address>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
-```
+    ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -529,20 +536,28 @@ Nun ist der gesamte eingehende TCP- und UDP-Datenverkehr von beliebigen Quellen-
       calicoctl apply -f filepath/blacklist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-Die IP-Adresse Ihres Systems ist jetzt in der Blacklist aufgeführt.
+  Die IP-Adresse Ihres Systems ist jetzt in der Blacklist aufgeführt.
 
 4. Überprüfen Sie mithilfe des Werts aus Ihrem Spickzettel und ausgehend von Ihrem System, dass Sie nicht auf die IP der Lastausgleichsfunktion zugreifen können, weil die IP Ihres Systems in der Blacklist aufgeführt ist.
-```
-        curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
-        ```
-    {: pre}
-Zu diesem Zeitpunkt ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche Lastausgleichsfunktion ist zugelassen. Nur der Datenverkehr von Ihrer in der Blacklist aufgeführten System-IP zur Lastausgleichsfunktion ist blockiert.
-
-5. Gehen Sie wie folgt vor, um diese Blacklist-Richtlinie zu bereinigen:
-```
-    calicoctl delete GlobalNetworkPolicy blacklist
+    ```
+    curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
     ```
     {: pre}
+    Zu diesem Zeitpunkt ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche Lastausgleichsfunktion ist zugelassen. Nur der Datenverkehr von Ihrer in der Blacklist aufgeführten System-IP zur Lastausgleichsfunktion ist blockiert.
+
+5. Gehen Sie wie folgt vor, um diese Blacklist-Richtlinie zu bereinigen:
+
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist
+      ```
+      {: pre}
+
+    - Windows und OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 Ganz hervorragend! Sie haben erfolgreich den in Ihre App eingehenden Datenverkehr gesteuert, indem Sie Calico-Richtlinien des Typs Pre-DNAT verwendet haben, um Quellen-IPs in einer Whitelist oder in einer Blacklist aufzuführen.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,13 +29,13 @@ lastupdated: "2018-08-06"
 
 通过 `PodSecurityPolicy` 许可控制器，在[授权策略](#customize_psp)之后，才能创建 pod。设置 pod 安全策略可能会产生意外的副作用，因此请确保在更改策略后测试部署。要部署应用程序，用户和服务帐户必须全部由部署 pod 所需的 pod 安全策略授权。例如，如果是使用 [Helm](cs_integrations.html#helm_links) 安装的应用程序，那么 Helm Tiller 组件会创建 pod，因此您必须具有正确的 pod 安全策略授权。
 
-要尝试控制有权访问 {{site.data.keyword.containershort_notm}} 的用户？请参阅[分配集群访问权](cs_users.html#users)以设置 IAM 和基础架构许可权。
+要尝试控制有权访问 {{site.data.keyword.containerlong_notm}} 的用户？请参阅[分配集群访问权](cs_users.html#users)以设置 IAM 和基础架构许可权。
 {: tip}
 
 **缺省情况下设置了任何策略吗？我可以添加哪些策略？**</br>
-缺省情况下，{{site.data.keyword.containershort_notm}} 将 `PodSecurityPolicy` 许可控制器配置为使用[用于 {{site.data.keyword.IBM_notm}} 集群管理的资源](#ibm_psp)，您无法删除也无法修改这些资源。您也无法禁用该许可控制器。 
+缺省情况下，{{site.data.keyword.containerlong_notm}} 将 `PodSecurityPolicy` 许可控制器配置为使用[用于 {{site.data.keyword.IBM_notm}} 集群管理的资源](#ibm_psp)，您无法删除也无法修改这些资源。您也无法禁用该许可控制器。 
 
-缺省情况下，pod 操作不会锁定。取而代之的是，集群中有两个基于角色的访问控制 (RBAC) 资源，用于授权所有管理员、用户、服务和节点创建有特权 pod 和无特权 pod。如果要阻止特定用户创建或更新 pod，可以[修改这些 RBAC 资源或创建自己的资源](#customize_psp)。
+缺省情况下，pod 操作不会锁定。取而代之的是，集群中有两个基于角色的访问控制 (RBAC) 资源，用于授权所有管理员、用户、服务和节点创建有特权 pod 和无特权 pod。如果要阻止特定用户创建或更新 pod，可以[修改这些 RBAC 资源或创建您自己的资源](#customize_psp)。
 
 **策略授权是如何运作的？**</br>
 您以用户身份直接创建 pod，而不是使用控制器（如部署）创建 pod 时，系统会根据您有权使用的 pod 安全策略来验证您的凭证。如果没有策略支持 pod 安全需求，那么不会创建 pod。
@@ -118,7 +118,7 @@ lastupdated: "2018-08-06"
     
     *   **服务帐户**：您可能希望授权服务帐户，以便部署只能在特定名称空间中执行。例如，如果策略的作用域限定为允许在 `kube-system` 名称空间内执行操作，那么可能会执行许多重要操作，例如集群更新。但是，不会再对其他名称空间中的操作进行授权。 
     
-        要将策略的作用域限定为允许在特定名称空间中执行操作，请将 `system:serviceaccounts` 更改为 `system:serviceaccount:<namespace>`。
+        要将策略的作用域限定为允许在特定名称空间中执行操作，请将 `system:serviceaccounts` 更改为 `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
@@ -169,15 +169,15 @@ lastupdated: "2018-08-06"
     {: pre}
 
 </br>
-**创建自己的 pod 安全策略**：</br>
-要创建自己的 pod 安全策略资源并通过 RBAC 授权用户，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)。 
+**创建您自己的 pod 安全策略**：</br>
+要创建您自己的 pod 安全策略资源并通过 RBAC 授权用户，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)。 
 
 确保已修改现有策略，以便您创建的新策略不会与现有策略相冲突。例如，现有策略允许用户创建和更新有特权 pod。如果创建的策略不允许用户创建或更新有特权 pod，那么现有策略与新策略之间的冲突可能会导致意外结果。
 
 ## 了解用于 {{site.data.keyword.IBM_notm}} 集群管理的缺省资源
 {: #ibm_psp}
 
-{{site.data.keyword.containershort_notm}} 中的 Kubernetes 集群包含以下 pod 安全策略和相关的 RBAC 资源，以允许 {{site.data.keyword.IBM_notm}} 正确管理集群。
+{{site.data.keyword.containerlong_notm}} 中的 Kubernetes 集群包含以下 pod 安全策略和相关的 RBAC 资源，以允许 {{site.data.keyword.IBM_notm}} 正确管理集群。
 {: shortdesc}
 
 缺省 `privileged-psp-user` 和 `restricted-psp-user` RBAC 资源指的是 {{site.data.keyword.IBM_notm}} 设置的 pod 安全策略。 

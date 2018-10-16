@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,19 +24,19 @@ lastupdated: "2018-08-06"
 Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls {{site.data.keyword.containerlong}} öffnen müssen, um folgende Aktionen zu ermöglichen:
 {:shortdesc}
 
-* [Ausführen von `ibmcloud`-Befehlen](#firewall_bx) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
+* [Ausführen von `bx`-Befehlen](#firewall_bx) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Ausführen von `kubectl`-Befehlen](#firewall_kubectl) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Ausführen von `calicoctl`-Befehlen](#firewall_calicoctl) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
-* [Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten](#firewall_outbound), wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) angepasst wurden.
+* [Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten](#firewall_outbound), wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) angepasst wurden.
 * [Zugreifen auf den NodePort-Service, LoadBalancer-Service oder auf Ingress von außerhalb des Clusters](#firewall_inbound).
 
 <br />
 
 
-## `ibmcloud ks`-Befehle von hinter einer Firewall ausführen
+## `bx cs`-Befehle von hinter einer Firewall ausführen
 {: #firewall_bx}
 
-Falls Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls verhindern, müssen Sie TCP-Zugriff für {{site.data.keyword.containerlong_notm}} zulassen, um `ibmcloud ks`-Befehle auszuführen.
+Falls Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls verhindern, müssen Sie TCP-Zugriff für {{site.data.keyword.containerlong_notm}} zulassen, um `bx cs`-Befehle auszuführen.
 {:shortdesc}
 
 1. Ermöglichen Sie Zugriff auf `containers.bluemix.net` an Port 443.
@@ -71,36 +71,36 @@ Falls Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffe
 
 Wenn ein Cluster erstellt wird, wird der Port in der Master-URL zufällig einer Zahl zwischen 20000-32767 zugewiesen. Sie können entweder den Portbereich 20000-32767 für alle Cluster öffnen, die eventuell erstellt werden, oder Sie können den Zugriff für einen spezifischen vorhandenen Cluster gewähren.
 
-Vorab müssen Sie zulassen, dass [`ibmcloud ks`-Befehle ausgeführt werden](#firewall_bx).
+Vorab müssen Sie zulassen, dass [`bx cs`-Befehle ausgeführt werden](#firewall_bx).
 
 Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 
 1. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Wenn Sie über ein föderiertes Konto verfügen, schließen Sie die Option `--sso` ein.
 
    ```
-   ibmcloud login [--sso]
+   bx login [--sso]
    ```
    {: pre}
 
 2. Wählen Sie die Region aus, in der sich Ihr Cluster befindet.
 
    ```
-   ibmcloud ks region-set
+   bx cs region-set
    ```
    {: pre}
 
 3. Rufen Sie den Namen Ihres Clusters ab.
 
    ```
-   ibmcloud ks clusters
+   bx cs clusters
    ```
    {: pre}
 
 4. Rufen Sie die **Master-URL** für Ihren Cluster ab.
 
    ```
-    ibmcloud ks cluster-get <clustername_oder_-id>
-    ```
+   bx cs cluster-get <clustername_oder_-id>
+   ```
    {: pre}
 
    Beispielausgabe:
@@ -153,7 +153,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 Falls Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls verhindern, müssen Sie TCP-Zugriff für die Calico-Befehle zulassen, um `calicoctl`-Befehle auszuführen.
 {:shortdesc}
 
-Vorab müssen Sie zulassen, dass [`ibmcloud`-Befehle](#firewall_bx) und [`kubectl`-Befehle](#firewall_kubectl) ausgeführt werden.
+Vorab müssen Sie zulassen, dass [`bx`-Befehle](#firewall_bx) und [`kubectl`-Befehle](#firewall_kubectl) ausgeführt werden.
 
 1. Rufen Sie die IP-Adresse aus der Master-URL ab, die Sie verwendet haben, um die [`kubectl`-Befehle](#firewall_kubectl) zuzulassen.
 
@@ -172,24 +172,24 @@ Vorab müssen Sie zulassen, dass [`ibmcloud`-Befehle](#firewall_bx) und [`kubect
 ## Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen
 {: #firewall_outbound}
 
-Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von hinter einer Firewall zuzugreifen, wie beispielsweise für {{site.data.keyword.containershort_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IPs der IBM Cloud-Infrastruktur (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
+Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von hinter einer Firewall zuzugreifen, wie beispielsweise für {{site.data.keyword.containershort_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IPs von IBM Cloud Infrastructure (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
 {:shortdesc}
 
   1.  Notieren Sie die öffentlichen IP-Adressen für alle Workerknoten im Cluster.
 
       ```
-      ibmcloud ks workers <clustername_oder_-id>
+      bx cs workers <clustername_oder_-id>
       ```
       {: pre}
 
   2.  Ermöglichen Sie Netzverkehr von der Quelle _<öffentliche_IP_für_jeden_workerknoten>_ zum Ziel-TCP/UDP-Portbereich 20000-32767 und zum Port 443 sowie für die folgenden IP-Adressen und Netzgruppen. Wenn Ihre Unternehmensfirewall verhindert, dass Ihr lokales System auf öffentliche Internetendpunkte zugreifen kann, führen Sie diesen Schritt sowohl für Ihre Quellen-Workerknoten als auch für Ihr lokales System aus.
-      - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Zonen in der Region zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Zonen ('dal10', 'dal12' und 'dal13') zulassen.
+      - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Standorte in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Standorte ('dal10', 'dal12' und 'dal13') zulassen.
       <p>
-  <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+  <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
   <caption>Zu öffnende IP-Adressen für abgehenden Datenverkehr</caption>
       <thead>
       <th>Region</th>
-      <th>Zone</th>
+      <th>Standort</th>
       <th>IP-Adresse</th>
       </thead>
     <tbody>
@@ -231,7 +231,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert.
         <p>
-<table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+<table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
   <caption>Zu öffnende IP-Adressen für Registrydatenverkehr</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>
@@ -271,7 +271,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
   4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}} und die {{site.data.keyword.loganalysislong_notm}}-Services:
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Ersetzen Sie <em>&lt;monitoring_public_IP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
   <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>
@@ -282,7 +282,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
         <tr>
          <td>Zentraleuropa</td>
          <td>metrics.eu-de.bluemix.net</td>
-         <td><code>158.177.65.80/30</code></td>
+         <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
          <td>Großbritannien (Süden)</td>
@@ -290,7 +290,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden), Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
+          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden), Asien-Pazifik (Norden)</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -300,7 +300,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
 </p>
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Ersetzen Sie <em>&lt;logging_public_IP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
 <caption>Zu öffnende IP-Adressen für die Protokollierung von Datenverkehr</caption>
         <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>
@@ -332,18 +332,15 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
        </table>
 </p>
 
-  5. Für private Firewalls müssen Sie die entsprechenden Bereiche privater IPs für die IBM Cloud-Infrastruktur (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
-      - Fügen Sie alle [Zonen in den Regionen](cs_regions.html#zones) hinzu, die Sie verwenden.
-      - Beachten Sie, dass Sie die Zone `dal01` (Rechenzentrum) hinzufügen müssen.
+  5. Für private Firewalls müssen Sie die entsprechenden Bereiche privater IPs für IBM Cloud Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
+      - Fügen Sie alle [Standorte in den Regionen](cs_regions.html#locations) hinzu, die von Ihnen verwendet werden.
+      - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) hinzufügen müssen.
       - Öffnen Sie die Ports 80 und 443, um die Durchführung des Cluster-Bootstrap-Prozesses zu erlauben.
-      - Öffnen Sie Port 10250 für das Kubernetes-Dashboard.
-      - Öffnen Sie Port 10250 für den DNS-Zugriff.
-      - Da der gesamte Pod-to-Pod-Datenverkehr über das private Netz übertragen wird, öffnen Sie entweder alle Ports, die die Pods verwenden, um zu kommunizieren, oder öffnen Sie alle Ports für die Workerknoten im Cluster.
 
-  6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall für die [IP-Adressen der IBM Cloud-Infrastruktur (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) der Zone zu, in der sich Ihr Cluster befindet.
-      - Um die Zone des Clusters zu ermitteln, führen Sie `ibmcloud ks clusters` aus.
+  6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall für die [IBM Cloud Infrastructure (SoftLayer)-IP-Adressen](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) des Standorts (Rechenzentrums) zu, in dem sich Ihr Cluster befindet.
+      - Führen Sie `bx cs clusters` aus, um den Standort (das Rechenzentrum) Ihres Clusters abzurufen.
       - Ermöglichen Sie Zugriff auf den IP-Bereich des **(öffentlichen) Front-End-Netzes** und des **privaten Back-End-Netzes**.
-      - Beachten Sie, dass Sie die Zone `dal01` (Rechenzentrum) für das **(private) Back-End-Netz** hinzufügen müssen.
+      - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) für das **(private) Back-End-Netz** hinzufügen müssen.
 
 <br />
 

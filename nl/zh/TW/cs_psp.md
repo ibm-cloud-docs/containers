@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,11 +29,11 @@ lastupdated: "2018-08-06"
 
 使用 `PodSecurityPolicy` 許可控制器，要到您[授權原則](#customize_psp)之後，才能建立 Pod。設定 Pod 安全原則可能會有非預期的副作用，因此請務必在變更原則之後測試部署。若要部署應用程式，部署 Pod 所需的 Pod 安全原則必須全部授權使用者及服務帳戶。例如，如果您使用 [Helm](cs_integrations.html#helm_links) 來安裝應用程式，則 Helm tiller 元件會建立 Pod，因此，您必須有正確的 Pod 安全原則授權。
 
-要嘗試控制哪些使用者可以存取 {{site.data.keyword.containershort_notm}} 嗎？請參閱[指派叢集存取](cs_users.html#users)，以設定 IAM 及基礎架構許可權。
+要嘗試控制哪些使用者可以存取 {{site.data.keyword.containerlong_notm}} 嗎？請參閱[指派叢集存取](cs_users.html#users)，以設定 IAM 及基礎架構許可權。
 {: tip}
 
 **依預設會設定任何原則嗎？我可以新增哪些原則？**</br>
-依預設，{{site.data.keyword.containershort_notm}} 會使用您無法刪除或修改的 [{{site.data.keyword.IBM_notm}} 叢集管理的資源](#ibm_psp)來配置 `PodSecurityPolicy` 許可控制器。您也無法停用許可控制器。 
+依預設，{{site.data.keyword.containerlong_notm}} 會使用您無法刪除或修改的 [{{site.data.keyword.IBM_notm}} 叢集管理的資源](#ibm_psp)來配置 `PodSecurityPolicy` 許可控制器。您也無法停用許可控制器。 
 
 依預設，不會鎖定 Pod 動作。相反地，叢集裡的兩個角色型存取控制 (RBAC) 資源會授權所有管理者、使用者、服務及節點來建立特許及非特許 Pod。如果您要防止特定使用者建立或更新 Pod，則可以[修改這些 RBAC 資源或建立自己的 RBAC 資源](#customize_psp)。
 
@@ -177,7 +177,7 @@ lastupdated: "2018-08-06"
 ## 瞭解 {{site.data.keyword.IBM_notm}} 叢集管理的預設資源
 {: #ibm_psp}
 
-{{site.data.keyword.containershort_notm}} 中的 Kubernetes 叢集包含下列 Pod 安全原則及相關 RBAC 資源，以容許 {{site.data.keyword.IBM_notm}} 適當地管理叢集。
+{{site.data.keyword.containerlong_notm}} 中的 Kubernetes 叢集包含下列 Pod 安全原則及相關 RBAC 資源，以容許 {{site.data.keyword.IBM_notm}} 適當地管理叢集。
 {: shortdesc}
 
 預設 `privileged-psp-user` 及 `restricted-psp-user` RBAC 資源指的是 {{site.data.keyword.IBM_notm}} 所設定的 Pod 安全原則。 

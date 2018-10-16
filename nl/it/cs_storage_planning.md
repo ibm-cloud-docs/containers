@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,86 +16,272 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-
-
 # Pianificazione di archiviazione persistente altamente disponibile
 {: #storage_planning}
 
-## Opzioni di archiviazione dati non persistente
-{: #non_persistent}
+## Scelta di una soluzione di archiviazione
+{: #choose_storage_solution}
 
-Puoi utilizzare le opzioni di archiviazione non persistente se i dati non devono essere memorizzati in modo persistente o se i dati non devono essere condivisi tra le istanze dell'applicazione. Le opzioni di archiviazione
-non persistente possono essere utilizzate anche per la verifica dell'unità dei tuoi componenti dell'applicazione o per provare nuove funzioni.
+Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per te, devi capire i tuoi requisiti applicativi, il tipo di dati che vuoi archiviare e con che frequenza vuoi accedere a tali dati.
+{: shortdesc}
+
+1. Decidi se i tuoi dati devono essere archiviati in modo permanente o se possono essere rimossi in qualsiasi momento.
+   - **Archiviazione persistente:** i tuoi dati devono continuare a essere disponibili, anche se il contenitore, il nodo di lavoro o il cluster vengono rimossi. Utilizza l'archiviazione persistente nei seguenti scenari:
+       - Applicazioni con stato
+       - Dati di business principali
+       - Dati che devono essere disponibili a causa di requisiti legali, come ad esempio un periodo di conservazione definito
+       - Controllo
+       - Dati a cui le istanze applicazione devono avere accesso e che devono condividere
+   - **Archiviazione non persistente:** i tuoi dati possono essere rimossi quando il contenitore, il nodo di lavoro o il cluster vengono rimossi. L'archiviazione non persistente viene di norma utilizzata per le informazioni di registrazione, quali i log di sistema o i log del contenitore, l'attività di test di sviluppo o quando vuoi accedere ai dati dal file system dell'host. Per trovare una panoramica delle opzioni di archiviazione non persistente disponibili, vedi [Confronto delle opzioni di archiviazione non persistente](#non_persistent_overview).
+
+2. Se devi archiviare in modo persistente i tuoi dati, analizza se la tua applicazione richiede uno specifico tipo di archiviazione. Quando utilizzi un'applicazione esistente, essa potrebbe essere progettata per archiviare i dati in uno dei seguenti modi:  
+   - **In un file system:** i dati possono essere archiviati come un file in una directory. Ad esempio, potresti archiviare questo file sul tuo disco rigido locale. Alcune applicazioni richiedono che i dati vengano archiviati in uno specifico file system, come `nfs` o `ext4`, per ottimizzare l'archiviazione dei dati e raggiungere gli obiettivi delle prestazioni.
+   - **In un database:** i dati devono essere archiviati in un database che segue uno specifico schema. Alcune applicazioni sono dotate di un'interfaccia di database che puoi utilizzare per archiviare i tuoi dati. Ad esempio, WordPress è ottimizzato per archiviare i dati in un database MySQL. In questi casi, il tipo di archiviazione è selezionato per te.
+
+3. Se la tua applicazione non ha una limitazione sul tipo di archiviazione che devi utilizzare, determina il tipo di dati che vuoi archiviare.
+   - **Dati strutturati:** dati che puoi archiviare in un database relazionale dove hai una tabella con colonne e righe. I dati nelle tabelle possono essere connessi utilizzando delle chiavi e sono di norma di facile accesso grazie al modello di dati predefinito. Degli esempi sono i numeri di telefono, i numeri di conto, i numeri di previdenza sociale o i CAP.
+   - **Dati semistrutturati:** dati che non si adattano a un database relazionale ma che sono dotati di alcune proprietà organizzative che puoi utilizzare per leggerli e analizzarli più facilmente. Degli esempi sono i file di linguaggio di markup quali CSV, XML o JSON.  
+   - **Dati non strutturati:** dati che non seguono un pattern organizzativo e che sono così complessi che non è possibile archiviarli in un database relazionale con modelli di dati predefiniti. Per accedere a questi dati, hai bisogno di strumenti e software avanzati. Degli esempi sono i messaggi e-mail, i video, le foto, i file audio, le presentazioni, i dati dei social media o le pagine web.
+
+   Se hai dei dati strutturati e non strutturati, prova ad archiviare ciascun tipo di dati separatamente in una soluzione di archiviazione progettata per tale tipo di dati. Utilizzare una soluzione di archiviazione appropriata per il tuo tipo di dati facilita l'accesso ai tuoi dati e ti offre vantaggi in termini di prestazioni, scalabilità, durabilità e congruenza.
+   {: tip}
+
+4. Analizza come vuoi accedere ai tuoi dati. Le soluzioni di archiviazione sono di norma progettate e ottimizzate per supportare le operazioni di lettura o scrittura.  
+   - **Solo lettura:** i tuoi dati sono di sola lettura. Non vuoi scrivere o modificare i tuoi dati.
+   - **Lettura e scrittura:** vuoi leggere, scrivere e modificare i tuoi dati. Per i dati letti e scritti, è importante comprendere se le operazioni sono prevalentemente di lettura, prevalentemente di scrittura oppure bilanciate.
+
+4. Determina la frequenza con cui si accede ai tuoi dati. Comprendere la frequenza dell'accesso ai dati può aiutarti a comprendere le prestazioni di cui hai bisogno per la tua archiviazione. Ad esempio, i dati a cui si accede di frequente di norma si trovano nell'archiviazione veloce.
+   - **Dati hot:** dati a cui si accede frequentemente. I casi d'uso comuni sono le applicazioni web o mobili.
+   - **Dati cool o warm:** dati a cui si accede con scarsa frequenza, come ad esempio una volta al mese o meno. I casi d'uso comuni sono gli archivi, la conservazione di dati a breve termine o il ripristino d'emergenza.
+   - **Dati cold:** i dati a cui si accede raramente, se non per nulla. I casi d'uso comuni sono gli archivi, i backup a lungo termine, i dati cronologici.
+   - **Dati frozen:** i dati a cui non si accede e che è necessario conservare per motivi legali.
+
+   Se non puoi prevedere la frequenza oppure se essa non segue uno schema rigido, determina se i tuoi carichi di lavoro sono con un'elevata percentuale di lettura, un'elevata percentuale di scritture oppure bilanciati. Guarda quindi l'opzione di archiviazione adatta al tuo carico di lavoro e analizza quale livello di archiviazione ti dà la flessibilità di cui hai bisogno. Ad esempio, {{site.data.keyword.containerlong_notm}} fornisce una classe di archiviazione `flex` che valuta la frequenza con la quale si accede ai dati in un mese e tiene conto di tale misurazione per ottimizzare la tua fatturazione mensile.
+   {: tip}
+
+5. Analizza se i tuoi dati devono essere condivisi tra più regioni, zone o istanze applicative.
+   - **Accesso tra i pod:** quando utilizzi i volumi persistenti Kubernetes per accedere alla tua archiviazione, puoi determinare il numero di pod che possono montare il volume contemporaneamente. Ad alcune soluzioni di archiviazione, come ad esempio l'archiviazione blocchi, può accedere un solo pod per volta. Altre soluzioni di archiviazione ti consentono di condividere lo stesso volume tra più pod.
+   - **Accesso tra zone e regioni:** potresti aver bisogno che i tuoi dati siano accessibili tra zone o regioni. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, sono specifiche per i data center e non possono essere condivise tra zone in una configurazione del cluster multizona.
+
+6. Comprendi le altre caratteristiche di archiviazione che si ripercuotono sulla tua scelta.
+   - **Congruenza:** la garanzia che un'operazione di lettura restituisca la versione più recente di un file. Le soluzioni di archiviazione possono fornire una solida congruenza (`strong consistency`) quando ti viene garantito di ricevere sempre la versione più recente di un file oppure una eventuale congruenza (`eventual consistency`) quando l'operazione di lettura potrebbe non restituire la versione più recente. Trovi spesso un'eventuale congruenza nei sistemi geograficamente distribuiti in cui un'operazione di scrittura deve prima essere replicata su tutte le istanze.
+   - **Prestazioni:** il tempo impiegato per completare un'operazione di lettura o scrittura.
+   - **Durabilità:** la garanzia che un'operazione di scrittura di cui viene eseguito il commit alla tua archiviazione sopravviva permanentemente e non venga danneggiata né vada perduta, anche se nella tua archiviazione vengono scritti contemporaneamente gigabyte o terabyte di dati.
+   - **Resilienza:** la capacità di ripristino da una condizione di interruzione e di continuare le operazioni, anche se si è verificato il malfunzionamento di un componente hardware o software. Ad esempio, la tua archiviazione fisica subisce un'interruzione dell'alimentazione o di rete oppure viene distrutta dal verificarsi di un disastro naturale.
+   - **Disponibilità:** la capacità di fornire l'accesso ai tuoi dati, anche se un data center o una regione non sono disponibili. La disponibilità per i tuoi dati viene di solito ottenuta aggiungendo la ridondanza e configurando dei meccanismi di failover.
+   - **Scalabilità:** la capacità di estendere la capienza e di personalizzare le prestazioni in base alle tue esigenze.
+   - **Crittografia:** il mascheramento dei dati per evitare la visibilità quando un utente non autorizzato accede ai dati.
+
+7. [Esamina le soluzioni di archiviazione persistente disponibili](#persistent_storage_overview) e scegli la soluzione che risponde meglio ai tuoi requisiti applicativi e di dati.
+
+## Confronto di opzioni di archiviazione non persistente
+{: #non_persistent_overview}
+
+Puoi utilizzare le opzioni di archiviazione non persistente se per i tuoi dati non è necessaria un'archiviazione persistente oppure se vuoi eseguire uno unit-test dei tuoi componenti applicativi.
 {: shortdesc}
 
 La seguente immagine mostra le opzioni di archiviazione dati non persistente disponibili in {{site.data.keyword.containerlong_notm}}. Queste opzioni sono disponibili per i cluster gratuito e standard.
 <p>
 <img src="images/cs_storage_nonpersistent.png" alt="Opzioni di archiviazione dati non persistente" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="La tabella mostra le opzioni di archiviazione non persistente. Le righe devono essere lette da sinistra a destra, con il numero dell'opzione nella colonna uno, il titolo delle opzioni nella colonna due e una descrizione nella colonna tre." style="width: 100%">
-<caption>Opzioni di archiviazione non persistente</caption>
-  <thead>
-  <th>Opzione</th>
-  <th>Descrizione</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. All'interno del contenitore o del pod</td>
-      <td>I contenitori e i pod sono, come progettati, di breve durata e possono avere un malfunzionamento imprevisto. Tuttavia, puoi scrivere i dati nel file system locale del contenitore per memorizzare i dati tramite il ciclo di vita di un contenitore. I dati all'interno di un contenitore non possono essere condivisi con altri contenitori o pod e vengono persi quando il contenitore ha un arresto anomalo o viene rimosso. Per ulteriori informazioni, consulta [Memorizzazione dei dati in un contenitore](https://docs.docker.com/storage/).</td>
-    </tr>
-  <tr>
-    <td>2. Nel nodo di lavoro</td>
-    <td>Ogni nodo di lavoro è configurato con un'archiviazione primaria e secondaria determinata dal tipo di macchina che selezioni per il tuo nodo di lavoro. L'archiviazione primaria viene utilizzata per memorizzare i dati dal sistema operativo e vi si può accedere utilizzando un [volume Kubernetes <code>hostPath</code> ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath). L'archiviazione secondaria viene utilizzata per memorizzare i dati da `kubelet` e dal motore di runtime del contenitore. Puoi accedere all'archiviazione secondaria utilizzando un [volume Kubernetes <code>emptyDir</code> ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)<br/><br/>Mentre i volumi <code>hostPath</code> vengono utilizzati per montare i file dal file system del nodo di lavoro sul tuo pod, <code>emptyDir</code> crea una directory vuota che viene assegnata a un pod nel tuo cluster. Tutti i contenitori in questo pod possono leggere e scrivere su quel volume. Poiché il volume è assegnato
-a un pod specifico, i dati non possono essere condivisi con altri pod in una serie di repliche.<br/><br/><p>Un volume <code>hostPath</code> o <code>emptyDir</code> e i relativi dati vengono rimossi quando: <ul><li>Il nodo di lavoro viene eliminato.</li><li>Il nodo di lavoro viene ricaricato o aggiornato.</li><li>Il cluster viene eliminato.</li><li>L'account {{site.data.keyword.Bluemix_notm}} raggiunge uno stato sospeso. </li></ul></p><p>Inoltre, i dati in un volume <code>emptyDir</code> vengono rimossi quando: <ul><li>Il pod assegnato
-viene eliminato definitivamente dal nodo di lavoro.</li><li>Il pod assegnato viene pianificato su un altro nodo di lavoro.</li></ul></p><p><strong>Nota:</strong> se il contenitore nel pod ha un arresto anomalo, i dati
-nel volume sono ancora disponibili nel nodo di lavoro.</p></td>
-    </tr>
-    </tbody>
-    </table>
+<table>
+<thead>
+<th style="text-align:left">Caratteristiche</th>
+<th style="text-align:left">All'interno del contenitore</th>
+<th style="text-align:left">Sul disco primario o secondario del nodo di lavoro</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Supporta il multizona</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">Tipi di dati</td>
+<td style="text-align:left">Tutti</td>
+<td style="text-align:left">Tutti</td>
+</tr>
+<tr>
+<td style="text-align:left">Capacità</td>
+<td style="text-align:left">Limitata al disco secondario disponibile del nodo di lavoro. Per limitare la quantità di archiviazione secondaria utilizzata dal tuo pod, utilizza le richieste di risorse e i limiti per l'[archiviazione effimera![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno") ](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+<td style="text-align:left">Limitata allo spazio disponibile del nodo di lavoro sul disco primario (hostPath) o secondario (emptyDir). Per limitare la quantità di archiviazione secondaria utilizzata dal tuo pod, utilizza le richieste di risorse e i limiti per l'[archiviazione effimera![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno") ](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+</tr>
+<tr>
+<td style="text-align:left">Modello di accesso ai dati</td>
+<td style="text-align:left">Operazioni di lettura e scrittura di qualsiasi frequenza</td>
+<td style="text-align:left">Operazioni di lettura e scrittura di qualsiasi frequenza</td>
+</tr>
+<tr>
+<td style="text-align:left">Accesso</td>
+<td style="text-align:left">Tramite il file system locale del contenitore</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Tramite il volume [Kubernetes <code>hostPath</code> ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) per l'accesso all'archiviazione primaria dei nodi di lavoro. </li><li style="margin:0px; padding:0px">Tramite il volume [Kubernetes <code>emptyDir</code> ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) per l'accesso all'archivio secondario dei nodi di lavoro.</td>
+</tr>
+<tr>
+<td style="text-align:left">Prestazioni</td>
+<td style="text-align:left">Elevate</td>
+<td style="text-align:left">Elevate con latenza più bassa quando si utilizza SSD</td>
+</tr>
+<tr>
+<td style="text-align:left">Congruenza</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+</tr>
+<tr>
+<td style="text-align:left">Resilienza</td>
+<td style="text-align:left">Bassa</td>
+<td style="text-align:left">Bassa</td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilità</td>
+<td style="text-align:left">Specifica per il contenitore</td>
+<td style="text-align:left">Specifica per il nodo di lavoro</td>
+</tr>
+<tr>
+<td style="text-align:left">Scalabilità</td>
+<td style="text-align:left">Difficile da estendere poiché limitata alla capacità del disco secondario del nodo di lavoro</td>
+<td style="text-align:left">Difficile da estendere poiché limitata alla capacità del disco primario e secondario del nodo di lavoro</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilità</td>
+<td style="text-align:left">I dati vanno perduti quando si verifica un arresto anomalo del contenitore oppure quando esso viene rimosso. </td>
+<td style="text-align:left">I dati nei volumi <code>hostPath</code> o <code>emptyDir</code> vanno perduti quando: <ul><li>Il nodo di lavoro viene eliminato.</li><li>Il nodo di lavoro viene ricaricato o aggiornato.</li><li>Il cluster viene eliminato.</li><li>L'account {{site.data.keyword.Bluemix_notm}} raggiunge uno stato sospeso. </li></ul></p><p>Inoltre, i dati in un volume <code>emptyDir</code> vengono rimossi quando: <ul><li>Il pod assegnato
+viene eliminato definitivamente dal nodo di lavoro.</li><li>Il pod assegnato viene pianificato su un altro nodo di lavoro.</li></ul>
+</tr>
+<tr>
+<td style="text-align:left">Casi d'uso comuni</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache delle immagini locale</li><li style="margin:0px; padding:0px">Log del contenitore</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache locale ad alte prestazioni</li><li style="margin:0px; padding:0px">Accedi ai file dal file system del nodo di lavoro</li><li style="margin:0px; padding:0px">Unit test</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Casi d'uso non ideali</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Archivio di dati persistenti</li><li style="margin:0px; padding:0px">Condivisione dei dati tra i contenitori</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Archivio di dati persistenti</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 
-## Opzioni di archiviazione dati persistente per l'elevata disponibilità
-{: #persistent}
+## Confronto delle opzioni di archiviazione persistente
+{: #persistent_storage_overview}
 
-La sfida principale quando crei le applicazioni con stato altamente disponibili è di conservare i dati tra più istanze dell'applicazione in più zone e mantenere i dati sempre sincronizzati. Per i dati altamente disponibili, vuoi assicurarti di avere un database master con più istanze che vengono suddivise tra più data center
-o anche tra più regioni. Questo database master deve essere continuamente replicato per mantenere una singola fonte di verità. Tutte le istanze nel tuo cluster devono leggere e scrivere in questo database master. Nel caso un'istanza del master sia inattiva, le altre istanze sostengono il carico di lavoro, per cui non riscontri del tempo di inattività per le tue applicazioni.
+Utilizza le opzioni di archiviazione persistente per i dati che vuoi conservare in modo permanente, anche nel caso in cui venissero rimossi il contenitore, il nodo di lavoro o il cluster.
 {: shortdesc}
 
-La seguente immagine mostra le opzioni che hai a disposizione in {{site.data.keyword.containerlong_notm}} per rendere i tuoi dati altamente disponibili in un cluster standard. L'opzione giusta per te dipende dai seguenti fattori:
-  * **Il tuo tipo di applicazione:** ad esempio, potresti avere un'applicazione che deve memorizzare i dati su una base file rispetto che all'interno di un database.
-  * **I requisiti legali su dove memorizzare e instradare i dati:** ad esempio, potresti essere obbligato a memorizzare e instradare i dati solo negli Stati Uniti e non poter utilizzare un servizio ubicato in Europa.
-  * **Le opzioni di backup e ripristino:** ogni opzione di memorizzazione viene fornita con le funzionalità di backup e ripristino dei dati. Controlla che le opzioni di backup e ripristino disponibili soddisfano i tuoi requisiti del piano di ripristino di emergenza, come la frequenza dei backup o le funzionalità di archiviazione dei dati all'esterno del tuo data center primario.
-  * **La replica globale:** per l'elevata disponibilità, potresti voler configurare più istanze di memorizzazione distribuite e replicate tra i data center globalmente.
+**Nota:** le opzioni di archiviazione dati permanente sono disponibili solo per i cluster standard.
 
-<br/>
+Intendi invece connettere il tuo cluster a un database in loco? Vedi [Configurazione della connettività VPN al tuo cluster](cs_vpn.html#vpn).
+{: tip}
+
+La seguente immagine mostra le opzioni che hai in {{site.data.keyword.containerlong_notm}} per archiviare permanentemente i tuoi dati e rendere i tuoi dati altamente disponibili in un cluster.
+
 <img src="images/cs_storage_mz-ha.png" alt="Opzioni di alta disponibilità per l'archiviazione persistente"/>
 
-<table summary="La tabella mostra le opzioni di archiviazione persistente: le righe devono essere lette da sinistra a destra, con il numero dell'opzione nella colonna uno, il titolo dell'opzione nella colonna due e una descrizione nella colonna tre." style="width: 100%">
-<caption>Opzioni di archiviazione persistente</caption>
-  <thead>
-  <th>Opzione</th>
-  <th>Descrizione</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>1. NFS o archiviazione blocchi</td>
-  <td>Con questa opzione, puoi conservare i dati del contenitore e dell'applicazione nella stessa zona utilizzando i volumi persistenti Kubernetes. </br></br><strong>Come posso eseguire il provisioning dell'archiviazione file o blocchi?</strong></br>Per eseguire il provisioning di archiviazione file e archiviazione blocchi in un cluster, [utilizzi i volumi persistenti (o PV; persistent volume) e le attestazioni del volume persistente (o PVC, persistent volume claim).](cs_storage_basics.html#pvc_pv). Le PVC e i PV sono concetti Kubernetes che astraggono l'API per eseguire il provisioning del dispositivo di archiviazione file o blocchi fisico. Puoi creare le PVC e i PV utilizzando il provisioning [dinamico](cs_storage_basics.html#dynamic_provisioning) o [statico](cs_storage_basics.html#static_provisioning). </br></br><strong>Come utilizzo l'archiviazione file o blocchi in un cluster multizona?</strong></br> I dispositivi di archiviazione file e blocchi sono specifici per una zona e non possono essere condivisi tra zone o regioni. Per utilizzare questo tipo di archiviazione in un cluster, devi disporre di almeno un nodo di lavoro nella stessa zona della tua archiviazione. </br></br>Se [esegui dinamicamente il provisioning](cs_storage_basics.html#dynamic_provisioning) dell'archiviazione file e blocchi in un cluster che si estende a più zone, il provisioning dell'archiviazione viene eseguito solo in una (1) zona selezionata su una base round-robin. Per eseguire il provisioning dell'archiviazione persistente in tutte le zone del tuo cluster multizona, ripeti la procedura per eseguire il provisioning dell'archiviazione dinamica per ogni zona. Ad esempio, se il tuo cluster si estende alle zone `dal10`, `dal12` e `dal13`, la prima volta che esegui dinamicamente il provisioning dell'archiviazione persistente potresti eseguire il provisioning dell'archiviazione in `dal10`. Crea altri due PVC per coprire `dal12` e `dal13`. </br></br><strong>Cosa devo fare se voglio condividere i dati tra le zone?</strong></br>Se vuoi condividere i dati tra le zone, utilizza un servizio database cloud, come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) oppure [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). </td>
-  </tr>
-  <tr id="cloud-db-service">
-    <td>2. Servizio database cloud</td>
-    <td>Con questa opzione, puoi conservare i dati utilizzando un servizio database {{site.data.keyword.Bluemix_notm}},
-come [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). </br></br><strong>Come utilizzo un servizio database cloud per il mio cluster multizona?</strong></br>Con un servizio database cloud, i dati vengono archiviati esternamente al cluster nell'istanza del servizio specificata. Il provisioning dell'istanza del servizio viene eseguito in una singola zona. Tuttavia, ogni istanza del servizio viene fornita con un'interfaccia esterna che puoi utilizzare per accedere ai tuoi dati. Quando utilizzi un servizio database per un cluster multizona, puoi condividere i dati tra i cluster, le zone e le regioni. Per rendere la tua istanza del servizio più disponibile, puoi scegliere di configurare più istanze tra le zone e la replica tra le istanze per una maggiore disponibilità. </br></br><strong>Come posso aggiungere un servizio database cloud al mio cluster?</strong></br>Per utilizzare un servizio nel tuo cluster, devi [associare il servizio {{site.data.keyword.Bluemix_notm}}](cs_integrations.html#adding_app) a uno spazio dei nomi nel tuo cluster. Quando associ il servizio al cluster, viene creato un segreto Kubernetes. Il segreto Kubernetes ospita informazioni confidenziali sul servizio,
-come ad esempio l'URL del servizio, i tuoi nome utente e password. Puoi montare il segreto
-come un volume segreto nel tuo pod e accedere al servizio utilizzando le credenziali nel segreto. Montando il volume segreto in altri pod, puoi inoltre condividere i dati tra i pod. Quando un
-contenitore ha un arresto anomalo o viene rimosso un pod da un nodo di lavoro, i dati non vengono rimossi ed è ancora possibile accedervi
-da altri pod che montano il volume segreto. </br></br>Alcuni servizi database {{site.data.keyword.Bluemix_notm}} forniscono spazio su disco
-per una piccola quantità di dati gratuitamente, in questo modo puoi verificarne le funzioni.</p></td>
-  </tr>
-  <tr>
-    <td>3. Database in loco</td>
-    <td>Se i tuoi dati devono essere archiviati in loco per motivi legali, puoi [configurare una connessione VPN](cs_vpn.html#vpn) nel tuo database in loco e utilizzare l'archiviazione esistente, i meccanismi di backup e ripristino nel tuo data center.</td>
-  </tr>
-  </tbody>
-  </table>
-
-{: caption="Tabella. Opzioni di archiviazione dati persistente per le distribuzioni nei cluster Kubernetes" caption-side="top"}
+<table>
+<thead>
+<th style="text-align:left">Caratteristiche</th>
+<th style="text-align:left">File</th>
+<th style="text-align:left">Blocco</th>
+<th style="text-align:left">Oggetto</th>
+<th style="text-align:left">DBaaS</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Con supporto multizona</td>
+<td style="text-align:left">No, come specifico per un data center. I dati non possono essere condivisi tra le zone, a meno che non implementi la tua replica dei dati.</td>
+<td style="text-align:left">No, come specifico per un data center. I dati non possono essere condivisi tra le zone, a meno che non implementi la tua replica dei dati.</td>
+<td style="text-align:left">Sì</td>
+<td style="text-align:left">Sì</td>
+</tr>
+<tr>
+<td style="text-align:left">Tipi di dati ideali</td>
+<td style="text-align:left">Tutti</td>
+<td style="text-align:left">Tutti</td>
+<td style="text-align:left">Dati semistrutturati e non strutturati</td>
+<td style="text-align:left">Dipende dal DBaaS</ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Modello di utilizzo dei dati</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Operazioni di lettura-scrittura casuali</li><li style="margin:0px; padding:0px">Operazioni di lettura-scrittura sequenziali</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Operazioni di lettura-scrittura casuali</li><li style="margin:0px; padding:0px">Carichi di lavoro a scrittura intensiva</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Carichi di lavoro a lettura intensiva</li><li style="margin:0px; padding:0px">Poche o zero operazioni di scrittura</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Carichi di lavoro a lettura-scrittura intensiva</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Accesso</td>
+<td style="text-align:left">Tramite il file system sul volume montato</td>
+<td style="text-align:left">Tramite il file system sul volume montato</td>
+<td style="text-align:left">Tramite il file system sul volume montato (plug-in) oppure tramite l'API REST dalla tua applicazione</td>
+<td style="text-align:left">Tramite l'API REST dalla tua applicazione</td>
+</tr>
+<tr>
+<td style="text-align:left">Scritture di accesso Kubernetes supportate</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/D poiché l'accesso ad esso avviene dall'applicazione direttamente</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Prestazioni</td>
+<td style="text-align:left">Prevedibili per IOPS e dimensione assegnati. Gli IOPS sono condivisi tra i pod che accedono al volume.</td>
+<td style="text-align:left">Prevedibili per IOPS e dimensione assegnati. Gli IOPS non sono condivisi tra i pod. </td>
+<td style="text-align:left">Elevate per le operazioni di lettura, con una latenza più bassa rispetto a Blocco in caso di lettura dalla cache locale. Non prevedibili per le operazioni di scrittura.</td>
+<td style="text-align:left">Elevate in caso di distribuzione allo stesso data center della tua applicazione.</td>
+</tr>
+<tr>
+<td style="text-align:left">Congruenza</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Eventuale</td>
+<td style="text-align:left">Dipende dal DBaaS</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilità</td>
+<td style="text-align:left">Elevata</td>
+<td style="text-align:left">Elevata</td>
+<td style="text-align:left">Elevata</td>
+<td style="text-align:left">Elevata</td>
+</tr>
+<tr>
+<td style="text-align:left">Resilienza</td>
+<td style="text-align:left">Media come specifico per un data center. Il server di archiviazione file è organizzato in cluster da IBM con la rete ridondante.</td>
+<td style="text-align:left">Media come specifico per un data center. Il server di archiviazione blocchi è organizzato in cluster da IBM con la rete ridondante.</td>
+<td style="text-align:left">Elevata poiché i dati sono archiviati in almeno 3 copie e distribuiti all'interno di una singola regione o tra le regioni.</td>
+<td style="text-align:left">Dipende dal DBaaS e dalla tua configurazione. </td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilità</td>
+<td style="text-align:left">Media come specifico per un data center. </td>
+<td style="text-align:left">Media come specifico per un data center. </td>
+<td style="text-align:left">Elevata in ragione della distribuzione tra zone o regioni. </td>
+<td style="text-align:left">Elevata se hai configurato più istanze. </td>
+</tr>
+<tr>
+<td style="text-align:left">Scalabilità</td>
+<td style="text-align:left">Difficile da estendere oltre il data center. Non puoi modificare un livello di archiviazione esistente. </td>
+<td style="text-align:left">Difficile da estendere oltre il data center. Non puoi modificare un livello di archiviazione esistente. </td>
+<td style="text-align:left">Facile da ridimensionare.</td>
+<td style="text-align:left">Facile da ridimensionare.</td>
+</tr>
+<tr>
+<td style="text-align:left">Crittografia</td>
+<td style="text-align:left">Dati inattivi</td>
+<td style="text-align:left">Dati inattivi</td>
+<td style="text-align:left">Dati inattivi</td>
+<td style="text-align:left">Dati inattivi</td>
+</tr>
+<tr>
+<td style="text-align:left">Casi d'uso comuni</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Archiviazione file singoli o di massa</li><li style="margin:0px; padding:0px">Condivisione file nell'ambito di un cluster a zona singola</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Serie con stato</li><li style="margin:0px; padding:0px">Archiviazione di supporto quando esegui il tuo database</li><li style="margin:0px; padding:0px">Accesso ad elevate prestazioni per i singoli pod</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li><li style="margin:0px; padding:0px">Big Data statici</li><li style="margin:0px; padding:0px">Contenuto multimediale statico</li><li style="margin:0px; padding:0px">Applicazioni web</li><li style="margin:0px; padding:0px">Backup</li><li style="margin:0px; padding:0px">Archivi</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Database relazionali e non relazionali</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Casi d'uso non ideali</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li><li style="margin:0px; padding:0px">Condivisione dei dati tra più istanze dell'applicazione</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Carichi di lavoro a scrittura intensiva</li><li style="margin:0px; padding:0px">Operazioni di scrittura casuali</li><li style="margin:0px; padding:0px">Aggiornamenti dei dati incrementali</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Applicazione che è progettata per scrivere su un file system</li></ul></td>
+</tr>
+</tbody>
+</table>

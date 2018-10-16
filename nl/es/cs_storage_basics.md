@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-08-06"
 Antes de empezar a suministrar almacenamiento, es importante comprender los conceptos volumen persistente y reclamación de volumen persistente de Kubernetes y cómo trabajan conjuntamente en un clúster. 
 {: shortdesc}
 
-En la imagen siguiente se muestran los componentes de almacenamiento en un clúster Kubernetes. 
+En la imagen siguiente se muestran los componentes de almacenamiento en un clúster de Kubernetes. 
 
 <img src="images/cs_storage_pvc_pv.png" alt="Componentes de almacenamiento en un clúster" width="300" style="width: 300px; border-style: none"/>
 
@@ -60,7 +60,7 @@ En la imagen siguiente se muestra cómo se suministra dinámicamente el almacena
 1. El usuario crea una reclamación de volumen persistente (PVC) que especifica el tipo de almacenamiento, la clase de almacenamiento, el tamaño en gigabytes, el número de IOPS y el tipo de facturación. La clase de almacenamiento determina el tipo de almacenamiento que se suministra y los rangos permitidos para tamaño e IOPS. La creación de una PVC en un clúster activa automáticamente el plugin de almacenamiento para el tipo de almacenamiento solicitado para suministrar almacenamiento con la especificación determinada. 
 2. El dispositivo de almacenamiento se solicita automáticamente y se suministra a la cuenta de la infraestructura de IBM Cloud (SoftLayer). Comienza el ciclo de facturación para el dispositivo de almacenamiento. 
 3. El plugin de almacenamiento crea automáticamente un volumen persistente (PV) en el clúster, un dispositivo de almacenamiento virtual que apunta al dispositivo de almacenamiento real en la cuenta de infraestructura de IBM Cloud (SoftLayer). 
-4. La PVC y el PV se conectan automáticamente entre sí. El estado de la PVC y del y PV pasa a ser `Bound`. Ahora puede utilizar la PVC para montar el almacenamiento permanente en la app. Si suprime la PVC, también se suprimirán el PV y la instancia de almacenamiento relacionada. </br>
+4. La PVC y el PV se conectan automáticamente entre sí. El estado de la PVC y del y PV pasa a ser `Bound`. Ahora puede utilizar la PVC para montar el almacenamiento persistente en la app. Si suprime la PVC, también se suprimirán el PV y la instancia de almacenamiento relacionada. </br>
 
 **¿Cuándo se utiliza el suministro dinámico?**</br>
 
@@ -94,12 +94,12 @@ En la imagen siguiente se muestra cómo suministrar almacenamiento de archivos d
 1. El administrador de clúster recopila todos los detalles sobre el dispositivo de almacenamiento existente y crea un volumen persistente (PV) en el clúster. 
 2. Basándose en los detalles de almacenamiento del PV, el plugin de almacenamiento conecta el PV con el dispositivo de almacenamiento en la cuenta de la infraestructura de IBM Cloud (SoftLayer). 
 3. El administrador del clúster o un desarrollador crea una PVC. Puesto que el PV y el dispositivo de almacenamiento ya existen, no se especifica ninguna clase de almacenamiento en la PVC. 
-4. Después de crear la PVC, el plugin de almacenamiento intenta combinar la PVC con un PV existente. La PVC y el PV coinciden cuando se utilizan los mismos valores para tamaño, IOPS y modalidad de acceso en la PVC y en el PV. Cuando la PVC y el PV coinciden, el estado de la PVC y del PV pasa a ser `Bound`. Ahora puede utilizar la PVC para montar el almacenamiento permanente en la app. Cuando se suprime la PVC, el PV y la instancia de almacenamiento físico no se eliminan. Debe eliminar por separado la PVC, el PV y la instancia de almacenamiento físico.  </br>
+4. Después de crear la PVC, el plugin de almacenamiento intenta combinar la PVC con un PV existente. La PVC y el PV coinciden cuando se utilizan los mismos valores para tamaño, IOPS y modalidad de acceso en la PVC y en el PV. Cuando la PVC y el PV coinciden, el estado de la PVC y del PV pasa a ser `Bound`. Ahora puede utilizar la PVC para montar el almacenamiento persistente en la app. Cuando se suprime la PVC, el PV y la instancia de almacenamiento físico no se eliminan. Debe eliminar por separado la PVC, el PV y la instancia de almacenamiento físico.  </br>
 
 **¿Cuándo se utiliza el suministro estático?**</br>
 
 Revise los siguientes casos de uso comunes para el suministro estático de almacenamiento persistente: 
-1. **Poner datos retenidos a disponibilidad del clúster:** El almacenamiento permanente se ha suministrado con una clase de almacenamiento de retención utilizando el suministro dinámico. Ha eliminado la PVC, pero el PV, el almacenamiento físico de la infraestructura de IBM Cloud (SoftLayer) y los datos siguen existiendo. Desea acceder a los datos retenidos desde una app del clúster. 
+1. **Poner datos retenidos a disponibilidad del clúster:** El almacenamiento persistente se ha suministrado con una clase de almacenamiento de retención utilizando el suministro dinámico. Ha eliminado la PVC, pero el PV, el almacenamiento físico de la infraestructura de IBM Cloud (SoftLayer) y los datos siguen existiendo. Desea acceder a los datos retenidos desde una app del clúster. 
 2. **Utilizar un dispositivo de almacenamiento existente:** Ha suministrado almacenamiento persistente directamente en la cuenta de la infraestructura de IBM Cloud (SoftLayer) y desea utilizar este dispositivo de almacenamiento en el clúster. 
 3. **Compartir almacenamiento persistente entre clústeres de la misma zona:** Ha suministrado almacenamiento persistente para el clúster. Para compartir la misma instancia de almacenamiento persistente con otros clústeres de la misma zona, debe crear manualmente el PV y la PVC coincidente en el otro clúster. **Nota:** El uso compartido de almacenamiento persistente entre clústeres solo está disponible si el clúster y la instancia de almacenamiento se encuentran en la misma zona. 
 4. **Compartir almacenamiento persistente entre espacios de nombres del mismo clúster:** Ha suministrado almacenamiento persistente en un espacio de nombres del clúster. Desea utilizar la misma instancia de almacenamiento para un pod de la app desplegado en otro espacio de nombres del clúster. 
@@ -114,7 +114,7 @@ Para obtener más información sobre cómo suministrar almacenamiento de forma e
 Para suministrar de forma dinámica almacenamiento persistente, debe definir el tipo y la configuración del almacenamiento que desee. 
 {: shortdesc}
 
-Una clase de almacenamiento Kubernetes se utiliza para resumen la plataforma de almacenamiento subyacente que recibe soporte en {{site.data.keyword.Bluemix_notm}} para que no tenga que conocer todos los detalles sobre los tamaños soportados, IOPS o políticas de retención para suministrar correctamente almacenamiento persistente en un clúster. {{site.data.keyword.containershort_notm}} proporciona clases de almacenamiento predefinidas para cada tipo de almacenamiento soportado. Cada clase de almacenamiento está diseñada para resumen el nivel de almacenamiento soportado al mismo tiempo que le ofrece la opción de decidir sobre tamaño, IOPS y política de retención que desea. 
+Una clase de almacenamiento Kubernetes se utiliza para resumen la plataforma de almacenamiento subyacente que recibe soporte en {{site.data.keyword.Bluemix_notm}} para que no tenga que conocer todos los detalles sobre los tamaños soportados, IOPS o políticas de retención para suministrar correctamente almacenamiento persistente en un clúster. {{site.data.keyword.containerlong_notm}} proporciona clases de almacenamiento predefinidas para cada tipo de almacenamiento soportado. Cada clase de almacenamiento está diseñada para resumen el nivel de almacenamiento soportado al mismo tiempo que le ofrece la opción de decidir sobre tamaño, IOPS y política de retención que desea. 
 
 Para ver las especificaciones de clase de almacenamiento predefinidas, consulte: 
 - [Almacenamiento de archivos](cs_storage_file.html#storageclass_reference)
@@ -153,7 +153,7 @@ Si no puede utilizar una de las clases de almacenamiento proporcionadas, puede c
    - [Almacenamiento de archivos](cs_storage_file.html#add_file)
    - [Almacenamiento en bloque](cs_storage_block.html#add_block)
    
-5. Verifique que la PVC se ha creado y se ha vinculado a un volumen permanente (PV). Este proceso puede tardar algunos minutos en completarse. 
+5. Verifique que la PVC se ha creado y se ha vinculado a un volumen persistente (PV). Este proceso puede tardar algunos minutos en completarse. 
    ```
    kubectl get pvc
    ```
@@ -217,7 +217,7 @@ Utilice un script para buscar todos los PV del clúster y aplique las etiquetas 
 
 Antes de empezar:
 - [Defina el clúster como destino de la CLI de Kubernetes](cs_cli_install.html#cs_cli_configure).
-- Habilite la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para su cuenta de la infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores se puedan comunicar entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Como alternativa a la expansión de VLAN, puede utilizar una función de direccionador virtual (VRF) si está habilitada en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
+- Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
 
 Para actualizar los PV existentes:
 

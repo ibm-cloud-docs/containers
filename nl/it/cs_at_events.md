@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # Eventi {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
-Puoi visualizzare, gestire e controllare le attività avviate dall'utente nel tuo cluster {{site.data.keyword.containershort_notm}} utilizzando il servizio {{site.data.keyword.cloudaccesstrailshort}}.
+Puoi visualizzare, gestire e controllare le attività avviate dall'utente nel tuo cluster {{site.data.keyword.containerlong_notm}} utilizzando il servizio {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-## Ricerca delle informazioni
-{: #at-find}
+
+
+Per ulteriori informazioni sulla modalità di funzionamento del servizio, vedi la [documentazione di {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, consulta la [documentazione di Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/home/).
+
+
+## Ricerca delle informazioni per gli eventi di controllo Kubernetes
+{: #kube-find}
 
 Gli eventi {{site.data.keyword.cloudaccesstrailshort}} sono disponibili nel **dominio account** {{site.data.keyword.cloudaccesstrailshort}} disponibile nella regione {{site.data.keyword.Bluemix_notm}} in cui sono stati generati gli eventi. Gli eventi {{site.data.keyword.cloudaccesstrailshort}} sono disponibili nel **dominio spazio** {{site.data.keyword.cloudaccesstrailshort}} associato allo spazio Cloud Foundry in cui è stato eseguito il provisioning del servizio {{site.data.keyword.cloudaccesstrailshort}}.
 
 Per monitorare l'attività amministrativa:
 
 1. Accedi al tuo account {{site.data.keyword.Bluemix_notm}}.
-2. Dal catalogo, esegui il provisioning di un'istanza del servizio {{site.data.keyword.cloudaccesstrailshort}} nello stesso account della tua istanza di {{site.data.keyword.containershort_notm}}.
+2. Dal catalogo, esegui il provisioning di un'istanza del servizio {{site.data.keyword.cloudaccesstrailshort}} nello stesso account della tua istanza di {{site.data.keyword.containerlong_notm}}.
 3. Sulla scheda **Gestisci** del dashboard {{site.data.keyword.cloudaccesstrailshort}}, fai clic su **Visualizza in Kibana**.
 4. Imposta l'intervallo di tempo per il quale desideri visualizzare i log. Il valore predefinito è 15 minuti.
 5. Nell'elenco **Campi disponibili**, fai clic su **type**. Fai clic sull'icona della lente di ingrandimento del **Programma di traccia dell'attività** per limitare i log a quelli tracciati dal servizio.
 6. Puoi utilizzare gli altri campi disponibili per restringere la tua ricerca.
 
+Per consentire ad altri utenti di visualizzare eventi di account e di spazio, vedi [Concessione di autorizzazioni per visualizzare gli eventi di account](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+{: tip}
 
+## Traccia degli eventi di controllo Kubernetes
+{: #kube-events}
 
-## Traccia degli eventi
-{: #events}
+Controlla la seguente tabella per un elenco degli eventi inviati a {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
 
-Controlla le seguenti tabelle per un elenco degli eventi inviati a {{site.data.keyword.cloudaccesstrailshort}}.
+**Prima di iniziare**
 
-Per ulteriori informazioni su come funziona il servizio, vedi la [documentazione di {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html).
+Assicurati che il tuo cluster sia configurato per inoltrare gli [eventi di controllo API Kubernetes](cs_health.html#api_forward).
 
-Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, vedi la [documentazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/home/).
+**Eventi inoltrati**
 
 <table>
   <tr>
@@ -422,19 +431,19 @@ Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, vedi l
   </tr>
   <tr>
     <td><code>localsubjectaccessreviews.create</code></td>
-    <td>È stata creata una revisione di accesso locale del soggetto. </td>
+    <td>È stata creata una revisione di accesso locale del soggetto.</td>
   </tr>
   <tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>È stata creata una auto revisione di accesso del soggetto. </td>
+    <td>È stata creata una auto revisione di accesso del soggetto.</td>
   </tr>
   <tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>È stata creata una auto revisione delle regole del soggetto. </td>
+    <td>È stata creata una auto revisione delle regole del soggetto.</td>
   </tr>
   <tr>
     <td><code>subjectaccessreviews.create</code></td>
-    <td>È stata creata una revisione di accesso del soggetto. </td>
+    <td>È stata creata una revisione di accesso del soggetto.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.create</code></td>
@@ -614,18 +623,18 @@ Per ulteriori informazioni sulle azioni Kubernetes che vengono tracciate, vedi l
   </tr>
   <tr>
     <td><code>podpresets.create</code></td>
-    <td>È stato creato un pod preimpostato. </td>
+    <td>È stato creato un pod preimpostato.</td>
   </tr>
   <tr>
     <td><code>podpresets.deleted</code></td>
-    <td>È stato eliminato un pod preimpostato. </td>
+    <td>È stato eliminato un pod preimpostato.</td>
   </tr>
   <tr>
     <td><code>podpresets.patched</code></td>
-    <td>È stato corretto un pod preimpostato. </td>
+    <td>È stato corretto un pod preimpostato.</td>
   </tr>
   <tr>
     <td><code>podpresets.updated</code></td>
-    <td>È stato aggiornato un pod preimpostato. </td>
+    <td>È stato aggiornato un pod preimpostato.</td>
   </tr>
 </table>

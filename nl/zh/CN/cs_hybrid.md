@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -33,26 +33,59 @@ lastupdated: "2018-08-06"
 在公共 Kubernetes 集群与 {{site.data.keyword.Bluemix}} Private 实例之间建立 VPN 连接，以允许双向通信。
 {: shortdesc}
 
-1.  [在 {{site.data.keyword.Bluemix}} Private 中创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)。
-
-2.  在 {{site.data.keyword.Bluemix}} Public 中通过 {{site.data.keyword.containerlong}} 创建标准集群，或使用现有集群。要创建集群，有以下选项可供选择： 
+1.  在 {{site.data.keyword.Bluemix_notm}} Public 中通过 {{site.data.keyword.containerlong}} 创建标准集群，或使用现有集群。要创建集群，有以下选项可供选择： 
     - [通过 GUI 创建标准集群](cs_clusters.html#clusters_ui)。 
     - [通过 CLI 创建标准集群](cs_clusters.html#clusters_cli)。 
     - [使用 Cloud Automation Manager (CAM) 通过预定义模板创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。使用 CAM 部署集群时，会自动安装 Helm Tiller。
 
-3.  在 {{site.data.keyword.Bluemix}} Private 集群中，部署 strongSwan IPSec VPN 服务。
+2.  在 {{site.data.keyword.containerlong_notm}} 集群中，[遵循指示信息设置 strongSwan IPSec VPN 服务](cs_vpn.html#vpn_configure)。 
+
+    *  对于[步骤 2](cs_vpn.html#strongswan_2)，请注意：
+
+       * 在 {{site.data.keyword.containerlong_notm}} 集群中设置的 `local.id` 必须与稍后在 {{site.data.keyword.Bluemix}} Private 集群中设置为 `remote.id` 的内容相匹配。 
+       * 在 {{site.data.keyword.containerlong_notm}} 集群中设置的 `remote.id` 必须与稍后在 {{site.data.keyword.Bluemix}} Private 集群中设置为 `local.id` 的内容相匹配。
+       * 在 {{site.data.keyword.containerlong_notm}} 集群中设置的 `preshared.secret` 必须与稍后在 {{site.data.keyword.Bluemix}} Private 集群中设置为 `preshared.secret` 的内容相匹配。
+
+    *  对于[步骤 3](cs_vpn.html#strongswan_3)，为**入站** VPN 连接配置 strongSwan。
+
+       ```
+       ipsec.auto: add
+       loadBalancerIP: <portable_public_IP>
+       ```
+       {: codeblock}
+
+3.  记下您设置为 `loadbalancerIP` 的可移植公共 IP 地址。
+
+    ```
+    kubectl get svc vpn-strongswan
+    ```
+    {: pre}
+
+4.  [在 {{site.data.keyword.Bluemix_notm}} Private 中创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)。
+
+5.  在 {{site.data.keyword.Bluemix_notm}} Private 集群中，部署 strongSwan IPSec VPN 服务。
 
     1.  [完成 strongSwan IPSec VPN 变通方法 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html)。 
 
-    2.  在专用集群中[安装 strongSwan VPN Helm 图表 ![在专用集群中](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。
+    2.  在专用集群中[设置 strongSwan VPN Helm 图表 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。 
+    
+        *  在配置参数中，将**远程网关**字段设置为您设置为 {{site.data.keyword.containerlong_notm}} 集群的 `loadbalancerIP` 的可移植公共 IP 地址的值。
+    
+           ```
+           Operation at startup: start
+           ...
+           Remote gateway: <portable_public_IP>
+           ...
+           ```
+           {: codeblock}
+    
+        *  请记住，专用 `local.id` 必须与公共 `remote.id` 相匹配，专用 `remote.id` 必须与公共 `local.id` 相匹配，并且专用和公共的 `preshared.secret` 值必须相匹配。
+        
+        现在，可以启动从 {{site.data.keyword.Bluemix_notm}} Private 集群到 {{site.data.keyword.containerlong_notm}} 集群的连接。
 
-4.  获取 {{site.data.keyword.Bluemix}} Private VPN 网关的公共 IP 地址。IP 地址是[专用集群初步设置 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/prep_cluster.html) 的一部分。
+7.  在集群之间[测试 VPN 连接](cs_vpn.html#vpn_test)。
 
-5.  在 {{site.data.keyword.Bluemix}} Public 集群中，[部署 strongSwan IPSec VPN 服务](cs_vpn.html#vpn-setup)。使用上一步中的公共 IP 地址，并确保在 {{site.data.keyword.Bluemix}} Public 中配置 VPN 网关用于[出站连接](cs_vpn.html#strongswan_3)，以便 VPN 连接从 {{site.data.keyword.Bluemix}} Public 中的集群启动。 
-
-6.  在集群之间[测试 VPN 连接](cs_vpn.html#vpn_test)。
-
-7.  针对要连接的每个集群，重复上述步骤。 
+8.  针对要连接的每个集群，重复上述步骤。 
 
 
 ## 在公共 Kubernetes 容器中运行 {{site.data.keyword.Bluemix_notm}} Private 映像

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-08-06"
 ## Volumes persistentes e solicitações de volume persistente
 {: #pvc_pv}
 
-Antes de começar a provisionar o fornecimento, é importante entender os conceitos do Kubernetes de um volume persistente e de uma solicitação de volume persistente e como eles trabalham juntos em um cluster.
+Antes de começar a provisionar o fornecimento, é importante entender os conceitos do Kubernetes de um volume persistente e de uma solicitação de volume persistente e como eles trabalham juntos em um cluster. 
 {: shortdesc}
 
 A imagem a seguir mostra os componentes de armazenamento em um cluster do Kubernetes. 
@@ -42,7 +42,7 @@ Para obter mais informações sobre como criar e usar PVCs, PVs e o dispositivo 
 ## Provisionamento dinâmico
 {: #dynamic_provisioning}
 
-Use o fornecimento dinâmico se você deseja fornecer aos desenvolvedores a liberdade de provisionar o armazenamento quando eles precisam.
+Use o fornecimento dinâmico se você deseja fornecer aos desenvolvedores a liberdade de provisionar o armazenamento quando eles precisam. 
 {: shortdesc}
 
 ** Como ele funciona? **</br>
@@ -76,7 +76,7 @@ Para obter mais informações sobre como provisionar dinamicamente o armazenamen
 ## Provisionamento estático
 {: #static_provisioning}
 
-Se você tiver um dispositivo de armazenamento persistente existente em sua conta de infraestrutura do IBM Cloud (SoftLayer), será possível usar o fornecimento estático para tornar a instância de armazenamento disponível para seu cluster.
+Se você tiver um dispositivo de armazenamento persistente existente em sua conta de infraestrutura do IBM Cloud (SoftLayer), será possível usar o fornecimento estático para tornar a instância de armazenamento disponível para seu cluster. 
 {: shortdesc}
 
 ** Como ele funciona? **</br>
@@ -111,10 +111,10 @@ Para obter mais informações sobre como provisionar armazenamento estaticamente
 ## Classes de armazenamento
 {: #storageclasses}
 
-Para provisionar dinamicamente o armazenamento persistente, deve-se definir o tipo e a configuração do armazenamento que você deseja.
+Para provisionar dinamicamente o armazenamento persistente, deve-se definir o tipo e a configuração do armazenamento que você deseja. 
 {: shortdesc}
 
-Uma classe de armazenamento do Kubernetes é usada para abstrair a plataforma de armazenamento subjacente que é suportada no {{site.data.keyword.Bluemix_notm}} para que você não tenha que saber todos os detalhes sobre tamanhos suportados, IOPS ou políticas de retenção para provisionar com êxito o armazenamento persistente em um cluster. O {{site.data.keyword.containershort_notm}} fornece classes de armazenamento predefinidas para cada tipo de armazenamento que é suportado. Cada classe de armazenamento é projetada para abstrair a camada de armazenamento suportada enquanto lhe dá a opção de decidir sobre o tamanho, o IOPS e a política de retenção que você deseja. 
+Uma classe de armazenamento do Kubernetes é usada para abstrair a plataforma de armazenamento subjacente que é suportada no {{site.data.keyword.Bluemix_notm}} para que você não tenha que saber todos os detalhes sobre tamanhos suportados, IOPS ou políticas de retenção para provisionar com êxito o armazenamento persistente em um cluster. O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento predefinidas para cada tipo de armazenamento que é suportado. Cada classe de armazenamento é projetada para abstrair a camada de armazenamento suportada enquanto lhe dá a opção de decidir sobre o tamanho, o IOPS e a política de retenção que você deseja. 
 
 Para obter as especificações de classe de armazenamento predefinidas, consulte: 
 - [Armazenamento de arquivo](cs_storage_file.html#storageclass_reference)
@@ -126,7 +126,7 @@ Não está localizando o que você procura? Também é possível criar sua próp
 ### Customizando uma classe de armazenamento
 {: #customized_storageclass}
 
-Se não for possível usar uma das classes de armazenamento fornecidas, será possível criar sua própria classe de armazenamento customizada.
+Se não for possível usar uma das classes de armazenamento fornecidas, será possível criar sua própria classe de armazenamento customizada. 
 {: shortdesc}
 
 1. Crie uma classe de armazenamento customizada. É possível iniciar usando uma das classes de armazenamento predefinidas ou efetuar check-out de nossas classes de armazenamento customizadas de amostra. 
@@ -179,7 +179,7 @@ Se você deseja mudar o tamanho, o IOPS, o tipo ou a política de retenção par
    - [ Bloquear armazenamento ](cs_storage_block.html#backup_restore)
    
 4. Atualize a implementação do app para referenciar o novo dispositivo de armazenamento. 
-   1. Obtenha o nome do PVC que você criou anteriormente.
+   1. Obtenha o nome do PVC que você criou anteriormente. 
       ```
       kubectl get pvc
       ```
@@ -191,14 +191,14 @@ Se você deseja mudar o tamanho, o IOPS, o tipo ou a política de retenção par
       ```
       {: pre}
       
-   3. Obtenha o yaml de implementação para a implementação que usa o dispositivo de armazenamento persistente antigo.
+   3. Obtenha o yaml de implementação para a implementação que usa o dispositivo de armazenamento persistente antigo. 
       ```
       kubectl get deployment < deployment_name> -o yaml
       ```
       {: pre}
       
    4. Mude o nome do PVC na seção `spec.volumes` de sua implementação.
-   5. Aplique as mudanças em sua implementação. Quando você aplica as mudanças, um novo pod é criado e o PVC que liga o PV é montado em seu pod. O pod que montou a antiga instância de armazenamento persistente é removido.
+   5. Aplique as mudanças em sua implementação. Quando você aplica as mudanças, um novo pod é criado e o PVC que liga o PV é montado em seu pod. O pod que montou a antiga instância de armazenamento persistente é removido. 
       ```
       kubectl apply -f deployment.yaml
       ```
@@ -217,11 +217,11 @@ Use um script para localizar todos os PVs em seu cluster e aplique os rótulos d
 
 Antes de iniciar:
 - [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
-- Ative a [ampliação da VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para a sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Como uma alternativa à VLAN ampliada, será possível usar um Virtual Router Function (VRF) se ele estiver ativado em sua conta de infraestrutura do IBM Cloud (SoftLayer).
+- Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster multizona, deve-se ativar o [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se você está usando o {{site.data.keyword.BluDirectLink}}, deve-se usar um [ Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para ativar o VRF, entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer).
 
 Para atualizar PVs existentes:
 
-1.  Aplique os rótulos de múltiplas zonas a seus PVs executando o script. Substitua <mycluster> pelo nome de seu cluster. Quando solicitado, confirme a atualização de seus PVs.
+1.  Aplique os rótulos de múltiplas zonas a seus PVs executando o script.  Substitua <mycluster> pelo nome de seu cluster. Quando solicitado, confirme a atualização de seus PVs.
 
     ```
     bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>

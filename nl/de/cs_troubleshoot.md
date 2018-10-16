@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -38,7 +38,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 1.  Listen Sie Ihren Cluster auf und suchen Sie nach `Status` des Clusters.
 
   ```
-  ibmcloud ks clusters
+  bx cs clusters
   ```
   {: pre}
 
@@ -115,7 +115,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 1.  Wenn Ihr Cluster den Status **Critical**, **Delete failed** oder **Warning** aufweist oder sich seit längerer Zeit im Status **Pending** befindet, überprüfen Sie den Status Ihrer Workerknoten.
 
   ```
-  ibmcloud ks workers <clustername_oder_-id>
+  bx cs workers <clustername_oder_-id>
   ```
   {: pre}
 
@@ -175,12 +175,12 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 5.  Listen Sie die Details für den Workerknoten auf. Wenn die Details eine Fehlernachricht enthalten, überprüfen Sie die Liste der [gängigen Fehlernachrichten für Workerknoten](#common_worker_nodes_issues) und lernen Sie, diese Probleme zu beheben.
 
    ```
-   ibmcloud ks worker-get <worker-id>
+   bx cs worker-get <worker-id>
    ```
    {: pre}
 
   ```
-  ibmcloud ks worker-get [<clustername_oder_-id>] <workerknoten-id>
+  bx cs worker-get [<clustername_oder_-id>] <workerknoten-id>
   ```
   {: pre}
 
@@ -205,11 +205,11 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'routername' to fulfill the request for the following guests: 'worker-id'.</td>
-        <td>Das ausgewählte VLAN ist einem Pod im Rechenzentrum zugeordnet, der nicht über ausreichend Speicherplatz zum Bereitstellen Ihres Workerknotens verfügt. Sie können zwischen den folgenden Optionen wählen:<ul><li>Stellen Sie Ihren Workerknoten in einem anderen Rechenzentrum bereit. Führen Sie <code>ibmcloud ks zones</code> aus, um verfügbare Rechenzentren aufzulisten.<li>Wenn Sie ein vorhandenes Paar aus öffentlichem und privatem VLAN haben, das einem anderen Pod in dem Rechenzentrum zugeordnet ist, verwenden Sie dieses VLAN stattdessen.<li>Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](#ts_getting_help) öffnen.</ul></td>
+        <td>Das ausgewählte VLAN ist einem Pod im Rechenzentrum zugeordnet, der nicht über ausreichend Speicherplatz zum Bereitstellen Ihres Workerknotens verfügt. Sie können zwischen den folgenden Optionen wählen:<ul><li>Stellen Sie Ihren Workerknoten in einem anderen Rechenzentrum bereit. Führen Sie <code>bx cs locations</code> aus, um verfügbare Rechenzentren aufzulisten.<li>Wenn Sie ein vorhandenes Paar aus öffentlichem und privatem VLAN haben, das einem anderen Pod in dem Rechenzentrum zugeordnet ist, verwenden Sie dieses VLAN stattdessen.<li>Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](#ts_getting_help) öffnen.</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan-id&gt;.</td>
-        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto der IBM Cloud-Infrastruktur (SoftLayer) zu ändern, lesen Sie die Informationen unter [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set) lesen.</ul></td>
+        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto von IBM Cloud Infrastructure (SoftLayer) zu ändern, sollten Sie die Informationen unter [`bx cs credentials-set`](cs_cli_reference.html#cs_credentials_set) nachlesen. </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -218,18 +218,16 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
         </br></br>
-        {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
-        </br></br>
-Die Berechtigungsnachweise für die IBM Cloud-Infrastruktur konnten nicht validiert werden.</td>
-        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen zum Ausführen der Aktion in Ihrem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) oder Sie verwenden die falschen Infrastrukturberechtigungsnachweise. Weitere Informationen finden Sie in [Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_troubleshoot_clusters.html#cs_credentials).</td>
+        {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
+        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen, um einen Workerknoten aus dem Portfolio von IBM Cloud Infrastructure (SoftLayer) bereitzustellen. Weitere Informationen finden Sie in [Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_troubleshoot_clusters.html#cs_credentials).</td>
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containershort_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>Wenn Sie über eine Firewall verfügen, [konfigurieren Sie Ihre Firewalleinstellungen so, dass sie ausgehenden Datenverkehr zu den entsprechenden Ports und IP-Adressen zulassen](cs_firewall.html#firewall_outbound).</li><li>Überprüfen Sie durch Ausführen von `ibmcloud ks workers &lt;, ob Ihr Cluster keine öffentliche IP aufweist. Wenn keine öffentliche IP aufgelistet wird, verfügt Ihr Cluster nur über private VLANs.<ul><li>Wenn Sie möchten, dass der Cluster nur über private VLANs verfügt, konfigurieren Sie die [VLAN-Verbindung](cs_network_planning.html#private_vlan) und die [Firewall](cs_firewall.html#firewall_outbound).</li><li>Wenn Sie möchten, dass der Cluster über eine öffentliche IP verfügt, [fügen Sie neue Workerknoten](cs_cli_reference.html#cs_worker_add) mit öffentlichen und privaten VLANs hinzu.</li></ul></li></ul></td>
+       <td><ul><li>Wenn Sie über eine Firewall verfügen, [konfigurieren Sie Ihre Firewalleinstellungen so, dass sie ausgehenden Datenverkehr zu den entsprechenden Ports und IP-Adressen zulassen](cs_firewall.html#firewall_outbound).</li><li>Überprüfen Sie, dass Ihr Cluster über keine öffentliche IP verfügt, indem Sie den folgenden Befehl ausführen: `bx cs workers <mycluster>`. Wenn keine öffentliche IP aufgelistet wird, verfügt Ihr Cluster nur über private VLANs.<ul><li>Wenn Sie möchten, dass der Cluster nur über private VLANs verfügt, konfigurieren Sie die [VLAN-Verbindung](cs_clusters.html#worker_vlan_connection) und die [Firewall](cs_firewall.html#firewall_outbound).</li><li>Wenn Sie möchten, dass der Cluster über eine öffentliche IP verfügt, [fügen Sie neue Workerknoten](cs_cli_reference.html#cs_worker_add) mit öffentlichen und privaten VLANs hinzu.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>Der Eigner des API-Schlüssels, der für den Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) verwendet wird, verfügt nicht über die erforderlichen Berechtigungen zum Ausführen der Aktion oder es steht die Löschung der Berechtigungen an.</br></br><strong>Als Benutzer</strong> führen Sie diese Schritte aus: <ol><li>Wenn Sie Zugriff auf mehrere Konten haben, stellen Sie sicher, dass Sie bei dem Konto angemeldet sind, in dem Sie mit {{site.data.keyword.containerlong_notm}} arbeiten möchten. </li><li>Führen Sie den Befehl <code>ibmcloud ks api-key-info</code> aus, um den aktuellen Eigner des API-Schlüssels anzuzeigen, der für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwendet wird.</li><li>Führen Sie den Befehl <code>ibmcloud account list</code> aus, um den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos anzuzeigen, das Sie aktuell verwenden.</li><li>Kontaktieren Sie den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos und melden Sie, dass der Eigner des API-Schlüssels nicht über ausreichende Berechtigungen in IBM Cloud Infrastructure (SoftLayer) verfügt oder dass die Löschung der Berechtigungen ansteht. </li></ol></br><strong>Als Kontoeigner</strong>, führen Sie diese Schritte aus: <ol><li>Überprüfen Sie die [erforderlichen Berechtigungen in IBM Cloud Infrastructure (SoftLayer)](cs_users.html#infra_access), um die Aktion auszuführen, die zuvor fehlgeschlagen ist. </li><li>Korrigieren Sie die Berechtigungen des API-Schlüsseleigners oder erstellen Sie mithilfe des Befehls [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) einen neuen API-Schlüssel.</li><li>Wenn durch Sie oder einen anderen Kontoadministrator Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) manuell in Ihrem Konto definiert wurden, führen Sie den Befehl [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) aus, um die Berechtigungsnachweise aus Ihrem Konto zu entfernen.</li></ol></td>
+  <td>Der Eigner des API-Schlüssels, der für den Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) verwendet wird, verfügt nicht über die erforderlichen Berechtigungen zum Ausführen der Aktion oder es steht die Löschung der Berechtigungen an.</br></br><strong>Als Benutzer</strong> führen Sie diese Schritte aus: <ol><li>Wenn Sie Zugriff auf mehrere Konten haben, stellen Sie sicher, dass Sie bei dem Konto angemeldet sind, in dem Sie mit {{site.data.keyword.containerlong_notm}} arbeiten möchten. </li><li>Führen Sie den Befehl <code>bx cs api-key-info</code> aus, um den aktuellen API-Schlüsseleigner anzuzeigen, der für den Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) verwendet wird. </li><li>Führen Sie den Befehl <code>bx account list</code> aus, um den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos anzuzeigen, das Sie gerade verwenden. </li><li>Kontaktieren Sie den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos und melden Sie, dass der Eigner des API-Schlüssels nicht über ausreichende Berechtigungen in IBM Cloud Infrastructure (SoftLayer) verfügt oder dass die Löschung der Berechtigungen ansteht. </li></ol></br><strong>Als Kontoeigner</strong>, führen Sie diese Schritte aus: <ol><li>Überprüfen Sie die [erforderlichen Berechtigungen in IBM Cloud Infrastructure (SoftLayer)](cs_users.html#infra_access), um die Aktion auszuführen, die zuvor fehlgeschlagen ist. </li><li>Korrigieren Sie die Berechtigungen für den API-Schlüsseleigner oder erstellen Sie einen neuen API-Schlüssel mithilfe des Befehls [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Wenn durch Sie oder einen anderen Kontoadministrator manuell Berechtigungsnachweise für IBM Cloud Infrastructure (SoftLayer) in Ihrem Konto definiert wurden, führen Sie den Befehl [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) aus, um die Berechtigungsnachweise aus Ihrem Konto zu entfernen.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -306,5 +304,5 @@ finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-
 -   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
 

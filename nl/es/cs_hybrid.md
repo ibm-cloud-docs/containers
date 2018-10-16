@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-12"
 
 ---
 
@@ -33,26 +33,59 @@ Conoce las [ofertas de {{site.data.keyword.Bluemix_notm}}](cs_why.html#different
 Establezca conectividad de VPN entre el clúster de Kubernetes público y la instancia privada de {{site.data.keyword.Bluemix}} para permitir la comunicación bidireccional.
 {: shortdesc}
 
-1.  [Cree un clúster en {{site.data.keyword.Bluemix}} privado![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
-
-2.  Cree un clúster estándar con {{site.data.keyword.containerlong}} en {{site.data.keyword.Bluemix}} público o utilice uno existente. Para crear un clúster, elija entre las opciones siguientes: 
+1.  Cree un clúster estándar con {{site.data.keyword.containerlong}} en {{site.data.keyword.Bluemix_notm}} público o utilice uno existente. Para crear un clúster, elija entre las opciones siguientes: 
     - [Cree un clúster estándar desde la GUI ](cs_clusters.html#clusters_ui). 
     - [Cree un clúster estándar desde la CLI](cs_clusters.html#clusters_cli). 
     - [Utilice Cloud Automation Manager (CAM) para crear un clúster utilizando una plantilla predefinida![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Cuando se despliega un clúster con CAM, el tiller de Helm se instala automáticamente.
 
-3.  En el clúster privado de {{site.data.keyword.Bluemix}}, despliegue el servicio VPN IPSec de strongSwan.
+2.  En el clúster de {{site.data.keyword.containerlong_notm}}, [siga las instrucciones para configurar el servicio VPN de IPSec de strongSwan](cs_vpn.html#vpn_configure). 
+
+    *  Para el [Paso 2](cs_vpn.html#strongswan_2), tenga en cuenta que:
+
+       * El valor de `local.id` que defina en el clúster de {{site.data.keyword.containerlong_notm}} debe coincidir con el valor que establezca después como `remote.id` en el clúster privado de {{site.data.keyword.Bluemix}}. 
+       * El valor de `remote.id` que defina en el clúster de {{site.data.keyword.containerlong_notm}} debe coincidir con el valor que establezca después como `local.id` en el clúster privado de {{site.data.keyword.Bluemix}}.
+       * El valor de `preshared.secret` que defina en el clúster de {{site.data.keyword.containerlong_notm}} debe coincidir con el valor que establezca después como `preshared.secret` en el clúster privado de {{site.data.keyword.Bluemix}}.
+
+    *  Para el [Paso 3](cs_vpn.html#strongswan_3), configure strongSwan para una conexión VPN **entrante**.
+
+       ```
+       ipsec.auto: add
+       loadBalancerIP: <portable_public_IP>
+       ```
+       {: codeblock}
+
+3.  Anote la dirección IP pública portátil que ha establecido como `loadbalancerIP`.
+
+    ```
+    kubectl get svc vpn-strongswan
+    ```
+    {: pre}
+
+4.  [Cree un clúster en {{site.data.keyword.Bluemix_notm}} privado![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
+
+5.  En el clúster privado de {{site.data.keyword.Bluemix_notm}}, despliegue el servicio VPN IPSec de strongSwan.
 
     1.  [Complete las soluciones alternativas de VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html). 
 
-    2.  [Instale el diagrama de Helm de VPN de strongSwan![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) en su clúster privado.
+    2.  [Configure el diagrama de Helm de VPN de strongSwan![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) en el clúster privado. 
+    
+        *  En los parámetros de configuración, defina el campo **Remote gateway** en el valor de la dirección IP pública portátil que ha establecido como `loadbalancerIP` del clúster de {{site.data.keyword.containerlong_notm}}.
+    
+           ```
+           Operation at startup: start
+           ...
+           Remote gateway: <portable_public_IP>
+           ...
+           ```
+           {: codeblock}
+    
+        *  Recuerde que el valor de `local.id` privado debe coincidir con el valor de `remote.id` público, el valor de `remote.id` privado debe coincidir con el valor de `local.id` público y los valores de `preshared.secret` público y privado deben coincidir.
+        
+        Ahora, puede iniciar una conexión desde el clúster privado de {{site.data.keyword.Bluemix_notm}} al clúster de {{site.data.keyword.containerlong_notm}}.
 
-4.  Obtenga la dirección IP pública de la pasarela VPN de {{site.data.keyword.Bluemix}} privado. La dirección IP forma parte de la [configuración preliminar del clúster privado![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/prep_cluster.html).
+7.  [Pruebe la conexión VPN](cs_vpn.html#vpn_test) entre los clústeres.
 
-5.  En el clúster de {{site.data.keyword.Bluemix}} público, [despliegue el servicio VPN de IPSec de strongSwan](cs_vpn.html#vpn-setup). Utilice la dirección IP pública del paso anterior y asegúrese de configurar la pasarela VPN en {{site.data.keyword.Bluemix}} público para la [conexión de salida](cs_vpn.html#strongswan_3) para que la conexión VPN se inicie desde el clúster en {{site.data.keyword.Bluemix}} público. 
-
-6.  [Pruebe la conexión VPN](cs_vpn.html#vpn_test) entre los clústeres.
-
-7.  Repita estos pasos para cada clúster que desee conectar. 
+8.  Repita estos pasos para cada clúster que desee conectar. 
 
 
 ## Ejecución de imágenes de {{site.data.keyword.Bluemix_notm}} privado en contenedores públicos de Kubernetes

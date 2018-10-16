@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -92,7 +92,7 @@ Toutes les classes de stockage indiquent le type de stockage de fichiers à mett
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Classe de stockage personnalisée :** lorsque vous choisissez cette classe de stockage, vous disposez d'un contrôle accru sur la taille et les IOPS que vous souhaitez. En ce qui concerne la taille, vous pouvez sélectionner n'importe quel nombre entier comme valeur de gigaoctets dans la plage de tailles autorisée. La taille que vous choisissez détermine la plage d'IOPS dont vous pourrez bénéficier. Vous pouvez choisir une valeur d'IOPS multiple de 100 comprise dans la plage spécifiée. Le nombre d'IOPS que vous choisissez est statique et ne s'adapte pas à la taille du stockage. Par exemple, si vous choisissez 40Gi avec 100 IOPS, le nombre total d'IOPS restera 100. </br></br> Le rapport IOPS/gigaoctets détermine le type de disque dur mis à votre disposition. Par exemple, si vous avez 500Gi à 100 IOPS, votre rapport IOPS/gigaoctet est 0,2. Un stockage avec un rapport inférieur ou égal à 0,3 est fourni sur des disques durs SATA. Si votre rapport est supérieur à 0,3, votre stockage est fourni sur des disques durs SSD.   
+   - **Classe de stockage personnalisée :** lorsque vous choisissez cette classe de stockage, vous disposez d'un contrôle accru sur la taille et les IOPS que vous souhaitez. En ce qui concerne la taille, vous pouvez sélectionner n'importe quel nombre entier comme valeur de gigaoctets dans la plage de tailles autorisée. La taille que vous choisissez détermine la plage d'IOPS dont vous pourrez bénéficier. Vous pouvez choisir une valeur d'IOPS multiple de 100 comprise dans la plage spécifiée. Le nombre d'IOPS que vous choisissez est statique et ne s'adapte pas à la taille du stockage. Par exemple, si vous choisissez 40Gi avec 100 IOPS, le nombre total d'IOPS restera 100. </br></br> Le rapport IOPS/gigaoctets détermine le type de disque dur mis à votre disposition. Par exemple, si vous avez 500Gi à 100 IOPS, votre rapport IOPS/gigaoctet est 0,2. Un stockage avec un rapport inférieur ou égal à 0,3 est fourni sur des disques durs SATA. Si votre rapport est supérieur à 0,3, votre stockage est fourni sur des disques durs SSD.  
      <table>
          <caption>Tableau des plages de tailles de classe de stockage personnalisée et nombre d'opérations d'entrée-sortie par seconde (IOPS)</caption>
          <thead>
@@ -148,9 +148,10 @@ Toutes les classes de stockage indiquent le type de stockage de fichiers à mett
 
 5. Déterminez si vous voulez conserver vos données après la suppression du cluster ou de la réservation de volume persistant (PVC).
    - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, seule la PVC est supprimée. Le volume persistant (PV), l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer), ainsi que vous données existent toujours. Pour récupérer le stockage et l'utiliser à nouveau dans votre cluster, vous devez supprimer le volume persistant et suivre les étapes pour [utiliser du stockage de fichiers existant](#existing_file).
-   - Si vous souhaitez que le volume persistant, les données et votre unité de stockage de fichiers physique soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`.
+   - Si vous souhaitez que le volume persistant, les données et votre unité de stockage de fichiers physique soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`. **Remarque** : si vous disposez d'un compte Dedicated, choisissez une classe de stockage sans `retain` pour éviter les volumes orphelins dans l'infrastructure IBM Cloud (SoftLayer).
 
-6. Choisissez une facturation à l'heure ou mensuelle. Pour plus d'informations, consultez la [tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing). Par défaut, toutes les unités de stockage de fichiers sont mises à disposition avec une facturation à l'heure. **Remarque :** si vous optez pour un type de facturation mensuel, lorsque vous supprimez le stockage persistant, vous devez quand même payer les frais mensuel, même si vous ne l'avez utilisé pendant très peu de temps.
+6. Choisissez une facturation à l'heure ou mensuelle. Pour plus d'informations, consultez la [tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing). Par défaut, toutes les unités de stockage de fichiers sont mises à disposition avec une facturation à l'heure.
+   **Remarque :** si vous optez pour un type de facturation mensuel, lorsque vous supprimez le stockage persistant, vous devez quand même payer les frais mensuel, même si vous ne l'avez utilisé pendant très peu de temps.
 
 <br />
 
@@ -173,7 +174,7 @@ Pour ajouter du stockage de fichiers :
 1.  Créez un fichier de configuration pour définir votre réservation de volume persistant (PVC) et sauvegardez la configuration sous forme de fichier `.yaml`.
 
     -  **Exemple de classes de stockage Bronze, Silver et Gold** :
-       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `"ibmc-file-silver"`, facturée au mois (`"monthly"`), avec une taille de `24Gi`. 
+       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `"ibmc-file-silver"`, facturée au mois (`"monthly"`), avec une taille de `24Gi`.
 
        ```
        apiVersion: v1
@@ -227,11 +228,15 @@ Pour ajouter du stockage de fichiers :
         </tr>
         <tr>
         <td><code>metadata/annotations</code></td>
-        <td>Nom de la classe de stockage que vous envisagez d'utiliser pour mettre à disposition du stockage de fichiers. </br> Si vous n'indiquez pas de classe de stockage, le volume persistant (PV) est créé avec la classe de stockage par défaut <code>ibmc-file-bronze</code>. <p>**Astuce :** pour modifier la classe de stockage par défaut, exécutez la commande <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> et remplacez <code>&lt;storageclass&gt;</code> par le nom de la classe de stockage.</p></td>
+        <td>Nom de la classe de stockage que vous envisagez d'utiliser pour mettre à disposition du stockage de fichiers. </br> Si vous n'indiquez pas de classe de stockage, le volume persistant (PV) est créé avec la classe de stockage par défaut <code>ibmc-file-bronze</code>.<p>**Astuce :** pour modifier la classe de stockage par défaut, exécutez la commande <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> et remplacez <code>&lt;storageclass&gt;</code> par le nom de la classe de stockage.</p></td>
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
           <td>Indiquez la fréquence de calcul de votre facture de stockage, au mois ("monthly") ou à l'heure ("hourly"). Si vous ne précisez pas de type de facturation, le stockage est mis à disposition avec un type de facturation à l'heure. </td>
+        </tr>
+        <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>Indiquez l'une des options suivantes : <ul><li><strong>ReadWriteMany : </strong>la réservation de volume persistant (PVC) peut être montée par plusieurs pods. Tous les pods peuvent effectuer des opérations de lecture et d'écriture dans le volume. </li><li><strong>ReadOnlyMany : </strong>la réservation de volume persistant (PVC) peut être montée par plusieurs pods. Tous les pods ont un accès en lecture seule. <li><strong>ReadWriteOnce : </strong>la réservation de volume persistant (PVC) peut être montée par un seul pod. Ce pod peut effectuer des opérations de lecture et d'écriture dans le volume. </li></ul></td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -343,7 +348,7 @@ Pour ajouter du stockage de fichiers :
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur.</td>
+    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur. Les données écrites dans le chemin de montage sont stockées sous le répertoire <code>root</code> dans votre instance de stockage de fichiers physique. Pour créer des répertoires dans cette instance, vous devez créer des sous-répertoires dans le chemin de montage. </td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -442,13 +447,15 @@ Pour utiliser du stockage existant dans un cluster différent de celui où vous 
 **Pour le stockage persistant mis à disposition en dehors du cluster :** </br>
 Si vous envisagez d'utiliser du stockage existant que vous avez mis à disposition auparavant mais que vous n'avez encore jamais utilisé dans votre cluster, vous devez le rendre accessible dans le même sous-réseau que vos noeuds worker.
 
+**Remarque** : si vous disposez d'un compte Dedicated, vous devez [ouvrir un ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
 1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://control.bluemix.net/), cliquez sur **Stockage**.
 2.  Cliquez sur **Stockage de fichiers** et, dans le menu **Actions**, sélectionnez **Autoriser l'hôte**.
 3.  Sélectionnez **Sous-réseaux**.
 4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers <cluster_name>` et comparez l'adresse IP privée (`Private IP`) de votre noeud worker au sous-réseau que vous avez trouvé dans la liste déroulante.
 5.  Cliquez sur **Soumettre**.
 6.  Cliquez sur le nom du stockage de fichiers.
-7.  Notez les zones de point de montage (`Mount Point`), de taille (`size`) et d'emplacement (`Location`). La zone `Mount Point` s'affiche sous la forme `<server>:/<path>`.
+7.  Notez les zones de point de montage (`Mount Point`), de taille (`size`) et d'emplacement (`Location`). La zone `Mount Point` s'affiche sous la forme `<nfs_server>:<file_storage_path>`.
 
 ### Etape 2 : Création d'un volume persistant (PV) et d'une réservation de volume persistant (PVC) correspondante
 
@@ -492,6 +499,10 @@ Si vous envisagez d'utiliser du stockage existant que vous avez mis à dispositi
     <td>Entrez la taille de stockage du partage de fichiers NFS existant que vous avez récupérée précédemment. Cette taille doit être indiquée en gigaoctets, par exemple 20Gi (20 Go) ou 1000Gi (1 To), et correspondre à celle du partage de fichiers existant.</td>
     </tr>
     <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>Indiquez l'une des options suivantes : <ul><li><strong>ReadWriteMany : </strong>la réservation de volume persistant (PVC) peut être montée par plusieurs pods. Tous les pods peuvent effectuer des opérations de lecture et d'écriture dans le volume. </li><li><strong>ReadOnlyMany : </strong>la réservation de volume persistant (PVC) peut être montée par plusieurs pods. Tous les pods ont un accès en lecture seule. <li><strong>ReadWriteOnce : </strong>la réservation de volume persistant (PVC) peut être montée par un seul pod. Ce pod peut effectuer des opérations de lecture et d'écriture dans le volume. </li></ul></td>
+    </tr>
+    <tr>
     <td><code>spec/nfs/server</code></td>
     <td>Entrez l'ID du serveur de partage de fichiers NFS que vous avez récupéré précédemment.</td>
     </tr>
@@ -504,7 +515,7 @@ Si vous envisagez d'utiliser du stockage existant que vous avez mis à dispositi
 3.  Créez le volume persistant dans votre cluster.
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -536,7 +547,7 @@ Si vous envisagez d'utiliser du stockage existant que vous avez mis à dispositi
 6.  Créez votre réservation de volume persistant (PVC).
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -588,7 +599,7 @@ Pour modifier la version NFS par défaut, vous pouvez créer une nouvelle classe
 1. Créez une [classe de stockage personnalisée](#nfs_version_class) avec la version NFS que vous voulez mettre à disposition.
 2. Créez la classe de stockage dans votre cluster.
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -629,7 +640,7 @@ Pour modifier la version NFS par défaut, vous pouvez créer une nouvelle classe
 
    3. Recréez le pod.
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
@@ -672,12 +683,12 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 <dl>
   <dt>Configurer la prise d'instantanés régulière</dt>
-  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage/snapshots.html). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. </br></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>Répertoriez les volumes persistants (PV) existants dans votre cluster. <pre class="pre"><code>    kubectl get pv
+  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage/snapshots.html). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez [ouvrir un ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>Répertoriez les volumes persistants (PV) existants dans votre cluster. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Obtenez les détails du volume persistant pour lequel vous voulez créer un espace d'instantané et notez l'ID du volume, la taille et le nombre d'entrées-sorties par seconde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> L'ID du volume, la taille et le nombre d'IOPS se trouvent dans la section <strong>Labels</strong> dans la sortie de l'interface CLI. </li><li>Créez la taille de l'instantané pour le volume existant avec les paramètres que vous avez récupérés à l'étape précédente. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Attendez que la taille de l'instantané soit créée. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>La taille de l'instantané est mise à disposition lorsque la section <strong>Snapshot Capacity (GB)</strong> de la sortie de l'interface CLI passe de 0 à la taille que vous avez commandée. </li><li>Créez l'instantané de votre volume et notez l'ID de l'instantané qui a été créé pour vous. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>Vérifiez que la création de l'instantané a abouti. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>Pour restaurer les données d'un instantané sur un volume existant : </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>Répliquer les instantanés dans une autre zone</dt>
- <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage/replication.html#replicating-data) sur une instance de stockage de fichiers configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage de fichiers répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde. </p></dd>
+ <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage/replication.html#replicating-data) sur une instance de stockage de fichiers configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage de fichiers répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous ne pouvez pas répliquer des instantanés sur une autre zone.</p></dd>
  <dt>Dupliquer le stockage</dt>
- <dd><p>Vous pouvez [dupliquer votre instance de stockage de fichiers](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) dans la même zone que l'instance de stockage d'origine. Un doublon contient les même données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, commencez par [configurer des instantanés pour le volume](/docs/infrastructure/FileStorage/snapshots.html).</p></dd>
+ <dd><p>Vous pouvez [dupliquer votre instance de stockage de fichiers](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) dans la même zone que l'instance de stockage d'origine. Un doublon contient les même données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, commencez par [configurer des instantanés pour le volume](/docs/infrastructure/FileStorage/snapshots.html). <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un ticket de demande de service</a>.</p></dd>
   <dt>Sauvegarder les données dans {{site.data.keyword.cos_full}}</dt>
   <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.cos_full}} que vous avez configuré dans une zone.</p>
   <p>Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'une zone, configurez une deuxième instance {{site.data.keyword.cos_full}} et répliquez les données entre les différentes zones. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.cos_full}}, utilisez le script de restauration fourni avec l'image.</p></dd>
@@ -688,7 +699,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 <ul>
 <li>Copier les données de votre machine locale vers un pod dans votre cluster : <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>Copier les données d'un pod de votre cluster vers votre machine locale : <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>Copier les données d'un pod de votre cluster vers un conteneur spécifique dans un autre pod : <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>Copier les données de votre machine locale vers un conteneur spécifique qui s'exécute dans un pod de votre cluster : <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -903,7 +914,7 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### Modification de la version NFS par défaut
+### Modification de la version NFS par défaut
 {: #nfs_version_class}
 
 La classe de stockage personnalisée suivante est basée sur la [classe de stockage `ibmc-file-bronze`](#bronze) et vous permet de définir la version NFS que vous souhaitez mettre à disposition. Par exemple, pour mettre à disposition NFS version 3.0, remplacez `<nfs_version>` par **3.0**.

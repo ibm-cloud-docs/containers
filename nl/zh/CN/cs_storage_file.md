@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -59,7 +59,7 @@ lastupdated: "2018-08-06"
    ```
    {: pre}
 
-   有关每个存储类的更多信息，请参阅[存储类参考](#storageclass_reference)。如果找不到要查找的内容，请考虑创建自己的定制存储类。首先，请查看[定制存储类样本](#custom_storageclass)。
+   有关每个存储类的更多信息，请参阅[存储类参考](#storageclass_reference)。如果找不到要查找的内容，请考虑创建您自己的定制存储类。首先，请查看[定制存储类样本](#custom_storageclass)。
    {: tip}
 
 3. 选择要供应的文件存储器的类型。
@@ -148,7 +148,7 @@ lastupdated: "2018-08-06"
 
 5. 选择在删除集群或持久性卷申领 (PVC) 后是否要保留数据。
    - 如果要保留数据，请选择 `retain` 存储类。删除 PVC 时，仅会删除 PVC。PV、IBM Cloud Infrastructure (SoftLayer) 帐户中的物理存储设备以及数据仍会存在。要回收存储器并再次在集群中使用，必须除去 PV，并执行[使用现有文件存储器](#existing_file)的步骤。
-   - 如果要在删除 PVC 时删除 PV、数据和物理文件存储设备，请选择不带 `retain` 的存储类。
+   - 如果要在删除 PVC 时删除 PV、数据和物理文件存储设备，请选择不带 `retain` 的存储类。**注**：如果您有 Dedicated 帐户，那么选择不带 `retain` 的存储类以阻止 IBM Cloud Infrastructure (SoftLayer) 中出现孤线程卷。
 
 6. 选择是要按小时还是按月计费。有关更多信息，请查看[定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/file-storage/pricing)。缺省情况下，所有文件存储设备都以按小时计费类型进行供应。
    **注：**如果选择按月计费类型，那么除去持久性存储器时，即使只用了很短的时间，您也仍需支付该持久性存储器一个月的费用。
@@ -235,6 +235,10 @@ lastupdated: "2018-08-06"
           <td>指定用于计算存储器帐单的频率："monthly" 或 "hourly"。如果未指定计费类型，那么会为存储器供应按小时计费类型。 </td>
         </tr>
         <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>指定下列选项之一：<ul><li><strong>ReadWriteMany：</strong>多个 pod 可安装 PVC。所有 pod 可对卷进行读取和写入。</li><li><strong>ReadOnlyMany：</strong>PVC 可由多个 pod 安装。所有 pod 都具有只读访问权。<li><strong>ReadWriteOnce：</strong>PVC 只能由一个 pod 安装。此 pod 可对卷进行读取和写入。</li></ul></td>
+        </tr>
+        <tr>
         <td><code>spec/resources/requests/storage</code></td>
         <td>输入文件存储器的大小，以千兆字节 (Gi) 为单位。</br></br><strong>注：</strong>供应存储器后，即不能更改文件存储器的大小。因此，请确保指定与要存储的数据量相匹配的大小。</td>
         </tr>
@@ -288,7 +292,7 @@ lastupdated: "2018-08-06"
     {: tip}
 
     ```
-    apiVersion: apps/v1beta1
+apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: <deployment_name>
@@ -344,7 +348,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>在容器中安装卷的目录的绝对路径。</td>
+    <td>在容器中安装卷的目录的绝对路径。写入安装路径的数据存储在物理文件存储实例的 <coode>root</code> 目录下。要在物理文件存储实例中创建目录，必须在安装路径中创建子目录。</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -381,11 +385,12 @@ lastupdated: "2018-08-06"
           /volumemount from myvol (rw)
     ...
      Volumes:
-       myvol:
-         Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-         ClaimName:	mypvc
-         ReadOnly:	false
-     ```
+      myvol:
+        Type: PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+        ClaimName: mypvc
+        ReadOnly: false
+
+    ```
      {: screen}
 
 <br />
@@ -444,13 +449,15 @@ lastupdated: "2018-08-06"
 **对于在集群外部供应的持久性存储器：**</br>
 如果要使用先前供应但从未在集群中使用的现有存储器，那么必须使存储器在工作程序节点所在的子网中可用。
 
+**注**：如果您有 Dedicated 帐户，那么必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
 1.  {: #external_storage}在 [IBM Cloud Infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.bluemix.net/) 中，单击**存储**。
 2.  单击**文件存储器**并从**操作**菜单中，选择**授权主机**。
 3.  选择**子网**。
 4.  从下拉列表中，选择工作程序节点连接到的专用 VLAN 子网。要查找工作程序节点的子网，请运行 `ibmcloud ks workers <cluster_name>`，并将工作程序节点的`专用 IP` 与下拉列表中找到的子网进行比较。
 5.  单击**提交**。
 6.  单击文件存储器的名称。
-7.  记录 `Mount Point`、`size` 和 `Location` 字段。`Mount Point` 字段显示为 `<server>:/<path>`。
+7.  记录 `Mount Point`、`size` 和 `Location` 字段。`Mount Point` 字段显示为 `<nfs_server>:<file_storage_path>`.
 
 ### 步骤 2：创建持久性卷 (PV) 和匹配的持久性卷申领 (PVC)
 
@@ -494,6 +501,10 @@ lastupdated: "2018-08-06"
     <td>输入先前检索到的现有 NFS 文件共享的存储器大小。输入的存储器大小必须以千兆字节为单位，例如 20Gi (20 GB) 或 1000Gi (1 TB)，并且大小必须与现有文件共享的大小相匹配。</td>
     </tr>
     <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>指定下列选项之一：<ul><li><strong>ReadWriteMany：</strong>多个 pod 可安装 PVC。所有 pod 可对卷进行读取和写入。</li><li><strong>ReadOnlyMany：</strong>PVC 可由多个 pod 安装。所有 pod 都具有只读访问权。<li><strong>ReadWriteOnce：</strong>PVC 只能由一个 pod 安装。此 pod 可对卷进行读取和写入。</li></ul></td>
+    </tr>
+    <tr>
     <td><code>spec/nfs/server</code></td>
     <td>输入先前检索到的 NFS 文件共享服务器标识。</td>
     </tr>
@@ -504,9 +515,10 @@ lastupdated: "2018-08-06"
     </tbody></table>
 
 3.  在集群中创建 PV。
+    
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -538,8 +550,8 @@ lastupdated: "2018-08-06"
 6.  创建 PVC。
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
-    ```
+     kubectl apply -f mypvc.yaml
+     ```
     {: pre}
 
 7.  验证 PVC 是否已创建并与 PV 绑定。此过程可能需要几分钟时间。
@@ -590,7 +602,7 @@ lastupdated: "2018-08-06"
 1. 使用要供应的 NFS 版本创建[定制存储类](#nfs_version_class)。
 2. 在集群中创建存储类。
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -631,14 +643,14 @@ lastupdated: "2018-08-06"
 
    3. 重新创建 pod。
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
 4. 等待 pod 部署。
    ```
-   kubectl get pods
-   ```
+            kubectl get pods
+            ```
    {: pre}
 
    状态更改为 `Running` 时，说明 pod 已完全部署。
@@ -667,19 +679,19 @@ lastupdated: "2018-08-06"
 ## 备份和复原数据
 {: #backup_restore}
 
-文件存储器已供应到集群中的工作程序节点所在的位置。存储器由 IBM 在集群服务器上托管，以在服务器停止运行时提供可用性。但是，文件存储器不会自动进行备份，因此在整个位置发生故障时可能无法进行访问。为了防止数据丢失或损坏，可以设置定期备份，以便在需要时可用于复原数据。
+文件存储器已供应到集群中的工作程序节点所在的位置。存储器由 IBM 在集群服务器上托管，以在其中某个服务器停止运行时提供可用性。但是，文件存储器不会自动进行备份，因此在整个位置发生故障时可能无法进行访问。为了防止数据丢失或损坏，可以设置定期备份，以便在需要时可用于复原数据。
 {: shortdesc}
 
 查看文件存储器的以下备份和复原选项：
 
 <dl>
   <dt>设置定期快照</dt>
-  <dd><p>可以[为文件存储器设置定期快照](/docs/infrastructure/FileStorage/snapshots.html)，这是捕获某个时间点的实例状态的只读图像。要存储快照，必须在文件存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户意外地从卷中除去了重要数据，那么可以通过快照来复原数据。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
+  <dd><p>可以[为文件存储器设置定期快照](/docs/infrastructure/FileStorage/snapshots.html)，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在文件存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户意外地从卷中除去了重要数据，那么可以通过快照来复原数据。<strong>注</strong>：如果您有 Dedicated 帐户，那么必须[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>获取要为其创建快照空间的 PV 的详细信息，并记下卷标识、大小和 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可以在 CLI 输出的 <strong>Labels</strong> 部分中找到卷标识、大小和 IOPS。</li><li>使用您在先前步骤中检索到的参数为现有卷创建快照大小。<pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>等待快照大小创建。<pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre>CLI 输出中的 <strong>Snapshot Capacity (GB)</strong> 从 0 更改为您所订购的大小时，说明已成功供应快照大小。</li><li>为卷创建快照，并记下创建的快照的标识。<pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>验证快照是否已成功创建。<pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>要将数据从快照复原到现有卷，请运行以下命令：</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
   <dt>将快照复制到其他专区</dt>
- <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/FileStorage/replication.html#replicating-data)到其他专区中设置的文件存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的文件存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。</p></dd>
+ <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/FileStorage/replication.html#replicating-data)到其他专区中设置的文件存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的文件存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。<strong>注</strong>：如果您有 Dedicated 帐户，那么无法将快照复制到其他专区。</p></dd>
  <dt>复制存储器</dt>
- <dd><p>可以在原始存储器实例所在的专区中，[复制文件存储器实例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。复制项采用原始存储器实例在创建该复制项的时间点的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先[为卷设置快照](/docs/infrastructure/FileStorage/snapshots.html)。</p></dd>
+ <dd><p>可以在原始存储器实例所在的专区中，[复制文件存储器实例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。复制项采用原始存储器实例在创建该复制项的时间点的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先[为卷设置快照](/docs/infrastructure/FileStorage/snapshots.html)。<strong>注</strong>：如果您有 Dedicated 帐户，那么必须<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">开具支持凭单</a>。</p></dd>
   <dt>将数据备份到 {{site.data.keyword.cos_full}}</dt>
   <dd><p>可以使用 [**ibm-backup-restore 映像**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)来加快集群中的备份和复原 pod。此 pod 包含一个脚本，用于对集群中的任何持久性卷申领 (PVC) 运行一次性或定期备份。数据存储在您在某个专区设置的 {{site.data.keyword.cos_full}} 实例中。</p>
   <p>要使数据具有更高可用性，并保护应用程序不受专区故障的影响，请设置第二个 {{site.data.keyword.cos_full}} 实例，并在各个专区之间复制数据。如果需要从 {{site.data.keyword.cos_full}} 实例复原数据，请使用随映像一起提供的复原脚本。</p></dd>
@@ -690,7 +702,7 @@ lastupdated: "2018-08-06"
 <ul>
 <li>将本地机器中的数据复制到集群中的 pod：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>将集群的 pod 中的数据复制到本地机器：<pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>将集群的 pod 中的数据复制到其他集群的其他 pod 中的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>将数据从本地计算机复制到在集群中的 pod 中运行的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -905,7 +917,7 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### 更改缺省 NFS 版本
+### 更改缺省 NFS 版本
 {: #nfs_version_class}
 
 以下定制存储类基于 [`ibmc-file-bronze` 存储类](#bronze)，并允许您定义要供应的 NFS 版本。例如，要供应 NFS V3.0，请将 `<nfs_version>` 替换为 **3.0**。

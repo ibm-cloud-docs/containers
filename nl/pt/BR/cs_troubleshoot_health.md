@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -64,9 +64,9 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
   <tr>
     <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
       <td>Para mudar permissões de acesso para o proprietário da conta:
-      <ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html">Gerenciando o acesso ao cluster</a>.</li>
-      <li>Para atualizar o token de criação de log após as permissões serem mudadas, execute <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <li>Para atualizar o token de criação de log após as permissões serem mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Você tem uma configuração de criação de log do aplicativo com um link simbólico no caminho do app.</td>
@@ -152,5 +152,5 @@ Ainda está tendo problemas com o seu cluster?
 -   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+Ao relatar um problema, inclua o ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
 

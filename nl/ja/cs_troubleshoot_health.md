@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -64,9 +64,9 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
   <tr>
     <td>クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。</td>
       <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。
-      <ol><li>クラスターのアカウント所有者を見つけるために、<code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code> を実行します。</li>
+      <ol><li>クラスターのアカウント所有者を見つけるために、<code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code> を実行します。</li>
       <li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containershort_notm}} アクセス許可を付与する方法については、<a href="cs_users.html">クラスター・アクセス権限の管理</a>を参照してください。</li>
-      <li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code> を実行します。</li></ol></td>
+      <li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code> を実行します。</li></ol></td>
     </tr>
     <tr>
       <td>アプリケーション・ロギング構成でアプリのパスにシンボリック・リンクが使用されている。</td>
@@ -152,5 +152,5 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
 -   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
 
 {: tip}
-問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`bx cs clusters` を実行します。
 

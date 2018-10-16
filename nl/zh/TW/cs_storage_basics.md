@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -30,7 +30,7 @@ lastupdated: "2018-08-06"
 <img src="images/cs_storage_pvc_pv.png" alt="叢集裡的儲存空間元件" width="300" style="width: 300px; border-style: none"/>
 
 - **叢集**</br> 依預設，每個叢集都會設定一個外掛程式，以[佈建檔案儲存空間](cs_storage_file.html#add_file)。您可以選擇安裝其他附加程式，例如適用於[區塊儲存空間](cs_storage_block.html)的附加程式。若要在叢集裡使用儲存空間，您必須建立持續性磁區要求、持續性磁區及實體儲存空間實例。當您刪除叢集時，可以選擇刪除相關的儲存空間實例。
-- **應用程式**</br> 若要從您的儲存空間實例讀取，以及寫入到其中，您必須將持續性磁區要求 (PVC) 裝載至您的應用程式。不同的儲存空間類型有不同的讀寫規則。例如，您可以將多個 Pod 裝載至同一個 PVC，以進行檔案儲存。區塊儲存空間具有 RWO (ReadWriteOnce) 存取模式，因此您只能將儲存空間裝載至一個 Pod。 
+- **應用程式**</br> 若要從您的儲存空間實例讀取，以及寫入到其中，您必須將持續性磁區要求 (PVC) 裝載至您的應用程式。不同的儲存空間類型有不同的讀寫規則。例如，您可以將多個 Pod 裝載至檔案儲存空間的同一個 PVC。區塊儲存空間具有 RWO (ReadWriteOnce) 存取模式，因此您只能將儲存空間裝載至一個 Pod。 
 - **持續性磁區要求 (PVC)** </br> PVC 是利用特定類型及配置來佈建持續性儲存空間的要求。若要指定您想要的持續性儲存空間特性，請使用 [Kubernetes 儲存空間類別](#storageclasses)。叢集管理者可以定義儲存空間類別，或者您可以從 {{site.data.keyword.containerlong_notm}} 的預先定義儲存空間類別中選擇一個。當您建立 PVC 時，要求會傳送至 {{site.data.keyword.Bluemix}} 儲存空間提供者。視儲存空間類別中定義的配置而定，會訂購實體儲存裝置，並將其佈建至您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。如果所要求的配置不存在，則不會建立儲存空間。 
 - **持續性磁區 (PV)** </br> PV 是以磁區形式新增至叢集的虛擬儲存空間實例。PV 指向 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，並使用來與儲存裝置通訊的 API 抽象化。若要將 PV 裝載至應用程式，您必須具有相符的 PVC。裝載的 PV 會以資料夾形式出現在容器的檔案系統內。 
 - **實體儲存空間** </br> 您可以用來持續保存資料的實體儲存空間實例。{{site.data.keyword.containerlong_notm}} 提供實體儲存空間實例的高可用性。不過，儲存在實體儲存空間實例上的資料不會自動備份。視您使用的儲存空間類型而定，有不同的方法存在，可設定備份及還原解決方案。 
@@ -114,7 +114,7 @@ lastupdated: "2018-08-06"
 若要動態佈建持續性儲存空間，您必須定義想要的儲存空間類型及配置。
 {: shortdesc}
 
-Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支援的基礎儲存空間平台抽象化，因此您不必知道所有關於支援大小、IOPS 或保留原則的詳細資料，即可在叢集裡順利地佈建持續性儲存空間。{{site.data.keyword.containershort_notm}} 為支援的每種儲存空間類型提供預先定義的儲存空間類別。每一個儲存類別都設計成使支援的儲存空間層級抽象化，同時又可讓您選擇決定想要的大小、IOPS 及保留原則。 
+Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支援的基礎儲存空間平台抽象化，因此您不必知道所有關於支援大小、IOPS 或保留原則的詳細資料，即可在叢集裡順利地佈建持續性儲存空間。{{site.data.keyword.containerlong_notm}} 為支援的每種儲存空間類型提供預先定義的儲存空間類別。每一個儲存空間類別都設計成使支援的儲存空間層級抽象化，同時又可讓您選擇決定想要的大小、IOPS 及保留原則。 
 
 如需預先定義的儲存空間類別規格相關資訊，請參閱： 
 - [檔案儲存空間](cs_storage_file.html#storageclass_reference)
@@ -129,7 +129,7 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 如果您無法使用其中一個提供的儲存空間類別，可以自行建立自訂儲存空間類別。
 {: shortdesc}
 
-1. 建立自訂的儲存空間類別。首先，您可以使用其中一個預先定義的儲存類別，或是參閱我們的自訂儲存空間類別範例。 
+1. 建立自訂的儲存空間類別。首先，您可以使用其中一個預先定義的儲存空間類別，或是參閱我們的自訂儲存空間類別範例。 
    - 預先定義的儲存空間類別： 
      - [檔案儲存空間](cs_storage_file.html#storageclass_reference)
      - [區塊儲存空間](cs_storage_block.html#storageclass_reference)
@@ -218,7 +218,7 @@ Kubernetes 儲存空間類別用來使 {{site.data.keyword.Bluemix_notm}} 中支
 
 開始之前：
 - [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
-- 針對您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。作為 VLAN Spanning 的替代方案，如果您已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中啟用「虛擬路由器功能 (VRF)」，則可以使用它。
+- 如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
 
 若要更新現有 PV，請執行下列動作：
 

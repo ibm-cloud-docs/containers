@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,64 +24,12 @@ lastupdated: "2018-08-06"
 Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulteriori informazioni sulle nuove funzioni da esplorare, su un suggerimento per la sperimentazione o su alcuni argomenti popolari che gli altri sviluppatori stanno trovando utili al momento.
 {:shortdesc}
 
-## Argomenti popolari nel luglio 2018
-{: #july18}
-
-<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel luglio 2018</caption>
-<thead>
-<th>Data</th>
-<th>Titolo</th>
-<th>Descrizione</th>
-</thead>
-<tbody>
-<tr>
-<td>30 luglio</td>
-<td>[Usa il tuo controller Ingress](cs_ingress.html#user_managed)</td>
-<td>Hai requisiti di sicurezza particolarmente specifici o altri requisiti personalizzati per il controller Ingress del tuo cluster? Se sì, potresti voler eseguire il tuo controller Ingress invece di quello predefinito. </td>
-</tr>
-<tr>
-<td>10 luglio</td>
-<td>Introduzione dei cluster multizona</td>
-<td>Vuoi migliorare la disponibilità del cluster? Ora puoi estendere il tuo cluster tra più zone in aree metropolitane selezionate. Per ulteriori informazioni, vedi [Creazione di cluster multizona in {{site.data.keyword.containershort_notm}}](cs_clusters.html#multizone).</td>
-</tr>
-</tbody></table>
-
-## Argomenti popolari nel giugno 2018
-{: #june18}
-
-<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel giugno 2018</caption>
-<thead>
-<th>Data</th>
-<th>Titolo</th>
-<th>Descrizione</th>
-</thead>
-<tbody>
-<tr>
-<td>13 giugno</td>
-<td>Il nome del comando CLI `bx` è stato modificato nel comando CLI `ic`</td>
-<td>Quando scarichi la versione più recente della CLI di {{site.data.keyword.Bluemix_notm}}, esegui i comandi utilizzando il prefisso `ic` invece di `bx`. Ad esempio, elenca i tuoi cluster eseguendo `ibmcloud ks clusters`.</td>
-</tr>
-<tr>
-<td>12 giugno</td>
-<td>[Politiche di sicurezza del pod](cs_psp.html)</td>
-<td>Per i cluster su cui è in esecuzione Kubernetes 1.10.3 o successive, puoi configurare le politiche di sicurezza del
-pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.containerlong_notm}}.</td>
-</tr>
-<tr>
-<td>06 giugno</td>
-<td>[Supporto TLS per il dominio secondario jolly Ingress fornito da IBM](cs_ingress.html#wildcard_tls)</td>
-<td>Per i cluster creati dopo il 6 giugno 2018, il certificato TLS del dominio secondario jolly Ingress fornito da IBM è ora un certificato jolly e può essere usato per il dominio secondario jolly registrato. Per i cluster creati prima del 6 giugno 2018, il certificato TLS verrà aggiornato a un certificato jolly quando verrà rinnovato il certificato TLS corrente.</td>
-</tr>
-</tbody></table>
-
 ## Argomenti popolari nel maggio 2018
 {: #may18}
 
 
 <table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel maggio 2018</caption>
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel maggio 2018 </caption>
 <thead>
 <th>Data</th>
 <th>Titolo</th>
@@ -127,7 +75,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 <tr>
 <td>17 aprile</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Installa il [plugin](cs_storage_block.html#install_block) di {{site.data.keyword.Bluemix_notm}} Block Storage per salvare i dati persistenti nell'archiviazione blocchi. Quindi puoi [creare una nuova](cs_storage_block.html#add_block) archiviazione blocchi o [utilizzarne una esistente](cs_storage_block.html#existing_block) per il tuo cluster.</td>
+<td>Installa il [plug-in](cs_storage.html#install_block) di {{site.data.keyword.Bluemix_notm}} Block Storage per salvare i dati persistenti nell'archiviazione blocchi. Quindi puoi [creare una nuova](cs_storage.html#create) archiviazione blocchi o [utilizzarne una esistente](cs_storage.html#existing_block) per il tuo cluster.</td>
 </tr>
 <tr>
 <td>13 aprile</td>
@@ -135,7 +83,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 <td>Hai un'applicazione Cloud Foundry? Impara a distribuire lo stesso codice proveniente da tale applicazione ad un'applicazione che viene eseguita in un cluster Kubernetes.</td>
 </tr>
 <tr>
-<td>05 aprile</td>
+<td>5 aprile</td>
 <td>[Filtraggio dei log](cs_health.html#filter-logs)</td>
 <td>Filtra specifici log per impedire che vengano inoltrati. I log possono essere filtrati per uno specifico spazio dei nomi, nome contenitore, livello di log e stringa di messaggio.</td>
 </tr>
@@ -164,13 +112,13 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>13 marzo</td>
-<td>[Zona disponibile a San Paolo](cs_regions.html)</td>
-<td>San Paolo, in Brasile, è una nuova zona nella regione Stati Uniti Sud. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa zona e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>[Ubicazione disponibile a San Paolo](cs_regions.html)</td>
+<td>San Paolo, in Brasile, è la nuova ubicazione nella regione Stati Uniti Sud. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
 <td>12 marzo</td>
 <td>[Ti sei appena registrato a {{site.data.keyword.Bluemix_notm}} con un account di prova? Prova un cluster Kubernetes gratuito!](container_index.html#clusters)</td>
-<td>Con un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) di prova, puoi distribuire un cluster gratuito per 30 giorni per verificare le funzionalità di Kubernetes. </td>
+<td>Con un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) di prova, puoi distribuire un cluster gratuito per 21 giorni per testare le funzionalità di Kubernetes.</td>
 </tr>
 </tbody></table>
 
@@ -188,7 +136,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 <tr>
 <td>27 febbraio</td>
 <td>Immagini HVM (hardware virtual machine) per i nodi di lavoro</td>
-<td>Aumenta le prestazioni I/O dei tuoi carichi di lavoro con le immagini HVM. Attivale su ogni nodo di lavoro esistente utilizzando il [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` o il [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`. </td>
+<td>Aumenta le prestazioni I/O dei tuoi carichi di lavoro con le immagini HVM. Attivale su ogni nodo di lavoro esistente utilizzando il [comando](cs_cli_reference.html#cs_worker_reload) `bx cs worker-reload` o il [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.</td>
 </tr>
 <tr>
 <td>26 febbraio</td>
@@ -203,7 +151,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 <tr>
 <td>20 febbraio</td>
 <td>Immagini crittografate e [contenuti firmati e attendibili](../services/Registry/registry_trusted_content.html#registry_trustedcontent)</td>
-<td>In {{site.data.keyword.registryshort_notm}}, puoi firmare e crittografare le immagini per garantirne l'integrità durante la memorizzazione nello spazio dei nomi del tuo registro. Esegui le tue istanze del contenitore utilizzando solo contenuti attendibili.</td>
+<td>In {{site.data.keyword.registryshort_notm}}, puoi firmare e crittografare le immagini per garantirne l'integrità durante la memorizzazione nello spazio dei nomi del tuo registro. Esegui le tue istanze del contenitore utilizzando solo contenuti attendibili. </td>
 </tr>
 <tr>
 <td>19 febbraio</td>
@@ -212,13 +160,13 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>14 febbraio</td>
-<td>[Zona disponibile a Seoul](cs_regions.html)</td>
-<td>Giusto in tempo per le Olimpiadi, distribuisci un cluster Kubernetes a Seoul nella regione Asia Pacifico Nord. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa zona e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>[Ubicazione disponibile a Seoul](cs_regions.html)</td>
+<td>Giusto in tempo per le Olimpiadi, distribuisci un cluster Kubernetes a Seoul nella regione Asia Pacifico Nord. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa ubicazione e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
-<td>08 febbraio</td>
+<td>8 febbraio</td>
 <td>[Aggiorna Kubernetes 1.9](cs_versions.html#cs_v19)</td>
-<td>Rivedi le modifiche da apportare ai tuoi cluster prima di aggiornare a Kubernetes 1.9.</td>
+<td>Rivedi le modifiche da apportare ai tuoi cluster prima di aggiornare a Kubernetes 1.9. </td>
 </tr>
 </tbody></table>
 
@@ -239,11 +187,11 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>23 gennaio</td>
-<td>[Zone disponibili a Singapore e Montreal, CA](cs_regions.html)</td>
-<td>Singapore e Montreal sono le zone disponibili nelle regioni Asia Pacifico Nord e Stati Uniti Est di {{site.data.keyword.containershort_notm}}. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per queste zone e le altre all'interno della regione in cui si trova il tuo cluster.</td>
+<td>[Ubicazioni disponibili a Singapore e Montreal, CA](cs_regions.html)</td>
+<td>Singapore e Montreal sono le ubicazioni disponibili nelle regioni Asia Pacifico Nord e Stati Uniti Est di {{site.data.keyword.containershort_notm}}. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per queste ubicazioni e le altre all'interno della regione in cui si trova il tuo cluster.</td>
 </tr>
 <tr>
-<td>08 gennaio</td>
+<td>8 gennaio</td>
 <td>[Disponibili caratteristiche avanzate](cs_cli_reference.html#cs_machine_types)</td>
 <td>I tipi di macchine virtuali della serie 2 includono l'archiviazione SSD locale e la crittografia del disco. [Sposta i tuoi carichi di lavoro](cs_cluster_update.html#machine_type) a queste caratteristiche per migliorare prestazioni e stabilità.</td>
 </tr>

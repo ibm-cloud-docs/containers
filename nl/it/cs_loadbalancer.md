@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -20,20 +20,31 @@ lastupdated: "2018-08-06"
 # Esposizione delle applicazioni con LoadBalancers
 {: #loadbalancer}
 
-Esponi una porta e usa un indirizzo IP portatile per un programma di bilanciamento del carico di livello 4 per accedere a un'applicazione inserita in un contenitore.
+Esponi una porta e utilizza un indirizzo IP portatile per il programma di bilanciamento del carico per accedere a un'applicazione inserita in un contenitore.
 {:shortdesc}
 
-## Componenti del programma di bilanciamento del carico e architettura
+## Gestione del traffico di rete utilizzando LoadBalancers
 {: #planning}
 
-Quando crei un cluster standard, {{site.data.keyword.containershort_notm}} esegue automaticamente il provisioning di una sottorete pubblica portatile e di una sottorete privata portatile. 
+Quando crei un cluster standard, {{site.data.keyword.containershort_notm}} esegue automaticamente il provisioning delle seguenti sottoreti:
+* Una sottorete pubblica primaria che determina gli indirizzi IP pubblici per i nodi di lavoro durante la creazione del cluster 
+* Una sottorete privata primaria che determina gli indirizzi IP privati per i nodi di lavoro durante la creazione del cluster 
+* Una sottorete pubblica portatile che fornisce 5 indirizzi IP pubblici per i servizi di rete di bilanciamento del carico e Ingress 
+* Una sottorete privata portatile che fornisce 5 indirizzi IP privati per i servizi di rete di bilanciamento del carico e Ingress 
 
-* La sottorete pubblica portatile fornisce un indirizzo IP pubblico portatile che viene usato dall'[ALB Ingress pubblico](cs_ingress.html) predefinito. I restanti 4 indirizzi IP pubblici portatili possono essere usati per esporre le singole applicazioni su internet creando un servizio del programma di bilanciamento del carico pubblico. 
-* La sottorete privata portatile fornisce un indirizzo IP privato portatile che viene usato dall'[ALB Ingress privato](cs_ingress.html#private_ingress) predefinito. I restanti 4 indirizzi IP privati portatili possono essere usati per esporre le singole applicazioni su una rete privata creando un servizio del programma di bilanciamento del carico privato. 
+Gli indirizzi IP pubblici e privati portatili sono statici e non cambiano quando viene rimosso un nodo di lavoro. Per ogni sottorete, viene utilizzato un indirizzo IP pubblico e un indirizzo IP privato portatili per i [programmi di bilanciamento del carico dell'applicazione Ingress](cs_ingress.html) predefiniti. I restanti quattro indirizzi IP pubblici portatili e quattro privati portatili possono essere utilizzati per esporre singole applicazioni alla rete pubblica o privata creando un servizio di bilanciamento del carico.
 
-Gli indirizzi IP pubblici e privati portatili sono statici e non cambiano quando viene rimosso un nodo di lavoro. Se il nodo di lavoro su cui si trova l'indirizzo IP del programma di bilanciamento del carico viene rimosso, un daemon keepalive, che monitora costantemente l'IP, sposta automaticamente l'IP in un altro nodo di lavoro. Puoi assegnare una qualsiasi porta al tuo programma di bilanciamento del carico e non è associata a un dato intervallo di porte. 
+Quando crei un servizio Kubernetes LoadBalancer in un cluster in una VLAN pubblica, viene creato
+un programma di bilanciamento del carico esterno. Le opzioni di indirizzi IP quando crei un servizio LoadBalancer sono le seguenti:
 
-Un servizio del programma di bilanciamento del carico rende anche disponibili le applicazioni sulle NodePorts del servizio. Puoi accedere alle [NodePorts](cs_nodeport.html) da ogni indirizzo IP pubblico e privato per ogni nodo all'interno del cluster. Per bloccare il traffico alle NodePorts mentre stai usando un servizio del programma di bilanciamento del carico, vedi [Controllo del traffico in entrata nei servizi LoadBalancer o NodePort](cs_network_policy.html#block_ingress).
+- Se il tuo cluster è su una VLAN pubblica, viene utilizzato uno dei quattro indirizzi IP pubblici portatili disponibili.
+- Se il tuo cluster è disponibile solo su una VLAN privata, viene utilizzato uno dei quattro indirizzi IP privati portatili disponibili.
+- Puoi richiedere un indirizzo IP pubblico o privato portatile per un servizio LoadBalancer aggiungendo un'annotazione al file di configurazione: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
+
+L'indirizzo IP pubblico portatile assegnato al tuo servizio
+LoadBalancer è permanente e non viene modificato quando un nodo di lavoro viene rimosso
+o ricreato. Pertanto, il servizio LoadBalancer è più disponibile del servizio NodePort. A differenza dei servizi NodePort, puoi assegnare una qualsiasi porta al tuo programma di bilanciamento del carico
+e non è associato a un dato intervallo di porte. Se utilizzi un servizio LoadBalancer, è disponibile anche una NodePort per ogni indirizzo IP di ogni nodo di lavoro. Per bloccare l'accesso alla NodePort mentre stai utilizzando un servizio LoadBalancer, consulta [Blocco del traffico in entrata](cs_network_policy.html#block_ingress).
 
 Il servizio
 LoadBalancer funge da punto di ingresso per le richieste in entrata per l'applicazione. Per accedere al servizio LoadBalancer da internet,
@@ -41,118 +52,48 @@ utilizza l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e
 
 <img src="images/cs_loadbalancer_planning.png" width="550" alt="Esponi un'applicazione in {{site.data.keyword.containershort_notm}} utilizzando un programma di bilanciamento del carico" style="width:550px; border-style: none"/>
 
-1. Una richiesta alla tua applicazione usa l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e la porta assegnata sul nodo di lavoro. 
+1. Viene inviata una richiesta alla tua applicazione utilizzando l'indirizzo IP pubblico del tuo programma di bilanciamento del carico e la porta assegnata sul nodo di lavoro.
 
 2. La richiesta viene inoltrata automaticamente alla porta e all'indirizzo IP del cluster interno del servizio di bilanciamento del carico. L'indirizzo IP del cluster interno è accessibile solo all'interno del cluster.
 
 3. `kube-proxy` instrada la richiesta al servizio di bilanciamento del carico Kubernetes per l'applicazione.
 
-4. La richiesta viene inoltrata all'indirizzo IP privato del pod dell'applicazione. L'indirizzo IP di origine del pacchetto di richieste viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, il programma di bilanciamento del carico instrada le richieste tra i pod dell'applicazione.
+4. La richiesta viene inoltrata all'indirizzo IP privato del pod in cui è distribuita l'applicazione. Se nel cluster vengono distribuite più istanze dell'applicazione, il programma di bilanciamento del carico instrada le richieste tra i pod dell'applicazione.
 
-**Cluster multizona**:
 
-Se hai un cluster multizona, le istanze dell'applicazione vengono distribuite nei pod sui nodi di lavoro tra le diverse zone. Esamina queste configurazioni del LoadBalancer per le richieste di bilanciamento del carico alle tue istanze dell'applicazione in più zone. 
-
-<img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="Usa un servizio LoadBalancer per bilanciare il carico delle applicazioni in cluster multizona" style="width:700px; border-style: none"/>
-
-1. **Disponibilità più bassa: programma di bilanciamento del carico che viene distribuito in una zona.** Per impostazione predefinita, ogni programma di bilanciamento del carico viene configurato solo in una zona. Quando viene distribuito un solo programma di bilanciamento del carico, quest'ultimo deve instradare le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone. 
-
-2. **Disponibilità più alta: programmi di bilanciamento del carico che vengono distribuiti in ciascuna zona.** Puoi ottenere una disponibilità più alta quando distribuisci un programma di bilanciamento del carico in ogni zona in cui hai istanze dell'applicazione. Le richieste vengono gestite dai programmi di bilanciamento del carico in diverse zone in un ciclo round-robin. Inoltre, ciascun programma di bilanciamento del carico instrada le richieste alle istanze dell'applicazione nella sua zona e alle istanze dell'applicazione nelle altre zone. 
 
 
 <br />
 
 
+s`.</td>
+        </tr>
+        <tr>
+          <td><code>selector</code></td>
+          <td>Immetti la coppia di chiave (<em>&lt;selector_key&gt;</em>) e valore (<em>&lt;selector_value&gt;</em>) dell'etichetta da utilizzare per indirizzare i pod in cui viene eseguita la tua applicazione. Per indirizzare i tuoi pod e includerli nel bilanciamento del carico di servizio, controlla i valori <em>&lt;selectorkey&gt;</em> e <em>&lt;selectorvalue&gt;</em>. Assicurati che siano gli stessi della coppia <em>chiave/valore</em> che hai utilizzato nella sezione <code>spec.template.metadata.labels</code> del tuo file yaml di distribuzione.</td>
+        </tr>
+        <tr>
+          <td><code> port</code></td>
+          <td>La porta su cui è in ascolto il servizio.</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIP</code></td>
+          <td>Per creare un LoadBalancer privato o per utilizzare uno specifico indirizzo IP portatile per un LoadBalancer pubblico, sostituisci <em>&lt;IP_address&gt;</em> con l'indirizzo IP che desideri utilizzare. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+        </tr>
+        </tbody></table>
 
-## Abilitazione dell'accesso pubblico o privato a un'applicazione in un cluster multizona
-{: #multi_zone_config}
+      3. Facoltativo: configura un firewall specificando `loadBalancerSourceRanges` nella sezione **spec**. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
-Nota:
-  * Questa funzione è disponibile solo per i cluster standard.
-  * I servizi LoadBalancer non supportano la terminazione TLS. Se la tua applicazione richiede la terminazione TLS,
-la puoi esporre utilizzando [Ingress](cs_ingress.html) o configurare la tua applicazione per gestire la terminazione TLS.
+      4. Crea il servizio nel tuo cluster.
 
-Prima di iniziare:
-  * Un servizio del programma di bilanciamento del carico con un indirizzo IP privato portatile dispone ancora di un NodePort pubblico aperto per i nodi di lavoro. Per aggiungere una politica di rete per evitare il traffico pubblico, consulta [Blocco del traffico in entrata](cs_network_policy.html#block_ingress).
-  * In ciascuna zona, almeno una VLAN pubblica deve avere sottoreti portatili disponibili per i servizi Ingress e LoadBalancer. Per aggiungere servizi Ingress e LoadBalancer privati, devi specificare almeno una VLAN privata con sottoreti portatili disponibili. Per aggiungere sottoreti, vedi [Configurazione delle sottoreti per i cluster](cs_subnets.html).
-  * Se limiti il traffico di rete ai nodi di lavoro edge, assicurati che siano abilitati almeno 2 [nodi di lavoro edge](cs_edge.html#edge) in ciascuna zona. Se i nodi di lavoro edge sono abilitati in alcune zone ma non in altre, i programmi di bilanciamento del carico non verranno distribuiti uniformemente. I programmi di bilanciamento del carico verranno distribuiti sui nodi edge in alcune zone ma non sui nodi di lavoro regolari in altre zone. 
-  * Per abilitare la comunicazione sulla rete privata tra i nodi di lavoro che si trovano in zone diverse, devi abilitare lo [spanning delle VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning). 
+          ```
+          kubectl apply -f myloadbalancer.yaml
+          ```
+          {: pre}
 
+          Quando viene creato il tuo servizio del programma di bilanciamento del carico, viene automaticamente assegnato un IP indirizzo IP portatile ad esso. Se non è disponibile alcun indirizzo IP portatile, è impossibile creare il servizio del programma di bilanciamento del carico.
 
-Per configurare un servizio LoadBalancer in un cluster multizona:
-1.  [Distribuisci la tua applicazione al cluster](cs_app.html#app_cli). Quando distribuisci la tua applicazione al cluster,
-vengono creati uno o più pod che eseguono la tua applicazione in un
-contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
-di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione in modo che possano essere inclusi nel bilanciamento del carico. 
-
-2.  Crea un servizio del programma di bilanciamento del carico per l'applicazione che desideri esporre. Per rendere la tua applicazione disponibile
-pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per la tua applicazione. Configura il tuo servizio per includere tutti i pod che compongono la tua applicazione nel bilanciamento del carico.
-  1. Crea uno file di configurazione del servizio denominato, ad esempio, `myloadbalancer.yaml`.
-  2. Definisci un servizio del programma di bilanciamento del carico per l'applicazione che vuoi esporre. Puoi specificare un indirizzo IP dalla tua sottorete portatile privata o pubblica e una zona. 
-      - Per scegliere sia una zona che un indirizzo IP, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona e il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato che si trova in tale zona. 
-      - Per scegliere solo un indirizzo IP, usa il campo `loadBalancerIP` per specificare un indirizzo IP pubblico o privato. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN dell'indirizzo IP. 
-      - Per scegliere solo una zona, usa l'annotazione `ibm-load-balancer-cloud-provider-zone` per specificare la zona. Viene usato un indirizzo IP portatile proveniente dalla zona specificata. 
-      - Se non specifichi un indirizzo IP o una zona, e il tuo cluster si trova in una VLAN pubblica, verrà usato un indirizzo IP pubblico portatile. Molti cluster sono su una VLAN pubblica. Se il tuo cluster è disponibile solo su una VLAN privata, viene quindi utilizzato un indirizzo IP privato portatile. Il programma di bilanciamento del carico viene creato nella zona in cui si trova la VLAN. 
-
-      Il servizio LoadBalancer che usa le annotazioni per specificare un programma di bilanciamento pubblico o privato e una zona e la sezione `loadBalancerIP` per specificare un indirizzo IP:
-
-      ```
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: myloadbalancer
-        annotations:
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
-      spec:
-        type: LoadBalancer
-        selector:
-          <selector_key>: <selector_value>
-        ports:
-         - protocol: TCP
-             port: 8080
-          loadBalancerIP: <IP_address>
-      ```
-      {: codeblock}
-
-      <table>
-      <caption>Descrizione dei componenti del file YAML</caption>
-      <thead>
-      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
-      </thead>
-      <tbody>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-        <td>Annotazione per specificare il tipo di LoadBalancer. I valori accettati sono <code>private</code> e <code>public</code>. Se crei un LoadBalancer pubblico nei cluster che si trovano su VLAN pubbliche, questa annotazione non è richiesta.</td>
-      </tr>
-      <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>L'annotazione per specificare la zona. Per vedere le zone, esegui <code>ibmcloud ks zones</code>.</td>
-      </tr>
-      <tr>
-        <td><code>selector</code></td>
-        <td>Immetti la coppia di chiave (<em>&lt;selector_key&gt;</em>) e valore (<em>&lt;selector_value&gt;</em>) dell'etichetta da utilizzare per indirizzare i pod in cui viene eseguita la tua applicazione. Per indirizzare i tuoi pod e includerli nel bilanciamento del carico di servizio, controlla i valori <em>&lt;selectorkey&gt;</em> e <em>&lt;selectorvalue&gt;</em>. Assicurati che siano gli stessi della coppia <em>chiave/valore</em> che hai utilizzato nella sezione <code>spec.template.metadata.labels</code> del tuo file yaml di distribuzione.</td>
-      </tr>
-      <tr>
-        <td><code> port</code></td>
-        <td>La porta su cui è in ascolto il servizio.</td>
-      </tr>
-      <tr>
-        <td><code>loadBalancerIP</code></td>
-        <td>Per creare un LoadBalancer privato o per utilizzare uno specifico indirizzo IP portatile per un LoadBalancer pubblico, sostituisci <em>&lt;IP_address&gt;</em> con l'indirizzo IP che desideri utilizzare. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
-      </tr>
-      </tbody></table>
-
-  3. Facoltativo: configura un firewall specificando `loadBalancerSourceRanges` nella sezione **spec**. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
-
-  4. Crea il servizio nel tuo cluster.
-
-      ```
-      kubectl apply -f myloadbalancer.yaml
-      ```
-      {: pre}
-
-3. Verifica che il servizio del programma di bilanciamento del carico sia stato creato correttamente. Sostituisci _&lt;myservice&gt;_ con il nome del servizio del programma di bilanciamento del carico che hai creato nel passo precedente.
+3.  Verifica che il servizio del programma di bilanciamento del carico sia stato creato correttamente. Sostituisci _&lt;myservice&gt;_ con il nome del servizio del programma di bilanciamento del carico che hai creato nel passo precedente.
 
     ```
     kubectl describe service myloadbalancer
@@ -169,7 +110,7 @@ pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per
     Labels:                 <none>
     Selector:               app=liberty
     Type:                   LoadBalancer
-    Zone:                   dal10
+    Location:               dal10
     IP:                     172.21.xxx.xxx
     LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP
@@ -197,11 +138,11 @@ pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per
 
 5. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](cs_loadbalancer.html#edge_nodes). I pod dell'applicazione devono essere pianificati nei nodi edge per ricevere le richieste in entrata.
 
-6. Per gestire le richieste in entrata alla tua applicazione dalle altre zone, ripeti i passi sopra riportati per aggiungere un programma di bilanciamento del carico in ciascuna zona. 
+6. Facoltativo: per gestire le richieste in entrata nella tua applicazione da altre zone, ripeti questi passi per aggiungere un programma di bilanciamento del carico in ciascuna zona.
 
-7. Facoltativo: un servizio del programma di bilanciamento del carico rende anche disponibile la tua applicazione sulle NodePorts del servizio. Puoi accedere alle [NodePorts](cs_nodeport.html) da ogni indirizzo IP pubblico e privato per ogni nodo all'interno del cluster. Per bloccare il traffico alle NodePorts mentre stai usando un servizio del programma di bilanciamento del carico, vedi [Controllo del traffico in entrata nei servizi LoadBalancer o NodePort](cs_network_policy.html#block_ingress).
+</staging>
 
-## Abilitazione dell'accesso pubblico o privato a un'applicazione in un cluster a zona singola
+## Abilitazione dell'accesso pubblico o privato a un'applicazione utilizzando un servizio LoadBalancer
 {: #config}
 
 Prima di iniziare:
@@ -343,24 +284,21 @@ pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per
 
 5. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](cs_loadbalancer.html#edge_nodes). I pod dell'applicazione devono essere pianificati nei nodi edge per ricevere le richieste in entrata.
 
-6. Facoltativo: un servizio del programma di bilanciamento del carico rende anche disponibile la tua applicazione sulle NodePorts del servizio. Puoi accedere alle [NodePorts](cs_nodeport.html) da ogni indirizzo IP pubblico e privato per ogni nodo all'interno del cluster. Per bloccare il traffico alle NodePorts mentre stai usando un servizio del programma di bilanciamento del carico, vedi [Controllo del traffico in entrata nei servizi LoadBalancer o NodePort](cs_network_policy.html#block_ingress).
-
 <br />
 
 
 ## Aggiunta dell'affinità e delle tolleranze del nodo ai pod dell'applicazione per l'IP di origine
 {: #node_affinity_tolerations}
 
-Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, la richiesta viene instradata al pod del servizio del programma di bilanciamento del carico che espone la tua applicazione. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.
-
-Per conservare l'indirizzo IP di origine originale della richiesta client, puoi [abilitare l'IP di origine ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) per i servizi del programma di bilanciamento del carico. La connessione TCP continua fino ai pod dell'applicazione in modo che l'applicazione possa vedere l'indirizzo IP di origine effettivo dell'initiator. La conservazione dell'IP del client è utile quando, ad esempio, i server delle applicazioni devono applicare le politiche di sicurezza e di controllo dell'accesso.
-
-Una volta abilitato l'IP di origine, i pod del servizio di bilanciamento del carico devono inoltrare le richieste solo ai pod dell'applicazione che sono distribuiti nello stesso nodo di lavoro Di norma, i pod del servizio del programma di bilanciamento del carico vengono distribuiti anche ai nodi di lavoro a cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del bilanciamento del carico e quelli dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro:
+Quando distribuisci i pod dell'applicazione, anche i pod del servizio di bilanciamento del carico vengono distribuiti ai nodi di lavoro in cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del bilanciamento del carico e quelli dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro:
+{: shortdesc}
 
 * Hai nodi edge corrotti in cui puoi distribuire solo i pod del servizio di bilanciamento del carico. I pod dell'applicazione non possono essere distribuiti in questi nodi.
 * Il tuo cluster è connesso a più VLAN pubbliche o private e i tuoi pod dell'applicazione possono essere distribuiti ai nodi di lavoro che sono connessi solo ad una VLAN. I pod del servizio di bilanciamento del carico non possono essere distribuiti in tali nodi di lavoro in quanto l'indirizzo IP del programma di bilanciamento è connesso ad una VLAN diversa da quella dei nodi di lavoro.
 
-Per forzare la tua applicazione alla distribuzione in specifici nodi di lavoro in cui possono essere distribuiti anche i pod del servizio di bilanciamento del carico, devi aggiungere le regole di affinità e le tolleranze alla tua distribuzione dell'applicazione. 
+Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, viene instradata ad un pod per il servizio di bilanciamento del carico Kubernetes che espone l'applicazione. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.
+
+Per conservare l'indirizzo IP di origine originale della richiesta client, puoi [abilitare l'IP di origine ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) per i servizi del programma di bilanciamento del carico. La conservazione dell'IP del client è utile quando, ad esempio, i server delle applicazioni devono applicare le politiche di sicurezza e di controllo dell'accesso. Una volta abilitato l'IP di origine, i pod del servizio di bilanciamento del carico devono inoltrare le richieste solo ai pod dell'applicazione che sono distribuiti nello stesso nodo di lavoro Per forzare la tua applicazione alla distribuzione in specifici nodi di lavoro in cui possono essere distribuiti anche i pod del servizio di bilanciamento del carico, devi aggiungere le regole di affinità e le tolleranze alla tua distribuzione dell'applicazione.
 
 ### Aggiunta delle regole di affinità e delle tolleranze del nodo edge
 {: #edge_nodes}
@@ -396,7 +334,7 @@ spec:
 ```
 {: codeblock}
 
-Entrambe le sezioni **affinity** e **tolerations** hanno `dedicated` come `key` e `edge` come `value`.
+Entrambe le sezioni **affinity** e **tolerations** hanno `dedicated` come `key` e `edge` come `value`. 
 
 ### Aggiunta di regole di affinità per più VLAN pubbliche o private
 {: #edge_nodes_multiple_vlans}
@@ -418,7 +356,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 
     1. Elenca le VLAN pubbliche portatili per il tuo cluster.
         ```
-        ibmcloud ks cluster-get <cluster_name_or_ID> --showResources
+        bx cs cluster-get <cluster_name_or_ID> --showResources
         ```
         {: pre}
 

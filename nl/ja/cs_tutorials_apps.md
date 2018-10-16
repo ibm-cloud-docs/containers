@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# チュートリアル: Kubernetes クラスターにアプリをデプロイする方法
+# チュートリアル: クラスターにアプリをデプロイする方法
 {: #cs_apps_tutorial}
 
 {{site.data.keyword.containerlong}} を使用して、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} を利用するコンテナー化アプリをデプロイする方法について説明します。
@@ -26,13 +26,14 @@ lastupdated: "2018-08-06"
 
 PR 会社のアプリ開発者が、直前のチュートリアルで作成した Kubernetes クラスターを使用して、Hello World バージョンのアプリをデプロイします。 このチュートリアルの各レッスンを基に、アプリ開発者は同じアプリを段階的に複雑にした各バージョンをデプロイします。 次の図は、各デプロイメントのコンポーネントをレッスン別に示しています。
 
-![レッスンの構成要素](images/cs_app_tutorial_mz-roadmap.png)
 
-図に示すように、Kubernetes では、クラスター内でアプリを稼働状態にするためにいくつかの異なるタイプのリソースを使用します。 Kubernetes の場合は、デプロイメントとサービスが相互に連係します。 デプロイメントには、アプリの定義が含まれます。 例えば、コンテナーに使用するイメージや、アプリのために公開する必要があるポートです。 デプロイメントを作成すると、デプロイメントで定義したコンテナーごとに Kubernetes のポッドが作成されます。 アプリの回復力を高めるために、デプロイメントの中で同じアプリのインスタンスを複数定義することもできます。そうすれば、Kubernetes によってレプリカ・セットが自動的に作成されます。 そのレプリカ・セットによってポッドがモニターされ、常に指定された数のポッドが稼働状態になります。 1 つのポッドが応答しなくなったら、そのポッドが自動的に再作成されます。
+![レッスンの構成要素](images/cs_app_tutorial_roadmap.png)
+
+図に示すように、Kubernetes では、クラスター内でアプリを稼働状態にするためにいくつかの異なるタイプのリソースを使用します。 Kubernetes の場合は、デプロイメントとサービスが相互に連係します。 デプロイメントには、アプリの定義が含まれます。例えば、コンテナーに使用するイメージや、アプリのために公開する必要があるポートです。デプロイメントを作成すると、デプロイメントで定義したコンテナーごとに Kubernetes のポッドが作成されます。 アプリの回復力を高めるために、デプロイメントの中で同じアプリのインスタンスを複数定義することもできます。そうすれば、Kubernetes によってレプリカ・セットが自動的に作成されます。 そのレプリカ・セットによってポッドがモニターされ、常に指定された数のポッドが稼働状態になります。1 つのポッドが応答しなくなったら、そのポッドが自動的に再作成されます。
 
 サービスによってポッドのセットをグループ化し、クラスター内の他のサービスからそれらのポッドにアクセスするためのネットワーク接続を提供します。そうすれば、各ポッドの実際のプライベート IP アドレスを公開する必要はありません。 Kubernetes サービスを使用すれば、クラスター内の他のポッドにアプリを公開することも、インターネットにアプリを公開することも可能です。 このチュートリアルでは、Kubernetes サービスを使用して、稼働中のアプリにインターネットからアクセスします。そのアクセスのために、ワーカー・ノードに自動的に割り当てられるパブリック IP アドレスとパブリック・ポートを使用します。
 
-標準クラスターでアプリの可用性をさらに高めるために、各ゾーンにワーカー・ノードを持つ複数のゾーンにまたがるワーカー・プールを作成して、アプリのレプリカをさらに多く実行することができます。このチュートリアルではそのような作業を取り上げませんが、いつかアプリの可用性を改善する必要が生じたときのために、そのような概念を頭に入れておいてください。
+標準クラスターでは、アプリの可用性をさらに高めるために、複数のワーカー・ノードを作成して、実行するアプリのレプリカをさらに増やすこともできます。 このチュートリアルではそのような作業を取り上げませんが、いつかアプリの可用性を改善する必要が生じたときのために、そのような概念を頭に入れておいてください。
 
 {{site.data.keyword.Bluemix_notm}} サービスをアプリに統合する作業は 1 つのレッスンでしか取り上げていませんが、そのサービスは、アプリがどれほど単純でもどれほど複雑でも利用できます。
 
@@ -55,7 +56,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 ## 前提条件
 
-* [チュートリアル: Kubernetes クラスターの作成](cs_tutorials.html#cs_cluster_tutorial)
+* [チュートリアル: {{site.data.keyword.containershort_notm}} での Kubernetes クラスターの作成](cs_tutorials.html#cs_cluster_tutorial)
 
 
 ## レッスン 1: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする
@@ -66,7 +67,8 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 次の図は、このレッスンを実行してデプロイするコンポーネントを示しています。
 
-![デプロイメントのセットアップ](images/cs_app_tutorial_mz-components1.png)
+
+![デプロイメントのセットアップ](images/cs_app_tutorial_components1.png)
 
 アプリをデプロイするには、以下のようにします。
 
@@ -87,10 +89,10 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     ```
     {: pre}
 
-3.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、`ibmcloud ks region-set` コマンドを使用します。
+3.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、`bx cs region-set` コマンドを使用します。
 
     ```
-    ibmcloud login [--sso]
+    bx login [--sso]
     ```
     {: pre}
 
@@ -100,7 +102,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -117,19 +119,19 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 5.  {{site.data.keyword.registryshort_notm}} CLI にログインします。 **注**: container-registry プラグインが[インストールされている](/docs/services/Registry/index.html#registry_cli_install)ことを確認してください。
 
     ```
-    ibmcloud cr login
+    bx cr login
     ```
     {: pre}
     -   {{site.data.keyword.registryshort_notm}} の名前空間を忘れた場合は、以下のコマンドを実行します。
 
         ```
-        ibmcloud cr namespace-list
+        bx cr namespace-list
         ```
         {: pre}
 
 6.  Docker を開始します。
     * Docker Community Edition を使用している場合は、何の操作も必要ありません。
-    * Linux を使用している場合は、[Docker の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/config/daemon/) を調べて、ご使用の Linux ディストリビューションに応じた Docker の開始方法についての説明を確認してください。
+    * Linux を使用している場合は、[Docker の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/admin/) を調べて、ご使用の Linux ディストリビューションに応じた Docker の開始方法についての説明を確認してください。
     * Windows や OSX で Docker Toolbox を使用している場合は、Docker Quickstart Terminal を使用できます。その場合は、Docker が自動的に開始します。 その後のいくつかの手順でも Docker Quickstart Terminal から Docker コマンドを実行し、それから `KUBECONFIG` セッション変数の設定時に使用した CLI に切り替えてください。
 
 7.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。
@@ -268,18 +270,18 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     2.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        bx cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
         出力例:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
@@ -313,13 +315,14 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 このレッスンでは、Hello World アプリの 3 つのインスタンスをクラスターにデプロイして、最初のバージョンのアプリよりも可用性を高めます。
 {:shortdesc}
 
-可用性が高くなることは、ユーザー・アクセスが 3 つのインスタンスに分割されることを意味します。 同じアプリ・インスタンスにアクセスするユーザーが多すぎると、応答時間が長くなる可能性があります。 複数のインスタンスをデプロイすれば、ユーザーにとって応答時間が短くなります。 このレッスンでは、Kubernetes でのヘルス・チェックとデプロイメント更新の処理についても取り上げます。 次の図には、このレッスンを完了することによりデプロイされるコンポーネントが含まれています。
+可用性が高くなることは、ユーザー・アクセスが 3 つのインスタンスに分割されることを意味します。同じアプリ・インスタンスにアクセスするユーザーが多すぎると、応答時間が長くなる可能性があります。 複数のインスタンスをデプロイすれば、ユーザーにとって応答時間が短くなります。 このレッスンでは、Kubernetes でのヘルス・チェックとデプロイメント更新の処理についても取り上げます。次の図には、このレッスンを完了することによりデプロイされるコンポーネントが含まれています。
 
-![デプロイメントのセットアップ](images/cs_app_tutorial_mz-components2.png)
+
+![デプロイメントのセットアップ](images/cs_app_tutorial_components2.png)
 
 直前のチュートリアルでは、アカウントと、ワーカー・ノードを 1 つ持つクラスターを作成しました。 このレッスンでは、デプロイメントを構成して、Hello World アプリの 3 つのインスタンスをデプロイします。 各インスタンスは、ワーカー・ノード内のレプリカ・セットの一部として、Kubernetes ポッドにデプロイされます。 それをだれでも利用できるようにするために、Kubernetes サービスも作成します。
 
-Kubernetes では、構成スクリプトで定義する可用性検査を使用して、ポッド内のコンテナーが稼働しているかどうかを確認できます。 例えば、その検査によってデッドロックをキャッチできます。デッドロックとは、アプリは稼働しているのに処理を進められない状況のことです。 そのような状態になったコンテナーを再始動すれば、バグはあってもアプリの可用性を高めることができます。 その後、Kubernetes で準備状況検査を使用して、コンテナーでトラフィックの受け入れを再開する準備が整っているかどうかを確認します。 コンテナーの準備が整っていれば、そのポッドの準備も整ったことになります。 ポッドの準備が整えば、ポッドが再び開始されます。 このバージョンのアプリでは、15 秒ごとにタイムアウトになります。 構成スクリプトでヘルス・チェックを構成しておけば、ヘルス・チェックでアプリの問題が検出された時点でコンテナーが再作成されます。
+Kubernetes では、構成スクリプトで定義する可用性検査を使用して、ポッド内のコンテナーが稼働しているかどうかを確認できます。 例えば、その検査によってデッドロックをキャッチできます。デッドロックとは、アプリは稼働しているのに処理を進められない状況のことです。そのような状態になったコンテナーを再始動すれば、バグはあってもアプリの可用性を高めることができます。 その後、Kubernetes で準備状況検査を使用して、コンテナーでトラフィックの受け入れを再開する準備が整っているかどうかを確認します。 コンテナーの準備が整っていれば、そのポッドの準備も整ったことになります。 ポッドの準備が整えば、ポッドが再び開始されます。 このバージョンのアプリでは、15 秒ごとにタイムアウトになります。 構成スクリプトでヘルス・チェックを構成しておけば、ヘルス・チェックでアプリの問題が検出された時点でコンテナーが再作成されます。
 
 1.  CLI で `Lab 2` ディレクトリーに移動します。
 
@@ -417,7 +420,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 7.  デプロイメント作業が完了したので、ブラウザーを開いてアプリを確認できます。 前のレッスンで使用したのと同じワーカー・ノードのパブリック IP アドレスに、構成スクリプトで指定した NodePort を組み合わせて、URL を作成します。 ワーカー・ノードのパブリック IP アドレスを取得するには、以下のようにします。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -478,7 +481,8 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
 各コンポーネントを異なるコンテナーに分離しておけば、1 つのコンポーネントの更新時に他のコンポーネントに影響が及ぶことを防止できます。 また、アプリを更新し、レプリカの追加でスケールを大きくして可用性をさらに高めるようにします。 次の図には、このレッスンを完了することによりデプロイされるコンポーネントが含まれています。
 
-![デプロイメントのセットアップ](images/cs_app_tutorial_mz-components3.png)
+![デプロイメントのセットアップ](images/cs_app_tutorial_components3.png)
+
 
 直前のチュートリアルから引き継いで使用するアカウントと、1 つのワーカー・ノードを持つクラスターがあります。 このレッスンでは、{{site.data.keyword.Bluemix_notm}} アカウントに {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスのインスタンスを作成し、2 つのデプロイメント (アプリのコンポーネントごとに 1 つのデプロイメント) を構成します。 各コンポーネントは、ワーカー・ノード内の Kubernetes ポッドにデプロイされます。 それら両方のコンポーネントをだれでも利用できるようにするために、コンポーネントごとに Kubernetes サービスも作成します。
 
@@ -558,7 +562,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 5.  それぞれのイメージがレジストリー名前空間に正常に追加されたことを確認します。 Docker Quickstart Terminal を使用して Docker コマンドを実行した場合は、必ず、`KUBECONFIG` セッション変数の設定時に使用した CLI に切り替えてください。
 
     ```
-    ibmcloud cr images
+    bx cr images
     ```
     {: pre}
 
@@ -740,7 +744,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   クラスターを保持する必要がない場合は、クラスターも削除できます。
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  bx cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -751,4 +755,4 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
 - リポジトリー内の[さらに複雑な Lab ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) を行う
 - {{site.data.keyword.containershort_notm}} を使用して[アプリの自動スケーリングを行う](cs_app.html#app_scaling)
--  [developerWorks ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/technologies/container-orchestration/) でコンテナー・オーケストレーションのコード・パターンを探索する
+- [developerWorks ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/journey/category/container-orchestration/) でコンテナーのオーケストレーション・ジャーニーを探索する

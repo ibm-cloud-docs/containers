@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -49,8 +49,8 @@ lastupdated: "2018-08-06"
 1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 LoadBalancer 服务具有高可用性。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
+       bx cs workers <cluster_name_or_ID>
+       ```
   {: pre}
 
     在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
@@ -58,7 +58,7 @@ lastupdated: "2018-08-06"
 2.  检查 LoadBalancer 服务的配置文件是否准确。
 
     ```
-apiVersion: v1
+    apiVersion: v1
     kind: Service
     metadata:
       name: myservice
@@ -79,7 +79,7 @@ apiVersion: v1
 3.  检查 LoadBalancer 服务，并查看 **Events** 部分以查找潜在错误。
 
     ```
-    kubectl describe service <myservice>
+        kubectl describe service <myservice>
     ```
     {: pre}
 
@@ -94,14 +94,14 @@ apiVersion: v1
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您没有足够的工作程序节点可部署 LoadBalancer 服务。一个原因可能是您已部署了包含多个工作程序节点的标准集群，但供应这些工作程序节点失败。
     </li>
     <ol><li>列出可用的工作程序节点。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>如果找到了至少两个可用的工作程序节点，请列出工作程序节点详细信息。</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>确保分别由 <code>kubectl get nodes</code> 和 <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> 命令返回的工作程序节点的公用和专用 VLAN 标识相匹配。</li></ol></li></ul>
+    <li>如果找到了至少两个可用的工作程序节点，请列出工作程序节点详细信息。</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>确保分别由 <code>kubectl get nodes</code> 和 <code>bx cs [&lt;cluster_name_or_ID&gt;] worker-get</code> 命令返回的工作程序节点的公用和专用 VLAN 标识相匹配。</li></ol></li></ul>
 
 4.  如果使用定制域来连接到 LoadBalancer 服务，请确保定制域已映射到 LoadBalancer 服务的公共 IP 地址。
     1.  找到 LoadBalancer 服务的公共 IP 地址。
 
         ```
-kubectl describe service <service_name> | grep "LoadBalancer Ingress"
+        kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
@@ -132,8 +132,8 @@ kubectl describe service <service_name> | grep "LoadBalancer Ingress"
 1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 ALB 具有高可用性。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
-  ```
+       bx cs workers <cluster_name_or_ID>
+       ```
   {: pre}
 
     在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
@@ -143,28 +143,28 @@ kubectl describe service <service_name> | grep "LoadBalancer Ingress"
     1.  检索 ALB 子域。
 
       ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
+            bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
     2.  对 ALB 子域执行 ping 操作。
 
       ```
-ping <ingress_subdomain>
+      ping <ingress_subdomain>
       ```
       {: pre}
 
     3.  检索 ALB 的公共 IP 地址。
 
       ```
-nslookup <ingress_subdomain>
+      nslookup <ingress_subdomain>
       ```
       {: pre}
 
     4.  对 ALB 公共 IP 地址执行 ping 操作。
 
       ```
-ping <ALB_IP>
+      ping <ALB_IP>
       ```
       {: pre}
 
@@ -176,7 +176,7 @@ ping <ALB_IP>
 4.  检查 Ingress 资源配置文件。
 
     ```
-apiVersion: extensions/v1beta1
+    apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
       name: myingress
@@ -196,19 +196,19 @@ apiVersion: extensions/v1beta1
     ```
     {: codeblock}
 
-    1.  检查 ALB 子域和 TLS 证书是否正确。要查找 IBM 提供的子域和 TLS 证书，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
+    1.  检查 ALB 子域和 TLS 证书是否正确。要查找 IBM 提供的子域和 TLS 证书，请运行 `bx cs cluster-get <cluster_name_or_ID>`.
     2.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请包含 **/** 以作为路径。
 5.  检查 Ingress 部署，并查找潜在的警告或错误消息。
 
     ```
-  kubectl describe ingress <myingress>
+      kubectl describe ingress <myingress>
   ```
     {: pre}
 
     例如，在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。
 
     ```
-Name:             myingress
+    Name:             myingress
     Namespace:        default
     Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
     Default backend:  default-http-backend:80 (<none>)
@@ -238,14 +238,14 @@ Name:             myingress
     1.  检索正在集群中运行的 Ingress pod 的标识。
 
       ```
-kubectl get pods -n kube-system | grep alb
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
     2.  检索每个 Ingress pod 的日志。
 
       ```
-      kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
+            kubectl logs <ingress_pod_ID> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -274,7 +274,7 @@ kubectl get pods -n kube-system | grep alb
  <tbody>
  <tr>
  <td>您没有下载和更新证书数据所需的访问角色。</td>
- <td>请咨询帐户管理员，要求为您分配对 {{site.data.keyword.cloudcerts_full_notm}} 实例的**管理员**和**作者**角色。有关更多信息，请参阅 {{site.data.keyword.cloudcerts_short}} 的<a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">管理服务访问</a>。</td>
+ <td>请咨询帐户管理员，要求为您分配对 {{site.data.keyword.cloudcerts_full_notm}} 实例的**操作员**和**编辑者**角色。有关更多信息，请参阅 {{site.data.keyword.cloudcerts_short}} 的<a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">管理服务访问</a>。</td>
  </tr>
  <tr>
  <td>创建、更新或除去时提供的证书 CRN 所属的帐户与集群不同。</td>
@@ -282,11 +282,11 @@ kubectl get pods -n kube-system | grep alb
  </tr>
  <tr>
  <td>创建时提供的证书 CRN 不正确。</td>
- <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 是准确的，请尝试更新私钥：<code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>如果此命令生成 <code>update_failed</code> 阶段状态，请除去私钥：<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署私钥：<code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 是准确的，请尝试更新私钥：<code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>如果此命令生成 <code>update_failed</code> 阶段状态，请除去私钥：<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署私钥：<code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>更新时提供的证书 CRN 不正确。</td>
- <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 是准确的，请除去私钥：<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署私钥：<code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>尝试更新私钥：<code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 是准确的，请除去私钥：<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署私钥：<code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>尝试更新私钥：<code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.cloudcerts_long_notm}} 服务遭遇停机时间。</td>
@@ -301,7 +301,7 @@ kubectl get pods -n kube-system | grep alb
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-运行 `ibmcloud ks cluster-get <cluster>` 时，集群处于 `normal` 状态，但没有 **Ingress 子域**可用。
+运行 `bx cs cluster-get <cluster>` 时，集群处于 `normal` 状态，但没有 **Ingress 子域**可用。
 
 您可能会看到类似于以下内容的错误消息。
 
@@ -311,47 +311,23 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。在该专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containershort_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的 VLAN 已达到该限制，那么供应 **Ingress 子域**会失败。
+创建集群时，将在指定的 VLAN 上请求 8 个公用和 8 个专用可移植子网。对于 {{site.data.keyword.containershort_notm}}，VLAN 限制为 40 个子网。如果集群的 VLAN 已达到该限制，那么供应 **Ingress 子域**会失败。
 
 要查看 VLAN 的子网数，请执行以下操作：
 1.  在 [IBM Cloud Infrastructure (SoftLayer) 控制台](https://control.bluemix.net/)中，选择**网络** > **IP 管理** > **VLAN**。
 2.  单击用于创建集群的 VLAN 的 **VLAN 编号**。查看**子网**部分以了解是否存在 40 个或更多子网。
 
 {: tsResolve}
-如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)进行订购。然后，[创建集群](cs_cli_reference.html#cs_cluster_create)以使用这一新的 VLAN。
+如果需要新的 VLAN，请通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/get-support/howtogetsupport.html#getting-customer-support)进行订购。然后，[创建集群](cs_cli_reference.html#cs_cluster_create)以使用这一新的 VLAN。
 
-如果有其他 VLAN 可用，那么可以在现有集群中[设置 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。在此之后，即可将新的工作程序节点添加到集群，这些节点将使用具有可用子网的其他 VLAN。
+如果有其他 VLAN 可用，那么可以在现有集群中[设置 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。在此之后，即可将新的工作程序节点添加到集群，这些节点将使用具有可用子网的其他 VLAN。
 
 如果并未使用 VLAN 中的所有子网，那么可以在集群中复用子网。
-1.  检查要使用的子网是否可用。**注**：使用的 Infrastructure 帐户可能在多个 {{site.data.keyword.Bluemix_notm}} 帐户之间共享。在这种情况下，即便运行 `ibmcloud ks subnets` 命令来查看 **Bound Cluster** 的子网，也只能看到您的集群的信息。请与 Infrastructure 帐户所有者核实以确保这些子网可用，并且未由其他任何帐户或团队使用。
+1.  检查要使用的子网是否可用。**注**：使用的 Infrastructure 帐户可能在多个 {{site.data.keyword.Bluemix_notm}} 帐户之间共享。在这种情况下，即便运行 `bx cs subnets` 命令来查看 **Bound Cluster** 的子网，也只能看到您的集群的信息。请与 Infrastructure 帐户所有者核实以确保这些子网可用，并且未由其他任何帐户或团队使用。
 
-2.  使用 `--no-subnet` 选项[创建集群](cs_cli_reference.html#cs_cluster_create)，以便该服务不会尝试创建新的子网。指定专区和具有可供复用的子网的 VLAN。
+2.  使用 `--no-subnet` 选项[创建集群](cs_cli_reference.html#cs_cluster_create)，以便该服务不会尝试创建新的子网。指定位置和具有可供复用的子网的 VLAN。
 
-3.  使用 `ibmcloud ks cluster-subnet-add` [命令](cs_cli_reference.html#cs_cluster_subnet_add)将现有子网添加到集群。有关更多信息，请参阅[在 Kubernetes 集群中添加或复用定制和现有子网](cs_subnets.html#custom)。
-
-<br />
-
-
-## Ingress ALB 未部署在专区中
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-具有多专区集群并运行 `ibmcloud ks albs <cluster>` 时，某个专区中未部署任何 ALB。例如，如果在 3 个专区中有工作程序节点，那么可能会看到类似以下内容的输出，其中公共 ALB 未部署到第三个专区。
-```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
-```
-{: screen}
-
-{: tsCauses}
-在每个专区中，会在指定的公用 VLAN 上请求 1 个公共可移植子网，并在指定的专用 VLAN 上请求 1 个专用可移植子网。对于 {{site.data.keyword.containershort_notm}}，VLAN 限制为 40 个子网。如果某个专区中集群的公用 VLAN 已达到该限制，那么供应该专区的公共 Ingress ALB 会失败。
-
-{: tsResolve}
-要检查 VLAN 上的子网数量以及了解如何获取其他 VLAN 的步骤，请参阅[无法为 Ingress ALB 获取子域](#cs_subnet_limit)。
+3.  使用 `bx cs cluster-subnet-add` [命令](cs_cli_reference.html#cs_cluster_subnet_add)将现有子网添加到集群。有关更多信息，请参阅[在 Kubernetes 集群中添加或复用定制和现有子网](cs_subnets.html#custom)。
 
 <br />
 
@@ -376,7 +352,7 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
     <li>安装新的 Helm 图表。</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
     </ol>
 
-2. 如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是因为在图表的配置映射中对 `ipsec.conf` 设置的参数验证问题。
+2. 如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是由于在图表的配置映射中对 `ipsec.conf` 设置进行了参数验证。
 
     <ol>
     <li>检查 strongSwan pod 日志中是否有任何验证错误。</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
@@ -402,62 +378,20 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
     1. 设置 `STRONGSWAN_POD` 环境变量。
 
         ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+                export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
         ```
         {: pre}
 
     2. 运行调试工具。
 
         ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- vpnDebug
+                kubectl exec -n kube-system  $STRONGSWAN_POD -- vpnDebug
         ```
         {: pre}
 
         该工具在对常见联网问题运行各种测试时，会输出多页信息。以 `ERROR`、`WARNING`、`VERIFY` 或 `CHECK` 开头的输出行指示 VPN 连接可能存在错误。
 
     <br />
-
-
-## 无法安装新的 strongSwan Helm 图表发行版
-{: #cs_strongswan_release}
-
-{: tsSymptoms}
-您修改了 strongSwan Helm 图表，并尝试通过运行 `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan` 来安装新的发行版。但是，您看到以下错误：
-```
-错误：发布 <new_release_name> 失败：deployments.extensions "vpn-strongswan" 已存在
-```
-{: screen}
-
-{: tsCauses}
-此错误指示未完全卸载 strongSwan 图表的前发行版。
-
-{: tsResolve}
-
-1. 删除图表的前发行版。
-    ```
-    helm delete --purge <old_release_name>
-    ```
-    {: pre}
-
-2. 删除先前发布版本的部署。删除部署和关联的 pod 最长需要 1 分钟。
-    ```
-    kubectl delete deploy -n kube-system vpn-strongswan
-    ```
-    {: pre}
-
-3. 验证部署是否已删除。列表中未显示部署 `vpn-strongswan` 时说明该部署已删除。
-    ```
-    kubectl get deployments -n kube-system
-    ```
-    {: pre}
-
-4. 使用新的发行版名称重新安装更新后的 strongSwan Helm 图表。
-    ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
-    ```
-    {: pre}
-
-<br />
 
 
 ## 添加或删除工作程序节点后，strongSwan VPN 连接失败
@@ -471,7 +405,7 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 * 无法从新工作程序节点上运行的 pod 访问远程网络
 
 {: tsCauses}
-如果已将工作程序节点添加到工作程序池：
+如果添加了工作程序节点：
 
 * 工作程序节点在新的专用子网上供应，该子网未由现有 `localSubnetNAT` 或 `local.subnet` 设置通过 VPN 连接公开
 * 无法将 VPN 路径添加到工作程序节点，因为工作程序具有未包含在现有 `tolerations` 或 `nodeSelector` 设置中的污点或标签
@@ -487,14 +421,14 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 1. 删除现有的 Helm 图表。
 
     ```
-    helm delete --purge <release_name>
+        helm delete --purge <release_name>
     ```
     {: pre}
 
 2. 打开 strongSwan VPN 服务的配置文件。
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+        helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
@@ -553,14 +487,14 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 4. 使用更新的值安装新 Helm 图表。
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+        helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
 5. 检查图表部署状态。当图表就绪时，输出顶部附近的 **STATUS** 字段的值为 `DEPLOYED`。
 
     ```
-    helm status <release_name>
+        helm status <release_name>
     ```
     {: pre}
 
@@ -573,14 +507,14 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 8. 设置 `STRONGSWAN_POD` 环境变量。
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
+        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 9. 检查 VPN 的状态。
 
     ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+            kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
         ```
     {: pre}
 
@@ -619,7 +553,7 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 
 1. 查看集群 Kubernetes 版本。
     ```
-    ibmcloud ks cluster-get <cluster_name>
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
@@ -637,73 +571,6 @@ Helm 图表配置文件具有不正确的值、缺少值或有语法错误。
 {: tip}
 
 <br />
-
-
-## 由于 VLAN 标识无效而无法添加工作程序节点
-{: #suspended}
-
-{: tsSymptoms}
-您的 {{site.data.keyword.Bluemix_notm}} 帐户已暂挂，或者集群中的所有工作程序节点都已删除。重新激活帐户后，在尝试调整工作程序池大小或重新均衡工作程序池时，无法添加工作程序节点。您会看到类似于以下内容的错误消息：
-
-```
-SoftLayerAPIError(SoftLayer_Exception_Public)：无法获取标识为 #123456 的网络 VLAN。
-```
-{: screen}
-
-{: tsCauses}
-帐户暂挂时，会删除帐户内的工作程序节点。如果集群没有工作程序节点，那么 IBM Cloud Infrastructure (SoftLayer) 会回收关联的公用和专用 VLAN。但是，集群工作程序池在其元数据中仍具有先前的 VLAN 标识，在您重新均衡池或调整池大小时，会使用这些不可用的标识。由于 VLAN 不再与集群相关联，因此创建节点失败。
-
-{: tsResolve}
-
-可以[删除现有工作程序池](cs_cli_reference.html#cs_worker_pool_rm)，然后[创建新的工作程序池](cs_cli_reference.html#cs_worker_pool_create)。
-
-或者，可以通过订购新 VLAN 并使用这些 VLAN 在现有工作程序池中创建新的工作程序节点来保留现有工作程序池。
-
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
-
-1.  要获取需要其新 VLAN 标识的专区，请记录以下命令输出中的 **Location**。**注**：如果集群是多专区集群，那么需要每个专区的 VLAN 标识。
-
-    ```
-    ibmcloud ks clusters
-    ```
-    {: pre}
-
-2.  通过[联系 {{site.data.keyword.Bluemix_notm}} 支持](/docs/infrastructure/vlans/order-vlan.html#order-vlans)，获取集群所在的每个专区的新专用和公用 VLAN。
-
-3.  记下每个专区的新专用和公用 VLAN 标识。
-
-4.  记下工作程序池的名称。
-
-    ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-5.  使用 `zone-network-set` [命令](cs_cli_reference.html#cs_zone_network_set)更改工作程序池网络元数据。
-
-    ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
-    ```
-    {: pre}
-
-6.  **仅限多专区集群**：针对集群中的每个专区重复**步骤 5**。
-
-7.  重新均衡工作程序池或调整其大小，以添加使用新 VLAN 标识的工作程序节点。例如：
-
-    ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-8.  验证工作程序节点是否已创建。
-
-    ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
-    ```
-    {: pre}
-
-<br />
-
 
 
 ## 获取帮助和支持
@@ -726,5 +593,5 @@ SoftLayerAPIError(SoftLayer_Exception_Public)：无法获取标识为 #123456 �
 -   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
+报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。
 

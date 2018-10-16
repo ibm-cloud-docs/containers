@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-06"
 {: #psp}
 
 Con le [politiche di sicurezza del pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puoi
-configurare le politiche per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.containerlong}}. I cluster con Kubernetes versioni 1.10.3, 1.9.8 e 1.8.13 o fixpack successivi supportano il controller di ammissione `PodSecurityPolicy` che applica tali politiche.
+configurare le politiche per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.containerlong}}. I cluster con Kubernetes versioni 1.10.3, 1.9.8 e 1.8.13 o fixpack successivi supportano il controller di ammissione `PodSecurityPolicy` che applica tali politiche. 
 {: shortdesc}
 
 Stai utilizzando una versione più vecchia di Kubernetes? [Aggiorna il tuo cluster](cs_cluster_update.html) oggi.
@@ -30,18 +30,18 @@ Come amministratore cluster, vuoi controllare cosa succede nel tuo cluster, spec
 
 Con il controller di ammissione `PodSecurityPolicy`, non potrai creare alcun pod fino a quando non [autorizzerai le politiche](#customize_psp). L'impostazione delle politiche di sicurezza del pod può avere effetti secondari involontari, assicurati quindi di eseguire il test di una distribuzione una volta modificata la politica. Per distribuire le applicazioni, tutti gli account utente e di servizio devono essere autorizzati dalle politiche di sicurezza del pod necessarie per distribuire i pod. Ad esempio, se installi le applicazioni utilizzando [Helm](cs_integrations.html#helm_links), il componente tiller di Helm crea i pod e quindi devi disporre della corretta autorizzazione della politica di sicurezza del pod.
 
-Stai provando a controllare quali utenti hanno accesso a {{site.data.keyword.containershort_notm}}? Vedi [Assegnazione dell'accesso al cluster](cs_users.html#users) per impostare le autorizzazioni IAM e dell'infrastruttura.
+Stai provando a controllare quali utenti hanno accesso a {{site.data.keyword.containerlong_notm}}? Vedi [Assegnazione dell'accesso al cluster](cs_users.html#users) per impostare le autorizzazioni IAM e dell'infrastruttura.
 {: tip}
 
 **Ci sono politiche configurate per impostazione predefinita? Cosa posso aggiungere?**</br>
-Per impostazione predefinita, {{site.data.keyword.containershort_notm}} configura il controller di ammissione `PodSecurityPolicy` con le [risorse per la gestione cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) che non puoi eliminare o modificare. Inoltre, non puoi disabilitare il controller di ammissione.  
+Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura il controller di ammissione `PodSecurityPolicy` con le [risorse per la gestione cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) che non puoi eliminare o modificare. Inoltre, non puoi disabilitare il controller di ammissione. 
 
 Per impostazione predefinita, le azioni pod non possono essere bloccate. Due risorse RBAC (role-based access control) nel cluster autorizzano invece tutti gli amministratori, gli utenti, i servizi e i nodi a creare pod privilegiati e non privilegiati. Se vuoi impedire che determinati utenti creino o aggiornino i pod, puoi [modificare queste risorse RBAC oppure crearne di tue](#customize_psp).
 
 **Come funziona l'autorizzazione della politica?**</br>
-Quando come utente crei direttamente un pod senza utilizzare un controller, ad esempio una distribuzione, le tue credenziali vengono convalidate rispetto alle politiche di sicurezza del pod che hai autorizzato ad utilizzare. Se nessuna politica supporta i requisiti di sicurezza del pod, quest'ultimo non viene creato. 
+Quando come utente crei direttamente un pod senza utilizzare un controller, ad esempio una distribuzione, le tue credenziali vengono convalidate rispetto alle politiche di sicurezza del pod che hai autorizzato ad utilizzare. Se nessuna politica supporta i requisiti di sicurezza del pod, quest'ultimo non viene creato.
 
-Quando crei un pod utilizzando un controller della risorsa, ad esempio una distribuzione, Kubernetes convalida le credenziali dell'account di servizio del pod rispetto alle politiche di sicurezza del pod che l'account di servizio è autorizzato ad utilizzare. Se nessuna politica supporta i requisiti di sicurezza del pod, il controller ha esito positivo, ma il pod non viene creato. 
+Quando crei un pod utilizzando un controller della risorsa, ad esempio una distribuzione, Kubernetes convalida le credenziali dell'account di servizio del pod rispetto alle politiche di sicurezza del pod che l'account di servizio è autorizzato ad utilizzare. Se nessuna politica supporta i requisiti di sicurezza del pod, il controller ha esito positivo, ma il pod non viene creato.
 
 Per i messaggi di errore comuni, vedi [Distribuzione dei pod non riuscita a causa di una politica di sicurezza del pod](cs_troubleshoot_clusters.html#cs_psp).
 
@@ -63,12 +63,12 @@ agli utenti di creare e aggiornare i pod privilegiati e non privilegiati (limita
 | `restricted-psp-user` | cluster-wide | `ClusterRoleBinding` | Consente agli amministratori cluster, agli utenti autenticati, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-restricted-psp`. |
 {: caption="Risorse RBAC predefinite che puoi modificare" caption-side="top"}
 
-Puoi modificare questi ruoli RBAC per rimuovere o aggiungere gli amministratori, gli utenti, i servizi o i nodi alla politica. 
+Puoi modificare questi ruoli RBAC per rimuovere o aggiungere gli amministratori, gli utenti, i servizi o i nodi alla politica.
 
 Prima di iniziare: 
 *  [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 *  Comprendi l'utilizzo dei ruoli RBAC. Per ulteriori informazioni, vedi [Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes](cs_users.html#rbac) o la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-*  **Nota**: quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di azioni cluster importanti, ad esempio le distribuzioni pod o gli aggiornamenti cluster. Verifica le tue modifiche in un cluster non di produzione che non viene utilizzato dagli altri team. 
+*  **Nota**: quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di azioni cluster importanti, ad esempio le distribuzioni pod o gli aggiornamenti cluster. Verifica le tue modifiche in un cluster non di produzione che non viene utilizzato dagli altri team.
 
 **Per modificare le risorse RBAC**:
 1.  Richiama il nome del bind del ruolo del cluster RBAC.
@@ -77,7 +77,7 @@ Prima di iniziare:
     ```
     {: pre}
     
-2.  Scarica il bind del ruolo del cluster come un file `.yaml` che puoi modificare in locale. 
+2.  Scarica il bind del ruolo del cluster come un file `.yaml` che puoi modificare in locale.
     
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
@@ -120,7 +120,7 @@ Prima di iniziare:
     
 3.  Modifica il file `.yaml` del bind del ruolo del cluster. Per comprendere cosa puoi modificare, esamina la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Azioni di esempio:
     
-    *   **Account di servizio**: potresti voler autorizzare gli account di servizio in modo che le distribuzioni possano verificarsi solo in specifici spazi dei nomi. Ad esempio, se dedichi la politica per consentire azioni all'interno dello spazio dei nomi `kube-system`, possono verificarsi molte azioni importanti come ad esempio gli aggiornamenti cluster. Tuttavia, le azioni negli altri spazi dei nomi non sono più autorizzate.  
+    *   **Account di servizio**: potresti voler autorizzare gli account di servizio in modo che le distribuzioni possano verificarsi solo in specifici spazi dei nomi. Ad esempio, se dedichi la politica per consentire azioni all'interno dello spazio dei nomi `kube-system`, possono verificarsi molte azioni importanti come ad esempio gli aggiornamenti cluster. Tuttavia, le azioni negli altri spazi dei nomi non sono più autorizzate. 
     
         Per dedicare la politica per consentire azioni in uno specifico spazio dei nomi, modifica `system:serviceaccounts` in `system:serviceaccount:<namespace>`.
         ```yaml
@@ -145,7 +145,7 @@ Prima di iniziare:
     ```
     {: pre}
     
-5.  Verifica che la risorsa sia stata modificata. 
+5.  Verifica che la risorsa sia stata modificata.
 
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml
@@ -176,12 +176,12 @@ Prima di iniziare:
 **Per creare la tua politica di sicurezza del pod**:</br>
 Per creare la tua risorsa della politica di sicurezza del pod e autorizzare gli utenti con RBAC, esamina la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). 
 
-Assicurati di aver modificato le politiche esistenti in modo che la nuova politica che hai creato non vada in conflitto con quella esistente. Ad esempio, la politica esistente consente agli utenti di creare e aggiornare pod privilegiati. Se crei una politica che non consente agli utenti di creare o aggiornare pod privilegiati, il conflitto tra la nuova politica e quella esistente potrebbe causare risultati imprevisti. 
+Assicurati di aver modificato le politiche esistenti in modo che la nuova politica che hai creato non vada in conflitto con quella esistente. Ad esempio, la politica esistente consente agli utenti di creare e aggiornare pod privilegiati. Se crei una politica che non consente agli utenti di creare o aggiornare pod privilegiati, il conflitto tra la nuova politica e quella esistente potrebbe causare risultati imprevisti.
 
 ## Descrizione delle risorse predefinite per la gestione cluster {{site.data.keyword.IBM_notm}}
 {: #ibm_psp}
 
-Il tuo cluster Kubernetes in {{site.data.keyword.containershort_notm}} contiene le seguenti politiche di sicurezza del
+Il tuo cluster Kubernetes in {{site.data.keyword.containerlong_notm}} contiene le seguenti politiche di sicurezza del
 pod e risorse RBAC correlate per consentire a {{site.data.keyword.IBM_notm}} di gestire correttamente il tuo cluster.
 {: shortdesc}
 

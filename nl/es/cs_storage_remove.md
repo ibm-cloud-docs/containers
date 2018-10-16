@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-06"
 # Eliminación del almacenamiento persistente de un clúster
 {: #cleanup}
 
-Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen permanente (PV) de Kubernetes que se monta en un pod y se describe en el PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo los haya creado, es posible que los tenga que suprimir por separado.
+Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en el PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo los haya creado, es posible que los tenga que suprimir por separado.
 {:shortdesc}
 
 ## Limpieza del almacenamiento persistente
@@ -31,7 +31,7 @@ Varias opciones de supresión:
 Depende. Cuando se suprime un clúster, se suprimen la PVC y el PV. Sin embargo, puede elegir si desea eliminar la instancia de almacenamiento asociada en la infraestructura de IBM Cloud (SoftLayer). Si ha elegido no eliminarla, la instancia de almacenamiento seguirá existiendo. Además, si ha suprimido el clúster en un estado no saludable, es posible que el almacenamiento siga existiendo incluso si ha elegido eliminarlo. Siga las instrucciones, en particular el paso para [suprimir la instancia de almacenamiento](#sl_delete_storage) en la infraestructura de IBM Cloud (SoftLayer).
 
 **¿Puedo suprimir la PVC para eliminar todo mi almacenamiento?**</br>
-A veces. Si [cree el almacenamiento permanente de forma dinámica](cs_storage_basics.html#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
+A veces. Si [cree el almacenamiento persistente de forma dinámica](cs_storage_basics.html#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
 
 En los demás casos, siga las instrucciones para comprobar el estado de su PVC, PV y del dispositivo de almacenamiento físico y suprímalos por separado si hace falta. 
 

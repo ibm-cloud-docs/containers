@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# 指導教學：將應用程式部署至 Kubernetes 叢集
+# 指導教學：將應用程式部署至叢集
 {: #cs_apps_tutorial}
 
 您可以瞭解如何使用 {{site.data.keyword.containerlong}} 來部署運用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的容器化應用程式。
@@ -26,13 +26,14 @@ lastupdated: "2018-08-06"
 
 使用在最後指導教學中建立的 Kubernetes 叢集，公關公司的應用程式開發人員會部署應用程式的 Hello World 版本。根據本指導教學中每個課程的建置，應用程式開發人員會漸進部署同一個應用程式的較複雜版本。下圖依課程顯示每個部署的元件。
 
-![課程元件](images/cs_app_tutorial_mz-roadmap.png)
 
-如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集裡開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有指定數目的 Pod 已啟動並在執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
+![課程元件](images/cs_app_tutorial_roadmap.png)
 
-服務會將一組 Pod 分組在一起，並且為叢集裡的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您使用 Kubernetes 服務，透過自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
+如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保一律有指定數目的 Pod 啟動與執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
 
-為了讓應用程式的可用性更高，您可以在標準叢集裡建立一個跨越多個區域（每一個區域都有工作者節點）的工作者節點儲存區，以執行更多的應用程式抄本。本指導教學中未討論此作業，但請記住這個概念，以便未來改進應用程式的可用性。
+服務會將一組 Pod 分組在一起，並且為叢集中的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您使用 Kubernetes 服務，透過自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
+
+為了讓應用程式的可用性更高，您可以在標準叢集中建立多個工作者節點，以執行更多的應用程式抄本。本指導教學中未討論此作業，但請記住這個概念，以便未來改進應用程式的可用性。
 
 只有其中一個課程討論到將 {{site.data.keyword.Bluemix_notm}} 服務整合至應用程式中，但無論您想像得到的應用程式有多麼簡單或複雜，都能派上用場。
 
@@ -41,8 +42,8 @@ lastupdated: "2018-08-06"
 * 瞭解基本的 Kubernetes 術語
 * 將映像檔推送至 {{site.data.keyword.registryshort_notm}} 中的登錄名稱空間
 * 讓應用程式可供公開存取
-* 使用 Kubernetes 指令及 Script 將應用程式的單一實例部署在叢集
-* 將應用程式的多個實例部署在性能檢查期間重建的容器
+* 使用 Kubernetes 指令及 Script 將應用程式的單一實例部署在叢集中
+* 將應用程式的多個實例部署在性能檢查期間重建的容器中
 * 部署使用 {{site.data.keyword.Bluemix_notm}} 服務功能的應用程式
 
 ## 所需時間
@@ -55,7 +56,7 @@ lastupdated: "2018-08-06"
 
 ## 必要條件
 
-* [指導教學：建立 Kubernetes 叢集](cs_tutorials.html#cs_cluster_tutorial).
+* [指導教學：在 {{site.data.keyword.containershort_notm}} 中建立 Kubernetes 叢集](cs_tutorials.html#cs_cluster_tutorial)。
 
 
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
@@ -67,7 +68,8 @@ lastupdated: "2018-08-06"
 您藉由完成本課程而部署的元件會顯示在下圖中。
 
 
-![部署設定](images/cs_app_tutorial_mz-components1.png)
+
+![部署設定](images/cs_app_tutorial_components1.png)
 
 若要部署應用程式，請執行下列動作：
 
@@ -77,21 +79,21 @@ lastupdated: "2018-08-06"
     * `package.json`：應用程式的相關 meta 資料。
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+        git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
 2.  導覽至 `Lab 1` 目錄。
 
     ```
-    cd 'container-service-getting-started-wt/Lab 1'
+        cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
 
-3.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請使用 `ibmcloud ks region-set` 指令。
+3.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請使用 `bx cs region-set` 指令。
 
     ```
-    ibmcloud login [--sso]
+        bx login [--sso]
     ```
     {: pre}
 
@@ -101,7 +103,7 @@ lastupdated: "2018-08-06"
     1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+                bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -111,26 +113,26 @@ lastupdated: "2018-08-06"
         OS X 的範例：
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
+                export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
         ```
         {: screen}
 
 5.  登入 {{site.data.keyword.registryshort_notm}} CLI。**附註**：確定已[安裝](/docs/services/Registry/index.html#registry_cli_install) container-registry 外掛程式。
 
     ```
-    ibmcloud cr login
+        bx cr login
     ```
     {: pre}
     -   如果您忘記 {{site.data.keyword.registryshort_notm}} 中的名稱空間，請執行下列指令。
 
         ```
-        ibmcloud cr namespace-list
+                bx cr namespace-list
         ```
         {: pre}
 
 6.  啟動 Docker。
     * 如果您使用 Docker Community Edition，則不需要執行任何動作。
-    * 如果您是使用 Linux，請遵循 [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/config/daemon/)，視您使用的 Linux 發行套件而定，尋找有關如何啟動 Docker 的指示。
+    * 如果您是使用 Linux，請遵循 [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/admin/)，視您使用的 Linux 發行套件而定，尋找有關如何啟動 Docker 的指示。
     * 如果您是在 Windows 或 OSX 上使用 Docker Toolbox，則可以使用 Docker Quickstart Terminal，它會為您啟動 Docker。在後續幾個步驟中，請使用 Docker Quickstart Terminal 來執行 Docker 指令，然後切回您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
 
 7.  建置 Docker 映像檔，其中包括 `Lab 1` 目錄的應用程式檔案。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。
@@ -140,7 +142,7 @@ lastupdated: "2018-08-06"
     1.  在本端建置映像檔。指定您要使用的名稱和標籤。請務必使用您在前一個指導教學中，在 {{site.data.keyword.registryshort_notm}} 中建立的名稱空間。為映像檔標記名稱空間資訊，可以讓 Docker 知道在稍後的步驟中，要將映像檔推送到哪裡。僅在映像檔名稱中使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+                docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
         ```
         {: pre}
 
@@ -235,7 +237,7 @@ lastupdated: "2018-08-06"
     </tr>
     <tr>
     <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>服務將資料流量導向該處的目標埠。在這個實例中，target-port 與 port 相同，但您建立的其他應用程式可能不同。</td>
+    <td>服務將資料流量導向其中的目標埠。在這個實例中，target-port 與 port 相同，但您建立的其他應用程式可能不同。</td>
     </tr>
     </tbody></table>
 
@@ -266,21 +268,21 @@ lastupdated: "2018-08-06"
 
         使用 `expose` 指令來產生 NodePort 時，即已將其隨機指派，但範圍落在 30000 到 32767 之間。在此範例中，NodePort 是 30872。
 
-    2.  取得工作者節點在叢集裡的公用 IP 位址。
+    2.  取得工作者節點在叢集中的公用 IP 位址。
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        bx cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
         輸出範例：
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
@@ -291,7 +293,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-    若要確定應用程式可公開使用，請嘗試在您的行動電話上將它輸入到瀏覽器中。
+    若要查看應用程式可公開使用，請嘗試在您的行動電話上將它輸入到瀏覽器中。
     {: tip}
 
 12. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
@@ -311,12 +313,13 @@ lastupdated: "2018-08-06"
 ## 課程 2：部署及更新具有更高可用性的應用程式
 {: #cs_apps_tutorial_lesson2}
 
-在本課程中，您會將 Hello World 應用程式的三個實例部署至叢集裡，以獲得比第一個應用程式版本更高的可用性。
+在本課程中，您會將 Hello World 應用程式的三個實例部署至叢集中，以獲得比第一個應用程式版本更高的可用性。
 {:shortdesc}
 
-較高的可用性表示使用者存取作業會分到三個實例。當有太多使用者嘗試存取相同的應用程式實例時，他們可能會注意到回應時間變慢。對您的使用者而言，多個實例可能表示更快的回應時間。在本課程中，您也會瞭解性能檢查及部署更新如何與 Kubernetes 搭配使用。下圖包括您藉由完成本課程所部署的元件。
+較高的可用性表示使用者存取作業會分成三個實例。當有太多使用者嘗試存取相同的應用程式實例時，他們可能會注意到回應時間變慢。對您的使用者而言，多個實例表示更快的回應時間。在本課程中，您也會瞭解性能檢查及部署更新如何使用 Kubernetes。下圖包括您藉由完成本課程所部署的元件。
 
-![部署設定](images/cs_app_tutorial_mz-components2.png)
+
+![部署設定](images/cs_app_tutorial_components2.png)
 
 在前一個指導教學中，您已建立自己的帳戶，以及一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並部署三個 Hello World 應用程式實例。每一個實例都會部署在 Kubernetes Pod 中，作為工作者節點中抄本集的一部分。若要讓它可公開使用，請同時建立 Kubernetes 服務。
 
@@ -418,7 +421,7 @@ lastupdated: "2018-08-06"
 7.  現在，部署工作已完成，您可以開啟瀏覽器並查看應用程式。若要構成 URL，請採用您在前一個課程中用於工作者節點的相同公用 IP 位址，並將其與配置 Script 中指定的 NodePort 結合。若要取得工作者節點的公用 IP 位址，請執行：
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -479,7 +482,8 @@ lastupdated: "2018-08-06"
 
 將元件分開在不同的容器中，可確保您在更新其中一個元件時，不會影響其他元件。然後，您更新應用程式，使用更多抄本擴充它，以提高可用性。下圖包括您藉由完成本課程所部署的元件。
 
-![部署設定](images/cs_app_tutorial_mz-components3.png)
+![部署設定](images/cs_app_tutorial_components3.png)
+
 
 在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將在 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的實例，並配置兩個部署，分別部署應用程式的每一個元件。每一個元件都會部署在工作者節點的 Kubernetes Pod 中。若要讓這兩個元件可公開使用，請同時對每一個元件建立一個 Kubernetes 服務。
 
@@ -559,7 +563,7 @@ lastupdated: "2018-08-06"
 5.  驗證這些映像檔都已順利新增至登錄名稱空間。如果您使用 Docker Quickstart 終端機來執行 Docker 指令，請務必切回到您用來設定 `KUBECONFIG` 階段作業變數的 CLI。
 
     ```
-    ibmcloud cr images
+    bx cr images
     ```
     {: pre}
 
@@ -741,7 +745,7 @@ lastupdated: "2018-08-06"
   如果您不想要保留叢集，可以同時將它刪除。
 
   ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
+  bx cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -751,5 +755,5 @@ lastupdated: "2018-08-06"
 既然您已掌握基本觀念，就可以移至更進階的活動。請考量嘗試執行下列其中一項：
 
 - 在儲存庫中完成[更複雜的實驗室 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
-- 使用 {{site.data.keyword.containershort_notm}} [自動調整應用程式](cs_app.html#app_scaling)
-- 探索 [developerWorks ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/technologies/container-orchestration/) 上的容器編排程式碼型樣。
+- 使用 {{site.data.keyword.containershort_notm}} [自動擴充應用程式](cs_app.html#app_scaling)
+- 探索 [developerWorks ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上的容器編排行程。

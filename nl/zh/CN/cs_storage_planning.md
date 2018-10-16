@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,78 +16,271 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-
-
 # 规划高可用性持久性存储器
 {: #storage_planning}
 
-## 非持久性数据存储选项
-{: #non_persistent}
+## 选择存储解决方案
+{: #choose_storage_solution}
 
-如果数据不需要持久存储，或者数据无需在应用程序实例间共享，那么可以使用非持久性存储选项。非持久性存储选项还可用于对应用程序组件进行单元测试或试用新功能。
+您必须了解应用程序需求、要存储的数据类型以及访问此数据的频率，然后才能决定哪种类型的存储器是适合您的解决方案。
+{: shortdesc}
+
+1. 决定是必须永久存储数据，还是可以在任何给定时间除去数据。
+   - **持久性存储器**即使除去了容器、工作程序节点或集群，数据仍然必须可用。在以下场景中，请使用持久性存储器：
+       - 有状态应用程序
+       - 核心业务数据
+       - 由于法律需求（例如，定义的保留期）而必须可用的数据
+       - 审计
+       - 必须在应用程序实例之间访问和共享的数据
+   - **非持久性存储器：**除去容器、工作程序节点或集群时，可以除去数据。非持久性存储器通常用于日志记录信息（例如，系统日志或容器日志）、开发测试或要从主机的文件系统访问数据时。要查找可用非持久性存储选项的概述，请参阅[非持久性存储选项的比较](#non_persistent_overview)。
+
+2. 如果必须持久存储数据，请分析应用程序是否需要特定类型的存储器。使用现有应用程序时，该应用程序可能设计为以下列其中一种方式存储数据：  
+   - **在文件系统中：**数据可以作为目录中的文件进行存储。例如，可以将此文件存储在本地硬盘上。某些应用程序需要将数据存储在特定文件系统（如 `nfs` 或 `ext4`）中，以优化数据存储并实现性能目标。
+   - **在数据库中：**数据必须存储在遵循特定模式的数据库中。某些应用程序随附可用于存储数据的数据库接口。例如，WordPress 已优化为可将数据存储在 MySQL 数据库中。在这些情况下，会为您选择存储类型。
+
+3. 如果应用程序对必须使用的存储类型没有限制，请确定要存储的数据的类型。
+   - **结构化数据：**可以存储在关系数据库中的数据，该数据库中有一个包含列和行的表。表中的数据可以使用键进行连接，并且由于采用了预定义的数据模型，因此数据通常易于访问。例如，电话号码、帐号、社会保障号或邮政编码。
+   - **半结构化数据：**不适用于关系数据库的数据，但这类数据随附一些组织属性，可以用于更轻松地读取和分析这类数据。例如，CSV、XML 或 JSON 等标记语言文件。  
+   - **非结构化数据：**不遵循组织模式的数据，这类数据过于复杂，无法存储在使用预定义数据模型的关系数据库中。要访问这类数据，需要高级工具和软件。例如，电子邮件消息、视频、照片、音频文件、演示文稿、社交媒体数据或 Web 页面。
+
+   如果您有结构化和非结构化数据，请尝试将每种数据类型分别存储在为此数据类型设计的存储解决方案中。使用适合数据类型的存储解决方案可以轻松访问数据，并给予您高性能、可扩展性、耐久性和一致性等优点。
+   {: tip}
+
+4. 分析您希望如何访问数据。存储解决方案通常是为了支持读或写操作而设计并优化的。  
+   - **只读：**数据为只读。您不想写入或更改数据。
+   - **读写：**要读取、写入和更改数据。对于读取和写入的数据，了解操作是多读少写、多写少读还是读写均衡很重要。
+
+4. 确定访问数据的频率。了解数据访问的频率可帮助您了解存储器所需的性能。例如，频繁访问的数据通常位于快速存储器上。
+   - **热数据：**频繁访问的数据。常见用例是 Web 或移动应用程序。
+   - **冷数据或温数据：**不经常访问（例如，每月一次或更低频率）的数据。常见用例是归档、短期数据保留或灾难恢复。
+   - **冷数据：**极少访问的数据（如果有访问的话）。常见用例是归档、长期备份和历史数据。
+   - **冻结数据：**不进行访问，但由于法律原因而需要保留的数据。
+
+   如果无法预测频率或频率不符合严格模式，请确定工作负载是多读少写、多写少读还是读写均衡。然后，查看适合工作负载的存储选项，并调查哪个存储层为您提供所需的灵活性。例如，{{site.data.keyword.containerlong_notm}} 提供了 `flex` 存储类，该存储类会考虑在一个月内访问数据的频率，并基于对此度量的考量来优化按月计费。
+   {: tip}
+
+5. 调查数据是否必须在多个应用程序实例、专区或区域中共享。
+   - **跨 pod 访问：**使用 Kubernetes 持久性卷访问存储器时，可以确定可同时安装该卷的 pod 的数量。某些存储解决方案（例如，Block Storage）一次只能由一个 pod 进行访问。其他存储解决方案允许在多个 pod 之间共享同一个卷。
+   - **跨专区和区域访问：**您可能需要数据可跨专区或区域进行访问。某些存储解决方案（例如，File Storage 和 Block Storage）是特定于数据中心的，无法在多专区集群设置中跨专区共享。
+
+6. 了解影响您选择的其他存储特征。
+   - **一致性：**保证读操作返回文件的最新版本。保证始终收到最新版本的文件时，存储解决方案可以提供`强一致性`；或者，在读操作可能无法返回最新版本时，存储解决方案可以提供`最终一致性`。通常，在必须首先在所有实例中复制写操作的地理分布式系统上可获得最终一致性。
+   - **性能：**完成读或写操作所需的时间。
+   - **耐久性：**保证落实到存储器的写操作能持久生存，不会被损坏或丢失，即使同时将数千兆字节或太字节的数据写入存储器时也不例外。
+   - **弹性：**能够从中断恢复并继续运行，即使硬件或软件组件发生故障时也不例外。例如，物理存储器遇到断电、网络中断或在自然灾害期间被破坏的情况。
+   - **可用性：**能够提供对数据的访问，即使数据中心或区域不可用时也不例外。通常通过添加冗余和设置故障转移机制来实现数据的可用性。
+   - **可扩展性：**能够根据需求扩展容量和定制性能。
+   - **加密：**在未经授权的用户访问数据时，掩蔽数据以阻止查看。
+
+7. [查看可用的持久性存储器解决方案](#persistent_storage_overview)，并选取最适合您的应用程序和数据需求的解决方案。
+
+## 非持久性存储选项的比较
+{: #non_persistent_overview}
+
+如果数据不需要持久存储，或者要对应用程序组件进行单元测试，那么可以使用非持久性存储选项。
 {: shortdesc}
 
 下图显示 {{site.data.keyword.containerlong_notm}} 中可用的非持久性数据存储选项。这些选项可用于免费和标准集群。
 <p>
 <img src="images/cs_storage_nonpersistent.png" alt="非持久性数据存储选项" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="该表显示非持久性存储选项。每行从左到右阅读，其中第一列是选项编号，第二列是选项标题，第三列是描述。" style="width: 100%">
-<caption>非持久性存储选项</caption>
-  <thead>
-  <th>选项</th>
-  <th>描述</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. 在容器或 pod 内</td>
-      <td>根据设计，容器和 pod 的生存时间短，并且可能会意外发生故障。但是，您可以将数据写入容器的本地文件系统，以存储容器整个生命周期内的数据。容器内的数据不能与其他容器或 pod 共享，并且在容器崩溃或被除去时会丢失。有关更多信息，请参阅[存储容器中的数据](https://docs.docker.com/storage/)。</td>
-    </tr>
-  <tr>
-    <td>2. 在工作程序节点上
-</td>
-    <td>每个工作程序节点都设置有主存储器和辅助存储器，这由您为工作程序节点选择的机器类型确定。主存储器用于存储来自操作系统的数据，并且无法使用 [Kubernetes <code>hostPath</code> 卷 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) 对其进行访问。辅助存储器用于存储来自 `kubelet` 和容器运行时引擎的数据。可以使用 [Kubernetes <code>emptyDir</code> 卷 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) 来访问辅助存储器。<br/><br/>虽然 <code>hostPath</code> 卷用于将文件从工作程序节点文件系统安装到 pod，但 <code>emptyDir</code> 会创建一个空目录，此目录将分配给集群中的 pod。该 pod 中的所有容器可以对该卷执行读写操作。由于卷会分配给一个特定 pod，因此数据无法与副本集内的其他 pod 共享。
-<br/><br/><p>对于以下情况，会除去 <code>hostPath</code> 或 <code>emptyDir</code> 卷及其数据：<ul><li>工作程序节点已删除。</li><li>工作程序节点已重新装入或更新。</li><li>集群已删除。</li><li>{{site.data.keyword.Bluemix_notm}} 帐户进入暂挂状态。</li></ul></p><p>此外，在以下情况下，也将除去 <code>emptyDir</code> 卷中的数据：<ul><li>从工作程序节点中永久删除分配的 pod。</li><li>在其他工作程序节点上安排了分配的 pod。</li></ul></p><p><strong>注</strong>：如果 pod 内的容器崩溃，该卷中的数据在工作程序节点上仍可用。</p></td>
-    </tr>
-    </tbody>
-    </table>
+<table>
+<thead>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">容器内</th>
+<th style="text-align:left">在工作程序节点的主磁盘或辅助磁盘上</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">支持多专区</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">否</td>
+</tr>
+<tr>
+<td style="text-align:left">数据类型</td>
+<td style="text-align:left">所有</td>
+<td style="text-align:left">所有</td>
+</tr>
+<tr>
+<td style="text-align:left">容量</td>
+<td style="text-align:left">限于工作程序节点的可用辅助磁盘。要限制 pod 使用的辅助存储量，请使用[临时存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) 的资源请求和限制。</td>
+<td style="text-align:left">限于工作程序节点在主磁盘 (hostPath) 或辅助磁盘 (emptyDir) 上的可用空间。要限制 pod 使用的辅助存储量，请使用[临时存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage) 的资源请求和限制。</td>
+</tr>
+<tr>
+<td style="text-align:left">数据访问模式</td>
+<td style="text-align:left">任何频率的读写操作</td>
+<td style="text-align:left">任何频率的读写操作</td>
+</tr>
+<tr>
+<td style="text-align:left">访问</td>
+<td style="text-align:left">通过容器的本地文件系统</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">通过 [Kubernetes <code>hostPath</code> 卷 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) 来访问工作程序节点主存储器。</li><li style="margin:0px; padding:0px">通过 [Kubernetes <code>emptyDir</code> 卷 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) 来访问工作程序节点辅助存储器。</td>
+</tr>
+<tr>
+<td style="text-align:left">性能</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">使用 SSD 时，性能高，等待时间更短</td>
+</tr>
+<tr>
+<td style="text-align:left">一致性</td>
+<td style="text-align:left">强</td>
+<td style="text-align:left">强</td>
+</tr>
+<tr>
+<td style="text-align:left">弹性</td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">低</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">特定于容器</td>
+<td style="text-align:left">特定于工作程序节点</td>
+</tr>
+<tr>
+<td style="text-align:left">可扩展性</td>
+<td style="text-align:left">难以扩展，因为限于工作程序节点的辅助磁盘容量</td>
+<td style="text-align:left">难以扩展，因为限于工作程序节点的主磁盘容量和辅助磁盘容量</td>
+</tr>
+<tr>
+<td style="text-align:left">耐久性</td>
+<td style="text-align:left">容器崩溃或除去容器时，数据会丢失。</td>
+<td style="text-align:left">在以下情况下，会丢失 <code>hostPath</code> 或 <code>emptyDir</code> 卷中的数据：<ul><li>工作程序节点已删除。</li><li>工作程序节点已重新装入或更新。</li><li>集群已删除。</li><li>{{site.data.keyword.Bluemix_notm}} 帐户进入暂挂状态。</li></ul></p><p>此外，在以下情况下，也将除去 <code>emptyDir</code> 卷中的数据：<ul><li>从工作程序节点中永久删除分配的 pod。</li><li>在其他工作程序节点上安排了分配的 pod。</li></ul>
+</tr>
+<tr>
+<td style="text-align:left">常见用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">本地映像高速缓存</li><li style="margin:0px; padding:0px">容器日志</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">高性能本地高速缓存</li><li style="margin:0px; padding:0px">从工作程序节点文件系统访问文件</li><li style="margin:0px; padding:0px">单元测试</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">非理想用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">持久数据存储</li><li style="margin:0px; padding:0px">在容器之间共享数据</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">持久数据存储</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 
-## 用于高可用性的持久性数据存储选项
-{: #persistent}
+## 持久性存储选项的比较
+{: #persistent_storage_overview}
 
-创建高可用性有状态应用程序时，主要困难是如何在多个专区的多个应用程序实例中持久存储数据，并使数据始终保持同步。对于高可用性数据，您希望确保有一个包含多个实例的主数据库，这些实例分布在多个数据中心甚或多个区域中。此主数据库必须被持续复制以保持单个事实源。集群中的所有实例都必须对此主数据库执行读写操作。如果主数据库的一个实例停止运行，其他实例会接管工作负载，避免您的应用程序发生停机时间。
+对要永久保留（即使除去了容器、工作程序节点或集群时数据也保留）的任何数据使用持久性存储选项。
 {: shortdesc}
 
-下图显示您在 {{site.data.keyword.containerlong_notm}} 中具有的可使数据在标准集群中实现高可用性的选项。适合您的选项取决于以下因素：
-  * **拥有的应用程序的类型：**例如，您可能有一个应用程序必须基于文件存储数据，而不是在数据库内存储数据。
-  * **数据存储和路由的法律要求：**例如，您可能只能在美国存储和路由数据，而不能使用位于欧洲的服务。
-  * **备份和复原选项：**每个存储选项都随附数据备份和复原功能。检查可用的备份和复原选项是否满足灾难恢复计划的需求，例如备份频率或在主数据中心外部存储数据的功能。
-  * **全局复制：**为了实现高可用性，您可能希望设置多个存储器实例以分布在全球各数据中心并进行复制。
+**注：**持久性数据存储选项仅可用于标准集群。
 
-<br/>
+要改为将集群连接到内部部署数据库吗？请参阅[设置到集群的 VPN 连接](cs_vpn.html#vpn)。
+{: tip}
+
+下图显示了在 {{site.data.keyword.containerlong_notm}} 中永久存储数据并使数据在集群中高度可用的选项。
+
 <img src="images/cs_storage_mz-ha.png" alt="持久性存储器的高可用性选项"/>
 
-<table summary="该表显示持久性存储选项。每行从左到右阅读，其中第一列是选项编号，第二列是选项标题，第三列是描述。" style="width: 100%">
-<caption>持久性数据存储选项</caption>
-  <thead>
-  <th>选项</th>
-  <th>描述</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>1. NFS 或块存储器</td>
-  <td>使用此选项时，可以利用 Kubernetes 持久性卷在同一专区中持久存储应用程序和容器数据。</br></br><strong>如何供应文件存储器或块存储器？</strong></br>要在集群中供应文件存储器和块存储器，请[使用持久性卷 (PV) 和持久性卷申领 (PVC)](cs_storage_basics.html#pvc_pv)。PVC 和 PV 是 Kubernetes 概念，用于抽象 API 以供应物理文件或块存储设备。可以使用[动态](cs_storage_basics.html#dynamic_provisioning)或[静态](cs_storage_basics.html#static_provisioning)供应来创建 PVC 和 PV。</br></br><strong>可以在多专区集群中使用文件存储器或块存储器吗？</strong></br> 文件存储器和块存储设备特定于专区，不能跨专区或区域共享。要在集群中使用此类型的存储器，必须在存储器所在的专区中至少有一个工作程序节点。</br></br>如果在跨多个专区的集群中[动态供应](cs_storage_basics.html#dynamic_provisioning)文件存储器和块存储器，那么将仅在按循环法选择的 1 个专区中供应存储器。要在多专区集群的所有专区中供应持久性存储器，请重复这些步骤为每个专区供应动态存储器。例如，如果集群跨专区 `dal10`、`dal12` 和 `dal13`，那么第一次动态供应持久性存储器时，可能会在 `dal10` 中供应该存储器。另外创建两个 PVC 以涵盖 `dal12`和 `dal13`。</br></br><strong>如果要跨专区共享数据该怎么办？</strong></br>如果要跨专区共享数据，请使用云数据库服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。</td>
-  </tr>
-  <tr id="cloud-db-service">
-    <td>2. Cloud 数据库服务</td>
-    <td>使用此选项时，可以利用 {{site.data.keyword.Bluemix_notm}} 数据库服务（例如 [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant)）来持久存储数据。</br></br><strong>可以将云数据库服务用于多专区集群吗？</strong></br>通过云数据库服务，数据可存储在指定服务实例的集群外部。服务实例将供应到一个专区中。但是，每个服务实例都随附一个外部接口，可以使用该接口来访问数据。将数据库服务用于多专区集群时，可以在集群、专区和区域之间共享数据。要使服务实例可用性更高，可以选择跨专区设置多个实例，并在实例之间进行复制，以实现更高的可用性。 </br></br><strong>如何将云数据库服务添加到集群？</strong></br>要在集群中使用服务，必须[绑定 {{site.data.keyword.Bluemix_notm}} 服务](cs_integrations.html#adding_app)到集群中的名称空间。将该服务绑定到集群时，将创建 Kubernetes 私钥。Kubernetes 私钥会保存有关该服务的保密信息，例如服务的 URL、用户名和密码。可以将私钥作为私钥卷安装到 pod，并使用该私钥中的凭证来访问该服务。通过将私钥卷安装到其他 pod，还可以在 pod 之间共享数据。容器崩溃或从工作程序节点中除去 pod 时，数据不会除去，而是仍可由安装该私钥卷的其他 pod 访问。</br></br>大多数 {{site.data.keyword.Bluemix_notm}} 数据库服务都免费对较小的数据量提供磁盘空间，因此您可以测试其功能。
-</p></td>
-  </tr>
-  <tr>
-    <td>3. 内部部署数据库</td>
-    <td>如果由于法律原因必须在现场存储数据，请[设置 VPN 连接](cs_vpn.html#vpn)以连接到内部部署数据库，并使用数据中心内的现有存储、备份和复制机制。</td>
-  </tr>
-  </tbody>
-  </table>
-
-{: caption="表. 用于在 Kubernetes 集群中进行部署的持久数据存储选项" caption-side="top"}
+<table>
+<thead>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">File</th>
+<th style="text-align:left">Block</th>
+<th style="text-align:left">Object</th>
+<th style="text-align:left">DBaaS</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">支持多专区</td>
+<td style="text-align:left">否，因为特定于数据中心。除非实现自己的数据复制，否则不能跨专区共享数据。</td>
+<td style="text-align:left">否，因为特定于数据中心。除非实现自己的数据复制，否则不能跨专区共享数据。</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">理想的数据类型</td>
+<td style="text-align:left">所有</td>
+<td style="text-align:left">所有</td>
+<td style="text-align:left">半结构化数据和非结构化数据</td>
+<td style="text-align:left">取决于 DBaaS</ul></td>
+</tr>
+<tr>
+<td style="text-align:left">数据使用模式</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">随机读写操作</li><li style="margin:0px; padding:0px">顺序读写操作</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">随机读写操作</li><li style="margin:0px; padding:0px">写密集型工作负载</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读密集型工作负载</li><li style="margin:0px; padding:0px">很少或没有写操作</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">读写密集型工作负载</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">访问</td>
+<td style="text-align:left">通过已安装卷上的文件系统</td>
+<td style="text-align:left">通过已安装卷上的文件系统</td>
+<td style="text-align:left">通过已安装卷（插件）上的文件系统或通过应用程序中的 REST API</td>
+<td style="text-align:left">通过应用程序中的 REST API</td>
+</tr>
+<tr>
+<td style="text-align:left">支持的 Kubernetes 访问写操作</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">不适用，因为是从应用程序直接访问</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">性能</td>
+<td style="text-align:left">由于分配了 IOPS 和大小，因此可预测。IOPS 在访问卷的 pod 之间共享。</td>
+<td style="text-align:left">由于分配了 IOPS 和大小，因此可预测。IOPS 不在 pod 之间共享。</td>
+<td style="text-align:left">对于读操作，性能为高，从本地高速缓存读取时的等待时间比 Block Storage 短。对于写操作，性能不可预测。</td>
+<td style="text-align:left">如果部署到应用程序所在的数据中心，那么性能高。</td>
+</tr>
+<tr>
+<td style="text-align:left">一致性</td>
+<td style="text-align:left">强</td>
+<td style="text-align:left">强</td>
+<td style="text-align:left">最终</td>
+<td style="text-align:left">取决于 DBaaS</td>
+</tr>
+<tr>
+<td style="text-align:left">耐久性</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left">弹性</td>
+<td style="text-align:left">中等，因为特定于数据中心。File Storage 服务器由 IBM 通过冗余联网进行集群。</td>
+<td style="text-align:left">中等，因为特定于数据中心。Block Storage 服务器由 IBM 通过冗余联网进行集群。</td>
+<td style="text-align:left">高，因为数据存储在至少 3 个副本中，并且分布在一个区域或多个区域中。</td>
+<td style="text-align:left">取决于 DBaaS 和设置。</td>
+</tr>
+<tr>
+<td style="text-align:left">可用性</td>
+<td style="text-align:left">中等，因为特定于数据中心。</td>
+<td style="text-align:left">中等，因为特定于数据中心。</td>
+<td style="text-align:left">高，因为跨专区或区域进行分布。</td>
+<td style="text-align:left">如果设置了多个实例，可用性为高。</td>
+</tr>
+<tr>
+<td style="text-align:left">可扩展性</td>
+<td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
+<td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
+<td style="text-align:left">轻松扩展。</td>
+<td style="text-align:left">轻松扩展。</td>
+</tr>
+<tr>
+<td style="text-align:left">加密</td>
+<td style="text-align:left">静态</td>
+<td style="text-align:left">静态</td>
+<td style="text-align:left">静态</td>
+<td style="text-align:left">静态</td>
+</tr>
+<tr>
+<td style="text-align:left">常见用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">海量或单个文件存储</li><li style="margin:0px; padding:0px">文件在单专区集群中共享</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">有状态集</li><li style="margin:0px; padding:0px">运行自己的数据库时备份存储器</li><li style="margin:0px; padding:0px">高性能访问单个 pod</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">静态大数据</li><li style="margin:0px; padding:0px">静态多媒体内容</li><li style="margin:0px; padding:0px">Web 应用程序</li><li style="margin:0px; padding:0px">备份</li><li style="margin:0px; padding:0px">归档</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">关系数据库和非关系数据库</li><li style="margin:0px; padding:0px">地理分布式数据</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">非理想用例</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">多专区集群</li><li style="margin:0px; padding:0px">地理分布式数据</li><li style="margin:0px; padding:0px">跨多个应用程序实例共享数据</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">写密集型工作负载</li><li style="margin:0px; padding:0px">随机写操作</li><li style="margin:0px; padding:0px">增量数据更新</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">设计为写入文件系统的应用程序</li></ul></td>
+</tr>
+</tbody>
+</table>

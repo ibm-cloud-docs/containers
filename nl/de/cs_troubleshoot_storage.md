@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -29,23 +29,6 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_troubleshoot.html).
 {: tip}
 
-## In einem Mehrzonencluster schlägt das Anhängen eines persistenten Datenträgers an einen Pod fehl
-{: #mz_pv_mount}
-
-{: tsSymptoms}
-Ihr Cluster war zuvor ein Einzelzonencluster mit eigenständigen Workerknoten, die sich nicht in Worker-Pools befanden. Sie haben erfolgreich einen Persistent Volume Claim (PVC) angehängt, der den persistenten Datenträger (PV) beschrieben hat, der für die Bereitstellung des Pods Ihrer App verwendet werden soll. Da Sie nun über Worker-Pools verfügen und Ihrem Cluster Zonen hinzugefügt haben, schlägt das Anhängen des persistenten Datenträgers (PV) an einen Pod jedoch fehl.
-
-{: tsCauses}
-Bei Mehrzonenclustern müssen die persistenten Datenträger über folgende Bezeichnungen verfügen, damit Pods nicht versuchen, Datenträger in einer anderen Zone anzuhängen.
-* `failure-domain.beta.kubernetes.io/region`
-* `failure-domain.beta.kubernetes.io/zone`
-
-Neue Cluster mit Worker-Pools, die mehrere Zonen umfassen können, kennzeichnen die persistenten Datenträger standardmäßig. Wenn Sie Ihre Cluster vor der Einführung von Worker-Pools erstellt haben, müssen Sie die Bezeichnungen manuell hinzufügen.
-
-{: tsResolve}
-[Aktualisieren Sie die persistenten Datenträger in Ihrem Cluster mit der Region und den Zonenbezeichnungen](cs_storage_basics.html#multizone).
-
-<br />
 
 
 ## Dateisysteme für Workerknoten werden schreibgeschützt
@@ -63,9 +46,9 @@ Das Dateisystem auf dem Workerknoten ist schreibgeschützt.
 {: tsResolve}
 1.  Erstellen Sie eine Sicherungskopie aller Daten, die möglicherweise auf dem Workerknoten oder in Ihren Containern gespeichert werden.
 2.  Laden Sie den Workerknoten erneut, um eine kurzfristige Programmkorrektur für den vorhandenen Workerknoten zu erreichen.
-    <pre class="pre"><code>ibmcloud ks worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
+    <pre class="pre"><code>bx cs worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
 
-Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp Ihres Worker-Pools aktualisieren](cs_cluster_update.html#machine_type).
+Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp aktualisieren, indem Sie einen anderen Workerknoten hinzufügen](cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -75,7 +58,7 @@ Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp Ihres Wor
 {: #nonroot}
 
 {: tsSymptoms}
-Nach dem [Hinzufügen von NFS-Speicher](cs_storage_file.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
+Nach dem [Hinzufügen von NFS-Speicher](cs_storage.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
 
 {: tsCauses}
 Standardmäßig haben Benutzer ohne Rootberechtigung keinen Schreibzugriff auf den Datenträgermountpfad für NFS-gesicherte Speicher. Einige allgemeine App-Images, wie z. B. Jenkins und Nexus3, geben einen Benutzer ohne Rootberechtigung an, der Eigner des Mountpfads in der Dockerfile ist. Wenn Sie einen Container aus dieser Dockerfile erstellen, schlägt die Erstellung des Containers aufgrund unzureichender Berechtigungen für den Benutzer ohne Rootberechtigung auf dem Mountpfad fehl. Um Schreibberechtigung zu erteilen, können Sie die Dockerfile so ändern, dass der Benutzer ohne Rootberechtigung temporär zur Stammbenutzergruppe hinzugefügt wird, bevor die Mountpfadberechtigungen geändert werden, oder Sie verwenden einen Init-Container.
@@ -299,7 +282,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Sie verfügen über eine vorhandene Blockspeichereinheit, die für ein `XFS`-Dateisystem konfiguriert ist. Um diese Einheit an Ihren Pod anzuhängen, haben Sie [einen persistenten Datenträger (PV) erstellt](cs_storage_block.html#existing_block), der `ext4` als Ihr Dateisystem oder kein Dateisystem im Abschnitt `spec/flexVolume/fsType` angegeben hat. Wenn kein Dateisystem definiert ist, nimmt der persistente Datenträger standardmäßig den Wert `ext4` ein.
+Sie verfügen über eine vorhandene Blockspeichereinheit, die für ein `XFS`-Dateisystem konfiguriert ist. Um diese Einheit an Ihren Pod anzuhängen, haben Sie [einen persistenten Datenträger (PV) erstellt](cs_storage.html#existing_block), der `ext4` als Ihr Dateisystem oder kein Dateisystem im Abschnitt `spec/flexVolume/fsType` angegeben hat. Wenn kein Dateisystem definiert ist, nimmt der persistente Datenträger standardmäßig den Wert `ext4` ein.
 Der persistente Datenträger wurde erfolgreich erstellt und mit der vorhandenen Blockspeicherinstanz verknüpft. Wenn Sie jedoch versuchen, den persistenten Datenträger mithilfe eines PVC an den Cluster anzuhängen, schlägt dieser Vorgang fehl. Sie können die `XFS`-Blockspeicherinstanz nicht mit einem `ext4`-Dateisystem an den Pod anhängen.
 
 {: tsResolve}
@@ -369,5 +352,5 @@ finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-
 -   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -108,7 +108,7 @@ Para desplegar un contenedor en el espacio de nombres **default** del clúster, 
     ```
     {: codeblock}
 
-    **Sugerencia:** Para recuperar la información del espacio de nombres, ejecute `ibmcloud cr namespace-list`.
+    **Sugerencia:** Para recuperar la información del espacio de nombres, ejecute `bx cr namespace-list`.
 
 3.  Cree el despliegue en el clúster.
 
@@ -212,7 +212,7 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
 2.  Obtenga una lista de las señales en la cuenta de {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
 4.  Recupere el valor de la señal. Sustituya <em>&lt;token_ID&gt;</em> por el ID de la señal que ha recuperado en el paso anterior.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -249,11 +249,11 @@ Para acceder a imágenes en otras regiones o cuentas de {{site.data.keyword.Blue
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Obligatorio. El URL del registro de imágenes en el que está configurado el espacio de nombres.<ul><li>Para los espacios de nombres definidos en EE.UU. Sur y EE.UU. este en registry.ng.bluemix.net</li><li>Para los espacios definidos en UK-Sur registry.eu-gb.bluemix.net</li><li>Para los espacios de nombres definidos en UE-Central (Frankfurt) registry.eu-de.bluemix.net</li><li>Para los espacios de nombres definidos en Australia (Sídney) registry.au-syd.bluemix.net</li><li>Para los espacios definidos en {{site.data.keyword.Bluemix_dedicated_notm}} registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>Obligatorio. El URL del registro de imágenes en el que está configurado el espacio de nombres.<ul><li>Para los espacios de nombres definidos en EE.UU. Sur y EE.UU. este en registry.ng.bluemix.net</li><li>Para los espacios definidos en UK-Sur registry.eu-gb.bluemix.net</li><li>Para los espacios de nombres definidos en UE-Central (Frankfurt) registry.eu-de.bluemix.net</li><li>Para los espacios de nombres definidos en Australia (Sidney) registry.au-syd.bluemix.net</li><li>Para los espacios definidos en {{site.data.keyword.Bluemix_dedicated_notm}} registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Obligatorio. El nombre de usuario para iniciar una sesión en su registro privado. Para {{site.data.keyword.registryshort_notm}}, el nombre de usuario se establece en el valor <strong><code>token</code></strong>.</td>
+    <td>Obligatorio. El nombre de usuario para iniciar una sesión en su registro privado. Para {{site.data.keyword.registryshort_notm}}, el nombre de usuario se establece en <code>token</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -400,11 +400,11 @@ Cuando haga referencia al imagePullSecret en un despliegue de pod, el imagePullS
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `ibmcloud cr namespace-list`.</td>
+    <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>El nombre del imagen que desea utilizar. Para ver una lista de todas las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute `ibmcloud cr image-list`.</td>
+    <td>El nombre del imagen que desea utilizar. Para ver una lista de las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute `bx cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

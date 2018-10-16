@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,14 +19,14 @@ lastupdated: "2018-08-06"
 # 备份和复原持久性卷中的数据
 {: #backup_restore}
 
-文件共享和块存储器会供应到集群所在的专区。存储器由 {{site.data.keyword.IBM_notm}} 在集群服务器上托管，以在服务器停止运行时提供可用性。但是，文件共享和块存储器不会自动进行备份，因此它们在整个专区发生故障时可能无法进行访问。为了防止数据丢失或损坏，可以设置定期备份，以便在需要时可用于复原数据。
+文件共享和块存储器会供应到集群所在的专区。存储器由 {{site.data.keyword.IBM_notm}} 在集群服务器上托管，以在其中某个服务器停止运行时提供可用性。但是，文件共享和块存储器不会自动进行备份，因此它们在整个专区发生故障时可能无法进行访问。为了防止数据丢失或损坏，可以设置定期备份，以便在需要时可用于复原数据。
 {: shortdesc}
 
 查看 NFS 文件共享和块存储器的以下备份和复原选项：
 
 <dl>
   <dt>设置定期快照</dt>
-  <dd><p>可以为 NFS 文件共享或块存储器设置定期快照，这是捕获某个时间点的实例状态的只读图像。要存储快照，必须在 NFS 文件共享或块存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户意外地从卷中除去了重要数据，那么可以通过快照来复原数据。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
+  <dd><p>可以为 NFS 文件共享或块存储器设置定期快照，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在 NFS 文件共享或块存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户意外地从卷中除去了重要数据，那么可以通过快照来复原数据。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>获取要为其创建快照空间的 PV 的详细信息，并记下卷标识、大小和 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 对于文件存储器，可以在 CLI 输出的 <strong>Labels</strong> 部分中找到卷标识、大小和 IOPS。对于块存储器，大小和 IOPS 会显示在 CLI 输出的 <strong>Labels</strong> 部分中。要查找卷标识，请查看 CLI 输出的 <code>ibm.io/network-storage-id</code> 注释。</li><li>使用您在先前步骤中检索到的参数为现有卷创建快照大小。<pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>等待快照大小创建。<pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>CLI 输出中的 <strong>Snapshot Capacity (GB)</strong> 从 0 更改为您所订购的大小时，说明已成功供应快照大小。</li><li>为卷创建快照，并记下创建的快照的标识。<pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>验证快照是否已成功创建。<pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>要将数据从快照复原到现有卷，请运行以下命令：</strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></br>有关更多信息，请参阅：<ul><li>[NFS 定期快照](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[块定期快照](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
   <dt>将快照复制到其他专区</dt>
  <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/FileStorage/replication.html#replicating-data)到其他专区中设置的 NFS 文件共享或块存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的 NFS 文件共享或块存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。</p>

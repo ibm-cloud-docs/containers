@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -22,47 +22,256 @@ lastupdated: "2018-08-06"
 Legen Sie die Protokollierung und Überwachung in {{site.data.keyword.containerlong}} fest, um Unterstützung bei der Fehlerbehebung zu erhalten und um die Leistung Ihrer Kubernetes-Cluster und Apps zu verbessern.
 {: shortdesc}
 
-## Informationen zur Protokollweiterleitung für Cluster und Apps
+
+## Protokollweiterleitung für Cluster und Anwendung konfigurieren
 {: #logging}
 
-Die kontinuierliche Überwachung und Protokollierung ist der Schlüssel, um Angriffe auf Ihren Cluster zu erkennen und Probleme zu lösen, sobald diese auftreten. Wenn Sie Ihren Cluster kontinuierlich überwachen, können Sie die Clusterkapazität und Verfügbarkeit von Ressourcen für Ihre App besser verstehen. Dadurch können Sie sich entsprechend vorbereiten, um Ihre Apps vor Ausfallzeiten zu schützen. Um die Protokollierung zu konfigurieren, müssen Sie mit einem Kubernetes-Standardcluster in {{site.data.keyword.containershort_notm}} arbeiten.
+Mit einem Kubernetes-Standardcluster in {{site.data.keyword.containershort_notm}} können Sie Protokolle von unterschiedlichen Quellen an {{site.data.keyword.loganalysislong_notm}}, an einen externen Systemprotokollserver oder an beide weiterleiten.
 {: shortdesc}
 
+Wenn Sie Protokolle von einer Quelle an beide Kollektorserver weiterleiten möchten, müssen Sie zwei Protokollierungskonfigurationen erstellen.
+{: tip}
 
-**Überwacht IBM meinen Cluster?**
-Jeder Kubernetes-Master wird kontinuierlich von IBM überwacht. {{site.data.keyword.containershort_notm}} überprüft automatisch alle Knoten, auf denen der Kubernetes-Master implementiert ist, auf Sicherheitslücken, die in Kubernetes- und betriebssystemspezifischen Sicherheitskorrekturen gefunden werden. Werden Schwachstellen bzw. Sicherheitslücken festgestellt, wendet {{site.data.keyword.containershort_notm}} automatisch entsprechende Korrekturen (Fixes) und beseitigt Schwachstellen bzw. Sicherheitslücken zugunsten des Benutzers, um den Schutz des Masterknotens sicherzustellen. Sie sind für die Überwachung und Analyse der Protokolle für den Rest Ihres Clusters verantwortlich.
-
-**Für was für Quellen kann ich die Protokollierung konfigurieren?**
-
-In der folgenden Abbildung sehen Sie die Position der Quellen, für die Sie die Protokollierung konfigurieren können.
-
-![Protokollquellen](images/log_sources.png)
-
-<ol>
-<li><p><code>application</code>: Informationen zu Ereignissen, die auf Anwendungsebene auftreten. Dabei kann es sich um eine Benachrichtigung handeln, dass eine Ereignis stattgefunden hat, beispielsweise eine erfolgreiche Anmeldung, eine Warnung zum Speicher oder andere Operationen, die auf Anwendungsebene durchgeführt werden können.</p> <p>Pfade: Sie können die Pfade festlegen, an die Ihre Protokolle weitergeleitet werden. Damit Protokolle jedoch gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt. Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle tatsächlich an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden.</p></li>
-
-<li><p><code>container</code>: Informationen, die von einem aktiven Container protokolliert werden.</p> <p>Pfade: Alles, was in <code>STDOUT</code> oder <code>STDERR</code> geschrieben wird.</p></li>
-
-<li><p><code>ingress</code>: Informationen zum Netzverkehr, der über die Ingress-ALB in einen Cluster gelangt. Spezifische Konfigurationsdaten finden Sie in der [Ingress-Dokumentation](cs_ingress.html#ingress_log_format).</p> <p>Pfade: <code>/var/log/alb/ids/&ast;.log</code> <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></p></li>
-
-<li><p><code>kube-audit</code>: Informationen zu clusterbezogenen Aktionen, die an den Kubernetes-API-Server gesendet werden, einschließlich der Zeit, des Benutzers und der betroffenen Ressource.</p></li>
-
-<li><p><code>kubernetes</code>: Informationen von 'kubelet, 'kube-proxy' und anderen Kubernetes-Ereignissen, die im Workerknoten auftreten können, die im Namensbereich 'kube-system' ausgeführt werden.</p><p>Pfade: <code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/*.log</code></p></li>
-
-<li><p><code>worker</code>: Informationen, die für die Infrastrukturkonfiguratin spezifisch sind, die Sie für Ihren Workerknoten konfiguriert haben. Workerprotokolle werden in Syslog erfasst und enthalten Betriebssystemereignisse. In der Datei 'auth.log' finden Sie Informationen zu den Authentifizierungsanforderungen, die an das Betriebssystem gestellt werden. </p><p>Pfade: <code>/var/log/syslog</code> und <code>/var/log/auth.log</code></p></li>
-</ol>
-
-</br>
-
-**Welche Konfigurationsoptionen stehen mir zur Verfügung?**
-
-In der folgenden Tabelle sind die verschiedenen Optionen aufgeführt, die Ihnen bei der Konfiguration der Protokollierung und ihrer Beschreibungen zur Verfügung stehen.
+Überprüfen Sie die folgende Tabelle auf Informationen zu unterschiedlichen Protokollquellen.
 
 <table>
-<caption> Informationen zu den Konfigurationsoptionen für die Protokollierung</caption>
+<caption>Protokollquellen</caption>
   <thead>
-    <th>Option</th>
-    <th>Beschreibung</th>
+    <tr>
+      <th>Protokollquelle</th>
+      <th>Merkmale</th>
+      <th>Protokollpfade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>container</code></td>
+      <td>Protokolle für Ihren Container, der in einem Kubernetes-Cluster ausgeführt wird. Alles, was in STDOUT oder STDERR protokolliert wurde.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>application</code></td>
+      <td>Protokolle für Ihre eigene Anwendung, die in einem Kubernetes-Cluster ausgeführt wird.</td>
+      <td><p>Sie können die Pfade definieren. Damit Protokolle gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt.</p>
+      <p>Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle tatsächlich an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden.</p></td>
+    </tr>
+    <tr>
+      <td><code>worker</code></td>
+      <td>Protokolle für Workerknoten für virtuelle Maschinen in einem Kubernetes-Cluster.</td>
+      <td><code>/var/log/syslog</code>, <code>/var/log/auth.log</code></td>
+    </tr>
+    <tr>
+      <td><code>kubernetes</code></td>
+      <td>Protokolle für die Kubernetes-Systemkomponente.</td>
+      <td><code>/var/log/kubelet.log</code>, <code>/var/log/kube-proxy.log</code>, <code>/var/log/event-exporter/&ast;.log</code></td>
+    </tr>
+    <tr>
+      <td><code>ingress</code></td>
+      <td>Protokolle für eine Ingress-Lastausgleichsfunktion für Anwendungen, die den eingehenden Netzverkehr für einen Cluster verwaltet.</td>
+      <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
+    </tr>
+    <tr>
+      <td><code>kube-audit</code></td>
+      <td>Protokolle für den Kubernetes-API-Server.</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+Um eine Protokollierung auf Kontoebene zu aktivieren oder die Anwendungsprotokollierung zu konfigurieren, verwenden Sie die CLI.
+{: tip}
+
+
+### Protokollweiterleitung über die GUI aktivieren
+{: #enable-forwarding-ui}
+
+Sie können die Protokollierungskonfiguration im {{site.data.keyword.containershort_notm}}-Dashboard einrichten. Es kann einige Minuten dauern, bis der Vorgang abgeschlossen ist. Wenn Sie die Protokolle also nicht sofort sehen, warten Sie einige Minuten und überprüfen Sie die Konfiguration dann nochmals.
+
+1. Navigieren Sie im Dashboard zur Registerkarte **Übersicht**.
+2. Wählen Sie die Cloud Foundry-Organisation und den Bereich, von der/dem Sie Protokolle weiterleiten möchten. Wenn Sie die Protokollweiterleitung im Dashboard konfigurieren, werden die Protokolle an den {{site.data.keyword.loganalysisshort_notm}}-Standardendpunkt für den Cluster gesendet. Um Protokolle an einen fernen Server oder einen anderen {{site.data.keyword.loganalysisshort_notm}}-Endpunkt weiterzuleiten, können Sie die Protokollierung über die CLI konfigurieren.
+3. Wählen Sie die Protokollquellen aus, aus denen Sie Protokolle weiterleiten möchten.
+
+    Um die Anwendungsprotokollierung oder bestimmte Containernamensbereiche zu konfigurieren, richten Sie die Protokollierungskonfiguration über die CLI ein.
+    {: tip}
+4. Klicken Sie auf **Erstellen**.
+
+### Protokollweiterleitung über die CLI aktivieren
+{: #enable-forwarding}
+
+Sie können eine Konfiguration für die Clusterprotokollierung erstellen. Sie können zwischen verschiedenen Protokollquellen unterscheiden, indem Sie Flags setzen. Eine vollständige Liste der Konfigurationsoptionen finden Sie in der [CLI-Referenz](cs_cli_reference.html#logging_commands).
+
+**Vorbereitende Schritte**
+
+1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containershort_notm}}-Schlüsseleigner Manager-, Entwickler- oder Auditor-Berechtigungen in diesem Bereich.
+  * Wenn Sie wissen, wer {{site.data.keyword.containershort_notm}}-Schlüsseleigner ist, führen Sie den folgenden Befehl aus:
+      ```
+      bx cs api-key-info <clustername>
+      ```
+      {: pre}
+  * Um sofort alle Änderungen anzuwenden, die Sie an Ihren Berechtigungen vorgenommen haben, führen Sie den folgenden Befehl aus.
+      ```
+      bx cs logging-config-refresh <clustername>
+      ```
+      {: pre}
+
+  Informationen zum Ändern der Zugriffsrichtlinien und Berechtigungen für {{site.data.keyword.containershort_notm}} finden Sie in [Clusterzugriff verwalten](cs_users.html#access_policies).
+  {: tip}
+
+2. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet.
+
+  Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
+  {: tip}
+
+3. Sie haben zwei Möglichkeiten, einen Server einzurichten, der ein Systemprotokoll empfangen kann, um somit Protokolle an den Systemprotokollserver weiterzuleiten:
+  * Richten Sie einen eigenen Server ein und verwalten Sie diesen oder lassen Sie diese Aufgaben von einem Provider durchführen. Wenn ein Provider den Server für Sie verwaltet, dann rufen Sie den Protokollierungsendpunkt vom Protokollierungsprovider ab. Ihr Systemprotokollserver muss UDP-Protokolle akzeptieren.
+  * Führen Sie das Systemprotokoll über einen Container aus. Sie können beispielsweise diese [YAML-Datei für die Bereitstellung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) verwenden, um ein öffentliches Docker-Image abzurufen, das zur Ausführung eines Containers in einem Kubernetes-Cluster dient. Das Image veröffentlicht den Port `514` auf der öffentlichen Cluster-IP-Adresse und verwendet diese öffentliche Cluster-IP-Adresse zum Konfigurieren des Systemprotokollhosts.
+
+    Sie können syslog-Präfixe entfernen, um die Protokolle als gültige JSON-Dateien anzuzeigen, indem Sie oben in der Datei `etc/rsyslog.conf` den folgenden Code einfügen.</br>
+    ```$template customFormat,"%msg%\n"
+    $ActionFileDefaultTemplate customFormat
+    ```
+    {: tip}
+
+
+**Protokolle weiterleiten**
+
+1. Erstellen Sie eine Konfiguration für die Protokollweiterleitung.
+  ```
+  bx cs logging-config-create <clustername_oder_-id> --logsource <protokollquelle> --namespace <kubernetes-namensbereich> --hostname <hostname_oder_ip_des_protokollservers> --port <protokollserver-port> --type <typ> --app-containers <container> --app-paths <pfade_zu_protokollen> --syslog-protocol <protokoll> --skip-validation
+  ```
+  {: pre}
+
+    * Beispiel für eine Containerprotokollierungskonfiguration für den Standardnamensbereich und die Ausgabe:
+      ```
+      bx cs logging-config-create cluster1 --namespace default
+      Creating logging configuration for container logs in cluster cluster1...
+      OK
+      Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+      af7d1ff4-33e6-4275-8167-b52eb3c5f0ee   container   default     ingest-au-syd.logging.bluemix.net✣  9091✣   -     -       ibm        -                        -
+
+      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysislong_notm}} service.
+
+      ```
+      {: screen}
+
+    * Beispiel für die Anwendungsprotokollierungskonfiguration und die Ausgabe:
+      ```
+      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+      Creating logging configuration for application logs in cluster cluster2...
+      OK
+      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application   Containers   Paths
+      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣  9091✣   -     -       ibm        container1,container2,container3   /var/log/apps.log
+      ```
+      {: screen}
+
+      Wenn Apps in Ihren Containern ausgeführt werden, die nicht für das Schreiben von Protokollen in STDOUT oder STDERR konfiguriert werden können, können Sie eine Protokollierungskonfiguration erstellen, um Protokolle aus Protokolldateien für Apps weiterzuleiten.
+      {: tip}
+
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;clustername_oder_-id&gt;</em></code></td>
+        <td>Der Name oder die ID des Clusters.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;protokollquelle&gt;</em></code></td>
+        <td>Die Quelle, von der die Protokolle weitergeleitet werden sollen. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> <code>ingress</code> und <code>kube-audit</code>.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;kubernetes-namensbereich&gt;</em></code></td>
+        <td>Optional: Der Kubernetes-Namensbereich, von dem aus Sie Protokolle weiterleiten möchten. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist nur für die Protokollquelle <code>container</code> gültig. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Cluster diese Konfiguration.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;hostname_oder_einpflege-url&gt;</em></code></td>
+        <td><p>Verwenden Sie für {{site.data.keyword.loganalysisshort_notm}} die [Einpflege-URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</p>
+        <p>Geben Sie für das Systemprotokoll den Hostnamen oder die IP-Adresse des Protokollcollector-Service an.</p></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;port&gt;</em></code></td>
+        <td>Der Einpflegeport. Wenn Sie keinen Port angeben, wird der Standardport <code>9091</code> verwendet.
+        <p>Geben Sie für das Systemprotokoll den Port des Protokollcollector-Servers an. Wenn Sie keinen Port angeben, dann wird der Standardport <code>514</code> verwendet.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;clusterbereich&gt;</em></code></td>
+        <td>Optional: Der Name des Cloud Foundry-Bereichs, an den Sie die Protokolle senden möchten. Wenn Sie Protokolle an {{site.data.keyword.loganalysisshort_notm}} senden, werden Bereich und Organisation im Einpflegepunkt angegeben. Wenn Sie keinen Bereich angeben, werden Protokolle an die Kontoebene gesendet.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;clusterorganisation&gt;</em></code></td>
+        <td>Der Name der Cloud Foundry-Organisation, in der sich der Bereich befindet. Dieser Wert ist erforderlich, wenn Sie einen Bereich angegeben haben.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;typ&gt;</em></code></td>
+        <td>Gibt an, wohin Sie Ihre Protokolle weiterleiten möchten. Optionen sind <code>ibm</code>, wodurch Ihre Protokolle an {{site.data.keyword.loganalysisshort_notm}} weitergeleitet werden, und <code>syslog</code>, wodurch Ihre Protokolle an externe Server weitergeleitet werden.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;pfade_zu_protokollen&gt;</em></code></td>
+        <td>Der Pfad zu einem Container, an den die Anwendungen Protokolle senden. Wenn Sie Protokolle mit dem Quellentyp <code>application</code> weiterleiten möchten, müssen Sie einen Pfad angeben. Wenn Sie mehr als einen Pfad angeben, verwenden Sie eine durch Kommas getrennte Liste. Beispiel: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;container&gt;</em></code></td>
+        <td>Optional: Zum Weiterleiten von Protokollen von Apps können Sie den Namen des Containers angeben, der Ihre App enthält. Sie können mehr als einen Container angeben, indem Sie eine durch Kommas getrennte Liste verwenden. Falls keine Container angegeben sind, werden Protokolle von allen Containern weitergeleitet, die die von Ihnen bereitgestellten Pfade enthalten.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;protokoll&gt;</em></code></td>
+        <td>Wenn der Protokollierungstyp <code>syslog</code> lautet, das Transport Layer Protocol. Unterstützte Werte sind <code>TCP</code> und der Standardwert <code>UDP</code>. Bei einer Weiterleitung an einen rsyslog-Server mit dem <code>udp</code>-Protokoll werden Protokolle, die größer sind als 1 KB, abgeschnitten. </td>
+      </tr>
+      <tr>
+        <td><code><em>--skip-validation</em></code></td>
+        <td>Optional: Überspringen Sie die Validierung der Organisations- und Bereichsnamen, wenn sie angegeben sind. Das Überspringen der Validierung verringert die Bearbeitungszeit. Eine ungültige Protokollierungskonfiguration aber führt dazu, dass Protokolle nicht ordnungsgemäß weitergeleitet werden.</td>
+      </tr>
+    </tbody>
+  </table>
+
+2. Überprüfen Sie, dass Ihre Konfiguration korrekt ist. Dazu haben Sie zwei Möglichkeiten:
+
+    * Gehen Sie wie folgt vor, um eine Liste aller Protokollierungskonfigurationen in einem Cluster anzuzeigen:
+      ```
+      bx cs logging-config-get <clustername_oder_-id>
+      ```
+      {: pre}
+
+      Beispielausgabe:
+
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.xxx.xxx                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
+
+    * Gehen Sie wie folgt vor, um die Protokollierungskonfiguration für einen Protokollquellentyp aufzulisten:
+      ```
+      bx cs logging-config-get <clustername_oder_-id> --logsource worker
+      ```
+      {: pre}
+
+      Beispielausgabe:
+
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.xxx.xxx                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+      {: screen}
+
+## Protokollweiterleitung aktualisieren
+{: #updating-forwarding}
+
+1. Aktualisieren Sie eine Protokollweiterleitungskonfiguration.
+    ```
+    bx cs logging-config-update <clustername_oder_-id> <protokollkonfigurations-id> --namespace <namensbereich> --type <protokolltyp> --logsource <quelle> --hostname <hostname_oder_einpflege-url> --port <port> --space <clusterbereich> --org <clusterorg> --app-containers <container> --app-paths <pfade_zu_protokollen>
+    ```
+    {: pre}
+
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
   </thead>
   <tbody>
     <tr>
@@ -70,263 +279,209 @@ In der folgenden Tabelle sind die verschiedenen Optionen aufgeführt, die Ihnen 
       <td>Der Name oder die ID des Clusters.</td>
     </tr>
     <tr>
-      <td><code><em>--log_source</em></code></td>
-      <td>Die Quelle, von der die Protokolle weitergeleitet werden sollen. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> <code>ingress</code> und <code>kube-audit</code>.</td>
+      <td><code><em>&lt;protokollkonfigurations-id&gt;</em></code></td>
+      <td>Die ID für die Konfiguration, die aktualisiert werden soll.</td>
     </tr>
     <tr>
-      <td><code><em>--type</em></code></td>
+      <td><code><em>&lt;namensbereich&gt;</em></code></td>
+      <td>Optional: Der Kubernetes-Namensbereich, von dem aus Protokolle weitergeleitet werden sollen. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist nur für die Protokollquelle <code>container</code> gültig. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Cluster die Konfiguration.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;protokolltyp&gt;</em></code></td>
       <td>Gibt an, wohin Sie Ihre Protokolle weiterleiten möchten. Optionen sind <code>ibm</code>, wodurch Ihre Protokolle an {{site.data.keyword.loganalysisshort_notm}} weitergeleitet werden, und <code>syslog</code>, wodurch Ihre Protokolle an externe Server weitergeleitet werden.</td>
     </tr>
     <tr>
-      <td><code><em>--namespace</em></code></td>
-      <td>Optional: Der Kubernetes-Namensbereich, von dem aus Sie Protokolle weiterleiten möchten. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist nur für die Protokollquelle <code>container</code> gültig. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Cluster diese Konfiguration.</td>
-    </tr>
-    <tr>
-      <td><code><em>--hostname</em></code></td>
+      <td><code><em>&lt;hostname_oder_einpflege-url&gt;</em></code></td>
       <td><p>Verwenden Sie für {{site.data.keyword.loganalysisshort_notm}} die [Einpflege-URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</p>
       <p>Geben Sie für das Systemprotokoll den Hostnamen oder die IP-Adresse des Protokollcollector-Service an.</p></td>
     </tr>
     <tr>
-      <td><code><em>--port</em></code></td>
+      <td><code><em>&lt;port&gt;</em></code></td>
       <td>Der Einpflegeport. Wenn Sie keinen Port angeben, wird der Standardport <code>9091</code> verwendet.
       <p>Geben Sie für das Systemprotokoll den Port des Protokollcollector-Servers an. Wenn Sie keinen Port angeben, dann wird der Standardport <code>514</code> verwendet.</td>
     </tr>
     <tr>
-      <td><code><em>--space</em></code></td>
-      <td>Optional: Der Name des Cloud Foundry-Bereichs, an den Sie die Protokolle senden möchten. Wenn Sie Protokolle an {{site.data.keyword.loganalysisshort_notm}} senden, werden Bereich und Organisation im Einpflegepunkt angegeben. Wenn Sie keinen Bereich angeben, werden Protokolle an die Kontoebene gesendet. Wenn Sie einen Bereich festlegen, müssen Sie auch eine Organisation angeben.</td>
+      <td><code><em>&lt;clusterbereich&gt;</em></code></td>
+      <td>Optional: Der Name des Cloud Foundry-Bereichs, an den Sie die Protokolle senden möchten. Wenn Sie Protokolle an {{site.data.keyword.loganalysisshort_notm}} senden, werden Bereich und Organisation im Einpflegepunkt angegeben. Wenn Sie keinen Bereich angeben, werden Protokolle an die Kontoebene gesendet.</td>
     </tr>
     <tr>
-      <td><code><em>--org</em></code></td>
-      <td>Optional: Der Name der Cloud Foundry-Organisation, in der sich der Bereich befindet. Dieser Wert ist erforderlich, wenn Sie einen Bereich angegeben haben.</td>
+      <td><code><em>&lt;clusterorganisation&gt;</em></code></td>
+      <td>Der Name der Cloud Foundry-Organisation, in der sich der Bereich befindet. Dieser Wert ist erforderlich, wenn Sie einen Bereich angegeben haben.</td>
     </tr>
     <tr>
-      <td><code><em>--app-containers</em></code></td>
+      <td><code><em>&lt;pfade_zu_protokollen&gt;</em></code></td>
+      <td>Der Pfad zu den Containern, an den die Apps Protokolle senden. Wenn Sie Protokolle mit dem Quellentyp <code>application</code> weiterleiten möchten, müssen Sie einen Pfad angeben. Wenn Sie mehr als einen Pfad angeben, verwenden Sie eine durch Kommas getrennte Liste. Beispiel: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;container&gt;</em></code></td>
       <td>Optional: Zum Weiterleiten von Protokollen von Apps können Sie den Namen des Containers angeben, der Ihre App enthält. Sie können mehr als einen Container angeben, indem Sie eine durch Kommas getrennte Liste verwenden. Falls keine Container angegeben sind, werden Protokolle von allen Containern weitergeleitet, die die von Ihnen bereitgestellten Pfade enthalten.</td>
     </tr>
-    <tr>
-      <td><code><em>--app-paths</em></code></td>
-      <td>Der Pfad zu einem Container, an den die Anwendungen Protokolle senden. Wenn Sie Protokolle mit dem Quellentyp <code>application</code> weiterleiten möchten, müssen Sie einen Pfad angeben. Wenn Sie mehr als einen Pfad angeben, verwenden Sie eine durch Kommas getrennte Liste. Beispiel: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>--syslog-protocol</em></code></td>
-      <td>Wenn der Protokollierungstyp <code>syslog</code> lautet, das Transport Layer Protocol. Sie können die folgenden Protokolle verwenden: `udp`, `tls` oder `tcp`. Bei einer Weiterleitung an einen rsyslog-Server mit dem <code>udp</code>-Protokoll werden Protokolle, die größer sind als 1 KB, abgeschnitten.</td>
-    </tr>
-    <tr>
-      <td><code><em>--ca-cert</em></code></td>
-      <td>Erforderlich: Wenn der Protokollierungstyp <code>syslog</code> und das Protokoll <code>tls</code> ist, ist dies der Name des geheimen Kubernetes-Schlüssels, der das Zertifikat einer Zertifizierungsstelle enthält.</td>
-    </tr>
-    <tr>
-      <td><code><em>--verify-mode</em></code></td>
-      <td>Wenn der Protokollierungstyp <code>syslog</code> und das Protokoll <code>tls</code> ist, ist dies der Prüfmodus. Unterstützte Werte sind <code>verify-peer</code> und der Standardwert <code>verify-none</code>.</td>
-    </tr>
-    <tr>
-      <td><code><em>--skip-validation</em></code></td>
-      <td>Optional: Überspringen Sie die Validierung der Organisations- und Bereichsnamen, wenn sie angegeben sind. Das Überspringen der Validierung verringert die Bearbeitungszeit. Eine ungültige Protokollierungskonfiguration aber führt dazu, dass Protokolle nicht ordnungsgemäß weitergeleitet werden.</td>
-    </tr>
   </tbody>
-</table>
-
-**Bin ich dafür verantwortlich, dass Fluentd für die Protokollierung aktualisiert wird?**
-
-Um Änderungen an Ihren Protokollierungs- oder Filterkonfigurationen vornehmen zu können, muss das Fluentd-Protokollierungs-Add-on die aktuelle Version aufweisen. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert.
-Informationen zum Inaktivieren automatischer Aktualisierungen finden Sie im Abschnitt [Cluster-Add-ons aktualisieren: Fluentd für die Protokollierung](cs_cluster_update.html#logging).
+  </table>
 
 <br />
 
 
-## Protokollweiterleitung konfigurieren
-{: #configuring}
 
-Sie können die Protokollierung für {{site.data.keyword.containershort_notm}} über die GUI oder über die Befehlszeilenschnittstelle konfigurieren.
-{: shortdesc}
+## Protokolle filtern
+{: #filter-logs}
 
-### Protokollweiterleitung über die GUI aktivieren
-{: #enable-forwarding-ui}
+Sie können auswählen, welche Protokolle Sie weiterleiten, indem Sie bestimmte Protokolle für einen bestimmten Zeitraum herausfiltern.
 
-Sie können die Protokollweiterleitung im {{site.data.keyword.containershort_notm}}-Dashboard konfigurieren. Es kann einige Minuten dauern, bis der Vorgang abgeschlossen ist. Wenn Sie die Protokolle also nicht sofort sehen, warten Sie einige Minuten und überprüfen Sie die Konfiguration dann nochmals.
+1. Erstellen Sie einen Protokollierungsfilter.
+  ```
+  bx cs logging-filter-create <clustername_oder_-id> --type <protokolltyp> --logging-configs <konfigurationen> --namespace <kubernetes-namensbereich> --container <containername> --level <protokollierungsstufe> --regex-message <nachricht>
+  ```
+  {: pre}
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;clustername_oder_-id&gt;</td>
+        <td>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter erstellen möchten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;protokolltyp&gt;</code></td>
+        <td>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;konfigurationen&gt;</code></td>
+        <td>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl verwenden.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;kubernetes-namensbereich&gt;</code></td>
+        <td>Optional: Der Kubernetes-Namensbereich, von dem aus Sie Protokolle weiterleiten möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;containername&gt;</code></td>
+        <td>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;protokollierungsstufe&gt;</code></td>
+        <td>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen heraus. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten. Wenn Sie Ihre Nachrichten in JSON anzeigen möchten, hängen Sie das Flag <code>--json</code> an den Befehl an.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;nachricht&gt;</code></td>
+        <td>Optional: Filtert Protokolle heraus, die eine angegebene Nachricht enthalten, die als regulärer Ausdruck geschrieben wird.</td>
+      </tr>
+    </tbody>
+  </table>
 
-Um eine Konfiguration auf Kontoebene, für einen bestimmten Containernamensbereich oder für die Anwendungsprotokollierung zu erstellen, verwenden Sie die CLI.
-{: tip}
+2. Zeigen Sie die erstellten Protokollfilter an.
 
-1. Navigieren Sie im Dashboard zur Registerkarte **Übersicht**.
-2. Wählen Sie die Cloud Foundry-Organisation und den Bereich, von der/dem Sie Protokolle weiterleiten möchten. Wenn Sie die Protokollweiterleitung im Dashboard konfigurieren, werden die Protokolle an den {{site.data.keyword.loganalysisshort_notm}}-Standardendpunkt für den Cluster gesendet. Um Protokolle an einen fernen Server oder einen anderen {{site.data.keyword.loganalysisshort_notm}}-Endpunkt weiterzuleiten, können Sie die Protokollierung über die CLI konfigurieren.
-3. Wählen Sie die Protokollquellen aus, aus denen Sie Protokolle weiterleiten möchten.
-4. Klicken Sie auf **Erstellen**.
+  ```
+  bx cs logging-filter-get <clustername_oder_-id> --id <filter-id> --show-matching-configs
+  ```
+  {: pre}
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;clustername_oder_-id&gt;</td>
+        <td>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter erstellen möchten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter-id&gt;</code></td>
+        <td>Optional: Die ID des Protokollfilters, den Sie anzeigen möchten.</td>
+      </tr>
+      <tr>
+        <td><code>--show-matching-configs</code></td>
+        <td>Zeigen Sie die Protokollierungskonfigurationen an, für die die einzelnen Filter gelten.</td>
+      </tr>
+    </tbody>
+  </table>
 
-</br>
-</br>
+3. Aktualisieren Sie den erstellten Protokollfilter.
+  ```
+  bx cs logging-filter-update <clustername_oder_-id> --id <filter-id> --type <protokolltyp> --logging-configs <konfigurationen> --namespace <kubernetes-namensbereich --container <containername> --level <protokollierungsstufe> --regex-message <nachricht>
+  ```
+  {: pre}
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;clustername_oder_-id&gt;</td>
+        <td>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter aktualisieren möchten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter-id&gt;</code></td>
+        <td>Die ID des Protokollfilters, den Sie aktualisieren möchten.</td>
+      </tr>
+      <tr>
+        <td><code><&lt;protokolltyp&gt;</code></td>
+        <td>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;konfigurationen&gt;</code></td>
+        <td>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs, auf die der Filter angewendet werden soll. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können mit dem Filter übereinstimmende Protokollkonfigurationen anzeigen, indem Sie das Flag <code>--show-matching-configs</code> mit dem Befehl <code>bx cs logging-filter-get</code> verwenden.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;kubernetes-namensbereich&gt;</code></td>
+        <td>Optional: Der Kubernetes-Namensbereich, von dem aus Sie Protokolle weiterleiten möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;containername&gt;</code></td>
+        <td>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;protokollierungsstufe&gt;</code></td>
+        <td>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen heraus. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;nachricht&gt;</code></td>
+        <td>Optional: Filtert Protokolle heraus, die eine angegebene Nachricht enthalten, die als regulärer Ausdruck geschrieben wird.</td>
+      </tr>
+    </tbody>
+  </table>
 
-### Protokollweiterleitung über die CLI aktivieren
-{: #enable-forwarding}
+4. Löschen Sie einen erstellten Protokollfilter.
 
-Sie können eine Konfiguration für die Clusterprotokollierung erstellen. Sie können zwischen den verschiedenen Protokollierungsoptionen unterscheiden, indem Sie Flags setzen. 
+  ```
+  bx cs logging-filter-rm <clustername_oder_-id> --id <filter-id> [--all]
+  ```
+  {: pre}
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>&lt;clustername_oder_-id&gt;</code></td>
+        <td>Erforderlich: Der Name oder die ID des Clusters, für das Sie einen Protokollierungsfilter löschen möchten.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter-id&gt;</code></td>
+        <td>Optional: Die ID des Protokollfilters, den Sie entfernen möchten.</td>
+      </tr>
+      <tr>
+        <td><code>--all</code></td>
+        <td>Optional: Löschen Sie alle Protokollweiterleitungsfilter.</td>
+      </tr>
+    </tbody>
+  </table>
 
-**Weiterleitung von Protokollen an IBM**
-
-1. Überprüfen Sie die Berechtigungen. Wenn Sie beim Erstellen der Cluster oder der Protokollierungskonfiguration einen Bereich angegeben haben, dann benötigen sowohl der Kontoeigner als auch der {{site.data.keyword.containershort_notm}}-API-Schlüsseleigner Manager-, Entwickler- oder Auditor-[Berechtigungen](cs_users.html#access_policies) in diesem Bereich.
-  * Wenn Sie wissen, wer der {{site.data.keyword.containershort_notm}}-API-Schlüsseleigner ist, führen Sie den folgenden Befehl aus:
-      ```
-      ibmcloud ks api-key-info <clustername>
-      ```
-      {: pre}
-  * Um sofort alle von Ihnen vorgenommenen Änderungen anzuwenden, führen Sie den folgenden Befehl aus.
-      ```
-      ibmcloud ks logging-config-refresh <clustername>
-      ```
-      {: pre}
-
-2. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet.
-
-  Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
-  {: tip}
-
-3. Erstellen Sie eine Konfiguration für die Protokollweiterleitung.
-    ```
-    ibmcloud ks logging-config-create <clustername_oder_-id> --logsource <protokollquelle> --type ibm --namespace <kubernetes-namensbereich> --hostname <hostname_oder_ip_des_protokollservers> --port <protokollserver-port> --space <clusterbereich> --org <cluster_org> --app-containers <container> --app-paths <pfade_zu_protokollen> --skip-validation
-    ```
-    {: pre}
-
-  * Beispiel für eine Containerprotokollierungskonfiguration für den Standardnamensbereich und die Ausgabe:
-    ```
-    ibmcloud ks logging-config-create mycluster
-    Creating cluster mycluster logging configurations...
-    OK
-    ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
-    4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
-    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-    ```
-    {: screen}
-
-  * Beispiel für die Anwendungsprotokollierungskonfiguration und die Ausgabe:
-    ```
-    ibmcloud ks logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-    Creating logging configuration for application logs in cluster cluster2...
-    OK
-    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
-    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
-    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-    ```
-    {: screen}
-
-Wenn Apps in Ihren Containern ausgeführt werden, die nicht für das Schreiben von Protokollen in STDOUT oder STDERR konfiguriert werden können, können Sie eine Protokollierungskonfiguration erstellen, um Protokolle aus Protokolldateien für Apps weiterzuleiten.
-{: tip}
-
-</br>
-</br>
-
-
-**Protokolle an Ihren eigenen Server über die Protokolle `udp` oder `tcp` weiterleiten**
-
-1. Sie haben zwei Möglichkeiten, einen Server einzurichten, der ein Systemprotokoll empfangen kann, um somit Protokolle an den Systemprotokollserver weiterzuleiten:
-  * Richten Sie einen eigenen Server ein und verwalten Sie diesen oder lassen Sie diese Aufgaben von einem Provider durchführen. Wenn ein Provider den Server für Sie verwaltet, dann rufen Sie den Protokollierungsendpunkt vom Protokollierungsprovider ab.
-
-  * Führen Sie das Systemprotokoll über einen Container aus. Sie können beispielsweise diese [YAML-Datei für die Bereitstellung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) verwenden, um ein öffentliches Docker-Image abzurufen, das zur Ausführung eines Containers in einem Kubernetes-Cluster dient. Das Image veröffentlicht den Port `514` auf der öffentlichen Cluster-IP-Adresse und verwendet diese öffentliche Cluster-IP-Adresse zum Konfigurieren des Systemprotokollhosts.
-
-  Sie können Ihre Protokolle als gültige JSON-Datei anzeigen, indem Sie syslog-Präfixe entfernen. Fügen Sie dazu den folgenden Code am Anfang der Datei <code>etc/rsyslog.conf</code> hinzu, in der Ihr rsyslog-Server ausgeführt wird: <code>$template customFormat,"%msg% \n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-2. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet. Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
-
-3. Erstellen Sie eine Konfiguration für die Protokollweiterleitung.
-    ```
-    ibmcloud ks logging-config-create <clustername_oder_-id> --logsource <protokollquelle> --namespace <kubernetes-namensbereich> --hostname <hostname_oder_ip_des_protokollservers> --port <protokollserver-port> --type syslog --app-containers <container> --app-paths <pfade_zu_protokollen> --syslog-protocol <protokoll> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**Protokolle auf Ihrem eigenen Server über das Protokoll `tls` weiterleiten**
-
-Die folgenden Schritte sind allgemeine Anweisungen. Stellen Sie vor der Verwendung des Containers in einer Produktionsumgebung sicher, dass alle von Ihnen benötigten Sicherheitsanforderungen erfüllt sind.
-{: tip}
-
-1. Sie haben zwei Möglichkeiten, einen Server einzurichten, der ein Systemprotokoll empfangen kann:
-  * Richten Sie einen eigenen Server ein und verwalten Sie diesen oder lassen Sie diese Aufgaben von einem Provider durchführen. Wenn ein Provider den Server für Sie verwaltet, dann rufen Sie den Protokollierungsendpunkt vom Protokollierungsprovider ab.
-
-  * Führen Sie das Systemprotokoll über einen Container aus. Sie können beispielsweise diese [YAML-Datei für die Bereitstellung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) verwenden, um ein öffentliches Docker-Image abzurufen, das zur Ausführung eines Containers in einem Kubernetes-Cluster dient. Das Image veröffentlicht den Port `514` auf der öffentlichen Cluster-IP-Adresse und verwendet diese öffentliche Cluster-IP-Adresse zum Konfigurieren des Systemprotokollhosts. Sie müssen die entsprechenden Zertifikate einer Zertifizierungsstelle und serverseitigen Zertifikate einfügen und die Datei `syslog.conf` aktualisieren, damit `tls` auf Ihrem Server aktiviert werden kann.
-
-2. Speichern Sie das Zertifikat der Zertifizierungsstelle in einer Datei namens `ca-cert`. Es muss genau dieser Name sein.
-
-3. Erstellen Sie im Namensbereich `kube-system` einen geheimen Schlüssel für die Datei `ca-cert`. Wenn Sie Ihre Protokollierungskonfiguration erstellen, verwenden Sie den Namen des geheimen Schlüssels für das Flag `-- ca-cert`.
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-4. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet. Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
-
-3. Erstellen Sie eine Konfiguration für die Protokollweiterleitung.
-    ```
-    ibmcloud ks logging-config-create <clustername_oder_-id> --logsource <protokollquelle> --type syslog --syslog-protocol tls --hostname <ip-adresse_des_syslog-servers> --port <port_für_syslog-server, 514 is default> --ca-cert <name_des_geheimen_schlüssels> --verify-mode <zu_prüfende_standards-none>
-    ```
-    {: pre}
-
-</br>
-</br>
+<br />
 
 
-### Protokollweiterleitung überprüfen
-{: verify-logging}
 
-Sie können überprüfen, ob Ihre Konfiguration ordnungsgemäß eingerichtet ist. Dazu haben Sie zwei Möglichkeiten:
 
-* Gehen Sie wie folgt vor, um eine Liste aller Protokollierungskonfigurationen in einem Cluster anzuzeigen:
-    ```
-    ibmcloud ks logging-config-get <clustername_oder_-id>
-    ```
-    {: pre}
-
-* Gehen Sie wie folgt vor, um die Protokollierungskonfiguration für einen Protokollquellentyp aufzulisten:
-    ```
-    ibmcloud ks logging-config-get <clustername_oder_-id> --logsource <quelle>
-    ```
-    {: pre}
-
-</br>
-</br>
-
-### Protokollweiterleitung aktualisieren
-{: #updating-forwarding}
-
-Sie können eine Protokollierungskonfiguration aktualisieren, die Sie bereits erstellt haben.
-
-1. Aktualisieren Sie eine Protokollweiterleitungskonfiguration.
-    ```
-    ibmcloud ks logging-config-update <clustername_oder_-id> <protokollkonfigurations-id> --namespace <namensbereich> --type <servertyp> --syslog-protocol <protokoll> --logsource <quelle> --hostname <hostname_oder_einpflege-url> --port <port> --space <clusterbereich> --org <clusterorg> --app-containers <container> --app-paths <pfade_zu_protokollen>
-    ```
-    {: pre}
-
-</br>
-</br>
-
-### Protokollweiterleitung stoppen
-{: #log_sources_delete}
-
-Sie können die Weiterleitung von einem oder allen Protokollen der Protokollierungskonfiguration eines Clusters stoppen.
-{: shortdesc}
-
-1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet.
-
-2. Löschen Sie die Protokollierungskonfiguration.
-  <ul>
-  <li>Gehen Sie wie folgt vor, um eine Protokollierungskonfiguration zu löschen:</br>
-    <pre><code>ibmcloud ks logging-config-rm &lt;clustername_oder_-id&gt; --id &lt;protokollkonfigurations-id&gt;</pre></code></li>
-  <li>Gehen Sie wie folgt vor, um alle Protokollierungskonfigurationen zu löschen.</br>
-    <pre><code>ibmcloud ks logging-config-rm <mein_cluster> --all</pre></code></li>
-  </ul>
-
-</br>
-</br>
-
-### Protokolle anzeigen
+## Protokolle anzeigen
 {: #view_logs}
 
 Zum Anzeigen von Protokollen für Cluster und Container können Sie die Standardprotokollierungsfunktionen von Kubernetes und Docker verwenden.
 {:shortdesc}
 
-**{{site.data.keyword.loganalysislong_notm}}**
+### {{site.data.keyword.loganalysislong_notm}}
 {: #view_logs_k8s}
 
 Sie können die Protokolle anzeigen, die Sie über das Kibana-Dashboard an {{site.data.keyword.loganalysislong_notm}} weitergeleitet haben.
@@ -342,95 +497,46 @@ Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufe
 
 Weitere Informationen zum Anzeigen von Protokollen finden Sie im Abschnitt zum [Navigieren zu Kibana über einen Web-Browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
-</br>
-
-**Docker-Protokolle**
+### Docker-Protokolle
+{: #view_logs_docker}
 
 Sie können die in Docker integrierten Protokollierungsfunktion nutzen, um Aktivitäten in den Standardausgabedatenströmen STDOUT und STDERR zu prüfen. Weitere Informationen finden Sie unter [Container-Protokolle für einen Container anzeigen, der in einem Kubernetes-Cluster ausgeführt wird](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 <br />
 
 
-## Protokolle filtern
-{: #filter-logs}
 
-Sie können auswählen, welche Protokolle Sie weiterleiten, indem Sie bestimmte Protokolle für einen bestimmten Zeitraum herausfiltern. Sie können zwischen den verschiedenen Filteroptionen unterscheiden, indem Sie Flags setzen. 
+## Protokollweiterleitung stoppen
+{: #log_sources_delete}
 
-<table>
-<caption>Informationen zu den Optionen für die Protokollfilterung</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Optionen für die Protokollfilterung</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>&lt;clustername_oder_-id&gt;</td>
-      <td>Erforderlich: Der Name oder die ID des Clusters, für den die Protokolle gefiltert werden sollen.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;protokolltyp&gt;</code></td>
-      <td>Der Typ von Protokollen, auf die Sie den Filter anwenden möchten. Momentan werden <code>all</code>, <code>container</code> und <code>host</code> unterstützt.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;konfigurationen&gt;</code></td>
-      <td>Optional: Eine durch Kommas getrennte Liste Ihrer Protokollierungskonfigurations-IDs. Wird sie nicht bereitgestellt, wird der Filter auf alle Clusterprotokollierungskonfigurationen angewendet, die an den Filter übergeben werden. Sie können die Protokollkonfigurationen anzeigen, die mit dem Filter übereinstimmen, indem Sie die Option <code>--show-matching-configs</code> verwenden.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;kubernetes-namensbereich&gt;</code></td>
-      <td>Optional: Der Kubernetes-Namensbereich, von dem aus Sie Protokolle weiterleiten möchten. Dieses Flag ist nur mit dem Protokolltyp <code>container</code> anwendbar.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;containername&gt;</code></td>
-      <td>Optional: Der Name des Containers, in dem Sie Protokolle filtern möchten.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;protokollierungsstufe&gt;</code></td>
-      <td>Optional: Filtert Protokolle auf einer angegebenen Stufe oder den darunterliegenden Stufen heraus. Zulässige Werte in ihrer kanonischen Reihenfolge sind <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> und <code>trace</code>. Beispiel: Wenn Sie Protokolle auf der Stufe <code>info</code> filtern, wird auch auf den Stufen <code>debug</code> und <code>trace</code> gefiltert. **Hinweis**: Sie können dieses Flag nur dann verwenden, wenn Protokollnachrichten das JSON-Format aufweisen und ein Feld für die Stufe enthalten. Wenn Sie Ihre Nachrichten in JSON anzeigen möchten, hängen Sie das Flag <code>--json</code> an den Befehl an.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;nachricht&gt;</code></td>
-      <td>Optional: Filtert Protokolle heraus, die eine angegebene Nachricht enthalten, die als regulärer Ausdruck geschrieben wird.</td>
-    </tr>
-    <tr>
-      <td><code>&lt;filter-id&gt;</code></td>
-      <td>Optional: Die ID des Protokollfilters.</td>
-    </tr>
-    <tr>
-      <td><code>--show-matching-configs</code></td>
-      <td>Optional: Zeigen Sie die Protokollierungskonfigurationen an, für die die einzelnen Filter gelten.</td>
-    </tr>
-    <tr>
-      <td><code>--all</code></td>
-      <td>Optional: Löschen Sie alle Protokollweiterleitungsfilter.</td>
-    </tr>
-  </tbody>
-</table>
+Sie können die Weiterleitung von einem oder allen Protokollen der Protokollierungskonfiguration eines Clusters stoppen.
+{: shortdesc}
 
+1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem sich die Protokollquelle befindet.
 
-1. Erstellen Sie einen Protokollierungsfilter.
-  ```
-  ibmcloud ks logging-filter-create <clustername_oder_-id> --type <protokolltyp> --logging-configs <konfigurationen> --namespace <kubernetes-namensbereich> --container <containername> --level <protokollierungsstufe> --regex-message <nachricht>
-  ```
-  {: pre}
-
-2. Zeigen Sie die erstellten Protokollfilter an.
-
-  ```
-  ibmcloud ks logging-filter-get <clustername_oder_-id> --id <filter-id> --show-matching-configs
-  ```
-  {: pre}
-
-3. Aktualisieren Sie den erstellten Protokollfilter.
-  ```
-  ibmcloud ks logging-filter-update <clustername_oder_-id> --id <filter-id> --type <protokolltyp> --logging-configs <konfigurationen> --namespace <kubernetes-namensbereich --container <containername> --level <protokollierungsstufe> --regex-message <nachricht>
-  ```
-  {: pre}
-
-4. Löschen Sie einen erstellten Protokollfilter.
-
-  ```
-  ibmcloud ks logging-filter-rm <clustername_oder_-id> --id <filter-id> [--all]
-  ```
-  {: pre}
+2. Löschen Sie die Protokollierungskonfiguration.
+<ul>
+<li>Gehen Sie wie folgt vor, um eine Protokollierungskonfiguration zu löschen:</br>
+  <pre><code>bx cs logging-config-rm &lt;clustername_oder_-id&gt; --id &lt;protokollkonfigurations-id&gt;</pre></code>
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;clustername_oder_-id&gt;</em></code></td>
+        <td>Der Name des Clusters, in dem sich die Protokollierungskonfiguration befindet.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;protokollkonfigurations-id&gt;</em></code></td>
+        <td>Die ID der Protokollquellenkonfiguration.</td>
+      </tr>
+    </tbody>
+  </table></li>
+<li>Gehen Sie wie folgt vor, um alle Protokollierungskonfigurationen zu löschen.</br>
+  <pre><code>bx cs logging-config-rm <mein_cluster> --all</pre></code></li>
+</ul>
 
 <br />
 
@@ -468,18 +574,18 @@ Sie können die Auditprotokolle des Kubernetes-API-Servers an {{site.data.keywor
 1. Erstellen Sie eine Protokollierungskonfiguration.
 
     ```
-    ibmcloud ks logging-config-create <clustername_oder_-id> --logsource kube-audit --space <clusterbereich> --org <clusterorganisation> --hostname <einpflege-url> --type ibm
+    bx cs logging-config-create <clustername_oder_-id> --logsource kube-audit --space <clusterbereich> --org <clusterorganisation> --hostname <einpflege-url> --type ibm
     ```
     {: pre}
 
     Beispielbefehl und -ausgabe:
 
     ```
-    ibmcloud ks logging-config-create myCluster --logsource kube-audit
+    bx cs logging-config-create myCluster --logsource kube-audit
     Creating logging configuration for kube-audit logs in cluster myCluster...
     OK
-    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
+    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
 
     ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
 
@@ -514,20 +620,33 @@ Sie können die Auditprotokolle des Kubernetes-API-Servers an {{site.data.keywor
 2. Überprüfen Sie die Protokollierungskonfiguration für Ihren Cluster, um sicherzustellen, dass diese nach Ihren Vorgaben implementiert wurde.
 
     ```
-    ibmcloud ks logging-config-get <clustername_oder_-id>
+    bx cs logging-config-get <clustername_oder_-id>
     ```
     {: pre}
 
     Beispielbefehl und -ausgabe:
     ```
-    ibmcloud ks logging-config-get myCluster
+    bx cs logging-config-get myCluster
     Retrieving cluster myCluster logging configurations...
     OK
-    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
-    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
     ```
     {: screen}
+
+  <table>
+  <caption>Erklärung der Bestandteile dieses Befehls</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Bestandteile dieses Befehls</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;clustername_oder_-id&gt;</em></code></td>
+        <td>Der Name oder die ID des Clusters.</td>
+      </tr>
+    </tbody>
+  </table>
 
 3. Optional: Wenn Sie Auditprotokolle nicht mehr weiterleiten möchten, können Sie [die Konfiguration löschen](#log_sources_delete).
 
@@ -549,7 +668,7 @@ Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
 1. Richten Sie den Weebhook ein. Wenn Sie keine Informationen in den Flags bereitstellen, wird eine Standardkonfiguration verwendet.
 
     ```
-    ibmcloud ks apiserver-config-set audit-webhook <clustername_oder_-id> --remoteServer <server-URL_oder_IP> --caCert <pfad_des_zertifizierungsstellenzertifikats> --clientCert <pfad_des_clientzertifikats> --clientKey <pfad_des_clientschlüssels>
+    bx cs apiserver-config-set audit-webhook <clustername_oder_-id> --remoteServer <server-URL_oder_IP> --caCert <pfad_des_zertifizierungsstellenzertifikats> --clientCert <pfad_des_clientzertifikats> --clientKey <pfad_des_clientschlüssels>
     ```
     {: pre}
 
@@ -585,7 +704,7 @@ Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
 2. Überprüfen Sie, dass die Protokollweiterleitung aktiviert war, indem Sie die URL für den fernen Protokollierungsservice anzeigen.
 
     ```
-    ibmcloud ks apiserver-config-get audit-webhook <clustername_oder_-id>
+    bx cs apiserver-config-get audit-webhook <clustername_oder_-id>
     ```
     {: pre}
 
@@ -599,7 +718,7 @@ Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
 3. Wenden Sie die Konfigurationsaktualisierung an, indem Sie den Kubernetes-Master erneut starten.
 
     ```
-    ibmcloud ks apiserver-refresh <clustername_oder_-id>
+    bx cs apiserver-refresh <clustername_oder_-id>
     ```
     {: pre}
 
@@ -608,14 +727,14 @@ Um Kubernetes-API-Auditprotokolle weiterzuleiten, gehen Sie wie folgt vor:
     2. Inaktivieren Sie die Webhook-Back-End-Konfiguration für den API-Server des Clusters.
 
         ```
-        ibmcloud ks apiserver-config-unset audit-webhook <clustername_oder_-id>
+        bx cs apiserver-config-unset audit-webhook <clustername_oder_-id>
         ```
         {: pre}
 
     3. Wenden Sie die Konfigurationsaktualisierung an, indem Sie den Kubernetes-Master erneut starten.
 
         ```
-        ibmcloud ks apiserver-refresh <clustername_oder_-id>
+        bx cs apiserver-refresh <clustername_oder_-id>
         ```
         {: pre}
 
@@ -632,33 +751,12 @@ Mit Metriken können Sie den Zustand und die Leistung Ihrer Cluster überwachen.
     <dd>Das Kubernetes-Dashboard ist eine Webschnittstelle für die Verwaltung, über die Sie den Zustand Ihrer Workerknoten überprüfen, Kubernetes-Ressourcen suchen, containerisierte Apps bereitstellen und Fehler bei Apps mithilfe von Protokollierungs- und Überwachungsdaten suchen und beheben können. Weitere Informationen dazu, wie Sie auf das Kubernetes-Dashboard zugreifen, finden Sie unter [Kubernetes-Dashboard für {{site.data.keyword.containershort_notm}} starten](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Metriken für Standardcluster befinden sich in dem {{site.data.keyword.Bluemix_notm}}-Konto, das angemeldet war, als der Kubernetes-Cluster erstellt wurde. Wenn Sie beim Erstellen des Clusters einen {{site.data.keyword.Bluemix_notm}}-Bereich angegeben haben, befinden sich die Metriken in diesem Bereich. Containermetriken werden automatisch für alle Container erfasst, die in einem Cluster bereitgestellt werden. Diese Metriken werden durch Grafana gesendet und verfügbar gemacht. Weitere Informationen zu Metriken finden Sie unter [Überwachung für {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
-    <p>Zum Zugriff auf das Grafana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.</p> <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
-  <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
-        <thead>
-        <th>{{site.data.keyword.containershort_notm}}-Region</th>
-        <th>Überwachungsadresse</th>
-        <th>IP-Adressen für die Überwachung</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Zentraleuropa</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>Großbritannien (Süden)</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden), Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
- </dd>
+    <p>Zum Zugriff auf das Grafana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.
+      <ul>
+        <li>Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://metrics.ng.bluemix.net</li>
+        <li>Großbritannien (Süden): https://metrics.eu-gb.bluemix.net</li>
+        <li>Zentraleuropa: https://metrics.eu-de.bluemix.net</li>
+      </ul></p></dd>
 </dl>
 
 ### Weitere Zustandsüberwachungstools
@@ -752,19 +850,19 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Definiert eine Kubernetes-API-Knotenprüfung, mit der ermittelt wird, ob sich jeder Workerknoten im Bereitstatus (<code>Ready</code>) befindet. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn sich der betreffende Workerknoten nicht im Status <code>Ready</code> befindet. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung von <code>ibmcloud ks worker-reload</code>.<br></br>Die Knotenprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
+   <td>Definiert eine Kubernetes-API-Knotenprüfung, mit der ermittelt wird, ob sich jeder Workerknoten im Bereitstatus (<code>Ready</code>) befindet. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn sich der betreffende Workerknoten nicht im Status <code>Ready</code> befindet. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>.<br></br>Die Knotenprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Workerknoten zugewiesenen Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Workerknoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung von <code>ibmcloud ks worker-reload</code>.Der Standardwert für <code>PodFailureThresholdPercent</code> ist beispielsweise 50 %. Wenn der Prozentsatz der Pods mit dem Status <code>NotReady</code> dreimal hintereinander höher als 50 % ist, wird der Workerknoten neu geladen. <br></br>Standardmäßig werden Pods in allen Namensbereichen geprüft. Um nur Pods in einem angegebenen Namensbereich zu prüfen, fügen Sie das Feld <code>Namespace</code> zur Prüfung hinzu. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.
+   Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Workerknoten zugewiesenen Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Workerknoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Workerknotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert. Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>. Der Standardwert für <code>PodFailureThresholdPercent</code> ist beispielsweise 50 %. Wenn der Prozentsatz der Pods mit dem Status <code>NotReady</code> dreimal hintereinander höher als 50 % ist, wird der Workerknoten neu geladen. <br></br>Standardmäßig werden Pods in allen Namensbereichen geprüft. Um nur Pods in einem angegebenen Namensbereich zu prüfen, fügen Sie das Feld <code>Namespace</code> zur Prüfung hinzu. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.
    </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>Definiert eine HTTP-Prüfung, die feststellt, ob ein auf einem Workerknoten ausgeführter HTTP-Server sich in einwandfreiem Zustand befindet. Für diese Prüfung müssen Sie ein [DaemonSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) einen HTTP-Server auf jedem Workerknoten in Ihrem Cluster bereitstellen. Sie müssen eine Statusprüfung implementieren, die im Pfad <code>/myhealth</code> verfügbar ist und überprüfen kann, ob sich Ihr HTTP-Server in einwandfreiem Zustand befindet. Sie können andere Pfade definieren, indem Sie den Parameter <strong>Route</strong> ändern. Falls sich der HTTP-Server in einwandfreiem Zustand befindet, müssen Sie den HTTP-Antwortcode zurückgeben, der in <strong>ExpectedStatus</strong> definiert ist. Der HTTP-Server muss so konfiguriert sein, dass er die private IP-Adresse des Workerknotens überwacht. Die private IP-Adresse kann durch Ausführen des Befehls <code>kubectl get nodes</code> ermittelt werden.<br></br>
    Beispiel: Angenommen, ein Cluster enthält zwei Knoten mit den privaten IP-Adressen 10.10.10.1 und 10.10.10.2. In diesem Beispiel werden zwei Routen hinsichtlich einer 200 HTTP-Antwort geprüft: <code>http://10.10.10.1:80/myhealth</code> und <code>http://10.10.10.2:80/myhealth</code>.
-   Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu gestartet. Diese Aktion ist äquivalent zur Ausführung von <code>ibmcloud ks worker-reboot</code>.<br></br>Die HTTP-Prüfung wird erst dann aktiviert, wenn Sie das Feld <b>Enabled</b> auf den Wert <code>true</code> setzen.</td>
+   Die Prüfung in der YAML-Beispieldatei wird alle 3 Minuten durchgeführt. Schlägt die Prüfung drei Mal hintereinander fehl, wird der Workerknoten neu gestartet. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reboot</code>.<br></br>Die HTTP-Prüfung wird erst dann aktiviert, wenn Sie das Feld <b>Enabled</b> auf den Wert <code>true</code> setzen.</td>
    </tr>
    </tbody>
    </table>

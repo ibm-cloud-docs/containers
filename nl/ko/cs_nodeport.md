@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -49,7 +49,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 <br />
 
 
-## NodePort 서비스를 사용하여 앱에 대한 액세스 사용
+## NodePort 서비스를 사용하여 앱에 대한 공용 액세스 사용 설정
 {: #config}
 
 무료 또는 표준 클러스터에 대해 Kubernetes NodePort 서비스로서 앱을 노출할 수 있습니다.
@@ -95,7 +95,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td><code><em>&lt;my-selector-key&gt;</em></code> 및 <code><em>&lt;my-selector-value&gt;</em></code>를 배치 yaml의 <code>spec.template.metadata.labels</code> 섹션에 사용한 키/값 쌍으로 대체하십시오. 서비스를 배치와 연관시키려면 선택기가 배치 레이블과 일치해야 합니다.
+      <td><code><em>&lt;my-selector-key&gt;</em></code> 및 <code><em>&lt;my-selector-value&gt;</em></code>를 배치 yaml의 <code>spec.template.metadata.labels</code> 섹션에 사용한 키/값 쌍으로 대체하십시오.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -103,7 +103,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>선택사항: <code><em>&lt;31514&gt;</em></code>를 30000 - 32767 범위의 NodePort로 대체합니다. 다른 서비스에서 이미 사용 중인 NodePort는 지정하지 마십시오. NodePort가 지정되지 않으면 사용자를 위해 임의로 지정됩니다.<br><br>NodePort를 지정하고 이미 사용 중인 NodePort를 보려면 다음 명령을 실행하십시오. <pre class="pre"><code>kubectl get svc</code></pre><p>사용 중인 모든 NodePort가 **Ports** 필드 아래에 표시됩니다.</p></td>
+     <td>선택사항: <code><em>&lt;31514&gt;</em></code>를 30000 - 32767 범위의 NodePort로 대체합니다. 다른 서비스에서 이미 사용 중인 NodePort는 지정하지 마십시오. NodePort가 지정되지 않으면 사용자를 위해 임의로 지정됩니다.<br><br>NodePort를 지정하고 이미 사용 중인 NodePort를 보려면 다음 명령을 실행하십시오.<pre class="pre"><code>kubectl get svc</code></pre><p>사용 중인 모든 NodePort가 **Ports** 필드 아래에 표시됩니다.</p></td>
      </tr>
      </tbody></table>
 
@@ -113,13 +113,12 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 **다음에 수행할 작업:**
 
-앱이 배치된 경우에는 작업자 노드의 공인 IP 주소와 NodePort를 사용하여
-브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다. 작업자 노드가 사설 VLAN에만 연결된 경우, 사설 NodePort 서비스가 작성되었으며 이는 q 작업자 노드의 사설 IP 주소를 통해 액세스가 가능합니다. 
+앱이 배치된 경우에는 작업자 노드의 공인 IP 주소와 NodePort를 사용하여 브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다.
 
-1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오. 사설 네트워크의 작업자 노드에 액세스하려면 사설 IP 주소를 대신 가져오십시오. 
+1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    bx cs workers <cluster_name>
     ```
     {: pre}
 
@@ -159,4 +158,4 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
     이 예에서 NodePort는 `30872`입니다.</br>
     **참고:** **Endpoints** 섹션에 `<none>`이 표시되는 경우 NodePort 서비스의 `spec.selector` 섹션에서 사용하는 `<selectorkey>` 및 `<selectorvalue>`를 확인하십시오. 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
 
-3.  NodePort 및 작업자 노드 IP 주소 중 하나로 URL을 구성하십시오. 예: `http://192.0.2.23:30872`
+3.  NodePort 및 작업자 노드 공인 IP 주소 중 하나로 URL을 구성하십시오. 예: `http://192.0.2.23:30872`

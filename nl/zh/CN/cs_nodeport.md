@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -49,7 +49,7 @@ lastupdated: "2018-08-06"
 <br />
 
 
-## 使用 NodePort 服务来启用对应用程序的访问权
+## 使用 NodePort 服务来启用对应用程序的公共访问权
 {: #config}
 
 对于免费或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
@@ -62,7 +62,7 @@ lastupdated: "2018-08-06"
     示例：
 
     ```
-apiVersion: v1
+    apiVersion: v1
     kind: Service
     metadata:
       name: <my-nodeport-service>
@@ -96,7 +96,6 @@ apiVersion: v1
     <tr>
       <td><code>spec.selector</code></td>
       <td>将 <code><em>&lt;my-selector-key&gt;</em></code> 和 <code><em>&lt;my-selector-value&gt;</em></code> 替换为您在部署 YAML 的 <code>spec.template.metadata.labels</code> 部分中使用的键/值对。
-      要将服务与部署相关联，选择器必须与部署标签相匹配。
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -115,19 +114,19 @@ apiVersion: v1
 
 **接下来要做什么？**
 
-应用程序部署后，可以使用任何工作程序节点的公共 IP 地址和 NodePort 来构成公共 URL，以用于在浏览器中访问该应用程序。如果工作程序节点仅连接到专用 VLAN，那么会创建专用 NodePort 服务，并且可以通过 q 工作程序节点的专用 IP 地址对其进行访问。
+应用程序部署后，可以使用任何工作程序节点的公共 IP 地址和 NodePort 来构成公共 URL，以用于在浏览器中访问该应用程序。
 
-1.  获取集群中工作程序节点的公共 IP 地址。如果要访问专用网络上的工作程序节点，请改为获取专用 IP 地址。
+1.  获取集群中工作程序节点的公共 IP 地址。
 
     ```
-    ibmcloud ks workers <cluster_name>
+        bx cs workers <cluster_name>
     ```
     {: pre}
 
     输出：
 
     ```
-    ID                                                Public IP   Private IP    Size     State    Status
+        ID                                                Public IP   Private IP    Size     State    Status
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
     prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
     ```
@@ -136,14 +135,14 @@ apiVersion: v1
 2.  如果分配了随机 NodePort，请了解分配的是哪个 NodePort。
 
     ```
-    kubectl describe service <service_name>
+        kubectl describe service <service_name>
     ```
     {: pre}
 
     输出：
 
     ```
-    Name:                   <service_name>
+        Name:                   <service_name>
     Namespace:              default
     Labels:                 run=<deployment_name>
     Selector:               run=<deployment_name>
@@ -160,4 +159,4 @@ apiVersion: v1
     在此示例中，NodePort为 `30872`。</br>
     **注：**如果 **Endpoints** 部分显示 `<none>`，请在 NodePort 服务的 `spec.selector` 部分中检查使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
 
-3.  使用其中一个工作程序节点 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`
+3.  使用其中一个工作程序节点公共 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`

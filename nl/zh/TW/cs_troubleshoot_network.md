@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -34,7 +34,7 @@ lastupdated: "2018-08-06"
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-您已透過在叢集裡建立負載平衡器服務，來公開應用程式。當您嘗試使用負載平衡器的公用 IP 位址連接至應用程式時，連線失敗或逾時。
+您已透過在叢集中建立負載平衡器服務，來公開應用程式。當您嘗試使用負載平衡器的公用 IP 位址連接至應用程式時，連線失敗或逾時。
 
 {: tsCauses}
 負載平衡器服務可能因下列其中一個原因而未正常運作：
@@ -49,7 +49,7 @@ lastupdated: "2018-08-06"
 1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保負載平衡器服務的高可用性。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -58,7 +58,7 @@ lastupdated: "2018-08-06"
 2.  檢查負載平衡器服務配置檔的正確性。
 
     ```
-apiVersion: v1
+    apiVersion: v1
     kind: Service
     metadata:
       name: myservice
@@ -92,8 +92,8 @@ apiVersion: v1
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您沒有足夠的工作者節點可部署負載平衡器服務。其中一個原因可能是您所部署的標準叢集有多個工作者節點，但佈建工作者節點失敗。
     </li>
     <ol><li>列出可用的工作者節點。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>確定 <code>kubectl get nodes</code> 及 <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> 指令所傳回的工作者節點的公用及專用 VLAN ID 相符。</li></ol></li></ul>
+    <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>確定 <code>kubectl get nodes</code> 及 <code>bx cs [&lt;cluster_name_or_ID&gt;] worker-get</code> 指令所傳回的工作者節點的公用及專用 VLAN ID 相符。</li></ol></li></ul>
 
 4.  如果您要使用自訂網域連接至負載平衡器服務，請確定已將自訂網域對映至負載平衡器服務的公用 IP 位址。
     1.  尋找負載平衡器服務的公用 IP 位址。
@@ -114,7 +114,7 @@ apiVersion: v1
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-您已透過在叢集裡建立應用程式的 Ingress 資源，來公開應用程式。當您嘗試使用 Ingress 應用程式負載平衡器 (ALB) 的公用 IP 位址或子網域連接至應用程式時，連線失敗或逾時。
+您已透過在叢集中建立應用程式的 Ingress 資源，來公開應用程式。當您嘗試使用 Ingress 應用程式負載平衡器 (ALB) 的公用 IP 位址或子網域連接至應用程式時，連線失敗或逾時。
 
 {: tsCauses}
 Ingress 可能未正常運作，原因如下：
@@ -130,7 +130,7 @@ Ingress 可能未正常運作，原因如下：
 1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保 ALB 的高可用性。
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -141,7 +141,7 @@ Ingress 可能未正常運作，原因如下：
     1.  擷取 ALB 子網域。
 
       ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
+      bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
@@ -194,7 +194,7 @@ Ingress 可能未正常運作，原因如下：
     ```
     {: codeblock}
 
-    1.  確認 ALB 子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的子網域及 TLS 憑證，請執行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
+    1.  確認 ALB 子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的子網域及 TLS 憑證，請執行 `bx cs cluster-get<cluster_name_or_ID>`。
     2.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請包含 **/** 作為路徑。
 5.  檢查 Ingress 部署，並尋找可能的警告或錯誤訊息。
 
@@ -233,7 +233,7 @@ Ingress 可能未正常運作，原因如下：
     {: screen}
 
 6.  檢查 ALB 的日誌。
-    1.  擷取在叢集裡執行的 Ingress Pod 的 ID。
+    1.  擷取在叢集中執行的 Ingress Pod 的 ID。
 
       ```
       kubectl get pods -n kube-system | grep alb
@@ -272,7 +272,7 @@ Ingress 可能未正常運作，原因如下：
  <tbody>
  <tr>
  <td>您沒有必要的存取角色，無法下載及更新憑證資料。</td>
- <td>請洽詢帳戶管理者，以將 {{site.data.keyword.cloudcerts_full_notm}} 實例的**管理員**和**作者**角色指派給您。如需相關資訊，請參閱 {{site.data.keyword.cloudcerts_short}} 的<a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">管理服務存取</a>。</td>
+ <td>請洽詢帳戶管理者，指派您 {{site.data.keyword.cloudcerts_full_notm}} 實例的**操作員**和**編輯者**角色。如需相關資訊，請參閱 {{site.data.keyword.cloudcerts_short}} 的<a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">管理服務存取</a>。</td>
  </tr>
  <tr>
  <td>建立、更新或移除時提供的憑證 CRN 與叢集不屬於相同的帳戶。</td>
@@ -280,11 +280,11 @@ Ingress 可能未正常運作，原因如下：
  </tr>
  <tr>
  <td>建立時提供的憑證 CRN 不正確。</td>
- <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 是正確的，請嘗試更新密碼：<code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>如果這個指令導致 <code>update_failed</code> 狀態，則移除密碼：<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署密碼：<code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 是正確的，請嘗試更新密碼：<code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>如果這個指令導致 <code>update_failed</code> 狀態，則移除密碼：<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署密碼：<code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>更新時提供的憑證 CRN 不正確。</td>
- <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 是正確的，則移除密碼：<code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署密碼：<code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>嘗試更新密碼：<code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 是正確的，則移除密碼：<code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>重新部署密碼：<code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>嘗試更新密碼：<code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.cloudcerts_long_notm}} 服務遭遇關閉時間。</td>
@@ -299,7 +299,7 @@ Ingress 可能未正常運作，原因如下：
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-當您執行 `ibmcloud ks cluster-get <cluster>` 時，您的叢集處於 `normal` 狀況，但沒有 **Ingress 子網域**可用。
+當您執行 `bx cs cluster-get <cluster>` 時，您的叢集處於 `normal` 狀態，但沒有 **Ingress 子網域**可用。
 
 您可能會看到類似下列內容的錯誤訊息。
 
@@ -309,47 +309,23 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-在標準叢集裡，第一次在區域中建立叢集時，會在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，自動為您在該區域中佈建公用 VLAN 及專用 VLAN。在該區域中，會在您指定的公用 VLAN 上要求 1 個公用可攜式子網路，並在您指定的專用 VLAN 上要求 1 個專用可攜式子網路。對於 {{site.data.keyword.containershort_notm}}，VLAN 的限制為 40 個子網路。如果區域中的叢集 VLAN 已達到該限制，則無法佈建 **Ingress 子網域**。
+當您建立叢集時，會在您指定的 VLAN 上要求 8 個公用及 8 個專用可攜式子網路。對於 {{site.data.keyword.containershort_notm}}，VLAN 的限制為 40 個子網路。如果叢集的 VLAN 已達到該限制，則無法佈建 **Ingress 子網域**。
 
 若要檢視 VLAN 有多少子網路，請執行下列動作：
 1.  從 [IBM Cloud 基礎架構 (SoftLayer) 主控台](https://control.bluemix.net/)，選取**網路** > **IP 管理** > **VLAN**。
 2.  按一下您用來建立叢集之 VLAN 的 **VLAN 號碼**。檢閱 **Subnets** 區段，以查看是否有 40 個以上的子網路。
 
 {: tsResolve}
-如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans/order-vlan.html#order-vlans)，進行訂購。然後，[建立叢集](cs_cli_reference.html#cs_cluster_create)，而叢集使用這個新的 VLAN。
+如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)來訂購。然後，[建立叢集](cs_cli_reference.html#cs_cluster_create)，而叢集使用這個新的 VLAN。
 
-如果您有另一個可用的 VLAN，可以在現有叢集裡[設定 VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)。之後，您便可以將新的工作者節點新增至使用具有可用子網路之另一個 VLAN 的叢集。
+如果您有另一個可用的 VLAN，可以在現有叢集中[設定 VLAN 跨越](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。之後，您便可以將新的工作者節點新增至使用具有可用子網路之另一個 VLAN 的叢集。
 
-如果您未使用 VLAN 中的所有子網路，則可以在叢集裡重複使用子網路。
-1.  檢查您要使用的子網路可供使用。**附註**：您所使用的基礎架構帳戶可能會在多個 {{site.data.keyword.Bluemix_notm}} 帳戶之間共用。若是如此，即使您執行 `ibmcloud ks subnets` 指令來查看具有**連結叢集**的子網路，您也只能看到您叢集的資訊。請洽詢基礎架構帳戶擁有者，以確定子網路可供使用，且其他任何帳戶或團隊不在使用中。
+如果您未使用 VLAN 中的所有子網路，則可以在叢集中重複使用子網路。
+1.  檢查您要使用的子網路可供使用。**附註**：您所使用的基礎架構帳戶可能會在多個 {{site.data.keyword.Bluemix_notm}} 帳戶之間共用。若是如此，即使您執行 `bx cs subnets` 指令來查看具有**連結叢集**的子網路，您也只能看到您的叢集的資訊。請洽詢基礎架構帳戶擁有者，以確定子網路可供使用，且其他任何帳戶或團隊不在使用中。
 
-2.  使用 `--no-subnet` 選項[建立叢集](cs_cli_reference.html#cs_cluster_create)，以便服務不會嘗試建立新的子網路。請指定區域以及具有子網路可供重複使用的 VLAN。
+2.  使用 `--no-subnet` 選項[建立叢集](cs_cli_reference.html#cs_cluster_create)，以便服務不會嘗試建立新的子網路。請指定位置以及有子網路可供重複使用的 VLAN。
 
-3.  使用 `ibmcloud ks cluster-subnet-add` [指令](cs_cli_reference.html#cs_cluster_subnet_add)，將現有子網路新增至叢集。如需相關資訊，請參閱[在 Kubernetes 叢集裡新增或重複使用自訂及現有的子網路](cs_subnets.html#custom)。
-
-<br />
-
-
-## Ingress ALB 未在區域中部署
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-當您具有多區域叢集，並執行 `ibmcloud ks albs <cluster>` 時，沒有任何 ALB 部署在區域中。例如，如果您在 3 個區域中具有工作者節點，則可能會看到如下的輸出，其中公用 ALB 未部署至第三個區域。
-```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
-```
-{: screen}
-
-{: tsCauses}
-在每一個區域中，會在您指定的公用 VLAN 上要求 1 個公用可攜式子網路，並在您指定的專用 VLAN 上要求 1 個專用可攜式子網路。對於 {{site.data.keyword.containershort_notm}}，VLAN 的限制為 40 個子網路。如果區域中叢集的公用 VLAN 已達到該限制，則該區域的公用 Ingress ALB 無法佈建。
-
-{: tsResolve}
-若要檢查 VLAN 上的子網路數目，以及如需如何取得另一個 VLAN 的步驟，請參閱[無法取得 Ingress ALB 的子網域](#cs_subnet_limit)。
+3.  使用 `bx cs cluster-subnet-add` [指令](cs_cli_reference.html#cs_cluster_subnet_add)，將現有子網路新增至叢集。如需相關資訊，請參閱[在 Kubernetes 叢集中新增或重複使用自訂及現有的子網路](cs_subnets.html#custom)。
 
 <br />
 
@@ -358,7 +334,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
-當您執行 `kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status` 來檢查 VPN 連線功能時，並未看到 `ESTABLISHED` 狀態，或是 VPN Pod 處於 `ERROR` 狀況，或持續當機及重新啟動。
+當您執行 `kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status` 來檢查 VPN 連線功能時，並未看到 `ESTABLISHED` 狀態，或是 VPN Pod 處於 `ERROR` 狀態，或持續當機及重新啟動。
 
 {: tsCauses}
 您的 Helm 圖表配置檔有不正確的值、遺漏值或語法錯誤。
@@ -374,7 +350,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
     <li>安裝新的 Helm 圖表。</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
     </ol>
 
-2. 如果 VPN Pod 處於 `ERROR` 狀況，或持續損毀並重新啟動，則可能是圖表配置對映中 `ipsec.conf` 設定的參數驗證所造成。
+2. 如果 VPN Pod 處於 `ERROR` 狀態，或持續損毀並重新啟動，則可能是圖表配置對映中 `ipsec.conf` 設定的參數驗證所造成。
 
     <ol>
     <li>檢查 strongSwan Pod 日誌中的所有驗證錯誤。</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
@@ -416,48 +392,6 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public   
     <br />
 
 
-## 無法安裝新版 strongSwan Helm 圖表
-{: #cs_strongswan_release}
-
-{: tsSymptoms}
-您可以修改 strongSwan Helm 圖表，並嘗試安裝您的新版本，方法為執行 `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan`。不過，您會看到下列錯誤：
-```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
-```
-{: screen}
-
-{: tsCauses}
-此錯誤指出未完全解除安裝舊版 strongSwan 圖表。
-
-{: tsResolve}
-
-1. 刪除舊版圖表。
-    ```
-    helm delete --purge <old_release_name>
-    ```
-    {: pre}
-
-2. 刪除舊版的部署。刪除部署及關聯的 Pod 最多需要 1 分鐘。
-    ```
-    kubectl delete deploy -n kube-system vpn-strongswan
-    ```
-    {: pre}
-
-3. 驗證已刪除部署。部署 `vpn-strongswan` 未出現在清單中。
-    ```
-    kubectl get deployments -n kube-system
-    ```
-    {: pre}
-
-4. 利用新的版本名稱來重新安裝更新的 strongSwan Helm 圖表。
-    ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
-    ```
-    {: pre}
-
-<br />
-
-
 ## 在工作者節點新增或刪除之後，strongSwan VPN 連線功能失敗
 {: #cs_vpn_fails_worker_add}
 
@@ -469,7 +403,7 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 * 您無法從在新的工作者節點上執行的 Pod 中存取遠端網路
 
 {: tsCauses}
-如果您已將工作者節點新增至工作者節點儲存區：
+如果您已新增工作者節點：
 
 * 工作者節點是佈建在新的專用子網路上，現有 `localSubnetNAT` 或 `local.subnet` 設定並未透過 VPN 連線公開該子網路
 * VPN 路徑無法新增至工作者節點，因為工作者節點有污點或標籤未內含在現有 `tolerations` 或 `nodeSelector` 設定中
@@ -509,7 +443,7 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>新增的工作者可能部署在另一個新的專用子網路上，而不是其他工作者節點所在的其他現有子網路。如果您使用子網路 NAT 來重新對映叢集的專用本端 IP 位址，且工作者節點已新增在新的子網路上，請將新的子網路 CIDR 新增至此設定。</td>
+     <td>新增的工作者可能部署在另一個新的專用子網路上，而不是其他工作者節點所在的其他現有子網路。如果您使用子網路 NAT 來重新對映叢集的專用本端 IP 位址，且工作者已新增在新的子網路上，請將新的子網路 CIDR 新增至此設定。</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -517,11 +451,11 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>如果新增的工作者節點有污點，則變更此設定，以容許 VPN Pod 在具有任何污點或特定污點的所有有污點的工作者節點上執行。</td>
+     <td>如果新增的工作者節點有污點，則變更此設定，以容許 VPN Pod 在具有任何污點或特定污點的所有有污點的工作者上執行。</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>新增的工作者節點可能部署在另一個新的專用子網路上，而不是其他工作者節點所在的現有子網路。如果您的應用程式是由專用網路上的 NodePort 或 LoadBalancer 服務公開，且應用程式位於新增的工作者節點上，請將新的子網路 CIDR 新增至此設定。**附註**：如果您將值新增至 `local.subnet`，請檢查內部部署子網路的 VPN 設定，以查看它們是否也必須進行更新。</td>
+     <td>新增的工作者可能部署在另一個新的專用子網路上，而不是其他工作者所在的現有子網路。如果您的應用程式是由專用網路上的 NodePort 或 LoadBalancer 服務公開，且應用程式位於新增的工作者上，請將新的子網路 CIDR 新增至此設定。**附註**：如果您將值新增至 `local.subnet`，請檢查內部部署子網路的 VPN 設定，以查看它們是否也必須進行更新。</td>
      </tr>
      </tbody></table>
 
@@ -536,15 +470,15 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>如果您使用子網路 NAT 來重新對映特定的專用本端 IP 位址，請從這個設定移除舊工作者節點中的任何 IP 位址。如果您使用子網路 NAT 來重新對映整個子網路，且子網路上未剩餘任何工作者節點，請從此設定移除該子網路 CIDR。</td>
+     <td>如果您使用子網路 NAT 來重新對映特定的專用本端 IP 位址，請從這個設定移除舊工作者中的任何 IP 位址。如果您使用子網路 NAT 來重新對映整個子網路，且子網路上未剩餘任何工作者，請從此設定中移除該子網路 CIDR。</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>如果您先前將 VPN Pod 部署限制為單一工作者節點，且已刪除該工作者節點，請變更此設定，以容許 VPN Pod 在其他工作者節點上執行。</td>
+     <td>如果您先前將 VPN Pod 部署限制為單一工作者，且已刪除該工作者，請變更此設定，以容許 VPN Pod 在其他工作者上執行。</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>如果您所刪除的工作者節點沒有污點，但唯一剩下的工作者節點有污點，請變更此設定，以容許 VPN Pod 在具有任何污點或特定污點的工作者節點上執行。
+     <td>如果您所刪除的工作者沒有污點，但唯一剩下的工作者有污點，請變更此設定，以容許 VPN Pod 在具有任何污點或特定污點的工作者上執行。
      </td>
      </tr>
      </tbody></table>
@@ -579,8 +513,8 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 9. 檢查 VPN 的狀態。
 
     ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
-        ```
+    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    ```
     {: pre}
 
     * 如果 VPN 連線的狀態為 `ESTABLISHED`，則表示 VPN 連線成功。不需執行進一步的動作。
@@ -595,12 +529,12 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-當您執行 `calicoctl get policy` 嘗試檢視叢集裡的 Calico 網路原則時，會收到下列其中一個非預期的結果或錯誤訊息：
+當您執行 `calicoctl get policy` 嘗試檢視叢集中的 Calico 網路原則時，會收到下列其中一個非預期的結果或錯誤訊息：
 - 空清單
 - 舊 Calico 第 2 版原則的清單，而非第 3 版原則
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
 
-當您執行 `calicoctl get GlobalNetworkPolicy` 嘗試檢視叢集裡的 Calico 網路原則時，會收到下列其中一個非預期的結果或錯誤訊息：
+當您執行 `calicoctl get GlobalNetworkPolicy` 嘗試檢視叢集中的 Calico 網路原則時，會收到下列其中一個非預期的結果或錯誤訊息：
 - 空清單
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'v1'`
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
@@ -618,7 +552,7 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 
 1. 檢視叢集 Kubernetes 版本。
     ```
-    ibmcloud ks cluster-get <cluster_name>
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
@@ -636,73 +570,6 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 {: tip}
 
 <br />
-
-
-## 由於 VLAN ID 無效，無法新增工作者節點
-{: #suspended}
-
-{: tsSymptoms}
-您的 {{site.data.keyword.Bluemix_notm}} 帳戶已暫停，或叢集裡的所有工作者節點已遭刪除。在重新啟動帳戶之後，當您嘗試調整工作者節點儲存區的大小，或重新平衡工作者節點儲存區時，無法新增工作者節點。您會看到與下列內容類似的錯誤訊息：
-
-```
-SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
-```
-{: screen}
-
-{: tsCauses}
-當帳戶暫時時，即會刪除帳戶內的工作者節點。如果叢集沒有工作者節點，則 IBM Cloud 基礎架構 (SoftLayer) 會收回關聯的公用及專用 VLAN。不過，叢集工作者節點儲存區在其 meta 資料中仍有先前的 VLAN ID，並會在您重新平衡儲存區或調整儲存區的大小時，使用這些無法使用的 ID。節點無法建立，因為 VLAN 不再與叢集相關聯。
-
-{: tsResolve}
-
-您可以[刪除現有的工作者節點儲存區](cs_cli_reference.html#cs_worker_pool_rm)，然後[建立新的工作者節點儲存區](cs_cli_reference.html#cs_worker_pool_create)。
-
-或者，您也可以保留現有的工作者節點儲存區，方法為訂購新的 VLAN，並使用這些 VLAN，在儲存區中建立新的工作者節點。
-
-開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。
-
-1.  若要取得您需要其新 VLAN ID 的區域，請記下下列指令輸出中的**位置**。**附註**：如果您的叢集是多區域，則您需要每一個區域的 VLAN ID。
-
-    ```
-    ibmcloud ks clusters
-    ```
-    {: pre}
-
-2.  [與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans/order-vlan.html#order-vlans)，為叢集所在的每一個區域取得新的專用及公用 VLAN。
-
-3.  記下每一個區域的新專用及公用 VLAN ID。
-
-4.  記下工作者節點儲存區的名稱。
-
-    ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-5.  使用 `zone-network-set` [指令](cs_cli_reference.html#cs_zone_network_set)，以變更工作者節點儲存區網路 meta 資料。
-
-    ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
-    ```
-    {: pre}
-
-6.  **僅限多區域叢集**：針對叢集裡的每一個區域重複**步驟 5**。
-
-7.  重新平衡工作者節點儲存區或調整其大小，以新增使用新的 VLAN ID 的工作者節點，例如：
-
-    ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-8.  驗證已建立工作者節點。
-
-    ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
-    ```
-    {: pre}
-
-<br />
-
 
 
 ## 取得協助及支援
@@ -724,5 +591,5 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 -   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
 
 {: tip}
-當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
+當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `bx cs clusters`。
 

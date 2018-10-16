@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,8 @@ lastupdated: "2018-08-06"
 # Persistenten Speicher aus einem Cluster entfernen
 {: #cleanup}
 
-Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur (SoftLayer), z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie diese erstellt haben, müssen Sie möglicherweise alle drei separat löschen.{:shortdesc}
+Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur (SoftLayer), z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie diese erstellt haben, müssen Sie möglicherweise alle drei separat löschen.
+{:shortdesc}
 
 ## Persistenten Speicher bereinigen
 {: #storage_remove}
@@ -47,7 +48,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie ein Ziel für Ihre C
 Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
 1.  Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich folgende Einstellungen: **NAME** des Persistent Volume Claim, die Speicherklasse (**STORAGECLASS**) und den Namen des persistenten Datenträgers, der an den Persistent Volume Claim gebunden ist und als **VOLUME** angezeigt wird.
-```
+    ```
     kubectl get pvc
     ```
     {: pre}
@@ -72,8 +73,8 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    **Wichtig:** Wenn Ihr Speicher monatlich berechnet wird, wird Ihnen der gesamte Monat auch dann in Rechnung gestellt, wenn Sie den Speicher vor Ende des Abrechnungszyklus entfernen. 
    
 3. Entfernen Sie alle Pods, die den Persistent Volume Claim anhängen. 
-   1. Listen Sie die Pods auf, die den PVC anhängen.
-```
+   1. Listen Sie die Pods auf, die den PVC anhängen. 
+      ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
       ```
       {: pre}
@@ -86,14 +87,14 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
     
       Wenn in Ihrer CLI-Ausgabe kein Pod zurückgegeben wird, haben Sie keine Pods, die den PVC verwenden. 
     
-   2. Entfernen Sie den Pod, der den PVC verwendet. Wenn der Pod Teil einer Bereitstellung ist, entfernen Sie die Bereitstellung.
-```
+   2. Entfernen Sie den Pod, der den PVC verwendet. Wenn der Pod Teil einer Bereitstellung ist, entfernen Sie die Bereitstellung. 
+      ```
       kubectl delete pod <podname>
       ```
       {: pre}
       
-   3. Überprüfen Sie, dass der Pod entfernt wurde.
-```
+   3. Überprüfen Sie, dass der Pod entfernt wurde. 
+      ```
       kubectl get pods
       ```
       {: pre}
@@ -139,7 +140,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
      
-   Wenn Sie Ihren Cluster entfernt haben und den Namen des persistenten Datenträgers nicht abrufen können, ersetzen Sie `grep <pv_name>` durch `grep <cluster_id>`, um alle Speichereinheiten aufzulisten, die Ihrem Cluster zugeordnet sind.
+   Wenn Sie Ihren Cluster entfernt haben und den Namen des persistenten Datenträgers nicht abrufen können, ersetzen Sie `grep <pv_name>` durch `grep <cluster_id>`, um alle Speichereinheiten aufzulisten, die Ihrem Cluster zugeordnet sind. 
    {: tip}
      
    Beispielausgabe: 

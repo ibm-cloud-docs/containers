@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -29,23 +29,6 @@ Ao usar o {{site.data.keyword.containerlong}}, considere estas técnicas para re
 Se você tiver um problema mais geral, tente a [depuração do cluster](cs_troubleshoot.html).
 {: tip}
 
-## Em um cluster de múltiplas zonas, um volume persistente falha ao ser montado em um pod
-{: #mz_pv_mount}
-
-{: tsSymptoms}
-Seu cluster era anteriormente um cluster de zona única com nós do trabalhador independentes que não estavam em conjuntos de trabalhadores. Você montou com êxito um persistent volume claim (PVC) que descreveu o persistent volume (PV) a ser usado para a implementação de pod de seu app. Agora que você tem conjuntos de trabalhadores e zonas incluídas em seu cluster, no entanto, o PV falha ao ser montado em um pod.
-
-{: tsCauses}
-Para clusters de múltiplas zonas, os PVs devem ter os rótulos a seguir para que os pods não tentem montar volumes em uma zona diferente.
-* ` failure-domain.beta.kubernetes.io/region `
-* ` failure-domain.beta.kubernetes.io/zone `
-
-Os novos clusters com conjuntos de trabalhadores que podem abranger múltiplas zonas rotulam os PVs por padrão. Se você criou seus clusters antes de os conjuntos de trabalhadores serem introduzidos, deve-se incluir os rótulos manualmente.
-
-{: tsResolve}
-[Atualize os PVs em seu cluster com os rótulos de região e zona](cs_storage_basics.html#multizone).
-
-<br />
 
 
 ## Os sistemas de arquivos para nós do trabalhador mudam para somente leitura
@@ -63,9 +46,9 @@ O sistema de arquivos no nó do trabalhador é somente leitura.
 {: tsResolve}
 1.  Faça backup de quaisquer dados que podem ser armazenados no nó do trabalhador ou em seus contêineres.
 2.  Para uma correção de curto prazo para o nó do trabalhador existente, recarregue o nó do trabalhador.
-    <pre class="pre"><code> ibmcloud ks worker-reload  &lt;cluster_name&gt;  &lt;worker_ID&gt; </code></pre>
+    <pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-Para uma correção de longo prazo, [atualize o tipo de máquina do seu conjunto de trabalhadores](cs_cluster_update.html#machine_type).
+Para uma correção de longo prazo, [atualize o tipo de máquina incluindo outro nó do trabalhador](cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -75,7 +58,7 @@ Para uma correção de longo prazo, [atualize o tipo de máquina do seu conjunto
 {: #nonroot}
 
 {: tsSymptoms}
-Depois de [incluir armazenamento NFS](cs_storage_file.html#app_volume_mount) em sua implementação, a implementação de seu contêiner falha. Ao recuperar os logs para seu contêiner, talvez você veja erros como "permissão de gravação" ou "não tem a permissão necessária". O pod falha e fica preso em um ciclo de recarregamento.
+Depois de [incluir armazenamento NFS](cs_storage.html#app_volume_mount) em sua implementação, a implementação de seu contêiner falha. Ao recuperar os logs para seu contêiner, talvez você veja erros como "permissão de gravação" ou "não tem a permissão necessária". O pod falha e fica preso em um ciclo de recarregamento.
 
 {: tsCauses}
 Por padrão, os usuários não raiz não tem permissão de gravação no caminho de montagem do volume para armazenamento suportado por NFS. Algumas imagens comuns do app, como Jenkins e Nexus3, especificam um usuário não raiz que possui o caminho de montagem no Dockerfile. Quando você cria um contêiner por meio desse Dockerfile, a criação do contêiner falha devido a permissões insuficientes do usuário não raiz no caminho de montagem. Para conceder permissão de gravação, é possível modificar o Dockerfile para incluir temporariamente o usuário não raiz no grupo de usuários raiz antes que ele mude as permissões de caminho de montagem ou usar um contêiner de inicialização.
@@ -299,7 +282,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Você tem um dispositivo de armazenamento de bloco existente que é configurado com um sistema de arquivos `XFS`. Para montar esse dispositivo em seu pod, você [criou um PV](cs_storage_block.html#existing_block) que especificou `ext4` como seu sistema de arquivos ou nenhum sistema de arquivos na seção `spec/flexVolume/fsType`. Se nenhum sistema de arquivos está definido, o PV é padronizado para `ext4`.
+Você tem um dispositivo de armazenamento de bloco existente que é configurado com um sistema de arquivos `XFS`. Para montar esse dispositivo em seu pod, você [criou um PV](cs_storage.html#existing_block) que especificou `ext4` como seu sistema de arquivos ou nenhum sistema de arquivos na seção `spec/flexVolume/fsType`. Se nenhum sistema de arquivos está definido, o PV é padronizado para `ext4`.
 O PV foi criado com êxito e foi vinculado à sua instância de armazenamento de bloco existente. No entanto, quando você tenta montar o PV em seu cluster usando um PVC correspondente, o volume falha ao ser montado. Não é possível montar sua instância de armazenamento de bloco `XFS` com um sistema de arquivos `ext4` no pod.
 
 {: tsResolve}
@@ -366,5 +349,5 @@ Ainda está tendo problemas com o seu cluster?
 -   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+Ao relatar um problema, inclua o ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
 

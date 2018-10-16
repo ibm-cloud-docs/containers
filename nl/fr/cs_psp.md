@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-08-06"
 {: #psp}
 
 Avec les [politiques de sécurité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), vous pouvez
-configurer des politiques pour déterminer quelles sont les personnes autorisées à créer et mettre à jour des pods dans {{site.data.keyword.containerlong}}. Les clusters qui exécutent Kubernetes versions 1.10.3, 1.9.8 t 1.8.13 ou des groupes de correctifs ultérieurs, prennent en charge le contrôleur d'admission `PodSecurityPolicy` qui applique ces politiques.
+configurer des politiques pour déterminer quelles sont les personnes autorisées à créer et mettre à jour des pods dans {{site.data.keyword.containerlong}}. Les clusters qui exécutent Kubernetes versions 1.10.3, 1.9.8 t 1.8.13 ou des groupes de correctifs ultérieurs, prennent en charge le contrôleur d'admission `PodSecurityPolicy` qui applique ces politiques. 
 {: shortdesc}
 
 Vous utilisez une version plus ancienne de Kubernetes ? [Mettez à jour votre cluster](cs_cluster_update.html) dès aujourd'hui.
@@ -30,11 +30,11 @@ En tant qu'administrateur de cluster, vous désirez contrôler ce qui se passe d
 
 Avec le contrôleur d'admission `PodSecurityPolicy`, aucun pod ne peut être créé tant que vous n'avez pas [autorisé de politiques](#customize_psp). La configuration des politiques de sécurité de pod peut avoir des effets secondaires indésirables, par conséquent veillez à tester un déploiement après avoir modifié une politique. Pour déployer des applications, les comptes utilisateur et les comptes de service doivent tous être autorisés par les politiques de sécurité de pod requises à déployer des pods. Par exemple, si vous installez des applications en utilisant [Helm](cs_integrations.html#helm_links), le composant Helm tiller crée des pods, et vous devez donc disposer de l'autorisation de politique de sécurité adéquate.
 
-Vous essayez de contrôler quels sont les utilisateurs pouvant accéder à {{site.data.keyword.containershort_notm}} ? Voir [Affectation d'accès au cluster](cs_users.html#users) pour définir les droits IAM et les droits de l'infrastructure.
+Vous essayez de contrôler quels sont les utilisateurs pouvant accéder à {{site.data.keyword.containerlong_notm}} ? Voir [Affectation d'accès au cluster](cs_users.html#users) pour définir les droits IAM et les droits de l'infrastructure.
 {: tip}
 
 **Existent-ils des politiques définies par défaut ? Que puis-je ajouter ?**</br>
-Par défaut, {{site.data.keyword.containershort_notm}} configure le contrôleur d'admission `PodSecurityPolicy` avec des [ressources de gestion de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que vous ne pouvez pas supprimer ou modifier. Vous ne pouvez pas non plus désactiver le contrôleur d'admission. 
+Par défaut, {{site.data.keyword.containerlong_notm}} configure le contrôleur d'admission `PodSecurityPolicy` avec des [ressources de gestion de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que vous ne pouvez pas supprimer ou modifier. Vous ne pouvez pas non plus désactiver le contrôleur d'admission. 
 
 Les actions de pod ne sont pas verrouillées par défaut. A la place, deux ressources RBAC (Role-Based Access Control) figurant dans le cluster autorisent tous les administrateurs, utilisateurs, services et noeuds à créer des pods privilégiés et non privilégiés. Pour empêcher certains utilisateurs de créer ou de mettre à jour des pods, vous pouvez [modifier ces ressources RBAC ou créer vos propres ressources](#customize_psp).
 
@@ -181,7 +181,7 @@ Veillez lorsque vous avez modifié des politiques existantes à ce que la nouvel
 ## Description des ressources par défaut pour la gestion de cluster {{site.data.keyword.IBM_notm}}
 {: #ibm_psp}
 
-Votre cluster Kubernetes dans {{site.data.keyword.containershort_notm}} contient les politiques
+Votre cluster Kubernetes dans {{site.data.keyword.containerlong_notm}} contient les politiques
 de sécurité de pod et des ressources RBAC associées pour permettre à {{site.data.keyword.IBM_notm}} gérer correctement votre cluster.
 {: shortdesc}
 

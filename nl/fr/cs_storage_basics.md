@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-08-06"
 ## Volumes persistants et réservations de volume persistant
 {: #pvc_pv}
 
-Avant de commencer à mettre à disposition du stockage, il est important de connaître les concepts Kubernetes de volume persistant et de réservation de volume persistant et de savoir comment ils interagissent dans un cluster.
+Avant de commencer à mettre à disposition du stockage, il est important de connaître les concepts Kubernetes de volume persistant et de réservation de volume persistant et de savoir comment ils interagissent dans un cluster. 
 {: shortdesc}
 
 L'image suivante présente les composants de stockage dans un cluster Kubernetes. 
@@ -42,7 +42,7 @@ Pour en savoir plus sur comment créer et utiliser des PVC, des PV et l'unité d
 ## Provisionnement dynamique
 {: #dynamic_provisioning}
 
-Utilisez le provisionnement dynamique pour donner aux développeurs la liberté de mettre à disposition du stockage lorsqu'ils en ont besoin.
+Utilisez le provisionnement dynamique pour donner aux développeurs la liberté de mettre à disposition du stockage lorsqu'ils en ont besoin. 
 {: shortdesc}
 
 **Comment cela fonctionne-t-il ?**</br>
@@ -76,7 +76,7 @@ Pour plus d'informations sur le provisionnement dynamique de stockage persistant
 ## Provisionnement statique
 {: #static_provisioning}
 
-Si vous disposez d'une unité de stockage persistant dans votre compte d'infrastructure IBM Cloud (SoftLayer), vous pouvez utiliser le provisionnement statique pour mettre à disposition l'instance de stockage dans votre cluster.
+Si vous disposez d'une unité de stockage persistant dans votre compte d'infrastructure IBM Cloud (SoftLayer), vous pouvez utiliser le provisionnement statique pour mettre à disposition l'instance de stockage dans votre cluster. 
 {: shortdesc}
 
 **Comment cela fonctionne-t-il ?**</br>
@@ -111,10 +111,10 @@ Pour plus d'informations sur le provisionnement statique de stockage persistant,
 ## Classes de stockage
 {: #storageclasses}
 
-Pour utiliser le provisionnement dynamique de stockage persistant, vous devez définir le type et la configuration de stockage de votre choix.
+Pour utiliser le provisionnement dynamique de stockage persistant, vous devez définir le type et la configuration de stockage de votre choix. 
 {: shortdesc}
 
-Une classe de stockage Kubernetes est utilisée pour faire abstraction de la plateforme de stockage sous-jacente prise en charge dans {{site.data.keyword.Bluemix_notm}} de sorte que vous n'ayez pas besoin de connaître tous les détails sur les tailles, les opérations d'entrée-sortie par seconde (IOPS) ou les règles de conservation prises en charge pour réussir à mettre à disposition du stockage persistant dans un cluster. {{site.data.keyword.containershort_notm}} fournit des classes de stockage prédéfinies pour tous les types de stockage pris en charge. Chaque classe de stockage est conçue pour faire abstraction du niveau de stockage pris en charge tout en vous laissant le choix de décider de la taille, du nombre d'IOPS et de la règle de conservation que vous souhaitez utiliser. 
+Une classe de stockage Kubernetes est utilisée pour faire abstraction de la plateforme de stockage sous-jacente prise en charge dans {{site.data.keyword.Bluemix_notm}} de sorte que vous n'ayez pas besoin de connaître tous les détails sur les tailles, les opérations d'entrée-sortie par seconde (IOPS) ou les règles de conservation prises en charge pour réussir à mettre à disposition du stockage persistant dans un cluster. {{site.data.keyword.containerlong_notm}} fournit des classes de stockage prédéfinies pour tous les types de stockage pris en charge. Chaque classe de stockage est conçue pour faire abstraction du niveau de stockage pris en charge tout en vous laissant le choix de décider de la taille, du nombre d'IOPS et de la règle de conservation que vous souhaitez utiliser. 
 
 Pour obtenir les spécifications des classes de stockage prédéfinies, voir : 
 - [Stockage de fichiers](cs_storage_file.html#storageclass_reference)
@@ -126,7 +126,7 @@ Vous ne trouvez pas ce que vous cherchez ? Vous pouvez également créer votre p
 ### Personnalisation d'une classe de stockage
 {: #customized_storageclass}
 
-Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouvez créer votre propre classe de stockage personnalisée.
+Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouvez créer votre propre classe de stockage personnalisée. 
 {: shortdesc}
 
 1. Créez une classe de stockage personnalisée. Vous pouvez commencer par utiliser une des classes prédéfinies ou consulter les exemples de classes de stockage personnalisées. 
@@ -179,26 +179,26 @@ Pour modifier la taille, le nombre d'IOPS ou la règle de conservation d'une uni
    - [Stockage par blocs](cs_storage_block.html#backup_restore)
    
 4. Mettez à jour le déploiement de votre application pour référencer la nouvelle unité de stockage. 
-   1. Récupérez le nom de la PVC que vous avez créée auparavant.
+   1. Récupérez le nom de la PVC que vous avez créée auparavant. 
       ```
       kubectl get pvc
       ```
       {: pre}
       
-   2. Affichez la liste des déploiements dans votre cluster.
+   2. Affichez la liste des déploiements dans votre cluster. 
       ```
       kubectl get deployments
       ```
       {: pre}
       
-   3. Récupérez le fichier YAML de déploiement correspondant au déploiement avec l'ancienne unité de stockage persistant.
+   3. Récupérez le fichier YAML de déploiement correspondant au déploiement avec l'ancienne unité de stockage persistant. 
       ```
       kubectl get deployment <deployment_name> -o yaml
       ```
       {: pre}
       
    4. Modifiez le nom de la PVC dans la section `spec.volumes` de votre déploiement.
-   5. Appliquez les modifications à votre déploiement. L'application des modifications entraîne la création d'un nouveau pod et le montage sur votre pod de la PVC qui effectue la liaison avec le PV. Le pod qui avait monté l'ancienne instance de stockage persistant est supprimé.
+   5. Appliquez les modifications à votre déploiement. L'application des modifications entraîne la création d'un nouveau pod et le montage sur votre pod de la PVC qui effectue la liaison avec le PV. Le pod qui avait monté l'ancienne instance de stockage persistant est supprimé. 
       ```
       kubectl apply -f deployment.yaml
       ```
@@ -217,7 +217,7 @@ Utilisez un script pour rechercher tous les volumes persistants présents dans v
 
 Avant de commencer :
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
-- Activez le [spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) de sorte que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Comme alternative au spanning VLAN, vous pouvez utiliser une fonction VRF (Virtual Router Function) si elle est activée dans votre compte d'infrastructure IBM Cloud (SoftLayer).
+- Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
 
 Pour mettre à jour des volumes persistants (PV) existants :
 

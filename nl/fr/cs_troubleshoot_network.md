@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -49,7 +49,7 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre service d'équilibreur de charge.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -90,8 +90,8 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Dans la section **loadBalancerIP** de votre script de configuration, supprimez l'adresse IP existante et ajoutez l'une des adresses IP publiques portables disponibles. Vous pouvez également retirer la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable disponible puisse être allouée automatiquement.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds worker pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds worker, mais que la mise à disposition des noeuds worker ait échoué.</li>
     <ol><li>Affichez la liste des noeuds worker disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>Si au moins deux noeuds worker disponibles sont trouvés, affichez les détails de ces noeuds worker.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>Vérifiez que les ID de VLAN privé et public pour les noeuds worker renvoyés par les commandes <code>kubectl get nodes</code> et <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> correspondent.</li></ol></li></ul>
+    <li>Si au moins deux noeuds worker disponibles sont trouvés, affichez les détails de ces noeuds worker.</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>Vérifiez que les ID de VLAN privé et public pour les noeuds worker renvoyés par les commandes <code>kubectl get nodes</code> et <code>bx cs [&lt;cluster_name_or_ID&gt;] worker-get</code> correspondent.</li></ol></li></ul>
 
 4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service d'équilibreur de charge, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service d'équilibreur de charge.
     1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
@@ -128,7 +128,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre équilibreur de charge ALB.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -139,7 +139,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     1.  Récupérez le sous-domaine de l'équilibreur de charge ALB.
 
       ```
-      ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
+      bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
@@ -192,7 +192,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     ```
     {: codeblock}
 
-    1.  Vérifiez que le sous-domaine de l'équilibreur de charge ALB et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine fournis par IBM, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    1.  Vérifiez que le sous-domaine de l'équilibreur de charge ALB et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine fournis par IBM, exécutez la commande `bx cs cluster-get <cluster_name_or_ID>`.
     2.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre contrôleur Ingress. Si votre application est configurée pour être en mode écoute sur le chemin racine, ajoutez **/** comme chemin.
 5.  Vérifiez le déploiement du contrôleur Ingress et recherchez les éventuels messages d'erreur ou d'avertissement.
 
@@ -270,7 +270,7 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  <tbody>
  <tr>
  <td>Les rôles d'accès requis pour télécharger et mettre à jour des données de certificat ne vous ont pas été attribués.</td>
- <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles **Responsable** et **Auteur** sur votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus d'informations, voir la rubrique sur la <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles **Opérateur** et **Editeur** sur votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus d'informations, voir la rubrique sur la <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>Le CRN de certificat indiqué lors de la création, de la mise à jour ou de la suppression ne relève pas du même compte que le cluster.</td>
@@ -278,11 +278,11 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  </tr>
  <tr>
  <td>Le CRN de certificat fourni lors de la création est incorrect.</td>
- <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN du certificat est exact, essayez de mettre à jour la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Si cette commande indique le statut <code>update_failed</code>, supprimez la valeur confidentielle : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN du certificat est exact, essayez de mettre à jour la valeur confidentielle : <code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Si cette commande indique le statut <code>update_failed</code>, supprimez la valeur confidentielle : <code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>Le CRN de certificat soumis lors de la mise à jour est incorrect.</td>
- <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN de certificat est exact, supprimez la valeur confidentielle : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Essayez de mettre à jour la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN de certificat est exact, supprimez la valeur confidentielle : <code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Essayez de mettre à jour la valeur confidentielle : <code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>Le service {{site.data.keyword.cloudcerts_long_notm}} est confronté à un temps d'indisponibilité.</td>
@@ -297,7 +297,7 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Lorsque vous exécutez la commande `ibmcloud ks cluster-get <cluster>`, votre cluster est à l'état `normal` mais aucun **Sous-domaine Ingress** n'est disponible.
+Lorsque vous exécutez la commande `bx cs cluster-get <cluster>`, votre cluster est à l'état `normal` mais aucun **Sous-domaine Ingress** n'est disponible.
 
 Vous pouvez obtenir un message d'erreur de ce type :
 
@@ -307,47 +307,23 @@ There are already the maximum number of subnets permitted in this VLAN.
 {: screen}
 
 {: tsCauses}
-Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containershort_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition.
+Lorsque vous créez un cluster, 8 sous-réseaux publics et 8 sous-réseaux privés portables sont demandés sur le réseau local virtuel (VLAN) que vous spécifiez. Pour {{site.data.keyword.containershort_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition.
 
 Pour afficher le nombre de sous-réseaux d'un VLAN :
 1.  Dans la [console de l'infrastructure IBM Cloud (SoftLayer)](https://control.bluemix.net/), sélectionnez **Réseau** > **Gestion IP** > **VLAN**.
 2.  Cliquez sur le **Numéro de VLAN** du VLAN que vous avez utilisé pour créer votre cluster. Examinez la section **Sous-réseaux** pour voir s'il existe 40 sous-réseaux ou plus.
 
 {: tsResolve}
-Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
+Si vous avez besoin d'un nouveau réseau local virtuel, commandez-le en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
 
-Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles.
+Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles.
 
 Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser des sous-réseaux dans le cluster.
-1.  Vérifiez que les sous-réseaux que vous souhaitez utiliser sont disponibles. **Remarque** : le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.
+1.  Vérifiez que les sous-réseaux que vous souhaitez utiliser sont disponibles. **Remarque** : le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `bx cs subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.
 
-2.  [Créez un cluster](cs_cli_reference.html#cs_cluster_create) avec l'option `--no-subnet` de sorte que le service n'essaie pas de créer de nouveaux sous-réseaux. Indiquez la zone et le VLAN qui contient les sous-réseaux disponibles pouvant être réutilisés.
+2.  [Créez un cluster](cs_cli_reference.html#cs_cluster_create) avec l'option `--no-subnet` de sorte que le service n'essaie pas de créer de nouveaux sous-réseaux. Indiquez l'emplacement et le VLAN qui contient les sous-réseaux disponibles pouvant être réutilisés.
 
-3.  Utilisez la [commande](cs_cli_reference.html#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` pour ajouter des sous-réseaux existants à votre cluster. Pour plus d'informations, voir [Ajout ou réutilisation de sous-réseaux personnalisés et existants dans les clusters Kubernetes](cs_subnets.html#custom).
-
-<br />
-
-
-## L'ALB Ingress ne se déploie pas dans une zone
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun équilibreur de charge d'application (ALB) n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
-```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
-```
-{: screen}
-
-{: tsCauses}
-Dans chaque zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containershort_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN public du cluster d'une zone a déjà atteint cette limite, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition.
-
-{: tsResolve}
-Pour vérifier le nombre de sous-réseaux d'un VLAN et obtenir les étapes à suivre pour obtenir un autre VLAN, voir [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](#cs_subnet_limit).
+3.  Utilisez la  [commande](cs_cli_reference.html#cs_cluster_subnet_add) `bx cs cluster-subnet-add` pour ajouter des sous-réseaux existants à votre cluster. Pour plus d'informations, voir [Ajout ou réutilisation de sous-réseaux personnalisés et existants dans les clusters Kubernetes](cs_subnets.html#custom).
 
 <br />
 
@@ -414,48 +390,6 @@ Lorsque vous essayez d'établir une connectivité VPN avec la charte Helm strong
     <br />
 
 
-## Impossible d'installer une nouvelle édition de charte Helm strongSwan
-{: #cs_strongswan_release}
-
-{: tsSymptoms}
-Vous modifiez votre charte Helm strongSwan et essayez d'installer une nouvelle édition en exécutant la commande `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan`. Pourtant, vous obtenez l'erreur suivante :
-```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
-```
-{: screen}
-
-{: tsCauses}
-Cette erreur indique que l'édition précédente de la charte strongSwan n'a pas été complètement désinstallée.
-
-{: tsResolve}
-
-1. Supprimez l'édition précédente de la charte.
-    ```
-    helm delete --purge <old_release_name>
-    ```
-    {: pre}
-
-2. Supprimez le déploiement de l'édition précédente. La suppression du déploiement et du pod associé peut prendre jusqu'à 1 minute.
-    ```
-    kubectl delete deploy -n kube-system vpn-strongswan
-    ```
-    {: pre}
-
-3. Vérifiez que le déploiement a été supprimé. Le déploiement `vpn-strongswan` n'apparaît pas dans la liste.
-    ```
-    kubectl get deployments -n kube-system
-    ```
-    {: pre}
-
-4. Réinstallez la charte Helm strongSwan mise à jour avec un nouveau nom d'édition.
-    ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
-    ```
-    {: pre}
-
-<br />
-
-
 ## La connectivité VPN strongSwan échoue après l'ajout ou la suppression d'un noeud worker
 {: #cs_vpn_fails_worker_add}
 
@@ -467,15 +401,15 @@ Vous avez déjà établi une connexion VPN opérationnelle en utilisant le servi
 * Vous ne pouvez pas accéder au réseau distant à partir des pods qui s'exécutent sur les nouveaux noeuds worker
 
 {: tsCauses}
-Si vous avez ajouté un noeud worker dans un pool de noeuds worker :
+Si vous avez ajouté un noeud worker :
 
 * Le noeud worker a été mis en place sur un nouveau sous-réseau privé qui n'est pas exposé via la connexion VPN avec vos paramètres `localSubnetNAT` ou `local.subnet`
-* Les routes VPN ne peuvent pas être ajoutées au noeud worker car celui-ci possède des annotations taint ou des libellés qui ne sont pas inclus dans vos paramètres `tolerations` ou `nodeSelector`
+* Les routes VPN ne peuvent pas être ajoutées au noeud worker car celui-ci possède des annotations taint ou des étiquettes qui ne sont pas incluses dans vos paramètres `tolerations` ou `nodeSelector`
 * Le pod VPN s'exécute sur le nouveau noeud worker, mais l'adresse IP publique de ce noeud n'est pas autorisée via le pare-feu local
 
 Si vous avez supprimé un noeud worker :
 
-* Ce noeud worker constituait le seul noeud sur lequel un pod VPN s'exécutait, en raison des restrictions relatives à certaines annotations taint ou libellés dans vos paramètres `tolerations` ou `nodeSelector`
+* Ce noeud worker constituait le seul noeud sur lequel un pod VPN s'exécutait, en raison des restrictions relatives à certaines annotations taint ou étiquettes dans vos paramètres `tolerations` ou `nodeSelector`
 
 {: tsResolve}
 Mettez à jour les valeurs de la charte Helm pour répercuter les modifications du noeud worker :
@@ -616,7 +550,7 @@ Pour vous assurer que tous les facteurs Calico sont en phase :
 
 1. Affichez la version de votre cluster Kubernetes.
     ```
-    ibmcloud ks cluster-get <cluster_name>
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
@@ -627,80 +561,13 @@ Pour vous assurer que tous les facteurs Calico sont en phase :
 
     * Si la version de votre cluster correspond à Kubernetes version 1.9 ou antérieure :
         1. [Installez et configurez l'interface CLI de Calico version 1.6.3](cs_network_policy.html#1.9_install). Vérifiez que le fichier `calicoctl.cfg` utilise la syntaxe de Calico v2.
-        2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v2 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+        2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v2 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy). 
         3. Pour [afficher les règles](cs_network_policy.html#1.9_examine_policies), vérifiez que vous utilisez la commande `calicoctl get policy`.
 
 Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 <br />
-
-
-## Impossible d'ajouter des noeuds worker en raison d'un ID de VLAN non valide
-{: #suspended}
-
-{: tsSymptoms}
-Votre compte {{site.data.keyword.Bluemix_notm}} a été suspendu ou tous les noeuds worker de votre cluster ont été supprimés. Une fois le compte réactivé, vous ne pouvez pas ajouter de noeuds worker lorsque vous tentez de redimensionner ou de rééquilibrer votre pool de noeuds worker. Vous voyez un message d'erreur de ce type :
-
-```
-SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
-```
-{: screen}
-
-{: tsCauses}
-Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte sont supprimés. S'il n'y a aucun noeud worker dans un cluster, l'infractructure IBM Cloud (SoftLayer) récupère les VLAN public et privé associés. Cependant, le pool de noeuds worker dispose toujours des ID de VLAN précédents parmi ses métadonnées et il utilise ces deux ID qui ne sont plus disponibles lors du rééquilibrage ou du redimensionnement du pool. Les noeuds ne parviennent pas à être créés car ces VLAN ne sont plus associés au cluster.
-
-{: tsResolve}
-
-Vous pouvez [supprimer votre pool de noeuds worker](cs_cli_reference.html#cs_worker_pool_rm), puis [créer un nouveau pool de noeuds worker](cs_cli_reference.html#cs_worker_pool_create).
-
-Sinon, vous pouvez conserver votre pool de noeuds worker en commandant des nouveaux VLAN que vous utiliserez pour créer de nouveaux noeuds worker dans le pool.
-
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
-
-1.  Pour obtenir les zones pour lesquelles vous devez obtenir les nouveaux ID de VLAN, notez l'**emplacement** dans la sortie de la commande suivante. **Remarque** : Si vous disposez d'un cluster à zones multiples, vous avez besoin des ID de VLAN pour chaque zone.
-
-    ```
-    ibmcloud ks clusters
-    ```
-    {: pre}
-
-2.  Obtenez un nouveau VLAN privé et un nouveau VLAN public pour chaque zone dans laquelle réside votre cluster en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans).
-
-3.  Notez les ID des nouveaux VLAN privé et VLAN public pour chaque zone.
-
-4.  Notez le nom de votre pool de noeuds worker.
-
-    ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-5.  Utilisez la [commande](cs_cli_reference.html#cs_zone_network_set)  `zone-network-set` pour modifier les métadonnées de réseau du pool de noeuds worker.
-
-    ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
-    ```
-    {: pre}
-
-6.  **Cluster à zones multiples uniquement** : répétez l'**étape 5** pour chaque zone dans votre cluster.
-
-7.  Rééquilibrez ou redimensionnez votre pool de noeuds worker pour ajouter des noeuds worker utilisant les nouveaux ID des VLAN. Exemple :
-
-    ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-8.  Vérifiez que vos noeuds worker ont été créés.
-
-    ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
-    ```
-    {: pre}
-
-<br />
-
 
 
 ## Aide et assistance
@@ -718,10 +585,11 @@ Vous avez encore des problèmes avec votre cluster ?
 
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
-    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
+    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
+pour plus d'informations sur l'utilisation des forums.
 
 -   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`.
+Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
 

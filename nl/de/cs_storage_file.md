@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -33,7 +33,7 @@ Jede Speicherklasse gibt den Typ des Dateispeichers an, den Sie bereitstellen, e
 **Wichtig:** Stellen Sie sicher, dass die Speicherkonfiguration sorgfältig ausgewählt ist, damit genügend Kapazität zum Speichern Ihrer Daten vorhanden ist. Nachdem Sie mithilfe einer Speicherklasse einen bestimmten Typ von Speicher bereitgestellt haben, können Sie die Größe, den Typ, die E/A-Operationen pro Sekunde oder die Aufbewahrungsrichtlinie für die Speichereinheit nicht mehr ändern. Wenn Sie mehr Speicher oder Speicher mit einer anderen Konfiguration benötigen, müssen Sie [eine neue Speicherinstanz erstellen und die Daten](cs_storage_basics.html#update_storageclass) aus der alten Speicherinstanz in die neue kopieren.
 
 1. Listen Sie die in {{site.data.keyword.containerlong}} verfügbaren Speicherklassen auf.
-```
+    ```
     kubectl get storageclasses | grep file
     ```
     {: pre}
@@ -59,14 +59,16 @@ Jede Speicherklasse gibt den Typ des Dateispeichers an, den Sie bereitstellen, e
    ```
    {: pre}
 
-   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie nichts Entsprechendes finden, können Sie eine eigene angepasste Speicherklasse erstellen. Prüfen Sie zunächst die [Beispiele für angepasste Speicherklassen](#custom_storageclass).{: tip}
+   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie nichts Entsprechendes finden, können Sie eine eigene angepasste Speicherklasse erstellen. Prüfen Sie zunächst die [Beispiele für angepasste Speicherklassen](#custom_storageclass).
+   {: tip}
 
 3. Wählen Sie den Typ des Dateispeichers aus, den Sie bereitstellen möchten.
    - **Speicherklassen 'bronze', 'silver' und 'gold':** Diese Speicherklassen stellen [Endurance-Speicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/endurance-storage) bereit. Mit dem Endurance-Speicher können Sie in vordefinierten Tiers für E/A-Operationen pro Sekunde die Größe des Speichers in Gigabyte auswählen.
    - **Speicherklasse 'custom':** Diese Speicherklasse stellt [Leistungsspeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/performance-storage) bereit. Mit dem Leistungsspeicher können Sie die Größe des Speichers und der E/A-Operationen pro Sekunde besser steuern.
 
 4. Wählen Sie für Ihren Dateispeicher die Größe und die Anzahl E/A-Operationen pro Sekunde aus. Die Größe und die Anzahl der E/A-Operationen pro Sekunde definieren die Gesamtzahl der E/A-Operationen pro Sekunde, die als Indikator für die Geschwindigkeit des Speichers dient. Je höher die Anzahl der E/A-Operationen pro Sekunde für Ihren Speicher ist, desto höher ist dessen Verarbeitungsgeschwindigkeit für Lese- und Schreiboperationen.
-   - **Speicherklassen 'bronze', 'silver' und 'gold':** Diese Speicherklassen haben eine feste Anzahl von pro Gigabyte angegebenen E/A-Operationen pro Sekunde und werden auf SSD-Festplatten bereitgestellt. Die Gesamtzahl der E/A-Operationen pro Sekunde hängt von der Größe des von Ihnen ausgewählten Speichers ab. Sie können innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen, z. B. 20, 256 oder 11854 Gigabyte. Um die Gesamtzahl der E/A-Operationen pro Sekunde zu ermitteln, müssen Sie die E/A-Operationen pro Sekunde mit der ausgewählten Größe multiplizieren. Wenn Sie beispielsweise in der Speicherklasse 'silver', die 4 E/A-Operationen pro Sekunde aufweist, als Größe des Dateispeichers 1000 Gigabyte (1000Gi) auswählen, hat Ihr Speicher eine Gesamtzahl von 4000 E/A-Operationen pro Sekunde.<table>
+   - **Speicherklassen 'bronze', 'silver' und 'gold':** Diese Speicherklassen haben eine feste Anzahl von pro Gigabyte angegebenen E/A-Operationen pro Sekunde und werden auf SSD-Festplatten bereitgestellt. Die Gesamtzahl der E/A-Operationen pro Sekunde hängt von der Größe des von Ihnen ausgewählten Speichers ab. Sie können innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen, z. B. 20, 256 oder 11854 Gigabyte. Um die Gesamtzahl der E/A-Operationen pro Sekunde zu ermitteln, müssen Sie die E/A-Operationen pro Sekunde mit der ausgewählten Größe multiplizieren. Wenn Sie beispielsweise in der Speicherklasse 'silver', die 4 E/A-Operationen pro Sekunde aufweist, als Größe des Dateispeichers 1000 Gigabyte (1000Gi) auswählen, hat Ihr Speicher eine Gesamtzahl von 4000 E/A-Operationen pro Sekunde.
+     <table>
          <caption>Tabelle der Größenbereiche der Speicherklasse und der IOPS pro Gigabyte</caption>
          <thead>
          <th>Speicherklasse</th>
@@ -90,7 +92,7 @@ Jede Speicherklasse gibt den Typ des Dateispeichers an, den Sie bereitstellen, e
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Speicherklasse 'custom':** Wenn Sie diese Speicherklasse auswählen, können Sie die gewünschte Größe und Anzahl der E/A-Operationen pro Sekunde besser steuern. Als Größe können Sie innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen. Die von Ihnen gewählte Größe legt den Bereich der für Sie verfügbaren E/A-Operationen pro Sekunde fest. Sie können eine Anzahl von E/A-Operationen pro Sekunde auswählen, bei der es sich um eine Vielzahl von 100 handelt und die sich im angegebenen Bereich befindet. Der von Ihnen ausgewählte Wert für E/A-Operationen pro Sekunde ist statisch und wird nicht mit der Größe des Speichers skaliert. Wenn Sie beispielsweise 40 Gigabyte (40Gi) mit 100 E/A-Operationen pro Sekunde auswählen, bleibt die Gesamtzahl der E/A-Operationen pro Sekunde bei 100.</br></br> Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt auch den Typ der Festplatte, die für Sie bereitgestellt wird. Beispiel: Wenn Sie beispielsweise 500 Gigabyte (500Gi) bei 100 E/A-Operationen pro Sekunde haben, ist das Verhältnis E/A-Operationen pro Sekunde zu Gigabyte 0,2. Speicher mit einem Verhältnis von kleiner-gleich 0,3 wird auf SATA-Festplatten bereitgestellt. Wenn das Verhältnis größer als 0,3 ist, wird Ihr Speicher auf SSD-Festplatten bereitgestellt.  
+   - **Speicherklasse 'custom':** Wenn Sie diese Speicherklasse auswählen, können Sie die gewünschte Größe und Anzahl der E/A-Operationen pro Sekunde besser steuern. Als Größe können Sie innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen. Die von Ihnen gewählte Größe legt den Bereich der für Sie verfügbaren E/A-Operationen pro Sekunde fest. Sie können eine Anzahl von E/A-Operationen pro Sekunde auswählen, bei der es sich um eine Vielzahl von 100 handelt und die sich im angegebenen Bereich befindet. Der von Ihnen ausgewählte Wert für E/A-Operationen pro Sekunde ist statisch und wird nicht mit der Größe des Speichers skaliert. Wenn Sie beispielsweise 40 Gigabyte (40Gi) mit 100 E/A-Operationen pro Sekunde auswählen, bleibt die Gesamtzahl der E/A-Operationen pro Sekunde bei 100. </br></br> Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt auch den Typ der Festplatte, die für Sie bereitgestellt wird. Beispiel: Wenn Sie beispielsweise 500 Gigabyte (500Gi) bei 100 E/A-Operationen pro Sekunde haben, ist das Verhältnis E/A-Operationen pro Sekunde zu Gigabyte 0,2. Speicher mit einem Verhältnis von kleiner-gleich 0,3 wird auf SATA-Festplatten bereitgestellt. Wenn das Verhältnis größer als 0,3 ist, wird Ihr Speicher auf SSD-Festplatten bereitgestellt.  
      <table>
          <caption>Tabelle mit Größenbereichen und der Anzahl E/A-Operationen pro Sekunde (IOPS) für Speicherklassen des Typs 'custom'</caption>
          <thead>
@@ -146,9 +148,11 @@ Jede Speicherklasse gibt den Typ des Dateispeichers an, den Sie bereitstellen, e
 
 5. Wählen Sie diese Option aus, wenn die Daten nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen.
    - Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur (SoftLayer) und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Dateispeicher](#existing_file) ausführen.
-   - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen.
+   - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen. 
+**Hinweis**: Wenn Sie über ein Dedicated-Konto verfügen, wählen Sie eine Speicherklasse ohne `retain` aus, um zu verhindern, dass es verwaiste Datenträger in der IBM Cloud-Infrastruktur (SoftLayer) gibt.
 
-6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing). Standardmäßig werden alle Dateispeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt. **Anmerkung:** Wenn Sie als Abrechnungstyp 'Monatlich' wählen, zahlen Sie beim Entfernen des persistenten Speichers immer noch eine monatliche Gebühr für ihn, selbst dann, wenn Sie den Speicher nur für eine kurze Zeit genutzt haben.
+6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing). Standardmäßig werden alle Dateispeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt.
+   **Anmerkung:** Wenn Sie als Abrechnungstyp 'Monatlich' wählen, zahlen Sie beim Entfernen des persistenten Speichers immer noch eine monatliche Gebühr für ihn, selbst dann, wenn Sie den Speicher nur für eine kurze Zeit genutzt haben.
 
 <br />
 
@@ -157,7 +161,8 @@ Jede Speicherklasse gibt den Typ des Dateispeichers an, den Sie bereitstellen, e
 ## Dateispeicher zu Apps hinzufügen
 {: #add_file}
 
-Erstellen Sie einen Persistent Volume Claim (PVC), um Dateispeicher für Ihren Cluster [dynamisch bereitzustellen](cs_storage_basics.html#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die physische Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bestellt.{:shortdesc}
+Erstellen Sie einen Persistent Volume Claim (PVC), um Dateispeicher für Ihren Cluster [dynamisch bereitzustellen](cs_storage_basics.html#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die physische Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bestellt.
+{:shortdesc}
 
 Vorbemerkungen:
 - Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](cs_firewall.html#pvc) für die IBM Cloud-Infrastruktur-IP-Bereiche (SoftLayer) der Zonen, in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims (PVCs) erstellen können.
@@ -228,7 +233,11 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
         </tr>
         <tr>
           <td><code>metadata/labels/billingType</code></td>
-          <td>Geben Sie die Häufigkeit an, mit der Ihre Speicherrechnung berechnet wird, monatlich ("monthly") oder stündlich ("hourly"). Wenn Sie keinen Abrechnungstyp angeben, wird der Speicher mit dem Abrechnungstyp 'Stündlich' (Hourly) bereitgestellt.</td>
+          <td>Geben Sie die Häufigkeit an, mit der Ihre Speicherrechnung berechnet wird, monatlich ("monthly") oder stündlich ("hourly"). Wenn Sie keinen Abrechnungstyp angeben, wird der Speicher mit dem Abrechnungstyp 'Stündlich' (Hourly) bereitgestellt. </td>
+        </tr>
+        <tr>
+        <td><code>spec/accessMode</code></td>
+        <td>Geben Sie eine der folgenden Optionen an: <ul><li><strong>ReadWriteMany:</strong> Der PVC kann von mehreren Pods angehängt werden. Alle Pods können von diesem Datenträger lesen und auf diesen Datenträger schreiben.</li><li><strong>ReadOnlyMany:</strong> Der PVC kann von mehreren Pods angehängt werden. Alle Pods verfügen über Lesezugriff.<li><strong>ReadWriteOnce:</strong> Der PVC kann nur von einem Pod angehängt werden. Dieser Pod kann von diesem Datenträger lesen und auf diesen Datenträger schreiben.</li></ul></td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -280,7 +289,8 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
 
 4.  {: #app_volume_mount}Erstellen Sie zum Anhängen des Speichers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den persistenten Datenträger bindet.
 
-    Wenn Sie über eine App verfügen, für die erforderlich ist, dass ein Benutzer ohne Rootberechtigung in den persistenten Speicher schreibt, oder eine App, für die erforderlich ist, dass der Rootbenutzer Eigner des Mountpfads ist, finden Sie weitere Informationen unter [Zugriff für Benutzer ohne Rootberechtigung auf NFS-Dateispeicher hinzufügen](cs_troubleshoot_storage.html#nonroot) oder [Rootberechtigung für NFS-Dateispeicher aktivieren](cs_troubleshoot_storage.html#nonroot).{: tip}
+    Wenn Sie über eine App verfügen, für die erforderlich ist, dass ein Benutzer ohne Rootberechtigung in den persistenten Speicher schreibt, oder eine App, für die erforderlich ist, dass der Rootbenutzer Eigner des Mountpfads ist, finden Sie weitere Informationen unter [Zugriff für Benutzer ohne Rootberechtigung auf NFS-Dateispeicher hinzufügen](cs_troubleshoot_storage.html#nonroot) oder [Rootberechtigung für NFS-Dateispeicher aktivieren](cs_troubleshoot_storage.html#nonroot).
+    {: tip}
 
     ```
     apiVersion: apps/v1beta1
@@ -339,7 +349,7 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird.</td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden unter dem Verzeichnis <code>root</code> in Ihrer physischen Dateispeicherinstanz gespeichert. Um Verzeichnisse in Ihrer physischen Dateispeicherinstanz zu erstellen, müssen Sie Unterverzeichnisse in Ihrem Mountpfad erstellen.</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -351,12 +361,12 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>volumes/persistentVolumeClaim/claimName</code></td>
-    <td>Der Name des PVC, der den zu verwendenden persistenten Datenträger bindet.</td>
+    <td>Der Name des PVC, der den zu verwendenden persistenten Datenträger bindet. </td>
     </tr>
     </tbody></table>
 
 5.  Erstellen Sie die Bereitstellung.
-```
+     ```
      kubectl apply -f <lokaler_yaml-pfad>
      ```
      {: pre}
@@ -438,13 +448,15 @@ Wenn Sie den in einem Cluster bereitgestellten Speicher auch in einem anderen Cl
 **Für persistenten Speicher, der außerhalb des Clusters bereitgestellt wurde:** </br>
 Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitgestellt, aber noch nie zuvor in Ihrem Cluster verwendet haben, müssen Sie den Speicher in demselben Teilnetz wie Ihre Workerknoten verfügbar machen.
 
+**Hinweis**: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
 1.  {: #external_storage}Klicken Sie im [Portal der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://control.bluemix.net/) auf **Speicher**.
 2.  Klicken Sie auf **Dateispeicher** und wählen Sie im Menü **Aktionen** die Option zum Autorisieren des Hosts**** aus.
 3.  Wählen Sie **Teilnetze** aus.
 4.  Wählen Sie in der Dropdown-Liste das private VLAN-Teilnetz aus, mit dem der Workerknoten verbunden ist. Um das Teilnetz Ihres Workerknotens zu finden, führen Sie den Befehl `ibmcloud ks workers <cluster_name>` aus und vergleichen Sie die `Private IP` Ihres Workerknotens mit dem Teilnetz, das Sie in der Dropdown-Liste gefunden haben.
 5.  Klicken Sie auf **Übergeben**.
 6.  Klicken Sie auf den Namen des Dateispeichers.
-7.  Notieren Sie die Werte in den Feldern `Mount Point`, `size` und `Location`. Das Feld `Mount Point` wird als `<server>:/<path>` angezeigt.
+7.  Notieren Sie die Werte in den Feldern `Mountpunkt`, `Größe` und `Standort`. Das Feld `Mountpunkt` wird als `<nfs_server>:<file_storage_path>` angezeigt.
 
 ### Schritt 2: Persistenten Datenträger (PV) und übereinstimmenden Persistent Volume Claim (PVC) erstellen
 
@@ -488,6 +500,10 @@ Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitge
     <td>Geben Sie die Speichergröße der vorhandenen NFS-Dateifreigabe ein, die Sie zuvor abgerufen haben. Die Größe des Speichers muss in Gigabyte angegeben werden, z. B. 20Gi (20 GB) oder 1000Gi (1 TB), und sie muss mit der Größe der vorhandenen Dateifreigabe übereinstimmen.</td>
     </tr>
     <tr>
+    <td><code>spec/accessMode</code></td>
+    <td>Geben Sie eine der folgenden Optionen an: <ul><li><strong>ReadWriteMany:</strong> Der PVC kann von mehreren Pods angehängt werden. Alle Pods können von diesem Datenträger lesen und auf diesen Datenträger schreiben.</li><li><strong>ReadOnlyMany:</strong> Der PVC kann von mehreren Pods angehängt werden. Alle Pods verfügen über Lesezugriff.<li><strong>ReadWriteOnce:</strong> Der PVC kann nur von einem Pod angehängt werden. Dieser Pod kann von diesem Datenträger lesen und auf diesen Datenträger schreiben.</li></ul></td>
+    </tr>
+    <tr>
     <td><code>spec/nfs/server</code></td>
     <td>Geben Sie die Server-ID der NFS-Dateifreigabe ein, die Sie zuvor abgerufen haben.</td>
     </tr>
@@ -500,7 +516,7 @@ Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitge
 3.  Erstellen Sie das PV in Ihrem Cluster.
 
     ```
-    kubectl apply -f deploy/kube-config/mypv.yaml
+    kubectl apply -f mypv.yaml
     ```
     {: pre}
 
@@ -532,7 +548,7 @@ Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitge
 6.  Erstellen Sie Ihren PVC.
 
     ```
-    kubectl apply -f deploy/kube-config/mypvc.yaml
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -580,12 +596,11 @@ Um die NFS-Standardversion zu ändern, können Sie entweder eine neue Speicherkl
 
 **Wichtig:** Um die aktuellen Sicherheitsupdates anzuwenden und eine bessere Leistung zu erzielen, verwenden Sie die NFS-Standardversion und wechseln nicht zu einer älteren NFS-Version.
 
-
 **Gehen Sie wie folgt vor, um eine angepasste Speicherklasse mit der gewünschten NFS-Version zu erstellen:**
 1. Erstellen Sie eine [angepasste Speicherklasse (custom)](#nfs_version_class), die die NFS-Version aufweist, die Sie bereitstellen möchten.
 2. Erstellen Sie die Speicherklasse in Ihrem Cluster.
    ```
-   kubectl apply -f <filepath/nfsversion_storageclass.yaml>
+   kubectl apply -f nfsversion_storageclass.yaml
    ```
    {: pre}
 
@@ -626,7 +641,7 @@ Um die NFS-Standardversion zu ändern, können Sie entweder eine neue Speicherkl
 
    3. Erstellen Sie den Pod erneut.
       ```
-      kubectl apply -f <filepath/pod.yaml>
+      kubectl apply -f pod.yaml
       ```
       {: pre}
 
@@ -669,12 +684,12 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage/snapshots.html) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. </br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>    kubectl get pv
-    </code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Datenträger-ID, die Größe und den Wert für die Anzahl E/A-Operationen pro Sekunde finden Sie im Abschnitt <strong>Labels</strong> der CLI-Ausgabe.</li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;größe&gt; --tier &lt;iops&gt; &lt;datenträger-id&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>slcli file volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Capacity (GB)</strong> in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>slcli file snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>slcli file volume-detail &lt;snapshot-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;datenträger-id&gt;</code></pre></p></dd>
+  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage/snapshots.html) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>    kubectl get pv
+    </code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Datenträger-ID, die Größe und den Wert für die Anzahl E/A-Operationen pro Sekunde finden Sie im Abschnitt <strong>Labels</strong> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;größe&gt; --tier &lt;iops&gt; &lt;datenträger-id&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>slcli file volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Capacity (GB)</strong> in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>slcli file snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>slcli file volume-detail &lt;snapshot-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;datenträger-id&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>
- <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Dateispeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/FileStorage/replication.html#replicating-data). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Dateispeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen. </p></dd>
+ <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Dateispeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/FileStorage/replication.html#replicating-data). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Dateispeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, können Sie keine Snapshots in eine andere Zone replizieren.</p></dd>
  <dt>Speicher duplizieren</dt>
- <dd><p>Sie können Ihre [Dateispeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Zur Vorbereitung einer Duplizierung müssen Sie zunächst [Snapshots für den Datenträger erstellen](/docs/infrastructure/FileStorage/snapshots.html).</p></dd>
+ <dd><p>Sie können Ihre [Dateispeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Zur Vorbereitung einer Duplizierung müssen Sie zunächst [Snapshots für den Datenträger erstellen](/docs/infrastructure/FileStorage/snapshots.html). <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ein Support-Ticket öffnen</a>.</p></dd>
   <dt>Daten in {{site.data.keyword.cos_full}} sichern</dt>
   <dd><p>Sie können den Befehl [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) verwenden, damit ein Pod für Sicherung und Wiederherstellung in Ihrem Cluster den Betrieb aufnimmt. Dieser Pod enthält ein Script zur Ausführung einer einmaligen oder regelmäßigen Sicherung für alle PVCs (Persistent Volume Claims) in Ihrem Cluster. Die Daten werden in Ihrer {{site.data.keyword.cos_full}}-Instanz gespeichert, die Sie in einer Zone konfiguriert haben.</p>
   <p>Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_full}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_full}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</p></dd>
@@ -685,7 +700,7 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 <ul>
 <li>Kopieren Sie Daten von Ihrer lokalen Maschine in einen Pod in Ihrem Cluster: <pre class="pre"><code>kubectl cp <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var> <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;</var></code></pre></li>
 <li>Kopieren Sie Daten von einem Pod in Ihrem Cluster auf Ihre lokale Maschine: <pre class="pre"><code>kubectl cp <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;/&lt;dateiname&gt;</var> <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var></code></pre></li>
-<li>Kopieren Sie Daten von einem Pod in Ihrem Cluster in einen spezifischen Container in einem anderen Pod: <pre class="pre"><code>kubectl cp <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;</var> <var>&lt;namensbereich&gt;/&lt;anderer_pod&gt;:&lt;dateipfad_des_pods&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>Kopieren Sie Daten von Ihrer lokalen Maschine in einen bestimmten Container, der in einem Pod in Ihrem Cluster ausgeführt wird: <pre class="pre"><code>kubectl cp <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var> <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;pod-dateipfad&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -859,7 +874,7 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 </tr>
 <tr>
 <td>Festplatte</td>
-<td>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers.</br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul></td>
+<td>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers. </br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul></td>
 </tr>
 <tr>
 <td>Abrechnung</td>
@@ -875,13 +890,13 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 <br />
 
 
-## Beispiele für angepasste Speicherklassen (custom) 
+## Beispiele für angepasste Speicherklassen (custom)
 {: #custom_storageclass}
 
 ### Zone angeben (bei Mehrzonencluster)
 {: #multizone_yaml}
 
-Die folgende `.yaml`-Datei passt eine Speicherklasse an, die auf der Speicherklasse `ibm-file-silver` ohne 'retain' (Beibehaltung) basiert: Der Typ (`type`) ist `"Endurance"`, der Wert für `iopsPerGB` ist `4`, der Wert für `sizeRange` ist `"[20-12000]Gi"` und für `reclaimPolicy` wird die Einstellung `"Delete"` festgelegt. Die Zone wird als `dal12` angegeben. Als Unterstützung für die Festlegung von zulässigen Werten können Sie die oben stehenden Informationen zu `ibmc`-Speicherklassen erneut lesen.</br>
+Die folgende `.yaml`-Datei passt eine Speicherklasse an, die auf der Speicherklasse `ibm-file-silver` ohne 'retain' (Beibehaltung) basiert: Der Typ (`type`) ist `"Endurance"`, der Wert für `iopsPerGB` ist `4`, der Wert für `sizeRange` ist `"[20-12000]Gi"` und für `reclaimPolicy` wird die Einstellung `"Delete"` festgelegt. Die Zone wird als `dal12` angegeben. Als Unterstützung für die Festlegung von zulässigen Werten können Sie die oben stehenden Informationen zu `ibmc`-Speicherklassen erneut lesen. </br>
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -900,7 +915,7 @@ reclaimPolicy: "Delete"
 ```
 {: codeblock}
 
-+### NEF-Standardversion ändern
+### NFS-Standardversion ändern
 {: #nfs_version_class}
 
 Die folgende angepasste Speicherklasse hat als Basis die [Speicherklasse `ibmc-file-bronze`](#bronze) und gibt Ihnen die Möglichkeit, die bereitzustellende NFS-Version zu definieren. Um beispielsweise NFS Version 3.0 bereitzustellen, ersetzen Sie `<nfs_version>` durch **3.0**.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -29,11 +29,11 @@ Como administrador del clúster, desea controlar lo que sucede en el clúster, e
 
 Con el controlador de admisiones `PodSecurityPolicy`, no se pueden crear pods hasta después de [autorizar políticas](#customize_psp). La configuración de políticas de seguridad de pod puede tener efectos secundarios no deseados, por lo tanto asegúrese de probar un despliegue después de cambiar la política. Para desplegar apps, las cuentas de usuario y de servicio deben estar autorizadas por las políticas de seguridad de pod necesarias para desplegar pods. Por ejemplo, si instala apps utilizando [Helm](cs_integrations.html#helm_links), el componente tiller de Helm crea pods y, por lo tanto, debe tener la autorización de política de seguridad de pod correcta.
 
-¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containershort_notm}}? Consulte [Asignación de acceso de clúster](cs_users.html#users) para establecer los permisos de IAM y de infraestructura.
+¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](cs_users.html#users) para establecer los permisos de IAM y de infraestructura.
 {: tip}
 
 **¿Hay políticas predeterminadas establecidas? ¿Qué puedo añadir?**</br>
-De forma predeterminada, {{site.data.keyword.containershort_notm}} configura el controlador de admisiones `PodSecurityPolicy` con [recursos para la gestión de clústeres de {{site.data.keyword.IBM_notm}}](#ibm_psp) que no puede suprimir ni modificar. Tampoco puede inhabilitar el controlador de admisiones. 
+De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el controlador de admisiones `PodSecurityPolicy` con [recursos para la gestión de clústeres de {{site.data.keyword.IBM_notm}}](#ibm_psp) que no puede suprimir ni modificar. Tampoco puede inhabilitar el controlador de admisiones. 
 
 Las acciones de pod no están bloqueadas de forma predeterminada. En su lugar, dos recursos de control de acceso basados en rol (RBAC) del clúster autorizan a todos los administradores, usuarios, servicios y nodos a crear pods privilegiados y sin privilegios. Si desea evitar que determinados usuarios creen o actualicen pods, puede [modificar estos recursos de RBAC o crear el suyo propio su propio](#customize_psp).
 
@@ -177,7 +177,7 @@ Asegúrese de que ha modificado las políticas existentes de modo que la nueva p
 ## Visión general de los recursos predeterminados para la gestión de clústeres de {{site.data.keyword.IBM_notm}}
 {: #ibm_psp}
 
-El clúster de Kubernetes en {{site.data.keyword.containershort_notm}} contiene las siguientes políticas de seguridad de pod y los recursos de RBAC relacionados para permitir que {{site.data.keyword.IBM_notm}} gestione correctamente el clúster.
+El clúster de Kubernetes en {{site.data.keyword.containerlong_notm}} contiene las siguientes políticas de seguridad de pod y los recursos de RBAC relacionados para permitir que {{site.data.keyword.IBM_notm}} gestione correctamente el clúster.
 {: shortdesc}
 
 Los recursos de RBAC predeterminados `privileged-psp-user` y `restricted-psp-user` hacen referencia a las políticas de seguridad de pod definidas por {{site.data.keyword.IBM_notm}}. 

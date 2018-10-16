@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-08-06"
 Sie können Kubernetes-Verfahren in {{site.data.keyword.containerlong}} verwenden, um Apps in Containern bereitzustellen und um sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen.
 {: shortdesc}
 
-Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, indem Sie auf einen Bereich der folgenden Abbildung klicken. Möchten Sie zuerst die Grundlagen lernen? Probieren Sie dazu das [Lernprogramm zum Bereitstellen von Apps](cs_tutorials_apps.html#cs_apps_tutorial) aus.
+Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, indem Sie auf einen Bereich der folgenden Abbildung klicken.
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Basisbereitstellungsprozess"/>
 <map name="d62e18" id="d62e18">
@@ -34,9 +34,8 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 <area href="#cli_dashboard" target="_blank" alt="Option 2: Starten Sie das Kubernetes-Dashboard lokal und führen Sie Konfigurationsdateien aus." title="Option 2: Starten Sie das Kubernetes-Dashboard lokal und führen Sie Konfigurationsdateien aus." shape="rect" coords="544, 141, 728, 204" />
 </map>
 
+
 <br />
-
-
 
 
 ## Bereitstellungen mit Hochverfügbarkeit planen
@@ -47,13 +46,17 @@ Je breiter gefächert Sie Ihre Containerkonfiguration auf mehrere Workerknoten u
 
 Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
 
-![Stufen der Hochverfügbarkeit für eine App](images/cs_app_ha_roadmap-mz.png)
+![Stufen der Hochverfügbarkeit für eine App](images/cs_app_ha_roadmap.png)
 
-1.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe in einem Knoten in einem einzelnen Cluster mit einer Zone erfolgt.
-2.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem einzelnen Cluster mit einer Zone verteilt sind.
-3.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem Cluster mit mehreren Zonen verteilt sind.
+1.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt.
+2.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten
+(Anti-Affinität) an demselben Standort verteilt sind.
+3.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten
+(Anti-Affinität) an unterschiedlichen Standorten verteilt sind.
+4.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in unterschiedlichen Regionen verteilt sind.
 
-Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen Lastausgleichsfunktion verbinden](cs_clusters.html#multiple_clusters), um die hohe Verfügbarkeit zu erweitern.
+
+
 
 ### Verfügbarkeit Ihrer App erhöhen
 {: #increase_availability}
@@ -73,20 +76,13 @@ Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen L
     <p><strong>Beispiele für YAML-Bereitstellungsdateien</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">Nginx-App mit bevorzugter Anti-Affinität für Pods</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">IBM® WebSphere® Application Server Liberty-App mit erforderlicher Anti-Affinität für Pods</a></li></ul></p>
-    
     </dd>
 <dt>Pods auf mehrere Zonen oder Regionen verteilen</dt>
-  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metro-Bereichen](cs_regions.html#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](cs_clusters.html#multiple_clusters).</p>
-  <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](cs_clusters.html#ha_clusters).</p>
-  <p><strong>Sind in einer Bereitstellung mit Mehrzonencluster meine App-Pods gleichmäßig über die Knoten hinweg verteilt?</strong></p>
-  <p>Die Pods sind gleichmäßig über die Zonen verteilt, aber nicht immer über Knoten hinweg. Wenn Sie beispielsweise über einen Cluster mit einem Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods implementieren, erhält jeder Knoten zwei Pods. Wenn Sie jedoch über einen Cluster mit zwei Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods bereitstellen, sind für jede Zone zwei Pods geplant und es kann ein Pod pro Knoten geplant werden (oder auch nicht). Für mehr Kontrolle über die Zeitplanung können Sie [die Pod-Affinität festlegen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>Wie werden Pods auf den verbleibenden Knoten in den anderen Zonen erneut geplant, wenn eine Zone inaktiv wird?</strong></br>Dies hängt von Ihrer Planungsrichtlinie ab, die Sie in der Bereitstellung verwendet haben. Wenn Sie eine [knotenspezifische Pod-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) angegeben haben, werden die Pods nicht erneut geplant. Wenn Sie dies nicht getan haben, werden die Pods auf verfügbaren Workerknoten in anderen Zonen erstellt, aber sie sind möglicherweise nicht ausgeglichen. Die beiden Pods können beispielsweise über die beiden verfügbaren Knoten verteilt sein, oder sie können beide für einen Knoten mit verfügbarer Kapazität geplant werden. In ähnlicher Weise werden Pods nicht automatisch neu gelöscht und über Knoten hinweg verteilt, wenn die nicht verfügbare Zone wieder verfügbar wird. Wenn Sie möchten, dass die Pods in den Zonen neu verteilt werden, wenn die Zone wieder aktiv ist, sollten Sie den [Kubernetes Descheduler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/descheduler) verwenden.</p>
-  <p><strong>Tipp</strong>: Versuchen Sie in Mehrzonenclustern, die Workerknotenkapazität bei 50 % pro Zone zu halten, damit Ihnen ausreichend Kapazität bleibt, um Ihren Cluster vor einem Zonenausfall zu schützen.</p>
-  <p><strong>Was ist, wenn ich meine App auf Regionen verteilen möchte?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](cs_clusters.html#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
-  <p><strong>Was ist, wenn meine Apps persistenten Speicher benötigen?</strong></p>
-  <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
+  <dd>Als Schutz Ihrer App vor einem Ausfall des Standorts oder der Region können Sie an einem anderen Standort oder in einer anderen Region
+einen zweiten Cluster erstellen und mit der YAML-Datei für die Bereitstellung ein Duplikat der Replikatgruppe bereitstellen. Durch Einfügen einer gemeinsam genutzten Route und einer Lastausgleichsfunktion (Load Balancer)
+vor Ihren Clustern können Sie eine Verteilung der Arbeitslast auf mehrere Standorte oder Regionen bewirken. Weitere Informationen finden Sie unter [Hochverfügbarkeit von Clustern](cs_clusters.html#clusters).
+  </dd>
 </dl>
-
 
 
 ### Minimale App-Bereitstellung
@@ -140,74 +136,97 @@ Um mehr über die einzelnen Komponenten zu erfahren, lesen Sie sich den Abschnit
 
 
 
-
-
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
 Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der GUI](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashoard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
+Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus. Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
 **Kubernetes-Dashboard über die GUI starten**
 {: #db_gui}
 
-1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) an.
+1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) an. 
 2.  Wählen Sie in Ihrem Profil in der Menüleiste das Konto aus, das Sie verwenden möchten.
 3.  Klicken Sie im Menü auf **Container**.
 4.  Klicken Sie auf der Seite **Cluster** auf den Cluster, auf den Sie zugreifen möchten.
 5.  Klicken Sie auf der Seite mit den Clusterdetails auf die Schaltfläche **Kubernetes-Dashboard**.
 
-</br>
-</br>
-
 **Kubernetes-Dashboard über die CLI starten**
 {: #db_cli}
 
-1.  Rufen Sie Ihre Berechtigungsnachweise für Kubernetes ab.
+*  Für Cluster mit der Kubernetes-Masterversion 1.7.16 oder einer früheren Version:
 
-    ```
-    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-    ```
-    {: pre}
+    1.  Legen Sie die Standardportnummer für den Proxy fest.
 
-2.  Kopieren Sie den Wert für **id-token**, der in der Ausgabe angezeigt wird.
+        ```
+        kubectl proxy
+        ```
+        {: pre}
 
-3.  Legen Sie die Standardportnummer für den Proxy fest.
+        Ausgabe:
 
-    ```
-    kubectl proxy
-    ```
-    {: pre}
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
 
-    Beispielausgabe:
+    2.  Öffnen Sie das Kubernetes-Dashboard in einem Web-Browser.
 
-    ```
-    Starting to serve on 127.0.0.1:8001
-    ```
-    {: screen}
+        ```
+        http://localhost:8001/ui
+        ```
+        {: codeblock}
 
-4.  Melden Sie sich beim Dashboard an.
+*  Für Cluster mit einer Kubernetes-Masterversion ab Version 1.8.2:
 
-  1.  Navigieren Sie in Ihrem Browser zur folgenden URL:
+    1.  Rufen Sie Ihre Berechtigungsnachweise für Kubernetes ab.
 
-      ```
-      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-      ```
-      {: codeblock}
+        ```
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+        ```
+        {: pre}
 
-  2.  Wählen Sie auf der Anmeldeseite die Authentifizierungsmethode **Token** aus.
+    2.  Kopieren Sie den Wert für **id-token**, der in der Ausgabe angezeigt wird.
 
-  3.  Fügen Sie dann den zuvor kopierten Wert für **id-token** in das Feld **Token** ein und klicken Sie auf **ANMELDEN**.
+    3.  Legen Sie die Standardportnummer für den Proxy fest.
+
+        ```
+        kubectl proxy
+        ```
+        {: pre}
+
+        Beispielausgabe:
+
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
+
+    4.  Melden Sie sich beim Dashboard an.
+
+      1.  Navigieren Sie in Ihrem Browser zur folgenden URL:
+
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
+
+      2.  Wählen Sie auf der Anmeldeseite die Authentifizierungsmethode **Token** aus.
+
+      3.  Fügen Sie dann den zuvor kopierten Wert für **id-token** in das Feld **Token** ein und klicken Sie auf **ANMELDEN**.
 
 Wenn Sie die Arbeit im Kubernetes-Dashboard beendet haben, beenden Sie den Befehl `proxy` mit der Tastenkombination `STRG + C`. Anschließend ist das Kubernetes-Dashboard nicht mehr verfügbar. Führen Sie den Befehl `proxy` aus, um das Kubernetes-Dashboard erneut zu starten.
 
 [Als Nächstes können Sie eine Konfigurationsdatei über das Dashboard ausführen.](#app_ui)
 
+
 <br />
+
+
 
 
 ## Geheime Schlüssel erstellen
@@ -216,127 +235,79 @@ Wenn Sie die Arbeit im Kubernetes-Dashboard beendet haben, beenden Sie den Befeh
 Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar.
 {:shortdesc}
 
-Überprüfen Sie die folgenden Tasks, für die geheime Schlüssel erforderlich sind. Weitere Informationen darüber, was Sie in geheimen Schlüsseln speichern können, finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/secret/).
+<table>
+<caption>Erforderliche Dateien, die nach Task in geheimen Schlüsseln gespeichert werden müssen</caption>
+<thead>
+<th>Task</th>
+<th>Erforderliche Dateien, die in geheimen Schlüssel gespeichert werden müssen</th>
+</thead>
+<tbody>
+<tr>
+<td>Hinzufügen eines Service zu einem Cluster</td>
+<td>Keine. Es wird ein geheimer Schlüssel für Sie erstellt, wenn Sie einen Service an einen Cluster binden.</td>
+</tr>
+<tr>
+<td>Optional: Konfigurieren Sie den Ingress-Service mit TLS, wenn 'ingress-secret' nicht verwendet wird. <p><b>Hinweis</b>: TLS ist bereits standardmäßig aktiviert und ein geheimer Schlüssel wurde bereits für die TLS-Verbindung erstellt.
 
-### Service zu einem Cluster hinzufügen
-{: #secrets_service}
+Gehen Sie wie folgt vor, um den geheimen TLS-Standardschlüssel anzuzeigen:
+<pre>
+bx cs cluster-get &lt;clustername_oder_-id&gt; | grep "Ingress secret"
+</pre>
+</p>
+Um stattdessen Ihren eigenen geheimen Schlüssel zu erstellen, führen Sie die Schritte im nachfolgenden Abschnitt durch.</td>
+<td>Serverzertifikat und -schlüssel: <code>server.crt</code> und <code>server.key</code></td>
+<tr>
+<td>Erstellen Sie die Annotation 'mutual-authentication'.</td>
+<td>Zertifikat der Zertifizierungsstelle: <code>ca.crt</code></td>
+</tr>
+</tbody>
+</table>
 
-Wenn Sie einen Service an einen Cluster binden, müssen Sie keinen geheimen Schlüssel erstellen. Ein geheimer Schlüssel wird automatisch für Sie erstellt. Weitere Informationen hierzu finden Sie im Abschnitt [Cloud-Foundry-Services zu Clustern hinzufügen](cs_integrations.html#adding_cluster).
+Weitere Informationen darüber, was Sie in geheimen Schlüssel speichern können, finden Sie in der [Kubernetes-Dokumentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-### Ingress-ALB für die Verwendung von TLS konfigurieren
-{: #secrets_tls}
 
-Die Lastausgleichsfunktion für Anwendungen verteilt die Lasten des HTTP-Netzverkehrs auf die Apps in Ihrem Cluster. Um auch einen Lastausgleich für eingehende HTTPS-Verbindungen durchführen zu können, können Sie die Lastausgleichsfunktion so konfigurieren, dass der Netzverkehr entschlüsselt und die entschlüsselte Anforderung an die Apps weitergeleitet wird, die in Ihrem Cluster zugänglich sind.
 
-Wenn Sie die von IBM bereitgestellte Ingress-Unterdomäne verwenden, können Sie [das von IBM bereitgestellte TLS-Zertifikat verwenden](cs_ingress.html#public_inside_2). Führen Sie den folgenden Befehl aus, um den von IBM bereitgestellten geheimen TLS-Schlüssel anzuzeigen:
-```
-ibmcloud ks cluster-get <clustername_oder_-id> | grep "Ingress secret"
-```
-{: pre}
+Gehen Sie wie folgt vor, um einen geheimen Schlüssel mit einem Zertifikat zu erstellen:
 
-Wenn Sie eine angepasste Domäne verwenden, können Sie Ihr eigenes Zertifikat zum Verwalten der TLS-Terminierung nutzen. Gehen Sie wie folgt vor, um Ihren eigenen geheimen TLS-Schlüssel zu erstellen:
-1. Generieren Sie einen Schlüssel und ein Zertifikat auf eine der folgenden Arten:
-    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne.
-      **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
-    * Zu Testzwecken können Sie ein selbst signiertes Zertifikat mit OpenSSL erstellen. Weitere Informationen erhalten Sie in diesem [Lernprogramm zu selbst signierten SSL-Zertifikaten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Erstellen Sie einen TLS-Schlüssel (`tls.key`).
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Verwenden Sie den Schlüssel zum Erstellen eines Zertifikats (`tls.crt`).
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
-2. [Konvertieren Sie das Zertifikat und den Schlüssel in Base-64 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/).
-3. Erstellen Sie anhand des Zertifikats und des Schlüssels eine YAML-Datei für geheime Schlüssel.
+1. Generieren Sie das Zertifikat und den Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Zu Testzwecken können Sie ein selbst signiertes Zertifikat generieren.
+
+ **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
+
+ Das Clientzertifikat und der Clientschlüssel müssen anhand des Trusted-Root-Zertifikats verifiziert werden, welches in diesem Fall das Zertifikat der Zertifizierungsstelle ist. Beispiel:
+
+ ```
+ Client Certificate: issued by Intermediate Certificate
+ Intermediate Certificate: issued by Root Certificate
+ Root Certificate: issued by itself
+ ```
+ {: codeblock}
+
+2. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
+
+   ```
+   kubectl create secret generic <name_des_geheimen_schlüssels> --from-file=<zertifikatsdatei>=<zertifikatsdatei>
+   ```
+   {: pre}
+
+   Beispiel:
+   - TLS-Verbindung:
+
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <clientzertifikat>
-       tls.key: <clientschlüssel>
-     ```
-     {: codeblock}
-
-4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-
-### Ingress-ALB mit der Annotation 'ssl-services' anpassen
-{: #secrets_ssl_services}
-
-Mit der [Annotation `ingress.bluemix.net/ssl-services`](cs_annotations.html#ssl-services) können Sie den Datenverkehr zu Ihren Upstream-Apps über die Ingress-ALB verschlüsseln. Gehen Sie wie folgt vor, um den geheimen Schlüssel zu erstellen:
-
-1. Rufen Sie die das Zertifikat und den Schlüssel der Zertifizierungsstelle über den Upstream-Server ab.
-2. [Konvertieren Sie das Zertifikat in Base-64 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/).
-3. Erstellen Sie anhand des Zertifikats eine YAML-Datei für geheime Schlüssel.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <zertifikat_der_zertifizierungsstelle>
-     ```
-     {: codeblock}
-     **Hinweis**: Wenn Sie die gegenseitige Authentifizierung auch für den Upstream-Datenverkehr erzwingen möchten, können Sie neben dem Wert für `trusted.crt` im Datenabschnitt auch Werte für `client.crt` und `client.key` bereitstellen.
-4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret tls <name_des_geheimen_schlüssels> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
-### Ingress-ALB mit der Annotation für die gegenseitige Authentifizierung anpassen
-{: #secrets_mutual_auth}
+   - Annotation für die gegenseitige Authentifizierung:
 
-Sie können die [Annotation `ingress.bluemix.net/mutual-auth`](cs_annotations.html#mutual-auth) verwenden, um die gegenseitige Authentifizierung des Downstream-Datenverkehrs für die Ingress-ALB zu konfigurieren. Gehen Sie wie folgt vor, um einen geheimen Schlüssel für die gegenseitige Authentifizierung zu erstellen:
-
-1. Generieren Sie einen Schlüssel und ein Zertifikat auf eine der folgenden Arten:
-    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne.
-      **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
-    * Zu Testzwecken können Sie ein selbst signiertes Zertifikat mit OpenSSL erstellen. Weitere Informationen erhalten Sie in diesem [Lernprogramm zu selbst signierten SSL-Zertifikaten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Erstellen Sie einen Schlüssel (`ca.key`).
-            ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Verwenden Sie den Schlüssel zum Erstellen eines Zertifikats (`ca.crt`).
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
-            ```
-            {: pre}
-        3. Verwenden Sie das Zertifikat `ca.crt`, um ein selbst signiertes Zertifikat zu erstellen.
-            ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
-2. [Konvertieren Sie das Zertifikat in Base-64 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.base64encode.org/).
-3. Erstellen Sie anhand des Zertifikats eine YAML-Datei für geheime Schlüssel.
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <zertifikat_der_zertifizierungsstelle>
-     ```
-     {: codeblock}
-4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret generic <name_des_geheimen_schlüssels> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
 <br />
+
+
+
 
 
 ## Apps über die GUI bereitstellen
@@ -357,8 +328,7 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
   * Wählen Sie **App-Details unten angeben** aus und geben Sie die Details ein.
   * Wählen Sie **YAML- oder JSON-Datei hochladen** aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) Ihrer App hochzuladen.
 
-  Benötigen Sie Hilfe mit Ihrer Konfigurationsdatei? Sehen Sie sich diese [YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In diesem Beispiel wird ein Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitgestellt. Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.
-  {: tip}
+  Benötigen Sie Hilfe mit Ihrer Konfigurationsdatei? Sehen Sie sich diese [YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In diesem Beispiel wird ein Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitgestellt. Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.{: tip}
 
 3.  Überprüfen Sie auf einem der beiden folgenden Wege, dass Sie Ihre App erfolgreich bereitgestellt haben.
   * Klicken Sie im Kubernetes-Dashboard auf **Bereitstellungen**. Es wird eine Liste der erfolgreichen Bereitstellungen angezeigt.
@@ -402,97 +372,6 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 <br />
 
 
-## Apps für bestimmte Workerknoten mithilfe von Bezeichnungen bereitstellen
-{: #node_affinity}
-
-Wenn Sie eine App bereitstellen, werden die App-Pods willkürlich auf verschiedenen Workerknoten in Ihrem Cluster implementiert. In einigen Fällen kann es sein, dass Sie die Workerknoten einschränken möchten, auf denen die App-Pods implementiert werden sollen. Beispiel: Sie möchten, dass App-Pods nur auf Workerknoten in einem bestimmten Worker-Pool implementiert werden, weil sich diese Workerknoten auf Bare-Metal-Maschinen befinden. Fügen Sie eine Affinitätsregel zu Ihrer App-Bereitstellung hinzu, um die Workerknoten anzugeben, auf denen die App-Pods implementiert werden müssen.{:shortdesc}
-
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
-
-1. Rufen Sie den Namen des Worker-Pools ab, in dem die App-Pods implementiert werden sollen.
-    ```
-    ibmcloud ks worker-pools <clustername_oder_-id>
-    ```
-    {:pre}
-
-    In diesen Schritten wird der Name eines Worker-Pools als Beispiel verwendet. Wenn Sie App-Pods auf der Basis eines anderen Faktors auf bestimmten Workerknoten implementieren möchten, rufen Sie stattdessen diesen Wert ab. Wenn Sie beispielsweise App-Pods nur auf Workerknoten in einem bestimmten VLAN implementieren möchten, müssen Sie die VLAN-ID abrufen, indem Sie den Befehl `ibmcloud ks vlans <zone>` ausführen.
-    {: tip}
-
-2. [Fügen Sie eine Affinitätsregel ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) für den Worker-Poolnamen zur App-Bereitstellung hinzu.
-
-    YAML-Beispieldatei:
-
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    metadata:
-      name: with-node-affinity
-    spec:
-      template:
-        spec:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: workerPool
-                    operator: In
-                    values:
-                    - <worker_pool_name>
-    ...
-    ```
-    {: codeblock}
-
-    Im Abschnitt **affinity** der YAML-Beispieldatei ist `workerPool` der Schlüssel (`key`) und `<worker_pool_name>` der Wert (`value`).
-
-3. Wenden Sie die aktualisierte Bereitstellungskonfigurationsdatei an.
-    ```
-    kubectl apply -f with-node-affinity.yaml
-    ```
-    {: pre}
-
-4. Stellen Sie sicher, dass die App-Pods auf den richtigen Workerknoten bereitgestellt wurden.
-
-    1. Listen Sie die Pods in Ihrem Cluster auf.
-        ```
-        kubectl get pods -o wide
-        ```
-        {: pre}
-
-        Beispielausgabe:
-        ```
-        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
-        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
-        ```
-        {: screen}
-
-    2. Geben Sie in der Ausgabe einen Pod für Ihre App an. Notieren Sie sich die private IP-Adresse (**NODE**) des Workerknotens, auf dem sich der Pod befindet.
-
-        In der obigen Beispielausgabe befindet sich der App-Pod `cf-py-d7b7d94db-vp8pq` auf einem Workerknoten mit der IP-Adresse `10.176.48.78`.
-
-    3. Listen Sie die Workerknoten im Worker-Pool auf, die Sie in Ihrer App-Bereitstellung angegeben haben.
-
-        ```
-        ibmcloud ks workers <clustername_oder_-id> --worker-pool <worker-poolname>
-        ```
-        {: pre}
-
-        Beispielausgabe:
-
-        ```
-        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
-        ```
-        {: screen}
-
-        Wenn Sie eine App-Affinitätsregel basierend auf einem anderen Faktor erstellt haben, rufen Sie stattdessen diesen Wert ab. Wenn Sie beispielsweise überprüfen möchten, dass der App-Pod auf einem Workerknoten in einem bestimmten VLAN bereitgestellt wurde, sehen Sie sich das VLAN an, auf dem sich der Workerknoten befindet, indem Sie den Befehl `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` ausführen.
-        {: tip}
-
-    4. Stellen Sie in der Ausgabe sicher, dass der Workerknoten mit der privaten IP-Adresse, die Sie im vorherigen Schritt angegeben haben, in diesem Worker-Pool implementiert ist.
-
-<br />
 
 
 ## Eine App auf einer GPU-Maschine bereitstellen
@@ -663,7 +542,7 @@ Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
 
     In diesem Beispiel wurden beide GPUs zum Ausführen des Jobs verwendet, da beide im Workerknoten terminiert wurden. Falls der Grenzwert auf '1' gesetzt ist, wird nur eine GPU angezeigt.
 
-## Apps skalieren
+## Apps skalieren 
 {: #app_scaling}
 
 Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) aktivieren, um die Anzahl der Instanzen Ihrer Apps CPU-basiert automatisch zu erhöhen oder zu verringern.

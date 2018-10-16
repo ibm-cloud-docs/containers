@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-08-06"
 Vous pouvez recourir à des techniques Kubernetes dans {{site.data.keyword.containerlong}} pour déployer des applications et faire en sorte qu'elles soient toujours opérationnelles. Par exemple, vous pouvez effectuer des mises à jour et des rétromigrations en continu sans générer de temps d'indisponibilité pour vos utilisateurs.
 {: shortdesc}
 
-Découvrez les étapes générales de déploiement d'applications en cliquant sur une zone de l'image suivante. Vous voulez commencer par un déploiement de base ? Suivez le [tutoriel de déploiement des applications](cs_tutorials_apps.html#cs_apps_tutorial).
+Découvrez les étapes générales de déploiement d'applications en cliquant sur une zone de l'image suivante.
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Processus de déploiement de base"/>
 <map name="d62e18" id="d62e18">
@@ -34,9 +34,8 @@ Découvrez les étapes générales de déploiement d'applications en cliquant su
 <area href="#cli_dashboard" target="_blank" alt="Option 2 : Démarrer le tableau de bord Kubernetes en local et exécuter des fichiers de configuration." title="Option 2 : Démarrer le tableau de bord Kubernetes en local et exécuter des fichiers de configuration." shape="rect" coords="544, 141, 728, 204" />
 </map>
 
+
 <br />
-
-
 
 
 ## Planification de déploiements à haute disponibilité
@@ -47,13 +46,15 @@ Plus votre configuration sera distribuée entre plusieurs noeuds worker et clust
 
 Examinez les configurations potentielles d'application suivantes, classées par ordre de disponibilité croissante.
 
-![Niveaux de haute disponibilité pour une application](images/cs_app_ha_roadmap-mz.png)
+![Niveaux de haute disponibilité pour une application](images/cs_app_ha_roadmap.png)
 
-1.  Déploiement avec n+2 pods gérés par un jeu de répliques dans un seul noeud figurant dans un cluster à zone unique.
-2.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans un cluster à zone unique.
-3.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans un cluster à zones multiples entre différentes zones.
+1.  Déploiement avec n+2 pods gérés par un jeu de répliques.
+2.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) sur le même emplacement.
+3.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans des emplacements différents.
+4.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans des régions différentes.
 
-Vous pouvez également [connecter plusieurs clusters dans différentes régions avec un équilibreur de charge global](cs_clusters.html#multiple_clusters) pour une haute disponibilité accrue.
+
+
 
 ### Augmentation de la disponibilité de votre application
 {: #increase_availability}
@@ -70,23 +71,14 @@ Vous pouvez également [connecter plusieurs clusters dans différentes régions 
   <dt>Disséminez les pods entre plusieurs noeuds (anti-affinité)</dt>
     <dd><p>Lorsque vous créez votre déploiement, vous pouvez déployer tous les pods sur le même noeud worker. C'est ce qu'on appelle affinité ou collocation. Pour protéger votre application contre une défaillance de noeud worker, vous pouvez configurer votre déploiement de sorte à disséminer les pods entre plusieurs noeuds worker, et ce en utilisant l'option <em>podAntiAffinity</em> avec vos clusters standard. Vous pouvez définir deux types d'anti-affinité de pod : préféré ou obligatoire. Pour plus d'informations, voir la documentation Kubernetes sur l'<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(S'ouvre dans un nouvel onglet ou une nouvelle fenêtre)">affectation de pods à des noeuds</a>.</p>
     <p><strong>Remarque</strong> : avec l'anti-affinité obligatoire, vous ne pouvez déployer que le nombre de répliques correspondant au nombre de noeuds worker. Par exemple, si vous disposez de 3 noeuds worker dans votre cluster mais que vous définissez 5 répliques dans votre fichier YAML, seules 3 répliques sont déployées. Chaque réplique réside sur un noeud worker distinct. Les deux autres répliques restent en attente. Si vous ajoutez un autre noeud worker dans votre cluster, l'une de ces répliques restantes se déploie automatiquement sur ce nouveau noeud.<p>
-    <p><strong>Exemples de fichiers YAML de déploiement</strong> :<ul>
+    <p><strong>Exemples de fichiers YAML de déploiement</strong>:<ul>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(S'ouvre dans un nouvel onglet ou une nouvelle fenêtre)">Application Nginx avec anti-affinité de pod préférée.</a></li>
     <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(S'ouvre dans un nouvel onglet ou une nouvelle fenêtre)">Application IBM WebSphere Application Server Liberty avec anti-affinité de pod obligatoire.</a></li></ul></p>
-    
     </dd>
 <dt>Disséminez les pods entre plusieurs zones ou régions</dt>
-  <dd><p>Pour protéger votre application en cas de défaillance d'une zone, vous pouvez créer plusieurs clusters dans des zones distinctes ou ajouter des zones dans un pool de noeuds worker dans un cluster à zones multiples. Les clusters à zones multiples sont disponibles uniquement dans certaines [métropoles](cs_regions.html#zones), comme Dallas. Si vous créez plusieurs clusters dans des zones distinctes, vous devez [configurer un équilibreur de charge global](cs_clusters.html#multiple_clusters).</p>
-  <p>Lorsque vous utilisez un jeu de répliques et spécifiez l'anti-affinité pour les pods, Kubernetes répartit les pods d'application sur les différents noeuds. Si vos noeuds se trouvent dans plusieurs zones, les pods sont répartis entre les zones, pour augmenter la disponibilité de votre application. Si vous souhaitez limiter l'exécution de vos applications à une seule zone, vous pouvez configurer l'affinité de pod pour créer et labelliser un pool de noeuds worker dans une zone. Pour plus d'informations, voir [Haute disponibilité pour les clusters à zones multiples](cs_clusters.html#ha_clusters).</p>
-  <p><strong>Dans le déploiement d'un cluster à zones multiples, mes pods d'application sont-ils répartis uniformément entre les noeuds ?</strong></p>
-  <p>Les pods sont répartis uniformément entre les zones mais pas toujours entre les noeuds. Par exemple, si vous disposez d'un cluster avec un noeud dans chacune des trois zones et que vous déployez un jeu de répliques de 6 pods, chaque noeud obtient 2 pods. Cependant, si vous avez un cluster avec 2 noeuds dans chacune des 3 zones et que vous déployez un jeu de répliques de 6 pods, chaque zone dispose de deux pods planifiés et peut ou non planifier 1 pod par noeud. Pour avoir plus de contrôle sur la planification, vous pouvez [définir l'affinité entre les pods  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>En cas de défaillance d'une zone, comment sont replanifiés les pods sur les noeuds restants dans les autres zones ?</strong></br>Tout dépend de la règle de planification que vous avez utilisée dans le déploiement. Si vous avez inclus l'[affinité entre pods de noeuds spécifiques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), vos pods ne sont pas replanifiés. Si vous ne l'avez pas fait, les pods sont créés sur les noeuds worker disponibles dans d'autres zones, mais risquent de ne pas être équilibrés. Par exemple, les 2 pods peuvent être répartis sur les 2 noeuds disponibles ou peuvent être planifiés tous les deux sur 1 noeud doté de la capacité disponible. De même, lorsque la zone indisponible est restaurée, les pods ne sont pas automatiquement supprimés et rééquilibrés entre les noeuds. Pour que les pods soient rééquilibrés entre les zones une fois qu'une zone redevient opérationnelle, envisagez l'utilisation de l'[outil de déplanification de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-incubator/descheduler).</p>
-  <p><strong>Astuce</strong> : dans les clusters à zones multiples, tâchez de maintenir la capacité de vos noeuds worker à 50% par zone de sorte à disposer d'une capacité disponible suffisante pour protéger votre cluster en cas de défaillance de zone.</p>
-  <p><strong>Que faire pour répartir mon application entre les différentes régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](cs_clusters.html#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application.</p>
-  <p><strong>Que faire si mes applications nécessitent du stockage persistant ?</strong></p>
-  <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
+  <dd>Pour protéger votre application en cas de défaillance d'un emplacement ou d'une région, vous pouvez créer un second cluster dans un autre emplacement ou une autre région et utiliser un fichier YAML de déploiement afin de déployer un doublon du jeu de répliques pour votre application. En ajoutant une route partagée et un équilibreur de charge devant vos clusters, vous pouvez répartir votre charge de travail entre plusieurs emplacements et régions. Pour plus d'informations, voir [Haute disponibilité de cluster](cs_clusters.html#clusters).
+  </dd>
 </dl>
-
 
 
 ### Déploiement d'application minimal
@@ -140,15 +132,13 @@ Pour en savoir plus sur chaque composant, consultez les [concepts de base de Kub
 
 
 
-
-
 ## Lancement du tableau de bord Kubernetes
 {: #cli_dashboard}
 
 Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et ses noeuds worker. [Dans l'interface graphique](#db_gui), vous pouvez accéder au tableau de bord par simple clic sur un bouton. [Avec l'interface de ligne de commande (CLI)](#db_cli), vous pouvez accéder au tableau de bord ou utiliser les étapes d'un processus automatique, comme pour un pipeline CI/CD.
 {:shortdesc}
 
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster. Cette tâche requiert d'utiliser la [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
 
 Vous pouvez utiliser le port par défaut ou définir votre propre port pour lancer le tableau de bord Kubernetes d'un cluster.
 
@@ -161,182 +151,161 @@ Vous pouvez utiliser le port par défaut ou définir votre propre port pour lanc
 4.  Sur la page **Clusters**, cliquez sur le cluster auquel vous souhaitez accéder.
 5.  Sur la page des détails du cluster, cliquez sur le bouton **Tableau de bord Kubernetes**.
 
-</br>
-</br>
-
 **Lancement du tableau de bord Kubernetes à partir de l'interface de ligne de commande (CLI)**
 {: #db_cli}
 
-1.  Extrayez vos données d'identification pour Kubernetes.
+*  Pour les clusters avec un maître Kubernetes version 1.7.16 ou antérieure :
 
-    ```
-    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-    ```
-    {: pre}
+    1.  Affectez le numéro de port par défaut au proxy.
 
-2.  Copiez la valeur **id-token** affichée dans la sortie.
+        ```
+        kubectl proxy
+        ```
+        {: pre}
 
-3.  Affectez le numéro de port par défaut au proxy.
+        Sortie :
 
-    ```
-    kubectl proxy
-    ```
-    {: pre}
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
 
-    Exemple de sortie :
+    2.  Ouvrez le tableau de bord Kubernetes dans un navigateur Web.
 
-    ```
-    Starting to serve on 127.0.0.1:8001
-    ```
-    {: screen}
+        ```
+        http://localhost:8001/ui
+        ```
+        {: codeblock}
 
-4.  Connectez-vous au tableau de bord.
+*  Pour les clusters avec un maître Kubernetes version 1.8.2 ou supérieure :
 
-  1.  Dans votre navigateur, accédez à l'URL suivante :
+    1.  Extrayez vos données d'identification pour Kubernetes.
 
-      ```
-      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-      ```
-      {: codeblock}
+        ```
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+        ```
+        {: pre}
 
-  2.  Sur la page de connexion, sélectionnez la méthode d'authentification par **Jeton**.
+    2.  Copiez la valeur **id-token** affichée dans la sortie.
 
-  3.  Collez ensuite la valeur **id-token** que vous aviez copiée dans la zone **Jeton** et cliquez sur **Connexion**.
+    3.  Affectez le numéro de port par défaut au proxy.
 
-Lorsque vous avez fini d'examiner le tableau de bord Kubernetes, utilisez les touches `CTRL+C` pour quitter la commande `proxy`. Après avoir quitté, le tableau de bord Kubernetes n'est plus disponible. Exécutez la commande `proxy` pour redémarrer le tableau de bord Kubernetes.
+        ```
+        kubectl proxy
+        ```
+        {: pre}
+
+        Exemple de sortie :
+
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
+
+    4.  Connectez-vous au tableau de bord.
+
+      1.  Dans votre navigateur, accédez à l'URL suivante :
+
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
+
+      2.  Sur la page de connexion, sélectionnez la méthode d'authentification par **Jeton**.
+
+      3.  Collez ensuite la valeur **id-token** que vous aviez copiée dans la zone **Jeton** et cliquez sur **Connexion**.
+
+Lorsque vous avez fini d'examiner le tableau de bord Kubernetes, utilisez les touches `CTRL+C` pour quitter la commande
+`proxy`. Après avoir quitté, le tableau de bord Kubernetes n'est plus disponible. Exécutez la commande `proxy` pour redémarrer le tableau de bord Kubernetes.
 
 [Ensuite, vous pouvez exécuter un fichier de configuration à partir du tableau de bord.](#app_ui)
 
+
 <br />
+
+
 
 
 ## Création de valeurs confidentielles
 {: #secrets}
 
-Les valeurs confidentielles Kubernetes permettent de stocker de manière sécurisée des informations sensibles, comme les noms des utilisateurs, leurs mots de passe ou leurs clés.
+Les valeurs confidentielles Kubernetes permettent de stocker de manière
+sécurisée des informations sensibles, comme les noms des utilisateurs, leurs mots de passe ou leurs clés.
 {:shortdesc}
 
-Passez en revue les tâches suivantes qui nécessitent des valeurs confidentielles. Pour plus d'informations sur ce que vous pouvez stocker dans les valeurs confidentielles, voir la [documentation de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/secret/).
+<table>
+<caption>Fichiers requis à stocker dans les valeurs confidentielles par tâche</caption>
+<thead>
+<th>Tâche</th>
+<th>Fichiers à stocker dans des valeurs confidentielles</th>
+</thead>
+<tbody>
+<tr>
+<td>Ajout d'un service à un cluster</td>
+<td>Aucun. Une valeur confidentielle est automatiquement créée lorsque vous liez un service à un cluster.</td>
+</tr>
+<tr>
+<td>Facultatif : Configurez le service Ingress avec TLS, si vous n'utilisez pas ingress-secret. <p><b>Remarque</b> : TLS est déjà activé par défaut et une valeur confidentielle créée pour la connexion TLS.
 
-### Ajout de service dans un cluster
-{: #secrets_service}
+Pour afficher la valeur confidentielle TLS par défaut :
+<pre>
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
+</pre>
+</p>
+Pour créer à la place votre propre valeur confidentielle, exécutez la procédure décrite dans cette rubrique.</td>
+<td>Certificat et clé de serveur : <code>server.crt</code> et <code>server.key</code></td>
+<tr>
+<td>Création de l'annotation mutual-authentication.</td>
+<td>Certificat d'autorité de certification : <code>ca.crt</code></td>
+</tr>
+</tbody>
+</table>
 
-Lorsque vous liez un service à un cluster, vous n'avez pas besoin de créer une valeur confidentielle. Elle est automatiquement créée pour vous. Pour plus d'informations, voir [Ajout de services Cloud Foundry à des clusters](cs_integrations.html#adding_cluster).
+Pour plus d'informations sur les éléments que vous pouvez stocker dans les valeurs confidentielles, voir la [documentation Kubernetes](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-### Configuration de l'équilibreur de charge d'application (ALB) Ingress pour l'utilisation de TLS
-{: #secrets_tls}
 
-L'équilibreur de charge ALB équilibre la charge du trafic réseau HTTP vers les applications de votre cluster. Pour équilibrer la charge des connexions HTTPS entrantes, vous pouvez configurer l'équilibreur de charge ALB pour déchiffrer le trafic réseau et transférer la demande déchiffrée aux applications exposées dans votre cluster.
 
-Si vous utilisez le sous-domaine Ingress fourni par IBM, vous pouvez [utiliser le certificat TLS fourni par IBM](cs_ingress.html#public_inside_2). Pour afficher la valeur confidentielle de TLS fournie par IBM, exécutez la commande suivante :
-```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep "Ingress secret"
-```
-{: pre}
+Pour créer une valeur confidentielle avec un certificat :
 
-Si vous utilisez un domaine personnalisé, vous pouvez utiliser votre propre certificat pour gérer la terminaison TLS. Pour créer votre propre valeur confidentielle TLS :
-1. Générez une clé et un certificat avec l'une de ces méthodes :
-    * Procurez-vous un certificat d'autorité de certification et une clé auprès de votre fournisseur de certificat. Si vous disposez de votre propre domaine, achetez un certificat TLS officiel pour votre domaine.
-      **Important** : vérifiez que l'élément [CN ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://support.dnsimple.com/articles/what-is-common-name/) est différent pour chaque certificat.
-    * A des fins de test, vous pouvez créer un certificat autosigné en utilisant OpenSSL. Pour plus d'informations, voir ce [tutoriel sur les certificats SSL autosignés ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Créez la clé `tls.key`.
-            ```
-            openssl genrsa -out tls.key 2048
-            ```
-            {: pre}
-        2. Utilisez cette clé pour créer un certificat `tls.crt`.
-            ```
-            openssl req -new -x509 -key tls.key -out tls.crt
-            ```
-            {: pre}
-2. [Convertissez le certificat et la clé en base 64 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.base64encode.org/).
-3. Créez un fichier de valeur confidentielle YAML en utilisant le certificat et la clé.
+1. Procurez-vous le certificat d'autorité de certification et la clé auprès de votre fournisseur de certificat. Si vous disposez de votre propre domaine, achetez un certificat TLS officiel pour votre domaine. Pour des tests, vous pouvez générer un certificat autosigné.
+
+ **Important** : assurez-vous que la valeur [CN](https://support.dnsimple.com/articles/what-is-common-name/) est différente pour chaque certificat.
+
+ Le certificat et la clé du client doivent être vérifiés jusqu'au niveau du certificat racine accrédité qui, dans ce cas, est le certificat de l'autorité de certification. Exemple :
+
+ ```
+ Client Certificate: issued by Intermediate Certificate
+ Intermediate Certificate: issued by Root Certificate
+ Root Certificate: issued by itself
+ ```
+ {: codeblock}
+
+2. Créez le certificat en tant que valeur confidentielle Kubernetes.
+
+   ```
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
+   ```
+   {: pre}
+
+   Exemples :
+   - Connexion TLS :
+
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <client_certificate>
-       tls.key: <client_key>
-     ```
-     {: codeblock}
-
-4. Créez le certificat en tant que valeur confidentielle Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-
-### Personnalisation de l'équilibreur de charge ALB Ingress avec l'annotation des services SSL
-{: #secrets_ssl_services}
-
-Vous pouvez utiliser l'[annotation `ingress.bluemix.net/ssl-services`](cs_annotations.html#ssl-services) pour chiffrer le trafic vers vos applications en amont depuis l'équilibreur de charge ALB Ingress. Pour créer la valeur confidentielle :
-
-1. Procurez-vous la clé et le certificat de l'autorité de certification (AC) de votre serveur en amont.
-2. [Convertissez le certificat en base 64 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.base64encode.org/).
-3. Créez un fichier YAML de valeur confidentielle à l'aide de la valeur cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <ca_certificate>
-     ```
-     {: codeblock}
-     **Remarque** : si vous souhaitez également imposer l'authentification mutuelle pour le trafic en amont, vous pouvez fournir les éléments `client.crt` et `client.key` en plus de `trusted.crt` dans la section data.
-4. Créez le certificat en tant que valeur confidentielle Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
-### Personnalisation de l'équilibreur de charge ALB Ingress avec l'annotation d'authentification mutuelle
-{: #secrets_mutual_auth}
+   - Annotation d'authentification mutuelle :
 
-Vous pouvez utiliser l'[annotation `ingress.bluemix.net/mutual-auth`](cs_annotations.html#mutual-auth) pour configurer l'authentification mutuelle de votre trafic en aval pour l'équilibreur de charge ALB Ingress. Pour créer une valeur confidentielle pour l'authentification mutuelle :
-
-1. Générez une clé et un certificat avec l'une de ces méthodes :
-    * Procurez-vous un certificat d'autorité de certification et une clé auprès de votre fournisseur de certificat. Si vous disposez de votre propre domaine, achetez un certificat TLS officiel pour votre domaine.
-      **Important** : vérifiez que l'élément [CN ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://support.dnsimple.com/articles/what-is-common-name/) est différent pour chaque certificat.
-    * A des fins de test, vous pouvez créer un certificat autosigné en utilisant OpenSSL. Pour plus d'informations, voir ce [tutoriel sur les certificats SSL autosignés ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Créez une clé `ca.key`.
-            ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Utilisez cette clé pour créer un élément `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
-            ```
-            {: pre}
-        3. Utilisez l'élément `ca.crt` pour créer un certificat autosigné.
-            ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
-2. [Convertissez le certificat en base 64 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.base64encode.org/).
-3. Créez un fichier YAML de valeur confidentielle à l'aide de la valeur cert.
      ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
-4. Créez le certificat en tant que valeur confidentielle Kubernetes.
-     ```
-     kubectl create -f ssl-my-test
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
 <br />
+
+
+
 
 
 ## Déploiement d'applications depuis l'interface graphique
@@ -348,14 +317,14 @@ Lorsque vous déployez une application dans votre cluster à l'aide du tableau d
 Avant de commencer :
 
 -   Installez les [interfaces de ligne de commande](cs_cli_install.html#cs_cli_install) requises.
--   [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+-   [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
 
 Pour déployer votre application :
 
 1.  Ouvrez le [tableau de bord](#cli_dashboard) Kubernetes et cliquez sur **+ Créer**.
 2.  Entrez les détails de votre application en choisissant l'une de ces deux méthodes :
   * Sélectionnez **Spécifier les détails de l'application ci-dessous** et entrez les détails.
-  * Sélectionnez **Télécharger un fichier YAML ou JSON** pour télécharger le [fichier de configuration ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) de votre application.
+  * Sélectionnez **Télécharger un fichier YAML ou JSON** pour télécharger le [fichier de configuration ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe") de votre application](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
 
   Besoin d'aide sur votre fichier de configuration ? Consultez cet [exemple de fichier YAML ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). Dans cet exemple, un conteneur est déployé à partir d'une image **ibmliberty** dans la région du Sud des Etats-Unis (US-South). Découvrez comment [sécuriser vos informations personnelles](cs_secure.html#pi) lorsque vous utilisez des ressources Kubernetes.
   {: tip}
@@ -376,7 +345,7 @@ Après avoir créé un cluster, vous pouvez y déployer une application à l'aid
 Avant de commencer :
 
 -   Installez les [interfaces de ligne de commande](cs_cli_install.html#cs_cli_install) requises.
--   [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+-   [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
 
 Pour déployer votre application :
 
@@ -402,98 +371,6 @@ Pour déployer votre application :
 <br />
 
 
-## Déploiement d'applications sur des noeuds worker spécifiques à l'aide de libellés
-{: #node_affinity}
-
-Lorsque vous déployez une application, les pods d'application déploient plusieurs noeuds worker dans votre cluster sans discernement. Dans certains cas, vous souhaiterez limiter le nombre de noeuds sur lesquels se déploient les pods d'application. Par exemple, vous pouvez opter pour le déploiement des pods d'application uniquement sur les noeuds worker d'un certain pool de noeuds worker car ces noeuds se trouvent sur des machines bare metal. Pour désigner les noeuds worker sur lesquels doivent se déployer les pods d'application, ajoutez une règle d'affinité dans le déploiement de votre application.
-{:shortdesc}
-
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
-
-1. Récupérez le nom du pool de noeuds worker sur lequel vous souhaitez déployer des pods d'application.
-    ```
-    ibmcloud ks worker-pools <cluster_name_or_ID>
-    ```
-    {:pre}
-
-    Dans ces étapes un nom de pool de noeuds worker est pris comme exemple. Pour déployer les pods d'application sur certains noeuds worker en fonction d'un autre facteur, utilisez cette valeur à la place. Par exemple, pour déployer des pods d'application uniquement sur les noeuds worker d'un réseau local virtuel (VLAN) spécifique, obtenez l'ID de ce VLAN en exécutant la commande `ibmcloud ks vlans <zone>`.
-    {: tip}
-
-2. [Ajoutez une règle d'affinité ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) pour le nom du pool de noeuds worker dans le déploiement de l'application.
-
-    Exemple de fichier YAML :
-
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    metadata:
-      name: with-node-affinity
-    spec:
-      template:
-        spec:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: workerPool
-                    operator: In
-                    values:
-                    - <worker_pool_name>
-    ...
-    ```
-    {: codeblock}
-
-    Dans la section **affinity** du fichier YAML indiqué en exemple, `workerPool` est la clé (`key`) et `<worker_pool_name>` est la valeur (`value`).
-
-3. Appliquez le fichier de configuration de déploiement mis à jour.
-    ```
-    kubectl apply -f with-node-affinity.yaml
-    ```
-    {: pre}
-
-4. Vérifiez que les pods d'application se sont déployés sur les noeuds worker appropriés.
-
-    1. Affichez la liste des pods de votre cluster.
-        ```
-        kubectl get pods -o wide
-        ```
-        {: pre}
-
-        Exemple de sortie :
-        ```
-        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
-        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
-        ```
-        {: screen}
-
-    2. Dans la sortie, identifiez un pod pour votre application. Notez l'adresse IP privée du noeud (**NODE**) correspondant au noeud worker dans lequel figure le pod.
-
-        Dans la sortie de l'exemple ci-dessus, le pod d'application `cf-py-d7b7d94db-vp8pq` se trouve sur un noeud worker dont l'adresse IP est `10.176.48.78`.
-
-    3. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker que vous avez désigné dans le déploiement de votre application. 
-
-        ```
-        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
-        ```
-        {: pre}
-
-        Exemple de sortie :
-
-        ```
-        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
-        ```
-        {: screen}
-
-        Si vous avez créé une règle d'affinité pour l'application en fonction d'un autre facteur, récupérez cette valeur à la place. Par exemple, pour vérifier que le pod d'application est déployé sur un noeud worker d'un VLAN spécifique, affichez le VLAN dans lequel se trouve le noeud worker en exécutant la commande `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
-        {: tip}
-
-    4. Dans la sortie, vérifiez que le noeud worker avec l'adresse IP que vous avez identifiée à l'étape précédente est déployé dans ce pool de noeuds worker.
-
-<br />
 
 
 ## Déploiement d'une application sur une machine GPU
@@ -664,7 +541,7 @@ Pour exécuter une charge de travail sur une machine GPU :
 
     Dans cet exemple, vous voyez que les deux unités GPU ont été utilisées pour exécuter le travail car elles étaient toutes les deux planifiées sur le noeud worker. Si la limite est définie sur 1, 1 seule unité GPU s'affiche.
 
-## Mise à l'échelle des applications
+## Mise à l'échelle des applications 
 {: #app_scaling}
 
 Avec Kubernetes, vous pouvez activer la [mise à l'échelle automatique horizontale de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) pour augmenter ou diminuer automatiquement le nombre d'instances de vos applications en fonction de l'UC.
@@ -674,7 +551,7 @@ Vous recherchez des informations sur la mise à l'échelle des applications Clou
 {: tip}
 
 Avant de commencer :
-- [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+- [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
 - La surveillance avec Heapster doit être déployée dans le cluster qui doit faire l'objet de la mise à l'échelle automatique.
 
 Etapes :
@@ -746,7 +623,7 @@ Etapes :
 ## Gestion des déploiements en continu
 {: #app_rolling}
 
-Vous pouvez gérer le déploiement de vos modifications automatiquement et de manière contrôlée. S'il ne correspond pas à ce que vous aviez prévu, vous pouvez rétromigrer le déploiement vers la dernière révision.
+Vous pouvez gérer un déploiement en continu automatique et contrôlé de vos modifications. S'il ne correspond pas à ce que vous aviez prévu, vous pouvez rétromigrer le déploiement vers la dernière révision.
 {:shortdesc}
 
 Avant de commencer, créez un [déploiement](#app_cli).

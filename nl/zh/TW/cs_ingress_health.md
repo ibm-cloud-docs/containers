@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -20,6 +20,102 @@ lastupdated: "2018-08-06"
 
 自訂記載以及設定監視，以協助對問題進行疑難排解，以及改善 Ingress 配置的效能。
 {: shortdesc}
+
+## 檢視 Ingress 日誌
+{: #ingress_logs}
+
+系統會自動收集 Ingress ALB 的日誌。若要檢視 ALB 日誌，有兩個選項可供您選擇。
+* 在叢集裡[建立 Ingress 服務的記載配置](cs_health.html#configuring)。
+* 從 CLI 檢查日誌。
+    1. 取得 ALB Pod 的 ID。
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+
+    2. 開啟該 ALB Pod 的日誌。驗證日誌遵循已更新格式。
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+</br>預設 Ingress 日誌內容會以 JSON 格式化，並顯示一般欄位來說明用戶端與應用程式之間的連線階段作業。具有預設欄位的範例日誌如下所示：
+
+```
+{"time_date": "2018-08-21T17:33:19+00:00", "client": "108.162.248.42", "host": "albhealth.multizone.us-south.containers.appdomain.cloud", "scheme": "http", "request_method": "GET", "request_uri": "/", "request_id": "c2bcce90cf2a3853694da9f52f5b72e6", "status": 200, "upstream_addr": "192.168.1.1:80", "upstream_status": 200, "request_time": 0.005, "upstream_response_time": 0.005, "upstream_connect_time": 0.000, "upstream_header_time": 0.005}
+```
+{: screen}
+
+<table>
+<caption>瞭解預設 Ingress 日誌格式的欄位</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/>瞭解預設 Ingress 日誌格式的欄位</th>
+</thead>
+<tbody>
+<tr>
+<td><code>"time_date": "$time_iso8601"</code></td>
+<td>寫入日誌時使用 ISO 8601 標準格式的當地時間。</td>
+</tr>
+<tr>
+<td><code>"client": "$remote_addr"</code></td>
+<td>用戶端傳至您應用程式的要求套件的 IP 位址。此 IP 可能因下列狀況而變更：<ul><li>將應用程式的用戶端要求傳送至叢集時，會將該要求遞送至可公開 ALB 之負載平衡器服務的 Pod。如果沒有應用程式 Pod 存在於與負載平衡器服務 Pod 相同的工作者節點上，則負載平衡器會將要求轉遞至不同工作者節點上的應用程式 Pod。要求套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。</li><li>如果[已啟用來源 IP 保留](cs_ingress.html#preserve_source_ip)，則會改為記錄您應用程式之用戶端要求的原始 IP 位址。</li></ul></td>
+</tr>
+<tr>
+<td><code>"host": "$http_host"</code></td>
+<td>可透過其存取您的應用程式的主機或子網域。此主機是配置在 ALB 的 Ingress 資源檔中。</td>
+</tr>
+<tr>
+<td><code>"scheme": "$scheme"</code></td>
+<td>要求的類型：<code>HTTP</code> 或 <code>HTTPS</code>。</td>
+</tr>
+<tr>
+<td><code>"request_method": "$request_method"</code></td>
+<td>對後端應用程式的要求呼叫方法，例如 <code>GET</code> 或 <code>POST</code>。</td>
+</tr>
+<tr>
+<td><code>"request_uri": "$uri"</code></td>
+<td>應用程式路徑的原始要求 URI。ALB 會以字首來處理應用程式接聽的路徑。當 ALB 接收用戶端對應用程式的要求時，ALB 會檢查 Ingress 資源中的路徑（作為字首）是否有符合此要求 URI 中的路徑。</td>
+</tr>
+<tr>
+<td><code>"request_id": "$request_id"</code></td>
+<td>從 16 個隨機位元組產生的唯一要求 ID。</td>
+</tr>
+<tr>
+<td><code>"status": $status</code></td>
+<td>連線階段作業的狀態碼。<ul>
+<li><code>200</code>：階段作業順利完成</li>
+<li><code>400</code>：無法剖析用戶端資料</li>
+<li><code>403</code>：禁止存取；例如，當特定用戶端 IP 位址的存取受到限制時</li>
+<li><code>500</code>：內部伺服器錯誤</li>
+<li><code>502</code>：不當的閘道；例如，如果無法選取或呼叫到上游伺服器</li>
+<li><code>503</code>：服務無法使用；例如，存取受到連線數目的限制</li>
+</ul></td>
+</tr>
+<tr>
+<td><code>"upstream_addr": "$upstream_addr"</code></td>
+<td>上游伺服器之 UNIX 網域 Socket 的 IP 位址及埠或路徑。如果在要求處理期間聯絡了數個伺服器，其位址會以逗點區隔：<code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock"</code>。如果該要求在內部就從一個伺服器群組重新導向至另一個伺服器群組，則不同群組中的伺服器位址會以冒號區隔：<code>"192.168.1.1:80, 192.168.1.2:80, unix:/tmp/sock : 192.168.10.1:80, 192.168.10.2:80"</code>。如果 ALB 無法選取伺服器，則會改為記載伺服器群組的名稱。</td>
+</tr>
+<tr>
+<td><code>"upstream_status": $upstream_status</code></td>
+<td>從上游伺服器取得對後端應用程式的回應狀態碼，例如標準 HTTP 回應碼。數個回應的狀態碼以逗點和冒號區隔，例如 <code>$upstream_addr</code> 變數中的位址。如果 ALB 無法選取伺服器，則會記載 502（不當的閘道）狀態碼。</td>
+</tr>
+<tr>
+<td><code>"request_time": $request_time</code></td>
+<td>要求處理時間（以秒為測量單位），並以毫秒解析。此時間會在 ALB 讀取用戶端要求的第一個位元組時開始，並在 ALB 將回應的最後位元組傳送給用戶端時停止。在要求處理時間停止之後，會立即寫入日誌。</td>
+</tr>
+<tr>
+<td><code>"upstream_response_time": $upstream_response_time</code></td>
+<td>ALB 從上游伺服器接收對後端應用程式的回應所花費的時間（以秒為測量單位），並以毫秒解析。數個回應的時間以逗點和冒號區隔，例如 <code>$upstream_addr</code> 變數中的位址。</td>
+</tr>
+<tr>
+<td><code>"upstream_connect_time": $upstream_connect_time</code></td>
+<td>ALB 為了後端應用程式而與上游伺服器建立連線所花費的時間（以秒為測量單位），並以毫秒解析。如果 Ingress 資源配置中已啟用 TLS/SSL，則此時間包括花費在信號交換的時間。數個連線的時間以逗點和冒號區隔，例如 <code>$upstream_addr</code> 變數中的位址。</td>
+</tr>
+<tr>
+<td><code>"upstream_header_time": $upstream_header_time</code></td>
+<td>ALB 從上游伺服器接收對後端應用程式的回應標頭所花費的時間（以秒為測量單位），並以毫秒解析。數個連線的時間以逗點和冒號區隔，例如 <code>$upstream_addr</code> 變數中的位址。</td>
+</tr>
+</tbody></table>
 
 ## 自訂 Ingress 日誌內容及格式
 {: #ingress_log_format}

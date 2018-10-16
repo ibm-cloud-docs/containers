@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -25,8 +25,8 @@ Os nós do trabalhador de borda podem melhorar a segurança de seu cluster do Ku
 
 Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
 
-Se você tiver um cluster de múltiplas zonas e desejar restringir o tráfego de rede para os nós do trabalhador de borda, pelo menos 2 nós do trabalhador de borda deverão ser ativados em cada zona para alta disponibilidade de balanceador de carga ou pods do Ingress. Crie um conjunto de trabalhadores do nó de borda que abrange todas as zonas em seu cluster, com pelo menos 2 nós do trabalhador por zona.
-{: tip}
+
+
 
 ## Identificação de nós do trabalhador como nós de borda
 {: #edge_nodes}
@@ -38,22 +38,21 @@ Antes de iniciar:
 
 - [Crie um cluster padrão.](cs_clusters.html#clusters_cli)
 - Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
-- [Crie um novo conjunto de trabalhadores](cs_clusters.html#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
 - [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
 
 Para rotular nós do trabalhador como nós de borda:
 
-1. Liste os nós do trabalhador em seu conjunto de trabalhadores do nó de borda. Use o endereço IP privado da coluna **NAME** para identificar os nós.
+1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador em cada VLAN pública para serem os nós do trabalhador de borda. O Ingresso requer pelo menos dois nós do trabalhador em cada zona para fornecer alta disponibilidade. 
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
 2. Rotule os nós do trabalhador com `dedicated=edge`. Após um nó do trabalhador ser marcado com `dedicated=edge`, todo Ingresso subsequente e balanceadores de carga são implementados em um nó do trabalhador de borda.
 
   ```
-  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
+  Kubectl label nodes < node1_name> < node2_name> dedicated=edge
   ```
   {: pre}
 

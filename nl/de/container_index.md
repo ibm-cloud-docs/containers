@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -46,32 +46,31 @@ Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Net
 
 **Vorbereitende Schritte**
 
-Rufen Sie den für Sie geeigneten [{{site.data.keyword.Bluemix_notm}}-Kontotyp](https://console.bluemix.net/registration/) ab:
-* **Nutzungsabhängiges Konto oder Abonnementenkonto**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
-* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) auf ein nutzungsabhängiges oder ein Abonnementenkonto.
-* **Testversion (zu Schulungszwecken)**: Sie können einen kostenlosen Cluster erstellen, den Sie 30 Tage lang verwenden können, um sich mit dem Service vertraut zu machen.
+Sie müssen über ein Testkonto, ein nutzungsabhängiges Konto oder ein Abonnementkonto als [{{site.data.keyword.Bluemix_notm}}-Konto](https://console.bluemix.net/registration/) verfügen.
+
+Mit einem Testkonto können Sie einen kostenlosen Cluster erstellen, den Sie 21 Tage lang verwenden können, um sich mit dem Service vertraut zu machen. Mit einem nutzungsabhängigen Konto oder einem Abonnementkonto können Sie auch einen kostenlosen Testcluster erstellen, jedoch auch IBM Cloud Infrastructure-Ressourcen (SoftLayer) für die Verwendung in Standardclustern bereitstellen.
+{:tip}
 
 Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:
 
-1.  Wählen Sie im [-{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) die Option **{{site.data.keyword.containershort_notm}}** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
+1.  Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) den Eintrag **Container in Kubernetes-Clustern** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
 
 2. Geben Sie dem Cluster einen eindeutigen Namen.
 
-3.  Klicken Sie auf **Cluster erstellen**. Es wird ein Worker-Pool erstellt, der einen Workerknoten enthält. Die Bereitstellung des Workerknotens kann einige Minuten dauern, der Fortschritt wird jedoch auf der Registerkarte **Workerknoten** angezeigt. Wenn der Status `Bereit` lautet, können Sie anfangen, mit dem Cluster zu arbeiten!
+3.  Klicken Sie auf **Cluster erstellen**. Es wird ein Workerknoten erstellt. Die Bereitstellung kann einige Minuten dauern, der Fortschritt wird jedoch auf der Registerkarte **Workerknoten** angezeigt. Wenn der Status `Bereit` lautet, können Sie anfangen, mit dem Cluster zu arbeiten!
 
 Hervorragend! Sie haben Ihren ersten Kubernetes-Cluster erstellt. Im Folgenden finden Sie einige Details zu Ihrem kostenlosen Cluster:
 
-*   **Maschinentyp**: Der kostenlose Cluster verfügt über einen in einem Worker-Pool gruppierten virtuellen Workerknoten mit zwei CPUs, 4 GB Speicher und einer einzelnen 100-GB-SAN-Platte, die für die Apps zur Verfügung steht. Wenn Sie einen Standardcluster erstellen, können Sie zwischen physischen (Bare-Metal-Maschinen) oder virtuellen Maschinen sowie verschiedenen Maschinengrößen wählen.
+*   **Maschinentyp**: Der kostenlose Cluster stellt Ihren Apps einen virtuellen Workerknoten mit 2 CPUs und 4 GB Speicherplatz zur Verfügung. Wenn Sie einen Standardcluster erstellen, können Sie zwischen physischen (Bare-Metal-Maschinen) oder virtuellen Maschinen sowie verschiedenen Maschinengrößen wählen.
 *   **Verwalteter Master**: Der Workerknoten wird durch einen dedizierten und hoch verfügbaren {{site.data.keyword.IBM_notm}}-eigenen Kubernetes-Master zentral überwacht und verwaltet, der alle Kubernetes-Ressourcen im Cluster steuert und überwacht. Sie können sich auf Ihren Workerknoten und die darin bereitgestellten Apps konzentrieren, ohne sich Gedanken über die Verwaltung des Masters zu machen.
-*   **Infrastrukturressourcen**: Die für die Ausführung des Clusters erforderlichen Ressourcen, z. B. VLANs und IP-Adressen, werden in einem {{site.data.keyword.IBM_notm}}-eigenen Konto der IBM Cloud-Infrastruktur (SoftLayer) verwaltet. Wenn Sie einen Standardcluster erstellen, verwalten Sie diese Ressourcen in Ihrem eigenen Konto der IBM Cloud-Infrastruktur (SoftLayer). Weitere Informationen zu diesen Ressourcen und den [erforderlichen Berechtigungen](cs_users.html#infra_access) erhalten Sie, wenn Sie einen Standardcluster erstellen.
-*   **Weitere Optionen**: Kostenlose Cluster werden innerhalb der von Ihnen ausgewählten Region bereitgestellt. Sie können jedoch nicht auswählen, in welcher Zone sie sich befinden werden. Erstellen Sie einen Standardcluster, um Kontrolle über Zone, Vernetzung und persistenten Speicher zu haben. [Weitere Informationen zu den Vorteilen von kostenlosen und Standardclustern](cs_why.html#cluster_types).
+*   **Infrastrukturressourcen**: Die für die Ausführung des Clusters erforderlichen Ressourcen, z. B. VLANs und IP-Adressen, werden in einem {{site.data.keyword.IBM_notm}}-eigenen Konto von IBM Cloud Infrastructure (SoftLayer) verwaltet. Wenn Sie einen Standardcluster erstellen, verwalten Sie diese Ressourcen in Ihrem eigenen Konto von IBM Cloud Infrastructure (SoftLayer). Weitere Informationen zu diesen Ressourcen und den [erforderlichen Berechtigungen](cs_users.html#infra_access) erhalten Sie, wenn Sie einen Standardcluster erstellen.
+*   **Weitere Optionen**: Kostenlose Cluster werden innerhalb der von Ihnen ausgewählten Region bereitgestellt. Sie können jedoch nicht auswählen, an welcher Position (in welchem Rechenzentrum) sie sich befinden werden. Erstellen Sie einen Standardcluster, um Kontrolle über Position, Vernetzung und persistenten Speicher zu haben. [Weitere Informationen zu den Vorteilen von kostenlosen und Standardclustern](cs_why.html#cluster_types).
 
 
-**Womit möchten Sie fortfahren? **</br>
-Probieren Sie verschiedene Dinge mit dem kostenlosen Cluster aus, bevor dieser abläuft.
+**Womit möchten Sie fortfahren?**
+In den nächsten 21 Tagen haben Sie die Gelegenheit, verschiedene Dinge mit Ihrem kostenlosen Cluster auszuprobieren.
 
-* Arbeiten Sie das [erste {{site.data.keyword.containershort_notm}}-Lernprogramm](cs_tutorials.html#cs_cluster_tutorial) durch, um einen Kubernetes-Cluster zu erstellen, die CLI zu installieren, eine private Registry zu erstellen, die Clusterumgebung einzurichten und einen Service zu Ihrem Cluster hinzuzufügen.
-* Behalten Sie Ihren Schwung mit dem [zweiten {{site.data.keyword.containershort_notm}}-Lernprogramm](cs_tutorials_apps.html#cs_apps_tutorial) über die Bereitstellung von Apps im Cluster bei.
-* [Erstellen Sie einen Standardcluster](cs_clusters.html#clusters_ui) mit mehreren Knoten für eine höhere Verfügbarkeit.
-
-
+* [Installieren Sie die Befehlszeilenschnittstellen und nehmen Sie die Arbeit mit dem Cluster auf.](cs_cli_install.html#cs_cli_install)
+* [Stellen Sie eine App in Ihrem Cluster bereit.](cs_app.html#app_cli)
+* [Erstellen Sie einen Standardcluster mit mehreren Knoten zwecks höherer Verfügbarkeit.](cs_clusters.html#clusters_ui)
+* [Richten Sie eine private Registry in {{site.data.keyword.Bluemix_notm}} ein, um Docker-Images zu speichern und gemeinsam mit anderen Benutzern zu verwenden.](/docs/services/Registry/index.html)

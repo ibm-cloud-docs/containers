@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,13 +16,14 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
+
 # Datenverkehr anhand von Netzrichtlinien steuern
 {: #network_policies}
 
 Jeder Kubernetes-Cluster wird mit einem Netz-Plug-in namens Calico eingerichtet. Standardnetzrichtlinien werden zum Schutz der öffentlichen Netzschnittstelle der einzelnen Workerknoten in {{site.data.keyword.containerlong}} eingerichtet.
 {: shortdesc}
 
-Wenn Sie spezielle Sicherheitsanforderungen haben oder über einen Mehrfachzonencluster mit aktiviertem VLAN-Spanning verfügen, können Sie Calico und Kubernetes zum Erstellen von Netzrichtlinien für einen Cluster verwenden. Mit Kubernetes-Netzrichtlinien können Sie den Netzverkehr angeben, den Sie zu und von einem Pod in einem Cluster zulassen oder blockieren möchten. Um erweiterte Netzrichtlinien einzurichten, beispielsweise zum Blockieren von eingehendem Datenverkehr (Ingress) an LoadBalancer-Services, verwenden Sie Calico-Netzrichtlinien.
+Wenn Sie spezielle Sicherheitsanforderungen haben, können Sie Calico und Kubernetes zum Ersellen von Netzrichtlinien für einen Cluster verwenden. Mit Kubernetes-Netzrichtlinien können Sie den Netzverkehr angeben, den Sie zu und von einem Pod in einem Cluster zulassen oder blockieren möchten. Um erweiterte Netzrichtlinien einzurichten, beispielsweise zum Blockieren von eingehendem Datenverkehr (Ingress) an LoadBalancer-Services, verwenden Sie Calico-Netzrichtlinien.
 
 <ul>
   <li>
@@ -41,9 +42,6 @@ Wenn Sie spezielle Sicherheitsanforderungen haben oder über einen Mehrfachzonen
 Calico erzwingt diese Richtlinien, einschließlich aller Kubernetes-Netzrichtlinien, die automatisch in Calico-Richtlinien konvertiert werden, indem 'iptables'-Regeln von Linux in den Kubernetes-Workerknoten konfiguriert werden. 'iptables'-Regeln dienen als
 Firewall für den Workerknoten, um die Merkmale zu definieren, die der Netzverkehr erfüllen muss, damit er an die Zielressource weitergeleitet wird.
 
-Um Ingress- and LoadBalancer-Services zu verwenden, greifen Sie bei der Verwaltung des Netzverkehrs für Ihren Cluster auf Calico- and Kubernetes-Richtlinien zurück. Verwenden Sie dazu nicht [Sicherheitsgruppen](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups) der IBM Cloud-Infrastruktur (SoftLayer). Die Sicherheitsgruppen der IBM Cloud-Infrastruktur (SoftLayer) werden auf die Netzschnittstelle eines einzelnen virtuellen Servers angewendet, um den Datenverkehr auf Hypervisor-Ebene zu filtern. Sicherheitsgruppen unterstützen jedoch nicht das VRRP-Protokoll, das {{site.data.keyword.containershort_notm}} verwendet, um die LoadBalancer-IP-Adresse zu verwalten. Wenn das VRRP-Protokoll nicht zur Verwaltung der LoadBalancer-IP, der Ingress- und LoadBalancer-Services zur Verfügung steht, funktionieren die Services nicht ordnungsgemäß.
-{: tip}
-
 <br />
 
 
@@ -53,13 +51,13 @@ Um Ingress- and LoadBalancer-Services zu verwenden, greifen Sie bei der Verwaltu
 Wenn ein Cluster mit einem öffentlichen VLAN erstellt wird, wird für jeden Workerknoten und die entsprechende öffentliche Netzschnittstelle automatisch eine Host-Endpunkt-Ressource mit der Bezeichnung `ibm.role: worker_public` erstellt. Um die öffentliche Netzschnittstelle eines Workerknotens zu schützen, werden Calico-Standardrichtlinien auf alle Host-Endpunkte mit der Bezeichnung `ibm.role: worker_public` angewendet.
 {:shortdesc}
 
-Diese Calico-Standardrichtlinien lassen sämtlichen ausgehenden und eingehenden Netzdatenverkehr zu bestimmten Clusterkomponenten, wie NodePort-, LoadBalancer- und Ingress-Services von Kubernetes, zu. Jeglicher eingehender Netzdatenverkehr aus dem Internet zu den Workerknoten, der nicht in den Standardrichtlinien festgelegt ist, wird blockiert. Die Standardrichtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus.
+Diese Calico-Standardrichtlinien lassen sämtlichen ausgehenden und eingehenden Netzdatenverkehr zu bestimmten Clusterkomponenten, wie NodePort-, LoadBalancer- und Ingress-Services von Kubernetes, zu. Eingehender Netzdatenverkehr aus dem Internet zu den Workerknoten, der nicht in den Standardrichtlinien festgelegt ist, wird blockiert. Die Standardrichtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus.
 
 Sehen Sie sich die folgenden Calico-Standardnetzrichtlinien an, die automatisch auf Ihren Cluster angewendet werden.
 
 **Wichtig:** Entfernen Sie keine Richtlinien, die auf einen Host-Endpunkt angewendet sind, es sei denn, Sie kennen die Richtlinie. Vergewissern Sie sich, dass Sie den Datenverkehr, der durch diese Richtlinie zugelassen wird, nicht benötigen.
 
- <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+ <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts den Serverstandort in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
  <caption>Calico-Standardrichtlinien für die einzelnen Cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Calico-Standardrichtlinien für die einzelnen Cluster</th>
@@ -70,7 +68,7 @@ Sehen Sie sich die folgenden Calico-Standardnetzrichtlinien an, die automatisch 
       <td>Lässt den gesamten ausgehenden Datenverkehr zu.</td>
     </tr>
     <tr>
-      <td><code>allow-bigfix-port</code></td>
+      <td><code>allow-bixfix-port</code></td>
       <td>Lässt eingehenden Datenverkehr an Port 52311 zur BigFix-App zu, um erforderliche Aktualisierungen für Workerknoten zu ermöglichen.</td>
     </tr>
     <tr>
@@ -83,7 +81,7 @@ Sehen Sie sich die folgenden Calico-Standardnetzrichtlinien an, die automatisch 
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Lässt eingehende Verbindungen für bestimmte Systeme der IBM Cloud-Infrastruktur (SoftLayer) zu, die zum Verwalten der Workerknoten verwendet werden.</td>
+      <td>Lässt eingehende Verbindungen für bestimmte Systeme von IBM Cloud Infrastructure (SoftLayer) zu, die zum Verwalten der Workerknoten verwendet werden.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -127,10 +125,10 @@ Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version 
 ### Version 3.1.1 der Calico-CLI für Cluster installieren und konfigurieren, die Kubernetes Version 1.10 oder höher ausführe
 {: #1.10_install}
 
-Führen Sie zunächst folgende Schritte aus. [Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `ibmcloud ks cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
+Führen Sie zunächst folgende Schritte aus. [Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
 
   ```
-  ibmcloud ks cluster-config <clustername> --admin
+  bx cs cluster-config <clustername> --admin
   ```
   {: pre}
 
@@ -138,8 +136,7 @@ Gehen Sie wie folgt vor, um die Calico-CLI der Version 3.1.1 zu installieren und
 
 1. [Laden Sie die Calico-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1) herunter.
 
-    Wenn Sie OSX verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. Stellen Sie sicher, dass die Datei als `calicoctl.exe` gespeichert wird.
-    {: tip}
+    Wenn Sie OSX verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. {: tip}
 
 2. OSX- und Linux-Benutzer müssen die folgenden Schritte ausführen:
     1. Verschieben Sie die ausführbare Datei in das Verzeichnis _/usr/local/bin_.
@@ -218,14 +215,14 @@ X:
           Beispielausgabe:
 
           ```
-          https://169.xx.xxx.xxx:30000
+          https://169.xx.xxx.xxx:30001
           ```
           {: screen}
 
       - Windows:
         <ol>
         <li>Rufen Sie die Calico-Konfigurationswerte aus der Konfigurationszuordnung ab. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-        <li>Suchen Sie im Abschnitt `data` nach dem Wert für 'etcd_endpoints'. Beispiel: <code>https://169.xx.xxx.xxx:30000</code>
+        <li>Suchen Sie im Abschnitt `data` nach dem Wert für 'etcd_endpoints'. Beispiel: <code>https://169.xx.xxx.xxx:30001</code>
         </ol>
 
     2. Rufen Sie das Verzeichnis `<CERTS_DIR>` ab. Dies ist das Verzeichnis, in das die Kubernetes-Zertifikate heruntergeladen werden.
@@ -258,7 +255,7 @@ X:
           ```
           {: screen}
 
-        **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<zone>-<cluster_name>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
+        **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<location>-<cluster_name>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
 
     3. Rufen Sie die `ca-*pem-datei` ab.
 
@@ -273,42 +270,40 @@ X:
           <ol><li>Öffnen Sie das Verzeichnis, das Sie im letzten Schritt abgerufen haben.</br><pre class="codeblock"><code>C:\Benutzer\<user>\.bluemix\plugins\container-service\&lt;clustername&gt;-admin\</code></pre>
           <li> Suchen Sie die Datei <code>ca-*pem-datei</code>.</ol>
 
-8. Speichern Sie die Datei und stellen Sie sicher, dass Sie sich in dem Verzeichnis befinden, in dem sich die Datei befindet.
+    4. Vergewissern Sie sich, dass die Calico-Konfiguration ordnungsgemäß funktioniert.
 
-9. Vergewissern Sie sich, dass die Calico-Konfiguration ordnungsgemäß funktioniert.
+        - Linux und OS X:
 
-    - Linux und OS X:
+          ```
+          calicoctl get nodes
+          ```
+          {: pre}
 
-      ```
-      calicoctl get nodes
-      ```
-      {: pre}
+        - Windows:
 
-    - Windows:
+          ```
+          calicoctl get nodes --config=filepath/calicoctl.cfg
+          ```
+          {: pre}
 
-      ```
-      calicoctl get nodes --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+          Ausgabe:
 
-      Ausgabe:
-
-      ```
-      NAME
+          ```
+          NAME
               kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
               kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
               kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-      ```
-      {: screen}
+          ```
+          {: screen}
 
 
 ### Version 1.6.3 der Calico-CLI für Cluster installieren und konfigurieren, die Kubernetes Version 1.9 oder früher ausführe
 {: #1.9_install}
 
-Führen Sie zunächst folgende Schritte aus. [Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `ibmcloud ks cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
+Führen Sie zunächst folgende Schritte aus. [Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
 
   ```
-  ibmcloud ks cluster-config <clustername> --admin
+  bx cs cluster-config <clustername> --admin
   ```
   {: pre}
 
@@ -316,8 +311,7 @@ Gehen Sie wie folgt vor, um die Calico-CLI der Version 1.6.3 zu installieren und
 
 1. [Laden Sie die Calico-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3) herunter.
 
-    Wenn Sie OSX verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen.
-    {: tip}
+    Wenn Sie OSX verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. {: tip}
 
 2. OSX- und Linux-Benutzer müssen die folgenden Schritte ausführen:
     1. Verschieben Sie die ausführbare Datei in das Verzeichnis _/usr/local/bin_.
@@ -434,7 +428,7 @@ X:
           ```
           {: screen}
 
-        **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<zone>-<cluster_name>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
+        **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<location>-<cluster_name>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
 
     3. Rufen Sie die `ca-*pem-datei` ab.
 
@@ -475,8 +469,6 @@ X:
           ```
           {: screen}
 
-          **Wichtig**: Windows- und OS X-Benutzer müssen jedes Mal, wenn Sie einen Befehl des Typs `calicoctl` ausführen, das Flag `--config=filepath/calicoctl.cfg` einschließen.
-
 <br />
 
 
@@ -488,9 +480,9 @@ Zeigen Sie die Details für Standardrichtlinien und allen weiteren hinzugefügte
 
 Vorbemerkungen:
 1. [Installieren und konfigurieren Sie die Calico-CLI.](#cli_install)
-2. [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `ibmcloud ks cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
+2. [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
     ```
-    ibmcloud ks cluster-config <clustername> --admin
+    bx cs cluster-config <clustername> --admin
     ```
     {: pre}
 
@@ -505,13 +497,10 @@ Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version 
 ### Netzrichtlinien in Clustern anzeigen, die Kubernetes Version 1.10 oder höher ausführen
 {: #1.10_examine_policies}
 
-Linux-Benutzer müssen das Flag `--config=filepath/calicoctl.cfg` nicht in Befehle des Typs `calicoctl` einschließen.
-{: tip}
-
 1. Zeigen Sie den Calico-Host-Endpunkt an.
 
     ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get hostendpoint -o yaml
     ```
     {: pre}
 
@@ -519,61 +508,57 @@ Linux-Benutzer müssen das Flag `--config=filepath/calicoctl.cfg` nicht in Befeh
 
     [Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) beziehen sich auf bestimmte Namensbereiche:
     ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy --all-namespaces -o wide
     ```
-    {:pre}
 
     [Globale Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) beziehen sich nicht auf bestimmte Namensbereiche:
     ```
-    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o wide
     ```
     {: pre}
 
 3. Zeigen Sie Details für ein Netzrichtlinie an.
 
     ```
-    calicoctl get NetworkPolicy -o yaml <richtlinienname> --namespace <namensbereich_für_richtlinie> --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy -o yaml <richtlinienname> --namespace <namensbereich_für_richtlinie>
     ```
     {: pre}
 
 4. Zeigen Sie die Details aller globalen Netzrichtlinien für den Cluster an.
 
     ```
-    calicoctl get GlobalNetworkPolicy -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o yaml
     ```
     {: pre}
 
 ### Netzrichtlinien in Clustern anzeigen, die Kubernetes Version 1.9 oder früher ausführen
 {: #1.9_examine_policies}
 
-Linux-Benutzer müssen das Flag `--config=filepath/calicoctl.cfg` nicht in Befehle des Typs `calicoctl` einschließen.
-{: tip}
-
 1. Zeigen Sie den Calico-Host-Endpunkt an.
 
     ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get hostendpoint -o yaml
     ```
     {: pre}
 
 2. Zeigen Sie alle Calico- und Kubernetes-Netzrichtlinien an, die für den Cluster erstellt wurden. Diese Liste enthält Richtlinien, die möglicherweise noch nicht auf Pods oder Hosts angewendet wurden. Damit eine Netzrichtlinie erzwungen wird, muss eine Kubernetes-Ressource gefunden werden, die mit dem Selektor übereinstimmt, der in der Calico-Netzrichtlinie definiert wurde.
 
     ```
-    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
+    calicoctl get policy -o wide
     ```
     {: pre}
 
 3. Zeigen Sie Details für ein Netzrichtlinie an.
 
     ```
-    calicoctl get policy -o yaml <richtlinienname> --config=filepath/calicoctl.cfg
+    calicoctl get policy -o yaml <richtlinienname>
     ```
     {: pre}
 
 4. Zeigen Sie die Details aller Netzrichtlinien für den Cluster an.
 
     ```
-    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get policy -o yaml
     ```
     {: pre}
 
@@ -592,9 +577,9 @@ Um Calico-Richtlinien zu erstellen, führen Sie die folgenden Schritte aus.
 
 Vorbemerkungen:
 1. [Installieren und konfigurieren Sie die Calico-CLI.](#cli_install)
-2. [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `ibmcloud ks cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
+2. [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
     ```
-    ibmcloud ks cluster-config <clustername> --admin
+    bx cs cluster-config <clustername> --admin
     ```
     {: pre}
 
@@ -652,10 +637,10 @@ Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version 
 <br />
 
 
-## Eingehenden Datenverkehr zu LoadBalancer- oder NodePort-Services steuern
+## Eingehenden Datenverkehr zu LoadBalancer- oder NodePort-Services blockieren
 {: #block_ingress}
 
-[Standardmäßig](#default_policy) sind die NodePort- und LoadBalancer-Services von Kubernetes so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Sie können jedoch die Richtlinien von Calico verwenden, um den eingehenden Datenverkehr auf Basis der Daqtenverkehrsquelle oder des Ziels zu blockieren.
+[Standardmäßig](#default_policy) sind die NodePort- und LoadBalancer-Services von Kubernetes so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Allerdings können Sie den eingehenden Datenverkehr zu Ihren Services auf Basis der Datenverkehrsquelle oder des Ziels blockieren.
 {:shortdesc}
 
 Ein Kubernetes-LoadBalancer-Service stellt auch einen NodePort-Service dar. Ein LoadBalancer-Service stellt Ihre App über die IP-Adresse der Lastausgleichsfunktion und den zugehörigen Port zur Verfügung und macht sie über die Knotenports des Service verfügbar. Auf Knotenports kann über jede IP-Adresse (öffentlich und privat) für jeden Knoten innerhalb des Clusters zugegriffen werden.
@@ -685,7 +670,7 @@ generieren. Cluster der Kubernetes Version 1.10 oder höher verwenden [Netzricht
         apiVersion: projectcalico.org/v3
         kind: GlobalNetworkPolicy
         metadata:
-          name: deny-nodeports
+          name: deny-kube-node-port-services
         spec:
           applyOnForward: true
           ingress:
@@ -702,8 +687,7 @@ generieren. Cluster der Kubernetes Version 1.10 oder höher verwenden [Netzricht
             protocol: UDP
             source: {}
           preDNAT: true
-          selector: ibm.role=='worker_public'
-          order: 1100
+          selector: ibm.role in { 'worker_public', 'master_public' }
           types:
           - Ingress
         ```
@@ -717,7 +701,7 @@ generieren. Cluster der Kubernetes Version 1.10 oder höher verwenden [Netzricht
         apiVersion: v1
         kind: policy
         metadata:
-          name: deny-nodeports
+          name: deny-kube-node-port-services
         spec:
           preDNAT: true
           selector: ibm.role in { 'worker_public', 'master_public' }
@@ -737,127 +721,7 @@ generieren. Cluster der Kubernetes Version 1.10 oder höher verwenden [Netzricht
 
 2. Wenden Sie die Calico-Netzrichtlinie vom Typ 'preDNAT' an. Es dauert ca. eine Minute, bis die Richtlinienänderungen im Cluster angewendet sind.
 
-  - Linux und OS X:
-
-    ```
-    calicoctl apply -f deny-nodeports.yaml
-    ```
-    {: pre}
-
-  - Windows:
-
-    ```
-    calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-3. Optional: In Mehrzonenclustern überprüft ein MZLB-Status die ALBs in jeder Zone des Clusters und hält die Ergebnisse der DNS-Suche auf der Basis dieser Diagnosungsprüfungen aktualisiert. Wenn Sie die preDNAT-Richtlinien verwenden, um den gesamten eingehenden Datenverkehr zu Ingress-Services zu blockieren, müssen Sie auch die [Cloudflare-IPv4-IPs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.cloudflare.com/ips/), die zur Überprüfung des Status Ihrer ALBs verwendet werden, in die Whitelist stellen. Informationen zum Erstellen einer Calico-preDNAT-Richtlinie für die Whitelist für diese IPs finden Sie unter Lerneinheit 3 des Lernprogramms [ Calico-Netzrichtlinie ](cs_tutorials_policies.html#lesson3).
-
-Um zu erfahren, wie Sie Quellen-IP-Adressen in Whitelists oder Blacklists aufnehmen, sehen Sie sich das [Lernprogramm zur Verwendung von Calico-Netzrichtlinien zum Blockieren von Datenverkehr](cs_tutorials_policies.html#policy_tutorial) an. Weitere Beispiele für Calico-Netzrichtlinien, die den Datenverkehr zu und von Ihrem Cluster steuern, finden Sie in der [Demo zur stars-Richtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) und in der [Demo zur erweiterten Richtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
-{: tip}
-
-## Datenverkehr zwischen Pods steuern
-{: #isolate_services}
-
-Kubernetes-Richtlinien schützen Pods vor internem Netzdatenverkehr. Sie können einfache Kubernetes-Netzrichtlinien erstellen, um die App-Mikroservices innerhalb eines Namensbereichs oder über Namensbereiche hinweg voneinander zu trennen.
-{: shortdesc}
-
-Weitere Informationen darüber, wie Kubernetes-Netzrichtlinien Pod-zu-Pod-Datenverkehr steuern, sowie weitere Beispielrichtlinien finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
-{: tip}
-
-### App-Services in einem Namensbereich isolieren
-{: #services_one_ns}
-
-Das folgende Szenario veranschaulicht, wie der Datenverkehr zwischen App-Mikroservices in einem Namensbereich verwaltet wird.
-
-Ein Team 'Accounts' stellt mehrere App-Services in einem Namensbereich bereit. Diese müssen jedoch isoliert werden, um nur die erforderliche Kommunikation zwischen den Mikroservices über das öffentliche Netz zu ermöglichen. Für die App 'Srv1' verfügt das Team über Front-End-, Back-End- und Datenbankservices. Jeder Service erhält die Bezeichnung `App: Srv1` sowie die Bezeichnung `Tier: Front-End`, `Tier: Back-End` oder `Tier: db`.
-
-<img src="images/cs_network_policy_single_ns.png" width="200" alt="Verwenden Sie eine Netzrichtlinie, um den bereichsübergreifenden Datenverkehr zu verwalten." style="width:200px; border-style: none"/>
-
-Das Team 'Accounts' möchte Datenverkehr vom Front-End zum Back-End und vom Back-End zur Datenbank zulassen. Es verwendet Bezeichnungen in den Netzrichtlinien, um festzulegen, welche Datenflüsse zwischen den Mikroservices zulässig sind.
-
-Zunächst erstellt das Team eine Kubernetes-Netzrichtlinie, die den Datenverkehr vom Frontend zum Back-End ermöglicht:
-
-```
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: backend-allow
-spec:
-  podSelector:
-    matchLabels:
-      app: Srv1
-      tier: backend
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: Srv1
-          Tier: frontend
-```
-{: codeblock}
-
-Im Abschnitt `spec.podSelector.matchLabels` sind die Bezeichnungen für den Back-End-Service für Srv1 aufgeführt, sodass die Richtlinie nur _für_ diese Pods gilt. Im Abschnitt ` spec.ingress.from.podSelector.matchLabels ` werden die Bezeichnungen für den Front-End-Service für Srv1 aufgelistet, sodass Ingress nur _über_ diese Pods zugelassen wird.
-
-Anschließend erstellt das Team eine ähnliche Kubernetes-Netzrichtlinie, die den Datenverkehr vom Back-End zur Datenbank zulässt:
-
-```
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: db-allow
-spec:
-  podSelector:
-    matchLabels:
-      app: Srv1
-      tier: db
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: Srv1
-          Tier: backend
   ```
-  {: codeblock}
-
-Im Abschnitt `spec.podSelector.matchLabels` sind die Bezeichnungen für den Datenbankservice für Srv1 aufgeführt, sodass die Richtlinie nur _für_ diese Pods gilt. Im Abschnitt `spec.ingress.from.podSelector.matchLabels` werden die Bezeichnungen für den Back-End-Service für Srv1 aufgelistet, sodass Ingress nur _über_ diese Pods zugelassen wird.
-
-Der Datenverkehr kann nun vom Front-End zum Back-End und vom Back-End zur Datenbank fließen. Die Datenbank kann auf das Back-End reagieren und das Back-End auf das Front-End; es können jedoch keine reversen Datenverkehrverbindungen aufgebaut werden.
-
-### App-Services zwischen Namensbereichen isolieren
-{: #services_across_ns}
-
-Im folgenden Szenario wird gezeigt, wie der Datenverkehr zwischen App-Mikroservices über mehrere Namensbereiche hinweg verwaltet wird.
-
-Services, deren Eigner verschiedene untergeordnete Teams sind, müssen kommunizieren, die Services werden aber in unterschiedlichen Namensbereichen innerhalb desselben Clusters implementiert. Das Team 'Accounts' implementiert Front-End-, Back-End- und Datenbankservices für die App 'Srv1' im Namensbereich 'Account'. Das Team 'Finance' implementiert Front-End-, Back-End- und Datenbankservices für die App 'Srv2' im Namensbereich 'Finance'. Jeder Service erhält von den Teams die Bezeichnung `App: Srv1` oder `App: Srv2` sowie die Bezeichnung `Tier: Front-End`, `Tier: Back-End` oder `Tier: db`. Außerdem werden die Namensbereiche mit der Bezeichnung `Nutzung: Finanzen` oder `Nutzung: Konten` versehen.
-
-<img src="images/cs_network_policy_multi_ns.png" width="475" alt="Verwenden Sie eine Netzrichtlinie zum Verwalten von namensbereichsübergreifendem Datenverkehr." style="width:475px; border-style: none"/>
-
-'Srv2' des Teams 'Finance' muss Informationen vom Back-End für 'Srv1' des Teams 'Accounts' aufrufen. Das Team 'Accounts' erstellt daher eine Kubernetes-Netzrichtlinie, die mithilfe von Bezeichnungen den gesamten Datenverkehr vom Namensbereich 'Finance' zum Back-End für 'Srv1' im Namensbereich 'Accounts' zulässt. Das Team gibt zudem den Port 3111 an, um den Zugriff ausschließlich an diesem Port zu ermöglichen.
-
-```
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  Namespace: accounts
-  name: accounts-allow
-spec:
-  podSelector:
-    matchLabels:
-      app: Srv1
-      Tier: backend
-  ingress:
-  - from:
-    - NamespaceSelector:
-        matchLabels:
-          usage: finance
-      ports:
-        port: 3111
-```
-{: codeblock}
-
-Im Abschnitt `spec.podSelector.matchLabels` sind die Bezeichnungen für den Back-End-Service für Srv1 aufgeführt, sodass die Richtlinie nur _für_ diese Pods gilt. Der Abschnitt `spec.ingress.from.NamespaceSelector.matchLabels` enthält die Bezeichnung für den Namensbereich 'Finance', sodass für Ingress nur _Von_-Services in diesem Namensbereich zulässig sind.
-
-Der Datenverkehr kann nun von den Mikroservices von 'Finance' zum Back-End für 'Srv1' von 'Accounts' fließen. Das Back-End für Srv1 von 'Accounts' kann auf die Mikroservices von 'Finance' antworten, jedoch keine umgekehrte Datenverkehrsverbindung herstellen.
-
-**Hinweis**: Der Datenverkehr von bestimmten App-Pods in einem anderen Namensbereich ist nicht möglich, da `podSelector` und `namespaceSelector` nicht kombiniert werden können. In diesem Beispiel ist der gesamte Datenverkehr von allen Mikroservices im Namensbereich 'Finance' zulässig.
+  calicoctl apply -f deny-kube-node-port-services.yaml
+  ```
+  {: pre}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -29,23 +29,6 @@ Lorsque vous utilisez {{site.data.keyword.containerlong}}, tenez compte des tech
 Si vous rencontrez un problème d'ordre plus général, expérimentez le [débogage de cluster](cs_troubleshoot.html).
 {: tip}
 
-## Dans un cluster à zones multiples, le montage d'un volume persistant sur un pod échoue
-{: #mz_pv_mount}
-
-{: tsSymptoms}
-Votre cluster était auparavant un cluster à zone unique avec des noeuds worker autonomes qui ne se trouvaient pas dans des pools de noeuds worker. Vous avez réussi à monter une réservation de volume persistant (PVC) qui décrivait le volume persistant (PV) à utiliser pour le déploiement du pod de votre application. Maintenant que vous disposez de pools de noeuds worker et de zones ajoutées dans votre cluster, le montage du volume persistant sur un pod se solde par un échec.
-
-{: tsCauses}
-Pour les clusters à zones multiples, les volumes persistants ont les libellés suivants pour que les pods ne puissent pas tenter de monter des volumes dans une autre zone.
-* `failure-domain.beta.kubernetes.io/region`
-* `failure-domain.beta.kubernetes.io/zone`
-
-Par défaut, les nouveaux clusters avec des pools de noeuds worker pouvant couvrir plusieurs zones fournissent ces labels aux volumes persistants. Si vous avez créé vos clusters avant l'introduction des pools de noeuds worker, vous devez ajouter ces libellés manuellement.
-
-{: tsResolve}
-[Mettez à jour les volumes persistants dans votre cluster avec des libellés de région et de zone](cs_storage_basics.html#multizone).
-
-<br />
 
 
 ## Les systèmes de fichiers des noeuds worker passent en mode lecture seule
@@ -63,9 +46,9 @@ Le système de fichiers sur le noeud worker est en lecture seule.
 {: tsResolve}
 1.  Sauvegardez les données éventuelles stockées sur le noeud worker ou dans vos conteneurs.
 2.  Pour une solution à court terme sur le noeud worker existant, rechargez le noeud worker.
-    <pre class="pre"><code>ibmcloud ks worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
+    <pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_ID&gt;</code></pre>
 
-Pour une solution à long terme, [mettez à jour le type de machine de votre pool de noeuds worker](cs_cluster_update.html#machine_type).
+Pour une solution à long terme, [mettez à jour le type de machine en ajoutant un autre noeud worker](cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -75,7 +58,7 @@ Pour une solution à long terme, [mettez à jour le type de machine de votre poo
 {: #nonroot}
 
 {: tsSymptoms}
-Une fois que vous [ajoutez du stockage NFS](cs_storage_file.html#app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir des erreurs liées au droit d'accès en écriture ou des messages d'erreur indiquant qu'il manque des droits nécessaires. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
+Une fois que vous [ajoutez du stockage NFS](cs_storage.html#app_volume_mount) dans votre déploiement, le conteneur ne parvient pas à se déployer. Lorsque vous extrayez les journaux de votre conteneur, vous pourrez voir des erreurs liées au droit d'accès en écriture ou des messages d'erreur indiquant qu'il manque des droits nécessaires. Il y a échec du pod qui est bloqué dans un cycle de rechargement.
 
 {: tsCauses}
 Par défaut, les utilisateurs non root ne disposent pas de droits en écriture sur le chemin de montage du volume correspondant au stockage sauvegardé par NFS. Certaines images d'application courantes, telles que Jenkins et Nexus3, spécifient un utilisateur non root qui détient le chemin de montage dans le fichier Dockerfile. Lorsque vous créez un conteneur à partir de ce fichier Dockerfile, la création échoue car l'utilisateur non root ne dispose pas des droits nécessaires pour accéder au chemin de montage. Pour octroyer des droits en écriture, vous pouvez modifier le fichier Dockerfile pour ajouter temporairement l'utilisateur non root au groupe d'utilisateurs root avant que les droits sur le chemin de montage soient modifiés, ou utiliser un conteneur init.
@@ -89,7 +72,7 @@ Si vous utilisez une charte Helm pour déployer l'image, modifiez le déploiemen
 Lorsque vous ajoutez un [conteneur init![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans votre déploiement, vous pouvez octroyer à un utilisateur non root spécifié dans votre fichier Dockerfile les droits en écriture pour le chemin de montage du volume à l'intérieur du conteneur qui pointe vers votre partage de fichiers NFS. Le conteneur init démarre avant le conteneur de votre application. Le conteneur init crée le chemin de montage du volume dans le conteneur, modifie le chemin de montage de sorte à ce que l'utilisateur (non root) correct en soit détenteur, puis se ferme. Ensuite, le conteneur de votre application avec l'utilisateur non root qui doit écrire dans le chemin de montage démarre. Comme le chemin est déjà détenu par l'utilisateur non root, l'écriture dans le chemin de montage aboutit. Si vous ne voulez pas utiliser un conteneur init, vous pouvez modifier le fichier Dockerfile afin d'ajouter l'accès d'utilisateur non root au stockage de fichiers NFS.
 
 
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
 
 1.  Ouvrez le fichier Dockerfile de votre application et récupérez l'ID utilisateur (UID) et l'ID du groupe (GID) de l'utilisateur auquel vous voulez accorder les droits en écriture sur le chemin de montage du volume. Dans l'exemple d'un fichier Dockerfile Jenkins, les informations sont :
     - UID : `1000`
@@ -299,8 +282,8 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Vous disposez d'une unité de stockage par blocs configurée avec un système de fichiers `XFS`. Pour monter cette unité sur votre pod, vous [avez créé un volume persistant (PV)](cs_storage_block.html#existing_block) qui spécifiait `ext4` pour votre système de fichiers dans la section `spec/flexVolume/fsType`. Si aucun système de fichiers n'est défini, le volume persistant prend la valeur par défaut `ext4`.
-Le volume persistant a été créé et lié à votre instance de stockage par blocs. Cependant, lorsque vous tentez de monter le volume persistant sur votre cluster en utilisant une réservation de volume persistant (PVC) correspondante, le montage du volume échoue. Vous ne pouvez pas monter votre instance de stockage par blocs `XFS` avec un système de fichiers `ext4` sur le pod.
+Vous disposez d'une unité de stockage par blocs configurée avec un système de fichiers `XFS`. Pour monter cette unité sur votre pod, vous [avez créé un volume persistant (PV)](cs_storage.html#existing_block) qui spécifiait `ext4` pour votre système de fichiers dans la section `spec/flexVolume/fsType`. Si aucun système de fichiers n'est défini, le volume persistant prend la valeur par défaut `ext4`.
+Le volume persitant a été créé et lié à votre instance de stockage par blocs. Cependant, lorsque vous tentez de monter le volume persistant sur votre cluster en utilisant une réservation de volume persistant (PVC) correspondante, le montage du volume échoue. Vous ne pouvez pas monter votre instance de stockage par blocs `XFS` avec un système de fichiers `ext4` sur le pod.
 
 {: tsResolve}
 Mettez à jour le système de fichier dans le volume persistant (PV) existant en remplaçant `ext4` par `XFS`.
@@ -361,10 +344,11 @@ Vous avez encore des problèmes avec votre cluster ?
 
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
-    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
+    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
+pour plus d'informations sur l'utilisation des forums.
 
 -   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`.
+Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.
 

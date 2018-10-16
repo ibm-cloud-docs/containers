@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,33 +19,42 @@ lastupdated: "2018-08-06"
 # {{site.data.keyword.cloudaccesstrailshort}}-Ereignisse
 {: #at_events}
 
-Mithilfe des {{site.data.keyword.cloudaccesstrailshort}}-Service können Sie vom Benutzer initiierte Aktivitäten in Ihrem {{site.data.keyword.containershort_notm}}-Cluster anzeigen, verwalten und prüfen.
+Mithilfe des {{site.data.keyword.cloudaccesstrailshort}}-Service können Sie vom Benutzer initiierte Aktivitäten in Ihrem {{site.data.keyword.containerlong_notm}}-Cluster anzeigen, verwalten und prüfen.
 {: shortdesc}
 
-## Informationen finden
-{: #at-find}
+
+
+Weitere Informationen zur Funktionsweise des Service finden Sie in der [Dokumentation zu {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Sie in der [Kubernetes-Dokumentation![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/). 
+
+
+## Informationen für Kubernetes-Auditereignisse suchen
+{: #kube-find}
 
 {{site.data.keyword.cloudaccesstrailshort}}-Ereignisse sind in der {{site.data.keyword.cloudaccesstrailshort}}-**Kontodomäne** verfügbar, die sich in der {{site.data.keyword.Bluemix_notm}}-Region befindet, in der die Ereignisse generiert werden. {{site.data.keyword.cloudaccesstrailshort}}-Ereignisse sind in der {{site.data.keyword.cloudaccesstrailshort}}-**Bereichsdomäne** verfügbar, die zum Cloud Foundry-Bereich zugeordnet ist, in dem der {{site.data.keyword.cloudaccesstrailshort}}-Service bereitgestellt wird.
 
 So überwachen Sie die Verwaltungsaktivität:
 
 1. Melden Sie sich bei Ihrem {{site.data.keyword.Bluemix_notm}}-Konto an.
-2. Stellen Sie über den Katalog eine Instanz des {{site.data.keyword.cloudaccesstrailshort}}-Service im selben Konto wie Ihre Instanz von {{site.data.keyword.containershort_notm}} bereit.
+2. Stellen Sie über den Katalog eine Instanz des {{site.data.keyword.cloudaccesstrailshort}}-Service im selben Konto wie Ihre Instanz von {{site.data.keyword.containerlong_notm}} bereit.
 3. Klicken Sie auf der Registerkarte **Verwalten** des {{site.data.keyword.cloudaccesstrailshort}}-Dashboards auf die Option **In Kibana anzeigen**.
 4. Legen Sie den Zeitrahmen fest, für den Sie Protokolle anzeigen möchten. Der Standardwert ist 15 Minuten.
 5. Klicken Sie in der Liste **Verfügbare Felder** auf **Typ**. Klicken Sie auf das Lupensymbol für **Activity Tracker**, um die Protokolle auf die Protokolle zu beschränken, die vom Service überwacht werden.
 6. Sie können die anderen verfügbaren Felder verwenden, um die Suche einzugrenzen.
 
+Die Informationen im Abschnitt [Berechtigungen zur Anzeige von Kontoereignissen erteilen](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions) helfen Ihnen dabei, wenn Sie andere Benutzer berechtigen wollen, Konto- und Bereichsereignisse anzuzeigen.
+{: tip}
 
+## Kubernetes-Auditereignisse aufzeichnen
+{: #kube-events}
 
-## Ereignisse verfolgen
-{: #events}
+In der folgenden Tabelle finden Sie eine Liste der Ereignisse, die an {{site.data.keyword.cloudaccesstrailshort}} gesendet werden.
+{: shortdesc}
 
-In den folgenden Tabellen finden Sie eine Liste der Ereignisse, die an {{site.data.keyword.cloudaccesstrailshort}} gesendet werden.
+**Vorbereitende Schritte**
 
-Weitere Informationen zur Funktionsweise des Service finden Sie in der [Dokumentation zu {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html).
+Stellen Sie sicher, dass Ihr Cluster für die Weiterleitung von [Kubernetes-API-Auditereignissen](cs_health.html#api_forward) konfiguriert ist.
 
-Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Sie in der [Kubernetes-Dokumentation![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/).
+**Weitergeleitete Ereignisse**
 
 <table>
   <tr>
@@ -54,11 +63,11 @@ Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Si
   </tr>
   <tr>
     <td><code>bindings.create</code></td>
-    <td>Eine Bindung wird erstellt.</td>
+    <td>Eine Bindung wurde erstellt.</td>
   </tr>
   <tr>
     <td><code>configmaps.create</code></td>
-    <td>Eine Konfigurationszuordnung wird erstellt.</td>
+    <td>Eine Konfigurationszuordnung wurde erstellt.</td>
   </tr>
   <tr>
     <td><code>configmaps.delete</code></td>
@@ -66,11 +75,11 @@ Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Si
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>Eine Konfigurationszuordnung wird korrigiert.</td>
+    <td>Eine Konfigurationszuordnung wurde korrigiert.</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
-    <td>Eine Konfigurationszuordnung wird aktualisiert.</td>
+    <td>Eine Konfigurationszuordnung wurde aktualisiert.</td>
   </tr>
   <tr>
     <td><code>events.create</code></td>
@@ -90,7 +99,7 @@ Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Si
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>Ein Bereichsgrenzwert wird erstellt.</td>
+    <td>Ein Bereichsgrenzwert wurde erstellt.</td>
   </tr>
   <tr>
     <td><code>limitranges.delete</code></td>
@@ -106,7 +115,7 @@ Weitere Informationen zu den Kubernetes-Aktionen, die verfolgt werden, finden Si
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
-    <td>Ein Namensbereich wird erstellt.</td>
+    <td>Ein Namensbereich wurde erstellt.</td>
   </tr>
   <tr>
     <td><code>namespaces.delete</code></td>

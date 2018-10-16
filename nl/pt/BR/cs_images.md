@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -122,7 +122,7 @@ Para implementar um contêiner no namespace **padrão** de seu cluster, crie um 
     ```
     {: codeblock}
 
-    **Dica:** para recuperar suas informações de namespace, execute `ibmcloud cr namespace-list`.
+    **Dica:** para recuperar informações de seu namespace, execute `bx cr namespace-list`.
 
 3.  Crie a implementação em seu cluster.
 
@@ -226,7 +226,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
 2.  Liste tokens em sua conta. {{site.data.keyword.Bluemix_notm}}
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -234,7 +234,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
 4.  Recupere o valor para seu token. Substitua <em>&lt;token_ID&gt;</em> pelo ID do token que você recuperou na etapa anterior.
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -267,7 +267,7 @@ Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Necessário. O nome do usuário para efetuar login no seu registro privado. Para o {{site.data.keyword.registryshort_notm}}, o nome do usuário é configurado para o valor <strong><code>token</code></strong>.</td>
+    <td>Necessário. O nome do usuário para efetuar login no seu registro privado. Para {{site.data.keyword.registryshort_notm}}, o nome de usuário é configurado como <code>token</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -404,11 +404,11 @@ Ao se referir ao imagePullSecret em uma implementação do pod, o imagePullSecre
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>O namespace no qual a imagem é armazenada. Para listar os namespaces disponíveis, execute `ibmcloud cr namespace-list`.</td>
+    <td>O namespace no qual a imagem é armazenada. Para listar os namespaces disponíveis, execute `bx cr namespace-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `ibmcloud cr image-list`.</td>
+    <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `bx cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

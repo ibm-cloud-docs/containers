@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-11"
 
 ---
 
@@ -36,13 +36,14 @@ lastupdated: "2018-08-06"
 1 小时
 
 ## 受众
-本教程适用于希望管理流至应用程序的网络流量的软件开发者和网络管理员。
+本教程适用于希望管理应用程序的网络流量的软件开发者和网络管理员。
 
 ## 先决条件
 
 - [创建 V1.10 集群](cs_clusters.html#clusters_ui)或[将现有集群更新到 V1.10](cs_versions.html#cs_v110)。在本教程中，需要 Kubernetes V1.10 或更高版本的集群才能使用 3.1.1 Calico CLI 和 Calico V3 策略语法。
 - [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 - [安装和配置 Calico CLI](cs_network_policy.html#1.10_install)。
+- [确保您具有**编辑者**、**操作员**或**管理员**平台角色](cs_users.html#add_users_cli)。
 
 <br />
 
@@ -59,21 +60,15 @@ lastupdated: "2018-08-06"
 
 <img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="在第 1 课结束时，Web 服务器应用程序会通过公共 NodePort 和公共 LoadBalancer 公开到因特网。" style="width:450px; border-style: none"/>
 
-1. 创建名为 `pr-firm` 的测试名称空间，以在本教程中从头到尾使用。
+1. 部署样本 Web 服务器应用程序。连接到该 Web 服务器应用程序时，应用程序会使用在连接中接收到的 HTTP 头进行响应。
     ```
-    kubectl create ns pr-firm
-    ```
-    {: pre}
-
-2. 部署样本 Web 服务器应用程序。连接到该 Web 服务器应用程序时，应用程序会使用它在连接中接收到的 HTTP 头进行响应。
-    ```
-    kubectl run webserver -n pr-firm --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
     ```
     {: pre}
 
-3. 验证 Web 服务器应用程序 pod 的 **STATUS** 是否为 `Running`。
+2. 验证 Web 服务器应用程序 pod 的 **STATUS** 是否为 `Running`。
     ```
-    kubectl get pods -n pr-firm -o wide
+    kubectl get pods -o wide
     ```
     {: pre}
 
@@ -86,7 +81,7 @@ lastupdated: "2018-08-06"
     ```
     {: screen}
 
-4. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver.yaml` 的 LoadBalancer 服务配置文件。
+3. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver.yaml` 的 LoadBalancer 服务配置文件。
     ```
     apiVersion: v1
     kind: Service
@@ -108,17 +103,17 @@ lastupdated: "2018-08-06"
     ```
     {: codeblock}
 
-5. 部署 LoadBalancer。
+4. 部署 LoadBalancer。
     ```
-    kubectl apply -f filepath/webserver.yaml
+    kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-6. 验证是否可以从您的计算机公开访问由 LoadBalancer 公开的应用程序。
+5. 验证是否可以从您的计算机公开访问由 LoadBalancer 公开的应用程序。
 
     1. 获取 LoadBalancer 的公共 **EXTERNAL-IP** 地址。
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -165,7 +160,7 @@ lastupdated: "2018-08-06"
 
     1. 获取 LoadBalancer 分配给工作程序节点的 NodePort。NodePort 的范围是 30000-32767。
         ```
-        kubectl get svc -n pr-firm -o wide
+        kubectl get svc -o wide
         ```
         {: pre}
 
@@ -185,9 +180,9 @@ lastupdated: "2018-08-06"
         输出示例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.5_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
         ```
         {: screen}
 
@@ -298,7 +293,7 @@ lastupdated: "2018-08-06"
 
 4. 将上一课中创建的 LoadBalancer 的 externalTrafficPolicy 从 `Cluster` 更改为 `Local`。`Local` 可确保在下一步中对 LoadBalancer 的外部 IP 执行 curl 时，保留系统的源 IP。
     ```
-    kubectl patch svc -n pr-firm webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -342,7 +337,7 @@ lastupdated: "2018-08-06"
 ## 第 3 课：允许来自列入白名单的 IP 的入局流量流至 LoadBalancer
 {: #lesson3}
 
-现在，您决定通过将自己计算机的 IP 地址列入白名单，以完全锁定流至公关公司集群的流量并测试访问。
+现在，您决定通过仅将自己计算机的 IP 地址列入白名单，以完全锁定流至公关公司集群的流量并测试访问。
 {: shortdesc}
 
 首先，除了 NodePort 外，还必须阻止流至公开应用程序的 LoadBalancer 的所有入局流量。然后，可以创建一个策略，用于将系统的 IP 地址列入白名单。在第 3 课结束时，将阻止流至公共 NodePort 和 LoadBalancer 的所有流量，并且只允许来自列入白名单的系统 IP 的流量：
@@ -471,15 +466,28 @@ lastupdated: "2018-08-06"
 <img src="images/cs_tutorial_policies_L4.png" width="600" alt="Web 服务器应用程序通过公共 LoadBalancer 公开到因特网。将仅阻止来自系统 IP 的流量。" style="width:600px; border-style: none"/>
 
 1. 清除上一课中创建的白名单策略。
-    ```
+    
+    - Linux：
+```
     calicoctl delete GlobalNetworkPolicy deny-lb-port-80
     ```
-    {: pre}
-    ```
+      {: pre}
+      ```
     calicoctl delete GlobalNetworkPolicy whitelist
     ```
-    {: pre}
-    现在，再次允许来自任何源 IP 的所有入局 TCP 和 UDP 流量流至 LoadBalancer IP 地址和端口。
+      {: pre}
+
+    - Windows 和 OS X：
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+      ```
+      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
+        现在，再次允许来自任何源 IP 的所有入局 TCP 和 UDP 流量流至 LoadBalancer IP 地址和端口。
 
 2. 要拒绝来自系统源 IP 地址的所有入局 TCP 和 UDP 流量流至 LoadBalancer IP 地址和端口，请在文本编辑器中创建名为 `deny-lb-port-80.yaml` 的低位 DNAT 前策略。使用备忘单中的值，将 `<loadbalancer_IP>` 替换为 LoadBalancer 的公共 IP 地址，将 `<client_address>` 替换为系统源 IP 的公共 IP 地址。
     ```
@@ -543,10 +551,19 @@ lastupdated: "2018-08-06"
     此时，将阻止流至公共 NodePort 的所有流量，但允许流至公共 LoadBalancer 的所有流量。只阻止来自列入黑名单的系统 IP 的流量流至 LoadBalancer。
 
 5. 要清除此黑名单策略，请运行以下命令：
-    ```
+    
+
+    - Linux：
+```
     calicoctl delete GlobalNetworkPolicy blacklist
     ```
-    {: pre}
+      {: pre}
+
+    - Windows 和 OS X：
+      ```
+      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 非常好！您已通过使用 Calico DNAT 前策略将源 IP 列入白名单和黑名单，成功控制了流至应用程序的流量。
 

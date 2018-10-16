@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-# Lernprogramm: Apps in Kubernetes-Clustern bereitstellen
+# Lernprogramm: Apps in Clustern bereitstellen
 {: #cs_apps_tutorial}
 
 Hier erfahren Sie, wie Sie mit {{site.data.keyword.containerlong}} eine containerisierte App bereitstellen, die den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nutzt.
@@ -26,13 +26,14 @@ In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.Blu
 
 Der App-Entwickler des PR-Unternehmens verwendet den im vorherigen Lernprogramm erstellten Kubernetes-Cluster, um eine 'Hello World'-Version der App bereitzustellen. In den aufeinander aufbauenden Lerneinheiten dieses Lernprogramms stellt der App-Entwickler zunehmend komplexere Versionen derselben App bereit. Das folgende Diagramm zeigt die Komponenten der Bereitstellungen in den einzelnen Lerneinheiten.
 
-![Komponenten der Lerneinheit](images/cs_app_tutorial_mz-roadmap.png)
+
+![Komponenten der Lerneinheit](images/cs_app_tutorial_roadmap.png)
 
 Wie im Diagramm dargestellt, verwendet Kubernetes verschiedene Typen von Ressourcen, um Ihre Apps betriebsbereit für die Ausführung in Clustern zu gestalten. In Kubernetes arbeiten Bereitstellungen und Services zusammen. Bereitstellungen enthalten die Definitionen für die App. Dazu zählen beispielsweise das Image, das für den Container verwendet werden soll, oder die Angabe, welcher Port für die App zugänglich gemacht werden muss. Wenn Sie eine Bereitstellung erstellen, wird für jeden Container, den Sie in der Bereitstellung definiert haben, ein Kubernetes-Pod erstellt. Um Ihre App widerstandsfähiger zu machen, können Sie in Ihrer Bereitstellung mehrere Instanzen derselben App definieren und von Kubernetes automatisch eine Replikatgruppe erstellen lassen. Die Replikatgruppe überwacht die Pods und stellt sicher, dass die angegebene Anzahl von Pods immer betriebsbereit ist. Reagiert einer der Pods nicht mehr, so wird dieser automatisch neu erstellt.
 
 Services fassen eine Gruppe von Pods zusammen und stellen diesen Pods eine Netzverbindung für andere Services im Cluster bereit, ohne hierbei die tatsächlichen privaten IP-Adressen der einzelnen Pods preiszugeben. Mit Kubernetes-Services können Sie eine App anderen Pods im Cluster zur Verfügung stellen oder über das Internet verfügbar machen. Im vorliegenden Lernprogramm verwenden Sie einen Kubernetes-Service, um über eine öffentliche IP-Adresse, die automatisch einem Workerknoten zugewiesen wird, und einen öffentlichen Port vom Internet aus auf Ihre aktive App zuzugreifen.
 
-Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie in Standardclustern einen Worker-Pool erstellen, der mehrere Zonen mit Workerknoten in jeder Zone umfasst, um eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
+Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie bei Standardclustern mehrere Workerknoten erstellen, die eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
 
 Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
 
@@ -55,7 +56,7 @@ Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kube
 
 ## Voraussetzungen
 
-* [Lernprogramm: Kubernetes-Cluster erstellen](cs_tutorials.html#cs_cluster_tutorial).
+* [Lernprogramm: Kubernetes-Cluster in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial) erstellen.
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -66,7 +67,8 @@ Im vorherigen Lernprogramm haben Sie einen Cluster mit einem Workerknoten erstel
 
 Das folgende Diagramm zeigt die Komponenten, die Sie im Rahmen dieser Lerneinheit bereitstellen.
 
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components1.png)
+
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)
 
 Gehen Sie wie folgt vor, um die App bereitzustellen:
 
@@ -87,10 +89,10 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     ```
     {: pre}
 
-3.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, verwenden Sie den Befehl `ibmcloud ks region-set`.
+3.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, verwenden Sie den Befehl `bx cs region-set`.
 
     ```
-    ibmcloud login [--sso]
+    bx login [--sso]
     ```
     {: pre}
 
@@ -100,8 +102,8 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
         ```
-    ibmcloud ks cluster-config <clustername_oder_-id>
-    ```
+        bx cs cluster-config <clustername_oder_-id>
+        ```
         {: pre}
 
         Wenn
@@ -119,19 +121,19 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 5.  Melden Sie sich an der {{site.data.keyword.registryshort_notm}}-CLI an. **Hinweis**: Stellen Sie sicher, dass das Plug-in 'container-registry' [installiert](/docs/services/Registry/index.html#registry_cli_install) ist.
 
     ```
-    ibmcloud cr login
+    bx cr login
     ```
     {: pre}
     -   Wenn Sie Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} vergessen haben, führen Sie den folgenden Befehl aus.
 
         ```
-        ibmcloud cr namespace-list
+        bx cr namespace-list
         ```
         {: pre}
 
 6.  Starten Sie Docker.
     * Wenn Sie Docker Community Edition verwenden, sind keine weiteren Maßnahmen erforderlich.
-    * Wenn Sie Linux verwenden, durchsuchen Sie die [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/config/daemon/) nach Anweisungen dazu, wie Docker abhängig von der verwendeten Linux-Distribution gestartet wird.
+    * Wenn Sie Linux verwenden, durchsuchen Sie die [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/admin/) nach Anweisungen dazu, wie Docker abhängig von der verwendeten Linux-Distribution gestartet wird.
     * Wenn Sie Docker Toolbox unter Windows oder OSX verwenden, können Sie das Programm 'Docker Quickstart Terminal' verwenden, das Docker für Sie startet. Verwenden Sie 'Docker Quickstart Terminal' für die nächsten Schritte, um die Docker-Befehle auszuführen. Wechseln Sie anschließend zurück zur CLI (Befehlszeilenschnittstelle) und legen Sie dort die Sitzungsvariable `KUBECONFIG` fest.
 
 7.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen.
@@ -270,18 +272,18 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        bx cs workers <clustername_oder_-id>
         ```
         {: pre}
 
         Beispielausgabe:
 
         ```
-        ibmcloud ks workers pr_firm_cluster
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.5
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
         ```
         {: screen}
 
@@ -318,7 +320,8 @@ In dieser Lerneinheit stellen Sie drei Instanzen der App 'Hello World' in einem 
 
 Höhere Verfügbarkeit bedeutet, dass der Benutzerzugriff auf drei Instanzen aufgeteilt ist. Versuchen zu viele Benutzer, auf dieselbe Instanz der App zuzugreifen, so können schleppende Reaktionszeiten auftreten. Eine höhere Anzahl von Instanzen kann für Ihre Benutzer gleichbedeutend mit geringeren Reaktionszeiten sein. In der vorliegenden Lerneinheit erfahren Sie außerdem, wie Statusprüfungen und Bereitstellungsaktualisierungen mit Kubernetes funktionieren können. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components2.png)
+
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components2.png)
 
 Im vorherigen Lernprogramm haben Sie ein eigenes Konto und einen Cluster mit einem Workerknoten erstellt. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen drei Instanzen der App 'Hello World' bereit. Jede dieser Instanzen wird in einem Kubernetes-Pod als Teil einer Replikatgruppe im Workerknoten implementiert. Um die App öffentlich zu machen, erstellen Sie zudem einen Kubernetes-Service.
 
@@ -420,7 +423,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 7.  Nachdem die Bereitstellung nun abgeschlossen ist, können Sie einen Browser öffnen und die App überprüfen. Um die URL zu bilden, kombinieren Sie die öffentliche IP-Adresse, die Sie in der vorherigen Lerneinheit für Ihren Workerknoten verwendet haben, mit der Knotenportnummer (NodePort), die im Konfigurationsscript angegeben war. So rufen Sie die öffentliche IP-Adresse für den Workerknoten ab:
 
   ```
-  ibmcloud ks workers <clustername_oder_-id>
+  bx cs workers <clustername_oder_-id>
   ```
   {: pre}
 
@@ -484,7 +487,8 @@ In den vorherigen Lerneinheiten wurden die Apps als einzelne Komponenten in eine
 
 Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie sicher, dass Sie ein Element aktualisieren können, ohne dass sich dies nachteilig auf die übrigen auswirkt. Dann aktualisieren Sie die App, um sie mit einer größeren Anzahl von Replikaten vertikal zu skalieren und so ihre Verfügbarkeit weiter zu steigern. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components3.png)
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components3.png)
+
 
 Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit erstellen Sie eine Instanz des {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto und konfigurieren zwei Bereitstellungen (eine Bereitstellung für jede Komponente der App). Jede Komponente wird in einem Kubernetes-Pod im Workerknoten implementiert. Um beide Komponenten öffentlich zu machen, erstellen Sie zudem für jede Komponente einen Kubernetes-Service.
 
@@ -564,7 +568,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
 5.  Überprüfen Sie, ob die Images erfolgreich zu Ihrem Registry-Namensbereich hinzugefügt wurden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
 
     ```
-    ibmcloud cr images
+    bx cr images
     ```
     {: pre}
 
@@ -750,8 +754,8 @@ service "watson-talk-service" deleted
   Falls Sie den Cluster nicht beibehalten wollen, können Sie diesen ebenfalls löschen.
 
   ```
-   ibmcloud ks cluster-rm <clustername_oder_-id>
-   ```
+  bx cs cluster-rm <clustername_oder_-id>
+  ```
   {: pre}
 
 ## Womit möchten Sie fortfahren?
@@ -761,4 +765,4 @@ Nachdem Sie sich mit den grundlegenden Informationen vertraut gemacht haben, kö
 
 - Ein [kompliziertes Lab ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) im Repository vervollständigen
 - [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containershort_notm}}
-- Lernprogramme für Codemuster für die Containerorchestrierung unter [developerWorks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/technologies/container-orchestration/) erkunden
+- Lernprogramme für die Containerorchestrierung unter [developerWorks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/) erkunden

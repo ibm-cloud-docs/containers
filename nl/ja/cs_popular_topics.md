@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -21,59 +21,8 @@ lastupdated: "2018-08-06"
 # よく閲覧された {{site.data.keyword.containershort_notm}} のトピック
 {: #cs_popular_topics}
 
-{{site.data.keyword.containerlong}} の最新情報を確認しましょう。 知っておくべき新機能、試してみたい便利な方法、他の開発者が役に立つと感じている、よく閲覧されたトピックをご覧ください。
+{{site.data.keyword.containerlong}} の最新情報を確認しましょう。知っておくべき新機能、試してみたい便利な方法、他の開発者が役に立つと感じている、よく閲覧されたトピックをご覧ください。
 {:shortdesc}
-
-## 2018 年 7 月によく閲覧されたトピック
-{: #july18}
-
-<table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
-<caption>2018 年 7 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
-<thead>
-<th>日</th>
-<th>タイトル</th>
-<th>説明</th>
-</thead>
-<tbody>
-<tr>
-<td>7 月 30 日</td>
-<td>[自分の Ingress コントローラーを持ち込む](cs_ingress.html#user_managed)</td>
-<td>クラスターの Ingress コントローラーに関して非常に特殊なセキュリティー要件やその他のカスタム要件を持っていますか? そうであれば、デフォルトの代わりに、持ち込みの Ingress コントローラーを実行することができます。</td>
-</tr>
-<tr>
-<td>7 月 10 日</td>
-<td>複数ゾーン・クラスターの概要</td>
-<td>クラスターの可用性を向上させる必要がありますか? 一部の大都市圏では、複数のゾーンにまたがるクラスターを作成できるようになりました。詳しくは、[{{site.data.keyword.containershort_notm}} でのマルチゾーン・クラスターの作成](cs_clusters.html#multizone)を参照してください。</td>
-</tr>
-</tbody></table>
-
-## 2018 年 6 月によく閲覧されたトピック
-{: #june18}
-
-<table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
-<caption>2018 年 6 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
-<thead>
-<th>日</th>
-<th>タイトル</th>
-<th>説明</th>
-</thead>
-<tbody>
-<tr>
-<td>6 月 13 日</td>
-<td>`bx` CLI コマンド名が `ic` CLI に変更されています。</td>
-<td>最新バージョンの {{site.data.keyword.Bluemix_notm}} CLI をダウンロードした後は、`bx` ではなく `ic` 接頭部を使用してコマンドを実行するようになります。例えば、`ibmcloud ks clusters` を実行するとクラスターがリスト表示されます。</td>
-</tr>
-<tr>
-<td>6 月 12 日</td>
-<td>[ポッド・セキュリティー・ポリシー](cs_psp.html)</td>
-<td>Kubernetes 1.10.3 以降を実行するクラスターでは、ポッド・セキュリティー・ポリシーを構成して、{{site.data.keyword.containerlong_notm}} のポッドの作成および更新をユーザーに許可することができます。</td>
-</tr>
-<tr>
-<td>6 月 6 日</td>
-<td>[IBM 提供の Ingress ワイルドカード・サブドメインに対する TLS サポート](cs_ingress.html#wildcard_tls)</td>
-<td>2018 年 6 月 6 日以降に作成されたクラスターの場合、IBM 提供の Ingress サブドメインの TLS 証明書はワイルドカード証明書ですので、登録されているワイルドカード・サブドメインに使用できます。2018 年 6 月 6 日より前に作成されたクラスターの場合、現在の TLS 証明書が更新されるときに、ワイルドカード証明書に更新されます。</td>
-</tr>
-</tbody></table>
 
 ## 2018 年 5 月によく閲覧されたトピック
 {: #may18}
@@ -90,22 +39,22 @@ lastupdated: "2018-08-06"
 <tr>
 <td>5 月 24 日</td>
 <td>[新しい Ingress サブドメイン形式](cs_ingress.html)</td>
-<td>5 月 24 日より後に作成されたクラスターには、新しい形式の <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code> で Ingress サブドメインが割り当てられます。 Ingress を使用してアプリを公開する場合、新しいサブドメインを使用してインターネットからアプリにアクセスできます。</td>
+<td>5 月 24 日より後に作成されたクラスターには、新しい形式の <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code> で Ingress サブドメインが割り当てられます。Ingress を使用してアプリを公開する場合、新しいサブドメインを使用してインターネットからアプリにアクセスできます。</td>
 </tr>
 <tr>
 <td>5 月 14 日</td>
 <td>[更新: 世界中の GPU ベアメタルへのワークロードのデプロイ](cs_app.html#gpu_app)</td>
-<td>クラスター内に[ベアメタルのグラフィックス・プロセッシング・ユニット (GPU) マシン・タイプ](cs_clusters.html#shared_dedicated_node)がある場合、大量の数学的処理が行われるアプリをスケジュールできます。 GPU ワーカー・ノードは、CPU と GPU の両方にわたってアプリのワークロードを処理することで、パフォーマンスを向上させることができます。</td>
+<td>クラスター内に[ベアメタルのグラフィックス・プロセッシング・ユニット (GPU) マシン・タイプ](cs_clusters.html#shared_dedicated_node)がある場合、大量の数学的処理が行われるアプリをスケジュールできます。GPU ワーカー・ノードは、CPU と GPU の両方にわたってアプリのワークロードを処理することで、パフォーマンスを向上させることができます。</td>
 </tr>
 <tr>
 <td>5 月 3 日</td>
 <td>[Container Image Security Enforcement (ベータ)](/docs/services/Registry/registry_security_enforce.html#security_enforce)</td>
-<td>チームでは、アプリ・コンテナーでプルするイメージを決める際の支援が必要ではありませんか。 コンテナー・イメージを検証してからデプロイできる、Container Image Security Enforcement ベータをお試しください。 Kubernetes 1.9 以降を実行するクラスターで使用可能です。</td>
+<td>チームでは、アプリ・コンテナーでプルするイメージを決める際の支援が必要ではありませんか。コンテナー・イメージを検証してからデプロイできる、Container Image Security Enforcement ベータをお試しください。Kubernetes 1.9 以降を実行するクラスターで使用可能です。</td>
 </tr>
 <tr>
 <td>5 月 1 日</td>
 <td>[GUI からの Kubernetes ダッシュボードのデプロイ](cs_app.html#cli_dashboard)</td>
-<td>ワンクリックで Kubernetes ダッシュボードにアクセスしたいと思ったことはありませんか。 {{site.data.keyword.Bluemix_notm}} GUI の**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンをお試しください。</td>
+<td>ワンクリックで Kubernetes ダッシュボードにアクセスしたいと思ったことはありませんか。{{site.data.keyword.Bluemix_notm}} GUI の**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンをお試しください。</td>
 </tr>
 </tbody></table>
 
@@ -126,7 +75,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>4 月 17 日</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>永続データをブロック・ストレージに保存するための {{site.data.keyword.Bluemix_notm}} Block Storage [プラグイン](cs_storage_block.html#install_block)をインストールします。 そして、クラスターのために[ブロック・ストレージを新規作成](cs_storage_block.html#add_block)するか、または[既存のブロック・ストレージを使用](cs_storage_block.html#existing_block)することができます。</td>
+<td>永続データをブロック・ストレージに保存するための {{site.data.keyword.Bluemix_notm}} Block Storage [プラグイン](cs_storage.html#install_block)をインストールします。 そして、クラスターのために[ブロック・ストレージを新規作成](cs_storage.html#create)するか、または[既存のブロック・ストレージを使用](cs_storage.html#existing_block)することができます。</td>
 </tr>
 <tr>
 <td>4 月 13 日</td>
@@ -163,13 +112,13 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>3 月 13 日</td>
-<td>[サンパウロで使用可能なゾーン](cs_regions.html)</td>
-<td>米国南部地域の新しいゾーンとしてブラジルのサンパウロが追加されました。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+<td>[サンパウロで使用可能なロケーション](cs_regions.html)</td>
+<td>米国南部地域の新しいロケーションとしてブラジルのサンパウロが追加されました。 ファイアウォールを使用している場合は、このロケーションと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>3 月 12 日</td>
 <td>トライアル・アカウントで [{{site.data.keyword.Bluemix_notm}} に参加したばかりですか? 無料の Kubernetes クラスターをお試しください。](container_index.html#clusters)</td>
-<td>トライアルの [{{site.data.keyword.Bluemix_notm}} アカウント](https://console.bluemix.net/registration/)で、無料クラスターを 1 つデプロイして、30 日間 Kubernetes の機能をテストできます。</td>
+<td>トライアルの [{{site.data.keyword.Bluemix_notm}} アカウント](https://console.bluemix.net/registration/)で、無料クラスターを 1 つデプロイして、21 日間 Kubernetes の機能をテストできます。</td>
 </tr>
 </tbody></table>
 
@@ -187,7 +136,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>2 月 27 日</td>
 <td>ワーカー・ノード用のハードウェア仮想マシン (HVM) のイメージ</td>
-<td>HVM イメージを使用して、ワークロードの入出力パフォーマンスを向上させます。 `ibmcloud ks worker-reload` [コマンド](cs_cli_reference.html#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](cs_cli_reference.html#cs_worker_update)を使用して、既存の各ワーカー・ノード上でアクティブ化します。</td>
+<td>HVM イメージを使用して、ワークロードの入出力パフォーマンスを向上させます。 `bx cs worker-reload` [コマンド](cs_cli_reference.html#cs_worker_reload)または `bx cs worker-update` [コマンド](cs_cli_reference.html#cs_worker_update)を使用して、既存の各ワーカー・ノード上でアクティブ化します。</td>
 </tr>
 <tr>
 <td>2 月 26 日</td>
@@ -202,7 +151,7 @@ lastupdated: "2018-08-06"
 <tr>
 <td>2 月 20 日</td>
 <td>暗号化されたイメージと[署名された信頼できるコンテンツ](../services/Registry/registry_trusted_content.html#registry_trustedcontent)</td>
-<td>{{site.data.keyword.registryshort_notm}} では、イメージをレジストリー名前空間に保管する際に、イメージに署名して暗号化することで、イメージの保全性を確保できます。 コンテナー・インスタンスは、信頼できるコンテンツのみを使用して実行してください。</td>
+<td>{{site.data.keyword.registryshort_notm}} では、イメージをレジストリー名前空間に保管する際に、イメージに署名して暗号化することで、イメージの保全性を確保できます。コンテナー・インスタンスは、信頼できるコンテンツのみを使用して実行してください。</td>
 </tr>
 <tr>
 <td>2 月 19 日</td>
@@ -211,8 +160,8 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>2 月 14 日</td>
-<td>[ソウルで使用可能なゾーン](cs_regions.html)</td>
-<td>オリンピックの時期に合わせて、Kubernetes クラスターを北アジア太平洋地域のソウルにデプロイします。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+<td>[ソウルで使用可能なロケーション](cs_regions.html)</td>
+<td>オリンピックの時期に合わせて、Kubernetes クラスターを北アジア太平洋地域のソウルにデプロイします。 ファイアウォールを使用している場合は、このロケーションと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>2 月 8 日</td>
@@ -238,8 +187,8 @@ lastupdated: "2018-08-06"
 </tr>
 <tr>
 <td>1 月 23 日</td>
-<td>[シンガポールおよびカナダのモントリオールで使用可能なゾーン](cs_regions.html)</td>
-<td>シンガポールおよびモントリオールは、{{site.data.keyword.containershort_notm}} の北アジア太平洋地域と米国東部地域で使用可能なゾーンです。 ファイアウォールを使用している場合は、これらのゾーンと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+<td>[シンガポールおよびカナダのモントリオールで使用可能なロケーション](cs_regions.html)</td>
+<td>シンガポールおよびモントリオールは、{{site.data.keyword.containershort_notm}} の北アジア太平洋地域と米国東部地域で使用可能なロケーションです。 ファイアウォールを使用している場合は、これらのロケーションと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>1 月 8 日</td>

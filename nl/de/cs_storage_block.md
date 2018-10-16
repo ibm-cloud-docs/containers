@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-08-06"
 {: #block_storage}
 
 
-## Plug-in für {{site.data.keyword.Bluemix_notm}}-Block Storage in Ihrem Cluster installieren 
+## Plug-in für {{site.data.keyword.Bluemix_notm}}-Block Storage in Ihrem Cluster installieren
 {: #install_block}
 
 Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in mit einem Helm-Diagramm, um vordefinierte Speicherklassen für den Blockspeicher einzurichten. Mit diesen Speicherklassen können Sie einen PVC zum Bereitstellen von Blockspeicher für Ihre Apps erstellen.
@@ -32,7 +32,10 @@ Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in mi
 Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in installieren möchten.
 
 
-1. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren, installieren Sie den Helm-Server (tiller) in Ihrem Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository für das Helm-Diagramm dem Cluster hinzu, in dem Sie das Plug-in für {{site.data.keyword.Bluemix_notm}}-Block Storage verwenden wollen.
+1. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren, installieren Sie den Helm-Server (tiller) in Ihrem Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository für das Helm-Diagramm dem Cluster hinzu, in dem Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in verwenden wollen.
+
+   **Wichtig:** Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben.
+
 2. Aktualisieren Sie das Helm-Repository, um die aktuelle Version aller Helm-Diagramme in diesem Repository abzurufen.
    ```
    helm repo update
@@ -129,7 +132,7 @@ Sie können jetzt mit dem [Erstellen eines PVC](#add_block) zum Bereitstellen vo
 
 
 ### {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in aktualisieren
-Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}}Blockspeicher-Plug-ins auf die aktuelle Version durchführen.
+Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-ins auf die aktuelle Version durchführen.
 {: shortdesc}
 
 Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf den Cluster aus.
@@ -139,8 +142,8 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
    helm repo update
    ```
    {: pre}
-   
-2. Optional: Laden Sie das aktuellste Helm-Diagramm auf Ihre lokale Maschine herunter. Dekomprimieren Sie anschließend das Paket und überprüfen Sie die Datei `release.md`, um die neuesten Releaseinformationen anzuzeigen. 
+
+2. Optional: Laden Sie das aktuellste Helm-Diagramm auf Ihre lokale Maschine herunter. Dekomprimieren Sie anschließend das Paket und überprüfen Sie die Datei `release.md`, um die neuesten Releaseinformationen anzuzeigen.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
@@ -172,16 +175,16 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 
 
 ### Plug-in für {{site.data.keyword.Bluemix_notm}}-Block Storage entfernen
-Wenn Sie in Ihrem Cluster {{site.data.keyword.Bluemix_notm}}-Block Storage nicht bereitstellen und verwenden möchten, können Sie das Helm-Diagramm deinstallieren.
+Wenn Sie in Ihrem Cluster {{site.data.keyword.Bluemix_notm}}-Block Storage nicht einrichten und verwenden möchten, können Sie das Helm-Diagramm deinstallieren.
 {: shortdesc}
 
-**Hinweis:** Durch das Entfernen des Plug-ins werden keine vorhandenen PVCs, PVs oder Daten entfernt. Wenn Sie das Plug-in entfernen, werden alle zugehörigen Pods und Dämongruppen aus Ihrem Cluster entfernt. Nachdem Sie das Plug-in entfernt haben, können Sie keinen neuen Blockspeicher für Ihren Cluster bereitstellen oder vorhandene Blockspeicher-PVCs und -PVs verwenden.
+**Hinweis:** Durch das Entfernen des Plug-ins werden keine vorhandenen PVCs, PVs oder Daten entfernt. Wenn Sie das Plug-in entfernen, werden alle zugehörigen Pods und Dämongruppen aus Ihrem Cluster entfernt. Nachdem Sie das Plug-in entfernt haben, können Sie keinen neuen Blockspeicher für Ihren Cluster einrichten oder vorhandene Blockspeicher-PVCs und -PVs verwenden.
 
 Vorbemerkungen:
-- [Geben Sie als Ziel Ihrer Befehlszeilenschnittstelle](cs_cli_install.html#cs_cli_configure) den Cluster an. 
+- [Geben Sie als Ziel Ihrer Befehlszeilenschnittstelle](cs_cli_install.html#cs_cli_configure) den Cluster an.
 - Stellen Sie sicher, dass in Ihrem Cluster keine PVCs oder persistenten Datenträger vorhanden sind, die Block Storage verwenden.
 
-Gehen Sie wie folgt vor, um das Plug-in zu entfernen: 
+Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
 
 1. Suchen Sie den Namen des Block Storage-Helm-Diagramms, das Sie in Ihrem Cluster installiert haben.
    ```
@@ -227,15 +230,15 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
 
 Jede Speicherklasse gibt den Typ des Blockspeichers an, den Sie bereitstellen, einschließlich der verfügbaren Größe, der E/A-Operationen pro Sekunde, des Dateisystems und der Aufbewahrungsrichtlinie.  
 
-**Wichtig:** Stellen Sie sicher, dass die Speicherkonfiguration sorgfältig ausgewählt ist, damit genügend Kapazität zum Speichern Ihrer Daten vorhanden ist. Nachdem Sie mithilfe einer Speicherklasse einen bestimmten Typ von Speicher bereitgestellt haben, können Sie die Größe, den Typ, die E/A-Operationen pro Sekunde oder die Aufbewahrungsrichtlinie für die Speichereinheit nicht mehr ändern. Wenn Sie mehr Speicher oder Speicher mit einer anderen Konfiguration benötigen, müssen Sie [eine neue Speicherinstanz erstellen und die Daten](cs_storage_basics.html#update_storageclass) aus der alten Speicherinstanz in die neue kopieren. 
+**Wichtig:** Stellen Sie sicher, dass die Speicherkonfiguration sorgfältig ausgewählt ist, damit genügend Kapazität zum Speichern Ihrer Daten vorhanden ist. Nachdem Sie mithilfe einer Speicherklasse einen bestimmten Typ von Speicher bereitgestellt haben, können Sie die Größe, den Typ, die E/A-Operationen pro Sekunde oder die Aufbewahrungsrichtlinie für die Speichereinheit nicht mehr ändern. Wenn Sie mehr Speicher oder Speicher mit einer anderen Konfiguration benötigen, müssen Sie [eine neue Speicherinstanz erstellen und die Daten](cs_storage_basics.html#update_storageclass) aus der alten Speicherinstanz in die neue kopieren.
 
 1. Listen Sie die in {{site.data.keyword.containerlong}} verfügbaren Speicherklassen auf.
-```
+    ```
     kubectl get storageclasses | grep block
     ```
     {: pre}
 
-    Beispielausgabe: 
+    Beispielausgabe:
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
@@ -250,19 +253,20 @@ Jede Speicherklasse gibt den Typ des Blockspeichers an, den Sie bereitstellen, e
     ```
     {: screen}
 
-2. Überprüfen Sie die Konfiguration einer Speicherklasse. 
+2. Überprüfen Sie die Konfiguration einer Speicherklasse.
    ```
    kubectl describe storageclass <name_der_speicherklasse>
    ```
    {: pre}
-   
-   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie nichts Entsprechendes finden, können Sie eine eigene angepasste Speicherklasse erstellen. Prüfen Sie zunächst die [Beispiele für angepasste Speicherklassen](#custom_storageclass).{: tip}
-   
-3. Wählen Sie den Typ des Blockspeichers aus, den Sie bereitstellen möchten. 
+
+   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie nichts Entsprechendes finden, können Sie eine eigene angepasste Speicherklasse erstellen. Prüfen Sie zunächst die [Beispiele für angepasste Speicherklassen](#custom_storageclass).
+   {: tip}
+
+3. Wählen Sie den Typ des Blockspeichers aus, den Sie bereitstellen möchten.
    - **Speicherklassen 'bronze', 'silver' und 'gold':** Diese Speicherklassen stellen [Endurance-Speicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/endurance-storage) bereit. Mit dem Endurance-Speicher können Sie in vordefinierten Tiers für E/A-Operationen pro Sekunde die Größe des Speichers in Gigabyte auswählen.
-   - **Speicherklasse 'custom':** Diese Speicherklasse stellt [Leistungsspeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/performance-storage) bereit. Mit dem Leistungsspeicher können Sie die Größe des Speichers und der E/A-Operationen pro Sekunde besser steuern. 
-     
-4. Wählen Sie für Ihren Blockspeicher die Größe und die Anzahl E/A-Operationen pro Sekunde aus. Die Größe und die Anzahl der E/A-Operationen pro Sekunde definieren die Gesamtzahl der E/A-Operationen pro Sekunde, die als Indikator für die Geschwindigkeit des Speichers dient. Je höher die Anzahl der E/A-Operationen pro Sekunde für Ihren Speicher ist, desto höher ist dessen Verarbeitungsgeschwindigkeit für Lese- und Schreiboperationen. 
+   - **Speicherklasse 'custom':** Diese Speicherklasse stellt [Leistungsspeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/performance-storage) bereit. Mit dem Leistungsspeicher können Sie die Größe des Speichers und der E/A-Operationen pro Sekunde besser steuern.
+
+4. Wählen Sie für Ihren Blockspeicher die Größe und die Anzahl E/A-Operationen pro Sekunde aus. Die Größe und die Anzahl der E/A-Operationen pro Sekunde definieren die Gesamtzahl der E/A-Operationen pro Sekunde, die als Indikator für die Geschwindigkeit des Speichers dient. Je höher die Anzahl der E/A-Operationen pro Sekunde für Ihren Speicher ist, desto höher ist dessen Verarbeitungsgeschwindigkeit für Lese- und Schreiboperationen.
    - **Speicherklassen 'bronze', 'silver' und 'gold':** Diese Speicherklassen haben eine feste Anzahl von pro Gigabyte angegebenen E/A-Operationen pro Sekunde und werden auf SSD-Festplatten bereitgestellt. Die Gesamtzahl der E/A-Operationen pro Sekunde hängt von der Größe des von Ihnen ausgewählten Speichers ab. Sie können innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen, z. B. 20, 256 oder 11854 Gigabyte. Um die Gesamtzahl der E/A-Operationen pro Sekunde zu ermitteln, müssen Sie die E/A-Operationen pro Sekunde mit der ausgewählten Größe multiplizieren. Wenn Sie beispielsweise in der Speicherklasse 'silver', die 4 E/A-Operationen pro Sekunde aufweist, als Größe des Blockspeichers 1000 Gigabyte (1000Gi) auswählen, hat Ihr Speicher eine Gesamtzahl von 4000 E/A-Operationen pro Sekunde.  
      <table>
          <caption>Tabelle der Größenbereiche der Speicherklasse und der IOPS pro Gigabyte</caption>
@@ -288,7 +292,8 @@ Jede Speicherklasse gibt den Typ des Blockspeichers an, den Sie bereitstellen, e
          <td>20-4000 Gi</td>
          </tr>
          </tbody></table>
-   - **Speicherklasse 'custom':** Wenn Sie diese Speicherklasse auswählen, können Sie die gewünschte Größe und Anzahl der E/A-Operationen pro Sekunde besser steuern. Als Größe können Sie innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen. Die von Ihnen gewählte Größe legt den Bereich der für Sie verfügbaren E/A-Operationen pro Sekunde fest. Sie können eine Anzahl von E/A-Operationen pro Sekunde auswählen, bei der es sich um eine Vielzahl von 100 handelt und die sich im angegebenen Bereich befindet. Der von Ihnen ausgewählte Wert für E/A-Operationen pro Sekunde ist statisch und wird nicht mit der Größe des Speichers skaliert. Wenn Sie beispielsweise 40 Gigabyte (40Gi) mit 100 E/A-Operationen pro Sekunde auswählen, bleibt die Gesamtzahl der E/A-Operationen pro Sekunde bei 100.</br></br>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt auch den Typ der Festplatte, die für Sie bereitgestellt wird. Beispiel: Wenn Sie beispielsweise 500 Gigabyte (500Gi) bei 100 E/A-Operationen pro Sekunde haben, ist das Verhältnis E/A-Operationen pro Sekunde zu Gigabyte 0,2. Speicher mit einem Verhältnis von kleiner-gleich 0,3 wird auf SATA-Festplatten bereitgestellt. Wenn das Verhältnis größer als 0,3 ist, wird Ihr Speicher auf SSD-Festplatten bereitgestellt.<table>
+   - **Speicherklasse 'custom':** Wenn Sie diese Speicherklasse auswählen, können Sie die gewünschte Größe und Anzahl der E/A-Operationen pro Sekunde besser steuern. Als Größe können Sie innerhalb des zulässigen Größenbereichs eine beliebige ganze Zahl von Gigabyte auswählen. Die von Ihnen gewählte Größe legt den Bereich der für Sie verfügbaren E/A-Operationen pro Sekunde fest. Sie können eine Anzahl von E/A-Operationen pro Sekunde auswählen, bei der es sich um eine Vielzahl von 100 handelt und die sich im angegebenen Bereich befindet. Der von Ihnen ausgewählte Wert für E/A-Operationen pro Sekunde ist statisch und wird nicht mit der Größe des Speichers skaliert. Wenn Sie beispielsweise 40 Gigabyte (40Gi) mit 100 E/A-Operationen pro Sekunde auswählen, bleibt die Gesamtzahl der E/A-Operationen pro Sekunde bei 100. </br></br>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt auch den Typ der Festplatte, die für Sie bereitgestellt wird. Beispiel: Wenn Sie beispielsweise 500 Gigabyte (500Gi) bei 100 E/A-Operationen pro Sekunde haben, ist das Verhältnis E/A-Operationen pro Sekunde zu Gigabyte 0,2. Speicher mit einem Verhältnis von kleiner-gleich 0,3 wird auf SATA-Festplatten bereitgestellt. Wenn das Verhältnis größer als 0,3 ist, wird Ihr Speicher auf SSD-Festplatten bereitgestellt.
+     <table>
          <caption>Tabelle mit Größenbereichen und der Anzahl E/A-Operationen pro Sekunde (IOPS) für Speicherklassen des Typs 'custom'</caption>
          <thead>
          <th>Größenbereich in Gigabyte</th>
@@ -341,11 +346,11 @@ Jede Speicherklasse gibt den Typ des Blockspeichers an, den Sie bereitstellen, e
          </tr>
          </tbody></table>
 
-5. Wählen Sie diese Option aus, wenn die Daten nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen. 
-   - Wenn Sie die Daten beibehalten möchten, wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur (SoftLayer) und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Blockspeicher](#existing_block) ausführen. 
+5. Wählen Sie diese Option aus, wenn die Daten nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen.
+   - Wenn Sie die Daten beibehalten möchten, wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur (SoftLayer) und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Blockspeicher](#existing_block) ausführen.
    - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Blockspeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen.
-   
-6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/block-storage/pricing). Standardmäßig werden alle Blockspeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt. 
+
+6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/block-storage/pricing). Standardmäßig werden alle Blockspeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt.
 
 <br />
 
@@ -354,21 +359,22 @@ Jede Speicherklasse gibt den Typ des Blockspeichers an, den Sie bereitstellen, e
 ## Blockspeicher zu Apps hinzufügen
 {: #add_block}
 
-Erstellen Sie einen Persistent Volume Claim (PVC), um Blockspeicher für Ihren Cluster [dynamisch bereitzustellen](cs_storage_basics.html#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die tatsächliche Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bestellt.{:shortdesc}
+Erstellen Sie einen Persistent Volume Claim (PVC), um Blockspeicher für Ihren Cluster [dynamisch bereitzustellen](cs_storage_basics.html#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die tatsächliche Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bestellt.
+{:shortdesc}
 
 **Wichtig**: Blockspeicher wird mit dem Zugriffsmodus `ReadWriteOnce` geliefert. Sie können ihn jeweils immer nur an einen Pod auf einem Workerknoten im Cluster anhängen.
 
 Vorbemerkungen:
 - Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](cs_firewall.html#pvc) für die IBM Cloud-Infrastruktur-IP-Bereiche (SoftLayer) der Zonen, in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims (PVCs) erstellen können.
 - Installieren Sie das [{{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in](#install_block).
-- [Entscheiden Sie sich für eine vordefinierte Speicherklasse](#predefined_storageclass) oder erstellen Sie eine [angepasste Speicherklasse](#custom_storageclass). 
+- [Entscheiden Sie sich für eine vordefinierte Speicherklasse](#predefined_storageclass) oder erstellen Sie eine [angepasste Speicherklasse](#custom_storageclass).
 
 Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
 
 1.  Erstellen Sie eine Konfigurationsdatei, um Ihren PVC zu definieren, und speichern Sie die Konfiguration als `.yaml`-Datei.
 
     -  **Beispiel für die Speicherklassen 'bronze', 'silver' und 'gold'**:
-       Die folgende `.yaml`-Datei erstellt eine Anforderung mit dem Namen `mypvc` der Speicherklasse `"ibmc-block-silver"` und einer Abrechnung auf Stundenbasis (`"hourly"`) mit einer Größe von `24Gi`.  
+       Die folgende `.yaml`-Datei erstellt eine Anforderung mit dem Namen `mypvc` der Speicherklasse `"ibmc-block-silver"` und einer Abrechnung auf Stundenbasis (`"hourly"`) mit einer Größe von `24Gi`.
 
        ```
        apiVersion: v1
@@ -391,7 +397,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
         {: codeblock}
 
     -  **Beispiel für die Verwendung der Speicherklasse 'custom'**:
-       Die folgende `.yaml`-Datei erstellt eine Anforderung mit dem Namen `mypvc` der Speicherklasse `ibmc-block-retain-custom` und einer Abrechnung auf Stundenbasis (`"hourly"`) mit einer Größe von `45Gi` und einer Anzahl von `"300"` E/A-Operationen pro Sekunde. 
+       Die folgende `.yaml`-Datei erstellt eine Anforderung mit dem Namen `mypvc` der Speicherklasse `ibmc-block-retain-custom` und einer Abrechnung auf Stundenbasis (`"hourly"`) mit einer Größe von `45Gi` und einer Anzahl von `"300"` E/A-Operationen pro Sekunde.
 
        ```
        apiVersion: v1
@@ -433,12 +439,12 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
           <td>Geben Sie die Häufigkeit an, mit der Ihre Speicherrechnung berechnet wird, monatlich ('monthly') oder stündlich ('hourly'). Der Standardwert ist 'hourly'.</td>
         </tr>
 	<tr>
-	<td><code>metadata/region</code></td>
-        <td>Geben Sie die Region an, in der der Blockspeicher bereitgestellt werden soll. Bei Angabe der Region müssen Sie auch eine Zone angeben. Wenn Sie keine Region angeben oder die angegebene Region nicht gefunden wird, wird der Speicher in derselben Region wie Ihr Cluster erstellt.</br><strong>Anmerkung:</strong> Diese Option wird nur mit dem Block Storage-Plug-in Version 1.0.1 oder höher von IBM Cloud unterstützt. Wenn Sie einen Mehrzonencluster haben, wird bei älteren Plug-in-Versionen die Zone, in der Ihr Speicher bereitgestellt wird, im Umlaufverfahren ausgewählt, um die Datenträgeranforderungen gleichmäßig auf alle Zonen zu verteilen. Wenn Sie die Zone für Ihren Speicher angeben möchten, müssen Sie zuerst eine [angepasste Speicherklasse](#multizone_yaml) erstellen. Erstellen Sie anschließend einen PVC mit der angepassten Speicherklasse.</td>
+	<td><code>metadata/labels/region</code></td>
+        <td>Geben Sie die Region an, in der der Blockspeicher bereitgestellt werden soll. Bei Angabe der Region müssen Sie auch eine Zone angeben. Wenn Sie keine Region angeben oder die angegebene Region nicht gefunden wird, wird der Speicher in derselben Region wie Ihr Cluster erstellt. </br><strong>Anmerkung:</strong> Diese Option wird nur mit dem Block Storage-Plug-in Version 1.0.1 oder höher von IBM Cloud unterstützt. Wenn Sie einen Mehrzonencluster haben, wird bei älteren Plug-in-Versionen die Zone, in der Ihr Speicher bereitgestellt wird, im Umlaufverfahren ausgewählt, um die Datenträgeranforderungen gleichmäßig auf alle Zonen zu verteilen. Wenn Sie die Zone für Ihren Speicher angeben möchten, müssen Sie zuerst eine [angepasste Speicherklasse](#multizone_yaml) erstellen. Erstellen Sie anschließend einen PVC mit der angepassten Speicherklasse.</td>
 	</tr>
 	<tr>
-	<td><code>metadata/zone</code></td>
-	<td>Geben Sie die Zone an, in der der Blockspeicher bereitgestellt werden soll. Bei Angabe der Zone müssen Sie auch eine Region angeben. Wenn Sie keine Zone angeben oder die angegebene Zone in einem Mehrzonencluster nicht gefunden wird, wird die Zone im Umlaufverfahren ausgewählt.</br><strong>Anmerkung:</strong> Diese Option wird nur mit dem Block Storage-Plug-in Version 1.0.1 oder höher von IBM Cloud unterstützt. Wenn Sie einen Mehrzonencluster haben, wird bei älteren Plug-in-Versionen die Zone, in der Ihr Speicher bereitgestellt wird, im Umlaufverfahren ausgewählt, um die Datenträgeranforderungen gleichmäßig auf alle Zonen zu verteilen. Wenn Sie die Zone für Ihren Speicher angeben möchten, müssen Sie zuerst eine [angepasste Speicherklasse](#multizone_yaml) erstellen. Erstellen Sie anschließend einen PVC mit der angepassten Speicherklasse.</td>
+	<td><code>metadata/labels/zone</code></td>
+	<td>Geben Sie die Zone an, in der der Blockspeicher bereitgestellt werden soll. Bei Angabe der Zone müssen Sie auch eine Region angeben. Wenn Sie keine Zone angeben oder die angegebene Zone in einem Mehrzonencluster nicht gefunden wird, wird die Zone im Umlaufverfahren ausgewählt. </br><strong>Anmerkung:</strong> Diese Option wird nur mit dem Block Storage-Plug-in Version 1.0.1 oder höher von IBM Cloud unterstützt. Wenn Sie einen Mehrzonencluster haben, wird bei älteren Plug-in-Versionen die Zone, in der Ihr Speicher bereitgestellt wird, im Umlaufverfahren ausgewählt, um die Datenträgeranforderungen gleichmäßig auf alle Zonen zu verteilen. Wenn Sie die Zone für Ihren Speicher angeben möchten, müssen Sie zuerst eine [angepasste Speicherklasse](#multizone_yaml) erstellen. Erstellen Sie anschließend einen PVC mit der angepassten Speicherklasse.</td>
 	</tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
@@ -547,7 +553,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird.</td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird. Daten, die in den Mountpfad geschrieben werden, werden unter dem Stammverzeichnis in Ihrer physischen Dateispeicherinstanz gespeichert. Um Verzeichnisse in Ihrer physischen Dateispeicherinstanz zu erstellen, müssen Sie Unterverzeichnisse in Ihrem Mountpfad erstellen.</td>
     </tr>
     <tr>
     <td><code>spec/containers/volumeMounts/name</code></td>
@@ -559,12 +565,12 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
     </tr>
     <tr>
     <td><code>volumes/persistentVolumeClaim/claimName</code></td>
-    <td>Der Name des PVC, der den zu verwendenden persistenten Datenträger bindet.</td>
+    <td>Der Name des PVC, der den zu verwendenden persistenten Datenträger bindet. </td>
     </tr>
     </tbody></table>
 
 5.  Erstellen Sie die Bereitstellung.
-```
+     ```
      kubectl apply -f <lokaler_yaml-pfad>
      ```
      {: pre}
@@ -590,7 +596,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
         ReadOnly: false
      ```
      {: screen}
-     
+
 <br />
 
 
@@ -635,27 +641,27 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
     ```
     {: screen}
 
-7.  Notieren Sie sich die Angaben `id`, `ip_addr`, `capacity_gb`, das Rechenzentrum (`datacenter`) und `lunId` der Blockspeichereinheit, die Sie an Ihren Cluster anhängen möchten. **Anmerkung:** Wenn Sie einen vorhandenen Speicher an einen Cluster anhängen möchten, müssen Sie in derselben Zone, in der sich auch der Speicher befindet, einen Workerknoten haben. Um die Zone des Workerknotens zu überprüfen, führen Sie `ibmcloud ks workers <cluster_name_or_ID>` aus. 
+7.  Notieren Sie sich die Angaben `id`, `ip_addr`, `capacity_gb`, das Rechenzentrum (`datacenter`) und `lunId` der Blockspeichereinheit, die Sie an Ihren Cluster anhängen möchten. **Anmerkung:** Wenn Sie einen vorhandenen Speicher an einen Cluster anhängen möchten, müssen Sie in derselben Zone, in der sich auch der Speicher befindet, einen Workerknoten haben. Um die Zone des Workerknotens zu überprüfen, führen Sie `ibmcloud ks workers <cluster_name_or_ID>` aus.
 
 ### Schritt 2: Persistenten Datenträger (PV) und übereinstimmenden Persistent Volume Claim (PVC) erstellen
 
-1.  Optional: Wenn Sie über Speicher verfügen, den Sie mit einer Speicherklasse des Typs `retain` bereitgestellt haben, werden der persistente Datenträger und die physische Speichereinheit beim Entfernen des Persistent Volume Claim (PVC) nicht entfernt. Zum Wiederverwenden des Speichers in Ihrem Cluster müssen Sie zuerst den persistenten Datenträger entfernen. 
+1.  Optional: Wenn Sie über Speicher verfügen, den Sie mit einer Speicherklasse des Typs `retain` bereitgestellt haben, werden der persistente Datenträger und die physische Speichereinheit beim Entfernen des Persistent Volume Claim (PVC) nicht entfernt. Zum Wiederverwenden des Speichers in Ihrem Cluster müssen Sie zuerst den persistenten Datenträger entfernen.
     1. Listen Sie vorhandene persistente Datenträger auf.
-```
+       ```
        kubectl get pv
        ```
        {: pre}
-     
-       Suchen Sie den persistenten Datenträger, der zu Ihrem persistenten Speicher gehört. Der persistente Datenträger hat den Status 'freigegeben' (`released`). 
-     
+
+       Suchen Sie den persistenten Datenträger, der zu Ihrem persistenten Speicher gehört. Der persistente Datenträger hat den Status 'freigegeben' (`released`).
+
     2. Entfernen Sie den persistenten Datenträger.
-```
+       ```
        kubectl delete pv <pv-name>
        ```
        {: pre}
-   
+
     3. Überprüfen Sie, dass der persistente Datenträger entfernt wurde.
-```
+       ```
        kubectl get pv
        ```
        {: pre}
@@ -668,8 +674,8 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
     metadata:
       name: mypv
       labels:
-         failure-domain.beta.kubernetes.io/region=<region>
-         failure-domain.beta.kubernetes.io/zone=<zone>
+         failure-domain.beta.kubernetes.io/region: <region>
+         failure-domain.beta.kubernetes.io/zone: <zone>
     spec:
       capacity:
         storage: "<speichergröße>"
@@ -698,7 +704,8 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
     </tr>
     <tr>
     <td><code>metadata/labels</code></td>
-    <td>Geben Sie die Region und die Zone ein, die Sie zuvor abgerufen haben. Zum Anhängen des Speichers an Ihren Cluster müssen Sie mindestens einen Workerknoten in der Region und Zone haben, in der sich auch der persistente Speicher befindet. Wenn bereits ein persistenter Datenträger für Ihren Speicher vorhanden ist, [fügen Sie die Zonen- und Regionsbezeichnung](cs_storage_basics.html#multizone) zu Ihrem persistenten Datenträger hinzu.</tr>
+    <td>Geben Sie die Region und die Zone ein, die Sie zuvor abgerufen haben. Zum Anhängen des Speichers an Ihren Cluster müssen Sie mindestens einen Workerknoten in der Region und Zone haben, in der sich auch der persistente Speicher befindet. Wenn bereits ein persistenter Datenträger für Ihren Speicher vorhanden ist, [fügen Sie die Zonen- und Regionsbezeichnung](cs_storage_basics.html#multizone) zu Ihrem persistenten Datenträger hinzu.
+    </tr>
     <tr>
     <td><code>spec/flexVolume/fsType</code></td>
     <td>Geben Sie den Dateisystemtyp ein, der für den vorhandenen Blockspeicher konfiguriert ist. Wählen Sie zwischen <code>ext4</code> oder <code>xfs</code>. Wenn Sie diese Option nicht angeben, nimmt das PV standardmäßig den Wert <code>ext4</code> ein. Wenn der falsche Wert für 'fsType' definiert ist, ist zwar die PV-Erstellung erfolgreich, das Anhängen des PVs an einen Pod schlägt jedoch fehl. </td></tr>	    
@@ -712,7 +719,7 @@ Bevor Sie mit dem Anhängen Ihres vorhandenen Speichers an eine App beginnen kö
     </tr>
     <tr>
     <td><code>flexVolume/options/TargetPortal</code></td>
-    <td>Geben Sie die IP-Adresse Ihres Blockspeichers ein, die Sie zuvor als <code>ip_addr</code> abgerufen haben.</td>
+    <td>Geben Sie die IP-Adresse Ihres Blockspeichers ein, die Sie zuvor als <code>ip_addr</code> abgerufen haben. </td>
     </tr>
     <tr>
 	    <td><code>flexVolume/options/VolumeId</code></td>
@@ -792,7 +799,7 @@ Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Pers
 
 
 
-## Daten sichern und wiederherstellen 
+## Daten sichern und wiederherstellen
 {: #backup_restore}
 
 Der Blockspeicher wird an derselben Position wie die Workerknoten in Ihrem Cluster bereitgestellt. Der Speicher wird auf in Gruppen zusammengefassten Servern von IBM gehostet, um Verfügbarkeit sicherzustellen, falls ein Server ausfallen sollte. Der Blockspeicher wird jedoch nicht automatisch gesichert und ist möglicherweise nicht zugänglich, wenn der gesamte Standort fehlschlägt. Um Ihre Daten vor Verlust oder Beschädigung zu schützen, können Sie regelmäßige Sicherungen konfigurieren, mit denen Sie bei Bedarf Daten wiederherstellen können.
@@ -801,15 +808,15 @@ Der Blockspeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. </br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>    kubectl get pv
-    </code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Größe und die Anzahl der E/A-Operationen pro Sekunde werden im Abschnitt <strong>Labels</strong> der CLI-Ausgabe angezeigt. Um die Datenträger-ID zu finden, überprüfen Sie die Annotation <code>ibm.io/network-storage-id</code> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;größe&gt; --tier &lt;iops&gt; &lt;datenträger-id&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>slcli block volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Capacity (GB)</strong> in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>slcli block snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>slcli block volume-detail &lt;snapshot-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot-id&gt; &lt;datenträger-id&gt;</code></pre></p></dd>
+  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ein Support-Ticket öffnen</a>.</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Größe und die Anzahl der E/A-Operationen pro Sekunde werden im Abschnitt <strong>Labels</strong> der CLI-Ausgabe angezeigt. Um die Datenträger-ID zu finden, überprüfen Sie die Annotation <code>ibm.io/network-storage-id</code> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>slcli block snapshot-order --capacity &lt;größe&gt; --tier &lt;iops&gt; &lt;datenträger-id&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre">
+<code>slcli block volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Capacity (GB)</strong> in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>slcli block snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>slcli block volume-detail &lt;snapshot-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot-id&gt; &lt;datenträger-id&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>
- <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Blockspeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/BlockStorage/replication.html#replicating-data). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Blockspeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen.</p></dd>
+ <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Blockspeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/BlockStorage/replication.html#replicating-data). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Blockspeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, können Sie keine Snapshots in eine andere Zone replizieren.</p></dd>
  <dt>Speicher duplizieren</dt>
- <dd><p>Sie können Ihre [Blockspeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Erstellen Sie zur Vorbereitung einer Duplizierung zunächst Snapshots für den Datenträger.</p></dd>
+ <dd><p>Sie können Ihre [Blockspeicherinstanz in derselben Zone duplizieren](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume), in der sich auch die ursprüngliche Speicherinstanz befindet. Ein Duplikat hat dieselben Daten wie die Originalspeicherinstanz zu dem Zeitpunkt, an dem das Duplikat erstellt wurde. Verwenden Sie das Duplikat - im Gegensatz zu den Replikaten - als unabhängige Speicherinstanz. Erstellen Sie zur Vorbereitung einer Duplizierung zunächst Snapshots für den Datenträger. <strong>Hinweis</strong>: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ein Support-Ticket öffnen</a>.</p></dd>
   <dt>Daten in {{site.data.keyword.cos_full}} sichern</dt>
-  <dd><p>Sie können den Befehl [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) verwenden, damit ein Pod für Sicherung und Wiederherstellung in Ihrem Cluster den Betrieb aufnimmt. Dieser Pod enthält ein Script zur Ausführung einer einmaligen oder regelmäßigen Sicherung für alle PVCs (Persistent Volume Claims) in Ihrem Cluster. Die Daten werden in Ihrer {{site.data.keyword.cos_full}}-Instanz gespeichert, die Sie in einer Zone konfiguriert haben.</p><strong>Anmerkung:</strong> Blockspeicher wird mit dem RWO-Zugriffsmodus (ReadWriteOnce) angehängt. Dieser Zugriff ermöglicht, dass gleichzeitig nur ein einziger Pod an den Blockspeicher angehängt werden kann. Zum Sichern Ihrer Daten müssen Sie den Speicher von Ihrem App-Pod abhängen, ihn an Ihren Sicherungspod anhängen, die Daten sichern und den Speicher wieder an Ihren App-Pod anhängen.</br></br>
-Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_full}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_full}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</dd>
+  <dd><p>Sie können den Befehl [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) verwenden, damit ein Pod für Sicherung und Wiederherstellung in Ihrem Cluster den Betrieb aufnimmt. Dieser Pod enthält ein Script zur Ausführung einer einmaligen oder regelmäßigen Sicherung für alle PVCs (Persistent Volume Claims) in Ihrem Cluster. Die Daten werden in Ihrer {{site.data.keyword.cos_full}}-Instanz gespeichert, die Sie in einer Zone konfiguriert haben.</p><strong>Anmerkung:</strong> Blockspeicher wird mit dem RWO-Zugriffsmodus (ReadWriteOnce) angehängt. Dieser Zugriff ermöglicht, dass gleichzeitig nur ein einziger Pod an den Blockspeicher angehängt werden kann. Zum Sichern Ihrer Daten müssen Sie den Speicher von Ihrem App-Pod abhängen, ihn an Ihren Sicherungspod anhängen, die Daten sichern und den Speicher wieder an Ihren App-Pod anhängen. </br></br>
+Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_short}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_short}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</dd>
 <dt>Daten in und aus Pods und Containern kopieren</dt>
 <dd><p>Sie können den [Befehl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` verwenden, um Dateien und Verzeichnisse in und aus Pods oder spezifischen Containern in Ihrem Cluster zu kopieren.</p>
 <p>Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel Ihrer Kubernetes-CLI](cs_cli_install.html#cs_cli_configure) den gewünschten Cluster an. Wenn Sie keinen Container mit <code>-c</code> angeben, verwendet der Befehl den ersten verfügbaren Container im Pod.</p>
@@ -817,7 +824,7 @@ Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zone
 <ul>
 <li>Kopieren Sie Daten von Ihrer lokalen Maschine in einen Pod in Ihrem Cluster: <pre class="pre"><code>kubectl cp <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var> <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;</var></code></pre></li>
 <li>Kopieren Sie Daten von einem Pod in Ihrem Cluster auf Ihre lokale Maschine: <pre class="pre"><code>kubectl cp <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;/&lt;dateiname&gt;</var> <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var></code></pre></li>
-<li>Kopieren Sie Daten von einem Pod in Ihrem Cluster in einen spezifischen Container in einem anderen Pod: <pre class="pre"><code>kubectl cp <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;</var> <var>&lt;namensbereich&gt;/&lt;anderer_pod&gt;:&lt;dateipfad_des_pods&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>Kopieren Sie Daten von Ihrer lokalen Maschine in einen bestimmten Container, der in einem Pod in Ihrem Cluster ausgeführt wird: <pre class="pre"><code>kubectl cp <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var> <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;pod-dateipfad&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -991,7 +998,7 @@ Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zone
 </tr>
 <tr>
 <td>Festplatte</td>
-<td>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers.</br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul></td>
+<td>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers. </br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul></td>
 </tr>
 <tr>
 <td>Abrechnung</td>
@@ -1013,9 +1020,9 @@ Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zone
 ### Zone angeben (bei Mehrzonencluster)
 {: #multizone_yaml}
 
-Die folgende `.yaml`-Datei passt eine Speicherklasse an, die auf der Speicherklasse `ibm-block-silver` ohne 'retain' (Beibehaltung) basiert: Der Typ (`type`) ist `"Endurance"`, der Wert für `iopsPerGB` ist `4`, der Wert für `sizeRange` ist `"[20-12000]Gi"` und für `reclaimPolicy` wird die Einstellung `"Delete"` festgelegt. Die Zone wird als `dal12` angegeben. Als Unterstützung für die Festlegung von zulässigen Werten können Sie die oben stehenden Informationen zu `ibmc`-Speicherklassen erneut lesen.</br>
+Die folgende `.yaml`-Datei passt eine Speicherklasse an, die auf der Speicherklasse `ibm-block-silver` ohne 'retain' (Beibehaltung) basiert: Der Typ (`type`) ist `"Endurance"`, der Wert für `iopsPerGB` ist `4`, der Wert für `sizeRange` ist `"[20-12000]Gi"` und für `reclaimPolicy` wird die Einstellung `"Delete"` festgelegt. Die Zone wird als `dal12` angegeben. Als Unterstützung für die Festlegung von zulässigen Werten können Sie die oben stehenden Informationen zu `ibmc`-Speicherklassen erneut lesen. </br>
 
-Lesen Sie in der [Speicherklassenreferenz](#storageclass_reference) nach, wenn Sie eine andere Speicherklasse als Basis verwenden möchten. 
+Lesen Sie in der [Speicherklassenreferenz](#storageclass_reference) nach, wenn Sie eine andere Speicherklasse als Basis verwenden möchten.
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -1037,7 +1044,7 @@ reclaimPolicy: "Delete"
 ### Blockspeicher mit einem `XFS`-Dateisystem anhängen
 {: #xfs}
 
-Im folgenden Beispiel wird eine Speicherklasse mit dem Namen `ibmc-block-custom-xfs` erstellt, die Performance-Blockspeicher mit dem Dateisystem `XFS` bereitstellt. 
+Im folgenden Beispiel wird eine Speicherklasse mit dem Namen `ibmc-block-custom-xfs` erstellt, die Performance-Blockspeicher mit dem Dateisystem `XFS` bereitstellt.
 
 ```
 apiVersion: storage.k8s.io/v1

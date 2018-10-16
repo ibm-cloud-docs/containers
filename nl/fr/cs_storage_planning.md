@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -16,75 +16,271 @@ lastupdated: "2018-08-06"
 {:download: .download}
 
 
-
-
 # Planification de stockage persistant à haute disponibilité
 {: #storage_planning}
 
-## Options de stockage de données non persistant
-{: #non_persistent}
+## Choix d'une solution de stockage
+{: #choose_storage_solution}
 
-Vous pouvez utiliser des options de stockage non persistant si vos données n'ont pas besoin d'être stockées de manière permanente ou si elles n'ont pas besoin d'être partagées entre les instances d'application. Ces options peuvent également être utilisées afin d'effectuer un test d'unité sur vos composants d'application ou d'essayer de nouvelles fonctions.
+Avant de décider du type de stockage qui vous convient le mieux, vous devez connaître les conditions requises par votre application, le type de données que vous souhaitez stocker et la fréquence à laquelle vous souhaitez accéder à ces données.
+{: shortdesc}
+
+1. Déterminez si vos données doivent faire l'objet d'un stockage permanent ou si elles peuvent être retirées à moment donné.
+   - **Stockage persistant :** vos données doivent toujours être disponibles, même en cas de retrait du conteneur, du noeud worker ou du cluster. Utilisez le stockage persistant dans les scénarios suivants :
+       - Applications avec état
+       - Données métier stratégiques
+       - Données devant être toujours disponibles en raison des réglementations en vigueur, par exemple une période de conservation définie
+       - Audit
+       - Données qui doivent être accessibles et partagées entre des instances d'application
+   - **Stockage non persistant :** vos données peuvent être retirées en cas de retrait du conteneur, du noeud worker ou du cluster. Ce type de stockage est utilisé en principe pour les informations de consignation, telles que les journaux système ou les journaux de conteneur, les tests de développement ou lorsque vous souhaitez accéder aux données à partir du système de fichiers de l'hôte. Pour obtenir une présentation des options de stockage non persistant disponibles, voir [Comparaison des options de stockage non persistant](#non_persistent_overview).
+
+2. Si vous devez conserver vos données, déterminez si votre application nécessite un type de stockage particulier. Lorsque vous utilisez une application existante, cette application peut être conçue pour stocker des données avec l'une des méthodes suivantes :  
+   - **Dans un système de fichiers :** les données peuvent être stockées sous forme de fichier dans un répertoire. Par exemple, vous pouvez stocker ce fichier sur votre disque dur local. Certaines applications nécessitent que les données soient stockées dans un système de fichiers spécifique, tel que `nfs` ou `ext4` afin d'optimiser le magasin de données et d'atteindre les objectifs en termes de performances.
+   - **Dans une base de données :** les données doivent être stockées dans une base de données selon un schéma précis. Certaines applications sont fournies avec une interface de base de données que vous pouvez utiliser pour stocker vos données. Par exemple, WordPress est optimisé pour stocker des données dans une base de données MySQL. Dans ces cas de figure, le type de stockage est sélectionné pour vous.
+
+3. Si votre application n'a pas de restriction particulière sur le type de stockage que vous devez utiliser, déterminez le type de données que vous souhaitez stocker.
+   - **Données structurées :** données que vous pouvez stocker dans une base de données relationnelle lorsque vous disposez d'une table avec des lignes et des colonnes. Les données dans les tables peuvent être connectées à l'aide de clés et sont en général faciles d'accès en raison d'un modèle de données prédéfini. Exemples : numéros de téléphone, numéros de sécurité sociale ou codes postaux.
+   - **Données semi-structurées :** données qui n'entrent pas dans le cadre d'une base de données relationnelle mais qui contiennent des propriétés organisationnelles que vous pouvez utiliser pour lire et analyser ces données plus facilement. Exemples : fichiers de langage de balisage, de type CSV, XML ou JSON.  
+   - **Données non structurées :** données qui ne suivent pas de modèle d'organisation particulier et dont le niveau de complexité est tel que vous ne pouvez pas les stocker dans une base de données relationnelle avec des modèles de données prédéfinis. Pour accéder à ces données, il vous faut des logiciels et des outils avancés. Exemples : messages électroniques, vidéos, photos, fichiers audio, présentations, données de réseaux sociaux ou pages Web.
+
+   Si vous disposez de données structurées et non structurées, essayez de stocker chacun de ces types de données séparément dans une solution de stockage conçue pour chaque type particulier. L'utilisation d'une solution de stockage adaptée à votre type de données facilite l'accès à vos données tout en vous offrant des avantages en termes de performances, d'évolutivité, de durabilité et de cohérence.
+   {: tip}
+
+4. Analysez le mode d'accès à vos données de votre choix. Les solutions de stockage sont en principe conçues et optimisées pour prendre en charge les opérations de lecture ou d'écriture.  
+   - **Lecture seule :** vos données sont en lecture seule. Vous ne voulez pas écrire ou modifier de données.
+   - **Lecture et écriture :** vous voulez lire, écrire et modifier vos données. Pour les données lues et écrites, il est important de savoir si les opérations sont plutôt des opérations de lecture ou des opérations d'écriture ou si les deux types d'opérations sont équilibrés.
+
+4. Déterminez la fréquence d'accès à vos données. Connaître la fréquence d'accès aux données peut vous aider à appréhender les performances dont vous avez besoin pour votre stockage. Par exemple, les données à accès fréquent résident en principe sur du stockage rapide.
+   - **Données les plus sollicitées :** données à accès fréquent. Les cas d'utilisation courants sont les applications Web ou mobiles.
+   - **Données à accès moins ou moyennement fréquent :** données dont l'accès n'est pas très fréquent, par exemple une fois par mois ou moins. Les cas d'utilisation courants sont les archives, la conservation à court-terme des données ou la reprise après incident.
+   - **Données à accès peu fréquent :** données dont l'accès est plutôt rare voire inexistant. Les cas d'utilisation courants sont les archives, les sauvegardes à long terme, les données d'historique.
+   - **Données figées :** données auxquelles il n'y a pas d'accès et que vous devez conserver pour vous conformer à une réglementation.
+
+   Si vous ne pouvez pas prévoir la fréquence ou si la fréquence ne suit pas un modèle précis, déterminez si vos charges de travail sont plutôt destinées à être lues, écrites ou si leurs opérations de lecture et d'écriture sont équilibrées. Ensuite, examinez l'option de stockage qui convient à votre charge de travail et recherchez le niveau de stockage qui vous offre la flexibilité dont vous avez besoin. Par exemple, {{site.data.keyword.containerlong_notm}} fournit la classe de stockage `flex` qui prend en considération la fréquence d'accès aux données sur un mois et tient compte de cette mesure pour optimiser votre facturation mensuelle.
+   {: tip}
+
+5. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions.
+   - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. D'autres solutions de stockage vous permettent de partager le même volume entre plusieurs pods.
+   - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples.
+
+6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.
+   - **Cohérence :** garantie qu'une opération de lecture renvoie la dernière version d'un fichier. Les solutions de stockage peuvent apporter une cohérence forte (`strong consistency`) qui vous garantit de recevoir la dernière version d'un fichier ou une cohérence finale (`eventual consistency`) lorsque l'opération de lecture ne garantit pas le renvoi de la dernière version. Vous obtenez souvent une cohérence finale dans les systèmes répartis géographiquement dans lesquels une opération d'écriture doit d'abord être répliquée sur toutes les instances.
+   - **Performances :** temps nécessaire pour exécuter une opération de lecture ou d'écriture.
+   - **Durabilité :** garantie qu'une opération d'écriture validée dans votre stockage survive de manière permanente sans subir de dommages ou de perte, même si les gigaoctets ou téraoctets de données sont écrits dans votre stockage au même moment.
+   - **Résilience :** capacité de reprise après une panne en poursuivant les opérations, même en cas de défaillance d'un composant matériel ou logiciel. Par exemple, votre stockage physique subit une panne de courant, doit faire face à l'indisponibilité du réseau ou est supprimé suite à une catastrophe naturelle.
+   - **Disponibilité :** capacité de fournir l'accès à vos données, même si un centre de données ou une région n'est pas disponible. La disponibilité de vos données est en principe assurée en ajoutant de la redondance et en configurant des mécanismes de basculement.
+   - **Evolutivité :** possibilité d'augmenter la capacité et de personnaliser les performances en fonction de vos besoins.
+   - **Chiffrement :** masquer les données permet d'empêcher leur visibilité en cas d'accès par un utilisateur non autorisé.
+
+7. [Passez en revue les solutions de stockage persistant](#persistent_storage_overview) et sélectionnez la solution qui convient le mieux aux besoins de votre application et de vos données.
+
+## Comparaison des options de stockage non persistant
+{: #non_persistent_overview}
+
+Vous pouvez utiliser des options de stockage non persistant si vos données n'ont pas besoin d'être stockées de manière permanente ou pour les tests d'unité des composants de votre application.
 {: shortdesc}
 
 L'illustration suivante présente les options de stockage de données non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters gratuits et standard.
 <p>
 <img src="images/cs_storage_nonpersistent.png" alt="Options de stockage de données non persistant" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="Le tableau présente les options de stockage non persistant. La lecture des lignes s'effectue de gauche à droite, avec le numéro de l'option dans la première colonne, son titre dans la deuxième colonne et une description dans la troisième colonne." style="width: 100%">
-<caption>Options de stockage non persistant</caption>
-  <thead>
-  <th>Option</th>
-  <th>Description</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1. Dans le conteneur ou dans le pod</td>
-      <td>De par leur conception, les conteneurs ont une durée de vie brève et ne sont pas à l'abri de défaillances inattendues. Toutefois, vous pouvez consigner des données sur le système de fichiers local afin de stocker des données tout au long du cycle de vie du conteneur. Les données hébergées au sein d'un conteneur ne peuvent pas être partagées avec d'autres conteneurs ou pods et sont perdues en cas de panne ou de suppression du conteneur. Pour plus d'informations, voir [Stockage de données dans un conteneur](https://docs.docker.com/storage/).</td>
-    </tr>
-  <tr>
-    <td>2. Sur le noeud worker</td>
-    <td>Chaque noeud worker est configuré avec un stockage principal et un stockage secondaire déterminés par le type de machine que vous sélectionnez pour votre noeud worker. Le stockage principal est utilisé pour stocker les données du système d'exploitation. Il est accessible par le biais d'un [volume <code>hostPath</code> Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath). Le stockage secondaire est utilisé pour stocker des données provenant du `kubelet` et du moteur d'exécution du conteneur. Vous pouvez accéder au stockage secondaire en utilisant un [volume <code>emptyDir</code> Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)<br/><br/>Alors que les volumes <code>hostPath</code> sont utilisés pour monter des fichiers à partir du système de fichiers du noeud worker sur votre pod, un volume <code>emptyDir</code> crée un répertoire vide qui est affecté à un pod dans votre cluster. Tous les conteneurs figurant dans ce pod peuvent effectuer des opérations de lecture/écriture dans ce volume. Comme le volume est affecté à un pod spécifique, les données ne peuvent pas être partagées avec d'autres pods dans un jeu de répliques.<br/><br/><p>Un volume <code>hostPath</code> ou <code>emptyDir</code> et ses données sont supprimés dans les cas suivants : <ul><li>Le noeud worker est supprimé.</li><li>Le noeud worker est rechargé ou mis à jour.</li><li>Le cluster est supprimé.</li><li>Le compte {{site.data.keyword.Bluemix_notm}} passe à un état 'suspendu'. </li></ul></p><p>Par ailleurs, les données d'un volume <code>emptyDir</code> sont supprimées dans les cas suivants : <ul><li>Le pod affecté est supprimé définitivement du noeud worker.</li><li>Le pod affecté est planifié pour opérer sur un autre noeud worker.</li></ul></p><p><strong>Remarque :</strong> si le conteneur à l'intérieur du pod tombe en panne, les données du volume restent disponibles sur le noeud worker.</p></td>
-    </tr>
-    </tbody>
-    </table>
+<table>
+<thead>
+<th style="text-align:left">Caractéristiques</th>
+<th style="text-align:left">A l'intérieur du conteneur</th>
+<th style="text-align:left">Sur le disque principal ou secondaire du noeud worker</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Compatible avec plusieurs zones</td>
+<td style="text-align:left">Non</td>
+<td style="text-align:left">Non</td>
+</tr>
+<tr>
+<td style="text-align:left">Types de données</td>
+<td style="text-align:left">Tous</td>
+<td style="text-align:left">Tous</td>
+</tr>
+<tr>
+<td style="text-align:left">Capacité</td>
+<td style="text-align:left">Limitée au disque secondaire disponible du noeud worker. Pour limiter la quantité de stockage secondaire consommée par votre pod, utilisez les limites et les demandes de ressources de [stockage éphémère ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+<td style="text-align:left">Limitée à l'espace disponible du noeud worker sur le disque principal (hostPath) ou secondaire (emptyDir). Pour limiter la quantité de stockage secondaire consommée par votre pod, utilisez les limites et les demandes de ressources de [stockage éphémère ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+</tr>
+<tr>
+<td style="text-align:left">Modèle d'accès aux données</td>
+<td style="text-align:left">Opérations de lecture et d'écriture quelle que soit la fréquence</td>
+<td style="text-align:left">Opérations de lecture et d'écriture quelle que soit la fréquence</td>
+</tr>
+<tr>
+<td style="text-align:left">Accès</td>
+<td style="text-align:left">Via le système de fichiers du conteneur</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Via le [volume <code>hostPath</code> de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) pour accéder au stockage principal du noeud worker. </li><li style="margin:0px; padding:0px">Via [le volume <code>emptyDir</code> de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) pour accéder au stockage secondaire du noeud worker.</td>
+</tr>
+<tr>
+<td style="text-align:left">Performances</td>
+<td style="text-align:left">Hautes</td>
+<td style="text-align:left">Hautes avec faible temps d'attente en utilisant une unité SSD</td>
+</tr>
+<tr>
+<td style="text-align:left">Cohérence</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+</tr>
+<tr>
+<td style="text-align:left">Résilience</td>
+<td style="text-align:left">Faible</td>
+<td style="text-align:left">Faible</td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilité</td>
+<td style="text-align:left">Spécifique au conteneur</td>
+<td style="text-align:left">Spécifique au noeud worker</td>
+</tr>
+<tr>
+<td style="text-align:left">Evolutivité</td>
+<td style="text-align:left">Difficile à étendre car limitée à la capacité du disque secondaire du noeud worker</td>
+<td style="text-align:left">Difficile à étendre car limitée à la capacité du disque principal et du disque secondaire du noeud worker</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilité</td>
+<td style="text-align:left">Les données sont perdues en cas de panne ou de retrait du conteneur. </td>
+<td style="text-align:left">Les données dans les volumes <code>hostPath</code> ou <code>emptyDir</code> sont perdues si : <ul><li>Le noeud worker est supprimé.</li><li>Le noeud worker est rechargé ou mis à jour.</li><li>Le cluster est supprimé.</li><li>Le compte {{site.data.keyword.Bluemix_notm}} passe à un état 'suspendu'. </li></ul></p><p>Par ailleurs, les données d'un volume <code>emptyDir</code> sont supprimées dans les cas suivants : <ul><li>Le pod affecté est supprimé définitivement du noeud worker.</li><li>Le pod affecté est planifié pour opérer sur un autre noeud worker.</li></ul>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation courants</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache d'image local</li><li style="margin:0px; padding:0px">Journaux de conteneur</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cache local hautes performances</li><li style="margin:0px; padding:0px">Accès aux fichiers à partir du système de fichiers du noeud worker</li><li style="margin:0px; padding:0px">Tests d'unité</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation qui ne sont pas idéaux</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stockage de données persistant</li><li style="margin:0px; padding:0px">Partage de données entre plusieurs conteneurs</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stockage de données persistant</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 
-## Options de stockage de données persistant pour haute disponibilité
-{: #persistent}
+## Comparaison des options de stockage persistant
+{: #persistent_storage_overview}
 
-La principale difficulté lorsque vous créez des applications avec état à haute disponibilité consiste à conserver les données réparties entre plusieurs instances d'application dans des zones multiples, et de toujours les maintenir synchronisées. Pour les données à haute disponibilité, assurez-vous de disposer d'une base de données maître à plusieurs instances réparties entre plusieurs centres de données, voire plusieurs régions. Cette base de données maître doit être répliquée en permanence pour assurer une source unique de données de référence. Toutes les instances dans votre cluster doivent pouvoir lire et écrire dans cette base de données maître. En cas de défaillance d'une instance de la base de données maître, les autres instances récupèrent le contrôle de la charge de travail afin que vos applications ne connaissent pas de temps d'indisponibilité.
+Utilisez des options de stockage persistant pour toutes les données que vous souhaitez conserver de manière permanente, même en cas de retrait du conteneur, du noeud worker ou du cluster.
 {: shortdesc}
 
-L'illustration suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour assurer une haute disponibilité de vos données dans un cluster standard. L'option pertinente dépend des facteurs suivants :
-  * **Type de votre application :** vous pourriez, par exemple, utiliser une application nécessitant le stockage des données dans un fichier et non pas dans une base de données.
-  * **Règlementation en termes de stockage et de routage des données :** vous pourriez, par exemple, être obligé de stocker et de router vos données aux Etats-Unis, sans pouvoir utiliser un service situé en Europe.
-  * **Options de sauvegarde et de restauration :** toutes les options de stockage disposent de capacités de sauvegarde et de restauration des données. Vérifiez que les options disponibles répondent aux exigences de votre plan de reprise après incident, telles que la fréquence des sauvegardes ou la possibilité de stocker vos données hors de votre centre de données principal.
-  * **Réplication globale :** pour assurer la haute disponibilité, vous souhaiterez éventuellement configurer plusieurs instances de stockage, lesquelles seront distribuées et répliquées entre vos centres de données à travers le monde.
+**Remarque :** les options de stockage persistant sont disponibles uniquement pour les clusters standard.
 
-<br/>
+Vous envisagez de connecter votre cluster à une base de données sur site à la place ? Voir [Configuration de la connectivité VPN dans votre cluster](cs_vpn.html#vpn).
+{: tip}
+
+L'illustration suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour stocker vos données de manière permanente et assurer la haute disponibilité de vos données dans un cluster. 
+
 <img src="images/cs_storage_mz-ha.png" alt="Options de haute disponibilité pour stockage persistant"/>
 
-<table summary="Le tableau suivant présente les options de stockage persistant. La lecture des lignes s'effectue de gauche à droite, avec le numéro de l'option dans la première colonne, le titre de l'option dans la deuxième colonne et une description dans la troisième colonne." style="width: 100%">
-<caption>Options de stockage persistant</caption>
-  <thead>
-  <th>Option</th>
-  <th>Description</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>1. Stockage NFS ou stockage par blocs</td>
-  <td>Avec cette option, vous pouvez conserver des données d'application et de conteneur au sein de la même zone en utilisant des volumes persistants Kubernetes. </br></br><strong>Comment puis-je mettre à disposition du stockage de fichiers ou du stockage par blocs ?</strong></br>Pour mettre à disposition du stockage de fichiers et du stockage par blocs dans un cluster, vous [utilisez des volumes persistants (PV) et des réservations de volume persistant (PVC)](cs_storage_basics.html#pvc_pv). Les PVC et les PV sont des concepts de Kubernetes qui font abstraction de l'API pour mettre à disposition l'unité physique de stockage de fichiers ou de stockage par blocs. Vous pouvez créer des PVC et des PV avec un provisionnement [dynamique](cs_storage_basics.html#dynamic_provisioning) ou [statique](cs_storage_basics.html#static_provisioning). </br></br><strong>Puis-je utiliser du stockage de fichiers ou du stockage par blocs dans un cluster à zones multiples ?</strong></br> Les unités de stockage de fichiers et de stockage par blocs sont spécifiques à une zone et ne peuvent pas être partagées entre plusieurs zones ou régions. Pour utiliser ce type de stockage dans un cluster, vous devez disposer d'au moins un noeud worker dans la même zone que votre stockage. </br></br>Si vous utilisez un [provisionnement dynamique](cs_storage_basics.html#dynamic_provisioning) de votre stockage de fichiers ou de votre stockage par blocs, dans un cluster couvrant plusieurs zones, le stockage est mis à disposition dans 1 seule zone qui est sélectionnée en mode circulaire. Pour mettre à disposition du stockage persistant dans toutes les zones de votre cluster à zones multiples, répétez ces étapes pour mettre à disposition le stockage de manière dynamique pour chaque zone. Par exemple si votre cluster couvre les zones `dal10`, `dal12` et `dal13`, la première fois que vous utilisez le provisionnement dynamique de stockage persistant, ce stockage sera peut-être mis à disposition dans `dal10`. Créez deux réservations de volume persistant (PVC) supplémentaires pour couvrir les zones `dal12` et `dal13`. </br></br><strong>Que faire pour partager les données entre différentes zones ?</strong></br>Si vous désirez partager des données entre plusieurs zones, utilisez un service cloud de base de données, tel que [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). </td>
-  </tr>
-  <tr id="cloud-db-service">
-    <td>2. Service de base de données cloud</td>
-    <td>Cette option vous permet de conserver les données via un service de base de données {{site.data.keyword.Bluemix_notm}}, comme [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). </br></br><strong>Puis-je utiliser un service cloud de base de données pour mon cluster à zones multiples ?</strong></br>Avec un service cloud de base de données, les données sont stockées hors du cluster dans l'instance de service spécifiée. Cette instance de service est mise à disposition dans une zone. Cependant, toutes les instances de service sont fournies avec une interface externe que vous pouvez utiliser pour accéder à vos données. Lorsque vous utilisez un service de base de données pour un cluster à zones multiples, vous pouvez partager des données entre des clusters, des zones et des régions. Pour rendre votre instance de service plus disponible, vous pouvez choisir de configurer plusieurs instances sur les différentes zones et la réplication entre ces instances pour une disponibilité accrue. </br></br><strong>Comment ajouter un service cloud de base de données à mon cluster ?</strong></br>Pour utiliser un service dans votre cluster, vous devez [lier le service {{site.data.keyword.Bluemix_notm}}](cs_integrations.html#adding_app) à un espace de nom dans votre cluster. Lorsque vous liez le service au cluster, une valeur confidentielle (secret) Kubernetes est créée. Celle-ci héberge des informations confidentielles relatives au service, comme son URL, votre nom d'utilisateur et votre mot de passe. Vous pouvez monter le volume en tant que volume secret sur votre pod et accéder au service en utilisant les données d'identification dans la valeur confidentielle. En montant le volume sur d'autres pods, vous pouvez également partager les données entre les pods. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas perdues et restent accessibles aux autres pods qui montent le volume secret. </br></br>La plupart des services de base de données {{site.data.keyword.Bluemix_notm}} proposent un espace disque gratuit pour une petite quantité de données, de sorte que vous puissiez tester ses caractéristiques.</p></td>
-  </tr>
-  <tr>
-    <td>3. Base de données sur site</td>
-    <td>Si vos données doivent être stockées sur site pour des raisons juridiques, vous pouvez [configurer une connexion VPN](cs_vpn.html#vpn) vers votre base de données locale et utiliser les mécanismes de stockage, de sauvegarde et de réplication existants dans votre centre de données.</td>
-  </tr>
-  </tbody>
-  </table>
-
-{: caption="Tableau. Options de stockage de données persistant pour les déploiements dans des clusters Kubernetes" caption-side="top"}
+<table>
+<thead>
+<th style="text-align:left">Caractéristiques</th>
+<th style="text-align:left">Stockage de fichiers</th>
+<th style="text-align:left">Stockage par blocs</th>
+<th style="text-align:left">Stockage d'objets</th>
+<th style="text-align:left">Base de données sous forme de service (DBaaS)</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Compatible avec plusieurs zones</td>
+<td style="text-align:left">Non, car spécifique à un centre de données. Les données ne peuvent pas être partagées entre plusieurs zones, sauf si vous implémentez votre propre réplication de données.</td>
+<td style="text-align:left">Non, car spécifique à un centre de données. Les données ne peuvent pas être partagées entre plusieurs zones, sauf si vous implémentez votre propre réplication de données.</td>
+<td style="text-align:left">Oui</td>
+<td style="text-align:left">Oui</td>
+</tr>
+<tr>
+<td style="text-align:left">Types de données idéaux</td>
+<td style="text-align:left">Tous</td>
+<td style="text-align:left">Tous</td>
+<td style="text-align:left">Données semi-structurées et non structurées</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Modèle d'utilisation des données</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Opérations de lecture-écriture aléatoire</li><li style="margin:0px; padding:0px">Opérations de lecture-écriture séquentielle</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Opérations de lecture-écriture aléatoire</li><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture intensive</li><li style="margin:0px; padding:0px">Peu ou pas du tout d'opérations d'écriture</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à lecture-écriture intensive</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Accès</td>
+<td style="text-align:left">Via le système de fichiers sur le volume monté</td>
+<td style="text-align:left">Via le système de fichiers sur le volume monté</td>
+<td style="text-align:left">Via le système de fichiers sur le volume monté (plug-in) ou via l'API REST de votre application</td>
+<td style="text-align:left">Via l'API REST de votre application</td>
+</tr>
+<tr>
+<td style="text-align:left">Accès en écriture pris en charge par Kubernetes</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A car accès direct dans l'application</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Performances</td>
+<td style="text-align:left">Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille. Les IOPS sont partagées entre les pods qui accèdent au volume.</td>
+<td style="text-align:left">Prévisibles en raison des opérations d'entrée-sortie par seconde (IOPS) affectées et de la taille. Les IOPS ne sont pas partagées entre les pods. </td>
+<td style="text-align:left">Hautes pour les opérations de lecture, avec des temps d'attente plus faibles que le stockage par blocs lorsque la lecture s'effectue à partir du cache local. Non prévisibles pour les opérations d'écriture.</td>
+<td style="text-align:left">Hautes si déployées dans le même centre de données que votre application.</td>
+</tr>
+<tr>
+<td style="text-align:left">Cohérence</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Forte</td>
+<td style="text-align:left">Finale</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS)</td>
+</tr>
+<tr>
+<td style="text-align:left">Durabilité</td>
+<td style="text-align:left">Haute</td>
+<td style="text-align:left">Haute</td>
+<td style="text-align:left">Haute</td>
+<td style="text-align:left">Haute</td>
+</tr>
+<tr>
+<td style="text-align:left">Résilience</td>
+<td style="text-align:left">Moyenne car spécifique à un centre de données. Le serveur de stockage de fichiers est clustérisé par IBM avec une mise en réseau redondante.</td>
+<td style="text-align:left">Moyenne car spécifique à un centre de données. Le serveur de stockage par blocs est clustérisé par IBM avec une mise en réseau redondante.</td>
+<td style="text-align:left">Elevée car les données sont stockées dans au moins 3 copies et réparties au sein d'une région ou entre plusieurs régions.</td>
+<td style="text-align:left">Selon la base de données sous forme de service (DBaaS) et votre configuration</td>
+</tr>
+<tr>
+<td style="text-align:left">Disponibilité</td>
+<td style="text-align:left">Moyenne car spécifique à un centre de données. </td>
+<td style="text-align:left">Moyenne car spécifique à un centre de données. </td>
+<td style="text-align:left">Haute en raison de la répartition entre plusieurs zones ou régions. </td>
+<td style="text-align:left">Haute si vous avez configuré plusieurs instances. </td>
+</tr>
+<tr>
+<td style="text-align:left">Evolutivité</td>
+<td style="text-align:left">Extension difficile au-delà du centre de données. Vous ne pouvez pas modifier un niveau de stockage existant. </td>
+<td style="text-align:left">Extension difficile au-delà du centre de données. Vous ne pouvez pas modifier un niveau de stockage existant. </td>
+<td style="text-align:left">Mise à l'échelle facile.</td>
+<td style="text-align:left">Mise à l'échelle facile.</td>
+</tr>
+<tr>
+<td style="text-align:left">Chiffrement</td>
+<td style="text-align:left">Au repos</td>
+<td style="text-align:left">Au repos</td>
+<td style="text-align:left">Au repos</td>
+<td style="text-align:left">Au repos</td>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation courants</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stockage de masse ou de fichier unique</li><li style="margin:0px; padding:0px">Partage de fichiers dans un cluster à zone unique</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Objets StatefulSet</li><li style="margin:0px; padding:0px">Stockage de secours lors de l'exécution de votre propre base de données</li><li style="margin:0px; padding:0px">Accès à hautes performances pour des pods uniques</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Big Data statiques</li><li style="margin:0px; padding:0px">Contenu multimédia statique</li><li style="margin:0px; padding:0px">Applications Web</li><li style="margin:0px; padding:0px">Sauvegardes</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Bases de données relationnelles et non relationnelles</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Cas d'utilisation qui ne sont pas idéaux</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Clusters à zones multiples</li><li style="margin:0px; padding:0px">Données réparties géographiquement</li><li style="margin:0px; padding:0px">Partage de données entre plusieurs instances d'application</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Charges de travail à écriture intensive</li><li style="margin:0px; padding:0px">Opérations d'écriture aléatoire</li><li style="margin:0px; padding:0px">Mises à jour de données incrémentielles</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Application conçue pour effectuer des opérations d'écriture dans un système de fichiers</li></ul></td>
+</tr>
+</tbody>
+</table>

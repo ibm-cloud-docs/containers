@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -108,7 +108,7 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
     ```
     {: codeblock}
 
-    **ヒント:** 名前空間の情報を取得するには、`ibmcloud cr namespace-list` を実行します。
+    **ヒント:** 名前空間の情報を取得するには、`bx cr namespace-list` を実行します。
 
 3.  クラスター内にデプロイメントを作成します。
 
@@ -212,7 +212,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
 2.  {{site.data.keyword.Bluemix_notm}} アカウント内のトークンのリストを表示します。
 
     ```
-    ibmcloud cr token-list
+    bx cr token-list
     ```
     {: pre}
 
@@ -220,7 +220,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
 4.  トークンの値を取得します。 <em>&lt;token_ID&gt;</em> を、前のステップで取得したトークンの ID に置き換えます。
 
     ```
-    ibmcloud cr token-get <token_id>
+    bx cr token-get <token_id>
     ```
     {: pre}
 
@@ -253,7 +253,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。 {{site.data.keyword.registryshort_notm}} の場合、ユーザー名は値 <strong><code>token</code></strong> に設定されます。</td>
+    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。 {{site.data.keyword.registryshort_notm}} の場合、ユーザー名は <code>token</code> に設定されます。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -261,7 +261,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
+    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、a@b.c のような架空の E メール・アドレスを入力します。この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
     </tr>
     </tbody></table>
 
@@ -400,11 +400,11 @@ imagePullSecret を作成するには、以下のようにします。
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>イメージが保管されている名前空間。 使用可能な名前空間をリストするには、`ibmcloud cr namespace-list` を実行します。</td>
+    <td>イメージが保管されている名前空間。 使用可能な名前空間をリストするには、`bx cr namespace-list` を実行します。</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`ibmcloud cr image-list` を実行します。</td>
+    <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`bx cr image-list` を実行します。</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>

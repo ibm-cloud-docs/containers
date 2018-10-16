@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -73,7 +73,7 @@ Para limpar os dados persistentes:
    **Importante:** se o seu armazenamento for cobrado em uma base mensal, você ainda será cobrado pelo mês inteiro, mesmo se remover o armazenamento antes do término do ciclo de faturamento. 
    
 3. Remova quaisquer pods que montam o PVC. 
-   1. Liste os pods que montam o PVC.
+   1. Liste os pods que montam o PVC. 
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
@@ -87,7 +87,7 @@ Para limpar os dados persistentes:
     
       Se nenhum pod é retornado em sua saída da CLI, você não tem um pod que usa o PVC. 
     
-   2. Remova o pod que usa o PVC. Se o pod fizer parte de uma implementação, remova a implementação.
+   2. Remova o pod que usa o PVC. Se o pod fizer parte de uma implementação, remova a implementação. 
       ```
       kubectl delete pod <pod_name>
       ```
@@ -140,7 +140,7 @@ Para limpar os dados persistentes:
    ```
    {: pre}
      
-   Se você removeu seu cluster e não pode recuperar o nome do PV, substitua `grep <pv_name>` por ` grep <cluster_id>` para listar todos os dispositivos de armazenamento que estão associados a seu cluster.
+   Se você removeu seu cluster e não pode recuperar o nome do PV, substitua `grep <pv_name>` por ` grep <cluster_id>` para listar todos os dispositivos de armazenamento que estão associados a seu cluster. 
    {: tip}
      
    Saída de exemplo: 

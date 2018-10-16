@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -58,19 +58,19 @@ Controlla i seguenti motivi sul perché i tuoi log del cluster non vengono visua
     <td>Per controllare lo stato del tuo cluster, vedi <a href="cs_troubleshoot.html#debug_clusters">Debug dei cluster</a>.</td>
   </tr>
   <tr>
-    <td>La quota di archiviazione dei log è stata raggiunta.</td>
+    <td>La quota di archiviazione dei log è stata raggiunta. </td>
     <td>Per aumentare i limiti della tua archiviazione di log, consulta la <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">documentazione {{site.data.keyword.loganalysislong_notm}}</a>.</td>
   </tr>
   <tr>
     <td>Se hai specificato uno spazio durante la creazione del cluster, il proprietario dell'account non dispone delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.</td>
       <td>Per modificare le autorizzazioni di accesso per il proprietario dell'account:
-      <ol><li>Per appurare chi è il proprietario dell'account per il cluster, esegui <code>ibmcloud ks api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>Per trovare chi è il proprietario dell'account del cluster, esegui <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Per concedere a tale proprietario dell'account le autorizzazioni di accesso allo spazio di gestore, sviluppatore o revisore {{site.data.keyword.containershort_notm}}, consulta <a href="cs_users.html">Gestione dell'accesso al cluster</a>.</li>
-      <li>Per aggiornare il token di registrazione dopo che sono state modificate le autorizzazioni, esegui <code>ibmcloud ks logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <li>Per aggiornare il token di accesso dopo che sono state modificate le autorizzazioni, esegui <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Hai una configurazione di registrazione dell'applicazione con un symlink nel tuo percorso dell'applicazione.</td>
-      <td><p>Per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un symlink.</p> <p>Esempio: se il percorso specificato è <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> ma vanno in <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, i log non potranno essere letti.</p></td>
+      <td><p>Per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un symlink.</p> <p>Esempio: se il percorso specificato è <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> ma vanno in <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, i log non potranno essere letti. </p></td>
     </tr>
   </tbody>
 </table>
@@ -106,8 +106,8 @@ Per verificare le modifiche che hai apportato durante la risoluzione dei problem
   4. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
       - Stati Uniti Sud e Stati Uniti Est: https://logging.ng.bluemix.net
       - Regno Unito-Sud: https://logging.eu-gb.bluemix.net
-      - Europa centrale: https://logging.eu-fra.bluemix.net
-      - Asia Pacifico Sud: https://logging.au-syd.bluemix.net
+      - EU-Central: https://logging.eu-fra.bluemix.net
+      - AP-South: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -156,5 +156,5 @@ e `containers`.
 -   Contatta il supporto IBM aprendo un ticket. Per informazioni su come aprire un ticket di supporto IBM o sui livelli di supporto e sulla gravità dei ticket, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`.
+Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `bx cs clusters`.
 

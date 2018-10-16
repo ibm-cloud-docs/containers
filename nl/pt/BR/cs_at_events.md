@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-08-06"
+lastupdated: "2018-09-10"
 
 ---
 
@@ -19,11 +19,16 @@ lastupdated: "2018-08-06"
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-É possível visualizar, gerenciar e auditar atividades iniciadas pelo usuário em seu cluster do {{site.data.keyword.containershort_notm}} usando o serviço {{site.data.keyword.cloudaccesstrailshort}}.
+É possível visualizar, gerenciar e auditar atividades iniciadas pelo usuário em seu cluster do {{site.data.keyword.containerlong_notm}} usando o serviço {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-## Localizando as informações
-{: #at-find}
+
+
+Para obter mais informações sobre como o serviço funciona, consulte a [documentação do {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html). Para obter mais informações sobre as ações do Kubernetes que são rastreadas, revise a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/home/).
+
+
+## Localizando as informações para eventos de auditoria do Kubernetes
+{: #kube-find}
 
 Os eventos do {{site.data.keyword.cloudaccesstrailshort}} estão disponíveis no
 {{site.data.keyword.cloudaccesstrailshort}} **domínio de contas** disponível na região do
@@ -32,22 +37,26 @@ Os eventos do {{site.data.keyword.cloudaccesstrailshort}} estão disponíveis no
 Para monitorar a atividade administrativa:
 
 1. Efetue login em sua conta do  {{site.data.keyword.Bluemix_notm}} .
-2. No catálogo, provisione uma instância do serviço {{site.data.keyword.cloudaccesstrailshort}} na mesma conta que sua instância do {{site.data.keyword.containershort_notm}}.
+2. No catálogo, provisione uma instância do serviço {{site.data.keyword.cloudaccesstrailshort}} na mesma conta que sua instância do {{site.data.keyword.containerlong_notm}}.
 3. Na guia **Gerenciar** do painel do {{site.data.keyword.cloudaccesstrailshort}}, clique em **Visualizar no Kibana**.
 4. Configure o prazo durante o qual deseja visualizar os logs. O padrão é 15 min.
 5. Na lista **Campos disponíveis**, clique em **tipo**. Clique no ícone de lupa para o **Activity Tracker** para limitar os logs somente aos rastreados pelo serviço.
 6. É possível usar os outros campos disponíveis para limitar sua procura.
 
+Para permitir que outros usuários visualizem eventos de conta e espaço, consulte [Concedendo permissões para ver eventos de conta](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+{: tip}
 
+## Rastreando eventos de auditoria do Kubernetes
+{: #kube-events}
 
-## Eventos de rastreamento
-{: #events}
+Confira a tabela a seguir para obter uma lista dos eventos enviados para o {{site.data.keyword.cloudaccesstrailshort}}.
+{: shortdesc}
 
-Confira as tabelas a seguir para obter uma lista dos eventos que são enviados para o {{site.data.keyword.cloudaccesstrailshort}}.
+**Antes de começar**
 
-Para obter mais informações sobre como o serviço funciona, consulte a [documentação do {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/index.html).
+Certifique-se de que seu cluster esteja configurado para encaminhar os [eventos de auditoria da API do Kubernetes](cs_health.html#api_forward).
 
-Para obter mais informações sobre as ações do Kubernetes que são rastreadas, revise a [documentação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/home/).
+** Eventos encaminhados **
 
 <table>
   <tr>
@@ -56,11 +65,11 @@ Para obter mais informações sobre as ações do Kubernetes que são rastreadas
   </tr>
   <tr>
     <td><code> bindings.create </code></td>
-    <td>Uma ligação é criada.</td>
+    <td>Uma ligação foi criada.</td>
   </tr>
   <tr>
     <td><code> configmaps.create </code></td>
-    <td>Um mapa de configuração é criado.</td>
+    <td>Um mapa de configuração foi criado.</td>
   </tr>
   <tr>
     <td><code> configmaps.delete </code></td>
@@ -68,11 +77,11 @@ Para obter mais informações sobre as ações do Kubernetes que são rastreadas
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>Um mapa de configuração é corrigido.</td>
+    <td>Um mapa de configuração foi corrigido.</td>
   </tr>
   <tr>
     <td><code> configmaps.update </code></td>
-    <td>Um mapa de configuração é atualizado.</td>
+    <td>Um mapa de configuração foi atualizado.</td>
   </tr>
   <tr>
     <td><code> events.create </code></td>
@@ -92,7 +101,7 @@ Para obter mais informações sobre as ações do Kubernetes que são rastreadas
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>Um limite de intervalo é criado.</td>
+    <td>Um limite de intervalo foi criado.</td>
   </tr>
   <tr>
     <td><code> UNK tranges.delete </code></td>
@@ -108,7 +117,7 @@ Para obter mais informações sobre as ações do Kubernetes que são rastreadas
   </tr>
   <tr>
     <td><code> namespaces.create </code></td>
-    <td>Um namespace é criado.</td>
+    <td>Um namespace foi criado.</td>
   </tr>
   <tr>
     <td><code> namespaces.delete </code></td>
