@@ -12,7 +12,15 @@ IBM Cloud Kubernetes Service
     About
         cs_why.md
         cs_tech.md
-    
+
+    {: .topicgroup}
+    Use cases
+        cs_uc_intro.md
+        cs_uc_finance.md
+        cs_uc_health.md
+        cs_uc_retail.md
+        cs_uc_transport.md
+        cs_uc_gov.md
 
     {: .topicgroup}
     Your cluster strategy
