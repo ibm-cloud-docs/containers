@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-12"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -218,7 +218,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
     Creating logging configuration for application logs in cluster cluster2...
     OK
     Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
-    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
     ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
     ```
     {: screen}

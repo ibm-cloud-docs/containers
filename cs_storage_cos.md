@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-15"
 
 ---
 
@@ -27,7 +27,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
    1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://console.bluemix.net/catalog/services/cloud-object-storage).
-   2.  Enter a name for your service instance, such as `cos-backup`, and select **default** as your resource group. 
+   2.  Enter a name for your service instance, such as `cos-backup`, and select the same resource group that your cluster is in. To view the resource group of your cluster, run `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
    3.  Review the [plan options ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for pricing information and select a plan. 
    4.  Click **Create**. The service details page opens. 
 2. {: #service_credentials}Retrieve the {{site.data.keyword.cos_full_notm}} service credentials.
@@ -35,7 +35,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
    2.  Click **New credential**. A dialog box displays. 
    3.  Enter a name for your credentials.
    4.  From the **Role** drop-down, select `Writer` or `Manager`. When you select `Reader`, then you cannot use the credentials to create buckets in {{site.data.keyword.cos_full_notm}} and write data to it. 
-   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the default OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. 
+   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. 
    6.  Click **Add**. Your new credentials are listed in the **Service Credentials** table.
    7.  Click **View credentials**. 
    8.  Make note of the **apikey** to use OAuth2 tokens to authenticate with the {{site.data.keyword.cos_full_notm}} service. For HMAC authentication, in the **cos_hmac_keys** section, note the **access_key_id** and the **secret_access_key**. 
@@ -888,7 +888,211 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    4. From the {{site.data.keyword.Bluemix}} dashboard, navigate to your {{site.data.keyword.cos_full_notm}} service instance. 
    5. From the menu, select **Buckets**. 
    6. Open your bucket, and verify that you can see the `test.txt` that you created. 
-    
+   
+
+## Using object storage in a stateful set
+{: #cos_statefulset}
+
+If you have a stateful app such as a database, you can create stateful sets that use {{site.data.keyword.cos_full_notm}} to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service, such as {{site.data.keyword.cloudant_short_notm}} and store your data in the cloud.
+
+Before you begin: 
+- [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
+- [Create a secret to store your {{site.data.keyword.cos_full_notm}} service credentials](#create_cos_secret).
+- [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos).
+
+To deploy a stateful set that uses object storage:
+
+1. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following examples show how to deploy nginx as a stateful set with 3 replicas with each replica using a separate bucket, or with all replicas sharing the same bucket.
+
+   **Example to create a stateful set with 3 replicas, with each replica using a separate bucket**: 
+   ```
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: nginx-v01
+     namespace: default
+     labels:
+       app: nginx-v01 # must match spec.template.metadata.labels and spec.selector.matchLabels in stateful set YAML
+   spec:
+     ports:
+     - port: 80
+       name: web
+     clusterIP: None
+     selector:
+       app: nginx-v01 # must match spec.template.metadata.labels and spec.selector.matchLabels in stateful set YAML
+   ---
+   apiVersion: apps/v1
+   kind: StatefulSet
+   metadata:
+     name: web-v01
+     namespace: default
+   spec:
+     selector:
+       matchLabels:
+         app: nginx-v01 # must match spec.template.metadata.labels in stateful set YAML and metadata.labels in service YAML
+     serviceName: "nginx-v01"
+     replicas: 3 
+     template:
+       metadata:
+         labels:
+           app: nginx-v01 # must match spec.selector.matchLabels in stateful set YAML and metadata.labels in service YAML
+       spec:
+         terminationGracePeriodSeconds: 10
+         containers:
+         - name: nginx
+           image: k8s.gcr.io/nginx-slim:0.8
+           ports:
+           - containerPort: 80
+             name: web
+           volumeMounts:
+           - name: mypvc
+             mountPath: /usr/share/nginx/html
+     volumeClaimTemplates:
+     - metadata:
+         name: mypvc
+         annotations:
+           ibm.io/auto-create-bucket: "true"
+           ibm.io/auto-delete-bucket: "true"
+           ibm.io/bucket: ""
+           ibm.io/secret-name: mysecret 
+           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region 
+           volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
+       spec:
+         accessModes: [ "ReadWriteOnce" ]
+         storageClassName: "ibmc-s3fs-standard-perf-cross-region"
+         resources:
+           requests:
+             storage: 1Gi
+   ```
+   {: codeblock}
+
+   **Example to create a stateful set with 3 replicas that all share the same bucket `mybucket`**: 
+   ```
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: nginx-v01
+     namespace: default
+     labels:
+       app: nginx-v01 # must match spec.template.metadata.labels and spec.selector.matchLabels in stateful set YAML
+   spec:
+     ports:
+     - port: 80
+       name: web
+     clusterIP: None
+     selector:
+       app: nginx-v01 # must match spec.template.metadata.labels and spec.selector.matchLabels in stateful set YAML
+   --- 
+   apiVersion: apps/v1
+   kind: StatefulSet
+   metadata:
+     name: web-v01
+     namespace: default
+   spec:
+     selector:
+       matchLabels:
+         app: nginx-v01 # must match spec.template.metadata.labels in stateful set YAML and metadata.labels in service YAML
+     serviceName: "nginx-v01"
+     replicas: 3 
+     template:
+       metadata:
+         labels:
+           app: nginx-v01 # must match spec.selector.matchLabels in stateful set YAML and metadata.labels in service YAML
+       spec:
+         terminationGracePeriodSeconds: 10
+         containers:
+         - name: nginx
+           image: k8s.gcr.io/nginx-slim:0.8
+           ports:
+           - containerPort: 80
+             name: web
+           volumeMounts:
+           - name: mypvc
+             mountPath: /usr/share/nginx/html
+     volumeClaimTemplates:
+     - metadata:
+         name: mypvc
+         annotations:
+           ibm.io/auto-create-bucket: "false"
+           ibm.io/auto-delete-bucket: "false"
+           ibm.io/bucket: mybucket
+           ibm.io/secret-name: mysecret
+           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region 
+           volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
+       spec:
+         accessModes: [ "ReadOnlyMany" ]
+         storageClassName: "ibmc-s3fs-standard-perf-cross-region"
+         resources:
+           requests:
+             storage: 1Gi
+   ```
+   {: codeblock}
+   
+   
+   <table>
+    <caption>Understanding the stateful set YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the stateful set YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align:left"><code>metadata.name</code></td>
+    <td style="text-align:left">Enter a name for your stateful set. The name that you enter is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.serviceName</code></td>
+    <td style="text-align:left">Enter the name of the service that you want to use to expose your stateful set. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.replicas</code></td>
+    <td style="text-align:left">Enter the number of replicas for your stateful set. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
+    <td style="text-align:left">Enter all labels that you want to include in your stateful set and your PVC. Labels that you include in the <code>volumeClaimTemplates</code> of your stateful set are not recognized by Kubernetes. Instead, you must define these labels in the <code>spec.selector.matchLabels</code> and <code>spec.template.metadata.labels</code> section of your stateful set YAML. To make sure that all your stateful set replicas are included into the load balancing of your service, include the same label that you used in the <code>spec.selector</code> section of your service YAML. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
+    <td style="text-align:left">Enter the same labels that you added to the <code>spec.selector.matchLabels</code> section of your stateful set YAML. </td>
+    </tr>
+    <tr>
+    <td><code>spec.template.spec.</code></br><code>terminationGracePeriodSeconds</code></td>
+    <td>Enter the number of seconds to give the <code>kubelet</code> to gracefully terminate the pod that runs your stateful set replica. For more information, see [Delete Pods ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#delete-pods). </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>metadata.name</code></td>
+    <td style="text-align:left">Enter a name for your volume. Use the same name that you defined in the <code>spec.containers.volumeMount.name</code> section. The name that you enter here is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+    </tr>
+    <tr>
+    <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-create-bucket</code></td>
+    <td>Choose between the following options: <ul><li><strong>true: </strong>Choose this option to automatically create a bucket for each stateful set replica. </li><li><strong>false: </strong>Choose this option if you want to share an existing bucket across your stateful set replicas. Make sure to define the name of the bucket in the <code>spec.volumeClaimTemplates.metadata.annotions.ibm.io/bucket</code> section of your stateful set YAML.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-delete-bucket</code></td>
+    <td>Choose between the following options: <ul><li><strong>true: </strong>Your data, the bucket, and the PV is automatically removed when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance remains and is not deleted. If you choose to set this option to true, then you must set <code>ibm.io/auto-create-bucket: true</code> and <code>ibm.io/bucket: ""</code> so that your bucket is automatically created with a name with the format <code>tmp-s3fs-xxxx<code>. </li><li><strong>false: </strong>When you delete the PVC, the PV is deleted automatically, but your data and the bucket in your {{site.data.keyword.cos_full_notm}} service instance remain. To access your data, you must create a new PVC with the name of your existing bucket.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/bucket</code></td>
+    <td>Choose between the following options: <ul><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to true: </strong>Enter the name of the bucket that you want to create in {{site.data.keyword.cos_full_notm}}. If in addition <code>ibm.io/auto-delete-bucket</code> is set to <strong>true</strong>, you must leave this field blank to automatically assign your bucket a name with the format tmp-s3fs-xxxx. The name must be unique in {{site.data.keyword.cos_full_notm}}.</li><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to false: </strong>Enter the name of the existing bucket that you want to access in the cluster.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/secret-name</code></td>
+    <td>Enter the name of the secret that holds the {{site.data.keyword.cos_full_notm}} credentials that you created earlier.</td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
+    <td style="text-align:left">Enter the storage class that you want to use. Choose between the following options: <ul><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to true: </strong>Enter the storage class that you want to use for your new bucket.</li><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to false: </strong>Enter the storage class that you used to create your existing bucket. </li></ul></br>  To list existing storage classes, run <code>kubectl get storageclasses | grep s3</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-s3fs</code> provisioner so that your stateful set is provisioned with object storage.</td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
+    <td>Enter the same storage class that you entered in the <code>spec.volumeClaimTemplates.metadata.annotations.volume.beta.kubernetes.io/storage-class</code> section of your stateful set YAML.  </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.</code></br><code>resource.requests.storage</code></td>
+    <td>Enter a fictitious size for your {{site.data.keyword.cos_full_notm}} bucket in gigabytes. The size is required by Kubernetes, but not respected in {{site.data.keyword.cos_full_notm}}. You can enter any size that you want. The actual space that you use in {{site.data.keyword.cos_full_notm}} might be different and is billed based on the [pricing table ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api).</td>
+    </tr>
+    </tbody></table>
+
     
 ## Backing up and restoring data
 {: #backup_restore}

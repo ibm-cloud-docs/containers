@@ -1,0 +1,184 @@
+---
+
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-10-16"
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:download: .download}
+
+
+
+
+# Retail use cases for IBM Cloud
+{: #cs_uc_retail}
+
+These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can 
+take advantage of cloud analytics for market insights, multiregion deployments across the globe, inventory management with IBM Event Streams, data storage in IBM Cloud Object Storage, customizable clusters to fit memory needs, toolchains for continuous delivery, and data sharing with APIs. 
+{: shortdesc}
+
+## Brick-and-mortar retailer shares data via APIs with global partners to drive omni-channel sales 
+{: #uc_data-share}
+
+A LOB Exec needs to increase sales channels, but the retail system is closed off in an on-prem data center. The competition has global partners to cross-sell/upsell permutations of their goods: across brick-and-mortar and online sites. 
+
+Why IBM Cloud: IBM Cloud Kubernetes Service provides a public-cloud ecosystem, where containers facilitate new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Dev and Test systems quickly with toolchains. 
+
+**Context: Retailer shares data via APIs with global partners to drive omni-channel sales**
+
+* The retailer is faced with strong competitive pressures. They need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
+* That ability to jump brand means that the retail ecosystem requires connectivity to partners. Then the cloud can facilitate new value from partners, customers, and other external players. 
+* Burst end-user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision compute infrastructure. 
+* The retailer’s developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when collaborating with partner teams.  
+
+**The solution**
+
+A smarter shopping experience is needed to increase customer retention and gross profit margin. The retailer’s traditional sales model was suffering due to the lack of partner inventory for cross-sales and up-sales. Their shoppers are looking for increased convenience, so that they can quickly find related items together, such as yoga pants and mats. 
+
+The retailer must also provide customers with useful content, such as product information, alternative product information, reviews, and real-time inventory visibility, while online and in-store through personal mobile devices and mobile-equipped store associates.
+
+The solution is made up of these primary components: 
+* INVENTORY: App for partner ecosystem that aggregates and communicates inventory, especially new product introductions, including APIs for partners to reuse in their own retail and B2B apps
+* CROSS- AND UP-SALES: App that surfaces cross-sell and up-sell opportunities via APIs that can be consumed in various e-commerce and mobile apps
+* DEVELOPMENT ENVIRONMENT: Kubernetes clusters for Dev, Test, and Production systems increase collaboration and data sharing among the retailer and its partners
+
+For the retailer to work with global partners, the inventory APIs required contextual modifications to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the retailer’s APIs reflected the needs of its partners, in each country, with low latency.
+
+Since inventory data must be shareable with the partners’ and company’s customers, the developers are responsible for APIs that all the developers can use to surface information onto their apps, such as mobile inventory apps or web e-commerce solutions. The developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure. 
+
+Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
+* Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
+* Monitoring health and recovery for worker nodes
+* Providing global compute, so developers don’t have to stand up infrastructure in geographies where they need workloads and data to reside
+
+Moreover logging and monitoring for the API microservices, especially how they pull personalized data out of back-end benefit systems, comes out of the box. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems.
+
+IBM Event Streams acts as the just-in-time events platform to bring in the rapidly changing information from the partners’ inventory systems to IBM Cloud Object Storage. 
+
+**Solution model**
+
+On-demand compute, storage, and event management running in public cloud with access to retail inventories across the globe, as warranted. 
+
+Technical solution:
+* IBM Cloud Kubernetes Service
+* IBM Event Streams
+* IBM Cloud Object Storage
+* IBM Cloud Continuous Delivery
+* IBM Cloud Logging and Monitoring
+
+**Step 1: Containerize apps using microservices**
+* Architect apps into a set of cooperative microservices running within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
+* Deploy apps to container images running in IBM Cloud Kubernetes Service. 
+* Provide standardized DevOps dashboards through Kubernetes.
+* Enable on-demand scaling of compute for batch and other inventory workloads that run infrequently.
+
+**Step 2: Ensure global availability**
+* Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
+* Load-balancing, firewalls, and DNS are handled by IBM Cloud Internet Services. 
+* Using the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional requirements, especially personalization. 
+
+**Step 3: Share data**
+* IBM Cloud Object Storage plus IBM Event Streams provides real-time and historical data storage, so that cross-sales offers represent available inventory from partners. 
+* APIs allow the retailer’s partners to share data into their e-commerce and B2B apps.
+
+**Step 4: Deliver continuously**
+* Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various developers. 
+* IBM Cloud Continuous Delivery helps developers to quickly provision an integrated toolchain using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
+* After developers build and test the apps in their Dev and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe. 
+* {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing. 
+
+**Results**
+* Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial WW development is fast, and updates are as frequent as 40x a week.
+* The retailer and its partners have real-time access to inventory availability and delivery schedules, via the APIs. 
+* With {{site.data.keyword.containerlong_notm}} and IBM CI/CD tools, A-B versions of apps are ready to test campaigns. 
+* {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and  cross-sales API workloads can be grow during high-volume periods of the year, such as the fall holidays. 
+
+## Traditional grocer increases customer traffic and sales with digital insights
+{: #uc_grocer}
+
+A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in stores by making the stores a differentiating asset. Big box competitors and online retailers are stealing sales. At the same time, the CMO needs to reduce inventory without markdowns because holding inventory too long locks up millions in capital.
+
+Why IBM Cloud: IBM Cloud Kubernetes Service provides easy spin-up of more compute, where developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
+
+Key technologies:    
+* Horizontal scaling to accelerate development
+* Design clusters to fit CPU, RAM, storage needs
+* Insights to market trends with Watson Discovery
+* DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery
+* Inventory management with Event Streams
+
+**Context: Traditional grocer increases customer traffic and sales with digital insights**
+
+* Competitive pressures from online retailers and big box stores have disrupted traditional grocery retail models. Sales are declining, evidenced by low foot traffic in physical stores. 
+* Their loyalty program needs a boost in the arm with a modern take on the printed coupons at check out. So developers must constantly evolve the related apps, but traditional tools slow their ability to deploy updates and features frequently.  
+* Certain high-value inventory isn’t moving as well as expected, but yet the “foodie” movement seems to be growing in major metropolitan markets. 
+
+**The solution**
+
+The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event in conjunction with a services or product vendor that would attract both loyalty and new customers based on affinity to the specific event. The store and partner could offer incentives to come to the event as well as buying products from the store or partner.  
+
+After the event, customers can be guided to purchasing the necessary products to be able to repeat the demonstrated activity on their own in the future. The targeted customer experience can be measured with incentive redemption and new loyalty customer signups. The combination of a hyper-personalized marketing event and a tool to track in-store purchases can carry the targeted experience all the way through to product purchase that are required to get the desired business outcomes of increased traffic and conversions.
+
+As an example event, a local chef could be brought into the store to show how to make a gourmet meal. The store would provide an incentive to drive attendance (e.g., a free appetizer at the chef's restaurant) and an additional incentive to buy the ingredients for the demonstrated meal (for example, $20 off $150 cart).
+
+The solution is made up of these primary components: 
+1. INVENTORY ANALYSIS: the in-store events (recipes, ingredient lists, and product locations) are tailored to market the slow-moving inventory. 
+2. LOYALTY MOBILE APP provides targeted marketing via digital coupons, shopping lists, product inventory (prices, availability) on a store map, and social sharing.
+3. SOCIAL MEDIA ANALYTICS provides personalization by detecting customers’ preferences in terms of trends: cuisines, chefs, and ingredients. The analytics connect regional trends with an individual’s Twitter, Pinterest, and Instagram activity. 
+4. DEVELOPER-FRIENDLY TOOLS accelerate roll-out of features and  bug fixes.
+
+Back-end inventory systems for product inventory, store replenishment, and product forecasting have a wealth of information, but modern analytics can unlock new insights about how to better move high-end products. By using a combination of IBM Cloudant and IBM Streaming Analytics, the CMO can find the sweet spot of ingredients to match to custom in-store events. 
+
+IBM Event Streams acts as the just-in-time events platform to bring in the rapidly changing information from the inventory systems to IBM Streaming Analytics. 
+
+Social media analytics with Watson Discovery (personality and tone insights) also feed in trends to the inventory analysis to improve product forecasting. 
+
+The loyalty mobile app provides detailed personalization information, especially when customers use its social sharing features, such as posting recipes.
+
+In addition to the mobile app, the developers are busy with building and maintaining the existing loyalty app that’s tied to traditional check-out coupons. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
+* Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
+* Monitoring health and recovery for worker nodes
+* Providing global compute, so developers don’t have to stand up infrastructure in data centers
+
+**Solution model**
+
+On-demand compute, storage, and event management running in public cloud with access to back-end ERP systems
+
+Technical solution:
+* IBM Cloud Kubernetes Service
+* IBM Event Streams
+* IBM Cloudant
+* IBM Streaming Analytics
+* IBM Watson Discovery
+
+**Step 1: Containerize apps using microservices**
+
+* Architect inventory analysis and mobile apps into microservices and deploy them to containers running in IBM Cloud Kubernetes Service. 
+* Provide standardized DevOps dashboards through Kubernetes.
+* Scale compute on-demand for batch and other inventory workloads that run less frequently.
+
+**Step 2: Analyze inventory and trends**
+* IBM Event Streams acts as the just-in-time events platform to bring in the rapidly changing information from inventory systems to IBM Streaming Analytics. 
+* Social media analysis with Watson Discovery and inventory systems data are integrated with IBM Streaming Analytics to deliver merchandising and marketing advice. 
+
+**Step 3: Deliver promotions via mobile loyalty app**
+* Jump start development of mobile app with the IBM Mobile Starter Kit and other IBM Mobile services, such as IBM Cloud App ID. 
+* Promotions in the form of coupons and other entitlements are sent to users’ mobile app. The promotions were identified via the inventory and social analysis, plus other back-end systems. 
+* Storage of promotion recipes on mobile app and conversions (redeemed check-out coupons) are fed back to ERP systems for further analysis. 
+
+**Results**
+* With {{site.data.keyword.containerlong_notm}}, microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial development is fast, and updates are frequent.
+* Customer traffic and sales increased in stores by making the stores themselves a differentiating asset. 
+* At the same time, new insights via social and cognitive analysis improved reduced inventory OpEx. 
+* Social sharing via mobile app also helps to identify and marketing to new customers.
+
+
+

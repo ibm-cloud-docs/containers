@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-16"
 
 ---
 
@@ -191,48 +191,46 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 2.  Allow outgoing network traffic from the source _<each_worker_node_publicIP>_ to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
     - **Important**: You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones (dal10, dal12, dal13).
-    <p>
-  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-  <caption>IP addresses to open for outgoing traffic</caption>
-      <thead>
-      <th>Region</th>
-      <th>Zone</th>
-      <th>IP address</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>AP North</td>
-        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>AP South</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
-      </tr>
-      <tr>
-         <td>EU Central</td>
-         <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98,</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+    <caption>IP addresses to open for outgoing traffic</caption>
+        <thead>
+        <th>Region</th>
+        <th>Zone</th>
+        <th>IP address</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>AP North</td>
+          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+         </tr>
+        <tr>
+           <td>AP South</td>
+           <td>mel01<br>syd01<br>syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
         </tr>
-      <tr>
-        <td>UK South</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
-      </tr>
-      <tr>
-        <td>US East</td>
-         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>US South</td>
-        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
+        <tr>
+           <td>EU Central</td>
+           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+          </tr>
+        <tr>
+          <td>UK South</td>
+          <td>lon02<br>lon04</td>
+          <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
+        </tr>
+        <tr>
+          <td>US East</td>
+           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+        </tr>
+        <tr>
+          <td>US South</td>
+          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
+          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+        </tr>
+        </tbody>
+      </table>
 
 3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry/registry_overview.html#registry_regions):
     - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
