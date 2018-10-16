@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-16"
 
 ---
 
@@ -41,7 +41,7 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
-### Changelog for 1.11.3_1527, released 15 October 2018
+### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
 {: #1113_1527}
 
 <table summary="Changes that were made since version 1.11.3_1524">
@@ -359,7 +359,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
-### Changelog for 1.10.8_1527, released 15 October 2018
+### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
 
 <table summary="Changes that were made since version 1.10.8_1524">
@@ -875,7 +875,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
-### Changelog for 1.9.10_1530 released 15 October 2018
+### Changelog for master fix pack 1.9.10_1530 released 15 October 2018
 {: #1910_1530}
 
 <table summary="Changes that were made since version 1.9.10_1527">
