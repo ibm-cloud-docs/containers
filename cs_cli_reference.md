@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-16"
 
 ---
 
@@ -544,7 +544,7 @@ Disable the webhook backend configuration for the cluster's API server. Disablin
 ### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
-Restart the Kubernetes master in the cluster to apply changes to the API server configuration.
+Restart the cluster master node to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
 
 <strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -2194,7 +2194,7 @@ Update the details of a log forwarding configuration.
   {: pre}
 
 
-### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE]  [--force-update]  [--json] [-s]
+### ibmcloud ks logging-filter-create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
 {: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
@@ -2222,8 +2222,11 @@ Create a logging filter. You can use this command to filter out logs that are fo
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
 
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
-    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional.</dd>
+    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9".</dd>
 
   <dt><code>--force-update</code></dt>
     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
@@ -2282,6 +2285,12 @@ View a logging filter configuration. You can use this command to view the loggin
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
+**Example**:
+
+```
+ibmcloud ks logging-filter-get mycluster --id 885732 --show-matching-configs
+```
+{: pre}
 
 ### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
 {: #cs_log_filter_delete}
@@ -2309,7 +2318,14 @@ Delete a logging filter. You can use this command to remove a logging filter tha
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE]  [--force-update] [--json] [-s]
+**Example**:
+
+```
+ibmcloud ks logging-filter-rm mycluster --id 885732
+```
+{: pre}
+
+### ibmcloud ks logging-filter-update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
 {: #cs_log_filter_update}
 
 Update a logging filter. You can use this command to update a logging filter that you created.
@@ -2341,7 +2357,10 @@ Update a logging filter. You can use this command to update a logging filter tha
     <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
 
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”. This value is optional.</dd>
+    <dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+
+  <dt><code>--regex-message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9"</dd>
 
   <dt><code>--force-update</code></dt>
     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
@@ -2352,6 +2371,22 @@ Update a logging filter. You can use this command to update a logging filter tha
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
+
+**Examples**:
+
+This example filters out all logs that are forwarded from containers with the name `test-container` in the default namespace that are at the debug level or less, and have a log message that contains "GET request".
+
+  ```
+  ibmcloud ks logging-filter-update --cluster example-cluster --id 885274 --type container --namespace default --container test-container --level debug --message "GET request"
+  ```
+  {: pre}
+
+This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+
+  ```
+  ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
+  ```
+  {: pre}
 
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
@@ -2367,6 +2402,12 @@ Enable automatic update of your Fluentd pods in a specific cluster.
     <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
 </dl>
 
+**Example:**
+```
+ibmcloud ks logging-autoupdate-enable --cluster mycluster
+```
+{: pre}
+
 ### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 {: #cs_log_autoupdate_disable}
 
@@ -2380,6 +2421,12 @@ Disable automatic update of your Fluentd pods in a specific cluster.
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
 </dl>
+
+**Example:**
+```
+ibmcloud ks logging-autoupdate-disable --cluster mycluster
+```
+{: pre}
 
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 {: #cs_log_autoupdate_get}
