@@ -30,7 +30,7 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
 
 [Financial services](cs_uc_finance.html):
 * [Mortgage company trims costs and accelerates regulatory compliance](cs_uc_finance.html#uc_mortgage)
-* [Payment tech company streamlines developer productivity, deploying AI tools to their partners 4x faster](cs_uc_finance.html##uc_payment_tech)
+* [Payment tech company streamlines developer productivity, deploying AI tools to their partners 4x faster](cs_uc_finance.html#uc_payment_tech)
 
 [Healthcare](cs_uc_health.html):
 * [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting & patient systems](cs_uc_health.html#uc_migrate)
