@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -626,6 +626,8 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 {: tip}
 
 <br />
+
+
 
 
 ## Getting help and support
