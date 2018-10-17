@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-16"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -353,18 +353,25 @@ Let your cluster access infrastructure resources and services from behind a fire
 If you have a firewall on the private network, allow communication between worker nodes and let your cluster access infrastructure resources over the private network.
 {:shortdesc}
 
-**Note**: If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway appliance as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
+1. Allow all TCP, UDP, VRRP and IPEncap traffic between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for private load balancers and the IPEncap protocol to permit pod to pod traffic across subnets.
 
-1. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
+2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
     1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
     2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](cs_regions.html#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
-2. Open the following ports:
+
+3. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.
     - Allow outbound TCP and UDP to port 2049 to allow mounting file storage as volumes.
     - Allow outbound TCP and UDP to port 3260 for communication to block storage.
     - Allow inbound TCP and UDP connections to port 10250 for the Kubernetes dashboard and commands such as `kubectl logs` and `kubectl exec`.
     - Allow inbound and outbound connections to TCP and UDP port 53 for DNS access.
-3. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
+
+4. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
+
+5. If you also have a firewall on the public network, or if you have a private-VLAN only cluster and are using a gateway appliance as a firewall, you must also allow the IPs and ports specified in [Allowing the cluster to access infrastructure resources and other services](#firewall_outbound).
+
+<br />
+
 
 ## Accessing NodePort, load balancer, and Ingress services from outside the cluster
 {: #firewall_inbound}
