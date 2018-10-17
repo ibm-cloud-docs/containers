@@ -924,7 +924,10 @@ Before you begin, make sure that you are the account owner or have **Super User*
     * In the **Device Type** drop-down list, you can grant access to **All Devices** so that users can work with both virtual and physical (bare metal hardware) machine types for worker nodes.
     * To allow users access to new devices that are created, select **Automatically grant access when new devices are added**.
     * In the table of devices, make sure that the appropriate devices are selected.
-    * To save your changes, click **Update Device Access**.
+
+7. To save your changes, click **Update Device Access**.
 
 Downgrading permissions? The action can take a few minutes to complete.
 {: tip}
+
+
