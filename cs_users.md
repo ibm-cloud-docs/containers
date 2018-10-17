@@ -261,11 +261,13 @@ If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you hav
 
 You can find the current API key owner by running [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. **Note**: Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it's unnecessarily changed.
 
-**Before you begin**: If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
+**Before you begin**:
+- If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
+To set the API key to access the IBM Cloud infrastructure (SoftLayer) portofolio:
 
-2.  Set the API key for the region and resource group that the cluster is in.
+1.  Set the API key for the region and resource group that the cluster is in.
     1.  Log in to the terminal with the user whose infrastructure permissions you want to use.
     2.  Target the resource group where you want to set the API key. If you do not target a resource group, the API key is set for the default resource group.
         ```
@@ -288,7 +290,7 @@ You can find the current API key owner by running [`ibmcloud ks api-key-info`](c
         ```
         {: pre}
 
-3. [Create a cluster](cs_clusters.html). To create the cluster, the API key credentials that you set for the region and resource group are used.
+2. [Create a cluster](cs_clusters.html). To create the cluster, the API key credentials that you set for the region and resource group are used.
 
 ### Accessing a different IBM Cloud infrastructure (SoftLayer) account
 {: #credentials}
@@ -297,13 +299,15 @@ Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account
 
 **Important**: The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks credentials-set` command persist after your session ends. If you remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set with the [`ibmcloud ks credentials-unset`](cs_cli_reference.html#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](cs_troubleshoot_clusters.html#orphaned).
 
-**Before you begin**: If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
+**Before you begin**:
+- If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portofolio:
 
 1. Get the infrastructure account that you want to use to access the IBM Cloud infrastructure (SoftLayer) portfolio. You have different options that depend on your [current account type](#understand_infra).
 
-2. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
-
-3.  Set the infrastructure API credentials with the user for the correct account.
+2.  Set the infrastructure API credentials with the user for the correct account.
 
     1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
 
@@ -317,9 +321,19 @@ Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account
         ```
         {: pre}
 
-4. [Create a cluster](cs_clusters.html). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
+    3. Verify that the correct credentials are set.
+        ```
+        ibmcloud ks credential-get
+        ```
+        Example output:
+        ```
+        Infrastructure credentials for user name user@email.com set for resource group default.
+        ```
+        {: screen}
 
-5. Verify that your cluster uses the infrastructure account credentials that you set.
+3. [Create a cluster](cs_clusters.html). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
+
+4. Verify that your cluster uses the infrastructure account credentials that you set.
   1. Open the [IBM Cloud Kubernetes Service GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. 
   2. In the Overview tab, look for an **Infrastructure User** field. 
   3. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
@@ -394,6 +408,7 @@ Before you begin:
 
 - Verify that you're assigned the `cluster-admin` IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 **To assign IAM platform roles to an individual user with the CLI:**
 

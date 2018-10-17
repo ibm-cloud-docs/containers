@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-17"
 
 
 ---
@@ -40,6 +40,7 @@ The following table shows the cluster management permissions granted by each IAM
     <td>
       Cluster:<ul>
         <li>View the name and email address for the owner of the IAM API key for a resource group and region</li>
+        <li>If your {{site.data.keyword.Bluemix_notm}} account uses different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, view the infrastructure user name</li>
         <li>List all or view details for clusters, worker nodes, worker pools, services in a cluster, and webhooks</li>
         <li>View the VLAN spanning status for the infrastructure account</li>
         <li>List available subnets in the infrastructure account</li>
@@ -337,14 +338,14 @@ The tables are organized alphabetically by CLI command name.
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
+<td>Get the infrastructure credentials that are set for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
+<ul><li>[GET /v1/credentials](https://containers.bluemix.net/swagger-api/#!/accounts/GetUserCredentials)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
 <td>Remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
 <ul><li>[ibmcloud ks credentials-unset](cs_cli_reference.html#cs_credentials_unset)</li>
 <li>[DELETE /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>Get the infrastructure credentials that are set for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
-<ul><li>[GET /v1/credentials](https://containers.bluemix.net/swagger-api/#!/accounts/GetUserCredentials)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 

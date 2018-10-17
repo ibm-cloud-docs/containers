@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -67,7 +67,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
 * [Create a standard cluster](cs_clusters.html#clusters_cli).
-* [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
