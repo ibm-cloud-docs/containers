@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -79,6 +79,10 @@ The following image shows the default cluster security settings that address aut
           <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. Kubernetes master to worker node communication is initiated by the user and includes <code>kubectl</code> commands, such as <code>logs</code>, <code>attach</code>, <code>exec</code>, and <code>top</code>.</li></ul></td>
     </tr>
     <tr>
+    <td>Continuous monitoring by IBM Site Reliability Engineers (SREs)</td>
+    <td>The Kubernetes master, including all the master components, compute, networking, and storage resources is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}. </td>
+    </tr>
+    <tr>
       <td>Secure communication via TLS</td>
       <td>To use {{site.data.keyword.containerlong_notm}} you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components. </td>
     </tr>
@@ -136,6 +140,10 @@ The following image shows the components that are set up for every worker node t
   </thead>
   <tbody>
     <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure. </br></br><strong>Important: </strong>{{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</td></tr>
+    <tr>
+    <td>Continuous monitoring by Site Reliability Engineers (SREs) </td>
+    <td>The Linux image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.</td>
+    </tr>
     <tr>
   <td>Compute isolation</td>
   <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](cs_clusters_planning.html#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
