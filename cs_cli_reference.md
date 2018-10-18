@@ -772,7 +772,7 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 
 After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 
-<strong>Minimum required permissions</strong>: **Reader** IAM service access role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Reader** IAM service access role for {{site.data.keyword.registryshort_notm}}
 
 **Command options**:
 
