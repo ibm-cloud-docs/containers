@@ -22,6 +22,117 @@ lastupdated: "2018-10-18"
 When you [assign cluster permissions](cs_users.html), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
+</ul>
+    </td>
+  </tr>
+  <tr>
+    <td>**Editor** <br/><br/>**Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.</td>
+    <td>This role has all permissions from the Viewer role, plus the following:</br></br>
+      Cluster:<ul>
+        <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li></ul>
+      Logging:<ul>
+        <li>Create, update, and delete API server audit webhooks</li>
+        <li>Create cluster webhooks</li>
+        <li>Create and delete log forwarding configurations for all types except `kube-audit`</li>
+        <li>Update and refresh log forwarding configurations</li>
+        <li>Create, update, and delete log filtering configurations</li></ul>
+      Ingress:<ul>
+        <li>Enable or disable ALBs</li></ul>
+    </td>
+  </tr>
+  <tr>
+    <td>**Operator**</td>
+    <td>This role has all permissions from the Viewer role, plus the following:</br></br>
+      Cluster:<ul>
+        <li>Update a cluster</li>
+        <li>Refresh the Kubernetes master</li>
+        <li>Add and remove worker nodes</li>
+        <li>Reboot, reload, and update worker nodes</li>
+        <li>Create and delete worker pools</li>
+        <li>Add and remove zones from worker pools</li>
+        <li>Update the network configuration for a given zone in worker pools</li>
+        <li>Resize and rebalance worker pools</li>
+        <li>Create and add subnets to a cluster</li>
+        <li>Add and remove user-managed subnets to and from a cluster</li></ul>
+    </td>
+  </tr>
+  <tr>
+    <td>**Administrator** <br/><br/>**Note**: To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.</td>
+    <td>This role has all permissions from the Editor, Operator, and Viewer roles for all clusters in this account, plus the following:</br></br>
+      Cluster:<ul>
+        <li>Create free or standard clusters</li>
+        <li>Delete clusters</li>
+        <li>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}</li>
+        <li>Set the API key for the {{site.data.keyword.Bluemix_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio</li>
+        <li>Set, view, and remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio</li>
+        <li>Assign and change IAM platform roles for other existing users in the account</li>
+        <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul>
+      Logging:<ul>
+        <li>Create and update log forwarding configurations for type `kube-audit`</li>
+        <li>Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket</li>
+        <li>Enable and disable automatic updates for the Fluentd cluster add-on</li></ul>
+      Ingress:<ul>
+        <li>List all or view details for ALB secrets in a cluster</li>
+        <li>Deploy a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB</li>
+        <li>Update or remove ALB secrets from a cluster</li>
+    </td>
+  </tr>
+</table>
+
+## Coming soon! IAM service roles (staging only)
+{: #service}
+
+Every user who is assigned an IAM service access role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in a specific namespace. To learn more about IAM service access roles, see [IAM service roles](cs_users.html#iam-service-namespaces). To learn more about RBAC roles, see [Assigning RBAC permissions](cs_users.html#role-binding).
+
+To instead see the permissions for individual Kubernetes resources permitted by each RBAC role, see [Kubernetes resource permissions per RBAC role](#rbac).
+{: tip}
+
+The following table shows the Kubernetes resource permissions granted by each IAM service role and its corresponding RBAC role.
+
+<table>
+  <tr>
+    <th>IAM service role</th>
+    <th>Corresponding RBAC role, binding, and scope</th>
+    <th>Kubernetes resource permissions</th>
+  </tr>
+  <tr>
+    <td>**Reader**</td>
+    <td><code>view</code> cluster role applied by the <code>ibm-view</code> role binding in a specified namespace</td>
+    <td><ul>
+      <li>Read access to resources in the namespace</li>
+      <li>No read access to roles and role bindings or to Kubernetes secrets</li></ul>
+    </td>
+  </tr>
+  <tr>
+    <td>**Writer**</td>
+    <td><code>edit</code> cluster role applied by the <code>ibm-edit</code> role binding in a specified namespace</td>
+    <td><ul><li>Read/write access to resources in the namespace</li>
+    <li>No read/write access to roles and role bindings</li></ul>
+    </td>
+  </tr>
+  <tr>
+    <td>**Manager**</td>
+    <td><ul>
+      <li>When scoped to one namespace: <code>admin</code> cluster role applied by the <code>ibm-operate</code> role binding</li>
+      <li>When scoped to all namespaces: <code>cluster-admin</code> cluster role applied by the <code>ibm-admin</code> cluster role binding</li></ul></td>
+    <td>When scoped to one namespace:
+      <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
+      <li>Create RBAC roles and role bindings in a namespace</li></ul>
+    When scoped to all namespaces:
+        <ul><li>Read/write access to all resources in every namespace</li>
+        <li>Create RBAC roles and role bindings in a namespace or cluster roles and cluster role bindings in all namespaces</li>
+        <li>Access the Kubernetes dashboard</li>
+        <li>Create an Ingress resource that makes apps publicly available</li>
+        <li>Review cluster metrics such as with the <code>kubectl top nodes</code> or <code>kubectl get nodes</code> commands</li></ul>
+    </td>
+  </tr>
+</table>
+
+Wondering if you have the correct permissions to run a certain `kubectl` command on a resource in a namespace? Try the `kubectl auth can-i` command. For example, to check if you can create pods in any namespace, run `kubectl auth can-i create pods --all-namespaces`. To check if you can get the job `bar` in namespace `foo`, run `kubectl auth can-i list jobs.batch/bar -n foo`.
+{: tip}
+
+</staging>
+
 ## IAM platform and Kubernetes RBAC
 {: #platform}
 
@@ -125,7 +236,9 @@ The following table shows the cluster management permissions granted by each IAM
   </tr>
 </table>
 
-## Cloud Foundry
+
+
+## Cloud Foundry roles
 {: #cloud-foundry}
 
 Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the IAM documentation.
@@ -151,7 +264,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
   </tr>
 </table>
 
-## Infrastructure
+## Infrastructure roles
 {: #infra}
 
 **Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
@@ -192,6 +305,8 @@ The following table shows the infrastructure permissions required to complete gr
    </tr>
  </tbody>
 </table>
+
+
 
 ## Minimum permissions required per action
 {: #commands}

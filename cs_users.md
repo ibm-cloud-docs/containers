@@ -761,7 +761,7 @@ To create custom RBAC permissions:
             </tr>
             <tr>
               <td><code>rules.verbs</code></td>
-              <td>Specify the types of [actions (../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
+              <td>Specify the types of [actions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
             </tr>
           </tbody>
         </table>
