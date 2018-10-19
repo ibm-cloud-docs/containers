@@ -23,21 +23,23 @@ lastupdated: "2018-10-19"
   </tr>
   <tr>
     <td>**Editor** <br/><br/>**Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.</td>
-    <td>All permissions from the Viewer role, plus the following:</br></br><ul>
-        <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li></ul></td>
-      <td>All permissions from the Viewer role, plus the following:<ul>
+    <td>All permissions from the Viewer role, plus the following:</br></br>
+        Cluster:<ul>
+        <li>Bind and unbind {{site.data.keyword.Bluemix_notm}} services to a cluster</li></ul>
+      Logging:<ul>
         <li>Create, update, and delete API server audit webhooks</li>
         <li>Create cluster webhooks</li>
         <li>Create and delete log forwarding configurations for all types except `kube-audit`</li>
         <li>Update and refresh log forwarding configurations</li>
-        <li>Create, update, and delete log filtering configurations</li></ul></td>
-      <td>All permissions from the Viewer role, plus the following:<ul>
+        <li>Create, update, and delete log filtering configurations</li></ul>
+      Ingress:<ul>
         <li>Enable or disable ALBs</li></ul>
     </td>
   </tr>
   <tr>
     <td>**Operator**</td>
-    <td>All permissions from the Viewer role, plus the following:</br></br><ul>
+    <td>All permissions from the Viewer role, plus the following:</br></br>
+    Cluster:<ul>
         <li>Update a cluster</li>
         <li>Refresh the Kubernetes master</li>
         <li>Add and remove worker nodes</li>
@@ -49,24 +51,23 @@ lastupdated: "2018-10-19"
         <li>Create and add subnets to a cluster</li>
         <li>Add and remove user-managed subnets to and from a cluster</li></ul>
     </td>
-    <td>Same permissions as the Viewer role</td>
-    <td>Same permissions as the Viewer role</td>
   </tr>
   <tr>
     <td>**Administrator** <br/><br/>**Note**: To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.</td>
-    <td>All permissions from the Editor, Operator, and Viewer roles for all clusters in this account, plus the following:</br></br><ul>
+    <td>All permissions from the Editor, Operator, and Viewer roles for all clusters in this account, plus the following:</br></br>
+    Cluster:<ul>
         <li>Create free or standard clusters</li>
         <li>Delete clusters</li>
         <li>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}</li>
         <li>Set the API key for the {{site.data.keyword.Bluemix_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Set, view, and remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Assign and change IAM platform roles for other existing users in the account</li>
-        <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul></td>
-      <td>All permissions from the Editor, Operator, and Viewer roles for all clusters in this account, plus the following:<ul>
+        <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul>
+      Logging:<ul>
         <li>Create and update log forwarding configurations for type `kube-audit`</li>
         <li>Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket</li>
-        <li>Enable and disable automatic updates for the Fluentd cluster add-on</li></ul></td>
-      <td>All permissions from the Editor, Operator, and Viewer roles for all clusters in this account, plus the following:<ul>
+        <li>Enable and disable automatic updates for the Fluentd cluster add-on</li></ul>
+      Ingress:<ul>
         <li>List all or view details for ALB secrets in a cluster</li>
         <li>Deploy a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB</li>
         <li>Update or remove ALB secrets from a cluster</li>
@@ -566,13 +567,11 @@ The **Administrator** IAM platform role includes all permissions that are grante
 <td>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.
 </td><td>[ibmcloud ks key-protect-enable](cs_cli_reference.html#cs_messages)</td>
 <td>[POST /v1/clusters/{idOrName}/kms](https://containers.bluemix.net/swagger-api/#!/clusters/CreateKMSConfig)</td>
-<td>IAM platform: Administrator <br> RBAC: cluster-admin</td>
 </tr>
 
 <td>Disable automatic updates for the Fluentd cluster add-on.</td>
 <td>[ibmcloud ks logging-autoupdate-disable](cs_cli_reference.html#cs_log_autoupdate_disable)</td>
-<td>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</td
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
+<td>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/ChangeUpdatePolicy)</td>
 </tr><tr>
 
 <td>Enable automatic updates for the Fluentd cluster add-on.</td>
@@ -603,7 +602,8 @@ The **Administrator** IAM platform role includes all permissions that are grante
 </tbody>
 </table>
 
-{[white-space]}
+<br />
+
 
 ## Coming soon! IAM service roles (staging only)
 {: #service}
@@ -623,7 +623,7 @@ The following table shows the Kubernetes resource permissions granted by each IA
   </tr>
   <tr>
     <td>**Reader**</td>
-    <td><code>view</code> cluster role applied by the <code>ibm-view</code> role binding in a specified namespace</td>
+    <td><code>view</code> cluster role applied by the <code>ibm-view</code> role binding in a specified namespace or cluster role binding in all namespaces</td>
     <td><ul>
       <li>Read access to resources in the namespace</li>
       <li>No read access to roles and role bindings or to Kubernetes secrets</li></ul>
@@ -631,7 +631,7 @@ The following table shows the Kubernetes resource permissions granted by each IA
   </tr>
   <tr>
     <td>**Writer**</td>
-    <td><code>edit</code> cluster role applied by the <code>ibm-edit</code> role binding in a specified namespace</td>
+    <td><code>edit</code> cluster role applied by the <code>ibm-edit</code> role binding in a specified namespace or cluster role binding in all namespaces</td>
     <td><ul><li>Read/write access to resources in the namespace</li>
     <li>No read/write access to roles and role bindings</li></ul>
     </td>
@@ -758,7 +758,7 @@ The following table shows the permissions that are granted by each RBAC role to 
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
   <td>replicationcontrollers/scale</td>
-  <td><code>get</code>, <code>list</code>, <code>watch</code></td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
@@ -837,7 +837,7 @@ The following table shows the permissions that are granted by each RBAC role to 
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>localsubjectaccessreviews.authorization.k8s.io</td>
+  <td>localsubjectaccessreviews</td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code></td>
@@ -902,7 +902,7 @@ The following table shows the permissions that are granted by each RBAC role to 
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies.networking.k8s.io</td>
+  <td>networkpolicies</td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
@@ -912,12 +912,12 @@ The following table shows the permissions that are granted by each RBAC role to 
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>rolebindings.rbac.authorization.k8s.io</td>
+  <td>rolebindings</td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>roles.rbac.authorization.k8s.io</td>
+  <td>roles</td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
