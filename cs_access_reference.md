@@ -149,7 +149,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 ### Viewer actions
 {: #view-actions}
 
-The **Viewer** IAM platform role includes the permissions that are granted by actions that require no permissions, plus the following:
+The **Viewer** IAM platform role includes the actions that require no permissions, plus the following:
 
 <table>
 <caption></caption>
@@ -654,7 +654,8 @@ The following table shows the Kubernetes resource permissions granted by each IA
   </tr>
 </table>
 
-{[white-space]}
+<br />
+
 
 ## Kubernetes resource permissions per RBAC role
 {: #rbac}
@@ -925,7 +926,8 @@ The following table shows the permissions that are granted by each RBAC role to 
 </tbody>
 </table>
 
-{[white-space]}
+<br />
+
 
 ## Cloud Foundry roles
 {: #cloud-foundry}
@@ -953,7 +955,8 @@ The following table shows the Cloud Foundry roles required for cluster action pe
   </tr>
 </table>
 
-{[white-space]}
+<br />
+
 
 ## Infrastructure roles
 {: #infra}
