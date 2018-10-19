@@ -75,9 +75,15 @@ lastupdated: "2018-10-19"
   </tr>
 </table>
 
-[Version 2: Separate tables. Combined with the min permissions per command tables so that there's only section for platform.]
+[Version 2: Separate tables. Combined with the min permissions per command tables so that there's only section for platform, especially now that no RBAC or IAM service roles are needed to run any ibmcloud ks commands - only IAM platform roles.]
 
 The following tables show the cluster management, logging, and Ingress permissions granted by each IAM platform role. The tables are organized alphabetically by CLI command name.
+
+* [Actions requiring no permissions](#none-actions)
+* [Viewer actions](#view-actions)
+* [Editor actions](#editor-actions)
+* [Operator actions](#operator-actions)
+* [Administrator actions](#admin-actions)
 
 ### Actions requiring no permissions
 {: #none-actions}
@@ -301,7 +307,7 @@ The **Viewer** IAM platform role includes the actions that require no permission
 ### Editor actions
 {: #editor-actions}
 
-The **Editor** IAM platform role includes the permissions that are granted by **Viewer**, plus the following:
+The **Editor** IAM platform role includes the permissions that are granted by **Viewer**, plus the following. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
 
 <table>
 <caption></caption>
@@ -502,7 +508,7 @@ The **Operator** IAM platform role includes the permissions that are granted by 
 ### Administrator actions
 {: #admin-actions}
 
-The **Administrator** IAM platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following:
+The **Administrator** IAM platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following. **Note**: To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.
 
 <table>
 <caption></caption>
@@ -610,7 +616,7 @@ The **Administrator** IAM platform role includes all permissions that are grante
 
 Every user who is assigned an IAM service access role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in a specific namespace. To learn more about IAM service access roles, see [IAM service roles](cs_users.html#iam-service-namespaces). To learn more about RBAC roles, see [Assigning RBAC permissions](cs_users.html#role-binding).
 
-To instead see the permissions for individual Kubernetes resources permitted by each RBAC role, see [Kubernetes resource permissions per RBAC role](#rbac).
+Looking for what Kubernetes actions service roles grant through RBAC? See [Kubernetes resource permissions per RBAC role](#rbac).
 {: tip}
 
 The following table shows the Kubernetes resource permissions granted by each IAM service role and its corresponding RBAC role.
@@ -623,27 +629,36 @@ The following table shows the Kubernetes resource permissions granted by each IA
   </tr>
   <tr>
     <td>**Reader**</td>
-    <td><code>view</code> cluster role applied by the <code>ibm-view</code> role binding in a specified namespace or cluster role binding in all namespaces</td>
     <td><ul>
-      <li>Read access to resources in the namespace</li>
-      <li>No read access to roles and role bindings or to Kubernetes secrets</li></ul>
+      <li>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</li>
+      <li>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> cluster role binding</li></ul>
+    </td>
+    <td><ul>
+      <li>Read access to resources in a namespace</li>
+      <li>No read access to roles and role bindings or to Kubernetes secrets</li>
+      <li>Access the Kubernetes dashboard to view resources in a namespace</li></ul>
     </td>
   </tr>
   <tr>
     <td>**Writer**</td>
-    <td><code>edit</code> cluster role applied by the <code>ibm-edit</code> role binding in a specified namespace or cluster role binding in all namespaces</td>
-    <td><ul><li>Read/write access to resources in the namespace</li>
-    <li>No read/write access to roles and role bindings</li></ul>
+    <td><ul>
+      <li>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</li>
+      <li>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> cluster role binding</li></ul>
+    </td>
+    <td><ul><li>Read/write access to resources in a namespace</li>
+    <li>No read/write access to roles and role bindings</li>
+    <li>Access the Kubernetes dashboard to view resources in a namespace</li></ul>
     </td>
   </tr>
   <tr>
     <td>**Manager**</td>
     <td><ul>
-      <li>When scoped to one namespace: <code>admin</code> cluster role applied by the <code>ibm-operate</code> role binding</li>
-      <li>When scoped to all namespaces: <code>cluster-admin</code> cluster role applied by the <code>ibm-admin</code> cluster role binding</li></ul></td>
+      <li>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> role binding</li>
+      <li>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</li></ul></td>
     <td>When scoped to one namespace:
       <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
-      <li>Create RBAC roles and role bindings in a namespace</li></ul>
+      <li>Create RBAC roles and role bindings in a namespace</li>
+      <li>Access the Kubernetes dashboard to view all resources in a namespace</li></ul>
     When scoped to all namespaces:
         <ul><li>Read/write access to all resources in every namespace</li>
         <li>Create RBAC roles and role bindings in a namespace or cluster roles and cluster role bindings in all namespaces</li>
@@ -663,7 +678,7 @@ The following table shows the Kubernetes resource permissions granted by each IA
 Every user who is assigned an IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role.
 {: shortdesc}
 
-Wondering if you have the correct permissions to run a certain `kubectl` command on a resource in a namespace? Try the `kubectl auth can-i` command. For example, to check if you can create pods in any namespace, run `kubectl auth can-i create pods --all-namespaces`. To check if you can get the job `bar` in namespace `foo`, run `kubectl auth can-i list jobs.batch/bar -n foo`.
+Wondering if you have the correct permissions to run a certain `kubectl` command on a resource in a namespace? Try the [`kubectl auth can-i` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
 {: tip}
 
 The following table shows the permissions that are granted by each RBAC role to individual Kubernetes resources. Permissions are shown as which verbs a user with that role can complete against the resource, such as "get", "list", "describe", "create", or "delete".
