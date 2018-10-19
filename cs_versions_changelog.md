@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -23,9 +23,7 @@ lastupdated: "2018-10-18"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
-IBM applies patch-level updates to your master automatically, but you must [update your worker nodes](cs_cluster_update.html#worker_node) patch. For both master and worker nodes, you must apply [major and minor](cs_versions.html#update_types) updates. Check monthly for available updates. As updates become available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
-
-For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
+For more information about major, minor, and patch versions and migration actions between minor versions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
@@ -33,6 +31,8 @@ For information about changes since the previous version, see the following chan
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
+
+**Note**: Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](cs_cli_reference.html#cs_worker_update) to ensure security compliance for your worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied, but you can choose to [apply them manually](cs_cli_reference.html#cs_cluster_update). For more information about patch types, see [Update types](cs_versions.html#update_types).
 
 </br>
 

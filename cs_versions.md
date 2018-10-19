@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -68,14 +68,16 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.9.x|You|Operation changes for clusters, including scripts or deployments.|
-|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes.|
+|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
    - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.7 and you want to update to 1.10, you must update to 1.9 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
--  **Patch updates**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
+-  **Patch updates**: Changes across patches are documented in the [Version changelog](cs_versions_changelog.html). As updates become available, you are notified when you view information about the master and worker nodes in the GUI or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
+   - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches.
+   - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealty state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
 
 <br/>
 
