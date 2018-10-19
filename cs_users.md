@@ -344,17 +344,17 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 ## Granting users access to your cluster through IAM
 {: #platform}
 
-Set IAM platform management policies so that users can work with clusters in {{site.data.keyword.containerlong_notm}}. Before you begin, check out [Understanding access policies and roles](#access_policies) to review what policies are, whom you can assign policies to, and what resources can be granted policies.
+Set IAM platform management policies in the [GUI](#add_users) or [CLI](#add_users_cli) so that users can work with clusters in {{site.data.keyword.containerlong_notm}}. Before you begin, check out [Understanding access policies and roles](#access_policies) to review what policies are, whom you can assign policies to, and what resources can be granted policies.
 {: shortdesc}
 
-### Assigning IAM platform roles with the GUI
+IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
+{: tip}
+
+### Assigning IAM roles with the GUI
 {: #add_users}
 
 Grant users access to your clusters by assigning IAM platform management roles with the GUI.
 {: shortdesc}
-
-IAM platform roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
-{: tip}
 
 Before you begin, verify that you're assigned the **Administrator** IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 
@@ -395,25 +395,22 @@ Before you begin, verify that you're assigned the **Administrator** IAM platform
   3. From the **Assign access to a resource group** list, select the **Viewer** role. This role permits users to access the resource group itself, but not to resources within the group.
   4. Click **Assign**.
 
-### Assigning IAM platform roles with the CLI
+### Assigning IAM roles with the CLI
 {: #add_users_cli}
 
 Grant users access to your clusters by assigning IAM platform management roles with the CLI.
 {: shortdesc}
 
-IAM platform roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
-{: tip}
-
-Before you begin:
+**Before you begin**:
 
 - Verify that you're assigned the `cluster-admin` IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-**To assign IAM platform roles to an individual user with the CLI:**
+**To assign IAM roles to an individual user with the CLI:**
 
-1. Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}}. You can choose Viewer, Editor, Operator, and Administrator for the IAM platform role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform).
-  * To assign access to one cluster in a resource group:
+1.  Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). You can choose Viewer, Editor, Operator, and Administrator for the IAM platform role. To find a list of supported actions per role, see [User access permissions](cs_access_reference.html#platform).
+    * To assign access to one cluster in a resource group:
       ```
       ibmcloud iam user-policy-create <user_email> --resource-group-name <resource_group_name> --service-name containers-kubernetes --region <region> --service-instance <cluster_ID> --roles <role>
       ```
@@ -421,13 +418,13 @@ Before you begin:
 
       **Note**: If you assign a user the **Administrator** IAM platform role for only one cluster, you must also assign the user the **Viewer** role for all clusters in the region within the resource group.
 
-  * To assign access to all clusters in a resource group:
+    * To assign access to all clusters in a resource group:
       ```
       ibmcloud iam user-policy-create <user_email> --resource-group-name <resource_group_name> --service-name containers-kubernetes [--region <region>] --roles <role>
       ```
       {: pre}
 
-  * To assign access to all clusters in all resource groups:
+    * To assign access to all clusters in all resource groups:
       ```
       ibmcloud iam user-policy-create <user_email> --service-name containers-kubernetes --roles <role>
       ```
@@ -435,7 +432,7 @@ Before you begin:
 
 2. If you want users to be able to work with clusters in a resource group other than the default, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
     ```
-    ibmcloud iam user-policy-create <user_email> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
+    ibmcloud iam user-policy-create <user-email_OR_access-group> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
     ```
     {: pre}
 
@@ -468,26 +465,28 @@ Before you begin:
         {: pre}
 
   For example, if you assign user `john@email.com` the **Viewer** IAM platform role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
+
   ```
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
     creationTimestamp: 2018-05-23T14:34:24Z
-    name: ibm-edit
+    name: ibm-view
     namespace: default
     resourceVersion: "8192510"
-    selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/default/rolebindings/ibm-edit
+    selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/default/rolebindings/ibm-view
     uid: 63f62887-5e96-11e8-8a75-b229c11ba64a
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: ClusterRole
-    name: edit
+    name: view
   subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: User
-    name: https://iam.ng.bluemix.net/IAM#john@email.com
+    name: https://iam.ng.bluemix.net/IAM#user@email.com
   ```
   {: screen}
+
 
 **To assign IAM platform roles multiple users in an access group with the CLI:**
 
