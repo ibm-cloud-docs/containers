@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -257,17 +257,17 @@ Let your cluster access infrastructure resources and services from behind a fire
         <tr>
           <td>EU Central</td>
           <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>161.156.73.192/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
          </tr>
          <tr>
           <td>UK South</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
          </tr>
          <tr>
           <td>US East, US South</td>
           <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
          </tr>
         </tbody>
       </table>
