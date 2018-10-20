@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-20"
 
 ---
 
@@ -39,8 +39,6 @@ Use cases:
 * [Payment tech company streamlines developer productivity to deploy AI tools to their partners 4 times  faster](cs_uc_finance.html#uc_payment_tech)
 * [Regional government improves collaboration and velocity with community developers, combining public-private data](cs_uc_gov.html#uc_data_mashup)
 * [Research nonprofit securely hosts sensitive data while growing research with partners](cs_uc_health.html#uc_research)
-
-
 
 
 
