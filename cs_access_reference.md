@@ -360,9 +360,10 @@ The tables are organized alphabetically by CLI command name.
 <td>None</td>
 </tr><tr>
 
-<td>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.</td>
-<td>[ibmcloud ks key-protect-enable](cs_cli_reference.html#cs_messages)</td>
-<td>[POST /v1/clusters/{idOrName}/kms](https://containers.bluemix.net/swagger-api/#!/clusters/CreateKMSConfig)</td>
+<td>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.
+<ul><li>[ibmcloud ks key-protect-enable](cs_cli_reference.html#cs_messages)</li>
+<li>[POST /v1/clusters/{idOrName}/kms](https://containers.bluemix.net/swagger-api/#!/clusters/CreateKMSConfig)</li></td>
+<td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
 <td>View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. <ul><li>[ibmcloud ks kube-versions](cs_cli_reference.html#cs_kube_versions)</li>
