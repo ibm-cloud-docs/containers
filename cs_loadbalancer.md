@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-16"
+lastupdated: "2018-10-20"
 
 ---
 
@@ -51,17 +51,13 @@ The load balancer service serves as the external entry point for incoming reques
 
 **Multizone clusters**:
 
-If you have a multizone cluster, app instances are deployed in pods on workers across the different zones. Review these load balancer setups for load balancing requests to your app instances in multiple zones.
+If you have a multizone cluster, app instances are deployed in pods on workers across the different zones. The following diagram shows how a classic load balancer directs communication from the internet to an app in a multizone cluster.
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="800" alt="Use a load balancer service to load balance apps in multizone clusters" style="width:700px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Use a load balancer service to load balance apps in multizone clusters" style="width:500px; border-style: none"/>
 
-1. **Lower availability: load balancer that is deployed in one zone.** By default, each load balancer is set up in one zone only. When only one load balancer is deployed, the load balancer must route requests to the app instances in its own zone and to app instances in other zones.
-
-2. **Higher availability: load balancers that are deployed in each zone.** You can achieve higher availability when you deploy a load balancer in every zone where you have app instances. Requests are handled by the load balancers in various zones in a round-robin cycle. Additionally, each load balancer routes requests to the app instances in its own zone and to app instances in other zones.
-
+By default, each load balancer is set up in one zone only. To achieve high availability, you must deploy a load balancer in every zone where you have app instances. Requests are handled by the load balancers in various zones in a round-robin cycle. Additionally, each load balancer routes requests to the app instances in its own zone and to app instances in other zones.
 
 <br />
-
 
 
 ## Enabling public or private access to an app in a multizone cluster

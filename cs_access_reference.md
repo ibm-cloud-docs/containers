@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-22"
 
 
 ---
@@ -18,6 +18,8 @@ lastupdated: "2018-10-15"
 
 # User access permissions
 {: #understanding}
+
+
 
 When you [assign cluster permissions](cs_users.html), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
@@ -40,6 +42,7 @@ The following table shows the cluster management permissions granted by each IAM
     <td>
       Cluster:<ul>
         <li>View the name and email address for the owner of the IAM API key for a resource group and region</li>
+        <li>If your {{site.data.keyword.Bluemix_notm}} account uses different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, view the infrastructure user name</li>
         <li>List all or view details for clusters, worker nodes, worker pools, services in a cluster, and webhooks</li>
         <li>View the VLAN spanning status for the infrastructure account</li>
         <li>List available subnets in the infrastructure account</li>
@@ -124,7 +127,7 @@ The following table shows the cluster management permissions granted by each IAM
   </tr>
 </table>
 
-## Cloud Foundry
+## Cloud Foundry roles
 {: #cloud-foundry}
 
 Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the IAM documentation.
@@ -150,7 +153,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
   </tr>
 </table>
 
-## Infrastructure
+## Infrastructure roles
 {: #infra}
 
 **Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
@@ -232,10 +235,9 @@ The tables are organized alphabetically by CLI command name.
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
-<td>Refresh the Kubernetes master.
-<ul><li>[ibmcloud ks apiserver-refresh](cs_cli_reference.html#cs_apiserver_refresh)</li>
-<li>[PUT /v1/clusters/{idOrName}/masters](https://containers.bluemix.net/swagger-api/#!/clusters/HandleMasterAPIServer)</li></ul></td>
-<td>IAM: Operator <br> RBAC: admin</td>
+<td>Refresh the Kubernetes master.</td>
+<td>[ibmcloud ks apiserver-refresh](cs_cli_reference.html#cs_apiserver_refresh)</td>
+<td>[PUT /v1/clusters/{idOrName}/masters](https://containers.bluemix.net/swagger-api/#!/clusters/HandleMasterAPIServer)</td>
 </tr><tr>
 
 <td>Download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands.
@@ -332,19 +334,19 @@ The tables are organized alphabetically by CLI command name.
 </tr><tr>
 
 <td>Set infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
-<ul><li>[ibmcloud ks credentials-set](cs_cli_reference.html#cs_credentials_set)</li>
+<ul><li>[ibmcloud ks credential-set](cs_cli_reference.html#cs_credentials_set)</li>
 <li>[POST /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/StoreUserCredentials)</li></ul></td>
-<td>IAM: Administrator <br> RBAC: cluster-admin</td>
-</tr><tr>
-
-<td>Remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
-<ul><li>[ibmcloud ks credentials-unset](cs_cli_reference.html#cs_credentials_unset)</li>
-<li>[DELETE /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
 <td>Get the infrastructure credentials that are set for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
 <ul><li>[GET /v1/credentials](https://containers.bluemix.net/swagger-api/#!/accounts/GetUserCredentials)</li></ul></td>
+<td>IAM: Viewer <br> RBAC: view</td>
+</tr><tr>
+
+<td>Remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
+<ul><li>[ibmcloud ks credential-unset](cs_cli_reference.html#cs_credentials_unset)</li>
+<li>[DELETE /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
@@ -360,7 +362,7 @@ The tables are organized alphabetically by CLI command name.
 
 <td>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}.
 <ul><li>[ibmcloud ks key-protect-enable](cs_cli_reference.html#cs_messages)</li>
-<li>[POST /v1/clusters/{idOrName}/kms](https://containers.bluemix.net/swagger-api/#!/clusters/CreateKMSConfig)</li></ul></td>
+<li>[POST /v1/clusters/{idOrName}/kms](https://containers.bluemix.net/swagger-api/#!/clusters/CreateKMSConfig)</li></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
 
@@ -731,3 +733,5 @@ The tables are organized alphabetically by CLI command name.
 <td>IAM: Viewer <br> RBAC: view</td>
 </tr>
 </tbody></table>
+
+

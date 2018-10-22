@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -16,6 +16,7 @@ lastupdated: "2018-10-15"
 {:download: .download}
 
 # Regions and zones
+{: #regions-and-zones}
 
 A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure. 
 {:shortdesc}
@@ -178,8 +179,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>London: lon02, lon04, lon06</td>
-      <td></td>
+      <td>London: lon04, lon05, lon06</td>
+      <td>London: lon02</td>
     </tr>
     <tr>
       <td>US East</td>

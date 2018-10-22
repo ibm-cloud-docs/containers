@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-15"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -27,6 +27,9 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 {: shortdesc}
 
 You publicly exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the ALB's public IP address or subdomain, the connection fails or times out. The steps in the following sections can help you debug your Ingress setup.
+
+Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
+{: tip}
 
 ## Step 1: Checking for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
@@ -142,17 +145,17 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](cs_ingress.html#planning). **Note**: The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](cs_clusters.html#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
     The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            Example output:
-            ```
-            healthy
-            ```
-            {: screen}
-            If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
+        Example output:
+        ```
+        healthy
+        ```
+        {: screen}
+        If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
 3. Get the IBM-provided Ingress subdomain.
     ```
@@ -218,11 +221,13 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: pre}
 
-    1. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    1. Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
 
-    2.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](cs_annotations.html#rewrite-path) annotation.
+    2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get <cluster_name_or_ID>`.
 
-    3. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
+    3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](cs_annotations.html#rewrite-path) annotation.
+
+    4. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
         ```
         kubectl edit ingress <myingressresource>
         ```
