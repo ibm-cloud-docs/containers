@@ -887,4 +887,46 @@ To create custom RBAC permissions:
 
 Now that you created and bound a custom Kubernetes RBAC role or cluster role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
 
+<br />
+
+
+## Customizing infrastructure permissions
+{: #infra_access}
+
+When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+{: shortdesc}
+
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credentials-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
+
+If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) account owner needs to turn on VLAN spanning so that the nodes in different zones can communicate within the cluster. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
+{: tip}
+
+Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
+
+1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+
+2. Click the name of the user that you want to set permissions for.
+
+3. Click **Assign access**, and click **Assign access to your SoftLayer account**.
+
+4. Click the **Portal Permissions** tab to customize the user's access. The permissions that users need depend on what infrastructure resources they need to use. You have two options for assigning access:
+    * Use the **Quick Permissions** drop-down list to assign one of the following predefined roles. After selecting a role, click **Set Permissions**.
+        * **View Only User** gives the user permissions to view infrastructure details only.
+        * **Basic User** gives the user some, but not all, infrastructure permissions.
+        * **Super User** gives the user all infrastructure permissions.
+    * Select individual permissions in each tab. To review permissions that are needed to perform common tasks in {{site.data.keyword.containerlong_notm}}, see [User access permissions](cs_access_reference.html#infra).
+
+5.  To save your changes, click **Edit Portal Permissions**.
+
+6.  In the **Device Access** tab, select the devices to grant access to.
+
+    * In the **Device Type** drop-down list, you can grant access to **All Devices** so that users can work with both virtual and physical (bare metal hardware) machine types for worker nodes.
+    * To allow users access to new devices that are created, select **Automatically grant access when new devices are added**.
+    * In the table of devices, make sure that the appropriate devices are selected.
+
+7. To save your changes, click **Update Device Access**.
+
+Downgrading permissions? The action can take a few minutes to complete.
+{: tip}
+
 
