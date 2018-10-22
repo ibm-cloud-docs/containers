@@ -265,7 +265,7 @@ You can find the current API key owner by running [`ibmcloud ks api-key-info`](c
 - If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-To set the API key to access the IBM Cloud infrastructure (SoftLayer) portofolio:
+To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
 1.  Set the API key for the region and resource group that the cluster is in.
     1.  Log in to the terminal with the user whose infrastructure permissions you want to use.
@@ -584,6 +584,8 @@ Grant users access to your clusters by assigning IAM platform management roles w
 <br />
 
 
+
+
 ## Assigning RBAC permissions
 {: #role-binding}
 
@@ -888,6 +890,8 @@ To create custom RBAC permissions:
 Now that you created and bound a custom Kubernetes RBAC role or cluster role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
 
 <br />
+
+
 
 
 ## Customizing infrastructure permissions
