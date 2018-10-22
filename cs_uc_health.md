@@ -18,7 +18,7 @@ lastupdated: "2018-10-22"
 
 
 
-# Healthcare use cases for IBM Cloud
+# Healthcare use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
 These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can 
@@ -30,18 +30,18 @@ take advantage of secure compute on isolated bare metal, easy spin-up of cluster
 
 An IT Exec for a healthcare provider has business reporting and patient systems on-prem. Those systems go through slow enhancement cycles, which leads to stagnant patient service levels.
 
-Why IBM Cloud: To improve patient service, the provider looked to IBM Cloud Kubernetes Service and IBM Continuous Delivery to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business reporting apps, needed updates frequently, but the on-prem environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
+Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business reporting apps, needed updates frequently, but the on-prem environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
 
 Key technologies:    
-* Clusters that fit varied CPU, RAM, storage needs
-* Horizontal scaling
-* Container security & isolation
-* DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery
-* SDK for Node.js
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
+* [Horizontal scaling](cs_app.html#highly_available_apps) 
+* [Container security and isolation](cs_secure.html#security)
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
+* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 They started by containerizing their SaaS systems and putting them in the cloud. They went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they could easily design Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for lower manpower costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
-Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and IBM Continuous Delivery. No longer were updates to the SaaS system languishing in slow, error-prone build processes. They can deliver incremental updates to their users, daily or even more frequently.  Moreover logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, comes out of the box. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
+Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the SaaS system languishing in slow, error-prone build processes. They can deliver incremental updates to their users, daily or even more frequently.  Moreover logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, comes out of the box. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
 
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides image vulnerability scanning, policy scanning based on ISO 27k, live container scanning, and package scanning for known malware. Secure patient data leads to happier patients.
 
@@ -64,32 +64,32 @@ On-demand compute, storage, and IO services running in public cloud with secure 
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware. 
 
 **Step 2: Lift & shift**
-* Migrate virtual machine images to container images running in IBM Cloud Kubernetes Service in the public IBM Cloud.
+* Migrate virtual machine images to container images running in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.cloud_notm}}.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
 * Enable on-demand scaling of compute for batch and other back office workloads that run infrequently.
-* Use IBM Secure Gateway to maintain secure connections to on-prem DBMS.
+* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to on-prem DBMS.
 * Private data center / on-prem capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 
 **Step 3: Microservices & Garage method**
 * Rearchitect apps into a set of cooperative microservices running within {{site.data.keyword.containerlong_notm}} based on functional areas of the app with the most quality problems.
-* Use Cloudant with customer provided keys for caching data in the cloud.
-* Adopt CI/CD best practices to support versioning & releasing a microservice on its own schedule as needed. IBM Continuous Delivery provides for workflow toolchains for CI/CD process along with image creation and vulnerability scanning of container images. 
+* Use {{site.data.keyword.cloudant}} with customer provided keys for caching data in the cloud.
+* Adopt CI/CD best practices to support versioning & releasing a microservice on its own schedule as needed. {{site.data.keyword.contdelivery_full}} provides for workflow toolchains for CI/CD process along with image creation and vulnerability scanning of container images. 
 * Adopt the essential agile and iterative development practices within the IBM Garage method to enable frequent releases of new functions, patches, and fixes without downtime.
 
 **Technical solution**
-* IBM Cloud Kubernetes Service
-* IBM Cloudant
-* IBM Secure Gateway
+* {{site.data.keyword.containerlong_notm}}
+* {{site.data.keyword.cloudant}}
+* {{site.data.keyword.SecureGatewayfull}}
 
 For the most sensitive workloads, the clusters can be hosted in {{site.data.keyword.containerlong_notm}} for Bare Metal, provided a trusted compute platform that automatically scans hardware and runtime code for vulnerabilities. Using industry-standard containers technology, apps can initially be rehosted on {{site.data.keyword.containerlong_notm}} quickly without major architectural changes. This provides the immediate benefit of scalability. 
 
 They will also be able to replicate and scale the apps using defined rules and the automated Kubernetes orchestrator. {{site.data.keyword.containerlong_notm}} provides scalable compute resources and the associated DevOps dashboards to create, scale, and tear down apps and services on demand. Using Kubernetes rich set of deployment & runtime objects, the provider will be able to monitor & manage upgrades to apps reliably.
 
-IBM Secure Gateway is used to create a secure pipeline to on-prem databases and documents for apps rehosted to run in {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.SecureGatewayfull}} is used to create a secure pipeline to on-prem databases and documents for apps rehosted to run in {{site.data.keyword.containerlong_notm}}.
 
-IBM Cloudant is a modern NoSQL database suitable a range of data driven use cases from key-value to complex document oriented data storage and query. To minimize queries to the back office RDBMS Cloudant is used to cache the user's session data across apps. This improves the front end app usability and performance across all apps hosted on {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data driven use cases from key-value to complex document oriented data storage and query. To minimize queries to the back office RDBMS, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. This improves the front end app usability and performance across all apps hosted on {{site.data.keyword.containerlong_notm}}.
 
-Moving compute workloads into the IBM Cloud isn't enough though. The provider needs to go through a process and methods transformation as well. By adopting the best practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration & Delivery (CI/CD).
+Moving compute workloads into the {{site.data.keyword.cloud_notm}} isn't enough though. The provider needs to go through a process and methods transformation as well. By adopting the best practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration & Delivery (CI/CD).
 
 Much of the CI/CD process itself is automated with IBM's Continuous Delivery service in the Cloud. The provider can define workflow toolchains to prepare container images, check for vulnerabilities, and deploy them to the Kubernetes cluster. 
 
@@ -103,14 +103,14 @@ Much of the CI/CD process itself is automated with IBM's Continuous Delivery ser
 
 A Development Exec for a disease research nonprofit has academic and industry researchers who can't easily share research data. Their work is instead isolated in pockets across the globe due to regional compliance regulations and centralized databases.
 
-Why IBM Cloud: IBM Cloud Kubernetes Service delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by geographies and tied to local regulations, inspiring patients’ and researchers’ confidence that their data is both protected locally and making a difference in better health outcomes.
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by geographies and tied to local regulations, inspiring patients’ and researchers’ confidence that their data is both protected locally and making a difference in better health outcomes.
 
 Key technologies:    
-* Intelligent scheduling places workloads where needed    
-* Cloudant to persist and sync data across apps
-* Vulnerability scanning  and isolation for workloads    
-* DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery
-* IBM Cloud Functions to sanitize data and notify researchers about data structure changes
+* [Intelligent scheduling places workloads where needed](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
+* [Vulnerability scanning  and isolation for workloads](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
+* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
 
 **Context: Securely hosting and sharing disease data for Research Nonprofit**
 
@@ -129,15 +129,15 @@ Researchers will affiliate with a regional cluster, and apps ingest, transform, 
 1. Syncing the anonymized data across regional clusters or shipping them to a centralized data store
 2. Processing the data, by using machine learning (ML) like PyTorch on bare metal worker nodes that provide GPUs 
 
-**INGEST** IBM Cloudant is used at each regional cluster, storing researchers’ rich data documents that can be queried and processed as needed. Cloudant encrypts data at rest and in transit as a best practice -- complying with regional data privacy laws.
+**INGEST** {{site.data.keyword.cloudant}} is used at each regional cluster, storing researchers’ rich data documents that can be queried and processed as needed. {{site.data.keyword.cloudant}} encrypts data at rest and in transit as a best practice -- complying with regional data privacy laws.
 
-IBM Cloud Functions is used to create processing functions for ingesting research data storing them as structured data documents in Cloudant. IBM Secure Gateway provides an easy way for Functions to access on-prem data in a safe and secure manner.
+{{site.data.keyword.openwhisk}} is used to create processing functions for ingesting research data storing them as structured data documents in {{site.data.keyword.cloudant}}. {{site.data.keyword.SecureGatewayfull}} provides an easy way for {{site.data.keyword.openwhisk}} to access on-prem data in a safe and secure manner.
 
-Web apps in the regional clusters are developed in nodeJS for manual data entry of results, schema definition, research organizations affiliation, etc. IBM Key Protect is used to secure all access to Cloudant data, and IBM Vulnerability Advisor scans app containers and images for security exploits.
+Web apps in the regional clusters are developed in nodeJS for manual data entry of results, schema definition, research organizations affiliation, etc. IBM Key Protect is used to secure all access to {{site.data.keyword.cloudant}} data, and IBM Vulnerability Advisor scans app containers and images for security exploits.
 
-**ANONYMIZE** Anytime a new data document is stored in Cloudant and event is triggered and a Cloud Function is executed to anonymize the data and remove all SPI from the data document. These anonymized data documents are stored separate from the "raw" data ingested and are the only documents shared across regions for analysis.
+**ANONYMIZE** Anytime a new data document is stored in {{site.data.keyword.cloudant}} and event is triggered and a Cloud Function is executed to anonymize the data and remove all SPI from the data document. These anonymized data documents are stored separate from the "raw" data ingested and are the only documents shared across regions for analysis.
 
-**ANALYZE** Machine learning frameworks are very compute intensive, and thus the nonprofit has set up a global processing cluster of bare metal worker nodes. Associated with this global processing cluster is an aggregated Cloudant database of all the anonymized data. A cron job periodically triggers a Cloud Function to push anonymized data documents from the regional centers to the global processing cluster's Cloudant instance.
+**ANALYZE** Machine learning frameworks are very compute intensive, and thus the nonprofit has set up a global processing cluster of bare metal worker nodes. Associated with this global processing cluster is an aggregated {{site.data.keyword.cloudant}} database of all the anonymized data. A cron job periodically triggers a Cloud Function to push anonymized data documents from the regional centers to the global processing cluster's {{site.data.keyword.cloudant}} instance.
 
 The compute cluster runs the PyTorch ML framework and machine learning apps are written in Python to analyze the aggregated data. In addition to ML apps, researchers in the collective group also develop their own apps that can be published and run on the global cluster.
 
@@ -145,31 +145,31 @@ The nonprofit also provides apps that run on non-baremetal nodes of the global c
 
 **Hosting research workloads on {{site.data.keyword.containerlong_notm}}**
 
-Developers started by deploying their research-sharing SaaS apps in containers with IBM Cloud Kubernetes Service. They created clusters for a Dev environment that allow world-wide Developers to collaboratively deploy app improvements quickly.
+Developers started by deploying their research-sharing SaaS apps in containers with {{site.data.keyword.containerlong_notm}}. They created clusters for a Dev environment that allow world-wide Developers to collaboratively deploy app improvements quickly.
 
 Security first: The Development Exec chose Trusted Compute for bare metal to host the research clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive research workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. Because this nonprofit also partners with pharmaceutical companies, app security is crucial. Competition is fierce, and corporate espionage is possible. From that secure core, Vulnerability Advisor provides image vulnerability scanning, policy scanning based on ISO 27k, live container scanning, and package scanning for known malware. Secured research apps lead to increased clinical trial participation.
 
 To achieve global availability, the Dev, Test, and Production systems were deployed across the globe in several data centers. For HA, they use a combination of multiple clusters in multiple geographic regions as well as multizone clusters. They can easily deploy the research app to Frankfort clusters to comply with the local European regulation and also deploy the app within the United States clusters to ensure availability and failure recovery locally. They also spread the research workload across multizone clusters in Frankfort to ensure that the European app is available and also balances the workload efficiently. Because researchers are uploading sensitive data with the research-sharing app, the app’s clusters are hosted in regions where stricter regulations apply.
 
-Developers focus on domain problems, by leveraging existing tools: Instead of writing unique ML code, ML logic is snapped into apps, by binding IBM Cloud services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more. 
+Developers focus on domain problems, by leveraging existing tools: Instead of writing unique ML code, ML logic is snapped into apps, by binding {{site.data.keyword.cloud_notm}} services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more. 
 
 **Solution model**
 
 On-demand compute, storage, and Node starter kits running in public cloud with secure access to research data across the globe, as warranted. Compute in clusters is tamper-proof and isolated to bare metal.
 
 Technical solution:
-* IBM Cloud Kubernetes Service with Trusted Compute
-* IBM Cloud Functions
-* IBM Cloudant
-* IBM Secure Gateway
+* {{site.data.keyword.containerlong_notm}} with Trusted Compute
+* {{site.data.keyword.openwhisk}}
+* {{site.data.keyword.cloudant}}
+* {{site.data.keyword.SecureGatewayfull}}
 
 **Step 1: Containerize apps using microservices**
 * Leverage the Node.js starter kit from IBM to jump start development.
 * Architect apps into a set of cooperative microservices running within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
-* Deploy research apps to containers running in IBM Cloud Kubernetes Service. 
+* Deploy research apps to containers running in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enable on-demand scaling of compute for batch and other research workloads that run infrequently.
-* Use IBM Secure Gateway to maintain secure connections to existing on-prem databases.
+* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to existing on-prem databases.
 
 **Step 2: Leverage secure and performant compute**
 * ML apps that require higher performing compute are hosted on {{site.data.keyword.containerlong_notm}} running on Bare Metal. This ML cluster is centralized, so each regional cluster doesn't have the expense of bare metal workers; Kubernetes deployments are easier too. 
@@ -182,10 +182,10 @@ Technical solution:
 * Using the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional regulations. 
 
 **Step 4: Data sharing**
-* IBM Cloudant is a modern NoSQL database suitable a range of data driven use cases from key-value to complex document oriented data storage and query. 
-* To minimize queries to the regional databases, Cloudant is used to cache the user's session data across apps. 
+* {{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data driven use cases from key-value to complex document oriented data storage and query. 
+* To minimize queries to the regional databases, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. 
 * This improves the front-end app usability and performance across all apps hosted on {{site.data.keyword.containerlong_notm}}.
-* While worker apps running in {{site.data.keyword.containerlong_notm}} analyze on-prem data and store results in Cloudant, IBM Cloud Functions reacts to changes and automatically sanitizes data on on the incoming feeds of data. 
+* While worker apps running in {{site.data.keyword.containerlong_notm}} analyze on-prem data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on on the incoming feeds of data. 
 * Similarly, notifications of research breakthroughs in one region can be triggered through data uploads, so that all researchers can leverage new data.
 
 **Results**
