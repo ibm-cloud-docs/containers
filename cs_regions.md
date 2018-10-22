@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -178,8 +178,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>London: lon02, lon04, lon06</td>
-      <td></td>
+      <td>London: lon04, lon05, lon06</td>
+      <td>London: lon02</td>
     </tr>
     <tr>
       <td>US East</td>

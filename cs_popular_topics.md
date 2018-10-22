@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -35,6 +35,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>22 October</td>
+<td>[New London multizone location, `lon05`](cs_regions.html#zones)</td>
+<td>The London multizone locations now include `lon05`, a zone with more infrastructure resources than `lon02`. You can still use the `lon02` zone for single-zone clusters. If you have an existing multizone cluster in the London metro city, [remove](cs_cli_reference.html#cs_zone_rm) `lon02` and [add](cs_cli_reference.html#cs_zone_add) `lon05` to your cluster worker pools.</td>
+</tr>
 <tr>
 <td>05 October</td>
 <td>Integration with {{site.data.keyword.keymanagementservicefull}}</td>
