@@ -33,7 +33,7 @@ A LOB Exec needs to increase sales channels, but the retail system is closed off
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers facilitate new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Dev and Test systems quickly with toolchains. 
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} to persist and sync data across apps](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -115,7 +115,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 
 Key technologies:    
 * [Horizontal scaling to accelerate development] (cs_app.html#highly_available_apps) 
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)

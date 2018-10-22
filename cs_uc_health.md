@@ -33,7 +33,7 @@ An IT Exec for a healthcare provider has business reporting and patient systems 
 Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business reporting apps, needed updates frequently, but the on-prem environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Horizontal scaling](cs_app.html#highly_available_apps) 
 * [Container security and isolation](cs_secure.html#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

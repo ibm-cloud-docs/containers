@@ -120,7 +120,7 @@ An HR Exec (CHRO) needs a new HR benefits site with an innovative chat bot, but 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of compute. Then, developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a boost when they add on IBM Watson Assistant. The new benefits site was created in less than 3 weeks.
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Chatbot service powered by Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
