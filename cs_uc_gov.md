@@ -33,7 +33,7 @@ A Open-Gov Data Program Executive needs to share public data with the community 
 Why {{site.data.keyword.Bluemix_notm}}: With the {{site.data.keyword.containershort}}, the Exec delivers transformative value of combined public-private data. The service provides the public cloud platform to refactor and expose microservices from monolithic on-prem apps. Also the public cloud allows government and the public partnerships to leverage external Cloud services and collaboration-friendly open-source tools. 
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Provide access to public data with {{site.data.keyword.cos_full_notm}}](https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)
 * [Plug-and-play Cloud Analytics services](https://www.ibm.com/cloud/analytics)
@@ -110,7 +110,7 @@ IT Execs for a private shipping company and the government-operated port need to
 Why {{site.data.keyword.Bluemix_notm}}: The {{site.data.keyword.containershort}} allows government and the public partnerships to leverage external Cloud services and collaboration-friendly open-source tools. The containers provided a shareable platform where both the port and shipping company could feel assured that the shared information was hosted on a secure platform, which could scale as they went from small Dev-Test systems to ultimately production-sized systems. Open toolchains further accelerated development by automating build, test, and deployments. 
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Container security and isolation](cs_secure.html#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)

@@ -35,8 +35,8 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 
 {{site.data.keyword.containerlong_notm}} and key technologies: 
 * [Horizontal scaling](cs_app.html#highly_available_apps) 
-* [Multiple regions for high availability](cs_regions.html#regions-and-locations)
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Multiple regions for high availability](cs_regions.html#regions-and-zones)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Container security and isolation](cs_secure.html#security)
 * [{{site.data.keyword.cloudant}} to persist and sync data across apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
@@ -103,7 +103,7 @@ Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}}
 Then, developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
@@ -171,5 +171,3 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * In parallel, the provider implemented simple time-boxed iterations to get a handle on the existing technical debt.
 * With the number of transactions they process, they can scale their operations exponentially.
 * At the same time, new fraud analysis with {{site.data.keyword.watson}} increased the speed of detection and prevention, reducing fraud 4x more than the region’s average. 
-
-
