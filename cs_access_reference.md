@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-20"
+lastupdated: "2018-10-22"
 
 
 ---
@@ -334,7 +334,7 @@ The tables are organized alphabetically by CLI command name.
 </tr><tr>
 
 <td>Set infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
-<ul><li>[ibmcloud ks credentials-set](cs_cli_reference.html#cs_credentials_set)</li>
+<ul><li>[ibmcloud ks credential-set](cs_cli_reference.html#cs_credentials_set)</li>
 <li>[POST /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/StoreUserCredentials)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
@@ -345,7 +345,7 @@ The tables are organized alphabetically by CLI command name.
 </tr><tr>
 
 <td>Remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.
-<ul><li>[ibmcloud ks credentials-unset](cs_cli_reference.html#cs_credentials_unset)</li>
+<ul><li>[ibmcloud ks credential-unset](cs_cli_reference.html#cs_credentials_unset)</li>
 <li>[DELETE /v1/credentials](https://containers.bluemix.net/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</li></ul></td>
 <td>IAM: Administrator <br> RBAC: cluster-admin</td>
 </tr><tr>
