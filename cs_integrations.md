@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -80,7 +80,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td> {{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/cs_at_events.html).</td>
+<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation. For more information about the types of events that you can track, see [Activity Tracker events](cs_at_events.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
