@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -33,7 +33,7 @@ An IT Exec for a healthcare provider has business reporting and patient systems 
 Why IBM Cloud: To improve patient service, the provider looked to IBM Cloud Kubernetes Service and IBM Continuous Delivery to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business reporting apps, needed updates frequently, but the on-prem environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
 
 Key technologies:    
-* Design clusters to fit CPU, RAM, storage needs
+* Clusters that fit varied CPU, RAM, storage needs
 * Horizontal scaling
 * Container security & isolation
 * DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-20"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-10-20"
 # Overview of use cases
 {: #cs_uc_intro}
 
-A variety of use cases show the strengths of {{site.data.keyword.containerlong_notm}} and IBM Cloud services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, the workloads are typical across a variety of industries. You'll see workload themes, such as:
+A variety of use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.Bluemix_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, the workloads are typical across a variety of industries. You'll see workload themes, such as:
 * AI and machine learning
 * Data and storage
 * DevOps

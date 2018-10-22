@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -120,7 +120,7 @@ An HR Exec (CHRO) needs a new HR benefits site with an innovative chat bot, but 
 Why IBM Cloud: IBM Cloud Kubernetes Service provides easy spin-up of compute. Then, developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a boost when they add on IBM Watson Assistant. The new benefits site was created in less than 3 weeks.
 
 Key technologies:    
-* Design clusters to fit CPU, RAM, storage needs
+* Clusters that fit varied CPU, RAM, storage needs
 * Chatbot service powered by Watson
 * DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery
 * SDK for Node.js

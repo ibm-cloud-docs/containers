@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -110,7 +110,7 @@ Why IBM Cloud: IBM Cloud Kubernetes Service provides easy spin-up of more comput
 
 Key technologies:    
 * Horizontal scaling to accelerate development
-* Design clusters to fit CPU, RAM, storage needs
+* Clusters that fit varied CPU, RAM, storage needs
 * Insights to market trends with Watson Discovery
 * DevOps native tools, including open toolchains in IBM Cloud Continuous Delivery
 * Inventory management with Event Streams
