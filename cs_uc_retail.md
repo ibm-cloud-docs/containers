@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-23"
 
 ---
 
@@ -42,7 +42,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 * The retailer is faced with strong competitive pressures. They need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
 * That ability to jump brand means that the retail ecosystem requires connectivity to partners. Then the cloud can facilitate new value from partners, customers, and other external players. 
 * Burst end-user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision compute infrastructure. 
-* The retailer’s developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when collaborating with partner teams.  
+* The retailer’s Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when collaborating with partner teams.  
 
 **The solution**
 
@@ -57,12 +57,12 @@ The solution is made up of these primary components:
 
 For the retailer to work with global partners, the inventory APIs required contextual modifications to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the retailer’s APIs reflected the needs of its partners, in each country, with low latency.
 
-Since inventory data must be shareable with the partners’ and company’s customers, the developers are responsible for APIs that all the developers can use to surface information onto their apps, such as mobile inventory apps or web e-commerce solutions. The developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure. 
+Since inventory data must be shareable with the partners’ and company’s customers, the Developers are responsible for APIs that all the Developers can use to surface information onto their apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure. 
 
 Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
 * Monitoring health and recovery for worker nodes
-* Providing global compute, so developers don’t have to stand up infrastructure in geographies where they need workloads and data to reside
+* Providing global compute, so Developers don’t have to stand up infrastructure in geographies where they need workloads and data to reside
 
 Moreover logging and monitoring for the API microservices, especially how they pull personalized data out of back-end benefit systems, comes out of the box. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems.
 
@@ -95,9 +95,9 @@ Technical solution:
 * APIs allow the retailer’s partners to share data into their e-commerce and B2B apps.
 
 **Step 4: Deliver continuously**
-* Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various developers. 
-* {{site.data.keyword.contdelivery_full}} helps developers to quickly provision an integrated toolchain using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
-* After developers build and test the apps in their Dev and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe. 
+* Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various Developers. 
+* {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
+* After Developers build and test the apps in their Dev and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe. 
 * {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing. 
 
 **Results**
@@ -111,11 +111,11 @@ Technical solution:
 
 A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in stores by making the stores a differentiating asset. Big box competitors and online retailers are stealing sales. At the same time, the CMO needs to reduce inventory without markdowns because holding inventory too long locks up millions in capital.
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where Developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
 
 Key technologies:    
-* [Horizontal scaling to accelerate development] (cs_app.html#highly_available_apps) 
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
+* [Horizontal scaling to accelerate development](cs_app.html#highly_available_apps) 
+* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters.html#shared_dedicated_node)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)
@@ -123,7 +123,7 @@ Key technologies:
 **Context: Traditional grocer increases customer traffic and sales with digital insights**
 
 * Competitive pressures from online retailers and big box stores have disrupted traditional grocery retail models. Sales are declining, evidenced by low foot traffic in physical stores. 
-* Their loyalty program needs a boost in the arm with a modern take on the printed coupons at check out. So developers must constantly evolve the related apps, but traditional tools slow their ability to deploy updates and features frequently.  
+* Their loyalty program needs a boost in the arm with a modern take on the printed coupons at check out. So Developers must constantly evolve the related apps, but traditional tools slow their ability to deploy updates and features frequently.  
 * Certain high-value inventory isn’t moving as well as expected, but yet the “foodie” movement seems to be growing in major metropolitan markets. 
 
 **The solution**
@@ -148,10 +148,10 @@ Social media analytics with Watson Discovery (personality and tone insights) als
 
 The loyalty mobile app provides detailed personalization information, especially when customers use its social sharing features, such as posting recipes.
 
-In addition to the mobile app, the developers are busy with building and maintaining the existing loyalty app that’s tied to traditional check-out coupons. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
+In addition to the mobile app, the Developers are busy with building and maintaining the existing loyalty app that’s tied to traditional check-out coupons. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
 * Monitoring health and recovery for worker nodes
-* Providing global compute, so developers don’t have to stand up infrastructure in data centers
+* Providing global compute, so Developers don’t have to stand up infrastructure in data centers
 
 **Solution model**
 

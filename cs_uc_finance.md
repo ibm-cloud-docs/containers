@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-23"
 
 ---
 
@@ -59,7 +59,7 @@ The company’s problem right now is scale and time to delivery.
 Their current environment is 7+ years old, on-prem, and with limited compute, storage, and IO capacity.
 Server refreshes are costly and take a long time to complete. 
 Software and app updates follow an informal process and aren't repeatable. 
-The actual HPC grid is hard to program against. The API is too complex for new developers who are brought on-board and requires non-documented knowledge. 
+The actual HPC grid is hard to program against. The API is too complex for new Developers who are brought on-board and requires non-documented knowledge. 
 And major app upgrades take 6 - 9 months to complete. 
 
 **Solution model: On-demand compute, storage, and IO services running in public cloud with secure access to on-prem enterprise assets as needed**
@@ -96,11 +96,11 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 ## Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4x faster
 {: #uc_payment_tech}
 
-A Development Exec has developers that use on-prem traditional tools that slow down prototyping while they wait for hardware procurement.
+A Development Exec has Developers that use on-prem traditional tools that slow down prototyping while they wait for hardware procurement.
 
-Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, developers have access to DevOps friendly tools, such as portable and easily shared containers.
+Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
-Then, developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
+Then, Developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
@@ -123,7 +123,7 @@ The Development Exec is faced with many challenges in the dynamic payment indust
 
 Their business model is to provide payment tools to business partners, so they can help these financial institutions and other organizations deliver security-rich digital payment experiences. 
 
-They need a solution that helps the developers and their business partners: 
+They need a solution that helps the Developers and their business partners: 
 * FRONT-END TO PAYMENT TOOLS: fee systems, payment tracking including cross-border, regulatory compliance, biometrics, remittance, and more
 * REGULATION-SPECIFIC FEATURES: each country has unique regulations so that the overall toolset might look similar but show country-specific benefits
 * DEVELOPER-FRIENDLY TOOLS that accelerate roll-out of features and bug fixes 
@@ -143,9 +143,9 @@ They started by containerizing the payment tool VMs and putting them in the clou
 
 With {{site.data.keyword.containerlong_notm}} horizontal scaling, their apps scale with the growing number of partners, resulting in faster growth. {{site.data.keyword.containerlong_notm}} provides elastic compute resources around the world that are secure for full usage of modern compute resources. 
 
-Accelerated development is a key win for the HR Exec. With the use of modern containers, developers can experiment easily in the languages of their choice, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the tools languishing in slow, error-prone build processes. They can deliver incremental updates to their tools, daily or even more frequently. 
+Accelerated development is a key win for the HR Exec. With the use of modern containers, Developers can experiment easily in the languages of their choice, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the tools languishing in slow, error-prone build processes. They can deliver incremental updates to their tools, daily or even more frequently. 
 
-Also logging and monitoring for the tools, especially where they used {{site.data.keyword.watson}} AI, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot their live systems. A key factor for less staffing costs is that IBM manages Kubernetes, so the developers can focus on better payment tools.
+Also logging and monitoring for the tools, especially where they used {{site.data.keyword.watson}} AI, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot their live systems. A key factor for less staffing costs is that IBM manages Kubernetes, so the Developers can focus on better payment tools.
 
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive payment tools now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute that can verify the underlying hardware against tampering. Scans for vulnerabilities and malware are run continuously.  
 
@@ -158,7 +158,7 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 **Step 2: Operations and connections to existing payment systems back-end**
 * Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-prem tool systems.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
-* After developers build and test apps in Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe. 
+* After Developers build and test apps in Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe. 
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 
 **Step 3: Analyze and prevent fraud**
