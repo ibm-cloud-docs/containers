@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-20"
+lastupdated: "2018-10-23"
 
 ---
 
@@ -79,13 +79,7 @@ To set up a load balancer service in a multizone cluster:
 
 2.  Create a load balancer service for the app that you want to expose. To make your app available on the public internet or on a private network, create a Kubernetes service for your app. Configure your service to include all the pods that make up your app into the load balancing.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
-  2. Define a load balancer service for the app that you want to expose. You can specify an IP address from your private or public portable subnet, and a zone.
-      - To choose both a zone and an IP address, use the `ibm-load-balancer-cloud-provider-zone` annotation to specify the zone and the `loadBalancerIP` field to specify a public or private IP address that is located in that zone.
-      - To choose an IP address only, use the `loadBalancerIP` field to specify a public or private IP address. The load balancer is created in the zone where the IP address's VLAN is located.
-      - To choose a zone only, use the `ibm-load-balancer-cloud-provider-zone` annotation to specify the zone. A portable IP address from the specified zone is used.
-      - If you do not specify an IP address or zone, and your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN. If your cluster is available on a private VLAN only, then a portable private IP address is used. The load balancer is created in the zone where the VLAN is located.
-
-      Load balancer service that uses annotations to specify a private or public load balancer and a zone, and the `loadBalancerIP` section to specify an IP address:
+  2. Define a load balancer service for the app that you want to expose. You can specify a zone and an IP address.
 
       ```
       apiVersion: v1
@@ -94,7 +88,7 @@ To set up a load balancer service in a multizone cluster:
         name: myloadbalancer
         annotations:
           service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"
       spec:
         type: LoadBalancer
         selector:
@@ -118,7 +112,7 @@ To set up a load balancer service in a multizone cluster:
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>Annotation to specify the zone. To see zones, run <code>ibmcloud ks zones</code>.</td>
+        <td>Annotation to specify the zone that the load balancer service deploys to. To see zones, run <code>ibmcloud ks zones</code>.</td>
       </tr>
       <tr>
         <td><code>selector</code></td>
@@ -133,6 +127,27 @@ To set up a load balancer service in a multizone cluster:
         <td>To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
       </tr>
       </tbody></table>
+
+      Example configuration file to create a private classic load balancer service that uses a specified IP address on private VLAN `2234945` in `dal12`:
+
+      ```
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: myloadbalancer
+        annotations:
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal12"
+      spec:
+        type: LoadBalancer
+        selector:
+          app: nginx
+        ports:
+         - protocol: TCP
+           port: 8080
+        loadBalancerIP: 172.21.xxx.xxx
+      ```
+      {: codeblock}
 
   3. Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
@@ -208,29 +223,6 @@ To create a load balancer service:
     1.  Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
 
     2.  Define a load balancer service for the app that you want to expose.
-        - If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.
-        - If your cluster is available on a private VLAN only, then a portable private IP address is used.
-        - You can request a portable public or private IP address for a load balancer service by adding an annotation to the configuration file.
-
-        Load balancer service that uses a default IP address:
-
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: myloadbalancer
-        spec:
-          type: LoadBalancer
-          selector:
-            <selector_key>:<selector_value>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-        {: codeblock}
-
-        LoadBalancer service that uses an annotation to specify a private or public IP address:
-
         ```
         apiVersion: v1
         kind: Service
@@ -256,6 +248,10 @@ To create a load balancer service:
         </thead>
         <tbody>
         <tr>
+          <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
+          <td>Annotation to specify the type of load balancer. Accepted values are `private` and `public`. If you are creating a public load balancer in clusters on public VLANs, this annotation is not required.</td>
+        </tr>
+        <tr>
           <td><code>selector</code></td>
           <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair to use to target the pods where your app runs. To target your pods and include them in the service load balancing, check the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> values. Make sure that they are the same as the <em>key/value</em> pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
         </tr>
@@ -264,14 +260,30 @@ To create a load balancer service:
           <td>The port that the service listens on.</td>
         </tr>
         <tr>
-          <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>Annotation to specify the type of load balancer. Accepted values are `private` and `public`. If you are creating a public load balancer in clusters on public VLANs, this annotation is not required.</td>
-        </tr>
-        <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+          <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer). If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></td>
         </tr>
         </tbody></table>
+
+        Example configuration file to create a private classic load balancer service that uses a specified IP address on a specified private VLAN:
+
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: myloadbalancer
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
+        spec:
+          type: LoadBalancer
+          selector:
+            app: nginx
+          ports:
+           - protocol: TCP
+             port: 8080
+          loadBalancerIP: 172.21.xxx.xxx
+        ```
+        {: codeblock}
 
     3.  Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
