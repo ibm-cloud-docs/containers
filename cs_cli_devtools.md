@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -2744,7 +2744,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
   <dt><code>--labels <em>LABELS</em></code></dt>
     <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
 
-  <dt><code>--diable-disk-encrpyt</code></dt>
+  <dt><code>--disable-disk-encrpyt</code></dt>
     <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
 
 </dl>
