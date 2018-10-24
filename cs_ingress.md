@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -1426,6 +1426,6 @@ Configuring your own custom Ingress controller can be useful when you have speci
 Your apps are now exposed by your custom Ingress controller. To restore the IBM-provided ALB deployment, re-enable the ALB. The ALB is redeployed, and the load balancer service is automatically reconfigured to point to the ALB.
 
 ```
-ibmcloud ks alb-configure --alb-ID <alb ID> --enable
+ibmcloud ks alb-configure --albID <alb ID> --enable
 ```
 {: pre}
