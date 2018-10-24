@@ -88,7 +88,7 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for all Ingress configurations:**
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied.
-- Setting up Ingress requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+- Setting up Ingress requires the [**Administrator** IAM platform role](cs_users.html#platform).
 
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
@@ -126,7 +126,7 @@ To use the same cluster ALB to manage traffic to these apps, you create the foll
 * A Kubernetes service in the staging namespace to expose `app3`.
 * An Ingress resource in the staging namespace that specifies the host as `stage.domain.net`.
 </br>
-<img src="images/cs_ingress_multi_ns.png" width="500" alt="Within a namespace, use subdomains in one or multiple resources" style="width:500px; border-style: none"/>
+<img src="images/cs_ingress_multi_ns.png" width="600" alt="Within a namespace, use subdomains in one or multiple resources" style="width:600px; border-style: none"/>
 
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.domain.net/app3` URL to only `app3`.
 
