@@ -39,9 +39,9 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 
 **Context: Retailer shares data, by using APIs with global partners to drive omnichannel sales**
 
-* The retailer is faced with strong competitive pressures. First they need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
+* The retailer is faced with strong competitive pressures. First, they need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
 * That ability to jump brand means that the retail ecosystem requires connectivity to partners. Then, the cloud can bring new value from partners, customers, and other external players. 
-* Burst user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision compute infrastructure. 
+* Burst user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision the compute infrastructure. 
 * The retailer’s Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when they collaborate with partner teams.  
 
 **The solution**
@@ -81,7 +81,7 @@ Technical solution:
 
 **Step 1: Containerize apps by using microservices**
 * Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
-* Deploy apps to container images running in {{site.data.keyword.containerlong_notm}}. 
+* Deploy apps to container images that run in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enable on-demand scaling of compute for batch and other inventory workloads that run infrequently.
 
@@ -96,7 +96,7 @@ Technical solution:
 
 **Step 4: Deliver continuously**
 * Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various Developers. 
-* {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
+* {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Dev and Test clusters, they use the IBM CI and CD toolchains to deploy apps into clusters across the globe. 
 * {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing. 
 
@@ -104,12 +104,12 @@ Technical solution:
 * Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial WW development is fast, and updates are as frequent as 40x a week.
 * The retailer and its partners have immediate access to inventory availability and delivery schedules, by using the APIs. 
 * With {{site.data.keyword.containerlong_notm}} and IBM CI and CD tools, A-B versions of apps are ready to test campaigns. 
-* {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and  cross-sales API workloads can be grow during high-volume periods of the year, such as the fall holidays. 
+* {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and cross-sales API workloads can grow during high-volume periods of the year, such as the fall holidays. 
 
 ## Traditional grocer increases customer traffic and sales with digital insights
 {: #uc_grocer}
 
-A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in stores by making the stores a differentiating asset. Big box competitors and online retailers are stealing sales. At the same time, the CMO needs to reduce inventory without markdowns because holding inventory too long locks up millions in capital.
+A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in stores by making the stores a differentiating asset. Large retail competitors and online retailers are stealing sales. At the same time, the CMO needs to reduce inventory without markdowns because holding inventory too long locks up millions in capital.
 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where Developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
 
@@ -122,17 +122,17 @@ Key technologies:
 
 **Context: Traditional grocer increases customer traffic and sales with digital insights**
 
-* Competitive pressures from online retailers and big box stores have disrupted traditional grocery retail models. Sales are declining, evidenced by low foot traffic in physical stores. 
+* Competitive pressures from online retailers and large retail stores disrupted traditional grocery retail models. Sales are declining, evidenced by low foot traffic in physical stores. 
 * Their loyalty program needs a boost in the arm with a modern take on the printed coupons at check out. So Developers must constantly evolve the related apps, but traditional tools slow their ability to deploy updates and features frequently.  
 * Certain high-value inventory isn’t moving as well as expected, but yet the “foodie” movement seems to be growing in major metropolitan markets. 
 
 **The solution**
 
-The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event in conjunction with a services or product vendor that would attract both loyalty and new customers based on affinity to the specific event. The store and partner could offer incentives to come to the event as well as buying products from the store or partner.  
+The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event along with a services or product vendor that attracts both loyalty and new customers based on affinity to the specific event. The store and partner then offer incentives to come to the event as well as buying products from the store or partner.  
 
-After the event, customers can be guided to purchasing the necessary products to be able to repeat the demonstrated activity on their own in the future. The targeted customer experience can be measured with incentive redemption and new loyalty customer signups. The combination of a hyper-personalized marketing event and a tool to track in-store purchases can carry the targeted experience all the way through to product purchase that are required to get the desired business outcomes of increased traffic and conversions.
+After the event, customers are guided to purchasing the necessary products, so they can repeat the demonstrated activity on their own in the future. The targeted customer experience is measured with incentive redemption and new loyalty customer signups. The combination of a hyper-personalized marketing event and a tool to track in-store purchases can carry the targeted experience all the way through to product purchase. All these actions result in higher traffic and conversions.
 
-As an example event, a local chef could be brought into the store to show how to make a gourmet meal. The store would provide an incentive to drive attendance (e.g., a free appetizer at the chef's restaurant) and an additional incentive to buy the ingredients for the demonstrated meal (for example, $20 off $150 cart).
+As an example event, a local chef is brought into the store to show how to make a gourmet meal. The store provides an incentive to drive attendance. For example they provide a free appetizer at the chef's restaurant and an extra incentive to buy the ingredients for the demonstrated meal (for example, $20 off $150 cart).
 
 The solution is made up of these primary components: 
 1. INVENTORY ANALYSIS: the in-store events (recipes, ingredient lists, and product locations) are tailored to market the slow-moving inventory. 
@@ -155,7 +155,7 @@ In addition to the mobile app, the Developers are busy with building and maintai
 
 **Solution model**
 
-On-demand compute, storage, and event management running in public cloud with access to back-end ERP systems
+On-demand compute, storage, and event management that runs in public cloud with access to back-end ERP systems
 
 Technical solution:
 * {{site.data.keyword.containerlong_notm}}
@@ -164,9 +164,9 @@ Technical solution:
 * IBM Streaming Analytics
 * IBM Watson Discovery
 
-**Step 1: Containerize apps using microservices**
+**Step 1: Containerize apps, by using microservices**
 
-* Architect inventory analysis and mobile apps into microservices and deploy them to containers running in {{site.data.keyword.containerlong_notm}}. 
+* Architect inventory analysis and mobile apps into microservices and deploy them to containers in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Scale the compute on-demand for batch and other inventory workloads that run less frequently.
 

@@ -38,9 +38,9 @@ Key technologies:
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
-They started by containerizing their SaaS systems and putting them in the cloud. From that first stpe, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they could easily design Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
+They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
-Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. Updates to the SaaS system no longer languished in slow, error-prone build processes. The Developers can deliver incremental updates to their users, daily or even more frequently.  Also logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
+Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. Updates to the SaaS system no longer languished in slow, error-prone build processes. The Developers can deliver incremental updates to their users, daily or even more frequently.  Also, logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
 
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
@@ -52,7 +52,7 @@ Secure patient data leads to happier patients.
 
 **Context: Workload migration for the Healthcare Provider**
 
-* Technical debt, which is coupled with long release cycles, is hindering the provider’s business critical patient management and reporting systems.
+* Technical debt, which is coupled with long release cycles, is hindering the provider’s business-critical patient management and reporting systems.
 * Their back-office and front-office custom apps are delivered on-premises in monolithic virtual machine images.
 * They need to overhaul their processes, methods, and tools but don’t know quite where to start.
 * Their technical debt is growing, not shrinking, from an inability to release quality software to keep up with market demands
@@ -92,7 +92,7 @@ They can replicate and scale the apps by using defined rules and the automated K
 
 {{site.data.keyword.SecureGatewayfull}} is used to create a secure pipeline to on-premises databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
 
-{{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. To minimize queries to the back-office RDBMS, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. This choices improves the front end app usability and performance across the apps on {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. To minimize queries to the back-office RDBMS, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. These choices improve the front-end app usability and performance across the apps on {{site.data.keyword.containerlong_notm}}.
 
 Moving compute workloads into the {{site.data.keyword.cloud_notm}} isn't enough though. The provider needs to go through a process and methods transformation as well. By adopting the practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration and Delivery (CI/CD).
 
@@ -108,7 +108,7 @@ Much of the CI/CD process itself is automated with IBM's Continuous Delivery ser
 
 A Development Exec for a disease research nonprofit has academic and industry researchers who can't easily share research data. Instead, their work's isolated in pockets across the globe due to regional compliance regulations and centralized databases.
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by geographies. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by regions. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
 
 Key technologies:    
 * [Intelligent scheduling places workloads where needed](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
@@ -120,7 +120,7 @@ Key technologies:
 **Context: Securely hosting and sharing disease data for Research Nonprofit**
 
 * Disparate groups of researchers from various institutions don’t have a unified way to share data, slowing down collaboration. 
-* The security concern adds to the collaboration burden that cause even less shared research. 
+* The security concern adds to the collaboration burden that causes even less shared research. 
 * Developers and Researchers are spread across the globe and across organizational boundaries, which make PaaS and SaaS the best option for each user group. 
 * Regional differences in health regulations require some data and data processing to remain within that region. 
 
@@ -142,11 +142,11 @@ Web apps in the regional clusters are developed in nodeJS for manual data entry 
 
 **ANONYMIZE** Anytime new data document is stored in {{site.data.keyword.cloudant}}, an event is triggered, and a Cloud Function anonymizes the data and removes SPI from the data document. These anonymized data documents are stored separate from the "raw" data that is ingested and are the only documents that are shared across regions for analysis.
 
-**ANALYZE** Machine learning frameworks are highly compute intensive, and thus the nonprofit set up a global processing cluster of bare-metal worker nodes. Associated with this global processing cluster is an aggregated {{site.data.keyword.cloudant}} database of the anonymized data. A cron job periodically triggers a Cloud Function to push anonymized data documents from the regional centers to the global processing cluster's {{site.data.keyword.cloudant}} instance.
+**ANALYZE** Machine learning frameworks are highly compute-intensive, and thus the nonprofit set up a global processing cluster of bare-metal worker nodes. Associated with this global processing cluster is an aggregated {{site.data.keyword.cloudant}} database of the anonymized data. A cron job periodically triggers a Cloud Function to push anonymized data documents from the regional centers to the global processing cluster's {{site.data.keyword.cloudant}} instance.
 
 The compute cluster runs the PyTorch ML framework, and machine learning apps are written in Python to analyze the aggregated data. In addition to ML apps, researchers in the collective group also develop their own apps that can be published and run on the global cluster.
 
-The nonprofit also provides apps that run on non-bare metal nodes of the global cluster. The apps view and extract the aggregated data and the ML app output. These apps are accessible by a public endpoint, which is secured by the API Gateway to the world. Then researchers and data analysts from everywhere can download data sets and do their own analysis.
+The nonprofit also provides apps that run on non-bare metal nodes of the global cluster. The apps view and extract the aggregated data and the ML app output. These apps are accessible by a public endpoint, which is secured by the API Gateway to the world. Then, researchers and data analysts from everywhere can download data sets and do their own analysis.
 
 **Hosting research workloads on {{site.data.keyword.containerlong_notm}}**
 
@@ -175,7 +175,7 @@ Technical solution:
 * {{site.data.keyword.SecureGatewayfull}}
 
 **Step 1: Containerize apps by using microservices**
-* Use the Node.js starter kit from IBM to jump start development.
+* Use the Node.js starter kit from IBM to jump-start development.
 * Architect apps into a set of cooperative microservices  within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy research apps to containers in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
@@ -197,7 +197,7 @@ Technical solution:
 * To minimize queries to the regional databases, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. 
 * This choice improves the front-end app usability and performance across apps on {{site.data.keyword.containerlong_notm}}.
 * While worker apps in {{site.data.keyword.containerlong_notm}} analyze on-premises data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on the incoming feeds of data. 
-* Similarly, notifications of research breakthroughs in one region can be triggered through data uploads so that all researchers can leverage new data.
+* Similarly, notifications of research breakthroughs in one region can be triggered through data uploads so that all researchers can take advantage of new data.
 
 **Results**
 * With starter kits, {{site.data.keyword.containerlong_notm}}, and IBM CI/CD tools, global Developers work across institutions and collaboratively develop research apps, with familiar and interoperable tools. 
