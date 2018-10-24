@@ -68,7 +68,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.9.x|You|Operation changes for clusters, including scripts or deployments.|
-|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. You can also disable automatic updates. See more about patches in the following section.|
+|Patch|x.x.4_1510|IBM and you|Kubernetes patches, as well as other {{site.data.keyword.Bluemix_notm}} Provider component updates such as security and operating system patches. IBM updates masters automatically, but you apply patches to worker nodes. See more about patches in the following section.|
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.

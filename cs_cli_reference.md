@@ -115,6 +115,21 @@ ibmcloud plugin list
 
 
 
+  <tr>
+    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
+    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
+    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
+    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+  </tr>
+  <tr>
+  <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
+    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
+    <td>[ibmcloud ks clusters](#cs_clusters)</td>
+    <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
+  </tr>
+</tbody>
+</table>
+</staging>
 
 <br>
 
@@ -652,82 +667,7 @@ ibmcloud ks messages
 ## Cluster commands: Management
 {: #cluster_mgmt_commands}
 
-### ibmcloud ks cluster-autoupdate-disable --cluster CLUSTER [--json]
-{: #cs_cluster_autoupdate_disable}
 
-By default, automatic patch updates for the Kubernetes master are enabled. Use this command to disable automatic updates for the master. When automatic updates are disabled, you can manually update the master to the latest patch version by running the [`ibmcloud ks cluster-update` command](cs_cli_reference.html#cs_cluster_update).
-
-Disabling automatic updates can help you verify patch changes in pre-production clusters before you allow production clusters' masters to be updated. However, the master version can never be behind the worker node version. For more information, see [Updating clusters, worker nodes, and add-ons](cs_cluster_update.html).
-
-**Minimum required permissions**: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-
-   <dt><code>--json</code></dt>
-   <dd>Prints the command output in JSON format. This value is optional.</dd>
-
-   </dl>
-
-**Example**:
-
-```
-ibmcloud ks cluster-autoupdate-disable --cluster my_cluster
-```
-{: pre}
-
-### ibmcloud ks cluster-autoupdate-enable --cluster CLUSTER [--json]
-{: #cs_cluster_autoupdate_enable}
-
-If automatic updates of the Kubernetes master to the latest patch version are disabled, re-enable automatic updates. You can check whether automatic updates are disabled with the [`ibmcloud ks cluster-autoupdate-get` command](#cs_cluster_autoupdate_get). Whenever the [latest patch](cs_versions_changelog.html) becomes available, the master is automatically updated to the latest patch.
-
-**Minimum required permissions**: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-
-   <dt><code>--json</code></dt>
-   <dd>Prints the command output in JSON format. This value is optional.</dd>
-
-   </dl>
-
-**Example**:
-
-```
-ibmcloud ks cluster-autoupdate-enable --cluster my_cluster
-```
-{: pre}
-
-### ibmcloud ks cluster-autoupdate-get --cluster CLUSTER [--json]
-{: #cs_cluster_autoupdate_get}
-
-View whether your cluster is set to automatically update the master to the latest patch version.
-
-**Minimum required permissions**: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-
-   <dt><code>--json</code></dt>
-   <dd>Prints the command output in JSON format. This value is optional.</dd>
-
-   </dl>
-
-**Example**:
-
-```
-ibmcloud ks cluster-autoupdate-get --cluster my_cluster
-```
-{: pre}
 
 ### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [-s] [--yaml]
 {: #cs_cluster_config}

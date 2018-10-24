@@ -42,14 +42,7 @@ For example, if your current Kubernetes API server version is 1.7 and you want t
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
 **Can my worker nodes run a later version than the master?**</br>
-No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
-
-**How are patch updates applied?**</br>
-By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
-
-If you want to verify patch changes before updating the master to the latest patch, you can [disable automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_disable). After you disable automatic updates, you must update your master to the latest patch by either running the [`ibmcloud ks cluster-update` command](cs_cli_reference.html#cs_cluster_update) or [re-enabling automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_enable).
-
-Unlike the master, you must update your workers for each patch version.
+No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you must update your workers for each patch version.
 
 **What happens during the master update?**</br>
 When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
