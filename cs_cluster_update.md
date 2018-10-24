@@ -45,11 +45,9 @@ If your cluster is running an unsupported Kubernetes version, you might have to 
 No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
 
 **How are patch updates applied?**</br>
-By default, patch updates for the master are applied automatically.
+By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
 
-Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
-
-If you want to verify patch changes before updating the master to the latest patch, you can [disable automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_disable). To update your master to the latest patch, you must either use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) or [re-enable automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_enable).
+If you want to verify patch changes before updating the master to the latest patch, you can [disable automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_disable). After you disable automatic updates, you must update your master to the latest patch by either running the [`ibmcloud ks cluster-update` command](cs_cli_reference.html#cs_cluster_update) or [re-enabling automatic master patch updates](cs_cli_reference.html#cs_cluster_autoupdate_enable).
 
 Unlike the master, you must update your workers for each patch version.
 
