@@ -28,9 +28,9 @@ take advantage of analytics for market insights, multiregion deployments across 
 ## Brick-and-mortar retailer shares data, by using APIs with global partners to drive omnichannel sales 
 {: #uc_data-share}
 
-A LOB Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites. 
+A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites. 
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Dev and Test systems quickly with toolchains. 
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains. 
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
@@ -97,11 +97,11 @@ Technical solution:
 **Step 4: Deliver continuously**
 * Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various Developers. 
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
-* After Developers build and test the apps in their Dev and Test clusters, they use the IBM CI and CD toolchains to deploy apps into clusters across the globe. 
+* After Developers build and test the apps in their Development and Test clusters, they use the IBM continuous integration and delivery (CI and CD) toolchains to deploy apps into clusters across the globe. 
 * {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing. 
 
 **Results**
-* Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial WW development is fast, and updates are as frequent as 40x a week.
+* Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial WW development is fast, and updates are as frequent as 40 times a week.
 * The retailer and its partners have immediate access to inventory availability and delivery schedules, by using the APIs. 
 * With {{site.data.keyword.containerlong_notm}} and IBM CI and CD tools, A-B versions of apps are ready to test campaigns. 
 * {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and cross-sales API workloads can grow during high-volume periods of the year, such as the fall holidays. 

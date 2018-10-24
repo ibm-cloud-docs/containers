@@ -100,7 +100,7 @@ A Development Exec has Developers that use on-premises traditional tools that sl
 
 Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
-Then, Developers can experiment easily, pushing changes to Dev and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
+Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
@@ -143,7 +143,7 @@ They started by containerizing the payment tool VMs and putting them in the clou
 
 With {{site.data.keyword.containerlong_notm}} horizontal scaling, their apps scale with the growing number of partners, resulting in faster growth. {{site.data.keyword.containerlong_notm}} provides elastic compute resources around the world that are secure for full usage of modern compute resources. 
 
-Accelerated development is a key win for the HR Exec. With the use of modern containers, Developers can experiment easily in the languages of their choice, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the tools languishing in slow, error-prone build processes. They can deliver incremental updates to their tools, daily or even more frequently. 
+Accelerated development is a key win for the Exec. With the use of modern containers, Developers can experiment easily in the languages of their choice, pushing changes to Development and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the tools languishing in slow, error-prone build processes. They can deliver incremental updates to their tools, daily or even more frequently. 
 
 Also, logging and monitoring for the tools, especially where they used {{site.data.keyword.watson}} AI, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot their live systems. A key factor for less staffing costs is that IBM manages Kubernetes, so the Developers can focus on better payment tools.
 
@@ -158,7 +158,7 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 **Step 2: Operations and connections to existing payment systems back-end**
 * Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-premises tool systems.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
-* After Developers build and test apps in Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe. 
+* After Developers build and test apps in Development and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe. 
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 
 **Step 3: Analyze and prevent fraud**
@@ -166,8 +166,8 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * Using the toolchains and Helm deployment tools, the apps are also deployed to the {{site.data.keyword.containerlong_notm}} clusters across the globe. Then, workloads and data meet regional regulations. 
 
 **Results**
-* Lifting the existing monolithic VMs into cloud-hosted containers was a first step that allowed the Dev Exec to save on capital and operations costs.
-* With infrastructure management taken care of by IBM, the dev team was freed up to deliver updates 10 times daily. 
+* Lifting the existing monolithic VMs into cloud-hosted containers was a first step that allowed the Development Exec to save on capital and operations costs.
+* With infrastructure management taken care of by IBM, the Development team was freed up to deliver updates 10 times daily. 
 * In parallel, the provider implemented simple time-boxed iterations to get a handle on the existing technical debt.
 * With the number of transactions they process, they can scale their operations exponentially.
 * At the same time, new fraud analysis with {{site.data.keyword.watson}} increased the speed of detection and prevention, reducing fraud 4 times more than the region’s average. 

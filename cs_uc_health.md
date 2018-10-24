@@ -40,7 +40,7 @@ Key technologies:
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
-Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Dev and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. Updates to the SaaS system no longer languished in slow, error-prone build processes. The Developers can deliver incremental updates to their users, daily or even more frequently.  Also, logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
+Accelerated development is a key win for the IT Exec. With the move to public cloud, Developers can experiment easily with Node.js SDK, pushing changes to Development and Test systems, scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. Updates to the SaaS system no longer languished in slow, error-prone build processes. The Developers can deliver incremental updates to their users, daily or even more frequently.  Also, logging and monitoring for the SaaS systems, especially how the patient front-end and back-end reports interact, rapidly integrate into the system. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. 
 
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
@@ -55,7 +55,7 @@ Secure patient data leads to happier patients.
 * Technical debt, which is coupled with long release cycles, is hindering the provider’s business-critical patient management and reporting systems.
 * Their back-office and front-office custom apps are delivered on-premises in monolithic virtual machine images.
 * They need to overhaul their processes, methods, and tools but don’t know quite where to start.
-* Their technical debt is growing, not shrinking, from an inability to release quality software to keep up with market demands
+* Their technical debt is growing, not shrinking, from an inability to release quality software to keep up with market demands.
 * Security is a primary concern, and this issue is adding to the delivery burden, which causes even more delays.
 * Capital expense budgets are under tight control, and IT feels they don't have the budget or staff to create the needed testing and staging landscapes with their in-house systems.
 
@@ -78,7 +78,7 @@ On-demand compute, storage, and IO services run in the public cloud with secure 
 **Step 3: Microservices and Garage Method**
 * Rearchitect apps into a set of cooperative microservices. That set runs within {{site.data.keyword.containerlong_notm}} that is based on functional areas of the app with the most quality problems.
 * Use {{site.data.keyword.cloudant}} with customer provided keys for caching data in the cloud.
-* Adopt CI/CD practices so that Developers version and release a microservice on its own schedule as needed. {{site.data.keyword.contdelivery_full}} provides for workflow toolchains for CI/CD process along with image creation and vulnerability scanning of container images. 
+* Adopt continuous integration and delivery (CI/CD) practices so that Developers version and release a microservice on its own schedule as needed. {{site.data.keyword.contdelivery_full}} provides for workflow toolchains for CI/CD process along with image creation and vulnerability scanning of container images. 
 * Adopt the agile and iterative development practices from the IBM Garage Method to enable frequent releases of new functions, patches, and fixes without downtime.
 
 **Technical solution**
@@ -94,7 +94,7 @@ They can replicate and scale the apps by using defined rules and the automated K
 
 {{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. To minimize queries to the back-office RDBMS, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. These choices improve the front-end app usability and performance across the apps on {{site.data.keyword.containerlong_notm}}.
 
-Moving compute workloads into the {{site.data.keyword.cloud_notm}} isn't enough though. The provider needs to go through a process and methods transformation as well. By adopting the practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like Continuous Integration and Delivery (CI/CD).
+Moving compute workloads into the {{site.data.keyword.cloud_notm}} isn't enough though. The provider needs to go through a process and methods transformation as well. By adopting the practices of the IBM Garage Method, the provider can implement an agile and iterative delivery process that supports modern DevOps practices like CI/CD.
 
 Much of the CI/CD process itself is automated with IBM's Continuous Delivery service in the Cloud. The provider can define workflow toolchains to prepare container images, check for vulnerabilities, and deploy them to the Kubernetes cluster. 
 
@@ -125,14 +125,15 @@ Key technologies:
 * Regional differences in health regulations require some data and data processing to remain within that region. 
 
 **The solution**
+
 The research nonprofit wants to aggregate cancer research data across the globe. So they create a division that is dedicated to solutions for their researchers:
 * INGEST - Apps to ingest research data. Researchers today use spreadsheets, documents, commercial products, and proprietary or home-grown databases to record research results. This situation is unlikely to change with the nonprofit's attempt to centralize data analysis.
 * ANONYMIZE - Apps to anonymize the data. SPI must be removed to comply with regional health regulations. 
-* ANALYZE - Apps to analyze the data. The basic pattern is to store the data in a regular format and then to query and process it by using AI/ML technology, simple regressions, and so forth.
+* ANALYZE - Apps to analyze the data. The basic pattern is to store the data in a regular format and then to query and process it by using AI and machine learning (ML) technology, simple regressions, and so forth.
 
 Researchers need to affiliate with a regional cluster, and apps ingest, transform, and anonymize the data:
 1. Syncing the anonymized data across regional clusters or shipping them to a centralized data store
-2. Processing the data, by using machine learning (ML) like PyTorch on bare metal worker nodes that provide GPUs 
+2. Processing the data, by using ML like PyTorch on bare metal worker nodes that provide GPUs 
 
 **INGEST** {{site.data.keyword.cloudant}} is used at each regional cluster that stores researchers’ rich data documents and can be queried and processed as needed. {{site.data.keyword.cloudant}} encrypts data at rest and in transit, which complies with regional data-privacy laws.
 
@@ -150,7 +151,7 @@ The nonprofit also provides apps that run on non-bare metal nodes of the global 
 
 **Hosting research workloads on {{site.data.keyword.containerlong_notm}}**
 
-Developers started by deploying their research-sharing SaaS apps in containers with {{site.data.keyword.containerlong_notm}}. They created clusters for a Dev environment that allow worldwide Developers to collaboratively deploy app improvements quickly.
+Developers started by deploying their research-sharing SaaS apps in containers with {{site.data.keyword.containerlong_notm}}. They created clusters for a Development environment that allow worldwide Developers to collaboratively deploy app improvements quickly.
 
 Security first: The Development Exec chose Trusted Compute for bare metal to host the research clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive research workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute that can verify the underlying hardware against tampering. Because this nonprofit also has a partnership with pharmaceutical companies, app security is crucial. Competition is fierce, and corporate espionage is possible. From that secure core, Vulnerability Advisor provides scanning: 
 * Image vulnerability scanning
@@ -164,7 +165,7 @@ To achieve global availability, the Dev, Test, and Production systems are deploy
 
 Developers focus on domain problems, by using existing tools: Instead of writing unique ML code, ML logic is snapped into apps, by binding {{site.data.keyword.cloud_notm}} services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more. 
 
-**Solution model**
+**The solution**
 
 On-demand compute, storage, and Node starter kits run in public cloud with secure access to research data across the globe, as warranted. Compute in clusters is tamper-proof and isolated to bare metal.
 
@@ -188,7 +189,7 @@ Technical solution:
 * Trusted Compute can verify the underlying hardware against tampering. From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware. 
 
 **Step 3: Ensure global availability**
-* After Developers build and test the apps in their Dev and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe. 
+* After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe. 
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 * With the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional regulations. 
 
