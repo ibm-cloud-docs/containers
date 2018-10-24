@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-23"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -29,7 +29,7 @@ compute, easy spin-up of clusters for faster development, and AI from {{site.dat
 ## Mortgage company trims costs and accelerates regulatory compliance
 {: #uc_mortgage}
 
-A Risk Management VP for a residential mortgage company processes 70 million records a day, but the on-prem system was slow and also inaccurate. IT expenses soared because hardware quickly went out of date and wasn't utilized fully. While they waited for hardware provisioning, their regulatory compliance slowed. 
+A Risk Management VP for a residential mortgage company processes 70 million records a day, but the on-premises system was slow and also inaccurate. IT expenses soared because hardware quickly went out of date and wasn't utilized fully. While they waited for hardware provisioning, their regulatory compliance slowed. 
 
 Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
 
@@ -45,7 +45,7 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 
 They started by containerizing the analysis apps and putting them in the cloud. In a flash, their hardware headaches went away. They were able to easily design Kubernetes clusters to fit their high-performance CPU, RAM, storage, and security needs. And when their analysis apps change, they can add or shrink compute without huge hardware investments. With the {{site.data.keyword.containerlong_notm}} horizontal scaling, their apps scale with the growing number of records, resulting in faster regulatory reports. {{site.data.keyword.containerlong_notm}} provides elastic compute resources around the world that are secure and highly performant for full usage of modern compute resources.
 
-Now those apps receive high-volume data from a data warehouse on {{site.data.keyword.cloudant}}. Cloud-based storage in {{site.data.keyword.cloudant}} ensures higher availability than when it was locked in an on-prem system. Since availability is essential, the apps are deployed across global data centers: for DR and for latency too.
+Now those apps receive high-volume data from a data warehouse on {{site.data.keyword.cloudant}}. Cloud-based storage in {{site.data.keyword.cloudant}} ensures higher availability than when it was locked in an on-premises system. Since availability is essential, the apps are deployed across global data centers: for DR and for latency too.
 
 They also accelerated their risk analysis and compliance. Their predictive and risk analytics functions, such as Monte Carlo calculations, are now constantly updated through iterative agile deployments. Container orchestration is handled by a managed Kubernetes so that operations costs are reduced too. Ultimately risk analysis for mortgages is more responsive to the fast-paced changes in the market.   
 
@@ -56,16 +56,16 @@ They also accelerated their risk analysis and compliance. Their predictive and r
 
 The company’s problem right now is scale and time to delivery. 
 
-Their current environment is 7+ years old, on-prem, and with limited compute, storage, and IO capacity.
+Their current environment is 7+ years old, on-premises, and with limited compute, storage, and IO capacity.
 Server refreshes are costly and take a long time to complete. 
 Software and app updates follow an informal process and aren't repeatable. 
 The actual HPC grid is hard to program against. The API is too complex for new Developers who are brought on-board and requires non-documented knowledge. 
 And major app upgrades take 6 - 9 months to complete. 
 
-**Solution model: On-demand compute, storage, and IO services running in public cloud with secure access to on-prem enterprise assets as needed**
+**Solution model: On-demand compute, storage, and IO services running in public cloud with secure access to on-premises enterprise assets as needed**
 
 * Secure and scalable document storage that supports structured and unstructured document query
-* "Lift and shift" existing enterprise assets and app while they enabled the integration to some on-prem systems that won't be migrated
+* "Lift and shift" existing enterprise assets and app while they enabled the integration to some on-premises systems that won't be migrated
 * Shorten time-to-deploy solutions and implement standard DevOps and monitoring processes to address bugs that affected reporting accuracy
 
 **Detailed solution**
@@ -80,7 +80,7 @@ And major app upgrades take 6 - 9 months to complete.
 
 This solution provides the immediate benefit of scalability. By using Kubernetes's rich set of deployment and runtime objects, the mortgage company is be able to monitor and manage upgrades to apps reliably. They're also able to replicate and scale the apps that use defined rules and the automated Kubernetes orchestrator.
 
-{{site.data.keyword.SecureGateway}} is used to create a secure pipeline to on-prem databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.SecureGateway}} is used to create a secure pipeline to on-premises databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.cos_full_notm}} is for all raw document and data storage as they go forward. For Monte Carlo simulations, a workflow pipeline is put in place where simulation data is in structured input files that are stored in {{site.data.keyword.cos_full_notm}}. A trigger to start the simulation scales compute services in {{site.data.keyword.containerlong_notm}} to split the input data into N event buckets for simulation processing. {{site.data.keyword.containerlong_notm}} automatically scales to N associated service executions and writes intermediate results to {{site.data.keyword.cos_full_notm}}. Those results are processed by another set of the {{site.data.keyword.containerlong_notm}} compute services to produce the final results.
 
@@ -88,7 +88,7 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 
 **Results**
 
-* Complex financial simulations are completed in 25% of the time than was previously possible with the legacy on-prem systems.
+* Complex financial simulations are completed in 25% of the time than was previously possible with the legacy on-premises systems.
 * Time to deployment improved from the previous 6 - 9 months to 1 - 3 weeks on average. This improvement occurs because {{site.data.keyword.containerlong_notm}} allows for a disciplined, controlled process for ramping up app containers and replacing them with newer versions. Reporting bugs can be fixed quickly, addressing issues, such as accuracy. 
 * Regulatory reporting costs were reduced with a consistent, scalable set of storage and compute services that {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cloudant}} bring.
 * Over time, legacy apps that were initially "lifted and shifted" to the cloud were rearchitected into cooperative microservices that run on {{site.data.keyword.containerlong_notm}}. This action further sped up development and time to deploy and allowed more innovation due to the relative ease of experimentation. They also released innovative apps with newer versions of microservices to take advantage of market and business conditions (that is, so called situational apps and microservices).
@@ -96,7 +96,7 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 ## Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4x faster
 {: #uc_payment_tech}
 
-A Development Exec has Developers that use on-prem traditional tools that slow down prototyping while they wait for hardware procurement.
+A Development Exec has Developers that use on-premises traditional tools that slow down prototyping while they wait for hardware procurement.
 
 Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
@@ -153,10 +153,10 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * Apps that manage highly sensitive data can be rehosted on {{site.data.keyword.containerlong_notm}} running on Bare Metal for Trusted Compute. Trusted Compute can verify the underlying hardware against tampering. 
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware. 
-* Private data center / on-prem capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
+* Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 
 **Step 2: Operations and connections to existing payment systems back-end**
-* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-prem tool systems.
+* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-premises tool systems.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
 * After Developers build and test apps in Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe. 
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.

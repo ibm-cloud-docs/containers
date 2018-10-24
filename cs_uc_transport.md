@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-23"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -162,8 +162,8 @@ With {{site.data.keyword.containerlong_notm}}, they went from over-built hardwar
 * Adopt the essential agile and iterative development practices within the IBM Garage Method to enable frequent releases of new functions, patches, and fixes without downtime. 
 
 **Step 2: Connections to existing benefits back-end**
-* {{site.data.keyword.SecureGatewayfull}} is used to create a secure tunnel to on-prem systems that host the benefits systems.  
-* Combination of on-prem data and {{site.data.keyword.containerlong_notm}} allows you to leverage sensitive data to provider deeper support while adhering to regulations.
+* {{site.data.keyword.SecureGatewayfull}} is used to create a secure tunnel to on-premises systems that host the benefits systems.  
+* Combination of on-premises data and {{site.data.keyword.containerlong_notm}} allows you to leverage sensitive data to provider deeper support while adhering to regulations.
 * Chatbot conversations fed back into HR policies, allowing the benefits site to reflect which benefits were most and least popular, including targeted improvements to poorly performing initiatives.
 
 **Step 3: Chatbot and personalization**

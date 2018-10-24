@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-23"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -27,9 +27,9 @@ These use cases highlight how workloads on {{site.data.keyword.containerlong_not
 ## Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems
 {: #uc_migrate}
 
-An IT Exec for a healthcare provider has business reporting and patient systems on-prem. Those systems go through slow enhancement cycles, which leads to stagnant patient service levels.
+An IT Exec for a healthcare provider has business reporting and patient systems on-premises. Those systems go through slow enhancement cycles, which leads to stagnant patient service levels.
 
-Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business report apps, needed updates frequently. Yet the on-prem environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
+Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business report apps, needed updates frequently. Yet the on-premises environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget. 
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
@@ -53,7 +53,7 @@ Secure patient data leads to happier patients.
 **Context: Workload migration for the Healthcare Provider**
 
 * Technical debt, which is coupled with long release cycles, is hindering the provider’s business critical patient management and reporting systems.
-* Their back-office and front-office custom apps are delivered on-prem in monolithic virtual machine images.
+* Their back-office and front-office custom apps are delivered on-premises in monolithic virtual machine images.
 * They need to overhaul their processes, methods, and tools but don’t know quite where to start.
 * Their technical debt is growing, not shrinking, from an inability to release quality software to keep up with market demands
 * Security is a primary concern, and this issue is adding to the delivery burden, which causes even more delays.
@@ -61,7 +61,7 @@ Secure patient data leads to happier patients.
 
 **Solution model**
 
-On-demand compute, storage, and IO services run in the public cloud with secure access to on-prem enterprise assets. Implement a CI/CD process and other parts of the IBM Garage Method to dramatically shorten delivery cycles.
+On-demand compute, storage, and IO services run in the public cloud with secure access to on-premises enterprise assets. Implement a CI/CD process and other parts of the IBM Garage Method to dramatically shorten delivery cycles.
 
 **Step 1: Secure the compute platform**
 * Apps that manage highly sensitive patient data can be rehosted on {{site.data.keyword.containerlong_notm}} that runs on Bare Metal for Trusted Compute.
@@ -72,8 +72,8 @@ On-demand compute, storage, and IO services run in the public cloud with secure 
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public cloud.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
 * Enable on-demand scaling of compute for batch and other back-office workloads that run infrequently.
-* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to on-prem DBMS.
-* Private data center / on-prem capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
+* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to on-premises DBMS.
+* Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 
 **Step 3: Microservices and Garage Method**
 * Rearchitect apps into a set of cooperative microservices. That set runs within {{site.data.keyword.containerlong_notm}} that is based on functional areas of the app with the most quality problems.
@@ -90,7 +90,7 @@ For the most sensitive workloads, the clusters can be hosted in {{site.data.keyw
 
 They can replicate and scale the apps by using defined rules and the automated Kubernetes orchestrator. {{site.data.keyword.containerlong_notm}} provides scalable compute resources and the associated DevOps dashboards to create, scale, and tear down apps and services on demand. By using Kubernetes's deployment and runtime objects, the provider can monitor and manage upgrades to apps reliably.
 
-{{site.data.keyword.SecureGatewayfull}} is used to create a secure pipeline to on-prem databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.SecureGatewayfull}} is used to create a secure pipeline to on-premises databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. To minimize queries to the back-office RDBMS, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. This choices improves the front end app usability and performance across the apps on {{site.data.keyword.containerlong_notm}}.
 
@@ -136,7 +136,7 @@ Researchers need to affiliate with a regional cluster, and apps ingest, transfor
 
 **INGEST** {{site.data.keyword.cloudant}} is used at each regional cluster that stores researchers’ rich data documents and can be queried and processed as needed. {{site.data.keyword.cloudant}} encrypts data at rest and in transit, which complies with regional data-privacy laws.
 
-{{site.data.keyword.openwhisk}} is used to create processing functions that ingest research data and store them as structured data documents in {{site.data.keyword.cloudant}}. {{site.data.keyword.SecureGatewayfull}} provides an easy way for {{site.data.keyword.openwhisk}} to access on-prem data in a safe and secure manner.
+{{site.data.keyword.openwhisk}} is used to create processing functions that ingest research data and store them as structured data documents in {{site.data.keyword.cloudant}}. {{site.data.keyword.SecureGatewayfull}} provides an easy way for {{site.data.keyword.openwhisk}} to access on-premises data in a safe and secure manner.
 
 Web apps in the regional clusters are developed in nodeJS for manual data entry of results, schema definition, and research organizations affiliation. IBM Key Protect helps to secure access to {{site.data.keyword.cloudant}} data, and IBM Vulnerability Advisor scans app containers and images for security exploits.
 
@@ -180,7 +180,7 @@ Technical solution:
 * Deploy research apps to containers in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enable on-demand scaling of compute for batch and other research workloads that run infrequently.
-* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to existing on-prem databases.
+* Use {{site.data.keyword.SecureGatewayfull}} to maintain secure connections to existing on-premises databases.
 
 **Step 2: Use secure and performant compute**
 * ML apps that require higher-performing compute are hosted on {{site.data.keyword.containerlong_notm}} on Bare Metal. This ML cluster is centralized, so each regional cluster doesn't have the expense of bare metal workers; Kubernetes deployments are easier too. 
@@ -196,7 +196,7 @@ Technical solution:
 * {{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. 
 * To minimize queries to the regional databases, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. 
 * This choice improves the front-end app usability and performance across apps on {{site.data.keyword.containerlong_notm}}.
-* While worker apps in {{site.data.keyword.containerlong_notm}} analyze on-prem data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on the incoming feeds of data. 
+* While worker apps in {{site.data.keyword.containerlong_notm}} analyze on-premises data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on the incoming feeds of data. 
 * Similarly, notifications of research breakthroughs in one region can be triggered through data uploads so that all researchers can leverage new data.
 
 **Results**

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-23"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -22,15 +22,15 @@ lastupdated: "2018-10-23"
 {: #cs_uc_gov}
 
 These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. They 
-take advantage of isolation with Trusted Compute, toolchains for rapid app updates, global regions for data sovereignty, Watson machine learning instead of net-new code, and connections to existing on-prem databases.
+take advantage of isolation with Trusted Compute, toolchains for rapid app updates, global regions for data sovereignty, Watson machine learning instead of net-new code, and connections to existing on-premises databases.
 {: shortdesc}
 
 ## Regional government improves collaboration and velocity with community Developers who combine public-private data
 {: #uc_data_mashup}
 
-An Open-Government Data Program Executive needs to share public data with the community and private sector, but the data is locked in an on-prem monolithic system.
+An Open-Government Data Program Executive needs to share public data with the community and private sector, but the data is locked in an on-premises monolithic system.
 
-Why {{site.data.keyword.Bluemix_notm}}: With {{site.data.keyword.containerlong_notm}}, the Exec delivers the transformative value of combined public-private data. Likewise, the service provides the public cloud platform to refactor and expose microservices from monolithic on-prem apps. Also, the public cloud allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools. 
+Why {{site.data.keyword.Bluemix_notm}}: With {{site.data.keyword.containerlong_notm}}, the Exec delivers the transformative value of combined public-private data. Likewise, the service provides the public cloud platform to refactor and expose microservices from monolithic on-premises apps. Also, the public cloud allows government and the public partnerships to use external cloud services and collaboration-friendly open-source tools. 
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
@@ -39,10 +39,10 @@ Key technologies:
 * [Plug-and-play IBM Cloud Analytics services](https://www.ibm.com/cloud/analytics)
 
 **Context: Government improves collaboration and velocity with community Developers who combine public-private data**
-* An “open government” model is the future, but this regional government agency can't make the leap with their on-prem systems. 
+* An “open government” model is the future, but this regional government agency can't make the leap with their on-premises systems. 
 * They want to support innovation and foster co-development between private sector, citizens, and public agencies.
 * Disparate groups of Developers from the government and private organizations don’t have a unified open-source platform where they can share APIs and data easily. 
-* Government data is locked in on-prem systems with no easy public access. 
+* Government data is locked in on-premises systems with no easy public access. 
 
 **The solution**
 
@@ -56,7 +56,7 @@ To bust bureaucracy and transform government’s relationship with its constitue
 
 To start, the government uses {{site.data.keyword.cos_full_notm}} to store its public data in the cloud. This storage is free to use and reuse, shareable by anyone, and subject only to attribution and share alike. Sensitive data can be sanitized before it’s pushed to the cloud. Besides that, access controls are set up so that the cloud caps new data storage, where the community can demonstrate POCs of enhanced existing free data. 
 
-The government’s next step for the public-private partnerships was to establish an API economy that is hosted in {{site.data.keyword.apiconnect_long}}. There, community and enterprise Developers make data easily accessible in API form. Their goals are to have publicly available REST APIs, to enable interoperability, and to accelerate app integration. They use IBM {{site.data.keyword.SecureGateway}} to connect back to private data sources on-prem. 
+The government’s next step for the public-private partnerships was to establish an API economy that is hosted in {{site.data.keyword.apiconnect_long}}. There, community and enterprise Developers make data easily accessible in API form. Their goals are to have publicly available REST APIs, to enable interoperability, and to accelerate app integration. They use IBM {{site.data.keyword.SecureGateway}} to connect back to private data sources on-premises. 
 
 Finally, apps based on those shared APIs are hosted in {{site.data.keyword.containerlong_notm}}, where it’s easy to spin up clusters. Then, Developers across the community, private sector, and the government can co-create apps easily. In short, Developers need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
@@ -69,7 +69,7 @@ Much of the CI/CD process itself is automated with {{site.data.keyword.contdeliv
 
 **Solution model**
 
-On-demand compute, storage, and API tools run in the public cloud with secure access to and from on-prem data sources. 
+On-demand compute, storage, and API tools run in the public cloud with secure access to and from on-premises data sources. 
 
 Technical solution:
 * {{site.data.keyword.containerlong_notm}}
@@ -81,7 +81,7 @@ Technical solution:
 **Step 1: Store data in the cloud**
 * {{site.data.keyword.cos_full_notm}} provides historical data storage, accessible to all on the public cloud.
 * Use {{site.data.keyword.cloudant}} with developer-provided keys to cache data in the cloud.
-* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to existing on-prem databases.
+* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to existing on-premises databases.
 
 **Step 2: Provide access to data with APIs**
 * Use {{site.data.keyword.apiconnect_long}} for the API economy platform. APIs allow the public and private sectors to combine data into their apps.
@@ -160,7 +160,7 @@ Technical solution:
 * Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy the manifest and shipment apps to container that run in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
-* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to existing on-prem databases.
+* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to existing on-premises databases.
 
 **Step 2: Ensure global availability**
 * After Developers deploy the apps in their Dev and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains and Helm to deploy country-specific apps into clusters across the globe. 
@@ -171,7 +171,7 @@ Technical solution:
 * {{site.data.keyword.cloudant}} is a modern NoSQL database suitable a range of data-driven use cases from key-value to complex document-oriented data storage and query. 
 * To minimize queries to the regional databases, {{site.data.keyword.cloudant}} is used to cache the user's session data across apps. 
 * This configuration improves the front-end app usability and performance across apps on {{site.data.keyword.containershort}}.
-* While worker apps in {{site.data.keyword.containerlong_notm}} analyze on-prem data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on the incoming feeds of data. 
+* While worker apps in {{site.data.keyword.containerlong_notm}} analyze on-premises data and store results in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reacts to changes and automatically sanitizes data on the incoming feeds of data. 
 * Similarly, notifications of shipments in one region can be triggered through data uploads so that all down-stream consumers can access new data.
 
 **Results**
