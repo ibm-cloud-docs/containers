@@ -36,7 +36,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>24 October</td>
+<td>25 October</td>
 <td>[Zone available in Milan](cs_regions.html)</td>
 <td>Welcome Milan, Italy as a new zone for paid clusters in the EU Central region. Previously, Milan was available only for free clusters. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
 </tr>
