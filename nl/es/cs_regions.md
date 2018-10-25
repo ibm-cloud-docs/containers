@@ -24,7 +24,7 @@ Una región es una ubicación geográfica específica en la que puede desplegar 
 
 **Nota**: Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 
-![Regiones y zonas de {{site.data.keyword.containerlong_notm}}](/images/regions-mz.png)
+![Regiones y zonas de {{site.data.keyword.containerlong_notm}}](images/regions-mz.png)
 
 _Regiones y zonas de {{site.data.keyword.containerlong_notm}}_
 
