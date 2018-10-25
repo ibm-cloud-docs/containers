@@ -25,7 +25,7 @@ lastupdated: "2018-10-10"
 
 **注**: サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で標準クラスターを作成できます。 フリー・クラスターは、選択地域でのみ使用可能です。
 
-![{{site.data.keyword.containerlong_notm}} 地域とゾーン](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 地域とゾーン](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 地域とゾーン_
 
