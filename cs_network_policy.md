@@ -126,22 +126,20 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 ### Install and configure the version 3.1.1 Calico CLI for clusters that are running Kubernetes version 1.10 or later
 {: #1.10_install}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
 
   ```
   ibmcloud ks cluster-config <cluster_name> --admin
   ```
   {: pre}
 
-To install and configure the 3.1.1 Calico CLI:
-
-1. Download the Calico configuration file to run all Calico commands.
+2. Download the Calico configuration file to run all Calico commands.
     ```
     ibmcloud ks cluster-config <cluster_name_or_ID> --network
     ```
     {: pre}
 
-2. For OSX and Linux users, complete the following steps.
+3. For OSX and Linux users, complete the following steps.
     1. Create the `/etc/calico` directory.
         ```
         sudo mkdir /etc/calico
@@ -154,12 +152,12 @@ To install and configure the 3.1.1 Calico CLI:
         ```
         {: pre}
 
-2. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
+4. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
 
     If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
     {: tip}
 
-3. For OSX and Linux users, complete the following steps.
+5. For OSX and Linux users, complete the following steps.
     1. Move the executable file to the _/usr/local/bin_ directory.
         - Linux:
 
@@ -182,9 +180,9 @@ To install and configure the 3.1.1 Calico CLI:
         ```
         {: pre}
 
-4. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](cs_firewall.html#firewall).
+6. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](cs_firewall.html#firewall).
 
-5. Verify that the Calico configuration is working correctly.
+7. Verify that the Calico configuration is working correctly.
 
     - Linux and OS X:
 
@@ -214,21 +212,20 @@ To install and configure the 3.1.1 Calico CLI:
 ### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier
 {: #1.9_install}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
 
   ```
   ibmcloud ks cluster-config <cluster_name> --admin
   ```
   {: pre}
 
-To install and configure the 1.6.3 Calico CLI:
 
-1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
+2. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
 
     If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
     {: tip}
 
-2. For OSX and Linux users, complete the following steps.
+3. For OSX and Linux users, complete the following steps.
     1. Move the executable file to the _/usr/local/bin_ directory.
         - Linux:
           ```
@@ -248,21 +245,21 @@ To install and configure the 1.6.3 Calico CLI:
         ```
         {: pre}
 
-3. Verify that `calicoctl` commands run properly by checking the Calico CLI client version.
+4. Verify that `calicoctl` commands run properly by checking the Calico CLI client version.
     ```
     calicoctl version
     ```
     {: pre}
 
-4. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
+5. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
 
-5. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
+6. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
     ```
     sudo mkdir -p /etc/calico/
     ```
     {: pre}
 
-6. Create a `calicoctl.cfg` file.
+7. Create a `calicoctl.cfg` file.
     - Linux and OS X:
       ```
       sudo vi /etc/calico/calicoctl.cfg
@@ -271,7 +268,7 @@ To install and configure the 1.6.3 Calico CLI:
 
     - Windows: Create the file with a text editor.
 
-7. Enter the following information in the <code>calicoctl.cfg</code> file.
+8. Enter the following information in the <code>calicoctl.cfg</code> file.
 
     ```
     apiVersion: v1
@@ -320,7 +317,7 @@ To install and configure the 1.6.3 Calico CLI:
           ```
           {: screen}
 
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
+        To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
 
     3. Retrieve the `ca-*pem_file`.
 
