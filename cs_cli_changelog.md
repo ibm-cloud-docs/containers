@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -41,16 +41,18 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>10 Oct 2018</td>
 <td><ul><li>Adds the resource group ID to the output of <code>ibmcloud ks cluster-get</code>.</li>
 <li>When [{{site.data.keyword.keymanagementserviceshort}} is enabled](cs_encrypt.html#keyprotect) as a key management service (KMS) provider in your cluster, adds the KMS enabled field in the output of <code>ibmcloud ks cluster-get</code>.</li></ul></td>
-</tr><tr>
+</tr>
+<tr>
 <td>0.1.591</td>
 <td>02 Oct 2018</td>
 <td>Adds support for [resource groups](cs_clusters.html#prepare_account_level).</td>
-</tr><tr>
+</tr>
+<tr>
 <td>0.1.590</td>
 <td>01 Oct 2018</td>
 <td><ul>
 <li>Adds the [<code>ibmcloud ks logging-collect</code>](cs_cli_reference.html#cs_log_collect) and [<code>ibmcloud ks logging-collect-status</code>](cs_cli_reference.html#cs_log_collect_status) commands for collecting API server logs in your cluster.</li>
-<li>Adds the [<code>ibmcloud ks key-protect-enable</code>](cs_cli_reference.html#cs_key_protect) command to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li>
+<li>Adds the [<code>ibmcloud ks key-protect-enable</code> command](cs_cli_reference.html#cs_key_protect) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li>
 <li>Adds the <code>--skip-master-health</code> flag to the [ibmcloud ks worker-reboot](cs_cli_reference.html#cs_worker_reboot) and [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload.</li>
 <li>Renames <code>Owner Email</code> to <code>Owner</code> in the output of <code>ibmcloud ks cluster-get</code>.</li></ul></td>
 </tr>

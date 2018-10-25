@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -35,6 +35,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>25 October</td>
+<td>[Zone available in Milan](cs_regions.html)</td>
+<td>Welcome Milan, Italy as a new zone for paid clusters in the EU Central region. Previously, Milan was available only for free clusters. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
+</tr>
 <tr>
 <td>22 October</td>
 <td>[New London multizone location, `lon05`](cs_regions.html#zones)</td>

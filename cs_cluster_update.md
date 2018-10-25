@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -42,7 +42,7 @@ For example, if your current Kubernetes API server version is 1.7 and you want t
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
 **Can my worker nodes run a later version than the master?**</br>
-No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you also must update your workers for each patch version.
+No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you must update your workers for each patch version.
 
 **What happens during the master update?**</br>
 When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
@@ -374,7 +374,7 @@ Your {{site.data.keyword.containerlong_notm}} cluster comes with **add-ons**, su
 * [Fluentd for logging](#logging)
 
 **Are there add-ons that I do not need to update and cannot change?**</br>
-Yes, your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval. 
+Yes, your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
 
 * `heapster`
 * `ibm-file-plugin`

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -173,7 +173,7 @@ To clean up persistent data:
    ```
    {: pre}
      
-9. Verify that the physical storage instance is removed. This process might take a few minutes. 
+9. Verify that the physical storage instance is removed. **Note**: The deletion process might take up to a few days to complete. 
 
    **File storage:** 
    ```

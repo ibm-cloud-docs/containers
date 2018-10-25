@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -14,8 +14,6 @@ lastupdated: "2018-10-22"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
-
-
 
 
 
@@ -106,7 +104,7 @@ ibmcloud plugin list
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
+  <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
     <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
@@ -166,6 +164,7 @@ ibmcloud plugin list
 </br>
 
 
+
 <table summary="Infrastructure commands table">
 <caption>Cluster commands: Infrastructure commands</caption>
 <col width="25%">
@@ -189,7 +188,6 @@ ibmcloud plugin list
   </tr>
 </tbody>
 </table>
-
 
 </br>
 
@@ -546,7 +544,7 @@ Disable the webhook backend configuration for the cluster's API server. Disablin
 ### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
-Restart the cluster master node to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
+Restart the cluster master to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
 
 <strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -652,12 +650,13 @@ ibmcloud ks messages
 {: #cluster_mgmt_commands}
 
 
+
 ### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [-s] [--yaml]
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 
-Minimum required permissions</strong>: None
+**Minimum required permissions**: None
 
 **Command options**:
 
@@ -1775,6 +1774,8 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ## Infrastructure commands
 {: #infrastructure_commands}
 
+
+
 ### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
@@ -1836,8 +1837,6 @@ You cannot set multiple credentials for the same {{site.data.keyword.containerlo
   ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
-
-
 
 ### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
@@ -3048,7 +3047,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 ### ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_worker_update}
 
-Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
 <strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -3157,7 +3156,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
   <dt><code>--labels <em>LABELS</em></code></dt>
     <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
 
-  <dt><code>--diable-disk-encrpyt</code></dt>
+  <dt><code>--disable-disk-encrpyt</code></dt>
     <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
 
   <dt><code>--json</code></dt>

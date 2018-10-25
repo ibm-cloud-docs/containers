@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,7 +25,7 @@ A region is a specific geographical location where you can deploy apps, services
 
 **Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-![{{site.data.keyword.containerlong_notm}} regions and zones](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} regions and zones](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} regions and zones_
 
@@ -173,6 +173,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
       <td>EU Central</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
+      <p>Milan: mil01</p>
       <p>Oslo: osl01</p>
       <p>Paris: par01</p>
       </td>

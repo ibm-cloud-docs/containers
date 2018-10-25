@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -30,7 +30,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 **IBM is responsible for:**
 
 - Deploying the master, worker nodes, and management components within the cluster, such as Ingress application load balancer, at cluster creation time
-- Managing the security updates, monitoring, isolation, and recovery of the Kubernetes master for the cluster
+- Providing the security updates, monitoring, isolation, and recovery of the Kubernetes master for the cluster
 - Monitoring the health of the worker nodes and providing automation for the update and recovery of those worker nodes
 - Performing automation tasks against your infrastructure account, including adding worker nodes, removing worker nodes, and creating a default subnet
 - Managing, updating, and recovering operational components within the cluster, such as the Ingress application load balancer and the storage plug-in

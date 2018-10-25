@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -62,28 +62,7 @@ In the following image you can see the location of the sources that you can conf
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
-    * `/var/log/alb/customerlogs/*.err`
-
-</br>
-
-**What configuration options do I have?**
-
-The following table shows the different options that you have when configuring logging and their descriptions.
-
-<table>
-<caption> Understanding logging configuration options</caption>
-  <thead>
-    <th>Option</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-      <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-      <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
+    * `/var/log/alb/customerlogs/*.err` and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>

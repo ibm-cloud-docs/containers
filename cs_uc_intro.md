@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -27,7 +27,6 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
 * DevOps
 
 {: shortdesc}
-
 <table summary="The table shows the use cases. Rows are to be read from the left to right, with icons representing each industry in column one the description in column two.">
 <caption>Use cases</caption>
   <thead>
@@ -45,7 +44,7 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
      <td align="center"><img src="icons/gov.svg" alt="Icon of government building with person inside"/><br>Government</td>
      <td><ul>
     <li>[Secure the exchange of data, connecting public and private organizations](cs_uc_gov.html#uc_port)</li>
-     <li>[Improve collaboration velocity with community developers, combining public-private data](cs_uc_gov.html#uc_data_mashup)</li></ul></td>
+     <li>[Improve collaboration velocity with community Developers, combining public-private data](cs_uc_gov.html#uc_data_mashup)</li></ul></td>
       </tr>
     <tr>
       <td align="center"><img src="icons/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
