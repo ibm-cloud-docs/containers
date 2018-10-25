@@ -25,7 +25,7 @@ A region is a specific geographical location where you can deploy apps, services
 
 **Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-![{{site.data.keyword.containerlong_notm}} regions and zones](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} regions and zones](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} regions and zones_
 
