@@ -24,7 +24,7 @@ lastupdated: "2018-10-10"
 
 **참고**: 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
 
-![{{site.data.keyword.containerlong_notm}} 지역 및 구역](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 지역 및 구역](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 
