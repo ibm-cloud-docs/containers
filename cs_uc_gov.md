@@ -21,8 +21,7 @@ lastupdated: "2018-10-25"
 # Government use cases for {{site.data.keyword.Bluemix_notm}}
 {: #cs_uc_gov}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. They 
-take advantage of isolation with Trusted Compute, toolchains for rapid app updates, global regions for data sovereignty, Watson machine learning instead of net-new code, and connections to existing on-premises databases.
+These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. These workloads have isolation with Trusted Compute, are in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
 {: shortdesc}
 
 ## Regional government improves collaboration and velocity with community Developers who combine public-private data
