@@ -114,7 +114,7 @@ The following image shows available non-persistent data storage options in {{sit
 <tr>
 <td style="text-align:left">Access</td>
 <td style="text-align:left">Via the container's local file system</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Via [Kubernetes <code>hostPath</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) for access to worker node primary storage. </li><li style="margin:0px; padding:0px">Via [Kubernetes <code>emptyDir</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) for access to worker node secondary storage.</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Via [Kubernetes <code>hostPath</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) for access to worker node primary storage. </li><li style="margin:0px; padding:0px">Via [Kubernetes <code>emptyDir</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) for access to worker node secondary storage.</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Performance</td>
@@ -196,7 +196,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">All</td>
 <td style="text-align:left">All</td>
 <td style="text-align:left">Semi-structured and unstructured data</td>
-<td style="text-align:left">Depends on the DBaaS</ul></td>
+<td style="text-align:left">Depends on the DBaaS</td>
 </tr>
 <tr>
 <td style="text-align:left">Data usage pattern</td>
@@ -281,7 +281,7 @@ nodes. Every node stores only a part of the data. </td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Sharing data across multiple app instances</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li</ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li></ul></td>
 </tr>
 </tbody>
 </table>
