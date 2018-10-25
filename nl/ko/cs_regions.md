@@ -172,7 +172,7 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
       <td>중앙 유럽</td>
       <td>프랑크푸르트: fra02, fra04, fra05</td>
       <td><p>암스테르담: ams03</p>
-      <td><p>밀라노: mil01</p>
+      <p>밀라노: mil01</p>
       <p>오슬로: osl01</p>
       <p>파리: par01</p>
       </td>
