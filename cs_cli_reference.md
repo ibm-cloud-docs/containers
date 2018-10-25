@@ -88,7 +88,6 @@ ibmcloud plugin list
 
 <br>
 
-
 <table summary="Cluster commands: Management table">
 <caption>Cluster commands: Management commands</caption>
 <col width="25%">
@@ -105,23 +104,6 @@ ibmcloud plugin list
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
-    <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
-    <td>[ibmcloud ks clusters](#cs_clusters)</td>
-    <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
-  </tr>
-</tbody>
-</table>
-
-
-
-  <tr>
-    <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
-    <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
-    <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
-  </tr>
-  <tr>
   <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
     <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
@@ -129,7 +111,6 @@ ibmcloud plugin list
   </tr>
 </tbody>
 </table>
-</staging>
 
 <br>
 
@@ -194,8 +175,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -416,7 +397,7 @@ When a different user performs an action in this resource group and region that 
 
 If you find that you need to update the API key that is stored for a resource group and region, you can do so by running the [ibmcloud ks api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
-**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credential-set](#cs_credentials_set) command.
+**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credentials-set](#cs_credentials_set) command.
 
 <strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -1795,7 +1776,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 
 
 
-### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Set IBM Cloud infrastructure (SoftLayer) account credentials for an {{site.data.keyword.containerlong_notm}} resource group and region.
@@ -1853,11 +1834,11 @@ You cannot set multiple credentials for the same {{site.data.keyword.containerlo
 **Example**:
 
   ```
-  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
-### ibmcloud ks credential-unset
+### ibmcloud ks credentials-unset
 {: #cs_credentials_unset}
 
 Remove IBM Cloud infrastructure (SoftLayer) account credentials from an {{site.data.keyword.containerlong_notm}} region.
@@ -1876,7 +1857,7 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 **Example**:
 
   ```
-  ibmcloud ks credential-unset
+  ibmcloud ks credentials-unset
   ```
   {: pre}
 

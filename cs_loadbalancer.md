@@ -88,7 +88,7 @@ To set up a load balancer service in a multizone cluster:
         name: myloadbalancer
         annotations:
           service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
       spec:
         type: LoadBalancer
         selector:
@@ -128,7 +128,7 @@ To set up a load balancer service in a multizone cluster:
       </tr>
       </tbody></table>
 
-      Example configuration file to create a private classic load balancer service that uses a specified IP address on private VLAN `2234945` in `dal12`:
+      Example configuration file to create a private classic load balancer service that uses a specified IP address in `dal12`:
 
       ```
       apiVersion: v1
@@ -265,7 +265,7 @@ To create a load balancer service:
         </tr>
         </tbody></table>
 
-        Example configuration file to create a private classic load balancer service that uses a specified IP address on private VLAN `2234945`:
+        Example configuration file to create a private classic load balancer service that uses a specified IP address :
 
         ```
         apiVersion: v1
