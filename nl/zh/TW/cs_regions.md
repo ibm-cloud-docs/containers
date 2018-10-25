@@ -173,7 +173,7 @@ _{{site.data.keyword.containerlong_notm}} 地區及區域_
       <td>歐盟中部</td>
       <td>法蘭克福：fra02、fra04、fra05</td>
       <td><p>阿姆斯特丹：ams03</p>
-      <td><p>米蘭：mil01</p>
+      <p>米蘭：mil01</p>
       <p>奧斯陸：osl01</p>
       <p>巴黎：par01</p>
       </td>
