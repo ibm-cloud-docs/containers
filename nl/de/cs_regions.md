@@ -172,7 +172,7 @@ Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_not
       <td>Mitteleuropa</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
-      <td><p>Mailand: mil01</p>
+      <p>Mailand: mil01</p>
       <p>Oslo: osl01</p>
       <p>Paris: par01</p>
       </td>
