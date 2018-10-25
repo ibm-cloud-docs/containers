@@ -172,7 +172,7 @@ Las zonas son centros de datos físicos que están disponibles dentro de una reg
       <td>UE central</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
-      <td><p>Milán: mil01</p>
+      <p>Milán: mil01</p>
       <p>Oslo: osl01</p>
       <p>París: par01</p>
       </td>
