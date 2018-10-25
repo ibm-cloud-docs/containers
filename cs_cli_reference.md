@@ -182,6 +182,8 @@ ibmcloud plugin list
 
 </br>
 
+
+
 <table summary="Infrastructure commands table">
 <caption>Cluster commands: Infrastructure commands</caption>
 <col width="25%">
@@ -193,12 +195,11 @@ ibmcloud plugin list
  <tbody>
   <tr>
     <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
     <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
+    <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks vlans](#cs_vlans)</td>
     <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
     <td> </td>
     <td> </td>
@@ -1792,6 +1793,8 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ## Infrastructure commands
 {: #infrastructure_commands}
 
+
+
 ### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
@@ -1853,33 +1856,6 @@ You cannot set multiple credentials for the same {{site.data.keyword.containerlo
   ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
-
-### ibmcloud ks credential-get [-s] [--json]
-{: #cs_credential_get}
-
-If you set up your IBM Cloud account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure user name for the region and resource group that you're currently targeted to.
-
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-
-   <dl>
-   <dt><code>--json</code></dt>
-   <dd>Prints the command output in JSON format. This value is optional.</dd>
-   <dt><code>-s</code></dt>
-   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-   </dl>
-
-**Example:**
-```
-ibmcloud ks credential-get
-```
-{: pre}
-
-**Example output:**
-```
-Infrastructure credentials for user name user@email.com set for resource group default.
-```
 
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
@@ -2010,7 +1986,7 @@ Create a logging configuration. You can use this command to forward logs for con
     <dd>The name or ID of the cluster.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
-    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>storage</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</dd>
@@ -2089,7 +2065,7 @@ View all log forwarding configurations for a cluster, or filter logging configur
     <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
 
   <dt><code>--show-covering-filters</code></dt>
     <dd>Shows the logging filters that render previous filters obsolete.</dd>

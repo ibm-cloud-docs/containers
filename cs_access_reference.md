@@ -19,7 +19,218 @@ lastupdated: "2018-10-25"
 # User access permissions
 {: #understanding}
 
+
+</tr><tr><td>List all services bound to a specific namespace.</td>
+<td>-</td>
+<td>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.bluemix.net/swagger-api/#!/clusters/ListServicesInNamespace)</td>
+</tr><tr><td>List all user-managed subnets that are bound to a cluster.</td>
+<td>-</td>
+<td>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.bluemix.net/swagger-api/#!/clusters/GetClusterUserSubnet)</td>
+</tr><tr>
+<td>List available subnets in the infrastructure account.</td>
+<td>[ibmcloud ks subnets](cs_cli_reference.html#cs_subnets)</td>
+<td>[GET /v1/subnets](https://containers.bluemix.net/swagger-api/#!/properties/ListSubnets)</td>
+</tr><tr>
+<td>View the VLAN spanning status for the infrastructure account.</td>
+<td>[ibmcloud ks vlan-spanning-get](cs_cli_reference.html#cs_vlan_spanning_get)</td>
+<td>[GET /v1/subnets/vlan-spanning](https://containers.bluemix.net/swagger-api/#!/accounts/GetVlanSpanning)</td>
+</tr><tr>
+<td>When set for one cluster: List VLANs that the cluster is connected to in a zone.</br>When set for all clusters in the account: List all available VLANs in a zone.
+</td><td>[ibmcloud ks vlans](cs_cli_reference.html#cs_vlans)</td>
+<td>[GET /v1/datacenters/{datacenter}/vlans](https://containers.bluemix.net/swagger-api/#!/properties/GetDatacenterVLANs)</td>
+</tr><tr>
+<td>List all webhooks for a cluster.</td>
+<td>-</td>
+<td>[GET /v1/clusters/{idOrName}/webhooks](https://containers.bluemix.net/swagger-api/#!/clusters/GetClusterWebhooks)</td>
+</tr><tr><td>View information for a worker node.
+</td><td>[ibmcloud ks worker-get](cs_cli_reference.html#cs_worker_get)</td>
+<td>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.bluemix.net/swagger-api/#!/clusters/GetWorkers)</td>
+</tr><tr><td>View information for a worker pool.
+</td><td>[ibmcloud ks worker-pool-get](cs_cli_reference.html#cs_worker_pool_get)</td>
+<td>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.bluemix.net/swagger-api/#!/clusters/GetWorkerPool)</td>
+</tr><tr><td>List all worker pools in a cluster.
+</td><td>[ibmcloud ks worker-pools](cs_cli_reference.html#cs_worker_pools)</td>
+<td>[GET /v1/clusters/{idOrName}/workerpools](https://containers.bluemix.net/swagger-api/#!/clusters/GetWorkerPools)</td>
+</tr><tr><td>List all worker nodes in a cluster.
+</td><td>[ibmcloud ks workers](cs_cli_reference.html#cs_workers)</td>
+<td>[GET /v1/clusters/{idOrName}/workers](https://containers.bluemix.net/swagger-api/#!/clusters/GetClusterWorkers)</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption></caption>
+<thead>
+<th>Ingress action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
+<tr><td>View information for an Ingress ALB.</td>
+<td>[ibmcloud ks alb-get](cs_cli_reference.html#cs_alb_get)</td>
+<td>[GET /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALB)</td>
+</tr><tr><td>View ALB types that are supported in the region.
+<td>[ibmcloud ks alb-types](cs_cli_reference.html#cs_alb_types)</td>
+<td>[GET /albtypes](https://containers.bluemix.net/swagger-alb-api/#!/util/GetAvailableALBTypes)</td>
+</tr><tr><td>List all Ingress ALBs in a cluster.</td>
+<td>[ibmcloud ks albs](cs_cli_reference.html#cs_albs)</td>
+<td>[GET /clusters/{idOrName}](https://containers.bluemix.net/swagger-alb-api/#!/alb/GetClusterALBs)</td>
+</tr>
+</tbody>
+</table>
+
+
+<table>
+<caption></caption>
+<thead>
+<th>Logging action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
 <tr>
+<td>View the status for automatic updates of the Fluentd add-on.</td>
+<td>[ibmcloud ks logging-autoupdate-get](cs_cli_reference.html#cs_log_autoupdate_get)</td>
+<td>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.bluemix.net/swagger-logging/#!/logging/GetUpdatePolicy)</td>
+</tr><tr>
+<td>View the default logging endpoint for the target region.</td>
+<td>-</td>
+<td>[GET /v1/logging/{idOrName}/default](https://containers.bluemix.net/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</td>
+</tr><tr>
+<td>List all log forwarding configurations in the cluster or for a specific log source in the cluster.</td>
+<td>[ibmcloud ks logging-config-get](cs_cli_reference.html#cs_logging_get)</td>
+<td>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigs) and [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</td>
+</tr><tr>
+<td>View information for a log filtering configuration.</td>
+<td>[ibmcloud ks logging-filter-get](cs_cli_reference.html#cs_log_filter_view)</td>
+<td>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfig)</td>
+</tr><tr>
+<td>List all logging filter configurations in the cluster.</td>
+<td>[ibmcloud ks logging-filter-get](cs_cli_reference.html#cs_log_filter_view)</td>
+<td>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/FetchFilterConfigs)</td>
+</tr>
+</tbody>
+</table>
+
+### Editor actions
+{: #editor-actions}
+
+The **Editor** IAM platform role includes the permissions that are granted by **Viewer**, plus the following. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
+
+<table>
+<caption></caption>
+<thead>
+<th>Cluster management action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
+<tr>
+<td>Bind a service to a cluster. **Note**: The Developer Cloud Foundry role in the space that the service is in is also required.
+</td><td>[ibmcloud ks cluster-service-bind](cs_cli_reference.html#cs_cluster_service_bind)</td>
+<td>[POST /v1/clusters/{idOrName}/services](https://containers.bluemix.net/swagger-api/#!/clusters/BindServiceToNamespace)</td>
+</tr><tr>
+<td>Unbind a service from a cluster. **Note**: The Developer Cloud Foundry role in the space that the service is in is also required.
+</td><td>[ibmcloud ks cluster-service-unbind](cs_cli_reference.html#cs_cluster_service_unbind)</td>
+<td>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.bluemix.net/swagger-api/#!/clusters/UnbindServiceFromNamespace)</td>
+</tr><tr>
+<td>Create a webhook in a cluster.
+</td><td>[ibmcloud ks webhook-create](cs_cli_reference.html#cs_webhook_create)</td>
+<td>[POST /v1/clusters/{idOrName}/webhooks](https://containers.bluemix.net/swagger-api/#!/clusters/AddClusterWebhooks)</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption></caption>
+<thead>
+<th>Ingress action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
+<tr>
+<td>Enable or disable an Ingress ALB.</td>
+<td>[ibmcloud ks alb-configure](cs_cli_reference.html#cs_alb_configure)</td>
+<td>[POST /albs](https://containers.bluemix.net/swagger-alb-api/#!/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.bluemix.net/swagger-alb-api/#/)</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption></caption>
+<thead>
+<th>Logging action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
+<tr>
+<td>Create an API server audit webhook.</td>
+<td>[ibmcloud ks apiserver-config-set](cs_cli_reference.html#cs_apiserver_config_set)</td>
+<td>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</td>
+</tr><tr>
+<td>Delete an API server audit webhook.</td>
+<td>[ibmcloud ks apiserver-config-unset](cs_cli_reference.html#cs_apiserver_config_unset)</td>
+<td>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.bluemix.net/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</td>
+</tr><tr>
+<td>Create a log forwarding configuration for all log sources except <code>kube-audit</code>.</td>
+<td>[ibmcloud ks logging-config-create](cs_cli_reference.html#cs_logging_create)</td>
+<td>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.bluemix.net/swagger-logging/#!/logging/CreateLoggingConfig)</td>
+</tr><tr>
+<td>Refresh a log forwarding configuration.</td>
+<td>[ibmcloud ks logging-config-refresh](cs_cli_reference.html#cs_logging_refresh)</td>
+<td>[PUT /v1/logging/{idOrName}/refresh](https://containers.bluemix.net/swagger-logging/#!/logging/RefreshLoggingConfig)</td>
+</tr><tr>
+<td>Delete a log forwarding configuration for all log sources except <code>kube-audit</code>.</td>
+<td>[ibmcloud ks logging-config-rm](cs_cli_reference.html#cs_logging_rm)</td>
+<td>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfig)</td>
+</tr><tr>
+<td>Delete all log forwarding configurations for a cluster.</td>
+<td>-</td>
+<td>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.bluemix.net/swagger-logging/#!/logging/DeleteLoggingConfigs)</td>
+</tr><tr>
+<td>Update a log forwarding configuration.</td>
+<td>[ibmcloud ks logging-config-update](cs_cli_reference.html#cs_logging_update)</td>
+<td>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.bluemix.net/swagger-logging/#!/logging/UpdateLoggingConfig)</td>
+</tr><tr>
+<td>Create a log filtering configuration.</td>
+<td>[ibmcloud ks logging-filter-create](cs_cli_reference.html#cs_log_filter_create)</td>
+<td>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/CreateFilterConfig)</td>
+</tr><tr>
+<td>Delete a log filtering configuration.</td>
+<td>[ibmcloud ks logging-filter-rm](cs_cli_reference.html#cs_log_filter_delete)</td>
+<td>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfig)</td>
+</tr><tr>
+<td>Delete all logging filter configurations for the Kubernetes cluster.</td>
+<td>-</td>
+<td>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.bluemix.net/swagger-logging/#!/filter/DeleteFilterConfigs)</td>
+</tr><tr>
+<td>Update a log filtering configuration.</td>
+<td>[ibmcloud ks logging-filter-update](cs_cli_reference.html#cs_log_filter_update)</td>
+<td>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.bluemix.net/swagger-logging/#!/filter/UpdateFilterConfig)</td>
+</tr>
+</tbody>
+</table>
+
+### Operator actions
+{: #operator-actions}
+
+The **Operator** IAM platform role includes the permissions that are granted by **Viewer**, plus the following:
+
+<table>
+<caption></caption>
+<thead>
+<th>Cluster management action</th>
+<th>CLI command</th>
+<th>API call</th>
+</thead>
+<tbody>
+<tr><td>Refresh the Kubernetes master.
+</td><td>[ibmcloud ks apiserver-refresh](cs_cli_reference.html#cs_apiserver_refresh)</td>
+<td>[PUT /v1/clusters/{idOrName}/masters](https://containers.bluemix.net/swagger-api/#!/clusters/HandleMasterAPIServer)</td>
+<td>IAM platform: Operator <br> IAM service: Manager for all namespaces</td>
+</tr><tr>
 <td>Add a subnet to a cluster.
 </td><td>[ibmcloud ks cluster-subnet-add](cs_cli_reference.html#cs_cluster_subnet_add)</td>
 <td>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.bluemix.net/swagger-api/#!/clusters/AddClusterSubnet)</td>

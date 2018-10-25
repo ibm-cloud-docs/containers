@@ -56,14 +56,6 @@ In the following image you can see the location of the sources that you can conf
     * `/var/log/kube-proxy.log`
     * `/var/log/event-exporter/1..log`
 
-6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
-
-7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](cs_ingress_health.html#ingress_logs).</br>**Paths**:
-    * `/var/log/alb/ids/*.log`
-    * `/var/log/alb/ids/*.err`
-    * `/var/log/alb/customerlogs/*.log`
-    * `/var/log/alb/customerlogs/*.err`
-
 </br>
 
 **What configuration options do I have?**
@@ -83,7 +75,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
