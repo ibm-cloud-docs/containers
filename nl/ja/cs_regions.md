@@ -173,7 +173,7 @@ API コマンドの資料を参照するには、[https://containers.bluemix.net
       <td>中欧</td>
       <td>フランクフルト: fra02、fra04、fra05</td>
       <td><p>アムステルダム: ams03</p>
-      <td><p>ミラノ: mil01</p>
+      <p>ミラノ: mil01</p>
       <p>オスロ: osl01</p>
       <p>パリ: par01</p>
       </td>
