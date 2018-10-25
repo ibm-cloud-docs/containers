@@ -174,7 +174,7 @@ Le zone sono data center fisici che sono disponibili in una regione {{site.data.
       <td>Europa Centrale</td>
       <td>Francoforte: fra02, fra04, fra05</td>
       <td><p>Amsterdam: ams03</p>
-      <td><p>Milano: mil01</p>
+      <p>Milano: mil01</p>
       <p>Oslo: osl01</p>
       <p>Parigi: par01</p>
       </td>
