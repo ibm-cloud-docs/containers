@@ -26,7 +26,7 @@ lastupdated: "2018-10-10"
 
 **注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
 
-![{{site.data.keyword.containerlong_notm}} 区域和专区](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 区域和专区](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 区域和专区_
 
