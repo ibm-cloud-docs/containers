@@ -24,7 +24,7 @@ Une région est un emplacement géographique spécifique dans lequel vous pouvez
 
 **Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
 
-![Régions et zones {{site.data.keyword.containerlong_notm}}](/images/regions-mz.png)
+![Régions et zones {{site.data.keyword.containerlong_notm}}](images/regions-mz.png)
 
 _Régions et zones {{site.data.keyword.containerlong_notm}}_
 
