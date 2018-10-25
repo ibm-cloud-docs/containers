@@ -24,7 +24,7 @@ Eine Region ist ein bestimmter Standort, an dem Sie Apps, Services und andere {{
 
 **Hinweis**: Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 
-![{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen_
 
