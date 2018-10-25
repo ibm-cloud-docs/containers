@@ -172,7 +172,7 @@ Zonas são data centers físicos que estão disponíveis em uma região do {{sit
       <td>União Europeia Central</td>
       <td>Frankfurt: fra02, fra04, fra05</td>
       <td><p>Amsterdã: ams03</p>
-      <td><p>Milão: mil01</p>
+      <p>Milão: mil01</p>
       <p>Oslo: osl01</p>
       <p>Paris: par01</p>
       </td>
