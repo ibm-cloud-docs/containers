@@ -24,7 +24,7 @@ Una regione è una specifica ubicazione geografica in cui puoi distribuire appli
 
 **Nota**: puoi creare dei cluster standard in ogni regione {{site.data.keyword.containerlong_notm}} supportata. I cluster gratuiti sono disponibili solo in regioni selezionate.
 
-![{{site.data.keyword.containerlong_notm}} - regioni e zone](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} - regioni e zone](images/regions-mz.png)
 
 _Regioni e zone {{site.data.keyword.containerlong_notm}}_
 
