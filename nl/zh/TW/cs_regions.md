@@ -25,7 +25,7 @@ lastupdated: "2018-10-10"
 
 **附註**：您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 
-![{{site.data.keyword.containerlong_notm}} 地區及區域](/images/regions-mz.png)
+![{{site.data.keyword.containerlong_notm}} 地區及區域](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 地區及區域_
 
