@@ -135,12 +135,31 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 To install and configure the 3.1.1 Calico CLI:
 
-1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
+1. Download the Calico configuration file to run all Calico commands.
+    ```
+    ibmcloud ks cluster-config <cluster_name_or_ID> --network
+    ```
+    {: pre}
+
+2. For OSX and Linux users, complete the following steps.
+    1. Create the `/etc/calico` directory.
+        ```
+        sudo mkdir /etc/calico
+        ```
+        {: pre}
+
+    2. Move the Calico configuration file that you previously downloaded to the directory.
+        ```
+        sudo mv /Users/<user>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/calicoctl.cfg /etc/calico
+        ```
+        {: pre}
+
+2. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
 
     If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
     {: tip}
 
-2. For OSX and Linux users, complete the following steps.
+3. For OSX and Linux users, complete the following steps.
     1. Move the executable file to the _/usr/local/bin_ directory.
         - Linux:
 
@@ -163,117 +182,9 @@ To install and configure the 3.1.1 Calico CLI:
         ```
         {: pre}
 
-3. Verify that the `calico` commands ran properly by checking the Calico CLI client version.
-
-    ```
-    calicoctl version
-    ```
-    {: pre}
-
 4. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](cs_firewall.html#firewall).
 
-5. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
-
-  ```
-  sudo mkdir -p /etc/calico/
-  ```
-  {: pre}
-
-6. Create a `calicoctl.cfg` file.
-    - Linux and OS X:
-
-      ```
-      sudo vi /etc/calico/calicoctl.cfg
-      ```
-      {: pre}
-
-    - Windows: Create the file with a text editor.
-
-7. Enter the following information in the <code>calicoctl.cfg</code> file.
-
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: CalicoAPIConfig
-    metadata:
-    spec:
-        datastoreType: etcdv3
-        etcdEndpoints: <ETCD_URL>
-        etcdKeyFile: <CERTS_DIR>/admin-key.pem
-        etcdCertFile: <CERTS_DIR>/admin.pem
-        etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-    ```
-    {: codeblock}
-
-    1. Retrieve the `<ETCD_URL>`.
-
-      - Linux and OS X:
-
-          ```
-          kubectl get cm -n kube-system calico-config -o yaml | grep "etcd_endpoints:" | awk '{ print $2 }'
-          ```
-          {: pre}
-
-          Example output:
-
-          ```
-          https://169.xx.xxx.xxx:30000
-          ```
-          {: screen}
-
-      - Windows:
-        <ol>
-        <li>Get the calico configuration values from the configmap. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-        <li>In the `data` section, locate the etcd_endpoints value. Example: <code>https://169.xx.xxx.xxx:30000</code>
-        </ol>
-
-    2. Retrieve the `<CERTS_DIR>`, the directory that the Kubernetes certificates are downloaded in.
-
-        - Linux and OS X:
-
-          ```
-          dirname $KUBECONFIG
-          ```
-          {: pre}
-
-          Example output:
-
-          ```
-          /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
-          ```
-          {: screen}
-
-        - Windows:
-
-          ```
-          ECHO %KUBECONFIG%
-          ```
-          {: pre}
-
-            Output example:
-
-          ```
-          C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-        **Note**: To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
-
-    3. Retrieve the `ca-*pem_file`.
-
-        - Linux and OS X:
-
-          ```
-          ls `dirname $KUBECONFIG` | grep "ca-"
-          ```
-          {: pre}
-
-        - Windows:
-          <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
-          <li> Locate the <code>ca-*pem_file</code> file.</ol>
-
-8. Save the file, and make sure you are in the directory where the file is located.
-
-9. Verify that the Calico configuration is working correctly.
+5. Verify that the Calico configuration is working correctly.
 
     - Linux and OS X:
 
@@ -282,7 +193,7 @@ To install and configure the 3.1.1 Calico CLI:
       ```
       {: pre}
 
-    - Windows:
+    - Windows: Use the `--config` flag to point to the network config file that you got in step 1. Include this flag each time you run a `calicoctl` command.
 
       ```
       calicoctl get nodes --config=filepath/calicoctl.cfg
@@ -320,28 +231,24 @@ To install and configure the 1.6.3 Calico CLI:
 2. For OSX and Linux users, complete the following steps.
     1. Move the executable file to the _/usr/local/bin_ directory.
         - Linux:
-
           ```
           mv filepath/calicoctl /usr/local/bin/calicoctl
           ```
           {: pre}
 
         - OS X:
-
           ```
           mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
           ```
           {: pre}
 
     2. Make the file an executable file.
-
         ```
         chmod +x /usr/local/bin/calicoctl
         ```
         {: pre}
 
-3. Verify that the `calico` commands ran properly by checking the Calico CLI client version.
-
+3. Verify that `calicoctl` commands run properly by checking the Calico CLI client version.
     ```
     calicoctl version
     ```
@@ -357,7 +264,6 @@ To install and configure the 1.6.3 Calico CLI:
 
 6. Create a `calicoctl.cfg` file.
     - Linux and OS X:
-
       ```
       sudo vi /etc/calico/calicoctl.cfg
       ```
@@ -372,60 +278,43 @@ To install and configure the 1.6.3 Calico CLI:
     kind: calicoApiConfig
     metadata:
     spec:
-        etcdEndpoints: <ETCD_URL>
+        etcdEndpoints: https://<ETCD_HOST>:<ETCD_PORT>
         etcdKeyFile: <CERTS_DIR>/admin-key.pem
         etcdCertFile: <CERTS_DIR>/admin.pem
         etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
     ```
     {: codeblock}
 
-    1. Retrieve the `<ETCD_URL>`.
+    1. Retrieve the `<ETCD_HOST>` and `<ETCD_PORT>`.
+        1. Get the Calico configuration values from the `cluster-info` configmap.
+            ```
+            kubectl get cm -n kube-system cluster-info -o yaml
+            ```
+            {: pre}
 
-      - Linux and OS X:
-
-          ```
-          kubectl get cm -n kube-system calico-config -o yaml | grep "etcd_endpoints:" | awk '{ print $2 }'
-          ```
-          {: pre}
-
-      - Output example:
-
-          ```
-          https://169.xx.xxx.xxx:30001
-          ```
-          {: screen}
-
-      - Windows:
-        <ol>
-        <li>Get the calico configuration values from the configmap. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-        <li>In the `data` section, locate the etcd_endpoints value. Example: <code>https://169.xx.xxx.xxx:30001</code>
-        </ol>
+        2. In the `data` section, locate the `etcd_host` and `etcd_port` values.
 
     2. Retrieve the `<CERTS_DIR>`, the directory that the Kubernetes certificates are downloaded in.
 
         - Linux and OS X:
-
           ```
           dirname $KUBECONFIG
           ```
           {: pre}
 
           Example output:
-
           ```
           /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
           ```
           {: screen}
 
         - Windows:
-
           ```
           ECHO %KUBECONFIG%
           ```
           {: pre}
 
           Example output:
-
           ```
           C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
           ```
@@ -436,34 +325,35 @@ To install and configure the 1.6.3 Calico CLI:
     3. Retrieve the `ca-*pem_file`.
 
         - Linux and OS X:
-
           ```
           ls `dirname $KUBECONFIG` | grep "ca-"
           ```
           {: pre}
 
         - Windows:
-          <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
-          <li> Locate the <code>ca-*pem_file</code> file.</ol>
+          1. Open the directory that you retrieved in the last step.
+              ```
+              C:\Users\<user>\.bluemix\plugins\container-service\<cluster_name>-admin\
+              ```
+              {: pre}
+
+          2. Locate the `ca-*pem_file` file.
 
     4. Verify that the Calico configuration is working correctly.
 
         - Linux and OS X:
-
           ```
           calicoctl get nodes
           ```
           {: pre}
 
-        - Windows:
-
+        - Windows: Use the `--config` flag to point to the network config file that you created. Include this flag each time you run a `calicoctl` command.
           ```
           calicoctl get nodes --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
           Output:
-
           ```
           NAME
           kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
@@ -471,8 +361,6 @@ To install and configure the 1.6.3 Calico CLI:
           kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
           ```
           {: screen}
-
-          **Important**: Windows and OS X users must include the `--config=filepath/calicoctl.cfg` flag every time you run a `calicoctl` command.
 
 <br />
 
