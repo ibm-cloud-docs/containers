@@ -2311,7 +2311,7 @@ Delete a logging filter. You can use this command to remove a logging filter tha
     <dd>The ID of the log filter to delete.</dd>
 
   <dt><code>--all</code></dt>
-    <dd>Delete all of your log forwarding filters. This value is optional.</dd
+    <dd>Delete all of your log forwarding filters. This value is optional.</dd>
 
   <dt><code>--force-update</code></dt>
     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
