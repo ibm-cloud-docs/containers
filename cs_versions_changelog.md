@@ -360,6 +360,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+
+
 ### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
 
@@ -883,6 +885,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #19_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for master fix pack 1.9.10_1530 released 15 October 2018
 {: #1910_1530}
