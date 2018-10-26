@@ -359,7 +359,7 @@ Consider the following scenario to understand how clusters might become orphaned
 2.  Check which infrastructure account was used to provision the cluster.
     1.  In the **Worker Nodes** tab, select a worker node and note its **ID**.
     2.  Open the expandable menu and click **Infrastructure**.
-    3.  From the infrastructure men, click **Devices > Device List**.
+    3.  From the infrastructure menu, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
 3.  Use the `ibmcloud ks credentials-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
