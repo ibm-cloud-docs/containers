@@ -172,6 +172,8 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
+
+
 ### Migrating to `containerd` as the container runtime
 {: #containerd}
 
