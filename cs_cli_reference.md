@@ -651,7 +651,7 @@ ibmcloud ks messages
 
 
 
-### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [-s] [--yaml]
+### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-s] [--yaml]
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
@@ -666,6 +666,9 @@ After logging in, download Kubernetes configuration data and certificates to con
 
    <dt><code>--admin</code></dt>
    <dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to re-authenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
+
+   <dt><code>--network</code></dt>
+   <dd>Download the Calico configuration file, TLS certificates, and permission files required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: To get the export command for the downloaded Kubernetes configuration data and certificates, you must run this command without this flag.</dd>
 
    <dt><code>--export</code></dt>
    <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
@@ -2311,7 +2314,7 @@ Delete a logging filter. You can use this command to remove a logging filter tha
     <dd>The ID of the log filter to delete.</dd>
 
   <dt><code>--all</code></dt>
-    <dd>Delete all of your log forwarding filters. This value is optional.</dd
+    <dd>Delete all of your log forwarding filters. This value is optional.</dd>
 
   <dt><code>--force-update</code></dt>
     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>

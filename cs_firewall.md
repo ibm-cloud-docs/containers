@@ -167,7 +167,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 2. Get the port for ETCD.
 
   ```
-  kubectl get cm -n kube-system calico-config -o yaml | grep etcd_endpoints
+  kubectl get cm -n kube-system cluster-info -o yaml | grep etcd_host
   ```
   {: pre}
 

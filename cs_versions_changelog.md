@@ -523,6 +523,14 @@ Also, now when you update the cluster master, the default IBM file storage class
 <caption>Changes since version 1.10.5_1519</caption>
 <thead>
 <tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>Calico</td>
 <td>v3.1.3</td>
 <td>v3.2.1</td>
@@ -1014,6 +1022,14 @@ Also, now when you update the cluster master, the default IBM file storage class
 <table summary="Changes that were made since version 1.9.9_1522">
 <caption>Changes since version 1.9.9_1522</caption>
 <thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.9.9-167</td>

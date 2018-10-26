@@ -456,6 +456,20 @@ Choose a machine type with the right storage configuration to support your workl
 </thead>
 <tbody>
 <tr>
+<td><strong>Bare metal with SDS, ms2c.4x32.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal with SDS, ms2c.16x64.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
 <td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 1.9TB SSD</td>

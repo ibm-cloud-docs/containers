@@ -32,7 +32,7 @@ Access policies determine the level of access that users in your {{site.data.key
 As you develop your plan to manage user access, consider the following general steps:
 1.  [Pick the right access policy and role for your users](#access_roles)
 2.  [Assign access roles to individual or groups of users in IAM](#iam_individuals_groups)
-3.  [Scope user access to instances or resource groups](#resource_groups)
+3.  [Scope user access to cluster instances or resource groups](#resource_groups)
 
 After you understand how roles, users, and resources in your account can be managed, check out [Setting up access to your cluster](#access-checklist) for a checklist of how to configure access.
 
@@ -48,12 +48,13 @@ To see the specific {{site.data.keyword.containerlong_notm}} permissions by each
 {: tip}
 
 <dl>
+
 <dt><a href="#platform">IAM platform</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} uses {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles to grant users access to the cluster. IAM platform roles determine the actions that users can perform on a cluster. You can set the policies for these roles by region. Every user who is assigned an IAM platform role is also automatically assigned a corresponding RBAC role in the `default` Kubernetes namespace. Additionally, IAM platform roles authorize you to perform infrastructure actions on the cluster, but do not grant access to the IBM Cloud infrastructure (SoftLayer) resources. Access to the IBM Cloud infrastructure (SoftLayer) resources is determined by the [API key that is set for the region](#api_key).</br></br>
 Example actions that are permitted by IAM platform roles are creating or removing clusters, binding services to a cluster, or adding extra worker nodes.</dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>In Kubernetes, role-based access control (RBAC) is a way of securing the resources inside your cluster. RBAC roles determine the Kubernetes actions that users can perform on those resources. Every user who is assigned an IAM platform role is automatically assigned a corresponding RBAC cluster role in the `default` Kubernetes. This RBAC cluster role is applied either in the default namespace or in all namespaces, depending on the IAM platform role that you choose.</br></br>
-Example actions that are permitted by RBAC roles are reating objects such as pods or reading pod logs.</dd>
+Example actions that are permitted by RBAC roles are creating objects such as pods or reading pod logs.</dd>
 <dt><a href="#api_key">Infrastructure</a></dt>
 <dd>Infrastructure roles enable access to your IBM Cloud infrastructure (SoftLayer) resources. Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} do not need infrastructure roles as the API key is shared for all users within the region. Instead, IAM platform roles determine the infrastructure actions that users are allowed to perform. If you don't set up the API key with full <strong>Super User</strong> infrastructure or you need to grant specific device access to users, you can [customize infrastructure permissions](#infra_access). </br></br>
 Example actions that are permitted by infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.</dd>
@@ -65,17 +66,17 @@ Example actions that are permitted by Cloud Foundry roles are creating a new Clo
 ### Assign access roles to individual or groups of users in IAM
 {: #iam_individuals_groups}
 
-When you set IAM platform management policies, you can assign roles to an individual user or to a group of users.
+When you set IAM policies, you can assign roles to an individual user or to a group of users.
 {: shortdesc}
 
 <dl>
 <dt>Individual users</dt>
-<dd>You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the permissions that they need to complete their tasks. You can assign more than one IAM platform role to each user.</dd>
+<dd>You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the permissions that they need to complete their tasks. You can assign more than one IAM role to each user.</dd>
 <dt>Multiple users in an access group</dt>
-<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one IAM platform role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.</dd>
+<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.</dd>
 </dl>
 
-IAM platform roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
+IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
 {: tip}
 
 You must also specify whether users have access to one cluster in a resource group, all clusters in a resource group, or all clusters in all resource groups in your account.
@@ -83,10 +84,10 @@ You must also specify whether users have access to one cluster in a resource gro
 ### Scope user access to cluster instances or resource groups
 {: #resource_groups}
 
-In IAM, you can assign user access roles to resource instances or to resource groups.
+In IAM, you can assign user access roles to resource instances or resource groups.
 {: shortdesc}
 
-When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. Resource instances belong to the default resource group if you do not specify a different resource group when you create the resource. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
+When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
 
 <dl>
 <dt>Resource instance</dt>
@@ -114,8 +115,8 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 After you [understand how roles, users, and resources in your account](#access_policies) can be managed, use the following checklist to configure user access in your cluster.
 {: shortdesc}
 
-1. [Set the API key](#api_key) for all the regions that you want to create clusters in.
-2. Invite users to your account and [assign them IAM platform roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
+1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
+2. Invite users to your account and [assign them IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
 3. To allow users to bind services to the cluster or to view logs that are forwarded from cluster logging configurations, [grant users Cloud Foundry roles](/docs/iam/mngcf.html) for the org and space that the services are deployed to or where logs are collected.
 4. If you use Kubernetes namespaces to isolate resources within the cluster, [copy the Kubernetes RBAC role bindings for the **Viewer** and **Editor** IAM platform roles to other namespaces](#role-binding).
 5. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](#rbac).

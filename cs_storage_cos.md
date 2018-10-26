@@ -121,7 +121,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    <td>Enter the secret access key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The secret access key must be base64 encoded. If you want to use OAuth2 authentication, specify the <code>data/api-key</code> instead.</td>
    </tr>
    <tr>
-   <td><code>data.service-instance-id</td>
+   <td><code>data.service-instance-id</code></td>
    <td>Enter the GUID of your {{site.data.keyword.cos_full_notm}} service instance that you retrieved earlier. The GUID must be base64 encoded. </td>
    </tr>
    </tbody>
@@ -640,7 +640,7 @@ To remove the plug-in:
    <td>The maximum number of records that are kept in the {{site.data.keyword.cos_full_notm}} metadata cache. Every record can take up to 0.5 kilobytes. All storage classes set the maximum number of records to 100000 by default. </td>
    </tr>
    <tr>
-   <td><code>ibm.io/tls-cipher-suite</td>
+   <td><code>ibm.io/tls-cipher-suite</code></td>
    <td>The TLS cipher suite that must be used when a connection to {{site.data.keyword.cos_full_notm}} is established via the HTTPS endpoint. The value for the cipher suite must follow the [OpenSSL format ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). All storage classes use the <strong>AESGCM</strong> cipher suite by default.  </td>
    </tr>
    </tbody>
@@ -735,7 +735,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    <td>Enter the name of the secret that holds the {{site.data.keyword.cos_full_notm}} credentials that you created earlier. </td>
    </tr>
    <tr>
-   <td><code>resources.requests.storage</td>
+   <td><code>resources.requests.storage</code></td>
    <td>A fictitious size for your {{site.data.keyword.cos_full_notm}} bucket in gigabytes. The size is required by Kubernetes, but not respected in {{site.data.keyword.cos_full_notm}}. You can enter any size that you want. The actual space that you use in {{site.data.keyword.cos_full_notm}} might be different and is billed based on the [pricing table ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api). </td>
    </tr>
    </tbody>
@@ -1069,7 +1069,7 @@ To deploy a stateful set that uses object storage:
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-delete-bucket</code></td>
-    <td>Choose between the following options: <ul><li><strong>true: </strong>Your data, the bucket, and the PV is automatically removed when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance remains and is not deleted. If you choose to set this option to true, then you must set <code>ibm.io/auto-create-bucket: true</code> and <code>ibm.io/bucket: ""</code> so that your bucket is automatically created with a name with the format <code>tmp-s3fs-xxxx<code>. </li><li><strong>false: </strong>When you delete the PVC, the PV is deleted automatically, but your data and the bucket in your {{site.data.keyword.cos_full_notm}} service instance remain. To access your data, you must create a new PVC with the name of your existing bucket.</li></ul></td>
+    <td>Choose between the following options: <ul><li><strong>true: </strong>Your data, the bucket, and the PV is automatically removed when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance remains and is not deleted. If you choose to set this option to true, then you must set <code>ibm.io/auto-create-bucket: true</code> and <code>ibm.io/bucket: ""</code> so that your bucket is automatically created with a name with the format <code>tmp-s3fs-xxxx</code>. </li><li><strong>false: </strong>When you delete the PVC, the PV is deleted automatically, but your data and the bucket in your {{site.data.keyword.cos_full_notm}} service instance remain. To access your data, you must create a new PVC with the name of your existing bucket.</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/bucket</code></td>
