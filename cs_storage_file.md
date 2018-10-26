@@ -237,7 +237,7 @@ To add file storage:
        </tr>
        <tr>
        <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
-       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code>. <p><strong>Tip:</strong> If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code>. </br></br><strong>Tip:</strong> If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
