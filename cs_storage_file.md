@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-10-26"
 
 ---
 
@@ -31,6 +31,10 @@ lastupdated: "2018-10-25"
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
 **Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+To decide on a storage configuration: 
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -167,8 +171,6 @@ Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
-  **Note:** If you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, follow the steps in this topic to provision storage by using your customized storage class.
-
 Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information.
 {: tip}
 
@@ -188,6 +190,8 @@ To add file storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
          labels:
            billingType: "monthly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -209,6 +213,8 @@ To add file storage:
            volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
          labels:
            billingType: "hourly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -230,12 +236,21 @@ To add file storage:
        <td>Enter the name of the PVC.</td>
        </tr>
        <tr>
-       <td><code>metadata.annotations</code></td>
-       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
+       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code>. </br></br><strong>Tip:</strong> If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
           <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". If you do not specify a billing type, the storage is provisioned with an hourly billing type. </td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.region</code></td>
+       <td>Optional: Specify the region where you want to provision your file storage. To connect to your storage, create the storage in the same region that your cluster is in. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br></br><strong>Tip: </strong>Instead of specifying the region and zone in the PVC, you can also specify these values in a [customized storage class](#multizone_yaml). Then, use your storage class in the <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> section of your PVC. If the region and zone are specified in the storage class and the PVC, the values in the PVC take precedence. </td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.zone</code></td>
+       <td>Optional: Specify the zone where you want to provision your file storage. To use your storage in an app, create the storage in the same zone that your worker node is in. To view the zone of your worker node, run <code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> and review the <strong>Zone</strong> column of your CLI output. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. </br></br><strong>Tip: </strong>Instead of specifying the region and zone in the PVC, you can also specify these values in a [customized storage class](#multizone_yaml). Then, use your storage class in the <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> section of your PVC. If the region and zone are specified in the storage class and the PVC, the values in the PVC take precedence.
+</td>
        </tr>
        <tr>
        <td><code>spec.accessMode</code></td>
@@ -403,7 +418,9 @@ To add file storage:
 
 If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
 
-Before you begin, make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
+Before you begin: 
+- Make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Preparing your existing storage.
 

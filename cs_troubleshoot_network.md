@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-10-26"
 
 ---
 
@@ -291,7 +291,7 @@ If you complete one of the above options but the `keepalived` pods are still not
 
 3. Describe each `keepalived` pod and look for the **Events** section. Address any error or warning messages that are listed.
     ```
-    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
+    kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
 

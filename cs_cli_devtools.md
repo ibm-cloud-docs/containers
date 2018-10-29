@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -168,8 +168,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +383,7 @@ When a different user performs an action in this region that requires interactio
 
 If you find that you need to update the API key that is stored for a region, you can do so by running the [ibmcloud ks api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
-**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credentials-set](#cs_credentials_set) command.
+**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credential-set](#cs_credentials_set) command.
 
 <strong>Command options</strong>:
 
@@ -1651,7 +1651,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ## Infrastructure commands
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Set IBM Cloud infrastructure (SoftLayer) account credentials for your {{site.data.keyword.containerlong_notm}} account.
@@ -1707,12 +1707,12 @@ You cannot set multiple credentials for one {{site.data.keyword.containerlong_no
 **Example**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Remove IBM Cloud infrastructure (SoftLayer) account credentials from your {{site.data.keyword.containerlong_notm}} account.
@@ -1729,7 +1729,7 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 **Example**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 

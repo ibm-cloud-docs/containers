@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -41,6 +41,30 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+
+
+### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
+{: #1113_1531}
+
+<table summary="Changes that were made since version 1.11.3_1525">
+<caption>Changes since version 1.11.3_1525</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS interrupt handling</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Replaced the interrupt request (IRQ) system daemon with a more performant interrupt handler.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
 {: #1113_1527}
@@ -359,6 +383,29 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #110_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018
+{: #1108_1528}
+
+<table summary="Changes that were made since version 1.10.8_1527">
+<caption>Changes since version 1.10.8_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS interrupt handling</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Replaced the interrupt request (IRQ) system daemon with a more performant interrupt handler.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
@@ -883,6 +930,29 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #19_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018
+{: #1910_1531}
+
+<table summary="Changes that were made since version 1.9.10_1530">
+<caption>Changes since version 1.9.10_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS interrupt handling</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Replaced the interrupt request (IRQ) system daemon with a more performant interrupt handler.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.9.10_1530 released 15 October 2018
 {: #1910_1530}

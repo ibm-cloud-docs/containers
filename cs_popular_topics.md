@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -23,6 +23,8 @@ lastupdated: "2018-10-25"
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+
 
 ## Popular topics in October 2018
 {: #oct18}
