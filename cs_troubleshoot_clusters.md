@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -341,7 +341,7 @@ The cluster might be provisioned in an IBM Cloud infrastructure (SoftLayer) acco
 Consider the following scenario to understand how clusters might become orphaned.
 1.  You have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account.
 2.  You create a cluster named `Cluster1`. The worker nodes and other infrastructure resources are provisioned into the infrastructure account that comes with your Pay-As-You-Go account.
-3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure (SoftLayer) account. You use the `ibmcloud ks credentials-set` command to change the IBM Cloud infrastructure (SoftLayer) credentials to use your team account.
+3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure (SoftLayer) account. You use the `ibmcloud ks credential-set` command to change the IBM Cloud infrastructure (SoftLayer) credentials to use your team account.
 4.  You create another cluster named `Cluster2`. The worker nodes and other infrastructure resources are provisioned into the team infrastructure account.
 5.  You notice that `Cluster1` needs a worker node update, a worker node reload, or you just want to clean it up by deleting it. However, because `Cluster1` was provisioned into a different infrastructure account, you cannot modify its infrastructure resources. `Cluster1` is orphaned.
 6.  You follow the resolution steps in the following section, but do not set your infrastructure credentials back to your team account. You can delete `Cluster1`, but now `Cluster2` is orphaned.
@@ -362,12 +362,12 @@ Consider the following scenario to understand how clusters might become orphaned
     3.  From the infrastructure menu, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
-3.  Use the `ibmcloud ks credentials-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
+3.  Use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
     **Note**: If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support ticket to remove the orphaned cluster.
 4.  [Delete the cluster](cs_clusters.html#remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
-    * To set credentials to a different infrastructure account, use the `ibmcloud ks credentials-set` [command](cs_cli_reference.html#cs_credentials_set).
-    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credentials-unset` [command](cs_cli_reference.html#cs_credentials_unset).
+    * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set).
+    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset` [command](cs_cli_reference.html#cs_credentials_unset).
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -51,6 +51,20 @@ In the following image you can see the location of the sources that you can conf
 
 3. `application`: Information about events that occur at the application level. This could be a notification that an event has taken place such as a successful login, a warning about storage, or other operations that can be performed at the app level.</br>**Paths**: You can set the paths that your logs are forwarded to. However, in order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink. Example: If the specified path is `/usr/local/spark/work/app-0546/0/stderr` but the logs actually go to `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, then the logs cannot be read.
 
+4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.</br>**Paths**:
+    * `/var/log/ibmc-s3fs.log`
+    * `/var/log/ibmc-block.log`
+    * `/var/lib/docker/containers/ibm-file-plugin.log`
+    * `/var/lib/docker/containers/ibmcloud-block-storage.log`
+    * `/var/lib/docker/containers/ibmcloud-object-storage.log`
+
+  **Pods**:
+    * `portworx-***`
+    * `ibmcloud-block-storage-attacher-***`
+    * `ibmcloud-block-storage-driver-***`
+    * `ibmcloud-block-storage-plugin-***`
+    * `ibmcloud-object-storage-plugin-***`
+
 5. `kubernetes`: Information from the kubelet, the kube-proxy, and other Kubernetes events that happen in the kube-system namespace of the worker node.</br>**Paths**:
     * `/var/log/kubelet.log`
     * `/var/log/kube-proxy.log`
@@ -83,7 +97,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code>, and <code>kube-audit</code>. This argument supports a comma separated list of log sources to apply the configuration for. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
