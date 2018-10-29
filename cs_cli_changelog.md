@@ -36,6 +36,10 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.621</td>
+<td>30 Oct 2018</td>
+<td><ul>
 <li>Adds the [<code>ibmcloud ks credential-get</code> command](cs_cli_reference.html#cs_credential_get).</li>
 <li>Adds support for the <code>storage</code> log source to all cluster logging commands. For more information, see <a href="cs_health.html#logging">Understanding cluster and app log forwarding</a>.</li>
 <li>Adds the `--network` flag to the [<code>ibmcloud ks cluster-config</code> command](cs_cli_reference.html#cs_cluster_config), which downloads the Calico configuration file to run all Calico commands.</li>
