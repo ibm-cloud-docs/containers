@@ -118,6 +118,15 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </thead>
 <tbody>
 <tr>
+<td>Cluster master high availability (HA) configuration</td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Migrating to highly available cluster masters](#ha-masters). These migration actions apply:<ul>
+<li>If you have a firewall or custom Calico network policies.</li>
+<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you used the cluster master IP address for in-cluster access to the master.</li>
+<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+</tr>
+<tr>
 <td>`containerd` new Kubernetes container runtime</td>
 <td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Migrating to `containerd` as the container runtime](#containerd).</td>
 </tr>
@@ -172,7 +181,135 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
+### Migrating to highly available cluster masters
+{: #ha-masters}
 
+For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
+{: shortdesc}
+
+Review the following situations in which you must make changes to take full advantage of HA master configuration:
+* If you have a firewall or custom Calico network policies.
+* If you are using host ports `2040` or `2041` on your worker nodes.
+* If you used the cluster master IP address for in-cluster access to the master.
+* If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.
+* If you use Kubernetes or Calico network policies to control pod egress access to the master.
+
+**Updating your firewall or custom Calico host network policies for HA masters**:</br>
+{: #ha-firewall}
+If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound).
+
+**Reserving host ports `2040` and `2041` on your worker nodes**:</br>
+{: #ha-ports}
+To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
+* Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
+* Update any pods with `hostNetwork` set to to `true` that listen on ports `2040` or `2041` to use different ports.
+
+To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
+
+```
+kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+```
+{: pre}
+
+**Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
+{: #ha-incluster}
+To access the cluster master in an HA configuration from within the cluster, use one of the following:
+* The `kubernetes` service cluster IP address, which by default is: `https://172.21.0.1`
+* The `kubernetes` service domain name, which by default is: `https://kubernetes.default.svc.cluster.local` 
+
+If you previously used the cluster master IP address, this method continues to work. However, for improved availability, update to use the `kubernetes` service cluster IP address or domain name.
+
+**Configuring Calico for out-of-cluster access to master with HA configuration**:</br>
+{: #ha-outofcluster}
+The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works. 
+
+Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
+
+**Updating Kubernetes or Calico network policies**:</br>
+{: #ha-networkpolicies}
+You need to take additional actions if you use [Kubernetes or Calico network policies](cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
+*  The Kubernetes service cluster IP, which you can get by running `kubectl get service kubernetes -o yaml | grep clusterIP`.
+*  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
+*  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
+
+**Note**: The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Get your cluster master IP address.
+    ```
+    kubectl cluster-info | grep Kubernetes
+    ```
+    {: pre}
+
+2.  Search your Kubernetes network policies for impacts. If no YAML is returned, your cluster is not impacted and you do not need to make additional changes.
+    ```
+    kubectl get networkpolicies --all-namespaces -o yaml | grep <cluster-master-ip>
+    ```
+    {: pre}
+
+3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name or cluster master IP address.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service
+      # domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1` instead of the cluster master IP address. For example, the previous network policy example changes to the following:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 172.20.0.1/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+6.  Apply the revised network policy to your cluster.
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
 
 ### Migrating to `containerd` as the container runtime
 {: #containerd}
