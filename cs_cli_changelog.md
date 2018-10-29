@@ -41,7 +41,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <li>Adds the `--network` flag to the [<code>ibmcloud ks cluster-config</code> command](cs_cli_reference.html#cs_cluster_config), which downloads the Calico configuration file to run all Calico commands.</li>
 <li>Minor bug fixes and refactoring</li>
 </td>
-</tr></staging>
+</tr>
 <tr>
 <td>0.1.593</td>
 <td>10 Oct 2018</td>
