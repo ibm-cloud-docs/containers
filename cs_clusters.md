@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-30"
 
 ---
 
@@ -77,22 +77,22 @@ The list is divided into two parts:
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-Before you begin, check out the steps you need to take to [prepare to create a cluster](#cluster_prepare).
-
 **To create a free cluster**
 
 You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
 
-1. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
+1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. Select a region in which to deploy your cluster. **Note**: You cannot create free clusters in the US East or AP North regions and corresponding zones.
+2. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
 
-3. Select the **Free** cluster plan.
+3. Select a region in which to deploy your cluster. **Note**: You cannot create free clusters in the US East or AP North regions and corresponding zones.
 
-4. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+4. Select the **Free** cluster plan.
+
+5. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
 
-5. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
+6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
 
     Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
     {: tip}
@@ -101,19 +101,21 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 **To create a standard cluster**
 
-1. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. Select a resource group in which to create your cluster.
+2. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+
+3. Select a resource group in which to create your cluster.
   **Note**:
     * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
     * Free clusters are automatically created in the default resource group.
     * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
 
-2. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
+4. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
-3. Select the **Standard** cluster plan. With a standard cluster you have access to features like multiple worker nodes for a highly available environment.
+5. Select the **Standard** cluster plan. With a standard cluster you have access to features like multiple worker nodes for a highly available environment.
 
-4. Enter your zone details.
+6. Enter your zone details.
 
     1. Select **Single zone** or **Multizone** availability. In a multizone cluster the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones. Your choices might be limited by region.
 
@@ -122,7 +124,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
     3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters.
         **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
 
-5. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
+7. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
 
     1. Select a type of hardware isolation. Virtual is billed hourly and bare metal is billed monthly.
 
@@ -139,11 +141,11 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
     3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. This means that if you have 2 zones and select 3 worker nodes, 6 nodes are provisioned, and 3 nodes live in each zone.
 
-6. Give your cluster a unique name. **Note**: Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
+8. Give your cluster a unique name. **Note**: Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
 
-7. Choose the Kubernetes API server version for the cluster master node.
+9. Choose the Kubernetes API server version for the cluster master node.
 
-8. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
+10. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
 
 **What's next?**
 
@@ -165,13 +167,13 @@ When the cluster is up and running, you can check out the following tasks:
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-Before you begin:
-* Check out the steps you need to take to [prepare to create a cluster](#cluster_prepare).
-* Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 
 To create a cluster:
 
-1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI.
+1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
+
+2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI.
 
     1.  Log in and enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
@@ -197,7 +199,7 @@ To create a cluster:
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
 
-3.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
+4.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
     1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in.
 
@@ -316,7 +318,7 @@ To create a cluster:
         </tr>
         </tbody></table>
 
-4.  Verify that the creation of the cluster was requested.
+5.  Verify that the creation of the cluster was requested.
 
     ```
     ibmcloud ks clusters
@@ -328,12 +330,12 @@ To create a cluster:
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
+    Name         ID                                   State      Created          Workers   Zone       Version
     my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8
     ```
     {: screen}
 
-5.  Check the status of the worker nodes.
+6.  Check the status of the worker nodes.
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
@@ -345,12 +347,12 @@ To create a cluster:
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01     1.10.8
     ```
     {: screen}
 
-6.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+7.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
@@ -385,7 +387,7 @@ To create a cluster:
         ```
         {: screen}
 
-7.  Launch your Kubernetes dashboard with the default port `8001`.
+8.  Launch your Kubernetes dashboard with the default port `8001`.
     1.  Set the proxy with the default port number.
 
         ```

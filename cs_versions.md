@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-30"
 
 ---
 
@@ -118,7 +118,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </thead>
 <tbody>
 <tr>
-<td>Cluster master high availability (HA) configuration</td>
+<td>Cluster master high availability (HA) configuration (preview)</td>
 <td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Migrating to highly available cluster masters](#ha-masters). These migration actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
@@ -181,7 +181,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
-### Migrating to highly available cluster masters
+### Migrating to highly available cluster masters (preview)
 {: #ha-masters}
 
 For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
