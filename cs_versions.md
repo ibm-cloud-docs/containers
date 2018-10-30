@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-30"
 
 ---
 
@@ -181,7 +181,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
-### Migrating to highly available cluster masters
+### Migrating to highly available cluster masters (preview)
 {: #ha-masters}
 
 For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
