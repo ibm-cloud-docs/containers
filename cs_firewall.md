@@ -342,7 +342,6 @@ Let your cluster access infrastructure resources and services from behind a fire
 6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges) of the zone that your cluster is in.
     - To find the zone of your cluster, run `ibmcloud ks clusters`.
     - Allow access to the IP range for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
-    - Note that you must add the `dal01` zone (data center) for the **Backend (private) Network**.
 
 <br />
 
