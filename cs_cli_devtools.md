@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-30"
 
 ---
 
@@ -896,21 +896,22 @@ View information about a cluster in your organization.
 **Example output**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.11.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
 
   Addons
   Name                   Enabled
@@ -3004,4 +3005,3 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  
