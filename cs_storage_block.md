@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-10-31"
 
 ---
 
@@ -283,8 +283,8 @@ Every storage class specifies the type of block storage that you provision, incl
    {: tip}
 
 3. Choose the type of block storage that you want to provision.
-   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
-   - **Custom storage class:** This storage class provisions [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage). With performance storage, you have more control over the size of the storage and the IOPS.
+   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
+   - **Custom storage class:** This storage class provisions [Performance storage](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance). With performance storage, you have more control over the size of the storage and the IOPS.
 
 4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
@@ -1123,7 +1123,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1169,7 +1169,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1214,7 +1214,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1259,7 +1259,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[Performance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>File system</td>
