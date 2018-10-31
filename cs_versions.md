@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-30"
+lastupdated: "2018-10-31"
 
 ---
 
@@ -187,6 +187,9 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
 {: shortdesc}
 
+To give you time to take the migration steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+{: tip}
+
 Review the following situations in which you must make changes to take full advantage of HA master configuration:
 * If you have a firewall or custom Calico network policies.
 * If you are using host ports `2040` or `2041` on your worker nodes.
@@ -277,7 +280,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1` instead of the cluster master IP address. For example, the previous network policy example changes to the following:
+4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1`. For now, keep the cluster master IP address. For example, the previous network policy example changes to the following:
     ```
     apiVersion: extensions/v1beta1
     kind: NetworkPolicy
@@ -293,6 +296,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         to:
         - ipBlock:
             cidr: 172.20.0.1/32
+        - ipBlock:
+            cidr: 161.202.126.210/32
       # Allow access to Kubernetes DNS in order to resolve the kubernetes service domain name.
       - ports:
         - protocol: TCP
@@ -305,7 +310,22 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-6.  Apply the revised network policy to your cluster.
+5.  Apply the revised network policy to your cluster.
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+    
+6.  After you complete all the [migration actions](#ha-masters) (including these steps), [update your cluster master](cs_cluster_update.html#master) to the HA master fix pack.
+
+7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
+
+    ```
+    - ipBlock:
+        cidr: 161.202.126.210/32
+    ```
+    {: screen}
+    
     ```
     kubectl apply -f all-master-egress.yaml
     ```
