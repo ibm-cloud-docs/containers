@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-31"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-10-29"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
-For more information about major, minor, and patch versions and migration actions between minor versions, see [Kubernetes versions](cs_versions.html).
+For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
@@ -321,13 +321,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -558,7 +558,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -1081,7 +1081,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
