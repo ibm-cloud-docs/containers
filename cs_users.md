@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-31"
+lastupdated: "2018-11-01"
 
 
 ---
@@ -216,13 +216,33 @@ To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.
 
 {{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure (SoftLayer) portfolio by using an API key. The API key stores the credentials of a user with access to an IBM Cloud infrastructure (SoftLayer) account. API keys are set by region within a resource group, and are shared by users in that region.
  
-To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials that you store in the API key must have [the **Super User** infrastructure role and the **Administrator** platform role](#owner_permissions) for {{site.data.keyword.containerlong_notm}} in you IBM Cloud account. Then, let that user perform the first admin action in a region. The user's infrastructure credentials are stored in an API key for that region. Other users within the account share the API key for accessing the infrastructure. You can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform).
+To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials are stored in the API key must have [the **Super User** infrastructure role and the **Administrator** platform role for {{site.data.keyword.containerlong_notm}} and for {{site.data.keyword.registryshort_notm}}](#owner_permissions) for {{site.data.keyword.containerlong_notm}} in your {{site.data.keyword.Bluemix_notm}} account. Then, let that user perform the first admin action in a region and resource group. The user's infrastructure credentials are stored in an API key for that region and resource group.
 
-For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users or users in IAM access groups to that region by setting IAM platform management policies for them in that region. A user with a `Viewer` IAM platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's IAM platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user role is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+Other users within the account share the API key for accessing the infrastructure. When users log in to the {{site.data.keyword.Bluemix_notm}} account, an IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
+
+To see the IAM token for a CLI session, you can run `ibmcloud iam oauth-tokens`. IAM tokens can also be used to [make calls directly to the {{site.data.keyword.containerlong_notm}} API](cs_cli_install.html#cs_api).
+{: tip}
+
+**If users have access to the portfolio through an IAM token, how do I limit which commands a user can run?**
+
+After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform). By assigning IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has the **Super User** infrastructure role, all infrastructure-related commands can be run in a cluster. But, depending on the IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
+
+For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users or users in IAM access groups to that region by setting IAM platform management policies for them in that region. A user with a **Viewer** IAM platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's IAM platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+
+To audit the actions that users in your account run, you can use [{{site.data.keyword.cloudaccesstrailshort}}](cs_at_events.html) to view all cluster-related events.
+{: tip}
 
 **What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
 
 For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure (SoftLayer) permissions](#infra_access) for users.
+
+**What happens if the user who set the API key for a region and resource group leaves the company?**
+
+If the user is leaving your organization, the {{site.data.keyword.Bluemix_notm}} account owner can remove that user's permissions. However, before you remove a user's specific access permissions or remove a user from your account completely, you must reset the API key with another user's infrastructure credentials. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure (SoftLayer) portal and infrastructure-related commands might fail. For more information, see [Removing user permissions](#removing).
+
+**How can I lock down my cluster if my API key becomes compromised?**
+
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](userid_keys.html#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](cs_secure.html#apiserver) security topic.
 
 **How do I set up the API key for my cluster?**</br>
 
@@ -335,7 +355,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 3. [Create a cluster](cs_clusters.html). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
 
 4. Verify that your cluster uses the infrastructure account credentials that you set.
-  1. Open the [IBM Cloud Kubernetes Service GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. 
+  1. Open the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters) and select your cluster. 
   2. In the Overview tab, look for an **Infrastructure User** field. 
   3. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
 
@@ -359,7 +379,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
 
 Before you begin, verify that you're assigned the **Administrator** IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 
 2. Select users individually or create an access group of users.
     * To assign roles to an individual user:
@@ -908,7 +928,7 @@ If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) accoun
 
 Before you begin, make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 
 2. Click the name of the user that you want to set permissions for.
 
@@ -990,7 +1010,7 @@ Before you begin:
 Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner must complete the following steps to prevent breaking changes in {{site.data.keyword.containerlong_notm}}.
 
 1. Determine which clusters the user created.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, look for the **Owner** field.
 
@@ -1013,7 +1033,7 @@ Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner mus
 4. When IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).
 
 5. If you have a Pay-As-You-Go account that is automatically linked to your {{site.data.keyword.Bluemix_notm}} account, the user's IBM Cloud infrastructure (SoftLayer) roles are automatically removed. However, if you have a [different type of account](#understand_infra), you might need to manually remove the user from IBM Cloud infrastructure (SoftLayer).
-    1. In the [IBM Cloud GUI](https://console.bluemix.net/) menu, click **Infrastructure**.
+    1. In the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) menu, click **Infrastructure**.
     2. Navigate to **Account > Users > User List**.
     2. Look for a table entry for the user.
         * If you don't see an entry for the user, the user has already been removed. No further action is required.
@@ -1039,7 +1059,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 #### Remove a user from an access group
 {: #remove_access_group}
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 2. Click the name of the user that you want to remove permissions from.
 3. Click the **Access group** tab.
 4. In the table entry for the access group, click the actions menu and select **Remove user**. When the user is removed, any roles that were assigned to the access group are removed from the user.
@@ -1047,7 +1067,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 #### Remove IAM platform permissions and the associated pre-defined RBAC permissions
 {: #remove_iam_rbac}
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 2. Click the name of the user that you want to remove permissions from.
 3. In the table entry for the permission that you want to remove, click the actions menu.
 4. Select **Remove.**
@@ -1070,7 +1090,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 
 To remove all of a user's Cloud Foundry permissions, you can remove the user's organization roles. If you only want to remove a user's ability, for example, to bind services in a cluster, only remove the user's space roles.
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 2. Click the name of the user that you want to remove permissions from.
 3. Click the **Cloud Foundry Access** tab.
     * To remove the user's space role:
@@ -1088,7 +1108,7 @@ To remove all of a user's Cloud Foundry permissions, you can remove the user's o
 #### Remove IBM Cloud infrastructure (SoftLayer) permissions
 {: #remove_infra}
 
-1. Log in to the [IBM Cloud GUI](https://console.bluemix.net/).
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
 2. From the menu, click **Infrastructure**.
 3. Click the user's email address.
 4. Click the **Portal Permissions** tab.
