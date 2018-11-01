@@ -1989,18 +1989,6 @@ View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) accoun
 ## Logging commands
 {: #logging_commands}
 
-### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
-{: #cs_log_autoupdate_enable}
-
-Enable automatic updates for your Fluentd pods in a specific cluster.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
-</dl>
-
 ### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 {: #cs_log_autoupdate_disable}
 
@@ -2011,6 +1999,18 @@ Disable automatic updates of your Fluentd pods in a specific cluster. When you u
 <dl>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+{: #cs_log_autoupdate_enable}
+
+Enable automatic updates for your Fluentd pods in a specific cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
 </dl>
 
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
