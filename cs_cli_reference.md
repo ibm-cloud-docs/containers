@@ -300,6 +300,7 @@ ibmcloud plugin list
       <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
       <td>[ibmcloud ks worker-update](#cs_worker_update)</td>
       <td>[ibmcloud ks workers](#cs_workers)</td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -699,7 +700,7 @@ Create a cluster in your organization. For free clusters, you specify the cluste
 <strong>Minimum required permissions</strong>:
 * **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}} at the account level
 * **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}} at the account level
-* **Super User**infrastructure role for IBM Cloud infrastructure (SoftLayer).
+* **Super User** role for IBM Cloud infrastructure (SoftLayer)
 
 <strong>Command options</strong>
 

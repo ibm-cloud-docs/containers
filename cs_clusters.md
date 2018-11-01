@@ -38,7 +38,7 @@ The list is divided into two parts:
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level.
+    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level.
 
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
     {: tip}

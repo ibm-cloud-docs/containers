@@ -372,7 +372,7 @@ Before you begin:
 ## Updating cluster add-ons
 {: #addons}
 
-Your {{site.data.keyword.containerlong_notm}} cluster comes with **add-ons**, such as Fluentd for logging, that are installed automatically when you provision the cluster. By default, these add-ons are updated automatically by IBM. However, you can disable automatic updates for some add-ons and manually update them separately from the master and worker nodes.
+Your {{site.data.keyword.containerlong_notm}} cluster comes with add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster. By default, these add-ons are updated automatically by IBM. However, you can disable automatic updates for some add-ons and manually update them separately from the master and worker nodes.
 {: shortdesc}
 
 **What default add-ons can I update separately from the cluster?**</br>
@@ -381,7 +381,7 @@ You can optionally disable automatic updates for the following add-ons:
 
 **Are there add-ons that I can't update separately from the cluster?**</br>
 
-Yes, your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
+Yes. Your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
 
 * `heapster`
 * `ibm-file-plugin`

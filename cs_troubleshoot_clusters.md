@@ -70,8 +70,8 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: tsCauses}
 You do not have the correct permissions to create a cluster. You need the following permissions to create a cluster:
 *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
-*  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
-*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure you [enable IAM policy enforcement](/docs/services/Registry/registry_users.html#existing_users).
+*  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
+*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure that you [enable IAM policy enforcement](/docs/services/Registry/registry_users.html#existing_users).
 
 For infrastructure-related errors, {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration. If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
