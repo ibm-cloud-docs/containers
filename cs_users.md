@@ -98,7 +98,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
   <li>To an individual instance, such as one cluster.</li></ul></dd>
 <dt>Resource group</dt>
   <dd><p>You can organize your account resources in customizable groupings so that you can quickly assign individual or groups of users access to more than one resource at a time. Resource groups can help operators and administrators filter resources to view their current usage, troubleshoot issues, and manage teams.</p>
-  <p>**Important**: If you have other services in your {{site.data.keyword.Bluemix_notm}} account that you want to use with your cluster, the services and your cluster must be in the same resource group. A resource can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and recreate it in the correct resource group.</p>
+  <p>**Important**: A cluster can integrate only with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}. A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and recreate it in the correct resource group.</p>
   <p>If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), consider giving clusters unique names across resource groups and regions in your account to avoid metrics naming conflicts. You cannot rename a cluster.</p>
   <p>You can assign users an access role to a resource group for the following scenarios. Note that unlike resource instances, you cannot grant access to an individual instance within a resource group.</p>
   <ul><li>All IAM services in the resource group, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
@@ -261,9 +261,9 @@ To ensure that all infrastructure-related actions can be successfully completed 
 2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct IAM platform roles.
     1. Navigate to **Manage > Account > Users**.
     2. Click the name of the user who you want to set the API key or whose credentials you want to set for the API key.
-    3. If the user doesn't have the **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
-    4. If the user doesn't have at least the **Viewer** role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
-    5. To create clusters, the user also needs the **Administrator** role for {{site.data.keyword.registryshort_notm}}.
+    3. If the user doesn't have the IAM platform **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
+    4. If the user doesn't have at least the **Viewer** IAM platform role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
+    5. To create clusters, the user also needs the **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level.
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
     1. From the expanding menu, select **Infrastructure**.
