@@ -87,7 +87,7 @@ You must also specify whether users have access to one cluster in a resource gro
 In IAM, you can assign user access roles to resource instances or resource groups.
 {: shortdesc}
 
-When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
+When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
 
 <dl>
 <dt>Resource instance</dt>
@@ -124,7 +124,7 @@ After you [understand how roles, users, and resources in your account](#access_p
 
 </br>
 
-For more information about setting up your account and resources, try out this tutorial about the [best practices for organizing users, teams, and applications](/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications).
+For more information about setting up your account and resources, try out this tutorial about the [best practices for organizing users, teams, and applications](/docs/tutorials/users-teams-applications.html).
 {: tip}
 
 <br />
@@ -242,7 +242,7 @@ If the user is leaving your organization, the {{site.data.keyword.Bluemix_notm}}
 
 **How can I lock down my cluster if my API key becomes compromised?**
 
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](userid_keys.html#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](cs_secure.html#apiserver) security topic.
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](../iam/userid_keys.html#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](cs_secure.html#apiserver) security topic.
 
 **How do I set up the API key for my cluster?**</br>
 

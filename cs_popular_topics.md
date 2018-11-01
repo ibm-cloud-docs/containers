@@ -38,7 +38,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>1 November</td>
 <td>Highly available masters in clusters that run Kubernetes version 1.11</td>
-<td>In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a cluster update. If your cluster is in a multizone-capable zone, your highly available master is also spread across zones to help protect against a zonal failure.<br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
+<td>In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a cluster update. If your cluster is in a multizone-capable zone, your highly available master is also spread across zones to help protect against a zonal failure.<br>For actions that you must take, see [Updating to highly available cluster masters](cs_versions.html#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
