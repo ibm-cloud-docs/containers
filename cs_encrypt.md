@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -19,8 +19,12 @@ lastupdated: "2018-10-26"
 # Protecting sensitive information in your cluster
 {: #encryption}
 
-By default, your {{site.data.keyword.containerlong}} cluster uses encrypted disks to store information such as configurations in `etcd` or the container file system that runs on the worker node secondary disks. When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/). You can also encrypt data in Kubernetes secrets to prevent unauthorized users from accessing sensitive cluster information.
+Protect sensitive cluster information to ensure data integrity and to prevent your data from being exposed to unauthorized users. 
 {: shortdesc}
+
+You can create sensitive data on different levels in your cluster that each require appropriate protection.
+- **Cluster-level:** Cluster configuration data is stored in the etcd component of your Kubernetes master. In clusters that run Kubernetes version 1.11.3_1531 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](cs_encrypt.html#encryption) for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily.
+- **App-level:** When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/). You can also [encrypt data in Kubernetes secrets](#keyprotect) to prevent unauthorized users from accessing sensitive cluster information.
 
 For more information on securing your cluster, see [Security for {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).
 
@@ -58,15 +62,17 @@ When you create a cluster, secrets for your {{site.data.keyword.registrylong}} c
 <br />
 
 
-## Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}
+## Encrypting the Kubernetes master's local disk and secrets by using {{site.data.keyword.keymanagementserviceshort}}
 {: #keyprotect}
 
-You can encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11.
+You can protect the etcd component in your Kubernetes master and Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11.
 {: shortdesc}
 
-By default, Kubernetes secrets are stored on an encrypted disk in the `etcd` component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in the cluster. When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt Kubernetes secrets, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to your secrets, you can delete the root key.
+By default, your cluster configuration and Kubernetes secrets are stored in the etcd component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in etcd. In clusters that run Kubernetes version 1.11.3_1531 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, data in your etcd component on the local disk of your Kubernetes master is not automatically encrypted until you enable {{site.data.keyword.keymanagementserviceshort}} encryption for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. 
 
-**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster afterward.
+When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt data in etcd, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your etcd data and Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to etcd or your secrets, you can delete the root key.
+
+**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data in etcd or the data from the secrets in your cluster afterward.
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -108,4 +114,4 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
     ```
     {: pre}
 
-After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key. You can rotate your key at any time by repeating these steps with a new root key ID.
+After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, data in `etcd`, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key. You can rotate your key at any time by repeating these steps with a new root key ID.

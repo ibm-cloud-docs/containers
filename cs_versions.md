@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-31"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -129,6 +129,10 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 <tr>
 <td>`containerd` new Kubernetes container runtime</td>
 <td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</td>
+</tr>
+<tr>
+<td>Encrypting data in etcd</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
 <td>Kubernetes container volume mount propagation</td>
