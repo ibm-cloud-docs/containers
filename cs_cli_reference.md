@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-30"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -189,6 +189,8 @@ ibmcloud plugin list
 
 </br>
 
+
+
 <table summary="Ingress application load balancer (ALB) commands table">
 <caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
@@ -215,6 +217,8 @@ ibmcloud plugin list
   </tbody>
 </table>
 
+
+
 </br>
 
 <table summary="Logging commands table">
@@ -229,22 +233,22 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
-      <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
-      <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
-      <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
-      <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
-      <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
-      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
       <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
       <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
       <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
+      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
+      <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
+      <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
+      <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
+      <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
+      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
+      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
     </tr>
     <tr>
       <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
@@ -267,10 +271,10 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
+    <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -1474,6 +1478,8 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
+
+
 ### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
 {: #cs_alb_cert_deploy}
 
@@ -1715,6 +1721,8 @@ View the details of an ALB.
   ```
   {: pre}
 
+
+
 ### ibmcloud ks alb-types [--json] [-s]
 {: #cs_alb_types}
 
@@ -1738,6 +1746,7 @@ View the ALB types that are supported in the region.
   ibmcloud ks alb-types
   ```
   {: pre}
+
 
 
 ### ibmcloud ks albs --cluster CLUSTER [--json] [-s]
@@ -1978,6 +1987,42 @@ View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) accoun
 
 ## Logging commands
 {: #logging_commands}
+
+### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
+{: #cs_log_autoupdate_enable}
+
+Enable automatic updates for your Fluentd pods in a specific cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
+{: #cs_log_autoupdate_disable}
+
+Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd configmap, but does not change the build version of your Fluentd for logging add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your add-on images.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
+</dl>
+
+### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
+{: #cs_log_autoupdate_get}
+
+Check if your Fluentd pods are set to automatically update in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to check if automatic updates for the Fluentd add-on are enabled. This value is required.</dd>
+</dl>
 
 ### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [--force-update][-s]
 {: #cs_logging_create}
@@ -2416,66 +2461,6 @@ This example filters out all of the logs that are forwarded, at an info level or
   ```
   {: pre}
 
-### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
-{: #cs_log_autoupdate_enable}
-
-Enable automatic update of your Fluentd pods in a specific cluster.
-
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
-</dl>
-
-**Example:**
-```
-ibmcloud ks logging-autoupdate-enable --cluster mycluster
-```
-{: pre}
-
-### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
-{: #cs_log_autoupdate_disable}
-
-Disable automatic update of your Fluentd pods in a specific cluster.
-
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
-</dl>
-
-**Example:**
-```
-ibmcloud ks logging-autoupdate-disable --cluster mycluster
-```
-{: pre}
-
-### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
-{: #cs_log_autoupdate_get}
-
-View whether your Fluentd pods are set to automatically update in a specific cluster.
-
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
-</dl>
-
-**Example:**
-```
-ibmcloud ks logging-autoupdate-get --cluster mycluster
-```
-{: pre}
-
 ### ibmcloud ks logging-collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
 {: #cs_log_collect}
 
@@ -2570,34 +2555,6 @@ Check the status of the log collection snapshot request for your cluster.
 ## Region commands
 {: #region_commands}
 
-### ibmcloud ks zones [--region-only] [--json] [-s]
-{: #cs_datacenters}
-
-View a list of available zones for you to create a cluster in. The available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region-set`.
-
-<strong>Minimum required permissions</strong>: None
-
-<strong>Command options</strong>:
-
-   <dl>
-   <dt><code>--region-only</code></dt>
-   <dd>List only multizones within the region that you are logged in to. This value is optional.</dd>
-
-   <dt><code>--json</code></dt>
-   <dd>Prints the command output in JSON format. This value is optional.</dd>
-
-   <dt><code>-s</code></dt>
-   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-   </dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
-
-
 ### ibmcloud ks region
 {: #cs_region}
 
@@ -2687,6 +2644,30 @@ us-south      us-south
 ```
 {: screen}
 
+### ibmcloud ks zones [--region-only] [--json] [-s]
+{: #cs_datacenters}
+
+View a list of available zones for you to create a cluster in. The available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region-set`.
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--region-only</code></dt>
+   <dd>List only multizones within the region that you are logged in to. This value is optional.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks zones
+  ```
+  {: pre}
 
 <br />
 
