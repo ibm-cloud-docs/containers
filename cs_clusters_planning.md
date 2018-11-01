@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -53,6 +53,10 @@ If the cluster is in one of the [supported multizone metro cities](cs_regions.ht
 **Do I have to use multizone clusters?**</br>
 No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](cs_regions.html#zones).
 
+**Can I have a highly available master in a single zone?**</br>
+Yes, with clusters that run Kubernetes version 1.11 or later. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
+* [Create a cluster in a multizone-capable zone](cs_clusters_planning.html#multizone), where the master is spread across zones. 
+* [Create multiple clusters](#multiple_clusters) and connect them with a global load balancer.
 
 ## Multizone cluster
 {: #multizone}
@@ -64,7 +68,7 @@ With {{site.data.keyword.containerlong}}, you can create multizone clusters. You
 A worker pool is a collection of worker nodes with the same flavor, such as machine type, CPU, and memory. When you create a cluster, a default worker pool is automatically created for you. To spread the worker nodes in your pool across zones, add worker nodes to the pool, or update worker nodes, you can use new `ibmcloud ks worker-pool` commands.
 
 **Can I still use stand-alone worker nodes?**</br>
-The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](cs_clusters.html#add_pool), and then [migrate to using worker pools](cs_cluster_update.html#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
+The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](cs_clusters.html#add_pool), and then [use worker pools](cs_cluster_update.html#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
 If the cluster is in one of the [supported multizone metro cities](cs_regions.html#zones), yes. See [Updating from stand-alone worker nodes to worker pools](cs_cluster_update.html#standalone_to_workerpool).
@@ -73,8 +77,7 @@ If the cluster is in one of the [supported multizone metro cities](cs_regions.ht
 ### Tell me more about the multizone cluster setup
 {: #mz_setup}
 
-<img src="images/cs_cluster_multizone.png" alt="High availability for multizone clusters" width="500" style="width:500px; border-style: none"/>
-
+<img src="images/cs_cluster_multizone-ha.png" alt="High availability for multizone clusters" width="500" style="width:500px; border-style: none"/>
 
 You can add additional zones to your cluster to replicate the worker nodes in your worker pools across multiple zones within one region. Multizone clusters are designed to evenly schedule pods across worker nodes and zones to assure availability and failure recovery. If worker nodes are not spread evenly across the zones or there is insufficient capacity in one of the zones, the Kubernetes scheduler might fail to schedule all requested pods. As a result, pods might go into a **Pending** state until enough capacity is available. If you want to change the default behavior to make Kubernetes scheduler distribute pods across zones in a best effort distribution, use the `preferredDuringSchedulingIgnoredDuringExecution` [pod affinity policy](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
@@ -87,7 +90,7 @@ Let's say you need a worker node with 6 cores to handle the workload for your ap
 - **Distribute resources across 3 zones:** With this option, you deploy 3 cores per zone, which leaves you with a total capacity of 9 cores. To handle your workload, two zones must be up at a time. If one zone is unavailable, the other two zones can handle your workload. If two zones are unavailable, the 3 remaining cores are up to handle your workload. Deploying 3 cores per zone means smaller machines and hence reduced cost for you.</br>
 
 **How is my Kubernetes master set up?** </br>
-A multizone cluster is set up with a single Kubernetes master that is provisioned in the same metro area as the workers. For example, if the workers are in one or multiple of the `dal10`, `dal12`, or `dal13` zones, the master is located in the Dallas multizone metro city.
+A multizone cluster is set up with a single or highly available (in Kubernetes 1.11 or later) Kubernetes master that is provisioned in the same metro area as the workers. Further, if you create a multizone cluster, highly available masters are spread across zones. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the master is spread across each zone in the Dallas multizone metro city.
 
 **What happens if the Kubernetes master becomes unavailable?** </br>
 The [Kubernetes master](cs_tech.html#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up. **Note**: Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.

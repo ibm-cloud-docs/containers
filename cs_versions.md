@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-31"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -82,9 +82,9 @@ As updates become available, you are notified when you view information about th
 </br>
 
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
--  Version 1.11 [migration actions](#cs_v111).
--  Version 1.10 [migration actions](#cs_v110).
--  Version 1.9 [migration actions](#cs_v19).
+-  Version 1.11 [preparation actions](#cs_v111).
+-  Version 1.10 [preparation actions](#cs_v110).
+-  Version 1.9 [preparation actions](#cs_v19).
 -  [Archive](#k8s_version_archive) of deprecated or unsupported versions.
 
 <br/>
@@ -119,7 +119,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 <tbody>
 <tr>
 <td>Cluster master high availability (HA) configuration (preview)</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Migrating to highly available cluster masters](#ha-masters). These migration actions apply:<ul>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
@@ -128,7 +128,11 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </tr>
 <tr>
 <td>`containerd` new Kubernetes container runtime</td>
-<td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Migrating to `containerd` as the container runtime](#containerd).</td>
+<td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</td>
+</tr>
+<tr>
+<td>Encrypting data in etcd</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
 <td>Kubernetes container volume mount propagation</td>
@@ -181,13 +185,13 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
-### Migrating to highly available cluster masters (preview)
+### Updating to highly available cluster masters (preview)
 {: #ha-masters}
 
 For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
 {: shortdesc}
 
-To give you time to take the migration steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+To give you time to take the preparation steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
 {: tip}
 
 Review the following situations in which you must make changes to take full advantage of HA master configuration:
@@ -316,7 +320,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
     
-6.  After you complete all the [migration actions](#ha-masters) (including these steps), [update your cluster master](cs_cluster_update.html#master) to the HA master fix pack.
+6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](cs_cluster_update.html#master) to the HA master fix pack.
 
 7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
 
@@ -331,7 +335,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-### Migrating to `containerd` as the container runtime
+### Updating to `containerd` as the container runtime
 {: #containerd}
 
 For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Docker as the new container runtime for Kubernetes to enhance performance. If your pods rely on Docker as the Kubernetes container runtime, you must update them to handle `containerd` as the container runtime. For more information, see the [Kubernetes containerd announcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).
@@ -344,7 +348,7 @@ Examples of times that you might rely on Docker as the container runtime:
 
 <br>
 
-**Besides reliance on the runtime, do I need to take other migration actions?**<br>
+**Besides reliance on the runtime, do I need to take other preparation actions?**<br>
 
 **Manifest tool**: If you have multi-platform images that are built with the experimental `docker manifest` [tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) before Docker version 18.06, you cannot pull the image from DockerHub by using `containerd`.
 
@@ -464,7 +468,7 @@ Review changes that you might need to make when you are updating from the previo
 <td>Read-only API data volumes</td>
 <td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
 Previously, apps were allowed to write data to these volumes that might be
-reverted automatically by the system. This migration action is required to fix
+reverted automatically by the system. This change is required to fix
 security vulnerability [CVE-2017-1002102![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
 If your apps rely on the previous insecure behavior, modify them accordingly.</td>
 </tr>
@@ -556,7 +560,7 @@ Previously, the operation failed and you saw the error message `xxx is not found
 <td>Read-only API data volumes</td>
 <td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
 Previously, apps were allowed to write data to these volumes that might be
-reverted automatically by the system. This migration action is required to fix
+reverted automatically by the system. This change is required to fix
 security vulnerability [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
 If your apps rely on the previous insecure behavior, modify them accordingly.</td>
 </tr>
@@ -601,4 +605,4 @@ As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 
 As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support.
 
-To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](cs_clusters.html#clusters) and [migrate your apps](cs_app.html#app) to the cluster.
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](cs_clusters.html#clusters) and [deploy your apps](cs_app.html#app) to the new cluster.

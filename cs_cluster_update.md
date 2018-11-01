@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -42,10 +42,17 @@ For example, if your current Kubernetes API server version is 1.7 and you want t
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
 **Can my worker nodes run a later version than the master?**</br>
-No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster. Unlike the master, you must update your workers for each patch version.
+No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
+
+**How are patch updates applied?**</br>
+By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions changelog](cs_versions_changelog.html) for any potential impact and choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
+
+Unlike the master, you must update your workers for each patch version.
 
 **What happens during the master update?**</br>
-When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
+In clusters that run Kubernetes version 1.11 or later, your master is highly available with three replica master pods. The master pods have a rolling update, during which only one pod is unavailable at a time. Two instances are up and running so that you can access and change the cluster during the update. Your worker nodes, apps, and resources continue to run.
+
+For clusters that run previous versions of Kubernetes, when you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
 
 **Can I roll back the update?**</br>
 No, you cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before updating your production master.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -33,8 +33,8 @@ lastupdated: "2018-10-26"
 
 **REST APIs**
 
-- [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger)
-- [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json)
+- [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api/)
+- [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api/swagger.json)
 - [REST API for logging in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [REST API for managing Ingress application load balancers in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 

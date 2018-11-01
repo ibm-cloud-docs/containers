@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-10-29"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
-For more information about major, minor, and patch versions and migration actions between minor versions, see [Kubernetes versions](cs_versions.html).
+For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
@@ -41,7 +41,51 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
+{: #1113_1531_ha-master}
 
+<table summary="Changes that were made since version 1.11.3_1527">
+<caption>Changes since version 1.11.3_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](cs_versions.html#ha-masters). These preparation actions apply:<ul>
+<li>If you have a firewall or custom Calico network policies.</li>
+<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you used the cluster master IP address for in-cluster access to the master.</li>
+<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+</tr>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>N/A</td>
+<td>1.8.12-alpine</td>
+<td>Added an `ibm-master-proxy-*` pod for client-side load balancing on all worker nodes, so that each worker node client can route requests to an available HA master replica.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.2.18</td>
+<td>v3.3.1</td>
+<td>See the [etcd release notes]![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+</tr>
+<tr>
+<td>Encrypting data in etcd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
 {: #1113_1531}
@@ -321,13 +365,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Migrating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](cs_versions.html#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -558,7 +602,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -1081,7 +1125,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Migrate to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>

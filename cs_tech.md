@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -148,7 +148,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is stored on an encrypted disk that is managed by IBM and backed up daily.</td>
+    <td>etcd is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>

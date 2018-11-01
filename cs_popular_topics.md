@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -24,13 +24,34 @@ lastupdated: "2018-10-29"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in November 2018
+{: #nov18}
 
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in November 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>1 November</td>
+<td>Highly available masters in clusters that run Kubernetes version 1.11</td>
+<td>In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a cluster update. If your cluster is in a multizone-capable zone, your highly available master is also spread across zones to help protect against a zonal failure.<br>For actions that you must take, see [Updating to highly available cluster masters](cs_versions.html#ha-masters). These preparation actions apply:<ul>
+<li>If you have a firewall or custom Calico network policies.</li>
+<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you used the cluster master IP address for in-cluster access to the master.</li>
+<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></td>
+</tr>
+</tbody></table>
 
 ## Popular topics in October 2018
 {: #oct18}
 
 <table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
-<caption>Popular topics for containers and Kubernetes clusters in August 2018</caption>
+<caption>Popular topics for containers and Kubernetes clusters in October 2018</caption>
 <thead>
 <th>Date</th>
 <th>Title</th>
@@ -68,7 +89,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 {: #sept18}
 
 <table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
-<caption>Popular topics for containers and Kubernetes clusters in August 2018</caption>
+<caption>Popular topics for containers and Kubernetes clusters in September 2018</caption>
 <thead>
 <th>Date</th>
 <th>Title</th>

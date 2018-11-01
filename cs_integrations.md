@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -124,7 +124,7 @@ You can use various external services and catalog services with a standard Kuber
 ## Security services
 {: #security_services}
 
-Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials/cloud-e2e-security.html).
 {: shortdesc}
 
 <table summary="Summary for accessibility">
