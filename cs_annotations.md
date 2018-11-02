@@ -1735,8 +1735,8 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB handles the TLS termination and decrypts the request before forwarding the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to stay encrypted, use the `ssl-services` annotation to disable the default TLS termination of the ALB. The ALB terminates the external TLS connection, then creates a new SSL connection between the ALB and the app pod.</br></br>
-Additionally, if your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</br></br>
+When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. By default, the ALB terminates the TLS termination and decrypts the request before using the HTTP protocol to forward the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to be encrypted, use the `ssl-services` annotation. With the `ssl-services` annotation, the ALB terminates the external TLS connection, then creates a new SSL connection between the ALB and the app pod. Traffic is re-encrypted before it is sent to the upstream pods.</br></br>
+If your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</br></br>
 Use the `ssl-services` annotation for SSL termination between the Ingress ALB and the backend application. Use the [`mutual-auth` annotation](#mutual-auth) for SSL termination between the client and the Ingress ALB. </dd>
 
 <dt>Sample Ingress resource YAML</dt>

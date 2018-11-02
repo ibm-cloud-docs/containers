@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-30"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -37,8 +37,8 @@ The list is divided into two parts:
 1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
-    *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}}.
-    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}}.
+    *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
+    *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level.
 
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
     {: tip}
@@ -46,7 +46,7 @@ The list is divided into two parts:
 3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
     *  If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
-    *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group.
+    *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
     * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the default resource group only.
 4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.

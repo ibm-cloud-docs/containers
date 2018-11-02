@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -122,11 +122,11 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     Example output for a multizone cluster with worker nodes in `dal10` and `dal13`:
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/auth:192  
     ```
     {: screen}
 
@@ -248,8 +248,8 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
     For example, the unreachable IP `169.62.196.238` belongs to the ALB `public-cr24a9f2caf6554648836337d240064935-alb1`:
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/auth:192
     ```
     {: screen}
 

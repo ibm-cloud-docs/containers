@@ -17,8 +17,6 @@ lastupdated: "2018-11-01"
 
 
 
-
-
 # Updating clusters, worker nodes, and add-ons
 {: #update}
 
@@ -374,14 +372,16 @@ Before you begin:
 ## Updating cluster add-ons
 {: #addons}
 
-Your {{site.data.keyword.containerlong_notm}} cluster comes with **add-ons**, such as Fluentd for logging, that are installed automatically when you provision the cluster. These add-ons must be updated separately from the master and worker nodes.
+Your {{site.data.keyword.containerlong_notm}} cluster comes with add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster. By default, these add-ons are updated automatically by IBM. However, you can disable automatic updates for some add-ons and manually update them separately from the master and worker nodes.
 {: shortdesc}
 
-**What default add-ons do I have to update separately from the cluster?**
+**What default add-ons can I update separately from the cluster?**</br>
+You can optionally disable automatic updates for the following add-ons:
 * [Fluentd for logging](#logging)
 
-**Are there add-ons that I do not need to update and cannot change?**</br>
-Yes, your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
+**Are there add-ons that I can't update separately from the cluster?**</br>
+
+Yes. Your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
 
 * `heapster`
 * `ibm-file-plugin`
@@ -402,7 +402,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 **Can I install other add-ons than the default?**</br>
 Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
-### Fluentd for logging
+### Disabling automatic updates for the Fluentd for logging add-on and manually updating Fluentd pods
 {: #logging}
 
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
@@ -429,6 +429,8 @@ If automatic updates are disabled but you need to make a change to your configur
     ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
     ```
     {: pre}
+
+
 
 ## Updating from stand-alone worker nodes to worker pools
 {: #standalone_to_workerpool}

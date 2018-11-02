@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -38,7 +38,7 @@ If you have unique security requirements or you have a multizone cluster with VL
   </li>
   </ul>
 
-Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
+Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux Iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
 To use Ingress and load balancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the load balancer IP address. If the VRRP protocol isn't present to manage the load balancer IP, Ingress and load balancer services do not work properly.
 {: tip}
@@ -78,7 +78,7 @@ Review the following default Calico network policies that are automatically appl
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Allows incoming node port, load balancer, and Ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
+      <td>Allows incoming node port, load balancer, and Ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in Iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -101,7 +101,7 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that 
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>In Kubernetes v1.10 only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} UI or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
+  <td><b>In Kubernetes v1.10 or later only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} UI or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>
@@ -540,7 +540,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 [By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can use Calico policies to block incoming traffic to your services based on traffic source or destination.
 {:shortdesc}
 
-Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT iptables rules generated for these services. However, pre-DNAT policies prevent specified traffic from reaching your apps because they generate and apply iptables rules before Kubernetes uses regular DNAT to forward traffic to pods.
+Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT Iptables rules generated for these services. However, pre-DNAT policies prevent specified traffic from reaching your apps because they generate and apply Iptables rules before Kubernetes uses regular DNAT to forward traffic to pods.
 
 Some common uses for Calico pre-DNAT network policies:
 
@@ -831,7 +831,7 @@ To create a Calico policy to log denied traffic:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as iptables rules.
+        The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as Iptables rules.
 
     * To apply a Calico policy:
         ```
@@ -864,7 +864,7 @@ To create a Calico policy to log denied traffic:
     ```
     {: screen}
 
-4. To log all the traffic that is denied by the Calico policy that you created earlier, create a Calico NetworkPolicy named `log-denied-packets`. For example, use the following policy to log all packets that were denied by the network policy that you defined in step 1. The log policy uses the same pod selector as the example `access-nginx` policy, which adds this policy to the Calico iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the iptables rule chain. Any request packet from the "run=access" pod that matches the `access-nginx` policy rule is accepted by the "run=nginx" pods.  However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the "run=nginx" pods are logged. After the packets' attempts are logged, the packets are dropped.
+4. To log all the traffic that is denied by the Calico policy that you created earlier, create a Calico NetworkPolicy named `log-denied-packets`. For example, use the following policy to log all packets that were denied by the network policy that you defined in step 1. The log policy uses the same pod selector as the example `access-nginx` policy, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the "run=access" pod that matches the `access-nginx` policy rule is accepted by the "run=nginx" pods.  However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the "run=nginx" pods are logged. After the packets' attempts are logged, the packets are dropped.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -898,11 +898,11 @@ To create a Calico policy to log denied traffic:
      </tr>
      <tr>
       <td><code>selector</code></td>
-      <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your Calico policy from step 1 or that you found in the Calico syntax for your Kubernetes policy in step 3. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same iptables chain as the <code>access-nginx</code> sample network policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same pod selector label.</td>
+      <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your Calico policy from step 1 or that you found in the Calico syntax for your Kubernetes policy in step 3. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same Iptables chain as the <code>access-nginx</code> sample network policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same pod selector label.</td>
      </tr>
      <tr>
       <td><code>order</code></td>
-      <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
+      <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the Iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the Iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
      </tr>
     </tbody>
     </table>

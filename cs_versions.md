@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -13,6 +13,7 @@ lastupdated: "2018-11-01"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
 {:download: .download}
 
 
@@ -118,7 +119,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </thead>
 <tbody>
 <tr>
-<td>Cluster master high availability (HA) configuration (preview)</td>
+<td>Cluster master high availability (HA) configuration</td>
 <td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
@@ -185,10 +186,10 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
-### Updating to highly available cluster masters (preview)
+### Updating to highly available cluster masters
 {: #ha-masters}
 
-For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones. 
+For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
 To give you time to take the preparation steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
@@ -222,13 +223,13 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 {: #ha-incluster}
 To access the cluster master in an HA configuration from within the cluster, use one of the following:
 * The `kubernetes` service cluster IP address, which by default is: `https://172.21.0.1`
-* The `kubernetes` service domain name, which by default is: `https://kubernetes.default.svc.cluster.local` 
+* The `kubernetes` service domain name, which by default is: `https://kubernetes.default.svc.cluster.local`
 
 If you previously used the cluster master IP address, this method continues to work. However, for improved availability, update to use the `kubernetes` service cluster IP address or domain name.
 
 **Configuring Calico for out-of-cluster access to master with HA configuration**:</br>
 {: #ha-outofcluster}
-The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works. 
+The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
 
 Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
 
@@ -284,7 +285,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1`. For now, keep the cluster master IP address. For example, the previous network policy example changes to the following:
+4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1`. For now, keep the cluster master IP address. For example, the previous network policy example changes to the following.
+
+    If you previously set up your egress policies to open up only the single IP address and port for the single Kubernetes master, now use the in-cluster master proxy IP address range 172.20.0.1/32 and port 2040.
+    {: tip}
+
     ```
     apiVersion: extensions/v1beta1
     kind: NetworkPolicy
@@ -319,7 +324,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kubectl apply -f all-master-egress.yaml
     ```
     {: pre}
-    
+
 6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](cs_cluster_update.html#master) to the HA master fix pack.
 
 7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
@@ -329,7 +334,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         cidr: 161.202.126.210/32
     ```
     {: screen}
-    
+
     ```
     kubectl apply -f all-master-egress.yaml
     ```
