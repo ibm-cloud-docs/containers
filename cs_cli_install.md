@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-30"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -179,7 +179,9 @@ You can use the commands that are provided with the Kubernetes CLI to manage clu
 
 All `kubectl` commands that are available in Kubernetes 1.10.8 are supported for use with clusters in {{site.data.keyword.Bluemix_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.Bluemix_notm}}.
 
-Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_install) and [create a cluster](cs_clusters.html#clusters_cli).
+Before you can run `kubectl` commands:
+* [Install the required CLIs](#cs_cli_install).
+* [Create a cluster](cs_clusters.html#clusters_cli).
 
 1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
 
@@ -198,16 +200,16 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
     ```
     {: pre}
 
-3.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
+4.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
-4.  List all of the clusters in the account to get the name of the cluster.
+5.  List all of the clusters in the account to get the name of the cluster.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+6.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
@@ -244,7 +246,7 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
         ```
         {: screen}
 
-6.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
+7.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
 
     ```
     kubectl version  --short
