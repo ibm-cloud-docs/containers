@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -144,7 +144,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports kubectl exec, attach, logs, and apiserver proxy.</td>
+    <td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
     <td>etcd</td>
@@ -170,19 +170,34 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>For clusters that run Kubernetes version 1.11.3_1531 or later, the `ibm-master-proxy` forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports kubectl exec, attach, logs, and apiserver proxy.</td>
+    <td>The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</td>
+    <td>The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</td>
     </tr>
     <tr>
-    <td>Storage provider</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>Every cluster is set up with a plug-in to provision file storage. You can choose to install other add-ons, such as block storage.</td>
+    <td>Kubernetes DNS schedules a DNS pod and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico manages network policies for your cluster, and comprises a few components as follows.
+    <ul>
+    <li>**calico-cni**: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
+    <li>**calico-ipam**: The Calico IPAM manages IP address assignment for containers.</li>
+    <li>**calico-node**: The Calico node is a container that bundles together the various components required for networking containers with Calico.</li>
+    <li>**calico-policy-controller**: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -195,29 +210,24 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>The Kubernetes dashboard is a web-based UI that allows users to manage and troubleshoot the cluster and applications running in the cluster.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS schedules a DNS pod and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.</td>
-    </tr>
-    <tr>
     <td>heapster</td>
     <td>kube-system</td>
     <td>Heapster is a cluster-wide aggregator of monitoring and event data. The Heapster pod discovers all nodes in the cluster and queries usage information from each node's kubelet. You can find utilization graphs in the Kubernetes dashboard.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>The Calico node is a container that bundles together the various components required for networking containers with Calico.</td>
+    <td>Ingress is a Kubernetes service that you can use to balance network traffic workloads in your cluster by forwarding public or private requests to multiple apps in your cluster. To expose your apps over the public or private network, you must create an Ingress resource to register your apps with the Ingress application load balancer (ALB). Multiple apps can then be accessed by using a single URL or IP address.</td>
+    </tr>
+    <tr>
+    <td>Storage provider</td>
+    <td>kube-system</td>
+    <td>Every cluster is set up with a plug-in to provision file storage. You can choose to install other add-ons, such as block storage.</td>
     </tr>
     <tr>
     <td>Logging and metrics</td>
     <td>ibm-system</td>
     <td>You can use the integrated {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}} services to expand your collection and retention capabilities when working with logs and metrics.</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress is a Kubernetes service that you can use to balance network traffic workloads in your cluster by forwarding public or private requests to multiple apps in your cluster. To expose your apps over the public or private network, you must create an Ingress resource to register your apps with the Ingress application load balancer (ALB). Multiple apps can then be accessed by using a single URL or IP address.</td>
     </tr>
     <tr>
     <td>Load balancer</td>
@@ -228,21 +238,6 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>App pods and services</td>
     <td>default</td>
     <td>In the <code>default</code> namespace or in namespaces that you create, you can deploy apps in pods and services to communicate with those pods.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/a</td>
-    <td>The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/a</td>
-    <td>The Calico IPAM manages IP address assignment for containers.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/a</td>
-    <td>The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</td>
     </tr>
     </tbody></table></dd>
 </dl>
