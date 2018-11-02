@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-30"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -73,7 +73,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Persistent storage</td>
  <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) or [static provisioning](cs_storage_basics.html#static_provisioning) of volumes.</td>
- <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -242,7 +242,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maximum availability and capacity.
 {:shortdesc}
 
-### Creating clusters with the GUI
+### Creating clusters with the {{site.data.keyword.Bluemix_notm}} console
 {: #dedicated_creating_ui}
 
 1. Open your Dedicated console: `https://<my-dedicated-cloud-instance>.bluemix.net`.
@@ -365,7 +365,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     **Note:**
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
-    * If you see the following error message, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+    * If you see the following error message, [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
         ```
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
@@ -480,7 +480,7 @@ Requirements:
 
 Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
-1. To use your own subnet, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) and provide the list of subnet CIDRs that you want to use.
+1. To use your own subnet, [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) and provide the list of subnet CIDRs that you want to use.
     **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
@@ -489,7 +489,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
     ```
     {: pre}
-    Replace <em>&lt;cluster_name&gt;</em> with the name or ID of your cluster, <em>&lt;subnet_CIDR&gt;</em> with one of the subnet CIDRs that you provided in the support ticket, and <em>&lt;private_VLAN&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud ks vlans`.
+    Replace <em>&lt;cluster_name&gt;</em> with the name or ID of your cluster, <em>&lt;subnet_CIDR&gt;</em> with one of the subnet CIDRs that you provided in the support case, and <em>&lt;private_VLAN&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud ks vlans`.
 
 3. Verify that the subnets were added to your cluster. The field **User-managed** for user-provided subnets is _`true`_.
 
@@ -548,16 +548,16 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](cs_loadbalancer.html).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](cs_loadbalancer.html).
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
-If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](cs_ingress.html#ingress_expose_public).
+If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](cs_ingress.html#ingress_expose_public).
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-If you choose to provision [file storage](cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support ticket.
+If you choose to provision [file storage](cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.

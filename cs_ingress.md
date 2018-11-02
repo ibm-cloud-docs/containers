@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -88,7 +88,7 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for all Ingress configurations:**
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied.
-- Setting up Ingress requires the [**Administrator** IAM platform role](cs_users.html#platform).
+- Setting up Ingress requires the [**Administrator** platform role](cs_users.html#platform).
 
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.

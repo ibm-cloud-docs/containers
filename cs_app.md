@@ -131,7 +131,7 @@ If you want to manage updates to your app, see [Managing rolling deployments](cs
 ### How can I control who has access to my app deployments?
 The account and cluster admins can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 
-With IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](cs_users.html#users).
+With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](cs_users.html#users).
 
 To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](cs_psp.html#psp).
 
@@ -591,19 +591,19 @@ spec:
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
 
-Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the GUI](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
+Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the {{site.data.keyword.Bluemix_notm}} console](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
-**Launching the Kubernetes dashboard from the GUI**
+**Launching the Kubernetes dashboard from the {{site.data.keyword.Bluemix_notm}} console**
 {: #db_gui}
 
-1.  Log in to the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/).
-2.  From your profile in the menu bar, select the account that you want to use.
-3.  From the menu, click **Containers**.
+1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
+2.  From the menu bar, click your user avatar ![Avatar icon](../icons/i-avatar-icon.svg "Avatar icon") and select the account that you want to use.
+3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers**.
 4.  On the **Clusters** page, click the cluster that you want to access.
 5.  From the cluster detail page, click the **Kubernetes Dashboard** button.
 
@@ -656,7 +656,7 @@ When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy
 <br />
 
 
-## Deploying apps with the GUI
+## Deploying apps with the Kubernetes dashboard
 {: #app_ui}
 
 When you deploy an app to your cluster by using the Kubernetes dashboard, a deployment resource automatically creates, updates, and manages the pods in your cluster.

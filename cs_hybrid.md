@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -34,7 +34,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 {: shortdesc}
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public or use an existing one. To create a cluster, choose between the following options: 
-    - [Create a standard cluster from the GUI](cs_clusters.html#clusters_ui). 
+    - [Create a standard cluster from the console](cs_clusters.html#clusters_ui). 
     - [Create a standard cluster from the CLI](cs_clusters.html#clusters_cli). 
     - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 

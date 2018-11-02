@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -609,7 +609,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>The API endpoint for Identity and Access Management (IAM). </td>
+   <td>The API endpoint for {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>
@@ -760,7 +760,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    ```
    {: screen}
    
-4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the GUI or the API directly, make sure that the [files have the correct permission](cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed. 
+4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed. 
    
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 

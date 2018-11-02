@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -34,7 +34,7 @@ The list is divided into two parts:
 ### Account-level
 {: #prepare_account_level}
 
-1.  [Create or upgrade your account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription account](https://console.bluemix.net/registration/).
+1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://console.bluemix.net/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
@@ -63,15 +63,15 @@ The list is divided into two parts:
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the pricing calculator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
+4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
 <br>
 <br>
 
 **What's next?**
-* [Creating clusters with the GUI](#clusters_ui)
-* [Creating clusters with the CLI](#clusters_cli)
+* [Creating clusters with the {{site.data.keyword.Bluemix_notm}} console](#clusters_ui)
+* [Creating clusters with the {{site.data.keyword.Bluemix_notm}} CLI](#clusters_cli)
 
-## Creating clusters with the GUI
+## Creating clusters with the {{site.data.keyword.Bluemix_notm}} console
 {: #clusters_ui}
 
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
@@ -79,7 +79,7 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 
 **To create a free cluster**
 
-You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a Pay-As-You-Go or Subscription account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a billable account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
@@ -161,7 +161,7 @@ When the cluster is up and running, you can check out the following tasks:
 <br />
 
 
-## Creating clusters with the CLI
+## Creating clusters with the {{site.data.keyword.Bluemix_notm}} CLI
 {: #clusters_cli}
 
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
@@ -675,7 +675,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    <tbody>
 <tr>
    <td>Aborted</td>
-   <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support ticket](cs_troubleshoot.html#ts_getting_help).</td>
+   <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
  <tr>
      <td>Critical</td>
@@ -687,7 +687,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -695,7 +695,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
    <tr>
      <td>Deploy failed</td>
-     <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](cs_troubleshoot.html#ts_getting_help).</td>
+     <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support case](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
      <tr>
        <td>Deploying</td>
@@ -711,7 +711,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
      </tr>
    <tr>
      <td>Requested</td>
-     <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -731,7 +731,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
 ## Removing clusters
 {: #remove}
 
-Free and standard clusters that are created with a Pay-As-You-Go account must be removed manually when they are not needed anymore so that those clusters are no longer consuming resources.
+Free and standard clusters that are created with a billable account must be removed manually when they are not needed anymore so that those clusters are no longer consuming resources.
 {:shortdesc}
 
 **Warning:**
@@ -744,7 +744,7 @@ Before you begin:
 
 To remove a cluster:
 
--   From the {{site.data.keyword.Bluemix_notm}} GUI
+-   From the {{site.data.keyword.Bluemix_notm}} console
     1.  Select your cluster and click **Delete** from the **More actions...** menu.
 
 -   From the {{site.data.keyword.Bluemix_notm}} CLI
@@ -770,4 +770,4 @@ To remove a cluster:
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.
 - If you kept the subnets, you can [reuse them in a new cluster](cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
-- If you kept the persistent storage, you can [delete your storage](cs_storage_remove.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} GUI.
+- If you kept the persistent storage, you can [delete your storage](cs_storage_remove.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.

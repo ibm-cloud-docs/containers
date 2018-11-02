@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -71,7 +71,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 You do not have the correct permissions to create a cluster. You need the following permissions to create a cluster:
 *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
 *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure that you [enable IAM policy enforcement](/docs/services/Registry/registry_users.html#existing_users).
+*  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure that you [enable {{site.data.keyword.Bluemix_notm}} IAM policy enforcement](/docs/services/Registry/registry_users.html#existing_users).
 
 For infrastructure-related errors, {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go accounts that were created after automatic account linking was enabled are already set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. You can purchase infrastructure resources for your cluster without additional configuration. If you have a valid Pay-As-You-Go account and receive this error message, you might not be using the correct IBM Cloud infrastructure (SoftLayer) account credentials to access infrastructure resources.
 
@@ -84,9 +84,9 @@ If you use a different IBM Cloud infrastructure (SoftLayer) account to provision
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
 
-1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the expandable menu, click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
+1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
 2.  Check if your cluster uses a different infrastructure account than the one that comes with your Pay-As-You-Go account.
-    1.  From the expandable menu, click **Containers > Clusters**.
+    1.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers > Clusters**.
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
@@ -168,7 +168,7 @@ You might have another firewall set up or customized your existing firewall sett
 
 
 {: tsCauses}
-In {{site.data.keyword.Bluemix_notm}}, each resource must be in a resource group. For example, cluster `mycluster` might exist in the `default` resource group. When the account owner gives you access to resources by assigning you an IAM platform role, the access can be to a specific resource or to the resource group. When you are given access to a specific resource, you don't have access to the resource group. In this case, you don't need to target a resource group to work with the clusters you have access to. If you target a different resource group than the group that the cluster is in, actions against that cluster can fail. Conversely, when you are given access to a resource as part of your access to a resource group, you must target a resource group to work with a cluster in that group. If you don't target your CLI session to the resource group that the cluster is in, actions against that cluster can fail.
+In {{site.data.keyword.Bluemix_notm}}, each resource must be in a resource group. For example, cluster `mycluster` might exist in the `default` resource group. When the account owner gives you access to resources by assigning you an {{site.data.keyword.Bluemix_notm}} IAM platform role, the access can be to a specific resource or to the resource group. When you are given access to a specific resource, you don't have access to the resource group. In this case, you don't need to target a resource group to work with the clusters you have access to. If you target a different resource group than the group that the cluster is in, actions against that cluster can fail. Conversely, when you are given access to a resource as part of your access to a resource group, you must target a resource group to work with a cluster in that group. If you don't target your CLI session to the resource group that the cluster is in, actions against that cluster can fail.
 
 If you cannot find or work with a cluster, you might be experiencing one of the following issues:
 * You have access to the cluster and the resource group that the cluster is in, but your CLI session is not targeted to the resource group that the cluster is in.
@@ -268,7 +268,7 @@ To check your user access permissions:
         {: pre}
 
     * If you do not have access to the cluster:
-        1. Ask your account owner to assign an [IAM platform role](cs_users.html#platform) to you for that cluster.
+        1. Ask your account owner to assign an [{{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) to you for that cluster.
         2. Do not target a resource group. If you already targeted a resource group, untarget it:
           ```
           ibmcloud target -g none
@@ -351,19 +351,19 @@ Consider the following scenario to understand how clusters might become orphaned
 
 {: tsResolve}
 1.  Check which infrastructure account the region that your cluster is in currently uses to provision clusters.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field. This field helps you determine if your {{site.data.keyword.containerlong_notm}} account uses a different infrastructure account than the default.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts. The cluster that cannot be modified might be provisioned in a different infrastructure account.
         * If you see an **Infrastructure User** field, you use a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region. The cluster that cannot be modified might be provisioned in your Pay-As-You-Go or a different infrastructure account.
 2.  Check which infrastructure account was used to provision the cluster.
     1.  In the **Worker Nodes** tab, select a worker node and note its **ID**.
-    2.  Open the expandable menu and click **Infrastructure**.
-    3.  From the infrastructure menu, click **Devices > Device List**.
+    2.  Open the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") and click **Infrastructure**.
+    3.  From the infrastructure navigation pane, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
 3.  Use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
-    **Note**: If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support ticket to remove the orphaned cluster.
+    **Note**: If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support case to remove the orphaned cluster.
 4.  [Delete the cluster](cs_clusters.html#remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
     * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set).
@@ -454,7 +454,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the {{site.data.keyword.Bluemix_notm}} IAM Editor platform access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
 
 {: tsResolve}
 
@@ -490,7 +490,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 4. Wait a few minutes, then let the user try to bind the service again.
 
-5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID.
+5. If this does not resolve the problem, then the {{site.data.keyword.Bluemix_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
    1. Retrieve the cluster ID.
       ```
       ibmcloud ks clusters
@@ -890,20 +890,15 @@ Still having issues with your cluster?
 {: shortdesc}
 
 -  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
-
 -   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 -   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
-
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
 -   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
-
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
-
--   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
+{: tip}
 

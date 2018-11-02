@@ -394,7 +394,7 @@ The {{site.data.keyword.containerlong_notm}} API requires header information tha
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
-**Note:** To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your IAM token.
+**Note:** To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
 
 <table>
 <caption>ID types and options</caption>
@@ -405,16 +405,16 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 <tbody>
 <tr>
 <td>Unfederated ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} user name and password:</strong> You can follow the steps in this topic to fully automate the creation of your IAM access token.</li>
-<li><strong>Generate an {{site.data.keyword.Bluemix_notm}} API key:</strong> As an alternative to using the {{site.data.keyword.Bluemix_notm}} user name and password, you can <a href="../iam/apikeys.html#manapikey" target="_blank">use {{site.data.keyword.Bluemix_notm}} API keys</a> {{site.data.keyword.Bluemix_notm}} API keys are dependent on the {{site.data.keyword.Bluemix_notm}} account they are generated for. You cannot combine your {{site.data.keyword.Bluemix_notm}} API key with a different account ID in the same IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.Bluemix_notm}} API key is based on, you must log in to the account to generate a new API key. </li></ul></tr>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} user name and password:</strong> You can follow the steps in this topic to fully automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM access token.</li>
+<li><strong>Generate an {{site.data.keyword.Bluemix_notm}} API key:</strong> As an alternative to using the {{site.data.keyword.Bluemix_notm}} user name and password, you can <a href="../iam/apikeys.html#manapikey" target="_blank">use {{site.data.keyword.Bluemix_notm}} API keys</a> {{site.data.keyword.Bluemix_notm}} API keys are dependent on the {{site.data.keyword.Bluemix_notm}} account they are generated for. You cannot combine your {{site.data.keyword.Bluemix_notm}} API key with a different account ID in the same {{site.data.keyword.Bluemix_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.Bluemix_notm}} API key is based on, you must log in to the account to generate a new API key. </li></ul></tr>
 <tr>
 <td>Federated ID</td>
-<td><ul><li><strong>Generate an {{site.data.keyword.Bluemix_notm}} API key:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API keys</a> are dependent on the {{site.data.keyword.Bluemix_notm}} account they are generated for. You cannot combine your {{site.data.keyword.Bluemix_notm}} API key with a different account ID in the same IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.Bluemix_notm}} API key is based on, you must log in to the account to generate a new API key. </li><li><strong>Use a one-time passcode: </strong> If you authenticate with {{site.data.keyword.Bluemix_notm}} by using a one-time passcode, you cannot fully automate the creation of your IAM token because the retrieval of your one-time passcode requires a manual interaction with your web browser. To fully automate the creation of your IAM token, you must create an {{site.data.keyword.Bluemix_notm}} API key instead. </ul></td>
+<td><ul><li><strong>Generate an {{site.data.keyword.Bluemix_notm}} API key:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API keys</a> are dependent on the {{site.data.keyword.Bluemix_notm}} account they are generated for. You cannot combine your {{site.data.keyword.Bluemix_notm}} API key with a different account ID in the same {{site.data.keyword.Bluemix_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.Bluemix_notm}} API key is based on, you must log in to the account to generate a new API key. </li><li><strong>Use a one-time passcode: </strong> If you authenticate with {{site.data.keyword.Bluemix_notm}} by using a one-time passcode, you cannot fully automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token because the retrieval of your one-time passcode requires a manual interaction with your web browser. To fully automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token, you must create an {{site.data.keyword.Bluemix_notm}} API key instead. </ul></td>
 </tr>
 </tbody>
 </table>
 
-1.  Create your IAM (Identity and Access Management) access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
+1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
   - _&lt;username&gt;_: Your {{site.data.keyword.Bluemix_notm}} user name.
   - _&lt;password&gt;_: Your {{site.data.keyword.Bluemix_notm}} password.
   - _&lt;api_key&gt;_: Your {{site.data.keyword.Bluemix_notm}} API key.
@@ -492,9 +492,9 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-    You can find the IAM token in the **access_token** field of your API ouput. Note the IAM token to retrieve additional header information in the next steps.
+    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API ouput. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
 
-2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace _&lt;iam_token&gt;_ with the IAM token that you retrieved in the previous step.
+2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace _&lt;iam_token&gt;_ with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved in the previous step.
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -539,7 +539,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
     You can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources/metadata/guid** field of your API output.
 
-3.  Generate a new IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;account_ID&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
+3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;account_ID&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
 
     **Note:** If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
 
@@ -617,7 +617,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-    You can find the IAM token in the **access_token** and the IAM refresh token in the **refresh_token**.
+    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** and the refresh token in the **refresh_token**.
 
 4.  List all Kubernetes clusters in your account. Use the information that you retrieved in earlier steps to build your header information.
 
@@ -646,31 +646,31 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 <br />
 
 
-## Refreshing IAM access tokens and obtaining new refresh tokens
+## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens
 {: #cs_api_refresh}
 
-Every IAM (Identity and Access Management) access token that is issued via the API expires after one hour. You must refresh your access token on a regular basis to assure access to the {{site.data.keyword.Bluemix_notm}} API. You can use the same steps to obtain a new refresh token.
+Every {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token on a regular basis to assure access to the {{site.data.keyword.Bluemix_notm}} API. You can use the same steps to obtain a new refresh token.
 {:shortdesc}
 
-Before you begin, make sure that you have an IAM refresh token or an {{site.data.keyword.Bluemix_notm}} API key that you can use to request a new access token.
+Before you begin, make sure that you have an {{site.data.keyword.Bluemix_notm}} IAM refresh token or an {{site.data.keyword.Bluemix_notm}} API key that you can use to request a new access token.
 - **Refresh token:** Follow the instructions in [Automating the cluster creation and management process with the {{site.data.keyword.Bluemix_notm}} API](#cs_api).
 - **API key:** Retrieve your [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) API key as follows.
    1. From the menu bar, click **Manage** > **Security** > **Platform API keys**.
    2. Click **Create**.
    3. Enter a **Name** and **Description** for your API key and click **Create**.
    4. Click **Show** to see the API key that was generated for you.
-   5. Copy the API key so that you can use it to retrieve your new IAM access token.
+   5. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.Bluemix_notm}} IAM access token.
 
-Use the following steps if you want to create an IAM token or if you want to obtain a new refresh token.
+Use the following steps if you want to create an {{site.data.keyword.Bluemix_notm}} IAM token or if you want to obtain a new refresh token.
 
-1.  Generate a new IAM access token by using the refresh token or the {{site.data.keyword.Bluemix_notm}} API key.
+1.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM access token by using the refresh token or the {{site.data.keyword.Bluemix_notm}} API key.
     ```
     POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
     <table summary="Input parameters for new IAM token">
-    <caption>Input parameters for a new IAM token</caption>
+    <caption>Input parameters for a new {{site.data.keyword.Bluemix_notm}} IAM token</caption>
     <thead>
     <th>Input parameters</th>
     <th>Values</th>
@@ -717,6 +717,6 @@ Use the following steps if you want to create an IAM token or if you want to obt
     ```
     {: screen}
 
-    You can find your new IAM token in the **access_token**, and the IAM refresh token in the **refresh_token** field of your API output.
+    You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
 2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api) by using the token from the previous step.

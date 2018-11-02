@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -73,7 +73,7 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 
     As the app is deployed, instructions for "Download, modify, and redeploy your app with the command line interface" are displayed.
 
-    c. From step 1 in the GUI instructions, click **DOWNLOAD STARTER CODE**.
+    c. From step 1 in the console instructions, click **DOWNLOAD STARTER CODE**.
 
     d. Extract the .zip file and save its contents to your `cf-py` directory.
 
@@ -269,7 +269,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
 5.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
-    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
 6. In the **Workloads** tab, you can see the resources that you created.

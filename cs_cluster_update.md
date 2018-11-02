@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -30,7 +30,7 @@ Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.h
 {:shortdesc}
 
 **How do I know when to update the master?**</br>
-You are notified in the GUI and CLI when updates are available, and can also check our [supported versions](cs_versions.html) page.
+You are notified in the {{site.data.keyword.Bluemix_notm}} console and CLI when updates are available, and can also check our [supported versions](cs_versions.html) page.
 
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version.
@@ -67,7 +67,7 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the CLI `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the {{site.data.keyword.Bluemix_notm}} console or running the CLI `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
 3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud ks clusters`.
 

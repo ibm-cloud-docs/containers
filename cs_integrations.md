@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -233,7 +233,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: screen}
 
-  - **IAM-enabled services:**
+  - **{{site.data.keyword.Bluemix_notm}} IAM-enabled services:**
      ```
      ibmcloud resource service-instances
      ```
@@ -248,7 +248,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
    You can also see the different service types in your dashboard as **Cloud Foundry Services** and **Services**.
 
-3. For IAM-enabled services, create a Cloud Foundry alias so that you can bind this service to your cluster. If your service already is a Cloud Foundry service, this step is not necessary and you can continue with the next step.
+3. For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, create a Cloud Foundry alias so that you can bind this service to your cluster. If your service already is a Cloud Foundry service, this step is not necessary and you can continue with the next step.
    1. Target a Cloud Foundry org and space.
       ```
       ibmcloud target --cf
@@ -280,7 +280,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-5.  Add the service to your cluster. For IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier.
+5.  Add the service to your cluster. For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier.
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -715,7 +715,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 {: #helm_links}
 
 * To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](cs_vpn.html#vpn-setup).
-* View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI.
+* View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) in the console.
 * Learn more about the Helm commands that are used to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
