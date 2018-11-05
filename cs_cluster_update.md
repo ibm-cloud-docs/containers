@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -378,6 +378,7 @@ Your {{site.data.keyword.containerlong_notm}} cluster comes with add-ons, such a
 **What default add-ons can I update separately from the cluster?**</br>
 You can optionally disable automatic updates for the following add-ons:
 * [Fluentd for logging](#logging)
+* [Ingress application load balancer](#alb)
 
 **Are there add-ons that I can't update separately from the cluster?**</br>
 
@@ -430,6 +431,92 @@ If automatic updates are disabled but you need to make a change to your configur
     ```
     {: pre}
 
+### Disabling automatic updates for the Ingress ALB add-on and manually updating ALB pods
+{: #alb}
+
+Control when the Ingress application load balancer (ALB) add-on is updated.
+{: shortdesc}
+
+When the ALB add-on is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to the add-on are enabled. Updates are performed on a rolling basis so that your Ingress ALBs don't experience any downtime.
+
+If you disable automatic updates, you are responsible for updating the add-on. As updates become available, you are notified in the CLI when you run the `ibmcloud ks albs` or `alb-autoupdate-get` commands.
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+{: note}
+
+Before you begin:
+
+1. Verify that your ALBs are running.
+    ```
+    ibmcloud ks albs
+    ```
+    {: pre}
+
+2. Check the status of automatic updates for the Ingress ALB add-on.
+    ```
+    ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output when automatic updates are enabled:
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are enabled in cluster mycluster
+    ALBs are at the latest version in cluster mycluster
+    ```
+    {: screen}
+
+    Example output when automatic updates are disabled:
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are disabled in cluster mycluster
+    ALBs are not at the latest version in cluster mycluster. To view the current version, run 'ibmcloud ks albs'.
+    ```
+    {: screen}
+
+3. Verify the current **Build** version of your ALB pods.
+    ```
+    ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    ALB ID                                            Status    Type      ALB IP         Zone    Build
+    private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
+    public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
+
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    ```
+    {: screen}
+
+You can manage automatic updates of the Ingress ALB add-on in the following ways:
+* Disable automatic updates.
+    ```
+    ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* Manually update your Ingress ALB add-on.
+    1. If an update is available and you want to update the add-on, first check the [changelog for the latest version of the Ingress ALB add-on](cs_versions_addons.html#alb_changelog) to verify any potentially disruptive changes.
+    2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
+        ```
+        ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+* If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. **Note**: After you roll back an update, automatic updates for ALB pods are disabled.
+    ```
+    ibmcloud ks alb-rollback --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* Re-enable automatic updates. Whenever the next build becomes available, the ALB pods are automatically updated to the latest build.
+        ```
+        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+<br />
 
 
 ## Updating from stand-alone worker nodes to worker pools

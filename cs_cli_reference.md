@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -189,8 +189,6 @@ ibmcloud plugin list
 
 </br>
 
-
-
 <table summary="Ingress application load balancer (ALB) commands table">
 <caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
@@ -203,21 +201,31 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
+      <td>[ibmcloud ks alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
+      <td>[ibmcloud ks alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
+      <td>[ibmcloud ks alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
       <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    </tr>
+    <tr>
       <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
       <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
       <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
+      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
       <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
+      <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
       <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
+      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
+    </tr>
+    <tr>
       <td>[ibmcloud ks albs](#cs_albs)</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
-
-
 
 </br>
 
@@ -1479,7 +1487,49 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
+### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+{: #cs_alb_autoupdate_disable}
 
+By default, automatic updates to the Ingress application load balancer (ALB) add-on are enabled. ALB pods are automatically updated when a new build version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb-update` command](#cs_alb_update).
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-disable --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+{: #cs_alb_autoupdate_enable}
+
+If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next build version becomes available, the ALBs are automatically updated to the latest build.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-enable --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+{: #cs_alb_autoupdate_get}
+
+Check if automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest build version.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-get --cluster mycluster
+```
+{: pre}
 
 ### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
 {: #cs_alb_cert_deploy}
@@ -1722,7 +1772,19 @@ View the details of an ALB.
   ```
   {: pre}
 
+### ibmcloud ks alb-rollback --cluster CLUSTER
+{: #cs_alb_rollback}
 
+If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. After you roll back an update, automatic updates for ALB pods are disabled. To re-enable automatic updates, use the [`alb-autoupdate-enable` command](#cs_alb_autoupdate_enable).
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-rollback --cluster mycluster
+```
+{: pre}
 
 ### ibmcloud ks alb-types [--json] [-s]
 {: #cs_alb_types}
@@ -1748,7 +1810,21 @@ View the ALB types that are supported in the region.
   ```
   {: pre}
 
+### ibmcloud ks alb-update --cluster CLUSTER
+{: #cs_alb_update}
 
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+```
+{: pre}
 
 ### ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 {: #cs_albs}
@@ -2004,7 +2080,7 @@ Disable automatic updates of your Fluentd pods in a specific cluster. When you u
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
 
-Enable automatic updates for your Fluentd pods in a specific cluster.
+Enable automatic updates for your Fluentd pods in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
 
 <strong>Command options</strong>:
 
@@ -2016,7 +2092,7 @@ Enable automatic updates for your Fluentd pods in a specific cluster.
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 {: #cs_log_autoupdate_get}
 
-Check if your Fluentd pods are set to automatically update in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
+Check if your Fluentd pods are set to automatically update in a specific cluster.
 
 <strong>Command options</strong>:
 
@@ -2618,6 +2694,8 @@ Enter a number> 3
 OK
 ```
 {: screen}
+
+
 
 ### ibmcloud ks regions
 {: #cs_regions}
