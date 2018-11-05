@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -56,7 +56,7 @@ Before you can decide what type of storage is the right solution for you, you mu
    - **Cold data:** Data that is rarely accessed, if at all. Common use cases are archives, long-term backups, historical data. 
    - **Frozen data:** Data that is not accessed and that you need to keep due to legal reasons. 
 
-   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine if your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.containerlong_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes this measurement into account to optimize your monthly billing. 
+   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine if your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes this measurement into account to optimize your monthly billing. 
    {: tip}
  
 5. Investigate if your data must be shared across multiple app instances, zones, or regions. 

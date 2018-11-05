@@ -101,7 +101,7 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that 
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>In Kubernetes v1.10 or later only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} UI or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
+  <td><b>In Kubernetes v1.10 or later only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>

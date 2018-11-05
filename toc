@@ -106,6 +106,7 @@ IBM Cloud Kubernetes Service
     IBM Cloud Kubernetes Service versions
         cs_versions.md
         cs_versions_changelog.md
+        cs_versions_addons.md
 
     cs_regions.md
     cs_access_reference.md

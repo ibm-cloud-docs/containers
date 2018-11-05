@@ -207,7 +207,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>The Kubernetes dashboard is a web-based UI that allows users to manage and troubleshoot the cluster and applications running in the cluster.</td>
+    <td>The Kubernetes dashboard is a web-based GUI that allows users to manage and troubleshoot the cluster and applications running in the cluster.</td>
     </tr>
     <tr>
     <td>heapster</td>

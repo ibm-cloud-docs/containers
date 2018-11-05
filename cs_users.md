@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 
 ---
@@ -31,7 +31,7 @@ Access policies determine the level of access that users in your {{site.data.key
 
 As you develop your plan to manage user access, consider the following general steps:
 1.  [Pick the right access policy and role for your users](#access_roles)
-2.  [Assign access roles to individual or groups of users in IAM](#iam_individuals_groups)
+2.  [Assign access roles to individual or groups of users in {{site.data.keyword.Bluemix_notm}} IAM](#iam_individuals_groups)
 3.  [Scope user access to cluster instances or resource groups](#resource_groups)
 
 After you understand how roles, users, and resources in your account can be managed, check out [Setting up access to your cluster](#access-checklist) for a checklist of how to configure access.
@@ -39,7 +39,7 @@ After you understand how roles, users, and resources in your account can be mana
 ### Pick the right access policy and role for your users
 {: #access_roles}
 
-You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containerlong_notm}} GUI or through the CLI, even when the actions are completed in IBM Cloud infrastructure (SoftLayer).
+You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containerlong_notm}} console or through the CLI, even when the actions are completed in IBM Cloud infrastructure (SoftLayer).
 {: shortdesc}
 
 Learn about the different types of permissions and roles, which role can perform each action, and how the roles relate to each other.
@@ -56,27 +56,27 @@ Example actions that are permitted by IAM platform roles are creating or removin
 <dd>In Kubernetes, role-based access control (RBAC) is a way of securing the resources inside your cluster. RBAC roles determine the Kubernetes actions that users can perform on those resources. Every user who is assigned an IAM platform role is automatically assigned a corresponding RBAC cluster role in the `default` Kubernetes. This RBAC cluster role is applied either in the default namespace or in all namespaces, depending on the IAM platform role that you choose.</br></br>
 Example actions that are permitted by RBAC roles are creating objects such as pods or reading pod logs.</dd>
 <dt><a href="#api_key">Infrastructure</a></dt>
-<dd>Infrastructure roles enable access to your IBM Cloud infrastructure (SoftLayer) resources. Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} do not need infrastructure roles as the API key is shared for all users within the region. Instead, IAM platform roles determine the infrastructure actions that users are allowed to perform. If you don't set up the API key with full <strong>Super User</strong> infrastructure or you need to grant specific device access to users, you can [customize infrastructure permissions](#infra_access). </br></br>
+<dd>Infrastructure roles enable access to your IBM Cloud infrastructure (SoftLayer) resources. Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} do not need infrastructure roles as the API key is shared for all users within the region. Instead, {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the infrastructure actions that users are allowed to perform. If you don't set up the API key with full <strong>Super User</strong> infrastructure or you need to grant specific device access to users, you can [customize infrastructure permissions](#infra_access). </br></br>
 Example actions that are permitted by infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.</dd>
 <dt>Cloud Foundry</dt>
 <dd>Not all services can be managed with {{site.data.keyword.Bluemix_notm}} IAM. If you're using one of these services, you can continue to use Cloud Foundry user roles to control access to those services. Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run <code>ibmcloud service list</code>.</br></br>
-Example actions that are permitted by Cloud Foundry roles are creating a new Cloud Foundry service instance or binding a Cloud Foundry service instance to a cluster. To learn more, see the available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the IAM documentation.</dd>
+Example actions that are permitted by Cloud Foundry roles are creating a new Cloud Foundry service instance or binding a Cloud Foundry service instance to a cluster. To learn more, see the available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the {{site.data.keyword.Bluemix_notm}} IAM documentation.</dd>
 </dl>
 
-### Assign access roles to individual or groups of users in IAM
+### Assign access roles to individual or groups of users in {{site.data.keyword.Bluemix_notm}} IAM
 {: #iam_individuals_groups}
 
-When you set IAM policies, you can assign roles to an individual user or to a group of users.
+When you set {{site.data.keyword.Bluemix_notm}} IAM policies, you can assign roles to an individual user or to a group of users.
 {: shortdesc}
 
 <dl>
 <dt>Individual users</dt>
-<dd>You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the permissions that they need to complete their tasks. You can assign more than one IAM role to each user.</dd>
+<dd>You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the permissions that they need to complete their tasks. You can assign more than one {{site.data.keyword.Bluemix_notm}} IAM role to each user.</dd>
 <dt>Multiple users in an access group</dt>
-<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.</dd>
+<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one {{site.data.keyword.Bluemix_notm}} IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.</dd>
 </dl>
 
-IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
+{{site.data.keyword.Bluemix_notm}} IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
 {: tip}
 
 You must also specify whether users have access to one cluster in a resource group, all clusters in a resource group, or all clusters in all resource groups in your account.
@@ -84,7 +84,7 @@ You must also specify whether users have access to one cluster in a resource gro
 ### Scope user access to cluster instances or resource groups
 {: #resource_groups}
 
-In IAM, you can assign user access roles to resource instances or resource groups.
+In {{site.data.keyword.Bluemix_notm}} IAM, you can assign user access roles to resource instances or resource groups.
 {: shortdesc}
 
 When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. If you want to add a resource group in your account, see [Best practices for setting up your account ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html) and [Setting up your resource groups](/docs/resources/bestpractice_rgs.html#setting-up-your-resource-groups).
@@ -92,7 +92,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 <dl>
 <dt>Resource instance</dt>
   <dd><p>Each {{site.data.keyword.Bluemix_notm}} service in your account is a resource that has instances. The instance differs by service. For example, in {{site.data.keyword.containerlong_notm}}, the instance is a cluster, but in {{site.data.keyword.cloudcerts_long_notm}}, the instance is a certificate. By default, resources also belong to the default resource group in your account. You can assign users an access role to a resource instance for the following scenarios.
-  <ul><li>All IAM services in your account, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
+  <ul><li>All {{site.data.keyword.Bluemix_notm}} IAM services in your account, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
   <li>All instances within a service, such as all the clusters in {{site.data.keyword.containerlong_notm}}.</li>
   <li>All instances within a region of a service, such as all the clusters in the **US South** region of {{site.data.keyword.containerlong_notm}}.</li>
   <li>To an individual instance, such as one cluster.</li></ul></dd>
@@ -101,7 +101,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
   <p>**Important**: A cluster can integrate only with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}. A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and recreate it in the correct resource group.</p>
   <p>If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), consider giving clusters unique names across resource groups and regions in your account to avoid metrics naming conflicts. You cannot rename a cluster.</p>
   <p>You can assign users an access role to a resource group for the following scenarios. Note that unlike resource instances, you cannot grant access to an individual instance within a resource group.</p>
-  <ul><li>All IAM services in the resource group, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
+  <ul><li>All {{site.data.keyword.Bluemix_notm}} IAM services in the resource group, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
   <li>All instances within a service in the resource group, such as all the clusters in {{site.data.keyword.containerlong_notm}}.</li>
   <li>All instances within a region of a service in the resource group, such as all the clusters in the **US South** region of {{site.data.keyword.containerlong_notm}}.</li></ul></dd>
 </dl>
@@ -116,9 +116,9 @@ After you [understand how roles, users, and resources in your account](#access_p
 {: shortdesc}
 
 1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
-2. Invite users to your account and [assign them IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
+2. Invite users to your account and [assign them {{site.data.keyword.Bluemix_notm}} IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
 3. To allow users to bind services to the cluster or to view logs that are forwarded from cluster logging configurations, [grant users Cloud Foundry roles](/docs/iam/mngcf.html) for the org and space that the services are deployed to or where logs are collected.
-4. If you use Kubernetes namespaces to isolate resources within the cluster, [copy the Kubernetes RBAC role bindings for the **Viewer** and **Editor** IAM platform roles to other namespaces](#role-binding).
+4. If you use Kubernetes namespaces to isolate resources within the cluster, [copy the Kubernetes RBAC role bindings for the **Viewer** and **Editor** {{site.data.keyword.Bluemix_notm}} IAM platform roles to other namespaces](#role-binding).
 5. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](#rbac).
 6. For other advanced configurations to control access to your cluster resources at the pod level, see [Configuring pod security](/docs/containers/cs_psp.html).
 
@@ -218,23 +218,23 @@ To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.
  
 To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials are stored in the API key must have [the **Super User** infrastructure role and the **Administrator** platform role for {{site.data.keyword.containerlong_notm}} and for {{site.data.keyword.registryshort_notm}}](#owner_permissions) in your {{site.data.keyword.Bluemix_notm}} account. Then, let that user perform the first admin action in a region and resource group. The user's infrastructure credentials are stored in an API key for that region and resource group.
 
-Other users within the account share the API key for accessing the infrastructure. When users log in to the {{site.data.keyword.Bluemix_notm}} account, an IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
+Other users within the account share the API key for accessing the infrastructure. When users log in to the {{site.data.keyword.Bluemix_notm}} account, an {{site.data.keyword.Bluemix_notm}} IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
 
-To see the IAM token for a CLI session, you can run `ibmcloud iam oauth-tokens`. IAM tokens can also be used to [make calls directly to the {{site.data.keyword.containerlong_notm}} API](cs_cli_install.html#cs_api).
+To see the {{site.data.keyword.Bluemix_notm}} IAM token for a CLI session, you can run `ibmcloud iam oauth-tokens`. {{site.data.keyword.Bluemix_notm}} IAM tokens can also be used to [make calls directly to the {{site.data.keyword.containerlong_notm}} API](cs_cli_install.html#cs_api).
 {: tip}
 
-**If users have access to the portfolio through an IAM token, how do I limit which commands a user can run?**
+**If users have access to the portfolio through an {{site.data.keyword.Bluemix_notm}} IAM token, how do I limit which commands a user can run?**
 
-After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform). By assigning IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has the **Super User** infrastructure role, all infrastructure-related commands can be run in a cluster. But, depending on the IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
+After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [platform role](#platform). By assigning {{site.data.keyword.Bluemix_notm}} IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has the **Super User** infrastructure role, all infrastructure-related commands can be run in a cluster. But, depending on the {{site.data.keyword.Bluemix_notm}} IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
 
-For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users or users in IAM access groups to that region by setting IAM platform management policies for them in that region. A user with a **Viewer** IAM platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's IAM platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users or users in {{site.data.keyword.Bluemix_notm}} IAM access groups to that region by setting platform management policies for them in that region. A user with a **Viewer** platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
 
 To audit the actions that users in your account run, you can use [{{site.data.keyword.cloudaccesstrailshort}}](cs_at_events.html) to view all cluster-related events.
 {: tip}
 
 **What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
 
-For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure (SoftLayer) permissions](#infra_access) for users.
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.Bluemix_notm}} IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure (SoftLayer) permissions](#infra_access) for users.
 
 **What happens if the user who set the API key for a region and resource group leaves the company?**
 
@@ -258,15 +258,15 @@ To ensure that all infrastructure-related actions can be successfully completed 
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
 
-2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct IAM platform roles.
+2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct {{site.data.keyword.Bluemix_notm}} IAM platform roles.
     1. Navigate to **Manage > Account > Users**.
     2. Click the name of the user who you want to set the API key or whose credentials you want to set for the API key.
-    3. If the user doesn't have the IAM platform **Administrator** role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
-    4. If the user doesn't have at least the **Viewer** IAM platform role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
-    5. To create clusters, the user also needs the **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level.
+    3. If the user doesn't have the **Administrator** platform role for all {{site.data.keyword.containerlong_notm}} clusters in all regions, [assign that platform role to the user](#platform).
+    4. If the user doesn't have at least the **Viewer** platform role for the resource group where you want to set the API key, [assign that resource group role to the user](#platform).
+    5. To create clusters, the user also needs the **Administrator** platform role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level.
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
-    1. From the expanding menu, select **Infrastructure**.
+    1. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
     2. From the menu bar, select **Account** > **Users** > **User List**.
     3. In the **API Key** column, verify that the user has an API Key, or click **Generate**.
     4. Select the user profile's name and check the user's permissions.
@@ -362,22 +362,22 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 <br />
 
 
-## Granting users access to your cluster through IAM
+## Granting users access to your cluster through {{site.data.keyword.Bluemix_notm}} IAM
 {: #platform}
 
-Set IAM platform management policies in the [GUI](#add_users) or [CLI](#add_users_cli) so that users can work with clusters in {{site.data.keyword.containerlong_notm}}. Before you begin, check out [Understanding access policies and roles](#access_policies) to review what policies are, whom you can assign policies to, and what resources can be granted policies.
+Set {{site.data.keyword.Bluemix_notm}} IAM platform management policies in the [{{site.data.keyword.Bluemix_notm}} console](#add_users) or [CLI](#add_users_cli) so that users can work with clusters in {{site.data.keyword.containerlong_notm}}. Before you begin, check out [Understanding access policies and roles](#access_policies) to review what policies are, whom you can assign policies to, and what resources can be granted policies.
 {: shortdesc}
 
-IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
+{{site.data.keyword.Bluemix_notm}} IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
 {: tip}
 
-### Assigning IAM roles with the GUI
+### Assigning {{site.data.keyword.Bluemix_notm}} IAM roles with the console
 {: #add_users}
 
-Grant users access to your clusters by assigning IAM platform management roles with the GUI.
+Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management roles with the {{site.data.keyword.Bluemix_notm}} console.
 {: shortdesc}
 
-Before you begin, verify that you're assigned the **Administrator** IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
+Before you begin, verify that you're assigned the **Administrator** platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 
@@ -407,37 +407,37 @@ Before you begin, verify that you're assigned the **Administrator** IAM platform
     2. From the **Services** list, select **{{site.data.keyword.containershort_notm}}**.
     3. From the **Region** list, select one or all regions.
     4. From the **Service instance** list, select a cluster name or **All service instances**.
-    5. In the **Select roles** section, choose an IAM platform access role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform). Note: If you assign a user the **Administrator** IAM platform role for only one cluster, you must also assign the user the **Viewer** role for all clusters in that region in the resource group.
+    5. In the **Select roles** section, choose an {{site.data.keyword.Bluemix_notm}} IAM platform access role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform). Note: If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in that region in the resource group.
     6. Click **Assign**.
 
-4. If you want users to be able to work with clusters in a resource group other than the default, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** role for resource groups.
+4. If you want users to be able to work with clusters in a resource group other than the default, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** platform role for resource groups.
   1. Click **Assign access within a resource group**.
   2. Select the resource group name.
   3. From the **Assign access to a resource group** list, select the **Viewer** role. This role permits users to access the resource group itself, but not to resources within the group.
   4. Click **Assign**.
 
-### Assigning IAM roles with the CLI
+### Assigning {{site.data.keyword.Bluemix_notm}} IAM roles with the CLI
 {: #add_users_cli}
 
-Grant users access to your clusters by assigning IAM platform management roles with the CLI.
+Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management roles with the CLI.
 {: shortdesc}
 
 **Before you begin**:
 
-- Verify that you're assigned the `cluster-admin` IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
+- Verify that you're assigned the `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-**To assign IAM roles to an individual user with the CLI:**
+**To assign {{site.data.keyword.Bluemix_notm}} IAM roles to an individual user with the CLI:**
 
-1.  Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). You can choose Viewer, Editor, Operator, and Administrator for the IAM platform role. To find a list of supported actions per role, see [User access permissions](cs_access_reference.html#platform).
+1.  Create an {{site.data.keyword.Bluemix_notm}} IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). You can choose Viewer, Editor, Operator, and Administrator for the platform role. To find a list of supported actions per role, see [User access permissions](cs_access_reference.html#platform).
     * To assign access to one cluster in a resource group:
       ```
       ibmcloud iam user-policy-create <user_email> --resource-group-name <resource_group_name> --service-name containers-kubernetes --region <region> --service-instance <cluster_ID> --roles <role>
       ```
       {: pre}
 
-      **Note**: If you assign a user the **Administrator** IAM platform role for only one cluster, you must also assign the user the **Viewer** role for all clusters in the region within the resource group.
+      **Note**: If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in the region within the resource group.
 
     * To assign access to all clusters in a resource group:
       ```
@@ -463,7 +463,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
     ```
     {: pre}
 
-4. The IAM platform role is automatically applied as a corresponding [RBAC role binding or cluster role binding](#role-binding). Verify that the user is added to the RBAC role by running one of the following commands for the IAM platform role you assigned:
+4. The {{site.data.keyword.Bluemix_notm}} IAM platform role is automatically applied as a corresponding [RBAC role binding or cluster role binding](#role-binding). Verify that the user is added to the RBAC role by running one of the following commands for the platform role you assigned:
     * Viewer:
         ```
         kubectl get rolebinding ibm-view -o yaml -n default
@@ -485,7 +485,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
         ```
         {: pre}
 
-  For example, if you assign user `john@email.com` the **Viewer** IAM platform role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
+  For example, if you assign user `john@email.com` the **Viewer** platform role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
 
   ```
   apiVersion: rbac.authorization.k8s.io/v1
@@ -509,7 +509,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
   {: screen}
 
 
-**To assign IAM platform roles multiple users in an access group with the CLI:**
+**To assign {{site.data.keyword.Bluemix_notm}} IAM platform roles multiple users in an access group with the CLI:**
 
 1. Create an access group.
     ```
@@ -523,14 +523,14 @@ Grant users access to your clusters by assigning IAM platform management roles w
     ```
     {: pre}
 
-3. Create an IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}}. You can choose Viewer, Editor, Operator, and Administrator for the IAM platform role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform).
+3. Create an {{site.data.keyword.Bluemix_notm}} IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}}. You can choose Viewer, Editor, Operator, and Administrator for the platform role. To find a list of supported actions per role, see [User access permissions](/cs_access_reference.html#platform).
   * To assign access to one cluster in a resource group:
       ```
       ibmcloud iam access-group-policy-create <access_group_name> --resource-group-name <resource_group_name> --service-name containers-kubernetes --region <region> --service-instance <cluster_ID> --roles <role>
       ```
       {: pre}
 
-      **Note**: If you assign a user the **Administrator** IAM platform role for only one cluster, you must also assign the user the **Viewer** role for all clusters in the region within the resource group.
+      **Note**: If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in the region within the resource group.
 
   * To assign access to all clusters in a resource group:
       ```
@@ -558,7 +558,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
     ```
     {: pre}
 
-6. The IAM platform role is automatically applied as a corresponding [RBAC role binding or cluster role binding](#role-binding). Verify that the user is added to the RBAC role by running one of the following commands for the IAM platform role you assigned:
+6. The {{site.data.keyword.Bluemix_notm}} IAM platform role is automatically applied as a corresponding [RBAC role binding or cluster role binding](#role-binding). Verify that the user is added to the RBAC role by running one of the following commands for the platform role you assigned:
     * Viewer:
         ```
         kubectl get rolebinding ibm-view -o yaml -n default
@@ -580,7 +580,7 @@ Grant users access to your clusters by assigning IAM platform management roles w
         ```
         {: pre}
 
-  For example, if you assign the access group `team1` the **Viewer** IAM platform role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
+  For example, if you assign the access group `team1` the **Viewer** platform role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
   ```
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
@@ -622,13 +622,13 @@ Cluster role bindings apply RBAC cluster roles to all namespaces in the cluster.
 
 **What do these roles look like in my cluster?**</br>
 
-Every user who is assigned a [IAM platform managment role](#platform) is automatically assigned a corresponding RBAC cluster role. These RBAC cluster roles are predefined and permit users to interact with Kubernetes resources in your cluster. Additionally, a role binding is created to apply the cluster role to a specific namespace, or a cluster role binding is created to apply the cluster role to all namespaces.
+Every user who is assigned a [{{site.data.keyword.Bluemix_notm}} IAM platform managment role](#platform) is automatically assigned a corresponding RBAC cluster role. These RBAC cluster roles are predefined and permit users to interact with Kubernetes resources in your cluster. Additionally, a role binding is created to apply the cluster role to a specific namespace, or a cluster role binding is created to apply the cluster role to all namespaces.
 
-The following table describes the relationships between the IAM platform roles and the corresponding cluster roles and role bindings or cluster role bindings that are automatically created for the IAM platform roles.
+The following table describes the relationships between the {{site.data.keyword.Bluemix_notm}} platform roles and the corresponding cluster roles and role bindings or cluster role bindings that are automatically created for the platform roles.
 
 <table>
   <tr>
-    <th>IAM platform role</th>
+    <th>{{site.data.keyword.Bluemix_notm}} IAM platform role</th>
     <th>RBAC cluster role</th>
     <th>RBAC role binding</th>
     <th>RBAC cluster role binding</th>
@@ -664,13 +664,13 @@ To learn more about the actions permitted by each RBAC role, check out the [User
 
 **How can I manage RBAC permissions for specific namespaces in my cluster?**
 
-If you use [Kubernetes namespaces to partition your cluster and provide isolation for workloads](cs_secure.html#container), you must assign user access to specific namespaces. When you assign a user the **Operator** or **Administrator** IAM platform roles, the corresponding `admin` and `cluster-admin` predefined cluster roles are automatically applied to the entire cluster. However, when you assign a user the **Viewer** or **Editor** IAM platform roles, the corresponding `view` and `edit` predefined cluster roles are automatically applied only in the default namespace. To enforce the same level of user access in other namespaces, you can [copy the role bindings](#rbac_copy) for those cluster roles, `ibm-view` and `ibm-edit`, to other namespaces.
+If you use [Kubernetes namespaces to partition your cluster and provide isolation for workloads](cs_secure.html#container), you must assign user access to specific namespaces. When you assign a user the **Operator** or **Administrator** platform roles, the corresponding `admin` and `cluster-admin` predefined cluster roles are automatically applied to the entire cluster. However, when you assign a user the **Viewer** or **Editor** platform roles, the corresponding `view` and `edit` predefined cluster roles are automatically applied only in the default namespace. To enforce the same level of user access in other namespaces, you can [copy the role bindings](#rbac_copy) for those cluster roles, `ibm-view` and `ibm-edit`, to other namespaces.
 
 **Can I create custom roles or cluster roles?**
 
-The `view`, `edit`, `admin` and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding IAM platform role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac).
+The `view`, `edit`, `admin` and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.Bluemix_notm}} IAM platform role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac).
 
-**When do I need to use cluster role bindings and role bindings that are not tied to the IAM permissions that I set?**
+**When do I need to use cluster role bindings and role bindings that are not tied to the {{site.data.keyword.Bluemix_notm}} IAM permissions that I set?**
 
 You might want to authorize who can create and update pods in your cluster. With [pod security policies](https://console.bluemix.net/docs/containers/cs_psp.html#psp), you can use existing cluster role bindings that come with your cluster, or create your own.
 
@@ -682,7 +682,7 @@ You might also want to integrate add-ons to your cluster. For example, when you 
 Some roles and cluster roles are applied only to one namespace. For example, the `view` and `edit` predefined cluster roles are automatically applied only in the `default` namespace. To enforce the same level of user access in other namespaces, you can copy the role bindings for those roles or cluster roles to other namespaces.
 {: shortdesc}
 
-For example, say you assign user "john@email.com" the **Editor** IAM platform management role. The predefined RBAC cluster role `edit` is automatically created in your cluster, and the `ibm-edit` role binding applies the permissions in the `default` namespace. You want "john@email.com" to also have Editor access in your development namespace, so you copy the `ibm-edit` role binding from `default` to `development`. **Note**: You must copy the role binding each time a user is added to the `view` or `edit` roles.
+For example, say you assign user "john@email.com" the **Editor** platform management role. The predefined RBAC cluster role `edit` is automatically created in your cluster, and the `ibm-edit` role binding applies the permissions in the `default` namespace. You want "john@email.com" to also have Editor access in your development namespace, so you copy the `ibm-edit` role binding from `default` to `development`. **Note**: You must copy the role binding each time a user is added to the `view` or `edit` roles.
 
 1. Copy the role binding from `default` to another namespace.
     ```
@@ -708,7 +708,7 @@ For example, say you assign user "john@email.com" the **Editor** IAM platform ma
 ### Creating custom RBAC permissions for users, groups, or service accounts
 {: #rbac}
 
-The `view`, `edit`, `admin` and `cluster-admin` cluster roles are automatically created when you assign the corresponding IAM platform management role. Do you need your cluster access policies to be more granular than these predefined permissions allow? No problem! You can create custom RBAC roles and cluster roles.
+The `view`, `edit`, `admin` and `cluster-admin` cluster roles are automatically created when you assign the corresponding {{site.data.keyword.Bluemix_notm}} IAM platform management role. Do you need your cluster access policies to be more granular than these predefined permissions allow? No problem! You can create custom RBAC roles and cluster roles.
 {: shortdesc}
 
 You can assign custom RBAC roles and cluster roles to individual users, groups of users (in clusters that run Kubernetes v1.11 or later), or service accounts. When a binding is created for a group, it affects any user that is added or removed from that group. When you add users to a group, they get the access rights of the group in addition to any individual access rights that you grant them. If they are removed, their access is revoked. **Note**: You can't add service accounts to access groups.
@@ -727,7 +727,7 @@ If you want to assign access to a process that runs in pods, such as a continuou
 Before you begin:
 
 - Target the [Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-- To assign access to individual users or users in an access group, ensure that the user or group has been assigned at least one [IAM platform role](#platform) at the {{site.data.keyword.containerlong_notm}} service level.
+- To assign access to individual users or users in an access group, ensure that the user or group has been assigned at least one [{{site.data.keyword.Bluemix_notm}} IAM platform role](#platform) at the {{site.data.keyword.containerlong_notm}} service level.
 
 To create custom RBAC permissions:
 
@@ -861,13 +861,13 @@ To create custom RBAC permissions:
               <td><code>subjects.kind</code></td>
               <td>Specify the kind as one of the following:
               <ul><li>`User`: Bind the RBAC role or cluster role to an individual user in your account.</li>
-              <li>`Group`: For clusters that run Kubernetes 1.11 or later, bind the RBAC role or cluster role to an [IAM access group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>`Group`: For clusters that run Kubernetes 1.11 or later, bind the RBAC role or cluster role to an [{{site.data.keyword.Bluemix_notm}} IAM access group](/docs/iam/groups.html#groups) in your account.</li>
               <li>`ServiceAccount`: Bind the RBAC role or cluster role to a service account in a namespace in your cluster.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
               <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>https://iam.ng.bluemix.net/IAM#user_email</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user_email</code></li></ul></li>
-              <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [IAM group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
             </tr>
             <tr>
@@ -918,10 +918,10 @@ Now that you created and bound a custom Kubernetes RBAC role or cluster role, fo
 ## Customizing infrastructure permissions
 {: #infra_access}
 
-When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [{{site.data.keyword.Bluemix_notm}} IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
 {: shortdesc}
 
-For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.Bluemix_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
 
 If you have multizone clusters, your IBM Cloud infrastructure (SoftLayer) account owner needs to turn on VLAN spanning so that the nodes in different zones can communicate within the cluster. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
 {: tip}
@@ -1017,23 +1017,23 @@ Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner mus
 2. For each cluster that the user created, follow these steps:
     1. Check which infrastructure account the user used to provision the cluster.
         1.  In the **Worker Nodes** tab, select a worker node and note its **ID**.
-        2.  Open the expandable menu and click **Infrastructure**.
-        3.  From the infrastructure menu, click **Devices > Device List**.
+        2.  Open the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") and click **Infrastructure**.
+        3.  From the infrastructure navigation pane, click **Devices > Device List**.
         4.  Search for the worker node ID that you previously noted.
         5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
     2. Determine what happens to the infrastructure account that the user used to provision the clusters after the user leaves.
-        * If the user does not own the infrastructure account, then other users have access to this infrastructure account and it persists after the user leaves. You can continue to work with these clusters in your account. Make sure at least one other user has the [**Administrator** IAM platform role](#platform) for the clusters.
+        * If the user does not own the infrastructure account, then other users have access to this infrastructure account and it persists after the user leaves. You can continue to work with these clusters in your account. Make sure at least one other user has the [**Administrator** platform role](#platform) for the clusters.
         * If the user owns the infrastructure account, then the infrastructure account is deleted when the user leaves. You cannot continue to work with these clusters. To prevent the cluster from becoming orphaned, the user must delete the clusters before the user leaves. If the user has left but the clusters were not deleted, you must use the `ibmcloud ks credential-set` command to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, and delete the cluster. For more information, see [Unable to modify or delete infrastructure in an orphaned cluster](cs_troubleshoot_clusters.html#orphaned).
 
 3. Remove the user from the {{site.data.keyword.Bluemix_notm}} account.
     1. Navigate to **Manage > Account > Users**.
     2. Click the user's username.
-    3. In the table entry for the user, click the actions menu and select **Remove user**. When you remove a user, the user's assigned IAM platform roles, Cloud Foundry roles, and IBM Cloud infrastructure (SoftLayer) roles are automatically removed.
+    3. In the table entry for the user, click the actions menu and select **Remove user**. When you remove a user, the user's assigned {{site.data.keyword.Bluemix_notm}} IAM platform roles, Cloud Foundry roles, and IBM Cloud infrastructure (SoftLayer) roles are automatically removed.
 
-4. When IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).
+4. When {{site.data.keyword.Bluemix_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).
 
 5. If you have a Pay-As-You-Go account that is automatically linked to your {{site.data.keyword.Bluemix_notm}} account, the user's IBM Cloud infrastructure (SoftLayer) roles are automatically removed. However, if you have a [different type of account](#understand_infra), you might need to manually remove the user from IBM Cloud infrastructure (SoftLayer).
-    1. In the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) menu, click **Infrastructure**.
+    1. In the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Infrastructure**.
     2. Navigate to **Account > Users > User List**.
     2. Look for a table entry for the user.
         * If you don't see an entry for the user, the user has already been removed. No further action is required.
@@ -1051,7 +1051,7 @@ If you want to remove specific permissions for a user, you can remove individual
 
 Before you begin, [ensure that the user's infrastructure credentials are not used to set the API key or for the `ibmcloud ks credential-set` command](#removing). After, you can remove:
 * [a user from an access group](#remove_access_group)
-* [a user's IAM platform and associated RBAC permissions](#remove_iam_rbac)
+* [a user's {{site.data.keyword.Bluemix_notm}} IAM platform and associated RBAC permissions](#remove_iam_rbac)
 * [a user's custom RBAC permissions](#remove_custom_rbac)
 * [a user's Cloud Foundry permissions](#remove_cloud_foundry)
 * [a user's infrastructure permissions](#remove_infra)
@@ -1064,14 +1064,14 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 3. Click the **Access group** tab.
 4. In the table entry for the access group, click the actions menu and select **Remove user**. When the user is removed, any roles that were assigned to the access group are removed from the user.
 
-#### Remove IAM platform permissions and the associated pre-defined RBAC permissions
+#### Remove {{site.data.keyword.Bluemix_notm}} IAM platform permissions and the associated pre-defined RBAC permissions
 {: #remove_iam_rbac}
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 2. Click the name of the user that you want to remove permissions from.
 3. In the table entry for the permission that you want to remove, click the actions menu.
 4. Select **Remove.**
-5. When IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster-config`. However, if you created [custom RBAC roles or cluster roles](#rbac), you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to remove custom RBAC permissions below.
+5. When {{site.data.keyword.Bluemix_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster-config`. However, if you created [custom RBAC roles or cluster roles](#rbac), you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to remove custom RBAC permissions below.
 
 #### Remove custom RBAC permissions
 {: #remove_custom_rbac}
@@ -1109,7 +1109,7 @@ To remove all of a user's Cloud Foundry permissions, you can remove the user's o
 {: #remove_infra}
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
-2. From the menu, click **Infrastructure**.
+2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Infrastructure**.
 3. Click the user's email address.
 4. Click the **Portal Permissions** tab.
 5. In each tab, deselect specific permissions.

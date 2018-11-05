@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -402,7 +402,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>N/A</td>
 <td>N/A</td>
 <td>Updated the OpenID Connect configuration for the cluster's Kubernetes API server to support {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) access groups. Added `Priority` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod priority. For more information, see:
-<ul><li>[IAM access groups](cs_users.html#rbac)</li>
+<ul><li>[{{site.data.keyword.Bluemix_notm}} IAM access groups](cs_users.html#rbac)</li>
 <li>[Configuring pod priority](cs_pod_priority.html#pod_priority)</li></ul></td>
 </tr>
 <tr>

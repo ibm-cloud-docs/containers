@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-05"
 
 
 ---
@@ -24,17 +24,17 @@ lastupdated: "2018-11-01"
 When you [assign cluster permissions](cs_users.html), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-## IAM platform and Kubernetes RBAC
+## {{site.data.keyword.Bluemix_notm}} IAM platform and Kubernetes RBAC
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. IAM platform roles determine the actions that users can perform on a cluster. Every user who is assigned an IAM platform role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in the default namespace. Additionally, IAM platform roles automatically set basic infrastructure permissions for users. To set IAM policies, see [Assigning IAM platform permissions](cs_users.html#platform). To learn more about RBAC roles, see [Assigning RBAC permissions](cs_users.html#role-binding).
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the actions that users can perform on a cluster. Every user who is assigned a platform role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in the default namespace. Additionally, platform roles automatically set basic infrastructure permissions for users. To set policies, see [Assigning {{site.data.keyword.Bluemix_notm}} IAM platform permissions](cs_users.html#platform). To learn more about RBAC roles, see [Assigning RBAC permissions](cs_users.html#role-binding).
 
-The following table shows the cluster management permissions granted by each IAM platform role and the Kubernetes resource permissions for the corresponding RBAC roles.
+The following table shows the cluster management permissions granted by each platform role and the Kubernetes resource permissions for the corresponding RBAC roles.
 
 <table summary="The table shows user permissions for IAM platform roles and corresponding RBAC policies. Rows are to be read from the left to right, with the IAM platform role in column one, the cluster permission in column two and the corresponding RBAC role in column three.">
-<caption>Cluster management permissions by IAM platform and RBAC role</caption>
+<caption>Cluster management permissions by platform and RBAC role</caption>
 <thead>
-    <th>IAM platform role</th>
+    <th>Platform role</th>
     <th>Cluster management permissions</th>
     <th>Corresponding RBAC role and resource permissions</th>
 </thead>
@@ -42,7 +42,7 @@ The following table shows the cluster management permissions granted by each IAM
     <td>**Viewer**</td>
     <td>
       Cluster:<ul>
-        <li>View the name and email address for the owner of the IAM API key for a resource group and region</li>
+        <li>View the name and email address for the owner of the {{site.data.keyword.Bluemix_notm}} IAM API key for a resource group and region</li>
         <li>If your {{site.data.keyword.Bluemix_notm}} account uses different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, view the infrastructure user name</li>
         <li>List all or view details for clusters, worker nodes, worker pools, services in a cluster, and webhooks</li>
         <li>View the VLAN spanning status for the infrastructure account</li>
@@ -107,7 +107,7 @@ The following table shows the cluster management permissions granted by each IAM
         <li>Encrypt Kubernetes secrets by using {{site.data.keyword.keymanagementservicefull}}</li>
         <li>Set the API key for the {{site.data.keyword.Bluemix_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio</li>
         <li>Set, view, and remove infrastructure credentials for the {{site.data.keyword.Bluemix_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio</li>
-        <li>Assign and change IAM platform roles for other existing users in the account</li>
+        <li>Assign and change {{site.data.keyword.Bluemix_notm}} IAM platform roles for other existing users in the account</li>
         <li>When set for all {{site.data.keyword.containerlong_notm}} instances (clusters) in all regions: List all available VLANs in the account</ul>
       Logging:<ul>
         <li>Create and update log forwarding configurations for type `kube-audit`</li>
@@ -133,7 +133,7 @@ The following table shows the cluster management permissions granted by each IAM
 ## Cloud Foundry roles
 {: #cloud-foundry}
 
-Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the IAM documentation.
+Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.Bluemix_notm}}, run `ibmcloud service list`. To learn more, see all available [org and space roles](/docs/iam/cfaccess.html) or the steps for [managing Cloud Foundry access](/docs/iam/mngcf.html) in the {{site.data.keyword.Bluemix_notm}} IAM documentation.
 
 The following table shows the Cloud Foundry roles required for cluster action permissions.
 
@@ -160,7 +160,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 ## Infrastructure roles
 {: #infra}
 
-**Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
+**Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 

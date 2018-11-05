@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -246,7 +246,7 @@ To deploy the app:
 
 11. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
-    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
 12. In the **Workloads** tab, you can see the resources that you created.
@@ -373,7 +373,7 @@ As defined in the configuration script, Kubernetes can use an availability check
   ```
   {: screen}
 
-7.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard GUI.
+7.  Check your pod status to monitor the health of your app in Kubernetes. You can check the status from the CLI or in the Kubernetes dashboard.
 
     *  **From the CLI**: Watch what is happening to your pods as they change status.
        ```
@@ -381,7 +381,7 @@ As defined in the configuration script, Kubernetes can use an availability check
        ```
        {: pre}
 
-    *  **From the GUI**:
+    *  **From the Kubernetes dashboard**:
 
        1.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
        2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.

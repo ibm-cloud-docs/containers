@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -26,7 +26,7 @@ lastupdated: "2018-11-01"
 
 **General**
 
-- [Pricing calculator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [Cost estimator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
@@ -85,7 +85,8 @@ lastupdated: "2018-11-01"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-- [REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 

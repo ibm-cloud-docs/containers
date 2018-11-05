@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-11-02"
 
 ---
 
@@ -166,10 +166,10 @@ If you have special requirements, you can set up your own logging solution in yo
 ## Configuring log forwarding
 {: #configuring}
 
-You can configure logging for {{site.data.keyword.containerlong_notm}} through the GUI or through the CLI.
+You can configure logging for {{site.data.keyword.containerlong_notm}} through the console or through the CLI.
 {: shortdesc}
 
-### Enabling log forwarding with the GUI
+### Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console
 {: #enable-forwarding-ui}
 
 You can configure log forwarding in the {{site.data.keyword.containerlong_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
@@ -662,15 +662,15 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
-* Be sure that you have [the **Administrator IAM platform role](cs_users.html#platform) for the cluster that you're working with.
+* Be sure that you have [the **Administrator platform role](cs_users.html#platform) for the cluster that you're working with.
 
 **Creating a snapshot**
 
-1. Create an Object Storage bucket through the GUI by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
-  2. Give the HMAC credentials the `Writer` IAM role.
+  2. Give the HMAC credentials the `Writer` service role.
   3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
 
 3. Through the CLI, make a request for a snapshot of your master logs.
@@ -691,7 +691,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: screen}
 
-4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.Bluemix_notm}} UI to download the file.
+4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.Bluemix_notm}} console to download the file.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -722,7 +722,7 @@ Metrics help you monitor the health and performance of your clusters. You can us
 
 <dl>
   <dt>Cluster details page in {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this GUI to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
   <dt>Kubernetes dashboard</dt>
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>

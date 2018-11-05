@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-01"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -189,8 +189,6 @@ ibmcloud plugin list
 
 </br>
 
-
-
 <table summary="Ingress application load balancer (ALB) commands table">
 <caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
@@ -203,21 +201,31 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
+      <td>[ibmcloud ks alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
+      <td>[ibmcloud ks alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
+      <td>[ibmcloud ks alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
       <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    </tr>
+    <tr>
       <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
       <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
       <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
+      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
       <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
+      <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
       <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
+      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
+    </tr>
+    <tr>
       <td>[ibmcloud ks albs](#cs_albs)</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
-
-
 
 </br>
 
@@ -392,9 +400,9 @@ Region:                us-south
 ### ibmcloud ks api-key-info --cluster CLUSTER [--json] [-s]
 {: #cs_api_key_info}
 
-View the name and email address for the owner of the IAM API key in an {{site.data.keyword.containerlong_notm}} resource group and region.
+View the name and email address for the owner of the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group and region.
 
-The Identity and Access Management (IAM) API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
+The {{site.data.keyword.Bluemix_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.Bluemix_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
 
 When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](cs_users.html#infra_access).
 
@@ -402,7 +410,7 @@ If you find that you need to update the API key that is stored for a resource gr
 
 **Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credential-set](#cs_credentials_set) command.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -429,13 +437,13 @@ If you find that you need to update the API key that is stored for a resource gr
 ### ibmcloud ks api-key-reset [-s]
 {: #cs_api_key_reset}
 
-Replace the current IAM API key in an {{site.data.keyword.containerlong_notm}} region.
+Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.containerlong_notm}} region.
 
-This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
+This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
 **Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -463,7 +471,7 @@ Get information about an option for a cluster's Kubernetes API server configurat
 
 View the URL for the remote logging service that you are sending API server audit logs to. The URL was specified when you created the webhook backend for the API server configuration.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -489,7 +497,7 @@ Set an option for a cluster's Kubernetes API server configuration. This command 
 
 Set the webhook backend for the API server configuration. The webhook backend forwards API server audit logs to a remote server. A webhook configuration is created based on the information you provide in this command's flags. If you do not provide any information in the flags, a default webhook configuration is used.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -528,7 +536,7 @@ Disable an option for a cluster's Kubernetes API server configuration. This comm
 
 Disable the webhook backend configuration for the cluster's API server. Disabling the webhook backend stops forwarding API server audit logs to a remote server.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -549,7 +557,7 @@ Disable the webhook backend configuration for the cluster's API server. Disablin
 
 Restart the cluster master to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -698,8 +706,8 @@ ibmcloud ks cluster-config --cluster my_cluster
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
 <strong>Minimum required permissions</strong>:
-* **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}} at the account level
-* **Administrator** IAM platform role for {{site.data.keyword.registrylong_notm}} at the account level
+* **Administrator** platform role for {{site.data.keyword.containerlong_notm}} at the account level
+* **Administrator** platform role for {{site.data.keyword.registrylong_notm}} at the account level
 * **Super User** role for IBM Cloud infrastructure (SoftLayer)
 
 <strong>Command options</strong>
@@ -885,7 +893,7 @@ trusted: <em>true</em>
 
 Enable a feature on an existing cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -916,7 +924,7 @@ Enable a feature on an existing cluster.
 
 View information about a cluster in your organization.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -983,7 +991,7 @@ View information about a cluster in your organization.
 
 Remove a cluster from your organization.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1017,7 +1025,7 @@ Update the Kubernetes master to the default API version. During the update, you 
 
 You might need to change your YAML files for future deployments. Review this [release note](cs_versions.html) for details.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1054,7 +1062,7 @@ You might need to change your YAML files for future deployments. Review this [re
 
 View a list of clusters in your organization.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1111,7 +1119,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containerlon
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
 <strong>Command options</strong>:
 
@@ -1145,7 +1153,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 
 **Note:** When you remove an {{site.data.keyword.Bluemix_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
 <strong>Command options</strong>:
 
@@ -1177,7 +1185,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 
 List the services that are bound to one or all of the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1210,7 +1218,7 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 
 After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 
-<strong>Minimum required permissions</strong>: **Reader** IAM service access role for {{site.data.keyword.registrylong_notm}}. **Note**: Do not assign policies for {{site.data.keyword.registryshort_notm}} at the resource group level.
+<strong>Minimum required permissions</strong>: **Reader** service access role for {{site.data.keyword.registrylong_notm}}. **Note**: Do not assign policies for {{site.data.keyword.registryshort_notm}} at the resource group level.
 
 **Command options**:
 
@@ -1248,7 +1256,7 @@ Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservi
 
 **Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1279,7 +1287,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 
 Register a webhook.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1324,7 +1332,7 @@ You can add existing portable public or private subnets from your IBM Cloud infr
 * When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
 * To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](cs_subnets.html#subnet-routing).
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1357,7 +1365,7 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 * When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
 * If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1394,7 +1402,7 @@ This private subnet is not one provided by IBM Cloud infrastructure (SoftLayer).
 * When you add a private user subnet to a cluster, IP addresses of this subnet are used for private Load Balancers in the cluster. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
 * If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1426,7 +1434,7 @@ Remove your own private subnet from a specified cluster.
 
 **Note:** Any service that was deployed to an IP address from your own private subnet remains active after the subnet is removed.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1453,7 +1461,7 @@ Remove your own private subnet from a specified cluster.
 
 View a list of subnets that are available in an IBM Cloud infrastructure (SoftLayer) account.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1479,7 +1487,49 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
+### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
+{: #cs_alb_autoupdate_disable}
 
+By default, automatic updates to the Ingress application load balancer (ALB) add-on are enabled. ALB pods are automatically updated when a new build version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb-update` command](#cs_alb_update).
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-disable --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
+{: #cs_alb_autoupdate_enable}
+
+If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next build version becomes available, the ALBs are automatically updated to the latest build.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-enable --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks alb-autoupdate-get --cluster CLUSTER
+{: #cs_alb_autoupdate_get}
+
+Check if automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest build version.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-autoupdate-get --cluster mycluster
+```
+{: pre}
 
 ### ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
 {: #cs_alb_cert_deploy}
@@ -1488,7 +1538,7 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
 
 **Note:** You can only update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -1531,7 +1581,7 @@ Example for updating an existing ALB secret:
 
 View information about an ALB secret in a cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -1574,7 +1624,7 @@ View information about an ALB secret in a cluster.
 
 Remove an ALB secret in a cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -1615,7 +1665,7 @@ Remove an ALB secret in a cluster.
 
 View a list of ALB secrets in a cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -1640,7 +1690,7 @@ View a list of ALB secrets in a cluster.
 
 Enable or disable an ALB in your standard cluster. The public ALB is enabled by default.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 
@@ -1699,7 +1749,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
 
 View the details of an ALB.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1722,14 +1772,26 @@ View the details of an ALB.
   ```
   {: pre}
 
+### ibmcloud ks alb-rollback --cluster CLUSTER
+{: #cs_alb_rollback}
 
+If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. After you roll back an update, automatic updates for ALB pods are disabled. To re-enable automatic updates, use the [`alb-autoupdate-enable` command](#cs_alb_autoupdate_enable).
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-rollback --cluster mycluster
+```
+{: pre}
 
 ### ibmcloud ks alb-types [--json] [-s]
 {: #cs_alb_types}
 
 View the ALB types that are supported in the region.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1748,14 +1810,28 @@ View the ALB types that are supported in the region.
   ```
   {: pre}
 
+### ibmcloud ks alb-update --cluster CLUSTER
+{: #cs_alb_update}
 
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your Ingress ALB add-on images.
+
+**Minimum required permissions**: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+```
+{: pre}
 
 ### ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 {: #cs_albs}
 
 View the status of all ALBs in a cluster. If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1790,7 +1866,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 
 If you set up your IBM Cloud account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure user name for the region and resource group that you're currently targeted to.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1819,13 +1895,13 @@ Set IBM Cloud infrastructure (SoftLayer) account credentials for an {{site.data.
 
 If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using this command.
 
-If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [IAM API key](#cs_api_key_info) already exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
+If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) already exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
 
 You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
 **Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1833,7 +1909,7 @@ You cannot set multiple credentials for the same {{site.data.keyword.containerlo
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. **Note**: The infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
    <ol><li>Log in to the [{{site.data.keyword.Bluemix_notm}} portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).</li>
-   <li>From the expanding menu, select **Infrastructure**.</li>
+   <li>From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.</li>
    <li>From the menu bar, select **Account** > **Users** > **User List**.</li>
    <li>For the user that you want to view, click the **IBMid or Username**.</li>
    <li>In the **API Access Information** section, view the **API Username**.</li>
@@ -1879,9 +1955,9 @@ You cannot set multiple credentials for the same {{site.data.keyword.containerlo
 
 Remove IBM Cloud infrastructure (SoftLayer) account credentials from an {{site.data.keyword.containerlong_notm}} region.
 
-After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
+After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1933,7 +2009,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
 List the public and private VLANs that are available for a zone in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -1964,7 +2040,7 @@ List the public and private VLANs that are available for a zone in your IBM Clou
 
 View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other by means of the private network, regardless of its assigned VLAN.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2004,7 +2080,7 @@ Disable automatic updates of your Fluentd pods in a specific cluster. When you u
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
 
-Enable automatic updates for your Fluentd pods in a specific cluster.
+Enable automatic updates for your Fluentd pods in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
 
 <strong>Command options</strong>:
 
@@ -2016,7 +2092,7 @@ Enable automatic updates for your Fluentd pods in a specific cluster.
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 {: #cs_log_autoupdate_get}
 
-Check if your Fluentd pods are set to automatically update in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
+Check if your Fluentd pods are set to automatically update in a specific cluster.
 
 <strong>Command options</strong>:
 
@@ -2030,7 +2106,7 @@ Check if your Fluentd pods are set to automatically update in a specific cluster
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}} for all log sources except `kube-audit` and **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}} for the `kube-audit` log source
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}} for all log sources except `kube-audit` and **Administrator** platform role for {{site.data.keyword.containerlong_notm}} for the `kube-audit` log source
 
 <strong>Command options</strong>:
 
@@ -2109,7 +2185,7 @@ Example for log type `syslog` that forwards logs from an `ingress` source on a p
 
 View all log forwarding configurations for a cluster, or filter logging configurations based on log source.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2143,7 +2219,7 @@ View all log forwarding configurations for a cluster, or filter logging configur
 
 Refresh the logging configuration for the cluster. This refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2171,7 +2247,7 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
 
 Delete one log forwarding configuration or all logging configurations for a cluster. This stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}} for all log sources except `kube-audit` and **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}} the `kube-audit` log source
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}} for all log sources except `kube-audit` and **Administrator** platform role for {{site.data.keyword.containerlong_notm}} the `kube-audit` log source
 
 <strong>Command options</strong>:
 
@@ -2205,7 +2281,7 @@ Delete one log forwarding configuration or all logging configurations for a clus
 
 Update the details of a log forwarding configuration.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2273,7 +2349,7 @@ Update the details of a log forwarding configuration.
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2335,7 +2411,7 @@ This example filters out all of the logs that are forwarded, at an info level or
 
 View a logging filter configuration. You can use this command to view the logging filters that you created.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2371,7 +2447,7 @@ ibmcloud ks logging-filter-get mycluster --id 885732 --show-matching-configs
 
 Delete a logging filter. You can use this command to remove a logging filter that you created.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2404,7 +2480,7 @@ ibmcloud ks logging-filter-rm mycluster --id 885732
 
 Update a logging filter. You can use this command to update a logging filter that you created.
 
-<strong>Minimum required permissions</strong>: **Editor** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Editor** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2467,7 +2543,7 @@ This example filters out all of the logs that are forwarded, at an info level or
 
 Make a request for a snapshot of your logs at a specific point in time and then store the logs in a {{site.data.keyword.cos_full_notm}} bucket.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2516,7 +2592,7 @@ Make a request for a snapshot of your logs at a specific point in time and then 
 
 Check the status of the log collection snapshot request for your cluster.
 
-<strong>Minimum required permissions</strong>: **Administrator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2619,6 +2695,8 @@ OK
 ```
 {: screen}
 
+
+
 ### ibmcloud ks regions
 {: #cs_regions}
 
@@ -2682,7 +2760,7 @@ View a list of available zones for you to create a cluster in. The available zon
 
 Add standalone worker nodes to your standard cluster that are not in a worker pool.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2790,7 +2868,7 @@ diskEncryption: <em>false</em></code></pre>
 
 View the details of a worker node.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -2839,7 +2917,7 @@ Reboot a worker node in a cluster. During the reboot, the state of your worker n
 
 **Attention:** Rebooting a worker node can cause data corruption on the worker node. Use this command with caution and when you know that a reboot can help recover your worker node. In all other cases, [reload your worker node](#cs_worker_reload) instead.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 Before you reboot your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
 
@@ -2919,7 +2997,7 @@ Reload all the necessary configurations for a worker node. A reload can be usefu
 Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](cs_versions_changelog.html#changelog) documentation.
 {: tip}
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 Before you reload your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
 
@@ -2989,7 +3067,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 
 Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. You can automatically rebalance your worker pool by running the `ibmcloud ks worker-pool-rebalance` [command](#cs_rebalance).
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 Before you remove your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
@@ -3057,7 +3135,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Important**: Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
@@ -3099,7 +3177,7 @@ You might need to change your YAML files for deployments before updating. Review
 
 View a list of worker nodes and the status for each in a cluster.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3141,7 +3219,7 @@ View a list of worker nodes and the status for each in a cluster.
 
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 <dl>
@@ -3186,7 +3264,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
 
 View the details of a worker pool.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3230,7 +3308,7 @@ View the details of a worker pool.
 
 You can rebalance your worker pool after you delete a worker node. When you run this command a new worker or workers are added to your worker pool.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3255,7 +3333,7 @@ You can rebalance your worker pool after you delete a worker node. When you run 
 
 Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster. Your worker pool must have at least 1 worker node.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3286,7 +3364,7 @@ Resize your worker pool to increase or decrease the number of worker nodes that 
 
 Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3311,7 +3389,7 @@ Remove a worker pool from your cluster. All worker nodes in the pool are deleted
 
 View the worker pools that you have in a cluster.
 
-<strong>Minimum required permissions</strong>: **Viewer** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3336,7 +3414,7 @@ View the worker pools that you have in a cluster.
 
 **Multizone clusters only**: After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool.
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
@@ -3385,7 +3463,7 @@ View the worker pools that you have in a cluster.
 
   **Multizone clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
 
-  <strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+  <strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
   Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.
   <ol><li>Check the VLANs that are available in your cluster. <pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>Example output:</p>
@@ -3439,7 +3517,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
 Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
 
-<strong>Minimum required permissions</strong>: **Operator** IAM platform role for {{site.data.keyword.containerlong_notm}}
+<strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
