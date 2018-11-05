@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -85,7 +85,8 @@ lastupdated: "2018-11-02"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-- [REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](/apidocs/container-registry/va)
 
 <br />
 
