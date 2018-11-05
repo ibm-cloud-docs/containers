@@ -85,8 +85,8 @@ lastupdated: "2018-11-05"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](/apidocs/container-registry)
-- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](/apidocs/container-registry/va)
+- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 
