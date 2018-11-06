@@ -29,15 +29,15 @@ _{{site.data.keyword.containerlong_notm}} regions and zones_
 
 **Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 
-Supported {{site.data.keyword.containerlong_notm}} regions are as follows:
-* AP North (standard clusters only)
-* AP South
-* EU Central
-* UK South
-* US East (standard clusters only)
-* US South
-
-
+| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
+| --- | --- |
+| AP North (standard clusters only) | Tokyo |
+| AP South | Sydney |
+| EU Central | Frankfurt |
+| UK South | London |
+| US East (standard clusters only) | Washington DC |
+| US South | Dallas |
+{: caption="Table: Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
 
 <br />
 
