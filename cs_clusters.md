@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -432,7 +432,7 @@ When you create a cluster, the worker nodes are provisioned in a worker pool. Af
 If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.
 {: tip}
 
-The following sections show you how to:
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). Then, choose one of the following sections:
   * [Add worker nodes by resizing an existing worker pool in your cluster](#resize_pool)
   * [Add worker nodes by adding a worker pool to your cluster](#add_pool)
   * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)
@@ -741,6 +741,7 @@ Free and standard clusters that are created with a billable account must be remo
 Before you begin:
 * Note down your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
 * If you want to delete the data in your persistent storage, [understand the delete options](cs_storage_remove.html#cleanup).
+* Make sure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
 
 To remove a cluster:
 

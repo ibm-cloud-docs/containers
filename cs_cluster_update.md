@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -63,6 +63,8 @@ The following diagram shows the process that you can take to update your master.
 Figure 1. Updating Kubernetes master process diagram
 
 {: #update_master}
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+
 To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
@@ -88,7 +90,8 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
-- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
+- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
 
 **Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
@@ -264,6 +267,7 @@ You can update the machine types of your worker nodes by adding new worker nodes
 Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
 
 
 **Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
