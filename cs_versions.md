@@ -33,6 +33,7 @@ lastupdated: "2018-11-06"
 - Default: 1.10.8
 - Other: 1.9.10
 
+
 </br>
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still fully supported. However, you cannot create new clusters that use the deprecated version.
@@ -95,6 +96,7 @@ For a complete list of changes, review the following information:
 * [IBM version changelog](cs_versions_changelog.html).
 
 </br>
+
 
 ## Version 1.11
 {: #cs_v111}

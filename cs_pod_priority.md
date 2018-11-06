@@ -48,6 +48,7 @@ _Figure: Pod priority scenarios_
 **Can I disable the pod priority admission controller?**</br>
 No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods following the existing scheduling policies that you have in place.
 
+
 ## Understanding default priority classes
 {: #default_priority_class}
 

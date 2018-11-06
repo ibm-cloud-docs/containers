@@ -594,6 +594,9 @@ spec:
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the {{site.data.keyword.Bluemix_notm}} console](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
 
+Do you have so many resources and users in your cluster that the dashboard is a little slow? For clusters that run Kubernetes version 1.12 or later, your cluster's admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
+
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
@@ -659,8 +662,11 @@ When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy
 ## Deploying apps with the Kubernetes dashboard
 {: #app_ui}
 
-When you deploy an app to your cluster by using the Kubernetes dashboard, a deployment resource automatically creates, updates, and manages the pods in your cluster.
+When you deploy an app to your cluster by using the Kubernetes dashboard, a deployment resource automatically creates, updates, and manages the pods in your cluster. For more information about using the dashboard, see [the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+Do you have so many resources and users in your cluster that the dashboard is a little slow? For clusters that run Kubernetes version 1.12 or later, your cluster's admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
 
 Before you begin:
 

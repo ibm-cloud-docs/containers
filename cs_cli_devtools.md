@@ -908,7 +908,7 @@ View information about a cluster in your organization.
   Ingress secret:       my_cluster
   Workers:              3
   Worker Zones:         dal10
-  Version:              1.11.3
+  Version:              1.12.2
   Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
   Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
