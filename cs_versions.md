@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -468,6 +468,10 @@ Review changes that you might need to make when you are updating from the previo
 <tr>
 <td><code>kubectl port-forward</code></td>
 <td>Now when you use the <code>kubectl port-forward</code> command, it no longer supports the <code>-p</code> flag. If your scripts rely on the previous behavior, update them to replace the <code>-p</code> flag with the pod name.</td>
+</tr>
+<tr>
+<td>`kubectl --show-all, -a` flag</td>
+<td>The `--show-all, -a` flag, which applied only to human-readable pod commands (not API calls), is deprecated and is unsupported in future versions. The flag is used to display pods in a terminal state. To track information about terminated apps and containers, [set up log forwarding in your cluster](cs_health.html#health).</td>
 </tr>
 <tr>
 <td>Read-only API data volumes</td>
