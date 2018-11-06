@@ -83,9 +83,9 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. In the catalog, select **{{site.data.keyword.containerlong_notm}}**.
+2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
 
-3. Select a region in which to deploy your cluster. **Note**: You cannot create free clusters in the US East or AP North regions and corresponding zones.
+3. Select a location in which to deploy your cluster. **Note**: You cannot create free clusters in the Washington DC (US East) or Tokyo (AP North) locations.
 
 4. Select the **Free** cluster plan.
 
@@ -103,7 +103,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. In the catalog, select **{{site.data.keyword.containershort_notm}}**.
+2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
 
 3. Select a resource group in which to create your cluster.
   **Note**:
@@ -111,7 +111,7 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
     * Free clusters are automatically created in the default resource group.
     * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
 
-4. Select a region in which to deploy your cluster. For the best performance, select the region that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
+4. Select an [{{site.data.keyword.Bluemix_notm}} location](cs_regions.html#regions-and-zones) in which to deploy your cluster. For the best performance, select the location that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 
 5. Select the **Standard** cluster plan. With a standard cluster you have access to features like multiple worker nodes for a highly available environment.
 

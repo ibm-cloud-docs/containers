@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -53,9 +53,9 @@ Get the [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net
 
 To create a free cluster:
 
-1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containerlong_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
+1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
 
-2. Give your cluster a unique name.
+2.  Give your cluster a unique name.
 
 3.  Click **Create Cluster**. A worker pool is created that contains 1 worker node. The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready` you can start working with your cluster!
 
