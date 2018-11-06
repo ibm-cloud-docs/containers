@@ -41,6 +41,8 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+
+
 ### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
 {: #1113_1531_ha-master}
 
@@ -427,6 +429,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #110_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018
 {: #1108_1528}
@@ -974,6 +978,8 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #19_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018
 {: #1910_1531}
