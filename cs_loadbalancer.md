@@ -25,19 +25,19 @@ Expose a port and use a portable IP address for a Layer 4 load balancer to acces
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 
-* The portable public subnet provides 1 portable public IP address that is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
-* The portable private subnet provides 1 portable private IP address that is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
+* The portable public subnet provides 5 usable IP addresses. 1 portable public IP address is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
+* The portable private subnet provides 5 usable IP addresses. 1 portable private IP address is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
 
-Portable public and private IP addresses are static and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer and are not bound to a certain port range. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
+Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer and are not bound to a certain port range. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
 
-A load balancer service also makes your app available over the service's NodePorts. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](cs_network_policy.html#block_ingress).
+When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](cs_network_policy.html#block_ingress).
 
 ## Load balancer 2.0 components and architecture (Beta)
 {: #planning_ipvs}
 
 **Note: Load balancer 2.0 capabilities are in beta.** To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](cs_cluster_update.html) to Kubernetes version 1.12 or later.
 
-The load balancer 2.0 is a Layer 4 IP Virtual Server (IPVS) load balancer that exists in the Linux kernel and is incorporated into the Linux Virtual Server (LVS). The load balancer 2.0 supports TCP and UPD, runs in front of multiple worker nodes, and uses Iptables, a Linux kernel feature, to distribute traffic arriving to a single load balancer IP address across those worker nodes.
+The load balancer 2.0 is a Layer 4 load balancer that is implemented using the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UPD, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic arriving to a single load balancer IP address across those worker nodes.
 
 For more information on version 2.0 load balancers, check out the following sections:
 * [Differences between version 1.0 and 2.0 load balancers](#differences)
@@ -49,10 +49,15 @@ For more information on version 2.0 load balancers, check out the following sect
 
 For more details, you can also check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/) on the load balancer 2.0.
 
+### How are version 1.0 and 2.0 load balancers similar?
+{: #similarities}
+
+Version 1.0 and 2.0 load balancers are both Layer 4 load balancers that live only in the Linux kernel space. Both versions run inside the cluster, and use worker node resources. Therefore, the available capacity of the load balancers is always dedicated to your own cluster. Additionally, both version of load balancers do not terminate the connection. Instead, they forward connections to an app pod.
+
 ### How are version 1.0 and 2.0 load balancers different?
 {: #differences}
 
-When a client sends a request to your app, a load balancer pod routes request packets to the worker node IP address where an app pod exists. Version 1.0 load balancers use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the load balancer exists. The load balancer must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods.
+When a client sends a request to your app, the load balancer routes request packets to the worker node IP address where an app pod exists. Version 1.0 load balancers use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the load balancer exists. The load balancer must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods.
 
 As opposed to version 1.0 load balancers, version 2.0 load balancers don't use NAT when forwarding requests to app pods on other workers. When a load balancer 2.0 routes a client request, it uses IP over IP (IPIP) to encapsulate the original request packet into another, new packet. This encapsulating IPIP packet has a source IP of the worker node where the load balancer pod is, which allows the original request packet to preserve the client IP as its source IP address. The worker node then uses direct server return (DSR) to send the app response packet to the client IP. The response packet skips the load balancer and is sent directly to the client, decreasing the amount of traffic that the load balancer must handle.
 
@@ -181,7 +186,7 @@ The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load bal
 
 The following diagram shows how a load balancer 1.0 directs communication from the internet to an app.
 
-<img src="images/cs_loadbalancer_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 1.0" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="450" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 1.0" style="width:450px; border-style: none"/>
 
 1. A request to your app uses the public IP address of your load balancer and the assigned port on the worker node.
 
@@ -195,7 +200,7 @@ The following diagram shows how a load balancer 1.0 directs communication from t
 
 If you have a multizone cluster, app instances are deployed in pods on workers across the different zones. The following diagram shows how a load balancer 1.0 directs communication from the internet to an app in a multizone cluster.
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Use a load balancer 1.0 to load balance apps in multizone clusters" style="width:500px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" width="475" alt="Use a load balancer 1.0 to load balance apps in multizone clusters" style="width:475px; border-style: none"/>
 
 By default, each load balancer 1.0 is set up in one zone only. To achieve high availability, you must deploy a load balancer 1.0 in every zone where you have app instances. Requests are handled by the load balancers in various zones in a round-robin cycle. Additionally, each load balancer routes requests to the app instances in its own zone and to app instances in other zones.
 
