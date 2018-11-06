@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 
 ---
@@ -46,6 +46,8 @@ Learn about the different types of permissions and roles, which role can perform
 
 To see the specific {{site.data.keyword.containerlong_notm}} permissions by each role, check out the [User access permissions](cs_access_reference.html) reference topic.
 {: tip}
+
+
 
 <dl>
 
