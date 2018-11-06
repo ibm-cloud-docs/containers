@@ -172,7 +172,7 @@ spec:
 <br />
 
 
-## Load balancer 2.0 components and architecture
+## Load balancer 1.0 components and architecture
 {: #planning}
 
 The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load balance requests across an app's pods.
@@ -691,7 +691,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: codeblock}
 
-    In the exmaple YAML, the **affinity** section has `publicVLAN` as the `key` and `"2234945"` as the `value`.
+    In the example YAML, the **affinity** section has `publicVLAN` as the `key` and `"2234945"` as the `value`.
 
 4. Apply the updated deployment configuration file.
     ```
