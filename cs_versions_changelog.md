@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -76,7 +76,7 @@ Review the following changes.
 <td>etcd</td>
 <td>v3.2.18</td>
 <td>v3.3.1</td>
-<td>See the [etcd release notes]![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
