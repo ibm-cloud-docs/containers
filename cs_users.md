@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 
 ---
@@ -606,6 +606,212 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
 
 
 
+- To assign access to individual users or users in an access group, ensure that the user or group has been assigned at least one [{{site.data.keyword.Bluemix_notm}} IAM platform role](#platform) at the {{site.data.keyword.containerlong_notm}} service level.
+
+To create custom RBAC permissions:
+
+1. Create the role or cluster role with the access that you want to assign.
+
+    1. Create a `.yaml` file to define the role or cluster role.
+
+        ```
+        kind: Role
+        apiVersion: rbac.authorization.k8s.io/v1
+        metadata:
+          namespace: default
+          name: my_role
+        rules:
+        - apiGroups: [""]
+          resources: ["pods"]
+          verbs: ["get", "watch", "list"]
+        - apiGroups: ["apps", "extensions"]
+          resources: ["daemonsets", "deployments"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        ```
+        {: codeblock}
+
+        <table>
+        <caption>Understanding the YAML components</caption>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML components</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td>Use `Role` to grant access to resources within a specific namespace. Use `ClusterRole` to grant access to cluster-wide resources such as worker nodes, or to namespace-scoped resources such as pods in all namespaces.</td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata.namespace</code></td>
+              <td>For kind `Role` only: Specify the Kubernetes namespace to which access is granted.</td>
+            </tr>
+            <tr>
+              <td><code>metadata.name</code></td>
+              <td>Name the role or cluster role.</td>
+            </tr>
+            <tr>
+              <td><code>rules.apiGroups</code></td>
+              <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://v1-9.docs.kubernetes.io/docs/reference/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
+            </tr>
+            <tr>
+              <td><code>rules.resources</code></td>
+              <td>Specify the Kubernetes [resource types ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) to which you want to grant access, such as `"daemonsets"`, `"deployments"`, `"events"`, or `"ingresses"`. If you specify `"nodes"`, then the kind must be `ClusterRole`.</td>
+            </tr>
+            <tr>
+              <td><code>rules.verbs</code></td>
+              <td>Specify the types of [actions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
+            </tr>
+          </tbody>
+        </table>
+
+    2. Create the role or cluster role in your cluster.
+
+        ```
+        kubectl apply -f my_role.yaml
+        ```
+        {: pre}
+
+    3. Verify that the role or cluster role is created.
+      * Role:
+          ```
+          kubectl get roles -n <namespace>
+          ```
+          {: pre}
+
+      * Cluster role:
+          ```
+          kubectl get clusterroles
+          ```
+          {: pre}
+
+2. Bind users to the role or cluster role.
+
+    1. Create a `.yaml` file to bind users to your role or cluster role. Note the unique URL to use for each subject's name.
+
+        ```
+        kind: RoleBinding
+        apiVersion: rbac.authorization.k8s.io/v1
+        metadata:
+          name: my_role_binding
+          namespace: default
+        subjects:
+        - kind: User
+          name: https://iam.ng.bluemix.net/IAM#user1@example.com
+          apiGroup: rbac.authorization.k8s.io
+        - kind: Group
+          name: team1
+          apiGroup: rbac.authorization.k8s.io
+        - kind: ServiceAccount
+          name: <service_account_name>
+          namespace: <kubernetes_namespace>
+        roleRef:
+          kind: Role
+          name: my_role
+          apiGroup: rbac.authorization.k8s.io
+        ```
+        {: codeblock}
+
+        <table>
+        <caption>Understanding the YAML components</caption>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML components</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td><ul><li>Specify `RoleBinding` for a namespace-specific `Role` or `ClusterRole`.</li><li>Specify `ClusterRoleBinding` for a cluster-wide `ClusterRole`.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata.namespace</code></td>
+              <td><ul><li>For kind `RoleBinding`: Specify the Kubernetes namespace to which access is granted.</li><li>For kind `ClusterRoleBinding`: don't use the `namespace` field.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata.name</code></td>
+              <td>Name the role binding or cluster role binding.</td>
+            </tr>
+            <tr>
+              <td><code>subjects.kind</code></td>
+              <td>Specify the kind as one of the following:
+              <ul><li>`User`: Bind the RBAC role or cluster role to an individual user in your account.</li>
+              <li>`Group`: For clusters that run Kubernetes 1.11 or later, bind the RBAC role or cluster role to an [{{site.data.keyword.Bluemix_notm}} IAM access group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>`ServiceAccount`: Bind the RBAC role or cluster role to a service account in a namespace in your cluster.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects.name</code></td>
+              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>https://iam.ng.bluemix.net/IAM#user_email</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user_email</code></li></ul></li>
+              <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM access group](/docs/iam/groups.html#groups) in your account.</li>
+              <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects.apiGroup</code></td>
+              <td><ul><li>For `User` or `Group`: use `rbac.authorization.k8s.io`.</li>
+              <li>For `ServiceAccount`: don't include this field.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects.namespace</code></td>
+              <td>For `ServiceAccount` only: Specify the name of the Kubernetes namespace that the service account is deployed to.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef.kind</code></td>
+              <td>Enter the same value as the `kind` in the role `.yaml` file: `Role` or `ClusterRole`.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef.name</code></td>
+              <td>Enter the name of the role `.yaml` file.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef.apiGroup</code></td>
+              <td>Use `rbac.authorization.k8s.io`.</td>
+            </tr>
+          </tbody>
+        </table>
+
+    2. Create the role binding or cluster role binding resource in your cluster.
+
+        ```
+        kubectl apply -f my_role_binding.yaml
+        ```
+        {: pre}
+
+    3.  Verify that the binding is created.
+
+        ```
+        kubectl get rolebinding -n <namespace>
+        ```
+        {: pre}
+
+3. Optional: To enforce the same level of user access in other namespaces, you can copy the role bindings for those roles or cluster roles to other namespaces.
+    1. Copy the role binding from one namespace to another namespace.
+        ```
+        kubectl get rolebinding <role_binding_name> -o yaml | sed 's/<namespace_1>/<namespace_2>/g' | kubectl -n <namespace_2> create -f -
+        ```
+        {: pre}
+
+        For example, to copy the `custom-role` role binding from the `default` namespace to the `testns` namespace:
+        ```
+        kubectl get rolebinding custom-role -o yaml | sed 's/default/testns/g' | kubectl -n testns create -f -
+        ```
+        {: pre}
+
+    2. Verify that the role binding is copied. **Note**: If you added an {{site.data.keyword.Bluemix_notm}} IAM access group to the role binding, each user in that group is added individually, not as an access group ID.
+        ```
+        kubectl get rolebinding -n <namespace_2>
+        ```
+        {: pre}
+
+Now that you created and bound a custom Kubernetes RBAC role or cluster role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
+
+<br />
+
+
+</staging>
 
 ## Assigning RBAC permissions
 {: #role-binding}

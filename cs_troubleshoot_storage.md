@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2018-11-06"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # Troubleshooting cluster storage
@@ -350,7 +350,7 @@ Update the file system in the existing PV from `ext4` to `XFS`.
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-When you install the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in, the installation fails with the following error: 
+When you install the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in, the installation fails with the following error:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +360,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 When the `ibmc` Helm plug-in is installed, a symlink is created from the `./helm/plugins/helm-ibmc` directory to the directory where the `ibmc` Helm plug-in is located on your local system, which is usually in `./ibmcloud-object-storage-plugin/helm-ibmc`. When you remove the `ibmc` Helm plug-in from your local system, or you move the `ibmc` Helm plug-in directory to a different location, the symlink is not removed.
 
 {: tsResolve}
-1. Remove the {{site.data.keyword.cos_full_notm}} Helm plug-in. 
+1. Remove the {{site.data.keyword.cos_full_notm}} Helm plug-in.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [Install the {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos). 
+
+2. [Install the {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos).
 
 <br />
 
@@ -375,33 +375,35 @@ When the `ibmc` Helm plug-in is installed, a symlink is created from the `./helm
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails. 
+When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails.
 
-- Example error message for a PVC creation failure: 
+- Example error message for a PVC creation failure:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- Example error message for a pod creation failure: 
+- Example error message for a pod creation failure:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} service credentials, the PVC, and the pod are not all in the same Kubernetes namespace. When the secret is deployed to a different namespace than your PVC or pod, the secret cannot be accessed. 
+The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} service credentials, the PVC, and the pod are not all in the same Kubernetes namespace. When the secret is deployed to a different namespace than your PVC or pod, the secret cannot be accessed.
 
 {: tsResolve}
-1. List the secrets in your cluster and review the Kubernetes namespace where the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service instance is created. The secret must show `ibm/ibmc-s3fs` as the **Type**. 
+
+
+1. List the secrets in your cluster and review the Kubernetes namespace where the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service instance is created. The secret must show `ibm/ibmc-s3fs` as the **Type**.
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](cs_storage_cos.html#create_cos_secret) in the desired namespace. 
-   
-3. Create the PVC or deploy the pod in the desired namespace. 
+
+2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](cs_storage_cos.html#create_cos_secret) in the desired namespace.
+
+3. Create the PVC or deploy the pod in the desired namespace.
 
 <br />
 
@@ -410,7 +412,7 @@ The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} s
 {: #cred_failure}
 
 {: tsSymptoms}
-When you create the PVC, you see an error message similar to one of the following: 
+When you create the PVC, you see an error message similar to one of the following:
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +420,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +434,22 @@ The {{site.data.keyword.cos_full_notm}} service credentials that you use to acce
 
 {: tsResolve}
 1. In the navigation on the service details page, click **Service Credentials**.
-2. Find your credentials, then click **View credentials**. 
-3. Verify that you use the correct **access_key_id** and **secret_access_key** in your Kubernetes secret. If not, update your Kubernetes secret. 
-   1. Get the YAML that you used to create the secret. 
+2. Find your credentials, then click **View credentials**.
+3. Verify that you use the correct **access_key_id** and **secret_access_key** in your Kubernetes secret. If not, update your Kubernetes secret.
+   1. Get the YAML that you used to create the secret.
       ```
       kubectl get secret <secret_name> -o yaml
       ```
       {: pre}
-      
-   2. Update the **access_key_id** and **secret_access_key**. 
-   3. Update the secret. 
+
+   2. Update the **access_key_id** and **secret_access_key**.
+   3. Update the secret.
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
-      
-4. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must [create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission](cs_storage_cos.html#create_cos_service). Then, update your existing secret or [create a new secret](cs_storage_cos.html#create_cos_secret) with your new service credentials. 
+
+4. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must [create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission](cs_storage_cos.html#create_cos_service). Then, update your existing secret or [create a new secret](cs_storage_cos.html#create_cos_secret) with your new service credentials.
 
 <br />
 
@@ -455,7 +457,7 @@ The {{site.data.keyword.cos_full_notm}} service credentials that you use to acce
 ## Object storage: Cannot access an existing bucket
 
 {: tsSymptoms}
-When you create the PVC, the bucket in {{site.data.keyword.cos_full_notm}} cannot be accessed. You see an error message similar to the following: 
+When you create the PVC, the bucket in {{site.data.keyword.cos_full_notm}} cannot be accessed. You see an error message similar to the following:
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
@@ -463,13 +465,13 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-You might used the wrong storage class to access your existing bucket, or you tried to access a bucket that you did not create. 
+You might have used the wrong storage class to access your existing bucket, or you tried to access a bucket that you did not create.
 
 {: tsResolve}
-1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance. 
-2. Select **Buckets**. 
-3. Review the **Class** and **Location** information for your existing bucket. 
-4. Choose the appropriate [storage class](cs_storage_cos.html#storageclass_reference). 
+1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance.
+2. Select **Buckets**.
+3. Review the **Class** and **Location** information for your existing bucket.
+4. Choose the appropriate [storage class](cs_storage_cos.html#storageclass_reference).
 
 <br />
 
@@ -478,25 +480,25 @@ You might used the wrong storage class to access your existing bucket, or you tr
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-You uploaded files to your {{site.data.keyword.cos_full_notm}} service instance by using the console or the REST API. When you try to access these files with a non-root user that you defined with `runAsUser` in your app deployment, access to the files is denied. 
+You uploaded files to your {{site.data.keyword.cos_full_notm}} service instance by using the console or the REST API. When you try to access these files with a non-root user that you defined with `runAsUser` in your app deployment, access to the files is denied.
 
 {: tsCauses}
-In Linux, a file or a directory has 3 access groups: `Owner`, `Group`, and `Other`. When you upload a file to {{site.data.keyword.cos_full_notm}} by using the console or the REST API, the permissions for the `Owner`, `Group`, and `Other` are removed. The permission of each file looks as follows: 
+In Linux, a file or a directory has 3 access groups: `Owner`, `Group`, and `Other`. When you upload a file to {{site.data.keyword.cos_full_notm}} by using the console or the REST API, the permissions for the `Owner`, `Group`, and `Other` are removed. The permission of each file looks as follows:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permissions for the file are preserved and not changed. 
+When you upload a file by using the {{site.data.keyword.cos_full_notm}} plug-in, the permissions for the file are preserved and not changed.
 
 {: tsResolve}
-To access the file with a non-root user, the non-root user must have read and write permissions for the file. Changing the permission on a file as part of your pod deployment requires a write operation. {{site.data.keyword.cos_full_notm}} is not designed for write workloads. Updating permissions during the pod deployment might prevent your pod from getting into a `Running` state. 
+To access the file with a non-root user, the non-root user must have read and write permissions for the file. Changing the permission on a file as part of your pod deployment requires a write operation. {{site.data.keyword.cos_full_notm}} is not designed for write workloads. Updating permissions during the pod deployment might prevent your pod from getting into a `Running` state.
 
-To resolve this issue, before you mount the PVC to your app pod, create another pod to set the correct permission for the non-root user. 
+To resolve this issue, before you mount the PVC to your app pod, create another pod to set the correct permission for the non-root user.
 
-1. Check the permissions of your files in your bucket. 
-   1. Create a configuration file for your `test-permission` pod and name the file `test-permission.yaml`. 
+1. Check the permissions of your files in your bucket.
+   1. Create a configuration file for your `test-permission` pod and name the file `test-permission.yaml`.
       ```
       apiVersion: v1
       kind: Pod
@@ -515,43 +517,43 @@ To resolve this issue, before you mount the PVC to your app pod, create another 
             claimName: <pvc_name>
       ```
       {: codeblock}
-        
-   2. Create the `test-permission` pod. 
+
+   2. Create the `test-permission` pod.
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. Log in to your pod. 
+
+   3. Log in to your pod.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   4. Navigate to your mount path and list the permissions for your files. 
+
+   4. Navigate to your mount path and list the permissions for your files.
       ```
       cd test && ls -al
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       d--------- 1 root root 0 Jan 1 1970 <file_name>
       ```
       {: screen}
-      
-2. Delete the pod. 
+
+2. Delete the pod.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. Create a configuration file for the pod that you use to correct the permissions of your files and name it `fix-permission.yaml`. 
+
+3. Create a configuration file for the pod that you use to correct the permissions of your files and name it `fix-permission.yaml`.
    ```
    apiVersion: v1
    kind: Pod
    metadata:
-     name: fix-permission 
+     name: fix-permission
      namespace: <namespace>
    spec:
      containers:
@@ -568,61 +570,61 @@ To resolve this issue, before you mount the PVC to your app pod, create another 
          claimName: <pvc_name>
     ```
     {: codeblock}
-    
-3. Create the `fix-permission` pod. 
+
+3. Create the `fix-permission` pod.
    ```
    kubectl apply -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. Wait for the pod to go into a `Completed` state.  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. Delete the `fix-permission` pod. 
+5. Delete the `fix-permission` pod.
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. Re-create the `test-permission` pod that you used earlier to check the permissions. 
+   {: pre}
+
+5. Re-create the `test-permission` pod that you used earlier to check the permissions.
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. Verify that the permissions for your files are updated. 
-   1. Log in to your pod. 
+
+5. Verify that the permissions for your files are updated.
+   1. Log in to your pod.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   2. Navigate to your mount path and list the permissions for your files. 
+
+   2. Navigate to your mount path and list the permissions for your files.
       ```
       cd test && ls -al
       ```
       {: pre}
 
-      Example output: 
+      Example output:
       ```
       -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
       ```
       {: screen}
-      
-6. Delete the `test-permission` pod. 
+
+6. Delete the `test-permission` pod.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. Mount the PVC to the app with the non-root user. 
 
-   **Important:** Define the non-root user as `runAsUser` without setting `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and might prevent your pod from getting into a `Running` state. 
+7. Mount the PVC to the app with the non-root user.
 
-After you set the correct file permissions in your {{site.data.keyword.cos_full_notm}} service instance, do not upload files by using the console or the REST API. Use the {{site.data.keyword.cos_full_notm}} plug-in to add files to your service instance. 
+   **Important:** Define the non-root user as `runAsUser` without setting `fsGroup` in your deployment YAML at the same time. Setting `fsGroup` triggers the {{site.data.keyword.cos_full_notm}} plug-in to update the group permissions for all files in a bucket when the pod is deployed. Updating the permissions is a write operation and might prevent your pod from getting into a `Running` state.
+
+After you set the correct file permissions in your {{site.data.keyword.cos_full_notm}} service instance, do not upload files by using the console or the REST API. Use the {{site.data.keyword.cos_full_notm}} plug-in to add files to your service instance.
 {: tip}
 
 <br />

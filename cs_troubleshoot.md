@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -258,6 +258,8 @@ Review common error messages and learn how to resolve them.
 {: #debug_apps}
 
 Review the options that you have to debug your app deployments and find the root causes for failures.
+
+
 
 1. Look for abnormalities in the service or deployment resources by running the `describe` command.
 

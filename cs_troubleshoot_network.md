@@ -54,26 +54,53 @@ To troubleshoot your load balancer service:
 
     In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-2.  Check the accuracy of the configuration file for your load balancer service.
+2. For version 2.0 load balancers: Ensure that you complete the [load balancer 2.0 prerequisites](cs_loadbalancer.html#ipvs_provision).
 
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: myservice
-    spec:
-      type: LoadBalancer
-      selector:
-        <selector_key>:<selector_value>
-      ports:
-       - protocol: TCP
-         port: 8080
-    ```
-    {: pre}
+3. Check the accuracy of the configuration file for your load balancer service.
+    * Version 2.0 load balancers:
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: myservice
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
+        spec:
+          type: LoadBalancer
+          selector:
+            <selector_key>:<selector_value>
+          ports:
+           - protocol: TCP
+             port: 8080
+          externalTrafficPolicy: Local
+        ```
+        {: screen}
 
-    1.  Check that you defined **LoadBalancer** as the type for your service.
-    2.  In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
-    3.  Check that you used the **port** that your app listens on.
+        1. Check that you defined **LoadBalancer** as the type for your service.
+        2. Check that you included the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` annotation.
+        3. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
+        4. Check that you used the **port** that your app listens on.
+        5. Check that you set `externalTrafficPolicy` to `Local`.
+
+    * Version 1.0 load balancers:
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: myservice
+        spec:
+          type: LoadBalancer
+          selector:
+            <selector_key>:<selector_value>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+        {: screen}
+
+        1. Check that you defined **LoadBalancer** as the type for your service.
+        2. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
+        3. Check that you used the **port** that your app listens on.
 
 3.  Check your load balancer service and review the **Events** section to find potential errors.
 
@@ -88,13 +115,12 @@ To troubleshoot your load balancer service:
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>This error message indicates that no portable public IP addresses are left to be allocated to your load balancer service. Refer to <a href="cs_subnets.html#subnets">Adding subnets to clusters</a> to find information about how to request portable public IP addresses for your cluster. After portable public IP addresses are available to the cluster, the load balancer service is automatically created.</li>
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. In the **loadBalancerIP** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
-    <ol><li>List available worker nodes.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> commands match.</li></ol></li></ul>
+    <ol><li>List available worker nodes.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
+    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
+    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> commands match.</li></ol></li></ul>
 
 4.  If you are using a custom domain to connect to your load balancer service, make sure that your custom domain is mapped to the public IP address of your load balancer service.
     1.  Find the public IP address of your load balancer service.
-
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
@@ -113,10 +139,10 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 
 {: tsResolve}
 First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
-    ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
-    {: pre}
+```
+ibmcloud ks workers <cluster_name_or_ID>
+```
+{: pre}
 
 In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
@@ -146,7 +172,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <tbody>
  <tr>
  <td>You do not have the required access roles to download and update certificate data.</td>
- <td>Check with your account Administrator to assign you both the **Manager** and **Writer** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Check with your account Administrator to assign you the following {{site.data.keyword.Bluemix_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</li><li>The <a href="cs_users.html#platform">**Administrator** platform role</a> for the cluster.</li></ul></td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>
@@ -258,7 +284,7 @@ To prevent the connection from closing after 60 seconds of inactivity:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-You enabled source IP preservation for a [ load balancer](cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
+You enabled source IP preservation for a [version 1.0 load balancer](cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
 
 {: tsCauses}
 When you enable source IP preservation for load balancer or Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed. Typically, load balancer or Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:

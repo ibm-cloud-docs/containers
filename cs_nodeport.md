@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -113,7 +113,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
 
 **What's next:**
 
-When the app is deployed, you can use the public IP address of any worker node and the NodePort to form the public URL to access the app in a browser. If your worker nodes are connected to a private VLAN only, then a private NodePort service was created and can be accessible through q worker node's private IP address.
+When the app is deployed, you can use the public IP address of any worker node and the NodePort to form the public URL to access the app in a browser. If your worker nodes are connected to a private VLAN only, then a private NodePort service was created and can be accessible through a worker node's private IP address.
 
 1.  Get the public IP address for a worker node in the cluster. If you want to access the worker node on a private network, get the private IP address instead.
 

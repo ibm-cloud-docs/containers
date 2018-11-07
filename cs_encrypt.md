@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-11-06"
 # Protecting sensitive information in your cluster
 {: #encryption}
 
-Protect sensitive cluster information to ensure data integrity and to prevent your data from being exposed to unauthorized users. 
+Protect sensitive cluster information to ensure data integrity and to prevent your data from being exposed to unauthorized users.
 {: shortdesc}
 
 You can create sensitive data on different levels in your cluster that each require appropriate protection.
@@ -68,7 +68,7 @@ When you create a cluster, secrets for your {{site.data.keyword.registrylong}} c
 You can protect the etcd component in your Kubernetes master and Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11.
 {: shortdesc}
 
-By default, your cluster configuration and Kubernetes secrets are stored in the etcd component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in etcd. In clusters that run Kubernetes version 1.11.3_1531 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, data in your etcd component on the local disk of your Kubernetes master is not automatically encrypted until you enable {{site.data.keyword.keymanagementserviceshort}} encryption for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. 
+By default, your cluster configuration and Kubernetes secrets are stored in the etcd component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in etcd. In clusters that run Kubernetes version 1.11.3_1531 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, data in your etcd component on the local disk of your Kubernetes master is not automatically encrypted until you enable {{site.data.keyword.keymanagementserviceshort}} encryption for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily.
 
 When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt data in etcd, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your etcd data and Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to etcd or your secrets, you can delete the root key.
 
@@ -77,7 +77,7 @@ When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster,
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 * Check that your cluster runs Kubernetes version 1.10.8_1524, 1.11.3_1521, or later by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and checking the **Version** field.
-* Verify that you have [**Administrator** permissions](cs_users.html#access_policies) to complete these steps.
+* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 * Make sure that the API key that is set for the region that your cluster is in is authorized to use Key Protect. To check the API key owner whose credentials are stored for the region, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the instance or root key that encrypts secrets in the cluster:

@@ -57,7 +57,7 @@ You can use pod priority in combination with resource quotas, including [quota s
 Your {{site.data.keyword.containerlong_notm}} clusters come with some priority classes by default. **Important**: Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
 {: shortdesc}
 
-The following table describes the priority classes that are in your cluster by default and why they are used. 
+The following table describes the priority classes that are in your cluster by default and why they are used.
 
 | Name | Set by | Priority Value | Purpose |
 |---|---|---|
@@ -83,22 +83,24 @@ Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 * [Create](cs_clusters.html#clusters_ui) or [update](cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
 
+To use a priority class:
+
 1.  Optional: Use an existing priority class as a template for the new class.
-    
+
     1.  List existing priority classes.
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  Choose the priority class that you want to copy and create a local YAML file.
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  Make your priority class YAML file.
 
     ```yaml
@@ -111,7 +113,7 @@ Before you begin:
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>Understanding the YAML file components</caption>
     <thead>
@@ -135,7 +137,7 @@ Before you begin:
     <td><code>description</code></td>
     <td>Optional: Tell users why to use this priority class. Enclose the string in quotations (`""`).</td>
     </tr></tbody></table>
-    
+
 3.  Create the priority class in your cluster.
 
     ```
@@ -167,14 +169,14 @@ To assign priority to your pods:
 
 1.  Check the importance of other deployed pods so that you can choose the right priority class for your pods in relation to what already is deployed.
 
-    1.  View the priority classes that other pods in the namespace use. 
-        
+    1.  View the priority classes that other pods in the namespace use.
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
-    2.  Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to revivew.
+
+    2.  Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
 
         ```
         kubectl describe priorityclass <priorityclass_name>
@@ -187,7 +189,7 @@ To assign priority to your pods:
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
 
     ```yaml

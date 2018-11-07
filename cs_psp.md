@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-11-06"
 {: #psp}
 
 With [pod security policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
-configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}. Clusters that run Kubernetes versions 1.10.3, 1.9.8, and 1.8.13 or later fixpacks support the `PodSecurityPolicy` admission controller that enforces these policies. 
+configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}. Clusters that run Kubernetes versions 1.10.3, 1.9.8, and 1.8.13 or later fixpacks support the `PodSecurityPolicy` admission controller that enforces these policies.
 {: shortdesc}
 
 Using an older version of Kubernetes? [Update your cluster](cs_cluster_update.html) today.
@@ -34,9 +34,9 @@ Trying to control which users have access to the {{site.data.keyword.containerlo
 {: tip}
 
 **Are any policies set by default? What can I add?**</br>
-By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller. 
+By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller.
 
-Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](cs_hybrid.html#hybrid_iks_icp). 
+Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](cs_hybrid.html#hybrid_iks_icp).
 
 If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
@@ -67,7 +67,7 @@ policies allow the users to create and update privileged and unprivileged (restr
 
 You can modify these RBAC roles to remove or add admins, users, services, or nodes to the policy.
 
-Before you begin: 
+Before you begin:
 *  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 *  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](cs_users.html#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Note**: When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
@@ -78,19 +78,19 @@ Before you begin:
     kubectl get clusterrolebinding
     ```
     {: pre}
-    
+
 2.  Download the cluster role binding as a `.yaml` file that you can edit locally.
-    
+
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
     ```
     {: pre}
-    
+
     You might want to save a copy of the existing policy so that you can revert to it if the modified policy yields unexpected results.
     {: tip}
-    
+
     **Example cluster role binding file**:
-    
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -119,11 +119,11 @@ Before you begin:
       name: system:authenticated
     ```
     {: codeblock}
-    
+
 3.  Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Example actions:
-    
-    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in others namespaces are no longer authorized. 
-    
+
+    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in others namespaces are no longer authorized.
+
         To scope the policy to allow actions in a specific namespace, change the `system:serviceaccounts` to `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -131,7 +131,7 @@ Before you begin:
           name: system:serviceaccount:kube-system
         ```
         {: codeblock}
-  
+
     *   **Users**: You might want to remove authorization for all authenticated users to deploy pods with privileged access. Remove the following `system:authenticated` entry.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -146,7 +146,7 @@ Before you begin:
     kubectl apply -f privileged-psp-user.yaml
     ```
     {: pre}
-    
+
 5.  Verify that the resource was modified.
 
     ```
@@ -167,7 +167,7 @@ Before you begin:
     kubectl delete clusterrolebinding privileged-psp-user
     ```
     {: pre}
-    
+
 3.  Verify that the RBAC cluster role binding is no longer in your cluster.
     ```
     kubectl get clusterrolebinding
@@ -176,7 +176,7 @@ Before you begin:
 
 </br>
 **To create your own pod security policy**:</br>
-To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). 
+To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, the existing policy permits users to create and update privileged pods. If you create a policy that does not permit users to create or update privileged pods, the conflict between the existing and the new policy might cause unexpected results.
 
@@ -187,7 +187,7 @@ Your Kubernetes cluster in {{site.data.keyword.containerlong_notm}} contains the
 pod security policies and related RBAC resources to allow {{site.data.keyword.IBM_notm}} to properly manage your cluster.
 {: shortdesc}
 
-The default `PodSecurityPolicy` resources refer to the pod security policies that are set by {{site.data.keyword.IBM_notm}}. 
+The default `PodSecurityPolicy` resources refer to the pod security policies that are set by {{site.data.keyword.IBM_notm}}.
 
 **Attention**: You must not delete or modify these resources.
 

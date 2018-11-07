@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -31,7 +31,10 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
 {: tip}
 
-## Step 1: Checking for error messages in your Ingress deployment and the ALB pod logs
+**Before you begin**: Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM access policies](cs_users.html#platform):
+    - **Editor** or **Administrator** platform role for the cluster
+
+## Step 1: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
 
 Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
@@ -107,7 +110,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     4. Look for error messages in the ALB logs.
 
-## Step 2: Pinging the ALB subdomain and public IP addresses
+## Step 2: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses.
@@ -184,7 +187,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-## Step 3: Checking your domain mappings and Ingress resource configuration
+## Step 3: Check your domain mappings and Ingress resource configuration
 {: #config}
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.

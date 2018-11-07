@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -192,22 +192,24 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 **Forwarding logs to IBM**
 
-1.  For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+1. Verify permissions.
+    1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+    2. If you specified a space when you created the cluster, both you and the {{site.data.keyword.containerlong_notm}} API key owner need the [**Developer** Cloud Foundry role](/docs/iam/mngcf.html) in that space.
+      * If you don't know who the {{site.data.keyword.containerlong_notm}} API key owner is, run the following command.
+          ```
+          ibmcloud ks api-key-info <cluster_name>
+          ```
+          {: pre}
+      * To immediately apply any changes that you made, run the following command.
+          ```
+          ibmcloud ks logging-config-refresh <cluster_name>
+          ```
+          {: pre}
+
+2.  For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
     If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
     {: tip}
-
-2. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} API key owner need Manager, Developer, or Auditor [permissions](cs_users.html#access_policies) in that space.
-  * If you don't know who the {{site.data.keyword.containerlong_notm}} API key owner is, run the following command.
-      ```
-      ibmcloud ks api-key-info <cluster_name>
-      ```
-      {: pre}
-  * To immediately apply any changes that you made, run the following command.
-      ```
-      ibmcloud ks logging-config-refresh <cluster_name>
-      ```
-      {: pre}
 
 3. Create a log forwarding configuration.
     ```
@@ -246,17 +248,19 @@ If you have apps that run in your containers that can't be configured to write l
 
 **Forwarding logs to your own server over the `udp` or `tcp` protocols**
 
-1. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
+1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
   You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. Create a log forwarding configuration.
+4. Create a log forwarding configuration.
     ```
     ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
@@ -271,22 +275,24 @@ If you have apps that run in your containers that can't be configured to write l
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Set up a server that accepts a syslog protocol in one of two ways:
+1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. Set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in ypur cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
 
-2. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
+4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
 
-3. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
+5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
     ```
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
     {: pre}
 
-4. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. Create a log forwarding configuration.
+6. Create a log forwarding configuration.
     ```
     ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
@@ -478,7 +484,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
-{: tip}
+* You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 
 ### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
@@ -662,7 +668,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
-* Be sure that you have [the **Administrator platform role](cs_users.html#platform) for the cluster that you're working with.
+* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 **Creating a snapshot**
 
@@ -780,7 +786,9 @@ The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
 **Note**: Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+- Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
 

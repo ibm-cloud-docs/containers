@@ -181,7 +181,7 @@ To create a config map and update worker nodes:
         "NodeSelectorValue": "<node_selector_value>"
       }
    ```
-   {:pre}
+   {: codeblock}
 
    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the parameter in column one and the description that matches in column two.">
    <caption>ConfigMap components</caption>
@@ -410,35 +410,31 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 **Can I install other add-ons than the default?**</br>
 Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](cs_integrations.html#helm) to install the [block storage plug-in](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
-### Disabling automatic updates for the Fluentd for logging add-on and manually updating Fluentd pods
+### Managing automatic updates for the Fluentd for logging add-on
 {: #logging}
 
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
 {: shortdesc}
 
-You can check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_log_autoupdate_get).
+You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
-To disable automatic updates, run the `ibmcloud ks logging-autoupdate-disable` [command](cs_cli_reference.html#cs_log_autoupdate_disable).
+* Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_log_autoupdate_get).
+* Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](cs_cli_reference.html#cs_log_autoupdate_disable).
+* If automatic updates are disabled but you need to make a change to your configuration, you have two options:
+    * Turn on automatic updates for your Fluentd pods.
+        ```
+        ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    * Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward.
+        Example command:
 
-If automatic updates are disabled but you need to make a change to your configuration, you have two options.
+        ```
+        ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+        ```
+        {: pre}
 
-*  Turn on automatic updates for your Fluentd pods.
-
-    ```
-    ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-*  Force a one-time update when you use a logging command that includes the `--force-update` option. **Note**: Your pods update to the latest version of the Fluentd add-on, but Fluentd does not update automatically going forward.
-
-    Example command:
-
-    ```
-    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
-    ```
-    {: pre}
-
-### Disabling automatic updates for the Ingress ALB add-on and manually updating ALB pods
+### Managing automatic updates for the Ingress ALB add-on
 {: #alb}
 
 Control when the Ingress application load balancer (ALB) add-on is updated.
@@ -499,7 +495,7 @@ Before you begin:
     ```
     {: screen}
 
-You can manage automatic updates of the Ingress ALB add-on in the following ways:
+You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 * Disable automatic updates.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
@@ -540,7 +536,9 @@ Review the following image to see how your cluster setup changes when you move f
 
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+- Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
    ```
@@ -641,7 +639,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kubectl cluster-info
     ```
     {: pre}
-        
+
     Example output:
     ```
     ...
