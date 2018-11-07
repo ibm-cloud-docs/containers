@@ -148,7 +148,7 @@ Review changes that you might need to make when you are updating from the previo
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
-<td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resource are recreated instead. If your scripts rely on the previous behavior, update them.</td>
+<td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resources are recreated instead. If your scripts rely on the previous behavior, update them.</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>

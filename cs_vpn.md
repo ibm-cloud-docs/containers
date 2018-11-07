@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -177,8 +177,45 @@ Determine which remote network resources must be accessible by the cluster over 
     <br>**Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
 2. Optional for version 2.2.0 and later strongSwan Helm charts: Remap remote network subnets by using the `remoteSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the remote network's IP subnets to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN.
 
-### Step 6: Deploy the Helm chart
+### Step 6 (optional): Enable monitoring with the Slack webhook integration
 {: #strongswan_6}
+
+To monitor the status of the strongSwan VPN, you can set up a webhook to automatically post VPN connectivity messages to a Slack channel.
+{: shortdesc}
+
+1. Sign in to your Slack workspace.
+
+2. Go to the [Incoming WebHooks app page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks).
+
+3. Click **Request to Install**. If this app is not listed in your Slack setup, contact your Slack workspace owner.
+
+4. After your request to install is approved, click **Add Configuration**.
+
+5. Choose a Slack channel or create a new channel to send the VPN messages to.
+
+6. Copy the webhook URL that is generated. Example URL:
+  ```
+  https://hooks.slack.com/services/B222BBB6B/AAA1AAA11/ccCcCCcC3cCccccC3cCCc3cc
+  ```
+  {: screen}
+
+7. To verify that the Slack webhook is installed, send a test message to your webhook URL by running the following command:
+    ```
+    curl -X POST -H 'Content-type: application/json' -d '{"text":"VPN test message"}' <webhook_URL>
+    ```
+    {: pre}
+
+8. Go to the Slack channel you chose to verify that the test message is successful.
+
+9. In the `config.yaml` file for the Helm chart, configure the webhook to monitor your VPN connection.
+    1. Change `monitoring.enable` to `true`.
+    2. Add private IP addresses in the remote subnet that you want ensure are reachable over the VPN connection to the `monitoring.privateIPs`. For example, you might add the IP from the `monitoring.privateIPs` setting.
+    3. Add the webhook URL to `monitoring.slackWebhook`.
+    4. Add the Slack channel name to `monitoring.slackChannel`.
+    5. Change other optional `monitoring` settings as needed.
+
+### Step 7: Deploy the Helm chart
+{: #strongswan_7}
 
 1. If you need to configure more advanced settings, follow the documentation provided for each setting in the Helm chart.
 
