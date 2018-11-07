@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -160,6 +160,7 @@ The following image shows available non-persistent data storage options in {{sit
 </table>
 
 
+
 ## Comparison of persistent storage options
 {: #persistent_storage_overview}
 
@@ -285,3 +286,7 @@ nodes. Every node stores only a part of the data. </td>
 </tr>
 </tbody>
 </table>
+
+
+
+
