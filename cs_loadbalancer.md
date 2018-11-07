@@ -149,7 +149,7 @@ Before you create a version 2.0 load balancer, you must complete the following p
     2. In the menu, navigate to **Infrastructure**, and then to **Support > Add Ticket**.
     3. In the case fields, select **Technical**, **Infrastructure**, and **Public Network Question.**
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
-    5. Click **Summit Ticket**.
+    5. Click **Submit Ticket**.
 
 3. After your VLANs have been configured with capacity aggregation, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account.
 
