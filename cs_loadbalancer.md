@@ -154,33 +154,32 @@ Before you create a version 2.0 load balancer, you must complete the following p
 3. After your VLANs have been configured with capacity aggregation, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account.
 
 4. If you use [Calico pre-DNAT network policies](cs_network_policy#block_ingress) to manage traffic to the IP address of a version 2.0 load balancer, you must add the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section in the policies. `applyOnForward: true` ensures that the Calico policy is applied to the traffic as it is encapsulated and forwarded. `doNotTrack: true` ensures that the worker nodes can use DSR to return a response packet directly to the client without needing the connection to be tracked. For example, if you use a Calico policy to whitelist traffic from only specific IP addresses to your load balancer IP address, the policy looks similar to the following:
-
-```
-apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
-metadata:
-  name: whitelist
-spec:
-  applyOnForward: true
-  doNotTrack: true
-  ingress:
-  - action: Allow
-    destination:
-      nets:
-      - <loadbalancer_IP>/32
-      ports:
-      - 80
-    protocol: TCP
-    source:
-      nets:
-      - <client_address>/32
-  preDNAT: true
-  selector: ibm.role=='worker_public'
-  order: 500
-  types:
-  - Ingress
-```
-{: screen}
+    ```
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: whitelist
+    spec:
+      applyOnForward: true
+      doNotTrack: true
+      ingress:
+      - action: Allow
+        destination:
+          nets:
+          - <loadbalancer_IP>/32
+          ports:
+          - 80
+        protocol: TCP
+        source:
+          nets:
+          - <client_address>/32
+      preDNAT: true
+      selector: ibm.role=='worker_public'
+      order: 500
+      types:
+      - Ingress
+    ```
+    {: screen}
 
 Next, you can follow the steps in [Setting up a load balancer 2.0 in a multizone cluster](#ipvs_multi_zone_config) or [in a single-zone cluster](#ipvs_single_zone_config).
 
