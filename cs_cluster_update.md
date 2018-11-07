@@ -386,8 +386,10 @@ You can optionally disable automatic updates for the following add-ons:
 
 **Are there add-ons that I can't update separately from the cluster?**</br>
 
-Yes. Your cluster is deployed with the following managed add-ons and associated resources that cannot be changed. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
+Yes. Your cluster is deployed with the following managed add-ons and associated resources that cannot be changed, except to scale pods or edit configmaps for certain performance benefits. If you try to change one of these deployment add-ons, their original settings are restored on a regular interval.
 
+* `coredns`
+* `coredns-autoscaler`
 * `heapster`
 * `ibm-file-plugin`
 * `ibm-storage-watcher`
@@ -395,6 +397,7 @@ Yes. Your cluster is deployed with the following managed add-ons and associated 
 * `kube-dns-amd64`
 * `kube-dns-autoscaler`
 * `kubernetes-dashboard`
+* `metrics-server`
 * `vpn`
 
 You can view these resources by using the `addonmanager.kubernetes.io/mode: Reconcile` label. For example:
