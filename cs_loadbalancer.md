@@ -91,10 +91,10 @@ Scheduling algorithms determine how a version 2.0 load balancer assigns network 
 {: #scheduling_supported}
 
 <dl>
-<dt>Round Robin (<code>rr</code>)<dt>
+<dt>Round Robin (<code>rr</code>)</dt>
 <dd>The load balancer cycles through the list of app pods when routing connections to worker nodes, treating each app pod equally. Round Robin is the default scheduling algorithm for version 2.0 load balancers.</dd>
 <dt>Source Hashing (<code>sh</code>)</dt>
-<dd>The load balancer generates a hash key based on the source IP address of the client request packet. The load balancer then looks up the hash key in a statically assigned hash table, and routes the request to the app pod that handles hashes of that range. This algorithm ensures that requests from a particular client are always directed to the same app pod.</br>**Note**: Kubernetes uses Iptables rules, which cause requests to be sent to a random pod on the worker. To use this scheduling algorithm, you must ensure that no more than one pod of your app is deployed per worker node. For example, if each pod has the label <code>run=<app_name></code>, add the following anti-affinity rule to the <code>spec</code> section of your app deployment:</br>
+<dd>The load balancer generates a hash key based on the source IP address of the client request packet. The load balancer then looks up the hash key in a statically assigned hash table, and routes the request to the app pod that handles hashes of that range. This algorithm ensures that requests from a particular client are always directed to the same app pod.</br>**Note**: Kubernetes uses Iptables rules, which cause requests to be sent to a random pod on the worker. To use this scheduling algorithm, you must ensure that no more than one pod of your app is deployed per worker node. For example, if each pod has the label <code>run=&lt;app_name&gt;</code>, add the following anti-affinity rule to the <code>spec</code> section of your app deployment:</br>
 <pre class="codeblock">
 <code>
     spec:
