@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -315,7 +315,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
     <ol>
     <li>Delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Fix the incorrect values in the <code>config.yaml</code> file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
+    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
     </ol>
 
 2. If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's config map.
@@ -324,7 +324,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
     <li>Check for any validation errors in the strongSwan pod logs.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
     <li>If the logs contain validation errors, delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Fix the incorrect values in the `config.yaml` file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
+    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
     </ol>
 
 3. Run the 5 Helm tests included in the strongSwan chart definition.
@@ -335,7 +335,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
     <li>View the output of a failed test by looking at the logs of the test pod.<br><pre class="codeblock"><code>kubectl logs -n kube-system <test_program></code></pre></li>
     <li>Delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Fix the incorrect values in the <code>config.yaml</code> file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
+    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
     <li>To check your changes:<ol><li>Get the current test pods.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Clean up the current test pods.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Run the tests again.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
     </ol></ol>
 
@@ -364,7 +364,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan`. However, you see the following error:
+You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> ibm/strongswan`. However, you see the following error:
 ```
 Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
 ```
@@ -395,7 +395,7 @@ This error indicates that the previous release of the strongSwan chart was not c
 
 4. Re-install the updated strongSwan Helm chart with a new release name.
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
+    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> ibm/strongswan
     ```
     {: pre}
 
