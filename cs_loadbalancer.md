@@ -79,15 +79,24 @@ The traffic flow through a multizone cluster follows the same path as [traffic t
 
 By default, each version 2.0 load balancer is set up in one zone only. You can achieve higher availability by deploying a version 2.0 load balancer in every zone where you have app instances.
 
+<br />
+
+
 ## Load balancer 2.0 scheduling algorithms
 {: #scheduling}
 
 Scheduling algorithms determine how a version 2.0 load balancer assigns network connections to your app pods. As client requests arrive to your cluster, the load balancer routes the request packets to worker nodes based on the scheduling algorithm. To use a scheduling algorithm, specify its Keepalived shortname in the scheduler annotation of your load balancer service configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "rr"`. Check the following lists to see which scheduling algorithms are supported in {{site.data.keyword.containerlong_notm}}. If you do not specify a scheduling algorithm, the Round Robin algorithm is used by default. For more information, see the [Keepalived documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](http://www.Keepalived.org/doc/scheduling_algorithms.html).
 
-**Supported scheduling algorithms**:
-* Round Robin (`rr`) - The load balancer cycles through the list of app pods when routing connections to worker nodes, treating each app pod equally.
-* Source Hashing (`sh`) - The load balancer generates a hash key based on the source IP address of the client request packet. The load balancer then looks up the hash key in a statically assigned hash table, and routes the request to the app pod that handles hashes of that range. This algorithm ensures that requests from a particular client are always directed to the same app pod.</br>**Note**: Kubernetes uses Iptables rules, which cause requests to be sent to a random pod on the worker. To use this scheduling algorithm, you must ensure that no more than one pod of your app is deployed per worker node. For example, if each pod has the label `run=<app_name>`, add the following anti-affinity rule to the `spec` section of your app deployment:
-    ```
+### Supported scheduling algorithms
+{: #scheduling_supported}
+
+<dl>
+<dt>Round Robin (<code>rr</code>)<dt>
+<dd>The load balancer cycles through the list of app pods when routing connections to worker nodes, treating each app pod equally. Round Robin is the default scheduling algorithm for version 2.0 load balancers.</dd>
+<dt>Source Hashing (<code>sh</code>)</dt>
+<dd>The load balancer generates a hash key based on the source IP address of the client request packet. The load balancer then looks up the hash key in a statically assigned hash table, and routes the request to the app pod that handles hashes of that range. This algorithm ensures that requests from a particular client are always directed to the same app pod.</br>**Note**: Kubernetes uses Iptables rules, which cause requests to be sent to a random pod on the worker. To use this scheduling algorithm, you must ensure that no more than one pod of your app is deployed per worker node. For example, if each pod has the label <code>run=<app_name></code>, add the following anti-affinity rule to the <code>spec</code> section of your app deployment:</br>
+<pre class="codeblock">
+<code>
     spec:
       affinity:
         podAntiAffinity:
@@ -100,23 +109,31 @@ Scheduling algorithms determine how a version 2.0 load balancer assigns network 
                   operator: In
                   values:
                   - <APP_NAME>
-              topologyKey: kubernetes.io/hostname
-    ```
-    {: codeblock}
+              topologyKey: kubernetes.io/hostname</code></pre>
 
-You can find the complete example in [this IBM Cloud deployment pattern blog](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-4-multi-zone-cluster-app-exposed-via-loadbalancer-aggregating-whole-region-capacity/).
-</br>
-**Unsupported scheduling algorithms**:
-* Destination Hashing (`dh`) - The destination of the packet, which is the load balancer IP address and port, is used to determine which worker node handles the incoming request. However, the IP address and port for load balancers in {{site.data.keyword.containerlong_notm}} don't change. The load balancer is forced to keep the request within the same worker node that it is on, so only app pods on one worker handle all incoming requests.
-* The following algorithms depend on dynamic counting of connections between clients and load balancers. However, because direct service return (DSR) prevents load balancer 2.0 pods from being in the return packet path, load balancers don't keep track of established connections.
-  * Least Connection (`lc`)
-  * Locality-Based Least Connection (`lblc`)
-  * Locality-Based Least Connection with Replication (`lblcr`)
-  * Never Queue (`nq`)
-  * Shortest Expected Delay (`seq`)
-* The following algorithms depend on weighted app pods. However, in {{site.data.keyword.containerlong_notm}}, all app pods are assigned equal weight for load balancing.
-  * Weighted Least Connection (`wlc`)
-  * Weighted Round Robin (`wrr`)
+You can find the complete example in [this IBM Cloud deployment pattern blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-4-multi-zone-cluster-app-exposed-via-loadbalancer-aggregating-whole-region-capacity/).</dd>
+</dl>
+
+### Unsupported scheduling algorithms
+{: #scheduling_unsupported}
+
+<dl>
+<dt>Destination Hashing (<code>dh</code>)</dt>
+<dd>The destination of the packet, which is the load balancer IP address and port, is used to determine which worker node handles the incoming request. However, the IP address and port for load balancers in {{site.data.keyword.containerlong_notm}} don't change. The load balancer is forced to keep the request within the same worker node that it is on, so only app pods on one worker handle all incoming requests.</dd>
+<dt>Dynamic connection counting algorithms</dt>
+<dd>The following algorithms depend on dynamic counting of connections between clients and load balancers. However, because direct service return (DSR) prevents load balancer 2.0 pods from being in the return packet path, load balancers don't keep track of established connections.<ul>
+<li>Least Connection (<code>lc</code>)</li>
+<li>Locality-Based Least Connection (<code>lblc</code>)</li>
+<li>Locality-Based Least Connection with Replication (<code>lblcr</code>)</li>
+<li>Never Queue (<code>nq</code>)</li>
+<li>Shortest Expected Delay (<code>seq</code>)</li><ul></dd>
+<dt>Weighted pod algorithms</dt>
+<dd>The following algorithms depend on weighted app pods. However, in {{site.data.keyword.containerlong_notm}}, all app pods are assigned equal weight for load balancing.<ul>
+<li>Weighted Least Connection (<code>wlc</code>)</li>
+<li>Weighted Round Robin (<code>wrr</code>)</li></ul></dd></dl>
+
+<br />
+
 
 ## Load balancer 2.0 prerequisites
 {: #ipvs_provision}
