@@ -79,7 +79,7 @@ The traffic flow through a multizone cluster follows the same path as [traffic t
 
 By default, each version 2.0 load balancer is set up in one zone only. You can achieve higher availability by deploying a version 2.0 load balancer in every zone where you have app instances.
 
-### Load balancer 2.0 scheduling algorithms
+## Load balancer 2.0 scheduling algorithms
 {: #scheduling}
 
 Scheduling algorithms determine how a version 2.0 load balancer assigns network connections to your app pods. As client requests arrive to your cluster, the load balancer routes the request packets to worker nodes based on the scheduling algorithm. To use a scheduling algorithm, specify its Keepalived shortname in the scheduler annotation of your load balancer service configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "rr"`. Check the following lists to see which scheduling algorithms are supported in {{site.data.keyword.containerlong_notm}}. If you do not specify a scheduling algorithm, the Round Robin algorithm is used by default. For more information, see the [Keepalived documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](http://www.Keepalived.org/doc/scheduling_algorithms.html).
@@ -118,7 +118,7 @@ You can find the complete example in [this IBM Cloud deployment pattern blog](ht
   * Weighted Least Connection (`wlc`)
   * Weighted Round Robin (`wrr`)
 
-### Load balancer 2.0 prerequisites
+## Load balancer 2.0 prerequisites
 {: #ipvs_provision}
 
 You cannot update an existing version 1.0 load balancer to 2.0. You must create a new version 2.0 load balancer. Note that you can run version 1.0 and 2.0 load balancers simultaneously in a cluster.
