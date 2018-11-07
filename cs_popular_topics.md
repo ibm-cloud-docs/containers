@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -35,6 +35,21 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>7 November</td>
+<td>Load balancer 2.0 (beta)</td>
+<td>You now can choose between [load balancer 1.0 or 2.0](cs_loadbalancer.html#planning_ipvs) to securely expose your cluster apps to the public.</td>
+</tr>
+<tr>
+<td>7 November</td>
+<td>Kubernetes version 1.12 available</td>
+<td>Now, you can update or create clusters that run [Kubernetes version 1.12](cs_versions.html#cs_v112)! 1.12 clusters come with highly available Kubernetes masters by default.</td>
+</tr>
+<tr>
+<td>7 November</td>
+<td>Highly available masters in clusters that run Kubernetes version 1.10</td>
+<td>Highly available masters are available for clusters that run Kubernetes version 1.10! All the benefits described in the earlier entry for 1.11 clusters apply to 1.10 clusters, as well as the [preparation steps](cs_versions.html#110_ha-masters) that you must take.</td>
+</tr>
 <tr>
 <td>1 November</td>
 <td>Highly available masters in clusters that run Kubernetes version 1.11</td>
