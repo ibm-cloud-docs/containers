@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -182,6 +182,8 @@ All `kubectl` commands that are available in Kubernetes 1.10.8 are supported for
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
 * [Create a cluster](cs_clusters.html#clusters_cli).
+
+To use `kubectl` commands:
 
 1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
 

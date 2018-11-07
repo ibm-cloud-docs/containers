@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -40,10 +40,11 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
-- [Create a version 1.10 cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.1.1 Calico CLI and Calico v3 policy syntax in this tutorial.
+- [Create a version 1.10 or later cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.1.1 Calico CLI and Calico v3 policy syntax in this tutorial.
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 - [Install and configure the Calico CLI](cs_network_policy.html#1.10_install).
-- [Make sure you have the **Editor**, **Operator**, or **Administrator** platform role](cs_users.html#add_users_cli).
+- Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
+    - [Any platform role](cs_users.html#platform)
 
 <br />
 
@@ -54,7 +55,7 @@ This tutorial is intended for software developers and network administrators who
 The first lesson shows you how your app is exposed from multiple IP addresses and ports, and where public traffic is coming into your cluster.
 {: shortdesc}
 
-Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer service. A load balancer service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
+Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer 2.0 service. A load balancer 2.0 service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
 
 The following image shows how the webserver app will be exposed to the internet by the public node port and public load balancer at the end of Lesson 1:
 
@@ -81,7 +82,7 @@ The following image shows how the webserver app will be exposed to the internet 
     ```
     {: screen}
 
-3. To expose the app to the public internet, create a load balancer service configuration file called `webserver-lb.yaml` in a text editor.
+3. To expose the app to the public internet, create a load balancer 2.0 service configuration file called `webserver-lb.yaml` in a text editor.
     ```
     apiVersion: v1
     kind: Service
@@ -89,16 +90,18 @@ The following image shows how the webserver app will be exposed to the internet 
       labels:
         run: webserver
       name: webserver-lb
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
-      externalTrafficPolicy: Cluster
+      type: LoadBalancer
+      selector:
+        run: webserver
       ports:
       - name: webserver-port
         port: 80
         protocol: TCP
         targetPort: 8080
-      selector:
-        run: webserver
-      type: LoadBalancer
+      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -289,13 +292,7 @@ To secure the PR firm's cluster, you must block public access to both the load b
     ```
     {: screen}
 
-4. Change the externalTrafficPolicy of the load balancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the load balancer in the next step.
-    ```
-    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
-    ```
-    {: pre}
-
-5. Using the value from your cheat sheet, verify that you can still publicly access the load balancer external IP address.
+4. Using the value from your cheat sheet, verify that you can still publicly access the load balancer external IP address.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -326,7 +323,7 @@ To secure the PR firm's cluster, you must block public access to both the load b
     {: screen}
     In the `Request Information` section of the output, note that the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the load balancer sees your system's source IP address as the client IP address.
 
-6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
+5. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
 
 Great! At this point, your app is exposed to the public internet from the public load balancer port only. Traffic to the public node ports is blocked. You've partially locked down your cluster from unwanted traffic.
 
@@ -349,6 +346,7 @@ First, in addition to the node ports, you must block all incoming traffic to the
       name: deny-lb-port-80
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -403,6 +401,7 @@ First, in addition to the node ports, you must block all incoming traffic to the
       name: whitelist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Allow
         destination:
@@ -492,6 +491,7 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
       name: blacklist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:

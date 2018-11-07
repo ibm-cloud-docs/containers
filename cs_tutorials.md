@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -50,7 +50,9 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  Check out the steps you need to take to [prepare to create a cluster](cs_clusters.html#cluster_prepare).
--  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in.
+-  Ensure you have the following access policies:
+    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}
+    -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI

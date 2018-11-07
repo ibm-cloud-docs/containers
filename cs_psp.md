@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -36,7 +36,9 @@ Trying to control which users have access to the {{site.data.keyword.containerlo
 **Are any policies set by default? What can I add?**</br>
 By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller. 
 
-Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
+Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](cs_hybrid.html#hybrid_iks_icp). 
+
+If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
 **How does policy authorization work?**</br>
 When you as a user create a pod directly and not by using a controller such as a deployment, your credentials are validated against the pod security policies that you are authorized to use. If no policy supports the pod security requirements, the pod is not created.
@@ -185,12 +187,18 @@ Your Kubernetes cluster in {{site.data.keyword.containerlong_notm}} contains the
 pod security policies and related RBAC resources to allow {{site.data.keyword.IBM_notm}} to properly manage your cluster.
 {: shortdesc}
 
-The default `privileged-psp-user` and `restricted-psp-user` RBAC resources refer to the pod security policies that are set by {{site.data.keyword.IBM_notm}}. 
+The default `PodSecurityPolicy` resources refer to the pod security policies that are set by {{site.data.keyword.IBM_notm}}. 
 
 **Attention**: You must not delete or modify these resources.
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|
+| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Policy for full host access pod creation. |
+| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostaccess-psp` pod security policy. |
+| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Policy for hostpath access pod creation. |
+| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostpath-psp` pod security policy. |
+| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Policy for any UID/GID executable pod creation. |
+| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-psp` pod security policy. |
 | `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Policy for privileged pod creation. |
 | `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-privileged-psp` pod security policy. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `kube-system` namespace. |

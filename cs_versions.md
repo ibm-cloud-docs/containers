@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -28,10 +28,9 @@ lastupdated: "2018-11-02"
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-
-- Latest: 1.11.3
+- Latest: 1.12.2
 - Default: 1.10.8
-- Other: 1.9.10
+- Other: 1.11.3, 1.9.10
 
 </br>
 
@@ -83,6 +82,7 @@ As updates become available, you are notified when you view information about th
 </br>
 
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+-  Version 1.12 [preparation actions](#cs_v112).
 -  Version 1.11 [preparation actions](#cs_v111).
 -  Version 1.10 [preparation actions](#cs_v110).
 -  Version 1.9 [preparation actions](#cs_v19).
@@ -95,6 +95,112 @@ For a complete list of changes, review the following information:
 * [IBM version changelog](cs_versions_changelog.html).
 
 </br>
+
+## Version 1.12
+{: #cs_v112}
+
+Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.12.
+
+### Update before master
+{: #112_before}
+
+<table summary="Kubernetes updates for version 1.12">
+<caption>Changes to make before you update the master to Kubernetes 1.12</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>If you currently have the Kubernetes `metric-server` deployed in your cluster, you must remove the `metric-server` before you update the cluster to Kubernetes 1.12. This removal prevents conflicts with the `metric-server` that is deployed during the update.</td>
+</tr>
+<tr>
+<td>Role bindings for `kube-system` `default` service account</td>
+<td>The `kube-system` `default` service account no longer has **cluster-admin** access to the Kubernetes API. If you deploy features or add-ons such as [Helm](cs_integrations.html#helm) that require access to processes in your cluster, set up a [service account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). If you need time to create and set up individual service accounts with the appropriate permissions, you can temporarily grant the **cluster-admin** role with the following cluster role binding: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+</tr>
+</tbody>
+</table>
+
+### Update after master
+{: #112_after}
+
+<table summary="Kubernetes updates for version 1.12">
+<caption>Changes to make after you update the master to Kubernetes 1.12</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`apps/v1` Kubernetes API</td>
+<td>The `apps/v1` Kubernetes API is replacing the `extensions`, `apps/v1beta1`, and `apps/v1alpha` APIs. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.<br><br>You must update all your YAML `apiVersion` fields to use `apps/v1`. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
+<ul><li>After creating a deployment, the `.spec.selector` field is immutable.</li>
+<li>The `.spec.rollbackTo` field is deprecated. Instead, use the `kubectl rollout undo` command.</li></ul></td>
+</tr>
+<tr>
+<td>CoreDNS available as cluster DNS provider</td>
+<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [choose to use CoreDNS](cs_cluster_update.html#dns).</td>
+</tr>
+<tr>
+<td>`kubectl apply --force`</td>
+<td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resource are recreated instead. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl logs --interactive`</td>
+<td>The `--interactive` flag is no longer supported for `kubectl logs`. Update any automation that uses this flag.</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>If the `patch` command results in no changes (a redundant patch), the command no longer exits with a `1` return code. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl version -c`</td>
+<td>The `-c` shorthand flag is no longer supported. Instead, use the full `--client` flag. Update any automation that uses this flag.</td>
+</tr>
+<tr>
+<td>`kubectl wait`</td>
+<td>If no matching selectors are found, the command now prints an error message and exits with a `1` return code. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>kubelet cAdvisor port</td>
+<td>The [Container Advisor (cAdvisor) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor) web UI that the kubelet used by starting the `--cadvisor-port` is removed from Kubernetes 1.12. If you still need to run cAdvisor, [deploy cAdvisor as a daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes).<br><br>In the daemon set, specify the ports section so that cAdvisor can be reached via `http://node-ip:4194`, such as follows. Note that the cAdvisor pods fail until the worker nodes are updated to 1.12, because earlier versions of kubelet use host port 4194 for cAdvisor.
+<pre class="screen"><code>ports:
+          - name: http
+            containerPort: 8080
+            hostPort: 4194
+            protocol: TCP</code></pre></td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, use a **Token** to log in.</td>
+</tr>
+<tr>
+<td id="metrics-server">Kubernetes Metrics Server</td>
+<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. If you run more than 30 pods per worker node in your cluster, [adjust the `metrics-server` configuration for performance](cs_performance.html#metrics).
+<p>The Kubernetes dashboard does not work with the `metrics-server`. If you want to display metrics in a dashboard, choose from the following options.</p>
+<ul><li>[Set up Grafana to analyze metrics](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics) by using the Cluster Monitoring Dashboard.</li>
+<li>Deploy [Heapster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster) to your cluster.
+<ol><li>Copy the `heapster-rbac` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml), `heapster-service` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml), and `heapster-controller` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) files.</li>
+<li>Edit the `heapster-controller` YAML by replacing the following strings.
+<ul><li>Replace `{{ nanny_memory }}` with `90Mi`</li>
+<li>Replace `{{ base_metrics_cpu }}` with `80m`</li>
+<li>Replace `{{ metrics_cpu_per_node }}` with `0.5m`</li>
+<li>Replace `{{ base_metrics_memory }}` with `140Mi`</li>
+<li>Replace `{{ metrics_memory_per_node }}` with `4Mi`</li>
+<li>Replace `{{ heapster_min_cluster_size }}` with `16`</li></ul></li>
+<li>Apply the `heapster-rbac`, `heapster-service`, and `heapster-controller` YAML files to your cluster by running the `kubectl apply -f` command.</li></ol></li></ul></td>
+</tr>
+<tr>
+<td>`rbac.authorization.k8s.io/v1` Kubernetes API</td>
+<td>The `rbac.authorization.k8s.io/v1` Kubernetes API (supported since Kubernetes 1.8) is replacing the `rbac.authorization.k8s.io/v1alpha1` and `rbac.authorization.k8s.io/v1beta1` API. You can no longer create RBAC objects such as roles or rolebindings with the unsupported `v1alpha` API. Existing RBAC objects are converted to the `v1` API.</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.11
 {: #cs_v111}
@@ -186,7 +292,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tbody>
 </table>
 
-### Updating to highly available cluster masters
+### Updating to highly available cluster masters in Kubernetes 1.11
 {: #ha-masters}
 
 For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
@@ -202,10 +308,12 @@ Review the following situations in which you must make changes to take full adva
 * If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.
 * If you use Kubernetes or Calico network policies to control pod egress access to the master.
 
+<br>
 **Updating your firewall or custom Calico host network policies for HA masters**:</br>
 {: #ha-firewall}
 If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound).
 
+<br>
 **Reserving host ports `2040` and `2041` on your worker nodes**:</br>
 {: #ha-ports}
 To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
@@ -219,6 +327,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 ```
 {: pre}
 
+<br>
 **Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
 {: #ha-incluster}
 To access the cluster master in an HA configuration from within the cluster, use one of the following:
@@ -227,12 +336,14 @@ To access the cluster master in an HA configuration from within the cluster, use
 
 If you previously used the cluster master IP address, this method continues to work. However, for improved availability, update to use the `kubernetes` service cluster IP address or domain name.
 
+<br>
 **Configuring Calico for out-of-cluster access to master with HA configuration**:</br>
 {: #ha-outofcluster}
 The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
 
 Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
 
+<br>
 **Updating Kubernetes or Calico network policies**:</br>
 {: #ha-networkpolicies}
 You need to take additional actions if you use [Kubernetes or Calico network policies](cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
@@ -427,6 +538,15 @@ Review changes that you might need to make when you are updating from the previo
 <td>Updating to Kubernetes version 1.10 also updates Calico from v2.6.5 to v3.1.1. <strong>Important</strong>: Before you can successfully update to Kubernetes v1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).</td>
 </tr>
 <tr>
+<td>Cluster master high availability (HA) configuration</td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#110_ha-masters). These preparation actions apply:<ul>
+<li>If you have a firewall or custom Calico network policies.</li>
+<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you used the cluster master IP address for in-cluster access to the master.</li>
+<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+</tr>
+<tr>
 <td>Kubernetes Dashboard network policy</td>
 <td>In Kubernetes 1.10, the <code>kubernetes-dashboard</code> network policy in the <code>kube-system</code> namespace blocks all pods from accessing the Kubernetes dashboard. However, this does <strong>not</strong> impact the ability to access the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, you can add a <code>kubernetes-dashboard-policy: allow</code> label to a namespace and then deploy the pod to the namespace.</td>
 </tr>
@@ -470,6 +590,10 @@ Review changes that you might need to make when you are updating from the previo
 <td>Now when you use the <code>kubectl port-forward</code> command, it no longer supports the <code>-p</code> flag. If your scripts rely on the previous behavior, update them to replace the <code>-p</code> flag with the pod name.</td>
 </tr>
 <tr>
+<td>`kubectl --show-all, -a` flag</td>
+<td>The `--show-all, -a` flag, which applied only to human-readable pod commands (not API calls), is deprecated and is unsupported in future versions. The flag is used to display pods in a terminal state. To track information about terminated apps and containers, [set up log forwarding in your cluster](cs_health.html#health).</td>
+</tr>
+<tr>
 <td>Read-only API data volumes</td>
 <td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
 Previously, apps were allowed to write data to these volumes that might be
@@ -483,6 +607,165 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 </tr>
 </tbody>
 </table>
+
+### Updating to highly available cluster masters in Kubernetes 1.10
+{: #110_ha-masters}
+
+For clusters that run Kubernetes version 1.10.8_1530 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
+{: shortdesc}
+
+To give you time to take the preparation steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+{: tip}
+
+Review the following situations in which you must make changes to take full advantage of HA master configuration:
+* If you have a firewall or custom Calico network policies.
+* If you are using host ports `2040` or `2041` on your worker nodes.
+* If you used the cluster master IP address for in-cluster access to the master.
+* If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.
+* If you use Kubernetes or Calico network policies to control pod egress access to the master.
+
+<br>
+**Updating your firewall or custom Calico host network policies for HA masters**:</br>
+{: #ha-firewall}
+If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound).
+
+<br>
+**Reserving host ports `2040` and `2041` on your worker nodes**:</br>
+{: #ha-ports}
+To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
+* Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
+* Update any pods with `hostNetwork` set to to `true` that listen on ports `2040` or `2041` to use different ports.
+
+To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
+
+```
+kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+```
+{: pre}
+
+<br>
+**Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
+{: #ha-incluster}
+To access the cluster master in an HA configuration from within the cluster, use one of the following:
+* The `kubernetes` service cluster IP address, which by default is: `https://172.21.0.1`
+* The `kubernetes` service domain name, which by default is: `https://kubernetes.default.svc.cluster.local`
+
+If you previously used the cluster master IP address, this method continues to work. However, for improved availability, update to use the `kubernetes` service cluster IP address or domain name.
+
+<br>
+**Configuring Calico for out-of-cluster access to master with HA configuration**:</br>
+{: #ha-outofcluster}
+The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
+
+Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
+
+<br>
+**Updating Kubernetes or Calico network policies**:</br>
+{: #ha-networkpolicies}
+You need to take additional actions if you use [Kubernetes or Calico network policies](cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
+*  The Kubernetes service cluster IP, which you can get by running `kubectl get service kubernetes -o yaml | grep clusterIP`.
+*  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
+*  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
+
+**Note**: The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Get your cluster master IP address.
+    ```
+    kubectl cluster-info | grep Kubernetes
+    ```
+    {: pre}
+
+2.  Search your Kubernetes network policies for impacts. If no YAML is returned, your cluster is not impacted and you do not need to make additional changes.
+    ```
+    kubectl get networkpolicies --all-namespaces -o yaml | grep <cluster-master-ip>
+    ```
+    {: pre}
+
+3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name or cluster master IP address.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service
+      # domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+4.  Revise the Kubernetes network policy to allow egress to the in-cluster master proxy IP address `172.20.0.1`. For now, keep the cluster master IP address. For example, the previous network policy example changes to the following.
+
+    If you previously set up your egress policies to open up only the single IP address and port for the single Kubernetes master, now use the in-cluster master proxy IP address range 172.20.0.1/32 and port 2040.
+    {: tip}
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 172.20.0.1/32
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+5.  Apply the revised network policy to your cluster.
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+
+6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](cs_cluster_update.html#master) to the HA master fix pack.
+
+7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
+
+    ```
+    - ipBlock:
+        cidr: 161.202.126.210/32
+    ```
+    {: screen}
+
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
 
 ### Preparing to update to Calico v3
 {: #110_calicov3}

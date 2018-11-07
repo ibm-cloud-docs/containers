@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -63,6 +63,8 @@ The following diagram shows the process that you can take to update your master.
 Figure 1. Updating Kubernetes master process diagram
 
 {: #update_master}
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+
 To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
@@ -88,7 +90,8 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
-- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog). </br>
+- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
 
 **Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
@@ -264,6 +267,7 @@ You can update the machine types of your worker nodes by adding new worker nodes
 Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
 
 
 **Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
@@ -617,3 +621,110 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 **What's next?** </br>
 Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](cs_clusters_planning.html#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+
+<br />
+
+
+## Setting the cluster DNS provider to CoreDNS
+{: #dns}
+
+Each service in your cluster is assigned a Domain Name System (DNS) name that the cluster DNS provider registers to resolve DNS requests. The default cluster DNS provider is Kubernetes DNS (KubeDNS). However, for clusters that run Kubernetes version 1.12 or later, you can choose to use [CoreDNS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/) instead. You might use CoreDNS as an early adopter or to test out potential impacts as the Kubernetes project moves to replace KubeDNS with CoreDNS. For more information about DNS for services and pods, see [the Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+{: shortdesc}
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Determine the current cluster DNS provider. In the following example, KubeDNS is the current cluster DNS provider.
+    ```
+    kubectl cluster-info
+    ```
+    {: pre}
+        
+    Example output:
+    ```
+    ...
+    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+    ...
+    ```
+    {: screen}
+2.  Set CoreDNS as the cluster DNS provider.
+    
+    1.  **Optional**: If you customized the `kube-dns` configmap in the `kube-system` namespace, transfer any customizations to the `coredns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
+    
+    2.  Scale down the KubeDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
+        ```
+        {: pre}
+    
+    3.  Check and wait for the pods to be deleted.
+        ```
+        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
+        ```
+        {: pre}
+    
+    4.  Scale down the KubeDNS deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
+        ```
+        {: pre}
+    
+    5.  Scale up the CoreDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
+        ```
+        {: pre}
+    
+    6.  Label and annotate the cluster DNS service for CoreDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
+        ```
+        {: pre}
+3.  **Optional**: Reverse the previous steps to switch back to KubeDNS as the cluster DNS provider.
+    
+    1.  **Optional**: If you customized the `coredns` configmap in the `kube-system` namespace, transfer any customizations to the `kube-dns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
+    
+    2.  Scale down the CoreDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
+        ```
+        {: pre}
+    
+    3.  Check and wait for the pods to be deleted.
+        ```
+        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
+        ```
+        {: pre}
+  
+    4.  Scale down the CoreDNS deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns
+        ```
+        {: pre}
+    
+    5.  Scale up the KubeDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
+        ```
+        {: pre}
+    
+    6.  Label and annotate the cluster DNS service for KubeDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
+        ```
+        {: pre}

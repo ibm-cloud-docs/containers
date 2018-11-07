@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -37,8 +37,8 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </thead>
 <tbody>
 <tr>
-<td>0.1.629</td>
-<td>05 Nov 2018</td>
+<td>0.1.635</td>
+<td>06 Nov 2018</td>
 <td>Adds the [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable),  [<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable), [<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get), [<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback), and [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) commands for managing automatic updates of the Ingress ALB cluster add-on.
 </td>
 </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -94,7 +94,7 @@ lastupdated: "2018-11-05"
 ## Follow us
 {: #follow}
 
-- [Twitter ![External link icon](../icons/launch-glyph.svg "External link icon")](https://twitter.com/hashtag/ibmcontainers)
+- [Twitter ![External link icon](../icons/launch-glyph.svg "External link icon")](https://twitter.com/hashtag/IKS)
 - [Developers Community articles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/tv/microservices/)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -21,44 +21,46 @@ lastupdated: "2018-11-02"
 A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure. 
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to. 
-
-**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
-
 ![{{site.data.keyword.containerlong_notm}} regions and zones](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} regions and zones_
 
-Supported {{site.data.keyword.containerlong_notm}} regions are as follows:
-* AP North (standard clusters only)
-* AP South
-* EU Central
-* UK South
-* US East (standard clusters only)
-* US South
+{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to. 
+
+**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+
+| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
+| --- | --- |
+| AP North (standard clusters only) | Tokyo |
+| AP South | Sydney |
+| EU Central | Frankfurt |
+| UK South | London |
+| US East (standard clusters only) | Washington DC |
+| US South | Dallas |
+{: caption="Table: Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
 
 <br />
 
 
-## Regions in {{site.data.keyword.Bluemix_notm}}
+## Locations in {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
-You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same region.
+You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
 {:shortdesc}
 
-To check which {{site.data.keyword.Bluemix_notm}} region you are currently in, run `ibmcloud info` and review the **Region** field.
+To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud info` and review the **Region** field.
 
-{{site.data.keyword.Bluemix_notm}} regions can be accessed by specifying the API endpoint when you log in. If you do not specify a region, you are automatically logged in to the region that is closest to you.
+{{site.data.keyword.Bluemix_notm}} locations can be accessed by specifying the region API endpoint when you log in. If you do not specify a region endpoint, you are automatically logged in to the region that is closest to you.
 
 For example, you can use the following commands to log in to {{site.data.keyword.Bluemix_notm}} region API endpoints:
 
-  * US South
+  * Dallas
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * US East
+  * Washington DC
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -70,13 +72,13 @@ For example, you can use the following commands to log in to {{site.data.keyword
       ```
       {: pre}
 
-  * Germany
+  * Frankfurt
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * United Kingdom
+  * London
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```

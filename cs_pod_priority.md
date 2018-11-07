@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -47,6 +47,9 @@ _Figure: Pod priority scenarios_
 
 **Can I disable the pod priority admission controller?**</br>
 No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods following the existing scheduling policies that you have in place.
+
+**How do resource quotas affect pod priority?**</br>
+You can use pod priority in combination with resource quotas, including [quota scopes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) for clusters that run Kubernetes 1.12 or later. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
 
 ## Understanding default priority classes
 {: #default_priority_class}

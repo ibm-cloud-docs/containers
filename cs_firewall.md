@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-02"
+lastupdated: "2018-11-06"
 
 ---
 
@@ -339,9 +339,9 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges) of the zone that your cluster is in.
-    - To find the zone of your cluster, run `ibmcloud ks clusters`.
-    - Allow access to the IP range for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
+6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer): 
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`. 
 
 <br />
 
