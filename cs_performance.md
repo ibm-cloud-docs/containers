@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -150,4 +150,73 @@ Before you begin: You must have the [Administrator platform role](cs_users.html#
 
 3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app is running, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nginx.com/blog/tuning-nginx/).
 
+<br />
 
+
+## Adjusting cluster metrics provider resources
+{: #metrics}
+
+Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later, or `heapster` in earlier versions) configurations are optimized for clusters with 30 or less pods per worker node. If your cluster has more pods per worker node, the metrics provider `metrics-server` or `heapster` main container for the pod might restart frequently with an error message such as `OOMKilled`.
+
+The metrics provider pod also has a `nanny` container that scales the `metrics-server` or `heapster` main container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Open the cluster metrics provider configmap YAML.
+    *  For `metrics-server`:
+       ```
+       kubectl get configmap metrics-server-config -n kube-system -o yaml
+       ```
+       {: pre}
+    *  For `heapster`:
+       ```
+       kubectl get configmap heapster-config -n kube-system -o yaml
+       ```
+       {: pre}
+    Example output:
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+    kind: ConfigMap
+    metadata:
+      annotations:
+        armada-service: cruiser-kube-addons
+        version: --
+      creationTimestamp: 2018-10-09T20:15:32Z
+      labels:
+        addonmanager.kubernetes.io/mode: EnsureExists
+        kubernetes.io/cluster-service: "true"
+      name: heapster-config
+      namespace: kube-system
+      resourceVersion: "526"
+      selfLink: /api/v1/namespaces/kube-system/configmaps/heapster-config
+      uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
+    ```
+    {: screen}
+       
+2.  Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value for both `metrics-server` and `heapster` is set to `4Mi`. 
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+        memoryPerNode: 5Mi
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+3.  Apply your changes.
+    ```
+    kubectl apply -f heapster-config.yaml
+    ```
+    {: pre}
+
+4.  Monitor the metrics provider pods to see if containers continue to be restarted due to an `OOMKilled` error message. If so, repeat these steps and increase the `memoryPerNode` size until the pod is stable.
+
+Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) for more ideas.
+{: tip}

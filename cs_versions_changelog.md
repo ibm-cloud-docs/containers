@@ -27,6 +27,7 @@ For more information about major, minor, and patch versions and preparation acti
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.12 [changelog](#112_changelog).
 -  Version 1.11 [changelog](#111_changelog).
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
@@ -36,14 +37,143 @@ For information about changes since the previous version, see the following chan
 
 </br>
 
+## Version 1.12 changelog
+{: #112_changelog}
 
+Review the following changes.
+
+### Changelog for 1.12.2_1527, released 7 November 2018
+{: #1122_1527}
+
+<table summary="Changes that were made since version 1.11.3_1533">
+<caption>Changes since version 1.11.3_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Calico `calico-*` pods in the `kube-system` namespace now set CPU and memory resource requests for all containers.</td>
+</tr>
+<tr>
+<td>Cluster DNS provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](cs_cluster_update.html#dns).</td>
+</tr>
+<tr>
+<td>Cluster metrics provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. For action items, see [the `metrics-server` preparation action](cs_versions.html#metrics-server).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.4</td>
+<td>1.2.0</td>
+<td>See the [containerd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.0).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>N/A</td>
+<td>1.2.2</td>
+<td>See the [CoreDNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.2).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.3</td>
+<td>v1.12.2</td>
+<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added three new IBM pod security policies and their associated cluster roles. For more information, see [Understanding default resources for IBM cluster management](cs_psp.html#ibm_psp).</td>
+</tr>
+<tr>
+<td>Kubernetes Dashboard</td>
+<td>v1.8.3</td>
+<td>v1.10.0</td>
+<td>See the [Kubernetes Dashboard release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
+If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, use a **Token** to log in. Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>See the [Kubernetes DNS release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.13).</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>N/A</td>
+<td>v0.3.1</td>
+<td>See the [Kubernetes Metrics Server release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.1).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.3-118</td>
+<td>v1.12.2-68</td>
+<td>Updated to support the Kubernetes 1.12 release. Additional changes include the following:
+<ul><li>Load balancer pods (`ibm-cloud-provider-ip-*` in `ibm-system` namespace) now set CPU and memory resource requests.</li>
+<li>The `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlans --zone <zone>`.</li>
+<li>A new [load balancer 2.0](cs_loadbalancer.html#planning_ipvs) is available as a beta.</li></ul></td>
+</tr>
+<tr>
+<td>OpenVPN client configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>OpenVPN client `vpn-* pod` in the `kube-system` namespace now sets CPU and memory resource requests.</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.11 changelog
 {: #111_changelog}
 
 Review the following changes.
 
+### Changelog for 1.11.3_1533, released 7 November 2018
+{: #1113_1533}
 
+<table summary="Changes that were made since version 1.11.3_1531">
+<caption>Changes since version 1.11.3_1531</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA update</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed the update to highly available (HA) masters for clusters that use admission webhooks such as `initializerconfigurations`, `mutatingwebhookconfigurations`, or `validatingwebhookconfigurations`. You might use these webhooks with Helm charts such as for [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.3-100</td>
+<td>v1.11.3-127</td>
+<td>Added the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>TPM-enabled kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](cs_cli_reference.html#cs_machine_types).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
 {: #1113_1531_ha-master}
@@ -432,7 +562,63 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for 1.10.8_1530, released 7 November 2018
+{: #1108_1530_ha-master}
 
+<table summary="Changes that were made since version 1.10.8_1528">
+<caption>Changes since version 1.10.8_1528</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](cs_versions.html#ha-masters). These preparation actions apply:<ul>
+<li>If you have a firewall or custom Calico network policies.</li>
+<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
+<li>If you used the cluster master IP address for in-cluster access to the master.</li>
+<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+</tr>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>N/A</td>
+<td>1.8.12-alpine</td>
+<td>Added an `ibm-master-proxy-*` pod for client-side load balancing on all worker nodes, so that each worker node client can route requests to an available HA master replica.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.2.18</td>
+<td>v3.3.1</td>
+<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+</tr>
+<tr>
+<td>Encrypting data in etcd</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.8-172</td>
+<td>v1.10.8-197</td>
+<td>Added the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>TPM-enabled kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](cs_cli_reference.html#cs_machine_types).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018
 {: #1108_1528}
@@ -981,7 +1167,28 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for worker node fix 1.9.10_1532, released 7 November 2018
+{: #1910_1532}
 
+<table summary="Changes that were made since version 1.9.10_1531">
+<caption>Changes since version 1.9.10_1531</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TPM-enabled kernel</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](cs_cli_reference.html#cs_machine_types).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018
 {: #1910_1531}
