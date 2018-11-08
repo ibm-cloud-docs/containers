@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-08"
 
 ---
 
@@ -192,9 +192,9 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 
 5. Choose a Slack channel or create a new channel to send the VPN messages to.
 
-6. Copy the webhook URL that is generated. Example URL:
+6. Copy the webhook URL that is generated. The URL format looks similar to the following:
   ```
-  https://hooks.slack.com/services/B222BBB6B/AAA1AAA11/ccCcCCcC3cCccccC3cCCc3cc
+  https://hooks.slack.com/services/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
   ```
   {: screen}
 
@@ -208,10 +208,9 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 
 9. In the `config.yaml` file for the Helm chart, configure the webhook to monitor your VPN connection.
     1. Change `monitoring.enable` to `true`.
-    2. Add private IP addresses in the remote subnet that you want ensure are reachable over the VPN connection to the `monitoring.privateIPs`. For example, you might add the IP from the `monitoring.privateIPs` setting.
+    2. Add private IP addresses or HTTP endpoints in the remote subnet that you want ensure are reachable over the VPN connection to `monitoring.privateIPs` or `monitoring.httpEndpoints`. For example, you might add the IP from the `remote.privateIPtoPing` setting to `monitoring.privateIPs`.
     3. Add the webhook URL to `monitoring.slackWebhook`.
-    4. Add the Slack channel name to `monitoring.slackChannel`.
-    5. Change other optional `monitoring` settings as needed.
+    4. Change other optional `monitoring` settings as needed.
 
 ### Step 7: Deploy the Helm chart
 {: #strongswan_7}
@@ -400,75 +399,8 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.2.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9.
-
-Updating your cluster to Kubernetes 1.10? Be sure to delete your strongSwan Helm chart first. Then after the update, reinstall it.
+The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), first update strongSwan to the 2.2.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9. Next, delete your strongSwan Helm chart. Then, after the update, you can reinstall the chart.
 {:tip}
-
-### Upgrading from version 1.0.0
-{: #vpn_upgrade_1.0.0}
-
-Due to some of the settings that are used in the version 1.0.0 Helm chart, you cannot use `helm upgrade` to update from 1.0.0 to the latest version.
-{:shortdesc}
-
-To upgrade from version 1.0.0, you must delete the 1.0.0 chart and install the latest version:
-
-1. Delete the 1.0.0 Helm chart.
-
-    ```
-    helm delete --purge <release_name>
-    ```
-    {: pre}
-
-2. Save the default configuration settings for the latest version of the strongSwan Helm chart in a local YAML file.
-
-    ```
-    helm inspect values ibm/strongswan > config.yaml
-    ```
-    {: pre}
-
-3. Update the configuration file and save the file with your changes.
-
-4. Install the Helm chart to your cluster with the updated `config.yaml` file.
-
-    ```
-    helm install -f config.yaml --name=<release_name> ibm/strongswan
-    ```
-    {: pre}
-
-Additionally, certain `ipsec.conf` timeout settings that were hardcoded in 1.0.0 are exposed as configurable properties in later versions. The names and defaults of some of these configurable `ipsec.conf` timeout settings were also changed to be more consistent with strongSwan standards. If you are upgrading your Helm chart from 1.0.0 and want to retain the 1.0.0 version defaults for the timeout settings, add the new settings to your chart configuration file with the old default values.
-
-
-
-  <table>
-  <caption>ipsec.conf settings differences between version 1.0.0 and the latest version</caption>
-  <thead>
-  <th>1.0.0 setting name</th>
-  <th>1.0.0 default</th>
-  <th>Latest version setting name</th>
-  <th>Latest version default</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ikelifetime</code></td>
-  <td>60m</td>
-  <td><code>ikelifetime</code></td>
-  <td>3h</td>
-  </tr>
-  <tr>
-  <td><code>keylife</code></td>
-  <td>20m</td>
-  <td><code>lifetime</code></td>
-  <td>1h</td>
-  </tr>
-  <tr>
-  <td><code>rekeymargin</code></td>
-  <td>3m</td>
-  <td><code>margintime</code></td>
-  <td>9m</td>
-  </tr>
-  </tbody></table>
-
 
 ## Disabling the strongSwan IPSec VPN service
 {: vpn_disable}
