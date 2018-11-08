@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-08"
 
 ---
 
@@ -2118,7 +2118,8 @@ Configure the number and size of proxy buffers for the ALB.
 <dl>
 <dt>Description</dt>
 <dd>
-Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
+Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.</br>
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
