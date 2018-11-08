@@ -144,7 +144,7 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
   <tr>
   <td><a href="#appid-auth">{{site.data.keyword.appid_short}} Authentication</a></td>
   <td><code>appid-auth</code></td>
-  <td>Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.</td>
+  <td>Use {{site.data.keyword.appid_full}} to authenticate with your app.</td>
   </tr>
   <tr>
   <td><a href="#custom-port">Custom HTTP and HTTPS ports</a></td>
