@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-08"
+lastupdated: "2018-11-09"
 
 ---
 
@@ -55,7 +55,7 @@ The solution is made up of these primary components:
 * CROSS- AND UP-SALES: App that surfaces cross-sell and up-sell opportunities with APIs that can be used in various e-commerce and mobile apps
 * DEVELOPMENT ENVIRONMENT: Kubernetes clusters for Dev, Test, and Production systems increase collaboration and data sharing among the retailer and its partners
 
-For the retailer to work with global partners, the inventory APIs required changes to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the APIs reflected the needs of each country and with low latency.
+For the retailer to work with global partners, the inventory APIs required changes to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the APIs reflected the needs of each country and ensured low latency for API calls.
 
 Another requirement is that inventory data must be shareable with the partners’ and company’s customers. With the inventory APIs, Developers can surface information in apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure. 
 
