@@ -47,8 +47,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>-</td>
 <td>Expected 14 Nov 2018</td>
 <td>Improves logging and logout features for {{site.data.keyword.appid_full}}</td>
-<td><ul><li>Replaces the self-signed certificate for `*.containers.mybluemix.net` with the LetsEncrypt signed certificate that is automatically generated for and used by the cluster. The `*.containers.mybluemix.net` self-signed certificate is removed.</li>
-<li>When you pass in only an ALB IP for a healthcheck without providing the host header and a valid hostname, a `404` response is now returned instead of `200`. You must also pass the hostname with the ALB IP. For example: <pre class="pre"><code>curl -X GET http://169.xx.xxx.xxx/ -H "Host: albhealth.&lt;ingress_subdomain&gt;"</code></pre></li></ul></td>
+<td>Replaces the self-signed certificate for `*.containers.mybluemix.net` with the LetsEncrypt signed certificate that is automatically generated for and used by the cluster. The `*.containers.mybluemix.net` self-signed certificate is removed.</td>
 </tr>
 <tr>
 <td>350</td>
