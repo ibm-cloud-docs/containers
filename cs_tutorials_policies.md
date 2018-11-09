@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-09"
 
 ---
 
@@ -56,6 +56,9 @@ The first lesson shows you how your app is exposed from multiple IP addresses an
 {: shortdesc}
 
 Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer 2.0 service. A load balancer 2.0 service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
+
+Want to use an [Ingress application load balancer (ALB)](cs_ingress.html) instead? Skip the load balancer creation in steps 3 and 4. Instead, get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
+{: tip}
 
 The following image shows how the webserver app will be exposed to the internet by the public node port and public load balancer at the end of Lesson 1:
 
@@ -229,7 +232,7 @@ Next, you can start creating and applying Calico policies to block public traffi
 
 To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports. The following image shows how traffic will be permitted to the load balancer but not to node ports at the end of Lesson 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public load balancer only." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public load balancer only." style="width:425px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all node ports.
     ```
@@ -336,9 +339,10 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 {: shortdesc}
 
 First, in addition to the node ports, you must block all incoming traffic to the load balancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and load balancer will be blocked and only traffic from your whitelisted system IP will be allowed:
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="The webserver app is exposed by public load balancer to your system IP only." style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public load balancer to your system IP only." style="width:500px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port. Replace `<loadbalancer_IP>` with the load balancer public IP address from your cheat sheet.
+
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -458,7 +462,7 @@ At this point, all traffic to the public node ports and load balancer is blocked
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
 
 In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked:
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="The webserver app is exposed by public load balancer to the internet. Traffic from your system IP only is blocked." style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public load balancer to the internet. Traffic from your system IP only is blocked." style="width:550px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.
     - Linux:

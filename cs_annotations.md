@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-08"
+lastupdated: "2018-11-09"
 
 ---
 
@@ -59,7 +59,7 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
  <tr>
  <td><a href="#rewrite-path">Rewrite paths</a></td>
  <td><code>rewrite-path</code></td>
- <td>Route incoming network traffic to a different path that your backend app listens on.</td>
+ <td>Route incoming network traffic to a different path that your back-end app listens on.</td>
  </tr>
  <tr>
  <td><a href="#server-snippets">Server snippets</a></td>
@@ -308,7 +308,7 @@ Add path definitions to external services, such as services hosted in {{site.dat
 
 <dl>
 <dt>Description</dt>
-<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a backend service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<br><br><strong>Note</strong>: You cannot specify multiple hosts for a single service and path.
+<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a back-end service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<br><br><strong>Note</strong>: You cannot specify multiple hosts for a single service and path.
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -569,7 +569,7 @@ If you have a multizone cluster with more than one private ALB enabled, you can 
 ### Rewrite paths (rewrite-path)
 {: #rewrite-path}
 
-Route incoming network traffic on an ALB domain path to a different path that your back-end application listens on.
+Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
 {:shortdesc}
 
 <dl>
@@ -675,7 +675,7 @@ rules:
 <br />
 
 
-### TCP ports for application load balancers (tcp-ports)
+### TCP ports for appplication load balancers (tcp-ports)
 {: #tcp-ports}
 
 Access an app via a non-standard TCP port.
@@ -686,7 +686,7 @@ Access an app via a non-standard TCP port.
 <dd>
 Use this annotation for an app that is running a TCP streams workload.
 
-<p>**Note**: The ALB operates in pass-through mode and forwards traffic to backend apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
+<p>**Note**: The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
 </dd>
 
 
@@ -730,7 +730,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the backend app. Otherwise, the port remains same as the Ingress port.</td>
+  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the back-end app. Otherwise, the port remains same as the Ingress port.</td>
   </tr>
   </tbody></table>
 
@@ -1303,7 +1303,7 @@ spec:
 ### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
 {: #appid-auth}
 
-Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
+Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
 {:shortdesc}
 
 <dl>
@@ -1367,7 +1367,7 @@ spec:
 </dd>
 <dt>Usage</dt></dl>
 
-Because the application uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
     * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
@@ -1624,7 +1624,7 @@ Configure mutual authentication for the ALB.
 <dt>Description</dt>
 <dd>
 Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.</br></br>
-Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the backend application.
+Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the back-end app.
 </dd>
 
 <dt>Pre-requisites</dt>
@@ -1736,8 +1736,8 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dt>Description</dt>
 <dd>
 When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. By default, the ALB terminates the TLS termination and decrypts the request before using the HTTP protocol to forward the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to be encrypted, use the `ssl-services` annotation. With the `ssl-services` annotation, the ALB terminates the external TLS connection, then creates a new SSL connection between the ALB and the app pod. Traffic is re-encrypted before it is sent to the upstream pods.</br></br>
-If your backend app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</br></br>
-Use the `ssl-services` annotation for SSL termination between the Ingress ALB and the backend application. Use the [`mutual-auth` annotation](#mutual-auth) for SSL termination between the client and the Ingress ALB. </dd>
+If your back-end app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.</br></br>
+Use the `ssl-services` annotation for SSL termination between the Ingress ALB and the back-end app. Use the [`mutual-auth` annotation](#mutual-auth) for SSL termination between the client and the Ingress ALB. </dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1782,7 +1782,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>If your backend app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
+  <td>If your back-end app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
   </tr>
   </tbody></table>
 
@@ -1933,7 +1933,7 @@ spec:
 </tr>
 <tr>
 <td><code>path</code></td>
-  <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the backend path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
+  <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the back-end path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
 </tr>
 <tr>
 <td><code>servicePort</code></td>
@@ -2299,7 +2299,7 @@ spec:
 
 <dl>
 <dt>Description</dt>
-<dd>Add the `:server_port` to the host header of a client request before forwarding the request to your backend app.
+<dd>Add the `:server_port` to the host header of a client request before forwarding the request to your back-end app.
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -2354,24 +2354,17 @@ Add extra header information to a client request before sending the request to t
 
 <dl>
 <dt>Description</dt>
-<dd>The Ingress ALB acts as a proxy between the client app and your back-end app. Client requests that are sent to the ALB are processed (proxied) and put into a new request that is then sent to your back-end app. Similarly, backend app responses that are sent to the ALB are processed (proxied) and put into a new response that is then sent to the client. Proxying a request or response removes HTTP header information, such as the user name, that was initially sent from the client or back-end app.
-
+<dd>The Ingress ALB acts as a proxy between the client app and your back-end app. Client requests that are sent to the ALB are processed (proxied) and put into a new request that is then sent to your back-end app. Similarly, back-end app responses that are sent to the ALB are processed (proxied) and put into a new response that is then sent to the client. Proxying a request or response removes HTTP header information, such as the user name, that was initially sent from the client or back-end app.
 <br><br>
-If your back-end app requires HTTP header information, you can use the <code>proxy-add-headers</code> annotation to add header information to the client request before the request is forwarded by the ALB to the back-end app.
+If your back-end app requires HTTP header information, you can use the <code>proxy-add-headers</code> annotation to add header information to the client request before the request is forwarded by the ALB to the back-end app. If the client web app requires HTTP header information, you can use the <code>response-add-headers</code> annotation to add header information to the response before the response is forwarded by the ALB to the client web app.<br>
 
-<br>
 <ul><li>For example, you might need to add the following X-Forward header information to the request before it is forwarded to your app:
-
 <pre class="screen">
 <code>proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
-
-</li>
-
-<li>To add the X-Forward header information to the request sent to your app, use the `proxy-add-headers` annotation in the following way:
-
+To add the X-Forward header information to the request that is sent to your app, use the `proxy-add-headers` annotation in the following way:
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=&lt;myservice1&gt; {
@@ -2380,10 +2373,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
-
-</li></ul><br>
-
-If the client web app requires HTTP header information, you can use the <code>response-add-headers</code> annotation to add header information to the response before the response is forwarded by the ALB to the client web app.</dd>
+</li></ul>
+</br>
+<p class="tip">The <code>response-add-headers</code> annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [<code>server-snippets</code> annotation](#server-snippets).</p>
+</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
