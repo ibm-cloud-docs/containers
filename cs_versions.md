@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-09"
 
 ---
 
@@ -99,6 +99,8 @@ For a complete list of changes, review the following information:
 ## Version 1.12
 {: #cs_v112}
 
+<p><img src="images/certified_kubernetes_1x12.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.12 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.12 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.12.
 
 ### Update before master
@@ -148,7 +150,7 @@ Review changes that you might need to make when you are updating from the previo
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
-<td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resource are recreated instead. If your scripts rely on the previous behavior, update them.</td>
+<td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resources are recreated instead. If your scripts rely on the previous behavior, update them.</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -295,10 +297,10 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 ### Updating to highly available cluster masters in Kubernetes 1.11
 {: #ha-masters}
 
-For clusters that run Kubernetes version 1.11.3_1531 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
+For clusters that run Kubernetes version [1.10.8_1530](#110_ha-masters), 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
-To give you time to take the preparation steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+When you update your cluster to this Kubernetes version from version 1.9 or an earlier patch of 1.10 or 1.11, you need to take these preparation steps. To give you time, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
 {: tip}
 
 Review the following situations in which you must make changes to take full advantage of HA master configuration:
@@ -611,10 +613,10 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 ### Updating to highly available cluster masters in Kubernetes 1.10
 {: #110_ha-masters}
 
-For clusters that run Kubernetes version 1.10.8_1530 or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
+For clusters that run Kubernetes version 1.10.8_1530, [1.11.3_1531](#ha-masters), or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
-To give you time to take the preparation steps, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+When you update your cluster to this Kubernetes version from version 1.9 or an earlier patch of 1.10, you need to take these preparation steps. To give you time, automatic updates of the master are temporarily disabled. For more information and the timeline, check out the [HA master blog post](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
 {: tip}
 
 Review the following situations in which you must make changes to take full advantage of HA master configuration:

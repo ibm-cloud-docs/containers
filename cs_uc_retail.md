@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-08"
 
 ---
 
@@ -101,7 +101,7 @@ Technical solution:
 * {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing. 
 
 **Results**
-* Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial WW development is fast, and updates are as frequent as 40 times a week.
+* Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial worldwide development is fast, and updates are as frequent as 40 times a week.
 * The retailer and its partners have immediate access to inventory availability and delivery schedules, by using the APIs. 
 * With {{site.data.keyword.containerlong_notm}} and IBM CI and CD tools, A-B versions of apps are ready to test campaigns. 
 * {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and cross-sales API workloads can grow during high-volume periods of the year, such as the fall holidays. 

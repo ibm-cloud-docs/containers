@@ -214,7 +214,11 @@ Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes clust
 
 **Important:** You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/connect_external_app.html#externalapp).
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+- Ensure you have the following roles:
+    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](cs_users.html#platform) for the cluster.
+    - [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) for the space that you want to use
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:**<ul><li>Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.</li><li>You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.</li></ul>
@@ -268,15 +272,8 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
       {: pre}
 
 4. Identify the cluster namespace that you want to use to add your service. Choose between the following options.
-   - List existing namespaces and choose a namespace that you want to use.
      ```
      kubectl get namespaces
-     ```
-     {: pre}
-
-   - Create a namespace in your cluster.
-     ```
-     kubectl create namespace <namespace_name>
      ```
      {: pre}
 

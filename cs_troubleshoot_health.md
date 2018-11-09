@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-07"
 
 ---
 
@@ -75,39 +75,37 @@ Review the following reasons why your cluster logs are not appearing and the cor
   </tbody>
 </table>
 
-To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, onto a worker node in your cluster.
+To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, to a worker node in your cluster.
 
-  1. For the cluster where you want to start producing logs: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-  2. Create the `deploy-noisy.yaml` configuration file.
-
+1. Create the `deploy-noisy.yaml` configuration file.
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: noisy
+    spec:
+      containers:
+      - name: noisy
+        image: ubuntu:16.04
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
+        imagePullPolicy: "Always"
       ```
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: noisy
-      spec:
-        containers:
-        - name: noisy
-          image: ubuntu:16.04
-          command: ["/bin/sh"]
-          args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
-          imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      {: codeblock}
 
-  3. Run the configuration file in the cluster's context.
+2. Run the configuration file in the cluster's context.
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. After a few minutes, you can view your logs in the Kibana dashboard. To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account where you created the cluster. If you specified a space at cluster creation, go to that space instead.
-      - US-South and US-East: https://logging.ng.bluemix.net
-      - UK-South: https://logging.eu-gb.bluemix.net
-      - EU-Central: https://logging.eu-fra.bluemix.net
-      - AP-South: https://logging.au-syd.bluemix.net
+3. After a few minutes, you can view your logs in the Kibana dashboard. To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account where you created the cluster. If you specified a space at cluster creation, go to that space instead.
+    - US-South and US-East: https://logging.ng.bluemix.net
+    - UK-South: https://logging.eu-gb.bluemix.net
+    - EU-Central: https://logging.eu-fra.bluemix.net
+    - AP-South: https://logging.au-syd.bluemix.net
 
 <br />
 

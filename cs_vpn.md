@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-08"
 
 ---
 
@@ -66,7 +66,6 @@ Before using the strongSwan Helm chart, review the following considerations and 
 
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
-* [Create a standard cluster](cs_clusters.html#clusters_cli).
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
@@ -177,8 +176,44 @@ Determine which remote network resources must be accessible by the cluster over 
     <br>**Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
 2. Optional for version 2.2.0 and later strongSwan Helm charts: Remap remote network subnets by using the `remoteSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the remote network's IP subnets to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN.
 
-### Step 6: Deploy the Helm chart
+### Step 6 (optional): Enable monitoring with the Slack webhook integration
 {: #strongswan_6}
+
+To monitor the status of the strongSwan VPN, you can set up a webhook to automatically post VPN connectivity messages to a Slack channel.
+{: shortdesc}
+
+1. Sign in to your Slack workspace.
+
+2. Go to the [Incoming WebHooks app page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks).
+
+3. Click **Request to Install**. If this app is not listed in your Slack setup, contact your Slack workspace owner.
+
+4. After your request to install is approved, click **Add Configuration**.
+
+5. Choose a Slack channel or create a new channel to send the VPN messages to.
+
+6. Copy the webhook URL that is generated. The URL format looks similar to the following:
+  ```
+  https://hooks.slack.com/services/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
+  ```
+  {: screen}
+
+7. To verify that the Slack webhook is installed, send a test message to your webhook URL by running the following command:
+    ```
+    curl -X POST -H 'Content-type: application/json' -d '{"text":"VPN test message"}' <webhook_URL>
+    ```
+    {: pre}
+
+8. Go to the Slack channel you chose to verify that the test message is successful.
+
+9. In the `config.yaml` file for the Helm chart, configure the webhook to monitor your VPN connection.
+    1. Change `monitoring.enable` to `true`.
+    2. Add private IP addresses or HTTP endpoints in the remote subnet that you want ensure are reachable over the VPN connection to `monitoring.privateIPs` or `monitoring.httpEndpoints`. For example, you might add the IP from the `remote.privateIPtoPing` setting to `monitoring.privateIPs`.
+    3. Add the webhook URL to `monitoring.slackWebhook`.
+    4. Change other optional `monitoring` settings as needed.
+
+### Step 7: Deploy the Helm chart
+{: #strongswan_7}
 
 1. If you need to configure more advanced settings, follow the documentation provided for each setting in the Helm chart.
 
@@ -364,75 +399,8 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.2.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9.
-
-Updating your cluster to Kubernetes 1.10? Be sure to delete your strongSwan Helm chart first. Then after the update, reinstall it.
+The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](cs_versions.html#cs_v110), first update strongSwan to the 2.2.0 Helm chart, which is backward compatible with Calico 2.6 and Kubernetes 1.8 and 1.9. Next, delete your strongSwan Helm chart. Then, after the update, you can reinstall the chart.
 {:tip}
-
-### Upgrading from version 1.0.0
-{: #vpn_upgrade_1.0.0}
-
-Due to some of the settings that are used in the version 1.0.0 Helm chart, you cannot use `helm upgrade` to update from 1.0.0 to the latest version.
-{:shortdesc}
-
-To upgrade from version 1.0.0, you must delete the 1.0.0 chart and install the latest version:
-
-1. Delete the 1.0.0 Helm chart.
-
-    ```
-    helm delete --purge <release_name>
-    ```
-    {: pre}
-
-2. Save the default configuration settings for the latest version of the strongSwan Helm chart in a local YAML file.
-
-    ```
-    helm inspect values ibm/strongswan > config.yaml
-    ```
-    {: pre}
-
-3. Update the configuration file and save the file with your changes.
-
-4. Install the Helm chart to your cluster with the updated `config.yaml` file.
-
-    ```
-    helm install -f config.yaml --name=<release_name> ibm/strongswan
-    ```
-    {: pre}
-
-Additionally, certain `ipsec.conf` timeout settings that were hardcoded in 1.0.0 are exposed as configurable properties in later versions. The names and defaults of some of these configurable `ipsec.conf` timeout settings were also changed to be more consistent with strongSwan standards. If you are upgrading your Helm chart from 1.0.0 and want to retain the 1.0.0 version defaults for the timeout settings, add the new settings to your chart configuration file with the old default values.
-
-
-
-  <table>
-  <caption>ipsec.conf settings differences between version 1.0.0 and the latest version</caption>
-  <thead>
-  <th>1.0.0 setting name</th>
-  <th>1.0.0 default</th>
-  <th>Latest version setting name</th>
-  <th>Latest version default</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ikelifetime</code></td>
-  <td>60m</td>
-  <td><code>ikelifetime</code></td>
-  <td>3h</td>
-  </tr>
-  <tr>
-  <td><code>keylife</code></td>
-  <td>20m</td>
-  <td><code>lifetime</code></td>
-  <td>1h</td>
-  </tr>
-  <tr>
-  <td><code>rekeymargin</code></td>
-  <td>3m</td>
-  <td><code>margintime</code></td>
-  <td>9m</td>
-  </tr>
-  </tbody></table>
-
 
 ## Disabling the strongSwan IPSec VPN service
 {: vpn_disable}

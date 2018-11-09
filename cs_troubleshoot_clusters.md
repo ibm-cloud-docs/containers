@@ -109,7 +109,7 @@ When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they f
 You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
 
 {: tsResolve}
-[Allow TCP access for the CLI commands to work](cs_firewall.html#firewall). This task requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+[Allow TCP access for the CLI commands to work](cs_firewall.html#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 
 ## Firewall prevents cluster from connecting to resources
@@ -153,7 +153,7 @@ If kubectl proxy succeeds, but the dashboard is not available, you might see the
 You might have another firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
 
 {: tsResolve}
-[Allow the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound). This task requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+[Allow the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound). This task requires the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 <br />
 
@@ -677,7 +677,7 @@ If this cluster is an existing one:
 *  The pod might have exceeded a resource request or limit.
 
 {: tsResolve}
-This task requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+This task requires the {{site.data.keyword.Bluemix_notm}} IAM [**Administrator** platform role](cs_users.html#platform) for the cluster.
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 
