@@ -120,7 +120,7 @@ The following table shows the cluster management permissions granted by each pla
         <li>List all or view details for ALB secrets in a cluster</li>
         <li>Deploy a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB</li>
         <li>Update or remove ALB secrets from a cluster</li></ul>
-      <strong>Note</strong>: To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** infrastructure role.
+      <p class="note">To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** infrastructure role.</p>
     </td>
     <td>The <code>cluster-admin</code> cluster role is applied by the <code>ibm-admin</code> cluster role binding, providing the following permissions:
       <ul><li>Read/write access to resources in every namespace</li>
@@ -163,7 +163,8 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 ## Infrastructure roles
 {: #infra}
 
-**Note**: When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
+When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
+{: note}
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 

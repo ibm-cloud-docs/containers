@@ -225,8 +225,9 @@ If you have another VLAN that is available, you can [set up VLAN spanning](/docs
 
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
 1.  Check that the subnets that you want to use are available.
-  The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
-  {: note}
+
+    The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
+    {: note}
 
 2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 

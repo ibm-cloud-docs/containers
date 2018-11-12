@@ -219,7 +219,9 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](cs_network_cluster.html#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](cs_edge.html).
 
 If you want to create a cluster that only has access on a private VLAN, you can create a single zone or multizone private cluster. However, when your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
-**Note**: You cannot convert a cluster that is connected to a public and private VLAN to become a private-only cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. You must create a new cluster using the following steps.
+
+You cannot convert a cluster that is connected to a public and private VLAN to become a private-only cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. You must create a new cluster using the following steps.
+{: note}
 
 If you want to create a cluster that only has access on a private VLAN:
 

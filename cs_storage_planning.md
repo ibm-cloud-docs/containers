@@ -25,57 +25,57 @@ lastupdated: "2018-11-12"
 ## Choosing a storage solution
 {: #choose_storage_solution}
 
-Before you can decide what type of storage is the right solution for you, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data. 
+Before you can decide what type of storage is the right solution for you, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
 {: shortdesc}
 
-1. Decide if your data must be permanently stored, or if your data can be removed at any given time. 
-   - **Persistent storage:** Your data must still be available, even if the container, the worker node, or the cluster is removed. Use persistent storage in the following scenarios: 
+1. Decide if your data must be permanently stored, or if your data can be removed at any given time.
+   - **Persistent storage:** Your data must still be available, even if the container, the worker node, or the cluster is removed. Use persistent storage in the following scenarios:
        - Stateful apps
        - Core business data
        - Data that must be available due to legal requirements, such as a defined retention period
-       - Auditing 
+       - Auditing
        - Data that must be accessed and shared across app instances
-   - **Non-persistent storage:** Your data can be removed when the container, the worker node, or the cluster is removed. Non-persistent storage is typically used for logging information, such as system logs or container logs, development testing, or when you want to access data from the host's file system. To find an overview of available non-persistent storage options, see [Comparison of non-persistent storage options](#non_persistent_overview). 
+   - **Non-persistent storage:** Your data can be removed when the container, the worker node, or the cluster is removed. Non-persistent storage is typically used for logging information, such as system logs or container logs, development testing, or when you want to access data from the host's file system. To find an overview of available non-persistent storage options, see [Comparison of non-persistent storage options](#non_persistent_overview).
 
 2. If you must persist your data, analyze if your app requires a specific type of storage. When you use an existing app, the app might be designed to store data in one of the following ways:  
-   - **In a file system:** The data can be stored as a file in a directory. For example, you could store this file on your local hard disk. Some apps require data to be stored in a specific file system, such as `nfs` or `ext4` to optimize the data store and achieve performance goals. 
-   - **In a database:** The data must be stored in a database that follows a specific schema. Some apps come with a database interface that you can use to store your data. For example, WordPress is optimized to store data in a MySQL database. In these cases, the type of storage is selected for you. 
-   
-3. If your app does not have a limitation on the type of storage that you must use, determine the type of data that you want to store. 
-   - **Structured data:** Data that you can store in a relational database where you have a table with columns and rows. Data in tables can be connected by using keys and is usually easy to access due to the pre-defined data model. Examples are phone numbers, account numbers, Social Security numbers, or ZIP codes. 
+   - **In a file system:** The data can be stored as a file in a directory. For example, you could store this file on your local hard disk. Some apps require data to be stored in a specific file system, such as `nfs` or `ext4` to optimize the data store and achieve performance goals.
+   - **In a database:** The data must be stored in a database that follows a specific schema. Some apps come with a database interface that you can use to store your data. For example, WordPress is optimized to store data in a MySQL database. In these cases, the type of storage is selected for you.
+
+3. If your app does not have a limitation on the type of storage that you must use, determine the type of data that you want to store.
+   - **Structured data:** Data that you can store in a relational database where you have a table with columns and rows. Data in tables can be connected by using keys and is usually easy to access due to the pre-defined data model. Examples are phone numbers, account numbers, Social Security numbers, or ZIP codes.
    - **Semi-structured data:** Data that does not fit into a relational database, but that comes with some organizational properties that you can use to read and analyze this data more easily. Examples are markup language files such as CSV, XML, or JSON.  
-   - **Unstructured data:** Data that does not follow an organizational pattern and that is so complex that you cannot store it in a relational database with pre-defined data models. To access this data, you need advanced tools and software. Examples are e-mail messages, videos, photos, audio files, presentations, social media data, or webpages. 
+   - **Unstructured data:** Data that does not follow an organizational pattern and that is so complex that you cannot store it in a relational database with pre-defined data models. To access this data, you need advanced tools and software. Examples are e-mail messages, videos, photos, audio files, presentations, social media data, or webpages.
 
-   If you have structured and unstructured data, try to store each data type separately in a storage solution that is designed for this data type. Using an appropriate storage solution for your data type eases up access to your data and gives you the benefits of performance, scalability, durability, and consistency. 
+   If you have structured and unstructured data, try to store each data type separately in a storage solution that is designed for this data type. Using an appropriate storage solution for your data type eases up access to your data and gives you the benefits of performance, scalability, durability, and consistency.
    {: tip}
-   
+
 4. Analyze how you want to access your data. Storage solutions are usually designed and optimized to support read or write operations.  
-   - **Read-only:** Your data is read-only. You do not want to write or change your data. 
-   - **Read and write:** You want to read, write, and change your data. For data that is read and written, it is important to understand if the operations are read-heavy, write-heavy, or balanced. 
-   
-4. Determine the frequency that your data is accessed. Understanding the frequency of data access can help you understand the performance that you require for your storage. For example, data that is accessed frequently usually resides on fast storage. 
-   - **Hot data:** Data that is accessed frequently. Common use cases are web or mobile apps. 
-   - **Cool or warm data:** Data that is accessed infrequently, such as once a month or less. Common use cases are archives, short-term data retention, or disaster recovery. 
-   - **Cold data:** Data that is rarely accessed, if at all. Common use cases are archives, long-term backups, historical data. 
-   - **Frozen data:** Data that is not accessed and that you need to keep due to legal reasons. 
+   - **Read-only:** Your data is read-only. You do not want to write or change your data.
+   - **Read and write:** You want to read, write, and change your data. For data that is read and written, it is important to understand if the operations are read-heavy, write-heavy, or balanced.
 
-   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine if your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes this measurement into account to optimize your monthly billing. 
+4. Determine the frequency that your data is accessed. Understanding the frequency of data access can help you understand the performance that you require for your storage. For example, data that is accessed frequently usually resides on fast storage.
+   - **Hot data:** Data that is accessed frequently. Common use cases are web or mobile apps.
+   - **Cool or warm data:** Data that is accessed infrequently, such as once a month or less. Common use cases are archives, short-term data retention, or disaster recovery.
+   - **Cold data:** Data that is rarely accessed, if at all. Common use cases are archives, long-term backups, historical data.
+   - **Frozen data:** Data that is not accessed and that you need to keep due to legal reasons.
+
+   If you cannot predict the frequency or the frequency does not follow a strict pattern, determine if your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes this measurement into account to optimize your monthly billing.
    {: tip}
- 
-5. Investigate if your data must be shared across multiple app instances, zones, or regions. 
-   - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. Other storage solutions allow you to share the same volume across multiple pods. 
-   - **Access across zones and regions:** You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup. 
 
-6. Understand other storage characteristics that impact your choice. 
-   - **Consistency:** The guarantee that a read operation returns the latest version of a file. Storage solutions can provide `strong consistency` when you are guaranteed to always receive the latest version of a file, or `eventual consistency` when the read operation might not return the latest version. You often find eventual consistency in geographically distributed systems where a write operation first must be replicated across all instances. 
-   - **Performance:** The time it takes to complete a read or write operation. 
-   - **Durability:** The guarantee that a write operation that is committed to your storage survives permanently and does not get corrupted or lost, even if gigabytes or terabytes of data are written to your storage at the same time. 
-   - **Resiliency:** The ability to recover from an outage and continue operations, even if a hardware or software component failed. For example, your physical storage experiences a power outage, a network outage, or is destroyed during a natural disaster. 
-   - **Availability:** The ability to provide access to your data, even if a data center or a region is unavailable. Availability for your data is usually achieved by adding redundancy and setting up failover mechanisms. 
-   - **Scalability:** The ability to extend capacity and customize performance based on your needs. 
-   - **Encryption:** The masking of data to prevent visibility when data is accessed by an unauthorized user. 
-   
-7. [Review available persistent storage solutions](#persistent_storage_overview) and pick the solution that best fits your app and data requirements. 
+5. Investigate if your data must be shared across multiple app instances, zones, or regions.
+   - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. Other storage solutions allow you to share the same volume across multiple pods.
+   - **Access across zones and regions:** You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
+
+6. Understand other storage characteristics that impact your choice.
+   - **Consistency:** The guarantee that a read operation returns the latest version of a file. Storage solutions can provide `strong consistency` when you are guaranteed to always receive the latest version of a file, or `eventual consistency` when the read operation might not return the latest version. You often find eventual consistency in geographically distributed systems where a write operation first must be replicated across all instances.
+   - **Performance:** The time it takes to complete a read or write operation.
+   - **Durability:** The guarantee that a write operation that is committed to your storage survives permanently and does not get corrupted or lost, even if gigabytes or terabytes of data are written to your storage at the same time.
+   - **Resiliency:** The ability to recover from an outage and continue operations, even if a hardware or software component failed. For example, your physical storage experiences a power outage, a network outage, or is destroyed during a natural disaster.
+   - **Availability:** The ability to provide access to your data, even if a data center or a region is unavailable. Availability for your data is usually achieved by adding redundancy and setting up failover mechanisms.
+   - **Scalability:** The ability to extend capacity and customize performance based on your needs.
+   - **Encryption:** The masking of data to prevent visibility when data is accessed by an unauthorized user.
+
+7. [Review available persistent storage solutions](#persistent_storage_overview) and pick the solution that best fits your app and data requirements.
 
 ## Comparison of non-persistent storage options
 {: #non_persistent_overview}
@@ -167,10 +167,10 @@ The following image shows available non-persistent data storage options in {{sit
 ## Comparison of persistent storage options
 {: #persistent_storage_overview}
 
-Use persistent storage options for any data that you want to permanently keep, even if the container, the worker node, or the cluster is removed. 
+Use persistent storage options for any data that you want to permanently keep, even if the container, the worker node, or the cluster is removed.
 {: shortdesc}
 
-**Note:** Persistent data storage options are available for standard clusters only. 
+Persistent data storage options are available for standard clusters only.
 
 Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](cs_vpn.html#vpn).
 {: tip}

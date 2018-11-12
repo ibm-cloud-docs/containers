@@ -81,7 +81,7 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 **Why might I use this setup?**
 
 * You have an app that must be accessible to the public internet in a single-zone cluster.
-* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. **Note**: To isolate your multizone cluster on the private network, use [Calico network policies](cs_network_policy.html#isolate_workers).
+* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. To isolate your multizone cluster on the private network, you can use [Calico network policies](cs_network_policy.html#isolate_workers).
 
 **What are my options for managing public and private access to my cluster?**
 </br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a public and a private VLAN.
@@ -186,7 +186,7 @@ You can choose to [create a private-VLAN only cluster](cs_clusters.html#clusters
 * An automatic connection between all worker nodes and the master. You must provide this connection by [configuring a gateway appliance](#private_vlan_gateway).
 
 **Why might I use this setup?**
-</br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. **Note**: Using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. Note that using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **What are my options for managing public and private access to my cluster?**
 </br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
@@ -196,7 +196,8 @@ You can choose to [create a private-VLAN only cluster](cs_clusters.html#clusters
 
 If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, you must also [open up the required ports and IP addresses](cs_firewall.html#firewall_outbound) for each region so that the master and the worker nodes can communicate.
 
-**Note**: If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#vra-routing).
+If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#vra-routing).
+{: important}
 
 To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
 {: tip}

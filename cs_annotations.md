@@ -311,7 +311,7 @@ Add path definitions to external services, such as services hosted in {{site.dat
 
 <dl>
 <dt>Description</dt>
-<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a back-end service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<br><br><strong>Note</strong>: You cannot specify multiple hosts for a single service and path.
+<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a back-end service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<p class="note">You cannot specify multiple hosts for a single service and path.</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -372,7 +372,7 @@ Modify the way the ALB matches the request URI against the app path.
 
 <dl>
 <dt>Description</dt>
-<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<br><br><strong>Note</strong>: To handle regular expression (regex) paths, this annotation is required.</dd>
+<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<p class="note">To handle regular expression (regex) paths, this annotation is required.</p></dd>
 
 <dt>Supported modifiers</dt>
 <dd>
@@ -689,7 +689,7 @@ Access an app via a non-standard TCP port.
 <dd>
 Use this annotation for an app that is running a TCP streams workload.
 
-<p>**Note**: The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
+<p class="note">The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
 </dd>
 
 
@@ -749,7 +749,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
+<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a></p>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -833,7 +833,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>1m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
+ <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>1m</code>. A connect-timeout cannot exceed 75 seconds.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -975,7 +975,7 @@ Set when the ALB can pass a request to the next upstream server.
 <dl>
 <dt>Description</dt>
 <dd>
-The Ingress ALB acts as a proxy between the client app and your app. Some app setups require multiple upstream servers that handle incoming client requests from the ALB. Sometimes the proxy server that the ALB uses cannot establish a connection with an upstream server that the app uses. The ALB can then try to establish a connection with the next upstream server to pass the request to it instead. You can use the `proxy-next-upstream-config` annotation to set in which cases, how long, and how many times the ALB can try to pass a request to the next upstream server.<br><br><strong>Note</strong>: Timeout is always configured when you use `proxy-next-upstream-config`, so don't add `timeout=true` to this annotation.
+The Ingress ALB acts as a proxy between the client app and your app. Some app setups require multiple upstream servers that handle incoming client requests from the ALB. Sometimes the proxy server that the ALB uses cannot establish a connection with an upstream server that the app uses. The ALB can then try to establish a connection with the next upstream server to pass the request to it instead. You can use the `proxy-next-upstream-config` annotation to set in which cases, how long, and how many times the ALB can try to pass a request to the next upstream server.<p class="note">Timeout is always configured when you use `proxy-next-upstream-config`, so don't add `timeout=true` to this annotation.</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1314,11 +1314,11 @@ Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
 <dd>
 Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
 
-<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. <strong>Note</strong>: For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
+<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page.<p class="note">For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
 
 <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
-<p>**Note**: For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
+<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1421,7 +1421,7 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 
 <dl>
 <dt>Description</dt>
-<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p><strong>Note</strong>: To enable mutual authentication on a port, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.</p></dd>
+<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p class="note">To enable mutual authentication on a port, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.</p></dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
@@ -1460,7 +1460,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Enter the port number to use for incoming HTTP or HTTPS network traffic.  <p><strong>Note:</strong> When a custom port is specified for either HTTP or HTTPS, the default ports are no longer valid for both HTTP and HTTPS. For example, to change the default port for HTTPS to 8443, but use the default port for HTTP, you must set custom ports for both: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Enter the port number to use for incoming HTTP or HTTPS network traffic.  <p class="note">When a custom port is specified for either HTTP or HTTPS, the default ports are no longer valid for both HTTP and HTTPS. For example, to change the default port for HTTPS to 8443, but use the default port for HTTP, you must set custom ports for both: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1476,7 +1476,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
+<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a></p>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1807,7 +1807,10 @@ spec:
        trusted.crt: <ca_certificate>
      ```
      {: codeblock}
-     **Note**: If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
+
+     If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
+     {: tip}
+
 4. Create the certificate as a Kubernetes secret.
      ```
      kubectl create -f ssl-my-test
@@ -1869,8 +1872,7 @@ Route traffic to Istio-managed services.
 <dl>
 <dt>Description</dt>
 <dd>
-<strong>Note</strong>: This annotation works only with Istio 0.7 and earlier.
-<br>If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
+<p class="note">This annotation works only with Istio 0.7 and earlier.</p>If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
 <br><br>In the Ingress resource for the cluster ALB, you must:
   <ul>
     <li>specify the `istio-services` annotation</li>
@@ -2525,7 +2527,7 @@ Set the maximum size of the body that the client can send as part of a request.
 </br></br>
 You might want to increase the maximum body size because you expect client requests with a body size that is greater than 1 megabyte. For example, you want your client to be able to upload large files. Increasing the maximum request body size might impact the performance of your ALB because the connection to the client must stay open until the request is received.
 </br></br>
-<strong>Note:</strong> Some client web browsers cannot display the 413 HTTP response message properly.</dd>
+<p class="note">Some client web browsers cannot display the 413 HTTP response message properly.</p></dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
 
@@ -2558,7 +2560,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>The maximum size of the client response body. For example, to set the maximum size to 200 megabyte, define <code>200m</code>.  <strong>Note:</strong> You can set the size to 0 to disable the check of the client request body size.</td>
+ <td>The maximum size of the client response body. For example, to set the maximum size to 200 megabyte, define <code>200m</code>. You can set the size to 0 to disable the check of the client request body size.</td>
  </tr>
  </tbody></table>
 
@@ -2613,8 +2615,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>The maximum size of buffers that read large client request header. For example, to set it to 16 kilobytes, define <code>16k</code>.
-   <strong>Note:</strong> The size must end with a <code>k</code> for kilobyte or <code>m</code> for megabyte.</td>
+ <td>The maximum size of buffers that read large client request header. For example, to set it to 16 kilobytes, define <code>16k</code>. The size must end with a <code>k</code> for kilobyte or <code>m</code> for megabyte.</td>
  </tr>
 </tbody></table>
 </dd>

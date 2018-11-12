@@ -242,7 +242,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </tr>
 <tr>
 <td>`containerd` new Kubernetes container runtime</td>
-<td><p class="important>"`containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</p></td>
+<td><p class="important">`containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</p></td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>

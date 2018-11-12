@@ -1197,8 +1197,10 @@ If a user no longer needs specific access permissions, or if the user is leaving
         {: pre}
 
 3. If the user's user name is returned, use another user's credentials to set the API key or infrastructure credentials.
-If the account owner is not setting the API key, or if you are not setting the account owner's infrastructure credentials, [ensure that the user who sets the API key or whose credentials you are setting has the correct permissions](#owner_permissions).
-{: note}
+
+  If the account owner is not setting the API key, or if you are not setting the account owner's infrastructure credentials, [ensure that the user who sets the API key or whose credentials you are setting has the correct permissions](#owner_permissions).
+  {: note}
+
     * To reset the API key:
         ```
         ibmcloud ks api-key-reset
