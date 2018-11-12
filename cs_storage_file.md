@@ -33,7 +33,8 @@ lastupdated: "2018-11-12"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+{: important}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -617,7 +618,8 @@ If you have a stateful app such as a database, you can create stateful sets that
 **What do I need to be aware of when adding file storage to a stateful set?** </br>
 To add storage to a stateful set, you specify your storage configuration in the `volumeClaimTemplates` section of your stateful set YAML. The `volumeClaimTemplates` is the basis for your PVC and can include the storage class and the size or IOPS of your file storage that you want to provision. However, if you want to include labels in your `volumeClaimTemplates`, Kubernetes does not include these labels when creating the PVC. Instead, you must add the labels directly to your stateful set.
 
-**Important:** You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+{: important}
 
 **How can I create my stateful set in a specific zone?** </br>
 In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
@@ -867,7 +869,8 @@ The version of the file storage determines the protocol that is used to communic
 
 To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod.
 
-**Important:** To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
+To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
+{: important}
 
 **To create a customized storage class with the desired NFS version:**
 1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.

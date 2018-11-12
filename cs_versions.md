@@ -216,8 +216,8 @@ Review changes that you might need to make when you are updating from the previo
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
 
-**Important**:
 Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
+{: important}
 
 ### Update before master
 {: #111_before}
@@ -497,7 +497,7 @@ In general, your container deployment processes do not change. You can still use
 ### Preparing to update to Calico v3
 {: #111_calicov3}
 
-**Important**: If you are updating a cluster from Kubernetes version 1.9 or earlier to version 1.11, prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.11, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+If you are updating a cluster from Kubernetes version 1.9 or earlier to version 1.11, prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.11, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
 
 If you are updating a cluster from Kubernetes version 1.10 to version 1.11, skip these steps because you completed these steps when you updated to 1.10.
 {: note}
@@ -528,7 +528,8 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.10.
 
-**Important**: Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
+Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
+{: important}
 
 <br/>
 
@@ -784,7 +785,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 Before you begin, your cluster master and all worker nodes must be running Kubernetes version 1.8 or later, and must have at least one worker node.
 
-**Important**: Prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.10, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+Prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.10, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+{: important}
 
 1.  Verify that your Calico pods are healthy.
     ```

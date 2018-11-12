@@ -24,7 +24,8 @@ lastupdated: "2018-11-12"
 If you have specific performance optimization requirements, you can change the default settings for some cluster components in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-**Warning**: If you choose to change the default settings, you are doing so at your own risk. You are responsible for running tests against any changed settings and for any potential disruptions caused by the changed settings in your environment.
+If you choose to change the default settings, you are doing so at your own risk. You are responsible for running tests against any changed settings and for any potential disruptions caused by the changed settings in your environment.
+{: important}
 
 ## Optimizing worker node performance
 {: #worker}

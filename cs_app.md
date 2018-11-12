@@ -838,7 +838,8 @@ Before you begin:
 To execute a workload on a GPU machine:
 1.  Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
 
-    **Important**: For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
+    For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1

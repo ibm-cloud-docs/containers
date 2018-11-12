@@ -59,7 +59,8 @@ These default Calico policies allow all outbound network traffic and allow inbou
 
 Review the following default Calico network policies that are automatically applied to your cluster.
 
-**Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
+Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
+{: important}
 
  <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server zone in column one and IP addresses to match in column two.">
  <caption>Default Calico policies for each cluster</caption>

@@ -444,7 +444,8 @@ Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
-**Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+{: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -1255,7 +1256,8 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
 {: shortdesc}
 
-**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+{: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -1898,7 +1900,8 @@ If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a regio
 
 You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
-**Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+{: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for {{site.data.keyword.containerlong_notm}}
 
@@ -3136,7 +3139,8 @@ Update worker nodes to apply the latest security updates and patches to the oper
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
-**Important**: Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
+Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
+{: important}
 
 You might need to change your YAML files for deployments before updating. Review this [release note](cs_versions.html) for details.
 

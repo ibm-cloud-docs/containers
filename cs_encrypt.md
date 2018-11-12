@@ -82,7 +82,8 @@ By default, your cluster configuration and Kubernetes secrets are stored in the 
 
 When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt data in etcd, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your etcd data and Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to etcd or your secrets, you can delete the root key.
 
-**Important**: If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data in etcd or the data from the secrets in your cluster afterward.
+If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data in etcd or the data from the secrets in your cluster afterward.
+{: important}
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).

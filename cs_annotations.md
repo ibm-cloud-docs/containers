@@ -26,7 +26,8 @@ lastupdated: "2018-11-12"
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-**Important**: Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](cs_ingress.html). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
+Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](cs_ingress.html). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
+{: note}
 
 <table>
 <caption>General annotations</caption>
@@ -1375,8 +1376,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
     * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
     * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id):
-        1. Replace the auto-filled **Service name** with your own unique name for the service instance.
-            **Important**: The service instance name can't contain spaces.
+        1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name can't contain spaces.
         2. Choose the same region that your cluster is deployed in.
         3. Click **Create**.
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
@@ -1689,8 +1689,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
     * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
         1. Create a `ca.key`.
             ```
@@ -1785,7 +1784,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>If your back-end app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><strong>Warning</strong>: If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</td>
+  <td>If your back-end app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><p class="important">If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</p></td>
   </tr>
   </tbody></table>
 
@@ -1821,8 +1820,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain.
-      **Important**: Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
     * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
         1. Create a `ca.key`.
             ```

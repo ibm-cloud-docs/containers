@@ -215,7 +215,8 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
-**Important:** You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/connect_external_app.html#externalapp).
+You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/connect_external_app.html#externalapp).
+{: note}
 
 Before you begin:
 - Ensure you have the following roles:
