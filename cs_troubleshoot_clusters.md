@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-12"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -259,7 +262,7 @@ To check your user access permissions:
         ibmcloud target -g none
         ```
         {: pre}
-        **Note**: This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
+        This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
 
       2. Target the cluster.
         ```
@@ -274,7 +277,7 @@ To check your user access permissions:
           ibmcloud target -g none
           ```
           {: pre}
-          **Note**: This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
+          This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
         3. Target the cluster.
           ```
           ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -363,7 +366,8 @@ Consider the following scenario to understand how clusters might become orphaned
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
 3.  Use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
-    **Note**: If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support case to remove the orphaned cluster.
+    If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support case to remove the orphaned cluster.
+    {: note}
 4.  [Delete the cluster](cs_clusters.html#remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
     * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set).

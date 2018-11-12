@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-08"
+lastupdated: "2018-11-12"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-08"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -119,7 +122,7 @@ When you configure a strongSwan VPN connection, you choose whether the VPN conne
 
 To establish an inbound VPN connection, modify the following settings:
 1. Verify that `ipsec.auto` is set to `add`.
-2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).<br>**Note**:
+2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
     * If you leave this setting blank, one of the available portable public IP addresses is used.
     * You must also configure the public IP address that you select for or the public IP address that is assigned to the cluster VPN endpoint on the on-premises VPN endpoint.
 
@@ -129,11 +132,11 @@ To establish an outbound VPN connection, modify the following settings:
 3. Choose one of the following options for the IP address for the cluster VPN endpoint:
     * **Public IP address of the cluster's private gateway**: If your worker nodes are connected to a private VLAN only, then the outbound VPN request is routed through the private gateway in order to reach the internet. The public IP address of the private gateway is used for the VPN connection.
     * **Public IP address of the worker node where the strongSwan pod is running**: If the worker node where the strongSwan pod is running is connected to a public VLAN, then the worker node's public IP address is used for the VPN connection.
-        <br>**Note**:
+        <br>
         * If the strongSwan pod is deleted and rescheduled onto a different worker node in the cluster, then the public IP address of the VPN changes. The on-premises VPN endpoint of the remote network must allow the VPN connection to be established from the public IP address of any of the cluster worker nodes.
         * If the remote VPN endpoint cannot handle VPN connections from multiple public IP addresses, limit the nodes that the strongSwan VPN pod deploys to. Set `nodeSelector` to the IP addresses of specific worker nodes or a worker node label. For example, the value `kubernetes.io/hostname: 10.232.xx.xx` allows the VPN pod to deploy to that worker node only. The value `strongswan: vpn` restricts the VPN pod to running on any worker nodes with that label. You can use any worker node label. To allow different worker nodes to be used with different helm chart deployments, use `strongswan: <release_name>`. For high availability, select at least two worker nodes.
     * **Public IP address of the strongSwan service**: To establish connection by using the IP address of the strongSwan VPN service, set `connectUsingLoadBalancerIP` to `true`. The strongSwan service IP address is either a portable public IP address you can specify in the `loadBalancerIP` setting, or an available portable public IP address that is automatically assigned to the service.
-        <br>**Note**:
+        <br>
         * If you choose to select an IP address using the `loadBalancerIP` setting, the cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#review_ip) or [free up a used IP address](cs_subnets.html#free).
         * All of the cluster worker nodes must be on the same public VLAN. Otherwise, you must use the `nodeSelector` setting to ensure that the VPN pod deploys to a worker node on the same public VLAN as the `loadBalancerIP`.
         * If `connectUsingLoadBalancerIP` is set to `true` and `ipsec.keyexchange` is set to `ikev1`, you must set `enableServiceSourceIP` to `true`.
@@ -147,21 +150,20 @@ Determine which cluster resources must be accessible by the remote network over 
 1. Add the CIDRs of one or more cluster subnets to the `local.subnet` setting. You must configure the local subnet CIDRs on the on-premises VPN endpoint. This list can include the following subnets:  
     * The Kubernetes pod subnet CIDR: `172.30.0.0/16`. Bidirectional communication is enabled between all cluster pods and any of the hosts in the remote network subnets that you list in the `remote.subnet` setting. If you must prevent any `remote.subnet` hosts from accessing cluster pods for security reasons, do not add the Kubernetes pod subnet to the `local.subnet` setting.
     * The Kubernetes service subnet CIDR: `172.21.0.0/16`. Service IP addresses provide a way to expose multiple app pods that are deployed on several worker nodes behind a single IP.
-    * If your apps are exposed by a NodePort service on the private network or a private Ingress ALB, add the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running `ibmcloud ks worker <cluster_name>`. For example, if it is `10.176.48.xx` then note `10.176.48`. Next, get the worker private subnet CIDR by running the following command, replacing `<xxx.yyy.zz>` with the octet that you previously retrieved: `ibmcloud sl subnet list | grep <xxx.yyy.zzz>`.<br>**Note**: If a worker node is added on a new private subnet, you must add the new private subnet CIDR to the `local.subnet` setting and the on-premises VPN endpoint. Then, the VPN connection must be restarted.
-    * If you have apps that are exposed by LoadBalancer services on the private network, add the cluster's private user-managed subnet CIDRs. To find these values, run `ibmcloud ks cluster-get <cluster_name> --showResources`. In the **VLANS** section, look for CIDRs that have a **Public** value of `false`.<br>
-    **Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet. However, you can use the `localSubnetNAT` setting to combine multiple cluster subnets into a single subnet.
+    * If your apps are exposed by a NodePort service on the private network or a private Ingress ALB, add the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running `ibmcloud ks worker <cluster_name>`. For example, if it is `10.176.48.xx` then note `10.176.48`. Next, get the worker private subnet CIDR by running the following command, replacing `<xxx.yyy.zz>` with the octet that you previously retrieved: `ibmcloud sl subnet list | grep <xxx.yyy.zzz>`. **Note**: If a worker node is added on a new private subnet, you must add the new private subnet CIDR to the `local.subnet` setting and the on-premises VPN endpoint. Then, the VPN connection must be restarted.
+    * If you have apps that are exposed by LoadBalancer services on the private network, add the cluster's private user-managed subnet CIDRs. To find these values, run `ibmcloud ks cluster-get <cluster_name> --showResources`. In the **VLANS** section, look for CIDRs that have a **Public** value of `false`. **Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet. However, you can use the `localSubnetNAT` setting to combine multiple cluster subnets into a single subnet.
 
 2. Optional: Remap cluster subnets by using the `localSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the cluster's private local IP subnets, the pod subnet (172.30.0.0/16), or the pod service subnet (172.21.0.0/16) to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN. To enable NAT, you can either add an entire subnet or individual IP addresses.
     * If you add an entire subnet in the format `10.171.42.0/24=10.10.10.0/24`, remapping is 1-to-1: all of the IP addresses in the internal network subnet are mapped over to external network subnet and vice versa.
     * If you add individual IP addresses in the format `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32`, only those internal IP addresses are mapped to the specified external IP addresses.
 
 3. Optional for version 2.2.0 and later strongSwan Helm charts: Hide all of the cluster IP addresses behind a single IP address by setting `enableSingleSourceIP` to `true`. This option provides one of the most secure configurations for the VPN connection because no connections from the remote network back into the cluster are permitted.
-    <br>**Note**:
+    <br>
     * This setting requires that all data flow over the VPN connection must be outbound regardless of whether the VPN connection is established from the cluster or from the remote network.
     * `local.subnet` must be set to only one /32 subnet.
 
 4. Optional for version 2.2.0 and later strongSwan Helm charts: Enable the strongSwan service to route incoming requests from the remote network to a service that exists outside of the cluster by using the `localNonClusterSubnet` setting.
-    <br>**Note**:
+    <br>
     * The non-cluster service must exist on the same private network or on a private network that is reachable by the worker nodes.
     * The non-cluster worker node cannot initiate traffic to the remote network through the VPN connection, but the non-cluster node can be the target of incoming requests from the remote network.
     * You must list the CIDRs of the non-cluster subnets in the `local.subnet` setting.
@@ -172,8 +174,7 @@ Determine which cluster resources must be accessible by the remote network over 
 Determine which remote network resources must be accessible by the cluster over the VPN connection.
 {: shortdesc}
 
-1. Add the CIDRs of one or more on-premises private subnets to the `remote.subnet` setting.
-    <br>**Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
+1. Add the CIDRs of one or more on-premises private subnets to the `remote.subnet` setting. **Note**: If `ipsec.keyexchange` is set to `ikev1`, you can specify only one subnet.
 2. Optional for version 2.2.0 and later strongSwan Helm charts: Remap remote network subnets by using the `remoteSubnetNAT` setting. Network Address Translation (NAT) for subnets provides a workaround for subnet conflicts between the cluster network and on-premises remote network. You can use NAT to remap the remote network's IP subnets to a different private subnet. The VPN tunnel sees remapped IP subnets instead of the original subnets. Remapping happens before the packets are sent over the VPN tunnel as well as after the packets arrive from the VPN tunnel. You can expose both remapped and non-remapped subnets at the same time over the VPN.
 
 ### Step 6 (optional): Enable monitoring with the Slack webhook integration
@@ -223,7 +224,8 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 
 4. Install the Helm chart to your cluster with the updated `config.yaml` file. The updated properties are stored in a configmap for your chart.
 
-    **Note**: If you have multiple VPN deployments in a single cluster, you can avoid naming conflicts and differentiate between your deployments by choosing more descriptive release names than `vpn`. To avoid the truncation of the release name, limit the release name to 35 characters or less.
+    If you have multiple VPN deployments in a single cluster, you can avoid naming conflicts and differentiate between your deployments by choosing more descriptive release names than `vpn`. To avoid the truncation of the release name, limit the release name to 35 characters or less.
+    {: tip}
 
     ```
     helm install -f config.yaml --name=vpn ibm/strongswan
@@ -276,8 +278,6 @@ After you deploy your Helm chart, test the VPN connectivity.
     ```
     {: screen}
 
-    **Note**:
-
     <ul>
     <li>When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status is not `ESTABLISHED` the first time. You might need to check the on-premises VPN endpoint settings and change the configuration file several times before the connection is successful: <ol><li>Run `helm delete --purge <release_name>`</li><li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>You can also run more checks in the next step.</li>
     <li>If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's configmap.<ol><li>Check for any validation errors in the strongSwan pod logs by running `kubectl logs -n $STRONGSWAN_POD`.</li><li>If validation errors exist, run `helm delete --purge <release_name>`<li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>If your cluster has a high number of worker nodes, you can also use `helm upgrade` to more quickly apply your changes instead of running `helm delete` and `helm install`.</li>
@@ -291,7 +291,6 @@ After you deploy your Helm chart, test the VPN connectivity.
     {: pre}
 
     * If all of the tests pass, your strongSwan VPN connection is successfully set up.
-
     * If any of the tests fail, continue to the next step.
 
 5. View the output of a failed test by looking at the logs of the test pod.
@@ -301,7 +300,8 @@ After you deploy your Helm chart, test the VPN connectivity.
     ```
     {: pre}
 
-    **Note**: Some of the tests have requirements that are optional settings in the VPN configuration. If some of the tests fail, the failures might be acceptable depending on whether you specified these optional settings. Refer to the following table for information about each test and why it might fail.
+    Some of the tests have requirements that are optional settings in the VPN configuration. If some of the tests fail, the failures might be acceptable depending on whether you specified these optional settings. Refer to the following table for information about each test and why it might fail.
+    {: note}
 
     {: #vpn_tests_table}
     <table>
@@ -444,4 +444,5 @@ To set up a Virtual Router Appliance:
 
 3. To enable a VPN connection by using the VRA, [configure VRRP on the VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
 
-**Note**: If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#subnet-routing). To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#subnet-routing). To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+{: important}

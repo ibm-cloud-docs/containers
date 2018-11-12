@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-12"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ Software developers and network administrators that are deploying an app into a 
 ## Prerequisites
 
 * [Tutorial: Creating Kubernetes clusters](cs_tutorials.html#cs_cluster_tutorial).
+* Install the [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
@@ -89,7 +93,7 @@ To deploy the app:
 
 3. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-5.  Log in to the {{site.data.keyword.registryshort_notm}} CLI. **Note**: Ensure that the container-registry plug-in is [installed](/docs/services/Registry/index.html#registry_cli_install).
+5.  Log in to the {{site.data.keyword.registryshort_notm}} CLI.
 
     ```
     ibmcloud cr login

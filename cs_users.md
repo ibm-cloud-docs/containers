@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-09"
+lastupdated: "2018-11-12"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-11-09"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -203,7 +206,7 @@ To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.
     </tr>
     <tr>
       <td>**Subscription accounts** are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
-      <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account. Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually set IBM Cloud infrastructure (SoftLayer) credentials for your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p></td>
+      <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account. Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually set IBM Cloud infrastructure (SoftLayer) credentials for your {{site.data.keyword.Bluemix_notm}} account.</p><p class="note">When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p></td>
     </tr>
     <tr>
       <td>**IBM Cloud infrastructure (SoftLayer) accounts**, no {{site.data.keyword.Bluemix_notm}} account</td>
@@ -280,7 +283,10 @@ To ensure that all infrastructure-related actions can be successfully completed 
 If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to a linked IBM Cloud infrastructure (SoftLayer) portfolio by default. The API key is used to order infrastructure resources from this IBM Cloud infrastructure (SoftLayer) portfolio, such as new worker nodes or VLANs.
 {: shortdec}
 
-You can find the current API key owner by running [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. **Note**: Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it's unnecessarily changed.
+You can find the current API key owner by running [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
+
+Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it's unnecessarily changed.
+{: note}
 
 **Before you begin**:
 - If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
@@ -330,7 +336,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
 2.  Set the infrastructure API credentials with the user for the correct account.
 
-    1.  Get the user's infrastructure API credentials. **Note**: The credentials differ from the IBMid.
+    1.  Get the user's infrastructure API credentials. Note that the credentials differ from the IBMid.
 
         1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
 
@@ -530,7 +536,8 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
       ```
       {: pre}
 
-      **Note**: If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in the region within the resource group.
+      If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in the region within the resource group.
+      {: note}
 
   * To assign access to all clusters in a resource group:
       ```
@@ -800,7 +807,7 @@ To create custom RBAC permissions:
         ```
         {: pre}
 
-    2. Verify that the role binding is copied. **Note**: If you added an {{site.data.keyword.Bluemix_notm}} IAM access group to the role binding, each user in that group is added individually, not as an access group ID.
+    2. Verify that the role binding is copied. If you added an {{site.data.keyword.Bluemix_notm}} IAM access group to the role binding, each user in that group is added individually, not as an access group ID.
         ```
         kubectl get rolebinding -n <namespace_2>
         ```
@@ -1189,7 +1196,9 @@ If a user no longer needs specific access permissions, or if the user is leaving
         ```
         {: pre}
 
-3. If the user's user name is returned, use another user's credentials to set the API key or infrastructure credentials. **Note**: If the account owner is not setting the API key, or if you are not setting the account owner's infrastructure credentials, [ensure that the user who sets the API key or whose credentials you are setting has the correct permissions](#owner_permissions).
+3. If the user's user name is returned, use another user's credentials to set the API key or infrastructure credentials.
+If the account owner is not setting the API key, or if you are not setting the account owner's infrastructure credentials, [ensure that the user who sets the API key or whose credentials you are setting has the correct permissions](#owner_permissions).
+{: note}
     * To reset the API key:
         ```
         ibmcloud ks api-key-reset

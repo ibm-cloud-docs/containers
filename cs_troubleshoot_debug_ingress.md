@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-12"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -137,7 +140,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
 2. Check the health of your ALB IPs.
 
-    * For single zone cluster and multizone clusters: Ping the IP address of each public ALB to ensure that each ALB is able to successfully receive packets. Note: If you are using private ALBs, you can ping their IP addresses only from the private network.
+    * For single zone cluster and multizone clusters: Ping the IP address of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses only from the private network.
         ```
         ping <ALB_IP>
         ```
@@ -146,7 +149,10 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your [firewall](cs_troubleshoot_clusters.html#cs_firewall).
         * If there is no firewall that is blocking the pings and the pings still run to timeout, [check the status of your ALB pods](#check_pods).
 
-    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](cs_ingress.html#planning). **Note**: The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](cs_clusters.html#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
+    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](cs_ingress.html#planning).
+    The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](cs_clusters.html#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
+    {: note}
+
     The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-09"
+lastupdated: "2018-11-12"
 
 ---
 
@@ -14,6 +14,11 @@ lastupdated: "2018-11-09"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -237,7 +242,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </tr>
 <tr>
 <td>`containerd` new Kubernetes container runtime</td>
-<td><strong>Important</strong>: `containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</td>
+<td><p class="important>"`containerd` replaces Docker as the new container runtime for Kubernetes. For actions that you must take, see [Updating to `containerd` as the container runtime](#containerd).</p></td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
@@ -249,7 +254,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 </tr>
 <tr>
 <td>Kubernetes API server JSON deserializer</td>
-<td>The Kubernetes API server JSON deserializer is now case-sensitive. This change restores the behavior that existed in Kubernetes version 1.7 and earlier. If your JSON resource definitions use the incorrect case, update them. <br><br>**Note**: Only direct Kubernetes API server requests are impacted. The `kubectl` CLI continued to enforce case-sensitive keys in Kubernetes version 1.7 and later, so if you strictly manage your resources with `kubectl`, you are not impacted.</td>
+<td>The Kubernetes API server JSON deserializer is now case-sensitive. This change restores the behavior that existed in Kubernetes version 1.7 and earlier. If your JSON resource definitions use the incorrect case, update them. <br><br>Only direct Kubernetes API server requests are impacted. The `kubectl` CLI continued to enforce case-sensitive keys in Kubernetes version 1.7 and later, so if you strictly manage your resources with `kubectl`, you are not impacted.</td>
 </tr>
 </tbody>
 </table>
@@ -353,7 +358,8 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
 *  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
 
-**Note**: The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+{: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -461,10 +467,10 @@ For clusters that run Kubernetes version 1.11 or later, `containerd` replaces Do
 
 **How do I know if my apps rely on `docker` instead of `containerd`?**<br>
 Examples of times that you might rely on Docker as the container runtime:
-*  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime. For example, you might call the Docker socket directly to launch containers or perform other Docker operations. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`. The protocol that is used in the `containerd` socket is slightly different to the one in Docker. Try to update your app to the `containerd` socket. If you want to continue using the Docker socket, look into using [Docker-inside-Docker (DinD) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/docker/). 
+*  If you access the Docker engine or API directly by using privileged containers, update your pods to support `containerd` as the runtime. For example, you might call the Docker socket directly to launch containers or perform other Docker operations. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`. The protocol that is used in the `containerd` socket is slightly different to the one in Docker. Try to update your app to the `containerd` socket. If you want to continue using the Docker socket, look into using [Docker-inside-Docker (DinD) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/docker/).
 *  Some third-party add-ons, such as logging and monitoring tools, that you install in your cluster might rely on the Docker engine. Check with your provider to make sure the tools are compatible with containerd. Possible use cases include:
-   - Your logging tool might use the container `stderr/stdout` directory `/var/log/pods/<pod_uuid>/<container_name>/*.log` to access logs. In Docker, this directory is a symlink to `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` whereas in `containerd` you access the directory directly without a symlink. 
-   - Your monitoring tool accesses the Docker socket directly. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`. 
+   - Your logging tool might use the container `stderr/stdout` directory `/var/log/pods/<pod_uuid>/<container_name>/*.log` to access logs. In Docker, this directory is a symlink to `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` whereas in `containerd` you access the directory directly without a symlink.
+   - Your monitoring tool accesses the Docker socket directly. The Docker socket changed from `/var/run/docker.sock` to `/run/containerd/containerd.sock`.
 
 <br>
 
@@ -493,7 +499,8 @@ In general, your container deployment processes do not change. You can still use
 
 **Important**: If you are updating a cluster from Kubernetes version 1.9 or earlier to version 1.11, prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.11, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
 
-**Note**: If you are updating a cluster from Kubernetes version 1.10 to version 1.11, skip these steps because you completed these steps when you updated to 1.10.
+If you are updating a cluster from Kubernetes version 1.10 to version 1.11, skip these steps because you completed these steps when you updated to 1.10.
+{: note}
 
 Before you begin, your cluster master and all worker nodes must be running Kubernetes version 1.8 or 1.9, and must have at least one worker node.
 
@@ -671,7 +678,8 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
 *  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
 
-**Note**: The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+{: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
