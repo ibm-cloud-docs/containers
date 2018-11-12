@@ -201,7 +201,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       <tbody>
         <tr>
           <td>AP North</td>
-          <td>hkg02<br>seo01<br>sng01<br>>tok02, tok04, tok05</td>
+          <td>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
           <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
          </tr>
         <tr>
@@ -211,8 +211,8 @@ Let your cluster access infrastructure resources and services from behind a fire
         </tr>
         <tr>
            <td>EU Central</td>
-           <td>ams03<br>>mil01<br>osl01<br>par01<br>fra02, fra04, fra05</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02, fra04, fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
           </tr>
         <tr>
           <td>UK South</td>
