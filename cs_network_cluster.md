@@ -199,9 +199,6 @@ If worker nodes are set up with a private VLAN only, you must configure an alter
 If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](cs_subnets.html#vra-routing).
 {: important}
 
-To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
-{: tip}
-
 ### Expose your apps with private networking services
 {: #private_vlan_services}
 

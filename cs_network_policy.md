@@ -474,17 +474,7 @@ In most cases, the default policies do not need to be changed. Only advanced sce
 
 To create Kubernetes network policies, see the [Kubernetes network policy documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-To create Calico policies, use the following steps.
-
-Before you begin:
-1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
-
-The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
+To create Calico policies, use the following steps. The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
 
 * [Kubernetes version 1.10 or later clusters](#1.10_create_new)
 * [Kubernetes version 1.9 or earlier clusters](#1.9_create_new)
@@ -494,6 +484,14 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 
 ### Adding Calico policies in clusters that are running Kubernetes version 1.10 or later
 {: #1.10_create_new}
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
 
 1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
 
@@ -514,6 +512,14 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 
 ### Adding Calico policies in clusters that are running Kubernetes version 1.9 or earlier
 {: #1.9_create_new}
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
 
 1. Define your [Calico network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
 

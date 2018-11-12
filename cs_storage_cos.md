@@ -470,7 +470,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 If you do not want to provision and use {{site.data.keyword.cos_full_notm}} in your cluster, you can uninstall the helm charts.
 
 Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new {{site.data.keyword.cos_full_notm}} for your cluster or use existing PVCs and PVs after you remove the plug-in, unless you configure your app to use the {{site.data.keyword.cos_full_notm}} API directly.
-{: note}
+{: important}
 
 Before you begin:
 
@@ -1107,7 +1107,7 @@ To deploy a stateful set that uses object storage:
 {: shortdesc}
 
 {{site.data.keyword.cos_full_notm}} does not provide a version history for your data. If you need to maintain and access older versions of your data, you must set up your app to manage the history of data or implement alternative backup solutions. For example, you might want to store your {{site.data.keyword.cos_full_notm}} data in your on-prem database or use tapes to archive your data.
-{: important}
+{: note}
 
 ## Storage class reference
 {: #storageclass_reference}

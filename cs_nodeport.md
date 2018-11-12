@@ -62,8 +62,9 @@ You can expose your app as a Kubernetes NodePort service for free or standard cl
 If you do not already have an app ready, you can use a Kubernetes example app called [Guestbook ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
 1.  In the configuration file for your app, define a [service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/) section.
-For the Guestbook example, a front-end service section exists in the configuration file. To make the Guestbook app available externally, add the NodePort type and a NodePort in the range 30000 - 32767 to the front-end service section.
-{: tip}
+
+    For the Guestbook example, a front-end service section exists in the configuration file. To make the Guestbook app available externally, add the NodePort type and a NodePort in the range 30000 - 32767 to the front-end service section.
+    {: tip}
 
     Example:
 
@@ -161,7 +162,8 @@ When the app is deployed, you can use the public IP address of any worker node a
     ```
     {: screen}
 
-    In this example, the NodePort is `30872`.</br>
+    In this example, the NodePort is `30872`.
+
     If the **Endpoints** section displays `<none>`, check the `<selectorkey>` and `<selectorvalue>` that you use in the `spec.selector` section of the NodePort service. Ensure that it is the same as the _key/value_ pair that you used in the `spec.template.metadata.labels` section of your deployment yaml.
     {: note}
 

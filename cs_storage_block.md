@@ -203,7 +203,7 @@ If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block
 {: shortdesc}
 
 Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
-{: note}
+{: important}
 
 Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).

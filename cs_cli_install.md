@@ -81,6 +81,7 @@ To install the CLIs:
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
     1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.10.8.
+
         If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
         {: note}
 
@@ -401,11 +402,10 @@ You can use the {{site.data.keyword.containerlong_notm}} API to automate the cre
 
 The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
 
+To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
+
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
-
-To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
-{: note}
 
 <table>
 <caption>ID types and options</caption>

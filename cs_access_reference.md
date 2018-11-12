@@ -164,7 +164,6 @@ The following table shows the Cloud Foundry roles required for cluster action pe
 {: #infra}
 
 When a user with the **Super User** infrastructure access role [sets the API key for a region and resource group](cs_users.html#api_key), infrastructure permissions for the other users in the account are set by {{site.data.keyword.Bluemix_notm}} IAM platform roles. You do not need to edit the other users' IBM Cloud infrastructure (SoftLayer) permissions. Only use the following table to customize users' IBM Cloud infrastructure (SoftLayer) permissions when you can't assign **Super User** to the user who sets the API key. For more information, see [Customizing infrastructure permissions](cs_users.html#infra_access).
-{: note}
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 

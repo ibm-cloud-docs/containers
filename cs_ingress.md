@@ -329,7 +329,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
 {: shortdesc}
 
 If your cluster has multiple namespaces where apps are exposed, one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
-<p class="note">
+{: note}
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 

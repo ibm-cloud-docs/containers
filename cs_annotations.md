@@ -750,7 +750,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a></p>.
+<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1315,7 +1315,7 @@ Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
 <dd>
 Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
 
-<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page.<p class="note">For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
+<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
 
 <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
@@ -1476,7 +1476,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a></p>.
+<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
