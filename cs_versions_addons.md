@@ -34,8 +34,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <caption>Changelog for the Ingress application load balancer add-on</caption>
 <thead>
 <tr>
-<th>`nginx-ingress` build</th>
-<th>`ingress-auth` build</th>
+<th>`nginx-ingress` / `ingress-auth` build</th>
 <th>Release date</th>
 <th>Non-disruptive changes</th>
 <th>Disruptive changes</th>
@@ -43,20 +42,16 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
-<td>-</td>
-<td>-</td>
+<td>- / -</td>
 <td>Expected 14 Nov 2018</td>
 <td>Improves logging and logout features for {{site.data.keyword.appid_full}}</td>
 <td>Replaces the self-signed certificate for `*.containers.mybluemix.net` with the LetsEncrypt signed certificate that is automatically generated for and used by the cluster. The `*.containers.mybluemix.net` self-signed certificate is removed.</td>
 </tr>
 <tr>
-<td>350</td>
-<td>192</td>
+<td>350 / 192</td>
 <td>05 Nov 2018</td>
 <td>Adds support for enabling and disabling automatic updates of the Ingress ALB add-on.</td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
-
-
