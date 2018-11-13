@@ -496,7 +496,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Choose the **Worker Zones** in your cluster where you want to deploy the worker nodes in your worker pool. If you plan on spreading your worker nodes in an existing worker pool across multiple zones, choose or [add a new zone](#add_zone) to a [multizone-capable](cs_regions.html#zones) cluster. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](cs_regions.html#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
