@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-12"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -365,7 +365,7 @@ This task includes the information for removing these CLIs:
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
-<br>
+
 To uninstall the CLIs:
 
 1.  Uninstall the {{site.data.keyword.containerlong_notm}} plug-in.

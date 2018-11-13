@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-12"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -143,7 +143,7 @@ The following table compares the old and new methods for a few common cluster ma
   <tbody>
     <tr>
     <td>Add worker nodes to the cluster.</td>
-    <td><strong>Deprecated</strong>: <code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</p></td>
     <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud ks worker-pool-create</code> [command](cs_cli_reference.html#cs_worker_pool_create).</li>
     <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud ks worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
     </tr>
@@ -155,7 +155,7 @@ The following table compares the old and new methods for a few common cluster ma
     </tr>
     <tr>
     <td>Use a new VLAN for worker nodes.</td>
-    <td><strong>Deprecated</strong>: Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</td>
+    <td><p class="deprecated">Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</p></td>
     <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud ks zone-network-set</code> [command](cs_cli_reference.html#cs_zone_network_set).</td>
     </tr>
   </tbody>
