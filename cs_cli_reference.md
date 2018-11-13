@@ -2982,7 +2982,8 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 ### ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-s]
 {: #cs_worker_reload}
 
-Reload all the necessary configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state.
+Reload the configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
+{: shortdesc}
 
 Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](cs_versions_changelog.html#changelog) documentation.
 {: tip}
@@ -3127,7 +3128,7 @@ Update worker nodes to apply the latest security updates and patches to the oper
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for {{site.data.keyword.containerlong_notm}}
 
-Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
+Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes, the worker node is reimaged, and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 {: important}
 
 You might need to change your YAML files for deployments before updating. Review this [release note](cs_versions.html) for details.
