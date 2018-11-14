@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -658,7 +658,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 <br />
 
 
-## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens
+## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API
 {: #cs_api_refresh}
 
 Every {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token on a regular basis to assure access to the {{site.data.keyword.Bluemix_notm}} API. You can use the same steps to obtain a new refresh token.
@@ -731,4 +731,17 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
 
     You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) by using the token from the previous step.
+
+<br />
+
+
+## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI
+{: #cs_cli_refresh}
+
+When you start a new CLI session, or if 24 hours has expired in your current CLI session, you must set the context for your cluster by running `ibmcloud ks cluster-config <cluster_name>`. When you set the context for your cluster with this command, the `kubeconfig` file for your Kubernetes cluster is downloaded. Additionally, an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID token and a refresh token are issued to provide authentication.
+{: shortdesc}
+
+**ID token**: Every IAM ID token that is issued via the CLI expires after one hour. When the ID token expires, the refresh token is sent to the token provider to refresh the ID token. Your authentication is refreshed, and you can continue to run commands against your cluster.
+
+**Refresh token**: Refresh tokens expire every 30 days. If the refresh token is expired, the ID token cannot be refreshed, and you are not able to continue running commands in the CLI. You can get a new refresh token by running `ibmcloud ks cluster-config <cluster_name>`. This command also refreshes your ID token.
