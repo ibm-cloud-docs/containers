@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -41,7 +41,7 @@ When you expose an app with a load balancer service, your app is automatically m
 Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](cs_cluster_update.html) to Kubernetes version 1.12 or later.
 {: note}
 
-The load balancer 2.0 is a Layer 4 load balancer that is implemented using the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UPD, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic arriving to a single load balancer IP address across those worker nodes.
+The load balancer 2.0 is a Layer 4 load balancer that is implemented using the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic arriving to a single load balancer IP address across those worker nodes.
 
 For more details, you can also check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/) on the load balancer 2.0.
 
