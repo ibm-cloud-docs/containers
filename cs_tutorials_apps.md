@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -526,7 +526,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: codeblock}
 
-    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous tutorial. By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} service credentials available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the service credentials by using the volume mount path.
+    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous tutorial. By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
 
         ```
         volumes:

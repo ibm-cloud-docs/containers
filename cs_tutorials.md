@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -288,7 +288,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     ```
     {: screen}
 
-3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.Bluemix_notm}} service is defined by a JSON file that includes confidential information such as the user name, password, and URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the credentials for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
+3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.Bluemix_notm}} service is defined by a JSON file that includes confidential information such as the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the API key for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
 
     ```
     kubectl get secrets --namespace=default
