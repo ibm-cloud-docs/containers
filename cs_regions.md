@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -152,7 +152,7 @@ To view documentation on the API commands, view [https://containers.bluemix.net/
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
-* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.11 or later cluster in a multizone metro city, the highly available masters are spread across zones.
+* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.10 or later cluster in a multizone metro city, the highly available masters are spread across zones.
 * **Single Zone City**: Worker nodes in clusters that are created in a single zone city stay within one zone. You cannot spread worker nodes across multiple zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
 <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro cities in column two, and the single zone cities in column three.">
