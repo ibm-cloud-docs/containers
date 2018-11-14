@@ -187,7 +187,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>London: lon04, lon05, lon06<p class="note">lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.</p></td>
+      <td>London: lon04, lon05, lon06 **Note**: lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.</td>
       <td></td>
     </tr>
     <tr>
