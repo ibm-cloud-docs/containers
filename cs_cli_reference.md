@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -3465,7 +3465,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
   <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
 229xxxx          1234     private   bcr01a.dal12   true
 229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set these public and private VLAN IDs for your worker pool.</p></li>
-  <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/order-vlan.html#order-vlans">order new VLANs</a>.</li></ol>
+  <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans">order new VLANs</a>.</li></ol>
 
   <strong>Command options</strong>:
 
