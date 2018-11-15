@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-14"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -127,6 +127,8 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 <br />
 
 
+
+
 ## Pricing and billing
 {: #pricing}
 
@@ -205,3 +207,5 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/) for more information.</dd>
 
 </dl>
+
+

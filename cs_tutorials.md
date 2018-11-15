@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-14"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -165,7 +165,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     If you have a federated ID, use the `--sso` flag to log in. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode.
     {: tip}
 
-2.  If the cluster is in a resource group other than `default`, target that resource group.
+2.  If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`.
    ```
    ibmcloud target -g <resource_group_name>
    ```
