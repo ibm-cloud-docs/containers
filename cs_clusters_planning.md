@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -54,7 +57,7 @@ If the cluster is in one of the [supported multizone metro cities](cs_regions.ht
 No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](cs_regions.html#zones).
 
 **Can I have a highly available master in a single zone?**</br>
-Yes, with clusters that run Kubernetes version 1.11 or later. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
+Yes, with clusters that run Kubernetes version 1.10 or later. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
 * [Create a cluster in a multizone-capable zone](cs_clusters_planning.html#multizone), where the master is spread across zones.
 * [Create multiple clusters](#multiple_clusters) and connect them with a global load balancer.
 
@@ -90,10 +93,13 @@ Let's say you need a worker node with 6 cores to handle the workload for your ap
 - **Distribute resources across 3 zones:** With this option, you deploy 3 cores per zone, which leaves you with a total capacity of 9 cores. To handle your workload, two zones must be up at a time. If one zone is unavailable, the other two zones can handle your workload. If two zones are unavailable, the 3 remaining cores are up to handle your workload. Deploying 3 cores per zone means smaller machines and hence reduced cost for you.</br>
 
 **How is my Kubernetes master set up?** </br>
-A multizone cluster is set up with a single or highly available (in Kubernetes 1.11 or later) Kubernetes master that is provisioned in the same metro area as the workers. Further, if you create a multizone cluster, highly available masters are spread across zones. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the master is spread across each zone in the Dallas multizone metro city.
+A multizone cluster is set up with a single or highly available (in Kubernetes 1.10 or later) Kubernetes master that is provisioned in the same metro area as the workers. Further, if you create a multizone cluster, highly available masters are spread across zones. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the master is spread across each zone in the Dallas multizone metro city.
 
 **What happens if the Kubernetes master becomes unavailable?** </br>
-The [Kubernetes master](cs_tech.html#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up. **Note**: Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.
+The [Kubernetes master](cs_tech.html#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up.
+
+Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.
+{: important}
 
 
 To protect your cluster against a Kubernetes master failure or in regions where multizone clusters are not available, you can [set up multiple clusters and connect them with a global load balancer](#multiple_clusters).
@@ -137,7 +143,7 @@ The following table compares the old and new methods for a few common cluster ma
   <tbody>
     <tr>
     <td>Add worker nodes to the cluster.</td>
-    <td><strong>Deprecated</strong>: <code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</p></td>
     <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud ks worker-pool-create</code> [command](cs_cli_reference.html#cs_worker_pool_create).</li>
     <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud ks worker-pool-resize</code> [command](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
     </tr>
@@ -149,7 +155,7 @@ The following table compares the old and new methods for a few common cluster ma
     </tr>
     <tr>
     <td>Use a new VLAN for worker nodes.</td>
-    <td><strong>Deprecated</strong>: Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</td>
+    <td><p class="deprecated">Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</p></td>
     <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud ks zone-network-set</code> [command](cs_cli_reference.html#cs_zone_network_set).</td>
     </tr>
   </tbody>
@@ -213,7 +219,9 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](cs_network_cluster.html#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](cs_edge.html).
 
 If you want to create a cluster that only has access on a private VLAN, you can create a single zone or multizone private cluster. However, when your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
-**Note**: You cannot convert a cluster that is connected to a public and private VLAN to become a private-only cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. You must create a new cluster using the following steps.
+
+You cannot convert a cluster that is connected to a public and private VLAN to become a private-only cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. You must create a new cluster using the following steps.
+{: note}
 
 If you want to create a cluster that only has access on a private VLAN:
 
@@ -353,7 +361,8 @@ Yes. With bare metal, you have the option to enable Trusted Compute to verify yo
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
 Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
 
-**Important**: Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.
+Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.
+{: important}
 
 **What bare metal flavors can I order?**</br>
 Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [VM](#vm) or [SDS](#sds) machine types.

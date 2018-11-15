@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Setting pod priority
@@ -35,7 +38,7 @@ In general, pending pods that have a higher priority are scheduled before lower 
 
 If you do not specify a priority for your pod deployment, the default is set to the priority class that is set as the `globalDefault` . If you do not have a `globalDefault` priority class, the default priority for all pods is zero (`0`). By default, {{site.data.keyword.containerlong_notm}} does not set a `globalDefault`, so the pod default priority is zero.
 
-Consider the scenarios in the following figure. **Important**: As you can see, you need to understand how pod priority and scheduler work together to place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending, at the same time as existing pods are removed, such as in Scenario 3.
+To understand how pod priority and scheduler work together, consider the scenarios in the following figure. You must place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending at the same time that existing pods are removed, such as in Scenario 3.
 
 _Figure: Pod priority scenarios_
 ![Pod priority scenarios](images/pod-priority.png)
@@ -54,8 +57,11 @@ You can use pod priority in combination with resource quotas, including [quota s
 ## Understanding default priority classes
 {: #default_priority_class}
 
-Your {{site.data.keyword.containerlong_notm}} clusters come with some priority classes by default. **Important**: Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
+Your {{site.data.keyword.containerlong_notm}} clusters come with some priority classes by default.
 {: shortdesc}
+
+Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
+{: important}
 
 The following table describes the priority classes that are in your cluster by default and why they are used.
 

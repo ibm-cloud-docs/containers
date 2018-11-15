@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-09"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-09"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -190,7 +193,10 @@ Let your cluster access infrastructure resources and services from behind a fire
     {: pre}
 
 2.  Allow outgoing network traffic from the source _<each_worker_node_publicIP>_ to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
-    - **Important**: You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
+
+    You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
+    {: important}
+
     <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
     <caption>IP addresses to open for outgoing traffic</caption>
         <thead>
@@ -339,9 +345,9 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer): 
+6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
     - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`. 
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
 <br />
 

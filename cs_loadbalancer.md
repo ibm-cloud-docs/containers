@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -35,9 +38,10 @@ When you expose an app with a load balancer service, your app is automatically m
 ## Load balancer 2.0 components and architecture (Beta)
 {: #planning_ipvs}
 
-**Note: Load balancer 2.0 capabilities are in beta.** To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](cs_cluster_update.html) to Kubernetes version 1.12 or later.
+Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](cs_cluster_update.html) to Kubernetes version 1.12 or later.
+{: note}
 
-The load balancer 2.0 is a Layer 4 load balancer that is implemented using the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UPD, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic arriving to a single load balancer IP address across those worker nodes.
+The load balancer 2.0 is a Layer 4 load balancer that is implemented using the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic arriving to a single load balancer IP address across those worker nodes.
 
 For more details, you can also check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/) on the load balancer 2.0.
 
@@ -189,9 +193,8 @@ Next, you can follow the steps in [Setting up a load balancer 2.0 in a multizone
 ## Setting up a load balancer 2.0 in a multizone cluster
 {: #ipvs_multi_zone_config}
 
-**Note**:
-  * This feature is available for standard clusters only.
-  * Load balancer services do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](cs_ingress.html), or configure your app to manage the TLS termination.
+Load balancer services are available for standard clusters only and do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](cs_ingress.html), or configure your app to manage the TLS termination.
+{: note}
 
 **Before you begin**:
 
@@ -305,14 +308,12 @@ To set up a load balancer 2.0 in a multizone cluster:
       ```
       {: pre}
 
-3. Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step.
+3. Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step. It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     ```
     kubectl describe service myloadbalancer
     ```
     {: pre}
-
-    **Note:** It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     Example CLI output:
 
@@ -441,14 +442,12 @@ To create a load balancer 2.0 service in a single-zone cluster:
 
         When your load balancer service is created, a portable IP address is automatically assigned to the load balancer. If no portable IP address is available, the load balancer service cannot be created.
 
-3.  Verify that the load balancer service was created successfully.
+3.  Verify that the load balancer service was created successfully. It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     ```
     kubectl describe service myloadbalancer
     ```
     {: pre}
-
-    **Note:** It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     Example CLI output:
 
@@ -522,9 +521,8 @@ By default, each load balancer 1.0 is set up in one zone only. To achieve high a
 ## Setting up a load balancer 1.0 in a multizone cluster
 {: #multi_zone_config}
 
-**Note**:
-  * This feature is available for standard clusters only.
-  * Load balancer services do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](cs_ingress.html), or configure your app to manage the TLS termination.
+Load balancer services are available for standard clusters only and do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](cs_ingress.html), or configure your app to manage the TLS termination.
+{: note}
 
 **Before you begin**:
   * You must deploy a load balancer in each zone, and each load balancer is assigned its own IP address in that zone. To create public load balancers, at least one public VLAN must have portable subnets available in each zone. To add private load balancer services, at least one private VLAN must have portable subnets available in each zone. To add subnets, see [Configuring subnets for clusters](cs_subnets.html).
@@ -622,14 +620,12 @@ To set up a load balancer 1.0 service in a multizone cluster:
       ```
       {: pre}
 
-3. Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step.
+3. Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step. It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     ```
     kubectl describe service myloadbalancer
     ```
     {: pre}
-
-    **Note:** It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     Example CLI output:
 
@@ -766,14 +762,12 @@ To create a load balancer 1.0 service in a single-zone cluster:
 
         When your load balancer service is created, a portable IP address is automatically assigned to the load balancer. If no portable IP address is available, the load balancer service cannot be created.
 
-3.  Verify that the load balancer service was created successfully.
+3.  Verify that the load balancer service was created successfully. It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     ```
     kubectl describe service myloadbalancer
     ```
     {: pre}
-
-    **Note:** It might take a few minutes for the load balancer service to be created properly and for the app to be available.
 
     Example CLI output:
 
@@ -819,7 +813,8 @@ To create a load balancer 1.0 service in a single-zone cluster:
 ## Enabling source IP preservation for version 1.0 load balancers
 {: #node_affinity_tolerations}
 
-**Note**: This feature is for version 1.0 load balancers only. The source IP address of client requests is preserved by default in version 2.0 load balancers.
+This feature is for version 1.0 load balancers only. The source IP address of client requests is preserved by default in version 2.0 load balancers.
+{: note}
 
 When a client request to your app is sent to your cluster, a load balancer service pod receives the request. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the load balancer service pod is running.
 

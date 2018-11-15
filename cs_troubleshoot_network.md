@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-08"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-08"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -221,7 +224,10 @@ If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_not
 If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
 
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
-1.  Check that the subnets that you want to use are available. **Note**: The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
+1.  Check that the subnets that you want to use are available.
+
+    The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
+    {: note}
 
 2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
@@ -328,7 +334,7 @@ If you complete one of the above options but the `keepalived` pods are still not
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
-When you check VPN connectivity by running `kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status`, you do not see a status of `ESTABLISHED`, or the VPN pod is in an `ERROR` state or continues to crash and restart.
+When you check VPN connectivity by running `kubectl exec  $STRONGSWAN_POD -- ipsec status`, you do not see a status of `ESTABLISHED`, or the VPN pod is in an `ERROR` state or continues to crash and restart.
 
 {: tsCauses}
 Your Helm chart configuration file has incorrect values, missing values, or syntax errors.
@@ -336,48 +342,21 @@ Your Helm chart configuration file has incorrect values, missing values, or synt
 {: tsResolve}
 When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status will not be `ESTABLISHED` the first time. You might need to check for several types of issues and change your configuration file accordingly. To troubleshoot your strongSwan VPN connectivity:
 
-1. Check the on-prem VPN endpoint settings against the settings in your configuration file. If the settings don't match:
+1. [Test and verify the strongSwan VPN connectivity](cs_vpn.html#vpn_test) by running the five Helm tests that are included in the strongSwan chart definition.
 
-    <ol>
-    <li>Delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Fix the incorrect values in the <code>config.yaml</code> file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
-    </ol>
-
-2. If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's config map.
-
-    <ol>
-    <li>Check for any validation errors in the strongSwan pod logs.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>If the logs contain validation errors, delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Fix the incorrect values in the `config.yaml` file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
-    </ol>
-
-3. Run the 5 Helm tests included in the strongSwan chart definition.
-
-    <ol>
-    <li>Run the Helm tests.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    <li>If any test fails, refer to [Understanding the Helm VPN connectivity tests](cs_vpn.html#vpn_tests_table) for information about each test and why it might fail. <b>Note</b>: Some of the tests have requirements that are optional settings in the VPN configuration. If some of the tests fail, the failures might be acceptable depending on whether you specified these optional settings.</li>
-    <li>View the output of a failed test by looking at the logs of the test pod.<br><pre class="codeblock"><code>kubectl logs -n kube-system <test_program></code></pre></li>
-    <li>Delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Fix the incorrect values in the <code>config.yaml</code> file and save the updated file.</li>
-    <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan</code></pre></li>
-    <li>To check your changes:<ol><li>Get the current test pods.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Clean up the current test pods.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Run the tests again.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    </ol></ol>
-
-4. Run the VPN debugging tool that is packaged inside of the VPN pod image.
+2. If you are unable to establish VPN connectivity after running the Helm tests, you can run the VPN debugging tool that is packaged inside of the VPN pod image.
 
     1. Set the `STRONGSWAN_POD` environment variable.
 
         ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
         ```
         {: pre}
 
     2. Run the debugging tool.
 
         ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- vpnDebug
+        kubectl exec  $STRONGSWAN_POD -- vpnDebug
         ```
         {: pre}
 
@@ -390,9 +369,9 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> ibm/strongswan`. However, you see the following error:
+You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --name=vpn ibm/strongswan`. However, you see the following error:
 ```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
+Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```
 {: screen}
 
@@ -403,25 +382,25 @@ This error indicates that the previous release of the strongSwan chart was not c
 
 1. Delete the previous chart release.
     ```
-    helm delete --purge <old_release_name>
+    helm delete --purge vpn
     ```
     {: pre}
 
 2. Delete the deployment for the previous release. Deletion of the deployment and associated pod takes up to 1 minute.
     ```
-    kubectl delete deploy -n kube-system vpn-strongswan
+    kubectl delete deploy vpn-strongswan
     ```
     {: pre}
 
 3. Verify that the deployment has been deleted. The deployment `vpn-strongswan` does not appear in the list.
     ```
-    kubectl get deployments -n kube-system
+    kubectl get deployments
     ```
     {: pre}
 
 4. Re-install the updated strongSwan Helm chart with a new release name.
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> ibm/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -522,7 +501,7 @@ Update the Helm chart values to reflect the worker node changes:
 4. Install the new Helm chart with your updated values.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
@@ -542,14 +521,14 @@ Update the Helm chart values to reflect the worker node changes:
 8. Set the `STRONGSWAN_POD` environment variable.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 9. Check the status of the VPN.
 
     ```
-    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    kubectl exec  $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -93,7 +96,7 @@ Before you begin:
 - If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
 - Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
 
 **What happens to my apps during an update?**</br>
@@ -147,7 +150,8 @@ To create a config map and update worker nodes:
 
 3. Create a config map and define the unavailability rules for your worker nodes. The following example shows 4 checks, the `zonecheck.json`, `regioncheck.json`, `defaultcheck.json`, and a check template. You can use these example checks to define rules for worker nodes in a specific zone (`zonecheck.json`), region (`regioncheck.json`), or for all worker nodes that do not match any of the checks that you defined in the config map (`defaultcheck.json`). Use the check template to create your own check. For every check, to identify a worker node, you must choose one of the worker node labels that you retrieved in the previous step.  
 
-   **Note:** For every check, you can set only one value for <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. If you want to set rules for more than one region, zone, or other worker node labels, create a new check. Define up to 10 checks in a config map. If you add more checks, they are ignored.
+   For every check, you can set only one value for <code>NodeSelectorKey</code> and <code>NodeSelectorValue</code>. If you want to set rules for more than one region, zone, or other worker node labels, create a new check. Define up to 10 checks in a config map. If you add more checks, they are ignored.
+   {: note}
 
    Example:
    ```
@@ -268,9 +272,6 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 - Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
-
-
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
 
 1. List available worker nodes and note their private IP address.
    - **For worker nodes in a worker pool**:
@@ -530,7 +531,8 @@ With the introduction of multizone clusters, worker nodes with the same configur
 
 You can use worker pools to spread worker nodes evenly across zones and build a balanced cluster. Balanced clusters are more available and resilient to failures. If a worker node is removed from a zone, you can rebalance the worker pool and automatically provision new worker nodes to that zone. Worker pools are also used to install Kubernetes version updates to all of your worker nodes.  
 
-**Important:** If you created clusters before multizone clusters became available, your worker nodes are still stand-alone and not automatically grouped into worker pools. You must update these clusters to use worker pools. If not updated, you cannot change your single zone cluster to a multizone cluster.
+If you created clusters before multizone clusters became available, your worker nodes are still stand-alone and not automatically grouped into worker pools. You must update these clusters to use worker pools. If not updated, you cannot change your single zone cluster to a multizone cluster.
+{: important}
 
 Review the following image to see how your cluster setup changes when you move from stand-alone worker nodes to worker pools.
 
@@ -648,33 +650,33 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 2.  Set CoreDNS as the cluster DNS provider.
-    
+
     1.  **Optional**: If you customized the `kube-dns` configmap in the `kube-system` namespace, transfer any customizations to the `coredns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
-    
+
     2.  Scale down the KubeDNS autoscaler deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
         ```
         {: pre}
-    
+
     3.  Check and wait for the pods to be deleted.
         ```
         kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
         ```
         {: pre}
-    
+
     4.  Scale down the KubeDNS deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
         ```
         {: pre}
-    
+
     5.  Scale up the CoreDNS autoscaler deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
         ```
         {: pre}
-    
+
     6.  Label and annotate the cluster DNS service for CoreDNS.
         ```
         kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
@@ -689,33 +691,33 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         ```
         {: pre}
 3.  **Optional**: Reverse the previous steps to switch back to KubeDNS as the cluster DNS provider.
-    
+
     1.  **Optional**: If you customized the `coredns` configmap in the `kube-system` namespace, transfer any customizations to the `kube-dns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
-    
+
     2.  Scale down the CoreDNS autoscaler deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
         ```
         {: pre}
-    
+
     3.  Check and wait for the pods to be deleted.
         ```
         kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
         ```
         {: pre}
-  
+
     4.  Scale down the CoreDNS deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=0 coredns
         ```
         {: pre}
-    
+
     5.  Scale up the KubeDNS autoscaler deployment.
         ```
         kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
         ```
         {: pre}
-    
+
     6.  Label and annotate the cluster DNS service for KubeDNS.
         ```
         kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS

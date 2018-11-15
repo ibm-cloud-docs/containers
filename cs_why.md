@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-11-06"
 # Why {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For certification information, see [Compliance on the {{site.data.keyword.Bluemix_notm}} [External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/compliance).
+{{site.data.keyword.containerlong}} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For certification information, see [Compliance on the {{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -109,7 +112,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Disk space on worker node for non-persistent storage](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 | [Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Multizone clusters to increase app high availability](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-| Replicated masters for higher availability (Kubernetes 1.11 or later) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| Replicated masters for higher availability (Kubernetes 1.10 or later) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Scalable number of worker nodes to increase capacity](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Persistent NFS file-based storage with volumes](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public or private network app access by a load balancer service to a stable IP address](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|

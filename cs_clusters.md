@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -60,10 +63,10 @@ The list is divided into two parts:
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
 2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
-    *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are availabe in select locations only.
+    *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are available in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Note**: For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
+4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
 <br>
 <br>
 
@@ -77,9 +80,13 @@ The list is divided into two parts:
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-**To create a free cluster**
+### Creating a free cluster
+{: #clusters_ui_free}
 
-You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a billable account. **Note**: Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a billable account.
+
+Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
+{: note}
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
@@ -99,7 +106,8 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
 </br>
 
-**To create a standard cluster**
+### Creating a standard cluster
+{: #clusters_ui_standard}
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
@@ -121,8 +129,9 @@ You can use your 1 free cluster to become familiar with how {{site.data.keyword.
 
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
 
-    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). You can use the same VLAN for multiple clusters.
-        **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
+    3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra). You can use the same VLAN for multiple clusters.
+        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
+        {: note}
 
 7. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
 
@@ -182,7 +191,8 @@ To create a cluster:
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        {: tip}
 
     2. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
@@ -199,11 +209,9 @@ To create a cluster:
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
 
 
-4.  Create a cluster. **Note**: Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
+4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in.
-
-        **Note**: To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones).
+    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones).
 
         ```
         ibmcloud ks zones
@@ -272,7 +280,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in to.<br></br>**Note**: The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</td>
+        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in to.<p class="note">The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</p></td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -286,13 +294,14 @@ To create a cluster:
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
           <li>**Free clusters**: You do not have to define a public VLAN. Your free cluster is automatically connected to a public VLAN that is owned by IBM.</li>
-          <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).<br/><br/>
-          <strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li>
+          <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
+          <p>Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p>
+          <p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).</p></li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containerlong_notm}} automatically creates a private VLAN for you.<br/><br/><strong>Note</strong>: Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</li></ul></td>
+        <td><ul><li>**Free clusters**: You do not have to define a private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li><li>**Standard clusters**: If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN. If you do not have a private VLAN in your account, do not specify this option. {{site.data.keyword.containerlong_notm}} automatically creates a private VLAN for you.<p>Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -318,14 +327,12 @@ To create a cluster:
         </tr>
         </tbody></table>
 
-5.  Verify that the creation of the cluster was requested.
+5.  Verify that the creation of the cluster was requested. For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
-
-    **Note:** For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
 
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
@@ -344,7 +351,8 @@ To create a cluster:
 
     When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
 
-    **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    {: important}
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version
@@ -488,7 +496,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Choose the **Worker Zones** in your cluster where you want to deploy the worker nodes in your worker pool. If you plan on spreading your worker nodes in an existing worker pool across multiple zones, choose or [add a new zone](#add_zone) to a [multizone-capable](cs_regions.html#zones) cluster. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](cs_regions.html#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -554,7 +562,7 @@ You can span your cluster across multiple zones within one region by adding a zo
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
-**Note**: If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
+If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](cs_regions.html#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
@@ -580,7 +588,10 @@ To add a zone with worker nodes to your worker pool:
    ```
    {: pre}
 
-4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones. Replace `<pool1_id_or_name,pool2_id_or_name,...>` with the names of all of your worker pools in a comma-separated list. </br>**Note:** A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
+4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones. Replace `<pool1_id_or_name,pool2_id_or_name,...>` with the names of all of your worker pools in a comma-separated list.
+
+    A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
+    {: note}
 
    If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
    {: tip}
@@ -620,9 +631,10 @@ To add a zone with worker nodes to your worker pool:
 {: #standalone}
 
 If you have a cluster that was created before worker pools were introduced, you can use the deprecated commands to add stand-alone worker nodes.
-{: shortdesc}
+{: deprecated}
 
-**Note:** If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
+If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
+{: note}
 
 1. List available zones and pick the zone where you want to add worker nodes.
    ```
@@ -703,7 +715,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
       </tr>
       <tr>
        <td>Normal</td>
-       <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you. **Note**: Although the worker nodes might be normal, other infrastructure resources, such as [networking](cs_troubleshoot_network.html) and [storage](cs_troubleshoot_storage.html), might still need attention.</td>
+       <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](cs_troubleshoot_network.html) and [storage](cs_troubleshoot_storage.html), might still need attention.</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -734,12 +746,12 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
 Free and standard clusters that are created with a billable account must be removed manually when they are not needed anymore so that those clusters are no longer consuming resources.
 {:shortdesc}
 
-**Warning:**
-  - No backups are created of your cluster or your data in your persistent storage. Deleting a cluster or persistent storage is permanent and cannot be undone.
-  - When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `ibmcloud ks cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `ibmcloud ks cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.
+<p class="important">
+No backups are created of your cluster or your data in your persistent storage. Deleting a cluster or persistent storage is permanent and cannot be undone.</br>
+</br>When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `ibmcloud ks cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `ibmcloud ks cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.</p>
 
 Before you begin:
-* Note down your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
+* Note your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
 * If you want to delete the data in your persistent storage, [understand the delete options](cs_storage_remove.html#cleanup).
 * Make sure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
 
@@ -766,7 +778,8 @@ To remove a cluster:
     3.  Follow the prompts and choose whether to delete cluster resources, which includes containers, pods, bound services, persistent storage, and secrets.
       - **Persistent storage**: Persistent storage provides high availability for your data. If you created a persistent volume claim by using an [existing file share](cs_storage_file.html#existing_file), then you cannot delete the file share when you delete the cluster. You must manually delete the file share later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 
-          **Note**: Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.
+          Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.
+          {: note}
 
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.

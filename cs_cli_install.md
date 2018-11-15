@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,7 +59,8 @@ To install the CLIs:
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    {: tip}
 
 3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containerlong_notm}} plug-in is `ibmcloud ks`.
 
@@ -76,7 +80,10 @@ To install the CLIs:
 
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.10.8. **Note**: If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.10.8.
+
+        If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+        {: note}
 
         - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
         - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
@@ -192,7 +199,8 @@ To use `kubectl` commands:
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    {: tip}
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
@@ -296,7 +304,8 @@ To update the CLIs:
     ```
     {: pre}
 
-     **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+     {: tip}
 
 3.  Update the {{site.data.keyword.containerlong_notm}} plug-in.
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
@@ -356,7 +365,7 @@ This task includes the information for removing these CLIs:
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
-<br>
+
 To uninstall the CLIs:
 
 1.  Uninstall the {{site.data.keyword.containerlong_notm}} plug-in.
@@ -393,10 +402,10 @@ You can use the {{site.data.keyword.containerlong_notm}} API to automate the cre
 
 The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
 
+To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
+
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
-
-**Note:** To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
 
 <table>
 <caption>ID types and options</caption>
@@ -543,7 +552,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
 3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;account_ID&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
 
-    **Note:** If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
+    If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
+    {: note}
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -648,7 +658,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 <br />
 
 
-## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens
+## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API
 {: #cs_api_refresh}
 
 Every {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token on a regular basis to assure access to the {{site.data.keyword.Bluemix_notm}} API. You can use the same steps to obtain a new refresh token.
@@ -721,4 +731,17 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
 
     You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) by using the token from the previous step.
+
+<br />
+
+
+## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI
+{: #cs_cli_refresh}
+
+When you start a new CLI session, or if 24 hours has expired in your current CLI session, you must set the context for your cluster by running `ibmcloud ks cluster-config <cluster_name>`. When you set the context for your cluster with this command, the `kubeconfig` file for your Kubernetes cluster is downloaded. Additionally, an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID token and a refresh token are issued to provide authentication.
+{: shortdesc}
+
+**ID token**: Every IAM ID token that is issued via the CLI expires after one hour. When the ID token expires, the refresh token is sent to the token provider to refresh the ID token. Your authentication is refreshed, and you can continue to run commands against your cluster.
+
+**Refresh token**: Refresh tokens expire every 30 days. If the refresh token is expired, the ID token cannot be refreshed, and you are not able to continue running commands in the CLI. You can get a new refresh token by running `ibmcloud ks cluster-config <cluster_name>`. This command also refreshes your ID token.

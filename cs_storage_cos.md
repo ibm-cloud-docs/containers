@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,47 +25,47 @@ lastupdated: "2018-11-06"
 ## Creating your object storage service instance
 {: #create_cos_service}
 
-Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, you must provision an {{site.data.keyword.cos_full_notm}} service instance in your account. 
+Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, you must provision an {{site.data.keyword.cos_full_notm}} service instance in your account.
 {: shortdesc}
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
    1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://console.bluemix.net/catalog/services/cloud-object-storage).
    2.  Enter a name for your service instance, such as `cos-backup`, and select the same resource group that your cluster is in. To view the resource group of your cluster, run `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
-   3.  Review the [plan options ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for pricing information and select a plan. 
-   4.  Click **Create**. The service details page opens. 
+   3.  Review the [plan options ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for pricing information and select a plan.
+   4.  Click **Create**. The service details page opens.
 2. {: #service_credentials}Retrieve the {{site.data.keyword.cos_full_notm}} service credentials.
    1.  In the navigation on the service details page, click **Service Credentials**.
-   2.  Click **New credential**. A dialog box displays. 
+   2.  Click **New credential**. A dialog box displays.
    3.  Enter a name for your credentials.
-   4.  From the **Role** drop-down, select `Writer` or `Manager`. When you select `Reader`, then you cannot use the credentials to create buckets in {{site.data.keyword.cos_full_notm}} and write data to it. 
-   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. 
+   4.  From the **Role** drop-down, select `Writer` or `Manager`. When you select `Reader`, then you cannot use the credentials to create buckets in {{site.data.keyword.cos_full_notm}} and write data to it.
+   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens.
    6.  Click **Add**. Your new credentials are listed in the **Service Credentials** table.
-   7.  Click **View credentials**. 
-   8.  Make note of the **apikey** to use OAuth2 tokens to authenticate with the {{site.data.keyword.cos_full_notm}} service. For HMAC authentication, in the **cos_hmac_keys** section, note the **access_key_id** and the **secret_access_key**. 
-3. [Store your service credentials in a Kubernetes secret inside the cluster](#create_cos_secret) to enable access to your {{site.data.keyword.cos_full_notm}} service instance. 
+   7.  Click **View credentials**.
+   8.  Make note of the **apikey** to use OAuth2 tokens to authenticate with the {{site.data.keyword.cos_full_notm}} service. For HMAC authentication, in the **cos_hmac_keys** section, note the **access_key_id** and the **secret_access_key**.
+3. [Store your service credentials in a Kubernetes secret inside the cluster](#create_cos_secret) to enable access to your {{site.data.keyword.cos_full_notm}} service instance.
 
 ## Creating a secret for the object storage service credentials
 {: #create_cos_secret}
 
-To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket. 
+To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket.
 {: shortdesc}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials). 
+1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials).
 
-2. Get the **GUID** of your {{site.data.keyword.cos_full_notm}} service instance. 
+2. Get the **GUID** of your {{site.data.keyword.cos_full_notm}} service instance.
    ```
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-  
-3. Encode the {{site.data.keyword.cos_full_notm}} **GUID** and the **apikey**, or the **access_key_id** and **secret_access_key** that you retrieved earlier to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value. 
+
+3. Encode the {{site.data.keyword.cos_full_notm}} **GUID** and the **apikey**, or the **access_key_id** and **secret_access_key** that you retrieved earlier to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value.
    ```
    echo -n "<key_value>" | base64
    ```
    {: pre}
-   
+
 4. Create a configuration file to define your Kubernetes secret.
 
    **Example for using the API key:**
@@ -74,11 +77,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      name: <secret_name>
      namespace: <namespace>
    data:
-     api-key: <base64_apikey> 
-     service-instance-id: <base64_guid> 
+     api-key: <base64_apikey>
+     service-instance-id: <base64_guid>
    ```
    {: codeblock}
-   
+
    **Example for using HMAC authentication:**
    ```
    apiVersion: v1
@@ -88,12 +91,12 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      name: <secret_name>
      namespace: <namespace>
    data:
-     access-key: <base64_access_key_id> 
-     secret-key: <base64_secret_access_key> 
-     service-instance-id: <base64_guid> 
+     access-key: <base64_access_key_id>
+     secret-key: <base64_secret_access_key>
+     service-instance-id: <base64_guid>
    ```
    {: codeblock}
-   
+
    <table>
    <caption>Understanding the YAML file components</caption>
    <thead>
@@ -126,20 +129,20 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    </tr>
    </tbody>
    </table>
-     
-5. Create the secret in your cluster. 
+
+5. Create the secret in your cluster.
    ```
    kubectl apply -f filepath/secret.yaml
    ```
    {: pre}
-   
-6. Verify that the secret is created in your namespace. 
+
+6. Verify that the secret is created in your namespace.
    ```
    kubectl get secret
    ```
    {: pre}
-   
-7. [Install the {{site.data.keyword.cos_full_notm}} plug-in](#install_cos), or if you already installed the plug-in, [decide on the configuration]( #configure_cos) for your {{site.data.keyword.cos_full_notm}} bucket. 
+
+7. [Install the {{site.data.keyword.cos_full_notm}} plug-in](#install_cos), or if you already installed the plug-in, [decide on the configuration]( #configure_cos) for your {{site.data.keyword.cos_full_notm}} bucket.
 
 ## Installing the IBM Cloud Object Storage plug-in
 {: #install_cos}
@@ -147,7 +150,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 Install the {{site.data.keyword.cos_full_notm}} plug-in with a Helm chart to set up pre-defined storage classes for {{site.data.keyword.cos_full_notm}}. You can use these storage classes to create a PVC to provision {{site.data.keyword.cos_full_notm}} for your apps.
 {: shortdesc}
 
-Looking for instructions for how to update or remove the {{site.data.keyword.cos_full_notm}} plug-in? See [Updating the plug-in](#update_cos_plugin) and [Removing the plug-in](#remove_cos_plugin). 
+Looking for instructions for how to update or remove the {{site.data.keyword.cos_full_notm}} plug-in? See [Updating the plug-in](#update_cos_plugin) and [Removing the plug-in](#remove_cos_plugin).
 {: tip}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -171,50 +174,51 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       
    2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
    
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node.
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
 2. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cos_full_notm}} plug-in.
 
-    **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm). 
-    
-3. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster. 
+    If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+    {: important}
+
+3. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
-   
+
 4. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
-   
-5. Download the Helm charts and unpack the charts in your current directory. 
+
+5. Download the Helm charts and unpack the charts in your current directory.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-6. If you use macOS or a Linux distribution, install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. If you use Windows as your operating system, continue with the next step. 
-   1. Install the Helm plug-in. 
+6. If you use macOS or a Linux distribution, install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. If you use Windows as your operating system, continue with the next step.
+   1. Install the Helm plug-in.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       Installed plugin: ibmc
       ```
       {: screen}
-    
-   2. Verify that the `ibmc` plug-in is installed successfully. 
+
+   2. Verify that the `ibmc` plug-in is installed successfully.
       ```
       helm ibmc --help
       ```
       {: pre}
-   
-      Example output: 
+
+      Example output:
       ```
       Install or upgrade Helm charts in IBM K8S Service
 
@@ -232,18 +236,18 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
        helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
-   
-7. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster. 
-   1. [Create your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service). 
+
+7. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster.
+   1. [Create your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
    2. [Store your {{site.data.keyword.cos_full_notm}} service credentials in a Kubernetes secret](#create_cos_secret).
    3. Navigate to the `templates` directory and list available files.  
       ```
       cd ibmcloud-object-storage-plugin/templates && ls
       ```
       {: pre}
-   
-   4. Open the `provisioner-sa.yaml` file and look for the `ibmcloud-object-storage-secret-reader` ClusterRole definition. 
-   6. Add the name of the secret that you created earlier to the list of secrets that the plug-in is authorized to access in the `resourceNames` section. 
+
+   4. Open the `provisioner-sa.yaml` file and look for the `ibmcloud-object-storage-secret-reader` ClusterRole definition.
+   6. Add the name of the secret that you created earlier to the list of secrets that the plug-in is authorized to access in the `resourceNames` section.
       ```
       kind: ClusterRole
       apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -256,9 +260,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         verbs: ["get"]
       ```
       {: codeblock}
-   7. Save your changes. 
-   
-8. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster. 
+   7. Save your changes.
+
+8. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster.
 
    - **For macOS and Linux:**
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
@@ -266,40 +270,40 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
        helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
-       
-     - If you completed the previous step, install with a limitation to specific Kubernetes secrets. 
+
+     - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
        ```
        helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
-     
+
    - **For Windows:**
-     1. Retrieve the zone where your cluster is deployed and store the zone in an environment variable. 
+     1. Retrieve the zone where your cluster is deployed and store the zone in an environment variable.
         ```
         export DC_NAME=$(kubectl get cm cluster-info -n kube-system -o jsonpath='{.data.cluster-config\.json}' | grep datacenter | awk -F ': ' '{print $2}' | sed 's/\"//g' |sed 's/,//g')
         ```
         {: pre}
-        
-     2. Verify that the environment variable is set. 
+
+     2. Verify that the environment variable is set.
         ```
         printenv
         ```
         {: pre}
-        
-     3. Install the Helm chart. 
+
+     3. Install the Helm chart.
         - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
           ```
           helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
-          
+
         - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
           ```
           helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
-         
-   Example output: 
+
+   Example output:
    ```
    Installing the Helm chart
    DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
@@ -361,28 +365,28 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    Please refer Chart RELEASE.md to see the release details/fixes.
    ```
    {: screen}
-   
-8. Verify that the plug-in is installed correctly. 
+
+8. Verify that the plug-in is installed correctly.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
    ```
    {: screen}
-      
-   The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure. 
-   
-9. Verify that the storage classes are created successfully. 
+
+   The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure.
+
+9. Verify that the storage classes are created successfully.
    ```
    kubectl get storageclass | grep s3
    ```
    {: pre}
-      
+
    Example output:
    ```
    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
@@ -401,7 +405,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    {: screen}
 
 10. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
-      
+
 ### Updating the IBM Cloud Object Storage plug-in
 {: #update_cos_plugin}
 
@@ -418,19 +422,19 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
-   
+
 3. Find the installation name of your helm chart.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
    ```
    {: screen}
-   
+
 4. Upgrade the {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
    ```   
    helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
@@ -442,35 +446,36 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
    {: pre}
-   
-   The upgrade of the plug-in is successful when you see `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in your CLI output. 
-   
-6. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded. 
+
+   The upgrade of the plug-in is successful when you see `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in your CLI output.
+
+6. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
    {: pre}
-   
-   The upgrade is successful when you see `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in your CLI output. 
-   
-7. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state. 
+
+   The upgrade is successful when you see `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in your CLI output.
+
+7. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
    {: pre}
-   
-  
+
+
 ### Removing the IBM Cloud Object Storage plug-in
 {: #remove_cos_plugin}
 
 If you do not want to provision and use {{site.data.keyword.cos_full_notm}} in your cluster, you can uninstall the helm charts.
 
-**Note:** Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new {{site.data.keyword.cos_full_notm}} for your cluster or use existing PVCs and PVs after you remove the plug-in, unless you configure your app to use the {{site.data.keyword.cos_full_notm}} API directly. 
+Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new {{site.data.keyword.cos_full_notm}} for your cluster or use existing PVCs and PVs after you remove the plug-in, unless you configure your app to use the {{site.data.keyword.cos_full_notm}} API directly.
+{: important}
 
 Before you begin:
 
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
-- Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`. 
+- Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 To remove the plug-in:
 
@@ -479,25 +484,25 @@ To remove the plug-in:
    helm ls | grep ibmcloud-object-storage-plugin
    ```
    {: pre}
-   
+
    Example output:
    ```
    <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
    ```
    {: screen}
-   
+
 2. Delete the {{site.data.keyword.cos_full_notm}} plug-in by removing the Helm chart.
    ```
    helm delete --purge <helm_chart_name>
    ```
    {: pre}
-   
+
 3. Verify that the {{site.data.keyword.cos_full_notm}} pods are removed.
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
    {: pre}
-   
+
    The removal of the pods is successful if no pods are displayed in your CLI output.
 
 4. Verify that the storage classes are removed.
@@ -505,31 +510,31 @@ To remove the plug-in:
    kubectl get storageclasses | grep s3
    ```
    {: pre}
-   
+
    The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
-   
-5. If you use macOS or a Linux distribution, remove the `ibmc` Helm plug-in. If you use Windows, this step is not required. 
-   1. Remove the `ibmc` plug-in. 
+
+5. If you use macOS or a Linux distribution, remove the `ibmc` Helm plug-in. If you use Windows, this step is not required.
+   1. Remove the `ibmc` plug-in.
       ```
       rm -rf ~/.helm/plugins/helm-ibmc
       ```
       {: pre}
-   
-   2. Verify that the `ibmc` plug-in is removed. 
+
+   2. Verify that the `ibmc` plug-in is removed.
       ```
       helm plugin list
       ```
       {: pre}
-   
-      Example output: 
+
+      Example output:
      ```
      NAME	VERSION	DESCRIPTION
      ```
      {: screen}
-   
-     The `ibmc` plug-in is removed successfully if the `ibmc` plug-in is not listed in your CLI output. 
 
-   
+     The `ibmc` plug-in is removed successfully if the `ibmc` plug-in is not listed in your CLI output.
+
+
 ## Deciding on the object storage configuration
 {: #configure_cos}
 
@@ -540,8 +545,8 @@ To remove the plug-in:
    kubectl get storageclasses | grep s3
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
@@ -557,24 +562,24 @@ To remove the plug-in:
    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
    ```
    {: screen}
-   
-2. Choose a storage class that fits your data access requirements. The storage class determines the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for storage capacity, read and write operations, and outbound bandwidth for a bucket. The option that is right for you is based on how frequently data is read and written to your service instance. 
-   - **Standard**: This option is used for hot data that is accessed frequently. Common use cases are web or mobile apps. 
-   - **Vault**: This option is used for workloads or cool data that are accessed infrequently, such as once a month or less. Common use cases are archives, short-term data retention, digital asset preservation, tape replacement, and disaster recovery. 
-   - **Cold**: This option is used for cold data that is rarely accessed (every 90 days or less), or inactive data. Common use cases are archives, long-term backups, historical data that you keep for compliance, or workloads and apps that are rarely accessed. 
+
+2. Choose a storage class that fits your data access requirements. The storage class determines the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for storage capacity, read and write operations, and outbound bandwidth for a bucket. The option that is right for you is based on how frequently data is read and written to your service instance.
+   - **Standard**: This option is used for hot data that is accessed frequently. Common use cases are web or mobile apps.
+   - **Vault**: This option is used for workloads or cool data that are accessed infrequently, such as once a month or less. Common use cases are archives, short-term data retention, digital asset preservation, tape replacement, and disaster recovery.
+   - **Cold**: This option is used for cold data that is rarely accessed (every 90 days or less), or inactive data. Common use cases are archives, long-term backups, historical data that you keep for compliance, or workloads and apps that are rarely accessed.
    - **Flex**: This option is used for workloads and data that do not follow a specific usage pattern, or that are too huge to determine or predict a usage pattern. **Tip:** Check out this [blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) to learn how the Flex storage class works compared to traditional storage tiers.   
-   
-3. Decide on the level of resiliency for the data that is stored in your bucket. 
+
+3. Decide on the level of resiliency for the data that is stored in your bucket.
    - **Cross-region**: With this option, your data is stored across three regions within a geolocation for highest availability. If you have workloads that are distributed across regions, requests are routed to the nearest regional endpoint. The API endpoint for the geolocation is automatically set by the `ibmc` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes are configured to use the `US GEO` API endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information.  
    - **Regional**: With this option, your data is replicated across multiple zones within one region. If you have workloads that are located in the same region, you see lower latency and better performance than in a cross-regional setup. The regional endpoint is automatically set by the `ibm` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes were configured to use `US South` as the regional endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information.
-   
-4. Review the detailed {{site.data.keyword.cos_full_notm}} bucket configuration for a storage class. 
+
+4. Review the detailed {{site.data.keyword.cos_full_notm}} bucket configuration for a storage class.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    Name:                  ibmc-s3fs-standard-cross-region
    IsDefaultClass:        No
@@ -588,7 +593,7 @@ To remove the plug-in:
    Events:                <none>
    ```
    {: screen}
-   
+
    <table>
    <caption>Understanding the storage class details</caption>
    <thead>
@@ -621,7 +626,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. </br></br><strong>Note: </strong> If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the API endpoint for your bucket. </td>
+   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. **Note**: If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the API endpoint for your bucket.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -645,34 +650,35 @@ To remove the plug-in:
    </tr>
    </tbody>
    </table>
-   
-   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](cs_storage_basics.html#customized_storageclass). 
-   {: tip}
-   
-5. Decide on a name for your bucket. The name of a bucket must be unique in {{site.data.keyword.cos_full_notm}}. You can also choose to automatically create a name for your bucket by the {{site.data.keyword.cos_full_notm}} plug-in. To organize data in a bucket, you can create subdirectories. 
 
-   **Note:** The storage class that you chose earlier determines the pricing for the entire bucket. You cannot define different storage classes for subdirectories. If you want to store data with different access requirements, consider creating multiple buckets by using multiple PVCs. 
-   
+   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](cs_storage_basics.html#customized_storageclass).
+   {: tip}
+
+5. Decide on a name for your bucket. The name of a bucket must be unique in {{site.data.keyword.cos_full_notm}}. You can also choose to automatically create a name for your bucket by the {{site.data.keyword.cos_full_notm}} plug-in. To organize data in a bucket, you can create subdirectories.
+
+   The storage class that you chose earlier determines the pricing for the entire bucket. You cannot define different storage classes for subdirectories. If you want to store data with different access requirements, consider creating multiple buckets by using multiple PVCs.
+   {: note}
+
 6. Choose if you want to keep your data and the bucket after the cluster or the persistent volume claim (PVC) is deleted. When you delete the PVC, the PV is always deleted. You can choose if you want to also automatically delete the data and the bucket when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance is independent from the retention policy that you select for your data and is never removed when you delete a PVC.
 
-Now that you decided on the configuration that you want, you are ready to [create a PVC](#add_cos) to provision {{site.data.keyword.cos_full_notm}}. 
+Now that you decided on the configuration that you want, you are ready to [create a PVC](#add_cos) to provision {{site.data.keyword.cos_full_notm}}.
 
 ## Adding object storage to apps
 {: #add_cos}
 
-Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full_notm}} for your cluster. 
+Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full_notm}} for your cluster.
 {: shortdesc}
 
-Depending on the settings that you choose in your PVC, you can provision {{site.data.keyword.cos_full_notm}} in the following ways: 
-- [Dynamic provisioning](cs_storage_basics.html#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created. 
+Depending on the settings that you choose in your PVC, you can provision {{site.data.keyword.cos_full_notm}} in the following ways:
+- [Dynamic provisioning](cs_storage_basics.html#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created.
 - [Static provisioning](cs_storage_basics.html#static_provisioning): You can reference an existing bucket in your {{site.data.keyword.cos_full_notm}} service instance in your PVC. When you create the PVC, only the matching PV is automatically created and linked to your existing bucket in {{site.data.keyword.cos_full_notm}}.
 
-Before you begin: 
+Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
 - [Create a secret to store your {{site.data.keyword.cos_full_notm}} service credentials](#create_cos_secret).
 - [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos).
 
-To add {{site.data.keyword.cos_full_notm}} to your cluster: 
+To add {{site.data.keyword.cos_full_notm}} to your cluster:
 
 1. Create a configuration file to define your persistent volume claim (PVC).
    ```
@@ -686,7 +692,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
        ibm.io/auto-create-bucket: "<true_or_false>"
        ibm.io/auto-delete-bucket: "<true_or_false>"
        ibm.io/bucket: "<bucket_name>"
-       ibm.io/object-path: "<bucket_subdirectory>" 
+       ibm.io/object-path: "<bucket_subdirectory>"
        ibm.io/secret-name: "<secret_name>"
    spec:
      accessModes:
@@ -696,7 +702,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
          storage: 8Gi # Enter a fictitious value
    ```
    {: codeblock}
-   
+
    <table>
    <caption>Understanding the YAML file components</caption>
    <thead>
@@ -713,7 +719,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#storageclass_reference). </br></br><strong>Note: </strong> The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket. </li></ul>  </td>
+   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -721,7 +727,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>ibm.io/auto-delete-bucket</code></td>
-   <td>Choose between the following options: <ul><li><strong>true</strong>: Your data, the bucket, and the PV is automatically removed when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance remains and is not deleted. If you choose to set this option to <strong>true</strong>, then you must set <code>ibm.io/auto-create-bucket: true</code> and <code>ibm.io/bucket: ""</code> so that your bucket is automatically created with a name with the format <code>tmp-s3fs-xxxx</code>. </li><li><strong>false</strong>: When you delete the PVC, the PV is deleted automatically, but your data and the bucket in your {{site.data.keyword.cos_full_notm}} service instance remain. To access your data, you must create a new PVC with the name of your existing bucket. </li></ul> 
+   <td>Choose between the following options: <ul><li><strong>true</strong>: Your data, the bucket, and the PV is automatically removed when you delete the PVC. Your {{site.data.keyword.cos_full_notm}} service instance remains and is not deleted. If you choose to set this option to <strong>true</strong>, then you must set <code>ibm.io/auto-create-bucket: true</code> and <code>ibm.io/bucket: ""</code> so that your bucket is automatically created with a name with the format <code>tmp-s3fs-xxxx</code>. </li><li><strong>false</strong>: When you delete the PVC, the PV is deleted automatically, but your data and the bucket in your {{site.data.keyword.cos_full_notm}} service instance remain. To access your data, you must create a new PVC with the name of your existing bucket. </li></ul>
    <tr>
    <td><code>ibm.io/bucket</code></td>
    <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the name of the bucket that you want to create in {{site.data.keyword.cos_full_notm}}. If in addition <code>ibm.io/auto-delete-bucket</code> is set to <strong>true</strong>, you must leave this field blank to automatically assign your bucket a name with the format <code>tmp-s3fs-xxxx</code>. The name must be unique in {{site.data.keyword.cos_full_notm}}. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the name of the existing bucket that you want to access in the cluster. </li></ul> </td>
@@ -741,27 +747,27 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tbody>
    </table>
 
-2. Create the PVC. 
+2. Create the PVC.
    ```
    kubectl apply -f filepath/pvc.yaml
    ```
    {: pre}
-   
-3. Verify that your PVC is created and bound to the PV. 
+
+3. Verify that your PVC is created and bound to the PV.
    ```
    kubectl get pvc
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    NAME                  STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                     AGE
    s3fs-test-pvc         Bound     pvc-b38b30f9-1234-11e8-ad2b-t910456jbe12   8Gi        RWO            ibmc-s3fs-standard-cross-region  1h
    ```
    {: screen}
-   
-4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed. 
-   
+
+4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed.
+
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
@@ -870,32 +876,32 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
          ReadOnly:	false
      ```
      {: screen}
-     
-7. Verify that you can write data to your {{site.data.keyword.cos_full_notm}} service instance. 
-   1. Log in to the pod that mounts your PV. 
+
+7. Verify that you can write data to your {{site.data.keyword.cos_full_notm}} service instance.
+   1. Log in to the pod that mounts your PV.
       ```
       kubectl exec <pod_name> -it bash
       ```
       {: pre}
-       
-   2. Navigate to your volume mount path that you defined in your app deployment. 
-   3. Create a text file. 
+
+   2. Navigate to your volume mount path that you defined in your app deployment.
+   3. Create a text file.
       ```
-      echo "This is a test" > test.txt 
+      echo "This is a test" > test.txt
       ```
       {: pre}
-       
-   4. From the {{site.data.keyword.Bluemix}} dashboard, navigate to your {{site.data.keyword.cos_full_notm}} service instance. 
-   5. From the menu, select **Buckets**. 
-   6. Open your bucket, and verify that you can see the `test.txt` that you created. 
-   
+
+   4. From the {{site.data.keyword.Bluemix}} dashboard, navigate to your {{site.data.keyword.cos_full_notm}} service instance.
+   5. From the menu, select **Buckets**.
+   6. Open your bucket, and verify that you can see the `test.txt` that you created.
+
 
 ## Using object storage in a stateful set
 {: #cos_statefulset}
 
 If you have a stateful app such as a database, you can create stateful sets that use {{site.data.keyword.cos_full_notm}} to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service, such as {{site.data.keyword.cloudant_short_notm}} and store your data in the cloud.
 
-Before you begin: 
+Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
 - [Create a secret to store your {{site.data.keyword.cos_full_notm}} service credentials](#create_cos_secret).
 - [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos).
@@ -904,7 +910,7 @@ To deploy a stateful set that uses object storage:
 
 1. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following examples show how to deploy nginx as a stateful set with 3 replicas with each replica using a separate bucket, or with all replicas sharing the same bucket.
 
-   **Example to create a stateful set with 3 replicas, with each replica using a separate bucket**: 
+   **Example to create a stateful set with 3 replicas, with each replica using a separate bucket**:
    ```
    apiVersion: v1
    kind: Service
@@ -931,7 +937,7 @@ To deploy a stateful set that uses object storage:
        matchLabels:
          app: nginx-v01 # must match spec.template.metadata.labels in stateful set YAML and metadata.labels in service YAML
      serviceName: "nginx-v01"
-     replicas: 3 
+     replicas: 3
      template:
        metadata:
          labels:
@@ -954,8 +960,8 @@ To deploy a stateful set that uses object storage:
            ibm.io/auto-create-bucket: "true"
            ibm.io/auto-delete-bucket: "true"
            ibm.io/bucket: ""
-           ibm.io/secret-name: mysecret 
-           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region 
+           ibm.io/secret-name: mysecret
+           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region
            volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
        spec:
          accessModes: [ "ReadWriteOnce" ]
@@ -966,7 +972,7 @@ To deploy a stateful set that uses object storage:
    ```
    {: codeblock}
 
-   **Example to create a stateful set with 3 replicas that all share the same bucket `mybucket`**: 
+   **Example to create a stateful set with 3 replicas that all share the same bucket `mybucket`**:
    ```
    apiVersion: v1
    kind: Service
@@ -982,7 +988,7 @@ To deploy a stateful set that uses object storage:
      clusterIP: None
      selector:
        app: nginx-v01 # must match spec.template.metadata.labels and spec.selector.matchLabels in stateful set YAML
-   --- 
+   ---
    apiVersion: apps/v1
    kind: StatefulSet
    metadata:
@@ -993,7 +999,7 @@ To deploy a stateful set that uses object storage:
        matchLabels:
          app: nginx-v01 # must match spec.template.metadata.labels in stateful set YAML and metadata.labels in service YAML
      serviceName: "nginx-v01"
-     replicas: 3 
+     replicas: 3
      template:
        metadata:
          labels:
@@ -1017,7 +1023,7 @@ To deploy a stateful set that uses object storage:
            ibm.io/auto-delete-bucket: "false"
            ibm.io/bucket: mybucket
            ibm.io/secret-name: mysecret
-           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region 
+           volume.beta.kubernetes.io/storage-class: ibmc-s3fs-standard-perf-cross-region
            volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
        spec:
          accessModes: [ "ReadOnlyMany" ]
@@ -1027,8 +1033,8 @@ To deploy a stateful set that uses object storage:
              storage: 1Gi
    ```
    {: codeblock}
-   
-   
+
+
    <table>
     <caption>Understanding the stateful set YAML file components</caption>
     <thead>
@@ -1093,14 +1099,15 @@ To deploy a stateful set that uses object storage:
     </tr>
     </tbody></table>
 
-    
+
 ## Backing up and restoring data
 {: #backup_restore}
 
 {{site.data.keyword.cos_full_notm}} is set up to provide high durability for your data so that your data is protected from being lost. You can find the SLA in the [{{site.data.keyword.cos_full_notm}} service terms ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7857-03).
 {: shortdesc}
 
-**Important:** {{site.data.keyword.cos_full_notm}} does not provide a version history for your data. If you need to maintain and access older versions of your data, you must set up your app to manage the history of data or implement alternative backup solutions. For example, you might want to store your {{site.data.keyword.cos_full_notm}} data in your on-prem database or use tapes to archive your data. 
+{{site.data.keyword.cos_full_notm}} does not provide a version history for your data. If you need to maintain and access older versions of your data, you must set up your app to manage the history of data or implement alternative backup solutions. For example, you might want to store your {{site.data.keyword.cos_full_notm}} data in your on-prem database or use tapes to archive your data.
+{: note}
 
 ## Storage class reference
 {: #storageclass_reference}

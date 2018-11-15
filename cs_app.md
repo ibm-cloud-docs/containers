@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -277,7 +280,7 @@ template:
   <dd><p>As a cluster admin, you can make sure that teams that share a cluster don't take up more than their fair share of compute resources (memory and CPU) by creating a [ResourceQuota object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for each Kubernetes namespace in the cluster. If the cluster admin sets a compute resource quota, then each container within the deployment template must specify resource requests and limits for memory and CPU, otherwise the pod creation fails.</p>
   <p><ol><li>Check if a resource quota is set for a namespace.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>See what the quota limits are.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Even if no resource quota is set, you can include resource requests and limits in your deployment to improve the management of worker node resources. **Note**: If a container exceeds its limit, the container might be restarted or fail. If a container exceeds a request, its pod might be evicted if the worker node runs out of that resource that is exceeded. For troubleshooting information, see [Pods repeatedly fail to restart or are unexpectedly removed](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Even if no resource quota is set, you can include resource requests and limits in your deployment to improve the management of worker node resources.</p><p class="note">If a container exceeds its limit, the container might be restarted or fail. If a container exceeds a request, its pod might be evicted if the worker node runs out of that resource that is exceeded. For troubleshooting information, see [Pods repeatedly fail to restart or are unexpectedly removed](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Request**: The minimum amount of the resource that the scheduler reserves for the container to use. If the amount is equal to the limit, the request is guaranteed. If the amount is less than the limit, the request is still guaranteed, but the the scheduler can use the difference between the request and the limit to fulfill the resources of other containers.</p>
   <p>**Limit**: The maximum amount of the resource that the container can consume. If the total amount of resources that is used across the containers exceeds the amount available on the worker node, containers can be evicted to free up space. To prevent eviction, set the resource request equal to the limit of the container. If no limit is specified, the default is the worker node's capacity.</p>
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -607,7 +610,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
 2.  From the menu bar, click your user avatar ![Avatar icon](../icons/i-avatar-icon.svg "Avatar icon") and select the account that you want to use.
-3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers**.
+3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 4.  On the **Clusters** page, click the cluster that you want to access.
 5.  From the cluster detail page, click the **Kubernetes Dashboard** button.
 
@@ -835,7 +838,8 @@ Before you begin:
 To execute a workload on a GPU machine:
 1.  Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
 
-    **Important**: For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
+    For GPU workloads, you must always provide the `resources: limits: nvidia.com/gpu` field in the YAML specification.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1

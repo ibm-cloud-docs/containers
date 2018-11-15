@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -159,7 +162,8 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use the `--sso` flag to log in. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode.
+    If you have a federated ID, use the `--sso` flag to log in. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode.
+    {: tip}
 
 2.  If the cluster is in a resource group other than `default`, target that resource group.
    ```
@@ -258,7 +262,8 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 
 1.  Add the {{site.data.keyword.toneanalyzershort}} service to your {{site.data.keyword.Bluemix_notm}} account. Replace <service_name> with a name for your service instance.
 
-    **Note:** When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -283,7 +288,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     ```
     {: screen}
 
-3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.Bluemix_notm}} service is defined by a JSON file that includes confidential information such as the user name, password, and URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the credentials for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
+3.  Verify that the Kubernetes secret was created in your cluster namespace. Every {{site.data.keyword.Bluemix_notm}} service is defined by a JSON file that includes confidential information such as the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key and the URL that the container uses to gain access. To securely store this information, Kubernetes secrets are used. In this example, the secret includes the API key for accessing the instance of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} that is provisioned in your account.
 
     ```
     kubectl get secrets --namespace=default

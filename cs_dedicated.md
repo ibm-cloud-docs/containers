@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -133,7 +136,8 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        {: tip}
 
     2.  Generate an API key for inviting users to the public account. Note the API key value, which the Dedicated account administrator must use in the next step.
 
@@ -157,7 +161,8 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        {: tip}
 
     2.  Invite the users to the public account.
         * To invite a single user:
@@ -213,11 +218,13 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        {: tip}
 
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. Your Dedicated account is authenticated, and the Dedicated and public accounts are linked together. Every time you log in after this first time, you use only your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/cli/connect_dedicated_id.html#connect_dedicated_id).
 
-        **Note**: You must log in to both your Dedicated account and your public account to create clusters. If you only want to log in to your Dedicated account, use the `--no-iam` flag when you log in to the Dedicated endpoint.
+        You must log in to both your Dedicated account and your public account to create clusters. If you only want to log in to your Dedicated account, use the `--no-iam` flag when you log in to the Dedicated endpoint.
+        {: note}
 
     3.  To create or access clusters in the dedicated environment, you must set the region that is associated with that environment. **Note**: You cannot create clusters in resource groups other than `default`.
 
@@ -275,12 +282,14 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
     7. Select a **Public VLAN** (optional) and **Private VLAN** (required). The available public and private VLANs are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
-        **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
+        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
+        {: note}
 
     8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](cs_secure.html#encrypted_disk).
 
 6. Click **Create cluster**. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deployment is done, you can see that your cluster is ready in the **Overview** tab.
-    **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    {: important}
 
 ### Creating clusters with the CLI
 {: #dedicated_creating_cli}
@@ -293,7 +302,8 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     ```
     {: pre}
 
-    **Note:** If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    {: tip}
 
 3.  To target a region, run `ibmcloud ks region-set`.
 
@@ -326,7 +336,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).</td>
+    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -363,7 +373,6 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     ```
     {: pre}
 
-    **Note:**
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
     * If you see the following error message, [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
         ```
@@ -387,7 +396,8 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
 
-    **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
+    {: important}
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
@@ -480,8 +490,7 @@ Requirements:
 
 Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
-1. To use your own subnet, [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) and provide the list of subnet CIDRs that you want to use.
-    **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
+1. To use your own subnet, [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) and provide the list of subnet CIDRs that you want to use. **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
 
@@ -520,10 +529,8 @@ Review the following options for other cluster configurations:
   * [Managing cluster access](cs_users.html#access_policies)
   * [Updating the Kubernetes master](cs_cluster_update.html#master)
   * [Updating worker nodes](cs_cluster_update.html#worker_node)
-  * [Configuring cluster logging](cs_health.html#logging)
-      * **Note**: Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
-  * [Configuring cluster monitoring](cs_health.html#view_metrics)
-      * **Note**: An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
+  * [Configuring cluster logging](cs_health.html#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
+  * [Configuring cluster monitoring](cs_health.html#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
   * [Visualizing Kubernetes cluster resources](cs_integrations.html#weavescope)
   * [Removing clusters](cs_clusters.html#remove)
 

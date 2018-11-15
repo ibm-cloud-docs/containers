@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,11 +33,12 @@ lastupdated: "2018-11-06"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+{: important}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-To decide on a storage configuration: 
+To decide on a storage configuration:
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -155,7 +159,8 @@ To decide on a storage configuration:
    - If you want the PV, the data, and your physical file storage device to be deleted when you delete the PVC, choose a storage class without `retain`. **Note**: If you have a Dedicated account, choose a storage class without `retain` to prevent orphaned volumes in IBM Cloud infrastructure (SoftLayer).
 
 6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type.
-   **Note:** If you choose a monthly billing type, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.
+   If you choose a monthly billing type, when you remove the persistent storage, you still pay the monthly charge for it, even if you used it only for a short amount of time.
+   {: note}
 
 <br />
 
@@ -258,7 +263,7 @@ To add file storage:
        </tr>
        <tr>
        <td><code>spec.resources.requests.storage</code></td>
-       <td>Enter the size of the file storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
+       <td>Enter the size of the file storage, in gigabytes (Gi). After your storage is provisioned, you cannot change the size of your file storage. Make sure to specify a size that matches the amount of data that you want to store.</td>
        </tr>
        <tr>
        <td><code>spec.resources.requests.iops</code></td>
@@ -418,7 +423,7 @@ To add file storage:
 
 If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
 
-Before you begin: 
+Before you begin:
 - Make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -465,7 +470,8 @@ To use existing storage in a different cluster than the one where you provisione
 **For persistent storage that was provisioned outside the cluster:** </br>
 If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes.
 
-**Note**: If you have a Dedicated account, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
+If you have a Dedicated account, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
+{: note}
 
 1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/), click **Storage**.
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
@@ -612,10 +618,11 @@ If you have a stateful app such as a database, you can create stateful sets that
 **What do I need to be aware of when adding file storage to a stateful set?** </br>
 To add storage to a stateful set, you specify your storage configuration in the `volumeClaimTemplates` section of your stateful set YAML. The `volumeClaimTemplates` is the basis for your PVC and can include the storage class and the size or IOPS of your file storage that you want to provision. However, if you want to include labels in your `volumeClaimTemplates`, Kubernetes does not include these labels when creating the PVC. Instead, you must add the labels directly to your stateful set.
 
-**Important:** You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+{: important}
 
 **How can I create my stateful set in a specific zone?** </br>
-In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set. 
+In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
 **What options do I have to add file storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -820,7 +827,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step.
    - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
 
-   **Note:** If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+   If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+   {: note}
 
 3. Verify that the PVCs are used in your stateful set replica pods.
    1. List the pods in your cluster. Identify the pods that belong to your stateful set.
@@ -861,7 +869,8 @@ The version of the file storage determines the protocol that is used to communic
 
 To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod.
 
-**Important:** To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
+To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
+{: important}
 
 **To create a customized storage class with the desired NFS version:**
 1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.
@@ -951,7 +960,7 @@ Review the following backup and restore options for your file storage:
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can [set up periodic snapshots for your file storage](/docs/infrastructure/FileStorage/snapshots.html), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your file storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. <strong>Note</strong>: If you have a Dedicated account, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>To create a snapshot for your volume: </strong><ol><li>[Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).</li><li>Log in to the `ibmcloud sl` CLI. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Size (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>You can [set up periodic snapshots for your file storage](/docs/infrastructure/FileStorage/snapshots.html), which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your file storage. Snapshots are stored on the existing storage instance within the same zone. You can restore data from a snapshot if a user accidentally removes important data from the volume. <p class="note">: If you have a Dedicated account, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).</p></br> <strong>To create a snapshot for your volume: </strong><ol><li>[Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).</li><li>Log in to the `ibmcloud sl` CLI. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> The volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Size (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Replicate snapshots to another zone</dt>
  <dd><p>To protect your data from a zone failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#replicating-data) to a file storage instance that is set up in another zone. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated file storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage. <strong>Note</strong>: If you have a Dedicated account, you cannot replicate snapshots to another zone.</p></dd>
  <dt>Duplicate storage</dt>

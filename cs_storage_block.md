@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -50,11 +53,12 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       
    2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
    
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node.
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
 2. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
 
-   **Important:** If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+   If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+   {: important}
 
 3. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
@@ -198,7 +202,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
 {: shortdesc}
 
-**Note:** Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
+Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in.
+{: important}
 
 Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -250,7 +255,8 @@ To remove the plug-in:
 
 Every storage class specifies the type of block storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-**Important:** Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+{: important}
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
     ```
@@ -382,7 +388,8 @@ Every storage class specifies the type of block storage that you provision, incl
 Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
-**Important**: Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only one pod on one worker node in the cluster at a time.
+Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only one pod on one worker node in the cluster at a time.
+{: note}
 
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
@@ -463,15 +470,15 @@ To add block storage:
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
+       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. </br><strong>Note:</strong> This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</td>
+	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
-        <td>Enter the size of the block storage, in gigabytes (Gi). </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
+        <td>Enter the size of the block storage, in gigabytes (Gi). After your storage is provisioned, you cannot change the size of your block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
         <tr>
         <td><code>spec.resources.requests.iops</code></td>
@@ -831,10 +838,11 @@ If you have a stateful app such as a database, you can create stateful sets that
 **What do I need to be aware of when adding block storage to a stateful set?** </br>
 To add storage to a stateful set, you specify your storage configuration in the `volumeClaimTemplates` section of your stateful set YAML. The `volumeClaimTemplates` is the basis for your PVC and can include the storage class and the size or IOPS of your block storage that you want to provision. However, if you want to include labels in your `volumeClaimTemplates`, Kubernetes does not include these labels when creating the PVC. Instead, you must add the labels directly to your stateful set.
 
-**Important:** You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+You cannot deploy two stateful sets at the same time. If you try to create a stateful set before a different one is fully deployed, then the deployment of your stateful set might lead to unexpected results.
+{: important}
 
 **How can I create my stateful set in a specific zone?** </br>
-In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set. 
+In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
 **What options do I have to add block storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -1039,7 +1047,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step.
    - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
 
-   **Note:** If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+   If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+   {: note}
 
 3. Verify that the PVCs are used in your stateful set replica pods.
    1. List the pods in your cluster. Identify the pods that belong to your stateful set.
@@ -1088,7 +1097,7 @@ Review the following backup and restore options for your block storage:
  <dt>Duplicate storage</dt>
  <dd><p>You can [duplicate your block storage instance](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume. <strong>Note</strong>: If you have a Dedicated account, you must <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">open a support case</a>.</p></dd>
   <dt>Back up data to {{site.data.keyword.cos_full}}</dt>
-  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full}} instance that you set up in a zone.</p><strong>Note:</strong> Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To backup your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and re-mount the storage to your app pod. </br></br>
+  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full}} instance that you set up in a zone.</p><p class="note">Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To backup your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and re-mount the storage to your app pod. </p>
 To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.cos_short}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.cos_short}} instance, use the restore script that is provided with the image.</dd>
 <dt>Copy data to and from pods and containers</dt>
 <dd><p>You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster.</p>
@@ -1300,7 +1309,8 @@ To create your customized storage class, see [Customizing a storage class](cs_st
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}
 
-**Note:** Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).  
+Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
+{: note}
 
 The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these </br>
 

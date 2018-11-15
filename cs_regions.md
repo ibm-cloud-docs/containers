@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-06"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -13,21 +13,25 @@ lastupdated: "2018-11-06"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Regions and zones
 {: #regions-and-zones}
 
-A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure. 
+A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure.
 {:shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} regions and zones](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} regions and zones_
 
-{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to. 
+{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to.
 
-**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+{: note}
 
 | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
 | --- | --- |
@@ -93,7 +97,8 @@ For example, you can use the following commands to log in to {{site.data.keyword
 By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
 {:shortdesc}
 
-**Note**: You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+{: note}
 
 Supported {{site.data.keyword.containerlong_notm}} regions:
   * AP North (standard clusters only)
@@ -147,7 +152,7 @@ To view documentation on the API commands, view [https://containers.bluemix.net/
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
-* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.11 or later cluster in a multizone metro city, the highly available masters are spread across zones.
+* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.10 or later cluster in a multizone metro city, the highly available masters are spread across zones.
 * **Single Zone City**: Worker nodes in clusters that are created in a single zone city stay within one zone. You cannot spread worker nodes across multiple zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
 <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro cities in column two, and the single zone cities in column three.">
@@ -182,7 +187,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>London: lon04, lon05, lon06<br><br>**Note**: lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.</td>
+      <td>London: lon04, lon05, lon06 **Note**: lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.</td>
       <td></td>
     </tr>
     <tr>

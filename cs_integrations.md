@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-07"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-11-07"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -184,7 +187,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>You can use <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>You can use <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Ark <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -212,7 +215,8 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
-**Important:** You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/connect_external_app.html#externalapp).
+You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/connect_external_app.html#externalapp).
+{: note}
 
 Before you begin:
 - Ensure you have the following roles:
@@ -221,7 +225,9 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance). </br></br>**Note:**<ul><li>Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.</li><li>You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.</li></ul>
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
+    * Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
+    * You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.
 
 2. Check the type of service that you created and make note of the service instance **Name**.
    - **Cloud Foundry services:**
