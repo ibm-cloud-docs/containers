@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -39,6 +39,14 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.638</td>
+<td>15 Nov 2018</td>
+<td>
+<ul><li>Adds the [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) command.</li>
+<li>Adds the resource group name to the output of <code>ibmcloud ks cluster-get</code> and <code>ibmcloud ks clusters</code>.</li>
+</td>
+</tr>
 <tr>
 <td>0.1.635</td>
 <td>06 Nov 2018</td>

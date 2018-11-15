@@ -129,8 +129,8 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     When your cluster is fully provisioned, the **State** changes to `deployed`.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.8
+    Name         ID                                   State      Created          Workers   Zone   Version               Resource Group Name
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.8   Default
     ```
     {: screen}
 
