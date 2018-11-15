@@ -114,7 +114,6 @@ IBM Cloud Kubernetes Service
 
     {: .navgroup id="help"}
     
-    
     {: .topicgroup}
     Troubleshooting clusters
         cs_troubleshoot.md
