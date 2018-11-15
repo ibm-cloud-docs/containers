@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 
 ---
@@ -139,7 +139,7 @@ For more information about setting up your account and resources, try out this t
 To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.Bluemix_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio.
 {: shortdesc}
 
-**Most cases**: Your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} access the portfolio, the **account owner** must set the API key for the region and resource group.
+**Most cases**: Your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
 
 1. Log in to the terminal as the account owner.
     ```
