@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -573,7 +573,7 @@ To expose apps that are outside your cluster to the public:
         ```
         {: pre}
 
-3. Continue with the steps in [Exposing apps that are inside your cluster to the public](#public_inside_2), beginning with Step 2.
+3. Continue with the steps in "Exposing apps that are inside your cluster to the public", [Step 2: Select an app domain](#public_inside_2).
 
 <br />
 
