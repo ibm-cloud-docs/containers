@@ -337,8 +337,8 @@ To create a cluster:
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone       Version               Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8   Default
+    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8      Default
     ```
     {: screen}
 
@@ -355,8 +355,8 @@ To create a cluster:
     {: important}
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version               Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01     1.10.8   Default
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.10.8      Default
     ```
     {: screen}
 

@@ -716,7 +716,7 @@ ibmcloud ks cluster-config --cluster my_cluster
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
 <strong>Minimum required permissions</strong>:
-* **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}} at the account level
+* **Administrator** platform role for {{site.data.keyword.containerlong_notm}} at the account level
 * **Administrator** platform role for {{site.data.keyword.registrylong_notm}} at the account level
 * **Super User** role for IBM Cloud infrastructure (SoftLayer)
 

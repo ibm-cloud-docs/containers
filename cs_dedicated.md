@@ -382,8 +382,8 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8   Default
+    Name         ID                                   State      Created          Workers   Zone   Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8      Default
     ```
     {: screen}
 
